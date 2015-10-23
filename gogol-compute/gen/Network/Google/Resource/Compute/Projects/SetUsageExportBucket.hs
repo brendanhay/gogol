@@ -45,11 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.projects.setUsageExportBucket@ method which the
 -- 'ProjectsSetUsageExportBucket' request conforms to.
 type ProjectsSetUsageExportBucketResource =
-     Capture "project" Text :>
-       "setUsageExportBucket" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] UsageExportLocation :>
-             Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "setUsageExportBucket" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] UsageExportLocation :>
+                   Post '[JSON] Operation
 
 -- | Enables the usage export feature and sets the usage export bucket where
 -- reports are stored. If you provide an empty request body using this

@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.rooms.join@ method which the
 -- 'RoomsJoin' request conforms to.
 type RoomsJoinResource =
-     "rooms" :>
-       Capture "roomId" Text :>
-         "join" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] RoomJoinRequest :> Post '[JSON] Room
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "join" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] RoomJoinRequest :> Post '[JSON] Room
 
 -- | Join a room. For internal use by the Games SDK only. Calling this method
 -- directly is unsupported.

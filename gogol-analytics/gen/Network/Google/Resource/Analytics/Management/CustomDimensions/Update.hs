@@ -46,17 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customDimensions.update@ method which the
 -- 'ManagementCustomDimensionsUpdate' request conforms to.
 type ManagementCustomDimensionsUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customDimensions" :>
-                 Capture "customDimensionId" Text :>
-                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CustomDimension :>
-                         Put '[JSON] CustomDimension
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     Capture "customDimensionId" Text :>
+                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CustomDimension :>
+                             Put '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension.
 --

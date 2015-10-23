@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.people.listByActivity@ method which the
 -- 'PeopleListByActivity' request conforms to.
 type PeopleListByActivityResource =
-     "activities" :>
-       Capture "activityId" Text :>
-         "people" :>
-           Capture "collection" PeopleListByActivityCollection
-             :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
+     "plusDomains" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             "people" :>
+               Capture "collection" PeopleListByActivityCollection
+                 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection for a particular
 -- activity.

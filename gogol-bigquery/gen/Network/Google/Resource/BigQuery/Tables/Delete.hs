@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.tables.delete@ method which the
 -- 'TablesDelete' request conforms to.
 type TablesDeleteResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "tables" :>
-               Capture "tableId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 "tables" :>
+                   Capture "tableId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the table specified by tableId from the dataset. If the table
 -- contains data, all the data will be deleted.

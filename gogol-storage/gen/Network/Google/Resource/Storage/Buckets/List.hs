@@ -46,13 +46,15 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.buckets.list@ method which the
 -- 'BucketsList' request conforms to.
 type BucketsListResource =
-     "b" :>
-       QueryParam "project" Text :>
-         QueryParam "prefix" Text :>
-           QueryParam "projection" BucketsListProjection :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Buckets
+     "storage" :>
+       "v1" :>
+         "b" :>
+           QueryParam "project" Text :>
+             QueryParam "prefix" Text :>
+               QueryParam "projection" BucketsListProjection :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Buckets
 
 -- | Retrieves a list of buckets for a given project.
 --

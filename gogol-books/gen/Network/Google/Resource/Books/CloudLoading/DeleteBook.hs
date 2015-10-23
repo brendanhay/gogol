@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.cloudloading.deleteBook@ method which the
 -- 'CloudLoadingDeleteBook' request conforms to.
 type CloudLoadingDeleteBookResource =
-     "cloudloading" :>
-       "deleteBook" :>
-         QueryParam "volumeId" Text :>
-           QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "books" :>
+       "v1" :>
+         "cloudloading" :>
+           "deleteBook" :>
+             QueryParam "volumeId" Text :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Remove the book and its contents
 --

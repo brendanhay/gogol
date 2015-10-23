@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.subscriptions.delete@ method which the
 -- 'SubscriptionsDelete' request conforms to.
 type SubscriptionsDeleteResource =
-     "subscriptions" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "mirror" :>
+       "v1" :>
+         "subscriptions" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a subscription.
 --

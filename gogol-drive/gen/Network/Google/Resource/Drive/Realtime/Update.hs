@@ -35,7 +35,6 @@ module Network.Google.Resource.Drive.Realtime.Update
 
     -- * Request Lenses
     , reaBaseRevision
-    , reaMedia
     , reaFileId
     ) where
 
@@ -45,12 +44,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.realtime.update@ method which the
 -- 'RealtimeUpdate' request conforms to.
 type RealtimeUpdateResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "realtime" :>
-           QueryParam "baseRevision" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] Body :> Put '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "realtime" :>
+               QueryParam "baseRevision" Text :>
+                 QueryParam "alt" AltJSON :> Put '[JSON] ()
+       :<|>
+       "upload" :>
+         "drive" :>
+           "v2" :>
+             "files" :>
+               Capture "fileId" Text :>
+                 "realtime" :>
+                   QueryParam "baseRevision" Text :>
+                     QueryParam "alt" AltJSON :>
+                       QueryParam "uploadType" AltMedia :>
+                         ReqBody '[OctetStream] RequestBody :> Put '[JSON] ()
 
 -- | Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.
@@ -58,9 +69,8 @@ type RealtimeUpdateResource =
 -- /See:/ 'realtimeUpdate' smart constructor.
 data RealtimeUpdate = RealtimeUpdate
     { _reaBaseRevision :: !(Maybe Text)
-    , _reaMedia        :: !Body
     , _reaFileId       :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeUpdate' with the minimum fields required to make a request.
 --
@@ -68,17 +78,13 @@ data RealtimeUpdate = RealtimeUpdate
 --
 -- * 'reaBaseRevision'
 --
--- * 'reaMedia'
---
 -- * 'reaFileId'
 realtimeUpdate
-    :: Body -- ^ 'reaMedia'
-    -> Text -- ^ 'reaFileId'
+    :: Text -- ^ 'reaFileId'
     -> RealtimeUpdate
-realtimeUpdate pReaMedia_ pReaFileId_ =
+realtimeUpdate pReaFileId_ =
     RealtimeUpdate
     { _reaBaseRevision = Nothing
-    , _reaMedia = pReaMedia_
     , _reaFileId = pReaFileId_
     }
 
@@ -92,9 +98,6 @@ reaBaseRevision
   = lens _reaBaseRevision
       (\ s a -> s{_reaBaseRevision = a})
 
-reaMedia :: Lens' RealtimeUpdate Body
-reaMedia = lens _reaMedia (\ s a -> s{_reaMedia = a})
-
 -- | The ID of the file that the Realtime API data model is associated with.
 reaFileId :: Lens' RealtimeUpdate Text
 reaFileId
@@ -104,8 +107,19 @@ instance GoogleRequest RealtimeUpdate where
         type Rs RealtimeUpdate = ()
         requestClient RealtimeUpdate{..}
           = go _reaFileId _reaBaseRevision (Just AltJSON)
-              _reaMedia
               driveService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy RealtimeUpdateResource)
+                      mempty
+
+instance GoogleRequest (Upload RealtimeUpdate) where
+        type Rs (Upload RealtimeUpdate) = ()
+        requestClient (Upload RealtimeUpdate{..} body)
+          = go _reaFileId _reaBaseRevision (Just AltJSON)
+              (Just AltMedia)
+              _reaPayload
+              body
+              driveService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy RealtimeUpdateResource)
                       mempty

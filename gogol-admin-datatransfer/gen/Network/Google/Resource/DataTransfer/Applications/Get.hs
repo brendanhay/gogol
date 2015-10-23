@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @datatransfer.applications.get@ method which the
 -- 'ApplicationsGet' request conforms to.
 type ApplicationsGetResource =
-     "applications" :>
-       Capture "applicationId" Int64 :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Application
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "applications" :>
+             Capture "applicationId" Int64 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Retrieves information about an application for the given application ID.
 --

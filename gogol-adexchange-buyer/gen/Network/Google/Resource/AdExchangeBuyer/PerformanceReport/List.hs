@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.performanceReport.list@ method which the
 -- 'PerformanceReportList'' request conforms to.
 type PerformanceReportListResource =
-     "performancereport" :>
-       QueryParam "accountId" Int64 :>
-         QueryParam "endDateTime" Text :>
-           QueryParam "startDateTime" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] PerformanceReportList
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "performancereport" :>
+           QueryParam "accountId" Int64 :>
+             QueryParam "endDateTime" Text :>
+               QueryParam "startDateTime" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] PerformanceReportList
 
 -- | Retrieves the authenticated user\'s list of performance metrics.
 --

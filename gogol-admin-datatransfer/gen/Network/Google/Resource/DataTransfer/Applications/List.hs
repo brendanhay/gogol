@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @datatransfer.applications.list@ method which the
 -- 'ApplicationsList' request conforms to.
 type ApplicationsListResource =
-     "applications" :>
-       QueryParam "customerId" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] ApplicationsListResponse
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "applications" :>
+             QueryParam "customerId" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ApplicationsListResponse
 
 -- | Lists the applications available for data transfer for a customer.
 --

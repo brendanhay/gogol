@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.marketplaceorders.get@ method which the
 -- 'MarketplaceOrdersGet' request conforms to.
 type MarketplaceOrdersGetResource =
-     "marketplaceOrders" :>
-       Capture "orderId" Text :>
-         QueryParam "alt" AltJSON :>
-           Get '[JSON] MarketplaceOrder
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] MarketplaceOrder
 
 -- | Get an order given its id
 --

@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.get@ method which the
 -- 'InstanceGroupManagersGet' request conforms to.
 type InstanceGroupManagersGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] InstanceGroupManager
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] InstanceGroupManager
 
 -- | Returns all of the details about the specified managed instance group.
 --

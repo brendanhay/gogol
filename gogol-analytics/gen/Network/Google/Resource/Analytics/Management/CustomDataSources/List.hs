@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customDataSources.list@ method which the
 -- 'ManagementCustomDataSourcesList' request conforms to.
 type ManagementCustomDataSourcesListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customDataSources" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] CustomDataSources
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] CustomDataSources
 
 -- | List custom data sources to which the user has access.
 --

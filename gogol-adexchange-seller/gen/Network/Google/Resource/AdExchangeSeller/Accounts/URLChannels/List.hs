@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.urlchannels.list@ method which the
 -- 'AccountsURLChannelsList' request conforms to.
 type AccountsURLChannelsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "urlchannels" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "urlchannels" :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
 
 -- | List all URL channels in the specified ad client for this Ad Exchange
 -- account.

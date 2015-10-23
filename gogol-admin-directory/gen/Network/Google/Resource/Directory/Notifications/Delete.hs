@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.notifications.delete@ method which the
 -- 'NotificationsDelete' request conforms to.
 type NotificationsDeleteResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "notifications" :>
-           Capture "notificationId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "notifications" :>
+                 Capture "notificationId" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a notification
 --

@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.vpnTunnels.get@ method which the
 -- 'VPNTunnelsGet' request conforms to.
 type VPNTunnelsGetResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "vpnTunnels" :>
-             Capture "vpnTunnel" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnel
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "vpnTunnels" :>
+                   Capture "vpnTunnel" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnel
 
 -- | Returns the specified VpnTunnel resource.
 --

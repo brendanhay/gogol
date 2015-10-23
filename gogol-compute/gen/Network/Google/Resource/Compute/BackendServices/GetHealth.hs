@@ -44,14 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.backendServices.getHealth@ method which the
 -- 'BackendServicesGetHealth' request conforms to.
 type BackendServicesGetHealthResource =
-     Capture "project" Text :>
-       "global" :>
-         "backendServices" :>
-           Capture "backendService" Text :>
-             "getHealth" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ResourceGroupReference :>
-                   Post '[JSON] BackendServiceGroupHealth
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "backendServices" :>
+                 Capture "backendService" Text :>
+                   "getHealth" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ResourceGroupReference :>
+                         Post '[JSON] BackendServiceGroupHealth
 
 -- | Gets the most recent health check results for this BackendService.
 --

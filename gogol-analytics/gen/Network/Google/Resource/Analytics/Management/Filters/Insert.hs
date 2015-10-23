@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.filters.insert@ method which the
 -- 'ManagementFiltersInsert' request conforms to.
 type ManagementFiltersInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "filters" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Filter :> Post '[JSON] Filter
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Filter :> Post '[JSON] Filter
 
 -- | Create a new filter.
 --

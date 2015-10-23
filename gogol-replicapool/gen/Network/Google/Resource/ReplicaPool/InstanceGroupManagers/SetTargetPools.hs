@@ -46,16 +46,19 @@ import           Network.Google.ReplicaPool.Types
 -- | A resource alias for @replicapool.instanceGroupManagers.setTargetPools@ method which the
 -- 'InstanceGroupManagersSetTargetPools' request conforms to.
 type InstanceGroupManagersSetTargetPoolsResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "setTargetPools" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersSetTargetPoolsRequest
-                     :> Post '[JSON] Operation
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "setTargetPools" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersSetTargetPoolsRequest
+                           :> Post '[JSON] Operation
 
 -- | Modifies the target pools to which all new instances in this group are
 -- assigned. Existing instances in the group are not affected.

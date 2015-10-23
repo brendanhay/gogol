@@ -50,21 +50,23 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.remarketingLists.list@ method which the
 -- 'RemarketingListsList' request conforms to.
 type RemarketingListsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "remarketingLists" :>
-           QueryParam "advertiserId" Int64 :>
-             QueryParam "floodlightActivityId" Int64 :>
-               QueryParam "sortOrder" RemarketingListsListSortOrder
-                 :>
-                 QueryParam "active" Bool :>
-                   QueryParam "name" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" RemarketingListsListSortField
-                         :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] RemarketingListsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               QueryParam "advertiserId" Int64 :>
+                 QueryParam "floodlightActivityId" Int64 :>
+                   QueryParam "sortOrder" RemarketingListsListSortOrder
+                     :>
+                     QueryParam "active" Bool :>
+                       QueryParam "name" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField" RemarketingListsListSortField
+                             :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] RemarketingListsListResponse
 
 -- | Retrieves a list of remarketing lists, possibly filtered.
 --

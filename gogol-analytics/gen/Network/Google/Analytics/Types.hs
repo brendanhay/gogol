@@ -1022,7 +1022,6 @@ analyticsService :: Service
 analyticsService
   = defaultService (ServiceId "analytics:v3")
       "www.googleapis.com"
-      "analytics/v3/"
 
 -- | Manage Google Analytics Account users by email address
 analyticsManageUsersScope :: OAuthScope

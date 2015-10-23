@@ -45,18 +45,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.query.sql@ method which the
 -- 'QuerySQL' request conforms to.
 type QuerySQLResource =
-     "query" :>
-       QueryParam "sql" Text :>
-         QueryParam "typed" Bool :>
-           QueryParam "hdrs" Bool :>
-             QueryParam "alt" AltJSON :> Post '[JSON] SQLresponse
+     "fusiontables" :>
+       "v2" :>
+         "query" :>
+           QueryParam "sql" Text :>
+             QueryParam "typed" Bool :>
+               QueryParam "hdrs" Bool :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] SQLresponse
        :<|>
-       "query" :>
-         QueryParam "sql" Text :>
-           QueryParam "typed" Bool :>
-             QueryParam "hdrs" Bool :>
-               QueryParam "alt" AltMedia :>
-                 Post '[OctetStream] Stream
+       "fusiontables" :>
+         "v2" :>
+           "query" :>
+             QueryParam "sql" Text :>
+               QueryParam "typed" Bool :>
+                 QueryParam "hdrs" Bool :>
+                   QueryParam "alt" AltMedia :>
+                     Get '[OctetStream] Stream
 
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.

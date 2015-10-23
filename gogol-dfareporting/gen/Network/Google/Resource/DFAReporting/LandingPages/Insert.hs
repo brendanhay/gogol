@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.landingPages.insert@ method which the
 -- 'LandingPagesInsert' request conforms to.
 type LandingPagesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           Capture "campaignId" Int64 :>
-             "landingPages" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] LandingPage :>
-                   Post '[JSON] LandingPage
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] LandingPage :>
+                       Post '[JSON] LandingPage
 
 -- | Inserts a new landing page for the specified campaign.
 --

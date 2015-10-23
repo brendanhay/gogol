@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placements.update@ method which the
 -- 'PlacementsUpdate' request conforms to.
 type PlacementsUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placements" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Placement :> Put '[JSON] Placement
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Placement :> Put '[JSON] Placement
 
 -- | Updates an existing placement.
 --

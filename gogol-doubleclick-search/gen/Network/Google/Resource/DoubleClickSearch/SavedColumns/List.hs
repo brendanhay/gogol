@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.savedColumns.list@ method which the
 -- 'SavedColumnsList' request conforms to.
 type SavedColumnsListResource =
-     "agency" :>
-       Capture "agencyId" Int64 :>
-         "advertiser" :>
-           Capture "advertiserId" Int64 :>
-             "savedcolumns" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] SavedColumnList
+     "doubleclicksearch" :>
+       "v2" :>
+         "agency" :>
+           Capture "agencyId" Int64 :>
+             "advertiser" :>
+               Capture "advertiserId" Int64 :>
+                 "savedcolumns" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] SavedColumnList
 
 -- | Retrieve the list of saved columns for a specified advertiser.
 --

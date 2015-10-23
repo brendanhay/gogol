@@ -42,9 +42,11 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.get@ method which the
 -- 'AccountsGet' request conforms to.
 type AccountsGetResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Account
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Gets a GTM Account.
 --

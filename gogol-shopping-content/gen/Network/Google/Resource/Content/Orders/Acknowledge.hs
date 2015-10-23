@@ -44,13 +44,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.acknowledge@ method which the
 -- 'OrdersAcknowledge' request conforms to.
 type OrdersAcknowledgeResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         Capture "orderId" Text :>
-           "acknowledge" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] OrdersAcknowledgeRequest :>
-                 Post '[JSON] OrdersAcknowledgeResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "acknowledge" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] OrdersAcknowledgeRequest :>
+                     Post '[JSON] OrdersAcknowledgeResponse
 
 -- | Marks an order as acknowledged.
 --

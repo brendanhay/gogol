@@ -60,32 +60,37 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.watch@ method which the
 -- 'EventsWatch' request conforms to.
 type EventsWatchResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           "watch" :>
-             QueryParam "syncToken" Text :>
-               QueryParam "timeMin" DateTime' :>
-                 QueryParam "orderBy" EventsWatchOrderBy :>
-                   QueryParam "singleEvents" Bool :>
-                     QueryParams "privateExtendedProperty" Text :>
-                       QueryParam "showDeleted" Bool :>
-                         QueryParam "q" Text :>
-                           QueryParams "sharedExtendedProperty" Text :>
-                             QueryParam "maxAttendees" Int32 :>
-                               QueryParam "iCalUID" Text :>
-                                 QueryParam "updatedMin" DateTime' :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "timeZone" Text :>
-                                       QueryParam "showHiddenInvitations" Bool
-                                         :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "alwaysIncludeEmail" Bool
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               "watch" :>
+                 QueryParam "syncToken" Text :>
+                   QueryParam "timeMin" DateTime' :>
+                     QueryParam "orderBy" EventsWatchOrderBy :>
+                       QueryParam "singleEvents" Bool :>
+                         QueryParams "privateExtendedProperty" Text :>
+                           QueryParam "showDeleted" Bool :>
+                             QueryParam "q" Text :>
+                               QueryParams "sharedExtendedProperty" Text :>
+                                 QueryParam "maxAttendees" Int32 :>
+                                   QueryParam "iCalUID" Text :>
+                                     QueryParam "updatedMin" DateTime' :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "timeZone" Text :>
+                                           QueryParam "showHiddenInvitations"
+                                             Bool
                                              :>
-                                             QueryParam "timeMax" DateTime' :>
-                                               QueryParam "alt" AltJSON :>
-                                                 ReqBody '[JSON] Channel :>
-                                                   Post '[JSON] Channel
+                                             QueryParam "maxResults" Int32 :>
+                                               QueryParam "alwaysIncludeEmail"
+                                                 Bool
+                                                 :>
+                                                 QueryParam "timeMax" DateTime'
+                                                   :>
+                                                   QueryParam "alt" AltJSON :>
+                                                     ReqBody '[JSON] Channel :>
+                                                       Post '[JSON] Channel
 
 -- | Watch for changes to Events resources.
 --

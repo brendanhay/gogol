@@ -44,13 +44,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.triggers.get@ method which the
 -- 'AccountsContainersTriggersGet' request conforms to.
 type AccountsContainersTriggersGetResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "triggers" :>
-               Capture "triggerId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Trigger
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "triggers" :>
+                   Capture "triggerId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Trigger
 
 -- | Gets a GTM Trigger.
 --

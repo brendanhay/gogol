@@ -45,13 +45,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accountshipping.update@ method which the
 -- 'AccountshippingUpdate' request conforms to.
 type AccountshippingUpdateResource =
-     Capture "merchantId" Word64 :>
-       "accountshipping" :>
-         Capture "accountId" Word64 :>
-           QueryParam "dryRun" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] AccountShipping :>
-                 Put '[JSON] AccountShipping
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accountshipping" :>
+             Capture "accountId" Word64 :>
+               QueryParam "dryRun" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] AccountShipping :>
+                     Put '[JSON] AccountShipping
 
 -- | Updates the shipping settings of the account.
 --

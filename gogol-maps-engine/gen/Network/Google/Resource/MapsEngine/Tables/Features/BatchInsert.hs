@@ -49,13 +49,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.features.batchInsert@ method which the
 -- 'TablesFeaturesBatchInsert' request conforms to.
 type TablesFeaturesBatchInsertResource =
-     "tables" :>
-       Capture "id" Text :>
-         "features" :>
-           "batchInsert" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] FeaturesBatchInsertRequest :>
-                 Post '[JSON] ()
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "id" Text :>
+             "features" :>
+               "batchInsert" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] FeaturesBatchInsertRequest :>
+                     Post '[JSON] ()
 
 -- | Append features to an existing table. A single batchInsert request can
 -- create: - Up to 50 features. - A combined total of 10 000 vertices.

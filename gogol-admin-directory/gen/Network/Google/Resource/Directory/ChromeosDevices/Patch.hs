@@ -45,17 +45,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.chromeosdevices.patch@ method which the
 -- 'ChromeosDevicesPatch' request conforms to.
 type ChromeosDevicesPatchResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "devices" :>
-           "chromeos" :>
-             Capture "deviceId" Text :>
-               QueryParam "projection"
-                 ChromeosDevicesPatchProjection
-                 :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ChromeOSDevice :>
-                     Patch '[JSON] ChromeOSDevice
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "devices" :>
+                 "chromeos" :>
+                   Capture "deviceId" Text :>
+                     QueryParam "projection"
+                       ChromeosDevicesPatchProjection
+                       :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ChromeOSDevice :>
+                           Patch '[JSON] ChromeOSDevice
 
 -- | Update Chrome OS Device. This method supports patch semantics.
 --

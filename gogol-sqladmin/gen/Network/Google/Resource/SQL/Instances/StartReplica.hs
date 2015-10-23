@@ -43,12 +43,14 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.startReplica@ method which the
 -- 'InstancesStartReplica' request conforms to.
 type InstancesStartReplicaResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "startReplica" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "startReplica" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Starts the replication in the read replica instance.
 --

@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.get@ method which the
 -- 'AccountsGet' request conforms to.
 type AccountsGetResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         QueryParam "tree" Bool :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Account
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             QueryParam "tree" Bool :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Get information about the selected AdSense account.
 --

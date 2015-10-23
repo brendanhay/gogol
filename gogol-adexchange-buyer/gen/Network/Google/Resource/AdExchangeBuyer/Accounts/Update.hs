@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.accounts.update@ method which the
 -- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
-     "accounts" :>
-       Capture "id" Int32 :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Account :> Put '[JSON] Account
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "id" Int32 :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Account :> Put '[JSON] Account
 
 -- | Updates an existing account.
 --

@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.images.deleteall@ method which the
 -- 'EditsImagesDeleteall' request conforms to.
 type EditsImagesDeleteallResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "listings" :>
-             Capture "language" Text :>
-               Capture "imageType" EditsImagesDeleteallImageType :>
-                 QueryParam "alt" AltJSON :>
-                   Delete '[JSON] ImagesDeleteAllResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "listings" :>
+                   Capture "language" Text :>
+                     Capture "imageType" EditsImagesDeleteallImageType :>
+                       QueryParam "alt" AltJSON :>
+                         Delete '[JSON] ImagesDeleteAllResponse
 
 -- | Deletes all images for the specified language and image type.
 --

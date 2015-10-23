@@ -46,16 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.addAccessConfig@ method which the
 -- 'InstancesAddAccessConfig' request conforms to.
 type InstancesAddAccessConfigResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "addAccessConfig" :>
-                 QueryParam "networkInterface" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] AccessConfig :>
-                       Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "addAccessConfig" :>
+                       QueryParam "networkInterface" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] AccessConfig :>
+                             Post '[JSON] Operation
 
 -- | Adds an access config to an instance\'s network interface.
 --

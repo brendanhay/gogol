@@ -43,11 +43,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.videos.rate@ method which the
 -- 'VideosRate' request conforms to.
 type VideosRateResource =
-     "videos" :>
-       "rate" :>
-         QueryParam "id" Text :>
-           QueryParam "rating" VideosRateRating :>
-             QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "videos" :>
+           "rate" :>
+             QueryParam "id" Text :>
+               QueryParam "rating" VideosRateRating :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Add a like or dislike rating to a video or remove a rating from a video.
 --

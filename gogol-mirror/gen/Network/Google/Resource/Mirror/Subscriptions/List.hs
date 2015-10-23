@@ -41,9 +41,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.subscriptions.list@ method which the
 -- 'SubscriptionsList' request conforms to.
 type SubscriptionsListResource =
-     "subscriptions" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] SubscriptionsListResponse
+     "mirror" :>
+       "v1" :>
+         "subscriptions" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] SubscriptionsListResponse
 
 -- | Retrieves a list of subscriptions for the authenticated user and
 -- service.

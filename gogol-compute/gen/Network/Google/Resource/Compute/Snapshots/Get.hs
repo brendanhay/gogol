@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.snapshots.get@ method which the
 -- 'SnapshotsGet' request conforms to.
 type SnapshotsGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "snapshots" :>
-           Capture "snapshot" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "snapshots" :>
+                 Capture "snapshot" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
 -- | Returns the specified Snapshot resource.
 --

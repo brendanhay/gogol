@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.eventTags.insert@ method which the
 -- 'EventTagsInsert' request conforms to.
 type EventTagsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "eventTags" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] EventTag :> Post '[JSON] EventTag
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] EventTag :> Post '[JSON] EventTag
 
 -- | Inserts a new event tag.
 --

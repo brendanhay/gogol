@@ -34,7 +34,6 @@ module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
 
     -- * Request Lenses
     , icuResourceId
-    , icuMedia
     , icuImageType
     ) where
 
@@ -44,24 +43,38 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.imageConfigurations.upload@ method which the
 -- 'ImageConfigurationsUpload' request conforms to.
 type ImageConfigurationsUploadResource =
-     "images" :>
-       Capture "resourceId" Text :>
-         "imageType" :>
-           Capture "imageType"
-             ImageConfigurationsUploadImageType
-             :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] Body :>
-                 Post '[JSON] ImageConfiguration
+     "games" :>
+       "v1configuration" :>
+         "images" :>
+           Capture "resourceId" Text :>
+             "imageType" :>
+               Capture "imageType"
+                 ImageConfigurationsUploadImageType
+                 :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] ImageConfiguration
+       :<|>
+       "upload" :>
+         "games" :>
+           "v1configuration" :>
+             "images" :>
+               Capture "resourceId" Text :>
+                 "imageType" :>
+                   Capture "imageType"
+                     ImageConfigurationsUploadImageType
+                     :>
+                     QueryParam "alt" AltJSON :>
+                       QueryParam "uploadType" AltMedia :>
+                         ReqBody '[OctetStream] RequestBody :>
+                           Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
 --
 -- /See:/ 'imageConfigurationsUpload' smart constructor.
 data ImageConfigurationsUpload = ImageConfigurationsUpload
     { _icuResourceId :: !Text
-    , _icuMedia      :: !Body
     , _icuImageType  :: !ImageConfigurationsUploadImageType
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImageConfigurationsUpload' with the minimum fields required to make a request.
 --
@@ -69,18 +82,14 @@ data ImageConfigurationsUpload = ImageConfigurationsUpload
 --
 -- * 'icuResourceId'
 --
--- * 'icuMedia'
---
 -- * 'icuImageType'
 imageConfigurationsUpload
     :: Text -- ^ 'icuResourceId'
-    -> Body -- ^ 'icuMedia'
     -> ImageConfigurationsUploadImageType -- ^ 'icuImageType'
     -> ImageConfigurationsUpload
-imageConfigurationsUpload pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
+imageConfigurationsUpload pIcuResourceId_ pIcuImageType_ =
     ImageConfigurationsUpload
     { _icuResourceId = pIcuResourceId_
-    , _icuMedia = pIcuMedia_
     , _icuImageType = pIcuImageType_
     }
 
@@ -89,9 +98,6 @@ icuResourceId :: Lens' ImageConfigurationsUpload Text
 icuResourceId
   = lens _icuResourceId
       (\ s a -> s{_icuResourceId = a})
-
-icuMedia :: Lens' ImageConfigurationsUpload Body
-icuMedia = lens _icuMedia (\ s a -> s{_icuMedia = a})
 
 -- | Selects which image in a resource for this method.
 icuImageType :: Lens' ImageConfigurationsUpload ImageConfigurationsUploadImageType
@@ -104,9 +110,24 @@ instance GoogleRequest ImageConfigurationsUpload
              ImageConfiguration
         requestClient ImageConfigurationsUpload{..}
           = go _icuResourceId _icuImageType (Just AltJSON)
-              _icuMedia
               gamesConfigurationService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy ImageConfigurationsUploadResource)
+                      mempty
+
+instance GoogleRequest
+         (Upload ImageConfigurationsUpload) where
+        type Rs (Upload ImageConfigurationsUpload) =
+             ImageConfiguration
+        requestClient
+          (Upload ImageConfigurationsUpload{..} body)
+          = go _icuResourceId _icuImageType (Just AltJSON)
+              (Just AltMedia)
+              _icuPayload
+              body
+              gamesConfigurationService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy ImageConfigurationsUploadResource)
                       mempty

@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.template.list@ method which the
 -- 'TemplateList'' request conforms to.
 type TemplateListResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "templates" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] TemplateList
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "templates" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] TemplateList
 
 -- | Retrieves a list of templates.
 --

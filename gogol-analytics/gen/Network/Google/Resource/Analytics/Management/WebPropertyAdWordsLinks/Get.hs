@@ -44,15 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.get@ method which the
 -- 'ManagementWebPropertyAdWordsLinksGet' request conforms to.
 type ManagementWebPropertyAdWordsLinksGetResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityAdWordsLinks" :>
-                 Capture "webPropertyAdWordsLinkId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] EntityAdWordsLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     Capture "webPropertyAdWordsLinkId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] EntityAdWordsLink
 
 -- | Returns a web property-AdWords link to which the user has access.
 --

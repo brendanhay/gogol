@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.list@ method which the
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
-     "accounts" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Accounts
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | List all accounts available to this AdSense account.
 --

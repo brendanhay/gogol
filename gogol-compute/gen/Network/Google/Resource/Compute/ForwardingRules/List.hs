@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.forwardingRules.list@ method which the
 -- 'ForwardingRulesList' request conforms to.
 type ForwardingRulesListResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "forwardingRules" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ForwardingRuleList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "forwardingRules" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ForwardingRuleList
 
 -- | Retrieves the list of ForwardingRule resources available to the
 -- specified project and region.

@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.zoneOperations.get@ method which the
 -- 'ZoneOperationsGet' request conforms to.
 type ZoneOperationsGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "operations" :>
-             Capture "operation" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "operations" :>
+                   Capture "operation" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified zone-specific Operations resource.
 --

@@ -44,11 +44,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.captions.delete@ method which the
 -- 'CaptionsDelete' request conforms to.
 type CaptionsDeleteResource =
-     "captions" :>
-       QueryParam "id" Text :>
-         QueryParam "onBehalfOf" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "captions" :>
+           QueryParam "id" Text :>
+             QueryParam "onBehalfOf" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a specified caption track.
 --

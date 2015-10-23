@@ -56,25 +56,27 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.layers.volumeAnnotations.list@ method which the
 -- 'LayersVolumeAnnotationsList' request conforms to.
 type LayersVolumeAnnotationsListResource =
-     "volumes" :>
-       Capture "volumeId" Text :>
-         "layers" :>
-           Capture "layerId" Text :>
-             QueryParam "contentVersion" Text :>
-               QueryParam "startOffset" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "showDeleted" Bool :>
-                     QueryParam "volumeAnnotationsVersion" Text :>
-                       QueryParam "updatedMax" Text :>
-                         QueryParam "updatedMin" Text :>
-                           QueryParam "endOffset" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "endPosition" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "startPosition" Text :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] Volumeannotations
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layers" :>
+               Capture "layerId" Text :>
+                 QueryParam "contentVersion" Text :>
+                   QueryParam "startOffset" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "showDeleted" Bool :>
+                         QueryParam "volumeAnnotationsVersion" Text :>
+                           QueryParam "updatedMax" Text :>
+                             QueryParam "updatedMin" Text :>
+                               QueryParam "endOffset" Text :>
+                                 QueryParam "source" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "endPosition" Text :>
+                                       QueryParam "maxResults" Word32 :>
+                                         QueryParam "startPosition" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] Volumeannotations
 
 -- | Gets the volume annotations for a volume and layer.
 --

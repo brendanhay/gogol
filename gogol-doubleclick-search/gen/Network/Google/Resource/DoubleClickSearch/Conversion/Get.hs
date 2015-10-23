@@ -53,23 +53,25 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.conversion.get@ method which the
 -- 'ConversionGet' request conforms to.
 type ConversionGetResource =
-     "agency" :>
-       Capture "agencyId" Int64 :>
-         "advertiser" :>
-           Capture "advertiserId" Int64 :>
-             "engine" :>
-               Capture "engineAccountId" Int64 :>
-                 "conversion" :>
-                   QueryParam "endDate" Int32 :>
-                     QueryParam "rowCount" Int32 :>
-                       QueryParam "startDate" Int32 :>
-                         QueryParam "startRow" Word32 :>
-                           QueryParam "adGroupId" Int64 :>
-                             QueryParam "campaignId" Int64 :>
-                               QueryParam "criterionId" Int64 :>
-                                 QueryParam "adId" Int64 :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ConversionList
+     "doubleclicksearch" :>
+       "v2" :>
+         "agency" :>
+           Capture "agencyId" Int64 :>
+             "advertiser" :>
+               Capture "advertiserId" Int64 :>
+                 "engine" :>
+                   Capture "engineAccountId" Int64 :>
+                     "conversion" :>
+                       QueryParam "endDate" Int32 :>
+                         QueryParam "rowCount" Int32 :>
+                           QueryParam "startDate" Int32 :>
+                             QueryParam "startRow" Word32 :>
+                               QueryParam "adGroupId" Int64 :>
+                                 QueryParam "campaignId" Int64 :>
+                                   QueryParam "criterionId" Int64 :>
+                                     QueryParam "adId" Int64 :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] ConversionList
 
 -- | Retrieves a list of conversions from a DoubleClick Search engine
 -- account.

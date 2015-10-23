@@ -48,16 +48,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.promooffer.dismiss@ method which the
 -- 'PromoOfferDismiss' request conforms to.
 type PromoOfferDismissResource =
-     "promooffer" :>
-       "dismiss" :>
-         QueryParam "manufacturer" Text :>
-           QueryParam "serial" Text :>
-             QueryParam "device" Text :>
-               QueryParam "model" Text :>
-                 QueryParam "offerId" Text :>
-                   QueryParam "product" Text :>
-                     QueryParam "androidId" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "books" :>
+       "v1" :>
+         "promooffer" :>
+           "dismiss" :>
+             QueryParam "manufacturer" Text :>
+               QueryParam "serial" Text :>
+                 QueryParam "device" Text :>
+                   QueryParam "model" Text :>
+                     QueryParam "offerId" Text :>
+                       QueryParam "product" Text :>
+                         QueryParam "androidId" Text :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- |
 --

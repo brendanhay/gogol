@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.photos.delete@ method which the
 -- 'UsersPhotosDelete' request conforms to.
 type UsersPhotosDeleteResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "photos" :>
-           "thumbnail" :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "photos" :>
+                 "thumbnail" :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove photos for the user
 --

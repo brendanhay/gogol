@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.users.generateToken@ method which the
 -- 'UsersGenerateToken' request conforms to.
 type UsersGenerateTokenResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "token" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] UserToken
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "token" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] UserToken
 
 -- | Generates a token (activation code) to allow this user to configure
 -- their work account in the Android Setup Wizard. Revokes any previously

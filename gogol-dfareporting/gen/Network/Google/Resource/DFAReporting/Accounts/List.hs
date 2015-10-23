@@ -49,18 +49,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accounts.list@ method which the
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accounts" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" AccountsListSortOrder :>
-                 QueryParam "active" Bool :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField" AccountsListSortField :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] AccountsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accounts" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder" AccountsListSortOrder :>
+                     QueryParam "active" Bool :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "sortField" AccountsListSortField :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] AccountsListResponse
 
 -- | Retrieves the list of accounts, possibly filtered.
 --

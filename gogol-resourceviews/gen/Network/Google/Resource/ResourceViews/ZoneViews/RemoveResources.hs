@@ -45,15 +45,18 @@ import           Network.Google.ResourceViews.Types
 -- | A resource alias for @resourceviews.zoneViews.removeResources@ method which the
 -- 'ZoneViewsRemoveResources' request conforms to.
 type ZoneViewsRemoveResourcesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "resourceViews" :>
-             Capture "resourceView" Text :>
-               "removeResources" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ZoneViewsRemoveResourcesRequest :>
-                     Post '[JSON] Operation
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "removeResources" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ZoneViewsRemoveResourcesRequest :>
+                           Post '[JSON] Operation
 
 -- | Remove resources from the view.
 --

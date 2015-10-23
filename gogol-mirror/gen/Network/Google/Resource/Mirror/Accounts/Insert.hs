@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.accounts.insert@ method which the
 -- 'AccountsInsert' request conforms to.
 type AccountsInsertResource =
-     "accounts" :>
-       Capture "userToken" Text :>
-         Capture "accountType" Text :>
-           Capture "accountName" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Account :> Post '[JSON] Account
+     "mirror" :>
+       "v1" :>
+         "accounts" :>
+           Capture "userToken" Text :>
+             Capture "accountType" Text :>
+               Capture "accountName" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Account :> Post '[JSON] Account
 
 -- | Inserts a new account for a user
 --

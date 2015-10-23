@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.members.list@ method which the
 -- 'MembersList' request conforms to.
 type MembersListResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         "members" :>
-           QueryParam "roles" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Members
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               "members" :>
+                 QueryParam "roles" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Members
 
 -- | Retrieve all members in a group (paginated)
 --

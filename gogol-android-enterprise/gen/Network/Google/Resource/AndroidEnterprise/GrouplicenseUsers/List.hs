@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.grouplicenseusers.list@ method which the
 -- 'GrouplicenseUsersList' request conforms to.
 type GrouplicenseUsersListResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "groupLicenses" :>
-           Capture "groupLicenseId" Text :>
-             "users" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] GroupLicenseUsersListResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "groupLicenses" :>
+               Capture "groupLicenseId" Text :>
+                 "users" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] GroupLicenseUsersListResponse
 
 -- | Retrieves the IDs of the users who have been granted entitlements under
 -- the license.

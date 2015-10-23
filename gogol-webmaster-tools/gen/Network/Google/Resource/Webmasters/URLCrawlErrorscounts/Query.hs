@@ -46,19 +46,21 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.urlcrawlerrorscounts.query@ method which the
 -- 'URLCrawlErrorscountsQuery' request conforms to.
 type URLCrawlErrorscountsQueryResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         "urlCrawlErrorsCounts" :>
-           "query" :>
-             QueryParam "platform"
-               URLCrawlErrorscountsQueryPlatform
-               :>
-               QueryParam "category"
-                 URLCrawlErrorscountsQueryCategory
-                 :>
-                 QueryParam "latestCountsOnly" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] URLCrawlErrorsCountsQueryResponse
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "urlCrawlErrorsCounts" :>
+               "query" :>
+                 QueryParam "platform"
+                   URLCrawlErrorscountsQueryPlatform
+                   :>
+                   QueryParam "category"
+                     URLCrawlErrorscountsQueryCategory
+                     :>
+                     QueryParam "latestCountsOnly" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] URLCrawlErrorsCountsQueryResponse
 
 -- | Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.

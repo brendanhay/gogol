@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.blogUserInfos.get@ method which the
 -- 'BlogUserInfosGet' request conforms to.
 type BlogUserInfosGetResource =
-     "users" :>
-       Capture "userId" Text :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             QueryParam "maxPosts" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] BlogUserInfo
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             "blogs" :>
+               Capture "blogId" Text :>
+                 QueryParam "maxPosts" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] BlogUserInfo
 
 -- | Gets one blog and user info pair by blogId and userId.
 --

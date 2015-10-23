@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.dataSources.get@ method which the
 -- 'UsersDataSourcesGet' request conforms to.
 type UsersDataSourcesGetResource =
-     Capture "userId" Text :>
-       "dataSources" :>
-         Capture "dataSourceId" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] DataSource
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
 -- | Returns a data source identified by a data stream ID.
 --

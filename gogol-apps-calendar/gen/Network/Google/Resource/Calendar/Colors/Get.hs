@@ -40,8 +40,10 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.colors.get@ method which the
 -- 'ColorsGet' request conforms to.
 type ColorsGetResource =
-     "colors" :>
-       QueryParam "alt" AltJSON :> Get '[JSON] Colors
+     "calendar" :>
+       "v3" :>
+         "colors" :>
+           QueryParam "alt" AltJSON :> Get '[JSON] Colors
 
 -- | Returns the color definitions for calendars and events.
 --

@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.reports.delete@ method which the
 -- 'ReportsDelete' request conforms to.
 type ReportsDeleteResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "reports" :>
-           Capture "reportId" Int64 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               Capture "reportId" Int64 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a report by its ID.
 --

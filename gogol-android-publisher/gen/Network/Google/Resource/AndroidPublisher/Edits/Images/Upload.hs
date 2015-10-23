@@ -35,7 +35,6 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
 
     -- * Request Lenses
     , eiuPackageName
-    , eiuMedia
     , eiuImageType
     , eiuLanguage
     , eiuEditId
@@ -47,15 +46,32 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.images.upload@ method which the
 -- 'EditsImagesUpload' request conforms to.
 type EditsImagesUploadResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "listings" :>
-             Capture "language" Text :>
-               Capture "imageType" EditsImagesUploadImageType :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[OctetStream] Body :>
-                     Post '[JSON] ImagesUploadResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "listings" :>
+                   Capture "language" Text :>
+                     Capture "imageType" EditsImagesUploadImageType :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] ImagesUploadResponse
+       :<|>
+       "upload" :>
+         "androidpublisher" :>
+           "v2" :>
+             "applications" :>
+               Capture "packageName" Text :>
+                 "edits" :>
+                   Capture "editId" Text :>
+                     "listings" :>
+                       Capture "language" Text :>
+                         Capture "imageType" EditsImagesUploadImageType :>
+                           QueryParam "alt" AltJSON :>
+                             QueryParam "uploadType" AltMedia :>
+                               ReqBody '[OctetStream] RequestBody :>
+                                 Post '[JSON] ImagesUploadResponse
 
 -- | Uploads a new image and adds it to the list of images for the specified
 -- language and image type.
@@ -63,19 +79,16 @@ type EditsImagesUploadResource =
 -- /See:/ 'editsImagesUpload' smart constructor.
 data EditsImagesUpload = EditsImagesUpload
     { _eiuPackageName :: !Text
-    , _eiuMedia       :: !Body
     , _eiuImageType   :: !EditsImagesUploadImageType
     , _eiuLanguage    :: !Text
     , _eiuEditId      :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsImagesUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'eiuPackageName'
---
--- * 'eiuMedia'
 --
 -- * 'eiuImageType'
 --
@@ -84,15 +97,13 @@ data EditsImagesUpload = EditsImagesUpload
 -- * 'eiuEditId'
 editsImagesUpload
     :: Text -- ^ 'eiuPackageName'
-    -> Body -- ^ 'eiuMedia'
     -> EditsImagesUploadImageType -- ^ 'eiuImageType'
     -> Text -- ^ 'eiuLanguage'
     -> Text -- ^ 'eiuEditId'
     -> EditsImagesUpload
-editsImagesUpload pEiuPackageName_ pEiuMedia_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
+editsImagesUpload pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
     EditsImagesUpload
     { _eiuPackageName = pEiuPackageName_
-    , _eiuMedia = pEiuMedia_
     , _eiuImageType = pEiuImageType_
     , _eiuLanguage = pEiuLanguage_
     , _eiuEditId = pEiuEditId_
@@ -104,9 +115,6 @@ eiuPackageName :: Lens' EditsImagesUpload Text
 eiuPackageName
   = lens _eiuPackageName
       (\ s a -> s{_eiuPackageName = a})
-
-eiuMedia :: Lens' EditsImagesUpload Body
-eiuMedia = lens _eiuMedia (\ s a -> s{_eiuMedia = a})
 
 eiuImageType :: Lens' EditsImagesUpload EditsImagesUploadImageType
 eiuImageType
@@ -130,9 +138,25 @@ instance GoogleRequest EditsImagesUpload where
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               (Just AltJSON)
-              _eiuMedia
               androidPublisherService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy EditsImagesUploadResource)
+                      mempty
+
+instance GoogleRequest (Upload EditsImagesUpload)
+         where
+        type Rs (Upload EditsImagesUpload) =
+             ImagesUploadResponse
+        requestClient (Upload EditsImagesUpload{..} body)
+          = go _eiuPackageName _eiuEditId _eiuLanguage
+              _eiuImageType
+              (Just AltJSON)
+              (Just AltMedia)
+              _eiuPayload
+              body
+              androidPublisherService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy EditsImagesUploadResource)
                       mempty

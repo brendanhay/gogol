@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dns.managedZones.delete@ method which the
 -- 'ManagedZonesDelete' request conforms to.
 type ManagedZonesDeleteResource =
-     Capture "project" Text :>
-       "managedZones" :>
-         Capture "managedZone" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dns" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a previously created ManagedZone.
 --

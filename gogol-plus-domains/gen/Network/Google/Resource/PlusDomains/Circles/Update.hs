@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.circles.update@ method which the
 -- 'CirclesUpdate' request conforms to.
 type CirclesUpdateResource =
-     "circles" :>
-       Capture "circleId" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Circle :> Put '[JSON] Circle
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Circle :> Put '[JSON] Circle
 
 -- | Update a circle\'s description.
 --

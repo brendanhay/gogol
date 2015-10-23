@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.customchannels.delete@ method which the
 -- 'CustomChannelsDelete' request conforms to.
 type CustomChannelsDeleteResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "customchannels" :>
-           Capture "customChannelId" Text :>
-             QueryParam "alt" AltJSON :>
-               Delete '[JSON] CustomChannel
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "customchannels" :>
+               Capture "customChannelId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Delete '[JSON] CustomChannel
 
 -- | Delete a specific custom channel from the host AdSense account.
 --

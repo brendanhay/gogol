@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.snapshots.get@ method which the
 -- 'SnapshotsGet' request conforms to.
 type SnapshotsGetResource =
-     "snapshots" :>
-       Capture "snapshotId" Text :>
-         QueryParam "language" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
+     "games" :>
+       "v1" :>
+         "snapshots" :>
+           Capture "snapshotId" Text :>
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
 -- | Retrieves the metadata for a given snapshot ID.
 --

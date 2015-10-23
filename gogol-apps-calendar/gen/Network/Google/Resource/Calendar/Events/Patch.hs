@@ -48,16 +48,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.patch@ method which the
 -- 'EventsPatch' request conforms to.
 type EventsPatchResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           Capture "eventId" Text :>
-             QueryParam "maxAttendees" Int32 :>
-               QueryParam "sendNotifications" Bool :>
-                 QueryParam "supportsAttachments" Bool :>
-                   QueryParam "alwaysIncludeEmail" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Event :> Patch '[JSON] Event
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               Capture "eventId" Text :>
+                 QueryParam "maxAttendees" Int32 :>
+                   QueryParam "sendNotifications" Bool :>
+                     QueryParam "supportsAttachments" Bool :>
+                       QueryParam "alwaysIncludeEmail" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Event :> Patch '[JSON] Event
 
 -- | Updates an event. This method supports patch semantics.
 --

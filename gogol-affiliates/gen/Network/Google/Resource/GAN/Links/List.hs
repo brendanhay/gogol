@@ -56,26 +56,28 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.links.list@ method which the
 -- 'LinksList' request conforms to.
 type LinksListResource =
-     Capture "role" LinksListRole :>
-       Capture "roleId" Text :>
-         "links" :>
-           QueryParam "createDateMax" Text :>
-             QueryParam "authorship" LinksListAuthorship :>
-               QueryParams "assetSize" Text :>
-                 QueryParam "relationshipStatus"
-                   LinksListRelationshipStatus
-                   :>
-                   QueryParams "advertiserId" Int64 :>
-                     QueryParam "searchText" Text :>
-                       QueryParams "promotionType" LinksListPromotionType :>
-                         QueryParam "createDateMin" Text :>
-                           QueryParam "linkType" LinksListLinkType :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "startDateMax" Text :>
-                                 QueryParam "startDateMin" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] Links
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" LinksListRole :>
+           Capture "roleId" Text :>
+             "links" :>
+               QueryParam "createDateMax" Text :>
+                 QueryParam "authorship" LinksListAuthorship :>
+                   QueryParams "assetSize" Text :>
+                     QueryParam "relationshipStatus"
+                       LinksListRelationshipStatus
+                       :>
+                       QueryParams "advertiserId" Int64 :>
+                         QueryParam "searchText" Text :>
+                           QueryParams "promotionType" LinksListPromotionType :>
+                             QueryParam "createDateMin" Text :>
+                               QueryParam "linkType" LinksListLinkType :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "startDateMax" Text :>
+                                     QueryParam "startDateMin" Text :>
+                                       QueryParam "maxResults" Word32 :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] Links
 
 -- | Retrieves all links that match the query parameters.
 --

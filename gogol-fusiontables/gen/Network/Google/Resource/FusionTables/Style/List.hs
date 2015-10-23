@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.style.list@ method which the
 -- 'StyleList' request conforms to.
 type StyleListResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "styles" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] StyleSettingList
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "styles" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] StyleSettingList
 
 -- | Retrieves a list of styles.
 --

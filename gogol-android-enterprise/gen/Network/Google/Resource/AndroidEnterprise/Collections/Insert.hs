@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.collections.insert@ method which the
 -- 'CollectionsInsert' request conforms to.
 type CollectionsInsertResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "collections" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Collection :> Post '[JSON] Collection
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "collections" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Collection :> Post '[JSON] Collection
 
 -- | Creates a new collection.
 --

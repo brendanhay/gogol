@@ -41,12 +41,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.datafeeds.custombatch@ method which the
 -- 'DatafeedsCustombatch' request conforms to.
 type DatafeedsCustombatchResource =
-     "datafeeds" :>
-       "batch" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] DatafeedsCustomBatchRequest :>
-               Post '[JSON] DatafeedsCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "datafeeds" :>
+           "batch" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] DatafeedsCustomBatchRequest :>
+                   Post '[JSON] DatafeedsCustomBatchResponse
 
 --
 -- /See:/ 'datafeedsCustombatch' smart constructor.

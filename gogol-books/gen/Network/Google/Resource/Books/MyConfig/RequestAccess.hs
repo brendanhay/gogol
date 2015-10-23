@@ -47,18 +47,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.myconfig.requestAccess@ method which the
 -- 'MyConfigRequestAccess' request conforms to.
 type MyConfigRequestAccessResource =
-     "myconfig" :>
-       "requestAccess" :>
-         QueryParam "source" Text :>
-           QueryParam "volumeId" Text :>
-             QueryParam "nonce" Text :>
-               QueryParam "cpksver" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "licenseTypes"
-                     MyConfigRequestAccessLicenseTypes
-                     :>
-                     QueryParam "alt" AltJSON :>
-                       Post '[JSON] RequestAccess
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "requestAccess" :>
+             QueryParam "source" Text :>
+               QueryParam "volumeId" Text :>
+                 QueryParam "nonce" Text :>
+                   QueryParam "cpksver" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "licenseTypes"
+                         MyConfigRequestAccessLicenseTypes
+                         :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] RequestAccess
 
 -- | Request concurrent and download access restrictions.
 --

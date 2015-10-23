@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.campaigns.patch@ method which the
 -- 'CampaignsPatch' request conforms to.
 type CampaignsPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
 
 -- | Updates an existing campaign. This method supports patch semantics.
 --

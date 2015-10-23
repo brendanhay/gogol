@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.networks.get@ method which the
 -- 'NetworksGet' request conforms to.
 type NetworksGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "networks" :>
-           Capture "network" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Network
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "networks" :>
+                 Capture "network" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Network
 
 -- | Returns the specified network resource.
 --

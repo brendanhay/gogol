@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.delete@ method which the
 -- 'InstancesDelete' request conforms to.
 type InstancesDeleteResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Instance resource. For more information, see
 -- Shutting down an instance.

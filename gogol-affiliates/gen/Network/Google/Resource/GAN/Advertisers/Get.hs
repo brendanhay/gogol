@@ -47,11 +47,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.advertisers.get@ method which the
 -- 'AdvertisersGet' request conforms to.
 type AdvertisersGetResource =
-     Capture "role" AdvertisersGetRole :>
-       Capture "roleId" Text :>
-         "advertiser" :>
-           QueryParam "advertiserId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" AdvertisersGetRole :>
+           Capture "roleId" Text :>
+             "advertiser" :>
+               QueryParam "advertiserId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
 
 -- | Retrieves data about a single advertiser if that the requesting
 -- advertiser\/publisher has access to it. Only publishers can lookup

@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webpropertyUserLinks.list@ method which the
 -- 'ManagementWebPropertyUserLinksList' request conforms to.
 type ManagementWebPropertyUserLinksListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityUserLinks" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] EntityUserLinks
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityUserLinks" :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] EntityUserLinks
 
 -- | Lists webProperty-user links for a given web property.
 --

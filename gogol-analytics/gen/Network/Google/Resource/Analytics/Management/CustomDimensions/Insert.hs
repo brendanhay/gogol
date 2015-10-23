@@ -44,15 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customDimensions.insert@ method which the
 -- 'ManagementCustomDimensionsInsert' request conforms to.
 type ManagementCustomDimensionsInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customDimensions" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] CustomDimension :>
-                     Post '[JSON] CustomDimension
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CustomDimension :>
+                         Post '[JSON] CustomDimension
 
 -- | Create a new custom dimension.
 --

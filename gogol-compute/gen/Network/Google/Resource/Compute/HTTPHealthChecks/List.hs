@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.httpHealthChecks.list@ method which the
 -- 'HTTPHealthChecksList' request conforms to.
 type HTTPHealthChecksListResource =
-     Capture "project" Text :>
-       "global" :>
-         "httpHealthChecks" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] HTTPHealthCheckList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "httpHealthChecks" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] HTTPHealthCheckList
 
 -- | Retrieves the list of HttpHealthCheck resources available to the
 -- specified project.

@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.urlMaps.update@ method which the
 -- 'URLMapsUpdate' request conforms to.
 type URLMapsUpdateResource =
-     Capture "project" Text :>
-       "global" :>
-         "urlMaps" :>
-           Capture "urlMap" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] URLMap :> Put '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "urlMaps" :>
+                 Capture "urlMap" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] URLMap :> Put '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource.
 --

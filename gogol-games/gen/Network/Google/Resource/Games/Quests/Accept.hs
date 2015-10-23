@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.quests.accept@ method which the
 -- 'QuestsAccept' request conforms to.
 type QuestsAcceptResource =
-     "quests" :>
-       Capture "questId" Text :>
-         "accept" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :> Post '[JSON] Quest
+     "games" :>
+       "v1" :>
+         "quests" :>
+           Capture "questId" Text :>
+             "accept" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] Quest
 
 -- | Indicates that the currently authorized user will participate in the
 -- quest.

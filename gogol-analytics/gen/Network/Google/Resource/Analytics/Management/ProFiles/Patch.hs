@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profiles.patch@ method which the
 -- 'ManagementProFilesPatch' request conforms to.
 type ManagementProFilesPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ProFile :> Patch '[JSON] ProFile
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ProFile :> Patch '[JSON] ProFile
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.

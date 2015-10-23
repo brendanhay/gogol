@@ -51,18 +51,22 @@ import           Network.Google.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.reports.query@ method which the
 -- 'ReportsQuery' request conforms to.
 type ReportsQueryResource =
-     "reports" :>
-       QueryParam "ids" Text :>
-         QueryParam "start-date" Text :>
-           QueryParam "end-date" Text :>
-             QueryParam "metrics" Text :>
-               QueryParam "filters" Text :>
-                 QueryParam "currency" Text :>
-                   QueryParam "sort" Text :>
-                     QueryParam "dimensions" Text :>
-                       QueryParam "start-index" Int32 :>
-                         QueryParam "max-results" Int32 :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] ResultTable
+     "youtube" :>
+       "analytics" :>
+         "v1" :>
+           "reports" :>
+             QueryParam "ids" Text :>
+               QueryParam "start-date" Text :>
+                 QueryParam "end-date" Text :>
+                   QueryParam "metrics" Text :>
+                     QueryParam "filters" Text :>
+                       QueryParam "currency" Text :>
+                         QueryParam "sort" Text :>
+                           QueryParam "dimensions" Text :>
+                             QueryParam "start-index" Int32 :>
+                               QueryParam "max-results" Int32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ResultTable
 
 -- | Retrieve your YouTube Analytics reports.
 --

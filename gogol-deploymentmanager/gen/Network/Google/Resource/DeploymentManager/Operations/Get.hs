@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.operations.get@ method which the
 -- 'OperationsGet' request conforms to.
 type OperationsGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "operations" :>
-           Capture "operation" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Operation
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 Capture "operation" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets information about a specific operation.
 --

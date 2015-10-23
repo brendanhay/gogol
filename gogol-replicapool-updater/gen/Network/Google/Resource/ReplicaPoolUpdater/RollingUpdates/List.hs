@@ -47,15 +47,18 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.rollingUpdates.list@ method which the
 -- 'RollingUpdatesList' request conforms to.
 type RollingUpdatesListResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "rollingUpdates" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] RollingUpdateList
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "rollingUpdates" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] RollingUpdateList
 
 -- | Lists recent updates for a given managed instance group, in reverse
 -- chronological order and paginated format.

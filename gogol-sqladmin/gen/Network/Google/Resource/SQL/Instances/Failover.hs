@@ -44,14 +44,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.failover@ method which the
 -- 'InstancesFailover' request conforms to.
 type InstancesFailoverResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "failover" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] InstancesFailoverRequest :>
-                   Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "failover" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] InstancesFailoverRequest :>
+                       Post '[JSON] Operation
 
 -- | Failover the instance to its failover replica instance.
 --

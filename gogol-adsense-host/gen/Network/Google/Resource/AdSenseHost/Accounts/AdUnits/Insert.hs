@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.accounts.adunits.insert@ method which the
 -- 'AccountsAdUnitsInsert' request conforms to.
 type AccountsAdUnitsInsertResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] AdUnit :> Post '[JSON] AdUnit
+     "adsensehost" :>
+       "v4.1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AdUnit :> Post '[JSON] AdUnit
 
 -- | Insert the supplied ad unit into the specified publisher AdSense
 -- account.

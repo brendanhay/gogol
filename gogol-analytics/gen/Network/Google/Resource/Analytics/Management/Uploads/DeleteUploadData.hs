@@ -45,18 +45,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.uploads.deleteUploadData@ method which the
 -- 'ManagementUploadsDeleteUploadData' request conforms to.
 type ManagementUploadsDeleteUploadDataResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customDataSources" :>
-                 Capture "customDataSourceId" Text :>
-                   "deleteUploadData" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON]
-                         AnalyticsDataimportDeleteUploadDataRequest
-                         :> Post '[JSON] ()
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     Capture "customDataSourceId" Text :>
+                       "deleteUploadData" :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON]
+                             AnalyticsDataimportDeleteUploadDataRequest
+                             :> Post '[JSON] ()
 
 -- | Delete data associated with a previous upload.
 --

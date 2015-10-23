@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.products.getPermissions@ method which the
 -- 'ProductsGetPermissions' request conforms to.
 type ProductsGetPermissionsResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "products" :>
-           Capture "productId" Text :>
-             "permissions" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ProductPermissions
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "products" :>
+               Capture "productId" Text :>
+                 "permissions" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ProductPermissions
 
 -- | Retrieves the Android app permissions required by this app.
 --

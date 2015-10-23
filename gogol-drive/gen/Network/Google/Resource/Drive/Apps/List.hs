@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.apps.list@ method which the
 -- 'AppsList' request conforms to.
 type AppsListResource =
-     "apps" :>
-       QueryParam "languageCode" Text :>
-         QueryParam "appFilterExtensions" Text :>
-           QueryParam "appFilterMimeTypes" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] AppList
+     "drive" :>
+       "v2" :>
+         "apps" :>
+           QueryParam "languageCode" Text :>
+             QueryParam "appFilterExtensions" Text :>
+               QueryParam "appFilterMimeTypes" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] AppList
 
 -- | Lists a user\'s installed apps.
 --

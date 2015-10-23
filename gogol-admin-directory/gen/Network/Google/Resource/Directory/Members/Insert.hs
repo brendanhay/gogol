@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.members.insert@ method which the
 -- 'MembersInsert' request conforms to.
 type MembersInsertResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         "members" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Member :> Post '[JSON] Member
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               "members" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Member :> Post '[JSON] Member
 
 -- | Add user to the specified group.
 --

@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.posts.search@ method which the
 -- 'PostsSearch' request conforms to.
 type PostsSearchResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           "search" :>
-             QueryParam "q" Text :>
-               QueryParam "orderBy" PostsSearchOrderBy :>
-                 QueryParam "fetchBodies" Bool :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] PostList
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               "search" :>
+                 QueryParam "q" Text :>
+                   QueryParam "orderBy" PostsSearchOrderBy :>
+                     QueryParam "fetchBodies" Bool :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] PostList
 
 -- | Search for a post.
 --

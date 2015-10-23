@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.delete@ method which the
 -- 'LeaderboardConfigurationsDelete' request conforms to.
 type LeaderboardConfigurationsDeleteResource =
-     "leaderboards" :>
-       Capture "leaderboardId" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "games" :>
+       "v1configuration" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete the leaderboard configuration with the given ID.
 --

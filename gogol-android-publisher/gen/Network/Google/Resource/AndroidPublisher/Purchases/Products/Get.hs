@@ -44,14 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.purchases.products.get@ method which the
 -- 'PurchasesProductsGet' request conforms to.
 type PurchasesProductsGetResource =
-     Capture "packageName" Text :>
-       "purchases" :>
-         "products" :>
-           Capture "productId" Text :>
-             "tokens" :>
-               Capture "token" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ProductPurchase
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "purchases" :>
+               "products" :>
+                 Capture "productId" Text :>
+                   "tokens" :>
+                     Capture "token" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ProductPurchase
 
 -- | Checks the purchase and consumption status of an inapp item.
 --

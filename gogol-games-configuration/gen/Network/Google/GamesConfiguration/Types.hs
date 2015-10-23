@@ -131,7 +131,6 @@ gamesConfigurationService
   = defaultService
       (ServiceId "gamesConfiguration:v1configuration")
       "www.googleapis.com"
-      "games/v1configuration/"
 
 -- | View and manage your Google Play Developer account
 androidpublisherScope :: OAuthScope

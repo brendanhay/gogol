@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.revisions.delete@ method which the
 -- 'RevisionsDelete' request conforms to.
 type RevisionsDeleteResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "revisions" :>
-           Capture "revisionId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               Capture "revisionId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a revision.
 --

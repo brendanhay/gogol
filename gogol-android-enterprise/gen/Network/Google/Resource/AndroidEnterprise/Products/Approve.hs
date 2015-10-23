@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.products.approve@ method which the
 -- 'ProductsApprove' request conforms to.
 type ProductsApproveResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "products" :>
-           Capture "productId" Text :>
-             "approve" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ProductsApproveRequest :>
-                   Post '[JSON] ()
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "products" :>
+               Capture "productId" Text :>
+                 "approve" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ProductsApproveRequest :>
+                       Post '[JSON] ()
 
 -- | Approves the specified product (and the relevant app permissions, if
 -- any).

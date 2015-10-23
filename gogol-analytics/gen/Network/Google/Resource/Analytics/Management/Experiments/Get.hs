@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.experiments.get@ method which the
 -- 'ManagementExperimentsGet' request conforms to.
 type ManagementExperimentsGetResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "experiments" :>
-                     Capture "experimentId" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Experiment
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         Capture "experimentId" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Experiment
 
 -- | Returns an experiment to which the user has access.
 --

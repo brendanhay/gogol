@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceTemplates.get@ method which the
 -- 'InstanceTemplatesGet' request conforms to.
 type InstanceTemplatesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "instanceTemplates" :>
-           Capture "instanceTemplate" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] InstanceTemplate
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "instanceTemplates" :>
+                 Capture "instanceTemplate" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] InstanceTemplate
 
 -- | Returns the specified instance template resource.
 --

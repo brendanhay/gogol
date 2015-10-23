@@ -736,7 +736,6 @@ directoryService :: Service
 directoryService
   = defaultService (ServiceId "admin:directory_v1")
       "www.googleapis.com"
-      "admin/directory/v1/"
 
 -- | View delegated admin roles for your domain
 adminDirectoryRolemanagementReadonlyScope :: OAuthScope

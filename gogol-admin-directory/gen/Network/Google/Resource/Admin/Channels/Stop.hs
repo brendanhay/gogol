@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- 'ChannelsStop' request conforms to.
 type ChannelsStopResource =
      "admin" :>
-       "directory_v1" :>
-         "channels" :>
-           "stop" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Channel :> Post '[JSON] ()
+       "directory" :>
+         "v1" :>
+           "admin" :>
+             "directory_v1" :>
+               "channels" :>
+                 "stop" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Channel :> Post '[JSON] ()
 
 -- | Stop watching resources through this channel
 --

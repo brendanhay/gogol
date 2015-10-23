@@ -45,15 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.attachDisk@ method which the
 -- 'InstancesAttachDisk' request conforms to.
 type InstancesAttachDiskResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "attachDisk" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] AttachedDisk :>
-                     Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "attachDisk" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] AttachedDisk :>
+                           Post '[JSON] Operation
 
 -- | Attaches a Disk resource to an instance.
 --

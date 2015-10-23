@@ -47,17 +47,20 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.rollingUpdates.listInstanceUpdates@ method which the
 -- 'RollingUpdatesListInstanceUpdates' request conforms to.
 type RollingUpdatesListInstanceUpdatesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "rollingUpdates" :>
-             Capture "rollingUpdate" Text :>
-               "instanceUpdates" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] InstanceUpdateList
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "rollingUpdates" :>
+                   Capture "rollingUpdate" Text :>
+                     "instanceUpdates" :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] InstanceUpdateList
 
 -- | Lists the current status for each instance within a given update.
 --

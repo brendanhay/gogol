@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.settings.watch@ method which the
 -- 'SettingsWatch' request conforms to.
 type SettingsWatchResource =
-     "users" :>
-       "me" :>
-         "settings" :>
-           "watch" :>
-             QueryParam "syncToken" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Channel :> Post '[JSON] Channel
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "settings" :>
+               "watch" :>
+                 QueryParam "syncToken" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes to Settings resources.
 --

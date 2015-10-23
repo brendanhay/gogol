@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.posts.revert@ method which the
 -- 'PostsRevert' request conforms to.
 type PostsRevertResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             "revert" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Post'
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "revert" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Post'
 
 -- | Revert a published or scheduled post to draft state.
 --

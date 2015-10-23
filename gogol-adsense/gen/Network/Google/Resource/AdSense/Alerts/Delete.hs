@@ -43,9 +43,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.alerts.delete@ method which the
 -- 'AlertsDelete' request conforms to.
 type AlertsDeleteResource =
-     "alerts" :>
-       Capture "alertId" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "adsense" :>
+       "v1.4" :>
+         "alerts" :>
+           Capture "alertId" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Dismiss (delete) the specified alert from the publisher\'s AdSense
 -- account.

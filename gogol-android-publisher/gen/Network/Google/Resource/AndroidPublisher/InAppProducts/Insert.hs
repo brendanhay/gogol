@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.inappproducts.insert@ method which the
 -- 'InAppProductsInsert' request conforms to.
 type InAppProductsInsertResource =
-     Capture "packageName" Text :>
-       "inappproducts" :>
-         QueryParam "autoConvertMissingPrices" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] InAppProduct :>
-               Post '[JSON] InAppProduct
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "inappproducts" :>
+               QueryParam "autoConvertMissingPrices" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] InAppProduct :>
+                     Post '[JSON] InAppProduct
 
 -- | Creates a new in-app product for an app.
 --

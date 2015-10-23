@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclickbidmanager.queries.deletequery@ method which the
 -- 'QueriesDeleteQuery' request conforms to.
 type QueriesDeleteQueryResource =
-     "query" :>
-       Capture "queryId" Int64 :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "query" :>
+           Capture "queryId" Int64 :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a stored query as well as the associated stored reports.
 --

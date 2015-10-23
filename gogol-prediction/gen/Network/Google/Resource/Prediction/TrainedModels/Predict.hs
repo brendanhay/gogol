@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @prediction.trainedmodels.predict@ method which the
 -- 'TrainedModelsPredict' request conforms to.
 type TrainedModelsPredictResource =
-     Capture "project" Text :>
-       "trainedmodels" :>
-         Capture "id" Text :>
-           "predict" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Input :> Post '[JSON] Output
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 "predict" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Input :> Post '[JSON] Output
 
 -- | Submit model id and request a prediction.
 --

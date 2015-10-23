@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.diskTypes.get@ method which the
 -- 'DiskTypesGet' request conforms to.
 type DiskTypesGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "diskTypes" :>
-             Capture "diskType" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] DiskType
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "diskTypes" :>
+                   Capture "diskType" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] DiskType
 
 -- | Returns the specified disk type resource.
 --

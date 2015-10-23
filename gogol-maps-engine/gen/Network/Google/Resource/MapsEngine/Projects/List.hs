@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.projects.list@ method which the
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
-     "projects" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] ProjectsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "projects" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] ProjectsListResponse
 
 -- | Return all projects readable by the current user.
 --

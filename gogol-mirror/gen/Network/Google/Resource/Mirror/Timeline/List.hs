@@ -48,16 +48,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.timeline.list@ method which the
 -- 'TimelineList' request conforms to.
 type TimelineListResource =
-     "timeline" :>
-       QueryParam "pinnedOnly" Bool :>
-         QueryParam "orderBy" TimelineListOrderBy :>
-           QueryParam "bundleId" Text :>
-             QueryParam "sourceItemId" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "includeDeleted" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] TimelineListResponse
+     "mirror" :>
+       "v1" :>
+         "timeline" :>
+           QueryParam "pinnedOnly" Bool :>
+             QueryParam "orderBy" TimelineListOrderBy :>
+               QueryParam "bundleId" Text :>
+                 QueryParam "sourceItemId" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "includeDeleted" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TimelineListResponse
 
 -- | Retrieves a list of timeline items for the authenticated user.
 --

@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @prediction.trainedmodels.insert@ method which the
 -- 'TrainedModelsInsert' request conforms to.
 type TrainedModelsInsertResource =
-     Capture "project" Text :>
-       "trainedmodels" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Insert :> Post '[JSON] Insert2
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Insert :> Post '[JSON] Insert2
 
 -- | Train a Prediction API model.
 --

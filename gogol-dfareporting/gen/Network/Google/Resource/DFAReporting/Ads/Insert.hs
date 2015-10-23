@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.ads.insert@ method which the
 -- 'AdsInsert' request conforms to.
 type AdsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "ads" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Ad :> Post '[JSON] Ad
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "ads" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Ad :> Post '[JSON] Ad
 
 -- | Inserts a new ad.
 --

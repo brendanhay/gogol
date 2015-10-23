@@ -47,13 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.tracks.update@ method which the
 -- 'EditsTracksUpdate' request conforms to.
 type EditsTracksUpdateResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "tracks" :>
-             Capture "track" EditsTracksUpdateTrack :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Track :> Put '[JSON] Track
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "tracks" :>
+                   Capture "track" EditsTracksUpdateTrack :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Track :> Put '[JSON] Track
 
 -- | Updates the track configuration for the specified track type. When
 -- halted, the rollout track cannot be updated without adding new APKs, and

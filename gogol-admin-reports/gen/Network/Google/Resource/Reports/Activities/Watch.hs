@@ -52,23 +52,26 @@ import           Network.Google.Reports.Types
 -- | A resource alias for @reports.activities.watch@ method which the
 -- 'ActivitiesWatch' request conforms to.
 type ActivitiesWatchResource =
-     "activity" :>
-       "users" :>
-         Capture "userKey" Text :>
-           "applications" :>
-             Capture "applicationName" Text :>
-               "watch" :>
-                 QueryParam "startTime" Text :>
-                   QueryParam "filters" Text :>
-                     QueryParam "customerId" Text :>
-                       QueryParam "actorIpAddress" Text :>
-                         QueryParam "endTime" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "eventName" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Channel :>
-                                     Post '[JSON] Channel
+     "admin" :>
+       "reports" :>
+         "v1" :>
+           "activity" :>
+             "users" :>
+               Capture "userKey" Text :>
+                 "applications" :>
+                   Capture "applicationName" Text :>
+                     "watch" :>
+                       QueryParam "startTime" Text :>
+                         QueryParam "filters" Text :>
+                           QueryParam "customerId" Text :>
+                             QueryParam "actorIpAddress" Text :>
+                               QueryParam "endTime" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "eventName" Text :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] Channel :>
+                                           Post '[JSON] Channel
 
 -- | Push changes to activities
 --

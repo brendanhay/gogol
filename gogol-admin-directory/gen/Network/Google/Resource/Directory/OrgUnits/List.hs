@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.orgunits.list@ method which the
 -- 'OrgUnitsList' request conforms to.
 type OrgUnitsListResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "orgunits" :>
-           QueryParam "orgUnitPath" Text :>
-             QueryParam "type" OrgUnitsListType :>
-               QueryParam "alt" AltJSON :> Get '[JSON] OrgUnits
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "orgunits" :>
+                 QueryParam "orgUnitPath" Text :>
+                   QueryParam "type" OrgUnitsListType :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] OrgUnits
 
 -- | Retrieve all Organization Units
 --

@@ -51,21 +51,23 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.inventoryItems.list@ method which the
 -- 'InventoryItemsList' request conforms to.
 type InventoryItemsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "projects" :>
-           Capture "projectId" Int64 :>
-             "inventoryItems" :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "sortOrder" InventoryItemsListSortOrder :>
-                   QueryParam "inPlan" Bool :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" InventoryItemsListSortField :>
-                         QueryParams "orderId" Int64 :>
-                           QueryParams "siteId" Int64 :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] InventoryItemsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "inventoryItems" :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder" InventoryItemsListSortOrder :>
+                       QueryParam "inPlan" Bool :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField" InventoryItemsListSortField :>
+                             QueryParams "orderId" Int64 :>
+                               QueryParams "siteId" Int64 :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] InventoryItemsListResponse
 
 -- | Retrieves a list of inventory items, possibly filtered.
 --

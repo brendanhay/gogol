@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasks.delete@ method which the
 -- 'TasksDelete' request conforms to.
 type TasksDeleteResource =
-     "lists" :>
-       Capture "tasklist" Text :>
-         "tasks" :>
-           Capture "task" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified task from the task list.
 --

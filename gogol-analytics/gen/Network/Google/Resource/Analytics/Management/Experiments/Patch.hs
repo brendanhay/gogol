@@ -46,18 +46,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.experiments.patch@ method which the
 -- 'ManagementExperimentsPatch' request conforms to.
 type ManagementExperimentsPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "experiments" :>
-                     Capture "experimentId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Experiment :>
-                           Patch '[JSON] Experiment
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         Capture "experimentId" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Experiment :>
+                               Patch '[JSON] Experiment
 
 -- | Update an existing experiment. This method supports patch semantics.
 --

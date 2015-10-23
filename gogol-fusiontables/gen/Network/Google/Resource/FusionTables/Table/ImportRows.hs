@@ -35,7 +35,6 @@ module Network.Google.Resource.FusionTables.Table.ImportRows
     -- * Request Lenses
     , tirStartLine
     , tirEndLine
-    , tirMedia
     , tirTableId
     , tirDelimiter
     , tirEncoding
@@ -48,16 +47,33 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.importRows@ method which the
 -- 'TableImportRows' request conforms to.
 type TableImportRowsResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "import" :>
-           QueryParam "startLine" Int32 :>
-             QueryParam "endLine" Int32 :>
-               QueryParam "delimiter" Text :>
-                 QueryParam "encoding" Text :>
-                   QueryParam "isStrict" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Body :> Post '[JSON] Import
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "import" :>
+               QueryParam "startLine" Int32 :>
+                 QueryParam "endLine" Int32 :>
+                   QueryParam "delimiter" Text :>
+                     QueryParam "encoding" Text :>
+                       QueryParam "isStrict" Bool :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Import
+       :<|>
+       "upload" :>
+         "fusiontables" :>
+           "v2" :>
+             "tables" :>
+               Capture "tableId" Text :>
+                 "import" :>
+                   QueryParam "startLine" Int32 :>
+                     QueryParam "endLine" Int32 :>
+                       QueryParam "delimiter" Text :>
+                         QueryParam "encoding" Text :>
+                           QueryParam "isStrict" Bool :>
+                             QueryParam "alt" AltJSON :>
+                               QueryParam "uploadType" AltMedia :>
+                                 ReqBody '[OctetStream] RequestBody :>
+                                   Post '[JSON] Import
 
 -- | Imports more rows into a table.
 --
@@ -65,12 +81,11 @@ type TableImportRowsResource =
 data TableImportRows = TableImportRows
     { _tirStartLine :: !(Maybe Int32)
     , _tirEndLine   :: !(Maybe Int32)
-    , _tirMedia     :: !Body
     , _tirTableId   :: !Text
     , _tirDelimiter :: !(Maybe Text)
     , _tirEncoding  :: !(Maybe Text)
     , _tirIsStrict  :: !(Maybe Bool)
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportRows' with the minimum fields required to make a request.
 --
@@ -80,8 +95,6 @@ data TableImportRows = TableImportRows
 --
 -- * 'tirEndLine'
 --
--- * 'tirMedia'
---
 -- * 'tirTableId'
 --
 -- * 'tirDelimiter'
@@ -90,14 +103,12 @@ data TableImportRows = TableImportRows
 --
 -- * 'tirIsStrict'
 tableImportRows
-    :: Body -- ^ 'tirMedia'
-    -> Text -- ^ 'tirTableId'
+    :: Text -- ^ 'tirTableId'
     -> TableImportRows
-tableImportRows pTirMedia_ pTirTableId_ =
+tableImportRows pTirTableId_ =
     TableImportRows
     { _tirStartLine = Nothing
     , _tirEndLine = Nothing
-    , _tirMedia = pTirMedia_
     , _tirTableId = pTirTableId_
     , _tirDelimiter = Nothing
     , _tirEncoding = Nothing
@@ -117,9 +128,6 @@ tirStartLine
 tirEndLine :: Lens' TableImportRows (Maybe Int32)
 tirEndLine
   = lens _tirEndLine (\ s a -> s{_tirEndLine = a})
-
-tirMedia :: Lens' TableImportRows Body
-tirMedia = lens _tirMedia (\ s a -> s{_tirMedia = a})
 
 -- | The table into which new rows are being imported.
 tirTableId :: Lens' TableImportRows Text
@@ -153,9 +161,25 @@ instance GoogleRequest TableImportRows where
               _tirEncoding
               _tirIsStrict
               (Just AltJSON)
-              _tirMedia
               fusionTablesService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy TableImportRowsResource)
+                      mempty
+
+instance GoogleRequest (Upload TableImportRows) where
+        type Rs (Upload TableImportRows) = Import
+        requestClient (Upload TableImportRows{..} body)
+          = go _tirTableId _tirStartLine _tirEndLine
+              _tirDelimiter
+              _tirEncoding
+              _tirIsStrict
+              (Just AltJSON)
+              (Just AltMedia)
+              _tirPayload
+              body
+              fusionTablesService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy TableImportRowsResource)
                       mempty

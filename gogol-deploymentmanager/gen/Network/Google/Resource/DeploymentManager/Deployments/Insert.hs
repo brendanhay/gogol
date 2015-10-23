@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.deployments.insert@ method which the
 -- 'DeploymentsInsert' request conforms to.
 type DeploymentsInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           QueryParam "preview" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Deployment :> Post '[JSON] Operation
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 QueryParam "preview" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Deployment :> Post '[JSON] Operation
 
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.

@@ -43,11 +43,13 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.sitemaps.delete@ method which the
 -- 'SitemapsDelete' request conforms to.
 type SitemapsDeleteResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         "sitemaps" :>
-           Capture "feedpath" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "sitemaps" :>
+               Capture "feedpath" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a sitemap from this site.
 --

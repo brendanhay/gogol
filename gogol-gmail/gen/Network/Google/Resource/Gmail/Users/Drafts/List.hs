@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.drafts.list@ method which the
 -- 'UsersDraftsList' request conforms to.
 type UsersDraftsListResource =
-     Capture "userId" Text :>
-       "drafts" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] ListDraftsResponse
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ListDraftsResponse
 
 -- | Lists the drafts in the user\'s mailbox.
 --

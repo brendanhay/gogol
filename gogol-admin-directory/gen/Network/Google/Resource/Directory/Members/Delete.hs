@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.members.delete@ method which the
 -- 'MembersDelete' request conforms to.
 type MembersDeleteResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         "members" :>
-           Capture "memberKey" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               "members" :>
+                 Capture "memberKey" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove membership.
 --

@@ -44,22 +44,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.reports.files.get@ method which the
 -- 'ReportsFilesGet' request conforms to.
 type ReportsFilesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "reports" :>
-           Capture "reportId" Int64 :>
-             "files" :>
-               Capture "fileId" Int64 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] File
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               Capture "reportId" Int64 :>
+                 "files" :>
+                   Capture "fileId" Int64 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
-       "userprofiles" :>
-         Capture "profileId" Int64 :>
-           "reports" :>
-             Capture "reportId" Int64 :>
-               "files" :>
-                 Capture "fileId" Int64 :>
-                   QueryParam "alt" AltMedia :>
-                     Get '[OctetStream] Stream
+       "dfareporting" :>
+         "v2.2" :>
+           "userprofiles" :>
+             Capture "profileId" Int64 :>
+               "reports" :>
+                 Capture "reportId" Int64 :>
+                   "files" :>
+                     Capture "fileId" Int64 :>
+                       QueryParam "alt" AltMedia :>
+                         Get '[OctetStream] Stream
 
 -- | Retrieves a report file.
 --

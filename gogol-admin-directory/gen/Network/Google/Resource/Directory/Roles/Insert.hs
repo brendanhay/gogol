@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roles.insert@ method which the
 -- 'RolesInsert' request conforms to.
 type RolesInsertResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roles" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Role :> Post '[JSON] Role
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roles" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Role :> Post '[JSON] Role
 
 -- | Creates a role.
 --

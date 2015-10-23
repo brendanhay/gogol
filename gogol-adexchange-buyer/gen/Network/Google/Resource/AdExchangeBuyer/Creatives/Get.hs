@@ -44,10 +44,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.creatives.get@ method which the
 -- 'CreativesGet' request conforms to.
 type CreativesGetResource =
-     "creatives" :>
-       Capture "accountId" Int32 :>
-         Capture "buyerCreativeId" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Creative
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "creatives" :>
+           Capture "accountId" Int32 :>
+             Capture "buyerCreativeId" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
 -- | Gets the status for a single creative. A creative will be available
 -- 30-40 minutes after submission.

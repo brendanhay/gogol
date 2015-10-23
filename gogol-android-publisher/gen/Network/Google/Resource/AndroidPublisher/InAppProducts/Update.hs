@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.inappproducts.update@ method which the
 -- 'InAppProductsUpdate' request conforms to.
 type InAppProductsUpdateResource =
-     Capture "packageName" Text :>
-       "inappproducts" :>
-         Capture "sku" Text :>
-           QueryParam "autoConvertMissingPrices" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] InAppProduct :>
-                 Put '[JSON] InAppProduct
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "inappproducts" :>
+               Capture "sku" Text :>
+                 QueryParam "autoConvertMissingPrices" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] InAppProduct :>
+                       Put '[JSON] InAppProduct
 
 -- | Updates the details of an in-app product.
 --

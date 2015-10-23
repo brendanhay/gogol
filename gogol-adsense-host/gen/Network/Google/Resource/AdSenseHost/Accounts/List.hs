@@ -43,9 +43,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.accounts.list@ method which the
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
-     "accounts" :>
-       QueryParams "filterAdClientId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Accounts
+     "adsensehost" :>
+       "v4.1" :>
+         "accounts" :>
+           QueryParams "filterAdClientId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | List hosted accounts associated with this AdSense account by ad client
 -- id.

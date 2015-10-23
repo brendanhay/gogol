@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetHttpProxies.insert@ method which the
 -- 'TargetHTTPProxiesInsert' request conforms to.
 type TargetHTTPProxiesInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "targetHttpProxies" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] TargetHTTPProxy :>
-               Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "targetHttpProxies" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] TargetHTTPProxy :>
+                     Post '[JSON] Operation
 
 -- | Creates a TargetHttpProxy resource in the specified project using the
 -- data included in the request.

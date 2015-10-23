@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.insert@ method which the
 -- 'LeaderboardConfigurationsInsert' request conforms to.
 type LeaderboardConfigurationsInsertResource =
-     "applications" :>
-       Capture "applicationId" Text :>
-         "leaderboards" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] LeaderboardConfiguration :>
-               Post '[JSON] LeaderboardConfiguration
+     "games" :>
+       "v1configuration" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "leaderboards" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] LeaderboardConfiguration :>
+                   Post '[JSON] LeaderboardConfiguration
 
 -- | Insert a new leaderboard configuration in this application.
 --

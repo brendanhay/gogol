@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.task.delete@ method which the
 -- 'TaskDelete' request conforms to.
 type TaskDeleteResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "tasks" :>
-           Capture "taskId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "tasks" :>
+               Capture "taskId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a specific task by its ID, unless that task has already started
 -- running.

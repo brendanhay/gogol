@@ -46,18 +46,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.unsampledReports.list@ method which the
 -- 'ManagementUnSampledReportsList' request conforms to.
 type ManagementUnSampledReportsListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "unsampledReports" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] UnSampledReports
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "unsampledReports" :>
+                         QueryParam "start-index" Int32 :>
+                           QueryParam "max-results" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] UnSampledReports
 
 -- | Lists unsampled reports to which the user has access.
 --

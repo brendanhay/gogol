@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.enterprises.sendTestPushNotification@ method which the
 -- 'EnterprisesSendTestPushNotification' request conforms to.
 type EnterprisesSendTestPushNotificationResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "sendTestPushNotification" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON]
-               EnterprisesSendTestPushNotificationResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "sendTestPushNotification" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON]
+                   EnterprisesSendTestPushNotificationResponse
 
 -- | Sends a test push notification to validate the MDM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.

@@ -143,7 +143,6 @@ youTubeAnalyticsService :: Service
 youTubeAnalyticsService
   = defaultService (ServiceId "youtubeAnalytics:v1")
       "www.googleapis.com"
-      "youtube/analytics/v1/"
 
 -- | Manage your YouTube account
 youtubeScope :: OAuthScope

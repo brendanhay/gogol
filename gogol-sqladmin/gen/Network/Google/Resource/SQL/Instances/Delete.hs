@@ -43,11 +43,13 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.delete@ method which the
 -- 'InstancesDelete' request conforms to.
 type InstancesDeleteResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a Cloud SQL instance.
 --

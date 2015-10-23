@@ -42,10 +42,13 @@ import           Network.Google.QPXExpress.Types
 -- | A resource alias for @qpxExpress.trips.search@ method which the
 -- 'TripsSearch' request conforms to.
 type TripsSearchResource =
-     "search" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] TripsSearchRequest :>
-           Post '[JSON] TripsSearchResponse
+     "qpxExpress" :>
+       "v1" :>
+         "trips" :>
+           "search" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] TripsSearchRequest :>
+                 Post '[JSON] TripsSearchResponse
 
 -- | Returns a list of flights.
 --

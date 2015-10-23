@@ -51,36 +51,39 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.update@ method which the
 -- 'ObjectsUpdate' request conforms to.
 type ObjectsUpdateResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
-               QueryParam "ifGenerationNotMatch" Int64 :>
-                 QueryParam "ifGenerationMatch" Int64 :>
-                   QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
-                     :>
-                     QueryParam "ifMetagenerationNotMatch" Int64 :>
-                       QueryParam "projection" ObjectsUpdateProjection :>
-                         QueryParam "generation" Int64 :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Object :> Put '[JSON] Object
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               Capture "object" Text :>
+                 QueryParam "ifMetagenerationMatch" Int64 :>
+                   QueryParam "ifGenerationNotMatch" Int64 :>
+                     QueryParam "ifGenerationMatch" Int64 :>
+                       QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
+                         :>
+                         QueryParam "ifMetagenerationNotMatch" Int64 :>
+                           QueryParam "projection" ObjectsUpdateProjection :>
+                             QueryParam "generation" Int64 :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Object :> Put '[JSON] Object
        :<|>
-       "b" :>
-         Capture "bucket" Text :>
-           "o" :>
-             Capture "object" Text :>
-               QueryParam "ifMetagenerationMatch" Int64 :>
-                 QueryParam "ifGenerationNotMatch" Int64 :>
-                   QueryParam "ifGenerationMatch" Int64 :>
-                     QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
-                       :>
-                       QueryParam "ifMetagenerationNotMatch" Int64 :>
-                         QueryParam "projection" ObjectsUpdateProjection :>
-                           QueryParam "generation" Int64 :>
-                             QueryParam "alt" AltMedia :>
-                               ReqBody '[JSON] Object :>
-                                 Put '[OctetStream] Stream
+       "storage" :>
+         "v1" :>
+           "b" :>
+             Capture "bucket" Text :>
+               "o" :>
+                 Capture "object" Text :>
+                   QueryParam "ifMetagenerationMatch" Int64 :>
+                     QueryParam "ifGenerationNotMatch" Int64 :>
+                       QueryParam "ifGenerationMatch" Int64 :>
+                         QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
+                           :>
+                           QueryParam "ifMetagenerationNotMatch" Int64 :>
+                             QueryParam "projection" ObjectsUpdateProjection :>
+                               QueryParam "generation" Int64 :>
+                                 QueryParam "alt" AltMedia :>
+                                   Get '[OctetStream] Stream
 
 -- | Updates an object\'s metadata.
 --
@@ -227,7 +230,6 @@ instance GoogleRequest (Download ObjectsUpdate) where
               _ouProjection
               _ouGeneration
               (Just AltMedia)
-              _ouPayload
               storageService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsUpdateResource)

@@ -37,7 +37,6 @@ groupsMigrationService :: Service
 groupsMigrationService
   = defaultService (ServiceId "groupsmigration:v1")
       "www.googleapis.com"
-      "groups/v1/groups/"
 
 -- | Manage messages in groups on your domain
 appsGroupsMigrationScope :: OAuthScope

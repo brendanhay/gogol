@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalOperations.delete@ method which the
 -- 'GlobalOperationsDelete' request conforms to.
 type GlobalOperationsDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "operations" :>
-           Capture "operation" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 Capture "operation" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified Operations resource.
 --

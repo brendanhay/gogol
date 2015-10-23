@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.entitlements.update@ method which the
 -- 'EntitlementsUpdate' request conforms to.
 type EntitlementsUpdateResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "entitlements" :>
-               Capture "entitlementId" Text :>
-                 QueryParam "install" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Entitlement :>
-                       Put '[JSON] Entitlement
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "entitlements" :>
+                   Capture "entitlementId" Text :>
+                     QueryParam "install" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Entitlement :>
+                           Put '[JSON] Entitlement
 
 -- | Adds or updates an entitlement to an app for a user.
 --

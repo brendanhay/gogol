@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placementGroups.get@ method which the
 -- 'PlacementGroupsGet' request conforms to.
 type PlacementGroupsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placementGroups" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] PlacementGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] PlacementGroup
 
 -- | Gets one placement group by ID.
 --

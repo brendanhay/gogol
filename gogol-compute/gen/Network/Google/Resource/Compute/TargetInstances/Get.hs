@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetInstances.get@ method which the
 -- 'TargetInstancesGet' request conforms to.
 type TargetInstancesGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "targetInstances" :>
-             Capture "targetInstance" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] TargetInstance
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "targetInstances" :>
+                   Capture "targetInstance" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] TargetInstance
 
 -- | Returns the specified TargetInstance resource.
 --

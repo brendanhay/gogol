@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.column.list@ method which the
 -- 'ColumnList'' request conforms to.
 type ColumnListResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "columns" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] ColumnList
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "columns" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] ColumnList
 
 -- | Retrieves a list of columns.
 --

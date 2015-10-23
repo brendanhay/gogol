@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.maps.listPublished@ method which the
 -- 'MapsListPublished' request conforms to.
 type MapsListPublishedResource =
-     "maps" :>
-       "published" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "projectId" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] PublishedMapsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "maps" :>
+           "published" :>
+             QueryParam "pageToken" Text :>
+               QueryParam "projectId" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] PublishedMapsListResponse
 
 -- | Return all published maps readable by the current user.
 --

@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.metadata.metrics.list@ method which the
 -- 'AccountsMetadataMetricsList' request conforms to.
 type AccountsMetadataMetricsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "metadata" :>
-           "metrics" :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Metadata
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "metadata" :>
+               "metrics" :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the metrics available to this AdExchange account.
 --

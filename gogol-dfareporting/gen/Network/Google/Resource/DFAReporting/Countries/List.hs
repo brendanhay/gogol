@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.countries.list@ method which the
 -- 'CountriesList' request conforms to.
 type CountriesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "countries" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] CountriesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "countries" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] CountriesListResponse
 
 -- | Retrieves a list of countries.
 --

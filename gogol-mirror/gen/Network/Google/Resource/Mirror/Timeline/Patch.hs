@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.timeline.patch@ method which the
 -- 'TimelinePatch' request conforms to.
 type TimelinePatchResource =
-     "timeline" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] TimelineItem :>
-             Patch '[JSON] TimelineItem
+     "mirror" :>
+       "v1" :>
+         "timeline" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] TimelineItem :>
+                 Patch '[JSON] TimelineItem
 
 -- | Updates a timeline item in place. This method supports patch semantics.
 --

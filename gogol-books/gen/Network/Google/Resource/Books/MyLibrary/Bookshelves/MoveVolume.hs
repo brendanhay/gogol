@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.bookshelves.moveVolume@ method which the
 -- 'MyLibraryBookshelvesMoveVolume' request conforms to.
 type MyLibraryBookshelvesMoveVolumeResource =
-     "mylibrary" :>
-       "bookshelves" :>
-         Capture "shelf" Text :>
-           "moveVolume" :>
-             QueryParam "volumeId" Text :>
-               QueryParam "volumePosition" Int32 :>
-                 QueryParam "source" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "bookshelves" :>
+             Capture "shelf" Text :>
+               "moveVolume" :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "volumePosition" Int32 :>
+                     QueryParam "source" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Moves a volume within a bookshelf.
 --

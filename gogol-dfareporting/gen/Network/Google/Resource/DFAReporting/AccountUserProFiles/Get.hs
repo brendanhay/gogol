@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountUserProfiles.get@ method which the
 -- 'AccountUserProFilesGet' request conforms to.
 type AccountUserProFilesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountUserProfiles" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AccountUserProFile
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AccountUserProFile
 
 -- | Gets one account user profile by ID.
 --

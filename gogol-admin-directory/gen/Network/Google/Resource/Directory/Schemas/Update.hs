@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.schemas.update@ method which the
 -- 'SchemasUpdate' request conforms to.
 type SchemasUpdateResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "schemas" :>
-           Capture "schemaKey" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Schema :> Put '[JSON] Schema
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "schemas" :>
+                 Capture "schemaKey" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Schema :> Put '[JSON] Schema
 
 -- | Update schema
 --

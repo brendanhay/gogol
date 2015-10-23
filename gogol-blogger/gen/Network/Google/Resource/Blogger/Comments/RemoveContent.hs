@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.comments.removeContent@ method which the
 -- 'CommentsRemoveContent' request conforms to.
 type CommentsRemoveContentResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "removecontent" :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Comment
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     "removecontent" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Removes the content of a comment.
 --

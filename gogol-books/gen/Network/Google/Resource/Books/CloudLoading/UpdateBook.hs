@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.cloudloading.updateBook@ method which the
 -- 'CloudLoadingUpdateBook' request conforms to.
 type CloudLoadingUpdateBookResource =
-     "cloudloading" :>
-       "updateBook" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] BooksCloudLoadingResource :>
-             Post '[JSON] BooksCloudLoadingResource
+     "books" :>
+       "v1" :>
+         "cloudloading" :>
+           "updateBook" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] BooksCloudLoadingResource :>
+                 Post '[JSON] BooksCloudLoadingResource
 
 -- |
 --

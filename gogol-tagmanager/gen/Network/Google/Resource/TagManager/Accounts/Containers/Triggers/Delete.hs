@@ -44,13 +44,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.triggers.delete@ method which the
 -- 'AccountsContainersTriggersDelete' request conforms to.
 type AccountsContainersTriggersDeleteResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "triggers" :>
-               Capture "triggerId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "triggers" :>
+                   Capture "triggerId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Trigger.
 --

@@ -46,14 +46,16 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objectAccessControls.delete@ method which the
 -- 'ObjectAccessControlsDelete' request conforms to.
 type ObjectAccessControlsDeleteResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           Capture "object" Text :>
-             "acl" :>
-               Capture "entity" Text :>
-                 QueryParam "generation" Int64 :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               Capture "object" Text :>
+                 "acl" :>
+                   Capture "entity" Text :>
+                     QueryParam "generation" Int64 :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified object.

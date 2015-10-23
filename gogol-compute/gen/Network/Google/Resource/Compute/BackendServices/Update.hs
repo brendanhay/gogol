@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.backendServices.update@ method which the
 -- 'BackendServicesUpdate' request conforms to.
 type BackendServicesUpdateResource =
-     Capture "project" Text :>
-       "global" :>
-         "backendServices" :>
-           Capture "backendService" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] BackendService :>
-                 Put '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "backendServices" :>
+                 Capture "backendService" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] BackendService :>
+                       Put '[JSON] Operation
 
 -- | Update the entire content of the BackendService resource.
 --

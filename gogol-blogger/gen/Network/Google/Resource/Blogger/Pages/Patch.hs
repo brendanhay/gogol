@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.pages.patch@ method which the
 -- 'PagesPatch' request conforms to.
 type PagesPatchResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "pages" :>
-           Capture "pageId" Text :>
-             QueryParam "revert" Bool :>
-               QueryParam "publish" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Page :> Patch '[JSON] Page
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 QueryParam "revert" Bool :>
+                   QueryParam "publish" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Page :> Patch '[JSON] Page
 
 -- | Update a page. This method supports patch semantics.
 --

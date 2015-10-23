@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroups.get@ method which the
 -- 'InstanceGroupsGet' request conforms to.
 type InstanceGroupsGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroups" :>
-             Capture "instanceGroup" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] InstanceGroup
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroups" :>
+                   Capture "instanceGroup" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] InstanceGroup
 
 -- | Returns the specified instance group resource.
 --

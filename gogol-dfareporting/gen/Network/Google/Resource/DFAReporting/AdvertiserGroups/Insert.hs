@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.advertiserGroups.insert@ method which the
 -- 'AdvertiserGroupsInsert' request conforms to.
 type AdvertiserGroupsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "advertiserGroups" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] AdvertiserGroup :>
-               Post '[JSON] AdvertiserGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AdvertiserGroup :>
+                   Post '[JSON] AdvertiserGroup
 
 -- | Inserts a new advertiser group.
 --

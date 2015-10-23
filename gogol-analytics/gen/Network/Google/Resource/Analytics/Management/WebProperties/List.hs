@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webproperties.list@ method which the
 -- 'ManagementWebPropertiesList' request conforms to.
 type ManagementWebPropertiesListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] WebProperties
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 QueryParam "start-index" Int32 :>
+                   QueryParam "max-results" Int32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] WebProperties
 
 -- | Lists web properties to which the user has access.
 --

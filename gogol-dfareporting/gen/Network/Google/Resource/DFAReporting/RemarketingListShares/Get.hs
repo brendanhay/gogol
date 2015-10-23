@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.remarketingListShares.get@ method which the
 -- 'RemarketingListSharesGet' request conforms to.
 type RemarketingListSharesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "remarketingListShares" :>
-           Capture "remarketingListId" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] RemarketingListShare
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingListShares" :>
+               Capture "remarketingListId" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] RemarketingListShare
 
 -- | Gets one remarketing list share by remarketing list ID.
 --

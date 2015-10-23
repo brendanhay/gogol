@@ -45,12 +45,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounttax.list@ method which the
 -- 'AccounttaxList' request conforms to.
 type AccounttaxListResource =
-     Capture "merchantId" Word64 :>
-       "accounttax" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AccounttaxListResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accounttax" :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AccounttaxListResponse
 
 -- | Lists the tax settings of the sub-accounts in your Merchant Center
 -- account.

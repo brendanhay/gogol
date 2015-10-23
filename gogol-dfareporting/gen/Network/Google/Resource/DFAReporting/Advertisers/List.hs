@@ -54,24 +54,29 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.advertisers.list@ method which the
 -- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "advertisers" :>
-           QueryParam "status" AdvertisersListStatus :>
-             QueryParam "onlyParent" Bool :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
-                     :>
-                     QueryParam "sortOrder" AdvertisersListSortOrder :>
-                       QueryParams "advertiserGroupIds" Int64 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" AdvertisersListSortField :>
-                             QueryParam "subaccountId" Int64 :>
-                               QueryParams "floodlightConfigurationIds" Int64 :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] AdvertisersListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertisers" :>
+               QueryParam "status" AdvertisersListStatus :>
+                 QueryParam "onlyParent" Bool :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
+                         :>
+                         QueryParam "sortOrder" AdvertisersListSortOrder :>
+                           QueryParams "advertiserGroupIds" Int64 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" AdvertisersListSortField
+                                 :>
+                                 QueryParam "subaccountId" Int64 :>
+                                   QueryParams "floodlightConfigurationIds"
+                                     Int64
+                                     :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] AdvertisersListResponse
 
 -- | Retrieves a list of advertisers, possibly filtered.
 --

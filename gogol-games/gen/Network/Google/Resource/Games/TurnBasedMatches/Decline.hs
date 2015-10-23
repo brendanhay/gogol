@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.decline@ method which the
 -- 'TurnBasedMatchesDecline' request conforms to.
 type TurnBasedMatchesDeclineResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         "decline" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               Put '[JSON] TurnBasedMatch
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "decline" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Put '[JSON] TurnBasedMatch
 
 -- | Decline an invitation to play a turn-based match.
 --

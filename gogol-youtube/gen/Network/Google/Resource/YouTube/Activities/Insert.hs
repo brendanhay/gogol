@@ -49,10 +49,12 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.activities.insert@ method which the
 -- 'ActivitiesInsert' request conforms to.
 type ActivitiesInsertResource =
-     "activities" :>
-       QueryParam "part" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Activity :> Post '[JSON] Activity
+     "youtube" :>
+       "v3" :>
+         "activities" :>
+           QueryParam "part" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Activity :> Post '[JSON] Activity
 
 -- | Posts a bulletin for a specific channel. (The user submitting the
 -- request must be authorized to act on the channel\'s behalf.) Note: Even

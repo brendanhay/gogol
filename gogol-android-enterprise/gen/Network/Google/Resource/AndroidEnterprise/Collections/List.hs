@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.collections.list@ method which the
 -- 'CollectionsList' request conforms to.
 type CollectionsListResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "collections" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] CollectionsListResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "collections" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] CollectionsListResponse
 
 -- | Retrieves the IDs of all the collections for an enterprise.
 --

@@ -42,11 +42,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.productstatuses.custombatch@ method which the
 -- 'ProductstatusesCustombatch' request conforms to.
 type ProductstatusesCustombatchResource =
-     "productstatuses" :>
-       "batch" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] ProductstatusesCustomBatchRequest :>
-             Post '[JSON] ProductstatusesCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "productstatuses" :>
+           "batch" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] ProductstatusesCustomBatchRequest :>
+                 Post '[JSON] ProductstatusesCustomBatchResponse
 
 -- | Gets the statuses of multiple products in a single request.
 --

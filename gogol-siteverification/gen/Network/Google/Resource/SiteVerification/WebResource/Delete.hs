@@ -42,9 +42,11 @@ import           Network.Google.SiteVerification.Types
 -- | A resource alias for @siteVerification.webResource.delete@ method which the
 -- 'WebResourceDelete' request conforms to.
 type WebResourceDeleteResource =
-     "webResource" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Relinquish ownership of a website or domain.
 --

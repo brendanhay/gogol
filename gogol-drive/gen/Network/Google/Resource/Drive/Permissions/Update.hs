@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.permissions.update@ method which the
 -- 'PermissionsUpdate' request conforms to.
 type PermissionsUpdateResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "permissions" :>
-           Capture "permissionId" Text :>
-             QueryParam "transferOwnership" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Permission :> Put '[JSON] Permission
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "transferOwnership" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Permission :> Put '[JSON] Permission
 
 -- | Updates a permission.
 --

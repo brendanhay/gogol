@@ -38,7 +38,6 @@ module Network.Google.Resource.Drive.Files.Insert
     , fiTimedTextLanguage
     , fiPayload
     , fiUseContentAsIndexableText
-    , fiMedia
     , fiTimedTextTrackName
     , fiOCRLanguage
     , fiConvert
@@ -51,18 +50,36 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.insert@ method which the
 -- 'FilesInsert' request conforms to.
 type FilesInsertResource =
-     "files" :>
-       QueryParam "pinned" Bool :>
-         QueryParam "visibility" FilesInsertVisibility :>
-           QueryParam "timedTextLanguage" Text :>
-             QueryParam "useContentAsIndexableText" Bool :>
-               QueryParam "timedTextTrackName" Text :>
-                 QueryParam "ocrLanguage" Text :>
-                   QueryParam "convert" Bool :>
-                     QueryParam "ocr" Bool :>
-                       QueryParam "alt" AltJSON :>
-                         MultipartRelated '[JSON] File Body :>
-                           Post '[JSON] File
+     "drive" :>
+       "v2" :>
+         "files" :>
+           QueryParam "pinned" Bool :>
+             QueryParam "visibility" FilesInsertVisibility :>
+               QueryParam "timedTextLanguage" Text :>
+                 QueryParam "useContentAsIndexableText" Bool :>
+                   QueryParam "timedTextTrackName" Text :>
+                     QueryParam "ocrLanguage" Text :>
+                       QueryParam "convert" Bool :>
+                         QueryParam "ocr" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] File :> Post '[JSON] File
+       :<|>
+       "upload" :>
+         "drive" :>
+           "v2" :>
+             "files" :>
+               QueryParam "pinned" Bool :>
+                 QueryParam "visibility" FilesInsertVisibility :>
+                   QueryParam "timedTextLanguage" Text :>
+                     QueryParam "useContentAsIndexableText" Bool :>
+                       QueryParam "timedTextTrackName" Text :>
+                         QueryParam "ocrLanguage" Text :>
+                           QueryParam "convert" Bool :>
+                             QueryParam "ocr" Bool :>
+                               QueryParam "alt" AltJSON :>
+                                 QueryParam "uploadType" AltMedia :>
+                                   MultipartRelated '[JSON] File RequestBody :>
+                                     Post '[JSON] File
 
 -- | Insert a new file.
 --
@@ -73,12 +90,11 @@ data FilesInsert = FilesInsert
     , _fiTimedTextLanguage         :: !(Maybe Text)
     , _fiPayload                   :: !File
     , _fiUseContentAsIndexableText :: !Bool
-    , _fiMedia                     :: !Body
     , _fiTimedTextTrackName        :: !(Maybe Text)
     , _fiOCRLanguage               :: !(Maybe Text)
     , _fiConvert                   :: !Bool
     , _fiOCR                       :: !Bool
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesInsert' with the minimum fields required to make a request.
 --
@@ -94,8 +110,6 @@ data FilesInsert = FilesInsert
 --
 -- * 'fiUseContentAsIndexableText'
 --
--- * 'fiMedia'
---
 -- * 'fiTimedTextTrackName'
 --
 -- * 'fiOCRLanguage'
@@ -105,16 +119,14 @@ data FilesInsert = FilesInsert
 -- * 'fiOCR'
 filesInsert
     :: File -- ^ 'fiPayload'
-    -> Body -- ^ 'fiMedia'
     -> FilesInsert
-filesInsert pFiPayload_ pFiMedia_ =
+filesInsert pFiPayload_ =
     FilesInsert
     { _fiPinned = False
     , _fiVisibility = Default
     , _fiTimedTextLanguage = Nothing
     , _fiPayload = pFiPayload_
     , _fiUseContentAsIndexableText = False
-    , _fiMedia = pFiMedia_
     , _fiTimedTextTrackName = Nothing
     , _fiOCRLanguage = Nothing
     , _fiConvert = False
@@ -148,9 +160,6 @@ fiUseContentAsIndexableText :: Lens' FilesInsert Bool
 fiUseContentAsIndexableText
   = lens _fiUseContentAsIndexableText
       (\ s a -> s{_fiUseContentAsIndexableText = a})
-
-fiMedia :: Lens' FilesInsert Body
-fiMedia = lens _fiMedia (\ s a -> s{_fiMedia = a})
 
 -- | The timed text track name.
 fiTimedTextTrackName :: Lens' FilesInsert (Maybe Text)
@@ -186,8 +195,26 @@ instance GoogleRequest FilesInsert where
               (Just _fiOCR)
               (Just AltJSON)
               _fiPayload
-              _fiMedia
               driveService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy FilesInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload FilesInsert) where
+        type Rs (Upload FilesInsert) = File
+        requestClient (Upload FilesInsert{..} body)
+          = go (Just _fiPinned) (Just _fiVisibility)
+              _fiTimedTextLanguage
+              (Just _fiUseContentAsIndexableText)
+              _fiTimedTextTrackName
+              _fiOCRLanguage
+              (Just _fiConvert)
+              (Just _fiOCR)
+              (Just AltJSON)
+              (Just AltMedia)
+              _fiPayload
+              body
+              driveService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy FilesInsertResource)
                       mempty

@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.patch@ method which the
 -- 'LeaderboardConfigurationsPatch' request conforms to.
 type LeaderboardConfigurationsPatchResource =
-     "leaderboards" :>
-       Capture "leaderboardId" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] LeaderboardConfiguration :>
-             Patch '[JSON] LeaderboardConfiguration
+     "games" :>
+       "v1configuration" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] LeaderboardConfiguration :>
+                 Patch '[JSON] LeaderboardConfiguration
 
 -- | Update the metadata of the leaderboard configuration with the given ID.
 -- This method supports patch semantics.

@@ -50,14 +50,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.dataSources.datasets.get@ method which the
 -- 'UsersDataSourcesDataSetsGet' request conforms to.
 type UsersDataSourcesDataSetsGetResource =
-     Capture "userId" Text :>
-       "dataSources" :>
-         Capture "dataSourceId" Text :>
-           "datasets" :>
-             Capture "datasetId" Text :>
-               QueryParam "limit" Int32 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] DataSet
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 "datasets" :>
+                   Capture "datasetId" Text :>
+                     QueryParam "limit" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] DataSet
 
 -- | Returns a dataset containing all data points whose start and end times
 -- overlap with the specified range of the dataset minimum start time and

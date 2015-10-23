@@ -43,10 +43,12 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.comments.update@ method which the
 -- 'CommentsUpdate' request conforms to.
 type CommentsUpdateResource =
-     "comments" :>
-       QueryParam "part" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Comment :> Put '[JSON] Comment
+     "youtube" :>
+       "v3" :>
+         "comments" :>
+           QueryParam "part" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Comment :> Put '[JSON] Comment
 
 -- | Modifies a comment.
 --

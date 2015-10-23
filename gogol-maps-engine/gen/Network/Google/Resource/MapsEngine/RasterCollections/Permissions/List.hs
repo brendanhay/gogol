@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasterCollections.permissions.list@ method which the
 -- 'RasterCollectionsPermissionsList' request conforms to.
 type RasterCollectionsPermissionsListResource =
-     "rasterCollections" :>
-       Capture "id" Text :>
-         "permissions" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] PermissionsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           Capture "id" Text :>
+             "permissions" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PermissionsListResponse
 
 -- | Return all of the permissions for the specified asset.
 --

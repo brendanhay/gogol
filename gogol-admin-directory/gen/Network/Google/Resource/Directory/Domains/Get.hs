@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.domains.get@ method which the
 -- 'DomainsGet' request conforms to.
 type DomainsGetResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "domains" :>
-           Capture "domainName" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Domains
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "domains" :>
+                 Capture "domainName" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Domains
 
 -- | Retrives a domain of the customer.
 --

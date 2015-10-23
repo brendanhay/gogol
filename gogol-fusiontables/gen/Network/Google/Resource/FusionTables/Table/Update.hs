@@ -45,11 +45,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.update@ method which the
 -- 'TableUpdate' request conforms to.
 type TableUpdateResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         QueryParam "replaceViewDefinition" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Table :> Put '[JSON] Table
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             QueryParam "replaceViewDefinition" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Table :> Put '[JSON] Table
 
 -- | Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated.

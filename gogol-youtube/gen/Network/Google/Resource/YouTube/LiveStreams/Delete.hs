@@ -44,11 +44,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveStreams.delete@ method which the
 -- 'LiveStreamsDelete' request conforms to.
 type LiveStreamsDeleteResource =
-     "liveStreams" :>
-       QueryParam "id" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "liveStreams" :>
+           QueryParam "id" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a video stream.
 --

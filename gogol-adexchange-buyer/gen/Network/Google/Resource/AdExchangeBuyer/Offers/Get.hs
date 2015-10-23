@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.offers.get@ method which the
 -- 'OffersGet' request conforms to.
 type OffersGetResource =
-     "offers" :>
-       Capture "offerId" Int64 :>
-         QueryParam "alt" AltJSON :> Get '[JSON] OfferDTO
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "offers" :>
+           Capture "offerId" Int64 :>
+             QueryParam "alt" AltJSON :> Get '[JSON] OfferDTO
 
 -- | Gets the requested offer.
 --

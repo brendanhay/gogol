@@ -46,12 +46,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.achievements.setStepsAtLeast@ method which the
 -- 'AchievementsSetStepsAtLeast' request conforms to.
 type AchievementsSetStepsAtLeastResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         "setStepsAtLeast" :>
-           QueryParam "steps" Int32 :>
-             QueryParam "alt" AltJSON :>
-               Post '[JSON] AchievementSetStepsAtLeastResponse
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "setStepsAtLeast" :>
+               QueryParam "steps" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] AchievementSetStepsAtLeastResponse
 
 -- | Sets the steps for the currently authenticated player towards unlocking
 -- an achievement. If the steps parameter is less than the current number

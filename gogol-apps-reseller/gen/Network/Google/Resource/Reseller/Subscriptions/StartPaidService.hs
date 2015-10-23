@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.startPaidService@ method which the
 -- 'SubscriptionsStartPaidService' request conforms to.
 type SubscriptionsStartPaidServiceResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "startPaidService" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Subscription
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "startPaidService" :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Starts paid service of a trial subscription
 --

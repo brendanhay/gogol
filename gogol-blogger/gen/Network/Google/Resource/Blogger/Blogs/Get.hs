@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.blogs.get@ method which the
 -- 'BlogsGet' request conforms to.
 type BlogsGetResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         QueryParam "maxPosts" Word32 :>
-           QueryParam "view" BlogsGetView :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Blog
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             QueryParam "maxPosts" Word32 :>
+               QueryParam "view" BlogsGetView :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Blog
 
 -- | Gets one blog by ID.
 --

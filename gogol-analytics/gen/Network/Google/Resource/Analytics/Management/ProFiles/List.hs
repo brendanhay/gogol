@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profiles.list@ method which the
 -- 'ManagementProFilesList' request conforms to.
 type ManagementProFilesListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] ProFiles
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] ProFiles
 
 -- | Lists views (profiles) to which the user has access.
 --

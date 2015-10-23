@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.regions.list@ method which the
 -- 'RegionsList' request conforms to.
 type RegionsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "regions" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] RegionsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "regions" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] RegionsListResponse
 
 -- | Retrieves a list of regions.
 --

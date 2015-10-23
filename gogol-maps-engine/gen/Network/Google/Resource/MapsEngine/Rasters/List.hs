@@ -54,24 +54,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasters.list@ method which the
 -- 'RastersList' request conforms to.
 type RastersListResource =
-     "rasters" :>
-       QueryParam "projectId" Text :>
-         QueryParam "createdAfter" DateTime' :>
-           QueryParam "creatorEmail" Text :>
-             QueryParam "role" RastersListRole :>
-               QueryParam "bbox" Text :>
-                 QueryParam "processingStatus"
-                   RastersListProcessingStatus
-                   :>
-                   QueryParam "modifiedAfter" DateTime' :>
-                     QueryParam "modifiedBefore" DateTime' :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] RastersListResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasters" :>
+           QueryParam "projectId" Text :>
+             QueryParam "createdAfter" DateTime' :>
+               QueryParam "creatorEmail" Text :>
+                 QueryParam "role" RastersListRole :>
+                   QueryParam "bbox" Text :>
+                     QueryParam "processingStatus"
+                       RastersListProcessingStatus
+                       :>
+                       QueryParam "modifiedAfter" DateTime' :>
+                         QueryParam "modifiedBefore" DateTime' :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "search" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "tags" Text :>
+                                   QueryParam "createdBefore" DateTime' :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] RastersListResponse
 
 -- | Return all rasters readable by the current user.
 --

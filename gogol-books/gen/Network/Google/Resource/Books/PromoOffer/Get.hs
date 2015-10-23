@@ -47,15 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.promooffer.get@ method which the
 -- 'PromoOfferGet' request conforms to.
 type PromoOfferGetResource =
-     "promooffer" :>
-       "get" :>
-         QueryParam "manufacturer" Text :>
-           QueryParam "serial" Text :>
-             QueryParam "device" Text :>
-               QueryParam "model" Text :>
-                 QueryParam "product" Text :>
-                   QueryParam "androidId" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Offers
+     "books" :>
+       "v1" :>
+         "promooffer" :>
+           "get" :>
+             QueryParam "manufacturer" Text :>
+               QueryParam "serial" Text :>
+                 QueryParam "device" Text :>
+                   QueryParam "model" Text :>
+                     QueryParam "product" Text :>
+                       QueryParam "androidId" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Offers
 
 -- | Returns a list of promo offers available to the user
 --

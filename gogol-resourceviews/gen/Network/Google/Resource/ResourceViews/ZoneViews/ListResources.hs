@@ -49,21 +49,24 @@ import           Network.Google.ResourceViews.Types
 -- | A resource alias for @resourceviews.zoneViews.listResources@ method which the
 -- 'ZoneViewsListResources' request conforms to.
 type ZoneViewsListResourcesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "resourceViews" :>
-             Capture "resourceView" Text :>
-               "resources" :>
-                 QueryParam "listState"
-                   ZoneViewsListResourcesListState
-                   :>
-                   QueryParam "format" ZoneViewsListResourcesFormat :>
-                     QueryParam "serviceName" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ZoneViewsListResourcesResponse
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "resources" :>
+                       QueryParam "listState"
+                         ZoneViewsListResourcesListState
+                         :>
+                         QueryParam "format" ZoneViewsListResourcesFormat :>
+                           QueryParam "serviceName" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ZoneViewsListResourcesResponse
 
 -- | List the resources of the resource view.
 --

@@ -133,7 +133,6 @@ appsResellerService :: Service
 appsResellerService
   = defaultService (ServiceId "reseller:v1")
       "www.googleapis.com"
-      "apps/reseller/v1/"
 
 -- | Manage users on your domain
 appsOrderReadonlyScope :: OAuthScope

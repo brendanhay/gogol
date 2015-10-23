@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.assets.get@ method which the
 -- 'AssetsGet' request conforms to.
 type AssetsGetResource =
-     "assets" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Asset
+     "mapsengine" :>
+       "v1" :>
+         "assets" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Asset
 
 -- | Return metadata for a particular asset.
 --

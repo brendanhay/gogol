@@ -56,20 +56,23 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudmonitoring.timeseries.list@ method which the
 -- 'TimeseriesList' request conforms to.
 type TimeseriesListResource =
-     Capture "project" Text :>
-       "timeseries" :>
-         Capture "metric" Text :>
-           QueryParam "youngest" Text :>
-             QueryParam "window" Text :>
-               QueryParam "count" Int32 :>
-                 QueryParam "aggregator" TimeseriesListAggregator :>
-                   QueryParam "timespan" Text :>
-                     QueryParam "oldest" Text :>
-                       QueryParams "labels" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] ListTimeseriesRequest :>
-                               Get '[JSON] ListTimeseriesResponse
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "timeseries" :>
+               Capture "metric" Text :>
+                 QueryParam "youngest" Text :>
+                   QueryParam "window" Text :>
+                     QueryParam "count" Int32 :>
+                       QueryParam "aggregator" TimeseriesListAggregator :>
+                         QueryParam "timespan" Text :>
+                           QueryParam "oldest" Text :>
+                             QueryParams "labels" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ListTimeseriesRequest :>
+                                     Get '[JSON] ListTimeseriesResponse
 
 -- | List the data points of the time series that match the metric and labels
 -- values and that have data points in the interval. Large responses are

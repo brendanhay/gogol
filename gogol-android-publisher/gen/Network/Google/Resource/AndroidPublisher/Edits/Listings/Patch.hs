@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.listings.patch@ method which the
 -- 'EditsListingsPatch' request conforms to.
 type EditsListingsPatchResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "listings" :>
-             Capture "language" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Listing :> Patch '[JSON] Listing
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "listings" :>
+                   Capture "language" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Listing :> Patch '[JSON] Listing
 
 -- | Creates or updates a localized store listing. This method supports patch
 -- semantics.

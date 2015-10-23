@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.replies.get@ method which the
 -- 'RepliesGet' request conforms to.
 type RepliesGetResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             "replies" :>
-               Capture "replyId" Text :>
-                 QueryParam "includeDeleted" Bool :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] CommentReply
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   Capture "replyId" Text :>
+                     QueryParam "includeDeleted" Bool :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] CommentReply
 
 -- | Gets a reply.
 --

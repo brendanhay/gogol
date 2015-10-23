@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.column.patch@ method which the
 -- 'ColumnPatch' request conforms to.
 type ColumnPatchResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "columns" :>
-           Capture "columnId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Column :> Patch '[JSON] Column
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "columns" :>
+               Capture "columnId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Column :> Patch '[JSON] Column
 
 -- | Updates the name or type of an existing column. This method supports
 -- patch semantics.

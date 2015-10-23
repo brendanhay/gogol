@@ -49,18 +49,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.myconfig.syncVolumeLicenses@ method which the
 -- 'MyConfigSyncVolumeLicenses' request conforms to.
 type MyConfigSyncVolumeLicensesResource =
-     "myconfig" :>
-       "syncVolumeLicenses" :>
-         QueryParam "source" Text :>
-           QueryParam "nonce" Text :>
-             QueryParam "cpksver" Text :>
-               QueryParam "locale" Text :>
-                 QueryParams "volumeIds" Text :>
-                   QueryParams "features"
-                     MyConfigSyncVolumeLicensesFeatures
-                     :>
-                     QueryParam "showPreorders" Bool :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Volumes
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "syncVolumeLicenses" :>
+             QueryParam "source" Text :>
+               QueryParam "nonce" Text :>
+                 QueryParam "cpksver" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParams "volumeIds" Text :>
+                       QueryParams "features"
+                         MyConfigSyncVolumeLicensesFeatures
+                         :>
+                         QueryParam "showPreorders" Bool :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] Volumes
 
 -- | Request downloaded content access for specified volumes on the My eBooks
 -- shelf.

@@ -84,7 +84,6 @@ appsTasksService :: Service
 appsTasksService
   = defaultService (ServiceId "tasks:v1")
       "www.googleapis.com"
-      "tasks/v1/"
 
 -- | View your tasks
 tasksReadonlyScope :: OAuthScope

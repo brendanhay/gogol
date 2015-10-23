@@ -47,16 +47,18 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objectAccessControls.patch@ method which the
 -- 'ObjectAccessControlsPatch' request conforms to.
 type ObjectAccessControlsPatchResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           Capture "object" Text :>
-             "acl" :>
-               Capture "entity" Text :>
-                 QueryParam "generation" Int64 :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ObjectAccessControl :>
-                       Patch '[JSON] ObjectAccessControl
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               Capture "object" Text :>
+                 "acl" :>
+                   Capture "entity" Text :>
+                     QueryParam "generation" Int64 :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ObjectAccessControl :>
+                           Patch '[JSON] ObjectAccessControl
 
 -- | Updates an ACL entry on the specified object. This method supports patch
 -- semantics.

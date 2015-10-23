@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasks.insert@ method which the
 -- 'TasksInsert' request conforms to.
 type TasksInsertResource =
-     "lists" :>
-       Capture "tasklist" Text :>
-         "tasks" :>
-           QueryParam "parent" Text :>
-             QueryParam "previous" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Task :> Post '[JSON] Task
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               QueryParam "parent" Text :>
+                 QueryParam "previous" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Task :> Post '[JSON] Task
 
 -- | Creates a new task on the specified task list.
 --

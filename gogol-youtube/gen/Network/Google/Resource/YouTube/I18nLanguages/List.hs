@@ -44,11 +44,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.i18nLanguages.list@ method which the
 -- 'I18nLanguagesList' request conforms to.
 type I18nLanguagesListResource =
-     "i18nLanguages" :>
-       QueryParam "part" Text :>
-         QueryParam "hl" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] I18nLanguageListResponse
+     "youtube" :>
+       "v3" :>
+         "i18nLanguages" :>
+           QueryParam "part" Text :>
+             QueryParam "hl" Text :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] I18nLanguageListResponse
 
 -- | Returns a list of application languages that the YouTube website
 -- supports.

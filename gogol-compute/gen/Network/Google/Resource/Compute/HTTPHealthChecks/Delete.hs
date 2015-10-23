@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.httpHealthChecks.delete@ method which the
 -- 'HTTPHealthChecksDelete' request conforms to.
 type HTTPHealthChecksDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "httpHealthChecks" :>
-           Capture "httpHealthCheck" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "httpHealthChecks" :>
+                 Capture "httpHealthCheck" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified HttpHealthCheck resource.
 --

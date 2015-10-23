@@ -46,17 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.volumes.associated.list@ method which the
 -- 'VolumesAssociatedList' request conforms to.
 type VolumesAssociatedListResource =
-     "volumes" :>
-       Capture "volumeId" Text :>
-         "associated" :>
-           QueryParam "locale" Text :>
-             QueryParam "maxAllowedMaturityRating"
-               VolumesAssociatedListMaxAllowedMaturityRating
-               :>
-               QueryParam "source" Text :>
-                 QueryParam "association"
-                   VolumesAssociatedListAssociation
-                   :> QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "associated" :>
+               QueryParam "locale" Text :>
+                 QueryParam "maxAllowedMaturityRating"
+                   VolumesAssociatedListMaxAllowedMaturityRating
+                   :>
+                   QueryParam "source" Text :>
+                     QueryParam "association"
+                       VolumesAssociatedListAssociation
+                       :> QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of associated books.
 --

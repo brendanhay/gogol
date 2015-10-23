@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.replies.update@ method which the
 -- 'RepliesUpdate' request conforms to.
 type RepliesUpdateResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             "replies" :>
-               Capture "replyId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] CommentReply :>
-                     Put '[JSON] CommentReply
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   Capture "replyId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CommentReply :>
+                         Put '[JSON] CommentReply
 
 -- | Updates an existing reply.
 --

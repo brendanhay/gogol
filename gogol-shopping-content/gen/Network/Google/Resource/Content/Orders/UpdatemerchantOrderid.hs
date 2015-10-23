@@ -44,13 +44,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.updatemerchantorderid@ method which the
 -- 'OrdersUpdatemerchantOrderid' request conforms to.
 type OrdersUpdatemerchantOrderidResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         Capture "orderId" Text :>
-           "updateMerchantOrderId" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] OrdersUpdateMerchantOrderIdRequest :>
-                 Post '[JSON] OrdersUpdateMerchantOrderIdResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "updateMerchantOrderId" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] OrdersUpdateMerchantOrderIdRequest :>
+                     Post '[JSON] OrdersUpdateMerchantOrderIdResponse
 
 -- | Updates the merchant order ID for a given order.
 --

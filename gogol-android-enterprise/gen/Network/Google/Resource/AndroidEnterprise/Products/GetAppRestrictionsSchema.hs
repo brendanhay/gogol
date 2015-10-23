@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.products.getAppRestrictionsSchema@ method which the
 -- 'ProductsGetAppRestrictionsSchema' request conforms to.
 type ProductsGetAppRestrictionsSchemaResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "products" :>
-           Capture "productId" Text :>
-             "appRestrictionsSchema" :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] AppRestrictionsSchema
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "products" :>
+               Capture "productId" Text :>
+                 "appRestrictionsSchema" :>
+                   QueryParam "language" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] AppRestrictionsSchema
 
 -- | Retrieves the schema defining app restrictions configurable for this
 -- product. All products have a schema, but this may be empty if no app

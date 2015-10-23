@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.acl.patch@ method which the
 -- 'ACLPatch' request conforms to.
 type ACLPatchResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "acl" :>
-           Capture "ruleId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ACLRule :> Patch '[JSON] ACLRule
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "acl" :>
+               Capture "ruleId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] ACLRule :> Patch '[JSON] ACLRule
 
 -- | Updates an access control rule. This method supports patch semantics.
 --

@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dns.managedZones.create@ method which the
 -- 'ManagedZonesCreate' request conforms to.
 type ManagedZonesCreateResource =
-     Capture "project" Text :>
-       "managedZones" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] ManagedZone :>
-             Post '[JSON] ManagedZone
+     "dns" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ManagedZone :>
+                   Post '[JSON] ManagedZone
 
 -- | Create a new ManagedZone.
 --

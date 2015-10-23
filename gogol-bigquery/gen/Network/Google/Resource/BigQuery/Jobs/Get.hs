@@ -45,11 +45,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.jobs.get@ method which the
 -- 'JobsGet' request conforms to.
 type JobsGetResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "jobs" :>
-           Capture "jobId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Job
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "jobs" :>
+               Capture "jobId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Returns information about a specific job. Job information is available
 -- for a six month period after creation. Requires that you\'re the person

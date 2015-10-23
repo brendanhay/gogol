@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.forwardingRules.get@ method which the
 -- 'ForwardingRulesGet' request conforms to.
 type ForwardingRulesGetResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "forwardingRules" :>
-             Capture "forwardingRule" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ForwardingRule
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "forwardingRules" :>
+                   Capture "forwardingRule" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ForwardingRule
 
 -- | Returns the specified ForwardingRule resource.
 --

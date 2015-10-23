@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.events.listByPlayer@ method which the
 -- 'EventsListByPlayer' request conforms to.
 type EventsListByPlayerResource =
-     "events" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] PlayerEventListResponse
+     "games" :>
+       "v1" :>
+         "events" :>
+           QueryParam "language" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] PlayerEventListResponse
 
 -- | Returns a list showing the current progress on events in this
 -- application for the currently authenticated user.

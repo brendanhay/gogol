@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.users.setAvailableProductSet@ method which the
 -- 'UsersSetAvailableProductSet' request conforms to.
 type UsersSetAvailableProductSetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "availableProductSet" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ProductSet :> Put '[JSON] ProductSet
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "availableProductSet" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ProductSet :> Put '[JSON] ProductSet
 
 -- | Modifies the set of products a user is entitled to access.
 --

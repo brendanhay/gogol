@@ -44,11 +44,13 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.permissions.delete@ method which the
 -- 'AccountsPermissionsDelete' request conforms to.
 type AccountsPermissionsDeleteResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "permissions" :>
-           Capture "permissionId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the account, revoking access to it and all of its
 -- containers.

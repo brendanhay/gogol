@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.layers.get@ method which the
 -- 'LayersGet' request conforms to.
 type LayersGetResource =
-     "volumes" :>
-       Capture "volumeId" Text :>
-         "layersummary" :>
-           Capture "summaryId" Text :>
-             QueryParam "contentVersion" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Layersummary
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layersummary" :>
+               Capture "summaryId" Text :>
+                 QueryParam "contentVersion" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Layersummary
 
 -- | Gets the layer summary for a volume.
 --

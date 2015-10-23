@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.circles.removePeople@ method which the
 -- 'CirclesRemovePeople' request conforms to.
 type CirclesRemovePeopleResource =
-     "circles" :>
-       Capture "circleId" Text :>
-         "people" :>
-           QueryParams "email" Text :>
-             QueryParams "userId" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             "people" :>
+               QueryParams "email" Text :>
+                 QueryParams "userId" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove a person from a circle.
 --

@@ -44,12 +44,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.advancetestorder@ method which the
 -- 'OrdersAdvancetestOrder' request conforms to.
 type OrdersAdvancetestOrderResource =
-     Capture "merchantId" Word64 :>
-       "testorders" :>
-         Capture "orderId" Text :>
-           "advance" :>
-             QueryParam "alt" AltJSON :>
-               Post '[JSON] OrdersAdvanceTestOrderResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "testorders" :>
+             Capture "orderId" Text :>
+               "advance" :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] OrdersAdvanceTestOrderResponse
 
 -- | Sandbox only. Moves a test order from state \"inProgress\" to state
 -- \"pendingShipment\".

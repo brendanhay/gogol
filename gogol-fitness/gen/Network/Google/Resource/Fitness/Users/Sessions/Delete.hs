@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.sessions.delete@ method which the
 -- 'UsersSessionsDelete' request conforms to.
 type UsersSessionsDeleteResource =
-     Capture "userId" Text :>
-       "sessions" :>
-         Capture "sessionId" Text :>
-           QueryParam "currentTimeMillis" Int64 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "sessions" :>
+               Capture "sessionId" Text :>
+                 QueryParam "currentTimeMillis" Int64 :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a session specified by the given session ID.
 --

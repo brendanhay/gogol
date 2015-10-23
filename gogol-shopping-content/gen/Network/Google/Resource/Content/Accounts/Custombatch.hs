@@ -44,12 +44,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounts.custombatch@ method which the
 -- 'AccountsCustombatch' request conforms to.
 type AccountsCustombatchResource =
-     "accounts" :>
-       "batch" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] AccountsCustomBatchRequest :>
-               Post '[JSON] AccountsCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "accounts" :>
+           "batch" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AccountsCustomBatchRequest :>
+                   Post '[JSON] AccountsCustomBatchResponse
 
 -- | Retrieves, inserts, updates, and deletes multiple Merchant Center
 -- (sub-)accounts in a single request.

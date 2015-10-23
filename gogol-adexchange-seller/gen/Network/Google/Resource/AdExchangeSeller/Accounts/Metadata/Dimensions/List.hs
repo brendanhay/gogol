@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.metadata.dimensions.list@ method which the
 -- 'AccountsMetadataDimensionsList' request conforms to.
 type AccountsMetadataDimensionsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "metadata" :>
-           "dimensions" :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Metadata
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "metadata" :>
+               "dimensions" :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdExchange
 -- account.

@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @plus.moments.insert@ method which the
 -- 'MomentsInsert' request conforms to.
 type MomentsInsertResource =
-     "people" :>
-       Capture "userId" Text :>
-         "moments" :>
-           Capture "collection" MomentsInsertCollection :>
-             QueryParam "debug" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Moment :> Post '[JSON] Moment
+     "plus" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "moments" :>
+               Capture "collection" MomentsInsertCollection :>
+                 QueryParam "debug" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Moment :> Post '[JSON] Moment
 
 -- | Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.

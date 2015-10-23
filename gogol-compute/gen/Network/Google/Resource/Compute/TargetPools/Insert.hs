@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.insert@ method which the
 -- 'TargetPoolsInsert' request conforms to.
 type TargetPoolsInsertResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] TargetPool :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TargetPool :> Post '[JSON] Operation
 
 -- | Creates a TargetPool resource in the specified project and region using
 -- the data included in the request.

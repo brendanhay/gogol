@@ -51,19 +51,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.publishers.list@ method which the
 -- 'PublishersList' request conforms to.
 type PublishersListResource =
-     Capture "role" PublishersListRole :>
-       Capture "roleId" Text :>
-         "publishers" :>
-           QueryParam "relationshipStatus"
-             PublishersListRelationshipStatus
-             :>
-             QueryParam "minSevenDayEpc" Double :>
-               QueryParam "minNinetyDayEpc" Double :>
-                 QueryParam "minPayoutRank" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "publisherCategory" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Publishers
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" PublishersListRole :>
+           Capture "roleId" Text :>
+             "publishers" :>
+               QueryParam "relationshipStatus"
+                 PublishersListRelationshipStatus
+                 :>
+                 QueryParam "minSevenDayEpc" Double :>
+                   QueryParam "minNinetyDayEpc" Double :>
+                     QueryParam "minPayoutRank" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "publisherCategory" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Publishers
 
 -- | Retrieves data about all publishers that the requesting
 -- advertiser\/publisher has access to.

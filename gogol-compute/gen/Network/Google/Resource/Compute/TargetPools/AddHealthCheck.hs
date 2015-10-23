@@ -45,15 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.addHealthCheck@ method which the
 -- 'TargetPoolsAddHealthCheck' request conforms to.
 type TargetPoolsAddHealthCheckResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             Capture "targetPool" Text :>
-               "addHealthCheck" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] TargetPoolsAddHealthCheckRequest :>
-                     Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   Capture "targetPool" Text :>
+                     "addHealthCheck" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] TargetPoolsAddHealthCheckRequest :>
+                           Post '[JSON] Operation
 
 -- | Adds health check URL to targetPool.
 --

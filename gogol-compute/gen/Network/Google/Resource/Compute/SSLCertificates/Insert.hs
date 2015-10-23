@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.sslCertificates.insert@ method which the
 -- 'SSLCertificatesInsert' request conforms to.
 type SSLCertificatesInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "sslCertificates" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] SSLCertificate :>
-               Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "sslCertificates" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] SSLCertificate :>
+                     Post '[JSON] Operation
 
 -- | Creates a SslCertificate resource in the specified project using the
 -- data included in the request.

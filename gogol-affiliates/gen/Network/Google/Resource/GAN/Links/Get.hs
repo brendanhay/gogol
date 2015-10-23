@@ -47,11 +47,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.links.get@ method which the
 -- 'LinksGet' request conforms to.
 type LinksGetResource =
-     Capture "role" LinksGetRole :>
-       Capture "roleId" Text :>
-         "link" :>
-           Capture "linkId" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Link
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" LinksGetRole :>
+           Capture "roleId" Text :>
+             "link" :>
+               Capture "linkId" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Link
 
 -- | Retrieves data about a single link if the requesting
 -- advertiser\/publisher has access to it. Advertisers can look up their

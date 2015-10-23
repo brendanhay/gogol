@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.uploads.get@ method which the
 -- 'ManagementUploadsGet' request conforms to.
 type ManagementUploadsGetResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customDataSources" :>
-                 Capture "customDataSourceId" Text :>
-                   "uploads" :>
-                     Capture "uploadId" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Upload
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     Capture "customDataSourceId" Text :>
+                       "uploads" :>
+                         Capture "uploadId" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Upload
 
 -- | List uploads to which the user has access.
 --

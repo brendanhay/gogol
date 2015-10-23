@@ -44,13 +44,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.variables.delete@ method which the
 -- 'AccountsContainersVariablesDelete' request conforms to.
 type AccountsContainersVariablesDeleteResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "variables" :>
-               Capture "variableId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "variables" :>
+                   Capture "variableId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Variable.
 --

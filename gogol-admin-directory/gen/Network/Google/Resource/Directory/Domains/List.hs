@@ -42,10 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.domains.list@ method which the
 -- 'DomainsList' request conforms to.
 type DomainsListResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "domains" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Domains2
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "domains" :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Domains2
 
 -- | Lists the domains of the customer.
 --

@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profiles.update@ method which the
 -- 'ManagementProFilesUpdate' request conforms to.
 type ManagementProFilesUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ProFile :> Put '[JSON] ProFile
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ProFile :> Put '[JSON] ProFile
 
 -- | Updates an existing view (profile).
 --

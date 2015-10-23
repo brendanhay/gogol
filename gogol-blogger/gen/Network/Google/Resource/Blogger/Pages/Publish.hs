@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.pages.publish@ method which the
 -- 'PagesPublish' request conforms to.
 type PagesPublishResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "pages" :>
-           Capture "pageId" Text :>
-             "publish" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Page
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 "publish" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Page
 
 -- | Publishes a draft page.
 --

@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.disks.get@ method which the
 -- 'DisksGet' request conforms to.
 type DisksGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "disks" :>
-             Capture "disk" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Disk
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "disks" :>
+                   Capture "disk" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Disk
 
 -- | Returns a specified persistent disk.
 --

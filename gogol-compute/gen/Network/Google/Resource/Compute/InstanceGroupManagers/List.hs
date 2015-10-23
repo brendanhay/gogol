@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.list@ method which the
 -- 'InstanceGroupManagersList' request conforms to.
 type InstanceGroupManagersListResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] InstanceGroupManagerList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] InstanceGroupManagerList
 
 -- | Retrieves a list of managed instance groups that are contained within
 -- the specified project and zone.

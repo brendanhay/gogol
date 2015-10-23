@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.list@ method which the
 -- 'AchievementConfigurationsList' request conforms to.
 type AchievementConfigurationsListResource =
-     "applications" :>
-       Capture "applicationId" Text :>
-         "achievements" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] AchievementConfigurationListResponse
+     "games" :>
+       "v1configuration" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "achievements" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] AchievementConfigurationListResponse
 
 -- | Returns a list of the achievement configurations in this application.
 --

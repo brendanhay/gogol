@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.purchases.subscriptions.revoke@ method which the
 -- 'PurchasesSubscriptionsRevoke' request conforms to.
 type PurchasesSubscriptionsRevokeResource =
-     Capture "packageName" Text :>
-       "purchases" :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "tokens" :>
-               CaptureMode "token" "revoke" Text :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "purchases" :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "tokens" :>
+                     CaptureMode "token" "revoke" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Refunds and immediately revokes a user\'s subscription purchase. Access
 -- to the subscription will be terminated immediately and it will stop

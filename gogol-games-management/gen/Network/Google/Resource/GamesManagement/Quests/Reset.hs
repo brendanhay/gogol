@@ -44,10 +44,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.quests.reset@ method which the
 -- 'QuestsReset' request conforms to.
 type QuestsResetResource =
-     "quests" :>
-       Capture "questId" Text :>
-         "reset" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "quests" :>
+           Capture "questId" Text :>
+             "reset" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on the quest with the given ID for the
 -- currently authenticated player. This method is only accessible to

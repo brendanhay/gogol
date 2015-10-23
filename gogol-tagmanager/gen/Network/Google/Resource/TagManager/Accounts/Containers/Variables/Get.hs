@@ -44,13 +44,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.variables.get@ method which the
 -- 'AccountsContainersVariablesGet' request conforms to.
 type AccountsContainersVariablesGetResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "variables" :>
-               Capture "variableId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Variable
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "variables" :>
+                   Capture "variableId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Variable
 
 -- | Gets a GTM Variable.
 --

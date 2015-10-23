@@ -51,24 +51,28 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightActivityGroups.list@ method which the
 -- 'FloodlightActivityGroupsList' request conforms to.
 type FloodlightActivityGroupsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightActivityGroups" :>
-           QueryParam "floodlightConfigurationId" Int64 :>
-             QueryParam "advertiserId" Int64 :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder"
-                     FloodlightActivityGroupsListSortOrder
-                     :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField"
-                         FloodlightActivityGroupsListSortField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivityGroups" :>
+               QueryParam "floodlightConfigurationId" Int64 :>
+                 QueryParam "advertiserId" Int64 :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "sortOrder"
+                         FloodlightActivityGroupsListSortOrder
                          :>
-                         QueryParam "type" FloodlightActivityGroupsListType :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] FloodlightActivityGroupsListResponse
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             FloodlightActivityGroupsListSortField
+                             :>
+                             QueryParam "type" FloodlightActivityGroupsListType
+                               :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON]
+                                     FloodlightActivityGroupsListResponse
 
 -- | Retrieves a list of floodlight activity groups, possibly filtered.
 --

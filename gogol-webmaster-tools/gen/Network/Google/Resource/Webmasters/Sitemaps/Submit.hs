@@ -43,11 +43,13 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.sitemaps.submit@ method which the
 -- 'SitemapsSubmit' request conforms to.
 type SitemapsSubmitResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         "sitemaps" :>
-           Capture "feedpath" Text :>
-             QueryParam "alt" AltJSON :> Put '[JSON] ()
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "sitemaps" :>
+               Capture "feedpath" Text :>
+                 QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Submits a sitemap for a site.
 --

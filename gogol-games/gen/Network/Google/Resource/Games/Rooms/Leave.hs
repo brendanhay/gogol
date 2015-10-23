@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.rooms.leave@ method which the
 -- 'RoomsLeave' request conforms to.
 type RoomsLeaveResource =
-     "rooms" :>
-       Capture "roomId" Text :>
-         "leave" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] RoomLeaveRequest :> Post '[JSON] Room
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "leave" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] RoomLeaveRequest :> Post '[JSON] Room
 
 -- | Leave a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.

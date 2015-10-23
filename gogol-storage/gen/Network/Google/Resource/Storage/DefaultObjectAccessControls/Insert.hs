@@ -43,12 +43,14 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.defaultObjectAccessControls.insert@ method which the
 -- 'DefaultObjectAccessControlsInsert' request conforms to.
 type DefaultObjectAccessControlsInsertResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "defaultObjectAcl" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ObjectAccessControl :>
-               Post '[JSON] ObjectAccessControl
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "defaultObjectAcl" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ObjectAccessControl :>
+                   Post '[JSON] ObjectAccessControl
 
 -- | Creates a new default object ACL entry on the specified bucket.
 --

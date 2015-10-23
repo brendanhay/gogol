@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.labels.create@ method which the
 -- 'UsersLabelsCreate' request conforms to.
 type UsersLabelsCreateResource =
-     Capture "userId" Text :>
-       "labels" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Label :> Post '[JSON] Label
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Label :> Post '[JSON] Label
 
 -- | Creates a new label.
 --

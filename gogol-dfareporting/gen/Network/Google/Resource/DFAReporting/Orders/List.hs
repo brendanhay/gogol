@@ -50,20 +50,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.orders.list@ method which the
 -- 'OrdersList' request conforms to.
 type OrdersListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "projects" :>
-           Capture "projectId" Int64 :>
-             "orders" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder" OrdersListSortOrder :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" OrdersListSortField :>
-                         QueryParams "siteId" Int64 :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] OrdersListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "orders" :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "sortOrder" OrdersListSortOrder :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField" OrdersListSortField :>
+                             QueryParams "siteId" Int64 :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] OrdersListResponse
 
 -- | Retrieves a list of orders, possibly filtered.
 --

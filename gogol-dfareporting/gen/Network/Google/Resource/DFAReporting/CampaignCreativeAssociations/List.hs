@@ -47,18 +47,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.campaignCreativeAssociations.list@ method which the
 -- 'CampaignCreativeAssociationsList' request conforms to.
 type CampaignCreativeAssociationsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           Capture "campaignId" Int64 :>
-             "campaignCreativeAssociations" :>
-               QueryParam "sortOrder"
-                 CampaignCreativeAssociationsListSortOrder
-                 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] CampaignCreativeAssociationsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "campaignCreativeAssociations" :>
+                   QueryParam "sortOrder"
+                     CampaignCreativeAssociationsListSortOrder
+                     :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] CampaignCreativeAssociationsListResponse
 
 -- | Retrieves the list of creative IDs associated with the specified
 -- campaign.

@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.members.patch@ method which the
 -- 'MembersPatch' request conforms to.
 type MembersPatchResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         "members" :>
-           Capture "memberKey" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Member :> Patch '[JSON] Member
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               "members" :>
+                 Capture "memberKey" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Member :> Patch '[JSON] Member
 
 -- | Update membership of a user in the specified group. This method supports
 -- patch semantics.

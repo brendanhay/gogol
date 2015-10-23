@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.tables.list@ method which the
 -- 'TablesList' request conforms to.
 type TablesListResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "tables" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] TableList
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 "tables" :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] TableList
 
 -- | Lists all tables in the specified dataset. Requires the READER dataset
 -- role.

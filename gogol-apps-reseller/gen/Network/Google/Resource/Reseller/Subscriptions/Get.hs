@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.get@ method which the
 -- 'SubscriptionsGet' request conforms to.
 type SubscriptionsGetResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Subscription
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Subscription
 
 -- | Gets a subscription of the customer.
 --

@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.scores.resetMultipleForAllPlayers@ method which the
 -- 'ScoresResetMultipleForAllPlayers' request conforms to.
 type ScoresResetMultipleForAllPlayersResource =
-     "scores" :>
-       "resetMultipleForAllPlayers" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] ScoresResetMultipleForAllRequest :>
-             Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "scores" :>
+           "resetMultipleForAllPlayers" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] ScoresResetMultipleForAllRequest :>
+                 Post '[JSON] ()
 
 -- | Resets scores for the leaderboards with the given IDs for all players.
 -- This method is only available to user accounts for your developer

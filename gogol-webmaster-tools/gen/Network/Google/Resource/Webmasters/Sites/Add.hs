@@ -42,9 +42,11 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.sites.add@ method which the
 -- 'SitesAdd' request conforms to.
 type SitesAddResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         QueryParam "alt" AltJSON :> Put '[JSON] ()
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Adds a site to the set of the user\'s sites in Webmaster Tools.
 --

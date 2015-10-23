@@ -44,10 +44,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.budget.get@ method which the
 -- 'BudgetGet' request conforms to.
 type BudgetGetResource =
-     "billinginfo" :>
-       Capture "accountId" Int64 :>
-         Capture "billingId" Int64 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Budget
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "billinginfo" :>
+           Capture "accountId" Int64 :>
+             Capture "billingId" Int64 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Budget
 
 -- | Returns the budget information for the adgroup specified by the
 -- accountId and billingId.

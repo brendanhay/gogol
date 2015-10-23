@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.delete@ method which the
 -- 'SubscriptionsDelete' request conforms to.
 type SubscriptionsDeleteResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             QueryParam "deletionType"
-               SubscriptionsDeleteDeletionType
-               :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   QueryParam "deletionType"
+                     SubscriptionsDeleteDeletionType
+                     :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Cancels\/Downgrades a subscription.
 --

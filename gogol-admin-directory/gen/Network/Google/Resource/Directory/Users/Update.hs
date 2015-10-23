@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.update@ method which the
 -- 'UsersUpdate' request conforms to.
 type UsersUpdateResource =
-     "users" :>
-       Capture "userKey" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] User :> Put '[JSON] User
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] User :> Put '[JSON] User
 
 -- | update user
 --

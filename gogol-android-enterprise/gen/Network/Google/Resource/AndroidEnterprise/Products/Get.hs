@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.products.get@ method which the
 -- 'ProductsGet' request conforms to.
 type ProductsGetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "products" :>
-           Capture "productId" Text :>
-             QueryParam "language" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Product
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "products" :>
+               Capture "productId" Text :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Product
 
 -- | Retrieves details of a product for display to an enterprise admin.
 --

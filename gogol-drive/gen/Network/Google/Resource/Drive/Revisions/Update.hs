@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.revisions.update@ method which the
 -- 'RevisionsUpdate' request conforms to.
 type RevisionsUpdateResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "revisions" :>
-           Capture "revisionId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Revision :> Put '[JSON] Revision
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               Capture "revisionId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Revision :> Put '[JSON] Revision
 
 -- | Updates a revision.
 --

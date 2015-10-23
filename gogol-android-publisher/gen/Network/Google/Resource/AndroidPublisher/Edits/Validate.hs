@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.validate@ method which the
 -- 'EditsValidate' request conforms to.
 type EditsValidateResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         CaptureMode "editId" "validate" Text :>
-           QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               CaptureMode "editId" "validate" Text :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
 
 -- | Checks that the edit can be successfully committed. The edit\'s changes
 -- are not applied to the live app.

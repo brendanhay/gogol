@@ -48,11 +48,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.dataSources.update@ method which the
 -- 'UsersDataSourcesUpdate' request conforms to.
 type UsersDataSourcesUpdateResource =
-     Capture "userId" Text :>
-       "dataSources" :>
-         Capture "dataSourceId" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] DataSource :> Put '[JSON] DataSource
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] DataSource :> Put '[JSON] DataSource
 
 -- | Updates a given data source. It is an error to modify the data source\'s
 -- data stream ID, data type, type, stream name or device information apart

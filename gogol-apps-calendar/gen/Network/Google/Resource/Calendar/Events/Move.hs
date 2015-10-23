@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.move@ method which the
 -- 'EventsMove' request conforms to.
 type EventsMoveResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           Capture "eventId" Text :>
-             "move" :>
-               QueryParam "destination" Text :>
-                 QueryParam "sendNotifications" Bool :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Event
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               Capture "eventId" Text :>
+                 "move" :>
+                   QueryParam "destination" Text :>
+                     QueryParam "sendNotifications" Bool :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
 --

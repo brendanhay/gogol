@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasklists.delete@ method which the
 -- 'TaskListsDelete' request conforms to.
 type TaskListsDeleteResource =
-     "users" :>
-       "@me" :>
-         "lists" :>
-           Capture "tasklist" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "tasks" :>
+       "v1" :>
+         "users" :>
+           "@me" :>
+             "lists" :>
+               Capture "tasklist" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the authenticated user\'s specified task list.
 --

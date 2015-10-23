@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.jobs.query@ method which the
 -- 'JobsQuery' request conforms to.
 type JobsQueryResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "queries" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] QueryRequest :>
-               Post '[JSON] QueryResponse
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "queries" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] QueryRequest :>
+                   Post '[JSON] QueryResponse
 
 -- | Runs a BigQuery SQL query synchronously and returns query results if the
 -- query completes within a specified timeout.

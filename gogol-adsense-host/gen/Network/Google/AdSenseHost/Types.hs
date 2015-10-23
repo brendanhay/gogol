@@ -199,7 +199,6 @@ adSenseHostService :: Service
 adSenseHostService
   = defaultService (ServiceId "adsensehost:v4.1")
       "www.googleapis.com"
-      "adsensehost/v4.1/"
 
 -- | View and manage your AdSense host data and associated accounts
 adsensehostScope :: OAuthScope

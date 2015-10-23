@@ -45,15 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.removeInstance@ method which the
 -- 'TargetPoolsRemoveInstance' request conforms to.
 type TargetPoolsRemoveInstanceResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             Capture "targetPool" Text :>
-               "removeInstance" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] TargetPoolsRemoveInstanceRequest :>
-                     Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   Capture "targetPool" Text :>
+                     "removeInstance" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] TargetPoolsRemoveInstanceRequest :>
+                           Post '[JSON] Operation
 
 -- | Removes instance URL from targetPool.
 --

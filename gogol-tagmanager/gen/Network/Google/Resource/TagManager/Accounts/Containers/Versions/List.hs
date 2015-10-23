@@ -44,14 +44,16 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.versions.list@ method which the
 -- 'AccountsContainersVersionsList' request conforms to.
 type AccountsContainersVersionsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "versions" :>
-               QueryParam "headers" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ListContainerVersionsResponse
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "versions" :>
+                   QueryParam "headers" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ListContainerVersionsResponse
 
 -- | Lists all Container Versions of a GTM Container.
 --

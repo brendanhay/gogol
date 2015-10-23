@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.routes.insert@ method which the
 -- 'RoutesInsert' request conforms to.
 type RoutesInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "routes" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Route :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "routes" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Route :> Post '[JSON] Operation
 
 -- | Creates a route resource in the specified project using the data
 -- included in the request.

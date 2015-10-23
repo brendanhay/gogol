@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.replies.insert@ method which the
 -- 'RepliesInsert' request conforms to.
 type RepliesInsertResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             "replies" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] CommentReply :>
-                   Post '[JSON] CommentReply
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CommentReply :>
+                       Post '[JSON] CommentReply
 
 -- | Creates a new reply to the given comment.
 --

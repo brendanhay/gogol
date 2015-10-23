@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroups.addInstances@ method which the
 -- 'InstanceGroupsAddInstances' request conforms to.
 type InstanceGroupsAddInstancesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroups" :>
-             Capture "instanceGroup" Text :>
-               "addInstances" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] InstanceGroupsAddInstancesRequest :>
-                     Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroups" :>
+                   Capture "instanceGroup" Text :>
+                     "addInstances" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] InstanceGroupsAddInstancesRequest :>
+                           Post '[JSON] Operation
 
 -- | Adds a list of instances to the specified instance group. All of the
 -- instances in the instance group must be in the same network\/subnetwork.

@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetVpnGateways.list@ method which the
 -- 'TargetVPNGatewaysList' request conforms to.
 type TargetVPNGatewaysListResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetVpnGateways" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] TargetVPNGatewayList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetVpnGateways" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TargetVPNGatewayList
 
 -- | Retrieves the list of TargetVpnGateway resources available to the
 -- specified project and region.

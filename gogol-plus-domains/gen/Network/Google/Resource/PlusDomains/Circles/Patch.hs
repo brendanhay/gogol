@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.circles.patch@ method which the
 -- 'CirclesPatch' request conforms to.
 type CirclesPatchResource =
-     "circles" :>
-       Capture "circleId" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Circle :> Patch '[JSON] Circle
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Circle :> Patch '[JSON] Circle
 
 -- | Update a circle\'s description. This method supports patch semantics.
 --

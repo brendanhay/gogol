@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.marketplacedeals.delete@ method which the
 -- 'MarketplaceDealsDelete' request conforms to.
 type MarketplaceDealsDeleteResource =
-     "marketplaceOrders" :>
-       Capture "orderId" Text :>
-         "deals" :>
-           "delete" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] DeleteOrderDealsRequest :>
-                 Post '[JSON] DeleteOrderDealsResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "deals" :>
+               "delete" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] DeleteOrderDealsRequest :>
+                     Post '[JSON] DeleteOrderDealsResponse
 
 -- | Delete the specified deals from the order
 --

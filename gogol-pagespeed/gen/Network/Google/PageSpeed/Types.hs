@@ -159,4 +159,3 @@ pageSpeedService :: Service
 pageSpeedService
   = defaultService (ServiceId "pagespeedonline:v2")
       "www.googleapis.com"
-      "pagespeedonline/v2/"

@@ -44,14 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalForwardingRules.setTarget@ method which the
 -- 'GlobalForwardingRulesSetTarget' request conforms to.
 type GlobalForwardingRulesSetTargetResource =
-     Capture "project" Text :>
-       "global" :>
-         "forwardingRules" :>
-           Capture "forwardingRule" Text :>
-             "setTarget" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] TargetReference :>
-                   Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "forwardingRules" :>
+                 Capture "forwardingRule" Text :>
+                   "setTarget" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] TargetReference :>
+                         Post '[JSON] Operation
 
 -- | Changes target url for forwarding rule.
 --

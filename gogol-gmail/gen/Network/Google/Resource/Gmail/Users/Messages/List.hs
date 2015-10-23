@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.list@ method which the
 -- 'UsersMessagesList' request conforms to.
 type UsersMessagesListResource =
-     Capture "userId" Text :>
-       "messages" :>
-         QueryParam "q" Text :>
-           QueryParam "includeSpamTrash" Bool :>
-             QueryParams "labelIds" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ListMessagesResponse
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               QueryParam "q" Text :>
+                 QueryParam "includeSpamTrash" Bool :>
+                   QueryParams "labelIds" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListMessagesResponse
 
 -- | Lists the messages in the user\'s mailbox.
 --

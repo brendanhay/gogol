@@ -711,7 +711,6 @@ dataflowService :: Service
 dataflowService
   = defaultService (ServiceId "dataflow:v1b3")
       "dataflow.googleapis.com"
-      ""
 
 -- | View your email address
 userinfoEmailScope :: OAuthScope

@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- 'ManagementWebPropertyAdWordsLinksInsert' request conforms to.
 type ManagementWebPropertyAdWordsLinksInsertResource
      =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityAdWordsLinks" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] EntityAdWordsLink :>
-                     Post '[JSON] EntityAdWordsLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] EntityAdWordsLink :>
+                         Post '[JSON] EntityAdWordsLink
 
 -- | Creates a webProperty-AdWords link.
 --

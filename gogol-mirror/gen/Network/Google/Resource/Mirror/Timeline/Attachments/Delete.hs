@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.timeline.attachments.delete@ method which the
 -- 'TimelineAttachmentsDelete' request conforms to.
 type TimelineAttachmentsDeleteResource =
-     "timeline" :>
-       Capture "itemId" Text :>
-         "attachments" :>
-           Capture "attachmentId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "mirror" :>
+       "v1" :>
+         "timeline" :>
+           Capture "itemId" Text :>
+             "attachments" :>
+               Capture "attachmentId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an attachment from a timeline item.
 --

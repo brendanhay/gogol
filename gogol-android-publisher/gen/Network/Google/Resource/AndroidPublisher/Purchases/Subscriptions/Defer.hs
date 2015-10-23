@@ -46,15 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.purchases.subscriptions.defer@ method which the
 -- 'PurchasesSubscriptionsDefer' request conforms to.
 type PurchasesSubscriptionsDeferResource =
-     Capture "packageName" Text :>
-       "purchases" :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "tokens" :>
-               CaptureMode "token" "defer" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] SubscriptionPurchasesDeferRequest :>
-                     Post '[JSON] SubscriptionPurchasesDeferResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "purchases" :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "tokens" :>
+                     CaptureMode "token" "defer" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] SubscriptionPurchasesDeferRequest :>
+                           Post '[JSON] SubscriptionPurchasesDeferResponse
 
 -- | Defers a user\'s subscription purchase until a specified future
 -- expiration time.

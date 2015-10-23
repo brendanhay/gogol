@@ -54,18 +54,20 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.activities.list@ method which the
 -- 'ActivitiesList' request conforms to.
 type ActivitiesListResource =
-     "activities" :>
-       QueryParam "part" Text :>
-         QueryParam "publishedAfter" DateTime' :>
-           QueryParam "home" Bool :>
-             QueryParam "mine" Bool :>
-               QueryParam "regionCode" Text :>
-                 QueryParam "channelId" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "publishedBefore" DateTime' :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ActivityListResponse
+     "youtube" :>
+       "v3" :>
+         "activities" :>
+           QueryParam "part" Text :>
+             QueryParam "publishedAfter" DateTime' :>
+               QueryParam "home" Bool :>
+                 QueryParam "mine" Bool :>
+                   QueryParam "regionCode" Text :>
+                     QueryParam "channelId" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "publishedBefore" DateTime' :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ActivityListResponse
 
 -- | Returns a list of channel activity events that match the request
 -- criteria. For example, you can retrieve events associated with a

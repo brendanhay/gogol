@@ -42,12 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.clientaccess.patch@ method which the
 -- 'ClientAccessPatch' request conforms to.
 type ClientAccessPatchResource =
-     "clientAccess" :>
-       Capture "clientAccountId" Int64 :>
-         QueryParam "sponsorAccountId" Int32 :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ClientAccessCapabilities :>
-               Patch '[JSON] ClientAccessCapabilities
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           Capture "clientAccountId" Int64 :>
+             QueryParam "sponsorAccountId" Int32 :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ClientAccessCapabilities :>
+                   Patch '[JSON] ClientAccessCapabilities
 
 --
 -- /See:/ 'clientAccessPatch' smart constructor.

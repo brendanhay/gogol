@@ -111,7 +111,6 @@ dNSService :: Service
 dNSService
   = defaultService (ServiceId "dns:v1")
       "www.googleapis.com"
-      "dns/v1/projects/"
 
 -- | View your DNS records hosted by Google Cloud DNS
 ndevClouddnsReadonlyScope :: OAuthScope

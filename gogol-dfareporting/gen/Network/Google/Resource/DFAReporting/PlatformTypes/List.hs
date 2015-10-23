@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.platformTypes.list@ method which the
 -- 'PlatformTypesList' request conforms to.
 type PlatformTypesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "platformTypes" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] PlatformTypesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "platformTypes" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PlatformTypesListResponse
 
 -- | Retrieves a list of platform types.
 --

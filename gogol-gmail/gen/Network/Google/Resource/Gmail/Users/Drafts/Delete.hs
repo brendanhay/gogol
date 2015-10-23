@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.drafts.delete@ method which the
 -- 'UsersDraftsDelete' request conforms to.
 type UsersDraftsDeleteResource =
-     Capture "userId" Text :>
-       "drafts" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified draft. Does not simply
 -- trash it.

@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.routes.list@ method which the
 -- 'RoutesList' request conforms to.
 type RoutesListResource =
-     Capture "project" Text :>
-       "global" :>
-         "routes" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] RouteList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "routes" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] RouteList
 
 -- | Retrieves the list of route resources available to the specified
 -- project.

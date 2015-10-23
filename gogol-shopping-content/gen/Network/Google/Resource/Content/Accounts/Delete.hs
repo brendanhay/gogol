@@ -44,11 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounts.delete@ method which the
 -- 'AccountsDelete' request conforms to.
 type AccountsDeleteResource =
-     Capture "merchantId" Word64 :>
-       "accounts" :>
-         Capture "accountId" Word64 :>
-           QueryParam "dryRun" Bool :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accounts" :>
+             Capture "accountId" Word64 :>
+               QueryParam "dryRun" Bool :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Merchant Center sub-account.
 --

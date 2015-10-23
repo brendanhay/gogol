@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.groups.aliases.insert@ method which the
 -- 'GroupsAliasesInsert' request conforms to.
 type GroupsAliasesInsertResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         "aliases" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Alias :> Post '[JSON] Alias
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               "aliases" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Alias :> Post '[JSON] Alias
 
 -- | Add a alias for the group
 --

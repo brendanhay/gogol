@@ -392,7 +392,6 @@ appsCalendarService :: Service
 appsCalendarService
   = defaultService (ServiceId "calendar:v3")
       "www.googleapis.com"
-      "calendar/v3/"
 
 -- | Manage your calendars
 calendarScope :: OAuthScope

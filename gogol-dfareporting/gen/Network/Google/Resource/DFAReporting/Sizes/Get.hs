@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.sizes.get@ method which the
 -- 'SizesGet' request conforms to.
 type SizesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "sizes" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Size
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sizes" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Size
 
 -- | Gets one size by ID.
 --

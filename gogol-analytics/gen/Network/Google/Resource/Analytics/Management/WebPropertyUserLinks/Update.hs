@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webpropertyUserLinks.update@ method which the
 -- 'ManagementWebPropertyUserLinksUpdate' request conforms to.
 type ManagementWebPropertyUserLinksUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityUserLinks" :>
-                 Capture "linkId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] EntityUserLink :>
-                       Put '[JSON] EntityUserLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityUserLinks" :>
+                     Capture "linkId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] EntityUserLink :>
+                           Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given web property.
 --

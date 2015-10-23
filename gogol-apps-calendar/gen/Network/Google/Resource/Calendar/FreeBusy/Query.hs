@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.freebusy.query@ method which the
 -- 'FreeBusyQuery' request conforms to.
 type FreeBusyQueryResource =
-     "freeBusy" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] FreeBusyRequest :>
-           Post '[JSON] FreeBusyResponse
+     "calendar" :>
+       "v3" :>
+         "freeBusy" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] FreeBusyRequest :>
+               Post '[JSON] FreeBusyResponse
 
 -- | Returns free\/busy information for a set of calendars.
 --

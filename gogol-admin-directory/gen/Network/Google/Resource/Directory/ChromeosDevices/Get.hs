@@ -44,15 +44,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.chromeosdevices.get@ method which the
 -- 'ChromeosDevicesGet' request conforms to.
 type ChromeosDevicesGetResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "devices" :>
-           "chromeos" :>
-             Capture "deviceId" Text :>
-               QueryParam "projection" ChromeosDevicesGetProjection
-                 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ChromeOSDevice
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "devices" :>
+                 "chromeos" :>
+                   Capture "deviceId" Text :>
+                     QueryParam "projection" ChromeosDevicesGetProjection
+                       :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ChromeOSDevice
 
 -- | Retrieve Chrome OS Device
 --

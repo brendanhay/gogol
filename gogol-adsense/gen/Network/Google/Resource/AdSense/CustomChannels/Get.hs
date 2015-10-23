@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.customchannels.get@ method which the
 -- 'CustomChannelsGet' request conforms to.
 type CustomChannelsGetResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "customchannels" :>
-           Capture "customChannelId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] CustomChannel
+     "adsense" :>
+       "v1.4" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "customchannels" :>
+               Capture "customChannelId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] CustomChannel
 
 -- | Get the specified custom channel from the specified ad client.
 --

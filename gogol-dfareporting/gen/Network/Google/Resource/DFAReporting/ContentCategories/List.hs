@@ -48,19 +48,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.contentCategories.list@ method which the
 -- 'ContentCategoriesList' request conforms to.
 type ContentCategoriesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "contentCategories" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" ContentCategoriesListSortOrder
-                 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" ContentCategoriesListSortField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder" ContentCategoriesListSortOrder
                      :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ContentCategoriesListResponse
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField" ContentCategoriesListSortField
+                         :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ContentCategoriesListResponse
 
 -- | Retrieves a list of content categories, possibly filtered.
 --

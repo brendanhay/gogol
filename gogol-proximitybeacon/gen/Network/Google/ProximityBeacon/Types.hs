@@ -155,4 +155,3 @@ proximityBeaconService
   = defaultService
       (ServiceId "proximitybeacon:v1beta1")
       "proximitybeacon.googleapis.com"
-      ""

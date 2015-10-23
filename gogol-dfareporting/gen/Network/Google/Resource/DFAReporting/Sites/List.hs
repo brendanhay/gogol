@@ -57,28 +57,30 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.sites.list@ method which the
 -- 'SitesList' request conforms to.
 type SitesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "sites" :>
-           QueryParam "unmappedSite" Bool :>
-             QueryParams "campaignIds" Int64 :>
-               QueryParam "searchString" Text :>
-                 QueryParam "acceptsInterstitialPlacements" Bool :>
-                   QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                     QueryParams "ids" Int64 :>
-                       QueryParams "directorySiteIds" Int64 :>
-                         QueryParam "sortOrder" SitesListSortOrder :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField" SitesListSortField :>
-                               QueryParam "subaccountId" Int64 :>
-                                 QueryParam "acceptsInStreamVideoPlacements"
-                                   Bool
-                                   :>
-                                   QueryParam "approved" Bool :>
-                                     QueryParam "adWordsSite" Bool :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] SitesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               QueryParam "unmappedSite" Bool :>
+                 QueryParams "campaignIds" Int64 :>
+                   QueryParam "searchString" Text :>
+                     QueryParam "acceptsInterstitialPlacements" Bool :>
+                       QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                         QueryParams "ids" Int64 :>
+                           QueryParams "directorySiteIds" Int64 :>
+                             QueryParam "sortOrder" SitesListSortOrder :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField" SitesListSortField :>
+                                   QueryParam "subaccountId" Int64 :>
+                                     QueryParam "acceptsInStreamVideoPlacements"
+                                       Bool
+                                       :>
+                                       QueryParam "approved" Bool :>
+                                         QueryParam "adWordsSite" Bool :>
+                                           QueryParam "maxResults" Int32 :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON] SitesListResponse
 
 -- | Retrieves a list of sites, possibly filtered.
 --

@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.devices.get@ method which the
 -- 'DevicesGet' request conforms to.
 type DevicesGetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "devices" :>
-               Capture "deviceId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Device
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "devices" :>
+                   Capture "deviceId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Device
 
 -- | Retrieves the details of a device.
 --

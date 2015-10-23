@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.revisions.check@ method which the
 -- 'RevisionsCheck' request conforms to.
 type RevisionsCheckResource =
-     "revisions" :>
-       "check" :>
-         QueryParam "clientRevision" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] RevisionCheckResponse
+     "games" :>
+       "v1" :>
+         "revisions" :>
+           "check" :>
+             QueryParam "clientRevision" Text :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] RevisionCheckResponse
 
 -- | Checks whether the games client is out of date.
 --

@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.maps.create@ method which the
 -- 'MapsCreate' request conforms to.
 type MapsCreateResource =
-     "maps" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Map :> Post '[JSON] Map
+     "mapsengine" :>
+       "v1" :>
+         "maps" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Map :> Post '[JSON] Map
 
 -- | Create a map asset.
 --

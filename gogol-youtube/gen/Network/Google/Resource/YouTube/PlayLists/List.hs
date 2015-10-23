@@ -52,18 +52,20 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.playlists.list@ method which the
 -- 'PlayListsList' request conforms to.
 type PlayListsListResource =
-     "playlists" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "channelId" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] PlayListListResponse
+     "youtube" :>
+       "v3" :>
+         "playlists" :>
+           QueryParam "part" Text :>
+             QueryParam "mine" Bool :>
+               QueryParam "channelId" Text :>
+                 QueryParam "hl" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] PlayListListResponse
 
 -- | Returns a collection of playlists that match the API request parameters.
 -- For example, you can retrieve all playlists that the authenticated user

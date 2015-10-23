@@ -50,16 +50,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.recreateInstances@ method which the
 -- 'InstanceGroupManagersRecreateInstances' request conforms to.
 type InstanceGroupManagersRecreateInstancesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "recreateInstances" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersRecreateInstancesRequest
-                     :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "recreateInstances" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersRecreateInstancesRequest
+                           :> Post '[JSON] Operation
 
 -- | Schedules a group action to recreate the specified instances in the
 -- managed instance group. The instances are deleted and recreated using

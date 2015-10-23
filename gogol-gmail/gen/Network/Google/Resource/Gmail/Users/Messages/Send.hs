@@ -36,7 +36,6 @@ module Network.Google.Resource.Gmail.Users.Messages.Send
     -- * Request Lenses
     , umsPayload
     , umsUserId
-    , umsMedia
     ) where
 
 import           Network.Google.Gmail.Types
@@ -45,12 +44,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.send@ method which the
 -- 'UsersMessagesSend' request conforms to.
 type UsersMessagesSendResource =
-     Capture "userId" Text :>
-       "messages" :>
-         "send" :>
-           QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Message Body :>
-               Post '[JSON] Message
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               "send" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Message :> Post '[JSON] Message
+       :<|>
+       "upload" :>
+         "gmail" :>
+           "v1" :>
+             "users" :>
+               Capture "userId" Text :>
+                 "messages" :>
+                   "send" :>
+                     QueryParam "alt" AltJSON :>
+                       QueryParam "uploadType" AltMedia :>
+                         MultipartRelated '[JSON] Message RequestBody :>
+                           Post '[JSON] Message
 
 -- | Sends the specified message to the recipients in the To, Cc, and Bcc
 -- headers.
@@ -59,8 +72,7 @@ type UsersMessagesSendResource =
 data UsersMessagesSend = UsersMessagesSend
     { _umsPayload :: !Message
     , _umsUserId  :: !Text
-    , _umsMedia   :: !Body
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesSend' with the minimum fields required to make a request.
 --
@@ -69,18 +81,14 @@ data UsersMessagesSend = UsersMessagesSend
 -- * 'umsPayload'
 --
 -- * 'umsUserId'
---
--- * 'umsMedia'
 usersMessagesSend
     :: Message -- ^ 'umsPayload'
-    -> Text -- ^ 'umsMedia'
-    -> Body
+    -> Text
     -> UsersMessagesSend
-usersMessagesSend pUmsPayload_ pUmsUserId_ pUmsMedia_ =
+usersMessagesSend pUmsPayload_ pUmsUserId_ =
     UsersMessagesSend
     { _umsPayload = pUmsPayload_
     , _umsUserId = pUmsUserId_
-    , _umsMedia = pUmsMedia_
     }
 
 -- | Multipart request metadata.
@@ -94,15 +102,25 @@ umsUserId :: Lens' UsersMessagesSend Text
 umsUserId
   = lens _umsUserId (\ s a -> s{_umsUserId = a})
 
-umsMedia :: Lens' UsersMessagesSend Body
-umsMedia = lens _umsMedia (\ s a -> s{_umsMedia = a})
-
 instance GoogleRequest UsersMessagesSend where
         type Rs UsersMessagesSend = Message
         requestClient UsersMessagesSend{..}
-          = go _umsUserId (Just AltJSON) _umsPayload _umsMedia
+          = go _umsUserId (Just AltJSON) _umsPayload
               gmailService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy UsersMessagesSendResource)
+                      mempty
+
+instance GoogleRequest (Upload UsersMessagesSend)
+         where
+        type Rs (Upload UsersMessagesSend) = Message
+        requestClient (Upload UsersMessagesSend{..} body)
+          = go _umsUserId (Just AltJSON) (Just AltMedia)
+              _umsPayload
+              body
+              gmailService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesSendResource)
                       mempty

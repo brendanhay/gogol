@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.list@ method which the
 -- 'TableList'' request conforms to.
 type TableListResource =
-     "tables" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] TableList
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] TableList
 
 -- | Retrieves a list of tables a user owns.
 --

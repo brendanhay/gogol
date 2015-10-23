@@ -64,70 +64,83 @@ import           Network.Google.Prelude
 -- | A resource alias for @freebase.search@ method which the
 -- 'Search' request conforms to.
 type SearchMethod =
-     "search" :>
-       QueryParams "without" Text :>
-         QueryParam "cursor" Int32 :>
-           QueryParams "with" Text :>
-             QueryParams "domain" Text :>
-               QueryParam "format" FreebaseSearchFormat :>
-                 QueryParam "help" FreebaseSearchHelp :>
-                   QueryParams "lang" Text :>
-                     QueryParam "indent" Bool :>
-                       QueryParam "output" Text :>
-                         QueryParam "query" Text :>
-                           QueryParam "scoring" FreebaseSearchScoring :>
-                             QueryParam "limit" Int32 :>
-                               QueryParams "filter" Text :>
-                                 QueryParam "mql_output" Text :>
-                                   QueryParams "mid" Text :>
-                                     QueryParams "type" Text :>
-                                       QueryParam "stemmed" Bool :>
-                                         QueryParam "exact" Bool :>
-                                           QueryParam "spell"
-                                             FreebaseSearchSpell
-                                             :>
-                                             QueryParam "as_of_time" Text :>
-                                               QueryParam "encode"
-                                                 FreebaseSearchEncode
+     "freebase" :>
+       "v1" :>
+         "search" :>
+           QueryParams "without" Text :>
+             QueryParam "cursor" Int32 :>
+               QueryParams "with" Text :>
+                 QueryParams "domain" Text :>
+                   QueryParam "format" FreebaseSearchFormat :>
+                     QueryParam "help" FreebaseSearchHelp :>
+                       QueryParams "lang" Text :>
+                         QueryParam "indent" Bool :>
+                           QueryParam "output" Text :>
+                             QueryParam "query" Text :>
+                               QueryParam "scoring" FreebaseSearchScoring :>
+                                 QueryParam "limit" Int32 :>
+                                   QueryParams "filter" Text :>
+                                     QueryParam "mql_output" Text :>
+                                       QueryParams "mid" Text :>
+                                         QueryParams "type" Text :>
+                                           QueryParam "stemmed" Bool :>
+                                             QueryParam "exact" Bool :>
+                                               QueryParam "spell"
+                                                 FreebaseSearchSpell
                                                  :>
-                                                 QueryParam "prefixed" Bool :>
-                                                   QueryParam "callback" Text :>
-                                                     QueryParam "alt" AltJSON :>
-                                                       Get '[JSON] ()
-       :<|>
-       "search" :>
-         QueryParams "without" Text :>
-           QueryParam "cursor" Int32 :>
-             QueryParams "with" Text :>
-               QueryParams "domain" Text :>
-                 QueryParam "format" FreebaseSearchFormat :>
-                   QueryParam "help" FreebaseSearchHelp :>
-                     QueryParams "lang" Text :>
-                       QueryParam "indent" Bool :>
-                         QueryParam "output" Text :>
-                           QueryParam "query" Text :>
-                             QueryParam "scoring" FreebaseSearchScoring :>
-                               QueryParam "limit" Int32 :>
-                                 QueryParams "filter" Text :>
-                                   QueryParam "mql_output" Text :>
-                                     QueryParams "mid" Text :>
-                                       QueryParams "type" Text :>
-                                         QueryParam "stemmed" Bool :>
-                                           QueryParam "exact" Bool :>
-                                             QueryParam "spell"
-                                               FreebaseSearchSpell
-                                               :>
-                                               QueryParam "as_of_time" Text :>
-                                                 QueryParam "encode"
-                                                   FreebaseSearchEncode
-                                                   :>
-                                                   QueryParam "prefixed" Bool :>
-                                                     QueryParam "callback" Text
+                                                 QueryParam "as_of_time" Text :>
+                                                   QueryParam "encode"
+                                                     FreebaseSearchEncode
+                                                     :>
+                                                     QueryParam "prefixed" Bool
                                                        :>
-                                                       QueryParam "alt" AltMedia
+                                                       QueryParam "callback"
+                                                         Text
                                                          :>
-                                                         Get '[OctetStream]
-                                                           Stream
+                                                         QueryParam "alt"
+                                                           AltJSON
+                                                           :> Get '[JSON] ()
+       :<|>
+       "freebase" :>
+         "v1" :>
+           "search" :>
+             QueryParams "without" Text :>
+               QueryParam "cursor" Int32 :>
+                 QueryParams "with" Text :>
+                   QueryParams "domain" Text :>
+                     QueryParam "format" FreebaseSearchFormat :>
+                       QueryParam "help" FreebaseSearchHelp :>
+                         QueryParams "lang" Text :>
+                           QueryParam "indent" Bool :>
+                             QueryParam "output" Text :>
+                               QueryParam "query" Text :>
+                                 QueryParam "scoring" FreebaseSearchScoring :>
+                                   QueryParam "limit" Int32 :>
+                                     QueryParams "filter" Text :>
+                                       QueryParam "mql_output" Text :>
+                                         QueryParams "mid" Text :>
+                                           QueryParams "type" Text :>
+                                             QueryParam "stemmed" Bool :>
+                                               QueryParam "exact" Bool :>
+                                                 QueryParam "spell"
+                                                   FreebaseSearchSpell
+                                                   :>
+                                                   QueryParam "as_of_time" Text
+                                                     :>
+                                                     QueryParam "encode"
+                                                       FreebaseSearchEncode
+                                                       :>
+                                                       QueryParam "prefixed"
+                                                         Bool
+                                                         :>
+                                                         QueryParam "callback"
+                                                           Text
+                                                           :>
+                                                           QueryParam "alt"
+                                                             AltMedia
+                                                             :>
+                                                             Get '[OctetStream]
+                                                               Stream
 
 -- | Search Freebase open data.
 --

@@ -54,22 +54,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.postUserInfos.list@ method which the
 -- 'PostUserInfosList'' request conforms to.
 type PostUserInfosListResource =
-     "users" :>
-       Capture "userId" Text :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               QueryParams "status" PostUserInfosListStatus :>
-                 QueryParam "orderBy" PostUserInfosListOrderBy :>
-                   QueryParam "endDate" DateTime' :>
-                     QueryParam "startDate" DateTime' :>
-                       QueryParam "fetchBodies" Bool :>
-                         QueryParam "view" PostUserInfosListView :>
-                           QueryParam "labels" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] PostUserInfosList
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             "blogs" :>
+               Capture "blogId" Text :>
+                 "posts" :>
+                   QueryParams "status" PostUserInfosListStatus :>
+                     QueryParam "orderBy" PostUserInfosListOrderBy :>
+                       QueryParam "endDate" DateTime' :>
+                         QueryParam "startDate" DateTime' :>
+                           QueryParam "fetchBodies" Bool :>
+                             QueryParam "view" PostUserInfosListView :>
+                               QueryParam "labels" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "maxResults" Word32 :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] PostUserInfosList
 
 -- | Retrieves a list of post and post user info pairs, possibly filtered.
 -- The post user info contains per-user information about the post, such as

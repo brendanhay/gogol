@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.setTags@ method which the
 -- 'InstancesSetTags' request conforms to.
 type InstancesSetTagsResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "setTags" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Tags :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "setTags" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Tags :> Post '[JSON] Operation
 
 -- | Sets tags for the specified instance to the data included in the
 -- request.

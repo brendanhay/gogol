@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.datasets.get@ method which the
 -- 'DataSetsGet' request conforms to.
 type DataSetsGetResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] DataSet
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] DataSet
 
 -- | Returns the dataset specified by datasetID.
 --

@@ -50,14 +50,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudmonitoring.metricDescriptors.list@ method which the
 -- 'MetricDescriptorsList' request conforms to.
 type MetricDescriptorsListResource =
-     Capture "project" Text :>
-       "metricDescriptors" :>
-         QueryParam "count" Int32 :>
-           QueryParam "query" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ListMetricDescriptorsRequest :>
-                   Get '[JSON] ListMetricDescriptorsResponse
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "metricDescriptors" :>
+               QueryParam "count" Int32 :>
+                 QueryParam "query" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ListMetricDescriptorsRequest :>
+                         Get '[JSON] ListMetricDescriptorsResponse
 
 -- | List metric descriptors that match the query. If the query is not set,
 -- then all of the metric descriptors will be returned. Large responses

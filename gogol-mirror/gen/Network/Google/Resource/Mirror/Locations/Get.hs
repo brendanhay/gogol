@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.locations.get@ method which the
 -- 'LocationsGet' request conforms to.
 type LocationsGetResource =
-     "locations" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Location
+     "mirror" :>
+       "v1" :>
+         "locations" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Location
 
 -- | Gets a single location by ID.
 --

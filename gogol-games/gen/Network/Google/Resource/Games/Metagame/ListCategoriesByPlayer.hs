@@ -47,17 +47,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.metagame.listCategoriesByPlayer@ method which the
 -- 'MetagameListCategoriesByPlayer' request conforms to.
 type MetagameListCategoriesByPlayerResource =
-     "players" :>
-       Capture "playerId" Text :>
-         "categories" :>
-           Capture "collection"
-             MetagameListCategoriesByPlayerCollection
-             :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] CategoryListResponse
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "categories" :>
+               Capture "collection"
+                 MetagameListCategoriesByPlayerCollection
+                 :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] CategoryListResponse
 
 -- | List play data aggregated per category for the player corresponding to
 -- playerId.

@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasterCollections.get@ method which the
 -- 'RasterCollectionsGet' request conforms to.
 type RasterCollectionsGetResource =
-     "rasterCollections" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           Get '[JSON] RasterCollection
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] RasterCollection
 
 -- | Return metadata for a particular raster collection.
 --

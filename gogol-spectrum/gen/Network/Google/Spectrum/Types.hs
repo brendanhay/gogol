@@ -296,4 +296,3 @@ spectrumService :: Service
 spectrumService
   = defaultService (ServiceId "spectrum:v1explorer")
       "www.googleapis.com"
-      "spectrum/v1explorer/paws/"

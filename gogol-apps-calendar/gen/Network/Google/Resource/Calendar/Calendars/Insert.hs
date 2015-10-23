@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendars.insert@ method which the
 -- 'CalendarsInsert' request conforms to.
 type CalendarsInsertResource =
-     "calendars" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Calendar :> Post '[JSON] Calendar
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Calendar :> Post '[JSON] Calendar
 
 -- | Creates a secondary calendar.
 --

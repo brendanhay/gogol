@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.domains.insert@ method which the
 -- 'DomainsInsert' request conforms to.
 type DomainsInsertResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "domains" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Domains :> Post '[JSON] Domains
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "domains" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Domains :> Post '[JSON] Domains
 
 -- | Inserts a domain of the customer.
 --

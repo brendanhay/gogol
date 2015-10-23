@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightActivities.insert@ method which the
 -- 'FloodlightActivitiesInsert' request conforms to.
 type FloodlightActivitiesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightActivities" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] FloodlightActivity :>
-               Post '[JSON] FloodlightActivity
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] FloodlightActivity :>
+                   Post '[JSON] FloodlightActivity
 
 -- | Inserts a new floodlight activity.
 --

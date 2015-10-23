@@ -43,11 +43,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.i18nRegions.list@ method which the
 -- 'I18nRegionsList' request conforms to.
 type I18nRegionsListResource =
-     "i18nRegions" :>
-       QueryParam "part" Text :>
-         QueryParam "hl" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] I18nRegionListResponse
+     "youtube" :>
+       "v3" :>
+         "i18nRegions" :>
+           QueryParam "part" Text :>
+             QueryParam "hl" Text :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] I18nRegionListResponse
 
 -- | Returns a list of content regions that the YouTube website supports.
 --

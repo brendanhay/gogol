@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasks.update@ method which the
 -- 'TasksUpdate' request conforms to.
 type TasksUpdateResource =
-     "lists" :>
-       Capture "tasklist" Text :>
-         "tasks" :>
-           Capture "task" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Task :> Put '[JSON] Task
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Task :> Put '[JSON] Task
 
 -- | Updates the specified task.
 --

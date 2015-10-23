@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.networks.list@ method which the
 -- 'NetworksList' request conforms to.
 type NetworksListResource =
-     Capture "project" Text :>
-       "global" :>
-         "networks" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] NetworkList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "networks" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] NetworkList
 
 -- | Retrieves the list of network resources available to the specified
 -- project.

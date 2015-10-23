@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightConfigurations.patch@ method which the
 -- 'FloodlightConfigurationsPatch' request conforms to.
 type FloodlightConfigurationsPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightConfigurations" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] FloodlightConfiguration :>
-                 Patch '[JSON] FloodlightConfiguration
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightConfigurations" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] FloodlightConfiguration :>
+                     Patch '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration. This method supports patch
 -- semantics.

@@ -48,16 +48,18 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.list@ method which the
 -- 'ObjectsList' request conforms to.
 type ObjectsListResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           QueryParam "prefix" Text :>
-             QueryParam "versions" Bool :>
-               QueryParam "projection" ObjectsListProjection :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "delimiter" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Objects
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               QueryParam "prefix" Text :>
+                 QueryParam "versions" Bool :>
+                   QueryParam "projection" ObjectsListProjection :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "delimiter" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Objects
 
 -- | Retrieves a list of objects matching the criteria.
 --

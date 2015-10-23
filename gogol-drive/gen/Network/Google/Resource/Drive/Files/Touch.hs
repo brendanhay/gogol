@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.touch@ method which the
 -- 'FilesTouch' request conforms to.
 type FilesTouchResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "touch" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] File
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "touch" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Set the file\'s updated time to the current server time.
 --

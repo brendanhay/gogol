@@ -43,13 +43,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.databases.list@ method which the
 -- 'DatabasesList' request conforms to.
 type DatabasesListResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "databases" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] DatabasesListResponse
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] DatabasesListResponse
 
 -- | Lists databases in the specified Cloud SQL instance.
 --

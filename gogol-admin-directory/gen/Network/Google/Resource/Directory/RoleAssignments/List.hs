@@ -46,15 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roleAssignments.list@ method which the
 -- 'RoleAssignmentsList' request conforms to.
 type RoleAssignmentsListResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roleassignments" :>
-           QueryParam "roleId" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "userKey" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] RoleAssignments
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roleassignments" :>
+                 QueryParam "roleId" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "userKey" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] RoleAssignments
 
 -- | Retrieves a paginated list of all roleAssignments.
 --

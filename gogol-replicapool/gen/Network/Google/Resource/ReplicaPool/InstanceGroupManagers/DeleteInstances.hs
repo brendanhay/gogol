@@ -48,16 +48,19 @@ import           Network.Google.ReplicaPool.Types
 -- | A resource alias for @replicapool.instanceGroupManagers.deleteInstances@ method which the
 -- 'InstanceGroupManagersDeleteInstances' request conforms to.
 type InstanceGroupManagersDeleteInstancesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "deleteInstances" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersDeleteInstancesRequest
-                     :> Post '[JSON] Operation
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "deleteInstances" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersDeleteInstancesRequest
+                           :> Post '[JSON] Operation
 
 -- | Deletes the specified instances. The instances are deleted, then removed
 -- from the instance group and any target pools of which they were a

@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendarList.delete@ method which the
 -- 'CalendarListDelete' request conforms to.
 type CalendarListDeleteResource =
-     "users" :>
-       "me" :>
-         "calendarList" :>
-           Capture "calendarId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "calendarList" :>
+               Capture "calendarId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an entry on the user\'s calendar list.
 --

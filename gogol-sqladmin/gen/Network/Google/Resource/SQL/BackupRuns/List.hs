@@ -46,15 +46,17 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.backupRuns.list@ method which the
 -- 'BackupRunsList' request conforms to.
 type BackupRunsListResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "backupRuns" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] BackupRunsListResponse
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "backupRuns" :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] BackupRunsListResponse
 
 -- | Lists all backup runs associated with a given instance and configuration
 -- in the reverse chronological order of the enqueued time.

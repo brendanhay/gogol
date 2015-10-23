@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placementStrategies.insert@ method which the
 -- 'PlacementStrategiesInsert' request conforms to.
 type PlacementStrategiesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placementStrategies" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] PlacementStrategy :>
-               Post '[JSON] PlacementStrategy
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] PlacementStrategy :>
+                   Post '[JSON] PlacementStrategy
 
 -- | Inserts a new placement strategy.
 --

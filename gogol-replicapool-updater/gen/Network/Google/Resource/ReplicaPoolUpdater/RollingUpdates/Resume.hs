@@ -45,13 +45,16 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.rollingUpdates.resume@ method which the
 -- 'RollingUpdatesResume' request conforms to.
 type RollingUpdatesResumeResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "rollingUpdates" :>
-             Capture "rollingUpdate" Text :>
-               "resume" :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "rollingUpdates" :>
+                   Capture "rollingUpdate" Text :>
+                     "resume" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Continues an update in PAUSED state. Has no effect if invoked when the
 -- state of the update is ROLLED_OUT.

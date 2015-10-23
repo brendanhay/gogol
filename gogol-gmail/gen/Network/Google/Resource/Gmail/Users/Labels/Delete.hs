@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.labels.delete@ method which the
 -- 'UsersLabelsDelete' request conforms to.
 type UsersLabelsDeleteResource =
-     Capture "userId" Text :>
-       "labels" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified label and removes it
 -- from any messages and threads that it is applied to.

@@ -43,10 +43,12 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.productstatuses.get@ method which the
 -- 'ProductstatusesGet' request conforms to.
 type ProductstatusesGetResource =
-     Capture "merchantId" Word64 :>
-       "productstatuses" :>
-         Capture "productId" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] ProductStatus
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "productstatuses" :>
+             Capture "productId" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] ProductStatus
 
 -- | Gets the status of a product from your Merchant Center account.
 --

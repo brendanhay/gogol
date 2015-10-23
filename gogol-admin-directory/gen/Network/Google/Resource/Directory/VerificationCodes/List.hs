@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.verificationCodes.list@ method which the
 -- 'VerificationCodesList' request conforms to.
 type VerificationCodesListResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "verificationCodes" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] VerificationCodes
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "verificationCodes" :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] VerificationCodes
 
 -- | Returns the current set of valid backup verification codes for the
 -- specified user.

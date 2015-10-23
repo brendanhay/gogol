@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.backendServices.insert@ method which the
 -- 'BackendServicesInsert' request conforms to.
 type BackendServicesInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "backendServices" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] BackendService :>
-               Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "backendServices" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] BackendService :>
+                     Post '[JSON] Operation
 
 -- | Creates a BackendService resource in the specified project using the
 -- data included in the request.

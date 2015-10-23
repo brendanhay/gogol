@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.sessions.update@ method which the
 -- 'UsersSessionsUpdate' request conforms to.
 type UsersSessionsUpdateResource =
-     Capture "userId" Text :>
-       "sessions" :>
-         Capture "sessionId" Text :>
-           QueryParam "currentTimeMillis" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Session :> Put '[JSON] Session
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "sessions" :>
+               Capture "sessionId" Text :>
+                 QueryParam "currentTimeMillis" Int64 :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Session :> Put '[JSON] Session
 
 -- | Updates or insert a given session.
 --

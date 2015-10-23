@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.achievements.unlock@ method which the
 -- 'AchievementsUnlock' request conforms to.
 type AchievementsUnlockResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         "unlock" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] AchievementUnlockResponse
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "unlock" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] AchievementUnlockResponse
 
 -- | Unlocks this achievement for the currently authenticated player.
 --

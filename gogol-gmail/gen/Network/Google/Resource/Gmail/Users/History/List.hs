@@ -47,14 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.history.list@ method which the
 -- 'UsersHistoryList' request conforms to.
 type UsersHistoryListResource =
-     Capture "userId" Text :>
-       "history" :>
-         QueryParam "startHistoryId" Word64 :>
-           QueryParam "pageToken" Text :>
-             QueryParam "labelId" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ListHistoryResponse
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "history" :>
+               QueryParam "startHistoryId" Word64 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "labelId" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ListHistoryResponse
 
 -- | Lists the history of all changes to the given mailbox. History results
 -- are returned in chronological order (increasing historyId).

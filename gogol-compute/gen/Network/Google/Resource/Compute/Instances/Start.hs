@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.start@ method which the
 -- 'InstancesStart' request conforms to.
 type InstancesStartResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "start" :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "start" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method starts an instance that was stopped using the using the
 -- instances().stop method. For more information, see Restart an instance.

@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.goals.insert@ method which the
 -- 'ManagementGoalsInsert' request conforms to.
 type ManagementGoalsInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "goals" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Goal :> Post '[JSON] Goal
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "goals" :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Goal :> Post '[JSON] Goal
 
 -- | Create a new goal.
 --

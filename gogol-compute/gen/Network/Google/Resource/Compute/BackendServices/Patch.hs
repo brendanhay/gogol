@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.backendServices.patch@ method which the
 -- 'BackendServicesPatch' request conforms to.
 type BackendServicesPatchResource =
-     Capture "project" Text :>
-       "global" :>
-         "backendServices" :>
-           Capture "backendService" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] BackendService :>
-                 Patch '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "backendServices" :>
+                 Capture "backendService" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] BackendService :>
+                       Patch '[JSON] Operation
 
 -- | Update the entire content of the BackendService resource. This method
 -- supports patch semantics.

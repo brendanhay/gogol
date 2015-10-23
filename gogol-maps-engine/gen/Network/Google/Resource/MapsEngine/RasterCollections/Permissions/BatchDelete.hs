@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- 'RasterCollectionsPermissionsBatchDelete' request conforms to.
 type RasterCollectionsPermissionsBatchDeleteResource
      =
-     "rasterCollections" :>
-       Capture "id" Text :>
-         "permissions" :>
-           "batchDelete" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] PermissionsBatchDeleteRequest :>
-                 Post '[JSON] PermissionsBatchDeleteResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           Capture "id" Text :>
+             "permissions" :>
+               "batchDelete" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] PermissionsBatchDeleteRequest :>
+                     Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --

@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.volumes.recommended.rate@ method which the
 -- 'VolumesRecommendedRate' request conforms to.
 type VolumesRecommendedRateResource =
-     "volumes" :>
-       "recommended" :>
-         "rate" :>
-           QueryParam "rating" VolumesRecommendedRateRating :>
-             QueryParam "volumeId" Text :>
-               QueryParam "locale" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] BooksVolumesRecommendedRateResponse
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           "recommended" :>
+             "rate" :>
+               QueryParam "rating" VolumesRecommendedRateRating :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "source" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] BooksVolumesRecommendedRateResponse
 
 -- | Rate a recommended book for the current user.
 --

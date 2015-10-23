@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.parents.delete@ method which the
 -- 'ParentsDelete' request conforms to.
 type ParentsDeleteResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "parents" :>
-           Capture "parentId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "parents" :>
+               Capture "parentId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a parent from a file.
 --

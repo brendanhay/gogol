@@ -45,15 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroups.setNamedPorts@ method which the
 -- 'InstanceGroupsSetNamedPorts' request conforms to.
 type InstanceGroupsSetNamedPortsResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroups" :>
-             Capture "instanceGroup" Text :>
-               "setNamedPorts" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] InstanceGroupsSetNamedPortsRequest :>
-                     Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroups" :>
+                   Capture "instanceGroup" Text :>
+                     "setNamedPorts" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] InstanceGroupsSetNamedPortsRequest :>
+                           Post '[JSON] Operation
 
 -- | Sets the named ports for the specified instance group.
 --

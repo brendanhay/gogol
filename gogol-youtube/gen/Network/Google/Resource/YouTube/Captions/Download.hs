@@ -49,22 +49,26 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.captions.download@ method which the
 -- 'CaptionsDownload' request conforms to.
 type CaptionsDownloadResource =
-     "captions" :>
-       Capture "id" Text :>
-         QueryParam "onBehalfOf" Text :>
-           QueryParam "tlang" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "tfmt" CaptionsDownloadTfmt :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "captions" :>
+           Capture "id" Text :>
+             QueryParam "onBehalfOf" Text :>
+               QueryParam "tlang" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "tfmt" CaptionsDownloadTfmt :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
-       "captions" :>
-         Capture "id" Text :>
-           QueryParam "onBehalfOf" Text :>
-             QueryParam "tlang" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "tfmt" CaptionsDownloadTfmt :>
-                   QueryParam "alt" AltMedia :>
-                     Get '[OctetStream] Stream
+       "youtube" :>
+         "v3" :>
+           "captions" :>
+             Capture "id" Text :>
+               QueryParam "onBehalfOf" Text :>
+                 QueryParam "tlang" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "tfmt" CaptionsDownloadTfmt :>
+                       QueryParam "alt" AltMedia :>
+                         Get '[OctetStream] Stream
 
 -- | Downloads a caption track. The caption track is returned in its original
 -- format unless the request specifies a value for the tfmt parameter and

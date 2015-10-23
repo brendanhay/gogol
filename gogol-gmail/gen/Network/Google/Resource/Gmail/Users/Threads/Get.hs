@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.threads.get@ method which the
 -- 'UsersThreadsGet' request conforms to.
 type UsersThreadsGetResource =
-     Capture "userId" Text :>
-       "threads" :>
-         Capture "id" Text :>
-           QueryParam "format" UsersThreadsGetFormat :>
-             QueryParams "metadataHeaders" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Thread
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 QueryParam "format" UsersThreadsGetFormat :>
+                   QueryParams "metadataHeaders" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Thread
 
 -- | Gets the specified thread.
 --

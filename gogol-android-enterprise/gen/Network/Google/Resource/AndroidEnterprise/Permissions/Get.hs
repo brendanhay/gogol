@@ -44,10 +44,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.permissions.get@ method which the
 -- 'PermissionsGet' request conforms to.
 type PermissionsGetResource =
-     "permissions" :>
-       Capture "permissionId" Text :>
-         QueryParam "language" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Permission
+     "androidenterprise" :>
+       "v1" :>
+         "permissions" :>
+           Capture "permissionId" Text :>
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Permission
 
 -- | Retrieves details of an Android app permission for display to an
 -- enterprise admin.

@@ -48,21 +48,23 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placementStrategies.list@ method which the
 -- 'PlacementStrategiesList' request conforms to.
 type PlacementStrategiesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placementStrategies" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder"
-                 PlacementStrategiesListSortOrder
-                 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField"
-                     PlacementStrategiesListSortField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder"
+                     PlacementStrategiesListSortOrder
                      :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] PlacementStrategiesListResponse
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField"
+                         PlacementStrategiesListSortField
+                         :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] PlacementStrategiesListResponse
 
 -- | Retrieves a list of placement strategies, possibly filtered.
 --

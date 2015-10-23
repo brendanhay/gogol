@@ -42,13 +42,15 @@ import           Network.Google.SiteVerification.Types
 -- | A resource alias for @siteVerification.webResource.getToken@ method which the
 -- 'WebResourceGetToken' request conforms to.
 type WebResourceGetTokenResource =
-     "token" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           SiteVerificationWebResourceGettokenRequest
-           :>
-           Post '[JSON]
-             SiteVerificationWebResourceGettokenResponse
+     "siteVerification" :>
+       "v1" :>
+         "token" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON]
+               SiteVerificationWebResourceGettokenRequest
+               :>
+               Post '[JSON]
+                 SiteVerificationWebResourceGettokenResponse
 
 -- | Get a verification token for placing on a website or domain.
 --

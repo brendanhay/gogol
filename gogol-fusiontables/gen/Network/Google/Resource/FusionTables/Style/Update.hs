@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.style.update@ method which the
 -- 'StyleUpdate' request conforms to.
 type StyleUpdateResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "styles" :>
-           Capture "styleId" Int32 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] StyleSetting :>
-                 Put '[JSON] StyleSetting
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "styles" :>
+               Capture "styleId" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] StyleSetting :>
+                     Put '[JSON] StyleSetting
 
 -- | Updates an existing style.
 --

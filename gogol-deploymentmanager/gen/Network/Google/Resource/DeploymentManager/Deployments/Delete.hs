@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.deployments.delete@ method which the
 -- 'DeploymentsDelete' request conforms to.
 type DeploymentsDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           Capture "deployment" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a deployment and all of the resources in the deployment.
 --

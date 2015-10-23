@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @civicinfo.divisions.search@ method which the
 -- 'DivisionsSearch' request conforms to.
 type DivisionsSearchResource =
-     "divisions" :>
-       QueryParam "query" Text :>
-         QueryParam "alt" AltJSON :>
-           Get '[JSON] DivisionSearchResponse
+     "civicinfo" :>
+       "v2" :>
+         "divisions" :>
+           QueryParam "query" Text :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] DivisionSearchResponse
 
 -- | Searches for political divisions by their natural name or OCD ID.
 --

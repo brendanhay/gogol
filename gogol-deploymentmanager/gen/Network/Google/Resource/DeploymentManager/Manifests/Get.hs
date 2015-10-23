@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.manifests.get@ method which the
 -- 'ManifestsGet' request conforms to.
 type ManifestsGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           Capture "deployment" Text :>
-             "manifests" :>
-               Capture "manifest" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Manifest
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "manifests" :>
+                     Capture "manifest" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Manifest
 
 -- | Gets information about a specific manifest.
 --

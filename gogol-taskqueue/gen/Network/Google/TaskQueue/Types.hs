@@ -80,7 +80,6 @@ taskQueueService :: Service
 taskQueueService
   = defaultService (ServiceId "taskqueue:v1beta2")
       "www.googleapis.com"
-      "taskqueue/v1beta2/projects/"
 
 -- | Consume Tasks from your Taskqueues
 taskqueueConsumerScope :: OAuthScope

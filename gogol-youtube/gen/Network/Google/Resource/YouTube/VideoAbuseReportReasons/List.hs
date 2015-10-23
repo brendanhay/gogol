@@ -44,11 +44,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.videoAbuseReportReasons.list@ method which the
 -- 'VideoAbuseReportReasonsList' request conforms to.
 type VideoAbuseReportReasonsListResource =
-     "videoAbuseReportReasons" :>
-       QueryParam "part" Text :>
-         QueryParam "hl" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] VideoAbuseReportReasonListResponse
+     "youtube" :>
+       "v3" :>
+         "videoAbuseReportReasons" :>
+           QueryParam "part" Text :>
+             QueryParam "hl" Text :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] VideoAbuseReportReasonListResponse
 
 -- | Returns a list of abuse reasons that can be used for reporting abusive
 -- videos.

@@ -47,16 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.jobs.getQueryResults@ method which the
 -- 'JobsGetQueryResults' request conforms to.
 type JobsGetQueryResultsResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "queries" :>
-           Capture "jobId" Text :>
-             QueryParam "timeoutMs" Word32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "startIndex" Word64 :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] GetQueryResultsResponse
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "queries" :>
+               Capture "jobId" Text :>
+                 QueryParam "timeoutMs" Word32 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "startIndex" Word64 :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] GetQueryResultsResponse
 
 -- | Retrieves the results of a query job.
 --

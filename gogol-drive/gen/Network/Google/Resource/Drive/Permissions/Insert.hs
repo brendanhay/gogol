@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.permissions.insert@ method which the
 -- 'PermissionsInsert' request conforms to.
 type PermissionsInsertResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "permissions" :>
-           QueryParam "emailMessage" Text :>
-             QueryParam "sendNotificationEmails" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Permission :> Post '[JSON] Permission
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               QueryParam "emailMessage" Text :>
+                 QueryParam "sendNotificationEmails" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Permission :> Post '[JSON] Permission
 
 -- | Inserts a permission for a file.
 --

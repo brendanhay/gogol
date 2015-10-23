@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.ccOffers.list@ method which the
 -- 'CcOffersList' request conforms to.
 type CcOffersListResource =
-     "publishers" :>
-       Capture "publisher" Text :>
-         "ccOffers" :>
-           QueryParams "advertiser" Text :>
-             QueryParam "projection" CcOffersListProjection :>
-               QueryParam "alt" AltJSON :> Get '[JSON] CcOffers
+     "gan" :>
+       "v1beta1" :>
+         "publishers" :>
+           Capture "publisher" Text :>
+             "ccOffers" :>
+               QueryParams "advertiser" Text :>
+                 QueryParam "projection" CcOffersListProjection :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] CcOffers
 
 -- | Retrieves credit card offers for the given publisher.
 --

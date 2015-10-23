@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.join@ method which the
 -- 'TurnBasedMatchesJoin' request conforms to.
 type TurnBasedMatchesJoinResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         "join" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               Put '[JSON] TurnBasedMatch
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "join" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Put '[JSON] TurnBasedMatch
 
 -- | Join a turn-based match.
 --

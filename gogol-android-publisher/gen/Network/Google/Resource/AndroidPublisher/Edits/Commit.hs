@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.commit@ method which the
 -- 'EditsCommit' request conforms to.
 type EditsCommitResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         CaptureMode "editId" "commit" Text :>
-           QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               CaptureMode "editId" "commit" Text :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] AppEdit
 
 -- | Commits\/applies the changes made in this edit back to the app.
 --

@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightActivityGroups.delete@ method which the
 -- 'FloodlightActivityGroupsDelete' request conforms to.
 type FloodlightActivityGroupsDeleteResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightActivityGroups" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivityGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity group.
 --

@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.urlMaps.validate@ method which the
 -- 'URLMapsValidate' request conforms to.
 type URLMapsValidateResource =
-     Capture "project" Text :>
-       "global" :>
-         "urlMaps" :>
-           Capture "urlMap" Text :>
-             "validate" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] URLMapsValidateRequest :>
-                   Post '[JSON] URLMapsValidateResponse
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "urlMaps" :>
+                 Capture "urlMap" Text :>
+                   "validate" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] URLMapsValidateRequest :>
+                         Post '[JSON] URLMapsValidateResponse
 
 -- | Run static validation for the UrlMap. In particular, the tests of the
 -- provided UrlMap will be run. Calling this method does NOT create the

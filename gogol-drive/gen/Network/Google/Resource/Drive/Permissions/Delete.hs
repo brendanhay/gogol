@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.permissions.delete@ method which the
 -- 'PermissionsDelete' request conforms to.
 type PermissionsDeleteResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "permissions" :>
-           Capture "permissionId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a permission from a file.
 --

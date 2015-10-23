@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountPermissions.list@ method which the
 -- 'AccountPermissionsList' request conforms to.
 type AccountPermissionsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountPermissions" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] AccountPermissionsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountPermissions" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] AccountPermissionsListResponse
 
 -- | Retrieves the list of account permissions.
 --

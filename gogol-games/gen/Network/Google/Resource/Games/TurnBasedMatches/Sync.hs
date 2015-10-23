@@ -49,15 +49,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.sync@ method which the
 -- 'TurnBasedMatchesSync' request conforms to.
 type TurnBasedMatchesSyncResource =
-     "turnbasedmatches" :>
-       "sync" :>
-         QueryParam "maxCompletedMatches" Int32 :>
-           QueryParam "includeMatchData" Bool :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] TurnBasedMatchSync
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           "sync" :>
+             QueryParam "maxCompletedMatches" Int32 :>
+               QueryParam "includeMatchData" Bool :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] TurnBasedMatchSync
 
 -- | Returns turn-based matches the player is or was involved in that changed
 -- since the last sync call, with the least recent changes coming first.

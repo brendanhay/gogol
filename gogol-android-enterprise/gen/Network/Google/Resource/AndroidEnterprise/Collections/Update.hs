@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.collections.update@ method which the
 -- 'CollectionsUpdate' request conforms to.
 type CollectionsUpdateResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "collections" :>
-           Capture "collectionId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Collection :> Put '[JSON] Collection
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "collections" :>
+               Capture "collectionId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Collection :> Put '[JSON] Collection
 
 -- | Updates a collection.
 --

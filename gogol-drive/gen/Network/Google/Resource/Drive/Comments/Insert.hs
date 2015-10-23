@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.comments.insert@ method which the
 -- 'CommentsInsert' request conforms to.
 type CommentsInsertResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Comment :> Post '[JSON] Comment
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Comment :> Post '[JSON] Comment
 
 -- | Creates a new comment on the given file.
 --

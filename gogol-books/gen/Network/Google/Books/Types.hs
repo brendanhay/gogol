@@ -867,7 +867,6 @@ booksService :: Service
 booksService
   = defaultService (ServiceId "books:v1")
       "www.googleapis.com"
-      "books/v1/"
 
 -- | Manage your books
 booksScope :: OAuthScope

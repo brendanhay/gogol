@@ -43,11 +43,14 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.groups.get@ method which the
 -- 'GroupsGet' request conforms to.
 type GroupsGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "groups" :>
-           Capture "groupName" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Group
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 Capture "groupName" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Group
 
 -- | Returns the specified Group resource.
 --

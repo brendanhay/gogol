@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.urlchannels.list@ method which the
 -- 'URLChannelsList' request conforms to.
 type URLChannelsListResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "urlchannels" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "urlchannels" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
 
 -- | List all host URL channels in the host AdSense account.
 --

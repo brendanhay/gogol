@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendars.get@ method which the
 -- 'CalendarsGet' request conforms to.
 type CalendarsGetResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Calendar
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Calendar
 
 -- | Returns metadata for a calendar.
 --

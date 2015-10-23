@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.parents.list@ method which the
 -- 'ParentsList' request conforms to.
 type ParentsListResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "parents" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] ParentList
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "parents" :>
+               QueryParam "alt" AltJSON :> Get '[JSON] ParentList
 
 -- | Lists a file\'s parents.
 --

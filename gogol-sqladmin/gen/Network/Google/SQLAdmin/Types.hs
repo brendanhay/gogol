@@ -409,7 +409,6 @@ sQLAdminService :: Service
 sQLAdminService
   = defaultService (ServiceId "sqladmin:v1beta4")
       "www.googleapis.com"
-      "sql/v1beta4/"
 
 -- | Manage your Google SQL Service instances
 sqlserviceAdminScope :: OAuthScope

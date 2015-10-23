@@ -48,18 +48,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.expansionfiles.patch@ method which the
 -- 'EditsExpansionFilesPatch' request conforms to.
 type EditsExpansionFilesPatchResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             Capture "apkVersionCode" Int32 :>
-               "expansionFiles" :>
-                 Capture "expansionFileType"
-                   EditsExpansionFilesPatchExpansionFileType
-                   :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ExpansionFile :>
-                       Patch '[JSON] ExpansionFile
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   Capture "apkVersionCode" Int32 :>
+                     "expansionFiles" :>
+                       Capture "expansionFileType"
+                         EditsExpansionFilesPatchExpansionFileType
+                         :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ExpansionFile :>
+                             Patch '[JSON] ExpansionFile
 
 -- | Updates the APK\'s Expansion File configuration to reference another
 -- APK\'s Expansion Files. To add a new Expansion File use the Upload

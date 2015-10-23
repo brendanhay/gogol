@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.httpsHealthChecks.insert@ method which the
 -- 'HTTPSHealthChecksInsert' request conforms to.
 type HTTPSHealthChecksInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "httpsHealthChecks" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] HTTPSHealthCheck :>
-               Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "httpsHealthChecks" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] HTTPSHealthCheck :>
+                     Post '[JSON] Operation
 
 -- | Creates a HttpsHealthCheck resource in the specified project using the
 -- data included in the request.

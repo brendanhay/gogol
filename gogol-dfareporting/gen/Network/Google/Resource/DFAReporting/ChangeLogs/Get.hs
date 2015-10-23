@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.changeLogs.get@ method which the
 -- 'ChangeLogsGet' request conforms to.
 type ChangeLogsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "changeLogs" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] ChangeLog
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "changeLogs" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] ChangeLog
 
 -- | Gets one change log by ID.
 --

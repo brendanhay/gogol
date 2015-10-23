@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.posts.publish@ method which the
 -- 'PostsPublish' request conforms to.
 type PostsPublishResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             "publish" :>
-               QueryParam "publishDate" DateTime' :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Post'
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "publish" :>
+                   QueryParam "publishDate" DateTime' :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Post'
 
 -- | Publishes a draft post, optionally at the specific time of the given
 -- publishDate parameter.

@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.eventTags.update@ method which the
 -- 'EventTagsUpdate' request conforms to.
 type EventTagsUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "eventTags" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
 
 -- | Updates an existing event tag.
 --

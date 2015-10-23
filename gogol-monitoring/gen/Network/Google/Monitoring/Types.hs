@@ -188,7 +188,6 @@ monitoringService
   = defaultService
       (ServiceId "cloudmonitoring:v2beta2")
       "www.googleapis.com"
-      "cloudmonitoring/v2beta2/projects/"
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope

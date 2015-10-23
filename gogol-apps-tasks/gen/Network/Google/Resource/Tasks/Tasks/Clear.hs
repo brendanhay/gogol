@@ -44,10 +44,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasks.clear@ method which the
 -- 'TasksClear' request conforms to.
 type TasksClearResource =
-     "lists" :>
-       Capture "tasklist" Text :>
-         "clear" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "clear" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears all completed tasks from the specified task list. The affected
 -- tasks will be marked as \'hidden\' and no longer be returned by default

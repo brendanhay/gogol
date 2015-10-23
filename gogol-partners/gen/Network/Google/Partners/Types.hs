@@ -224,4 +224,3 @@ partnersService :: Service
 partnersService
   = defaultService (ServiceId "partners:v2")
       "partners.googleapis.com"
-      ""

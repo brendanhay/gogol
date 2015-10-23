@@ -43,13 +43,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.users.list@ method which the
 -- 'UsersList' request conforms to.
 type UsersListResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "users" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] UsersListResponse
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "users" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] UsersListResponse
 
 -- | Lists users in the specified Cloud SQL instance.
 --

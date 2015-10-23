@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.datasets.beginTransaction@ method which the
 -- 'DataSetsBeginTransaction' request conforms to.
 type DataSetsBeginTransactionResource =
-     Capture "datasetId" Text :>
-       "beginTransaction" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] BeginTransactionRequest :>
-             Post '[JSON] BeginTransactionResponse
+     "datastore" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             "beginTransaction" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] BeginTransactionRequest :>
+                   Post '[JSON] BeginTransactionResponse
 
 -- | Begin a new transaction.
 --

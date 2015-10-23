@@ -47,16 +47,19 @@ import           Network.Google.ReplicaPool.Types
 -- | A resource alias for @replicapool.instanceGroupManagers.abandonInstances@ method which the
 -- 'InstanceGroupManagersAbandonInstances' request conforms to.
 type InstanceGroupManagersAbandonInstancesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "abandonInstances" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersAbandonInstancesRequest
-                     :> Post '[JSON] Operation
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "abandonInstances" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersAbandonInstancesRequest
+                           :> Post '[JSON] Operation
 
 -- | Removes the specified instances from the managed instance group, and
 -- from any target pools of which they were members, without deleting the

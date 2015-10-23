@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.subaccounts.get@ method which the
 -- 'SubAccountsGet' request conforms to.
 type SubAccountsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "subaccounts" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] SubAccount
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] SubAccount
 
 -- | Gets one subaccount by ID.
 --

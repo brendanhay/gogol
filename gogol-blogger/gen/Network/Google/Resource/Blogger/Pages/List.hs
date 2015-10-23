@@ -47,15 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.pages.list@ method which the
 -- 'PagesList' request conforms to.
 type PagesListResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "pages" :>
-           QueryParams "status" PagesListStatus :>
-             QueryParam "fetchBodies" Bool :>
-               QueryParam "view" PagesListView :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] PageList
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               QueryParams "status" PagesListStatus :>
+                 QueryParam "fetchBodies" Bool :>
+                   QueryParam "view" PagesListView :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] PageList
 
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --

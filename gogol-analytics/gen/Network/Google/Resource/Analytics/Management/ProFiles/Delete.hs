@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profiles.delete@ method which the
 -- 'ManagementProFilesDelete' request conforms to.
 type ManagementProFilesDeleteResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a view (profile).
 --

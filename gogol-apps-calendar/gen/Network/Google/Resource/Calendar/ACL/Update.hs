@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.acl.update@ method which the
 -- 'ACLUpdate' request conforms to.
 type ACLUpdateResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "acl" :>
-           Capture "ruleId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ACLRule :> Put '[JSON] ACLRule
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "acl" :>
+               Capture "ruleId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] ACLRule :> Put '[JSON] ACLRule
 
 -- | Updates an access control rule.
 --

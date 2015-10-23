@@ -47,12 +47,14 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveStreams.update@ method which the
 -- 'LiveStreamsUpdate' request conforms to.
 type LiveStreamsUpdateResource =
-     "liveStreams" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] LiveStream :> Put '[JSON] LiveStream
+     "youtube" :>
+       "v3" :>
+         "liveStreams" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] LiveStream :> Put '[JSON] LiveStream
 
 -- | Updates a video stream. If the properties that you want to change cannot
 -- be updated, then you need to create a new stream with the proper

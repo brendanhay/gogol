@@ -42,7 +42,6 @@ module Network.Google.Resource.YouTube.ChannelBanners.Insert
 
     -- * Request Lenses
     , cbiPayload
-    , cbiMedia
     , cbiOnBehalfOfContentOwner
     ) where
 
@@ -52,12 +51,26 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.channelBanners.insert@ method which the
 -- 'ChannelBannersInsert' request conforms to.
 type ChannelBannersInsertResource =
-     "channelBanners" :>
-       "insert" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] ChannelBannerResource Body
-               :> Post '[JSON] ChannelBannerResource
+     "youtube" :>
+       "v3" :>
+         "channelBanners" :>
+           "insert" :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ChannelBannerResource :>
+                   Post '[JSON] ChannelBannerResource
+       :<|>
+       "upload" :>
+         "youtube" :>
+           "v3" :>
+             "channelBanners" :>
+               "insert" :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "alt" AltJSON :>
+                     QueryParam "uploadType" AltMedia :>
+                       MultipartRelated '[JSON] ChannelBannerResource
+                         RequestBody
+                         :> Post '[JSON] ChannelBannerResource
 
 -- | Uploads a channel banner image to YouTube. This method represents the
 -- first two steps in a three-step process to update the banner image for a
@@ -72,9 +85,8 @@ type ChannelBannersInsertResource =
 -- /See:/ 'channelBannersInsert' smart constructor.
 data ChannelBannersInsert = ChannelBannersInsert
     { _cbiPayload                :: !ChannelBannerResource
-    , _cbiMedia                  :: !Body
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelBannersInsert' with the minimum fields required to make a request.
 --
@@ -82,17 +94,13 @@ data ChannelBannersInsert = ChannelBannersInsert
 --
 -- * 'cbiPayload'
 --
--- * 'cbiMedia'
---
 -- * 'cbiOnBehalfOfContentOwner'
 channelBannersInsert
     :: ChannelBannerResource -- ^ 'cbiPayload'
-    -> Body -- ^ 'cbiMedia'
     -> ChannelBannersInsert
-channelBannersInsert pCbiPayload_ pCbiMedia_ =
+channelBannersInsert pCbiPayload_ =
     ChannelBannersInsert
     { _cbiPayload = pCbiPayload_
-    , _cbiMedia = pCbiMedia_
     , _cbiOnBehalfOfContentOwner = Nothing
     }
 
@@ -100,9 +108,6 @@ channelBannersInsert pCbiPayload_ pCbiMedia_ =
 cbiPayload :: Lens' ChannelBannersInsert ChannelBannerResource
 cbiPayload
   = lens _cbiPayload (\ s a -> s{_cbiPayload = a})
-
-cbiMedia :: Lens' ChannelBannersInsert Body
-cbiMedia = lens _cbiMedia (\ s a -> s{_cbiMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -124,9 +129,23 @@ instance GoogleRequest ChannelBannersInsert where
         requestClient ChannelBannersInsert{..}
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               _cbiPayload
-              _cbiMedia
               youTubeService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy ChannelBannersInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload ChannelBannersInsert)
+         where
+        type Rs (Upload ChannelBannersInsert) =
+             ChannelBannerResource
+        requestClient (Upload ChannelBannersInsert{..} body)
+          = go _cbiOnBehalfOfContentOwner (Just AltJSON)
+              (Just AltMedia)
+              _cbiPayload
+              body
+              youTubeService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy ChannelBannersInsertResource)
                       mempty

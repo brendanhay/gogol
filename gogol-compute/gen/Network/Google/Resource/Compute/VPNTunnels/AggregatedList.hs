@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.vpnTunnels.aggregatedList@ method which the
 -- 'VPNTunnelsAggregatedList' request conforms to.
 type VPNTunnelsAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "vpnTunnels" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] VPNTunnelAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "vpnTunnels" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] VPNTunnelAggregatedList
 
 -- | Retrieves the list of VPN tunnels grouped by scope.
 --

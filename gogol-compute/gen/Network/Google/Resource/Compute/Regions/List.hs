@@ -46,12 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.regions.list@ method which the
 -- 'RegionsList' request conforms to.
 type RegionsListResource =
-     Capture "project" Text :>
-       "regions" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] RegionList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               QueryParam "filter" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] RegionList
 
 -- | Retrieves the list of region resources available to the specified
 -- project.

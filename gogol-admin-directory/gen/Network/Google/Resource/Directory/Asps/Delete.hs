@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.asps.delete@ method which the
 -- 'AspsDelete' request conforms to.
 type AspsDeleteResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "asps" :>
-           Capture "codeId" Int32 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "asps" :>
+                 Capture "codeId" Int32 :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an ASP issued by a user.
 --

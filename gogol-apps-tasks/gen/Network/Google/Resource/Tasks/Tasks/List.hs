@@ -52,20 +52,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasks.list@ method which the
 -- 'TasksList' request conforms to.
 type TasksListResource =
-     "lists" :>
-       Capture "tasklist" Text :>
-         "tasks" :>
-           QueryParam "dueMax" Text :>
-             QueryParam "showDeleted" Bool :>
-               QueryParam "showCompleted" Bool :>
-                 QueryParam "dueMin" Text :>
-                   QueryParam "showHidden" Bool :>
-                     QueryParam "completedMax" Text :>
-                       QueryParam "updatedMin" Text :>
-                         QueryParam "completedMin" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" Int64 :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] Tasks
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               QueryParam "dueMax" Text :>
+                 QueryParam "showDeleted" Bool :>
+                   QueryParam "showCompleted" Bool :>
+                     QueryParam "dueMin" Text :>
+                       QueryParam "showHidden" Bool :>
+                         QueryParam "completedMax" Text :>
+                           QueryParam "updatedMin" Text :>
+                             QueryParam "completedMin" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "maxResults" Int64 :>
+                                   QueryParam "alt" AltJSON :> Get '[JSON] Tasks
 
 -- | Returns all tasks in the specified task list.
 --

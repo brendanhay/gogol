@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.quickAdd@ method which the
 -- 'EventsQuickAdd' request conforms to.
 type EventsQuickAddResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           "quickAdd" :>
-             QueryParam "text" Text :>
-               QueryParam "sendNotifications" Bool :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Event
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               "quickAdd" :>
+                 QueryParam "text" Text :>
+                   QueryParam "sendNotifications" Bool :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Creates an event based on a simple text string.
 --

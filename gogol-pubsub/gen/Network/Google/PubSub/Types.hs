@@ -161,7 +161,6 @@ pubSubService :: Service
 pubSubService
   = defaultService (ServiceId "pubsub:v1")
       "pubsub.googleapis.com"
-      ""
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope

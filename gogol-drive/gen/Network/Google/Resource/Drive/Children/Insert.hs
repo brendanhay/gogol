@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.children.insert@ method which the
 -- 'ChildrenInsert' request conforms to.
 type ChildrenInsertResource =
-     "files" :>
-       Capture "folderId" Text :>
-         "children" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ChildReference :>
-               Post '[JSON] ChildReference
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "folderId" Text :>
+             "children" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ChildReference :>
+                   Post '[JSON] ChildReference
 
 -- | Inserts a file into a folder.
 --

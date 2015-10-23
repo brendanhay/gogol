@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.deployments.stop@ method which the
 -- 'DeploymentsStop' request conforms to.
 type DeploymentsStopResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           Capture "deployment" Text :>
-             "stop" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] DeploymentsStopRequest :>
-                   Post '[JSON] Operation
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "stop" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] DeploymentsStopRequest :>
+                         Post '[JSON] Operation
 
 -- | Stops an ongoing operation. This does not roll back any work that has
 -- already been completed, but prevents any new work from being started.

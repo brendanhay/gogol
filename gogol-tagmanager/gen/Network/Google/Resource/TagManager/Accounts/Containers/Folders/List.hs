@@ -43,13 +43,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.folders.list@ method which the
 -- 'AccountsContainersFoldersList' request conforms to.
 type AccountsContainersFoldersListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "folders" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ListFoldersResponse
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "folders" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ListFoldersResponse
 
 -- | Lists all GTM Folders of a Container.
 --

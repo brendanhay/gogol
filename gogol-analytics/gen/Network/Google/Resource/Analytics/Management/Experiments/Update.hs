@@ -46,17 +46,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.experiments.update@ method which the
 -- 'ManagementExperimentsUpdate' request conforms to.
 type ManagementExperimentsUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "experiments" :>
-                     Capture "experimentId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Experiment :> Put '[JSON] Experiment
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         Capture "experimentId" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Experiment :>
+                               Put '[JSON] Experiment
 
 -- | Update an existing experiment.
 --

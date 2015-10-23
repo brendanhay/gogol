@@ -45,10 +45,13 @@ import           Network.Google.Spectrum.Types
 -- | A resource alias for @spectrum.paws.notifySpectrumUse@ method which the
 -- 'PawsNotifySpectrumUse' request conforms to.
 type PawsNotifySpectrumUseResource =
-     "notifySpectrumUse" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] PawsNotifySpectrumUseRequest :>
-           Post '[JSON] PawsNotifySpectrumUseResponse
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "notifySpectrumUse" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PawsNotifySpectrumUseRequest :>
+                 Post '[JSON] PawsNotifySpectrumUseResponse
 
 -- | Notifies the database that the device has selected certain frequency
 -- ranges for transmission. Only to be invoked when required by the

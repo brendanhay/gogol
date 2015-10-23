@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.urlMaps.get@ method which the
 -- 'URLMapsGet' request conforms to.
 type URLMapsGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "urlMaps" :>
-           Capture "urlMap" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] URLMap
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "urlMaps" :>
+                 Capture "urlMap" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] URLMap
 
 -- | Returns the specified UrlMap resource.
 --

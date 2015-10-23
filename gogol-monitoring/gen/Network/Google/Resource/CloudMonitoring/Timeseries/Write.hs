@@ -49,11 +49,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudmonitoring.timeseries.write@ method which the
 -- 'TimeseriesWrite' request conforms to.
 type TimeseriesWriteResource =
-     Capture "project" Text :>
-       "timeseries:write" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] WriteTimeseriesRequest :>
-             Post '[JSON] WriteTimeseriesResponse
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "timeseries:write" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] WriteTimeseriesRequest :>
+                   Post '[JSON] WriteTimeseriesResponse
 
 -- | Put data points to one or more time series for one or more metrics. If a
 -- time series does not exist, a new time series will be created. It is not

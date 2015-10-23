@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.entitlements.list@ method which the
 -- 'EntitlementsList' request conforms to.
 type EntitlementsListResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "entitlements" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] EntitlementsListResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "entitlements" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] EntitlementsListResponse
 
 -- | List of all entitlements for the specified user. Only the ID is set.
 --

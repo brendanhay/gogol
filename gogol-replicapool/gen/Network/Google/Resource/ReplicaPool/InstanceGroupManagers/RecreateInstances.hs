@@ -46,16 +46,19 @@ import           Network.Google.ReplicaPool.Types
 -- | A resource alias for @replicapool.instanceGroupManagers.recreateInstances@ method which the
 -- 'InstanceGroupManagersRecreateInstances' request conforms to.
 type InstanceGroupManagersRecreateInstancesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "recreateInstances" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersRecreateInstancesRequest
-                     :> Post '[JSON] Operation
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "recreateInstances" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersRecreateInstancesRequest
+                           :> Post '[JSON] Operation
 
 -- | Recreates the specified instances. The instances are deleted, then
 -- recreated using the instance group manager\'s current instance template.

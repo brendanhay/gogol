@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.process@ method which the
 -- 'LayersProcess' request conforms to.
 type LayersProcessResource =
-     "layers" :>
-       Capture "id" Text :>
-         "process" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] ProcessResponse
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             "process" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] ProcessResponse
 
 -- | Process a layer asset.
 --

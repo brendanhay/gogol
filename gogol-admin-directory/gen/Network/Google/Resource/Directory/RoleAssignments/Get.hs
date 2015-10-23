@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roleAssignments.get@ method which the
 -- 'RoleAssignmentsGet' request conforms to.
 type RoleAssignmentsGetResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roleassignments" :>
-           Capture "roleAssignmentId" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] RoleAssignment
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roleassignments" :>
+                 Capture "roleAssignmentId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] RoleAssignment
 
 -- | Retrieve a role assignment.
 --

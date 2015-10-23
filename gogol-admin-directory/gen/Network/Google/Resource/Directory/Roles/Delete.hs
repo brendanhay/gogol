@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roles.delete@ method which the
 -- 'RolesDelete' request conforms to.
 type RolesDeleteResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roles" :>
-           Capture "roleId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roles" :>
+                 Capture "roleId" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a role.
 --

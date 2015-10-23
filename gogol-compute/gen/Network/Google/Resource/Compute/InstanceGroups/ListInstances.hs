@@ -48,18 +48,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroups.listInstances@ method which the
 -- 'InstanceGroupsListInstances'' request conforms to.
 type InstanceGroupsListInstancesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroups" :>
-             Capture "instanceGroup" Text :>
-               "listInstances" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] InstanceGroupsListInstancesRequest :>
-                           Post '[JSON] InstanceGroupsListInstances
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroups" :>
+                   Capture "instanceGroup" Text :>
+                     "listInstances" :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON]
+                                 InstanceGroupsListInstancesRequest
+                                 :> Post '[JSON] InstanceGroupsListInstances
 
 -- | Lists the instances in the specified instance group.
 --

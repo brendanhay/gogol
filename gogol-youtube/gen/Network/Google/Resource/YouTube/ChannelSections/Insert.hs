@@ -45,13 +45,15 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.channelSections.insert@ method which the
 -- 'ChannelSectionsInsert' request conforms to.
 type ChannelSectionsInsertResource =
-     "channelSections" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ChannelSection :>
-                 Post '[JSON] ChannelSection
+     "youtube" :>
+       "v3" :>
+         "channelSections" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] ChannelSection :>
+                     Post '[JSON] ChannelSection
 
 -- | Adds a channelSection for the authenticated user\'s channel.
 --

@@ -49,17 +49,19 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.list@ method which the
 -- 'OrdersList' request conforms to.
 type OrdersListResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         QueryParam "placedDateEnd" Text :>
-           QueryParam "orderBy" OrdersListOrderBy :>
-             QueryParam "acknowledged" Bool :>
-               QueryParams "statuses" OrdersListStatuses :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "placedDateStart" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] OrdersListResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             QueryParam "placedDateEnd" Text :>
+               QueryParam "orderBy" OrdersListOrderBy :>
+                 QueryParam "acknowledged" Bool :>
+                   QueryParams "statuses" OrdersListStatuses :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "placedDateStart" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] OrdersListResponse
 
 -- | Lists the orders in your Merchant Center account.
 --

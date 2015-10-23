@@ -45,14 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @licensing.licenseAssignments.patch@ method which the
 -- 'LicenseAssignmentsPatch' request conforms to.
 type LicenseAssignmentsPatchResource =
-     Capture "productId" Text :>
-       "sku" :>
-         Capture "skuId" Text :>
-           "user" :>
-             Capture "userId" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] LicenseAssignment :>
-                   Patch '[JSON] LicenseAssignment
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     Capture "userId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] LicenseAssignment :>
+                           Patch '[JSON] LicenseAssignment
 
 -- | Assign License. This method supports patch semantics.
 --

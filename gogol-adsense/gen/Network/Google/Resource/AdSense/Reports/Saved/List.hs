@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.reports.saved.list@ method which the
 -- 'ReportsSavedList' request conforms to.
 type ReportsSavedListResource =
-     "reports" :>
-       "saved" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
+     "adsense" :>
+       "v1.4" :>
+         "reports" :>
+           "saved" :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
 
 -- | List all saved reports in this AdSense account.
 --

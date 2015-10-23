@@ -40,9 +40,11 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.list@ method which the
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
-     "accounts" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] ListAccountsResponse
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] ListAccountsResponse
 
 -- | Lists all GTM Accounts that a user has access to.
 --

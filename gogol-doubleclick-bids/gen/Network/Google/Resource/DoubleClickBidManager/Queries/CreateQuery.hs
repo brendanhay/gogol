@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclickbidmanager.queries.createquery@ method which the
 -- 'QueriesCreateQuery' request conforms to.
 type QueriesCreateQueryResource =
-     "query" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Query :> Post '[JSON] Query
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "query" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Query :> Post '[JSON] Query
 
 -- | Creates a query.
 --

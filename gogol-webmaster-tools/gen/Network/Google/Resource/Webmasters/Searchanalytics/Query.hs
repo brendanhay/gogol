@@ -48,13 +48,15 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.searchanalytics.query@ method which the
 -- 'SearchanalyticsQuery' request conforms to.
 type SearchanalyticsQueryResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         "searchAnalytics" :>
-           "query" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] SearchAnalyticsQueryRequest :>
-                 Post '[JSON] SearchAnalyticsQueryResponse
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "searchAnalytics" :>
+               "query" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] SearchAnalyticsQueryRequest :>
+                     Post '[JSON] SearchAnalyticsQueryResponse
 
 -- | Query your data with filters and parameters that you define. Returns
 -- zero or more rows grouped by the row keys that you define. You must

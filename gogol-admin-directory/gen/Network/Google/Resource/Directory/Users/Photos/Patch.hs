@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.photos.patch@ method which the
 -- 'UsersPhotosPatch' request conforms to.
 type UsersPhotosPatchResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "photos" :>
-           "thumbnail" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] UserPhoto :> Patch '[JSON] UserPhoto
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "photos" :>
+                 "thumbnail" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] UserPhoto :> Patch '[JSON] UserPhoto
 
 -- | Add a photo for the user. This method supports patch semantics.
 --

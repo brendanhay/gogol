@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetInstances.list@ method which the
 -- 'TargetInstancesList' request conforms to.
 type TargetInstancesListResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "targetInstances" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] TargetInstanceList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "targetInstances" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TargetInstanceList
 
 -- | Retrieves the list of TargetInstance resources available to the
 -- specified project and zone.

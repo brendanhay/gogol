@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.segments.list@ method which the
 -- 'ManagementSegmentsList' request conforms to.
 type ManagementSegmentsListResource =
-     "management" :>
-       "segments" :>
-         QueryParam "start-index" Int32 :>
-           QueryParam "max-results" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Segments
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "segments" :>
+             QueryParam "start-index" Int32 :>
+               QueryParam "max-results" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Segments
 
 -- | Lists segments to which the user has access.
 --

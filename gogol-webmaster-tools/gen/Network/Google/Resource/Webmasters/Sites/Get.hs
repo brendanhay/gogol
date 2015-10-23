@@ -42,9 +42,11 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.sites.get@ method which the
 -- 'SitesGet' request conforms to.
 type SitesGetResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] WmxSite
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] WmxSite
 
 -- | Retrieves information about specific site.
 --

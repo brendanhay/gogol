@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.customers.patch@ method which the
 -- 'CustomersPatch' request conforms to.
 type CustomersPatchResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Customer :> Patch '[JSON] Customer
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Customer :> Patch '[JSON] Customer
 
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller. This method supports patch semantics.

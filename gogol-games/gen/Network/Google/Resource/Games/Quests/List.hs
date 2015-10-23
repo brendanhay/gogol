@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.quests.list@ method which the
 -- 'QuestsList' request conforms to.
 type QuestsListResource =
-     "players" :>
-       Capture "playerId" Text :>
-         "quests" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] QuestListResponse
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "quests" :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] QuestListResponse
 
 -- | Get a list of quests for your application and the currently
 -- authenticated player.

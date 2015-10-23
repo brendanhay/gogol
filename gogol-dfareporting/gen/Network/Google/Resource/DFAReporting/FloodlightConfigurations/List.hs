@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightConfigurations.list@ method which the
 -- 'FloodlightConfigurationsList' request conforms to.
 type FloodlightConfigurationsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightConfigurations" :>
-           QueryParams "ids" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] FloodlightConfigurationsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightConfigurations" :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] FloodlightConfigurationsListResponse
 
 -- | Retrieves a list of floodlight configurations, possibly filtered.
 --

@@ -52,20 +52,22 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.videos.list@ method which the
 -- 'VideosList' request conforms to.
 type VideosListResource =
-     "videos" :>
-       QueryParam "part" Text :>
-         QueryParam "chart" VideosListChart :>
-           QueryParam "regionCode" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "myRating" VideosListMyRating :>
-                 QueryParam "hl" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "videoCategoryId" Text :>
-                       QueryParam "id" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] VideoListResponse
+     "youtube" :>
+       "v3" :>
+         "videos" :>
+           QueryParam "part" Text :>
+             QueryParam "chart" VideosListChart :>
+               QueryParam "regionCode" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "myRating" VideosListMyRating :>
+                     QueryParam "hl" Text :>
+                       QueryParam "onBehalfOfContentOwner" Text :>
+                         QueryParam "videoCategoryId" Text :>
+                           QueryParam "id" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] VideoListResponse
 
 -- | Returns a list of videos that match the API request parameters.
 --

@@ -49,17 +49,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.schedule.patch@ method which the
 -- 'SchedulePatch' request conforms to.
 type SchedulePatchResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "jobs" :>
-           Capture "jobId" Word64 :>
-             "schedule" :>
-               QueryParam "allDay" Bool :>
-                 QueryParam "startTime" Word64 :>
-                   QueryParam "endTime" Word64 :>
-                     QueryParam "duration" Word64 :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Schedule :> Patch '[JSON] Schedule
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 "schedule" :>
+                   QueryParam "allDay" Bool :>
+                     QueryParam "startTime" Word64 :>
+                       QueryParam "endTime" Word64 :>
+                         QueryParam "duration" Word64 :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Schedule :> Patch '[JSON] Schedule
 
 -- | Replaces the schedule of a job with the provided schedule. This method
 -- supports patch semantics.

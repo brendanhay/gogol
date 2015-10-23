@@ -46,13 +46,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.sslCerts.get@ method which the
 -- 'SSLCertsGet' request conforms to.
 type SSLCertsGetResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "sslCerts" :>
-               Capture "sha1Fingerprint" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] SSLCert
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "sslCerts" :>
+                   Capture "sha1Fingerprint" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] SSLCert
 
 -- | Retrieves a particular SSL certificate. Does not include the private key
 -- (required for usage). The private key must be saved from the response to

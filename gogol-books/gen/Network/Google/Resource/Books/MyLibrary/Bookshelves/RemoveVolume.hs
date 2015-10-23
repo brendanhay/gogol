@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.bookshelves.removeVolume@ method which the
 -- 'MyLibraryBookshelvesRemoveVolume' request conforms to.
 type MyLibraryBookshelvesRemoveVolumeResource =
-     "mylibrary" :>
-       "bookshelves" :>
-         Capture "shelf" Text :>
-           "removeVolume" :>
-             QueryParam "volumeId" Text :>
-               QueryParam "reason"
-                 MyLibraryBookshelvesRemoveVolumeReason
-                 :>
-                 QueryParam "source" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "bookshelves" :>
+             Capture "shelf" Text :>
+               "removeVolume" :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "reason"
+                     MyLibraryBookshelvesRemoveVolumeReason
+                     :>
+                     QueryParam "source" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Removes a volume from a bookshelf.
 --

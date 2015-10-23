@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.notifications.list@ method which the
 -- 'NotificationsList' request conforms to.
 type NotificationsListResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "notifications" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Notifications
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "notifications" :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Notifications
 
 -- | Retrieves a list of notifications.
 --

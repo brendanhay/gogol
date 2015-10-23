@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.annotations.insert@ method which the
 -- 'MyLibraryAnnotationsInsert' request conforms to.
 type MyLibraryAnnotationsInsertResource =
-     "mylibrary" :>
-       "annotations" :>
-         QueryParam "country" Text :>
-           QueryParam "showOnlySummaryInResponse" Bool :>
-             QueryParam "source" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Annotation :> Post '[JSON] Annotation
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             QueryParam "country" Text :>
+               QueryParam "showOnlySummaryInResponse" Bool :>
+                 QueryParam "source" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Annotation :> Post '[JSON] Annotation
 
 -- | Inserts a new annotation.
 --

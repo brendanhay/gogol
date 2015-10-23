@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.licenses.get@ method which the
 -- 'LicensesGet' request conforms to.
 type LicensesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "licenses" :>
-           Capture "license" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] License
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "licenses" :>
+                 Capture "license" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] License
 
 -- | Returns the specified license resource.
 --

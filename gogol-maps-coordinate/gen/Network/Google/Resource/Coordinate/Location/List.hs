@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.location.list@ method which the
 -- 'LocationList' request conforms to.
 type LocationListResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "workers" :>
-           Capture "workerEmail" Text :>
-             "locations" :>
-               QueryParam "startTimestampMs" Word64 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] LocationListResponse
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "workers" :>
+               Capture "workerEmail" Text :>
+                 "locations" :>
+                   QueryParam "startTimestampMs" Word64 :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] LocationListResponse
 
 -- | Retrieves a list of locations for a worker.
 --

@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.dataSources.delete@ method which the
 -- 'UsersDataSourcesDelete' request conforms to.
 type UsersDataSourcesDeleteResource =
-     Capture "userId" Text :>
-       "dataSources" :>
-         Capture "dataSourceId" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] DataSource
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] DataSource
 
 -- | Delete the data source if there are no datapoints associated with it
 --

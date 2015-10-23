@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetInstances.insert@ method which the
 -- 'TargetInstancesInsert' request conforms to.
 type TargetInstancesInsertResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "targetInstances" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] TargetInstance :>
-                 Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "targetInstances" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TargetInstance :>
+                       Post '[JSON] Operation
 
 -- | Creates a TargetInstance resource in the specified project and zone
 -- using the data included in the request.

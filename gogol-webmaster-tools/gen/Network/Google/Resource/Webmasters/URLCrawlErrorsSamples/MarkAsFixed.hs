@@ -46,16 +46,18 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.urlcrawlerrorssamples.markAsFixed@ method which the
 -- 'URLCrawlErrorsSamplesMarkAsFixed' request conforms to.
 type URLCrawlErrorsSamplesMarkAsFixedResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         "urlCrawlErrorsSamples" :>
-           Capture "url" Text :>
-             QueryParam "category"
-               URLCrawlErrorsSamplesMarkAsFixedCategory
-               :>
-               QueryParam "platform"
-                 URLCrawlErrorsSamplesMarkAsFixedPlatform
-                 :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "urlCrawlErrorsSamples" :>
+               Capture "url" Text :>
+                 QueryParam "category"
+                   URLCrawlErrorsSamplesMarkAsFixedCategory
+                   :>
+                   QueryParam "platform"
+                     URLCrawlErrorsSamplesMarkAsFixedPlatform
+                     :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.

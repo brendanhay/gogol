@@ -48,19 +48,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.deployments.patch@ method which the
 -- 'DeploymentsPatch' request conforms to.
 type DeploymentsPatchResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           Capture "deployment" Text :>
-             QueryParam "createPolicy"
-               DeploymentsPatchCreatePolicy
-               :>
-               QueryParam "deletePolicy"
-                 DeploymentsPatchDeletePolicy
-                 :>
-                 QueryParam "preview" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Deployment :> Patch '[JSON] Operation
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   QueryParam "createPolicy"
+                     DeploymentsPatchCreatePolicy
+                     :>
+                     QueryParam "deletePolicy"
+                       DeploymentsPatchDeletePolicy
+                       :>
+                       QueryParam "preview" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Deployment :> Patch '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest. This method supports patch semantics.

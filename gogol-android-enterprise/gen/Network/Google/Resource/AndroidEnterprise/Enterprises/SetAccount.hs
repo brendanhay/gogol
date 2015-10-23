@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.enterprises.setAccount@ method which the
 -- 'EnterprisesSetAccount' request conforms to.
 type EnterprisesSetAccountResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "account" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] EnterpriseAccount :>
-               Put '[JSON] EnterpriseAccount
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "account" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] EnterpriseAccount :>
+                   Put '[JSON] EnterpriseAccount
 
 -- | Set the account that will be used to authenticate to the API as the
 -- enterprise.

@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.offers.insert@ method which the
 -- 'OffersInsert' request conforms to.
 type OffersInsertResource =
-     "offers" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] OfferDTO :> Post '[JSON] OfferDTO
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "offers" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] OfferDTO :> Post '[JSON] OfferDTO
 
 -- | Creates or updates the requested offer.
 --

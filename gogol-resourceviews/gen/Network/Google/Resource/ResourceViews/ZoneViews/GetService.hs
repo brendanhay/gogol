@@ -45,15 +45,18 @@ import           Network.Google.ResourceViews.Types
 -- | A resource alias for @resourceviews.zoneViews.getService@ method which the
 -- 'ZoneViewsGetService' request conforms to.
 type ZoneViewsGetServiceResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "resourceViews" :>
-             Capture "resourceView" Text :>
-               "getService" :>
-                 QueryParam "resourceName" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] ZoneViewsGetServiceResponse
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "getService" :>
+                       QueryParam "resourceName" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] ZoneViewsGetServiceResponse
 
 -- | Get the service information of a resource view or a resource.
 --

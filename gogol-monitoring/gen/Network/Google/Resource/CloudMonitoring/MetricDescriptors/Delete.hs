@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudmonitoring.metricDescriptors.delete@ method which the
 -- 'MetricDescriptorsDelete' request conforms to.
 type MetricDescriptorsDeleteResource =
-     Capture "project" Text :>
-       "metricDescriptors" :>
-         Capture "metric" Text :>
-           QueryParam "alt" AltJSON :>
-             Delete '[JSON] DeleteMetricDescriptorResponse
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "metricDescriptors" :>
+               Capture "metric" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Delete '[JSON] DeleteMetricDescriptorResponse
 
 -- | Delete an existing metric.
 --

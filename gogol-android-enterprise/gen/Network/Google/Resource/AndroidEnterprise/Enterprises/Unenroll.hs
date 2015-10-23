@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.enterprises.unenroll@ method which the
 -- 'EnterprisesUnenroll' request conforms to.
 type EnterprisesUnenrollResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "unenroll" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "unenroll" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Unenrolls an enterprise from the calling MDM.
 --

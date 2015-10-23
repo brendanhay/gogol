@@ -46,16 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.manifests.list@ method which the
 -- 'ManifestsList' request conforms to.
 type ManifestsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           Capture "deployment" Text :>
-             "manifests" :>
-               QueryParam "filter" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ManifestsListResponse
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "manifests" :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ManifestsListResponse
 
 -- | Lists all manifests for a given deployment.
 --

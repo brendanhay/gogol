@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.resetPassword@ method which the
 -- 'RelyingPartyResetPassword' request conforms to.
 type RelyingPartyResetPasswordResource =
-     "resetPassword" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           IdentitytoolkitRelyingPartyResetPasswordRequest
-           :> Post '[JSON] ResetPasswordResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "resetPassword" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 IdentitytoolkitRelyingPartyResetPasswordRequest
+                 :> Post '[JSON] ResetPasswordResponse
 
 -- | Reset password for a user.
 --

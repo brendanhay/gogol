@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.template.get@ method which the
 -- 'TemplateGet' request conforms to.
 type TemplateGetResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "templates" :>
-           Capture "templateId" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Template
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "templates" :>
+               Capture "templateId" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Template
 
 -- | Retrieves a specific template by its id
 --

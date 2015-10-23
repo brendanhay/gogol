@@ -46,18 +46,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profileFilterLinks.list@ method which the
 -- 'ManagementProFileFilterLinksList' request conforms to.
 type ManagementProFileFilterLinksListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "profileFilterLinks" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ProFileFilterLinks
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         QueryParam "start-index" Int32 :>
+                           QueryParam "max-results" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ProFileFilterLinks
 
 -- | Lists all profile filter links for a profile.
 --

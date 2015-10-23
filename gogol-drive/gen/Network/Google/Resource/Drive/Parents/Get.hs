@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.parents.get@ method which the
 -- 'ParentsGet' request conforms to.
 type ParentsGetResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "parents" :>
-           Capture "parentId" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] ParentReference
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "parents" :>
+               Capture "parentId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] ParentReference
 
 -- | Gets a specific parent reference.
 --

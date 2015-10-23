@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.ads.update@ method which the
 -- 'AdsUpdate' request conforms to.
 type AdsUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "ads" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Ad :> Put '[JSON] Ad
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "ads" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Ad :> Put '[JSON] Ad
 
 -- | Updates an existing ad.
 --

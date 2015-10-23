@@ -45,17 +45,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.chromeosdevices.update@ method which the
 -- 'ChromeosDevicesUpdate' request conforms to.
 type ChromeosDevicesUpdateResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "devices" :>
-           "chromeos" :>
-             Capture "deviceId" Text :>
-               QueryParam "projection"
-                 ChromeosDevicesUpdateProjection
-                 :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ChromeOSDevice :>
-                     Put '[JSON] ChromeOSDevice
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "devices" :>
+                 "chromeos" :>
+                   Capture "deviceId" Text :>
+                     QueryParam "projection"
+                       ChromeosDevicesUpdateProjection
+                       :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ChromeOSDevice :>
+                           Put '[JSON] ChromeOSDevice
 
 -- | Update Chrome OS Device
 --

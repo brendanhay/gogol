@@ -45,13 +45,16 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.rollingUpdates.rollback@ method which the
 -- 'RollingUpdatesRollback' request conforms to.
 type RollingUpdatesRollbackResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "rollingUpdates" :>
-             Capture "rollingUpdate" Text :>
-               "rollback" :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "rollingUpdates" :>
+                   Capture "rollingUpdate" Text :>
+                     "rollback" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no
 -- effect if invoked when the state of the update is ROLLED_BACK.

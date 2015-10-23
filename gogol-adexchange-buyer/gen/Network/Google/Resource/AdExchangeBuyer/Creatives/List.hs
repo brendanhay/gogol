@@ -48,18 +48,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.creatives.list@ method which the
 -- 'CreativesList'' request conforms to.
 type CreativesListResource =
-     "creatives" :>
-       QueryParams "buyerCreativeId" Text :>
-         QueryParam "openAuctionStatusFilter"
-           CreativesListOpenAuctionStatusFilter
-           :>
-           QueryParams "accountId" Int32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "dealsStatusFilter"
-                 CreativesListDealsStatusFilter
-                 :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] CreativesList
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "creatives" :>
+           QueryParams "buyerCreativeId" Text :>
+             QueryParam "openAuctionStatusFilter"
+               CreativesListOpenAuctionStatusFilter
+               :>
+               QueryParams "accountId" Int32 :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "dealsStatusFilter"
+                     CreativesListDealsStatusFilter
+                     :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] CreativesList
 
 -- | Retrieves a list of the authenticated user\'s active creatives. A
 -- creative will be available 30-40 minutes after submission.

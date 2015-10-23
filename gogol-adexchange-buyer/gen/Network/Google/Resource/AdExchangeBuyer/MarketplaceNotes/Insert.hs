@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.marketplacenotes.insert@ method which the
 -- 'MarketplaceNotesInsert' request conforms to.
 type MarketplaceNotesInsertResource =
-     "marketplaceOrders" :>
-       Capture "orderId" Text :>
-         "notes" :>
-           "insert" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] AddOrderNotesRequest :>
-                 Post '[JSON] AddOrderNotesResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "notes" :>
+               "insert" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] AddOrderNotesRequest :>
+                     Post '[JSON] AddOrderNotesResponse
 
 -- | Add notes to the order
 --

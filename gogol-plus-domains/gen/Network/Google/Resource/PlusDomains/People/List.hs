@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.people.list@ method which the
 -- 'PeopleList' request conforms to.
 type PeopleListResource =
-     "people" :>
-       Capture "userId" Text :>
+     "plusDomains" :>
+       "v1" :>
          "people" :>
-           Capture "collection" PeopleListCollection :>
-             QueryParam "orderBy" PeopleListOrderBy :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
+           Capture "userId" Text :>
+             "people" :>
+               Capture "collection" PeopleListCollection :>
+                 QueryParam "orderBy" PeopleListOrderBy :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection.
 --

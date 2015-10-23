@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.marketplaceorders.patch@ method which the
 -- 'MarketplaceOrdersPatch' request conforms to.
 type MarketplaceOrdersPatchResource =
-     "marketplaceOrders" :>
-       Capture "orderId" Text :>
-         Capture "revisionNumber" Int64 :>
-           Capture "updateAction"
-             MarketplaceOrdersPatchUpdateAction
-             :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] MarketplaceOrder :>
-                 Patch '[JSON] MarketplaceOrder
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             Capture "revisionNumber" Int64 :>
+               Capture "updateAction"
+                 MarketplaceOrdersPatchUpdateAction
+                 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] MarketplaceOrder :>
+                     Patch '[JSON] MarketplaceOrder
 
 -- | Update the given order. This method supports patch semantics.
 --

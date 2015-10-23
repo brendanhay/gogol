@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.adunits.get@ method which the
 -- 'AccountsAdUnitsGet' request conforms to.
 type AccountsAdUnitsGetResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               Capture "adUnitId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] AdUnit
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   Capture "adUnitId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] AdUnit
 
 -- | Gets the specified ad unit in the specified ad client for the specified
 -- account.

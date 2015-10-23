@@ -46,14 +46,17 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.groups.list@ method which the
 -- 'GroupsList' request conforms to.
 type GroupsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "groups" :>
-           QueryParam "orderBy" Text :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] GroupList
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] GroupList
 
 -- | Retrieves the list of groups contained within the specified project.
 --

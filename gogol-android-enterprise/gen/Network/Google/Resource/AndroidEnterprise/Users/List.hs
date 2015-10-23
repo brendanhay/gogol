@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.users.list@ method which the
 -- 'UsersList' request conforms to.
 type UsersListResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           QueryParam "email" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] UsersListResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               QueryParam "email" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] UsersListResponse
 
 -- | Looks up a user by email address.
 --

@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasters.parents.list@ method which the
 -- 'RastersParentsList' request conforms to.
 type RastersParentsListResource =
-     "rasters" :>
-       Capture "id" Text :>
-         "parents" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ParentsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasters" :>
+           Capture "id" Text :>
+             "parents" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ParentsListResponse
 
 -- | Return all parent ids of the specified rasters.
 --

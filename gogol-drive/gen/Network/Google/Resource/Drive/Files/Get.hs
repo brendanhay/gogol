@@ -46,22 +46,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.get@ method which the
 -- 'FilesGet' request conforms to.
 type FilesGetResource =
-     "files" :>
-       Capture "fileId" Text :>
-         QueryParam "updateViewedDate" Bool :>
-           QueryParam "projection" FilesGetProjection :>
-             QueryParam "acknowledgeAbuse" Bool :>
-               QueryParam "revisionId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] File
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             QueryParam "updateViewedDate" Bool :>
+               QueryParam "projection" FilesGetProjection :>
+                 QueryParam "acknowledgeAbuse" Bool :>
+                   QueryParam "revisionId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
-       "files" :>
-         Capture "fileId" Text :>
-           QueryParam "updateViewedDate" Bool :>
-             QueryParam "projection" FilesGetProjection :>
-               QueryParam "acknowledgeAbuse" Bool :>
-                 QueryParam "revisionId" Text :>
-                   QueryParam "alt" AltMedia :>
-                     Get '[OctetStream] Stream
+       "drive" :>
+         "v2" :>
+           "files" :>
+             Capture "fileId" Text :>
+               QueryParam "updateViewedDate" Bool :>
+                 QueryParam "projection" FilesGetProjection :>
+                   QueryParam "acknowledgeAbuse" Bool :>
+                     QueryParam "revisionId" Text :>
+                       QueryParam "alt" AltMedia :>
+                         Get '[OctetStream] Stream
 
 -- | Gets a file\'s metadata by ID.
 --

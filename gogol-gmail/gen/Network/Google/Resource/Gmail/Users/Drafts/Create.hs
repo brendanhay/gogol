@@ -35,7 +35,6 @@ module Network.Google.Resource.Gmail.Users.Drafts.Create
     -- * Request Lenses
     , udcPayload
     , udcUserId
-    , udcMedia
     ) where
 
 import           Network.Google.Gmail.Types
@@ -44,11 +43,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.drafts.create@ method which the
 -- 'UsersDraftsCreate' request conforms to.
 type UsersDraftsCreateResource =
-     Capture "userId" Text :>
-       "drafts" :>
-         QueryParam "alt" AltJSON :>
-           MultipartRelated '[JSON] Draft Body :>
-             Post '[JSON] Draft
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Draft :> Post '[JSON] Draft
+       :<|>
+       "upload" :>
+         "gmail" :>
+           "v1" :>
+             "users" :>
+               Capture "userId" Text :>
+                 "drafts" :>
+                   QueryParam "alt" AltJSON :>
+                     QueryParam "uploadType" AltMedia :>
+                       MultipartRelated '[JSON] Draft RequestBody :>
+                         Post '[JSON] Draft
 
 -- | Creates a new draft with the DRAFT label.
 --
@@ -56,8 +68,7 @@ type UsersDraftsCreateResource =
 data UsersDraftsCreate = UsersDraftsCreate
     { _udcPayload :: !Draft
     , _udcUserId  :: !Text
-    , _udcMedia   :: !Body
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsCreate' with the minimum fields required to make a request.
 --
@@ -66,18 +77,14 @@ data UsersDraftsCreate = UsersDraftsCreate
 -- * 'udcPayload'
 --
 -- * 'udcUserId'
---
--- * 'udcMedia'
 usersDraftsCreate
     :: Draft -- ^ 'udcPayload'
-    -> Text -- ^ 'udcMedia'
-    -> Body
+    -> Text
     -> UsersDraftsCreate
-usersDraftsCreate pUdcPayload_ pUdcUserId_ pUdcMedia_ =
+usersDraftsCreate pUdcPayload_ pUdcUserId_ =
     UsersDraftsCreate
     { _udcPayload = pUdcPayload_
     , _udcUserId = pUdcUserId_
-    , _udcMedia = pUdcMedia_
     }
 
 -- | Multipart request metadata.
@@ -91,15 +98,25 @@ udcUserId :: Lens' UsersDraftsCreate Text
 udcUserId
   = lens _udcUserId (\ s a -> s{_udcUserId = a})
 
-udcMedia :: Lens' UsersDraftsCreate Body
-udcMedia = lens _udcMedia (\ s a -> s{_udcMedia = a})
-
 instance GoogleRequest UsersDraftsCreate where
         type Rs UsersDraftsCreate = Draft
         requestClient UsersDraftsCreate{..}
-          = go _udcUserId (Just AltJSON) _udcPayload _udcMedia
+          = go _udcUserId (Just AltJSON) _udcPayload
               gmailService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy UsersDraftsCreateResource)
+                      mempty
+
+instance GoogleRequest (Upload UsersDraftsCreate)
+         where
+        type Rs (Upload UsersDraftsCreate) = Draft
+        requestClient (Upload UsersDraftsCreate{..} body)
+          = go _udcUserId (Just AltJSON) (Just AltMedia)
+              _udcPayload
+              body
+              gmailService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy UsersDraftsCreateResource)
                       mempty

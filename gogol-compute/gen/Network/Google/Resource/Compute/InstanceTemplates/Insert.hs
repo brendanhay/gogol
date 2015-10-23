@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceTemplates.insert@ method which the
 -- 'InstanceTemplatesInsert' request conforms to.
 type InstanceTemplatesInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "instanceTemplates" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] InstanceTemplate :>
-               Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "instanceTemplates" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] InstanceTemplate :>
+                     Post '[JSON] Operation
 
 -- | Creates an instance template in the specified project using the data
 -- that is included in the request.

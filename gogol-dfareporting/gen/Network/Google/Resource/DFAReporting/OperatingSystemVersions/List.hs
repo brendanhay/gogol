@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.operatingSystemVersions.list@ method which the
 -- 'OperatingSystemVersionsList' request conforms to.
 type OperatingSystemVersionsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "operatingSystemVersions" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] OperatingSystemVersionsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "operatingSystemVersions" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] OperatingSystemVersionsListResponse
 
 -- | Retrieves a list of operating system versions.
 --

@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasklists.list@ method which the
 -- 'TaskListsList' request conforms to.
 type TaskListsListResource =
-     "users" :>
-       "@me" :>
-         "lists" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int64 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] TaskLists
+     "tasks" :>
+       "v1" :>
+         "users" :>
+           "@me" :>
+             "lists" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int64 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] TaskLists
 
 -- | Returns all the authenticated user\'s task lists.
 --

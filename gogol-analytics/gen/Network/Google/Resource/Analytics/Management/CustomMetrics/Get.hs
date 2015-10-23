@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customMetrics.get@ method which the
 -- 'ManagementCustomMetricsGet' request conforms to.
 type ManagementCustomMetricsGetResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customMetrics" :>
-                 Capture "customMetricId" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] CustomMetric
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     Capture "customMetricId" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] CustomMetric
 
 -- | Get a custom metric to which the user has access.
 --

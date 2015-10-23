@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.adclients.list@ method which the
 -- 'AccountsAdClientsList' request conforms to.
 type AccountsAdClientsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] AdClients
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
 -- | List all ad clients in the specified account.
 --

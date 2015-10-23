@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.sslCertificates.delete@ method which the
 -- 'SSLCertificatesDelete' request conforms to.
 type SSLCertificatesDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "sslCertificates" :>
-           Capture "sslCertificate" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "sslCertificates" :>
+                 Capture "sslCertificate" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified SslCertificate resource.
 --

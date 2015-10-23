@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.projects.list@ method which the
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
-     "projects" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] ProjectList
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] ProjectList
 
 -- | Lists all projects to which you have been granted any project role.
 --

@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.scores.submitMultiple@ method which the
 -- 'ScoresSubmitMultiple' request conforms to.
 type ScoresSubmitMultipleResource =
-     "leaderboards" :>
-       "scores" :>
-         QueryParam "language" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] PlayerScoreSubmissionList :>
-               Post '[JSON] PlayerScoreListResponse
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           "scores" :>
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] PlayerScoreSubmissionList :>
+                   Post '[JSON] PlayerScoreListResponse
 
 -- | Submits multiple scores to leaderboards.
 --

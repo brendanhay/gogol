@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.getProfile@ method which the
 -- 'UsersGetProFile' request conforms to.
 type UsersGetProFileResource =
-     Capture "userId" Text :>
-       "profile" :>
-         QueryParam "alt" AltJSON :> Get '[JSON] ProFile
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "profile" :>
+               QueryParam "alt" AltJSON :> Get '[JSON] ProFile
 
 -- | Gets the current user\'s Gmail profile.
 --

@@ -44,12 +44,14 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.promoteReplica@ method which the
 -- 'InstancesPromoteReplica' request conforms to.
 type InstancesPromoteReplicaResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "promoteReplica" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "promoteReplica" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Promotes the read replica instance to be a stand-alone Cloud SQL
 -- instance.

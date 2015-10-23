@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.negotiationrounds.insert@ method which the
 -- 'NegotiationRoundsInsert' request conforms to.
 type NegotiationRoundsInsertResource =
-     "negotiations" :>
-       Capture "negotiationId" Int64 :>
-         "negotiationrounds" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] NegotiationRoundDTO :>
-               Post '[JSON] NegotiationRoundDTO
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "negotiations" :>
+           Capture "negotiationId" Int64 :>
+             "negotiationrounds" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] NegotiationRoundDTO :>
+                   Post '[JSON] NegotiationRoundDTO
 
 -- | Adds the requested negotiationRound to the requested negotiation.
 --

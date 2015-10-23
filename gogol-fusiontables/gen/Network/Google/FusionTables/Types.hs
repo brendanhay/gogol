@@ -236,7 +236,6 @@ fusionTablesService :: Service
 fusionTablesService
   = defaultService (ServiceId "fusiontables:v2")
       "www.googleapis.com"
-      "fusiontables/v2/"
 
 -- | View your Fusion Tables
 fusiontablesReadonlyScope :: OAuthScope

@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.advertiserGroups.delete@ method which the
 -- 'AdvertiserGroupsDelete' request conforms to.
 type AdvertiserGroupsDeleteResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "advertiserGroups" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing advertiser group.
 --

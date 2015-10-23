@@ -216,7 +216,6 @@ predictionService :: Service
 predictionService
   = defaultService (ServiceId "prediction:v1.6")
       "www.googleapis.com"
-      "prediction/v1.6/projects/"
 
 -- | View your data in Google Cloud Storage
 devstorageReadOnlyScope :: OAuthScope

@@ -46,17 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.experiments.list@ method which the
 -- 'ManagementExperimentsList' request conforms to.
 type ManagementExperimentsListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "experiments" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Experiments
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         QueryParam "start-index" Int32 :>
+                           QueryParam "max-results" Int32 :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Experiments
 
 -- | Lists experiments to which the user has access.
 --

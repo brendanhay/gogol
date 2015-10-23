@@ -43,10 +43,12 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounts.get@ method which the
 -- 'AccountsGet' request conforms to.
 type AccountsGetResource =
-     Capture "merchantId" Word64 :>
-       "accounts" :>
-         Capture "accountId" Word64 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Account
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accounts" :>
+             Capture "accountId" Word64 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Retrieves a Merchant Center account.
 --

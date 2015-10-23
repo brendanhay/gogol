@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.apps.get@ method which the
 -- 'AppsGet' request conforms to.
 type AppsGetResource =
-     "apps" :>
-       Capture "appId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] App
+     "drive" :>
+       "v2" :>
+         "apps" :>
+           Capture "appId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] App
 
 -- | Gets a specific app.
 --

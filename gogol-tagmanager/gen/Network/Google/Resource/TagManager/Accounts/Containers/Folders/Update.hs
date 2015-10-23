@@ -46,15 +46,17 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.folders.update@ method which the
 -- 'AccountsContainersFoldersUpdate' request conforms to.
 type AccountsContainersFoldersUpdateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "folders" :>
-               Capture "folderId" Text :>
-                 QueryParam "fingerprint" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Folder :> Put '[JSON] Folder
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "folders" :>
+                   Capture "folderId" Text :>
+                     QueryParam "fingerprint" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Folder :> Put '[JSON] Folder
 
 -- | Updates a GTM Folder.
 --

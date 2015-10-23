@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.marketplacedeals.update@ method which the
 -- 'MarketplaceDealsUpdate' request conforms to.
 type MarketplaceDealsUpdateResource =
-     "marketplaceOrders" :>
-       Capture "orderId" Text :>
-         "deals" :>
-           "update" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] EditAllOrderDealsRequest :>
-                 Post '[JSON] EditAllOrderDealsResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "deals" :>
+               "update" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] EditAllOrderDealsRequest :>
+                     Post '[JSON] EditAllOrderDealsResponse
 
 -- | Replaces all the deals in the order with the passed in deals
 --

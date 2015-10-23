@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.maps.unpublish@ method which the
 -- 'MapsUnPublish' request conforms to.
 type MapsUnPublishResource =
-     "maps" :>
-       Capture "id" Text :>
-         "unpublish" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] PublishResponse
+     "mapsengine" :>
+       "v1" :>
+         "maps" :>
+           Capture "id" Text :>
+             "unpublish" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] PublishResponse
 
 -- | Unpublish a map asset.
 --

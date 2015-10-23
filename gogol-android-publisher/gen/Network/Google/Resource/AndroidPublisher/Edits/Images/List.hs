@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.images.list@ method which the
 -- 'EditsImagesList' request conforms to.
 type EditsImagesListResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "listings" :>
-             Capture "language" Text :>
-               Capture "imageType" EditsImagesListImageType :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ImagesListResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "listings" :>
+                   Capture "language" Text :>
+                     Capture "imageType" EditsImagesListImageType :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ImagesListResponse
 
 -- | Lists all images for the specified language and image type.
 --

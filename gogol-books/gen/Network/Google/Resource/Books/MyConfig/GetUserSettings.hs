@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.myconfig.getUserSettings@ method which the
 -- 'MyConfigGetUserSettings' request conforms to.
 type MyConfigGetUserSettingsResource =
-     "myconfig" :>
-       "getUserSettings" :>
-         QueryParam "alt" AltJSON :> Get '[JSON] UserSettings
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "getUserSettings" :>
+             QueryParam "alt" AltJSON :> Get '[JSON] UserSettings
 
 -- | Gets the current settings for the user.
 --

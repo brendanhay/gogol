@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalAddresses.insert@ method which the
 -- 'GlobalAddressesInsert' request conforms to.
 type GlobalAddressesInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "addresses" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Address :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "addresses" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Address :> Post '[JSON] Operation
 
 -- | Creates an address resource in the specified project using the data
 -- included in the request.

@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.orgunits.insert@ method which the
 -- 'OrgUnitsInsert' request conforms to.
 type OrgUnitsInsertResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "orgunits" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] OrgUnit :> Post '[JSON] OrgUnit
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "orgunits" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] OrgUnit :> Post '[JSON] OrgUnit
 
 -- | Add Organization Unit
 --

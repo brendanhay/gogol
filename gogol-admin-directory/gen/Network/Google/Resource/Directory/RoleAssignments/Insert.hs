@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roleAssignments.insert@ method which the
 -- 'RoleAssignmentsInsert' request conforms to.
 type RoleAssignmentsInsertResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roleassignments" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] RoleAssignment :>
-               Post '[JSON] RoleAssignment
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roleassignments" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] RoleAssignment :>
+                     Post '[JSON] RoleAssignment
 
 -- | Creates a role assignment.
 --

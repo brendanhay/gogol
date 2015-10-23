@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.revisions.get@ method which the
 -- 'RevisionsGet' request conforms to.
 type RevisionsGetResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "revisions" :>
-           Capture "revisionId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Revision
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               Capture "revisionId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Revision
 
 -- | Gets a specific revision.
 --

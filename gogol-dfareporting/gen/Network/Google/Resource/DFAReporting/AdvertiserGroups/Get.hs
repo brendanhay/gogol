@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.advertiserGroups.get@ method which the
 -- 'AdvertiserGroupsGet' request conforms to.
 type AdvertiserGroupsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "advertiserGroups" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AdvertiserGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AdvertiserGroup
 
 -- | Gets one advertiser group by ID.
 --

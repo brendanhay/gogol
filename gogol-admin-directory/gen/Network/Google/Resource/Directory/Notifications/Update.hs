@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.notifications.update@ method which the
 -- 'NotificationsUpdate' request conforms to.
 type NotificationsUpdateResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "notifications" :>
-           Capture "notificationId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Notification :>
-                 Put '[JSON] Notification
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "notifications" :>
+                 Capture "notificationId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Notification :>
+                       Put '[JSON] Notification
 
 -- | Updates a notification.
 --

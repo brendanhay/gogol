@@ -44,15 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customDimensions.get@ method which the
 -- 'ManagementCustomDimensionsGet' request conforms to.
 type ManagementCustomDimensionsGetResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customDimensions" :>
-                 Capture "customDimensionId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] CustomDimension
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     Capture "customDimensionId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] CustomDimension
 
 -- | Get a custom dimension to which the user has access.
 --

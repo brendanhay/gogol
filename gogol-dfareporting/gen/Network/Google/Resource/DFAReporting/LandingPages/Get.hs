@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.landingPages.get@ method which the
 -- 'LandingPagesGet' request conforms to.
 type LandingPagesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           Capture "campaignId" Int64 :>
-             "landingPages" :>
-               Capture "id" Int64 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] LandingPage
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   Capture "id" Int64 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] LandingPage
 
 -- | Gets one campaign landing page by ID.
 --

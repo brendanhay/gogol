@@ -50,16 +50,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.setTargetPools@ method which the
 -- 'InstanceGroupManagersSetTargetPools' request conforms to.
 type InstanceGroupManagersSetTargetPoolsResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "setTargetPools" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersSetTargetPoolsRequest
-                     :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "setTargetPools" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersSetTargetPoolsRequest
+                           :> Post '[JSON] Operation
 
 -- | Modifies the target pools to which all instances in this managed
 -- instance group are assigned. The target pools automatically apply to all

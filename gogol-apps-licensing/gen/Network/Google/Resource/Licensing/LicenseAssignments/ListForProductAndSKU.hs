@@ -46,15 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @licensing.licenseAssignments.listForProductAndSku@ method which the
 -- 'LicenseAssignmentsListForProductAndSKU' request conforms to.
 type LicenseAssignmentsListForProductAndSKUResource =
-     Capture "productId" Text :>
-       "sku" :>
-         Capture "skuId" Text :>
-           "users" :>
-             QueryParam "customerId" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] LicenseAssignmentList
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "users" :>
+                     QueryParam "customerId" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] LicenseAssignmentList
 
 -- | List license assignments for given product and sku of the customer.
 --

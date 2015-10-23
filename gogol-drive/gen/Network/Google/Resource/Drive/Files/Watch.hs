@@ -47,25 +47,29 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.watch@ method which the
 -- 'FilesWatch' request conforms to.
 type FilesWatchResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "watch" :>
-           QueryParam "updateViewedDate" Bool :>
-             QueryParam "projection" FilesWatchProjection :>
-               QueryParam "acknowledgeAbuse" Bool :>
-                 QueryParam "revisionId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Channel :> Post '[JSON] Channel
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "watch" :>
+               QueryParam "updateViewedDate" Bool :>
+                 QueryParam "projection" FilesWatchProjection :>
+                   QueryParam "acknowledgeAbuse" Bool :>
+                     QueryParam "revisionId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Channel :> Post '[JSON] Channel
        :<|>
-       "files" :>
-         Capture "fileId" Text :>
-           "watch" :>
-             QueryParam "updateViewedDate" Bool :>
-               QueryParam "projection" FilesWatchProjection :>
-                 QueryParam "acknowledgeAbuse" Bool :>
-                   QueryParam "revisionId" Text :>
-                     QueryParam "alt" AltMedia :>
-                       ReqBody '[JSON] Channel :> Post '[OctetStream] Stream
+       "drive" :>
+         "v2" :>
+           "files" :>
+             Capture "fileId" Text :>
+               "watch" :>
+                 QueryParam "updateViewedDate" Bool :>
+                   QueryParam "projection" FilesWatchProjection :>
+                     QueryParam "acknowledgeAbuse" Bool :>
+                       QueryParam "revisionId" Text :>
+                         QueryParam "alt" AltMedia :>
+                           Get '[OctetStream] Stream
 
 -- | Subscribe to changes on a file
 --
@@ -164,7 +168,6 @@ instance GoogleRequest (Download FilesWatch) where
               (Just _fwAcknowledgeAbuse)
               _fwRevisionId
               (Just AltMedia)
-              _fwPayload
               driveService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy FilesWatchResource)

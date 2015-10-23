@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.copy@ method which the
 -- 'TableCopy' request conforms to.
 type TableCopyResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "copy" :>
-           QueryParam "copyPresentation" Bool :>
-             QueryParam "alt" AltJSON :> Post '[JSON] Table
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "copy" :>
+               QueryParam "copyPresentation" Bool :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] Table
 
 -- | Copies a table.
 --

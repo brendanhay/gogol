@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.leaderboards.list@ method which the
 -- 'LeaderboardsList' request conforms to.
 type LeaderboardsListResource =
-     "leaderboards" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] LeaderboardListResponse
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           QueryParam "language" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] LeaderboardListResponse
 
 -- | Lists all the leaderboard metadata for your application.
 --

@@ -114,7 +114,6 @@ resourceManagerService
   = defaultService
       (ServiceId "cloudresourcemanager:v1beta1")
       "cloudresourcemanager.googleapis.com"
-      ""
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope

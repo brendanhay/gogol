@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.filters.get@ method which the
 -- 'ManagementFiltersGet' request conforms to.
 type ManagementFiltersGetResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "filters" :>
-             Capture "filterId" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Filter
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 Capture "filterId" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Filter
 
 -- | Returns a filters to which the user has access.
 --

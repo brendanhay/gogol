@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.achievements.updateMultiple@ method which the
 -- 'AchievementsUpdateMultiple' request conforms to.
 type AchievementsUpdateMultipleResource =
-     "achievements" :>
-       "updateMultiple" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] AchievementUpdateMultipleRequest :>
-             Post '[JSON] AchievementUpdateMultipleResponse
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           "updateMultiple" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] AchievementUpdateMultipleRequest :>
+                 Post '[JSON] AchievementUpdateMultipleResponse
 
 -- | Updates multiple achievements for the currently authenticated player.
 --

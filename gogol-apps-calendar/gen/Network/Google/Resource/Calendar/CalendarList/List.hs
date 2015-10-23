@@ -47,18 +47,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendarList.list@ method which the
 -- 'CalendarListList' request conforms to.
 type CalendarListListResource =
-     "users" :>
-       "me" :>
-         "calendarList" :>
-           QueryParam "syncToken" Text :>
-             QueryParam "minAccessRole"
-               CalendarListListMinAccessRole
-               :>
-               QueryParam "showDeleted" Bool :>
-                 QueryParam "showHidden" Bool :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] CalendarList
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "calendarList" :>
+               QueryParam "syncToken" Text :>
+                 QueryParam "minAccessRole"
+                   CalendarListListMinAccessRole
+                   :>
+                   QueryParam "showDeleted" Bool :>
+                     QueryParam "showHidden" Bool :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] CalendarList
 
 -- | Returns entries on the user\'s calendar list.
 --

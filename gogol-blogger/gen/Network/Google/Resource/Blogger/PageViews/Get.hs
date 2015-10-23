@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.pageViews.get@ method which the
 -- 'PageViewsGet' request conforms to.
 type PageViewsGetResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "pageviews" :>
-           QueryParams "range" PageViewsGetRange :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Pageviews
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pageviews" :>
+               QueryParams "range" PageViewsGetRange :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Pageviews
 
 -- | Retrieve pageview stats for a Blog.
 --

@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.accountUserLinks.update@ method which the
 -- 'ManagementAccountUserLinksUpdate' request conforms to.
 type ManagementAccountUserLinksUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "entityUserLinks" :>
-             Capture "linkId" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] EntityUserLink :>
-                   Put '[JSON] EntityUserLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "entityUserLinks" :>
+                 Capture "linkId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] EntityUserLink :>
+                       Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given account.
 --

@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.metadata.metrics.list@ method which the
 -- 'MetadataMetricsList' request conforms to.
 type MetadataMetricsListResource =
-     "metadata" :>
-       "metrics" :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Metadata
+     "adsense" :>
+       "v1.4" :>
+         "metadata" :>
+           "metrics" :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the metrics available to this AdSense account.
 --

@@ -54,24 +54,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasterCollections.list@ method which the
 -- 'RasterCollectionsList' request conforms to.
 type RasterCollectionsListResource =
-     "rasterCollections" :>
-       QueryParam "createdAfter" DateTime' :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" RasterCollectionsListRole :>
-             QueryParam "bbox" Text :>
-               QueryParam "processingStatus"
-                 RasterCollectionsListProcessingStatus
-                 :>
-                 QueryParam "modifiedAfter" DateTime' :>
-                   QueryParam "modifiedBefore" DateTime' :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projectId" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] RasterCollectionsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           QueryParam "createdAfter" DateTime' :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "role" RasterCollectionsListRole :>
+                 QueryParam "bbox" Text :>
+                   QueryParam "processingStatus"
+                     RasterCollectionsListProcessingStatus
+                     :>
+                     QueryParam "modifiedAfter" DateTime' :>
+                       QueryParam "modifiedBefore" DateTime' :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "projectId" Text :>
+                             QueryParam "search" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "tags" Text :>
+                                   QueryParam "createdBefore" DateTime' :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] RasterCollectionsListResponse
 
 -- | Return all raster collections readable by the current user.
 --

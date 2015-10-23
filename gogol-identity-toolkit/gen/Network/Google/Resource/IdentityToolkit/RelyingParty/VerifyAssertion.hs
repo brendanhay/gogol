@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.verifyAssertion@ method which the
 -- 'RelyingPartyVerifyAssertion' request conforms to.
 type RelyingPartyVerifyAssertionResource =
-     "verifyAssertion" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           IdentitytoolkitRelyingPartyVerifyAssertionRequest
-           :> Post '[JSON] VerifyAssertionResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "verifyAssertion" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 IdentitytoolkitRelyingPartyVerifyAssertionRequest
+                 :> Post '[JSON] VerifyAssertionResponse
 
 -- | Verifies the assertion returned by the IdP.
 --

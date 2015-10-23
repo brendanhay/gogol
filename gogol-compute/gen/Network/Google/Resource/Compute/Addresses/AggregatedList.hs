@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.addresses.aggregatedList@ method which the
 -- 'AddressesAggregatedList' request conforms to.
 type AddressesAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "addresses" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] AddressAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "addresses" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] AddressAggregatedList
 
 -- | Retrieves the list of addresses grouped by scope.
 --

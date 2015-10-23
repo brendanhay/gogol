@@ -42,10 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.getOobConfirmationCode@ method which the
 -- 'RelyingPartyGetOOBConfirmationCode' request conforms to.
 type RelyingPartyGetOOBConfirmationCodeResource =
-     "getOobConfirmationCode" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] RelyingParty :>
-           Post '[JSON] GetOOBConfirmationCodeResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "getOobConfirmationCode" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] RelyingParty :>
+                 Post '[JSON] GetOOBConfirmationCodeResponse
 
 -- | Get a code for user action confirmation.
 --

@@ -45,14 +45,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.export@ method which the
 -- 'InstancesExport' request conforms to.
 type InstancesExportResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "export" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] InstancesExportRequest :>
-                   Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "export" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] InstancesExportRequest :>
+                       Post '[JSON] Operation
 
 -- | Exports data from a Cloud SQL instance to a Google Cloud Storage bucket
 -- as a MySQL dump file.

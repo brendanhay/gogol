@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.browsers.list@ method which the
 -- 'BrowsersList' request conforms to.
 type BrowsersListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "browsers" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] BrowsersListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "browsers" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] BrowsersListResponse
 
 -- | Retrieves a list of browsers.
 --

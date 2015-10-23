@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.details.patch@ method which the
 -- 'EditsDetailsPatch' request conforms to.
 type EditsDetailsPatchResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "details" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] AppDetails :>
-                 Patch '[JSON] AppDetails
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "details" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AppDetails :>
+                       Patch '[JSON] AppDetails
 
 -- | Updates app details for this edit. This method supports patch semantics.
 --

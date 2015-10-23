@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.filters.list@ method which the
 -- 'ManagementFiltersList' request conforms to.
 type ManagementFiltersListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "filters" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Filters
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 QueryParam "start-index" Int32 :>
+                   QueryParam "max-results" Int32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Filters
 
 -- | Lists all filters for an account
 --

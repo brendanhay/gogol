@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.firewalls.insert@ method which the
 -- 'FirewallsInsert' request conforms to.
 type FirewallsInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "firewalls" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Firewall :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "firewalls" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Firewall :> Post '[JSON] Operation
 
 -- | Creates a firewall resource in the specified project using the data
 -- included in the request.

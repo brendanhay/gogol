@@ -134,7 +134,6 @@ classroomService :: Service
 classroomService
   = defaultService (ServiceId "classroom:v1")
       "classroom.googleapis.com"
-      ""
 
 -- | View your Google Classroom class rosters
 classroomRostersReadonlyScope :: OAuthScope

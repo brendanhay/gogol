@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.patch@ method which the
 -- 'LayersPatch' request conforms to.
 type LayersPatchResource =
-     "layers" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Layer :> Patch '[JSON] ()
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Layer :> Patch '[JSON] ()
 
 -- | Mutate a layer asset.
 --

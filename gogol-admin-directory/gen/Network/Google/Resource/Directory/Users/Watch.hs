@@ -54,23 +54,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.watch@ method which the
 -- 'UsersWatch' request conforms to.
 type UsersWatchResource =
-     "users" :>
-       "watch" :>
-         QueryParam "event" UsersWatchEvent :>
-           QueryParam "orderBy" UsersWatchOrderBy :>
-             QueryParam "viewType" UsersWatchViewType :>
-               QueryParam "customFieldMask" Text :>
-                 QueryParam "domain" Text :>
-                   QueryParam "showDeleted" Text :>
-                     QueryParam "sortOrder" UsersWatchSortOrder :>
-                       QueryParam "customer" Text :>
-                         QueryParam "query" Text :>
-                           QueryParam "projection" UsersWatchProjection :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Channel :>
-                                     Post '[JSON] Channel
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             "watch" :>
+               QueryParam "event" UsersWatchEvent :>
+                 QueryParam "orderBy" UsersWatchOrderBy :>
+                   QueryParam "viewType" UsersWatchViewType :>
+                     QueryParam "customFieldMask" Text :>
+                       QueryParam "domain" Text :>
+                         QueryParam "showDeleted" Text :>
+                           QueryParam "sortOrder" UsersWatchSortOrder :>
+                             QueryParam "customer" Text :>
+                               QueryParam "query" Text :>
+                                 QueryParam "projection" UsersWatchProjection :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] Channel :>
+                                           Post '[JSON] Channel
 
 -- | Watch for changes in users list
 --

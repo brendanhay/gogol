@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.emptyTrash@ method which the
 -- 'FilesEmptyTrash' request conforms to.
 type FilesEmptyTrashResource =
-     "files" :>
-       "trash" :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           "trash" :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes all of the user\'s trashed files.
 --

@@ -45,15 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.removeHealthCheck@ method which the
 -- 'TargetPoolsRemoveHealthCheck' request conforms to.
 type TargetPoolsRemoveHealthCheckResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             Capture "targetPool" Text :>
-               "removeHealthCheck" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] TargetPoolsRemoveHealthCheckRequest
-                     :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   Capture "targetPool" Text :>
+                     "removeHealthCheck" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] TargetPoolsRemoveHealthCheckRequest
+                           :> Post '[JSON] Operation
 
 -- | Removes health check URL from targetPool.
 --

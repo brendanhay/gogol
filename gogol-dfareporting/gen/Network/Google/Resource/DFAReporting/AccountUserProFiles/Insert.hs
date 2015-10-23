@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountUserProfiles.insert@ method which the
 -- 'AccountUserProFilesInsert' request conforms to.
 type AccountUserProFilesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountUserProfiles" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] AccountUserProFile :>
-               Post '[JSON] AccountUserProFile
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AccountUserProFile :>
+                   Post '[JSON] AccountUserProFile
 
 -- | Inserts a new account user profile.
 --

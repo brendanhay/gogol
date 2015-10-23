@@ -48,14 +48,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.tables.patch@ method which the
 -- 'TablesPatch' request conforms to.
 type TablesPatchResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "tables" :>
-               Capture "tableId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Table :> Patch '[JSON] Table
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 "tables" :>
+                   Capture "tableId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Table :> Patch '[JSON] Table
 
 -- | Updates information in an existing table. The update method replaces the
 -- entire table resource, whereas the patch method only replaces fields

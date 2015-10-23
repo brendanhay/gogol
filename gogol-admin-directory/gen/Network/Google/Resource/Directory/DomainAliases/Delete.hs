@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.domainAliases.delete@ method which the
 -- 'DomainAliasesDelete' request conforms to.
 type DomainAliasesDeleteResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "domainaliases" :>
-           Capture "domainAliasName" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "domainaliases" :>
+                 Capture "domainAliasName" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Domain Alias of the customer.
 --

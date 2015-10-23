@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.scores.submit@ method which the
 -- 'ScoresSubmit' request conforms to.
 type ScoresSubmitResource =
-     "leaderboards" :>
-       Capture "leaderboardId" Text :>
-         "scores" :>
-           QueryParam "score" Int64 :>
-             QueryParam "scoreTag" Text :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] PlayerScoreResponse
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "scores" :>
+               QueryParam "score" Int64 :>
+                 QueryParam "scoreTag" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Post '[JSON] PlayerScoreResponse
 
 -- | Submits a score to the specified leaderboard.
 --

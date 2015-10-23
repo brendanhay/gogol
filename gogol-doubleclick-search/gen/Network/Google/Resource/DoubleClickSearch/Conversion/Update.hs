@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.conversion.update@ method which the
 -- 'ConversionUpdate' request conforms to.
 type ConversionUpdateResource =
-     "conversion" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] ConversionList :>
-           Put '[JSON] ConversionList
+     "doubleclicksearch" :>
+       "v2" :>
+         "conversion" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] ConversionList :>
+               Put '[JSON] ConversionList
 
 -- | Updates a batch of conversions in DoubleClick Search.
 --

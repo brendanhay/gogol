@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.alerts.list@ method which the
 -- 'AlertsList' request conforms to.
 type AlertsListResource =
-     "alerts" :>
-       QueryParam "locale" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Alerts
+     "adsense" :>
+       "v1.4" :>
+         "alerts" :>
+           QueryParam "locale" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Alerts
 
 -- | List the alerts for this AdSense account.
 --

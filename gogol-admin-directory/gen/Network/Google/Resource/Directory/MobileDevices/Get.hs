@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.mobiledevices.get@ method which the
 -- 'MobileDevicesGet' request conforms to.
 type MobileDevicesGetResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "devices" :>
-           "mobile" :>
-             Capture "resourceId" Text :>
-               QueryParam "projection" MobileDevicesGetProjection :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] MobileDevice
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "devices" :>
+                 "mobile" :>
+                   Capture "resourceId" Text :>
+                     QueryParam "projection" MobileDevicesGetProjection :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] MobileDevice
 
 -- | Retrieve Mobile Device
 --

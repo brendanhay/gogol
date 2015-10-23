@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.permissions.batchDelete@ method which the
 -- 'LayersPermissionsBatchDelete' request conforms to.
 type LayersPermissionsBatchDeleteResource =
-     "layers" :>
-       Capture "id" Text :>
-         "permissions" :>
-           "batchDelete" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] PermissionsBatchDeleteRequest :>
-                 Post '[JSON] PermissionsBatchDeleteResponse
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             "permissions" :>
+               "batchDelete" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] PermissionsBatchDeleteRequest :>
+                     Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --

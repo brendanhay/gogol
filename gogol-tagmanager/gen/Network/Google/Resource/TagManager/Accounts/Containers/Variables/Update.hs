@@ -46,15 +46,17 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.variables.update@ method which the
 -- 'AccountsContainersVariablesUpdate' request conforms to.
 type AccountsContainersVariablesUpdateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "variables" :>
-               Capture "variableId" Text :>
-                 QueryParam "fingerprint" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Variable :> Put '[JSON] Variable
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "variables" :>
+                   Capture "variableId" Text :>
+                     QueryParam "fingerprint" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Variable :> Put '[JSON] Variable
 
 -- | Updates a GTM Variable.
 --

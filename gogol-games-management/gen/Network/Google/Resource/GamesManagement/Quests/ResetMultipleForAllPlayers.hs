@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.quests.resetMultipleForAllPlayers@ method which the
 -- 'QuestsResetMultipleForAllPlayers' request conforms to.
 type QuestsResetMultipleForAllPlayersResource =
-     "quests" :>
-       "resetMultipleForAllPlayers" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] QuestsResetMultipleForAllRequest :>
-             Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "quests" :>
+           "resetMultipleForAllPlayers" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] QuestsResetMultipleForAllRequest :>
+                 Post '[JSON] ()
 
 -- | Resets quests with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft quests

@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.acl.get@ method which the
 -- 'ACLGet' request conforms to.
 type ACLGetResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "acl" :>
-           Capture "ruleId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] ACLRule
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "acl" :>
+               Capture "ruleId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] ACLRule
 
 -- | Returns an access control rule.
 --

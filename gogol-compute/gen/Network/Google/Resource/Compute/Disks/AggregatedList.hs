@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.disks.aggregatedList@ method which the
 -- 'DisksAggregatedList' request conforms to.
 type DisksAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "disks" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] DiskAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "disks" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] DiskAggregatedList
 
 -- | Retrieves the list of disks grouped by scope.
 --

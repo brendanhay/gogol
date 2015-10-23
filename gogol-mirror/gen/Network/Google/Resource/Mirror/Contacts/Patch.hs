@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.contacts.patch@ method which the
 -- 'ContactsPatch' request conforms to.
 type ContactsPatchResource =
-     "contacts" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Contact :> Patch '[JSON] Contact
+     "mirror" :>
+       "v1" :>
+         "contacts" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Contact :> Patch '[JSON] Contact
 
 -- | Updates a contact in place. This method supports patch semantics.
 --

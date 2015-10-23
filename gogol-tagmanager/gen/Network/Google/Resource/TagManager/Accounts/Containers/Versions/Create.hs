@@ -44,15 +44,17 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.versions.create@ method which the
 -- 'AccountsContainersVersionsCreate' request conforms to.
 type AccountsContainersVersionsCreateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "versions" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON]
-                   CreateContainerVersionRequestVersionOptions
-                   :> Post '[JSON] CreateContainerVersionResponse
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "versions" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON]
+                       CreateContainerVersionRequestVersionOptions
+                       :> Post '[JSON] CreateContainerVersionResponse
 
 -- | Creates a Container Version.
 --

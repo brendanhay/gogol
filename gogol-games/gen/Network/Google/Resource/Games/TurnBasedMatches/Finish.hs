@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.finish@ method which the
 -- 'TurnBasedMatchesFinish' request conforms to.
 type TurnBasedMatchesFinishResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         "finish" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] TurnBasedMatchResults :>
-                 Put '[JSON] TurnBasedMatch
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "finish" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] TurnBasedMatchResults :>
+                     Put '[JSON] TurnBasedMatch
 
 -- | Finish a turn-based match. Each player should make this call once, after
 -- all results are in. Only the player whose turn it is may make the first

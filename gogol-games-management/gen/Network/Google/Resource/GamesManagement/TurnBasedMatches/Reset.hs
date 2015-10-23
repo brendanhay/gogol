@@ -41,9 +41,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.turnBasedMatches.reset@ method which the
 -- 'TurnBasedMatchesReset' request conforms to.
 type TurnBasedMatchesResetResource =
-     "turnbasedmatches" :>
-       "reset" :>
-         QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "turnbasedmatches" :>
+           "reset" :>
+             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Reset all turn-based match data for a user. This method is only
 -- accessible to whitelisted tester accounts for your application.

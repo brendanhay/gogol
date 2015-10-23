@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.insert@ method which the
 -- 'AchievementConfigurationsInsert' request conforms to.
 type AchievementConfigurationsInsertResource =
-     "applications" :>
-       Capture "applicationId" Text :>
-         "achievements" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] AchievementConfiguration :>
-               Post '[JSON] AchievementConfiguration
+     "games" :>
+       "v1configuration" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "achievements" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AchievementConfiguration :>
+                   Post '[JSON] AchievementConfiguration
 
 -- | Insert a new achievement configuration in this application.
 --

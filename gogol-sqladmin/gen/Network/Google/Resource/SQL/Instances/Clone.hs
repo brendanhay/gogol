@@ -44,14 +44,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.clone@ method which the
 -- 'InstancesClone' request conforms to.
 type InstancesCloneResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "clone" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] InstancesCloneRequest :>
-                   Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "clone" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] InstancesCloneRequest :>
+                       Post '[JSON] Operation
 
 -- | Creates a Cloud SQL instance as a clone of the source instance.
 --

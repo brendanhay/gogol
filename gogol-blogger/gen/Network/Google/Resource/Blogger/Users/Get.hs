@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.users.get@ method which the
 -- 'UsersGet' request conforms to.
 type UsersGetResource =
-     "users" :>
-       Capture "userId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] User
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Gets one user by ID.
 --

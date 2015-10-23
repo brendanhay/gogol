@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.filters.delete@ method which the
 -- 'ManagementFiltersDelete' request conforms to.
 type ManagementFiltersDeleteResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "filters" :>
-             Capture "filterId" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] Filter
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 Capture "filterId" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Filter
 
 -- | Delete a filter.
 --

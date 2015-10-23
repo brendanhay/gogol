@@ -45,14 +45,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.users.delete@ method which the
 -- 'UsersDelete' request conforms to.
 type UsersDeleteResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "users" :>
-               QueryParam "host" Text :>
-                 QueryParam "name" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "users" :>
+                   QueryParam "host" Text :>
+                     QueryParam "name" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a user from a Cloud SQL instance.
 --

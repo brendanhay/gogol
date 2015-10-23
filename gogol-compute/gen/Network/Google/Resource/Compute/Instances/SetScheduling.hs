@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.setScheduling@ method which the
 -- 'InstancesSetScheduling' request conforms to.
 type InstancesSetSchedulingResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "setScheduling" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Scheduling :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "setScheduling" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Scheduling :> Post '[JSON] Operation
 
 -- | Sets an instance\'s scheduling options.
 --

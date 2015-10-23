@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeFieldValues.get@ method which the
 -- 'CreativeFieldValuesGet' request conforms to.
 type CreativeFieldValuesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeFields" :>
-           Capture "creativeFieldId" Int64 :>
-             "creativeFieldValues" :>
-               Capture "id" Int64 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] CreativeFieldValue
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   Capture "id" Int64 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] CreativeFieldValue
 
 -- | Gets one creative field value by ID.
 --

@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.permissions.batchUpdate@ method which the
 -- 'TablesPermissionsBatchUpdate' request conforms to.
 type TablesPermissionsBatchUpdateResource =
-     "tables" :>
-       Capture "id" Text :>
-         "permissions" :>
-           "batchUpdate" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] PermissionsBatchUpdateRequest :>
-                 Post '[JSON] PermissionsBatchUpdateResponse
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "id" Text :>
+             "permissions" :>
+               "batchUpdate" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] PermissionsBatchUpdateRequest :>
+                     Post '[JSON] PermissionsBatchUpdateResponse
 
 -- | Add or update permission entries to an already existing asset. An asset
 -- can hold up to 20 different permission entries. Each batchInsert request

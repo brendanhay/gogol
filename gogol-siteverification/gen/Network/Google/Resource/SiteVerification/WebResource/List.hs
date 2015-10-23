@@ -40,9 +40,11 @@ import           Network.Google.SiteVerification.Types
 -- | A resource alias for @siteVerification.webResource.list@ method which the
 -- 'WebResourceList' request conforms to.
 type WebResourceListResource =
-     "webResource" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] SiteVerificationWebResourceListResponse
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] SiteVerificationWebResourceListResponse
 
 -- | Get the list of your verified websites and domains.
 --

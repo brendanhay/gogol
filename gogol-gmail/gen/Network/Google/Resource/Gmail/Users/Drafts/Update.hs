@@ -35,7 +35,6 @@ module Network.Google.Resource.Gmail.Users.Drafts.Update
     -- * Request Lenses
     , uduPayload
     , uduUserId
-    , uduMedia
     , uduId
     ) where
 
@@ -45,12 +44,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.drafts.update@ method which the
 -- 'UsersDraftsUpdate' request conforms to.
 type UsersDraftsUpdateResource =
-     Capture "userId" Text :>
-       "drafts" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Draft Body :>
-               Put '[JSON] Draft
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Draft :> Put '[JSON] Draft
+       :<|>
+       "upload" :>
+         "gmail" :>
+           "v1" :>
+             "users" :>
+               Capture "userId" Text :>
+                 "drafts" :>
+                   Capture "id" Text :>
+                     QueryParam "alt" AltJSON :>
+                       QueryParam "uploadType" AltMedia :>
+                         MultipartRelated '[JSON] Draft RequestBody :>
+                           Put '[JSON] Draft
 
 -- | Replaces a draft\'s content.
 --
@@ -58,9 +71,8 @@ type UsersDraftsUpdateResource =
 data UsersDraftsUpdate = UsersDraftsUpdate
     { _uduPayload :: !Draft
     , _uduUserId  :: !Text
-    , _uduMedia   :: !Body
     , _uduId      :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsUpdate' with the minimum fields required to make a request.
 --
@@ -70,20 +82,16 @@ data UsersDraftsUpdate = UsersDraftsUpdate
 --
 -- * 'uduUserId'
 --
--- * 'uduMedia'
---
 -- * 'uduId'
 usersDraftsUpdate
     :: Draft -- ^ 'uduPayload'
-    -> Text -- ^ 'uduMedia'
-    -> Body -- ^ 'uduId'
+    -> Text -- ^ 'uduId'
     -> Text
     -> UsersDraftsUpdate
-usersDraftsUpdate pUduPayload_ pUduUserId_ pUduMedia_ pUduId_ =
+usersDraftsUpdate pUduPayload_ pUduUserId_ pUduId_ =
     UsersDraftsUpdate
     { _uduPayload = pUduPayload_
     , _uduUserId = pUduUserId_
-    , _uduMedia = pUduMedia_
     , _uduId = pUduId_
     }
 
@@ -98,9 +106,6 @@ uduUserId :: Lens' UsersDraftsUpdate Text
 uduUserId
   = lens _uduUserId (\ s a -> s{_uduUserId = a})
 
-uduMedia :: Lens' UsersDraftsUpdate Body
-uduMedia = lens _uduMedia (\ s a -> s{_uduMedia = a})
-
 -- | The ID of the draft to update.
 uduId :: Lens' UsersDraftsUpdate Text
 uduId = lens _uduId (\ s a -> s{_uduId = a})
@@ -109,9 +114,21 @@ instance GoogleRequest UsersDraftsUpdate where
         type Rs UsersDraftsUpdate = Draft
         requestClient UsersDraftsUpdate{..}
           = go _uduUserId _uduId (Just AltJSON) _uduPayload
-              _uduMedia
               gmailService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy UsersDraftsUpdateResource)
+                      mempty
+
+instance GoogleRequest (Upload UsersDraftsUpdate)
+         where
+        type Rs (Upload UsersDraftsUpdate) = Draft
+        requestClient (Upload UsersDraftsUpdate{..} body)
+          = go _uduUserId _uduId (Just AltJSON) (Just AltMedia)
+              _uduPayload
+              body
+              gmailService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy UsersDraftsUpdateResource)
                       mempty

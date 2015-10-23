@@ -559,7 +559,6 @@ plusService :: Service
 plusService
   = defaultService (ServiceId "plus:v1")
       "www.googleapis.com"
-      "plus/v1/"
 
 -- | View your basic profile info
 userinfoProfileScope :: OAuthScope

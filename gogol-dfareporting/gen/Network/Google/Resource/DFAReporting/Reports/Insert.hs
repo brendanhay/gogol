@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.reports.insert@ method which the
 -- 'ReportsInsert' request conforms to.
 type ReportsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "reports" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Report :> Post '[JSON] Report
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Report :> Post '[JSON] Report
 
 -- | Creates a report.
 --

@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.adunits.get@ method which the
 -- 'AdUnitsGet' request conforms to.
 type AdUnitsGetResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "adunits" :>
-           Capture "adUnitId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] AdUnit
+     "adsense" :>
+       "v1.4" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "adunits" :>
+               Capture "adUnitId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] AdUnit
 
 -- | Gets the specified ad unit in the specified ad client.
 --

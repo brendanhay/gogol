@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.list@ method which the
 -- 'TargetPoolsList' request conforms to.
 type TargetPoolsListResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] TargetPoolList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TargetPoolList
 
 -- | Retrieves the list of TargetPool resources available to the specified
 -- project and region.

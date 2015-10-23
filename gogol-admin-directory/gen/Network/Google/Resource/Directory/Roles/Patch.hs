@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roles.patch@ method which the
 -- 'RolesPatch' request conforms to.
 type RolesPatchResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roles" :>
-           Capture "roleId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Role :> Patch '[JSON] Role
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roles" :>
+                 Capture "roleId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Role :> Patch '[JSON] Role
 
 -- | Updates a role. This method supports patch semantics.
 --

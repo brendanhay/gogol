@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.bookshelves.list@ method which the
 -- 'MyLibraryBookshelvesList' request conforms to.
 type MyLibraryBookshelvesListResource =
-     "mylibrary" :>
-       "bookshelves" :>
-         QueryParam "source" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "bookshelves" :>
+             QueryParam "source" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
 
 -- | Retrieves a list of bookshelves belonging to the authenticated user.
 --

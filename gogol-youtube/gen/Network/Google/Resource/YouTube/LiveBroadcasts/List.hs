@@ -50,19 +50,21 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveBroadcasts.list@ method which the
 -- 'LiveBroadcastsList' request conforms to.
 type LiveBroadcastsListResource =
-     "liveBroadcasts" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "broadcastStatus"
-             LiveBroadcastsListBroadcastStatus
-             :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                 QueryParam "id" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] LiveBroadcastListResponse
+     "youtube" :>
+       "v3" :>
+         "liveBroadcasts" :>
+           QueryParam "part" Text :>
+             QueryParam "mine" Bool :>
+               QueryParam "broadcastStatus"
+                 LiveBroadcastsListBroadcastStatus
+                 :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "id" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] LiveBroadcastListResponse
 
 -- | Returns a list of YouTube broadcasts that match the API request
 -- parameters.

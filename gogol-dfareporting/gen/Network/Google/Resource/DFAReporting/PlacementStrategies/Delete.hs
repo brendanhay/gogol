@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placementStrategies.delete@ method which the
 -- 'PlacementStrategiesDelete' request conforms to.
 type PlacementStrategiesDeleteResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placementStrategies" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing placement strategy.
 --

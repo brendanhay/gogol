@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.images.get@ method which the
 -- 'ImagesGet' request conforms to.
 type ImagesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "images" :>
-           Capture "image" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Image
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "images" :>
+                 Capture "image" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Image
 
 -- | Returns the specified image resource.
 --

@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetHttpProxies.setUrlMap@ method which the
 -- 'TargetHTTPProxiesSetURLMap' request conforms to.
 type TargetHTTPProxiesSetURLMapResource =
-     Capture "project" Text :>
-       "targetHttpProxies" :>
-         Capture "targetHttpProxy" Text :>
-           "setUrlMap" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] URLMapReference :>
-                 Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "targetHttpProxies" :>
+               Capture "targetHttpProxy" Text :>
+                 "setUrlMap" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] URLMapReference :>
+                       Post '[JSON] Operation
 
 -- | Changes the URL map for TargetHttpProxy.
 --

@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceTemplates.list@ method which the
 -- 'InstanceTemplatesList' request conforms to.
 type InstanceTemplatesListResource =
-     Capture "project" Text :>
-       "global" :>
-         "instanceTemplates" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] InstanceTemplateList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "instanceTemplates" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] InstanceTemplateList
 
 -- | Retrieves a list of instance templates that are contained within the
 -- specified project and zone.

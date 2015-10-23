@@ -47,14 +47,17 @@ import           Network.Google.ReplicaPool.Types
 -- | A resource alias for @replicapool.zoneOperations.list@ method which the
 -- 'ZoneOperationsList' request conforms to.
 type ZoneOperationsListResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "operations" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] OperationList
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "operations" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of operation resources contained within the specified
 -- zone.

@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.sessions.list@ method which the
 -- 'UsersSessionsList' request conforms to.
 type UsersSessionsListResource =
-     Capture "userId" Text :>
-       "sessions" :>
-         QueryParam "startTime" Text :>
-           QueryParam "endTime" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "includeDeleted" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ListSessionsResponse
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "sessions" :>
+               QueryParam "startTime" Text :>
+                 QueryParam "endTime" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "includeDeleted" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ListSessionsResponse
 
 -- | Lists sessions previously created.
 --

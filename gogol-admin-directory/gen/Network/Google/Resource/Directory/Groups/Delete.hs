@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.groups.delete@ method which the
 -- 'GroupsDelete' request conforms to.
 type GroupsDeleteResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete Group
 --

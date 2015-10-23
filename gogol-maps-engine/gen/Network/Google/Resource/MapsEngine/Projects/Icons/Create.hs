@@ -34,7 +34,6 @@ module Network.Google.Resource.MapsEngine.Projects.Icons.Create
 
     -- * Request Lenses
     , picPayload
-    , picMedia
     , picProjectId
     ) where
 
@@ -44,21 +43,32 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.projects.icons.create@ method which the
 -- 'ProjectsIconsCreate' request conforms to.
 type ProjectsIconsCreateResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "icons" :>
-           QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Icon Body :>
-               Post '[JSON] Icon
+     "mapsengine" :>
+       "v1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "icons" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Icon :> Post '[JSON] Icon
+       :<|>
+       "upload" :>
+         "mapsengine" :>
+           "v1" :>
+             "projects" :>
+               Capture "projectId" Text :>
+                 "icons" :>
+                   QueryParam "alt" AltJSON :>
+                     QueryParam "uploadType" AltMedia :>
+                       MultipartRelated '[JSON] Icon RequestBody :>
+                         Post '[JSON] Icon
 
 -- | Create an icon.
 --
 -- /See:/ 'projectsIconsCreate' smart constructor.
 data ProjectsIconsCreate = ProjectsIconsCreate
     { _picPayload   :: !Icon
-    , _picMedia     :: !Body
     , _picProjectId :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsIconsCreate' with the minimum fields required to make a request.
 --
@@ -66,18 +76,14 @@ data ProjectsIconsCreate = ProjectsIconsCreate
 --
 -- * 'picPayload'
 --
--- * 'picMedia'
---
 -- * 'picProjectId'
 projectsIconsCreate
     :: Icon -- ^ 'picPayload'
-    -> Body -- ^ 'picMedia'
     -> Text -- ^ 'picProjectId'
     -> ProjectsIconsCreate
-projectsIconsCreate pPicPayload_ pPicMedia_ pPicProjectId_ =
+projectsIconsCreate pPicPayload_ pPicProjectId_ =
     ProjectsIconsCreate
     { _picPayload = pPicPayload_
-    , _picMedia = pPicMedia_
     , _picProjectId = pPicProjectId_
     }
 
@@ -85,9 +91,6 @@ projectsIconsCreate pPicPayload_ pPicMedia_ pPicProjectId_ =
 picPayload :: Lens' ProjectsIconsCreate Icon
 picPayload
   = lens _picPayload (\ s a -> s{_picPayload = a})
-
-picMedia :: Lens' ProjectsIconsCreate Body
-picMedia = lens _picMedia (\ s a -> s{_picMedia = a})
 
 -- | The ID of the project.
 picProjectId :: Lens' ProjectsIconsCreate Text
@@ -98,9 +101,21 @@ instance GoogleRequest ProjectsIconsCreate where
         type Rs ProjectsIconsCreate = Icon
         requestClient ProjectsIconsCreate{..}
           = go _picProjectId (Just AltJSON) _picPayload
-              _picMedia
               mapsEngineService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy ProjectsIconsCreateResource)
+                      mempty
+
+instance GoogleRequest (Upload ProjectsIconsCreate)
+         where
+        type Rs (Upload ProjectsIconsCreate) = Icon
+        requestClient (Upload ProjectsIconsCreate{..} body)
+          = go _picProjectId (Just AltJSON) (Just AltMedia)
+              _picPayload
+              body
+              mapsEngineService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy ProjectsIconsCreateResource)
                       mempty

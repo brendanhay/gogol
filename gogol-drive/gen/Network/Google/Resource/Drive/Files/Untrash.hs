@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.untrash@ method which the
 -- 'FilesUntrash' request conforms to.
 type FilesUntrashResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "untrash" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] File
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "untrash" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Restores a file from the trash.
 --

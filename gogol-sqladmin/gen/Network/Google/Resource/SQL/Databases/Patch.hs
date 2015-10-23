@@ -46,14 +46,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.databases.patch@ method which the
 -- 'DatabasesPatch' request conforms to.
 type DatabasesPatchResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "databases" :>
-               Capture "database" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Database :> Patch '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   Capture "database" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Database :> Patch '[JSON] Operation
 
 -- | Updates a resource containing information about a database inside a
 -- Cloud SQL instance. This method supports patch semantics.

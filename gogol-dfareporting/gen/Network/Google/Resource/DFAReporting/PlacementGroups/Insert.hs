@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placementGroups.insert@ method which the
 -- 'PlacementGroupsInsert' request conforms to.
 type PlacementGroupsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placementGroups" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] PlacementGroup :>
-               Post '[JSON] PlacementGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementGroups" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] PlacementGroup :>
+                   Post '[JSON] PlacementGroup
 
 -- | Inserts a new placement group.
 --

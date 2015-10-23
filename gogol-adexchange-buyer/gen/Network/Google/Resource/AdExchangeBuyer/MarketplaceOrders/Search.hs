@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.marketplaceorders.search@ method which the
 -- 'MarketplaceOrdersSearch' request conforms to.
 type MarketplaceOrdersSearchResource =
-     "marketplaceOrders" :>
-       "search" :>
-         QueryParam "pqlQuery" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] GetOrdersResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           "search" :>
+             QueryParam "pqlQuery" Text :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] GetOrdersResponse
 
 -- | Search for orders using pql query
 --

@@ -43,13 +43,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.testers.update@ method which the
 -- 'EditsTestersUpdate' request conforms to.
 type EditsTestersUpdateResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "testers" :>
-             Capture "track" EditsTestersUpdateTrack :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Testers :> Put '[JSON] Testers
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "testers" :>
+                   Capture "track" EditsTestersUpdateTrack :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Testers :> Put '[JSON] Testers
 
 --
 -- /See:/ 'editsTestersUpdate' smart constructor.

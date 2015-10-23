@@ -44,12 +44,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.datafeeds.list@ method which the
 -- 'DatafeedsList' request conforms to.
 type DatafeedsListResource =
-     Capture "merchantId" Word64 :>
-       "datafeeds" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] DatafeedsListResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "datafeeds" :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] DatafeedsListResponse
 
 -- | Lists the datafeeds in your Merchant Center account.
 --

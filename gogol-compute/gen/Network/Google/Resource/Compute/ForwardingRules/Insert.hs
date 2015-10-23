@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.forwardingRules.insert@ method which the
 -- 'ForwardingRulesInsert' request conforms to.
 type ForwardingRulesInsertResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "forwardingRules" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ForwardingRule :>
-                 Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "forwardingRules" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ForwardingRule :>
+                       Post '[JSON] Operation
 
 -- | Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.

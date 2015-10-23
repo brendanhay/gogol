@@ -44,14 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.changePlan@ method which the
 -- 'SubscriptionsChangePlan' request conforms to.
 type SubscriptionsChangePlanResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "changePlan" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ChangePlanRequest :>
-                   Post '[JSON] Subscription
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "changePlan" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ChangePlanRequest :>
+                         Post '[JSON] Subscription
 
 -- | Changes the plan of a subscription
 --

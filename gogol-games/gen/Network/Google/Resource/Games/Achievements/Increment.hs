@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.achievements.increment@ method which the
 -- 'AchievementsIncrement' request conforms to.
 type AchievementsIncrementResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         "increment" :>
-           QueryParam "stepsToIncrement" Int32 :>
-             QueryParam "requestId" Int64 :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] AchievementIncrementResponse
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "increment" :>
+               QueryParam "stepsToIncrement" Int32 :>
+                 QueryParam "requestId" Int64 :>
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] AchievementIncrementResponse
 
 -- | Increments the steps of the achievement with the given ID for the
 -- currently authenticated player.

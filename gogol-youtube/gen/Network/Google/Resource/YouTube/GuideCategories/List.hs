@@ -46,13 +46,15 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.guideCategories.list@ method which the
 -- 'GuideCategoriesList' request conforms to.
 type GuideCategoriesListResource =
-     "guideCategories" :>
-       QueryParam "part" Text :>
-         QueryParam "regionCode" Text :>
-           QueryParam "hl" Text :>
-             QueryParam "id" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] GuideCategoryListResponse
+     "youtube" :>
+       "v3" :>
+         "guideCategories" :>
+           QueryParam "part" Text :>
+             QueryParam "regionCode" Text :>
+               QueryParam "hl" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] GuideCategoryListResponse
 
 -- | Returns a list of categories that can be associated with YouTube
 -- channels.

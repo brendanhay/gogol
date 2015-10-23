@@ -43,12 +43,14 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.insert@ method which the
 -- 'InstancesInsert' request conforms to.
 type InstancesInsertResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] DatabaseInstance :>
-               Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] DatabaseInstance :>
+                   Post '[JSON] Operation
 
 -- | Creates a new Cloud SQL instance.
 --

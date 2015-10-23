@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.patch@ method which the
 -- 'TablesPatch' request conforms to.
 type TablesPatchResource =
-     "tables" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Table :> Patch '[JSON] ()
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Table :> Patch '[JSON] ()
 
 -- | Mutate a table asset.
 --

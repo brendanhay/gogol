@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.cloudloading.addBook@ method which the
 -- 'CloudLoadingAddBook' request conforms to.
 type CloudLoadingAddBookResource =
-     "cloudloading" :>
-       "addBook" :>
-         QueryParam "mime_type" Text :>
-           QueryParam "upload_client_token" Text :>
-             QueryParam "name" Text :>
-               QueryParam "drive_document_id" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] BooksCloudLoadingResource
+     "books" :>
+       "v1" :>
+         "cloudloading" :>
+           "addBook" :>
+             QueryParam "mime_type" Text :>
+               QueryParam "upload_client_token" Text :>
+                 QueryParam "name" Text :>
+                   QueryParam "drive_document_id" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Post '[JSON] BooksCloudLoadingResource
 
 -- |
 --

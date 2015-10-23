@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @discovery.apis.getRest@ method which the
 -- 'APIsGetRest' request conforms to.
 type APIsGetRestResource =
-     "apis" :>
-       Capture "api" Text :>
-         Capture "version" Text :>
-           "rest" :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] RestDescription
+     "discovery" :>
+       "v1" :>
+         "apis" :>
+           Capture "api" Text :>
+             Capture "version" Text :>
+               "rest" :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] RestDescription
 
 -- | Retrieve the description of a particular version of an api.
 --

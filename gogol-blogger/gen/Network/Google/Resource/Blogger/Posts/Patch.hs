@@ -49,17 +49,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.posts.patch@ method which the
 -- 'PostsPatch' request conforms to.
 type PostsPatchResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             QueryParam "fetchBody" Bool :>
-               QueryParam "fetchImages" Bool :>
-                 QueryParam "maxComments" Word32 :>
-                   QueryParam "revert" Bool :>
-                     QueryParam "publish" Bool :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Post' :> Patch '[JSON] Post'
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 QueryParam "fetchBody" Bool :>
+                   QueryParam "fetchImages" Bool :>
+                     QueryParam "maxComments" Word32 :>
+                       QueryParam "revert" Bool :>
+                         QueryParam "publish" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Post' :> Patch '[JSON] Post'
 
 -- | Update a post. This method supports patch semantics.
 --

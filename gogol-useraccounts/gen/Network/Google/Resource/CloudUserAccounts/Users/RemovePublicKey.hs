@@ -44,13 +44,16 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.users.removePublicKey@ method which the
 -- 'UsersRemovePublicKey' request conforms to.
 type UsersRemovePublicKeyResource =
-     Capture "project" Text :>
-       "global" :>
-         "users" :>
-           Capture "user" Text :>
-             "removePublicKey" :>
-               QueryParam "fingerprint" Text :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 Capture "user" Text :>
+                   "removePublicKey" :>
+                     QueryParam "fingerprint" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Removes the specified public key from the user.
 --

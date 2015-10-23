@@ -47,14 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.diskTypes.list@ method which the
 -- 'DiskTypesList' request conforms to.
 type DiskTypesListResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "diskTypes" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] DiskTypeList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "diskTypes" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] DiskTypeList
 
 -- | Retrieves the list of disk type resources available to the specified
 -- project.

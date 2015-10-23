@@ -36,7 +36,6 @@ module Network.Google.Resource.YouTube.Videos.Insert
     , viPart
     , viStabilize
     , viPayload
-    , viMedia
     , viOnBehalfOfContentOwner
     , viOnBehalfOfContentOwnerChannel
     , viNotifySubscribers
@@ -49,16 +48,32 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.videos.insert@ method which the
 -- 'VideosInsert' request conforms to.
 type VideosInsertResource =
-     "videos" :>
-       QueryParam "part" Text :>
-         QueryParam "stabilize" Bool :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "onBehalfOfContentOwnerChannel" Text :>
-               QueryParam "notifySubscribers" Bool :>
-                 QueryParam "autoLevels" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     MultipartRelated '[JSON] Video Body :>
-                       Post '[JSON] Video
+     "youtube" :>
+       "v3" :>
+         "videos" :>
+           QueryParam "part" Text :>
+             QueryParam "stabilize" Bool :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                   QueryParam "notifySubscribers" Bool :>
+                     QueryParam "autoLevels" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Video :> Post '[JSON] Video
+       :<|>
+       "upload" :>
+         "youtube" :>
+           "v3" :>
+             "videos" :>
+               QueryParam "part" Text :>
+                 QueryParam "stabilize" Bool :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "notifySubscribers" Bool :>
+                         QueryParam "autoLevels" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             QueryParam "uploadType" AltMedia :>
+                               MultipartRelated '[JSON] Video RequestBody :>
+                                 Post '[JSON] Video
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
@@ -67,12 +82,11 @@ data VideosInsert = VideosInsert
     { _viPart                          :: !Text
     , _viStabilize                     :: !(Maybe Bool)
     , _viPayload                       :: !Video
-    , _viMedia                         :: !Body
     , _viOnBehalfOfContentOwner        :: !(Maybe Text)
     , _viOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _viNotifySubscribers             :: !Bool
     , _viAutoLevels                    :: !(Maybe Bool)
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosInsert' with the minimum fields required to make a request.
 --
@@ -84,8 +98,6 @@ data VideosInsert = VideosInsert
 --
 -- * 'viPayload'
 --
--- * 'viMedia'
---
 -- * 'viOnBehalfOfContentOwner'
 --
 -- * 'viOnBehalfOfContentOwnerChannel'
@@ -96,14 +108,12 @@ data VideosInsert = VideosInsert
 videosInsert
     :: Text -- ^ 'viPart'
     -> Video -- ^ 'viPayload'
-    -> Body -- ^ 'viMedia'
     -> VideosInsert
-videosInsert pViPart_ pViPayload_ pViMedia_ =
+videosInsert pViPart_ pViPayload_ =
     VideosInsert
     { _viPart = pViPart_
     , _viStabilize = Nothing
     , _viPayload = pViPayload_
-    , _viMedia = pViMedia_
     , _viOnBehalfOfContentOwner = Nothing
     , _viOnBehalfOfContentOwnerChannel = Nothing
     , _viNotifySubscribers = True
@@ -131,9 +141,6 @@ viStabilize
 viPayload :: Lens' VideosInsert Video
 viPayload
   = lens _viPayload (\ s a -> s{_viPayload = a})
-
-viMedia :: Lens' VideosInsert Body
-viMedia = lens _viMedia (\ s a -> s{_viMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -199,8 +206,24 @@ instance GoogleRequest VideosInsert where
               _viAutoLevels
               (Just AltJSON)
               _viPayload
-              _viMedia
               youTubeService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy VideosInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload VideosInsert) where
+        type Rs (Upload VideosInsert) = Video
+        requestClient (Upload VideosInsert{..} body)
+          = go (Just _viPart) _viStabilize
+              _viOnBehalfOfContentOwner
+              _viOnBehalfOfContentOwnerChannel
+              (Just _viNotifySubscribers)
+              _viAutoLevels
+              (Just AltJSON)
+              (Just AltMedia)
+              _viPayload
+              body
+              youTubeService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy VideosInsertResource)
                       mempty

@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeGroups.get@ method which the
 -- 'CreativeGroupsGet' request conforms to.
 type CreativeGroupsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeGroups" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] CreativeGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] CreativeGroup
 
 -- | Gets one creative group by ID.
 --

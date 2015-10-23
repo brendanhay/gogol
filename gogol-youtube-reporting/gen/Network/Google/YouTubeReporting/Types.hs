@@ -83,7 +83,6 @@ youTubeReportingService :: Service
 youTubeReportingService
   = defaultService (ServiceId "youtubereporting:v1")
       "youtubereporting.googleapis.com"
-      ""
 
 -- | View YouTube Analytics reports for your YouTube content
 ytAnalyticsReadonlyScope :: OAuthScope

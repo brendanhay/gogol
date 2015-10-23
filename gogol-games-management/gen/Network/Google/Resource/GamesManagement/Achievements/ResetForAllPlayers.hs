@@ -44,10 +44,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.achievements.resetForAllPlayers@ method which the
 -- 'AchievementsResetForAllPlayers' request conforms to.
 type AchievementsResetForAllPlayersResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         "resetForAllPlayers" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "resetForAllPlayers" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets the achievement with the given ID for all players. This method is
 -- only available to user accounts for your developer console. Only draft

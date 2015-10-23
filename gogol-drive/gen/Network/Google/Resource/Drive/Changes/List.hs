@@ -47,14 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.changes.list@ method which the
 -- 'ChangesList' request conforms to.
 type ChangesListResource =
-     "changes" :>
-       QueryParam "includeSubscribed" Bool :>
-         QueryParam "startChangeId" Int64 :>
-           QueryParam "spaces" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "includeDeleted" Bool :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] ChangeList
+     "drive" :>
+       "v2" :>
+         "changes" :>
+           QueryParam "includeSubscribed" Bool :>
+             QueryParam "startChangeId" Int64 :>
+               QueryParam "spaces" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "includeDeleted" Bool :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] ChangeList
 
 -- | Lists the changes for a user.
 --

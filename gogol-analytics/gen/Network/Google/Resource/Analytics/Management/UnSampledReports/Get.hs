@@ -45,17 +45,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.unsampledReports.get@ method which the
 -- 'ManagementUnSampledReportsGet' request conforms to.
 type ManagementUnSampledReportsGetResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "unsampledReports" :>
-                     Capture "unsampledReportId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] UnSampledReport
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "unsampledReports" :>
+                         Capture "unsampledReportId" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] UnSampledReport
 
 -- | Returns a single unsampled report.
 --

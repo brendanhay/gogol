@@ -47,17 +47,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.volumes.useruploaded.list@ method which the
 -- 'VolumesUserUploadedList' request conforms to.
 type VolumesUserUploadedListResource =
-     "volumes" :>
-       "useruploaded" :>
-         QueryParams "processingState"
-           VolumesUserUploadedListProcessingState
-           :>
-           QueryParam "locale" Text :>
-             QueryParams "volumeId" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "startIndex" Word32 :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           "useruploaded" :>
+             QueryParams "processingState"
+               VolumesUserUploadedListProcessingState
+               :>
+               QueryParam "locale" Text :>
+                 QueryParams "volumeId" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "startIndex" Word32 :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books uploaded by the current user.
 --

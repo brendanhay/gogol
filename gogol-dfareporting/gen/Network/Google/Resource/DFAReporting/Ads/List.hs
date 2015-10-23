@@ -66,57 +66,64 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.ads.list@ method which the
 -- 'AdsList' request conforms to.
 type AdsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "ads" :>
-           QueryParams "remarketingListIds" Int64 :>
-             QueryParams "landingPageIds" Int64 :>
-               QueryParams "creativeIds" Int64 :>
-                 QueryParam "advertiserId" Int64 :>
-                   QueryParams "campaignIds" Int64 :>
-                     QueryParam "searchString" Text :>
-                       QueryParams "sizeIds" Int64 :>
-                         QueryParam "sslCompliant" Bool :>
-                           QueryParams "ids" Int64 :>
-                             QueryParam "sortOrder" AdsListSortOrder :>
-                               QueryParam "active" Bool :>
-                                 QueryParams
-                                   "creativeOptimizationConfigurationIds"
-                                   Int64
-                                   :>
-                                   QueryParams "placementIds" Int64 :>
-                                     QueryParam "sslRequired" Bool :>
-                                       QueryParam "overriddenEventTagId" Int64
-                                         :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "sortField"
-                                             AdsListSortField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "ads" :>
+               QueryParams "remarketingListIds" Int64 :>
+                 QueryParams "landingPageIds" Int64 :>
+                   QueryParams "creativeIds" Int64 :>
+                     QueryParam "advertiserId" Int64 :>
+                       QueryParams "campaignIds" Int64 :>
+                         QueryParam "searchString" Text :>
+                           QueryParams "sizeIds" Int64 :>
+                             QueryParam "sslCompliant" Bool :>
+                               QueryParams "ids" Int64 :>
+                                 QueryParam "sortOrder" AdsListSortOrder :>
+                                   QueryParam "active" Bool :>
+                                     QueryParams
+                                       "creativeOptimizationConfigurationIds"
+                                       Int64
+                                       :>
+                                       QueryParams "placementIds" Int64 :>
+                                         QueryParam "sslRequired" Bool :>
+                                           QueryParam "overriddenEventTagId"
+                                             Int64
                                              :>
-                                             QueryParams "type" AdsListType :>
-                                               QueryParam "creativeType"
-                                                 AdsListCreativeType
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "sortField"
+                                                 AdsListSortField
                                                  :>
-                                                 QueryParam
-                                                   "dynamicClickTracker"
-                                                   Bool
+                                                 QueryParams "type" AdsListType
                                                    :>
-                                                   QueryParam "compatibility"
-                                                     AdsListCompatibility
+                                                   QueryParam "creativeType"
+                                                     AdsListCreativeType
                                                      :>
-                                                     QueryParam "archived" Bool
+                                                     QueryParam
+                                                       "dynamicClickTracker"
+                                                       Bool
                                                        :>
-                                                       QueryParam "maxResults"
-                                                         Int32
+                                                       QueryParam
+                                                         "compatibility"
+                                                         AdsListCompatibility
                                                          :>
-                                                         QueryParams
-                                                           "audienceSegmentIds"
-                                                           Int64
+                                                         QueryParam "archived"
+                                                           Bool
                                                            :>
-                                                           QueryParam "alt"
-                                                             AltJSON
+                                                           QueryParam
+                                                             "maxResults"
+                                                             Int32
                                                              :>
-                                                             Get '[JSON]
-                                                               AdsListResponse
+                                                             QueryParams
+                                                               "audienceSegmentIds"
+                                                               Int64
+                                                               :>
+                                                               QueryParam "alt"
+                                                                 AltJSON
+                                                                 :>
+                                                                 Get '[JSON]
+                                                                   AdsListResponse
 
 -- | Retrieves a list of ads, possibly filtered.
 --

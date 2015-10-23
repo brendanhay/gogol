@@ -44,11 +44,14 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.users.insert@ method which the
 -- 'UsersInsert' request conforms to.
 type UsersInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "users" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] User :> Post '[JSON] Operation
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] User :> Post '[JSON] Operation
 
 -- | Creates a User resource in the specified project using the data included
 -- in the request.

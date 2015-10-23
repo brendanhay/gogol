@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.jobs.get@ method which the
 -- 'JobsGet' request conforms to.
 type JobsGetResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "jobs" :>
-           Capture "jobId" Word64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Job
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Retrieves a job, including all the changes made to the job.
 --

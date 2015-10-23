@@ -42,11 +42,13 @@ import           Network.Google.Translate.Types
 -- | A resource alias for @language.detections.list@ method which the
 -- 'DetectionsList' request conforms to.
 type DetectionsListResource =
-     "v2" :>
-       "detect" :>
-         QueryParams "q" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] DetectionsListResponse
+     "language" :>
+       "translate" :>
+         "v2" :>
+           "detect" :>
+             QueryParams "q" Text :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] DetectionsListResponse
 
 -- | Detect the language of text.
 --

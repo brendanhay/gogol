@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.aggregatedList@ method which the
 -- 'InstanceGroupManagersAggregatedList' request conforms to.
 type InstanceGroupManagersAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "instanceGroupManagers" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] InstanceGroupManagerAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "instanceGroupManagers" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] InstanceGroupManagerAggregatedList
 
 -- | Retrieves the list of managed instance groups and groups them by zone.
 --

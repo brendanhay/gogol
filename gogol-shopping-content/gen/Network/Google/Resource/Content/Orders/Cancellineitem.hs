@@ -44,13 +44,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.cancellineitem@ method which the
 -- 'OrdersCancellineitem' request conforms to.
 type OrdersCancellineitemResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         Capture "orderId" Text :>
-           "cancelLineItem" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] OrdersCancelLineItemRequest :>
-                 Post '[JSON] OrdersCancelLineItemResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "cancelLineItem" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] OrdersCancelLineItemRequest :>
+                     Post '[JSON] OrdersCancelLineItemResponse
 
 -- | Cancels a line item.
 --

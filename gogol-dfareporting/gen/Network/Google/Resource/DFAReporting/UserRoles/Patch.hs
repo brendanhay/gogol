@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.userRoles.patch@ method which the
 -- 'UserRolesPatch' request conforms to.
 type UserRolesPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "userRoles" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] UserRole :> Patch '[JSON] UserRole
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] UserRole :> Patch '[JSON] UserRole
 
 -- | Updates an existing user role. This method supports patch semantics.
 --

@@ -219,4 +219,3 @@ doubleClickBidsService
   = defaultService
       (ServiceId "doubleclickbidmanager:v1")
       "www.googleapis.com"
-      "doubleclickbidmanager/v1/"

@@ -48,14 +48,17 @@ import           Network.Google.ReplicaPool.Types
 -- | A resource alias for @replicapool.instanceGroupManagers.resize@ method which the
 -- 'InstanceGroupManagersResize' request conforms to.
 type InstanceGroupManagersResizeResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "resize" :>
-                 QueryParam "size" Int32 :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "resize" :>
+                       QueryParam "size" Int32 :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Resizes the managed instance group up or down. If resized up, new
 -- instances are created using the current instance template. If resized

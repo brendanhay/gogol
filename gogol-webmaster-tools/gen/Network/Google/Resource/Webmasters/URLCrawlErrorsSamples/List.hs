@@ -45,17 +45,19 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.urlcrawlerrorssamples.list@ method which the
 -- 'URLCrawlErrorsSamplesList' request conforms to.
 type URLCrawlErrorsSamplesListResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         "urlCrawlErrorsSamples" :>
-           QueryParam "category"
-             URLCrawlErrorsSamplesListCategory
-             :>
-             QueryParam "platform"
-               URLCrawlErrorsSamplesListPlatform
-               :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] URLCrawlErrorsSamplesListResponse
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "urlCrawlErrorsSamples" :>
+               QueryParam "category"
+                 URLCrawlErrorsSamplesListCategory
+                 :>
+                 QueryParam "platform"
+                   URLCrawlErrorsSamplesListPlatform
+                   :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] URLCrawlErrorsSamplesListResponse
 
 -- | Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.

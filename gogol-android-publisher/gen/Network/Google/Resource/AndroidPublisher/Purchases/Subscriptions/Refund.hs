@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.purchases.subscriptions.refund@ method which the
 -- 'PurchasesSubscriptionsRefund' request conforms to.
 type PurchasesSubscriptionsRefundResource =
-     Capture "packageName" Text :>
-       "purchases" :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "tokens" :>
-               CaptureMode "token" "refund" Text :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "purchases" :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "tokens" :>
+                     CaptureMode "token" "refund" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Refunds a user\'s subscription purchase, but the subscription remains
 -- valid until its expiration time and it will continue to recur.

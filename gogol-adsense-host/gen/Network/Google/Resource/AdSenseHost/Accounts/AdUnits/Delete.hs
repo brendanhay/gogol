@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.accounts.adunits.delete@ method which the
 -- 'AccountsAdUnitsDelete' request conforms to.
 type AccountsAdUnitsDeleteResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               Capture "adUnitId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] AdUnit
+     "adsensehost" :>
+       "v4.1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   Capture "adUnitId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] AdUnit
 
 -- | Delete the specified ad unit from the specified publisher AdSense
 -- account.

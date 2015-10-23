@@ -46,13 +46,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accountshipping.patch@ method which the
 -- 'AccountshippingPatch' request conforms to.
 type AccountshippingPatchResource =
-     Capture "merchantId" Word64 :>
-       "accountshipping" :>
-         Capture "accountId" Word64 :>
-           QueryParam "dryRun" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] AccountShipping :>
-                 Patch '[JSON] AccountShipping
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accountshipping" :>
+             Capture "accountId" Word64 :>
+               QueryParam "dryRun" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] AccountShipping :>
+                     Patch '[JSON] AccountShipping
 
 -- | Updates the shipping settings of the account. This method supports patch
 -- semantics.

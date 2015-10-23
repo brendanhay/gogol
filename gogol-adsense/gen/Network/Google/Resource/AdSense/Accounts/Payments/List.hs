@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.payments.list@ method which the
 -- 'AccountsPaymentsList' request conforms to.
 type AccountsPaymentsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "payments" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Payments
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "payments" :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Payments
 
 -- | List the payments for the specified AdSense account.
 --

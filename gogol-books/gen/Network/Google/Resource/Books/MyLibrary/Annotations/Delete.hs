@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.annotations.delete@ method which the
 -- 'MyLibraryAnnotationsDelete' request conforms to.
 type MyLibraryAnnotationsDeleteResource =
-     "mylibrary" :>
-       "annotations" :>
-         Capture "annotationId" Text :>
-           QueryParam "source" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             Capture "annotationId" Text :>
+               QueryParam "source" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an annotation.
 --

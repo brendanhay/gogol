@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.filters.patch@ method which the
 -- 'ManagementFiltersPatch' request conforms to.
 type ManagementFiltersPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "filters" :>
-             Capture "filterId" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Filter :> Patch '[JSON] Filter
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 Capture "filterId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Filter :> Patch '[JSON] Filter
 
 -- | Updates an existing filter. This method supports patch semantics.
 --

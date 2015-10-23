@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.orgunits.delete@ method which the
 -- 'OrgUnitsDelete' request conforms to.
 type OrgUnitsDeleteResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "orgunits" :>
-           Captures "orgUnitPath" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "orgunits" :>
+                 Captures "orgUnitPath" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove Organization Unit
 --

@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasterCollections.rasters.batchDelete@ method which the
 -- 'RasterCollectionsRastersBatchDelete' request conforms to.
 type RasterCollectionsRastersBatchDeleteResource =
-     "rasterCollections" :>
-       Capture "id" Text :>
-         "rasters" :>
-           "batchDelete" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON]
-                 RasterCollectionsRasterBatchDeleteRequest
-                 :>
-                 Post '[JSON]
-                   RasterCollectionsRastersBatchDeleteResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           Capture "id" Text :>
+             "rasters" :>
+               "batchDelete" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON]
+                     RasterCollectionsRasterBatchDeleteRequest
+                     :>
+                     Post '[JSON]
+                       RasterCollectionsRastersBatchDeleteResponse
 
 -- | Remove rasters from an existing raster collection. Up to 50 rasters can
 -- be included in a single batchDelete request. Each batchDelete request is

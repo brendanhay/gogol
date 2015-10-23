@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.tokens.list@ method which the
 -- 'TokensList' request conforms to.
 type TokensListResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "tokens" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Tokens
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "tokens" :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Tokens
 
 -- | Returns the set of tokens specified user has issued to 3rd party
 -- applications.

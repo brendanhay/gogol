@@ -49,14 +49,16 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.captions.list@ method which the
 -- 'CaptionsList' request conforms to.
 type CaptionsListResource =
-     "captions" :>
-       QueryParam "part" Text :>
-         QueryParam "videoId" Text :>
-           QueryParam "onBehalfOf" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "id" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] CaptionListResponse
+     "youtube" :>
+       "v3" :>
+         "captions" :>
+           QueryParam "part" Text :>
+             QueryParam "videoId" Text :>
+               QueryParam "onBehalfOf" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] CaptionListResponse
 
 -- | Returns a list of caption tracks that are associated with a specified
 -- video. Note that the API response does not contain the actual captions

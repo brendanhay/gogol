@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.schemas.insert@ method which the
 -- 'SchemasInsert' request conforms to.
 type SchemasInsertResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "schemas" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Schema :> Post '[JSON] Schema
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "schemas" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Schema :> Post '[JSON] Schema
 
 -- | Create schema.
 --

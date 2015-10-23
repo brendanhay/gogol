@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.publish@ method which the
 -- 'LayersPublish' request conforms to.
 type LayersPublishResource =
-     "layers" :>
-       Capture "id" Text :>
-         "publish" :>
-           QueryParam "force" Bool :>
-             QueryParam "alt" AltJSON :>
-               Post '[JSON] PublishResponse
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             "publish" :>
+               QueryParam "force" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] PublishResponse
 
 -- | Publish a layer asset.
 --

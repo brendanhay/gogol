@@ -45,16 +45,18 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.versions.publish@ method which the
 -- 'AccountsContainersVersionsPublish' request conforms to.
 type AccountsContainersVersionsPublishResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "versions" :>
-               Capture "containerVersionId" Text :>
-                 "publish" :>
-                   QueryParam "fingerprint" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Post '[JSON] PublishContainerVersionResponse
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "versions" :>
+                   Capture "containerVersionId" Text :>
+                     "publish" :>
+                       QueryParam "fingerprint" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] PublishContainerVersionResponse
 
 -- | Publishes a Container Version.
 --

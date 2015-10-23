@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.deployments.list@ method which the
 -- 'DeploymentsList' request conforms to.
 type DeploymentsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] DeploymentsListResponse
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] DeploymentsListResponse
 
 -- | Lists all deployments for a given project.
 --

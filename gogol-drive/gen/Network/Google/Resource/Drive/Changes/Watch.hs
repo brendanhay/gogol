@@ -48,16 +48,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.changes.watch@ method which the
 -- 'ChangesWatch' request conforms to.
 type ChangesWatchResource =
-     "changes" :>
-       "watch" :>
-         QueryParam "includeSubscribed" Bool :>
-           QueryParam "startChangeId" Int64 :>
-             QueryParam "spaces" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "includeDeleted" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Channel :> Post '[JSON] Channel
+     "drive" :>
+       "v2" :>
+         "changes" :>
+           "watch" :>
+             QueryParam "includeSubscribed" Bool :>
+               QueryParam "startChangeId" Int64 :>
+                 QueryParam "spaces" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "includeDeleted" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Subscribe to changes for a user.
 --

@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.datasets.commit@ method which the
 -- 'DataSetsCommit' request conforms to.
 type DataSetsCommitResource =
-     Capture "datasetId" Text :>
-       "commit" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] CommitRequest :>
-             Post '[JSON] CommitResponse
+     "datastore" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             "commit" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] CommitRequest :>
+                   Post '[JSON] CommitResponse
 
 -- | Commit a transaction, optionally creating, deleting or modifying some
 -- entities.

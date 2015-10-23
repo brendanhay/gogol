@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.contacts.delete@ method which the
 -- 'ContactsDelete' request conforms to.
 type ContactsDeleteResource =
-     "contacts" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "mirror" :>
+       "v1" :>
+         "contacts" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a contact.
 --

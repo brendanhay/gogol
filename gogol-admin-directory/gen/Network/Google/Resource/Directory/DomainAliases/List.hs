@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.domainAliases.list@ method which the
 -- 'DomainAliasesList' request conforms to.
 type DomainAliasesListResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "domainaliases" :>
-           QueryParam "parentDomainName" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] DomainAliases
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "domainaliases" :>
+                 QueryParam "parentDomainName" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] DomainAliases
 
 -- | Lists the domain aliases of the customer.
 --

@@ -43,11 +43,13 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.sitemaps.get@ method which the
 -- 'SitemapsGet' request conforms to.
 type SitemapsGetResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         "sitemaps" :>
-           Capture "feedpath" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] WmxSitemap
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "sitemaps" :>
+               Capture "feedpath" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] WmxSitemap
 
 -- | Retrieves information about a specific sitemap.
 --

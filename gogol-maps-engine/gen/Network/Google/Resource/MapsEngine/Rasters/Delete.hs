@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasters.delete@ method which the
 -- 'RastersDelete' request conforms to.
 type RastersDeleteResource =
-     "rasters" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "mapsengine" :>
+       "v1" :>
+         "rasters" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a raster.
 --

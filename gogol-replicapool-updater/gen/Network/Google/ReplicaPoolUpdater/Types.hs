@@ -171,7 +171,6 @@ replicaPoolUpdaterService
   = defaultService
       (ServiceId "replicapoolupdater:v1beta1")
       "www.googleapis.com"
-      "replicapoolupdater/v1beta1/projects/"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope

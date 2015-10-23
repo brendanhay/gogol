@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.posts.getByPath@ method which the
 -- 'PostsGetByPath' request conforms to.
 type PostsGetByPathResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           "bypath" :>
-             QueryParam "path" Text :>
-               QueryParam "maxComments" Word32 :>
-                 QueryParam "view" PostsGetByPathView :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Post'
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               "bypath" :>
+                 QueryParam "path" Text :>
+                   QueryParam "maxComments" Word32 :>
+                     QueryParam "view" PostsGetByPathView :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
 -- | Retrieve a Post by Path.
 --

@@ -349,4 +349,3 @@ affiliatesService :: Service
 affiliatesService
   = defaultService (ServiceId "gan:v1beta1")
       "www.googleapis.com"
-      "gan/v1beta1/"

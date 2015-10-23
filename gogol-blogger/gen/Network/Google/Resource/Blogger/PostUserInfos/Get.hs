@@ -47,14 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.postUserInfos.get@ method which the
 -- 'PostUserInfosGet' request conforms to.
 type PostUserInfosGetResource =
-     "users" :>
-       Capture "userId" Text :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 QueryParam "maxComments" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] PostUserInfo
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             "blogs" :>
+               Capture "blogId" Text :>
+                 "posts" :>
+                   Capture "postId" Text :>
+                     QueryParam "maxComments" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] PostUserInfo
 
 -- | Gets one post and user info pair, by post ID and user ID. The post user
 -- info contains per-user information about the post, such as access

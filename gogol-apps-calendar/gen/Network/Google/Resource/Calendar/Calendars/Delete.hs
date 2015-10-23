@@ -43,9 +43,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendars.delete@ method which the
 -- 'CalendarsDelete' request conforms to.
 type CalendarsDeleteResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a secondary calendar. Use calendars.clear for clearing all
 -- events on primary calendars.

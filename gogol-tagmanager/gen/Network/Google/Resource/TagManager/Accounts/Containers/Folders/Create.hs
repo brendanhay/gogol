@@ -44,13 +44,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.folders.create@ method which the
 -- 'AccountsContainersFoldersCreate' request conforms to.
 type AccountsContainersFoldersCreateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "folders" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Folder :> Post '[JSON] Folder
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "folders" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Folder :> Post '[JSON] Folder
 
 -- | Creates a GTM Folder.
 --

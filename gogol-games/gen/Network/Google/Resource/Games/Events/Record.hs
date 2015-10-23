@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.events.record@ method which the
 -- 'EventsRecord' request conforms to.
 type EventsRecordResource =
-     "events" :>
-       QueryParam "language" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] EventRecordRequest :>
-             Post '[JSON] EventUpdateResponse
+     "games" :>
+       "v1" :>
+         "events" :>
+           QueryParam "language" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] EventRecordRequest :>
+                 Post '[JSON] EventUpdateResponse
 
 -- | Records a batch of changes to the number of times events have occurred
 -- for the currently authenticated user of this application.

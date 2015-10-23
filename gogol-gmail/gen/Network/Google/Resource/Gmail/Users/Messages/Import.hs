@@ -37,7 +37,6 @@ module Network.Google.Resource.Gmail.Users.Messages.Import
     -- * Request Lenses
     , umiPayload
     , umiUserId
-    , umiMedia
     , umiProcessForCalendar
     , umiDeleted
     , umiNeverMarkSpam
@@ -50,18 +49,38 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.import@ method which the
 -- 'UsersMessagesImport' request conforms to.
 type UsersMessagesImportResource =
-     Capture "userId" Text :>
-       "messages" :>
-         "import" :>
-           QueryParam "processForCalendar" Bool :>
-             QueryParam "deleted" Bool :>
-               QueryParam "neverMarkSpam" Bool :>
-                 QueryParam "internalDateSource"
-                   UsersMessagesImportInternalDateSource
-                   :>
-                   QueryParam "alt" AltJSON :>
-                     MultipartRelated '[JSON] Message Body :>
-                       Post '[JSON] Message
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               "import" :>
+                 QueryParam "processForCalendar" Bool :>
+                   QueryParam "deleted" Bool :>
+                     QueryParam "neverMarkSpam" Bool :>
+                       QueryParam "internalDateSource"
+                         UsersMessagesImportInternalDateSource
+                         :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Message :> Post '[JSON] Message
+       :<|>
+       "upload" :>
+         "gmail" :>
+           "v1" :>
+             "users" :>
+               Capture "userId" Text :>
+                 "messages" :>
+                   "import" :>
+                     QueryParam "processForCalendar" Bool :>
+                       QueryParam "deleted" Bool :>
+                         QueryParam "neverMarkSpam" Bool :>
+                           QueryParam "internalDateSource"
+                             UsersMessagesImportInternalDateSource
+                             :>
+                             QueryParam "alt" AltJSON :>
+                               QueryParam "uploadType" AltMedia :>
+                                 MultipartRelated '[JSON] Message RequestBody :>
+                                   Post '[JSON] Message
 
 -- | Imports a message into only this user\'s mailbox, with standard email
 -- delivery scanning and classification similar to receiving via SMTP. Does
@@ -71,12 +90,11 @@ type UsersMessagesImportResource =
 data UsersMessagesImport = UsersMessagesImport
     { _umiPayload            :: !Message
     , _umiUserId             :: !Text
-    , _umiMedia              :: !Body
     , _umiProcessForCalendar :: !Bool
     , _umiDeleted            :: !Bool
     , _umiNeverMarkSpam      :: !Bool
     , _umiInternalDateSource :: !UsersMessagesImportInternalDateSource
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesImport' with the minimum fields required to make a request.
 --
@@ -85,8 +103,6 @@ data UsersMessagesImport = UsersMessagesImport
 -- * 'umiPayload'
 --
 -- * 'umiUserId'
---
--- * 'umiMedia'
 --
 -- * 'umiProcessForCalendar'
 --
@@ -97,14 +113,12 @@ data UsersMessagesImport = UsersMessagesImport
 -- * 'umiInternalDateSource'
 usersMessagesImport
     :: Message -- ^ 'umiPayload'
-    -> Text -- ^ 'umiMedia'
-    -> Body
+    -> Text
     -> UsersMessagesImport
-usersMessagesImport pUmiPayload_ pUmiUserId_ pUmiMedia_ =
+usersMessagesImport pUmiPayload_ pUmiUserId_ =
     UsersMessagesImport
     { _umiPayload = pUmiPayload_
     , _umiUserId = pUmiUserId_
-    , _umiMedia = pUmiMedia_
     , _umiProcessForCalendar = False
     , _umiDeleted = False
     , _umiNeverMarkSpam = False
@@ -121,9 +135,6 @@ umiPayload
 umiUserId :: Lens' UsersMessagesImport Text
 umiUserId
   = lens _umiUserId (\ s a -> s{_umiUserId = a})
-
-umiMedia :: Lens' UsersMessagesImport Body
-umiMedia = lens _umiMedia (\ s a -> s{_umiMedia = a})
 
 -- | Process calendar invites in the email and add any extracted meetings to
 -- the Google Calendar for this user.
@@ -161,9 +172,26 @@ instance GoogleRequest UsersMessagesImport where
               (Just _umiInternalDateSource)
               (Just AltJSON)
               _umiPayload
-              _umiMedia
               gmailService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy UsersMessagesImportResource)
+                      mempty
+
+instance GoogleRequest (Upload UsersMessagesImport)
+         where
+        type Rs (Upload UsersMessagesImport) = Message
+        requestClient (Upload UsersMessagesImport{..} body)
+          = go _umiUserId (Just _umiProcessForCalendar)
+              (Just _umiDeleted)
+              (Just _umiNeverMarkSpam)
+              (Just _umiInternalDateSource)
+              (Just AltJSON)
+              (Just AltMedia)
+              _umiPayload
+              body
+              gmailService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesImportResource)
                       mempty

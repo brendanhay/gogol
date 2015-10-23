@@ -44,12 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @licensing.licenseAssignments.delete@ method which the
 -- 'LicenseAssignmentsDelete' request conforms to.
 type LicenseAssignmentsDeleteResource =
-     Capture "productId" Text :>
-       "sku" :>
-         Capture "skuId" Text :>
-           "user" :>
-             Capture "userId" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     Capture "userId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Revoke License.
 --

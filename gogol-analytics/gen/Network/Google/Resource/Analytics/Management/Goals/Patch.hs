@@ -47,17 +47,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.goals.patch@ method which the
 -- 'ManagementGoalsPatch' request conforms to.
 type ManagementGoalsPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "goals" :>
-                     Capture "goalId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Goal :> Patch '[JSON] Goal
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "goals" :>
+                         Capture "goalId" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Goal :> Patch '[JSON] Goal
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.

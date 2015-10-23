@@ -47,16 +47,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @dns.changes.list@ method which the
 -- 'ChangesList' request conforms to.
 type ChangesListResource =
-     Capture "project" Text :>
-       "managedZones" :>
-         Capture "managedZone" Text :>
-           "changes" :>
-             QueryParam "sortOrder" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "sortBy" ChangesListSortBy :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ChangesListResponse
+     "dns" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 "changes" :>
+                   QueryParam "sortOrder" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "sortBy" ChangesListSortBy :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ChangesListResponse
 
 -- | Enumerate Changes to a ResourceRecordSet collection.
 --

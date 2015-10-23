@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.myconfig.releaseDownloadAccess@ method which the
 -- 'MyConfigReleaseDownloadAccess' request conforms to.
 type MyConfigReleaseDownloadAccessResource =
-     "myconfig" :>
-       "releaseDownloadAccess" :>
-         QueryParams "volumeIds" Text :>
-           QueryParam "cpksver" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] DownloadAccesses
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "releaseDownloadAccess" :>
+             QueryParams "volumeIds" Text :>
+               QueryParam "cpksver" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Post '[JSON] DownloadAccesses
 
 -- | Release downloaded content access restriction.
 --

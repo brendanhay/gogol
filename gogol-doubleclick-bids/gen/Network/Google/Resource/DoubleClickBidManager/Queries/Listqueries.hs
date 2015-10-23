@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclickbidmanager.queries.listqueries@ method which the
 -- 'QueriesListqueries' request conforms to.
 type QueriesListqueriesResource =
-     "queries" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] ListQueriesResponse
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "queries" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] ListQueriesResponse
 
 -- | Retrieves stored queries.
 --

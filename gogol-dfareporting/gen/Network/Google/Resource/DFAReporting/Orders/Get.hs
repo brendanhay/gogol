@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.orders.get@ method which the
 -- 'OrdersGet' request conforms to.
 type OrdersGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "projects" :>
-           Capture "projectId" Int64 :>
-             "orders" :>
-               Capture "id" Int64 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Order
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "orders" :>
+                   Capture "id" Int64 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Gets one order by ID.
 --

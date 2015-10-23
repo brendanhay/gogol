@@ -44,10 +44,12 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.comments.insert@ method which the
 -- 'CommentsInsert' request conforms to.
 type CommentsInsertResource =
-     "comments" :>
-       QueryParam "part" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Comment :> Post '[JSON] Comment
+     "youtube" :>
+       "v3" :>
+         "comments" :>
+           QueryParam "part" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Comment :> Post '[JSON] Comment
 
 -- | Creates a reply to an existing comment. Note: To create a top-level
 -- comment, use the commentThreads.insert method.

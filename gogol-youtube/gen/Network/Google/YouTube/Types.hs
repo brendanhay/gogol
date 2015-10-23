@@ -1863,7 +1863,6 @@ youTubeService :: Service
 youTubeService
   = defaultService (ServiceId "youtube:v3")
       "www.googleapis.com"
-      "youtube/v3/"
 
 -- | Manage your YouTube videos
 youtubeUploadScope :: OAuthScope

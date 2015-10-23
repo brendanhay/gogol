@@ -40,11 +40,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accountstatuses.custombatch@ method which the
 -- 'AccountstatusesCustombatch' request conforms to.
 type AccountstatusesCustombatchResource =
-     "accountstatuses" :>
-       "batch" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] AccountstatusesCustomBatchRequest :>
-             Post '[JSON] AccountstatusesCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "accountstatuses" :>
+           "batch" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] AccountstatusesCustomBatchRequest :>
+                 Post '[JSON] AccountstatusesCustomBatchResponse
 
 --
 -- /See:/ 'accountstatusesCustombatch' smart constructor.

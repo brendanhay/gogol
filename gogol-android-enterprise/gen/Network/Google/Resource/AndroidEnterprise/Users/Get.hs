@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.users.get@ method which the
 -- 'UsersGet' request conforms to.
 type UsersGetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] User
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Retrieves a user\'s details.
 --

@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.patch@ method which the
 -- 'AchievementConfigurationsPatch' request conforms to.
 type AchievementConfigurationsPatchResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] AchievementConfiguration :>
-             Patch '[JSON] AchievementConfiguration
+     "games" :>
+       "v1configuration" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] AchievementConfiguration :>
+                 Patch '[JSON] AchievementConfiguration
 
 -- | Update the metadata of the achievement configuration with the given ID.
 -- This method supports patch semantics.

@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.onboarding.listCategoryVolumes@ method which the
 -- 'OnboardingListCategoryVolumes' request conforms to.
 type OnboardingListCategoryVolumesResource =
-     "onboarding" :>
-       "listCategoryVolumes" :>
-         QueryParam "locale" Text :>
-           QueryParam "maxAllowedMaturityRating"
-             OnboardingListCategoryVolumesMaxAllowedMaturityRating
-             :>
-             QueryParams "categoryId" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "pageSize" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Volume2
+     "books" :>
+       "v1" :>
+         "onboarding" :>
+           "listCategoryVolumes" :>
+             QueryParam "locale" Text :>
+               QueryParam "maxAllowedMaturityRating"
+                 OnboardingListCategoryVolumesMaxAllowedMaturityRating
+                 :>
+                 QueryParams "categoryId" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Volume2
 
 -- | List available volumes under categories for onboarding experience.
 --

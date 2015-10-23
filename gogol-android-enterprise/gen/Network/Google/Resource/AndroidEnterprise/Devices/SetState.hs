@@ -49,16 +49,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.devices.setState@ method which the
 -- 'DevicesSetState' request conforms to.
 type DevicesSetStateResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "devices" :>
-               Capture "deviceId" Text :>
-                 "state" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] DeviceState :>
-                       Put '[JSON] DeviceState
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "devices" :>
+                   Capture "deviceId" Text :>
+                     "state" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] DeviceState :>
+                           Put '[JSON] DeviceState
 
 -- | Sets whether a device is enabled or disabled for access by the user to
 -- Google services. The device state takes effect only if enforcing EMM

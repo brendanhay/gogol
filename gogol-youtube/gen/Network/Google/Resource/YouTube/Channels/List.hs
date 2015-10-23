@@ -53,20 +53,22 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.channels.list@ method which the
 -- 'ChannelsList' request conforms to.
 type ChannelsListResource =
-     "channels" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "forUsername" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "categoryId" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "mySubscribers" Bool :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "managedByMe" Bool :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ChannelListResponse
+     "youtube" :>
+       "v3" :>
+         "channels" :>
+           QueryParam "part" Text :>
+             QueryParam "mine" Bool :>
+               QueryParam "forUsername" Text :>
+                 QueryParam "hl" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "categoryId" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "mySubscribers" Bool :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "managedByMe" Bool :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ChannelListResponse
 
 -- | Returns a collection of zero or more channel resources that match the
 -- request criteria.

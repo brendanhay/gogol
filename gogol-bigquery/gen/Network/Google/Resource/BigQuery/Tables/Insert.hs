@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.tables.insert@ method which the
 -- 'TablesInsert' request conforms to.
 type TablesInsertResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "tables" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Table :> Post '[JSON] Table
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 "tables" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Table :> Post '[JSON] Table
 
 -- | Creates a new, empty table in the dataset.
 --

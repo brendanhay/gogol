@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.comments.delete@ method which the
 -- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a comment by ID.
 --

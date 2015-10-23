@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.schemas.get@ method which the
 -- 'SchemasGet' request conforms to.
 type SchemasGetResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "schemas" :>
-           Capture "schemaKey" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Schema
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "schemas" :>
+                 Capture "schemaKey" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Schema
 
 -- | Retrieve schema
 --

@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.provisioning.createAccountTicket@ method which the
 -- 'ProvisioningCreateAccountTicket' request conforms to.
 type ProvisioningCreateAccountTicketResource =
-     "provisioning" :>
-       "createAccountTicket" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] AccountTicket :>
-             Post '[JSON] AccountTicket
+     "analytics" :>
+       "v3" :>
+         "provisioning" :>
+           "createAccountTicket" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] AccountTicket :>
+                 Post '[JSON] AccountTicket
 
 -- | Creates an account ticket.
 --

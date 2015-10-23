@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webpropertyUserLinks.delete@ method which the
 -- 'ManagementWebPropertyUserLinksDelete' request conforms to.
 type ManagementWebPropertyUserLinksDeleteResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityUserLinks" :>
-                 Capture "linkId" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityUserLinks" :>
+                     Capture "linkId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the given web property.
 --

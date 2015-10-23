@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.images.insert@ method which the
 -- 'ImagesInsert' request conforms to.
 type ImagesInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "images" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Image :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "images" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Image :> Post '[JSON] Operation
 
 -- | Creates an image resource in the specified project using the data
 -- included in the request.

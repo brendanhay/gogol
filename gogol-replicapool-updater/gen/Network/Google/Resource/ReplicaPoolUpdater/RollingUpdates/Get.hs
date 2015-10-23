@@ -44,12 +44,15 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.rollingUpdates.get@ method which the
 -- 'RollingUpdatesGet' request conforms to.
 type RollingUpdatesGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "rollingUpdates" :>
-             Capture "rollingUpdate" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] RollingUpdate
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "rollingUpdates" :>
+                   Capture "rollingUpdate" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] RollingUpdate
 
 -- | Returns information about an update.
 --

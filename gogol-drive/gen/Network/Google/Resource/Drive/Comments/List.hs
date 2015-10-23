@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.comments.list@ method which the
 -- 'CommentsList' request conforms to.
 type CommentsListResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           QueryParam "updatedMin" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "includeDeleted" Bool :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] CommentList
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               QueryParam "updatedMin" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "includeDeleted" Bool :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] CommentList
 
 -- | Lists a file\'s comments.
 --

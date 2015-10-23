@@ -52,21 +52,23 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.changeLogs.list@ method which the
 -- 'ChangeLogsList' request conforms to.
 type ChangeLogsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "changeLogs" :>
-           QueryParams "userProfileIds" Int64 :>
-             QueryParam "objectType" ChangeLogsListObjectType :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "action" ChangeLogsListAction :>
-                     QueryParam "minChangeTime" Text :>
-                       QueryParam "maxChangeTime" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParams "objectIds" Int64 :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ChangeLogsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "changeLogs" :>
+               QueryParams "userProfileIds" Int64 :>
+                 QueryParam "objectType" ChangeLogsListObjectType :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "action" ChangeLogsListAction :>
+                         QueryParam "minChangeTime" Text :>
+                           QueryParam "maxChangeTime" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParams "objectIds" Int64 :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ChangeLogsListResponse
 
 -- | Retrieves a list of change logs.
 --

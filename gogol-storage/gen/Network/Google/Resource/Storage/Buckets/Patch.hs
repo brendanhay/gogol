@@ -48,18 +48,20 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.buckets.patch@ method which the
 -- 'BucketsPatch' request conforms to.
 type BucketsPatchResource =
-     "b" :>
-       Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Int64 :>
-           QueryParam "predefinedAcl" BucketsPatchPredefinedACL
-             :>
-             QueryParam "predefinedDefaultObjectAcl"
-               BucketsPatchPredefinedDefaultObjectACL
-               :>
-               QueryParam "ifMetagenerationNotMatch" Int64 :>
-                 QueryParam "projection" BucketsPatchProjection :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "predefinedAcl" BucketsPatchPredefinedACL
+                 :>
+                 QueryParam "predefinedDefaultObjectAcl"
+                   BucketsPatchPredefinedDefaultObjectACL
+                   :>
+                   QueryParam "ifMetagenerationNotMatch" Int64 :>
+                     QueryParam "projection" BucketsPatchProjection :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
 
 -- | Updates a bucket. This method supports patch semantics.
 --

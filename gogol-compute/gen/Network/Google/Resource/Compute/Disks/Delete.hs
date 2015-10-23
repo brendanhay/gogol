@@ -47,12 +47,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.disks.delete@ method which the
 -- 'DisksDelete' request conforms to.
 type DisksDeleteResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "disks" :>
-             Capture "disk" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "disks" :>
+                   Capture "disk" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified persistent disk. Deleting a disk removes its data
 -- permanently and is irreversible. However, deleting a disk does not

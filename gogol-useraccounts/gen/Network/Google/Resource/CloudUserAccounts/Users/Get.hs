@@ -43,11 +43,14 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.users.get@ method which the
 -- 'UsersGet' request conforms to.
 type UsersGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "users" :>
-           Capture "user" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] User
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 Capture "user" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Returns the specified User resource.
 --

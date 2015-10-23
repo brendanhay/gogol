@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.marketplacenotes.list@ method which the
 -- 'MarketplaceNotesList' request conforms to.
 type MarketplaceNotesListResource =
-     "marketplaceOrders" :>
-       Capture "orderId" Text :>
-         "notes" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] GetOrderNotesResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "notes" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] GetOrderNotesResponse
 
 -- | Get all the notes associated with an order
 --

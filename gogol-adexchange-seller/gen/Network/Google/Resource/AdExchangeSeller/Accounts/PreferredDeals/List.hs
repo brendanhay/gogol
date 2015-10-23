@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.preferreddeals.list@ method which the
 -- 'AccountsPreferredDealsList' request conforms to.
 type AccountsPreferredDealsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "preferreddeals" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] PreferredDeals
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "preferreddeals" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PreferredDeals
 
 -- | List the preferred deals for this Ad Exchange account.
 --

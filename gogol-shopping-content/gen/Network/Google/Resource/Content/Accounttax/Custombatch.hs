@@ -44,12 +44,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounttax.custombatch@ method which the
 -- 'AccounttaxCustombatch' request conforms to.
 type AccounttaxCustombatchResource =
-     "accounttax" :>
-       "batch" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] AccounttaxCustomBatchRequest :>
-               Post '[JSON] AccounttaxCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "accounttax" :>
+           "batch" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AccounttaxCustomBatchRequest :>
+                   Post '[JSON] AccounttaxCustomBatchResponse
 
 -- | Retrieves and updates tax settings of multiple accounts in a single
 -- request.

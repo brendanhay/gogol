@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.comments.get@ method which the
 -- 'CommentsGet' request conforms to.
 type CommentsGetResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 QueryParam "view" CommentsGetView :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Comment
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     QueryParam "view" CommentsGetView :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Gets one comment by ID.
 --

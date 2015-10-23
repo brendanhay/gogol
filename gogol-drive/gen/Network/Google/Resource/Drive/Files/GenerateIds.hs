@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.generateIds@ method which the
 -- 'FilesGenerateIds' request conforms to.
 type FilesGenerateIdsResource =
-     "files" :>
-       "generateIds" :>
-         QueryParam "space" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] GeneratedIds
+     "drive" :>
+       "v2" :>
+         "files" :>
+           "generateIds" :>
+             QueryParam "space" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] GeneratedIds
 
 -- | Generates a set of file IDs which can be provided in insert requests.
 --

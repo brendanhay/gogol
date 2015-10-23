@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendars.clear@ method which the
 -- 'CalendarsClear' request conforms to.
 type CalendarsClearResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "clear" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "clear" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears a primary calendar. This operation deletes all events associated
 -- with the primary calendar of an account.

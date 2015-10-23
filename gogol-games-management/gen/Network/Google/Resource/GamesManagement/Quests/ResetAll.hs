@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.quests.resetAll@ method which the
 -- 'QuestsResetAll' request conforms to.
 type QuestsResetAllResource =
-     "quests" :>
-       "reset" :>
-         QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "quests" :>
+           "reset" :>
+             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on all quests for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts

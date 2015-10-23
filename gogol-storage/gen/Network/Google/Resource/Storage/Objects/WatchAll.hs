@@ -49,18 +49,20 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.watchAll@ method which the
 -- 'ObjectsWatchAll' request conforms to.
 type ObjectsWatchAllResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           "watch" :>
-             QueryParam "prefix" Text :>
-               QueryParam "versions" Bool :>
-                 QueryParam "projection" ObjectsWatchAllProjection :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "delimiter" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Channel :> Post '[JSON] Channel
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               "watch" :>
+                 QueryParam "prefix" Text :>
+                   QueryParam "versions" Bool :>
+                     QueryParam "projection" ObjectsWatchAllProjection :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "delimiter" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes on all objects in a bucket.
 --

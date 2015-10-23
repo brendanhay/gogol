@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.subscriptions.update@ method which the
 -- 'SubscriptionsUpdate' request conforms to.
 type SubscriptionsUpdateResource =
-     "subscriptions" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Subscription :>
-             Put '[JSON] Subscription
+     "mirror" :>
+       "v1" :>
+         "subscriptions" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Subscription :>
+                 Put '[JSON] Subscription
 
 -- | Updates an existing subscription in place.
 --

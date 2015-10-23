@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalOperations.get@ method which the
 -- 'GlobalOperationsGet' request conforms to.
 type GlobalOperationsGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "operations" :>
-           Capture "operation" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 Capture "operation" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified Operations resource.
 --

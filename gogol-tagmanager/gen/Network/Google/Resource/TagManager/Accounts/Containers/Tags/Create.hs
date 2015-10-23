@@ -44,13 +44,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.tags.create@ method which the
 -- 'AccountsContainersTagsCreate' request conforms to.
 type AccountsContainersTagsCreateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "tags" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Tag :> Post '[JSON] Tag
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "tags" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Tag :> Post '[JSON] Tag
 
 -- | Creates a GTM Tag.
 --

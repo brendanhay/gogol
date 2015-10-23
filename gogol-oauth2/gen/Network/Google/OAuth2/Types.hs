@@ -77,7 +77,6 @@ oAuth2Service :: Service
 oAuth2Service
   = defaultService (ServiceId "oauth2:v2")
       "www.googleapis.com"
-      ""
 
 -- | View your basic profile info
 userinfoProfileScope :: OAuthScope

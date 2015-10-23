@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.detachDisk@ method which the
 -- 'InstancesDetachDisk' request conforms to.
 type InstancesDetachDiskResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "detachDisk" :>
-                 QueryParam "deviceName" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "detachDisk" :>
+                       QueryParam "deviceName" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Detaches a disk from an instance.
 --

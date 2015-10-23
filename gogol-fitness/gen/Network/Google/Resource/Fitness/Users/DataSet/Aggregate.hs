@@ -46,11 +46,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.dataset.aggregate@ method which the
 -- 'UsersDataSetAggregate' request conforms to.
 type UsersDataSetAggregateResource =
-     Capture "userId" Text :>
-       "dataset:aggregate" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] AggregateRequest :>
-             Post '[JSON] AggregateResponse
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataset:aggregate" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AggregateRequest :>
+                   Post '[JSON] AggregateResponse
 
 -- | Aggregates data of a certain type or stream into buckets divided by a
 -- given type of boundary. Multiple data sets of multiple types and from

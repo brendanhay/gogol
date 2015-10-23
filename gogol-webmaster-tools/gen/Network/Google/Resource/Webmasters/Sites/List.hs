@@ -40,9 +40,11 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.sites.list@ method which the
 -- 'SitesList' request conforms to.
 type SitesListResource =
-     "sites" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] SitesListResponse
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] SitesListResponse
 
 -- | Lists the user\'s Webmaster Tools sites.
 --

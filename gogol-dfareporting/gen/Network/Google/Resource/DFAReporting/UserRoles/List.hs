@@ -50,19 +50,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.userRoles.list@ method which the
 -- 'UserRolesList' request conforms to.
 type UserRolesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "userRoles" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" UserRolesListSortOrder :>
-                 QueryParam "accountUserRoleOnly" Bool :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField" UserRolesListSortField :>
-                       QueryParam "subaccountId" Int64 :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] UserRolesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder" UserRolesListSortOrder :>
+                     QueryParam "accountUserRoleOnly" Bool :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "sortField" UserRolesListSortField :>
+                           QueryParam "subaccountId" Int64 :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] UserRolesListResponse
 
 -- | Retrieves a list of user roles, possibly filtered.
 --

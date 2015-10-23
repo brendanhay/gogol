@@ -44,13 +44,16 @@ import           Network.Google.ResourceViews.Types
 -- | A resource alias for @resourceviews.zoneViews.insert@ method which the
 -- 'ZoneViewsInsert' request conforms to.
 type ZoneViewsInsertResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "resourceViews" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ResourceView :>
-                 Post '[JSON] Operation
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ResourceView :>
+                       Post '[JSON] Operation
 
 -- | Create a resource view.
 --

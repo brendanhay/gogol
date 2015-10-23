@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.replies.delete@ method which the
 -- 'RepliesDelete' request conforms to.
 type RepliesDeleteResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             "replies" :>
-               Capture "replyId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   Capture "replyId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a reply.
 --

@@ -44,11 +44,13 @@ import           Network.Google.SiteVerification.Types
 -- | A resource alias for @siteVerification.webResource.patch@ method which the
 -- 'WebResourcePatch' request conforms to.
 type WebResourcePatchResource =
-     "webResource" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] SiteVerificationWebResourceResource
-             :> Patch '[JSON] SiteVerificationWebResourceResource
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] SiteVerificationWebResourceResource
+                 :> Patch '[JSON] SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain. This method
 -- supports patch semantics.

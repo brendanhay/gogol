@@ -45,13 +45,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.databases.get@ method which the
 -- 'DatabasesGet' request conforms to.
 type DatabasesGetResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "databases" :>
-               Capture "database" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Database
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   Capture "database" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Database
 
 -- | Retrieves a resource containing information about a database inside a
 -- Cloud SQL instance.

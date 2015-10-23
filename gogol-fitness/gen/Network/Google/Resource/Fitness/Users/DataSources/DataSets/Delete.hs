@@ -52,14 +52,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.dataSources.datasets.delete@ method which the
 -- 'UsersDataSourcesDataSetsDelete' request conforms to.
 type UsersDataSourcesDataSetsDeleteResource =
-     Capture "userId" Text :>
-       "dataSources" :>
-         Capture "dataSourceId" Text :>
-           "datasets" :>
-             Capture "datasetId" Text :>
-               QueryParam "modifiedTimeMillis" Int64 :>
-                 QueryParam "currentTimeMillis" Int64 :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 "datasets" :>
+                   Capture "datasetId" Text :>
+                     QueryParam "modifiedTimeMillis" Int64 :>
+                       QueryParam "currentTimeMillis" Int64 :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Performs an inclusive delete of all data points whose start and end
 -- times have any overlap with the time range specified by the dataset ID.

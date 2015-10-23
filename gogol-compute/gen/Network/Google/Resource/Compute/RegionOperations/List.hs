@@ -47,14 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.regionOperations.list@ method which the
 -- 'RegionOperationsList' request conforms to.
 type RegionOperationsListResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "operations" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] OperationList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "operations" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- region.

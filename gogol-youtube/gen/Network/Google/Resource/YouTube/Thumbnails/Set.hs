@@ -33,7 +33,6 @@ module Network.Google.Resource.YouTube.Thumbnails.Set
     , ThumbnailsSet
 
     -- * Request Lenses
-    , tsMedia
     , tsOnBehalfOfContentOwner
     , tsVideoId
     ) where
@@ -44,45 +43,50 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.thumbnails.set@ method which the
 -- 'ThumbnailsSet' request conforms to.
 type ThumbnailsSetResource =
-     "thumbnails" :>
-       "set" :>
-         QueryParam "videoId" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] Body :>
-                 Post '[JSON] ThumbnailSetResponse
+     "youtube" :>
+       "v3" :>
+         "thumbnails" :>
+           "set" :>
+             QueryParam "videoId" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] ThumbnailSetResponse
+       :<|>
+       "upload" :>
+         "youtube" :>
+           "v3" :>
+             "thumbnails" :>
+               "set" :>
+                 QueryParam "videoId" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "alt" AltJSON :>
+                       QueryParam "uploadType" AltMedia :>
+                         ReqBody '[OctetStream] RequestBody :>
+                           Post '[JSON] ThumbnailSetResponse
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
 -- /See:/ 'thumbnailsSet' smart constructor.
 data ThumbnailsSet = ThumbnailsSet
-    { _tsMedia                  :: !Body
-    , _tsOnBehalfOfContentOwner :: !(Maybe Text)
+    { _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThumbnailsSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tsMedia'
---
 -- * 'tsOnBehalfOfContentOwner'
 --
 -- * 'tsVideoId'
 thumbnailsSet
-    :: Body -- ^ 'tsMedia'
-    -> Text -- ^ 'tsVideoId'
+    :: Text -- ^ 'tsVideoId'
     -> ThumbnailsSet
-thumbnailsSet pTsMedia_ pTsVideoId_ =
+thumbnailsSet pTsVideoId_ =
     ThumbnailsSet
-    { _tsMedia = pTsMedia_
-    , _tsOnBehalfOfContentOwner = Nothing
+    { _tsOnBehalfOfContentOwner = Nothing
     , _tsVideoId = pTsVideoId_
     }
-
-tsMedia :: Lens' ThumbnailsSet Body
-tsMedia = lens _tsMedia (\ s a -> s{_tsMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -110,8 +114,20 @@ instance GoogleRequest ThumbnailsSet where
         requestClient ThumbnailsSet{..}
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
-              _tsMedia
               youTubeService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy ThumbnailsSetResource)
+                      mempty
+
+instance GoogleRequest (Upload ThumbnailsSet) where
+        type Rs (Upload ThumbnailsSet) = ThumbnailSetResponse
+        requestClient (Upload ThumbnailsSet{..} body)
+          = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
+              (Just AltJSON)
+              (Just AltMedia)
+              _tsPayload
+              body
+              youTubeService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy ThumbnailsSetResource)
                       mempty

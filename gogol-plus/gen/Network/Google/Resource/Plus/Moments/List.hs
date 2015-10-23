@@ -47,15 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @plus.moments.list@ method which the
 -- 'MomentsList' request conforms to.
 type MomentsListResource =
-     "people" :>
-       Capture "userId" Text :>
-         "moments" :>
-           Capture "collection" MomentsListCollection :>
-             QueryParam "targetUrl" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "type" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] MomentsFeed
+     "plus" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "moments" :>
+               Capture "collection" MomentsListCollection :>
+                 QueryParam "targetUrl" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "type" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] MomentsFeed
 
 -- | List all of the moments for a particular user.
 --

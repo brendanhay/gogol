@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.sites.patch@ method which the
 -- 'SitesPatch' request conforms to.
 type SitesPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "sites" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Site :> Patch '[JSON] Site
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Site :> Patch '[JSON] Site
 
 -- | Updates an existing site. This method supports patch semantics.
 --

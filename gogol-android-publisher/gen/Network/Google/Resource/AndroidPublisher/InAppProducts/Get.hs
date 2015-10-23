@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.inappproducts.get@ method which the
 -- 'InAppProductsGet' request conforms to.
 type InAppProductsGetResource =
-     Capture "packageName" Text :>
-       "inappproducts" :>
-         Capture "sku" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] InAppProduct
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "inappproducts" :>
+               Capture "sku" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] InAppProduct
 
 -- | Returns information about the in-app product specified.
 --

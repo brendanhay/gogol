@@ -44,8 +44,10 @@ import           Network.Google.Prelude
 -- 'WebfontsList' request conforms to.
 type WebfontsListResource =
      "webfonts" :>
-       QueryParam "sort" WebfontsListSort :>
-         QueryParam "alt" AltJSON :> Get '[JSON] WebfontList
+       "v1" :>
+         "webfonts" :>
+           QueryParam "sort" WebfontsListSort :>
+             QueryParam "alt" AltJSON :> Get '[JSON] WebfontList
 
 -- | Retrieves the list of fonts currently served by the Google Fonts
 -- Developer API

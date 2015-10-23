@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.unpublish@ method which the
 -- 'LayersUnPublish' request conforms to.
 type LayersUnPublishResource =
-     "layers" :>
-       Capture "id" Text :>
-         "unpublish" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] PublishResponse
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             "unpublish" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] PublishResponse
 
 -- | Unpublish a layer asset.
 --

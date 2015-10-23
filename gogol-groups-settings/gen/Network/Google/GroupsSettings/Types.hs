@@ -63,7 +63,6 @@ groupsSettingsService :: Service
 groupsSettingsService
   = defaultService (ServiceId "groupssettings:v1")
       "www.googleapis.com"
-      "groups/v1/groups/"
 
 -- | View and manage the settings of a Google Apps Group
 appsGroupsSettingsScope :: OAuthScope

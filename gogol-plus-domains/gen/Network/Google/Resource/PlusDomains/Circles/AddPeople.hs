@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.circles.addPeople@ method which the
 -- 'CirclesAddPeople' request conforms to.
 type CirclesAddPeopleResource =
-     "circles" :>
-       Capture "circleId" Text :>
-         "people" :>
-           QueryParams "email" Text :>
-             QueryParams "userId" Text :>
-               QueryParam "alt" AltJSON :> Put '[JSON] Circle
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             "people" :>
+               QueryParams "email" Text :>
+                 QueryParams "userId" Text :>
+                   QueryParam "alt" AltJSON :> Put '[JSON] Circle
 
 -- | Add a person to a circle. Google+ limits certain circle operations,
 -- including the number of circle adds. Learn More.

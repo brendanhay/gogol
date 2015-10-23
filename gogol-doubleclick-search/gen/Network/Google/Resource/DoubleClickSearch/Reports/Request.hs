@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.reports.request@ method which the
 -- 'ReportsRequest' request conforms to.
 type ReportsRequestResource =
-     "reports" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
+     "doubleclicksearch" :>
+       "v2" :>
+         "reports" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
 
 -- | Inserts a report request into the reporting system.
 --

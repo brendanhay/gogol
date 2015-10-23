@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @civicinfo.elections.voterInfoQuery@ method which the
 -- 'ElectionsVoterInfoQuery' request conforms to.
 type ElectionsVoterInfoQueryResource =
-     "voterinfo" :>
-       QueryParam "address" Text :>
-         QueryParam "electionId" Int64 :>
-           QueryParam "officialOnly" Bool :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] VoterInfoResponse
+     "civicinfo" :>
+       "v2" :>
+         "voterinfo" :>
+           QueryParam "address" Text :>
+             QueryParam "electionId" Int64 :>
+               QueryParam "officialOnly" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] VoterInfoResponse
 
 -- | Looks up information relevant to a voter based on the voter\'s
 -- registered address.

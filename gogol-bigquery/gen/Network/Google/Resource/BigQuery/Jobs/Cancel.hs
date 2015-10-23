@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.jobs.cancel@ method which the
 -- 'JobsCancel' request conforms to.
 type JobsCancelResource =
-     "project" :>
-       Capture "projectId" Text :>
-         "jobs" :>
-           Capture "jobId" Text :>
-             "cancel" :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] JobCancelResponse
+     "bigquery" :>
+       "v2" :>
+         "project" :>
+           Capture "projectId" Text :>
+             "jobs" :>
+               Capture "jobId" Text :>
+                 "cancel" :>
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] JobCancelResponse
 
 -- | Requests that a job be cancelled. This call will return immediately, and
 -- the client will need to poll for the job status to see if the cancel

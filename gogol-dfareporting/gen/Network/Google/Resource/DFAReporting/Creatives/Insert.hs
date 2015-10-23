@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creatives.insert@ method which the
 -- 'CreativesInsert' request conforms to.
 type CreativesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creatives" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Creative :> Post '[JSON] Creative
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creatives" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Creative :> Post '[JSON] Creative
 
 -- | Inserts a new creative.
 --

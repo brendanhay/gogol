@@ -43,10 +43,13 @@ import           Network.Google.Spectrum.Types
 -- | A resource alias for @spectrum.paws.register@ method which the
 -- 'PawsRegister' request conforms to.
 type PawsRegisterResource =
-     "register" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] PawsRegisterRequest :>
-           Post '[JSON] PawsRegisterResponse
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "register" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PawsRegisterRequest :>
+                 Post '[JSON] PawsRegisterResponse
 
 -- | The Google Spectrum Database implements registration in the getSpectrum
 -- method. As such this always returns an UNIMPLEMENTED error.

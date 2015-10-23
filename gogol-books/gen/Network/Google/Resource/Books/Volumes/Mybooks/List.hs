@@ -47,19 +47,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.volumes.mybooks.list@ method which the
 -- 'VolumesMybooksList' request conforms to.
 type VolumesMybooksListResource =
-     "volumes" :>
-       "mybooks" :>
-         QueryParams "processingState"
-           VolumesMybooksListProcessingState
-           :>
-           QueryParams "acquireMethod"
-             VolumesMybooksListAcquireMethod
-             :>
-             QueryParam "locale" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "startIndex" Word32 :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           "mybooks" :>
+             QueryParams "processingState"
+               VolumesMybooksListProcessingState
+               :>
+               QueryParams "acquireMethod"
+                 VolumesMybooksListAcquireMethod
+                 :>
+                 QueryParam "locale" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "startIndex" Word32 :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books in My Library.
 --

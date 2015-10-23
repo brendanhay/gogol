@@ -44,12 +44,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounts.list@ method which the
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
-     Capture "merchantId" Word64 :>
-       "accounts" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AccountsListResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accounts" :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AccountsListResponse
 
 -- | Lists the sub-accounts in your Merchant Center account.
 --

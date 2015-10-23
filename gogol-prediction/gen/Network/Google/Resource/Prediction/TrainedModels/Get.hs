@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @prediction.trainedmodels.get@ method which the
 -- 'TrainedModelsGet' request conforms to.
 type TrainedModelsGetResource =
-     Capture "project" Text :>
-       "trainedmodels" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Insert2
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Insert2
 
 -- | Check training status of your model.
 --

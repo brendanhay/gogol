@@ -48,19 +48,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.deployments.update@ method which the
 -- 'DeploymentsUpdate' request conforms to.
 type DeploymentsUpdateResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           Capture "deployment" Text :>
-             QueryParam "createPolicy"
-               DeploymentsUpdateCreatePolicy
-               :>
-               QueryParam "deletePolicy"
-                 DeploymentsUpdateDeletePolicy
-                 :>
-                 QueryParam "preview" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Deployment :> Put '[JSON] Operation
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   QueryParam "createPolicy"
+                     DeploymentsUpdateCreatePolicy
+                     :>
+                     QueryParam "deletePolicy"
+                       DeploymentsUpdateDeletePolicy
+                       :>
+                       QueryParam "preview" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Deployment :> Put '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest.

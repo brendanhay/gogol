@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.people.listByCircle@ method which the
 -- 'PeopleListByCircle' request conforms to.
 type PeopleListByCircleResource =
-     "circles" :>
-       Capture "circleId" Text :>
-         "people" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             "people" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people who are members of a circle.
 --

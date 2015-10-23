@@ -48,15 +48,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @datatransfer.transfers.list@ method which the
 -- 'TransfersList' request conforms to.
 type TransfersListResource =
-     "transfers" :>
-       QueryParam "status" Text :>
-         QueryParam "oldOwnerUserId" Text :>
-           QueryParam "newOwnerUserId" Text :>
-             QueryParam "customerId" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] DataTransfersListResponse
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "transfers" :>
+             QueryParam "status" Text :>
+               QueryParam "oldOwnerUserId" Text :>
+                 QueryParam "newOwnerUserId" Text :>
+                   QueryParam "customerId" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] DataTransfersListResponse
 
 -- | Lists the transfers for a customer by source user, destination user, or
 -- status.

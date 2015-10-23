@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.advertisers.patch@ method which the
 -- 'AdvertisersPatch' request conforms to.
 type AdvertisersPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "advertisers" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Advertiser :>
-                 Patch '[JSON] Advertiser
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertisers" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Advertiser :>
+                     Patch '[JSON] Advertiser
 
 -- | Updates an existing advertiser. This method supports patch semantics.
 --

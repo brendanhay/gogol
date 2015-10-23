@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.networks.insert@ method which the
 -- 'NetworksInsert' request conforms to.
 type NetworksInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "networks" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Network :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "networks" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Network :> Post '[JSON] Operation
 
 -- | Creates a network resource in the specified project using the data
 -- included in the request.

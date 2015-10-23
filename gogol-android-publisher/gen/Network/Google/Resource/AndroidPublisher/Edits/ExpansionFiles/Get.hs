@@ -45,16 +45,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.expansionfiles.get@ method which the
 -- 'EditsExpansionFilesGet' request conforms to.
 type EditsExpansionFilesGetResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             Capture "apkVersionCode" Int32 :>
-               "expansionFiles" :>
-                 Capture "expansionFileType"
-                   EditsExpansionFilesGetExpansionFileType
-                   :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] ExpansionFile
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   Capture "apkVersionCode" Int32 :>
+                     "expansionFiles" :>
+                       Capture "expansionFileType"
+                         EditsExpansionFilesGetExpansionFileType
+                         :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] ExpansionFile
 
 -- | Fetches the Expansion File configuration for the APK specified.
 --

@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.contacts.get@ method which the
 -- 'ContactsGet' request conforms to.
 type ContactsGetResource =
-     "contacts" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Contact
+     "mirror" :>
+       "v1" :>
+         "contacts" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Contact
 
 -- | Gets a single contact by ID.
 --

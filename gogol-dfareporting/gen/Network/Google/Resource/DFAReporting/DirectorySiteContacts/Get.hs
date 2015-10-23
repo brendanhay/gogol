@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.directorySiteContacts.get@ method which the
 -- 'DirectorySiteContactsGet' request conforms to.
 type DirectorySiteContactsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "directorySiteContacts" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] DirectorySiteContact
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySiteContacts" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] DirectorySiteContact
 
 -- | Gets one directory site contact by ID.
 --

@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountActiveAdSummaries.get@ method which the
 -- 'AccountActiveAdSummariesGet' request conforms to.
 type AccountActiveAdSummariesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountActiveAdSummaries" :>
-           Capture "summaryAccountId" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AccountActiveAdSummary
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountActiveAdSummaries" :>
+               Capture "summaryAccountId" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AccountActiveAdSummary
 
 -- | Gets the account\'s active ad summary by account ID.
 --

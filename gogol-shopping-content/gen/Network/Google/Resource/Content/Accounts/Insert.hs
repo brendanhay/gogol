@@ -44,11 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounts.insert@ method which the
 -- 'AccountsInsert' request conforms to.
 type AccountsInsertResource =
-     Capture "merchantId" Word64 :>
-       "accounts" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Account :> Post '[JSON] Account
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accounts" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Account :> Post '[JSON] Account
 
 -- | Creates a Merchant Center sub-account.
 --

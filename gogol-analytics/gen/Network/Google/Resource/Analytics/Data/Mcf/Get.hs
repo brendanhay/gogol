@@ -51,19 +51,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.data.mcf.get@ method which the
 -- 'DataMcfGet' request conforms to.
 type DataMcfGetResource =
-     "data" :>
-       "mcf" :>
-         QueryParam "ids" Text :>
-           QueryParam "start-date" Text :>
-             QueryParam "end-date" Text :>
-               QueryParam "metrics" Text :>
-                 QueryParam "samplingLevel" DataMcfGetSamplingLevel :>
-                   QueryParam "filters" Text :>
-                     QueryParam "sort" Text :>
-                       QueryParam "dimensions" Text :>
-                         QueryParam "start-index" Int32 :>
-                           QueryParam "max-results" Int32 :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] McfData
+     "analytics" :>
+       "v3" :>
+         "data" :>
+           "mcf" :>
+             QueryParam "ids" Text :>
+               QueryParam "start-date" Text :>
+                 QueryParam "end-date" Text :>
+                   QueryParam "metrics" Text :>
+                     QueryParam "samplingLevel" DataMcfGetSamplingLevel :>
+                       QueryParam "filters" Text :>
+                         QueryParam "sort" Text :>
+                           QueryParam "dimensions" Text :>
+                             QueryParam "start-index" Int32 :>
+                               QueryParam "max-results" Int32 :>
+                                 QueryParam "alt" AltJSON :> Get '[JSON] McfData
 
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
 --

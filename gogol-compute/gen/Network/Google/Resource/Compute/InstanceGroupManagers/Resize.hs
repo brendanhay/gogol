@@ -51,14 +51,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.resize@ method which the
 -- 'InstanceGroupManagersResize' request conforms to.
 type InstanceGroupManagersResizeResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "resize" :>
-                 QueryParam "size" Int32 :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "resize" :>
+                       QueryParam "size" Int32 :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Resizes the managed instance group. If you increase the size, the group
 -- creates new instances using the current instance template. If you

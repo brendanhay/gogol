@@ -82,7 +82,6 @@ dataTransferService :: Service
 dataTransferService
   = defaultService (ServiceId "admin:datatransfer_v1")
       "www.googleapis.com"
-      "admin/datatransfer/v1/"
 
 -- | View data transfers between users in your organization
 adminDatatransferReadonlyScope :: OAuthScope

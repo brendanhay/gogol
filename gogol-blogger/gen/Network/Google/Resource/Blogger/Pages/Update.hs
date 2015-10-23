@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.pages.update@ method which the
 -- 'PagesUpdate' request conforms to.
 type PagesUpdateResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "pages" :>
-           Capture "pageId" Text :>
-             QueryParam "revert" Bool :>
-               QueryParam "publish" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Page :> Put '[JSON] Page
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 QueryParam "revert" Bool :>
+                   QueryParam "publish" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Page :> Put '[JSON] Page
 
 -- | Update a page.
 --

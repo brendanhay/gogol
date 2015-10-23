@@ -43,11 +43,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.commentThreads.update@ method which the
 -- 'CommentThreadsUpdate' request conforms to.
 type CommentThreadsUpdateResource =
-     "commentThreads" :>
-       QueryParam "part" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] CommentThread :>
-             Put '[JSON] CommentThread
+     "youtube" :>
+       "v3" :>
+         "commentThreads" :>
+           QueryParam "part" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] CommentThread :>
+                 Put '[JSON] CommentThread
 
 -- | Modifies the top-level comment in a comment thread.
 --

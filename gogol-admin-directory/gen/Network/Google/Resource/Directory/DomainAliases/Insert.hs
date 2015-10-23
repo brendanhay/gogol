@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.domainAliases.insert@ method which the
 -- 'DomainAliasesInsert' request conforms to.
 type DomainAliasesInsertResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "domainaliases" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] DomainAlias :>
-               Post '[JSON] DomainAlias
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "domainaliases" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] DomainAlias :>
+                     Post '[JSON] DomainAlias
 
 -- | Inserts a Domain alias of the customer.
 --

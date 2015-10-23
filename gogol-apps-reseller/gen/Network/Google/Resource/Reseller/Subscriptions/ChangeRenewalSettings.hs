@@ -44,14 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.changeRenewalSettings@ method which the
 -- 'SubscriptionsChangeRenewalSettings' request conforms to.
 type SubscriptionsChangeRenewalSettingsResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "changeRenewalSettings" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] RenewalSettings :>
-                   Post '[JSON] Subscription
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "changeRenewalSettings" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] RenewalSettings :>
+                         Post '[JSON] Subscription
 
 -- | Changes the renewal settings of a subscription
 --

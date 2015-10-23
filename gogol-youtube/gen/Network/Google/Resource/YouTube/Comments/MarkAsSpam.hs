@@ -43,10 +43,12 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.comments.markAsSpam@ method which the
 -- 'CommentsMarkAsSpam' request conforms to.
 type CommentsMarkAsSpamResource =
-     "comments" :>
-       "markAsSpam" :>
-         QueryParam "id" Text :>
-           QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "comments" :>
+           "markAsSpam" :>
+             QueryParam "id" Text :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Expresses the caller\'s opinion that one or more comments should be
 -- flagged as spam.

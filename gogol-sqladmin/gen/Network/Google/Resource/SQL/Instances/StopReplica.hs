@@ -43,12 +43,14 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.stopReplica@ method which the
 -- 'InstancesStopReplica' request conforms to.
 type InstancesStopReplicaResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "stopReplica" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "stopReplica" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Stops the replication in the read replica instance.
 --

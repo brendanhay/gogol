@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.properties.update@ method which the
 -- 'PropertiesUpdate' request conforms to.
 type PropertiesUpdateResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "properties" :>
-           Capture "propertyKey" Text :>
-             QueryParam "visibility" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Property :> Put '[JSON] Property
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               Capture "propertyKey" Text :>
+                 QueryParam "visibility" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Property :> Put '[JSON] Property
 
 -- | Updates a property.
 --

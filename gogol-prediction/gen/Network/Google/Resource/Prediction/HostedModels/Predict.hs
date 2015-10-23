@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @prediction.hostedmodels.predict@ method which the
 -- 'HostedModelsPredict' request conforms to.
 type HostedModelsPredictResource =
-     Capture "project" Text :>
-       "hostedmodels" :>
-         Capture "hostedModelName" Text :>
-           "predict" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Input :> Post '[JSON] Output
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "hostedmodels" :>
+               Capture "hostedModelName" Text :>
+                 "predict" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Input :> Post '[JSON] Output
 
 -- | Submit input and request an output against a hosted model.
 --

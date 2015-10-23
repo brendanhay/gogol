@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasterCollections.cancelProcessing@ method which the
 -- 'RasterCollectionsCancelProcessing' request conforms to.
 type RasterCollectionsCancelProcessingResource =
-     "rasterCollections" :>
-       Capture "id" Text :>
-         "cancelProcessing" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] ProcessResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           Capture "id" Text :>
+             "cancelProcessing" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] ProcessResponse
 
 -- | Cancel processing on a raster collection asset.
 --

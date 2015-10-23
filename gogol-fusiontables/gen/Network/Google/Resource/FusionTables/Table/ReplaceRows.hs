@@ -36,7 +36,6 @@ module Network.Google.Resource.FusionTables.Table.ReplaceRows
     -- * Request Lenses
     , trrStartLine
     , trrEndLine
-    , trrMedia
     , trrTableId
     , trrDelimiter
     , trrEncoding
@@ -49,16 +48,33 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.replaceRows@ method which the
 -- 'TableReplaceRows' request conforms to.
 type TableReplaceRowsResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "replace" :>
-           QueryParam "startLine" Int32 :>
-             QueryParam "endLine" Int32 :>
-               QueryParam "delimiter" Text :>
-                 QueryParam "encoding" Text :>
-                   QueryParam "isStrict" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Body :> Post '[JSON] Task
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "replace" :>
+               QueryParam "startLine" Int32 :>
+                 QueryParam "endLine" Int32 :>
+                   QueryParam "delimiter" Text :>
+                     QueryParam "encoding" Text :>
+                       QueryParam "isStrict" Bool :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Task
+       :<|>
+       "upload" :>
+         "fusiontables" :>
+           "v2" :>
+             "tables" :>
+               Capture "tableId" Text :>
+                 "replace" :>
+                   QueryParam "startLine" Int32 :>
+                     QueryParam "endLine" Int32 :>
+                       QueryParam "delimiter" Text :>
+                         QueryParam "encoding" Text :>
+                           QueryParam "isStrict" Bool :>
+                             QueryParam "alt" AltJSON :>
+                               QueryParam "uploadType" AltMedia :>
+                                 ReqBody '[OctetStream] RequestBody :>
+                                   Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.
@@ -67,12 +83,11 @@ type TableReplaceRowsResource =
 data TableReplaceRows = TableReplaceRows
     { _trrStartLine :: !(Maybe Int32)
     , _trrEndLine   :: !(Maybe Int32)
-    , _trrMedia     :: !Body
     , _trrTableId   :: !Text
     , _trrDelimiter :: !(Maybe Text)
     , _trrEncoding  :: !(Maybe Text)
     , _trrIsStrict  :: !(Maybe Bool)
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableReplaceRows' with the minimum fields required to make a request.
 --
@@ -82,8 +97,6 @@ data TableReplaceRows = TableReplaceRows
 --
 -- * 'trrEndLine'
 --
--- * 'trrMedia'
---
 -- * 'trrTableId'
 --
 -- * 'trrDelimiter'
@@ -92,14 +105,12 @@ data TableReplaceRows = TableReplaceRows
 --
 -- * 'trrIsStrict'
 tableReplaceRows
-    :: Body -- ^ 'trrMedia'
-    -> Text -- ^ 'trrTableId'
+    :: Text -- ^ 'trrTableId'
     -> TableReplaceRows
-tableReplaceRows pTrrMedia_ pTrrTableId_ =
+tableReplaceRows pTrrTableId_ =
     TableReplaceRows
     { _trrStartLine = Nothing
     , _trrEndLine = Nothing
-    , _trrMedia = pTrrMedia_
     , _trrTableId = pTrrTableId_
     , _trrDelimiter = Nothing
     , _trrEncoding = Nothing
@@ -119,9 +130,6 @@ trrStartLine
 trrEndLine :: Lens' TableReplaceRows (Maybe Int32)
 trrEndLine
   = lens _trrEndLine (\ s a -> s{_trrEndLine = a})
-
-trrMedia :: Lens' TableReplaceRows Body
-trrMedia = lens _trrMedia (\ s a -> s{_trrMedia = a})
 
 -- | Table whose rows will be replaced.
 trrTableId :: Lens' TableReplaceRows Text
@@ -156,9 +164,26 @@ instance GoogleRequest TableReplaceRows where
               _trrEncoding
               _trrIsStrict
               (Just AltJSON)
-              _trrMedia
               fusionTablesService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy TableReplaceRowsResource)
+                      mempty
+
+instance GoogleRequest (Upload TableReplaceRows)
+         where
+        type Rs (Upload TableReplaceRows) = Task
+        requestClient (Upload TableReplaceRows{..} body)
+          = go _trrTableId _trrStartLine _trrEndLine
+              _trrDelimiter
+              _trrEncoding
+              _trrIsStrict
+              (Just AltJSON)
+              (Just AltMedia)
+              _trrPayload
+              body
+              fusionTablesService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy TableReplaceRowsResource)
                       mempty

@@ -42,12 +42,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.testers.get@ method which the
 -- 'EditsTestersGet' request conforms to.
 type EditsTestersGetResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "testers" :>
-             Capture "track" EditsTestersGetTrack :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Testers
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "testers" :>
+                   Capture "track" EditsTestersGetTrack :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Testers
 
 --
 -- /See:/ 'editsTestersGet' smart constructor.

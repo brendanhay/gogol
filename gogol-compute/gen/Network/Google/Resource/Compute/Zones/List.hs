@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.zones.list@ method which the
 -- 'ZonesList' request conforms to.
 type ZonesListResource =
-     Capture "project" Text :>
-       "zones" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               QueryParam "filter" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
 
 -- | Retrieves the list of zone resources available to the specified project.
 --

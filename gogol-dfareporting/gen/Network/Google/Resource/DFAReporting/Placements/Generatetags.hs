@@ -45,17 +45,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placements.generatetags@ method which the
 -- 'PlacementsGeneratetags' request conforms to.
 type PlacementsGeneratetagsResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placements" :>
-           "generatetags" :>
-             QueryParams "tagFormats"
-               PlacementsGeneratetagsTagFormats
-               :>
-               QueryParam "campaignId" Int64 :>
-                 QueryParams "placementIds" Int64 :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] PlacementsGenerateTagsResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               "generatetags" :>
+                 QueryParams "tagFormats"
+                   PlacementsGeneratetagsTagFormats
+                   :>
+                   QueryParam "campaignId" Int64 :>
+                     QueryParams "placementIds" Int64 :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] PlacementsGenerateTagsResponse
 
 -- | Generates tags for a placement.
 --

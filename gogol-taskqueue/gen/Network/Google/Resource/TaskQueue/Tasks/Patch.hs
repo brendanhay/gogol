@@ -47,14 +47,17 @@ import           Network.Google.TaskQueue.Types
 -- | A resource alias for @taskqueue.tasks.patch@ method which the
 -- 'TasksPatch' request conforms to.
 type TasksPatchResource =
-     Capture "project" Text :>
-       "taskqueues" :>
-         Capture "taskqueue" Text :>
-           "tasks" :>
-             Capture "task" Text :>
-               QueryParam "newLeaseSeconds" Int32 :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Task :> Patch '[JSON] Task
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   Capture "task" Text :>
+                     QueryParam "newLeaseSeconds" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Task :> Patch '[JSON] Task
 
 -- | Update tasks that are leased out of a TaskQueue. This method supports
 -- patch semantics.

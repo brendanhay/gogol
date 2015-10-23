@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.apklistings.update@ method which the
 -- 'EditsAPKListingsUpdate' request conforms to.
 type EditsAPKListingsUpdateResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             Capture "apkVersionCode" Int32 :>
-               "listings" :>
-                 Capture "language" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] APKListing :> Put '[JSON] APKListing
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   Capture "apkVersionCode" Int32 :>
+                     "listings" :>
+                       Capture "language" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] APKListing :> Put '[JSON] APKListing
 
 -- | Updates or creates the APK-specific localized listing for a specified
 -- APK and language code.

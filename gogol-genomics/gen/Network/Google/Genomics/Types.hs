@@ -528,7 +528,6 @@ genomicsService :: Service
 genomicsService
   = defaultService (ServiceId "genomics:v1")
       "genomics.googleapis.com"
-      ""
 
 -- | View and manage Genomics data
 genomicsScope :: OAuthScope

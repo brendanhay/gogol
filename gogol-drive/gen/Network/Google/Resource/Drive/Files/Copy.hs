@@ -50,18 +50,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.copy@ method which the
 -- 'FilesCopy' request conforms to.
 type FilesCopyResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "copy" :>
-           QueryParam "pinned" Bool :>
-             QueryParam "visibility" FilesCopyVisibility :>
-               QueryParam "timedTextLanguage" Text :>
-                 QueryParam "timedTextTrackName" Text :>
-                   QueryParam "ocrLanguage" Text :>
-                     QueryParam "convert" Bool :>
-                       QueryParam "ocr" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] File :> Post '[JSON] File
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "copy" :>
+               QueryParam "pinned" Bool :>
+                 QueryParam "visibility" FilesCopyVisibility :>
+                   QueryParam "timedTextLanguage" Text :>
+                     QueryParam "timedTextTrackName" Text :>
+                       QueryParam "ocrLanguage" Text :>
+                         QueryParam "convert" Bool :>
+                           QueryParam "ocr" Bool :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] File :> Post '[JSON] File
 
 -- | Creates a copy of the specified file.
 --

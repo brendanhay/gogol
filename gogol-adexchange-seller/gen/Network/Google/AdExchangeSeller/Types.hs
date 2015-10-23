@@ -187,7 +187,6 @@ adExchangeSellerService :: Service
 adExchangeSellerService
   = defaultService (ServiceId "adexchangeseller:v2.0")
       "www.googleapis.com"
-      "adexchangeseller/v2.0/"
 
 -- | View your Ad Exchange data
 adexchangeSellerReadonlyScope :: OAuthScope

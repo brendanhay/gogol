@@ -53,20 +53,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.list@ method which the
 -- 'UsersList' request conforms to.
 type UsersListResource =
-     "users" :>
-       QueryParam "event" UsersListEvent :>
-         QueryParam "orderBy" UsersListOrderBy :>
-           QueryParam "viewType" UsersListViewType :>
-             QueryParam "customFieldMask" Text :>
-               QueryParam "domain" Text :>
-                 QueryParam "showDeleted" Text :>
-                   QueryParam "sortOrder" UsersListSortOrder :>
-                     QueryParam "customer" Text :>
-                       QueryParam "query" Text :>
-                         QueryParam "projection" UsersListProjection :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] Users
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             QueryParam "event" UsersListEvent :>
+               QueryParam "orderBy" UsersListOrderBy :>
+                 QueryParam "viewType" UsersListViewType :>
+                   QueryParam "customFieldMask" Text :>
+                     QueryParam "domain" Text :>
+                       QueryParam "showDeleted" Text :>
+                         QueryParam "sortOrder" UsersListSortOrder :>
+                           QueryParam "customer" Text :>
+                             QueryParam "query" Text :>
+                               QueryParam "projection" UsersListProjection :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Users
 
 -- | Retrieve either deleted users or all users in a domain (paginated)
 --

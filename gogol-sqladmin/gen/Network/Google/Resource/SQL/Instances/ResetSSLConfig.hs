@@ -46,12 +46,14 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.resetSslConfig@ method which the
 -- 'InstancesResetSSLConfig' request conforms to.
 type InstancesResetSSLConfigResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "resetSslConfig" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "resetSslConfig" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Deletes all client certificates and generates a new server SSL
 -- certificate for the instance. The changes will not take effect until the

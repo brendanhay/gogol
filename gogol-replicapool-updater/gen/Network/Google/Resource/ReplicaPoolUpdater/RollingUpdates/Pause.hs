@@ -45,13 +45,16 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.rollingUpdates.pause@ method which the
 -- 'RollingUpdatesPause' request conforms to.
 type RollingUpdatesPauseResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "rollingUpdates" :>
-             Capture "rollingUpdate" Text :>
-               "pause" :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "rollingUpdates" :>
+                   Capture "rollingUpdate" Text :>
+                     "pause" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no
 -- effect if invoked when the state of the update is PAUSED.

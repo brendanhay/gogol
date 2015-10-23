@@ -45,15 +45,17 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objectAccessControls.get@ method which the
 -- 'ObjectAccessControlsGet' request conforms to.
 type ObjectAccessControlsGetResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           Capture "object" Text :>
-             "acl" :>
-               Capture "entity" Text :>
-                 QueryParam "generation" Int64 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ObjectAccessControl
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               Capture "object" Text :>
+                 "acl" :>
+                   Capture "entity" Text :>
+                     QueryParam "generation" Int64 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ObjectAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified object.
 --

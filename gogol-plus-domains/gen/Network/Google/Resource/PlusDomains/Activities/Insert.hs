@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.activities.insert@ method which the
 -- 'ActivitiesInsert' request conforms to.
 type ActivitiesInsertResource =
-     "people" :>
-       Capture "userId" Text :>
-         "activities" :>
-           QueryParam "preview" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Activity :> Post '[JSON] Activity
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "activities" :>
+               QueryParam "preview" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Activity :> Post '[JSON] Activity
 
 -- | Create a new activity for the authenticated user.
 --

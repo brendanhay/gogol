@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.customchannels.patch@ method which the
 -- 'CustomChannelsPatch' request conforms to.
 type CustomChannelsPatchResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "customchannels" :>
-           QueryParam "customChannelId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] CustomChannel :>
-                 Patch '[JSON] CustomChannel
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "customchannels" :>
+               QueryParam "customChannelId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] CustomChannel :>
+                     Patch '[JSON] CustomChannel
 
 -- | Update a custom channel in the host AdSense account. This method
 -- supports patch semantics.

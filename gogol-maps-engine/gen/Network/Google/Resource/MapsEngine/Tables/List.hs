@@ -54,24 +54,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.list@ method which the
 -- 'TablesList' request conforms to.
 type TablesListResource =
-     "tables" :>
-       QueryParam "createdAfter" DateTime' :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" TablesListRole :>
-             QueryParam "bbox" Text :>
-               QueryParam "processingStatus"
-                 TablesListProcessingStatus
-                 :>
-                 QueryParam "modifiedAfter" DateTime' :>
-                   QueryParam "modifiedBefore" DateTime' :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projectId" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] TablesListResponse
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           QueryParam "createdAfter" DateTime' :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "role" TablesListRole :>
+                 QueryParam "bbox" Text :>
+                   QueryParam "processingStatus"
+                     TablesListProcessingStatus
+                     :>
+                     QueryParam "modifiedAfter" DateTime' :>
+                       QueryParam "modifiedBefore" DateTime' :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "projectId" Text :>
+                             QueryParam "search" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "tags" Text :>
+                                   QueryParam "createdBefore" DateTime' :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] TablesListResponse
 
 -- | Return all tables readable by the current user.
 --

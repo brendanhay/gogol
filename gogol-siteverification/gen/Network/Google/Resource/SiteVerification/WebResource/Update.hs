@@ -43,11 +43,13 @@ import           Network.Google.SiteVerification.Types
 -- | A resource alias for @siteVerification.webResource.update@ method which the
 -- 'WebResourceUpdate' request conforms to.
 type WebResourceUpdateResource =
-     "webResource" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] SiteVerificationWebResourceResource
-             :> Put '[JSON] SiteVerificationWebResourceResource
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] SiteVerificationWebResourceResource
+                 :> Put '[JSON] SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain.
 --

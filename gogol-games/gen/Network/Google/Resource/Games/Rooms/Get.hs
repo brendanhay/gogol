@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.rooms.get@ method which the
 -- 'RoomsGet' request conforms to.
 type RoomsGetResource =
-     "rooms" :>
-       Capture "roomId" Text :>
-         QueryParam "language" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Room
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Room
 
 -- | Get the data for a room.
 --

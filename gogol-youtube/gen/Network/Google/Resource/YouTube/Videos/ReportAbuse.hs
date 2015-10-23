@@ -43,11 +43,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.videos.reportAbuse@ method which the
 -- 'VideosReportAbuse' request conforms to.
 type VideosReportAbuseResource =
-     "videos" :>
-       "reportAbuse" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "videos" :>
+           "reportAbuse" :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
 
 -- | Report abuse for a video.
 --

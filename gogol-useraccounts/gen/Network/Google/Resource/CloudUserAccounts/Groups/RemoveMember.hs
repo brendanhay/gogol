@@ -44,14 +44,17 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.groups.removeMember@ method which the
 -- 'GroupsRemoveMember' request conforms to.
 type GroupsRemoveMemberResource =
-     Capture "project" Text :>
-       "global" :>
-         "groups" :>
-           Capture "groupName" Text :>
-             "removeMember" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] GroupsRemoveMemberRequest :>
-                   Post '[JSON] Operation
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 Capture "groupName" Text :>
+                   "removeMember" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] GroupsRemoveMemberRequest :>
+                         Post '[JSON] Operation
 
 -- | Removes users from the specified group.
 --

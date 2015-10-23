@@ -43,11 +43,14 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.groups.delete@ method which the
 -- 'GroupsDelete' request conforms to.
 type GroupsDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "groups" :>
-           Capture "groupName" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 Capture "groupName" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Group resource.
 --

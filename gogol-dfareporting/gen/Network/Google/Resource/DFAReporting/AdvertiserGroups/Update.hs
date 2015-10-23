@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.advertiserGroups.update@ method which the
 -- 'AdvertiserGroupsUpdate' request conforms to.
 type AdvertiserGroupsUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "advertiserGroups" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] AdvertiserGroup :>
-               Put '[JSON] AdvertiserGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AdvertiserGroup :>
+                   Put '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group.
 --

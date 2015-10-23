@@ -52,23 +52,26 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.commentThreads.list@ method which the
 -- 'CommentThreadsList' request conforms to.
 type CommentThreadsListResource =
-     "commentThreads" :>
-       QueryParam "part" Text :>
-         QueryParam "moderationStatus"
-           CommentThreadsListModerationStatus
-           :>
-           QueryParam "searchTerms" Text :>
-             QueryParam "channelId" Text :>
-               QueryParam "allThreadsRelatedToChannelId" Text :>
-                 QueryParam "videoId" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "order" CommentThreadsListOrder :>
-                         QueryParam "textFormat" CommentThreadsListTextFormat
-                           :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] CommentThreadListResponse
+     "youtube" :>
+       "v3" :>
+         "commentThreads" :>
+           QueryParam "part" Text :>
+             QueryParam "moderationStatus"
+               CommentThreadsListModerationStatus
+               :>
+               QueryParam "searchTerms" Text :>
+                 QueryParam "channelId" Text :>
+                   QueryParam "allThreadsRelatedToChannelId" Text :>
+                     QueryParam "videoId" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "order" CommentThreadsListOrder :>
+                             QueryParam "textFormat"
+                               CommentThreadsListTextFormat
+                               :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] CommentThreadListResponse
 
 -- | Returns a list of comment threads that match the API request parameters.
 --

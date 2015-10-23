@@ -43,11 +43,13 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.permissions.create@ method which the
 -- 'AccountsPermissionsCreate' request conforms to.
 type AccountsPermissionsCreateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "permissions" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] UserAccess :> Post '[JSON] UserAccess
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "permissions" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] UserAccess :> Post '[JSON] UserAccess
 
 -- | Creates a user\'s Account & Container Permissions.
 --

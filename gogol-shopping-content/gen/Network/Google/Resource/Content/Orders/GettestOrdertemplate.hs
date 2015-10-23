@@ -44,13 +44,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.gettestordertemplate@ method which the
 -- 'OrdersGettestOrdertemplate' request conforms to.
 type OrdersGettestOrdertemplateResource =
-     Capture "merchantId" Word64 :>
-       "testordertemplates" :>
-         Capture "templateName"
-           OrdersGettestOrdertemplateTemplateName
-           :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] OrdersGetTestOrderTemplateResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "testordertemplates" :>
+             Capture "templateName"
+               OrdersGettestOrdertemplateTemplateName
+               :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] OrdersGetTestOrderTemplateResponse
 
 -- | Sandbox only. Retrieves an order template that can be used to quickly
 -- create a new order in sandbox.

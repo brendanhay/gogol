@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.bookshelves.clearVolumes@ method which the
 -- 'MyLibraryBookshelvesClearVolumes' request conforms to.
 type MyLibraryBookshelvesClearVolumesResource =
-     "mylibrary" :>
-       "bookshelves" :>
-         Capture "shelf" Text :>
-           "clearVolumes" :>
-             QueryParam "source" Text :>
-               QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "bookshelves" :>
+             Capture "shelf" Text :>
+               "clearVolumes" :>
+                 QueryParam "source" Text :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears all volumes from a bookshelf.
 --

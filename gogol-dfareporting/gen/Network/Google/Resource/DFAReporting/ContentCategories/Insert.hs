@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.contentCategories.insert@ method which the
 -- 'ContentCategoriesInsert' request conforms to.
 type ContentCategoriesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "contentCategories" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ContentCategory :>
-               Post '[JSON] ContentCategory
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ContentCategory :>
+                   Post '[JSON] ContentCategory
 
 -- | Inserts a new content category.
 --

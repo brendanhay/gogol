@@ -44,14 +44,16 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.versions.get@ method which the
 -- 'AccountsContainersVersionsGet' request conforms to.
 type AccountsContainersVersionsGetResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "versions" :>
-               Capture "containerVersionId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ContainerVersion
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "versions" :>
+                   Capture "containerVersionId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ContainerVersion
 
 -- | Gets a Container Version.
 --

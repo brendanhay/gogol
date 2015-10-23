@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.urlchannels.list@ method which the
 -- 'AccountsURLChannelsList' request conforms to.
 type AccountsURLChannelsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "urlchannels" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "urlchannels" :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
 
 -- | List all URL channels in the specified ad client for the specified
 -- account.

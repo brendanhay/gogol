@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.delete@ method which the
 -- 'PretargetingConfigDelete' request conforms to.
 type PretargetingConfigDeleteResource =
-     "pretargetingconfigs" :>
-       Capture "accountId" Int64 :>
-         Capture "configId" Int64 :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             Capture "configId" Int64 :>
+               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing pretargeting config.
 --

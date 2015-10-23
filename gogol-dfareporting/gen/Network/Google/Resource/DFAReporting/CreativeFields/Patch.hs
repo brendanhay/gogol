@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeFields.patch@ method which the
 -- 'CreativeFieldsPatch' request conforms to.
 type CreativeFieldsPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeFields" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] CreativeField :>
-                 Patch '[JSON] CreativeField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] CreativeField :>
+                     Patch '[JSON] CreativeField
 
 -- | Updates an existing creative field. This method supports patch
 -- semantics.

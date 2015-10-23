@@ -49,14 +49,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.dataSources.datasets.patch@ method which the
 -- 'UsersDataSourcesDataSetsPatch' request conforms to.
 type UsersDataSourcesDataSetsPatchResource =
-     Capture "userId" Text :>
-       "dataSources" :>
-         Capture "dataSourceId" Text :>
-           "datasets" :>
-             Capture "datasetId" Text :>
-               QueryParam "currentTimeMillis" Int64 :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] DataSet :> Patch '[JSON] DataSet
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 "datasets" :>
+                   Capture "datasetId" Text :>
+                     QueryParam "currentTimeMillis" Int64 :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] DataSet :> Patch '[JSON] DataSet
 
 -- | Adds data points to a dataset. The dataset need not be previously
 -- created. All points within the given dataset will be returned with

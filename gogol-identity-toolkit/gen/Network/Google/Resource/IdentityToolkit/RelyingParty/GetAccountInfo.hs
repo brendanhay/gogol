@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.getAccountInfo@ method which the
 -- 'RelyingPartyGetAccountInfo' request conforms to.
 type RelyingPartyGetAccountInfoResource =
-     "getAccountInfo" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           IdentitytoolkitRelyingPartyGetAccountInfoRequest
-           :> Post '[JSON] GetAccountInfoResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "getAccountInfo" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 IdentitytoolkitRelyingPartyGetAccountInfoRequest
+                 :> Post '[JSON] GetAccountInfoResponse
 
 -- | Returns the account info.
 --

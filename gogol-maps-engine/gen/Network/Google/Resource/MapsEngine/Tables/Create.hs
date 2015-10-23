@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.create@ method which the
 -- 'TablesCreate' request conforms to.
 type TablesCreateResource =
-     "tables" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Table :> Post '[JSON] Table
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Table :> Post '[JSON] Table
 
 -- | Create a table asset.
 --

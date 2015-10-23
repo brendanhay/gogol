@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.deployments.cancelPreview@ method which the
 -- 'DeploymentsCancelPreview' request conforms to.
 type DeploymentsCancelPreviewResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           Capture "deployment" Text :>
-             "cancelPreview" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] DeploymentsCancelPreviewRequest :>
-                   Post '[JSON] Operation
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "cancelPreview" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] DeploymentsCancelPreviewRequest :>
+                         Post '[JSON] Operation
 
 -- | Cancels and removes the preview currently associated with the
 -- deployment.

@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.aliases.delete@ method which the
 -- 'UsersAliasesDelete' request conforms to.
 type UsersAliasesDeleteResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "aliases" :>
-           Capture "alias" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "aliases" :>
+                 Capture "alias" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove a alias for the user
 --

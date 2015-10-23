@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.audiences.list@ method which the
 -- 'AudiencesList' request conforms to.
 type AudiencesListResource =
-     "people" :>
-       Capture "userId" Text :>
-         "audiences" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] AudiencesFeed
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "audiences" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] AudiencesFeed
 
 -- | List all of the audiences to which a user can share.
 --

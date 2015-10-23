@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.reports.generate@ method which the
 -- 'ReportsGenerate' request conforms to.
 type ReportsGenerateResource =
-     "reports" :>
-       "generate" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
+     "doubleclicksearch" :>
+       "v2" :>
+         "reports" :>
+           "generate" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
 
 -- | Generates and returns a report immediately.
 --

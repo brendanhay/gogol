@@ -45,13 +45,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.update@ method which the
 -- 'AccountsContainersUpdate' request conforms to.
 type AccountsContainersUpdateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             QueryParam "fingerprint" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Container :> Put '[JSON] Container
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 QueryParam "fingerprint" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Container :> Put '[JSON] Container
 
 -- | Updates a Container.
 --

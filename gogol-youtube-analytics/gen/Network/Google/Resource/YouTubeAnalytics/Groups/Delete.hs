@@ -43,10 +43,13 @@ import           Network.Google.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.groups.delete@ method which the
 -- 'GroupsDelete' request conforms to.
 type GroupsDeleteResource =
-     "groups" :>
-       QueryParam "id" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "analytics" :>
+         "v1" :>
+           "groups" :>
+             QueryParam "id" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a group.
 --

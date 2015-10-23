@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.associationsessions.verify@ method which the
 -- 'AssociationSessionsVerify' request conforms to.
 type AssociationSessionsVerifyResource =
-     "associationsessions" :>
-       "verify" :>
-         QueryParam "token" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] AssociationSession
+     "adsensehost" :>
+       "v4.1" :>
+         "associationsessions" :>
+           "verify" :>
+             QueryParam "token" Text :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] AssociationSession
 
 -- | Verify an association session after the association callback returns
 -- from AdSense signup.

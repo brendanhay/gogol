@@ -57,25 +57,28 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.patch@ method which the
 -- 'FilesPatch' request conforms to.
 type FilesPatchResource =
-     "files" :>
-       Capture "fileId" Text :>
-         QueryParam "newRevision" Bool :>
-           QueryParam "pinned" Bool :>
-             QueryParam "timedTextLanguage" Text :>
-               QueryParam "updateViewedDate" Bool :>
-                 QueryParam "removeParents" Text :>
-                   QueryParam "modifiedDateBehavior"
-                     FilesPatchModifiedDateBehavior
-                     :>
-                     QueryParam "useContentAsIndexableText" Bool :>
-                       QueryParam "timedTextTrackName" Text :>
-                         QueryParam "ocrLanguage" Text :>
-                           QueryParam "convert" Bool :>
-                             QueryParam "setModifiedDate" Bool :>
-                               QueryParam "addParents" Text :>
-                                 QueryParam "ocr" Bool :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] File :> Patch '[JSON] File
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             QueryParam "newRevision" Bool :>
+               QueryParam "pinned" Bool :>
+                 QueryParam "timedTextLanguage" Text :>
+                   QueryParam "updateViewedDate" Bool :>
+                     QueryParam "removeParents" Text :>
+                       QueryParam "modifiedDateBehavior"
+                         FilesPatchModifiedDateBehavior
+                         :>
+                         QueryParam "useContentAsIndexableText" Bool :>
+                           QueryParam "timedTextTrackName" Text :>
+                             QueryParam "ocrLanguage" Text :>
+                               QueryParam "convert" Bool :>
+                                 QueryParam "setModifiedDate" Bool :>
+                                   QueryParam "addParents" Text :>
+                                     QueryParam "ocr" Bool :>
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] File :>
+                                           Patch '[JSON] File
 
 -- | Updates file metadata and\/or content. This method supports patch
 -- semantics.

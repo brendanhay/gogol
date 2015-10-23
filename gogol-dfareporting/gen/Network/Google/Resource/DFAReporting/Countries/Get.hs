@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.countries.get@ method which the
 -- 'CountriesGet' request conforms to.
 type CountriesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "countries" :>
-           Capture "dartId" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Country
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "countries" :>
+               Capture "dartId" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Country
 
 -- | Gets one country by ID.
 --

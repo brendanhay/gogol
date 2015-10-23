@@ -44,14 +44,17 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.groups.addMember@ method which the
 -- 'GroupsAddMember' request conforms to.
 type GroupsAddMemberResource =
-     Capture "project" Text :>
-       "global" :>
-         "groups" :>
-           Capture "groupName" Text :>
-             "addMember" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] GroupsAddMemberRequest :>
-                   Post '[JSON] Operation
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 Capture "groupName" Text :>
+                   "addMember" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] GroupsAddMemberRequest :>
+                         Post '[JSON] Operation
 
 -- | Adds users to the specified group.
 --

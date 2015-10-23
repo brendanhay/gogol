@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.accountUserLinks.delete@ method which the
 -- 'ManagementAccountUserLinksDelete' request conforms to.
 type ManagementAccountUserLinksDeleteResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "entityUserLinks" :>
-             Capture "linkId" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "entityUserLinks" :>
+                 Capture "linkId" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the given account.
 --

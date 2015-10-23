@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclickbidmanager.reports.listreports@ method which the
 -- 'ReportsListreports' request conforms to.
 type ReportsListreportsResource =
-     "queries" :>
-       Capture "queryId" Int64 :>
-         "reports" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] ListReportsResponse
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "queries" :>
+           Capture "queryId" Int64 :>
+             "reports" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ListReportsResponse
 
 -- | Retrieves stored reports.
 --

@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.reports.saved.list@ method which the
 -- 'AccountsReportsSavedList' request conforms to.
 type AccountsReportsSavedListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "reports" :>
-           "saved" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               "saved" :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
 
 -- | List all saved reports in this Ad Exchange account.
 --

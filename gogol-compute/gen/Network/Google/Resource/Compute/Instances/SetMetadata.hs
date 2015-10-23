@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.setMetadata@ method which the
 -- 'InstancesSetMetadata' request conforms to.
 type InstancesSetMetadataResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "setMetadata" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Metadata :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "setMetadata" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Metadata :> Post '[JSON] Operation
 
 -- | Sets metadata for the specified instance to the data included in the
 -- request.

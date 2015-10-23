@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.labels.get@ method which the
 -- 'UsersLabelsGet' request conforms to.
 type UsersLabelsGetResource =
-     Capture "userId" Text :>
-       "labels" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Label
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Label
 
 -- | Gets the specified label.
 --

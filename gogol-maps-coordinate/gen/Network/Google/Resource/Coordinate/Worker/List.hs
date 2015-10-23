@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.worker.list@ method which the
 -- 'WorkerList' request conforms to.
 type WorkerListResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "workers" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] WorkerListResponse
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "workers" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] WorkerListResponse
 
 -- | Retrieves a list of workers in a team.
 --

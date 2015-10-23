@@ -46,17 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customMetrics.update@ method which the
 -- 'ManagementCustomMetricsUpdate' request conforms to.
 type ManagementCustomMetricsUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customMetrics" :>
-                 Capture "customMetricId" Text :>
-                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CustomMetric :>
-                         Put '[JSON] CustomMetric
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     Capture "customMetricId" Text :>
+                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CustomMetric :>
+                             Put '[JSON] CustomMetric
 
 -- | Updates an existing custom metric.
 --

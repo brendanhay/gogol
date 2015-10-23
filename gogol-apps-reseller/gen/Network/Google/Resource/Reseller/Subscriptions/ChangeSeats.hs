@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.changeSeats@ method which the
 -- 'SubscriptionsChangeSeats' request conforms to.
 type SubscriptionsChangeSeatsResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "changeSeats" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Seats :> Post '[JSON] Subscription
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "changeSeats" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Seats :> Post '[JSON] Subscription
 
 -- | Changes the seats configuration of a subscription
 --

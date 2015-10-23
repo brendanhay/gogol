@@ -42,9 +42,11 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.playlistItems.delete@ method which the
 -- 'PlayListItemsDelete' request conforms to.
 type PlayListItemsDeleteResource =
-     "playlistItems" :>
-       QueryParam "id" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "playlistItems" :>
+           QueryParam "id" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a playlist item.
 --

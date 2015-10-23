@@ -162,7 +162,6 @@ replicaPoolService :: Service
 replicaPoolService
   = defaultService (ServiceId "replicapool:v1beta2")
       "www.googleapis.com"
-      "replicapool/v1beta2/projects/"
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: OAuthScope

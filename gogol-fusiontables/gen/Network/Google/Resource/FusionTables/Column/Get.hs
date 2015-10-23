@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.column.get@ method which the
 -- 'ColumnGet' request conforms to.
 type ColumnGetResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "columns" :>
-           Capture "columnId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Column
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "columns" :>
+               Capture "columnId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Column
 
 -- | Retrieves a specific column by its ID.
 --

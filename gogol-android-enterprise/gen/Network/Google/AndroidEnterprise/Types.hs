@@ -255,7 +255,6 @@ androidEnterpriseService :: Service
 androidEnterpriseService
   = defaultService (ServiceId "androidenterprise:v1")
       "www.googleapis.com"
-      "androidenterprise/v1/"
 
 -- | Manage corporate Android devices
 androidenterpriseScope :: OAuthScope

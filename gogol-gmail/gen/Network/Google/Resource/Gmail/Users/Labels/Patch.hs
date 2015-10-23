@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.labels.patch@ method which the
 -- 'UsersLabelsPatch' request conforms to.
 type UsersLabelsPatchResource =
-     Capture "userId" Text :>
-       "labels" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Label :> Patch '[JSON] Label
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Label :> Patch '[JSON] Label
 
 -- | Updates the specified label. This method supports patch semantics.
 --

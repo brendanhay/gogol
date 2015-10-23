@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.jobs.list@ method which the
 -- 'JobsList' request conforms to.
 type JobsListResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "jobs" :>
-           QueryParam "minModifiedTimestampMs" Word64 :>
-             QueryParam "omitJobChanges" Bool :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] JobListResponse
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               QueryParam "minModifiedTimestampMs" Word64 :>
+                 QueryParam "omitJobChanges" Bool :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] JobListResponse
 
 -- | Retrieves jobs created or modified since the given timestamp.
 --

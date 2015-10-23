@@ -49,30 +49,34 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.get@ method which the
 -- 'ObjectsGet' request conforms to.
 type ObjectsGetResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
-               QueryParam "ifGenerationNotMatch" Int64 :>
-                 QueryParam "ifGenerationMatch" Int64 :>
-                   QueryParam "ifMetagenerationNotMatch" Int64 :>
-                     QueryParam "projection" ObjectsGetProjection :>
-                       QueryParam "generation" Int64 :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Object
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               Capture "object" Text :>
+                 QueryParam "ifMetagenerationMatch" Int64 :>
+                   QueryParam "ifGenerationNotMatch" Int64 :>
+                     QueryParam "ifGenerationMatch" Int64 :>
+                       QueryParam "ifMetagenerationNotMatch" Int64 :>
+                         QueryParam "projection" ObjectsGetProjection :>
+                           QueryParam "generation" Int64 :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Object
        :<|>
-       "b" :>
-         Capture "bucket" Text :>
-           "o" :>
-             Capture "object" Text :>
-               QueryParam "ifMetagenerationMatch" Int64 :>
-                 QueryParam "ifGenerationNotMatch" Int64 :>
-                   QueryParam "ifGenerationMatch" Int64 :>
-                     QueryParam "ifMetagenerationNotMatch" Int64 :>
-                       QueryParam "projection" ObjectsGetProjection :>
-                         QueryParam "generation" Int64 :>
-                           QueryParam "alt" AltMedia :>
-                             Get '[OctetStream] Stream
+       "storage" :>
+         "v1" :>
+           "b" :>
+             Capture "bucket" Text :>
+               "o" :>
+                 Capture "object" Text :>
+                   QueryParam "ifMetagenerationMatch" Int64 :>
+                     QueryParam "ifGenerationNotMatch" Int64 :>
+                       QueryParam "ifGenerationMatch" Int64 :>
+                         QueryParam "ifMetagenerationNotMatch" Int64 :>
+                           QueryParam "projection" ObjectsGetProjection :>
+                             QueryParam "generation" Int64 :>
+                               QueryParam "alt" AltMedia :>
+                                 Get '[OctetStream] Stream
 
 -- | Retrieves an object or its metadata.
 --

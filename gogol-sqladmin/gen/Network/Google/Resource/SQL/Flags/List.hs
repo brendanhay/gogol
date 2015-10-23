@@ -40,9 +40,11 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.flags.list@ method which the
 -- 'FlagsList' request conforms to.
 type FlagsListResource =
-     "flags" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] FlagsListResponse
+     "sql" :>
+       "v1beta4" :>
+         "flags" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] FlagsListResponse
 
 -- | List all available database flags for Google Cloud SQL instances.
 --

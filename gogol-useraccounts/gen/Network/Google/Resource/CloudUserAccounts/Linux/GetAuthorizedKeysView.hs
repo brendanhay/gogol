@@ -46,15 +46,18 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.linux.getAuthorizedKeysView@ method which the
 -- 'LinuxGetAuthorizedKeysView' request conforms to.
 type LinuxGetAuthorizedKeysViewResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "authorizedKeysView" :>
-             Capture "user" Text :>
-               QueryParam "instance" Text :>
-                 QueryParam "login" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] LinuxGetAuthorizedKeysViewResponse
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "authorizedKeysView" :>
+                   Capture "user" Text :>
+                     QueryParam "instance" Text :>
+                       QueryParam "login" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] LinuxGetAuthorizedKeysViewResponse
 
 -- | Returns a list of authorized public keys for a specific user account.
 --

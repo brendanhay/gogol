@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.permissions.getIdForEmail@ method which the
 -- 'PermissionsGetIdForEmail' request conforms to.
 type PermissionsGetIdForEmailResource =
-     "permissionIds" :>
-       Capture "email" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] PermissionId
+     "drive" :>
+       "v2" :>
+         "permissionIds" :>
+           Capture "email" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] PermissionId
 
 -- | Returns the permission ID for an email address.
 --

@@ -43,11 +43,13 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.permissions.list@ method which the
 -- 'AccountsPermissionsList' request conforms to.
 type AccountsPermissionsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "permissions" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] ListAccountUsersResponse
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "permissions" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ListAccountUsersResponse
 
 -- | List all users that have access to the account along with Account and
 -- Container Permissions granted to each of them.

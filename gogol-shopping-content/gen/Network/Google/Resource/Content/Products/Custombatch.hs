@@ -43,12 +43,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.products.custombatch@ method which the
 -- 'ProductsCustombatch' request conforms to.
 type ProductsCustombatchResource =
-     "products" :>
-       "batch" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ProductsCustomBatchRequest :>
-               Post '[JSON] ProductsCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "products" :>
+           "batch" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ProductsCustomBatchRequest :>
+                   Post '[JSON] ProductsCustomBatchResponse
 
 -- | Retrieves, inserts, and deletes multiple products in a single request.
 --

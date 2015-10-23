@@ -44,18 +44,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.realtime.get@ method which the
 -- 'RealtimeGet' request conforms to.
 type RealtimeGetResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "realtime" :>
-           QueryParam "revision" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "realtime" :>
+               QueryParam "revision" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
-       "files" :>
-         Capture "fileId" Text :>
-           "realtime" :>
-             QueryParam "revision" Int32 :>
-               QueryParam "alt" AltMedia :>
-                 Get '[OctetStream] Stream
+       "drive" :>
+         "v2" :>
+           "files" :>
+             Capture "fileId" Text :>
+               "realtime" :>
+                 QueryParam "revision" Int32 :>
+                   QueryParam "alt" AltMedia :>
+                     Get '[OctetStream] Stream
 
 -- | Exports the contents of the Realtime API data model associated with this
 -- file as JSON.

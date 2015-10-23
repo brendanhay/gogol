@@ -46,15 +46,17 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.users.update@ method which the
 -- 'UsersUpdate' request conforms to.
 type UsersUpdateResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "users" :>
-               QueryParam "host" Text :>
-                 QueryParam "name" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] User :> Put '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "users" :>
+                   QueryParam "host" Text :>
+                     QueryParam "name" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] User :> Put '[JSON] Operation
 
 -- | Updates an existing user in a Cloud SQL instance.
 --

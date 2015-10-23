@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.links.insert@ method which the
 -- 'LinksInsert' request conforms to.
 type LinksInsertResource =
-     Capture "role" LinksInsertRole :>
-       Capture "roleId" Text :>
-         "link" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Link :> Post '[JSON] Link
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" LinksInsertRole :>
+           Capture "roleId" Text :>
+             "link" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Link :> Post '[JSON] Link
 
 -- | Inserts a new link.
 --

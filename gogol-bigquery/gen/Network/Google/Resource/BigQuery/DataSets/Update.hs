@@ -46,12 +46,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.datasets.update@ method which the
 -- 'DataSetsUpdate' request conforms to.
 type DataSetsUpdateResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] DataSet :> Put '[JSON] DataSet
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] DataSet :> Put '[JSON] DataSet
 
 -- | Updates information in an existing dataset. The update method replaces
 -- the entire dataset resource, whereas the patch method only replaces

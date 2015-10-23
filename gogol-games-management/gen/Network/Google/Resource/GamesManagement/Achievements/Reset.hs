@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.achievements.reset@ method which the
 -- 'AchievementsReset' request conforms to.
 type AchievementsResetResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         "reset" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] AchievementResetResponse
+     "games" :>
+       "v1management" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "reset" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] AchievementResetResponse
 
 -- | Resets the achievement with the given ID for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts

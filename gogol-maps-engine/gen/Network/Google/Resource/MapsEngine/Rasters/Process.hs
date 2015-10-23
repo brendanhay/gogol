@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasters.process@ method which the
 -- 'RastersProcess' request conforms to.
 type RastersProcessResource =
-     "rasters" :>
-       Capture "id" Text :>
-         "process" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] ProcessResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasters" :>
+           Capture "id" Text :>
+             "process" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] ProcessResponse
 
 -- | Process a raster asset.
 --

@@ -53,18 +53,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @appsactivity.activities.list@ method which the
 -- 'ActivitiesList' request conforms to.
 type ActivitiesListResource =
-     "activities" :>
-       QueryParam "drive.fileId" Text :>
-         QueryParam "drive.ancestorId" Text :>
-           QueryParam "groupingStrategy"
-             ActivitiesListGroupingStrategy
-             :>
-             QueryParam "userId" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ListActivitiesResponse
+     "appsactivity" :>
+       "v1" :>
+         "activities" :>
+           QueryParam "drive.fileId" Text :>
+             QueryParam "drive.ancestorId" Text :>
+               QueryParam "groupingStrategy"
+                 ActivitiesListGroupingStrategy
+                 :>
+                 QueryParam "userId" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListActivitiesResponse
 
 -- | Returns a list of activities visible to the current logged in user.
 -- Visible activities are determined by the visiblity settings of the

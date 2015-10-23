@@ -60,44 +60,53 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.rewrite@ method which the
 -- 'ObjectsRewrite' request conforms to.
 type ObjectsRewriteResource =
-     "b" :>
-       Capture "sourceBucket" Text :>
-         "o" :>
-           Capture "sourceObject" Text :>
-             "rewriteTo" :>
-               "b" :>
-                 Capture "destinationBucket" Text :>
-                   "o" :>
-                     Capture "destinationObject" Text :>
-                       QueryParam "destinationPredefinedAcl"
-                         ObjectsRewriteDestinationPredefinedACL
-                         :>
-                         QueryParam "ifSourceGenerationMatch" Int64 :>
-                           QueryParam "ifMetagenerationMatch" Int64 :>
-                             QueryParam "ifGenerationNotMatch" Int64 :>
-                               QueryParam "ifSourceMetagenerationNotMatch" Int64
-                                 :>
-                                 QueryParam "ifSourceMetagenerationMatch" Int64
-                                   :>
-                                   QueryParam "ifGenerationMatch" Int64 :>
-                                     QueryParam "maxBytesRewrittenPerCall" Int64
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "sourceBucket" Text :>
+             "o" :>
+               Capture "sourceObject" Text :>
+                 "rewriteTo" :>
+                   "b" :>
+                     Capture "destinationBucket" Text :>
+                       "o" :>
+                         Capture "destinationObject" Text :>
+                           QueryParam "destinationPredefinedAcl"
+                             ObjectsRewriteDestinationPredefinedACL
+                             :>
+                             QueryParam "ifSourceGenerationMatch" Int64 :>
+                               QueryParam "ifMetagenerationMatch" Int64 :>
+                                 QueryParam "ifGenerationNotMatch" Int64 :>
+                                   QueryParam "ifSourceMetagenerationNotMatch"
+                                     Int64
+                                     :>
+                                     QueryParam "ifSourceMetagenerationMatch"
+                                       Int64
                                        :>
-                                       QueryParam "ifMetagenerationNotMatch"
-                                         Int64
-                                         :>
-                                         QueryParam "ifSourceGenerationNotMatch"
+                                       QueryParam "ifGenerationMatch" Int64 :>
+                                         QueryParam "maxBytesRewrittenPerCall"
                                            Int64
                                            :>
-                                           QueryParam "projection"
-                                             ObjectsRewriteProjection
+                                           QueryParam "ifMetagenerationNotMatch"
+                                             Int64
                                              :>
-                                             QueryParam "sourceGeneration" Int64
+                                             QueryParam
+                                               "ifSourceGenerationNotMatch"
+                                               Int64
                                                :>
-                                               QueryParam "rewriteToken" Text :>
-                                                 QueryParam "alt" AltJSON :>
-                                                   ReqBody '[JSON] Object :>
-                                                     Post '[JSON]
-                                                       RewriteResponse
+                                               QueryParam "projection"
+                                                 ObjectsRewriteProjection
+                                                 :>
+                                                 QueryParam "sourceGeneration"
+                                                   Int64
+                                                   :>
+                                                   QueryParam "rewriteToken"
+                                                     Text
+                                                     :>
+                                                     QueryParam "alt" AltJSON :>
+                                                       ReqBody '[JSON] Object :>
+                                                         Post '[JSON]
+                                                           RewriteResponse
 
 -- | Rewrites a source object to a destination object. Optionally overrides
 -- metadata.

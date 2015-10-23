@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.schemas.patch@ method which the
 -- 'SchemasPatch' request conforms to.
 type SchemasPatchResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "schemas" :>
-           Capture "schemaKey" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Schema :> Patch '[JSON] Schema
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "schemas" :>
+                 Capture "schemaKey" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Schema :> Patch '[JSON] Schema
 
 -- | Update schema. This method supports patch semantics.
 --

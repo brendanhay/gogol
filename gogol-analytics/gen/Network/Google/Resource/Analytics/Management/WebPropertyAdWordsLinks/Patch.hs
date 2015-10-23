@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.patch@ method which the
 -- 'ManagementWebPropertyAdWordsLinksPatch' request conforms to.
 type ManagementWebPropertyAdWordsLinksPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityAdWordsLinks" :>
-                 Capture "webPropertyAdWordsLinkId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] EntityAdWordsLink :>
-                       Patch '[JSON] EntityAdWordsLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     Capture "webPropertyAdWordsLinkId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] EntityAdWordsLink :>
+                           Patch '[JSON] EntityAdWordsLink
 
 -- | Updates an existing webProperty-AdWords link. This method supports patch
 -- semantics.

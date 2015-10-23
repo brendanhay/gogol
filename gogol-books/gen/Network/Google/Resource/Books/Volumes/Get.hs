@@ -47,14 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.volumes.get@ method which the
 -- 'VolumesGet' request conforms to.
 type VolumesGetResource =
-     "volumes" :>
-       Capture "volumeId" Text :>
-         QueryParam "country" Text :>
-           QueryParam "partner" Text :>
-             QueryParam "source" Text :>
-               QueryParam "projection" VolumesGetProjection :>
-                 QueryParam "user_library_consistent_read" Bool :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Volume
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             QueryParam "country" Text :>
+               QueryParam "partner" Text :>
+                 QueryParam "source" Text :>
+                   QueryParam "projection" VolumesGetProjection :>
+                     QueryParam "user_library_consistent_read" Bool :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Volume
 
 -- | Gets volume information for a single volume.
 --

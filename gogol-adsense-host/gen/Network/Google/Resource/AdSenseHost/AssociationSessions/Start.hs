@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.associationsessions.start@ method which the
 -- 'AssociationSessionsStart' request conforms to.
 type AssociationSessionsStartResource =
-     "associationsessions" :>
-       "start" :>
-         QueryParams "productCode"
-           AssociationSessionsStartProductCode
-           :>
-           QueryParam "websiteUrl" Text :>
-             QueryParam "websiteLocale" Text :>
-               QueryParam "userLocale" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] AssociationSession
+     "adsensehost" :>
+       "v4.1" :>
+         "associationsessions" :>
+           "start" :>
+             QueryParams "productCode"
+               AssociationSessionsStartProductCode
+               :>
+               QueryParam "websiteUrl" Text :>
+                 QueryParam "websiteLocale" Text :>
+                   QueryParam "userLocale" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] AssociationSession
 
 -- | Create an association session for initiating an association with an
 -- AdSense user.

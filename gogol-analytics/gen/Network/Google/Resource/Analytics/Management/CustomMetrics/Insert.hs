@@ -44,15 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customMetrics.insert@ method which the
 -- 'ManagementCustomMetricsInsert' request conforms to.
 type ManagementCustomMetricsInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customMetrics" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] CustomMetric :>
-                     Post '[JSON] CustomMetric
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CustomMetric :>
+                         Post '[JSON] CustomMetric
 
 -- | Create a new custom metric.
 --

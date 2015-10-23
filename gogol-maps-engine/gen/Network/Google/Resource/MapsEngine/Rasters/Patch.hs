@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasters.patch@ method which the
 -- 'RastersPatch' request conforms to.
 type RastersPatchResource =
-     "rasters" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Raster :> Patch '[JSON] ()
+     "mapsengine" :>
+       "v1" :>
+         "rasters" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Raster :> Patch '[JSON] ()
 
 -- | Mutate a raster asset.
 --

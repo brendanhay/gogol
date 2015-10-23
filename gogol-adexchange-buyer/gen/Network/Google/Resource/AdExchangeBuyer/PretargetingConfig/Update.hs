@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.update@ method which the
 -- 'PretargetingConfigUpdate' request conforms to.
 type PretargetingConfigUpdateResource =
-     "pretargetingconfigs" :>
-       Capture "accountId" Int64 :>
-         Capture "configId" Int64 :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] PretargetingConfig :>
-               Put '[JSON] PretargetingConfig
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             Capture "configId" Int64 :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] PretargetingConfig :>
+                   Put '[JSON] PretargetingConfig
 
 -- | Updates an existing pretargeting config.
 --

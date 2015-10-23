@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.applications.listHidden@ method which the
 -- 'ApplicationsListHidden' request conforms to.
 type ApplicationsListHiddenResource =
-     "applications" :>
-       Capture "applicationId" Text :>
-         "players" :>
-           "hidden" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] HiddenPlayerList
+     "games" :>
+       "v1management" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "players" :>
+               "hidden" :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] HiddenPlayerList
 
 -- | Get the list of players hidden from the given application. This method
 -- is only available to user accounts for your developer console.

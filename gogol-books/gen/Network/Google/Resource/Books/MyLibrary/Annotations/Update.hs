@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.annotations.update@ method which the
 -- 'MyLibraryAnnotationsUpdate' request conforms to.
 type MyLibraryAnnotationsUpdateResource =
-     "mylibrary" :>
-       "annotations" :>
-         Capture "annotationId" Text :>
-           QueryParam "source" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Annotation :> Put '[JSON] Annotation
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             Capture "annotationId" Text :>
+               QueryParam "source" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Annotation :> Put '[JSON] Annotation
 
 -- | Updates an existing annotation.
 --

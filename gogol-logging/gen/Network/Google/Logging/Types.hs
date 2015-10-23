@@ -84,4 +84,3 @@ loggingService :: Service
 loggingService
   = defaultService (ServiceId "logging:v2beta1")
       "logging.googleapis.com"
-      ""

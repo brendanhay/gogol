@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudmonitoring.metricDescriptors.create@ method which the
 -- 'MetricDescriptorsCreate' request conforms to.
 type MetricDescriptorsCreateResource =
-     Capture "project" Text :>
-       "metricDescriptors" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] MetricDescriptor :>
-             Post '[JSON] MetricDescriptor
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "metricDescriptors" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] MetricDescriptor :>
+                   Post '[JSON] MetricDescriptor
 
 -- | Create a new metric.
 --

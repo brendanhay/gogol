@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.threads.delete@ method which the
 -- 'UsersThreadsDelete' request conforms to.
 type UsersThreadsDeleteResource =
-     Capture "userId" Text :>
-       "threads" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified thread. This operation
 -- cannot be undone. Prefer threads.trash instead.

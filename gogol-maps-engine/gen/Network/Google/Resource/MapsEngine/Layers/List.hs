@@ -54,24 +54,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.list@ method which the
 -- 'LayersList' request conforms to.
 type LayersListResource =
-     "layers" :>
-       QueryParam "createdAfter" DateTime' :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" LayersListRole :>
-             QueryParam "bbox" Text :>
-               QueryParam "processingStatus"
-                 LayersListProcessingStatus
-                 :>
-                 QueryParam "modifiedAfter" DateTime' :>
-                   QueryParam "modifiedBefore" DateTime' :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projectId" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] LayersListResponse
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           QueryParam "createdAfter" DateTime' :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "role" LayersListRole :>
+                 QueryParam "bbox" Text :>
+                   QueryParam "processingStatus"
+                     LayersListProcessingStatus
+                     :>
+                     QueryParam "modifiedAfter" DateTime' :>
+                       QueryParam "modifiedBefore" DateTime' :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "projectId" Text :>
+                             QueryParam "search" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "tags" Text :>
+                                   QueryParam "createdBefore" DateTime' :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] LayersListResponse
 
 -- | Return all layers readable by the current user.
 --

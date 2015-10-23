@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.replies.patch@ method which the
 -- 'RepliesPatch' request conforms to.
 type RepliesPatchResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             "replies" :>
-               Capture "replyId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] CommentReply :>
-                     Patch '[JSON] CommentReply
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   Capture "replyId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CommentReply :>
+                         Patch '[JSON] CommentReply
 
 -- | Updates an existing reply. This method supports patch semantics.
 --

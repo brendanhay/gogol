@@ -42,11 +42,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.custombatch@ method which the
 -- 'OrdersCustombatch' request conforms to.
 type OrdersCustombatchResource =
-     "orders" :>
-       "batch" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] OrdersCustomBatchRequest :>
-             Post '[JSON] OrdersCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "orders" :>
+           "batch" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] OrdersCustomBatchRequest :>
+                 Post '[JSON] OrdersCustomBatchResponse
 
 -- | Retrieves or modifies multiple orders in a single request.
 --

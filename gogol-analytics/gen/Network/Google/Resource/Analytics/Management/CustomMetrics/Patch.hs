@@ -46,17 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customMetrics.patch@ method which the
 -- 'ManagementCustomMetricsPatch' request conforms to.
 type ManagementCustomMetricsPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customMetrics" :>
-                 Capture "customMetricId" Text :>
-                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CustomMetric :>
-                         Patch '[JSON] CustomMetric
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     Capture "customMetricId" Text :>
+                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CustomMetric :>
+                             Patch '[JSON] CustomMetric
 
 -- | Updates an existing custom metric. This method supports patch semantics.
 --

@@ -46,18 +46,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profileUserLinks.update@ method which the
 -- 'ManagementProFileUserLinksUpdate' request conforms to.
 type ManagementProFileUserLinksUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "entityUserLinks" :>
-                     Capture "linkId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] EntityUserLink :>
-                           Put '[JSON] EntityUserLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "entityUserLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] EntityUserLink :>
+                               Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given view (profile).
 --

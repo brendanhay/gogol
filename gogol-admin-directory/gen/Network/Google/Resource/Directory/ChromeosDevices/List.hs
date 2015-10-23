@@ -48,20 +48,23 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.chromeosdevices.list@ method which the
 -- 'ChromeosDevicesList' request conforms to.
 type ChromeosDevicesListResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "devices" :>
-           "chromeos" :>
-             QueryParam "orderBy" ChromeosDevicesListOrderBy :>
-               QueryParam "sortOrder" ChromeosDevicesListSortOrder
-                 :>
-                 QueryParam "query" Text :>
-                   QueryParam "projection" ChromeosDevicesListProjection
-                     :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ChromeOSDevices
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "devices" :>
+                 "chromeos" :>
+                   QueryParam "orderBy" ChromeosDevicesListOrderBy :>
+                     QueryParam "sortOrder" ChromeosDevicesListSortOrder
+                       :>
+                       QueryParam "query" Text :>
+                         QueryParam "projection" ChromeosDevicesListProjection
+                           :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ChromeOSDevices
 
 -- | Retrieve all Chrome OS Devices of a customer (paginated)
 --

@@ -44,13 +44,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.users.insert@ method which the
 -- 'UsersInsert' request conforms to.
 type UsersInsertResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "users" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] User :> Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "users" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] User :> Post '[JSON] Operation
 
 -- | Creates a new user in a Cloud SQL instance.
 --

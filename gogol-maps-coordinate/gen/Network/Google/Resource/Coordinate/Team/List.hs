@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.team.list@ method which the
 -- 'TeamList' request conforms to.
 type TeamListResource =
-     "teams" :>
-       QueryParam "dispatcher" Bool :>
-         QueryParam "admin" Bool :>
-           QueryParam "worker" Bool :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] TeamListResponse
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           QueryParam "dispatcher" Bool :>
+             QueryParam "admin" Bool :>
+               QueryParam "worker" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] TeamListResponse
 
 -- | Retrieves a list of teams for a user.
 --

@@ -48,14 +48,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.devices.getState@ method which the
 -- 'DevicesGetState' request conforms to.
 type DevicesGetStateResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "devices" :>
-               Capture "deviceId" Text :>
-                 "state" :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] DeviceState
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "devices" :>
+                   Capture "deviceId" Text :>
+                     "state" :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] DeviceState
 
 -- | Retrieves whether a device is enabled or disabled for access by the user
 -- to Google services. The device state takes effect only if enforcing EMM

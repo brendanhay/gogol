@@ -45,12 +45,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accountshipping.list@ method which the
 -- 'AccountshippingList' request conforms to.
 type AccountshippingListResource =
-     Capture "merchantId" Word64 :>
-       "accountshipping" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Word32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AccountshippingListResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accountshipping" :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Word32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AccountshippingListResponse
 
 -- | Lists the shipping settings of the sub-accounts in your Merchant Center
 -- account.

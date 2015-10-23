@@ -44,11 +44,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveBroadcasts.delete@ method which the
 -- 'LiveBroadcastsDelete' request conforms to.
 type LiveBroadcastsDeleteResource =
-     "liveBroadcasts" :>
-       QueryParam "id" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "liveBroadcasts" :>
+           QueryParam "id" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a broadcast.
 --

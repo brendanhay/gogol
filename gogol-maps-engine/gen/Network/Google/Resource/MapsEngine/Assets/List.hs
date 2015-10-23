@@ -54,22 +54,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.assets.list@ method which the
 -- 'AssetsList' request conforms to.
 type AssetsListResource =
-     "assets" :>
-       QueryParam "createdAfter" DateTime' :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" AssetsListRole :>
-             QueryParam "bbox" Text :>
-               QueryParam "modifiedAfter" DateTime' :>
-                 QueryParam "modifiedBefore" DateTime' :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "projectId" Text :>
-                       QueryParam "type" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] AssetsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "assets" :>
+           QueryParam "createdAfter" DateTime' :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "role" AssetsListRole :>
+                 QueryParam "bbox" Text :>
+                   QueryParam "modifiedAfter" DateTime' :>
+                     QueryParam "modifiedBefore" DateTime' :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "projectId" Text :>
+                           QueryParam "type" Text :>
+                             QueryParam "search" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "tags" Text :>
+                                   QueryParam "createdBefore" DateTime' :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] AssetsListResponse
 
 -- | Return all assets readable by the current user.
 --

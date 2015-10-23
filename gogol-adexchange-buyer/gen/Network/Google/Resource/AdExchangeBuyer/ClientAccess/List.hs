@@ -40,10 +40,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.clientaccess.list@ method which the
 -- 'ClientAccessList' request conforms to.
 type ClientAccessListResource =
-     "clientAccess" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] ListClientAccessCapabilitiesRequest
-           :> Get '[JSON] ListClientAccessCapabilitiesResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] ListClientAccessCapabilitiesRequest
+               :> Get '[JSON] ListClientAccessCapabilitiesResponse
 
 --
 -- /See:/ 'clientAccessList' smart constructor.

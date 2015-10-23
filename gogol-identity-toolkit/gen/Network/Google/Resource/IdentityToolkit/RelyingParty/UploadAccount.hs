@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.uploadAccount@ method which the
 -- 'RelyingPartyUploadAccount' request conforms to.
 type RelyingPartyUploadAccountResource =
-     "uploadAccount" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           IdentitytoolkitRelyingPartyUploadAccountRequest
-           :> Post '[JSON] UploadAccountResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "uploadAccount" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 IdentitytoolkitRelyingPartyUploadAccountRequest
+                 :> Post '[JSON] UploadAccountResponse
 
 -- | Batch upload existing user accounts.
 --

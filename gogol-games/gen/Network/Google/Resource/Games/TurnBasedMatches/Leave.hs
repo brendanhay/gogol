@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.leave@ method which the
 -- 'TurnBasedMatchesLeave' request conforms to.
 type TurnBasedMatchesLeaveResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         "leave" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               Put '[JSON] TurnBasedMatch
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "leave" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Put '[JSON] TurnBasedMatch
 
 -- | Leave a turn-based match when it is not the current player\'s turn,
 -- without canceling the match.

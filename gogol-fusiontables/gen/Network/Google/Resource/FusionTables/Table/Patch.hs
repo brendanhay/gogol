@@ -46,11 +46,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.patch@ method which the
 -- 'TablePatch' request conforms to.
 type TablePatchResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         QueryParam "replaceViewDefinition" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Table :> Patch '[JSON] Table
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             QueryParam "replaceViewDefinition" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Table :> Patch '[JSON] Table
 
 -- | Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated. This method supports patch

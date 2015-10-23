@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.disks.insert@ method which the
 -- 'DisksInsert' request conforms to.
 type DisksInsertResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "disks" :>
-             QueryParam "sourceImage" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Disk :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "disks" :>
+                   QueryParam "sourceImage" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Disk :> Post '[JSON] Operation
 
 -- | Creates a persistent disk in the specified project using the data
 -- included in the request.

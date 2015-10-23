@@ -44,15 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webpropertyUserLinks.insert@ method which the
 -- 'ManagementWebPropertyUserLinksInsert' request conforms to.
 type ManagementWebPropertyUserLinksInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityUserLinks" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] EntityUserLink :>
-                     Post '[JSON] EntityUserLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityUserLinks" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] EntityUserLink :>
+                         Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given web property.
 --

@@ -55,24 +55,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.campaigns.list@ method which the
 -- 'CampaignsList' request conforms to.
 type CampaignsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           QueryParams "excludedIds" Int64 :>
-             QueryParam "searchString" Text :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "sortOrder" CampaignsListSortOrder :>
-                   QueryParams "advertiserGroupIds" Int64 :>
-                     QueryParam "atLeastOneOptimizationActivity" Bool :>
-                       QueryParam "overriddenEventTagId" Int64 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" CampaignsListSortField :>
-                             QueryParam "subaccountId" Int64 :>
-                               QueryParams "advertiserIds" Int64 :>
-                                 QueryParam "archived" Bool :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] CampaignsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               QueryParams "excludedIds" Int64 :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder" CampaignsListSortOrder :>
+                       QueryParams "advertiserGroupIds" Int64 :>
+                         QueryParam "atLeastOneOptimizationActivity" Bool :>
+                           QueryParam "overriddenEventTagId" Int64 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" CampaignsListSortField :>
+                                 QueryParam "subaccountId" Int64 :>
+                                   QueryParams "advertiserIds" Int64 :>
+                                     QueryParam "archived" Bool :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] CampaignsListResponse
 
 -- | Retrieves a list of campaigns, possibly filtered.
 --

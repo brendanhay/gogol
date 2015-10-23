@@ -46,13 +46,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.update@ method which the
 -- 'InstancesUpdate' request conforms to.
 type InstancesUpdateResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] DatabaseInstance :>
-                 Put '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] DatabaseInstance :>
+                     Put '[JSON] Operation
 
 -- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
 -- update, so you must include values for all the settings that you want to

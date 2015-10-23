@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.experiments.insert@ method which the
 -- 'ManagementExperimentsInsert' request conforms to.
 type ManagementExperimentsInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "experiments" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Experiment :> Post '[JSON] Experiment
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Experiment :> Post '[JSON] Experiment
 
 -- | Create a new experiment.
 --

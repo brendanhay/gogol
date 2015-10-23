@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.labels.update@ method which the
 -- 'UsersLabelsUpdate' request conforms to.
 type UsersLabelsUpdateResource =
-     Capture "userId" Text :>
-       "labels" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Label :> Put '[JSON] Label
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Label :> Put '[JSON] Label
 
 -- | Updates the specified label.
 --

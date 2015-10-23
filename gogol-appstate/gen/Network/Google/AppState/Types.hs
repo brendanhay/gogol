@@ -59,7 +59,6 @@ appStateService :: Service
 appStateService
   = defaultService (ServiceId "appstate:v1")
       "www.googleapis.com"
-      "appstate/v1/"
 
 -- | View and manage your data for this application
 appstateScope :: OAuthScope

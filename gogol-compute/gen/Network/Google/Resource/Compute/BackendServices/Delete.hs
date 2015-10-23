@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.backendServices.delete@ method which the
 -- 'BackendServicesDelete' request conforms to.
 type BackendServicesDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "backendServices" :>
-           Capture "backendService" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "backendServices" :>
+                 Capture "backendService" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified BackendService resource.
 --

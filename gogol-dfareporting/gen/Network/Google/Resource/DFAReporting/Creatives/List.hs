@@ -58,28 +58,32 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creatives.list@ method which the
 -- 'CreativesList' request conforms to.
 type CreativesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creatives" :>
-           QueryParams "renderingIds" Int64 :>
-             QueryParam "advertiserId" Int64 :>
-               QueryParam "searchString" Text :>
-                 QueryParams "sizeIds" Int64 :>
-                   QueryParams "companionCreativeIds" Int64 :>
-                     QueryParam "campaignId" Int64 :>
-                       QueryParams "types" CreativesListTypes :>
-                         QueryParams "ids" Int64 :>
-                           QueryParam "sortOrder" CreativesListSortOrder :>
-                             QueryParam "active" Bool :>
-                               QueryParams "creativeFieldIds" Int64 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" CreativesListSortField
-                                     :>
-                                     QueryParam "studioCreativeId" Int64 :>
-                                       QueryParam "archived" Bool :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] CreativesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creatives" :>
+               QueryParams "renderingIds" Int64 :>
+                 QueryParam "advertiserId" Int64 :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "sizeIds" Int64 :>
+                       QueryParams "companionCreativeIds" Int64 :>
+                         QueryParam "campaignId" Int64 :>
+                           QueryParams "types" CreativesListTypes :>
+                             QueryParams "ids" Int64 :>
+                               QueryParam "sortOrder" CreativesListSortOrder :>
+                                 QueryParam "active" Bool :>
+                                   QueryParams "creativeFieldIds" Int64 :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "sortField"
+                                         CreativesListSortField
+                                         :>
+                                         QueryParam "studioCreativeId" Int64 :>
+                                           QueryParam "archived" Bool :>
+                                             QueryParam "maxResults" Int32 :>
+                                               QueryParam "alt" AltJSON :>
+                                                 Get '[JSON]
+                                                   CreativesListResponse
 
 -- | Retrieves a list of creatives, possibly filtered.
 --

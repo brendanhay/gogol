@@ -43,18 +43,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.projects.icons.get@ method which the
 -- 'ProjectsIconsGet' request conforms to.
 type ProjectsIconsGetResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "icons" :>
-           Capture "id" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Icon
+     "mapsengine" :>
+       "v1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "icons" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Icon
        :<|>
-       "projects" :>
-         Capture "projectId" Text :>
-           "icons" :>
-             Capture "id" Text :>
-               QueryParam "alt" AltMedia :>
-                 Get '[OctetStream] Stream
+       "mapsengine" :>
+         "v1" :>
+           "projects" :>
+             Capture "projectId" Text :>
+               "icons" :>
+                 Capture "id" Text :>
+                   QueryParam "alt" AltMedia :>
+                     Get '[OctetStream] Stream
 
 -- | Return an icon or its associated metadata
 --

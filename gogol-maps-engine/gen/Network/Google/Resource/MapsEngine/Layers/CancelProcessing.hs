@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.cancelProcessing@ method which the
 -- 'LayersCancelProcessing' request conforms to.
 type LayersCancelProcessingResource =
-     "layers" :>
-       Capture "id" Text :>
-         "cancelProcessing" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] ProcessResponse
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             "cancelProcessing" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] ProcessResponse
 
 -- | Cancel processing on a layer asset.
 --

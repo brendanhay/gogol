@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.entitlements.delete@ method which the
 -- 'EntitlementsDelete' request conforms to.
 type EntitlementsDeleteResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "entitlements" :>
-               Capture "entitlementId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "entitlements" :>
+                   Capture "entitlementId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes an entitlement to an app for a user and uninstalls it.
 --

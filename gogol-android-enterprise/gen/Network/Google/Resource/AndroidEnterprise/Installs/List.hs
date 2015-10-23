@@ -44,15 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.installs.list@ method which the
 -- 'InstallsList' request conforms to.
 type InstallsListResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "devices" :>
-               Capture "deviceId" Text :>
-                 "installs" :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] InstallsListResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "devices" :>
+                   Capture "deviceId" Text :>
+                     "installs" :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] InstallsListResponse
 
 -- | Retrieves the details of all apps installed on the specified device.
 --

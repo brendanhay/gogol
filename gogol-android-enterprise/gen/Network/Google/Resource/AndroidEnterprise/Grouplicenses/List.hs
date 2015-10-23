@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.grouplicenses.list@ method which the
 -- 'GrouplicensesList' request conforms to.
 type GrouplicensesListResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "groupLicenses" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] GroupLicensesListResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "groupLicenses" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] GroupLicensesListResponse
 
 -- | Retrieves IDs of all products for which the enterprise has a group
 -- license.

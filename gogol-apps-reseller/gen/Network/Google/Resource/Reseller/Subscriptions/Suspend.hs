@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.suspend@ method which the
 -- 'SubscriptionsSuspend' request conforms to.
 type SubscriptionsSuspendResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "suspend" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Subscription
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "suspend" :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Suspends an active subscription
 --

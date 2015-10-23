@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.userRoles.update@ method which the
 -- 'UserRolesUpdate' request conforms to.
 type UserRolesUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "userRoles" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
 
 -- | Updates an existing user role.
 --

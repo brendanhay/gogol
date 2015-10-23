@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.settings.get@ method which the
 -- 'SettingsGet' request conforms to.
 type SettingsGetResource =
-     "settings" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Setting
+     "mirror" :>
+       "v1" :>
+         "settings" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Setting
 
 -- | Gets a single setting by ID.
 --

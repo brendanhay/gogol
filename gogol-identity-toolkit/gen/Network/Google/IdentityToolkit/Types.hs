@@ -278,4 +278,3 @@ identityToolkitService :: Service
 identityToolkitService
   = defaultService (ServiceId "identitytoolkit:v3")
       "www.googleapis.com"
-      "identitytoolkit/v3/relyingparty/"

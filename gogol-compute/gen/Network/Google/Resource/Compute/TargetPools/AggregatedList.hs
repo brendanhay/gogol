@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.aggregatedList@ method which the
 -- 'TargetPoolsAggregatedList' request conforms to.
 type TargetPoolsAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "targetPools" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] TargetPoolAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "targetPools" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] TargetPoolAggregatedList
 
 -- | Retrieves the list of target pools grouped by scope.
 --

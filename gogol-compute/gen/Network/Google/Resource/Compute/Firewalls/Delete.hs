@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.firewalls.delete@ method which the
 -- 'FirewallsDelete' request conforms to.
 type FirewallsDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "firewalls" :>
-           Capture "firewall" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "firewalls" :>
+                 Capture "firewall" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified firewall resource.
 --

@@ -43,12 +43,14 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.get@ method which the
 -- 'InstancesGet' request conforms to.
 type InstancesGetResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] DatabaseInstance
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] DatabaseInstance
 
 -- | Retrieves a resource containing information about a Cloud SQL instance.
 --

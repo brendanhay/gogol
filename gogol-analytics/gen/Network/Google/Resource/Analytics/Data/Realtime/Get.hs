@@ -47,15 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.data.realtime.get@ method which the
 -- 'DataRealtimeGet' request conforms to.
 type DataRealtimeGetResource =
-     "data" :>
-       "realtime" :>
-         QueryParam "ids" Text :>
-           QueryParam "metrics" Text :>
-             QueryParam "filters" Text :>
-               QueryParam "sort" Text :>
-                 QueryParam "dimensions" Text :>
-                   QueryParam "max-results" Int32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] RealtimeData
+     "analytics" :>
+       "v3" :>
+         "data" :>
+           "realtime" :>
+             QueryParam "ids" Text :>
+               QueryParam "metrics" Text :>
+                 QueryParam "filters" Text :>
+                   QueryParam "sort" Text :>
+                     QueryParam "dimensions" Text :>
+                       QueryParam "max-results" Int32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] RealtimeData
 
 -- | Returns real time data for a view (profile).
 --

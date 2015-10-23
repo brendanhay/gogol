@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.acl.list@ method which the
 -- 'ACLList' request conforms to.
 type ACLListResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "acl" :>
-           QueryParam "syncToken" Text :>
-             QueryParam "showDeleted" Bool :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] ACL
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "acl" :>
+               QueryParam "syncToken" Text :>
+                 QueryParam "showDeleted" Bool :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] ACL
 
 -- | Returns the rules in the access control list for the calendar.
 --

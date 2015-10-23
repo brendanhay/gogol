@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.firewalls.patch@ method which the
 -- 'FirewallsPatch' request conforms to.
 type FirewallsPatchResource =
-     Capture "project" Text :>
-       "global" :>
-         "firewalls" :>
-           Capture "firewall" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Firewall :> Patch '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "firewalls" :>
+                 Capture "firewall" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Firewall :> Patch '[JSON] Operation
 
 -- | Updates the specified firewall resource with the data included in the
 -- request. This method supports patch semantics.

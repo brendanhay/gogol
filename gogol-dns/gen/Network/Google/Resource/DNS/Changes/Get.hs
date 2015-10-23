@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dns.changes.get@ method which the
 -- 'ChangesGet' request conforms to.
 type ChangesGetResource =
-     Capture "project" Text :>
-       "managedZones" :>
-         Capture "managedZone" Text :>
-           "changes" :>
-             Capture "changeId" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Change
+     "dns" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 "changes" :>
+                   Capture "changeId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Change
 
 -- | Fetch the representation of an existing Change.
 --

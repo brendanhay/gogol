@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.circles.insert@ method which the
 -- 'CirclesInsert' request conforms to.
 type CirclesInsertResource =
-     "people" :>
-       Capture "userId" Text :>
-         "circles" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Circle :> Post '[JSON] Circle
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "circles" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Circle :> Post '[JSON] Circle
 
 -- | Create a new circle for the authenticated user.
 --

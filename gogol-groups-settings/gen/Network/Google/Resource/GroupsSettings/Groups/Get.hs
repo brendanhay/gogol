@@ -42,8 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @groupsSettings.groups.get@ method which the
 -- 'GroupsGet' request conforms to.
 type GroupsGetResource =
-     Capture "groupUniqueId" Text :>
-       QueryParam "alt" AltJSON :> Get '[JSON] Groups
+     "groups" :>
+       "v1" :>
+         "groups" :>
+           Capture "groupUniqueId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Groups
 
 -- | Gets one resource by id.
 --

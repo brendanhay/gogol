@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.accountUserLinks.list@ method which the
 -- 'ManagementAccountUserLinksList' request conforms to.
 type ManagementAccountUserLinksListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "entityUserLinks" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] EntityUserLinks
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "entityUserLinks" :>
+                 QueryParam "start-index" Int32 :>
+                   QueryParam "max-results" Int32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] EntityUserLinks
 
 -- | Lists account-user links for a given account.
 --

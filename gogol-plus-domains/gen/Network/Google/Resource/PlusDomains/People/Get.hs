@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.people.get@ method which the
 -- 'PeopleGet' request conforms to.
 type PeopleGetResource =
-     "people" :>
-       Capture "userId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Person
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Person
 
 -- | Get a person\'s profile.
 --

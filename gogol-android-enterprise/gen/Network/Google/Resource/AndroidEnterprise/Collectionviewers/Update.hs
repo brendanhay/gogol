@@ -47,14 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.collectionviewers.update@ method which the
 -- 'CollectionviewersUpdate' request conforms to.
 type CollectionviewersUpdateResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "collections" :>
-           Capture "collectionId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] User :> Put '[JSON] User
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "collections" :>
+               Capture "collectionId" Text :>
+                 "users" :>
+                   Capture "userId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] User :> Put '[JSON] User
 
 -- | Adds the user to the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then

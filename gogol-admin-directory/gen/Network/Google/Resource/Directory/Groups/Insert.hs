@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.groups.insert@ method which the
 -- 'GroupsInsert' request conforms to.
 type GroupsInsertResource =
-     "groups" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Group :> Post '[JSON] Group
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Group :> Post '[JSON] Group
 
 -- | Create Group
 --

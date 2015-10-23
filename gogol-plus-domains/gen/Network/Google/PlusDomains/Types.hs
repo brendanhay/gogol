@@ -580,7 +580,6 @@ plusDomainsService :: Service
 plusDomainsService
   = defaultService (ServiceId "plusDomains:v1")
       "www.googleapis.com"
-      "plusDomains/v1/"
 
 -- | View your basic profile info
 userinfoProfileScope :: OAuthScope

@@ -81,7 +81,6 @@ uRLShortenerService :: Service
 uRLShortenerService
   = defaultService (ServiceId "urlshortener:v1")
       "www.googleapis.com"
-      "urlshortener/v1/"
 
 -- | Manage your goo.gl short URLs
 urlshortenerScope :: OAuthScope

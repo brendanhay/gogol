@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.images.delete@ method which the
 -- 'EditsImagesDelete' request conforms to.
 type EditsImagesDeleteResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "listings" :>
-             Capture "language" Text :>
-               Capture "imageType" EditsImagesDeleteImageType :>
-                 Capture "imageId" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "listings" :>
+                   Capture "language" Text :>
+                     Capture "imageType" EditsImagesDeleteImageType :>
+                       Capture "imageId" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the image (specified by id) from the edit.
 --

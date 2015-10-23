@@ -45,13 +45,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.databases.insert@ method which the
 -- 'DatabasesInsert' request conforms to.
 type DatabasesInsertResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "databases" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Database :> Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Database :> Post '[JSON] Operation
 
 -- | Inserts a resource containing information about a database inside a
 -- Cloud SQL instance.

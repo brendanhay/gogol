@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.mobiledevices.delete@ method which the
 -- 'MobileDevicesDelete' request conforms to.
 type MobileDevicesDeleteResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "devices" :>
-           "mobile" :>
-             Capture "resourceId" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "devices" :>
+                 "mobile" :>
+                   Capture "resourceId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete Mobile Device
 --

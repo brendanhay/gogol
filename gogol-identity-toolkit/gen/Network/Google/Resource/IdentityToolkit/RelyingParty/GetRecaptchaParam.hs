@@ -40,9 +40,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.getRecaptchaParam@ method which the
 -- 'RelyingPartyGetRecaptchaParam' request conforms to.
 type RelyingPartyGetRecaptchaParamResource =
-     "getRecaptchaParam" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] GetRecaptchaParamResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "getRecaptchaParam" :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] GetRecaptchaParamResponse
 
 -- | Get recaptcha secure param.
 --

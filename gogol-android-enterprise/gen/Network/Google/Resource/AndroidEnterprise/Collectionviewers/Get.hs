@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.collectionviewers.get@ method which the
 -- 'CollectionviewersGet' request conforms to.
 type CollectionviewersGetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "collections" :>
-           Capture "collectionId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] User
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "collections" :>
+               Capture "collectionId" Text :>
+                 "users" :>
+                   Capture "userId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Retrieves the ID of the user if they have been specifically allowed to
 -- see the collection. If the collection\'s visibility is set to

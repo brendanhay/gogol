@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudlatencytest.statscollection.updateaggregatedstats@ method which the
 -- 'StatscollectionUpdateaggregatedstats' request conforms to.
 type StatscollectionUpdateaggregatedstatsResource =
-     "updateaggregatedstats" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] AggregatedStats :>
-           Post '[JSON] AggregatedStatsReply
+     "v2" :>
+       "statscollection" :>
+         "updateaggregatedstats" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] AggregatedStats :>
+               Post '[JSON] AggregatedStatsReply
 
 -- | RPC to update the new TCP stats.
 --

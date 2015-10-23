@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetInstances.aggregatedList@ method which the
 -- 'TargetInstancesAggregatedList' request conforms to.
 type TargetInstancesAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "targetInstances" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] TargetInstanceAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "targetInstances" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] TargetInstanceAggregatedList
 
 -- | Retrieves the list of target instances grouped by scope.
 --

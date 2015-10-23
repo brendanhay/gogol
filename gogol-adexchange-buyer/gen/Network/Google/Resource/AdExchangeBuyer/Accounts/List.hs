@@ -40,8 +40,10 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.accounts.list@ method which the
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
-     "accounts" :>
-       QueryParam "alt" AltJSON :> Get '[JSON] AccountsList
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "accounts" :>
+           QueryParam "alt" AltJSON :> Get '[JSON] AccountsList
 
 -- | Retrieves the authenticated user\'s list of accounts.
 --

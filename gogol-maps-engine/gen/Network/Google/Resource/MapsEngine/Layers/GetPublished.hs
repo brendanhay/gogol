@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.getPublished@ method which the
 -- 'LayersGetPublished' request conforms to.
 type LayersGetPublishedResource =
-     "layers" :>
-       Capture "id" Text :>
-         "published" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] PublishedLayer
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             "published" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PublishedLayer
 
 -- | Return the published metadata for a particular layer.
 --

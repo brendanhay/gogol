@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.get@ method which the
 -- 'TargetPoolsGet' request conforms to.
 type TargetPoolsGetResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             Capture "targetPool" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] TargetPool
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   Capture "targetPool" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] TargetPool
 
 -- | Returns the specified TargetPool resource.
 --

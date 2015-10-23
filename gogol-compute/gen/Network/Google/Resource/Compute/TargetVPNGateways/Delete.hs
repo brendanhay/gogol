@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetVpnGateways.delete@ method which the
 -- 'TargetVPNGatewaysDelete' request conforms to.
 type TargetVPNGatewaysDeleteResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetVpnGateways" :>
-             Capture "targetVpnGateway" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetVpnGateways" :>
+                   Capture "targetVpnGateway" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetVpnGateway resource.
 --

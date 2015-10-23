@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @prediction.trainedmodels.delete@ method which the
 -- 'TrainedModelsDelete' request conforms to.
 type TrainedModelsDeleteResource =
-     Capture "project" Text :>
-       "trainedmodels" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a trained model.
 --

@@ -44,12 +44,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accountshipping.custombatch@ method which the
 -- 'AccountshippingCustombatch' request conforms to.
 type AccountshippingCustombatchResource =
-     "accountshipping" :>
-       "batch" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] AccountshippingCustomBatchRequest :>
-               Post '[JSON] AccountshippingCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "accountshipping" :>
+           "batch" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AccountshippingCustomBatchRequest :>
+                   Post '[JSON] AccountshippingCustomBatchResponse
 
 -- | Retrieves and updates the shipping settings of multiple accounts in a
 -- single request.

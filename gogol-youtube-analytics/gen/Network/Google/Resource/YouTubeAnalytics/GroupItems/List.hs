@@ -44,11 +44,14 @@ import           Network.Google.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.groupItems.list@ method which the
 -- 'GroupItemsList' request conforms to.
 type GroupItemsListResource =
-     "groupItems" :>
-       QueryParam "groupId" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] GroupItemListResponse
+     "youtube" :>
+       "analytics" :>
+         "v1" :>
+           "groupItems" :>
+             QueryParam "groupId" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] GroupItemListResponse
 
 -- | Returns a collection of group items that match the API request
 -- parameters.

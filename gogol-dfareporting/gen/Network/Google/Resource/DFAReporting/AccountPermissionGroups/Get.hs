@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountPermissionGroups.get@ method which the
 -- 'AccountPermissionGroupsGet' request conforms to.
 type AccountPermissionGroupsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountPermissionGroups" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AccountPermissionGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountPermissionGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AccountPermissionGroup
 
 -- | Gets one account permission group by ID.
 --

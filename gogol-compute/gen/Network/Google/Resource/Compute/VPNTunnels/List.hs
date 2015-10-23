@@ -47,14 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.vpnTunnels.list@ method which the
 -- 'VPNTunnelsList' request conforms to.
 type VPNTunnelsListResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "vpnTunnels" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnelList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "vpnTunnels" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnelList
 
 -- | Retrieves the list of VpnTunnel resources contained in the specified
 -- project and region.

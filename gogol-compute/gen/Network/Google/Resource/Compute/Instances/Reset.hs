@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.reset@ method which the
 -- 'InstancesReset' request conforms to.
 type InstancesResetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "reset" :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "reset" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Performs a hard reset on the instance.
 --

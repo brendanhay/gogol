@@ -42,8 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.projects.get@ method which the
 -- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
-     Capture "project" Text :>
-       QueryParam "alt" AltJSON :> Get '[JSON] Project
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Returns the specified project resource.
 --

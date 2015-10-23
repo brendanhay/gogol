@@ -47,17 +47,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customDimensions.patch@ method which the
 -- 'ManagementCustomDimensionsPatch' request conforms to.
 type ManagementCustomDimensionsPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customDimensions" :>
-                 Capture "customDimensionId" Text :>
-                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CustomDimension :>
-                         Patch '[JSON] CustomDimension
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     Capture "customDimensionId" Text :>
+                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CustomDimension :>
+                             Patch '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension. This method supports patch
 -- semantics.

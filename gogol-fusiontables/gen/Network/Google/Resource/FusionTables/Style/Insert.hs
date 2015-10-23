@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.style.insert@ method which the
 -- 'StyleInsert' request conforms to.
 type StyleInsertResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "styles" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] StyleSetting :>
-               Post '[JSON] StyleSetting
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "styles" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] StyleSetting :>
+                   Post '[JSON] StyleSetting
 
 -- | Adds a new style for the table.
 --

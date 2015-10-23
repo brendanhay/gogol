@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.comments.delete@ method which the
 -- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a comment.
 --

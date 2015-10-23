@@ -347,7 +347,6 @@ storageService :: Service
 storageService
   = defaultService (ServiceId "storage:v1")
       "www.googleapis.com"
-      "storage/v1/"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope

@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.userProfiles.list@ method which the
 -- 'UserProFilesList' request conforms to.
 type UserProFilesListResource =
-     "userprofiles" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] UserProFileList
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] UserProFileList
 
 -- | Retrieves list of user profiles for a user.
 --

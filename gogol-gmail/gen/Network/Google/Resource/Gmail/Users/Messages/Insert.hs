@@ -37,7 +37,6 @@ module Network.Google.Resource.Gmail.Users.Messages.Insert
     -- * Request Lenses
     , uPayload
     , uUserId
-    , uMedia
     , uDeleted
     , uInternalDateSource
     ) where
@@ -48,15 +47,32 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.insert@ method which the
 -- 'UsersMessagesInsert' request conforms to.
 type UsersMessagesInsertResource =
-     Capture "userId" Text :>
-       "messages" :>
-         QueryParam "deleted" Bool :>
-           QueryParam "internalDateSource"
-             UsersMessagesInsertInternalDateSource
-             :>
-             QueryParam "alt" AltJSON :>
-               MultipartRelated '[JSON] Message Body :>
-                 Post '[JSON] Message
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               QueryParam "deleted" Bool :>
+                 QueryParam "internalDateSource"
+                   UsersMessagesInsertInternalDateSource
+                   :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Message :> Post '[JSON] Message
+       :<|>
+       "upload" :>
+         "gmail" :>
+           "v1" :>
+             "users" :>
+               Capture "userId" Text :>
+                 "messages" :>
+                   QueryParam "deleted" Bool :>
+                     QueryParam "internalDateSource"
+                       UsersMessagesInsertInternalDateSource
+                       :>
+                       QueryParam "alt" AltJSON :>
+                         QueryParam "uploadType" AltMedia :>
+                           MultipartRelated '[JSON] Message RequestBody :>
+                             Post '[JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to
 -- IMAP APPEND, bypassing most scanning and classification. Does not send a
@@ -66,10 +82,9 @@ type UsersMessagesInsertResource =
 data UsersMessagesInsert = UsersMessagesInsert
     { _uPayload            :: !Message
     , _uUserId             :: !Text
-    , _uMedia              :: !Body
     , _uDeleted            :: !Bool
     , _uInternalDateSource :: !UsersMessagesInsertInternalDateSource
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesInsert' with the minimum fields required to make a request.
 --
@@ -79,21 +94,17 @@ data UsersMessagesInsert = UsersMessagesInsert
 --
 -- * 'uUserId'
 --
--- * 'uMedia'
---
 -- * 'uDeleted'
 --
 -- * 'uInternalDateSource'
 usersMessagesInsert
     :: Message -- ^ 'uPayload'
-    -> Text -- ^ 'uMedia'
-    -> Body
+    -> Text
     -> UsersMessagesInsert
-usersMessagesInsert pUPayload_ pUUserId_ pUMedia_ =
+usersMessagesInsert pUPayload_ pUUserId_ =
     UsersMessagesInsert
     { _uPayload = pUPayload_
     , _uUserId = pUUserId_
-    , _uMedia = pUMedia_
     , _uDeleted = False
     , _uInternalDateSource = UMIIDSReceivedTime
     }
@@ -106,9 +117,6 @@ uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 -- the authenticated user.
 uUserId :: Lens' UsersMessagesInsert Text
 uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
-
-uMedia :: Lens' UsersMessagesInsert Body
-uMedia = lens _uMedia (\ s a -> s{_uMedia = a})
 
 -- | Mark the email as permanently deleted (not TRASH) and only visible in
 -- Google Apps Vault to a Vault administrator. Only used for Google Apps
@@ -129,9 +137,24 @@ instance GoogleRequest UsersMessagesInsert where
               (Just _uInternalDateSource)
               (Just AltJSON)
               _uPayload
-              _uMedia
               gmailService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy UsersMessagesInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload UsersMessagesInsert)
+         where
+        type Rs (Upload UsersMessagesInsert) = Message
+        requestClient (Upload UsersMessagesInsert{..} body)
+          = go _uUserId (Just _uDeleted)
+              (Just _uInternalDateSource)
+              (Just AltJSON)
+              (Just AltMedia)
+              _uPayload
+              body
+              gmailService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesInsertResource)
                       mempty

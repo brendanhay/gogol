@@ -41,10 +41,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.clientaccess.delete@ method which the
 -- 'ClientAccessDelete' request conforms to.
 type ClientAccessDeleteResource =
-     "clientAccess" :>
-       Capture "clientAccountId" Int64 :>
-         QueryParam "sponsorAccountId" Int32 :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           Capture "clientAccountId" Int64 :>
+             QueryParam "sponsorAccountId" Int32 :>
+               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 --
 -- /See:/ 'clientAccessDelete' smart constructor.

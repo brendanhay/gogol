@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.properties.list@ method which the
 -- 'PropertiesList' request conforms to.
 type PropertiesListResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "properties" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] PropertyList
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               QueryParam "alt" AltJSON :> Get '[JSON] PropertyList
 
 -- | Lists a file\'s properties.
 --

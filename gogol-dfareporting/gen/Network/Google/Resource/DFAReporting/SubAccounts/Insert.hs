@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.subaccounts.insert@ method which the
 -- 'SubAccountsInsert' request conforms to.
 type SubAccountsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "subaccounts" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
 
 -- | Inserts a new subaccount.
 --

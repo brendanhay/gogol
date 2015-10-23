@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.delete@ method which the
 -- 'AchievementConfigurationsDelete' request conforms to.
 type AchievementConfigurationsDeleteResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "games" :>
+       "v1configuration" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete the achievement configuration with the given ID.
 --

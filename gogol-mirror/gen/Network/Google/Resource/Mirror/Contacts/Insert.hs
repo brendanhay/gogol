@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.contacts.insert@ method which the
 -- 'ContactsInsert' request conforms to.
 type ContactsInsertResource =
-     "contacts" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Contact :> Post '[JSON] Contact
+     "mirror" :>
+       "v1" :>
+         "contacts" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Contact :> Post '[JSON] Contact
 
 -- | Inserts a new contact.
 --

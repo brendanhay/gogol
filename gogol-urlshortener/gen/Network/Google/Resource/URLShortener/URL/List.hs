@@ -43,11 +43,13 @@ import           Network.Google.URLShortener.Types
 -- | A resource alias for @urlshortener.url.list@ method which the
 -- 'URLList' request conforms to.
 type URLListResource =
-     "url" :>
-       "history" :>
-         QueryParam "start-token" Text :>
-           QueryParam "projection" URLListProjection :>
-             QueryParam "alt" AltJSON :> Get '[JSON] URLHistory
+     "urlshortener" :>
+       "v1" :>
+         "url" :>
+           "history" :>
+             QueryParam "start-token" Text :>
+               QueryParam "projection" URLListProjection :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] URLHistory
 
 -- | Retrieves a list of URLs shortened by a user.
 --

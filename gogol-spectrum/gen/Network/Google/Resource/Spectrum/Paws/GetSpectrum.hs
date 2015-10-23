@@ -44,10 +44,13 @@ import           Network.Google.Spectrum.Types
 -- | A resource alias for @spectrum.paws.getSpectrum@ method which the
 -- 'PawsGetSpectrum' request conforms to.
 type PawsGetSpectrumResource =
-     "getSpectrum" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] PawsGetSpectrumRequest :>
-           Post '[JSON] PawsGetSpectrumResponse
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "getSpectrum" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PawsGetSpectrumRequest :>
+                 Post '[JSON] PawsGetSpectrumResponse
 
 -- | Requests information about the available spectrum for a device at a
 -- location. Requests from a fixed-mode device must include owner

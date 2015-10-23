@@ -44,12 +44,15 @@ import           Network.Google.TaskQueue.Types
 -- | A resource alias for @taskqueue.tasks.insert@ method which the
 -- 'TasksInsert' request conforms to.
 type TasksInsertResource =
-     Capture "project" Text :>
-       "taskqueues" :>
-         Capture "taskqueue" Text :>
-           "tasks" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Task :> Post '[JSON] Task
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Task :> Post '[JSON] Task
 
 -- | Insert a new task in a TaskQueue
 --

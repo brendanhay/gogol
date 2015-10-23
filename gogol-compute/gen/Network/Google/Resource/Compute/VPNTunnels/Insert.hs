@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.vpnTunnels.insert@ method which the
 -- 'VPNTunnelsInsert' request conforms to.
 type VPNTunnelsInsertResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "vpnTunnels" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] VPNTunnel :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "vpnTunnels" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] VPNTunnel :> Post '[JSON] Operation
 
 -- | Creates a VpnTunnel resource in the specified project and region using
 -- the data included in the request.

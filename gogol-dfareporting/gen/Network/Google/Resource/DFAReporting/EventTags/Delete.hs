@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.eventTags.delete@ method which the
 -- 'EventTagsDelete' request conforms to.
 type EventTagsDeleteResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "eventTags" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing event tag.
 --

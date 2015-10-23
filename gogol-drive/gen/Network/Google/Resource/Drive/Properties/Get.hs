@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.properties.get@ method which the
 -- 'PropertiesGet' request conforms to.
 type PropertiesGetResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "properties" :>
-           Capture "propertyKey" Text :>
-             QueryParam "visibility" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Property
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               Capture "propertyKey" Text :>
+                 QueryParam "visibility" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Property
 
 -- | Gets a property by its key.
 --

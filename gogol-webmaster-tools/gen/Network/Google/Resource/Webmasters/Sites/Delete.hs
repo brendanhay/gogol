@@ -42,9 +42,11 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.sites.delete@ method which the
 -- 'SitesDelete' request conforms to.
 type SitesDeleteResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a site from the set of the user\'s Webmaster Tools sites.
 --

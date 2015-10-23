@@ -47,16 +47,19 @@ import           Network.Google.ReplicaPool.Types
 -- 'InstanceGroupManagersSetInstanceTemplate' request conforms to.
 type InstanceGroupManagersSetInstanceTemplateResource
      =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "setInstanceTemplate" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersSetInstanceTemplateRequest
-                     :> Post '[JSON] Operation
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "setInstanceTemplate" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersSetInstanceTemplateRequest
+                           :> Post '[JSON] Operation
 
 -- | Sets the instance template to use when creating new instances in this
 -- group. Existing instances are not affected.

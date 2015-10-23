@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.posts.insert@ method which the
 -- 'PostsInsert' request conforms to.
 type PostsInsertResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           QueryParam "fetchBody" Bool :>
-             QueryParam "isDraft" Bool :>
-               QueryParam "fetchImages" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Post' :> Post '[JSON] Post'
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               QueryParam "fetchBody" Bool :>
+                 QueryParam "isDraft" Bool :>
+                   QueryParam "fetchImages" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Post' :> Post '[JSON] Post'
 
 -- | Add a post.
 --

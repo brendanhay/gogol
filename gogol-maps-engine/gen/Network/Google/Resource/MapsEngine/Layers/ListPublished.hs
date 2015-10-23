@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.listPublished@ method which the
 -- 'LayersListPublished' request conforms to.
 type LayersListPublishedResource =
-     "layers" :>
-       "published" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "projectId" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] PublishedLayersListResponse
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           "published" :>
+             QueryParam "pageToken" Text :>
+               QueryParam "projectId" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] PublishedLayersListResponse
 
 -- | Return all published layers readable by the current user.
 --

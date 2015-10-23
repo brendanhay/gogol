@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.rooms.dismiss@ method which the
 -- 'RoomsDismiss' request conforms to.
 type RoomsDismissResource =
-     "rooms" :>
-       Capture "roomId" Text :>
-         "dismiss" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "dismiss" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Dismiss an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.

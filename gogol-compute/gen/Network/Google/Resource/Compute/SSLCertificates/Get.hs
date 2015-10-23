@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.sslCertificates.get@ method which the
 -- 'SSLCertificatesGet' request conforms to.
 type SSLCertificatesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "sslCertificates" :>
-           Capture "sslCertificate" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] SSLCertificate
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "sslCertificates" :>
+                 Capture "sslCertificate" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] SSLCertificate
 
 -- | Returns the specified SslCertificate resource.
 --

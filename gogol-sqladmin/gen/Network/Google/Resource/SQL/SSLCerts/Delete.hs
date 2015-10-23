@@ -45,13 +45,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.sslCerts.delete@ method which the
 -- 'SSLCertsDelete' request conforms to.
 type SSLCertsDeleteResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "sslCerts" :>
-               Capture "sha1Fingerprint" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "sslCerts" :>
+                   Capture "sha1Fingerprint" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the SSL certificate. The change will not take effect until the
 -- instance is restarted.

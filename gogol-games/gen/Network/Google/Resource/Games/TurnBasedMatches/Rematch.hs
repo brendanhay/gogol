@@ -47,13 +47,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.rematch@ method which the
 -- 'TurnBasedMatchesRematch' request conforms to.
 type TurnBasedMatchesRematchResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         "rematch" :>
-           QueryParam "requestId" Int64 :>
-             QueryParam "language" Text :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] TurnBasedMatchRematch
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "rematch" :>
+               QueryParam "requestId" Int64 :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] TurnBasedMatchRematch
 
 -- | Create a rematch of a match that was previously completed, with the same
 -- participants. This can be called by only one player on a match still in

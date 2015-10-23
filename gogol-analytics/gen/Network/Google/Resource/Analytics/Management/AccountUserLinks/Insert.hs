@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.accountUserLinks.insert@ method which the
 -- 'ManagementAccountUserLinksInsert' request conforms to.
 type ManagementAccountUserLinksInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "entityUserLinks" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] EntityUserLink :>
-                 Post '[JSON] EntityUserLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "entityUserLinks" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] EntityUserLink :>
+                     Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given account.
 --

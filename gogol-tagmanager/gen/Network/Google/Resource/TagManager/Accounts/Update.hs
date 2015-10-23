@@ -44,11 +44,13 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.update@ method which the
 -- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         QueryParam "fingerprint" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Account :> Put '[JSON] Account
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             QueryParam "fingerprint" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Account :> Put '[JSON] Account
 
 -- | Updates a GTM Account.
 --

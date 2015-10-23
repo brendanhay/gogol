@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.snapshots.list@ method which the
 -- 'SnapshotsList' request conforms to.
 type SnapshotsListResource =
-     "players" :>
-       Capture "playerId" Text :>
-         "snapshots" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] SnapshotListResponse
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "snapshots" :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] SnapshotListResponse
 
 -- | Retrieves a list of snapshots created by your application for the player
 -- corresponding to the player ID.

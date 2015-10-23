@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeFieldValues.delete@ method which the
 -- 'CreativeFieldValuesDelete' request conforms to.
 type CreativeFieldValuesDeleteResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeFields" :>
-           Capture "creativeFieldId" Int64 :>
-             "creativeFieldValues" :>
-               Capture "id" Int64 :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   Capture "id" Int64 :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing creative field value.
 --

@@ -43,11 +43,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.datafeedstatuses.get@ method which the
 -- 'DatafeedstatusesGet' request conforms to.
 type DatafeedstatusesGetResource =
-     Capture "merchantId" Word64 :>
-       "datafeedstatuses" :>
-         Capture "datafeedId" Word64 :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] DatafeedStatus
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "datafeedstatuses" :>
+             Capture "datafeedId" Word64 :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] DatafeedStatus
 
 -- | Retrieves the status of a datafeed from your Merchant Center account.
 --

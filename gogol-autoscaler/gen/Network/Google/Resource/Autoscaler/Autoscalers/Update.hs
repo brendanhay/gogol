@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @autoscaler.autoscalers.update@ method which the
 -- 'AutoscalersUpdate' request conforms to.
 type AutoscalersUpdateResource =
-     "projects" :>
-       Capture "project" Text :>
-         "zones" :>
-           Capture "zone" Text :>
-             "autoscalers" :>
-               Capture "autoscaler" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
+     "autoscaler" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "autoscalers" :>
+                   Capture "autoscaler" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
 
 -- | Update the entire content of the Autoscaler resource.
 --

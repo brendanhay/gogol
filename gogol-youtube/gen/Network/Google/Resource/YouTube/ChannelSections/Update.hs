@@ -44,12 +44,14 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.channelSections.update@ method which the
 -- 'ChannelSectionsUpdate' request conforms to.
 type ChannelSectionsUpdateResource =
-     "channelSections" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ChannelSection :>
-               Put '[JSON] ChannelSection
+     "youtube" :>
+       "v3" :>
+         "channelSections" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ChannelSection :>
+                   Put '[JSON] ChannelSection
 
 -- | Update a channelSection.
 --

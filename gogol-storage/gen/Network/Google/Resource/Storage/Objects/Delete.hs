@@ -50,16 +50,18 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.delete@ method which the
 -- 'ObjectsDelete' request conforms to.
 type ObjectsDeleteResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
-               QueryParam "ifGenerationNotMatch" Int64 :>
-                 QueryParam "ifGenerationMatch" Int64 :>
-                   QueryParam "ifMetagenerationNotMatch" Int64 :>
-                     QueryParam "generation" Int64 :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               Capture "object" Text :>
+                 QueryParam "ifMetagenerationMatch" Int64 :>
+                   QueryParam "ifGenerationNotMatch" Int64 :>
+                     QueryParam "ifGenerationMatch" Int64 :>
+                       QueryParam "ifMetagenerationNotMatch" Int64 :>
+                         QueryParam "generation" Int64 :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an object and its metadata. Deletions are permanent if
 -- versioning is not enabled for the bucket, or if the generation parameter

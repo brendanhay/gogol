@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @autoscaler.autoscalers.delete@ method which the
 -- 'AutoscalersDelete' request conforms to.
 type AutoscalersDeleteResource =
-     "projects" :>
-       Capture "project" Text :>
-         "zones" :>
-           Capture "zone" Text :>
-             "autoscalers" :>
-               Capture "autoscaler" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "autoscaler" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "autoscalers" :>
+                   Capture "autoscaler" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Autoscaler resource.
 --

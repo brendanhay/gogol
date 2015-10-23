@@ -52,20 +52,22 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.subscriptions.list@ method which the
 -- 'SubscriptionsList' request conforms to.
 type SubscriptionsListResource =
-     "subscriptions" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "channelId" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                 QueryParam "id" Text :>
-                   QueryParam "mySubscribers" Bool :>
-                     QueryParam "forChannelId" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "order" SubscriptionsListOrder :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] SubscriptionListResponse
+     "youtube" :>
+       "v3" :>
+         "subscriptions" :>
+           QueryParam "part" Text :>
+             QueryParam "mine" Bool :>
+               QueryParam "channelId" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "id" Text :>
+                       QueryParam "mySubscribers" Bool :>
+                         QueryParam "forChannelId" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "order" SubscriptionsListOrder :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] SubscriptionListResponse
 
 -- | Returns subscription resources that match the API request criteria.
 --

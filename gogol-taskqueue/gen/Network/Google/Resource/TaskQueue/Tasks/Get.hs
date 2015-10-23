@@ -44,12 +44,15 @@ import           Network.Google.TaskQueue.Types
 -- | A resource alias for @taskqueue.tasks.get@ method which the
 -- 'TasksGet' request conforms to.
 type TasksGetResource =
-     Capture "project" Text :>
-       "taskqueues" :>
-         Capture "taskqueue" Text :>
-           "tasks" :>
-             Capture "task" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Task
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   Capture "task" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Task
 
 -- | Get a particular task from a TaskQueue.
 --

@@ -44,13 +44,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.variables.create@ method which the
 -- 'AccountsContainersVariablesCreate' request conforms to.
 type AccountsContainersVariablesCreateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "variables" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Variable :> Post '[JSON] Variable
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "variables" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Variable :> Post '[JSON] Variable
 
 -- | Creates a GTM Variable.
 --

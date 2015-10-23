@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.delete@ method which the
 -- 'UsersMessagesDelete' request conforms to.
 type UsersMessagesDeleteResource =
-     Capture "userId" Text :>
-       "messages" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified message. This
 -- operation cannot be undone. Prefer messages.trash instead.

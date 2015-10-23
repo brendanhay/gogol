@@ -43,11 +43,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.subscriptions.insert@ method which the
 -- 'SubscriptionsInsert' request conforms to.
 type SubscriptionsInsertResource =
-     "subscriptions" :>
-       QueryParam "part" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Subscription :>
-             Post '[JSON] Subscription
+     "youtube" :>
+       "v3" :>
+         "subscriptions" :>
+           QueryParam "part" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Subscription :>
+                 Post '[JSON] Subscription
 
 -- | Adds a subscription for the authenticated user\'s channel.
 --

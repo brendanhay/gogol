@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.photos.update@ method which the
 -- 'UsersPhotosUpdate' request conforms to.
 type UsersPhotosUpdateResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "photos" :>
-           "thumbnail" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] UserPhoto :> Put '[JSON] UserPhoto
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "photos" :>
+                 "thumbnail" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] UserPhoto :> Put '[JSON] UserPhoto
 
 -- | Add a photo for the user
 --

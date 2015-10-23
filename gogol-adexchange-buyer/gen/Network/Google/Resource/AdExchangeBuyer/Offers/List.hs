@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.offers.list@ method which the
 -- 'OffersList' request conforms to.
 type OffersListResource =
-     "offers" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] ListOffersRequest :>
-           Get '[JSON] ListOffersResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "offers" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] ListOffersRequest :>
+               Get '[JSON] ListOffersResponse
 
 -- | Lists all offers the authenticated user has access to.
 --

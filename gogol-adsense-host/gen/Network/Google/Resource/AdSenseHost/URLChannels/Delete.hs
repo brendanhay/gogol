@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.urlchannels.delete@ method which the
 -- 'URLChannelsDelete' request conforms to.
 type URLChannelsDeleteResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "urlchannels" :>
-           Capture "urlChannelId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] URLChannel
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "urlchannels" :>
+               Capture "urlChannelId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] URLChannel
 
 -- | Delete a URL channel from the host AdSense account.
 --

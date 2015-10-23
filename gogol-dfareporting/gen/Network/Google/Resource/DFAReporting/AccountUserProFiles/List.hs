@@ -51,24 +51,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountUserProfiles.list@ method which the
 -- 'AccountUserProFilesList' request conforms to.
 type AccountUserProFilesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountUserProfiles" :>
-           QueryParam "userRoleId" Int64 :>
-             QueryParam "searchString" Text :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "sortOrder"
-                   AccountUserProFilesListSortOrder
-                   :>
-                   QueryParam "active" Bool :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField"
-                         AccountUserProFilesListSortField
-                         :>
-                         QueryParam "subaccountId" Int64 :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] AccountUserProFilesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               QueryParam "userRoleId" Int64 :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       AccountUserProFilesListSortOrder
+                       :>
+                       QueryParam "active" Bool :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             AccountUserProFilesListSortField
+                             :>
+                             QueryParam "subaccountId" Int64 :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] AccountUserProFilesListResponse
 
 -- | Retrieves a list of account user profiles, possibly filtered.
 --

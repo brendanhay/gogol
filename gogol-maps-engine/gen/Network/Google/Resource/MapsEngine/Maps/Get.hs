@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.maps.get@ method which the
 -- 'MapsGet' request conforms to.
 type MapsGetResource =
-     "maps" :>
-       Capture "id" Text :>
-         QueryParam "version" MapsGetVersion :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Map
+     "mapsengine" :>
+       "v1" :>
+         "maps" :>
+           Capture "id" Text :>
+             QueryParam "version" MapsGetVersion :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Map
 
 -- | Return metadata for a particular map.
 --

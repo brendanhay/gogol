@@ -46,15 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroups.removeInstances@ method which the
 -- 'InstanceGroupsRemoveInstances' request conforms to.
 type InstanceGroupsRemoveInstancesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroups" :>
-             Capture "instanceGroup" Text :>
-               "removeInstances" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] InstanceGroupsRemoveInstancesRequest
-                     :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroups" :>
+                   Capture "instanceGroup" Text :>
+                     "removeInstances" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] InstanceGroupsRemoveInstancesRequest
+                           :> Post '[JSON] Operation
 
 -- | Removes one or more instances from the specified instance group, but
 -- does not delete those instances.

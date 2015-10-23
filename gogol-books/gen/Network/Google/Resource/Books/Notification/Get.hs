@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.notification.get@ method which the
 -- 'NotificationGet' request conforms to.
 type NotificationGetResource =
-     "notification" :>
-       "get" :>
-         QueryParam "notification_id" Text :>
-           QueryParam "locale" Text :>
-             QueryParam "source" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Notification
+     "books" :>
+       "v1" :>
+         "notification" :>
+           "get" :>
+             QueryParam "notification_id" Text :>
+               QueryParam "locale" Text :>
+                 QueryParam "source" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Notification
 
 -- | Returns notification details for a given notification id.
 --

@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.delete@ method which the
 -- 'EventsDelete' request conforms to.
 type EventsDeleteResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           Capture "eventId" Text :>
-             QueryParam "sendNotifications" Bool :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               Capture "eventId" Text :>
+                 QueryParam "sendNotifications" Bool :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an event.
 --

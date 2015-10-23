@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.customchannels.update@ method which the
 -- 'CustomChannelsUpdate' request conforms to.
 type CustomChannelsUpdateResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "customchannels" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] CustomChannel :>
-               Put '[JSON] CustomChannel
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "customchannels" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] CustomChannel :>
+                   Put '[JSON] CustomChannel
 
 -- | Update a custom channel in the host AdSense account.
 --

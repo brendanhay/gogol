@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.achievementDefinitions.list@ method which the
 -- 'AchievementDefinitionsList' request conforms to.
 type AchievementDefinitionsListResource =
-     "achievements" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AchievementDefinitionsListResponse
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           QueryParam "language" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AchievementDefinitionsListResponse
 
 -- | Lists all the achievement definitions for your application.
 --

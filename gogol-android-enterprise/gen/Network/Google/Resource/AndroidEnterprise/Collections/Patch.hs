@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.collections.patch@ method which the
 -- 'CollectionsPatch' request conforms to.
 type CollectionsPatchResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "collections" :>
-           Capture "collectionId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Collection :>
-                 Patch '[JSON] Collection
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "collections" :>
+               Capture "collectionId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Collection :>
+                     Patch '[JSON] Collection
 
 -- | Updates a collection. This method supports patch semantics.
 --

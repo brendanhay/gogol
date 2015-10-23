@@ -44,13 +44,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.tags.delete@ method which the
 -- 'AccountsContainersTagsDelete' request conforms to.
 type AccountsContainersTagsDeleteResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "tags" :>
-               Capture "tagId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "tags" :>
+                   Capture "tagId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Tag.
 --

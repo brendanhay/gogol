@@ -46,18 +46,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profileUserLinks.list@ method which the
 -- 'ManagementProFileUserLinksList' request conforms to.
 type ManagementProFileUserLinksListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "entityUserLinks" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] EntityUserLinks
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "entityUserLinks" :>
+                         QueryParam "start-index" Int32 :>
+                           QueryParam "max-results" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] EntityUserLinks
 
 -- | Lists profile-user links for a given view (profile).
 --

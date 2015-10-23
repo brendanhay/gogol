@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.create@ method which the
 -- 'LayersCreate' request conforms to.
 type LayersCreateResource =
-     "layers" :>
-       QueryParam "process" Bool :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Layer :> Post '[JSON] Layer
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           QueryParam "process" Bool :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Layer :> Post '[JSON] Layer
 
 -- | Create a layer asset.
 --

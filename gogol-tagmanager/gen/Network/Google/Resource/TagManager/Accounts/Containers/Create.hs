@@ -43,11 +43,13 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.create@ method which the
 -- 'AccountsContainersCreate' request conforms to.
 type AccountsContainersCreateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Container :> Post '[JSON] Container
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Container :> Post '[JSON] Container
 
 -- | Creates a Container.
 --

@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.notifications.get@ method which the
 -- 'NotificationsGet' request conforms to.
 type NotificationsGetResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "notifications" :>
-           Capture "notificationId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Notification
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "notifications" :>
+                 Capture "notificationId" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Notification
 
 -- | Retrieves a notification.
 --

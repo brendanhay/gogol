@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.dictionary.listOfflineMetadata@ method which the
 -- 'DictionaryListOfflineMetadata' request conforms to.
 type DictionaryListOfflineMetadataResource =
-     "dictionary" :>
-       "listOfflineMetadata" :>
-         QueryParam "cpksver" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Metadata
+     "books" :>
+       "v1" :>
+         "dictionary" :>
+           "listOfflineMetadata" :>
+             QueryParam "cpksver" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | Returns a list of offline dictionary metadata available
 --

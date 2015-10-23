@@ -44,10 +44,13 @@ import           Network.Google.Spectrum.Types
 -- | A resource alias for @spectrum.paws.verifyDevice@ method which the
 -- 'PawsVerifyDevice' request conforms to.
 type PawsVerifyDeviceResource =
-     "verifyDevice" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] PawsVerifyDeviceRequest :>
-           Post '[JSON] PawsVerifyDeviceResponse
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "verifyDevice" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PawsVerifyDeviceRequest :>
+                 Post '[JSON] PawsVerifyDeviceResponse
 
 -- | Validates a device for white space use in accordance with regulatory
 -- rules. The Google Spectrum Database does not support master\/slave

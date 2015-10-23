@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.verifyPassword@ method which the
 -- 'RelyingPartyVerifyPassword' request conforms to.
 type RelyingPartyVerifyPasswordResource =
-     "verifyPassword" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           IdentitytoolkitRelyingPartyVerifyPasswordRequest
-           :> Post '[JSON] VerifyPasswordResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "verifyPassword" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 IdentitytoolkitRelyingPartyVerifyPasswordRequest
+                 :> Post '[JSON] VerifyPasswordResponse
 
 -- | Verifies the user entered password.
 --

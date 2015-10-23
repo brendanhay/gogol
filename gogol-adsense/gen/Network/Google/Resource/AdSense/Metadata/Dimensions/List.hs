@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.metadata.dimensions.list@ method which the
 -- 'MetadataDimensionsList' request conforms to.
 type MetadataDimensionsListResource =
-     "metadata" :>
-       "dimensions" :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Metadata
+     "adsense" :>
+       "v1.4" :>
+         "metadata" :>
+           "dimensions" :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdSense account.
 --

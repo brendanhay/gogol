@@ -51,20 +51,22 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.patch@ method which the
 -- 'ObjectsPatch' request conforms to.
 type ObjectsPatchResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
-               QueryParam "ifGenerationNotMatch" Int64 :>
-                 QueryParam "ifGenerationMatch" Int64 :>
-                   QueryParam "predefinedAcl" ObjectsPatchPredefinedACL
-                     :>
-                     QueryParam "ifMetagenerationNotMatch" Int64 :>
-                       QueryParam "projection" ObjectsPatchProjection :>
-                         QueryParam "generation" Int64 :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Object :> Patch '[JSON] Object
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               Capture "object" Text :>
+                 QueryParam "ifMetagenerationMatch" Int64 :>
+                   QueryParam "ifGenerationNotMatch" Int64 :>
+                     QueryParam "ifGenerationMatch" Int64 :>
+                       QueryParam "predefinedAcl" ObjectsPatchPredefinedACL
+                         :>
+                         QueryParam "ifMetagenerationNotMatch" Int64 :>
+                           QueryParam "projection" ObjectsPatchProjection :>
+                             QueryParam "generation" Int64 :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Object :> Patch '[JSON] Object
 
 -- | Updates an object\'s metadata. This method supports patch semantics.
 --

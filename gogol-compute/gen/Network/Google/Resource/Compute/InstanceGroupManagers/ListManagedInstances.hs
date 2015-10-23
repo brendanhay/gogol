@@ -50,15 +50,18 @@ import           Network.Google.Prelude
 -- 'InstanceGroupManagersListManagedInstances' request conforms to.
 type InstanceGroupManagersListManagedInstancesResource
      =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "listManagedInstances" :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON]
-                     InstanceGroupManagersListManagedInstancesResponse
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "listManagedInstances" :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON]
+                           InstanceGroupManagersListManagedInstancesResponse
 
 -- | Lists all of the instances in the managed instance group. Each instance
 -- in the list has a currentAction, which indicates the action that the

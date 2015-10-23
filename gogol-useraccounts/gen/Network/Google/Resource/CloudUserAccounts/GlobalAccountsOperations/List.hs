@@ -47,14 +47,17 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.globalAccountsOperations.list@ method which the
 -- 'GlobalAccountsOperationsList' request conforms to.
 type GlobalAccountsOperationsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "operations" :>
-           QueryParam "orderBy" Text :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] OperationList
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of operation resources contained within the specified
 -- project.

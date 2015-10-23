@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.changes.get@ method which the
 -- 'ChangesGet' request conforms to.
 type ChangesGetResource =
-     "changes" :>
-       Capture "changeId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Change
+     "drive" :>
+       "v2" :>
+         "changes" :>
+           Capture "changeId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Change
 
 -- | Gets a specific change.
 --

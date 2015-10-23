@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.revisions.list@ method which the
 -- 'RevisionsList' request conforms to.
 type RevisionsListResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "revisions" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] RevisionList
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               QueryParam "alt" AltJSON :> Get '[JSON] RevisionList
 
 -- | Lists a file\'s revisions.
 --

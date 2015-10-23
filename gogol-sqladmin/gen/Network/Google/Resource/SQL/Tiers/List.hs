@@ -43,11 +43,13 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.tiers.list@ method which the
 -- 'TiersList' request conforms to.
 type TiersListResource =
-     "projects" :>
-       Capture "project" Text :>
-         "tiers" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] TiersListResponse
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "tiers" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] TiersListResponse
 
 -- | Lists all available service tiers for Google Cloud SQL, for example D1,
 -- D2. For related information, see Pricing.

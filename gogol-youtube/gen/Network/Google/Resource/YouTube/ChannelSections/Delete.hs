@@ -43,10 +43,12 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.channelSections.delete@ method which the
 -- 'ChannelSectionsDelete' request conforms to.
 type ChannelSectionsDeleteResource =
-     "channelSections" :>
-       QueryParam "id" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "channelSections" :>
+           QueryParam "id" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a channelSection.
 --

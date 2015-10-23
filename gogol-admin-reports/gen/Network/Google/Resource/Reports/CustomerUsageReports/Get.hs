@@ -46,13 +46,16 @@ import           Network.Google.Reports.Types
 -- | A resource alias for @reports.customerUsageReports.get@ method which the
 -- 'CustomerUsageReportsGet' request conforms to.
 type CustomerUsageReportsGetResource =
-     "usage" :>
-       "dates" :>
-         Capture "date" Text :>
-           QueryParam "customerId" Text :>
-             QueryParam "parameters" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] UsageReports
+     "admin" :>
+       "reports" :>
+         "v1" :>
+           "usage" :>
+             "dates" :>
+               Capture "date" Text :>
+                 QueryParam "customerId" Text :>
+                   QueryParam "parameters" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] UsageReports
 
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a specific customer.

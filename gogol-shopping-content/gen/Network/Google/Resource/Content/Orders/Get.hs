@@ -43,10 +43,12 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.get@ method which the
 -- 'OrdersGet' request conforms to.
 type OrdersGetResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         Capture "orderId" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Order
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Retrieves an order from your Merchant Center account.
 --

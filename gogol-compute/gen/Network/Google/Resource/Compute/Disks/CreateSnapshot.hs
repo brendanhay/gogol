@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.disks.createSnapshot@ method which the
 -- 'DisksCreateSnapshot' request conforms to.
 type DisksCreateSnapshotResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "disks" :>
-             Capture "disk" Text :>
-               "createSnapshot" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Snapshot :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "disks" :>
+                   Capture "disk" Text :>
+                     "createSnapshot" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Snapshot :> Post '[JSON] Operation
 
 -- | Creates a snapshot of this disk.
 --

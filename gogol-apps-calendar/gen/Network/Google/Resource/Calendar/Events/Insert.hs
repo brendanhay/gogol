@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.insert@ method which the
 -- 'EventsInsert' request conforms to.
 type EventsInsertResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           QueryParam "maxAttendees" Int32 :>
-             QueryParam "sendNotifications" Bool :>
-               QueryParam "supportsAttachments" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Event :> Post '[JSON] Event
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               QueryParam "maxAttendees" Int32 :>
+                 QueryParam "sendNotifications" Bool :>
+                   QueryParam "supportsAttachments" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Event :> Post '[JSON] Event
 
 -- | Creates an event.
 --

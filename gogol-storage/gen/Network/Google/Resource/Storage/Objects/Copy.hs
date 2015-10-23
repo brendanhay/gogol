@@ -58,76 +58,86 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.copy@ method which the
 -- 'ObjectsCopy' request conforms to.
 type ObjectsCopyResource =
-     "b" :>
-       Capture "sourceBucket" Text :>
-         "o" :>
-           Capture "sourceObject" Text :>
-             "copyTo" :>
-               "b" :>
-                 Capture "destinationBucket" Text :>
-                   "o" :>
-                     Capture "destinationObject" Text :>
-                       QueryParam "destinationPredefinedAcl"
-                         ObjectsCopyDestinationPredefinedACL
-                         :>
-                         QueryParam "ifSourceGenerationMatch" Int64 :>
-                           QueryParam "ifMetagenerationMatch" Int64 :>
-                             QueryParam "ifGenerationNotMatch" Int64 :>
-                               QueryParam "ifSourceMetagenerationNotMatch" Int64
-                                 :>
-                                 QueryParam "ifSourceMetagenerationMatch" Int64
-                                   :>
-                                   QueryParam "ifGenerationMatch" Int64 :>
-                                     QueryParam "ifMetagenerationNotMatch" Int64
-                                       :>
-                                       QueryParam "ifSourceGenerationNotMatch"
-                                         Int64
-                                         :>
-                                         QueryParam "projection"
-                                           ObjectsCopyProjection
-                                           :>
-                                           QueryParam "sourceGeneration" Int64
-                                             :>
-                                             QueryParam "alt" AltJSON :>
-                                               ReqBody '[JSON] Object :>
-                                                 Post '[JSON] Object
-       :<|>
-       "b" :>
-         Capture "sourceBucket" Text :>
-           "o" :>
-             Capture "sourceObject" Text :>
-               "copyTo" :>
-                 "b" :>
-                   Capture "destinationBucket" Text :>
-                     "o" :>
-                       Capture "destinationObject" Text :>
-                         QueryParam "destinationPredefinedAcl"
-                           ObjectsCopyDestinationPredefinedACL
-                           :>
-                           QueryParam "ifSourceGenerationMatch" Int64 :>
-                             QueryParam "ifMetagenerationMatch" Int64 :>
-                               QueryParam "ifGenerationNotMatch" Int64 :>
-                                 QueryParam "ifSourceMetagenerationNotMatch"
-                                   Int64
-                                   :>
-                                   QueryParam "ifSourceMetagenerationMatch"
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "sourceBucket" Text :>
+             "o" :>
+               Capture "sourceObject" Text :>
+                 "copyTo" :>
+                   "b" :>
+                     Capture "destinationBucket" Text :>
+                       "o" :>
+                         Capture "destinationObject" Text :>
+                           QueryParam "destinationPredefinedAcl"
+                             ObjectsCopyDestinationPredefinedACL
+                             :>
+                             QueryParam "ifSourceGenerationMatch" Int64 :>
+                               QueryParam "ifMetagenerationMatch" Int64 :>
+                                 QueryParam "ifGenerationNotMatch" Int64 :>
+                                   QueryParam "ifSourceMetagenerationNotMatch"
                                      Int64
                                      :>
-                                     QueryParam "ifGenerationMatch" Int64 :>
-                                       QueryParam "ifMetagenerationNotMatch"
-                                         Int64
-                                         :>
-                                         QueryParam "ifSourceGenerationNotMatch"
+                                     QueryParam "ifSourceMetagenerationMatch"
+                                       Int64
+                                       :>
+                                       QueryParam "ifGenerationMatch" Int64 :>
+                                         QueryParam "ifMetagenerationNotMatch"
                                            Int64
                                            :>
-                                           QueryParam "projection"
-                                             ObjectsCopyProjection
+                                           QueryParam
+                                             "ifSourceGenerationNotMatch"
+                                             Int64
                                              :>
-                                             QueryParam "sourceGeneration" Int64
+                                             QueryParam "projection"
+                                               ObjectsCopyProjection
                                                :>
-                                               QueryParam "alt" AltMedia :>
-                                                 ReqBody '[JSON] Object :>
-                                                   Post '[OctetStream] Stream
+                                               QueryParam "sourceGeneration"
+                                                 Int64
+                                                 :>
+                                                 QueryParam "alt" AltJSON :>
+                                                   ReqBody '[JSON] Object :>
+                                                     Post '[JSON] Object
+       :<|>
+       "storage" :>
+         "v1" :>
+           "b" :>
+             Capture "sourceBucket" Text :>
+               "o" :>
+                 Capture "sourceObject" Text :>
+                   "copyTo" :>
+                     "b" :>
+                       Capture "destinationBucket" Text :>
+                         "o" :>
+                           Capture "destinationObject" Text :>
+                             QueryParam "destinationPredefinedAcl"
+                               ObjectsCopyDestinationPredefinedACL
+                               :>
+                               QueryParam "ifSourceGenerationMatch" Int64 :>
+                                 QueryParam "ifMetagenerationMatch" Int64 :>
+                                   QueryParam "ifGenerationNotMatch" Int64 :>
+                                     QueryParam "ifSourceMetagenerationNotMatch"
+                                       Int64
+                                       :>
+                                       QueryParam "ifSourceMetagenerationMatch"
+                                         Int64
+                                         :>
+                                         QueryParam "ifGenerationMatch" Int64 :>
+                                           QueryParam "ifMetagenerationNotMatch"
+                                             Int64
+                                             :>
+                                             QueryParam
+                                               "ifSourceGenerationNotMatch"
+                                               Int64
+                                               :>
+                                               QueryParam "projection"
+                                                 ObjectsCopyProjection
+                                                 :>
+                                                 QueryParam "sourceGeneration"
+                                                   Int64
+                                                   :>
+                                                   QueryParam "alt" AltMedia :>
+                                                     Get '[OctetStream] Stream
 
 -- | Copies a source object to a destination object. Optionally overrides
 -- metadata.
@@ -365,7 +375,6 @@ instance GoogleRequest (Download ObjectsCopy) where
               _ocProjection
               _ocSourceGeneration
               (Just AltMedia)
-              _ocPayload
               storageService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsCopyResource)

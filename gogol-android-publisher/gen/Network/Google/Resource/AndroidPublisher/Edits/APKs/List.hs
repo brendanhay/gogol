@@ -41,12 +41,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.apks.list@ method which the
 -- 'EditsAPKsList' request conforms to.
 type EditsAPKsListResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] APKsListResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] APKsListResponse
 
 --
 -- /See:/ 'editsAPKsList' smart constructor.

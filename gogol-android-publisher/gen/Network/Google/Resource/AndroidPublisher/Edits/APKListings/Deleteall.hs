@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.apklistings.deleteall@ method which the
 -- 'EditsAPKListingsDeleteall' request conforms to.
 type EditsAPKListingsDeleteallResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             Capture "apkVersionCode" Int32 :>
-               "listings" :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   Capture "apkVersionCode" Int32 :>
+                     "listings" :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes all the APK-specific localized listings for a specified APK.
 --

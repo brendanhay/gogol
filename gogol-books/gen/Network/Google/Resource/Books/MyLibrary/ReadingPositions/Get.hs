@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.readingpositions.get@ method which the
 -- 'MyLibraryReadingPositionsGet' request conforms to.
 type MyLibraryReadingPositionsGetResource =
-     "mylibrary" :>
-       "readingpositions" :>
-         Capture "volumeId" Text :>
-           QueryParam "contentVersion" Text :>
-             QueryParam "source" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ReadingPosition
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "readingpositions" :>
+             Capture "volumeId" Text :>
+               QueryParam "contentVersion" Text :>
+                 QueryParam "source" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ReadingPosition
 
 -- | Retrieves my reading position information for a volume.
 --

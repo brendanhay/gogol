@@ -49,22 +49,25 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.targetableRemarketingLists.list@ method which the
 -- 'TargetableRemarketingListsList' request conforms to.
 type TargetableRemarketingListsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "targetableRemarketingLists" :>
-           QueryParam "advertiserId" Int64 :>
-             QueryParam "sortOrder"
-               TargetableRemarketingListsListSortOrder
-               :>
-               QueryParam "active" Bool :>
-                 QueryParam "name" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField"
-                       TargetableRemarketingListsListSortField
-                       :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] TargetableRemarketingListsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "targetableRemarketingLists" :>
+               QueryParam "advertiserId" Int64 :>
+                 QueryParam "sortOrder"
+                   TargetableRemarketingListsListSortOrder
+                   :>
+                   QueryParam "active" Bool :>
+                     QueryParam "name" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "sortField"
+                           TargetableRemarketingListsListSortField
+                           :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON]
+                                 TargetableRemarketingListsListResponse
 
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
 --

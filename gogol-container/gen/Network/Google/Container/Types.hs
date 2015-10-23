@@ -114,7 +114,6 @@ containerService :: Service
 containerService
   = defaultService (ServiceId "container:v1")
       "container.googleapis.com"
-      ""
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope

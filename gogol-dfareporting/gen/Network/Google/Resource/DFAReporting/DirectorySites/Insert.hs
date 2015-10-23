@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.directorySites.insert@ method which the
 -- 'DirectorySitesInsert' request conforms to.
 type DirectorySitesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "directorySites" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] DirectorySite :>
-               Post '[JSON] DirectorySite
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySites" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] DirectorySite :>
+                   Post '[JSON] DirectorySite
 
 -- | Inserts a new directory site.
 --

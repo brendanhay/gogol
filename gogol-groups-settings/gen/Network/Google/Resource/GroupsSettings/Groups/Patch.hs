@@ -43,9 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @groupsSettings.groups.patch@ method which the
 -- 'GroupsPatch' request conforms to.
 type GroupsPatchResource =
-     Capture "groupUniqueId" Text :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Groups :> Patch '[JSON] Groups
+     "groups" :>
+       "v1" :>
+         "groups" :>
+           Capture "groupUniqueId" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Groups :> Patch '[JSON] Groups
 
 -- | Updates an existing resource. This method supports patch semantics.
 --

@@ -43,10 +43,12 @@ import           Network.Google.URLShortener.Types
 -- | A resource alias for @urlshortener.url.get@ method which the
 -- 'URLGet' request conforms to.
 type URLGetResource =
-     "url" :>
-       QueryParam "shortUrl" Text :>
-         QueryParam "projection" URLGetProjection :>
-           QueryParam "alt" AltJSON :> Get '[JSON] URL
+     "urlshortener" :>
+       "v1" :>
+         "url" :>
+           QueryParam "shortUrl" Text :>
+             QueryParam "projection" URLGetProjection :>
+               QueryParam "alt" AltJSON :> Get '[JSON] URL
 
 -- | Expands a short URL or gets creation time and analytics.
 --

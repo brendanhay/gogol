@@ -44,14 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.apklistings.list@ method which the
 -- 'EditsAPKListingsList' request conforms to.
 type EditsAPKListingsListResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             Capture "apkVersionCode" Int32 :>
-               "listings" :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] APKListingsListResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   Capture "apkVersionCode" Int32 :>
+                     "listings" :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] APKListingsListResponse
 
 -- | Lists all the APK-specific localized listings for a specified APK.
 --

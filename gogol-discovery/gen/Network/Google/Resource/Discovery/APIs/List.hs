@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @discovery.apis.list@ method which the
 -- 'APIsList' request conforms to.
 type APIsListResource =
-     "apis" :>
-       QueryParam "preferred" Bool :>
-         QueryParam "name" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] DirectoryList
+     "discovery" :>
+       "v1" :>
+         "apis" :>
+           QueryParam "preferred" Bool :>
+             QueryParam "name" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] DirectoryList
 
 -- | Retrieve the list of APIs supported at this endpoint.
 --

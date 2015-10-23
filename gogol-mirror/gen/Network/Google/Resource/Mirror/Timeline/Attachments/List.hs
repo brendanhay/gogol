@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.timeline.attachments.list@ method which the
 -- 'TimelineAttachmentsList' request conforms to.
 type TimelineAttachmentsListResource =
-     "timeline" :>
-       Capture "itemId" Text :>
-         "attachments" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] AttachmentsListResponse
+     "mirror" :>
+       "v1" :>
+         "timeline" :>
+           Capture "itemId" Text :>
+             "attachments" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] AttachmentsListResponse
 
 -- | Returns a list of attachments for a timeline item.
 --

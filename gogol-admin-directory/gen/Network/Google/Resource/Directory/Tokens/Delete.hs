@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.tokens.delete@ method which the
 -- 'TokensDelete' request conforms to.
 type TokensDeleteResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "tokens" :>
-           Capture "clientId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "tokens" :>
+                 Capture "clientId" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete all access tokens issued by a user for an application.
 --

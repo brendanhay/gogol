@@ -45,13 +45,15 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.bucketAccessControls.patch@ method which the
 -- 'BucketAccessControlsPatch' request conforms to.
 type BucketAccessControlsPatchResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "acl" :>
-           Capture "entity" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] BucketAccessControl :>
-                 Patch '[JSON] BucketAccessControl
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "acl" :>
+               Capture "entity" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] BucketAccessControl :>
+                     Patch '[JSON] BucketAccessControl
 
 -- | Updates an ACL entry on the specified bucket. This method supports patch
 -- semantics.

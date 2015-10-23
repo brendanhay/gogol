@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.features.get@ method which the
 -- 'TablesFeaturesGet' request conforms to.
 type TablesFeaturesGetResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "features" :>
-           Capture "id" Text :>
-             QueryParam "version" TablesFeaturesGetVersion :>
-               QueryParam "select" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Feature
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "features" :>
+               Capture "id" Text :>
+                 QueryParam "version" TablesFeaturesGetVersion :>
+                   QueryParam "select" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Feature
 
 -- | Return a single feature, given its ID.
 --

@@ -59,28 +59,33 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.list@ method which the
 -- 'EventsList' request conforms to.
 type EventsListResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           QueryParam "syncToken" Text :>
-             QueryParam "timeMin" DateTime' :>
-               QueryParam "orderBy" EventsListOrderBy :>
-                 QueryParam "singleEvents" Bool :>
-                   QueryParams "privateExtendedProperty" Text :>
-                     QueryParam "showDeleted" Bool :>
-                       QueryParam "q" Text :>
-                         QueryParams "sharedExtendedProperty" Text :>
-                           QueryParam "maxAttendees" Int32 :>
-                             QueryParam "iCalUID" Text :>
-                               QueryParam "updatedMin" DateTime' :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "timeZone" Text :>
-                                     QueryParam "showHiddenInvitations" Bool :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "alwaysIncludeEmail" Bool :>
-                                           QueryParam "timeMax" DateTime' :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON] Events
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               QueryParam "syncToken" Text :>
+                 QueryParam "timeMin" DateTime' :>
+                   QueryParam "orderBy" EventsListOrderBy :>
+                     QueryParam "singleEvents" Bool :>
+                       QueryParams "privateExtendedProperty" Text :>
+                         QueryParam "showDeleted" Bool :>
+                           QueryParam "q" Text :>
+                             QueryParams "sharedExtendedProperty" Text :>
+                               QueryParam "maxAttendees" Int32 :>
+                                 QueryParam "iCalUID" Text :>
+                                   QueryParam "updatedMin" DateTime' :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "timeZone" Text :>
+                                         QueryParam "showHiddenInvitations" Bool
+                                           :>
+                                           QueryParam "maxResults" Int32 :>
+                                             QueryParam "alwaysIncludeEmail"
+                                               Bool
+                                               :>
+                                               QueryParam "timeMax" DateTime' :>
+                                                 QueryParam "alt" AltJSON :>
+                                                   Get '[JSON] Events
 
 -- | Returns events on the specified calendar.
 --

@@ -44,13 +44,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.returnlineitem@ method which the
 -- 'OrdersReturnlineitem' request conforms to.
 type OrdersReturnlineitemResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         Capture "orderId" Text :>
-           "returnLineItem" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] OrdersReturnLineItemRequest :>
-                 Post '[JSON] OrdersReturnLineItemResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "returnLineItem" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] OrdersReturnLineItemRequest :>
+                     Post '[JSON] OrdersReturnLineItemResponse
 
 -- | Returns a line item.
 --

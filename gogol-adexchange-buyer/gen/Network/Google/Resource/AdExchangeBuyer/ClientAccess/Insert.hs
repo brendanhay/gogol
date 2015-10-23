@@ -42,12 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.clientaccess.insert@ method which the
 -- 'ClientAccessInsert' request conforms to.
 type ClientAccessInsertResource =
-     "clientAccess" :>
-       QueryParam "sponsorAccountId" Int32 :>
-         QueryParam "clientAccountId" Int64 :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ClientAccessCapabilities :>
-               Post '[JSON] ClientAccessCapabilities
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           QueryParam "sponsorAccountId" Int32 :>
+             QueryParam "clientAccountId" Int64 :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ClientAccessCapabilities :>
+                   Post '[JSON] ClientAccessCapabilities
 
 --
 -- /See:/ 'clientAccessInsert' smart constructor.

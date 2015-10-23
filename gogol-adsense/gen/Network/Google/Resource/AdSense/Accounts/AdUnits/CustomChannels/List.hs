@@ -46,17 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.adunits.customchannels.list@ method which the
 -- 'AccountsAdUnitsCustomChannelsList' request conforms to.
 type AccountsAdUnitsCustomChannelsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               Capture "adUnitId" Text :>
-                 "customchannels" :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] CustomChannels
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   Capture "adUnitId" Text :>
+                     "customchannels" :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] CustomChannels
 
 -- | List all custom channels which the specified ad unit belongs to.
 --

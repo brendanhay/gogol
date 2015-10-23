@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.insert@ method which the
 -- 'UsersInsert' request conforms to.
 type UsersInsertResource =
-     "users" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] User :> Post '[JSON] User
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] User :> Post '[JSON] User
 
 -- | create user.
 --

@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.customFieldDef.list@ method which the
 -- 'CustomFieldDefList' request conforms to.
 type CustomFieldDefListResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "custom_fields" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] CustomFieldDefListResponse
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "custom_fields" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] CustomFieldDefListResponse
 
 -- | Retrieves a list of custom field definitions for a team.
 --

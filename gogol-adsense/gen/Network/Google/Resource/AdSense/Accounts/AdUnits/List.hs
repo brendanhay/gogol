@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.adunits.list@ method which the
 -- 'AccountsAdUnitsList' request conforms to.
 type AccountsAdUnitsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               QueryParam "includeInactive" Bool :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   QueryParam "includeInactive" Bool :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified ad client for the specified account.
 --

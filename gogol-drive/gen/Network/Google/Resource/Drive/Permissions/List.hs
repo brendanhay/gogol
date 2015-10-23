@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.permissions.list@ method which the
 -- 'PermissionsList' request conforms to.
 type PermissionsListResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "permissions" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] PermissionList
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PermissionList
 
 -- | Lists a file\'s permissions.
 --

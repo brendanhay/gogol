@@ -46,12 +46,15 @@ import           Network.Google.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.groups.list@ method which the
 -- 'GroupsList' request conforms to.
 type GroupsListResource =
-     "groups" :>
-       QueryParam "mine" Bool :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "id" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] GroupListResponse
+     "youtube" :>
+       "analytics" :>
+         "v1" :>
+           "groups" :>
+             QueryParam "mine" Bool :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] GroupListResponse
 
 -- | Returns a collection of groups that match the API request parameters.
 -- For example, you can retrieve all groups that the authenticated user

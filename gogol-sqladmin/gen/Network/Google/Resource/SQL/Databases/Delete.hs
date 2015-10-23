@@ -45,13 +45,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.databases.delete@ method which the
 -- 'DatabasesDelete' request conforms to.
 type DatabasesDeleteResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "databases" :>
-               Capture "database" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   Capture "database" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a resource containing information about a database inside a
 -- Cloud SQL instance.

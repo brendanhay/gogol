@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.autoscalers.insert@ method which the
 -- 'AutoscalersInsert' request conforms to.
 type AutoscalersInsertResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "autoscalers" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Autoscaler :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "autoscalers" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Autoscaler :> Post '[JSON] Operation
 
 -- | Creates an autoscaler resource in the specified project using the data
 -- included in the request.

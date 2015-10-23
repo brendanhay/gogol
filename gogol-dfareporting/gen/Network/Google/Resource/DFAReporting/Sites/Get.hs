@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.sites.get@ method which the
 -- 'SitesGet' request conforms to.
 type SitesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "sites" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Site
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Site
 
 -- | Gets one site by ID.
 --

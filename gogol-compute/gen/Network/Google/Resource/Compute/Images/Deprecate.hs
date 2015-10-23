@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.images.deprecate@ method which the
 -- 'ImagesDeprecate' request conforms to.
 type ImagesDeprecateResource =
-     Capture "project" Text :>
-       "global" :>
-         "images" :>
-           Capture "image" Text :>
-             "deprecate" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] DeprecationStatus :>
-                   Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "images" :>
+                 Capture "image" Text :>
+                   "deprecate" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] DeprecationStatus :>
+                         Post '[JSON] Operation
 
 -- | Sets the deprecation status of an image. If an empty request body is
 -- given, clears the deprecation status instead.

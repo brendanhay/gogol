@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.cancel@ method which the
 -- 'TurnBasedMatchesCancel' request conforms to.
 type TurnBasedMatchesCancelResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         "cancel" :>
-           QueryParam "alt" AltJSON :> Put '[JSON] ()
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "cancel" :>
+               QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Cancel a turn-based match.
 --

@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.remarketingLists.insert@ method which the
 -- 'RemarketingListsInsert' request conforms to.
 type RemarketingListsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "remarketingLists" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] RemarketingList :>
-               Post '[JSON] RemarketingList
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] RemarketingList :>
+                   Post '[JSON] RemarketingList
 
 -- | Inserts a new remarketing list.
 --

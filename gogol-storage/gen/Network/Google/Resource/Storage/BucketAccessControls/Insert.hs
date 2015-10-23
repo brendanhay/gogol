@@ -43,12 +43,14 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.bucketAccessControls.insert@ method which the
 -- 'BucketAccessControlsInsert' request conforms to.
 type BucketAccessControlsInsertResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "acl" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] BucketAccessControl :>
-               Post '[JSON] BucketAccessControl
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "acl" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] BucketAccessControl :>
+                   Post '[JSON] BucketAccessControl
 
 -- | Creates a new ACL entry on the specified bucket.
 --

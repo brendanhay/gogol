@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.snapshots.list@ method which the
 -- 'SnapshotsList' request conforms to.
 type SnapshotsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "snapshots" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] SnapshotList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "snapshots" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] SnapshotList
 
 -- | Retrieves the list of Snapshot resources contained within the specified
 -- project.

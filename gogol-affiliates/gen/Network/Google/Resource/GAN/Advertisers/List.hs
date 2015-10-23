@@ -51,19 +51,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.advertisers.list@ method which the
 -- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
-     Capture "role" AdvertisersListRole :>
-       Capture "roleId" Text :>
-         "advertisers" :>
-           QueryParam "relationshipStatus"
-             AdvertisersListRelationshipStatus
-             :>
-             QueryParam "minSevenDayEpc" Double :>
-               QueryParam "minNinetyDayEpc" Double :>
-                 QueryParam "minPayoutRank" Int32 :>
-                   QueryParam "advertiserCategory" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Advertisers
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" AdvertisersListRole :>
+           Capture "roleId" Text :>
+             "advertisers" :>
+               QueryParam "relationshipStatus"
+                 AdvertisersListRelationshipStatus
+                 :>
+                 QueryParam "minSevenDayEpc" Double :>
+                   QueryParam "minNinetyDayEpc" Double :>
+                     QueryParam "minPayoutRank" Int32 :>
+                       QueryParam "advertiserCategory" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Advertisers
 
 -- | Retrieves data about all advertisers that the requesting
 -- advertiser\/publisher has access to.

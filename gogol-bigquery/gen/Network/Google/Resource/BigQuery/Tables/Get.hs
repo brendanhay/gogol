@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.tables.get@ method which the
 -- 'TablesGet' request conforms to.
 type TablesGetResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "tables" :>
-               Capture "tableId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Table
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 "tables" :>
+                   Capture "tableId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Gets the specified table resource by table ID. This method does not
 -- return the data in the table, it only returns the table resource, which

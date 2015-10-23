@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.threads.modify@ method which the
 -- 'UsersThreadsModify' request conforms to.
 type UsersThreadsModifyResource =
-     Capture "userId" Text :>
-       "threads" :>
-         Capture "id" Text :>
-           "modify" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ModifyThreadRequest :>
-                 Post '[JSON] Thread
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 "modify" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ModifyThreadRequest :>
+                       Post '[JSON] Thread
 
 -- | Modifies the labels applied to the thread. This applies to all messages
 -- in the thread.

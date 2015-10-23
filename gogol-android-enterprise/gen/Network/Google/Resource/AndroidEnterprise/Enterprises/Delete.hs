@@ -45,9 +45,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.enterprises.delete@ method which the
 -- 'EnterprisesDelete' request conforms to.
 type EnterprisesDeleteResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the binding between the MDM and enterprise. This is now
 -- deprecated; use this to unenroll customers that were previously enrolled

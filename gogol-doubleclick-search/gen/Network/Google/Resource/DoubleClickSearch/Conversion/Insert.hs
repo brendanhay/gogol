@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.conversion.insert@ method which the
 -- 'ConversionInsert' request conforms to.
 type ConversionInsertResource =
-     "conversion" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] ConversionList :>
-           Post '[JSON] ConversionList
+     "doubleclicksearch" :>
+       "v2" :>
+         "conversion" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] ConversionList :>
+               Post '[JSON] ConversionList
 
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --

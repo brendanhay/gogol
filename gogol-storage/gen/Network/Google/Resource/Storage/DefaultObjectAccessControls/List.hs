@@ -44,13 +44,15 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.defaultObjectAccessControls.list@ method which the
 -- 'DefaultObjectAccessControlsList' request conforms to.
 type DefaultObjectAccessControlsListResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "defaultObjectAcl" :>
-           QueryParam "ifMetagenerationMatch" Int64 :>
-             QueryParam "ifMetagenerationNotMatch" Int64 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ObjectAccessControls
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "defaultObjectAcl" :>
+               QueryParam "ifMetagenerationMatch" Int64 :>
+                 QueryParam "ifMetagenerationNotMatch" Int64 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ObjectAccessControls
 
 -- | Retrieves default object ACL entries on the specified bucket.
 --

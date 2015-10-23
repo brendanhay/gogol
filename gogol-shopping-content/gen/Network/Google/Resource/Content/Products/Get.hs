@@ -43,10 +43,12 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.products.get@ method which the
 -- 'ProductsGet' request conforms to.
 type ProductsGetResource =
-     Capture "merchantId" Word64 :>
-       "products" :>
-         Capture "productId" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Product
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "products" :>
+             Capture "productId" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Product
 
 -- | Retrieves a product from your Merchant Center account.
 --

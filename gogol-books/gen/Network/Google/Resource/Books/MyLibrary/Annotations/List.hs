@@ -51,19 +51,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.annotations.list@ method which the
 -- 'MyLibraryAnnotationsList' request conforms to.
 type MyLibraryAnnotationsListResource =
-     "mylibrary" :>
-       "annotations" :>
-         QueryParam "contentVersion" Text :>
-           QueryParam "showDeleted" Bool :>
-             QueryParam "updatedMax" Text :>
-               QueryParam "updatedMin" Text :>
-                 QueryParams "layerIds" Text :>
-                   QueryParam "volumeId" Text :>
-                     QueryParam "source" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "layerId" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Annotations
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             QueryParam "contentVersion" Text :>
+               QueryParam "showDeleted" Bool :>
+                 QueryParam "updatedMax" Text :>
+                   QueryParam "updatedMin" Text :>
+                     QueryParams "layerIds" Text :>
+                       QueryParam "volumeId" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "layerId" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] Annotations
 
 -- | Retrieves a list of annotations, possibly filtered.
 --

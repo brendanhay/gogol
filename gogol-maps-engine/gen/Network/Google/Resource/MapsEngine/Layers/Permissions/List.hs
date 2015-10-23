@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.permissions.list@ method which the
 -- 'LayersPermissionsList' request conforms to.
 type LayersPermissionsListResource =
-     "layers" :>
-       Capture "id" Text :>
-         "permissions" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] PermissionsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             "permissions" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PermissionsListResponse
 
 -- | Return all of the permissions for the specified asset.
 --

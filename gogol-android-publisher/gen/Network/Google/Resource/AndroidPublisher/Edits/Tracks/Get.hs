@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.tracks.get@ method which the
 -- 'EditsTracksGet' request conforms to.
 type EditsTracksGetResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "tracks" :>
-             Capture "track" EditsTracksGetTrack :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Track
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "tracks" :>
+                   Capture "track" EditsTracksGetTrack :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Track
 
 -- | Fetches the track configuration for the specified track type. Includes
 -- the APK version codes that are in this track.

@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.delete@ method which the
 -- 'UsersDelete' request conforms to.
 type UsersDeleteResource =
-     "users" :>
-       Capture "userKey" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete user
 --

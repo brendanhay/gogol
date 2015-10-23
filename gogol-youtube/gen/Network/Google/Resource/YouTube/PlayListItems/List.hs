@@ -50,16 +50,18 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.playlistItems.list@ method which the
 -- 'PlayListItemsList' request conforms to.
 type PlayListItemsListResource =
-     "playlistItems" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "videoId" Text :>
-             QueryParam "id" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "playlistId" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] PlayListItemListResponse
+     "youtube" :>
+       "v3" :>
+         "playlistItems" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "videoId" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "playlistId" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] PlayListItemListResponse
 
 -- | Returns a collection of playlist items that match the API request
 -- parameters. You can retrieve all of the playlist items in a specified

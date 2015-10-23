@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.landingPages.patch@ method which the
 -- 'LandingPagesPatch' request conforms to.
 type LandingPagesPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           Capture "campaignId" Int64 :>
-             "landingPages" :>
-               QueryParam "id" Int64 :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] LandingPage :>
-                     Patch '[JSON] LandingPage
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] LandingPage :>
+                         Patch '[JSON] LandingPage
 
 -- | Updates an existing campaign landing page. This method supports patch
 -- semantics.

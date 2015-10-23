@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetHttpsProxies.get@ method which the
 -- 'TargetHTTPSProxiesGet' request conforms to.
 type TargetHTTPSProxiesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "targetHttpsProxies" :>
-           Capture "targetHttpsProxy" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] TargetHTTPSProxy
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "targetHttpsProxies" :>
+                 Capture "targetHttpsProxy" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] TargetHTTPSProxy
 
 -- | Returns the specified TargetHttpsProxy resource.
 --

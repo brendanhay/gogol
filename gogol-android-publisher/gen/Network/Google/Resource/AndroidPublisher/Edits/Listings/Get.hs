@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.listings.get@ method which the
 -- 'EditsListingsGet' request conforms to.
 type EditsListingsGetResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "listings" :>
-             Capture "language" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Listing
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "listings" :>
+                   Capture "language" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Listing
 
 -- | Fetches information about a localized store listing.
 --

@@ -48,16 +48,19 @@ import           Network.Google.Prelude
 -- 'InstanceGroupManagersSetInstanceTemplate' request conforms to.
 type InstanceGroupManagersSetInstanceTemplateResource
      =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "setInstanceTemplate" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersSetInstanceTemplateRequest
-                     :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "setInstanceTemplate" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersSetInstanceTemplateRequest
+                           :> Post '[JSON] Operation
 
 -- | Specifies the instance template to use when creating new instances in
 -- this group. The templates for existing instances in the group do not

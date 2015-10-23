@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.devices.list@ method which the
 -- 'DevicesList' request conforms to.
 type DevicesListResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "devices" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] DevicesListResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "devices" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] DevicesListResponse
 
 -- | Retrieves the IDs of all of a user\'s devices.
 --

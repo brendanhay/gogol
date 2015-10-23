@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.deals.get@ method which the
 -- 'DealsGet' request conforms to.
 type DealsGetResource =
-     "deals" :>
-       Capture "dealId" Int64 :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON]
-             GetFinalizedNegotiationByExternalDealIdRequest
-             :> Get '[JSON] NegotiationDTO
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "deals" :>
+           Capture "dealId" Int64 :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 GetFinalizedNegotiationByExternalDealIdRequest
+                 :> Get '[JSON] NegotiationDTO
 
 -- | Gets the requested deal.
 --

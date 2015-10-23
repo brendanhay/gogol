@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.autoscalers.aggregatedList@ method which the
 -- 'AutoscalersAggregatedList' request conforms to.
 type AutoscalersAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "autoscalers" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] AutoscalerAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "autoscalers" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] AutoscalerAggregatedList
 
 -- | Retrieves the list of autoscalers grouped by scope.
 --

@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.revisions.patch@ method which the
 -- 'RevisionsPatch' request conforms to.
 type RevisionsPatchResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "revisions" :>
-           Capture "revisionId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Revision :> Patch '[JSON] Revision
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               Capture "revisionId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Revision :> Patch '[JSON] Revision
 
 -- | Updates a revision. This method supports patch semantics.
 --

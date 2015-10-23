@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroups.insert@ method which the
 -- 'InstanceGroupsInsert' request conforms to.
 type InstanceGroupsInsertResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroups" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] InstanceGroup :>
-                 Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroups" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] InstanceGroup :>
+                       Post '[JSON] Operation
 
 -- | Creates an instance group in the specified project using the parameters
 -- that are included in the request.

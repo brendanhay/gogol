@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.achievements.reveal@ method which the
 -- 'AchievementsReveal' request conforms to.
 type AchievementsRevealResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         "reveal" :>
-           QueryParam "alt" AltJSON :>
-             Post '[JSON] AchievementRevealResponse
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "reveal" :>
+               QueryParam "alt" AltJSON :>
+                 Post '[JSON] AchievementRevealResponse
 
 -- | Sets the state of the achievement with the given ID to REVEALED for the
 -- currently authenticated player.

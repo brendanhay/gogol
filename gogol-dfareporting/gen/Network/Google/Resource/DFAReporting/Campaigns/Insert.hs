@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.campaigns.insert@ method which the
 -- 'CampaignsInsert' request conforms to.
 type CampaignsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           QueryParam "defaultLandingPageName" Text :>
-             QueryParam "defaultLandingPageUrl" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               QueryParam "defaultLandingPageName" Text :>
+                 QueryParam "defaultLandingPageUrl" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
 
 -- | Inserts a new campaign.
 --

@@ -55,31 +55,34 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightActivities.list@ method which the
 -- 'FloodlightActivitiesList' request conforms to.
 type FloodlightActivitiesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightActivities" :>
-           QueryParam "tagString" Text :>
-             QueryParam "floodlightActivityGroupTagString" Text :>
-               QueryParam "floodlightConfigurationId" Int64 :>
-                 QueryParam "advertiserId" Int64 :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "ids" Int64 :>
-                       QueryParams "floodlightActivityGroupIds" Int64 :>
-                         QueryParam "sortOrder"
-                           FloodlightActivitiesListSortOrder
-                           :>
-                           QueryParam "floodlightActivityGroupType"
-                             FloodlightActivitiesListFloodlightActivityGroupType
-                             :>
-                             QueryParam "floodlightActivityGroupName" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "sortField"
-                                   FloodlightActivitiesListSortField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               QueryParam "tagString" Text :>
+                 QueryParam "floodlightActivityGroupTagString" Text :>
+                   QueryParam "floodlightConfigurationId" Int64 :>
+                     QueryParam "advertiserId" Int64 :>
+                       QueryParam "searchString" Text :>
+                         QueryParams "ids" Int64 :>
+                           QueryParams "floodlightActivityGroupIds" Int64 :>
+                             QueryParam "sortOrder"
+                               FloodlightActivitiesListSortOrder
+                               :>
+                               QueryParam "floodlightActivityGroupType"
+                                 FloodlightActivitiesListFloodlightActivityGroupType
+                                 :>
+                                 QueryParam "floodlightActivityGroupName" Text
                                    :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON]
-                                         FloodlightActivitiesListResponse
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "sortField"
+                                       FloodlightActivitiesListSortField
+                                       :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON]
+                                             FloodlightActivitiesListResponse
 
 -- | Retrieves a list of floodlight activities, possibly filtered.
 --

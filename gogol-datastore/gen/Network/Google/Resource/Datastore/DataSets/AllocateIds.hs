@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.datasets.allocateIds@ method which the
 -- 'DataSetsAllocateIds' request conforms to.
 type DataSetsAllocateIdsResource =
-     Capture "datasetId" Text :>
-       "allocateIds" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] AllocateIdsRequest :>
-             Post '[JSON] AllocateIdsResponse
+     "datastore" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             "allocateIds" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AllocateIdsRequest :>
+                   Post '[JSON] AllocateIdsResponse
 
 -- | Allocate IDs for incomplete keys (useful for referencing an entity
 -- before it is inserted).

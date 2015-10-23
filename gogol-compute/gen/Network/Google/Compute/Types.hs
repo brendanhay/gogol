@@ -1848,7 +1848,6 @@ computeService :: Service
 computeService
   = defaultService (ServiceId "compute:v1")
       "www.googleapis.com"
-      "compute/v1/projects/"
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: OAuthScope

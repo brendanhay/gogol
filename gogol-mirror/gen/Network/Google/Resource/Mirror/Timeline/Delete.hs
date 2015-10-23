@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.timeline.delete@ method which the
 -- 'TimelineDelete' request conforms to.
 type TimelineDeleteResource =
-     "timeline" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "mirror" :>
+       "v1" :>
+         "timeline" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a timeline item.
 --

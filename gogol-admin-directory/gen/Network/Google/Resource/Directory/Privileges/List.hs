@@ -42,12 +42,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.privileges.list@ method which the
 -- 'PrivilegesList' request conforms to.
 type PrivilegesListResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roles" :>
-           "ALL" :>
-             "privileges" :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Privileges
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roles" :>
+                 "ALL" :>
+                   "privileges" :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Privileges
 
 -- | Retrieves a paginated list of all privileges for a customer.
 --

@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @datatransfer.transfers.get@ method which the
 -- 'TransfersGet' request conforms to.
 type TransfersGetResource =
-     "transfers" :>
-       Capture "dataTransferId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] DataTransfer
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "transfers" :>
+             Capture "dataTransferId" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] DataTransfer
 
 -- | Retrieves a data transfer request by its resource ID.
 --

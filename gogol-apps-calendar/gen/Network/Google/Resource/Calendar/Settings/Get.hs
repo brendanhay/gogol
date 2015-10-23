@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.settings.get@ method which the
 -- 'SettingsGet' request conforms to.
 type SettingsGetResource =
-     "users" :>
-       "me" :>
-         "settings" :>
-           Capture "setting" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Setting
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "settings" :>
+               Capture "setting" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Setting
 
 -- | Returns a single user setting.
 --

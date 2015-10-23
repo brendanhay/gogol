@@ -58,7 +58,6 @@ billingService :: Service
 billingService
   = defaultService (ServiceId "cloudbilling:v1")
       "cloudbilling.googleapis.com"
-      ""
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope

@@ -44,13 +44,16 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.rollingUpdates.insert@ method which the
 -- 'RollingUpdatesInsert' request conforms to.
 type RollingUpdatesInsertResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "rollingUpdates" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] RollingUpdate :>
-                 Post '[JSON] Operation
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "rollingUpdates" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] RollingUpdate :>
+                       Post '[JSON] Operation
 
 -- | Inserts and starts a new update.
 --

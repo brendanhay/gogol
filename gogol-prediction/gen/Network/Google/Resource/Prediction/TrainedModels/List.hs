@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @prediction.trainedmodels.list@ method which the
 -- 'TrainedModelsList' request conforms to.
 type TrainedModelsListResource =
-     Capture "project" Text :>
-       "trainedmodels" :>
-         "list" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] List
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               "list" :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] List
 
 -- | List available models.
 --

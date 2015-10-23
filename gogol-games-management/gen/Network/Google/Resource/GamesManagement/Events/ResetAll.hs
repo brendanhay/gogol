@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.events.resetAll@ method which the
 -- 'EventsResetAll' request conforms to.
 type EventsResetAllResource =
-     "events" :>
-       "reset" :>
-         QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "events" :>
+           "reset" :>
+             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on all events for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts

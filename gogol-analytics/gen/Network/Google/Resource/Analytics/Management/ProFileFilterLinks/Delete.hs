@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profileFilterLinks.delete@ method which the
 -- 'ManagementProFileFilterLinksDelete' request conforms to.
 type ManagementProFileFilterLinksDeleteResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "profileFilterLinks" :>
-                     Capture "linkId" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a profile filter link.
 --

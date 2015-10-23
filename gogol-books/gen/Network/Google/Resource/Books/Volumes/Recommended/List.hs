@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.volumes.recommended.list@ method which the
 -- 'VolumesRecommendedList' request conforms to.
 type VolumesRecommendedListResource =
-     "volumes" :>
-       "recommended" :>
-         QueryParam "locale" Text :>
-           QueryParam "maxAllowedMaturityRating"
-             VolumesRecommendedListMaxAllowedMaturityRating
-             :>
-             QueryParam "source" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           "recommended" :>
+             QueryParam "locale" Text :>
+               QueryParam "maxAllowedMaturityRating"
+                 VolumesRecommendedListMaxAllowedMaturityRating
+                 :>
+                 QueryParam "source" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of recommended books for the current user.
 --

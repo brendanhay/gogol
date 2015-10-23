@@ -46,9 +46,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @appstate.states.delete@ method which the
 -- 'StatesDelete' request conforms to.
 type StatesDeleteResource =
-     "states" :>
-       Capture "stateKey" Int32 :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           Capture "stateKey" Int32 :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a key and the data associated with it. The key is removed and no
 -- longer counts against the key quota. Note that since this method is not

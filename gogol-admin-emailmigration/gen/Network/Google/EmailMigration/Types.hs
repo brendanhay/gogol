@@ -45,7 +45,6 @@ emailMigrationService
   = defaultService
       (ServiceId "admin:email_migration_v2")
       "www.googleapis.com"
-      "email/v2/users/"
 
 -- | Manage email messages of users on your domain
 emailMigrationScope :: OAuthScope

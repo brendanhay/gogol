@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.comments.update@ method which the
 -- 'CommentsUpdate' request conforms to.
 type CommentsUpdateResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Comment :> Put '[JSON] Comment
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Comment :> Put '[JSON] Comment
 
 -- | Updates an existing comment.
 --

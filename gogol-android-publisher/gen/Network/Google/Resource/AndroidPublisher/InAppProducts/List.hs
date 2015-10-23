@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.inappproducts.list@ method which the
 -- 'InAppProductsList' request conforms to.
 type InAppProductsListResource =
-     Capture "packageName" Text :>
-       "inappproducts" :>
-         QueryParam "token" Text :>
-           QueryParam "startIndex" Word32 :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] InAppProductsListResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "inappproducts" :>
+               QueryParam "token" Text :>
+                 QueryParam "startIndex" Word32 :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] InAppProductsListResponse
 
 -- | List all the in-app products for an Android app, both subscriptions and
 -- managed in-app products..

@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.purchases.subscriptions.cancel@ method which the
 -- 'PurchasesSubscriptionsCancel' request conforms to.
 type PurchasesSubscriptionsCancelResource =
-     Capture "packageName" Text :>
-       "purchases" :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "tokens" :>
-               CaptureMode "token" "cancel" Text :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "purchases" :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "tokens" :>
+                     CaptureMode "token" "cancel" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Cancels a user\'s subscription purchase. The subscription remains valid
 -- until its expiration time.

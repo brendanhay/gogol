@@ -44,13 +44,15 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.bucketAccessControls.update@ method which the
 -- 'BucketAccessControlsUpdate' request conforms to.
 type BucketAccessControlsUpdateResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "acl" :>
-           Capture "entity" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] BucketAccessControl :>
-                 Put '[JSON] BucketAccessControl
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "acl" :>
+               Capture "entity" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] BucketAccessControl :>
+                     Put '[JSON] BucketAccessControl
 
 -- | Updates an ACL entry on the specified bucket.
 --

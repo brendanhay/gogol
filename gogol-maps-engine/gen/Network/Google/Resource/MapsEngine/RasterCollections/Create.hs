@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasterCollections.create@ method which the
 -- 'RasterCollectionsCreate' request conforms to.
 type RasterCollectionsCreateResource =
-     "rasterCollections" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] RasterCollection :>
-           Post '[JSON] RasterCollection
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] RasterCollection :>
+               Post '[JSON] RasterCollection
 
 -- | Create a raster collection asset.
 --

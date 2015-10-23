@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.subaccounts.update@ method which the
 -- 'SubAccountsUpdate' request conforms to.
 type SubAccountsUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "subaccounts" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] SubAccount :> Put '[JSON] SubAccount
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] SubAccount :> Put '[JSON] SubAccount
 
 -- | Updates an existing subaccount.
 --

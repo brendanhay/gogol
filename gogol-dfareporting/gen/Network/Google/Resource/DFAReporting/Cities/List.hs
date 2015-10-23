@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.cities.list@ method which the
 -- 'CitiesList' request conforms to.
 type CitiesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "cities" :>
-           QueryParams "regionDartIds" Int64 :>
-             QueryParam "namePrefix" Text :>
-               QueryParams "countryDartIds" Int64 :>
-                 QueryParams "dartIds" Int64 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] CitiesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "cities" :>
+               QueryParams "regionDartIds" Int64 :>
+                 QueryParam "namePrefix" Text :>
+                   QueryParams "countryDartIds" Int64 :>
+                     QueryParams "dartIds" Int64 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] CitiesListResponse
 
 -- | Retrieves a list of cities, possibly filtered.
 --

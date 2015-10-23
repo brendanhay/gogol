@@ -48,19 +48,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.readingpositions.setPosition@ method which the
 -- 'MyLibraryReadingPositionsSetPosition' request conforms to.
 type MyLibraryReadingPositionsSetPositionResource =
-     "mylibrary" :>
-       "readingpositions" :>
-         Capture "volumeId" Text :>
-           "setPosition" :>
-             QueryParam "timestamp" Text :>
-               QueryParam "position" Text :>
-                 QueryParam "deviceCookie" Text :>
-                   QueryParam "contentVersion" Text :>
-                     QueryParam "action"
-                       MyLibraryReadingPositionsSetPositionAction
-                       :>
-                       QueryParam "source" Text :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "readingpositions" :>
+             Capture "volumeId" Text :>
+               "setPosition" :>
+                 QueryParam "timestamp" Text :>
+                   QueryParam "position" Text :>
+                     QueryParam "deviceCookie" Text :>
+                       QueryParam "contentVersion" Text :>
+                         QueryParam "action"
+                           MyLibraryReadingPositionsSetPositionAction
+                           :>
+                           QueryParam "source" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Sets my reading position information for a volume.
 --

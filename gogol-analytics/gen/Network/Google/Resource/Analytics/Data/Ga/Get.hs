@@ -53,21 +53,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.data.ga.get@ method which the
 -- 'DataGaGet' request conforms to.
 type DataGaGetResource =
-     "data" :>
-       "ga" :>
-         QueryParam "ids" Text :>
-           QueryParam "start-date" Text :>
-             QueryParam "end-date" Text :>
-               QueryParam "metrics" Text :>
-                 QueryParam "samplingLevel" DataGaGetSamplingLevel :>
-                   QueryParam "filters" Text :>
-                     QueryParam "output" DataGaGetOutput :>
-                       QueryParam "sort" Text :>
-                         QueryParam "dimensions" Text :>
-                           QueryParam "start-index" Int32 :>
-                             QueryParam "max-results" Int32 :>
-                               QueryParam "segment" Text :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] GaData
+     "analytics" :>
+       "v3" :>
+         "data" :>
+           "ga" :>
+             QueryParam "ids" Text :>
+               QueryParam "start-date" Text :>
+                 QueryParam "end-date" Text :>
+                   QueryParam "metrics" Text :>
+                     QueryParam "samplingLevel" DataGaGetSamplingLevel :>
+                       QueryParam "filters" Text :>
+                         QueryParam "output" DataGaGetOutput :>
+                           QueryParam "sort" Text :>
+                             QueryParam "dimensions" Text :>
+                               QueryParam "start-index" Int32 :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "segment" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] GaData
 
 -- | Returns Analytics data for a view (profile).
 --

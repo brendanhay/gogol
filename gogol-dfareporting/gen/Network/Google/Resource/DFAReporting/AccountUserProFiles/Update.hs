@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountUserProfiles.update@ method which the
 -- 'AccountUserProFilesUpdate' request conforms to.
 type AccountUserProFilesUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountUserProfiles" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] AccountUserProFile :>
-               Put '[JSON] AccountUserProFile
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AccountUserProFile :>
+                   Put '[JSON] AccountUserProFile
 
 -- | Updates an existing account user profile.
 --

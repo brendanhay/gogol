@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.orgunits.patch@ method which the
 -- 'OrgUnitsPatch' request conforms to.
 type OrgUnitsPatchResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "orgunits" :>
-           Captures "orgUnitPath" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] OrgUnit :> Patch '[JSON] OrgUnit
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "orgunits" :>
+                 Captures "orgUnitPath" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] OrgUnit :> Patch '[JSON] OrgUnit
 
 -- | Update Organization Unit. This method supports patch semantics.
 --

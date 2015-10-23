@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.contentCategories.update@ method which the
 -- 'ContentCategoriesUpdate' request conforms to.
 type ContentCategoriesUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "contentCategories" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ContentCategory :>
-               Put '[JSON] ContentCategory
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ContentCategory :>
+                   Put '[JSON] ContentCategory
 
 -- | Updates an existing content category.
 --

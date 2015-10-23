@@ -306,7 +306,6 @@ datastoreService :: Service
 datastoreService
   = defaultService (ServiceId "datastore:v1beta2")
       "www.googleapis.com"
-      "datastore/v1beta2/datasets/"
 
 -- | View your email address
 userinfoEmailScope :: OAuthScope

@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.children.list@ method which the
 -- 'ChildrenList' request conforms to.
 type ChildrenListResource =
-     "files" :>
-       Capture "folderId" Text :>
-         "children" :>
-           QueryParam "orderBy" Text :>
-             QueryParam "q" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] ChildList
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "folderId" Text :>
+             "children" :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "q" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] ChildList
 
 -- | Lists a folder\'s children.
 --

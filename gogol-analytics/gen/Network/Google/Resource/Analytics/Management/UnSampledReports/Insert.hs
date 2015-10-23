@@ -45,17 +45,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.unsampledReports.insert@ method which the
 -- 'ManagementUnSampledReportsInsert' request conforms to.
 type ManagementUnSampledReportsInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "unsampledReports" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] UnSampledReport :>
-                         Post '[JSON] UnSampledReport
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "unsampledReports" :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] UnSampledReport :>
+                             Post '[JSON] UnSampledReport
 
 -- | Create a new unsampled report.
 --

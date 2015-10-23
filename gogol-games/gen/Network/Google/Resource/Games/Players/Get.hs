@@ -44,10 +44,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.players.get@ method which the
 -- 'PlayersGet' request conforms to.
 type PlayersGetResource =
-     "players" :>
-       Capture "playerId" Text :>
-         QueryParam "language" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Player
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Player
 
 -- | Retrieves the Player resource with the given ID. To retrieve the player
 -- for the currently authenticated user, set playerId to me.

@@ -47,16 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.entitlements.patch@ method which the
 -- 'EntitlementsPatch' request conforms to.
 type EntitlementsPatchResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "entitlements" :>
-               Capture "entitlementId" Text :>
-                 QueryParam "install" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Entitlement :>
-                       Patch '[JSON] Entitlement
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "entitlements" :>
+                   Capture "entitlementId" Text :>
+                     QueryParam "install" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Entitlement :>
+                           Patch '[JSON] Entitlement
 
 -- | Adds or updates an entitlement to an app for a user. This method
 -- supports patch semantics.

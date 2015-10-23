@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.remarketingListShares.patch@ method which the
 -- 'RemarketingListSharesPatch' request conforms to.
 type RemarketingListSharesPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "remarketingListShares" :>
-           QueryParam "remarketingListId" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] RemarketingListShare :>
-                 Patch '[JSON] RemarketingListShare
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingListShares" :>
+               QueryParam "remarketingListId" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] RemarketingListShare :>
+                     Patch '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share. This method supports patch
 -- semantics.

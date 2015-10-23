@@ -259,4 +259,3 @@ qPXExpressService :: Service
 qPXExpressService
   = defaultService (ServiceId "qpxExpress:v1")
       "www.googleapis.com"
-      "qpxExpress/v1/trips/"

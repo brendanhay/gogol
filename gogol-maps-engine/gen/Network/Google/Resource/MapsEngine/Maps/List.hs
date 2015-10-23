@@ -54,24 +54,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.maps.list@ method which the
 -- 'MapsList' request conforms to.
 type MapsListResource =
-     "maps" :>
-       QueryParam "createdAfter" DateTime' :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" MapsListRole :>
-             QueryParam "bbox" Text :>
-               QueryParam "processingStatus"
-                 MapsListProcessingStatus
-                 :>
-                 QueryParam "modifiedAfter" DateTime' :>
-                   QueryParam "modifiedBefore" DateTime' :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projectId" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] MapsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "maps" :>
+           QueryParam "createdAfter" DateTime' :>
+             QueryParam "creatorEmail" Text :>
+               QueryParam "role" MapsListRole :>
+                 QueryParam "bbox" Text :>
+                   QueryParam "processingStatus"
+                     MapsListProcessingStatus
+                     :>
+                     QueryParam "modifiedAfter" DateTime' :>
+                       QueryParam "modifiedBefore" DateTime' :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "projectId" Text :>
+                             QueryParam "search" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "tags" Text :>
+                                   QueryParam "createdBefore" DateTime' :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] MapsListResponse
 
 -- | Return all maps readable by the current user.
 --

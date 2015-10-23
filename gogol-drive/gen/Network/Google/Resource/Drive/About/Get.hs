@@ -45,11 +45,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.about.get@ method which the
 -- 'AboutGet' request conforms to.
 type AboutGetResource =
-     "about" :>
-       QueryParam "includeSubscribed" Bool :>
-         QueryParam "startChangeId" Int64 :>
-           QueryParam "maxChangeIdCount" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] About
+     "drive" :>
+       "v2" :>
+         "about" :>
+           QueryParam "includeSubscribed" Bool :>
+             QueryParam "startChangeId" Int64 :>
+               QueryParam "maxChangeIdCount" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] About
 
 -- | Gets the information about the current user along with Drive API
 -- settings

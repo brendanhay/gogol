@@ -43,10 +43,13 @@ import           Network.Google.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.groups.insert@ method which the
 -- 'GroupsInsert' request conforms to.
 type GroupsInsertResource =
-     "groups" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Group :> Post '[JSON] Group
+     "youtube" :>
+       "analytics" :>
+         "v1" :>
+           "groups" :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Group :> Post '[JSON] Group
 
 -- | Creates a group.
 --

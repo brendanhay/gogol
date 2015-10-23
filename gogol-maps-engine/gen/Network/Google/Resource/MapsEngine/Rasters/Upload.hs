@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasters.upload@ method which the
 -- 'RastersUpload' request conforms to.
 type RastersUploadResource =
-     "rasters" :>
-       "upload" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Raster :> Post '[JSON] Raster
+     "mapsengine" :>
+       "v1" :>
+         "rasters" :>
+           "upload" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Raster :> Post '[JSON] Raster
 
 -- | Create a skeleton raster asset for upload.
 --

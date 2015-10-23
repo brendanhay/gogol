@@ -48,18 +48,20 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.buckets.update@ method which the
 -- 'BucketsUpdate' request conforms to.
 type BucketsUpdateResource =
-     "b" :>
-       Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Int64 :>
-           QueryParam "predefinedAcl" BucketsUpdatePredefinedACL
-             :>
-             QueryParam "predefinedDefaultObjectAcl"
-               BucketsUpdatePredefinedDefaultObjectACL
-               :>
-               QueryParam "ifMetagenerationNotMatch" Int64 :>
-                 QueryParam "projection" BucketsUpdateProjection :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "predefinedAcl" BucketsUpdatePredefinedACL
+                 :>
+                 QueryParam "predefinedDefaultObjectAcl"
+                   BucketsUpdatePredefinedDefaultObjectACL
+                   :>
+                   QueryParam "ifMetagenerationNotMatch" Int64 :>
+                     QueryParam "projection" BucketsUpdateProjection :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
 
 -- | Updates a bucket.
 --

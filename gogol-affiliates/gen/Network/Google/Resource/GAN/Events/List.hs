@@ -59,27 +59,29 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.events.list@ method which the
 -- 'EventsList' request conforms to.
 type EventsListResource =
-     Capture "role" EventsListRole :>
-       Capture "roleId" Text :>
-         "events" :>
-           QueryParam "status" EventsListStatus :>
-             QueryParam "eventDateMin" Text :>
-               QueryParam "chargeType" EventsListChargeType :>
-                 QueryParam "memberId" Text :>
-                   QueryParam "modifyDateMax" Text :>
-                     QueryParam "advertiserId" Text :>
-                       QueryParam "modifyDateMin" Text :>
-                         QueryParam "eventDateMax" Text :>
-                           QueryParam "sku" Text :>
-                             QueryParam "linkId" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "type" EventsListType :>
-                                   QueryParam "orderId" Text :>
-                                     QueryParam "publisherId" Text :>
-                                       QueryParam "productCategory" Text :>
-                                         QueryParam "maxResults" Word32 :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] Events
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" EventsListRole :>
+           Capture "roleId" Text :>
+             "events" :>
+               QueryParam "status" EventsListStatus :>
+                 QueryParam "eventDateMin" Text :>
+                   QueryParam "chargeType" EventsListChargeType :>
+                     QueryParam "memberId" Text :>
+                       QueryParam "modifyDateMax" Text :>
+                         QueryParam "advertiserId" Text :>
+                           QueryParam "modifyDateMin" Text :>
+                             QueryParam "eventDateMax" Text :>
+                               QueryParam "sku" Text :>
+                                 QueryParam "linkId" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "type" EventsListType :>
+                                       QueryParam "orderId" Text :>
+                                         QueryParam "publisherId" Text :>
+                                           QueryParam "productCategory" Text :>
+                                             QueryParam "maxResults" Word32 :>
+                                               QueryParam "alt" AltJSON :>
+                                                 Get '[JSON] Events
 
 -- | Retrieves event data for a given advertiser\/publisher.
 --

@@ -47,17 +47,19 @@ import           Network.Google.Prelude
 -- 'RepresentativesRepresentativeInfoByAddress' request conforms to.
 type RepresentativesRepresentativeInfoByAddressResource
      =
-     "representatives" :>
-       QueryParams "roles"
-         RepresentativesRepresentativeInfoByAddressRoles
-         :>
-         QueryParam "address" Text :>
-           QueryParam "includeOffices" Bool :>
-             QueryParams "levels"
-               RepresentativesRepresentativeInfoByAddressLevels
-               :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] RepresentativeInfoResponse
+     "civicinfo" :>
+       "v2" :>
+         "representatives" :>
+           QueryParams "roles"
+             RepresentativesRepresentativeInfoByAddressRoles
+             :>
+             QueryParam "address" Text :>
+               QueryParam "includeOffices" Bool :>
+                 QueryParams "levels"
+                   RepresentativesRepresentativeInfoByAddressLevels
+                   :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] RepresentativeInfoResponse
 
 -- | Looks up political geography and representative information for a single
 -- address.

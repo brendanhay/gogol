@@ -45,15 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.getSerialPortOutput@ method which the
 -- 'InstancesGetSerialPortOutput' request conforms to.
 type InstancesGetSerialPortOutputResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "serialPort" :>
-                 QueryParam "port" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] SerialPortOutput
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "serialPort" :>
+                       QueryParam "port" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] SerialPortOutput
 
 -- | Returns the specified instance\'s serial port output.
 --

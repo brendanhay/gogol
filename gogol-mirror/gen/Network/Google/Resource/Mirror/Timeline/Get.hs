@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.timeline.get@ method which the
 -- 'TimelineGet' request conforms to.
 type TimelineGetResource =
-     "timeline" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] TimelineItem
+     "mirror" :>
+       "v1" :>
+         "timeline" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] TimelineItem
 
 -- | Gets a single timeline item by ID.
 --

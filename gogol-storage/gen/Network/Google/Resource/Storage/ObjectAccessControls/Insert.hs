@@ -45,15 +45,17 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objectAccessControls.insert@ method which the
 -- 'ObjectAccessControlsInsert' request conforms to.
 type ObjectAccessControlsInsertResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           Capture "object" Text :>
-             "acl" :>
-               QueryParam "generation" Int64 :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ObjectAccessControl :>
-                     Post '[JSON] ObjectAccessControl
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               Capture "object" Text :>
+                 "acl" :>
+                   QueryParam "generation" Int64 :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ObjectAccessControl :>
+                         Post '[JSON] ObjectAccessControl
 
 -- | Creates a new ACL entry on the specified object.
 --

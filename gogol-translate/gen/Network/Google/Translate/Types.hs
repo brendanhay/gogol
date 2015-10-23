@@ -65,4 +65,3 @@ translateService :: Service
 translateService
   = defaultService (ServiceId "translate:v2")
       "www.googleapis.com"
-      "language/translate/"

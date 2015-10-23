@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.events.listDefinitions@ method which the
 -- 'EventsListDefinitions' request conforms to.
 type EventsListDefinitionsResource =
-     "eventDefinitions" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] EventDefinitionListResponse
+     "games" :>
+       "v1" :>
+         "eventDefinitions" :>
+           QueryParam "language" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] EventDefinitionListResponse
 
 -- | Returns a list of the event definitions in this application.
 --

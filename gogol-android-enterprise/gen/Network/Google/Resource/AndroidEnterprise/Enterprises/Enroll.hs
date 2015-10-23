@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.enterprises.enroll@ method which the
 -- 'EnterprisesEnroll' request conforms to.
 type EnterprisesEnrollResource =
-     "enterprises" :>
-       "enroll" :>
-         QueryParam "token" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           "enroll" :>
+             QueryParam "token" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
 
 -- | Enrolls an enterprise with the calling MDM.
 --

@@ -47,12 +47,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.datasets.delete@ method which the
 -- 'DataSetsDelete' request conforms to.
 type DataSetsDeleteResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             QueryParam "deleteContents" Bool :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 QueryParam "deleteContents" Bool :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the dataset specified by the datasetId value. Before you can
 -- delete a dataset, you must delete all its tables, either manually or by

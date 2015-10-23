@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.bookshelves.addVolume@ method which the
 -- 'MyLibraryBookshelvesAddVolume' request conforms to.
 type MyLibraryBookshelvesAddVolumeResource =
-     "mylibrary" :>
-       "bookshelves" :>
-         Capture "shelf" Text :>
-           "addVolume" :>
-             QueryParam "volumeId" Text :>
-               QueryParam "reason"
-                 MyLibraryBookshelvesAddVolumeReason
-                 :>
-                 QueryParam "source" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "bookshelves" :>
+             Capture "shelf" Text :>
+               "addVolume" :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "reason"
+                     MyLibraryBookshelvesAddVolumeReason
+                     :>
+                     QueryParam "source" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Adds a volume to a bookshelf.
 --

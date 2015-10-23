@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.tabledata.insertAll@ method which the
 -- 'TableDataInsertAll' request conforms to.
 type TableDataInsertAllResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "tables" :>
-               Capture "tableId" Text :>
-                 "insertAll" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] TableDataInsertAllRequest :>
-                       Post '[JSON] TableDataInsertAllResponse
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               Capture "datasetId" Text :>
+                 "tables" :>
+                   Capture "tableId" Text :>
+                     "insertAll" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] TableDataInsertAllRequest :>
+                           Post '[JSON] TableDataInsertAllResponse
 
 -- | Streams data into BigQuery one record at a time without needing to run a
 -- load job. Requires the WRITER dataset role.

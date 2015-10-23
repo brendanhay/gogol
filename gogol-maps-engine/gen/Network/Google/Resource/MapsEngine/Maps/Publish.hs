@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.maps.publish@ method which the
 -- 'MapsPublish' request conforms to.
 type MapsPublishResource =
-     "maps" :>
-       Capture "id" Text :>
-         "publish" :>
-           QueryParam "force" Bool :>
-             QueryParam "alt" AltJSON :>
-               Post '[JSON] PublishResponse
+     "mapsengine" :>
+       "v1" :>
+         "maps" :>
+           Capture "id" Text :>
+             "publish" :>
+               QueryParam "force" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] PublishResponse
 
 -- | Publish a map asset.
 --

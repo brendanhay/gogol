@@ -42,10 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.schemas.list@ method which the
 -- 'SchemasList' request conforms to.
 type SchemasListResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "schemas" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Schemas
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "schemas" :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Schemas
 
 -- | Retrieve all schemas for a customer
 --

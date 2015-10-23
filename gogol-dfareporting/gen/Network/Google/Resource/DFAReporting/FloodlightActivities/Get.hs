@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightActivities.get@ method which the
 -- 'FloodlightActivitiesGet' request conforms to.
 type FloodlightActivitiesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightActivities" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] FloodlightActivity
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] FloodlightActivity
 
 -- | Gets one floodlight activity by ID.
 --

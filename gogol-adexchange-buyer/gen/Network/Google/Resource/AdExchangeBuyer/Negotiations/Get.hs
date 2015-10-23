@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.negotiations.get@ method which the
 -- 'NegotiationsGet' request conforms to.
 type NegotiationsGetResource =
-     "negotiations" :>
-       Capture "negotiationId" Int64 :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] GetNegotiationByIdRequest :>
-             Get '[JSON] NegotiationDTO
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "negotiations" :>
+           Capture "negotiationId" Int64 :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] GetNegotiationByIdRequest :>
+                 Get '[JSON] NegotiationDTO
 
 -- | Gets the requested negotiation.
 --

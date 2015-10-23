@@ -44,13 +44,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.updateshipment@ method which the
 -- 'OrdersUpdateshipment' request conforms to.
 type OrdersUpdateshipmentResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         Capture "orderId" Text :>
-           "updateShipment" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] OrdersUpdateShipmentRequest :>
-                 Post '[JSON] OrdersUpdateShipmentResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "updateShipment" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] OrdersUpdateShipmentRequest :>
+                     Post '[JSON] OrdersUpdateShipmentResponse
 
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --

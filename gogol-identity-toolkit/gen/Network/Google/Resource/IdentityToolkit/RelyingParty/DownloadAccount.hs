@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.downloadAccount@ method which the
 -- 'RelyingPartyDownloadAccount' request conforms to.
 type RelyingPartyDownloadAccountResource =
-     "downloadAccount" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           IdentitytoolkitRelyingPartyDownloadAccountRequest
-           :> Post '[JSON] DownloadAccountResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "downloadAccount" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 IdentitytoolkitRelyingPartyDownloadAccountRequest
+                 :> Post '[JSON] DownloadAccountResponse
 
 -- | Batch download user accounts.
 --

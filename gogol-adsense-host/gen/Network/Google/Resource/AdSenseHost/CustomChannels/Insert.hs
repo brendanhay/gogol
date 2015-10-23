@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.customchannels.insert@ method which the
 -- 'CustomChannelsInsert' request conforms to.
 type CustomChannelsInsertResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "customchannels" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] CustomChannel :>
-               Post '[JSON] CustomChannel
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "customchannels" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] CustomChannel :>
+                   Post '[JSON] CustomChannel
 
 -- | Add a new custom channel to the host AdSense account.
 --

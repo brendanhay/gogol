@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.projects.setCommonInstanceMetadata@ method which the
 -- 'ProjectsSetCommonInstanceMetadata' request conforms to.
 type ProjectsSetCommonInstanceMetadataResource =
-     Capture "project" Text :>
-       "setCommonInstanceMetadata" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Metadata :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "setCommonInstanceMetadata" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Metadata :> Post '[JSON] Operation
 
 -- | Sets metadata common to all instances within the specified project using
 -- the data included in the request.

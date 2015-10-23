@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.bookshelves.get@ method which the
 -- 'MyLibraryBookshelvesGet' request conforms to.
 type MyLibraryBookshelvesGetResource =
-     "mylibrary" :>
-       "bookshelves" :>
-         Capture "shelf" Text :>
-           QueryParam "source" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Bookshelf
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "bookshelves" :>
+             Capture "shelf" Text :>
+               QueryParam "source" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Bookshelf
 
 -- | Retrieves metadata for a specific bookshelf belonging to the
 -- authenticated user.

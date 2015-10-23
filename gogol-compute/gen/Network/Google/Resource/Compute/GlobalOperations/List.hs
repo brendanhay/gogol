@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalOperations.list@ method which the
 -- 'GlobalOperationsList' request conforms to.
 type GlobalOperationsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "operations" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] OperationList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- project.

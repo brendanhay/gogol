@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.circles.list@ method which the
 -- 'CirclesList' request conforms to.
 type CirclesListResource =
-     "people" :>
-       Capture "userId" Text :>
-         "circles" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] CircleFeed
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "circles" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] CircleFeed
 
 -- | List all of the circles for a user.
 --

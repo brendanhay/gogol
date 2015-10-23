@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.projects.get@ method which the
 -- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "projects" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Project
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Gets one project by ID.
 --

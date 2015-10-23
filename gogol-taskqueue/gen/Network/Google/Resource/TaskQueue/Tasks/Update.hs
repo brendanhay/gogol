@@ -46,14 +46,17 @@ import           Network.Google.TaskQueue.Types
 -- | A resource alias for @taskqueue.tasks.update@ method which the
 -- 'TasksUpdate' request conforms to.
 type TasksUpdateResource =
-     Capture "project" Text :>
-       "taskqueues" :>
-         Capture "taskqueue" Text :>
-           "tasks" :>
-             Capture "task" Text :>
-               QueryParam "newLeaseSeconds" Int32 :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Task :> Post '[JSON] Task
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   Capture "task" Text :>
+                     QueryParam "newLeaseSeconds" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Task :> Post '[JSON] Task
 
 -- | Update tasks that are leased out of a TaskQueue.
 --

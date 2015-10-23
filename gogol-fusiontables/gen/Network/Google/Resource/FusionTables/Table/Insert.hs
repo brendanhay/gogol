@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.insert@ method which the
 -- 'TableInsert' request conforms to.
 type TableInsertResource =
-     "tables" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Table :> Post '[JSON] Table
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Table :> Post '[JSON] Table
 
 -- | Creates a new table.
 --

@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetVpnGateways.insert@ method which the
 -- 'TargetVPNGatewaysInsert' request conforms to.
 type TargetVPNGatewaysInsertResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetVpnGateways" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] TargetVPNGateway :>
-                 Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetVpnGateways" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TargetVPNGateway :>
+                       Post '[JSON] Operation
 
 -- | Creates a TargetVpnGateway resource in the specified project and region
 -- using the data included in the request.

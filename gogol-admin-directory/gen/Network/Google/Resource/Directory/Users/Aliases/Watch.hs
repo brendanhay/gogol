@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.aliases.watch@ method which the
 -- 'UsersAliasesWatch' request conforms to.
 type UsersAliasesWatchResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "aliases" :>
-           "watch" :>
-             QueryParam "event" UsersAliasesWatchEvent :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Channel :> Post '[JSON] Channel
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "aliases" :>
+                 "watch" :>
+                   QueryParam "event" UsersAliasesWatchEvent :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes in user aliases list
 --

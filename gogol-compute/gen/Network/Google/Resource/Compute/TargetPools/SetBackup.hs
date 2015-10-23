@@ -46,16 +46,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.setBackup@ method which the
 -- 'TargetPoolsSetBackup' request conforms to.
 type TargetPoolsSetBackupResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             Capture "targetPool" Text :>
-               "setBackup" :>
-                 QueryParam "failoverRatio" Float :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] TargetReference :>
-                       Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   Capture "targetPool" Text :>
+                     "setBackup" :>
+                       QueryParam "failoverRatio" Float :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TargetReference :>
+                             Post '[JSON] Operation
 
 -- | Changes backup pool configurations.
 --

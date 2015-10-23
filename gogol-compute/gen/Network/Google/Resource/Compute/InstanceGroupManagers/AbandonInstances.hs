@@ -53,16 +53,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.abandonInstances@ method which the
 -- 'InstanceGroupManagersAbandonInstances' request conforms to.
 type InstanceGroupManagersAbandonInstancesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               "abandonInstances" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     InstanceGroupManagersAbandonInstancesRequest
-                     :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "abandonInstances" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           InstanceGroupManagersAbandonInstancesRequest
+                           :> Post '[JSON] Operation
 
 -- | Schedules a group action to remove the specified instances from the
 -- managed instance group. Abandoning an instance does not delete the

@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.properties.delete@ method which the
 -- 'PropertiesDelete' request conforms to.
 type PropertiesDeleteResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "properties" :>
-           Capture "propertyKey" Text :>
-             QueryParam "visibility" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               Capture "propertyKey" Text :>
+                 QueryParam "visibility" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a property.
 --

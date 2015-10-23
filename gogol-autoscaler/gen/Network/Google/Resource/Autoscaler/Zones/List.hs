@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @autoscaler.zones.list@ method which the
 -- 'ZonesList' request conforms to.
 type ZonesListResource =
-     Capture "project" Text :>
-       "zones" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
+     "autoscaler" :>
+       "v1beta2" :>
+         Capture "project" Text :>
+           "zones" :>
+             QueryParam "filter" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
 
 -- |
 --

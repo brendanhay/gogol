@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.get@ method which the
 -- 'AchievementConfigurationsGet' request conforms to.
 type AchievementConfigurationsGetResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         QueryParam "alt" AltJSON :>
-           Get '[JSON] AchievementConfiguration
+     "games" :>
+       "v1configuration" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] AchievementConfiguration
 
 -- | Retrieves the metadata of the achievement configuration with the given
 -- ID.

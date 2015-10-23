@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.enterprises.get@ method which the
 -- 'EnterprisesGet' request conforms to.
 type EnterprisesGetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Enterprise
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Enterprise
 
 -- | Retrieves the name and domain of an enterprise.
 --

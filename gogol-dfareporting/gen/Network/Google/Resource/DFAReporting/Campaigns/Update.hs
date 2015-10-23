@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.campaigns.update@ method which the
 -- 'CampaignsUpdate' request conforms to.
 type CampaignsUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Campaign :> Put '[JSON] Campaign
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Campaign :> Put '[JSON] Campaign
 
 -- | Updates an existing campaign.
 --

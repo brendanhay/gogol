@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.savedadstyles.get@ method which the
 -- 'AccountsSavedadstylesGet' request conforms to.
 type AccountsSavedadstylesGetResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "savedadstyles" :>
-           Capture "savedAdStyleId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "savedadstyles" :>
+               Capture "savedAdStyleId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
 
 -- | List a specific saved ad style for the specified account.
 --

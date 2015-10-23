@@ -56,22 +56,28 @@ import           Network.Google.Prelude
 -- | A resource alias for @cloudmonitoring.timeseriesDescriptors.list@ method which the
 -- 'TimeseriesDescriptorsList' request conforms to.
 type TimeseriesDescriptorsListResource =
-     Capture "project" Text :>
-       "timeseriesDescriptors" :>
-         Capture "metric" Text :>
-           QueryParam "youngest" Text :>
-             QueryParam "window" Text :>
-               QueryParam "count" Int32 :>
-                 QueryParam "aggregator"
-                   TimeseriesDescriptorsListAggregator
-                   :>
-                   QueryParam "timespan" Text :>
-                     QueryParam "oldest" Text :>
-                       QueryParams "labels" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] ListTimeseriesDescriptorsRequest :>
-                               Get '[JSON] ListTimeseriesDescriptorsResponse
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "timeseriesDescriptors" :>
+               Capture "metric" Text :>
+                 QueryParam "youngest" Text :>
+                   QueryParam "window" Text :>
+                     QueryParam "count" Int32 :>
+                       QueryParam "aggregator"
+                         TimeseriesDescriptorsListAggregator
+                         :>
+                         QueryParam "timespan" Text :>
+                           QueryParam "oldest" Text :>
+                             QueryParams "labels" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON]
+                                     ListTimeseriesDescriptorsRequest
+                                     :>
+                                     Get '[JSON]
+                                       ListTimeseriesDescriptorsResponse
 
 -- | List the descriptors of the time series that match the metric and labels
 -- values and that have data points in the interval. Large responses are

@@ -202,7 +202,6 @@ fitnessService :: Service
 fitnessService
   = defaultService (ServiceId "fitness:v1")
       "www.googleapis.com"
-      "fitness/v1/users/"
 
 -- | View body sensor information in Google Fit
 fitnessBodyReadScope :: OAuthScope

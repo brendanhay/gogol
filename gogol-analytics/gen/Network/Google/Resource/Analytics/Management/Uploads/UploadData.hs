@@ -35,7 +35,6 @@ module Network.Google.Resource.Analytics.Management.Uploads.UploadData
     -- * Request Lenses
     , muudWebPropertyId
     , muudCustomDataSourceId
-    , muudMedia
     , muudAccountId
     ) where
 
@@ -45,16 +44,33 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.uploads.uploadData@ method which the
 -- 'ManagementUploadsUploadData' request conforms to.
 type ManagementUploadsUploadDataResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customDataSources" :>
-                 Capture "customDataSourceId" Text :>
-                   "uploads" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[OctetStream] Body :> Post '[JSON] Upload
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     Capture "customDataSourceId" Text :>
+                       "uploads" :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Upload
+       :<|>
+       "upload" :>
+         "analytics" :>
+           "v3" :>
+             "management" :>
+               "accounts" :>
+                 Capture "accountId" Text :>
+                   "webproperties" :>
+                     Capture "webPropertyId" Text :>
+                       "customDataSources" :>
+                         Capture "customDataSourceId" Text :>
+                           "uploads" :>
+                             QueryParam "alt" AltJSON :>
+                               QueryParam "uploadType" AltMedia :>
+                                 ReqBody '[OctetStream] RequestBody :>
+                                   Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
 --
@@ -62,9 +78,8 @@ type ManagementUploadsUploadDataResource =
 data ManagementUploadsUploadData = ManagementUploadsUploadData
     { _muudWebPropertyId      :: !Text
     , _muudCustomDataSourceId :: !Text
-    , _muudMedia              :: !Body
     , _muudAccountId          :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsUploadData' with the minimum fields required to make a request.
 --
@@ -74,20 +89,16 @@ data ManagementUploadsUploadData = ManagementUploadsUploadData
 --
 -- * 'muudCustomDataSourceId'
 --
--- * 'muudMedia'
---
 -- * 'muudAccountId'
 managementUploadsUploadData
     :: Text -- ^ 'muudWebPropertyId'
     -> Text -- ^ 'muudCustomDataSourceId'
-    -> Body -- ^ 'muudMedia'
     -> Text -- ^ 'muudAccountId'
     -> ManagementUploadsUploadData
-managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ =
+managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAccountId_ =
     ManagementUploadsUploadData
     { _muudWebPropertyId = pMuudWebPropertyId_
     , _muudCustomDataSourceId = pMuudCustomDataSourceId_
-    , _muudMedia = pMuudMedia_
     , _muudAccountId = pMuudAccountId_
     }
 
@@ -103,10 +114,6 @@ muudCustomDataSourceId
   = lens _muudCustomDataSourceId
       (\ s a -> s{_muudCustomDataSourceId = a})
 
-muudMedia :: Lens' ManagementUploadsUploadData Body
-muudMedia
-  = lens _muudMedia (\ s a -> s{_muudMedia = a})
-
 -- | Account Id associated with the upload.
 muudAccountId :: Lens' ManagementUploadsUploadData Text
 muudAccountId
@@ -120,9 +127,25 @@ instance GoogleRequest ManagementUploadsUploadData
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
               (Just AltJSON)
-              _muudMedia
               analyticsService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy ManagementUploadsUploadDataResource)
+                      mempty
+
+instance GoogleRequest
+         (Upload ManagementUploadsUploadData) where
+        type Rs (Upload ManagementUploadsUploadData) = Upload
+        requestClient
+          (Upload ManagementUploadsUploadData{..} body)
+          = go _muudAccountId _muudWebPropertyId
+              _muudCustomDataSourceId
+              (Just AltJSON)
+              (Just AltMedia)
+              _muudPayload
+              body
+              analyticsService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy ManagementUploadsUploadDataResource)
                       mempty

@@ -40,11 +40,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.inappproducts.batch@ method which the
 -- 'InAppProductsBatch' request conforms to.
 type InAppProductsBatchResource =
-     "inappproducts" :>
-       "batch" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] InAppProductsBatchRequest :>
-             Post '[JSON] InAppProductsBatchResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           "inappproducts" :>
+             "batch" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] InAppProductsBatchRequest :>
+                   Post '[JSON] InAppProductsBatchResponse
 
 --
 -- /See:/ 'inAppProductsBatch' smart constructor.

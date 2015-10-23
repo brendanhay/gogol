@@ -49,13 +49,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.stop@ method which the
 -- 'InstancesStop' request conforms to.
 type InstancesStopResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "stop" :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "stop" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method stops a running instance, shutting it down cleanly, and
 -- allows you to restart the instance at a later time. Stopped instances do

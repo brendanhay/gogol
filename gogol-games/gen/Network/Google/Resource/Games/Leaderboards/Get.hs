@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.leaderboards.get@ method which the
 -- 'LeaderboardsGet' request conforms to.
 type LeaderboardsGetResource =
-     "leaderboards" :>
-       Capture "leaderboardId" Text :>
-         QueryParam "language" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Leaderboard
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Leaderboard
 
 -- | Retrieves the metadata of the leaderboard with the given ID.
 --

@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.remarketingLists.update@ method which the
 -- 'RemarketingListsUpdate' request conforms to.
 type RemarketingListsUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "remarketingLists" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] RemarketingList :>
-               Put '[JSON] RemarketingList
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] RemarketingList :>
+                   Put '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list.
 --

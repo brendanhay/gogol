@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.customers.get@ method which the
 -- 'CustomersGet' request conforms to.
 type CustomersGetResource =
-     "customers" :>
-       Capture "customerKey" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Customer
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerKey" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Customer
 
 -- | Retrives a customer.
 --

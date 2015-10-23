@@ -33,7 +33,6 @@ module Network.Google.Resource.MapsEngine.Rasters.Files.Insert
     , RastersFilesInsert
 
     -- * Request Lenses
-    , rfiMedia
     , rfiId
     , rfiFilename
     ) where
@@ -44,45 +43,49 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasters.files.insert@ method which the
 -- 'RastersFilesInsert' request conforms to.
 type RastersFilesInsertResource =
-     "rasters" :>
-       Capture "id" Text :>
-         "files" :>
-           QueryParam "filename" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[OctetStream] Body :> Post '[JSON] ()
+     "mapsengine" :>
+       "v1" :>
+         "rasters" :>
+           Capture "id" Text :>
+             "files" :>
+               QueryParam "filename" Text :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] ()
+       :<|>
+       "upload" :>
+         "mapsengine" :>
+           "v1" :>
+             "rasters" :>
+               Capture "id" Text :>
+                 "files" :>
+                   QueryParam "filename" Text :>
+                     QueryParam "alt" AltJSON :>
+                       QueryParam "uploadType" AltMedia :>
+                         ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
 --
 -- /See:/ 'rastersFilesInsert' smart constructor.
 data RastersFilesInsert = RastersFilesInsert
-    { _rfiMedia    :: !Body
-    , _rfiId       :: !Text
+    { _rfiId       :: !Text
     , _rfiFilename :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersFilesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rfiMedia'
---
 -- * 'rfiId'
 --
 -- * 'rfiFilename'
 rastersFilesInsert
-    :: Body -- ^ 'rfiMedia'
-    -> Text -- ^ 'rfiId'
+    :: Text -- ^ 'rfiId'
     -> Text -- ^ 'rfiFilename'
     -> RastersFilesInsert
-rastersFilesInsert pRfiMedia_ pRfiId_ pRfiFilename_ =
+rastersFilesInsert pRfiId_ pRfiFilename_ =
     RastersFilesInsert
-    { _rfiMedia = pRfiMedia_
-    , _rfiId = pRfiId_
+    { _rfiId = pRfiId_
     , _rfiFilename = pRfiFilename_
     }
-
-rfiMedia :: Lens' RastersFilesInsert Body
-rfiMedia = lens _rfiMedia (\ s a -> s{_rfiMedia = a})
 
 -- | The ID of the raster asset.
 rfiId :: Lens' RastersFilesInsert Text
@@ -97,9 +100,22 @@ instance GoogleRequest RastersFilesInsert where
         type Rs RastersFilesInsert = ()
         requestClient RastersFilesInsert{..}
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
-              _rfiMedia
               mapsEngineService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy RastersFilesInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload RastersFilesInsert)
+         where
+        type Rs (Upload RastersFilesInsert) = ()
+        requestClient (Upload RastersFilesInsert{..} body)
+          = go _rfiId (Just _rfiFilename) (Just AltJSON)
+              (Just AltMedia)
+              _rfiPayload
+              body
+              mapsEngineService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy RastersFilesInsertResource)
                       mempty

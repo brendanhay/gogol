@@ -2525,7 +2525,6 @@ dFAReportingService :: Service
 dFAReportingService
   = defaultService (ServiceId "dfareporting:v2.2")
       "www.googleapis.com"
-      "dfareporting/v2.2/"
 
 -- | View and manage DoubleClick for Advertisers reports
 dfareportingScope :: OAuthScope

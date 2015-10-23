@@ -50,18 +50,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.scores.listWindow@ method which the
 -- 'ScoresListWindow' request conforms to.
 type ScoresListWindowResource =
-     "leaderboards" :>
-       Capture "leaderboardId" Text :>
-         "window" :>
-           Capture "collection" ScoresListWindowCollection :>
-             QueryParam "timeSpan" ScoresListWindowTimeSpan :>
-               QueryParam "returnTopIfAbsent" Bool :>
-                 QueryParam "language" Text :>
-                   QueryParam "resultsAbove" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] LeaderboardScores
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "window" :>
+               Capture "collection" ScoresListWindowCollection :>
+                 QueryParam "timeSpan" ScoresListWindowTimeSpan :>
+                   QueryParam "returnTopIfAbsent" Bool :>
+                     QueryParam "language" Text :>
+                       QueryParam "resultsAbove" Int32 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] LeaderboardScores
 
 -- | Lists the scores in a leaderboard around (and including) a player\'s
 -- score.

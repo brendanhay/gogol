@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.template.patch@ method which the
 -- 'TemplatePatch' request conforms to.
 type TemplatePatchResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "templates" :>
-           Capture "templateId" Int32 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Template :> Patch '[JSON] Template
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "templates" :>
+               Capture "templateId" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Template :> Patch '[JSON] Template
 
 -- | Updates an existing template. This method supports patch semantics.
 --

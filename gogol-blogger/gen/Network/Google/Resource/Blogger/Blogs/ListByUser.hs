@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.blogs.listByUser@ method which the
 -- 'BlogsListByUser' request conforms to.
 type BlogsListByUserResource =
-     "users" :>
-       Capture "userId" Text :>
-         "blogs" :>
-           QueryParams "status" BlogsListByUserStatus :>
-             QueryParam "fetchUserInfo" Bool :>
-               QueryParams "role" BlogsListByUserRole :>
-                 QueryParam "view" BlogsListByUserView :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] BlogList
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             "blogs" :>
+               QueryParams "status" BlogsListByUserStatus :>
+                 QueryParam "fetchUserInfo" Bool :>
+                   QueryParams "role" BlogsListByUserRole :>
+                     QueryParam "view" BlogsListByUserView :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] BlogList
 
 -- | Retrieves a list of blogs, possibly filtered.
 --

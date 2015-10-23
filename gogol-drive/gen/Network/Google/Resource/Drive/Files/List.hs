@@ -48,15 +48,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.list@ method which the
 -- 'FilesList' request conforms to.
 type FilesListResource =
-     "files" :>
-       QueryParam "orderBy" Text :>
-         QueryParam "q" Text :>
-           QueryParam "spaces" Text :>
-             QueryParam "projection" FilesListProjection :>
-               QueryParam "corpus" FilesListCorpus :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] FileList
+     "drive" :>
+       "v2" :>
+         "files" :>
+           QueryParam "orderBy" Text :>
+             QueryParam "q" Text :>
+               QueryParam "spaces" Text :>
+                 QueryParam "projection" FilesListProjection :>
+                   QueryParam "corpus" FilesListCorpus :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] FileList
 
 -- | Lists the user\'s files.
 --

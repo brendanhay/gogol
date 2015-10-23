@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.list@ method which the
 -- 'LeaderboardConfigurationsList' request conforms to.
 type LeaderboardConfigurationsListResource =
-     "applications" :>
-       Capture "applicationId" Text :>
-         "leaderboards" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] LeaderboardConfigurationListResponse
+     "games" :>
+       "v1configuration" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "leaderboards" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] LeaderboardConfigurationListResponse
 
 -- | Returns a list of the leaderboard configurations in this application.
 --

@@ -225,7 +225,6 @@ gmailService :: Service
 gmailService
   = defaultService (ServiceId "gmail:v1")
       "www.googleapis.com"
-      "gmail/v1/users/"
 
 -- | View and manage your mail
 gmailAllScope :: OAuthScope

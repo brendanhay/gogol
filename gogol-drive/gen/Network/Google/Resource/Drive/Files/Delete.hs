@@ -43,9 +43,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.delete@ method which the
 -- 'FilesDelete' request conforms to.
 type FilesDeleteResource =
-     "files" :>
-       Capture "fileId" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes a file by ID. Skips the trash. The currently
 -- authenticated user must own the file.

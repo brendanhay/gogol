@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.features.batchDelete@ method which the
 -- 'TablesFeaturesBatchDelete' request conforms to.
 type TablesFeaturesBatchDeleteResource =
-     "tables" :>
-       Capture "id" Text :>
-         "features" :>
-           "batchDelete" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] FeaturesBatchDeleteRequest :>
-                 Post '[JSON] ()
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "id" Text :>
+             "features" :>
+               "batchDelete" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] FeaturesBatchDeleteRequest :>
+                     Post '[JSON] ()
 
 -- | Delete all features matching the given IDs.
 --

@@ -38,7 +38,6 @@ module Network.Google.Resource.YouTube.Captions.Update
     , capOnBehalfOf
     , capPart
     , capPayload
-    , capMedia
     , capOnBehalfOfContentOwner
     , capSync
     ) where
@@ -49,14 +48,28 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.captions.update@ method which the
 -- 'CaptionsUpdate' request conforms to.
 type CaptionsUpdateResource =
-     "captions" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOf" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "sync" Bool :>
-               QueryParam "alt" AltJSON :>
-                 MultipartRelated '[JSON] Caption Body :>
-                   Put '[JSON] Caption
+     "youtube" :>
+       "v3" :>
+         "captions" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOf" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "sync" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Caption :> Put '[JSON] Caption
+       :<|>
+       "upload" :>
+         "youtube" :>
+           "v3" :>
+             "captions" :>
+               QueryParam "part" Text :>
+                 QueryParam "onBehalfOf" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "sync" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         QueryParam "uploadType" AltMedia :>
+                           MultipartRelated '[JSON] Caption RequestBody :>
+                             Put '[JSON] Caption
 
 -- | Updates a caption track. When updating a caption track, you can change
 -- the track\'s draft status, upload a new caption file for the track, or
@@ -67,10 +80,9 @@ data CaptionsUpdate = CaptionsUpdate
     { _capOnBehalfOf             :: !(Maybe Text)
     , _capPart                   :: !Text
     , _capPayload                :: !Caption
-    , _capMedia                  :: !Body
     , _capOnBehalfOfContentOwner :: !(Maybe Text)
     , _capSync                   :: !(Maybe Bool)
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsUpdate' with the minimum fields required to make a request.
 --
@@ -82,22 +94,18 @@ data CaptionsUpdate = CaptionsUpdate
 --
 -- * 'capPayload'
 --
--- * 'capMedia'
---
 -- * 'capOnBehalfOfContentOwner'
 --
 -- * 'capSync'
 captionsUpdate
     :: Text -- ^ 'capPart'
     -> Caption -- ^ 'capPayload'
-    -> Body -- ^ 'capMedia'
     -> CaptionsUpdate
-captionsUpdate pCapPart_ pCapPayload_ pCapMedia_ =
+captionsUpdate pCapPart_ pCapPayload_ =
     CaptionsUpdate
     { _capOnBehalfOf = Nothing
     , _capPart = pCapPart_
     , _capPayload = pCapPayload_
-    , _capMedia = pCapMedia_
     , _capOnBehalfOfContentOwner = Nothing
     , _capSync = Nothing
     }
@@ -121,9 +129,6 @@ capPart = lens _capPart (\ s a -> s{_capPart = a})
 capPayload :: Lens' CaptionsUpdate Caption
 capPayload
   = lens _capPayload (\ s a -> s{_capPayload = a})
-
-capMedia :: Lens' CaptionsUpdate Body
-capMedia = lens _capMedia (\ s a -> s{_capMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -156,8 +161,22 @@ instance GoogleRequest CaptionsUpdate where
               _capSync
               (Just AltJSON)
               _capPayload
-              _capMedia
               youTubeService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy CaptionsUpdateResource)
+                      mempty
+
+instance GoogleRequest (Upload CaptionsUpdate) where
+        type Rs (Upload CaptionsUpdate) = Caption
+        requestClient (Upload CaptionsUpdate{..} body)
+          = go (Just _capPart) _capOnBehalfOf
+              _capOnBehalfOfContentOwner
+              _capSync
+              (Just AltJSON)
+              (Just AltMedia)
+              _capPayload
+              body
+              youTubeService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy CaptionsUpdateResource)
                       mempty

@@ -64,46 +64,56 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placements.list@ method which the
 -- 'PlacementsList' request conforms to.
 type PlacementsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placements" :>
-           QueryParams "placementStrategyIds" Int64 :>
-             QueryParams "contentCategoryIds" Int64 :>
-               QueryParam "maxEndDate" Text :>
-                 QueryParams "campaignIds" Int64 :>
-                   QueryParams "pricingTypes" PlacementsListPricingTypes
-                     :>
-                     QueryParam "searchString" Text :>
-                       QueryParams "sizeIds" Int64 :>
-                         QueryParams "ids" Int64 :>
-                           QueryParams "groupIds" Int64 :>
-                             QueryParams "directorySiteIds" Int64 :>
-                               QueryParam "sortOrder" PlacementsListSortOrder :>
-                                 QueryParam "paymentSource"
-                                   PlacementsListPaymentSource
-                                   :>
-                                   QueryParams "siteIds" Int64 :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "sortField"
-                                         PlacementsListSortField
-                                         :>
-                                         QueryParams "compatibilities"
-                                           PlacementsListCompatibilities
-                                           :>
-                                           QueryParam "maxStartDate" Text :>
-                                             QueryParams "advertiserIds" Int64
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               QueryParams "placementStrategyIds" Int64 :>
+                 QueryParams "contentCategoryIds" Int64 :>
+                   QueryParam "maxEndDate" Text :>
+                     QueryParams "campaignIds" Int64 :>
+                       QueryParams "pricingTypes" PlacementsListPricingTypes
+                         :>
+                         QueryParam "searchString" Text :>
+                           QueryParams "sizeIds" Int64 :>
+                             QueryParams "ids" Int64 :>
+                               QueryParams "groupIds" Int64 :>
+                                 QueryParams "directorySiteIds" Int64 :>
+                                   QueryParam "sortOrder"
+                                     PlacementsListSortOrder
+                                     :>
+                                     QueryParam "paymentSource"
+                                       PlacementsListPaymentSource
+                                       :>
+                                       QueryParams "siteIds" Int64 :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "sortField"
+                                             PlacementsListSortField
+                                             :>
+                                             QueryParams "compatibilities"
+                                               PlacementsListCompatibilities
                                                :>
-                                               QueryParam "minStartDate" Text :>
-                                                 QueryParam "archived" Bool :>
-                                                   QueryParam "maxResults" Int32
+                                               QueryParam "maxStartDate" Text :>
+                                                 QueryParams "advertiserIds"
+                                                   Int64
+                                                   :>
+                                                   QueryParam "minStartDate"
+                                                     Text
                                                      :>
-                                                     QueryParam "minEndDate"
-                                                       Text
+                                                     QueryParam "archived" Bool
                                                        :>
-                                                       QueryParam "alt" AltJSON
+                                                       QueryParam "maxResults"
+                                                         Int32
                                                          :>
-                                                         Get '[JSON]
-                                                           PlacementsListResponse
+                                                         QueryParam "minEndDate"
+                                                           Text
+                                                           :>
+                                                           QueryParam "alt"
+                                                             AltJSON
+                                                             :>
+                                                             Get '[JSON]
+                                                               PlacementsListResponse
 
 -- | Retrieves a list of placements, possibly filtered.
 --

@@ -69,7 +69,6 @@ cloudTraceService :: Service
 cloudTraceService
   = defaultService (ServiceId "cloudtrace:v1")
       "cloudtrace.googleapis.com"
-      ""
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope

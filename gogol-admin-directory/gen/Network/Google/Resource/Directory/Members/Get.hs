@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.members.get@ method which the
 -- 'MembersGet' request conforms to.
 type MembersGetResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         "members" :>
-           Capture "memberKey" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Member
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               "members" :>
+                 Capture "memberKey" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Member
 
 -- | Retrieve Group Member
 --

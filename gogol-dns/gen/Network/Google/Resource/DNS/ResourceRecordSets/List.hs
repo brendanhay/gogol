@@ -47,16 +47,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @dns.resourceRecordSets.list@ method which the
 -- 'ResourceRecordSetsList' request conforms to.
 type ResourceRecordSetsListResource =
-     Capture "project" Text :>
-       "managedZones" :>
-         Capture "managedZone" Text :>
-           "rrsets" :>
-             QueryParam "name" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "type" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ResourceRecordSetsListResponse
+     "dns" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 "rrsets" :>
+                   QueryParam "name" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "type" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ResourceRecordSetsListResponse
 
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 --

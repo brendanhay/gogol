@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.makeAdmin@ method which the
 -- 'UsersMakeAdmin' request conforms to.
 type UsersMakeAdminResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "makeAdmin" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] UserMakeAdmin :> Post '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "makeAdmin" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] UserMakeAdmin :> Post '[JSON] ()
 
 -- | change admin status of a user
 --

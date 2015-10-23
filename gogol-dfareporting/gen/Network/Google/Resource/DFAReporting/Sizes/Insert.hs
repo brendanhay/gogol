@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.sizes.insert@ method which the
 -- 'SizesInsert' request conforms to.
 type SizesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "sizes" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Size :> Post '[JSON] Size
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sizes" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Size :> Post '[JSON] Size
 
 -- | Inserts a new size.
 --

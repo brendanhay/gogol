@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.properties.insert@ method which the
 -- 'PropertiesInsert' request conforms to.
 type PropertiesInsertResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "properties" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Property :> Post '[JSON] Property
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Property :> Post '[JSON] Property
 
 -- | Adds a property to a file.
 --

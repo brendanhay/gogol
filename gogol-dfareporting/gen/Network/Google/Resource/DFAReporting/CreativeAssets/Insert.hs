@@ -36,7 +36,6 @@ module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
     , caiAdvertiserId
     , caiProFileId
     , caiPayload
-    , caiMedia
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -45,14 +44,30 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeAssets.insert@ method which the
 -- 'CreativeAssetsInsert' request conforms to.
 type CreativeAssetsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeAssets" :>
-           Capture "advertiserId" Int64 :>
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
              "creativeAssets" :>
-               QueryParam "alt" AltJSON :>
-                 MultipartRelated '[JSON] CreativeAssetMetadata Body
-                   :> Post '[JSON] CreativeAssetMetadata
+               Capture "advertiserId" Int64 :>
+                 "creativeAssets" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CreativeAssetMetadata :>
+                       Post '[JSON] CreativeAssetMetadata
+       :<|>
+       "upload" :>
+         "dfareporting" :>
+           "v2.2" :>
+             "userprofiles" :>
+               Capture "profileId" Int64 :>
+                 "creativeAssets" :>
+                   Capture "advertiserId" Int64 :>
+                     "creativeAssets" :>
+                       QueryParam "alt" AltJSON :>
+                         QueryParam "uploadType" AltMedia :>
+                           MultipartRelated '[JSON] CreativeAssetMetadata
+                             RequestBody
+                             :> Post '[JSON] CreativeAssetMetadata
 
 -- | Inserts a new creative asset.
 --
@@ -61,8 +76,7 @@ data CreativeAssetsInsert = CreativeAssetsInsert
     { _caiAdvertiserId :: !Int64
     , _caiProFileId    :: !Int64
     , _caiPayload      :: !CreativeAssetMetadata
-    , _caiMedia        :: !Body
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAssetsInsert' with the minimum fields required to make a request.
 --
@@ -73,20 +87,16 @@ data CreativeAssetsInsert = CreativeAssetsInsert
 -- * 'caiProFileId'
 --
 -- * 'caiPayload'
---
--- * 'caiMedia'
 creativeAssetsInsert
     :: Int64 -- ^ 'caiAdvertiserId'
     -> Int64 -- ^ 'caiProFileId'
     -> CreativeAssetMetadata -- ^ 'caiPayload'
-    -> Body -- ^ 'caiMedia'
     -> CreativeAssetsInsert
-creativeAssetsInsert pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ pCaiMedia_ =
+creativeAssetsInsert pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ =
     CreativeAssetsInsert
     { _caiAdvertiserId = pCaiAdvertiserId_
     , _caiProFileId = pCaiProFileId_
     , _caiPayload = pCaiPayload_
-    , _caiMedia = pCaiMedia_
     }
 
 -- | Advertiser ID of this creative. This is a required field.
@@ -105,17 +115,28 @@ caiPayload :: Lens' CreativeAssetsInsert CreativeAssetMetadata
 caiPayload
   = lens _caiPayload (\ s a -> s{_caiPayload = a})
 
-caiMedia :: Lens' CreativeAssetsInsert Body
-caiMedia = lens _caiMedia (\ s a -> s{_caiMedia = a})
-
 instance GoogleRequest CreativeAssetsInsert where
         type Rs CreativeAssetsInsert = CreativeAssetMetadata
         requestClient CreativeAssetsInsert{..}
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
               _caiPayload
-              _caiMedia
               dFAReportingService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy CreativeAssetsInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload CreativeAssetsInsert)
+         where
+        type Rs (Upload CreativeAssetsInsert) =
+             CreativeAssetMetadata
+        requestClient (Upload CreativeAssetsInsert{..} body)
+          = go _caiProFileId _caiAdvertiserId (Just AltJSON)
+              (Just AltMedia)
+              _caiPayload
+              body
+              dFAReportingService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy CreativeAssetsInsertResource)
                       mempty

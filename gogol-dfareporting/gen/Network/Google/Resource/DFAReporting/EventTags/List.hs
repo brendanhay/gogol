@@ -52,23 +52,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.eventTags.list@ method which the
 -- 'EventTagsList' request conforms to.
 type EventTagsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "eventTags" :>
-           QueryParam "definitionsOnly" Bool :>
-             QueryParams "eventTagTypes"
-               EventTagsListEventTagTypes
-               :>
-               QueryParam "enabled" Bool :>
-                 QueryParam "advertiserId" Int64 :>
-                   QueryParam "searchString" Text :>
-                     QueryParam "campaignId" Int64 :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "sortOrder" EventTagsListSortOrder :>
-                           QueryParam "adId" Int64 :>
-                             QueryParam "sortField" EventTagsListSortField :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] EventTagsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               QueryParam "definitionsOnly" Bool :>
+                 QueryParams "eventTagTypes"
+                   EventTagsListEventTagTypes
+                   :>
+                   QueryParam "enabled" Bool :>
+                     QueryParam "advertiserId" Int64 :>
+                       QueryParam "searchString" Text :>
+                         QueryParam "campaignId" Int64 :>
+                           QueryParams "ids" Int64 :>
+                             QueryParam "sortOrder" EventTagsListSortOrder :>
+                               QueryParam "adId" Int64 :>
+                                 QueryParam "sortField" EventTagsListSortField
+                                   :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] EventTagsListResponse
 
 -- | Retrieves a list of event tags, possibly filtered.
 --

@@ -68,7 +68,6 @@ siteVerificationService :: Service
 siteVerificationService
   = defaultService (ServiceId "siteVerification:v1")
       "www.googleapis.com"
-      "siteVerification/v1/"
 
 -- | Manage your new site verifications with Google
 siteverificationVerifyOnlyScope :: OAuthScope

@@ -45,12 +45,14 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.buckets.get@ method which the
 -- 'BucketsGet' request conforms to.
 type BucketsGetResource =
-     "b" :>
-       Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Int64 :>
-           QueryParam "ifMetagenerationNotMatch" Int64 :>
-             QueryParam "projection" BucketsGetProjection :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Bucket
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "ifMetagenerationNotMatch" Int64 :>
+                 QueryParam "projection" BucketsGetProjection :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Bucket
 
 -- | Returns metadata for the specified bucket.
 --

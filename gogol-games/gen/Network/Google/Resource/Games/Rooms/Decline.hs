@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.rooms.decline@ method which the
 -- 'RoomsDecline' request conforms to.
 type RoomsDeclineResource =
-     "rooms" :>
-       Capture "roomId" Text :>
-         "decline" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :> Post '[JSON] Room
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "decline" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] Room
 
 -- | Decline an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.

@@ -50,17 +50,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.conversion.patch@ method which the
 -- 'ConversionPatch' request conforms to.
 type ConversionPatchResource =
-     "conversion" :>
-       QueryParam "advertiserId" Int64 :>
-         QueryParam "agencyId" Int64 :>
-           QueryParam "endDate" Int32 :>
-             QueryParam "engineAccountId" Int64 :>
-               QueryParam "rowCount" Int32 :>
-                 QueryParam "startDate" Int32 :>
-                   QueryParam "startRow" Word32 :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ConversionList :>
-                         Patch '[JSON] ConversionList
+     "doubleclicksearch" :>
+       "v2" :>
+         "conversion" :>
+           QueryParam "advertiserId" Int64 :>
+             QueryParam "agencyId" Int64 :>
+               QueryParam "endDate" Int32 :>
+                 QueryParam "engineAccountId" Int64 :>
+                   QueryParam "rowCount" Int32 :>
+                     QueryParam "startDate" Int32 :>
+                       QueryParam "startRow" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ConversionList :>
+                             Patch '[JSON] ConversionList
 
 -- | Updates a batch of conversions in DoubleClick Search. This method
 -- supports patch semantics.

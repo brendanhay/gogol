@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.acl.insert@ method which the
 -- 'ACLInsert' request conforms to.
 type ACLInsertResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "acl" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] ACLRule :> Post '[JSON] ACLRule
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "acl" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ACLRule :> Post '[JSON] ACLRule
 
 -- | Creates an access control rule.
 --

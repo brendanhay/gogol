@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.comments.get@ method which the
 -- 'CommentsGet' request conforms to.
 type CommentsGetResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             QueryParam "includeDeleted" Bool :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Comment
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 QueryParam "includeDeleted" Bool :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Gets a comment by ID.
 --

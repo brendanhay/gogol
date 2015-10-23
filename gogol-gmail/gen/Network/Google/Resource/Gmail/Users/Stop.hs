@@ -42,8 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.stop@ method which the
 -- 'UsersStop' request conforms to.
 type UsersStopResource =
-     Capture "userId" Text :>
-       "stop" :> QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "stop" :> QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Stop receiving push notifications for the given user mailbox.
 --

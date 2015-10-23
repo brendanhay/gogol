@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.scores.reset@ method which the
 -- 'ScoresReset' request conforms to.
 type ScoresResetResource =
-     "leaderboards" :>
-       Capture "leaderboardId" Text :>
-         "scores" :>
-           "reset" :>
-             QueryParam "alt" AltJSON :>
-               Post '[JSON] PlayerScoreResetResponse
+     "games" :>
+       "v1management" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "scores" :>
+               "reset" :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] PlayerScoreResetResponse
 
 -- | Resets scores for the leaderboard with the given ID for the currently
 -- authenticated player. This method is only accessible to whitelisted

@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.metagame.getMetagameConfig@ method which the
 -- 'MetagameGetMetagameConfig' request conforms to.
 type MetagameGetMetagameConfigResource =
-     "metagameConfig" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] MetagameConfig
+     "games" :>
+       "v1" :>
+         "metagameConfig" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] MetagameConfig
 
 -- | Return the metagame configuration data for the calling application.
 --

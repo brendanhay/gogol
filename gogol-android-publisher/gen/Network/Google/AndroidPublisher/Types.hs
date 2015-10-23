@@ -382,7 +382,6 @@ androidPublisherService :: Service
 androidPublisherService
   = defaultService (ServiceId "androidpublisher:v2")
       "www.googleapis.com"
-      "androidpublisher/v2/applications/"
 
 -- | View and manage your Google Play Developer account
 androidpublisherScope :: OAuthScope

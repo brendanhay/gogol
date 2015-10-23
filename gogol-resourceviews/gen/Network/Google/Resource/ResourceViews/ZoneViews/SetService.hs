@@ -45,15 +45,18 @@ import           Network.Google.ResourceViews.Types
 -- | A resource alias for @resourceviews.zoneViews.setService@ method which the
 -- 'ZoneViewsSetService' request conforms to.
 type ZoneViewsSetServiceResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "resourceViews" :>
-             Capture "resourceView" Text :>
-               "setService" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ZoneViewsSetServiceRequest :>
-                     Post '[JSON] Operation
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "setService" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ZoneViewsSetServiceRequest :>
+                           Post '[JSON] Operation
 
 -- | Update the service information of a resource view or a resource.
 --

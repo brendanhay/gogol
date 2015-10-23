@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.userRoles.delete@ method which the
 -- 'UserRolesDelete' request conforms to.
 type UserRolesDeleteResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "userRoles" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing user role.
 --

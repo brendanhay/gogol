@@ -45,12 +45,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.inventory.custombatch@ method which the
 -- 'InventoryCustombatch' request conforms to.
 type InventoryCustombatchResource =
-     "inventory" :>
-       "batch" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] InventoryCustomBatchRequest :>
-               Post '[JSON] InventoryCustomBatchResponse
+     "content" :>
+       "v2" :>
+         "inventory" :>
+           "batch" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] InventoryCustomBatchRequest :>
+                   Post '[JSON] InventoryCustomBatchResponse
 
 -- | Updates price and availability for multiple products or stores in a
 -- single request. This operation does not update the expiration date of

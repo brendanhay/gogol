@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.rooms.reportStatus@ method which the
 -- 'RoomsReportStatus' request conforms to.
 type RoomsReportStatusResource =
-     "rooms" :>
-       Capture "roomId" Text :>
-         "reportstatus" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] RoomP2PStatuses :>
-                 Post '[JSON] RoomStatus
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "reportstatus" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] RoomP2PStatuses :>
+                     Post '[JSON] RoomStatus
 
 -- | Updates sent by a client reporting the status of peers in a room. For
 -- internal use by the Games SDK only. Calling this method directly is

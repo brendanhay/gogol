@@ -46,14 +46,17 @@ import           Network.Google.ReplicaPool.Types
 -- | A resource alias for @replicapool.instanceGroupManagers.insert@ method which the
 -- 'InstanceGroupManagersInsert' request conforms to.
 type InstanceGroupManagersInsertResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             QueryParam "size" Int32 :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] InstanceGroupManager :>
-                   Post '[JSON] Operation
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   QueryParam "size" Int32 :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] InstanceGroupManager :>
+                         Post '[JSON] Operation
 
 -- | Creates an instance group manager, as well as the instance group and the
 -- specified number of instances.

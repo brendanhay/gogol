@@ -256,7 +256,6 @@ deploymentManagerService :: Service
 deploymentManagerService
   = defaultService (ServiceId "deploymentmanager:v2")
       "www.googleapis.com"
-      "deploymentmanager/v2/projects/"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope

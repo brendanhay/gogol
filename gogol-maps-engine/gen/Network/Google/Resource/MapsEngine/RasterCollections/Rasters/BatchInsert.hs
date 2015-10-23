@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasterCollections.rasters.batchInsert@ method which the
 -- 'RasterCollectionsRastersBatchInsert' request conforms to.
 type RasterCollectionsRastersBatchInsertResource =
-     "rasterCollections" :>
-       Capture "id" Text :>
-         "rasters" :>
-           "batchInsert" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON]
-                 RasterCollectionsRastersBatchInsertRequest
-                 :>
-                 Post '[JSON]
-                   RasterCollectionsRastersBatchInsertResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           Capture "id" Text :>
+             "rasters" :>
+               "batchInsert" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON]
+                     RasterCollectionsRastersBatchInsertRequest
+                     :>
+                     Post '[JSON]
+                       RasterCollectionsRastersBatchInsertResponse
 
 -- | Add rasters to an existing raster collection. Rasters must be
 -- successfully processed in order to be added to a raster collection. Up

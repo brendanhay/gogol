@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.contacts.list@ method which the
 -- 'ContactsList' request conforms to.
 type ContactsListResource =
-     "contacts" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] ContactsListResponse
+     "mirror" :>
+       "v1" :>
+         "contacts" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] ContactsListResponse
 
 -- | Retrieves a list of contacts for the authenticated user.
 --

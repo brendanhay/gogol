@@ -51,13 +51,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.images.list@ method which the
 -- 'ImagesList' request conforms to.
 type ImagesListResource =
-     Capture "project" Text :>
-       "global" :>
-         "images" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] ImageList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "images" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] ImageList
 
 -- | Retrieves the list of private images available to the specified project.
 -- Private images are images you create that belong to your project. This

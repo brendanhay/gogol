@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @appstate.states.list@ method which the
 -- 'StatesList' request conforms to.
 type StatesListResource =
-     "states" :>
-       QueryParam "includeData" Bool :>
-         QueryParam "alt" AltJSON :> Get '[JSON] ListResponse
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           QueryParam "includeData" Bool :>
+             QueryParam "alt" AltJSON :> Get '[JSON] ListResponse
 
 -- | Lists all the states keys, and optionally the state data.
 --

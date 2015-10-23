@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.comments.insert@ method which the
 -- 'CommentsInsert' request conforms to.
 type CommentsInsertResource =
-     "activities" :>
-       Capture "activityId" Text :>
-         "comments" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Comment :> Post '[JSON] Comment
+     "plusDomains" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             "comments" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Comment :> Post '[JSON] Comment
 
 -- | Create a new comment in reply to an activity.
 --

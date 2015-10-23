@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webproperties.patch@ method which the
 -- 'ManagementWebPropertiesPatch' request conforms to.
 type ManagementWebPropertiesPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] WebProperty :>
-                   Patch '[JSON] WebProperty
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] WebProperty :>
+                       Patch '[JSON] WebProperty
 
 -- | Updates an existing web property. This method supports patch semantics.
 --

@@ -43,13 +43,15 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.tags.list@ method which the
 -- 'AccountsContainersTagsList' request conforms to.
 type AccountsContainersTagsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "tags" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ListTagsResponse
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "tags" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ListTagsResponse
 
 -- | Lists all GTM Tags of a Container.
 --

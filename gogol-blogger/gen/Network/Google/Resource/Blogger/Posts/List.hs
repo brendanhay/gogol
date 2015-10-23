@@ -52,20 +52,23 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.posts.list@ method which the
 -- 'PostsList' request conforms to.
 type PostsListResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           QueryParams "status" PostsListStatus :>
-             QueryParam "orderBy" PostsListOrderBy :>
-               QueryParam "fetchImages" Bool :>
-                 QueryParam "endDate" DateTime' :>
-                   QueryParam "startDate" DateTime' :>
-                     QueryParam "fetchBodies" Bool :>
-                       QueryParam "view" PostsListView :>
-                         QueryParam "labels" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] PostList
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               QueryParams "status" PostsListStatus :>
+                 QueryParam "orderBy" PostsListOrderBy :>
+                   QueryParam "fetchImages" Bool :>
+                     QueryParam "endDate" DateTime' :>
+                       QueryParam "startDate" DateTime' :>
+                         QueryParam "fetchBodies" Bool :>
+                           QueryParam "view" PostsListView :>
+                             QueryParam "labels" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] PostList
 
 -- | Retrieves a list of posts, possibly filtered.
 --

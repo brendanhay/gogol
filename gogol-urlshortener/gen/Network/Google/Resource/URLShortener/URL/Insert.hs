@@ -42,9 +42,11 @@ import           Network.Google.URLShortener.Types
 -- | A resource alias for @urlshortener.url.insert@ method which the
 -- 'URLInsert' request conforms to.
 type URLInsertResource =
-     "url" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] URL :> Post '[JSON] URL
+     "urlshortener" :>
+       "v1" :>
+         "url" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] URL :> Post '[JSON] URL
 
 -- | Creates a new short URL.
 --

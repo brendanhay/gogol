@@ -289,7 +289,6 @@ adSenseService :: Service
 adSenseService
   = defaultService (ServiceId "adsense:v1.4")
       "www.googleapis.com"
-      "adsense/v1.4/"
 
 -- | View your AdSense data
 adsenseReadonlyScope :: OAuthScope

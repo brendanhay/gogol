@@ -42,10 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @datatransfer.transfers.insert@ method which the
 -- 'TransfersInsert' request conforms to.
 type TransfersInsertResource =
-     "transfers" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] DataTransfer :>
-           Post '[JSON] DataTransfer
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "transfers" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] DataTransfer :>
+                 Post '[JSON] DataTransfer
 
 -- | Inserts a data transfer request.
 --

@@ -42,10 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.labels.list@ method which the
 -- 'UsersLabelsList' request conforms to.
 type UsersLabelsListResource =
-     Capture "userId" Text :>
-       "labels" :>
-         QueryParam "alt" AltJSON :>
-           Get '[JSON] ListLabelsResponse
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ListLabelsResponse
 
 -- | Lists all labels in the user\'s mailbox.
 --

@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.rooms.reset@ method which the
 -- 'RoomsReset' request conforms to.
 type RoomsResetResource =
-     "rooms" :>
-       "reset" :>
-         QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "rooms" :>
+           "reset" :>
+             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Reset all rooms for the currently authenticated player for your
 -- application. This method is only accessible to whitelisted tester

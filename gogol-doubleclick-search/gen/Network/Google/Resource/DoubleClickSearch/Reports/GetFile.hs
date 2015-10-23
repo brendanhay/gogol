@@ -43,18 +43,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.reports.getFile@ method which the
 -- 'ReportsGetFile' request conforms to.
 type ReportsGetFileResource =
-     "reports" :>
-       Capture "reportId" Text :>
-         "files" :>
-           Capture "reportFragment" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] ()
+     "doubleclicksearch" :>
+       "v2" :>
+         "reports" :>
+           Capture "reportId" Text :>
+             "files" :>
+               Capture "reportFragment" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
-       "reports" :>
-         Capture "reportId" Text :>
-           "files" :>
-             Capture "reportFragment" Int32 :>
-               QueryParam "alt" AltMedia :>
-                 Get '[OctetStream] Stream
+       "doubleclicksearch" :>
+         "v2" :>
+           "reports" :>
+             Capture "reportId" Text :>
+               "files" :>
+                 Capture "reportFragment" Int32 :>
+                   QueryParam "alt" AltMedia :>
+                     Get '[OctetStream] Stream
 
 -- | Downloads a report file encoded in UTF-8.
 --

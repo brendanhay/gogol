@@ -45,13 +45,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.list@ method which the
 -- 'InstancesList' request conforms to.
 type InstancesListResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] InstancesListResponse
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] InstancesListResponse
 
 -- | Lists instances under a given project in the alphabetical order of the
 -- instance name.

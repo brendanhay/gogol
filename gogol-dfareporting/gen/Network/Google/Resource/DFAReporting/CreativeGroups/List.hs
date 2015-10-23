@@ -50,19 +50,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeGroups.list@ method which the
 -- 'CreativeGroupsList' request conforms to.
 type CreativeGroupsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeGroups" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" CreativeGroupsListSortOrder :>
-                 QueryParam "groupNumber" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField" CreativeGroupsListSortField :>
-                       QueryParams "advertiserIds" Int64 :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] CreativeGroupsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder" CreativeGroupsListSortOrder :>
+                     QueryParam "groupNumber" Int32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "sortField" CreativeGroupsListSortField :>
+                           QueryParams "advertiserIds" Int64 :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] CreativeGroupsListResponse
 
 -- | Retrieves a list of creative groups, possibly filtered.
 --

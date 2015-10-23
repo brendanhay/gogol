@@ -48,15 +48,17 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.inventory.set@ method which the
 -- 'InventorySet' request conforms to.
 type InventorySetResource =
-     Capture "merchantId" Word64 :>
-       "inventory" :>
-         Capture "storeCode" Text :>
-           "products" :>
-             Capture "productId" Text :>
-               QueryParam "dryRun" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] InventorySetRequest :>
-                     Post '[JSON] InventorySetResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "inventory" :>
+             Capture "storeCode" Text :>
+               "products" :>
+                 Capture "productId" Text :>
+                   QueryParam "dryRun" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] InventorySetRequest :>
+                         Post '[JSON] InventorySetResponse
 
 -- | Updates price and availability of a product in your Merchant Center
 -- account. This operation does not update the expiration date of the

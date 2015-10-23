@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalForwardingRules.delete@ method which the
 -- 'GlobalForwardingRulesDelete' request conforms to.
 type GlobalForwardingRulesDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "forwardingRules" :>
-           Capture "forwardingRule" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "forwardingRules" :>
+                 Capture "forwardingRule" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified ForwardingRule resource.
 --

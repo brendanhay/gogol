@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placementStrategies.patch@ method which the
 -- 'PlacementStrategiesPatch' request conforms to.
 type PlacementStrategiesPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placementStrategies" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] PlacementStrategy :>
-                 Patch '[JSON] PlacementStrategy
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] PlacementStrategy :>
+                     Patch '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy. This method supports patch
 -- semantics.

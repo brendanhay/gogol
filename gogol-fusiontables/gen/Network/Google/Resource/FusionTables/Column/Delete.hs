@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.column.delete@ method which the
 -- 'ColumnDelete' request conforms to.
 type ColumnDeleteResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "columns" :>
-           Capture "columnId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "columns" :>
+               Capture "columnId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified column.
 --

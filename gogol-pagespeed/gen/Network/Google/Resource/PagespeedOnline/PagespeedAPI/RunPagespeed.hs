@@ -49,16 +49,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @pagespeedonline.pagespeedapi.runpagespeed@ method which the
 -- 'PagespeedAPIRunPagespeed' request conforms to.
 type PagespeedAPIRunPagespeedResource =
-     "runPagespeed" :>
-       QueryParam "url" Text :>
-         QueryParam "screenshot" Bool :>
-           QueryParam "locale" Text :>
-             QueryParam "filter_third_party_resources" Bool :>
-               QueryParam "strategy"
-                 PagespeedAPIRunPagespeedStrategy
-                 :>
-                 QueryParams "rule" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Result
+     "pagespeedonline" :>
+       "v2" :>
+         "runPagespeed" :>
+           QueryParam "url" Text :>
+             QueryParam "screenshot" Bool :>
+               QueryParam "locale" Text :>
+                 QueryParam "filter_third_party_resources" Bool :>
+                   QueryParam "strategy"
+                     PagespeedAPIRunPagespeedStrategy
+                     :>
+                     QueryParams "rule" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Result
 
 -- | Runs PageSpeed analysis on the page at the specified URL, and returns
 -- PageSpeed scores, a list of suggestions to make that page faster, and

@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.routes.get@ method which the
 -- 'RoutesGet' request conforms to.
 type RoutesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "routes" :>
-           Capture "route" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Route
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "routes" :>
+                 Capture "route" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Route
 
 -- | Returns the specified route resource.
 --

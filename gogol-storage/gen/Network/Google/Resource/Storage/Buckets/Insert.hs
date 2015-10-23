@@ -46,16 +46,18 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.buckets.insert@ method which the
 -- 'BucketsInsert' request conforms to.
 type BucketsInsertResource =
-     "b" :>
-       QueryParam "project" Text :>
-         QueryParam "predefinedAcl" BucketsInsertPredefinedACL
-           :>
-           QueryParam "predefinedDefaultObjectAcl"
-             BucketsInsertPredefinedDefaultObjectACL
-             :>
-             QueryParam "projection" BucketsInsertProjection :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
+     "storage" :>
+       "v1" :>
+         "b" :>
+           QueryParam "project" Text :>
+             QueryParam "predefinedAcl" BucketsInsertPredefinedACL
+               :>
+               QueryParam "predefinedDefaultObjectAcl"
+                 BucketsInsertPredefinedDefaultObjectACL
+                 :>
+                 QueryParam "projection" BucketsInsertProjection :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
 
 -- | Creates a new bucket.
 --

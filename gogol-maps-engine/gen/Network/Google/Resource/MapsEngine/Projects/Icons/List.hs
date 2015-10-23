@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.projects.icons.list@ method which the
 -- 'ProjectsIconsList' request conforms to.
 type ProjectsIconsListResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "icons" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] IconsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "icons" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] IconsListResponse
 
 -- | Return all icons in the current project
 --

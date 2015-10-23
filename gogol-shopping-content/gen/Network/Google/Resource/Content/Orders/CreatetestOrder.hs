@@ -43,11 +43,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.createtestorder@ method which the
 -- 'OrdersCreatetestOrder' request conforms to.
 type OrdersCreatetestOrderResource =
-     Capture "merchantId" Word64 :>
-       "testorders" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] OrdersCreateTestOrderRequest :>
-             Post '[JSON] OrdersCreateTestOrderResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "testorders" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] OrdersCreateTestOrderRequest :>
+                 Post '[JSON] OrdersCreateTestOrderResponse
 
 -- | Sandbox only. Creates a test order.
 --

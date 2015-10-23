@@ -43,11 +43,14 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.globalAccountsOperations.get@ method which the
 -- 'GlobalAccountsOperationsGet' request conforms to.
 type GlobalAccountsOperationsGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "operations" :>
-           Capture "operation" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Operation
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 Capture "operation" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified operation resource.
 --

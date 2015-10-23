@@ -45,14 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @licensing.licenseAssignments.update@ method which the
 -- 'LicenseAssignmentsUpdate' request conforms to.
 type LicenseAssignmentsUpdateResource =
-     Capture "productId" Text :>
-       "sku" :>
-         Capture "skuId" Text :>
-           "user" :>
-             Capture "userId" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] LicenseAssignment :>
-                   Put '[JSON] LicenseAssignment
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     Capture "userId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] LicenseAssignment :>
+                           Put '[JSON] LicenseAssignment
 
 -- | Assign License.
 --

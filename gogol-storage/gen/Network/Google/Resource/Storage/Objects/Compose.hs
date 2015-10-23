@@ -48,32 +48,35 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.compose@ method which the
 -- 'ObjectsCompose' request conforms to.
 type ObjectsComposeResource =
-     "b" :>
-       Capture "destinationBucket" Text :>
-         "o" :>
-           Capture "destinationObject" Text :>
-             "compose" :>
-               QueryParam "destinationPredefinedAcl"
-                 ObjectsComposeDestinationPredefinedACL
-                 :>
-                 QueryParam "ifMetagenerationMatch" Int64 :>
-                   QueryParam "ifGenerationMatch" Int64 :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ComposeRequest :> Post '[JSON] Object
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "destinationBucket" Text :>
+             "o" :>
+               Capture "destinationObject" Text :>
+                 "compose" :>
+                   QueryParam "destinationPredefinedAcl"
+                     ObjectsComposeDestinationPredefinedACL
+                     :>
+                     QueryParam "ifMetagenerationMatch" Int64 :>
+                       QueryParam "ifGenerationMatch" Int64 :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ComposeRequest :> Post '[JSON] Object
        :<|>
-       "b" :>
-         Capture "destinationBucket" Text :>
-           "o" :>
-             Capture "destinationObject" Text :>
-               "compose" :>
-                 QueryParam "destinationPredefinedAcl"
-                   ObjectsComposeDestinationPredefinedACL
-                   :>
-                   QueryParam "ifMetagenerationMatch" Int64 :>
-                     QueryParam "ifGenerationMatch" Int64 :>
-                       QueryParam "alt" AltMedia :>
-                         ReqBody '[JSON] ComposeRequest :>
-                           Post '[OctetStream] Stream
+       "storage" :>
+         "v1" :>
+           "b" :>
+             Capture "destinationBucket" Text :>
+               "o" :>
+                 Capture "destinationObject" Text :>
+                   "compose" :>
+                     QueryParam "destinationPredefinedAcl"
+                       ObjectsComposeDestinationPredefinedACL
+                       :>
+                       QueryParam "ifMetagenerationMatch" Int64 :>
+                         QueryParam "ifGenerationMatch" Int64 :>
+                           QueryParam "alt" AltMedia :>
+                             Get '[OctetStream] Stream
 
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.
@@ -178,7 +181,6 @@ instance GoogleRequest (Download ObjectsCompose)
               _oIfMetagenerationMatch
               _oIfGenerationMatch
               (Just AltMedia)
-              _oPayload
               storageService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsComposeResource)

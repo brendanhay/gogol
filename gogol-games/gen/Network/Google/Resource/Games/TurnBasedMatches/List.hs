@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.list@ method which the
 -- 'TurnBasedMatchesList' request conforms to.
 type TurnBasedMatchesListResource =
-     "turnbasedmatches" :>
-       QueryParam "maxCompletedMatches" Int32 :>
-         QueryParam "includeMatchData" Bool :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] TurnBasedMatchList
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           QueryParam "maxCompletedMatches" Int32 :>
+             QueryParam "includeMatchData" Bool :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] TurnBasedMatchList
 
 -- | Returns turn-based matches the player is or was involved in.
 --

@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.regionOperations.get@ method which the
 -- 'RegionOperationsGet' request conforms to.
 type RegionOperationsGetResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "operations" :>
-             Capture "operation" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "operations" :>
+                   Capture "operation" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified region-specific Operations resource.
 --

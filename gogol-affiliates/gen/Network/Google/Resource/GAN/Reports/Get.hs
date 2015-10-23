@@ -55,23 +55,25 @@ import           Network.Google.Prelude
 -- | A resource alias for @gan.reports.get@ method which the
 -- 'ReportsGet' request conforms to.
 type ReportsGetResource =
-     Capture "role" ReportsGetRole :>
-       Capture "roleId" Text :>
-         "report" :>
-           Capture "reportType" ReportsGetReportType :>
-             QueryParam "status" ReportsGetStatus :>
-               QueryParams "advertiserId" Text :>
-                 QueryParam "endDate" Text :>
-                   QueryParam "eventType" ReportsGetEventType :>
-                     QueryParam "startDate" Text :>
-                       QueryParam "calculateTotals" Bool :>
-                         QueryParams "linkId" Text :>
-                           QueryParams "orderId" Text :>
-                             QueryParams "publisherId" Text :>
-                               QueryParam "startIndex" Word32 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] Report
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" ReportsGetRole :>
+           Capture "roleId" Text :>
+             "report" :>
+               Capture "reportType" ReportsGetReportType :>
+                 QueryParam "status" ReportsGetStatus :>
+                   QueryParams "advertiserId" Text :>
+                     QueryParam "endDate" Text :>
+                       QueryParam "eventType" ReportsGetEventType :>
+                         QueryParam "startDate" Text :>
+                           QueryParam "calculateTotals" Bool :>
+                             QueryParams "linkId" Text :>
+                               QueryParams "orderId" Text :>
+                                 QueryParams "publisherId" Text :>
+                                   QueryParam "startIndex" Word32 :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] Report
 
 -- | Retrieves a report of the specified type.
 --

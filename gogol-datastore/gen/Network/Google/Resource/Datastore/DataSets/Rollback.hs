@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.datasets.rollback@ method which the
 -- 'DataSetsRollback' request conforms to.
 type DataSetsRollbackResource =
-     Capture "datasetId" Text :>
-       "rollback" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] RollbackRequest :>
-             Post '[JSON] RollbackResponse
+     "datastore" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             "rollback" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] RollbackRequest :>
+                   Post '[JSON] RollbackResponse
 
 -- | Roll back a transaction.
 --

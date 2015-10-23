@@ -218,4 +218,3 @@ customSearchService :: Service
 customSearchService
   = defaultService (ServiceId "customsearch:v1")
       "www.googleapis.com"
-      "customsearch/"

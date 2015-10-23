@@ -41,9 +41,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.applications.played@ method which the
 -- 'ApplicationsPlayed' request conforms to.
 type ApplicationsPlayedResource =
-     "applications" :>
-       "played" :>
-         QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1" :>
+         "applications" :>
+           "played" :>
+             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Indicate that the the currently authenticated user is playing your
 -- application.

@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.negotiations.insert@ method which the
 -- 'NegotiationsInsert' request conforms to.
 type NegotiationsInsertResource =
-     "negotiations" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] NegotiationDTO :>
-           Post '[JSON] NegotiationDTO
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "negotiations" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] NegotiationDTO :>
+               Post '[JSON] NegotiationDTO
 
 -- | Creates or updates the requested negotiation.
 --

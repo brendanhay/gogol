@@ -44,11 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.products.insert@ method which the
 -- 'ProductsInsert' request conforms to.
 type ProductsInsertResource =
-     Capture "merchantId" Word64 :>
-       "products" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Product :> Post '[JSON] Product
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "products" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Product :> Post '[JSON] Product
 
 -- | Uploads a product to your Merchant Center account.
 --

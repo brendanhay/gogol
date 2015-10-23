@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclickbidmanager.lineitems.uploadlineitems@ method which the
 -- 'LineitemsUploadlineitems' request conforms to.
 type LineitemsUploadlineitemsResource =
-     "lineitems" :>
-       "uploadlineitems" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] UploadLineItemsRequest :>
-             Post '[JSON] UploadLineItemsResponse
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "lineitems" :>
+           "uploadlineitems" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] UploadLineItemsRequest :>
+                 Post '[JSON] UploadLineItemsResponse
 
 -- | Uploads line items in CSV format.
 --

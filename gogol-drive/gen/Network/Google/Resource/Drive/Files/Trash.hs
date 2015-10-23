@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.trash@ method which the
 -- 'FilesTrash' request conforms to.
 type FilesTrashResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "trash" :>
-           QueryParam "alt" AltJSON :> Post '[JSON] File
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "trash" :>
+               QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Moves a file to the trash. The currently authenticated user must own the
 -- file.

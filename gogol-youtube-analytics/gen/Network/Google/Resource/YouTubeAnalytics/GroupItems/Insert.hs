@@ -43,10 +43,13 @@ import           Network.Google.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.groupItems.insert@ method which the
 -- 'GroupItemsInsert' request conforms to.
 type GroupItemsInsertResource =
-     "groupItems" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] GroupItem :> Post '[JSON] GroupItem
+     "youtube" :>
+       "analytics" :>
+         "v1" :>
+           "groupItems" :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] GroupItem :> Post '[JSON] GroupItem
 
 -- | Creates a group item.
 --

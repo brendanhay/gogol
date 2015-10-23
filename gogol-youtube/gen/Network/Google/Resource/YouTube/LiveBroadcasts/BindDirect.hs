@@ -49,16 +49,18 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveBroadcasts.bind_direct@ method which the
 -- 'LiveBroadcastsBindDirect' request conforms to.
 type LiveBroadcastsBindDirectResource =
-     "liveBroadcasts" :>
-       "bind" :>
-         "direct" :>
-           QueryParam "id" Text :>
-             QueryParam "part" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                   QueryParam "streamId" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Post '[JSON] LiveBroadcast
+     "youtube" :>
+       "v3" :>
+         "liveBroadcasts" :>
+           "bind" :>
+             "direct" :>
+               QueryParam "id" Text :>
+                 QueryParam "part" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "streamId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] LiveBroadcast
 
 -- | Binds a YouTube broadcast to a stream or removes an existing binding
 -- between a broadcast and a stream. A broadcast can only be bound to one

@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.children.delete@ method which the
 -- 'ChildrenDelete' request conforms to.
 type ChildrenDeleteResource =
-     "files" :>
-       Capture "folderId" Text :>
-         "children" :>
-           Capture "childId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "folderId" Text :>
+             "children" :>
+               Capture "childId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a child from a folder.
 --

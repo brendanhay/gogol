@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @dns.managedZones.list@ method which the
 -- 'ManagedZonesList' request conforms to.
 type ManagedZonesListResource =
-     Capture "project" Text :>
-       "managedZones" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "dnsName" Text :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ManagedZonesListResponse
+     "dns" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "dnsName" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ManagedZonesListResponse
 
 -- | Enumerate ManagedZones that have been created but not yet deleted.
 --

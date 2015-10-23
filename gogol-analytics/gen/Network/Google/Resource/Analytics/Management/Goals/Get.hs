@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.goals.get@ method which the
 -- 'ManagementGoalsGet' request conforms to.
 type ManagementGoalsGetResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "goals" :>
-                     Capture "goalId" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Goal
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "goals" :>
+                         Capture "goalId" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Goal
 
 -- | Gets a goal to which the user has access.
 --

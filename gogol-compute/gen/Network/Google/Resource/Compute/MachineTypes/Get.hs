@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.machineTypes.get@ method which the
 -- 'MachineTypesGet' request conforms to.
 type MachineTypesGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "machineTypes" :>
-             Capture "machineType" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] MachineType
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "machineTypes" :>
+                   Capture "machineType" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] MachineType
 
 -- | Returns the specified machine type resource.
 --

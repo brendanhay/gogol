@@ -72,7 +72,6 @@ latencyTestService :: Service
 latencyTestService
   = defaultService (ServiceId "cloudlatencytest:v2")
       "cloudlatencytest-pa.googleapis.com"
-      "v2/statscollection/"
 
 -- | View monitoring data for all of your Google Cloud and API projects
 monitoringReadonlyScope :: OAuthScope

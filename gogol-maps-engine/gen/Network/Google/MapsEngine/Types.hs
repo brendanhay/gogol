@@ -767,7 +767,6 @@ mapsEngineService :: Service
 mapsEngineService
   = defaultService (ServiceId "mapsengine:v1")
       "www.googleapis.com"
-      "mapsengine/v1/"
 
 -- | View and manage your Google My Maps data
 mapsengineScope :: OAuthScope

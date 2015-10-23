@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasks.patch@ method which the
 -- 'TasksPatch' request conforms to.
 type TasksPatchResource =
-     "lists" :>
-       Capture "tasklist" Text :>
-         "tasks" :>
-           Capture "task" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Task :> Patch '[JSON] Task
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Task :> Patch '[JSON] Task
 
 -- | Updates the specified task. This method supports patch semantics.
 --

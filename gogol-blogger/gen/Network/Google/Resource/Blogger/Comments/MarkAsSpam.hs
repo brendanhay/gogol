@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.comments.markAsSpam@ method which the
 -- 'CommentsMarkAsSpam' request conforms to.
 type CommentsMarkAsSpamResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "spam" :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Comment
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     "spam" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Marks a comment as spam.
 --

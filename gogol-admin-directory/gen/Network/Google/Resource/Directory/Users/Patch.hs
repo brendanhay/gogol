@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.patch@ method which the
 -- 'UsersPatch' request conforms to.
 type UsersPatchResource =
-     "users" :>
-       Capture "userKey" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] User :> Patch '[JSON] User
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] User :> Patch '[JSON] User
 
 -- | update user. This method supports patch semantics.
 --

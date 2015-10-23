@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.urlMaps.list@ method which the
 -- 'URLMapsList' request conforms to.
 type URLMapsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "urlMaps" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] URLMapList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "urlMaps" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] URLMapList
 
 -- | Retrieves the list of UrlMap resources available to the specified
 -- project.

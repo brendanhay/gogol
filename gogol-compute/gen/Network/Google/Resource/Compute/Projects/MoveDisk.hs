@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.projects.moveDisk@ method which the
 -- 'ProjectsMoveDisk' request conforms to.
 type ProjectsMoveDiskResource =
-     Capture "project" Text :>
-       "moveDisk" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] DiskMoveRequest :>
-             Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "moveDisk" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] DiskMoveRequest :>
+                   Post '[JSON] Operation
 
 -- | Moves a persistent disk from one zone to another.
 --

@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.drafts.get@ method which the
 -- 'UsersDraftsGet' request conforms to.
 type UsersDraftsGetResource =
-     Capture "userId" Text :>
-       "drafts" :>
-         Capture "id" Text :>
-           QueryParam "format" UsersDraftsGetFormat :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Draft
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               Capture "id" Text :>
+                 QueryParam "format" UsersDraftsGetFormat :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Draft
 
 -- | Gets the specified draft.
 --

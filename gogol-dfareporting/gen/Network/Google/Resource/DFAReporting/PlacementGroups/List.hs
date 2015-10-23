@@ -61,38 +61,43 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.placementGroups.list@ method which the
 -- 'PlacementGroupsList' request conforms to.
 type PlacementGroupsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "placementGroups" :>
-           QueryParams "placementStrategyIds" Int64 :>
-             QueryParams "contentCategoryIds" Int64 :>
-               QueryParam "maxEndDate" Text :>
-                 QueryParams "campaignIds" Int64 :>
-                   QueryParams "pricingTypes"
-                     PlacementGroupsListPricingTypes
-                     :>
-                     QueryParam "searchString" Text :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "placementGroupType"
-                           PlacementGroupsListPlacementGroupType
-                           :>
-                           QueryParams "directorySiteIds" Int64 :>
-                             QueryParam "sortOrder" PlacementGroupsListSortOrder
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementGroups" :>
+               QueryParams "placementStrategyIds" Int64 :>
+                 QueryParams "contentCategoryIds" Int64 :>
+                   QueryParam "maxEndDate" Text :>
+                     QueryParams "campaignIds" Int64 :>
+                       QueryParams "pricingTypes"
+                         PlacementGroupsListPricingTypes
+                         :>
+                         QueryParam "searchString" Text :>
+                           QueryParams "ids" Int64 :>
+                             QueryParam "placementGroupType"
+                               PlacementGroupsListPlacementGroupType
                                :>
-                               QueryParams "siteIds" Int64 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField"
-                                     PlacementGroupsListSortField
-                                     :>
-                                     QueryParam "maxStartDate" Text :>
-                                       QueryParams "advertiserIds" Int64 :>
-                                         QueryParam "minStartDate" Text :>
-                                           QueryParam "archived" Bool :>
-                                             QueryParam "maxResults" Int32 :>
-                                               QueryParam "minEndDate" Text :>
-                                                 QueryParam "alt" AltJSON :>
-                                                   Get '[JSON]
-                                                     PlacementGroupsListResponse
+                               QueryParams "directorySiteIds" Int64 :>
+                                 QueryParam "sortOrder"
+                                   PlacementGroupsListSortOrder
+                                   :>
+                                   QueryParams "siteIds" Int64 :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "sortField"
+                                         PlacementGroupsListSortField
+                                         :>
+                                         QueryParam "maxStartDate" Text :>
+                                           QueryParams "advertiserIds" Int64 :>
+                                             QueryParam "minStartDate" Text :>
+                                               QueryParam "archived" Bool :>
+                                                 QueryParam "maxResults" Int32
+                                                   :>
+                                                   QueryParam "minEndDate" Text
+                                                     :>
+                                                     QueryParam "alt" AltJSON :>
+                                                       Get '[JSON]
+                                                         PlacementGroupsListResponse
 
 -- | Retrieves a list of placement groups, possibly filtered.
 --

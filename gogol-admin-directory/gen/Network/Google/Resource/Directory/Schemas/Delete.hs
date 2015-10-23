@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.schemas.delete@ method which the
 -- 'SchemasDelete' request conforms to.
 type SchemasDeleteResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "schemas" :>
-           Capture "schemaKey" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "schemas" :>
+                 Capture "schemaKey" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete schema
 --

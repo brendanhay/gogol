@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- 'ManagementWebPropertyAdWordsLinksDelete' request conforms to.
 type ManagementWebPropertyAdWordsLinksDeleteResource
      =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityAdWordsLinks" :>
-                 Capture "webPropertyAdWordsLinkId" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     Capture "webPropertyAdWordsLinkId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a web property-AdWords link.
 --

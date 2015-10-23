@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.undelete@ method which the
 -- 'UsersUndelete' request conforms to.
 type UsersUndeleteResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "undelete" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] UserUndelete :> Post '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "undelete" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] UserUndelete :> Post '[JSON] ()
 
 -- | Undelete a deleted user
 --

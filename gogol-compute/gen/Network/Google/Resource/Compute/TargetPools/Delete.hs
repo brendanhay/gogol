@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.delete@ method which the
 -- 'TargetPoolsDelete' request conforms to.
 type TargetPoolsDeleteResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             Capture "targetPool" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   Capture "targetPool" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetPool resource.
 --

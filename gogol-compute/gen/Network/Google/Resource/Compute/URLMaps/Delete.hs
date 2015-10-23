@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.urlMaps.delete@ method which the
 -- 'URLMapsDelete' request conforms to.
 type URLMapsDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "urlMaps" :>
-           Capture "urlMap" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "urlMaps" :>
+                 Capture "urlMap" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified UrlMap resource.
 --

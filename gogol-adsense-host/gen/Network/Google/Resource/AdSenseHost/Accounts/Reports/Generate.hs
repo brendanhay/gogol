@@ -53,19 +53,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.accounts.reports.generate@ method which the
 -- 'AccountsReportsGenerate' request conforms to.
 type AccountsReportsGenerateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "reports" :>
-           QueryParam "startDate" Text :>
-             QueryParam "endDate" Text :>
-               QueryParams "dimension" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParams "metric" Text :>
-                     QueryParams "sort" Text :>
-                       QueryParams "filter" Text :>
-                         QueryParam "startIndex" Word32 :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Report
+     "adsensehost" :>
+       "v4.1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               QueryParam "startDate" Text :>
+                 QueryParam "endDate" Text :>
+                   QueryParams "dimension" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParams "metric" Text :>
+                         QueryParams "sort" Text :>
+                           QueryParams "filter" Text :>
+                             QueryParam "startIndex" Word32 :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Generate an AdSense report based on the report request sent in the query
 -- parameters. Returns the result as JSON; to retrieve output in CSV format

@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.datasets.list@ method which the
 -- 'DataSetsList' request conforms to.
 type DataSetsListResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           QueryParam "all" Bool :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] DataSetList
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               QueryParam "all" Bool :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] DataSetList
 
 -- | Lists all datasets in the specified project to which you have been
 -- granted the READER dataset role.

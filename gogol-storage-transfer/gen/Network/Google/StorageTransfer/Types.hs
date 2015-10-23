@@ -226,7 +226,6 @@ storageTransferService :: Service
 storageTransferService
   = defaultService (ServiceId "storagetransfer:v1")
       "storagetransfer.googleapis.com"
-      ""
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope

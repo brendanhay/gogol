@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.inappproducts.delete@ method which the
 -- 'InAppProductsDelete' request conforms to.
 type InAppProductsDeleteResource =
-     Capture "packageName" Text :>
-       "inappproducts" :>
-         Capture "sku" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "inappproducts" :>
+               Capture "sku" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an in-app product for an app.
 --

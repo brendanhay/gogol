@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.groups.list@ method which the
 -- 'GroupsList' request conforms to.
 type GroupsListResource =
-     "groups" :>
-       QueryParam "domain" Text :>
-         QueryParam "customer" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "userKey" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Groups
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             QueryParam "domain" Text :>
+               QueryParam "customer" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "userKey" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Groups
 
 -- | Retrieve all groups in a domain (paginated)
 --

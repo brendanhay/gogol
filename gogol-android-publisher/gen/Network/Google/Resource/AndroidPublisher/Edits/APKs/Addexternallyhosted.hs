@@ -47,14 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.apks.addexternallyhosted@ method which the
 -- 'EditsAPKsAddexternallyhosted' request conforms to.
 type EditsAPKsAddexternallyhostedResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             "externallyHosted" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] APKsAddExternallyHostedRequest :>
-                   Post '[JSON] APKsAddExternallyHostedResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   "externallyHosted" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] APKsAddExternallyHostedRequest :>
+                         Post '[JSON] APKsAddExternallyHostedResponse
 
 -- | Creates a new APK without uploading the APK itself to Google Play,
 -- instead hosting the APK at a specified URL. This function is only

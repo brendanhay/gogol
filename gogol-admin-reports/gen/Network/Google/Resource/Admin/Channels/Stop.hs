@@ -43,11 +43,14 @@ import           Network.Google.Reports.Types
 -- 'ChannelsStop' request conforms to.
 type ChannelsStopResource =
      "admin" :>
-       "reports_v1" :>
-         "channels" :>
-           "stop" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Channel :> Post '[JSON] ()
+       "reports" :>
+         "v1" :>
+           "admin" :>
+             "reports_v1" :>
+               "channels" :>
+                 "stop" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Channel :> Post '[JSON] ()
 
 -- | Stop watching resources through this channel
 --

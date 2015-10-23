@@ -1257,7 +1257,6 @@ shoppingContentService :: Service
 shoppingContentService
   = defaultService (ServiceId "content:v2")
       "www.googleapis.com"
-      "content/v2/"
 
 -- | Manage your product listings and accounts for Google Shopping
 contentScope :: OAuthScope

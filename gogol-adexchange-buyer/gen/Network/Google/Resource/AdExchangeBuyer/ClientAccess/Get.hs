@@ -41,11 +41,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.clientaccess.get@ method which the
 -- 'ClientAccessGet' request conforms to.
 type ClientAccessGetResource =
-     "clientAccess" :>
-       Capture "clientAccountId" Int64 :>
-         QueryParam "sponsorAccountId" Int32 :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] ClientAccessCapabilities
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           Capture "clientAccountId" Int64 :>
+             QueryParam "sponsorAccountId" Int32 :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ClientAccessCapabilities
 
 --
 -- /See:/ 'clientAccessGet' smart constructor.

@@ -48,18 +48,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.mobiledevices.list@ method which the
 -- 'MobileDevicesList' request conforms to.
 type MobileDevicesListResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "devices" :>
-           "mobile" :>
-             QueryParam "orderBy" MobileDevicesListOrderBy :>
-               QueryParam "sortOrder" MobileDevicesListSortOrder :>
-                 QueryParam "query" Text :>
-                   QueryParam "projection" MobileDevicesListProjection
-                     :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] MobileDevices
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "devices" :>
+                 "mobile" :>
+                   QueryParam "orderBy" MobileDevicesListOrderBy :>
+                     QueryParam "sortOrder" MobileDevicesListSortOrder :>
+                       QueryParam "query" Text :>
+                         QueryParam "projection" MobileDevicesListProjection
+                           :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] MobileDevices
 
 -- | Retrieve all Mobile Devices of a customer (paginated)
 --

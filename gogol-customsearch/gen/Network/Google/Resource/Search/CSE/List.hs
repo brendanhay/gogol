@@ -74,69 +74,72 @@ import           Network.Google.Prelude
 -- | A resource alias for @search.cse.list@ method which the
 -- 'CSEList' request conforms to.
 type CSEListResource =
-     "v1" :>
-       QueryParam "q" Text :>
-         QueryParam "imgDominantColor" CSEListImgDominantColor
-           :>
-           QueryParam "siteSearchFilter" CSEListSiteSearchFilter
+     "customsearch" :>
+       "v1" :>
+         QueryParam "q" Text :>
+           QueryParam "imgDominantColor" CSEListImgDominantColor
              :>
-             QueryParam "c2coff" Text :>
-               QueryParam "orTerms" Text :>
-                 QueryParam "start" Word32 :>
-                   QueryParam "rights" Text :>
-                     QueryParam "excludeTerms" Text :>
-                       QueryParam "num" Word32 :>
-                         QueryParam "fileType" Text :>
-                           QueryParam "searchType" CSEListSearchType :>
-                             QueryParam "lr" CSEListLr :>
-                               QueryParam "googlehost" Text :>
-                                 QueryParam "relatedSite" Text :>
-                                   QueryParam "hl" Text :>
-                                     QueryParam "cref" Text :>
-                                       QueryParam "sort" Text :>
-                                         QueryParam "siteSearch" Text :>
-                                           QueryParam "filter" CSEListFilter :>
-                                             QueryParam "dateRestrict" Text :>
-                                               QueryParam "linkSite" Text :>
-                                                 QueryParam "lowRange" Text :>
-                                                   QueryParam "imgType"
-                                                     CSEListImgType
-                                                     :>
-                                                     QueryParam "gl" Text :>
-                                                       QueryParam "cx" Text :>
-                                                         QueryParam
-                                                           "imgColorType"
-                                                           CSEListImgColorType
-                                                           :>
-                                                           QueryParam "imgSize"
-                                                             CSEListImgSize
+             QueryParam "siteSearchFilter" CSEListSiteSearchFilter
+               :>
+               QueryParam "c2coff" Text :>
+                 QueryParam "orTerms" Text :>
+                   QueryParam "start" Word32 :>
+                     QueryParam "rights" Text :>
+                       QueryParam "excludeTerms" Text :>
+                         QueryParam "num" Word32 :>
+                           QueryParam "fileType" Text :>
+                             QueryParam "searchType" CSEListSearchType :>
+                               QueryParam "lr" CSEListLr :>
+                                 QueryParam "googlehost" Text :>
+                                   QueryParam "relatedSite" Text :>
+                                     QueryParam "hl" Text :>
+                                       QueryParam "cref" Text :>
+                                         QueryParam "sort" Text :>
+                                           QueryParam "siteSearch" Text :>
+                                             QueryParam "filter" CSEListFilter
+                                               :>
+                                               QueryParam "dateRestrict" Text :>
+                                                 QueryParam "linkSite" Text :>
+                                                   QueryParam "lowRange" Text :>
+                                                     QueryParam "imgType"
+                                                       CSEListImgType
+                                                       :>
+                                                       QueryParam "gl" Text :>
+                                                         QueryParam "cx" Text :>
+                                                           QueryParam
+                                                             "imgColorType"
+                                                             CSEListImgColorType
                                                              :>
                                                              QueryParam
-                                                               "exactTerms"
-                                                               Text
+                                                               "imgSize"
+                                                               CSEListImgSize
                                                                :>
-                                                               QueryParam "cr"
+                                                               QueryParam
+                                                                 "exactTerms"
                                                                  Text
                                                                  :>
-                                                                 QueryParam
-                                                                   "safe"
-                                                                   CSEListSafe
+                                                                 QueryParam "cr"
+                                                                   Text
                                                                    :>
                                                                    QueryParam
-                                                                     "hq"
-                                                                     Text
+                                                                     "safe"
+                                                                     CSEListSafe
                                                                      :>
                                                                      QueryParam
-                                                                       "highRange"
+                                                                       "hq"
                                                                        Text
                                                                        :>
                                                                        QueryParam
-                                                                         "alt"
-                                                                         AltJSON
+                                                                         "highRange"
+                                                                         Text
                                                                          :>
-                                                                         Get
-                                                                           '[JSON]
-                                                                           Search
+                                                                         QueryParam
+                                                                           "alt"
+                                                                           AltJSON
+                                                                           :>
+                                                                           Get
+                                                                             '[JSON]
+                                                                             Search
 
 -- | Returns metadata about the search performed, metadata about the custom
 -- search engine used for the search, and the search results.

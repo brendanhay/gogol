@@ -44,12 +44,14 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.permissions.update@ method which the
 -- 'AccountsPermissionsUpdate' request conforms to.
 type AccountsPermissionsUpdateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "permissions" :>
-           Capture "permissionId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] UserAccess :> Put '[JSON] UserAccess
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] UserAccess :> Put '[JSON] UserAccess
 
 -- | Updates a user\'s Account & Container Permissions.
 --

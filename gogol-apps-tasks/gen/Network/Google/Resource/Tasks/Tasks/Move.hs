@@ -47,14 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasks.move@ method which the
 -- 'TasksMove' request conforms to.
 type TasksMoveResource =
-     "lists" :>
-       Capture "tasklist" Text :>
-         "tasks" :>
-           Capture "task" Text :>
-             "move" :>
-               QueryParam "parent" Text :>
-                 QueryParam "previous" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Task
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 "move" :>
+                   QueryParam "parent" Text :>
+                     QueryParam "previous" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Task
 
 -- | Moves the specified task to another position in the task list. This can
 -- include putting it as a child task under a new parent and\/or move it to

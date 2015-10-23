@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetHttpsProxies.delete@ method which the
 -- 'TargetHTTPSProxiesDelete' request conforms to.
 type TargetHTTPSProxiesDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "targetHttpsProxies" :>
-           Capture "targetHttpsProxy" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "targetHttpsProxies" :>
+                 Capture "targetHttpsProxy" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetHttpsProxy resource.
 --

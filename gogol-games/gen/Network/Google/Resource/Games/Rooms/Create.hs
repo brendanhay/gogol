@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.rooms.create@ method which the
 -- 'RoomsCreate' request conforms to.
 type RoomsCreateResource =
-     "rooms" :>
-       "create" :>
-         QueryParam "language" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] RoomCreateRequest :>
-               Post '[JSON] Room
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           "create" :>
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] RoomCreateRequest :>
+                   Post '[JSON] Room
 
 -- | Create a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.

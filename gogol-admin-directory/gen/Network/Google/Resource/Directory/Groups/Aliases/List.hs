@@ -42,10 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.groups.aliases.list@ method which the
 -- 'GroupsAliasesList' request conforms to.
 type GroupsAliasesListResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         "aliases" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Aliases
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               "aliases" :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Aliases
 
 -- | List all aliases for a group
 --

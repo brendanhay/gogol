@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.backendServices.list@ method which the
 -- 'BackendServicesList' request conforms to.
 type BackendServicesListResource =
-     Capture "project" Text :>
-       "global" :>
-         "backendServices" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] BackendServiceList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "backendServices" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] BackendServiceList
 
 -- | Retrieves the list of BackendService resources available to the
 -- specified project.

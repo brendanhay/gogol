@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.maps.getPublished@ method which the
 -- 'MapsGetPublished' request conforms to.
 type MapsGetPublishedResource =
-     "maps" :>
-       Capture "id" Text :>
-         "published" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] PublishedMap
+     "mapsengine" :>
+       "v1" :>
+         "maps" :>
+           Capture "id" Text :>
+             "published" :>
+               QueryParam "alt" AltJSON :> Get '[JSON] PublishedMap
 
 -- | Return the published metadata for a particular map.
 --

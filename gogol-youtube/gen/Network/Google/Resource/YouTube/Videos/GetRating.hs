@@ -44,12 +44,14 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.videos.getRating@ method which the
 -- 'VideosGetRating' request conforms to.
 type VideosGetRatingResource =
-     "videos" :>
-       "getRating" :>
-         QueryParam "id" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] VideoGetRatingResponse
+     "youtube" :>
+       "v3" :>
+         "videos" :>
+           "getRating" :>
+             QueryParam "id" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] VideoGetRatingResponse
 
 -- | Retrieves the ratings that the authorized user gave to a list of
 -- specified videos.

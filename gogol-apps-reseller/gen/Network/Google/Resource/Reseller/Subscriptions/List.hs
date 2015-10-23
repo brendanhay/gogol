@@ -47,13 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.list@ method which the
 -- 'SubscriptionsList' request conforms to.
 type SubscriptionsListResource =
-     "subscriptions" :>
-       QueryParam "customerNamePrefix" Text :>
-         QueryParam "customerId" Text :>
-           QueryParam "customerAuthToken" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Subscriptions
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "subscriptions" :>
+             QueryParam "customerNamePrefix" Text :>
+               QueryParam "customerId" Text :>
+                 QueryParam "customerAuthToken" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Subscriptions
 
 -- | Lists subscriptions of a reseller, optionally filtered by a customer
 -- name prefix.

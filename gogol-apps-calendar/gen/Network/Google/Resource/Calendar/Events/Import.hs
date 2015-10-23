@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.import@ method which the
 -- 'EventsImport' request conforms to.
 type EventsImportResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           "import" :>
-             QueryParam "supportsAttachments" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Event :> Post '[JSON] Event
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               "import" :>
+                 QueryParam "supportsAttachments" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Event :> Post '[JSON] Event
 
 -- | Imports an event. This operation is used to add a private copy of an
 -- existing event to a calendar.

@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.experiments.delete@ method which the
 -- 'ManagementExperimentsDelete' request conforms to.
 type ManagementExperimentsDeleteResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "experiments" :>
-                     Capture "experimentId" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         Capture "experimentId" Text :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an experiment.
 --

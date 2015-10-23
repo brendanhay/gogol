@@ -45,11 +45,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @appstate.states.clear@ method which the
 -- 'StatesClear' request conforms to.
 type StatesClearResource =
-     "states" :>
-       Capture "stateKey" Int32 :>
-         "clear" :>
-           QueryParam "currentDataVersion" Text :>
-             QueryParam "alt" AltJSON :> Post '[JSON] WriteResult
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           Capture "stateKey" Int32 :>
+             "clear" :>
+               QueryParam "currentDataVersion" Text :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] WriteResult
 
 -- | Clears (sets to empty) the data for the passed key if and only if the
 -- passed version matches the currently stored version. This method results

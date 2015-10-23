@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.machineTypes.list@ method which the
 -- 'MachineTypesList' request conforms to.
 type MachineTypesListResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "machineTypes" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] MachineTypeList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "machineTypes" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] MachineTypeList
 
 -- | Retrieves the list of machine type resources available to the specified
 -- project.

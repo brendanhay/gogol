@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetVpnGateways.get@ method which the
 -- 'TargetVPNGatewaysGet' request conforms to.
 type TargetVPNGatewaysGetResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetVpnGateways" :>
-             Capture "targetVpnGateway" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] TargetVPNGateway
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetVpnGateways" :>
+                   Capture "targetVpnGateway" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] TargetVPNGateway
 
 -- | Returns the specified TargetVpnGateway resource.
 --

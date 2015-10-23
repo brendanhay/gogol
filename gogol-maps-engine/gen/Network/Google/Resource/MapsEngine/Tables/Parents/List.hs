@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.parents.list@ method which the
 -- 'TablesParentsList' request conforms to.
 type TablesParentsListResource =
-     "tables" :>
-       Capture "id" Text :>
-         "parents" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ParentsListResponse
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "id" Text :>
+             "parents" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ParentsListResponse
 
 -- | Return all parent ids of the specified table.
 --

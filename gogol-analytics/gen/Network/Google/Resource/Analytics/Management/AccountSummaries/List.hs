@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.accountSummaries.list@ method which the
 -- 'ManagementAccountSummariesList' request conforms to.
 type ManagementAccountSummariesListResource =
-     "management" :>
-       "accountSummaries" :>
-         QueryParam "start-index" Int32 :>
-           QueryParam "max-results" Int32 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] AccountSummaries
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accountSummaries" :>
+             QueryParam "start-index" Int32 :>
+               QueryParam "max-results" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AccountSummaries
 
 -- | Lists account summaries (lightweight tree comprised of
 -- accounts\/properties\/profiles) to which the user has access.

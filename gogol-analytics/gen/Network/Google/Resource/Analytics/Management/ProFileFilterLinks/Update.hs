@@ -46,18 +46,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profileFilterLinks.update@ method which the
 -- 'ManagementProFileFilterLinksUpdate' request conforms to.
 type ManagementProFileFilterLinksUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "profileFilterLinks" :>
-                     Capture "linkId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ProFileFilterLink :>
-                           Put '[JSON] ProFileFilterLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] ProFileFilterLink :>
+                               Put '[JSON] ProFileFilterLink
 
 -- | Update an existing profile filter link.
 --

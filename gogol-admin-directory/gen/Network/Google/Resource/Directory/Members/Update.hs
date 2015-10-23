@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.members.update@ method which the
 -- 'MembersUpdate' request conforms to.
 type MembersUpdateResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         "members" :>
-           Capture "memberKey" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Member :> Put '[JSON] Member
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               "members" :>
+                 Capture "memberKey" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Member :> Put '[JSON] Member
 
 -- | Update membership of a user in the specified group.
 --

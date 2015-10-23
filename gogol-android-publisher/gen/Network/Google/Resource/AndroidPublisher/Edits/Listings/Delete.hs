@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.listings.delete@ method which the
 -- 'EditsListingsDelete' request conforms to.
 type EditsListingsDeleteResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "listings" :>
-             Capture "language" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "listings" :>
+                   Capture "language" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified localized store listing from an edit.
 --

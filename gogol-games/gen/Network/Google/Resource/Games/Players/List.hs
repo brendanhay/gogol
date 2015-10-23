@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.players.list@ method which the
 -- 'PlayersList' request conforms to.
 type PlayersListResource =
-     "players" :>
-       "me" :>
+     "games" :>
+       "v1" :>
          "players" :>
-           Capture "collection" PlayersListCollection :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] PlayerListResponse
+           "me" :>
+             "players" :>
+               Capture "collection" PlayersListCollection :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] PlayerListResponse
 
 -- | Get the collection of players for the currently authenticated user.
 --

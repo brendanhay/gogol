@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.aliases.list@ method which the
 -- 'UsersAliasesList' request conforms to.
 type UsersAliasesListResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "aliases" :>
-           QueryParam "event" UsersAliasesListEvent :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Aliases
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "aliases" :>
+                 QueryParam "event" UsersAliasesListEvent :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Aliases
 
 -- | List all aliases for a user
 --

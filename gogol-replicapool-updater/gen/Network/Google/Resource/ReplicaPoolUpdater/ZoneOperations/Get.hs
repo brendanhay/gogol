@@ -44,12 +44,15 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.zoneOperations.get@ method which the
 -- 'ZoneOperationsGet' request conforms to.
 type ZoneOperationsGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "operations" :>
-             Capture "operation" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Operation
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "operations" :>
+                   Capture "operation" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified zone-specific operation resource.
 --

@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.get@ method which the
 -- 'UsersMessagesGet' request conforms to.
 type UsersMessagesGetResource =
-     Capture "userId" Text :>
-       "messages" :>
-         Capture "id" Text :>
-           QueryParam "format" UsersMessagesGetFormat :>
-             QueryParams "metadataHeaders" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Message
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               Capture "id" Text :>
+                 QueryParam "format" UsersMessagesGetFormat :>
+                   QueryParams "metadataHeaders" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Message
 
 -- | Gets the specified message.
 --

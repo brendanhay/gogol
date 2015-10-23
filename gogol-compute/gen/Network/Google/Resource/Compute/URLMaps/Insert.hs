@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.urlMaps.insert@ method which the
 -- 'URLMapsInsert' request conforms to.
 type URLMapsInsertResource =
-     Capture "project" Text :>
-       "global" :>
-         "urlMaps" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] URLMap :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "urlMaps" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] URLMap :> Post '[JSON] Operation
 
 -- | Creates a UrlMap resource in the specified project using the data
 -- included in the request.

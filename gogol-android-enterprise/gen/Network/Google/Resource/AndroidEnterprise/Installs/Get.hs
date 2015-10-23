@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.installs.get@ method which the
 -- 'InstallsGet' request conforms to.
 type InstallsGetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "devices" :>
-               Capture "deviceId" Text :>
-                 "installs" :>
-                   Capture "installId" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Install
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "devices" :>
+                   Capture "deviceId" Text :>
+                     "installs" :>
+                       Capture "installId" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Install
 
 -- | Retrieves details of an installation of an app on a device.
 --

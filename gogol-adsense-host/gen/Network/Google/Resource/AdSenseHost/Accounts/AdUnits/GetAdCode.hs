@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.accounts.adunits.getAdCode@ method which the
 -- 'AccountsAdUnitsGetAdCode' request conforms to.
 type AccountsAdUnitsGetAdCodeResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               Capture "adUnitId" Text :>
-                 "adcode" :>
-                   QueryParams "hostCustomChannelId" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] AdCode
+     "adsensehost" :>
+       "v4.1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   Capture "adUnitId" Text :>
+                     "adcode" :>
+                       QueryParams "hostCustomChannelId" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] AdCode
 
 -- | Get ad code for the specified ad unit, attaching the specified host
 -- custom channels.

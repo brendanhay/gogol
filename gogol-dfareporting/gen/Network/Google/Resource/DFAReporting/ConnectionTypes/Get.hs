@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.connectionTypes.get@ method which the
 -- 'ConnectionTypesGet' request conforms to.
 type ConnectionTypesGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "connectionTypes" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] ConnectionType
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "connectionTypes" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] ConnectionType
 
 -- | Gets one connection type by ID.
 --

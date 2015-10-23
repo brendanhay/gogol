@@ -45,12 +45,14 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.playlists.insert@ method which the
 -- 'PlayListsInsert' request conforms to.
 type PlayListsInsertResource =
-     "playlists" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] PlayList :> Post '[JSON] PlayList
+     "youtube" :>
+       "v3" :>
+         "playlists" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] PlayList :> Post '[JSON] PlayList
 
 -- | Creates a playlist.
 --

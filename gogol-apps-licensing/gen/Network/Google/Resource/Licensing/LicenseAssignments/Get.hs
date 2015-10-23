@@ -44,13 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @licensing.licenseAssignments.get@ method which the
 -- 'LicenseAssignmentsGet' request conforms to.
 type LicenseAssignmentsGetResource =
-     Capture "productId" Text :>
-       "sku" :>
-         Capture "skuId" Text :>
-           "user" :>
-             Capture "userId" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] LicenseAssignment
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     Capture "userId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] LicenseAssignment
 
 -- | Get license assignment of a particular product and sku for a user
 --

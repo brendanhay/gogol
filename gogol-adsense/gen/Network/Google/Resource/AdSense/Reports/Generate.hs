@@ -55,37 +55,41 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.reports.generate@ method which the
 -- 'ReportsGenerate' request conforms to.
 type ReportsGenerateResource =
-     "reports" :>
-       QueryParam "startDate" Text :>
-         QueryParam "endDate" Text :>
-           QueryParams "dimension" Text :>
-             QueryParam "locale" Text :>
-               QueryParams "accountId" Text :>
-                 QueryParams "metric" Text :>
-                   QueryParam "currency" Text :>
-                     QueryParams "sort" Text :>
-                       QueryParams "filter" Text :>
-                         QueryParam "startIndex" Int32 :>
-                           QueryParam "useTimezoneReporting" Bool :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] AdsenseReportsGenerateResponse
+     "adsense" :>
+       "v1.4" :>
+         "reports" :>
+           QueryParam "startDate" Text :>
+             QueryParam "endDate" Text :>
+               QueryParams "dimension" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParams "accountId" Text :>
+                     QueryParams "metric" Text :>
+                       QueryParam "currency" Text :>
+                         QueryParams "sort" Text :>
+                           QueryParams "filter" Text :>
+                             QueryParam "startIndex" Int32 :>
+                               QueryParam "useTimezoneReporting" Bool :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] AdsenseReportsGenerateResponse
        :<|>
-       "reports" :>
-         QueryParam "startDate" Text :>
-           QueryParam "endDate" Text :>
-             QueryParams "dimension" Text :>
-               QueryParam "locale" Text :>
-                 QueryParams "accountId" Text :>
-                   QueryParams "metric" Text :>
-                     QueryParam "currency" Text :>
-                       QueryParams "sort" Text :>
-                         QueryParams "filter" Text :>
-                           QueryParam "startIndex" Int32 :>
-                             QueryParam "useTimezoneReporting" Bool :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "alt" AltMedia :>
-                                   Get '[OctetStream] Stream
+       "adsense" :>
+         "v1.4" :>
+           "reports" :>
+             QueryParam "startDate" Text :>
+               QueryParam "endDate" Text :>
+                 QueryParams "dimension" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParams "accountId" Text :>
+                       QueryParams "metric" Text :>
+                         QueryParam "currency" Text :>
+                           QueryParams "sort" Text :>
+                             QueryParams "filter" Text :>
+                               QueryParam "startIndex" Int32 :>
+                                 QueryParam "useTimezoneReporting" Bool :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "alt" AltMedia :>
+                                       Get '[OctetStream] Stream
 
 -- | Generate an AdSense report based on the report request sent in the query
 -- parameters. Returns the result as JSON; to retrieve output in CSV format

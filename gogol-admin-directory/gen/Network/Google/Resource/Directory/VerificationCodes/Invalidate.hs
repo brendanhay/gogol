@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.verificationCodes.invalidate@ method which the
 -- 'VerificationCodesInvalidate' request conforms to.
 type VerificationCodesInvalidateResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "verificationCodes" :>
-           "invalidate" :>
-             QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "verificationCodes" :>
+                 "invalidate" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Invalidate the current backup verification codes for the user.
 --

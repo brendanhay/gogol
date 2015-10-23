@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.types.list@ method which the
 -- 'TypesList' request conforms to.
 type TypesListResource =
-     Capture "project" Text :>
-       "global" :>
-         "types" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] TypesListResponse
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "types" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] TypesListResponse
 
 -- | Lists all resource types for Deployment Manager.
 --

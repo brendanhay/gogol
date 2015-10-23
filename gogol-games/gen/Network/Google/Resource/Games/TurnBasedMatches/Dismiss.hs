@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.dismiss@ method which the
 -- 'TurnBasedMatchesDismiss' request conforms to.
 type TurnBasedMatchesDismissResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         "dismiss" :>
-           QueryParam "alt" AltJSON :> Put '[JSON] ()
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "dismiss" :>
+               QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Dismiss a turn-based match from the match list. The match will no longer
 -- show up in the list and will not generate notifications.

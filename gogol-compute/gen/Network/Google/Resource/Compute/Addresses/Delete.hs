@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.addresses.delete@ method which the
 -- 'AddressesDelete' request conforms to.
 type AddressesDeleteResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "addresses" :>
-             Capture "address" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "addresses" :>
+                   Capture "address" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified address resource.
 --

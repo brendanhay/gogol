@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.accounts.customchannels.list@ method which the
 -- 'AccountsCustomChannelsList' request conforms to.
 type AccountsCustomChannelsListResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "customchannels" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] CustomChannels
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "customchannels" :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] CustomChannels
 
 -- | List all custom channels in the specified ad client for the specified
 -- account.

@@ -47,14 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.disks.list@ method which the
 -- 'DisksList' request conforms to.
 type DisksListResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "disks" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] DiskList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "disks" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] DiskList
 
 -- | Retrieves the list of persistent disks contained within the specified
 -- zone.

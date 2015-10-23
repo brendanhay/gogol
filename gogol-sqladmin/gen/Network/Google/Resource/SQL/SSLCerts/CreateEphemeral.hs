@@ -47,14 +47,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.sslCerts.createEphemeral@ method which the
 -- 'SSLCertsCreateEphemeral' request conforms to.
 type SSLCertsCreateEphemeralResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "createEphemeral" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] SSLCertsCreateEphemeralRequest :>
-                   Post '[JSON] SSLCert
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "createEphemeral" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] SSLCertsCreateEphemeralRequest :>
+                       Post '[JSON] SSLCert
 
 -- | Generates a short-lived X509 certificate containing the provided public
 -- key and signed by a private key specific to the target instance. Users

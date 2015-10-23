@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.customers.get@ method which the
 -- 'CustomersGet' request conforms to.
 type CustomersGetResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Customer
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Customer
 
 -- | Gets a customer resource if one exists and is owned by the reseller.
 --

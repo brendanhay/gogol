@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.backendServices.get@ method which the
 -- 'BackendServicesGet' request conforms to.
 type BackendServicesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "backendServices" :>
-           Capture "backendService" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] BackendService
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "backendServices" :>
+                 Capture "backendService" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] BackendService
 
 -- | Returns the specified BackendService resource.
 --

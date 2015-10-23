@@ -174,7 +174,6 @@ playMoviesPartnerService :: Service
 playMoviesPartnerService
   = defaultService (ServiceId "playmoviespartner:v1")
       "playmoviespartner.googleapis.com"
-      ""
 
 -- | View the digital assets you publish on Google Play Movies and TV
 playmoviesPartnerReadonlyScope :: OAuthScope

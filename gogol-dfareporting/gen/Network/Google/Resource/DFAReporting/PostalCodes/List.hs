@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.postalCodes.list@ method which the
 -- 'PostalCodesList' request conforms to.
 type PostalCodesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "postalCodes" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] PostalCodesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "postalCodes" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PostalCodesListResponse
 
 -- | Retrieves a list of postal codes.
 --

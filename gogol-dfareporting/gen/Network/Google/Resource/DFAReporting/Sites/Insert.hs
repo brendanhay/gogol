@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.sites.insert@ method which the
 -- 'SitesInsert' request conforms to.
 type SitesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "sites" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Site :> Post '[JSON] Site
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Site :> Post '[JSON] Site
 
 -- | Inserts a new site.
 --

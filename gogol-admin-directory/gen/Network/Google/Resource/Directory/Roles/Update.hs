@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roles.update@ method which the
 -- 'RolesUpdate' request conforms to.
 type RolesUpdateResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roles" :>
-           Capture "roleId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Role :> Put '[JSON] Role
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roles" :>
+                 Capture "roleId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Role :> Put '[JSON] Role
 
 -- | Updates a role.
 --

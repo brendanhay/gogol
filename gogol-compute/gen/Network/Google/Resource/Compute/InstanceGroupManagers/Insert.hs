@@ -50,13 +50,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.insert@ method which the
 -- 'InstanceGroupManagersInsert' request conforms to.
 type InstanceGroupManagersInsertResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] InstanceGroupManager :>
-                 Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] InstanceGroupManager :>
+                       Post '[JSON] Operation
 
 -- | Creates a managed instance group using the information that you specify
 -- in the request. After the group is created, it schedules an action to

@@ -47,15 +47,17 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.comments.list@ method which the
 -- 'CommentsList' request conforms to.
 type CommentsListResource =
-     "comments" :>
-       QueryParam "part" Text :>
-         QueryParam "id" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "textFormat" CommentsListTextFormat :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "parentId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] CommentListResponse
+     "youtube" :>
+       "v3" :>
+         "comments" :>
+           QueryParam "part" Text :>
+             QueryParam "id" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "textFormat" CommentsListTextFormat :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "parentId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] CommentListResponse
 
 -- | Returns a list of comments that match the API request parameters.
 --

@@ -46,11 +46,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.budget.patch@ method which the
 -- 'BudgetPatch' request conforms to.
 type BudgetPatchResource =
-     "billinginfo" :>
-       Capture "accountId" Int64 :>
-         Capture "billingId" Int64 :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Budget :> Patch '[JSON] Budget
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "billinginfo" :>
+           Capture "accountId" Int64 :>
+             Capture "billingId" Int64 :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Budget :> Patch '[JSON] Budget
 
 -- | Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request. This

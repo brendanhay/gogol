@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclicksearch.conversion.updateAvailability@ method which the
 -- 'ConversionUpdateAvailability' request conforms to.
 type ConversionUpdateAvailabilityResource =
-     "conversion" :>
-       "updateAvailability" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] UpdateAvailabilityRequest :>
-             Post '[JSON] UpdateAvailabilityResponse
+     "doubleclicksearch" :>
+       "v2" :>
+         "conversion" :>
+           "updateAvailability" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] UpdateAvailabilityRequest :>
+                 Post '[JSON] UpdateAvailabilityResponse
 
 -- | Updates the availabilities of a batch of floodlight activities in
 -- DoubleClick Search.

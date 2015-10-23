@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.comments.get@ method which the
 -- 'CommentsGet' request conforms to.
 type CommentsGetResource =
-     "comments" :>
-       Capture "commentId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Comment
+     "plusDomains" :>
+       "v1" :>
+         "comments" :>
+           Capture "commentId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Get a comment.
 --

@@ -45,14 +45,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.import@ method which the
 -- 'InstancesImport' request conforms to.
 type InstancesImportResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "import" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] InstancesImportRequest :>
-                   Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "import" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] InstancesImportRequest :>
+                       Post '[JSON] Operation
 
 -- | Imports data into a Cloud SQL instance from a MySQL dump file in Google
 -- Cloud Storage.

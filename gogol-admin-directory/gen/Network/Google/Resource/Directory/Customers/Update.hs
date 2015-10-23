@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.customers.update@ method which the
 -- 'CustomersUpdate' request conforms to.
 type CustomersUpdateResource =
-     "customers" :>
-       Capture "customerKey" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Customer :> Put '[JSON] Customer
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerKey" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Customer :> Put '[JSON] Customer
 
 -- | Updates a customer.
 --

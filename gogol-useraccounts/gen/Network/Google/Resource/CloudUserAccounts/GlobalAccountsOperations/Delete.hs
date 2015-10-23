@@ -43,11 +43,14 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.globalAccountsOperations.delete@ method which the
 -- 'GlobalAccountsOperationsDelete' request conforms to.
 type GlobalAccountsOperationsDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "operations" :>
-           Capture "operation" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 Capture "operation" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified operation resource.
 --

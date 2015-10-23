@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.aliases.insert@ method which the
 -- 'UsersAliasesInsert' request conforms to.
 type UsersAliasesInsertResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "aliases" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Alias :> Post '[JSON] Alias
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "aliases" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Alias :> Post '[JSON] Alias
 
 -- | Add a alias for the user
 --

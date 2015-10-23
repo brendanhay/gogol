@@ -44,11 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.datafeeds.insert@ method which the
 -- 'DatafeedsInsert' request conforms to.
 type DatafeedsInsertResource =
-     Capture "merchantId" Word64 :>
-       "datafeeds" :>
-         QueryParam "dryRun" Bool :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Datafeed :> Post '[JSON] Datafeed
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "datafeeds" :>
+             QueryParam "dryRun" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Datafeed :> Post '[JSON] Datafeed
 
 -- | Registers a datafeed with your Merchant Center account.
 --

@@ -54,7 +54,6 @@ appsLicensingService :: Service
 appsLicensingService
   = defaultService (ServiceId "licensing:v1")
       "www.googleapis.com"
-      "apps/licensing/v1/product/"
 
 -- | View and manage Google Apps licenses for your domain
 appsLicensingScope :: OAuthScope

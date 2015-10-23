@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.contacts.update@ method which the
 -- 'ContactsUpdate' request conforms to.
 type ContactsUpdateResource =
-     "contacts" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Contact :> Put '[JSON] Contact
+     "mirror" :>
+       "v1" :>
+         "contacts" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Contact :> Put '[JSON] Contact
 
 -- | Updates a contact in place.
 --

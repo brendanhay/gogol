@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.subscriptions.insert@ method which the
 -- 'SubscriptionsInsert' request conforms to.
 type SubscriptionsInsertResource =
-     "subscriptions" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Subscription :>
-           Post '[JSON] Subscription
+     "mirror" :>
+       "v1" :>
+         "subscriptions" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Subscription :>
+               Post '[JSON] Subscription
 
 -- | Creates a new subscription.
 --

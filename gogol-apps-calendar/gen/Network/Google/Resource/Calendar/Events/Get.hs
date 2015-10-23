@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.get@ method which the
 -- 'EventsGet' request conforms to.
 type EventsGetResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           Capture "eventId" Text :>
-             QueryParam "maxAttendees" Int32 :>
-               QueryParam "timeZone" Text :>
-                 QueryParam "alwaysIncludeEmail" Bool :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Event
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               Capture "eventId" Text :>
+                 QueryParam "maxAttendees" Int32 :>
+                   QueryParam "timeZone" Text :>
+                     QueryParam "alwaysIncludeEmail" Bool :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Event
 
 -- | Returns an event.
 --

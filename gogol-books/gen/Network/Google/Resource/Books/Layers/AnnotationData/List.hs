@@ -54,24 +54,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.layers.annotationData.list@ method which the
 -- 'LayersAnnotationDataList' request conforms to.
 type LayersAnnotationDataListResource =
-     "volumes" :>
-       Capture "volumeId" Text :>
-         "layers" :>
-           Capture "layerId" Text :>
-             "data" :>
-               QueryParam "contentVersion" Text :>
-                 QueryParam "w" Int32 :>
-                   QueryParam "scale" Int32 :>
-                     QueryParam "locale" Text :>
-                       QueryParam "updatedMax" Text :>
-                         QueryParam "updatedMin" Text :>
-                           QueryParams "annotationDataId" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "h" Int32 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] AnnotationsData
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layers" :>
+               Capture "layerId" Text :>
+                 "data" :>
+                   QueryParam "contentVersion" Text :>
+                     QueryParam "w" Int32 :>
+                       QueryParam "scale" Int32 :>
+                         QueryParam "locale" Text :>
+                           QueryParam "updatedMax" Text :>
+                             QueryParam "updatedMin" Text :>
+                               QueryParams "annotationDataId" Text :>
+                                 QueryParam "source" Text :>
+                                   QueryParam "h" Int32 :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "maxResults" Word32 :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] AnnotationsData
 
 -- | Gets the annotation data for a volume and layer.
 --

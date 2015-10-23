@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.httpsHealthChecks.update@ method which the
 -- 'HTTPSHealthChecksUpdate' request conforms to.
 type HTTPSHealthChecksUpdateResource =
-     Capture "project" Text :>
-       "global" :>
-         "httpsHealthChecks" :>
-           Capture "httpsHealthCheck" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] HTTPSHealthCheck :>
-                 Put '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "httpsHealthChecks" :>
+                 Capture "httpsHealthCheck" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] HTTPSHealthCheck :>
+                       Put '[JSON] Operation
 
 -- | Updates a HttpsHealthCheck resource in the specified project using the
 -- data included in the request.

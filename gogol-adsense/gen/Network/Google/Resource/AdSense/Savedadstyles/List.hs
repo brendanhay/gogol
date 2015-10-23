@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.savedadstyles.list@ method which the
 -- 'SavedadstylesList' request conforms to.
 type SavedadstylesListResource =
-     "savedadstyles" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
+     "adsense" :>
+       "v1.4" :>
+         "savedadstyles" :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the user\'s account.
 --

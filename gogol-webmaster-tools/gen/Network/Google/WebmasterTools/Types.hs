@@ -169,7 +169,6 @@ webmasterToolsService :: Service
 webmasterToolsService
   = defaultService (ServiceId "webmasters:v3")
       "www.googleapis.com"
-      "webmasters/v3/"
 
 -- | View and modify Webmaster Tools data for your verified sites
 webmastersScope :: OAuthScope

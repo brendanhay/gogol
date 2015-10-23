@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.insert@ method which the
 -- 'EditsInsert' request conforms to.
 type EditsInsertResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] AppEdit :> Post '[JSON] AppEdit
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] AppEdit :> Post '[JSON] AppEdit
 
 -- | Creates a new edit for an app, populated with the app\'s current state.
 --

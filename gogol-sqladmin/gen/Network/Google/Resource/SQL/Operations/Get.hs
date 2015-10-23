@@ -43,11 +43,13 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.operations.get@ method which the
 -- 'OperationsGet' request conforms to.
 type OperationsGetResource =
-     "projects" :>
-       Capture "project" Text :>
-         "operations" :>
-           Capture "operation" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "operations" :>
+               Capture "operation" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves an instance operation that has been performed on an instance.
 --

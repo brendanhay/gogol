@@ -46,17 +46,19 @@ import           Network.Google.Prelude
 -- 'RepresentativesRepresentativeInfoByDivision' request conforms to.
 type RepresentativesRepresentativeInfoByDivisionResource
      =
-     "representatives" :>
-       Capture "ocdId" Text :>
-         QueryParams "roles"
-           RepresentativesRepresentativeInfoByDivisionRoles
-           :>
-           QueryParam "recursive" Bool :>
-             QueryParams "levels"
-               RepresentativesRepresentativeInfoByDivisionLevels
+     "civicinfo" :>
+       "v2" :>
+         "representatives" :>
+           Capture "ocdId" Text :>
+             QueryParams "roles"
+               RepresentativesRepresentativeInfoByDivisionRoles
                :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] RepresentativeInfoData
+               QueryParam "recursive" Bool :>
+                 QueryParams "levels"
+                   RepresentativesRepresentativeInfoByDivisionLevels
+                   :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] RepresentativeInfoData
 
 -- | Looks up representative information for a single geographic division.
 --

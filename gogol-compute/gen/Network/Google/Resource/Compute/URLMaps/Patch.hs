@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.urlMaps.patch@ method which the
 -- 'URLMapsPatch' request conforms to.
 type URLMapsPatchResource =
-     Capture "project" Text :>
-       "global" :>
-         "urlMaps" :>
-           Capture "urlMap" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "urlMaps" :>
+                 Capture "urlMap" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource. This method supports
 -- patch semantics.

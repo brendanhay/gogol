@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceGroupManagers.delete@ method which the
 -- 'InstanceGroupManagersDelete' request conforms to.
 type InstanceGroupManagersDeleteResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified managed instance group and all of the instances in
 -- that group.

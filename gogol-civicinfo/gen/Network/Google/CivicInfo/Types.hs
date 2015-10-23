@@ -255,4 +255,3 @@ civicInfoService :: Service
 civicInfoService
   = defaultService (ServiceId "civicinfo:v2")
       "www.googleapis.com"
-      "civicinfo/v2/"

@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.threads.trash@ method which the
 -- 'UsersThreadsTrash' request conforms to.
 type UsersThreadsTrashResource =
-     Capture "userId" Text :>
-       "threads" :>
-         Capture "id" Text :>
-           "trash" :>
-             QueryParam "alt" AltJSON :> Post '[JSON] Thread
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 "trash" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Thread
 
 -- | Moves the specified thread to the trash.
 --

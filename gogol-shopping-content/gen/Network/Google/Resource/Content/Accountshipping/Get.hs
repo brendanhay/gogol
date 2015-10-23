@@ -43,11 +43,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accountshipping.get@ method which the
 -- 'AccountshippingGet' request conforms to.
 type AccountshippingGetResource =
-     Capture "merchantId" Word64 :>
-       "accountshipping" :>
-         Capture "accountId" Word64 :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] AccountShipping
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accountshipping" :>
+             Capture "accountId" Word64 :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] AccountShipping
 
 -- | Retrieves the shipping settings of the account.
 --

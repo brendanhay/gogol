@@ -45,13 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalAddresses.list@ method which the
 -- 'GlobalAddressesList' request conforms to.
 type GlobalAddressesListResource =
-     Capture "project" Text :>
-       "global" :>
-         "addresses" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] AddressList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "addresses" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
 -- | Retrieves the list of global address resources.
 --

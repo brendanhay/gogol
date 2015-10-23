@@ -43,9 +43,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @appstate.states.get@ method which the
 -- 'StatesGet' request conforms to.
 type StatesGetResource =
-     "states" :>
-       Capture "stateKey" Int32 :>
-         QueryParam "alt" AltJSON :> Get '[JSON] GetResponse
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           Capture "stateKey" Int32 :>
+             QueryParam "alt" AltJSON :> Get '[JSON] GetResponse
 
 -- | Retrieves the data corresponding to the passed key. If the key does not
 -- exist on the server, an HTTP 404 will be returned.

@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.reports.patch@ method which the
 -- 'ReportsPatch' request conforms to.
 type ReportsPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "reports" :>
-           Capture "reportId" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Report :> Patch '[JSON] Report
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               Capture "reportId" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Report :> Patch '[JSON] Report
 
 -- | Updates a report. This method supports patch semantics.
 --

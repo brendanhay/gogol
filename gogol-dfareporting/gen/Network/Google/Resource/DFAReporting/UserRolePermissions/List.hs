@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.userRolePermissions.list@ method which the
 -- 'UserRolePermissionsList' request conforms to.
 type UserRolePermissionsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "userRolePermissions" :>
-           QueryParams "ids" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] UserRolePermissionsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRolePermissions" :>
+               QueryParams "ids" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] UserRolePermissionsListResponse
 
 -- | Gets a list of user role permissions, possibly filtered.
 --

@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.pushtokens.remove@ method which the
 -- 'PushtokensRemove' request conforms to.
 type PushtokensRemoveResource =
-     "pushtokens" :>
-       "remove" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] PushTokenId :> Post '[JSON] ()
+     "games" :>
+       "v1" :>
+         "pushtokens" :>
+           "remove" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PushTokenId :> Post '[JSON] ()
 
 -- | Removes a push token for the current user and application. Removing a
 -- non-existent push token will report success.

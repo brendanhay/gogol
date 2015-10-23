@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountUserProfiles.patch@ method which the
 -- 'AccountUserProFilesPatch' request conforms to.
 type AccountUserProFilesPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountUserProfiles" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] AccountUserProFile :>
-                 Patch '[JSON] AccountUserProFile
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] AccountUserProFile :>
+                     Patch '[JSON] AccountUserProFile
 
 -- | Updates an existing account user profile. This method supports patch
 -- semantics.

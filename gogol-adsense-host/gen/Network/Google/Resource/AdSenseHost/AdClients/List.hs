@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.adclients.list@ method which the
 -- 'AdClientsList' request conforms to.
 type AdClientsListResource =
-     "adclients" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Word32 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] AdClients
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Word32 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
 -- | List all host ad clients in this AdSense account.
 --

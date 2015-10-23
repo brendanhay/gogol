@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @civicinfo.elections.electionQuery@ method which the
 -- 'ElectionsElectionQuery' request conforms to.
 type ElectionsElectionQueryResource =
-     "elections" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] ElectionsQueryResponse
+     "civicinfo" :>
+       "v2" :>
+         "elections" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] ElectionsQueryResponse
 
 -- | List of available elections to query.
 --

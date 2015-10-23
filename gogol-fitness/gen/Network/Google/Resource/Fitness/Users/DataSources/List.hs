@@ -46,11 +46,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fitness.users.dataSources.list@ method which the
 -- 'UsersDataSourcesList' request conforms to.
 type UsersDataSourcesListResource =
-     Capture "userId" Text :>
-       "dataSources" :>
-         QueryParams "dataTypeName" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] ListDataSourcesResponse
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               QueryParams "dataTypeName" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] ListDataSourcesResponse
 
 -- | Lists all data sources that are visible to the developer, using the
 -- OAuth scopes provided. The list is not exhaustive: the user may have

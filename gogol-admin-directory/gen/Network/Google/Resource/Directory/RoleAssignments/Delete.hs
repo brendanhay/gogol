@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roleAssignments.delete@ method which the
 -- 'RoleAssignmentsDelete' request conforms to.
 type RoleAssignmentsDeleteResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roleassignments" :>
-           Capture "roleAssignmentId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roleassignments" :>
+                 Capture "roleAssignmentId" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a role assignment.
 --

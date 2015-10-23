@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.zones.get@ method which the
 -- 'ZonesGet' request conforms to.
 type ZonesGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Zone
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Zone
 
 -- | Returns the specified zone resource.
 --

@@ -44,14 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetHttpsProxies.setSslCertificates@ method which the
 -- 'TargetHTTPSProxiesSetSSLCertificates' request conforms to.
 type TargetHTTPSProxiesSetSSLCertificatesResource =
-     Capture "project" Text :>
-       "targetHttpsProxies" :>
-         Capture "targetHttpsProxy" Text :>
-           "setSslCertificates" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON]
-                 TargetHTTPSProxiesSetSSLCertificatesRequest
-                 :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "targetHttpsProxies" :>
+               Capture "targetHttpsProxy" Text :>
+                 "setSslCertificates" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON]
+                       TargetHTTPSProxiesSetSSLCertificatesRequest
+                       :> Post '[JSON] Operation
 
 -- | Replaces SslCertificates for TargetHttpsProxy.
 --

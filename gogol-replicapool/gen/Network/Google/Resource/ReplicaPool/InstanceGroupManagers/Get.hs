@@ -44,13 +44,16 @@ import           Network.Google.ReplicaPool.Types
 -- | A resource alias for @replicapool.instanceGroupManagers.get@ method which the
 -- 'InstanceGroupManagersGet' request conforms to.
 type InstanceGroupManagersGetResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instanceGroupManagers" :>
-             Capture "instanceGroupManager" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] InstanceGroupManager
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] InstanceGroupManager
 
 -- | Returns the specified Instance Group Manager resource.
 --

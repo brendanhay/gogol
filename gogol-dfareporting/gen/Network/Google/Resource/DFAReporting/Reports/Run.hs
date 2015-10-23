@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.reports.run@ method which the
 -- 'ReportsRun' request conforms to.
 type ReportsRunResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "reports" :>
-           Capture "reportId" Int64 :>
-             "run" :>
-               QueryParam "synchronous" Bool :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] File
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               Capture "reportId" Int64 :>
+                 "run" :>
+                   QueryParam "synchronous" Bool :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Runs a report.
 --

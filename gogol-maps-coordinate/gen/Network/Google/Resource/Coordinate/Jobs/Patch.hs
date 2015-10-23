@@ -55,22 +55,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.jobs.patch@ method which the
 -- 'JobsPatch' request conforms to.
 type JobsPatchResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "jobs" :>
-           Capture "jobId" Word64 :>
-             QueryParam "progress" JobsPatchProgress :>
-               QueryParam "note" Text :>
-                 QueryParam "customerPhoneNumber" Text :>
-                   QueryParam "customerName" Text :>
-                     QueryParam "address" Text :>
-                       QueryParam "assignee" Text :>
-                         QueryParam "lat" Double :>
-                           QueryParam "lng" Double :>
-                             QueryParam "title" Text :>
-                               QueryParams "customField" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Job :> Patch '[JSON] Job
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 QueryParam "progress" JobsPatchProgress :>
+                   QueryParam "note" Text :>
+                     QueryParam "customerPhoneNumber" Text :>
+                       QueryParam "customerName" Text :>
+                         QueryParam "address" Text :>
+                           QueryParam "assignee" Text :>
+                             QueryParam "lat" Double :>
+                               QueryParam "lng" Double :>
+                                 QueryParam "title" Text :>
+                                   QueryParams "customField" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] Job :> Patch '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.
 -- This method supports patch semantics.

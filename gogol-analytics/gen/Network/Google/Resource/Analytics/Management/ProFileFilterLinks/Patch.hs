@@ -47,18 +47,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profileFilterLinks.patch@ method which the
 -- 'ManagementProFileFilterLinksPatch' request conforms to.
 type ManagementProFileFilterLinksPatchResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "profileFilterLinks" :>
-                     Capture "linkId" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ProFileFilterLink :>
-                           Patch '[JSON] ProFileFilterLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] ProFileFilterLink :>
+                               Patch '[JSON] ProFileFilterLink
 
 -- | Update an existing profile filter link. This method supports patch
 -- semantics.

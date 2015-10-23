@@ -46,12 +46,14 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveStreams.insert@ method which the
 -- 'LiveStreamsInsert' request conforms to.
 type LiveStreamsInsertResource =
-     "liveStreams" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] LiveStream :> Post '[JSON] LiveStream
+     "youtube" :>
+       "v3" :>
+         "liveStreams" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] LiveStream :> Post '[JSON] LiveStream
 
 -- | Creates a video stream. The stream enables you to send your video to
 -- YouTube, which can then broadcast the video to your audience.

@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.dimensionValues.query@ method which the
 -- 'DimensionValuesQuery' request conforms to.
 type DimensionValuesQueryResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "dimensionvalues" :>
-           "query" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] DimensionValueRequest :>
-                     Post '[JSON] DimensionValueList
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "dimensionvalues" :>
+               "query" :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] DimensionValueRequest :>
+                         Post '[JSON] DimensionValueList
 
 -- | Retrieves list of report dimension values for a list of filters.
 --

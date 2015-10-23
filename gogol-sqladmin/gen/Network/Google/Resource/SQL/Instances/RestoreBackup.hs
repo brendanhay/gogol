@@ -44,14 +44,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.restoreBackup@ method which the
 -- 'InstancesRestoreBackup' request conforms to.
 type InstancesRestoreBackupResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "restoreBackup" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] InstancesRestoreBackupRequest :>
-                   Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "restoreBackup" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] InstancesRestoreBackupRequest :>
+                       Post '[JSON] Operation
 
 -- | Restores a backup of a Cloud SQL instance.
 --

@@ -325,7 +325,6 @@ appEngineService :: Service
 appEngineService
   = defaultService (ServiceId "appengine:v1beta4")
       "appengine.googleapis.com"
-      ""
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: OAuthScope

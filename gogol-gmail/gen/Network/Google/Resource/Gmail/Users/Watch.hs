@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.watch@ method which the
 -- 'UsersWatch' request conforms to.
 type UsersWatchResource =
-     Capture "userId" Text :>
-       "watch" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] WatchRequest :>
-             Post '[JSON] WatchResponse
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "watch" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] WatchRequest :>
+                   Post '[JSON] WatchResponse
 
 -- | Set up or update a push notification watch on the given user mailbox.
 --

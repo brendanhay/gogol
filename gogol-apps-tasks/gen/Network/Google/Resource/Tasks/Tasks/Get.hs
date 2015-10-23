@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @tasks.tasks.get@ method which the
 -- 'TasksGet' request conforms to.
 type TasksGetResource =
-     "lists" :>
-       Capture "tasklist" Text :>
-         "tasks" :>
-           Capture "task" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Task
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Task
 
 -- | Returns the specified task.
 --

@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.layers.volumeAnnotations.get@ method which the
 -- 'LayersVolumeAnnotationsGet' request conforms to.
 type LayersVolumeAnnotationsGetResource =
-     "volumes" :>
-       Capture "volumeId" Text :>
-         "layers" :>
-           Capture "layerId" Text :>
-             "annotations" :>
-               Capture "annotationId" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "source" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] Volumeannotation
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layers" :>
+               Capture "layerId" Text :>
+                 "annotations" :>
+                   Capture "annotationId" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] Volumeannotation
 
 -- | Gets the volume annotation.
 --

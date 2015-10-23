@@ -47,15 +47,17 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.channelSections.list@ method which the
 -- 'ChannelSectionsList' request conforms to.
 type ChannelSectionsListResource =
-     "channelSections" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "channelId" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "id" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ChannelSectionListResponse
+     "youtube" :>
+       "v3" :>
+         "channelSections" :>
+           QueryParam "part" Text :>
+             QueryParam "mine" Bool :>
+               QueryParam "channelId" Text :>
+                 QueryParam "hl" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "id" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ChannelSectionListResponse
 
 -- | Returns channelSection resources that match the API request criteria.
 --

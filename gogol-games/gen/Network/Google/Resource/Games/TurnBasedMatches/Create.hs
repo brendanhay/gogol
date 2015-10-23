@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.create@ method which the
 -- 'TurnBasedMatchesCreate' request conforms to.
 type TurnBasedMatchesCreateResource =
-     "turnbasedmatches" :>
-       "create" :>
-         QueryParam "language" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] TurnBasedMatchCreateRequest :>
-               Post '[JSON] TurnBasedMatch
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           "create" :>
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] TurnBasedMatchCreateRequest :>
+                   Post '[JSON] TurnBasedMatch
 
 -- | Create a turn-based match.
 --

@@ -49,17 +49,20 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.linux.getLinuxAccountViews@ method which the
 -- 'LinuxGetLinuxAccountViews' request conforms to.
 type LinuxGetLinuxAccountViewsResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "linuxAccountViews" :>
-             QueryParam "instance" Text :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "alt" AltJSON :>
-                         Post '[JSON] LinuxGetLinuxAccountViewsResponse
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "linuxAccountViews" :>
+                   QueryParam "instance" Text :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "alt" AltJSON :>
+                               Post '[JSON] LinuxGetLinuxAccountViewsResponse
 
 -- | Retrieves a list of user accounts for an instance within a specific
 -- project.

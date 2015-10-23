@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.landingPages.update@ method which the
 -- 'LandingPagesUpdate' request conforms to.
 type LandingPagesUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           Capture "campaignId" Int64 :>
-             "landingPages" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] LandingPage :>
-                   Put '[JSON] LandingPage
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] LandingPage :>
+                       Put '[JSON] LandingPage
 
 -- | Updates an existing campaign landing page.
 --

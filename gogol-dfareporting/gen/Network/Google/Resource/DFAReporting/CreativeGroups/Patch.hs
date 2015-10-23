@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeGroups.patch@ method which the
 -- 'CreativeGroupsPatch' request conforms to.
 type CreativeGroupsPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeGroups" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] CreativeGroup :>
-                 Patch '[JSON] CreativeGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] CreativeGroup :>
+                     Patch '[JSON] CreativeGroup
 
 -- | Updates an existing creative group. This method supports patch
 -- semantics.

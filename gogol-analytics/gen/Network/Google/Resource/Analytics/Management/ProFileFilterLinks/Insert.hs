@@ -45,17 +45,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profileFilterLinks.insert@ method which the
 -- 'ManagementProFileFilterLinksInsert' request conforms to.
 type ManagementProFileFilterLinksInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "profileFilterLinks" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ProFileFilterLink :>
-                         Post '[JSON] ProFileFilterLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ProFileFilterLink :>
+                             Post '[JSON] ProFileFilterLink
 
 -- | Create a new profile filter link.
 --

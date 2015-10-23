@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.accounts.list@ method which the
 -- 'ManagementAccountsList' request conforms to.
 type ManagementAccountsListResource =
-     "management" :>
-       "accounts" :>
-         QueryParam "start-index" Int32 :>
-           QueryParam "max-results" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Accounts
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             QueryParam "start-index" Int32 :>
+               QueryParam "max-results" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | Lists all accounts to which the user has access.
 --

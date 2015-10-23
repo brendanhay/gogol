@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.mylibrary.annotations.summary@ method which the
 -- 'MyLibraryAnnotationsSummary' request conforms to.
 type MyLibraryAnnotationsSummaryResource =
-     "mylibrary" :>
-       "annotations" :>
-         "summary" :>
-           QueryParams "layerIds" Text :>
-             QueryParam "volumeId" Text :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] AnnotationsSummary
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             "summary" :>
+               QueryParams "layerIds" Text :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] AnnotationsSummary
 
 -- | Gets the summary of specified layers.
 --

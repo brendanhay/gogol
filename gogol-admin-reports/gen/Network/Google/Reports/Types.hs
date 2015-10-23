@@ -157,7 +157,6 @@ reportsService :: Service
 reportsService
   = defaultService (ServiceId "admin:reports_v1")
       "www.googleapis.com"
-      "admin/reports/v1/"
 
 -- | View usage reports of Google Apps for your domain
 adminReportsUsageReadonlyScope :: OAuthScope

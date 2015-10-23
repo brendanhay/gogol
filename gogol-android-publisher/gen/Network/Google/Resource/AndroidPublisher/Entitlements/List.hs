@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.entitlements.list@ method which the
 -- 'EntitlementsList' request conforms to.
 type EntitlementsListResource =
-     Capture "packageName" Text :>
-       "entitlements" :>
-         QueryParam "token" Text :>
-           QueryParam "startIndex" Word32 :>
-             QueryParam "productId" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] EntitlementsListResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "entitlements" :>
+               QueryParam "token" Text :>
+                 QueryParam "startIndex" Word32 :>
+                   QueryParam "productId" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] EntitlementsListResponse
 
 -- | Lists the user\'s current inapp item or subscription entitlements
 --

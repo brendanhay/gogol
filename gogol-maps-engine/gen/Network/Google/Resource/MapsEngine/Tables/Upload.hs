@@ -46,10 +46,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.upload@ method which the
 -- 'TablesUpload' request conforms to.
 type TablesUploadResource =
-     "tables" :>
-       "upload" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Table :> Post '[JSON] Table
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           "upload" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Table :> Post '[JSON] Table
 
 -- | Create a placeholder table asset to which table files can be uploaded.
 -- Once the placeholder has been created, files are uploaded to the

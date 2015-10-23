@@ -47,16 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.acl.watch@ method which the
 -- 'ACLWatch' request conforms to.
 type ACLWatchResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "acl" :>
-           "watch" :>
-             QueryParam "syncToken" Text :>
-               QueryParam "showDeleted" Bool :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Channel :> Post '[JSON] Channel
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "acl" :>
+               "watch" :>
+                 QueryParam "syncToken" Text :>
+                   QueryParam "showDeleted" Bool :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes to ACL resources.
 --

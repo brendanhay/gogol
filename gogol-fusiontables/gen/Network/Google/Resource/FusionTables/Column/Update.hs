@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.column.update@ method which the
 -- 'ColumnUpdate' request conforms to.
 type ColumnUpdateResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "columns" :>
-           Capture "columnId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Column :> Put '[JSON] Column
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "columns" :>
+               Capture "columnId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Column :> Put '[JSON] Column
 
 -- | Updates the name or type of an existing column.
 --

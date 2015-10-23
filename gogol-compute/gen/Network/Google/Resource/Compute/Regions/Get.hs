@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.regions.get@ method which the
 -- 'RegionsGet' request conforms to.
 type RegionsGetResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Region
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Region
 
 -- | Returns the specified region resource.
 --

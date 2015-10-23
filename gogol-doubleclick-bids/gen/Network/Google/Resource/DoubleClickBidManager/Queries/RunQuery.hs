@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @doubleclickbidmanager.queries.runquery@ method which the
 -- 'QueriesRunQuery' request conforms to.
 type QueriesRunQueryResource =
-     "query" :>
-       Capture "queryId" Int64 :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] RunQueryRequest :> Post '[JSON] ()
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "query" :>
+           Capture "queryId" Int64 :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] RunQueryRequest :> Post '[JSON] ()
 
 -- | Runs a stored query to generate a report.
 --

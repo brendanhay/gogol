@@ -42,9 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.groups.get@ method which the
 -- 'GroupsGet' request conforms to.
 type GroupsGetResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Group
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Group
 
 -- | Retrieve Group
 --

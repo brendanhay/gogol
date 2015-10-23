@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.images.delete@ method which the
 -- 'ImagesDelete' request conforms to.
 type ImagesDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "images" :>
-           Capture "image" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "images" :>
+                 Capture "image" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified image resource.
 --

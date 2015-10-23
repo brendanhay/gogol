@@ -48,20 +48,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendarList.watch@ method which the
 -- 'CalendarListWatch' request conforms to.
 type CalendarListWatchResource =
-     "users" :>
-       "me" :>
-         "calendarList" :>
-           "watch" :>
-             QueryParam "syncToken" Text :>
-               QueryParam "minAccessRole"
-                 CalendarListWatchMinAccessRole
-                 :>
-                 QueryParam "showDeleted" Bool :>
-                   QueryParam "showHidden" Bool :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Channel :> Post '[JSON] Channel
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "calendarList" :>
+               "watch" :>
+                 QueryParam "syncToken" Text :>
+                   QueryParam "minAccessRole"
+                     CalendarListWatchMinAccessRole
+                     :>
+                     QueryParam "showDeleted" Bool :>
+                       QueryParam "showHidden" Bool :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes to CalendarList resources.
 --

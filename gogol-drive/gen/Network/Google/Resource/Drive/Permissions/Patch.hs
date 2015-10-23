@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.permissions.patch@ method which the
 -- 'PermissionsPatch' request conforms to.
 type PermissionsPatchResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "permissions" :>
-           Capture "permissionId" Text :>
-             QueryParam "transferOwnership" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Permission :>
-                   Patch '[JSON] Permission
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "transferOwnership" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Permission :>
+                       Patch '[JSON] Permission
 
 -- | Updates a permission using patch semantics.
 --

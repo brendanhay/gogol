@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalAddresses.get@ method which the
 -- 'GlobalAddressesGet' request conforms to.
 type GlobalAddressesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "addresses" :>
-           Capture "address" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Address
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "addresses" :>
+                 Capture "address" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Address
 
 -- | Returns the specified address resource.
 --

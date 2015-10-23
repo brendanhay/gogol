@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.collectionviewers.delete@ method which the
 -- 'CollectionviewersDelete' request conforms to.
 type CollectionviewersDeleteResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "collections" :>
-           Capture "collectionId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "collections" :>
+               Capture "collectionId" Text :>
+                 "users" :>
+                   Capture "userId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes the user from the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then

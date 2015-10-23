@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetHttpsProxies.list@ method which the
 -- 'TargetHTTPSProxiesList' request conforms to.
 type TargetHTTPSProxiesListResource =
-     Capture "project" Text :>
-       "global" :>
-         "targetHttpsProxies" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] TargetHTTPSProxyList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "targetHttpsProxies" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] TargetHTTPSProxyList
 
 -- | Retrieves the list of TargetHttpsProxy resources available to the
 -- specified project.

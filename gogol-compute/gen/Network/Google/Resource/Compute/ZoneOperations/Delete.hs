@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.zoneOperations.delete@ method which the
 -- 'ZoneOperationsDelete' request conforms to.
 type ZoneOperationsDeleteResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "operations" :>
-             Capture "operation" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "operations" :>
+                   Capture "operation" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified zone-specific Operations resource.
 --

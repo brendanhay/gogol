@@ -75,77 +75,87 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.search.list@ method which the
 -- 'SearchList' request conforms to.
 type SearchListResource =
-     "search" :>
-       QueryParam "part" Text :>
-         QueryParam "publishedAfter" DateTime' :>
-           QueryParam "videoDefinition"
-             SearchListVideoDefinition
-             :>
-             QueryParam "videoDuration" SearchListVideoDuration :>
-               QueryParam "videoCaption" SearchListVideoCaption :>
-                 QueryParam "videoLicense" SearchListVideoLicense :>
-                   QueryParam "regionCode" Text :>
-                     QueryParam "forDeveloper" Bool :>
-                       QueryParam "location" Text :>
-                         QueryParam "locationRadius" Text :>
-                           QueryParam "forContentOwner" Bool :>
-                             QueryParam "channelId" Text :>
-                               QueryParam "q" Text :>
-                                 QueryParam "forMine" Bool :>
-                                   QueryParam "videoEmbeddable"
-                                     SearchListVideoEmbeddable
-                                     :>
-                                     QueryParam "eventType" SearchListEventType
-                                       :>
-                                       QueryParam "onBehalfOfContentOwner" Text
+     "youtube" :>
+       "v3" :>
+         "search" :>
+           QueryParam "part" Text :>
+             QueryParam "publishedAfter" DateTime' :>
+               QueryParam "videoDefinition"
+                 SearchListVideoDefinition
+                 :>
+                 QueryParam "videoDuration" SearchListVideoDuration :>
+                   QueryParam "videoCaption" SearchListVideoCaption :>
+                     QueryParam "videoLicense" SearchListVideoLicense :>
+                       QueryParam "regionCode" Text :>
+                         QueryParam "forDeveloper" Bool :>
+                           QueryParam "location" Text :>
+                             QueryParam "locationRadius" Text :>
+                               QueryParam "forContentOwner" Bool :>
+                                 QueryParam "channelId" Text :>
+                                   QueryParam "q" Text :>
+                                     QueryParam "forMine" Bool :>
+                                       QueryParam "videoEmbeddable"
+                                         SearchListVideoEmbeddable
                                          :>
-                                         QueryParam "videoCategoryId" Text :>
-                                           QueryParam "topicId" Text :>
-                                             QueryParam "safeSearch"
-                                               SearchListSafeSearch
+                                         QueryParam "eventType"
+                                           SearchListEventType
+                                           :>
+                                           QueryParam "onBehalfOfContentOwner"
+                                             Text
+                                             :>
+                                             QueryParam "videoCategoryId" Text
                                                :>
-                                               QueryParam "videoSyndicated"
-                                                 SearchListVideoSyndicated
-                                                 :>
-                                                 QueryParam "relatedToVideoId"
-                                                   Text
+                                               QueryParam "topicId" Text :>
+                                                 QueryParam "safeSearch"
+                                                   SearchListSafeSearch
                                                    :>
-                                                   QueryParam "pageToken" Text
+                                                   QueryParam "videoSyndicated"
+                                                     SearchListVideoSyndicated
                                                      :>
-                                                     QueryParam "type" Text :>
-                                                       QueryParam "channelType"
-                                                         SearchListChannelType
+                                                     QueryParam
+                                                       "relatedToVideoId"
+                                                       Text
+                                                       :>
+                                                       QueryParam "pageToken"
+                                                         Text
                                                          :>
-                                                         QueryParam
-                                                           "relevanceLanguage"
-                                                           Text
+                                                         QueryParam "type" Text
                                                            :>
-                                                           QueryParam "order"
-                                                             SearchListOrder
+                                                           QueryParam
+                                                             "channelType"
+                                                             SearchListChannelType
                                                              :>
                                                              QueryParam
-                                                               "maxResults"
-                                                               Word32
+                                                               "relevanceLanguage"
+                                                               Text
                                                                :>
                                                                QueryParam
-                                                                 "publishedBefore"
-                                                                 DateTime'
+                                                                 "order"
+                                                                 SearchListOrder
                                                                  :>
                                                                  QueryParam
-                                                                   "videoType"
-                                                                   SearchListVideoType
+                                                                   "maxResults"
+                                                                   Word32
                                                                    :>
                                                                    QueryParam
-                                                                     "videoDimension"
-                                                                     SearchListVideoDimension
+                                                                     "publishedBefore"
+                                                                     DateTime'
                                                                      :>
                                                                      QueryParam
-                                                                       "alt"
-                                                                       AltJSON
+                                                                       "videoType"
+                                                                       SearchListVideoType
                                                                        :>
-                                                                       Get
-                                                                         '[JSON]
-                                                                         SearchListResponse
+                                                                       QueryParam
+                                                                         "videoDimension"
+                                                                         SearchListVideoDimension
+                                                                         :>
+                                                                         QueryParam
+                                                                           "alt"
+                                                                           AltJSON
+                                                                           :>
+                                                                           Get
+                                                                             '[JSON]
+                                                                             SearchListResponse
 
 -- | Returns a collection of search results that match the query parameters
 -- specified in the API request. By default, a search result set identifies

@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dns.changes.create@ method which the
 -- 'ChangesCreate' request conforms to.
 type ChangesCreateResource =
-     Capture "project" Text :>
-       "managedZones" :>
-         Capture "managedZone" Text :>
-           "changes" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Change :> Post '[JSON] Change
+     "dns" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 "changes" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Change :> Post '[JSON] Change
 
 -- | Atomically update the ResourceRecordSet collection.
 --

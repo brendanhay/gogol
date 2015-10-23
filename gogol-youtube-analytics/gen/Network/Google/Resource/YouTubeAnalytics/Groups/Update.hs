@@ -43,10 +43,13 @@ import           Network.Google.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.groups.update@ method which the
 -- 'GroupsUpdate' request conforms to.
 type GroupsUpdateResource =
-     "groups" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Group :> Put '[JSON] Group
+     "youtube" :>
+       "analytics" :>
+         "v1" :>
+           "groups" :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Group :> Put '[JSON] Group
 
 -- | Modifies a group. For example, you could change a group\'s title.
 --

@@ -46,15 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.deleteAccessConfig@ method which the
 -- 'InstancesDeleteAccessConfig' request conforms to.
 type InstancesDeleteAccessConfigResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "deleteAccessConfig" :>
-                 QueryParam "accessConfig" Text :>
-                   QueryParam "networkInterface" Text :>
-                     QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "deleteAccessConfig" :>
+                       QueryParam "accessConfig" Text :>
+                         QueryParam "networkInterface" Text :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Deletes an access config from an instance\'s network interface.
 --

@@ -46,13 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.firewalls.list@ method which the
 -- 'FirewallsList' request conforms to.
 type FirewallsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "firewalls" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] FirewallList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "firewalls" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] FirewallList
 
 -- | Retrieves the list of firewall resources available to the specified
 -- project.

@@ -43,10 +43,12 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.videos.delete@ method which the
 -- 'VideosDelete' request conforms to.
 type VideosDeleteResource =
-     "videos" :>
-       QueryParam "id" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "videos" :>
+           QueryParam "id" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a YouTube video.
 --

@@ -51,20 +51,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.features.list@ method which the
 -- 'TablesFeaturesList' request conforms to.
 type TablesFeaturesListResource =
-     "tables" :>
-       Capture "id" Text :>
-         "features" :>
-           QueryParam "include" Text :>
-             QueryParam "where" Text :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "version" TablesFeaturesListVersion :>
-                   QueryParam "limit" Word32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "select" Text :>
-                         QueryParam "intersects" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] FeaturesListResponse
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "id" Text :>
+             "features" :>
+               QueryParam "include" Text :>
+                 QueryParam "where" Text :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "version" TablesFeaturesListVersion :>
+                       QueryParam "limit" Word32 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "select" Text :>
+                             QueryParam "intersects" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] FeaturesListResponse
 
 -- | Return all features readable by the current user.
 --

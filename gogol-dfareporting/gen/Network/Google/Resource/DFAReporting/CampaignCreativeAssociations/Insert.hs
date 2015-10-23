@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.campaignCreativeAssociations.insert@ method which the
 -- 'CampaignCreativeAssociationsInsert' request conforms to.
 type CampaignCreativeAssociationsInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           Capture "campaignId" Int64 :>
-             "campaignCreativeAssociations" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] CampaignCreativeAssociation :>
-                   Post '[JSON] CampaignCreativeAssociation
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "campaignCreativeAssociations" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CampaignCreativeAssociation :>
+                       Post '[JSON] CampaignCreativeAssociation
 
 -- | Associates a creative with the specified campaign. This method creates a
 -- default ad with dimensions matching the creative in the campaign if such

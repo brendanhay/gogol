@@ -216,7 +216,6 @@ mirrorService :: Service
 mirrorService
   = defaultService (ServiceId "mirror:v1")
       "www.googleapis.com"
-      "mirror/v1/"
 
 -- | View and manage your Glass timeline
 glassTimelineScope :: OAuthScope

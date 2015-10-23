@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeFieldValues.insert@ method which the
 -- 'CreativeFieldValuesInsert' request conforms to.
 type CreativeFieldValuesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeFields" :>
-           Capture "creativeFieldId" Int64 :>
-             "creativeFieldValues" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] CreativeFieldValue :>
-                   Post '[JSON] CreativeFieldValue
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CreativeFieldValue :>
+                       Post '[JSON] CreativeFieldValue
 
 -- | Inserts a new creative field value.
 --

@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.globalOperations.aggregatedList@ method which the
 -- 'GlobalOperationsAggregatedList' request conforms to.
 type GlobalOperationsAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "operations" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] OperationAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "operations" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] OperationAggregatedList
 
 -- | Retrieves the list of all operations grouped by scope.
 --

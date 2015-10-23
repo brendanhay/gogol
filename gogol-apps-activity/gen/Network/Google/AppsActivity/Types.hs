@@ -128,7 +128,6 @@ appsActivityService :: Service
 appsActivityService
   = defaultService (ServiceId "appsactivity:v1")
       "www.googleapis.com"
-      "appsactivity/v1/"
 
 -- | View metadata for files in your Google Drive
 driveMetadataReadonlyScope :: OAuthScope

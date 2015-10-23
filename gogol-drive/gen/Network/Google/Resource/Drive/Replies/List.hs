@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.replies.list@ method which the
 -- 'RepliesList' request conforms to.
 type RepliesListResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             "replies" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "includeDeleted" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] CommentReplyList
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "includeDeleted" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] CommentReplyList
 
 -- | Lists all of the replies to a comment.
 --

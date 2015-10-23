@@ -46,13 +46,15 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveBroadcasts.update@ method which the
 -- 'LiveBroadcastsUpdate' request conforms to.
 type LiveBroadcastsUpdateResource =
-     "liveBroadcasts" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] LiveBroadcast :>
-                 Put '[JSON] LiveBroadcast
+     "youtube" :>
+       "v3" :>
+         "liveBroadcasts" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] LiveBroadcast :>
+                     Put '[JSON] LiveBroadcast
 
 -- | Updates a broadcast. For example, you could modify the broadcast
 -- settings defined in the liveBroadcast resource\'s contentDetails object.

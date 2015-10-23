@@ -46,14 +46,16 @@ import           Network.Google.Translate.Types
 -- | A resource alias for @language.translations.list@ method which the
 -- 'TranslationsList' request conforms to.
 type TranslationsListResource =
-     "v2" :>
-       QueryParams "q" Text :>
-         QueryParam "target" Text :>
-           QueryParam "format" TranslationsListFormat :>
-             QueryParam "source" Text :>
-               QueryParams "cid" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] TranslationsListResponse
+     "language" :>
+       "translate" :>
+         "v2" :>
+           QueryParams "q" Text :>
+             QueryParam "target" Text :>
+               QueryParam "format" TranslationsListFormat :>
+                 QueryParam "source" Text :>
+                   QueryParams "cid" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] TranslationsListResponse
 
 -- | Returns text translations from one language to another.
 --

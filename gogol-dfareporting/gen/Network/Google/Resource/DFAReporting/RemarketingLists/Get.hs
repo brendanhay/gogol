@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.remarketingLists.get@ method which the
 -- 'RemarketingListsGet' request conforms to.
 type RemarketingListsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "remarketingLists" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] RemarketingList
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] RemarketingList
 
 -- | Gets one remarketing list by ID.
 --

@@ -51,17 +51,19 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveBroadcasts.transition@ method which the
 -- 'LiveBroadcastsTransition' request conforms to.
 type LiveBroadcastsTransitionResource =
-     "liveBroadcasts" :>
-       "transition" :>
-         QueryParam "broadcastStatus"
-           LiveBroadcastsTransitionBroadcastStatus
-           :>
-           QueryParam "id" Text :>
-             QueryParam "part" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] LiveBroadcast
+     "youtube" :>
+       "v3" :>
+         "liveBroadcasts" :>
+           "transition" :>
+             QueryParam "broadcastStatus"
+               LiveBroadcastsTransitionBroadcastStatus
+               :>
+               QueryParam "id" Text :>
+                 QueryParam "part" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] LiveBroadcast
 
 -- | Changes the status of a YouTube live broadcast and initiates any
 -- processes associated with the new status. For example, when you

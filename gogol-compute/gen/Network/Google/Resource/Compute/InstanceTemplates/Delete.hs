@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instanceTemplates.delete@ method which the
 -- 'InstanceTemplatesDelete' request conforms to.
 type InstanceTemplatesDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "instanceTemplates" :>
-           Capture "instanceTemplate" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "instanceTemplates" :>
+                 Capture "instanceTemplate" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance template.
 --

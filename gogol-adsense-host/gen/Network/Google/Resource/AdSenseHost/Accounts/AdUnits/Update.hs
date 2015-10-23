@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.accounts.adunits.update@ method which the
 -- 'AccountsAdUnitsUpdate' request conforms to.
 type AccountsAdUnitsUpdateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] AdUnit :> Put '[JSON] AdUnit
+     "adsensehost" :>
+       "v4.1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AdUnit :> Put '[JSON] AdUnit
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 --

@@ -46,12 +46,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.datafeeds.patch@ method which the
 -- 'DatafeedsPatch' request conforms to.
 type DatafeedsPatchResource =
-     Capture "merchantId" Word64 :>
-       "datafeeds" :>
-         Capture "datafeedId" Word64 :>
-           QueryParam "dryRun" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Datafeed :> Patch '[JSON] Datafeed
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "datafeeds" :>
+             Capture "datafeedId" Word64 :>
+               QueryParam "dryRun" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Datafeed :> Patch '[JSON] Datafeed
 
 -- | Updates a datafeed of your Merchant Center account. This method supports
 -- patch semantics.

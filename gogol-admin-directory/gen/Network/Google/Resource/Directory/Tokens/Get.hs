@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.tokens.get@ method which the
 -- 'TokensGet' request conforms to.
 type TokensGetResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "tokens" :>
-           Capture "clientId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Token
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "tokens" :>
+                 Capture "clientId" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Token
 
 -- | Get information about an access token issued by a user.
 --

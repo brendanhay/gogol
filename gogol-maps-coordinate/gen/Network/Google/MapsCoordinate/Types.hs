@@ -176,7 +176,6 @@ mapsCoordinateService :: Service
 mapsCoordinateService
   = defaultService (ServiceId "coordinate:v1")
       "www.googleapis.com"
-      "coordinate/v1/"
 
 -- | View and manage your Google Maps Coordinate jobs
 coordinateScope :: OAuthScope

@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.settings.list@ method which the
 -- 'SettingsList' request conforms to.
 type SettingsListResource =
-     "users" :>
-       "me" :>
-         "settings" :>
-           QueryParam "syncToken" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Settings
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "settings" :>
+               QueryParam "syncToken" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Settings
 
 -- | Returns all user settings for the authenticated user.
 --

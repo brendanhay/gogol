@@ -43,11 +43,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.watermarks.unset@ method which the
 -- 'WatermarksUnSet' request conforms to.
 type WatermarksUnSetResource =
-     "watermarks" :>
-       "unset" :>
-         QueryParam "channelId" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "watermarks" :>
+           "unset" :>
+             QueryParam "channelId" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Deletes a channel\'s watermark image.
 --

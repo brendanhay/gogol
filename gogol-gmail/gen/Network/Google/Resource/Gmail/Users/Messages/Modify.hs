@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.modify@ method which the
 -- 'UsersMessagesModify' request conforms to.
 type UsersMessagesModifyResource =
-     Capture "userId" Text :>
-       "messages" :>
-         Capture "id" Text :>
-           "modify" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ModifyMessageRequest :>
-                 Post '[JSON] Message
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               Capture "id" Text :>
+                 "modify" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ModifyMessageRequest :>
+                       Post '[JSON] Message
 
 -- | Modifies the labels on the specified message.
 --

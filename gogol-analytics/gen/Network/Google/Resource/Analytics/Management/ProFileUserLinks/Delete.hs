@@ -45,16 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profileUserLinks.delete@ method which the
 -- 'ManagementProFileUserLinksDelete' request conforms to.
 type ManagementProFileUserLinksDeleteResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 Capture "profileId" Text :>
-                   "entityUserLinks" :>
-                     Capture "linkId" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "entityUserLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the given view (profile).
 --

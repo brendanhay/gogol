@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.domains.delete@ method which the
 -- 'DomainsDelete' request conforms to.
 type DomainsDeleteResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "domains" :>
-           Capture "domainName" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "domains" :>
+                 Capture "domainName" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a domain of the customer.
 --

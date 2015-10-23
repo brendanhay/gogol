@@ -44,15 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.personalizedstream.get@ method which the
 -- 'PersonalizedstreamGet' request conforms to.
 type PersonalizedstreamGetResource =
-     "personalizedstream" :>
-       "get" :>
-         QueryParam "locale" Text :>
-           QueryParam "maxAllowedMaturityRating"
-             PersonalizedstreamGetMaxAllowedMaturityRating
-             :>
-             QueryParam "source" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] Discoveryclusters
+     "books" :>
+       "v1" :>
+         "personalizedstream" :>
+           "get" :>
+             QueryParam "locale" Text :>
+               QueryParam "maxAllowedMaturityRating"
+                 PersonalizedstreamGetMaxAllowedMaturityRating
+                 :>
+                 QueryParam "source" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] Discoveryclusters
 
 -- | Returns a stream of personalized book clusters
 --

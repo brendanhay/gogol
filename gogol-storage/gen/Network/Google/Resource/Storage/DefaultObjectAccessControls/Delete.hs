@@ -44,11 +44,13 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.defaultObjectAccessControls.delete@ method which the
 -- 'DefaultObjectAccessControlsDelete' request conforms to.
 type DefaultObjectAccessControlsDeleteResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "defaultObjectAcl" :>
-           Capture "entity" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "defaultObjectAcl" :>
+               Capture "entity" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the default object ACL entry for the specified
 -- entity on the specified bucket.

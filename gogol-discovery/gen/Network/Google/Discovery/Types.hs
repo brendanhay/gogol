@@ -258,4 +258,3 @@ discoveryService :: Service
 discoveryService
   = defaultService (ServiceId "discovery:v1")
       "www.googleapis.com"
-      "discovery/v1/"

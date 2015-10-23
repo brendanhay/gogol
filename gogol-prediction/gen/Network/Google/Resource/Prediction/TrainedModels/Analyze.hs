@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @prediction.trainedmodels.analyze@ method which the
 -- 'TrainedModelsAnalyze' request conforms to.
 type TrainedModelsAnalyzeResource =
-     Capture "project" Text :>
-       "trainedmodels" :>
-         Capture "id" Text :>
-           "analyze" :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Analyze
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 "analyze" :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Analyze
 
 -- | Get analysis of the model and the data the model was trained on.
 --

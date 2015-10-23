@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.datasets.lookup@ method which the
 -- 'DataSetsLookup' request conforms to.
 type DataSetsLookupResource =
-     Capture "datasetId" Text :>
-       "lookup" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] LookupRequest :>
-             Post '[JSON] LookupResponse
+     "datastore" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             "lookup" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] LookupRequest :>
+                   Post '[JSON] LookupResponse
 
 -- | Look up some entities by key.
 --

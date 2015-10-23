@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.onboarding.listCategories@ method which the
 -- 'OnboardingListCategories' request conforms to.
 type OnboardingListCategoriesResource =
-     "onboarding" :>
-       "listCategories" :>
-         QueryParam "locale" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Category
+     "books" :>
+       "v1" :>
+         "onboarding" :>
+           "listCategories" :>
+             QueryParam "locale" Text :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Category
 
 -- | List categories for onboarding experience.
 --

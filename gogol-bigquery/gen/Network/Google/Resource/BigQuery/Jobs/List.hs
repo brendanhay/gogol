@@ -51,15 +51,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.jobs.list@ method which the
 -- 'JobsList' request conforms to.
 type JobsListResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "jobs" :>
-           QueryParams "stateFilter" JobsListStateFilter :>
-             QueryParam "projection" JobsListProjection :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "allUsers" Bool :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] JobList
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "jobs" :>
+               QueryParams "stateFilter" JobsListStateFilter :>
+                 QueryParam "projection" JobsListProjection :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "allUsers" Bool :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] JobList
 
 -- | Lists all jobs that you started in the specified project. Job
 -- information is available for a six month period after creation. The job

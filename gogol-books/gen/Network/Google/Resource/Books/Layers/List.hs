@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.layers.list@ method which the
 -- 'LayersList' request conforms to.
 type LayersListResource =
-     "volumes" :>
-       Capture "volumeId" Text :>
-         "layersummary" :>
-           QueryParam "contentVersion" Text :>
-             QueryParam "source" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] Layersummaries
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layersummary" :>
+               QueryParam "contentVersion" Text :>
+                 QueryParam "source" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] Layersummaries
 
 -- | List the layer summaries for a volume.
 --

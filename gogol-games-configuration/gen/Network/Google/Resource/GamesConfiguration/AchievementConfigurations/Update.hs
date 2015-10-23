@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.update@ method which the
 -- 'AchievementConfigurationsUpdate' request conforms to.
 type AchievementConfigurationsUpdateResource =
-     "achievements" :>
-       Capture "achievementId" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] AchievementConfiguration :>
-             Put '[JSON] AchievementConfiguration
+     "games" :>
+       "v1configuration" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] AchievementConfiguration :>
+                 Put '[JSON] AchievementConfiguration
 
 -- | Update the metadata of the achievement configuration with the given ID.
 --

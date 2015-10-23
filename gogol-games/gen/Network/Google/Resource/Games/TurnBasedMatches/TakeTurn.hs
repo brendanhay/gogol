@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.takeTurn@ method which the
 -- 'TurnBasedMatchesTakeTurn' request conforms to.
 type TurnBasedMatchesTakeTurnResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         "turn" :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] TurnBasedMatchTurn :>
-                 Put '[JSON] TurnBasedMatch
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "turn" :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] TurnBasedMatchTurn :>
+                     Put '[JSON] TurnBasedMatch
 
 -- | Commit the results of a player turn.
 --

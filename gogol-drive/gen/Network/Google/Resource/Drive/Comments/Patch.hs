@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.comments.patch@ method which the
 -- 'CommentsPatch' request conforms to.
 type CommentsPatchResource =
-     "files" :>
-       Capture "fileId" Text :>
-         "comments" :>
-           Capture "commentId" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Comment :> Patch '[JSON] Comment
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Comment :> Patch '[JSON] Comment
 
 -- | Updates an existing comment. This method supports patch semantics.
 --

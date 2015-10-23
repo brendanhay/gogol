@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.threads.list@ method which the
 -- 'UsersThreadsList' request conforms to.
 type UsersThreadsListResource =
-     Capture "userId" Text :>
-       "threads" :>
-         QueryParam "q" Text :>
-           QueryParam "includeSpamTrash" Bool :>
-             QueryParams "labelIds" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ListThreadsResponse
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               QueryParam "q" Text :>
+                 QueryParam "includeSpamTrash" Bool :>
+                   QueryParams "labelIds" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListThreadsResponse
 
 -- | Lists the threads in the user\'s mailbox.
 --

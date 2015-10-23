@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.events.resetAllForAllPlayers@ method which the
 -- 'EventsResetAllForAllPlayers' request conforms to.
 type EventsResetAllForAllPlayersResource =
-     "events" :>
-       "resetAllForAllPlayers" :>
-         QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "events" :>
+           "resetAllForAllPlayers" :>
+             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all draft events for all players. This method is only available
 -- to user accounts for your developer console. All quests that use any of

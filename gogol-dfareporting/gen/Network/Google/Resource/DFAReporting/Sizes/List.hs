@@ -46,15 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.sizes.list@ method which the
 -- 'SizesList' request conforms to.
 type SizesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "sizes" :>
-           QueryParam "height" Int32 :>
-             QueryParams "ids" Int64 :>
-               QueryParam "width" Int32 :>
-                 QueryParam "iabStandard" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] SizesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sizes" :>
+               QueryParam "height" Int32 :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "width" Int32 :>
+                     QueryParam "iabStandard" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] SizesListResponse
 
 -- | Retrieves a list of sizes, possibly filtered.
 --

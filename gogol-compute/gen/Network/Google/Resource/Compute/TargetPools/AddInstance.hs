@@ -45,15 +45,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.addInstance@ method which the
 -- 'TargetPoolsAddInstance' request conforms to.
 type TargetPoolsAddInstanceResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             Capture "targetPool" Text :>
-               "addInstance" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] TargetPoolsAddInstanceRequest :>
-                     Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   Capture "targetPool" Text :>
+                     "addInstance" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] TargetPoolsAddInstanceRequest :>
+                           Post '[JSON] Operation
 
 -- | Adds instance url to targetPool.
 --

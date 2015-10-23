@@ -49,22 +49,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.directorySiteContacts.list@ method which the
 -- 'DirectorySiteContactsList' request conforms to.
 type DirectorySiteContactsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "directorySiteContacts" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParams "directorySiteIds" Int64 :>
-                 QueryParam "sortOrder"
-                   DirectorySiteContactsListSortOrder
-                   :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField"
-                       DirectorySiteContactsListSortField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySiteContacts" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParams "directorySiteIds" Int64 :>
+                     QueryParam "sortOrder"
+                       DirectorySiteContactsListSortOrder
                        :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] DirectorySiteContactsListResponse
+                       QueryParam "pageToken" Text :>
+                         QueryParam "sortField"
+                           DirectorySiteContactsListSortField
+                           :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] DirectorySiteContactsListResponse
 
 -- | Retrieves a list of directory site contacts, possibly filtered.
 --

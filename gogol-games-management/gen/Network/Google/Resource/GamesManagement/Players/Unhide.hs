@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gamesManagement.players.unhide@ method which the
 -- 'PlayersUnhide' request conforms to.
 type PlayersUnhideResource =
-     "applications" :>
-       Capture "applicationId" Text :>
-         "players" :>
-           "hidden" :>
-             Capture "playerId" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "games" :>
+       "v1management" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "players" :>
+               "hidden" :>
+                 Capture "playerId" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Unhide the given player\'s leaderboard scores from the given
 -- application. This method is only available to user accounts for your

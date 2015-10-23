@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.users.revokeToken@ method which the
 -- 'UsersRevokeToken' request conforms to.
 type UsersRevokeTokenResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "token" :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "token" :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Revokes a previously generated token (activation code) for the user.
 --

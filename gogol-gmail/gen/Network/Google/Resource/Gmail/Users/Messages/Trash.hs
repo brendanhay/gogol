@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.trash@ method which the
 -- 'UsersMessagesTrash' request conforms to.
 type UsersMessagesTrashResource =
-     Capture "userId" Text :>
-       "messages" :>
-         Capture "id" Text :>
-           "trash" :>
-             QueryParam "alt" AltJSON :> Post '[JSON] Message
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               Capture "id" Text :>
+                 "trash" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Message
 
 -- | Moves the specified message to the trash.
 --

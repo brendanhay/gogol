@@ -46,15 +46,17 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.triggers.update@ method which the
 -- 'AccountsContainersTriggersUpdate' request conforms to.
 type AccountsContainersTriggersUpdateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "triggers" :>
-               Capture "triggerId" Text :>
-                 QueryParam "fingerprint" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Trigger :> Put '[JSON] Trigger
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "triggers" :>
+                   Capture "triggerId" Text :>
+                     QueryParam "fingerprint" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Trigger :> Put '[JSON] Trigger
 
 -- | Updates a GTM Trigger.
 --

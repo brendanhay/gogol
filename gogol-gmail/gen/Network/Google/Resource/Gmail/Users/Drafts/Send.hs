@@ -36,7 +36,6 @@ module Network.Google.Resource.Gmail.Users.Drafts.Send
     -- * Request Lenses
     , udsPayload
     , udsUserId
-    , udsMedia
     ) where
 
 import           Network.Google.Gmail.Types
@@ -45,12 +44,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.drafts.send@ method which the
 -- 'UsersDraftsSend' request conforms to.
 type UsersDraftsSendResource =
-     Capture "userId" Text :>
-       "drafts" :>
-         "send" :>
-           QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Draft Body :>
-               Post '[JSON] Message
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               "send" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Draft :> Post '[JSON] Message
+       :<|>
+       "upload" :>
+         "gmail" :>
+           "v1" :>
+             "users" :>
+               Capture "userId" Text :>
+                 "drafts" :>
+                   "send" :>
+                     QueryParam "alt" AltJSON :>
+                       QueryParam "uploadType" AltMedia :>
+                         MultipartRelated '[JSON] Draft RequestBody :>
+                           Post '[JSON] Message
 
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
 -- Bcc headers.
@@ -59,8 +72,7 @@ type UsersDraftsSendResource =
 data UsersDraftsSend = UsersDraftsSend
     { _udsPayload :: !Draft
     , _udsUserId  :: !Text
-    , _udsMedia   :: !Body
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsSend' with the minimum fields required to make a request.
 --
@@ -69,18 +81,14 @@ data UsersDraftsSend = UsersDraftsSend
 -- * 'udsPayload'
 --
 -- * 'udsUserId'
---
--- * 'udsMedia'
 usersDraftsSend
     :: Draft -- ^ 'udsPayload'
-    -> Text -- ^ 'udsMedia'
-    -> Body
+    -> Text
     -> UsersDraftsSend
-usersDraftsSend pUdsPayload_ pUdsUserId_ pUdsMedia_ =
+usersDraftsSend pUdsPayload_ pUdsUserId_ =
     UsersDraftsSend
     { _udsPayload = pUdsPayload_
     , _udsUserId = pUdsUserId_
-    , _udsMedia = pUdsMedia_
     }
 
 -- | Multipart request metadata.
@@ -94,15 +102,24 @@ udsUserId :: Lens' UsersDraftsSend Text
 udsUserId
   = lens _udsUserId (\ s a -> s{_udsUserId = a})
 
-udsMedia :: Lens' UsersDraftsSend Body
-udsMedia = lens _udsMedia (\ s a -> s{_udsMedia = a})
-
 instance GoogleRequest UsersDraftsSend where
         type Rs UsersDraftsSend = Message
         requestClient UsersDraftsSend{..}
-          = go _udsUserId (Just AltJSON) _udsPayload _udsMedia
+          = go _udsUserId (Just AltJSON) _udsPayload
               gmailService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy UsersDraftsSendResource)
+                      mempty
+
+instance GoogleRequest (Upload UsersDraftsSend) where
+        type Rs (Upload UsersDraftsSend) = Message
+        requestClient (Upload UsersDraftsSend{..} body)
+          = go _udsUserId (Just AltJSON) (Just AltMedia)
+              _udsPayload
+              body
+              gmailService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy UsersDraftsSendResource)
                       mempty

@@ -42,9 +42,11 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.comments.delete@ method which the
 -- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
-     "comments" :>
-       QueryParam "id" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "comments" :>
+           QueryParam "id" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a comment.
 --

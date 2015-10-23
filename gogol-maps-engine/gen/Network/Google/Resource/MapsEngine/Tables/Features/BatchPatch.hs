@@ -54,13 +54,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.features.batchPatch@ method which the
 -- 'TablesFeaturesBatchPatch' request conforms to.
 type TablesFeaturesBatchPatchResource =
-     "tables" :>
-       Capture "id" Text :>
-         "features" :>
-           "batchPatch" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] FeaturesBatchPatchRequest :>
-                 Post '[JSON] ()
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "id" Text :>
+             "features" :>
+               "batchPatch" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] FeaturesBatchPatchRequest :>
+                     Post '[JSON] ()
 
 -- | Update the supplied features. A single batchPatch request can update: -
 -- Up to 50 features. - A combined total of 10 000 vertices. Feature limits

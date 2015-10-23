@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.connectionTypes.list@ method which the
 -- 'ConnectionTypesList' request conforms to.
 type ConnectionTypesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "connectionTypes" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] ConnectionTypesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "connectionTypes" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ConnectionTypesListResponse
 
 -- | Retrieves a list of connection types.
 --

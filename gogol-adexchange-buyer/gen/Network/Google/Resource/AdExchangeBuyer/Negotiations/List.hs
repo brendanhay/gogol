@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.negotiations.list@ method which the
 -- 'NegotiationsList' request conforms to.
 type NegotiationsListResource =
-     "negotiations" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] GetNegotiationsRequest :>
-           Get '[JSON] GetNegotiationsResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "negotiations" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] GetNegotiationsRequest :>
+               Get '[JSON] GetNegotiationsResponse
 
 -- | Lists all negotiations the authenticated user has access to.
 --

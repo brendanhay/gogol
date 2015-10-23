@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.pages.delete@ method which the
 -- 'PagesDelete' request conforms to.
 type PagesDeleteResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "pages" :>
-           Capture "pageId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a page by ID.
 --

@@ -52,20 +52,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.jobs.insert@ method which the
 -- 'JobsInsert' request conforms to.
 type JobsInsertResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "jobs" :>
-           QueryParam "address" Text :>
-             QueryParam "lat" Double :>
-               QueryParam "lng" Double :>
-                 QueryParam "title" Text :>
-                   QueryParam "note" Text :>
-                     QueryParam "customerPhoneNumber" Text :>
-                       QueryParam "customerName" Text :>
-                         QueryParam "assignee" Text :>
-                           QueryParams "customField" Text :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Job :> Post '[JSON] Job
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               QueryParam "address" Text :>
+                 QueryParam "lat" Double :>
+                   QueryParam "lng" Double :>
+                     QueryParam "title" Text :>
+                       QueryParam "note" Text :>
+                         QueryParam "customerPhoneNumber" Text :>
+                           QueryParam "customerName" Text :>
+                             QueryParam "assignee" Text :>
+                               QueryParams "customField" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Job :> Post '[JSON] Job
 
 -- | Inserts a new job. Only the state field of the job should be set.
 --

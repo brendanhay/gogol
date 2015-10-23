@@ -45,13 +45,15 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.defaultObjectAccessControls.patch@ method which the
 -- 'DefaultObjectAccessControlsPatch' request conforms to.
 type DefaultObjectAccessControlsPatchResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "defaultObjectAcl" :>
-           Capture "entity" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ObjectAccessControl :>
-                 Patch '[JSON] ObjectAccessControl
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "defaultObjectAcl" :>
+               Capture "entity" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] ObjectAccessControl :>
+                     Patch '[JSON] ObjectAccessControl
 
 -- | Updates a default object ACL entry on the specified bucket. This method
 -- supports patch semantics.

@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.entitlements.get@ method which the
 -- 'EntitlementsGet' request conforms to.
 type EntitlementsGetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "entitlements" :>
-               Capture "entitlementId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Entitlement
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "entitlements" :>
+                   Capture "entitlementId" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Entitlement
 
 -- | Retrieves details of an entitlement.
 --

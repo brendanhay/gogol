@@ -47,16 +47,19 @@ import           Network.Google.TaskQueue.Types
 -- | A resource alias for @taskqueue.tasks.lease@ method which the
 -- 'TasksLease' request conforms to.
 type TasksLeaseResource =
-     Capture "project" Text :>
-       "taskqueues" :>
-         Capture "taskqueue" Text :>
-           "tasks" :>
-             "lease" :>
-               QueryParam "numTasks" Int32 :>
-                 QueryParam "leaseSecs" Int32 :>
-                   QueryParam "tag" Text :>
-                     QueryParam "groupByTag" Bool :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Tasks
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   "lease" :>
+                     QueryParam "numTasks" Int32 :>
+                       QueryParam "leaseSecs" Int32 :>
+                         QueryParam "tag" Text :>
+                           QueryParam "groupByTag" Bool :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] Tasks
 
 -- | Lease 1 or more tasks from a TaskQueue.
 --

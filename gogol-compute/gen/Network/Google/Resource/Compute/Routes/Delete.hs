@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.routes.delete@ method which the
 -- 'RoutesDelete' request conforms to.
 type RoutesDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "routes" :>
-           Capture "route" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "routes" :>
+                 Capture "route" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified route resource.
 --

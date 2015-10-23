@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.task.list@ method which the
 -- 'TaskList'' request conforms to.
 type TaskListResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "tasks" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "startIndex" Word32 :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] TaskList
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "tasks" :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "startIndex" Word32 :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] TaskList
 
 -- | Retrieves a list of tasks.
 --

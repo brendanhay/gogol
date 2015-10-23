@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.urlchannels.insert@ method which the
 -- 'URLChannelsInsert' request conforms to.
 type URLChannelsInsertResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "urlchannels" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] URLChannel :> Post '[JSON] URLChannel
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "urlchannels" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] URLChannel :> Post '[JSON] URLChannel
 
 -- | Add a new URL channel to the host AdSense account.
 --

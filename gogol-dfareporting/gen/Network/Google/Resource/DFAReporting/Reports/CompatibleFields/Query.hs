@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.reports.compatibleFields.query@ method which the
 -- 'ReportsCompatibleFieldsQuery' request conforms to.
 type ReportsCompatibleFieldsQueryResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "reports" :>
-           "compatiblefields" :>
-             "query" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Report :>
-                   Post '[JSON] CompatibleFields
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               "compatiblefields" :>
+                 "query" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Report :>
+                       Post '[JSON] CompatibleFields
 
 -- | Returns the fields that are compatible to be selected in the respective
 -- sections of a report criteria, given the fields already selected in the

@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.projects.moveInstance@ method which the
 -- 'ProjectsMoveInstance' request conforms to.
 type ProjectsMoveInstanceResource =
-     Capture "project" Text :>
-       "moveInstance" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] InstanceMoveRequest :>
-             Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "moveInstance" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] InstanceMoveRequest :>
+                   Post '[JSON] Operation
 
 -- | Moves an instance and its attached persistent disks from one zone to
 -- another.

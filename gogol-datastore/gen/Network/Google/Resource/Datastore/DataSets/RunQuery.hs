@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.datasets.runQuery@ method which the
 -- 'DataSetsRunQuery' request conforms to.
 type DataSetsRunQueryResource =
-     Capture "datasetId" Text :>
-       "runQuery" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] RunQueryRequest :>
-             Post '[JSON] RunQueryResponse
+     "datastore" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             "runQuery" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] RunQueryRequest :>
+                   Post '[JSON] RunQueryResponse
 
 -- | Query for entities.
 --

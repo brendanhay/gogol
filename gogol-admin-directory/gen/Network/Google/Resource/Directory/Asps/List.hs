@@ -42,10 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.asps.list@ method which the
 -- 'AspsList' request conforms to.
 type AspsListResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "asps" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Asps
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "asps" :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Asps
 
 -- | List the ASPs issued by a user.
 --

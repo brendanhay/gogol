@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.marketplacedeals.list@ method which the
 -- 'MarketplaceDealsList' request conforms to.
 type MarketplaceDealsListResource =
-     "marketplaceOrders" :>
-       Capture "orderId" Text :>
-         "deals" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] GetOrderDealsResponse
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "deals" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] GetOrderDealsResponse
 
 -- | List all the deals for a given order
 --

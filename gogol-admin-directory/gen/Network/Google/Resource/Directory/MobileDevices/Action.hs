@@ -44,14 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.mobiledevices.action@ method which the
 -- 'MobileDevicesAction' request conforms to.
 type MobileDevicesActionResource =
-     "customer" :>
-       Capture "customerId" Text :>
-         "devices" :>
-           "mobile" :>
-             Capture "resourceId" Text :>
-               "action" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] MobileDeviceAction :> Post '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customerId" Text :>
+               "devices" :>
+                 "mobile" :>
+                   Capture "resourceId" Text :>
+                     "action" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] MobileDeviceAction :> Post '[JSON] ()
 
 -- | Take action on Mobile Device
 --

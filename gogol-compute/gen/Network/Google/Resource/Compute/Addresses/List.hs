@@ -47,14 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.addresses.list@ method which the
 -- 'AddressesList' request conforms to.
 type AddressesListResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "addresses" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] AddressList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "addresses" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
 -- | Retrieves the list of address resources contained within the specified
 -- region.

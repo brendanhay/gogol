@@ -42,10 +42,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.metadata.columns.list@ method which the
 -- 'MetadataColumnsList' request conforms to.
 type MetadataColumnsListResource =
-     "metadata" :>
-       Capture "reportType" Text :>
-         "columns" :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Columns
+     "analytics" :>
+       "v3" :>
+         "metadata" :>
+           Capture "reportType" Text :>
+             "columns" :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Columns
 
 -- | Lists all columns for a report type
 --

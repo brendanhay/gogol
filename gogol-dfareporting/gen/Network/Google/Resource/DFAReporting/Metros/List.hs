@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.metros.list@ method which the
 -- 'MetrosList' request conforms to.
 type MetrosListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "metros" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] MetrosListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "metros" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] MetrosListResponse
 
 -- | Retrieves a list of metros.
 --

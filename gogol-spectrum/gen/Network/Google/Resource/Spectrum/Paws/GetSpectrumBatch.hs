@@ -43,10 +43,13 @@ import           Network.Google.Spectrum.Types
 -- | A resource alias for @spectrum.paws.getSpectrumBatch@ method which the
 -- 'PawsGetSpectrumBatch' request conforms to.
 type PawsGetSpectrumBatchResource =
-     "getSpectrumBatch" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] PawsGetSpectrumBatchRequest :>
-           Post '[JSON] PawsGetSpectrumBatchResponse
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "getSpectrumBatch" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PawsGetSpectrumBatchRequest :>
+                 Post '[JSON] PawsGetSpectrumBatchResponse
 
 -- | The Google Spectrum Database does not support batch requests, so this
 -- method always yields an UNIMPLEMENTED error.

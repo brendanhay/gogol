@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.comments.list@ method which the
 -- 'CommentsList' request conforms to.
 type CommentsListResource =
-     "activities" :>
-       Capture "activityId" Text :>
-         "comments" :>
-           QueryParam "sortOrder" CommentsListSortOrder :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] CommentFeed
+     "plusDomains" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             "comments" :>
+               QueryParam "sortOrder" CommentsListSortOrder :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] CommentFeed
 
 -- | List all of the comments for an activity.
 --

@@ -42,10 +42,12 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.channels.stop@ method which the
 -- 'ChannelsStop' request conforms to.
 type ChannelsStopResource =
-     "channels" :>
-       "stop" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Channel :> Post '[JSON] ()
+     "storage" :>
+       "v1" :>
+         "channels" :>
+           "stop" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Channel :> Post '[JSON] ()
 
 -- | Stop watching resources through this channel
 --

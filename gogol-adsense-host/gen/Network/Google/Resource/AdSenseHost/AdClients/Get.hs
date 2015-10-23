@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.adclients.get@ method which the
 -- 'AdClientsGet' request conforms to.
 type AdClientsGetResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] AdClient
+     "adsensehost" :>
+       "v4.1" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] AdClient
 
 -- | Get information about one of the ad clients in the Host AdSense account.
 --

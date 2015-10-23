@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.creatives.insert@ method which the
 -- 'CreativesInsert' request conforms to.
 type CreativesInsertResource =
-     "creatives" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] Creative :> Post '[JSON] Creative
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "creatives" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] Creative :> Post '[JSON] Creative
 
 -- | Submit a new creative.
 --

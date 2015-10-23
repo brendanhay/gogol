@@ -45,13 +45,16 @@ import           Network.Google.ReplicaPoolUpdater.Types
 -- | A resource alias for @replicapoolupdater.rollingUpdates.cancel@ method which the
 -- 'RollingUpdatesCancel' request conforms to.
 type RollingUpdatesCancelResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "rollingUpdates" :>
-             Capture "rollingUpdate" Text :>
-               "cancel" :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "replicapoolupdater" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "rollingUpdates" :>
+                   Capture "rollingUpdate" Text :>
+                     "cancel" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Cancels an update. The update must be PAUSED before it can be cancelled.
 -- This has no effect if the update is already CANCELLED.

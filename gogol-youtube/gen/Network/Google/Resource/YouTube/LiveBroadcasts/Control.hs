@@ -49,17 +49,19 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveBroadcasts.control@ method which the
 -- 'LiveBroadcastsControl' request conforms to.
 type LiveBroadcastsControlResource =
-     "liveBroadcasts" :>
-       "control" :>
-         QueryParam "id" Text :>
-           QueryParam "part" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                 QueryParam "displaySlate" Bool :>
-                   QueryParam "walltime" DateTime' :>
-                     QueryParam "offsetTimeMs" Word64 :>
-                       QueryParam "alt" AltJSON :>
-                         Post '[JSON] LiveBroadcast
+     "youtube" :>
+       "v3" :>
+         "liveBroadcasts" :>
+           "control" :>
+             QueryParam "id" Text :>
+               QueryParam "part" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "displaySlate" Bool :>
+                       QueryParam "walltime" DateTime' :>
+                         QueryParam "offsetTimeMs" Word64 :>
+                           QueryParam "alt" AltJSON :>
+                             Post '[JSON] LiveBroadcast
 
 -- | Controls the settings for a slate that can be displayed in the broadcast
 -- stream.

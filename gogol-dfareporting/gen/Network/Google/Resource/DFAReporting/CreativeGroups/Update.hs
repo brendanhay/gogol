@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeGroups.update@ method which the
 -- 'CreativeGroupsUpdate' request conforms to.
 type CreativeGroupsUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeGroups" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] CreativeGroup :>
-               Put '[JSON] CreativeGroup
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] CreativeGroup :>
+                   Put '[JSON] CreativeGroup
 
 -- | Updates an existing creative group.
 --

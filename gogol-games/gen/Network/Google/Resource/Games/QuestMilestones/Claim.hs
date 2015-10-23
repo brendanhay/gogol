@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.questMilestones.claim@ method which the
 -- 'QuestMilestonesClaim' request conforms to.
 type QuestMilestonesClaimResource =
-     "quests" :>
-       Capture "questId" Text :>
-         "milestones" :>
-           Capture "milestoneId" Text :>
-             "claim" :>
-               QueryParam "requestId" Int64 :>
-                 QueryParam "alt" AltJSON :> Put '[JSON] ()
+     "games" :>
+       "v1" :>
+         "quests" :>
+           Capture "questId" Text :>
+             "milestones" :>
+               Capture "milestoneId" Text :>
+                 "claim" :>
+                   QueryParam "requestId" Int64 :>
+                     QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Report that a reward for the milestone corresponding to milestoneId for
 -- the quest corresponding to questId has been claimed by the currently

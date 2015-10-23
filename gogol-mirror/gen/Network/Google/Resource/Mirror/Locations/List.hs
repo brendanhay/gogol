@@ -40,9 +40,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.locations.list@ method which the
 -- 'LocationsList' request conforms to.
 type LocationsListResource =
-     "locations" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON] LocationsListResponse
+     "mirror" :>
+       "v1" :>
+         "locations" :>
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] LocationsListResponse
 
 -- | Retrieves a list of locations for the user.
 --

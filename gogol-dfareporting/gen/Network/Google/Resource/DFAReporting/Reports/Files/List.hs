@@ -47,16 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.reports.files.list@ method which the
 -- 'ReportsFilesList' request conforms to.
 type ReportsFilesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "reports" :>
-           Capture "reportId" Int64 :>
-             "files" :>
-               QueryParam "sortOrder" ReportsFilesListSortOrder :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" ReportsFilesListSortField :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] FileList
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               Capture "reportId" Int64 :>
+                 "files" :>
+                   QueryParam "sortOrder" ReportsFilesListSortOrder :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField" ReportsFilesListSortField :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] FileList
 
 -- | Lists files for a report.
 --

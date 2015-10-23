@@ -179,7 +179,6 @@ resourceViewsService :: Service
 resourceViewsService
   = defaultService (ServiceId "resourceviews:v1beta2")
       "www.googleapis.com"
-      "resourceviews/v1beta2/projects/"
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: OAuthScope

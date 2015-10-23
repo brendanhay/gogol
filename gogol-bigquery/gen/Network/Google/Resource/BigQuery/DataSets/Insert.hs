@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.datasets.insert@ method which the
 -- 'DataSetsInsert' request conforms to.
 type DataSetsInsertResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "datasets" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] DataSet :> Post '[JSON] DataSet
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "datasets" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] DataSet :> Post '[JSON] DataSet
 
 -- | Creates a new empty dataset.
 --

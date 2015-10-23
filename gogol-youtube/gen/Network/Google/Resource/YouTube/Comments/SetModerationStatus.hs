@@ -46,14 +46,16 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.comments.setModerationStatus@ method which the
 -- 'CommentsSetModerationStatus' request conforms to.
 type CommentsSetModerationStatusResource =
-     "comments" :>
-       "setModerationStatus" :>
-         QueryParam "id" Text :>
-           QueryParam "moderationStatus"
-             CommentsSetModerationStatusModerationStatus
-             :>
-             QueryParam "banAuthor" Bool :>
-               QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "comments" :>
+           "setModerationStatus" :>
+             QueryParam "id" Text :>
+               QueryParam "moderationStatus"
+                 CommentsSetModerationStatusModerationStatus
+                 :>
+                 QueryParam "banAuthor" Bool :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Sets the moderation status of one or more comments. The API request must
 -- be authorized by the owner of the channel or video associated with the

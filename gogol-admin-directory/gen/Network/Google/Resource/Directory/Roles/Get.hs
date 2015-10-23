@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roles.get@ method which the
 -- 'RolesGet' request conforms to.
 type RolesGetResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roles" :>
-           Capture "roleId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Role
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roles" :>
+                 Capture "roleId" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Role
 
 -- | Retrieves a role.
 --

@@ -39,7 +39,6 @@ module Network.Google.Resource.Storage.Objects.Insert
     , oiPredefinedACL
     , oiBucket
     , oiPayload
-    , oiMedia
     , oiName
     , oiIfMetagenerationNotMatch
     , oiContentEncoding
@@ -52,37 +51,62 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.objects.insert@ method which the
 -- 'ObjectsInsert' request conforms to.
 type ObjectsInsertResource =
-     "b" :>
-       Capture "bucket" Text :>
-         "o" :>
-           QueryParam "ifMetagenerationMatch" Int64 :>
-             QueryParam "ifGenerationNotMatch" Int64 :>
-               QueryParam "ifGenerationMatch" Int64 :>
-                 QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
-                   :>
-                   QueryParam "name" Text :>
-                     QueryParam "ifMetagenerationNotMatch" Int64 :>
-                       QueryParam "contentEncoding" Text :>
-                         QueryParam "projection" ObjectsInsertProjection :>
-                           QueryParam "alt" AltJSON :>
-                             MultipartRelated '[JSON] Object Body :>
-                               Post '[JSON] Object
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             "o" :>
+               QueryParam "ifMetagenerationMatch" Int64 :>
+                 QueryParam "ifGenerationNotMatch" Int64 :>
+                   QueryParam "ifGenerationMatch" Int64 :>
+                     QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
+                       :>
+                       QueryParam "name" Text :>
+                         QueryParam "ifMetagenerationNotMatch" Int64 :>
+                           QueryParam "contentEncoding" Text :>
+                             QueryParam "projection" ObjectsInsertProjection :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Object :> Post '[JSON] Object
        :<|>
-       "b" :>
-         Capture "bucket" Text :>
-           "o" :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
-               QueryParam "ifGenerationNotMatch" Int64 :>
-                 QueryParam "ifGenerationMatch" Int64 :>
-                   QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
-                     :>
-                     QueryParam "name" Text :>
-                       QueryParam "ifMetagenerationNotMatch" Int64 :>
-                         QueryParam "contentEncoding" Text :>
-                           QueryParam "projection" ObjectsInsertProjection :>
-                             QueryParam "alt" AltMedia :>
-                               MultipartRelated '[JSON] Object Body :>
-                                 Post '[OctetStream] Stream
+       "storage" :>
+         "v1" :>
+           "b" :>
+             Capture "bucket" Text :>
+               "o" :>
+                 QueryParam "ifMetagenerationMatch" Int64 :>
+                   QueryParam "ifGenerationNotMatch" Int64 :>
+                     QueryParam "ifGenerationMatch" Int64 :>
+                       QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
+                         :>
+                         QueryParam "name" Text :>
+                           QueryParam "ifMetagenerationNotMatch" Int64 :>
+                             QueryParam "contentEncoding" Text :>
+                               QueryParam "projection" ObjectsInsertProjection
+                                 :>
+                                 QueryParam "alt" AltMedia :>
+                                   Get '[OctetStream] Stream
+       :<|>
+       "upload" :>
+         "storage" :>
+           "v1" :>
+             "b" :>
+               Capture "bucket" Text :>
+                 "o" :>
+                   QueryParam "ifMetagenerationMatch" Int64 :>
+                     QueryParam "ifGenerationNotMatch" Int64 :>
+                       QueryParam "ifGenerationMatch" Int64 :>
+                         QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
+                           :>
+                           QueryParam "name" Text :>
+                             QueryParam "ifMetagenerationNotMatch" Int64 :>
+                               QueryParam "contentEncoding" Text :>
+                                 QueryParam "projection" ObjectsInsertProjection
+                                   :>
+                                   QueryParam "alt" AltJSON :>
+                                     QueryParam "uploadType" AltMedia :>
+                                       MultipartRelated '[JSON] Object
+                                         RequestBody
+                                         :> Post '[JSON] Object
 
 -- | Stores a new object and metadata.
 --
@@ -94,12 +118,11 @@ data ObjectsInsert = ObjectsInsert
     , _oiPredefinedACL            :: !(Maybe ObjectsInsertPredefinedACL)
     , _oiBucket                   :: !Text
     , _oiPayload                  :: !Object
-    , _oiMedia                    :: !Body
     , _oiName                     :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe Int64)
     , _oiContentEncoding          :: !(Maybe Text)
     , _oiProjection               :: !(Maybe ObjectsInsertProjection)
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsInsert' with the minimum fields required to make a request.
 --
@@ -117,8 +140,6 @@ data ObjectsInsert = ObjectsInsert
 --
 -- * 'oiPayload'
 --
--- * 'oiMedia'
---
 -- * 'oiName'
 --
 -- * 'oiIfMetagenerationNotMatch'
@@ -129,9 +150,8 @@ data ObjectsInsert = ObjectsInsert
 objectsInsert
     :: Text -- ^ 'oiBucket'
     -> Object -- ^ 'oiPayload'
-    -> Body -- ^ 'oiMedia'
     -> ObjectsInsert
-objectsInsert pOiBucket_ pOiPayload_ pOiMedia_ =
+objectsInsert pOiBucket_ pOiPayload_ =
     ObjectsInsert
     { _oiIfMetagenerationMatch = Nothing
     , _oiIfGenerationNotMatch = Nothing
@@ -139,7 +159,6 @@ objectsInsert pOiBucket_ pOiPayload_ pOiMedia_ =
     , _oiPredefinedACL = Nothing
     , _oiBucket = pOiBucket_
     , _oiPayload = pOiPayload_
-    , _oiMedia = pOiMedia_
     , _oiName = Nothing
     , _oiIfMetagenerationNotMatch = Nothing
     , _oiContentEncoding = Nothing
@@ -182,9 +201,6 @@ oiBucket = lens _oiBucket (\ s a -> s{_oiBucket = a})
 oiPayload :: Lens' ObjectsInsert Object
 oiPayload
   = lens _oiPayload (\ s a -> s{_oiPayload = a})
-
-oiMedia :: Lens' ObjectsInsert Body
-oiMedia = lens _oiMedia (\ s a -> s{_oiMedia = a})
 
 -- | Name of the object. Required when the object metadata is not otherwise
 -- provided. Overrides the object metadata\'s name value, if any. For
@@ -229,9 +245,8 @@ instance GoogleRequest ObjectsInsert where
               _oiProjection
               (Just AltJSON)
               _oiPayload
-              _oiMedia
               storageService
-          where go :<|> _
+          where go :<|> (_ :<|> _)
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty
 
@@ -247,9 +262,27 @@ instance GoogleRequest (Download ObjectsInsert) where
               _oiContentEncoding
               _oiProjection
               (Just AltMedia)
-              _oiPayload
-              _oiMedia
               storageService
-          where _ :<|> go
+          where _ :<|> (go :<|> _)
+                  = buildClient (Proxy :: Proxy ObjectsInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload ObjectsInsert) where
+        type Rs (Upload ObjectsInsert) = Object
+        requestClient (Upload ObjectsInsert{..} body)
+          = go _oiBucket _oiIfMetagenerationMatch
+              _oiIfGenerationNotMatch
+              _oiIfGenerationMatch
+              _oiPredefinedACL
+              _oiName
+              _oiIfMetagenerationNotMatch
+              _oiContentEncoding
+              _oiProjection
+              (Just AltJSON)
+              (Just AltMedia)
+              _oiPayload
+              body
+              storageService
+          where _ :<|> (_ :<|> go)
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty

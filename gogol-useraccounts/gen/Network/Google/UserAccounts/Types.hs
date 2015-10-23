@@ -201,7 +201,6 @@ userAccountsService :: Service
 userAccountsService
   = defaultService (ServiceId "clouduseraccounts:beta")
       "www.googleapis.com"
-      "clouduseraccounts/beta/projects/"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope

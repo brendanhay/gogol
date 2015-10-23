@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.posts.delete@ method which the
 -- 'PostsDelete' request conforms to.
 type PostsDeleteResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a post by ID.
 --

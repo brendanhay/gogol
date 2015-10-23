@@ -42,11 +42,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.accountPermissionGroups.list@ method which the
 -- 'AccountPermissionGroupsList' request conforms to.
 type AccountPermissionGroupsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "accountPermissionGroups" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] AccountPermissionGroupsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountPermissionGroups" :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] AccountPermissionGroupsListResponse
 
 -- | Retrieves the list of account permission groups.
 --

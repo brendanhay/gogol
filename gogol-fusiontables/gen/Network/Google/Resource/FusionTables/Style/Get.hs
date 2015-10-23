@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.style.get@ method which the
 -- 'StyleGet' request conforms to.
 type StyleGetResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "styles" :>
-           Capture "styleId" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] StyleSetting
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "styles" :>
+               Capture "styleId" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] StyleSetting
 
 -- | Gets a specific style.
 --

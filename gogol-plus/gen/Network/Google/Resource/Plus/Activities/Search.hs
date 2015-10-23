@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @plus.activities.search@ method which the
 -- 'ActivitiesSearch' request conforms to.
 type ActivitiesSearchResource =
-     "activities" :>
-       QueryParam "query" Text :>
-         QueryParam "orderBy" ActivitiesSearchOrderBy :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
+     "plus" :>
+       "v1" :>
+         "activities" :>
+           QueryParam "query" Text :>
+             QueryParam "orderBy" ActivitiesSearchOrderBy :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
 -- | Search public activities.
 --

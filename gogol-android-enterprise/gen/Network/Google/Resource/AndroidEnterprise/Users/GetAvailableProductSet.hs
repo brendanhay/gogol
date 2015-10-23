@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.users.getAvailableProductSet@ method which the
 -- 'UsersGetAvailableProductSet' request conforms to.
 type UsersGetAvailableProductSetResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "availableProductSet" :>
-               QueryParam "alt" AltJSON :> Get '[JSON] ProductSet
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "availableProductSet" :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] ProductSet
 
 -- | Retrieves the set of products a user is entitled to access.
 --

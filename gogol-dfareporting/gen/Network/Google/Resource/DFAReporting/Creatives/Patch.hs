@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creatives.patch@ method which the
 -- 'CreativesPatch' request conforms to.
 type CreativesPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creatives" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Creative :> Patch '[JSON] Creative
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creatives" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Creative :> Patch '[JSON] Creative
 
 -- | Updates an existing creative. This method supports patch semantics.
 --

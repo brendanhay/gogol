@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.contentCategories.patch@ method which the
 -- 'ContentCategoriesPatch' request conforms to.
 type ContentCategoriesPatchResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "contentCategories" :>
-           QueryParam "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ContentCategory :>
-                 Patch '[JSON] ContentCategory
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               QueryParam "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] ContentCategory :>
+                     Patch '[JSON] ContentCategory
 
 -- | Updates an existing content category. This method supports patch
 -- semantics.

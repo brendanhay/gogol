@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.deleteAccount@ method which the
 -- 'RelyingPartyDeleteAccount' request conforms to.
 type RelyingPartyDeleteAccountResource =
-     "deleteAccount" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           IdentitytoolkitRelyingPartyDeleteAccountRequest
-           :> Post '[JSON] DeleteAccountResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "deleteAccount" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 IdentitytoolkitRelyingPartyDeleteAccountRequest
+                 :> Post '[JSON] DeleteAccountResponse
 
 -- | Delete user account.
 --

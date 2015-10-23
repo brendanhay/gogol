@@ -860,7 +860,6 @@ adExchangeBuyerService :: Service
 adExchangeBuyerService
   = defaultService (ServiceId "adexchangebuyer:v1.4")
       "www.googleapis.com"
-      "adexchangebuyer/v1.4/"
 
 -- | Manage your Ad Exchange buyer account configuration
 adexchangeBuyerScope :: OAuthScope

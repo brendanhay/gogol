@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.machineTypes.aggregatedList@ method which the
 -- 'MachineTypesAggregatedList' request conforms to.
 type MachineTypesAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "machineTypes" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] MachineTypeAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "machineTypes" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] MachineTypeAggregatedList
 
 -- | Retrieves the list of machine type resources grouped by scope.
 --

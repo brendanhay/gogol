@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.pages.insert@ method which the
 -- 'PagesInsert' request conforms to.
 type PagesInsertResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "pages" :>
-           QueryParam "isDraft" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Page :> Post '[JSON] Page
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               QueryParam "isDraft" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Page :> Post '[JSON] Page
 
 -- | Add a page.
 --

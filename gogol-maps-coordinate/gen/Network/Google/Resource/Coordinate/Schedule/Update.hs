@@ -48,17 +48,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.schedule.update@ method which the
 -- 'ScheduleUpdate' request conforms to.
 type ScheduleUpdateResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "jobs" :>
-           Capture "jobId" Word64 :>
-             "schedule" :>
-               QueryParam "allDay" Bool :>
-                 QueryParam "startTime" Word64 :>
-                   QueryParam "endTime" Word64 :>
-                     QueryParam "duration" Word64 :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Schedule :> Put '[JSON] Schedule
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 "schedule" :>
+                   QueryParam "allDay" Bool :>
+                     QueryParam "startTime" Word64 :>
+                       QueryParam "endTime" Word64 :>
+                         QueryParam "duration" Word64 :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Schedule :> Put '[JSON] Schedule
 
 -- | Replaces the schedule of a job with the provided schedule.
 --

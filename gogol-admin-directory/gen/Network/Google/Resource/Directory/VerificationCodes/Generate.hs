@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.verificationCodes.generate@ method which the
 -- 'VerificationCodesGenerate' request conforms to.
 type VerificationCodesGenerateResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "verificationCodes" :>
-           "generate" :>
-             QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "verificationCodes" :>
+                 "generate" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Generate new backup verification codes for the user.
 --

@@ -39,7 +39,6 @@ module Network.Google.Resource.PlusDomains.Media.Insert
     , miCollection
     , miPayload
     , miUserId
-    , miMedia
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -48,13 +47,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.media.insert@ method which the
 -- 'MediaInsert' request conforms to.
 type MediaInsertResource =
-     "people" :>
-       Capture "userId" Text :>
-         "media" :>
-           Capture "collection" MediaInsertCollection :>
-             QueryParam "alt" AltJSON :>
-               MultipartRelated '[JSON] Media Body :>
-                 Post '[JSON] Media
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "media" :>
+               Capture "collection" MediaInsertCollection :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Media :> Post '[JSON] Media
+       :<|>
+       "upload" :>
+         "plusDomains" :>
+           "v1" :>
+             "people" :>
+               Capture "userId" Text :>
+                 "media" :>
+                   Capture "collection" MediaInsertCollection :>
+                     QueryParam "alt" AltJSON :>
+                       QueryParam "uploadType" AltMedia :>
+                         MultipartRelated '[JSON] Media RequestBody :>
+                           Post '[JSON] Media
 
 -- | Add a new media item to an album. The current upload size limitations
 -- are 36MB for a photo and 1GB for a video. Uploads do not count against
@@ -66,8 +78,7 @@ data MediaInsert = MediaInsert
     { _miCollection :: !MediaInsertCollection
     , _miPayload    :: !Media
     , _miUserId     :: !Text
-    , _miMedia      :: !Body
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MediaInsert' with the minimum fields required to make a request.
 --
@@ -78,20 +89,16 @@ data MediaInsert = MediaInsert
 -- * 'miPayload'
 --
 -- * 'miUserId'
---
--- * 'miMedia'
 mediaInsert
     :: MediaInsertCollection -- ^ 'miCollection'
     -> Media -- ^ 'miPayload'
     -> Text -- ^ 'miUserId'
-    -> Body -- ^ 'miMedia'
     -> MediaInsert
-mediaInsert pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ =
+mediaInsert pMiCollection_ pMiPayload_ pMiUserId_ =
     MediaInsert
     { _miCollection = pMiCollection_
     , _miPayload = pMiPayload_
     , _miUserId = pMiUserId_
-    , _miMedia = pMiMedia_
     }
 
 miCollection :: Lens' MediaInsert MediaInsertCollection
@@ -107,16 +114,24 @@ miPayload
 miUserId :: Lens' MediaInsert Text
 miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
-miMedia :: Lens' MediaInsert Body
-miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
-
 instance GoogleRequest MediaInsert where
         type Rs MediaInsert = Media
         requestClient MediaInsert{..}
           = go _miUserId _miCollection (Just AltJSON)
               _miPayload
-              _miMedia
               plusDomainsService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy MediaInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload MediaInsert) where
+        type Rs (Upload MediaInsert) = Media
+        requestClient (Upload MediaInsert{..} body)
+          = go _miUserId _miCollection (Just AltJSON)
+              (Just AltMedia)
+              _miPayload
+              body
+              plusDomainsService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy MediaInsertResource)
                       mempty

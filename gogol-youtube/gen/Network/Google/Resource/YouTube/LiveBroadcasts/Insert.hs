@@ -45,13 +45,15 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveBroadcasts.insert@ method which the
 -- 'LiveBroadcastsInsert' request conforms to.
 type LiveBroadcastsInsertResource =
-     "liveBroadcasts" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] LiveBroadcast :>
-                 Post '[JSON] LiveBroadcast
+     "youtube" :>
+       "v3" :>
+         "liveBroadcasts" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] LiveBroadcast :>
+                     Post '[JSON] LiveBroadcast
 
 -- | Creates a broadcast.
 --

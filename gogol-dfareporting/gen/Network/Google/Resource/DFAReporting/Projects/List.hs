@@ -49,18 +49,20 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.projects.list@ method which the
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "projects" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" ProjectsListSortOrder :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" ProjectsListSortField :>
-                     QueryParams "advertiserIds" Int64 :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ProjectsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder" ProjectsListSortOrder :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField" ProjectsListSortField :>
+                         QueryParams "advertiserIds" Int64 :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ProjectsListResponse
 
 -- | Retrieves a list of projects, possibly filtered.
 --

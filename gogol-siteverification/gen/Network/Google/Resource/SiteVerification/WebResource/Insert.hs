@@ -43,11 +43,13 @@ import           Network.Google.SiteVerification.Types
 -- | A resource alias for @siteVerification.webResource.insert@ method which the
 -- 'WebResourceInsert' request conforms to.
 type WebResourceInsertResource =
-     "webResource" :>
-       QueryParam "verificationMethod" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] SiteVerificationWebResourceResource
-             :> Post '[JSON] SiteVerificationWebResourceResource
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           QueryParam "verificationMethod" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] SiteVerificationWebResourceResource
+                 :> Post '[JSON] SiteVerificationWebResourceResource
 
 -- | Attempt verification of a website or domain.
 --

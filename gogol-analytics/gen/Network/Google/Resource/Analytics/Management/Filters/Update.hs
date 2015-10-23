@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.filters.update@ method which the
 -- 'ManagementFiltersUpdate' request conforms to.
 type ManagementFiltersUpdateResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "filters" :>
-             Capture "filterId" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Filter :> Put '[JSON] Filter
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 Capture "filterId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Filter :> Put '[JSON] Filter
 
 -- | Updates an existing filter.
 --

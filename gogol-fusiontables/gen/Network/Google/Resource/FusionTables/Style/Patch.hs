@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.style.patch@ method which the
 -- 'StylePatch' request conforms to.
 type StylePatchResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "styles" :>
-           Capture "styleId" Int32 :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] StyleSetting :>
-                 Patch '[JSON] StyleSetting
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "styles" :>
+               Capture "styleId" Int32 :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] StyleSetting :>
+                     Patch '[JSON] StyleSetting
 
 -- | Updates an existing style. This method supports patch semantics.
 --

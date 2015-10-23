@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @autoscaler.autoscalers.patch@ method which the
 -- 'AutoscalersPatch' request conforms to.
 type AutoscalersPatchResource =
-     "projects" :>
-       Capture "project" Text :>
-         "zones" :>
-           Capture "zone" Text :>
-             "autoscalers" :>
-               Capture "autoscaler" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Autoscaler :> Patch '[JSON] Operation
+     "autoscaler" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "autoscalers" :>
+                   Capture "autoscaler" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Autoscaler :> Patch '[JSON] Operation
 
 -- | Update the entire content of the Autoscaler resource. This method
 -- supports patch semantics.

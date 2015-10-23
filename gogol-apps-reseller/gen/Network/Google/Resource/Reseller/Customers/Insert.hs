@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.customers.insert@ method which the
 -- 'CustomersInsert' request conforms to.
 type CustomersInsertResource =
-     "customers" :>
-       QueryParam "customerAuthToken" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Customer :> Post '[JSON] Customer
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             QueryParam "customerAuthToken" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Customer :> Post '[JSON] Customer
 
 -- | Creates a customer resource if one does not already exist.
 --

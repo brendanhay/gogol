@@ -33,7 +33,6 @@ module Network.Google.Resource.FusionTables.Table.ImportTable
     , TableImportTable
 
     -- * Request Lenses
-    , titMedia
     , titName
     , titDelimiter
     , titEncoding
@@ -45,29 +44,40 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.importTable@ method which the
 -- 'TableImportTable' request conforms to.
 type TableImportTableResource =
-     "tables" :>
-       "import" :>
-         QueryParam "name" Text :>
-           QueryParam "delimiter" Text :>
-             QueryParam "encoding" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[OctetStream] Body :> Post '[JSON] Table
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           "import" :>
+             QueryParam "name" Text :>
+               QueryParam "delimiter" Text :>
+                 QueryParam "encoding" Text :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Table
+       :<|>
+       "upload" :>
+         "fusiontables" :>
+           "v2" :>
+             "tables" :>
+               "import" :>
+                 QueryParam "name" Text :>
+                   QueryParam "delimiter" Text :>
+                     QueryParam "encoding" Text :>
+                       QueryParam "alt" AltJSON :>
+                         QueryParam "uploadType" AltMedia :>
+                           ReqBody '[OctetStream] RequestBody :>
+                             Post '[JSON] Table
 
 -- | Imports a new table.
 --
 -- /See:/ 'tableImportTable' smart constructor.
 data TableImportTable = TableImportTable
-    { _titMedia     :: !Body
-    , _titName      :: !Text
+    { _titName      :: !Text
     , _titDelimiter :: !(Maybe Text)
     , _titEncoding  :: !(Maybe Text)
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'titMedia'
 --
 -- * 'titName'
 --
@@ -75,19 +85,14 @@ data TableImportTable = TableImportTable
 --
 -- * 'titEncoding'
 tableImportTable
-    :: Body -- ^ 'titMedia'
-    -> Text -- ^ 'titName'
+    :: Text -- ^ 'titName'
     -> TableImportTable
-tableImportTable pTitMedia_ pTitName_ =
+tableImportTable pTitName_ =
     TableImportTable
-    { _titMedia = pTitMedia_
-    , _titName = pTitName_
+    { _titName = pTitName_
     , _titDelimiter = Nothing
     , _titEncoding = Nothing
     }
-
-titMedia :: Lens' TableImportTable Body
-titMedia = lens _titMedia (\ s a -> s{_titMedia = a})
 
 -- | The name to be assigned to the new table.
 titName :: Lens' TableImportTable Text
@@ -110,9 +115,23 @@ instance GoogleRequest TableImportTable where
         requestClient TableImportTable{..}
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
-              _titMedia
               fusionTablesService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy TableImportTableResource)
+                      mempty
+
+instance GoogleRequest (Upload TableImportTable)
+         where
+        type Rs (Upload TableImportTable) = Table
+        requestClient (Upload TableImportTable{..} body)
+          = go (Just _titName) _titDelimiter _titEncoding
+              (Just AltJSON)
+              (Just AltMedia)
+              _titPayload
+              body
+              fusionTablesService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy TableImportTableResource)
                       mempty

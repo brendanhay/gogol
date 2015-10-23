@@ -34,7 +34,6 @@ module Network.Google.Resource.BigQuery.Jobs.Insert
 
     -- * Request Lenses
     , jiPayload
-    , jiMedia
     , jiProjectId
     ) where
 
@@ -44,20 +43,32 @@ import           Network.Google.Prelude
 -- | A resource alias for @bigquery.jobs.insert@ method which the
 -- 'JobsInsert' request conforms to.
 type JobsInsertResource =
-     "projects" :>
-       Capture "projectId" Text :>
-         "jobs" :>
-           QueryParam "alt" AltJSON :>
-             MultipartRelated '[JSON] Job Body :> Post '[JSON] Job
+     "bigquery" :>
+       "v2" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "jobs" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Job :> Post '[JSON] Job
+       :<|>
+       "upload" :>
+         "bigquery" :>
+           "v2" :>
+             "projects" :>
+               Capture "projectId" Text :>
+                 "jobs" :>
+                   QueryParam "alt" AltJSON :>
+                     QueryParam "uploadType" AltMedia :>
+                       MultipartRelated '[JSON] Job RequestBody :>
+                         Post '[JSON] Job
 
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
 -- /See:/ 'jobsInsert' smart constructor.
 data JobsInsert = JobsInsert
     { _jiPayload   :: !Job
-    , _jiMedia     :: !Body
     , _jiProjectId :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsInsert' with the minimum fields required to make a request.
 --
@@ -65,18 +76,14 @@ data JobsInsert = JobsInsert
 --
 -- * 'jiPayload'
 --
--- * 'jiMedia'
---
 -- * 'jiProjectId'
 jobsInsert
     :: Job -- ^ 'jiPayload'
-    -> Body -- ^ 'jiMedia'
     -> Text -- ^ 'jiProjectId'
     -> JobsInsert
-jobsInsert pJiPayload_ pJiMedia_ pJiProjectId_ =
+jobsInsert pJiPayload_ pJiProjectId_ =
     JobsInsert
     { _jiPayload = pJiPayload_
-    , _jiMedia = pJiMedia_
     , _jiProjectId = pJiProjectId_
     }
 
@@ -84,9 +91,6 @@ jobsInsert pJiPayload_ pJiMedia_ pJiProjectId_ =
 jiPayload :: Lens' JobsInsert Job
 jiPayload
   = lens _jiPayload (\ s a -> s{_jiPayload = a})
-
-jiMedia :: Lens' JobsInsert Body
-jiMedia = lens _jiMedia (\ s a -> s{_jiMedia = a})
 
 -- | Project ID of the project that will be billed for the job
 jiProjectId :: Lens' JobsInsert Text
@@ -96,8 +100,19 @@ jiProjectId
 instance GoogleRequest JobsInsert where
         type Rs JobsInsert = Job
         requestClient JobsInsert{..}
-          = go _jiProjectId (Just AltJSON) _jiPayload _jiMedia
+          = go _jiProjectId (Just AltJSON) _jiPayload
               bigQueryService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy JobsInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload JobsInsert) where
+        type Rs (Upload JobsInsert) = Job
+        requestClient (Upload JobsInsert{..} body)
+          = go _jiProjectId (Just AltJSON) (Just AltMedia)
+              _jiPayload
+              body
+              bigQueryService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy JobsInsertResource)
                       mempty

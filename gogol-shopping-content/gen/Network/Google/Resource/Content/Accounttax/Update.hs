@@ -45,12 +45,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounttax.update@ method which the
 -- 'AccounttaxUpdate' request conforms to.
 type AccounttaxUpdateResource =
-     Capture "merchantId" Word64 :>
-       "accounttax" :>
-         Capture "accountId" Word64 :>
-           QueryParam "dryRun" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] AccountTax :> Put '[JSON] AccountTax
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accounttax" :>
+             Capture "accountId" Word64 :>
+               QueryParam "dryRun" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] AccountTax :> Put '[JSON] AccountTax
 
 -- | Updates the tax settings of the account.
 --

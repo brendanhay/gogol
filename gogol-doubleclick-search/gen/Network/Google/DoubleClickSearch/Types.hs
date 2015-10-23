@@ -207,7 +207,6 @@ doubleClickSearchService :: Service
 doubleClickSearchService
   = defaultService (ServiceId "doubleclicksearch:v2")
       "www.googleapis.com"
-      "doubleclicksearch/v2/"
 
 -- | View and manage your advertising data in DoubleClick Search
 doubleclicksearchScope :: OAuthScope

@@ -42,9 +42,11 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.subscriptions.delete@ method which the
 -- 'SubscriptionsDelete' request conforms to.
 type SubscriptionsDeleteResource =
-     "subscriptions" :>
-       QueryParam "id" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "youtube" :>
+       "v3" :>
+         "subscriptions" :>
+           QueryParam "id" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a subscription.
 --

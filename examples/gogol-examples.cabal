@@ -18,18 +18,20 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Example.Compute
+          Example.Storage
 
     build-depends:
           base          >= 4.7 && < 5
         , bytestring
         , conduit
+        , conduit-extra
         , exceptions
         , gogol         == 0.0.1.*
-        , gogol-compute
         , gogol-core
+        , gogol-storage
         , http-conduit
         , lens
         , semigroups
         , text
+        , time
         , transformers

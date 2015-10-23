@@ -42,10 +42,12 @@ import           Network.Google.SiteVerification.Types
 -- | A resource alias for @siteVerification.webResource.get@ method which the
 -- 'WebResourceGet' request conforms to.
 type WebResourceGetResource =
-     "webResource" :>
-       Capture "id" Text :>
-         QueryParam "alt" AltJSON :>
-           Get '[JSON] SiteVerificationWebResourceResource
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           Capture "id" Text :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] SiteVerificationWebResourceResource
 
 -- | Get the most current data for a website or domain.
 --

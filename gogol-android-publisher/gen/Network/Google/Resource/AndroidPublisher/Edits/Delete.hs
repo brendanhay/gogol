@@ -45,10 +45,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.delete@ method which the
 -- 'EditsDelete' request conforms to.
 type EditsDeleteResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an edit for an app. Creating a new edit will automatically
 -- delete any of your previous edits so this method need only be called if

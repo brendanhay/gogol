@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendars.update@ method which the
 -- 'CalendarsUpdate' request conforms to.
 type CalendarsUpdateResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Calendar :> Put '[JSON] Calendar
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Calendar :> Put '[JSON] Calendar
 
 -- | Updates metadata for a calendar.
 --

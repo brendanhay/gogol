@@ -48,16 +48,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.installs.patch@ method which the
 -- 'InstallsPatch' request conforms to.
 type InstallsPatchResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "devices" :>
-               Capture "deviceId" Text :>
-                 "installs" :>
-                   Capture "installId" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Install :> Patch '[JSON] Install
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "devices" :>
+                   Capture "deviceId" Text :>
+                     "installs" :>
+                       Capture "installId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Install :> Patch '[JSON] Install
 
 -- | Requests to install the latest version of an app to a device. If the app
 -- is already installed then it is updated to the latest version if

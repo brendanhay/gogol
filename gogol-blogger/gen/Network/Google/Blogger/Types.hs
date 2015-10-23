@@ -383,7 +383,6 @@ bloggerService :: Service
 bloggerService
   = defaultService (ServiceId "blogger:v3")
       "www.googleapis.com"
-      "blogger/v3/"
 
 -- | Manage your Blogger account
 bloggerScope :: OAuthScope

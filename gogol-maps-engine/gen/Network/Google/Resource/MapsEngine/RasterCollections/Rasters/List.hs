@@ -53,23 +53,25 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.rasterCollections.rasters.list@ method which the
 -- 'RasterCollectionsRastersList' request conforms to.
 type RasterCollectionsRastersListResource =
-     "rasterCollections" :>
-       Capture "id" Text :>
-         "rasters" :>
-           QueryParam "createdAfter" DateTime' :>
-             QueryParam "creatorEmail" Text :>
-               QueryParam "role" RasterCollectionsRastersListRole :>
-                 QueryParam "bbox" Text :>
-                   QueryParam "modifiedAfter" DateTime' :>
-                     QueryParam "modifiedBefore" DateTime' :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" DateTime' :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON]
-                                     RasterCollectionsRastersListResponse
+     "mapsengine" :>
+       "v1" :>
+         "rasterCollections" :>
+           Capture "id" Text :>
+             "rasters" :>
+               QueryParam "createdAfter" DateTime' :>
+                 QueryParam "creatorEmail" Text :>
+                   QueryParam "role" RasterCollectionsRastersListRole :>
+                     QueryParam "bbox" Text :>
+                       QueryParam "modifiedAfter" DateTime' :>
+                         QueryParam "modifiedBefore" DateTime' :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "search" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "tags" Text :>
+                                   QueryParam "createdBefore" DateTime' :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON]
+                                         RasterCollectionsRastersListResponse
 
 -- | Return all rasters within a raster collection.
 --

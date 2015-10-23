@@ -45,13 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.webproperties.insert@ method which the
 -- 'ManagementWebPropertiesInsert' request conforms to.
 type ManagementWebPropertiesInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] WebProperty :>
-                 Post '[JSON] WebProperty
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] WebProperty :>
+                     Post '[JSON] WebProperty
 
 -- | Create a new property if the account has fewer than 20 properties. Web
 -- properties are visible in the Google Analytics interface only if they

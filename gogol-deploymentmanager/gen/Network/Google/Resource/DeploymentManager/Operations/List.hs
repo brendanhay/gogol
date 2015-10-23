@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.operations.list@ method which the
 -- 'OperationsList' request conforms to.
 type OperationsListResource =
-     Capture "project" Text :>
-       "global" :>
-         "operations" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] OperationsListResponse
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] OperationsListResponse
 
 -- | Lists all operations for a project.
 --

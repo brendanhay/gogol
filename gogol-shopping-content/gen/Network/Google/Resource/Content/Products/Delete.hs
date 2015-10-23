@@ -44,11 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.products.delete@ method which the
 -- 'ProductsDelete' request conforms to.
 type ProductsDeleteResource =
-     Capture "merchantId" Word64 :>
-       "products" :>
-         Capture "productId" Text :>
-           QueryParam "dryRun" Bool :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "products" :>
+             Capture "productId" Text :>
+               QueryParam "dryRun" Bool :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a product from your Merchant Center account.
 --

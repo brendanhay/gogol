@@ -44,11 +44,13 @@ import           Network.Google.Storage.Types
 -- | A resource alias for @storage.buckets.delete@ method which the
 -- 'BucketsDelete' request conforms to.
 type BucketsDeleteResource =
-     "b" :>
-       Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Int64 :>
-           QueryParam "ifMetagenerationNotMatch" Int64 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "storage" :>
+       "v1" :>
+         "b" :>
+           Capture "bucket" Text :>
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "ifMetagenerationNotMatch" Int64 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes an empty bucket.
 --

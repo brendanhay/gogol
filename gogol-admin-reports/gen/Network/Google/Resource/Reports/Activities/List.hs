@@ -51,21 +51,24 @@ import           Network.Google.Reports.Types
 -- | A resource alias for @reports.activities.list@ method which the
 -- 'ActivitiesList' request conforms to.
 type ActivitiesListResource =
-     "activity" :>
-       "users" :>
-         Capture "userKey" Text :>
-           "applications" :>
-             Capture "applicationName" Text :>
-               QueryParam "startTime" Text :>
-                 QueryParam "filters" Text :>
-                   QueryParam "customerId" Text :>
-                     QueryParam "actorIpAddress" Text :>
-                       QueryParam "endTime" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "eventName" Text :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] Activities
+     "admin" :>
+       "reports" :>
+         "v1" :>
+           "activity" :>
+             "users" :>
+               Capture "userKey" Text :>
+                 "applications" :>
+                   Capture "applicationName" Text :>
+                     QueryParam "startTime" Text :>
+                       QueryParam "filters" Text :>
+                         QueryParam "customerId" Text :>
+                           QueryParam "actorIpAddress" Text :>
+                             QueryParam "endTime" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "eventName" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Activities
 
 -- | Retrieves a list of activities for a specific customer and application.
 --

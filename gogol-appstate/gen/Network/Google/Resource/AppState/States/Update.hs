@@ -46,12 +46,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @appstate.states.update@ method which the
 -- 'StatesUpdate' request conforms to.
 type StatesUpdateResource =
-     "states" :>
-       Capture "stateKey" Int32 :>
-         QueryParam "currentStateVersion" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] UpdateRequest :>
-               Put '[JSON] WriteResult
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           Capture "stateKey" Int32 :>
+             QueryParam "currentStateVersion" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] UpdateRequest :>
+                   Put '[JSON] WriteResult
 
 -- | Update the data associated with the input key if and only if the passed
 -- version matches the currently stored version. This method is safe in the

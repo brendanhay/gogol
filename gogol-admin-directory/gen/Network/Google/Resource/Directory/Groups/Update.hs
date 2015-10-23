@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.groups.update@ method which the
 -- 'GroupsUpdate' request conforms to.
 type GroupsUpdateResource =
-     "groups" :>
-       Capture "groupKey" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Group :> Put '[JSON] Group
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "groups" :>
+             Capture "groupKey" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Group :> Put '[JSON] Group
 
 -- | Update Group
 --

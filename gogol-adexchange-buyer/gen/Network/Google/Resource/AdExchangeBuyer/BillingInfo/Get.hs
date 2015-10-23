@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.billingInfo.get@ method which the
 -- 'BillingInfoGet' request conforms to.
 type BillingInfoGetResource =
-     "billinginfo" :>
-       Capture "accountId" Int32 :>
-         QueryParam "alt" AltJSON :> Get '[JSON] BillingInfo
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "billinginfo" :>
+           Capture "accountId" Int32 :>
+             QueryParam "alt" AltJSON :> Get '[JSON] BillingInfo
 
 -- | Returns the billing information for one account specified by account ID.
 --

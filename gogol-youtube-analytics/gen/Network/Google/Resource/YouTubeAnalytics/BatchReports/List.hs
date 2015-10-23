@@ -43,11 +43,14 @@ import           Network.Google.YouTubeAnalytics.Types
 -- | A resource alias for @youtubeAnalytics.batchReports.list@ method which the
 -- 'BatchReportsList' request conforms to.
 type BatchReportsListResource =
-     "batchReports" :>
-       QueryParam "batchReportDefinitionId" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] BatchReportList
+     "youtube" :>
+       "analytics" :>
+         "v1" :>
+           "batchReports" :>
+             QueryParam "batchReportDefinitionId" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] BatchReportList
 
 -- | Retrieves a list of processed batch reports.
 --

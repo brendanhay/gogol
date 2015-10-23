@@ -47,15 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.achievements.list@ method which the
 -- 'AchievementsList' request conforms to.
 type AchievementsListResource =
-     "players" :>
-       Capture "playerId" Text :>
-         "achievements" :>
-           QueryParam "state" AchievementsListState :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] PlayerAchievementListResponse
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "achievements" :>
+               QueryParam "state" AchievementsListState :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] PlayerAchievementListResponse
 
 -- | Lists the progress for all your application\'s achievements for the
 -- currently authenticated player.

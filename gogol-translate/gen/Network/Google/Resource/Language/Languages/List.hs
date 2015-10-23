@@ -42,11 +42,13 @@ import           Network.Google.Translate.Types
 -- | A resource alias for @language.languages.list@ method which the
 -- 'LanguagesList' request conforms to.
 type LanguagesListResource =
-     "v2" :>
-       "languages" :>
-         QueryParam "target" Text :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] LanguagesListResponse
+     "language" :>
+       "translate" :>
+         "v2" :>
+           "languages" :>
+             QueryParam "target" Text :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] LanguagesListResponse
 
 -- | List the source\/target languages supported by the API
 --

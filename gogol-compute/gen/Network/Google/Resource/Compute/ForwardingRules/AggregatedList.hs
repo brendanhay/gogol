@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.forwardingRules.aggregatedList@ method which the
 -- 'ForwardingRulesAggregatedList' request conforms to.
 type ForwardingRulesAggregatedListResource =
-     Capture "project" Text :>
-       "aggregated" :>
-         "forwardingRules" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ForwardingRuleAggregatedList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "aggregated" :>
+               "forwardingRules" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ForwardingRuleAggregatedList
 
 -- | Retrieves the list of forwarding rules grouped by scope.
 --

@@ -52,21 +52,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.events.instances@ method which the
 -- 'EventsInstances' request conforms to.
 type EventsInstancesResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "events" :>
-           Capture "eventId" Text :>
-             "instances" :>
-               QueryParam "timeMin" DateTime' :>
-                 QueryParam "showDeleted" Bool :>
-                   QueryParam "originalStart" Text :>
-                     QueryParam "maxAttendees" Int32 :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "timeZone" Text :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "alwaysIncludeEmail" Bool :>
-                               QueryParam "timeMax" DateTime' :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Events
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "events" :>
+               Capture "eventId" Text :>
+                 "instances" :>
+                   QueryParam "timeMin" DateTime' :>
+                     QueryParam "showDeleted" Bool :>
+                       QueryParam "originalStart" Text :>
+                         QueryParam "maxAttendees" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "timeZone" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "alwaysIncludeEmail" Bool :>
+                                   QueryParam "timeMax" DateTime' :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Events
 
 -- | Returns instances of the specified recurring event.
 --

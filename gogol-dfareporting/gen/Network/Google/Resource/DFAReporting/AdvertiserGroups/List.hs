@@ -48,19 +48,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.advertiserGroups.list@ method which the
 -- 'AdvertiserGroupsList' request conforms to.
 type AdvertiserGroupsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "advertiserGroups" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" AdvertiserGroupsListSortOrder
-                 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" AdvertiserGroupsListSortField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder" AdvertiserGroupsListSortOrder
                      :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] AdvertiserGroupsListResponse
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField" AdvertiserGroupsListSortField
+                         :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] AdvertiserGroupsListResponse
 
 -- | Retrieves a list of advertiser groups, possibly filtered.
 --

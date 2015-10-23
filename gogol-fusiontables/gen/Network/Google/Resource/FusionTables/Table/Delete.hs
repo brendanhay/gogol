@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.delete@ method which the
 -- 'TableDelete' request conforms to.
 type TableDeleteResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a table.
 --

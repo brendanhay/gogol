@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.userRoles.insert@ method which the
 -- 'UserRolesInsert' request conforms to.
 type UserRolesInsertResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "userRoles" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] UserRole :> Post '[JSON] UserRole
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] UserRole :> Post '[JSON] UserRole
 
 -- | Inserts a new user role.
 --

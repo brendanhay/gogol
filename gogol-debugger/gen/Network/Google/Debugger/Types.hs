@@ -210,7 +210,6 @@ debuggerService :: Service
 debuggerService
   = defaultService (ServiceId "clouddebugger:v2")
       "clouddebugger.googleapis.com"
-      ""
 
 -- | Manage cloud debugger
 cloudDebuggerScope :: OAuthScope

@@ -48,14 +48,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.collectionviewers.patch@ method which the
 -- 'CollectionviewersPatch' request conforms to.
 type CollectionviewersPatchResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "collections" :>
-           Capture "collectionId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] User :> Patch '[JSON] User
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "collections" :>
+               Capture "collectionId" Text :>
+                 "users" :>
+                   Capture "userId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] User :> Patch '[JSON] User
 
 -- | Adds the user to the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then

@@ -46,14 +46,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.sslCerts.insert@ method which the
 -- 'SSLCertsInsert' request conforms to.
 type SSLCertsInsertResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "sslCerts" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] SSLCertsInsertRequest :>
-                   Post '[JSON] SSLCertsInsertResponse
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "sslCerts" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] SSLCertsInsertRequest :>
+                       Post '[JSON] SSLCertsInsertResponse
 
 -- | Creates an SSL certificate and returns it along with the private key and
 -- server certificate authority. The new certificate will not be usable

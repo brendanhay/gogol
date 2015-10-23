@@ -46,14 +46,16 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.operations.list@ method which the
 -- 'OperationsList' request conforms to.
 type OperationsListResource =
-     "projects" :>
-       Capture "project" Text :>
-         "operations" :>
-           QueryParam "instance" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] OperationsListResponse
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "operations" :>
+               QueryParam "instance" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] OperationsListResponse
 
 -- | Lists all instance operations that have been performed on the given
 -- Cloud SQL instance in the reverse chronological order of the start time.

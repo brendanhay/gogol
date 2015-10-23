@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.asps.get@ method which the
 -- 'AspsGet' request conforms to.
 type AspsGetResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "asps" :>
-           Capture "codeId" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Asp
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "asps" :>
+                 Capture "codeId" Int32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Asp
 
 -- | Get information about an ASP issued by a user.
 --

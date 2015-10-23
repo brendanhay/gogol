@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.mobileCarriers.get@ method which the
 -- 'MobileCarriersGet' request conforms to.
 type MobileCarriersGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "mobileCarriers" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] MobileCarrier
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "mobileCarriers" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] MobileCarrier
 
 -- | Gets one mobile carrier by ID.
 --

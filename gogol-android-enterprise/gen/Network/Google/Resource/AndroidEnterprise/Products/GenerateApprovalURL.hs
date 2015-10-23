@@ -51,14 +51,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.products.generateApprovalUrl@ method which the
 -- 'ProductsGenerateApprovalURL' request conforms to.
 type ProductsGenerateApprovalURLResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "products" :>
-           Capture "productId" Text :>
-             "generateApprovalUrl" :>
-               QueryParam "languageCode" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] ProductsGenerateApprovalURLResponse
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "products" :>
+               Capture "productId" Text :>
+                 "generateApprovalUrl" :>
+                   QueryParam "languageCode" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Post '[JSON] ProductsGenerateApprovalURLResponse
 
 -- | Generates a URL that can be rendered in an iframe to display the
 -- permissions (if any) of a product. An enterprise admin must view these

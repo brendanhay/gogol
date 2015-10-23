@@ -44,13 +44,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.backupRuns.get@ method which the
 -- 'BackupRunsGet' request conforms to.
 type BackupRunsGetResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "backupRuns" :>
-               Capture "id" Int64 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] BackupRun
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "backupRuns" :>
+                   Capture "id" Int64 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] BackupRun
 
 -- | Retrieves a resource containing information about a backup run.
 --

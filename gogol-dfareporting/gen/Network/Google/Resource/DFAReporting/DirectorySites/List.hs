@@ -55,24 +55,31 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.directorySites.list@ method which the
 -- 'DirectorySitesList' request conforms to.
 type DirectorySitesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "directorySites" :>
-           QueryParam "searchString" Text :>
-             QueryParam "acceptsInterstitialPlacements" Bool :>
-               QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder" DirectorySitesListSortOrder :>
-                     QueryParam "active" Bool :>
-                       QueryParam "countryId" Int64 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" DirectorySitesListSortField :>
-                             QueryParam "acceptsInStreamVideoPlacements" Bool :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "parentId" Int64 :>
-                                   QueryParam "dfp_network_code" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] DirectorySitesListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySites" :>
+               QueryParam "searchString" Text :>
+                 QueryParam "acceptsInterstitialPlacements" Bool :>
+                   QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "sortOrder" DirectorySitesListSortOrder :>
+                         QueryParam "active" Bool :>
+                           QueryParam "countryId" Int64 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 DirectorySitesListSortField
+                                 :>
+                                 QueryParam "acceptsInStreamVideoPlacements"
+                                   Bool
+                                   :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "parentId" Int64 :>
+                                       QueryParam "dfp_network_code" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON]
+                                             DirectorySitesListResponse
 
 -- | Retrieves a list of directory sites, possibly filtered.
 --

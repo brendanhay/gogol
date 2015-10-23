@@ -48,16 +48,18 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.liveStreams.list@ method which the
 -- 'LiveStreamsList' request conforms to.
 type LiveStreamsListResource =
-     "liveStreams" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "onBehalfOfContentOwnerChannel" Text :>
-               QueryParam "id" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] LiveStreamListResponse
+     "youtube" :>
+       "v3" :>
+         "liveStreams" :>
+           QueryParam "part" Text :>
+             QueryParam "mine" Bool :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] LiveStreamListResponse
 
 -- | Returns a list of video streams that match the API request parameters.
 --

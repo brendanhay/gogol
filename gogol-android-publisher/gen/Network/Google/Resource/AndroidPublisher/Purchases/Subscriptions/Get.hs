@@ -45,14 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.purchases.subscriptions.get@ method which the
 -- 'PurchasesSubscriptionsGet' request conforms to.
 type PurchasesSubscriptionsGetResource =
-     Capture "packageName" Text :>
-       "purchases" :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "tokens" :>
-               Capture "token" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] SubscriptionPurchase
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "purchases" :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "tokens" :>
+                     Capture "token" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] SubscriptionPurchase
 
 -- | Checks whether a user\'s subscription purchase is valid and returns its
 -- expiry time.

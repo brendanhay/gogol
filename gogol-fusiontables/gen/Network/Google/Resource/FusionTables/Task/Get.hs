@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.task.get@ method which the
 -- 'TaskGet' request conforms to.
 type TaskGetResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "tasks" :>
-           Capture "taskId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Task
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "tasks" :>
+               Capture "taskId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Task
 
 -- | Retrieves a specific task by its ID.
 --

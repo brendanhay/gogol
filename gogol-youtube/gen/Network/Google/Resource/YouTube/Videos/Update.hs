@@ -44,11 +44,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.videos.update@ method which the
 -- 'VideosUpdate' request conforms to.
 type VideosUpdateResource =
-     "videos" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Video :> Put '[JSON] Video
+     "youtube" :>
+       "v3" :>
+         "videos" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Video :> Put '[JSON] Video
 
 -- | Updates a video\'s metadata.
 --

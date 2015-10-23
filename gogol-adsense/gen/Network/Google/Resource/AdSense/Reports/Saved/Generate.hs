@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.reports.saved.generate@ method which the
 -- 'ReportsSavedGenerate' request conforms to.
 type ReportsSavedGenerateResource =
-     "reports" :>
-       Capture "savedReportId" Text :>
-         QueryParam "locale" Text :>
-           QueryParam "startIndex" Int32 :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] AdsenseReportsGenerateResponse
+     "adsense" :>
+       "v1.4" :>
+         "reports" :>
+           Capture "savedReportId" Text :>
+             QueryParam "locale" Text :>
+               QueryParam "startIndex" Int32 :>
+                 QueryParam "maxResults" Int32 :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] AdsenseReportsGenerateResponse
 
 -- | Generate an AdSense report based on the saved report ID sent in the
 -- query parameters.

@@ -44,12 +44,14 @@ import           Network.Google.WebmasterTools.Types
 -- | A resource alias for @webmasters.sitemaps.list@ method which the
 -- 'SitemapsList' request conforms to.
 type SitemapsListResource =
-     "sites" :>
-       Capture "siteUrl" Text :>
-         "sitemaps" :>
-           QueryParam "sitemapIndex" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] SitemapsListResponse
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "sitemaps" :>
+               QueryParam "sitemapIndex" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] SitemapsListResponse
 
 -- | Lists the sitemaps-entries submitted for this site, or included in the
 -- sitemap index file (if sitemapIndex is specified in the request).

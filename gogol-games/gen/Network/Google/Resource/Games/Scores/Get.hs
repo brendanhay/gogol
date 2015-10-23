@@ -52,19 +52,21 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.scores.get@ method which the
 -- 'ScoresGet' request conforms to.
 type ScoresGetResource =
-     "players" :>
-       Capture "playerId" Text :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             "scores" :>
-               Capture "timeSpan" ScoresGetTimeSpan :>
-                 QueryParam "includeRankType" ScoresGetIncludeRankType
-                   :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] PlayerLeaderboardScoreListResponse
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "leaderboards" :>
+               Capture "leaderboardId" Text :>
+                 "scores" :>
+                   Capture "timeSpan" ScoresGetTimeSpan :>
+                     QueryParam "includeRankType" ScoresGetIncludeRankType
+                       :>
+                       QueryParam "language" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] PlayerLeaderboardScoreListResponse
 
 -- | Get high scores, and optionally ranks, in leaderboards for the currently
 -- authenticated player. For a specific time span, leaderboardId can be set

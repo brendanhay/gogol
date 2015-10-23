@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.turnBasedMatches.get@ method which the
 -- 'TurnBasedMatchesGet' request conforms to.
 type TurnBasedMatchesGetResource =
-     "turnbasedmatches" :>
-       Capture "matchId" Text :>
-         QueryParam "includeMatchData" Bool :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] TurnBasedMatch
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             QueryParam "includeMatchData" Bool :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] TurnBasedMatch
 
 -- | Get the data for a turn-based match.
 --

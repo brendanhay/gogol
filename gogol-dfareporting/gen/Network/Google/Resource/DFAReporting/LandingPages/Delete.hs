@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.landingPages.delete@ method which the
 -- 'LandingPagesDelete' request conforms to.
 type LandingPagesDeleteResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "campaigns" :>
-           Capture "campaignId" Int64 :>
-             "landingPages" :>
-               Capture "id" Int64 :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   Capture "id" Int64 :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing campaign landing page.
 --

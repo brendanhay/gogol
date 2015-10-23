@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.operatingSystems.get@ method which the
 -- 'OperatingSystemsGet' request conforms to.
 type OperatingSystemsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "operatingSystems" :>
-           Capture "dartId" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] OperatingSystem
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "operatingSystems" :>
+               Capture "dartId" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] OperatingSystem
 
 -- | Gets one operating system by DART ID.
 --

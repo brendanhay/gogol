@@ -45,13 +45,16 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.users.addPublicKey@ method which the
 -- 'UsersAddPublicKey' request conforms to.
 type UsersAddPublicKeyResource =
-     Capture "project" Text :>
-       "global" :>
-         "users" :>
-           Capture "user" Text :>
-             "addPublicKey" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] PublicKey :> Post '[JSON] Operation
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 Capture "user" Text :>
+                   "addPublicKey" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] PublicKey :> Post '[JSON] Operation
 
 -- | Adds a public key to the specified User resource with the data included
 -- in the request.

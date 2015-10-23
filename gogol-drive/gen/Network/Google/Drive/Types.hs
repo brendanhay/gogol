@@ -555,7 +555,6 @@ driveService :: Service
 driveService
   = defaultService (ServiceId "drive:v2")
       "www.googleapis.com"
-      "drive/v2/"
 
 -- | View metadata for files in your Google Drive
 driveMetadataReadonlyScope :: OAuthScope

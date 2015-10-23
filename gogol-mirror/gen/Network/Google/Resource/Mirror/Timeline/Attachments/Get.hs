@@ -43,18 +43,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.timeline.attachments.get@ method which the
 -- 'TimelineAttachmentsGet' request conforms to.
 type TimelineAttachmentsGetResource =
-     "timeline" :>
-       Capture "itemId" Text :>
-         "attachments" :>
-           Capture "attachmentId" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Attachment
+     "mirror" :>
+       "v1" :>
+         "timeline" :>
+           Capture "itemId" Text :>
+             "attachments" :>
+               Capture "attachmentId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Attachment
        :<|>
-       "timeline" :>
-         Capture "itemId" Text :>
-           "attachments" :>
-             Capture "attachmentId" Text :>
-               QueryParam "alt" AltMedia :>
-                 Get '[OctetStream] Stream
+       "mirror" :>
+         "v1" :>
+           "timeline" :>
+             Capture "itemId" Text :>
+               "attachments" :>
+                 Capture "attachmentId" Text :>
+                   QueryParam "alt" AltMedia :>
+                     Get '[OctetStream] Stream
 
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --

@@ -40,10 +40,12 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounts.authinfo@ method which the
 -- 'AccountsAuthInfo' request conforms to.
 type AccountsAuthInfoResource =
-     "accounts" :>
-       "authinfo" :>
-         QueryParam "alt" AltJSON :>
-           Get '[JSON] AccountsAuthInfoResponse
+     "content" :>
+       "v2" :>
+         "accounts" :>
+           "authinfo" :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] AccountsAuthInfoResponse
 
 -- | Returns information about the authenticated user.
 --

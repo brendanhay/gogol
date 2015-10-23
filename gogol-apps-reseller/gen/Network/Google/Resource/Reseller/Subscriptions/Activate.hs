@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.activate@ method which the
 -- 'SubscriptionsActivate' request conforms to.
 type SubscriptionsActivateResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           Capture "subscriptionId" Text :>
-             "activate" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Subscription
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 Capture "subscriptionId" Text :>
+                   "activate" :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Activates a subscription previously suspended by the reseller
 --

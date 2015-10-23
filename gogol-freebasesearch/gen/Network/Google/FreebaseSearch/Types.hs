@@ -79,4 +79,3 @@ freebaseSearchService :: Service
 freebaseSearchService
   = defaultService (ServiceId "freebase:v1")
       "www.googleapis.com"
-      "freebase/v1/"

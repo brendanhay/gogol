@@ -47,14 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.reports.saved.generate@ method which the
 -- 'AccountsReportsSavedGenerate' request conforms to.
 type AccountsReportsSavedGenerateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "reports" :>
-           Capture "savedReportId" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "startIndex" Int32 :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Report
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               Capture "savedReportId" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "startIndex" Int32 :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Generate an Ad Exchange report based on the saved report ID sent in the
 -- query parameters.

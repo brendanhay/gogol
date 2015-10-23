@@ -43,10 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dns.managedZones.get@ method which the
 -- 'ManagedZonesGet' request conforms to.
 type ManagedZonesGetResource =
-     Capture "project" Text :>
-       "managedZones" :>
-         Capture "managedZone" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] ManagedZone
+     "dns" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] ManagedZone
 
 -- | Fetch the representation of an existing ManagedZone.
 --

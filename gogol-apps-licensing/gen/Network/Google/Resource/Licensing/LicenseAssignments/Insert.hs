@@ -44,13 +44,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @licensing.licenseAssignments.insert@ method which the
 -- 'LicenseAssignmentsInsert' request conforms to.
 type LicenseAssignmentsInsertResource =
-     Capture "productId" Text :>
-       "sku" :>
-         Capture "skuId" Text :>
-           "user" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] LicenseAssignmentInsert :>
-                 Post '[JSON] LicenseAssignment
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] LicenseAssignmentInsert :>
+                         Post '[JSON] LicenseAssignment
 
 -- | Assign License.
 --

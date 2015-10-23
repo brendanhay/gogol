@@ -47,11 +47,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.snapshots.delete@ method which the
 -- 'SnapshotsDelete' request conforms to.
 type SnapshotsDeleteResource =
-     Capture "project" Text :>
-       "global" :>
-         "snapshots" :>
-           Capture "snapshot" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "snapshots" :>
+                 Capture "snapshot" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Snapshot resource. Keep in mind that deleting a
 -- single snapshot might not necessarily delete all the data on that

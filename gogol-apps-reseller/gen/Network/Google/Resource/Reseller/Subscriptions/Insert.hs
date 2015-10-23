@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.subscriptions.insert@ method which the
 -- 'SubscriptionsInsert' request conforms to.
 type SubscriptionsInsertResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         "subscriptions" :>
-           QueryParam "customerAuthToken" Text :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Subscription :>
-                 Post '[JSON] Subscription
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               "subscriptions" :>
+                 QueryParam "customerAuthToken" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Subscription :>
+                       Post '[JSON] Subscription
 
 -- | Creates\/Transfers a subscription for the customer.
 --

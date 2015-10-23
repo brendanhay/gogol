@@ -44,12 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.roles.list@ method which the
 -- 'RolesList' request conforms to.
 type RolesListResource =
-     "customer" :>
-       Capture "customer" Text :>
-         "roles" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Roles
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "customer" :>
+             Capture "customer" Text :>
+               "roles" :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Roles
 
 -- | Retrieves a paginated list of all the roles in a domain.
 --

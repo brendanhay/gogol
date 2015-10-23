@@ -46,15 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.targetPools.getHealth@ method which the
 -- 'TargetPoolsGetHealth' request conforms to.
 type TargetPoolsGetHealthResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "targetPools" :>
-             Capture "targetPool" Text :>
-               "getHealth" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] InstanceReference :>
-                     Post '[JSON] TargetPoolInstanceHealth
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "targetPools" :>
+                   Capture "targetPool" Text :>
+                     "getHealth" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] InstanceReference :>
+                           Post '[JSON] TargetPoolInstanceHealth
 
 -- | Gets the most recent health check results for each IP for the given
 -- instance that is referenced by given TargetPool.

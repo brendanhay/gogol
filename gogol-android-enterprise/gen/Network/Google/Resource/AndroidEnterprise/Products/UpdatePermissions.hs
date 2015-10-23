@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.products.updatePermissions@ method which the
 -- 'ProductsUpdatePermissions' request conforms to.
 type ProductsUpdatePermissionsResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "products" :>
-           Capture "productId" Text :>
-             "permissions" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ProductPermissions :>
-                   Put '[JSON] ProductPermissions
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "products" :>
+               Capture "productId" Text :>
+                 "permissions" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ProductPermissions :>
+                       Put '[JSON] ProductPermissions
 
 -- | Updates the set of Android app permissions for this app that have been
 -- accepted by the enterprise.

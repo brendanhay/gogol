@@ -46,12 +46,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.applications.get@ method which the
 -- 'ApplicationsGet' request conforms to.
 type ApplicationsGetResource =
-     "applications" :>
-       Capture "applicationId" Text :>
-         QueryParam "platformType" ApplicationsGetPlatformType
-           :>
-           QueryParam "language" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Application
+     "games" :>
+       "v1" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             QueryParam "platformType" ApplicationsGetPlatformType
+               :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Retrieves the metadata of the application with the given ID. If the
 -- requested application is not available for the specified platformType,

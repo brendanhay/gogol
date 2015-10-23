@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.sites.update@ method which the
 -- 'SitesUpdate' request conforms to.
 type SitesUpdateResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "sites" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Site :> Put '[JSON] Site
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Site :> Put '[JSON] Site
 
 -- | Updates an existing site.
 --

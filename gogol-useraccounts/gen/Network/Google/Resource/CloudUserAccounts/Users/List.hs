@@ -46,14 +46,17 @@ import           Network.Google.UserAccounts.Types
 -- | A resource alias for @clouduseraccounts.users.list@ method which the
 -- 'UsersList' request conforms to.
 type UsersListResource =
-     Capture "project" Text :>
-       "global" :>
-         "users" :>
-           QueryParam "orderBy" Text :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] UserList
+     "clouduseraccounts" :>
+       "beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] UserList
 
 -- | Retrieves a list of users contained within the specified project.
 --

@@ -47,15 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.autoscalers.list@ method which the
 -- 'AutoscalersList' request conforms to.
 type AutoscalersListResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "autoscalers" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] AutoscalerList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "autoscalers" :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] AutoscalerList
 
 -- | Retrieves the list of autoscaler resources contained within the
 -- specified zone.

@@ -41,7 +41,6 @@ module Network.Google.Resource.Drive.Files.Update
     , fuRemoveParents
     , fuModifiedDateBehavior
     , fuUseContentAsIndexableText
-    , fuMedia
     , fuTimedTextTrackName
     , fuOCRLanguage
     , fuConvert
@@ -57,26 +56,54 @@ import           Network.Google.Prelude
 -- | A resource alias for @drive.files.update@ method which the
 -- 'FilesUpdate' request conforms to.
 type FilesUpdateResource =
-     "files" :>
-       Capture "fileId" Text :>
-         QueryParam "newRevision" Bool :>
-           QueryParam "pinned" Bool :>
-             QueryParam "timedTextLanguage" Text :>
-               QueryParam "updateViewedDate" Bool :>
-                 QueryParam "removeParents" Text :>
-                   QueryParam "modifiedDateBehavior"
-                     FilesUpdateModifiedDateBehavior
-                     :>
-                     QueryParam "useContentAsIndexableText" Bool :>
-                       QueryParam "timedTextTrackName" Text :>
-                         QueryParam "ocrLanguage" Text :>
-                           QueryParam "convert" Bool :>
-                             QueryParam "setModifiedDate" Bool :>
-                               QueryParam "addParents" Text :>
-                                 QueryParam "ocr" Bool :>
-                                   QueryParam "alt" AltJSON :>
-                                     MultipartRelated '[JSON] File Body :>
-                                       Put '[JSON] File
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             QueryParam "newRevision" Bool :>
+               QueryParam "pinned" Bool :>
+                 QueryParam "timedTextLanguage" Text :>
+                   QueryParam "updateViewedDate" Bool :>
+                     QueryParam "removeParents" Text :>
+                       QueryParam "modifiedDateBehavior"
+                         FilesUpdateModifiedDateBehavior
+                         :>
+                         QueryParam "useContentAsIndexableText" Bool :>
+                           QueryParam "timedTextTrackName" Text :>
+                             QueryParam "ocrLanguage" Text :>
+                               QueryParam "convert" Bool :>
+                                 QueryParam "setModifiedDate" Bool :>
+                                   QueryParam "addParents" Text :>
+                                     QueryParam "ocr" Bool :>
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] File :>
+                                           Put '[JSON] File
+       :<|>
+       "upload" :>
+         "drive" :>
+           "v2" :>
+             "files" :>
+               Capture "fileId" Text :>
+                 QueryParam "newRevision" Bool :>
+                   QueryParam "pinned" Bool :>
+                     QueryParam "timedTextLanguage" Text :>
+                       QueryParam "updateViewedDate" Bool :>
+                         QueryParam "removeParents" Text :>
+                           QueryParam "modifiedDateBehavior"
+                             FilesUpdateModifiedDateBehavior
+                             :>
+                             QueryParam "useContentAsIndexableText" Bool :>
+                               QueryParam "timedTextTrackName" Text :>
+                                 QueryParam "ocrLanguage" Text :>
+                                   QueryParam "convert" Bool :>
+                                     QueryParam "setModifiedDate" Bool :>
+                                       QueryParam "addParents" Text :>
+                                         QueryParam "ocr" Bool :>
+                                           QueryParam "alt" AltJSON :>
+                                             QueryParam "uploadType" AltMedia :>
+                                               MultipartRelated '[JSON] File
+                                                 RequestBody
+                                                 :> Put '[JSON] File
 
 -- | Updates file metadata and\/or content.
 --
@@ -90,7 +117,6 @@ data FilesUpdate = FilesUpdate
     , _fuRemoveParents             :: !(Maybe Text)
     , _fuModifiedDateBehavior      :: !(Maybe FilesUpdateModifiedDateBehavior)
     , _fuUseContentAsIndexableText :: !Bool
-    , _fuMedia                     :: !Body
     , _fuTimedTextTrackName        :: !(Maybe Text)
     , _fuOCRLanguage               :: !(Maybe Text)
     , _fuConvert                   :: !Bool
@@ -98,7 +124,7 @@ data FilesUpdate = FilesUpdate
     , _fuFileId                    :: !Text
     , _fuAddParents                :: !(Maybe Text)
     , _fuOCR                       :: !Bool
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesUpdate' with the minimum fields required to make a request.
 --
@@ -120,8 +146,6 @@ data FilesUpdate = FilesUpdate
 --
 -- * 'fuUseContentAsIndexableText'
 --
--- * 'fuMedia'
---
 -- * 'fuTimedTextTrackName'
 --
 -- * 'fuOCRLanguage'
@@ -137,10 +161,9 @@ data FilesUpdate = FilesUpdate
 -- * 'fuOCR'
 filesUpdate
     :: File -- ^ 'fuPayload'
-    -> Body -- ^ 'fuMedia'
     -> Text -- ^ 'fuFileId'
     -> FilesUpdate
-filesUpdate pFuPayload_ pFuMedia_ pFuFileId_ =
+filesUpdate pFuPayload_ pFuFileId_ =
     FilesUpdate
     { _fuNewRevision = True
     , _fuPinned = False
@@ -150,7 +173,6 @@ filesUpdate pFuPayload_ pFuMedia_ pFuFileId_ =
     , _fuRemoveParents = Nothing
     , _fuModifiedDateBehavior = Nothing
     , _fuUseContentAsIndexableText = False
-    , _fuMedia = pFuMedia_
     , _fuTimedTextTrackName = Nothing
     , _fuOCRLanguage = Nothing
     , _fuConvert = False
@@ -213,9 +235,6 @@ fuUseContentAsIndexableText
   = lens _fuUseContentAsIndexableText
       (\ s a -> s{_fuUseContentAsIndexableText = a})
 
-fuMedia :: Lens' FilesUpdate Body
-fuMedia = lens _fuMedia (\ s a -> s{_fuMedia = a})
-
 -- | The timed text track name.
 fuTimedTextTrackName :: Lens' FilesUpdate (Maybe Text)
 fuTimedTextTrackName
@@ -270,8 +289,31 @@ instance GoogleRequest FilesUpdate where
               (Just _fuOCR)
               (Just AltJSON)
               _fuPayload
-              _fuMedia
               driveService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy FilesUpdateResource)
+                      mempty
+
+instance GoogleRequest (Upload FilesUpdate) where
+        type Rs (Upload FilesUpdate) = File
+        requestClient (Upload FilesUpdate{..} body)
+          = go _fuFileId (Just _fuNewRevision) (Just _fuPinned)
+              _fuTimedTextLanguage
+              (Just _fuUpdateViewedDate)
+              _fuRemoveParents
+              _fuModifiedDateBehavior
+              (Just _fuUseContentAsIndexableText)
+              _fuTimedTextTrackName
+              _fuOCRLanguage
+              (Just _fuConvert)
+              (Just _fuSetModifiedDate)
+              _fuAddParents
+              (Just _fuOCR)
+              (Just AltJSON)
+              (Just AltMedia)
+              _fuPayload
+              body
+              driveService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy FilesUpdateResource)
                       mempty

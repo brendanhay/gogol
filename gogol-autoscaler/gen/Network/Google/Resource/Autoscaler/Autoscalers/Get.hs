@@ -44,13 +44,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @autoscaler.autoscalers.get@ method which the
 -- 'AutoscalersGet' request conforms to.
 type AutoscalersGetResource =
-     "projects" :>
-       Capture "project" Text :>
-         "zones" :>
-           Capture "zone" Text :>
-             "autoscalers" :>
-               Capture "autoscaler" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Autoscaler
+     "autoscaler" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "autoscalers" :>
+                   Capture "autoscaler" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Autoscaler
 
 -- | Gets the specified Autoscaler resource.
 --

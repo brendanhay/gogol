@@ -178,7 +178,6 @@ autoscalerService :: Service
 autoscalerService
   = defaultService (ServiceId "autoscaler:v1beta2")
       "www.googleapis.com"
-      "autoscaler/v1beta2/"
 
 -- | View and manage your Google Compute Engine resources
 computeScope :: OAuthScope

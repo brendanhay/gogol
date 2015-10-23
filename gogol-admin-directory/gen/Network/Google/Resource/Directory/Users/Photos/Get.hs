@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.photos.get@ method which the
 -- 'UsersPhotosGet' request conforms to.
 type UsersPhotosGetResource =
-     "users" :>
-       Capture "userKey" Text :>
-         "photos" :>
-           "thumbnail" :>
-             QueryParam "alt" AltJSON :> Get '[JSON] UserPhoto
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               "photos" :>
+                 "thumbnail" :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] UserPhoto
 
 -- | Retrieve photo of a user
 --

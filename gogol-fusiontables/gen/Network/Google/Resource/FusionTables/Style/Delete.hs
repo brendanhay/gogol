@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.style.delete@ method which the
 -- 'StyleDelete' request conforms to.
 type StyleDeleteResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "styles" :>
-           Capture "styleId" Int32 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "styles" :>
+               Capture "styleId" Int32 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a style.
 --

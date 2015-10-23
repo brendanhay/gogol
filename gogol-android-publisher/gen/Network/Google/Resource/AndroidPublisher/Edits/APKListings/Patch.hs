@@ -47,16 +47,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.apklistings.patch@ method which the
 -- 'EditsAPKListingsPatch' request conforms to.
 type EditsAPKListingsPatchResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             Capture "apkVersionCode" Int32 :>
-               "listings" :>
-                 Capture "language" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] APKListing :>
-                       Patch '[JSON] APKListing
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   Capture "apkVersionCode" Int32 :>
+                     "listings" :>
+                       Capture "language" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] APKListing :>
+                             Patch '[JSON] APKListing
 
 -- | Updates or creates the APK-specific localized listing for a specified
 -- APK and language code. This method supports patch semantics.

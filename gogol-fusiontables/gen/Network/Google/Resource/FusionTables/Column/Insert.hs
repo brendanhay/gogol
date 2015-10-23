@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.column.insert@ method which the
 -- 'ColumnInsert' request conforms to.
 type ColumnInsertResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "columns" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Column :> Post '[JSON] Column
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "columns" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Column :> Post '[JSON] Column
 
 -- | Adds a new column to the table.
 --

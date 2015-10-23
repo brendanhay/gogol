@@ -49,23 +49,25 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.creativeFieldValues.list@ method which the
 -- 'CreativeFieldValuesList' request conforms to.
 type CreativeFieldValuesListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "creativeFields" :>
-           Capture "creativeFieldId" Int64 :>
-             "creativeFieldValues" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder"
-                     CreativeFieldValuesListSortOrder
-                     :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField"
-                         CreativeFieldValuesListSortField
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "sortOrder"
+                         CreativeFieldValuesListSortOrder
                          :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] CreativeFieldValuesListResponse
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             CreativeFieldValuesListSortField
+                             :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] CreativeFieldValuesListResponse
 
 -- | Retrieves a list of creative field values, possibly filtered.
 --

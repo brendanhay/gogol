@@ -44,9 +44,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @plus.people.get@ method which the
 -- 'PeopleGet' request conforms to.
 type PeopleGetResource =
-     "people" :>
-       Capture "userId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Person
+     "plus" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Person
 
 -- | Get a person\'s profile. If your app uses scope
 -- https:\/\/www.googleapis.com\/auth\/plus.login, this method is

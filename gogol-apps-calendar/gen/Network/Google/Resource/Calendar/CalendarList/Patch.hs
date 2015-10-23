@@ -45,14 +45,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendarList.patch@ method which the
 -- 'CalendarListPatch' request conforms to.
 type CalendarListPatchResource =
-     "users" :>
-       "me" :>
-         "calendarList" :>
-           Capture "calendarId" Text :>
-             QueryParam "colorRgbFormat" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] CalendarListEntry :>
-                   Patch '[JSON] CalendarListEntry
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "calendarList" :>
+               Capture "calendarId" Text :>
+                 QueryParam "colorRgbFormat" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CalendarListEntry :>
+                       Patch '[JSON] CalendarListEntry
 
 -- | Updates an entry on the user\'s calendar list. This method supports
 -- patch semantics.

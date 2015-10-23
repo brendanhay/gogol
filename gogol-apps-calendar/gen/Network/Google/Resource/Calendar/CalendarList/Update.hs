@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendarList.update@ method which the
 -- 'CalendarListUpdate' request conforms to.
 type CalendarListUpdateResource =
-     "users" :>
-       "me" :>
-         "calendarList" :>
-           Capture "calendarId" Text :>
-             QueryParam "colorRgbFormat" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] CalendarListEntry :>
-                   Put '[JSON] CalendarListEntry
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "calendarList" :>
+               Capture "calendarId" Text :>
+                 QueryParam "colorRgbFormat" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CalendarListEntry :>
+                       Put '[JSON] CalendarListEntry
 
 -- | Updates an entry on the user\'s calendar list.
 --

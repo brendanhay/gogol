@@ -46,13 +46,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.activities.list@ method which the
 -- 'ActivitiesList' request conforms to.
 type ActivitiesListResource =
-     "people" :>
-       Capture "userId" Text :>
-         "activities" :>
-           Capture "collection" ActivitiesListCollection :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "activities" :>
+               Capture "collection" ActivitiesListCollection :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
 -- | List all of the activities in the specified collection for a particular
 -- user.

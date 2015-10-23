@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.rooms.list@ method which the
 -- 'RoomsList' request conforms to.
 type RoomsListResource =
-     "rooms" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             QueryParam "alt" AltJSON :> Get '[JSON] RoomList
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           QueryParam "language" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" Int32 :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] RoomList
 
 -- | Returns invitations to join rooms.
 --

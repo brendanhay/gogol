@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightActivities.generatetag@ method which the
 -- 'FloodlightActivitiesGeneratetag' request conforms to.
 type FloodlightActivitiesGeneratetagResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightActivities" :>
-           "generatetag" :>
-             QueryParam "floodlightActivityId" Int64 :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] FloodlightActivitiesGenerateTagResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               "generatetag" :>
+                 QueryParam "floodlightActivityId" Int64 :>
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] FloodlightActivitiesGenerateTagResponse
 
 -- | Generates a tag for a floodlight activity.
 --

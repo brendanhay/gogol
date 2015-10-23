@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @plus.activities.get@ method which the
 -- 'ActivitiesGet' request conforms to.
 type ActivitiesGetResource =
-     "activities" :>
-       Capture "activityId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Activity
+     "plus" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Activity
 
 -- | Get an activity.
 --

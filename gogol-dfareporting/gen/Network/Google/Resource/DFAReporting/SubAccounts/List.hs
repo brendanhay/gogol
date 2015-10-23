@@ -48,17 +48,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.subaccounts.list@ method which the
 -- 'SubAccountsList' request conforms to.
 type SubAccountsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "subaccounts" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" SubAccountsListSortOrder :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" SubAccountsListSortField :>
-                     QueryParam "maxResults" Int32 :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] SubAccountsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               QueryParam "searchString" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "sortOrder" SubAccountsListSortOrder :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "sortField" SubAccountsListSortField :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] SubAccountsListResponse
 
 -- | Gets a list of subaccounts, possibly filtered.
 --

@@ -47,16 +47,18 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.move_folders.update@ method which the
 -- 'AccountsContainersMoveFoldersUpdate' request conforms to.
 type AccountsContainersMoveFoldersUpdateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "move_folders" :>
-               Capture "folderId" Text :>
-                 QueryParams "triggerId" Text :>
-                   QueryParams "variableId" Text :>
-                     QueryParams "tagId" Text :>
-                       QueryParam "alt" AltJSON :> Put '[JSON] ()
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "move_folders" :>
+                   Capture "folderId" Text :>
+                     QueryParams "triggerId" Text :>
+                       QueryParams "variableId" Text :>
+                         QueryParams "tagId" Text :>
+                           QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Moves entities to a GTM Folder.
 --

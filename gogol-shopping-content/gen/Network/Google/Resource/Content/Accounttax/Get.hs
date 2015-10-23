@@ -43,10 +43,12 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounttax.get@ method which the
 -- 'AccounttaxGet' request conforms to.
 type AccounttaxGetResource =
-     Capture "merchantId" Word64 :>
-       "accounttax" :>
-         Capture "accountId" Word64 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] AccountTax
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accounttax" :>
+             Capture "accountId" Word64 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] AccountTax
 
 -- | Retrieves the tax settings of the account.
 --

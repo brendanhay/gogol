@@ -54,23 +54,27 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.volumes.list@ method which the
 -- 'VolumesList' request conforms to.
 type VolumesListResource =
-     "volumes" :>
-       QueryParam "q" Text :>
-         QueryParam "orderBy" VolumesListOrderBy :>
-           QueryParam "libraryRestrict"
-             VolumesListLibraryRestrict
-             :>
-             QueryParam "partner" Text :>
-               QueryParam "download" VolumesListDownload :>
-                 QueryParam "source" Text :>
-                   QueryParam "projection" VolumesListProjection :>
-                     QueryParam "filter" VolumesListFilter :>
-                       QueryParam "langRestrict" Text :>
-                         QueryParam "startIndex" Word32 :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "showPreorders" Bool :>
-                               QueryParam "printType" VolumesListPrintType :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           QueryParam "q" Text :>
+             QueryParam "orderBy" VolumesListOrderBy :>
+               QueryParam "libraryRestrict"
+                 VolumesListLibraryRestrict
+                 :>
+                 QueryParam "partner" Text :>
+                   QueryParam "download" VolumesListDownload :>
+                     QueryParam "source" Text :>
+                       QueryParam "projection" VolumesListProjection :>
+                         QueryParam "filter" VolumesListFilter :>
+                           QueryParam "langRestrict" Text :>
+                             QueryParam "startIndex" Word32 :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "showPreorders" Bool :>
+                                   QueryParam "printType" VolumesListPrintType
+                                     :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Volumes
 
 -- | Performs a book search.
 --

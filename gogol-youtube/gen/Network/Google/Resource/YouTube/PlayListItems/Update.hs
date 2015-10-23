@@ -44,11 +44,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.playlistItems.update@ method which the
 -- 'PlayListItemsUpdate' request conforms to.
 type PlayListItemsUpdateResource =
-     "playlistItems" :>
-       QueryParam "part" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] PlayListItem :>
-             Put '[JSON] PlayListItem
+     "youtube" :>
+       "v3" :>
+         "playlistItems" :>
+           QueryParam "part" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PlayListItem :>
+                 Put '[JSON] PlayListItem
 
 -- | Modifies a playlist item. For example, you could update the item\'s
 -- position in the playlist.

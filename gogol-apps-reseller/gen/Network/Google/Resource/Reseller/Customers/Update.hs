@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @reseller.customers.update@ method which the
 -- 'CustomersUpdate' request conforms to.
 type CustomersUpdateResource =
-     "customers" :>
-       Capture "customerId" Text :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Customer :> Put '[JSON] Customer
+     "apps" :>
+       "reseller" :>
+         "v1" :>
+           "customers" :>
+             Capture "customerId" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Customer :> Put '[JSON] Customer
 
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller.

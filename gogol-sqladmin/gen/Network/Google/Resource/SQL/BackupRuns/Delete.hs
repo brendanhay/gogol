@@ -44,13 +44,15 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.backupRuns.delete@ method which the
 -- 'BackupRunsDelete' request conforms to.
 type BackupRunsDeleteResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "backupRuns" :>
-               Capture "id" Int64 :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "backupRuns" :>
+                   Capture "id" Int64 :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the backup taken by a backup run.
 --

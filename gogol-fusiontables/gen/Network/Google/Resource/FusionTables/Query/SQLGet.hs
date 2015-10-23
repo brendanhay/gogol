@@ -44,18 +44,22 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.query.sqlGet@ method which the
 -- 'QuerySQLGet' request conforms to.
 type QuerySQLGetResource =
-     "query" :>
-       QueryParam "sql" Text :>
-         QueryParam "typed" Bool :>
-           QueryParam "hdrs" Bool :>
-             QueryParam "alt" AltJSON :> Get '[JSON] SQLresponse
+     "fusiontables" :>
+       "v2" :>
+         "query" :>
+           QueryParam "sql" Text :>
+             QueryParam "typed" Bool :>
+               QueryParam "hdrs" Bool :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] SQLresponse
        :<|>
-       "query" :>
-         QueryParam "sql" Text :>
-           QueryParam "typed" Bool :>
-             QueryParam "hdrs" Bool :>
-               QueryParam "alt" AltMedia :>
-                 Get '[OctetStream] Stream
+       "fusiontables" :>
+         "v2" :>
+           "query" :>
+             QueryParam "sql" Text :>
+               QueryParam "typed" Bool :>
+                 QueryParam "hdrs" Bool :>
+                   QueryParam "alt" AltMedia :>
+                     Get '[OctetStream] Stream
 
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --

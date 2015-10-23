@@ -137,7 +137,6 @@ gamesManagementService
   = defaultService
       (ServiceId "gamesManagement:v1management")
       "www.googleapis.com"
-      "games/v1management/"
 
 -- | Know your basic profile info and list of people in your circles.
 plusLoginScope :: OAuthScope

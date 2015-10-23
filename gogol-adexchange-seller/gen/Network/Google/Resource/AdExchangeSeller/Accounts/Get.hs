@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.get@ method which the
 -- 'AccountsGet' request conforms to.
 type AccountsGetResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Account
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Get information about the selected Ad Exchange account.
 --

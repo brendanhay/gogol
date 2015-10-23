@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @directory.users.get@ method which the
 -- 'UsersGet' request conforms to.
 type UsersGetResource =
-     "users" :>
-       Capture "userKey" Text :>
-         QueryParam "viewType" UsersGetViewType :>
-           QueryParam "customFieldMask" Text :>
-             QueryParam "projection" UsersGetProjection :>
-               QueryParam "alt" AltJSON :> Get '[JSON] User
+     "admin" :>
+       "directory" :>
+         "v1" :>
+           "users" :>
+             Capture "userKey" Text :>
+               QueryParam "viewType" UsersGetViewType :>
+                 QueryParam "customFieldMask" Text :>
+                   QueryParam "projection" UsersGetProjection :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | retrieve user
 --

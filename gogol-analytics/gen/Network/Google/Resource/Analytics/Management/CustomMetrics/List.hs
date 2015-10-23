@@ -45,15 +45,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.customMetrics.list@ method which the
 -- 'ManagementCustomMetricsList' request conforms to.
 type ManagementCustomMetricsListResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "customMetrics" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] CustomMetrics
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     QueryParam "start-index" Int32 :>
+                       QueryParam "max-results" Int32 :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] CustomMetrics
 
 -- | Lists custom metrics to which the user has access.
 --

@@ -47,15 +47,17 @@ import           Network.Google.TagManager.Types
 -- | A resource alias for @tagmanager.accounts.containers.versions.restore@ method which the
 -- 'AccountsContainersVersionsRestore' request conforms to.
 type AccountsContainersVersionsRestoreResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "containers" :>
-           Capture "containerId" Text :>
-             "versions" :>
-               Capture "containerVersionId" Text :>
-                 "restore" :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] ContainerVersion
+     "tagmanager" :>
+       "v1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "containers" :>
+               Capture "containerId" Text :>
+                 "versions" :>
+                   Capture "containerVersionId" Text :>
+                     "restore" :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] ContainerVersion
 
 -- | Restores a Container Version. This will overwrite the container\'s
 -- current configuration (including its variables, triggers and tags). The

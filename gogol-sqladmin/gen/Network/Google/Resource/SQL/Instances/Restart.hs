@@ -43,12 +43,14 @@ import           Network.Google.SQLAdmin.Types
 -- | A resource alias for @sql.instances.restart@ method which the
 -- 'InstancesRestart' request conforms to.
 type InstancesRestartResource =
-     "projects" :>
-       Capture "project" Text :>
-         "instances" :>
-           Capture "instance" Text :>
-             "restart" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "restart" :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Restarts a Cloud SQL instance.
 --

@@ -478,7 +478,6 @@ bigQueryService :: Service
 bigQueryService
   = defaultService (ServiceId "bigquery:v2")
       "www.googleapis.com"
-      "bigquery/v2/"
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: OAuthScope

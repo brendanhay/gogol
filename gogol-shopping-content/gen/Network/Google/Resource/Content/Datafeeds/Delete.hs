@@ -44,11 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.datafeeds.delete@ method which the
 -- 'DatafeedsDelete' request conforms to.
 type DatafeedsDeleteResource =
-     Capture "merchantId" Word64 :>
-       "datafeeds" :>
-         Capture "datafeedId" Word64 :>
-           QueryParam "dryRun" Bool :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "datafeeds" :>
+             Capture "datafeedId" Word64 :>
+               QueryParam "dryRun" Bool :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a datafeed from your Merchant Center account.
 --

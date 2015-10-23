@@ -44,13 +44,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.shiplineitems@ method which the
 -- 'OrdersShiplineitems' request conforms to.
 type OrdersShiplineitemsResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         Capture "orderId" Text :>
-           "shipLineItems" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] OrdersShipLineItemsRequest :>
-                 Post '[JSON] OrdersShipLineItemsResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "shipLineItems" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] OrdersShipLineItemsRequest :>
+                     Post '[JSON] OrdersShipLineItemsResponse
 
 -- | Marks line item(s) as shipped.
 --

@@ -43,10 +43,13 @@ import           Network.Google.Spectrum.Types
 -- | A resource alias for @spectrum.paws.init@ method which the
 -- 'PawsInit' request conforms to.
 type PawsInitResource =
-     "init" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] PawsInitRequest :>
-           Post '[JSON] PawsInitResponse
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "init" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PawsInitRequest :>
+                 Post '[JSON] PawsInitResponse
 
 -- | Initializes the connection between a white space device and the
 -- database.

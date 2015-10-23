@@ -47,14 +47,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @freebase.reconcile@ method which the
 -- 'Reconcile' request conforms to.
 type ReconcileMethod =
-     "reconcile" :>
-       QueryParams "kind" Text :>
-         QueryParams "lang" Text :>
-           QueryParam "confidence" Float :>
-             QueryParam "name" Text :>
-               QueryParam "limit" Int32 :>
-                 QueryParams "prop" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] ReconcileGet
+     "freebase" :>
+       "v1" :>
+         "reconcile" :>
+           QueryParams "kind" Text :>
+             QueryParams "lang" Text :>
+               QueryParam "confidence" Float :>
+                 QueryParam "name" Text :>
+                   QueryParam "limit" Int32 :>
+                     QueryParams "prop" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] ReconcileGet
 
 -- | Reconcile entities to Freebase open data.
 --

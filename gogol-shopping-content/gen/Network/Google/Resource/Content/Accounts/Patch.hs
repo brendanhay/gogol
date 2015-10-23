@@ -45,12 +45,14 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.accounts.patch@ method which the
 -- 'AccountsPatch' request conforms to.
 type AccountsPatchResource =
-     Capture "merchantId" Word64 :>
-       "accounts" :>
-         Capture "accountId" Word64 :>
-           QueryParam "dryRun" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Account :> Patch '[JSON] Account
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "accounts" :>
+             Capture "accountId" Word64 :>
+               QueryParam "dryRun" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Account :> Patch '[JSON] Account
 
 -- | Updates a Merchant Center account. This method supports patch semantics.
 --

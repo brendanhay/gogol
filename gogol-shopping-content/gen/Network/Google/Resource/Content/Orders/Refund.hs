@@ -44,13 +44,15 @@ import           Network.Google.ShoppingContent.Types
 -- | A resource alias for @content.orders.refund@ method which the
 -- 'OrdersRefund' request conforms to.
 type OrdersRefundResource =
-     Capture "merchantId" Word64 :>
-       "orders" :>
-         Capture "orderId" Text :>
-           "refund" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] OrdersRefundRequest :>
-                 Post '[JSON] OrdersRefundResponse
+     "content" :>
+       "v2" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "refund" :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] OrdersRefundRequest :>
+                     Post '[JSON] OrdersRefundResponse
 
 -- | Refund a portion of the order, up to the full amount paid.
 --

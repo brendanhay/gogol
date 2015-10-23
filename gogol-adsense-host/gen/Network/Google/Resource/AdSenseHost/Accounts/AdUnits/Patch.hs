@@ -46,14 +46,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsensehost.accounts.adunits.patch@ method which the
 -- 'AccountsAdUnitsPatch' request conforms to.
 type AccountsAdUnitsPatchResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               QueryParam "adUnitId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] AdUnit :> Patch '[JSON] AdUnit
+     "adsensehost" :>
+       "v4.1" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   QueryParam "adUnitId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AdUnit :> Patch '[JSON] AdUnit
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 -- This method supports patch semantics.

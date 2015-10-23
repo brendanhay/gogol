@@ -45,15 +45,18 @@ import           Network.Google.ResourceViews.Types
 -- | A resource alias for @resourceviews.zoneViews.addResources@ method which the
 -- 'ZoneViewsAddResources' request conforms to.
 type ZoneViewsAddResourcesResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "resourceViews" :>
-             Capture "resourceView" Text :>
-               "addResources" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ZoneViewsAddResourcesRequest :>
-                     Post '[JSON] Operation
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "addResources" :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ZoneViewsAddResourcesRequest :>
+                           Post '[JSON] Operation
 
 -- | Add resources to the view.
 --

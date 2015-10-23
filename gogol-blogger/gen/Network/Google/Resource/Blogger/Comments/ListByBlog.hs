@@ -48,16 +48,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.comments.listByBlog@ method which the
 -- 'CommentsListByBlog' request conforms to.
 type CommentsListByBlogResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "comments" :>
-           QueryParams "status" CommentsListByBlogStatus :>
-             QueryParam "endDate" DateTime' :>
-               QueryParam "startDate" DateTime' :>
-                 QueryParam "fetchBodies" Bool :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] CommentList
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "comments" :>
+               QueryParams "status" CommentsListByBlogStatus :>
+                 QueryParam "endDate" DateTime' :>
+                   QueryParam "startDate" DateTime' :>
+                     QueryParam "fetchBodies" Bool :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] CommentList
 
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
 --

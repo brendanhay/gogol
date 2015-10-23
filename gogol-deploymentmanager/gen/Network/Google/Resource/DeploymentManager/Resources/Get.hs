@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @deploymentmanager.resources.get@ method which the
 -- 'ResourcesGet' request conforms to.
 type ResourcesGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "deployments" :>
-           Capture "deployment" Text :>
-             "resources" :>
-               Capture "resource" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Resource
+     "deploymentmanager" :>
+       "v2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "resources" :>
+                     Capture "resource" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Resource
 
 -- | Gets information about a single resource.
 --

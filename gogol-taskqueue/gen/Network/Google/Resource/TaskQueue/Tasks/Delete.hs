@@ -44,12 +44,15 @@ import           Network.Google.TaskQueue.Types
 -- | A resource alias for @taskqueue.tasks.delete@ method which the
 -- 'TasksDelete' request conforms to.
 type TasksDeleteResource =
-     Capture "project" Text :>
-       "taskqueues" :>
-         Capture "taskqueue" Text :>
-           "tasks" :>
-             Capture "task" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   Capture "task" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a task from a TaskQueue.
 --

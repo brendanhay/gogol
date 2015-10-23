@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.floodlightConfigurations.get@ method which the
 -- 'FloodlightConfigurationsGet' request conforms to.
 type FloodlightConfigurationsGetResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "floodlightConfigurations" :>
-           Capture "id" Int64 :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] FloodlightConfiguration
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightConfigurations" :>
+               Capture "id" Int64 :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] FloodlightConfiguration
 
 -- | Gets one floodlight configuration by ID.
 --

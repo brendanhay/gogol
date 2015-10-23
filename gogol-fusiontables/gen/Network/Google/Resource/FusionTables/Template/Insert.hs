@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.template.insert@ method which the
 -- 'TemplateInsert' request conforms to.
 type TemplateInsertResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "templates" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Template :> Post '[JSON] Template
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "templates" :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Template :> Post '[JSON] Template
 
 -- | Creates a new template for the table.
 --

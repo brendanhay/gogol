@@ -44,13 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @gmail.users.messages.attachments.get@ method which the
 -- 'UsersMessagesAttachmentsGet' request conforms to.
 type UsersMessagesAttachmentsGetResource =
-     Capture "userId" Text :>
-       "messages" :>
-         Capture "messageId" Text :>
-           "attachments" :>
-             Capture "id" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] MessagePartBody
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               Capture "messageId" Text :>
+                 "attachments" :>
+                   Capture "id" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] MessagePartBody
 
 -- | Gets the specified message attachment.
 --

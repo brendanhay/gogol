@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.get@ method which the
 -- 'PretargetingConfigGet' request conforms to.
 type PretargetingConfigGetResource =
-     "pretargetingconfigs" :>
-       Capture "accountId" Int64 :>
-         Capture "configId" Int64 :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] PretargetingConfig
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             Capture "configId" Int64 :>
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] PretargetingConfig
 
 -- | Gets a specific pretargeting configuration
 --

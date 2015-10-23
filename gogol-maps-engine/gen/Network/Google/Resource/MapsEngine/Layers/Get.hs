@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.layers.get@ method which the
 -- 'LayersGet' request conforms to.
 type LayersGetResource =
-     "layers" :>
-       Capture "id" Text :>
-         QueryParam "version" LayersGetVersion :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Layer
+     "mapsengine" :>
+       "v1" :>
+         "layers" :>
+           Capture "id" Text :>
+             QueryParam "version" LayersGetVersion :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Layer
 
 -- | Return metadata for a particular layer.
 --

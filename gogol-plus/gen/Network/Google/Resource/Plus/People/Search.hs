@@ -45,12 +45,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @plus.people.search@ method which the
 -- 'PeopleSearch' request conforms to.
 type PeopleSearchResource =
-     "people" :>
-       QueryParam "query" Text :>
-         QueryParam "language" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
+     "plus" :>
+       "v1" :>
+         "people" :>
+           QueryParam "query" Text :>
+             QueryParam "language" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" Word32 :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | Search all public profiles.
 --

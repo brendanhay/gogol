@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @analytics.management.profiles.insert@ method which the
 -- 'ManagementProFilesInsert' request conforms to.
 type ManagementProFilesInsertResource =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "profiles" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ProFile :> Post '[JSON] ProFile
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ProFile :> Post '[JSON] ProFile
 
 -- | Create a new view (profile).
 --

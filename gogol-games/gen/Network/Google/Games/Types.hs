@@ -926,7 +926,6 @@ gamesService :: Service
 gamesService
   = defaultService (ServiceId "games:v1")
       "www.googleapis.com"
-      "games/v1/"
 
 -- | Know your basic profile info and list of people in your circles.
 plusLoginScope :: OAuthScope

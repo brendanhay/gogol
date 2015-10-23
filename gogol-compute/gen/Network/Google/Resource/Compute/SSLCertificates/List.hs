@@ -46,14 +46,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.sslCertificates.list@ method which the
 -- 'SSLCertificatesList' request conforms to.
 type SSLCertificatesListResource =
-     Capture "project" Text :>
-       "global" :>
-         "sslCertificates" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] SSLCertificateList
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "sslCertificates" :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] SSLCertificateList
 
 -- | Retrieves the list of SslCertificate resources available to the
 -- specified project.

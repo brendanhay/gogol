@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @plusDomains.circles.get@ method which the
 -- 'CirclesGet' request conforms to.
 type CirclesGetResource =
-     "circles" :>
-       Capture "circleId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Circle
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Circle
 
 -- | Get a circle.
 --

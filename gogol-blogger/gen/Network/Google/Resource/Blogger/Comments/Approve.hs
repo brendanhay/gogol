@@ -44,14 +44,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.comments.approve@ method which the
 -- 'CommentsApprove' request conforms to.
 type CommentsApproveResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "posts" :>
-           Capture "postId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "approve" :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Comment
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     "approve" :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Marks a comment as not spam.
 --

@@ -43,12 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.tracks.list@ method which the
 -- 'EditsTracksList' request conforms to.
 type EditsTracksListResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "tracks" :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] TracksListResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "tracks" :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] TracksListResponse
 
 -- | Lists all the track configurations for this edit.
 --

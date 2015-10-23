@@ -43,11 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.firewalls.get@ method which the
 -- 'FirewallsGet' request conforms to.
 type FirewallsGetResource =
-     Capture "project" Text :>
-       "global" :>
-         "firewalls" :>
-           Capture "firewall" Text :>
-             QueryParam "alt" AltJSON :> Get '[JSON] Firewall
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "firewalls" :>
+                 Capture "firewall" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Firewall
 
 -- | Returns the specified firewall resource.
 --

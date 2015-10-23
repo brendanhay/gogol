@@ -34,7 +34,6 @@ module Network.Google.Resource.Mirror.Timeline.Insert
 
     -- * Request Lenses
     , tiPayload
-    , tiMedia
     ) where
 
 import           Network.Google.Mirror.Types
@@ -43,34 +42,40 @@ import           Network.Google.Prelude
 -- | A resource alias for @mirror.timeline.insert@ method which the
 -- 'TimelineInsert' request conforms to.
 type TimelineInsertResource =
-     "timeline" :>
-       QueryParam "alt" AltJSON :>
-         MultipartRelated '[JSON] TimelineItem Body :>
-           Post '[JSON] TimelineItem
+     "mirror" :>
+       "v1" :>
+         "timeline" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] TimelineItem :>
+               Post '[JSON] TimelineItem
+       :<|>
+       "upload" :>
+         "mirror" :>
+           "v1" :>
+             "timeline" :>
+               QueryParam "alt" AltJSON :>
+                 QueryParam "uploadType" AltMedia :>
+                   MultipartRelated '[JSON] TimelineItem RequestBody :>
+                     Post '[JSON] TimelineItem
 
 -- | Inserts a new item into the timeline.
 --
 -- /See:/ 'timelineInsert' smart constructor.
-data TimelineInsert = TimelineInsert
-    { _tiPayload :: !TimelineItem
-    , _tiMedia   :: !Body
-    }
+newtype TimelineInsert = TimelineInsert
+    { _tiPayload :: TimelineItem
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tiPayload'
---
--- * 'tiMedia'
 timelineInsert
     :: TimelineItem -- ^ 'tiPayload'
-    -> Body -- ^ 'tiMedia'
     -> TimelineInsert
-timelineInsert pTiPayload_ pTiMedia_ =
+timelineInsert pTiPayload_ =
     TimelineInsert
     { _tiPayload = pTiPayload_
-    , _tiMedia = pTiMedia_
     }
 
 -- | Multipart request metadata.
@@ -78,13 +83,19 @@ tiPayload :: Lens' TimelineInsert TimelineItem
 tiPayload
   = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
-tiMedia :: Lens' TimelineInsert Body
-tiMedia = lens _tiMedia (\ s a -> s{_tiMedia = a})
-
 instance GoogleRequest TimelineInsert where
         type Rs TimelineInsert = TimelineItem
         requestClient TimelineInsert{..}
-          = go (Just AltJSON) _tiPayload _tiMedia mirrorService
-          where go
+          = go (Just AltJSON) _tiPayload mirrorService
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy TimelineInsertResource)
+                      mempty
+
+instance GoogleRequest (Upload TimelineInsert) where
+        type Rs (Upload TimelineInsert) = TimelineItem
+        requestClient (Upload TimelineInsert{..} body)
+          = go (Just AltJSON) (Just AltMedia) _tiPayload body
+              mirrorService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy TimelineInsertResource)
                       mempty

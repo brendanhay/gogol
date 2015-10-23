@@ -45,11 +45,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.playlists.update@ method which the
 -- 'PlayListsUpdate' request conforms to.
 type PlayListsUpdateResource =
-     "playlists" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] PlayList :> Put '[JSON] PlayList
+     "youtube" :>
+       "v3" :>
+         "playlists" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] PlayList :> Put '[JSON] PlayList
 
 -- | Modifies a playlist. For example, you could change a playlist\'s title,
 -- description, or privacy status.

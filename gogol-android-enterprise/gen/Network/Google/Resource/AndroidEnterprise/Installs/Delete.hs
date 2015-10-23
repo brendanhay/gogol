@@ -47,15 +47,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidenterprise.installs.delete@ method which the
 -- 'InstallsDelete' request conforms to.
 type InstallsDeleteResource =
-     "enterprises" :>
-       Capture "enterpriseId" Text :>
-         "users" :>
-           Capture "userId" Text :>
-             "devices" :>
-               Capture "deviceId" Text :>
-                 "installs" :>
-                   Capture "installId" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "androidenterprise" :>
+       "v1" :>
+         "enterprises" :>
+           Capture "enterpriseId" Text :>
+             "users" :>
+               Capture "userId" Text :>
+                 "devices" :>
+                   Capture "deviceId" Text :>
+                     "installs" :>
+                       Capture "installId" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Requests to remove an app from a device. A call to get or list will
 -- still show the app as installed on the device until it is actually

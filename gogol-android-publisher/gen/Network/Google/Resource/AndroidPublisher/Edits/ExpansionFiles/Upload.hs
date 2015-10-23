@@ -35,7 +35,6 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
     -- * Request Lenses
     , ePackageName
     , eAPKVersionCode
-    , eMedia
     , eExpansionFileType
     , eEditId
     ) where
@@ -46,18 +45,38 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.expansionfiles.upload@ method which the
 -- 'EditsExpansionFilesUpload' request conforms to.
 type EditsExpansionFilesUploadResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "apks" :>
-             Capture "apkVersionCode" Int32 :>
-               "expansionFiles" :>
-                 Capture "expansionFileType"
-                   EditsExpansionFilesUploadExpansionFileType
-                   :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[OctetStream] Body :>
-                       Post '[JSON] ExpansionFilesUploadResponse
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "apks" :>
+                   Capture "apkVersionCode" Int32 :>
+                     "expansionFiles" :>
+                       Capture "expansionFileType"
+                         EditsExpansionFilesUploadExpansionFileType
+                         :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] ExpansionFilesUploadResponse
+       :<|>
+       "upload" :>
+         "androidpublisher" :>
+           "v2" :>
+             "applications" :>
+               Capture "packageName" Text :>
+                 "edits" :>
+                   Capture "editId" Text :>
+                     "apks" :>
+                       Capture "apkVersionCode" Int32 :>
+                         "expansionFiles" :>
+                           Capture "expansionFileType"
+                             EditsExpansionFilesUploadExpansionFileType
+                             :>
+                             QueryParam "alt" AltJSON :>
+                               QueryParam "uploadType" AltMedia :>
+                                 ReqBody '[OctetStream] RequestBody :>
+                                   Post '[JSON] ExpansionFilesUploadResponse
 
 -- | Uploads and attaches a new Expansion File to the APK specified.
 --
@@ -65,10 +84,9 @@ type EditsExpansionFilesUploadResource =
 data EditsExpansionFilesUpload = EditsExpansionFilesUpload
     { _ePackageName       :: !Text
     , _eAPKVersionCode    :: !Int32
-    , _eMedia             :: !Body
     , _eExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
     , _eEditId            :: !Text
-    }
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsExpansionFilesUpload' with the minimum fields required to make a request.
 --
@@ -78,23 +96,19 @@ data EditsExpansionFilesUpload = EditsExpansionFilesUpload
 --
 -- * 'eAPKVersionCode'
 --
--- * 'eMedia'
---
 -- * 'eExpansionFileType'
 --
 -- * 'eEditId'
 editsExpansionFilesUpload
     :: Text -- ^ 'ePackageName'
     -> Int32 -- ^ 'eAPKVersionCode'
-    -> Body -- ^ 'eMedia'
     -> EditsExpansionFilesUploadExpansionFileType -- ^ 'eExpansionFileType'
     -> Text -- ^ 'eEditId'
     -> EditsExpansionFilesUpload
-editsExpansionFilesUpload pEPackageName_ pEAPKVersionCode_ pEMedia_ pEExpansionFileType_ pEEditId_ =
+editsExpansionFilesUpload pEPackageName_ pEAPKVersionCode_ pEExpansionFileType_ pEEditId_ =
     EditsExpansionFilesUpload
     { _ePackageName = pEPackageName_
     , _eAPKVersionCode = pEAPKVersionCode_
-    , _eMedia = pEMedia_
     , _eExpansionFileType = pEExpansionFileType_
     , _eEditId = pEEditId_
     }
@@ -111,9 +125,6 @@ eAPKVersionCode :: Lens' EditsExpansionFilesUpload Int32
 eAPKVersionCode
   = lens _eAPKVersionCode
       (\ s a -> s{_eAPKVersionCode = a})
-
-eMedia :: Lens' EditsExpansionFilesUpload Body
-eMedia = lens _eMedia (\ s a -> s{_eMedia = a})
 
 eExpansionFileType :: Lens' EditsExpansionFilesUpload EditsExpansionFilesUploadExpansionFileType
 eExpansionFileType
@@ -132,9 +143,26 @@ instance GoogleRequest EditsExpansionFilesUpload
           = go _ePackageName _eEditId _eAPKVersionCode
               _eExpansionFileType
               (Just AltJSON)
-              _eMedia
               androidPublisherService
-          where go
+          where go :<|> _
+                  = buildClient
+                      (Proxy :: Proxy EditsExpansionFilesUploadResource)
+                      mempty
+
+instance GoogleRequest
+         (Upload EditsExpansionFilesUpload) where
+        type Rs (Upload EditsExpansionFilesUpload) =
+             ExpansionFilesUploadResponse
+        requestClient
+          (Upload EditsExpansionFilesUpload{..} body)
+          = go _ePackageName _eEditId _eAPKVersionCode
+              _eExpansionFileType
+              (Just AltJSON)
+              (Just AltMedia)
+              _ePayload
+              body
+              androidPublisherService
+          where _ :<|> go
                   = buildClient
                       (Proxy :: Proxy EditsExpansionFilesUploadResource)
                       mempty

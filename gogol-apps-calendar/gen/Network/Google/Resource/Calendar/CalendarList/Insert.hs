@@ -43,13 +43,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.calendarList.insert@ method which the
 -- 'CalendarListInsert' request conforms to.
 type CalendarListInsertResource =
-     "users" :>
-       "me" :>
-         "calendarList" :>
-           QueryParam "colorRgbFormat" Bool :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] CalendarListEntry :>
-                 Post '[JSON] CalendarListEntry
+     "calendar" :>
+       "v3" :>
+         "users" :>
+           "me" :>
+             "calendarList" :>
+               QueryParam "colorRgbFormat" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] CalendarListEntry :>
+                     Post '[JSON] CalendarListEntry
 
 -- | Adds an entry to the user\'s calendar list.
 --

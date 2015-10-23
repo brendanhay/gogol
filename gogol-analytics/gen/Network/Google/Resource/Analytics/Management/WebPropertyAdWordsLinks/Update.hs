@@ -46,16 +46,18 @@ import           Network.Google.Prelude
 -- 'ManagementWebPropertyAdWordsLinksUpdate' request conforms to.
 type ManagementWebPropertyAdWordsLinksUpdateResource
      =
-     "management" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "webproperties" :>
-             Capture "webPropertyId" Text :>
-               "entityAdWordsLinks" :>
-                 Capture "webPropertyAdWordsLinkId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] EntityAdWordsLink :>
-                       Put '[JSON] EntityAdWordsLink
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     Capture "webPropertyAdWordsLinkId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] EntityAdWordsLink :>
+                           Put '[JSON] EntityAdWordsLink
 
 -- | Updates an existing webProperty-AdWords link.
 --

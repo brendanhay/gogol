@@ -49,17 +49,19 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.promooffer.accept@ method which the
 -- 'PromoOfferAccept' request conforms to.
 type PromoOfferAcceptResource =
-     "promooffer" :>
-       "accept" :>
-         QueryParam "manufacturer" Text :>
-           QueryParam "serial" Text :>
-             QueryParam "device" Text :>
-               QueryParam "model" Text :>
-                 QueryParam "volumeId" Text :>
-                   QueryParam "offerId" Text :>
-                     QueryParam "product" Text :>
-                       QueryParam "androidId" Text :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] ()
+     "books" :>
+       "v1" :>
+         "promooffer" :>
+           "accept" :>
+             QueryParam "manufacturer" Text :>
+               QueryParam "serial" Text :>
+                 QueryParam "device" Text :>
+                   QueryParam "model" Text :>
+                     QueryParam "volumeId" Text :>
+                       QueryParam "offerId" Text :>
+                         QueryParam "product" Text :>
+                           QueryParam "androidId" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- |
 --

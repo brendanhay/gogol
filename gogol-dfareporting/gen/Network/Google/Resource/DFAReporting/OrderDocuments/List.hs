@@ -52,22 +52,24 @@ import           Network.Google.Prelude
 -- | A resource alias for @dfareporting.orderDocuments.list@ method which the
 -- 'OrderDocumentsList' request conforms to.
 type OrderDocumentsListResource =
-     "userprofiles" :>
-       Capture "profileId" Int64 :>
-         "projects" :>
-           Capture "projectId" Int64 :>
-             "orderDocuments" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder" OrderDocumentsListSortOrder :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" OrderDocumentsListSortField :>
-                         QueryParams "orderId" Int64 :>
-                           QueryParam "approved" Bool :>
-                             QueryParams "siteId" Int64 :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] OrderDocumentsListResponse
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "orderDocuments" :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "sortOrder" OrderDocumentsListSortOrder :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField" OrderDocumentsListSortField :>
+                             QueryParams "orderId" Int64 :>
+                               QueryParam "approved" Bool :>
+                                 QueryParams "siteId" Int64 :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] OrderDocumentsListResponse
 
 -- | Retrieves a list of order documents, possibly filtered.
 --

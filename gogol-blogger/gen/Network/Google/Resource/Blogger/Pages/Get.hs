@@ -44,12 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @blogger.pages.get@ method which the
 -- 'PagesGet' request conforms to.
 type PagesGetResource =
-     "blogs" :>
-       Capture "blogId" Text :>
-         "pages" :>
-           Capture "pageId" Text :>
-             QueryParam "view" PagesGetView :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Page
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 QueryParam "view" PagesGetView :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Page
 
 -- | Gets one blog page by ID.
 --

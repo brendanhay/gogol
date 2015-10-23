@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @adsense.adunits.getAdCode@ method which the
 -- 'AdUnitsGetAdCode' request conforms to.
 type AdUnitsGetAdCodeResource =
-     "adclients" :>
-       Capture "adClientId" Text :>
-         "adunits" :>
-           Capture "adUnitId" Text :>
-             "adcode" :>
-               QueryParam "alt" AltJSON :> Get '[JSON] AdCode
+     "adsense" :>
+       "v1.4" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "adunits" :>
+               Capture "adUnitId" Text :>
+                 "adcode" :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] AdCode
 
 -- | Get ad code for the specified ad unit.
 --

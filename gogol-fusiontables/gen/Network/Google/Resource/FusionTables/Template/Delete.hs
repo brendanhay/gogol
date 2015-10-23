@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.template.delete@ method which the
 -- 'TemplateDelete' request conforms to.
 type TemplateDeleteResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         "templates" :>
-           Capture "templateId" Int32 :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             "templates" :>
+               Capture "templateId" Int32 :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a template
 --

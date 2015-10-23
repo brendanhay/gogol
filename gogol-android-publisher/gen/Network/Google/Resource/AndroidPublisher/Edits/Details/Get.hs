@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.details.get@ method which the
 -- 'EditsDetailsGet' request conforms to.
 type EditsDetailsGetResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           "details" :>
-             QueryParam "alt" AltJSON :> Get '[JSON] AppDetails
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 "details" :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] AppDetails
 
 -- | Fetches app details for this edit. This includes the default language
 -- and developer support contact information.

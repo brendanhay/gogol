@@ -44,10 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @androidpublisher.edits.get@ method which the
 -- 'EditsGet' request conforms to.
 type EditsGetResource =
-     Capture "packageName" Text :>
-       "edits" :>
-         Capture "editId" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] AppEdit
+     "androidpublisher" :>
+       "v2" :>
+         "applications" :>
+           Capture "packageName" Text :>
+             "edits" :>
+               Capture "editId" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] AppEdit
 
 -- | Returns information about the edit specified. Calls will fail if the
 -- edit is no long active (e.g. has been deleted, superseded or expired).

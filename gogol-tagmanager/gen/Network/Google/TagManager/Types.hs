@@ -331,7 +331,6 @@ tagManagerService :: Service
 tagManagerService
   = defaultService (ServiceId "tagmanager:v1")
       "www.googleapis.com"
-      "tagmanager/v1/"
 
 -- | View your Google Tag Manager containers
 tagmanagerReadonlyScope :: OAuthScope

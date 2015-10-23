@@ -54,4 +54,3 @@ fontsService :: Service
 fontsService
   = defaultService (ServiceId "webfonts:v1")
       "www.googleapis.com"
-      "webfonts/v1/"

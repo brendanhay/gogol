@@ -44,11 +44,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.myconfig.updateUserSettings@ method which the
 -- 'MyConfigUpdateUserSettings' request conforms to.
 type MyConfigUpdateUserSettingsResource =
-     "myconfig" :>
-       "updateUserSettings" :>
-         QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] UserSettings :>
-             Post '[JSON] UserSettings
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "updateUserSettings" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] UserSettings :>
+                 Post '[JSON] UserSettings
 
 -- | Sets the settings for the user. If a sub-object is specified, it will
 -- overwrite the existing sub-object stored in the server. Unspecified

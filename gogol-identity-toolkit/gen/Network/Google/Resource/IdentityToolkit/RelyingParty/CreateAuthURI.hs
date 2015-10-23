@@ -42,11 +42,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.createAuthUri@ method which the
 -- 'RelyingPartyCreateAuthURI' request conforms to.
 type RelyingPartyCreateAuthURIResource =
-     "createAuthUri" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON]
-           IdentitytoolkitRelyingPartyCreateAuthURIRequest
-           :> Post '[JSON] CreateAuthURIResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "createAuthUri" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON]
+                 IdentitytoolkitRelyingPartyCreateAuthURIRequest
+                 :> Post '[JSON] CreateAuthURIResponse
 
 -- | Creates the URI used by the IdP to authenticate the user.
 --

@@ -43,12 +43,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @coordinate.schedule.get@ method which the
 -- 'ScheduleGet' request conforms to.
 type ScheduleGetResource =
-     "teams" :>
-       Capture "teamId" Text :>
-         "jobs" :>
-           Capture "jobId" Word64 :>
-             "schedule" :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Schedule
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 "schedule" :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Schedule
 
 -- | Retrieves the schedule for a job.
 --

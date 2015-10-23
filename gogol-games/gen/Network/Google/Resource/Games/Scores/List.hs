@@ -47,16 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.scores.list@ method which the
 -- 'ScoresList' request conforms to.
 type ScoresListResource =
-     "leaderboards" :>
-       Capture "leaderboardId" Text :>
-         "scores" :>
-           Capture "collection" ScoresListCollection :>
-             QueryParam "timeSpan" ScoresListTimeSpan :>
-               QueryParam "language" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] LeaderboardScores
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "scores" :>
+               Capture "collection" ScoresListCollection :>
+                 QueryParam "timeSpan" ScoresListTimeSpan :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] LeaderboardScores
 
 -- | Lists the scores in a leaderboard, starting from the top.
 --

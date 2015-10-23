@@ -45,12 +45,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.addresses.insert@ method which the
 -- 'AddressesInsert' request conforms to.
 type AddressesInsertResource =
-     Capture "project" Text :>
-       "regions" :>
-         Capture "region" Text :>
-           "addresses" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Address :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "regions" :>
+               Capture "region" Text :>
+                 "addresses" :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Address :> Post '[JSON] Operation
 
 -- | Creates an address resource in the specified project using the data
 -- included in the request.

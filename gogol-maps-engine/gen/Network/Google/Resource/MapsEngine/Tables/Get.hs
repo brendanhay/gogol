@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @mapsengine.tables.get@ method which the
 -- 'TablesGet' request conforms to.
 type TablesGetResource =
-     "tables" :>
-       Capture "id" Text :>
-         QueryParam "version" TablesGetVersion :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Table
+     "mapsengine" :>
+       "v1" :>
+         "tables" :>
+           Capture "id" Text :>
+             QueryParam "version" TablesGetVersion :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Return metadata for a particular table, including the schema.
 --

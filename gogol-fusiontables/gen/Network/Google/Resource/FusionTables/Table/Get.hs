@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @fusiontables.table.get@ method which the
 -- 'TableGet' request conforms to.
 type TableGetResource =
-     "tables" :>
-       Capture "tableId" Text :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Table
+     "fusiontables" :>
+       "v2" :>
+         "tables" :>
+           Capture "tableId" Text :>
+             QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Retrieves a specific table by its ID.
 --

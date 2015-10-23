@@ -53,34 +53,38 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.reports.generate@ method which the
 -- 'AccountsReportsGenerate' request conforms to.
 type AccountsReportsGenerateResource =
-     "accounts" :>
-       Capture "accountId" Text :>
-         "reports" :>
-           QueryParam "startDate" Text :>
-             QueryParam "endDate" Text :>
-               QueryParams "dimension" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParams "metric" Text :>
-                     QueryParams "sort" Text :>
-                       QueryParams "filter" Text :>
-                         QueryParam "startIndex" Word32 :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Report
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               QueryParam "startDate" Text :>
+                 QueryParam "endDate" Text :>
+                   QueryParams "dimension" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParams "metric" Text :>
+                         QueryParams "sort" Text :>
+                           QueryParams "filter" Text :>
+                             QueryParam "startIndex" Word32 :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Report
        :<|>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "reports" :>
-             QueryParam "startDate" Text :>
-               QueryParam "endDate" Text :>
-                 QueryParams "dimension" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParams "metric" Text :>
-                       QueryParams "sort" Text :>
-                         QueryParams "filter" Text :>
-                           QueryParam "startIndex" Word32 :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "alt" AltMedia :>
-                                 Get '[OctetStream] Stream
+       "adexchangeseller" :>
+         "v2.0" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "reports" :>
+                 QueryParam "startDate" Text :>
+                   QueryParam "endDate" Text :>
+                     QueryParams "dimension" Text :>
+                       QueryParam "locale" Text :>
+                         QueryParams "metric" Text :>
+                           QueryParams "sort" Text :>
+                             QueryParams "filter" Text :>
+                               QueryParam "startIndex" Word32 :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "alt" AltMedia :>
+                                     Get '[OctetStream] Stream
 
 -- | Generate an Ad Exchange report based on the report request sent in the
 -- query parameters. Returns the result as JSON; to retrieve output in CSV

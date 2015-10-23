@@ -40,10 +40,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @identitytoolkit.relyingparty.getPublicKeys@ method which the
 -- 'RelyingPartyGetPublicKeys' request conforms to.
 type RelyingPartyGetPublicKeysResource =
-     "publicKeys" :>
-       QueryParam "alt" AltJSON :>
-         Get '[JSON]
-           IdentitytoolkitRelyingPartyGetPublicKeysResponse
+     "identitytoolkit" :>
+       "v3" :>
+         "relyingparty" :>
+           "publicKeys" :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON]
+                 IdentitytoolkitRelyingPartyGetPublicKeysResponse
 
 -- | Get token signing public key.
 --

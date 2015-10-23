@@ -43,10 +43,12 @@ import           Network.Google.Prelude
 -- | A resource alias for @adexchangeseller.accounts.list@ method which the
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
-     "accounts" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Int32 :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Accounts
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           QueryParam "pageToken" Text :>
+             QueryParam "maxResults" Int32 :>
+               QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | List all accounts available to this Ad Exchange account.
 --

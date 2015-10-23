@@ -46,15 +46,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @compute.instances.setDiskAutoDelete@ method which the
 -- 'InstancesSetDiskAutoDelete' request conforms to.
 type InstancesSetDiskAutoDeleteResource =
-     Capture "project" Text :>
-       "zones" :>
-         Capture "zone" Text :>
-           "instances" :>
-             Capture "instance" Text :>
-               "setDiskAutoDelete" :>
-                 QueryParam "autoDelete" Bool :>
-                   QueryParam "deviceName" Text :>
-                     QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "compute" :>
+       "v1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instances" :>
+                   Capture "instance" Text :>
+                     "setDiskAutoDelete" :>
+                       QueryParam "autoDelete" Bool :>
+                         QueryParam "deviceName" Text :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Sets the auto-delete flag for a disk attached to an instance.
 --

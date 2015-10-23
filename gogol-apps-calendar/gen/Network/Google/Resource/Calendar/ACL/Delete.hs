@@ -43,11 +43,13 @@ import           Network.Google.Prelude
 -- | A resource alias for @calendar.acl.delete@ method which the
 -- 'ACLDelete' request conforms to.
 type ACLDeleteResource =
-     "calendars" :>
-       Capture "calendarId" Text :>
-         "acl" :>
-           Capture "ruleId" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+     "calendar" :>
+       "v3" :>
+         "calendars" :>
+           Capture "calendarId" Text :>
+             "acl" :>
+               Capture "ruleId" Text :>
+                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an access control rule.
 --

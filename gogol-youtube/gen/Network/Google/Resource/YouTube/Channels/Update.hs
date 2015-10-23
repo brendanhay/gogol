@@ -46,11 +46,13 @@ import           Network.Google.YouTube.Types
 -- | A resource alias for @youtube.channels.update@ method which the
 -- 'ChannelsUpdate' request conforms to.
 type ChannelsUpdateResource =
-     "channels" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Channel :> Put '[JSON] Channel
+     "youtube" :>
+       "v3" :>
+         "channels" :>
+           QueryParam "part" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Channel :> Put '[JSON] Channel
 
 -- | Updates a channel\'s metadata. Note that this method currently only
 -- supports updates to the channel resource\'s brandingSettings and

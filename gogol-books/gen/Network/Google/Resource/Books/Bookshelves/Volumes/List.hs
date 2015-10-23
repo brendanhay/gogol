@@ -47,16 +47,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @books.bookshelves.volumes.list@ method which the
 -- 'BookshelvesVolumesList' request conforms to.
 type BookshelvesVolumesListResource =
-     "users" :>
-       Capture "userId" Text :>
-         "bookshelves" :>
-           Capture "shelf" Text :>
-             "volumes" :>
-               QueryParam "source" Text :>
-                 QueryParam "startIndex" Word32 :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "showPreorders" Bool :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+     "books" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "bookshelves" :>
+               Capture "shelf" Text :>
+                 "volumes" :>
+                   QueryParam "source" Text :>
+                     QueryParam "startIndex" Word32 :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "showPreorders" Bool :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Retrieves volumes in a specific bookshelf for the specified user.
 --

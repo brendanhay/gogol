@@ -44,11 +44,14 @@ import           Network.Google.Prelude
 -- | A resource alias for @prediction.trainedmodels.update@ method which the
 -- 'TrainedModelsUpdate' request conforms to.
 type TrainedModelsUpdateResource =
-     Capture "project" Text :>
-       "trainedmodels" :>
-         Capture "id" Text :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] Update :> Put '[JSON] Insert2
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] Update :> Put '[JSON] Insert2
 
 -- | Add new data to a trained model.
 --

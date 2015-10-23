@@ -42,9 +42,11 @@ import           Network.Google.Prelude
 -- | A resource alias for @games.pushtokens.update@ method which the
 -- 'PushtokensUpdate' request conforms to.
 type PushtokensUpdateResource =
-     "pushtokens" :>
-       QueryParam "alt" AltJSON :>
-         ReqBody '[JSON] PushToken :> Put '[JSON] ()
+     "games" :>
+       "v1" :>
+         "pushtokens" :>
+           QueryParam "alt" AltJSON :>
+             ReqBody '[JSON] PushToken :> Put '[JSON] ()
 
 -- | Registers a push token for the current user and application.
 --
