@@ -42,7 +42,7 @@ import           Servant.API
 type JSONValue = Value
 
 newtype JSONText a = JSONText a
-    deriving (Eq, Ord, Read, Show, Data, Typeable, FromText, ToText)
+    deriving (Eq, Ord, Read, Show, Num, Data, Typeable, FromText, ToText)
 
 instance (FromJSON a, FromText a) => FromJSON (JSONText a) where
     parseJSON (String s) =
