@@ -47,9 +47,9 @@ import           Network.Google.ShoppingContent.Types
 type AccountshippingUpdateResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accountshipping" :>
-             Capture "accountId" Word64 :>
+             Capture "accountId" (JSONText Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AccountShipping :>
@@ -59,9 +59,9 @@ type AccountshippingUpdateResource =
 --
 -- /See:/ 'accountshippingUpdate' smart constructor.
 data AccountshippingUpdate = AccountshippingUpdate
-    { _auMerchantId :: !Word64
+    { _auMerchantId :: !(JSONText Word64)
     , _auPayload    :: !AccountShipping
-    , _auAccountId  :: !Word64
+    , _auAccountId  :: !(JSONText Word64)
     , _auDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -93,6 +93,7 @@ accountshippingUpdate pAuMerchantId_ pAuPayload_ pAuAccountId_ =
 auMerchantId :: Lens' AccountshippingUpdate Word64
 auMerchantId
   = lens _auMerchantId (\ s a -> s{_auMerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 auPayload :: Lens' AccountshippingUpdate AccountShipping
@@ -103,7 +104,8 @@ auPayload
 -- settings.
 auAccountId :: Lens' AccountshippingUpdate Word64
 auAccountId
-  = lens _auAccountId (\ s a -> s{_auAccountId = a})
+  = lens _auAccountId (\ s a -> s{_auAccountId = a}) .
+      _Coerce
 
 -- | Flag to run the request in dry-run mode.
 auDryRun :: Lens' AccountshippingUpdate (Maybe Bool)

@@ -47,9 +47,9 @@ type PlacementsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placements" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Placement :> Patch '[JSON] Placement
 
@@ -57,9 +57,9 @@ type PlacementsPatchResource =
 --
 -- /See:/ 'placementsPatch' smart constructor.
 data PlacementsPatch = PlacementsPatch
-    { _ppProFileId :: !Int64
+    { _ppProFileId :: !(JSONText Int64)
     , _ppPayload   :: !Placement
-    , _ppId        :: !Int64
+    , _ppId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsPatch' with the minimum fields required to make a request.
@@ -86,7 +86,8 @@ placementsPatch pPpProFileId_ pPpPayload_ pPpId_ =
 -- | User profile ID associated with this request.
 ppProFileId :: Lens' PlacementsPatch Int64
 ppProFileId
-  = lens _ppProFileId (\ s a -> s{_ppProFileId = a})
+  = lens _ppProFileId (\ s a -> s{_ppProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 ppPayload :: Lens' PlacementsPatch Placement
@@ -95,7 +96,7 @@ ppPayload
 
 -- | Placement ID.
 ppId :: Lens' PlacementsPatch Int64
-ppId = lens _ppId (\ s a -> s{_ppId = a})
+ppId = lens _ppId (\ s a -> s{_ppId = a}) . _Coerce
 
 instance GoogleRequest PlacementsPatch where
         type Rs PlacementsPatch = Placement

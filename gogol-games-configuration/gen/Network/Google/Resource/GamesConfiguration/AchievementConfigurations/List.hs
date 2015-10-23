@@ -50,7 +50,7 @@ type AchievementConfigurationsListResource =
            Capture "applicationId" Text :>
              "achievements" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
+                 QueryParam "maxResults" (JSONText Int32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] AchievementConfigurationListResponse
 
@@ -60,7 +60,7 @@ type AchievementConfigurationsListResource =
 data AchievementConfigurationsList = AchievementConfigurationsList
     { _aclApplicationId :: !Text
     , _aclPageToken     :: !(Maybe Text)
-    , _aclMaxResults    :: !(Maybe Int32)
+    , _aclMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsList' with the minimum fields required to make a request.
@@ -100,6 +100,7 @@ aclMaxResults :: Lens' AchievementConfigurationsList (Maybe Int32)
 aclMaxResults
   = lens _aclMaxResults
       (\ s a -> s{_aclMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AchievementConfigurationsList
          where

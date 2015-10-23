@@ -25,8 +25,8 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'valueRange' smart constructor.
 data ValueRange = ValueRange
-    { _vrMax :: !(Maybe Double)
-    , _vrMin :: !(Maybe Double)
+    { _vrMax :: !(Maybe (JSONText Double))
+    , _vrMin :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ValueRange' with the minimum fields required to make a request.
@@ -46,11 +46,15 @@ valueRange =
 
 -- | Maximum value.
 vrMax :: Lens' ValueRange (Maybe Double)
-vrMax = lens _vrMax (\ s a -> s{_vrMax = a})
+vrMax
+  = lens _vrMax (\ s a -> s{_vrMax = a}) .
+      mapping _Coerce
 
 -- | Minimum value.
 vrMin :: Lens' ValueRange (Maybe Double)
-vrMin = lens _vrMin (\ s a -> s{_vrMin = a})
+vrMin
+  = lens _vrMin (\ s a -> s{_vrMin = a}) .
+      mapping _Coerce
 
 instance FromJSON ValueRange where
         parseJSON
@@ -328,7 +332,7 @@ instance ToJSON PermissionsBatchDeleteRequest where
 --
 -- /See:/ 'rasterCollectionsListResponse' smart constructor.
 data RasterCollectionsListResponse = RasterCollectionsListResponse
-    { _rclrNextPageToken     :: !(Maybe Word8)
+    { _rclrNextPageToken     :: !(Maybe (JSONText Word8))
     , _rclrRasterCollections :: !(Maybe [RasterCollection])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -352,6 +356,7 @@ rclrNextPageToken :: Lens' RasterCollectionsListResponse (Maybe Word8)
 rclrNextPageToken
   = lens _rclrNextPageToken
       (\ s a -> s{_rclrNextPageToken = a})
+      . mapping _Coerce
 
 -- | Resources returned.
 rclrRasterCollections :: Lens' RasterCollectionsListResponse [RasterCollection]
@@ -437,7 +442,7 @@ instance ToJSON GeoJSONGeometry where
 --
 -- /See:/ 'mapLayer' smart constructor.
 data MapLayer = MapLayer
-    { _mlDefaultViewport :: !(Maybe [Double])
+    { _mlDefaultViewport :: !(Maybe [JSONText Double])
     , _mlVisibility      :: !(Maybe Text)
     , _mlKey             :: !(Maybe Text)
     , _mlName            :: !(Maybe Text)
@@ -531,8 +536,8 @@ instance ToJSON MapLayer where
 --
 -- /See:/ 'zoomLevels' smart constructor.
 data ZoomLevels = ZoomLevels
-    { _zlMax :: !(Maybe Int32)
-    , _zlMin :: !(Maybe Int32)
+    { _zlMax :: !(Maybe (JSONText Int32))
+    , _zlMin :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoomLevels' with the minimum fields required to make a request.
@@ -552,11 +557,15 @@ zoomLevels =
 
 -- | Maximum zoom level.
 zlMax :: Lens' ZoomLevels (Maybe Int32)
-zlMax = lens _zlMax (\ s a -> s{_zlMax = a})
+zlMax
+  = lens _zlMax (\ s a -> s{_zlMax = a}) .
+      mapping _Coerce
 
 -- | Minimum zoom level.
 zlMin :: Lens' ZoomLevels (Maybe Int32)
-zlMin = lens _zlMin (\ s a -> s{_zlMin = a})
+zlMin
+  = lens _zlMin (\ s a -> s{_zlMin = a}) .
+      mapping _Coerce
 
 instance FromJSON ZoomLevels where
         parseJSON
@@ -609,8 +618,8 @@ instance ToJSON FeatureInfo where
 --
 -- /See:/ 'sizeRange' smart constructor.
 data SizeRange = SizeRange
-    { _srMax :: !(Maybe Double)
-    , _srMin :: !(Maybe Double)
+    { _srMax :: !(Maybe (JSONText Double))
+    , _srMin :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizeRange' with the minimum fields required to make a request.
@@ -630,11 +639,15 @@ sizeRange =
 
 -- | Maximum size, in pixels.
 srMax :: Lens' SizeRange (Maybe Double)
-srMax = lens _srMax (\ s a -> s{_srMax = a})
+srMax
+  = lens _srMax (\ s a -> s{_srMax = a}) .
+      mapping _Coerce
 
 -- | Minimum size, in pixels.
 srMin :: Lens' SizeRange (Maybe Double)
-srMin = lens _srMin (\ s a -> s{_srMin = a})
+srMin
+  = lens _srMin (\ s a -> s{_srMin = a}) .
+      mapping _Coerce
 
 instance FromJSON SizeRange where
         parseJSON
@@ -652,7 +665,7 @@ instance ToJSON SizeRange where
 -- /See:/ 'mapFolder' smart constructor.
 data MapFolder = MapFolder
     { _mfExpandable      :: !(Maybe Bool)
-    , _mfDefaultViewport :: !(Maybe [Double])
+    , _mfDefaultViewport :: !(Maybe [JSONText Double])
     , _mfContents        :: !(Maybe [MapItem])
     , _mfVisibility      :: !(Maybe Text)
     , _mfKey             :: !(Maybe Text)
@@ -801,7 +814,7 @@ instance ToJSON Project where
 -- /See:/ 'color' smart constructor.
 data Color = Color
     { _cColor   :: !(Maybe Text)
-    , _cOpacity :: !(Maybe Double)
+    , _cOpacity :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Color' with the minimum fields required to make a request.
@@ -825,7 +838,9 @@ cColor = lens _cColor (\ s a -> s{_cColor = a})
 
 -- | Opacity ranges from 0 to 1, inclusive. If not provided, default to 1.
 cOpacity :: Lens' Color (Maybe Double)
-cOpacity = lens _cOpacity (\ s a -> s{_cOpacity = a})
+cOpacity
+  = lens _cOpacity (\ s a -> s{_cOpacity = a}) .
+      mapping _Coerce
 
 instance FromJSON Color where
         parseJSON
@@ -853,7 +868,7 @@ data RasterCollection = RasterCollection
     , _rcLastModifiedTime          :: !(Maybe DateTime')
     , _rcLastModifierEmail         :: !(Maybe Text)
     , _rcName                      :: !(Maybe Text)
-    , _rcBbox                      :: !(Maybe [Double])
+    , _rcBbox                      :: !(Maybe [JSONText Double])
     , _rcProcessingStatus          :: !(Maybe RasterCollectionProcessingStatus)
     , _rcMosaic                    :: !(Maybe Bool)
     , _rcId                        :: !(Maybe Text)
@@ -1086,8 +1101,8 @@ instance ToJSON RasterCollection where
 -- /See:/ 'lineStyleStroke' smart constructor.
 data LineStyleStroke = LineStyleStroke
     { _lssColor   :: !(Maybe Text)
-    , _lssWidth   :: !(Maybe Double)
-    , _lssOpacity :: !(Maybe Double)
+    , _lssWidth   :: !(Maybe (JSONText Double))
+    , _lssOpacity :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineStyleStroke' with the minimum fields required to make a request.
@@ -1115,12 +1130,15 @@ lssColor = lens _lssColor (\ s a -> s{_lssColor = a})
 -- | Width of the line, in pixels. 0 \<= width \<= 10. If width is set to 0,
 -- the line will be invisible.
 lssWidth :: Lens' LineStyleStroke (Maybe Double)
-lssWidth = lens _lssWidth (\ s a -> s{_lssWidth = a})
+lssWidth
+  = lens _lssWidth (\ s a -> s{_lssWidth = a}) .
+      mapping _Coerce
 
 -- | Opacity of the line.
 lssOpacity :: Lens' LineStyleStroke (Maybe Double)
 lssOpacity
-  = lens _lssOpacity (\ s a -> s{_lssOpacity = a})
+  = lens _lssOpacity (\ s a -> s{_lssOpacity = a}) .
+      mapping _Coerce
 
 instance FromJSON LineStyleStroke where
         parseJSON
@@ -1243,7 +1261,7 @@ data Asset = Asset
     , _aLastModifiedTime          :: !(Maybe DateTime')
     , _aLastModifierEmail         :: !(Maybe Text)
     , _aName                      :: !(Maybe Text)
-    , _aBbox                      :: !(Maybe [Double])
+    , _aBbox                      :: !(Maybe [JSONText Double])
     , _aResource                  :: !(Maybe Text)
     , _aId                        :: !(Maybe Text)
     , _aProjectId                 :: !(Maybe Text)
@@ -1645,7 +1663,7 @@ instance ToJSON ParentsListResponse where
 -- /See:/ 'featuresListResponse' smart constructor.
 data FeaturesListResponse = FeaturesListResponse
     { _flrNextPageToken           :: !(Maybe Text)
-    , _flrAllowedQueriesPerSecond :: !(Maybe Double)
+    , _flrAllowedQueriesPerSecond :: !(Maybe (JSONText Double))
     , _flrSchema                  :: !(Maybe Schema)
     , _flrFeatures                :: !(Maybe [Feature])
     , _flrType                    :: !Text
@@ -1687,6 +1705,7 @@ flrAllowedQueriesPerSecond :: Lens' FeaturesListResponse (Maybe Double)
 flrAllowedQueriesPerSecond
   = lens _flrAllowedQueriesPerSecond
       (\ s a -> s{_flrAllowedQueriesPerSecond = a})
+      . mapping _Coerce
 
 -- | The feature schema.
 flrSchema :: Lens' FeaturesListResponse (Maybe Schema)
@@ -1809,8 +1828,8 @@ instance ToJSON IconsListResponse where
 data LabelStyle = LabelStyle
     { _lsFontStyle  :: !(Maybe LabelStyleFontStyle)
     , _lsColor      :: !(Maybe Text)
-    , _lsSize       :: !(Maybe Double)
-    , _lsOpacity    :: !(Maybe Double)
+    , _lsSize       :: !(Maybe (JSONText Double))
+    , _lsOpacity    :: !(Maybe (JSONText Double))
     , _lsOutline    :: !(Maybe Color)
     , _lsFontWeight :: !(Maybe LabelStyleFontWeight)
     , _lsColumn     :: !(Maybe Text)
@@ -1858,12 +1877,15 @@ lsColor = lens _lsColor (\ s a -> s{_lsColor = a})
 -- | Font size of the label, in pixels. 8 \<= size \<= 15. If not provided, a
 -- default size will be provided.
 lsSize :: Lens' LabelStyle (Maybe Double)
-lsSize = lens _lsSize (\ s a -> s{_lsSize = a})
+lsSize
+  = lens _lsSize (\ s a -> s{_lsSize = a}) .
+      mapping _Coerce
 
 -- | Opacity of the text.
 lsOpacity :: Lens' LabelStyle (Maybe Double)
 lsOpacity
-  = lens _lsOpacity (\ s a -> s{_lsOpacity = a})
+  = lens _lsOpacity (\ s a -> s{_lsOpacity = a}) .
+      mapping _Coerce
 
 -- | Outline color of the text.
 lsOutline :: Lens' LabelStyle (Maybe Color)
@@ -2072,7 +2094,7 @@ instance ToJSON
 --
 -- /See:/ 'publishedMap' smart constructor.
 data PublishedMap = PublishedMap
-    { _pmDefaultViewport :: !(Maybe [Double])
+    { _pmDefaultViewport :: !(Maybe [JSONText Double])
     , _pmContents        :: !(Maybe [MapItem])
     , _pmName            :: !(Maybe Text)
     , _pmId              :: !(Maybe Text)
@@ -2234,7 +2256,7 @@ instance ToJSON AcquisitionTime where
 --
 -- /See:/ 'tablesListResponse' smart constructor.
 data TablesListResponse = TablesListResponse
-    { _tlrNextPageToken :: !(Maybe Word8)
+    { _tlrNextPageToken :: !(Maybe (JSONText Word8))
     , _tlrTables        :: !(Maybe [Table])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2258,6 +2280,7 @@ tlrNextPageToken :: Lens' TablesListResponse (Maybe Word8)
 tlrNextPageToken
   = lens _tlrNextPageToken
       (\ s a -> s{_tlrNextPageToken = a})
+      . mapping _Coerce
 
 -- | Resources returned.
 tlrTables :: Lens' TablesListResponse [Table]
@@ -2455,8 +2478,8 @@ instance ToJSON DisplayRule where
 -- /See:/ 'bOrder' smart constructor.
 data BOrder = BOrder
     { _boColor   :: !(Maybe Text)
-    , _boWidth   :: !(Maybe Double)
-    , _boOpacity :: !(Maybe Double)
+    , _boWidth   :: !(Maybe (JSONText Double))
+    , _boOpacity :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BOrder' with the minimum fields required to make a request.
@@ -2483,12 +2506,15 @@ boColor = lens _boColor (\ s a -> s{_boColor = a})
 
 -- | Width of the border, in pixels.
 boWidth :: Lens' BOrder (Maybe Double)
-boWidth = lens _boWidth (\ s a -> s{_boWidth = a})
+boWidth
+  = lens _boWidth (\ s a -> s{_boWidth = a}) .
+      mapping _Coerce
 
 -- | Opacity of the border.
 boOpacity :: Lens' BOrder (Maybe Double)
 boOpacity
-  = lens _boOpacity (\ s a -> s{_boOpacity = a})
+  = lens _boOpacity (\ s a -> s{_boOpacity = a}) .
+      mapping _Coerce
 
 instance FromJSON BOrder where
         parseJSON
@@ -2513,7 +2539,7 @@ data Map = Map
     { _mCreationTime              :: !(Maybe DateTime')
     , _mWritersCanEditPermissions :: !(Maybe Bool)
     , _mEtag                      :: !(Maybe Text)
-    , _mDefaultViewport           :: !(Maybe [Double])
+    , _mDefaultViewport           :: !(Maybe [JSONText Double])
     , _mContents                  :: !(Maybe [MapItem])
     , _mPublishingStatus          :: !(Maybe MapPublishingStatus)
     , _mCreatorEmail              :: !(Maybe Text)
@@ -2521,7 +2547,7 @@ data Map = Map
     , _mLastModifierEmail         :: !(Maybe Text)
     , _mVersions                  :: !(Maybe [Text])
     , _mName                      :: !(Maybe Text)
-    , _mBbox                      :: !(Maybe [Double])
+    , _mBbox                      :: !(Maybe [JSONText Double])
     , _mProcessingStatus          :: !(Maybe MapProcessingStatus)
     , _mId                        :: !(Maybe Text)
     , _mProjectId                 :: !(Maybe Text)
@@ -2841,7 +2867,7 @@ instance ToJSON RasterCollectionsRastersListResponse
 --
 -- /See:/ 'geoJSONMultiLineString' smart constructor.
 data GeoJSONMultiLineString = GeoJSONMultiLineString
-    { _gjmlsCoordinates :: !(Maybe [[[Double]]])
+    { _gjmlsCoordinates :: !(Maybe [[[JSONText Double]]])
     , _gjmlsType        :: !(Maybe GeoJSONMultiLineStringType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2962,7 +2988,7 @@ instance ToJSON ScalingFunction where
 --
 -- /See:/ 'assetsListResponse' smart constructor.
 data AssetsListResponse = AssetsListResponse
-    { _alrNextPageToken :: !(Maybe Word8)
+    { _alrNextPageToken :: !(Maybe (JSONText Word8))
     , _alrAssets        :: !(Maybe [Asset])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2986,6 +3012,7 @@ alrNextPageToken :: Lens' AssetsListResponse (Maybe Word8)
 alrNextPageToken
   = lens _alrNextPageToken
       (\ s a -> s{_alrNextPageToken = a})
+      . mapping _Coerce
 
 -- | Assets returned.
 alrAssets :: Lens' AssetsListResponse [Asset]
@@ -3124,7 +3151,7 @@ data RasterCollectionsRaster = RasterCollectionsRaster
     , _rcrRasterType       :: !Text
     , _rcrLastModifiedTime :: !(Maybe DateTime')
     , _rcrName             :: !(Maybe Text)
-    , _rcrBbox             :: !(Maybe [Double])
+    , _rcrBbox             :: !(Maybe [JSONText Double])
     , _rcrId               :: !(Maybe Text)
     , _rcrProjectId        :: !(Maybe Text)
     , _rcrDescription      :: !(Maybe Text)
@@ -3309,7 +3336,7 @@ instance ToJSON Filter where
 --
 -- /See:/ 'geoJSONMultiPoint' smart constructor.
 data GeoJSONMultiPoint = GeoJSONMultiPoint
-    { _gjmpCoordinates :: !(Maybe [[Double]])
+    { _gjmpCoordinates :: !(Maybe [[JSONText Double]])
     , _gjmpType        :: !(Maybe GeoJSONMultiPointType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3357,7 +3384,7 @@ instance ToJSON GeoJSONMultiPoint where
 --
 -- /See:/ 'geoJSONMultiPolygon' smart constructor.
 data GeoJSONMultiPolygon = GeoJSONMultiPolygon
-    { _gjsonmpCoordinates :: !(Maybe [[[[Double]]]])
+    { _gjsonmpCoordinates :: !(Maybe [[[[JSONText Double]]]])
     , _gjsonmpType        :: !(Maybe GeoJSONMultiPolygonType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3420,7 +3447,7 @@ data Layer = Layer
     , _layDatasources               :: !(Maybe [Datasource])
     , _layLastModifierEmail         :: !(Maybe Text)
     , _layName                      :: !(Maybe Text)
-    , _layBbox                      :: !(Maybe [Double])
+    , _layBbox                      :: !(Maybe [JSONText Double])
     , _layProcessingStatus          :: !(Maybe LayerProcessingStatus)
     , _layId                        :: !(Maybe Text)
     , _layProjectId                 :: !(Maybe Text)
@@ -3756,7 +3783,7 @@ data Raster = Raster
     , _rrLastModifierEmail         :: !(Maybe Text)
     , _rrAcquisitionTime           :: !(Maybe AcquisitionTime)
     , _rrName                      :: !(Maybe Text)
-    , _rrBbox                      :: !(Maybe [Double])
+    , _rrBbox                      :: !(Maybe [JSONText Double])
     , _rrProcessingStatus          :: !(Maybe RasterProcessingStatus)
     , _rrFiles                     :: !(Maybe [File])
     , _rrId                        :: !(Maybe Text)
@@ -4219,7 +4246,7 @@ data Table = Table
     , _tabSchema                    :: !(Maybe Schema)
     , _tabLastModifierEmail         :: !(Maybe Text)
     , _tabName                      :: !(Maybe Text)
-    , _tabBbox                      :: !(Maybe [Double])
+    , _tabBbox                      :: !(Maybe [JSONText Double])
     , _tabProcessingStatus          :: !(Maybe TableProcessingStatus)
     , _tabFiles                     :: !(Maybe [File])
     , _tabId                        :: !(Maybe Text)
@@ -4476,7 +4503,7 @@ instance ToJSON Table where
 --
 -- /See:/ 'file' smart constructor.
 data File = File
-    { _fSize         :: !(Maybe Int64)
+    { _fSize         :: !(Maybe (JSONText Int64))
     , _fUploadStatus :: !(Maybe FileUploadStatus)
     , _fFilename     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4501,7 +4528,9 @@ file =
 
 -- | The size of the file in bytes.
 fSize :: Lens' File (Maybe Int64)
-fSize = lens _fSize (\ s a -> s{_fSize = a})
+fSize
+  = lens _fSize (\ s a -> s{_fSize = a}) .
+      mapping _Coerce
 
 -- | The upload status of the file.
 fUploadStatus :: Lens' File (Maybe FileUploadStatus)
@@ -4618,7 +4647,7 @@ instance ToJSON PermissionsBatchDeleteResponse where
 --
 -- /See:/ 'mapKmlLink' smart constructor.
 data MapKmlLink = MapKmlLink
-    { _mklDefaultViewport :: !(Maybe [Double])
+    { _mklDefaultViewport :: !(Maybe [JSONText Double])
     , _mklVisibility      :: !(Maybe Text)
     , _mklName            :: !(Maybe Text)
     , _mklType            :: !(Maybe MapKmlLinkType)
@@ -4724,7 +4753,7 @@ instance ToJSON PermissionsBatchUpdateResponse where
 --
 -- /See:/ 'geoJSONLineString' smart constructor.
 data GeoJSONLineString = GeoJSONLineString
-    { _gjlsCoordinates :: !(Maybe [[Double]])
+    { _gjlsCoordinates :: !(Maybe [[JSONText Double]])
     , _gjlsType        :: !(Maybe GeoJSONLineStringType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4774,7 +4803,7 @@ instance ToJSON GeoJSONLineString where
 -- /See:/ 'publishedMapsListResponse' smart constructor.
 data PublishedMapsListResponse = PublishedMapsListResponse
     { _pmlrMaps          :: !(Maybe [PublishedMap])
-    , _pmlrNextPageToken :: !(Maybe Word8)
+    , _pmlrNextPageToken :: !(Maybe (JSONText Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedMapsListResponse' with the minimum fields required to make a request.
@@ -4804,6 +4833,7 @@ pmlrNextPageToken :: Lens' PublishedMapsListResponse (Maybe Word8)
 pmlrNextPageToken
   = lens _pmlrNextPageToken
       (\ s a -> s{_pmlrNextPageToken = a})
+      . mapping _Coerce
 
 instance FromJSON PublishedMapsListResponse where
         parseJSON
@@ -4825,7 +4855,7 @@ instance ToJSON PublishedMapsListResponse where
 -- /See:/ 'mapsListResponse' smart constructor.
 data MapsListResponse = MapsListResponse
     { _mlrMaps          :: !(Maybe [Map])
-    , _mlrNextPageToken :: !(Maybe Word8)
+    , _mlrNextPageToken :: !(Maybe (JSONText Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListResponse' with the minimum fields required to make a request.
@@ -4854,6 +4884,7 @@ mlrNextPageToken :: Lens' MapsListResponse (Maybe Word8)
 mlrNextPageToken
   = lens _mlrNextPageToken
       (\ s a -> s{_mlrNextPageToken = a})
+      . mapping _Coerce
 
 instance FromJSON MapsListResponse where
         parseJSON
@@ -4923,7 +4954,7 @@ instance ToJSON GeoJSONGeometryCollection where
 --
 -- /See:/ 'geoJSONPolygon' smart constructor.
 data GeoJSONPolygon = GeoJSONPolygon
-    { _gjpCoordinates :: !(Maybe [[[Double]]])
+    { _gjpCoordinates :: !(Maybe [[[JSONText Double]]])
     , _gjpType        :: !(Maybe GeoJSONPolygonType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4975,7 +5006,7 @@ instance ToJSON GeoJSONPolygon where
 --
 -- /See:/ 'geoJSONPoint' smart constructor.
 data GeoJSONPoint = GeoJSONPoint
-    { _gjsonpCoordinates :: !(Maybe [Double])
+    { _gjsonpCoordinates :: !(Maybe [JSONText Double])
     , _gjsonpType        :: !(Maybe GeoJSONPointType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5029,7 +5060,7 @@ instance ToJSON GeoJSONPoint where
 --
 -- /See:/ 'layersListResponse' smart constructor.
 data LayersListResponse = LayersListResponse
-    { _llrNextPageToken :: !(Maybe Word8)
+    { _llrNextPageToken :: !(Maybe (JSONText Word8))
     , _llrLayers        :: !(Maybe [Layer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5053,6 +5084,7 @@ llrNextPageToken :: Lens' LayersListResponse (Maybe Word8)
 llrNextPageToken
   = lens _llrNextPageToken
       (\ s a -> s{_llrNextPageToken = a})
+      . mapping _Coerce
 
 -- | Resources returned.
 llrLayers :: Lens' LayersListResponse [Layer]
@@ -5171,7 +5203,7 @@ instance ToJSON PermissionsListResponse where
 data LineStyle = LineStyle
     { _lsStroke :: !(Maybe LineStyleStroke)
     , _lsBOrder :: !(Maybe BOrder)
-    , _lsDash   :: !(Maybe [Double])
+    , _lsDash   :: !(Maybe [JSONText Double])
     , _lsLabel  :: !(Maybe LabelStyle)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5238,7 +5270,7 @@ instance ToJSON LineStyle where
 --
 -- /See:/ 'publishedLayersListResponse' smart constructor.
 data PublishedLayersListResponse = PublishedLayersListResponse
-    { _pllrNextPageToken :: !(Maybe Word8)
+    { _pllrNextPageToken :: !(Maybe (JSONText Word8))
     , _pllrLayers        :: !(Maybe [PublishedLayer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5262,6 +5294,7 @@ pllrNextPageToken :: Lens' PublishedLayersListResponse (Maybe Word8)
 pllrNextPageToken
   = lens _pllrNextPageToken
       (\ s a -> s{_pllrNextPageToken = a})
+      . mapping _Coerce
 
 -- | Resources returned.
 pllrLayers :: Lens' PublishedLayersListResponse [PublishedLayer]

@@ -52,7 +52,7 @@ type EventsGetResource =
            Capture "calendarId" Text :>
              "events" :>
                Capture "eventId" Text :>
-                 QueryParam "maxAttendees" Int32 :>
+                 QueryParam "maxAttendees" (JSONText Int32) :>
                    QueryParam "timeZone" Text :>
                      QueryParam "alwaysIncludeEmail" Bool :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Event
@@ -62,7 +62,7 @@ type EventsGetResource =
 -- /See:/ 'eventsGet' smart constructor.
 data EventsGet = EventsGet
     { _egCalendarId         :: !Text
-    , _egMaxAttendees       :: !(Maybe Int32)
+    , _egMaxAttendees       :: !(Maybe (JSONText Int32))
     , _egTimeZone           :: !(Maybe Text)
     , _egAlwaysIncludeEmail :: !(Maybe Bool)
     , _egEventId            :: !Text
@@ -108,6 +108,7 @@ egMaxAttendees :: Lens' EventsGet (Maybe Int32)
 egMaxAttendees
   = lens _egMaxAttendees
       (\ s a -> s{_egMaxAttendees = a})
+      . mapping _Coerce
 
 -- | Time zone used in the response. Optional. The default is the time zone
 -- of the calendar.

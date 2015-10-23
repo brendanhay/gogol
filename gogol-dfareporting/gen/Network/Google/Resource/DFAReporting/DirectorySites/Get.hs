@@ -46,17 +46,17 @@ type DirectorySitesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "directorySites" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] DirectorySite
 
 -- | Gets one directory site by ID.
 --
 -- /See:/ 'directorySitesGet' smart constructor.
 data DirectorySitesGet = DirectorySitesGet
-    { _dsgProFileId :: !Int64
-    , _dsgId        :: !Int64
+    { _dsgProFileId :: !(JSONText Int64)
+    , _dsgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ directorySitesGet pDsgProFileId_ pDsgId_ =
 dsgProFileId :: Lens' DirectorySitesGet Int64
 dsgProFileId
   = lens _dsgProFileId (\ s a -> s{_dsgProFileId = a})
+      . _Coerce
 
 -- | Directory site ID.
 dsgId :: Lens' DirectorySitesGet Int64
-dsgId = lens _dsgId (\ s a -> s{_dsgId = a})
+dsgId
+  = lens _dsgId (\ s a -> s{_dsgId = a}) . _Coerce
 
 instance GoogleRequest DirectorySitesGet where
         type Rs DirectorySitesGet = DirectorySite

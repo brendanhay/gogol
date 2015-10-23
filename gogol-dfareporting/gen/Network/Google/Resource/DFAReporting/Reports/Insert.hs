@@ -46,7 +46,7 @@ type ReportsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Report :> Post '[JSON] Report
@@ -55,7 +55,7 @@ type ReportsInsertResource =
 --
 -- /See:/ 'reportsInsert' smart constructor.
 data ReportsInsert = ReportsInsert
-    { _riProFileId :: !Int64
+    { _riProFileId :: !(JSONText Int64)
     , _riPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ reportsInsert pRiProFileId_ pRiPayload_ =
 -- | The DFA user profile ID.
 riProFileId :: Lens' ReportsInsert Int64
 riProFileId
-  = lens _riProFileId (\ s a -> s{_riProFileId = a})
+  = lens _riProFileId (\ s a -> s{_riProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 riPayload :: Lens' ReportsInsert Report

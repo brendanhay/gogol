@@ -254,24 +254,24 @@ instance ToJSON TypesListResponse where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe Word64)
+    { _oTargetId            :: !(Maybe (JSONText Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe Int32)
+    , _oProgress            :: !(Maybe (JSONText Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe Int32)
+    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe Word64)
+    , _oId                  :: !(Maybe (JSONText Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -357,7 +357,8 @@ operation =
 -- of the target.
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
-  = lens _oTargetId (\ s a -> s{_oTargetId = a})
+  = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
@@ -377,7 +378,8 @@ oInsertTime
 -- operation progresses.
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
-  = lens _oProgress (\ s a -> s{_oProgress = a})
+  = lens _oProgress (\ s a -> s{_oProgress = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The time that this operation was started by the server.
 -- This is in RFC3339 text format.
@@ -420,6 +422,7 @@ oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
       (\ s a -> s{_oHTTPErrorStatusCode = a})
+      . mapping _Coerce
 
 -- | [Output Only] User who requested the operation, for example:
 -- user\'example.com.
@@ -455,7 +458,8 @@ oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 oId :: Lens' Operation (Maybe Word64)
-oId = lens _oId (\ s a -> s{_oId = a})
+oId
+  = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
 -- | [Output Only] Type of the operation, such as insert, update, and delete.
 oOperationType :: Lens' Operation (Maybe Text)
@@ -738,7 +742,7 @@ data Manifest = Manifest
     , _mImports        :: !(Maybe [ImportFile])
     , _mSelfLink       :: !(Maybe Text)
     , _mName           :: !(Maybe Text)
-    , _mId             :: !(Maybe Word64)
+    , _mId             :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Manifest' with the minimum fields required to make a request.
@@ -813,7 +817,8 @@ mName = lens _mName (\ s a -> s{_mName = a})
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 mId :: Lens' Manifest (Maybe Word64)
-mId = lens _mId (\ s a -> s{_mId = a})
+mId
+  = lens _mId (\ s a -> s{_mId = a}) . mapping _Coerce
 
 instance FromJSON Manifest where
         parseJSON
@@ -902,7 +907,7 @@ instance ToJSON ResourceUpdateWarningsItem where
 --
 -- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
 newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest
-    { _dcprFingerprint :: Maybe Word8
+    { _dcprFingerprint :: Maybe (JSONText Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsCancelPreviewRequest' with the minimum fields required to make a request.
@@ -930,6 +935,7 @@ dcprFingerprint :: Lens' DeploymentsCancelPreviewRequest (Maybe Word8)
 dcprFingerprint
   = lens _dcprFingerprint
       (\ s a -> s{_dcprFingerprint = a})
+      . mapping _Coerce
 
 instance FromJSON DeploymentsCancelPreviewRequest
          where
@@ -955,7 +961,7 @@ data Resource = Resource
     , _rName            :: !(Maybe Text)
     , _rManifest        :: !(Maybe Text)
     , _rFinalProperties :: !(Maybe Text)
-    , _rId              :: !(Maybe Word64)
+    , _rId              :: !(Maybe (JSONText Word64))
     , _rType            :: !(Maybe Text)
     , _rUpdate          :: !(Maybe ResourceUpdate)
     , _rProperties      :: !(Maybe Text)
@@ -1046,7 +1052,8 @@ rFinalProperties
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 rId :: Lens' Resource (Maybe Word64)
-rId = lens _rId (\ s a -> s{_rId = a})
+rId
+  = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
 
 -- | [Output Only] The type of the resource, for example compute.v1.instance,
 -- or replicaPools.v1beta2.instanceGroupManager.
@@ -1250,7 +1257,7 @@ data Type = Type
     { _tInsertTime :: !(Maybe Text)
     , _tSelfLink   :: !(Maybe Text)
     , _tName       :: !(Maybe Text)
-    , _tId         :: !(Maybe Word64)
+    , _tId         :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
@@ -1291,7 +1298,8 @@ tName = lens _tName (\ s a -> s{_tName = a})
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 tId :: Lens' Type (Maybe Word64)
-tId = lens _tId (\ s a -> s{_tId = a})
+tId
+  = lens _tId (\ s a -> s{_tId = a}) . mapping _Coerce
 
 instance FromJSON Type where
         parseJSON
@@ -1416,7 +1424,7 @@ instance ToJSON OperationErrorErrorsItem where
 --
 -- /See:/ 'deploymentsStopRequest' smart constructor.
 newtype DeploymentsStopRequest = DeploymentsStopRequest
-    { _dsrFingerprint :: Maybe Word8
+    { _dsrFingerprint :: Maybe (JSONText Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsStopRequest' with the minimum fields required to make a request.
@@ -1444,6 +1452,7 @@ dsrFingerprint :: Lens' DeploymentsStopRequest (Maybe Word8)
 dsrFingerprint
   = lens _dsrFingerprint
       (\ s a -> s{_dsrFingerprint = a})
+      . mapping _Coerce
 
 instance FromJSON DeploymentsStopRequest where
         parseJSON
@@ -1760,10 +1769,10 @@ instance ToJSON OperationWarningsItem where
 data Deployment = Deployment
     { _dInsertTime  :: !(Maybe Text)
     , _dOperation   :: !(Maybe Operation)
-    , _dFingerprint :: !(Maybe Word8)
+    , _dFingerprint :: !(Maybe (JSONText Word8))
     , _dName        :: !(Maybe Text)
     , _dManifest    :: !(Maybe Text)
-    , _dId          :: !(Maybe Word64)
+    , _dId          :: !(Maybe (JSONText Word64))
     , _dDescription :: !(Maybe Text)
     , _dUpdate      :: !(Maybe DeploymentUpdate)
     , _dTarget      :: !(Maybe TargetConfiguration)
@@ -1828,6 +1837,7 @@ dOperation
 dFingerprint :: Lens' Deployment (Maybe Word8)
 dFingerprint
   = lens _dFingerprint (\ s a -> s{_dFingerprint = a})
+      . mapping _Coerce
 
 -- | Name of the resource; provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -1847,7 +1857,8 @@ dManifest
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 dId :: Lens' Deployment (Maybe Word64)
-dId = lens _dId (\ s a -> s{_dId = a})
+dId
+  = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
 -- | An optional user-provided description of the deployment.
 dDescription :: Lens' Deployment (Maybe Text)

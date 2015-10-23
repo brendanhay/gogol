@@ -69,7 +69,7 @@ type RastersListResource =
                          QueryParam "modifiedBefore" DateTime' :>
                            QueryParam "pageToken" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -89,7 +89,7 @@ data RastersList = RastersList
     , _rlPageToken        :: !(Maybe Text)
     , _rlProjectId        :: !Text
     , _rlSearch           :: !(Maybe Text)
-    , _rlMaxResults       :: !(Maybe Word32)
+    , _rlMaxResults       :: !(Maybe (JSONText Word32))
     , _rlTags             :: !(Maybe Text)
     , _rlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -214,6 +214,7 @@ rlSearch = lens _rlSearch (\ s a -> s{_rlSearch = a})
 rlMaxResults :: Lens' RastersList (Maybe Word32)
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
+      . mapping _Coerce
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.

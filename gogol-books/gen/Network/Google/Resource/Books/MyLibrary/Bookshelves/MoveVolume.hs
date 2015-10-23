@@ -52,7 +52,7 @@ type MyLibraryBookshelvesMoveVolumeResource =
              Capture "shelf" Text :>
                "moveVolume" :>
                  QueryParam "volumeId" Text :>
-                   QueryParam "volumePosition" Int32 :>
+                   QueryParam "volumePosition" (JSONText Int32) :>
                      QueryParam "source" Text :>
                        QueryParam "alt" AltJSON :> Post '[JSON] ()
 
@@ -63,7 +63,7 @@ data MyLibraryBookshelvesMoveVolume = MyLibraryBookshelvesMoveVolume
     { _mlbmvShelf          :: !Text
     , _mlbmvVolumeId       :: !Text
     , _mlbmvSource         :: !(Maybe Text)
-    , _mlbmvVolumePosition :: !Int32
+    , _mlbmvVolumePosition :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryBookshelvesMoveVolume' with the minimum fields required to make a request.
@@ -112,6 +112,7 @@ mlbmvVolumePosition :: Lens' MyLibraryBookshelvesMoveVolume Int32
 mlbmvVolumePosition
   = lens _mlbmvVolumePosition
       (\ s a -> s{_mlbmvVolumePosition = a})
+      . _Coerce
 
 instance GoogleRequest MyLibraryBookshelvesMoveVolume
          where

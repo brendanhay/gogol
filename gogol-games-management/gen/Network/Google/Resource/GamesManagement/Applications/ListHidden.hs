@@ -52,7 +52,7 @@ type ApplicationsListHiddenResource =
              "players" :>
                "hidden" :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
+                   QueryParam "maxResults" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] HiddenPlayerList
 
@@ -63,7 +63,7 @@ type ApplicationsListHiddenResource =
 data ApplicationsListHidden = ApplicationsListHidden
     { _alhApplicationId :: !Text
     , _alhPageToken     :: !(Maybe Text)
-    , _alhMaxResults    :: !(Maybe Int32)
+    , _alhMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsListHidden' with the minimum fields required to make a request.
@@ -103,6 +103,7 @@ alhMaxResults :: Lens' ApplicationsListHidden (Maybe Int32)
 alhMaxResults
   = lens _alhMaxResults
       (\ s a -> s{_alhMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ApplicationsListHidden where
         type Rs ApplicationsListHidden = HiddenPlayerList

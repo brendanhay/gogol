@@ -47,7 +47,7 @@ type AdClientsListResource =
        "v4.1" :>
          "adclients" :>
            QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
+             QueryParam "maxResults" (JSONText Word32) :>
                QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
 -- | List all host ad clients in this AdSense account.
@@ -55,7 +55,7 @@ type AdClientsListResource =
 -- /See:/ 'adClientsList' smart constructor.
 data AdClientsList = AdClientsList
     { _aclPageToken  :: !(Maybe Text)
-    , _aclMaxResults :: !(Maybe Word32)
+    , _aclMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdClientsList' with the minimum fields required to make a request.
@@ -86,6 +86,7 @@ aclMaxResults :: Lens' AdClientsList (Maybe Word32)
 aclMaxResults
   = lens _aclMaxResults
       (\ s a -> s{_aclMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AdClientsList where
         type Rs AdClientsList = AdClients

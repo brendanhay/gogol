@@ -46,17 +46,17 @@ type ReportsDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
-               Capture "reportId" Int64 :>
+               Capture "reportId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a report by its ID.
 --
 -- /See:/ 'reportsDelete' smart constructor.
 data ReportsDelete = ReportsDelete
-    { _rdReportId  :: !Int64
-    , _rdProFileId :: !Int64
+    { _rdReportId  :: !(JSONText Int64)
+    , _rdProFileId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsDelete' with the minimum fields required to make a request.
@@ -79,12 +79,14 @@ reportsDelete pRdReportId_ pRdProFileId_ =
 -- | The ID of the report.
 rdReportId :: Lens' ReportsDelete Int64
 rdReportId
-  = lens _rdReportId (\ s a -> s{_rdReportId = a})
+  = lens _rdReportId (\ s a -> s{_rdReportId = a}) .
+      _Coerce
 
 -- | The DFA user profile ID.
 rdProFileId :: Lens' ReportsDelete Int64
 rdProFileId
-  = lens _rdProFileId (\ s a -> s{_rdProFileId = a})
+  = lens _rdProFileId (\ s a -> s{_rdProFileId = a}) .
+      _Coerce
 
 instance GoogleRequest ReportsDelete where
         type Rs ReportsDelete = ()

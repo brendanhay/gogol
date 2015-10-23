@@ -46,7 +46,7 @@ type AdvertiserGroupsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "advertiserGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] AdvertiserGroup :>
@@ -56,7 +56,7 @@ type AdvertiserGroupsInsertResource =
 --
 -- /See:/ 'advertiserGroupsInsert' smart constructor.
 data AdvertiserGroupsInsert = AdvertiserGroupsInsert
-    { _agiProFileId :: !Int64
+    { _agiProFileId :: !(JSONText Int64)
     , _agiPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ advertiserGroupsInsert pAgiProFileId_ pAgiPayload_ =
 agiProFileId :: Lens' AdvertiserGroupsInsert Int64
 agiProFileId
   = lens _agiProFileId (\ s a -> s{_agiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 agiPayload :: Lens' AdvertiserGroupsInsert AdvertiserGroup

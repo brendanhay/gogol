@@ -28,8 +28,8 @@ data Insert2ModelInfo = Insert2ModelInfo
     , _imiClassWeightedAccuracy  :: !(Maybe Text)
     , _imiClassificationAccuracy :: !(Maybe Text)
     , _imiMeanSquaredError       :: !(Maybe Text)
-    , _imiNumberLabels           :: !(Maybe Int64)
-    , _imiNumberInstances        :: !(Maybe Int64)
+    , _imiNumberLabels           :: !(Maybe (JSONText Int64))
+    , _imiNumberInstances        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Insert2ModelInfo' with the minimum fields required to make a request.
@@ -94,12 +94,14 @@ imiNumberLabels :: Lens' Insert2ModelInfo (Maybe Int64)
 imiNumberLabels
   = lens _imiNumberLabels
       (\ s a -> s{_imiNumberLabels = a})
+      . mapping _Coerce
 
 -- | Number of valid data instances used in the trained model.
 imiNumberInstances :: Lens' Insert2ModelInfo (Maybe Int64)
 imiNumberInstances
   = lens _imiNumberInstances
       (\ s a -> s{_imiNumberInstances = a})
+      . mapping _Coerce
 
 instance FromJSON Insert2ModelInfo where
         parseJSON
@@ -360,7 +362,7 @@ instance ToJSON List where
 --
 -- /See:/ 'insertUtilityItem' smart constructor.
 newtype InsertUtilityItem = InsertUtilityItem
-    { _iuiAddtional :: HashMap Text Double
+    { _iuiAddtional :: HashMap Text (JSONText Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InsertUtilityItem' with the minimum fields required to make a request.
@@ -634,7 +636,7 @@ instance ToJSON InputInput where
 -- /See:/ 'analyzeDataDescriptionFeaturesItemCategoricalValuesItem' smart constructor.
 data AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem = AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
     { _addficviValue :: !(Maybe Text)
-    , _addficviCount :: !(Maybe Int64)
+    , _addficviCount :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem' with the minimum fields required to make a request.
@@ -663,6 +665,7 @@ addficviCount :: Lens' AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem (
 addficviCount
   = lens _addficviCount
       (\ s a -> s{_addficviCount = a})
+      . mapping _Coerce
 
 instance FromJSON
          AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
@@ -689,7 +692,7 @@ instance ToJSON
 -- /See:/ 'analyzeDataDescriptionFeaturesItemNumeric' smart constructor.
 data AnalyzeDataDescriptionFeaturesItemNumeric = AnalyzeDataDescriptionFeaturesItemNumeric
     { _addfinMean     :: !(Maybe Text)
-    , _addfinCount    :: !(Maybe Int64)
+    , _addfinCount    :: !(Maybe (JSONText Int64))
     , _addfinVariance :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -719,7 +722,8 @@ addfinMean
 -- | Number of numeric values for this feature in the data set.
 addfinCount :: Lens' AnalyzeDataDescriptionFeaturesItemNumeric (Maybe Int64)
 addfinCount
-  = lens _addfinCount (\ s a -> s{_addfinCount = a})
+  = lens _addfinCount (\ s a -> s{_addfinCount = a}) .
+      mapping _Coerce
 
 -- | Variance of the numeric values of this feature in the data set.
 addfinVariance :: Lens' AnalyzeDataDescriptionFeaturesItemNumeric (Maybe Text)
@@ -782,7 +786,7 @@ instance ToJSON Input where
 -- /See:/ 'analyzeDataDescriptionFeaturesItemCategorical' smart constructor.
 data AnalyzeDataDescriptionFeaturesItemCategorical = AnalyzeDataDescriptionFeaturesItemCategorical
     { _addficValues :: !(Maybe [AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem])
-    , _addficCount  :: !(Maybe Int64)
+    , _addficCount  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemCategorical' with the minimum fields required to make a request.
@@ -810,7 +814,8 @@ addficValues
 -- | Number of categorical values for this feature in the data.
 addficCount :: Lens' AnalyzeDataDescriptionFeaturesItemCategorical (Maybe Int64)
 addficCount
-  = lens _addficCount (\ s a -> s{_addficCount = a})
+  = lens _addficCount (\ s a -> s{_addficCount = a}) .
+      mapping _Coerce
 
 instance FromJSON
          AnalyzeDataDescriptionFeaturesItemCategorical where
@@ -834,7 +839,7 @@ instance ToJSON
 -- /See:/ 'analyzeDataDescriptionOutputFeatureTextItem' smart constructor.
 data AnalyzeDataDescriptionOutputFeatureTextItem = AnalyzeDataDescriptionOutputFeatureTextItem
     { _addoftiValue :: !(Maybe Text)
-    , _addoftiCount :: !(Maybe Int64)
+    , _addoftiCount :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionOutputFeatureTextItem' with the minimum fields required to make a request.
@@ -861,6 +866,7 @@ addoftiValue
 addoftiCount :: Lens' AnalyzeDataDescriptionOutputFeatureTextItem (Maybe Int64)
 addoftiCount
   = lens _addoftiCount (\ s a -> s{_addoftiCount = a})
+      . mapping _Coerce
 
 instance FromJSON
          AnalyzeDataDescriptionOutputFeatureTextItem where
@@ -1156,7 +1162,7 @@ instance ToJSON Output where
 -- /See:/ 'analyzeDataDescriptionOutputFeatureNumeric' smart constructor.
 data AnalyzeDataDescriptionOutputFeatureNumeric = AnalyzeDataDescriptionOutputFeatureNumeric
     { _addofnMean     :: !(Maybe Text)
-    , _addofnCount    :: !(Maybe Int64)
+    , _addofnCount    :: !(Maybe (JSONText Int64))
     , _addofnVariance :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1186,7 +1192,8 @@ addofnMean
 -- | Number of numeric output values in the data set.
 addofnCount :: Lens' AnalyzeDataDescriptionOutputFeatureNumeric (Maybe Int64)
 addofnCount
-  = lens _addofnCount (\ s a -> s{_addofnCount = a})
+  = lens _addofnCount (\ s a -> s{_addofnCount = a}) .
+      mapping _Coerce
 
 -- | Variance of the output values in the data set.
 addofnVariance :: Lens' AnalyzeDataDescriptionOutputFeatureNumeric (Maybe Text)
@@ -1367,7 +1374,7 @@ instance ToJSON AnalyzeModelDescription where
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItemText' smart constructor.
 newtype AnalyzeDataDescriptionFeaturesItemText = AnalyzeDataDescriptionFeaturesItemText
-    { _addfitCount :: Maybe Int64
+    { _addfitCount :: Maybe (JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemText' with the minimum fields required to make a request.
@@ -1385,7 +1392,8 @@ analyzeDataDescriptionFeaturesItemText =
 -- | Number of multiple-word text values for this feature.
 addfitCount :: Lens' AnalyzeDataDescriptionFeaturesItemText (Maybe Int64)
 addfitCount
-  = lens _addfitCount (\ s a -> s{_addfitCount = a})
+  = lens _addfitCount (\ s a -> s{_addfitCount = a}) .
+      mapping _Coerce
 
 instance FromJSON
          AnalyzeDataDescriptionFeaturesItemText where
@@ -1448,7 +1456,7 @@ instance ToJSON
 data AnalyzeDataDescriptionFeaturesItem = AnalyzeDataDescriptionFeaturesItem
     { _addfiText        :: !(Maybe AnalyzeDataDescriptionFeaturesItemText)
     , _addfiNumeric     :: !(Maybe AnalyzeDataDescriptionFeaturesItemNumeric)
-    , _addfiIndex       :: !(Maybe Int64)
+    , _addfiIndex       :: !(Maybe (JSONText Int64))
     , _addfiCategorical :: !(Maybe AnalyzeDataDescriptionFeaturesItemCategorical)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1486,7 +1494,8 @@ addfiNumeric
 -- | The feature index.
 addfiIndex :: Lens' AnalyzeDataDescriptionFeaturesItem (Maybe Int64)
 addfiIndex
-  = lens _addfiIndex (\ s a -> s{_addfiIndex = a})
+  = lens _addfiIndex (\ s a -> s{_addfiIndex = a}) .
+      mapping _Coerce
 
 -- | Description of the categorical values of this feature.
 addfiCategorical :: Lens' AnalyzeDataDescriptionFeaturesItem (Maybe AnalyzeDataDescriptionFeaturesItemCategorical)

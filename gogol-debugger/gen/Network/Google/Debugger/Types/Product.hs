@@ -733,7 +733,7 @@ instance ToJSON GetBreakpointResponse where
 -- /See:/ 'variable' smart constructor.
 data Variable = Variable
     { _vStatus        :: !(Maybe StatusMessage)
-    , _vVarTableIndex :: !(Maybe Int32)
+    , _vVarTableIndex :: !(Maybe (JSONText Int32))
     , _vMembers       :: !(Maybe [Variable])
     , _vValue         :: !(Maybe Text)
     , _vName          :: !(Maybe Text)
@@ -785,6 +785,7 @@ vVarTableIndex :: Lens' Variable (Maybe Int32)
 vVarTableIndex
   = lens _vVarTableIndex
       (\ s a -> s{_vVarTableIndex = a})
+      . mapping _Coerce
 
 -- | The members contained or pointed to by the variable.
 vMembers :: Lens' Variable [Variable]
@@ -1121,7 +1122,7 @@ instance ToJSON GitSourceContext where
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation = SourceLocation
     { _slPath :: !(Maybe Text)
-    , _slLine :: !(Maybe Int32)
+    , _slLine :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
@@ -1146,7 +1147,9 @@ slPath = lens _slPath (\ s a -> s{_slPath = a})
 
 -- | The line inside the file (first line value is \'1\').
 slLine :: Lens' SourceLocation (Maybe Int32)
-slLine = lens _slLine (\ s a -> s{_slLine = a})
+slLine
+  = lens _slLine (\ s a -> s{_slLine = a}) .
+      mapping _Coerce
 
 instance FromJSON SourceLocation where
         parseJSON

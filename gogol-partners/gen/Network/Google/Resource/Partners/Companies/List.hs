@@ -76,7 +76,8 @@ type CompaniesListResource =
        "companies" :>
          QueryParams "languageCodes" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "maxMonthlyBudget.units" Int64 :>
+             QueryParam "maxMonthlyBudget.units" (JSONText Int64)
+               :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "orderBy" Text :>
                    QueryParam "pp" Bool :>
@@ -84,13 +85,16 @@ type CompaniesListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "address" Text :>
-                             QueryParam "minMonthlyBudget.nanos" Int32 :>
+                             QueryParam "minMonthlyBudget.nanos"
+                               (JSONText Int32)
+                               :>
                                QueryParams "industries" Text :>
                                  QueryParam "requestMetadata.partnersSessionId"
                                    Text
                                    :>
                                    QueryParam "bearer_token" Text :>
-                                     QueryParam "maxMonthlyBudget.nanos" Int32
+                                     QueryParam "maxMonthlyBudget.nanos"
+                                       (JSONText Int32)
                                        :>
                                        QueryParam "requestMetadata.locale" Text
                                          :>
@@ -119,7 +123,7 @@ type CompaniesListResource =
                                                          Text
                                                          :>
                                                          QueryParam "pageSize"
-                                                           Int32
+                                                           (JSONText Int32)
                                                            :>
                                                            QueryParam
                                                              "minMonthlyBudget.currencyCode"
@@ -135,7 +139,8 @@ type CompaniesListResource =
                                                                  :>
                                                                  QueryParam
                                                                    "minMonthlyBudget.units"
-                                                                   Int64
+                                                                   (JSONText
+                                                                      Int64)
                                                                    :>
                                                                    QueryParam
                                                                      "requestMetadata.trafficSource.trafficSourceId"
@@ -159,7 +164,7 @@ type CompaniesListResource =
 data CompaniesList = CompaniesList
     { _clLanguageCodes                               :: !(Maybe [Text])
     , _clXgafv                                       :: !(Maybe Text)
-    , _clMaxMonthlyBudgetUnits                       :: !(Maybe Int64)
+    , _clMaxMonthlyBudgetUnits                       :: !(Maybe (JSONText Int64))
     , _clUploadProtocol                              :: !(Maybe Text)
     , _clOrderBy                                     :: !(Maybe Text)
     , _clPp                                          :: !Bool
@@ -167,11 +172,11 @@ data CompaniesList = CompaniesList
     , _clAccessToken                                 :: !(Maybe Text)
     , _clUploadType                                  :: !(Maybe Text)
     , _clAddress                                     :: !(Maybe Text)
-    , _clMinMonthlyBudgetNanos                       :: !(Maybe Int32)
+    , _clMinMonthlyBudgetNanos                       :: !(Maybe (JSONText Int32))
     , _clIndustries                                  :: !(Maybe [Text])
     , _clRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _clBearerToken                                 :: !(Maybe Text)
-    , _clMaxMonthlyBudgetNanos                       :: !(Maybe Int32)
+    , _clMaxMonthlyBudgetNanos                       :: !(Maybe (JSONText Int32))
     , _clRequestMetadataLocale                       :: !(Maybe Text)
     , _clView                                        :: !(Maybe Text)
     , _clRequestMetadataExperimentIds                :: !(Maybe [Text])
@@ -181,11 +186,11 @@ data CompaniesList = CompaniesList
     , _clPageToken                                   :: !(Maybe Text)
     , _clRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
     , _clGpsMotivations                              :: !(Maybe [Text])
-    , _clPageSize                                    :: !(Maybe Int32)
+    , _clPageSize                                    :: !(Maybe (JSONText Int32))
     , _clMinMonthlyBudgetCurrencyCode                :: !(Maybe Text)
     , _clServices                                    :: !(Maybe [Text])
     , _clRequestMetadataUserOverridesUserId          :: !(Maybe Text)
-    , _clMinMonthlyBudgetUnits                       :: !(Maybe Int64)
+    , _clMinMonthlyBudgetUnits                       :: !(Maybe (JSONText Int64))
     , _clRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _clCallback                                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -312,6 +317,7 @@ clMaxMonthlyBudgetUnits :: Lens' CompaniesList (Maybe Int64)
 clMaxMonthlyBudgetUnits
   = lens _clMaxMonthlyBudgetUnits
       (\ s a -> s{_clMaxMonthlyBudgetUnits = a})
+      . mapping _Coerce
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 clUploadProtocol :: Lens' CompaniesList (Maybe Text)
@@ -364,6 +370,7 @@ clMinMonthlyBudgetNanos :: Lens' CompaniesList (Maybe Int32)
 clMinMonthlyBudgetNanos
   = lens _clMinMonthlyBudgetNanos
       (\ s a -> s{_clMinMonthlyBudgetNanos = a})
+      . mapping _Coerce
 
 -- | List of industries the company can help with.
 clIndustries :: Lens' CompaniesList [Text]
@@ -394,6 +401,7 @@ clMaxMonthlyBudgetNanos :: Lens' CompaniesList (Maybe Int32)
 clMaxMonthlyBudgetNanos
   = lens _clMaxMonthlyBudgetNanos
       (\ s a -> s{_clMaxMonthlyBudgetNanos = a})
+      . mapping _Coerce
 
 -- | Locale to use for the current request.
 clRequestMetadataLocale :: Lens' CompaniesList (Maybe Text)
@@ -461,7 +469,8 @@ clGpsMotivations
 -- If unspecified, server picks an appropriate default.
 clPageSize :: Lens' CompaniesList (Maybe Int32)
 clPageSize
-  = lens _clPageSize (\ s a -> s{_clPageSize = a})
+  = lens _clPageSize (\ s a -> s{_clPageSize = a}) .
+      mapping _Coerce
 
 -- | The 3-letter currency code defined in ISO 4217.
 clMinMonthlyBudgetCurrencyCode :: Lens' CompaniesList (Maybe Text)
@@ -489,6 +498,7 @@ clMinMonthlyBudgetUnits :: Lens' CompaniesList (Maybe Int64)
 clMinMonthlyBudgetUnits
   = lens _clMinMonthlyBudgetUnits
       (\ s a -> s{_clMinMonthlyBudgetUnits = a})
+      . mapping _Coerce
 
 -- | Identifier to indicate where the traffic comes from. An identifier has
 -- multiple letters created by a team which redirected the traffic to us.

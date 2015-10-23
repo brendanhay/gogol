@@ -55,18 +55,18 @@ type ChangeLogsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "changeLogs" :>
-               QueryParams "userProfileIds" Int64 :>
+               QueryParams "userProfileIds" (JSONText Int64) :>
                  QueryParam "objectType" ChangeLogsListObjectType :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" Int64 :>
+                     QueryParams "ids" (JSONText Int64) :>
                        QueryParam "action" ChangeLogsListAction :>
                          QueryParam "minChangeTime" Text :>
                            QueryParam "maxChangeTime" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParams "objectIds" Int64 :>
-                                 QueryParam "maxResults" Int32 :>
+                               QueryParams "objectIds" (JSONText Int64) :>
+                                 QueryParam "maxResults" (JSONText Int32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ChangeLogsListResponse
 
@@ -74,17 +74,17 @@ type ChangeLogsListResource =
 --
 -- /See:/ 'changeLogsList' smart constructor.
 data ChangeLogsList = ChangeLogsList
-    { _cllUserProFileIds :: !(Maybe [Int64])
+    { _cllUserProFileIds :: !(Maybe [JSONText Int64])
     , _cllObjectType     :: !(Maybe ChangeLogsListObjectType)
     , _cllSearchString   :: !(Maybe Text)
-    , _cllIds            :: !(Maybe [Int64])
-    , _cllProFileId      :: !Int64
+    , _cllIds            :: !(Maybe [JSONText Int64])
+    , _cllProFileId      :: !(JSONText Int64)
     , _cllAction         :: !(Maybe ChangeLogsListAction)
     , _cllMinChangeTime  :: !(Maybe Text)
     , _cllMaxChangeTime  :: !(Maybe Text)
     , _cllPageToken      :: !(Maybe Text)
-    , _cllObjectIds      :: !(Maybe [Int64])
-    , _cllMaxResults     :: !(Maybe Int32)
+    , _cllObjectIds      :: !(Maybe [JSONText Int64])
+    , _cllMaxResults     :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsList' with the minimum fields required to make a request.
@@ -161,6 +161,7 @@ cllIds
 cllProFileId :: Lens' ChangeLogsList Int64
 cllProFileId
   = lens _cllProFileId (\ s a -> s{_cllProFileId = a})
+      . _Coerce
 
 -- | Select only change logs with the specified action.
 cllAction :: Lens' ChangeLogsList (Maybe ChangeLogsListAction)
@@ -208,6 +209,7 @@ cllMaxResults :: Lens' ChangeLogsList (Maybe Int32)
 cllMaxResults
   = lens _cllMaxResults
       (\ s a -> s{_cllMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ChangeLogsList where
         type Rs ChangeLogsList = ChangeLogsListResponse

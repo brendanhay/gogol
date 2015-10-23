@@ -47,9 +47,9 @@ type CampaignsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
 
@@ -57,9 +57,9 @@ type CampaignsPatchResource =
 --
 -- /See:/ 'campaignsPatch' smart constructor.
 data CampaignsPatch = CampaignsPatch
-    { _cpProFileId :: !Int64
+    { _cpProFileId :: !(JSONText Int64)
     , _cpPayload   :: !Campaign
-    , _cpId        :: !Int64
+    , _cpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsPatch' with the minimum fields required to make a request.
@@ -86,7 +86,8 @@ campaignsPatch pCpProFileId_ pCpPayload_ pCpId_ =
 -- | User profile ID associated with this request.
 cpProFileId :: Lens' CampaignsPatch Int64
 cpProFileId
-  = lens _cpProFileId (\ s a -> s{_cpProFileId = a})
+  = lens _cpProFileId (\ s a -> s{_cpProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 cpPayload :: Lens' CampaignsPatch Campaign
@@ -95,7 +96,7 @@ cpPayload
 
 -- | Campaign ID.
 cpId :: Lens' CampaignsPatch Int64
-cpId = lens _cpId (\ s a -> s{_cpId = a})
+cpId = lens _cpId (\ s a -> s{_cpId = a}) . _Coerce
 
 instance GoogleRequest CampaignsPatch where
         type Rs CampaignsPatch = Campaign

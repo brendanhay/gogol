@@ -53,7 +53,7 @@ type InstanceGroupManagersInsertResource =
              "zones" :>
                Capture "zone" Text :>
                  "instanceGroupManagers" :>
-                   QueryParam "size" Int32 :>
+                   QueryParam "size" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] InstanceGroupManager :>
                          Post '[JSON] Operation
@@ -64,7 +64,7 @@ type InstanceGroupManagersInsertResource =
 -- /See:/ 'instanceGroupManagersInsert' smart constructor.
 data InstanceGroupManagersInsert = InstanceGroupManagersInsert
     { _igmiProject :: !Text
-    , _igmiSize    :: !Int32
+    , _igmiSize    :: !(JSONText Int32)
     , _igmiZone    :: !Text
     , _igmiPayload :: !InstanceGroupManager
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -101,7 +101,9 @@ igmiProject
 
 -- | Number of instances that should exist.
 igmiSize :: Lens' InstanceGroupManagersInsert Int32
-igmiSize = lens _igmiSize (\ s a -> s{_igmiSize = a})
+igmiSize
+  = lens _igmiSize (\ s a -> s{_igmiSize = a}) .
+      _Coerce
 
 -- | The name of the zone in which the instance group manager resides.
 igmiZone :: Lens' InstanceGroupManagersInsert Text

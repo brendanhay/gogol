@@ -94,8 +94,8 @@ instance ToJSON InAppProductsUpdateResponse where
 --
 -- /See:/ 'monthDay' smart constructor.
 data MonthDay = MonthDay
-    { _mdDay   :: !(Maybe Word32)
-    , _mdMonth :: !(Maybe Word32)
+    { _mdDay   :: !(Maybe (JSONText Word32))
+    , _mdMonth :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MonthDay' with the minimum fields required to make a request.
@@ -116,11 +116,15 @@ monthDay =
 -- | Day of a month, value in [1, 31] range. Valid range depends on the
 -- specified month.
 mdDay :: Lens' MonthDay (Maybe Word32)
-mdDay = lens _mdDay (\ s a -> s{_mdDay = a})
+mdDay
+  = lens _mdDay (\ s a -> s{_mdDay = a}) .
+      mapping _Coerce
 
 -- | Month of a year. e.g. 1 = JAN, 2 = FEB etc.
 mdMonth :: Lens' MonthDay (Maybe Word32)
-mdMonth = lens _mdMonth (\ s a -> s{_mdMonth = a})
+mdMonth
+  = lens _mdMonth (\ s a -> s{_mdMonth = a}) .
+      mapping _Coerce
 
 instance FromJSON MonthDay where
         parseJSON
@@ -137,9 +141,9 @@ instance ToJSON MonthDay where
 --
 -- /See:/ 'track' smart constructor.
 data Track = Track
-    { _tVersionCodes :: !(Maybe [Int32])
+    { _tVersionCodes :: !(Maybe [JSONText Int32])
     , _tTrack        :: !(Maybe Text)
-    , _tUserFraction :: !(Maybe Double)
+    , _tUserFraction :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Track' with the minimum fields required to make a request.
@@ -174,6 +178,7 @@ tUserFraction :: Lens' Track (Maybe Double)
 tUserFraction
   = lens _tUserFraction
       (\ s a -> s{_tUserFraction = a})
+      . mapping _Coerce
 
 instance FromJSON Track where
         parseJSON
@@ -249,7 +254,7 @@ data InAppProductsBatchRequestEntry = InAppProductsBatchRequestEntry
     { _iapbreMethodName                 :: !(Maybe Text)
     , _iapbreInAppProductsinsertrequest :: !(Maybe InAppProductsInsertRequest)
     , _iapbreInAppProductsupdaterequest :: !(Maybe InAppProductsUpdateRequest)
-    , _iapbreBatchId                    :: !(Maybe Word32)
+    , _iapbreBatchId                    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductsBatchRequestEntry' with the minimum fields required to make a request.
@@ -292,6 +297,7 @@ iapbreBatchId :: Lens' InAppProductsBatchRequestEntry (Maybe Word32)
 iapbreBatchId
   = lens _iapbreBatchId
       (\ s a -> s{_iapbreBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON InAppProductsBatchRequestEntry
          where
@@ -446,8 +452,8 @@ instance ToJSON TokenPagination where
 --
 -- /See:/ 'expansionFile' smart constructor.
 data ExpansionFile = ExpansionFile
-    { _efFileSize          :: !(Maybe Int64)
-    , _efReferencesVersion :: !(Maybe Int32)
+    { _efFileSize          :: !(Maybe (JSONText Int64))
+    , _efReferencesVersion :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExpansionFile' with the minimum fields required to make a request.
@@ -470,7 +476,8 @@ expansionFile =
 -- field\'s value is the size of the uploaded Expansion File in bytes.
 efFileSize :: Lens' ExpansionFile (Maybe Int64)
 efFileSize
-  = lens _efFileSize (\ s a -> s{_efFileSize = a})
+  = lens _efFileSize (\ s a -> s{_efFileSize = a}) .
+      mapping _Coerce
 
 -- | If set this APK\'s Expansion File references another APK\'s Expansion
 -- File. The file_size field will not be set.
@@ -478,6 +485,7 @@ efReferencesVersion :: Lens' ExpansionFile (Maybe Int32)
 efReferencesVersion
   = lens _efReferencesVersion
       (\ s a -> s{_efReferencesVersion = a})
+      . mapping _Coerce
 
 instance FromJSON ExpansionFile where
         parseJSON
@@ -629,7 +637,7 @@ instance ToJSON Listing where
 --
 -- /See:/ 'aPK' smart constructor.
 data APK = APK
-    { _aVersionCode :: !(Maybe Int32)
+    { _aVersionCode :: !(Maybe (JSONText Int32))
     , _aBinary      :: !(Maybe APKBinary)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -652,6 +660,7 @@ aPK =
 aVersionCode :: Lens' APK (Maybe Int32)
 aVersionCode
   = lens _aVersionCode (\ s a -> s{_aVersionCode = a})
+      . mapping _Coerce
 
 -- | Information about the binary payload of this APK.
 aBinary :: Lens' APK (Maybe APKBinary)
@@ -802,9 +811,9 @@ instance ToJSON Season where
 --
 -- /See:/ 'pageInfo' smart constructor.
 data PageInfo = PageInfo
-    { _piResultPerPage :: !(Maybe Int32)
-    , _piTotalResults  :: !(Maybe Int32)
-    , _piStartIndex    :: !(Maybe Int32)
+    { _piResultPerPage :: !(Maybe (JSONText Int32))
+    , _piTotalResults  :: !(Maybe (JSONText Int32))
+    , _piStartIndex    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
@@ -829,15 +838,18 @@ piResultPerPage :: Lens' PageInfo (Maybe Int32)
 piResultPerPage
   = lens _piResultPerPage
       (\ s a -> s{_piResultPerPage = a})
+      . mapping _Coerce
 
 piTotalResults :: Lens' PageInfo (Maybe Int32)
 piTotalResults
   = lens _piTotalResults
       (\ s a -> s{_piTotalResults = a})
+      . mapping _Coerce
 
 piStartIndex :: Lens' PageInfo (Maybe Int32)
 piStartIndex
   = lens _piStartIndex (\ s a -> s{_piStartIndex = a})
+      . mapping _Coerce
 
 instance FromJSON PageInfo where
         parseJSON
@@ -943,10 +955,10 @@ instance ToJSON AppEdit where
 --
 -- /See:/ 'productPurchase' smart constructor.
 data ProductPurchase = ProductPurchase
-    { _ppPurchaseState      :: !(Maybe Int32)
-    , _ppConsumptionState   :: !(Maybe Int32)
+    { _ppPurchaseState      :: !(Maybe (JSONText Int32))
+    , _ppConsumptionState   :: !(Maybe (JSONText Int32))
     , _ppKind               :: !Text
-    , _ppPurchaseTimeMillis :: !(Maybe Int64)
+    , _ppPurchaseTimeMillis :: !(Maybe (JSONText Int64))
     , _ppDeveloperPayload   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -980,6 +992,7 @@ ppPurchaseState :: Lens' ProductPurchase (Maybe Int32)
 ppPurchaseState
   = lens _ppPurchaseState
       (\ s a -> s{_ppPurchaseState = a})
+      . mapping _Coerce
 
 -- | The consumption state of the inapp product. Possible values are: - Yet
 -- to be consumed - Consumed
@@ -987,6 +1000,7 @@ ppConsumptionState :: Lens' ProductPurchase (Maybe Int32)
 ppConsumptionState
   = lens _ppConsumptionState
       (\ s a -> s{_ppConsumptionState = a})
+      . mapping _Coerce
 
 -- | This kind represents an inappPurchase object in the androidpublisher
 -- service.
@@ -999,6 +1013,7 @@ ppPurchaseTimeMillis :: Lens' ProductPurchase (Maybe Int64)
 ppPurchaseTimeMillis
   = lens _ppPurchaseTimeMillis
       (\ s a -> s{_ppPurchaseTimeMillis = a})
+      . mapping _Coerce
 
 -- | A developer-specified string that contains supplemental information
 -- about an order.
@@ -1032,7 +1047,7 @@ instance ToJSON ProductPurchase where
 --
 -- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
 newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
-    { _spdrNewExpiryTimeMillis :: Maybe Int64
+    { _spdrNewExpiryTimeMillis :: Maybe (JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchasesDeferResponse' with the minimum fields required to make a request.
@@ -1053,6 +1068,7 @@ spdrNewExpiryTimeMillis :: Lens' SubscriptionPurchasesDeferResponse (Maybe Int64
 spdrNewExpiryTimeMillis
   = lens _spdrNewExpiryTimeMillis
       (\ s a -> s{_spdrNewExpiryTimeMillis = a})
+      . mapping _Coerce
 
 instance FromJSON SubscriptionPurchasesDeferResponse
          where
@@ -1123,9 +1139,9 @@ instance ToJSON APKListing where
 -- /See:/ 'subscriptionPurchase' smart constructor.
 data SubscriptionPurchase = SubscriptionPurchase
     { _spKind             :: !Text
-    , _spExpiryTimeMillis :: !(Maybe Int64)
+    , _spExpiryTimeMillis :: !(Maybe (JSONText Int64))
     , _spAutoRenewing     :: !(Maybe Bool)
-    , _spStartTimeMillis  :: !(Maybe Int64)
+    , _spStartTimeMillis  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
@@ -1159,6 +1175,7 @@ spExpiryTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
 spExpiryTimeMillis
   = lens _spExpiryTimeMillis
       (\ s a -> s{_spExpiryTimeMillis = a})
+      . mapping _Coerce
 
 -- | Whether the subscription will automatically be renewed when it reaches
 -- its current expiry time.
@@ -1172,6 +1189,7 @@ spStartTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
 spStartTimeMillis
   = lens _spStartTimeMillis
       (\ s a -> s{_spStartTimeMillis = a})
+      . mapping _Coerce
 
 instance FromJSON SubscriptionPurchase where
         parseJSON
@@ -1343,17 +1361,17 @@ instance ToJSON InAppProductsBatchRequest where
 -- /See:/ 'externallyHostedAPK' smart constructor.
 data ExternallyHostedAPK = ExternallyHostedAPK
     { _ehapkApplicationLabel    :: !(Maybe Text)
-    , _ehapkMaximumSdk          :: !(Maybe Int32)
+    , _ehapkMaximumSdk          :: !(Maybe (JSONText Int32))
     , _ehapkNATiveCodes         :: !(Maybe [Text])
-    , _ehapkVersionCode         :: !(Maybe Int32)
+    , _ehapkVersionCode         :: !(Maybe (JSONText Int32))
     , _ehapkFileSha256Base64    :: !(Maybe Text)
     , _ehapkExternallyHostedURL :: !(Maybe Text)
     , _ehapkVersionName         :: !(Maybe Text)
     , _ehapkPackageName         :: !(Maybe Text)
-    , _ehapkFileSize            :: !(Maybe Int64)
+    , _ehapkFileSize            :: !(Maybe (JSONText Int64))
     , _ehapkIconBase64          :: !(Maybe Text)
     , _ehapkUsesFeatures        :: !(Maybe [Text])
-    , _ehapkMinimumSdk          :: !(Maybe Int32)
+    , _ehapkMinimumSdk          :: !(Maybe (JSONText Int32))
     , _ehapkFileSha1Base64      :: !(Maybe Text)
     , _ehapkUsesPermissions     :: !(Maybe [ExternallyHostedAPKUsesPermission])
     , _ehapkCertificateBase64s  :: !(Maybe [Text])
@@ -1424,6 +1442,7 @@ ehapkMaximumSdk :: Lens' ExternallyHostedAPK (Maybe Int32)
 ehapkMaximumSdk
   = lens _ehapkMaximumSdk
       (\ s a -> s{_ehapkMaximumSdk = a})
+      . mapping _Coerce
 
 -- | The native code environments supported by this APK (optional).
 ehapkNATiveCodes :: Lens' ExternallyHostedAPK [Text]
@@ -1438,6 +1457,7 @@ ehapkVersionCode :: Lens' ExternallyHostedAPK (Maybe Int32)
 ehapkVersionCode
   = lens _ehapkVersionCode
       (\ s a -> s{_ehapkVersionCode = a})
+      . mapping _Coerce
 
 -- | The SHA256 checksum of this APK, represented as a base64 encoded byte
 -- array.
@@ -1469,6 +1489,7 @@ ehapkFileSize :: Lens' ExternallyHostedAPK (Maybe Int64)
 ehapkFileSize
   = lens _ehapkFileSize
       (\ s a -> s{_ehapkFileSize = a})
+      . mapping _Coerce
 
 -- | The icon image from the APK, as a base64 encoded byte array.
 ehapkIconBase64 :: Lens' ExternallyHostedAPK (Maybe Text)
@@ -1489,6 +1510,7 @@ ehapkMinimumSdk :: Lens' ExternallyHostedAPK (Maybe Int32)
 ehapkMinimumSdk
   = lens _ehapkMinimumSdk
       (\ s a -> s{_ehapkMinimumSdk = a})
+      . mapping _Coerce
 
 -- | The SHA1 checksum of this APK, represented as a base64 encoded byte
 -- array.
@@ -1825,8 +1847,8 @@ instance ToJSON APKsAddExternallyHostedResponse where
 --
 -- /See:/ 'subscriptionDeferralInfo' smart constructor.
 data SubscriptionDeferralInfo = SubscriptionDeferralInfo
-    { _sdiDesiredExpiryTimeMillis  :: !(Maybe Int64)
-    , _sdiExpectedExpiryTimeMillis :: !(Maybe Int64)
+    { _sdiDesiredExpiryTimeMillis  :: !(Maybe (JSONText Int64))
+    , _sdiExpectedExpiryTimeMillis :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionDeferralInfo' with the minimum fields required to make a request.
@@ -1851,6 +1873,7 @@ sdiDesiredExpiryTimeMillis :: Lens' SubscriptionDeferralInfo (Maybe Int64)
 sdiDesiredExpiryTimeMillis
   = lens _sdiDesiredExpiryTimeMillis
       (\ s a -> s{_sdiDesiredExpiryTimeMillis = a})
+      . mapping _Coerce
 
 -- | The expected expiry time for the subscription. If the current expiry
 -- time for the subscription is not the value specified here, the deferral
@@ -1859,6 +1882,7 @@ sdiExpectedExpiryTimeMillis :: Lens' SubscriptionDeferralInfo (Maybe Int64)
 sdiExpectedExpiryTimeMillis
   = lens _sdiExpectedExpiryTimeMillis
       (\ s a -> s{_sdiExpectedExpiryTimeMillis = a})
+      . mapping _Coerce
 
 instance FromJSON SubscriptionDeferralInfo where
         parseJSON
@@ -2037,7 +2061,7 @@ instance ToJSON InAppProduct where
 data InAppProductsBatchResponseEntry = InAppProductsBatchResponseEntry
     { _iInAppProductsupdateresponse :: !(Maybe InAppProductsUpdateResponse)
     , _iInAppProductsinsertresponse :: !(Maybe InAppProductsInsertResponse)
-    , _iBatchId                     :: !(Maybe Word32)
+    , _iBatchId                     :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductsBatchResponseEntry' with the minimum fields required to make a request.
@@ -2069,7 +2093,9 @@ iInAppProductsinsertresponse
       (\ s a -> s{_iInAppProductsinsertresponse = a})
 
 iBatchId :: Lens' InAppProductsBatchResponseEntry (Maybe Word32)
-iBatchId = lens _iBatchId (\ s a -> s{_iBatchId = a})
+iBatchId
+  = lens _iBatchId (\ s a -> s{_iBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON InAppProductsBatchResponseEntry
          where
@@ -2226,7 +2252,7 @@ instance ToJSON APKsListResponse where
 -- /See:/ 'externallyHostedAPKUsesPermission' smart constructor.
 data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission
     { _ehapkupName          :: !(Maybe Text)
-    , _ehapkupMaxSdkVersion :: !(Maybe Int32)
+    , _ehapkupMaxSdkVersion :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExternallyHostedAPKUsesPermission' with the minimum fields required to make a request.
@@ -2255,6 +2281,7 @@ ehapkupMaxSdkVersion :: Lens' ExternallyHostedAPKUsesPermission (Maybe Int32)
 ehapkupMaxSdkVersion
   = lens _ehapkupMaxSdkVersion
       (\ s a -> s{_ehapkupMaxSdkVersion = a})
+      . mapping _Coerce
 
 instance FromJSON ExternallyHostedAPKUsesPermission
          where

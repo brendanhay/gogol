@@ -46,17 +46,17 @@ type AdvertisersGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "advertisers" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
 
 -- | Gets one advertiser by ID.
 --
 -- /See:/ 'advertisersGet' smart constructor.
 data AdvertisersGet = AdvertisersGet
-    { _advProFileId :: !Int64
-    , _advId        :: !Int64
+    { _advProFileId :: !(JSONText Int64)
+    , _advId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ advertisersGet pAdvProFileId_ pAdvId_ =
 advProFileId :: Lens' AdvertisersGet Int64
 advProFileId
   = lens _advProFileId (\ s a -> s{_advProFileId = a})
+      . _Coerce
 
 -- | Advertiser ID.
 advId :: Lens' AdvertisersGet Int64
-advId = lens _advId (\ s a -> s{_advId = a})
+advId
+  = lens _advId (\ s a -> s{_advId = a}) . _Coerce
 
 instance GoogleRequest AdvertisersGet where
         type Rs AdvertisersGet = Advertiser

@@ -51,7 +51,7 @@ type EventsInsertResource =
          "calendars" :>
            Capture "calendarId" Text :>
              "events" :>
-               QueryParam "maxAttendees" Int32 :>
+               QueryParam "maxAttendees" (JSONText Int32) :>
                  QueryParam "sendNotifications" Bool :>
                    QueryParam "supportsAttachments" Bool :>
                      QueryParam "alt" AltJSON :>
@@ -63,7 +63,7 @@ type EventsInsertResource =
 data EventsInsert = EventsInsert
     { _eveCalendarId          :: !Text
     , _evePayload             :: !Event
-    , _eveMaxAttendees        :: !(Maybe Int32)
+    , _eveMaxAttendees        :: !(Maybe (JSONText Int32))
     , _eveSendNotifications   :: !(Maybe Bool)
     , _eveSupportsAttachments :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -114,6 +114,7 @@ eveMaxAttendees :: Lens' EventsInsert (Maybe Int32)
 eveMaxAttendees
   = lens _eveMaxAttendees
       (\ s a -> s{_eveMaxAttendees = a})
+      . mapping _Coerce
 
 -- | Whether to send notifications about the creation of the new event.
 -- Optional. The default is False.

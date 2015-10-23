@@ -46,8 +46,8 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng
-    { _llLatitude  :: !(Maybe Double)
-    , _llLongitude :: !(Maybe Double)
+    { _llLatitude  :: !(Maybe (JSONText Double))
+    , _llLongitude :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
@@ -68,12 +68,14 @@ latLng =
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
 llLatitude
-  = lens _llLatitude (\ s a -> s{_llLatitude = a})
+  = lens _llLatitude (\ s a -> s{_llLatitude = a}) .
+      mapping _Coerce
 
 -- | The longitude in degrees. It must be in the range [-180.0, +180.0].
 llLongitude :: Lens' LatLng (Maybe Double)
 llLongitude
-  = lens _llLongitude (\ s a -> s{_llLongitude = a})
+  = lens _llLongitude (\ s a -> s{_llLongitude = a}) .
+      mapping _Coerce
 
 instance FromJSON LatLng where
         parseJSON
@@ -517,7 +519,7 @@ instance ToJSON PublicProFile where
 --
 -- /See:/ 'certificationExamStatus' smart constructor.
 data CertificationExamStatus = CertificationExamStatus
-    { _cesNumberUsersPass :: !(Maybe Int32)
+    { _cesNumberUsersPass :: !(Maybe (JSONText Int32))
     , _cesType            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -541,6 +543,7 @@ cesNumberUsersPass :: Lens' CertificationExamStatus (Maybe Int32)
 cesNumberUsersPass
   = lens _cesNumberUsersPass
       (\ s a -> s{_cesNumberUsersPass = a})
+      . mapping _Coerce
 
 -- | The type of certification exam.
 cesType :: Lens' CertificationExamStatus (Maybe Text)
@@ -661,8 +664,8 @@ instance ToJSON TrafficSource where
 -- /See:/ 'money' smart constructor.
 data Money = Money
     { _mCurrencyCode :: !(Maybe Text)
-    , _mNanos        :: !(Maybe Int32)
-    , _mUnits        :: !(Maybe Int64)
+    , _mNanos        :: !(Maybe (JSONText Int32))
+    , _mUnits        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
@@ -696,12 +699,16 @@ mCurrencyCode
 -- be negative or zero. For example $-1.75 is represented as \`units\`=-1
 -- and \`nanos\`=-750,000,000.
 mNanos :: Lens' Money (Maybe Int32)
-mNanos = lens _mNanos (\ s a -> s{_mNanos = a})
+mNanos
+  = lens _mNanos (\ s a -> s{_mNanos = a}) .
+      mapping _Coerce
 
 -- | The whole units of the amount. For example if \`currencyCode\` is
 -- \`\"USD\"\`, then 1 unit is one US dollar.
 mUnits :: Lens' Money (Maybe Int64)
-mUnits = lens _mUnits (\ s a -> s{_mUnits = a})
+mUnits
+  = lens _mUnits (\ s a -> s{_mUnits = a}) .
+      mapping _Coerce
 
 instance FromJSON Money where
         parseJSON
@@ -1652,7 +1659,7 @@ instance ToJSON LogUserEventRequest where
 --
 -- /See:/ 'rank' smart constructor.
 data Rank = Rank
-    { _rValue :: !(Maybe Double)
+    { _rValue :: !(Maybe (JSONText Double))
     , _rType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1673,7 +1680,9 @@ rank =
 
 -- | The numerical value of the rank.
 rValue :: Lens' Rank (Maybe Double)
-rValue = lens _rValue (\ s a -> s{_rValue = a})
+rValue
+  = lens _rValue (\ s a -> s{_rValue = a}) .
+      mapping _Coerce
 
 -- | The type of rank.
 rType :: Lens' Rank (Maybe Text)

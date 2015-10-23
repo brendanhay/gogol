@@ -49,11 +49,11 @@ type SizesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "sizes" :>
-               QueryParam "height" Int32 :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "width" Int32 :>
+               QueryParam "height" (JSONText Int32) :>
+                 QueryParams "ids" (JSONText Int64) :>
+                   QueryParam "width" (JSONText Int32) :>
                      QueryParam "iabStandard" Bool :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] SizesListResponse
@@ -62,10 +62,10 @@ type SizesListResource =
 --
 -- /See:/ 'sizesList' smart constructor.
 data SizesList = SizesList
-    { _slHeight      :: !(Maybe Int32)
-    , _slIds         :: !(Maybe [Int64])
-    , _slWidth       :: !(Maybe Int32)
-    , _slProFileId   :: !Int64
+    { _slHeight      :: !(Maybe (JSONText Int32))
+    , _slIds         :: !(Maybe [JSONText Int64])
+    , _slWidth       :: !(Maybe (JSONText Int32))
+    , _slProFileId   :: !(JSONText Int64)
     , _slIabStandard :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,7 +96,9 @@ sizesList pSlProFileId_ =
 
 -- | Select only sizes with this height.
 slHeight :: Lens' SizesList (Maybe Int32)
-slHeight = lens _slHeight (\ s a -> s{_slHeight = a})
+slHeight
+  = lens _slHeight (\ s a -> s{_slHeight = a}) .
+      mapping _Coerce
 
 -- | Select only sizes with these IDs.
 slIds :: Lens' SizesList [Int64]
@@ -106,12 +108,15 @@ slIds
 
 -- | Select only sizes with this width.
 slWidth :: Lens' SizesList (Maybe Int32)
-slWidth = lens _slWidth (\ s a -> s{_slWidth = a})
+slWidth
+  = lens _slWidth (\ s a -> s{_slWidth = a}) .
+      mapping _Coerce
 
 -- | User profile ID associated with this request.
 slProFileId :: Lens' SizesList Int64
 slProFileId
-  = lens _slProFileId (\ s a -> s{_slProFileId = a})
+  = lens _slProFileId (\ s a -> s{_slProFileId = a}) .
+      _Coerce
 
 -- | Select only IAB standard sizes.
 slIabStandard :: Lens' SizesList (Maybe Bool)

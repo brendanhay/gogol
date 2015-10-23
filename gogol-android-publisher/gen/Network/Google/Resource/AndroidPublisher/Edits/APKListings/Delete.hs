@@ -53,7 +53,7 @@ type EditsAPKListingsDeleteResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" Int32 :>
+                   Capture "apkVersionCode" (JSONText Int32) :>
                      "listings" :>
                        Capture "language" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
@@ -64,7 +64,7 @@ type EditsAPKListingsDeleteResource =
 -- /See:/ 'editsAPKListingsDelete' smart constructor.
 data EditsAPKListingsDelete = EditsAPKListingsDelete
     { _eapkldPackageName    :: !Text
-    , _eapkldAPKVersionCode :: !Int32
+    , _eapkldAPKVersionCode :: !(JSONText Int32)
     , _eapkldLanguage       :: !Text
     , _eapkldEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -107,6 +107,7 @@ eapkldAPKVersionCode :: Lens' EditsAPKListingsDelete Int32
 eapkldAPKVersionCode
   = lens _eapkldAPKVersionCode
       (\ s a -> s{_eapkldAPKVersionCode = a})
+      . _Coerce
 
 -- | The language code (a BCP-47 language tag) of the APK-specific localized
 -- listing to read or modify. For example, to select Austrian German, pass

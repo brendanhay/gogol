@@ -46,17 +46,17 @@ type ContentCategoriesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "contentCategories" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing content category.
 --
 -- /See:/ 'contentCategoriesDelete' smart constructor.
 data ContentCategoriesDelete = ContentCategoriesDelete
-    { _ccdProFileId :: !Int64
-    , _ccdId        :: !Int64
+    { _ccdProFileId :: !(JSONText Int64)
+    , _ccdId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesDelete' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ contentCategoriesDelete pCcdProFileId_ pCcdId_ =
 ccdProFileId :: Lens' ContentCategoriesDelete Int64
 ccdProFileId
   = lens _ccdProFileId (\ s a -> s{_ccdProFileId = a})
+      . _Coerce
 
 -- | Content category ID.
 ccdId :: Lens' ContentCategoriesDelete Int64
-ccdId = lens _ccdId (\ s a -> s{_ccdId = a})
+ccdId
+  = lens _ccdId (\ s a -> s{_ccdId = a}) . _Coerce
 
 instance GoogleRequest ContentCategoriesDelete where
         type Rs ContentCategoriesDelete = ()

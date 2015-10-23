@@ -52,7 +52,7 @@ type LinksGetResource =
          Capture "role" LinksGetRole :>
            Capture "roleId" Text :>
              "link" :>
-               Capture "linkId" Int64 :>
+               Capture "linkId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Link
 
 -- | Retrieves data about a single link if the requesting
@@ -64,7 +64,7 @@ type LinksGetResource =
 data LinksGet = LinksGet
     { _lgRoleId :: !Text
     , _lgRole   :: !LinksGetRole
-    , _lgLinkId :: !Int64
+    , _lgLinkId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksGet' with the minimum fields required to make a request.
@@ -99,7 +99,9 @@ lgRole = lens _lgRole (\ s a -> s{_lgRole = a})
 
 -- | The ID of the link to look up.
 lgLinkId :: Lens' LinksGet Int64
-lgLinkId = lens _lgLinkId (\ s a -> s{_lgLinkId = a})
+lgLinkId
+  = lens _lgLinkId (\ s a -> s{_lgLinkId = a}) .
+      _Coerce
 
 instance GoogleRequest LinksGet where
         type Rs LinksGet = Link

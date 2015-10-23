@@ -46,17 +46,17 @@ type PlacementStrategiesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placementStrategies" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesDelete' smart constructor.
 data PlacementStrategiesDelete = PlacementStrategiesDelete
-    { _psdProFileId :: !Int64
-    , _psdId        :: !Int64
+    { _psdProFileId :: !(JSONText Int64)
+    , _psdId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesDelete' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ placementStrategiesDelete pPsdProFileId_ pPsdId_ =
 psdProFileId :: Lens' PlacementStrategiesDelete Int64
 psdProFileId
   = lens _psdProFileId (\ s a -> s{_psdProFileId = a})
+      . _Coerce
 
 -- | Placement strategy ID.
 psdId :: Lens' PlacementStrategiesDelete Int64
-psdId = lens _psdId (\ s a -> s{_psdId = a})
+psdId
+  = lens _psdId (\ s a -> s{_psdId = a}) . _Coerce
 
 instance GoogleRequest PlacementStrategiesDelete
          where

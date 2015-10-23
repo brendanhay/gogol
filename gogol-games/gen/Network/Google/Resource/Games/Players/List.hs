@@ -53,7 +53,7 @@ type PlayersListResource =
                Capture "collection" PlayersListCollection :>
                  QueryParam "language" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PlayerListResponse
 
@@ -64,7 +64,7 @@ data PlayersList = PlayersList
     { _plCollection :: !PlayersListCollection
     , _plLanguage   :: !(Maybe Text)
     , _plPageToken  :: !(Maybe Text)
-    , _plMaxResults :: !(Maybe Int32)
+    , _plMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersList' with the minimum fields required to make a request.
@@ -110,6 +110,7 @@ plPageToken
 plMaxResults :: Lens' PlayersList (Maybe Int32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest PlayersList where
         type Rs PlayersList = PlayerListResponse

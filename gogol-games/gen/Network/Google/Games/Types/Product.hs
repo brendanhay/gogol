@@ -150,13 +150,13 @@ instance ToJSON PlayerName where
 --
 -- /See:/ 'snapshot' smart constructor.
 data Snapshot = Snapshot
-    { _sLastModifiedMillis :: !(Maybe Int64)
+    { _sLastModifiedMillis :: !(Maybe (JSONText Int64))
     , _sKind               :: !Text
-    , _sProgressValue      :: !(Maybe Int64)
+    , _sProgressValue      :: !(Maybe (JSONText Int64))
     , _sUniqueName         :: !(Maybe Text)
     , _sCoverImage         :: !(Maybe SnapshotImage)
     , _sId                 :: !(Maybe Text)
-    , _sDurationMillis     :: !(Maybe Int64)
+    , _sDurationMillis     :: !(Maybe (JSONText Int64))
     , _sTitle              :: !(Maybe Text)
     , _sType               :: !(Maybe Text)
     , _sDescription        :: !(Maybe Text)
@@ -211,6 +211,7 @@ sLastModifiedMillis :: Lens' Snapshot (Maybe Int64)
 sLastModifiedMillis
   = lens _sLastModifiedMillis
       (\ s a -> s{_sLastModifiedMillis = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#snapshot.
@@ -223,6 +224,7 @@ sProgressValue :: Lens' Snapshot (Maybe Int64)
 sProgressValue
   = lens _sProgressValue
       (\ s a -> s{_sProgressValue = a})
+      . mapping _Coerce
 
 -- | The unique name provided when the snapshot was created.
 sUniqueName :: Lens' Snapshot (Maybe Text)
@@ -243,6 +245,7 @@ sDurationMillis :: Lens' Snapshot (Maybe Int64)
 sDurationMillis
   = lens _sDurationMillis
       (\ s a -> s{_sDurationMillis = a})
+      . mapping _Coerce
 
 -- | The title of this snapshot.
 sTitle :: Lens' Snapshot (Maybe Text)
@@ -301,13 +304,13 @@ instance ToJSON Snapshot where
 -- /See:/ 'room' smart constructor.
 data Room = Room
     { _rStatus               :: !(Maybe Text)
-    , _rVariant              :: !(Maybe Int32)
+    , _rVariant              :: !(Maybe (JSONText Int32))
     , _rKind                 :: !Text
     , _rAutoMatchingStatus   :: !(Maybe RoomAutoMatchStatus)
     , _rCreationDetails      :: !(Maybe RoomModification)
     , _rInviterId            :: !(Maybe Text)
     , _rLastUpdateDetails    :: !(Maybe RoomModification)
-    , _rRoomStatusVersion    :: !(Maybe Int32)
+    , _rRoomStatusVersion    :: !(Maybe (JSONText Int32))
     , _rParticipants         :: !(Maybe [RoomParticipant])
     , _rApplicationId        :: !(Maybe Text)
     , _rAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
@@ -378,7 +381,9 @@ rStatus = lens _rStatus (\ s a -> s{_rStatus = a})
 -- | The variant \/ mode of the application being played; can be any integer
 -- value, or left blank.
 rVariant :: Lens' Room (Maybe Int32)
-rVariant = lens _rVariant (\ s a -> s{_rVariant = a})
+rVariant
+  = lens _rVariant (\ s a -> s{_rVariant = a}) .
+      mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#room.
@@ -416,6 +421,7 @@ rRoomStatusVersion :: Lens' Room (Maybe Int32)
 rRoomStatusVersion
   = lens _rRoomStatusVersion
       (\ s a -> s{_rRoomStatusVersion = a})
+      . mapping _Coerce
 
 -- | The participants involved in the room, along with their statuses.
 -- Includes participants who have left or declined invitations.
@@ -553,9 +559,9 @@ instance ToJSON QuestListResponse where
 -- /See:/ 'turnBasedMatch' smart constructor.
 data TurnBasedMatch = TurnBasedMatch
     { _tbmStatus               :: !(Maybe Text)
-    , _tbmVariant              :: !(Maybe Int32)
+    , _tbmVariant              :: !(Maybe (JSONText Int32))
     , _tbmResults              :: !(Maybe [ParticipantResult])
-    , _tbmMatchNumber          :: !(Maybe Int32)
+    , _tbmMatchNumber          :: !(Maybe (JSONText Int32))
     , _tbmKind                 :: !Text
     , _tbmData                 :: !(Maybe TurnBasedMatchData)
     , _tbmWithParticipantId    :: !(Maybe Text)
@@ -571,7 +577,7 @@ data TurnBasedMatch = TurnBasedMatch
     , _tbmMatchId              :: !(Maybe Text)
     , _tbmDescription          :: !(Maybe Text)
     , _tbmRematchId            :: !(Maybe Text)
-    , _tbmMatchVersion         :: !(Maybe Int32)
+    , _tbmMatchVersion         :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatch' with the minimum fields required to make a request.
@@ -659,7 +665,8 @@ tbmStatus
 -- value, or left blank.
 tbmVariant :: Lens' TurnBasedMatch (Maybe Int32)
 tbmVariant
-  = lens _tbmVariant (\ s a -> s{_tbmVariant = a})
+  = lens _tbmVariant (\ s a -> s{_tbmVariant = a}) .
+      mapping _Coerce
 
 -- | The results reported for this match.
 tbmResults :: Lens' TurnBasedMatch [ParticipantResult]
@@ -674,6 +681,7 @@ tbmMatchNumber :: Lens' TurnBasedMatch (Maybe Int32)
 tbmMatchNumber
   = lens _tbmMatchNumber
       (\ s a -> s{_tbmMatchNumber = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#turnBasedMatch.
@@ -781,6 +789,7 @@ tbmMatchVersion :: Lens' TurnBasedMatch (Maybe Int32)
 tbmMatchVersion
   = lens _tbmMatchVersion
       (\ s a -> s{_tbmMatchVersion = a})
+      . mapping _Coerce
 
 instance FromJSON TurnBasedMatch where
         parseJSON
@@ -838,7 +847,7 @@ instance ToJSON TurnBasedMatch where
 -- /See:/ 'turnBasedMatchData' smart constructor.
 data TurnBasedMatchData = TurnBasedMatchData
     { _tbmdKind          :: !Text
-    , _tbmdData          :: !(Maybe Word8)
+    , _tbmdData          :: !(Maybe (JSONText Word8))
     , _tbmdDataAvailable :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -868,7 +877,9 @@ tbmdKind = lens _tbmdKind (\ s a -> s{_tbmdKind = a})
 -- | The byte representation of the data (limited to 128 kB), as a
 -- Base64-encoded string with the URL_SAFE encoding option.
 tbmdData :: Lens' TurnBasedMatchData (Maybe Word8)
-tbmdData = lens _tbmdData (\ s a -> s{_tbmdData = a})
+tbmdData
+  = lens _tbmdData (\ s a -> s{_tbmdData = a}) .
+      mapping _Coerce
 
 -- | True if this match has data available but it wasn\'t returned in a list
 -- response; fetching the match individually will retrieve this data.
@@ -899,7 +910,7 @@ instance ToJSON TurnBasedMatchData where
 -- /See:/ 'playerEvent' smart constructor.
 data PlayerEvent = PlayerEvent
     { _peKind               :: !Text
-    , _peNumEvents          :: !(Maybe Int64)
+    , _peNumEvents          :: !(Maybe (JSONText Int64))
     , _peFormattedNumEvents :: !(Maybe Text)
     , _peDefinitionId       :: !(Maybe Text)
     , _pePlayerId           :: !(Maybe Text)
@@ -937,7 +948,8 @@ peKind = lens _peKind (\ s a -> s{_peKind = a})
 -- | The current number of times this event has occurred.
 peNumEvents :: Lens' PlayerEvent (Maybe Int64)
 peNumEvents
-  = lens _peNumEvents (\ s a -> s{_peNumEvents = a})
+  = lens _peNumEvents (\ s a -> s{_peNumEvents = a}) .
+      mapping _Coerce
 
 -- | The current number of times this event has occurred, as a string. The
 -- formatting of this string depends on the configuration of your event in
@@ -986,12 +998,12 @@ data PlayerLeaderboardScore = PlayerLeaderboardScore
     { _plsScoreTag       :: !(Maybe Text)
     , _plsScoreString    :: !(Maybe Text)
     , _plsKind           :: !Text
-    , _plsScoreValue     :: !(Maybe Int64)
+    , _plsScoreValue     :: !(Maybe (JSONText Int64))
     , _plsTimeSpan       :: !(Maybe Text)
     , _plsPublicRank     :: !(Maybe LeaderboardScoreRank)
     , _plsSocialRank     :: !(Maybe LeaderboardScoreRank)
     , _plsLeaderboardId  :: !(Maybe Text)
-    , _plsWriteTimestamp :: !(Maybe Int64)
+    , _plsWriteTimestamp :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerLeaderboardScore' with the minimum fields required to make a request.
@@ -1052,6 +1064,7 @@ plsScoreValue :: Lens' PlayerLeaderboardScore (Maybe Int64)
 plsScoreValue
   = lens _plsScoreValue
       (\ s a -> s{_plsScoreValue = a})
+      . mapping _Coerce
 
 -- | The time span of this score. Possible values are: - \"ALL_TIME\" - The
 -- score is an all-time score. - \"WEEKLY\" - The score is a weekly score.
@@ -1085,6 +1098,7 @@ plsWriteTimestamp :: Lens' PlayerLeaderboardScore (Maybe Int64)
 plsWriteTimestamp
   = lens _plsWriteTimestamp
       (\ s a -> s{_plsWriteTimestamp = a})
+      . mapping _Coerce
 
 instance FromJSON PlayerLeaderboardScore where
         parseJSON
@@ -1119,7 +1133,7 @@ instance ToJSON PlayerLeaderboardScore where
 -- /See:/ 'application' smart constructor.
 data Application = Application
     { _aThemeColor           :: !(Maybe Text)
-    , _aLeaderboardCount     :: !(Maybe Int32)
+    , _aLeaderboardCount     :: !(Maybe (JSONText Int32))
     , _aKind                 :: !Text
     , _aCategory             :: !(Maybe ApplicationCategory)
     , _aName                 :: !(Maybe Text)
@@ -1127,10 +1141,10 @@ data Application = Application
     , _aInstances            :: !(Maybe [Instance])
     , _aAuthor               :: !(Maybe Text)
     , _aId                   :: !(Maybe Text)
-    , _aAchievementCount     :: !(Maybe Int32)
+    , _aAchievementCount     :: !(Maybe (JSONText Int32))
     , _aAssets               :: !(Maybe [ImageAsset])
     , _aDescription          :: !(Maybe Text)
-    , _aLastUpdatedTimestamp :: !(Maybe Int64)
+    , _aLastUpdatedTimestamp :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
@@ -1193,6 +1207,7 @@ aLeaderboardCount :: Lens' Application (Maybe Int32)
 aLeaderboardCount
   = lens _aLeaderboardCount
       (\ s a -> s{_aLeaderboardCount = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#application.
@@ -1238,6 +1253,7 @@ aAchievementCount :: Lens' Application (Maybe Int32)
 aAchievementCount
   = lens _aAchievementCount
       (\ s a -> s{_aAchievementCount = a})
+      . mapping _Coerce
 
 -- | The assets of the application.
 aAssets :: Lens' Application [ImageAsset]
@@ -1255,6 +1271,7 @@ aLastUpdatedTimestamp :: Lens' Application (Maybe Int64)
 aLastUpdatedTimestamp
   = lens _aLastUpdatedTimestamp
       (\ s a -> s{_aLastUpdatedTimestamp = a})
+      . mapping _Coerce
 
 instance FromJSON Application where
         parseJSON
@@ -1406,13 +1423,13 @@ instance ToJSON PlayerScoreListResponse where
 --
 -- /See:/ 'networkDiagnostics' smart constructor.
 data NetworkDiagnostics = NetworkDiagnostics
-    { _ndAndroidNetworkType        :: !(Maybe Int32)
+    { _ndAndroidNetworkType        :: !(Maybe (JSONText Int32))
     , _ndKind                      :: !Text
     , _ndNetworkOperatorCode       :: !(Maybe Text)
     , _ndNetworkOperatorName       :: !(Maybe Text)
-    , _ndRegistrationLatencyMillis :: !(Maybe Int32)
-    , _ndIosNetworkType            :: !(Maybe Int32)
-    , _ndAndroidNetworkSubtype     :: !(Maybe Int32)
+    , _ndRegistrationLatencyMillis :: !(Maybe (JSONText Int32))
+    , _ndIosNetworkType            :: !(Maybe (JSONText Int32))
+    , _ndAndroidNetworkSubtype     :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworkDiagnostics' with the minimum fields required to make a request.
@@ -1450,6 +1467,7 @@ ndAndroidNetworkType :: Lens' NetworkDiagnostics (Maybe Int32)
 ndAndroidNetworkType
   = lens _ndAndroidNetworkType
       (\ s a -> s{_ndAndroidNetworkType = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#networkDiagnostics.
@@ -1480,18 +1498,21 @@ ndRegistrationLatencyMillis :: Lens' NetworkDiagnostics (Maybe Int32)
 ndRegistrationLatencyMillis
   = lens _ndRegistrationLatencyMillis
       (\ s a -> s{_ndRegistrationLatencyMillis = a})
+      . mapping _Coerce
 
 -- | iOS network type as defined in Reachability.h.
 ndIosNetworkType :: Lens' NetworkDiagnostics (Maybe Int32)
 ndIosNetworkType
   = lens _ndIosNetworkType
       (\ s a -> s{_ndIosNetworkType = a})
+      . mapping _Coerce
 
 -- | The Android network subtype.
 ndAndroidNetworkSubtype :: Lens' NetworkDiagnostics (Maybe Int32)
 ndAndroidNetworkSubtype
   = lens _ndAndroidNetworkSubtype
       (\ s a -> s{_ndAndroidNetworkSubtype = a})
+      . mapping _Coerce
 
 instance FromJSON NetworkDiagnostics where
         parseJSON
@@ -1530,7 +1551,7 @@ data TurnBasedMatchTurn = TurnBasedMatchTurn
     , _tbmtKind                 :: !Text
     , _tbmtData                 :: !(Maybe TurnBasedMatchDataRequest)
     , _tbmtPendingParticipantId :: !(Maybe Text)
-    , _tbmtMatchVersion         :: !(Maybe Int32)
+    , _tbmtMatchVersion         :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchTurn' with the minimum fields required to make a request.
@@ -1589,6 +1610,7 @@ tbmtMatchVersion :: Lens' TurnBasedMatchTurn (Maybe Int32)
 tbmtMatchVersion
   = lens _tbmtMatchVersion
       (\ s a -> s{_tbmtMatchVersion = a})
+      . mapping _Coerce
 
 instance FromJSON TurnBasedMatchTurn where
         parseJSON
@@ -1773,14 +1795,14 @@ instance ToJSON TurnBasedMatchList where
 --
 -- /See:/ 'peerChannelDiagnostics' smart constructor.
 data PeerChannelDiagnostics = PeerChannelDiagnostics
-    { _pcdNumMessagesLost        :: !(Maybe Int32)
+    { _pcdNumMessagesLost        :: !(Maybe (JSONText Int32))
     , _pcdBytesSent              :: !(Maybe AggregateStats)
     , _pcdKind                   :: !Text
     , _pcdRoundtripLatencyMillis :: !(Maybe AggregateStats)
     , _pcdBytesReceived          :: !(Maybe AggregateStats)
-    , _pcdNumMessagesReceived    :: !(Maybe Int32)
-    , _pcdNumSendFailures        :: !(Maybe Int32)
-    , _pcdNumMessagesSent        :: !(Maybe Int32)
+    , _pcdNumMessagesReceived    :: !(Maybe (JSONText Int32))
+    , _pcdNumSendFailures        :: !(Maybe (JSONText Int32))
+    , _pcdNumMessagesSent        :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeerChannelDiagnostics' with the minimum fields required to make a request.
@@ -1821,6 +1843,7 @@ pcdNumMessagesLost :: Lens' PeerChannelDiagnostics (Maybe Int32)
 pcdNumMessagesLost
   = lens _pcdNumMessagesLost
       (\ s a -> s{_pcdNumMessagesLost = a})
+      . mapping _Coerce
 
 -- | Number of bytes sent.
 pcdBytesSent :: Lens' PeerChannelDiagnostics (Maybe AggregateStats)
@@ -1849,18 +1872,21 @@ pcdNumMessagesReceived :: Lens' PeerChannelDiagnostics (Maybe Int32)
 pcdNumMessagesReceived
   = lens _pcdNumMessagesReceived
       (\ s a -> s{_pcdNumMessagesReceived = a})
+      . mapping _Coerce
 
 -- | Number of send failures.
 pcdNumSendFailures :: Lens' PeerChannelDiagnostics (Maybe Int32)
 pcdNumSendFailures
   = lens _pcdNumSendFailures
       (\ s a -> s{_pcdNumSendFailures = a})
+      . mapping _Coerce
 
 -- | Number of messages sent.
 pcdNumMessagesSent :: Lens' PeerChannelDiagnostics (Maybe Int32)
 pcdNumMessagesSent
   = lens _pcdNumMessagesSent
       (\ s a -> s{_pcdNumMessagesSent = a})
+      . mapping _Coerce
 
 instance FromJSON PeerChannelDiagnostics where
         parseJSON
@@ -2032,7 +2058,7 @@ data AchievementUpdateResponse = AchievementUpdateResponse
     , _aurKind           :: !Text
     , _aurCurrentState   :: !(Maybe Text)
     , _aurNewlyUnlocked  :: !(Maybe Bool)
-    , _aurCurrentSteps   :: !(Maybe Int32)
+    , _aurCurrentSteps   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateResponse' with the minimum fields required to make a request.
@@ -2099,6 +2125,7 @@ aurCurrentSteps :: Lens' AchievementUpdateResponse (Maybe Int32)
 aurCurrentSteps
   = lens _aurCurrentSteps
       (\ s a -> s{_aurCurrentSteps = a})
+      . mapping _Coerce
 
 instance FromJSON AchievementUpdateResponse where
         parseJSON
@@ -2128,14 +2155,14 @@ instance ToJSON AchievementUpdateResponse where
 -- /See:/ 'leaderboardEntry' smart constructor.
 data LeaderboardEntry = LeaderboardEntry
     { _leScoreTag             :: !(Maybe Text)
-    , _leWriteTimestampMillis :: !(Maybe Int64)
+    , _leWriteTimestampMillis :: !(Maybe (JSONText Int64))
     , _leKind                 :: !Text
-    , _leScoreValue           :: !(Maybe Int64)
+    , _leScoreValue           :: !(Maybe (JSONText Int64))
     , _leFormattedScore       :: !(Maybe Text)
     , _leTimeSpan             :: !(Maybe Text)
     , _leFormattedScoreRank   :: !(Maybe Text)
     , _lePlayer               :: !(Maybe Player)
-    , _leScoreRank            :: !(Maybe Int64)
+    , _leScoreRank            :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardEntry' with the minimum fields required to make a request.
@@ -2186,6 +2213,7 @@ leWriteTimestampMillis :: Lens' LeaderboardEntry (Maybe Int64)
 leWriteTimestampMillis
   = lens _leWriteTimestampMillis
       (\ s a -> s{_leWriteTimestampMillis = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#leaderboardEntry.
@@ -2196,6 +2224,7 @@ leKind = lens _leKind (\ s a -> s{_leKind = a})
 leScoreValue :: Lens' LeaderboardEntry (Maybe Int64)
 leScoreValue
   = lens _leScoreValue (\ s a -> s{_leScoreValue = a})
+      . mapping _Coerce
 
 -- | The localized string for the numerical value of this score.
 leFormattedScore :: Lens' LeaderboardEntry (Maybe Text)
@@ -2223,7 +2252,8 @@ lePlayer = lens _lePlayer (\ s a -> s{_lePlayer = a})
 -- | The rank of this score for this leaderboard.
 leScoreRank :: Lens' LeaderboardEntry (Maybe Int64)
 leScoreRank
-  = lens _leScoreRank (\ s a -> s{_leScoreRank = a})
+  = lens _leScoreRank (\ s a -> s{_leScoreRank = a}) .
+      mapping _Coerce
 
 instance FromJSON LeaderboardEntry where
         parseJSON
@@ -2321,10 +2351,10 @@ instance ToJSON SnapshotListResponse where
 --
 -- /See:/ 'playerLevel' smart constructor.
 data PlayerLevel = PlayerLevel
-    { _plMaxExperiencePoints :: !(Maybe Int64)
+    { _plMaxExperiencePoints :: !(Maybe (JSONText Int64))
     , _plKind                :: !Text
-    , _plMinExperiencePoints :: !(Maybe Int64)
-    , _plLevel               :: !(Maybe Int32)
+    , _plMinExperiencePoints :: !(Maybe (JSONText Int64))
+    , _plLevel               :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerLevel' with the minimum fields required to make a request.
@@ -2353,6 +2383,7 @@ plMaxExperiencePoints :: Lens' PlayerLevel (Maybe Int64)
 plMaxExperiencePoints
   = lens _plMaxExperiencePoints
       (\ s a -> s{_plMaxExperiencePoints = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerLevel.
@@ -2364,10 +2395,13 @@ plMinExperiencePoints :: Lens' PlayerLevel (Maybe Int64)
 plMinExperiencePoints
   = lens _plMinExperiencePoints
       (\ s a -> s{_plMinExperiencePoints = a})
+      . mapping _Coerce
 
 -- | The level for the user.
 plLevel :: Lens' PlayerLevel (Maybe Int32)
-plLevel = lens _plLevel (\ s a -> s{_plLevel = a})
+plLevel
+  = lens _plLevel (\ s a -> s{_plLevel = a}) .
+      mapping _Coerce
 
 instance FromJSON PlayerLevel where
         parseJSON
@@ -2676,7 +2710,7 @@ instance ToJSON EventDefinitionListResponse where
 data Category = Category
     { _cKind             :: !Text
     , _cCategory         :: !(Maybe Text)
-    , _cExperiencePoints :: !(Maybe Int64)
+    , _cExperiencePoints :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
@@ -2712,6 +2746,7 @@ cExperiencePoints :: Lens' Category (Maybe Int64)
 cExperiencePoints
   = lens _cExperiencePoints
       (\ s a -> s{_cExperiencePoints = a})
+      . mapping _Coerce
 
 instance FromJSON Category where
         parseJSON
@@ -3147,7 +3182,7 @@ instance ToJSON AnonymousPlayer where
 -- /See:/ 'questContribution' smart constructor.
 data QuestContribution = QuestContribution
     { _qKind           :: !Text
-    , _qValue          :: !(Maybe Int64)
+    , _qValue          :: !(Maybe (JSONText Int64))
     , _qFormattedValue :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3176,7 +3211,9 @@ qKind = lens _qKind (\ s a -> s{_qKind = a})
 
 -- | The value of the contribution.
 qValue :: Lens' QuestContribution (Maybe Int64)
-qValue = lens _qValue (\ s a -> s{_qValue = a})
+qValue
+  = lens _qValue (\ s a -> s{_qValue = a}) .
+      mapping _Coerce
 
 -- | The formatted value of the contribution as a string. Format depends on
 -- the configuration for the associated event definition in the Play Games
@@ -3318,7 +3355,7 @@ instance ToJSON LeaderboardListResponse where
 -- /See:/ 'playerScore' smart constructor.
 data PlayerScore = PlayerScore
     { _psScoreTag       :: !(Maybe Text)
-    , _psScore          :: !(Maybe Int64)
+    , _psScore          :: !(Maybe (JSONText Int64))
     , _psKind           :: !Text
     , _psFormattedScore :: !(Maybe Text)
     , _psTimeSpan       :: !(Maybe Text)
@@ -3356,7 +3393,9 @@ psScoreTag
 
 -- | The numerical value for this player score.
 psScore :: Lens' PlayerScore (Maybe Int64)
-psScore = lens _psScore (\ s a -> s{_psScore = a})
+psScore
+  = lens _psScore (\ s a -> s{_psScore = a}) .
+      mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#playerScore.
@@ -3400,9 +3439,9 @@ instance ToJSON PlayerScore where
 -- /See:/ 'turnBasedAutoMatchingCriteria' smart constructor.
 data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria
     { _tbamcKind                   :: !Text
-    , _tbamcExclusiveBitmask       :: !(Maybe Int64)
-    , _tbamcMaxAutoMatchingPlayers :: !(Maybe Int32)
-    , _tbamcMinAutoMatchingPlayers :: !(Maybe Int32)
+    , _tbamcExclusiveBitmask       :: !(Maybe (JSONText Int64))
+    , _tbamcMaxAutoMatchingPlayers :: !(Maybe (JSONText Int32))
+    , _tbamcMinAutoMatchingPlayers :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedAutoMatchingCriteria' with the minimum fields required to make a request.
@@ -3439,6 +3478,7 @@ tbamcExclusiveBitmask :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int64)
 tbamcExclusiveBitmask
   = lens _tbamcExclusiveBitmask
       (\ s a -> s{_tbamcExclusiveBitmask = a})
+      . mapping _Coerce
 
 -- | The maximum number of players that should be added to the match by
 -- auto-matching.
@@ -3446,6 +3486,7 @@ tbamcMaxAutoMatchingPlayers :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int32)
 tbamcMaxAutoMatchingPlayers
   = lens _tbamcMaxAutoMatchingPlayers
       (\ s a -> s{_tbamcMaxAutoMatchingPlayers = a})
+      . mapping _Coerce
 
 -- | The minimum number of players that should be added to the match by
 -- auto-matching.
@@ -3453,6 +3494,7 @@ tbamcMinAutoMatchingPlayers :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int32)
 tbamcMinAutoMatchingPlayers
   = lens _tbamcMinAutoMatchingPlayers
       (\ s a -> s{_tbamcMinAutoMatchingPlayers = a})
+      . mapping _Coerce
 
 instance FromJSON TurnBasedAutoMatchingCriteria where
         parseJSON
@@ -3480,11 +3522,11 @@ instance ToJSON TurnBasedAutoMatchingCriteria where
 --
 -- /See:/ 'snapshotImage' smart constructor.
 data SnapshotImage = SnapshotImage
-    { _siHeight   :: !(Maybe Int32)
+    { _siHeight   :: !(Maybe (JSONText Int32))
     , _siKind     :: !Text
     , _siURL      :: !(Maybe Text)
     , _siMimeType :: !(Maybe Text)
-    , _siWidth    :: !(Maybe Int32)
+    , _siWidth    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotImage' with the minimum fields required to make a request.
@@ -3513,7 +3555,9 @@ snapshotImage =
 
 -- | The height of the image.
 siHeight :: Lens' SnapshotImage (Maybe Int32)
-siHeight = lens _siHeight (\ s a -> s{_siHeight = a})
+siHeight
+  = lens _siHeight (\ s a -> s{_siHeight = a}) .
+      mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#snapshotImage.
@@ -3532,7 +3576,9 @@ siMimeType
 
 -- | The width of the image.
 siWidth :: Lens' SnapshotImage (Maybe Int32)
-siWidth = lens _siWidth (\ s a -> s{_siWidth = a})
+siWidth
+  = lens _siWidth (\ s a -> s{_siWidth = a}) .
+      mapping _Coerce
 
 instance FromJSON SnapshotImage where
         parseJSON
@@ -3562,7 +3608,7 @@ data RoomStatus = RoomStatus
     { _rsStatus             :: !(Maybe Text)
     , _rsKind               :: !Text
     , _rsAutoMatchingStatus :: !(Maybe RoomAutoMatchStatus)
-    , _rsStatusVersion      :: !(Maybe Int32)
+    , _rsStatusVersion      :: !(Maybe (JSONText Int32))
     , _rsParticipants       :: !(Maybe [RoomParticipant])
     , _rsRoomId             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3622,6 +3668,7 @@ rsStatusVersion :: Lens' RoomStatus (Maybe Int32)
 rsStatusVersion
   = lens _rsStatusVersion
       (\ s a -> s{_rsStatusVersion = a})
+      . mapping _Coerce
 
 -- | The participants involved in the room, along with their statuses.
 -- Includes participants who have left or declined invitations.
@@ -3998,7 +4045,7 @@ data ParticipantResult = ParticipantResult
     { _prParticipantId :: !(Maybe Text)
     , _prKind          :: !Text
     , _prResult        :: !(Maybe Text)
-    , _prPlacing       :: !(Maybe Int32)
+    , _prPlacing       :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParticipantResult' with the minimum fields required to make a request.
@@ -4050,7 +4097,8 @@ prResult = lens _prResult (\ s a -> s{_prResult = a})
 -- participants may have the same placing value in case of a type.
 prPlacing :: Lens' ParticipantResult (Maybe Int32)
 prPlacing
-  = lens _prPlacing (\ s a -> s{_prPlacing = a})
+  = lens _prPlacing (\ s a -> s{_prPlacing = a}) .
+      mapping _Coerce
 
 instance FromJSON ParticipantResult where
         parseJSON
@@ -4168,7 +4216,7 @@ instance ToJSON Leaderboard where
 -- /See:/ 'metagameConfig' smart constructor.
 data MetagameConfig = MetagameConfig
     { _mcKind           :: !Text
-    , _mcCurrentVersion :: !(Maybe Int32)
+    , _mcCurrentVersion :: !(Maybe (JSONText Int32))
     , _mcPlayerLevels   :: !(Maybe [PlayerLevel])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4201,6 +4249,7 @@ mcCurrentVersion :: Lens' MetagameConfig (Maybe Int32)
 mcCurrentVersion
   = lens _mcCurrentVersion
       (\ s a -> s{_mcCurrentVersion = a})
+      . mapping _Coerce
 
 -- | The list of player levels.
 mcPlayerLevels :: Lens' MetagameConfig [PlayerLevel]
@@ -4298,8 +4347,8 @@ data RoomP2PStatus = RoomP2PStatus
     , _rppsKind                             :: !Text
     , _rppsError                            :: !(Maybe Text)
     , _rppsErrorReason                      :: !(Maybe Text)
-    , _rppsConnectionSetupLatencyMillis     :: !(Maybe Int32)
-    , _rppsUnreliableRoundtripLatencyMillis :: !(Maybe Int32)
+    , _rppsConnectionSetupLatencyMillis     :: !(Maybe (JSONText Int32))
+    , _rppsUnreliableRoundtripLatencyMillis :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomP2PStatus' with the minimum fields required to make a request.
@@ -4373,6 +4422,7 @@ rppsConnectionSetupLatencyMillis :: Lens' RoomP2PStatus (Maybe Int32)
 rppsConnectionSetupLatencyMillis
   = lens _rppsConnectionSetupLatencyMillis
       (\ s a -> s{_rppsConnectionSetupLatencyMillis = a})
+      . mapping _Coerce
 
 -- | The amount of time in milliseconds it took to send packets back and
 -- forth on the unreliable channel with this peer.
@@ -4381,6 +4431,7 @@ rppsUnreliableRoundtripLatencyMillis
   = lens _rppsUnreliableRoundtripLatencyMillis
       (\ s a ->
          s{_rppsUnreliableRoundtripLatencyMillis = a})
+      . mapping _Coerce
 
 instance FromJSON RoomP2PStatus where
         parseJSON
@@ -4414,7 +4465,7 @@ instance ToJSON RoomP2PStatus where
 data TurnBasedMatchModification = TurnBasedMatchModification
     { _tbmmParticipantId           :: !(Maybe Text)
     , _tbmmKind                    :: !Text
-    , _tbmmModifiedTimestampMillis :: !(Maybe Int64)
+    , _tbmmModifiedTimestampMillis :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchModification' with the minimum fields required to make a request.
@@ -4452,6 +4503,7 @@ tbmmModifiedTimestampMillis :: Lens' TurnBasedMatchModification (Maybe Int64)
 tbmmModifiedTimestampMillis
   = lens _tbmmModifiedTimestampMillis
       (\ s a -> s{_tbmmModifiedTimestampMillis = a})
+      . mapping _Coerce
 
 instance FromJSON TurnBasedMatchModification where
         parseJSON
@@ -4600,7 +4652,7 @@ instance ToJSON EventDefinition where
 data RoomModification = RoomModification
     { _rmParticipantId           :: !(Maybe Text)
     , _rmKind                    :: !Text
-    , _rmModifiedTimestampMillis :: !(Maybe Int64)
+    , _rmModifiedTimestampMillis :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomModification' with the minimum fields required to make a request.
@@ -4638,6 +4690,7 @@ rmModifiedTimestampMillis :: Lens' RoomModification (Maybe Int64)
 rmModifiedTimestampMillis
   = lens _rmModifiedTimestampMillis
       (\ s a -> s{_rmModifiedTimestampMillis = a})
+      . mapping _Coerce
 
 instance FromJSON RoomModification where
         parseJSON
@@ -4661,7 +4714,7 @@ instance ToJSON RoomModification where
 --
 -- /See:/ 'eventUpdateRequest' smart constructor.
 data EventUpdateRequest = EventUpdateRequest
-    { _eUpdateCount  :: !(Maybe Int64)
+    { _eUpdateCount  :: !(Maybe (JSONText Int64))
     , _eKind         :: !Text
     , _eDefinitionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4688,6 +4741,7 @@ eventUpdateRequest =
 eUpdateCount :: Lens' EventUpdateRequest (Maybe Int64)
 eUpdateCount
   = lens _eUpdateCount (\ s a -> s{_eUpdateCount = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventUpdateRequest.
@@ -4774,10 +4828,10 @@ data PlayerAchievement = PlayerAchievement
     { _paKind                        :: !Text
     , _paAchievementState            :: !(Maybe Text)
     , _paFormattedCurrentStepsString :: !(Maybe Text)
-    , _paExperiencePoints            :: !(Maybe Int64)
+    , _paExperiencePoints            :: !(Maybe (JSONText Int64))
     , _paId                          :: !(Maybe Text)
-    , _paCurrentSteps                :: !(Maybe Int32)
-    , _paLastUpdatedTimestamp        :: !(Maybe Int64)
+    , _paCurrentSteps                :: !(Maybe (JSONText Int32))
+    , _paLastUpdatedTimestamp        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerAchievement' with the minimum fields required to make a request.
@@ -4836,6 +4890,7 @@ paExperiencePoints :: Lens' PlayerAchievement (Maybe Int64)
 paExperiencePoints
   = lens _paExperiencePoints
       (\ s a -> s{_paExperiencePoints = a})
+      . mapping _Coerce
 
 -- | The ID of the achievement.
 paId :: Lens' PlayerAchievement (Maybe Text)
@@ -4846,12 +4901,14 @@ paCurrentSteps :: Lens' PlayerAchievement (Maybe Int32)
 paCurrentSteps
   = lens _paCurrentSteps
       (\ s a -> s{_paCurrentSteps = a})
+      . mapping _Coerce
 
 -- | The timestamp of the last modification to this achievement\'s state.
 paLastUpdatedTimestamp :: Lens' PlayerAchievement (Maybe Int64)
 paLastUpdatedTimestamp
   = lens _paLastUpdatedTimestamp
       (\ s a -> s{_paLastUpdatedTimestamp = a})
+      . mapping _Coerce
 
 instance FromJSON PlayerAchievement where
         parseJSON
@@ -4935,10 +4992,10 @@ instance ToJSON RoomP2PStatuses where
 --
 -- /See:/ 'imageAsset' smart constructor.
 data ImageAsset = ImageAsset
-    { _iaHeight :: !(Maybe Int32)
+    { _iaHeight :: !(Maybe (JSONText Int32))
     , _iaKind   :: !Text
     , _iaURL    :: !(Maybe Text)
-    , _iaWidth  :: !(Maybe Int32)
+    , _iaWidth  :: !(Maybe (JSONText Int32))
     , _iaName   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4968,7 +5025,9 @@ imageAsset =
 
 -- | The height of the asset.
 iaHeight :: Lens' ImageAsset (Maybe Int32)
-iaHeight = lens _iaHeight (\ s a -> s{_iaHeight = a})
+iaHeight
+  = lens _iaHeight (\ s a -> s{_iaHeight = a}) .
+      mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#imageAsset.
@@ -4981,7 +5040,9 @@ iaURL = lens _iaURL (\ s a -> s{_iaURL = a})
 
 -- | The width of the asset.
 iaWidth :: Lens' ImageAsset (Maybe Int32)
-iaWidth = lens _iaWidth (\ s a -> s{_iaWidth = a})
+iaWidth
+  = lens _iaWidth (\ s a -> s{_iaWidth = a}) .
+      mapping _Coerce
 
 -- | The name of the asset.
 iaName :: Lens' ImageAsset (Maybe Text)
@@ -5066,7 +5127,7 @@ instance ToJSON AchievementUpdateMultipleRequest
 -- /See:/ 'roomAutoMatchStatus' smart constructor.
 data RoomAutoMatchStatus = RoomAutoMatchStatus
     { _ramsKind                :: !Text
-    , _ramsWaitEstimateSeconds :: !(Maybe Int32)
+    , _ramsWaitEstimateSeconds :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomAutoMatchStatus' with the minimum fields required to make a request.
@@ -5095,6 +5156,7 @@ ramsWaitEstimateSeconds :: Lens' RoomAutoMatchStatus (Maybe Int32)
 ramsWaitEstimateSeconds
   = lens _ramsWaitEstimateSeconds
       (\ s a -> s{_ramsWaitEstimateSeconds = a})
+      . mapping _Coerce
 
 instance FromJSON RoomAutoMatchStatus where
         parseJSON
@@ -5207,11 +5269,11 @@ instance ToJSON AchievementUpdateRequest where
 --
 -- /See:/ 'leaderboardScoreRank' smart constructor.
 data LeaderboardScoreRank = LeaderboardScoreRank
-    { _lsrNumScores          :: !(Maybe Int64)
+    { _lsrNumScores          :: !(Maybe (JSONText Int64))
     , _lsrKind               :: !Text
     , _lsrFormattedRank      :: !(Maybe Text)
     , _lsrFormattedNumScores :: !(Maybe Text)
-    , _lsrRank               :: !(Maybe Int64)
+    , _lsrRank               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardScoreRank' with the minimum fields required to make a request.
@@ -5242,6 +5304,7 @@ leaderboardScoreRank =
 lsrNumScores :: Lens' LeaderboardScoreRank (Maybe Int64)
 lsrNumScores
   = lens _lsrNumScores (\ s a -> s{_lsrNumScores = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#leaderboardScoreRank.
@@ -5262,7 +5325,9 @@ lsrFormattedNumScores
 
 -- | The rank in the leaderboard.
 lsrRank :: Lens' LeaderboardScoreRank (Maybe Int64)
-lsrRank = lens _lsrRank (\ s a -> s{_lsrRank = a})
+lsrRank
+  = lens _lsrRank (\ s a -> s{_lsrRank = a}) .
+      mapping _Coerce
 
 instance FromJSON LeaderboardScoreRank where
         parseJSON
@@ -5289,8 +5354,8 @@ instance ToJSON LeaderboardScoreRank where
 --
 -- /See:/ 'roomCreateRequest' smart constructor.
 data RoomCreateRequest = RoomCreateRequest
-    { _rooRequestId            :: !(Maybe Int64)
-    , _rooVariant              :: !(Maybe Int32)
+    { _rooRequestId            :: !(Maybe (JSONText Int64))
+    , _rooVariant              :: !(Maybe (JSONText Int32))
     , _rooNetworkDiagnostics   :: !(Maybe NetworkDiagnostics)
     , _rooKind                 :: !Text
     , _rooInvitedPlayerIds     :: !(Maybe [Text])
@@ -5337,13 +5402,15 @@ roomCreateRequest =
 rooRequestId :: Lens' RoomCreateRequest (Maybe Int64)
 rooRequestId
   = lens _rooRequestId (\ s a -> s{_rooRequestId = a})
+      . mapping _Coerce
 
 -- | The variant \/ mode of the application to be played. This can be any
 -- integer value, or left blank. You should use a small number of variants
 -- to keep the auto-matching pool as large as possible.
 rooVariant :: Lens' RoomCreateRequest (Maybe Int32)
 rooVariant
-  = lens _rooVariant (\ s a -> s{_rooVariant = a})
+  = lens _rooVariant (\ s a -> s{_rooVariant = a}) .
+      mapping _Coerce
 
 -- | Network diagnostics for the client creating the room.
 rooNetworkDiagnostics :: Lens' RoomCreateRequest (Maybe NetworkDiagnostics)
@@ -5478,7 +5545,7 @@ instance ToJSON PlayerListResponse where
 -- /See:/ 'leaderboardScores' smart constructor.
 data LeaderboardScores = LeaderboardScores
     { _lsNextPageToken :: !(Maybe Text)
-    , _lsNumScores     :: !(Maybe Int64)
+    , _lsNumScores     :: !(Maybe (JSONText Int64))
     , _lsKind          :: !Text
     , _lsPlayerScore   :: !(Maybe LeaderboardEntry)
     , _lsItems         :: !(Maybe [LeaderboardEntry])
@@ -5521,7 +5588,8 @@ lsNextPageToken
 -- | The total number of scores in the leaderboard.
 lsNumScores :: Lens' LeaderboardScores (Maybe Int64)
 lsNumScores
-  = lens _lsNumScores (\ s a -> s{_lsNumScores = a})
+  = lens _lsNumScores (\ s a -> s{_lsNumScores = a}) .
+      mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#leaderboardScores.
@@ -5580,12 +5648,12 @@ data AchievementDefinition = AchievementDefinition
     , _adFormattedTotalSteps      :: !(Maybe Text)
     , _adRevealedIconURL          :: !(Maybe Text)
     , _adKind                     :: !Text
-    , _adExperiencePoints         :: !(Maybe Int64)
+    , _adExperiencePoints         :: !(Maybe (JSONText Int64))
     , _adInitialState             :: !(Maybe Text)
     , _adName                     :: !(Maybe Text)
     , _adId                       :: !(Maybe Text)
     , _adIsUnlockedIconURLDefault :: !(Maybe Bool)
-    , _adTotalSteps               :: !(Maybe Int32)
+    , _adTotalSteps               :: !(Maybe (JSONText Int32))
     , _adDescription              :: !(Maybe Text)
     , _adIsRevealedIconURLDefault :: !(Maybe Bool)
     , _adUnlockedIconURL          :: !(Maybe Text)
@@ -5669,6 +5737,7 @@ adExperiencePoints :: Lens' AchievementDefinition (Maybe Int64)
 adExperiencePoints
   = lens _adExperiencePoints
       (\ s a -> s{_adExperiencePoints = a})
+      . mapping _Coerce
 
 -- | The initial state of the achievement. Possible values are: - \"HIDDEN\"
 -- - Achievement is hidden. - \"REVEALED\" - Achievement is revealed. -
@@ -5697,6 +5766,7 @@ adIsUnlockedIconURLDefault
 adTotalSteps :: Lens' AchievementDefinition (Maybe Int32)
 adTotalSteps
   = lens _adTotalSteps (\ s a -> s{_adTotalSteps = a})
+      . mapping _Coerce
 
 -- | The description of the achievement.
 adDescription :: Lens' AchievementDefinition (Maybe Text)
@@ -5760,8 +5830,8 @@ instance ToJSON AchievementDefinition where
 --
 -- /See:/ 'turnBasedMatchCreateRequest' smart constructor.
 data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest
-    { _tbmcrRequestId            :: !(Maybe Int64)
-    , _tbmcrVariant              :: !(Maybe Int32)
+    { _tbmcrRequestId            :: !(Maybe (JSONText Int64))
+    , _tbmcrVariant              :: !(Maybe (JSONText Int32))
     , _tbmcrKind                 :: !Text
     , _tbmcrInvitedPlayerIds     :: !(Maybe [Text])
     , _tbmcrAutoMatchingCriteria :: !(Maybe TurnBasedAutoMatchingCriteria)
@@ -5797,6 +5867,7 @@ tbmcrRequestId :: Lens' TurnBasedMatchCreateRequest (Maybe Int64)
 tbmcrRequestId
   = lens _tbmcrRequestId
       (\ s a -> s{_tbmcrRequestId = a})
+      . mapping _Coerce
 
 -- | The variant \/ mode of the application to be played. This can be any
 -- integer value, or left blank. You should use a small number of variants
@@ -5804,6 +5875,7 @@ tbmcrRequestId
 tbmcrVariant :: Lens' TurnBasedMatchCreateRequest (Maybe Int32)
 tbmcrVariant
   = lens _tbmcrVariant (\ s a -> s{_tbmcrVariant = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#turnBasedMatchCreateRequest.
@@ -5922,7 +5994,7 @@ data TurnBasedMatchResults = TurnBasedMatchResults
     { _tbmrResults      :: !(Maybe [ParticipantResult])
     , _tbmrKind         :: !Text
     , _tbmrData         :: !(Maybe TurnBasedMatchDataRequest)
-    , _tbmrMatchVersion :: !(Maybe Int32)
+    , _tbmrMatchVersion :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchResults' with the minimum fields required to make a request.
@@ -5967,6 +6039,7 @@ tbmrMatchVersion :: Lens' TurnBasedMatchResults (Maybe Int32)
 tbmrMatchVersion
   = lens _tbmrMatchVersion
       (\ s a -> s{_tbmrMatchVersion = a})
+      . mapping _Coerce
 
 instance FromJSON TurnBasedMatchResults where
         parseJSON
@@ -5991,7 +6064,7 @@ instance ToJSON TurnBasedMatchResults where
 --
 -- /See:/ 'pushTokenIdIos' smart constructor.
 data PushTokenIdIos = PushTokenIdIos
-    { _ptiiAPNSDeviceToken :: !(Maybe Word8)
+    { _ptiiAPNSDeviceToken :: !(Maybe (JSONText Word8))
     , _ptiiAPNSEnvironment :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6016,6 +6089,7 @@ ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe Word8)
 ptiiAPNSDeviceToken
   = lens _ptiiAPNSDeviceToken
       (\ s a -> s{_ptiiAPNSDeviceToken = a})
+      . mapping _Coerce
 
 -- | Indicates whether this token should be used for the production or
 -- sandbox APNS server.
@@ -6122,7 +6196,7 @@ instance ToJSON RoomLeaveRequest where
 data Played = Played
     { _pKind        :: !Text
     , _pAutoMatched :: !(Maybe Bool)
-    , _pTimeMillis  :: !(Maybe Int64)
+    , _pTimeMillis  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Played' with the minimum fields required to make a request.
@@ -6158,7 +6232,8 @@ pAutoMatched
 -- in UTC.
 pTimeMillis :: Lens' Played (Maybe Int64)
 pTimeMillis
-  = lens _pTimeMillis (\ s a -> s{_pTimeMillis = a})
+  = lens _pTimeMillis (\ s a -> s{_pTimeMillis = a}) .
+      mapping _Coerce
 
 instance FromJSON Played where
         parseJSON
@@ -6183,7 +6258,7 @@ instance ToJSON Played where
 data AchievementIncrementResponse = AchievementIncrementResponse
     { _airKind          :: !Text
     , _airNewlyUnlocked :: !(Maybe Bool)
-    , _airCurrentSteps  :: !(Maybe Int32)
+    , _airCurrentSteps  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementIncrementResponse' with the minimum fields required to make a request.
@@ -6221,6 +6296,7 @@ airCurrentSteps :: Lens' AchievementIncrementResponse (Maybe Int32)
 airCurrentSteps
   = lens _airCurrentSteps
       (\ s a -> s{_airCurrentSteps = a})
+      . mapping _Coerce
 
 instance FromJSON AchievementIncrementResponse where
         parseJSON
@@ -6298,7 +6374,7 @@ instance ToJSON AchievementRevealResponse where
 data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse
     { _assalrKind          :: !Text
     , _assalrNewlyUnlocked :: !(Maybe Bool)
-    , _assalrCurrentSteps  :: !(Maybe Int32)
+    , _assalrCurrentSteps  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementSetStepsAtLeastResponse' with the minimum fields required to make a request.
@@ -6337,6 +6413,7 @@ assalrCurrentSteps :: Lens' AchievementSetStepsAtLeastResponse (Maybe Int32)
 assalrCurrentSteps
   = lens _assalrCurrentSteps
       (\ s a -> s{_assalrCurrentSteps = a})
+      . mapping _Coerce
 
 instance FromJSON AchievementSetStepsAtLeastResponse
          where
@@ -6425,9 +6502,9 @@ instance ToJSON PlayerAchievementListResponse where
 --
 -- /See:/ 'eventRecordRequest' smart constructor.
 data EventRecordRequest = EventRecordRequest
-    { _errRequestId         :: !(Maybe Int64)
+    { _errRequestId         :: !(Maybe (JSONText Int64))
     , _errKind              :: !Text
-    , _errCurrentTimeMillis :: !(Maybe Int64)
+    , _errCurrentTimeMillis :: !(Maybe (JSONText Int64))
     , _errTimePeriods       :: !(Maybe [EventPeriodUpdate])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6456,6 +6533,7 @@ eventRecordRequest =
 errRequestId :: Lens' EventRecordRequest (Maybe Int64)
 errRequestId
   = lens _errRequestId (\ s a -> s{_errRequestId = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventRecordRequest.
@@ -6468,6 +6546,7 @@ errCurrentTimeMillis :: Lens' EventRecordRequest (Maybe Int64)
 errCurrentTimeMillis
   = lens _errCurrentTimeMillis
       (\ s a -> s{_errCurrentTimeMillis = a})
+      . mapping _Coerce
 
 -- | A list of the time period updates being made in this request.
 errTimePeriods :: Lens' EventRecordRequest [EventPeriodUpdate]
@@ -6501,9 +6580,9 @@ instance ToJSON EventRecordRequest where
 -- /See:/ 'roomAutoMatchingCriteria' smart constructor.
 data RoomAutoMatchingCriteria = RoomAutoMatchingCriteria
     { _ramcKind                   :: !Text
-    , _ramcExclusiveBitmask       :: !(Maybe Int64)
-    , _ramcMaxAutoMatchingPlayers :: !(Maybe Int32)
-    , _ramcMinAutoMatchingPlayers :: !(Maybe Int32)
+    , _ramcExclusiveBitmask       :: !(Maybe (JSONText Int64))
+    , _ramcMaxAutoMatchingPlayers :: !(Maybe (JSONText Int32))
+    , _ramcMinAutoMatchingPlayers :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomAutoMatchingCriteria' with the minimum fields required to make a request.
@@ -6539,6 +6618,7 @@ ramcExclusiveBitmask :: Lens' RoomAutoMatchingCriteria (Maybe Int64)
 ramcExclusiveBitmask
   = lens _ramcExclusiveBitmask
       (\ s a -> s{_ramcExclusiveBitmask = a})
+      . mapping _Coerce
 
 -- | The maximum number of players that should be added to the room by
 -- auto-matching.
@@ -6546,6 +6626,7 @@ ramcMaxAutoMatchingPlayers :: Lens' RoomAutoMatchingCriteria (Maybe Int32)
 ramcMaxAutoMatchingPlayers
   = lens _ramcMaxAutoMatchingPlayers
       (\ s a -> s{_ramcMaxAutoMatchingPlayers = a})
+      . mapping _Coerce
 
 -- | The minimum number of players that should be added to the room by
 -- auto-matching.
@@ -6553,6 +6634,7 @@ ramcMinAutoMatchingPlayers :: Lens' RoomAutoMatchingCriteria (Maybe Int32)
 ramcMinAutoMatchingPlayers
   = lens _ramcMinAutoMatchingPlayers
       (\ s a -> s{_ramcMinAutoMatchingPlayers = a})
+      . mapping _Coerce
 
 instance FromJSON RoomAutoMatchingCriteria where
         parseJSON
@@ -6582,7 +6664,7 @@ data QuestMilestone = QuestMilestone
     { _qmState                :: !(Maybe Text)
     , _qmKind                 :: !Text
     , _qmId                   :: !(Maybe Text)
-    , _qmCompletionRewardData :: !(Maybe Word8)
+    , _qmCompletionRewardData :: !(Maybe (JSONText Word8))
     , _qmCriteria             :: !(Maybe [QuestCriterion])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6635,6 +6717,7 @@ qmCompletionRewardData :: Lens' QuestMilestone (Maybe Word8)
 qmCompletionRewardData
   = lens _qmCompletionRewardData
       (\ s a -> s{_qmCompletionRewardData = a})
+      . mapping _Coerce
 
 -- | The criteria of the milestone.
 qmCriteria :: Lens' QuestMilestone [QuestCriterion]
@@ -6668,7 +6751,7 @@ instance ToJSON QuestMilestone where
 --
 -- /See:/ 'peerSessionDiagnostics' smart constructor.
 data PeerSessionDiagnostics = PeerSessionDiagnostics
-    { _psdConnectedTimestampMillis :: !(Maybe Int64)
+    { _psdConnectedTimestampMillis :: !(Maybe (JSONText Int64))
     , _psdParticipantId            :: !(Maybe Text)
     , _psdKind                     :: !Text
     , _psdUnreliableChannel        :: !(Maybe PeerChannelDiagnostics)
@@ -6704,6 +6787,7 @@ psdConnectedTimestampMillis :: Lens' PeerSessionDiagnostics (Maybe Int64)
 psdConnectedTimestampMillis
   = lens _psdConnectedTimestampMillis
       (\ s a -> s{_psdConnectedTimestampMillis = a})
+      . mapping _Coerce
 
 -- | The participant ID of the peer.
 psdParticipantId :: Lens' PeerSessionDiagnostics (Maybe Text)
@@ -6940,7 +7024,7 @@ instance ToJSON TurnBasedMatchSync where
 data ScoreSubmission = ScoreSubmission
     { _scoSignature     :: !(Maybe Text)
     , _scoScoreTag      :: !(Maybe Text)
-    , _scoScore         :: !(Maybe Int64)
+    , _scoScore         :: !(Maybe (JSONText Int64))
     , _scoKind          :: !Text
     , _scoLeaderboardId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6983,7 +7067,9 @@ scoScoreTag
 
 -- | The new score being submitted.
 scoScore :: Lens' ScoreSubmission (Maybe Int64)
-scoScore = lens _scoScore (\ s a -> s{_scoScore = a})
+scoScore
+  = lens _scoScore (\ s a -> s{_scoScore = a}) .
+      mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#scoreSubmission.
@@ -7021,13 +7107,13 @@ instance ToJSON ScoreSubmission where
 -- /See:/ 'roomLeaveDiagnostics' smart constructor.
 data RoomLeaveDiagnostics = RoomLeaveDiagnostics
     { _rldPeerSession           :: !(Maybe [PeerSessionDiagnostics])
-    , _rldAndroidNetworkType    :: !(Maybe Int32)
+    , _rldAndroidNetworkType    :: !(Maybe (JSONText Int32))
     , _rldKind                  :: !Text
     , _rldNetworkOperatorCode   :: !(Maybe Text)
     , _rldNetworkOperatorName   :: !(Maybe Text)
     , _rldSocketsUsed           :: !(Maybe Bool)
-    , _rldIosNetworkType        :: !(Maybe Int32)
-    , _rldAndroidNetworkSubtype :: !(Maybe Int32)
+    , _rldIosNetworkType        :: !(Maybe (JSONText Int32))
+    , _rldAndroidNetworkSubtype :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomLeaveDiagnostics' with the minimum fields required to make a request.
@@ -7077,6 +7163,7 @@ rldAndroidNetworkType :: Lens' RoomLeaveDiagnostics (Maybe Int32)
 rldAndroidNetworkType
   = lens _rldAndroidNetworkType
       (\ s a -> s{_rldAndroidNetworkType = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#roomLeaveDiagnostics.
@@ -7112,6 +7199,7 @@ rldIosNetworkType :: Lens' RoomLeaveDiagnostics (Maybe Int32)
 rldIosNetworkType
   = lens _rldIosNetworkType
       (\ s a -> s{_rldIosNetworkType = a})
+      . mapping _Coerce
 
 -- | Android network subtype.
 -- http:\/\/developer.android.com\/reference\/android\/net\/NetworkInfo.html#getSubtype()
@@ -7119,6 +7207,7 @@ rldAndroidNetworkSubtype :: Lens' RoomLeaveDiagnostics (Maybe Int32)
 rldAndroidNetworkSubtype
   = lens _rldAndroidNetworkSubtype
       (\ s a -> s{_rldAndroidNetworkSubtype = a})
+      . mapping _Coerce
 
 instance FromJSON RoomLeaveDiagnostics where
         parseJSON
@@ -7154,11 +7243,11 @@ instance ToJSON RoomLeaveDiagnostics where
 --
 -- /See:/ 'aggregateStats' smart constructor.
 data AggregateStats = AggregateStats
-    { _asMax   :: !(Maybe Int64)
+    { _asMax   :: !(Maybe (JSONText Int64))
     , _asKind  :: !Text
-    , _asCount :: !(Maybe Int64)
-    , _asMin   :: !(Maybe Int64)
-    , _asSum   :: !(Maybe Int64)
+    , _asCount :: !(Maybe (JSONText Int64))
+    , _asMin   :: !(Maybe (JSONText Int64))
+    , _asSum   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateStats' with the minimum fields required to make a request.
@@ -7187,7 +7276,9 @@ aggregateStats =
 
 -- | The maximum amount.
 asMax :: Lens' AggregateStats (Maybe Int64)
-asMax = lens _asMax (\ s a -> s{_asMax = a})
+asMax
+  = lens _asMax (\ s a -> s{_asMax = a}) .
+      mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#aggregateStats.
@@ -7196,15 +7287,21 @@ asKind = lens _asKind (\ s a -> s{_asKind = a})
 
 -- | The number of messages sent between a pair of peers.
 asCount :: Lens' AggregateStats (Maybe Int64)
-asCount = lens _asCount (\ s a -> s{_asCount = a})
+asCount
+  = lens _asCount (\ s a -> s{_asCount = a}) .
+      mapping _Coerce
 
 -- | The minimum amount.
 asMin :: Lens' AggregateStats (Maybe Int64)
-asMin = lens _asMin (\ s a -> s{_asMin = a})
+asMin
+  = lens _asMin (\ s a -> s{_asMin = a}) .
+      mapping _Coerce
 
 -- | The total number of bytes sent for messages between a pair of peers.
 asSum :: Lens' AggregateStats (Maybe Int64)
-asSum = lens _asSum (\ s a -> s{_asSum = a})
+asSum
+  = lens _asSum (\ s a -> s{_asSum = a}) .
+      mapping _Coerce
 
 instance FromJSON AggregateStats where
         parseJSON
@@ -7351,10 +7448,10 @@ instance ToJSON TurnBasedMatchRematch where
 -- /See:/ 'playerExperienceInfo' smart constructor.
 data PlayerExperienceInfo = PlayerExperienceInfo
     { _peiKind                       :: !Text
-    , _peiCurrentExperiencePoints    :: !(Maybe Int64)
+    , _peiCurrentExperiencePoints    :: !(Maybe (JSONText Int64))
     , _peiCurrentLevel               :: !(Maybe PlayerLevel)
     , _peiNextLevel                  :: !(Maybe PlayerLevel)
-    , _peiLastLevelUpTimestampMillis :: !(Maybe Int64)
+    , _peiLastLevelUpTimestampMillis :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerExperienceInfo' with the minimum fields required to make a request.
@@ -7391,6 +7488,7 @@ peiCurrentExperiencePoints :: Lens' PlayerExperienceInfo (Maybe Int64)
 peiCurrentExperiencePoints
   = lens _peiCurrentExperiencePoints
       (\ s a -> s{_peiCurrentExperiencePoints = a})
+      . mapping _Coerce
 
 -- | The current level of the player.
 peiCurrentLevel :: Lens' PlayerExperienceInfo (Maybe PlayerLevel)
@@ -7410,6 +7508,7 @@ peiLastLevelUpTimestampMillis :: Lens' PlayerExperienceInfo (Maybe Int64)
 peiLastLevelUpTimestampMillis
   = lens _peiLastLevelUpTimestampMillis
       (\ s a -> s{_peiLastLevelUpTimestampMillis = a})
+      . mapping _Coerce
 
 instance FromJSON PlayerExperienceInfo where
         parseJSON
@@ -7440,7 +7539,7 @@ instance ToJSON PlayerExperienceInfo where
 -- /See:/ 'gamesAchievementSetStepsAtLeast' smart constructor.
 data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast
     { _gassalKind  :: !Text
-    , _gassalSteps :: !(Maybe Int32)
+    , _gassalSteps :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesAchievementSetStepsAtLeast' with the minimum fields required to make a request.
@@ -7467,7 +7566,8 @@ gassalKind
 -- | The minimum number of steps for the achievement to be set to.
 gassalSteps :: Lens' GamesAchievementSetStepsAtLeast (Maybe Int32)
 gassalSteps
-  = lens _gassalSteps (\ s a -> s{_gassalSteps = a})
+  = lens _gassalSteps (\ s a -> s{_gassalSteps = a}) .
+      mapping _Coerce
 
 instance FromJSON GamesAchievementSetStepsAtLeast
          where
@@ -7609,9 +7709,9 @@ instance ToJSON Player where
 --
 -- /See:/ 'gamesAchievementIncrement' smart constructor.
 data GamesAchievementIncrement = GamesAchievementIncrement
-    { _gaiRequestId :: !(Maybe Int64)
+    { _gaiRequestId :: !(Maybe (JSONText Int64))
     , _gaiKind      :: !Text
-    , _gaiSteps     :: !(Maybe Int32)
+    , _gaiSteps     :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesAchievementIncrement' with the minimum fields required to make a request.
@@ -7636,6 +7736,7 @@ gamesAchievementIncrement =
 gaiRequestId :: Lens' GamesAchievementIncrement (Maybe Int64)
 gaiRequestId
   = lens _gaiRequestId (\ s a -> s{_gaiRequestId = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#GamesAchievementIncrement.
@@ -7644,7 +7745,9 @@ gaiKind = lens _gaiKind (\ s a -> s{_gaiKind = a})
 
 -- | The number of steps to be incremented.
 gaiSteps :: Lens' GamesAchievementIncrement (Maybe Int32)
-gaiSteps = lens _gaiSteps (\ s a -> s{_gaiSteps = a})
+gaiSteps
+  = lens _gaiSteps (\ s a -> s{_gaiSteps = a}) .
+      mapping _Coerce
 
 instance FromJSON GamesAchievementIncrement where
         parseJSON
@@ -7667,22 +7770,22 @@ instance ToJSON GamesAchievementIncrement where
 --
 -- /See:/ 'quest' smart constructor.
 data Quest = Quest
-    { _queLastUpdatedTimestampMillis :: !(Maybe Int64)
+    { _queLastUpdatedTimestampMillis :: !(Maybe (JSONText Int64))
     , _queBannerURL                  :: !(Maybe Text)
     , _queState                      :: !(Maybe Text)
     , _queMilestones                 :: !(Maybe [QuestMilestone])
     , _queKind                       :: !Text
     , _queApplicationId              :: !(Maybe Text)
-    , _queEndTimestampMillis         :: !(Maybe Int64)
+    , _queEndTimestampMillis         :: !(Maybe (JSONText Int64))
     , _queName                       :: !(Maybe Text)
     , _queId                         :: !(Maybe Text)
     , _queIconURL                    :: !(Maybe Text)
-    , _queStartTimestampMillis       :: !(Maybe Int64)
-    , _queNotifyTimestampMillis      :: !(Maybe Int64)
+    , _queStartTimestampMillis       :: !(Maybe (JSONText Int64))
+    , _queNotifyTimestampMillis      :: !(Maybe (JSONText Int64))
     , _queDescription                :: !(Maybe Text)
     , _queIsDefaultBannerURL         :: !(Maybe Bool)
     , _queIsDefaultIconURL           :: !(Maybe Bool)
-    , _queAcceptedTimestampMillis    :: !(Maybe Int64)
+    , _queAcceptedTimestampMillis    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quest' with the minimum fields required to make a request.
@@ -7749,6 +7852,7 @@ queLastUpdatedTimestampMillis :: Lens' Quest (Maybe Int64)
 queLastUpdatedTimestampMillis
   = lens _queLastUpdatedTimestampMillis
       (\ s a -> s{_queLastUpdatedTimestampMillis = a})
+      . mapping _Coerce
 
 -- | The banner image URL for the quest.
 queBannerURL :: Lens' Quest (Maybe Text)
@@ -7791,6 +7895,7 @@ queEndTimestampMillis :: Lens' Quest (Maybe Int64)
 queEndTimestampMillis
   = lens _queEndTimestampMillis
       (\ s a -> s{_queEndTimestampMillis = a})
+      . mapping _Coerce
 
 -- | The name of the quest.
 queName :: Lens' Quest (Maybe Text)
@@ -7811,6 +7916,7 @@ queStartTimestampMillis :: Lens' Quest (Maybe Int64)
 queStartTimestampMillis
   = lens _queStartTimestampMillis
       (\ s a -> s{_queStartTimestampMillis = a})
+      . mapping _Coerce
 
 -- | The timestamp at which the user should be notified that the quest will
 -- end soon in milliseconds since the epoch in UTC.
@@ -7818,6 +7924,7 @@ queNotifyTimestampMillis :: Lens' Quest (Maybe Int64)
 queNotifyTimestampMillis
   = lens _queNotifyTimestampMillis
       (\ s a -> s{_queNotifyTimestampMillis = a})
+      . mapping _Coerce
 
 -- | The description of the quest.
 queDescription :: Lens' Quest (Maybe Text)
@@ -7845,6 +7952,7 @@ queAcceptedTimestampMillis :: Lens' Quest (Maybe Int64)
 queAcceptedTimestampMillis
   = lens _queAcceptedTimestampMillis
       (\ s a -> s{_queAcceptedTimestampMillis = a})
+      . mapping _Coerce
 
 instance FromJSON Quest where
         parseJSON
@@ -8007,7 +8115,7 @@ instance ToJSON PlayerEventListResponse where
 -- /See:/ 'turnBasedMatchDataRequest' smart constructor.
 data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest
     { _tbmdrKind :: !Text
-    , _tbmdrData :: !(Maybe Word8)
+    , _tbmdrData :: !(Maybe (JSONText Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
@@ -8035,7 +8143,8 @@ tbmdrKind
 -- Base64-encoded string with the URL_SAFE encoding option.
 tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe Word8)
 tbmdrData
-  = lens _tbmdrData (\ s a -> s{_tbmdrData = a})
+  = lens _tbmdrData (\ s a -> s{_tbmdrData = a}) .
+      mapping _Coerce
 
 instance FromJSON TurnBasedMatchDataRequest where
         parseJSON
@@ -8057,8 +8166,8 @@ instance ToJSON TurnBasedMatchDataRequest where
 -- /See:/ 'eventPeriodRange' smart constructor.
 data EventPeriodRange = EventPeriodRange
     { _eprKind              :: !Text
-    , _eprPeriodStartMillis :: !(Maybe Int64)
-    , _eprPeriodEndMillis   :: !(Maybe Int64)
+    , _eprPeriodStartMillis :: !(Maybe (JSONText Int64))
+    , _eprPeriodEndMillis   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventPeriodRange' with the minimum fields required to make a request.
@@ -8090,6 +8199,7 @@ eprPeriodStartMillis :: Lens' EventPeriodRange (Maybe Int64)
 eprPeriodStartMillis
   = lens _eprPeriodStartMillis
       (\ s a -> s{_eprPeriodStartMillis = a})
+      . mapping _Coerce
 
 -- | The time when this update period ends, in millis, since 1970 UTC (Unix
 -- Epoch).
@@ -8097,6 +8207,7 @@ eprPeriodEndMillis :: Lens' EventPeriodRange (Maybe Int64)
 eprPeriodEndMillis
   = lens _eprPeriodEndMillis
       (\ s a -> s{_eprPeriodEndMillis = a})
+      . mapping _Coerce
 
 instance FromJSON EventPeriodRange where
         parseJSON

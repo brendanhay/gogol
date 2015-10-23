@@ -54,12 +54,12 @@ type SchedulePatchResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" Word64 :>
+               Capture "jobId" (JSONText Word64) :>
                  "schedule" :>
                    QueryParam "allDay" Bool :>
-                     QueryParam "startTime" Word64 :>
-                       QueryParam "endTime" Word64 :>
-                         QueryParam "duration" Word64 :>
+                     QueryParam "startTime" (JSONText Word64) :>
+                       QueryParam "endTime" (JSONText Word64) :>
+                         QueryParam "duration" (JSONText Word64) :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Schedule :> Patch '[JSON] Schedule
 
@@ -68,13 +68,13 @@ type SchedulePatchResource =
 --
 -- /See:/ 'schedulePatch' smart constructor.
 data SchedulePatch = SchedulePatch
-    { _spJobId     :: !Word64
+    { _spJobId     :: !(JSONText Word64)
     , _spAllDay    :: !(Maybe Bool)
-    , _spStartTime :: !(Maybe Word64)
+    , _spStartTime :: !(Maybe (JSONText Word64))
     , _spTeamId    :: !Text
     , _spPayload   :: !Schedule
-    , _spEndTime   :: !(Maybe Word64)
-    , _spDuration  :: !(Maybe Word64)
+    , _spEndTime   :: !(Maybe (JSONText Word64))
+    , _spDuration  :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchedulePatch' with the minimum fields required to make a request.
@@ -112,7 +112,8 @@ schedulePatch pSpJobId_ pSpTeamId_ pSpPayload_ =
 
 -- | Job number
 spJobId :: Lens' SchedulePatch Word64
-spJobId = lens _spJobId (\ s a -> s{_spJobId = a})
+spJobId
+  = lens _spJobId (\ s a -> s{_spJobId = a}) . _Coerce
 
 -- | Whether the job is scheduled for the whole day. Time of day in
 -- start\/end times is ignored if this is true.
@@ -122,7 +123,8 @@ spAllDay = lens _spAllDay (\ s a -> s{_spAllDay = a})
 -- | Scheduled start time in milliseconds since epoch.
 spStartTime :: Lens' SchedulePatch (Maybe Word64)
 spStartTime
-  = lens _spStartTime (\ s a -> s{_spStartTime = a})
+  = lens _spStartTime (\ s a -> s{_spStartTime = a}) .
+      mapping _Coerce
 
 -- | Team ID
 spTeamId :: Lens' SchedulePatch Text
@@ -136,12 +138,14 @@ spPayload
 -- | Scheduled end time in milliseconds since epoch.
 spEndTime :: Lens' SchedulePatch (Maybe Word64)
 spEndTime
-  = lens _spEndTime (\ s a -> s{_spEndTime = a})
+  = lens _spEndTime (\ s a -> s{_spEndTime = a}) .
+      mapping _Coerce
 
 -- | Job duration in milliseconds.
 spDuration :: Lens' SchedulePatch (Maybe Word64)
 spDuration
-  = lens _spDuration (\ s a -> s{_spDuration = a})
+  = lens _spDuration (\ s a -> s{_spDuration = a}) .
+      mapping _Coerce
 
 instance GoogleRequest SchedulePatch where
         type Rs SchedulePatch = Schedule

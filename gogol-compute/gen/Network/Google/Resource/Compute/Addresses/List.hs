@@ -56,7 +56,7 @@ type AddressesListResource =
                  "addresses" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
 -- | Retrieves the list of address resources contained within the specified
@@ -68,7 +68,7 @@ data AddressesList = AddressesList
     , _alFilter     :: !(Maybe Text)
     , _alRegion     :: !Text
     , _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !Word32
+    , _alMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesList' with the minimum fields required to make a request.
@@ -131,6 +131,7 @@ alPageToken
 alMaxResults :: Lens' AddressesList Word32
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest AddressesList where
         type Rs AddressesList = AddressList

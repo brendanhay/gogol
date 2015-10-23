@@ -46,17 +46,17 @@ type CountriesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "countries" :>
-               Capture "dartId" Int64 :>
+               Capture "dartId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Country
 
 -- | Gets one country by ID.
 --
 -- /See:/ 'countriesGet' smart constructor.
 data CountriesGet = CountriesGet
-    { _cgProFileId :: !Int64
-    , _cgDartId    :: !Int64
+    { _cgProFileId :: !(JSONText Int64)
+    , _cgDartId    :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CountriesGet' with the minimum fields required to make a request.
@@ -79,11 +79,14 @@ countriesGet pCgProFileId_ pCgDartId_ =
 -- | User profile ID associated with this request.
 cgProFileId :: Lens' CountriesGet Int64
 cgProFileId
-  = lens _cgProFileId (\ s a -> s{_cgProFileId = a})
+  = lens _cgProFileId (\ s a -> s{_cgProFileId = a}) .
+      _Coerce
 
 -- | Country DART ID.
 cgDartId :: Lens' CountriesGet Int64
-cgDartId = lens _cgDartId (\ s a -> s{_cgDartId = a})
+cgDartId
+  = lens _cgDartId (\ s a -> s{_cgDartId = a}) .
+      _Coerce
 
 instance GoogleRequest CountriesGet where
         type Rs CountriesGet = Country

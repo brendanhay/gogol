@@ -60,8 +60,8 @@ type UsersDataSourcesDataSetsDeleteResource =
                Capture "dataSourceId" Text :>
                  "datasets" :>
                    Capture "datasetId" Text :>
-                     QueryParam "modifiedTimeMillis" Int64 :>
-                       QueryParam "currentTimeMillis" Int64 :>
+                     QueryParam "modifiedTimeMillis" (JSONText Int64) :>
+                       QueryParam "currentTimeMillis" (JSONText Int64) :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Performs an inclusive delete of all data points whose start and end
@@ -77,8 +77,8 @@ data UsersDataSourcesDataSetsDelete = UsersDataSourcesDataSetsDelete
     { _udsdsdDataSourceId       :: !Text
     , _udsdsdUserId             :: !Text
     , _udsdsdDataSetId          :: !Text
-    , _udsdsdModifiedTimeMillis :: !(Maybe Int64)
-    , _udsdsdCurrentTimeMillis  :: !(Maybe Int64)
+    , _udsdsdModifiedTimeMillis :: !(Maybe (JSONText Int64))
+    , _udsdsdCurrentTimeMillis  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDataSetsDelete' with the minimum fields required to make a request.
@@ -134,12 +134,14 @@ udsdsdModifiedTimeMillis :: Lens' UsersDataSourcesDataSetsDelete (Maybe Int64)
 udsdsdModifiedTimeMillis
   = lens _udsdsdModifiedTimeMillis
       (\ s a -> s{_udsdsdModifiedTimeMillis = a})
+      . mapping _Coerce
 
 -- | The client\'s current time in milliseconds since epoch.
 udsdsdCurrentTimeMillis :: Lens' UsersDataSourcesDataSetsDelete (Maybe Int64)
 udsdsdCurrentTimeMillis
   = lens _udsdsdCurrentTimeMillis
       (\ s a -> s{_udsdsdCurrentTimeMillis = a})
+      . mapping _Coerce
 
 instance GoogleRequest UsersDataSourcesDataSetsDelete
          where

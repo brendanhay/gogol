@@ -46,7 +46,7 @@ type ContentCategoriesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "contentCategories" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] ContentCategory :>
@@ -56,7 +56,7 @@ type ContentCategoriesUpdateResource =
 --
 -- /See:/ 'contentCategoriesUpdate' smart constructor.
 data ContentCategoriesUpdate = ContentCategoriesUpdate
-    { _ccuProFileId :: !Int64
+    { _ccuProFileId :: !(JSONText Int64)
     , _ccuPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ contentCategoriesUpdate pCcuProFileId_ pCcuPayload_ =
 ccuProFileId :: Lens' ContentCategoriesUpdate Int64
 ccuProFileId
   = lens _ccuProFileId (\ s a -> s{_ccuProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 ccuPayload :: Lens' ContentCategoriesUpdate ContentCategory

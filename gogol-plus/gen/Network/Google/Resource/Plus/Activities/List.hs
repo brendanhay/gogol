@@ -53,7 +53,7 @@ type ActivitiesListResource =
              "activities" :>
                Capture "collection" ActivitiesListCollection :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
 -- | List all of the activities in the specified collection for a particular
@@ -64,7 +64,7 @@ data ActivitiesList = ActivitiesList
     { _alCollection :: !ActivitiesListCollection
     , _alUserId     :: !Text
     , _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !Word32
+    , _alMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
@@ -113,6 +113,7 @@ alPageToken
 alMaxResults :: Lens' ActivitiesList Word32
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = ActivityFeed

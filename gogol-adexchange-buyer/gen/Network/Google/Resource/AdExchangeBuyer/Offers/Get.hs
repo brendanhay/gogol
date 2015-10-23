@@ -45,14 +45,14 @@ type OffersGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "offers" :>
-           Capture "offerId" Int64 :>
+           Capture "offerId" (JSONText Int64) :>
              QueryParam "alt" AltJSON :> Get '[JSON] OfferDTO
 
 -- | Gets the requested offer.
 --
 -- /See:/ 'offersGet' smart constructor.
 newtype OffersGet = OffersGet
-    { _ogOfferId :: Int64
+    { _ogOfferId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersGet' with the minimum fields required to make a request.
@@ -70,7 +70,8 @@ offersGet pOgOfferId_ =
 
 ogOfferId :: Lens' OffersGet Int64
 ogOfferId
-  = lens _ogOfferId (\ s a -> s{_ogOfferId = a})
+  = lens _ogOfferId (\ s a -> s{_ogOfferId = a}) .
+      _Coerce
 
 instance GoogleRequest OffersGet where
         type Rs OffersGet = OfferDTO

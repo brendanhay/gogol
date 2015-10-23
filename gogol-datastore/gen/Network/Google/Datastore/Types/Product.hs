@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'rollbackRequest' smart constructor.
 newtype RollbackRequest = RollbackRequest
-    { _rrTransaction :: Maybe Word8
+    { _rrTransaction :: Maybe (JSONText Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
@@ -43,6 +43,7 @@ rrTransaction :: Lens' RollbackRequest (Maybe Word8)
 rrTransaction
   = lens _rrTransaction
       (\ s a -> s{_rrTransaction = a})
+      . mapping _Coerce
 
 instance FromJSON RollbackRequest where
         parseJSON
@@ -61,15 +62,15 @@ data Property = Property
     { _pKeyValue      :: !(Maybe Key)
     , _pBlobKeyValue  :: !(Maybe Text)
     , _pDateTimeValue :: !(Maybe DateTime')
-    , _pIntegerValue  :: !(Maybe Int64)
+    , _pIntegerValue  :: !(Maybe (JSONText Int64))
     , _pEntityValue   :: !(Maybe Entity)
-    , _pDoubleValue   :: !(Maybe Double)
+    , _pDoubleValue   :: !(Maybe (JSONText Double))
     , _pStringValue   :: !(Maybe Text)
     , _pListValue     :: !(Maybe [Value])
     , _pIndexed       :: !(Maybe Bool)
     , _pBooleanValue  :: !(Maybe Bool)
-    , _pMeaning       :: !(Maybe Int32)
-    , _pBlobValue     :: !(Maybe Word8)
+    , _pMeaning       :: !(Maybe (JSONText Int32))
+    , _pBlobValue     :: !(Maybe (JSONText Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Property' with the minimum fields required to make a request.
@@ -140,6 +141,7 @@ pIntegerValue :: Lens' Property (Maybe Int64)
 pIntegerValue
   = lens _pIntegerValue
       (\ s a -> s{_pIntegerValue = a})
+      . mapping _Coerce
 
 -- | An entity value. May have no key. May have a key with an incomplete key
 -- path. May have a reserved\/read-only key.
@@ -151,6 +153,7 @@ pEntityValue
 pDoubleValue :: Lens' Property (Maybe Double)
 pDoubleValue
   = lens _pDoubleValue (\ s a -> s{_pDoubleValue = a})
+      . mapping _Coerce
 
 -- | A UTF-8 encoded string value. When indexed is true, may have at most 500
 -- characters.
@@ -184,13 +187,16 @@ pBooleanValue
 
 -- | The meaning field is reserved and should not be used.
 pMeaning :: Lens' Property (Maybe Int32)
-pMeaning = lens _pMeaning (\ s a -> s{_pMeaning = a})
+pMeaning
+  = lens _pMeaning (\ s a -> s{_pMeaning = a}) .
+      mapping _Coerce
 
 -- | A blob value. May be a maximum of 1,000,000 bytes. When indexed is true,
 -- may have at most 500 bytes.
 pBlobValue :: Lens' Property (Maybe Word8)
 pBlobValue
-  = lens _pBlobValue (\ s a -> s{_pBlobValue = a})
+  = lens _pBlobValue (\ s a -> s{_pBlobValue = a}) .
+      mapping _Coerce
 
 instance FromJSON Property where
         parseJSON
@@ -279,11 +285,11 @@ instance ToJSON PartitionId where
 --
 -- /See:/ 'queryResultBatch' smart constructor.
 data QueryResultBatch = QueryResultBatch
-    { _qrbSkippedResults   :: !(Maybe Int32)
+    { _qrbSkippedResults   :: !(Maybe (JSONText Int32))
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
     , _qrbEntityResults    :: !(Maybe [EntityResult])
     , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
-    , _qrbEndCursor        :: !(Maybe Word8)
+    , _qrbEndCursor        :: !(Maybe (JSONText Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
@@ -315,6 +321,7 @@ qrbSkippedResults :: Lens' QueryResultBatch (Maybe Int32)
 qrbSkippedResults
   = lens _qrbSkippedResults
       (\ s a -> s{_qrbSkippedResults = a})
+      . mapping _Coerce
 
 -- | The result type for every entity in entityResults. full for full
 -- entities, projection for entities with only projected properties,
@@ -345,6 +352,7 @@ qrbMoreResults
 qrbEndCursor :: Lens' QueryResultBatch (Maybe Word8)
 qrbEndCursor
   = lens _qrbEndCursor (\ s a -> s{_qrbEndCursor = a})
+      . mapping _Coerce
 
 instance FromJSON QueryResultBatch where
         parseJSON
@@ -609,7 +617,7 @@ instance ToJSON CompositeFilter where
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
 data BeginTransactionResponse = BeginTransactionResponse
-    { _btrTransaction :: !(Maybe Word8)
+    { _btrTransaction :: !(Maybe (JSONText Word8))
     , _btrHeader      :: !(Maybe ResponseHeader)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -633,6 +641,7 @@ btrTransaction :: Lens' BeginTransactionResponse (Maybe Word8)
 btrTransaction
   = lens _btrTransaction
       (\ s a -> s{_btrTransaction = a})
+      . mapping _Coerce
 
 btrHeader :: Lens' BeginTransactionResponse (Maybe ResponseHeader)
 btrHeader
@@ -656,7 +665,7 @@ instance ToJSON BeginTransactionResponse where
 -- /See:/ 'mutationResult' smart constructor.
 data MutationResult = MutationResult
     { _mrInsertAutoIdKeys :: !(Maybe [Key])
-    , _mrIndexUpdates     :: !(Maybe Int32)
+    , _mrIndexUpdates     :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MutationResult' with the minimum fields required to make a request.
@@ -688,6 +697,7 @@ mrIndexUpdates :: Lens' MutationResult (Maybe Int32)
 mrIndexUpdates
   = lens _mrIndexUpdates
       (\ s a -> s{_mrIndexUpdates = a})
+      . mapping _Coerce
 
 instance FromJSON MutationResult where
         parseJSON
@@ -884,15 +894,15 @@ data Value = Value
     { _vKeyValue      :: !(Maybe Key)
     , _vBlobKeyValue  :: !(Maybe Text)
     , _vDateTimeValue :: !(Maybe DateTime')
-    , _vIntegerValue  :: !(Maybe Int64)
+    , _vIntegerValue  :: !(Maybe (JSONText Int64))
     , _vEntityValue   :: !(Maybe Entity)
-    , _vDoubleValue   :: !(Maybe Double)
+    , _vDoubleValue   :: !(Maybe (JSONText Double))
     , _vStringValue   :: !(Maybe Text)
     , _vListValue     :: !(Maybe [Value])
     , _vIndexed       :: !(Maybe Bool)
     , _vBooleanValue  :: !(Maybe Bool)
-    , _vMeaning       :: !(Maybe Int32)
-    , _vBlobValue     :: !(Maybe Word8)
+    , _vMeaning       :: !(Maybe (JSONText Int32))
+    , _vBlobValue     :: !(Maybe (JSONText Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
@@ -963,6 +973,7 @@ vIntegerValue :: Lens' Value (Maybe Int64)
 vIntegerValue
   = lens _vIntegerValue
       (\ s a -> s{_vIntegerValue = a})
+      . mapping _Coerce
 
 -- | An entity value. May have no key. May have a key with an incomplete key
 -- path. May have a reserved\/read-only key.
@@ -974,6 +985,7 @@ vEntityValue
 vDoubleValue :: Lens' Value (Maybe Double)
 vDoubleValue
   = lens _vDoubleValue (\ s a -> s{_vDoubleValue = a})
+      . mapping _Coerce
 
 -- | A UTF-8 encoded string value. When indexed is true, may have at most 500
 -- characters.
@@ -1007,13 +1019,16 @@ vBooleanValue
 
 -- | The meaning field is reserved and should not be used.
 vMeaning :: Lens' Value (Maybe Int32)
-vMeaning = lens _vMeaning (\ s a -> s{_vMeaning = a})
+vMeaning
+  = lens _vMeaning (\ s a -> s{_vMeaning = a}) .
+      mapping _Coerce
 
 -- | A blob value. May be a maximum of 1,000,000 bytes. When indexed is true,
 -- may have at most 500 bytes.
 vBlobValue :: Lens' Value (Maybe Word8)
 vBlobValue
-  = lens _vBlobValue (\ s a -> s{_vBlobValue = a})
+  = lens _vBlobValue (\ s a -> s{_vBlobValue = a}) .
+      mapping _Coerce
 
 instance FromJSON Value where
         parseJSON
@@ -1242,7 +1257,7 @@ instance ToJSON ResponseHeader where
 data KeyPathElement = KeyPathElement
     { _kpeKind :: !(Maybe Text)
     , _kpeName :: !(Maybe Text)
-    , _kpeId   :: !(Maybe Int64)
+    , _kpeId   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'KeyPathElement' with the minimum fields required to make a request.
@@ -1278,7 +1293,9 @@ kpeName = lens _kpeName (\ s a -> s{_kpeName = a})
 -- | The ID of the entity. Never equal to zero. Values less than zero are
 -- discouraged and will not be supported in the future.
 kpeId :: Lens' KeyPathElement (Maybe Int64)
-kpeId = lens _kpeId (\ s a -> s{_kpeId = a})
+kpeId
+  = lens _kpeId (\ s a -> s{_kpeId = a}) .
+      mapping _Coerce
 
 instance FromJSON KeyPathElement where
         parseJSON
@@ -1330,7 +1347,7 @@ instance ToJSON PropertyReference where
 --
 -- /See:/ 'gqlQueryArg' smart constructor.
 data GqlQueryArg = GqlQueryArg
-    { _gqaCursor :: !(Maybe Word8)
+    { _gqaCursor :: !(Maybe (JSONText Word8))
     , _gqaValue  :: !(Maybe Value)
     , _gqaName   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1355,7 +1372,8 @@ gqlQueryArg =
 
 gqaCursor :: Lens' GqlQueryArg (Maybe Word8)
 gqaCursor
-  = lens _gqaCursor (\ s a -> s{_gqaCursor = a})
+  = lens _gqaCursor (\ s a -> s{_gqaCursor = a}) .
+      mapping _Coerce
 
 gqaValue :: Lens' GqlQueryArg (Maybe Value)
 gqaValue = lens _gqaValue (\ s a -> s{_gqaValue = a})
@@ -1504,10 +1522,10 @@ instance ToJSON PropertyFilter where
 -- /See:/ 'query' smart constructor.
 data Query = Query
     { _qGroupBy     :: !(Maybe [PropertyReference])
-    , _qStartCursor :: !(Maybe Word8)
-    , _qOffSet      :: !(Maybe Int32)
-    , _qEndCursor   :: !(Maybe Word8)
-    , _qLimit       :: !(Maybe Int32)
+    , _qStartCursor :: !(Maybe (JSONText Word8))
+    , _qOffSet      :: !(Maybe (JSONText Int32))
+    , _qEndCursor   :: !(Maybe (JSONText Word8))
+    , _qLimit       :: !(Maybe (JSONText Int32))
     , _qProjection  :: !(Maybe [PropertyExpression])
     , _qFilter      :: !(Maybe Filter)
     , _qKinds       :: !(Maybe [KindExpression])
@@ -1563,22 +1581,28 @@ qGroupBy
 qStartCursor :: Lens' Query (Maybe Word8)
 qStartCursor
   = lens _qStartCursor (\ s a -> s{_qStartCursor = a})
+      . mapping _Coerce
 
 -- | The number of results to skip. Applies before limit, but after all other
 -- constraints (optional, defaults to 0).
 qOffSet :: Lens' Query (Maybe Int32)
-qOffSet = lens _qOffSet (\ s a -> s{_qOffSet = a})
+qOffSet
+  = lens _qOffSet (\ s a -> s{_qOffSet = a}) .
+      mapping _Coerce
 
 -- | An ending point for the query results. Optional. Query cursors are
 -- returned in query result batches.
 qEndCursor :: Lens' Query (Maybe Word8)
 qEndCursor
-  = lens _qEndCursor (\ s a -> s{_qEndCursor = a})
+  = lens _qEndCursor (\ s a -> s{_qEndCursor = a}) .
+      mapping _Coerce
 
 -- | The maximum number of results to return. Applies after all other
 -- constraints. Optional.
 qLimit :: Lens' Query (Maybe Int32)
-qLimit = lens _qLimit (\ s a -> s{_qLimit = a})
+qLimit
+  = lens _qLimit (\ s a -> s{_qLimit = a}) .
+      mapping _Coerce
 
 -- | The projection to return. If not set the entire entity is returned.
 qProjection :: Lens' Query [PropertyExpression]
@@ -1745,7 +1769,7 @@ instance ToJSON KindExpression where
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
-    , _roTransaction     :: !(Maybe Word8)
+    , _roTransaction     :: !(Maybe (JSONText Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
@@ -1777,6 +1801,7 @@ roTransaction :: Lens' ReadOptions (Maybe Word8)
 roTransaction
   = lens _roTransaction
       (\ s a -> s{_roTransaction = a})
+      . mapping _Coerce
 
 instance FromJSON ReadOptions where
         parseJSON
@@ -1930,7 +1955,7 @@ instance ToJSON Filter where
 data CommitRequest = CommitRequest
     { _crMode           :: !(Maybe CommitRequestMode)
     , _crMutation       :: !(Maybe Mutation)
-    , _crTransaction    :: !(Maybe Word8)
+    , _crTransaction    :: !(Maybe (JSONText Word8))
     , _crIgnoreReadOnly :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1971,6 +1996,7 @@ crTransaction :: Lens' CommitRequest (Maybe Word8)
 crTransaction
   = lens _crTransaction
       (\ s a -> s{_crTransaction = a})
+      . mapping _Coerce
 
 crIgnoreReadOnly :: Lens' CommitRequest (Maybe Bool)
 crIgnoreReadOnly

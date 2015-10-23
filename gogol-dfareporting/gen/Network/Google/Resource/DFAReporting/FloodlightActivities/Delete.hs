@@ -46,17 +46,17 @@ type FloodlightActivitiesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivities" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesDelete' smart constructor.
 data FloodlightActivitiesDelete = FloodlightActivitiesDelete
-    { _fadProFileId :: !Int64
-    , _fadId        :: !Int64
+    { _fadProFileId :: !(JSONText Int64)
+    , _fadId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesDelete' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ floodlightActivitiesDelete pFadProFileId_ pFadId_ =
 fadProFileId :: Lens' FloodlightActivitiesDelete Int64
 fadProFileId
   = lens _fadProFileId (\ s a -> s{_fadProFileId = a})
+      . _Coerce
 
 -- | Floodlight activity ID.
 fadId :: Lens' FloodlightActivitiesDelete Int64
-fadId = lens _fadId (\ s a -> s{_fadId = a})
+fadId
+  = lens _fadId (\ s a -> s{_fadId = a}) . _Coerce
 
 instance GoogleRequest FloodlightActivitiesDelete
          where

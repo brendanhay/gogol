@@ -53,7 +53,7 @@ type OperationsListResource =
                "operations" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OperationsListResponse
 
@@ -64,7 +64,7 @@ data OperationsList = OperationsList
     { _olProject    :: !Text
     , _olFilter     :: !(Maybe Text)
     , _olPageToken  :: !(Maybe Text)
-    , _olMaxResults :: !Word32
+    , _olMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
@@ -119,6 +119,7 @@ olPageToken
 olMaxResults :: Lens' OperationsList Word32
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest OperationsList where
         type Rs OperationsList = OperationsListResponse

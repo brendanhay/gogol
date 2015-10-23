@@ -60,12 +60,12 @@ type LayersAnnotationDataGetResource =
                  "data" :>
                    Capture "annotationDataId" Text :>
                      QueryParam "contentVersion" Text :>
-                       QueryParam "w" Int32 :>
-                         QueryParam "scale" Int32 :>
+                       QueryParam "w" (JSONText Int32) :>
+                         QueryParam "scale" (JSONText Int32) :>
                            QueryParam "locale" Text :>
                              QueryParam "allowWebDefinitions" Bool :>
                                QueryParam "source" Text :>
-                                 QueryParam "h" Int32 :>
+                                 QueryParam "h" (JSONText Int32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] AnnotationData
 
@@ -73,15 +73,15 @@ type LayersAnnotationDataGetResource =
 --
 -- /See:/ 'layersAnnotationDataGet' smart constructor.
 data LayersAnnotationDataGet = LayersAnnotationDataGet
-    { _ladgW                   :: !(Maybe Int32)
-    , _ladgScale               :: !(Maybe Int32)
+    { _ladgW                   :: !(Maybe (JSONText Int32))
+    , _ladgScale               :: !(Maybe (JSONText Int32))
     , _ladgLocale              :: !(Maybe Text)
     , _ladgContentVersion      :: !Text
     , _ladgAllowWebDefinitions :: !(Maybe Bool)
     , _ladgAnnotationDataId    :: !Text
     , _ladgVolumeId            :: !Text
     , _ladgSource              :: !(Maybe Text)
-    , _ladgH                   :: !(Maybe Int32)
+    , _ladgH                   :: !(Maybe (JSONText Int32))
     , _ladgLayerId             :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -131,12 +131,15 @@ layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeI
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.
 ladgW :: Lens' LayersAnnotationDataGet (Maybe Int32)
-ladgW = lens _ladgW (\ s a -> s{_ladgW = a})
+ladgW
+  = lens _ladgW (\ s a -> s{_ladgW = a}) .
+      mapping _Coerce
 
 -- | The requested scale for the image.
 ladgScale :: Lens' LayersAnnotationDataGet (Maybe Int32)
 ladgScale
-  = lens _ladgScale (\ s a -> s{_ladgScale = a})
+  = lens _ladgScale (\ s a -> s{_ladgScale = a}) .
+      mapping _Coerce
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
@@ -175,7 +178,9 @@ ladgSource
 -- | The requested pixel height for any images. If height is provided width
 -- must also be provided.
 ladgH :: Lens' LayersAnnotationDataGet (Maybe Int32)
-ladgH = lens _ladgH (\ s a -> s{_ladgH = a})
+ladgH
+  = lens _ladgH (\ s a -> s{_ladgH = a}) .
+      mapping _Coerce
 
 -- | The ID for the layer to get the annotations.
 ladgLayerId :: Lens' LayersAnnotationDataGet Text

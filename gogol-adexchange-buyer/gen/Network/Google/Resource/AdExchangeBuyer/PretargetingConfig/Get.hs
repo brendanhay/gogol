@@ -46,8 +46,8 @@ type PretargetingConfigGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "pretargetingconfigs" :>
-           Capture "accountId" Int64 :>
-             Capture "configId" Int64 :>
+           Capture "accountId" (JSONText Int64) :>
+             Capture "configId" (JSONText Int64) :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] PretargetingConfig
 
@@ -55,8 +55,8 @@ type PretargetingConfigGetResource =
 --
 -- /See:/ 'pretargetingConfigGet' smart constructor.
 data PretargetingConfigGet = PretargetingConfigGet
-    { _pcgAccountId :: !Int64
-    , _pcgConfigId  :: !Int64
+    { _pcgAccountId :: !(JSONText Int64)
+    , _pcgConfigId  :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigGet' with the minimum fields required to make a request.
@@ -80,11 +80,13 @@ pretargetingConfigGet pPcgAccountId_ pPcgConfigId_ =
 pcgAccountId :: Lens' PretargetingConfigGet Int64
 pcgAccountId
   = lens _pcgAccountId (\ s a -> s{_pcgAccountId = a})
+      . _Coerce
 
 -- | The specific id of the configuration to retrieve.
 pcgConfigId :: Lens' PretargetingConfigGet Int64
 pcgConfigId
-  = lens _pcgConfigId (\ s a -> s{_pcgConfigId = a})
+  = lens _pcgConfigId (\ s a -> s{_pcgConfigId = a}) .
+      _Coerce
 
 instance GoogleRequest PretargetingConfigGet where
         type Rs PretargetingConfigGet = PretargetingConfig

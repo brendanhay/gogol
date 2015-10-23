@@ -56,20 +56,20 @@ type ConversionGetResource =
      "doubleclicksearch" :>
        "v2" :>
          "agency" :>
-           Capture "agencyId" Int64 :>
+           Capture "agencyId" (JSONText Int64) :>
              "advertiser" :>
-               Capture "advertiserId" Int64 :>
+               Capture "advertiserId" (JSONText Int64) :>
                  "engine" :>
-                   Capture "engineAccountId" Int64 :>
+                   Capture "engineAccountId" (JSONText Int64) :>
                      "conversion" :>
-                       QueryParam "endDate" Int32 :>
-                         QueryParam "rowCount" Int32 :>
-                           QueryParam "startDate" Int32 :>
-                             QueryParam "startRow" Word32 :>
-                               QueryParam "adGroupId" Int64 :>
-                                 QueryParam "campaignId" Int64 :>
-                                   QueryParam "criterionId" Int64 :>
-                                     QueryParam "adId" Int64 :>
+                       QueryParam "endDate" (JSONText Int32) :>
+                         QueryParam "rowCount" (JSONText Int32) :>
+                           QueryParam "startDate" (JSONText Int32) :>
+                             QueryParam "startRow" (JSONText Word32) :>
+                               QueryParam "adGroupId" (JSONText Int64) :>
+                                 QueryParam "campaignId" (JSONText Int64) :>
+                                   QueryParam "criterionId" (JSONText Int64) :>
+                                     QueryParam "adId" (JSONText Int64) :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ConversionList
 
@@ -78,17 +78,17 @@ type ConversionGetResource =
 --
 -- /See:/ 'conversionGet' smart constructor.
 data ConversionGet = ConversionGet
-    { _cgAdGroupId       :: !(Maybe Int64)
-    , _cgEngineAccountId :: !Int64
-    , _cgAgencyId        :: !Int64
-    , _cgAdvertiserId    :: !Int64
-    , _cgEndDate         :: !Int32
-    , _cgCampaignId      :: !(Maybe Int64)
-    , _cgCriterionId     :: !(Maybe Int64)
-    , _cgStartDate       :: !Int32
-    , _cgStartRow        :: !Word32
-    , _cgAdId            :: !(Maybe Int64)
-    , _cgRowCount        :: !Int32
+    { _cgAdGroupId       :: !(Maybe (JSONText Int64))
+    , _cgEngineAccountId :: !(JSONText Int64)
+    , _cgAgencyId        :: !(JSONText Int64)
+    , _cgAdvertiserId    :: !(JSONText Int64)
+    , _cgEndDate         :: !(JSONText Int32)
+    , _cgCampaignId      :: !(Maybe (JSONText Int64))
+    , _cgCriterionId     :: !(Maybe (JSONText Int64))
+    , _cgStartDate       :: !(JSONText Int32)
+    , _cgStartRow        :: !(JSONText Word32)
+    , _cgAdId            :: !(Maybe (JSONText Int64))
+    , _cgRowCount        :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionGet' with the minimum fields required to make a request.
@@ -143,61 +143,73 @@ conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgS
 -- | Numeric ID of the ad group.
 cgAdGroupId :: Lens' ConversionGet (Maybe Int64)
 cgAdGroupId
-  = lens _cgAdGroupId (\ s a -> s{_cgAdGroupId = a})
+  = lens _cgAdGroupId (\ s a -> s{_cgAdGroupId = a}) .
+      mapping _Coerce
 
 -- | Numeric ID of the engine account.
 cgEngineAccountId :: Lens' ConversionGet Int64
 cgEngineAccountId
   = lens _cgEngineAccountId
       (\ s a -> s{_cgEngineAccountId = a})
+      . _Coerce
 
 -- | Numeric ID of the agency.
 cgAgencyId :: Lens' ConversionGet Int64
 cgAgencyId
-  = lens _cgAgencyId (\ s a -> s{_cgAgencyId = a})
+  = lens _cgAgencyId (\ s a -> s{_cgAgencyId = a}) .
+      _Coerce
 
 -- | Numeric ID of the advertiser.
 cgAdvertiserId :: Lens' ConversionGet Int64
 cgAdvertiserId
   = lens _cgAdvertiserId
       (\ s a -> s{_cgAdvertiserId = a})
+      . _Coerce
 
 -- | Last date (inclusive) on which to retrieve conversions. Format is
 -- yyyymmdd.
 cgEndDate :: Lens' ConversionGet Int32
 cgEndDate
-  = lens _cgEndDate (\ s a -> s{_cgEndDate = a})
+  = lens _cgEndDate (\ s a -> s{_cgEndDate = a}) .
+      _Coerce
 
 -- | Numeric ID of the campaign.
 cgCampaignId :: Lens' ConversionGet (Maybe Int64)
 cgCampaignId
   = lens _cgCampaignId (\ s a -> s{_cgCampaignId = a})
+      . mapping _Coerce
 
 -- | Numeric ID of the criterion.
 cgCriterionId :: Lens' ConversionGet (Maybe Int64)
 cgCriterionId
   = lens _cgCriterionId
       (\ s a -> s{_cgCriterionId = a})
+      . mapping _Coerce
 
 -- | First date (inclusive) on which to retrieve conversions. Format is
 -- yyyymmdd.
 cgStartDate :: Lens' ConversionGet Int32
 cgStartDate
-  = lens _cgStartDate (\ s a -> s{_cgStartDate = a})
+  = lens _cgStartDate (\ s a -> s{_cgStartDate = a}) .
+      _Coerce
 
 -- | The 0-based starting index for retrieving conversions results.
 cgStartRow :: Lens' ConversionGet Word32
 cgStartRow
-  = lens _cgStartRow (\ s a -> s{_cgStartRow = a})
+  = lens _cgStartRow (\ s a -> s{_cgStartRow = a}) .
+      _Coerce
 
 -- | Numeric ID of the ad.
 cgAdId :: Lens' ConversionGet (Maybe Int64)
-cgAdId = lens _cgAdId (\ s a -> s{_cgAdId = a})
+cgAdId
+  = lens _cgAdId (\ s a -> s{_cgAdId = a}) .
+      mapping _Coerce
 
 -- | The number of conversions to return per call.
 cgRowCount :: Lens' ConversionGet Int32
 cgRowCount
-  = lens _cgRowCount (\ s a -> s{_cgRowCount = a})
+  = lens _cgRowCount (\ s a -> s{_cgRowCount = a}) .
+      _Coerce
 
 instance GoogleRequest ConversionGet where
         type Rs ConversionGet = ConversionList

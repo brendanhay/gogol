@@ -54,7 +54,7 @@ type FirewallsListResource =
                "firewalls" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] FirewallList
 
 -- | Retrieves the list of firewall resources available to the specified
@@ -65,7 +65,7 @@ data FirewallsList = FirewallsList
     { _flProject    :: !Text
     , _flFilter     :: !(Maybe Text)
     , _flPageToken  :: !(Maybe Text)
-    , _flMaxResults :: !Word32
+    , _flMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsList' with the minimum fields required to make a request.
@@ -120,6 +120,7 @@ flPageToken
 flMaxResults :: Lens' FirewallsList Word32
 flMaxResults
   = lens _flMaxResults (\ s a -> s{_flMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest FirewallsList where
         type Rs FirewallsList = FirewallList

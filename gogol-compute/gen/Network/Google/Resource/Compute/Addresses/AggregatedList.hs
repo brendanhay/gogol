@@ -53,7 +53,7 @@ type AddressesAggregatedListResource =
                "addresses" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] AddressAggregatedList
 
@@ -64,7 +64,7 @@ data AddressesAggregatedList = AddressesAggregatedList
     { _aalProject    :: !Text
     , _aalFilter     :: !(Maybe Text)
     , _aalPageToken  :: !(Maybe Text)
-    , _aalMaxResults :: !Word32
+    , _aalMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesAggregatedList' with the minimum fields required to make a request.
@@ -121,6 +121,7 @@ aalMaxResults :: Lens' AddressesAggregatedList Word32
 aalMaxResults
   = lens _aalMaxResults
       (\ s a -> s{_aalMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest AddressesAggregatedList where
         type Rs AddressesAggregatedList =

@@ -54,7 +54,7 @@ type GlobalOperationsListResource =
                "operations" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
@@ -65,7 +65,7 @@ data GlobalOperationsList = GlobalOperationsList
     { _golProject    :: !Text
     , _golFilter     :: !(Maybe Text)
     , _golPageToken  :: !(Maybe Text)
-    , _golMaxResults :: !Word32
+    , _golMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ golMaxResults :: Lens' GlobalOperationsList Word32
 golMaxResults
   = lens _golMaxResults
       (\ s a -> s{_golMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest GlobalOperationsList where
         type Rs GlobalOperationsList = OperationList

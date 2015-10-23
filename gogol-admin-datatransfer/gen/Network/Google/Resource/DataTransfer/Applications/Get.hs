@@ -46,14 +46,14 @@ type ApplicationsGetResource =
        "datatransfer" :>
          "v1" :>
            "applications" :>
-             Capture "applicationId" Int64 :>
+             Capture "applicationId" (JSONText Int64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Retrieves information about an application for the given application ID.
 --
 -- /See:/ 'applicationsGet' smart constructor.
 newtype ApplicationsGet = ApplicationsGet
-    { _agApplicationId :: Int64
+    { _agApplicationId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.
@@ -74,6 +74,7 @@ agApplicationId :: Lens' ApplicationsGet Int64
 agApplicationId
   = lens _agApplicationId
       (\ s a -> s{_agApplicationId = a})
+      . _Coerce
 
 instance GoogleRequest ApplicationsGet where
         type Rs ApplicationsGet = Application

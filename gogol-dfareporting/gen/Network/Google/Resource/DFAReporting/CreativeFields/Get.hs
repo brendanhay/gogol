@@ -46,17 +46,17 @@ type CreativeFieldsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeFields" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] CreativeField
 
 -- | Gets one creative field by ID.
 --
 -- /See:/ 'creativeFieldsGet' smart constructor.
 data CreativeFieldsGet = CreativeFieldsGet
-    { _cfgProFileId :: !Int64
-    , _cfgId        :: !Int64
+    { _cfgProFileId :: !(JSONText Int64)
+    , _cfgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ creativeFieldsGet pCfgProFileId_ pCfgId_ =
 cfgProFileId :: Lens' CreativeFieldsGet Int64
 cfgProFileId
   = lens _cfgProFileId (\ s a -> s{_cfgProFileId = a})
+      . _Coerce
 
 -- | Creative Field ID
 cfgId :: Lens' CreativeFieldsGet Int64
-cfgId = lens _cfgId (\ s a -> s{_cfgId = a})
+cfgId
+  = lens _cfgId (\ s a -> s{_cfgId = a}) . _Coerce
 
 instance GoogleRequest CreativeFieldsGet where
         type Rs CreativeFieldsGet = CreativeField

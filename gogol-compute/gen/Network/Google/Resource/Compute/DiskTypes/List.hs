@@ -56,7 +56,7 @@ type DiskTypesListResource =
                  "diskTypes" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] DiskTypeList
 
 -- | Retrieves the list of disk type resources available to the specified
@@ -68,7 +68,7 @@ data DiskTypesList = DiskTypesList
     , _dtlZone       :: !Text
     , _dtlFilter     :: !(Maybe Text)
     , _dtlPageToken  :: !(Maybe Text)
-    , _dtlMaxResults :: !Word32
+    , _dtlMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesList' with the minimum fields required to make a request.
@@ -133,6 +133,7 @@ dtlMaxResults :: Lens' DiskTypesList Word32
 dtlMaxResults
   = lens _dtlMaxResults
       (\ s a -> s{_dtlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest DiskTypesList where
         type Rs DiskTypesList = DiskTypeList

@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 type ProductsGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "products" :>
              Capture "productId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] Product
@@ -54,7 +54,7 @@ type ProductsGetResource =
 --
 -- /See:/ 'productsGet' smart constructor.
 data ProductsGet = ProductsGet
-    { _pggMerchantId :: !Word64
+    { _pggMerchantId :: !(JSONText Word64)
     , _pggProductId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,6 +80,7 @@ pggMerchantId :: Lens' ProductsGet Word64
 pggMerchantId
   = lens _pggMerchantId
       (\ s a -> s{_pggMerchantId = a})
+      . _Coerce
 
 -- | The ID of the product.
 pggProductId :: Lens' ProductsGet Text

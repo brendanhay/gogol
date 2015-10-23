@@ -154,11 +154,11 @@ instance ToJSON CarrierData where
 -- /See:/ 'freeBaggageAllowance' smart constructor.
 data FreeBaggageAllowance = FreeBaggageAllowance
     { _fbaKind          :: !Text
-    , _fbaPounds        :: !(Maybe Int32)
+    , _fbaPounds        :: !(Maybe (JSONText Int32))
     , _fbaBagDescriptor :: !(Maybe [BagDescriptor])
-    , _fbaKilosPerPiece :: !(Maybe Int32)
-    , _fbaKilos         :: !(Maybe Int32)
-    , _fbaPieces        :: !(Maybe Int32)
+    , _fbaKilosPerPiece :: !(Maybe (JSONText Int32))
+    , _fbaKilos         :: !(Maybe (JSONText Int32))
+    , _fbaPieces        :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBaggageAllowance' with the minimum fields required to make a request.
@@ -196,7 +196,8 @@ fbaKind = lens _fbaKind (\ s a -> s{_fbaKind = a})
 -- | The number of pounds of free baggage allowed.
 fbaPounds :: Lens' FreeBaggageAllowance (Maybe Int32)
 fbaPounds
-  = lens _fbaPounds (\ s a -> s{_fbaPounds = a})
+  = lens _fbaPounds (\ s a -> s{_fbaPounds = a}) .
+      mapping _Coerce
 
 -- | A representation of a type of bag, such as an ATPCo subcode, Commercial
 -- Name, or other description.
@@ -212,15 +213,19 @@ fbaKilosPerPiece :: Lens' FreeBaggageAllowance (Maybe Int32)
 fbaKilosPerPiece
   = lens _fbaKilosPerPiece
       (\ s a -> s{_fbaKilosPerPiece = a})
+      . mapping _Coerce
 
 -- | The maximum number of kilos all the free baggage together may weigh.
 fbaKilos :: Lens' FreeBaggageAllowance (Maybe Int32)
-fbaKilos = lens _fbaKilos (\ s a -> s{_fbaKilos = a})
+fbaKilos
+  = lens _fbaKilos (\ s a -> s{_fbaKilos = a}) .
+      mapping _Coerce
 
 -- | The number of free pieces of baggage allowed.
 fbaPieces :: Lens' FreeBaggageAllowance (Maybe Int32)
 fbaPieces
-  = lens _fbaPieces (\ s a -> s{_fbaPieces = a})
+  = lens _fbaPieces (\ s a -> s{_fbaPieces = a}) .
+      mapping _Coerce
 
 instance FromJSON FreeBaggageAllowance where
         parseJSON
@@ -478,16 +483,16 @@ data LegInfo = LegInfo
     , _liKind                :: !Text
     , _liAircraft            :: !(Maybe Text)
     , _liArrivalTime         :: !(Maybe Text)
-    , _liOnTimePerformance   :: !(Maybe Int32)
+    , _liOnTimePerformance   :: !(Maybe (JSONText Int32))
     , _liOperatingDisclosure :: !(Maybe Text)
     , _liMeal                :: !(Maybe Text)
     , _liId                  :: !(Maybe Text)
     , _liOriginTerminal      :: !(Maybe Text)
     , _liChangePlane         :: !(Maybe Bool)
     , _liDestinationTerminal :: !(Maybe Text)
-    , _liConnectionDuration  :: !(Maybe Int32)
-    , _liDuration            :: !(Maybe Int32)
-    , _liMileage             :: !(Maybe Int32)
+    , _liConnectionDuration  :: !(Maybe (JSONText Int32))
+    , _liDuration            :: !(Maybe (JSONText Int32))
+    , _liMileage             :: !(Maybe (JSONText Int32))
     , _liDePartureTime       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -591,6 +596,7 @@ liOnTimePerformance :: Lens' LegInfo (Maybe Int32)
 liOnTimePerformance
   = lens _liOnTimePerformance
       (\ s a -> s{_liOnTimePerformance = a})
+      . mapping _Coerce
 
 -- | Department of Transportation disclosure information on the actual
 -- operator of a flight in a code share. (A code share refers to a
@@ -635,16 +641,19 @@ liConnectionDuration :: Lens' LegInfo (Maybe Int32)
 liConnectionDuration
   = lens _liConnectionDuration
       (\ s a -> s{_liConnectionDuration = a})
+      . mapping _Coerce
 
 -- | The scheduled travelling time from the origin to the destination.
 liDuration :: Lens' LegInfo (Maybe Int32)
 liDuration
-  = lens _liDuration (\ s a -> s{_liDuration = a})
+  = lens _liDuration (\ s a -> s{_liDuration = a}) .
+      mapping _Coerce
 
 -- | The number of miles in this leg.
 liMileage :: Lens' LegInfo (Maybe Int32)
 liMileage
-  = lens _liMileage (\ s a -> s{_liMileage = a})
+  = lens _liMileage (\ s a -> s{_liMileage = a}) .
+      mapping _Coerce
 
 -- | The scheduled departure time of the leg, local to the point of
 -- departure.
@@ -850,7 +859,7 @@ instance ToJSON SegmentPricing where
 data SliceInfo = SliceInfo
     { _siKind     :: !Text
     , _siSegment  :: !(Maybe [SegmentInfo])
-    , _siDuration :: !(Maybe Int32)
+    , _siDuration :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SliceInfo' with the minimum fields required to make a request.
@@ -889,7 +898,8 @@ siSegment
 -- | The duration of the slice in minutes.
 siDuration :: Lens' SliceInfo (Maybe Int32)
 siDuration
-  = lens _siDuration (\ s a -> s{_siDuration = a})
+  = lens _siDuration (\ s a -> s{_siDuration = a}) .
+      mapping _Coerce
 
 instance FromJSON SliceInfo where
         parseJSON
@@ -1044,7 +1054,7 @@ instance ToJSON TripOption where
 data BagDescriptor = BagDescriptor
     { _bdKind           :: !Text
     , _bdCommercialName :: !(Maybe Text)
-    , _bdCount          :: !(Maybe Int32)
+    , _bdCount          :: !(Maybe (JSONText Int32))
     , _bdDescription    :: !(Maybe [Text])
     , _bdSubcode        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1086,7 +1096,9 @@ bdCommercialName
 
 -- | How many of this type of bag will be checked on this flight.
 bdCount :: Lens' BagDescriptor (Maybe Int32)
-bdCount = lens _bdCount (\ s a -> s{_bdCount = a})
+bdCount
+  = lens _bdCount (\ s a -> s{_bdCount = a}) .
+      mapping _Coerce
 
 -- | A description of the baggage.
 bdDescription :: Lens' BagDescriptor [Text]
@@ -1196,12 +1208,12 @@ instance ToJSON CityData where
 --
 -- /See:/ 'passengerCounts' smart constructor.
 data PassengerCounts = PassengerCounts
-    { _pcSeniorCount       :: !(Maybe Int32)
+    { _pcSeniorCount       :: !(Maybe (JSONText Int32))
     , _pcKind              :: !Text
-    , _pcInfantInLapCount  :: !(Maybe Int32)
-    , _pcChildCount        :: !(Maybe Int32)
-    , _pcInfantInSeatCount :: !(Maybe Int32)
-    , _pcAdultCount        :: !(Maybe Int32)
+    , _pcInfantInLapCount  :: !(Maybe (JSONText Int32))
+    , _pcChildCount        :: !(Maybe (JSONText Int32))
+    , _pcInfantInSeatCount :: !(Maybe (JSONText Int32))
+    , _pcAdultCount        :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PassengerCounts' with the minimum fields required to make a request.
@@ -1236,6 +1248,7 @@ pcSeniorCount :: Lens' PassengerCounts (Maybe Int32)
 pcSeniorCount
   = lens _pcSeniorCount
       (\ s a -> s{_pcSeniorCount = a})
+      . mapping _Coerce
 
 -- | Identifies this as a passenger count object, representing the number of
 -- passengers. Value: the fixed string qpxexpress#passengerCounts.
@@ -1248,22 +1261,26 @@ pcInfantInLapCount :: Lens' PassengerCounts (Maybe Int32)
 pcInfantInLapCount
   = lens _pcInfantInLapCount
       (\ s a -> s{_pcInfantInLapCount = a})
+      . mapping _Coerce
 
 -- | The number of passengers that are children.
 pcChildCount :: Lens' PassengerCounts (Maybe Int32)
 pcChildCount
   = lens _pcChildCount (\ s a -> s{_pcChildCount = a})
+      . mapping _Coerce
 
 -- | The number of passengers that are infants each assigned a seat.
 pcInfantInSeatCount :: Lens' PassengerCounts (Maybe Int32)
 pcInfantInSeatCount
   = lens _pcInfantInSeatCount
       (\ s a -> s{_pcInfantInSeatCount = a})
+      . mapping _Coerce
 
 -- | The number of passengers that are adults.
 pcAdultCount :: Lens' PassengerCounts (Maybe Int32)
 pcAdultCount
   = lens _pcAdultCount (\ s a -> s{_pcAdultCount = a})
+      . mapping _Coerce
 
 instance FromJSON PassengerCounts where
         parseJSON
@@ -1297,14 +1314,14 @@ instance ToJSON PassengerCounts where
 data SegmentInfo = SegmentInfo
     { _sBookingCode                 :: !(Maybe Text)
     , _sCabin                       :: !(Maybe Text)
-    , _sBookingCodeCount            :: !(Maybe Int32)
+    , _sBookingCodeCount            :: !(Maybe (JSONText Int32))
     , _sSubjectToGovernmentApproval :: !(Maybe Bool)
     , _sKind                        :: !Text
     , _sFlight                      :: !(Maybe FlightInfo)
     , _sId                          :: !(Maybe Text)
     , _sMarriedSegmentGroup         :: !(Maybe Text)
-    , _sConnectionDuration          :: !(Maybe Int32)
-    , _sDuration                    :: !(Maybe Int32)
+    , _sConnectionDuration          :: !(Maybe (JSONText Int32))
+    , _sDuration                    :: !(Maybe (JSONText Int32))
     , _sLeg                         :: !(Maybe [LegInfo])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1364,6 +1381,7 @@ sBookingCodeCount :: Lens' SegmentInfo (Maybe Int32)
 sBookingCodeCount
   = lens _sBookingCodeCount
       (\ s a -> s{_sBookingCodeCount = a})
+      . mapping _Coerce
 
 -- | Whether the operation of this segment remains subject to government
 -- approval.
@@ -1408,11 +1426,13 @@ sConnectionDuration :: Lens' SegmentInfo (Maybe Int32)
 sConnectionDuration
   = lens _sConnectionDuration
       (\ s a -> s{_sConnectionDuration = a})
+      . mapping _Coerce
 
 -- | The duration of the flight segment in minutes.
 sDuration :: Lens' SegmentInfo (Maybe Int32)
 sDuration
-  = lens _sDuration (\ s a -> s{_sDuration = a})
+  = lens _sDuration (\ s a -> s{_sDuration = a}) .
+      mapping _Coerce
 
 -- | The legs composing this segment.
 sLeg :: Lens' SegmentInfo [LegInfo]
@@ -1981,7 +2001,7 @@ data TripOptionsRequest = TripOptionsRequest
     { _torRefundable  :: !(Maybe Bool)
     , _torSaleCountry :: !(Maybe Text)
     , _torPassengers  :: !(Maybe PassengerCounts)
-    , _torSolutions   :: !(Maybe Int32)
+    , _torSolutions   :: !(Maybe (JSONText Int32))
     , _torSlice       :: !(Maybe [SliceInput])
     , _torMaxPrice    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2036,6 +2056,7 @@ torPassengers
 torSolutions :: Lens' TripOptionsRequest (Maybe Int32)
 torSolutions
   = lens _torSolutions (\ s a -> s{_torSolutions = a})
+      . mapping _Coerce
 
 -- | The slices that make up the itinerary of this trip. A slice represents a
 -- traveler\'s intent, the portion of a low-fare search corresponding to a
@@ -2085,11 +2106,11 @@ instance ToJSON TripOptionsRequest where
 data SliceInput = SliceInput
     { _sliDestination            :: !(Maybe Text)
     , _sliOrigin                 :: !(Maybe Text)
-    , _sliMaxStops               :: !(Maybe Int32)
+    , _sliMaxStops               :: !(Maybe (JSONText Int32))
     , _sliKind                   :: !Text
     , _sliProhibitedCarrier      :: !(Maybe [Text])
     , _sliDate                   :: !(Maybe Text)
-    , _sliMaxConnectionDuration  :: !(Maybe Int32)
+    , _sliMaxConnectionDuration  :: !(Maybe (JSONText Int32))
     , _sliPreferredCabin         :: !(Maybe Text)
     , _sliPermittedDePartureTime :: !(Maybe TimeOfDayRange)
     , _sliPermittedCarrier       :: !(Maybe [Text])
@@ -2152,7 +2173,8 @@ sliOrigin
 -- | The maximum number of stops you are willing to accept in this slice.
 sliMaxStops :: Lens' SliceInput (Maybe Int32)
 sliMaxStops
-  = lens _sliMaxStops (\ s a -> s{_sliMaxStops = a})
+  = lens _sliMaxStops (\ s a -> s{_sliMaxStops = a}) .
+      mapping _Coerce
 
 -- | Identifies this as a slice input object, representing the criteria a
 -- desired slice must satisfy. Value: the fixed string
@@ -2179,6 +2201,7 @@ sliMaxConnectionDuration :: Lens' SliceInput (Maybe Int32)
 sliMaxConnectionDuration
   = lens _sliMaxConnectionDuration
       (\ s a -> s{_sliMaxConnectionDuration = a})
+      . mapping _Coerce
 
 -- | Prefer solutions that book in this cabin for this slice. Allowed values
 -- are COACH, PREMIUM_COACH, BUSINESS, and FIRST.

@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 type ProductstatusesGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "productstatuses" :>
              Capture "productId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] ProductStatus
@@ -54,7 +54,7 @@ type ProductstatusesGetResource =
 --
 -- /See:/ 'productstatusesGet' smart constructor.
 data ProductstatusesGet = ProductstatusesGet
-    { _pgMerchantId :: !Word64
+    { _pgMerchantId :: !(JSONText Word64)
     , _pgProductId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,6 +79,7 @@ productstatusesGet pPgMerchantId_ pPgProductId_ =
 pgMerchantId :: Lens' ProductstatusesGet Word64
 pgMerchantId
   = lens _pgMerchantId (\ s a -> s{_pgMerchantId = a})
+      . _Coerce
 
 -- | The ID of the product.
 pgProductId :: Lens' ProductstatusesGet Text

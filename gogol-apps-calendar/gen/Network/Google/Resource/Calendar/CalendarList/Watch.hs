@@ -61,7 +61,7 @@ type CalendarListWatchResource =
                      QueryParam "showDeleted" Bool :>
                        QueryParam "showHidden" Bool :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" Int32 :>
+                           QueryParam "maxResults" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
@@ -75,7 +75,7 @@ data CalendarListWatch = CalendarListWatch
     , _clwPayload       :: !Channel
     , _clwShowHidden    :: !(Maybe Bool)
     , _clwPageToken     :: !(Maybe Text)
-    , _clwMaxResults    :: !(Maybe Int32)
+    , _clwMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListWatch' with the minimum fields required to make a request.
@@ -163,6 +163,7 @@ clwMaxResults :: Lens' CalendarListWatch (Maybe Int32)
 clwMaxResults
   = lens _clwMaxResults
       (\ s a -> s{_clwMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest CalendarListWatch where
         type Rs CalendarListWatch = Channel

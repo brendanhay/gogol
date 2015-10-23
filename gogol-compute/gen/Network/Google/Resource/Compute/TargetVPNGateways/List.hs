@@ -56,7 +56,7 @@ type TargetVPNGatewaysListResource =
                  "targetVpnGateways" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TargetVPNGatewayList
 
@@ -69,7 +69,7 @@ data TargetVPNGatewaysList = TargetVPNGatewaysList
     , _tvglFilter     :: !(Maybe Text)
     , _tvglRegion     :: !Text
     , _tvglPageToken  :: !(Maybe Text)
-    , _tvglMaxResults :: !Word32
+    , _tvglMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysList' with the minimum fields required to make a request.
@@ -136,6 +136,7 @@ tvglMaxResults :: Lens' TargetVPNGatewaysList Word32
 tvglMaxResults
   = lens _tvglMaxResults
       (\ s a -> s{_tvglMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest TargetVPNGatewaysList where
         type Rs TargetVPNGatewaysList = TargetVPNGatewayList

@@ -54,11 +54,11 @@ type AccountUserProFilesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "accountUserProfiles" :>
-               QueryParam "userRoleId" Int64 :>
+               QueryParam "userRoleId" (JSONText Int64) :>
                  QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
+                   QueryParams "ids" (JSONText Int64) :>
                      QueryParam "sortOrder"
                        AccountUserProFilesListSortOrder
                        :>
@@ -67,8 +67,8 @@ type AccountUserProFilesListResource =
                            QueryParam "sortField"
                              AccountUserProFilesListSortField
                              :>
-                             QueryParam "subaccountId" Int64 :>
-                               QueryParam "maxResults" Int32 :>
+                             QueryParam "subaccountId" (JSONText Int64) :>
+                               QueryParam "maxResults" (JSONText Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] AccountUserProFilesListResponse
 
@@ -76,16 +76,16 @@ type AccountUserProFilesListResource =
 --
 -- /See:/ 'accountUserProFilesList' smart constructor.
 data AccountUserProFilesList = AccountUserProFilesList
-    { _aupflUserRoleId   :: !(Maybe Int64)
+    { _aupflUserRoleId   :: !(Maybe (JSONText Int64))
     , _aupflSearchString :: !(Maybe Text)
-    , _aupflIds          :: !(Maybe [Int64])
-    , _aupflProFileId    :: !Int64
+    , _aupflIds          :: !(Maybe [JSONText Int64])
+    , _aupflProFileId    :: !(JSONText Int64)
     , _aupflSortOrder    :: !(Maybe AccountUserProFilesListSortOrder)
     , _aupflActive       :: !(Maybe Bool)
     , _aupflPageToken    :: !(Maybe Text)
     , _aupflSortField    :: !(Maybe AccountUserProFilesListSortField)
-    , _aupflSubAccountId :: !(Maybe Int64)
-    , _aupflMaxResults   :: !(Maybe Int32)
+    , _aupflSubAccountId :: !(Maybe (JSONText Int64))
+    , _aupflMaxResults   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProFilesList' with the minimum fields required to make a request.
@@ -133,6 +133,7 @@ aupflUserRoleId :: Lens' AccountUserProFilesList (Maybe Int64)
 aupflUserRoleId
   = lens _aupflUserRoleId
       (\ s a -> s{_aupflUserRoleId = a})
+      . mapping _Coerce
 
 -- | Allows searching for objects by name, ID or email. Wildcards (*) are
 -- allowed. For example, \"user profile*2015\" will return objects with
@@ -158,6 +159,7 @@ aupflProFileId :: Lens' AccountUserProFilesList Int64
 aupflProFileId
   = lens _aupflProFileId
       (\ s a -> s{_aupflProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 aupflSortOrder :: Lens' AccountUserProFilesList (Maybe AccountUserProFilesListSortOrder)
@@ -187,12 +189,14 @@ aupflSubAccountId :: Lens' AccountUserProFilesList (Maybe Int64)
 aupflSubAccountId
   = lens _aupflSubAccountId
       (\ s a -> s{_aupflSubAccountId = a})
+      . mapping _Coerce
 
 -- | Maximum number of results to return.
 aupflMaxResults :: Lens' AccountUserProFilesList (Maybe Int32)
 aupflMaxResults
   = lens _aupflMaxResults
       (\ s a -> s{_aupflMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountUserProFilesList where
         type Rs AccountUserProFilesList =

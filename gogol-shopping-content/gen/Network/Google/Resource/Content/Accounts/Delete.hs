@@ -46,9 +46,9 @@ import           Network.Google.ShoppingContent.Types
 type AccountsDeleteResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accounts" :>
-             Capture "accountId" Word64 :>
+             Capture "accountId" (JSONText Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -56,8 +56,8 @@ type AccountsDeleteResource =
 --
 -- /See:/ 'accountsDelete' smart constructor.
 data AccountsDelete = AccountsDelete
-    { _adMerchantId :: !Word64
-    , _adAccountId  :: !Word64
+    { _adMerchantId :: !(JSONText Word64)
+    , _adAccountId  :: !(JSONText Word64)
     , _adDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -85,11 +85,13 @@ accountsDelete pAdMerchantId_ pAdAccountId_ =
 adMerchantId :: Lens' AccountsDelete Word64
 adMerchantId
   = lens _adMerchantId (\ s a -> s{_adMerchantId = a})
+      . _Coerce
 
 -- | The ID of the account.
 adAccountId :: Lens' AccountsDelete Word64
 adAccountId
-  = lens _adAccountId (\ s a -> s{_adAccountId = a})
+  = lens _adAccountId (\ s a -> s{_adAccountId = a}) .
+      _Coerce
 
 -- | Flag to run the request in dry-run mode.
 adDryRun :: Lens' AccountsDelete (Maybe Bool)

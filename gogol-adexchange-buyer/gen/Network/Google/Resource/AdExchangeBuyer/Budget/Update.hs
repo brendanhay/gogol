@@ -48,8 +48,8 @@ type BudgetUpdateResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "billinginfo" :>
-           Capture "accountId" Int64 :>
-             Capture "billingId" Int64 :>
+           Capture "accountId" (JSONText Int64) :>
+             Capture "billingId" (JSONText Int64) :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Budget :> Put '[JSON] Budget
 
@@ -59,8 +59,8 @@ type BudgetUpdateResource =
 -- /See:/ 'budgetUpdate' smart constructor.
 data BudgetUpdate = BudgetUpdate
     { _buPayload   :: !Budget
-    , _buAccountId :: !Int64
-    , _buBillingId :: !Int64
+    , _buAccountId :: !(JSONText Int64)
+    , _buBillingId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetUpdate' with the minimum fields required to make a request.
@@ -92,12 +92,14 @@ buPayload
 -- | The account id associated with the budget being updated.
 buAccountId :: Lens' BudgetUpdate Int64
 buAccountId
-  = lens _buAccountId (\ s a -> s{_buAccountId = a})
+  = lens _buAccountId (\ s a -> s{_buAccountId = a}) .
+      _Coerce
 
 -- | The billing id associated with the budget being updated.
 buBillingId :: Lens' BudgetUpdate Int64
 buBillingId
-  = lens _buBillingId (\ s a -> s{_buBillingId = a})
+  = lens _buBillingId (\ s a -> s{_buBillingId = a}) .
+      _Coerce
 
 instance GoogleRequest BudgetUpdate where
         type Rs BudgetUpdate = Budget

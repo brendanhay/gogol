@@ -46,7 +46,7 @@ type DealsGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "deals" :>
-           Capture "dealId" Int64 :>
+           Capture "dealId" (JSONText Int64) :>
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON]
                  GetFinalizedNegotiationByExternalDealIdRequest
@@ -57,7 +57,7 @@ type DealsGetResource =
 -- /See:/ 'dealsGet' smart constructor.
 data DealsGet = DealsGet
     { _dgPayload :: !GetFinalizedNegotiationByExternalDealIdRequest
-    , _dgDealId  :: !Int64
+    , _dgDealId  :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealsGet' with the minimum fields required to make a request.
@@ -83,7 +83,9 @@ dgPayload
   = lens _dgPayload (\ s a -> s{_dgPayload = a})
 
 dgDealId :: Lens' DealsGet Int64
-dgDealId = lens _dgDealId (\ s a -> s{_dgDealId = a})
+dgDealId
+  = lens _dgDealId (\ s a -> s{_dgDealId = a}) .
+      _Coerce
 
 instance GoogleRequest DealsGet where
         type Rs DealsGet = NegotiationDTO

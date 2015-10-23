@@ -48,14 +48,14 @@ type TemplateGetResource =
          "tables" :>
            Capture "tableId" Text :>
              "templates" :>
-               Capture "templateId" Int32 :>
+               Capture "templateId" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Template
 
 -- | Retrieves a specific template by its id
 --
 -- /See:/ 'templateGet' smart constructor.
 data TemplateGet = TemplateGet
-    { _temeTemplateId :: !Int32
+    { _temeTemplateId :: !(JSONText Int32)
     , _temeTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ temeTemplateId :: Lens' TemplateGet Int32
 temeTemplateId
   = lens _temeTemplateId
       (\ s a -> s{_temeTemplateId = a})
+      . _Coerce
 
 -- | Table to which the template belongs
 temeTableId :: Lens' TemplateGet Text

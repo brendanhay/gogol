@@ -25,7 +25,7 @@ import           Network.Google.Prelude
 data TokenInfo = TokenInfo
     { _tiAudience      :: !(Maybe Text)
     , _tiEmail         :: !(Maybe Text)
-    , _tiExpiresIn     :: !(Maybe Int32)
+    , _tiExpiresIn     :: !(Maybe (JSONText Int32))
     , _tiAccessType    :: !(Maybe Text)
     , _tiScope         :: !(Maybe Text)
     , _tiVerifiedEmail :: !(Maybe Bool)
@@ -84,7 +84,8 @@ tiEmail = lens _tiEmail (\ s a -> s{_tiEmail = a})
 -- | The expiry time of the token, as number of seconds left until expiry.
 tiExpiresIn :: Lens' TokenInfo (Maybe Int32)
 tiExpiresIn
-  = lens _tiExpiresIn (\ s a -> s{_tiExpiresIn = a})
+  = lens _tiExpiresIn (\ s a -> s{_tiExpiresIn = a}) .
+      mapping _Coerce
 
 -- | The access type granted with this token. It can be offline or online.
 tiAccessType :: Lens' TokenInfo (Maybe Text)

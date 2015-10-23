@@ -53,7 +53,7 @@ type ForwardingRulesAggregatedListResource =
                "forwardingRules" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ForwardingRuleAggregatedList
 
@@ -64,7 +64,7 @@ data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList
     { _fralProject    :: !Text
     , _fralFilter     :: !(Maybe Text)
     , _fralPageToken  :: !(Maybe Text)
-    , _fralMaxResults :: !Word32
+    , _fralMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesAggregatedList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ fralMaxResults :: Lens' ForwardingRulesAggregatedList Word32
 fralMaxResults
   = lens _fralMaxResults
       (\ s a -> s{_fralMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest ForwardingRulesAggregatedList
          where

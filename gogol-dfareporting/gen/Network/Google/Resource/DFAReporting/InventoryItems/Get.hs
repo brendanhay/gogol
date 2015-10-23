@@ -47,20 +47,20 @@ type InventoryItemsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "projects" :>
-               Capture "projectId" Int64 :>
+               Capture "projectId" (JSONText Int64) :>
                  "inventoryItems" :>
-                   Capture "id" Int64 :>
+                   Capture "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] InventoryItem
 
 -- | Gets one inventory item by ID.
 --
 -- /See:/ 'inventoryItemsGet' smart constructor.
 data InventoryItemsGet = InventoryItemsGet
-    { _iigProFileId :: !Int64
-    , _iigId        :: !Int64
-    , _iigProjectId :: !Int64
+    { _iigProFileId :: !(JSONText Int64)
+    , _iigId        :: !(JSONText Int64)
+    , _iigProjectId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsGet' with the minimum fields required to make a request.
@@ -88,15 +88,18 @@ inventoryItemsGet pIigProFileId_ pIigId_ pIigProjectId_ =
 iigProFileId :: Lens' InventoryItemsGet Int64
 iigProFileId
   = lens _iigProFileId (\ s a -> s{_iigProFileId = a})
+      . _Coerce
 
 -- | Inventory item ID.
 iigId :: Lens' InventoryItemsGet Int64
-iigId = lens _iigId (\ s a -> s{_iigId = a})
+iigId
+  = lens _iigId (\ s a -> s{_iigId = a}) . _Coerce
 
 -- | Project ID for order documents.
 iigProjectId :: Lens' InventoryItemsGet Int64
 iigProjectId
   = lens _iigProjectId (\ s a -> s{_iigProjectId = a})
+      . _Coerce
 
 instance GoogleRequest InventoryItemsGet where
         type Rs InventoryItemsGet = InventoryItem

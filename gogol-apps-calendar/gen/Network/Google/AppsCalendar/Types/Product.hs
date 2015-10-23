@@ -299,7 +299,7 @@ data Event = Event
     , _eGuestsCanInviteOthers   :: !Bool
     , _eRecurrence              :: !(Maybe [Text])
     , _eGadget                  :: !(Maybe EventGadget)
-    , _eSequence                :: !(Maybe Int32)
+    , _eSequence                :: !(Maybe (JSONText Int32))
     , _eICalUId                 :: !(Maybe Text)
     , _eEnd                     :: !(Maybe EventDateTime)
     , _eAttendeesOmitted        :: !Bool
@@ -591,7 +591,8 @@ eGadget = lens _eGadget (\ s a -> s{_eGadget = a})
 -- | Sequence number as per iCalendar.
 eSequence :: Lens' Event (Maybe Int32)
 eSequence
-  = lens _eSequence (\ s a -> s{_eSequence = a})
+  = lens _eSequence (\ s a -> s{_eSequence = a}) .
+      mapping _Coerce
 
 -- | Event unique identifier as defined in RFC5545. It is used to uniquely
 -- identify events accross calendaring systems and must be supplied when
@@ -1312,7 +1313,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe Int64)
+    , _cExpiration  :: !(Maybe (JSONText Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -1380,7 +1381,8 @@ cKind = lens _cKind (\ s a -> s{_cKind = a})
 -- timestamp, in milliseconds. Optional.
 cExpiration :: Lens' Channel (Maybe Int64)
 cExpiration
-  = lens _cExpiration (\ s a -> s{_cExpiration = a})
+  = lens _cExpiration (\ s a -> s{_cExpiration = a}) .
+      mapping _Coerce
 
 -- | An arbitrary string delivered to the target address with each
 -- notification delivered over this channel. Optional.
@@ -1975,7 +1977,7 @@ data EventAttendee = EventAttendee
     , _eaResponseStatus   :: !(Maybe Text)
     , _eaSelf             :: !Bool
     , _eaResource         :: !Bool
-    , _eaAdditionalGuests :: !Int32
+    , _eaAdditionalGuests :: !(JSONText Int32)
     , _eaDisplayName      :: !(Maybe Text)
     , _eaId               :: !(Maybe Text)
     , _eaComment          :: !(Maybe Text)
@@ -2053,6 +2055,7 @@ eaAdditionalGuests :: Lens' EventAttendee Int32
 eaAdditionalGuests
   = lens _eaAdditionalGuests
       (\ s a -> s{_eaAdditionalGuests = a})
+      . _Coerce
 
 -- | The attendee\'s name, if available. Optional.
 eaDisplayName :: Lens' EventAttendee (Maybe Text)
@@ -2294,7 +2297,7 @@ instance ToJSON FreeBusyResponse where
 -- /See:/ 'eventReminder' smart constructor.
 data EventReminder = EventReminder
     { _erMethod  :: !(Maybe Text)
-    , _erMinutes :: !(Maybe Int32)
+    , _erMinutes :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventReminder' with the minimum fields required to make a request.
@@ -2324,7 +2327,8 @@ erMethod = lens _erMethod (\ s a -> s{_erMethod = a})
 -- trigger. Valid values are between 0 and 40320 (4 weeks in minutes).
 erMinutes :: Lens' EventReminder (Maybe Int32)
 erMinutes
-  = lens _erMinutes (\ s a -> s{_erMinutes = a})
+  = lens _erMinutes (\ s a -> s{_erMinutes = a}) .
+      mapping _Coerce
 
 instance FromJSON EventReminder where
         parseJSON
@@ -2612,12 +2616,12 @@ instance ToJSON CalendarList where
 --
 -- /See:/ 'eventGadget' smart constructor.
 data EventGadget = EventGadget
-    { _egHeight      :: !(Maybe Int32)
+    { _egHeight      :: !(Maybe (JSONText Int32))
     , _egDisplay     :: !(Maybe Text)
     , _egPreferences :: !(Maybe EventGadgetPreferences)
     , _egLink        :: !(Maybe Text)
     , _egIconLink    :: !(Maybe Text)
-    , _egWidth       :: !(Maybe Int32)
+    , _egWidth       :: !(Maybe (JSONText Int32))
     , _egTitle       :: !(Maybe Text)
     , _egType        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2658,7 +2662,9 @@ eventGadget =
 -- | The gadget\'s height in pixels. The height must be an integer greater
 -- than 0. Optional.
 egHeight :: Lens' EventGadget (Maybe Int32)
-egHeight = lens _egHeight (\ s a -> s{_egHeight = a})
+egHeight
+  = lens _egHeight (\ s a -> s{_egHeight = a}) .
+      mapping _Coerce
 
 -- | The gadget\'s display mode. Optional. Possible values are: - \"icon\" -
 -- The gadget displays next to the event\'s title in the calendar view. -
@@ -2685,7 +2691,9 @@ egIconLink
 -- | The gadget\'s width in pixels. The width must be an integer greater than
 -- 0. Optional.
 egWidth :: Lens' EventGadget (Maybe Int32)
-egWidth = lens _egWidth (\ s a -> s{_egWidth = a})
+egWidth
+  = lens _egWidth (\ s a -> s{_egWidth = a}) .
+      mapping _Coerce
 
 -- | The gadget\'s title.
 egTitle :: Lens' EventGadget (Maybe Text)
@@ -2757,10 +2765,10 @@ instance ToJSON EventGadgetPreferences where
 --
 -- /See:/ 'freeBusyRequest' smart constructor.
 data FreeBusyRequest = FreeBusyRequest
-    { _fCalendarExpansionMax :: !(Maybe Int32)
+    { _fCalendarExpansionMax :: !(Maybe (JSONText Int32))
     , _fTimeMin              :: !(Maybe DateTime')
     , _fItems                :: !(Maybe [FreeBusyRequestItem])
-    , _fGroupExpansionMax    :: !(Maybe Int32)
+    , _fGroupExpansionMax    :: !(Maybe (JSONText Int32))
     , _fTimeZone             :: !Text
     , _fTimeMax              :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2798,6 +2806,7 @@ fCalendarExpansionMax :: Lens' FreeBusyRequest (Maybe Int32)
 fCalendarExpansionMax
   = lens _fCalendarExpansionMax
       (\ s a -> s{_fCalendarExpansionMax = a})
+      . mapping _Coerce
 
 -- | The start of the interval for the query.
 fTimeMin :: Lens' FreeBusyRequest (Maybe UTCTime)
@@ -2818,6 +2827,7 @@ fGroupExpansionMax :: Lens' FreeBusyRequest (Maybe Int32)
 fGroupExpansionMax
   = lens _fGroupExpansionMax
       (\ s a -> s{_fGroupExpansionMax = a})
+      . mapping _Coerce
 
 -- | Time zone used in the response. Optional. The default is UTC.
 fTimeZone :: Lens' FreeBusyRequest Text

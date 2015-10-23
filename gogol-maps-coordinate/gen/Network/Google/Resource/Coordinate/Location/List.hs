@@ -53,9 +53,9 @@ type LocationListResource =
              "workers" :>
                Capture "workerEmail" Text :>
                  "locations" :>
-                   QueryParam "startTimestampMs" Word64 :>
+                   QueryParam "startTimestampMs" (JSONText Word64) :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] LocationListResponse
 
@@ -64,10 +64,10 @@ type LocationListResource =
 -- /See:/ 'locationList' smart constructor.
 data LocationList = LocationList
     { _llWorkerEmail      :: !Text
-    , _llStartTimestampMs :: !Word64
+    , _llStartTimestampMs :: !(JSONText Word64)
     , _llTeamId           :: !Text
     , _llPageToken        :: !(Maybe Text)
-    , _llMaxResults       :: !(Maybe Word32)
+    , _llMaxResults       :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationList' with the minimum fields required to make a request.
@@ -108,6 +108,7 @@ llStartTimestampMs :: Lens' LocationList Word64
 llStartTimestampMs
   = lens _llStartTimestampMs
       (\ s a -> s{_llStartTimestampMs = a})
+      . _Coerce
 
 -- | Team ID
 llTeamId :: Lens' LocationList Text
@@ -122,6 +123,7 @@ llPageToken
 llMaxResults :: Lens' LocationList (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest LocationList where
         type Rs LocationList = LocationListResponse

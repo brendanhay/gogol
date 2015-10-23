@@ -46,9 +46,9 @@ type FloodlightActivityGroupsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivityGroups" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] FloodlightActivityGroup
 
@@ -56,8 +56,8 @@ type FloodlightActivityGroupsGetResource =
 --
 -- /See:/ 'floodlightActivityGroupsGet' smart constructor.
 data FloodlightActivityGroupsGet = FloodlightActivityGroupsGet
-    { _faggProFileId :: !Int64
-    , _faggId        :: !Int64
+    { _faggProFileId :: !(JSONText Int64)
+    , _faggId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsGet' with the minimum fields required to make a request.
@@ -82,10 +82,12 @@ faggProFileId :: Lens' FloodlightActivityGroupsGet Int64
 faggProFileId
   = lens _faggProFileId
       (\ s a -> s{_faggProFileId = a})
+      . _Coerce
 
 -- | Floodlight activity Group ID.
 faggId :: Lens' FloodlightActivityGroupsGet Int64
-faggId = lens _faggId (\ s a -> s{_faggId = a})
+faggId
+  = lens _faggId (\ s a -> s{_faggId = a}) . _Coerce
 
 instance GoogleRequest FloodlightActivityGroupsGet
          where

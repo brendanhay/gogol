@@ -72,7 +72,7 @@ type ProjectsTracesListResource =
                                QueryParam "view" Text :>
                                  QueryParam "filter" Text :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "pageSize" Int32 :>
+                                     QueryParam "pageSize" (JSONText Int32) :>
                                        QueryParam "callback" Text :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListTracesResponse
@@ -94,7 +94,7 @@ data ProjectsTracesList = ProjectsTracesList
     , _ptlFilter         :: !(Maybe Text)
     , _ptlPageToken      :: !(Maybe Text)
     , _ptlProjectId      :: !Text
-    , _ptlPageSize       :: !(Maybe Int32)
+    , _ptlPageSize       :: !(Maybe (JSONText Int32))
     , _ptlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -231,7 +231,8 @@ ptlProjectId
 -- always return fewer than the requested page_size.
 ptlPageSize :: Lens' ProjectsTracesList (Maybe Int32)
 ptlPageSize
-  = lens _ptlPageSize (\ s a -> s{_ptlPageSize = a})
+  = lens _ptlPageSize (\ s a -> s{_ptlPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 ptlCallback :: Lens' ProjectsTracesList (Maybe Text)

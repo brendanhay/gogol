@@ -48,9 +48,9 @@ type RemarketingListsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "remarketingLists" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] RemarketingList :>
                      Patch '[JSON] RemarketingList
@@ -60,9 +60,9 @@ type RemarketingListsPatchResource =
 --
 -- /See:/ 'remarketingListsPatch' smart constructor.
 data RemarketingListsPatch = RemarketingListsPatch
-    { _rlpProFileId :: !Int64
+    { _rlpProFileId :: !(JSONText Int64)
     , _rlpPayload   :: !RemarketingList
-    , _rlpId        :: !Int64
+    , _rlpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsPatch' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ remarketingListsPatch pRlpProFileId_ pRlpPayload_ pRlpId_ =
 rlpProFileId :: Lens' RemarketingListsPatch Int64
 rlpProFileId
   = lens _rlpProFileId (\ s a -> s{_rlpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 rlpPayload :: Lens' RemarketingListsPatch RemarketingList
@@ -98,7 +99,8 @@ rlpPayload
 
 -- | Remarketing list ID.
 rlpId :: Lens' RemarketingListsPatch Int64
-rlpId = lens _rlpId (\ s a -> s{_rlpId = a})
+rlpId
+  = lens _rlpId (\ s a -> s{_rlpId = a}) . _Coerce
 
 instance GoogleRequest RemarketingListsPatch where
         type Rs RemarketingListsPatch = RemarketingList

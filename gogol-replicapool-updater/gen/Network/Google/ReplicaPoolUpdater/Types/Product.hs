@@ -71,7 +71,7 @@ instance ToJSON OperationWarningsItemDataItem where
 -- /See:/ 'rollingUpdate' smart constructor.
 data RollingUpdate = RollingUpdate
     { _ruStatus               :: !(Maybe Text)
-    , _ruProgress             :: !(Maybe Int32)
+    , _ruProgress             :: !(Maybe (JSONText Int32))
     , _ruInstanceGroupManager :: !(Maybe Text)
     , _ruKind                 :: !Text
     , _ruError                :: !(Maybe RollingUpdateError)
@@ -163,7 +163,8 @@ ruStatus = lens _ruStatus (\ s a -> s{_ruStatus = a})
 -- update progresses.
 ruProgress :: Lens' RollingUpdate (Maybe Int32)
 ruProgress
-  = lens _ruProgress (\ s a -> s{_ruProgress = a})
+  = lens _ruProgress (\ s a -> s{_ruProgress = a}) .
+      mapping _Coerce
 
 -- | Fully-qualified URL of an instance group manager being updated. Exactly
 -- one of instanceGroupManager and instanceGroup must be set.
@@ -544,24 +545,24 @@ instance ToJSON RollingUpdateErrorErrorsItem where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe Word64)
+    { _oTargetId            :: !(Maybe (JSONText Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe Int32)
+    , _oProgress            :: !(Maybe (JSONText Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe Int32)
+    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe Word64)
+    , _oId                  :: !(Maybe (JSONText Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -647,7 +648,8 @@ operation =
 -- of the target.
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
-  = lens _oTargetId (\ s a -> s{_oTargetId = a})
+  = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- \"PENDING\", \"RUNNING\", or \"DONE\".
@@ -662,7 +664,8 @@ oInsertTime
 
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
-  = lens _oProgress (\ s a -> s{_oProgress = a})
+  = lens _oProgress (\ s a -> s{_oProgress = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The time that this operation was started by the server.
 -- This is in RFC 3339 format.
@@ -699,6 +702,7 @@ oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
       (\ s a -> s{_oHTTPErrorStatusCode = a})
+      . mapping _Coerce
 
 oUser :: Lens' Operation (Maybe Text)
 oUser = lens _oUser (\ s a -> s{_oUser = a})
@@ -730,7 +734,8 @@ oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 oId :: Lens' Operation (Maybe Word64)
-oId = lens _oId (\ s a -> s{_oId = a})
+oId
+  = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
 oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
@@ -909,11 +914,11 @@ instance ToJSON InstanceUpdateError where
 --
 -- /See:/ 'rollingUpdatePolicy' smart constructor.
 data RollingUpdatePolicy = RollingUpdatePolicy
-    { _rupMinInstanceUpdateTimeSec  :: !(Maybe Int32)
-    , _rupInstanceStartupTimeoutSec :: !(Maybe Int32)
-    , _rupMaxNumFailedInstances     :: !(Maybe Int32)
-    , _rupAutoPauseAfterInstances   :: !(Maybe Int32)
-    , _rupMaxNumConcurrentInstances :: !(Maybe Int32)
+    { _rupMinInstanceUpdateTimeSec  :: !(Maybe (JSONText Int32))
+    , _rupInstanceStartupTimeoutSec :: !(Maybe (JSONText Int32))
+    , _rupMaxNumFailedInstances     :: !(Maybe (JSONText Int32))
+    , _rupAutoPauseAfterInstances   :: !(Maybe (JSONText Int32))
+    , _rupMaxNumConcurrentInstances :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatePolicy' with the minimum fields required to make a request.
@@ -950,6 +955,7 @@ rupMinInstanceUpdateTimeSec :: Lens' RollingUpdatePolicy (Maybe Int32)
 rupMinInstanceUpdateTimeSec
   = lens _rupMinInstanceUpdateTimeSec
       (\ s a -> s{_rupMinInstanceUpdateTimeSec = a})
+      . mapping _Coerce
 
 -- | The maximum amount of time that the updater waits for a HEALTHY state
 -- after all of the update steps are complete. If the HEALTHY state is not
@@ -959,6 +965,7 @@ rupInstanceStartupTimeoutSec :: Lens' RollingUpdatePolicy (Maybe Int32)
 rupInstanceStartupTimeoutSec
   = lens _rupInstanceStartupTimeoutSec
       (\ s a -> s{_rupInstanceStartupTimeoutSec = a})
+      . mapping _Coerce
 
 -- | The maximum number of instance updates that can fail before the group
 -- update is considered a failure. An instance update is considered failed
@@ -969,6 +976,7 @@ rupMaxNumFailedInstances :: Lens' RollingUpdatePolicy (Maybe Int32)
 rupMaxNumFailedInstances
   = lens _rupMaxNumFailedInstances
       (\ s a -> s{_rupMaxNumFailedInstances = a})
+      . mapping _Coerce
 
 -- | Number of instances to update before the updater pauses the rolling
 -- update.
@@ -976,6 +984,7 @@ rupAutoPauseAfterInstances :: Lens' RollingUpdatePolicy (Maybe Int32)
 rupAutoPauseAfterInstances
   = lens _rupAutoPauseAfterInstances
       (\ s a -> s{_rupAutoPauseAfterInstances = a})
+      . mapping _Coerce
 
 -- | The maximum number of instances that can be updated simultaneously. An
 -- instance update is considered complete only after the instance is
@@ -984,6 +993,7 @@ rupMaxNumConcurrentInstances :: Lens' RollingUpdatePolicy (Maybe Int32)
 rupMaxNumConcurrentInstances
   = lens _rupMaxNumConcurrentInstances
       (\ s a -> s{_rupMaxNumConcurrentInstances = a})
+      . mapping _Coerce
 
 instance FromJSON RollingUpdatePolicy where
         parseJSON

@@ -46,7 +46,7 @@ type CreativeGroupsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] CreativeGroup :>
@@ -56,7 +56,7 @@ type CreativeGroupsInsertResource =
 --
 -- /See:/ 'creativeGroupsInsert' smart constructor.
 data CreativeGroupsInsert = CreativeGroupsInsert
-    { _cgiProFileId :: !Int64
+    { _cgiProFileId :: !(JSONText Int64)
     , _cgiPayload   :: !CreativeGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ creativeGroupsInsert pCgiProFileId_ pCgiPayload_ =
 cgiProFileId :: Lens' CreativeGroupsInsert Int64
 cgiProFileId
   = lens _cgiProFileId (\ s a -> s{_cgiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 cgiPayload :: Lens' CreativeGroupsInsert CreativeGroup

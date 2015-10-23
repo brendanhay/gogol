@@ -46,7 +46,7 @@ type PlacementGroupsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placementGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] PlacementGroup :>
@@ -56,7 +56,7 @@ type PlacementGroupsInsertResource =
 --
 -- /See:/ 'placementGroupsInsert' smart constructor.
 data PlacementGroupsInsert = PlacementGroupsInsert
-    { _pgiProFileId :: !Int64
+    { _pgiProFileId :: !(JSONText Int64)
     , _pgiPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ placementGroupsInsert pPgiProFileId_ pPgiPayload_ =
 pgiProFileId :: Lens' PlacementGroupsInsert Int64
 pgiProFileId
   = lens _pgiProFileId (\ s a -> s{_pgiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 pgiPayload :: Lens' PlacementGroupsInsert PlacementGroup

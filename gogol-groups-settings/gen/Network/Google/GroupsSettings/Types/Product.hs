@@ -36,7 +36,7 @@ data Groups = Groups
     , _gWhoCanViewGroup                    :: !(Maybe Text)
     , _gWhoCanJoin                         :: !(Maybe Text)
     , _gArchiveOnly                        :: !(Maybe Text)
-    , _gMaxMessageBytes                    :: !(Maybe Int32)
+    , _gMaxMessageBytes                    :: !(Maybe (JSONText Int32))
     , _gReplyTo                            :: !(Maybe Text)
     , _gMessageModerationLevel             :: !(Maybe Text)
     , _gIncludeInGlobalAddressList         :: !(Maybe Text)
@@ -224,6 +224,7 @@ gMaxMessageBytes :: Lens' Groups (Maybe Int32)
 gMaxMessageBytes
   = lens _gMaxMessageBytes
       (\ s a -> s{_gMaxMessageBytes = a})
+      . mapping _Coerce
 
 -- | Whome should the default reply to a message go to. Possible values are:
 -- REPLY_TO_CUSTOM REPLY_TO_SENDER REPLY_TO_LIST REPLY_TO_OWNER

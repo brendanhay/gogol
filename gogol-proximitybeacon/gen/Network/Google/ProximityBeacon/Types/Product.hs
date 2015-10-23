@@ -46,8 +46,8 @@ import           Network.Google.ProximityBeacon.Types.Sum
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng
-    { _llLatitude  :: !(Maybe Double)
-    , _llLongitude :: !(Maybe Double)
+    { _llLatitude  :: !(Maybe (JSONText Double))
+    , _llLongitude :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
@@ -68,12 +68,14 @@ latLng =
 -- | The latitude in degrees. It must be in the range [-90.0, +90.0].
 llLatitude :: Lens' LatLng (Maybe Double)
 llLatitude
-  = lens _llLatitude (\ s a -> s{_llLatitude = a})
+  = lens _llLatitude (\ s a -> s{_llLatitude = a}) .
+      mapping _Coerce
 
 -- | The longitude in degrees. It must be in the range [-180.0, +180.0].
 llLongitude :: Lens' LatLng (Maybe Double)
 llLongitude
-  = lens _llLongitude (\ s a -> s{_llLongitude = a})
+  = lens _llLongitude (\ s a -> s{_llLongitude = a}) .
+      mapping _Coerce
 
 instance FromJSON LatLng where
         parseJSON
@@ -95,7 +97,7 @@ instance ToJSON LatLng where
 --
 -- /See:/ 'attachmentInfo' smart constructor.
 data AttachmentInfo = AttachmentInfo
-    { _aiData           :: !(Maybe Word8)
+    { _aiData           :: !(Maybe (JSONText Word8))
     , _aiNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -116,7 +118,9 @@ attachmentInfo =
 
 -- | An opaque data container for client-provided data.
 aiData :: Lens' AttachmentInfo (Maybe Word8)
-aiData = lens _aiData (\ s a -> s{_aiData = a})
+aiData
+  = lens _aiData (\ s a -> s{_aiData = a}) .
+      mapping _Coerce
 
 -- | Specifies what kind of attachment this is. Tells a client how to
 -- interpret the \`data\` field. Format is namespace\/type, for example
@@ -200,7 +204,7 @@ instance ToJSON Empty where
 --
 -- /See:/ 'deleteAttachmentsResponse' smart constructor.
 newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse
-    { _darNumDeleted :: Maybe Int32
+    { _darNumDeleted :: Maybe (JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteAttachmentsResponse' with the minimum fields required to make a request.
@@ -220,6 +224,7 @@ darNumDeleted :: Lens' DeleteAttachmentsResponse (Maybe Int32)
 darNumDeleted
   = lens _darNumDeleted
       (\ s a -> s{_darNumDeleted = a})
+      . mapping _Coerce
 
 instance FromJSON DeleteAttachmentsResponse where
         parseJSON
@@ -398,9 +403,9 @@ instance ToJSON ListNamespacesResponse where
 --
 -- /See:/ 'date' smart constructor.
 data Date = Date
-    { _dDay   :: !(Maybe Int32)
-    , _dYear  :: !(Maybe Int32)
-    , _dMonth :: !(Maybe Int32)
+    { _dDay   :: !(Maybe (JSONText Int32))
+    , _dYear  :: !(Maybe (JSONText Int32))
+    , _dMonth :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
@@ -424,16 +429,22 @@ date =
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year\/month where the day is not sigificant.
 dDay :: Lens' Date (Maybe Int32)
-dDay = lens _dDay (\ s a -> s{_dDay = a})
+dDay
+  = lens _dDay (\ s a -> s{_dDay = a}) .
+      mapping _Coerce
 
 -- | Year of date. Must be from 1 to 9,999, or 0 if specifying a date without
 -- a year.
 dYear :: Lens' Date (Maybe Int32)
-dYear = lens _dYear (\ s a -> s{_dYear = a})
+dYear
+  = lens _dYear (\ s a -> s{_dYear = a}) .
+      mapping _Coerce
 
 -- | Month of year of date. Must be from 1 to 12.
 dMonth :: Lens' Date (Maybe Int32)
-dMonth = lens _dMonth (\ s a -> s{_dMonth = a})
+dMonth
+  = lens _dMonth (\ s a -> s{_dMonth = a}) .
+      mapping _Coerce
 
 instance FromJSON Date where
         parseJSON
@@ -808,7 +819,7 @@ instance ToJSON BeaconInfo where
 --
 -- /See:/ 'observation' smart constructor.
 data Observation = Observation
-    { _oTelemetry    :: !(Maybe Word8)
+    { _oTelemetry    :: !(Maybe (JSONText Word8))
     , _oTimestampMs  :: !(Maybe Text)
     , _oAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -836,7 +847,8 @@ observation =
 -- a beacon that transmits telemetry only occasionally.
 oTelemetry :: Lens' Observation (Maybe Word8)
 oTelemetry
-  = lens _oTelemetry (\ s a -> s{_oTelemetry = a})
+  = lens _oTelemetry (\ s a -> s{_oTelemetry = a}) .
+      mapping _Coerce
 
 -- | Time when the beacon was observed. Being sourced from a mobile device,
 -- this time may be suspect.
@@ -870,7 +882,7 @@ instance ToJSON Observation where
 --
 -- /See:/ 'beaconAttachment' smart constructor.
 data BeaconAttachment = BeaconAttachment
-    { _baData           :: !(Maybe Word8)
+    { _baData           :: !(Maybe (JSONText Word8))
     , _baAttachmentName :: !(Maybe Text)
     , _baNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -898,7 +910,9 @@ beaconAttachment =
 -- HTTP requests, and will be so encoded (with padding) in responses.
 -- Required.
 baData :: Lens' BeaconAttachment (Maybe Word8)
-baData = lens _baData (\ s a -> s{_baData = a})
+baData
+  = lens _baData (\ s a -> s{_baData = a}) .
+      mapping _Coerce
 
 -- | Resource name of this attachment. Attachment names have the format:
 -- beacons\/beacon_id\/attachments\/attachment_id. Leave this empty on
@@ -991,7 +1005,7 @@ instance ToJSON ListDiagnosticsResponse where
 --
 -- /See:/ 'advertisedId' smart constructor.
 data AdvertisedId = AdvertisedId
-    { _aiId   :: !(Maybe Word8)
+    { _aiId   :: !(Maybe (JSONText Word8))
     , _aiType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1016,7 +1030,9 @@ advertisedId =
 -- base64 encoding should be of the binary byte-stream and not any textual
 -- (such as hex) representation thereof. Required.
 aiId :: Lens' AdvertisedId (Maybe Word8)
-aiId = lens _aiId (\ s a -> s{_aiId = a})
+aiId
+  = lens _aiId (\ s a -> s{_aiId = a}) .
+      mapping _Coerce
 
 -- | Specifies the identifier type. Required.
 aiType :: Lens' AdvertisedId (Maybe Text)
@@ -1040,7 +1056,7 @@ instance ToJSON AdvertisedId where
 data ListBeaconsResponse = ListBeaconsResponse
     { _lbrNextPageToken :: !(Maybe Text)
     , _lbrBeacons       :: !(Maybe [Beacon])
-    , _lbrTotalCount    :: !(Maybe Int64)
+    , _lbrTotalCount    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBeaconsResponse' with the minimum fields required to make a request.
@@ -1081,6 +1097,7 @@ lbrTotalCount :: Lens' ListBeaconsResponse (Maybe Int64)
 lbrTotalCount
   = lens _lbrTotalCount
       (\ s a -> s{_lbrTotalCount = a})
+      . mapping _Coerce
 
 instance FromJSON ListBeaconsResponse where
         parseJSON

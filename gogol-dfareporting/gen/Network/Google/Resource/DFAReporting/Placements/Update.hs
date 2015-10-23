@@ -46,7 +46,7 @@ type PlacementsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placements" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Placement :> Put '[JSON] Placement
@@ -55,7 +55,7 @@ type PlacementsUpdateResource =
 --
 -- /See:/ 'placementsUpdate' smart constructor.
 data PlacementsUpdate = PlacementsUpdate
-    { _puProFileId :: !Int64
+    { _puProFileId :: !(JSONText Int64)
     , _puPayload   :: !Placement
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ placementsUpdate pPuProFileId_ pPuPayload_ =
 -- | User profile ID associated with this request.
 puProFileId :: Lens' PlacementsUpdate Int64
 puProFileId
-  = lens _puProFileId (\ s a -> s{_puProFileId = a})
+  = lens _puProFileId (\ s a -> s{_puProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 puPayload :: Lens' PlacementsUpdate Placement

@@ -58,7 +58,7 @@ type ObjectsListResource =
                    QueryParam "projection" ObjectsListProjection :>
                      QueryParam "pageToken" Text :>
                        QueryParam "delimiter" Text :>
-                         QueryParam "maxResults" Word32 :>
+                         QueryParam "maxResults" (JSONText Word32) :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Objects
 
 -- | Retrieves a list of objects matching the criteria.
@@ -71,7 +71,7 @@ data ObjectsList = ObjectsList
     , _olProjection :: !(Maybe ObjectsListProjection)
     , _olPageToken  :: !(Maybe Text)
     , _olDelimiter  :: !(Maybe Text)
-    , _olMaxResults :: !(Maybe Word32)
+    , _olMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsList' with the minimum fields required to make a request.
@@ -145,6 +145,7 @@ olDelimiter
 olMaxResults :: Lens' ObjectsList (Maybe Word32)
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectsList where
         type Rs ObjectsList = Objects

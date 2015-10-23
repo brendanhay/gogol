@@ -53,8 +53,8 @@ type ManagementWebPropertyUserLinksListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "entityUserLinks" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
+                     QueryParam "start-index" (JSONText Int32) :>
+                       QueryParam "max-results" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] EntityUserLinks
 
@@ -64,8 +64,8 @@ type ManagementWebPropertyUserLinksListResource =
 data ManagementWebPropertyUserLinksList = ManagementWebPropertyUserLinksList
     { _mwpullWebPropertyId :: !Text
     , _mwpullAccountId     :: !Text
-    , _mwpullStartIndex    :: !(Maybe Int32)
-    , _mwpullMaxResults    :: !(Maybe Int32)
+    , _mwpullStartIndex    :: !(Maybe (JSONText Int32))
+    , _mwpullMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksList' with the minimum fields required to make a request.
@@ -112,6 +112,7 @@ mwpullStartIndex :: Lens' ManagementWebPropertyUserLinksList (Maybe Int32)
 mwpullStartIndex
   = lens _mwpullStartIndex
       (\ s a -> s{_mwpullStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of webProperty-user Links to include in this
 -- response.
@@ -119,6 +120,7 @@ mwpullMaxResults :: Lens' ManagementWebPropertyUserLinksList (Maybe Int32)
 mwpullMaxResults
   = lens _mwpullMaxResults
       (\ s a -> s{_mwpullMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest
          ManagementWebPropertyUserLinksList where

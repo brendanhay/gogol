@@ -72,8 +72,8 @@ instance ToJSON GeoLocationPolygon where
 --
 -- /See:/ 'geoLocationPoint' smart constructor.
 data GeoLocationPoint = GeoLocationPoint
-    { _glpLatitude  :: !(Maybe Double)
-    , _glpLongitude :: !(Maybe Double)
+    { _glpLatitude  :: !(Maybe (JSONText Double))
+    , _glpLongitude :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocationPoint' with the minimum fields required to make a request.
@@ -96,7 +96,8 @@ geoLocationPoint =
 -- Imagery and Mapping Agency\'s Technical Report TR8350.2.
 glpLatitude :: Lens' GeoLocationPoint (Maybe Double)
 glpLatitude
-  = lens _glpLatitude (\ s a -> s{_glpLatitude = a})
+  = lens _glpLatitude (\ s a -> s{_glpLatitude = a}) .
+      mapping _Coerce
 
 -- | A required floating-point number that expresses the longitude in degrees
 -- using the WGS84 datum. For details on this encoding, see the National
@@ -104,6 +105,7 @@ glpLatitude
 glpLongitude :: Lens' GeoLocationPoint (Maybe Double)
 glpLongitude
   = lens _glpLongitude (\ s a -> s{_glpLongitude = a})
+      . mapping _Coerce
 
 instance FromJSON GeoLocationPoint where
         parseJSON
@@ -1118,9 +1120,9 @@ instance ToJSON PawsGetSpectrumRequest where
 --
 -- /See:/ 'antennaCharacteristics' smart constructor.
 data AntennaCharacteristics = AntennaCharacteristics
-    { _acHeight            :: !(Maybe Double)
+    { _acHeight            :: !(Maybe (JSONText Double))
     , _acHeightType        :: !(Maybe Text)
-    , _acHeightUncertainty :: !(Maybe Double)
+    , _acHeightUncertainty :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AntennaCharacteristics' with the minimum fields required to make a request.
@@ -1145,7 +1147,9 @@ antennaCharacteristics =
 -- depends on the device type and the regulatory domain. Note that the
 -- height may be negative.
 acHeight :: Lens' AntennaCharacteristics (Maybe Double)
-acHeight = lens _acHeight (\ s a -> s{_acHeight = a})
+acHeight
+  = lens _acHeight (\ s a -> s{_acHeight = a}) .
+      mapping _Coerce
 
 -- | If the height is required, then the height type (AGL for above ground
 -- level or AMSL for above mean sea level) is also required. The default is
@@ -1160,6 +1164,7 @@ acHeightUncertainty :: Lens' AntennaCharacteristics (Maybe Double)
 acHeightUncertainty
   = lens _acHeightUncertainty
       (\ s a -> s{_acHeightUncertainty = a})
+      . mapping _Coerce
 
 instance FromJSON AntennaCharacteristics where
         parseJSON
@@ -1366,14 +1371,14 @@ data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse
     { _pNeedsSpectrumReport  :: !(Maybe Bool)
     , _pKind                 :: !Text
     , _pGeoSpectrumSchedules :: !(Maybe [GeoSpectrumSchedule])
-    , _pMaxContiguousBwHz    :: !(Maybe Double)
+    , _pMaxContiguousBwHz    :: !(Maybe (JSONText Double))
     , _pVersion              :: !(Maybe Text)
     , _pRulesetInfo          :: !(Maybe RulesetInfo)
     , _pType                 :: !(Maybe Text)
     , _pDatabaseChange       :: !(Maybe DBUpdateSpec)
     , _pTimestamp            :: !(Maybe Text)
     , _pDeviceDesc           :: !(Maybe DeviceDescriptor)
-    , _pMaxTotalBwHz         :: !(Maybe Double)
+    , _pMaxTotalBwHz         :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatchResponse' with the minimum fields required to make a request.
@@ -1461,6 +1466,7 @@ pMaxContiguousBwHz :: Lens' PawsGetSpectrumBatchResponse (Maybe Double)
 pMaxContiguousBwHz
   = lens _pMaxContiguousBwHz
       (\ s a -> s{_pMaxContiguousBwHz = a})
+      . mapping _Coerce
 
 -- | The PAWS version. Must be exactly 1.0. Required field.
 pVersion :: Lens' PawsGetSpectrumBatchResponse (Maybe Text)
@@ -1517,6 +1523,7 @@ pMaxTotalBwHz :: Lens' PawsGetSpectrumBatchResponse (Maybe Double)
 pMaxTotalBwHz
   = lens _pMaxTotalBwHz
       (\ s a -> s{_pMaxTotalBwHz = a})
+      . mapping _Coerce
 
 instance FromJSON PawsGetSpectrumBatchResponse where
         parseJSON
@@ -1620,10 +1627,10 @@ instance ToJSON DeviceValidity where
 --
 -- /See:/ 'geoLocationEllipse' smart constructor.
 data GeoLocationEllipse = GeoLocationEllipse
-    { _gleSemiMajorAxis :: !(Maybe Double)
+    { _gleSemiMajorAxis :: !(Maybe (JSONText Double))
     , _gleCenter        :: !(Maybe GeoLocationPoint)
-    , _gleOrientation   :: !(Maybe Double)
-    , _gleSemiMinorAxis :: !(Maybe Double)
+    , _gleOrientation   :: !(Maybe (JSONText Double))
+    , _gleSemiMinorAxis :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocationEllipse' with the minimum fields required to make a request.
@@ -1654,6 +1661,7 @@ gleSemiMajorAxis :: Lens' GeoLocationEllipse (Maybe Double)
 gleSemiMajorAxis
   = lens _gleSemiMajorAxis
       (\ s a -> s{_gleSemiMajorAxis = a})
+      . mapping _Coerce
 
 -- | A required geo-spatial point representing the center of the ellipse.
 gleCenter :: Lens' GeoLocationEllipse (Maybe GeoLocationPoint)
@@ -1671,6 +1679,7 @@ gleOrientation :: Lens' GeoLocationEllipse (Maybe Double)
 gleOrientation
   = lens _gleOrientation
       (\ s a -> s{_gleOrientation = a})
+      . mapping _Coerce
 
 -- | A floating-point number that expresses the location uncertainty along
 -- the minor axis of the ellipse. May be required by the regulatory domain.
@@ -1679,6 +1688,7 @@ gleSemiMinorAxis :: Lens' GeoLocationEllipse (Maybe Double)
 gleSemiMinorAxis
   = lens _gleSemiMinorAxis
       (\ s a -> s{_gleSemiMinorAxis = a})
+      . mapping _Coerce
 
 instance FromJSON GeoLocationEllipse where
         parseJSON
@@ -1704,8 +1714,8 @@ instance ToJSON GeoLocationEllipse where
 -- /See:/ 'rulesetInfo' smart constructor.
 data RulesetInfo = RulesetInfo
     { _riRulesetIds        :: !(Maybe [Text])
-    , _riMaxPollingSecs    :: !(Maybe Int32)
-    , _riMaxLocationChange :: !(Maybe Double)
+    , _riMaxPollingSecs    :: !(Maybe (JSONText Int32))
+    , _riMaxLocationChange :: !(Maybe (JSONText Double))
     , _riAuthority         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1759,6 +1769,7 @@ riMaxPollingSecs :: Lens' RulesetInfo (Maybe Int32)
 riMaxPollingSecs
   = lens _riMaxPollingSecs
       (\ s a -> s{_riMaxPollingSecs = a})
+      . mapping _Coerce
 
 -- | The maximum location change in meters is required in the initialization
 -- response, but optional otherwise. When the device changes location by
@@ -1772,6 +1783,7 @@ riMaxLocationChange :: Lens' RulesetInfo (Maybe Double)
 riMaxLocationChange
   = lens _riMaxLocationChange
       (\ s a -> s{_riMaxLocationChange = a})
+      . mapping _Coerce
 
 -- | The regulatory domain to which the ruleset belongs is required. It must
 -- be a 2-letter country code. The device should use this to determine
@@ -2004,7 +2016,7 @@ instance ToJSON DatabaseSpec where
 --
 -- /See:/ 'spectrumMessage' smart constructor.
 data SpectrumMessage = SpectrumMessage
-    { _smBandwidth       :: !(Maybe Double)
+    { _smBandwidth       :: !(Maybe (JSONText Double))
     , _smFrequencyRanges :: !(Maybe [FrequencyRange])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2030,7 +2042,8 @@ spectrumMessage =
 -- is no available spectrum. It will be present otherwise.
 smBandwidth :: Lens' SpectrumMessage (Maybe Double)
 smBandwidth
-  = lens _smBandwidth (\ s a -> s{_smBandwidth = a})
+  = lens _smBandwidth (\ s a -> s{_smBandwidth = a}) .
+      mapping _Coerce
 
 -- | The list of frequency ranges and permissible power levels. The list may
 -- be empty if there is no available spectrum, otherwise it will be
@@ -2061,7 +2074,7 @@ instance ToJSON SpectrumMessage where
 --
 -- /See:/ 'geoLocation' smart constructor.
 data GeoLocation = GeoLocation
-    { _glConfidence :: !(Maybe Int32)
+    { _glConfidence :: !(Maybe (JSONText Int32))
     , _glPoint      :: !(Maybe GeoLocationEllipse)
     , _glRegion     :: !(Maybe GeoLocationPolygon)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2093,6 +2106,7 @@ geoLocation =
 glConfidence :: Lens' GeoLocation (Maybe Int32)
 glConfidence
   = lens _glConfidence (\ s a -> s{_glConfidence = a})
+      . mapping _Coerce
 
 -- | If present, indicates that the geolocation represents a point.
 -- Paradoxically, a point is parameterized using an ellipse, where the
@@ -2128,10 +2142,10 @@ instance ToJSON GeoLocation where
 --
 -- /See:/ 'frequencyRange' smart constructor.
 data FrequencyRange = FrequencyRange
-    { _frStopHz      :: !(Maybe Double)
-    , _frMaxPowerDBm :: !(Maybe Double)
+    { _frStopHz      :: !(Maybe (JSONText Double))
+    , _frMaxPowerDBm :: !(Maybe (JSONText Double))
     , _frChannelId   :: !(Maybe Text)
-    , _frStartHz     :: !(Maybe Double)
+    , _frStartHz     :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FrequencyRange' with the minimum fields required to make a request.
@@ -2157,7 +2171,9 @@ frequencyRange =
 
 -- | The required exclusive end of the frequency range (in Hertz).
 frStopHz :: Lens' FrequencyRange (Maybe Double)
-frStopHz = lens _frStopHz (\ s a -> s{_frStopHz = a})
+frStopHz
+  = lens _frStopHz (\ s a -> s{_frStopHz = a}) .
+      mapping _Coerce
 
 -- | The maximum total power level (EIRP)—computed over the corresponding
 -- operating bandwidth—that is permitted within the frequency range.
@@ -2171,6 +2187,7 @@ frMaxPowerDBm :: Lens' FrequencyRange (Maybe Double)
 frMaxPowerDBm
   = lens _frMaxPowerDBm
       (\ s a -> s{_frMaxPowerDBm = a})
+      . mapping _Coerce
 
 -- | The database may include a channel identifier, when applicable. When it
 -- is included, the device should treat it as informative. The length of
@@ -2182,7 +2199,8 @@ frChannelId
 -- | The required inclusive start of the frequency range (in Hertz).
 frStartHz :: Lens' FrequencyRange (Maybe Double)
 frStartHz
-  = lens _frStartHz (\ s a -> s{_frStartHz = a})
+  = lens _frStartHz (\ s a -> s{_frStartHz = a}) .
+      mapping _Coerce
 
 instance FromJSON FrequencyRange where
         parseJSON
@@ -2210,14 +2228,14 @@ data PawsGetSpectrumResponse = PawsGetSpectrumResponse
     { _pgsrgNeedsSpectrumReport :: !(Maybe Bool)
     , _pgsrgSpectrumSchedules   :: !(Maybe [SpectrumSchedule])
     , _pgsrgKind                :: !Text
-    , _pgsrgMaxContiguousBwHz   :: !(Maybe Double)
+    , _pgsrgMaxContiguousBwHz   :: !(Maybe (JSONText Double))
     , _pgsrgVersion             :: !(Maybe Text)
     , _pgsrgRulesetInfo         :: !(Maybe RulesetInfo)
     , _pgsrgType                :: !(Maybe Text)
     , _pgsrgDatabaseChange      :: !(Maybe DBUpdateSpec)
     , _pgsrgTimestamp           :: !(Maybe Text)
     , _pgsrgDeviceDesc          :: !(Maybe DeviceDescriptor)
-    , _pgsrgMaxTotalBwHz        :: !(Maybe Double)
+    , _pgsrgMaxTotalBwHz        :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumResponse' with the minimum fields required to make a request.
@@ -2301,6 +2319,7 @@ pgsrgMaxContiguousBwHz :: Lens' PawsGetSpectrumResponse (Maybe Double)
 pgsrgMaxContiguousBwHz
   = lens _pgsrgMaxContiguousBwHz
       (\ s a -> s{_pgsrgMaxContiguousBwHz = a})
+      . mapping _Coerce
 
 -- | The PAWS version. Must be exactly 1.0. Required field.
 pgsrgVersion :: Lens' PawsGetSpectrumResponse (Maybe Text)
@@ -2362,6 +2381,7 @@ pgsrgMaxTotalBwHz :: Lens' PawsGetSpectrumResponse (Maybe Double)
 pgsrgMaxTotalBwHz
   = lens _pgsrgMaxTotalBwHz
       (\ s a -> s{_pgsrgMaxTotalBwHz = a})
+      . mapping _Coerce
 
 instance FromJSON PawsGetSpectrumResponse where
         parseJSON

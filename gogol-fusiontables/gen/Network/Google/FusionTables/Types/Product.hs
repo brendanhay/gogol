@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'columnList' smart constructor.
 data ColumnList = ColumnList
-    { _clTotalItems    :: !(Maybe Int32)
+    { _clTotalItems    :: !(Maybe (JSONText Int32))
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [Column])
@@ -55,6 +55,7 @@ columnList =
 clTotalItems :: Lens' ColumnList (Maybe Int32)
 clTotalItems
   = lens _clTotalItems (\ s a -> s{_clTotalItems = a})
+      . mapping _Coerce
 
 -- | Token used to access the next page of this result. No token is displayed
 -- if there are no more pages left.
@@ -235,8 +236,8 @@ instance ToJSON StyleFunction where
 --
 -- /See:/ 'columnBaseColumn' smart constructor.
 data ColumnBaseColumn = ColumnBaseColumn
-    { _cbcTableIndex :: !(Maybe Int32)
-    , _cbcColumnId   :: !(Maybe Int32)
+    { _cbcTableIndex :: !(Maybe (JSONText Int32))
+    , _cbcColumnId   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnBaseColumn' with the minimum fields required to make a request.
@@ -259,12 +260,14 @@ cbcTableIndex :: Lens' ColumnBaseColumn (Maybe Int32)
 cbcTableIndex
   = lens _cbcTableIndex
       (\ s a -> s{_cbcTableIndex = a})
+      . mapping _Coerce
 
 -- | The id of the column in the base table from which this column is
 -- derived.
 cbcColumnId :: Lens' ColumnBaseColumn (Maybe Int32)
 cbcColumnId
-  = lens _cbcColumnId (\ s a -> s{_cbcColumnId = a})
+  = lens _cbcColumnId (\ s a -> s{_cbcColumnId = a}) .
+      mapping _Coerce
 
 instance FromJSON ColumnBaseColumn where
         parseJSON
@@ -347,7 +350,7 @@ instance ToJSON SQLresponse where
 -- /See:/ 'styleFunctionGradientColorsItem' smart constructor.
 data StyleFunctionGradientColorsItem = StyleFunctionGradientColorsItem
     { _sfgciColor   :: !(Maybe Text)
-    , _sfgciOpacity :: !(Maybe Double)
+    , _sfgciOpacity :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleFunctionGradientColorsItem' with the minimum fields required to make a request.
@@ -374,6 +377,7 @@ sfgciColor
 sfgciOpacity :: Lens' StyleFunctionGradientColorsItem (Maybe Double)
 sfgciOpacity
   = lens _sfgciOpacity (\ s a -> s{_sfgciOpacity = a})
+      . mapping _Coerce
 
 instance FromJSON StyleFunctionGradientColorsItem
          where
@@ -394,7 +398,7 @@ instance ToJSON StyleFunctionGradientColorsItem where
 --
 -- /See:/ 'styleSettingList' smart constructor.
 data StyleSettingList = StyleSettingList
-    { _sslTotalItems    :: !(Maybe Int32)
+    { _sslTotalItems    :: !(Maybe (JSONText Int32))
     , _sslNextPageToken :: !(Maybe Text)
     , _sslKind          :: !Text
     , _sslItems         :: !(Maybe [StyleSetting])
@@ -426,6 +430,7 @@ sslTotalItems :: Lens' StyleSettingList (Maybe Int32)
 sslTotalItems
   = lens _sslTotalItems
       (\ s a -> s{_sslTotalItems = a})
+      . mapping _Coerce
 
 -- | Token used to access the next page of this result. No token is displayed
 -- if there are no more styles left.
@@ -469,12 +474,12 @@ instance ToJSON StyleSettingList where
 --
 -- /See:/ 'bucket' smart constructor.
 data Bucket = Bucket
-    { _bMax     :: !(Maybe Double)
+    { _bMax     :: !(Maybe (JSONText Double))
     , _bColor   :: !(Maybe Text)
-    , _bWeight  :: !(Maybe Int32)
+    , _bWeight  :: !(Maybe (JSONText Int32))
     , _bIcon    :: !(Maybe Text)
-    , _bOpacity :: !(Maybe Double)
-    , _bMin     :: !(Maybe Double)
+    , _bOpacity :: !(Maybe (JSONText Double))
+    , _bMin     :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
@@ -507,7 +512,9 @@ bucket =
 -- | Maximum value in the selected column for a row to be styled according to
 -- the bucket color, opacity, icon, or weight.
 bMax :: Lens' Bucket (Maybe Double)
-bMax = lens _bMax (\ s a -> s{_bMax = a})
+bMax
+  = lens _bMax (\ s a -> s{_bMax = a}) .
+      mapping _Coerce
 
 -- | Color of line or the interior of a polygon in #RRGGBB format.
 bColor :: Lens' Bucket (Maybe Text)
@@ -515,7 +522,9 @@ bColor = lens _bColor (\ s a -> s{_bColor = a})
 
 -- | Width of a line (in pixels).
 bWeight :: Lens' Bucket (Maybe Int32)
-bWeight = lens _bWeight (\ s a -> s{_bWeight = a})
+bWeight
+  = lens _bWeight (\ s a -> s{_bWeight = a}) .
+      mapping _Coerce
 
 -- | Icon name used for a point.
 bIcon :: Lens' Bucket (Maybe Text)
@@ -523,12 +532,16 @@ bIcon = lens _bIcon (\ s a -> s{_bIcon = a})
 
 -- | Opacity of the color: 0.0 (transparent) to 1.0 (opaque).
 bOpacity :: Lens' Bucket (Maybe Double)
-bOpacity = lens _bOpacity (\ s a -> s{_bOpacity = a})
+bOpacity
+  = lens _bOpacity (\ s a -> s{_bOpacity = a}) .
+      mapping _Coerce
 
 -- | Minimum value in the selected column for a row to be styled according to
 -- the bucket color, opacity, icon, or weight.
 bMin :: Lens' Bucket (Maybe Double)
-bMin = lens _bMin (\ s a -> s{_bMin = a})
+bMin
+  = lens _bMin (\ s a -> s{_bMin = a}) .
+      mapping _Coerce
 
 instance FromJSON Bucket where
         parseJSON
@@ -553,7 +566,7 @@ instance ToJSON Bucket where
 --
 -- /See:/ 'line' smart constructor.
 data Line = Line
-    { _lCoordinates :: !(Maybe [[Double]])
+    { _lCoordinates :: !(Maybe [[JSONText Double]])
     , _lType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -608,7 +621,7 @@ data StyleSetting = StyleSetting
     , _ssMarkerOptions   :: !(Maybe PointStyle)
     , _ssKind            :: !Text
     , _ssName            :: !(Maybe Text)
-    , _ssStyleId         :: !(Maybe Int32)
+    , _ssStyleId         :: !(Maybe (JSONText Int32))
     , _ssTableId         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -674,7 +687,8 @@ ssName = lens _ssName (\ s a -> s{_ssName = a})
 -- | Identifier for the style setting (unique only within tables).
 ssStyleId :: Lens' StyleSetting (Maybe Int32)
 ssStyleId
-  = lens _ssStyleId (\ s a -> s{_ssStyleId = a})
+  = lens _ssStyleId (\ s a -> s{_ssStyleId = a}) .
+      mapping _Coerce
 
 -- | Identifier for the table.
 ssTableId :: Lens' StyleSetting (Maybe Text)
@@ -709,7 +723,7 @@ instance ToJSON StyleSetting where
 --
 -- /See:/ 'point' smart constructor.
 data Point = Point
-    { _pCoordinates :: !(Maybe [Double])
+    { _pCoordinates :: !(Maybe [JSONText Double])
     , _pType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -758,7 +772,7 @@ instance ToJSON Point where
 --
 -- /See:/ 'polygon' smart constructor.
 data Polygon = Polygon
-    { _polCoordinates :: !(Maybe [[[Double]]])
+    { _polCoordinates :: !(Maybe [[[JSONText Double]]])
     , _polType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -808,7 +822,7 @@ instance ToJSON Polygon where
 --
 -- /See:/ 'taskList' smart constructor.
 data TaskList = TaskList
-    { _tTotalItems    :: !(Maybe Int32)
+    { _tTotalItems    :: !(Maybe (JSONText Int32))
     , _tNextPageToken :: !(Maybe Text)
     , _tKind          :: !Text
     , _tItems         :: !(Maybe [Task])
@@ -838,7 +852,8 @@ taskList =
 -- | Total number of tasks for the table.
 tTotalItems :: Lens' TaskList (Maybe Int32)
 tTotalItems
-  = lens _tTotalItems (\ s a -> s{_tTotalItems = a})
+  = lens _tTotalItems (\ s a -> s{_tTotalItems = a}) .
+      mapping _Coerce
 
 -- | Token used to access the next page of this result. No token is displayed
 -- if there are no more pages left.
@@ -937,7 +952,7 @@ instance ToJSON Geometry where
 --
 -- /See:/ 'templateList' smart constructor.
 data TemplateList = TemplateList
-    { _temTotalItems    :: !(Maybe Int32)
+    { _temTotalItems    :: !(Maybe (JSONText Int32))
     , _temNextPageToken :: !(Maybe Text)
     , _temKind          :: !Text
     , _temItems         :: !(Maybe [Template])
@@ -969,6 +984,7 @@ temTotalItems :: Lens' TemplateList (Maybe Int32)
 temTotalItems
   = lens _temTotalItems
       (\ s a -> s{_temTotalItems = a})
+      . mapping _Coerce
 
 -- | Token used to access the next page of this result. No token is displayed
 -- if there are no more pages left.
@@ -1012,7 +1028,7 @@ instance ToJSON TemplateList where
 -- /See:/ 'import'' smart constructor.
 data Import = Import
     { _iKind            :: !Text
-    , _iNumRowsReceived :: !(Maybe Int64)
+    , _iNumRowsReceived :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Import' with the minimum fields required to make a request.
@@ -1040,6 +1056,7 @@ iNumRowsReceived :: Lens' Import (Maybe Int64)
 iNumRowsReceived
   = lens _iNumRowsReceived
       (\ s a -> s{_iNumRowsReceived = a})
+      . mapping _Coerce
 
 instance FromJSON Import where
         parseJSON
@@ -1062,7 +1079,7 @@ instance ToJSON Import where
 -- /See:/ 'task' smart constructor.
 data Task = Task
     { _tasProgress :: !(Maybe Text)
-    , _tasTaskId   :: !(Maybe Int64)
+    , _tasTaskId   :: !(Maybe (JSONText Int64))
     , _tasKind     :: !Text
     , _tasType     :: !(Maybe Text)
     , _tasStarted  :: !(Maybe Bool)
@@ -1100,7 +1117,8 @@ tasProgress
 -- | Identifier for the task.
 tasTaskId :: Lens' Task (Maybe Int64)
 tasTaskId
-  = lens _tasTaskId (\ s a -> s{_tasTaskId = a})
+  = lens _tasTaskId (\ s a -> s{_tasTaskId = a}) .
+      mapping _Coerce
 
 -- | Type of the resource. This is always \"fusiontables#task\".
 tasKind :: Lens' Task Text
@@ -1140,7 +1158,7 @@ instance ToJSON Task where
 -- /See:/ 'template' smart constructor.
 data Template = Template
     { _ttAutomaticColumnNames :: !(Maybe [Text])
-    , _ttTemplateId           :: !(Maybe Int32)
+    , _ttTemplateId           :: !(Maybe (JSONText Int32))
     , _ttKind                 :: !Text
     , _ttBody                 :: !(Maybe Text)
     , _ttName                 :: !(Maybe Text)
@@ -1188,6 +1206,7 @@ ttAutomaticColumnNames
 ttTemplateId :: Lens' Template (Maybe Int32)
 ttTemplateId
   = lens _ttTemplateId (\ s a -> s{_ttTemplateId = a})
+      . mapping _Coerce
 
 -- | The kind of item this is. For a template, this is always
 -- fusiontables#template.
@@ -1288,9 +1307,9 @@ data PolygonStyle = PolygonStyle
     { _psFillColorStyler    :: !(Maybe StyleFunction)
     , _psFillColor          :: !(Maybe Text)
     , _psStrokeColorStyler  :: !(Maybe StyleFunction)
-    , _psStrokeWeight       :: !(Maybe Int32)
-    , _psStrokeOpacity      :: !(Maybe Double)
-    , _psFillOpacity        :: !(Maybe Double)
+    , _psStrokeWeight       :: !(Maybe (JSONText Int32))
+    , _psStrokeOpacity      :: !(Maybe (JSONText Double))
+    , _psFillOpacity        :: !(Maybe (JSONText Double))
     , _psStrokeWeightStyler :: !(Maybe StyleFunction)
     , _psStrokeColor        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1352,12 +1371,14 @@ psStrokeWeight :: Lens' PolygonStyle (Maybe Int32)
 psStrokeWeight
   = lens _psStrokeWeight
       (\ s a -> s{_psStrokeWeight = a})
+      . mapping _Coerce
 
 -- | Opacity of the polygon border: 0.0 (transparent) to 1.0 (opaque).
 psStrokeOpacity :: Lens' PolygonStyle (Maybe Double)
 psStrokeOpacity
   = lens _psStrokeOpacity
       (\ s a -> s{_psStrokeOpacity = a})
+      . mapping _Coerce
 
 -- | Opacity of the interior of the polygon: 0.0 (transparent) to 1.0
 -- (opaque).
@@ -1365,6 +1386,7 @@ psFillOpacity :: Lens' PolygonStyle (Maybe Double)
 psFillOpacity
   = lens _psFillOpacity
       (\ s a -> s{_psFillOpacity = a})
+      . mapping _Coerce
 
 -- | Column-value or bucket styler that is used to determine the width of the
 -- polygon border.
@@ -1410,8 +1432,8 @@ instance ToJSON PolygonStyle where
 --
 -- /See:/ 'styleFunctionGradient' smart constructor.
 data StyleFunctionGradient = StyleFunctionGradient
-    { _sfgMax    :: !(Maybe Double)
-    , _sfgMin    :: !(Maybe Double)
+    { _sfgMax    :: !(Maybe (JSONText Double))
+    , _sfgMin    :: !(Maybe (JSONText Double))
     , _sfgColors :: !(Maybe [StyleFunctionGradientColorsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1436,12 +1458,16 @@ styleFunctionGradient =
 -- | Higher-end of the interpolation range: rows with this value will be
 -- assigned to colors[n-1].
 sfgMax :: Lens' StyleFunctionGradient (Maybe Double)
-sfgMax = lens _sfgMax (\ s a -> s{_sfgMax = a})
+sfgMax
+  = lens _sfgMax (\ s a -> s{_sfgMax = a}) .
+      mapping _Coerce
 
 -- | Lower-end of the interpolation range: rows with this value will be
 -- assigned to colors[0].
 sfgMin :: Lens' StyleFunctionGradient (Maybe Double)
-sfgMin = lens _sfgMin (\ s a -> s{_sfgMin = a})
+sfgMin
+  = lens _sfgMin (\ s a -> s{_sfgMin = a}) .
+      mapping _Coerce
 
 -- | Array with two or more colors.
 sfgColors :: Lens' StyleFunctionGradient [StyleFunctionGradientColorsItem]
@@ -1477,7 +1503,7 @@ data Column = Column
     , _cName                 :: !(Maybe Text)
     , _cType                 :: !(Maybe Text)
     , _cFormatPattern        :: !(Maybe Text)
-    , _cColumnId             :: !(Maybe Int32)
+    , _cColumnId             :: !(Maybe (JSONText Int32))
     , _cValidValues          :: !(Maybe [Text])
     , _cValidateData         :: !(Maybe Bool)
     , _cDescription          :: !(Maybe Text)
@@ -1599,7 +1625,8 @@ cFormatPattern
 -- | Identifier for the column.
 cColumnId :: Lens' Column (Maybe Int32)
 cColumnId
-  = lens _cColumnId (\ s a -> s{_cColumnId = a})
+  = lens _cColumnId (\ s a -> s{_cColumnId = a}) .
+      mapping _Coerce
 
 -- | List of valid values used to validate data and supply a drop-down list
 -- of values in the web application.
@@ -1842,8 +1869,8 @@ instance ToJSON Table where
 -- /See:/ 'lineStyle' smart constructor.
 data LineStyle = LineStyle
     { _lsStrokeColorStyler  :: !(Maybe StyleFunction)
-    , _lsStrokeWeight       :: !(Maybe Int32)
-    , _lsStrokeOpacity      :: !(Maybe Double)
+    , _lsStrokeWeight       :: !(Maybe (JSONText Int32))
+    , _lsStrokeOpacity      :: !(Maybe (JSONText Double))
     , _lsStrokeWeightStyler :: !(Maybe StyleFunction)
     , _lsStrokeColor        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1884,12 +1911,14 @@ lsStrokeWeight :: Lens' LineStyle (Maybe Int32)
 lsStrokeWeight
   = lens _lsStrokeWeight
       (\ s a -> s{_lsStrokeWeight = a})
+      . mapping _Coerce
 
 -- | Opacity of the line : 0.0 (transparent) to 1.0 (opaque).
 lsStrokeOpacity :: Lens' LineStyle (Maybe Double)
 lsStrokeOpacity
   = lens _lsStrokeOpacity
       (\ s a -> s{_lsStrokeOpacity = a})
+      . mapping _Coerce
 
 -- | Column-value or bucket styler that is used to determine the width of the
 -- line.

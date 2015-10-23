@@ -277,7 +277,7 @@ instance ToJSON SourceSplitResponse where
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe Int32)
+    , _sCode    :: !(Maybe (JSONText Int32))
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -309,7 +309,9 @@ sDetails
 
 -- | The status code, which should be an enum value of [google.rpc.Code][].
 sCode :: Lens' Status (Maybe Int32)
-sCode = lens _sCode (\ s a -> s{_sCode = a})
+sCode
+  = lens _sCode (\ s a -> s{_sCode = a}) .
+      mapping _Coerce
 
 -- | A developer-facing error message, which should be in English. Any
 -- user-facing error message should be localized and sent in the
@@ -343,12 +345,12 @@ data WorkItem = WorkItem
     , _wiReportStatusInterval     :: !(Maybe Text)
     , _wiShellTask                :: !(Maybe ShellTask)
     , _wiStreamingSetupTask       :: !(Maybe StreamingSetupTask)
-    , _wiInitialReportIndex       :: !(Maybe Int64)
+    , _wiInitialReportIndex       :: !(Maybe (JSONText Int64))
     , _wiMapTask                  :: !(Maybe MapTask)
     , _wiPackages                 :: !(Maybe [Package])
     , _wiStreamingComputationTask :: !(Maybe StreamingComputationTask)
     , _wiSourceOperationTask      :: !(Maybe SourceOperationRequest)
-    , _wiId                       :: !(Maybe Int64)
+    , _wiId                       :: !(Maybe (JSONText Int64))
     , _wiProjectId                :: !(Maybe Text)
     , _wiLeaseExpireTime          :: !(Maybe Text)
     , _wiConfiguration            :: !(Maybe Text)
@@ -432,6 +434,7 @@ wiInitialReportIndex :: Lens' WorkItem (Maybe Int64)
 wiInitialReportIndex
   = lens _wiInitialReportIndex
       (\ s a -> s{_wiInitialReportIndex = a})
+      . mapping _Coerce
 
 -- | Additional information for MapTask WorkItems.
 wiMapTask :: Lens' WorkItem (Maybe MapTask)
@@ -460,7 +463,9 @@ wiSourceOperationTask
 
 -- | Identifies this WorkItem.
 wiId :: Lens' WorkItem (Maybe Int64)
-wiId = lens _wiId (\ s a -> s{_wiId = a})
+wiId
+  = lens _wiId (\ s a -> s{_wiId = a}) .
+      mapping _Coerce
 
 -- | Identifies the cloud project this WorkItem belongs to.
 wiProjectId :: Lens' WorkItem (Maybe Text)
@@ -530,8 +535,8 @@ instance ToJSON WorkItem where
 --
 -- /See:/ 'sourceSplitOptions' smart constructor.
 data SourceSplitOptions = SourceSplitOptions
-    { _ssoDesiredShardSizeBytes  :: !(Maybe Int64)
-    , _ssoDesiredBundleSizeBytes :: !(Maybe Int64)
+    { _ssoDesiredShardSizeBytes  :: !(Maybe (JSONText Int64))
+    , _ssoDesiredBundleSizeBytes :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceSplitOptions' with the minimum fields required to make a request.
@@ -554,6 +559,7 @@ ssoDesiredShardSizeBytes :: Lens' SourceSplitOptions (Maybe Int64)
 ssoDesiredShardSizeBytes
   = lens _ssoDesiredShardSizeBytes
       (\ s a -> s{_ssoDesiredShardSizeBytes = a})
+      . mapping _Coerce
 
 -- | The source should be split into a set of bundles where the estimated
 -- size of each is approximately this many bytes.
@@ -561,6 +567,7 @@ ssoDesiredBundleSizeBytes :: Lens' SourceSplitOptions (Maybe Int64)
 ssoDesiredBundleSizeBytes
   = lens _ssoDesiredBundleSizeBytes
       (\ s a -> s{_ssoDesiredBundleSizeBytes = a})
+      . mapping _Coerce
 
 instance FromJSON SourceSplitOptions where
         parseJSON
@@ -615,7 +622,7 @@ instance ToJSON WorkerPoolMetadata where
 --
 -- /See:/ 'autoscalingSettings' smart constructor.
 data AutoscalingSettings = AutoscalingSettings
-    { _asMaxNumWorkers :: !(Maybe Int32)
+    { _asMaxNumWorkers :: !(Maybe (JSONText Int32))
     , _asAlgorithm     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -639,6 +646,7 @@ asMaxNumWorkers :: Lens' AutoscalingSettings (Maybe Int32)
 asMaxNumWorkers
   = lens _asMaxNumWorkers
       (\ s a -> s{_asMaxNumWorkers = a})
+      . mapping _Coerce
 
 -- | The algorithm to use for autoscaling.
 asAlgorithm :: Lens' AutoscalingSettings (Maybe Text)
@@ -1047,7 +1055,7 @@ instance ToJSON EnvironmentUserAgent where
 --
 -- /See:/ 'disk' smart constructor.
 data Disk = Disk
-    { _dSizeGb     :: !(Maybe Int32)
+    { _dSizeGb     :: !(Maybe (JSONText Int32))
     , _dDiskType   :: !(Maybe Text)
     , _dMountPoint :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1073,7 +1081,9 @@ disk =
 -- | Size of disk in GB. If zero or unspecified, the service will attempt to
 -- choose a reasonable default.
 dSizeGb :: Lens' Disk (Maybe Int32)
-dSizeGb = lens _dSizeGb (\ s a -> s{_dSizeGb = a})
+dSizeGb
+  = lens _dSizeGb (\ s a -> s{_dSizeGb = a}) .
+      mapping _Coerce
 
 -- | Disk storage type, as defined by Google Compute Engine. This must be a
 -- disk type appropriate to the project and zone in which the workers will
@@ -1443,7 +1453,7 @@ instance ToJSON Environment where
 --
 -- /See:/ 'concatPosition' smart constructor.
 data ConcatPosition = ConcatPosition
-    { _cpIndex    :: !(Maybe Int32)
+    { _cpIndex    :: !(Maybe (JSONText Int32))
     , _cpPosition :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1464,7 +1474,9 @@ concatPosition =
 
 -- | Index of the inner source.
 cpIndex :: Lens' ConcatPosition (Maybe Int32)
-cpIndex = lens _cpIndex (\ s a -> s{_cpIndex = a})
+cpIndex
+  = lens _cpIndex (\ s a -> s{_cpIndex = a}) .
+      mapping _Coerce
 
 -- | Position within the inner source.
 cpPosition :: Lens' ConcatPosition (Maybe Position)
@@ -1673,7 +1685,7 @@ data WorkItemStatus = WorkItemStatus
     , _wisDynamicSourceSplit      :: !(Maybe DynamicSourceSplit)
     , _wisCompleted               :: !(Maybe Bool)
     , _wisSourceFork              :: !(Maybe SourceFork)
-    , _wisReportIndex             :: !(Maybe Int64)
+    , _wisReportIndex             :: !(Maybe (JSONText Int64))
     , _wisRequestedLeaseDuration  :: !(Maybe Text)
     , _wisErrors                  :: !(Maybe [Status])
     , _wisMetricUpdates           :: !(Maybe [MetricUpdate])
@@ -1794,6 +1806,7 @@ wisReportIndex :: Lens' WorkItemStatus (Maybe Int64)
 wisReportIndex
   = lens _wisReportIndex
       (\ s a -> s{_wisReportIndex = a})
+      . mapping _Coerce
 
 -- | Amount of time the worker requests for its lease.
 wisRequestedLeaseDuration :: Lens' WorkItemStatus (Maybe Text)
@@ -1969,7 +1982,7 @@ instance ToJSON SourceSpec where
 --
 -- /See:/ 'sourceMetadata' smart constructor.
 data SourceMetadata = SourceMetadata
-    { _smEstimatedSizeBytes :: !(Maybe Int64)
+    { _smEstimatedSizeBytes :: !(Maybe (JSONText Int64))
     , _smProducesSortedKeys :: !(Maybe Bool)
     , _smInfinite           :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1999,6 +2012,7 @@ smEstimatedSizeBytes :: Lens' SourceMetadata (Maybe Int64)
 smEstimatedSizeBytes
   = lens _smEstimatedSizeBytes
       (\ s a -> s{_smEstimatedSizeBytes = a})
+      . mapping _Coerce
 
 -- | Whether this source is known to produce key\/value pairs with the
 -- (encoded) keys in lexicographically sorted order.
@@ -2558,7 +2572,7 @@ instance ToJSON
 -- /See:/ 'shellTask' smart constructor.
 data ShellTask = ShellTask
     { _stCommand  :: !(Maybe Text)
-    , _stExitCode :: !(Maybe Int32)
+    , _stExitCode :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ShellTask' with the minimum fields required to make a request.
@@ -2584,7 +2598,8 @@ stCommand
 -- | Exit code for the task.
 stExitCode :: Lens' ShellTask (Maybe Int32)
 stExitCode
-  = lens _stExitCode (\ s a -> s{_stExitCode = a})
+  = lens _stExitCode (\ s a -> s{_stExitCode = a}) .
+      mapping _Coerce
 
 instance FromJSON ShellTask where
         parseJSON
@@ -2938,7 +2953,7 @@ instance ToJSON DataDiskAssignment where
 --
 -- /See:/ 'workItemServiceState' smart constructor.
 data WorkItemServiceState = WorkItemServiceState
-    { _wissNextReportIndex       :: !(Maybe Int64)
+    { _wissNextReportIndex       :: !(Maybe (JSONText Int64))
     , _wissReportStatusInterval  :: !(Maybe Text)
     , _wissHarnessData           :: !(Maybe WorkItemServiceStateHarnessData)
     , _wissSuggestedStopPoint    :: !(Maybe ApproximateProgress)
@@ -2980,6 +2995,7 @@ wissNextReportIndex :: Lens' WorkItemServiceState (Maybe Int64)
 wissNextReportIndex
   = lens _wissNextReportIndex
       (\ s a -> s{_wissNextReportIndex = a})
+      . mapping _Coerce
 
 -- | New recommended reporting interval.
 wissReportStatusInterval :: Lens' WorkItemServiceState (Maybe Text)
@@ -3044,8 +3060,8 @@ instance ToJSON WorkItemServiceState where
 -- /See:/ 'streamingSetupTask' smart constructor.
 data StreamingSetupTask = StreamingSetupTask
     { _sstStreamingComputationTopology :: !(Maybe TopologyConfig)
-    , _sstReceiveWorkPort              :: !(Maybe Int32)
-    , _sstWorkerHarnessPort            :: !(Maybe Int32)
+    , _sstReceiveWorkPort              :: !(Maybe (JSONText Int32))
+    , _sstWorkerHarnessPort            :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StreamingSetupTask' with the minimum fields required to make a request.
@@ -3078,6 +3094,7 @@ sstReceiveWorkPort :: Lens' StreamingSetupTask (Maybe Int32)
 sstReceiveWorkPort
   = lens _sstReceiveWorkPort
       (\ s a -> s{_sstReceiveWorkPort = a})
+      . mapping _Coerce
 
 -- | The TCP port used by the worker to communicate with the Dataflow worker
 -- harness.
@@ -3085,6 +3102,7 @@ sstWorkerHarnessPort :: Lens' StreamingSetupTask (Maybe Int32)
 sstWorkerHarnessPort
   = lens _sstWorkerHarnessPort
       (\ s a -> s{_sstWorkerHarnessPort = a})
+      . mapping _Coerce
 
 instance FromJSON StreamingSetupTask where
         parseJSON
@@ -4087,10 +4105,10 @@ instance ToJSON SinkSpec where
 -- /See:/ 'workerPool' smart constructor.
 data WorkerPool = WorkerPool
     { _wpAutoscalingSettings :: !(Maybe AutoscalingSettings)
-    , _wpDiskSizeGb          :: !(Maybe Int32)
+    , _wpDiskSizeGb          :: !(Maybe (JSONText Int32))
     , _wpKind                :: !(Maybe Text)
     , _wpTaskrunnerSettings  :: !(Maybe TaskRunnerSettings)
-    , _wpNumWorkers          :: !(Maybe Int32)
+    , _wpNumWorkers          :: !(Maybe (JSONText Int32))
     , _wpNetwork             :: !(Maybe Text)
     , _wpZone                :: !(Maybe Text)
     , _wpPackages            :: !(Maybe [Package])
@@ -4176,6 +4194,7 @@ wpAutoscalingSettings
 wpDiskSizeGb :: Lens' WorkerPool (Maybe Int32)
 wpDiskSizeGb
   = lens _wpDiskSizeGb (\ s a -> s{_wpDiskSizeGb = a})
+      . mapping _Coerce
 
 -- | The kind of the worker pool; currently only \'harness\' and \'shuffle\'
 -- are supported.
@@ -4195,6 +4214,7 @@ wpTaskrunnerSettings
 wpNumWorkers :: Lens' WorkerPool (Maybe Int32)
 wpNumWorkers
   = lens _wpNumWorkers (\ s a -> s{_wpNumWorkers = a})
+      . mapping _Coerce
 
 -- | Network to which VMs will be assigned. If empty or unspecified, the
 -- service will use the network \"default\".
@@ -4826,7 +4846,7 @@ instance ToJSON Source where
 -- /See:/ 'approximateProgress' smart constructor.
 data ApproximateProgress = ApproximateProgress
     { _apRemainingTime   :: !(Maybe Text)
-    , _apPercentComplete :: !(Maybe Float)
+    , _apPercentComplete :: !(Maybe (JSONText Float))
     , _apPosition        :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4860,6 +4880,7 @@ apPercentComplete :: Lens' ApproximateProgress (Maybe Float)
 apPercentComplete
   = lens _apPercentComplete
       (\ s a -> s{_apPercentComplete = a})
+      . mapping _Coerce
 
 -- | A Position within the work to represent a progress.
 apPosition :: Lens' ApproximateProgress (Maybe Position)
@@ -5071,7 +5092,7 @@ instance ToJSON PartialGroupByKeyInstruction where
 --
 -- /See:/ 'parDoInstruction' smart constructor.
 data ParDoInstruction = ParDoInstruction
-    { _pdiNumOutputs       :: !(Maybe Int32)
+    { _pdiNumOutputs       :: !(Maybe (JSONText Int32))
     , _pdiMultiOutputInfos :: !(Maybe [MultiOutputInfo])
     , _pdiSideInputs       :: !(Maybe [SideInputInfo])
     , _pdiInput            :: !(Maybe InstructionInput)
@@ -5107,6 +5128,7 @@ pdiNumOutputs :: Lens' ParDoInstruction (Maybe Int32)
 pdiNumOutputs
   = lens _pdiNumOutputs
       (\ s a -> s{_pdiNumOutputs = a})
+      . mapping _Coerce
 
 -- | Information about each of the outputs, if user_fn is a MultiDoFn.
 pdiMultiOutputInfos :: Lens' ParDoInstruction [MultiOutputInfo]
@@ -5868,8 +5890,8 @@ instance ToJSON PubsubLocation where
 --
 -- /See:/ 'instructionInput' smart constructor.
 data InstructionInput = InstructionInput
-    { _iiProducerInstructionIndex :: !(Maybe Int32)
-    , _iiOutputNum                :: !(Maybe Int32)
+    { _iiProducerInstructionIndex :: !(Maybe (JSONText Int32))
+    , _iiOutputNum                :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstructionInput' with the minimum fields required to make a request.
@@ -5894,11 +5916,13 @@ iiProducerInstructionIndex :: Lens' InstructionInput (Maybe Int32)
 iiProducerInstructionIndex
   = lens _iiProducerInstructionIndex
       (\ s a -> s{_iiProducerInstructionIndex = a})
+      . mapping _Coerce
 
 -- | The output index (origin zero) within the producer.
 iiOutputNum :: Lens' InstructionInput (Maybe Int32)
 iiOutputNum
-  = lens _iiOutputNum (\ s a -> s{_iiOutputNum = a})
+  = lens _iiOutputNum (\ s a -> s{_iiOutputNum = a}) .
+      mapping _Coerce
 
 instance FromJSON InstructionInput where
         parseJSON
@@ -6105,9 +6129,9 @@ instance ToJSON LeaseWorkItemResponse where
 --
 -- /See:/ 'position' smart constructor.
 data Position = Position
-    { _pByteOffSet      :: !(Maybe Int64)
+    { _pByteOffSet      :: !(Maybe (JSONText Int64))
     , _pConcatPosition  :: !(Maybe ConcatPosition)
-    , _pRecordIndex     :: !(Maybe Int64)
+    , _pRecordIndex     :: !(Maybe (JSONText Int64))
     , _pShufflePosition :: !(Maybe Text)
     , _pKey             :: !(Maybe Text)
     , _pEnd             :: !(Maybe Bool)
@@ -6143,7 +6167,8 @@ position =
 -- | Position is a byte offset.
 pByteOffSet :: Lens' Position (Maybe Int64)
 pByteOffSet
-  = lens _pByteOffSet (\ s a -> s{_pByteOffSet = a})
+  = lens _pByteOffSet (\ s a -> s{_pByteOffSet = a}) .
+      mapping _Coerce
 
 -- | CloudPosition is a concat position.
 pConcatPosition :: Lens' Position (Maybe ConcatPosition)
@@ -6155,6 +6180,7 @@ pConcatPosition
 pRecordIndex :: Lens' Position (Maybe Int64)
 pRecordIndex
   = lens _pRecordIndex (\ s a -> s{_pRecordIndex = a})
+      . mapping _Coerce
 
 -- | CloudPosition is a base64 encoded BatchShufflePosition (with FIXED
 -- sharding).

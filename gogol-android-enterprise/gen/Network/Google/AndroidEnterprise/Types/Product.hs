@@ -41,8 +41,8 @@ import           Network.Google.Prelude
 -- /See:/ 'groupLicense' smart constructor.
 data GroupLicense = GroupLicense
     { _glKind            :: !Text
-    , _glNumProvisioned  :: !(Maybe Int32)
-    , _glNumPurchased    :: !(Maybe Int32)
+    , _glNumProvisioned  :: !(Maybe (JSONText Int32))
+    , _glNumPurchased    :: !(Maybe (JSONText Int32))
     , _glApproval        :: !(Maybe Text)
     , _glProductId       :: !(Maybe Text)
     , _glAcquisitionKind :: !(Maybe Text)
@@ -86,6 +86,7 @@ glNumProvisioned :: Lens' GroupLicense (Maybe Int32)
 glNumProvisioned
   = lens _glNumProvisioned
       (\ s a -> s{_glNumProvisioned = a})
+      . mapping _Coerce
 
 -- | The number of purchased licenses (possibly in multiple purchases). If
 -- this field is omitted then there is no limit on the number of licenses
@@ -94,6 +95,7 @@ glNumPurchased :: Lens' GroupLicense (Maybe Int32)
 glNumPurchased
   = lens _glNumPurchased
       (\ s a -> s{_glNumPurchased = a})
+      . mapping _Coerce
 
 -- | Whether the product to which this group license relates is currently
 -- approved by the enterprise, as either \"approved\" or \"unapproved\".
@@ -253,7 +255,7 @@ instance ToJSON CollectionsListResponse where
 data AppRestrictionsSchemaRestrictionRestrictionValue = AppRestrictionsSchemaRestrictionRestrictionValue
     { _arsrrvValueMultiselect :: !(Maybe [Text])
     , _arsrrvValueBool        :: !(Maybe Bool)
-    , _arsrrvValueInteger     :: !(Maybe Int32)
+    , _arsrrvValueInteger     :: !(Maybe (JSONText Int32))
     , _arsrrvType             :: !(Maybe Text)
     , _arsrrvValueString      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -302,6 +304,7 @@ arsrrvValueInteger :: Lens' AppRestrictionsSchemaRestrictionRestrictionValue (Ma
 arsrrvValueInteger
   = lens _arsrrvValueInteger
       (\ s a -> s{_arsrrvValueInteger = a})
+      . mapping _Coerce
 
 -- | The type of the value being provided.
 arsrrvType :: Lens' AppRestrictionsSchemaRestrictionRestrictionValue (Maybe Text)
@@ -840,7 +843,7 @@ instance ToJSON UsersListResponse where
 --
 -- /See:/ 'appVersion' smart constructor.
 data AppVersion = AppVersion
-    { _avVersionCode   :: !(Maybe Int32)
+    { _avVersionCode   :: !(Maybe (JSONText Int32))
     , _avVersionString :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -864,6 +867,7 @@ avVersionCode :: Lens' AppVersion (Maybe Int32)
 avVersionCode
   = lens _avVersionCode
       (\ s a -> s{_avVersionCode = a})
+      . mapping _Coerce
 
 -- | The string used in the Play Store by the app developer to identify the
 -- version. The string is not necessarily unique or localized (for example,
@@ -1112,7 +1116,7 @@ instance ToJSON ProductSet where
 --
 -- /See:/ 'install' smart constructor.
 data Install = Install
-    { _iVersionCode  :: !(Maybe Int32)
+    { _iVersionCode  :: !(Maybe (JSONText Int32))
     , _iKind         :: !Text
     , _iInstallState :: !(Maybe Text)
     , _iProductId    :: !(Maybe Text)
@@ -1144,6 +1148,7 @@ install =
 iVersionCode :: Lens' Install (Maybe Int32)
 iVersionCode
   = lens _iVersionCode (\ s a -> s{_iVersionCode = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#install\".

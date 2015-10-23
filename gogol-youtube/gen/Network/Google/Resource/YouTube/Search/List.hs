@@ -135,7 +135,8 @@ type SearchListResource =
                                                                  :>
                                                                  QueryParam
                                                                    "maxResults"
-                                                                   Word32
+                                                                   (JSONText
+                                                                      Word32)
                                                                    :>
                                                                    QueryParam
                                                                      "publishedBefore"
@@ -191,7 +192,7 @@ data SearchList = SearchList
     , _slChannelType            :: !(Maybe SearchListChannelType)
     , _slRelevanceLanguage      :: !(Maybe Text)
     , _slOrder                  :: !SearchListOrder
-    , _slMaxResults             :: !Word32
+    , _slMaxResults             :: !(JSONText Word32)
     , _slPublishedBefore        :: !(Maybe DateTime')
     , _slVideoType              :: !(Maybe SearchListVideoType)
     , _slVideoDimension         :: !(Maybe SearchListVideoDimension)
@@ -544,6 +545,7 @@ slOrder = lens _slOrder (\ s a -> s{_slOrder = a})
 slMaxResults :: Lens' SearchList Word32
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
+      . _Coerce
 
 -- | The publishedBefore parameter indicates that the API response should
 -- only contain resources created before the specified time. The value is

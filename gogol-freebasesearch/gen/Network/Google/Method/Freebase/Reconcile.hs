@@ -52,9 +52,9 @@ type ReconcileMethod =
          "reconcile" :>
            QueryParams "kind" Text :>
              QueryParams "lang" Text :>
-               QueryParam "confidence" Float :>
+               QueryParam "confidence" (JSONText Float) :>
                  QueryParam "name" Text :>
-                   QueryParam "limit" Int32 :>
+                   QueryParam "limit" (JSONText Int32) :>
                      QueryParams "prop" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ReconcileGet
 
@@ -64,9 +64,9 @@ type ReconcileMethod =
 data Reconcile = Reconcile
     { _rKind       :: !(Maybe [Text])
     , _rLang       :: !(Maybe [Text])
-    , _rConfidence :: !Float
+    , _rConfidence :: !(JSONText Float)
     , _rName       :: !(Maybe Text)
-    , _rLimit      :: !Int32
+    , _rLimit      :: !(JSONText Int32)
     , _rProp       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -113,7 +113,8 @@ rLang
 -- | Required confidence for a candidate to match. Must be between .5 and 1.0
 rConfidence :: Lens' Reconcile Float
 rConfidence
-  = lens _rConfidence (\ s a -> s{_rConfidence = a})
+  = lens _rConfidence (\ s a -> s{_rConfidence = a}) .
+      _Coerce
 
 -- | Name of entity.
 rName :: Lens' Reconcile (Maybe Text)
@@ -121,7 +122,8 @@ rName = lens _rName (\ s a -> s{_rName = a})
 
 -- | Maximum number of candidates to return.
 rLimit :: Lens' Reconcile Int32
-rLimit = lens _rLimit (\ s a -> s{_rLimit = a})
+rLimit
+  = lens _rLimit (\ s a -> s{_rLimit = a}) . _Coerce
 
 -- | Property values for entity formatted as :
 rProp :: Lens' Reconcile [Text]

@@ -63,7 +63,7 @@ type BillingAccountsProjectsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListProjectBillingInfoResponse
@@ -82,7 +82,7 @@ data BillingAccountsProjectsList = BillingAccountsProjectsList
     , _baplBearerToken    :: !(Maybe Text)
     , _baplName           :: !Text
     , _baplPageToken      :: !(Maybe Text)
-    , _baplPageSize       :: !(Maybe Int32)
+    , _baplPageSize       :: !(Maybe (JSONText Int32))
     , _baplCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -179,6 +179,7 @@ baplPageToken
 baplPageSize :: Lens' BillingAccountsProjectsList (Maybe Int32)
 baplPageSize
   = lens _baplPageSize (\ s a -> s{_baplPageSize = a})
+      . mapping _Coerce
 
 -- | JSONP
 baplCallback :: Lens' BillingAccountsProjectsList (Maybe Text)

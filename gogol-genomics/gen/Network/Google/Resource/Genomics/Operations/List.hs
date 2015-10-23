@@ -62,7 +62,7 @@ type OperationsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListOperationsResponse
@@ -80,7 +80,7 @@ data OperationsList = OperationsList
     , _olName           :: !Text
     , _olFilter         :: !(Maybe Text)
     , _olPageToken      :: !(Maybe Text)
-    , _olPageSize       :: !(Maybe Int32)
+    , _olPageSize       :: !(Maybe (JSONText Int32))
     , _olCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -181,7 +181,8 @@ olPageToken
 -- 256. The maximum value is 2048.
 olPageSize :: Lens' OperationsList (Maybe Int32)
 olPageSize
-  = lens _olPageSize (\ s a -> s{_olPageSize = a})
+  = lens _olPageSize (\ s a -> s{_olPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 olCallback :: Lens' OperationsList (Maybe Text)

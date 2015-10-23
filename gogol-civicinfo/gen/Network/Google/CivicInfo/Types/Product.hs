@@ -370,7 +370,7 @@ instance ToJSON PollingLocation where
 -- /See:/ 'geographicDivision' smart constructor.
 data GeographicDivision = GeographicDivision
     { _gdName          :: !(Maybe Text)
-    , _gdOfficeIndices :: !(Maybe [Word32])
+    , _gdOfficeIndices :: !(Maybe [JSONText Word32])
     , _gdAlsoKnownAs   :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -447,7 +447,7 @@ data Candidate = Candidate
     , _cPhotoURL      :: !(Maybe Text)
     , _cChannels      :: !(Maybe [Channel])
     , _cCandidateURL  :: !(Maybe Text)
-    , _cOrderOnBallot :: !(Maybe Int64)
+    , _cOrderOnBallot :: !(Maybe (JSONText Int64))
     , _cName          :: !(Maybe Text)
     , _cParty         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -516,6 +516,7 @@ cOrderOnBallot :: Lens' Candidate (Maybe Int64)
 cOrderOnBallot
   = lens _cOrderOnBallot
       (\ s a -> s{_cOrderOnBallot = a})
+      . mapping _Coerce
 
 -- | The candidate\'s name.
 cName :: Lens' Candidate (Maybe Text)
@@ -555,7 +556,7 @@ instance ToJSON Candidate where
 data Office = Office
     { _oDivisionId      :: !(Maybe Text)
     , _oRoles           :: !(Maybe [Text])
-    , _oOfficialIndices :: !(Maybe [Word32])
+    , _oOfficialIndices :: !(Maybe [JSONText Word32])
     , _oSources         :: !(Maybe [Source])
     , _oName            :: !(Maybe Text)
     , _oLevels          :: !(Maybe [Text])
@@ -705,7 +706,7 @@ data Election = Election
     { _eOcdDivisionId :: !(Maybe Text)
     , _eElectionDay   :: !(Maybe Text)
     , _eName          :: !(Maybe Text)
-    , _eId            :: !(Maybe Int64)
+    , _eId            :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Election' with the minimum fields required to make a request.
@@ -750,7 +751,8 @@ eName = lens _eName (\ s a -> s{_eName = a})
 
 -- | The unique ID of this election.
 eId :: Lens' Election (Maybe Int64)
-eId = lens _eId (\ s a -> s{_eId = a})
+eId
+  = lens _eId (\ s a -> s{_eId = a}) . mapping _Coerce
 
 instance FromJSON Election where
         parseJSON
@@ -1128,13 +1130,13 @@ data Contest = Contest
     , _conReferendumURL              :: !(Maybe Text)
     , _conReferendumEffectOfAbstain  :: !(Maybe Text)
     , _conReferendumSubtitle         :: !(Maybe Text)
-    , _conNumberVotingFor            :: !(Maybe Int64)
+    , _conNumberVotingFor            :: !(Maybe (JSONText Int64))
     , _conOffice                     :: !(Maybe Text)
     , _conReferendumConStatement     :: !(Maybe Text)
     , _conSources                    :: !(Maybe [Source])
     , _conReferendumProStatement     :: !(Maybe Text)
     , _conReferendumBallotResponses  :: !(Maybe [Text])
-    , _conNumberElected              :: !(Maybe Int64)
+    , _conNumberElected              :: !(Maybe (JSONText Int64))
     , _conSpecial                    :: !(Maybe Text)
     , _conReferendumText             :: !(Maybe Text)
     , _conPrimaryParty               :: !(Maybe Text)
@@ -1146,7 +1148,7 @@ data Contest = Contest
     , _conLevel                      :: !(Maybe [Text])
     , _conCandidates                 :: !(Maybe [Candidate])
     , _conReferendumTitle            :: !(Maybe Text)
-    , _conBallotPlacement            :: !(Maybe Int64)
+    , _conBallotPlacement            :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Contest' with the minimum fields required to make a request.
@@ -1272,6 +1274,7 @@ conNumberVotingFor :: Lens' Contest (Maybe Int64)
 conNumberVotingFor
   = lens _conNumberVotingFor
       (\ s a -> s{_conNumberVotingFor = a})
+      . mapping _Coerce
 
 -- | The name of the office for this contest.
 conOffice :: Lens' Contest (Maybe Text)
@@ -1318,6 +1321,7 @@ conNumberElected :: Lens' Contest (Maybe Int64)
 conNumberElected
   = lens _conNumberElected
       (\ s a -> s{_conNumberElected = a})
+      . mapping _Coerce
 
 -- | \"Yes\" or \"No\" depending on whether this a contest being held outside
 -- the normal election cycle.
@@ -1401,6 +1405,7 @@ conBallotPlacement :: Lens' Contest (Maybe Int64)
 conBallotPlacement
   = lens _conBallotPlacement
       (\ s a -> s{_conBallotPlacement = a})
+      . mapping _Coerce
 
 instance FromJSON Contest where
         parseJSON

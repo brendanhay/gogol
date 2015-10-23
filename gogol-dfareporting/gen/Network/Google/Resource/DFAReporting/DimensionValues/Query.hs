@@ -48,11 +48,11 @@ type DimensionValuesQueryResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "dimensionvalues" :>
                "query" :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
+                   QueryParam "maxResults" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DimensionValueRequest :>
                          Post '[JSON] DimensionValueList
@@ -61,10 +61,10 @@ type DimensionValuesQueryResource =
 --
 -- /See:/ 'dimensionValuesQuery' smart constructor.
 data DimensionValuesQuery = DimensionValuesQuery
-    { _dvqProFileId  :: !Int64
+    { _dvqProFileId  :: !(JSONText Int64)
     , _dvqPayload    :: !DimensionValueRequest
     , _dvqPageToken  :: !(Maybe Text)
-    , _dvqMaxResults :: !(Maybe Int32)
+    , _dvqMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DimensionValuesQuery' with the minimum fields required to make a request.
@@ -94,6 +94,7 @@ dimensionValuesQuery pDvqProFileId_ pDvqPayload_ =
 dvqProFileId :: Lens' DimensionValuesQuery Int64
 dvqProFileId
   = lens _dvqProFileId (\ s a -> s{_dvqProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 dvqPayload :: Lens' DimensionValuesQuery DimensionValueRequest
@@ -110,6 +111,7 @@ dvqMaxResults :: Lens' DimensionValuesQuery (Maybe Int32)
 dvqMaxResults
   = lens _dvqMaxResults
       (\ s a -> s{_dvqMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest DimensionValuesQuery where
         type Rs DimensionValuesQuery = DimensionValueList

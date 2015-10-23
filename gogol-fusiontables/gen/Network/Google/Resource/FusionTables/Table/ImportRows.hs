@@ -52,8 +52,8 @@ type TableImportRowsResource =
          "tables" :>
            Capture "tableId" Text :>
              "import" :>
-               QueryParam "startLine" Int32 :>
-                 QueryParam "endLine" Int32 :>
+               QueryParam "startLine" (JSONText Int32) :>
+                 QueryParam "endLine" (JSONText Int32) :>
                    QueryParam "delimiter" Text :>
                      QueryParam "encoding" Text :>
                        QueryParam "isStrict" Bool :>
@@ -65,8 +65,8 @@ type TableImportRowsResource =
              "tables" :>
                Capture "tableId" Text :>
                  "import" :>
-                   QueryParam "startLine" Int32 :>
-                     QueryParam "endLine" Int32 :>
+                   QueryParam "startLine" (JSONText Int32) :>
+                     QueryParam "endLine" (JSONText Int32) :>
                        QueryParam "delimiter" Text :>
                          QueryParam "encoding" Text :>
                            QueryParam "isStrict" Bool :>
@@ -79,8 +79,8 @@ type TableImportRowsResource =
 --
 -- /See:/ 'tableImportRows' smart constructor.
 data TableImportRows = TableImportRows
-    { _tirStartLine :: !(Maybe Int32)
-    , _tirEndLine   :: !(Maybe Int32)
+    { _tirStartLine :: !(Maybe (JSONText Int32))
+    , _tirEndLine   :: !(Maybe (JSONText Int32))
     , _tirTableId   :: !Text
     , _tirDelimiter :: !(Maybe Text)
     , _tirEncoding  :: !(Maybe Text)
@@ -120,6 +120,7 @@ tableImportRows pTirTableId_ =
 tirStartLine :: Lens' TableImportRows (Maybe Int32)
 tirStartLine
   = lens _tirStartLine (\ s a -> s{_tirStartLine = a})
+      . mapping _Coerce
 
 -- | The index of the line up to which data will be imported. Default is to
 -- import the entire file. If endLine is negative, it is an offset from the
@@ -127,7 +128,8 @@ tirStartLine
 -- lines.
 tirEndLine :: Lens' TableImportRows (Maybe Int32)
 tirEndLine
-  = lens _tirEndLine (\ s a -> s{_tirEndLine = a})
+  = lens _tirEndLine (\ s a -> s{_tirEndLine = a}) .
+      mapping _Coerce
 
 -- | The table into which new rows are being imported.
 tirTableId :: Lens' TableImportRows Text

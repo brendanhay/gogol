@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersReturnlineitemResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "orders" :>
              Capture "orderId" Text :>
                "returnLineItem" :>
@@ -58,7 +58,7 @@ type OrdersReturnlineitemResource =
 --
 -- /See:/ 'ordersReturnlineitem' smart constructor.
 data OrdersReturnlineitem = OrdersReturnlineitem
-    { _oMerchantId :: !Word64
+    { _oMerchantId :: !(JSONText Word64)
     , _oPayload    :: !OrdersReturnLineItemRequest
     , _oOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,7 +87,8 @@ ordersReturnlineitem pOMerchantId_ pOPayload_ pOOrderId_ =
 -- | The ID of the managing account.
 oMerchantId :: Lens' OrdersReturnlineitem Word64
 oMerchantId
-  = lens _oMerchantId (\ s a -> s{_oMerchantId = a})
+  = lens _oMerchantId (\ s a -> s{_oMerchantId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 oPayload :: Lens' OrdersReturnlineitem OrdersReturnLineItemRequest

@@ -46,17 +46,17 @@ type UserRolesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "userRoles" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] UserRole
 
 -- | Gets one user role by ID.
 --
 -- /See:/ 'userRolesGet' smart constructor.
 data UserRolesGet = UserRolesGet
-    { _urgProFileId :: !Int64
-    , _urgId        :: !Int64
+    { _urgProFileId :: !(JSONText Int64)
+    , _urgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ userRolesGet pUrgProFileId_ pUrgId_ =
 urgProFileId :: Lens' UserRolesGet Int64
 urgProFileId
   = lens _urgProFileId (\ s a -> s{_urgProFileId = a})
+      . _Coerce
 
 -- | User role ID.
 urgId :: Lens' UserRolesGet Int64
-urgId = lens _urgId (\ s a -> s{_urgId = a})
+urgId
+  = lens _urgId (\ s a -> s{_urgId = a}) . _Coerce
 
 instance GoogleRequest UserRolesGet where
         type Rs UserRolesGet = UserRole

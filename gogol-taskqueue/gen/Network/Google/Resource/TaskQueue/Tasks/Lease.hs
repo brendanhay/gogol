@@ -55,8 +55,8 @@ type TasksLeaseResource =
                Capture "taskqueue" Text :>
                  "tasks" :>
                    "lease" :>
-                     QueryParam "numTasks" Int32 :>
-                       QueryParam "leaseSecs" Int32 :>
+                     QueryParam "numTasks" (JSONText Int32) :>
+                       QueryParam "leaseSecs" (JSONText Int32) :>
                          QueryParam "tag" Text :>
                            QueryParam "groupByTag" Bool :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Tasks
@@ -68,8 +68,8 @@ data TasksLease = TasksLease
     { _tlTaskqueue  :: !Text
     , _tlTag        :: !(Maybe Text)
     , _tlProject    :: !Text
-    , _tlNumTasks   :: !Int32
-    , _tlLeaseSecs  :: !Int32
+    , _tlNumTasks   :: !(JSONText Int32)
+    , _tlLeaseSecs  :: !(JSONText Int32)
     , _tlGroupByTag :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -124,12 +124,14 @@ tlProject
 -- | The number of tasks to lease.
 tlNumTasks :: Lens' TasksLease Int32
 tlNumTasks
-  = lens _tlNumTasks (\ s a -> s{_tlNumTasks = a})
+  = lens _tlNumTasks (\ s a -> s{_tlNumTasks = a}) .
+      _Coerce
 
 -- | The lease in seconds.
 tlLeaseSecs :: Lens' TasksLease Int32
 tlLeaseSecs
-  = lens _tlLeaseSecs (\ s a -> s{_tlLeaseSecs = a})
+  = lens _tlLeaseSecs (\ s a -> s{_tlLeaseSecs = a}) .
+      _Coerce
 
 -- | When true, all returned tasks will have the same tag
 tlGroupByTag :: Lens' TasksLease (Maybe Bool)

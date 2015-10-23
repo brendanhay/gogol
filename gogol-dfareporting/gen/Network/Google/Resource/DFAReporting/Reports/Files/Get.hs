@@ -47,21 +47,21 @@ type ReportsFilesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
-               Capture "reportId" Int64 :>
+               Capture "reportId" (JSONText Int64) :>
                  "files" :>
-                   Capture "fileId" Int64 :>
+                   Capture "fileId" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
          "v2.2" :>
            "userprofiles" :>
-             Capture "profileId" Int64 :>
+             Capture "profileId" (JSONText Int64) :>
                "reports" :>
-                 Capture "reportId" Int64 :>
+                 Capture "reportId" (JSONText Int64) :>
                    "files" :>
-                     Capture "fileId" Int64 :>
+                     Capture "fileId" (JSONText Int64) :>
                        QueryParam "alt" AltMedia :>
                          Get '[OctetStream] Stream
 
@@ -69,9 +69,9 @@ type ReportsFilesGetResource =
 --
 -- /See:/ 'reportsFilesGet' smart constructor.
 data ReportsFilesGet = ReportsFilesGet
-    { _rfgReportId  :: !Int64
-    , _rfgProFileId :: !Int64
-    , _rfgFileId    :: !Int64
+    { _rfgReportId  :: !(JSONText Int64)
+    , _rfgProFileId :: !(JSONText Int64)
+    , _rfgFileId    :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesGet' with the minimum fields required to make a request.
@@ -98,17 +98,20 @@ reportsFilesGet pRfgReportId_ pRfgProFileId_ pRfgFileId_ =
 -- | The ID of the report.
 rfgReportId :: Lens' ReportsFilesGet Int64
 rfgReportId
-  = lens _rfgReportId (\ s a -> s{_rfgReportId = a})
+  = lens _rfgReportId (\ s a -> s{_rfgReportId = a}) .
+      _Coerce
 
 -- | The DFA profile ID.
 rfgProFileId :: Lens' ReportsFilesGet Int64
 rfgProFileId
   = lens _rfgProFileId (\ s a -> s{_rfgProFileId = a})
+      . _Coerce
 
 -- | The ID of the report file.
 rfgFileId :: Lens' ReportsFilesGet Int64
 rfgFileId
-  = lens _rfgFileId (\ s a -> s{_rfgFileId = a})
+  = lens _rfgFileId (\ s a -> s{_rfgFileId = a}) .
+      _Coerce
 
 instance GoogleRequest ReportsFilesGet where
         type Rs ReportsFilesGet = File

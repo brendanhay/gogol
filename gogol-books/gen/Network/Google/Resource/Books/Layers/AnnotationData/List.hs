@@ -62,16 +62,17 @@ type LayersAnnotationDataListResource =
                Capture "layerId" Text :>
                  "data" :>
                    QueryParam "contentVersion" Text :>
-                     QueryParam "w" Int32 :>
-                       QueryParam "scale" Int32 :>
+                     QueryParam "w" (JSONText Int32) :>
+                       QueryParam "scale" (JSONText Int32) :>
                          QueryParam "locale" Text :>
                            QueryParam "updatedMax" Text :>
                              QueryParam "updatedMin" Text :>
                                QueryParams "annotationDataId" Text :>
                                  QueryParam "source" Text :>
-                                   QueryParam "h" Int32 :>
+                                   QueryParam "h" (JSONText Int32) :>
                                      QueryParam "pageToken" Text :>
-                                       QueryParam "maxResults" Word32 :>
+                                       QueryParam "maxResults" (JSONText Word32)
+                                         :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] AnnotationsData
 
@@ -79,8 +80,8 @@ type LayersAnnotationDataListResource =
 --
 -- /See:/ 'layersAnnotationDataList' smart constructor.
 data LayersAnnotationDataList = LayersAnnotationDataList
-    { _ladlW                :: !(Maybe Int32)
-    , _ladlScale            :: !(Maybe Int32)
+    { _ladlW                :: !(Maybe (JSONText Int32))
+    , _ladlScale            :: !(Maybe (JSONText Int32))
     , _ladlLocale           :: !(Maybe Text)
     , _ladlContentVersion   :: !Text
     , _ladlUpdatedMax       :: !(Maybe Text)
@@ -88,10 +89,10 @@ data LayersAnnotationDataList = LayersAnnotationDataList
     , _ladlAnnotationDataId :: !(Maybe [Text])
     , _ladlVolumeId         :: !Text
     , _ladlSource           :: !(Maybe Text)
-    , _ladlH                :: !(Maybe Int32)
+    , _ladlH                :: !(Maybe (JSONText Int32))
     , _ladlPageToken        :: !(Maybe Text)
     , _ladlLayerId          :: !Text
-    , _ladlMaxResults       :: !(Maybe Word32)
+    , _ladlMaxResults       :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersAnnotationDataList' with the minimum fields required to make a request.
@@ -148,12 +149,15 @@ layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.
 ladlW :: Lens' LayersAnnotationDataList (Maybe Int32)
-ladlW = lens _ladlW (\ s a -> s{_ladlW = a})
+ladlW
+  = lens _ladlW (\ s a -> s{_ladlW = a}) .
+      mapping _Coerce
 
 -- | The requested scale for the image.
 ladlScale :: Lens' LayersAnnotationDataList (Maybe Int32)
 ladlScale
-  = lens _ladlScale (\ s a -> s{_ladlScale = a})
+  = lens _ladlScale (\ s a -> s{_ladlScale = a}) .
+      mapping _Coerce
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
@@ -203,7 +207,9 @@ ladlSource
 -- | The requested pixel height for any images. If height is provided width
 -- must also be provided.
 ladlH :: Lens' LayersAnnotationDataList (Maybe Int32)
-ladlH = lens _ladlH (\ s a -> s{_ladlH = a})
+ladlH
+  = lens _ladlH (\ s a -> s{_ladlH = a}) .
+      mapping _Coerce
 
 -- | The value of the nextToken from the previous page.
 ladlPageToken :: Lens' LayersAnnotationDataList (Maybe Text)
@@ -221,6 +227,7 @@ ladlMaxResults :: Lens' LayersAnnotationDataList (Maybe Word32)
 ladlMaxResults
   = lens _ladlMaxResults
       (\ s a -> s{_ladlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest LayersAnnotationDataList where
         type Rs LayersAnnotationDataList = AnnotationsData

@@ -45,14 +45,14 @@ type AccountsGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "accounts" :>
-           Capture "id" Int32 :>
+           Capture "id" (JSONText Int32) :>
              QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
 newtype AccountsGet = AccountsGet
-    { _agId :: Int32
+    { _agId :: JSONText Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
@@ -70,7 +70,7 @@ accountsGet pAgId_ =
 
 -- | The account id
 agId :: Lens' AccountsGet Int32
-agId = lens _agId (\ s a -> s{_agId = a})
+agId = lens _agId (\ s a -> s{_agId = a}) . _Coerce
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account

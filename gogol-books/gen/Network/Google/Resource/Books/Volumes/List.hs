@@ -68,8 +68,8 @@ type VolumesListResource =
                        QueryParam "projection" VolumesListProjection :>
                          QueryParam "filter" VolumesListFilter :>
                            QueryParam "langRestrict" Text :>
-                             QueryParam "startIndex" Word32 :>
-                               QueryParam "maxResults" Word32 :>
+                             QueryParam "startIndex" (JSONText Word32) :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "showPreorders" Bool :>
                                    QueryParam "printType" VolumesListPrintType
                                      :>
@@ -89,8 +89,8 @@ data VolumesList = VolumesList
     , _vlProjection      :: !(Maybe VolumesListProjection)
     , _vlFilter          :: !(Maybe VolumesListFilter)
     , _vlLangRestrict    :: !(Maybe Text)
-    , _vlStartIndex      :: !(Maybe Word32)
-    , _vlMaxResults      :: !(Maybe Word32)
+    , _vlStartIndex      :: !(Maybe (JSONText Word32))
+    , _vlMaxResults      :: !(Maybe (JSONText Word32))
     , _vlShowPreOrders   :: !(Maybe Bool)
     , _vlPrintType       :: !(Maybe VolumesListPrintType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -192,11 +192,13 @@ vlLangRestrict
 vlStartIndex :: Lens' VolumesList (Maybe Word32)
 vlStartIndex
   = lens _vlStartIndex (\ s a -> s{_vlStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum number of results to return.
 vlMaxResults :: Lens' VolumesList (Maybe Word32)
 vlMaxResults
   = lens _vlMaxResults (\ s a -> s{_vlMaxResults = a})
+      . mapping _Coerce
 
 -- | Set to true to show books available for preorder. Defaults to false.
 vlShowPreOrders :: Lens' VolumesList (Maybe Bool)

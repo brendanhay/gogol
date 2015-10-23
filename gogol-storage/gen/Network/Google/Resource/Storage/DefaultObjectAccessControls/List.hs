@@ -49,8 +49,11 @@ type DefaultObjectAccessControlsListResource =
          "b" :>
            Capture "bucket" Text :>
              "defaultObjectAcl" :>
-               QueryParam "ifMetagenerationMatch" Int64 :>
-                 QueryParam "ifMetagenerationNotMatch" Int64 :>
+               QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                 :>
+                 QueryParam "ifMetagenerationNotMatch"
+                   (JSONText Int64)
+                   :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ObjectAccessControls
 
@@ -58,9 +61,9 @@ type DefaultObjectAccessControlsListResource =
 --
 -- /See:/ 'defaultObjectAccessControlsList' smart constructor.
 data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList
-    { _doaclIfMetagenerationMatch    :: !(Maybe Int64)
+    { _doaclIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
     , _doaclBucket                   :: !Text
-    , _doaclIfMetagenerationNotMatch :: !(Maybe Int64)
+    , _doaclIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsList' with the minimum fields required to make a request.
@@ -88,6 +91,7 @@ doaclIfMetagenerationMatch :: Lens' DefaultObjectAccessControlsList (Maybe Int64
 doaclIfMetagenerationMatch
   = lens _doaclIfMetagenerationMatch
       (\ s a -> s{_doaclIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Name of a bucket.
 doaclBucket :: Lens' DefaultObjectAccessControlsList Text
@@ -100,6 +104,7 @@ doaclIfMetagenerationNotMatch :: Lens' DefaultObjectAccessControlsList (Maybe In
 doaclIfMetagenerationNotMatch
   = lens _doaclIfMetagenerationNotMatch
       (\ s a -> s{_doaclIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 instance GoogleRequest
          DefaultObjectAccessControlsList where

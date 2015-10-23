@@ -54,7 +54,7 @@ type PeopleListByActivityResource =
                Capture "collection" PeopleListByActivityCollection
                  :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection for a particular
@@ -65,7 +65,7 @@ data PeopleListByActivity = PeopleListByActivity
     { _plbaActivityId :: !Text
     , _plbaCollection :: !PeopleListByActivityCollection
     , _plbaPageToken  :: !(Maybe Text)
-    , _plbaMaxResults :: !Word32
+    , _plbaMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByActivity' with the minimum fields required to make a request.
@@ -118,6 +118,7 @@ plbaMaxResults :: Lens' PeopleListByActivity Word32
 plbaMaxResults
   = lens _plbaMaxResults
       (\ s a -> s{_plbaMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest PeopleListByActivity where
         type Rs PeopleListByActivity = PeopleFeed

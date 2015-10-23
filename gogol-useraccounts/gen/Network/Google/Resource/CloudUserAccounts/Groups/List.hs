@@ -55,7 +55,7 @@ type GroupsListResource =
                  QueryParam "orderBy" Text :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] GroupList
 
 -- | Retrieves the list of groups contained within the specified project.
@@ -66,7 +66,7 @@ data GroupsList = GroupsList
     , _glProject    :: !Text
     , _glFilter     :: !(Maybe Text)
     , _glPageToken  :: !(Maybe Text)
-    , _glMaxResults :: !Word32
+    , _glMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList' with the minimum fields required to make a request.
@@ -136,6 +136,7 @@ glPageToken
 glMaxResults :: Lens' GroupsList Word32
 glMaxResults
   = lens _glMaxResults (\ s a -> s{_glMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest GroupsList where
         type Rs GroupsList = GroupList

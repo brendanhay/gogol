@@ -54,7 +54,7 @@ type EventsUpdateResource =
            Capture "calendarId" Text :>
              "events" :>
                Capture "eventId" Text :>
-                 QueryParam "maxAttendees" Int32 :>
+                 QueryParam "maxAttendees" (JSONText Int32) :>
                    QueryParam "sendNotifications" Bool :>
                      QueryParam "supportsAttachments" Bool :>
                        QueryParam "alwaysIncludeEmail" Bool :>
@@ -67,7 +67,7 @@ type EventsUpdateResource =
 data EventsUpdate = EventsUpdate
     { _euCalendarId          :: !Text
     , _euPayload             :: !Event
-    , _euMaxAttendees        :: !(Maybe Int32)
+    , _euMaxAttendees        :: !(Maybe (JSONText Int32))
     , _euSendNotifications   :: !(Maybe Bool)
     , _euSupportsAttachments :: !(Maybe Bool)
     , _euAlwaysIncludeEmail  :: !(Maybe Bool)
@@ -126,6 +126,7 @@ euMaxAttendees :: Lens' EventsUpdate (Maybe Int32)
 euMaxAttendees
   = lens _euMaxAttendees
       (\ s a -> s{_euMaxAttendees = a})
+      . mapping _Coerce
 
 -- | Whether to send notifications about the event update (e.g. attendee\'s
 -- responses, title changes, etc.). Optional. The default is False.

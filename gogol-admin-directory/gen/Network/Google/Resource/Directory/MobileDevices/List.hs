@@ -61,7 +61,7 @@ type MobileDevicesListResource =
                          QueryParam "projection" MobileDevicesListProjection
                            :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" Int32 :>
+                             QueryParam "maxResults" (JSONText Int32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] MobileDevices
 
@@ -75,7 +75,7 @@ data MobileDevicesList = MobileDevicesList
     , _mdlQuery      :: !(Maybe Text)
     , _mdlProjection :: !(Maybe MobileDevicesListProjection)
     , _mdlPageToken  :: !(Maybe Text)
-    , _mdlMaxResults :: !(Maybe Int32)
+    , _mdlMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDevicesList' with the minimum fields required to make a request.
@@ -147,6 +147,7 @@ mdlMaxResults :: Lens' MobileDevicesList (Maybe Int32)
 mdlMaxResults
   = lens _mdlMaxResults
       (\ s a -> s{_mdlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest MobileDevicesList where
         type Rs MobileDevicesList = MobileDevices

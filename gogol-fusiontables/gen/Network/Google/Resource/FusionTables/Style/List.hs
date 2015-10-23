@@ -50,7 +50,7 @@ type StyleListResource =
            Capture "tableId" Text :>
              "styles" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] StyleSettingList
 
@@ -60,7 +60,7 @@ type StyleListResource =
 data StyleList = StyleList
     { _slPageToken  :: !(Maybe Text)
     , _slTableId    :: !Text
-    , _slMaxResults :: !(Maybe Word32)
+    , _slMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleList' with the minimum fields required to make a request.
@@ -96,6 +96,7 @@ slTableId
 slMaxResults :: Lens' StyleList (Maybe Word32)
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest StyleList where
         type Rs StyleList = StyleSettingList

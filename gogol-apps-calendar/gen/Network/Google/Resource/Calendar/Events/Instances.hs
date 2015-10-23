@@ -62,10 +62,10 @@ type EventsInstancesResource =
                    QueryParam "timeMin" DateTime' :>
                      QueryParam "showDeleted" Bool :>
                        QueryParam "originalStart" Text :>
-                         QueryParam "maxAttendees" Int32 :>
+                         QueryParam "maxAttendees" (JSONText Int32) :>
                            QueryParam "pageToken" Text :>
                              QueryParam "timeZone" Text :>
-                               QueryParam "maxResults" Int32 :>
+                               QueryParam "maxResults" (JSONText Int32) :>
                                  QueryParam "alwaysIncludeEmail" Bool :>
                                    QueryParam "timeMax" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -79,10 +79,10 @@ data EventsInstances = EventsInstances
     , _eTimeMin            :: !(Maybe DateTime')
     , _eShowDeleted        :: !(Maybe Bool)
     , _eOriginalStart      :: !(Maybe Text)
-    , _eMaxAttendees       :: !(Maybe Int32)
+    , _eMaxAttendees       :: !(Maybe (JSONText Int32))
     , _ePageToken          :: !(Maybe Text)
     , _eTimeZone           :: !(Maybe Text)
-    , _eMaxResults         :: !(Maybe Int32)
+    , _eMaxResults         :: !(Maybe (JSONText Int32))
     , _eAlwaysIncludeEmail :: !(Maybe Bool)
     , _eTimeMax            :: !(Maybe DateTime')
     , _eEventId            :: !Text
@@ -167,6 +167,7 @@ eMaxAttendees :: Lens' EventsInstances (Maybe Int32)
 eMaxAttendees
   = lens _eMaxAttendees
       (\ s a -> s{_eMaxAttendees = a})
+      . mapping _Coerce
 
 -- | Token specifying which result page to return. Optional.
 ePageToken :: Lens' EventsInstances (Maybe Text)
@@ -184,7 +185,8 @@ eTimeZone
 -- Optional.
 eMaxResults :: Lens' EventsInstances (Maybe Int32)
 eMaxResults
-  = lens _eMaxResults (\ s a -> s{_eMaxResults = a})
+  = lens _eMaxResults (\ s a -> s{_eMaxResults = a}) .
+      mapping _Coerce
 
 -- | Whether to always include a value in the email field for the organizer,
 -- creator and attendees, even if no real email is available (i.e. a

@@ -64,7 +64,7 @@ type ActivitiesListResource =
                  QueryParam "userId" Text :>
                    QueryParam "source" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" Int32 :>
+                       QueryParam "pageSize" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListActivitiesResponse
 
@@ -83,7 +83,7 @@ data ActivitiesList = ActivitiesList
     , _alUserId           :: !Text
     , _alSource           :: !(Maybe Text)
     , _alPageToken        :: !(Maybe Text)
-    , _alPageSize         :: !Int32
+    , _alPageSize         :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
@@ -155,7 +155,8 @@ alPageToken
 -- a continuation token if there are more events.
 alPageSize :: Lens' ActivitiesList Int32
 alPageSize
-  = lens _alPageSize (\ s a -> s{_alPageSize = a})
+  = lens _alPageSize (\ s a -> s{_alPageSize = a}) .
+      _Coerce
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = ListActivitiesResponse

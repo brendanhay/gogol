@@ -65,8 +65,8 @@ type AccountsReportsGenerateResource =
                        QueryParams "metric" Text :>
                          QueryParams "sort" Text :>
                            QueryParams "filter" Text :>
-                             QueryParam "startIndex" Word32 :>
-                               QueryParam "maxResults" Word32 :>
+                             QueryParam "startIndex" (JSONText Word32) :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Report
        :<|>
        "adexchangeseller" :>
@@ -81,8 +81,8 @@ type AccountsReportsGenerateResource =
                          QueryParams "metric" Text :>
                            QueryParams "sort" Text :>
                              QueryParams "filter" Text :>
-                               QueryParam "startIndex" Word32 :>
-                                 QueryParam "maxResults" Word32 :>
+                               QueryParam "startIndex" (JSONText Word32) :>
+                                 QueryParam "maxResults" (JSONText Word32) :>
                                    QueryParam "alt" AltMedia :>
                                      Get '[OctetStream] Stream
 
@@ -100,8 +100,8 @@ data AccountsReportsGenerate = AccountsReportsGenerate
     , _argMetric     :: !(Maybe [Text])
     , _argSort       :: !(Maybe [Text])
     , _argFilter     :: !(Maybe [Text])
-    , _argStartIndex :: !(Maybe Word32)
-    , _argMaxResults :: !(Maybe Word32)
+    , _argStartIndex :: !(Maybe (JSONText Word32))
+    , _argMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsGenerate' with the minimum fields required to make a request.
@@ -202,12 +202,14 @@ argStartIndex :: Lens' AccountsReportsGenerate (Maybe Word32)
 argStartIndex
   = lens _argStartIndex
       (\ s a -> s{_argStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of rows of report data to return.
 argMaxResults :: Lens' AccountsReportsGenerate (Maybe Word32)
 argMaxResults
   = lens _argMaxResults
       (\ s a -> s{_argMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsReportsGenerate where
         type Rs AccountsReportsGenerate = Report

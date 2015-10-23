@@ -92,7 +92,7 @@ instance ToJSON ReadInfo where
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe Int32)
+    , _sCode    :: !(Maybe (JSONText Int32))
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -124,7 +124,9 @@ sDetails
 
 -- | The status code, which should be an enum value of google.rpc.Code.
 sCode :: Lens' Status (Maybe Int32)
-sCode = lens _sCode (\ s a -> s{_sCode = a})
+sCode
+  = lens _sCode (\ s a -> s{_sCode = a}) .
+      mapping _Coerce
 
 -- | A developer-facing error message, which should be in English. Any
 -- user-facing error message should be localized and sent in the
@@ -193,15 +195,15 @@ instance ToJSON OperationSchema where
 -- /See:/ 'variant' smart constructor.
 data Variant = Variant
     { _vVariantSetId   :: !(Maybe Text)
-    , _vCreated        :: !(Maybe Int64)
-    , _vStart          :: !(Maybe Int64)
+    , _vCreated        :: !(Maybe (JSONText Int64))
+    , _vStart          :: !(Maybe (JSONText Int64))
     , _vAlternateBases :: !(Maybe [Text])
     , _vReferenceName  :: !(Maybe Text)
     , _vNames          :: !(Maybe [Text])
-    , _vEnd            :: !(Maybe Int64)
+    , _vEnd            :: !(Maybe (JSONText Int64))
     , _vReferenceBases :: !(Maybe Text)
     , _vId             :: !(Maybe Text)
-    , _vQuality        :: !(Maybe Double)
+    , _vQuality        :: !(Maybe (JSONText Double))
     , _vFilter         :: !(Maybe [Text])
     , _vInfo           :: !(Maybe VariantInfo)
     , _vCalls          :: !(Maybe [VariantCall])
@@ -263,12 +265,16 @@ vVariantSetId
 
 -- | The date this variant was created, in milliseconds from the epoch.
 vCreated :: Lens' Variant (Maybe Int64)
-vCreated = lens _vCreated (\ s a -> s{_vCreated = a})
+vCreated
+  = lens _vCreated (\ s a -> s{_vCreated = a}) .
+      mapping _Coerce
 
 -- | The position at which this variant occurs (0-based). This corresponds to
 -- the first base of the string of reference bases.
 vStart :: Lens' Variant (Maybe Int64)
-vStart = lens _vStart (\ s a -> s{_vStart = a})
+vStart
+  = lens _vStart (\ s a -> s{_vStart = a}) .
+      mapping _Coerce
 
 -- | The bases that appear instead of the reference bases.
 vAlternateBases :: Lens' Variant [Text]
@@ -296,7 +302,9 @@ vNames
 -- that don\'t explicitly give alternate bases, for example large
 -- deletions.
 vEnd :: Lens' Variant (Maybe Int64)
-vEnd = lens _vEnd (\ s a -> s{_vEnd = a})
+vEnd
+  = lens _vEnd (\ s a -> s{_vEnd = a}) .
+      mapping _Coerce
 
 -- | The reference bases for this variant. They start at the given position.
 vReferenceBases :: Lens' Variant (Maybe Text)
@@ -311,7 +319,9 @@ vId = lens _vId (\ s a -> s{_vId = a})
 -- | A measure of how likely this variant is to be real. A higher value is
 -- better.
 vQuality :: Lens' Variant (Maybe Double)
-vQuality = lens _vQuality (\ s a -> s{_vQuality = a})
+vQuality
+  = lens _vQuality (\ s a -> s{_vQuality = a}) .
+      mapping _Coerce
 
 -- | A list of filters (normally quality filters) this variant has failed.
 -- \`PASS\` indicates this variant has passed all filters.
@@ -369,7 +379,7 @@ instance ToJSON Variant where
 -- /See:/ 'listBasesResponse' smart constructor.
 data ListBasesResponse = ListBasesResponse
     { _lbrNextPageToken :: !(Maybe Text)
-    , _lbrOffSet        :: !(Maybe Int64)
+    , _lbrOffSet        :: !(Maybe (JSONText Int64))
     , _lbrSequence      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -405,7 +415,8 @@ lbrNextPageToken
 -- paginated request.
 lbrOffSet :: Lens' ListBasesResponse (Maybe Int64)
 lbrOffSet
-  = lens _lbrOffSet (\ s a -> s{_lbrOffSet = a})
+  = lens _lbrOffSet (\ s a -> s{_lbrOffSet = a}) .
+      mapping _Coerce
 
 -- | A substring of the bases that make up this reference.
 lbrSequence :: Lens' ListBasesResponse (Maybe Text)
@@ -616,14 +627,14 @@ instance ToJSON DataSet where
 --
 -- /See:/ 'read'' smart constructor.
 data Read' = Read'
-    { _rFragmentLength            :: !(Maybe Int32)
+    { _rFragmentLength            :: !(Maybe (JSONText Int32))
     , _rDuplicateFragment         :: !(Maybe Bool)
     , _rReadGroupSetId            :: !(Maybe Text)
     , _rNextMatePosition          :: !(Maybe Position)
     , _rFailedVendorQualityChecks :: !(Maybe Bool)
     , _rAlignment                 :: !(Maybe LinearAlignment)
     , _rFragmentName              :: !(Maybe Text)
-    , _rNumberReads               :: !(Maybe Int32)
+    , _rNumberReads               :: !(Maybe (JSONText Int32))
     , _rId                        :: !(Maybe Text)
     , _rSecondaryAlignment        :: !(Maybe Bool)
     , _rReadGroupId               :: !(Maybe Text)
@@ -631,8 +642,8 @@ data Read' = Read'
     , _rAlignedSequence           :: !(Maybe Text)
     , _rProperPlacement           :: !(Maybe Bool)
     , _rInfo                      :: !(Maybe ReadInfo)
-    , _rReadNumber                :: !(Maybe Int32)
-    , _rAlignedQuality            :: !(Maybe [Int32])
+    , _rReadNumber                :: !(Maybe (JSONText Int32))
+    , _rAlignedQuality            :: !(Maybe [JSONText Int32])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Read' with the minimum fields required to make a request.
@@ -700,6 +711,7 @@ rFragmentLength :: Lens' Read' (Maybe Int32)
 rFragmentLength
   = lens _rFragmentLength
       (\ s a -> s{_rFragmentLength = a})
+      . mapping _Coerce
 
 -- | The fragment is a PCR or optical duplicate (SAM flag 0x400)
 rDuplicateFragment :: Lens' Read' (Maybe Bool)
@@ -744,6 +756,7 @@ rFragmentName
 rNumberReads :: Lens' Read' (Maybe Int32)
 rNumberReads
   = lens _rNumberReads (\ s a -> s{_rNumberReads = a})
+      . mapping _Coerce
 
 -- | The server-generated read ID, unique across all reads. This is different
 -- from the \`fragmentName\`.
@@ -811,7 +824,8 @@ rInfo = lens _rInfo (\ s a -> s{_rInfo = a})
 -- field replaces SAM flag 0x40 and 0x80.
 rReadNumber :: Lens' Read' (Maybe Int32)
 rReadNumber
-  = lens _rReadNumber (\ s a -> s{_rReadNumber = a})
+  = lens _rReadNumber (\ s a -> s{_rReadNumber = a}) .
+      mapping _Coerce
 
 -- | The quality of the read sequence contained in this alignment record.
 -- \`alignedSequence\` and \`alignedQuality\` may be shorter than the full
@@ -881,11 +895,11 @@ instance ToJSON Read' where
 --
 -- /See:/ 'variantCall' smart constructor.
 data VariantCall = VariantCall
-    { _vcGenotypeLikelihood :: !(Maybe [Double])
+    { _vcGenotypeLikelihood :: !(Maybe [JSONText Double])
     , _vcCallSetName        :: !(Maybe Text)
     , _vcPhaseset           :: !(Maybe Text)
     , _vcCallSetId          :: !(Maybe Text)
-    , _vcGenotype           :: !(Maybe [Int32])
+    , _vcGenotype           :: !(Maybe [JSONText Int32])
     , _vcInfo               :: !(Maybe VariantCallInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1005,7 +1019,7 @@ data ReadGroup = ReadGroup
     , _reaDataSetId           :: !(Maybe Text)
     , _reaId                  :: !(Maybe Text)
     , _reaSampleId            :: !(Maybe Text)
-    , _reaPredictedInsertSize :: !(Maybe Int32)
+    , _reaPredictedInsertSize :: !(Maybe (JSONText Int32))
     , _reaDescription         :: !(Maybe Text)
     , _reaInfo                :: !(Maybe ReadGroupInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1102,6 +1116,7 @@ reaPredictedInsertSize :: Lens' ReadGroup (Maybe Int32)
 reaPredictedInsertSize
   = lens _reaPredictedInsertSize
       (\ s a -> s{_reaPredictedInsertSize = a})
+      . mapping _Coerce
 
 -- | A free-form text description of this read group.
 reaDescription :: Lens' ReadGroup (Maybe Text)
@@ -1237,7 +1252,7 @@ data SearchReferenceSetsRequest = SearchReferenceSetsRequest
     , _srsrAccessions   :: !(Maybe [Text])
     , _srsrPageToken    :: !(Maybe Text)
     , _srsrAssemblyId   :: !(Maybe Text)
-    , _srsrPageSize     :: !(Maybe Int32)
+    , _srsrPageSize     :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReferenceSetsRequest' with the minimum fields required to make a request.
@@ -1304,6 +1319,7 @@ srsrAssemblyId
 srsrPageSize :: Lens' SearchReferenceSetsRequest (Maybe Int32)
 srsrPageSize
   = lens _srsrPageSize (\ s a -> s{_srsrPageSize = a})
+      . mapping _Coerce
 
 instance FromJSON SearchReferenceSetsRequest where
         parseJSON
@@ -1510,7 +1526,7 @@ instance ToJSON VariantSetMetadata where
 --
 -- /See:/ 'callSet' smart constructor.
 data CallSet = CallSet
-    { _csCreated       :: !(Maybe Int64)
+    { _csCreated       :: !(Maybe (JSONText Int64))
     , _csName          :: !(Maybe Text)
     , _csId            :: !(Maybe Text)
     , _csSampleId      :: !(Maybe Text)
@@ -1548,7 +1564,8 @@ callSet =
 -- | The date this call set was created in milliseconds from the epoch.
 csCreated :: Lens' CallSet (Maybe Int64)
 csCreated
-  = lens _csCreated (\ s a -> s{_csCreated = a})
+  = lens _csCreated (\ s a -> s{_csCreated = a}) .
+      mapping _Coerce
 
 -- | The call set name.
 csName :: Lens' CallSet (Maybe Text)
@@ -1605,7 +1622,7 @@ instance ToJSON CallSet where
 -- /See:/ 'coverageBucket' smart constructor.
 data CoverageBucket = CoverageBucket
     { _cbRange        :: !(Maybe Range)
-    , _cbMeanCoverage :: !(Maybe Float)
+    , _cbMeanCoverage :: !(Maybe (JSONText Float))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoverageBucket' with the minimum fields required to make a request.
@@ -1633,6 +1650,7 @@ cbMeanCoverage :: Lens' CoverageBucket (Maybe Float)
 cbMeanCoverage
   = lens _cbMeanCoverage
       (\ s a -> s{_cbMeanCoverage = a})
+      . mapping _Coerce
 
 instance FromJSON CoverageBucket where
         parseJSON
@@ -1655,7 +1673,7 @@ data SearchReadGroupSetsRequest = SearchReadGroupSetsRequest
     { _srgsrDataSetIds :: !(Maybe [Text])
     , _srgsrName       :: !(Maybe Text)
     , _srgsrPageToken  :: !(Maybe Text)
-    , _srgsrPageSize   :: !(Maybe Int32)
+    , _srgsrPageSize   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReadGroupSetsRequest' with the minimum fields required to make a request.
@@ -1708,6 +1726,7 @@ srgsrPageSize :: Lens' SearchReadGroupSetsRequest (Maybe Int32)
 srgsrPageSize
   = lens _srgsrPageSize
       (\ s a -> s{_srgsrPageSize = a})
+      . mapping _Coerce
 
 instance FromJSON SearchReadGroupSetsRequest where
         parseJSON
@@ -1734,11 +1753,11 @@ instance ToJSON SearchReadGroupSetsRequest where
 --
 -- /See:/ 'reference' smart constructor.
 data Reference = Reference
-    { _refLength           :: !(Maybe Int64)
+    { _refLength           :: !(Maybe (JSONText Int64))
     , _refSourceAccessions :: !(Maybe [Text])
     , _refMD5checksum      :: !(Maybe Text)
     , _refName             :: !(Maybe Text)
-    , _refNcbiTaxonId      :: !(Maybe Int32)
+    , _refNcbiTaxonId      :: !(Maybe (JSONText Int32))
     , _refId               :: !(Maybe Text)
     , _refSourceURI        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1776,7 +1795,8 @@ reference =
 -- | The length of this reference\'s sequence.
 refLength :: Lens' Reference (Maybe Int64)
 refLength
-  = lens _refLength (\ s a -> s{_refLength = a})
+  = lens _refLength (\ s a -> s{_refLength = a}) .
+      mapping _Coerce
 
 -- | All known corresponding accession IDs in INSDC (GenBank\/ENA\/DDBJ)
 -- ideally with a version number, for example \`GCF_000001405.26\`.
@@ -1805,6 +1825,7 @@ refNcbiTaxonId :: Lens' Reference (Maybe Int32)
 refNcbiTaxonId
   = lens _refNcbiTaxonId
       (\ s a -> s{_refNcbiTaxonId = a})
+      . mapping _Coerce
 
 -- | The server-generated reference ID, unique across all references.
 refId :: Lens' Reference (Maybe Text)
@@ -2033,12 +2054,12 @@ instance ToJSON SetIAMPolicyRequest where
 --
 -- /See:/ 'searchReadsRequest' smart constructor.
 data SearchReadsRequest = SearchReadsRequest
-    { _srrStart           :: !(Maybe Int64)
+    { _srrStart           :: !(Maybe (JSONText Int64))
     , _srrReadGroupIds    :: !(Maybe [Text])
     , _srrReferenceName   :: !(Maybe Text)
-    , _srrEnd             :: !(Maybe Int64)
+    , _srrEnd             :: !(Maybe (JSONText Int64))
     , _srrPageToken       :: !(Maybe Text)
-    , _srrPageSize        :: !(Maybe Int32)
+    , _srrPageSize        :: !(Maybe (JSONText Int32))
     , _srrReadGroupSetIds :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2075,7 +2096,9 @@ searchReadsRequest =
 -- | The start position of the range on the reference, 0-based inclusive. If
 -- specified, \`referenceName\` must also be specified.
 srrStart :: Lens' SearchReadsRequest (Maybe Int64)
-srrStart = lens _srrStart (\ s a -> s{_srrStart = a})
+srrStart
+  = lens _srrStart (\ s a -> s{_srrStart = a}) .
+      mapping _Coerce
 
 -- | The IDs of the read groups within which to search for reads. All
 -- specified read groups must belong to the same read group sets. Must
@@ -2097,7 +2120,9 @@ srrReferenceName
 -- | The end position of the range on the reference, 0-based exclusive. If
 -- specified, \`referenceName\` must also be specified.
 srrEnd :: Lens' SearchReadsRequest (Maybe Int64)
-srrEnd = lens _srrEnd (\ s a -> s{_srrEnd = a})
+srrEnd
+  = lens _srrEnd (\ s a -> s{_srrEnd = a}) .
+      mapping _Coerce
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
@@ -2110,7 +2135,8 @@ srrPageToken
 -- it will default to 256. The maximum value is 2048.
 srrPageSize :: Lens' SearchReadsRequest (Maybe Int32)
 srrPageSize
-  = lens _srrPageSize (\ s a -> s{_srrPageSize = a})
+  = lens _srrPageSize (\ s a -> s{_srrPageSize = a}) .
+      mapping _Coerce
 
 -- | The IDs of the read groups sets within which to search for reads. All
 -- specified read group sets must be aligned against a common set of
@@ -2299,7 +2325,7 @@ instance ToJSON Experiment where
 data SearchVariantSetsRequest = SearchVariantSetsRequest
     { _svsrDataSetIds :: !(Maybe [Text])
     , _svsrPageToken  :: !(Maybe Text)
-    , _svsrPageSize   :: !(Maybe Int32)
+    , _svsrPageSize   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchVariantSetsRequest' with the minimum fields required to make a request.
@@ -2341,6 +2367,7 @@ svsrPageToken
 svsrPageSize :: Lens' SearchVariantSetsRequest (Maybe Int32)
 svsrPageSize
   = lens _svsrPageSize (\ s a -> s{_svsrPageSize = a})
+      . mapping _Coerce
 
 instance FromJSON SearchVariantSetsRequest where
         parseJSON
@@ -2420,7 +2447,7 @@ data SearchCallSetsRequest = SearchCallSetsRequest
     { _scsrName          :: !(Maybe Text)
     , _scsrPageToken     :: !(Maybe Text)
     , _scsrVariantSetIds :: !(Maybe [Text])
-    , _scsrPageSize      :: !(Maybe Int32)
+    , _scsrPageSize      :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchCallSetsRequest' with the minimum fields required to make a request.
@@ -2471,6 +2498,7 @@ scsrVariantSetIds
 scsrPageSize :: Lens' SearchCallSetsRequest (Maybe Int32)
 scsrPageSize
   = lens _scsrPageSize (\ s a -> s{_scsrPageSize = a})
+      . mapping _Coerce
 
 instance FromJSON SearchCallSetsRequest where
         parseJSON
@@ -2631,7 +2659,7 @@ data SearchReferencesRequest = SearchReferencesRequest
     , _sMD5checksums   :: !(Maybe [Text])
     , _sAccessions     :: !(Maybe [Text])
     , _sPageToken      :: !(Maybe Text)
-    , _sPageSize       :: !(Maybe Int32)
+    , _sPageSize       :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReferencesRequest' with the minimum fields required to make a request.
@@ -2694,7 +2722,8 @@ sPageToken
 -- | Specifies the maximum number of results to return in a single page.
 sPageSize :: Lens' SearchReferencesRequest (Maybe Int32)
 sPageSize
-  = lens _sPageSize (\ s a -> s{_sPageSize = a})
+  = lens _sPageSize (\ s a -> s{_sPageSize = a}) .
+      mapping _Coerce
 
 instance FromJSON SearchReferencesRequest where
         parseJSON
@@ -2775,9 +2804,9 @@ instance ToJSON SearchReferenceSetsResponse where
 --
 -- /See:/ 'range' smart constructor.
 data Range = Range
-    { _rStart         :: !(Maybe Int64)
+    { _rStart         :: !(Maybe (JSONText Int64))
     , _rReferenceName :: !(Maybe Text)
-    , _rEnd           :: !(Maybe Int64)
+    , _rEnd           :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Range' with the minimum fields required to make a request.
@@ -2800,7 +2829,9 @@ range =
 
 -- | The start position of the range on the reference, 0-based inclusive.
 rStart :: Lens' Range (Maybe Int64)
-rStart = lens _rStart (\ s a -> s{_rStart = a})
+rStart
+  = lens _rStart (\ s a -> s{_rStart = a}) .
+      mapping _Coerce
 
 -- | The reference sequence name, for example \`chr1\`, \`1\`, or \`chrX\`.
 rReferenceName :: Lens' Range (Maybe Text)
@@ -2810,7 +2841,9 @@ rReferenceName
 
 -- | The end position of the range on the reference, 0-based exclusive.
 rEnd :: Lens' Range (Maybe Int64)
-rEnd = lens _rEnd (\ s a -> s{_rEnd = a})
+rEnd
+  = lens _rEnd (\ s a -> s{_rEnd = a}) .
+      mapping _Coerce
 
 instance FromJSON Range where
         parseJSON
@@ -3049,7 +3082,7 @@ instance ToJSON ImportVariantsResponse where
 -- /See:/ 'listCoverageBucketsResponse' smart constructor.
 data ListCoverageBucketsResponse = ListCoverageBucketsResponse
     { _lcbrNextPageToken   :: !(Maybe Text)
-    , _lcbrBucketWidth     :: !(Maybe Int64)
+    , _lcbrBucketWidth     :: !(Maybe (JSONText Int64))
     , _lcbrCoverageBuckets :: !(Maybe [CoverageBucket])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3088,6 +3121,7 @@ lcbrBucketWidth :: Lens' ListCoverageBucketsResponse (Maybe Int64)
 lcbrBucketWidth
   = lens _lcbrBucketWidth
       (\ s a -> s{_lcbrBucketWidth = a})
+      . mapping _Coerce
 
 -- | The coverage buckets. The list of buckets is sparse; a bucket with 0
 -- overlapping reads is not returned. A bucket never crosses more than one
@@ -3206,7 +3240,7 @@ instance ToJSON ImportReadGroupSetsResponse where
 -- /See:/ 'linearAlignment' smart constructor.
 data LinearAlignment = LinearAlignment
     { _laCigar          :: !(Maybe [CigarUnit])
-    , _laMAppingQuality :: !(Maybe Int32)
+    , _laMAppingQuality :: !(Maybe (JSONText Int32))
     , _laPosition       :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3241,6 +3275,7 @@ laMAppingQuality :: Lens' LinearAlignment (Maybe Int32)
 laMAppingQuality
   = lens _laMAppingQuality
       (\ s a -> s{_laMAppingQuality = a})
+      . mapping _Coerce
 
 -- | The position of this alignment.
 laPosition :: Lens' LinearAlignment (Maybe Position)
@@ -3610,7 +3645,7 @@ instance ToJSON ImportVariantsRequest where
 -- /See:/ 'cigarUnit' smart constructor.
 data CigarUnit = CigarUnit
     { _cuOperation         :: !(Maybe Text)
-    , _cuOperationLength   :: !(Maybe Int64)
+    , _cuOperationLength   :: !(Maybe (JSONText Int64))
     , _cuReferenceSequence :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3641,6 +3676,7 @@ cuOperationLength :: Lens' CigarUnit (Maybe Int64)
 cuOperationLength
   = lens _cuOperationLength
       (\ s a -> s{_cuOperationLength = a})
+      . mapping _Coerce
 
 -- | \`referenceSequence\` is only used at mismatches (\`SEQUENCE_MISMATCH\`)
 -- and deletions (\`DELETE\`). Filling this field replaces SAM\'s MD tag.
@@ -3682,8 +3718,8 @@ instance ToJSON CigarUnit where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy
-    { _polEtag     :: !(Maybe Word8)
-    , _polVersion  :: !(Maybe Int32)
+    { _polEtag     :: !(Maybe (JSONText Word8))
+    , _polVersion  :: !(Maybe (JSONText Int32))
     , _polBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3707,12 +3743,15 @@ policy =
 
 -- | Can be used to perform a read-modify-write.
 polEtag :: Lens' Policy (Maybe Word8)
-polEtag = lens _polEtag (\ s a -> s{_polEtag = a})
+polEtag
+  = lens _polEtag (\ s a -> s{_polEtag = a}) .
+      mapping _Coerce
 
 -- | Version of the \`Policy\`. The default version is 0.
 polVersion :: Lens' Policy (Maybe Int32)
 polVersion
-  = lens _polVersion (\ s a -> s{_polVersion = a})
+  = lens _polVersion (\ s a -> s{_polVersion = a}) .
+      mapping _Coerce
 
 -- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
 -- must not be specified for the same \`role\`. \`bindings\` with no
@@ -3966,15 +4005,15 @@ instance ToJSON SearchVariantSetsResponse where
 --
 -- /See:/ 'searchVariantsRequest' smart constructor.
 data SearchVariantsRequest = SearchVariantsRequest
-    { _svrStart         :: !(Maybe Int64)
+    { _svrStart         :: !(Maybe (JSONText Int64))
     , _svrCallSetIds    :: !(Maybe [Text])
     , _svrReferenceName :: !(Maybe Text)
-    , _svrEnd           :: !(Maybe Int64)
-    , _svrMaxCalls      :: !(Maybe Int32)
+    , _svrEnd           :: !(Maybe (JSONText Int64))
+    , _svrMaxCalls      :: !(Maybe (JSONText Int32))
     , _svrPageToken     :: !(Maybe Text)
     , _svrVariantName   :: !(Maybe Text)
     , _svrVariantSetIds :: !(Maybe [Text])
-    , _svrPageSize      :: !(Maybe Int32)
+    , _svrPageSize      :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchVariantsRequest' with the minimum fields required to make a request.
@@ -4016,7 +4055,9 @@ searchVariantsRequest =
 -- | The beginning of the window (0-based, inclusive) for which overlapping
 -- variants should be returned. If unspecified, defaults to 0.
 svrStart :: Lens' SearchVariantsRequest (Maybe Int64)
-svrStart = lens _svrStart (\ s a -> s{_svrStart = a})
+svrStart
+  = lens _svrStart (\ s a -> s{_svrStart = a}) .
+      mapping _Coerce
 
 -- | Only return variant calls which belong to call sets with these ids.
 -- Leaving this blank returns all variant calls. If a variant has no calls
@@ -4039,14 +4080,17 @@ svrReferenceName
 -- | The end of the window, 0-based exclusive. If unspecified or 0, defaults
 -- to the length of the reference.
 svrEnd :: Lens' SearchVariantsRequest (Maybe Int64)
-svrEnd = lens _svrEnd (\ s a -> s{_svrEnd = a})
+svrEnd
+  = lens _svrEnd (\ s a -> s{_svrEnd = a}) .
+      mapping _Coerce
 
 -- | The maximum number of calls to return. However, at least one variant
 -- will always be returned, even if it has more calls than this limit. If
 -- unspecified, defaults to 5000.
 svrMaxCalls :: Lens' SearchVariantsRequest (Maybe Int32)
 svrMaxCalls
-  = lens _svrMaxCalls (\ s a -> s{_svrMaxCalls = a})
+  = lens _svrMaxCalls (\ s a -> s{_svrMaxCalls = a}) .
+      mapping _Coerce
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
@@ -4075,7 +4119,8 @@ svrVariantSetIds
 -- 5000.
 svrPageSize :: Lens' SearchVariantsRequest (Maybe Int32)
 svrPageSize
-  = lens _svrPageSize (\ s a -> s{_svrPageSize = a})
+  = lens _svrPageSize (\ s a -> s{_svrPageSize = a}) .
+      mapping _Coerce
 
 instance FromJSON SearchVariantsRequest where
         parseJSON
@@ -4248,7 +4293,7 @@ instance ToJSON OperationEvent where
 --
 -- /See:/ 'referenceBound' smart constructor.
 data ReferenceBound = ReferenceBound
-    { _rbUpperBound    :: !(Maybe Int64)
+    { _rbUpperBound    :: !(Maybe (JSONText Int64))
     , _rbReferenceName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4272,6 +4317,7 @@ referenceBound =
 rbUpperBound :: Lens' ReferenceBound (Maybe Int64)
 rbUpperBound
   = lens _rbUpperBound (\ s a -> s{_rbUpperBound = a})
+      . mapping _Coerce
 
 -- | The reference the bound is associate with.
 rbReferenceName :: Lens' ReferenceBound (Maybe Text)
@@ -4384,7 +4430,7 @@ instance ToJSON Binding where
 data Position = Position
     { _pReverseStrand :: !(Maybe Bool)
     , _pReferenceName :: !(Maybe Text)
-    , _pPosition      :: !(Maybe Int64)
+    , _pPosition      :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Position' with the minimum fields required to make a request.
@@ -4422,7 +4468,8 @@ pReferenceName
 -- reference.
 pPosition :: Lens' Position (Maybe Int64)
 pPosition
-  = lens _pPosition (\ s a -> s{_pPosition = a})
+  = lens _pPosition (\ s a -> s{_pPosition = a}) .
+      mapping _Coerce
 
 instance FromJSON Position where
         parseJSON
@@ -4539,7 +4586,7 @@ data ReferenceSet = ReferenceSet
     { _rsSourceAccessions :: !(Maybe [Text])
     , _rsReferenceIds     :: !(Maybe [Text])
     , _rsMD5checksum      :: !(Maybe Text)
-    , _rsNcbiTaxonId      :: !(Maybe Int32)
+    , _rsNcbiTaxonId      :: !(Maybe (JSONText Int32))
     , _rsId               :: !(Maybe Text)
     , _rsAssemblyId       :: !(Maybe Text)
     , _rsSourceURI        :: !(Maybe Text)
@@ -4616,6 +4663,7 @@ rsNcbiTaxonId :: Lens' ReferenceSet (Maybe Int32)
 rsNcbiTaxonId
   = lens _rsNcbiTaxonId
       (\ s a -> s{_rsNcbiTaxonId = a})
+      . mapping _Coerce
 
 -- | The server-generated reference set ID, unique across all reference sets.
 rsId :: Lens' ReferenceSet (Maybe Text)

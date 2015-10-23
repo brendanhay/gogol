@@ -45,14 +45,14 @@ type UserProFilesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              QueryParam "alt" AltJSON :> Get '[JSON] UserProFile
 
 -- | Gets one user profile by ID.
 --
 -- /See:/ 'userProFilesGet' smart constructor.
 newtype UserProFilesGet = UserProFilesGet
-    { _upfgProFileId :: Int64
+    { _upfgProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProFilesGet' with the minimum fields required to make a request.
@@ -73,6 +73,7 @@ upfgProFileId :: Lens' UserProFilesGet Int64
 upfgProFileId
   = lens _upfgProFileId
       (\ s a -> s{_upfgProFileId = a})
+      . _Coerce
 
 instance GoogleRequest UserProFilesGet where
         type Rs UserProFilesGet = UserProFile

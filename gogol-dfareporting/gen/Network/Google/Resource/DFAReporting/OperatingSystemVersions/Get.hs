@@ -46,9 +46,9 @@ type OperatingSystemVersionsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "operatingSystemVersions" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] OperatingSystemVersion
 
@@ -56,8 +56,8 @@ type OperatingSystemVersionsGetResource =
 --
 -- /See:/ 'operatingSystemVersionsGet' smart constructor.
 data OperatingSystemVersionsGet = OperatingSystemVersionsGet
-    { _osvgProFileId :: !Int64
-    , _osvgId        :: !Int64
+    { _osvgProFileId :: !(JSONText Int64)
+    , _osvgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersionsGet' with the minimum fields required to make a request.
@@ -82,10 +82,12 @@ osvgProFileId :: Lens' OperatingSystemVersionsGet Int64
 osvgProFileId
   = lens _osvgProFileId
       (\ s a -> s{_osvgProFileId = a})
+      . _Coerce
 
 -- | Operating system version ID.
 osvgId :: Lens' OperatingSystemVersionsGet Int64
-osvgId = lens _osvgId (\ s a -> s{_osvgId = a})
+osvgId
+  = lens _osvgId (\ s a -> s{_osvgId = a}) . _Coerce
 
 instance GoogleRequest OperatingSystemVersionsGet
          where

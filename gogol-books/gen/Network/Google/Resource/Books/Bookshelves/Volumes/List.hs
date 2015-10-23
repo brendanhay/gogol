@@ -55,8 +55,8 @@ type BookshelvesVolumesListResource =
                Capture "shelf" Text :>
                  "volumes" :>
                    QueryParam "source" Text :>
-                     QueryParam "startIndex" Word32 :>
-                       QueryParam "maxResults" Word32 :>
+                     QueryParam "startIndex" (JSONText Word32) :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "showPreorders" Bool :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
@@ -67,8 +67,8 @@ data BookshelvesVolumesList = BookshelvesVolumesList
     { _bvlUserId        :: !Text
     , _bvlShelf         :: !Text
     , _bvlSource        :: !(Maybe Text)
-    , _bvlStartIndex    :: !(Maybe Word32)
-    , _bvlMaxResults    :: !(Maybe Word32)
+    , _bvlStartIndex    :: !(Maybe (JSONText Word32))
+    , _bvlMaxResults    :: !(Maybe (JSONText Word32))
     , _bvlShowPreOrders :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -120,12 +120,14 @@ bvlStartIndex :: Lens' BookshelvesVolumesList (Maybe Word32)
 bvlStartIndex
   = lens _bvlStartIndex
       (\ s a -> s{_bvlStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum number of results to return
 bvlMaxResults :: Lens' BookshelvesVolumesList (Maybe Word32)
 bvlMaxResults
   = lens _bvlMaxResults
       (\ s a -> s{_bvlMaxResults = a})
+      . mapping _Coerce
 
 -- | Set to true to show pre-ordered books. Defaults to false.
 bvlShowPreOrders :: Lens' BookshelvesVolumesList (Maybe Bool)

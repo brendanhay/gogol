@@ -60,7 +60,7 @@ type LinuxGetLinuxAccountViewsResource =
                      QueryParam "orderBy" Text :>
                        QueryParam "filter" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" Word32 :>
+                           QueryParam "maxResults" (JSONText Word32) :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] LinuxGetLinuxAccountViewsResponse
 
@@ -74,7 +74,7 @@ data LinuxGetLinuxAccountViews = LinuxGetLinuxAccountViews
     , _lglavZone       :: !Text
     , _lglavFilter     :: !(Maybe Text)
     , _lglavPageToken  :: !(Maybe Text)
-    , _lglavMaxResults :: !Word32
+    , _lglavMaxResults :: !(JSONText Word32)
     , _lglavInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -161,6 +161,7 @@ lglavMaxResults :: Lens' LinuxGetLinuxAccountViews Word32
 lglavMaxResults
   = lens _lglavMaxResults
       (\ s a -> s{_lglavMaxResults = a})
+      . _Coerce
 
 -- | The fully-qualified URL of the virtual machine requesting the views.
 lglavInstance :: Lens' LinuxGetLinuxAccountViews Text

@@ -47,10 +47,10 @@ import           Network.Google.ShoppingContent.Types
 type AccounttaxListResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accounttax" :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
+               QueryParam "maxResults" (JSONText Word32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccounttaxListResponse
 
@@ -59,9 +59,9 @@ type AccounttaxListResource =
 --
 -- /See:/ 'accounttaxList' smart constructor.
 data AccounttaxList = AccounttaxList
-    { _allMerchantId :: !Word64
+    { _allMerchantId :: !(JSONText Word64)
     , _allPageToken  :: !(Maybe Text)
-    , _allMaxResults :: !(Maybe Word32)
+    , _allMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxList' with the minimum fields required to make a request.
@@ -88,6 +88,7 @@ allMerchantId :: Lens' AccounttaxList Word64
 allMerchantId
   = lens _allMerchantId
       (\ s a -> s{_allMerchantId = a})
+      . _Coerce
 
 -- | The token returned by the previous request.
 allPageToken :: Lens' AccounttaxList (Maybe Text)
@@ -100,6 +101,7 @@ allMaxResults :: Lens' AccounttaxList (Maybe Word32)
 allMaxResults
   = lens _allMaxResults
       (\ s a -> s{_allMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccounttaxList where
         type Rs AccounttaxList = AccounttaxListResponse

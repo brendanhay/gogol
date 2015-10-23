@@ -54,7 +54,7 @@ type RepliesListResource =
                Capture "commentId" Text :>
                  "replies" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "includeDeleted" Bool :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] CommentReplyList
@@ -66,7 +66,7 @@ data RepliesList = RepliesList
     { _rlPageToken      :: !(Maybe Text)
     , _rlFileId         :: !Text
     , _rlCommentId      :: !Text
-    , _rlMaxResults     :: !Int32
+    , _rlMaxResults     :: !(JSONText Int32)
     , _rlIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -117,6 +117,7 @@ rlCommentId
 rlMaxResults :: Lens' RepliesList Int32
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
+      . _Coerce
 
 -- | If set, all replies, including deleted replies (with content stripped)
 -- will be returned.

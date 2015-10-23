@@ -68,7 +68,7 @@ type SearchMethod =
        "v1" :>
          "search" :>
            QueryParams "without" Text :>
-             QueryParam "cursor" Int32 :>
+             QueryParam "cursor" (JSONText Int32) :>
                QueryParams "with" Text :>
                  QueryParams "domain" Text :>
                    QueryParam "format" FreebaseSearchFormat :>
@@ -78,7 +78,7 @@ type SearchMethod =
                            QueryParam "output" Text :>
                              QueryParam "query" Text :>
                                QueryParam "scoring" FreebaseSearchScoring :>
-                                 QueryParam "limit" Int32 :>
+                                 QueryParam "limit" (JSONText Int32) :>
                                    QueryParams "filter" Text :>
                                      QueryParam "mql_output" Text :>
                                        QueryParams "mid" Text :>
@@ -105,7 +105,7 @@ type SearchMethod =
          "v1" :>
            "search" :>
              QueryParams "without" Text :>
-               QueryParam "cursor" Int32 :>
+               QueryParam "cursor" (JSONText Int32) :>
                  QueryParams "with" Text :>
                    QueryParams "domain" Text :>
                      QueryParam "format" FreebaseSearchFormat :>
@@ -115,7 +115,7 @@ type SearchMethod =
                              QueryParam "output" Text :>
                                QueryParam "query" Text :>
                                  QueryParam "scoring" FreebaseSearchScoring :>
-                                   QueryParam "limit" Int32 :>
+                                   QueryParam "limit" (JSONText Int32) :>
                                      QueryParams "filter" Text :>
                                        QueryParam "mql_output" Text :>
                                          QueryParams "mid" Text :>
@@ -147,7 +147,7 @@ type SearchMethod =
 -- /See:/ 'search' smart constructor.
 data Search = Search
     { _sWithout   :: !(Maybe [Text])
-    , _sCursor    :: !(Maybe Int32)
+    , _sCursor    :: !(Maybe (JSONText Int32))
     , _sWith      :: !(Maybe [Text])
     , _sDomain    :: !(Maybe [Text])
     , _sFormat    :: !FreebaseSearchFormat
@@ -157,7 +157,7 @@ data Search = Search
     , _sOutput    :: !(Maybe Text)
     , _sQuery     :: !(Maybe Text)
     , _sScoring   :: !FreebaseSearchScoring
-    , _sLimit     :: !Int32
+    , _sLimit     :: !(JSONText Int32)
     , _sFilter    :: !(Maybe [Text])
     , _sMqlOutput :: !(Maybe Text)
     , _sMid       :: !(Maybe [Text])
@@ -258,7 +258,9 @@ sWithout
 
 -- | The cursor value to use for the next page of results.
 sCursor :: Lens' Search (Maybe Int32)
-sCursor = lens _sCursor (\ s a -> s{_sCursor = a})
+sCursor
+  = lens _sCursor (\ s a -> s{_sCursor = a}) .
+      mapping _Coerce
 
 -- | A rule to match against.
 sWith :: Lens' Search [Text]
@@ -304,7 +306,8 @@ sScoring = lens _sScoring (\ s a -> s{_sScoring = a})
 
 -- | Maximum number of results to return.
 sLimit :: Lens' Search Int32
-sLimit = lens _sLimit (\ s a -> s{_sLimit = a})
+sLimit
+  = lens _sLimit (\ s a -> s{_sLimit = a}) . _Coerce
 
 -- | A filter to apply to the query.
 sFilter :: Lens' Search [Text]

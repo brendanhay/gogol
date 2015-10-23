@@ -80,10 +80,10 @@ instance ToJSON
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' smart constructor.
 data PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-    { _pafsvaisiHeight :: !(Maybe Int32)
-    , _pafsvaisiLeft   :: !(Maybe Int32)
-    , _pafsvaisiWidth  :: !(Maybe Int32)
-    , _pafsvaisiTop    :: !(Maybe Int32)
+    { _pafsvaisiHeight :: !(Maybe (JSONText Int32))
+    , _pafsvaisiLeft   :: !(Maybe (JSONText Int32))
+    , _pafsvaisiWidth  :: !(Maybe (JSONText Int32))
+    , _pafsvaisiTop    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' with the minimum fields required to make a request.
@@ -112,23 +112,27 @@ pafsvaisiHeight :: Lens' PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem (
 pafsvaisiHeight
   = lens _pafsvaisiHeight
       (\ s a -> s{_pafsvaisiHeight = a})
+      . mapping _Coerce
 
 -- | The left coordinate of the rect, in page coordinates.
 pafsvaisiLeft :: Lens' PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem (Maybe Int32)
 pafsvaisiLeft
   = lens _pafsvaisiLeft
       (\ s a -> s{_pafsvaisiLeft = a})
+      . mapping _Coerce
 
 -- | The width of the rect.
 pafsvaisiWidth :: Lens' PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem (Maybe Int32)
 pafsvaisiWidth
   = lens _pafsvaisiWidth
       (\ s a -> s{_pafsvaisiWidth = a})
+      . mapping _Coerce
 
 -- | The top coordinate of the rect, in page coordinates.
 pafsvaisiTop :: Lens' PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem (Maybe Int32)
 pafsvaisiTop
   = lens _pafsvaisiTop (\ s a -> s{_pafsvaisiTop = a})
+      . mapping _Coerce
 
 instance FromJSON
          PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
@@ -158,10 +162,10 @@ instance ToJSON
 --
 -- /See:/ 'pagespeedAPIImageV2' smart constructor.
 data PagespeedAPIImageV2 = PagespeedAPIImageV2
-    { _paivHeight   :: !(Maybe Int32)
-    , _paivData     :: !(Maybe Word8)
+    { _paivHeight   :: !(Maybe (JSONText Int32))
+    , _paivData     :: !(Maybe (JSONText Word8))
     , _paivMimeType :: !(Maybe Text)
-    , _paivWidth    :: !(Maybe Int32)
+    , _paivWidth    :: !(Maybe (JSONText Int32))
     , _paivPageRect :: !(Maybe PagespeedAPIImageV2Page_rect)
     , _paivKey      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -196,11 +200,14 @@ pagespeedAPIImageV2 =
 -- | Height of screenshot in pixels.
 paivHeight :: Lens' PagespeedAPIImageV2 (Maybe Int32)
 paivHeight
-  = lens _paivHeight (\ s a -> s{_paivHeight = a})
+  = lens _paivHeight (\ s a -> s{_paivHeight = a}) .
+      mapping _Coerce
 
 -- | Image data base64 encoded.
 paivData :: Lens' PagespeedAPIImageV2 (Maybe Word8)
-paivData = lens _paivData (\ s a -> s{_paivData = a})
+paivData
+  = lens _paivData (\ s a -> s{_paivData = a}) .
+      mapping _Coerce
 
 -- | Mime type of image data (e.g. \"image\/jpeg\").
 paivMimeType :: Lens' PagespeedAPIImageV2 (Maybe Text)
@@ -210,7 +217,8 @@ paivMimeType
 -- | Width of screenshot in pixels.
 paivWidth :: Lens' PagespeedAPIImageV2 (Maybe Int32)
 paivWidth
-  = lens _paivWidth (\ s a -> s{_paivWidth = a})
+  = lens _paivWidth (\ s a -> s{_paivWidth = a}) .
+      mapping _Coerce
 
 -- | The region of the page that is captured by this image, with dimensions
 -- measured in CSS pixels.
@@ -247,10 +255,10 @@ instance ToJSON PagespeedAPIImageV2 where
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItemRectsItem' smart constructor.
 data PagespeedAPIFormatStringV2ArgsItemRectsItem = PagespeedAPIFormatStringV2ArgsItemRectsItem
-    { _pafsvairiHeight :: !(Maybe Int32)
-    , _pafsvairiLeft   :: !(Maybe Int32)
-    , _pafsvairiWidth  :: !(Maybe Int32)
-    , _pafsvairiTop    :: !(Maybe Int32)
+    { _pafsvairiHeight :: !(Maybe (JSONText Int32))
+    , _pafsvairiLeft   :: !(Maybe (JSONText Int32))
+    , _pafsvairiWidth  :: !(Maybe (JSONText Int32))
+    , _pafsvairiTop    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItemRectsItem' with the minimum fields required to make a request.
@@ -279,23 +287,27 @@ pafsvairiHeight :: Lens' PagespeedAPIFormatStringV2ArgsItemRectsItem (Maybe Int3
 pafsvairiHeight
   = lens _pafsvairiHeight
       (\ s a -> s{_pafsvairiHeight = a})
+      . mapping _Coerce
 
 -- | The left coordinate of the rect, in page coordinates.
 pafsvairiLeft :: Lens' PagespeedAPIFormatStringV2ArgsItemRectsItem (Maybe Int32)
 pafsvairiLeft
   = lens _pafsvairiLeft
       (\ s a -> s{_pafsvairiLeft = a})
+      . mapping _Coerce
 
 -- | The width of the rect.
 pafsvairiWidth :: Lens' PagespeedAPIFormatStringV2ArgsItemRectsItem (Maybe Int32)
 pafsvairiWidth
   = lens _pafsvairiWidth
       (\ s a -> s{_pafsvairiWidth = a})
+      . mapping _Coerce
 
 -- | The top coordinate of the rect, in page coordinates.
 pafsvairiTop :: Lens' PagespeedAPIFormatStringV2ArgsItemRectsItem (Maybe Int32)
 pafsvairiTop
   = lens _pafsvairiTop (\ s a -> s{_pafsvairiTop = a})
+      . mapping _Coerce
 
 instance FromJSON
          PagespeedAPIFormatStringV2ArgsItemRectsItem where
@@ -323,8 +335,8 @@ instance ToJSON
 --
 -- /See:/ 'resultVersion' smart constructor.
 data ResultVersion = ResultVersion
-    { _rvMinor :: !(Maybe Int32)
-    , _rvMajor :: !(Maybe Int32)
+    { _rvMinor :: !(Maybe (JSONText Int32))
+    , _rvMajor :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultVersion' with the minimum fields required to make a request.
@@ -344,11 +356,15 @@ resultVersion =
 
 -- | The minor version number of PageSpeed used to generate these results.
 rvMinor :: Lens' ResultVersion (Maybe Int32)
-rvMinor = lens _rvMinor (\ s a -> s{_rvMinor = a})
+rvMinor
+  = lens _rvMinor (\ s a -> s{_rvMinor = a}) .
+      mapping _Coerce
 
 -- | The major version number of PageSpeed used to generate these results.
 rvMajor :: Lens' ResultVersion (Maybe Int32)
-rvMajor = lens _rvMajor (\ s a -> s{_rvMajor = a})
+rvMajor
+  = lens _rvMajor (\ s a -> s{_rvMajor = a}) .
+      mapping _Coerce
 
 instance FromJSON ResultVersion where
         parseJSON
@@ -369,19 +385,19 @@ instance ToJSON ResultVersion where
 --
 -- /See:/ 'resultPageStats' smart constructor.
 data ResultPageStats = ResultPageStats
-    { _rpsHTMLResponseBytes       :: !(Maybe Int64)
-    , _rpsTotalRequestBytes       :: !(Maybe Int64)
-    , _rpsNumberResources         :: !(Maybe Int32)
-    , _rpsNumberStaticResources   :: !(Maybe Int32)
-    , _rpsNumberHosts             :: !(Maybe Int32)
-    , _rpsNumberJsResources       :: !(Maybe Int32)
-    , _rpsNumberCssResources      :: !(Maybe Int32)
-    , _rpsTextResponseBytes       :: !(Maybe Int64)
-    , _rpsFlashResponseBytes      :: !(Maybe Int64)
-    , _rpsImageResponseBytes      :: !(Maybe Int64)
-    , _rpsOtherResponseBytes      :: !(Maybe Int64)
-    , _rpsJavascriptResponseBytes :: !(Maybe Int64)
-    , _rpsCssResponseBytes        :: !(Maybe Int64)
+    { _rpsHTMLResponseBytes       :: !(Maybe (JSONText Int64))
+    , _rpsTotalRequestBytes       :: !(Maybe (JSONText Int64))
+    , _rpsNumberResources         :: !(Maybe (JSONText Int32))
+    , _rpsNumberStaticResources   :: !(Maybe (JSONText Int32))
+    , _rpsNumberHosts             :: !(Maybe (JSONText Int32))
+    , _rpsNumberJsResources       :: !(Maybe (JSONText Int32))
+    , _rpsNumberCssResources      :: !(Maybe (JSONText Int32))
+    , _rpsTextResponseBytes       :: !(Maybe (JSONText Int64))
+    , _rpsFlashResponseBytes      :: !(Maybe (JSONText Int64))
+    , _rpsImageResponseBytes      :: !(Maybe (JSONText Int64))
+    , _rpsOtherResponseBytes      :: !(Maybe (JSONText Int64))
+    , _rpsJavascriptResponseBytes :: !(Maybe (JSONText Int64))
+    , _rpsCssResponseBytes        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultPageStats' with the minimum fields required to make a request.
@@ -438,42 +454,49 @@ rpsHTMLResponseBytes :: Lens' ResultPageStats (Maybe Int64)
 rpsHTMLResponseBytes
   = lens _rpsHTMLResponseBytes
       (\ s a -> s{_rpsHTMLResponseBytes = a})
+      . mapping _Coerce
 
 -- | Total size of all request bytes sent by the page.
 rpsTotalRequestBytes :: Lens' ResultPageStats (Maybe Int64)
 rpsTotalRequestBytes
   = lens _rpsTotalRequestBytes
       (\ s a -> s{_rpsTotalRequestBytes = a})
+      . mapping _Coerce
 
 -- | Number of HTTP resources loaded by the page.
 rpsNumberResources :: Lens' ResultPageStats (Maybe Int32)
 rpsNumberResources
   = lens _rpsNumberResources
       (\ s a -> s{_rpsNumberResources = a})
+      . mapping _Coerce
 
 -- | Number of static (i.e. cacheable) resources on the page.
 rpsNumberStaticResources :: Lens' ResultPageStats (Maybe Int32)
 rpsNumberStaticResources
   = lens _rpsNumberStaticResources
       (\ s a -> s{_rpsNumberStaticResources = a})
+      . mapping _Coerce
 
 -- | Number of unique hosts referenced by the page.
 rpsNumberHosts :: Lens' ResultPageStats (Maybe Int32)
 rpsNumberHosts
   = lens _rpsNumberHosts
       (\ s a -> s{_rpsNumberHosts = a})
+      . mapping _Coerce
 
 -- | Number of JavaScript resources referenced by the page.
 rpsNumberJsResources :: Lens' ResultPageStats (Maybe Int32)
 rpsNumberJsResources
   = lens _rpsNumberJsResources
       (\ s a -> s{_rpsNumberJsResources = a})
+      . mapping _Coerce
 
 -- | Number of CSS resources referenced by the page.
 rpsNumberCssResources :: Lens' ResultPageStats (Maybe Int32)
 rpsNumberCssResources
   = lens _rpsNumberCssResources
       (\ s a -> s{_rpsNumberCssResources = a})
+      . mapping _Coerce
 
 -- | Number of uncompressed response bytes for text resources not covered by
 -- other statistics (i.e non-HTML, non-script, non-CSS resources) on the
@@ -482,36 +505,42 @@ rpsTextResponseBytes :: Lens' ResultPageStats (Maybe Int64)
 rpsTextResponseBytes
   = lens _rpsTextResponseBytes
       (\ s a -> s{_rpsTextResponseBytes = a})
+      . mapping _Coerce
 
 -- | Number of response bytes for flash resources on the page.
 rpsFlashResponseBytes :: Lens' ResultPageStats (Maybe Int64)
 rpsFlashResponseBytes
   = lens _rpsFlashResponseBytes
       (\ s a -> s{_rpsFlashResponseBytes = a})
+      . mapping _Coerce
 
 -- | Number of response bytes for image resources on the page.
 rpsImageResponseBytes :: Lens' ResultPageStats (Maybe Int64)
 rpsImageResponseBytes
   = lens _rpsImageResponseBytes
       (\ s a -> s{_rpsImageResponseBytes = a})
+      . mapping _Coerce
 
 -- | Number of response bytes for other resources on the page.
 rpsOtherResponseBytes :: Lens' ResultPageStats (Maybe Int64)
 rpsOtherResponseBytes
   = lens _rpsOtherResponseBytes
       (\ s a -> s{_rpsOtherResponseBytes = a})
+      . mapping _Coerce
 
 -- | Number of uncompressed response bytes for JS resources on the page.
 rpsJavascriptResponseBytes :: Lens' ResultPageStats (Maybe Int64)
 rpsJavascriptResponseBytes
   = lens _rpsJavascriptResponseBytes
       (\ s a -> s{_rpsJavascriptResponseBytes = a})
+      . mapping _Coerce
 
 -- | Number of uncompressed response bytes for CSS resources on the page.
 rpsCssResponseBytes :: Lens' ResultPageStats (Maybe Int64)
 rpsCssResponseBytes
   = lens _rpsCssResponseBytes
       (\ s a -> s{_rpsCssResponseBytes = a})
+      . mapping _Coerce
 
 instance FromJSON ResultPageStats where
         parseJSON
@@ -557,10 +586,10 @@ instance ToJSON ResultPageStats where
 --
 -- /See:/ 'pagespeedAPIImageV2Page_rect' smart constructor.
 data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect
-    { _paivpHeight :: !(Maybe Int32)
-    , _paivpLeft   :: !(Maybe Int32)
-    , _paivpWidth  :: !(Maybe Int32)
-    , _paivpTop    :: !(Maybe Int32)
+    { _paivpHeight :: !(Maybe (JSONText Int32))
+    , _paivpLeft   :: !(Maybe (JSONText Int32))
+    , _paivpWidth  :: !(Maybe (JSONText Int32))
+    , _paivpTop    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIImageV2Page_rect' with the minimum fields required to make a request.
@@ -587,21 +616,26 @@ pagespeedAPIImageV2Page_rect =
 -- | The height of the rect.
 paivpHeight :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
 paivpHeight
-  = lens _paivpHeight (\ s a -> s{_paivpHeight = a})
+  = lens _paivpHeight (\ s a -> s{_paivpHeight = a}) .
+      mapping _Coerce
 
 -- | The left coordinate of the rect, in page coordinates.
 paivpLeft :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
 paivpLeft
-  = lens _paivpLeft (\ s a -> s{_paivpLeft = a})
+  = lens _paivpLeft (\ s a -> s{_paivpLeft = a}) .
+      mapping _Coerce
 
 -- | The width of the rect.
 paivpWidth :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
 paivpWidth
-  = lens _paivpWidth (\ s a -> s{_paivpWidth = a})
+  = lens _paivpWidth (\ s a -> s{_paivpWidth = a}) .
+      mapping _Coerce
 
 -- | The top coordinate of the rect, in page coordinates.
 paivpTop :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpTop = lens _paivpTop (\ s a -> s{_paivpTop = a})
+paivpTop
+  = lens _paivpTop (\ s a -> s{_paivpTop = a}) .
+      mapping _Coerce
 
 instance FromJSON PagespeedAPIImageV2Page_rect where
         parseJSON
@@ -626,7 +660,7 @@ instance ToJSON PagespeedAPIImageV2Page_rect where
 data Result = Result
     { _rScreenshot       :: !(Maybe PagespeedAPIImageV2)
     , _rKind             :: !Text
-    , _rResponseCode     :: !(Maybe Int32)
+    , _rResponseCode     :: !(Maybe (JSONText Int32))
     , _rInvalidRules     :: !(Maybe [Text])
     , _rFormattedResults :: !(Maybe ResultFormattedResults)
     , _rVersion          :: !(Maybe ResultVersion)
@@ -690,6 +724,7 @@ rResponseCode :: Lens' Result (Maybe Int32)
 rResponseCode
   = lens _rResponseCode
       (\ s a -> s{_rResponseCode = a})
+      . mapping _Coerce
 
 -- | List of rules that were specified in the request, but which the server
 -- did not know how to instantiate.
@@ -856,7 +891,7 @@ instance ToJSON PagespeedAPIFormatStringV2ArgsItem
 --
 -- /See:/ 'resultRuleGroupsAdditional' smart constructor.
 newtype ResultRuleGroupsAdditional = ResultRuleGroupsAdditional
-    { _rrgaScore :: Maybe Int32
+    { _rrgaScore :: Maybe (JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultRuleGroupsAdditional' with the minimum fields required to make a request.
@@ -877,7 +912,8 @@ resultRuleGroupsAdditional =
 -- lower score indicates more room for improvement.
 rrgaScore :: Lens' ResultRuleGroupsAdditional (Maybe Int32)
 rrgaScore
-  = lens _rrgaScore (\ s a -> s{_rrgaScore = a})
+  = lens _rrgaScore (\ s a -> s{_rrgaScore = a}) .
+      mapping _Coerce
 
 instance FromJSON ResultRuleGroupsAdditional where
         parseJSON
@@ -945,7 +981,7 @@ instance ToJSON ResultFormattedResults where
 -- /See:/ 'resultFormattedResultsRuleResultsAdditional' smart constructor.
 data ResultFormattedResultsRuleResultsAdditional = ResultFormattedResultsRuleResultsAdditional
     { _rfrrraSummary           :: !(Maybe PagespeedAPIFormatStringV2)
-    , _rfrrraRuleImpact        :: !(Maybe Double)
+    , _rfrrraRuleImpact        :: !(Maybe (JSONText Double))
     , _rfrrraGroups            :: !(Maybe [Text])
     , _rfrrraLocalizedRuleName :: !(Maybe Text)
     , _rfrrraURLBlocks         :: !(Maybe [ResultFormattedResultsRuleResultsAdditionalURLBlocksItem])
@@ -994,6 +1030,7 @@ rfrrraRuleImpact :: Lens' ResultFormattedResultsRuleResultsAdditional (Maybe Dou
 rfrrraRuleImpact
   = lens _rfrrraRuleImpact
       (\ s a -> s{_rfrrraRuleImpact = a})
+      . mapping _Coerce
 
 -- | List of rule groups that this rule belongs to. Each entry in the list is
 -- one of \"SPEED\" or \"USABILITY\".

@@ -53,7 +53,7 @@ type MembersListResource =
                "members" :>
                  QueryParam "roles" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Members
 
 -- | Retrieve all members in a group (paginated)
@@ -63,7 +63,7 @@ data MembersList = MembersList
     { _mlRoles      :: !(Maybe Text)
     , _mlGroupKey   :: !Text
     , _mlPageToken  :: !(Maybe Text)
-    , _mlMaxResults :: !(Maybe Int32)
+    , _mlMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersList' with the minimum fields required to make a request.
@@ -106,6 +106,7 @@ mlPageToken
 mlMaxResults :: Lens' MembersList (Maybe Int32)
 mlMaxResults
   = lens _mlMaxResults (\ s a -> s{_mlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest MembersList where
         type Rs MembersList = Members

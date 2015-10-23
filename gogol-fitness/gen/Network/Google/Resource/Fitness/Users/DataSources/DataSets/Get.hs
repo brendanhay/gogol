@@ -58,7 +58,7 @@ type UsersDataSourcesDataSetsGetResource =
                Capture "dataSourceId" Text :>
                  "datasets" :>
                    Capture "datasetId" Text :>
-                     QueryParam "limit" Int32 :>
+                     QueryParam "limit" (JSONText Int32) :>
                        QueryParam "pageToken" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] DataSet
 
@@ -73,7 +73,7 @@ data UsersDataSourcesDataSetsGet = UsersDataSourcesDataSetsGet
     { _udsdsgDataSourceId :: !Text
     , _udsdsgUserId       :: !Text
     , _udsdsgDataSetId    :: !Text
-    , _udsdsgLimit        :: !(Maybe Int32)
+    , _udsdsgLimit        :: !(Maybe (JSONText Int32))
     , _udsdsgPageToken    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -130,7 +130,8 @@ udsdsgDataSetId
 -- will be set in the dataset response.
 udsdsgLimit :: Lens' UsersDataSourcesDataSetsGet (Maybe Int32)
 udsdsgLimit
-  = lens _udsdsgLimit (\ s a -> s{_udsdsgLimit = a})
+  = lens _udsdsgLimit (\ s a -> s{_udsdsgLimit = a}) .
+      mapping _Coerce
 
 -- | The continuation token, which is used to page through large datasets. To
 -- get the next page of a dataset, set this parameter to the value of

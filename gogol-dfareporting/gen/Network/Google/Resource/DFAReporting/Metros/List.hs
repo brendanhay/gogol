@@ -45,7 +45,7 @@ type MetrosListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "metros" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] MetrosListResponse
@@ -54,7 +54,7 @@ type MetrosListResource =
 --
 -- /See:/ 'metrosList' smart constructor.
 newtype MetrosList = MetrosList
-    { _mlProFileId :: Int64
+    { _mlProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetrosList' with the minimum fields required to make a request.
@@ -73,7 +73,8 @@ metrosList pMlProFileId_ =
 -- | User profile ID associated with this request.
 mlProFileId :: Lens' MetrosList Int64
 mlProFileId
-  = lens _mlProFileId (\ s a -> s{_mlProFileId = a})
+  = lens _mlProFileId (\ s a -> s{_mlProFileId = a}) .
+      _Coerce
 
 instance GoogleRequest MetrosList where
         type Rs MetrosList = MetrosListResponse

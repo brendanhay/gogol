@@ -47,9 +47,9 @@ type AdsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "ads" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Ad :> Patch '[JSON] Ad
 
@@ -57,9 +57,9 @@ type AdsPatchResource =
 --
 -- /See:/ 'adsPatch' smart constructor.
 data AdsPatch = AdsPatch
-    { _adsdProFileId :: !Int64
+    { _adsdProFileId :: !(JSONText Int64)
     , _adsdPayload   :: !Ad
-    , _adsdId        :: !Int64
+    , _adsdId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsPatch' with the minimum fields required to make a request.
@@ -88,6 +88,7 @@ adsdProFileId :: Lens' AdsPatch Int64
 adsdProFileId
   = lens _adsdProFileId
       (\ s a -> s{_adsdProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 adsdPayload :: Lens' AdsPatch Ad
@@ -96,7 +97,8 @@ adsdPayload
 
 -- | Ad ID.
 adsdId :: Lens' AdsPatch Int64
-adsdId = lens _adsdId (\ s a -> s{_adsdId = a})
+adsdId
+  = lens _adsdId (\ s a -> s{_adsdId = a}) . _Coerce
 
 instance GoogleRequest AdsPatch where
         type Rs AdsPatch = Ad

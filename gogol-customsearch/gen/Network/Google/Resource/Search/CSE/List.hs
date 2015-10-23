@@ -83,10 +83,10 @@ type CSEListResource =
                :>
                QueryParam "c2coff" Text :>
                  QueryParam "orTerms" Text :>
-                   QueryParam "start" Word32 :>
+                   QueryParam "start" (JSONText Word32) :>
                      QueryParam "rights" Text :>
                        QueryParam "excludeTerms" Text :>
-                         QueryParam "num" Word32 :>
+                         QueryParam "num" (JSONText Word32) :>
                            QueryParam "fileType" Text :>
                              QueryParam "searchType" CSEListSearchType :>
                                QueryParam "lr" CSEListLr :>
@@ -150,10 +150,10 @@ data CSEList = CSEList
     , _cselSiteSearchFilter :: !(Maybe CSEListSiteSearchFilter)
     , _cselC2coff           :: !(Maybe Text)
     , _cselOrTerms          :: !(Maybe Text)
-    , _cselStart            :: !(Maybe Word32)
+    , _cselStart            :: !(Maybe (JSONText Word32))
     , _cselRights           :: !(Maybe Text)
     , _cselExcludeTerms     :: !(Maybe Text)
-    , _cselNum              :: !Word32
+    , _cselNum              :: !(JSONText Word32)
     , _cselFileType         :: !(Maybe Text)
     , _cselSearchType       :: !(Maybe CSEListSearchType)
     , _cselLr               :: !(Maybe CSEListLr)
@@ -315,7 +315,8 @@ cselOrTerms
 -- | The index of the first result to return
 cselStart :: Lens' CSEList (Maybe Word32)
 cselStart
-  = lens _cselStart (\ s a -> s{_cselStart = a})
+  = lens _cselStart (\ s a -> s{_cselStart = a}) .
+      mapping _Coerce
 
 -- | Filters based on licensing. Supported values include: cc_publicdomain,
 -- cc_attribute, cc_sharealike, cc_noncommercial, cc_nonderived and
@@ -333,7 +334,8 @@ cselExcludeTerms
 
 -- | Number of search results to return
 cselNum :: Lens' CSEList Word32
-cselNum = lens _cselNum (\ s a -> s{_cselNum = a})
+cselNum
+  = lens _cselNum (\ s a -> s{_cselNum = a}) . _Coerce
 
 -- | Returns images of a specified type. Some of the allowed values are: bmp,
 -- gif, png, jpg, svg, pdf, ...

@@ -49,7 +49,7 @@ type MarketplaceOrdersUpdateResource =
        "v1.4" :>
          "marketplaceOrders" :>
            Capture "orderId" Text :>
-             Capture "revisionNumber" Int64 :>
+             Capture "revisionNumber" (JSONText Int64) :>
                Capture "updateAction"
                  MarketplaceOrdersUpdateUpdateAction
                  :>
@@ -62,7 +62,7 @@ type MarketplaceOrdersUpdateResource =
 -- /See:/ 'marketplaceOrdersUpdate' smart constructor.
 data MarketplaceOrdersUpdate = MarketplaceOrdersUpdate
     { _mouUpdateAction   :: !MarketplaceOrdersUpdateUpdateAction
-    , _mouRevisionNumber :: !Int64
+    , _mouRevisionNumber :: !(JSONText Int64)
     , _mouPayload        :: !MarketplaceOrder
     , _mouOrderId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -106,6 +106,7 @@ mouRevisionNumber :: Lens' MarketplaceOrdersUpdate Int64
 mouRevisionNumber
   = lens _mouRevisionNumber
       (\ s a -> s{_mouRevisionNumber = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 mouPayload :: Lens' MarketplaceOrdersUpdate MarketplaceOrder

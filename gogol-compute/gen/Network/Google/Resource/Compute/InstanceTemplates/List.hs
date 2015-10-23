@@ -54,7 +54,7 @@ type InstanceTemplatesListResource =
                "instanceTemplates" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] InstanceTemplateList
 
@@ -66,7 +66,7 @@ data InstanceTemplatesList = InstanceTemplatesList
     { _itlProject    :: !Text
     , _itlFilter     :: !(Maybe Text)
     , _itlPageToken  :: !(Maybe Text)
-    , _itlMaxResults :: !Word32
+    , _itlMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesList' with the minimum fields required to make a request.
@@ -123,6 +123,7 @@ itlMaxResults :: Lens' InstanceTemplatesList Word32
 itlMaxResults
   = lens _itlMaxResults
       (\ s a -> s{_itlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest InstanceTemplatesList where
         type Rs InstanceTemplatesList = InstanceTemplateList

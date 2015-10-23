@@ -65,7 +65,7 @@ type SubscriptionsListResource =
                          QueryParam "forChannelId" Text :>
                            QueryParam "pageToken" Text :>
                              QueryParam "order" SubscriptionsListOrder :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] SubscriptionListResponse
 
@@ -83,7 +83,7 @@ data SubscriptionsList = SubscriptionsList
     , _sForChannelId                  :: !(Maybe Text)
     , _sPageToken                     :: !(Maybe Text)
     , _sOrder                         :: !SubscriptionsListOrder
-    , _sMaxResults                    :: !Word32
+    , _sMaxResults                    :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
@@ -224,7 +224,8 @@ sOrder = lens _sOrder (\ s a -> s{_sOrder = a})
 -- should be returned in the result set.
 sMaxResults :: Lens' SubscriptionsList Word32
 sMaxResults
-  = lens _sMaxResults (\ s a -> s{_sMaxResults = a})
+  = lens _sMaxResults (\ s a -> s{_sMaxResults = a}) .
+      _Coerce
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = SubscriptionListResponse

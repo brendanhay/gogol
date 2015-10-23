@@ -53,7 +53,7 @@ type InstanceGroupsAggregatedListResource =
                "instanceGroups" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] InstanceGroupAggregatedList
 
@@ -64,7 +64,7 @@ data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList
     { _igalProject    :: !Text
     , _igalFilter     :: !(Maybe Text)
     , _igalPageToken  :: !(Maybe Text)
-    , _igalMaxResults :: !Word32
+    , _igalMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsAggregatedList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ igalMaxResults :: Lens' InstanceGroupsAggregatedList Word32
 igalMaxResults
   = lens _igalMaxResults
       (\ s a -> s{_igalMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest InstanceGroupsAggregatedList
          where

@@ -46,17 +46,17 @@ type CampaignsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Campaign
 
 -- | Gets one campaign by ID.
 --
 -- /See:/ 'campaignsGet' smart constructor.
 data CampaignsGet = CampaignsGet
-    { _cggProFileId :: !Int64
-    , _cggId        :: !Int64
+    { _cggProFileId :: !(JSONText Int64)
+    , _cggId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ campaignsGet pCggProFileId_ pCggId_ =
 cggProFileId :: Lens' CampaignsGet Int64
 cggProFileId
   = lens _cggProFileId (\ s a -> s{_cggProFileId = a})
+      . _Coerce
 
 -- | Campaign ID.
 cggId :: Lens' CampaignsGet Int64
-cggId = lens _cggId (\ s a -> s{_cggId = a})
+cggId
+  = lens _cggId (\ s a -> s{_cggId = a}) . _Coerce
 
 instance GoogleRequest CampaignsGet where
         type Rs CampaignsGet = Campaign

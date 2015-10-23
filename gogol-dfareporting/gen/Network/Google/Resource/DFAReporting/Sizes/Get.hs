@@ -46,17 +46,17 @@ type SizesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "sizes" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Size
 
 -- | Gets one size by ID.
 --
 -- /See:/ 'sizesGet' smart constructor.
 data SizesGet = SizesGet
-    { _sgProFileId :: !Int64
-    , _sgId        :: !Int64
+    { _sgProFileId :: !(JSONText Int64)
+    , _sgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesGet' with the minimum fields required to make a request.
@@ -79,11 +79,12 @@ sizesGet pSgProFileId_ pSgId_ =
 -- | User profile ID associated with this request.
 sgProFileId :: Lens' SizesGet Int64
 sgProFileId
-  = lens _sgProFileId (\ s a -> s{_sgProFileId = a})
+  = lens _sgProFileId (\ s a -> s{_sgProFileId = a}) .
+      _Coerce
 
 -- | Size ID.
 sgId :: Lens' SizesGet Int64
-sgId = lens _sgId (\ s a -> s{_sgId = a})
+sgId = lens _sgId (\ s a -> s{_sgId = a}) . _Coerce
 
 instance GoogleRequest SizesGet where
         type Rs SizesGet = Size

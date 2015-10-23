@@ -71,7 +71,7 @@ instance ToJSON Tasks2 where
 data TaskQueue = TaskQueue
     { _tqKind      :: !Text
     , _tqStats     :: !(Maybe TaskQueueStats)
-    , _tqMaxLeases :: !(Maybe Int32)
+    , _tqMaxLeases :: !(Maybe (JSONText Int32))
     , _tqId        :: !(Maybe Text)
     , _tqACL       :: !(Maybe TaskQueueACL)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -112,7 +112,8 @@ tqStats = lens _tqStats (\ s a -> s{_tqStats = a})
 -- If unset we lease them out forever until a worker deletes the task.
 tqMaxLeases :: Lens' TaskQueue (Maybe Int32)
 tqMaxLeases
-  = lens _tqMaxLeases (\ s a -> s{_tqMaxLeases = a})
+  = lens _tqMaxLeases (\ s a -> s{_tqMaxLeases = a}) .
+      mapping _Coerce
 
 -- | Name of the taskqueue.
 tqId :: Lens' TaskQueue (Maybe Text)
@@ -216,10 +217,10 @@ instance ToJSON TaskQueueACL where
 --
 -- /See:/ 'taskQueueStats' smart constructor.
 data TaskQueueStats = TaskQueueStats
-    { _tqsTotalTasks       :: !(Maybe Int32)
-    , _tqsOldestTask       :: !(Maybe Int64)
-    , _tqsLeasedLastHour   :: !(Maybe Int64)
-    , _tqsLeasedLastMinute :: !(Maybe Int64)
+    { _tqsTotalTasks       :: !(Maybe (JSONText Int32))
+    , _tqsOldestTask       :: !(Maybe (JSONText Int64))
+    , _tqsLeasedLastHour   :: !(Maybe (JSONText Int64))
+    , _tqsLeasedLastMinute :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskQueueStats' with the minimum fields required to make a request.
@@ -248,6 +249,7 @@ tqsTotalTasks :: Lens' TaskQueueStats (Maybe Int32)
 tqsTotalTasks
   = lens _tqsTotalTasks
       (\ s a -> s{_tqsTotalTasks = a})
+      . mapping _Coerce
 
 -- | The timestamp (in seconds since the epoch) of the oldest unfinished
 -- task.
@@ -255,18 +257,21 @@ tqsOldestTask :: Lens' TaskQueueStats (Maybe Int64)
 tqsOldestTask
   = lens _tqsOldestTask
       (\ s a -> s{_tqsOldestTask = a})
+      . mapping _Coerce
 
 -- | Number of tasks leased in the last hour.
 tqsLeasedLastHour :: Lens' TaskQueueStats (Maybe Int64)
 tqsLeasedLastHour
   = lens _tqsLeasedLastHour
       (\ s a -> s{_tqsLeasedLastHour = a})
+      . mapping _Coerce
 
 -- | Number of tasks leased in the last minute.
 tqsLeasedLastMinute :: Lens' TaskQueueStats (Maybe Int64)
 tqsLeasedLastMinute
   = lens _tqsLeasedLastMinute
       (\ s a -> s{_tqsLeasedLastMinute = a})
+      . mapping _Coerce
 
 instance FromJSON TaskQueueStats where
         parseJSON
@@ -337,14 +342,14 @@ instance ToJSON Tasks where
 --
 -- /See:/ 'task' smart constructor.
 data Task = Task
-    { _ttRetryCount       :: !(Maybe Int32)
-    , _ttEnqueueTimestamp :: !(Maybe Int64)
+    { _ttRetryCount       :: !(Maybe (JSONText Int32))
+    , _ttEnqueueTimestamp :: !(Maybe (JSONText Int64))
     , _ttTag              :: !(Maybe Text)
     , _ttKind             :: !Text
     , _ttQueueName        :: !(Maybe Text)
     , _ttPayloadBase64    :: !(Maybe Text)
     , _ttId               :: !(Maybe Text)
-    , _ttLeaseTimestamp   :: !(Maybe Int64)
+    , _ttLeaseTimestamp   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Task' with the minimum fields required to make a request.
@@ -384,12 +389,14 @@ task =
 ttRetryCount :: Lens' Task (Maybe Int32)
 ttRetryCount
   = lens _ttRetryCount (\ s a -> s{_ttRetryCount = a})
+      . mapping _Coerce
 
 -- | Time (in seconds since the epoch) at which the task was enqueued.
 ttEnqueueTimestamp :: Lens' Task (Maybe Int64)
 ttEnqueueTimestamp
   = lens _ttEnqueueTimestamp
       (\ s a -> s{_ttEnqueueTimestamp = a})
+      . mapping _Coerce
 
 -- | Tag for the task, could be used later to lease tasks grouped by a
 -- specific tag.
@@ -422,6 +429,7 @@ ttLeaseTimestamp :: Lens' Task (Maybe Int64)
 ttLeaseTimestamp
   = lens _ttLeaseTimestamp
       (\ s a -> s{_ttLeaseTimestamp = a})
+      . mapping _Coerce
 
 instance FromJSON Task where
         parseJSON

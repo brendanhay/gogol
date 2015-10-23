@@ -50,7 +50,7 @@ type TablesParentsListResource =
            Capture "id" Text :>
              "parents" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ParentsListResponse
 
@@ -60,7 +60,7 @@ type TablesParentsListResource =
 data TablesParentsList = TablesParentsList
     { _tId         :: !Text
     , _tPageToken  :: !(Maybe Text)
-    , _tMaxResults :: !(Maybe Word32)
+    , _tMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesParentsList' with the minimum fields required to make a request.
@@ -97,7 +97,8 @@ tPageToken
 -- maximum supported value is 50.
 tMaxResults :: Lens' TablesParentsList (Maybe Word32)
 tMaxResults
-  = lens _tMaxResults (\ s a -> s{_tMaxResults = a})
+  = lens _tMaxResults (\ s a -> s{_tMaxResults = a}) .
+      mapping _Coerce
 
 instance GoogleRequest TablesParentsList where
         type Rs TablesParentsList = ParentsListResponse

@@ -51,7 +51,7 @@ type AchievementsSetStepsAtLeastResource =
          "achievements" :>
            Capture "achievementId" Text :>
              "setStepsAtLeast" :>
-               QueryParam "steps" Int32 :>
+               QueryParam "steps" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :>
                    Post '[JSON] AchievementSetStepsAtLeastResponse
 
@@ -63,7 +63,7 @@ type AchievementsSetStepsAtLeastResource =
 -- /See:/ 'achievementsSetStepsAtLeast' smart constructor.
 data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast
     { _assalAchievementId :: !Text
-    , _assalSteps         :: !Int32
+    , _assalSteps         :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsSetStepsAtLeast' with the minimum fields required to make a request.
@@ -92,7 +92,8 @@ assalAchievementId
 -- | The minimum value to set the steps to.
 assalSteps :: Lens' AchievementsSetStepsAtLeast Int32
 assalSteps
-  = lens _assalSteps (\ s a -> s{_assalSteps = a})
+  = lens _assalSteps (\ s a -> s{_assalSteps = a}) .
+      _Coerce
 
 instance GoogleRequest AchievementsSetStepsAtLeast
          where

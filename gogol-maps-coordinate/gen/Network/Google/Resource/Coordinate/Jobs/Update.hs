@@ -59,15 +59,15 @@ type JobsUpdateResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" Word64 :>
+               Capture "jobId" (JSONText Word64) :>
                  QueryParam "progress" JobsUpdateProgress :>
                    QueryParam "note" Text :>
                      QueryParam "customerPhoneNumber" Text :>
                        QueryParam "customerName" Text :>
                          QueryParam "address" Text :>
                            QueryParam "assignee" Text :>
-                             QueryParam "lat" Double :>
-                               QueryParam "lng" Double :>
+                             QueryParam "lat" (JSONText Double) :>
+                               QueryParam "lng" (JSONText Double) :>
                                  QueryParam "title" Text :>
                                    QueryParams "customField" Text :>
                                      QueryParam "alt" AltJSON :>
@@ -77,7 +77,7 @@ type JobsUpdateResource =
 --
 -- /See:/ 'jobsUpdate' smart constructor.
 data JobsUpdate = JobsUpdate
-    { _juJobId               :: !Word64
+    { _juJobId               :: !(JSONText Word64)
     , _juProgress            :: !(Maybe JobsUpdateProgress)
     , _juNote                :: !(Maybe Text)
     , _juTeamId              :: !Text
@@ -86,8 +86,8 @@ data JobsUpdate = JobsUpdate
     , _juAddress             :: !(Maybe Text)
     , _juPayload             :: !Job
     , _juAssignee            :: !(Maybe Text)
-    , _juLat                 :: !(Maybe Double)
-    , _juLng                 :: !(Maybe Double)
+    , _juLat                 :: !(Maybe (JSONText Double))
+    , _juLng                 :: !(Maybe (JSONText Double))
     , _juTitle               :: !(Maybe Text)
     , _juCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -145,7 +145,8 @@ jobsUpdate pJuJobId_ pJuTeamId_ pJuPayload_ =
 
 -- | Job number
 juJobId :: Lens' JobsUpdate Word64
-juJobId = lens _juJobId (\ s a -> s{_juJobId = a})
+juJobId
+  = lens _juJobId (\ s a -> s{_juJobId = a}) . _Coerce
 
 -- | Job progress
 juProgress :: Lens' JobsUpdate (Maybe JobsUpdateProgress)
@@ -189,11 +190,15 @@ juAssignee
 
 -- | The latitude coordinate of this job\'s location.
 juLat :: Lens' JobsUpdate (Maybe Double)
-juLat = lens _juLat (\ s a -> s{_juLat = a})
+juLat
+  = lens _juLat (\ s a -> s{_juLat = a}) .
+      mapping _Coerce
 
 -- | The longitude coordinate of this job\'s location.
 juLng :: Lens' JobsUpdate (Maybe Double)
-juLng = lens _juLng (\ s a -> s{_juLng = a})
+juLng
+  = lens _juLng (\ s a -> s{_juLng = a}) .
+      mapping _Coerce
 
 -- | Job title
 juTitle :: Lens' JobsUpdate (Maybe Text)

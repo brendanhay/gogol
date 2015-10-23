@@ -46,16 +46,16 @@ type PretargetingConfigDeleteResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "pretargetingconfigs" :>
-           Capture "accountId" Int64 :>
-             Capture "configId" Int64 :>
+           Capture "accountId" (JSONText Int64) :>
+             Capture "configId" (JSONText Int64) :>
                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing pretargeting config.
 --
 -- /See:/ 'pretargetingConfigDelete' smart constructor.
 data PretargetingConfigDelete = PretargetingConfigDelete
-    { _pcdAccountId :: !Int64
-    , _pcdConfigId  :: !Int64
+    { _pcdAccountId :: !(JSONText Int64)
+    , _pcdConfigId  :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigDelete' with the minimum fields required to make a request.
@@ -79,11 +79,13 @@ pretargetingConfigDelete pPcdAccountId_ pPcdConfigId_ =
 pcdAccountId :: Lens' PretargetingConfigDelete Int64
 pcdAccountId
   = lens _pcdAccountId (\ s a -> s{_pcdAccountId = a})
+      . _Coerce
 
 -- | The specific id of the configuration to delete.
 pcdConfigId :: Lens' PretargetingConfigDelete Int64
 pcdConfigId
-  = lens _pcdConfigId (\ s a -> s{_pcdConfigId = a})
+  = lens _pcdConfigId (\ s a -> s{_pcdConfigId = a}) .
+      _Coerce
 
 instance GoogleRequest PretargetingConfigDelete where
         type Rs PretargetingConfigDelete = ()

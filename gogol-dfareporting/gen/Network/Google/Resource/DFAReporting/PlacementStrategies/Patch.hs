@@ -48,9 +48,9 @@ type PlacementStrategiesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placementStrategies" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] PlacementStrategy :>
                      Patch '[JSON] PlacementStrategy
@@ -60,9 +60,9 @@ type PlacementStrategiesPatchResource =
 --
 -- /See:/ 'placementStrategiesPatch' smart constructor.
 data PlacementStrategiesPatch = PlacementStrategiesPatch
-    { _pspProFileId :: !Int64
+    { _pspProFileId :: !(JSONText Int64)
     , _pspPayload   :: !PlacementStrategy
-    , _pspId        :: !Int64
+    , _pspId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesPatch' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ placementStrategiesPatch pPspProFileId_ pPspPayload_ pPspId_ =
 pspProFileId :: Lens' PlacementStrategiesPatch Int64
 pspProFileId
   = lens _pspProFileId (\ s a -> s{_pspProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 pspPayload :: Lens' PlacementStrategiesPatch PlacementStrategy
@@ -98,7 +99,8 @@ pspPayload
 
 -- | Placement strategy ID.
 pspId :: Lens' PlacementStrategiesPatch Int64
-pspId = lens _pspId (\ s a -> s{_pspId = a})
+pspId
+  = lens _pspId (\ s a -> s{_pspId = a}) . _Coerce
 
 instance GoogleRequest PlacementStrategiesPatch where
         type Rs PlacementStrategiesPatch = PlacementStrategy

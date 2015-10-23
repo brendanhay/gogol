@@ -61,7 +61,7 @@ type ProjectsTopicsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListTopicsResponse
@@ -78,7 +78,7 @@ data ProjectsTopicsList = ProjectsTopicsList
     , _ptlUploadType     :: !(Maybe Text)
     , _ptlBearerToken    :: !(Maybe Text)
     , _ptlPageToken      :: !(Maybe Text)
-    , _ptlPageSize       :: !(Maybe Int32)
+    , _ptlPageSize       :: !(Maybe (JSONText Int32))
     , _ptlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -169,7 +169,8 @@ ptlPageToken
 -- | Maximum number of topics to return.
 ptlPageSize :: Lens' ProjectsTopicsList (Maybe Int32)
 ptlPageSize
-  = lens _ptlPageSize (\ s a -> s{_ptlPageSize = a})
+  = lens _ptlPageSize (\ s a -> s{_ptlPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 ptlCallback :: Lens' ProjectsTopicsList (Maybe Text)

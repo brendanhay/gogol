@@ -52,13 +52,16 @@ type BucketsPatchResource =
        "v1" :>
          "b" :>
            Capture "bucket" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
+             QueryParam "ifMetagenerationMatch" (JSONText Int64)
+               :>
                QueryParam "predefinedAcl" BucketsPatchPredefinedACL
                  :>
                  QueryParam "predefinedDefaultObjectAcl"
                    BucketsPatchPredefinedDefaultObjectACL
                    :>
-                   QueryParam "ifMetagenerationNotMatch" Int64 :>
+                   QueryParam "ifMetagenerationNotMatch"
+                     (JSONText Int64)
+                     :>
                      QueryParam "projection" BucketsPatchProjection :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
@@ -67,12 +70,12 @@ type BucketsPatchResource =
 --
 -- /See:/ 'bucketsPatch' smart constructor.
 data BucketsPatch = BucketsPatch
-    { _bpIfMetagenerationMatch      :: !(Maybe Int64)
+    { _bpIfMetagenerationMatch      :: !(Maybe (JSONText Int64))
     , _bpPredefinedACL              :: !(Maybe BucketsPatchPredefinedACL)
     , _bpBucket                     :: !Text
     , _bpPayload                    :: !Bucket
     , _bpPredefinedDefaultObjectACL :: !(Maybe BucketsPatchPredefinedDefaultObjectACL)
-    , _bpIfMetagenerationNotMatch   :: !(Maybe Int64)
+    , _bpIfMetagenerationNotMatch   :: !(Maybe (JSONText Int64))
     , _bpProjection                 :: !(Maybe BucketsPatchProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -114,6 +117,7 @@ bpIfMetagenerationMatch :: Lens' BucketsPatch (Maybe Int64)
 bpIfMetagenerationMatch
   = lens _bpIfMetagenerationMatch
       (\ s a -> s{_bpIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Apply a predefined set of access controls to this bucket.
 bpPredefinedACL :: Lens' BucketsPatch (Maybe BucketsPatchPredefinedACL)
@@ -142,6 +146,7 @@ bpIfMetagenerationNotMatch :: Lens' BucketsPatch (Maybe Int64)
 bpIfMetagenerationNotMatch
   = lens _bpIfMetagenerationNotMatch
       (\ s a -> s{_bpIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Set of properties to return. Defaults to full.
 bpProjection :: Lens' BucketsPatch (Maybe BucketsPatchProjection)

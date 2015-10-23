@@ -66,7 +66,7 @@ type ActivitiesListResource =
                              QueryParam "endTime" Text :>
                                QueryParam "pageToken" Text :>
                                  QueryParam "eventName" Text :>
-                                   QueryParam "maxResults" Int32 :>
+                                   QueryParam "maxResults" (JSONText Int32) :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Activities
 
@@ -83,7 +83,7 @@ data ActivitiesList = ActivitiesList
     , _alPageToken       :: !(Maybe Text)
     , _alEventName       :: !(Maybe Text)
     , _alUserKey         :: !Text
-    , _alMaxResults      :: !(Maybe Int32)
+    , _alMaxResults      :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
@@ -182,6 +182,7 @@ alUserKey
 alMaxResults :: Lens' ActivitiesList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = Activities

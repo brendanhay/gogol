@@ -48,7 +48,7 @@ type ReportsCompatibleFieldsQueryResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
                "compatiblefields" :>
                  "query" :>
@@ -62,7 +62,7 @@ type ReportsCompatibleFieldsQueryResource =
 --
 -- /See:/ 'reportsCompatibleFieldsQuery' smart constructor.
 data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery
-    { _rcfqProFileId :: !Int64
+    { _rcfqProFileId :: !(JSONText Int64)
     , _rcfqPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -88,6 +88,7 @@ rcfqProFileId :: Lens' ReportsCompatibleFieldsQuery Int64
 rcfqProFileId
   = lens _rcfqProFileId
       (\ s a -> s{_rcfqProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 rcfqPayload :: Lens' ReportsCompatibleFieldsQuery Report

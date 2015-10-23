@@ -52,7 +52,7 @@ type EditsExpansionFilesUploadResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" Int32 :>
+                   Capture "apkVersionCode" (JSONText Int32) :>
                      "expansionFiles" :>
                        Capture "expansionFileType"
                          EditsExpansionFilesUploadExpansionFileType
@@ -68,7 +68,7 @@ type EditsExpansionFilesUploadResource =
                  "edits" :>
                    Capture "editId" Text :>
                      "apks" :>
-                       Capture "apkVersionCode" Int32 :>
+                       Capture "apkVersionCode" (JSONText Int32) :>
                          "expansionFiles" :>
                            Capture "expansionFileType"
                              EditsExpansionFilesUploadExpansionFileType
@@ -83,7 +83,7 @@ type EditsExpansionFilesUploadResource =
 -- /See:/ 'editsExpansionFilesUpload' smart constructor.
 data EditsExpansionFilesUpload = EditsExpansionFilesUpload
     { _ePackageName       :: !Text
-    , _eAPKVersionCode    :: !Int32
+    , _eAPKVersionCode    :: !(JSONText Int32)
     , _eExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
     , _eEditId            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -125,6 +125,7 @@ eAPKVersionCode :: Lens' EditsExpansionFilesUpload Int32
 eAPKVersionCode
   = lens _eAPKVersionCode
       (\ s a -> s{_eAPKVersionCode = a})
+      . _Coerce
 
 eExpansionFileType :: Lens' EditsExpansionFilesUpload EditsExpansionFilesUploadExpansionFileType
 eExpansionFileType

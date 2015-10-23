@@ -46,17 +46,17 @@ type CreativeGroupsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeGroups" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] CreativeGroup
 
 -- | Gets one creative group by ID.
 --
 -- /See:/ 'creativeGroupsGet' smart constructor.
 data CreativeGroupsGet = CreativeGroupsGet
-    { _cgggProFileId :: !Int64
-    , _cgggId        :: !Int64
+    { _cgggProFileId :: !(JSONText Int64)
+    , _cgggId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsGet' with the minimum fields required to make a request.
@@ -81,10 +81,12 @@ cgggProFileId :: Lens' CreativeGroupsGet Int64
 cgggProFileId
   = lens _cgggProFileId
       (\ s a -> s{_cgggProFileId = a})
+      . _Coerce
 
 -- | Creative group ID.
 cgggId :: Lens' CreativeGroupsGet Int64
-cgggId = lens _cgggId (\ s a -> s{_cgggId = a})
+cgggId
+  = lens _cgggId (\ s a -> s{_cgggId = a}) . _Coerce
 
 instance GoogleRequest CreativeGroupsGet where
         type Rs CreativeGroupsGet = CreativeGroup

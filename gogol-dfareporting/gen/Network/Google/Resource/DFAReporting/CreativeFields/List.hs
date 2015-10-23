@@ -52,15 +52,15 @@ type CreativeFieldsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeFields" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
+                 QueryParams "ids" (JSONText Int64) :>
                    QueryParam "sortOrder" CreativeFieldsListSortOrder :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" CreativeFieldsListSortField :>
-                         QueryParams "advertiserIds" Int64 :>
-                           QueryParam "maxResults" Int32 :>
+                         QueryParams "advertiserIds" (JSONText Int64) :>
+                           QueryParam "maxResults" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] CreativeFieldsListResponse
 
@@ -69,13 +69,13 @@ type CreativeFieldsListResource =
 -- /See:/ 'creativeFieldsList' smart constructor.
 data CreativeFieldsList = CreativeFieldsList
     { _cflSearchString  :: !(Maybe Text)
-    , _cflIds           :: !(Maybe [Int64])
-    , _cflProFileId     :: !Int64
+    , _cflIds           :: !(Maybe [JSONText Int64])
+    , _cflProFileId     :: !(JSONText Int64)
     , _cflSortOrder     :: !(Maybe CreativeFieldsListSortOrder)
     , _cflPageToken     :: !(Maybe Text)
     , _cflSortField     :: !(Maybe CreativeFieldsListSortField)
-    , _cflAdvertiserIds :: !(Maybe [Int64])
-    , _cflMaxResults    :: !(Maybe Int32)
+    , _cflAdvertiserIds :: !(Maybe [JSONText Int64])
+    , _cflMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsList' with the minimum fields required to make a request.
@@ -135,6 +135,7 @@ cflIds
 cflProFileId :: Lens' CreativeFieldsList Int64
 cflProFileId
   = lens _cflProFileId (\ s a -> s{_cflProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 cflSortOrder :: Lens' CreativeFieldsList (Maybe CreativeFieldsListSortOrder)
@@ -164,6 +165,7 @@ cflMaxResults :: Lens' CreativeFieldsList (Maybe Int32)
 cflMaxResults
   = lens _cflMaxResults
       (\ s a -> s{_cflMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest CreativeFieldsList where
         type Rs CreativeFieldsList =

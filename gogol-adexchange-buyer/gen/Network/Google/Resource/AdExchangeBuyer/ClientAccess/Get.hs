@@ -44,16 +44,16 @@ type ClientAccessGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "clientAccess" :>
-           Capture "clientAccountId" Int64 :>
-             QueryParam "sponsorAccountId" Int32 :>
+           Capture "clientAccountId" (JSONText Int64) :>
+             QueryParam "sponsorAccountId" (JSONText Int32) :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] ClientAccessCapabilities
 
 --
 -- /See:/ 'clientAccessGet' smart constructor.
 data ClientAccessGet = ClientAccessGet
-    { _cagSponsorAccountId :: !Int32
-    , _cagClientAccountId  :: !Int64
+    { _cagSponsorAccountId :: !(JSONText Int32)
+    , _cagClientAccountId  :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessGet' with the minimum fields required to make a request.
@@ -77,11 +77,13 @@ cagSponsorAccountId :: Lens' ClientAccessGet Int32
 cagSponsorAccountId
   = lens _cagSponsorAccountId
       (\ s a -> s{_cagSponsorAccountId = a})
+      . _Coerce
 
 cagClientAccountId :: Lens' ClientAccessGet Int64
 cagClientAccountId
   = lens _cagClientAccountId
       (\ s a -> s{_cagClientAccountId = a})
+      . _Coerce
 
 instance GoogleRequest ClientAccessGet where
         type Rs ClientAccessGet = ClientAccessCapabilities

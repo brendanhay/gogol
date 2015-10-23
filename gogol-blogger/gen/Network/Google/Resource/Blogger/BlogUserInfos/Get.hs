@@ -50,7 +50,7 @@ type BlogUserInfosGetResource =
            Capture "userId" Text :>
              "blogs" :>
                Capture "blogId" Text :>
-                 QueryParam "maxPosts" Word32 :>
+                 QueryParam "maxPosts" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] BlogUserInfo
 
 -- | Gets one blog and user info pair by blogId and userId.
@@ -59,7 +59,7 @@ type BlogUserInfosGetResource =
 data BlogUserInfosGet = BlogUserInfosGet
     { _buigBlogId   :: !Text
     , _buigUserId   :: !Text
-    , _buigMaxPosts :: !(Maybe Word32)
+    , _buigMaxPosts :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogUserInfosGet' with the minimum fields required to make a request.
@@ -97,6 +97,7 @@ buigUserId
 buigMaxPosts :: Lens' BlogUserInfosGet (Maybe Word32)
 buigMaxPosts
   = lens _buigMaxPosts (\ s a -> s{_buigMaxPosts = a})
+      . mapping _Coerce
 
 instance GoogleRequest BlogUserInfosGet where
         type Rs BlogUserInfosGet = BlogUserInfo

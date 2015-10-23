@@ -46,9 +46,9 @@ type LandingPagesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               Capture "campaignId" Int64 :>
+               Capture "campaignId" (JSONText Int64) :>
                  "landingPages" :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] LandingPagesListResponse
@@ -57,8 +57,8 @@ type LandingPagesListResource =
 --
 -- /See:/ 'landingPagesList' smart constructor.
 data LandingPagesList = LandingPagesList
-    { _lplCampaignId :: !Int64
-    , _lplProFileId  :: !Int64
+    { _lplCampaignId :: !(JSONText Int64)
+    , _lplProFileId  :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesList' with the minimum fields required to make a request.
@@ -83,11 +83,13 @@ lplCampaignId :: Lens' LandingPagesList Int64
 lplCampaignId
   = lens _lplCampaignId
       (\ s a -> s{_lplCampaignId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 lplProFileId :: Lens' LandingPagesList Int64
 lplProFileId
   = lens _lplProFileId (\ s a -> s{_lplProFileId = a})
+      . _Coerce
 
 instance GoogleRequest LandingPagesList where
         type Rs LandingPagesList = LandingPagesListResponse

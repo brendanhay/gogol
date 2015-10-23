@@ -46,7 +46,7 @@ type SizesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "sizes" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Size :> Post '[JSON] Size
@@ -55,7 +55,7 @@ type SizesInsertResource =
 --
 -- /See:/ 'sizesInsert' smart constructor.
 data SizesInsert = SizesInsert
-    { _siProFileId :: !Int64
+    { _siProFileId :: !(JSONText Int64)
     , _siPayload   :: !Size
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ sizesInsert pSiProFileId_ pSiPayload_ =
 -- | User profile ID associated with this request.
 siProFileId :: Lens' SizesInsert Int64
 siProFileId
-  = lens _siProFileId (\ s a -> s{_siProFileId = a})
+  = lens _siProFileId (\ s a -> s{_siProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 siPayload :: Lens' SizesInsert Size

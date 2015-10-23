@@ -56,7 +56,7 @@ type LicenseAssignmentsListForProductAndSKUResource =
                    "users" :>
                      QueryParam "customerId" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" Word32 :>
+                         QueryParam "maxResults" (JSONText Word32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LicenseAssignmentList
 
@@ -68,7 +68,7 @@ data LicenseAssignmentsListForProductAndSKU = LicenseAssignmentsListForProductAn
     , _lalfpaskuCustomerId :: !Text
     , _lalfpaskuPageToken  :: !Text
     , _lalfpaskuProductId  :: !Text
-    , _lalfpaskuMaxResults :: !Word32
+    , _lalfpaskuMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsListForProductAndSKU' with the minimum fields required to make a request.
@@ -130,6 +130,7 @@ lalfpaskuMaxResults :: Lens' LicenseAssignmentsListForProductAndSKU Word32
 lalfpaskuMaxResults
   = lens _lalfpaskuMaxResults
       (\ s a -> s{_lalfpaskuMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest
          LicenseAssignmentsListForProductAndSKU where

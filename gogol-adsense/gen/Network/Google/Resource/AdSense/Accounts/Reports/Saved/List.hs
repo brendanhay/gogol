@@ -51,7 +51,7 @@ type AccountsReportsSavedListResource =
              "reports" :>
                "saved" :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
+                   QueryParam "maxResults" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
 
 -- | List all saved reports in the specified AdSense account.
@@ -60,7 +60,7 @@ type AccountsReportsSavedListResource =
 data AccountsReportsSavedList = AccountsReportsSavedList
     { _arslAccountId  :: !Text
     , _arslPageToken  :: !(Maybe Text)
-    , _arslMaxResults :: !(Maybe Int32)
+    , _arslMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsSavedList' with the minimum fields required to make a request.
@@ -102,6 +102,7 @@ arslMaxResults :: Lens' AccountsReportsSavedList (Maybe Int32)
 arslMaxResults
   = lens _arslMaxResults
       (\ s a -> s{_arslMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsReportsSavedList where
         type Rs AccountsReportsSavedList = SavedReports

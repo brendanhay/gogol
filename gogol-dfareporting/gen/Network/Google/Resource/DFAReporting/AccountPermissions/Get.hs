@@ -46,9 +46,9 @@ type AccountPermissionsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "accountPermissions" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountPermission
 
@@ -56,8 +56,8 @@ type AccountPermissionsGetResource =
 --
 -- /See:/ 'accountPermissionsGet' smart constructor.
 data AccountPermissionsGet = AccountPermissionsGet
-    { _apgProFileId :: !Int64
-    , _apgId        :: !Int64
+    { _apgProFileId :: !(JSONText Int64)
+    , _apgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionsGet' with the minimum fields required to make a request.
@@ -81,10 +81,12 @@ accountPermissionsGet pApgProFileId_ pApgId_ =
 apgProFileId :: Lens' AccountPermissionsGet Int64
 apgProFileId
   = lens _apgProFileId (\ s a -> s{_apgProFileId = a})
+      . _Coerce
 
 -- | Account permission ID.
 apgId :: Lens' AccountPermissionsGet Int64
-apgId = lens _apgId (\ s a -> s{_apgId = a})
+apgId
+  = lens _apgId (\ s a -> s{_apgId = a}) . _Coerce
 
 instance GoogleRequest AccountPermissionsGet where
         type Rs AccountPermissionsGet = AccountPermission

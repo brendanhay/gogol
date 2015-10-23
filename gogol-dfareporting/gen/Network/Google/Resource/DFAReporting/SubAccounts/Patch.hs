@@ -47,9 +47,9 @@ type SubAccountsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "subaccounts" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] SubAccount :>
                      Patch '[JSON] SubAccount
@@ -58,9 +58,9 @@ type SubAccountsPatchResource =
 --
 -- /See:/ 'subAccountsPatch' smart constructor.
 data SubAccountsPatch = SubAccountsPatch
-    { _sapProFileId :: !Int64
+    { _sapProFileId :: !(JSONText Int64)
     , _sapPayload   :: !SubAccount
-    , _sapId        :: !Int64
+    , _sapId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsPatch' with the minimum fields required to make a request.
@@ -88,6 +88,7 @@ subAccountsPatch pSapProFileId_ pSapPayload_ pSapId_ =
 sapProFileId :: Lens' SubAccountsPatch Int64
 sapProFileId
   = lens _sapProFileId (\ s a -> s{_sapProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 sapPayload :: Lens' SubAccountsPatch SubAccount
@@ -96,7 +97,8 @@ sapPayload
 
 -- | Subaccount ID.
 sapId :: Lens' SubAccountsPatch Int64
-sapId = lens _sapId (\ s a -> s{_sapId = a})
+sapId
+  = lens _sapId (\ s a -> s{_sapId = a}) . _Coerce
 
 instance GoogleRequest SubAccountsPatch where
         type Rs SubAccountsPatch = SubAccount

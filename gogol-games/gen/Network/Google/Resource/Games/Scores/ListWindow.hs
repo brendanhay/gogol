@@ -59,9 +59,9 @@ type ScoresListWindowResource =
                  QueryParam "timeSpan" ScoresListWindowTimeSpan :>
                    QueryParam "returnTopIfAbsent" Bool :>
                      QueryParam "language" Text :>
-                       QueryParam "resultsAbove" Int32 :>
+                       QueryParam "resultsAbove" (JSONText Int32) :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" Int32 :>
+                           QueryParam "maxResults" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] LeaderboardScores
 
@@ -75,9 +75,9 @@ data ScoresListWindow = ScoresListWindow
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
     , _slwLeaderboardId     :: !Text
     , _slwLanguage          :: !(Maybe Text)
-    , _slwResultsAbove      :: !(Maybe Int32)
+    , _slwResultsAbove      :: !(Maybe (JSONText Int32))
     , _slwPageToken         :: !(Maybe Text)
-    , _slwMaxResults        :: !(Maybe Int32)
+    , _slwMaxResults        :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresListWindow' with the minimum fields required to make a request.
@@ -153,6 +153,7 @@ slwResultsAbove :: Lens' ScoresListWindow (Maybe Int32)
 slwResultsAbove
   = lens _slwResultsAbove
       (\ s a -> s{_slwResultsAbove = a})
+      . mapping _Coerce
 
 -- | The token returned by the previous request.
 slwPageToken :: Lens' ScoresListWindow (Maybe Text)
@@ -166,6 +167,7 @@ slwMaxResults :: Lens' ScoresListWindow (Maybe Int32)
 slwMaxResults
   = lens _slwMaxResults
       (\ s a -> s{_slwMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ScoresListWindow where
         type Rs ScoresListWindow = LeaderboardScores

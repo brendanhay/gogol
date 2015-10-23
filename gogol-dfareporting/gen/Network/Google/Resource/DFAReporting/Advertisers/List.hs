@@ -57,24 +57,24 @@ type AdvertisersListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "advertisers" :>
                QueryParam "status" AdvertisersListStatus :>
                  QueryParam "onlyParent" Bool :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" Int64 :>
+                     QueryParams "ids" (JSONText Int64) :>
                        QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
                          :>
                          QueryParam "sortOrder" AdvertisersListSortOrder :>
-                           QueryParams "advertiserGroupIds" Int64 :>
+                           QueryParams "advertiserGroupIds" (JSONText Int64) :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField" AdvertisersListSortField
                                  :>
-                                 QueryParam "subaccountId" Int64 :>
+                                 QueryParam "subaccountId" (JSONText Int64) :>
                                    QueryParams "floodlightConfigurationIds"
-                                     Int64
+                                     (JSONText Int64)
                                      :>
-                                     QueryParam "maxResults" Int32 :>
+                                     QueryParam "maxResults" (JSONText Int32) :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] AdvertisersListResponse
 
@@ -85,16 +85,16 @@ data AdvertisersList = AdvertisersList
     { _allStatus                              :: !(Maybe AdvertisersListStatus)
     , _allOnlyParent                          :: !(Maybe Bool)
     , _allSearchString                        :: !(Maybe Text)
-    , _allIds                                 :: !(Maybe [Int64])
+    , _allIds                                 :: !(Maybe [JSONText Int64])
     , _allIncludeAdvertisersWithoutGroupsOnly :: !(Maybe Bool)
-    , _allProFileId                           :: !Int64
+    , _allProFileId                           :: !(JSONText Int64)
     , _allSortOrder                           :: !(Maybe AdvertisersListSortOrder)
-    , _allAdvertiserGroupIds                  :: !(Maybe [Int64])
+    , _allAdvertiserGroupIds                  :: !(Maybe [JSONText Int64])
     , _allPageToken                           :: !(Maybe Text)
     , _allSortField                           :: !(Maybe AdvertisersListSortField)
-    , _allSubAccountId                        :: !(Maybe Int64)
-    , _allFloodlightConfigurationIds          :: !(Maybe [Int64])
-    , _allMaxResults                          :: !(Maybe Int32)
+    , _allSubAccountId                        :: !(Maybe (JSONText Int64))
+    , _allFloodlightConfigurationIds          :: !(Maybe [JSONText Int64])
+    , _allMaxResults                          :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.
@@ -187,6 +187,7 @@ allIncludeAdvertisersWithoutGroupsOnly
 allProFileId :: Lens' AdvertisersList Int64
 allProFileId
   = lens _allProFileId (\ s a -> s{_allProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 allSortOrder :: Lens' AdvertisersList (Maybe AdvertisersListSortOrder)
@@ -216,6 +217,7 @@ allSubAccountId :: Lens' AdvertisersList (Maybe Int64)
 allSubAccountId
   = lens _allSubAccountId
       (\ s a -> s{_allSubAccountId = a})
+      . mapping _Coerce
 
 -- | Select only advertisers with these floodlight configuration IDs.
 allFloodlightConfigurationIds :: Lens' AdvertisersList [Int64]
@@ -230,6 +232,7 @@ allMaxResults :: Lens' AdvertisersList (Maybe Int32)
 allMaxResults
   = lens _allMaxResults
       (\ s a -> s{_allMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = AdvertisersListResponse

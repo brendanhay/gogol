@@ -81,7 +81,7 @@ instance ToJSON UserSettings where
 --
 -- /See:/ 'annotations' smart constructor.
 data Annotations = Annotations
-    { _aTotalItems    :: !(Maybe Int32)
+    { _aTotalItems    :: !(Maybe (JSONText Int32))
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
     , _aItems         :: !(Maybe [Annotation])
@@ -112,7 +112,8 @@ annotations =
 -- of notes returned in this response if results have been paginated.
 aTotalItems :: Lens' Annotations (Maybe Int32)
 aTotalItems
-  = lens _aTotalItems (\ s a -> s{_aTotalItems = a})
+  = lens _aTotalItems (\ s a -> s{_aTotalItems = a}) .
+      mapping _Coerce
 
 -- | Token to pass in for pagination for the next page. This will not be
 -- present if this request does not have more results.
@@ -151,7 +152,7 @@ instance ToJSON Annotations where
 --
 -- /See:/ 'annotationsData' smart constructor.
 data AnnotationsData = AnnotationsData
-    { _adTotalItems    :: !(Maybe Int32)
+    { _adTotalItems    :: !(Maybe (JSONText Int32))
     , _adNextPageToken :: !(Maybe Text)
     , _adKind          :: !Text
     , _adItems         :: !(Maybe [AnnotationData])
@@ -182,6 +183,7 @@ annotationsData =
 adTotalItems :: Lens' AnnotationsData (Maybe Int32)
 adTotalItems
   = lens _adTotalItems (\ s a -> s{_adTotalItems = a})
+      . mapping _Coerce
 
 -- | Token to pass in for pagination for the next page. This will not be
 -- present if this request does not have more results.
@@ -259,7 +261,7 @@ instance ToJSON
 --
 -- /See:/ 'volumeannotations' smart constructor.
 data Volumeannotations = Volumeannotations
-    { _vTotalItems    :: !(Maybe Int32)
+    { _vTotalItems    :: !(Maybe (JSONText Int32))
     , _vNextPageToken :: !(Maybe Text)
     , _vKind          :: !Text
     , _vItems         :: !(Maybe [Volumeannotation])
@@ -293,7 +295,8 @@ volumeannotations =
 -- | The total number of volume annotations found.
 vTotalItems :: Lens' Volumeannotations (Maybe Int32)
 vTotalItems
-  = lens _vTotalItems (\ s a -> s{_vTotalItems = a})
+  = lens _vTotalItems (\ s a -> s{_vTotalItems = a}) .
+      mapping _Coerce
 
 -- | Token to pass in for pagination for the next page. This will not be
 -- present if this request does not have more results.
@@ -401,7 +404,7 @@ instance ToJSON ReviewSource where
 --
 -- /See:/ 'annotationData' smart constructor.
 data AnnotationData = AnnotationData
-    { _annEncodedData    :: !(Maybe Word8)
+    { _annEncodedData    :: !(Maybe (JSONText Word8))
     , _annKind           :: !Text
     , _annData           :: !(Maybe JSONValue)
     , _annSelfLink       :: !(Maybe Text)
@@ -453,6 +456,7 @@ annEncodedData :: Lens' AnnotationData (Maybe Word8)
 annEncodedData
   = lens _annEncodedData
       (\ s a -> s{_annEncodedData = a})
+      . mapping _Coerce
 
 -- | Resource Type
 annKind :: Lens' AnnotationData Text
@@ -1074,8 +1078,8 @@ data VolumeUserInfo = VolumeUserInfo
     { _vuiCopy                   :: !(Maybe VolumeUserInfoCopy)
     , _vuiUserUploadedVolumeInfo :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
     , _vuiIsPurchased            :: !(Maybe Bool)
-    , _vuiEntitlementType        :: !(Maybe Int32)
-    , _vuiAcquisitionType        :: !(Maybe Int32)
+    , _vuiEntitlementType        :: !(Maybe (JSONText Int32))
+    , _vuiAcquisitionType        :: !(Maybe (JSONText Int32))
     , _vuiRentalState            :: !(Maybe Text)
     , _vuiIsPreOrdered           :: !(Maybe Bool)
     , _vuiReview                 :: !(Maybe Review)
@@ -1155,12 +1159,14 @@ vuiEntitlementType :: Lens' VolumeUserInfo (Maybe Int32)
 vuiEntitlementType
   = lens _vuiEntitlementType
       (\ s a -> s{_vuiEntitlementType = a})
+      . mapping _Coerce
 
 -- | How this volume was acquired.
 vuiAcquisitionType :: Lens' VolumeUserInfo (Maybe Int32)
 vuiAcquisitionType
   = lens _vuiAcquisitionType
       (\ s a -> s{_vuiAcquisitionType = a})
+      . mapping _Coerce
 
 -- | Whether this book is an active or an expired rental.
 vuiRentalState :: Lens' VolumeUserInfo (Maybe Text)
@@ -1256,10 +1262,10 @@ data Layersummary = Layersummary
     { _lAnnotationsDataLink      :: !(Maybe Text)
     , _lAnnotationsLink          :: !(Maybe Text)
     , _lKind                     :: !Text
-    , _lDataCount                :: !(Maybe Int32)
+    , _lDataCount                :: !(Maybe (JSONText Int32))
     , _lContentVersion           :: !(Maybe Text)
     , _lVolumeAnnotationsVersion :: !(Maybe Text)
-    , _lAnnotationCount          :: !(Maybe Int32)
+    , _lAnnotationCount          :: !(Maybe (JSONText Int32))
     , _lAnnotationTypes          :: !(Maybe [Text])
     , _lSelfLink                 :: !(Maybe Text)
     , _lVolumeId                 :: !(Maybe Text)
@@ -1335,7 +1341,8 @@ lKind = lens _lKind (\ s a -> s{_lKind = a})
 -- | The number of data items for this layer.
 lDataCount :: Lens' Layersummary (Maybe Int32)
 lDataCount
-  = lens _lDataCount (\ s a -> s{_lDataCount = a})
+  = lens _lDataCount (\ s a -> s{_lDataCount = a}) .
+      mapping _Coerce
 
 -- | The content version this resource is for.
 lContentVersion :: Lens' Layersummary (Maybe Text)
@@ -1356,6 +1363,7 @@ lAnnotationCount :: Lens' Layersummary (Maybe Int32)
 lAnnotationCount
   = lens _lAnnotationCount
       (\ s a -> s{_lAnnotationCount = a})
+      . mapping _Coerce
 
 -- | The list of annotation types contained for this layer.
 lAnnotationTypes :: Lens' Layersummary [Text]
@@ -1850,9 +1858,9 @@ instance ToJSON VolumeUserInfoUserUploadedVolumeInfo
 -- /See:/ 'volumeUserInfoCopy' smart constructor.
 data VolumeUserInfoCopy = VolumeUserInfoCopy
     { _vuicLimitType               :: !(Maybe Text)
-    , _vuicAllowedCharacterCount   :: !(Maybe Int32)
+    , _vuicAllowedCharacterCount   :: !(Maybe (JSONText Int32))
     , _vuicUpdated                 :: !(Maybe DateTime')
-    , _vuicRemainingCharacterCount :: !(Maybe Int32)
+    , _vuicRemainingCharacterCount :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeUserInfoCopy' with the minimum fields required to make a request.
@@ -1885,6 +1893,7 @@ vuicAllowedCharacterCount :: Lens' VolumeUserInfoCopy (Maybe Int32)
 vuicAllowedCharacterCount
   = lens _vuicAllowedCharacterCount
       (\ s a -> s{_vuicAllowedCharacterCount = a})
+      . mapping _Coerce
 
 vuicUpdated :: Lens' VolumeUserInfoCopy (Maybe UTCTime)
 vuicUpdated
@@ -1895,6 +1904,7 @@ vuicRemainingCharacterCount :: Lens' VolumeUserInfoCopy (Maybe Int32)
 vuicRemainingCharacterCount
   = lens _vuicRemainingCharacterCount
       (\ s a -> s{_vuicRemainingCharacterCount = a})
+      . mapping _Coerce
 
 instance FromJSON VolumeUserInfoCopy where
         parseJSON
@@ -1963,9 +1973,9 @@ data Bookshelf = Bookshelf
     , _bVolumesLastUpdated :: !(Maybe DateTime')
     , _bKind               :: !Text
     , _bCreated            :: !(Maybe DateTime')
-    , _bVolumeCount        :: !(Maybe Int32)
+    , _bVolumeCount        :: !(Maybe (JSONText Int32))
     , _bSelfLink           :: !(Maybe Text)
-    , _bId                 :: !(Maybe Int32)
+    , _bId                 :: !(Maybe (JSONText Int32))
     , _bUpdated            :: !(Maybe DateTime')
     , _bTitle              :: !(Maybe Text)
     , _bDescription        :: !(Maybe Text)
@@ -2037,6 +2047,7 @@ bCreated
 bVolumeCount :: Lens' Bookshelf (Maybe Int32)
 bVolumeCount
   = lens _bVolumeCount (\ s a -> s{_bVolumeCount = a})
+      . mapping _Coerce
 
 -- | URL to this resource.
 bSelfLink :: Lens' Bookshelf (Maybe Text)
@@ -2045,7 +2056,8 @@ bSelfLink
 
 -- | Id of this bookshelf, only unique by user.
 bId :: Lens' Bookshelf (Maybe Int32)
-bId = lens _bId (\ s a -> s{_bId = a})
+bId
+  = lens _bId (\ s a -> s{_bId = a}) . mapping _Coerce
 
 -- | Last modified time of this bookshelf (formatted UTC timestamp with
 -- millisecond resolution).
@@ -2166,10 +2178,10 @@ instance ToJSON Notification where
 -- /See:/ 'annotationsSummaryLayersItem' smart constructor.
 data AnnotationsSummaryLayersItem = AnnotationsSummaryLayersItem
     { _asliLimitType               :: !(Maybe Text)
-    , _asliAllowedCharacterCount   :: !(Maybe Int32)
+    , _asliAllowedCharacterCount   :: !(Maybe (JSONText Int32))
     , _asliUpdated                 :: !(Maybe DateTime')
     , _asliLayerId                 :: !(Maybe Text)
-    , _asliRemainingCharacterCount :: !(Maybe Int32)
+    , _asliRemainingCharacterCount :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsSummaryLayersItem' with the minimum fields required to make a request.
@@ -2205,6 +2217,7 @@ asliAllowedCharacterCount :: Lens' AnnotationsSummaryLayersItem (Maybe Int32)
 asliAllowedCharacterCount
   = lens _asliAllowedCharacterCount
       (\ s a -> s{_asliAllowedCharacterCount = a})
+      . mapping _Coerce
 
 asliUpdated :: Lens' AnnotationsSummaryLayersItem (Maybe UTCTime)
 asliUpdated
@@ -2219,6 +2232,7 @@ asliRemainingCharacterCount :: Lens' AnnotationsSummaryLayersItem (Maybe Int32)
 asliRemainingCharacterCount
   = lens _asliRemainingCharacterCount
       (\ s a -> s{_asliRemainingCharacterCount = a})
+      . mapping _Coerce
 
 instance FromJSON AnnotationsSummaryLayersItem where
         parseJSON
@@ -2247,7 +2261,7 @@ instance ToJSON AnnotationsSummaryLayersItem where
 --
 -- /See:/ 'volumeSaleInfoOffersItemRentalDuration' smart constructor.
 data VolumeSaleInfoOffersItemRentalDuration = VolumeSaleInfoOffersItemRentalDuration
-    { _vsioirdCount :: !(Maybe Double)
+    { _vsioirdCount :: !(Maybe (JSONText Double))
     , _vsioirdUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2269,6 +2283,7 @@ volumeSaleInfoOffersItemRentalDuration =
 vsioirdCount :: Lens' VolumeSaleInfoOffersItemRentalDuration (Maybe Double)
 vsioirdCount
   = lens _vsioirdCount (\ s a -> s{_vsioirdCount = a})
+      . mapping _Coerce
 
 vsioirdUnit :: Lens' VolumeSaleInfoOffersItemRentalDuration (Maybe Text)
 vsioirdUnit
@@ -2406,8 +2421,8 @@ instance ToJSON OffersItemsItem where
 -- /See:/ 'annotationLayerSummary' smart constructor.
 data AnnotationLayerSummary = AnnotationLayerSummary
     { _alsLimitType               :: !(Maybe Text)
-    , _alsAllowedCharacterCount   :: !(Maybe Int32)
-    , _alsRemainingCharacterCount :: !(Maybe Int32)
+    , _alsAllowedCharacterCount   :: !(Maybe (JSONText Int32))
+    , _alsRemainingCharacterCount :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationLayerSummary' with the minimum fields required to make a request.
@@ -2440,6 +2455,7 @@ alsAllowedCharacterCount :: Lens' AnnotationLayerSummary (Maybe Int32)
 alsAllowedCharacterCount
   = lens _alsAllowedCharacterCount
       (\ s a -> s{_alsAllowedCharacterCount = a})
+      . mapping _Coerce
 
 -- | Remaining allowed characters on this layer, especially for the \"copy\"
 -- layer.
@@ -2447,6 +2463,7 @@ alsRemainingCharacterCount :: Lens' AnnotationLayerSummary (Maybe Int32)
 alsRemainingCharacterCount
   = lens _alsRemainingCharacterCount
       (\ s a -> s{_alsRemainingCharacterCount = a})
+      . mapping _Coerce
 
 instance FromJSON AnnotationLayerSummary where
         parseJSON
@@ -2842,8 +2859,8 @@ instance ToJSON Volume where
 --
 -- /See:/ 'geolayerDataGeoBoundaryItemItem' smart constructor.
 data GeolayerDataGeoBoundaryItemItem = GeolayerDataGeoBoundaryItemItem
-    { _gdgbiiLatitude  :: !(Maybe Word32)
-    , _gdgbiiLongitude :: !(Maybe Word32)
+    { _gdgbiiLatitude  :: !(Maybe (JSONText Word32))
+    , _gdgbiiLongitude :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeolayerDataGeoBoundaryItemItem' with the minimum fields required to make a request.
@@ -2865,11 +2882,13 @@ gdgbiiLatitude :: Lens' GeolayerDataGeoBoundaryItemItem (Maybe Word32)
 gdgbiiLatitude
   = lens _gdgbiiLatitude
       (\ s a -> s{_gdgbiiLatitude = a})
+      . mapping _Coerce
 
 gdgbiiLongitude :: Lens' GeolayerDataGeoBoundaryItemItem (Maybe Word32)
 gdgbiiLongitude
   = lens _gdgbiiLongitude
       (\ s a -> s{_gdgbiiLongitude = a})
+      . mapping _Coerce
 
 instance FromJSON GeolayerDataGeoBoundaryItemItem
          where
@@ -3113,10 +3132,10 @@ data GeolayerDataGeo = GeolayerDataGeo
     , _gdgCachePolicy :: !(Maybe Text)
     , _gdgViewport    :: !(Maybe GeolayerDataGeoViewport)
     , _gdgBoundary    :: !(Maybe [[GeolayerDataGeoBoundaryItemItem]])
-    , _gdgLatitude    :: !(Maybe Double)
-    , _gdgZoom        :: !(Maybe Int32)
+    , _gdgLatitude    :: !(Maybe (JSONText Double))
+    , _gdgZoom        :: !(Maybe (JSONText Int32))
     , _gdgCountryCode :: !(Maybe Text)
-    , _gdgLongitude   :: !(Maybe Double)
+    , _gdgLongitude   :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeolayerDataGeo' with the minimum fields required to make a request.
@@ -3182,14 +3201,17 @@ gdgBoundary
 -- | The latitude of the location.
 gdgLatitude :: Lens' GeolayerDataGeo (Maybe Double)
 gdgLatitude
-  = lens _gdgLatitude (\ s a -> s{_gdgLatitude = a})
+  = lens _gdgLatitude (\ s a -> s{_gdgLatitude = a}) .
+      mapping _Coerce
 
 -- | The Zoom level to use for the map. Zoom levels between 0 (the lowest
 -- zoom level, in which the entire world can be seen on one map) to 21+
 -- (down to individual buildings). See:
 -- https:\/\/developers.google.com\/maps\/documentation\/staticmaps\/#Zoomlevels
 gdgZoom :: Lens' GeolayerDataGeo (Maybe Int32)
-gdgZoom = lens _gdgZoom (\ s a -> s{_gdgZoom = a})
+gdgZoom
+  = lens _gdgZoom (\ s a -> s{_gdgZoom = a}) .
+      mapping _Coerce
 
 -- | The country code of the location.
 gdgCountryCode :: Lens' GeolayerDataGeo (Maybe Text)
@@ -3201,6 +3223,7 @@ gdgCountryCode
 gdgLongitude :: Lens' GeolayerDataGeo (Maybe Double)
 gdgLongitude
   = lens _gdgLongitude (\ s a -> s{_gdgLongitude = a})
+      . mapping _Coerce
 
 instance FromJSON GeolayerDataGeo where
         parseJSON
@@ -3799,8 +3822,8 @@ instance ToJSON
 --
 -- /See:/ 'geolayerDataGeoViewportLo' smart constructor.
 data GeolayerDataGeoViewportLo = GeolayerDataGeoViewportLo
-    { _gdgvlLatitude  :: !(Maybe Double)
-    , _gdgvlLongitude :: !(Maybe Double)
+    { _gdgvlLatitude  :: !(Maybe (JSONText Double))
+    , _gdgvlLongitude :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeolayerDataGeoViewportLo' with the minimum fields required to make a request.
@@ -3822,11 +3845,13 @@ gdgvlLatitude :: Lens' GeolayerDataGeoViewportLo (Maybe Double)
 gdgvlLatitude
   = lens _gdgvlLatitude
       (\ s a -> s{_gdgvlLatitude = a})
+      . mapping _Coerce
 
 gdgvlLongitude :: Lens' GeolayerDataGeoViewportLo (Maybe Double)
 gdgvlLongitude
   = lens _gdgvlLongitude
       (\ s a -> s{_gdgvlLongitude = a})
+      . mapping _Coerce
 
 instance FromJSON GeolayerDataGeoViewportLo where
         parseJSON
@@ -3847,7 +3872,7 @@ instance ToJSON GeolayerDataGeoViewportLo where
 -- /See:/ 'volumeSaleInfoOffersItemListPrice' smart constructor.
 data VolumeSaleInfoOffersItemListPrice = VolumeSaleInfoOffersItemListPrice
     { _vsioilpCurrencyCode   :: !(Maybe Text)
-    , _vsioilpAmountInMicros :: !(Maybe Double)
+    , _vsioilpAmountInMicros :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeSaleInfoOffersItemListPrice' with the minimum fields required to make a request.
@@ -3874,6 +3899,7 @@ vsioilpAmountInMicros :: Lens' VolumeSaleInfoOffersItemListPrice (Maybe Double)
 vsioilpAmountInMicros
   = lens _vsioilpAmountInMicros
       (\ s a -> s{_vsioilpAmountInMicros = a})
+      . mapping _Coerce
 
 instance FromJSON VolumeSaleInfoOffersItemListPrice
          where
@@ -3897,8 +3923,8 @@ data DownloadAccessRestriction = DownloadAccessRestriction
     { _darJustAcquired       :: !(Maybe Bool)
     , _darSignature          :: !(Maybe Text)
     , _darKind               :: !Text
-    , _darMaxDownloadDevices :: !(Maybe Int32)
-    , _darDownloadsAcquired  :: !(Maybe Int32)
+    , _darMaxDownloadDevices :: !(Maybe (JSONText Int32))
+    , _darDownloadsAcquired  :: !(Maybe (JSONText Int32))
     , _darReasonCode         :: !(Maybe Text)
     , _darVolumeId           :: !(Maybe Text)
     , _darRestricted         :: !(Maybe Bool)
@@ -3974,6 +4000,7 @@ darMaxDownloadDevices :: Lens' DownloadAccessRestriction (Maybe Int32)
 darMaxDownloadDevices
   = lens _darMaxDownloadDevices
       (\ s a -> s{_darMaxDownloadDevices = a})
+      . mapping _Coerce
 
 -- | If restricted, the number of content download licenses already acquired
 -- (including the requesting client, if licensed).
@@ -3981,6 +4008,7 @@ darDownloadsAcquired :: Lens' DownloadAccessRestriction (Maybe Int32)
 darDownloadsAcquired
   = lens _darDownloadsAcquired
       (\ s a -> s{_darDownloadsAcquired = a})
+      . mapping _Coerce
 
 -- | Error\/warning reason code. Additional codes may be added in the future.
 -- 0 OK 100 ACCESS_DENIED_PUBLISHER_LIMIT 101 ACCESS_DENIED_LIMIT 200
@@ -4095,7 +4123,7 @@ instance ToJSON DictlayerDataCommon where
 data DiscoveryclustersClustersItem = DiscoveryclustersClustersItem
     { _dciBannerWithContentContainer :: !(Maybe DiscoveryclustersClustersItemBanner_with_content_container)
     , _dciUid                        :: !(Maybe Text)
-    , _dciTotalVolumes               :: !(Maybe Int32)
+    , _dciTotalVolumes               :: !(Maybe (JSONText Int32))
     , _dciSubTitle                   :: !(Maybe Text)
     , _dciTitle                      :: !(Maybe Text)
     , _dciVolumes                    :: !(Maybe [Volume])
@@ -4140,6 +4168,7 @@ dciTotalVolumes :: Lens' DiscoveryclustersClustersItem (Maybe Int32)
 dciTotalVolumes
   = lens _dciTotalVolumes
       (\ s a -> s{_dciTotalVolumes = a})
+      . mapping _Coerce
 
 dciSubTitle :: Lens' DiscoveryclustersClustersItem (Maybe Text)
 dciSubTitle
@@ -4184,7 +4213,7 @@ instance ToJSON DiscoveryclustersClustersItem where
 --
 -- /See:/ 'volumeSaleInfoRetailPrice' smart constructor.
 data VolumeSaleInfoRetailPrice = VolumeSaleInfoRetailPrice
-    { _vsirpAmount       :: !(Maybe Double)
+    { _vsirpAmount       :: !(Maybe (JSONText Double))
     , _vsirpCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4206,7 +4235,8 @@ volumeSaleInfoRetailPrice =
 -- | Amount in the currency listed below. (In LITE projection.)
 vsirpAmount :: Lens' VolumeSaleInfoRetailPrice (Maybe Double)
 vsirpAmount
-  = lens _vsirpAmount (\ s a -> s{_vsirpAmount = a})
+  = lens _vsirpAmount (\ s a -> s{_vsirpAmount = a}) .
+      mapping _Coerce
 
 -- | An ISO 4217, three-letter currency code. (In LITE projection.)
 vsirpCurrencyCode :: Lens' VolumeSaleInfoRetailPrice (Maybe Text)
@@ -4232,7 +4262,7 @@ instance ToJSON VolumeSaleInfoRetailPrice where
 --
 -- /See:/ 'volumeSaleInfoListPrice' smart constructor.
 data VolumeSaleInfoListPrice = VolumeSaleInfoListPrice
-    { _vsilpAmount       :: !(Maybe Double)
+    { _vsilpAmount       :: !(Maybe (JSONText Double))
     , _vsilpCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4254,7 +4284,8 @@ volumeSaleInfoListPrice =
 -- | Amount in the currency listed below. (In LITE projection.)
 vsilpAmount :: Lens' VolumeSaleInfoListPrice (Maybe Double)
 vsilpAmount
-  = lens _vsilpAmount (\ s a -> s{_vsilpAmount = a})
+  = lens _vsilpAmount (\ s a -> s{_vsilpAmount = a}) .
+      mapping _Coerce
 
 -- | An ISO 4217, three-letter currency code. (In LITE projection.)
 vsilpCurrencyCode :: Lens' VolumeSaleInfoListPrice (Maybe Text)
@@ -4518,8 +4549,8 @@ instance ToJSON Review where
 --
 -- /See:/ 'volumeUserInfoRentalPeriod' smart constructor.
 data VolumeUserInfoRentalPeriod = VolumeUserInfoRentalPeriod
-    { _vuirpEndUtcSec   :: !(Maybe Int64)
-    , _vuirpStartUtcSec :: !(Maybe Int64)
+    { _vuirpEndUtcSec   :: !(Maybe (JSONText Int64))
+    , _vuirpStartUtcSec :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeUserInfoRentalPeriod' with the minimum fields required to make a request.
@@ -4541,11 +4572,13 @@ vuirpEndUtcSec :: Lens' VolumeUserInfoRentalPeriod (Maybe Int64)
 vuirpEndUtcSec
   = lens _vuirpEndUtcSec
       (\ s a -> s{_vuirpEndUtcSec = a})
+      . mapping _Coerce
 
 vuirpStartUtcSec :: Lens' VolumeUserInfoRentalPeriod (Maybe Int64)
 vuirpStartUtcSec
   = lens _vuirpStartUtcSec
       (\ s a -> s{_vuirpStartUtcSec = a})
+      . mapping _Coerce
 
 instance FromJSON VolumeUserInfoRentalPeriod where
         parseJSON
@@ -5450,7 +5483,7 @@ instance ToJSON ReadingPosition where
 --
 -- /See:/ 'volumeSaleInfoOffersItem' smart constructor.
 data VolumeSaleInfoOffersItem = VolumeSaleInfoOffersItem
-    { _vsioiFinskyOfferType :: !(Maybe Int32)
+    { _vsioiFinskyOfferType :: !(Maybe (JSONText Int32))
     , _vsioiRentalDuration  :: !(Maybe VolumeSaleInfoOffersItemRentalDuration)
     , _vsioiListPrice       :: !(Maybe VolumeSaleInfoOffersItemListPrice)
     , _vsioiRetailPrice     :: !(Maybe VolumeSaleInfoOffersItemRetailPrice)
@@ -5482,6 +5515,7 @@ vsioiFinskyOfferType :: Lens' VolumeSaleInfoOffersItem (Maybe Int32)
 vsioiFinskyOfferType
   = lens _vsioiFinskyOfferType
       (\ s a -> s{_vsioiFinskyOfferType = a})
+      . mapping _Coerce
 
 -- | The rental duration (for rental offers only).
 vsioiRentalDuration :: Lens' VolumeSaleInfoOffersItem (Maybe VolumeSaleInfoOffersItemRentalDuration)
@@ -5775,7 +5809,7 @@ instance ToJSON Offers where
 -- /See:/ 'discoveryclusters' smart constructor.
 data Discoveryclusters = Discoveryclusters
     { _dKind          :: !Text
-    , _dTotalClusters :: !(Maybe Int32)
+    , _dTotalClusters :: !(Maybe (JSONText Int32))
     , _dClusters      :: !(Maybe [DiscoveryclustersClustersItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5805,6 +5839,7 @@ dTotalClusters :: Lens' Discoveryclusters (Maybe Int32)
 dTotalClusters
   = lens _dTotalClusters
       (\ s a -> s{_dTotalClusters = a})
+      . mapping _Coerce
 
 dClusters :: Lens' Discoveryclusters [DiscoveryclustersClustersItem]
 dClusters
@@ -5879,9 +5914,9 @@ instance ToJSON UserSettingsNotesExport where
 --
 -- /See:/ 'concurrentAccessRestriction' smart constructor.
 data ConcurrentAccessRestriction = ConcurrentAccessRestriction
-    { _carMaxConcurrentDevices :: !(Maybe Int32)
+    { _carMaxConcurrentDevices :: !(Maybe (JSONText Int32))
     , _carSignature            :: !(Maybe Text)
-    , _carTimeWindowSeconds    :: !(Maybe Int32)
+    , _carTimeWindowSeconds    :: !(Maybe (JSONText Int32))
     , _carKind                 :: !Text
     , _carReasonCode           :: !(Maybe Text)
     , _carVolumeId             :: !(Maybe Text)
@@ -5939,6 +5974,7 @@ carMaxConcurrentDevices :: Lens' ConcurrentAccessRestriction (Maybe Int32)
 carMaxConcurrentDevices
   = lens _carMaxConcurrentDevices
       (\ s a -> s{_carMaxConcurrentDevices = a})
+      . mapping _Coerce
 
 -- | Response signature.
 carSignature :: Lens' ConcurrentAccessRestriction (Maybe Text)
@@ -5950,6 +5986,7 @@ carTimeWindowSeconds :: Lens' ConcurrentAccessRestriction (Maybe Int32)
 carTimeWindowSeconds
   = lens _carTimeWindowSeconds
       (\ s a -> s{_carTimeWindowSeconds = a})
+      . mapping _Coerce
 
 -- | Resource type.
 carKind :: Lens' ConcurrentAccessRestriction Text
@@ -6033,7 +6070,7 @@ instance ToJSON ConcurrentAccessRestriction where
 --
 -- /See:/ 'volumes' smart constructor.
 data Volumes = Volumes
-    { _v1TotalItems :: !(Maybe Int32)
+    { _v1TotalItems :: !(Maybe (JSONText Int32))
     , _v1Kind       :: !Text
     , _v1Items      :: !(Maybe [Volume])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6061,6 +6098,7 @@ volumes =
 v1TotalItems :: Lens' Volumes (Maybe Int32)
 v1TotalItems
   = lens _v1TotalItems (\ s a -> s{_v1TotalItems = a})
+      . mapping _Coerce
 
 -- | Resource type.
 v1Kind :: Lens' Volumes Text
@@ -6233,8 +6271,8 @@ instance ToJSON DownloadAccesses where
 --
 -- /See:/ 'geolayerDataGeoViewportHi' smart constructor.
 data GeolayerDataGeoViewportHi = GeolayerDataGeoViewportHi
-    { _gdgvhLatitude  :: !(Maybe Double)
-    , _gdgvhLongitude :: !(Maybe Double)
+    { _gdgvhLatitude  :: !(Maybe (JSONText Double))
+    , _gdgvhLongitude :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeolayerDataGeoViewportHi' with the minimum fields required to make a request.
@@ -6256,11 +6294,13 @@ gdgvhLatitude :: Lens' GeolayerDataGeoViewportHi (Maybe Double)
 gdgvhLatitude
   = lens _gdgvhLatitude
       (\ s a -> s{_gdgvhLatitude = a})
+      . mapping _Coerce
 
 gdgvhLongitude :: Lens' GeolayerDataGeoViewportHi (Maybe Double)
 gdgvhLongitude
   = lens _gdgvhLongitude
       (\ s a -> s{_gdgvhLongitude = a})
+      . mapping _Coerce
 
 instance FromJSON GeolayerDataGeoViewportHi where
         parseJSON
@@ -6281,15 +6321,15 @@ instance ToJSON GeolayerDataGeoViewportHi where
 -- /See:/ 'volumeVolumeInfo' smart constructor.
 data VolumeVolumeInfo = VolumeVolumeInfo
     { _vviImageLinks          :: !(Maybe VolumeVolumeInfoImageLinks)
-    , _vviAverageRating       :: !(Maybe Double)
-    , _vviRatingsCount        :: !(Maybe Int32)
+    , _vviAverageRating       :: !(Maybe (JSONText Double))
+    , _vviRatingsCount        :: !(Maybe (JSONText Int32))
     , _vviCanonicalVolumeLink :: !(Maybe Text)
     , _vviReadingModes        :: !(Maybe JSONValue)
     , _vviIndustryIdentifiers :: !(Maybe [VolumeVolumeInfoIndustryIdentifiersItem])
-    , _vviPrintedPageCount    :: !(Maybe Int32)
+    , _vviPrintedPageCount    :: !(Maybe (JSONText Int32))
     , _vviMainCategory        :: !(Maybe Text)
     , _vviContentVersion      :: !(Maybe Text)
-    , _vviSamplePageCount     :: !(Maybe Int32)
+    , _vviSamplePageCount     :: !(Maybe (JSONText Int32))
     , _vviCategories          :: !(Maybe [Text])
     , _vviAuthors             :: !(Maybe [Text])
     , _vviAllowAnonLogging    :: !(Maybe Bool)
@@ -6299,7 +6339,7 @@ data VolumeVolumeInfo = VolumeVolumeInfo
     , _vviPreviewLink         :: !(Maybe Text)
     , _vviLanguage            :: !(Maybe Text)
     , _vviTitle               :: !(Maybe Text)
-    , _vviPageCount           :: !(Maybe Int32)
+    , _vviPageCount           :: !(Maybe (JSONText Int32))
     , _vviDimensions          :: !(Maybe VolumeVolumeInfoDimensions)
     , _vviInfoLink            :: !(Maybe Text)
     , _vviPublisher           :: !(Maybe Text)
@@ -6403,12 +6443,14 @@ vviAverageRating :: Lens' VolumeVolumeInfo (Maybe Double)
 vviAverageRating
   = lens _vviAverageRating
       (\ s a -> s{_vviAverageRating = a})
+      . mapping _Coerce
 
 -- | The number of review ratings for this volume.
 vviRatingsCount :: Lens' VolumeVolumeInfo (Maybe Int32)
 vviRatingsCount
   = lens _vviRatingsCount
       (\ s a -> s{_vviRatingsCount = a})
+      . mapping _Coerce
 
 -- | Canonical URL for a volume. (In LITE projection.)
 vviCanonicalVolumeLink :: Lens' VolumeVolumeInfo (Maybe Text)
@@ -6435,6 +6477,7 @@ vviPrintedPageCount :: Lens' VolumeVolumeInfo (Maybe Int32)
 vviPrintedPageCount
   = lens _vviPrintedPageCount
       (\ s a -> s{_vviPrintedPageCount = a})
+      . mapping _Coerce
 
 -- | The main category to which this volume belongs. It will be the category
 -- from the categories list returned below that has the highest weight.
@@ -6455,6 +6498,7 @@ vviSamplePageCount :: Lens' VolumeVolumeInfo (Maybe Int32)
 vviSamplePageCount
   = lens _vviSamplePageCount
       (\ s a -> s{_vviSamplePageCount = a})
+      . mapping _Coerce
 
 -- | A list of subject categories, such as \"Fiction\", \"Suspense\", etc.
 vviCategories :: Lens' VolumeVolumeInfo [Text]
@@ -6514,6 +6558,7 @@ vviTitle = lens _vviTitle (\ s a -> s{_vviTitle = a})
 vviPageCount :: Lens' VolumeVolumeInfo (Maybe Int32)
 vviPageCount
   = lens _vviPageCount (\ s a -> s{_vviPageCount = a})
+      . mapping _Coerce
 
 -- | Physical dimensions of this volume.
 vviDimensions :: Lens' VolumeVolumeInfo (Maybe VolumeVolumeInfoDimensions)
@@ -6611,8 +6656,8 @@ instance ToJSON VolumeVolumeInfo where
 --
 -- /See:/ 'metadataItemsItem' smart constructor.
 data MetadataItemsItem = MetadataItemsItem
-    { _miiSize         :: !(Maybe Int64)
-    , _miiVersion      :: !(Maybe Int64)
+    { _miiSize         :: !(Maybe (JSONText Int64))
+    , _miiVersion      :: !(Maybe (JSONText Int64))
     , _miiLanguage     :: !(Maybe Text)
     , _miiDownloadURL  :: !(Maybe Text)
     , _miiEncryptedKey :: !(Maybe Text)
@@ -6643,11 +6688,14 @@ metadataItemsItem =
     }
 
 miiSize :: Lens' MetadataItemsItem (Maybe Int64)
-miiSize = lens _miiSize (\ s a -> s{_miiSize = a})
+miiSize
+  = lens _miiSize (\ s a -> s{_miiSize = a}) .
+      mapping _Coerce
 
 miiVersion :: Lens' MetadataItemsItem (Maybe Int64)
 miiVersion
-  = lens _miiVersion (\ s a -> s{_miiVersion = a})
+  = lens _miiVersion (\ s a -> s{_miiVersion = a}) .
+      mapping _Coerce
 
 miiLanguage :: Lens' MetadataItemsItem (Maybe Text)
 miiLanguage
@@ -6736,7 +6784,7 @@ instance ToJSON
 -- /See:/ 'volumeSaleInfoOffersItemRetailPrice' smart constructor.
 data VolumeSaleInfoOffersItemRetailPrice = VolumeSaleInfoOffersItemRetailPrice
     { _vsioirpCurrencyCode   :: !(Maybe Text)
-    , _vsioirpAmountInMicros :: !(Maybe Double)
+    , _vsioirpAmountInMicros :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeSaleInfoOffersItemRetailPrice' with the minimum fields required to make a request.
@@ -6763,6 +6811,7 @@ vsioirpAmountInMicros :: Lens' VolumeSaleInfoOffersItemRetailPrice (Maybe Double
 vsioirpAmountInMicros
   = lens _vsioirpAmountInMicros
       (\ s a -> s{_vsioirpAmountInMicros = a})
+      . mapping _Coerce
 
 instance FromJSON VolumeSaleInfoOffersItemRetailPrice
          where
@@ -6904,7 +6953,7 @@ instance ToJSON BooksAnnotationsRange where
 --
 -- /See:/ 'layersummaries' smart constructor.
 data Layersummaries = Layersummaries
-    { _layTotalItems :: !(Maybe Int32)
+    { _layTotalItems :: !(Maybe (JSONText Int32))
     , _layKind       :: !Text
     , _layItems      :: !(Maybe [Layersummary])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6932,6 +6981,7 @@ layTotalItems :: Lens' Layersummaries (Maybe Int32)
 layTotalItems
   = lens _layTotalItems
       (\ s a -> s{_layTotalItems = a})
+      . mapping _Coerce
 
 -- | Resource type.
 layKind :: Lens' Layersummaries Text

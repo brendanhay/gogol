@@ -134,7 +134,7 @@ instance ToJSON ReceivedMessage where
 -- /See:/ 'modifyAckDeadlineRequest' smart constructor.
 data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest
     { _madrAckIds             :: !(Maybe [Text])
-    , _madrAckDeadlineSeconds :: !(Maybe Int32)
+    , _madrAckDeadlineSeconds :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ModifyAckDeadlineRequest' with the minimum fields required to make a request.
@@ -168,6 +168,7 @@ madrAckDeadlineSeconds :: Lens' ModifyAckDeadlineRequest (Maybe Int32)
 madrAckDeadlineSeconds
   = lens _madrAckDeadlineSeconds
       (\ s a -> s{_madrAckDeadlineSeconds = a})
+      . mapping _Coerce
 
 instance FromJSON ModifyAckDeadlineRequest where
         parseJSON
@@ -253,7 +254,7 @@ instance ToJSON Empty where
 --
 -- /See:/ 'pubsubMessage' smart constructor.
 data PubsubMessage = PubsubMessage
-    { _pmData       :: !(Maybe Word8)
+    { _pmData       :: !(Maybe (JSONText Word8))
     , _pmAttributes :: !(Maybe PubsubMessageAttributes)
     , _pmMessageId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -279,7 +280,9 @@ pubsubMessage =
 -- | The message payload. For JSON requests, the value of this field must be
 -- base64-encoded.
 pmData :: Lens' PubsubMessage (Maybe Word8)
-pmData = lens _pmData (\ s a -> s{_pmData = a})
+pmData
+  = lens _pmData (\ s a -> s{_pmData = a}) .
+      mapping _Coerce
 
 -- | Optional attributes for this message.
 pmAttributes :: Lens' PubsubMessage (Maybe PubsubMessageAttributes)
@@ -539,7 +542,7 @@ instance ToJSON Topic where
 --
 -- /See:/ 'pullRequest' smart constructor.
 data PullRequest = PullRequest
-    { _prMaxMessages       :: !(Maybe Int32)
+    { _prMaxMessages       :: !(Maybe (JSONText Int32))
     , _prReturnImmediately :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -564,6 +567,7 @@ prMaxMessages :: Lens' PullRequest (Maybe Int32)
 prMaxMessages
   = lens _prMaxMessages
       (\ s a -> s{_prMaxMessages = a})
+      . mapping _Coerce
 
 -- | If this is specified as true the system will respond immediately even if
 -- it is not able to return a message in the \`Pull\` response. Otherwise
@@ -796,8 +800,8 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy
-    { _pEtag     :: !(Maybe Word8)
-    , _pVersion  :: !(Maybe Int32)
+    { _pEtag     :: !(Maybe (JSONText Word8))
+    , _pVersion  :: !(Maybe (JSONText Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -821,11 +825,15 @@ policy =
 
 -- | Can be used to perform a read-modify-write.
 pEtag :: Lens' Policy (Maybe Word8)
-pEtag = lens _pEtag (\ s a -> s{_pEtag = a})
+pEtag
+  = lens _pEtag (\ s a -> s{_pEtag = a}) .
+      mapping _Coerce
 
 -- | Version of the \`Policy\`. The default version is 0.
 pVersion :: Lens' Policy (Maybe Int32)
-pVersion = lens _pVersion (\ s a -> s{_pVersion = a})
+pVersion
+  = lens _pVersion (\ s a -> s{_pVersion = a}) .
+      mapping _Coerce
 
 -- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
 -- must not be specified for the same \`role\`. \`bindings\` with no
@@ -905,7 +913,7 @@ data Subscription = Subscription
     { _sPushConfig         :: !(Maybe PushConfig)
     , _sTopic              :: !(Maybe Text)
     , _sName               :: !(Maybe Text)
-    , _sAckDeadlineSeconds :: !(Maybe Int32)
+    , _sAckDeadlineSeconds :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
@@ -968,6 +976,7 @@ sAckDeadlineSeconds :: Lens' Subscription (Maybe Int32)
 sAckDeadlineSeconds
   = lens _sAckDeadlineSeconds
       (\ s a -> s{_sAckDeadlineSeconds = a})
+      . mapping _Coerce
 
 instance FromJSON Subscription where
         parseJSON

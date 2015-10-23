@@ -54,12 +54,14 @@ type FloodlightActivityGroupsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivityGroups" :>
-               QueryParam "floodlightConfigurationId" Int64 :>
-                 QueryParam "advertiserId" Int64 :>
+               QueryParam "floodlightConfigurationId"
+                 (JSONText Int64)
+                 :>
+                 QueryParam "advertiserId" (JSONText Int64) :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" Int64 :>
+                     QueryParams "ids" (JSONText Int64) :>
                        QueryParam "sortOrder"
                          FloodlightActivityGroupsListSortOrder
                          :>
@@ -69,7 +71,7 @@ type FloodlightActivityGroupsListResource =
                              :>
                              QueryParam "type" FloodlightActivityGroupsListType
                                :>
-                               QueryParam "maxResults" Int32 :>
+                               QueryParam "maxResults" (JSONText Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON]
                                      FloodlightActivityGroupsListResponse
@@ -78,16 +80,16 @@ type FloodlightActivityGroupsListResource =
 --
 -- /See:/ 'floodlightActivityGroupsList' smart constructor.
 data FloodlightActivityGroupsList = FloodlightActivityGroupsList
-    { _faglFloodlightConfigurationId :: !(Maybe Int64)
-    , _faglAdvertiserId              :: !(Maybe Int64)
+    { _faglFloodlightConfigurationId :: !(Maybe (JSONText Int64))
+    , _faglAdvertiserId              :: !(Maybe (JSONText Int64))
     , _faglSearchString              :: !(Maybe Text)
-    , _faglIds                       :: !(Maybe [Int64])
-    , _faglProFileId                 :: !Int64
+    , _faglIds                       :: !(Maybe [JSONText Int64])
+    , _faglProFileId                 :: !(JSONText Int64)
     , _faglSortOrder                 :: !(Maybe FloodlightActivityGroupsListSortOrder)
     , _faglPageToken                 :: !(Maybe Text)
     , _faglSortField                 :: !(Maybe FloodlightActivityGroupsListSortField)
     , _faglType                      :: !(Maybe FloodlightActivityGroupsListType)
-    , _faglMaxResults                :: !(Maybe Int32)
+    , _faglMaxResults                :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsList' with the minimum fields required to make a request.
@@ -137,6 +139,7 @@ faglFloodlightConfigurationId :: Lens' FloodlightActivityGroupsList (Maybe Int64
 faglFloodlightConfigurationId
   = lens _faglFloodlightConfigurationId
       (\ s a -> s{_faglFloodlightConfigurationId = a})
+      . mapping _Coerce
 
 -- | Select only floodlight activity groups with the specified advertiser ID.
 -- Must specify either advertiserId or floodlightConfigurationId for a
@@ -145,6 +148,7 @@ faglAdvertiserId :: Lens' FloodlightActivityGroupsList (Maybe Int64)
 faglAdvertiserId
   = lens _faglAdvertiserId
       (\ s a -> s{_faglAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"floodlightactivitygroup*2015\" will return objects with
@@ -173,6 +177,7 @@ faglProFileId :: Lens' FloodlightActivityGroupsList Int64
 faglProFileId
   = lens _faglProFileId
       (\ s a -> s{_faglProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 faglSortOrder :: Lens' FloodlightActivityGroupsList (Maybe FloodlightActivityGroupsListSortOrder)
@@ -202,6 +207,7 @@ faglMaxResults :: Lens' FloodlightActivityGroupsList (Maybe Int32)
 faglMaxResults
   = lens _faglMaxResults
       (\ s a -> s{_faglMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest FloodlightActivityGroupsList
          where

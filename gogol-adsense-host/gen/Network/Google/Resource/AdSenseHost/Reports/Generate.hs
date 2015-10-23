@@ -62,8 +62,8 @@ type ReportsGenerateResource =
                    QueryParams "metric" Text :>
                      QueryParams "sort" Text :>
                        QueryParams "filter" Text :>
-                         QueryParam "startIndex" Word32 :>
-                           QueryParam "maxResults" Word32 :>
+                         QueryParam "startIndex" (JSONText Word32) :>
+                           QueryParam "maxResults" (JSONText Word32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Generate an AdSense report based on the report request sent in the query
@@ -79,8 +79,8 @@ data ReportsGenerate = ReportsGenerate
     , _rgMetric     :: !(Maybe [Text])
     , _rgSort       :: !(Maybe [Text])
     , _rgFilter     :: !(Maybe [Text])
-    , _rgStartIndex :: !(Maybe Word32)
-    , _rgMaxResults :: !(Maybe Word32)
+    , _rgStartIndex :: !(Maybe (JSONText Word32))
+    , _rgMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.
@@ -170,11 +170,13 @@ rgFilter
 rgStartIndex :: Lens' ReportsGenerate (Maybe Word32)
 rgStartIndex
   = lens _rgStartIndex (\ s a -> s{_rgStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of rows of report data to return.
 rgMaxResults :: Lens' ReportsGenerate (Maybe Word32)
 rgMaxResults
   = lens _rgMaxResults (\ s a -> s{_rgMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate = Report

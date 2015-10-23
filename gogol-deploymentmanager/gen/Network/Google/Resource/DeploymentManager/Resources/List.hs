@@ -56,7 +56,7 @@ type ResourcesListResource =
                    "resources" :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" Word32 :>
+                         QueryParam "maxResults" (JSONText Word32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ResourcesListResponse
 
@@ -67,7 +67,7 @@ data ResourcesList = ResourcesList
     { _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
-    , _rlMaxResults :: !Word32
+    , _rlMaxResults :: !(JSONText Word32)
     , _rlDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -127,6 +127,7 @@ rlPageToken
 rlMaxResults :: Lens' ResourcesList Word32
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
+      . _Coerce
 
 -- | The name of the deployment for this request.
 rlDeployment :: Lens' ResourcesList Text

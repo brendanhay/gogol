@@ -50,7 +50,7 @@ type ApplicationsListResource =
            "applications" :>
              QueryParam "customerId" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ApplicationsListResponse
 
@@ -60,7 +60,7 @@ type ApplicationsListResource =
 data ApplicationsList = ApplicationsList
     { _alCustomerId :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !(Maybe Word32)
+    , _alMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsList' with the minimum fields required to make a request.
@@ -95,6 +95,7 @@ alPageToken
 alMaxResults :: Lens' ApplicationsList (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ApplicationsList where
         type Rs ApplicationsList = ApplicationsListResponse

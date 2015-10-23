@@ -45,7 +45,7 @@ type OperatingSystemsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "operatingSystems" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] OperatingSystemsListResponse
@@ -54,7 +54,7 @@ type OperatingSystemsListResource =
 --
 -- /See:/ 'operatingSystemsList' smart constructor.
 newtype OperatingSystemsList = OperatingSystemsList
-    { _oslProFileId :: Int64
+    { _oslProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemsList' with the minimum fields required to make a request.
@@ -74,6 +74,7 @@ operatingSystemsList pOslProFileId_ =
 oslProFileId :: Lens' OperatingSystemsList Int64
 oslProFileId
   = lens _oslProFileId (\ s a -> s{_oslProFileId = a})
+      . _Coerce
 
 instance GoogleRequest OperatingSystemsList where
         type Rs OperatingSystemsList =

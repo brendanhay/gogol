@@ -46,9 +46,9 @@ type DirectorySiteContactsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "directorySiteContacts" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] DirectorySiteContact
 
@@ -56,8 +56,8 @@ type DirectorySiteContactsGetResource =
 --
 -- /See:/ 'directorySiteContactsGet' smart constructor.
 data DirectorySiteContactsGet = DirectorySiteContactsGet
-    { _dscgProFileId :: !Int64
-    , _dscgId        :: !Int64
+    { _dscgProFileId :: !(JSONText Int64)
+    , _dscgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsGet' with the minimum fields required to make a request.
@@ -82,10 +82,12 @@ dscgProFileId :: Lens' DirectorySiteContactsGet Int64
 dscgProFileId
   = lens _dscgProFileId
       (\ s a -> s{_dscgProFileId = a})
+      . _Coerce
 
 -- | Directory site contact ID.
 dscgId :: Lens' DirectorySiteContactsGet Int64
-dscgId = lens _dscgId (\ s a -> s{_dscgId = a})
+dscgId
+  = lens _dscgId (\ s a -> s{_dscgId = a}) . _Coerce
 
 instance GoogleRequest DirectorySiteContactsGet where
         type Rs DirectorySiteContactsGet =

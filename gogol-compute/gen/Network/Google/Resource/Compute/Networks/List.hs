@@ -54,7 +54,7 @@ type NetworksListResource =
                "networks" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] NetworkList
 
 -- | Retrieves the list of network resources available to the specified
@@ -65,7 +65,7 @@ data NetworksList = NetworksList
     { _nlProject    :: !Text
     , _nlFilter     :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
-    , _nlMaxResults :: !Word32
+    , _nlMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksList' with the minimum fields required to make a request.
@@ -120,6 +120,7 @@ nlPageToken
 nlMaxResults :: Lens' NetworksList Word32
 nlMaxResults
   = lens _nlMaxResults (\ s a -> s{_nlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest NetworksList where
         type Rs NetworksList = NetworkList

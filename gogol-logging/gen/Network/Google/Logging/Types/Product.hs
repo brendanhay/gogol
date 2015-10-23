@@ -25,10 +25,10 @@ import           Network.Google.Prelude
 -- /See:/ 'requestLog' smart constructor.
 data RequestLog = RequestLog
     { _rlTraceId           :: !(Maybe Text)
-    , _rlInstanceId        :: !(Maybe Word8)
-    , _rlStatus            :: !(Maybe Int32)
-    , _rlRequestId         :: !(Maybe Word8)
-    , _rlInstanceIndex     :: !(Maybe Int32)
+    , _rlInstanceId        :: !(Maybe (JSONText Word8))
+    , _rlStatus            :: !(Maybe (JSONText Int32))
+    , _rlRequestId         :: !(Maybe (JSONText Word8))
+    , _rlInstanceIndex     :: !(Maybe (JSONText Int32))
     , _rlModuleId          :: !(Maybe Text)
     , _rlVersionId         :: !(Maybe Text)
     , _rlHTTPVersion       :: !(Maybe Text)
@@ -38,7 +38,7 @@ data RequestLog = RequestLog
     , _rlStartTime         :: !(Maybe Text)
     , _rlLatency           :: !(Maybe Text)
     , _rlURLMapEntry       :: !(Maybe Text)
-    , _rlCost              :: !(Maybe Double)
+    , _rlCost              :: !(Maybe (JSONText Double))
     , _rlReferrer          :: !(Maybe Text)
     , _rlLine              :: !(Maybe [LogLine])
     , _rlIP                :: !(Maybe Text)
@@ -47,12 +47,12 @@ data RequestLog = RequestLog
     , _rlResource          :: !(Maybe Text)
     , _rlEndTime           :: !(Maybe Text)
     , _rlFinished          :: !(Maybe Bool)
-    , _rlMegaCycles        :: !(Maybe Int64)
+    , _rlMegaCycles        :: !(Maybe (JSONText Int64))
     , _rlUserAgent         :: !(Maybe Text)
     , _rlNickname          :: !(Maybe Text)
     , _rlHost              :: !(Maybe Text)
     , _rlTaskQueueName     :: !(Maybe Text)
-    , _rlResponseSize      :: !(Maybe Int64)
+    , _rlResponseSize      :: !(Maybe (JSONText Int64))
     , _rlSourceReference   :: !(Maybe [SourceReference])
     , _rlAppEngineRelease  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -168,17 +168,21 @@ rlTraceId
 rlInstanceId :: Lens' RequestLog (Maybe Word8)
 rlInstanceId
   = lens _rlInstanceId (\ s a -> s{_rlInstanceId = a})
+      . mapping _Coerce
 
 -- | Response status of request.
 rlStatus :: Lens' RequestLog (Maybe Int32)
-rlStatus = lens _rlStatus (\ s a -> s{_rlStatus = a})
+rlStatus
+  = lens _rlStatus (\ s a -> s{_rlStatus = a}) .
+      mapping _Coerce
 
 -- | Globally unique identifier for a request, based on request start time.
 -- Request IDs for requests which started later will compare greater as
 -- binary strings than those for requests which started earlier.
 rlRequestId :: Lens' RequestLog (Maybe Word8)
 rlRequestId
-  = lens _rlRequestId (\ s a -> s{_rlRequestId = a})
+  = lens _rlRequestId (\ s a -> s{_rlRequestId = a}) .
+      mapping _Coerce
 
 -- | If the instance that processed this request was individually addressable
 -- (i.e. belongs to a manually scaled module), this is the index of the
@@ -187,6 +191,7 @@ rlInstanceIndex :: Lens' RequestLog (Maybe Int32)
 rlInstanceIndex
   = lens _rlInstanceIndex
       (\ s a -> s{_rlInstanceIndex = a})
+      . mapping _Coerce
 
 -- | Identifies the module of the application that handled this request.
 rlModuleId :: Lens' RequestLog (Maybe Text)
@@ -242,7 +247,9 @@ rlURLMapEntry
 
 -- | An indication of the relative cost of serving this request.
 rlCost :: Lens' RequestLog (Maybe Double)
-rlCost = lens _rlCost (\ s a -> s{_rlCost = a})
+rlCost
+  = lens _rlCost (\ s a -> s{_rlCost = a}) .
+      mapping _Coerce
 
 -- | Referrer URL of request.
 rlReferrer :: Lens' RequestLog (Maybe Text)
@@ -292,6 +299,7 @@ rlFinished
 rlMegaCycles :: Lens' RequestLog (Maybe Int64)
 rlMegaCycles
   = lens _rlMegaCycles (\ s a -> s{_rlMegaCycles = a})
+      . mapping _Coerce
 
 -- | User agent used for making request.
 rlUserAgent :: Lens' RequestLog (Maybe Text)
@@ -323,6 +331,7 @@ rlResponseSize :: Lens' RequestLog (Maybe Int64)
 rlResponseSize
   = lens _rlResponseSize
       (\ s a -> s{_rlResponseSize = a})
+      . mapping _Coerce
 
 -- | Source code for the application that handled this request. There can be
 -- more than one source reference per deployed application if source code
@@ -484,7 +493,7 @@ instance ToJSON LogLine where
 --
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation = SourceLocation
-    { _slLine         :: !(Maybe Int64)
+    { _slLine         :: !(Maybe (JSONText Int64))
     , _slFunctionName :: !(Maybe Text)
     , _slFile         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -509,7 +518,9 @@ sourceLocation =
 
 -- | Line within the source file.
 slLine :: Lens' SourceLocation (Maybe Int64)
-slLine = lens _slLine (\ s a -> s{_slLine = a})
+slLine
+  = lens _slLine (\ s a -> s{_slLine = a}) .
+      mapping _Coerce
 
 -- | Human-readable name of the function or method being invoked, with
 -- optional context such as the class or package name, for use in contexts

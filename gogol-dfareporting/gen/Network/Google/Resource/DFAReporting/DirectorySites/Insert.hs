@@ -46,7 +46,7 @@ type DirectorySitesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "directorySites" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] DirectorySite :>
@@ -56,7 +56,7 @@ type DirectorySitesInsertResource =
 --
 -- /See:/ 'directorySitesInsert' smart constructor.
 data DirectorySitesInsert = DirectorySitesInsert
-    { _dsiProFileId :: !Int64
+    { _dsiProFileId :: !(JSONText Int64)
     , _dsiPayload   :: !DirectorySite
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ directorySitesInsert pDsiProFileId_ pDsiPayload_ =
 dsiProFileId :: Lens' DirectorySitesInsert Int64
 dsiProFileId
   = lens _dsiProFileId (\ s a -> s{_dsiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 dsiPayload :: Lens' DirectorySitesInsert DirectorySite

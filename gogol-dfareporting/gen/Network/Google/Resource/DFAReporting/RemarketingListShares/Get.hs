@@ -46,9 +46,9 @@ type RemarketingListSharesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "remarketingListShares" :>
-               Capture "remarketingListId" Int64 :>
+               Capture "remarketingListId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] RemarketingListShare
 
@@ -56,8 +56,8 @@ type RemarketingListSharesGetResource =
 --
 -- /See:/ 'remarketingListSharesGet' smart constructor.
 data RemarketingListSharesGet = RemarketingListSharesGet
-    { _rlsgProFileId         :: !Int64
-    , _rlsgRemarketingListId :: !Int64
+    { _rlsgProFileId         :: !(JSONText Int64)
+    , _rlsgRemarketingListId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesGet' with the minimum fields required to make a request.
@@ -82,12 +82,14 @@ rlsgProFileId :: Lens' RemarketingListSharesGet Int64
 rlsgProFileId
   = lens _rlsgProFileId
       (\ s a -> s{_rlsgProFileId = a})
+      . _Coerce
 
 -- | Remarketing list ID.
 rlsgRemarketingListId :: Lens' RemarketingListSharesGet Int64
 rlsgRemarketingListId
   = lens _rlsgRemarketingListId
       (\ s a -> s{_rlsgRemarketingListId = a})
+      . _Coerce
 
 instance GoogleRequest RemarketingListSharesGet where
         type Rs RemarketingListSharesGet =

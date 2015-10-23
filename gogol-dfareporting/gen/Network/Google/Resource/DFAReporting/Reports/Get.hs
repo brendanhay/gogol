@@ -46,17 +46,17 @@ type ReportsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
-               Capture "reportId" Int64 :>
+               Capture "reportId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Retrieves a report by its ID.
 --
 -- /See:/ 'reportsGet' smart constructor.
 data ReportsGet = ReportsGet
-    { _rgReportId  :: !Int64
-    , _rgProFileId :: !Int64
+    { _rgReportId  :: !(JSONText Int64)
+    , _rgProFileId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.
@@ -79,12 +79,14 @@ reportsGet pRgReportId_ pRgProFileId_ =
 -- | The ID of the report.
 rgReportId :: Lens' ReportsGet Int64
 rgReportId
-  = lens _rgReportId (\ s a -> s{_rgReportId = a})
+  = lens _rgReportId (\ s a -> s{_rgReportId = a}) .
+      _Coerce
 
 -- | The DFA user profile ID.
 rgProFileId :: Lens' ReportsGet Int64
 rgProFileId
-  = lens _rgProFileId (\ s a -> s{_rgProFileId = a})
+  = lens _rgProFileId (\ s a -> s{_rgProFileId = a}) .
+      _Coerce
 
 instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report

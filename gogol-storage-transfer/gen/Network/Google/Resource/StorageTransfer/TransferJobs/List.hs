@@ -61,7 +61,7 @@ type TransferJobsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListTransferJobsResponse
@@ -78,7 +78,7 @@ data TransferJobsList = TransferJobsList
     , _tjlBearerToken    :: !(Maybe Text)
     , _tjlFilter         :: !(Maybe Text)
     , _tjlPageToken      :: !(Maybe Text)
-    , _tjlPageSize       :: !(Maybe Int32)
+    , _tjlPageSize       :: !(Maybe (JSONText Int32))
     , _tjlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -173,7 +173,8 @@ tjlPageToken
 -- | The list page size. The max allowed value is 256.
 tjlPageSize :: Lens' TransferJobsList (Maybe Int32)
 tjlPageSize
-  = lens _tjlPageSize (\ s a -> s{_tjlPageSize = a})
+  = lens _tjlPageSize (\ s a -> s{_tjlPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 tjlCallback :: Lens' TransferJobsList (Maybe Text)

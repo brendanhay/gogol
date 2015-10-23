@@ -46,9 +46,9 @@ import           Network.Google.ShoppingContent.Types
 type DatafeedsDeleteResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "datafeeds" :>
-             Capture "datafeedId" Word64 :>
+             Capture "datafeedId" (JSONText Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -56,8 +56,8 @@ type DatafeedsDeleteResource =
 --
 -- /See:/ 'datafeedsDelete' smart constructor.
 data DatafeedsDelete = DatafeedsDelete
-    { _ddMerchantId :: !Word64
-    , _ddDatafeedId :: !Word64
+    { _ddMerchantId :: !(JSONText Word64)
+    , _ddDatafeedId :: !(JSONText Word64)
     , _ddDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,10 +84,12 @@ datafeedsDelete pDdMerchantId_ pDdDatafeedId_ =
 ddMerchantId :: Lens' DatafeedsDelete Word64
 ddMerchantId
   = lens _ddMerchantId (\ s a -> s{_ddMerchantId = a})
+      . _Coerce
 
 ddDatafeedId :: Lens' DatafeedsDelete Word64
 ddDatafeedId
   = lens _ddDatafeedId (\ s a -> s{_ddDatafeedId = a})
+      . _Coerce
 
 -- | Flag to run the request in dry-run mode.
 ddDryRun :: Lens' DatafeedsDelete (Maybe Bool)

@@ -51,10 +51,11 @@ type JobsListResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               QueryParam "minModifiedTimestampMs" Word64 :>
+               QueryParam "minModifiedTimestampMs" (JSONText Word64)
+                 :>
                  QueryParam "omitJobChanges" Bool :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] JobListResponse
 
@@ -63,10 +64,10 @@ type JobsListResource =
 -- /See:/ 'jobsList' smart constructor.
 data JobsList = JobsList
     { _jlTeamId                 :: !Text
-    , _jlMinModifiedTimestampMs :: !(Maybe Word64)
+    , _jlMinModifiedTimestampMs :: !(Maybe (JSONText Word64))
     , _jlOmitJobChanges         :: !(Maybe Bool)
     , _jlPageToken              :: !(Maybe Text)
-    , _jlMaxResults             :: !(Maybe Word32)
+    , _jlMaxResults             :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList' with the minimum fields required to make a request.
@@ -103,6 +104,7 @@ jlMinModifiedTimestampMs :: Lens' JobsList (Maybe Word64)
 jlMinModifiedTimestampMs
   = lens _jlMinModifiedTimestampMs
       (\ s a -> s{_jlMinModifiedTimestampMs = a})
+      . mapping _Coerce
 
 -- | Whether to omit detail job history information.
 jlOmitJobChanges :: Lens' JobsList (Maybe Bool)
@@ -119,6 +121,7 @@ jlPageToken
 jlMaxResults :: Lens' JobsList (Maybe Word32)
 jlMaxResults
   = lens _jlMaxResults (\ s a -> s{_jlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest JobsList where
         type Rs JobsList = JobListResponse

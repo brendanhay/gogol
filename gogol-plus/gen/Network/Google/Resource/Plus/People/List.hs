@@ -54,7 +54,7 @@ type PeopleListResource =
                Capture "collection" PeopleListCollection :>
                  QueryParam "orderBy" PeopleListOrderBy :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection.
@@ -65,7 +65,7 @@ data PeopleList = PeopleList
     , _plCollection :: !PeopleListCollection
     , _plUserId     :: !Text
     , _plPageToken  :: !(Maybe Text)
-    , _plMaxResults :: !Word32
+    , _plMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ plPageToken
 plMaxResults :: Lens' PeopleList Word32
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest PeopleList where
         type Rs PeopleList = PeopleFeed

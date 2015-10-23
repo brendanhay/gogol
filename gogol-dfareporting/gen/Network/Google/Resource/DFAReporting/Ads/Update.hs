@@ -46,7 +46,7 @@ type AdsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "ads" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Ad :> Put '[JSON] Ad
@@ -55,7 +55,7 @@ type AdsUpdateResource =
 --
 -- /See:/ 'adsUpdate' smart constructor.
 data AdsUpdate = AdsUpdate
-    { _aProFileId :: !Int64
+    { _aProFileId :: !(JSONText Int64)
     , _aPayload   :: !Ad
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ adsUpdate pAProFileId_ pAPayload_ =
 -- | User profile ID associated with this request.
 aProFileId :: Lens' AdsUpdate Int64
 aProFileId
-  = lens _aProFileId (\ s a -> s{_aProFileId = a})
+  = lens _aProFileId (\ s a -> s{_aProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 aPayload :: Lens' AdsUpdate Ad

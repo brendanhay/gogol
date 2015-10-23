@@ -53,7 +53,7 @@ type InstanceGroupManagersAggregatedListResource =
                "instanceGroupManagers" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] InstanceGroupManagerAggregatedList
 
@@ -64,7 +64,7 @@ data InstanceGroupManagersAggregatedList = InstanceGroupManagersAggregatedList
     { _igmalProject    :: !Text
     , _igmalFilter     :: !(Maybe Text)
     , _igmalPageToken  :: !(Maybe Text)
-    , _igmalMaxResults :: !Word32
+    , _igmalMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAggregatedList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ igmalMaxResults :: Lens' InstanceGroupManagersAggregatedList Word32
 igmalMaxResults
   = lens _igmalMaxResults
       (\ s a -> s{_igmalMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest
          InstanceGroupManagersAggregatedList where

@@ -53,8 +53,8 @@ type ManagementCustomDimensionsListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "customDimensions" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
+                     QueryParam "start-index" (JSONText Int32) :>
+                       QueryParam "max-results" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] CustomDimensions
 
@@ -64,8 +64,8 @@ type ManagementCustomDimensionsListResource =
 data ManagementCustomDimensionsList = ManagementCustomDimensionsList
     { _mcdlWebPropertyId :: !Text
     , _mcdlAccountId     :: !Text
-    , _mcdlStartIndex    :: !(Maybe Int32)
-    , _mcdlMaxResults    :: !(Maybe Int32)
+    , _mcdlStartIndex    :: !(Maybe (JSONText Int32))
+    , _mcdlMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsList' with the minimum fields required to make a request.
@@ -109,12 +109,14 @@ mcdlStartIndex :: Lens' ManagementCustomDimensionsList (Maybe Int32)
 mcdlStartIndex
   = lens _mcdlStartIndex
       (\ s a -> s{_mcdlStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of custom dimensions to include in this response.
 mcdlMaxResults :: Lens' ManagementCustomDimensionsList (Maybe Int32)
 mcdlMaxResults
   = lens _mcdlMaxResults
       (\ s a -> s{_mcdlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementCustomDimensionsList
          where

@@ -68,9 +68,9 @@ type AccountsReportsGenerateResource =
                          QueryParam "currency" Text :>
                            QueryParams "sort" Text :>
                              QueryParams "filter" Text :>
-                               QueryParam "startIndex" Int32 :>
+                               QueryParam "startIndex" (JSONText Int32) :>
                                  QueryParam "useTimezoneReporting" Bool :>
-                                   QueryParam "maxResults" Int32 :>
+                                   QueryParam "maxResults" (JSONText Int32) :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON]
                                          AdsenseReportsGenerateResponse
@@ -88,9 +88,9 @@ type AccountsReportsGenerateResource =
                            QueryParam "currency" Text :>
                              QueryParams "sort" Text :>
                                QueryParams "filter" Text :>
-                                 QueryParam "startIndex" Int32 :>
+                                 QueryParam "startIndex" (JSONText Int32) :>
                                    QueryParam "useTimezoneReporting" Bool :>
-                                     QueryParam "maxResults" Int32 :>
+                                     QueryParam "maxResults" (JSONText Int32) :>
                                        QueryParam "alt" AltMedia :>
                                          Get '[OctetStream] Stream
 
@@ -109,9 +109,9 @@ data AccountsReportsGenerate = AccountsReportsGenerate
     , _argCurrency             :: !(Maybe Text)
     , _argSort                 :: !(Maybe [Text])
     , _argFilter               :: !(Maybe [Text])
-    , _argStartIndex           :: !(Maybe Int32)
+    , _argStartIndex           :: !(Maybe (JSONText Int32))
     , _argUseTimezoneReporting :: !(Maybe Bool)
-    , _argMaxResults           :: !(Maybe Int32)
+    , _argMaxResults           :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsGenerate' with the minimum fields required to make a request.
@@ -224,6 +224,7 @@ argStartIndex :: Lens' AccountsReportsGenerate (Maybe Int32)
 argStartIndex
   = lens _argStartIndex
       (\ s a -> s{_argStartIndex = a})
+      . mapping _Coerce
 
 -- | Whether the report should be generated in the AdSense account\'s local
 -- timezone. If false default PST\/PDT timezone will be used.
@@ -237,6 +238,7 @@ argMaxResults :: Lens' AccountsReportsGenerate (Maybe Int32)
 argMaxResults
   = lens _argMaxResults
       (\ s a -> s{_argMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsReportsGenerate where
         type Rs AccountsReportsGenerate =

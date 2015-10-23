@@ -247,9 +247,9 @@ instance ToJSON ChannelAuditDetails where
 --
 -- /See:/ 'thumbnail' smart constructor.
 data Thumbnail = Thumbnail
-    { _tHeight :: !(Maybe Word32)
+    { _tHeight :: !(Maybe (JSONText Word32))
     , _tURL    :: !(Maybe Text)
-    , _tWidth  :: !(Maybe Word32)
+    , _tWidth  :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
@@ -272,7 +272,9 @@ thumbnail =
 
 -- | (Optional) Height of the thumbnail image.
 tHeight :: Lens' Thumbnail (Maybe Word32)
-tHeight = lens _tHeight (\ s a -> s{_tHeight = a})
+tHeight
+  = lens _tHeight (\ s a -> s{_tHeight = a}) .
+      mapping _Coerce
 
 -- | The thumbnail image\'s URL.
 tURL :: Lens' Thumbnail (Maybe Text)
@@ -280,7 +282,9 @@ tURL = lens _tURL (\ s a -> s{_tURL = a})
 
 -- | (Optional) Width of the thumbnail image.
 tWidth :: Lens' Thumbnail (Maybe Word32)
-tWidth = lens _tWidth (\ s a -> s{_tWidth = a})
+tWidth
+  = lens _tWidth (\ s a -> s{_tWidth = a}) .
+      mapping _Coerce
 
 instance FromJSON Thumbnail where
         parseJSON
@@ -499,7 +503,7 @@ data ChannelSectionSnippet = ChannelSectionSnippet
     , _cssLocalized       :: !(Maybe ChannelSectionLocalization)
     , _cssTitle           :: !(Maybe Text)
     , _cssType            :: !(Maybe ChannelSectionSnippetType)
-    , _cssPosition        :: !(Maybe Word32)
+    , _cssPosition        :: !(Maybe (JSONText Word32))
     , _cssDefaultLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -560,7 +564,8 @@ cssType = lens _cssType (\ s a -> s{_cssType = a})
 -- | The position of the channel section in the channel.
 cssPosition :: Lens' ChannelSectionSnippet (Maybe Word32)
 cssPosition
-  = lens _cssPosition (\ s a -> s{_cssPosition = a})
+  = lens _cssPosition (\ s a -> s{_cssPosition = a}) .
+      mapping _Coerce
 
 -- | The language of the channel section\'s default title and description.
 cssDefaultLanguage :: Lens' ChannelSectionSnippet (Maybe Text)
@@ -2776,7 +2781,7 @@ instance ToJSON ActivityContentDetailsLike where
 --
 -- /See:/ 'playListContentDetails' smart constructor.
 newtype PlayListContentDetails = PlayListContentDetails
-    { _plcdItemCount :: Maybe Word32
+    { _plcdItemCount :: Maybe (JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListContentDetails' with the minimum fields required to make a request.
@@ -2796,6 +2801,7 @@ plcdItemCount :: Lens' PlayListContentDetails (Maybe Word32)
 plcdItemCount
   = lens _plcdItemCount
       (\ s a -> s{_plcdItemCount = a})
+      . mapping _Coerce
 
 instance FromJSON PlayListContentDetails where
         parseJSON
@@ -2813,8 +2819,8 @@ instance ToJSON PlayListContentDetails where
 --
 -- /See:/ 'pageInfo' smart constructor.
 data PageInfo = PageInfo
-    { _piResultsPerPage :: !(Maybe Int32)
-    , _piTotalResults   :: !(Maybe Int32)
+    { _piResultsPerPage :: !(Maybe (JSONText Int32))
+    , _piTotalResults   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
@@ -2837,12 +2843,14 @@ piResultsPerPage :: Lens' PageInfo (Maybe Int32)
 piResultsPerPage
   = lens _piResultsPerPage
       (\ s a -> s{_piResultsPerPage = a})
+      . mapping _Coerce
 
 -- | The total number of results in the result set.
 piTotalResults :: Lens' PageInfo (Maybe Int32)
 piTotalResults
   = lens _piTotalResults
       (\ s a -> s{_piTotalResults = a})
+      . mapping _Coerce
 
 instance FromJSON PageInfo where
         parseJSON
@@ -2992,11 +3000,11 @@ instance ToJSON VideoStatus where
 --
 -- /See:/ 'videoFileDetails' smart constructor.
 data VideoFileDetails = VideoFileDetails
-    { _vfdBitrateBps        :: !(Maybe Word64)
+    { _vfdBitrateBps        :: !(Maybe (JSONText Word64))
     , _vfdCreationTime      :: !(Maybe Text)
     , _vfdRecordingLocation :: !(Maybe GeoPoint)
-    , _vfdDurationMs        :: !(Maybe Word64)
-    , _vfdFileSize          :: !(Maybe Word64)
+    , _vfdDurationMs        :: !(Maybe (JSONText Word64))
+    , _vfdFileSize          :: !(Maybe (JSONText Word64))
     , _vfdFileType          :: !(Maybe VideoFileDetailsFileType)
     , _vfdContainer         :: !(Maybe Text)
     , _vfdVideoStreams      :: !(Maybe [VideoFileDetailsVideoStream])
@@ -3049,6 +3057,7 @@ vfdBitrateBps :: Lens' VideoFileDetails (Maybe Word64)
 vfdBitrateBps
   = lens _vfdBitrateBps
       (\ s a -> s{_vfdBitrateBps = a})
+      . mapping _Coerce
 
 -- | The date and time when the uploaded video file was created. The value is
 -- specified in ISO 8601 format. Currently, the following ISO 8601 formats
@@ -3071,12 +3080,14 @@ vfdDurationMs :: Lens' VideoFileDetails (Maybe Word64)
 vfdDurationMs
   = lens _vfdDurationMs
       (\ s a -> s{_vfdDurationMs = a})
+      . mapping _Coerce
 
 -- | The uploaded file\'s size in bytes. This field is present whether a
 -- video file or another type of file was uploaded.
 vfdFileSize :: Lens' VideoFileDetails (Maybe Word64)
 vfdFileSize
-  = lens _vfdFileSize (\ s a -> s{_vfdFileSize = a})
+  = lens _vfdFileSize (\ s a -> s{_vfdFileSize = a}) .
+      mapping _Coerce
 
 -- | The uploaded file\'s type as detected by YouTube\'s video processing
 -- engine. Currently, YouTube only processes video files, but this field is
@@ -4109,7 +4120,7 @@ data CommentThreadSnippet = CommentThreadSnippet
     , _ctsChannelId       :: !(Maybe Text)
     , _ctsCanReply        :: !(Maybe Bool)
     , _ctsVideoId         :: !(Maybe Text)
-    , _ctsTotalReplyCount :: !(Maybe Word32)
+    , _ctsTotalReplyCount :: !(Maybe (JSONText Word32))
     , _ctsTopLevelComment :: !(Maybe Comment)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4170,6 +4181,7 @@ ctsTotalReplyCount :: Lens' CommentThreadSnippet (Maybe Word32)
 ctsTotalReplyCount
   = lens _ctsTotalReplyCount
       (\ s a -> s{_ctsTotalReplyCount = a})
+      . mapping _Coerce
 
 -- | The top level comment of this thread.
 ctsTopLevelComment :: Lens' CommentThreadSnippet (Maybe Comment)
@@ -5244,8 +5256,8 @@ instance ToJSON VideoContentDetailsRegionRestriction
 --
 -- /See:/ 'invideoTiming' smart constructor.
 data InvideoTiming = InvideoTiming
-    { _itDurationMs :: !(Maybe Word64)
-    , _itOffSetMs   :: !(Maybe Word64)
+    { _itDurationMs :: !(Maybe (JSONText Word64))
+    , _itOffSetMs   :: !(Maybe (JSONText Word64))
     , _itType       :: !(Maybe InvideoTimingType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5272,6 +5284,7 @@ invideoTiming =
 itDurationMs :: Lens' InvideoTiming (Maybe Word64)
 itDurationMs
   = lens _itDurationMs (\ s a -> s{_itDurationMs = a})
+      . mapping _Coerce
 
 -- | Defines the time at which the promotion will appear. Depending on the
 -- value of type the value of the offsetMs field will represent a time
@@ -5279,7 +5292,8 @@ itDurationMs
 -- milliseconds.
 itOffSetMs :: Lens' InvideoTiming (Maybe Word64)
 itOffSetMs
-  = lens _itOffSetMs (\ s a -> s{_itOffSetMs = a})
+  = lens _itOffSetMs (\ s a -> s{_itOffSetMs = a}) .
+      mapping _Coerce
 
 -- | Describes a timing type. If the value is offsetFromStart, then the
 -- offsetMs field represents an offset from the start of the video. If the
@@ -5342,9 +5356,9 @@ instance ToJSON PlayListLocalizations where
 --
 -- /See:/ 'videoProcessingDetailsProcessingProgress' smart constructor.
 data VideoProcessingDetailsProcessingProgress = VideoProcessingDetailsProcessingProgress
-    { _vpdppTimeLeftMs     :: !(Maybe Word64)
-    , _vpdppPartsTotal     :: !(Maybe Word64)
-    , _vpdppPartsProcessed :: !(Maybe Word64)
+    { _vpdppTimeLeftMs     :: !(Maybe (JSONText Word64))
+    , _vpdppPartsTotal     :: !(Maybe (JSONText Word64))
+    , _vpdppPartsProcessed :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoProcessingDetailsProcessingProgress' with the minimum fields required to make a request.
@@ -5371,6 +5385,7 @@ vpdppTimeLeftMs :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Word64)
 vpdppTimeLeftMs
   = lens _vpdppTimeLeftMs
       (\ s a -> s{_vpdppTimeLeftMs = a})
+      . mapping _Coerce
 
 -- | An estimate of the total number of parts that need to be processed for
 -- the video. The number may be updated with more precise estimates while
@@ -5379,6 +5394,7 @@ vpdppPartsTotal :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Word64)
 vpdppPartsTotal
   = lens _vpdppPartsTotal
       (\ s a -> s{_vpdppPartsTotal = a})
+      . mapping _Coerce
 
 -- | The number of parts of the video that YouTube has already processed. You
 -- can estimate the percentage of the video that YouTube has already
@@ -5391,6 +5407,7 @@ vpdppPartsProcessed :: Lens' VideoProcessingDetailsProcessingProgress (Maybe Wor
 vpdppPartsProcessed
   = lens _vpdppPartsProcessed
       (\ s a -> s{_vpdppPartsProcessed = a})
+      . mapping _Coerce
 
 instance FromJSON
          VideoProcessingDetailsProcessingProgress where
@@ -5601,7 +5618,7 @@ instance ToJSON ThumbnailDetails where
 --
 -- /See:/ 'monitorStreamInfo' smart constructor.
 data MonitorStreamInfo = MonitorStreamInfo
-    { _msiBroadcastStreamDelayMs :: !(Maybe Word32)
+    { _msiBroadcastStreamDelayMs :: !(Maybe (JSONText Word32))
     , _msiEmbedHTML              :: !(Maybe Text)
     , _msiEnableMonitorStream    :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5630,6 +5647,7 @@ msiBroadcastStreamDelayMs :: Lens' MonitorStreamInfo (Maybe Word32)
 msiBroadcastStreamDelayMs
   = lens _msiBroadcastStreamDelayMs
       (\ s a -> s{_msiBroadcastStreamDelayMs = a})
+      . mapping _Coerce
 
 -- | HTML code that embeds a player that plays the monitor stream.
 msiEmbedHTML :: Lens' MonitorStreamInfo (Maybe Text)
@@ -5740,11 +5758,11 @@ instance ToJSON I18nRegion where
 --
 -- /See:/ 'channelStatistics' smart constructor.
 data ChannelStatistics = ChannelStatistics
-    { _csCommentCount          :: !(Maybe Word64)
-    , _csSubscriberCount       :: !(Maybe Word64)
-    , _csVideoCount            :: !(Maybe Word64)
+    { _csCommentCount          :: !(Maybe (JSONText Word64))
+    , _csSubscriberCount       :: !(Maybe (JSONText Word64))
+    , _csVideoCount            :: !(Maybe (JSONText Word64))
     , _csHiddenSubscriberCount :: !(Maybe Bool)
-    , _csViewCount             :: !(Maybe Word64)
+    , _csViewCount             :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelStatistics' with the minimum fields required to make a request.
@@ -5776,17 +5794,20 @@ csCommentCount :: Lens' ChannelStatistics (Maybe Word64)
 csCommentCount
   = lens _csCommentCount
       (\ s a -> s{_csCommentCount = a})
+      . mapping _Coerce
 
 -- | The number of subscribers that the channel has.
 csSubscriberCount :: Lens' ChannelStatistics (Maybe Word64)
 csSubscriberCount
   = lens _csSubscriberCount
       (\ s a -> s{_csSubscriberCount = a})
+      . mapping _Coerce
 
 -- | The number of videos uploaded to the channel.
 csVideoCount :: Lens' ChannelStatistics (Maybe Word64)
 csVideoCount
   = lens _csVideoCount (\ s a -> s{_csVideoCount = a})
+      . mapping _Coerce
 
 -- | Whether or not the number of subscribers is shown for this user.
 csHiddenSubscriberCount :: Lens' ChannelStatistics (Maybe Bool)
@@ -5797,7 +5818,8 @@ csHiddenSubscriberCount
 -- | The number of times the channel has been viewed.
 csViewCount :: Lens' ChannelStatistics (Maybe Word64)
 csViewCount
-  = lens _csViewCount (\ s a -> s{_csViewCount = a})
+  = lens _csViewCount (\ s a -> s{_csViewCount = a}) .
+      mapping _Coerce
 
 instance FromJSON ChannelStatistics where
         parseJSON
@@ -7311,8 +7333,8 @@ instance ToJSON CdnSettings where
 --
 -- /See:/ 'liveBroadcastStatistics' smart constructor.
 data LiveBroadcastStatistics = LiveBroadcastStatistics
-    { _lbsTotalChatCount    :: !(Maybe Word64)
-    , _lbsConcurrentViewers :: !(Maybe Word64)
+    { _lbsTotalChatCount    :: !(Maybe (JSONText Word64))
+    , _lbsConcurrentViewers :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastStatistics' with the minimum fields required to make a request.
@@ -7340,6 +7362,7 @@ lbsTotalChatCount :: Lens' LiveBroadcastStatistics (Maybe Word64)
 lbsTotalChatCount
   = lens _lbsTotalChatCount
       (\ s a -> s{_lbsTotalChatCount = a})
+      . mapping _Coerce
 
 -- | The number of viewers currently watching the broadcast. The property and
 -- its value will be present if the broadcast has current viewers and the
@@ -7352,6 +7375,7 @@ lbsConcurrentViewers :: Lens' LiveBroadcastStatistics (Maybe Word64)
 lbsConcurrentViewers
   = lens _lbsConcurrentViewers
       (\ s a -> s{_lbsConcurrentViewers = a})
+      . mapping _Coerce
 
 instance FromJSON LiveBroadcastStatistics where
         parseJSON
@@ -7499,11 +7523,11 @@ instance ToJSON I18nLanguage where
 --
 -- /See:/ 'videoStatistics' smart constructor.
 data VideoStatistics = VideoStatistics
-    { _vsLikeCount     :: !(Maybe Word64)
-    , _vsCommentCount  :: !(Maybe Word64)
-    , _vsFavoriteCount :: !(Maybe Word64)
-    , _vsDislikeCount  :: !(Maybe Word64)
-    , _vsViewCount     :: !(Maybe Word64)
+    { _vsLikeCount     :: !(Maybe (JSONText Word64))
+    , _vsCommentCount  :: !(Maybe (JSONText Word64))
+    , _vsFavoriteCount :: !(Maybe (JSONText Word64))
+    , _vsDislikeCount  :: !(Maybe (JSONText Word64))
+    , _vsViewCount     :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoStatistics' with the minimum fields required to make a request.
@@ -7534,13 +7558,15 @@ videoStatistics =
 -- giving it a positive rating.
 vsLikeCount :: Lens' VideoStatistics (Maybe Word64)
 vsLikeCount
-  = lens _vsLikeCount (\ s a -> s{_vsLikeCount = a})
+  = lens _vsLikeCount (\ s a -> s{_vsLikeCount = a}) .
+      mapping _Coerce
 
 -- | The number of comments for the video.
 vsCommentCount :: Lens' VideoStatistics (Maybe Word64)
 vsCommentCount
   = lens _vsCommentCount
       (\ s a -> s{_vsCommentCount = a})
+      . mapping _Coerce
 
 -- | The number of users who currently have the video marked as a favorite
 -- video.
@@ -7548,6 +7574,7 @@ vsFavoriteCount :: Lens' VideoStatistics (Maybe Word64)
 vsFavoriteCount
   = lens _vsFavoriteCount
       (\ s a -> s{_vsFavoriteCount = a})
+      . mapping _Coerce
 
 -- | The number of users who have indicated that they disliked the video by
 -- giving it a negative rating.
@@ -7555,11 +7582,13 @@ vsDislikeCount :: Lens' VideoStatistics (Maybe Word64)
 vsDislikeCount
   = lens _vsDislikeCount
       (\ s a -> s{_vsDislikeCount = a})
+      . mapping _Coerce
 
 -- | The number of times the video has been viewed.
 vsViewCount :: Lens' VideoStatistics (Maybe Word64)
 vsViewCount
-  = lens _vsViewCount (\ s a -> s{_vsViewCount = a})
+  = lens _vsViewCount (\ s a -> s{_vsViewCount = a}) .
+      mapping _Coerce
 
 instance FromJSON VideoStatistics where
         parseJSON
@@ -7832,10 +7861,10 @@ instance ToJSON VideoAbuseReport where
 --
 -- /See:/ 'videoFileDetailsAudioStream' smart constructor.
 data VideoFileDetailsAudioStream = VideoFileDetailsAudioStream
-    { _vfdasBitrateBps   :: !(Maybe Word64)
+    { _vfdasBitrateBps   :: !(Maybe (JSONText Word64))
     , _vfdasVendor       :: !(Maybe Text)
     , _vfdasCodec        :: !(Maybe Text)
-    , _vfdasChannelCount :: !(Maybe Word32)
+    , _vfdasChannelCount :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoFileDetailsAudioStream' with the minimum fields required to make a request.
@@ -7864,6 +7893,7 @@ vfdasBitrateBps :: Lens' VideoFileDetailsAudioStream (Maybe Word64)
 vfdasBitrateBps
   = lens _vfdasBitrateBps
       (\ s a -> s{_vfdasBitrateBps = a})
+      . mapping _Coerce
 
 -- | A value that uniquely identifies a video vendor. Typically, the value is
 -- a four-letter vendor code.
@@ -7881,6 +7911,7 @@ vfdasChannelCount :: Lens' VideoFileDetailsAudioStream (Maybe Word32)
 vfdasChannelCount
   = lens _vfdasChannelCount
       (\ s a -> s{_vfdasChannelCount = a})
+      . mapping _Coerce
 
 instance FromJSON VideoFileDetailsAudioStream where
         parseJSON
@@ -8198,7 +8229,7 @@ instance ToJSON InvideoPosition where
 data LiveStreamHealthStatus = LiveStreamHealthStatus
     { _lshsStatus                :: !(Maybe LiveStreamHealthStatusStatus)
     , _lshsConfigurationIssues   :: !(Maybe [LiveStreamConfigurationIssue])
-    , _lshsLastUpdateTimeSeconds :: !(Maybe Word64)
+    , _lshsLastUpdateTimeSeconds :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamHealthStatus' with the minimum fields required to make a request.
@@ -8237,6 +8268,7 @@ lshsLastUpdateTimeSeconds :: Lens' LiveStreamHealthStatus (Maybe Word64)
 lshsLastUpdateTimeSeconds
   = lens _lshsLastUpdateTimeSeconds
       (\ s a -> s{_lshsLastUpdateTimeSeconds = a})
+      . mapping _Coerce
 
 instance FromJSON LiveStreamHealthStatus where
         parseJSON
@@ -9310,7 +9342,7 @@ data InvideoBranding = InvideoBranding
     { _ibImageURL        :: !(Maybe Text)
     , _ibTargetChannelId :: !(Maybe Text)
     , _ibTiming          :: !(Maybe InvideoTiming)
-    , _ibImageBytes      :: !(Maybe Word8)
+    , _ibImageBytes      :: !(Maybe (JSONText Word8))
     , _ibPosition        :: !(Maybe InvideoPosition)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9353,6 +9385,7 @@ ibTiming = lens _ibTiming (\ s a -> s{_ibTiming = a})
 ibImageBytes :: Lens' InvideoBranding (Maybe Word8)
 ibImageBytes
   = lens _ibImageBytes (\ s a -> s{_ibImageBytes = a})
+      . mapping _Coerce
 
 ibPosition :: Lens' InvideoBranding (Maybe InvideoPosition)
 ibPosition
@@ -9754,8 +9787,8 @@ instance ToJSON PlayListLocalization where
 -- /See:/ 'subscriptionContentDetails' smart constructor.
 data SubscriptionContentDetails = SubscriptionContentDetails
     { _scdActivityType   :: !(Maybe SubscriptionContentDetailsActivityType)
-    , _scdTotalItemCount :: !(Maybe Word32)
-    , _scdNewItemCount   :: !(Maybe Word32)
+    , _scdTotalItemCount :: !(Maybe (JSONText Word32))
+    , _scdNewItemCount   :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionContentDetails' with the minimum fields required to make a request.
@@ -9788,6 +9821,7 @@ scdTotalItemCount :: Lens' SubscriptionContentDetails (Maybe Word32)
 scdTotalItemCount
   = lens _scdTotalItemCount
       (\ s a -> s{_scdTotalItemCount = a})
+      . mapping _Coerce
 
 -- | The number of new items in the subscription since its content was last
 -- read.
@@ -9795,6 +9829,7 @@ scdNewItemCount :: Lens' SubscriptionContentDetails (Maybe Word32)
 scdNewItemCount
   = lens _scdNewItemCount
       (\ s a -> s{_scdNewItemCount = a})
+      . mapping _Coerce
 
 instance FromJSON SubscriptionContentDetails where
         parseJSON
@@ -10190,14 +10225,14 @@ instance ToJSON LanguageTag where
 --
 -- /See:/ 'videoFileDetailsVideoStream' smart constructor.
 data VideoFileDetailsVideoStream = VideoFileDetailsVideoStream
-    { _vfdvsHeightPixels :: !(Maybe Word32)
-    , _vfdvsBitrateBps   :: !(Maybe Word64)
+    { _vfdvsHeightPixels :: !(Maybe (JSONText Word32))
+    , _vfdvsBitrateBps   :: !(Maybe (JSONText Word64))
     , _vfdvsVendor       :: !(Maybe Text)
     , _vfdvsRotation     :: !(Maybe VideoFileDetailsVideoStreamRotation)
-    , _vfdvsFrameRateFps :: !(Maybe Double)
+    , _vfdvsFrameRateFps :: !(Maybe (JSONText Double))
     , _vfdvsCodec        :: !(Maybe Text)
-    , _vfdvsAspectRatio  :: !(Maybe Double)
-    , _vfdvsWidthPixels  :: !(Maybe Word32)
+    , _vfdvsAspectRatio  :: !(Maybe (JSONText Double))
+    , _vfdvsWidthPixels  :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoFileDetailsVideoStream' with the minimum fields required to make a request.
@@ -10238,12 +10273,14 @@ vfdvsHeightPixels :: Lens' VideoFileDetailsVideoStream (Maybe Word32)
 vfdvsHeightPixels
   = lens _vfdvsHeightPixels
       (\ s a -> s{_vfdvsHeightPixels = a})
+      . mapping _Coerce
 
 -- | The video stream\'s bitrate, in bits per second.
 vfdvsBitrateBps :: Lens' VideoFileDetailsVideoStream (Maybe Word64)
 vfdvsBitrateBps
   = lens _vfdvsBitrateBps
       (\ s a -> s{_vfdvsBitrateBps = a})
+      . mapping _Coerce
 
 -- | A value that uniquely identifies a video vendor. Typically, the value is
 -- a four-letter vendor code.
@@ -10263,6 +10300,7 @@ vfdvsFrameRateFps :: Lens' VideoFileDetailsVideoStream (Maybe Double)
 vfdvsFrameRateFps
   = lens _vfdvsFrameRateFps
       (\ s a -> s{_vfdvsFrameRateFps = a})
+      . mapping _Coerce
 
 -- | The video codec that the stream uses.
 vfdvsCodec :: Lens' VideoFileDetailsVideoStream (Maybe Text)
@@ -10275,6 +10313,7 @@ vfdvsAspectRatio :: Lens' VideoFileDetailsVideoStream (Maybe Double)
 vfdvsAspectRatio
   = lens _vfdvsAspectRatio
       (\ s a -> s{_vfdvsAspectRatio = a})
+      . mapping _Coerce
 
 -- | The encoded video content\'s width in pixels. You can calculate the
 -- video\'s encoding aspect ratio as width_pixels \/ height_pixels.
@@ -10282,6 +10321,7 @@ vfdvsWidthPixels :: Lens' VideoFileDetailsVideoStream (Maybe Word32)
 vfdvsWidthPixels
   = lens _vfdvsWidthPixels
       (\ s a -> s{_vfdvsWidthPixels = a})
+      . mapping _Coerce
 
 instance FromJSON VideoFileDetailsVideoStream where
         parseJSON
@@ -11116,7 +11156,7 @@ data CommentSnippet = CommentSnippet
     , _cPublishedAt                :: !(Maybe DateTime')
     , _cAuthorChannelURL           :: !(Maybe Text)
     , _cModerationStatus           :: !(Maybe CommentSnippetModerationStatus)
-    , _cLikeCount                  :: !(Maybe Word32)
+    , _cLikeCount                  :: !(Maybe (JSONText Word32))
     , _cChannelId                  :: !(Maybe Text)
     , _cTextOriginal               :: !(Maybe Text)
     , _cVideoId                    :: !(Maybe Text)
@@ -11218,7 +11258,8 @@ cModerationStatus
 -- | The total number of likes this comment has received.
 cLikeCount :: Lens' CommentSnippet (Maybe Word32)
 cLikeCount
-  = lens _cLikeCount (\ s a -> s{_cLikeCount = a})
+  = lens _cLikeCount (\ s a -> s{_cLikeCount = a}) .
+      mapping _Coerce
 
 -- | The id of the corresponding YouTube channel. In case of a channel
 -- comment this is the channel the comment refers to. In case of a video
@@ -11501,7 +11542,7 @@ data PlayListItemSnippet = PlayListItemSnippet
     , _plisTitle        :: !(Maybe Text)
     , _plisPlayListId   :: !(Maybe Text)
     , _plisDescription  :: !(Maybe Text)
-    , _plisPosition     :: !(Maybe Word32)
+    , _plisPosition     :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListItemSnippet' with the minimum fields required to make a request.
@@ -11600,6 +11641,7 @@ plisDescription
 plisPosition :: Lens' PlayListItemSnippet (Maybe Word32)
 plisPosition
   = lens _plisPosition (\ s a -> s{_plisPosition = a})
+      . mapping _Coerce
 
 instance FromJSON PlayListItemSnippet where
         parseJSON
@@ -12912,7 +12954,7 @@ instance ToJSON SubscriptionSnippet where
 -- /See:/ 'videoLiveStreamingDetails' smart constructor.
 data VideoLiveStreamingDetails = VideoLiveStreamingDetails
     { _vlsdActualEndTime      :: !(Maybe DateTime')
-    , _vlsdConcurrentViewers  :: !(Maybe Word64)
+    , _vlsdConcurrentViewers  :: !(Maybe (JSONText Word64))
     , _vlsdScheduledEndTime   :: !(Maybe DateTime')
     , _vlsdScheduledStartTime :: !(Maybe DateTime')
     , _vlsdActualStartTime    :: !(Maybe DateTime')
@@ -12962,6 +13004,7 @@ vlsdConcurrentViewers :: Lens' VideoLiveStreamingDetails (Maybe Word64)
 vlsdConcurrentViewers
   = lens _vlsdConcurrentViewers
       (\ s a -> s{_vlsdConcurrentViewers = a})
+      . mapping _Coerce
 
 -- | The time that the broadcast is scheduled to end. The value is specified
 -- in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. If the value is empty or
@@ -13227,9 +13270,9 @@ instance ToJSON VideoConversionPing where
 --
 -- /See:/ 'geoPoint' smart constructor.
 data GeoPoint = GeoPoint
-    { _gpLatitude  :: !(Maybe Double)
-    , _gpAltitude  :: !(Maybe Double)
-    , _gpLongitude :: !(Maybe Double)
+    { _gpLatitude  :: !(Maybe (JSONText Double))
+    , _gpAltitude  :: !(Maybe (JSONText Double))
+    , _gpLongitude :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoPoint' with the minimum fields required to make a request.
@@ -13253,17 +13296,20 @@ geoPoint =
 -- | Latitude in degrees.
 gpLatitude :: Lens' GeoPoint (Maybe Double)
 gpLatitude
-  = lens _gpLatitude (\ s a -> s{_gpLatitude = a})
+  = lens _gpLatitude (\ s a -> s{_gpLatitude = a}) .
+      mapping _Coerce
 
 -- | Altitude above the reference ellipsoid, in meters.
 gpAltitude :: Lens' GeoPoint (Maybe Double)
 gpAltitude
-  = lens _gpAltitude (\ s a -> s{_gpAltitude = a})
+  = lens _gpAltitude (\ s a -> s{_gpAltitude = a}) .
+      mapping _Coerce
 
 -- | Longitude in degrees.
 gpLongitude :: Lens' GeoPoint (Maybe Double)
 gpLongitude
-  = lens _gpLongitude (\ s a -> s{_gpLongitude = a})
+  = lens _gpLongitude (\ s a -> s{_gpLongitude = a}) .
+      mapping _Coerce
 
 instance FromJSON GeoPoint where
         parseJSON

@@ -46,7 +46,7 @@ type EventTagsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "eventTags" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] EventTag :> Post '[JSON] EventTag
@@ -55,7 +55,7 @@ type EventTagsInsertResource =
 --
 -- /See:/ 'eventTagsInsert' smart constructor.
 data EventTagsInsert = EventTagsInsert
-    { _etiProFileId :: !Int64
+    { _etiProFileId :: !(JSONText Int64)
     , _etiPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,6 +80,7 @@ eventTagsInsert pEtiProFileId_ pEtiPayload_ =
 etiProFileId :: Lens' EventTagsInsert Int64
 etiProFileId
   = lens _etiProFileId (\ s a -> s{_etiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 etiPayload :: Lens' EventTagsInsert EventTag

@@ -48,17 +48,19 @@ type BucketsDeleteResource =
        "v1" :>
          "b" :>
            Capture "bucket" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
-               QueryParam "ifMetagenerationNotMatch" Int64 :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "ifMetagenerationMatch" (JSONText Int64)
+               :>
+               QueryParam "ifMetagenerationNotMatch"
+                 (JSONText Int64)
+                 :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes an empty bucket.
 --
 -- /See:/ 'bucketsDelete' smart constructor.
 data BucketsDelete = BucketsDelete
-    { _bdIfMetagenerationMatch    :: !(Maybe Int64)
+    { _bdIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
     , _bdBucket                   :: !Text
-    , _bdIfMetagenerationNotMatch :: !(Maybe Int64)
+    , _bdIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsDelete' with the minimum fields required to make a request.
@@ -86,6 +88,7 @@ bdIfMetagenerationMatch :: Lens' BucketsDelete (Maybe Int64)
 bdIfMetagenerationMatch
   = lens _bdIfMetagenerationMatch
       (\ s a -> s{_bdIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Name of a bucket.
 bdBucket :: Lens' BucketsDelete Text
@@ -97,6 +100,7 @@ bdIfMetagenerationNotMatch :: Lens' BucketsDelete (Maybe Int64)
 bdIfMetagenerationNotMatch
   = lens _bdIfMetagenerationNotMatch
       (\ s a -> s{_bdIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 instance GoogleRequest BucketsDelete where
         type Rs BucketsDelete = ()

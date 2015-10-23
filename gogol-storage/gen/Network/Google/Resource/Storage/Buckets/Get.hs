@@ -49,8 +49,11 @@ type BucketsGetResource =
        "v1" :>
          "b" :>
            Capture "bucket" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
-               QueryParam "ifMetagenerationNotMatch" Int64 :>
+             QueryParam "ifMetagenerationMatch" (JSONText Int64)
+               :>
+               QueryParam "ifMetagenerationNotMatch"
+                 (JSONText Int64)
+                 :>
                  QueryParam "projection" BucketsGetProjection :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Bucket
 
@@ -58,9 +61,9 @@ type BucketsGetResource =
 --
 -- /See:/ 'bucketsGet' smart constructor.
 data BucketsGet = BucketsGet
-    { _bgIfMetagenerationMatch    :: !(Maybe Int64)
+    { _bgIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
     , _bgBucket                   :: !Text
-    , _bgIfMetagenerationNotMatch :: !(Maybe Int64)
+    , _bgIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
     , _bgProjection               :: !(Maybe BucketsGetProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -92,6 +95,7 @@ bgIfMetagenerationMatch :: Lens' BucketsGet (Maybe Int64)
 bgIfMetagenerationMatch
   = lens _bgIfMetagenerationMatch
       (\ s a -> s{_bgIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Name of a bucket.
 bgBucket :: Lens' BucketsGet Text
@@ -103,6 +107,7 @@ bgIfMetagenerationNotMatch :: Lens' BucketsGet (Maybe Int64)
 bgIfMetagenerationNotMatch
   = lens _bgIfMetagenerationNotMatch
       (\ s a -> s{_bgIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Set of properties to return. Defaults to noAcl.
 bgProjection :: Lens' BucketsGet (Maybe BucketsGetProjection)

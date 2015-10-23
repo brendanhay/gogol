@@ -53,7 +53,7 @@ type GlobalOperationsAggregatedListResource =
                "operations" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] OperationAggregatedList
 
@@ -64,7 +64,7 @@ data GlobalOperationsAggregatedList = GlobalOperationsAggregatedList
     { _goalProject    :: !Text
     , _goalFilter     :: !(Maybe Text)
     , _goalPageToken  :: !(Maybe Text)
-    , _goalMaxResults :: !Word32
+    , _goalMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsAggregatedList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ goalMaxResults :: Lens' GlobalOperationsAggregatedList Word32
 goalMaxResults
   = lens _goalMaxResults
       (\ s a -> s{_goalMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest GlobalOperationsAggregatedList
          where

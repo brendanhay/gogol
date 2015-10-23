@@ -44,15 +44,15 @@ type ClientAccessDeleteResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "clientAccess" :>
-           Capture "clientAccountId" Int64 :>
-             QueryParam "sponsorAccountId" Int32 :>
+           Capture "clientAccountId" (JSONText Int64) :>
+             QueryParam "sponsorAccountId" (JSONText Int32) :>
                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 --
 -- /See:/ 'clientAccessDelete' smart constructor.
 data ClientAccessDelete = ClientAccessDelete
-    { _cadSponsorAccountId :: !Int32
-    , _cadClientAccountId  :: !Int64
+    { _cadSponsorAccountId :: !(JSONText Int32)
+    , _cadClientAccountId  :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessDelete' with the minimum fields required to make a request.
@@ -76,11 +76,13 @@ cadSponsorAccountId :: Lens' ClientAccessDelete Int32
 cadSponsorAccountId
   = lens _cadSponsorAccountId
       (\ s a -> s{_cadSponsorAccountId = a})
+      . _Coerce
 
 cadClientAccountId :: Lens' ClientAccessDelete Int64
 cadClientAccountId
   = lens _cadClientAccountId
       (\ s a -> s{_cadClientAccountId = a})
+      . _Coerce
 
 instance GoogleRequest ClientAccessDelete where
         type Rs ClientAccessDelete = ()

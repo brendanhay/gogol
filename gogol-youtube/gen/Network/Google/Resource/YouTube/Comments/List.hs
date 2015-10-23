@@ -54,7 +54,7 @@ type CommentsListResource =
              QueryParam "id" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "textFormat" CommentsListTextFormat :>
-                   QueryParam "maxResults" Word32 :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "parentId" Text :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CommentListResponse
@@ -67,7 +67,7 @@ data CommentsList = CommentsList
     , _cllId         :: !(Maybe Text)
     , _cllPageToken  :: !(Maybe Text)
     , _cllTextFormat :: !CommentsListTextFormat
-    , _cllMaxResults :: !Word32
+    , _cllMaxResults :: !(JSONText Word32)
     , _cllParentId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -132,6 +132,7 @@ cllMaxResults :: Lens' CommentsList Word32
 cllMaxResults
   = lens _cllMaxResults
       (\ s a -> s{_cllMaxResults = a})
+      . _Coerce
 
 -- | The parentId parameter specifies the ID of the comment for which replies
 -- should be retrieved. Note: YouTube currently supports replies only for

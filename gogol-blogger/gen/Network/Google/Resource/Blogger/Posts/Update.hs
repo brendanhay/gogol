@@ -57,7 +57,7 @@ type PostsUpdateResource =
                Capture "postId" Text :>
                  QueryParam "fetchBody" Bool :>
                    QueryParam "fetchImages" Bool :>
-                     QueryParam "maxComments" Word32 :>
+                     QueryParam "maxComments" (JSONText Word32) :>
                        QueryParam "revert" Bool :>
                          QueryParam "publish" Bool :>
                            QueryParam "alt" AltJSON :>
@@ -71,7 +71,7 @@ data PostsUpdate = PostsUpdate
     , _puFetchImages :: !(Maybe Bool)
     , _puBlogId      :: !Text
     , _puPayload     :: !Post'
-    , _puMaxComments :: !(Maybe Word32)
+    , _puMaxComments :: !(Maybe (JSONText Word32))
     , _puRevert      :: !(Maybe Bool)
     , _puPostId      :: !Text
     , _puPublish     :: !(Maybe Bool)
@@ -140,6 +140,7 @@ puMaxComments :: Lens' PostsUpdate (Maybe Word32)
 puMaxComments
   = lens _puMaxComments
       (\ s a -> s{_puMaxComments = a})
+      . mapping _Coerce
 
 -- | Whether a revert action should be performed when the post is updated
 -- (default: false).

@@ -50,7 +50,7 @@ type CustomChannelsListResource =
            Capture "adClientId" Text :>
              "customchannels" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] CustomChannels
 
@@ -60,7 +60,7 @@ type CustomChannelsListResource =
 data CustomChannelsList = CustomChannelsList
     { _cclAdClientId :: !Text
     , _cclPageToken  :: !(Maybe Text)
-    , _cclMaxResults :: !(Maybe Word32)
+    , _cclMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannelsList' with the minimum fields required to make a request.
@@ -101,6 +101,7 @@ cclMaxResults :: Lens' CustomChannelsList (Maybe Word32)
 cclMaxResults
   = lens _cclMaxResults
       (\ s a -> s{_cclMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest CustomChannelsList where
         type Rs CustomChannelsList = CustomChannels

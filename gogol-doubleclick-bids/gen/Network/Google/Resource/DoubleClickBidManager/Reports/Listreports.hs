@@ -45,7 +45,7 @@ type ReportsListreportsResource =
      "doubleclickbidmanager" :>
        "v1" :>
          "queries" :>
-           Capture "queryId" Int64 :>
+           Capture "queryId" (JSONText Int64) :>
              "reports" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] ListReportsResponse
@@ -54,7 +54,7 @@ type ReportsListreportsResource =
 --
 -- /See:/ 'reportsListreports' smart constructor.
 newtype ReportsListreports = ReportsListreports
-    { _rlQueryId :: Int64
+    { _rlQueryId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsListreports' with the minimum fields required to make a request.
@@ -73,7 +73,8 @@ reportsListreports pRlQueryId_ =
 -- | Query ID with which the reports are associated.
 rlQueryId :: Lens' ReportsListreports Int64
 rlQueryId
-  = lens _rlQueryId (\ s a -> s{_rlQueryId = a})
+  = lens _rlQueryId (\ s a -> s{_rlQueryId = a}) .
+      _Coerce
 
 instance GoogleRequest ReportsListreports where
         type Rs ReportsListreports = ListReportsResponse

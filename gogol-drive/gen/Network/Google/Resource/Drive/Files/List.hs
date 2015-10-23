@@ -57,7 +57,7 @@ type FilesListResource =
                  QueryParam "projection" FilesListProjection :>
                    QueryParam "corpus" FilesListCorpus :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
+                       QueryParam "maxResults" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] FileList
 
 -- | Lists the user\'s files.
@@ -70,7 +70,7 @@ data FilesList = FilesList
     , _flProjection :: !(Maybe FilesListProjection)
     , _flCorpus     :: !(Maybe FilesListCorpus)
     , _flPageToken  :: !(Maybe Text)
-    , _flMaxResults :: !Int32
+    , _flMaxResults :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.
@@ -142,6 +142,7 @@ flPageToken
 flMaxResults :: Lens' FilesList Int32
 flMaxResults
   = lens _flMaxResults (\ s a -> s{_flMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest FilesList where
         type Rs FilesList = FileList

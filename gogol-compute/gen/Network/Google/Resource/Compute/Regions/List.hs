@@ -53,7 +53,7 @@ type RegionsListResource =
              "regions" :>
                QueryParam "filter" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] RegionList
 
 -- | Retrieves the list of region resources available to the specified
@@ -64,7 +64,7 @@ data RegionsList = RegionsList
     { _rProject    :: !Text
     , _rFilter     :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
-    , _rMaxResults :: !Word32
+    , _rMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsList' with the minimum fields required to make a request.
@@ -117,7 +117,8 @@ rPageToken
 -- | Maximum count of results to be returned.
 rMaxResults :: Lens' RegionsList Word32
 rMaxResults
-  = lens _rMaxResults (\ s a -> s{_rMaxResults = a})
+  = lens _rMaxResults (\ s a -> s{_rMaxResults = a}) .
+      _Coerce
 
 instance GoogleRequest RegionsList where
         type Rs RegionsList = RegionList

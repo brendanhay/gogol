@@ -53,8 +53,8 @@ type ManagementCustomDataSourcesListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "customDataSources" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
+                     QueryParam "start-index" (JSONText Int32) :>
+                       QueryParam "max-results" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] CustomDataSources
 
@@ -64,8 +64,8 @@ type ManagementCustomDataSourcesListResource =
 data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList
     { _mcdslWebPropertyId :: !Text
     , _mcdslAccountId     :: !Text
-    , _mcdslStartIndex    :: !(Maybe Int32)
-    , _mcdslMaxResults    :: !(Maybe Int32)
+    , _mcdslStartIndex    :: !(Maybe (JSONText Int32))
+    , _mcdslMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDataSourcesList' with the minimum fields required to make a request.
@@ -110,12 +110,14 @@ mcdslStartIndex :: Lens' ManagementCustomDataSourcesList (Maybe Int32)
 mcdslStartIndex
   = lens _mcdslStartIndex
       (\ s a -> s{_mcdslStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of custom data sources to include in this response.
 mcdslMaxResults :: Lens' ManagementCustomDataSourcesList (Maybe Int32)
 mcdslMaxResults
   = lens _mcdslMaxResults
       (\ s a -> s{_mcdslMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest
          ManagementCustomDataSourcesList where

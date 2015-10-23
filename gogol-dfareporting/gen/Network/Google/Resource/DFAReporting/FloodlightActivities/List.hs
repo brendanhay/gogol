@@ -58,15 +58,19 @@ type FloodlightActivitiesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivities" :>
                QueryParam "tagString" Text :>
                  QueryParam "floodlightActivityGroupTagString" Text :>
-                   QueryParam "floodlightConfigurationId" Int64 :>
-                     QueryParam "advertiserId" Int64 :>
+                   QueryParam "floodlightConfigurationId"
+                     (JSONText Int64)
+                     :>
+                     QueryParam "advertiserId" (JSONText Int64) :>
                        QueryParam "searchString" Text :>
-                         QueryParams "ids" Int64 :>
-                           QueryParams "floodlightActivityGroupIds" Int64 :>
+                         QueryParams "ids" (JSONText Int64) :>
+                           QueryParams "floodlightActivityGroupIds"
+                             (JSONText Int64)
+                             :>
                              QueryParam "sortOrder"
                                FloodlightActivitiesListSortOrder
                                :>
@@ -79,7 +83,8 @@ type FloodlightActivitiesListResource =
                                      QueryParam "sortField"
                                        FloodlightActivitiesListSortField
                                        :>
-                                       QueryParam "maxResults" Int32 :>
+                                       QueryParam "maxResults" (JSONText Int32)
+                                         :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
                                              FloodlightActivitiesListResponse
@@ -90,18 +95,18 @@ type FloodlightActivitiesListResource =
 data FloodlightActivitiesList = FloodlightActivitiesList
     { _falTagString                        :: !(Maybe Text)
     , _falFloodlightActivityGroupTagString :: !(Maybe Text)
-    , _falFloodlightConfigurationId        :: !(Maybe Int64)
-    , _falAdvertiserId                     :: !(Maybe Int64)
+    , _falFloodlightConfigurationId        :: !(Maybe (JSONText Int64))
+    , _falAdvertiserId                     :: !(Maybe (JSONText Int64))
     , _falSearchString                     :: !(Maybe Text)
-    , _falIds                              :: !(Maybe [Int64])
-    , _falProFileId                        :: !Int64
-    , _falFloodlightActivityGroupIds       :: !(Maybe [Int64])
+    , _falIds                              :: !(Maybe [JSONText Int64])
+    , _falProFileId                        :: !(JSONText Int64)
+    , _falFloodlightActivityGroupIds       :: !(Maybe [JSONText Int64])
     , _falSortOrder                        :: !(Maybe FloodlightActivitiesListSortOrder)
     , _falFloodlightActivityGroupType      :: !(Maybe FloodlightActivitiesListFloodlightActivityGroupType)
     , _falFloodlightActivityGroupName      :: !(Maybe Text)
     , _falPageToken                        :: !(Maybe Text)
     , _falSortField                        :: !(Maybe FloodlightActivitiesListSortField)
-    , _falMaxResults                       :: !(Maybe Int32)
+    , _falMaxResults                       :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesList' with the minimum fields required to make a request.
@@ -176,6 +181,7 @@ falFloodlightConfigurationId :: Lens' FloodlightActivitiesList (Maybe Int64)
 falFloodlightConfigurationId
   = lens _falFloodlightConfigurationId
       (\ s a -> s{_falFloodlightConfigurationId = a})
+      . mapping _Coerce
 
 -- | Select only floodlight activities for the specified advertiser ID. Must
 -- specify either ids, advertiserId, or floodlightConfigurationId for a
@@ -184,6 +190,7 @@ falAdvertiserId :: Lens' FloodlightActivitiesList (Maybe Int64)
 falAdvertiserId
   = lens _falAdvertiserId
       (\ s a -> s{_falAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"floodlightactivity*2015\" will return objects with names
@@ -210,6 +217,7 @@ falIds
 falProFileId :: Lens' FloodlightActivitiesList Int64
 falProFileId
   = lens _falProFileId (\ s a -> s{_falProFileId = a})
+      . _Coerce
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group IDs.
@@ -254,6 +262,7 @@ falMaxResults :: Lens' FloodlightActivitiesList (Maybe Int32)
 falMaxResults
   = lens _falMaxResults
       (\ s a -> s{_falMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest FloodlightActivitiesList where
         type Rs FloodlightActivitiesList =

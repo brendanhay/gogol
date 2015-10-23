@@ -46,7 +46,7 @@ type PlacementsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placements" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Placement :> Post '[JSON] Placement
@@ -55,7 +55,7 @@ type PlacementsInsertResource =
 --
 -- /See:/ 'placementsInsert' smart constructor.
 data PlacementsInsert = PlacementsInsert
-    { _piProFileId :: !Int64
+    { _piProFileId :: !(JSONText Int64)
     , _piPayload   :: !Placement
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ placementsInsert pPiProFileId_ pPiPayload_ =
 -- | User profile ID associated with this request.
 piProFileId :: Lens' PlacementsInsert Int64
 piProFileId
-  = lens _piProFileId (\ s a -> s{_piProFileId = a})
+  = lens _piProFileId (\ s a -> s{_piProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 piPayload :: Lens' PlacementsInsert Placement

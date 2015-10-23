@@ -60,15 +60,15 @@ type JobsPatchResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" Word64 :>
+               Capture "jobId" (JSONText Word64) :>
                  QueryParam "progress" JobsPatchProgress :>
                    QueryParam "note" Text :>
                      QueryParam "customerPhoneNumber" Text :>
                        QueryParam "customerName" Text :>
                          QueryParam "address" Text :>
                            QueryParam "assignee" Text :>
-                             QueryParam "lat" Double :>
-                               QueryParam "lng" Double :>
+                             QueryParam "lat" (JSONText Double) :>
+                               QueryParam "lng" (JSONText Double) :>
                                  QueryParam "title" Text :>
                                    QueryParams "customField" Text :>
                                      QueryParam "alt" AltJSON :>
@@ -79,7 +79,7 @@ type JobsPatchResource =
 --
 -- /See:/ 'jobsPatch' smart constructor.
 data JobsPatch = JobsPatch
-    { _jpJobId               :: !Word64
+    { _jpJobId               :: !(JSONText Word64)
     , _jpProgress            :: !(Maybe JobsPatchProgress)
     , _jpNote                :: !(Maybe Text)
     , _jpTeamId              :: !Text
@@ -88,8 +88,8 @@ data JobsPatch = JobsPatch
     , _jpAddress             :: !(Maybe Text)
     , _jpPayload             :: !Job
     , _jpAssignee            :: !(Maybe Text)
-    , _jpLat                 :: !(Maybe Double)
-    , _jpLng                 :: !(Maybe Double)
+    , _jpLat                 :: !(Maybe (JSONText Double))
+    , _jpLng                 :: !(Maybe (JSONText Double))
     , _jpTitle               :: !(Maybe Text)
     , _jpCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,8 @@ jobsPatch pJpJobId_ pJpTeamId_ pJpPayload_ =
 
 -- | Job number
 jpJobId :: Lens' JobsPatch Word64
-jpJobId = lens _jpJobId (\ s a -> s{_jpJobId = a})
+jpJobId
+  = lens _jpJobId (\ s a -> s{_jpJobId = a}) . _Coerce
 
 -- | Job progress
 jpProgress :: Lens' JobsPatch (Maybe JobsPatchProgress)
@@ -191,11 +192,15 @@ jpAssignee
 
 -- | The latitude coordinate of this job\'s location.
 jpLat :: Lens' JobsPatch (Maybe Double)
-jpLat = lens _jpLat (\ s a -> s{_jpLat = a})
+jpLat
+  = lens _jpLat (\ s a -> s{_jpLat = a}) .
+      mapping _Coerce
 
 -- | The longitude coordinate of this job\'s location.
 jpLng :: Lens' JobsPatch (Maybe Double)
-jpLng = lens _jpLng (\ s a -> s{_jpLng = a})
+jpLng
+  = lens _jpLng (\ s a -> s{_jpLng = a}) .
+      mapping _Coerce
 
 -- | Job title
 jpTitle :: Lens' JobsPatch (Maybe Text)

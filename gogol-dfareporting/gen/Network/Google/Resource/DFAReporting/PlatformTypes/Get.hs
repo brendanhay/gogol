@@ -46,17 +46,17 @@ type PlatformTypesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "platformTypes" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] PlatformType
 
 -- | Gets one platform type by ID.
 --
 -- /See:/ 'platformTypesGet' smart constructor.
 data PlatformTypesGet = PlatformTypesGet
-    { _ptgProFileId :: !Int64
-    , _ptgId        :: !Int64
+    { _ptgProFileId :: !(JSONText Int64)
+    , _ptgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformTypesGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ platformTypesGet pPtgProFileId_ pPtgId_ =
 ptgProFileId :: Lens' PlatformTypesGet Int64
 ptgProFileId
   = lens _ptgProFileId (\ s a -> s{_ptgProFileId = a})
+      . _Coerce
 
 -- | Platform type ID.
 ptgId :: Lens' PlatformTypesGet Int64
-ptgId = lens _ptgId (\ s a -> s{_ptgId = a})
+ptgId
+  = lens _ptgId (\ s a -> s{_ptgId = a}) . _Coerce
 
 instance GoogleRequest PlatformTypesGet where
         type Rs PlatformTypesGet = PlatformType

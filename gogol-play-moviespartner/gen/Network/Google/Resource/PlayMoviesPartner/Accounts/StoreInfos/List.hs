@@ -76,7 +76,7 @@ type AccountsStoreInfosListResource =
                                  QueryParam "bearer_token" Text :>
                                    QueryParam "name" Text :>
                                      QueryParam "pageToken" Text :>
-                                       QueryParam "pageSize" Int32 :>
+                                       QueryParam "pageSize" (JSONText Int32) :>
                                          QueryParam "callback" Text :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListStoreInfosResponse
@@ -101,7 +101,7 @@ data AccountsStoreInfosList = AccountsStoreInfosList
     , _asilBearerToken    :: !(Maybe Text)
     , _asilName           :: !(Maybe Text)
     , _asilPageToken      :: !(Maybe Text)
-    , _asilPageSize       :: !(Maybe Int32)
+    , _asilPageSize       :: !(Maybe (JSONText Int32))
     , _asilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -256,6 +256,7 @@ asilPageToken
 asilPageSize :: Lens' AccountsStoreInfosList (Maybe Int32)
 asilPageSize
   = lens _asilPageSize (\ s a -> s{_asilPageSize = a})
+      . mapping _Coerce
 
 -- | JSONP
 asilCallback :: Lens' AccountsStoreInfosList (Maybe Text)

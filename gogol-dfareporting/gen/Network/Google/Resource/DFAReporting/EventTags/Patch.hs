@@ -47,9 +47,9 @@ type EventTagsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "eventTags" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] EventTag :> Patch '[JSON] EventTag
 
@@ -57,9 +57,9 @@ type EventTagsPatchResource =
 --
 -- /See:/ 'eventTagsPatch' smart constructor.
 data EventTagsPatch = EventTagsPatch
-    { _etpProFileId :: !Int64
+    { _etpProFileId :: !(JSONText Int64)
     , _etpPayload   :: !EventTag
-    , _etpId        :: !Int64
+    , _etpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsPatch' with the minimum fields required to make a request.
@@ -87,6 +87,7 @@ eventTagsPatch pEtpProFileId_ pEtpPayload_ pEtpId_ =
 etpProFileId :: Lens' EventTagsPatch Int64
 etpProFileId
   = lens _etpProFileId (\ s a -> s{_etpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 etpPayload :: Lens' EventTagsPatch EventTag
@@ -95,7 +96,8 @@ etpPayload
 
 -- | Event tag ID.
 etpId :: Lens' EventTagsPatch Int64
-etpId = lens _etpId (\ s a -> s{_etpId = a})
+etpId
+  = lens _etpId (\ s a -> s{_etpId = a}) . _Coerce
 
 instance GoogleRequest EventTagsPatch where
         type Rs EventTagsPatch = EventTag

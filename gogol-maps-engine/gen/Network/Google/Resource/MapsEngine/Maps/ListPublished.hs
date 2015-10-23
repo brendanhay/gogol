@@ -50,7 +50,7 @@ type MapsListPublishedResource =
            "published" :>
              QueryParam "pageToken" Text :>
                QueryParam "projectId" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] PublishedMapsListResponse
 
@@ -60,7 +60,7 @@ type MapsListPublishedResource =
 data MapsListPublished = MapsListPublished
     { _mlpPageToken  :: !(Maybe Text)
     , _mlpProjectId  :: !(Maybe Text)
-    , _mlpMaxResults :: !(Maybe Word32)
+    , _mlpMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListPublished' with the minimum fields required to make a request.
@@ -102,6 +102,7 @@ mlpMaxResults :: Lens' MapsListPublished (Maybe Word32)
 mlpMaxResults
   = lens _mlpMaxResults
       (\ s a -> s{_mlpMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest MapsListPublished where
         type Rs MapsListPublished = PublishedMapsListResponse

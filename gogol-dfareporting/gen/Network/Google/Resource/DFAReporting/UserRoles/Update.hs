@@ -46,7 +46,7 @@ type UserRolesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "userRoles" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
@@ -55,7 +55,7 @@ type UserRolesUpdateResource =
 --
 -- /See:/ 'userRolesUpdate' smart constructor.
 data UserRolesUpdate = UserRolesUpdate
-    { _uruProFileId :: !Int64
+    { _uruProFileId :: !(JSONText Int64)
     , _uruPayload   :: !UserRole
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,6 +80,7 @@ userRolesUpdate pUruProFileId_ pUruPayload_ =
 uruProFileId :: Lens' UserRolesUpdate Int64
 uruProFileId
   = lens _uruProFileId (\ s a -> s{_uruProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 uruPayload :: Lens' UserRolesUpdate UserRole

@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type DatafeedsInsertResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "datafeeds" :>
              QueryParam "dryRun" Bool :>
                QueryParam "alt" AltJSON :>
@@ -56,7 +56,7 @@ type DatafeedsInsertResource =
 --
 -- /See:/ 'datafeedsInsert' smart constructor.
 data DatafeedsInsert = DatafeedsInsert
-    { _diMerchantId :: !Word64
+    { _diMerchantId :: !(JSONText Word64)
     , _diPayload    :: !Datafeed
     , _diDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,6 +84,7 @@ datafeedsInsert pDiMerchantId_ pDiPayload_ =
 diMerchantId :: Lens' DatafeedsInsert Word64
 diMerchantId
   = lens _diMerchantId (\ s a -> s{_diMerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 diPayload :: Lens' DatafeedsInsert Datafeed

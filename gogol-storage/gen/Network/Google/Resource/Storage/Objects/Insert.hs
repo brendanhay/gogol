@@ -56,13 +56,16 @@ type ObjectsInsertResource =
          "b" :>
            Capture "bucket" Text :>
              "o" :>
-               QueryParam "ifMetagenerationMatch" Int64 :>
-                 QueryParam "ifGenerationNotMatch" Int64 :>
-                   QueryParam "ifGenerationMatch" Int64 :>
+               QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                 :>
+                 QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                   QueryParam "ifGenerationMatch" (JSONText Int64) :>
                      QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
                        :>
                        QueryParam "name" Text :>
-                         QueryParam "ifMetagenerationNotMatch" Int64 :>
+                         QueryParam "ifMetagenerationNotMatch"
+                           (JSONText Int64)
+                           :>
                            QueryParam "contentEncoding" Text :>
                              QueryParam "projection" ObjectsInsertProjection :>
                                QueryParam "alt" AltJSON :>
@@ -73,13 +76,16 @@ type ObjectsInsertResource =
            "b" :>
              Capture "bucket" Text :>
                "o" :>
-                 QueryParam "ifMetagenerationMatch" Int64 :>
-                   QueryParam "ifGenerationNotMatch" Int64 :>
-                     QueryParam "ifGenerationMatch" Int64 :>
+                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                   :>
+                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
                        QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
                          :>
                          QueryParam "name" Text :>
-                           QueryParam "ifMetagenerationNotMatch" Int64 :>
+                           QueryParam "ifMetagenerationNotMatch"
+                             (JSONText Int64)
+                             :>
                              QueryParam "contentEncoding" Text :>
                                QueryParam "projection" ObjectsInsertProjection
                                  :>
@@ -92,13 +98,16 @@ type ObjectsInsertResource =
              "b" :>
                Capture "bucket" Text :>
                  "o" :>
-                   QueryParam "ifMetagenerationMatch" Int64 :>
-                     QueryParam "ifGenerationNotMatch" Int64 :>
-                       QueryParam "ifGenerationMatch" Int64 :>
+                   QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                     :>
+                     QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                       QueryParam "ifGenerationMatch" (JSONText Int64) :>
                          QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
                            :>
                            QueryParam "name" Text :>
-                             QueryParam "ifMetagenerationNotMatch" Int64 :>
+                             QueryParam "ifMetagenerationNotMatch"
+                               (JSONText Int64)
+                               :>
                                QueryParam "contentEncoding" Text :>
                                  QueryParam "projection" ObjectsInsertProjection
                                    :>
@@ -112,14 +121,14 @@ type ObjectsInsertResource =
 --
 -- /See:/ 'objectsInsert' smart constructor.
 data ObjectsInsert = ObjectsInsert
-    { _oiIfMetagenerationMatch    :: !(Maybe Int64)
-    , _oiIfGenerationNotMatch     :: !(Maybe Int64)
-    , _oiIfGenerationMatch        :: !(Maybe Int64)
+    { _oiIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    , _oiIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
+    , _oiIfGenerationMatch        :: !(Maybe (JSONText Int64))
     , _oiPredefinedACL            :: !(Maybe ObjectsInsertPredefinedACL)
     , _oiBucket                   :: !Text
     , _oiPayload                  :: !Object
     , _oiName                     :: !(Maybe Text)
-    , _oiIfMetagenerationNotMatch :: !(Maybe Int64)
+    , _oiIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
     , _oiContentEncoding          :: !(Maybe Text)
     , _oiProjection               :: !(Maybe ObjectsInsertProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -171,6 +180,7 @@ oiIfMetagenerationMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfMetagenerationMatch
   = lens _oiIfMetagenerationMatch
       (\ s a -> s{_oiIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
@@ -178,6 +188,7 @@ oiIfGenerationNotMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfGenerationNotMatch
   = lens _oiIfGenerationNotMatch
       (\ s a -> s{_oiIfGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
@@ -185,6 +196,7 @@ oiIfGenerationMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfGenerationMatch
   = lens _oiIfGenerationMatch
       (\ s a -> s{_oiIfGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Apply a predefined set of access controls to this object.
 oiPredefinedACL :: Lens' ObjectsInsert (Maybe ObjectsInsertPredefinedACL)
@@ -215,6 +227,7 @@ oiIfMetagenerationNotMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfMetagenerationNotMatch
   = lens _oiIfMetagenerationNotMatch
       (\ s a -> s{_oiIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | If set, sets the contentEncoding property of the final object to this
 -- value. Setting this parameter is equivalent to setting the

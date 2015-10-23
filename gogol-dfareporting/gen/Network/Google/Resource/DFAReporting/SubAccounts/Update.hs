@@ -46,7 +46,7 @@ type SubAccountsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "subaccounts" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] SubAccount :> Put '[JSON] SubAccount
@@ -55,7 +55,7 @@ type SubAccountsUpdateResource =
 --
 -- /See:/ 'subAccountsUpdate' smart constructor.
 data SubAccountsUpdate = SubAccountsUpdate
-    { _sauProFileId :: !Int64
+    { _sauProFileId :: !(JSONText Int64)
     , _sauPayload   :: !SubAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,6 +80,7 @@ subAccountsUpdate pSauProFileId_ pSauPayload_ =
 sauProFileId :: Lens' SubAccountsUpdate Int64
 sauProFileId
   = lens _sauProFileId (\ s a -> s{_sauProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 sauPayload :: Lens' SubAccountsUpdate SubAccount

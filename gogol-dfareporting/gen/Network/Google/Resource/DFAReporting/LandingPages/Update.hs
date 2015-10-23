@@ -47,9 +47,9 @@ type LandingPagesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               Capture "campaignId" Int64 :>
+               Capture "campaignId" (JSONText Int64) :>
                  "landingPages" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] LandingPage :>
@@ -59,8 +59,8 @@ type LandingPagesUpdateResource =
 --
 -- /See:/ 'landingPagesUpdate' smart constructor.
 data LandingPagesUpdate = LandingPagesUpdate
-    { _lpuCampaignId :: !Int64
-    , _lpuProFileId  :: !Int64
+    { _lpuCampaignId :: !(JSONText Int64)
+    , _lpuProFileId  :: !(JSONText Int64)
     , _lpuPayload    :: !LandingPage
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -90,11 +90,13 @@ lpuCampaignId :: Lens' LandingPagesUpdate Int64
 lpuCampaignId
   = lens _lpuCampaignId
       (\ s a -> s{_lpuCampaignId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 lpuProFileId :: Lens' LandingPagesUpdate Int64
 lpuProFileId
   = lens _lpuProFileId (\ s a -> s{_lpuProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 lpuPayload :: Lens' LandingPagesUpdate LandingPage

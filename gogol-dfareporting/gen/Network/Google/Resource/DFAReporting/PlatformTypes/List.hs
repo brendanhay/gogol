@@ -45,7 +45,7 @@ type PlatformTypesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "platformTypes" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] PlatformTypesListResponse
@@ -54,7 +54,7 @@ type PlatformTypesListResource =
 --
 -- /See:/ 'platformTypesList' smart constructor.
 newtype PlatformTypesList = PlatformTypesList
-    { _ptlProFileId :: Int64
+    { _ptlProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformTypesList' with the minimum fields required to make a request.
@@ -74,6 +74,7 @@ platformTypesList pPtlProFileId_ =
 ptlProFileId :: Lens' PlatformTypesList Int64
 ptlProFileId
   = lens _ptlProFileId (\ s a -> s{_ptlProFileId = a})
+      . _Coerce
 
 instance GoogleRequest PlatformTypesList where
         type Rs PlatformTypesList = PlatformTypesListResponse

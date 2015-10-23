@@ -314,11 +314,11 @@ instance ToJSON AchievementConfigurationListResponse
 --
 -- /See:/ 'leaderboardConfiguration' smart constructor.
 data LeaderboardConfiguration = LeaderboardConfiguration
-    { _lcScoreMax   :: !(Maybe Int64)
+    { _lcScoreMax   :: !(Maybe (JSONText Int64))
     , _lcKind       :: !Text
     , _lcPublished  :: !(Maybe LeaderboardConfigurationDetail)
     , _lcToken      :: !(Maybe Text)
-    , _lcScoreMin   :: !(Maybe Int64)
+    , _lcScoreMin   :: !(Maybe (JSONText Int64))
     , _lcDraft      :: !(Maybe LeaderboardConfigurationDetail)
     , _lcId         :: !(Maybe Text)
     , _lcScoreOrder :: !(Maybe Text)
@@ -360,7 +360,8 @@ leaderboardConfiguration =
 -- | Maximum score that can be posted to this leaderboard.
 lcScoreMax :: Lens' LeaderboardConfiguration (Maybe Int64)
 lcScoreMax
-  = lens _lcScoreMax (\ s a -> s{_lcScoreMax = a})
+  = lens _lcScoreMax (\ s a -> s{_lcScoreMax = a}) .
+      mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesConfiguration#leaderboardConfiguration.
@@ -379,7 +380,8 @@ lcToken = lens _lcToken (\ s a -> s{_lcToken = a})
 -- | Minimum score that can be posted to this leaderboard.
 lcScoreMin :: Lens' LeaderboardConfiguration (Maybe Int64)
 lcScoreMin
-  = lens _lcScoreMin (\ s a -> s{_lcScoreMin = a})
+  = lens _lcScoreMin (\ s a -> s{_lcScoreMin = a}) .
+      mapping _Coerce
 
 -- | The draft data of the leaderboard.
 lcDraft :: Lens' LeaderboardConfiguration (Maybe LeaderboardConfigurationDetail)
@@ -428,7 +430,7 @@ instance ToJSON LeaderboardConfiguration where
 -- /See:/ 'achievementConfiguration' smart constructor.
 data AchievementConfiguration = AchievementConfiguration
     { _acAchievementType :: !(Maybe Text)
-    , _acStepsToUnlock   :: !(Maybe Int32)
+    , _acStepsToUnlock   :: !(Maybe (JSONText Int32))
     , _acKind            :: !Text
     , _acPublished       :: !(Maybe AchievementConfigurationDetail)
     , _acToken           :: !(Maybe Text)
@@ -483,6 +485,7 @@ acStepsToUnlock :: Lens' AchievementConfiguration (Maybe Int32)
 acStepsToUnlock
   = lens _acStepsToUnlock
       (\ s a -> s{_acStepsToUnlock = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesConfiguration#achievementConfiguration.
@@ -606,7 +609,7 @@ data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration
     { _gnfcSuffix           :: !(Maybe GamesNumberAffixConfiguration)
     , _gnfcCurrencyCode     :: !(Maybe Text)
     , _gnfcNumberFormatType :: !(Maybe Text)
-    , _gnfcNumDecimalPlaces :: !(Maybe Int32)
+    , _gnfcNumDecimalPlaces :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesNumberFormatConfiguration' with the minimum fields required to make a request.
@@ -659,6 +662,7 @@ gnfcNumDecimalPlaces :: Lens' GamesNumberFormatConfiguration (Maybe Int32)
 gnfcNumDecimalPlaces
   = lens _gnfcNumDecimalPlaces
       (\ s a -> s{_gnfcNumDecimalPlaces = a})
+      . mapping _Coerce
 
 instance FromJSON GamesNumberFormatConfiguration
          where
@@ -685,7 +689,7 @@ instance ToJSON GamesNumberFormatConfiguration where
 data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
     { _lcdKind        :: !Text
     , _lcdScoreFormat :: !(Maybe GamesNumberFormatConfiguration)
-    , _lcdSortRank    :: !(Maybe Int32)
+    , _lcdSortRank    :: !(Maybe (JSONText Int32))
     , _lcdName        :: !(Maybe LocalizedStringBundle)
     , _lcdIconURL     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -728,7 +732,8 @@ lcdScoreFormat
 -- | The sort rank of this leaderboard. Writes to this field are ignored.
 lcdSortRank :: Lens' LeaderboardConfigurationDetail (Maybe Int32)
 lcdSortRank
-  = lens _lcdSortRank (\ s a -> s{_lcdSortRank = a})
+  = lens _lcdSortRank (\ s a -> s{_lcdSortRank = a}) .
+      mapping _Coerce
 
 -- | Localized strings for the leaderboard name.
 lcdName :: Lens' LeaderboardConfigurationDetail (Maybe LocalizedStringBundle)
@@ -767,9 +772,9 @@ instance ToJSON LeaderboardConfigurationDetail where
 -- /See:/ 'achievementConfigurationDetail' smart constructor.
 data AchievementConfigurationDetail = AchievementConfigurationDetail
     { _acdKind        :: !Text
-    , _acdSortRank    :: !(Maybe Int32)
+    , _acdSortRank    :: !(Maybe (JSONText Int32))
     , _acdName        :: !(Maybe LocalizedStringBundle)
-    , _acdPointValue  :: !(Maybe Int32)
+    , _acdPointValue  :: !(Maybe (JSONText Int32))
     , _acdIconURL     :: !(Maybe Text)
     , _acdDescription :: !(Maybe LocalizedStringBundle)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -809,7 +814,8 @@ acdKind = lens _acdKind (\ s a -> s{_acdKind = a})
 -- | The sort rank of this achievement. Writes to this field are ignored.
 acdSortRank :: Lens' AchievementConfigurationDetail (Maybe Int32)
 acdSortRank
-  = lens _acdSortRank (\ s a -> s{_acdSortRank = a})
+  = lens _acdSortRank (\ s a -> s{_acdSortRank = a}) .
+      mapping _Coerce
 
 -- | Localized strings for the achievement name.
 acdName :: Lens' AchievementConfigurationDetail (Maybe LocalizedStringBundle)
@@ -820,6 +826,7 @@ acdPointValue :: Lens' AchievementConfigurationDetail (Maybe Int32)
 acdPointValue
   = lens _acdPointValue
       (\ s a -> s{_acdPointValue = a})
+      . mapping _Coerce
 
 -- | The icon url of this achievement. Writes to this field are ignored.
 acdIconURL :: Lens' AchievementConfigurationDetail (Maybe Text)

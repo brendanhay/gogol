@@ -112,7 +112,7 @@ instance ToJSON Photo where
 data Event = Event
     { _ePrimaryEventType     :: !(Maybe EventPrimaryEventType)
     , _eUser                 :: !(Maybe User)
-    , _eEventTimeMillis      :: !(Maybe Word64)
+    , _eEventTimeMillis      :: !(Maybe (JSONText Word64))
     , _eRename               :: !(Maybe Rename)
     , _eFromUserDeletion     :: !(Maybe Bool)
     , _eAdditionalEventTypes :: !(Maybe [EventAdditionalEventTypesItem])
@@ -173,6 +173,7 @@ eEventTimeMillis :: Lens' Event (Maybe Word64)
 eEventTimeMillis
   = lens _eEventTimeMillis
       (\ s a -> s{_eEventTimeMillis = a})
+      . mapping _Coerce
 
 -- | Extra information for rename type events, such as the old and new names.
 eRename :: Lens' Event (Maybe Rename)

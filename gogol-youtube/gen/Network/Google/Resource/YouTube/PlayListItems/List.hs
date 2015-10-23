@@ -59,7 +59,7 @@ type PlayListItemsListResource =
                  QueryParam "id" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "playlistId" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] PlayListItemListResponse
 
@@ -75,7 +75,7 @@ data PlayListItemsList = PlayListItemsList
     , _plilId                     :: !(Maybe Text)
     , _plilPageToken              :: !(Maybe Text)
     , _plilPlayListId             :: !(Maybe Text)
-    , _plilMaxResults             :: !Word32
+    , _plilMaxResults             :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListItemsList' with the minimum fields required to make a request.
@@ -169,6 +169,7 @@ plilMaxResults :: Lens' PlayListItemsList Word32
 plilMaxResults
   = lens _plilMaxResults
       (\ s a -> s{_plilMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest PlayListItemsList where
         type Rs PlayListItemsList = PlayListItemListResponse

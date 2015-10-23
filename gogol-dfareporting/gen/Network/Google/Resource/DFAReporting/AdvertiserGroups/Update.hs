@@ -46,7 +46,7 @@ type AdvertiserGroupsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "advertiserGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] AdvertiserGroup :>
@@ -56,7 +56,7 @@ type AdvertiserGroupsUpdateResource =
 --
 -- /See:/ 'advertiserGroupsUpdate' smart constructor.
 data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate
-    { _aguProFileId :: !Int64
+    { _aguProFileId :: !(JSONText Int64)
     , _aguPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ advertiserGroupsUpdate pAguProFileId_ pAguPayload_ =
 aguProFileId :: Lens' AdvertiserGroupsUpdate Int64
 aguProFileId
   = lens _aguProFileId (\ s a -> s{_aguProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 aguPayload :: Lens' AdvertiserGroupsUpdate AdvertiserGroup

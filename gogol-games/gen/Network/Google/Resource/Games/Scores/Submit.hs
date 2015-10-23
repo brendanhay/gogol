@@ -50,7 +50,7 @@ type ScoresSubmitResource =
          "leaderboards" :>
            Capture "leaderboardId" Text :>
              "scores" :>
-               QueryParam "score" Int64 :>
+               QueryParam "score" (JSONText Int64) :>
                  QueryParam "scoreTag" Text :>
                    QueryParam "language" Text :>
                      QueryParam "alt" AltJSON :>
@@ -61,7 +61,7 @@ type ScoresSubmitResource =
 -- /See:/ 'scoresSubmit' smart constructor.
 data ScoresSubmit = ScoresSubmit
     { _ssScoreTag      :: !(Maybe Text)
-    , _ssScore         :: !Int64
+    , _ssScore         :: !(JSONText Int64)
     , _ssLeaderboardId :: !Text
     , _ssLanguage      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -103,7 +103,8 @@ ssScoreTag
 -- value. For time, the score represents elapsed time in milliseconds. For
 -- currency, the score represents a value in micro units.
 ssScore :: Lens' ScoresSubmit Int64
-ssScore = lens _ssScore (\ s a -> s{_ssScore = a})
+ssScore
+  = lens _ssScore (\ s a -> s{_ssScore = a}) . _Coerce
 
 -- | The ID of the leaderboard.
 ssLeaderboardId :: Lens' ScoresSubmit Text

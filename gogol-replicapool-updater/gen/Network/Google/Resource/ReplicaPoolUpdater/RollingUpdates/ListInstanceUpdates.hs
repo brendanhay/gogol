@@ -58,7 +58,7 @@ type RollingUpdatesListInstanceUpdatesResource =
                      "instanceUpdates" :>
                        QueryParam "filter" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" Word32 :>
+                           QueryParam "maxResults" (JSONText Word32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceUpdateList
 
@@ -71,7 +71,7 @@ data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates
     , _ruliuZone          :: !Text
     , _ruliuFilter        :: !(Maybe Text)
     , _ruliuPageToken     :: !(Maybe Text)
-    , _ruliuMaxResults    :: !Word32
+    , _ruliuMaxResults    :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesListInstanceUpdates' with the minimum fields required to make a request.
@@ -138,6 +138,7 @@ ruliuMaxResults :: Lens' RollingUpdatesListInstanceUpdates Word32
 ruliuMaxResults
   = lens _ruliuMaxResults
       (\ s a -> s{_ruliuMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest
          RollingUpdatesListInstanceUpdates where

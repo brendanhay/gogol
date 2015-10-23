@@ -46,7 +46,7 @@ type CampaignsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Campaign :> Put '[JSON] Campaign
@@ -55,7 +55,7 @@ type CampaignsUpdateResource =
 --
 -- /See:/ 'campaignsUpdate' smart constructor.
 data CampaignsUpdate = CampaignsUpdate
-    { _cuProFileId :: !Int64
+    { _cuProFileId :: !(JSONText Int64)
     , _cuPayload   :: !Campaign
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ campaignsUpdate pCuProFileId_ pCuPayload_ =
 -- | User profile ID associated with this request.
 cuProFileId :: Lens' CampaignsUpdate Int64
 cuProFileId
-  = lens _cuProFileId (\ s a -> s{_cuProFileId = a})
+  = lens _cuProFileId (\ s a -> s{_cuProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 cuPayload :: Lens' CampaignsUpdate Campaign

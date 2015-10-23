@@ -46,7 +46,7 @@ type AdsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "ads" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Ad :> Post '[JSON] Ad
@@ -55,7 +55,7 @@ type AdsInsertResource =
 --
 -- /See:/ 'adsInsert' smart constructor.
 data AdsInsert = AdsInsert
-    { _aiProFileId :: !Int64
+    { _aiProFileId :: !(JSONText Int64)
     , _aiPayload   :: !Ad
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ adsInsert pAiProFileId_ pAiPayload_ =
 -- | User profile ID associated with this request.
 aiProFileId :: Lens' AdsInsert Int64
 aiProFileId
-  = lens _aiProFileId (\ s a -> s{_aiProFileId = a})
+  = lens _aiProFileId (\ s a -> s{_aiProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 aiPayload :: Lens' AdsInsert Ad

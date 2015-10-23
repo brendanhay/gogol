@@ -50,8 +50,8 @@ type AchievementsIncrementResource =
          "achievements" :>
            Capture "achievementId" Text :>
              "increment" :>
-               QueryParam "stepsToIncrement" Int32 :>
-                 QueryParam "requestId" Int64 :>
+               QueryParam "stepsToIncrement" (JSONText Int32) :>
+                 QueryParam "requestId" (JSONText Int64) :>
                    QueryParam "alt" AltJSON :>
                      Post '[JSON] AchievementIncrementResponse
 
@@ -60,9 +60,9 @@ type AchievementsIncrementResource =
 --
 -- /See:/ 'achievementsIncrement' smart constructor.
 data AchievementsIncrement = AchievementsIncrement
-    { _aiRequestId        :: !(Maybe Int64)
+    { _aiRequestId        :: !(Maybe (JSONText Int64))
     , _aiAchievementId    :: !Text
-    , _aiStepsToIncrement :: !Int32
+    , _aiStepsToIncrement :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsIncrement' with the minimum fields required to make a request.
@@ -90,7 +90,8 @@ achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
 -- handled correctly across retries.
 aiRequestId :: Lens' AchievementsIncrement (Maybe Int64)
 aiRequestId
-  = lens _aiRequestId (\ s a -> s{_aiRequestId = a})
+  = lens _aiRequestId (\ s a -> s{_aiRequestId = a}) .
+      mapping _Coerce
 
 -- | The ID of the achievement used by this method.
 aiAchievementId :: Lens' AchievementsIncrement Text
@@ -103,6 +104,7 @@ aiStepsToIncrement :: Lens' AchievementsIncrement Int32
 aiStepsToIncrement
   = lens _aiStepsToIncrement
       (\ s a -> s{_aiStepsToIncrement = a})
+      . _Coerce
 
 instance GoogleRequest AchievementsIncrement where
         type Rs AchievementsIncrement =

@@ -50,7 +50,7 @@ type EventsListByPlayerResource =
          "events" :>
            QueryParam "language" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
+               QueryParam "maxResults" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] PlayerEventListResponse
 
@@ -61,7 +61,7 @@ type EventsListByPlayerResource =
 data EventsListByPlayer = EventsListByPlayer
     { _elbpLanguage   :: !(Maybe Text)
     , _elbpPageToken  :: !(Maybe Text)
-    , _elbpMaxResults :: !(Maybe Int32)
+    , _elbpMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListByPlayer' with the minimum fields required to make a request.
@@ -100,6 +100,7 @@ elbpMaxResults :: Lens' EventsListByPlayer (Maybe Int32)
 elbpMaxResults
   = lens _elbpMaxResults
       (\ s a -> s{_elbpMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest EventsListByPlayer where
         type Rs EventsListByPlayer = PlayerEventListResponse

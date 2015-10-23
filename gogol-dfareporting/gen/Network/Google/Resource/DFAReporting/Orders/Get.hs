@@ -47,20 +47,20 @@ type OrdersGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "projects" :>
-               Capture "projectId" Int64 :>
+               Capture "projectId" (JSONText Int64) :>
                  "orders" :>
-                   Capture "id" Int64 :>
+                   Capture "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Gets one order by ID.
 --
 -- /See:/ 'ordersGet' smart constructor.
 data OrdersGet = OrdersGet
-    { _ogProFileId :: !Int64
-    , _ogId        :: !Int64
-    , _ogProjectId :: !Int64
+    { _ogProFileId :: !(JSONText Int64)
+    , _ogId        :: !(JSONText Int64)
+    , _ogProjectId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGet' with the minimum fields required to make a request.
@@ -87,16 +87,18 @@ ordersGet pOgProFileId_ pOgId_ pOgProjectId_ =
 -- | User profile ID associated with this request.
 ogProFileId :: Lens' OrdersGet Int64
 ogProFileId
-  = lens _ogProFileId (\ s a -> s{_ogProFileId = a})
+  = lens _ogProFileId (\ s a -> s{_ogProFileId = a}) .
+      _Coerce
 
 -- | Order ID.
 ogId :: Lens' OrdersGet Int64
-ogId = lens _ogId (\ s a -> s{_ogId = a})
+ogId = lens _ogId (\ s a -> s{_ogId = a}) . _Coerce
 
 -- | Project ID for orders.
 ogProjectId :: Lens' OrdersGet Int64
 ogProjectId
-  = lens _ogProjectId (\ s a -> s{_ogProjectId = a})
+  = lens _ogProjectId (\ s a -> s{_ogProjectId = a}) .
+      _Coerce
 
 instance GoogleRequest OrdersGet where
         type Rs OrdersGet = Order

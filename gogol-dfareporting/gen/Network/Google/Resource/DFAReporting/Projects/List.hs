@@ -52,15 +52,15 @@ type ProjectsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "projects" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
+                 QueryParams "ids" (JSONText Int64) :>
                    QueryParam "sortOrder" ProjectsListSortOrder :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" ProjectsListSortField :>
-                         QueryParams "advertiserIds" Int64 :>
-                           QueryParam "maxResults" Int32 :>
+                         QueryParams "advertiserIds" (JSONText Int64) :>
+                           QueryParam "maxResults" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ProjectsListResponse
 
@@ -69,13 +69,13 @@ type ProjectsListResource =
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList = ProjectsList
     { _plSearchString  :: !(Maybe Text)
-    , _plIds           :: !(Maybe [Int64])
-    , _plProFileId     :: !Int64
+    , _plIds           :: !(Maybe [JSONText Int64])
+    , _plProFileId     :: !(JSONText Int64)
     , _plSortOrder     :: !(Maybe ProjectsListSortOrder)
     , _plPageToken     :: !(Maybe Text)
     , _plSortField     :: !(Maybe ProjectsListSortField)
-    , _plAdvertiserIds :: !(Maybe [Int64])
-    , _plMaxResults    :: !(Maybe Int32)
+    , _plAdvertiserIds :: !(Maybe [JSONText Int64])
+    , _plMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
@@ -133,7 +133,8 @@ plIds
 -- | User profile ID associated with this request.
 plProFileId :: Lens' ProjectsList Int64
 plProFileId
-  = lens _plProFileId (\ s a -> s{_plProFileId = a})
+  = lens _plProFileId (\ s a -> s{_plProFileId = a}) .
+      _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 plSortOrder :: Lens' ProjectsList (Maybe ProjectsListSortOrder)
@@ -162,6 +163,7 @@ plAdvertiserIds
 plMaxResults :: Lens' ProjectsList (Maybe Int32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse

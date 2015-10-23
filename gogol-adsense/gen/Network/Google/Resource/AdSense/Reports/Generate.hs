@@ -67,9 +67,9 @@ type ReportsGenerateResource =
                        QueryParam "currency" Text :>
                          QueryParams "sort" Text :>
                            QueryParams "filter" Text :>
-                             QueryParam "startIndex" Int32 :>
+                             QueryParam "startIndex" (JSONText Int32) :>
                                QueryParam "useTimezoneReporting" Bool :>
-                                 QueryParam "maxResults" Int32 :>
+                                 QueryParam "maxResults" (JSONText Int32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] AdsenseReportsGenerateResponse
        :<|>
@@ -85,9 +85,9 @@ type ReportsGenerateResource =
                          QueryParam "currency" Text :>
                            QueryParams "sort" Text :>
                              QueryParams "filter" Text :>
-                               QueryParam "startIndex" Int32 :>
+                               QueryParam "startIndex" (JSONText Int32) :>
                                  QueryParam "useTimezoneReporting" Bool :>
-                                   QueryParam "maxResults" Int32 :>
+                                   QueryParam "maxResults" (JSONText Int32) :>
                                      QueryParam "alt" AltMedia :>
                                        Get '[OctetStream] Stream
 
@@ -106,9 +106,9 @@ data ReportsGenerate = ReportsGenerate
     , _rgCurrency             :: !(Maybe Text)
     , _rgSort                 :: !(Maybe [Text])
     , _rgFilter               :: !(Maybe [Text])
-    , _rgStartIndex           :: !(Maybe Int32)
+    , _rgStartIndex           :: !(Maybe (JSONText Int32))
     , _rgUseTimezoneReporting :: !(Maybe Bool)
-    , _rgMaxResults           :: !(Maybe Int32)
+    , _rgMaxResults           :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.
@@ -220,6 +220,7 @@ rgFilter
 rgStartIndex :: Lens' ReportsGenerate (Maybe Int32)
 rgStartIndex
   = lens _rgStartIndex (\ s a -> s{_rgStartIndex = a})
+      . mapping _Coerce
 
 -- | Whether the report should be generated in the AdSense account\'s local
 -- timezone. If false default PST\/PDT timezone will be used.
@@ -232,6 +233,7 @@ rgUseTimezoneReporting
 rgMaxResults :: Lens' ReportsGenerate (Maybe Int32)
 rgMaxResults
   = lens _rgMaxResults (\ s a -> s{_rgMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate =

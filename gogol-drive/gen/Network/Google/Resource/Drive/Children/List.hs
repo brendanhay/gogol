@@ -54,7 +54,7 @@ type ChildrenListResource =
                QueryParam "orderBy" Text :>
                  QueryParam "q" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ChildList
 
 -- | Lists a folder\'s children.
@@ -65,7 +65,7 @@ data ChildrenList = ChildrenList
     , _cFolderId   :: !Text
     , _cQ          :: !(Maybe Text)
     , _cPageToken  :: !(Maybe Text)
-    , _cMaxResults :: !Int32
+    , _cMaxResults :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenList' with the minimum fields required to make a request.
@@ -121,7 +121,8 @@ cPageToken
 -- | Maximum number of children to return.
 cMaxResults :: Lens' ChildrenList Int32
 cMaxResults
-  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
+  = lens _cMaxResults (\ s a -> s{_cMaxResults = a}) .
+      _Coerce
 
 instance GoogleRequest ChildrenList where
         type Rs ChildrenList = ChildList

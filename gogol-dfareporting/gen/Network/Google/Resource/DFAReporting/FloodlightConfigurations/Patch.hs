@@ -48,9 +48,9 @@ type FloodlightConfigurationsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightConfigurations" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] FloodlightConfiguration :>
                      Patch '[JSON] FloodlightConfiguration
@@ -60,9 +60,9 @@ type FloodlightConfigurationsPatchResource =
 --
 -- /See:/ 'floodlightConfigurationsPatch' smart constructor.
 data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch
-    { _fcpProFileId :: !Int64
+    { _fcpProFileId :: !(JSONText Int64)
     , _fcpPayload   :: !FloodlightConfiguration
-    , _fcpId        :: !Int64
+    , _fcpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsPatch' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ floodlightConfigurationsPatch pFcpProFileId_ pFcpPayload_ pFcpId_ =
 fcpProFileId :: Lens' FloodlightConfigurationsPatch Int64
 fcpProFileId
   = lens _fcpProFileId (\ s a -> s{_fcpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 fcpPayload :: Lens' FloodlightConfigurationsPatch FloodlightConfiguration
@@ -98,7 +99,8 @@ fcpPayload
 
 -- | Floodlight configuration ID.
 fcpId :: Lens' FloodlightConfigurationsPatch Int64
-fcpId = lens _fcpId (\ s a -> s{_fcpId = a})
+fcpId
+  = lens _fcpId (\ s a -> s{_fcpId = a}) . _Coerce
 
 instance GoogleRequest FloodlightConfigurationsPatch
          where

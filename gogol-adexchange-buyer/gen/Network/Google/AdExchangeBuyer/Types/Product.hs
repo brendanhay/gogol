@@ -23,9 +23,9 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'brandDTO' smart constructor.
 data BrandDTO = BrandDTO
-    { _bdtoAdvertiserId :: !(Maybe Int64)
+    { _bdtoAdvertiserId :: !(Maybe (JSONText Int64))
     , _bdtoName         :: !(Maybe Text)
-    , _bdtoId           :: !(Maybe Int64)
+    , _bdtoId           :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BrandDTO' with the minimum fields required to make a request.
@@ -50,12 +50,15 @@ bdtoAdvertiserId :: Lens' BrandDTO (Maybe Int64)
 bdtoAdvertiserId
   = lens _bdtoAdvertiserId
       (\ s a -> s{_bdtoAdvertiserId = a})
+      . mapping _Coerce
 
 bdtoName :: Lens' BrandDTO (Maybe Text)
 bdtoName = lens _bdtoName (\ s a -> s{_bdtoName = a})
 
 bdtoId :: Lens' BrandDTO (Maybe Int64)
-bdtoId = lens _bdtoId (\ s a -> s{_bdtoId = a})
+bdtoId
+  = lens _bdtoId (\ s a -> s{_bdtoId = a}) .
+      mapping _Coerce
 
 instance FromJSON BrandDTO where
         parseJSON
@@ -79,12 +82,12 @@ instance ToJSON BrandDTO where
 data MarketplaceNote = MarketplaceNote
     { _mnNote                :: !(Maybe Text)
     , _mnKind                :: !Text
-    , _mnTimestampMs         :: !(Maybe Int64)
+    , _mnTimestampMs         :: !(Maybe (JSONText Int64))
     , _mnDealId              :: !(Maybe Text)
     , _mnNoteId              :: !(Maybe Text)
     , _mnCreatorRole         :: !(Maybe Text)
     , _mnOrderId             :: !(Maybe Text)
-    , _mnOrderRevisionNumber :: !(Maybe Int64)
+    , _mnOrderRevisionNumber :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNote' with the minimum fields required to make a request.
@@ -134,6 +137,7 @@ mnTimestampMs :: Lens' MarketplaceNote (Maybe Int64)
 mnTimestampMs
   = lens _mnTimestampMs
       (\ s a -> s{_mnTimestampMs = a})
+      . mapping _Coerce
 
 -- | Notes can optionally be associated with a deal. (readonly, except on
 -- create)
@@ -161,6 +165,7 @@ mnOrderRevisionNumber :: Lens' MarketplaceNote (Maybe Int64)
 mnOrderRevisionNumber
   = lens _mnOrderRevisionNumber
       (\ s a -> s{_mnOrderRevisionNumber = a})
+      . mapping _Coerce
 
 instance FromJSON MarketplaceNote where
         parseJSON
@@ -203,7 +208,7 @@ data CreativeNATiveAd = CreativeNATiveAd
     , _cnataStore                 :: !(Maybe Text)
     , _cnataPrice                 :: !(Maybe Text)
     , _cnataAdvertiser            :: !(Maybe Text)
-    , _cnataStarRating            :: !(Maybe Double)
+    , _cnataStarRating            :: !(Maybe (JSONText Double))
     , _cnataLogo                  :: !(Maybe CreativeNATiveAdLogo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -313,6 +318,7 @@ cnataStarRating :: Lens' CreativeNATiveAd (Maybe Double)
 cnataStarRating
   = lens _cnataStarRating
       (\ s a -> s{_cnataStarRating = a})
+      . mapping _Coerce
 
 -- | A smaller image, for the advertiser logo.
 cnataLogo :: Lens' CreativeNATiveAd (Maybe CreativeNATiveAdLogo)
@@ -458,7 +464,7 @@ data CreativeServingRestrictionsItemContextsItem = CreativeServingRestrictionsIt
     { _csriciPlatform      :: !(Maybe [Text])
     , _csriciContextType   :: !(Maybe Text)
     , _csriciAuctionType   :: !(Maybe [Text])
-    , _csriciGeoCriteriaId :: !(Maybe [Int32])
+    , _csriciGeoCriteriaId :: !(Maybe [JSONText Int32])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeServingRestrictionsItemContextsItem' with the minimum fields required to make a request.
@@ -549,11 +555,11 @@ data TermsDTO = TermsDTO
     , _tdtoCpm                        :: !(Maybe MoneyDTO)
     , _tdtoEstimatedSpend             :: !(Maybe MoneyDTO)
     , _tdtoAdvertisers                :: !(Maybe [AdvertiserDTO])
-    , _tdtoEstimatedImpressionsPerDay :: !(Maybe Int64)
+    , _tdtoEstimatedImpressionsPerDay :: !(Maybe (JSONText Int64))
     , _tdtoMonetizerType              :: !(Maybe Text)
     , _tdtoAudienceSegmentDescription :: !(Maybe Text)
     , _tdtoCreativeReviewPolicy       :: !(Maybe Text)
-    , _tdtoMinimumTrueLooks           :: !(Maybe Int64)
+    , _tdtoMinimumTrueLooks           :: !(Maybe (JSONText Int64))
     , _tdtoStartDate                  :: !(Maybe DateTime)
     , _tdtoCreativeBlockingLevel      :: !(Maybe Text)
     , _tdtoSemiTransparent            :: !(Maybe Bool)
@@ -564,7 +570,7 @@ data TermsDTO = TermsDTO
     , _tdtoTermsAttributes            :: !(Maybe [Text])
     , _tdtoInventorySegmentTargeting  :: !(Maybe InventorySegmentTargeting)
     , _tdtoDescriptiveName            :: !(Maybe Text)
-    , _tdtoMinimumSpendMicros         :: !(Maybe Int64)
+    , _tdtoMinimumSpendMicros         :: !(Maybe (JSONText Int64))
     , _tdtoTargetByDealId             :: !(Maybe Bool)
     , _tdtoBillingTerms               :: !(Maybe Text)
     , _tdtoDescription                :: !(Maybe Text)
@@ -713,6 +719,7 @@ tdtoEstimatedImpressionsPerDay :: Lens' TermsDTO (Maybe Int64)
 tdtoEstimatedImpressionsPerDay
   = lens _tdtoEstimatedImpressionsPerDay
       (\ s a -> s{_tdtoEstimatedImpressionsPerDay = a})
+      . mapping _Coerce
 
 -- | The monetizer type.
 tdtoMonetizerType :: Lens' TermsDTO (Maybe Text)
@@ -737,6 +744,7 @@ tdtoMinimumTrueLooks :: Lens' TermsDTO (Maybe Int64)
 tdtoMinimumTrueLooks
   = lens _tdtoMinimumTrueLooks
       (\ s a -> s{_tdtoMinimumTrueLooks = a})
+      . mapping _Coerce
 
 -- | The start date for the offer.
 tdtoStartDate :: Lens' TermsDTO (Maybe DateTime)
@@ -806,6 +814,7 @@ tdtoMinimumSpendMicros :: Lens' TermsDTO (Maybe Int64)
 tdtoMinimumSpendMicros
   = lens _tdtoMinimumSpendMicros
       (\ s a -> s{_tdtoMinimumSpendMicros = a})
+      . mapping _Coerce
 
 -- | Whether to target by deal id.
 tdtoTargetByDealId :: Lens' TermsDTO (Maybe Bool)
@@ -937,7 +946,7 @@ instance ToJSON CreateOrdersResponse where
 -- /See:/ 'accountBidderLocationItem' smart constructor.
 data AccountBidderLocationItem = AccountBidderLocationItem
     { _abliURL        :: !(Maybe Text)
-    , _abliMaximumQps :: !(Maybe Int32)
+    , _abliMaximumQps :: !(Maybe (JSONText Int32))
     , _abliRegion     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -968,6 +977,7 @@ abliMaximumQps :: Lens' AccountBidderLocationItem (Maybe Int32)
 abliMaximumQps
   = lens _abliMaximumQps
       (\ s a -> s{_abliMaximumQps = a})
+      . mapping _Coerce
 
 -- | The geographical region the Ad Exchange should send requests from. Only
 -- used by some quota systems, but always setting the value is recommended.
@@ -995,7 +1005,7 @@ instance ToJSON AccountBidderLocationItem where
 --
 -- /See:/ 'privateData' smart constructor.
 data PrivateData = PrivateData
-    { _pdReferencePayload :: !(Maybe Word8)
+    { _pdReferencePayload :: !(Maybe (JSONText Word8))
     , _pdReferenceId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1018,6 +1028,7 @@ pdReferencePayload :: Lens' PrivateData (Maybe Word8)
 pdReferencePayload
   = lens _pdReferencePayload
       (\ s a -> s{_pdReferencePayload = a})
+      . mapping _Coerce
 
 pdReferenceId :: Lens' PrivateData (Maybe Text)
 pdReferenceId
@@ -1044,10 +1055,10 @@ instance ToJSON PrivateData where
 data Budget = Budget
     { _bCurrencyCode :: !(Maybe Text)
     , _bKind         :: !Text
-    , _bBudgetAmount :: !(Maybe Int64)
-    , _bAccountId    :: !(Maybe Int64)
+    , _bBudgetAmount :: !(Maybe (JSONText Int64))
+    , _bAccountId    :: !(Maybe (JSONText Int64))
     , _bId           :: !(Maybe Text)
-    , _bBillingId    :: !(Maybe Int64)
+    , _bBillingId    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Budget' with the minimum fields required to make a request.
@@ -1093,11 +1104,13 @@ bBudgetAmount :: Lens' Budget (Maybe Int64)
 bBudgetAmount
   = lens _bBudgetAmount
       (\ s a -> s{_bBudgetAmount = a})
+      . mapping _Coerce
 
 -- | The id of the account. This is required for get and update requests.
 bAccountId :: Lens' Budget (Maybe Int64)
 bAccountId
-  = lens _bAccountId (\ s a -> s{_bAccountId = a})
+  = lens _bAccountId (\ s a -> s{_bAccountId = a}) .
+      mapping _Coerce
 
 -- | The unique id that describes this item.
 bId :: Lens' Budget (Maybe Text)
@@ -1107,7 +1120,8 @@ bId = lens _bId (\ s a -> s{_bId = a})
 -- for. This is required for get and update requests.
 bBillingId :: Lens' Budget (Maybe Int64)
 bBillingId
-  = lens _bBillingId (\ s a -> s{_bBillingId = a})
+  = lens _bBillingId (\ s a -> s{_bBillingId = a}) .
+      mapping _Coerce
 
 instance FromJSON Budget where
         parseJSON
@@ -1210,8 +1224,8 @@ instance ToJSON
 --
 -- /See:/ 'deliveryControlFrequencyCap' smart constructor.
 data DeliveryControlFrequencyCap = DeliveryControlFrequencyCap
-    { _dcfcMaxImpressions :: !(Maybe Int32)
-    , _dcfcNumTimeUnits   :: !(Maybe Int32)
+    { _dcfcMaxImpressions :: !(Maybe (JSONText Int32))
+    , _dcfcNumTimeUnits   :: !(Maybe (JSONText Int32))
     , _dcfcTimeUnitType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1237,11 +1251,13 @@ dcfcMaxImpressions :: Lens' DeliveryControlFrequencyCap (Maybe Int32)
 dcfcMaxImpressions
   = lens _dcfcMaxImpressions
       (\ s a -> s{_dcfcMaxImpressions = a})
+      . mapping _Coerce
 
 dcfcNumTimeUnits :: Lens' DeliveryControlFrequencyCap (Maybe Int32)
 dcfcNumTimeUnits
   = lens _dcfcNumTimeUnits
       (\ s a -> s{_dcfcNumTimeUnits = a})
+      . mapping _Coerce
 
 dcfcTimeUnitType :: Lens' DeliveryControlFrequencyCap (Maybe Text)
 dcfcTimeUnitType
@@ -1268,7 +1284,7 @@ instance ToJSON DeliveryControlFrequencyCap where
 -- /See:/ 'dealPartyDTO' smart constructor.
 data DealPartyDTO = DealPartyDTO
     { _dpdtoBuyerSellerRole :: !(Maybe Text)
-    , _dpdtoCustomerId      :: !(Maybe Int32)
+    , _dpdtoCustomerId      :: !(Maybe (JSONText Int32))
     , _dpdtoName            :: !(Maybe Text)
     , _dpdtoWebProperty     :: !(Maybe WebPropertyDTO)
     , _dpdtoBuyer           :: !(Maybe BuyerDTO)
@@ -1307,6 +1323,7 @@ dpdtoCustomerId :: Lens' DealPartyDTO (Maybe Int32)
 dpdtoCustomerId
   = lens _dpdtoCustomerId
       (\ s a -> s{_dpdtoCustomerId = a})
+      . mapping _Coerce
 
 dpdtoName :: Lens' DealPartyDTO (Maybe Text)
 dpdtoName
@@ -1706,8 +1723,8 @@ instance ToJSON CreateOrdersRequest where
 --
 -- /See:/ 'adSize' smart constructor.
 data AdSize = AdSize
-    { _asHeight :: !(Maybe Int32)
-    , _asWidth  :: !(Maybe Int32)
+    { _asHeight :: !(Maybe (JSONText Int32))
+    , _asWidth  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdSize' with the minimum fields required to make a request.
@@ -1726,10 +1743,14 @@ adSize =
     }
 
 asHeight :: Lens' AdSize (Maybe Int32)
-asHeight = lens _asHeight (\ s a -> s{_asHeight = a})
+asHeight
+  = lens _asHeight (\ s a -> s{_asHeight = a}) .
+      mapping _Coerce
 
 asWidth :: Lens' AdSize (Maybe Int32)
-asWidth = lens _asWidth (\ s a -> s{_asWidth = a})
+asWidth
+  = lens _asWidth (\ s a -> s{_asWidth = a}) .
+      mapping _Coerce
 
 instance FromJSON AdSize where
         parseJSON
@@ -1796,7 +1817,7 @@ instance ToJSON CreativeCorrectionsItem where
 -- /See:/ 'addOrderDealsResponse' smart constructor.
 data AddOrderDealsResponse = AddOrderDealsResponse
     { _aodrDeals               :: !(Maybe [MarketplaceDeal])
-    , _aodrOrderRevisionNumber :: !(Maybe Int64)
+    , _aodrOrderRevisionNumber :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddOrderDealsResponse' with the minimum fields required to make a request.
@@ -1826,6 +1847,7 @@ aodrOrderRevisionNumber :: Lens' AddOrderDealsResponse (Maybe Int64)
 aodrOrderRevisionNumber
   = lens _aodrOrderRevisionNumber
       (\ s a -> s{_aodrOrderRevisionNumber = a})
+      . mapping _Coerce
 
 instance FromJSON AddOrderDealsResponse where
         parseJSON
@@ -1949,27 +1971,27 @@ instance ToJSON PricePerBuyer where
 --
 -- /See:/ 'creative' smart constructor.
 data Creative = Creative
-    { _cAttribute             :: !(Maybe [Int32])
+    { _cAttribute             :: !(Maybe [JSONText Int32])
     , _cNATiveAd              :: !(Maybe CreativeNATiveAd)
-    , _cHeight                :: !(Maybe Int32)
+    , _cHeight                :: !(Maybe (JSONText Int32))
     , _cBuyerCreativeId       :: !(Maybe Text)
     , _cAdvertiserName        :: !(Maybe Text)
-    , _cAgencyId              :: !(Maybe Int64)
+    , _cAgencyId              :: !(Maybe (JSONText Int64))
     , _cCorrections           :: !(Maybe [CreativeCorrectionsItem])
-    , _cProductCategories     :: !(Maybe [Int32])
+    , _cProductCategories     :: !(Maybe [JSONText Int32])
     , _cKind                  :: !Text
     , _cHTMLSnippet           :: !(Maybe Text)
-    , _cAdvertiserId          :: !(Maybe [Int64])
-    , _cRestrictedCategories  :: !(Maybe [Int32])
+    , _cAdvertiserId          :: !(Maybe [JSONText Int64])
+    , _cRestrictedCategories  :: !(Maybe [JSONText Int32])
     , _cDealsStatus           :: !(Maybe Text)
-    , _cWidth                 :: !(Maybe Int32)
+    , _cWidth                 :: !(Maybe (JSONText Int32))
     , _cClickThroughURL       :: !(Maybe [Text])
-    , _cVendorType            :: !(Maybe [Int32])
-    , _cAccountId             :: !(Maybe Int32)
+    , _cVendorType            :: !(Maybe [JSONText Int32])
+    , _cAccountId             :: !(Maybe (JSONText Int32))
     , _cImpressionTrackingURL :: !(Maybe [Text])
     , _cFilteringReasons      :: !(Maybe CreativeFilteringReasons)
-    , _cVersion               :: !(Maybe Int32)
-    , _cSensitiveCategories   :: !(Maybe [Int32])
+    , _cVersion               :: !(Maybe (JSONText Int32))
+    , _cSensitiveCategories   :: !(Maybe [JSONText Int32])
     , _cVideoURL              :: !(Maybe Text)
     , _cAPIUploadTimestamp    :: !(Maybe DateTime')
     , _cServingRestrictions   :: !(Maybe [CreativeServingRestrictionsItem])
@@ -2074,7 +2096,9 @@ cNATiveAd
 
 -- | Ad height.
 cHeight :: Lens' Creative (Maybe Int32)
-cHeight = lens _cHeight (\ s a -> s{_cHeight = a})
+cHeight
+  = lens _cHeight (\ s a -> s{_cHeight = a}) .
+      mapping _Coerce
 
 -- | A buyer-specific id identifying the creative in this ad.
 cBuyerCreativeId :: Lens' Creative (Maybe Text)
@@ -2091,7 +2115,8 @@ cAdvertiserName
 -- | The agency id for this creative.
 cAgencyId :: Lens' Creative (Maybe Int64)
 cAgencyId
-  = lens _cAgencyId (\ s a -> s{_cAgencyId = a})
+  = lens _cAgencyId (\ s a -> s{_cAgencyId = a}) .
+      mapping _Coerce
 
 -- | Shows any corrections that were applied to this creative. Read-only.
 -- This field should not be set in requests.
@@ -2149,7 +2174,9 @@ cDealsStatus
 
 -- | Ad width.
 cWidth :: Lens' Creative (Maybe Int32)
-cWidth = lens _cWidth (\ s a -> s{_cWidth = a})
+cWidth
+  = lens _cWidth (\ s a -> s{_cWidth = a}) .
+      mapping _Coerce
 
 -- | The set of destination urls for the snippet.
 cClickThroughURL :: Lens' Creative [Text]
@@ -2169,7 +2196,8 @@ cVendorType
 -- | Account id.
 cAccountId :: Lens' Creative (Maybe Int32)
 cAccountId
-  = lens _cAccountId (\ s a -> s{_cAccountId = a})
+  = lens _cAccountId (\ s a -> s{_cAccountId = a}) .
+      mapping _Coerce
 
 -- | The set of urls to be called to record an impression.
 cImpressionTrackingURL :: Lens' Creative [Text]
@@ -2189,7 +2217,9 @@ cFilteringReasons
 -- | The version for this creative. Read-only. This field should not be set
 -- in requests.
 cVersion :: Lens' Creative (Maybe Int32)
-cVersion = lens _cVersion (\ s a -> s{_cVersion = a})
+cVersion
+  = lens _cVersion (\ s a -> s{_cVersion = a}) .
+      mapping _Coerce
 
 -- | Detected sensitive categories, if any. Read-only. This field should not
 -- be set in requests.
@@ -2300,11 +2330,11 @@ instance ToJSON Creative where
 --
 -- /See:/ 'targetingValueDayPartTargetingDayPart' smart constructor.
 data TargetingValueDayPartTargetingDayPart = TargetingValueDayPartTargetingDayPart
-    { _tvdptdpEndHour     :: !(Maybe Int32)
-    , _tvdptdpStartHour   :: !(Maybe Int32)
-    , _tvdptdpStartMinute :: !(Maybe Int32)
+    { _tvdptdpEndHour     :: !(Maybe (JSONText Int32))
+    , _tvdptdpStartHour   :: !(Maybe (JSONText Int32))
+    , _tvdptdpStartMinute :: !(Maybe (JSONText Int32))
     , _tvdptdpDayOfWeek   :: !(Maybe Text)
-    , _tvdptdpEndMinute   :: !(Maybe Int32)
+    , _tvdptdpEndMinute   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValueDayPartTargetingDayPart' with the minimum fields required to make a request.
@@ -2335,16 +2365,19 @@ tvdptdpEndHour :: Lens' TargetingValueDayPartTargetingDayPart (Maybe Int32)
 tvdptdpEndHour
   = lens _tvdptdpEndHour
       (\ s a -> s{_tvdptdpEndHour = a})
+      . mapping _Coerce
 
 tvdptdpStartHour :: Lens' TargetingValueDayPartTargetingDayPart (Maybe Int32)
 tvdptdpStartHour
   = lens _tvdptdpStartHour
       (\ s a -> s{_tvdptdpStartHour = a})
+      . mapping _Coerce
 
 tvdptdpStartMinute :: Lens' TargetingValueDayPartTargetingDayPart (Maybe Int32)
 tvdptdpStartMinute
   = lens _tvdptdpStartMinute
       (\ s a -> s{_tvdptdpStartMinute = a})
+      . mapping _Coerce
 
 tvdptdpDayOfWeek :: Lens' TargetingValueDayPartTargetingDayPart (Maybe Text)
 tvdptdpDayOfWeek
@@ -2355,6 +2388,7 @@ tvdptdpEndMinute :: Lens' TargetingValueDayPartTargetingDayPart (Maybe Int32)
 tvdptdpEndMinute
   = lens _tvdptdpEndMinute
       (\ s a -> s{_tvdptdpEndMinute = a})
+      . mapping _Coerce
 
 instance FromJSON
          TargetingValueDayPartTargetingDayPart where
@@ -2430,13 +2464,13 @@ instance ToJSON PretargetingConfigList where
 --
 -- /See:/ 'buyerDTO' smart constructor.
 data BuyerDTO = BuyerDTO
-    { _buySponsorAccountId                 :: !(Maybe Int32)
+    { _buySponsorAccountId                 :: !(Maybe (JSONText Int32))
     , _buyEnabledForInterestTargetingDeals :: !(Maybe Bool)
-    , _buyCustomerId                       :: !(Maybe Int32)
+    , _buyCustomerId                       :: !(Maybe (JSONText Int32))
     , _buyEnabledForPreferredDeals         :: !(Maybe Bool)
-    , _buyAccountId                        :: !(Maybe Int32)
+    , _buyAccountId                        :: !(Maybe (JSONText Int32))
     , _buyDisplayName                      :: !(Maybe Text)
-    , _buyId                               :: !(Maybe Int32)
+    , _buyId                               :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BuyerDTO' with the minimum fields required to make a request.
@@ -2473,6 +2507,7 @@ buySponsorAccountId :: Lens' BuyerDTO (Maybe Int32)
 buySponsorAccountId
   = lens _buySponsorAccountId
       (\ s a -> s{_buySponsorAccountId = a})
+      . mapping _Coerce
 
 buyEnabledForInterestTargetingDeals :: Lens' BuyerDTO (Maybe Bool)
 buyEnabledForInterestTargetingDeals
@@ -2484,6 +2519,7 @@ buyCustomerId :: Lens' BuyerDTO (Maybe Int32)
 buyCustomerId
   = lens _buyCustomerId
       (\ s a -> s{_buyCustomerId = a})
+      . mapping _Coerce
 
 buyEnabledForPreferredDeals :: Lens' BuyerDTO (Maybe Bool)
 buyEnabledForPreferredDeals
@@ -2493,6 +2529,7 @@ buyEnabledForPreferredDeals
 buyAccountId :: Lens' BuyerDTO (Maybe Int32)
 buyAccountId
   = lens _buyAccountId (\ s a -> s{_buyAccountId = a})
+      . mapping _Coerce
 
 buyDisplayName :: Lens' BuyerDTO (Maybe Text)
 buyDisplayName
@@ -2500,7 +2537,9 @@ buyDisplayName
       (\ s a -> s{_buyDisplayName = a})
 
 buyId :: Lens' BuyerDTO (Maybe Int32)
-buyId = lens _buyId (\ s a -> s{_buyId = a})
+buyId
+  = lens _buyId (\ s a -> s{_buyId = a}) .
+      mapping _Coerce
 
 instance FromJSON BuyerDTO where
         parseJSON
@@ -2532,10 +2571,10 @@ instance ToJSON BuyerDTO where
 --
 -- /See:/ 'adSlotDTO' smart constructor.
 data AdSlotDTO = AdSlotDTO
-    { _asdtoWebPropertyId :: !(Maybe Int32)
+    { _asdtoWebPropertyId :: !(Maybe (JSONText Int32))
     , _asdtoSize          :: !(Maybe Text)
     , _asdtoChannelCode   :: !(Maybe Text)
-    , _asdtoChannelId     :: !(Maybe Int32)
+    , _asdtoChannelId     :: !(Maybe (JSONText Int32))
     , _asdtoName          :: !(Maybe Text)
     , _asdtoDescription   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2571,6 +2610,7 @@ asdtoWebPropertyId :: Lens' AdSlotDTO (Maybe Int32)
 asdtoWebPropertyId
   = lens _asdtoWebPropertyId
       (\ s a -> s{_asdtoWebPropertyId = a})
+      . mapping _Coerce
 
 asdtoSize :: Lens' AdSlotDTO (Maybe Text)
 asdtoSize
@@ -2585,6 +2625,7 @@ asdtoChannelId :: Lens' AdSlotDTO (Maybe Int32)
 asdtoChannelId
   = lens _asdtoChannelId
       (\ s a -> s{_asdtoChannelId = a})
+      . mapping _Coerce
 
 asdtoName :: Lens' AdSlotDTO (Maybe Text)
 asdtoName
@@ -2662,28 +2703,28 @@ instance ToJSON DealTermsNonGuaranteedFixedPriceTerms
 --
 -- /See:/ 'performanceReport' smart constructor.
 data PerformanceReport = PerformanceReport
-    { _prFilteredBidRate         :: !(Maybe Double)
+    { _prFilteredBidRate         :: !(Maybe (JSONText Double))
     , _prKind                    :: !Text
-    , _prLatency95thPercentile   :: !(Maybe Double)
+    , _prLatency95thPercentile   :: !(Maybe (JSONText Double))
     , _prCookieMatcherStatusRate :: !(Maybe [JSONValue])
     , _prHostedMatchStatusRate   :: !(Maybe [JSONValue])
-    , _prUnsuccessfulRequestRate :: !(Maybe Double)
-    , _prBidRequestRate          :: !(Maybe Double)
-    , _prQuotaThrottledLimit     :: !(Maybe Double)
-    , _prQuotaConfiguredLimit    :: !(Maybe Double)
-    , _prSuccessfulRequestRate   :: !(Maybe Double)
-    , _prLatency85thPercentile   :: !(Maybe Double)
+    , _prUnsuccessfulRequestRate :: !(Maybe (JSONText Double))
+    , _prBidRequestRate          :: !(Maybe (JSONText Double))
+    , _prQuotaThrottledLimit     :: !(Maybe (JSONText Double))
+    , _prQuotaConfiguredLimit    :: !(Maybe (JSONText Double))
+    , _prSuccessfulRequestRate   :: !(Maybe (JSONText Double))
+    , _prLatency85thPercentile   :: !(Maybe (JSONText Double))
     , _prCalloutStatusRate       :: !(Maybe [JSONValue])
-    , _prLatency50thPercentile   :: !(Maybe Double)
-    , _prBidRate                 :: !(Maybe Double)
+    , _prLatency50thPercentile   :: !(Maybe (JSONText Double))
+    , _prBidRate                 :: !(Maybe (JSONText Double))
     , _prCreativeStatusRate      :: !(Maybe [JSONValue])
-    , _prNoQuotaInRegion         :: !(Maybe Double)
+    , _prNoQuotaInRegion         :: !(Maybe (JSONText Double))
     , _prRegion                  :: !(Maybe Text)
-    , _prInventoryMatchRate      :: !(Maybe Double)
-    , _prPixelMatchResponses     :: !(Maybe Double)
-    , _prTimestamp               :: !(Maybe Int64)
-    , _prPixelMatchRequests      :: !(Maybe Double)
-    , _prOutOfQuota              :: !(Maybe Double)
+    , _prInventoryMatchRate      :: !(Maybe (JSONText Double))
+    , _prPixelMatchResponses     :: !(Maybe (JSONText Double))
+    , _prTimestamp               :: !(Maybe (JSONText Int64))
+    , _prPixelMatchRequests      :: !(Maybe (JSONText Double))
+    , _prOutOfQuota              :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PerformanceReport' with the minimum fields required to make a request.
@@ -2767,6 +2808,7 @@ prFilteredBidRate :: Lens' PerformanceReport (Maybe Double)
 prFilteredBidRate
   = lens _prFilteredBidRate
       (\ s a -> s{_prFilteredBidRate = a})
+      . mapping _Coerce
 
 -- | Resource type.
 prKind :: Lens' PerformanceReport Text
@@ -2778,6 +2820,7 @@ prLatency95thPercentile :: Lens' PerformanceReport (Maybe Double)
 prLatency95thPercentile
   = lens _prLatency95thPercentile
       (\ s a -> s{_prLatency95thPercentile = a})
+      . mapping _Coerce
 
 -- | Average QPS for cookie matcher operations.
 prCookieMatcherStatusRate :: Lens' PerformanceReport [JSONValue]
@@ -2801,24 +2844,28 @@ prUnsuccessfulRequestRate :: Lens' PerformanceReport (Maybe Double)
 prUnsuccessfulRequestRate
   = lens _prUnsuccessfulRequestRate
       (\ s a -> s{_prUnsuccessfulRequestRate = a})
+      . mapping _Coerce
 
 -- | The number of bid requests sent to your bidder.
 prBidRequestRate :: Lens' PerformanceReport (Maybe Double)
 prBidRequestRate
   = lens _prBidRequestRate
       (\ s a -> s{_prBidRequestRate = a})
+      . mapping _Coerce
 
 -- | The throttled quota limits for this account.
 prQuotaThrottledLimit :: Lens' PerformanceReport (Maybe Double)
 prQuotaThrottledLimit
   = lens _prQuotaThrottledLimit
       (\ s a -> s{_prQuotaThrottledLimit = a})
+      . mapping _Coerce
 
 -- | The configured quota limits for this account.
 prQuotaConfiguredLimit :: Lens' PerformanceReport (Maybe Double)
 prQuotaConfiguredLimit
   = lens _prQuotaConfiguredLimit
       (\ s a -> s{_prQuotaConfiguredLimit = a})
+      . mapping _Coerce
 
 -- | The number of properly formed bid responses received by our servers
 -- within the deadline.
@@ -2826,6 +2873,7 @@ prSuccessfulRequestRate :: Lens' PerformanceReport (Maybe Double)
 prSuccessfulRequestRate
   = lens _prSuccessfulRequestRate
       (\ s a -> s{_prSuccessfulRequestRate = a})
+      . mapping _Coerce
 
 -- | The 85th percentile round trip latency(ms) as perceived from Google
 -- servers for the duration period covered by the report.
@@ -2833,6 +2881,7 @@ prLatency85thPercentile :: Lens' PerformanceReport (Maybe Double)
 prLatency85thPercentile
   = lens _prLatency85thPercentile
       (\ s a -> s{_prLatency85thPercentile = a})
+      . mapping _Coerce
 
 -- | Rate of various prefiltering statuses per match. Please refer to the
 -- callout-status-codes.txt file for different statuses.
@@ -2849,11 +2898,13 @@ prLatency50thPercentile :: Lens' PerformanceReport (Maybe Double)
 prLatency50thPercentile
   = lens _prLatency50thPercentile
       (\ s a -> s{_prLatency50thPercentile = a})
+      . mapping _Coerce
 
 -- | The number of bid responses with an ad.
 prBidRate :: Lens' PerformanceReport (Maybe Double)
 prBidRate
-  = lens _prBidRate (\ s a -> s{_prBidRate = a})
+  = lens _prBidRate (\ s a -> s{_prBidRate = a}) .
+      mapping _Coerce
 
 -- | Rate of ads with a given status. Please refer to the
 -- creative-status-codes.txt file for different statuses.
@@ -2869,6 +2920,7 @@ prNoQuotaInRegion :: Lens' PerformanceReport (Maybe Double)
 prNoQuotaInRegion
   = lens _prNoQuotaInRegion
       (\ s a -> s{_prNoQuotaInRegion = a})
+      . mapping _Coerce
 
 -- | The trading location of this data.
 prRegion :: Lens' PerformanceReport (Maybe Text)
@@ -2879,28 +2931,33 @@ prInventoryMatchRate :: Lens' PerformanceReport (Maybe Double)
 prInventoryMatchRate
   = lens _prInventoryMatchRate
       (\ s a -> s{_prInventoryMatchRate = a})
+      . mapping _Coerce
 
 -- | Average QPS for pixel match responses from clients.
 prPixelMatchResponses :: Lens' PerformanceReport (Maybe Double)
 prPixelMatchResponses
   = lens _prPixelMatchResponses
       (\ s a -> s{_prPixelMatchResponses = a})
+      . mapping _Coerce
 
 -- | The unix timestamp of the starting time of this performance data.
 prTimestamp :: Lens' PerformanceReport (Maybe Int64)
 prTimestamp
-  = lens _prTimestamp (\ s a -> s{_prTimestamp = a})
+  = lens _prTimestamp (\ s a -> s{_prTimestamp = a}) .
+      mapping _Coerce
 
 -- | Average QPS for pixel match requests from clients.
 prPixelMatchRequests :: Lens' PerformanceReport (Maybe Double)
 prPixelMatchRequests
   = lens _prPixelMatchRequests
       (\ s a -> s{_prPixelMatchRequests = a})
+      . mapping _Coerce
 
 -- | Rate of various quota account statuses per quota check.
 prOutOfQuota :: Lens' PerformanceReport (Maybe Double)
 prOutOfQuota
   = lens _prOutOfQuota (\ s a -> s{_prOutOfQuota = a})
+      . mapping _Coerce
 
 instance FromJSON PerformanceReport where
         parseJSON
@@ -3071,13 +3128,13 @@ instance ToJSON Seller where
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account
-    { _aMaximumTotalQps        :: !(Maybe Int32)
+    { _aMaximumTotalQps        :: !(Maybe (JSONText Int32))
     , _aKind                   :: !Text
     , _aCookieMatchingURL      :: !(Maybe Text)
-    , _aMaximumActiveCreatives :: !(Maybe Int32)
+    , _aMaximumActiveCreatives :: !(Maybe (JSONText Int32))
     , _aCookieMatchingNid      :: !(Maybe Text)
-    , _aNumberActiveCreatives  :: !(Maybe Int32)
-    , _aId                     :: !(Maybe Int32)
+    , _aNumberActiveCreatives  :: !(Maybe (JSONText Int32))
+    , _aId                     :: !(Maybe (JSONText Int32))
     , _aBidderLocation         :: !(Maybe [AccountBidderLocationItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3121,6 +3178,7 @@ aMaximumTotalQps :: Lens' Account (Maybe Int32)
 aMaximumTotalQps
   = lens _aMaximumTotalQps
       (\ s a -> s{_aMaximumTotalQps = a})
+      . mapping _Coerce
 
 -- | Resource type.
 aKind :: Lens' Account Text
@@ -3140,6 +3198,7 @@ aMaximumActiveCreatives :: Lens' Account (Maybe Int32)
 aMaximumActiveCreatives
   = lens _aMaximumActiveCreatives
       (\ s a -> s{_aMaximumActiveCreatives = a})
+      . mapping _Coerce
 
 -- | The nid parameter value used in cookie match requests. Please contact
 -- your technical account manager if you need to change this.
@@ -3154,10 +3213,12 @@ aNumberActiveCreatives :: Lens' Account (Maybe Int32)
 aNumberActiveCreatives
   = lens _aNumberActiveCreatives
       (\ s a -> s{_aNumberActiveCreatives = a})
+      . mapping _Coerce
 
 -- | Account id.
 aId :: Lens' Account (Maybe Int32)
-aId = lens _aId (\ s a -> s{_aId = a})
+aId
+  = lens _aId (\ s a -> s{_aId = a}) . mapping _Coerce
 
 -- | Your bidder locations that have distinct URLs.
 aBidderLocation :: Lens' Account [AccountBidderLocationItem]
@@ -3201,7 +3262,7 @@ instance ToJSON Account where
 data DeleteOrderDealsRequest = DeleteOrderDealsRequest
     { _dodrUpdateAction        :: !(Maybe Text)
     , _dodrDealIds             :: !(Maybe [Text])
-    , _dodrOrderRevisionNumber :: !(Maybe Int64)
+    , _dodrOrderRevisionNumber :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteOrderDealsRequest' with the minimum fields required to make a request.
@@ -3239,6 +3300,7 @@ dodrOrderRevisionNumber :: Lens' DeleteOrderDealsRequest (Maybe Int64)
 dodrOrderRevisionNumber
   = lens _dodrOrderRevisionNumber
       (\ s a -> s{_dodrOrderRevisionNumber = a})
+      . mapping _Coerce
 
 instance FromJSON DeleteOrderDealsRequest where
         parseJSON
@@ -3305,9 +3367,9 @@ instance ToJSON ContactInformation where
 --
 -- /See:/ 'creativeNATiveAdLogo' smart constructor.
 data CreativeNATiveAdLogo = CreativeNATiveAdLogo
-    { _cnatalHeight :: !(Maybe Int32)
+    { _cnatalHeight :: !(Maybe (JSONText Int32))
     , _cnatalURL    :: !(Maybe Text)
-    , _cnatalWidth  :: !(Maybe Int32)
+    , _cnatalWidth  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeNATiveAdLogo' with the minimum fields required to make a request.
@@ -3331,6 +3393,7 @@ creativeNATiveAdLogo =
 cnatalHeight :: Lens' CreativeNATiveAdLogo (Maybe Int32)
 cnatalHeight
   = lens _cnatalHeight (\ s a -> s{_cnatalHeight = a})
+      . mapping _Coerce
 
 cnatalURL :: Lens' CreativeNATiveAdLogo (Maybe Text)
 cnatalURL
@@ -3338,7 +3401,8 @@ cnatalURL
 
 cnatalWidth :: Lens' CreativeNATiveAdLogo (Maybe Int32)
 cnatalWidth
-  = lens _cnatalWidth (\ s a -> s{_cnatalWidth = a})
+  = lens _cnatalWidth (\ s a -> s{_cnatalWidth = a}) .
+      mapping _Coerce
 
 instance FromJSON CreativeNATiveAdLogo where
         parseJSON
@@ -3448,28 +3512,28 @@ instance ToJSON PerformanceReportList where
 -- /See:/ 'pretargetingConfig' smart constructor.
 data PretargetingConfig = PretargetingConfig
     { _pcPlatforms                     :: !(Maybe [Text])
-    , _pcMobileCarriers                :: !(Maybe [Int64])
-    , _pcVendorTypes                   :: !(Maybe [Int64])
-    , _pcExcludedGeoCriteriaIds        :: !(Maybe [Int64])
-    , _pcSupportedCreativeAttributes   :: !(Maybe [Int64])
-    , _pcUserLists                     :: !(Maybe [Int64])
+    , _pcMobileCarriers                :: !(Maybe [JSONText Int64])
+    , _pcVendorTypes                   :: !(Maybe [JSONText Int64])
+    , _pcExcludedGeoCriteriaIds        :: !(Maybe [JSONText Int64])
+    , _pcSupportedCreativeAttributes   :: !(Maybe [JSONText Int64])
+    , _pcUserLists                     :: !(Maybe [JSONText Int64])
     , _pcKind                          :: !Text
     , _pcExcludedPlacements            :: !(Maybe [PretargetingConfigExcludedPlacementsItem])
-    , _pcMobileDevices                 :: !(Maybe [Int64])
+    , _pcMobileDevices                 :: !(Maybe [JSONText Int64])
     , _pcLanguages                     :: !(Maybe [Text])
-    , _pcVerticals                     :: !(Maybe [Int64])
-    , _pcConfigId                      :: !(Maybe Int64)
+    , _pcVerticals                     :: !(Maybe [JSONText Int64])
+    , _pcConfigId                      :: !(Maybe (JSONText Int64))
     , _pcPlacements                    :: !(Maybe [PretargetingConfigPlacementsItem])
-    , _pcExcludedUserLists             :: !(Maybe [Int64])
+    , _pcExcludedUserLists             :: !(Maybe [JSONText Int64])
     , _pcConfigName                    :: !(Maybe Text)
-    , _pcGeoCriteriaIds                :: !(Maybe [Int64])
+    , _pcGeoCriteriaIds                :: !(Maybe [JSONText Int64])
     , _pcDimensions                    :: !(Maybe [PretargetingConfigDimensionsItem])
-    , _pcExcludedVerticals             :: !(Maybe [Int64])
+    , _pcExcludedVerticals             :: !(Maybe [JSONText Int64])
     , _pcCreativeType                  :: !(Maybe [Text])
     , _pcIsActive                      :: !(Maybe Bool)
-    , _pcExcludedContentLabels         :: !(Maybe [Int64])
-    , _pcBillingId                     :: !(Maybe Int64)
-    , _pcMobileOperatingSystemVersions :: !(Maybe [Int64])
+    , _pcExcludedContentLabels         :: !(Maybe [JSONText Int64])
+    , _pcBillingId                     :: !(Maybe (JSONText Int64))
+    , _pcMobileOperatingSystemVersions :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfig' with the minimum fields required to make a request.
@@ -3642,7 +3706,8 @@ pcVerticals
 -- insert requests.
 pcConfigId :: Lens' PretargetingConfig (Maybe Int64)
 pcConfigId
-  = lens _pcConfigId (\ s a -> s{_pcConfigId = a})
+  = lens _pcConfigId (\ s a -> s{_pcConfigId = a}) .
+      mapping _Coerce
 
 -- | Requests containing any of these placements will match.
 pcPlacements :: Lens' PretargetingConfig [PretargetingConfigPlacementsItem]
@@ -3716,7 +3781,8 @@ pcExcludedContentLabels
 -- blank for insert requests; the id will be generated automatically.
 pcBillingId :: Lens' PretargetingConfig (Maybe Int64)
 pcBillingId
-  = lens _pcBillingId (\ s a -> s{_pcBillingId = a})
+  = lens _pcBillingId (\ s a -> s{_pcBillingId = a}) .
+      mapping _Coerce
 
 -- | Requests containing any of these mobile operating system version ids
 -- will match. Values are from mobile-os.csv in the downloadable files
@@ -3907,7 +3973,7 @@ instance ToJSON TargetingValueCreativeSize where
 -- /See:/ 'negotiationDTO' smart constructor.
 data NegotiationDTO = NegotiationDTO
     { _ndtoNegotiationState    :: !(Maybe Text)
-    , _ndtoExternalDealId      :: !(Maybe Int64)
+    , _ndtoExternalDealId      :: !(Maybe (JSONText Int64))
     , _ndtoStatus              :: !(Maybe Text)
     , _ndtoDealType            :: !(Maybe Text)
     , _ndtoNegotiationRounds   :: !(Maybe [NegotiationRoundDTO])
@@ -3917,8 +3983,8 @@ data NegotiationDTO = NegotiationDTO
     , _ndtoStats               :: !(Maybe StatsDTO)
     , _ndtoSeller              :: !(Maybe DealPartyDTO)
     , _ndtoLabelNames          :: !(Maybe [Text])
-    , _ndtoOfferId             :: !(Maybe Int64)
-    , _ndtoNegotiationId       :: !(Maybe Int64)
+    , _ndtoOfferId             :: !(Maybe (JSONText Int64))
+    , _ndtoNegotiationId       :: !(Maybe (JSONText Int64))
     , _ndtoSellerEmailContacts :: !(Maybe [Text])
     , _ndtoBuyer               :: !(Maybe DealPartyDTO)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3988,6 +4054,7 @@ ndtoExternalDealId :: Lens' NegotiationDTO (Maybe Int64)
 ndtoExternalDealId
   = lens _ndtoExternalDealId
       (\ s a -> s{_ndtoExternalDealId = a})
+      . mapping _Coerce
 
 -- | The status of this negotiation.
 ndtoStatus :: Lens' NegotiationDTO (Maybe Text)
@@ -4045,13 +4112,15 @@ ndtoLabelNames
 -- | The ID of this negotiation\'s original offer.
 ndtoOfferId :: Lens' NegotiationDTO (Maybe Int64)
 ndtoOfferId
-  = lens _ndtoOfferId (\ s a -> s{_ndtoOfferId = a})
+  = lens _ndtoOfferId (\ s a -> s{_ndtoOfferId = a}) .
+      mapping _Coerce
 
 -- | The unique ID of this negotiation.
 ndtoNegotiationId :: Lens' NegotiationDTO (Maybe Int64)
 ndtoNegotiationId
   = lens _ndtoNegotiationId
       (\ s a -> s{_ndtoNegotiationId = a})
+      . mapping _Coerce
 
 -- | The seller party\'s contact email.
 ndtoSellerEmailContacts :: Lens' NegotiationDTO [Text]
@@ -4122,7 +4191,7 @@ data OfferDTO = OfferDTO
     , _odtoOpenToDealParties   :: !(Maybe [DealPartyDTO])
     , _odtoEmailContacts       :: !(Maybe [Text])
     , _odtoLabelNames          :: !(Maybe [Text])
-    , _odtoOfferId             :: !(Maybe Int64)
+    , _odtoOfferId             :: !(Maybe (JSONText Int64))
     , _odtoClosedToDealParties :: !(Maybe [DealPartyDTO])
     , _odtoAnonymous           :: !(Maybe Bool)
     , _odtoIsOpen              :: !(Maybe Bool)
@@ -4243,7 +4312,8 @@ odtoLabelNames
 -- | The unique ID of this offer.
 odtoOfferId :: Lens' OfferDTO (Maybe Int64)
 odtoOfferId
-  = lens _odtoOfferId (\ s a -> s{_odtoOfferId = a})
+  = lens _odtoOfferId (\ s a -> s{_odtoOfferId = a}) .
+      mapping _Coerce
 
 -- | The list of buyer or seller parties this offer is closed to.
 odtoClosedToDealParties :: Lens' OfferDTO [DealPartyDTO]
@@ -4306,9 +4376,9 @@ instance ToJSON OfferDTO where
 --
 -- /See:/ 'audienceSegment' smart constructor.
 data AudienceSegment = AudienceSegment
-    { _asNumCookies  :: !(Maybe Int64)
+    { _asNumCookies  :: !(Maybe (JSONText Int64))
     , _asName        :: !(Maybe Text)
-    , _asId          :: !(Maybe Int64)
+    , _asId          :: !(Maybe (JSONText Int64))
     , _asDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4336,12 +4406,15 @@ audienceSegment =
 asNumCookies :: Lens' AudienceSegment (Maybe Int64)
 asNumCookies
   = lens _asNumCookies (\ s a -> s{_asNumCookies = a})
+      . mapping _Coerce
 
 asName :: Lens' AudienceSegment (Maybe Text)
 asName = lens _asName (\ s a -> s{_asName = a})
 
 asId :: Lens' AudienceSegment (Maybe Int64)
-asId = lens _asId (\ s a -> s{_asId = a})
+asId
+  = lens _asId (\ s a -> s{_asId = a}) .
+      mapping _Coerce
 
 asDescription :: Lens' AudienceSegment (Maybe Text)
 asDescription
@@ -4427,17 +4500,17 @@ instance ToJSON BillingInfoList where
 data MarketplaceOffer = MarketplaceOffer
     { _moState               :: !(Maybe Text)
     , _moWebPropertyCode     :: !(Maybe Text)
-    , _moCreationTimeMs      :: !(Maybe Int64)
+    , _moCreationTimeMs      :: !(Maybe (JSONText Int64))
     , _moTerms               :: !(Maybe DealTerms)
-    , _moLastUpdateTimeMs    :: !(Maybe Int64)
+    , _moLastUpdateTimeMs    :: !(Maybe (JSONText Int64))
     , _moKind                :: !Text
-    , _moRevisionNumber      :: !(Maybe Int64)
+    , _moRevisionNumber      :: !(Maybe (JSONText Int64))
     , _moHasCreatorSignedOff :: !(Maybe Bool)
-    , _moFlightStartTimeMs   :: !(Maybe Int64)
+    , _moFlightStartTimeMs   :: !(Maybe (JSONText Int64))
     , _moSharedTargetings    :: !(Maybe [SharedTargeting])
     , _moSeller              :: !(Maybe Seller)
     , _moSyndicationProduct  :: !(Maybe Text)
-    , _moFlightEndTimeMs     :: !(Maybe Int64)
+    , _moFlightEndTimeMs     :: !(Maybe (JSONText Int64))
     , _moName                :: !(Maybe Text)
     , _moCreatorContacts     :: !(Maybe [ContactInformation])
     , _moOfferId             :: !(Maybe Text)
@@ -4518,6 +4591,7 @@ moCreationTimeMs :: Lens' MarketplaceOffer (Maybe Int64)
 moCreationTimeMs
   = lens _moCreationTimeMs
       (\ s a -> s{_moCreationTimeMs = a})
+      . mapping _Coerce
 
 -- | The negotiable terms of the deal (buyer-readonly)
 moTerms :: Lens' MarketplaceOffer (Maybe DealTerms)
@@ -4528,6 +4602,7 @@ moLastUpdateTimeMs :: Lens' MarketplaceOffer (Maybe Int64)
 moLastUpdateTimeMs
   = lens _moLastUpdateTimeMs
       (\ s a -> s{_moLastUpdateTimeMs = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"adexchangebuyer#marketplaceOffer\".
@@ -4539,6 +4614,7 @@ moRevisionNumber :: Lens' MarketplaceOffer (Maybe Int64)
 moRevisionNumber
   = lens _moRevisionNumber
       (\ s a -> s{_moRevisionNumber = a})
+      . mapping _Coerce
 
 -- | If the creator has already signed off on the offer, then the buyer can
 -- finalize the deal by accepting the offer as is. When copying to an
@@ -4555,6 +4631,7 @@ moFlightStartTimeMs :: Lens' MarketplaceOffer (Maybe Int64)
 moFlightStartTimeMs
   = lens _moFlightStartTimeMs
       (\ s a -> s{_moFlightStartTimeMs = a})
+      . mapping _Coerce
 
 -- | Targeting that is shared between the buyer and the seller. Each
 -- targeting criteria has a specified key and for each key there is a list
@@ -4583,6 +4660,7 @@ moFlightEndTimeMs :: Lens' MarketplaceOffer (Maybe Int64)
 moFlightEndTimeMs
   = lens _moFlightEndTimeMs
       (\ s a -> s{_moFlightEndTimeMs = a})
+      . mapping _Coerce
 
 -- | The name for this offer as set by the seller. (buyer-readonly)
 moName :: Lens' MarketplaceOffer (Maybe Text)
@@ -4691,8 +4769,8 @@ instance ToJSON AddOrderNotesResponse where
 --
 -- /See:/ 'targetingValueSize' smart constructor.
 data TargetingValueSize = TargetingValueSize
-    { _tvsHeight :: !(Maybe Int32)
-    , _tvsWidth  :: !(Maybe Int32)
+    { _tvsHeight :: !(Maybe (JSONText Int32))
+    , _tvsWidth  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValueSize' with the minimum fields required to make a request.
@@ -4713,11 +4791,14 @@ targetingValueSize =
 -- | The height of the creative.
 tvsHeight :: Lens' TargetingValueSize (Maybe Int32)
 tvsHeight
-  = lens _tvsHeight (\ s a -> s{_tvsHeight = a})
+  = lens _tvsHeight (\ s a -> s{_tvsHeight = a}) .
+      mapping _Coerce
 
 -- | The width of the creative.
 tvsWidth :: Lens' TargetingValueSize (Maybe Int32)
-tvsWidth = lens _tvsWidth (\ s a -> s{_tvsWidth = a})
+tvsWidth
+  = lens _tvsWidth (\ s a -> s{_tvsWidth = a}) .
+      mapping _Coerce
 
 instance FromJSON TargetingValueSize where
         parseJSON
@@ -4736,7 +4817,7 @@ instance ToJSON TargetingValueSize where
 --
 -- /See:/ 'getNegotiationsRequest' smart constructor.
 data GetNegotiationsRequest = GetNegotiationsRequest
-    { _gnrSinceTimestampMillis   :: !(Maybe Int64)
+    { _gnrSinceTimestampMillis   :: !(Maybe (JSONText Int64))
     , _gnrFinalized              :: !(Maybe Bool)
     , _gnrIncludePrivateAuctions :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4763,6 +4844,7 @@ gnrSinceTimestampMillis :: Lens' GetNegotiationsRequest (Maybe Int64)
 gnrSinceTimestampMillis
   = lens _gnrSinceTimestampMillis
       (\ s a -> s{_gnrSinceTimestampMillis = a})
+      . mapping _Coerce
 
 gnrFinalized :: Lens' GetNegotiationsRequest (Maybe Bool)
 gnrFinalized
@@ -4796,7 +4878,7 @@ instance ToJSON GetNegotiationsRequest where
 -- /See:/ 'moneyDTO' smart constructor.
 data MoneyDTO = MoneyDTO
     { _mdtoCurrencyCode :: !(Maybe Text)
-    , _mdtoMicros       :: !(Maybe Int64)
+    , _mdtoMicros       :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MoneyDTO' with the minimum fields required to make a request.
@@ -4821,7 +4903,8 @@ mdtoCurrencyCode
 
 mdtoMicros :: Lens' MoneyDTO (Maybe Int64)
 mdtoMicros
-  = lens _mdtoMicros (\ s a -> s{_mdtoMicros = a})
+  = lens _mdtoMicros (\ s a -> s{_mdtoMicros = a}) .
+      mapping _Coerce
 
 instance FromJSON MoneyDTO where
         parseJSON
@@ -4923,8 +5006,8 @@ instance ToJSON ListOffersResponse where
 --
 -- /See:/ 'pretargetingConfigDimensionsItem' smart constructor.
 data PretargetingConfigDimensionsItem = PretargetingConfigDimensionsItem
-    { _pcdiHeight :: !(Maybe Int64)
-    , _pcdiWidth  :: !(Maybe Int64)
+    { _pcdiHeight :: !(Maybe (JSONText Int64))
+    , _pcdiWidth  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigDimensionsItem' with the minimum fields required to make a request.
@@ -4945,12 +5028,14 @@ pretargetingConfigDimensionsItem =
 -- | Height in pixels.
 pcdiHeight :: Lens' PretargetingConfigDimensionsItem (Maybe Int64)
 pcdiHeight
-  = lens _pcdiHeight (\ s a -> s{_pcdiHeight = a})
+  = lens _pcdiHeight (\ s a -> s{_pcdiHeight = a}) .
+      mapping _Coerce
 
 -- | Width in pixels.
 pcdiWidth :: Lens' PretargetingConfigDimensionsItem (Maybe Int64)
 pcdiWidth
-  = lens _pcdiWidth (\ s a -> s{_pcdiWidth = a})
+  = lens _pcdiWidth (\ s a -> s{_pcdiWidth = a}) .
+      mapping _Coerce
 
 instance FromJSON PretargetingConfigDimensionsItem
          where
@@ -4974,7 +5059,7 @@ data AdvertiserDTO = AdvertiserDTO
     { _adtoStatus :: !(Maybe Text)
     , _adtoBrands :: !(Maybe [BrandDTO])
     , _adtoName   :: !(Maybe Text)
-    , _adtoId     :: !(Maybe Int64)
+    , _adtoId     :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserDTO' with the minimum fields required to make a request.
@@ -5012,7 +5097,9 @@ adtoName :: Lens' AdvertiserDTO (Maybe Text)
 adtoName = lens _adtoName (\ s a -> s{_adtoName = a})
 
 adtoId :: Lens' AdvertiserDTO (Maybe Int64)
-adtoId = lens _adtoId (\ s a -> s{_adtoId = a})
+adtoId
+  = lens _adtoId (\ s a -> s{_adtoId = a}) .
+      mapping _Coerce
 
 instance FromJSON AdvertiserDTO where
         parseJSON
@@ -5077,7 +5164,7 @@ instance ToJSON ListClientAccessCapabilitiesResponse
 data TargetingValue = TargetingValue
     { _tvCreativeSizeValue     :: !(Maybe TargetingValueCreativeSize)
     , _tvStringValue           :: !(Maybe Text)
-    , _tvLongValue             :: !(Maybe Int64)
+    , _tvLongValue             :: !(Maybe (JSONText Int64))
     , _tvDayPartTargetingValue :: !(Maybe TargetingValueDayPartTargeting)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5117,7 +5204,8 @@ tvStringValue
 -- | The long value to exclude\/include.
 tvLongValue :: Lens' TargetingValue (Maybe Int64)
 tvLongValue
-  = lens _tvLongValue (\ s a -> s{_tvLongValue = a})
+  = lens _tvLongValue (\ s a -> s{_tvLongValue = a}) .
+      mapping _Coerce
 
 -- | The daypart targeting to include \/ exclude. Filled in when the key is
 -- GOOG_DAYPART_TARGETING.
@@ -5149,9 +5237,9 @@ instance ToJSON TargetingValue where
 --
 -- /See:/ 'creativeNATiveAdAppIcon' smart constructor.
 data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon
-    { _cnataaiHeight :: !(Maybe Int32)
+    { _cnataaiHeight :: !(Maybe (JSONText Int32))
     , _cnataaiURL    :: !(Maybe Text)
-    , _cnataaiWidth  :: !(Maybe Int32)
+    , _cnataaiWidth  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeNATiveAdAppIcon' with the minimum fields required to make a request.
@@ -5176,6 +5264,7 @@ cnataaiHeight :: Lens' CreativeNATiveAdAppIcon (Maybe Int32)
 cnataaiHeight
   = lens _cnataaiHeight
       (\ s a -> s{_cnataaiHeight = a})
+      . mapping _Coerce
 
 cnataaiURL :: Lens' CreativeNATiveAdAppIcon (Maybe Text)
 cnataaiURL
@@ -5184,6 +5273,7 @@ cnataaiURL
 cnataaiWidth :: Lens' CreativeNATiveAdAppIcon (Maybe Int32)
 cnataaiWidth
   = lens _cnataaiWidth (\ s a -> s{_cnataaiWidth = a})
+      . mapping _Coerce
 
 instance FromJSON CreativeNATiveAdAppIcon where
         parseJSON
@@ -5205,7 +5295,7 @@ instance ToJSON CreativeNATiveAdAppIcon where
 -- /See:/ 'price' smart constructor.
 data Price = Price
     { _pCurrencyCode :: !(Maybe Text)
-    , _pAmountMicros :: !(Maybe Double)
+    , _pAmountMicros :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
@@ -5234,6 +5324,7 @@ pAmountMicros :: Lens' Price (Maybe Double)
 pAmountMicros
   = lens _pAmountMicros
       (\ s a -> s{_pAmountMicros = a})
+      . mapping _Coerce
 
 instance FromJSON Price where
         parseJSON
@@ -5255,7 +5346,7 @@ data EditAllOrderDealsRequest = EditAllOrderDealsRequest
     { _eUpdateAction        :: !(Maybe Text)
     , _eDeals               :: !(Maybe [MarketplaceDeal])
     , _eOrder               :: !(Maybe MarketplaceOrder)
-    , _eOrderRevisionNumber :: !(Maybe Int64)
+    , _eOrderRevisionNumber :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditAllOrderDealsRequest' with the minimum fields required to make a request.
@@ -5312,6 +5403,7 @@ eOrderRevisionNumber :: Lens' EditAllOrderDealsRequest (Maybe Int64)
 eOrderRevisionNumber
   = lens _eOrderRevisionNumber
       (\ s a -> s{_eOrderRevisionNumber = a})
+      . mapping _Coerce
 
 instance FromJSON EditAllOrderDealsRequest where
         parseJSON
@@ -5337,7 +5429,7 @@ instance ToJSON EditAllOrderDealsRequest where
 data BillingInfo = BillingInfo
     { _biKind        :: !Text
     , _biAccountName :: !(Maybe Text)
-    , _biAccountId   :: !(Maybe Int32)
+    , _biAccountId   :: !(Maybe (JSONText Int32))
     , _biBillingId   :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5375,7 +5467,8 @@ biAccountName
 -- | Account id.
 biAccountId :: Lens' BillingInfo (Maybe Int32)
 biAccountId
-  = lens _biAccountId (\ s a -> s{_biAccountId = a})
+  = lens _biAccountId (\ s a -> s{_biAccountId = a}) .
+      mapping _Coerce
 
 -- | A list of adgroup IDs associated with this particular account. These IDs
 -- may show up as part of a realtime bidding BidRequest, which indicates a
@@ -5518,7 +5611,7 @@ instance ToJSON SharedTargeting where
 --
 -- /See:/ 'listClientAccessCapabilitiesRequest' smart constructor.
 newtype ListClientAccessCapabilitiesRequest = ListClientAccessCapabilitiesRequest
-    { _lcacrSponsorAccountId :: Maybe Int64
+    { _lcacrSponsorAccountId :: Maybe (JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListClientAccessCapabilitiesRequest' with the minimum fields required to make a request.
@@ -5537,6 +5630,7 @@ lcacrSponsorAccountId :: Lens' ListClientAccessCapabilitiesRequest (Maybe Int64)
 lcacrSponsorAccountId
   = lens _lcacrSponsorAccountId
       (\ s a -> s{_lcacrSponsorAccountId = a})
+      . mapping _Coerce
 
 instance FromJSON ListClientAccessCapabilitiesRequest
          where
@@ -5556,42 +5650,42 @@ instance ToJSON ListClientAccessCapabilitiesRequest
 --
 -- /See:/ 'inventorySegmentTargeting' smart constructor.
 data InventorySegmentTargeting = InventorySegmentTargeting
-    { _istNegativeVideoDurationSegments   :: !(Maybe [Int64])
-    , _istNegativeIcmBrands               :: !(Maybe [Int64])
+    { _istNegativeVideoDurationSegments   :: !(Maybe [JSONText Int64])
+    , _istNegativeIcmBrands               :: !(Maybe [JSONText Int64])
     , _istNegativeKeyValues               :: !(Maybe [RuleKeyValuePair])
-    , _istPositiveAudienceSegments        :: !(Maybe [Int64])
-    , _istPositiveXfpPlacements           :: !(Maybe [Int64])
-    , _istNegativeXfpAdSlots              :: !(Maybe [Int64])
-    , _istPositiveOperatingSystemVersions :: !(Maybe [Int64])
-    , _istPositiveSizes                   :: !(Maybe [Int64])
-    , _istPositiveDeviceCategories        :: !(Maybe [Int64])
-    , _istPositiveLocations               :: !(Maybe [Int64])
+    , _istPositiveAudienceSegments        :: !(Maybe [JSONText Int64])
+    , _istPositiveXfpPlacements           :: !(Maybe [JSONText Int64])
+    , _istNegativeXfpAdSlots              :: !(Maybe [JSONText Int64])
+    , _istPositiveOperatingSystemVersions :: !(Maybe [JSONText Int64])
+    , _istPositiveSizes                   :: !(Maybe [JSONText Int64])
+    , _istPositiveDeviceCategories        :: !(Maybe [JSONText Int64])
+    , _istPositiveLocations               :: !(Maybe [JSONText Int64])
     , _istNegativeAdSizes                 :: !(Maybe [AdSize])
-    , _istPositiveOperatingSystems        :: !(Maybe [Int64])
+    , _istPositiveOperatingSystems        :: !(Maybe [JSONText Int64])
     , _istPositiveSiteURLs                :: !(Maybe [Text])
     , _istNegativeInventorySlots          :: !(Maybe [Text])
     , _istNegativeVideoAdPositionSegments :: !(Maybe [Text])
     , _istPositiveAdTypeSegments          :: !(Maybe [Text])
-    , _istPositiveIcmInterests            :: !(Maybe [Int64])
+    , _istPositiveIcmInterests            :: !(Maybe [JSONText Int64])
     , _istPositiveMobileApps              :: !(Maybe [Text])
     , _istPositiveKeyValues               :: !(Maybe [RuleKeyValuePair])
-    , _istPositiveIcmBrands               :: !(Maybe [Int64])
-    , _istPositiveVideoDurationSegments   :: !(Maybe [Int64])
-    , _istNegativeAudienceSegments        :: !(Maybe [Int64])
-    , _istNegativeXfpPlacements           :: !(Maybe [Int64])
-    , _istPositiveXfpAdSlots              :: !(Maybe [Int64])
-    , _istNegativeOperatingSystemVersions :: !(Maybe [Int64])
-    , _istNegativeSizes                   :: !(Maybe [Int64])
-    , _istNegativeLocations               :: !(Maybe [Int64])
-    , _istNegativeDeviceCategories        :: !(Maybe [Int64])
-    , _istNegativeOperatingSystems        :: !(Maybe [Int64])
+    , _istPositiveIcmBrands               :: !(Maybe [JSONText Int64])
+    , _istPositiveVideoDurationSegments   :: !(Maybe [JSONText Int64])
+    , _istNegativeAudienceSegments        :: !(Maybe [JSONText Int64])
+    , _istNegativeXfpPlacements           :: !(Maybe [JSONText Int64])
+    , _istPositiveXfpAdSlots              :: !(Maybe [JSONText Int64])
+    , _istNegativeOperatingSystemVersions :: !(Maybe [JSONText Int64])
+    , _istNegativeSizes                   :: !(Maybe [JSONText Int64])
+    , _istNegativeLocations               :: !(Maybe [JSONText Int64])
+    , _istNegativeDeviceCategories        :: !(Maybe [JSONText Int64])
+    , _istNegativeOperatingSystems        :: !(Maybe [JSONText Int64])
     , _istPositiveAdSizes                 :: !(Maybe [AdSize])
     , _istNegativeSiteURLs                :: !(Maybe [Text])
     , _istNegativeAdTypeSegments          :: !(Maybe [Text])
     , _istPositiveVideoAdPositionSegments :: !(Maybe [Text])
     , _istPositiveInventorySlots          :: !(Maybe [Text])
     , _istNegativeMobileApps              :: !(Maybe [Text])
-    , _istNegativeIcmInterests            :: !(Maybe [Int64])
+    , _istNegativeIcmInterests            :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventorySegmentTargeting' with the minimum fields required to make a request.
@@ -6075,9 +6169,9 @@ instance ToJSON InventorySegmentTargeting where
 --
 -- /See:/ 'creativeNATiveAdImage' smart constructor.
 data CreativeNATiveAdImage = CreativeNATiveAdImage
-    { _cnataiHeight :: !(Maybe Int32)
+    { _cnataiHeight :: !(Maybe (JSONText Int32))
     , _cnataiURL    :: !(Maybe Text)
-    , _cnataiWidth  :: !(Maybe Int32)
+    , _cnataiWidth  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeNATiveAdImage' with the minimum fields required to make a request.
@@ -6101,6 +6195,7 @@ creativeNATiveAdImage =
 cnataiHeight :: Lens' CreativeNATiveAdImage (Maybe Int32)
 cnataiHeight
   = lens _cnataiHeight (\ s a -> s{_cnataiHeight = a})
+      . mapping _Coerce
 
 cnataiURL :: Lens' CreativeNATiveAdImage (Maybe Text)
 cnataiURL
@@ -6108,7 +6203,8 @@ cnataiURL
 
 cnataiWidth :: Lens' CreativeNATiveAdImage (Maybe Int32)
 cnataiWidth
-  = lens _cnataiWidth (\ s a -> s{_cnataiWidth = a})
+  = lens _cnataiWidth (\ s a -> s{_cnataiWidth = a}) .
+      mapping _Coerce
 
 instance FromJSON CreativeNATiveAdImage where
         parseJSON
@@ -6133,7 +6229,7 @@ data WebPropertyDTO = WebPropertyDTO
     , _wpdtoSyndicationProduct       :: !(Maybe Text)
     , _wpdtoName                     :: !(Maybe Text)
     , _wpdtoPropertyCode             :: !(Maybe Text)
-    , _wpdtoId                       :: !(Maybe Int32)
+    , _wpdtoId                       :: !(Maybe (JSONText Int32))
     , _wpdtoSiteURLs                 :: !(Maybe [Text])
     , _wpdtoAllowInterestTargetedAds :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6188,7 +6284,9 @@ wpdtoPropertyCode
       (\ s a -> s{_wpdtoPropertyCode = a})
 
 wpdtoId :: Lens' WebPropertyDTO (Maybe Int32)
-wpdtoId = lens _wpdtoId (\ s a -> s{_wpdtoId = a})
+wpdtoId
+  = lens _wpdtoId (\ s a -> s{_wpdtoId = a}) .
+      mapping _Coerce
 
 wpdtoSiteURLs :: Lens' WebPropertyDTO [Text]
 wpdtoSiteURLs
@@ -6233,7 +6331,7 @@ instance ToJSON WebPropertyDTO where
 --
 -- /See:/ 'listOffersRequest' smart constructor.
 newtype ListOffersRequest = ListOffersRequest
-    { _lorSinceTimestampMillis :: Maybe Int64
+    { _lorSinceTimestampMillis :: Maybe (JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOffersRequest' with the minimum fields required to make a request.
@@ -6252,6 +6350,7 @@ lorSinceTimestampMillis :: Lens' ListOffersRequest (Maybe Int64)
 lorSinceTimestampMillis
   = lens _lorSinceTimestampMillis
       (\ s a -> s{_lorSinceTimestampMillis = a})
+      . mapping _Coerce
 
 instance FromJSON ListOffersRequest where
         parseJSON
@@ -6269,8 +6368,8 @@ instance ToJSON ListOffersRequest where
 --
 -- /See:/ 'clientAccessCapabilities' smart constructor.
 data ClientAccessCapabilities = ClientAccessCapabilities
-    { _cacClientAccountId :: !(Maybe Int64)
-    , _cacCapabilities    :: !(Maybe [Int32])
+    { _cacClientAccountId :: !(Maybe (JSONText Int64))
+    , _cacCapabilities    :: !(Maybe [JSONText Int32])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessCapabilities' with the minimum fields required to make a request.
@@ -6292,6 +6391,7 @@ cacClientAccountId :: Lens' ClientAccessCapabilities (Maybe Int64)
 cacClientAccountId
   = lens _cacClientAccountId
       (\ s a -> s{_cacClientAccountId = a})
+      . mapping _Coerce
 
 cacCapabilities :: Lens' ClientAccessCapabilities [Int32]
 cacCapabilities
@@ -6388,7 +6488,7 @@ instance ToJSON CreativeServingRestrictionsItem where
 -- /See:/ 'deleteOrderDealsResponse' smart constructor.
 data DeleteOrderDealsResponse = DeleteOrderDealsResponse
     { _dDeals               :: !(Maybe [MarketplaceDeal])
-    , _dOrderRevisionNumber :: !(Maybe Int64)
+    , _dOrderRevisionNumber :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteOrderDealsResponse' with the minimum fields required to make a request.
@@ -6417,6 +6517,7 @@ dOrderRevisionNumber :: Lens' DeleteOrderDealsResponse (Maybe Int64)
 dOrderRevisionNumber
   = lens _dOrderRevisionNumber
       (\ s a -> s{_dOrderRevisionNumber = a})
+      . mapping _Coerce
 
 instance FromJSON DeleteOrderDealsResponse where
         parseJSON
@@ -6491,18 +6592,18 @@ data MarketplaceDeal = MarketplaceDeal
     { _mdExternalDealId       :: !(Maybe Text)
     , _mdBuyerPrivateData     :: !(Maybe PrivateData)
     , _mdWebPropertyCode      :: !(Maybe Text)
-    , _mdCreationTimeMs       :: !(Maybe Int64)
+    , _mdCreationTimeMs       :: !(Maybe (JSONText Int64))
     , _mdTerms                :: !(Maybe DealTerms)
-    , _mdOfferRevisionNumber  :: !(Maybe Int64)
-    , _mdLastUpdateTimeMs     :: !(Maybe Int64)
+    , _mdOfferRevisionNumber  :: !(Maybe (JSONText Int64))
+    , _mdLastUpdateTimeMs     :: !(Maybe (JSONText Int64))
     , _mdKind                 :: !Text
     , _mdDeliveryControl      :: !(Maybe DeliveryControl)
-    , _mdFlightStartTimeMs    :: !(Maybe Int64)
+    , _mdFlightStartTimeMs    :: !(Maybe (JSONText Int64))
     , _mdSharedTargetings     :: !(Maybe [SharedTargeting])
     , _mdDealId               :: !(Maybe Text)
     , _mdInventoryDescription :: !(Maybe Text)
     , _mdSyndicationProduct   :: !(Maybe Text)
-    , _mdFlightEndTimeMs      :: !(Maybe Int64)
+    , _mdFlightEndTimeMs      :: !(Maybe (JSONText Int64))
     , _mdName                 :: !(Maybe Text)
     , _mdSellerContacts       :: !(Maybe [ContactInformation])
     , _mdOfferId              :: !(Maybe Text)
@@ -6598,6 +6699,7 @@ mdCreationTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
 mdCreationTimeMs
   = lens _mdCreationTimeMs
       (\ s a -> s{_mdCreationTimeMs = a})
+      . mapping _Coerce
 
 -- | The negotiable terms of the deal. (updatable)
 mdTerms :: Lens' MarketplaceDeal (Maybe DealTerms)
@@ -6609,12 +6711,14 @@ mdOfferRevisionNumber :: Lens' MarketplaceDeal (Maybe Int64)
 mdOfferRevisionNumber
   = lens _mdOfferRevisionNumber
       (\ s a -> s{_mdOfferRevisionNumber = a})
+      . mapping _Coerce
 
 -- | The time (ms since epoch) when the deal was last updated. (readonly)
 mdLastUpdateTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
 mdLastUpdateTimeMs
   = lens _mdLastUpdateTimeMs
       (\ s a -> s{_mdLastUpdateTimeMs = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"adexchangebuyer#marketplaceDeal\".
@@ -6636,6 +6740,7 @@ mdFlightStartTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
 mdFlightStartTimeMs
   = lens _mdFlightStartTimeMs
       (\ s a -> s{_mdFlightStartTimeMs = a})
+      . mapping _Coerce
 
 -- | The shared targeting visible to buyers and sellers. (updatable)
 mdSharedTargetings :: Lens' MarketplaceDeal [SharedTargeting]
@@ -6668,6 +6773,7 @@ mdFlightEndTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
 mdFlightEndTimeMs
   = lens _mdFlightEndTimeMs
       (\ s a -> s{_mdFlightEndTimeMs = a})
+      . mapping _Coerce
 
 -- | The name of the deal. (updatable)
 mdName :: Lens' MarketplaceDeal (Maybe Text)
@@ -6781,12 +6887,12 @@ instance ToJSON GetOffersResponse where
 --
 -- /See:/ 'statsDTO' smart constructor.
 data StatsDTO = StatsDTO
-    { _sdtoBids        :: !(Maybe Int64)
+    { _sdtoBids        :: !(Maybe (JSONText Int64))
     , _sdtoSpend       :: !(Maybe MoneyDTO)
-    , _sdtoImpressions :: !(Maybe Int64)
-    , _sdtoGoodBids    :: !(Maybe Int64)
+    , _sdtoImpressions :: !(Maybe (JSONText Int64))
+    , _sdtoGoodBids    :: !(Maybe (JSONText Int64))
     , _sdtoRevenue     :: !(Maybe MoneyDTO)
-    , _sdtoRequests    :: !(Maybe Int64)
+    , _sdtoRequests    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatsDTO' with the minimum fields required to make a request.
@@ -6817,7 +6923,9 @@ statsDTO =
     }
 
 sdtoBids :: Lens' StatsDTO (Maybe Int64)
-sdtoBids = lens _sdtoBids (\ s a -> s{_sdtoBids = a})
+sdtoBids
+  = lens _sdtoBids (\ s a -> s{_sdtoBids = a}) .
+      mapping _Coerce
 
 sdtoSpend :: Lens' StatsDTO (Maybe MoneyDTO)
 sdtoSpend
@@ -6827,10 +6935,12 @@ sdtoImpressions :: Lens' StatsDTO (Maybe Int64)
 sdtoImpressions
   = lens _sdtoImpressions
       (\ s a -> s{_sdtoImpressions = a})
+      . mapping _Coerce
 
 sdtoGoodBids :: Lens' StatsDTO (Maybe Int64)
 sdtoGoodBids
   = lens _sdtoGoodBids (\ s a -> s{_sdtoGoodBids = a})
+      . mapping _Coerce
 
 sdtoRevenue :: Lens' StatsDTO (Maybe MoneyDTO)
 sdtoRevenue
@@ -6839,6 +6949,7 @@ sdtoRevenue
 sdtoRequests :: Lens' StatsDTO (Maybe Int64)
 sdtoRequests
   = lens _sdtoRequests (\ s a -> s{_sdtoRequests = a})
+      . mapping _Coerce
 
 instance FromJSON StatsDTO where
         parseJSON
@@ -6919,8 +7030,8 @@ instance ToJSON DealTermsNonGuaranteedAuctionTerms
 --
 -- /See:/ 'creativeFilteringReasonsReasonsItem' smart constructor.
 data CreativeFilteringReasonsReasonsItem = CreativeFilteringReasonsReasonsItem
-    { _cfrriFilteringStatus :: !(Maybe Int32)
-    , _cfrriFilteringCount  :: !(Maybe Int64)
+    { _cfrriFilteringStatus :: !(Maybe (JSONText Int32))
+    , _cfrriFilteringCount  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFilteringReasonsReasonsItem' with the minimum fields required to make a request.
@@ -6944,6 +7055,7 @@ cfrriFilteringStatus :: Lens' CreativeFilteringReasonsReasonsItem (Maybe Int32)
 cfrriFilteringStatus
   = lens _cfrriFilteringStatus
       (\ s a -> s{_cfrriFilteringStatus = a})
+      . mapping _Coerce
 
 -- | The number of times the creative was filtered for the status. The count
 -- is aggregated across all publishers on the exchange.
@@ -6951,6 +7063,7 @@ cfrriFilteringCount :: Lens' CreativeFilteringReasonsReasonsItem (Maybe Int64)
 cfrriFilteringCount
   = lens _cfrriFilteringCount
       (\ s a -> s{_cfrriFilteringCount = a})
+      . mapping _Coerce
 
 instance FromJSON CreativeFilteringReasonsReasonsItem
          where
@@ -6976,11 +7089,11 @@ data NegotiationRoundDTO = NegotiationRoundDTO
     , _nrdtoKind           :: !Text
     , _nrdtoOriginatorRole :: !(Maybe Text)
     , _nrdtoAction         :: !(Maybe Text)
-    , _nrdtoDBmPartnerId   :: !(Maybe Int64)
+    , _nrdtoDBmPartnerId   :: !(Maybe (JSONText Int64))
     , _nrdtoNotes          :: !(Maybe Text)
-    , _nrdtoNegotiationId  :: !(Maybe Int64)
+    , _nrdtoNegotiationId  :: !(Maybe (JSONText Int64))
     , _nrdtoEditHistory    :: !(Maybe EditHistoryDTO)
-    , _nrdtoRoundNumber    :: !(Maybe Int64)
+    , _nrdtoRoundNumber    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationRoundDTO' with the minimum fields required to make a request.
@@ -7044,6 +7157,7 @@ nrdtoDBmPartnerId :: Lens' NegotiationRoundDTO (Maybe Int64)
 nrdtoDBmPartnerId
   = lens _nrdtoDBmPartnerId
       (\ s a -> s{_nrdtoDBmPartnerId = a})
+      . mapping _Coerce
 
 -- | Notes regarding this negotiation round.
 nrdtoNotes :: Lens' NegotiationRoundDTO (Maybe Text)
@@ -7055,6 +7169,7 @@ nrdtoNegotiationId :: Lens' NegotiationRoundDTO (Maybe Int64)
 nrdtoNegotiationId
   = lens _nrdtoNegotiationId
       (\ s a -> s{_nrdtoNegotiationId = a})
+      . mapping _Coerce
 
 -- | The edit history of this negotiation round.
 nrdtoEditHistory :: Lens' NegotiationRoundDTO (Maybe EditHistoryDTO)
@@ -7067,6 +7182,7 @@ nrdtoRoundNumber :: Lens' NegotiationRoundDTO (Maybe Int64)
 nrdtoRoundNumber
   = lens _nrdtoRoundNumber
       (\ s a -> s{_nrdtoRoundNumber = a})
+      . mapping _Coerce
 
 instance FromJSON NegotiationRoundDTO where
         parseJSON
@@ -7176,12 +7292,12 @@ instance ToJSON DealTerms where
 --
 -- /See:/ 'dateTime' smart constructor.
 data DateTime = DateTime
-    { _dtSecond     :: !(Maybe Int32)
-    , _dtDay        :: !(Maybe Int32)
-    , _dtYear       :: !(Maybe Int32)
-    , _dtHour       :: !(Maybe Int32)
-    , _dtMonth      :: !(Maybe Int32)
-    , _dtMinute     :: !(Maybe Int32)
+    { _dtSecond     :: !(Maybe (JSONText Int32))
+    , _dtDay        :: !(Maybe (JSONText Int32))
+    , _dtYear       :: !(Maybe (JSONText Int32))
+    , _dtHour       :: !(Maybe (JSONText Int32))
+    , _dtMonth      :: !(Maybe (JSONText Int32))
+    , _dtMinute     :: !(Maybe (JSONText Int32))
     , _dtTimeZoneId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7216,22 +7332,34 @@ dateTime =
     }
 
 dtSecond :: Lens' DateTime (Maybe Int32)
-dtSecond = lens _dtSecond (\ s a -> s{_dtSecond = a})
+dtSecond
+  = lens _dtSecond (\ s a -> s{_dtSecond = a}) .
+      mapping _Coerce
 
 dtDay :: Lens' DateTime (Maybe Int32)
-dtDay = lens _dtDay (\ s a -> s{_dtDay = a})
+dtDay
+  = lens _dtDay (\ s a -> s{_dtDay = a}) .
+      mapping _Coerce
 
 dtYear :: Lens' DateTime (Maybe Int32)
-dtYear = lens _dtYear (\ s a -> s{_dtYear = a})
+dtYear
+  = lens _dtYear (\ s a -> s{_dtYear = a}) .
+      mapping _Coerce
 
 dtHour :: Lens' DateTime (Maybe Int32)
-dtHour = lens _dtHour (\ s a -> s{_dtHour = a})
+dtHour
+  = lens _dtHour (\ s a -> s{_dtHour = a}) .
+      mapping _Coerce
 
 dtMonth :: Lens' DateTime (Maybe Int32)
-dtMonth = lens _dtMonth (\ s a -> s{_dtMonth = a})
+dtMonth
+  = lens _dtMonth (\ s a -> s{_dtMonth = a}) .
+      mapping _Coerce
 
 dtMinute :: Lens' DateTime (Maybe Int32)
-dtMinute = lens _dtMinute (\ s a -> s{_dtMinute = a})
+dtMinute
+  = lens _dtMinute (\ s a -> s{_dtMinute = a}) .
+      mapping _Coerce
 
 dtTimeZoneId :: Lens' DateTime (Maybe Text)
 dtTimeZoneId
@@ -7263,7 +7391,7 @@ instance ToJSON DateTime where
 data MarketplaceLabel = MarketplaceLabel
     { _mlDeprecatedMarketplaceDealParty :: !(Maybe MarketplaceDealParty)
     , _mlAccountId                      :: !(Maybe Text)
-    , _mlCreateTimeMs                   :: !(Maybe Int64)
+    , _mlCreateTimeMs                   :: !(Maybe (JSONText Int64))
     , _mlLabel                          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7304,6 +7432,7 @@ mlCreateTimeMs :: Lens' MarketplaceLabel (Maybe Int64)
 mlCreateTimeMs
   = lens _mlCreateTimeMs
       (\ s a -> s{_mlCreateTimeMs = a})
+      . mapping _Coerce
 
 -- | The label to use.
 mlLabel :: Lens' MarketplaceLabel (Maybe Text)
@@ -7334,8 +7463,8 @@ instance ToJSON MarketplaceLabel where
 data EditHistoryDTO = EditHistoryDTO
     { _ehdtoLastUpdatedByLoginName :: !(Maybe Text)
     , _ehdtoCreatedByLoginName     :: !(Maybe Text)
-    , _ehdtoLastUpdateTimeStamp    :: !(Maybe Int64)
-    , _ehdtoCreatedTimeStamp       :: !(Maybe Int64)
+    , _ehdtoLastUpdateTimeStamp    :: !(Maybe (JSONText Int64))
+    , _ehdtoCreatedTimeStamp       :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditHistoryDTO' with the minimum fields required to make a request.
@@ -7373,11 +7502,13 @@ ehdtoLastUpdateTimeStamp :: Lens' EditHistoryDTO (Maybe Int64)
 ehdtoLastUpdateTimeStamp
   = lens _ehdtoLastUpdateTimeStamp
       (\ s a -> s{_ehdtoLastUpdateTimeStamp = a})
+      . mapping _Coerce
 
 ehdtoCreatedTimeStamp :: Lens' EditHistoryDTO (Maybe Int64)
 ehdtoCreatedTimeStamp
   = lens _ehdtoCreatedTimeStamp
       (\ s a -> s{_ehdtoCreatedTimeStamp = a})
+      . mapping _Coerce
 
 instance FromJSON EditHistoryDTO where
         parseJSON
@@ -7449,7 +7580,7 @@ data MarketplaceOrder = MarketplaceOrder
     , _mBuyerContacts              :: !(Maybe [ContactInformation])
     , _mKind                       :: !Text
     , _mOriginatorRole             :: !(Maybe Text)
-    , _mRevisionNumber             :: !(Maybe Int64)
+    , _mRevisionNumber             :: !(Maybe (JSONText Int64))
     , _mBilledBuyer                :: !(Maybe Buyer)
     , _mIsRenegotiating            :: !(Maybe Bool)
     , _mHasSellerSignedOff         :: !(Maybe Bool)
@@ -7459,7 +7590,7 @@ data MarketplaceOrder = MarketplaceOrder
     , _mSellerContacts             :: !(Maybe [ContactInformation])
     , _mLastUpdaterRole            :: !(Maybe Text)
     , _mLabels                     :: !(Maybe [MarketplaceLabel])
-    , _mRevisionTimeMs             :: !(Maybe Int64)
+    , _mRevisionTimeMs             :: !(Maybe (JSONText Int64))
     , _mOrderId                    :: !(Maybe Text)
     , _mLastUpdaterOrCommentorRole :: !(Maybe Text)
     , _mHasBuyerSignedOff          :: !(Maybe Bool)
@@ -7572,6 +7703,7 @@ mRevisionNumber :: Lens' MarketplaceOrder (Maybe Int64)
 mRevisionNumber
   = lens _mRevisionNumber
       (\ s a -> s{_mRevisionNumber = a})
+      . mapping _Coerce
 
 -- | Reference to the buyer that will get billed for this order. (readonly)
 mBilledBuyer :: Lens' MarketplaceOrder (Maybe Buyer)
@@ -7629,6 +7761,7 @@ mRevisionTimeMs :: Lens' MarketplaceOrder (Maybe Int64)
 mRevisionTimeMs
   = lens _mRevisionTimeMs
       (\ s a -> s{_mRevisionTimeMs = a})
+      . mapping _Coerce
 
 -- | The unique id of the order. (readonly).
 mOrderId :: Lens' MarketplaceOrder (Maybe Text)
@@ -7711,7 +7844,7 @@ instance ToJSON MarketplaceOrder where
 data AddOrderDealsRequest = AddOrderDealsRequest
     { _aUpdateAction        :: !(Maybe Text)
     , _aDeals               :: !(Maybe [MarketplaceDeal])
-    , _aOrderRevisionNumber :: !(Maybe Int64)
+    , _aOrderRevisionNumber :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddOrderDealsRequest' with the minimum fields required to make a request.
@@ -7749,6 +7882,7 @@ aOrderRevisionNumber :: Lens' AddOrderDealsRequest (Maybe Int64)
 aOrderRevisionNumber
   = lens _aOrderRevisionNumber
       (\ s a -> s{_aOrderRevisionNumber = a})
+      . mapping _Coerce
 
 instance FromJSON AddOrderDealsRequest where
         parseJSON
@@ -7770,8 +7904,8 @@ instance ToJSON AddOrderDealsRequest where
 --
 -- /See:/ 'dealTermsGuaranteedFixedPriceTerms' smart constructor.
 data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms
-    { _dtgfptGuaranteedLooks       :: !(Maybe Int64)
-    , _dtgfptGuaranteedImpressions :: !(Maybe Int64)
+    { _dtgfptGuaranteedLooks       :: !(Maybe (JSONText Int64))
+    , _dtgfptGuaranteedImpressions :: !(Maybe (JSONText Int64))
     , _dtgfptFixedPrices           :: !(Maybe [PricePerBuyer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7798,6 +7932,7 @@ dtgfptGuaranteedLooks :: Lens' DealTermsGuaranteedFixedPriceTerms (Maybe Int64)
 dtgfptGuaranteedLooks
   = lens _dtgfptGuaranteedLooks
       (\ s a -> s{_dtgfptGuaranteedLooks = a})
+      . mapping _Coerce
 
 -- | Guaranteed impressions as a percentage. This is the percentage of
 -- guaranteed looks that the buyer is guaranteeing to buy.
@@ -7805,6 +7940,7 @@ dtgfptGuaranteedImpressions :: Lens' DealTermsGuaranteedFixedPriceTerms (Maybe I
 dtgfptGuaranteedImpressions
   = lens _dtgfptGuaranteedImpressions
       (\ s a -> s{_dtgfptGuaranteedImpressions = a})
+      . mapping _Coerce
 
 -- | Fixed price for the specified buyer.
 dtgfptFixedPrices :: Lens' DealTermsGuaranteedFixedPriceTerms [PricePerBuyer]

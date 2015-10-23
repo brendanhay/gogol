@@ -47,20 +47,20 @@ type LandingPagesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               Capture "campaignId" Int64 :>
+               Capture "campaignId" (JSONText Int64) :>
                  "landingPages" :>
-                   Capture "id" Int64 :>
+                   Capture "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] LandingPage
 
 -- | Gets one campaign landing page by ID.
 --
 -- /See:/ 'landingPagesGet' smart constructor.
 data LandingPagesGet = LandingPagesGet
-    { _lpgCampaignId :: !Int64
-    , _lpgProFileId  :: !Int64
-    , _lpgId         :: !Int64
+    { _lpgCampaignId :: !(JSONText Int64)
+    , _lpgProFileId  :: !(JSONText Int64)
+    , _lpgId         :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesGet' with the minimum fields required to make a request.
@@ -89,15 +89,18 @@ lpgCampaignId :: Lens' LandingPagesGet Int64
 lpgCampaignId
   = lens _lpgCampaignId
       (\ s a -> s{_lpgCampaignId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 lpgProFileId :: Lens' LandingPagesGet Int64
 lpgProFileId
   = lens _lpgProFileId (\ s a -> s{_lpgProFileId = a})
+      . _Coerce
 
 -- | Landing page ID.
 lpgId :: Lens' LandingPagesGet Int64
-lpgId = lens _lpgId (\ s a -> s{_lpgId = a})
+lpgId
+  = lens _lpgId (\ s a -> s{_lpgId = a}) . _Coerce
 
 instance GoogleRequest LandingPagesGet where
         type Rs LandingPagesGet = LandingPage

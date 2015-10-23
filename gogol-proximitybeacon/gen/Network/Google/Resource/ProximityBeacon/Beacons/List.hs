@@ -63,7 +63,7 @@ type BeaconsListResource =
                    QueryParam "q" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListBeaconsResponse
@@ -82,7 +82,7 @@ data BeaconsList = BeaconsList
     , _blQ              :: !(Maybe Text)
     , _blBearerToken    :: !(Maybe Text)
     , _blPageToken      :: !(Maybe Text)
-    , _blPageSize       :: !(Maybe Int32)
+    , _blPageSize       :: !(Maybe (JSONText Int32))
     , _blCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -214,7 +214,8 @@ blPageToken
 -- server-defined upper limit.
 blPageSize :: Lens' BeaconsList (Maybe Int32)
 blPageSize
-  = lens _blPageSize (\ s a -> s{_blPageSize = a})
+  = lens _blPageSize (\ s a -> s{_blPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 blCallback :: Lens' BeaconsList (Maybe Text)

@@ -135,7 +135,7 @@ data History = History
     , _hMessagesDeleted :: !(Maybe [HistoryMessageDeleted])
     , _hMessagesAdded   :: !(Maybe [HistoryMessageAdded])
     , _hLabelsAdded     :: !(Maybe [HistoryLabelAdded])
-    , _hId              :: !(Maybe Word64)
+    , _hId              :: !(Maybe (JSONText Word64))
     , _hMessages        :: !(Maybe [Message])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -199,7 +199,8 @@ hLabelsAdded
 
 -- | The mailbox sequence ID.
 hId :: Lens' History (Maybe Word64)
-hId = lens _hId (\ s a -> s{_hId = a})
+hId
+  = lens _hId (\ s a -> s{_hId = a}) . mapping _Coerce
 
 -- | List of messages changed in this history record. The fields for specific
 -- change types, such as messagesAdded may duplicate messages in this
@@ -237,9 +238,9 @@ instance ToJSON History where
 --
 -- /See:/ 'proFile' smart constructor.
 data ProFile = ProFile
-    { _pfMessagesTotal :: !(Maybe Int32)
-    , _pfThreadsTotal  :: !(Maybe Int32)
-    , _pfHistoryId     :: !(Maybe Word64)
+    { _pfMessagesTotal :: !(Maybe (JSONText Int32))
+    , _pfThreadsTotal  :: !(Maybe (JSONText Int32))
+    , _pfHistoryId     :: !(Maybe (JSONText Word64))
     , _pfEmailAddress  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -269,17 +270,20 @@ pfMessagesTotal :: Lens' ProFile (Maybe Int32)
 pfMessagesTotal
   = lens _pfMessagesTotal
       (\ s a -> s{_pfMessagesTotal = a})
+      . mapping _Coerce
 
 -- | The total number of threads in the mailbox.
 pfThreadsTotal :: Lens' ProFile (Maybe Int32)
 pfThreadsTotal
   = lens _pfThreadsTotal
       (\ s a -> s{_pfThreadsTotal = a})
+      . mapping _Coerce
 
 -- | The ID of the mailbox\'s current history record.
 pfHistoryId :: Lens' ProFile (Maybe Word64)
 pfHistoryId
-  = lens _pfHistoryId (\ s a -> s{_pfHistoryId = a})
+  = lens _pfHistoryId (\ s a -> s{_pfHistoryId = a}) .
+      mapping _Coerce
 
 -- | The user\'s email address.
 pfEmailAddress :: Lens' ProFile (Maybe Text)
@@ -355,7 +359,7 @@ instance ToJSON MessagePartHeader where
 data ListHistoryResponse = ListHistoryResponse
     { _lhrNextPageToken :: !(Maybe Text)
     , _lhrHistory       :: !(Maybe [History])
-    , _lhrHistoryId     :: !(Maybe Word64)
+    , _lhrHistoryId     :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListHistoryResponse' with the minimum fields required to make a request.
@@ -394,6 +398,7 @@ lhrHistory
 lhrHistoryId :: Lens' ListHistoryResponse (Maybe Word64)
 lhrHistoryId
   = lens _lhrHistoryId (\ s a -> s{_lhrHistoryId = a})
+      . mapping _Coerce
 
 instance FromJSON ListHistoryResponse where
         parseJSON
@@ -416,7 +421,7 @@ instance ToJSON ListHistoryResponse where
 -- /See:/ 'listThreadsResponse' smart constructor.
 data ListThreadsResponse = ListThreadsResponse
     { _ltrNextPageToken      :: !(Maybe Text)
-    , _ltrResultSizeEstimate :: !(Maybe Word32)
+    , _ltrResultSizeEstimate :: !(Maybe (JSONText Word32))
     , _ltrThreads            :: !(Maybe [Thread])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -449,6 +454,7 @@ ltrResultSizeEstimate :: Lens' ListThreadsResponse (Maybe Word32)
 ltrResultSizeEstimate
   = lens _ltrResultSizeEstimate
       (\ s a -> s{_ltrResultSizeEstimate = a})
+      . mapping _Coerce
 
 -- | List of threads.
 ltrThreads :: Lens' ListThreadsResponse [Thread]
@@ -689,8 +695,8 @@ instance ToJSON HistoryMessageDeleted where
 --
 -- /See:/ 'messagePartBody' smart constructor.
 data MessagePartBody = MessagePartBody
-    { _mpbSize         :: !(Maybe Int32)
-    , _mpbData         :: !(Maybe Word8)
+    { _mpbSize         :: !(Maybe (JSONText Int32))
+    , _mpbData         :: !(Maybe (JSONText Word8))
     , _mpbAttachmentId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -714,14 +720,18 @@ messagePartBody =
 
 -- | Total number of bytes in the body of the message part.
 mpbSize :: Lens' MessagePartBody (Maybe Int32)
-mpbSize = lens _mpbSize (\ s a -> s{_mpbSize = a})
+mpbSize
+  = lens _mpbSize (\ s a -> s{_mpbSize = a}) .
+      mapping _Coerce
 
 -- | The body data of a MIME message part. May be empty for MIME container
 -- types that have no message body or when the body data is sent as a
 -- separate attachment. An attachment ID is present if the body data is
 -- contained in a separate attachment.
 mpbData :: Lens' MessagePartBody (Maybe Word8)
-mpbData = lens _mpbData (\ s a -> s{_mpbData = a})
+mpbData
+  = lens _mpbData (\ s a -> s{_mpbData = a}) .
+      mapping _Coerce
 
 -- | When present, contains the ID of an external attachment that can be
 -- retrieved in a separate messages.attachments.get request. When not
@@ -751,7 +761,7 @@ instance ToJSON MessagePartBody where
 -- /See:/ 'listDraftsResponse' smart constructor.
 data ListDraftsResponse = ListDraftsResponse
     { _ldrNextPageToken      :: !(Maybe Text)
-    , _ldrResultSizeEstimate :: !(Maybe Word32)
+    , _ldrResultSizeEstimate :: !(Maybe (JSONText Word32))
     , _ldrDrafts             :: !(Maybe [Draft])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -784,6 +794,7 @@ ldrResultSizeEstimate :: Lens' ListDraftsResponse (Maybe Word32)
 ldrResultSizeEstimate
   = lens _ldrResultSizeEstimate
       (\ s a -> s{_ldrResultSizeEstimate = a})
+      . mapping _Coerce
 
 -- | List of drafts.
 ldrDrafts :: Lens' ListDraftsResponse [Draft]
@@ -813,8 +824,8 @@ instance ToJSON ListDraftsResponse where
 --
 -- /See:/ 'watchResponse' smart constructor.
 data WatchResponse = WatchResponse
-    { _wrExpiration :: !(Maybe Int64)
-    , _wrHistoryId  :: !(Maybe Word64)
+    { _wrExpiration :: !(Maybe (JSONText Int64))
+    , _wrHistoryId  :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatchResponse' with the minimum fields required to make a request.
@@ -837,11 +848,13 @@ watchResponse =
 wrExpiration :: Lens' WatchResponse (Maybe Int64)
 wrExpiration
   = lens _wrExpiration (\ s a -> s{_wrExpiration = a})
+      . mapping _Coerce
 
 -- | The ID of the mailbox\'s current history record.
 wrHistoryId :: Lens' WatchResponse (Maybe Word64)
 wrHistoryId
-  = lens _wrHistoryId (\ s a -> s{_wrHistoryId = a})
+  = lens _wrHistoryId (\ s a -> s{_wrHistoryId = a}) .
+      mapping _Coerce
 
 instance FromJSON WatchResponse where
         parseJSON
@@ -972,15 +985,15 @@ instance ToJSON WatchRequest where
 --
 -- /See:/ 'message' smart constructor.
 data Message = Message
-    { _mRaw          :: !(Maybe Word8)
+    { _mRaw          :: !(Maybe (JSONText Word8))
     , _mSnippet      :: !(Maybe Text)
-    , _mSizeEstimate :: !(Maybe Int32)
+    , _mSizeEstimate :: !(Maybe (JSONText Int32))
     , _mPayload      :: !(Maybe MessagePart)
-    , _mHistoryId    :: !(Maybe Word64)
+    , _mHistoryId    :: !(Maybe (JSONText Word64))
     , _mId           :: !(Maybe Text)
     , _mLabelIds     :: !(Maybe [Text])
     , _mThreadId     :: !(Maybe Text)
-    , _mInternalDate :: !(Maybe Int64)
+    , _mInternalDate :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Message' with the minimum fields required to make a request.
@@ -1023,7 +1036,9 @@ message =
 -- string. Returned in messages.get and drafts.get responses when the
 -- format=RAW parameter is supplied.
 mRaw :: Lens' Message (Maybe Word8)
-mRaw = lens _mRaw (\ s a -> s{_mRaw = a})
+mRaw
+  = lens _mRaw (\ s a -> s{_mRaw = a}) .
+      mapping _Coerce
 
 -- | A short part of the message text.
 mSnippet :: Lens' Message (Maybe Text)
@@ -1034,6 +1049,7 @@ mSizeEstimate :: Lens' Message (Maybe Int32)
 mSizeEstimate
   = lens _mSizeEstimate
       (\ s a -> s{_mSizeEstimate = a})
+      . mapping _Coerce
 
 -- | The parsed email structure in the message parts.
 mPayload :: Lens' Message (Maybe MessagePart)
@@ -1042,7 +1058,8 @@ mPayload = lens _mPayload (\ s a -> s{_mPayload = a})
 -- | The ID of the last history record that modified this message.
 mHistoryId :: Lens' Message (Maybe Word64)
 mHistoryId
-  = lens _mHistoryId (\ s a -> s{_mHistoryId = a})
+  = lens _mHistoryId (\ s a -> s{_mHistoryId = a}) .
+      mapping _Coerce
 
 -- | The immutable ID of the message.
 mId :: Lens' Message (Maybe Text)
@@ -1074,6 +1091,7 @@ mInternalDate :: Lens' Message (Maybe Int64)
 mInternalDate
   = lens _mInternalDate
       (\ s a -> s{_mInternalDate = a})
+      . mapping _Coerce
 
 instance FromJSON Message where
         parseJSON
@@ -1153,7 +1171,7 @@ instance ToJSON HistoryLabelRemoved where
 -- /See:/ 'thread' smart constructor.
 data Thread = Thread
     { _tSnippet   :: !(Maybe Text)
-    , _tHistoryId :: !(Maybe Word64)
+    , _tHistoryId :: !(Maybe (JSONText Word64))
     , _tId        :: !(Maybe Text)
     , _tMessages  :: !(Maybe [Message])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1186,7 +1204,8 @@ tSnippet = lens _tSnippet (\ s a -> s{_tSnippet = a})
 -- | The ID of the last history record that modified this thread.
 tHistoryId :: Lens' Thread (Maybe Word64)
 tHistoryId
-  = lens _tHistoryId (\ s a -> s{_tHistoryId = a})
+  = lens _tHistoryId (\ s a -> s{_tHistoryId = a}) .
+      mapping _Coerce
 
 -- | The unique ID of the thread.
 tId :: Lens' Thread (Maybe Text)
@@ -1221,12 +1240,12 @@ instance ToJSON Thread where
 --
 -- /See:/ 'label' smart constructor.
 data Label = Label
-    { _lThreadsUnread         :: !(Maybe Int32)
+    { _lThreadsUnread         :: !(Maybe (JSONText Int32))
     , _lMessageListVisibility :: !(Maybe LabelMessageListVisibility)
-    , _lMessagesTotal         :: !(Maybe Int32)
-    , _lMessagesUnread        :: !(Maybe Int32)
+    , _lMessagesTotal         :: !(Maybe (JSONText Int32))
+    , _lMessagesUnread        :: !(Maybe (JSONText Int32))
     , _lName                  :: !(Maybe Text)
-    , _lThreadsTotal          :: !(Maybe Int32)
+    , _lThreadsTotal          :: !(Maybe (JSONText Int32))
     , _lLabelListVisibility   :: !(Maybe LabelLabelListVisibility)
     , _lId                    :: !(Maybe Text)
     , _lType                  :: !(Maybe LabelType)
@@ -1273,6 +1292,7 @@ lThreadsUnread :: Lens' Label (Maybe Int32)
 lThreadsUnread
   = lens _lThreadsUnread
       (\ s a -> s{_lThreadsUnread = a})
+      . mapping _Coerce
 
 -- | The visibility of the label in the message list in the Gmail web
 -- interface.
@@ -1286,12 +1306,14 @@ lMessagesTotal :: Lens' Label (Maybe Int32)
 lMessagesTotal
   = lens _lMessagesTotal
       (\ s a -> s{_lMessagesTotal = a})
+      . mapping _Coerce
 
 -- | The number of unread messages with the label.
 lMessagesUnread :: Lens' Label (Maybe Int32)
 lMessagesUnread
   = lens _lMessagesUnread
       (\ s a -> s{_lMessagesUnread = a})
+      . mapping _Coerce
 
 -- | The display name of the label.
 lName :: Lens' Label (Maybe Text)
@@ -1302,6 +1324,7 @@ lThreadsTotal :: Lens' Label (Maybe Int32)
 lThreadsTotal
   = lens _lThreadsTotal
       (\ s a -> s{_lThreadsTotal = a})
+      . mapping _Coerce
 
 -- | The visibility of the label in the label list in the Gmail web
 -- interface.
@@ -1358,7 +1381,7 @@ instance ToJSON Label where
 -- /See:/ 'listMessagesResponse' smart constructor.
 data ListMessagesResponse = ListMessagesResponse
     { _lmrNextPageToken      :: !(Maybe Text)
-    , _lmrResultSizeEstimate :: !(Maybe Word32)
+    , _lmrResultSizeEstimate :: !(Maybe (JSONText Word32))
     , _lmrMessages           :: !(Maybe [Message])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1391,6 +1414,7 @@ lmrResultSizeEstimate :: Lens' ListMessagesResponse (Maybe Word32)
 lmrResultSizeEstimate
   = lens _lmrResultSizeEstimate
       (\ s a -> s{_lmrResultSizeEstimate = a})
+      . mapping _Coerce
 
 -- | List of messages.
 lmrMessages :: Lens' ListMessagesResponse [Message]

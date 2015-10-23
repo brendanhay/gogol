@@ -52,7 +52,7 @@ type ObjectAccessControlsInsertResource =
              "o" :>
                Capture "object" Text :>
                  "acl" :>
-                   QueryParam "generation" Int64 :>
+                   QueryParam "generation" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] ObjectAccessControl :>
                          Post '[JSON] ObjectAccessControl
@@ -64,7 +64,7 @@ data ObjectAccessControlsInsert = ObjectAccessControlsInsert
     { _oaciBucket     :: !Text
     , _oaciPayload    :: !ObjectAccessControl
     , _oaciObject     :: !Text
-    , _oaciGeneration :: !(Maybe Int64)
+    , _oaciGeneration :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsInsert' with the minimum fields required to make a request.
@@ -113,6 +113,7 @@ oaciGeneration :: Lens' ObjectAccessControlsInsert (Maybe Int64)
 oaciGeneration
   = lens _oaciGeneration
       (\ s a -> s{_oaciGeneration = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectAccessControlsInsert
          where

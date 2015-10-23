@@ -56,7 +56,7 @@ type ZoneOperationsListResource =
                  "operations" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
@@ -68,7 +68,7 @@ data ZoneOperationsList = ZoneOperationsList
     , _zolZone       :: !Text
     , _zolFilter     :: !(Maybe Text)
     , _zolPageToken  :: !(Maybe Text)
-    , _zolMaxResults :: !Word32
+    , _zolMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsList' with the minimum fields required to make a request.
@@ -133,6 +133,7 @@ zolMaxResults :: Lens' ZoneOperationsList Word32
 zolMaxResults
   = lens _zolMaxResults
       (\ s a -> s{_zolMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest ZoneOperationsList where
         type Rs ZoneOperationsList = OperationList

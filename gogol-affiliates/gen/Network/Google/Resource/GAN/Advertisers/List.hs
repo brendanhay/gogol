@@ -59,12 +59,12 @@ type AdvertisersListResource =
                QueryParam "relationshipStatus"
                  AdvertisersListRelationshipStatus
                  :>
-                 QueryParam "minSevenDayEpc" Double :>
-                   QueryParam "minNinetyDayEpc" Double :>
-                     QueryParam "minPayoutRank" Int32 :>
+                 QueryParam "minSevenDayEpc" (JSONText Double) :>
+                   QueryParam "minNinetyDayEpc" (JSONText Double) :>
+                     QueryParam "minPayoutRank" (JSONText Int32) :>
                        QueryParam "advertiserCategory" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" Word32 :>
+                           QueryParam "maxResults" (JSONText Word32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Advertisers
 
 -- | Retrieves data about all advertisers that the requesting
@@ -73,14 +73,14 @@ type AdvertisersListResource =
 -- /See:/ 'advertisersList' smart constructor.
 data AdvertisersList = AdvertisersList
     { _alRelationshipStatus :: !(Maybe AdvertisersListRelationshipStatus)
-    , _alMinSevenDayEpc     :: !(Maybe Double)
+    , _alMinSevenDayEpc     :: !(Maybe (JSONText Double))
     , _alRoleId             :: !Text
-    , _alMinNinetyDayEpc    :: !(Maybe Double)
+    , _alMinNinetyDayEpc    :: !(Maybe (JSONText Double))
     , _alRole               :: !AdvertisersListRole
-    , _alMinPayoutRank      :: !(Maybe Int32)
+    , _alMinPayoutRank      :: !(Maybe (JSONText Int32))
     , _alAdvertiserCategory :: !(Maybe Text)
     , _alPageToken          :: !(Maybe Text)
-    , _alMaxResults         :: !(Maybe Word32)
+    , _alMaxResults         :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.
@@ -134,6 +134,7 @@ alMinSevenDayEpc :: Lens' AdvertisersList (Maybe Double)
 alMinSevenDayEpc
   = lens _alMinSevenDayEpc
       (\ s a -> s{_alMinSevenDayEpc = a})
+      . mapping _Coerce
 
 -- | The ID of the requesting advertiser or publisher.
 alRoleId :: Lens' AdvertisersList Text
@@ -145,6 +146,7 @@ alMinNinetyDayEpc :: Lens' AdvertisersList (Maybe Double)
 alMinNinetyDayEpc
   = lens _alMinNinetyDayEpc
       (\ s a -> s{_alMinNinetyDayEpc = a})
+      . mapping _Coerce
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
@@ -160,6 +162,7 @@ alMinPayoutRank :: Lens' AdvertisersList (Maybe Int32)
 alMinPayoutRank
   = lens _alMinPayoutRank
       (\ s a -> s{_alMinPayoutRank = a})
+      . mapping _Coerce
 
 -- | Caret(^) delimted list of advertiser categories. Valid categories are
 -- defined here:
@@ -180,6 +183,7 @@ alPageToken
 alMaxResults :: Lens' AdvertisersList (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = Advertisers

@@ -53,10 +53,10 @@ type RemarketingListsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "remarketingLists" :>
-               QueryParam "advertiserId" Int64 :>
-                 QueryParam "floodlightActivityId" Int64 :>
+               QueryParam "advertiserId" (JSONText Int64) :>
+                 QueryParam "floodlightActivityId" (JSONText Int64) :>
                    QueryParam "sortOrder" RemarketingListsListSortOrder
                      :>
                      QueryParam "active" Bool :>
@@ -64,7 +64,7 @@ type RemarketingListsListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField" RemarketingListsListSortField
                              :>
-                             QueryParam "maxResults" Int32 :>
+                             QueryParam "maxResults" (JSONText Int32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] RemarketingListsListResponse
 
@@ -72,15 +72,15 @@ type RemarketingListsListResource =
 --
 -- /See:/ 'remarketingListsList' smart constructor.
 data RemarketingListsList = RemarketingListsList
-    { _rllFloodlightActivityId :: !(Maybe Int64)
-    , _rllAdvertiserId         :: !Int64
-    , _rllProFileId            :: !Int64
+    { _rllFloodlightActivityId :: !(Maybe (JSONText Int64))
+    , _rllAdvertiserId         :: !(JSONText Int64)
+    , _rllProFileId            :: !(JSONText Int64)
     , _rllSortOrder            :: !(Maybe RemarketingListsListSortOrder)
     , _rllActive               :: !(Maybe Bool)
     , _rllName                 :: !(Maybe Text)
     , _rllPageToken            :: !(Maybe Text)
     , _rllSortField            :: !(Maybe RemarketingListsListSortField)
-    , _rllMaxResults           :: !(Maybe Int32)
+    , _rllMaxResults           :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsList' with the minimum fields required to make a request.
@@ -126,17 +126,20 @@ rllFloodlightActivityId :: Lens' RemarketingListsList (Maybe Int64)
 rllFloodlightActivityId
   = lens _rllFloodlightActivityId
       (\ s a -> s{_rllFloodlightActivityId = a})
+      . mapping _Coerce
 
 -- | Select only remarketing lists owned by this advertiser.
 rllAdvertiserId :: Lens' RemarketingListsList Int64
 rllAdvertiserId
   = lens _rllAdvertiserId
       (\ s a -> s{_rllAdvertiserId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 rllProFileId :: Lens' RemarketingListsList Int64
 rllProFileId
   = lens _rllProFileId (\ s a -> s{_rllProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 rllSortOrder :: Lens' RemarketingListsList (Maybe RemarketingListsListSortOrder)
@@ -174,6 +177,7 @@ rllMaxResults :: Lens' RemarketingListsList (Maybe Int32)
 rllMaxResults
   = lens _rllMaxResults
       (\ s a -> s{_rllMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest RemarketingListsList where
         type Rs RemarketingListsList =

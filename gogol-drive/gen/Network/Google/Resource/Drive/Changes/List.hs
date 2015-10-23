@@ -51,10 +51,10 @@ type ChangesListResource =
        "v2" :>
          "changes" :>
            QueryParam "includeSubscribed" Bool :>
-             QueryParam "startChangeId" Int64 :>
+             QueryParam "startChangeId" (JSONText Int64) :>
                QueryParam "spaces" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
+                   QueryParam "maxResults" (JSONText Int32) :>
                      QueryParam "includeDeleted" Bool :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ChangeList
 
@@ -63,10 +63,10 @@ type ChangesListResource =
 -- /See:/ 'changesList' smart constructor.
 data ChangesList = ChangesList
     { _clIncludeSubscribed :: !Bool
-    , _clStartChangeId     :: !(Maybe Int64)
+    , _clStartChangeId     :: !(Maybe (JSONText Int64))
     , _clSpaces            :: !(Maybe Text)
     , _clPageToken         :: !(Maybe Text)
-    , _clMaxResults        :: !Int32
+    , _clMaxResults        :: !(JSONText Int32)
     , _clIncludeDeleted    :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -110,6 +110,7 @@ clStartChangeId :: Lens' ChangesList (Maybe Int64)
 clStartChangeId
   = lens _clStartChangeId
       (\ s a -> s{_clStartChangeId = a})
+      . mapping _Coerce
 
 -- | A comma-separated list of spaces to query. Supported values are
 -- \'drive\', \'appDataFolder\' and \'photos\'.
@@ -125,6 +126,7 @@ clPageToken
 clMaxResults :: Lens' ChangesList Int32
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
+      . _Coerce
 
 -- | Whether to include deleted items.
 clIncludeDeleted :: Lens' ChangesList Bool

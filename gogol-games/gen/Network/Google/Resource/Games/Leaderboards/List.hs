@@ -49,7 +49,7 @@ type LeaderboardsListResource =
          "leaderboards" :>
            QueryParam "language" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
+               QueryParam "maxResults" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] LeaderboardListResponse
 
@@ -59,7 +59,7 @@ type LeaderboardsListResource =
 data LeaderboardsList = LeaderboardsList
     { _llLanguage   :: !(Maybe Text)
     , _llPageToken  :: !(Maybe Text)
-    , _llMaxResults :: !(Maybe Int32)
+    , _llMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsList' with the minimum fields required to make a request.
@@ -96,6 +96,7 @@ llPageToken
 llMaxResults :: Lens' LeaderboardsList (Maybe Int32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest LeaderboardsList where
         type Rs LeaderboardsList = LeaderboardListResponse

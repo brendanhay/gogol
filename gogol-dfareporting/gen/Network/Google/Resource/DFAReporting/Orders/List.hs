@@ -53,17 +53,17 @@ type OrdersListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "projects" :>
-               Capture "projectId" Int64 :>
+               Capture "projectId" (JSONText Int64) :>
                  "orders" :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" Int64 :>
+                     QueryParams "ids" (JSONText Int64) :>
                        QueryParam "sortOrder" OrdersListSortOrder :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField" OrdersListSortField :>
-                             QueryParams "siteId" Int64 :>
-                               QueryParam "maxResults" Int32 :>
+                             QueryParams "siteId" (JSONText Int64) :>
+                               QueryParam "maxResults" (JSONText Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] OrdersListResponse
 
@@ -72,14 +72,14 @@ type OrdersListResource =
 -- /See:/ 'ordersList' smart constructor.
 data OrdersList = OrdersList
     { _olSearchString :: !(Maybe Text)
-    , _olIds          :: !(Maybe [Int64])
-    , _olProFileId    :: !Int64
+    , _olIds          :: !(Maybe [JSONText Int64])
+    , _olProFileId    :: !(JSONText Int64)
     , _olSortOrder    :: !(Maybe OrdersListSortOrder)
     , _olPageToken    :: !(Maybe Text)
-    , _olProjectId    :: !Int64
+    , _olProjectId    :: !(JSONText Int64)
     , _olSortField    :: !(Maybe OrdersListSortField)
-    , _olSiteId       :: !(Maybe [Int64])
-    , _olMaxResults   :: !(Maybe Int32)
+    , _olSiteId       :: !(Maybe [JSONText Int64])
+    , _olMaxResults   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList' with the minimum fields required to make a request.
@@ -140,7 +140,8 @@ olIds
 -- | User profile ID associated with this request.
 olProFileId :: Lens' OrdersList Int64
 olProFileId
-  = lens _olProFileId (\ s a -> s{_olProFileId = a})
+  = lens _olProFileId (\ s a -> s{_olProFileId = a}) .
+      _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 olSortOrder :: Lens' OrdersList (Maybe OrdersListSortOrder)
@@ -155,7 +156,8 @@ olPageToken
 -- | Project ID for orders.
 olProjectId :: Lens' OrdersList Int64
 olProjectId
-  = lens _olProjectId (\ s a -> s{_olProjectId = a})
+  = lens _olProjectId (\ s a -> s{_olProjectId = a}) .
+      _Coerce
 
 -- | Field by which to sort the list.
 olSortField :: Lens' OrdersList (Maybe OrdersListSortField)
@@ -173,6 +175,7 @@ olSiteId
 olMaxResults :: Lens' OrdersList (Maybe Int32)
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest OrdersList where
         type Rs OrdersList = OrdersListResponse

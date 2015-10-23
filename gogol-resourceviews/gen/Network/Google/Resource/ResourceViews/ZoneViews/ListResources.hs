@@ -64,7 +64,7 @@ type ZoneViewsListResourcesResource =
                          QueryParam "format" ZoneViewsListResourcesFormat :>
                            QueryParam "serviceName" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" Int32 :>
+                               QueryParam "maxResults" (JSONText Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ZoneViewsListResourcesResponse
 
@@ -79,7 +79,7 @@ data ZoneViewsListResources = ZoneViewsListResources
     , _zvlrZone         :: !Text
     , _zvlrServiceName  :: !(Maybe Text)
     , _zvlrPageToken    :: !(Maybe Text)
-    , _zvlrMaxResults   :: !Int32
+    , _zvlrMaxResults   :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsListResources' with the minimum fields required to make a request.
@@ -167,6 +167,7 @@ zvlrMaxResults :: Lens' ZoneViewsListResources Int32
 zvlrMaxResults
   = lens _zvlrMaxResults
       (\ s a -> s{_zvlrMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest ZoneViewsListResources where
         type Rs ZoneViewsListResources =

@@ -49,11 +49,11 @@ type PerformanceReportListResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "performancereport" :>
-           QueryParam "accountId" Int64 :>
+           QueryParam "accountId" (JSONText Int64) :>
              QueryParam "endDateTime" Text :>
                QueryParam "startDateTime" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] PerformanceReportList
 
@@ -61,10 +61,10 @@ type PerformanceReportListResource =
 --
 -- /See:/ 'performanceReportList'' smart constructor.
 data PerformanceReportList' = PerformanceReportList'
-    { _prlAccountId     :: !Int64
+    { _prlAccountId     :: !(JSONText Int64)
     , _prlPageToken     :: !(Maybe Text)
     , _prlEndDateTime   :: !Text
-    , _prlMaxResults    :: !(Maybe Word32)
+    , _prlMaxResults    :: !(Maybe (JSONText Word32))
     , _prlStartDateTime :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -99,6 +99,7 @@ performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
 prlAccountId :: Lens' PerformanceReportList' Int64
 prlAccountId
   = lens _prlAccountId (\ s a -> s{_prlAccountId = a})
+      . _Coerce
 
 -- | A continuation token, used to page through performance reports. To
 -- retrieve the next page, set this parameter to the value of
@@ -119,6 +120,7 @@ prlMaxResults :: Lens' PerformanceReportList' (Maybe Word32)
 prlMaxResults
   = lens _prlMaxResults
       (\ s a -> s{_prlMaxResults = a})
+      . mapping _Coerce
 
 -- | The start time of the report in ISO 8601 timestamp format using UTC.
 prlStartDateTime :: Lens' PerformanceReportList' Text

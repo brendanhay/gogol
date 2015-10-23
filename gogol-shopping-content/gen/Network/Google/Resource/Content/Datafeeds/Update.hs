@@ -47,9 +47,9 @@ import           Network.Google.ShoppingContent.Types
 type DatafeedsUpdateResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "datafeeds" :>
-             Capture "datafeedId" Word64 :>
+             Capture "datafeedId" (JSONText Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Datafeed :> Put '[JSON] Datafeed
@@ -58,9 +58,9 @@ type DatafeedsUpdateResource =
 --
 -- /See:/ 'datafeedsUpdate' smart constructor.
 data DatafeedsUpdate = DatafeedsUpdate
-    { _duMerchantId :: !Word64
+    { _duMerchantId :: !(JSONText Word64)
     , _duPayload    :: !Datafeed
-    , _duDatafeedId :: !Word64
+    , _duDatafeedId :: !(JSONText Word64)
     , _duDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -91,6 +91,7 @@ datafeedsUpdate pDuMerchantId_ pDuPayload_ pDuDatafeedId_ =
 duMerchantId :: Lens' DatafeedsUpdate Word64
 duMerchantId
   = lens _duMerchantId (\ s a -> s{_duMerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 duPayload :: Lens' DatafeedsUpdate Datafeed
@@ -100,6 +101,7 @@ duPayload
 duDatafeedId :: Lens' DatafeedsUpdate Word64
 duDatafeedId
   = lens _duDatafeedId (\ s a -> s{_duDatafeedId = a})
+      . _Coerce
 
 -- | Flag to run the request in dry-run mode.
 duDryRun :: Lens' DatafeedsUpdate (Maybe Bool)

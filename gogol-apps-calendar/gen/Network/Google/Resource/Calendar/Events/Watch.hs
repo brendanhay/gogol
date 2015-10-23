@@ -74,7 +74,7 @@ type EventsWatchResource =
                            QueryParam "showDeleted" Bool :>
                              QueryParam "q" Text :>
                                QueryParams "sharedExtendedProperty" Text :>
-                                 QueryParam "maxAttendees" Int32 :>
+                                 QueryParam "maxAttendees" (JSONText Int32) :>
                                    QueryParam "iCalUID" Text :>
                                      QueryParam "updatedMin" DateTime' :>
                                        QueryParam "pageToken" Text :>
@@ -82,7 +82,9 @@ type EventsWatchResource =
                                            QueryParam "showHiddenInvitations"
                                              Bool
                                              :>
-                                             QueryParam "maxResults" Int32 :>
+                                             QueryParam "maxResults"
+                                               (JSONText Int32)
+                                               :>
                                                QueryParam "alwaysIncludeEmail"
                                                  Bool
                                                  :>
@@ -106,13 +108,13 @@ data EventsWatch = EventsWatch
     , _ewPayload                 :: !Channel
     , _ewQ                       :: !(Maybe Text)
     , _ewSharedExtendedProperty  :: !(Maybe [Text])
-    , _ewMaxAttendees            :: !(Maybe Int32)
+    , _ewMaxAttendees            :: !(Maybe (JSONText Int32))
     , _ewICalUId                 :: !(Maybe Text)
     , _ewUpdatedMin              :: !(Maybe DateTime')
     , _ewPageToken               :: !(Maybe Text)
     , _ewTimeZone                :: !(Maybe Text)
     , _ewShowHiddenInvitations   :: !(Maybe Bool)
-    , _ewMaxResults              :: !(Maybe Int32)
+    , _ewMaxResults              :: !(Maybe (JSONText Int32))
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
     , _ewTimeMax                 :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -280,6 +282,7 @@ ewMaxAttendees :: Lens' EventsWatch (Maybe Int32)
 ewMaxAttendees
   = lens _ewMaxAttendees
       (\ s a -> s{_ewMaxAttendees = a})
+      . mapping _Coerce
 
 -- | Specifies event ID in the iCalendar format to be included in the
 -- response. Optional.
@@ -320,6 +323,7 @@ ewShowHiddenInvitations
 ewMaxResults :: Lens' EventsWatch (Maybe Int32)
 ewMaxResults
   = lens _ewMaxResults (\ s a -> s{_ewMaxResults = a})
+      . mapping _Coerce
 
 -- | Whether to always include a value in the email field for the organizer,
 -- creator and attendees, even if no real email is available (i.e. a

@@ -27,7 +27,7 @@ data Audience = Audience
     , _aKind        :: !Text
     , _aVisibility  :: !(Maybe Text)
     , _aItem        :: !(Maybe PlusDomainsACLentryResource)
-    , _aMemberCount :: !(Maybe Word32)
+    , _aMemberCount :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Audience' with the minimum fields required to make a request.
@@ -80,6 +80,7 @@ aItem = lens _aItem (\ s a -> s{_aItem = a})
 aMemberCount :: Lens' Audience (Maybe Word32)
 aMemberCount
   = lens _aMemberCount (\ s a -> s{_aMemberCount = a})
+      . mapping _Coerce
 
 instance FromJSON Audience where
         parseJSON
@@ -184,7 +185,7 @@ instance ToJSON ActivityObjectAttachmentsItemEmbed
 --
 -- /See:/ 'commentPlusoners' smart constructor.
 newtype CommentPlusoners = CommentPlusoners
-    { _cpTotalItems :: Maybe Word32
+    { _cpTotalItems :: Maybe (JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentPlusoners' with the minimum fields required to make a request.
@@ -203,6 +204,7 @@ commentPlusoners =
 cpTotalItems :: Lens' CommentPlusoners (Maybe Word32)
 cpTotalItems
   = lens _cpTotalItems (\ s a -> s{_cpTotalItems = a})
+      . mapping _Coerce
 
 instance FromJSON CommentPlusoners where
         parseJSON
@@ -303,7 +305,7 @@ instance ToJSON
 --
 -- /See:/ 'activityObjectPlusoners' smart constructor.
 data ActivityObjectPlusoners = ActivityObjectPlusoners
-    { _aopTotalItems :: !(Maybe Word32)
+    { _aopTotalItems :: !(Maybe (JSONText Word32))
     , _aopSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -327,6 +329,7 @@ aopTotalItems :: Lens' ActivityObjectPlusoners (Maybe Word32)
 aopTotalItems
   = lens _aopTotalItems
       (\ s a -> s{_aopTotalItems = a})
+      . mapping _Coerce
 
 -- | The URL for the collection of people who +1\'d this activity.
 aopSelfLink :: Lens' ActivityObjectPlusoners (Maybe Text)
@@ -432,9 +435,9 @@ instance ToJSON CommentActorImage where
 --
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItemImage' smart constructor.
 data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachmentsItemThumbnailsItemImage
-    { _aoaitiiHeight :: !(Maybe Word32)
+    { _aoaitiiHeight :: !(Maybe (JSONText Word32))
     , _aoaitiiURL    :: !(Maybe Text)
-    , _aoaitiiWidth  :: !(Maybe Word32)
+    , _aoaitiiWidth  :: !(Maybe (JSONText Word32))
     , _aoaitiiType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -464,6 +467,7 @@ aoaitiiHeight :: Lens' ActivityObjectAttachmentsItemThumbnailsItemImage (Maybe W
 aoaitiiHeight
   = lens _aoaitiiHeight
       (\ s a -> s{_aoaitiiHeight = a})
+      . mapping _Coerce
 
 -- | Image url.
 aoaitiiURL :: Lens' ActivityObjectAttachmentsItemThumbnailsItemImage (Maybe Text)
@@ -474,6 +478,7 @@ aoaitiiURL
 aoaitiiWidth :: Lens' ActivityObjectAttachmentsItemThumbnailsItemImage (Maybe Word32)
 aoaitiiWidth
   = lens _aoaitiiWidth (\ s a -> s{_aoaitiiWidth = a})
+      . mapping _Coerce
 
 -- | Media type of the link.
 aoaitiiType :: Lens' ActivityObjectAttachmentsItemThumbnailsItemImage (Maybe Text)
@@ -508,8 +513,8 @@ instance ToJSON
 --
 -- /See:/ 'placePosition' smart constructor.
 data PlacePosition = PlacePosition
-    { _ppLatitude  :: !(Maybe Double)
-    , _ppLongitude :: !(Maybe Double)
+    { _ppLatitude  :: !(Maybe (JSONText Double))
+    , _ppLongitude :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacePosition' with the minimum fields required to make a request.
@@ -530,12 +535,14 @@ placePosition =
 -- | The latitude of this position.
 ppLatitude :: Lens' PlacePosition (Maybe Double)
 ppLatitude
-  = lens _ppLatitude (\ s a -> s{_ppLatitude = a})
+  = lens _ppLatitude (\ s a -> s{_ppLatitude = a}) .
+      mapping _Coerce
 
 -- | The longitude of this position.
 ppLongitude :: Lens' PlacePosition (Maybe Double)
 ppLongitude
-  = lens _ppLongitude (\ s a -> s{_ppLongitude = a})
+  = lens _ppLongitude (\ s a -> s{_ppLongitude = a}) .
+      mapping _Coerce
 
 instance FromJSON PlacePosition where
         parseJSON
@@ -744,7 +751,7 @@ data Person = Person
     , _pImage              :: !(Maybe PersonImage)
     , _pBraggingRights     :: !(Maybe Text)
     , _pPlacesLived        :: !(Maybe [PersonPlacesLivedItem])
-    , _pPlusOneCount       :: !(Maybe Int32)
+    , _pPlusOneCount       :: !(Maybe (JSONText Int32))
     , _pObjectType         :: !(Maybe Text)
     , _pCover              :: !(Maybe PersonCover)
     , _pKind               :: !Text
@@ -766,7 +773,7 @@ data Person = Person
     , _pId                 :: !(Maybe Text)
     , _pNickname           :: !(Maybe Text)
     , _pOrganizations      :: !(Maybe [PersonOrganizationsItem])
-    , _pCircledByCount     :: !(Maybe Int32)
+    , _pCircledByCount     :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Person' with the minimum fields required to make a request.
@@ -894,6 +901,7 @@ pPlusOneCount :: Lens' Person (Maybe Int32)
 pPlusOneCount
   = lens _pPlusOneCount
       (\ s a -> s{_pPlusOneCount = a})
+      . mapping _Coerce
 
 -- | Type of person within Google+. Possible values include, but are not
 -- limited to, the following values: - \"person\" - represents an actual
@@ -1021,6 +1029,7 @@ pCircledByCount :: Lens' Person (Maybe Int32)
 pCircledByCount
   = lens _pCircledByCount
       (\ s a -> s{_pCircledByCount = a})
+      . mapping _Coerce
 
 instance FromJSON Person where
         parseJSON
@@ -1085,9 +1094,9 @@ instance ToJSON Person where
 --
 -- /See:/ 'videostream' smart constructor.
 data Videostream = Videostream
-    { _vHeight :: !(Maybe Int32)
+    { _vHeight :: !(Maybe (JSONText Int32))
     , _vURL    :: !(Maybe Text)
-    , _vWidth  :: !(Maybe Int32)
+    , _vWidth  :: !(Maybe (JSONText Int32))
     , _vType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1114,7 +1123,9 @@ videostream =
 
 -- | The height, in pixels, of the video resource.
 vHeight :: Lens' Videostream (Maybe Int32)
-vHeight = lens _vHeight (\ s a -> s{_vHeight = a})
+vHeight
+  = lens _vHeight (\ s a -> s{_vHeight = a}) .
+      mapping _Coerce
 
 -- | URL of the video stream.
 vURL :: Lens' Videostream (Maybe Text)
@@ -1122,7 +1133,9 @@ vURL = lens _vURL (\ s a -> s{_vURL = a})
 
 -- | The width, in pixels, of the video resource.
 vWidth :: Lens' Videostream (Maybe Int32)
-vWidth = lens _vWidth (\ s a -> s{_vWidth = a})
+vWidth
+  = lens _vWidth (\ s a -> s{_vWidth = a}) .
+      mapping _Coerce
 
 -- | MIME type of the video stream.
 vType :: Lens' Videostream (Maybe Text)
@@ -1147,7 +1160,7 @@ instance ToJSON Videostream where
 --
 -- /See:/ 'circleFeed' smart constructor.
 data CircleFeed = CircleFeed
-    { _cfTotalItems    :: !(Maybe Int32)
+    { _cfTotalItems    :: !(Maybe (JSONText Int32))
     , _cfEtag          :: !(Maybe Text)
     , _cfNextPageToken :: !(Maybe Text)
     , _cfNextLink      :: !(Maybe Text)
@@ -1195,6 +1208,7 @@ circleFeed =
 cfTotalItems :: Lens' CircleFeed (Maybe Int32)
 cfTotalItems
   = lens _cfTotalItems (\ s a -> s{_cfTotalItems = a})
+      . mapping _Coerce
 
 -- | ETag of this response for caching purposes.
 cfEtag :: Lens' CircleFeed (Maybe Text)
@@ -1262,9 +1276,9 @@ instance ToJSON CircleFeed where
 --
 -- /See:/ 'activityObjectAttachmentsItemImage' smart constructor.
 data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage
-    { _aoaiiHeight :: !(Maybe Word32)
+    { _aoaiiHeight :: !(Maybe (JSONText Word32))
     , _aoaiiURL    :: !(Maybe Text)
-    , _aoaiiWidth  :: !(Maybe Word32)
+    , _aoaiiWidth  :: !(Maybe (JSONText Word32))
     , _aoaiiType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1292,7 +1306,8 @@ activityObjectAttachmentsItemImage =
 -- | The height, in pixels, of the linked resource.
 aoaiiHeight :: Lens' ActivityObjectAttachmentsItemImage (Maybe Word32)
 aoaiiHeight
-  = lens _aoaiiHeight (\ s a -> s{_aoaiiHeight = a})
+  = lens _aoaiiHeight (\ s a -> s{_aoaiiHeight = a}) .
+      mapping _Coerce
 
 -- | Image URL.
 aoaiiURL :: Lens' ActivityObjectAttachmentsItemImage (Maybe Text)
@@ -1301,7 +1316,8 @@ aoaiiURL = lens _aoaiiURL (\ s a -> s{_aoaiiURL = a})
 -- | The width, in pixels, of the linked resource.
 aoaiiWidth :: Lens' ActivityObjectAttachmentsItemImage (Maybe Word32)
 aoaiiWidth
-  = lens _aoaiiWidth (\ s a -> s{_aoaiiWidth = a})
+  = lens _aoaiiWidth (\ s a -> s{_aoaiiWidth = a}) .
+      mapping _Coerce
 
 -- | Media type of the link.
 aoaiiType :: Lens' ActivityObjectAttachmentsItemImage (Maybe Text)
@@ -1670,9 +1686,9 @@ instance ToJSON ActivityObjectActor where
 --
 -- /See:/ 'activityObjectAttachmentsItemFullImage' smart constructor.
 data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullImage
-    { _aoaifiHeight :: !(Maybe Word32)
+    { _aoaifiHeight :: !(Maybe (JSONText Word32))
     , _aoaifiURL    :: !(Maybe Text)
-    , _aoaifiWidth  :: !(Maybe Word32)
+    , _aoaifiWidth  :: !(Maybe (JSONText Word32))
     , _aoaifiType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1701,6 +1717,7 @@ activityObjectAttachmentsItemFullImage =
 aoaifiHeight :: Lens' ActivityObjectAttachmentsItemFullImage (Maybe Word32)
 aoaifiHeight
   = lens _aoaifiHeight (\ s a -> s{_aoaifiHeight = a})
+      . mapping _Coerce
 
 -- | URL of the image.
 aoaifiURL :: Lens' ActivityObjectAttachmentsItemFullImage (Maybe Text)
@@ -1710,7 +1727,8 @@ aoaifiURL
 -- | The width, in pixels, of the linked resource.
 aoaifiWidth :: Lens' ActivityObjectAttachmentsItemFullImage (Maybe Word32)
 aoaifiWidth
-  = lens _aoaifiWidth (\ s a -> s{_aoaifiWidth = a})
+  = lens _aoaifiWidth (\ s a -> s{_aoaifiWidth = a}) .
+      mapping _Coerce
 
 -- | Media type of the link.
 aoaifiType :: Lens' ActivityObjectAttachmentsItemFullImage (Maybe Text)
@@ -1775,7 +1793,7 @@ instance ToJSON MediaAuthorImage where
 --
 -- /See:/ 'circlePeople' smart constructor.
 newtype CirclePeople = CirclePeople
-    { _cTotalItems :: Maybe Word32
+    { _cTotalItems :: Maybe (JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclePeople' with the minimum fields required to make a request.
@@ -1793,7 +1811,8 @@ circlePeople =
 -- | The total number of people in this circle.
 cTotalItems :: Lens' CirclePeople (Maybe Word32)
 cTotalItems
-  = lens _cTotalItems (\ s a -> s{_cTotalItems = a})
+  = lens _cTotalItems (\ s a -> s{_cTotalItems = a}) .
+      mapping _Coerce
 
 instance FromJSON CirclePeople where
         parseJSON
@@ -1904,7 +1923,7 @@ instance ToJSON ActivityActorImage where
 --
 -- /See:/ 'peopleFeed' smart constructor.
 data PeopleFeed = PeopleFeed
-    { _pfTotalItems    :: !(Maybe Int32)
+    { _pfTotalItems    :: !(Maybe (JSONText Int32))
     , _pfEtag          :: !(Maybe Text)
     , _pfNextPageToken :: !(Maybe Text)
     , _pfKind          :: !Text
@@ -1949,6 +1968,7 @@ peopleFeed =
 pfTotalItems :: Lens' PeopleFeed (Maybe Int32)
 pfTotalItems
   = lens _pfTotalItems (\ s a -> s{_pfTotalItems = a})
+      . mapping _Coerce
 
 -- | ETag of this response for caching purposes.
 pfEtag :: Lens' PeopleFeed (Maybe Text)
@@ -2011,9 +2031,9 @@ instance ToJSON PeopleFeed where
 --
 -- /See:/ 'personCoverCoverPhoto' smart constructor.
 data PersonCoverCoverPhoto = PersonCoverCoverPhoto
-    { _pccpHeight :: !(Maybe Int32)
+    { _pccpHeight :: !(Maybe (JSONText Int32))
     , _pccpURL    :: !(Maybe Text)
-    , _pccpWidth  :: !(Maybe Int32)
+    , _pccpWidth  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PersonCoverCoverPhoto' with the minimum fields required to make a request.
@@ -2037,7 +2057,8 @@ personCoverCoverPhoto =
 -- | The height of the image.
 pccpHeight :: Lens' PersonCoverCoverPhoto (Maybe Int32)
 pccpHeight
-  = lens _pccpHeight (\ s a -> s{_pccpHeight = a})
+  = lens _pccpHeight (\ s a -> s{_pccpHeight = a}) .
+      mapping _Coerce
 
 -- | The URL of the image.
 pccpURL :: Lens' PersonCoverCoverPhoto (Maybe Text)
@@ -2046,7 +2067,8 @@ pccpURL = lens _pccpURL (\ s a -> s{_pccpURL = a})
 -- | The width of the image.
 pccpWidth :: Lens' PersonCoverCoverPhoto (Maybe Int32)
 pccpWidth
-  = lens _pccpWidth (\ s a -> s{_pccpWidth = a})
+  = lens _pccpWidth (\ s a -> s{_pccpWidth = a}) .
+      mapping _Coerce
 
 instance FromJSON PersonCoverCoverPhoto where
         parseJSON
@@ -2209,16 +2231,16 @@ instance ToJSON
 --
 -- /See:/ 'media' smart constructor.
 data Media = Media
-    { _mSizeBytes        :: !(Maybe Int64)
+    { _mSizeBytes        :: !(Maybe (JSONText Int64))
     , _mSummary          :: !(Maybe Text)
     , _mEtag             :: !(Maybe Text)
-    , _mHeight           :: !(Maybe Word32)
-    , _mVideoDuration    :: !(Maybe Int64)
+    , _mHeight           :: !(Maybe (JSONText Word32))
+    , _mVideoDuration    :: !(Maybe (JSONText Int64))
     , _mVideoStatus      :: !(Maybe Text)
     , _mKind             :: !Text
     , _mPublished        :: !(Maybe DateTime')
     , _mURL              :: !(Maybe Text)
-    , _mWidth            :: !(Maybe Word32)
+    , _mWidth            :: !(Maybe (JSONText Word32))
     , _mMediaURL         :: !(Maybe Text)
     , _mStreams          :: !(Maybe [Videostream])
     , _mExif             :: !(Maybe MediaExif)
@@ -2295,7 +2317,8 @@ media =
 -- | The size in bytes of this video.
 mSizeBytes :: Lens' Media (Maybe Int64)
 mSizeBytes
-  = lens _mSizeBytes (\ s a -> s{_mSizeBytes = a})
+  = lens _mSizeBytes (\ s a -> s{_mSizeBytes = a}) .
+      mapping _Coerce
 
 -- | A description, or caption, for this media.
 mSummary :: Lens' Media (Maybe Text)
@@ -2307,13 +2330,16 @@ mEtag = lens _mEtag (\ s a -> s{_mEtag = a})
 
 -- | The height in pixels of the original image.
 mHeight :: Lens' Media (Maybe Word32)
-mHeight = lens _mHeight (\ s a -> s{_mHeight = a})
+mHeight
+  = lens _mHeight (\ s a -> s{_mHeight = a}) .
+      mapping _Coerce
 
 -- | The duration in milliseconds of this video.
 mVideoDuration :: Lens' Media (Maybe Int64)
 mVideoDuration
   = lens _mVideoDuration
       (\ s a -> s{_mVideoDuration = a})
+      . mapping _Coerce
 
 -- | The encoding status of this video. Possible values are: - \"UPLOADING\"
 -- - Not all the video bytes have been received. - \"PENDING\" - Video not
@@ -2341,7 +2367,9 @@ mURL = lens _mURL (\ s a -> s{_mURL = a})
 
 -- | The width in pixels of the original image.
 mWidth :: Lens' Media (Maybe Word32)
-mWidth = lens _mWidth (\ s a -> s{_mWidth = a})
+mWidth
+  = lens _mWidth (\ s a -> s{_mWidth = a}) .
+      mapping _Coerce
 
 -- | The URL of this photo or video\'s still image.
 mMediaURL :: Lens' Media (Maybe Text)
@@ -2436,7 +2464,7 @@ instance ToJSON Media where
 --
 -- /See:/ 'activityObjectReplies' smart constructor.
 data ActivityObjectReplies = ActivityObjectReplies
-    { _aorTotalItems :: !(Maybe Word32)
+    { _aorTotalItems :: !(Maybe (JSONText Word32))
     , _aorSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2460,6 +2488,7 @@ aorTotalItems :: Lens' ActivityObjectReplies (Maybe Word32)
 aorTotalItems
   = lens _aorTotalItems
       (\ s a -> s{_aorTotalItems = a})
+      . mapping _Coerce
 
 -- | The URL for the collection of comments in reply to this activity.
 aorSelfLink :: Lens' ActivityObjectReplies (Maybe Text)
@@ -3460,7 +3489,7 @@ instance ToJSON PlaceAddress where
 --
 -- /See:/ 'audiencesFeed' smart constructor.
 data AudiencesFeed = AudiencesFeed
-    { _audTotalItems    :: !(Maybe Int32)
+    { _audTotalItems    :: !(Maybe (JSONText Int32))
     , _audEtag          :: !(Maybe Text)
     , _audNextPageToken :: !(Maybe Text)
     , _audKind          :: !Text
@@ -3497,6 +3526,7 @@ audTotalItems :: Lens' AudiencesFeed (Maybe Int32)
 audTotalItems
   = lens _audTotalItems
       (\ s a -> s{_audTotalItems = a})
+      . mapping _Coerce
 
 -- | ETag of this response for caching purposes.
 audEtag :: Lens' AudiencesFeed (Maybe Text)
@@ -3891,8 +3921,8 @@ instance ToJSON PersonURLsItem where
 --
 -- /See:/ 'personCoverCoverInfo' smart constructor.
 data PersonCoverCoverInfo = PersonCoverCoverInfo
-    { _pcciTopImageOffSet  :: !(Maybe Int32)
-    , _pcciLeftImageOffSet :: !(Maybe Int32)
+    { _pcciTopImageOffSet  :: !(Maybe (JSONText Int32))
+    , _pcciLeftImageOffSet :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PersonCoverCoverInfo' with the minimum fields required to make a request.
@@ -3916,6 +3946,7 @@ pcciTopImageOffSet :: Lens' PersonCoverCoverInfo (Maybe Int32)
 pcciTopImageOffSet
   = lens _pcciTopImageOffSet
       (\ s a -> s{_pcciTopImageOffSet = a})
+      . mapping _Coerce
 
 -- | The difference between the left position of the cover image and the
 -- actual displayed cover image. Only valid for banner layout.
@@ -3923,6 +3954,7 @@ pcciLeftImageOffSet :: Lens' PersonCoverCoverInfo (Maybe Int32)
 pcciLeftImageOffSet
   = lens _pcciLeftImageOffSet
       (\ s a -> s{_pcciLeftImageOffSet = a})
+      . mapping _Coerce
 
 instance FromJSON PersonCoverCoverInfo where
         parseJSON
@@ -3943,7 +3975,7 @@ instance ToJSON PersonCoverCoverInfo where
 --
 -- /See:/ 'activityObjectResharers' smart constructor.
 data ActivityObjectResharers = ActivityObjectResharers
-    { _aTotalItems :: !(Maybe Word32)
+    { _aTotalItems :: !(Maybe (JSONText Word32))
     , _aSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3965,7 +3997,8 @@ activityObjectResharers =
 -- | Total number of people who reshared this activity.
 aTotalItems :: Lens' ActivityObjectResharers (Maybe Word32)
 aTotalItems
-  = lens _aTotalItems (\ s a -> s{_aTotalItems = a})
+  = lens _aTotalItems (\ s a -> s{_aTotalItems = a}) .
+      mapping _Coerce
 
 -- | The URL for the collection of resharers.
 aSelfLink :: Lens' ActivityObjectResharers (Maybe Text)

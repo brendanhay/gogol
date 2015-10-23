@@ -46,9 +46,9 @@ type AccountActiveAdSummariesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "accountActiveAdSummaries" :>
-               Capture "summaryAccountId" Int64 :>
+               Capture "summaryAccountId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountActiveAdSummary
 
@@ -56,8 +56,8 @@ type AccountActiveAdSummariesGetResource =
 --
 -- /See:/ 'accountActiveAdSummariesGet' smart constructor.
 data AccountActiveAdSummariesGet = AccountActiveAdSummariesGet
-    { _aaasgProFileId        :: !Int64
-    , _aaasgSummaryAccountId :: !Int64
+    { _aaasgProFileId        :: !(JSONText Int64)
+    , _aaasgSummaryAccountId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountActiveAdSummariesGet' with the minimum fields required to make a request.
@@ -82,12 +82,14 @@ aaasgProFileId :: Lens' AccountActiveAdSummariesGet Int64
 aaasgProFileId
   = lens _aaasgProFileId
       (\ s a -> s{_aaasgProFileId = a})
+      . _Coerce
 
 -- | Account ID.
 aaasgSummaryAccountId :: Lens' AccountActiveAdSummariesGet Int64
 aaasgSummaryAccountId
   = lens _aaasgSummaryAccountId
       (\ s a -> s{_aaasgSummaryAccountId = a})
+      . _Coerce
 
 instance GoogleRequest AccountActiveAdSummariesGet
          where

@@ -60,7 +60,7 @@ import           Network.Google.Prelude
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe Int32)
+    , _sCode    :: !(Maybe (JSONText Int32))
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -93,7 +93,9 @@ sDetails
 -- | The status code, which should be an enum value of
 -- [google.rpc.Code][google.rpc.Code].
 sCode :: Lens' Status (Maybe Int32)
-sCode = lens _sCode (\ s a -> s{_sCode = a})
+sCode
+  = lens _sCode (\ s a -> s{_sCode = a}) .
+      mapping _Coerce
 
 -- | A developer-facing error message, which should be in English. Any
 -- user-facing error message should be localized and sent in the
@@ -489,13 +491,13 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'healthCheck' smart constructor.
 data HealthCheck = HealthCheck
-    { _hcHealthyThreshold   :: !(Maybe Word32)
+    { _hcHealthyThreshold   :: !(Maybe (JSONText Word32))
     , _hcDisableHealthCheck :: !(Maybe Bool)
     , _hcCheckInterval      :: !(Maybe Text)
-    , _hcRestartThreshold   :: !(Maybe Word32)
+    , _hcRestartThreshold   :: !(Maybe (JSONText Word32))
     , _hcHost               :: !(Maybe Text)
     , _hcTimeout            :: !(Maybe Text)
-    , _hcUnhealthyThreshold :: !(Maybe Word32)
+    , _hcUnhealthyThreshold :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
@@ -534,6 +536,7 @@ hcHealthyThreshold :: Lens' HealthCheck (Maybe Word32)
 hcHealthyThreshold
   = lens _hcHealthyThreshold
       (\ s a -> s{_hcHealthyThreshold = a})
+      . mapping _Coerce
 
 -- | Whether to explicitly disable health checks for this instance.
 hcDisableHealthCheck :: Lens' HealthCheck (Maybe Bool)
@@ -553,6 +556,7 @@ hcRestartThreshold :: Lens' HealthCheck (Maybe Word32)
 hcRestartThreshold
   = lens _hcRestartThreshold
       (\ s a -> s{_hcRestartThreshold = a})
+      . mapping _Coerce
 
 -- | The host header to send when performing an HTTP health check (e.g.
 -- myapp.appspot.com)
@@ -569,6 +573,7 @@ hcUnhealthyThreshold :: Lens' HealthCheck (Maybe Word32)
 hcUnhealthyThreshold
   = lens _hcUnhealthyThreshold
       (\ s a -> s{_hcUnhealthyThreshold = a})
+      . mapping _Coerce
 
 instance FromJSON HealthCheck where
         parseJSON
@@ -1143,13 +1148,13 @@ instance ToJSON FileInfo where
 --
 -- /See:/ 'automaticScaling' smart constructor.
 data AutomaticScaling = AutomaticScaling
-    { _asMaxTotalInstances     :: !(Maybe Int32)
-    , _asMinIdleInstances      :: !(Maybe Int32)
+    { _asMaxTotalInstances     :: !(Maybe (JSONText Int32))
+    , _asMinIdleInstances      :: !(Maybe (JSONText Int32))
     , _asMinPendingLatency     :: !(Maybe Text)
     , _asCPUUtilization        :: !(Maybe CPUUtilization)
-    , _asMaxIdleInstances      :: !(Maybe Int32)
-    , _asMinTotalInstances     :: !(Maybe Int32)
-    , _asMaxConcurrentRequests :: !(Maybe Int32)
+    , _asMaxIdleInstances      :: !(Maybe (JSONText Int32))
+    , _asMinTotalInstances     :: !(Maybe (JSONText Int32))
+    , _asMaxConcurrentRequests :: !(Maybe (JSONText Int32))
     , _asCoolDownPeriod        :: !(Maybe Text)
     , _asMaxPendingLatency     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1195,6 +1200,7 @@ asMaxTotalInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMaxTotalInstances
   = lens _asMaxTotalInstances
       (\ s a -> s{_asMaxTotalInstances = a})
+      . mapping _Coerce
 
 -- | The minimum number of idle instances that App Engine should maintain for
 -- this version. Only applies to the default version of a module, since
@@ -1203,6 +1209,7 @@ asMinIdleInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMinIdleInstances
   = lens _asMinIdleInstances
       (\ s a -> s{_asMinIdleInstances = a})
+      . mapping _Coerce
 
 -- | The minimum amount of time that App Engine should allow a request to
 -- wait in the pending queue before starting a new instance to handle it.
@@ -1223,12 +1230,14 @@ asMaxIdleInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMaxIdleInstances
   = lens _asMaxIdleInstances
       (\ s a -> s{_asMaxIdleInstances = a})
+      . mapping _Coerce
 
 -- | Minimum number of instances that App Engine should maintain.
 asMinTotalInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMinTotalInstances
   = lens _asMinTotalInstances
       (\ s a -> s{_asMinTotalInstances = a})
+      . mapping _Coerce
 
 -- | The number of concurrent requests an automatic scaling instance can
 -- accept before the scheduler spawns a new instance. Default value is
@@ -1237,6 +1246,7 @@ asMaxConcurrentRequests :: Lens' AutomaticScaling (Maybe Int32)
 asMaxConcurrentRequests
   = lens _asMaxConcurrentRequests
       (\ s a -> s{_asMaxConcurrentRequests = a})
+      . mapping _Coerce
 
 -- | The amount of time that the
 -- [Autoscaler](https:\/\/cloud.google.com\/compute\/docs\/autoscaler\/)
@@ -1505,9 +1515,9 @@ instance ToJSON StaticFilesHandlerHTTPHeaders where
 --
 -- /See:/ 'resources' smart constructor.
 data Resources = Resources
-    { _rMemoryGb :: !(Maybe Double)
-    , _rDiskGb   :: !(Maybe Double)
-    , _rCPU      :: !(Maybe Double)
+    { _rMemoryGb :: !(Maybe (JSONText Double))
+    , _rDiskGb   :: !(Maybe (JSONText Double))
+    , _rCPU      :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Resources' with the minimum fields required to make a request.
@@ -1531,15 +1541,20 @@ resources =
 -- | How much memory, in GB, an app version needs.
 rMemoryGb :: Lens' Resources (Maybe Double)
 rMemoryGb
-  = lens _rMemoryGb (\ s a -> s{_rMemoryGb = a})
+  = lens _rMemoryGb (\ s a -> s{_rMemoryGb = a}) .
+      mapping _Coerce
 
 -- | How much disk size, in GB, an app version needs.
 rDiskGb :: Lens' Resources (Maybe Double)
-rDiskGb = lens _rDiskGb (\ s a -> s{_rDiskGb = a})
+rDiskGb
+  = lens _rDiskGb (\ s a -> s{_rDiskGb = a}) .
+      mapping _Coerce
 
 -- | How many CPU cores an app version needs.
 rCPU :: Lens' Resources (Maybe Double)
-rCPU = lens _rCPU (\ s a -> s{_rCPU = a})
+rCPU
+  = lens _rCPU (\ s a -> s{_rCPU = a}) .
+      mapping _Coerce
 
 instance FromJSON Resources where
         parseJSON
@@ -1595,7 +1610,7 @@ instance ToJSON DeploymentFiles where
 -- /See:/ 'cpuUtilization' smart constructor.
 data CPUUtilization = CPUUtilization
     { _cuAggregationWindowLength :: !(Maybe Text)
-    , _cuTargetUtilization       :: !(Maybe Double)
+    , _cuTargetUtilization       :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CPUUtilization' with the minimum fields required to make a request.
@@ -1624,6 +1639,7 @@ cuTargetUtilization :: Lens' CPUUtilization (Maybe Double)
 cuTargetUtilization
   = lens _cuTargetUtilization
       (\ s a -> s{_cuTargetUtilization = a})
+      . mapping _Coerce
 
 instance FromJSON CPUUtilization where
         parseJSON
@@ -1652,7 +1668,7 @@ instance ToJSON CPUUtilization where
 --
 -- /See:/ 'trafficSplitAllocations' smart constructor.
 newtype TrafficSplitAllocations = TrafficSplitAllocations
-    { _tsaAddtional :: HashMap Text Double
+    { _tsaAddtional :: HashMap Text (JSONText Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
@@ -1686,7 +1702,7 @@ instance ToJSON TrafficSplitAllocations where
 --
 -- /See:/ 'manualScaling' smart constructor.
 newtype ManualScaling = ManualScaling
-    { _msInstances :: Maybe Int32
+    { _msInstances :: Maybe (JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManualScaling' with the minimum fields required to make a request.
@@ -1707,7 +1723,8 @@ manualScaling =
 -- \`set_num_instances()\` function.
 msInstances :: Lens' ManualScaling (Maybe Int32)
 msInstances
-  = lens _msInstances (\ s a -> s{_msInstances = a})
+  = lens _msInstances (\ s a -> s{_msInstances = a}) .
+      mapping _Coerce
 
 instance FromJSON ManualScaling where
         parseJSON
@@ -1726,7 +1743,7 @@ instance ToJSON ManualScaling where
 --
 -- /See:/ 'basicScaling' smart constructor.
 data BasicScaling = BasicScaling
-    { _bsMaxInstances :: !(Maybe Int32)
+    { _bsMaxInstances :: !(Maybe (JSONText Int32))
     , _bsIdleTimeout  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1751,6 +1768,7 @@ bsMaxInstances :: Lens' BasicScaling (Maybe Int32)
 bsMaxInstances
   = lens _bsMaxInstances
       (\ s a -> s{_bsMaxInstances = a})
+      . mapping _Coerce
 
 -- | The instance will be shut down this amount of time after receiving its
 -- last request.

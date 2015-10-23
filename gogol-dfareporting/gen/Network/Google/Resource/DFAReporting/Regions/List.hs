@@ -45,7 +45,7 @@ type RegionsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "regions" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] RegionsListResponse
@@ -54,7 +54,7 @@ type RegionsListResource =
 --
 -- /See:/ 'regionsList' smart constructor.
 newtype RegionsList = RegionsList
-    { _rProFileId :: Int64
+    { _rProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsList' with the minimum fields required to make a request.
@@ -73,7 +73,8 @@ regionsList pRProFileId_ =
 -- | User profile ID associated with this request.
 rProFileId :: Lens' RegionsList Int64
 rProFileId
-  = lens _rProFileId (\ s a -> s{_rProFileId = a})
+  = lens _rProFileId (\ s a -> s{_rProFileId = a}) .
+      _Coerce
 
 instance GoogleRequest RegionsList where
         type Rs RegionsList = RegionsListResponse

@@ -72,28 +72,36 @@ type ObjectsCopyResource =
                            QueryParam "destinationPredefinedAcl"
                              ObjectsCopyDestinationPredefinedACL
                              :>
-                             QueryParam "ifSourceGenerationMatch" Int64 :>
-                               QueryParam "ifMetagenerationMatch" Int64 :>
-                                 QueryParam "ifGenerationNotMatch" Int64 :>
+                             QueryParam "ifSourceGenerationMatch"
+                               (JSONText Int64)
+                               :>
+                               QueryParam "ifMetagenerationMatch"
+                                 (JSONText Int64)
+                                 :>
+                                 QueryParam "ifGenerationNotMatch"
+                                   (JSONText Int64)
+                                   :>
                                    QueryParam "ifSourceMetagenerationNotMatch"
-                                     Int64
+                                     (JSONText Int64)
                                      :>
                                      QueryParam "ifSourceMetagenerationMatch"
-                                       Int64
+                                       (JSONText Int64)
                                        :>
-                                       QueryParam "ifGenerationMatch" Int64 :>
+                                       QueryParam "ifGenerationMatch"
+                                         (JSONText Int64)
+                                         :>
                                          QueryParam "ifMetagenerationNotMatch"
-                                           Int64
+                                           (JSONText Int64)
                                            :>
                                            QueryParam
                                              "ifSourceGenerationNotMatch"
-                                             Int64
+                                             (JSONText Int64)
                                              :>
                                              QueryParam "projection"
                                                ObjectsCopyProjection
                                                :>
                                                QueryParam "sourceGeneration"
-                                                 Int64
+                                                 (JSONText Int64)
                                                  :>
                                                  QueryParam "alt" AltJSON :>
                                                    ReqBody '[JSON] Object :>
@@ -113,28 +121,36 @@ type ObjectsCopyResource =
                              QueryParam "destinationPredefinedAcl"
                                ObjectsCopyDestinationPredefinedACL
                                :>
-                               QueryParam "ifSourceGenerationMatch" Int64 :>
-                                 QueryParam "ifMetagenerationMatch" Int64 :>
-                                   QueryParam "ifGenerationNotMatch" Int64 :>
+                               QueryParam "ifSourceGenerationMatch"
+                                 (JSONText Int64)
+                                 :>
+                                 QueryParam "ifMetagenerationMatch"
+                                   (JSONText Int64)
+                                   :>
+                                   QueryParam "ifGenerationNotMatch"
+                                     (JSONText Int64)
+                                     :>
                                      QueryParam "ifSourceMetagenerationNotMatch"
-                                       Int64
+                                       (JSONText Int64)
                                        :>
                                        QueryParam "ifSourceMetagenerationMatch"
-                                         Int64
+                                         (JSONText Int64)
                                          :>
-                                         QueryParam "ifGenerationMatch" Int64 :>
+                                         QueryParam "ifGenerationMatch"
+                                           (JSONText Int64)
+                                           :>
                                            QueryParam "ifMetagenerationNotMatch"
-                                             Int64
+                                             (JSONText Int64)
                                              :>
                                              QueryParam
                                                "ifSourceGenerationNotMatch"
-                                               Int64
+                                               (JSONText Int64)
                                                :>
                                                QueryParam "projection"
                                                  ObjectsCopyProjection
                                                  :>
                                                  QueryParam "sourceGeneration"
-                                                   Int64
+                                                   (JSONText Int64)
                                                    :>
                                                    QueryParam "alt" AltMedia :>
                                                      Get '[OctetStream] Stream
@@ -145,20 +161,20 @@ type ObjectsCopyResource =
 -- /See:/ 'objectsCopy' smart constructor.
 data ObjectsCopy = ObjectsCopy
     { _ocDestinationPredefinedACL       :: !(Maybe ObjectsCopyDestinationPredefinedACL)
-    , _ocIfSourceGenerationMatch        :: !(Maybe Int64)
-    , _ocIfMetagenerationMatch          :: !(Maybe Int64)
-    , _ocIfGenerationNotMatch           :: !(Maybe Int64)
-    , _ocIfSourceMetagenerationNotMatch :: !(Maybe Int64)
-    , _ocIfSourceMetagenerationMatch    :: !(Maybe Int64)
-    , _ocIfGenerationMatch              :: !(Maybe Int64)
+    , _ocIfSourceGenerationMatch        :: !(Maybe (JSONText Int64))
+    , _ocIfMetagenerationMatch          :: !(Maybe (JSONText Int64))
+    , _ocIfGenerationNotMatch           :: !(Maybe (JSONText Int64))
+    , _ocIfSourceMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _ocIfSourceMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    , _ocIfGenerationMatch              :: !(Maybe (JSONText Int64))
     , _ocSourceObject                   :: !Text
     , _ocSourceBucket                   :: !Text
     , _ocPayload                        :: !Object
     , _ocDestinationBucket              :: !Text
-    , _ocIfMetagenerationNotMatch       :: !(Maybe Int64)
-    , _ocIfSourceGenerationNotMatch     :: !(Maybe Int64)
+    , _ocIfMetagenerationNotMatch       :: !(Maybe (JSONText Int64))
+    , _ocIfSourceGenerationNotMatch     :: !(Maybe (JSONText Int64))
     , _ocProjection                     :: !(Maybe ObjectsCopyProjection)
-    , _ocSourceGeneration               :: !(Maybe Int64)
+    , _ocSourceGeneration               :: !(Maybe (JSONText Int64))
     , _ocDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -236,6 +252,7 @@ ocIfSourceGenerationMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfSourceGenerationMatch
   = lens _ocIfSourceGenerationMatch
       (\ s a -> s{_ocIfSourceGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current metageneration matches the given value.
@@ -243,6 +260,7 @@ ocIfMetagenerationMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfMetagenerationMatch
   = lens _ocIfMetagenerationMatch
       (\ s a -> s{_ocIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation does not match the given value.
@@ -250,6 +268,7 @@ ocIfGenerationNotMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfGenerationNotMatch
   = lens _ocIfGenerationNotMatch
       (\ s a -> s{_ocIfGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration does not match the given value.
@@ -257,6 +276,7 @@ ocIfSourceMetagenerationNotMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfSourceMetagenerationNotMatch
   = lens _ocIfSourceMetagenerationNotMatch
       (\ s a -> s{_ocIfSourceMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration matches the given value.
@@ -264,6 +284,7 @@ ocIfSourceMetagenerationMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfSourceMetagenerationMatch
   = lens _ocIfSourceMetagenerationMatch
       (\ s a -> s{_ocIfSourceMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation matches the given value.
@@ -271,6 +292,7 @@ ocIfGenerationMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfGenerationMatch
   = lens _ocIfGenerationMatch
       (\ s a -> s{_ocIfGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Name of the source object. For information about how to URL encode
 -- object names to be path safe, see Encoding URI Path Parts.
@@ -305,6 +327,7 @@ ocIfMetagenerationNotMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfMetagenerationNotMatch
   = lens _ocIfMetagenerationNotMatch
       (\ s a -> s{_ocIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation does not match the given value.
@@ -312,6 +335,7 @@ ocIfSourceGenerationNotMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfSourceGenerationNotMatch
   = lens _ocIfSourceGenerationNotMatch
       (\ s a -> s{_ocIfSourceGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
@@ -325,6 +349,7 @@ ocSourceGeneration :: Lens' ObjectsCopy (Maybe Int64)
 ocSourceGeneration
   = lens _ocSourceGeneration
       (\ s a -> s{_ocSourceGeneration = a})
+      . mapping _Coerce
 
 -- | Name of the new object. Required when the object metadata is not
 -- otherwise provided. Overrides the object metadata\'s name value, if any.

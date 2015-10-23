@@ -49,7 +49,7 @@ type RoomsListResource =
          "rooms" :>
            QueryParam "language" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
+               QueryParam "maxResults" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] RoomList
 
 -- | Returns invitations to join rooms.
@@ -58,7 +58,7 @@ type RoomsListResource =
 data RoomsList = RoomsList
     { _rLanguage   :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
-    , _rMaxResults :: !(Maybe Int32)
+    , _rMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsList' with the minimum fields required to make a request.
@@ -94,7 +94,8 @@ rPageToken
 -- the specified maxResults.
 rMaxResults :: Lens' RoomsList (Maybe Int32)
 rMaxResults
-  = lens _rMaxResults (\ s a -> s{_rMaxResults = a})
+  = lens _rMaxResults (\ s a -> s{_rMaxResults = a}) .
+      mapping _Coerce
 
 instance GoogleRequest RoomsList where
         type Rs RoomsList = RoomList

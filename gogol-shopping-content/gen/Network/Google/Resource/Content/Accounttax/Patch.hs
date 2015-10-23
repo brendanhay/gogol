@@ -48,9 +48,9 @@ import           Network.Google.ShoppingContent.Types
 type AccounttaxPatchResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accounttax" :>
-             Capture "accountId" Word64 :>
+             Capture "accountId" (JSONText Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AccountTax :>
@@ -61,9 +61,9 @@ type AccounttaxPatchResource =
 --
 -- /See:/ 'accounttaxPatch' smart constructor.
 data AccounttaxPatch = AccounttaxPatch
-    { _appMerchantId :: !Word64
+    { _appMerchantId :: !(JSONText Word64)
     , _appPayload    :: !AccountTax
-    , _appAccountId  :: !Word64
+    , _appAccountId  :: !(JSONText Word64)
     , _appDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,6 +96,7 @@ appMerchantId :: Lens' AccounttaxPatch Word64
 appMerchantId
   = lens _appMerchantId
       (\ s a -> s{_appMerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 appPayload :: Lens' AccounttaxPatch AccountTax
@@ -106,6 +107,7 @@ appPayload
 appAccountId :: Lens' AccounttaxPatch Word64
 appAccountId
   = lens _appAccountId (\ s a -> s{_appAccountId = a})
+      . _Coerce
 
 -- | Flag to run the request in dry-run mode.
 appDryRun :: Lens' AccounttaxPatch (Maybe Bool)

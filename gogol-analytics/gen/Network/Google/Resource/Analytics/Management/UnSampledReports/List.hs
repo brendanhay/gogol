@@ -56,8 +56,8 @@ type ManagementUnSampledReportsListResource =
                    "profiles" :>
                      Capture "profileId" Text :>
                        "unsampledReports" :>
-                         QueryParam "start-index" Int32 :>
-                           QueryParam "max-results" Int32 :>
+                         QueryParam "start-index" (JSONText Int32) :>
+                           QueryParam "max-results" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] UnSampledReports
 
@@ -68,8 +68,8 @@ data ManagementUnSampledReportsList = ManagementUnSampledReportsList
     { _musrlWebPropertyId :: !Text
     , _musrlProFileId     :: !Text
     , _musrlAccountId     :: !Text
-    , _musrlStartIndex    :: !(Maybe Int32)
-    , _musrlMaxResults    :: !(Maybe Int32)
+    , _musrlStartIndex    :: !(Maybe (JSONText Int32))
+    , _musrlMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnSampledReportsList' with the minimum fields required to make a request.
@@ -126,12 +126,14 @@ musrlStartIndex :: Lens' ManagementUnSampledReportsList (Maybe Int32)
 musrlStartIndex
   = lens _musrlStartIndex
       (\ s a -> s{_musrlStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of unsampled reports to include in this response.
 musrlMaxResults :: Lens' ManagementUnSampledReportsList (Maybe Int32)
 musrlMaxResults
   = lens _musrlMaxResults
       (\ s a -> s{_musrlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementUnSampledReportsList
          where

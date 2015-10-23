@@ -46,17 +46,17 @@ type AccountsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "accounts" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
 data AccountsGet = AccountsGet
-    { _aggProFileId :: !Int64
-    , _aggId        :: !Int64
+    { _aggProFileId :: !(JSONText Int64)
+    , _aggId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ accountsGet pAggProFileId_ pAggId_ =
 aggProFileId :: Lens' AccountsGet Int64
 aggProFileId
   = lens _aggProFileId (\ s a -> s{_aggProFileId = a})
+      . _Coerce
 
 -- | Account ID.
 aggId :: Lens' AccountsGet Int64
-aggId = lens _aggId (\ s a -> s{_aggId = a})
+aggId
+  = lens _aggId (\ s a -> s{_aggId = a}) . _Coerce
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account

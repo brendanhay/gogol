@@ -73,7 +73,8 @@ type LayersVolumeAnnotationsListResource =
                                  QueryParam "source" Text :>
                                    QueryParam "pageToken" Text :>
                                      QueryParam "endPosition" Text :>
-                                       QueryParam "maxResults" Word32 :>
+                                       QueryParam "maxResults" (JSONText Word32)
+                                         :>
                                          QueryParam "startPosition" Text :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] Volumeannotations
@@ -95,7 +96,7 @@ data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
     , _lvalPageToken                :: !(Maybe Text)
     , _lvalEndPosition              :: !(Maybe Text)
     , _lvalLayerId                  :: !Text
-    , _lvalMaxResults               :: !(Maybe Word32)
+    , _lvalMaxResults               :: !(Maybe (JSONText Word32))
     , _lvalStartPosition            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -239,6 +240,7 @@ lvalMaxResults :: Lens' LayersVolumeAnnotationsList (Maybe Word32)
 lvalMaxResults
   = lens _lvalMaxResults
       (\ s a -> s{_lvalMaxResults = a})
+      . mapping _Coerce
 
 -- | The start position to start retrieving data from.
 lvalStartPosition :: Lens' LayersVolumeAnnotationsList (Maybe Text)

@@ -54,7 +54,7 @@ type HTTPSHealthChecksListResource =
                "httpsHealthChecks" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] HTTPSHealthCheckList
 
@@ -66,7 +66,7 @@ data HTTPSHealthChecksList = HTTPSHealthChecksList
     { _hhclProject    :: !Text
     , _hhclFilter     :: !(Maybe Text)
     , _hhclPageToken  :: !(Maybe Text)
-    , _hhclMaxResults :: !Word32
+    , _hhclMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPSHealthChecksList' with the minimum fields required to make a request.
@@ -124,6 +124,7 @@ hhclMaxResults :: Lens' HTTPSHealthChecksList Word32
 hhclMaxResults
   = lens _hhclMaxResults
       (\ s a -> s{_hhclMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest HTTPSHealthChecksList where
         type Rs HTTPSHealthChecksList = HTTPSHealthCheckList

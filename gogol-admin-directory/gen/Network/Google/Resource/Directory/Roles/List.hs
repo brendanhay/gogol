@@ -51,7 +51,7 @@ type RolesListResource =
              Capture "customer" Text :>
                "roles" :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
+                   QueryParam "maxResults" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Roles
 
 -- | Retrieves a paginated list of all the roles in a domain.
@@ -60,7 +60,7 @@ type RolesListResource =
 data RolesList = RolesList
     { _rlCustomer   :: !Text
     , _rlPageToken  :: !(Maybe Text)
-    , _rlMaxResults :: !(Maybe Int32)
+    , _rlMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RolesList' with the minimum fields required to make a request.
@@ -96,6 +96,7 @@ rlPageToken
 rlMaxResults :: Lens' RolesList (Maybe Int32)
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest RolesList where
         type Rs RolesList = Roles

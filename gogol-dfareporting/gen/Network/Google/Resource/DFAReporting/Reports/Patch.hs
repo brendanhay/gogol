@@ -47,9 +47,9 @@ type ReportsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
-               Capture "reportId" Int64 :>
+               Capture "reportId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Report :> Patch '[JSON] Report
 
@@ -57,8 +57,8 @@ type ReportsPatchResource =
 --
 -- /See:/ 'reportsPatch' smart constructor.
 data ReportsPatch = ReportsPatch
-    { _rpReportId  :: !Int64
-    , _rpProFileId :: !Int64
+    { _rpReportId  :: !(JSONText Int64)
+    , _rpProFileId :: !(JSONText Int64)
     , _rpPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,12 +86,14 @@ reportsPatch pRpReportId_ pRpProFileId_ pRpPayload_ =
 -- | The ID of the report.
 rpReportId :: Lens' ReportsPatch Int64
 rpReportId
-  = lens _rpReportId (\ s a -> s{_rpReportId = a})
+  = lens _rpReportId (\ s a -> s{_rpReportId = a}) .
+      _Coerce
 
 -- | The DFA user profile ID.
 rpProFileId :: Lens' ReportsPatch Int64
 rpProFileId
-  = lens _rpProFileId (\ s a -> s{_rpProFileId = a})
+  = lens _rpProFileId (\ s a -> s{_rpProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 rpPayload :: Lens' ReportsPatch Report

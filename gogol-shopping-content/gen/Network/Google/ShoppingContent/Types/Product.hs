@@ -61,7 +61,7 @@ instance ToJSON OrdersAcknowledgeRequest where
 data AccountTax = AccountTax
     { _atRules     :: !(Maybe [AccountTaxTaxRule])
     , _atKind      :: !Text
-    , _atAccountId :: !(Maybe Word64)
+    , _atAccountId :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountTax' with the minimum fields required to make a request.
@@ -97,7 +97,8 @@ atKind = lens _atKind (\ s a -> s{_atKind = a})
 -- | The ID of the account to which these account tax settings belong.
 atAccountId :: Lens' AccountTax (Maybe Word64)
 atAccountId
-  = lens _atAccountId (\ s a -> s{_atAccountId = a})
+  = lens _atAccountId (\ s a -> s{_atAccountId = a}) .
+      mapping _Coerce
 
 instance FromJSON AccountTax where
         parseJSON
@@ -370,7 +371,7 @@ instance ToJSON DatafeedstatusesCustomBatchResponse
 --
 -- /See:/ 'orderReturn' smart constructor.
 data OrderReturn = OrderReturn
-    { _orQuantity     :: !(Maybe Word32)
+    { _orQuantity     :: !(Maybe (JSONText Word32))
     , _orActor        :: !(Maybe Text)
     , _orReason       :: !(Maybe Text)
     , _orCreationDate :: !(Maybe Text)
@@ -404,7 +405,8 @@ orderReturn =
 -- | Quantity that is returned.
 orQuantity :: Lens' OrderReturn (Maybe Word32)
 orQuantity
-  = lens _orQuantity (\ s a -> s{_orQuantity = a})
+  = lens _orQuantity (\ s a -> s{_orQuantity = a}) .
+      mapping _Coerce
 
 -- | The actor that created the refund.
 orActor :: Lens' OrderReturn (Maybe Text)
@@ -452,7 +454,7 @@ data AccounttaxCustomBatchResponseEntry = AccounttaxCustomBatchResponseEntry
     { _acbreAccountTax :: !(Maybe AccountTax)
     , _acbreKind       :: !Text
     , _acbreErrors     :: !(Maybe Errors)
-    , _acbreBatchId    :: !(Maybe Word32)
+    , _acbreBatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -497,6 +499,7 @@ acbreErrors
 acbreBatchId :: Lens' AccounttaxCustomBatchResponseEntry (Maybe Word32)
 acbreBatchId
   = lens _acbreBatchId (\ s a -> s{_acbreBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON AccounttaxCustomBatchResponseEntry
          where
@@ -680,7 +683,7 @@ data AccountTaxTaxRule = AccountTaxTaxRule
     { _attrUseGlobalRate :: !(Maybe Bool)
     , _attrCountry       :: !(Maybe Text)
     , _attrShippingTaxed :: !(Maybe Bool)
-    , _attrLocationId    :: !(Maybe Word64)
+    , _attrLocationId    :: !(Maybe (JSONText Word64))
     , _attrRatePercent   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -732,6 +735,7 @@ attrLocationId :: Lens' AccountTaxTaxRule (Maybe Word64)
 attrLocationId
   = lens _attrLocationId
       (\ s a -> s{_attrLocationId = a})
+      . mapping _Coerce
 
 -- | Explicit tax rate in percent, represented as a floating point number
 -- without the percentage character. Must not be negative.
@@ -846,7 +850,7 @@ instance ToJSON DatafeedsCustomBatchRequest where
 --
 -- /See:/ 'ordersCustomBatchRequestEntry' smart constructor.
 data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry
-    { _ocbreMerchantId      :: !(Maybe Word64)
+    { _ocbreMerchantId      :: !(Maybe (JSONText Word64))
     , _ocbreCancelLineItem  :: !(Maybe OrdersCustomBatchRequestEntryCancelLineItem)
     , _ocbreRefund          :: !(Maybe OrdersCustomBatchRequestEntryRefund)
     , _ocbreUpdateShipment  :: !(Maybe OrdersCustomBatchRequestEntryUpdateShipment)
@@ -857,7 +861,7 @@ data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry
     , _ocbreOperationId     :: !(Maybe Text)
     , _ocbreOrderId         :: !(Maybe Text)
     , _ocbreCancel          :: !(Maybe OrdersCustomBatchRequestEntryCancel)
-    , _ocbreBatchId         :: !(Maybe Word32)
+    , _ocbreBatchId         :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -910,6 +914,7 @@ ocbreMerchantId :: Lens' OrdersCustomBatchRequestEntry (Maybe Word64)
 ocbreMerchantId
   = lens _ocbreMerchantId
       (\ s a -> s{_ocbreMerchantId = a})
+      . mapping _Coerce
 
 -- | Required for cancelLineItem method.
 ocbreCancelLineItem :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryCancelLineItem)
@@ -974,6 +979,7 @@ ocbreCancel
 ocbreBatchId :: Lens' OrdersCustomBatchRequestEntry (Maybe Word32)
 ocbreBatchId
   = lens _ocbreBatchId (\ s a -> s{_ocbreBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON OrdersCustomBatchRequestEntry where
         parseJSON
@@ -1173,7 +1179,7 @@ instance ToJSON
 --
 -- /See:/ 'ordersCustomBatchRequestEntryCancelLineItem' smart constructor.
 data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntryCancelLineItem
-    { _ocbrecliQuantity   :: !(Maybe Word32)
+    { _ocbrecliQuantity   :: !(Maybe (JSONText Word32))
     , _ocbrecliLineItemId :: !(Maybe Text)
     , _ocbrecliReason     :: !(Maybe Text)
     , _ocbrecliReasonText :: !(Maybe Text)
@@ -1205,6 +1211,7 @@ ocbrecliQuantity :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Wor
 ocbrecliQuantity
   = lens _ocbrecliQuantity
       (\ s a -> s{_ocbrecliQuantity = a})
+      . mapping _Coerce
 
 -- | The ID of the line item to cancel.
 ocbrecliLineItemId :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Text)
@@ -1251,8 +1258,8 @@ instance ToJSON
 data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod
     { _olisdmCarrier          :: !(Maybe Text)
     , _olisdmMethodName       :: !(Maybe Text)
-    , _olisdmMaxDaysInTransit :: !(Maybe Word32)
-    , _olisdmMinDaysInTransit :: !(Maybe Word32)
+    , _olisdmMaxDaysInTransit :: !(Maybe (JSONText Word32))
+    , _olisdmMinDaysInTransit :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemShippingDetailsMethod' with the minimum fields required to make a request.
@@ -1293,12 +1300,14 @@ olisdmMaxDaysInTransit :: Lens' OrderLineItemShippingDetailsMethod (Maybe Word32
 olisdmMaxDaysInTransit
   = lens _olisdmMaxDaysInTransit
       (\ s a -> s{_olisdmMaxDaysInTransit = a})
+      . mapping _Coerce
 
 -- | Minimum transit time.
 olisdmMinDaysInTransit :: Lens' OrderLineItemShippingDetailsMethod (Maybe Word32)
 olisdmMinDaysInTransit
   = lens _olisdmMinDaysInTransit
       (\ s a -> s{_olisdmMinDaysInTransit = a})
+      . mapping _Coerce
 
 instance FromJSON OrderLineItemShippingDetailsMethod
          where
@@ -1331,7 +1340,7 @@ data Datafeed = Datafeed
     , _dFetchSchedule        :: !(Maybe DatafeedFetchSchedule)
     , _dName                 :: !(Maybe Text)
     , _dIntendedDestinations :: !(Maybe [Text])
-    , _dId                   :: !(Maybe Int64)
+    , _dId                   :: !(Maybe (JSONText Int64))
     , _dContentLanguage      :: !(Maybe Text)
     , _dContentType          :: !(Maybe Text)
     , _dFileName             :: !(Maybe Text)
@@ -1423,7 +1432,8 @@ dIntendedDestinations
 
 -- | The ID of the data feed.
 dId :: Lens' Datafeed (Maybe Int64)
-dId = lens _dId (\ s a -> s{_dId = a})
+dId
+  = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
 -- | The two-letter ISO 639-1 language of the items in the feed.
 dContentLanguage :: Lens' Datafeed (Maybe Text)
@@ -1530,7 +1540,7 @@ data AccountsCustomBatchResponseEntry = AccountsCustomBatchResponseEntry
     { _aKind    :: !Text
     , _aAccount :: !(Maybe Account)
     , _aErrors  :: !(Maybe Errors)
-    , _aBatchId :: !(Maybe Word32)
+    , _aBatchId :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -1570,7 +1580,9 @@ aErrors = lens _aErrors (\ s a -> s{_aErrors = a})
 
 -- | The ID of the request entry this entry responds to.
 aBatchId :: Lens' AccountsCustomBatchResponseEntry (Maybe Word32)
-aBatchId = lens _aBatchId (\ s a -> s{_aBatchId = a})
+aBatchId
+  = lens _aBatchId (\ s a -> s{_aBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON AccountsCustomBatchResponseEntry
          where
@@ -1597,8 +1609,8 @@ instance ToJSON AccountsCustomBatchResponseEntry
 --
 -- /See:/ 'accountIdentifier' smart constructor.
 data AccountIdentifier = AccountIdentifier
-    { _aiMerchantId   :: !(Maybe Word64)
-    , _aiAggregatorId :: !(Maybe Word64)
+    { _aiMerchantId   :: !(Maybe (JSONText Word64))
+    , _aiAggregatorId :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountIdentifier' with the minimum fields required to make a request.
@@ -1620,6 +1632,7 @@ accountIdentifier =
 aiMerchantId :: Lens' AccountIdentifier (Maybe Word64)
 aiMerchantId
   = lens _aiMerchantId (\ s a -> s{_aiMerchantId = a})
+      . mapping _Coerce
 
 -- | The aggregator ID, set for aggregators and subaccounts (in that case, it
 -- represents the aggregator of the subaccount).
@@ -1627,6 +1640,7 @@ aiAggregatorId :: Lens' AccountIdentifier (Maybe Word64)
 aiAggregatorId
   = lens _aiAggregatorId
       (\ s a -> s{_aiAggregatorId = a})
+      . mapping _Coerce
 
 instance FromJSON AccountIdentifier where
         parseJSON
@@ -1645,8 +1659,8 @@ instance ToJSON AccountIdentifier where
 --
 -- /See:/ 'testOrderPaymentMethod' smart constructor.
 data TestOrderPaymentMethod = TestOrderPaymentMethod
-    { _topmExpirationMonth          :: !(Maybe Int32)
-    , _topmExpirationYear           :: !(Maybe Int32)
+    { _topmExpirationMonth          :: !(Maybe (JSONText Int32))
+    , _topmExpirationYear           :: !(Maybe (JSONText Int32))
     , _topmLastFourDigits           :: !(Maybe Text)
     , _topmType                     :: !(Maybe Text)
     , _topmPredefinedBillingAddress :: !(Maybe Text)
@@ -1681,12 +1695,14 @@ topmExpirationMonth :: Lens' TestOrderPaymentMethod (Maybe Int32)
 topmExpirationMonth
   = lens _topmExpirationMonth
       (\ s a -> s{_topmExpirationMonth = a})
+      . mapping _Coerce
 
 -- | The card expiration year (4-digit, e.g. 2015).
 topmExpirationYear :: Lens' TestOrderPaymentMethod (Maybe Int32)
 topmExpirationYear
   = lens _topmExpirationYear
       (\ s a -> s{_topmExpirationYear = a})
+      . mapping _Coerce
 
 -- | The last four digits of the card number.
 topmLastFourDigits :: Lens' TestOrderPaymentMethod (Maybe Text)
@@ -1730,18 +1746,18 @@ instance ToJSON TestOrderPaymentMethod where
 --
 -- /See:/ 'orderLineItem' smart constructor.
 data OrderLineItem = OrderLineItem
-    { _oliQuantityOrdered   :: !(Maybe Word32)
+    { _oliQuantityOrdered   :: !(Maybe (JSONText Word32))
     , _oliReturnInfo        :: !(Maybe OrderLineItemReturnInfo)
-    , _oliQuantityDelivered :: !(Maybe Word32)
+    , _oliQuantityDelivered :: !(Maybe (JSONText Word32))
     , _oliShippingDetails   :: !(Maybe OrderLineItemShippingDetails)
-    , _oliQuantityPending   :: !(Maybe Word32)
+    , _oliQuantityPending   :: !(Maybe (JSONText Word32))
     , _oliCancellations     :: !(Maybe [OrderCancellation])
-    , _oliQuantityCanceled  :: !(Maybe Word32)
+    , _oliQuantityCanceled  :: !(Maybe (JSONText Word32))
     , _oliId                :: !(Maybe Text)
     , _oliTax               :: !(Maybe Price)
     , _oliPrice             :: !(Maybe Price)
-    , _oliQuantityShipped   :: !(Maybe Word32)
-    , _oliQuantityReturned  :: !(Maybe Word32)
+    , _oliQuantityShipped   :: !(Maybe (JSONText Word32))
+    , _oliQuantityReturned  :: !(Maybe (JSONText Word32))
     , _oliProduct           :: !(Maybe OrderLineItemProduct)
     , _oliReturns           :: !(Maybe [OrderReturn])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1802,6 +1818,7 @@ oliQuantityOrdered :: Lens' OrderLineItem (Maybe Word32)
 oliQuantityOrdered
   = lens _oliQuantityOrdered
       (\ s a -> s{_oliQuantityOrdered = a})
+      . mapping _Coerce
 
 -- | Details of the return policy for the line item.
 oliReturnInfo :: Lens' OrderLineItem (Maybe OrderLineItemReturnInfo)
@@ -1814,6 +1831,7 @@ oliQuantityDelivered :: Lens' OrderLineItem (Maybe Word32)
 oliQuantityDelivered
   = lens _oliQuantityDelivered
       (\ s a -> s{_oliQuantityDelivered = a})
+      . mapping _Coerce
 
 -- | Details of the requested shipping for the line item.
 oliShippingDetails :: Lens' OrderLineItem (Maybe OrderLineItemShippingDetails)
@@ -1826,6 +1844,7 @@ oliQuantityPending :: Lens' OrderLineItem (Maybe Word32)
 oliQuantityPending
   = lens _oliQuantityPending
       (\ s a -> s{_oliQuantityPending = a})
+      . mapping _Coerce
 
 -- | Cancellations of the line item.
 oliCancellations :: Lens' OrderLineItem [OrderCancellation]
@@ -1840,6 +1859,7 @@ oliQuantityCanceled :: Lens' OrderLineItem (Maybe Word32)
 oliQuantityCanceled
   = lens _oliQuantityCanceled
       (\ s a -> s{_oliQuantityCanceled = a})
+      . mapping _Coerce
 
 -- | The id of the line item.
 oliId :: Lens' OrderLineItem (Maybe Text)
@@ -1861,12 +1881,14 @@ oliQuantityShipped :: Lens' OrderLineItem (Maybe Word32)
 oliQuantityShipped
   = lens _oliQuantityShipped
       (\ s a -> s{_oliQuantityShipped = a})
+      . mapping _Coerce
 
 -- | Number of items returned.
 oliQuantityReturned :: Lens' OrderLineItem (Maybe Word32)
 oliQuantityReturned
   = lens _oliQuantityReturned
       (\ s a -> s{_oliQuantityReturned = a})
+      . mapping _Coerce
 
 -- | Product data from the time of the order placement.
 oliProduct :: Lens' OrderLineItem (Maybe OrderLineItemProduct)
@@ -1972,7 +1994,7 @@ instance ToJSON ProductstatusesCustomBatchResponse
 --
 -- /See:/ 'productUnitPricingMeasure' smart constructor.
 data ProductUnitPricingMeasure = ProductUnitPricingMeasure
-    { _pupmValue :: !(Maybe Double)
+    { _pupmValue :: !(Maybe (JSONText Double))
     , _pupmUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1994,7 +2016,8 @@ productUnitPricingMeasure =
 -- | The measure of an item.
 pupmValue :: Lens' ProductUnitPricingMeasure (Maybe Double)
 pupmValue
-  = lens _pupmValue (\ s a -> s{_pupmValue = a})
+  = lens _pupmValue (\ s a -> s{_pupmValue = a}) .
+      mapping _Coerce
 
 -- | The unit of the measure.
 pupmUnit :: Lens' ProductUnitPricingMeasure (Maybe Text)
@@ -2099,7 +2122,7 @@ instance ToJSON OrdersUpdateShipmentRequest where
 --
 -- /See:/ 'orderShipmentLineItemShipment' smart constructor.
 data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment
-    { _oslisQuantity   :: !(Maybe Word32)
+    { _oslisQuantity   :: !(Maybe (JSONText Word32))
     , _oslisLineItemId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2123,6 +2146,7 @@ oslisQuantity :: Lens' OrderShipmentLineItemShipment (Maybe Word32)
 oslisQuantity
   = lens _oslisQuantity
       (\ s a -> s{_oslisQuantity = a})
+      . mapping _Coerce
 
 -- | The id of the line item that is shipped.
 oslisLineItemId :: Lens' OrderShipmentLineItemShipment (Maybe Text)
@@ -2147,8 +2171,8 @@ instance ToJSON OrderShipmentLineItemShipment where
 --
 -- /See:/ 'loyaltyPoints' smart constructor.
 data LoyaltyPoints = LoyaltyPoints
-    { _lpRatio       :: !(Maybe Double)
-    , _lpPointsValue :: !(Maybe Int64)
+    { _lpRatio       :: !(Maybe (JSONText Double))
+    , _lpPointsValue :: !(Maybe (JSONText Int64))
     , _lpName        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2174,13 +2198,16 @@ loyaltyPoints =
 -- based on Merchant Center settings. If ratio is left out, it defaults to
 -- 1.0.
 lpRatio :: Lens' LoyaltyPoints (Maybe Double)
-lpRatio = lens _lpRatio (\ s a -> s{_lpRatio = a})
+lpRatio
+  = lens _lpRatio (\ s a -> s{_lpRatio = a}) .
+      mapping _Coerce
 
 -- | The retailer\'s loyalty points in absolute value.
 lpPointsValue :: Lens' LoyaltyPoints (Maybe Int64)
 lpPointsValue
   = lens _lpPointsValue
       (\ s a -> s{_lpPointsValue = a})
+      . mapping _Coerce
 
 -- | Name of loyalty points program. It is recommended to limit the name to
 -- 12 full-width characters or 24 Roman characters.
@@ -2385,7 +2412,7 @@ instance ToJSON AccountStatus where
 --
 -- /See:/ 'ordersReturnLineItemRequest' smart constructor.
 data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest
-    { _orlirQuantity    :: !(Maybe Word32)
+    { _orlirQuantity    :: !(Maybe (JSONText Word32))
     , _orlirLineItemId  :: !(Maybe Text)
     , _orlirReason      :: !(Maybe Text)
     , _orlirOperationId :: !(Maybe Text)
@@ -2421,6 +2448,7 @@ orlirQuantity :: Lens' OrdersReturnLineItemRequest (Maybe Word32)
 orlirQuantity
   = lens _orlirQuantity
       (\ s a -> s{_orlirQuantity = a})
+      . mapping _Coerce
 
 -- | The ID of the line item to return.
 orlirLineItemId :: Lens' OrdersReturnLineItemRequest (Maybe Text)
@@ -2619,11 +2647,11 @@ instance ToJSON OrdersGetTestOrderTemplateResponse
 --
 -- /See:/ 'accountsCustomBatchRequestEntry' smart constructor.
 data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry
-    { _accMerchantId :: !(Maybe Word64)
+    { _accMerchantId :: !(Maybe (JSONText Word64))
     , _accAccount    :: !(Maybe Account)
-    , _accAccountId  :: !(Maybe Word64)
+    , _accAccountId  :: !(Maybe (JSONText Word64))
     , _accMethod     :: !(Maybe Text)
-    , _accBatchId    :: !(Maybe Word32)
+    , _accBatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -2655,6 +2683,7 @@ accMerchantId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
 accMerchantId
   = lens _accMerchantId
       (\ s a -> s{_accMerchantId = a})
+      . mapping _Coerce
 
 -- | The account to create or update. Only defined if the method is insert or
 -- update.
@@ -2667,6 +2696,7 @@ accAccount
 accAccountId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
 accAccountId
   = lens _accAccountId (\ s a -> s{_accAccountId = a})
+      . mapping _Coerce
 
 accMethod :: Lens' AccountsCustomBatchRequestEntry (Maybe Text)
 accMethod
@@ -2675,7 +2705,8 @@ accMethod
 -- | An entry ID, unique within the batch request.
 accBatchId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word32)
 accBatchId
-  = lens _accBatchId (\ s a -> s{_accBatchId = a})
+  = lens _accBatchId (\ s a -> s{_accBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON AccountsCustomBatchRequestEntry
          where
@@ -2744,7 +2775,7 @@ instance ToJSON Weight where
 -- /See:/ 'productInstallment' smart constructor.
 data ProductInstallment = ProductInstallment
     { _piAmount :: !(Maybe Price)
-    , _piMonths :: !(Maybe Int64)
+    , _piMonths :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductInstallment' with the minimum fields required to make a request.
@@ -2768,7 +2799,9 @@ piAmount = lens _piAmount (\ s a -> s{_piAmount = a})
 
 -- | The number of installments the buyer has to pay.
 piMonths :: Lens' ProductInstallment (Maybe Int64)
-piMonths = lens _piMonths (\ s a -> s{_piMonths = a})
+piMonths
+  = lens _piMonths (\ s a -> s{_piMonths = a}) .
+      mapping _Coerce
 
 instance FromJSON ProductInstallment where
         parseJSON
@@ -3131,11 +3164,11 @@ instance ToJSON AccountStatusExampleItem where
 --
 -- /See:/ 'datafeedsCustomBatchRequestEntry' smart constructor.
 data DatafeedsCustomBatchRequestEntry = DatafeedsCustomBatchRequestEntry
-    { _dcbreMerchantId :: !(Maybe Word64)
+    { _dcbreMerchantId :: !(Maybe (JSONText Word64))
     , _dcbreDatafeed   :: !(Maybe Datafeed)
     , _dcbreMethod     :: !(Maybe Text)
-    , _dcbreDatafeedId :: !(Maybe Word64)
-    , _dcbreBatchId    :: !(Maybe Word32)
+    , _dcbreDatafeedId :: !(Maybe (JSONText Word64))
+    , _dcbreBatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedsCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -3167,6 +3200,7 @@ dcbreMerchantId :: Lens' DatafeedsCustomBatchRequestEntry (Maybe Word64)
 dcbreMerchantId
   = lens _dcbreMerchantId
       (\ s a -> s{_dcbreMerchantId = a})
+      . mapping _Coerce
 
 -- | The data feed to insert.
 dcbreDatafeed :: Lens' DatafeedsCustomBatchRequestEntry (Maybe Datafeed)
@@ -3183,11 +3217,13 @@ dcbreDatafeedId :: Lens' DatafeedsCustomBatchRequestEntry (Maybe Word64)
 dcbreDatafeedId
   = lens _dcbreDatafeedId
       (\ s a -> s{_dcbreDatafeedId = a})
+      . mapping _Coerce
 
 -- | An entry ID, unique within the batch request.
 dcbreBatchId :: Lens' DatafeedsCustomBatchRequestEntry (Maybe Word32)
 dcbreBatchId
   = lens _dcbreBatchId (\ s a -> s{_dcbreBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON DatafeedsCustomBatchRequestEntry
          where
@@ -3221,8 +3257,8 @@ data DatafeedFetchSchedule = DatafeedFetchSchedule
     { _dfsFetchURL   :: !(Maybe Text)
     , _dfsUsername   :: !(Maybe Text)
     , _dfsPassword   :: !(Maybe Text)
-    , _dfsDayOfMonth :: !(Maybe Word32)
-    , _dfsHour       :: !(Maybe Word32)
+    , _dfsDayOfMonth :: !(Maybe (JSONText Word32))
+    , _dfsHour       :: !(Maybe (JSONText Word32))
     , _dfsWeekday    :: !(Maybe Text)
     , _dfsTimeZone   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3280,10 +3316,13 @@ dfsDayOfMonth :: Lens' DatafeedFetchSchedule (Maybe Word32)
 dfsDayOfMonth
   = lens _dfsDayOfMonth
       (\ s a -> s{_dfsDayOfMonth = a})
+      . mapping _Coerce
 
 -- | The hour of the day the feed file should be fetched (0-24).
 dfsHour :: Lens' DatafeedFetchSchedule (Maybe Word32)
-dfsHour = lens _dfsHour (\ s a -> s{_dfsHour = a})
+dfsHour
+  = lens _dfsHour (\ s a -> s{_dfsHour = a}) .
+      mapping _Coerce
 
 -- | The day of the week the feed file should be fetched.
 dfsWeekday :: Lens' DatafeedFetchSchedule (Maybe Text)
@@ -3677,9 +3716,9 @@ data ProductTax = ProductTax
     { _ptTaxShip    :: !(Maybe Bool)
     , _ptCountry    :: !(Maybe Text)
     , _ptPostalCode :: !(Maybe Text)
-    , _ptRate       :: !(Maybe Double)
+    , _ptRate       :: !(Maybe (JSONText Double))
     , _ptRegion     :: !(Maybe Text)
-    , _ptLocationId :: !(Maybe Int64)
+    , _ptLocationId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductTax' with the minimum fields required to make a request.
@@ -3730,7 +3769,9 @@ ptPostalCode
 
 -- | The percentage of tax rate that applies to the item price.
 ptRate :: Lens' ProductTax (Maybe Double)
-ptRate = lens _ptRate (\ s a -> s{_ptRate = a})
+ptRate
+  = lens _ptRate (\ s a -> s{_ptRate = a}) .
+      mapping _Coerce
 
 -- | The geographic region to which the tax rate applies.
 ptRegion :: Lens' ProductTax (Maybe Text)
@@ -3741,6 +3782,7 @@ ptRegion = lens _ptRegion (\ s a -> s{_ptRegion = a})
 ptLocationId :: Lens' ProductTax (Maybe Int64)
 ptLocationId
   = lens _ptLocationId (\ s a -> s{_ptLocationId = a})
+      . mapping _Coerce
 
 instance FromJSON ProductTax where
         parseJSON
@@ -3872,7 +3914,7 @@ instance ToJSON OrderShipment where
 data OrderLineItemReturnInfo = OrderLineItemReturnInfo
     { _oliriIsReturnable :: !(Maybe Bool)
     , _oliriPolicyURL    :: !(Maybe Text)
-    , _oliriDaysToReturn :: !(Maybe Int32)
+    , _oliriDaysToReturn :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemReturnInfo' with the minimum fields required to make a request.
@@ -3910,6 +3952,7 @@ oliriDaysToReturn :: Lens' OrderLineItemReturnInfo (Maybe Int32)
 oliriDaysToReturn
   = lens _oliriDaysToReturn
       (\ s a -> s{_oliriDaysToReturn = a})
+      . mapping _Coerce
 
 instance FromJSON OrderLineItemReturnInfo where
         parseJSON
@@ -3987,7 +4030,7 @@ data Account = Account
     , _aaSellerId     :: !(Maybe Text)
     , _aaName         :: !(Maybe Text)
     , _aaReviewsURL   :: !(Maybe Text)
-    , _aaId           :: !(Maybe Word64)
+    , _aaId           :: !(Maybe (JSONText Word64))
     , _aaWebsiteURL   :: !(Maybe Text)
     , _aaAdwordsLinks :: !(Maybe [AccountAdwordsLink])
     , _aaAdultContent :: !(Maybe Bool)
@@ -4057,7 +4100,9 @@ aaReviewsURL
 
 -- | Merchant Center account ID.
 aaId :: Lens' Account (Maybe Word64)
-aaId = lens _aaId (\ s a -> s{_aaId = a})
+aaId
+  = lens _aaId (\ s a -> s{_aaId = a}) .
+      mapping _Coerce
 
 -- | The merchant\'s website.
 aaWebsiteURL :: Lens' Account (Maybe Text)
@@ -4113,11 +4158,11 @@ instance ToJSON Account where
 --
 -- /See:/ 'inventorySetRequest' smart constructor.
 data InventorySetRequest = InventorySetRequest
-    { _isrQuantity               :: !(Maybe Word32)
+    { _isrQuantity               :: !(Maybe (JSONText Word32))
     , _isrSalePrice              :: !(Maybe Price)
     , _isrAvailability           :: !(Maybe Text)
     , _isrSalePriceEffectiveDate :: !(Maybe Text)
-    , _isrSellOnGoogleQuantity   :: !(Maybe Word32)
+    , _isrSellOnGoogleQuantity   :: !(Maybe (JSONText Word32))
     , _isrPrice                  :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4152,7 +4197,8 @@ inventorySetRequest =
 -- Supported only for local products.
 isrQuantity :: Lens' InventorySetRequest (Maybe Word32)
 isrQuantity
-  = lens _isrQuantity (\ s a -> s{_isrQuantity = a})
+  = lens _isrQuantity (\ s a -> s{_isrQuantity = a}) .
+      mapping _Coerce
 
 -- | The sale price of the product. Mandatory if sale_price_effective_date is
 -- defined.
@@ -4180,6 +4226,7 @@ isrSellOnGoogleQuantity :: Lens' InventorySetRequest (Maybe Word32)
 isrSellOnGoogleQuantity
   = lens _isrSellOnGoogleQuantity
       (\ s a -> s{_isrSellOnGoogleQuantity = a})
+      . mapping _Coerce
 
 -- | The price of the product.
 isrPrice :: Lens' InventorySetRequest (Maybe Price)
@@ -4288,7 +4335,7 @@ instance ToJSON
 --
 -- /See:/ 'ordersCancelLineItemRequest' smart constructor.
 data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest
-    { _oclirQuantity    :: !(Maybe Word32)
+    { _oclirQuantity    :: !(Maybe (JSONText Word32))
     , _oclirLineItemId  :: !(Maybe Text)
     , _oclirReason      :: !(Maybe Text)
     , _oclirOperationId :: !(Maybe Text)
@@ -4324,6 +4371,7 @@ oclirQuantity :: Lens' OrdersCancelLineItemRequest (Maybe Word32)
 oclirQuantity
   = lens _oclirQuantity
       (\ s a -> s{_oclirQuantity = a})
+      . mapping _Coerce
 
 -- | The ID of the line item to cancel.
 oclirLineItemId :: Lens' OrdersCancelLineItemRequest (Maybe Text)
@@ -4371,7 +4419,7 @@ instance ToJSON OrdersCancelLineItemRequest where
 --
 -- /See:/ 'productShippingWeight' smart constructor.
 data ProductShippingWeight = ProductShippingWeight
-    { _pswValue :: !(Maybe Double)
+    { _pswValue :: !(Maybe (JSONText Double))
     , _pswUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4393,7 +4441,9 @@ productShippingWeight =
 -- | The weight of the product used to calculate the shipping cost of the
 -- item.
 pswValue :: Lens' ProductShippingWeight (Maybe Double)
-pswValue = lens _pswValue (\ s a -> s{_pswValue = a})
+pswValue
+  = lens _pswValue (\ s a -> s{_pswValue = a}) .
+      mapping _Coerce
 
 -- | The unit of value.
 pswUnit :: Lens' ProductShippingWeight (Maybe Text)
@@ -4417,10 +4467,10 @@ instance ToJSON ProductShippingWeight where
 --
 -- /See:/ 'accountstatusesCustomBatchRequestEntry' smart constructor.
 data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestEntry
-    { _acbrecMerchantId :: !(Maybe Word64)
-    , _acbrecAccountId  :: !(Maybe Word64)
+    { _acbrecMerchantId :: !(Maybe (JSONText Word64))
+    , _acbrecAccountId  :: !(Maybe (JSONText Word64))
     , _acbrecMethod     :: !(Maybe Text)
-    , _acbrecBatchId    :: !(Maybe Word32)
+    , _acbrecBatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -4449,12 +4499,14 @@ acbrecMerchantId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
 acbrecMerchantId
   = lens _acbrecMerchantId
       (\ s a -> s{_acbrecMerchantId = a})
+      . mapping _Coerce
 
 -- | The ID of the (sub-)account whose status to get.
 acbrecAccountId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
 acbrecAccountId
   = lens _acbrecAccountId
       (\ s a -> s{_acbrecAccountId = a})
+      . mapping _Coerce
 
 -- | The method (get).
 acbrecMethod :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Text)
@@ -4466,6 +4518,7 @@ acbrecBatchId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word32)
 acbrecBatchId
   = lens _acbrecBatchId
       (\ s a -> s{_acbrecBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON
          AccountstatusesCustomBatchRequestEntry where
@@ -4494,7 +4547,7 @@ data ProductstatusesCustomBatchResponseEntry = ProductstatusesCustomBatchRespons
     { _pcbreKind          :: !Text
     , _pcbreProductStatus :: !(Maybe ProductStatus)
     , _pcbreErrors        :: !(Maybe Errors)
-    , _pcbreBatchId       :: !(Maybe Word32)
+    , _pcbreBatchId       :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -4540,6 +4593,7 @@ pcbreErrors
 pcbreBatchId :: Lens' ProductstatusesCustomBatchResponseEntry (Maybe Word32)
 pcbreBatchId
   = lens _pcbreBatchId (\ s a -> s{_pcbreBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON
          ProductstatusesCustomBatchResponseEntry where
@@ -4686,7 +4740,7 @@ data ProductShipping = ProductShipping
     , _psPostalCode        :: !(Maybe Text)
     , _psPrice             :: !(Maybe Price)
     , _psRegion            :: !(Maybe Text)
-    , _psLocationId        :: !(Maybe Int64)
+    , _psLocationId        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductShipping' with the minimum fields required to make a request.
@@ -4756,6 +4810,7 @@ psRegion = lens _psRegion (\ s a -> s{_psRegion = a})
 psLocationId :: Lens' ProductShipping (Maybe Int64)
 psLocationId
   = lens _psLocationId (\ s a -> s{_psLocationId = a})
+      . mapping _Coerce
 
 instance FromJSON ProductShipping where
         parseJSON
@@ -4785,11 +4840,11 @@ instance ToJSON ProductShipping where
 --
 -- /See:/ 'accountshippingCustomBatchRequestEntry' smart constructor.
 data AccountshippingCustomBatchRequestEntry = AccountshippingCustomBatchRequestEntry
-    { _aaMerchantId      :: !(Maybe Word64)
-    , _aaAccountId       :: !(Maybe Word64)
+    { _aaMerchantId      :: !(Maybe (JSONText Word64))
+    , _aaAccountId       :: !(Maybe (JSONText Word64))
     , _aaMethod          :: !(Maybe Text)
     , _aaAccountShipping :: !(Maybe AccountShipping)
-    , _aaBatchId         :: !(Maybe Word32)
+    , _aaBatchId         :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountshippingCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -4820,12 +4875,14 @@ accountshippingCustomBatchRequestEntry =
 aaMerchantId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
 aaMerchantId
   = lens _aaMerchantId (\ s a -> s{_aaMerchantId = a})
+      . mapping _Coerce
 
 -- | The ID of the account for which to get\/update account shipping
 -- settings.
 aaAccountId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
 aaAccountId
-  = lens _aaAccountId (\ s a -> s{_aaAccountId = a})
+  = lens _aaAccountId (\ s a -> s{_aaAccountId = a}) .
+      mapping _Coerce
 
 aaMethod :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Text)
 aaMethod = lens _aaMethod (\ s a -> s{_aaMethod = a})
@@ -4840,7 +4897,8 @@ aaAccountShipping
 -- | An entry ID, unique within the batch request.
 aaBatchId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word32)
 aaBatchId
-  = lens _aaBatchId (\ s a -> s{_aaBatchId = a})
+  = lens _aaBatchId (\ s a -> s{_aaBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON
          AccountshippingCustomBatchRequestEntry where
@@ -5802,11 +5860,11 @@ instance ToJSON AccounttaxCustomBatchRequest where
 --
 -- /See:/ 'productsCustomBatchRequestEntry' smart constructor.
 data ProductsCustomBatchRequestEntry = ProductsCustomBatchRequestEntry
-    { _pMerchantId :: !(Maybe Word64)
+    { _pMerchantId :: !(Maybe (JSONText Word64))
     , _pMethod     :: !(Maybe Text)
     , _pProduct    :: !(Maybe Product)
     , _pProductId  :: !(Maybe Text)
-    , _pBatchId    :: !(Maybe Word32)
+    , _pBatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -5836,7 +5894,8 @@ productsCustomBatchRequestEntry =
 -- | The ID of the managing account.
 pMerchantId :: Lens' ProductsCustomBatchRequestEntry (Maybe Word64)
 pMerchantId
-  = lens _pMerchantId (\ s a -> s{_pMerchantId = a})
+  = lens _pMerchantId (\ s a -> s{_pMerchantId = a}) .
+      mapping _Coerce
 
 pMethod :: Lens' ProductsCustomBatchRequestEntry (Maybe Text)
 pMethod = lens _pMethod (\ s a -> s{_pMethod = a})
@@ -5853,7 +5912,9 @@ pProductId
 
 -- | An entry ID, unique within the batch request.
 pBatchId :: Lens' ProductsCustomBatchRequestEntry (Maybe Word32)
-pBatchId = lens _pBatchId (\ s a -> s{_pBatchId = a})
+pBatchId
+  = lens _pBatchId (\ s a -> s{_pBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON ProductsCustomBatchRequestEntry
          where
@@ -5880,10 +5941,10 @@ instance ToJSON ProductsCustomBatchRequestEntry where
 --
 -- /See:/ 'datafeedstatusesCustomBatchRequestEntry' smart constructor.
 data DatafeedstatusesCustomBatchRequestEntry = DatafeedstatusesCustomBatchRequestEntry
-    { _dMerchantId :: !(Maybe Word64)
+    { _dMerchantId :: !(Maybe (JSONText Word64))
     , _dMethod     :: !(Maybe Text)
-    , _dDatafeedId :: !(Maybe Word64)
-    , _dBatchId    :: !(Maybe Word32)
+    , _dDatafeedId :: !(Maybe (JSONText Word64))
+    , _dBatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -5910,7 +5971,8 @@ datafeedstatusesCustomBatchRequestEntry =
 -- | The ID of the managing account.
 dMerchantId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word64)
 dMerchantId
-  = lens _dMerchantId (\ s a -> s{_dMerchantId = a})
+  = lens _dMerchantId (\ s a -> s{_dMerchantId = a}) .
+      mapping _Coerce
 
 dMethod :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Text)
 dMethod = lens _dMethod (\ s a -> s{_dMethod = a})
@@ -5918,11 +5980,14 @@ dMethod = lens _dMethod (\ s a -> s{_dMethod = a})
 -- | The ID of the data feed to get or delete.
 dDatafeedId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word64)
 dDatafeedId
-  = lens _dDatafeedId (\ s a -> s{_dDatafeedId = a})
+  = lens _dDatafeedId (\ s a -> s{_dDatafeedId = a}) .
+      mapping _Coerce
 
 -- | An entry ID, unique within the batch request.
 dBatchId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word32)
-dBatchId = lens _dBatchId (\ s a -> s{_dBatchId = a})
+dBatchId
+  = lens _dBatchId (\ s a -> s{_dBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON
          DatafeedstatusesCustomBatchRequestEntry where
@@ -6013,7 +6078,7 @@ instance ToJSON OrderCustomer where
 data InventoryCustomBatchResponseEntry = InventoryCustomBatchResponseEntry
     { _icbreKind    :: !Text
     , _icbreErrors  :: !(Maybe Errors)
-    , _icbreBatchId :: !(Maybe Word32)
+    , _icbreBatchId :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -6049,6 +6114,7 @@ icbreErrors
 icbreBatchId :: Lens' InventoryCustomBatchResponseEntry (Maybe Word32)
 icbreBatchId
   = lens _icbreBatchId (\ s a -> s{_icbreBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON InventoryCustomBatchResponseEntry
          where
@@ -6137,11 +6203,11 @@ instance ToJSON AccountshippingListResponse where
 -- /See:/ 'inventory' smart constructor.
 data Inventory = Inventory
     { _iKind                   :: !Text
-    , _iQuantity               :: !(Maybe Word32)
+    , _iQuantity               :: !(Maybe (JSONText Word32))
     , _iSalePrice              :: !(Maybe Price)
     , _iAvailability           :: !(Maybe Text)
     , _iSalePriceEffectiveDate :: !(Maybe Text)
-    , _iSellOnGoogleQuantity   :: !(Maybe Word32)
+    , _iSellOnGoogleQuantity   :: !(Maybe (JSONText Word32))
     , _iPrice                  :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6184,7 +6250,8 @@ iKind = lens _iKind (\ s a -> s{_iKind = a})
 -- Supported only for local products.
 iQuantity :: Lens' Inventory (Maybe Word32)
 iQuantity
-  = lens _iQuantity (\ s a -> s{_iQuantity = a})
+  = lens _iQuantity (\ s a -> s{_iQuantity = a}) .
+      mapping _Coerce
 
 -- | The sale price of the product. Mandatory if sale_price_effective_date is
 -- defined.
@@ -6212,6 +6279,7 @@ iSellOnGoogleQuantity :: Lens' Inventory (Maybe Word32)
 iSellOnGoogleQuantity
   = lens _iSellOnGoogleQuantity
       (\ s a -> s{_iSellOnGoogleQuantity = a})
+      . mapping _Coerce
 
 -- | The price of the product.
 iPrice :: Lens' Inventory (Maybe Price)
@@ -6410,7 +6478,7 @@ data OrdersCustomBatchResponseEntry = OrdersCustomBatchResponseEntry
     , _oExecutionStatus :: !(Maybe Text)
     , _oErrors          :: !(Maybe Errors)
     , _oOrder           :: !(Maybe Order)
-    , _oBatchId         :: !(Maybe Word32)
+    , _oBatchId         :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -6460,7 +6528,9 @@ oOrder = lens _oOrder (\ s a -> s{_oOrder = a})
 
 -- | The ID of the request entry this entry responds to.
 oBatchId :: Lens' OrdersCustomBatchResponseEntry (Maybe Word32)
-oBatchId = lens _oBatchId (\ s a -> s{_oBatchId = a})
+oBatchId
+  = lens _oBatchId (\ s a -> s{_oBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON OrdersCustomBatchResponseEntry
          where
@@ -6968,7 +7038,7 @@ instance ToJSON TestOrder where
 data DatafeedstatusesCustomBatchResponseEntry = DatafeedstatusesCustomBatchResponseEntry
     { _datErrors         :: !(Maybe Errors)
     , _datDatafeedStatus :: !(Maybe DatafeedStatus)
-    , _datBatchId        :: !(Maybe Word32)
+    , _datBatchId        :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -7004,7 +7074,8 @@ datDatafeedStatus
 -- | The ID of the request entry this entry responds to.
 datBatchId :: Lens' DatafeedstatusesCustomBatchResponseEntry (Maybe Word32)
 datBatchId
-  = lens _datBatchId (\ s a -> s{_datBatchId = a})
+  = lens _datBatchId (\ s a -> s{_datBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON
          DatafeedstatusesCustomBatchResponseEntry where
@@ -7329,11 +7400,11 @@ instance ToJSON AccounttaxCustomBatchResponse where
 --
 -- /See:/ 'inventoryCustomBatchRequestEntry' smart constructor.
 data InventoryCustomBatchRequestEntry = InventoryCustomBatchRequestEntry
-    { _iMerchantId :: !(Maybe Word64)
+    { _iMerchantId :: !(Maybe (JSONText Word64))
     , _iStoreCode  :: !(Maybe Text)
     , _iInventory  :: !(Maybe Inventory)
     , _iProductId  :: !(Maybe Text)
-    , _iBatchId    :: !(Maybe Word32)
+    , _iBatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -7363,7 +7434,8 @@ inventoryCustomBatchRequestEntry =
 -- | The ID of the managing account.
 iMerchantId :: Lens' InventoryCustomBatchRequestEntry (Maybe Word64)
 iMerchantId
-  = lens _iMerchantId (\ s a -> s{_iMerchantId = a})
+  = lens _iMerchantId (\ s a -> s{_iMerchantId = a}) .
+      mapping _Coerce
 
 -- | The code of the store for which to update price and availability. Use
 -- online to update price and availability of an online product.
@@ -7383,7 +7455,9 @@ iProductId
 
 -- | An entry ID, unique within the batch request.
 iBatchId :: Lens' InventoryCustomBatchRequestEntry (Maybe Word32)
-iBatchId = lens _iBatchId (\ s a -> s{_iBatchId = a})
+iBatchId
+  = lens _iBatchId (\ s a -> s{_iBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON InventoryCustomBatchRequestEntry
          where
@@ -7533,7 +7607,7 @@ instance ToJSON OrderAddress where
 --
 -- /See:/ 'productUnitPricingBaseMeasure' smart constructor.
 data ProductUnitPricingBaseMeasure = ProductUnitPricingBaseMeasure
-    { _pupbmValue :: !(Maybe Int64)
+    { _pupbmValue :: !(Maybe (JSONText Int64))
     , _pupbmUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7555,7 +7629,8 @@ productUnitPricingBaseMeasure =
 -- | The denominator of the unit price.
 pupbmValue :: Lens' ProductUnitPricingBaseMeasure (Maybe Int64)
 pupbmValue
-  = lens _pupbmValue (\ s a -> s{_pupbmValue = a})
+  = lens _pupbmValue (\ s a -> s{_pupbmValue = a}) .
+      mapping _Coerce
 
 -- | The unit of the denominator.
 pupbmUnit :: Lens' ProductUnitPricingBaseMeasure (Maybe Text)
@@ -7584,7 +7659,7 @@ data AccountShippingCondition = AccountShippingCondition
     , _ascDeliveryLocationGroup   :: !(Maybe Text)
     , _ascPriceMax                :: !(Maybe Price)
     , _ascShippingLabel           :: !(Maybe Text)
-    , _ascDeliveryLocationId      :: !(Maybe Int64)
+    , _ascDeliveryLocationId      :: !(Maybe (JSONText Int64))
     , _ascDeliveryPostalCodeRange :: !(Maybe AccountShippingPostalCodeRange)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7655,6 +7730,7 @@ ascDeliveryLocationId :: Lens' AccountShippingCondition (Maybe Int64)
 ascDeliveryLocationId
   = lens _ascDeliveryLocationId
       (\ s a -> s{_ascDeliveryLocationId = a})
+      . mapping _Coerce
 
 -- | Delivery location in terms of a postal code range.
 ascDeliveryPostalCodeRange :: Lens' AccountShippingCondition (Maybe AccountShippingPostalCodeRange)
@@ -7755,7 +7831,7 @@ data ProductsCustomBatchResponseEntry = ProductsCustomBatchResponseEntry
     { _proKind    :: !Text
     , _proProduct :: !(Maybe Product)
     , _proErrors  :: !(Maybe Errors)
-    , _proBatchId :: !(Maybe Word32)
+    , _proBatchId :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -7798,7 +7874,8 @@ proErrors
 -- | The ID of the request entry this entry responds to.
 proBatchId :: Lens' ProductsCustomBatchResponseEntry (Maybe Word32)
 proBatchId
-  = lens _proBatchId (\ s a -> s{_proBatchId = a})
+  = lens _proBatchId (\ s a -> s{_proBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON ProductsCustomBatchResponseEntry
          where
@@ -7825,8 +7902,8 @@ instance ToJSON ProductsCustomBatchResponseEntry
 --
 -- /See:/ 'orderPaymentMethod' smart constructor.
 data OrderPaymentMethod = OrderPaymentMethod
-    { _opmExpirationMonth :: !(Maybe Int32)
-    , _opmExpirationYear  :: !(Maybe Int32)
+    { _opmExpirationMonth :: !(Maybe (JSONText Int32))
+    , _opmExpirationYear  :: !(Maybe (JSONText Int32))
     , _opmPhoneNumber     :: !(Maybe Text)
     , _opmBillingAddress  :: !(Maybe OrderAddress)
     , _opmLastFourDigits  :: !(Maybe Text)
@@ -7865,12 +7942,14 @@ opmExpirationMonth :: Lens' OrderPaymentMethod (Maybe Int32)
 opmExpirationMonth
   = lens _opmExpirationMonth
       (\ s a -> s{_opmExpirationMonth = a})
+      . mapping _Coerce
 
 -- | The card expiration year (4-digit, e.g. 2015).
 opmExpirationYear :: Lens' OrderPaymentMethod (Maybe Int32)
 opmExpirationYear
   = lens _opmExpirationYear
       (\ s a -> s{_opmExpirationYear = a})
+      . mapping _Coerce
 
 -- | The billing phone number.
 opmPhoneNumber :: Lens' OrderPaymentMethod (Maybe Text)
@@ -7926,14 +8005,14 @@ data Product = Product
     , _ppShippingWidth          :: !(Maybe ProductShippingDimension)
     , _ppCustomGroups           :: !(Maybe [ProductCustomGroup])
     , _ppImageLink              :: !(Maybe Text)
-    , _ppDisplayAdsValue        :: !(Maybe Double)
+    , _ppDisplayAdsValue        :: !(Maybe (JSONText Double))
     , _ppLoyaltyPoints          :: !(Maybe LoyaltyPoints)
     , _ppAdditionalImageLinks   :: !(Maybe [Text])
     , _ppValidatedDestinations  :: !(Maybe [Text])
     , _ppColor                  :: !(Maybe Text)
     , _ppCustomLabel0           :: !(Maybe Text)
     , _ppKind                   :: !Text
-    , _ppMultipack              :: !(Maybe Int64)
+    , _ppMultipack              :: !(Maybe (JSONText Int64))
     , _ppPattern                :: !(Maybe Text)
     , _ppLink                   :: !(Maybe Text)
     , _ppSizeSystem             :: !(Maybe Text)
@@ -7969,7 +8048,7 @@ data Product = Product
     , _ppShipping               :: !(Maybe [ProductShipping])
     , _ppAdwordsRedirect        :: !(Maybe Text)
     , _ppShippingWeight         :: !(Maybe ProductShippingWeight)
-    , _ppSellOnGoogleQuantity   :: !(Maybe Int64)
+    , _ppSellOnGoogleQuantity   :: !(Maybe (JSONText Int64))
     , _ppShippingHeight         :: !(Maybe ProductShippingDimension)
     , _ppAvailabilityDate       :: !(Maybe Text)
     , _ppOfferId                :: !(Maybe Text)
@@ -8249,6 +8328,7 @@ ppDisplayAdsValue :: Lens' Product (Maybe Double)
 ppDisplayAdsValue
   = lens _ppDisplayAdsValue
       (\ s a -> s{_ppDisplayAdsValue = a})
+      . mapping _Coerce
 
 -- | Loyalty points that users receive after purchasing the item. Japan only.
 ppLoyaltyPoints :: Lens' Product (Maybe LoyaltyPoints)
@@ -8290,7 +8370,8 @@ ppKind = lens _ppKind (\ s a -> s{_ppKind = a})
 -- | The number of identical products in a merchant-defined multipack.
 ppMultipack :: Lens' Product (Maybe Int64)
 ppMultipack
-  = lens _ppMultipack (\ s a -> s{_ppMultipack = a})
+  = lens _ppMultipack (\ s a -> s{_ppMultipack = a}) .
+      mapping _Coerce
 
 -- | The item\'s pattern (e.g. polka dots).
 ppPattern :: Lens' Product (Maybe Text)
@@ -8512,6 +8593,7 @@ ppSellOnGoogleQuantity :: Lens' Product (Maybe Int64)
 ppSellOnGoogleQuantity
   = lens _ppSellOnGoogleQuantity
       (\ s a -> s{_ppSellOnGoogleQuantity = a})
+      . mapping _Coerce
 
 -- | Height of the item for shipping.
 ppShippingHeight :: Lens' Product (Maybe ProductShippingDimension)
@@ -8791,7 +8873,7 @@ instance ToJSON Product where
 --
 -- /See:/ 'errors' smart constructor.
 data Errors = Errors
-    { _errCode    :: !(Maybe Word32)
+    { _errCode    :: !(Maybe (JSONText Word32))
     , _errMessage :: !(Maybe Text)
     , _errErrors  :: !(Maybe [Error'])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8816,7 +8898,9 @@ errors =
 
 -- | The HTTP status of the first error in errors.
 errCode :: Lens' Errors (Maybe Word32)
-errCode = lens _errCode (\ s a -> s{_errCode = a})
+errCode
+  = lens _errCode (\ s a -> s{_errCode = a}) .
+      mapping _Coerce
 
 -- | The message of the first error in errors.
 errMessage :: Lens' Errors (Maybe Text)
@@ -8852,7 +8936,7 @@ instance ToJSON Errors where
 data AccountstatusesCustomBatchResponseEntry = AccountstatusesCustomBatchResponseEntry
     { _acccAccountStatus :: !(Maybe AccountStatus)
     , _acccErrors        :: !(Maybe Errors)
-    , _acccBatchId       :: !(Maybe Word32)
+    , _acccBatchId       :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -8888,7 +8972,8 @@ acccErrors
 -- | The ID of the request entry this entry responds to.
 acccBatchId :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Word32)
 acccBatchId
-  = lens _acccBatchId (\ s a -> s{_acccBatchId = a})
+  = lens _acccBatchId (\ s a -> s{_acccBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON
          AccountstatusesCustomBatchResponseEntry where
@@ -8996,7 +9081,7 @@ instance ToJSON OrdersCancelLineItemResponse where
 --
 -- /See:/ 'testOrderLineItem' smart constructor.
 data TestOrderLineItem = TestOrderLineItem
-    { _toliQuantityOrdered :: !(Maybe Word32)
+    { _toliQuantityOrdered :: !(Maybe (JSONText Word32))
     , _toliReturnInfo      :: !(Maybe OrderLineItemReturnInfo)
     , _toliShippingDetails :: !(Maybe OrderLineItemShippingDetails)
     , _toliProduct         :: !(Maybe TestOrderLineItemProduct)
@@ -9032,6 +9117,7 @@ toliQuantityOrdered :: Lens' TestOrderLineItem (Maybe Word32)
 toliQuantityOrdered
   = lens _toliQuantityOrdered
       (\ s a -> s{_toliQuantityOrdered = a})
+      . mapping _Coerce
 
 -- | Details of the return policy for the line item.
 toliReturnInfo :: Lens' TestOrderLineItem (Maybe OrderLineItemReturnInfo)
@@ -9079,10 +9165,10 @@ instance ToJSON TestOrderLineItem where
 --
 -- /See:/ 'productstatusesCustomBatchRequestEntry' smart constructor.
 data ProductstatusesCustomBatchRequestEntry = ProductstatusesCustomBatchRequestEntry
-    { _pcbrecMerchantId :: !(Maybe Word64)
+    { _pcbrecMerchantId :: !(Maybe (JSONText Word64))
     , _pcbrecMethod     :: !(Maybe Text)
     , _pcbrecProductId  :: !(Maybe Text)
-    , _pcbrecBatchId    :: !(Maybe Word32)
+    , _pcbrecBatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -9111,6 +9197,7 @@ pcbrecMerchantId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Word64)
 pcbrecMerchantId
   = lens _pcbrecMerchantId
       (\ s a -> s{_pcbrecMerchantId = a})
+      . mapping _Coerce
 
 pcbrecMethod :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Text)
 pcbrecMethod
@@ -9127,6 +9214,7 @@ pcbrecBatchId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Word32)
 pcbrecBatchId
   = lens _pcbrecBatchId
       (\ s a -> s{_pcbrecBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON
          ProductstatusesCustomBatchRequestEntry where
@@ -9155,7 +9243,7 @@ data AccountshippingCustomBatchResponseEntry = AccountshippingCustomBatchRespons
     { _acbre1Kind            :: !Text
     , _acbre1Errors          :: !(Maybe Errors)
     , _acbre1AccountShipping :: !(Maybe AccountShipping)
-    , _acbre1BatchId         :: !(Maybe Word32)
+    , _acbre1BatchId         :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountshippingCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -9201,6 +9289,7 @@ acbre1BatchId :: Lens' AccountshippingCustomBatchResponseEntry (Maybe Word32)
 acbre1BatchId
   = lens _acbre1BatchId
       (\ s a -> s{_acbre1BatchId = a})
+      . mapping _Coerce
 
 instance FromJSON
          AccountshippingCustomBatchResponseEntry where
@@ -9291,7 +9380,7 @@ data AccountShipping = AccountShipping
     , _assCarrierRates   :: !(Maybe [AccountShippingCarrierRate])
     , _assKind           :: !Text
     , _assLocationGroups :: !(Maybe [AccountShippingLocationGroup])
-    , _assAccountId      :: !(Maybe Word64)
+    , _assAccountId      :: !(Maybe (JSONText Word64))
     , _assServices       :: !(Maybe [AccountShippingShippingService])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9355,6 +9444,7 @@ assLocationGroups
 assAccountId :: Lens' AccountShipping (Maybe Word64)
 assAccountId
   = lens _assAccountId (\ s a -> s{_assAccountId = a})
+      . mapping _Coerce
 
 -- | Shipping services describing shipping fees calculation.
 assServices :: Lens' AccountShipping [AccountShippingShippingService]
@@ -9442,7 +9532,7 @@ instance ToJSON OrdersUpdateMerchantOrderIdResponse
 --
 -- /See:/ 'datafeedStatusExample' smart constructor.
 data DatafeedStatusExample = DatafeedStatusExample
-    { _dseLineNumber :: !(Maybe Word64)
+    { _dseLineNumber :: !(Maybe (JSONText Word64))
     , _dseItemId     :: !(Maybe Text)
     , _dseValue      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9470,6 +9560,7 @@ dseLineNumber :: Lens' DatafeedStatusExample (Maybe Word64)
 dseLineNumber
   = lens _dseLineNumber
       (\ s a -> s{_dseLineNumber = a})
+      . mapping _Coerce
 
 -- | The ID of the example item.
 dseItemId :: Lens' DatafeedStatusExample (Maybe Text)
@@ -9549,7 +9640,7 @@ instance ToJSON OrdersAcknowledgeResponse where
 -- /See:/ 'order' smart constructor.
 data Order = Order
     { _ooStatus          :: !(Maybe Text)
-    , _ooMerchantId      :: !(Maybe Word64)
+    , _ooMerchantId      :: !(Maybe (JSONText Word64))
     , _ooRefunds         :: !(Maybe [OrderRefund])
     , _ooKind            :: !Text
     , _ooLineItems       :: !(Maybe [OrderLineItem])
@@ -9638,6 +9729,7 @@ ooStatus = lens _ooStatus (\ s a -> s{_ooStatus = a})
 ooMerchantId :: Lens' Order (Maybe Word64)
 ooMerchantId
   = lens _ooMerchantId (\ s a -> s{_ooMerchantId = a})
+      . mapping _Coerce
 
 -- | Refunds for the order.
 ooRefunds :: Lens' Order [OrderRefund]
@@ -10030,10 +10122,10 @@ instance ToJSON OrderLineItemProduct where
 -- /See:/ 'accounttaxCustomBatchRequestEntry' smart constructor.
 data AccounttaxCustomBatchRequestEntry = AccounttaxCustomBatchRequestEntry
     { _a2AccountTax :: !(Maybe AccountTax)
-    , _a2MerchantId :: !(Maybe Word64)
-    , _a2AccountId  :: !(Maybe Word64)
+    , _a2MerchantId :: !(Maybe (JSONText Word64))
+    , _a2AccountId  :: !(Maybe (JSONText Word64))
     , _a2Method     :: !(Maybe Text)
-    , _a2BatchId    :: !(Maybe Word32)
+    , _a2BatchId    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -10070,11 +10162,13 @@ a2AccountTax
 a2MerchantId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word64)
 a2MerchantId
   = lens _a2MerchantId (\ s a -> s{_a2MerchantId = a})
+      . mapping _Coerce
 
 -- | The ID of the account for which to get\/update account tax settings.
 a2AccountId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word64)
 a2AccountId
-  = lens _a2AccountId (\ s a -> s{_a2AccountId = a})
+  = lens _a2AccountId (\ s a -> s{_a2AccountId = a}) .
+      mapping _Coerce
 
 a2Method :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Text)
 a2Method = lens _a2Method (\ s a -> s{_a2Method = a})
@@ -10082,7 +10176,8 @@ a2Method = lens _a2Method (\ s a -> s{_a2Method = a})
 -- | An entry ID, unique within the batch request.
 a2BatchId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word32)
 a2BatchId
-  = lens _a2BatchId (\ s a -> s{_a2BatchId = a})
+  = lens _a2BatchId (\ s a -> s{_a2BatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON AccounttaxCustomBatchRequestEntry
          where
@@ -10110,7 +10205,7 @@ instance ToJSON AccounttaxCustomBatchRequestEntry
 --
 -- /See:/ 'datafeedStatusError' smart constructor.
 data DatafeedStatusError = DatafeedStatusError
-    { _dseCount    :: !(Maybe Word64)
+    { _dseCount    :: !(Maybe (JSONText Word64))
     , _dseCode     :: !(Maybe Text)
     , _dseMessage  :: !(Maybe Text)
     , _dseExamples :: !(Maybe [DatafeedStatusExample])
@@ -10139,7 +10234,9 @@ datafeedStatusError =
 
 -- | The number of occurrences of the error in the feed.
 dseCount :: Lens' DatafeedStatusError (Maybe Word64)
-dseCount = lens _dseCount (\ s a -> s{_dseCount = a})
+dseCount
+  = lens _dseCount (\ s a -> s{_dseCount = a}) .
+      mapping _Coerce
 
 -- | The code of the error, e.g., \"validation\/invalid_value\".
 dseCode :: Lens' DatafeedStatusError (Maybe Text)
@@ -10215,7 +10312,7 @@ instance ToJSON ProductsCustomBatchRequest where
 --
 -- /See:/ 'ordersCustomBatchRequestEntryReturnLineItem' smart constructor.
 data OrdersCustomBatchRequestEntryReturnLineItem = OrdersCustomBatchRequestEntryReturnLineItem
-    { _ocbrerliQuantity   :: !(Maybe Word32)
+    { _ocbrerliQuantity   :: !(Maybe (JSONText Word32))
     , _ocbrerliLineItemId :: !(Maybe Text)
     , _ocbrerliReason     :: !(Maybe Text)
     , _ocbrerliReasonText :: !(Maybe Text)
@@ -10247,6 +10344,7 @@ ocbrerliQuantity :: Lens' OrdersCustomBatchRequestEntryReturnLineItem (Maybe Wor
 ocbrerliQuantity
   = lens _ocbrerliQuantity
       (\ s a -> s{_ocbrerliQuantity = a})
+      . mapping _Coerce
 
 -- | The ID of the line item to return.
 ocbrerliLineItemId :: Lens' OrdersCustomBatchRequestEntryReturnLineItem (Maybe Text)
@@ -10369,13 +10467,13 @@ instance ToJSON
 --
 -- /See:/ 'datafeedStatus' smart constructor.
 data DatafeedStatus = DatafeedStatus
-    { _dsItemsTotal       :: !(Maybe Word64)
+    { _dsItemsTotal       :: !(Maybe (JSONText Word64))
     , _dsKind             :: !Text
     , _dsWarnings         :: !(Maybe [DatafeedStatusError])
-    , _dsDatafeedId       :: !(Maybe Word64)
+    , _dsDatafeedId       :: !(Maybe (JSONText Word64))
     , _dsProcessingStatus :: !(Maybe Text)
     , _dsLastUploadDate   :: !(Maybe Text)
-    , _dsItemsValid       :: !(Maybe Word64)
+    , _dsItemsValid       :: !(Maybe (JSONText Word64))
     , _dsErrors           :: !(Maybe [DatafeedStatusError])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10416,6 +10514,7 @@ datafeedStatus =
 dsItemsTotal :: Lens' DatafeedStatus (Maybe Word64)
 dsItemsTotal
   = lens _dsItemsTotal (\ s a -> s{_dsItemsTotal = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#datafeedStatus\".
@@ -10433,6 +10532,7 @@ dsWarnings
 dsDatafeedId :: Lens' DatafeedStatus (Maybe Word64)
 dsDatafeedId
   = lens _dsDatafeedId (\ s a -> s{_dsDatafeedId = a})
+      . mapping _Coerce
 
 -- | The processing status of the feed.
 dsProcessingStatus :: Lens' DatafeedStatus (Maybe Text)
@@ -10450,6 +10550,7 @@ dsLastUploadDate
 dsItemsValid :: Lens' DatafeedStatus (Maybe Word64)
 dsItemsValid
   = lens _dsItemsValid (\ s a -> s{_dsItemsValid = a})
+      . mapping _Coerce
 
 -- | The list of errors occurring in the feed.
 dsErrors :: Lens' DatafeedStatus [DatafeedStatusError]
@@ -10530,7 +10631,7 @@ instance ToJSON DatafeedstatusesCustomBatchRequest
 -- /See:/ 'accountShippingLocationGroup' smart constructor.
 data AccountShippingLocationGroup = AccountShippingLocationGroup
     { _aslgCountry          :: !(Maybe Text)
-    , _aslgLocationIds      :: !(Maybe [Int64])
+    , _aslgLocationIds      :: !(Maybe [JSONText Int64])
     , _aslgPostalCodeRanges :: !(Maybe [AccountShippingPostalCodeRange])
     , _aslgName             :: !(Maybe Text)
     , _aslgPostalCodes      :: !(Maybe [Text])
@@ -10623,7 +10724,7 @@ data AccountStatusDataQualityIssue = AccountStatusDataQualityIssue
     { _asdqiSubmittedValue :: !(Maybe Text)
     , _asdqiCountry        :: !(Maybe Text)
     , _asdqiDisplayedValue :: !(Maybe Text)
-    , _asdqiNumItems       :: !(Maybe Word32)
+    , _asdqiNumItems       :: !(Maybe (JSONText Word32))
     , _asdqiSeverity       :: !(Maybe Text)
     , _asdqiExampleItems   :: !(Maybe [AccountStatusExampleItem])
     , _asdqiLastChecked    :: !(Maybe Text)
@@ -10685,6 +10786,7 @@ asdqiNumItems :: Lens' AccountStatusDataQualityIssue (Maybe Word32)
 asdqiNumItems
   = lens _asdqiNumItems
       (\ s a -> s{_asdqiNumItems = a})
+      . mapping _Coerce
 
 -- | Severity of the problem.
 asdqiSeverity :: Lens' AccountStatusDataQualityIssue (Maybe Text)
@@ -10739,7 +10841,7 @@ instance ToJSON AccountStatusDataQualityIssue where
 --
 -- /See:/ 'productShippingDimension' smart constructor.
 data ProductShippingDimension = ProductShippingDimension
-    { _psdValue :: !(Maybe Double)
+    { _psdValue :: !(Maybe (JSONText Double))
     , _psdUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10761,7 +10863,9 @@ productShippingDimension =
 -- | The dimension of the product used to calculate the shipping cost of the
 -- item.
 psdValue :: Lens' ProductShippingDimension (Maybe Double)
-psdValue = lens _psdValue (\ s a -> s{_psdValue = a})
+psdValue
+  = lens _psdValue (\ s a -> s{_psdValue = a}) .
+      mapping _Coerce
 
 -- | The unit of value. Acceptable values are: - \"cm\" - \"in\"
 psdUnit :: Lens' ProductShippingDimension (Maybe Text)
@@ -10787,7 +10891,7 @@ instance ToJSON ProductShippingDimension where
 data DatafeedsCustomBatchResponseEntry = DatafeedsCustomBatchResponseEntry
     { _dcbrecDatafeed :: !(Maybe Datafeed)
     , _dcbrecErrors   :: !(Maybe Errors)
-    , _dcbrecBatchId  :: !(Maybe Word32)
+    , _dcbrecBatchId  :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedsCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -10825,6 +10929,7 @@ dcbrecBatchId :: Lens' DatafeedsCustomBatchResponseEntry (Maybe Word32)
 dcbrecBatchId
   = lens _dcbrecBatchId
       (\ s a -> s{_dcbrecBatchId = a})
+      . mapping _Coerce
 
 instance FromJSON DatafeedsCustomBatchResponseEntry
          where
@@ -11031,7 +11136,7 @@ instance ToJSON ProductsListResponse where
 -- /See:/ 'accountAdwordsLink' smart constructor.
 data AccountAdwordsLink = AccountAdwordsLink
     { _aalStatus    :: !(Maybe Text)
-    , _aalAdwordsId :: !(Maybe Word64)
+    , _aalAdwordsId :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountAdwordsLink' with the minimum fields required to make a request.
@@ -11067,6 +11172,7 @@ aalStatus
 aalAdwordsId :: Lens' AccountAdwordsLink (Maybe Word64)
 aalAdwordsId
   = lens _aalAdwordsId (\ s a -> s{_aalAdwordsId = a})
+      . mapping _Coerce
 
 instance FromJSON AccountAdwordsLink where
         parseJSON
@@ -11085,7 +11191,7 @@ instance ToJSON AccountAdwordsLink where
 --
 -- /See:/ 'orderCancellation' smart constructor.
 data OrderCancellation = OrderCancellation
-    { _ocQuantity     :: !(Maybe Word32)
+    { _ocQuantity     :: !(Maybe (JSONText Word32))
     , _ocActor        :: !(Maybe Text)
     , _ocReason       :: !(Maybe Text)
     , _ocCreationDate :: !(Maybe Text)
@@ -11119,7 +11225,8 @@ orderCancellation =
 -- | The quantity that was canceled.
 ocQuantity :: Lens' OrderCancellation (Maybe Word32)
 ocQuantity
-  = lens _ocQuantity (\ s a -> s{_ocQuantity = a})
+  = lens _ocQuantity (\ s a -> s{_ocQuantity = a}) .
+      mapping _Coerce
 
 -- | The actor that created the cancellation.
 ocActor :: Lens' OrderCancellation (Maybe Text)

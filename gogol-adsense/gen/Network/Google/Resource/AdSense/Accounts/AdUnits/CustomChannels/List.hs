@@ -56,7 +56,7 @@ type AccountsAdUnitsCustomChannelsListResource =
                    Capture "adUnitId" Text :>
                      "customchannels" :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" Int32 :>
+                         QueryParam "maxResults" (JSONText Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] CustomChannels
 
@@ -68,7 +68,7 @@ data AccountsAdUnitsCustomChannelsList = AccountsAdUnitsCustomChannelsList
     , _aaucclAdClientId :: !Text
     , _aaucclAccountId  :: !Text
     , _aaucclPageToken  :: !(Maybe Text)
-    , _aaucclMaxResults :: !(Maybe Int32)
+    , _aaucclMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsCustomChannelsList' with the minimum fields required to make a request.
@@ -130,6 +130,7 @@ aaucclMaxResults :: Lens' AccountsAdUnitsCustomChannelsList (Maybe Int32)
 aaucclMaxResults
   = lens _aaucclMaxResults
       (\ s a -> s{_aaucclMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest
          AccountsAdUnitsCustomChannelsList where

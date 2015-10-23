@@ -58,8 +58,8 @@ type TableDataListResource =
                    Capture "tableId" Text :>
                      "data" :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "startIndex" Word64 :>
-                           QueryParam "maxResults" Word32 :>
+                         QueryParam "startIndex" (JSONText Word64) :>
+                           QueryParam "maxResults" (JSONText Word32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TableDataList
 
@@ -72,8 +72,8 @@ data TableDataList' = TableDataList'
     , _tPageToken  :: !(Maybe Text)
     , _tProjectId  :: !Text
     , _tTableId    :: !Text
-    , _tStartIndex :: !(Maybe Word64)
-    , _tMaxResults :: !(Maybe Word32)
+    , _tStartIndex :: !(Maybe (JSONText Word64))
+    , _tMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataList'' with the minimum fields required to make a request.
@@ -130,12 +130,14 @@ tTableId = lens _tTableId (\ s a -> s{_tTableId = a})
 -- | Zero-based index of the starting row to read
 tStartIndex :: Lens' TableDataList' (Maybe Word64)
 tStartIndex
-  = lens _tStartIndex (\ s a -> s{_tStartIndex = a})
+  = lens _tStartIndex (\ s a -> s{_tStartIndex = a}) .
+      mapping _Coerce
 
 -- | Maximum number of results to return
 tMaxResults :: Lens' TableDataList' (Maybe Word32)
 tMaxResults
-  = lens _tMaxResults (\ s a -> s{_tMaxResults = a})
+  = lens _tMaxResults (\ s a -> s{_tMaxResults = a}) .
+      mapping _Coerce
 
 instance GoogleRequest TableDataList' where
         type Rs TableDataList' = TableDataList

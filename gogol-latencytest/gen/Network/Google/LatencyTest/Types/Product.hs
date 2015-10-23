@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'intValue' smart constructor.
 data IntValue = IntValue
-    { _ivValue :: !(Maybe Int64)
+    { _ivValue :: !(Maybe (JSONText Int64))
     , _ivLabel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -43,7 +43,9 @@ intValue =
     }
 
 ivValue :: Lens' IntValue (Maybe Int64)
-ivValue = lens _ivValue (\ s a -> s{_ivValue = a})
+ivValue
+  = lens _ivValue (\ s a -> s{_ivValue = a}) .
+      mapping _Coerce
 
 ivLabel :: Lens' IntValue (Maybe Text)
 ivLabel = lens _ivLabel (\ s a -> s{_ivLabel = a})
@@ -64,7 +66,7 @@ instance ToJSON IntValue where
 --
 -- /See:/ 'doubleValue' smart constructor.
 data DoubleValue = DoubleValue
-    { _dvValue :: !(Maybe Float)
+    { _dvValue :: !(Maybe (JSONText Float))
     , _dvLabel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,7 +86,9 @@ doubleValue =
     }
 
 dvValue :: Lens' DoubleValue (Maybe Float)
-dvValue = lens _dvValue (\ s a -> s{_dvValue = a})
+dvValue
+  = lens _dvValue (\ s a -> s{_dvValue = a}) .
+      mapping _Coerce
 
 dvLabel :: Lens' DoubleValue (Maybe Text)
 dvLabel = lens _dvLabel (\ s a -> s{_dvLabel = a})
@@ -178,7 +182,7 @@ instance ToJSON AggregatedStatsReply where
 --
 -- /See:/ 'stats' smart constructor.
 data Stats = Stats
-    { _sTime         :: !(Maybe Double)
+    { _sTime         :: !(Maybe (JSONText Double))
     , _sDoubleValues :: !(Maybe [DoubleValue])
     , _sStringValues :: !(Maybe [StringValue])
     , _sIntValues    :: !(Maybe [IntValue])
@@ -206,7 +210,9 @@ stats =
     }
 
 sTime :: Lens' Stats (Maybe Double)
-sTime = lens _sTime (\ s a -> s{_sTime = a})
+sTime
+  = lens _sTime (\ s a -> s{_sTime = a}) .
+      mapping _Coerce
 
 sDoubleValues :: Lens' Stats [DoubleValue]
 sDoubleValues

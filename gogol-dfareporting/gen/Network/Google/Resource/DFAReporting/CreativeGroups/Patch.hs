@@ -48,9 +48,9 @@ type CreativeGroupsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeGroups" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] CreativeGroup :>
                      Patch '[JSON] CreativeGroup
@@ -60,9 +60,9 @@ type CreativeGroupsPatchResource =
 --
 -- /See:/ 'creativeGroupsPatch' smart constructor.
 data CreativeGroupsPatch = CreativeGroupsPatch
-    { _cgpProFileId :: !Int64
+    { _cgpProFileId :: !(JSONText Int64)
     , _cgpPayload   :: !CreativeGroup
-    , _cgpId        :: !Int64
+    , _cgpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsPatch' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ creativeGroupsPatch pCgpProFileId_ pCgpPayload_ pCgpId_ =
 cgpProFileId :: Lens' CreativeGroupsPatch Int64
 cgpProFileId
   = lens _cgpProFileId (\ s a -> s{_cgpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 cgpPayload :: Lens' CreativeGroupsPatch CreativeGroup
@@ -98,7 +99,8 @@ cgpPayload
 
 -- | Creative group ID.
 cgpId :: Lens' CreativeGroupsPatch Int64
-cgpId = lens _cgpId (\ s a -> s{_cgpId = a})
+cgpId
+  = lens _cgpId (\ s a -> s{_cgpId = a}) . _Coerce
 
 instance GoogleRequest CreativeGroupsPatch where
         type Rs CreativeGroupsPatch = CreativeGroup

@@ -52,8 +52,8 @@ type InAppProductsListResource =
            Capture "packageName" Text :>
              "inappproducts" :>
                QueryParam "token" Text :>
-                 QueryParam "startIndex" Word32 :>
-                   QueryParam "maxResults" Word32 :>
+                 QueryParam "startIndex" (JSONText Word32) :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] InAppProductsListResponse
 
@@ -64,8 +64,8 @@ type InAppProductsListResource =
 data InAppProductsList = InAppProductsList
     { _iaplPackageName :: !Text
     , _iaplToken       :: !(Maybe Text)
-    , _iaplStartIndex  :: !(Maybe Word32)
-    , _iaplMaxResults  :: !(Maybe Word32)
+    , _iaplStartIndex  :: !(Maybe (JSONText Word32))
+    , _iaplMaxResults  :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductsList' with the minimum fields required to make a request.
@@ -105,11 +105,13 @@ iaplStartIndex :: Lens' InAppProductsList (Maybe Word32)
 iaplStartIndex
   = lens _iaplStartIndex
       (\ s a -> s{_iaplStartIndex = a})
+      . mapping _Coerce
 
 iaplMaxResults :: Lens' InAppProductsList (Maybe Word32)
 iaplMaxResults
   = lens _iaplMaxResults
       (\ s a -> s{_iaplMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest InAppProductsList where
         type Rs InAppProductsList = InAppProductsListResponse

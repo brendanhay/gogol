@@ -48,9 +48,9 @@ type FloodlightActivitiesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivities" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] FloodlightActivity :>
                      Patch '[JSON] FloodlightActivity
@@ -60,9 +60,9 @@ type FloodlightActivitiesPatchResource =
 --
 -- /See:/ 'floodlightActivitiesPatch' smart constructor.
 data FloodlightActivitiesPatch = FloodlightActivitiesPatch
-    { _fapProFileId :: !Int64
+    { _fapProFileId :: !(JSONText Int64)
     , _fapPayload   :: !FloodlightActivity
-    , _fapId        :: !Int64
+    , _fapId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesPatch' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ floodlightActivitiesPatch pFapProFileId_ pFapPayload_ pFapId_ =
 fapProFileId :: Lens' FloodlightActivitiesPatch Int64
 fapProFileId
   = lens _fapProFileId (\ s a -> s{_fapProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 fapPayload :: Lens' FloodlightActivitiesPatch FloodlightActivity
@@ -98,7 +99,8 @@ fapPayload
 
 -- | Floodlight activity ID.
 fapId :: Lens' FloodlightActivitiesPatch Int64
-fapId = lens _fapId (\ s a -> s{_fapId = a})
+fapId
+  = lens _fapId (\ s a -> s{_fapId = a}) . _Coerce
 
 instance GoogleRequest FloodlightActivitiesPatch
          where

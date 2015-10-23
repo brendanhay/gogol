@@ -82,8 +82,8 @@ data QueryMetadata = QueryMetadata
     , _qmShareEmailAddress                     :: !(Maybe [Text])
     , _qmRunning                               :: !(Maybe Bool)
     , _qmDataRange                             :: !(Maybe QueryMetadataDataRange)
-    , _qmLatestReportRunTimeMs                 :: !(Maybe Int64)
-    , _qmReportCount                           :: !(Maybe Int32)
+    , _qmLatestReportRunTimeMs                 :: !(Maybe (JSONText Int64))
+    , _qmReportCount                           :: !(Maybe (JSONText Int32))
     , _qmTitle                                 :: !(Maybe Text)
     , _qmSendNotification                      :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -180,12 +180,14 @@ qmLatestReportRunTimeMs :: Lens' QueryMetadata (Maybe Int64)
 qmLatestReportRunTimeMs
   = lens _qmLatestReportRunTimeMs
       (\ s a -> s{_qmLatestReportRunTimeMs = a})
+      . mapping _Coerce
 
 -- | Number of reports that have been generated for the query.
 qmReportCount :: Lens' QueryMetadata (Maybe Int32)
 qmReportCount
   = lens _qmReportCount
       (\ s a -> s{_qmReportCount = a})
+      . mapping _Coerce
 
 -- | Query title. It is used to name the reports generated from this query.
 qmTitle :: Lens' QueryMetadata (Maybe Text)
@@ -238,9 +240,9 @@ instance ToJSON QueryMetadata where
 --
 -- /See:/ 'runQueryRequest' smart constructor.
 data RunQueryRequest = RunQueryRequest
-    { _rqrReportDataEndTimeMs   :: !(Maybe Int64)
+    { _rqrReportDataEndTimeMs   :: !(Maybe (JSONText Int64))
     , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
-    , _rqrReportDataStartTimeMs :: !(Maybe Int64)
+    , _rqrReportDataStartTimeMs :: !(Maybe (JSONText Int64))
     , _rqrTimezoneCode          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -272,6 +274,7 @@ rqrReportDataEndTimeMs :: Lens' RunQueryRequest (Maybe Int64)
 rqrReportDataEndTimeMs
   = lens _rqrReportDataEndTimeMs
       (\ s a -> s{_rqrReportDataEndTimeMs = a})
+      . mapping _Coerce
 
 -- | Report data range used to generate the report.
 rqrDataRange :: Lens' RunQueryRequest (Maybe RunQueryRequestDataRange)
@@ -285,6 +288,7 @@ rqrReportDataStartTimeMs :: Lens' RunQueryRequest (Maybe Int64)
 rqrReportDataStartTimeMs
   = lens _rqrReportDataStartTimeMs
       (\ s a -> s{_rqrReportDataStartTimeMs = a})
+      . mapping _Coerce
 
 -- | Canonical timezone code for report data time. Defaults to
 -- America\/New_York.
@@ -424,7 +428,7 @@ data DownloadLineItemsRequest = DownloadLineItemsRequest
     { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
     , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
     , _dlirFileSpec   :: !(Maybe DownloadLineItemsRequestFileSpec)
-    , _dlirFilterIds  :: !(Maybe [Int64])
+    , _dlirFilterIds  :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
@@ -585,9 +589,9 @@ instance ToJSON UploadLineItemsResponse where
 -- /See:/ 'reportMetadata' smart constructor.
 data ReportMetadata = ReportMetadata
     { _rmStatus                 :: !(Maybe ReportStatus)
-    , _rmReportDataEndTimeMs    :: !(Maybe Int64)
+    , _rmReportDataEndTimeMs    :: !(Maybe (JSONText Int64))
     , _rmGoogleCloudStoragePath :: !(Maybe Text)
-    , _rmReportDataStartTimeMs  :: !(Maybe Int64)
+    , _rmReportDataStartTimeMs  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportMetadata' with the minimum fields required to make a request.
@@ -620,6 +624,7 @@ rmReportDataEndTimeMs :: Lens' ReportMetadata (Maybe Int64)
 rmReportDataEndTimeMs
   = lens _rmReportDataEndTimeMs
       (\ s a -> s{_rmReportDataEndTimeMs = a})
+      . mapping _Coerce
 
 -- | The path to the location in Google Cloud Storage where the report is
 -- stored.
@@ -633,6 +638,7 @@ rmReportDataStartTimeMs :: Lens' ReportMetadata (Maybe Int64)
 rmReportDataStartTimeMs
   = lens _rmReportDataStartTimeMs
       (\ s a -> s{_rmReportDataStartTimeMs = a})
+      . mapping _Coerce
 
 instance FromJSON ReportMetadata where
         parseJSON
@@ -717,9 +723,9 @@ data RowStatus = RowStatus
     { _rsEntityName :: !(Maybe Text)
     , _rsChanged    :: !(Maybe Bool)
     , _rsPersisted  :: !(Maybe Bool)
-    , _rsRowNumber  :: !(Maybe Int32)
+    , _rsRowNumber  :: !(Maybe (JSONText Int32))
     , _rsErrors     :: !(Maybe [Text])
-    , _rsEntityId   :: !(Maybe Int64)
+    , _rsEntityId   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RowStatus' with the minimum fields required to make a request.
@@ -767,7 +773,8 @@ rsPersisted
 -- | Row number.
 rsRowNumber :: Lens' RowStatus (Maybe Int32)
 rsRowNumber
-  = lens _rsRowNumber (\ s a -> s{_rsRowNumber = a})
+  = lens _rsRowNumber (\ s a -> s{_rsRowNumber = a}) .
+      mapping _Coerce
 
 -- | Reasons why the entity can\'t be uploaded.
 rsErrors :: Lens' RowStatus [Text]
@@ -779,7 +786,8 @@ rsErrors
 -- | Entity Id.
 rsEntityId :: Lens' RowStatus (Maybe Int64)
 rsEntityId
-  = lens _rsEntityId (\ s a -> s{_rsEntityId = a})
+  = lens _rsEntityId (\ s a -> s{_rsEntityId = a}) .
+      mapping _Coerce
 
 instance FromJSON RowStatus where
         parseJSON
@@ -807,8 +815,8 @@ instance ToJSON RowStatus where
 --
 -- /See:/ 'reportKey' smart constructor.
 data ReportKey = ReportKey
-    { _rkQueryId  :: !(Maybe Int64)
-    , _rkReportId :: !(Maybe Int64)
+    { _rkQueryId  :: !(Maybe (JSONText Int64))
+    , _rkReportId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportKey' with the minimum fields required to make a request.
@@ -829,12 +837,14 @@ reportKey =
 -- | Query ID.
 rkQueryId :: Lens' ReportKey (Maybe Int64)
 rkQueryId
-  = lens _rkQueryId (\ s a -> s{_rkQueryId = a})
+  = lens _rkQueryId (\ s a -> s{_rkQueryId = a}) .
+      mapping _Coerce
 
 -- | Report ID.
 rkReportId :: Lens' ReportKey (Maybe Int64)
 rkReportId
-  = lens _rkReportId (\ s a -> s{_rkReportId = a})
+  = lens _rkReportId (\ s a -> s{_rkReportId = a}) .
+      mapping _Coerce
 
 instance FromJSON ReportKey where
         parseJSON
@@ -907,8 +917,8 @@ instance ToJSON UploadStatus where
 -- /See:/ 'querySchedule' smart constructor.
 data QuerySchedule = QuerySchedule
     { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
-    , _qsEndTimeMs           :: !(Maybe Int64)
-    , _qsNextRunMinuteOfDay  :: !(Maybe Int32)
+    , _qsEndTimeMs           :: !(Maybe (JSONText Int64))
+    , _qsNextRunMinuteOfDay  :: !(Maybe (JSONText Int32))
     , _qsNextRunTimezoneCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -941,7 +951,8 @@ qsFrequency
 -- | Datetime to periodically run the query until.
 qsEndTimeMs :: Lens' QuerySchedule (Maybe Int64)
 qsEndTimeMs
-  = lens _qsEndTimeMs (\ s a -> s{_qsEndTimeMs = a})
+  = lens _qsEndTimeMs (\ s a -> s{_qsEndTimeMs = a}) .
+      mapping _Coerce
 
 -- | Time of day at which a new report will be generated, represented as
 -- minutes past midnight. Range is 0 to 1439. Only applies to scheduled
@@ -950,6 +961,7 @@ qsNextRunMinuteOfDay :: Lens' QuerySchedule (Maybe Int32)
 qsNextRunMinuteOfDay
   = lens _qsNextRunMinuteOfDay
       (\ s a -> s{_qsNextRunMinuteOfDay = a})
+      . mapping _Coerce
 
 -- | Canonical timezone code for report generation time. Defaults to
 -- America\/New_York.
@@ -1019,7 +1031,7 @@ instance ToJSON DownloadLineItemsResponse where
 -- /See:/ 'reportStatus' smart constructor.
 data ReportStatus = ReportStatus
     { _rsState        :: !(Maybe ReportStatusState)
-    , _rsFinishTimeMs :: !(Maybe Int64)
+    , _rsFinishTimeMs :: !(Maybe (JSONText Int64))
     , _rsFormat       :: !(Maybe ReportStatusFormat)
     , _rsFailure      :: !(Maybe ReportFailure)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1054,6 +1066,7 @@ rsFinishTimeMs :: Lens' ReportStatus (Maybe Int64)
 rsFinishTimeMs
   = lens _rsFinishTimeMs
       (\ s a -> s{_rsFinishTimeMs = a})
+      . mapping _Coerce
 
 -- | The file type of the report.
 rsFormat :: Lens' ReportStatus (Maybe ReportStatusFormat)
@@ -1086,13 +1099,13 @@ instance ToJSON ReportStatus where
 --
 -- /See:/ 'query' smart constructor.
 data Query = Query
-    { _qQueryId               :: !(Maybe Int64)
-    , _qReportDataEndTimeMs   :: !(Maybe Int64)
+    { _qQueryId               :: !(Maybe (JSONText Int64))
+    , _qReportDataEndTimeMs   :: !(Maybe (JSONText Int64))
     , _qSchedule              :: !(Maybe QuerySchedule)
     , _qKind                  :: !Text
     , _qParams                :: !(Maybe Parameters)
     , _qMetadata              :: !(Maybe QueryMetadata)
-    , _qReportDataStartTimeMs :: !(Maybe Int64)
+    , _qReportDataStartTimeMs :: !(Maybe (JSONText Int64))
     , _qTimezoneCode          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1131,7 +1144,9 @@ query =
 
 -- | Query ID.
 qQueryId :: Lens' Query (Maybe Int64)
-qQueryId = lens _qQueryId (\ s a -> s{_qQueryId = a})
+qQueryId
+  = lens _qQueryId (\ s a -> s{_qQueryId = a}) .
+      mapping _Coerce
 
 -- | The ending time for the data that is shown in the report. Note,
 -- reportDataEndTimeMs is required if metadata.dataRange is CUSTOM_DATES
@@ -1140,6 +1155,7 @@ qReportDataEndTimeMs :: Lens' Query (Maybe Int64)
 qReportDataEndTimeMs
   = lens _qReportDataEndTimeMs
       (\ s a -> s{_qReportDataEndTimeMs = a})
+      . mapping _Coerce
 
 -- | Information on how often and when to run a query.
 qSchedule :: Lens' Query (Maybe QuerySchedule)
@@ -1167,6 +1183,7 @@ qReportDataStartTimeMs :: Lens' Query (Maybe Int64)
 qReportDataStartTimeMs
   = lens _qReportDataStartTimeMs
       (\ s a -> s{_qReportDataStartTimeMs = a})
+      . mapping _Coerce
 
 -- | Canonical timezone code for report data time. Defaults to
 -- America\/New_York.

@@ -79,7 +79,9 @@ type EventsListResource =
                                        QueryParam "orderId" Text :>
                                          QueryParam "publisherId" Text :>
                                            QueryParam "productCategory" Text :>
-                                             QueryParam "maxResults" Word32 :>
+                                             QueryParam "maxResults"
+                                               (JSONText Word32)
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON] Events
 
@@ -104,7 +106,7 @@ data EventsList = EventsList
     , _elOrderId         :: !(Maybe Text)
     , _elPublisherId     :: !(Maybe Text)
     , _elProductCategory :: !(Maybe Text)
-    , _elMaxResults      :: !(Maybe Word32)
+    , _elMaxResults      :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList' with the minimum fields required to make a request.
@@ -283,6 +285,7 @@ elProductCategory
 elMaxResults :: Lens' EventsList (Maybe Word32)
 elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest EventsList where
         type Rs EventsList = Events

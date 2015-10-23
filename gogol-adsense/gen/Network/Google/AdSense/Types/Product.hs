@@ -1087,7 +1087,7 @@ instance ToJSON AdStyleFont where
 -- /See:/ 'account' smart constructor.
 data Account = Account
     { _accKind         :: !Text
-    , _accCreationTime :: !(Maybe Int64)
+    , _accCreationTime :: !(Maybe (JSONText Int64))
     , _accPremium      :: !(Maybe Bool)
     , _accName         :: !(Maybe Text)
     , _accId           :: !(Maybe Text)
@@ -1133,6 +1133,7 @@ accCreationTime :: Lens' Account (Maybe Int64)
 accCreationTime
   = lens _accCreationTime
       (\ s a -> s{_accCreationTime = a})
+      . mapping _Coerce
 
 -- | Whether this account is premium.
 accPremium :: Lens' Account (Maybe Bool)
@@ -1773,10 +1774,10 @@ instance ToJSON AdStyle where
 --
 -- /See:/ 'adUnitFeedAdsSettings' smart constructor.
 data AdUnitFeedAdsSettings = AdUnitFeedAdsSettings
-    { _aufasFrequency        :: !(Maybe Int32)
+    { _aufasFrequency        :: !(Maybe (JSONText Int32))
     , _aufasAdPosition       :: !(Maybe Text)
     , _aufasType             :: !(Maybe Text)
-    , _aufasMinimumWordCount :: !(Maybe Int32)
+    , _aufasMinimumWordCount :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitFeedAdsSettings' with the minimum fields required to make a request.
@@ -1806,6 +1807,7 @@ aufasFrequency :: Lens' AdUnitFeedAdsSettings (Maybe Int32)
 aufasFrequency
   = lens _aufasFrequency
       (\ s a -> s{_aufasFrequency = a})
+      . mapping _Coerce
 
 -- | The position of the ads relative to the feed entries.
 aufasAdPosition :: Lens' AdUnitFeedAdsSettings (Maybe Text)
@@ -1823,6 +1825,7 @@ aufasMinimumWordCount :: Lens' AdUnitFeedAdsSettings (Maybe Int32)
 aufasMinimumWordCount
   = lens _aufasMinimumWordCount
       (\ s a -> s{_aufasMinimumWordCount = a})
+      . mapping _Coerce
 
 instance FromJSON AdUnitFeedAdsSettings where
         parseJSON
@@ -2080,7 +2083,7 @@ data AdsenseReportsGenerateResponse = AdsenseReportsGenerateResponse
     , _argrTotals           :: !(Maybe [Text])
     , _argrStartDate        :: !(Maybe Text)
     , _argrHeaders          :: !(Maybe [AdsenseReportsGenerateResponseHeadersItem])
-    , _argrTotalMatchedRows :: !(Maybe Int64)
+    , _argrTotalMatchedRows :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsenseReportsGenerateResponse' with the minimum fields required to make a request.
@@ -2183,6 +2186,7 @@ argrTotalMatchedRows :: Lens' AdsenseReportsGenerateResponse (Maybe Int64)
 argrTotalMatchedRows
   = lens _argrTotalMatchedRows
       (\ s a -> s{_argrTotalMatchedRows = a})
+      . mapping _Coerce
 
 instance FromJSON AdsenseReportsGenerateResponse
          where

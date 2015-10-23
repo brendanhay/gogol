@@ -45,7 +45,7 @@ type BrowsersListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "browsers" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] BrowsersListResponse
@@ -54,7 +54,7 @@ type BrowsersListResource =
 --
 -- /See:/ 'browsersList' smart constructor.
 newtype BrowsersList = BrowsersList
-    { _blProFileId :: Int64
+    { _blProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BrowsersList' with the minimum fields required to make a request.
@@ -73,7 +73,8 @@ browsersList pBlProFileId_ =
 -- | User profile ID associated with this request.
 blProFileId :: Lens' BrowsersList Int64
 blProFileId
-  = lens _blProFileId (\ s a -> s{_blProFileId = a})
+  = lens _blProFileId (\ s a -> s{_blProFileId = a}) .
+      _Coerce
 
 instance GoogleRequest BrowsersList where
         type Rs BrowsersList = BrowsersListResponse

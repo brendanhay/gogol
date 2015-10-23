@@ -59,12 +59,12 @@ type PublishersListResource =
                QueryParam "relationshipStatus"
                  PublishersListRelationshipStatus
                  :>
-                 QueryParam "minSevenDayEpc" Double :>
-                   QueryParam "minNinetyDayEpc" Double :>
-                     QueryParam "minPayoutRank" Int32 :>
+                 QueryParam "minSevenDayEpc" (JSONText Double) :>
+                   QueryParam "minNinetyDayEpc" (JSONText Double) :>
+                     QueryParam "minPayoutRank" (JSONText Int32) :>
                        QueryParam "pageToken" Text :>
                          QueryParam "publisherCategory" Text :>
-                           QueryParam "maxResults" Word32 :>
+                           QueryParam "maxResults" (JSONText Word32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Publishers
 
 -- | Retrieves data about all publishers that the requesting
@@ -73,14 +73,14 @@ type PublishersListResource =
 -- /See:/ 'publishersList' smart constructor.
 data PublishersList = PublishersList
     { _plRelationshipStatus :: !(Maybe PublishersListRelationshipStatus)
-    , _plMinSevenDayEpc     :: !(Maybe Double)
+    , _plMinSevenDayEpc     :: !(Maybe (JSONText Double))
     , _plRoleId             :: !Text
-    , _plMinNinetyDayEpc    :: !(Maybe Double)
+    , _plMinNinetyDayEpc    :: !(Maybe (JSONText Double))
     , _plRole               :: !PublishersListRole
-    , _plMinPayoutRank      :: !(Maybe Int32)
+    , _plMinPayoutRank      :: !(Maybe (JSONText Int32))
     , _plPageToken          :: !(Maybe Text)
     , _plPublisherCategory  :: !(Maybe Text)
-    , _plMaxResults         :: !(Maybe Word32)
+    , _plMaxResults         :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersList' with the minimum fields required to make a request.
@@ -134,6 +134,7 @@ plMinSevenDayEpc :: Lens' PublishersList (Maybe Double)
 plMinSevenDayEpc
   = lens _plMinSevenDayEpc
       (\ s a -> s{_plMinSevenDayEpc = a})
+      . mapping _Coerce
 
 -- | The ID of the requesting advertiser or publisher.
 plRoleId :: Lens' PublishersList Text
@@ -145,6 +146,7 @@ plMinNinetyDayEpc :: Lens' PublishersList (Maybe Double)
 plMinNinetyDayEpc
   = lens _plMinNinetyDayEpc
       (\ s a -> s{_plMinNinetyDayEpc = a})
+      . mapping _Coerce
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
@@ -160,6 +162,7 @@ plMinPayoutRank :: Lens' PublishersList (Maybe Int32)
 plMinPayoutRank
   = lens _plMinPayoutRank
       (\ s a -> s{_plMinPayoutRank = a})
+      . mapping _Coerce
 
 -- | The value of \'nextPageToken\' from the previous page. Optional.
 plPageToken :: Lens' PublishersList (Maybe Text)
@@ -179,6 +182,7 @@ plPublisherCategory
 plMaxResults :: Lens' PublishersList (Maybe Word32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest PublishersList where
         type Rs PublishersList = Publishers

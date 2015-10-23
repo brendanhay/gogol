@@ -69,7 +69,7 @@ type TablesListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "projectId" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -89,7 +89,7 @@ data TablesList = TablesList
     , _tlPageToken        :: !(Maybe Text)
     , _tlProjectId        :: !(Maybe Text)
     , _tlSearch           :: !(Maybe Text)
-    , _tlMaxResults       :: !(Maybe Word32)
+    , _tlMaxResults       :: !(Maybe (JSONText Word32))
     , _tlTags             :: !(Maybe Text)
     , _tlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -213,6 +213,7 @@ tlSearch = lens _tlSearch (\ s a -> s{_tlSearch = a})
 tlMaxResults :: Lens' TablesList (Maybe Word32)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
+      . mapping _Coerce
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.

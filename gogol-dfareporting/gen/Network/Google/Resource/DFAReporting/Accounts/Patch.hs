@@ -47,9 +47,9 @@ type AccountsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "accounts" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Account :> Patch '[JSON] Account
 
@@ -57,9 +57,9 @@ type AccountsPatchResource =
 --
 -- /See:/ 'accountsPatch' smart constructor.
 data AccountsPatch = AccountsPatch
-    { _appProFileId :: !Int64
+    { _appProFileId :: !(JSONText Int64)
     , _appPayload   :: !Account
-    , _appId        :: !Int64
+    , _appId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
@@ -87,6 +87,7 @@ accountsPatch pAppProFileId_ pAppPayload_ pAppId_ =
 appProFileId :: Lens' AccountsPatch Int64
 appProFileId
   = lens _appProFileId (\ s a -> s{_appProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 appPayload :: Lens' AccountsPatch Account
@@ -95,7 +96,8 @@ appPayload
 
 -- | Account ID.
 appId :: Lens' AccountsPatch Int64
-appId = lens _appId (\ s a -> s{_appId = a})
+appId
+  = lens _appId (\ s a -> s{_appId = a}) . _Coerce
 
 instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account

@@ -53,7 +53,7 @@ type TargetPoolsAggregatedListResource =
                "targetPools" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TargetPoolAggregatedList
 
@@ -64,7 +64,7 @@ data TargetPoolsAggregatedList = TargetPoolsAggregatedList
     { _tpalProject    :: !Text
     , _tpalFilter     :: !(Maybe Text)
     , _tpalPageToken  :: !(Maybe Text)
-    , _tpalMaxResults :: !Word32
+    , _tpalMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAggregatedList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ tpalMaxResults :: Lens' TargetPoolsAggregatedList Word32
 tpalMaxResults
   = lens _tpalMaxResults
       (\ s a -> s{_tpalMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest TargetPoolsAggregatedList
          where

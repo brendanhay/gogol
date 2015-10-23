@@ -56,7 +56,7 @@ type UsersMessagesListResource =
                  QueryParam "includeSpamTrash" Bool :>
                    QueryParams "labelIds" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListMessagesResponse
 
@@ -69,7 +69,7 @@ data UsersMessagesList = UsersMessagesList
     , _umlIncludeSpamTrash :: !Bool
     , _umlLabelIds         :: !(Maybe [Text])
     , _umlPageToken        :: !(Maybe Text)
-    , _umlMaxResults       :: !Word32
+    , _umlMaxResults       :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesList' with the minimum fields required to make a request.
@@ -136,6 +136,7 @@ umlMaxResults :: Lens' UsersMessagesList Word32
 umlMaxResults
   = lens _umlMaxResults
       (\ s a -> s{_umlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest UsersMessagesList where
         type Rs UsersMessagesList = ListMessagesResponse

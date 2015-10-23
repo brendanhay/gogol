@@ -47,16 +47,16 @@ type ManagementAccountsListResource =
        "v3" :>
          "management" :>
            "accounts" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :>
+             QueryParam "start-index" (JSONText Int32) :>
+               QueryParam "max-results" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | Lists all accounts to which the user has access.
 --
 -- /See:/ 'managementAccountsList' smart constructor.
 data ManagementAccountsList = ManagementAccountsList
-    { _malStartIndex :: !(Maybe Int32)
-    , _malMaxResults :: !(Maybe Int32)
+    { _malStartIndex :: !(Maybe (JSONText Int32))
+    , _malMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountsList' with the minimum fields required to make a request.
@@ -80,12 +80,14 @@ malStartIndex :: Lens' ManagementAccountsList (Maybe Int32)
 malStartIndex
   = lens _malStartIndex
       (\ s a -> s{_malStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of accounts to include in this response.
 malMaxResults :: Lens' ManagementAccountsList (Maybe Int32)
 malMaxResults
   = lens _malMaxResults
       (\ s a -> s{_malMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementAccountsList where
         type Rs ManagementAccountsList = Accounts

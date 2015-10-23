@@ -53,10 +53,10 @@ type ChangesWatchResource =
          "changes" :>
            "watch" :>
              QueryParam "includeSubscribed" Bool :>
-               QueryParam "startChangeId" Int64 :>
+               QueryParam "startChangeId" (JSONText Int64) :>
                  QueryParam "spaces" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "includeDeleted" Bool :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Channel :> Post '[JSON] Channel
@@ -66,11 +66,11 @@ type ChangesWatchResource =
 -- /See:/ 'changesWatch' smart constructor.
 data ChangesWatch = ChangesWatch
     { _cwIncludeSubscribed :: !Bool
-    , _cwStartChangeId     :: !(Maybe Int64)
+    , _cwStartChangeId     :: !(Maybe (JSONText Int64))
     , _cwPayload           :: !Channel
     , _cwSpaces            :: !(Maybe Text)
     , _cwPageToken         :: !(Maybe Text)
-    , _cwMaxResults        :: !Int32
+    , _cwMaxResults        :: !(JSONText Int32)
     , _cwIncludeDeleted    :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -118,6 +118,7 @@ cwStartChangeId :: Lens' ChangesWatch (Maybe Int64)
 cwStartChangeId
   = lens _cwStartChangeId
       (\ s a -> s{_cwStartChangeId = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 cwPayload :: Lens' ChangesWatch Channel
@@ -138,6 +139,7 @@ cwPageToken
 cwMaxResults :: Lens' ChangesWatch Int32
 cwMaxResults
   = lens _cwMaxResults (\ s a -> s{_cwMaxResults = a})
+      . _Coerce
 
 -- | Whether to include deleted items.
 cwIncludeDeleted :: Lens' ChangesWatch Bool

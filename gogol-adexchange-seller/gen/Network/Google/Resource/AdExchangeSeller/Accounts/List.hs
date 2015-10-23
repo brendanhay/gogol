@@ -47,7 +47,7 @@ type AccountsListResource =
        "v2.0" :>
          "accounts" :>
            QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
+             QueryParam "maxResults" (JSONText Int32) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | List all accounts available to this Ad Exchange account.
@@ -55,7 +55,7 @@ type AccountsListResource =
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList = AccountsList
     { _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !(Maybe Int32)
+    , _alMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
@@ -85,6 +85,7 @@ alPageToken
 alMaxResults :: Lens' AccountsList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = Accounts

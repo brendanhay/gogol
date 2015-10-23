@@ -48,9 +48,9 @@ type AdvertiserGroupsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "advertiserGroups" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AdvertiserGroup :>
                      Patch '[JSON] AdvertiserGroup
@@ -60,9 +60,9 @@ type AdvertiserGroupsPatchResource =
 --
 -- /See:/ 'advertiserGroupsPatch' smart constructor.
 data AdvertiserGroupsPatch = AdvertiserGroupsPatch
-    { _agpProFileId :: !Int64
+    { _agpProFileId :: !(JSONText Int64)
     , _agpPayload   :: !AdvertiserGroup
-    , _agpId        :: !Int64
+    , _agpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsPatch' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ advertiserGroupsPatch pAgpProFileId_ pAgpPayload_ pAgpId_ =
 agpProFileId :: Lens' AdvertiserGroupsPatch Int64
 agpProFileId
   = lens _agpProFileId (\ s a -> s{_agpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 agpPayload :: Lens' AdvertiserGroupsPatch AdvertiserGroup
@@ -98,7 +99,8 @@ agpPayload
 
 -- | Advertiser group ID.
 agpId :: Lens' AdvertiserGroupsPatch Int64
-agpId = lens _agpId (\ s a -> s{_agpId = a})
+agpId
+  = lens _agpId (\ s a -> s{_agpId = a}) . _Coerce
 
 instance GoogleRequest AdvertiserGroupsPatch where
         type Rs AdvertiserGroupsPatch = AdvertiserGroup

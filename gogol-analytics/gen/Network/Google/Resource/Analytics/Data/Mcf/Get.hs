@@ -63,8 +63,8 @@ type DataMcfGetResource =
                        QueryParam "filters" Text :>
                          QueryParam "sort" Text :>
                            QueryParam "dimensions" Text :>
-                             QueryParam "start-index" Int32 :>
-                               QueryParam "max-results" Int32 :>
+                             QueryParam "start-index" (JSONText Int32) :>
+                               QueryParam "max-results" (JSONText Int32) :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] McfData
 
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
@@ -78,8 +78,8 @@ data DataMcfGet = DataMcfGet
     , _dmgEndDate       :: !Text
     , _dmgSort          :: !(Maybe Text)
     , _dmgDimensions    :: !(Maybe Text)
-    , _dmgStartIndex    :: !(Maybe Int32)
-    , _dmgMaxResults    :: !(Maybe Int32)
+    , _dmgStartIndex    :: !(Maybe (JSONText Int32))
+    , _dmgMaxResults    :: !(Maybe (JSONText Int32))
     , _dmgStartDate     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -175,12 +175,14 @@ dmgStartIndex :: Lens' DataMcfGet (Maybe Int32)
 dmgStartIndex
   = lens _dmgStartIndex
       (\ s a -> s{_dmgStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of entries to include in this feed.
 dmgMaxResults :: Lens' DataMcfGet (Maybe Int32)
 dmgMaxResults
   = lens _dmgMaxResults
       (\ s a -> s{_dmgMaxResults = a})
+      . mapping _Coerce
 
 -- | Start date for fetching Analytics data. Requests can specify a start
 -- date formatted as YYYY-MM-DD, or as a relative date (e.g., today,

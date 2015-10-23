@@ -30,8 +30,8 @@ data DataSet = DataSet
     { _dsNextPageToken  :: !(Maybe Text)
     , _dsDataSourceId   :: !(Maybe Text)
     , _dsPoint          :: !(Maybe [DataPoint])
-    , _dsMinStartTimeNs :: !(Maybe Int64)
-    , _dsMaxEndTimeNs   :: !(Maybe Int64)
+    , _dsMinStartTimeNs :: !(Maybe (JSONText Int64))
+    , _dsMaxEndTimeNs   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataSet' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ dsMinStartTimeNs :: Lens' DataSet (Maybe Int64)
 dsMinStartTimeNs
   = lens _dsMinStartTimeNs
       (\ s a -> s{_dsMinStartTimeNs = a})
+      . mapping _Coerce
 
 -- | The largest end time of all data points in this possibly partial
 -- representation of the dataset. Time is in nanoseconds from epoch. This
@@ -98,6 +99,7 @@ dsMaxEndTimeNs :: Lens' DataSet (Maybe Int64)
 dsMaxEndTimeNs
   = lens _dsMaxEndTimeNs
       (\ s a -> s{_dsMaxEndTimeNs = a})
+      . mapping _Coerce
 
 instance FromJSON DataSet where
         parseJSON
@@ -286,7 +288,7 @@ instance ToJSON AggregateBy where
 --
 -- /See:/ 'bucketByActivity' smart constructor.
 data BucketByActivity = BucketByActivity
-    { _bbaMinDurationMillis    :: !(Maybe Int64)
+    { _bbaMinDurationMillis    :: !(Maybe (JSONText Int64))
     , _bbaActivityDataSourceId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -312,6 +314,7 @@ bbaMinDurationMillis :: Lens' BucketByActivity (Maybe Int64)
 bbaMinDurationMillis
   = lens _bbaMinDurationMillis
       (\ s a -> s{_bbaMinDurationMillis = a})
+      . mapping _Coerce
 
 -- | The default activity stream will be used if a specific
 -- activityDataSourceId is not specified.
@@ -339,12 +342,12 @@ instance ToJSON BucketByActivity where
 --
 -- /See:/ 'aggregateRequest' smart constructor.
 data AggregateRequest = AggregateRequest
-    { _arEndTimeMillis           :: !(Maybe Int64)
+    { _arEndTimeMillis           :: !(Maybe (JSONText Int64))
     , _arAggregateBy             :: !(Maybe [AggregateBy])
     , _arBucketBySession         :: !(Maybe BucketBySession)
     , _arBucketByActivityType    :: !(Maybe BucketByActivity)
     , _arBucketByTime            :: !(Maybe BucketByTime)
-    , _arStartTimeMillis         :: !(Maybe Int64)
+    , _arStartTimeMillis         :: !(Maybe (JSONText Int64))
     , _arBucketByActivitySegment :: !(Maybe BucketByActivity)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -384,6 +387,7 @@ arEndTimeMillis :: Lens' AggregateRequest (Maybe Int64)
 arEndTimeMillis
   = lens _arEndTimeMillis
       (\ s a -> s{_arEndTimeMillis = a})
+      . mapping _Coerce
 
 -- | The specification of data to be aggregated. At least one aggregateBy
 -- spec must be provided. All data that is specified will be aggregated
@@ -429,6 +433,7 @@ arStartTimeMillis :: Lens' AggregateRequest (Maybe Int64)
 arStartTimeMillis
   = lens _arStartTimeMillis
       (\ s a -> s{_arStartTimeMillis = a})
+      . mapping _Coerce
 
 -- | Specifies that data be aggregated each activity segment recored for a
 -- user. Similar to bucketByActivitySegment, but bucketing is done for each
@@ -561,8 +566,8 @@ instance ToJSON Device where
 -- /See:/ 'value' smart constructor.
 data Value = Value
     { _vMapVal    :: !(Maybe [ValueMapValEntry])
-    , _vFpVal     :: !(Maybe Double)
-    , _vIntVal    :: !(Maybe Int32)
+    , _vFpVal     :: !(Maybe (JSONText Double))
+    , _vIntVal    :: !(Maybe (JSONText Int32))
     , _vStringVal :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -598,11 +603,15 @@ vMapVal
 
 -- | Floating point value. When this is set, other values must not be set.
 vFpVal :: Lens' Value (Maybe Double)
-vFpVal = lens _vFpVal (\ s a -> s{_vFpVal = a})
+vFpVal
+  = lens _vFpVal (\ s a -> s{_vFpVal = a}) .
+      mapping _Coerce
 
 -- | Integer value. When this is set, other values must not be set.
 vIntVal :: Lens' Value (Maybe Int32)
-vIntVal = lens _vIntVal (\ s a -> s{_vIntVal = a})
+vIntVal
+  = lens _vIntVal (\ s a -> s{_vIntVal = a}) .
+      mapping _Coerce
 
 -- | String value. When this is set, other values must not be set. Strings
 -- should be kept small whenever possible. Data streams with large string
@@ -631,7 +640,7 @@ instance ToJSON Value where
 --
 -- /See:/ 'bucketBySession' smart constructor.
 newtype BucketBySession = BucketBySession
-    { _bbsMinDurationMillis :: Maybe Int64
+    { _bbsMinDurationMillis :: Maybe (JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketBySession' with the minimum fields required to make a request.
@@ -652,6 +661,7 @@ bbsMinDurationMillis :: Lens' BucketBySession (Maybe Int64)
 bbsMinDurationMillis
   = lens _bbsMinDurationMillis
       (\ s a -> s{_bbsMinDurationMillis = a})
+      . mapping _Coerce
 
 instance FromJSON BucketBySession where
         parseJSON
@@ -678,13 +688,13 @@ instance ToJSON BucketBySession where
 -- /See:/ 'dataPoint' smart constructor.
 data DataPoint = DataPoint
     { _dpOriginDataSourceId    :: !(Maybe Text)
-    , _dpRawTimestampNanos     :: !(Maybe Int64)
+    , _dpRawTimestampNanos     :: !(Maybe (JSONText Int64))
     , _dpDataTypeName          :: !(Maybe Text)
     , _dpValue                 :: !(Maybe [Value])
-    , _dpComputationTimeMillis :: !(Maybe Int64)
-    , _dpEndTimeNanos          :: !(Maybe Int64)
-    , _dpModifiedTimeMillis    :: !(Maybe Int64)
-    , _dpStartTimeNanos        :: !(Maybe Int64)
+    , _dpComputationTimeMillis :: !(Maybe (JSONText Int64))
+    , _dpEndTimeNanos          :: !(Maybe (JSONText Int64))
+    , _dpModifiedTimeMillis    :: !(Maybe (JSONText Int64))
+    , _dpStartTimeNanos        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataPoint' with the minimum fields required to make a request.
@@ -733,6 +743,7 @@ dpRawTimestampNanos :: Lens' DataPoint (Maybe Int64)
 dpRawTimestampNanos
   = lens _dpRawTimestampNanos
       (\ s a -> s{_dpRawTimestampNanos = a})
+      . mapping _Coerce
 
 -- | The data type defining the format of the values in this data point.
 dpDataTypeName :: Lens' DataPoint (Maybe Text)
@@ -757,6 +768,7 @@ dpComputationTimeMillis :: Lens' DataPoint (Maybe Int64)
 dpComputationTimeMillis
   = lens _dpComputationTimeMillis
       (\ s a -> s{_dpComputationTimeMillis = a})
+      . mapping _Coerce
 
 -- | The end time of the interval represented by this data point, in
 -- nanoseconds since epoch.
@@ -764,6 +776,7 @@ dpEndTimeNanos :: Lens' DataPoint (Maybe Int64)
 dpEndTimeNanos
   = lens _dpEndTimeNanos
       (\ s a -> s{_dpEndTimeNanos = a})
+      . mapping _Coerce
 
 -- | Indicates the last time this data point was modified. Useful only in
 -- contexts where we are listing the data changes, rather than representing
@@ -772,6 +785,7 @@ dpModifiedTimeMillis :: Lens' DataPoint (Maybe Int64)
 dpModifiedTimeMillis
   = lens _dpModifiedTimeMillis
       (\ s a -> s{_dpModifiedTimeMillis = a})
+      . mapping _Coerce
 
 -- | The start time of the interval represented by this data point, in
 -- nanoseconds since epoch.
@@ -779,6 +793,7 @@ dpStartTimeNanos :: Lens' DataPoint (Maybe Int64)
 dpStartTimeNanos
   = lens _dpStartTimeNanos
       (\ s a -> s{_dpStartTimeNanos = a})
+      . mapping _Coerce
 
 instance FromJSON DataPoint where
         parseJSON
@@ -880,11 +895,11 @@ instance ToJSON ListSessionsResponse where
 --
 -- /See:/ 'aggregateBucket' smart constructor.
 data AggregateBucket = AggregateBucket
-    { _abEndTimeMillis   :: !(Maybe Int64)
+    { _abEndTimeMillis   :: !(Maybe (JSONText Int64))
     , _abDataSet         :: !(Maybe [DataSet])
-    , _abActivity        :: !(Maybe Int32)
+    , _abActivity        :: !(Maybe (JSONText Int32))
     , _abType            :: !(Maybe AggregateBucketType)
-    , _abStartTimeMillis :: !(Maybe Int64)
+    , _abStartTimeMillis :: !(Maybe (JSONText Int64))
     , _abSession         :: !(Maybe Session)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -921,6 +936,7 @@ abEndTimeMillis :: Lens' AggregateBucket (Maybe Int64)
 abEndTimeMillis
   = lens _abEndTimeMillis
       (\ s a -> s{_abEndTimeMillis = a})
+      . mapping _Coerce
 
 -- | There will be one dataset per AggregateBy in the request.
 abDataSet :: Lens' AggregateBucket [DataSet]
@@ -932,7 +948,8 @@ abDataSet
 -- | Available for Bucket.Type.ACTIVITY_TYPE, Bucket.Type.ACTIVITY_SEGMENT
 abActivity :: Lens' AggregateBucket (Maybe Int32)
 abActivity
-  = lens _abActivity (\ s a -> s{_abActivity = a})
+  = lens _abActivity (\ s a -> s{_abActivity = a}) .
+      mapping _Coerce
 
 -- | The type of a bucket signifies how the data aggregation is performed in
 -- the bucket.
@@ -945,6 +962,7 @@ abStartTimeMillis :: Lens' AggregateBucket (Maybe Int64)
 abStartTimeMillis
   = lens _abStartTimeMillis
       (\ s a -> s{_abStartTimeMillis = a})
+      . mapping _Coerce
 
 -- | Available for Bucket.Type.SESSION
 abSession :: Lens' AggregateBucket (Maybe Session)
@@ -980,7 +998,7 @@ instance ToJSON AggregateBucket where
 --
 -- /See:/ 'mapValue' smart constructor.
 newtype MapValue = MapValue
-    { _mvFpVal :: Maybe Double
+    { _mvFpVal :: Maybe (JSONText Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapValue' with the minimum fields required to make a request.
@@ -997,7 +1015,9 @@ mapValue =
 
 -- | Floating point value.
 mvFpVal :: Lens' MapValue (Maybe Double)
-mvFpVal = lens _mvFpVal (\ s a -> s{_mvFpVal = a})
+mvFpVal
+  = lens _mvFpVal (\ s a -> s{_mvFpVal = a}) .
+      mapping _Coerce
 
 instance FromJSON MapValue where
         parseJSON
@@ -1298,7 +1318,7 @@ instance ToJSON ValueMapValEntry where
 --
 -- /See:/ 'bucketByTime' smart constructor.
 newtype BucketByTime = BucketByTime
-    { _bbtDurationMillis :: Maybe Int64
+    { _bbtDurationMillis :: Maybe (JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketByTime' with the minimum fields required to make a request.
@@ -1320,6 +1340,7 @@ bbtDurationMillis :: Lens' BucketByTime (Maybe Int64)
 bbtDurationMillis
   = lens _bbtDurationMillis
       (\ s a -> s{_bbtDurationMillis = a})
+      . mapping _Coerce
 
 instance FromJSON BucketByTime where
         parseJSON
@@ -1385,14 +1406,14 @@ instance ToJSON DataType where
 --
 -- /See:/ 'session' smart constructor.
 data Session = Session
-    { _sEndTimeMillis      :: !(Maybe Int64)
-    , _sActiveTimeMillis   :: !(Maybe Int64)
+    { _sEndTimeMillis      :: !(Maybe (JSONText Int64))
+    , _sActiveTimeMillis   :: !(Maybe (JSONText Int64))
     , _sApplication        :: !(Maybe Application)
-    , _sActivityType       :: !(Maybe Int32)
+    , _sActivityType       :: !(Maybe (JSONText Int32))
     , _sName               :: !(Maybe Text)
-    , _sModifiedTimeMillis :: !(Maybe Int64)
+    , _sModifiedTimeMillis :: !(Maybe (JSONText Int64))
     , _sId                 :: !(Maybe Text)
-    , _sStartTimeMillis    :: !(Maybe Int64)
+    , _sStartTimeMillis    :: !(Maybe (JSONText Int64))
     , _sDescription        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1437,6 +1458,7 @@ sEndTimeMillis :: Lens' Session (Maybe Int64)
 sEndTimeMillis
   = lens _sEndTimeMillis
       (\ s a -> s{_sEndTimeMillis = a})
+      . mapping _Coerce
 
 -- | Session active time. While start_time_millis and end_time_millis define
 -- the full session time, the active time can be shorter and specified by
@@ -1447,6 +1469,7 @@ sActiveTimeMillis :: Lens' Session (Maybe Int64)
 sActiveTimeMillis
   = lens _sActiveTimeMillis
       (\ s a -> s{_sActiveTimeMillis = a})
+      . mapping _Coerce
 
 -- | The application that created the session.
 sApplication :: Lens' Session (Maybe Application)
@@ -1458,6 +1481,7 @@ sActivityType :: Lens' Session (Maybe Int32)
 sActivityType
   = lens _sActivityType
       (\ s a -> s{_sActivityType = a})
+      . mapping _Coerce
 
 -- | A human readable name of the session.
 sName :: Lens' Session (Maybe Text)
@@ -1468,6 +1492,7 @@ sModifiedTimeMillis :: Lens' Session (Maybe Int64)
 sModifiedTimeMillis
   = lens _sModifiedTimeMillis
       (\ s a -> s{_sModifiedTimeMillis = a})
+      . mapping _Coerce
 
 -- | A client-generated identifier that is unique across all sessions owned
 -- by this particular user.
@@ -1479,6 +1504,7 @@ sStartTimeMillis :: Lens' Session (Maybe Int64)
 sStartTimeMillis
   = lens _sStartTimeMillis
       (\ s a -> s{_sStartTimeMillis = a})
+      . mapping _Coerce
 
 -- | A description for this session.
 sDescription :: Lens' Session (Maybe Text)

@@ -47,9 +47,9 @@ type LandingPagesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               Capture "campaignId" Int64 :>
+               Capture "campaignId" (JSONText Int64) :>
                  "landingPages" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] LandingPage :>
@@ -59,8 +59,8 @@ type LandingPagesInsertResource =
 --
 -- /See:/ 'landingPagesInsert' smart constructor.
 data LandingPagesInsert = LandingPagesInsert
-    { _lpiCampaignId :: !Int64
-    , _lpiProFileId  :: !Int64
+    { _lpiCampaignId :: !(JSONText Int64)
+    , _lpiProFileId  :: !(JSONText Int64)
     , _lpiPayload    :: !LandingPage
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -90,11 +90,13 @@ lpiCampaignId :: Lens' LandingPagesInsert Int64
 lpiCampaignId
   = lens _lpiCampaignId
       (\ s a -> s{_lpiCampaignId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 lpiProFileId :: Lens' LandingPagesInsert Int64
 lpiProFileId
   = lens _lpiProFileId (\ s a -> s{_lpiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 lpiPayload :: Lens' LandingPagesInsert LandingPage

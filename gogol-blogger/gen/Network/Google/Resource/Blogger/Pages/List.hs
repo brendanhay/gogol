@@ -56,7 +56,7 @@ type PagesListResource =
                  QueryParam "fetchBodies" Bool :>
                    QueryParam "view" PagesListView :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] PageList
 
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
@@ -68,7 +68,7 @@ data PagesList = PagesList
     , _plFetchBodies :: !(Maybe Bool)
     , _plView        :: !(Maybe PagesListView)
     , _plPageToken   :: !(Maybe Text)
-    , _plMaxResults  :: !(Maybe Word32)
+    , _plMaxResults  :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesList' with the minimum fields required to make a request.
@@ -129,6 +129,7 @@ plPageToken
 plMaxResults :: Lens' PagesList (Maybe Word32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest PagesList where
         type Rs PagesList = PageList

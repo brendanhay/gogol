@@ -54,7 +54,7 @@ type SSLCertificatesListResource =
                "sslCertificates" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] SSLCertificateList
 
@@ -66,7 +66,7 @@ data SSLCertificatesList = SSLCertificatesList
     { _sclProject    :: !Text
     , _sclFilter     :: !(Maybe Text)
     , _sclPageToken  :: !(Maybe Text)
-    , _sclMaxResults :: !Word32
+    , _sclMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SSLCertificatesList' with the minimum fields required to make a request.
@@ -123,6 +123,7 @@ sclMaxResults :: Lens' SSLCertificatesList Word32
 sclMaxResults
   = lens _sclMaxResults
       (\ s a -> s{_sclMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest SSLCertificatesList where
         type Rs SSLCertificatesList = SSLCertificateList

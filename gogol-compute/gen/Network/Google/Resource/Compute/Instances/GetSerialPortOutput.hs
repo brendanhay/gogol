@@ -54,7 +54,7 @@ type InstancesGetSerialPortOutputResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "serialPort" :>
-                       QueryParam "port" Int32 :>
+                       QueryParam "port" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] SerialPortOutput
 
@@ -64,7 +64,7 @@ type InstancesGetSerialPortOutputResource =
 data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput
     { _igspoProject  :: !Text
     , _igspoZone     :: !Text
-    , _igspoPort     :: !Int32
+    , _igspoPort     :: !(JSONText Int32)
     , _igspoInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -105,7 +105,8 @@ igspoZone
 -- | Specifies which COM or serial port to retrieve data from.
 igspoPort :: Lens' InstancesGetSerialPortOutput Int32
 igspoPort
-  = lens _igspoPort (\ s a -> s{_igspoPort = a})
+  = lens _igspoPort (\ s a -> s{_igspoPort = a}) .
+      _Coerce
 
 -- | Name of the instance scoping this request.
 igspoInstance :: Lens' InstancesGetSerialPortOutput Text

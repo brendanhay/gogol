@@ -25,10 +25,10 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'gamesPlayerExperienceInfoResource' smart constructor.
 data GamesPlayerExperienceInfoResource = GamesPlayerExperienceInfoResource
-    { _gpeirCurrentExperiencePoints    :: !(Maybe Int64)
+    { _gpeirCurrentExperiencePoints    :: !(Maybe (JSONText Int64))
     , _gpeirCurrentLevel               :: !(Maybe GamesPlayerLevelResource)
     , _gpeirNextLevel                  :: !(Maybe GamesPlayerLevelResource)
-    , _gpeirLastLevelUpTimestampMillis :: !(Maybe Int64)
+    , _gpeirLastLevelUpTimestampMillis :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayerExperienceInfoResource' with the minimum fields required to make a request.
@@ -57,6 +57,7 @@ gpeirCurrentExperiencePoints :: Lens' GamesPlayerExperienceInfoResource (Maybe I
 gpeirCurrentExperiencePoints
   = lens _gpeirCurrentExperiencePoints
       (\ s a -> s{_gpeirCurrentExperiencePoints = a})
+      . mapping _Coerce
 
 -- | The current level of the player.
 gpeirCurrentLevel :: Lens' GamesPlayerExperienceInfoResource (Maybe GamesPlayerLevelResource)
@@ -77,6 +78,7 @@ gpeirLastLevelUpTimestampMillis :: Lens' GamesPlayerExperienceInfoResource (Mayb
 gpeirLastLevelUpTimestampMillis
   = lens _gpeirLastLevelUpTimestampMillis
       (\ s a -> s{_gpeirLastLevelUpTimestampMillis = a})
+      . mapping _Coerce
 
 instance FromJSON GamesPlayerExperienceInfoResource
          where
@@ -209,7 +211,7 @@ instance ToJSON PlayerScoreResetAllResponse where
 -- /See:/ 'gamesPlayedResource' smart constructor.
 data GamesPlayedResource = GamesPlayedResource
     { _gprAutoMatched :: !(Maybe Bool)
-    , _gprTimeMillis  :: !(Maybe Int64)
+    , _gprTimeMillis  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayedResource' with the minimum fields required to make a request.
@@ -240,6 +242,7 @@ gprTimeMillis :: Lens' GamesPlayedResource (Maybe Int64)
 gprTimeMillis
   = lens _gprTimeMillis
       (\ s a -> s{_gprTimeMillis = a})
+      . mapping _Coerce
 
 instance FromJSON GamesPlayedResource where
         parseJSON
@@ -259,9 +262,9 @@ instance ToJSON GamesPlayedResource where
 --
 -- /See:/ 'gamesPlayerLevelResource' smart constructor.
 data GamesPlayerLevelResource = GamesPlayerLevelResource
-    { _gplrMaxExperiencePoints :: !(Maybe Int64)
-    , _gplrMinExperiencePoints :: !(Maybe Int64)
-    , _gplrLevel               :: !(Maybe Int32)
+    { _gplrMaxExperiencePoints :: !(Maybe (JSONText Int64))
+    , _gplrMinExperiencePoints :: !(Maybe (JSONText Int64))
+    , _gplrLevel               :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayerLevelResource' with the minimum fields required to make a request.
@@ -287,17 +290,20 @@ gplrMaxExperiencePoints :: Lens' GamesPlayerLevelResource (Maybe Int64)
 gplrMaxExperiencePoints
   = lens _gplrMaxExperiencePoints
       (\ s a -> s{_gplrMaxExperiencePoints = a})
+      . mapping _Coerce
 
 -- | The minimum experience points for this level.
 gplrMinExperiencePoints :: Lens' GamesPlayerLevelResource (Maybe Int64)
 gplrMinExperiencePoints
   = lens _gplrMinExperiencePoints
       (\ s a -> s{_gplrMinExperiencePoints = a})
+      . mapping _Coerce
 
 -- | The level for the user.
 gplrLevel :: Lens' GamesPlayerLevelResource (Maybe Int32)
 gplrLevel
-  = lens _gplrLevel (\ s a -> s{_gplrLevel = a})
+  = lens _gplrLevel (\ s a -> s{_gplrLevel = a}) .
+      mapping _Coerce
 
 instance FromJSON GamesPlayerLevelResource where
         parseJSON
@@ -672,7 +678,7 @@ instance ToJSON AchievementResetMultipleForAllRequest
 -- /See:/ 'hiddenPlayer' smart constructor.
 data HiddenPlayer = HiddenPlayer
     { _hpKind             :: !Text
-    , _hpHiddenTimeMillis :: !(Maybe Int64)
+    , _hpHiddenTimeMillis :: !(Maybe (JSONText Int64))
     , _hpPlayer           :: !(Maybe Player)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -704,6 +710,7 @@ hpHiddenTimeMillis :: Lens' HiddenPlayer (Maybe Int64)
 hpHiddenTimeMillis
   = lens _hpHiddenTimeMillis
       (\ s a -> s{_hpHiddenTimeMillis = a})
+      . mapping _Coerce
 
 -- | The player information.
 hpPlayer :: Lens' HiddenPlayer (Maybe Player)

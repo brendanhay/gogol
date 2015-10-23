@@ -51,14 +51,14 @@ type SubAccountsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "subaccounts" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
+                 QueryParams "ids" (JSONText Int64) :>
                    QueryParam "sortOrder" SubAccountsListSortOrder :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" SubAccountsListSortField :>
-                         QueryParam "maxResults" Int32 :>
+                         QueryParam "maxResults" (JSONText Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SubAccountsListResponse
 
@@ -67,12 +67,12 @@ type SubAccountsListResource =
 -- /See:/ 'subAccountsList' smart constructor.
 data SubAccountsList = SubAccountsList
     { _salSearchString :: !(Maybe Text)
-    , _salIds          :: !(Maybe [Int64])
-    , _salProFileId    :: !Int64
+    , _salIds          :: !(Maybe [JSONText Int64])
+    , _salProFileId    :: !(JSONText Int64)
     , _salSortOrder    :: !(Maybe SubAccountsListSortOrder)
     , _salPageToken    :: !(Maybe Text)
     , _salSortField    :: !(Maybe SubAccountsListSortField)
-    , _salMaxResults   :: !(Maybe Int32)
+    , _salMaxResults   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsList' with the minimum fields required to make a request.
@@ -128,6 +128,7 @@ salIds
 salProFileId :: Lens' SubAccountsList Int64
 salProFileId
   = lens _salProFileId (\ s a -> s{_salProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 salSortOrder :: Lens' SubAccountsList (Maybe SubAccountsListSortOrder)
@@ -149,6 +150,7 @@ salMaxResults :: Lens' SubAccountsList (Maybe Int32)
 salMaxResults
   = lens _salMaxResults
       (\ s a -> s{_salMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest SubAccountsList where
         type Rs SubAccountsList = SubAccountsListResponse

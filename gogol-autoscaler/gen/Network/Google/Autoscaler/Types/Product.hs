@@ -141,7 +141,7 @@ instance ToJSON DeprecationStatus where
 --
 -- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
 data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
-    { _apcmuUtilizationTarget     :: !(Maybe Double)
+    { _apcmuUtilizationTarget     :: !(Maybe (JSONText Double))
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -170,6 +170,7 @@ apcmuUtilizationTarget :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe 
 apcmuUtilizationTarget
   = lens _apcmuUtilizationTarget
       (\ s a -> s{_apcmuUtilizationTarget = a})
+      . mapping _Coerce
 
 -- | Identifier of the metric. It should be a Cloud Monitoring metric. The
 -- metric can not have negative values. The metric should be an utilization
@@ -286,24 +287,24 @@ instance ToJSON OperationList where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe Word64)
+    { _oTargetId            :: !(Maybe (JSONText Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe Int32)
+    , _oProgress            :: !(Maybe (JSONText Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe Int32)
+    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe Word64)
+    , _oId                  :: !(Maybe (JSONText Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -387,7 +388,8 @@ operation =
 
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
-  = lens _oTargetId (\ s a -> s{_oTargetId = a})
+  = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
+      mapping _Coerce
 
 oStatus :: Lens' Operation (Maybe Text)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
@@ -398,7 +400,8 @@ oInsertTime
 
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
-  = lens _oProgress (\ s a -> s{_oProgress = a})
+  = lens _oProgress (\ s a -> s{_oProgress = a}) .
+      mapping _Coerce
 
 oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
@@ -430,6 +433,7 @@ oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
       (\ s a -> s{_oHTTPErrorStatusCode = a})
+      . mapping _Coerce
 
 oUser :: Lens' Operation (Maybe Text)
 oUser = lens _oUser (\ s a -> s{_oUser = a})
@@ -455,7 +459,8 @@ oEndTime :: Lens' Operation (Maybe Text)
 oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
 oId :: Lens' Operation (Maybe Word64)
-oId = lens _oId (\ s a -> s{_oId = a})
+oId
+  = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
 oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
@@ -530,7 +535,7 @@ instance ToJSON Operation where
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
 newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
-    { _aplbuUtilizationTarget :: Maybe Double
+    { _aplbuUtilizationTarget :: Maybe (JSONText Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyLoadBalancingUtilization' with the minimum fields required to make a request.
@@ -555,6 +560,7 @@ aplbuUtilizationTarget :: Lens' AutoscalingPolicyLoadBalancingUtilization (Maybe
 aplbuUtilizationTarget
   = lens _aplbuUtilizationTarget
       (\ s a -> s{_aplbuUtilizationTarget = a})
+      . mapping _Coerce
 
 instance FromJSON
          AutoscalingPolicyLoadBalancingUtilization where
@@ -582,7 +588,7 @@ data Zone = Zone
     , _zSelfLink           :: !(Maybe Text)
     , _zName               :: !(Maybe Text)
     , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe Word64)
+    , _zId                 :: !(Maybe (JSONText Word64))
     , _zRegion             :: !(Maybe Text)
     , _zDescription        :: !(Maybe Text)
     , _zDeprecated         :: !(Maybe DeprecationStatus)
@@ -655,7 +661,8 @@ zCreationTimestamp
       (\ s a -> s{_zCreationTimestamp = a})
 
 zId :: Lens' Zone (Maybe Word64)
-zId = lens _zId (\ s a -> s{_zId = a})
+zId
+  = lens _zId (\ s a -> s{_zId = a}) . mapping _Coerce
 
 zRegion :: Lens' Zone (Maybe Text)
 zRegion = lens _zRegion (\ s a -> s{_zRegion = a})
@@ -904,11 +911,11 @@ instance ToJSON AutoscalerListResponse where
 -- /See:/ 'autoscalingPolicy' smart constructor.
 data AutoscalingPolicy = AutoscalingPolicy
     { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
-    , _apMaxNumReplicas           :: !(Maybe Int32)
+    , _apMaxNumReplicas           :: !(Maybe (JSONText Int32))
     , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
     , _apLoadBalancingUtilization :: !(Maybe AutoscalingPolicyLoadBalancingUtilization)
-    , _apMinNumReplicas           :: !(Maybe Int32)
-    , _apCoolDownPeriodSec        :: !(Maybe Int32)
+    , _apMinNumReplicas           :: !(Maybe (JSONText Int32))
+    , _apCoolDownPeriodSec        :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicy' with the minimum fields required to make a request.
@@ -951,6 +958,7 @@ apMaxNumReplicas :: Lens' AutoscalingPolicy (Maybe Int32)
 apMaxNumReplicas
   = lens _apMaxNumReplicas
       (\ s a -> s{_apMaxNumReplicas = a})
+      . mapping _Coerce
 
 -- | Exactly one utilization policy should be provided. Configuration
 -- parameters of CPU based autoscaling policy.
@@ -970,6 +978,7 @@ apMinNumReplicas :: Lens' AutoscalingPolicy (Maybe Int32)
 apMinNumReplicas
   = lens _apMinNumReplicas
       (\ s a -> s{_apMinNumReplicas = a})
+      . mapping _Coerce
 
 -- | The number of seconds that the Autoscaler should wait between two
 -- succeeding changes to the number of virtual machines. You should define
@@ -980,6 +989,7 @@ apCoolDownPeriodSec :: Lens' AutoscalingPolicy (Maybe Int32)
 apCoolDownPeriodSec
   = lens _apCoolDownPeriodSec
       (\ s a -> s{_apCoolDownPeriodSec = a})
+      . mapping _Coerce
 
 instance FromJSON AutoscalingPolicy where
         parseJSON
@@ -1049,7 +1059,7 @@ data Autoscaler = Autoscaler
     , _aName              :: !(Maybe Text)
     , _aCreationTimestamp :: !(Maybe Text)
     , _aAutoscalingPolicy :: !(Maybe AutoscalingPolicy)
-    , _aId                :: !(Maybe Word64)
+    , _aId                :: !(Maybe (JSONText Word64))
     , _aDescription       :: !(Maybe Text)
     , _aTarget            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1114,7 +1124,8 @@ aAutoscalingPolicy
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 aId :: Lens' Autoscaler (Maybe Word64)
-aId = lens _aId (\ s a -> s{_aId = a})
+aId
+  = lens _aId (\ s a -> s{_aId = a}) . mapping _Coerce
 
 -- | An optional textual description of the resource provided by the client.
 aDescription :: Lens' Autoscaler (Maybe Text)
@@ -1211,7 +1222,7 @@ instance ToJSON OperationErrorErrorsItem where
 --
 -- /See:/ 'autoscalingPolicyCPUUtilization' smart constructor.
 newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
-    { _apcuUtilizationTarget :: Maybe Double
+    { _apcuUtilizationTarget :: Maybe (JSONText Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyCPUUtilization' with the minimum fields required to make a request.
@@ -1234,6 +1245,7 @@ apcuUtilizationTarget :: Lens' AutoscalingPolicyCPUUtilization (Maybe Double)
 apcuUtilizationTarget
   = lens _apcuUtilizationTarget
       (\ s a -> s{_apcuUtilizationTarget = a})
+      . mapping _Coerce
 
 instance FromJSON AutoscalingPolicyCPUUtilization
          where

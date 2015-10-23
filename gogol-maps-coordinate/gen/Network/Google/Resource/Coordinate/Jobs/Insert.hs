@@ -58,8 +58,8 @@ type JobsInsertResource =
            Capture "teamId" Text :>
              "jobs" :>
                QueryParam "address" Text :>
-                 QueryParam "lat" Double :>
-                   QueryParam "lng" Double :>
+                 QueryParam "lat" (JSONText Double) :>
+                   QueryParam "lng" (JSONText Double) :>
                      QueryParam "title" Text :>
                        QueryParam "note" Text :>
                          QueryParam "customerPhoneNumber" Text :>
@@ -80,8 +80,8 @@ data JobsInsert = JobsInsert
     , _jiAddress             :: !Text
     , _jiPayload             :: !Job
     , _jiAssignee            :: !(Maybe Text)
-    , _jiLat                 :: !Double
-    , _jiLng                 :: !Double
+    , _jiLat                 :: !(JSONText Double)
+    , _jiLng                 :: !(JSONText Double)
     , _jiTitle               :: !Text
     , _jiCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -171,11 +171,13 @@ jiAssignee
 
 -- | The latitude coordinate of this job\'s location.
 jiLat :: Lens' JobsInsert Double
-jiLat = lens _jiLat (\ s a -> s{_jiLat = a})
+jiLat
+  = lens _jiLat (\ s a -> s{_jiLat = a}) . _Coerce
 
 -- | The longitude coordinate of this job\'s location.
 jiLng :: Lens' JobsInsert Double
-jiLng = lens _jiLng (\ s a -> s{_jiLng = a})
+jiLng
+  = lens _jiLng (\ s a -> s{_jiLng = a}) . _Coerce
 
 -- | Job title
 jiTitle :: Lens' JobsInsert Text

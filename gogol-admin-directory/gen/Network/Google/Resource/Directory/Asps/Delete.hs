@@ -49,14 +49,14 @@ type AspsDeleteResource =
            "users" :>
              Capture "userKey" Text :>
                "asps" :>
-                 Capture "codeId" Int32 :>
+                 Capture "codeId" (JSONText Int32) :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an ASP issued by a user.
 --
 -- /See:/ 'aspsDelete' smart constructor.
 data AspsDelete = AspsDelete
-    { _adCodeId  :: !Int32
+    { _adCodeId  :: !(JSONText Int32)
     , _adUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,9 @@ aspsDelete pAdCodeId_ pAdUserKey_ =
 
 -- | The unique ID of the ASP to be deleted.
 adCodeId :: Lens' AspsDelete Int32
-adCodeId = lens _adCodeId (\ s a -> s{_adCodeId = a})
+adCodeId
+  = lens _adCodeId (\ s a -> s{_adCodeId = a}) .
+      _Coerce
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.

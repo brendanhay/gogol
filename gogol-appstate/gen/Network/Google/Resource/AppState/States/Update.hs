@@ -49,7 +49,7 @@ type StatesUpdateResource =
      "appstate" :>
        "v1" :>
          "states" :>
-           Capture "stateKey" Int32 :>
+           Capture "stateKey" (JSONText Int32) :>
              QueryParam "currentStateVersion" Text :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] UpdateRequest :>
@@ -62,7 +62,7 @@ type StatesUpdateResource =
 -- /See:/ 'statesUpdate' smart constructor.
 data StatesUpdate = StatesUpdate
     { _suCurrentStateVersion :: !(Maybe Text)
-    , _suStateKey            :: !Int32
+    , _suStateKey            :: !(JSONText Int32)
     , _suPayload             :: !UpdateRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -98,7 +98,8 @@ suCurrentStateVersion
 -- | The key for the data to be retrieved.
 suStateKey :: Lens' StatesUpdate Int32
 suStateKey
-  = lens _suStateKey (\ s a -> s{_suStateKey = a})
+  = lens _suStateKey (\ s a -> s{_suStateKey = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 suPayload :: Lens' StatesUpdate UpdateRequest

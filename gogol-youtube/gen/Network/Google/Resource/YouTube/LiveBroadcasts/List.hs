@@ -62,7 +62,7 @@ type LiveBroadcastsListResource =
                    QueryParam "onBehalfOfContentOwnerChannel" Text :>
                      QueryParam "id" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" Word32 :>
+                         QueryParam "maxResults" (JSONText Word32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LiveBroadcastListResponse
 
@@ -78,7 +78,7 @@ data LiveBroadcastsList = LiveBroadcastsList
     , _lblOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lblId                            :: !(Maybe Text)
     , _lblPageToken                     :: !(Maybe Text)
-    , _lblMaxResults                    :: !Word32
+    , _lblMaxResults                    :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsList' with the minimum fields required to make a request.
@@ -190,6 +190,7 @@ lblMaxResults :: Lens' LiveBroadcastsList Word32
 lblMaxResults
   = lens _lblMaxResults
       (\ s a -> s{_lblMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest LiveBroadcastsList where
         type Rs LiveBroadcastsList =

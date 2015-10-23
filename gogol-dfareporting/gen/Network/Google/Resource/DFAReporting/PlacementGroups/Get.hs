@@ -46,9 +46,9 @@ type PlacementGroupsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placementGroups" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] PlacementGroup
 
@@ -56,8 +56,8 @@ type PlacementGroupsGetResource =
 --
 -- /See:/ 'placementGroupsGet' smart constructor.
 data PlacementGroupsGet = PlacementGroupsGet
-    { _pggProFileId :: !Int64
-    , _pggId        :: !Int64
+    { _pggProFileId :: !(JSONText Int64)
+    , _pggId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsGet' with the minimum fields required to make a request.
@@ -81,10 +81,12 @@ placementGroupsGet pPggProFileId_ pPggId_ =
 pggProFileId :: Lens' PlacementGroupsGet Int64
 pggProFileId
   = lens _pggProFileId (\ s a -> s{_pggProFileId = a})
+      . _Coerce
 
 -- | Placement group ID.
 pggId :: Lens' PlacementGroupsGet Int64
-pggId = lens _pggId (\ s a -> s{_pggId = a})
+pggId
+  = lens _pggId (\ s a -> s{_pggId = a}) . _Coerce
 
 instance GoogleRequest PlacementGroupsGet where
         type Rs PlacementGroupsGet = PlacementGroup

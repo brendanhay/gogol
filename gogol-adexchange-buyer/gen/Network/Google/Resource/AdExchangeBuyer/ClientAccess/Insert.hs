@@ -45,8 +45,8 @@ type ClientAccessInsertResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "clientAccess" :>
-           QueryParam "sponsorAccountId" Int32 :>
-             QueryParam "clientAccountId" Int64 :>
+           QueryParam "sponsorAccountId" (JSONText Int32) :>
+             QueryParam "clientAccountId" (JSONText Int64) :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] ClientAccessCapabilities :>
                    Post '[JSON] ClientAccessCapabilities
@@ -54,9 +54,9 @@ type ClientAccessInsertResource =
 --
 -- /See:/ 'clientAccessInsert' smart constructor.
 data ClientAccessInsert = ClientAccessInsert
-    { _caiSponsorAccountId :: !(Maybe Int32)
+    { _caiSponsorAccountId :: !(Maybe (JSONText Int32))
     , _caiPayload          :: !ClientAccessCapabilities
-    , _caiClientAccountId  :: !(Maybe Int64)
+    , _caiClientAccountId  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessInsert' with the minimum fields required to make a request.
@@ -82,6 +82,7 @@ caiSponsorAccountId :: Lens' ClientAccessInsert (Maybe Int32)
 caiSponsorAccountId
   = lens _caiSponsorAccountId
       (\ s a -> s{_caiSponsorAccountId = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 caiPayload :: Lens' ClientAccessInsert ClientAccessCapabilities
@@ -92,6 +93,7 @@ caiClientAccountId :: Lens' ClientAccessInsert (Maybe Int64)
 caiClientAccountId
   = lens _caiClientAccountId
       (\ s a -> s{_caiClientAccountId = a})
+      . mapping _Coerce
 
 instance GoogleRequest ClientAccessInsert where
         type Rs ClientAccessInsert = ClientAccessCapabilities

@@ -53,7 +53,7 @@ type TargetInstancesAggregatedListResource =
                "targetInstances" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TargetInstanceAggregatedList
 
@@ -64,7 +64,7 @@ data TargetInstancesAggregatedList = TargetInstancesAggregatedList
     { _tialProject    :: !Text
     , _tialFilter     :: !(Maybe Text)
     , _tialPageToken  :: !(Maybe Text)
-    , _tialMaxResults :: !Word32
+    , _tialMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesAggregatedList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ tialMaxResults :: Lens' TargetInstancesAggregatedList Word32
 tialMaxResults
   = lens _tialMaxResults
       (\ s a -> s{_tialMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest TargetInstancesAggregatedList
          where

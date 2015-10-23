@@ -57,7 +57,7 @@ type UsersDataSourcesDataSetsPatchResource =
                Capture "dataSourceId" Text :>
                  "datasets" :>
                    Capture "datasetId" Text :>
-                     QueryParam "currentTimeMillis" Int64 :>
+                     QueryParam "currentTimeMillis" (JSONText Int64) :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] DataSet :> Patch '[JSON] DataSet
 
@@ -72,7 +72,7 @@ data UsersDataSourcesDataSetsPatch = UsersDataSourcesDataSetsPatch
     , _udsdspPayload           :: !DataSet
     , _udsdspUserId            :: !Text
     , _udsdspDataSetId         :: !Text
-    , _udsdspCurrentTimeMillis :: !(Maybe Int64)
+    , _udsdspCurrentTimeMillis :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDataSetsPatch' with the minimum fields required to make a request.
@@ -137,6 +137,7 @@ udsdspCurrentTimeMillis :: Lens' UsersDataSourcesDataSetsPatch (Maybe Int64)
 udsdspCurrentTimeMillis
   = lens _udsdspCurrentTimeMillis
       (\ s a -> s{_udsdspCurrentTimeMillis = a})
+      . mapping _Coerce
 
 instance GoogleRequest UsersDataSourcesDataSetsPatch
          where

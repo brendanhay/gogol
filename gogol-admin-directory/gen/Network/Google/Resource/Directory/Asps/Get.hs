@@ -49,14 +49,14 @@ type AspsGetResource =
            "users" :>
              Capture "userKey" Text :>
                "asps" :>
-                 Capture "codeId" Int32 :>
+                 Capture "codeId" (JSONText Int32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Asp
 
 -- | Get information about an ASP issued by a user.
 --
 -- /See:/ 'aspsGet' smart constructor.
 data AspsGet = AspsGet
-    { _agCodeId  :: !Int32
+    { _agCodeId  :: !(JSONText Int32)
     , _agUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,9 @@ aspsGet pAgCodeId_ pAgUserKey_ =
 
 -- | The unique ID of the ASP.
 agCodeId :: Lens' AspsGet Int32
-agCodeId = lens _agCodeId (\ s a -> s{_agCodeId = a})
+agCodeId
+  = lens _agCodeId (\ s a -> s{_agCodeId = a}) .
+      _Coerce
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.

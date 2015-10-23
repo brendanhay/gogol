@@ -64,7 +64,7 @@ type TimeseriesListResource =
                Capture "metric" Text :>
                  QueryParam "youngest" Text :>
                    QueryParam "window" Text :>
-                     QueryParam "count" Int32 :>
+                     QueryParam "count" (JSONText Int32) :>
                        QueryParam "aggregator" TimeseriesListAggregator :>
                          QueryParam "timespan" Text :>
                            QueryParam "oldest" Text :>
@@ -84,7 +84,7 @@ type TimeseriesListResource =
 data TimeseriesList = TimeseriesList
     { _tlWindow     :: !(Maybe Text)
     , _tlProject    :: !Text
-    , _tlCount      :: !Int32
+    , _tlCount      :: !(JSONText Int32)
     , _tlPayload    :: !ListTimeseriesRequest
     , _tlAggregator :: !(Maybe TimeseriesListAggregator)
     , _tlTimespan   :: !(Maybe Text)
@@ -158,7 +158,8 @@ tlProject
 -- | Maximum number of data points per page, which is used for pagination of
 -- results.
 tlCount :: Lens' TimeseriesList Int32
-tlCount = lens _tlCount (\ s a -> s{_tlCount = a})
+tlCount
+  = lens _tlCount (\ s a -> s{_tlCount = a}) . _Coerce
 
 -- | Multipart request metadata.
 tlPayload :: Lens' TimeseriesList ListTimeseriesRequest

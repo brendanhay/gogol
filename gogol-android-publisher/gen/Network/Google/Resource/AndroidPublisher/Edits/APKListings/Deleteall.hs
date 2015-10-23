@@ -51,7 +51,7 @@ type EditsAPKListingsDeleteallResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" Int32 :>
+                   Capture "apkVersionCode" (JSONText Int32) :>
                      "listings" :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -60,7 +60,7 @@ type EditsAPKListingsDeleteallResource =
 -- /See:/ 'editsAPKListingsDeleteall' smart constructor.
 data EditsAPKListingsDeleteall = EditsAPKListingsDeleteall
     { _eapkldaPackageName    :: !Text
-    , _eapkldaAPKVersionCode :: !Int32
+    , _eapkldaAPKVersionCode :: !(JSONText Int32)
     , _eapkldaEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -98,6 +98,7 @@ eapkldaAPKVersionCode :: Lens' EditsAPKListingsDeleteall Int32
 eapkldaAPKVersionCode
   = lens _eapkldaAPKVersionCode
       (\ s a -> s{_eapkldaAPKVersionCode = a})
+      . _Coerce
 
 -- | Unique identifier for this edit.
 eapkldaEditId :: Lens' EditsAPKListingsDeleteall Text

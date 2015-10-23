@@ -58,21 +58,23 @@ type CampaignsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               QueryParams "excludedIds" Int64 :>
+               QueryParams "excludedIds" (JSONText Int64) :>
                  QueryParam "searchString" Text :>
-                   QueryParams "ids" Int64 :>
+                   QueryParams "ids" (JSONText Int64) :>
                      QueryParam "sortOrder" CampaignsListSortOrder :>
-                       QueryParams "advertiserGroupIds" Int64 :>
+                       QueryParams "advertiserGroupIds" (JSONText Int64) :>
                          QueryParam "atLeastOneOptimizationActivity" Bool :>
-                           QueryParam "overriddenEventTagId" Int64 :>
+                           QueryParam "overriddenEventTagId" (JSONText Int64) :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField" CampaignsListSortField :>
-                                 QueryParam "subaccountId" Int64 :>
-                                   QueryParams "advertiserIds" Int64 :>
+                                 QueryParam "subaccountId" (JSONText Int64) :>
+                                   QueryParams "advertiserIds" (JSONText Int64)
+                                     :>
                                      QueryParam "archived" Bool :>
-                                       QueryParam "maxResults" Int32 :>
+                                       QueryParam "maxResults" (JSONText Int32)
+                                         :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] CampaignsListResponse
 
@@ -80,20 +82,20 @@ type CampaignsListResource =
 --
 -- /See:/ 'campaignsList' smart constructor.
 data CampaignsList = CampaignsList
-    { _clExcludedIds                    :: !(Maybe [Int64])
+    { _clExcludedIds                    :: !(Maybe [JSONText Int64])
     , _clSearchString                   :: !(Maybe Text)
-    , _clIds                            :: !(Maybe [Int64])
-    , _clProFileId                      :: !Int64
+    , _clIds                            :: !(Maybe [JSONText Int64])
+    , _clProFileId                      :: !(JSONText Int64)
     , _clSortOrder                      :: !(Maybe CampaignsListSortOrder)
-    , _clAdvertiserGroupIds             :: !(Maybe [Int64])
+    , _clAdvertiserGroupIds             :: !(Maybe [JSONText Int64])
     , _clAtLeastOneOptimizationActivity :: !(Maybe Bool)
-    , _clOverriddenEventTagId           :: !(Maybe Int64)
+    , _clOverriddenEventTagId           :: !(Maybe (JSONText Int64))
     , _clPageToken                      :: !(Maybe Text)
     , _clSortField                      :: !(Maybe CampaignsListSortField)
-    , _clSubAccountId                   :: !(Maybe Int64)
-    , _clAdvertiserIds                  :: !(Maybe [Int64])
+    , _clSubAccountId                   :: !(Maybe (JSONText Int64))
+    , _clAdvertiserIds                  :: !(Maybe [JSONText Int64])
     , _clArchived                       :: !(Maybe Bool)
-    , _clMaxResults                     :: !(Maybe Int32)
+    , _clMaxResults                     :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsList' with the minimum fields required to make a request.
@@ -177,7 +179,8 @@ clIds
 -- | User profile ID associated with this request.
 clProFileId :: Lens' CampaignsList Int64
 clProFileId
-  = lens _clProFileId (\ s a -> s{_clProFileId = a})
+  = lens _clProFileId (\ s a -> s{_clProFileId = a}) .
+      _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 clSortOrder :: Lens' CampaignsList (Maybe CampaignsListSortOrder)
@@ -204,6 +207,7 @@ clOverriddenEventTagId :: Lens' CampaignsList (Maybe Int64)
 clOverriddenEventTagId
   = lens _clOverriddenEventTagId
       (\ s a -> s{_clOverriddenEventTagId = a})
+      . mapping _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
 clPageToken :: Lens' CampaignsList (Maybe Text)
@@ -220,6 +224,7 @@ clSubAccountId :: Lens' CampaignsList (Maybe Int64)
 clSubAccountId
   = lens _clSubAccountId
       (\ s a -> s{_clSubAccountId = a})
+      . mapping _Coerce
 
 -- | Select only campaigns that belong to these advertisers.
 clAdvertiserIds :: Lens' CampaignsList [Int64]
@@ -239,6 +244,7 @@ clArchived
 clMaxResults :: Lens' CampaignsList (Maybe Int32)
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest CampaignsList where
         type Rs CampaignsList = CampaignsListResponse

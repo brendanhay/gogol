@@ -53,8 +53,8 @@ type ManagementCustomMetricsListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "customMetrics" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
+                     QueryParam "start-index" (JSONText Int32) :>
+                       QueryParam "max-results" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] CustomMetrics
 
 -- | Lists custom metrics to which the user has access.
@@ -63,8 +63,8 @@ type ManagementCustomMetricsListResource =
 data ManagementCustomMetricsList = ManagementCustomMetricsList
     { _mcmlWebPropertyId :: !Text
     , _mcmlAccountId     :: !Text
-    , _mcmlStartIndex    :: !(Maybe Int32)
-    , _mcmlMaxResults    :: !(Maybe Int32)
+    , _mcmlStartIndex    :: !(Maybe (JSONText Int32))
+    , _mcmlMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsList' with the minimum fields required to make a request.
@@ -108,12 +108,14 @@ mcmlStartIndex :: Lens' ManagementCustomMetricsList (Maybe Int32)
 mcmlStartIndex
   = lens _mcmlStartIndex
       (\ s a -> s{_mcmlStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of custom metrics to include in this response.
 mcmlMaxResults :: Lens' ManagementCustomMetricsList (Maybe Int32)
 mcmlMaxResults
   = lens _mcmlMaxResults
       (\ s a -> s{_mcmlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementCustomMetricsList
          where

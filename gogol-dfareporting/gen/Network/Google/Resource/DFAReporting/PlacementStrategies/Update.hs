@@ -46,7 +46,7 @@ type PlacementStrategiesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placementStrategies" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] PlacementStrategy :>
@@ -56,7 +56,7 @@ type PlacementStrategiesUpdateResource =
 --
 -- /See:/ 'placementStrategiesUpdate' smart constructor.
 data PlacementStrategiesUpdate = PlacementStrategiesUpdate
-    { _psuProFileId :: !Int64
+    { _psuProFileId :: !(JSONText Int64)
     , _psuPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ placementStrategiesUpdate pPsuProFileId_ pPsuPayload_ =
 psuProFileId :: Lens' PlacementStrategiesUpdate Int64
 psuProFileId
   = lens _psuProFileId (\ s a -> s{_psuProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 psuPayload :: Lens' PlacementStrategiesUpdate PlacementStrategy

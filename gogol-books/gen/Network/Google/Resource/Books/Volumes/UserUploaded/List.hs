@@ -57,8 +57,8 @@ type VolumesUserUploadedListResource =
                QueryParam "locale" Text :>
                  QueryParams "volumeId" Text :>
                    QueryParam "source" Text :>
-                     QueryParam "startIndex" Word32 :>
-                       QueryParam "maxResults" Word32 :>
+                     QueryParam "startIndex" (JSONText Word32) :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books uploaded by the current user.
@@ -69,8 +69,8 @@ data VolumesUserUploadedList = VolumesUserUploadedList
     , _vuulLocale          :: !(Maybe Text)
     , _vuulVolumeId        :: !(Maybe [Text])
     , _vuulSource          :: !(Maybe Text)
-    , _vuulStartIndex      :: !(Maybe Word32)
-    , _vuulMaxResults      :: !(Maybe Word32)
+    , _vuulStartIndex      :: !(Maybe (JSONText Word32))
+    , _vuulMaxResults      :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesUserUploadedList' with the minimum fields required to make a request.
@@ -132,12 +132,14 @@ vuulStartIndex :: Lens' VolumesUserUploadedList (Maybe Word32)
 vuulStartIndex
   = lens _vuulStartIndex
       (\ s a -> s{_vuulStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum number of results to return.
 vuulMaxResults :: Lens' VolumesUserUploadedList (Maybe Word32)
 vuulMaxResults
   = lens _vuulMaxResults
       (\ s a -> s{_vuulMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest VolumesUserUploadedList where
         type Rs VolumesUserUploadedList = Volumes

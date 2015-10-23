@@ -49,7 +49,7 @@ type TemplateUpdateResource =
          "tables" :>
            Capture "tableId" Text :>
              "templates" :>
-               Capture "templateId" Int32 :>
+               Capture "templateId" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Template :> Put '[JSON] Template
 
@@ -57,7 +57,7 @@ type TemplateUpdateResource =
 --
 -- /See:/ 'templateUpdate' smart constructor.
 data TemplateUpdate = TemplateUpdate
-    { _tuTemplateId :: !Int32
+    { _tuTemplateId :: !(JSONText Int32)
     , _tuPayload    :: !Template
     , _tuTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,6 +87,7 @@ templateUpdate pTuTemplateId_ pTuPayload_ pTuTableId_ =
 tuTemplateId :: Lens' TemplateUpdate Int32
 tuTemplateId
   = lens _tuTemplateId (\ s a -> s{_tuTemplateId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 tuPayload :: Lens' TemplateUpdate Template

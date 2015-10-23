@@ -56,7 +56,7 @@ type InstancesListResource =
                  "instances" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] InstanceList
 
 -- | Retrieves the list of instance resources contained within the specified
@@ -68,7 +68,7 @@ data InstancesList = InstancesList
     , _ilZone       :: !Text
     , _ilFilter     :: !(Maybe Text)
     , _ilPageToken  :: !(Maybe Text)
-    , _ilMaxResults :: !Word32
+    , _ilMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesList' with the minimum fields required to make a request.
@@ -131,6 +131,7 @@ ilPageToken
 ilMaxResults :: Lens' InstancesList Word32
 ilMaxResults
   = lens _ilMaxResults (\ s a -> s{_ilMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest InstancesList where
         type Rs InstancesList = InstanceList

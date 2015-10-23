@@ -50,25 +50,25 @@ type ReportsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
                QueryParam "sortOrder" ReportsListSortOrder :>
                  QueryParam "scope" ReportsListScope :>
                    QueryParam "pageToken" Text :>
                      QueryParam "sortField" ReportsListSortField :>
-                       QueryParam "maxResults" Int32 :>
+                       QueryParam "maxResults" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ReportList
 
 -- | Retrieves list of reports.
 --
 -- /See:/ 'reportsList' smart constructor.
 data ReportsList = ReportsList
-    { _rlProFileId  :: !Int64
+    { _rlProFileId  :: !(JSONText Int64)
     , _rlSortOrder  :: !ReportsListSortOrder
     , _rlScope      :: !ReportsListScope
     , _rlPageToken  :: !(Maybe Text)
     , _rlSortField  :: !ReportsListSortField
-    , _rlMaxResults :: !(Maybe Int32)
+    , _rlMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsList' with the minimum fields required to make a request.
@@ -102,7 +102,8 @@ reportsList pRlProFileId_ =
 -- | The DFA user profile ID.
 rlProFileId :: Lens' ReportsList Int64
 rlProFileId
-  = lens _rlProFileId (\ s a -> s{_rlProFileId = a})
+  = lens _rlProFileId (\ s a -> s{_rlProFileId = a}) .
+      _Coerce
 
 -- | Order of sorted results, default is \'DESCENDING\'.
 rlSortOrder :: Lens' ReportsList ReportsListSortOrder
@@ -127,6 +128,7 @@ rlSortField
 rlMaxResults :: Lens' ReportsList (Maybe Int32)
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ReportsList where
         type Rs ReportsList = ReportList

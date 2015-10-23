@@ -46,17 +46,17 @@ type SitesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "sites" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Site
 
 -- | Gets one site by ID.
 --
 -- /See:/ 'sitesGet' smart constructor.
 data SitesGet = SitesGet
-    { _sggProFileId :: !Int64
-    , _sggId        :: !Int64
+    { _sggProFileId :: !(JSONText Int64)
+    , _sggId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ sitesGet pSggProFileId_ pSggId_ =
 sggProFileId :: Lens' SitesGet Int64
 sggProFileId
   = lens _sggProFileId (\ s a -> s{_sggProFileId = a})
+      . _Coerce
 
 -- | Site ID.
 sggId :: Lens' SitesGet Int64
-sggId = lens _sggId (\ s a -> s{_sggId = a})
+sggId
+  = lens _sggId (\ s a -> s{_sggId = a}) . _Coerce
 
 instance GoogleRequest SitesGet where
         type Rs SitesGet = Site

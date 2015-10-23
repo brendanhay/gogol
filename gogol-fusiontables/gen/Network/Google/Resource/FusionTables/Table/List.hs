@@ -47,7 +47,7 @@ type TableListResource =
        "v2" :>
          "tables" :>
            QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
+             QueryParam "maxResults" (JSONText Word32) :>
                QueryParam "alt" AltJSON :> Get '[JSON] TableList
 
 -- | Retrieves a list of tables a user owns.
@@ -55,7 +55,7 @@ type TableListResource =
 -- /See:/ 'tableList'' smart constructor.
 data TableList' = TableList'
     { _tPageToken  :: !(Maybe Text)
-    , _tMaxResults :: !(Maybe Word32)
+    , _tMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableList'' with the minimum fields required to make a request.
@@ -81,7 +81,8 @@ tPageToken
 -- | Maximum number of tables to return. Default is 5.
 tMaxResults :: Lens' TableList' (Maybe Word32)
 tMaxResults
-  = lens _tMaxResults (\ s a -> s{_tMaxResults = a})
+  = lens _tMaxResults (\ s a -> s{_tMaxResults = a}) .
+      mapping _Coerce
 
 instance GoogleRequest TableList' where
         type Rs TableList' = TableList

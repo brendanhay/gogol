@@ -46,7 +46,7 @@ type PostalCodesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "postalCodes" :>
                Capture "code" Text :>
                  QueryParam "alt" AltJSON :> Get '[JSON] PostalCode
@@ -55,7 +55,7 @@ type PostalCodesGetResource =
 --
 -- /See:/ 'postalCodesGet' smart constructor.
 data PostalCodesGet = PostalCodesGet
-    { _pcgProFileId :: !Int64
+    { _pcgProFileId :: !(JSONText Int64)
     , _pcgCode      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,6 +80,7 @@ postalCodesGet pPcgProFileId_ pPcgCode_ =
 pcgProFileId :: Lens' PostalCodesGet Int64
 pcgProFileId
   = lens _pcgProFileId (\ s a -> s{_pcgProFileId = a})
+      . _Coerce
 
 -- | Postal code ID.
 pcgCode :: Lens' PostalCodesGet Text

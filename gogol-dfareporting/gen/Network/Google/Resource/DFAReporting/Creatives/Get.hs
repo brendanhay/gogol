@@ -46,17 +46,17 @@ type CreativesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creatives" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
 -- | Gets one creative by ID.
 --
 -- /See:/ 'creativesGet' smart constructor.
 data CreativesGet = CreativesGet
-    { _ccProFileId :: !Int64
-    , _ccId        :: !Int64
+    { _ccProFileId :: !(JSONText Int64)
+    , _ccId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesGet' with the minimum fields required to make a request.
@@ -79,11 +79,12 @@ creativesGet pCcProFileId_ pCcId_ =
 -- | User profile ID associated with this request.
 ccProFileId :: Lens' CreativesGet Int64
 ccProFileId
-  = lens _ccProFileId (\ s a -> s{_ccProFileId = a})
+  = lens _ccProFileId (\ s a -> s{_ccProFileId = a}) .
+      _Coerce
 
 -- | Creative ID.
 ccId :: Lens' CreativesGet Int64
-ccId = lens _ccId (\ s a -> s{_ccId = a})
+ccId = lens _ccId (\ s a -> s{_ccId = a}) . _Coerce
 
 instance GoogleRequest CreativesGet where
         type Rs CreativesGet = Creative

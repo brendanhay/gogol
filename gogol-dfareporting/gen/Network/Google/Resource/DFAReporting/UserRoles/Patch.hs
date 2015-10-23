@@ -47,9 +47,9 @@ type UserRolesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "userRoles" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] UserRole :> Patch '[JSON] UserRole
 
@@ -57,9 +57,9 @@ type UserRolesPatchResource =
 --
 -- /See:/ 'userRolesPatch' smart constructor.
 data UserRolesPatch = UserRolesPatch
-    { _urpProFileId :: !Int64
+    { _urpProFileId :: !(JSONText Int64)
     , _urpPayload   :: !UserRole
-    , _urpId        :: !Int64
+    , _urpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesPatch' with the minimum fields required to make a request.
@@ -87,6 +87,7 @@ userRolesPatch pUrpProFileId_ pUrpPayload_ pUrpId_ =
 urpProFileId :: Lens' UserRolesPatch Int64
 urpProFileId
   = lens _urpProFileId (\ s a -> s{_urpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 urpPayload :: Lens' UserRolesPatch UserRole
@@ -95,7 +96,8 @@ urpPayload
 
 -- | User role ID.
 urpId :: Lens' UserRolesPatch Int64
-urpId = lens _urpId (\ s a -> s{_urpId = a})
+urpId
+  = lens _urpId (\ s a -> s{_urpId = a}) . _Coerce
 
 instance GoogleRequest UserRolesPatch where
         type Rs UserRolesPatch = UserRole

@@ -46,7 +46,7 @@ type StatesGetResource =
      "appstate" :>
        "v1" :>
          "states" :>
-           Capture "stateKey" Int32 :>
+           Capture "stateKey" (JSONText Int32) :>
              QueryParam "alt" AltJSON :> Get '[JSON] GetResponse
 
 -- | Retrieves the data corresponding to the passed key. If the key does not
@@ -54,7 +54,7 @@ type StatesGetResource =
 --
 -- /See:/ 'statesGet' smart constructor.
 newtype StatesGet = StatesGet
-    { _sgStateKey :: Int32
+    { _sgStateKey :: JSONText Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesGet' with the minimum fields required to make a request.
@@ -73,7 +73,8 @@ statesGet pSgStateKey_ =
 -- | The key for the data to be retrieved.
 sgStateKey :: Lens' StatesGet Int32
 sgStateKey
-  = lens _sgStateKey (\ s a -> s{_sgStateKey = a})
+  = lens _sgStateKey (\ s a -> s{_sgStateKey = a}) .
+      _Coerce
 
 instance GoogleRequest StatesGet where
         type Rs StatesGet = GetResponse

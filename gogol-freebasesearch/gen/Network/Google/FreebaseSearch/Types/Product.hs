@@ -81,8 +81,8 @@ instance ToJSON ReconcileGetWarningItem where
 --
 -- /See:/ 'reconcileGetCosts' smart constructor.
 data ReconcileGetCosts = ReconcileGetCosts
-    { _rgcHits :: !(Maybe Int32)
-    , _rgcMs   :: !(Maybe Int32)
+    { _rgcHits :: !(Maybe (JSONText Int32))
+    , _rgcMs   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReconcileGetCosts' with the minimum fields required to make a request.
@@ -102,11 +102,15 @@ reconcileGetCosts =
 
 -- | Total number of hits found.
 rgcHits :: Lens' ReconcileGetCosts (Maybe Int32)
-rgcHits = lens _rgcHits (\ s a -> s{_rgcHits = a})
+rgcHits
+  = lens _rgcHits (\ s a -> s{_rgcHits = a}) .
+      mapping _Coerce
 
 -- | Total milliseconds spent.
 rgcMs :: Lens' ReconcileGetCosts (Maybe Int32)
-rgcMs = lens _rgcMs (\ s a -> s{_rgcMs = a})
+rgcMs
+  = lens _rgcMs (\ s a -> s{_rgcMs = a}) .
+      mapping _Coerce
 
 instance FromJSON ReconcileGetCosts where
         parseJSON
@@ -247,7 +251,7 @@ instance ToJSON ReconcileCandidateNotable where
 -- /See:/ 'reconcileCandidate' smart constructor.
 data ReconcileCandidate = ReconcileCandidate
     { _rcLang       :: !(Maybe Text)
-    , _rcConfidence :: !(Maybe Float)
+    , _rcConfidence :: !(Maybe (JSONText Float))
     , _rcName       :: !(Maybe Text)
     , _rcNotable    :: !(Maybe ReconcileCandidateNotable)
     , _rcMid        :: !(Maybe Text)
@@ -286,6 +290,7 @@ rcLang = lens _rcLang (\ s a -> s{_rcLang = a})
 rcConfidence :: Lens' ReconcileCandidate (Maybe Float)
 rcConfidence
   = lens _rcConfidence (\ s a -> s{_rcConfidence = a})
+      . mapping _Coerce
 
 -- | Freebase name of matching entity in specified language.
 rcName :: Lens' ReconcileCandidate (Maybe Text)

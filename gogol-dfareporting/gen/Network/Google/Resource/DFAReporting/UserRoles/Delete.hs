@@ -46,17 +46,17 @@ type UserRolesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "userRoles" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing user role.
 --
 -- /See:/ 'userRolesDelete' smart constructor.
 data UserRolesDelete = UserRolesDelete
-    { _urdProFileId :: !Int64
-    , _urdId        :: !Int64
+    { _urdProFileId :: !(JSONText Int64)
+    , _urdId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesDelete' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ userRolesDelete pUrdProFileId_ pUrdId_ =
 urdProFileId :: Lens' UserRolesDelete Int64
 urdProFileId
   = lens _urdProFileId (\ s a -> s{_urdProFileId = a})
+      . _Coerce
 
 -- | User role ID.
 urdId :: Lens' UserRolesDelete Int64
-urdId = lens _urdId (\ s a -> s{_urdId = a})
+urdId
+  = lens _urdId (\ s a -> s{_urdId = a}) . _Coerce
 
 instance GoogleRequest UserRolesDelete where
         type Rs UserRolesDelete = ()

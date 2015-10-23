@@ -23,8 +23,8 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'promotionImage' smart constructor.
 data PromotionImage = PromotionImage
-    { _piHeight :: !(Maybe Int32)
-    , _piWidth  :: !(Maybe Int32)
+    { _piHeight :: !(Maybe (JSONText Int32))
+    , _piWidth  :: !(Maybe (JSONText Int32))
     , _piSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -47,10 +47,14 @@ promotionImage =
     }
 
 piHeight :: Lens' PromotionImage (Maybe Int32)
-piHeight = lens _piHeight (\ s a -> s{_piHeight = a})
+piHeight
+  = lens _piHeight (\ s a -> s{_piHeight = a}) .
+      mapping _Coerce
 
 piWidth :: Lens' PromotionImage (Maybe Int32)
-piWidth = lens _piWidth (\ s a -> s{_piWidth = a})
+piWidth
+  = lens _piWidth (\ s a -> s{_piWidth = a}) .
+      mapping _Coerce
 
 piSource :: Lens' PromotionImage (Maybe Text)
 piSource = lens _piSource (\ s a -> s{_piSource = a})
@@ -275,12 +279,12 @@ instance ToJSON SearchSpelling where
 -- /See:/ 'resultImage' smart constructor.
 data ResultImage = ResultImage
     { _riThumbnailLink   :: !(Maybe Text)
-    , _riHeight          :: !(Maybe Int32)
-    , _riByteSize        :: !(Maybe Int32)
+    , _riHeight          :: !(Maybe (JSONText Int32))
+    , _riByteSize        :: !(Maybe (JSONText Int32))
     , _riContextLink     :: !(Maybe Text)
-    , _riThumbnailHeight :: !(Maybe Int32)
-    , _riWidth           :: !(Maybe Int32)
-    , _riThumbnailWidth  :: !(Maybe Int32)
+    , _riThumbnailHeight :: !(Maybe (JSONText Int32))
+    , _riWidth           :: !(Maybe (JSONText Int32))
+    , _riThumbnailWidth  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultImage' with the minimum fields required to make a request.
@@ -319,11 +323,14 @@ riThumbnailLink
       (\ s a -> s{_riThumbnailLink = a})
 
 riHeight :: Lens' ResultImage (Maybe Int32)
-riHeight = lens _riHeight (\ s a -> s{_riHeight = a})
+riHeight
+  = lens _riHeight (\ s a -> s{_riHeight = a}) .
+      mapping _Coerce
 
 riByteSize :: Lens' ResultImage (Maybe Int32)
 riByteSize
-  = lens _riByteSize (\ s a -> s{_riByteSize = a})
+  = lens _riByteSize (\ s a -> s{_riByteSize = a}) .
+      mapping _Coerce
 
 riContextLink :: Lens' ResultImage (Maybe Text)
 riContextLink
@@ -334,14 +341,18 @@ riThumbnailHeight :: Lens' ResultImage (Maybe Int32)
 riThumbnailHeight
   = lens _riThumbnailHeight
       (\ s a -> s{_riThumbnailHeight = a})
+      . mapping _Coerce
 
 riWidth :: Lens' ResultImage (Maybe Int32)
-riWidth = lens _riWidth (\ s a -> s{_riWidth = a})
+riWidth
+  = lens _riWidth (\ s a -> s{_riWidth = a}) .
+      mapping _Coerce
 
 riThumbnailWidth :: Lens' ResultImage (Maybe Int32)
 riThumbnailWidth
   = lens _riThumbnailWidth
       (\ s a -> s{_riThumbnailWidth = a})
+      . mapping _Coerce
 
 instance FromJSON ResultImage where
         parseJSON
@@ -623,9 +634,9 @@ instance ToJSON ResultLabelsItem where
 --
 -- /See:/ 'searchSearchInformation' smart constructor.
 data SearchSearchInformation = SearchSearchInformation
-    { _ssiSearchTime            :: !(Maybe Double)
+    { _ssiSearchTime            :: !(Maybe (JSONText Double))
     , _ssiFormattedSearchTime   :: !(Maybe Text)
-    , _ssiTotalResults          :: !(Maybe Int64)
+    , _ssiTotalResults          :: !(Maybe (JSONText Int64))
     , _ssiFormattedTotalResults :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -654,6 +665,7 @@ ssiSearchTime :: Lens' SearchSearchInformation (Maybe Double)
 ssiSearchTime
   = lens _ssiSearchTime
       (\ s a -> s{_ssiSearchTime = a})
+      . mapping _Coerce
 
 ssiFormattedSearchTime :: Lens' SearchSearchInformation (Maybe Text)
 ssiFormattedSearchTime
@@ -664,6 +676,7 @@ ssiTotalResults :: Lens' SearchSearchInformation (Maybe Int64)
 ssiTotalResults
   = lens _ssiTotalResults
       (\ s a -> s{_ssiTotalResults = a})
+      . mapping _Coerce
 
 ssiFormattedTotalResults :: Lens' SearchSearchInformation (Maybe Text)
 ssiFormattedTotalResults
@@ -700,9 +713,9 @@ data Query = Query
     , _qInputEncoding          :: !(Maybe Text)
     , _qOrTerms                :: !(Maybe Text)
     , _qSearchTerms            :: !(Maybe Text)
-    , _qStartPage              :: !(Maybe Int32)
+    , _qStartPage              :: !(Maybe (JSONText Int32))
     , _qRights                 :: !(Maybe Text)
-    , _qCount                  :: !(Maybe Int32)
+    , _qCount                  :: !(Maybe (JSONText Int32))
     , _qExcludeTerms           :: !(Maybe Text)
     , _qFileType               :: !(Maybe Text)
     , _qSearchType             :: !(Maybe Text)
@@ -715,7 +728,7 @@ data Query = Query
     , _qLanguage               :: !(Maybe Text)
     , _qSiteSearch             :: !(Maybe Text)
     , _qFilter                 :: !(Maybe Text)
-    , _qTotalResults           :: !(Maybe Int64)
+    , _qTotalResults           :: !(Maybe (JSONText Int64))
     , _qDateRestrict           :: !(Maybe Text)
     , _qTitle                  :: !(Maybe Text)
     , _qLinkSite               :: !(Maybe Text)
@@ -726,7 +739,7 @@ data Query = Query
     , _qImgColorType           :: !(Maybe Text)
     , _qImgSize                :: !(Maybe Text)
     , _qExactTerms             :: !(Maybe Text)
-    , _qStartIndex             :: !(Maybe Int32)
+    , _qStartIndex             :: !(Maybe (JSONText Int32))
     , _qCr                     :: !(Maybe Text)
     , _qSafe                   :: !(Maybe Text)
     , _qHq                     :: !(Maybe Text)
@@ -882,13 +895,16 @@ qSearchTerms
 
 qStartPage :: Lens' Query (Maybe Int32)
 qStartPage
-  = lens _qStartPage (\ s a -> s{_qStartPage = a})
+  = lens _qStartPage (\ s a -> s{_qStartPage = a}) .
+      mapping _Coerce
 
 qRights :: Lens' Query (Maybe Text)
 qRights = lens _qRights (\ s a -> s{_qRights = a})
 
 qCount :: Lens' Query (Maybe Int32)
-qCount = lens _qCount (\ s a -> s{_qCount = a})
+qCount
+  = lens _qCount (\ s a -> s{_qCount = a}) .
+      mapping _Coerce
 
 qExcludeTerms :: Lens' Query (Maybe Text)
 qExcludeTerms
@@ -940,6 +956,7 @@ qTotalResults :: Lens' Query (Maybe Int64)
 qTotalResults
   = lens _qTotalResults
       (\ s a -> s{_qTotalResults = a})
+      . mapping _Coerce
 
 qDateRestrict :: Lens' Query (Maybe Text)
 qDateRestrict
@@ -980,7 +997,8 @@ qExactTerms
 
 qStartIndex :: Lens' Query (Maybe Int32)
 qStartIndex
-  = lens _qStartIndex (\ s a -> s{_qStartIndex = a})
+  = lens _qStartIndex (\ s a -> s{_qStartIndex = a}) .
+      mapping _Coerce
 
 qCr :: Lens' Query (Maybe Text)
 qCr = lens _qCr (\ s a -> s{_qCr = a})

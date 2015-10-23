@@ -46,9 +46,9 @@ type ContentCategoriesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "contentCategories" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] ContentCategory
 
@@ -56,8 +56,8 @@ type ContentCategoriesGetResource =
 --
 -- /See:/ 'contentCategoriesGet' smart constructor.
 data ContentCategoriesGet = ContentCategoriesGet
-    { _ccgProFileId :: !Int64
-    , _ccgId        :: !Int64
+    { _ccgProFileId :: !(JSONText Int64)
+    , _ccgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesGet' with the minimum fields required to make a request.
@@ -81,10 +81,12 @@ contentCategoriesGet pCcgProFileId_ pCcgId_ =
 ccgProFileId :: Lens' ContentCategoriesGet Int64
 ccgProFileId
   = lens _ccgProFileId (\ s a -> s{_ccgProFileId = a})
+      . _Coerce
 
 -- | Content category ID.
 ccgId :: Lens' ContentCategoriesGet Int64
-ccgId = lens _ccgId (\ s a -> s{_ccgId = a})
+ccgId
+  = lens _ccgId (\ s a -> s{_ccgId = a}) . _Coerce
 
 instance GoogleRequest ContentCategoriesGet where
         type Rs ContentCategoriesGet = ContentCategory

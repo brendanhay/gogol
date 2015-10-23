@@ -55,12 +55,15 @@ type ObjectsGetResource =
            Capture "bucket" Text :>
              "o" :>
                Capture "object" Text :>
-                 QueryParam "ifMetagenerationMatch" Int64 :>
-                   QueryParam "ifGenerationNotMatch" Int64 :>
-                     QueryParam "ifGenerationMatch" Int64 :>
-                       QueryParam "ifMetagenerationNotMatch" Int64 :>
+                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                   :>
+                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                       QueryParam "ifMetagenerationNotMatch"
+                         (JSONText Int64)
+                         :>
                          QueryParam "projection" ObjectsGetProjection :>
-                           QueryParam "generation" Int64 :>
+                           QueryParam "generation" (JSONText Int64) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Object
        :<|>
        "storage" :>
@@ -69,12 +72,15 @@ type ObjectsGetResource =
              Capture "bucket" Text :>
                "o" :>
                  Capture "object" Text :>
-                   QueryParam "ifMetagenerationMatch" Int64 :>
-                     QueryParam "ifGenerationNotMatch" Int64 :>
-                       QueryParam "ifGenerationMatch" Int64 :>
-                         QueryParam "ifMetagenerationNotMatch" Int64 :>
+                   QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                     :>
+                     QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                       QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                         QueryParam "ifMetagenerationNotMatch"
+                           (JSONText Int64)
+                           :>
                            QueryParam "projection" ObjectsGetProjection :>
-                             QueryParam "generation" Int64 :>
+                             QueryParam "generation" (JSONText Int64) :>
                                QueryParam "alt" AltMedia :>
                                  Get '[OctetStream] Stream
 
@@ -82,14 +88,14 @@ type ObjectsGetResource =
 --
 -- /See:/ 'objectsGet' smart constructor.
 data ObjectsGet = ObjectsGet
-    { _ogIfMetagenerationMatch    :: !(Maybe Int64)
-    , _ogIfGenerationNotMatch     :: !(Maybe Int64)
-    , _ogIfGenerationMatch        :: !(Maybe Int64)
+    { _ogIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    , _ogIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
+    , _ogIfGenerationMatch        :: !(Maybe (JSONText Int64))
     , _ogBucket                   :: !Text
-    , _ogIfMetagenerationNotMatch :: !(Maybe Int64)
+    , _ogIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
     , _ogObject                   :: !Text
     , _ogProjection               :: !(Maybe ObjectsGetProjection)
-    , _ogGeneration               :: !(Maybe Int64)
+    , _ogGeneration               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsGet' with the minimum fields required to make a request.
@@ -133,6 +139,7 @@ ogIfMetagenerationMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfMetagenerationMatch
   = lens _ogIfMetagenerationMatch
       (\ s a -> s{_ogIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s generation does
 -- not match the given value.
@@ -140,6 +147,7 @@ ogIfGenerationNotMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfGenerationNotMatch
   = lens _ogIfGenerationNotMatch
       (\ s a -> s{_ogIfGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s generation
 -- matches the given value.
@@ -147,6 +155,7 @@ ogIfGenerationMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfGenerationMatch
   = lens _ogIfGenerationMatch
       (\ s a -> s{_ogIfGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Name of the bucket in which the object resides.
 ogBucket :: Lens' ObjectsGet Text
@@ -158,6 +167,7 @@ ogIfMetagenerationNotMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfMetagenerationNotMatch
   = lens _ogIfMetagenerationNotMatch
       (\ s a -> s{_ogIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
@@ -174,6 +184,7 @@ ogProjection
 ogGeneration :: Lens' ObjectsGet (Maybe Int64)
 ogGeneration
   = lens _ogGeneration (\ s a -> s{_ogGeneration = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectsGet where
         type Rs ObjectsGet = Object

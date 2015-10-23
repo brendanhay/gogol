@@ -76,7 +76,7 @@ type AccountsAvailsListResource =
                                  QueryParam "bearer_token" Text :>
                                    QueryParam "pageToken" Text :>
                                      QueryParam "title" Text :>
-                                       QueryParam "pageSize" Int32 :>
+                                       QueryParam "pageSize" (JSONText Int32) :>
                                          QueryParam "callback" Text :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListAvailsResponse
@@ -101,7 +101,7 @@ data AccountsAvailsList = AccountsAvailsList
     , _aalBearerToken    :: !(Maybe Text)
     , _aalPageToken      :: !(Maybe Text)
     , _aalTitle          :: !(Maybe Text)
-    , _aalPageSize       :: !(Maybe Int32)
+    , _aalPageSize       :: !(Maybe (JSONText Int32))
     , _aalCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -249,7 +249,8 @@ aalTitle = lens _aalTitle (\ s a -> s{_aalTitle = a})
 -- | See _List methods rules_ for info about this field.
 aalPageSize :: Lens' AccountsAvailsList (Maybe Int32)
 aalPageSize
-  = lens _aalPageSize (\ s a -> s{_aalPageSize = a})
+  = lens _aalPageSize (\ s a -> s{_aalPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 aalCallback :: Lens' AccountsAvailsList (Maybe Text)

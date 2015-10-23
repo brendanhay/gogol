@@ -46,7 +46,7 @@ type RemarketingListsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "remarketingLists" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] RemarketingList :>
@@ -56,7 +56,7 @@ type RemarketingListsInsertResource =
 --
 -- /See:/ 'remarketingListsInsert' smart constructor.
 data RemarketingListsInsert = RemarketingListsInsert
-    { _rliProFileId :: !Int64
+    { _rliProFileId :: !(JSONText Int64)
     , _rliPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ remarketingListsInsert pRliProFileId_ pRliPayload_ =
 rliProFileId :: Lens' RemarketingListsInsert Int64
 rliProFileId
   = lens _rliProFileId (\ s a -> s{_rliProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 rliPayload :: Lens' RemarketingListsInsert RemarketingList

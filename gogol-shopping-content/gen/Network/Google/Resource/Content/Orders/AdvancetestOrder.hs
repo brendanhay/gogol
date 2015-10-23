@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersAdvancetestOrderResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "testorders" :>
              Capture "orderId" Text :>
                "advance" :>
@@ -58,7 +58,7 @@ type OrdersAdvancetestOrderResource =
 --
 -- /See:/ 'ordersAdvancetestOrder' smart constructor.
 data OrdersAdvancetestOrder = OrdersAdvancetestOrder
-    { _oaoMerchantId :: !Word64
+    { _oaoMerchantId :: !(JSONText Word64)
     , _oaoOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,6 +84,7 @@ oaoMerchantId :: Lens' OrdersAdvancetestOrder Word64
 oaoMerchantId
   = lens _oaoMerchantId
       (\ s a -> s{_oaoMerchantId = a})
+      . _Coerce
 
 -- | The ID of the test order to modify.
 oaoOrderId :: Lens' OrdersAdvancetestOrder Text

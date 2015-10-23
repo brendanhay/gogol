@@ -64,7 +64,7 @@ type TimeseriesDescriptorsListResource =
                Capture "metric" Text :>
                  QueryParam "youngest" Text :>
                    QueryParam "window" Text :>
-                     QueryParam "count" Int32 :>
+                     QueryParam "count" (JSONText Int32) :>
                        QueryParam "aggregator"
                          TimeseriesDescriptorsListAggregator
                          :>
@@ -89,7 +89,7 @@ type TimeseriesDescriptorsListResource =
 data TimeseriesDescriptorsList = TimeseriesDescriptorsList
     { _tdlWindow     :: !(Maybe Text)
     , _tdlProject    :: !Text
-    , _tdlCount      :: !Int32
+    , _tdlCount      :: !(JSONText Int32)
     , _tdlPayload    :: !ListTimeseriesDescriptorsRequest
     , _tdlAggregator :: !(Maybe TimeseriesDescriptorsListAggregator)
     , _tdlTimespan   :: !(Maybe Text)
@@ -164,7 +164,9 @@ tdlProject
 -- | Maximum number of time series descriptors per page. Used for pagination.
 -- If not specified, count = 100.
 tdlCount :: Lens' TimeseriesDescriptorsList Int32
-tdlCount = lens _tdlCount (\ s a -> s{_tdlCount = a})
+tdlCount
+  = lens _tdlCount (\ s a -> s{_tdlCount = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 tdlPayload :: Lens' TimeseriesDescriptorsList ListTimeseriesDescriptorsRequest

@@ -48,14 +48,14 @@ type PlacementsGeneratetagsResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placements" :>
                "generatetags" :>
                  QueryParams "tagFormats"
                    PlacementsGeneratetagsTagFormats
                    :>
-                   QueryParam "campaignId" Int64 :>
-                     QueryParams "placementIds" Int64 :>
+                   QueryParam "campaignId" (JSONText Int64) :>
+                     QueryParams "placementIds" (JSONText Int64) :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] PlacementsGenerateTagsResponse
 
@@ -64,9 +64,9 @@ type PlacementsGeneratetagsResource =
 -- /See:/ 'placementsGeneratetags' smart constructor.
 data PlacementsGeneratetags = PlacementsGeneratetags
     { _pgsTagFormats   :: !(Maybe [PlacementsGeneratetagsTagFormats])
-    , _pgsCampaignId   :: !(Maybe Int64)
-    , _pgsProFileId    :: !Int64
-    , _pgsPlacementIds :: !(Maybe [Int64])
+    , _pgsCampaignId   :: !(Maybe (JSONText Int64))
+    , _pgsProFileId    :: !(JSONText Int64)
+    , _pgsPlacementIds :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsGeneratetags' with the minimum fields required to make a request.
@@ -105,11 +105,13 @@ pgsCampaignId :: Lens' PlacementsGeneratetags (Maybe Int64)
 pgsCampaignId
   = lens _pgsCampaignId
       (\ s a -> s{_pgsCampaignId = a})
+      . mapping _Coerce
 
 -- | User profile ID associated with this request.
 pgsProFileId :: Lens' PlacementsGeneratetags Int64
 pgsProFileId
   = lens _pgsProFileId (\ s a -> s{_pgsProFileId = a})
+      . _Coerce
 
 -- | Generate tags for these placements.
 pgsPlacementIds :: Lens' PlacementsGeneratetags [Int64]

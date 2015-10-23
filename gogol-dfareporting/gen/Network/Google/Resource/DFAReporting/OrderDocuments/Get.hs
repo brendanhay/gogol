@@ -47,20 +47,20 @@ type OrderDocumentsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "projects" :>
-               Capture "projectId" Int64 :>
+               Capture "projectId" (JSONText Int64) :>
                  "orderDocuments" :>
-                   Capture "id" Int64 :>
+                   Capture "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] OrderDocument
 
 -- | Gets one order document by ID.
 --
 -- /See:/ 'orderDocumentsGet' smart constructor.
 data OrderDocumentsGet = OrderDocumentsGet
-    { _odgProFileId :: !Int64
-    , _odgId        :: !Int64
-    , _odgProjectId :: !Int64
+    { _odgProFileId :: !(JSONText Int64)
+    , _odgId        :: !(JSONText Int64)
+    , _odgProjectId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsGet' with the minimum fields required to make a request.
@@ -88,15 +88,18 @@ orderDocumentsGet pOdgProFileId_ pOdgId_ pOdgProjectId_ =
 odgProFileId :: Lens' OrderDocumentsGet Int64
 odgProFileId
   = lens _odgProFileId (\ s a -> s{_odgProFileId = a})
+      . _Coerce
 
 -- | Order document ID.
 odgId :: Lens' OrderDocumentsGet Int64
-odgId = lens _odgId (\ s a -> s{_odgId = a})
+odgId
+  = lens _odgId (\ s a -> s{_odgId = a}) . _Coerce
 
 -- | Project ID for order documents.
 odgProjectId :: Lens' OrderDocumentsGet Int64
 odgProjectId
   = lens _odgProjectId (\ s a -> s{_odgProjectId = a})
+      . _Coerce
 
 instance GoogleRequest OrderDocumentsGet where
         type Rs OrderDocumentsGet = OrderDocument

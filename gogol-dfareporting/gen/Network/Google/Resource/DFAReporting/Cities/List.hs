@@ -49,12 +49,12 @@ type CitiesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "cities" :>
-               QueryParams "regionDartIds" Int64 :>
+               QueryParams "regionDartIds" (JSONText Int64) :>
                  QueryParam "namePrefix" Text :>
-                   QueryParams "countryDartIds" Int64 :>
-                     QueryParams "dartIds" Int64 :>
+                   QueryParams "countryDartIds" (JSONText Int64) :>
+                     QueryParams "dartIds" (JSONText Int64) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CitiesListResponse
 
@@ -62,11 +62,11 @@ type CitiesListResource =
 --
 -- /See:/ 'citiesList' smart constructor.
 data CitiesList = CitiesList
-    { _citRegionDartIds  :: !(Maybe [Int64])
-    , _citProFileId      :: !Int64
+    { _citRegionDartIds  :: !(Maybe [JSONText Int64])
+    , _citProFileId      :: !(JSONText Int64)
     , _citNamePrefix     :: !(Maybe Text)
-    , _citCountryDartIds :: !(Maybe [Int64])
-    , _citDartIds        :: !(Maybe [Int64])
+    , _citCountryDartIds :: !(Maybe [JSONText Int64])
+    , _citDartIds        :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CitiesList' with the minimum fields required to make a request.
@@ -106,6 +106,7 @@ citRegionDartIds
 citProFileId :: Lens' CitiesList Int64
 citProFileId
   = lens _citProFileId (\ s a -> s{_citProFileId = a})
+      . _Coerce
 
 -- | Select only cities with names starting with this prefix.
 citNamePrefix :: Lens' CitiesList (Maybe Text)

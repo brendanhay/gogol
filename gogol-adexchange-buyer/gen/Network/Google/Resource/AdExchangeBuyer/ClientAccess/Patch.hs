@@ -45,8 +45,8 @@ type ClientAccessPatchResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "clientAccess" :>
-           Capture "clientAccountId" Int64 :>
-             QueryParam "sponsorAccountId" Int32 :>
+           Capture "clientAccountId" (JSONText Int64) :>
+             QueryParam "sponsorAccountId" (JSONText Int32) :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] ClientAccessCapabilities :>
                    Patch '[JSON] ClientAccessCapabilities
@@ -54,9 +54,9 @@ type ClientAccessPatchResource =
 --
 -- /See:/ 'clientAccessPatch' smart constructor.
 data ClientAccessPatch = ClientAccessPatch
-    { _capSponsorAccountId :: !Int32
+    { _capSponsorAccountId :: !(JSONText Int32)
     , _capPayload          :: !ClientAccessCapabilities
-    , _capClientAccountId  :: !Int64
+    , _capClientAccountId  :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessPatch' with the minimum fields required to make a request.
@@ -84,6 +84,7 @@ capSponsorAccountId :: Lens' ClientAccessPatch Int32
 capSponsorAccountId
   = lens _capSponsorAccountId
       (\ s a -> s{_capSponsorAccountId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 capPayload :: Lens' ClientAccessPatch ClientAccessCapabilities
@@ -94,6 +95,7 @@ capClientAccountId :: Lens' ClientAccessPatch Int64
 capClientAccountId
   = lens _capClientAccountId
       (\ s a -> s{_capClientAccountId = a})
+      . _Coerce
 
 instance GoogleRequest ClientAccessPatch where
         type Rs ClientAccessPatch = ClientAccessCapabilities

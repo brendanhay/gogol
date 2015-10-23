@@ -46,7 +46,7 @@ type PlacementGroupsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placementGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] PlacementGroup :>
@@ -56,7 +56,7 @@ type PlacementGroupsUpdateResource =
 --
 -- /See:/ 'placementGroupsUpdate' smart constructor.
 data PlacementGroupsUpdate = PlacementGroupsUpdate
-    { _pguProFileId :: !Int64
+    { _pguProFileId :: !(JSONText Int64)
     , _pguPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ placementGroupsUpdate pPguProFileId_ pPguPayload_ =
 pguProFileId :: Lens' PlacementGroupsUpdate Int64
 pguProFileId
   = lens _pguProFileId (\ s a -> s{_pguProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 pguPayload :: Lens' PlacementGroupsUpdate PlacementGroup

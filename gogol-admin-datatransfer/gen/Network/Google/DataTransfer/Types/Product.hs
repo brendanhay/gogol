@@ -28,7 +28,7 @@ data Application = Application
     , _aEtag           :: !(Maybe Text)
     , _aKind           :: !Text
     , _aName           :: !(Maybe Text)
-    , _aId             :: !(Maybe Int64)
+    , _aId             :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
@@ -79,7 +79,8 @@ aName = lens _aName (\ s a -> s{_aName = a})
 
 -- | The application\'s ID.
 aId :: Lens' Application (Maybe Int64)
-aId = lens _aId (\ s a -> s{_aId = a})
+aId
+  = lens _aId (\ s a -> s{_aId = a}) . mapping _Coerce
 
 instance FromJSON Application where
         parseJSON
@@ -424,7 +425,7 @@ instance ToJSON DataTransfersListResponse where
 -- /See:/ 'applicationDataTransfer' smart constructor.
 data ApplicationDataTransfer = ApplicationDataTransfer
     { _adtApplicationTransferParams :: !(Maybe [ApplicationTransferParam])
-    , _adtApplicationId             :: !(Maybe Int64)
+    , _adtApplicationId             :: !(Maybe (JSONText Int64))
     , _adtApplicationTransferStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -461,6 +462,7 @@ adtApplicationId :: Lens' ApplicationDataTransfer (Maybe Int64)
 adtApplicationId
   = lens _adtApplicationId
       (\ s a -> s{_adtApplicationId = a})
+      . mapping _Coerce
 
 -- | Current status of transfer for this application. (Read-only)
 adtApplicationTransferStatus :: Lens' ApplicationDataTransfer (Maybe Text)

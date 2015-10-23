@@ -47,9 +47,9 @@ type CreativeFieldValuesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
+               Capture "creativeFieldId" (JSONText Int64) :>
                  "creativeFieldValues" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] CreativeFieldValue :>
@@ -59,8 +59,8 @@ type CreativeFieldValuesInsertResource =
 --
 -- /See:/ 'creativeFieldValuesInsert' smart constructor.
 data CreativeFieldValuesInsert = CreativeFieldValuesInsert
-    { _cfviCreativeFieldId :: !Int64
-    , _cfviProFileId       :: !Int64
+    { _cfviCreativeFieldId :: !(JSONText Int64)
+    , _cfviProFileId       :: !(JSONText Int64)
     , _cfviPayload         :: !CreativeFieldValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -90,12 +90,14 @@ cfviCreativeFieldId :: Lens' CreativeFieldValuesInsert Int64
 cfviCreativeFieldId
   = lens _cfviCreativeFieldId
       (\ s a -> s{_cfviCreativeFieldId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 cfviProFileId :: Lens' CreativeFieldValuesInsert Int64
 cfviProFileId
   = lens _cfviProFileId
       (\ s a -> s{_cfviProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 cfviPayload :: Lens' CreativeFieldValuesInsert CreativeFieldValue

@@ -60,7 +60,7 @@ type ObjectsWatchAllResource =
                      QueryParam "projection" ObjectsWatchAllProjection :>
                        QueryParam "pageToken" Text :>
                          QueryParam "delimiter" Text :>
-                           QueryParam "maxResults" Word32 :>
+                           QueryParam "maxResults" (JSONText Word32) :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
@@ -75,7 +75,7 @@ data ObjectsWatchAll = ObjectsWatchAll
     , _owaProjection :: !(Maybe ObjectsWatchAllProjection)
     , _owaPageToken  :: !(Maybe Text)
     , _owaDelimiter  :: !(Maybe Text)
-    , _owaMaxResults :: !(Maybe Word32)
+    , _owaMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsWatchAll' with the minimum fields required to make a request.
@@ -162,6 +162,7 @@ owaMaxResults :: Lens' ObjectsWatchAll (Maybe Word32)
 owaMaxResults
   = lens _owaMaxResults
       (\ s a -> s{_owaMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectsWatchAll where
         type Rs ObjectsWatchAll = Channel

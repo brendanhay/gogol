@@ -46,7 +46,7 @@ type NegotiationsGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "negotiations" :>
-           Capture "negotiationId" Int64 :>
+           Capture "negotiationId" (JSONText Int64) :>
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] GetNegotiationByIdRequest :>
                  Get '[JSON] NegotiationDTO
@@ -56,7 +56,7 @@ type NegotiationsGetResource =
 -- /See:/ 'negotiationsGet' smart constructor.
 data NegotiationsGet = NegotiationsGet
     { _ngPayload       :: !GetNegotiationByIdRequest
-    , _ngNegotiationId :: !Int64
+    , _ngNegotiationId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsGet' with the minimum fields required to make a request.
@@ -85,6 +85,7 @@ ngNegotiationId :: Lens' NegotiationsGet Int64
 ngNegotiationId
   = lens _ngNegotiationId
       (\ s a -> s{_ngNegotiationId = a})
+      . _Coerce
 
 instance GoogleRequest NegotiationsGet where
         type Rs NegotiationsGet = NegotiationDTO

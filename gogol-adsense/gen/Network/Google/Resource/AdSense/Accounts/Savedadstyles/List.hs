@@ -50,7 +50,7 @@ type AccountsSavedadstylesListResource =
            Capture "accountId" Text :>
              "savedadstyles" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
+                 QueryParam "maxResults" (JSONText Int32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the specified account.
@@ -59,7 +59,7 @@ type AccountsSavedadstylesListResource =
 data AccountsSavedadstylesList = AccountsSavedadstylesList
     { _aslAccountId  :: !Text
     , _aslPageToken  :: !(Maybe Text)
-    , _aslMaxResults :: !(Maybe Int32)
+    , _aslMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesList' with the minimum fields required to make a request.
@@ -99,6 +99,7 @@ aslMaxResults :: Lens' AccountsSavedadstylesList (Maybe Int32)
 aslMaxResults
   = lens _aslMaxResults
       (\ s a -> s{_aslMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsSavedadstylesList
          where

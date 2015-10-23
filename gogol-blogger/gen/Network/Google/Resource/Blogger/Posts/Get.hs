@@ -55,7 +55,7 @@ type PostsGetResource =
                Capture "postId" Text :>
                  QueryParam "fetchBody" Bool :>
                    QueryParam "fetchImages" Bool :>
-                     QueryParam "maxComments" Word32 :>
+                     QueryParam "maxComments" (JSONText Word32) :>
                        QueryParam "view" PostsGetView :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
@@ -66,7 +66,7 @@ data PostsGet = PostsGet
     { _pggFetchBody   :: !Bool
     , _pggFetchImages :: !(Maybe Bool)
     , _pggBlogId      :: !Text
-    , _pggMaxComments :: !(Maybe Word32)
+    , _pggMaxComments :: !(Maybe (JSONText Word32))
     , _pggView        :: !(Maybe PostsGetView)
     , _pggPostId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -123,6 +123,7 @@ pggMaxComments :: Lens' PostsGet (Maybe Word32)
 pggMaxComments
   = lens _pggMaxComments
       (\ s a -> s{_pggMaxComments = a})
+      . mapping _Coerce
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.

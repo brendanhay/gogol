@@ -61,26 +61,33 @@ type CreativesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creatives" :>
-               QueryParams "renderingIds" Int64 :>
-                 QueryParam "advertiserId" Int64 :>
+               QueryParams "renderingIds" (JSONText Int64) :>
+                 QueryParam "advertiserId" (JSONText Int64) :>
                    QueryParam "searchString" Text :>
-                     QueryParams "sizeIds" Int64 :>
-                       QueryParams "companionCreativeIds" Int64 :>
-                         QueryParam "campaignId" Int64 :>
+                     QueryParams "sizeIds" (JSONText Int64) :>
+                       QueryParams "companionCreativeIds" (JSONText Int64)
+                         :>
+                         QueryParam "campaignId" (JSONText Int64) :>
                            QueryParams "types" CreativesListTypes :>
-                             QueryParams "ids" Int64 :>
+                             QueryParams "ids" (JSONText Int64) :>
                                QueryParam "sortOrder" CreativesListSortOrder :>
                                  QueryParam "active" Bool :>
-                                   QueryParams "creativeFieldIds" Int64 :>
+                                   QueryParams "creativeFieldIds"
+                                     (JSONText Int64)
+                                     :>
                                      QueryParam "pageToken" Text :>
                                        QueryParam "sortField"
                                          CreativesListSortField
                                          :>
-                                         QueryParam "studioCreativeId" Int64 :>
+                                         QueryParam "studioCreativeId"
+                                           (JSONText Int64)
+                                           :>
                                            QueryParam "archived" Bool :>
-                                             QueryParam "maxResults" Int32 :>
+                                             QueryParam "maxResults"
+                                               (JSONText Int32)
+                                               :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON]
                                                    CreativesListResponse
@@ -89,23 +96,23 @@ type CreativesListResource =
 --
 -- /See:/ 'creativesList' smart constructor.
 data CreativesList = CreativesList
-    { _cRenderingIds         :: !(Maybe [Int64])
-    , _cAdvertiserId         :: !(Maybe Int64)
+    { _cRenderingIds         :: !(Maybe [JSONText Int64])
+    , _cAdvertiserId         :: !(Maybe (JSONText Int64))
     , _cSearchString         :: !(Maybe Text)
-    , _cSizeIds              :: !(Maybe [Int64])
-    , _cCompanionCreativeIds :: !(Maybe [Int64])
-    , _cCampaignId           :: !(Maybe Int64)
+    , _cSizeIds              :: !(Maybe [JSONText Int64])
+    , _cCompanionCreativeIds :: !(Maybe [JSONText Int64])
+    , _cCampaignId           :: !(Maybe (JSONText Int64))
     , _cTypes                :: !(Maybe [CreativesListTypes])
-    , _cIds                  :: !(Maybe [Int64])
-    , _cProFileId            :: !Int64
+    , _cIds                  :: !(Maybe [JSONText Int64])
+    , _cProFileId            :: !(JSONText Int64)
     , _cSortOrder            :: !(Maybe CreativesListSortOrder)
     , _cActive               :: !(Maybe Bool)
-    , _cCreativeFieldIds     :: !(Maybe [Int64])
+    , _cCreativeFieldIds     :: !(Maybe [JSONText Int64])
     , _cPageToken            :: !(Maybe Text)
     , _cSortField            :: !(Maybe CreativesListSortField)
-    , _cStudioCreativeId     :: !(Maybe Int64)
+    , _cStudioCreativeId     :: !(Maybe (JSONText Int64))
     , _cArchived             :: !(Maybe Bool)
-    , _cMaxResults           :: !(Maybe Int32)
+    , _cMaxResults           :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList' with the minimum fields required to make a request.
@@ -182,6 +189,7 @@ cAdvertiserId :: Lens' CreativesList (Maybe Int64)
 cAdvertiserId
   = lens _cAdvertiserId
       (\ s a -> s{_cAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"creative*2015\" will return objects with names like
@@ -213,7 +221,8 @@ cCompanionCreativeIds
 -- | Select only creatives with this campaign ID.
 cCampaignId :: Lens' CreativesList (Maybe Int64)
 cCampaignId
-  = lens _cCampaignId (\ s a -> s{_cCampaignId = a})
+  = lens _cCampaignId (\ s a -> s{_cCampaignId = a}) .
+      mapping _Coerce
 
 -- | Select only creatives with these creative types.
 cTypes :: Lens' CreativesList [CreativesListTypes]
@@ -230,7 +239,8 @@ cIds
 -- | User profile ID associated with this request.
 cProFileId :: Lens' CreativesList Int64
 cProFileId
-  = lens _cProFileId (\ s a -> s{_cProFileId = a})
+  = lens _cProFileId (\ s a -> s{_cProFileId = a}) .
+      _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 cSortOrder :: Lens' CreativesList (Maybe CreativesListSortOrder)
@@ -265,6 +275,7 @@ cStudioCreativeId :: Lens' CreativesList (Maybe Int64)
 cStudioCreativeId
   = lens _cStudioCreativeId
       (\ s a -> s{_cStudioCreativeId = a})
+      . mapping _Coerce
 
 -- | Select only archived creatives. Leave blank to select archived and
 -- unarchived creatives.
@@ -275,7 +286,8 @@ cArchived
 -- | Maximum number of results to return.
 cMaxResults :: Lens' CreativesList (Maybe Int32)
 cMaxResults
-  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
+  = lens _cMaxResults (\ s a -> s{_cMaxResults = a}) .
+      mapping _Coerce
 
 instance GoogleRequest CreativesList where
         type Rs CreativesList = CreativesListResponse

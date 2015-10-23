@@ -55,7 +55,7 @@ type AchievementsListResource =
                QueryParam "state" AchievementsListState :>
                  QueryParam "language" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PlayerAchievementListResponse
 
@@ -68,7 +68,7 @@ data AchievementsList = AchievementsList
     , _alLanguage   :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
     , _alPlayerId   :: !Text
-    , _alMaxResults :: !(Maybe Int32)
+    , _alMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsList' with the minimum fields required to make a request.
@@ -123,6 +123,7 @@ alPlayerId
 alMaxResults :: Lens' AchievementsList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AchievementsList where
         type Rs AchievementsList =

@@ -48,14 +48,14 @@ type StyleDeleteResource =
          "tables" :>
            Capture "tableId" Text :>
              "styles" :>
-               Capture "styleId" Int32 :>
+               Capture "styleId" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a style.
 --
 -- /See:/ 'styleDelete' smart constructor.
 data StyleDelete = StyleDelete
-    { _sdStyleId :: !Int32
+    { _sdStyleId :: !(JSONText Int32)
     , _sdTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ styleDelete pSdStyleId_ pSdTableId_ =
 -- | Identifier (within a table) for the style being deleted
 sdStyleId :: Lens' StyleDelete Int32
 sdStyleId
-  = lens _sdStyleId (\ s a -> s{_sdStyleId = a})
+  = lens _sdStyleId (\ s a -> s{_sdStyleId = a}) .
+      _Coerce
 
 -- | Table from which the style is being deleted
 sdTableId :: Lens' StyleDelete Text

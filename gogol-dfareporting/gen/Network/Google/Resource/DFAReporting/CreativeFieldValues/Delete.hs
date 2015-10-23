@@ -47,20 +47,20 @@ type CreativeFieldValuesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
+               Capture "creativeFieldId" (JSONText Int64) :>
                  "creativeFieldValues" :>
-                   Capture "id" Int64 :>
+                   Capture "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing creative field value.
 --
 -- /See:/ 'creativeFieldValuesDelete' smart constructor.
 data CreativeFieldValuesDelete = CreativeFieldValuesDelete
-    { _cfvdCreativeFieldId :: !Int64
-    , _cfvdProFileId       :: !Int64
-    , _cfvdId              :: !Int64
+    { _cfvdCreativeFieldId :: !(JSONText Int64)
+    , _cfvdProFileId       :: !(JSONText Int64)
+    , _cfvdId              :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesDelete' with the minimum fields required to make a request.
@@ -89,16 +89,19 @@ cfvdCreativeFieldId :: Lens' CreativeFieldValuesDelete Int64
 cfvdCreativeFieldId
   = lens _cfvdCreativeFieldId
       (\ s a -> s{_cfvdCreativeFieldId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 cfvdProFileId :: Lens' CreativeFieldValuesDelete Int64
 cfvdProFileId
   = lens _cfvdProFileId
       (\ s a -> s{_cfvdProFileId = a})
+      . _Coerce
 
 -- | Creative Field Value ID
 cfvdId :: Lens' CreativeFieldValuesDelete Int64
-cfvdId = lens _cfvdId (\ s a -> s{_cfvdId = a})
+cfvdId
+  = lens _cfvdId (\ s a -> s{_cfvdId = a}) . _Coerce
 
 instance GoogleRequest CreativeFieldValuesDelete
          where

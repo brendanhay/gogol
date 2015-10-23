@@ -98,7 +98,7 @@ instance ToJSON ChangesListResponse where
 data Project = Project
     { _pKind   :: !Text
     , _pId     :: !(Maybe Text)
-    , _pNumber :: !(Maybe Word64)
+    , _pNumber :: !(Maybe (JSONText Word64))
     , _pQuota  :: !(Maybe Quota)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -135,7 +135,9 @@ pId = lens _pId (\ s a -> s{_pId = a})
 -- | Unique numeric identifier for the resource; defined by the server
 -- (output only).
 pNumber :: Lens' Project (Maybe Word64)
-pNumber = lens _pNumber (\ s a -> s{_pNumber = a})
+pNumber
+  = lens _pNumber (\ s a -> s{_pNumber = a}) .
+      mapping _Coerce
 
 -- | Quotas assigned to this project (output only).
 pQuota :: Lens' Project (Maybe Quota)
@@ -327,7 +329,7 @@ instance ToJSON ResourceRecordSetsListResponse where
 --
 -- /See:/ 'resourceRecordSet' smart constructor.
 data ResourceRecordSet = ResourceRecordSet
-    { _rrsTtl     :: !(Maybe Int32)
+    { _rrsTtl     :: !(Maybe (JSONText Int32))
     , _rrsKind    :: !Text
     , _rrsName    :: !(Maybe Text)
     , _rrsType    :: !(Maybe Text)
@@ -361,7 +363,9 @@ resourceRecordSet =
 -- | Number of seconds that this ResourceRecordSet can be cached by
 -- resolvers.
 rrsTtl :: Lens' ResourceRecordSet (Maybe Int32)
-rrsTtl = lens _rrsTtl (\ s a -> s{_rrsTtl = a})
+rrsTtl
+  = lens _rrsTtl (\ s a -> s{_rrsTtl = a}) .
+      mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dns#resourceRecordSet\".
@@ -413,7 +417,7 @@ data ManagedZone = ManagedZone
     , _mzKind          :: !Text
     , _mzNameServerSet :: !(Maybe Text)
     , _mzName          :: !(Maybe Text)
-    , _mzId            :: !(Maybe Word64)
+    , _mzId            :: !(Maybe (JSONText Word64))
     , _mzDNSName       :: !(Maybe Text)
     , _mzDescription   :: !(Maybe Text)
     , _mzNameServers   :: !(Maybe [Text])
@@ -481,7 +485,9 @@ mzName = lens _mzName (\ s a -> s{_mzName = a})
 
 -- | Unique identifier for the resource; defined by the server (output only)
 mzId :: Lens' ManagedZone (Maybe Word64)
-mzId = lens _mzId (\ s a -> s{_mzId = a})
+mzId
+  = lens _mzId (\ s a -> s{_mzId = a}) .
+      mapping _Coerce
 
 -- | The DNS name of this managed zone, for instance \"example.com.\".
 mzDNSName :: Lens' ManagedZone (Maybe Text)
@@ -535,13 +541,13 @@ instance ToJSON ManagedZone where
 --
 -- /See:/ 'quota' smart constructor.
 data Quota = Quota
-    { _qRrSetDeletionsPerChange  :: !(Maybe Int32)
-    , _qRrSetsPerManagedZone     :: !(Maybe Int32)
+    { _qRrSetDeletionsPerChange  :: !(Maybe (JSONText Int32))
+    , _qRrSetsPerManagedZone     :: !(Maybe (JSONText Int32))
     , _qKind                     :: !Text
-    , _qResourceRecordsPerRrSet  :: !(Maybe Int32)
-    , _qRrSetAdditionsPerChange  :: !(Maybe Int32)
-    , _qManagedZones             :: !(Maybe Int32)
-    , _qTotalRrDataSizePerChange :: !(Maybe Int32)
+    , _qResourceRecordsPerRrSet  :: !(Maybe (JSONText Int32))
+    , _qRrSetAdditionsPerChange  :: !(Maybe (JSONText Int32))
+    , _qManagedZones             :: !(Maybe (JSONText Int32))
+    , _qTotalRrDataSizePerChange :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
@@ -580,12 +586,14 @@ qRrSetDeletionsPerChange :: Lens' Quota (Maybe Int32)
 qRrSetDeletionsPerChange
   = lens _qRrSetDeletionsPerChange
       (\ s a -> s{_qRrSetDeletionsPerChange = a})
+      . mapping _Coerce
 
 -- | Maximum allowed number of ResourceRecordSets per zone in the project.
 qRrSetsPerManagedZone :: Lens' Quota (Maybe Int32)
 qRrSetsPerManagedZone
   = lens _qRrSetsPerManagedZone
       (\ s a -> s{_qRrSetsPerManagedZone = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dns#quota\".
@@ -597,6 +605,7 @@ qResourceRecordsPerRrSet :: Lens' Quota (Maybe Int32)
 qResourceRecordsPerRrSet
   = lens _qResourceRecordsPerRrSet
       (\ s a -> s{_qResourceRecordsPerRrSet = a})
+      . mapping _Coerce
 
 -- | Maximum allowed number of ResourceRecordSets to add per
 -- ChangesCreateRequest.
@@ -604,12 +613,14 @@ qRrSetAdditionsPerChange :: Lens' Quota (Maybe Int32)
 qRrSetAdditionsPerChange
   = lens _qRrSetAdditionsPerChange
       (\ s a -> s{_qRrSetAdditionsPerChange = a})
+      . mapping _Coerce
 
 -- | Maximum allowed number of managed zones in the project.
 qManagedZones :: Lens' Quota (Maybe Int32)
 qManagedZones
   = lens _qManagedZones
       (\ s a -> s{_qManagedZones = a})
+      . mapping _Coerce
 
 -- | Maximum allowed size for total rrdata in one ChangesCreateRequest in
 -- bytes.
@@ -617,6 +628,7 @@ qTotalRrDataSizePerChange :: Lens' Quota (Maybe Int32)
 qTotalRrDataSizePerChange
   = lens _qTotalRrDataSizePerChange
       (\ s a -> s{_qTotalRrDataSizePerChange = a})
+      . mapping _Coerce
 
 instance FromJSON Quota where
         parseJSON

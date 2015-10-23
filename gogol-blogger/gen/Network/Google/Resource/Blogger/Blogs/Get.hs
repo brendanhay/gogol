@@ -48,7 +48,7 @@ type BlogsGetResource =
        "v3" :>
          "blogs" :>
            Capture "blogId" Text :>
-             QueryParam "maxPosts" Word32 :>
+             QueryParam "maxPosts" (JSONText Word32) :>
                QueryParam "view" BlogsGetView :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Blog
 
@@ -57,7 +57,7 @@ type BlogsGetResource =
 -- /See:/ 'blogsGet' smart constructor.
 data BlogsGet = BlogsGet
     { _bgBlogId   :: !Text
-    , _bgMaxPosts :: !(Maybe Word32)
+    , _bgMaxPosts :: !(Maybe (JSONText Word32))
     , _bgView     :: !(Maybe BlogsGetView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -87,7 +87,8 @@ bgBlogId = lens _bgBlogId (\ s a -> s{_bgBlogId = a})
 -- | Maximum number of posts to pull back with the blog.
 bgMaxPosts :: Lens' BlogsGet (Maybe Word32)
 bgMaxPosts
-  = lens _bgMaxPosts (\ s a -> s{_bgMaxPosts = a})
+  = lens _bgMaxPosts (\ s a -> s{_bgMaxPosts = a}) .
+      mapping _Coerce
 
 -- | Access level with which to view the blog. Note that some fields require
 -- elevated access.

@@ -46,17 +46,17 @@ type EventTagsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "eventTags" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] EventTag
 
 -- | Gets one event tag by ID.
 --
 -- /See:/ 'eventTagsGet' smart constructor.
 data EventTagsGet = EventTagsGet
-    { _etgProFileId :: !Int64
-    , _etgId        :: !Int64
+    { _etgProFileId :: !(JSONText Int64)
+    , _etgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ eventTagsGet pEtgProFileId_ pEtgId_ =
 etgProFileId :: Lens' EventTagsGet Int64
 etgProFileId
   = lens _etgProFileId (\ s a -> s{_etgProFileId = a})
+      . _Coerce
 
 -- | Event tag ID.
 etgId :: Lens' EventTagsGet Int64
-etgId = lens _etgId (\ s a -> s{_etgId = a})
+etgId
+  = lens _etgId (\ s a -> s{_etgId = a}) . _Coerce
 
 instance GoogleRequest EventTagsGet where
         type Rs EventTagsGet = EventTag

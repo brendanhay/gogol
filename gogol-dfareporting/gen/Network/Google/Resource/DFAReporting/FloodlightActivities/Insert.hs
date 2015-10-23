@@ -46,7 +46,7 @@ type FloodlightActivitiesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivities" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] FloodlightActivity :>
@@ -56,7 +56,7 @@ type FloodlightActivitiesInsertResource =
 --
 -- /See:/ 'floodlightActivitiesInsert' smart constructor.
 data FloodlightActivitiesInsert = FloodlightActivitiesInsert
-    { _faiProFileId :: !Int64
+    { _faiProFileId :: !(JSONText Int64)
     , _faiPayload   :: !FloodlightActivity
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ floodlightActivitiesInsert pFaiProFileId_ pFaiPayload_ =
 faiProFileId :: Lens' FloodlightActivitiesInsert Int64
 faiProFileId
   = lens _faiProFileId (\ s a -> s{_faiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 faiPayload :: Lens' FloodlightActivitiesInsert FloodlightActivity

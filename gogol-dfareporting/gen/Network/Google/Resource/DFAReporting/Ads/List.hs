@@ -69,27 +69,29 @@ type AdsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "ads" :>
-               QueryParams "remarketingListIds" Int64 :>
-                 QueryParams "landingPageIds" Int64 :>
-                   QueryParams "creativeIds" Int64 :>
-                     QueryParam "advertiserId" Int64 :>
-                       QueryParams "campaignIds" Int64 :>
+               QueryParams "remarketingListIds" (JSONText Int64) :>
+                 QueryParams "landingPageIds" (JSONText Int64) :>
+                   QueryParams "creativeIds" (JSONText Int64) :>
+                     QueryParam "advertiserId" (JSONText Int64) :>
+                       QueryParams "campaignIds" (JSONText Int64) :>
                          QueryParam "searchString" Text :>
-                           QueryParams "sizeIds" Int64 :>
+                           QueryParams "sizeIds" (JSONText Int64) :>
                              QueryParam "sslCompliant" Bool :>
-                               QueryParams "ids" Int64 :>
+                               QueryParams "ids" (JSONText Int64) :>
                                  QueryParam "sortOrder" AdsListSortOrder :>
                                    QueryParam "active" Bool :>
                                      QueryParams
                                        "creativeOptimizationConfigurationIds"
-                                       Int64
+                                       (JSONText Int64)
                                        :>
-                                       QueryParams "placementIds" Int64 :>
+                                       QueryParams "placementIds"
+                                         (JSONText Int64)
+                                         :>
                                          QueryParam "sslRequired" Bool :>
                                            QueryParam "overriddenEventTagId"
-                                             Int64
+                                             (JSONText Int64)
                                              :>
                                              QueryParam "pageToken" Text :>
                                                QueryParam "sortField"
@@ -113,11 +115,11 @@ type AdsListResource =
                                                            :>
                                                            QueryParam
                                                              "maxResults"
-                                                             Int32
+                                                             (JSONText Int32)
                                                              :>
                                                              QueryParams
                                                                "audienceSegmentIds"
-                                                               Int64
+                                                               (JSONText Int64)
                                                                :>
                                                                QueryParam "alt"
                                                                  AltJSON
@@ -129,22 +131,22 @@ type AdsListResource =
 --
 -- /See:/ 'adsList' smart constructor.
 data AdsList = AdsList
-    { _alRemarketingListIds                   :: !(Maybe [Int64])
-    , _alLandingPageIds                       :: !(Maybe [Int64])
-    , _alCreativeIds                          :: !(Maybe [Int64])
-    , _alAdvertiserId                         :: !(Maybe Int64)
-    , _alCampaignIds                          :: !(Maybe [Int64])
+    { _alRemarketingListIds                   :: !(Maybe [JSONText Int64])
+    , _alLandingPageIds                       :: !(Maybe [JSONText Int64])
+    , _alCreativeIds                          :: !(Maybe [JSONText Int64])
+    , _alAdvertiserId                         :: !(Maybe (JSONText Int64))
+    , _alCampaignIds                          :: !(Maybe [JSONText Int64])
     , _alSearchString                         :: !(Maybe Text)
-    , _alSizeIds                              :: !(Maybe [Int64])
+    , _alSizeIds                              :: !(Maybe [JSONText Int64])
     , _alSSLCompliant                         :: !(Maybe Bool)
-    , _alIds                                  :: !(Maybe [Int64])
-    , _alProFileId                            :: !Int64
+    , _alIds                                  :: !(Maybe [JSONText Int64])
+    , _alProFileId                            :: !(JSONText Int64)
     , _alSortOrder                            :: !(Maybe AdsListSortOrder)
     , _alActive                               :: !(Maybe Bool)
-    , _alCreativeOptimizationConfigurationIds :: !(Maybe [Int64])
-    , _alPlacementIds                         :: !(Maybe [Int64])
+    , _alCreativeOptimizationConfigurationIds :: !(Maybe [JSONText Int64])
+    , _alPlacementIds                         :: !(Maybe [JSONText Int64])
     , _alSSLRequired                          :: !(Maybe Bool)
-    , _alOverriddenEventTagId                 :: !(Maybe Int64)
+    , _alOverriddenEventTagId                 :: !(Maybe (JSONText Int64))
     , _alPageToken                            :: !(Maybe Text)
     , _alSortField                            :: !(Maybe AdsListSortField)
     , _alType                                 :: !(Maybe [AdsListType])
@@ -152,8 +154,8 @@ data AdsList = AdsList
     , _alDynamicClickTracker                  :: !(Maybe Bool)
     , _alCompatibility                        :: !(Maybe AdsListCompatibility)
     , _alArchived                             :: !(Maybe Bool)
-    , _alMaxResults                           :: !(Maybe Int32)
-    , _alAudienceSegmentIds                   :: !(Maybe [Int64])
+    , _alMaxResults                           :: !(Maybe (JSONText Int32))
+    , _alAudienceSegmentIds                   :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsList' with the minimum fields required to make a request.
@@ -271,6 +273,7 @@ alAdvertiserId :: Lens' AdsList (Maybe Int64)
 alAdvertiserId
   = lens _alAdvertiserId
       (\ s a -> s{_alAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Select only ads with these campaign IDs.
 alCampaignIds :: Lens' AdsList [Int64]
@@ -313,7 +316,8 @@ alIds
 -- | User profile ID associated with this request.
 alProFileId :: Lens' AdsList Int64
 alProFileId
-  = lens _alProFileId (\ s a -> s{_alProFileId = a})
+  = lens _alProFileId (\ s a -> s{_alProFileId = a}) .
+      _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 alSortOrder :: Lens' AdsList (Maybe AdsListSortOrder)
@@ -352,6 +356,7 @@ alOverriddenEventTagId :: Lens' AdsList (Maybe Int64)
 alOverriddenEventTagId
   = lens _alOverriddenEventTagId
       (\ s a -> s{_alOverriddenEventTagId = a})
+      . mapping _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
 alPageToken :: Lens' AdsList (Maybe Text)
@@ -403,6 +408,7 @@ alArchived
 alMaxResults :: Lens' AdsList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 -- | Select only ads with these audience segment IDs.
 alAudienceSegmentIds :: Lens' AdsList [Int64]

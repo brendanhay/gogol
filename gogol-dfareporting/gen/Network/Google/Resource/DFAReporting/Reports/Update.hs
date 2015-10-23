@@ -47,9 +47,9 @@ type ReportsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
-               Capture "reportId" Int64 :>
+               Capture "reportId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Report :> Put '[JSON] Report
 
@@ -57,8 +57,8 @@ type ReportsUpdateResource =
 --
 -- /See:/ 'reportsUpdate' smart constructor.
 data ReportsUpdate = ReportsUpdate
-    { _ruReportId  :: !Int64
-    , _ruProFileId :: !Int64
+    { _ruReportId  :: !(JSONText Int64)
+    , _ruProFileId :: !(JSONText Int64)
     , _ruPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,12 +86,14 @@ reportsUpdate pRuReportId_ pRuProFileId_ pRuPayload_ =
 -- | The ID of the report.
 ruReportId :: Lens' ReportsUpdate Int64
 ruReportId
-  = lens _ruReportId (\ s a -> s{_ruReportId = a})
+  = lens _ruReportId (\ s a -> s{_ruReportId = a}) .
+      _Coerce
 
 -- | The DFA user profile ID.
 ruProFileId :: Lens' ReportsUpdate Int64
 ruProFileId
-  = lens _ruProFileId (\ s a -> s{_ruProFileId = a})
+  = lens _ruProFileId (\ s a -> s{_ruProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 ruPayload :: Lens' ReportsUpdate Report

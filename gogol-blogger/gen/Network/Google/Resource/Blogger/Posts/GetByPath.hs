@@ -52,7 +52,7 @@ type PostsGetByPathResource =
              "posts" :>
                "bypath" :>
                  QueryParam "path" Text :>
-                   QueryParam "maxComments" Word32 :>
+                   QueryParam "maxComments" (JSONText Word32) :>
                      QueryParam "view" PostsGetByPathView :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
@@ -62,7 +62,7 @@ type PostsGetByPathResource =
 data PostsGetByPath = PostsGetByPath
     { _pgbpPath        :: !Text
     , _pgbpBlogId      :: !Text
-    , _pgbpMaxComments :: !(Maybe Word32)
+    , _pgbpMaxComments :: !(Maybe (JSONText Word32))
     , _pgbpView        :: !(Maybe PostsGetByPathView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -103,6 +103,7 @@ pgbpMaxComments :: Lens' PostsGetByPath (Maybe Word32)
 pgbpMaxComments
   = lens _pgbpMaxComments
       (\ s a -> s{_pgbpMaxComments = a})
+      . mapping _Coerce
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.

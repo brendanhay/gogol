@@ -53,8 +53,8 @@ type TableReplaceRowsResource =
          "tables" :>
            Capture "tableId" Text :>
              "replace" :>
-               QueryParam "startLine" Int32 :>
-                 QueryParam "endLine" Int32 :>
+               QueryParam "startLine" (JSONText Int32) :>
+                 QueryParam "endLine" (JSONText Int32) :>
                    QueryParam "delimiter" Text :>
                      QueryParam "encoding" Text :>
                        QueryParam "isStrict" Bool :>
@@ -66,8 +66,8 @@ type TableReplaceRowsResource =
              "tables" :>
                Capture "tableId" Text :>
                  "replace" :>
-                   QueryParam "startLine" Int32 :>
-                     QueryParam "endLine" Int32 :>
+                   QueryParam "startLine" (JSONText Int32) :>
+                     QueryParam "endLine" (JSONText Int32) :>
                        QueryParam "delimiter" Text :>
                          QueryParam "encoding" Text :>
                            QueryParam "isStrict" Bool :>
@@ -81,8 +81,8 @@ type TableReplaceRowsResource =
 --
 -- /See:/ 'tableReplaceRows' smart constructor.
 data TableReplaceRows = TableReplaceRows
-    { _trrStartLine :: !(Maybe Int32)
-    , _trrEndLine   :: !(Maybe Int32)
+    { _trrStartLine :: !(Maybe (JSONText Int32))
+    , _trrEndLine   :: !(Maybe (JSONText Int32))
     , _trrTableId   :: !Text
     , _trrDelimiter :: !(Maybe Text)
     , _trrEncoding  :: !(Maybe Text)
@@ -122,6 +122,7 @@ tableReplaceRows pTrrTableId_ =
 trrStartLine :: Lens' TableReplaceRows (Maybe Int32)
 trrStartLine
   = lens _trrStartLine (\ s a -> s{_trrStartLine = a})
+      . mapping _Coerce
 
 -- | The index of the line up to which data will be imported. Default is to
 -- import the entire file. If endLine is negative, it is an offset from the
@@ -129,7 +130,8 @@ trrStartLine
 -- lines.
 trrEndLine :: Lens' TableReplaceRows (Maybe Int32)
 trrEndLine
-  = lens _trrEndLine (\ s a -> s{_trrEndLine = a})
+  = lens _trrEndLine (\ s a -> s{_trrEndLine = a}) .
+      mapping _Coerce
 
 -- | Table whose rows will be replaced.
 trrTableId :: Lens' TableReplaceRows Text

@@ -95,8 +95,8 @@ instance ToJSON FileList where
 --
 -- /See:/ 'optimizationActivity' smart constructor.
 data OptimizationActivity = OptimizationActivity
-    { _oaWeight                             :: !(Maybe Int32)
-    , _oaFloodlightActivityId               :: !(Maybe Int64)
+    { _oaWeight                             :: !(Maybe (JSONText Int32))
+    , _oaFloodlightActivityId               :: !(Maybe (JSONText Int64))
     , _oaFloodlightActivityIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -122,7 +122,9 @@ optimizationActivity =
 -- weight assigned will be understood in proportion to the weights assigned
 -- to the other optimization activities.
 oaWeight :: Lens' OptimizationActivity (Maybe Int32)
-oaWeight = lens _oaWeight (\ s a -> s{_oaWeight = a})
+oaWeight
+  = lens _oaWeight (\ s a -> s{_oaWeight = a}) .
+      mapping _Coerce
 
 -- | Floodlight activity ID of this optimization activity. This is a required
 -- field.
@@ -130,6 +132,7 @@ oaFloodlightActivityId :: Lens' OptimizationActivity (Maybe Int64)
 oaFloodlightActivityId
   = lens _oaFloodlightActivityId
       (\ s a -> s{_oaFloodlightActivityId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the floodlight activity. This is a
 -- read-only, auto-generated field.
@@ -205,7 +208,7 @@ data CreativeCustomEvent = CreativeCustomEvent
     , _cceTargetType                :: !(Maybe CreativeCustomEventTargetType)
     , _ccePopupWindowProperties     :: !(Maybe PopupWindowProperties)
     , _cceVideoReportingId          :: !(Maybe Text)
-    , _cceId                        :: !(Maybe Int64)
+    , _cceId                        :: !(Maybe (JSONText Int64))
     , _cceArtworkLabel              :: !(Maybe Text)
     , _cceArtworkType               :: !(Maybe CreativeCustomEventArtworkType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -286,7 +289,9 @@ cceVideoReportingId
 -- | ID of this event. This is a required field and should not be modified
 -- after insertion.
 cceId :: Lens' CreativeCustomEvent (Maybe Int64)
-cceId = lens _cceId (\ s a -> s{_cceId = a})
+cceId
+  = lens _cceId (\ s a -> s{_cceId = a}) .
+      mapping _Coerce
 
 -- | Artwork label column, used to link events in DCM back to events in
 -- Studio. This is a required field and should not be modified after
@@ -700,10 +705,10 @@ instance ToJSON ReachReportCompatibleFields where
 data Browser = Browser
     { _bMinorVersion     :: !(Maybe Text)
     , _bKind             :: !Text
-    , _bBrowserVersionId :: !(Maybe Int64)
+    , _bBrowserVersionId :: !(Maybe (JSONText Int64))
     , _bMajorVersion     :: !(Maybe Text)
     , _bName             :: !(Maybe Text)
-    , _bDartId           :: !(Maybe Int64)
+    , _bDartId           :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Browser' with the minimum fields required to make a request.
@@ -757,6 +762,7 @@ bBrowserVersionId :: Lens' Browser (Maybe Int64)
 bBrowserVersionId
   = lens _bBrowserVersionId
       (\ s a -> s{_bBrowserVersionId = a})
+      . mapping _Coerce
 
 -- | Major version number (leftmost number) of this browser. For example, for
 -- Chrome 5.0.376.86 beta, this field should be set to 5. An asterisk (*)
@@ -777,7 +783,9 @@ bName = lens _bName (\ s a -> s{_bName = a})
 
 -- | DART ID of this browser. This is the ID used when generating reports.
 bDartId :: Lens' Browser (Maybe Int64)
-bDartId = lens _bDartId (\ s a -> s{_bDartId = a})
+bDartId
+  = lens _bDartId (\ s a -> s{_bDartId = a}) .
+      mapping _Coerce
 
 instance FromJSON Browser where
         parseJSON
@@ -806,7 +814,7 @@ instance ToJSON Browser where
 -- /See:/ 'creativeGroupAssignment' smart constructor.
 data CreativeGroupAssignment = CreativeGroupAssignment
     { _cgaCreativeGroupNumber :: !(Maybe CreativeGroupAssignmentCreativeGroupNumber)
-    , _cgaCreativeGroupId     :: !(Maybe Int64)
+    , _cgaCreativeGroupId     :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupAssignment' with the minimum fields required to make a request.
@@ -835,6 +843,7 @@ cgaCreativeGroupId :: Lens' CreativeGroupAssignment (Maybe Int64)
 cgaCreativeGroupId
   = lens _cgaCreativeGroupId
       (\ s a -> s{_cgaCreativeGroupId = a})
+      . mapping _Coerce
 
 instance FromJSON CreativeGroupAssignment where
         parseJSON
@@ -973,7 +982,7 @@ instance ToJSON DirectorySiteSettings where
 -- /See:/ 'listPopulationRule' smart constructor.
 data ListPopulationRule = ListPopulationRule
     { _lprFloodlightActivityName :: !(Maybe Text)
-    , _lprFloodlightActivityId   :: !(Maybe Int64)
+    , _lprFloodlightActivityId   :: !(Maybe (JSONText Int64))
     , _lprListPopulationClauses  :: !(Maybe [ListPopulationClause])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1008,6 +1017,7 @@ lprFloodlightActivityId :: Lens' ListPopulationRule (Maybe Int64)
 lprFloodlightActivityId
   = lens _lprFloodlightActivityId
       (\ s a -> s{_lprFloodlightActivityId = a})
+      . mapping _Coerce
 
 -- | Clauses that make up this list population rule. Clauses are joined by
 -- ANDs, and the clauses themselves are made up of list population terms
@@ -1095,7 +1105,7 @@ instance ToJSON SizesListResponse where
 data CreativeRotation = CreativeRotation
     { _crWeightCalculationStrategy           :: !(Maybe CreativeRotationWeightCalculationStrategy)
     , _crCreativeAssignments                 :: !(Maybe [CreativeAssignment])
-    , _crCreativeOptimizationConfigurationId :: !(Maybe Int64)
+    , _crCreativeOptimizationConfigurationId :: !(Maybe (JSONText Int64))
     , _crType                                :: !(Maybe CreativeRotationType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1144,6 +1154,7 @@ crCreativeOptimizationConfigurationId
   = lens _crCreativeOptimizationConfigurationId
       (\ s a ->
          s{_crCreativeOptimizationConfigurationId = a})
+      . mapping _Coerce
 
 -- | Type of creative rotation. Can be used to specify whether to use
 -- sequential or random rotation.
@@ -1305,25 +1316,25 @@ instance ToJSON TechnologyTargeting where
 --
 -- /See:/ 'inventoryItem' smart constructor.
 data InventoryItem = InventoryItem
-    { _iiPlacementStrategyId       :: !(Maybe Int64)
-    , _iiEstimatedClickThroughRate :: !(Maybe Int64)
+    { _iiPlacementStrategyId       :: !(Maybe (JSONText Int64))
+    , _iiEstimatedClickThroughRate :: !(Maybe (JSONText Int64))
     , _iiPricing                   :: !(Maybe Pricing)
     , _iiKind                      :: !Text
-    , _iiAdvertiserId              :: !(Maybe Int64)
-    , _iiRfpId                     :: !(Maybe Int64)
-    , _iiContentCategoryId         :: !(Maybe Int64)
+    , _iiAdvertiserId              :: !(Maybe (JSONText Int64))
+    , _iiRfpId                     :: !(Maybe (JSONText Int64))
+    , _iiContentCategoryId         :: !(Maybe (JSONText Int64))
     , _iiInPlan                    :: !(Maybe Bool)
-    , _iiAccountId                 :: !(Maybe Int64)
+    , _iiAccountId                 :: !(Maybe (JSONText Int64))
     , _iiName                      :: !(Maybe Text)
     , _iiAdSlots                   :: !(Maybe [AdSlot])
-    , _iiNegotiationChannelId      :: !(Maybe Int64)
+    , _iiNegotiationChannelId      :: !(Maybe (JSONText Int64))
     , _iiLastModifiedInfo          :: !(Maybe LastModifiedInfo)
-    , _iiId                        :: !(Maybe Int64)
-    , _iiEstimatedConversionRate   :: !(Maybe Int64)
-    , _iiProjectId                 :: !(Maybe Int64)
-    , _iiSubAccountId              :: !(Maybe Int64)
-    , _iiOrderId                   :: !(Maybe Int64)
-    , _iiSiteId                    :: !(Maybe Int64)
+    , _iiId                        :: !(Maybe (JSONText Int64))
+    , _iiEstimatedConversionRate   :: !(Maybe (JSONText Int64))
+    , _iiProjectId                 :: !(Maybe (JSONText Int64))
+    , _iiSubAccountId              :: !(Maybe (JSONText Int64))
+    , _iiOrderId                   :: !(Maybe (JSONText Int64))
+    , _iiSiteId                    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItem' with the minimum fields required to make a request.
@@ -1397,12 +1408,14 @@ iiPlacementStrategyId :: Lens' InventoryItem (Maybe Int64)
 iiPlacementStrategyId
   = lens _iiPlacementStrategyId
       (\ s a -> s{_iiPlacementStrategyId = a})
+      . mapping _Coerce
 
 -- | Estimated click-through rate of this inventory item.
 iiEstimatedClickThroughRate :: Lens' InventoryItem (Maybe Int64)
 iiEstimatedClickThroughRate
   = lens _iiEstimatedClickThroughRate
       (\ s a -> s{_iiEstimatedClickThroughRate = a})
+      . mapping _Coerce
 
 -- | Pricing of this inventory item.
 iiPricing :: Lens' InventoryItem (Maybe Pricing)
@@ -1419,16 +1432,20 @@ iiAdvertiserId :: Lens' InventoryItem (Maybe Int64)
 iiAdvertiserId
   = lens _iiAdvertiserId
       (\ s a -> s{_iiAdvertiserId = a})
+      . mapping _Coerce
 
 -- | RFP ID of this inventory item.
 iiRfpId :: Lens' InventoryItem (Maybe Int64)
-iiRfpId = lens _iiRfpId (\ s a -> s{_iiRfpId = a})
+iiRfpId
+  = lens _iiRfpId (\ s a -> s{_iiRfpId = a}) .
+      mapping _Coerce
 
 -- | Content category ID of this inventory item.
 iiContentCategoryId :: Lens' InventoryItem (Maybe Int64)
 iiContentCategoryId
   = lens _iiContentCategoryId
       (\ s a -> s{_iiContentCategoryId = a})
+      . mapping _Coerce
 
 -- | Whether this inventory item is in plan.
 iiInPlan :: Lens' InventoryItem (Maybe Bool)
@@ -1437,7 +1454,8 @@ iiInPlan = lens _iiInPlan (\ s a -> s{_iiInPlan = a})
 -- | Account ID of this inventory item.
 iiAccountId :: Lens' InventoryItem (Maybe Int64)
 iiAccountId
-  = lens _iiAccountId (\ s a -> s{_iiAccountId = a})
+  = lens _iiAccountId (\ s a -> s{_iiAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this inventory item. For standalone inventory items, this is the
 -- same name as that of its only ad slot. For group inventory items, this
@@ -1460,6 +1478,7 @@ iiNegotiationChannelId :: Lens' InventoryItem (Maybe Int64)
 iiNegotiationChannelId
   = lens _iiNegotiationChannelId
       (\ s a -> s{_iiNegotiationChannelId = a})
+      . mapping _Coerce
 
 -- | Information about the most recent modification of this inventory item.
 iiLastModifiedInfo :: Lens' InventoryItem (Maybe LastModifiedInfo)
@@ -1469,33 +1488,41 @@ iiLastModifiedInfo
 
 -- | ID of this inventory item.
 iiId :: Lens' InventoryItem (Maybe Int64)
-iiId = lens _iiId (\ s a -> s{_iiId = a})
+iiId
+  = lens _iiId (\ s a -> s{_iiId = a}) .
+      mapping _Coerce
 
 -- | Estimated conversion rate of this inventory item.
 iiEstimatedConversionRate :: Lens' InventoryItem (Maybe Int64)
 iiEstimatedConversionRate
   = lens _iiEstimatedConversionRate
       (\ s a -> s{_iiEstimatedConversionRate = a})
+      . mapping _Coerce
 
 -- | Project ID of this inventory item.
 iiProjectId :: Lens' InventoryItem (Maybe Int64)
 iiProjectId
-  = lens _iiProjectId (\ s a -> s{_iiProjectId = a})
+  = lens _iiProjectId (\ s a -> s{_iiProjectId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this inventory item.
 iiSubAccountId :: Lens' InventoryItem (Maybe Int64)
 iiSubAccountId
   = lens _iiSubAccountId
       (\ s a -> s{_iiSubAccountId = a})
+      . mapping _Coerce
 
 -- | Order ID of this inventory item.
 iiOrderId :: Lens' InventoryItem (Maybe Int64)
 iiOrderId
-  = lens _iiOrderId (\ s a -> s{_iiOrderId = a})
+  = lens _iiOrderId (\ s a -> s{_iiOrderId = a}) .
+      mapping _Coerce
 
 -- | ID of the site this inventory item is associated with.
 iiSiteId :: Lens' InventoryItem (Maybe Int64)
-iiSiteId = lens _iiSiteId (\ s a -> s{_iiSiteId = a})
+iiSiteId
+  = lens _iiSiteId (\ s a -> s{_iiSiteId = a}) .
+      mapping _Coerce
 
 instance FromJSON InventoryItem where
         parseJSON
@@ -1682,7 +1709,7 @@ data ListPopulationTerm = ListPopulationTerm
     , _lptVariableFriendlyName :: !(Maybe Text)
     , _lptNegation             :: !(Maybe Bool)
     , _lptVariableName         :: !(Maybe Text)
-    , _lptRemarketingListId    :: !(Maybe Int64)
+    , _lptRemarketingListId    :: !(Maybe (JSONText Int64))
     , _lptType                 :: !(Maybe ListPopulationTermType)
     , _lptContains             :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1760,6 +1787,7 @@ lptRemarketingListId :: Lens' ListPopulationTerm (Maybe Int64)
 lptRemarketingListId
   = lens _lptRemarketingListId
       (\ s a -> s{_lptRemarketingListId = a})
+      . mapping _Coerce
 
 -- | List population term type determines the applicable fields in this
 -- object. If left unset or set to CUSTOM_VARIABLE_TERM, then variableName,
@@ -1930,7 +1958,7 @@ data DirectorySiteContact = DirectorySiteContact
     , _dscAddress   :: !(Maybe Text)
     , _dscRole      :: !(Maybe DirectorySiteContactRole)
     , _dscFirstName :: !(Maybe Text)
-    , _dscId        :: !(Maybe Int64)
+    , _dscId        :: !(Maybe (JSONText Int64))
     , _dscTitle     :: !(Maybe Text)
     , _dscType      :: !(Maybe DirectorySiteContactType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2009,7 +2037,9 @@ dscFirstName
 -- | ID of this directory site contact. This is a read-only, auto-generated
 -- field.
 dscId :: Lens' DirectorySiteContact (Maybe Int64)
-dscId = lens _dscId (\ s a -> s{_dscId = a})
+dscId
+  = lens _dscId (\ s a -> s{_dscId = a}) .
+      mapping _Coerce
 
 -- | Title or designation of this directory site contact.
 dscTitle :: Lens' DirectorySiteContact (Maybe Text)
@@ -2106,7 +2136,7 @@ instance ToJSON RegionsListResponse where
 data FloodlightActivityDynamicTag = FloodlightActivityDynamicTag
     { _fadtTag  :: !(Maybe Text)
     , _fadtName :: !(Maybe Text)
-    , _fadtId   :: !(Maybe Int64)
+    , _fadtId   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityDynamicTag' with the minimum fields required to make a request.
@@ -2137,7 +2167,9 @@ fadtName = lens _fadtName (\ s a -> s{_fadtName = a})
 
 -- | ID of this dynamic tag. This is a read-only, auto-generated field.
 fadtId :: Lens' FloodlightActivityDynamicTag (Maybe Int64)
-fadtId = lens _fadtId (\ s a -> s{_fadtId = a})
+fadtId
+  = lens _fadtId (\ s a -> s{_fadtId = a}) .
+      mapping _Coerce
 
 instance FromJSON FloodlightActivityDynamicTag where
         parseJSON
@@ -2159,7 +2191,7 @@ instance ToJSON FloodlightActivityDynamicTag where
 --
 -- /See:/ 'directorySite' smart constructor.
 data DirectorySite = DirectorySite
-    { _dsCurrencyId             :: !(Maybe Int64)
+    { _dsCurrencyId             :: !(Maybe (JSONText Int64))
     , _dsSettings               :: !(Maybe DirectorySiteSettings)
     , _dsInterstitialTagFormats :: !(Maybe [DirectorySiteInterstitialTagFormatsItem])
     , _dsKind                   :: !Text
@@ -2168,11 +2200,11 @@ data DirectorySite = DirectorySite
     , _dsInpageTagFormats       :: !(Maybe [DirectorySiteInpageTagFormatsItem])
     , _dsActive                 :: !(Maybe Bool)
     , _dsName                   :: !(Maybe Text)
-    , _dsId                     :: !(Maybe Int64)
-    , _dsCountryId              :: !(Maybe Int64)
+    , _dsId                     :: !(Maybe (JSONText Int64))
+    , _dsCountryId              :: !(Maybe (JSONText Int64))
     , _dsContactAssignments     :: !(Maybe [DirectorySiteContactAssignment])
     , _dsDescription            :: !(Maybe Text)
-    , _dsParentId               :: !(Maybe Int64)
+    , _dsParentId               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySite' with the minimum fields required to make a request.
@@ -2239,6 +2271,7 @@ directorySite =
 dsCurrencyId :: Lens' DirectorySite (Maybe Int64)
 dsCurrencyId
   = lens _dsCurrencyId (\ s a -> s{_dsCurrencyId = a})
+      . mapping _Coerce
 
 -- | Directory site settings.
 dsSettings :: Lens' DirectorySite (Maybe DirectorySiteSettings)
@@ -2291,12 +2324,15 @@ dsName = lens _dsName (\ s a -> s{_dsName = a})
 
 -- | ID of this directory site. This is a read-only, auto-generated field.
 dsId :: Lens' DirectorySite (Maybe Int64)
-dsId = lens _dsId (\ s a -> s{_dsId = a})
+dsId
+  = lens _dsId (\ s a -> s{_dsId = a}) .
+      mapping _Coerce
 
 -- | Country ID of this directory site.
 dsCountryId :: Lens' DirectorySite (Maybe Int64)
 dsCountryId
-  = lens _dsCountryId (\ s a -> s{_dsCountryId = a})
+  = lens _dsCountryId (\ s a -> s{_dsCountryId = a}) .
+      mapping _Coerce
 
 -- | Directory site contacts.
 dsContactAssignments :: Lens' DirectorySite [DirectorySiteContactAssignment]
@@ -2315,7 +2351,8 @@ dsDescription
 -- | Parent directory site ID.
 dsParentId :: Lens' DirectorySite (Maybe Int64)
 dsParentId
-  = lens _dsParentId (\ s a -> s{_dsParentId = a})
+  = lens _dsParentId (\ s a -> s{_dsParentId = a}) .
+      mapping _Coerce
 
 instance FromJSON DirectorySite where
         parseJSON
@@ -2435,15 +2472,15 @@ instance ToJSON
 -- /See:/ 'floodlightActivityGroup' smart constructor.
 data FloodlightActivityGroup = FloodlightActivityGroup
     { _fagTagString                               :: !(Maybe Text)
-    , _fagFloodlightConfigurationId               :: !(Maybe Int64)
+    , _fagFloodlightConfigurationId               :: !(Maybe (JSONText Int64))
     , _fagKind                                    :: !Text
-    , _fagAdvertiserId                            :: !(Maybe Int64)
+    , _fagAdvertiserId                            :: !(Maybe (JSONText Int64))
     , _fagAdvertiserIdDimensionValue              :: !(Maybe DimensionValue)
     , _fagIdDimensionValue                        :: !(Maybe DimensionValue)
-    , _fagAccountId                               :: !(Maybe Int64)
+    , _fagAccountId                               :: !(Maybe (JSONText Int64))
     , _fagName                                    :: !(Maybe Text)
-    , _fagId                                      :: !(Maybe Int64)
-    , _fagSubAccountId                            :: !(Maybe Int64)
+    , _fagId                                      :: !(Maybe (JSONText Int64))
+    , _fagSubAccountId                            :: !(Maybe (JSONText Int64))
     , _fagType                                    :: !(Maybe FloodlightActivityGroupType)
     , _fagFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2510,6 +2547,7 @@ fagFloodlightConfigurationId :: Lens' FloodlightActivityGroup (Maybe Int64)
 fagFloodlightConfigurationId
   = lens _fagFloodlightConfigurationId
       (\ s a -> s{_fagFloodlightConfigurationId = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#floodlightActivityGroup\".
@@ -2524,6 +2562,7 @@ fagAdvertiserId :: Lens' FloodlightActivityGroup (Maybe Int64)
 fagAdvertiserId
   = lens _fagAdvertiserId
       (\ s a -> s{_fagAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
@@ -2544,6 +2583,7 @@ fagIdDimensionValue
 fagAccountId :: Lens' FloodlightActivityGroup (Maybe Int64)
 fagAccountId
   = lens _fagAccountId (\ s a -> s{_fagAccountId = a})
+      . mapping _Coerce
 
 -- | Name of this floodlight activity group. This is a required field. Must
 -- be less than 65 characters long and cannot contain quotes.
@@ -2553,7 +2593,9 @@ fagName = lens _fagName (\ s a -> s{_fagName = a})
 -- | ID of this floodlight activity group. This is a read-only,
 -- auto-generated field.
 fagId :: Lens' FloodlightActivityGroup (Maybe Int64)
-fagId = lens _fagId (\ s a -> s{_fagId = a})
+fagId
+  = lens _fagId (\ s a -> s{_fagId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this floodlight activity group. This is a read-only
 -- field that can be left blank.
@@ -2561,6 +2603,7 @@ fagSubAccountId :: Lens' FloodlightActivityGroup (Maybe Int64)
 fagSubAccountId
   = lens _fagSubAccountId
       (\ s a -> s{_fagSubAccountId = a})
+      . mapping _Coerce
 
 -- | Type of the floodlight activity group. This is a required field that is
 -- read-only after insertion.
@@ -2724,10 +2767,10 @@ instance ToJSON
 -- /See:/ 'fsCommand' smart constructor.
 data FsCommand = FsCommand
     { _fcPositionOption :: !(Maybe FsCommandPositionOption)
-    , _fcLeft           :: !(Maybe Int32)
-    , _fcWindowHeight   :: !(Maybe Int32)
-    , _fcWindowWidth    :: !(Maybe Int32)
-    , _fcTop            :: !(Maybe Int32)
+    , _fcLeft           :: !(Maybe (JSONText Int32))
+    , _fcWindowHeight   :: !(Maybe (JSONText Int32))
+    , _fcWindowWidth    :: !(Maybe (JSONText Int32))
+    , _fcTop            :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FsCommand' with the minimum fields required to make a request.
@@ -2763,24 +2806,30 @@ fcPositionOption
 -- | Distance from the left of the browser.Applicable when positionOption is
 -- DISTANCE_FROM_TOP_LEFT_CORNER.
 fcLeft :: Lens' FsCommand (Maybe Int32)
-fcLeft = lens _fcLeft (\ s a -> s{_fcLeft = a})
+fcLeft
+  = lens _fcLeft (\ s a -> s{_fcLeft = a}) .
+      mapping _Coerce
 
 -- | Height of the window.
 fcWindowHeight :: Lens' FsCommand (Maybe Int32)
 fcWindowHeight
   = lens _fcWindowHeight
       (\ s a -> s{_fcWindowHeight = a})
+      . mapping _Coerce
 
 -- | Width of the window.
 fcWindowWidth :: Lens' FsCommand (Maybe Int32)
 fcWindowWidth
   = lens _fcWindowWidth
       (\ s a -> s{_fcWindowWidth = a})
+      . mapping _Coerce
 
 -- | Distance from the top of the browser. Applicable when positionOption is
 -- DISTANCE_FROM_TOP_LEFT_CORNER.
 fcTop :: Lens' FsCommand (Maybe Int32)
-fcTop = lens _fcTop (\ s a -> s{_fcTop = a})
+fcTop
+  = lens _fcTop (\ s a -> s{_fcTop = a}) .
+      mapping _Coerce
 
 instance FromJSON FsCommand where
         parseJSON
@@ -2806,7 +2855,7 @@ instance ToJSON FsCommand where
 --
 -- /See:/ 'placementAssignment' smart constructor.
 data PlacementAssignment = PlacementAssignment
-    { _paPlacementId               :: !(Maybe Int64)
+    { _paPlacementId               :: !(Maybe (JSONText Int64))
     , _paPlacementIdDimensionValue :: !(Maybe DimensionValue)
     , _paActive                    :: !(Maybe Bool)
     , _paSSLRequired               :: !(Maybe Bool)
@@ -2838,6 +2887,7 @@ paPlacementId :: Lens' PlacementAssignment (Maybe Int64)
 paPlacementId
   = lens _paPlacementId
       (\ s a -> s{_paPlacementId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the placement. This is a read-only,
 -- auto-generated field.
@@ -2884,7 +2934,7 @@ instance ToJSON PlacementAssignment where
 data CreativeFieldValue = CreativeFieldValue
     { _cfvKind  :: !Text
     , _cfvValue :: !(Maybe Text)
-    , _cfvId    :: !(Maybe Int64)
+    , _cfvId    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValue' with the minimum fields required to make a request.
@@ -2918,7 +2968,9 @@ cfvValue = lens _cfvValue (\ s a -> s{_cfvValue = a})
 -- | ID of this creative field value. This is a read-only, auto-generated
 -- field.
 cfvId :: Lens' CreativeFieldValue (Maybe Int64)
-cfvId = lens _cfvId (\ s a -> s{_cfvId = a})
+cfvId
+  = lens _cfvId (\ s a -> s{_cfvId = a}) .
+      mapping _Coerce
 
 instance FromJSON CreativeFieldValue where
         parseJSON
@@ -3151,8 +3203,8 @@ instance ToJSON FloodlightActivitiesListResponse
 --
 -- /See:/ 'creativeFieldAssignment' smart constructor.
 data CreativeFieldAssignment = CreativeFieldAssignment
-    { _cfaCreativeFieldId      :: !(Maybe Int64)
-    , _cfaCreativeFieldValueId :: !(Maybe Int64)
+    { _cfaCreativeFieldId      :: !(Maybe (JSONText Int64))
+    , _cfaCreativeFieldValueId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldAssignment' with the minimum fields required to make a request.
@@ -3175,12 +3227,14 @@ cfaCreativeFieldId :: Lens' CreativeFieldAssignment (Maybe Int64)
 cfaCreativeFieldId
   = lens _cfaCreativeFieldId
       (\ s a -> s{_cfaCreativeFieldId = a})
+      . mapping _Coerce
 
 -- | ID of the creative field value.
 cfaCreativeFieldValueId :: Lens' CreativeFieldAssignment (Maybe Int64)
 cfaCreativeFieldValueId
   = lens _cfaCreativeFieldValueId
       (\ s a -> s{_cfaCreativeFieldValueId = a})
+      . mapping _Coerce
 
 instance FromJSON CreativeFieldAssignment where
         parseJSON
@@ -3204,9 +3258,9 @@ instance ToJSON CreativeFieldAssignment where
 -- /See:/ 'advertiserGroup' smart constructor.
 data AdvertiserGroup = AdvertiserGroup
     { _agKind      :: !Text
-    , _agAccountId :: !(Maybe Int64)
+    , _agAccountId :: !(Maybe (JSONText Int64))
     , _agName      :: !(Maybe Text)
-    , _agId        :: !(Maybe Int64)
+    , _agId        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroup' with the minimum fields required to make a request.
@@ -3239,7 +3293,8 @@ agKind = lens _agKind (\ s a -> s{_agKind = a})
 -- be left blank.
 agAccountId :: Lens' AdvertiserGroup (Maybe Int64)
 agAccountId
-  = lens _agAccountId (\ s a -> s{_agAccountId = a})
+  = lens _agAccountId (\ s a -> s{_agAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this advertiser group. This is a required field and must be less
 -- than 256 characters long and unique among advertiser groups of the same
@@ -3249,7 +3304,9 @@ agName = lens _agName (\ s a -> s{_agName = a})
 
 -- | ID of this advertiser group. This is a read-only, auto-generated field.
 agId :: Lens' AdvertiserGroup (Maybe Int64)
-agId = lens _agId (\ s a -> s{_agId = a})
+agId
+  = lens _agId (\ s a -> s{_agId = a}) .
+      mapping _Coerce
 
 instance FromJSON AdvertiserGroup where
         parseJSON
@@ -3275,8 +3332,8 @@ instance ToJSON AdvertiserGroup where
 data TagData = TagData
     { _tdClickTag      :: !(Maybe Text)
     , _tdFormat        :: !(Maybe TagDataFormat)
-    , _tdCreativeId    :: !(Maybe Int64)
-    , _tdAdId          :: !(Maybe Int64)
+    , _tdCreativeId    :: !(Maybe (JSONText Int64))
+    , _tdAdId          :: !(Maybe (JSONText Int64))
     , _tdImpressionTag :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3317,10 +3374,13 @@ tdFormat = lens _tdFormat (\ s a -> s{_tdFormat = a})
 tdCreativeId :: Lens' TagData (Maybe Int64)
 tdCreativeId
   = lens _tdCreativeId (\ s a -> s{_tdCreativeId = a})
+      . mapping _Coerce
 
 -- | Ad associated with this placement tag.
 tdAdId :: Lens' TagData (Maybe Int64)
-tdAdId = lens _tdAdId (\ s a -> s{_tdAdId = a})
+tdAdId
+  = lens _tdAdId (\ s a -> s{_tdAdId = a}) .
+      mapping _Coerce
 
 -- | Tag string for serving an ad.
 tdImpressionTag :: Lens' TagData (Maybe Text)
@@ -3353,7 +3413,7 @@ instance ToJSON TagData where
 -- /See:/ 'dayPartTargeting' smart constructor.
 data DayPartTargeting = DayPartTargeting
     { _dptDaysOfWeek    :: !(Maybe [DayPartTargetingDaysOfWeekItem])
-    , _dptHoursOfDay    :: !(Maybe [Int32])
+    , _dptHoursOfDay    :: !(Maybe [JSONText Int32])
     , _dptUserLocalTime :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3430,7 +3490,7 @@ data CreativeOptimizationConfiguration = CreativeOptimizationConfiguration
     { _cocOptimizationModel     :: !(Maybe CreativeOptimizationConfigurationOptimizationModel)
     , _cocName                  :: !(Maybe Text)
     , _cocOptimizationActivitys :: !(Maybe [OptimizationActivity])
-    , _cocId                    :: !(Maybe Int64)
+    , _cocId                    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeOptimizationConfiguration' with the minimum fields required to make a request.
@@ -3477,7 +3537,9 @@ cocOptimizationActivitys
 -- when the campaign is inserted or updated. It can be null for existing
 -- campaigns.
 cocId :: Lens' CreativeOptimizationConfiguration (Maybe Int64)
-cocId = lens _cocId (\ s a -> s{_cocId = a})
+cocId
+  = lens _cocId (\ s a -> s{_cocId = a}) .
+      mapping _Coerce
 
 instance FromJSON CreativeOptimizationConfiguration
          where
@@ -3676,10 +3738,10 @@ instance ToJSON PlacementStrategiesListResponse where
 -- /See:/ 'subAccount' smart constructor.
 data SubAccount = SubAccount
     { _saKind                   :: !Text
-    , _saAvailablePermissionIds :: !(Maybe [Int64])
-    , _saAccountId              :: !(Maybe Int64)
+    , _saAvailablePermissionIds :: !(Maybe [JSONText Int64])
+    , _saAccountId              :: !(Maybe (JSONText Int64))
     , _saName                   :: !(Maybe Text)
-    , _saId                     :: !(Maybe Int64)
+    , _saId                     :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccount' with the minimum fields required to make a request.
@@ -3723,7 +3785,8 @@ saAvailablePermissionIds
 -- field that can be left blank.
 saAccountId :: Lens' SubAccount (Maybe Int64)
 saAccountId
-  = lens _saAccountId (\ s a -> s{_saAccountId = a})
+  = lens _saAccountId (\ s a -> s{_saAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this subaccount. This is a required field. Must be less than 128
 -- characters long and be unique among subaccounts of the same account.
@@ -3732,7 +3795,9 @@ saName = lens _saName (\ s a -> s{_saName = a})
 
 -- | ID of this subaccount. This is a read-only, auto-generated field.
 saId :: Lens' SubAccount (Maybe Int64)
-saId = lens _saId (\ s a -> s{_saId = a})
+saId
+  = lens _saId (\ s a -> s{_saId = a}) .
+      mapping _Coerce
 
 instance FromJSON SubAccount where
         parseJSON
@@ -3828,32 +3893,32 @@ data Ad = Ad
     , _aGeoTargeting                          :: !(Maybe GeoTargeting)
     , _aCreativeRotation                      :: !(Maybe CreativeRotation)
     , _aTechnologyTargeting                   :: !(Maybe TechnologyTargeting)
-    , _aAudienceSegmentId                     :: !(Maybe Int64)
+    , _aAudienceSegmentId                     :: !(Maybe (JSONText Int64))
     , _aDayPartTargeting                      :: !(Maybe DayPartTargeting)
     , _aSize                                  :: !(Maybe Size)
     , _aStartTime                             :: !(Maybe DateTime')
     , _aKind                                  :: !Text
     , _aClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
     , _aCampaignIdDimensionValue              :: !(Maybe DimensionValue)
-    , _aAdvertiserId                          :: !(Maybe Int64)
+    , _aAdvertiserId                          :: !(Maybe (JSONText Int64))
     , _aAdvertiserIdDimensionValue            :: !(Maybe DimensionValue)
     , _aSSLCompliant                          :: !(Maybe Bool)
-    , _aCampaignId                            :: !(Maybe Int64)
+    , _aCampaignId                            :: !(Maybe (JSONText Int64))
     , _aIdDimensionValue                      :: !(Maybe DimensionValue)
     , _aClickThroughURL                       :: !(Maybe ClickThroughURL)
     , _aDeliverySchedule                      :: !(Maybe DeliverySchedule)
     , _aEventTagOverrides                     :: !(Maybe [EventTagOverride])
     , _aActive                                :: !(Maybe Bool)
-    , _aAccountId                             :: !(Maybe Int64)
+    , _aAccountId                             :: !(Maybe (JSONText Int64))
     , _aName                                  :: !(Maybe Text)
     , _aKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
     , _aEndTime                               :: !(Maybe DateTime')
     , _aCreateInfo                            :: !(Maybe LastModifiedInfo)
     , _aLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
-    , _aId                                    :: !(Maybe Int64)
+    , _aId                                    :: !(Maybe (JSONText Int64))
     , _aSSLRequired                           :: !(Maybe Bool)
     , _aComments                              :: !(Maybe Text)
-    , _aSubAccountId                          :: !(Maybe Int64)
+    , _aSubAccountId                          :: !(Maybe (JSONText Int64))
     , _aType                                  :: !(Maybe AdType)
     , _aRemarketingListExpression             :: !(Maybe ListTargetingExpression)
     , _aDynamicClickTracker                   :: !(Maybe Bool)
@@ -4022,6 +4087,7 @@ aAudienceSegmentId :: Lens' Ad (Maybe Int64)
 aAudienceSegmentId
   = lens _aAudienceSegmentId
       (\ s a -> s{_aAudienceSegmentId = a})
+      . mapping _Coerce
 
 -- | Time and day targeting information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
@@ -4066,6 +4132,7 @@ aAdvertiserId :: Lens' Ad (Maybe Int64)
 aAdvertiserId
   = lens _aAdvertiserId
       (\ s a -> s{_aAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
@@ -4084,7 +4151,8 @@ aSSLCompliant
 -- | Campaign ID of this ad. This is a required field on insertion.
 aCampaignId :: Lens' Ad (Maybe Int64)
 aCampaignId
-  = lens _aCampaignId (\ s a -> s{_aCampaignId = a})
+  = lens _aCampaignId (\ s a -> s{_aCampaignId = a}) .
+      mapping _Coerce
 
 -- | Dimension value for the ID of this ad. This is a read-only,
 -- auto-generated field.
@@ -4124,7 +4192,8 @@ aActive = lens _aActive (\ s a -> s{_aActive = a})
 -- | Account ID of this ad. This is a read-only field that can be left blank.
 aAccountId :: Lens' Ad (Maybe Int64)
 aAccountId
-  = lens _aAccountId (\ s a -> s{_aAccountId = a})
+  = lens _aAccountId (\ s a -> s{_aAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this ad. This is a required field and must be less than 256
 -- characters long.
@@ -4159,7 +4228,8 @@ aLastModifiedInfo
 
 -- | ID of this ad. This is a read-only, auto-generated field.
 aId :: Lens' Ad (Maybe Int64)
-aId = lens _aId (\ s a -> s{_aId = a})
+aId
+  = lens _aId (\ s a -> s{_aId = a}) . mapping _Coerce
 
 -- | Whether this ad requires ssl. This is a read-only field that is
 -- auto-generated when the ad is inserted or updated.
@@ -4178,6 +4248,7 @@ aSubAccountId :: Lens' Ad (Maybe Int64)
 aSubAccountId
   = lens _aSubAccountId
       (\ s a -> s{_aSubAccountId = a})
+      . mapping _Coerce
 
 -- | Type of ad. This is a required field on insertion. Note that default ads
 -- (AD_SERVING_DEFAULT_AD) cannot be created directly (see Creative
@@ -4328,27 +4399,27 @@ instance ToJSON Ad where
 --
 -- /See:/ 'project' smart constructor.
 data Project = Project
-    { _pTargetClicks      :: !(Maybe Int64)
+    { _pTargetClicks      :: !(Maybe (JSONText Int64))
     , _pClientBillingCode :: !(Maybe Text)
-    , _pTargetCpmNanos    :: !(Maybe Int64)
-    , _pTargetConversions :: !(Maybe Int64)
-    , _pBudget            :: !(Maybe Int64)
+    , _pTargetCpmNanos    :: !(Maybe (JSONText Int64))
+    , _pTargetConversions :: !(Maybe (JSONText Int64))
+    , _pBudget            :: !(Maybe (JSONText Int64))
     , _pKind              :: !Text
-    , _pAdvertiserId      :: !(Maybe Int64)
+    , _pAdvertiserId      :: !(Maybe (JSONText Int64))
     , _pEndDate           :: !(Maybe Date')
     , _pOverview          :: !(Maybe Text)
-    , _pTargetImpressions :: !(Maybe Int64)
+    , _pTargetImpressions :: !(Maybe (JSONText Int64))
     , _pStartDate         :: !(Maybe Date')
-    , _pTargetCpcNanos    :: !(Maybe Int64)
-    , _pAccountId         :: !(Maybe Int64)
+    , _pTargetCpcNanos    :: !(Maybe (JSONText Int64))
+    , _pAccountId         :: !(Maybe (JSONText Int64))
     , _pName              :: !(Maybe Text)
     , _pLastModifiedInfo  :: !(Maybe LastModifiedInfo)
-    , _pId                :: !(Maybe Int64)
+    , _pId                :: !(Maybe (JSONText Int64))
     , _pAudienceAgeGroup  :: !(Maybe ProjectAudienceAgeGroup)
-    , _pSubAccountId      :: !(Maybe Int64)
+    , _pSubAccountId      :: !(Maybe (JSONText Int64))
     , _pAudienceGender    :: !(Maybe ProjectAudienceGender)
     , _pClientName        :: !(Maybe Text)
-    , _pTargetCpaNanos    :: !(Maybe Int64)
+    , _pTargetCpaNanos    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
@@ -4428,6 +4499,7 @@ pTargetClicks :: Lens' Project (Maybe Int64)
 pTargetClicks
   = lens _pTargetClicks
       (\ s a -> s{_pTargetClicks = a})
+      . mapping _Coerce
 
 -- | Client billing code of this project.
 pClientBillingCode :: Lens' Project (Maybe Text)
@@ -4440,19 +4512,23 @@ pTargetCpmNanos :: Lens' Project (Maybe Int64)
 pTargetCpmNanos
   = lens _pTargetCpmNanos
       (\ s a -> s{_pTargetCpmNanos = a})
+      . mapping _Coerce
 
 -- | Number of conversions that the advertiser is targeting.
 pTargetConversions :: Lens' Project (Maybe Int64)
 pTargetConversions
   = lens _pTargetConversions
       (\ s a -> s{_pTargetConversions = a})
+      . mapping _Coerce
 
 -- | Budget of this project in the currency specified by the current account.
 -- The value stored in this field represents only the non-fractional
 -- amount. For example, for USD, the smallest value that can be represented
 -- by this field is 1 US dollar.
 pBudget :: Lens' Project (Maybe Int64)
-pBudget = lens _pBudget (\ s a -> s{_pBudget = a})
+pBudget
+  = lens _pBudget (\ s a -> s{_pBudget = a}) .
+      mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#project\".
@@ -4464,6 +4540,7 @@ pAdvertiserId :: Lens' Project (Maybe Int64)
 pAdvertiserId
   = lens _pAdvertiserId
       (\ s a -> s{_pAdvertiserId = a})
+      . mapping _Coerce
 
 -- | End date of the project.
 pEndDate :: Lens' Project (Maybe Day)
@@ -4481,6 +4558,7 @@ pTargetImpressions :: Lens' Project (Maybe Int64)
 pTargetImpressions
   = lens _pTargetImpressions
       (\ s a -> s{_pTargetImpressions = a})
+      . mapping _Coerce
 
 -- | Start date of the project.
 pStartDate :: Lens' Project (Maybe Day)
@@ -4493,11 +4571,13 @@ pTargetCpcNanos :: Lens' Project (Maybe Int64)
 pTargetCpcNanos
   = lens _pTargetCpcNanos
       (\ s a -> s{_pTargetCpcNanos = a})
+      . mapping _Coerce
 
 -- | Account ID of this project.
 pAccountId :: Lens' Project (Maybe Int64)
 pAccountId
-  = lens _pAccountId (\ s a -> s{_pAccountId = a})
+  = lens _pAccountId (\ s a -> s{_pAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this project.
 pName :: Lens' Project (Maybe Text)
@@ -4511,7 +4591,8 @@ pLastModifiedInfo
 
 -- | ID of this project. This is a read-only, auto-generated field.
 pId :: Lens' Project (Maybe Int64)
-pId = lens _pId (\ s a -> s{_pId = a})
+pId
+  = lens _pId (\ s a -> s{_pId = a}) . mapping _Coerce
 
 -- | Audience age group of this project.
 pAudienceAgeGroup :: Lens' Project (Maybe ProjectAudienceAgeGroup)
@@ -4524,6 +4605,7 @@ pSubAccountId :: Lens' Project (Maybe Int64)
 pSubAccountId
   = lens _pSubAccountId
       (\ s a -> s{_pSubAccountId = a})
+      . mapping _Coerce
 
 -- | Audience gender of this project.
 pAudienceGender :: Lens' Project (Maybe ProjectAudienceGender)
@@ -4541,6 +4623,7 @@ pTargetCpaNanos :: Lens' Project (Maybe Int64)
 pTargetCpaNanos
   = lens _pTargetCpaNanos
       (\ s a -> s{_pTargetCpaNanos = a})
+      . mapping _Coerce
 
 instance FromJSON Project where
         parseJSON
@@ -4721,11 +4804,11 @@ instance ToJSON ReportFloodlightCriteria where
 --
 -- /See:/ 'size' smart constructor.
 data Size = Size
-    { _sHeight :: !(Maybe Int32)
+    { _sHeight :: !(Maybe (JSONText Int32))
     , _sKind   :: !Text
-    , _sWidth  :: !(Maybe Int32)
+    , _sWidth  :: !(Maybe (JSONText Int32))
     , _sIab    :: !(Maybe Bool)
-    , _sId     :: !(Maybe Int64)
+    , _sId     :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Size' with the minimum fields required to make a request.
@@ -4754,7 +4837,9 @@ size =
 
 -- | Height of this size.
 sHeight :: Lens' Size (Maybe Int32)
-sHeight = lens _sHeight (\ s a -> s{_sHeight = a})
+sHeight
+  = lens _sHeight (\ s a -> s{_sHeight = a}) .
+      mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#size\".
@@ -4763,7 +4848,9 @@ sKind = lens _sKind (\ s a -> s{_sKind = a})
 
 -- | Width of this size.
 sWidth :: Lens' Size (Maybe Int32)
-sWidth = lens _sWidth (\ s a -> s{_sWidth = a})
+sWidth
+  = lens _sWidth (\ s a -> s{_sWidth = a}) .
+      mapping _Coerce
 
 -- | IAB standard size. This is a read-only, auto-generated field.
 sIab :: Lens' Size (Maybe Bool)
@@ -4771,7 +4858,8 @@ sIab = lens _sIab (\ s a -> s{_sIab = a})
 
 -- | ID of this size. This is a read-only, auto-generated field.
 sId :: Lens' Size (Maybe Int64)
-sId = lens _sId (\ s a -> s{_sId = a})
+sId
+  = lens _sId (\ s a -> s{_sId = a}) . mapping _Coerce
 
 instance FromJSON Size where
         parseJSON
@@ -4798,7 +4886,7 @@ instance ToJSON Size where
 data ObjectFilter = ObjectFilter
     { _ofStatus    :: !(Maybe ObjectFilterStatus)
     , _ofKind      :: !Text
-    , _ofObjectIds :: !(Maybe [Int64])
+    , _ofObjectIds :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectFilter' with the minimum fields required to make a request.
@@ -4860,7 +4948,7 @@ instance ToJSON ObjectFilter where
 -- /See:/ 'reportsConfiguration' smart constructor.
 data ReportsConfiguration = ReportsConfiguration
     { _rcExposureToConversionEnabled :: !(Maybe Bool)
-    , _rcReportGenerationTimeZoneId  :: !(Maybe Int64)
+    , _rcReportGenerationTimeZoneId  :: !(Maybe (JSONText Int64))
     , _rcLookbackConfiguration       :: !(Maybe LookbackConfiguration)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4903,6 +4991,7 @@ rcReportGenerationTimeZoneId :: Lens' ReportsConfiguration (Maybe Int64)
 rcReportGenerationTimeZoneId
   = lens _rcReportGenerationTimeZoneId
       (\ s a -> s{_rcReportGenerationTimeZoneId = a})
+      . mapping _Coerce
 
 -- | Default lookback windows for new advertisers in this account.
 rcLookbackConfiguration :: Lens' ReportsConfiguration (Maybe LookbackConfiguration)
@@ -4935,7 +5024,7 @@ instance ToJSON ReportsConfiguration where
 -- /See:/ 'pricingSchedule' smart constructor.
 data PricingSchedule = PricingSchedule
     { _psTestingStartDate      :: !(Maybe Date')
-    , _psFloodlightActivityId  :: !(Maybe Int64)
+    , _psFloodlightActivityId  :: !(Maybe (JSONText Int64))
     , _psEndDate               :: !(Maybe Date')
     , _psDisregardOverdelivery :: !(Maybe Bool)
     , _psStartDate             :: !(Maybe Date')
@@ -4995,6 +5084,7 @@ psFloodlightActivityId :: Lens' PricingSchedule (Maybe Int64)
 psFloodlightActivityId
   = lens _psFloodlightActivityId
       (\ s a -> s{_psFloodlightActivityId = a})
+      . mapping _Coerce
 
 -- | Placement end date. This date must be later than, or the same day as,
 -- the placement start date, but not later than the campaign end date. If,
@@ -5087,7 +5177,7 @@ data PostalCode = PostalCode
     , _pcCode          :: !(Maybe Text)
     , _pcCountryCode   :: !(Maybe Text)
     , _pcId            :: !(Maybe Text)
-    , _pcCountryDartId :: !(Maybe Int64)
+    , _pcCountryDartId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostalCode' with the minimum fields required to make a request.
@@ -5138,6 +5228,7 @@ pcCountryDartId :: Lens' PostalCode (Maybe Int64)
 pcCountryDartId
   = lens _pcCountryDartId
       (\ s a -> s{_pcCountryDartId = a})
+      . mapping _Coerce
 
 instance FromJSON PostalCode where
         parseJSON
@@ -5220,7 +5311,7 @@ data Country = Country
     { _cKind        :: !Text
     , _cName        :: !(Maybe Text)
     , _cCountryCode :: !(Maybe Text)
-    , _cDartId      :: !(Maybe Int64)
+    , _cDartId      :: !(Maybe (JSONText Int64))
     , _cSSLEnabled  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5265,7 +5356,9 @@ cCountryCode
 -- | DART ID of this country. This is the ID used for targeting and
 -- generating reports.
 cDartId :: Lens' Country (Maybe Int64)
-cDartId = lens _cDartId (\ s a -> s{_cDartId = a})
+cDartId
+  = lens _cDartId (\ s a -> s{_cDartId = a}) .
+      mapping _Coerce
 
 -- | Whether ad serving supports secure servers in this country.
 cSSLEnabled :: Lens' Country (Maybe Bool)
@@ -5515,7 +5608,7 @@ instance ToJSON Pricing where
 data AudienceSegmentGroup = AudienceSegmentGroup
     { _asgAudienceSegments :: !(Maybe [AudienceSegment])
     , _asgName             :: !(Maybe Text)
-    , _asgId               :: !(Maybe Int64)
+    , _asgId               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudienceSegmentGroup' with the minimum fields required to make a request.
@@ -5553,7 +5646,9 @@ asgName = lens _asgName (\ s a -> s{_asgName = a})
 -- | ID of this audience segment group. This is a read-only, auto-generated
 -- field.
 asgId :: Lens' AudienceSegmentGroup (Maybe Int64)
-asgId = lens _asgId (\ s a -> s{_asgId = a})
+asgId
+  = lens _asgId (\ s a -> s{_asgId = a}) .
+      mapping _Coerce
 
 instance FromJSON AudienceSegmentGroup where
         parseJSON
@@ -5580,7 +5675,7 @@ data OperatingSystem = OperatingSystem
     , _osKind    :: !Text
     , _osName    :: !(Maybe Text)
     , _osMobile  :: !(Maybe Bool)
-    , _osDartId  :: !(Maybe Int64)
+    , _osDartId  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystem' with the minimum fields required to make a request.
@@ -5627,7 +5722,9 @@ osMobile = lens _osMobile (\ s a -> s{_osMobile = a})
 
 -- | DART ID of this operating system. This is the ID used for targeting.
 osDartId :: Lens' OperatingSystem (Maybe Int64)
-osDartId = lens _osDartId (\ s a -> s{_osDartId = a})
+osDartId
+  = lens _osDartId (\ s a -> s{_osDartId = a}) .
+      mapping _Coerce
 
 instance FromJSON OperatingSystem where
         parseJSON
@@ -5653,10 +5750,10 @@ instance ToJSON OperatingSystem where
 --
 -- /See:/ 'flight' smart constructor.
 data Flight = Flight
-    { _fRateOrCost :: !(Maybe Int64)
+    { _fRateOrCost :: !(Maybe (JSONText Int64))
     , _fEndDate    :: !(Maybe Date')
     , _fStartDate  :: !(Maybe Date')
-    , _fUnits      :: !(Maybe Int64)
+    , _fUnits      :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Flight' with the minimum fields required to make a request.
@@ -5683,7 +5780,8 @@ flight =
 -- | Rate or cost of this flight.
 fRateOrCost :: Lens' Flight (Maybe Int64)
 fRateOrCost
-  = lens _fRateOrCost (\ s a -> s{_fRateOrCost = a})
+  = lens _fRateOrCost (\ s a -> s{_fRateOrCost = a}) .
+      mapping _Coerce
 
 -- | Inventory item flight end date.
 fEndDate :: Lens' Flight (Maybe Day)
@@ -5699,7 +5797,9 @@ fStartDate
 
 -- | Units of this flight.
 fUnits :: Lens' Flight (Maybe Int64)
-fUnits = lens _fUnits (\ s a -> s{_fUnits = a})
+fUnits
+  = lens _fUnits (\ s a -> s{_fUnits = a}) .
+      mapping _Coerce
 
 instance FromJSON Flight where
         parseJSON
@@ -6145,18 +6245,18 @@ data AccountUserProFile = AccountUserProFile
     { _aupfEmail            :: !(Maybe Text)
     , _aupfUserRoleFilter   :: !(Maybe ObjectFilter)
     , _aupfAdvertiserFilter :: !(Maybe ObjectFilter)
-    , _aupfUserRoleId       :: !(Maybe Int64)
+    , _aupfUserRoleId       :: !(Maybe (JSONText Int64))
     , _aupfKind             :: !Text
     , _aupfLocale           :: !(Maybe Text)
     , _aupfSiteFilter       :: !(Maybe ObjectFilter)
     , _aupfTraffickerType   :: !(Maybe AccountUserProFileTraffickerType)
     , _aupfActive           :: !(Maybe Bool)
-    , _aupfAccountId        :: !(Maybe Int64)
+    , _aupfAccountId        :: !(Maybe (JSONText Int64))
     , _aupfName             :: !(Maybe Text)
-    , _aupfId               :: !(Maybe Int64)
+    , _aupfId               :: !(Maybe (JSONText Int64))
     , _aupfUserAccessType   :: !(Maybe AccountUserProFileUserAccessType)
     , _aupfComments         :: !(Maybe Text)
-    , _aupfSubAccountId     :: !(Maybe Int64)
+    , _aupfSubAccountId     :: !(Maybe (JSONText Int64))
     , _aupfCampaignFilter   :: !(Maybe ObjectFilter)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6241,6 +6341,7 @@ aupfUserRoleId :: Lens' AccountUserProFile (Maybe Int64)
 aupfUserRoleId
   = lens _aupfUserRoleId
       (\ s a -> s{_aupfUserRoleId = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#accountUserProfile\".
@@ -6282,6 +6383,7 @@ aupfAccountId :: Lens' AccountUserProFile (Maybe Int64)
 aupfAccountId
   = lens _aupfAccountId
       (\ s a -> s{_aupfAccountId = a})
+      . mapping _Coerce
 
 -- | Name of the user profile. This is a required field. Must be less than 64
 -- characters long, must be globally unique, and cannot contain whitespace
@@ -6291,7 +6393,9 @@ aupfName = lens _aupfName (\ s a -> s{_aupfName = a})
 
 -- | ID of the user profile. This is a read-only, auto-generated field.
 aupfId :: Lens' AccountUserProFile (Maybe Int64)
-aupfId = lens _aupfId (\ s a -> s{_aupfId = a})
+aupfId
+  = lens _aupfId (\ s a -> s{_aupfId = a}) .
+      mapping _Coerce
 
 -- | User type of the user profile. This is a read-only field that can be
 -- left blank.
@@ -6311,6 +6415,7 @@ aupfSubAccountId :: Lens' AccountUserProFile (Maybe Int64)
 aupfSubAccountId
   = lens _aupfSubAccountId
       (\ s a -> s{_aupfSubAccountId = a})
+      . mapping _Coerce
 
 -- | Filter that describes which campaigns are visible to the user profile.
 aupfCampaignFilter :: Lens' AccountUserProFile (Maybe ObjectFilter)
@@ -6576,7 +6681,7 @@ instance ToJSON UserRolePermissionGroupsListResponse
 --
 -- /See:/ 'placementTag' smart constructor.
 data PlacementTag = PlacementTag
-    { _ptPlacementId :: !(Maybe Int64)
+    { _ptPlacementId :: !(Maybe (JSONText Int64))
     , _ptTagDatas    :: !(Maybe [TagData])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6600,6 +6705,7 @@ ptPlacementId :: Lens' PlacementTag (Maybe Int64)
 ptPlacementId
   = lens _ptPlacementId
       (\ s a -> s{_ptPlacementId = a})
+      . mapping _Coerce
 
 -- | Tags generated for this placement.
 ptTagDatas :: Lens' PlacementTag [TagData]
@@ -6696,8 +6802,8 @@ data Creative = Creative
     , _creBackupImageTargetWindow             :: !(Maybe TargetWindow)
     , _creRenderingIdDimensionValue           :: !(Maybe DimensionValue)
     , _creCustomKeyValues                     :: !(Maybe [Text])
-    , _creVideoDuration                       :: !(Maybe Float)
-    , _creRenderingId                         :: !(Maybe Int64)
+    , _creVideoDuration                       :: !(Maybe (JSONText Float))
+    , _creRenderingId                         :: !(Maybe (JSONText Int64))
     , _creThirdPartyBackupImageImpressionsURL :: !(Maybe Text)
     , _creFsCommand                           :: !(Maybe FsCommand)
     , _creAllowScriptAccess                   :: !(Maybe Bool)
@@ -6710,8 +6816,8 @@ data Creative = Creative
     , _creKind                                :: !Text
     , _creSSLOverride                         :: !(Maybe Bool)
     , _creHTMLCode                            :: !(Maybe Text)
-    , _creAdvertiserId                        :: !(Maybe Int64)
-    , _creRequiredFlashVersion                :: !(Maybe Int32)
+    , _creAdvertiserId                        :: !(Maybe (JSONText Int64))
+    , _creRequiredFlashVersion                :: !(Maybe (JSONText Int32))
     , _creBackgRoundColor                     :: !(Maybe Text)
     , _creAdTagKeys                           :: !(Maybe [Text])
     , _creSkippable                           :: !(Maybe Bool)
@@ -6721,31 +6827,31 @@ data Creative = Creative
     , _creCommercialId                        :: !(Maybe Text)
     , _creActive                              :: !(Maybe Bool)
     , _creExitCustomEvents                    :: !(Maybe [CreativeCustomEvent])
-    , _creAccountId                           :: !(Maybe Int64)
+    , _creAccountId                           :: !(Maybe (JSONText Int64))
     , _creBackupImageClickThroughURL          :: !(Maybe Text)
     , _creName                                :: !(Maybe Text)
     , _creOverrideCss                         :: !(Maybe Text)
     , _creVideoDescription                    :: !(Maybe Text)
     , _creClickTags                           :: !(Maybe [ClickTag])
     , _creAdParameters                        :: !(Maybe Text)
-    , _creVersion                             :: !(Maybe Int32)
-    , _creLatestTraffickedCreativeId          :: !(Maybe Int64)
+    , _creVersion                             :: !(Maybe (JSONText Int32))
+    , _creLatestTraffickedCreativeId          :: !(Maybe (JSONText Int64))
     , _creThirdPartyRichMediaImpressionsURL   :: !(Maybe Text)
     , _creLastModifiedInfo                    :: !(Maybe LastModifiedInfo)
-    , _creId                                  :: !(Maybe Int64)
-    , _creStudioAdvertiserId                  :: !(Maybe Int64)
+    , _creId                                  :: !(Maybe (JSONText Int64))
+    , _creStudioAdvertiserId                  :: !(Maybe (JSONText Int64))
     , _creCreativeAssets                      :: !(Maybe [CreativeAsset])
-    , _creSubAccountId                        :: !(Maybe Int64)
+    , _creSubAccountId                        :: !(Maybe (JSONText Int64))
     , _creType                                :: !(Maybe CreativeType)
     , _creTimerCustomEvents                   :: !(Maybe [CreativeCustomEvent])
-    , _creStudioCreativeId                    :: !(Maybe Int64)
+    , _creStudioCreativeId                    :: !(Maybe (JSONText Int64))
     , _creCompatibility                       :: !(Maybe [CreativeCompatibilityItem])
     , _creBackupImageFeatures                 :: !(Maybe [CreativeBackupImageFeaturesItem])
     , _creArtworkType                         :: !(Maybe CreativeArtworkType)
     , _creArchived                            :: !(Maybe Bool)
-    , _creCompanionCreatives                  :: !(Maybe [Int64])
-    , _creTotalFileSize                       :: !(Maybe Int64)
-    , _creStudioTraffickedCreativeId          :: !(Maybe Int64)
+    , _creCompanionCreatives                  :: !(Maybe [JSONText Int64])
+    , _creTotalFileSize                       :: !(Maybe (JSONText Int64))
+    , _creStudioTraffickedCreativeId          :: !(Maybe (JSONText Int64))
     , _creRedirectURL                         :: !(Maybe Text)
     , _creAutoAdvanceImages                   :: !(Maybe Bool)
     , _creCreativeFieldAssignments            :: !(Maybe [CreativeFieldAssignment])
@@ -6974,6 +7080,7 @@ creVideoDuration :: Lens' Creative (Maybe Float)
 creVideoDuration
   = lens _creVideoDuration
       (\ s a -> s{_creVideoDuration = a})
+      . mapping _Coerce
 
 -- | ID of current rendering version. This is a read-only field. Applicable
 -- to all creative types.
@@ -6981,6 +7088,7 @@ creRenderingId :: Lens' Creative (Maybe Int64)
 creRenderingId
   = lens _creRenderingId
       (\ s a -> s{_creRenderingId = a})
+      . mapping _Coerce
 
 -- | Third-party URL used to record backup image impressions. Applicable to
 -- the following creative types: all RICH_MEDIA
@@ -7085,6 +7193,7 @@ creAdvertiserId :: Lens' Creative (Maybe Int64)
 creAdvertiserId
   = lens _creAdvertiserId
       (\ s a -> s{_creAdvertiserId = a})
+      . mapping _Coerce
 
 -- | The internal Flash version for this creative as calculated by
 -- DoubleClick Studio. This is a read-only field. Applicable to the
@@ -7094,6 +7203,7 @@ creRequiredFlashVersion :: Lens' Creative (Maybe Int32)
 creRequiredFlashVersion
   = lens _creRequiredFlashVersion
       (\ s a -> s{_creRequiredFlashVersion = a})
+      . mapping _Coerce
 
 -- | The 6-character HTML color code, beginning with #, for the background of
 -- the window area where the Flash file is displayed. Default is white.
@@ -7169,6 +7279,7 @@ creExitCustomEvents
 creAccountId :: Lens' Creative (Maybe Int64)
 creAccountId
   = lens _creAccountId (\ s a -> s{_creAccountId = a})
+      . mapping _Coerce
 
 -- | Click-through URL for backup image. Applicable to the following creative
 -- types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.
@@ -7231,7 +7342,8 @@ creAdParameters
 -- to all creative types.
 creVersion :: Lens' Creative (Maybe Int32)
 creVersion
-  = lens _creVersion (\ s a -> s{_creVersion = a})
+  = lens _creVersion (\ s a -> s{_creVersion = a}) .
+      mapping _Coerce
 
 -- | Latest Studio trafficked creative ID associated with rich media and
 -- VPAID creatives. This is a read-only field. Applicable to the following
@@ -7240,6 +7352,7 @@ creLatestTraffickedCreativeId :: Lens' Creative (Maybe Int64)
 creLatestTraffickedCreativeId
   = lens _creLatestTraffickedCreativeId
       (\ s a -> s{_creLatestTraffickedCreativeId = a})
+      . mapping _Coerce
 
 -- | Third-party URL used to record rich media impressions. Applicable to the
 -- following creative types: all RICH_MEDIA
@@ -7259,7 +7372,9 @@ creLastModifiedInfo
 -- | ID of this creative. This is a read-only, auto-generated field.
 -- Applicable to all creative types.
 creId :: Lens' Creative (Maybe Int64)
-creId = lens _creId (\ s a -> s{_creId = a})
+creId
+  = lens _creId (\ s a -> s{_creId = a}) .
+      mapping _Coerce
 
 -- | Studio advertiser ID associated with rich media and VPAID creatives.
 -- This is a read-only field. Applicable to the following creative types:
@@ -7268,6 +7383,7 @@ creStudioAdvertiserId :: Lens' Creative (Maybe Int64)
 creStudioAdvertiserId
   = lens _creStudioAdvertiserId
       (\ s a -> s{_creStudioAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Assets associated with a creative. Applicable to all but the following
 -- creative types: INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and
@@ -7286,6 +7402,7 @@ creSubAccountId :: Lens' Creative (Maybe Int64)
 creSubAccountId
   = lens _creSubAccountId
       (\ s a -> s{_creSubAccountId = a})
+      . mapping _Coerce
 
 -- | Type of this creative.This is a required field. Applicable to all
 -- creative types.
@@ -7308,6 +7425,7 @@ creStudioCreativeId :: Lens' Creative (Maybe Int64)
 creStudioCreativeId
   = lens _creStudioCreativeId
       (\ s a -> s{_creStudioCreativeId = a})
+      . mapping _Coerce
 
 -- | Compatibilities associated with this creative. This is a read-only
 -- field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or
@@ -7371,6 +7489,7 @@ creTotalFileSize :: Lens' Creative (Maybe Int64)
 creTotalFileSize
   = lens _creTotalFileSize
       (\ s a -> s{_creTotalFileSize = a})
+      . mapping _Coerce
 
 -- | Studio trafficked creative ID associated with rich media and VPAID
 -- creatives. This is a read-only field. Applicable to the following
@@ -7379,6 +7498,7 @@ creStudioTraffickedCreativeId :: Lens' Creative (Maybe Int64)
 creStudioTraffickedCreativeId
   = lens _creStudioTraffickedCreativeId
       (\ s a -> s{_creStudioTraffickedCreativeId = a})
+      . mapping _Coerce
 
 -- | URL of hosted image or another ad tag. This is a required field when
 -- applicable. Applicable to the following creative types:
@@ -7552,7 +7672,7 @@ data SiteContact = SiteContact
     , _scLastName    :: !(Maybe Text)
     , _scAddress     :: !(Maybe Text)
     , _scFirstName   :: !(Maybe Text)
-    , _scId          :: !(Maybe Int64)
+    , _scId          :: !(Maybe (JSONText Int64))
     , _scTitle       :: !(Maybe Text)
     , _scContactType :: !(Maybe SiteContactContactType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7615,7 +7735,9 @@ scFirstName
 
 -- | ID of this site contact. This is a read-only, auto-generated field.
 scId :: Lens' SiteContact (Maybe Int64)
-scId = lens _scId (\ s a -> s{_scId = a})
+scId
+  = lens _scId (\ s a -> s{_scId = a}) .
+      mapping _Coerce
 
 -- | Title or designation of this site contact.
 scTitle :: Lens' SiteContact (Maybe Text)
@@ -7796,19 +7918,19 @@ instance ToJSON DateRange where
 data Report = Report
     { _rDelivery                    :: !(Maybe ReportDelivery)
     , _rEtag                        :: !(Maybe Text)
-    , _rOwnerProFileId              :: !(Maybe Int64)
+    , _rOwnerProFileId              :: !(Maybe (JSONText Int64))
     , _rSchedule                    :: !(Maybe ReportSchedule)
     , _rPathToConversionCriteria    :: !(Maybe ReportPathToConversionCriteria)
     , _rKind                        :: !Text
     , _rFormat                      :: !(Maybe ReportFormat)
     , _rReachCriteria               :: !(Maybe ReportReachCriteria)
-    , _rLastModifiedTime            :: !(Maybe Word64)
-    , _rAccountId                   :: !(Maybe Int64)
+    , _rLastModifiedTime            :: !(Maybe (JSONText Word64))
+    , _rAccountId                   :: !(Maybe (JSONText Int64))
     , _rName                        :: !(Maybe Text)
-    , _rId                          :: !(Maybe Int64)
+    , _rId                          :: !(Maybe (JSONText Int64))
     , _rCrossDimensionReachCriteria :: !(Maybe ReportCrossDimensionReachCriteria)
     , _rType                        :: !(Maybe ReportType)
-    , _rSubAccountId                :: !(Maybe Int64)
+    , _rSubAccountId                :: !(Maybe (JSONText Int64))
     , _rFloodlightCriteria          :: !(Maybe ReportFloodlightCriteria)
     , _rCriteria                    :: !(Maybe ReportCriteria)
     , _rFileName                    :: !(Maybe Text)
@@ -7891,6 +8013,7 @@ rOwnerProFileId :: Lens' Report (Maybe Int64)
 rOwnerProFileId
   = lens _rOwnerProFileId
       (\ s a -> s{_rOwnerProFileId = a})
+      . mapping _Coerce
 
 -- | The report\'s schedule. Can only be set if the report\'s \'dateRange\'
 -- is a relative date range and the relative date range is not \"TODAY\".
@@ -7927,11 +8050,13 @@ rLastModifiedTime :: Lens' Report (Maybe Word64)
 rLastModifiedTime
   = lens _rLastModifiedTime
       (\ s a -> s{_rLastModifiedTime = a})
+      . mapping _Coerce
 
 -- | The account ID to which this report belongs.
 rAccountId :: Lens' Report (Maybe Int64)
 rAccountId
-  = lens _rAccountId (\ s a -> s{_rAccountId = a})
+  = lens _rAccountId (\ s a -> s{_rAccountId = a}) .
+      mapping _Coerce
 
 -- | The name of the report.
 rName :: Lens' Report (Maybe Text)
@@ -7939,7 +8064,8 @@ rName = lens _rName (\ s a -> s{_rName = a})
 
 -- | The unique ID identifying this report resource.
 rId :: Lens' Report (Maybe Int64)
-rId = lens _rId (\ s a -> s{_rId = a})
+rId
+  = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
 
 -- | The report criteria for a report of type \"CROSS_DIMENSION_REACH\".
 rCrossDimensionReachCriteria :: Lens' Report (Maybe ReportCrossDimensionReachCriteria)
@@ -7956,6 +8082,7 @@ rSubAccountId :: Lens' Report (Maybe Int64)
 rSubAccountId
   = lens _rSubAccountId
       (\ s a -> s{_rSubAccountId = a})
+      . mapping _Coerce
 
 -- | The report criteria for a report of type \"FLOODLIGHT\".
 rFloodlightCriteria :: Lens' Report (Maybe ReportFloodlightCriteria)
@@ -8024,26 +8151,26 @@ instance ToJSON Report where
 -- /See:/ 'campaign' smart constructor.
 data Campaign = Campaign
     { _camCreativeOptimizationConfiguration            :: !(Maybe CreativeOptimizationConfiguration)
-    , _camCreativeGroupIds                             :: !(Maybe [Int64])
+    , _camCreativeGroupIds                             :: !(Maybe [JSONText Int64])
     , _camNielsenOCREnabled                            :: !(Maybe Bool)
     , _camKind                                         :: !Text
     , _camClickThroughURLSuffixProperties              :: !(Maybe ClickThroughURLSuffixProperties)
-    , _camAdvertiserId                                 :: !(Maybe Int64)
+    , _camAdvertiserId                                 :: !(Maybe (JSONText Int64))
     , _camEndDate                                      :: !(Maybe Date')
     , _camAdvertiserIdDimensionValue                   :: !(Maybe DimensionValue)
     , _camIdDimensionValue                             :: !(Maybe DimensionValue)
     , _camEventTagOverrides                            :: !(Maybe [EventTagOverride])
     , _camLookbackConfiguration                        :: !(Maybe LookbackConfiguration)
     , _camStartDate                                    :: !(Maybe Date')
-    , _camAccountId                                    :: !(Maybe Int64)
+    , _camAccountId                                    :: !(Maybe (JSONText Int64))
     , _camComscoreVceEnabled                           :: !(Maybe Bool)
     , _camName                                         :: !(Maybe Text)
-    , _camAdvertiserGroupId                            :: !(Maybe Int64)
+    , _camAdvertiserGroupId                            :: !(Maybe (JSONText Int64))
     , _camBillingInvoiceCode                           :: !(Maybe Text)
     , _camCreateInfo                                   :: !(Maybe LastModifiedInfo)
     , _camLastModifiedInfo                             :: !(Maybe LastModifiedInfo)
-    , _camId                                           :: !(Maybe Int64)
-    , _camSubAccountId                                 :: !(Maybe Int64)
+    , _camId                                           :: !(Maybe (JSONText Int64))
+    , _camSubAccountId                                 :: !(Maybe (JSONText Int64))
     , _camAdditionalCreativeOptimizationConfigurations :: !(Maybe [CreativeOptimizationConfiguration])
     , _camExternalId                                   :: !(Maybe Text)
     , _camComment                                      :: !(Maybe Text)
@@ -8183,6 +8310,7 @@ camAdvertiserId :: Lens' Campaign (Maybe Int64)
 camAdvertiserId
   = lens _camAdvertiserId
       (\ s a -> s{_camAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Date on which the campaign will stop running. On insert, the end date
 -- must be today or a future date. The end date must be later than or be
@@ -8238,6 +8366,7 @@ camStartDate
 camAccountId :: Lens' Campaign (Maybe Int64)
 camAccountId
   = lens _camAccountId (\ s a -> s{_camAccountId = a})
+      . mapping _Coerce
 
 -- | Whether comScore vCE reports are enabled for this campaign.
 camComscoreVceEnabled :: Lens' Campaign (Maybe Bool)
@@ -8255,6 +8384,7 @@ camAdvertiserGroupId :: Lens' Campaign (Maybe Int64)
 camAdvertiserGroupId
   = lens _camAdvertiserGroupId
       (\ s a -> s{_camAdvertiserGroupId = a})
+      . mapping _Coerce
 
 -- | Billing invoice code included in the DCM client billing invoices
 -- associated with the campaign.
@@ -8279,7 +8409,9 @@ camLastModifiedInfo
 
 -- | ID of this campaign. This is a read-only auto-generated field.
 camId :: Lens' Campaign (Maybe Int64)
-camId = lens _camId (\ s a -> s{_camId = a})
+camId
+  = lens _camId (\ s a -> s{_camId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this campaign. This is a read-only field that can be
 -- left blank.
@@ -8287,6 +8419,7 @@ camSubAccountId :: Lens' Campaign (Maybe Int64)
 camSubAccountId
   = lens _camSubAccountId
       (\ s a -> s{_camSubAccountId = a})
+      . mapping _Coerce
 
 -- | Additional creative optimization configurations for the campaign.
 camAdditionalCreativeOptimizationConfigurations :: Lens' Campaign [CreativeOptimizationConfiguration]
@@ -8470,7 +8603,7 @@ data ClickThroughURL = ClickThroughURL
     { _ctuDefaultLandingPage      :: !(Maybe Bool)
     , _ctuComputedClickThroughURL :: !(Maybe Text)
     , _ctuCustomClickThroughURL   :: !(Maybe Text)
-    , _ctuLandingPageId           :: !(Maybe Int64)
+    , _ctuLandingPageId           :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClickThroughURL' with the minimum fields required to make a request.
@@ -8525,6 +8658,7 @@ ctuLandingPageId :: Lens' ClickThroughURL (Maybe Int64)
 ctuLandingPageId
   = lens _ctuLandingPageId
       (\ s a -> s{_ctuLandingPageId = a})
+      . mapping _Coerce
 
 instance FromJSON ClickThroughURL where
         parseJSON
@@ -8830,24 +8964,24 @@ instance ToJSON CreativesListResponse where
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account
-    { _aaAccountPermissionIds   :: !(Maybe [Int64])
-    , _aaMaximumImageSize       :: !(Maybe Int64)
-    , _aaCurrencyId             :: !(Maybe Int64)
+    { _aaAccountPermissionIds   :: !(Maybe [JSONText Int64])
+    , _aaMaximumImageSize       :: !(Maybe (JSONText Int64))
+    , _aaCurrencyId             :: !(Maybe (JSONText Int64))
     , _aaReportsConfiguration   :: !(Maybe ReportsConfiguration)
     , _aaNielsenOCREnabled      :: !(Maybe Bool)
     , _aaKind                   :: !Text
     , _aaLocale                 :: !(Maybe Text)
     , _aaActive                 :: !(Maybe Bool)
-    , _aaAvailablePermissionIds :: !(Maybe [Int64])
-    , _aaTeaserSizeLimit        :: !(Maybe Int64)
+    , _aaAvailablePermissionIds :: !(Maybe [JSONText Int64])
+    , _aaTeaserSizeLimit        :: !(Maybe (JSONText Int64))
     , _aaComscoreVceEnabled     :: !(Maybe Bool)
     , _aaActiveViewOptOut       :: !(Maybe Bool)
     , _aaName                   :: !(Maybe Text)
     , _aaAccountProFile         :: !(Maybe AccountAccountProFile)
-    , _aaId                     :: !(Maybe Int64)
-    , _aaCountryId              :: !(Maybe Int64)
+    , _aaId                     :: !(Maybe (JSONText Int64))
+    , _aaCountryId              :: !(Maybe (JSONText Int64))
     , _aaActiveAdsLimitTier     :: !(Maybe AccountActiveAdsLimitTier)
-    , _aaDefaultCreativeSizeId  :: !(Maybe Int64)
+    , _aaDefaultCreativeSizeId  :: !(Maybe (JSONText Int64))
     , _aaDescription            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8930,6 +9064,7 @@ aaMaximumImageSize :: Lens' Account (Maybe Int64)
 aaMaximumImageSize
   = lens _aaMaximumImageSize
       (\ s a -> s{_aaMaximumImageSize = a})
+      . mapping _Coerce
 
 -- | ID of currency associated with this account. This is a required field.
 -- Acceptable values are: - \"1\" for USD - \"2\" for GBP - \"3\" for ESP -
@@ -8944,6 +9079,7 @@ aaMaximumImageSize
 aaCurrencyId :: Lens' Account (Maybe Int64)
 aaCurrencyId
   = lens _aaCurrencyId (\ s a -> s{_aaCurrencyId = a})
+      . mapping _Coerce
 
 -- | Reporting configuration of this account.
 aaReportsConfiguration :: Lens' Account (Maybe ReportsConfiguration)
@@ -8990,6 +9126,7 @@ aaTeaserSizeLimit :: Lens' Account (Maybe Int64)
 aaTeaserSizeLimit
   = lens _aaTeaserSizeLimit
       (\ s a -> s{_aaTeaserSizeLimit = a})
+      . mapping _Coerce
 
 -- | Whether campaigns created in this account will be enabled for comScore
 -- vCE by default.
@@ -9019,12 +9156,15 @@ aaAccountProFile
 
 -- | ID of this account. This is a read-only, auto-generated field.
 aaId :: Lens' Account (Maybe Int64)
-aaId = lens _aaId (\ s a -> s{_aaId = a})
+aaId
+  = lens _aaId (\ s a -> s{_aaId = a}) .
+      mapping _Coerce
 
 -- | ID of the country associated with this account.
 aaCountryId :: Lens' Account (Maybe Int64)
 aaCountryId
-  = lens _aaCountryId (\ s a -> s{_aaCountryId = a})
+  = lens _aaCountryId (\ s a -> s{_aaCountryId = a}) .
+      mapping _Coerce
 
 -- | Maximum number of active ads allowed for this account.
 aaActiveAdsLimitTier :: Lens' Account (Maybe AccountActiveAdsLimitTier)
@@ -9037,6 +9177,7 @@ aaDefaultCreativeSizeId :: Lens' Account (Maybe Int64)
 aaDefaultCreativeSizeId
   = lens _aaDefaultCreativeSizeId
       (\ s a -> s{_aaDefaultCreativeSizeId = a})
+      . mapping _Coerce
 
 -- | Description of this account.
 aaDescription :: Lens' Account (Maybe Text)
@@ -9171,9 +9312,9 @@ instance ToJSON AccountUserProFilesListResponse where
 -- /See:/ 'contentCategory' smart constructor.
 data ContentCategory = ContentCategory
     { _conKind      :: !Text
-    , _conAccountId :: !(Maybe Int64)
+    , _conAccountId :: !(Maybe (JSONText Int64))
     , _conName      :: !(Maybe Text)
-    , _conId        :: !(Maybe Int64)
+    , _conId        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategory' with the minimum fields required to make a request.
@@ -9207,6 +9348,7 @@ conKind = lens _conKind (\ s a -> s{_conKind = a})
 conAccountId :: Lens' ContentCategory (Maybe Int64)
 conAccountId
   = lens _conAccountId (\ s a -> s{_conAccountId = a})
+      . mapping _Coerce
 
 -- | Name of this content category. This is a required field and must be less
 -- than 256 characters long and unique among content categories of the same
@@ -9216,7 +9358,9 @@ conName = lens _conName (\ s a -> s{_conName = a})
 
 -- | ID of this content category. This is a read-only, auto-generated field.
 conId :: Lens' ContentCategory (Maybe Int64)
-conId = lens _conId (\ s a -> s{_conId = a})
+conId
+  = lens _conId (\ s a -> s{_conId = a}) .
+      mapping _Coerce
 
 instance FromJSON ContentCategory where
         parseJSON
@@ -9341,7 +9485,7 @@ instance ToJSON ReportCompatibleFields where
 data DeliverySchedule = DeliverySchedule
     { _dsHardCutoff      :: !(Maybe Bool)
     , _dsPriority        :: !(Maybe DeliverySchedulePriority)
-    , _dsImpressionRatio :: !(Maybe Int64)
+    , _dsImpressionRatio :: !(Maybe (JSONText Int64))
     , _dsFrequencyCap    :: !(Maybe FrequencyCap)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9387,6 +9531,7 @@ dsImpressionRatio :: Lens' DeliverySchedule (Maybe Int64)
 dsImpressionRatio
   = lens _dsImpressionRatio
       (\ s a -> s{_dsImpressionRatio = a})
+      . mapping _Coerce
 
 -- | Limit on the number of times an individual user can be served the ad
 -- within a specified period of time.
@@ -9423,18 +9568,18 @@ instance ToJSON DeliverySchedule where
 --
 -- /See:/ 'remarketingList' smart constructor.
 data RemarketingList = RemarketingList
-    { _rlListSize                   :: !(Maybe Int64)
+    { _rlListSize                   :: !(Maybe (JSONText Int64))
     , _rlListPopulationRule         :: !(Maybe ListPopulationRule)
-    , _rlLifeSpan                   :: !(Maybe Int64)
+    , _rlLifeSpan                   :: !(Maybe (JSONText Int64))
     , _rlKind                       :: !Text
-    , _rlAdvertiserId               :: !(Maybe Int64)
+    , _rlAdvertiserId               :: !(Maybe (JSONText Int64))
     , _rlAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _rlActive                     :: !(Maybe Bool)
-    , _rlAccountId                  :: !(Maybe Int64)
+    , _rlAccountId                  :: !(Maybe (JSONText Int64))
     , _rlName                       :: !(Maybe Text)
     , _rlListSource                 :: !(Maybe RemarketingListListSource)
-    , _rlId                         :: !(Maybe Int64)
-    , _rlSubAccountId               :: !(Maybe Int64)
+    , _rlId                         :: !(Maybe (JSONText Int64))
+    , _rlSubAccountId               :: !(Maybe (JSONText Int64))
     , _rlDescription                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9489,7 +9634,8 @@ remarketingList =
 -- | Number of users currently in the list. This is a read-only field.
 rlListSize :: Lens' RemarketingList (Maybe Int64)
 rlListSize
-  = lens _rlListSize (\ s a -> s{_rlListSize = a})
+  = lens _rlListSize (\ s a -> s{_rlListSize = a}) .
+      mapping _Coerce
 
 -- | Rule used to populate the remarketing list with users.
 rlListPopulationRule :: Lens' RemarketingList (Maybe ListPopulationRule)
@@ -9501,7 +9647,8 @@ rlListPopulationRule
 -- an impression.
 rlLifeSpan :: Lens' RemarketingList (Maybe Int64)
 rlLifeSpan
-  = lens _rlLifeSpan (\ s a -> s{_rlLifeSpan = a})
+  = lens _rlLifeSpan (\ s a -> s{_rlLifeSpan = a}) .
+      mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#remarketingList\".
@@ -9514,6 +9661,7 @@ rlAdvertiserId :: Lens' RemarketingList (Maybe Int64)
 rlAdvertiserId
   = lens _rlAdvertiserId
       (\ s a -> s{_rlAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
@@ -9530,7 +9678,8 @@ rlActive = lens _rlActive (\ s a -> s{_rlActive = a})
 -- field that is only returned in GET requests.
 rlAccountId :: Lens' RemarketingList (Maybe Int64)
 rlAccountId
-  = lens _rlAccountId (\ s a -> s{_rlAccountId = a})
+  = lens _rlAccountId (\ s a -> s{_rlAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of the remarketing list. This is a required field. Must be no
 -- greater than 128 characters long.
@@ -9544,7 +9693,9 @@ rlListSource
 
 -- | Remarketing list ID. This is a read-only, auto-generated field.
 rlId :: Lens' RemarketingList (Maybe Int64)
-rlId = lens _rlId (\ s a -> s{_rlId = a})
+rlId
+  = lens _rlId (\ s a -> s{_rlId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this remarketing list. This is a read-only,
 -- auto-generated field that is only returned in GET requests.
@@ -9552,6 +9703,7 @@ rlSubAccountId :: Lens' RemarketingList (Maybe Int64)
 rlSubAccountId
   = lens _rlSubAccountId
       (\ s a -> s{_rlSubAccountId = a})
+      . mapping _Coerce
 
 -- | Remarketing list description.
 rlDescription :: Lens' RemarketingList (Maybe Text)
@@ -9760,7 +9912,7 @@ instance ToJSON FloodlightReportCompatibleFields
 data UserRolePermissionGroup = UserRolePermissionGroup
     { _urpgKind :: !Text
     , _urpgName :: !(Maybe Text)
-    , _urpgId   :: !(Maybe Int64)
+    , _urpgId   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionGroup' with the minimum fields required to make a request.
@@ -9792,7 +9944,9 @@ urpgName = lens _urpgName (\ s a -> s{_urpgName = a})
 
 -- | ID of this user role permission.
 urpgId :: Lens' UserRolePermissionGroup (Maybe Int64)
-urpgId = lens _urpgId (\ s a -> s{_urpgId = a})
+urpgId
+  = lens _urpgId (\ s a -> s{_urpgId = a}) .
+      mapping _Coerce
 
 instance FromJSON UserRolePermissionGroup where
         parseJSON
@@ -9899,13 +10053,13 @@ instance ToJSON TagSetting where
 --
 -- /See:/ 'reportPathToConversionCriteriaReportProperties' smart constructor.
 data ReportPathToConversionCriteriaReportProperties = ReportPathToConversionCriteriaReportProperties
-    { _rptccrpMaximumInteractionGap                :: !(Maybe Int32)
-    , _rptccrpMaximumClickInteractions             :: !(Maybe Int32)
+    { _rptccrpMaximumInteractionGap                :: !(Maybe (JSONText Int32))
+    , _rptccrpMaximumClickInteractions             :: !(Maybe (JSONText Int32))
     , _rptccrpPivotOnInteractionPath               :: !(Maybe Bool)
-    , _rptccrpMaximumImpressionInteractions        :: !(Maybe Int32)
+    , _rptccrpMaximumImpressionInteractions        :: !(Maybe (JSONText Int32))
     , _rptccrpIncludeUnattributedIPConversions     :: !(Maybe Bool)
-    , _rptccrpImpressionsLookbackWindow            :: !(Maybe Int32)
-    , _rptccrpClicksLookbackWindow                 :: !(Maybe Int32)
+    , _rptccrpImpressionsLookbackWindow            :: !(Maybe (JSONText Int32))
+    , _rptccrpClicksLookbackWindow                 :: !(Maybe (JSONText Int32))
     , _rptccrpIncludeUnattributedCookieConversions :: !(Maybe Bool)
     , _rptccrpIncludeAttributedIPConversions       :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9952,6 +10106,7 @@ rptccrpMaximumInteractionGap :: Lens' ReportPathToConversionCriteriaReportProper
 rptccrpMaximumInteractionGap
   = lens _rptccrpMaximumInteractionGap
       (\ s a -> s{_rptccrpMaximumInteractionGap = a})
+      . mapping _Coerce
 
 -- | The maximum number of click interactions to include in the report.
 -- Advertisers currently paying for E2C reports get up to 200 (100 clicks,
@@ -9961,6 +10116,7 @@ rptccrpMaximumClickInteractions :: Lens' ReportPathToConversionCriteriaReportPro
 rptccrpMaximumClickInteractions
   = lens _rptccrpMaximumClickInteractions
       (\ s a -> s{_rptccrpMaximumClickInteractions = a})
+      . mapping _Coerce
 
 -- | Enable pivoting on interaction path.
 rptccrpPivotOnInteractionPath :: Lens' ReportPathToConversionCriteriaReportProperties (Maybe Bool)
@@ -9977,6 +10133,7 @@ rptccrpMaximumImpressionInteractions
   = lens _rptccrpMaximumImpressionInteractions
       (\ s a ->
          s{_rptccrpMaximumImpressionInteractions = a})
+      . mapping _Coerce
 
 -- | Include conversions that have no associated cookies and no exposures.
 -- It’s therefore impossible to know how the user was exposed to your ads
@@ -9995,6 +10152,7 @@ rptccrpImpressionsLookbackWindow :: Lens' ReportPathToConversionCriteriaReportPr
 rptccrpImpressionsLookbackWindow
   = lens _rptccrpImpressionsLookbackWindow
       (\ s a -> s{_rptccrpImpressionsLookbackWindow = a})
+      . mapping _Coerce
 
 -- | DFA checks to see if a click interaction occurred within the specified
 -- period of time before a conversion. By default the value is pulled from
@@ -10003,6 +10161,7 @@ rptccrpClicksLookbackWindow :: Lens' ReportPathToConversionCriteriaReportPropert
 rptccrpClicksLookbackWindow
   = lens _rptccrpClicksLookbackWindow
       (\ s a -> s{_rptccrpClicksLookbackWindow = a})
+      . mapping _Coerce
 
 -- | Include conversions of users with a DoubleClick cookie but without an
 -- exposure. That means the user did not click or see an ad from the
@@ -10189,8 +10348,8 @@ data MobileCarrier = MobileCarrier
     { _mcKind          :: !Text
     , _mcName          :: !(Maybe Text)
     , _mcCountryCode   :: !(Maybe Text)
-    , _mcId            :: !(Maybe Int64)
-    , _mcCountryDartId :: !(Maybe Int64)
+    , _mcId            :: !(Maybe (JSONText Int64))
+    , _mcCountryDartId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileCarrier' with the minimum fields required to make a request.
@@ -10234,13 +10393,16 @@ mcCountryCode
 
 -- | ID of this mobile carrier.
 mcId :: Lens' MobileCarrier (Maybe Int64)
-mcId = lens _mcId (\ s a -> s{_mcId = a})
+mcId
+  = lens _mcId (\ s a -> s{_mcId = a}) .
+      mapping _Coerce
 
 -- | DART ID of the country to which this mobile carrier belongs.
 mcCountryDartId :: Lens' MobileCarrier (Maybe Int64)
 mcCountryDartId
   = lens _mcCountryDartId
       (\ s a -> s{_mcCountryDartId = a})
+      . mapping _Coerce
 
 instance FromJSON MobileCarrier where
         parseJSON
@@ -10271,7 +10433,7 @@ data LandingPage = LandingPage
     , _lpDefault :: !(Maybe Bool)
     , _lpURL     :: !(Maybe Text)
     , _lpName    :: !(Maybe Text)
-    , _lpId      :: !(Maybe Int64)
+    , _lpId      :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPage' with the minimum fields required to make a request.
@@ -10322,7 +10484,9 @@ lpName = lens _lpName (\ s a -> s{_lpName = a})
 
 -- | ID of this landing page. This is a read-only, auto-generated field.
 lpId :: Lens' LandingPage (Maybe Int64)
-lpId = lens _lpId (\ s a -> s{_lpId = a})
+lpId
+  = lens _lpId (\ s a -> s{_lpId = a}) .
+      mapping _Coerce
 
 instance FromJSON LandingPage where
         parseJSON
@@ -10535,13 +10699,13 @@ instance ToJSON ReportList where
 -- /See:/ 'creativeGroup' smart constructor.
 data CreativeGroup = CreativeGroup
     { _cgKind                       :: !Text
-    , _cgAdvertiserId               :: !(Maybe Int64)
+    , _cgAdvertiserId               :: !(Maybe (JSONText Int64))
     , _cgAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
-    , _cgGroupNumber                :: !(Maybe Int32)
-    , _cgAccountId                  :: !(Maybe Int64)
+    , _cgGroupNumber                :: !(Maybe (JSONText Int32))
+    , _cgAccountId                  :: !(Maybe (JSONText Int64))
     , _cgName                       :: !(Maybe Text)
-    , _cgId                         :: !(Maybe Int64)
-    , _cgSubAccountId               :: !(Maybe Int64)
+    , _cgId                         :: !(Maybe (JSONText Int64))
+    , _cgSubAccountId               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroup' with the minimum fields required to make a request.
@@ -10588,6 +10752,7 @@ cgAdvertiserId :: Lens' CreativeGroup (Maybe Int64)
 cgAdvertiserId
   = lens _cgAdvertiserId
       (\ s a -> s{_cgAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
@@ -10604,12 +10769,14 @@ cgGroupNumber :: Lens' CreativeGroup (Maybe Int32)
 cgGroupNumber
   = lens _cgGroupNumber
       (\ s a -> s{_cgGroupNumber = a})
+      . mapping _Coerce
 
 -- | Account ID of this creative group. This is a read-only field that can be
 -- left blank.
 cgAccountId :: Lens' CreativeGroup (Maybe Int64)
 cgAccountId
-  = lens _cgAccountId (\ s a -> s{_cgAccountId = a})
+  = lens _cgAccountId (\ s a -> s{_cgAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this creative group. This is a required field and must be less
 -- than 256 characters long and unique among creative groups of the same
@@ -10619,7 +10786,9 @@ cgName = lens _cgName (\ s a -> s{_cgName = a})
 
 -- | ID of this creative group. This is a read-only, auto-generated field.
 cgId :: Lens' CreativeGroup (Maybe Int64)
-cgId = lens _cgId (\ s a -> s{_cgId = a})
+cgId
+  = lens _cgId (\ s a -> s{_cgId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this creative group. This is a read-only field that can
 -- be left blank.
@@ -10627,6 +10796,7 @@ cgSubAccountId :: Lens' CreativeGroup (Maybe Int64)
 cgSubAccountId
   = lens _cgSubAccountId
       (\ s a -> s{_cgSubAccountId = a})
+      . mapping _Coerce
 
 instance FromJSON CreativeGroup where
         parseJSON
@@ -10660,7 +10830,7 @@ instance ToJSON CreativeGroup where
 -- /See:/ 'campaignCreativeAssociation' smart constructor.
 data CampaignCreativeAssociation = CampaignCreativeAssociation
     { _ccaKind       :: !Text
-    , _ccaCreativeId :: !(Maybe Int64)
+    , _ccaCreativeId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociation' with the minimum fields required to make a request.
@@ -10689,6 +10859,7 @@ ccaCreativeId :: Lens' CampaignCreativeAssociation (Maybe Int64)
 ccaCreativeId
   = lens _ccaCreativeId
       (\ s a -> s{_ccaCreativeId = a})
+      . mapping _Coerce
 
 instance FromJSON CampaignCreativeAssociation where
         parseJSON
@@ -10710,8 +10881,8 @@ instance ToJSON CampaignCreativeAssociation where
 --
 -- /See:/ 'lookbackConfiguration' smart constructor.
 data LookbackConfiguration = LookbackConfiguration
-    { _lcClickDuration                    :: !(Maybe Int32)
-    , _lcPostImpressionActivitiesDuration :: !(Maybe Int32)
+    { _lcClickDuration                    :: !(Maybe (JSONText Int32))
+    , _lcPostImpressionActivitiesDuration :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LookbackConfiguration' with the minimum fields required to make a request.
@@ -10737,6 +10908,7 @@ lcClickDuration :: Lens' LookbackConfiguration (Maybe Int32)
 lcClickDuration
   = lens _lcClickDuration
       (\ s a -> s{_lcClickDuration = a})
+      . mapping _Coerce
 
 -- | Lookback window, in days, from the last time a given user viewed one of
 -- your ads. If you enter 0, impressions will not be considered as
@@ -10746,6 +10918,7 @@ lcPostImpressionActivitiesDuration :: Lens' LookbackConfiguration (Maybe Int32)
 lcPostImpressionActivitiesDuration
   = lens _lcPostImpressionActivitiesDuration
       (\ s a -> s{_lcPostImpressionActivitiesDuration = a})
+      . mapping _Coerce
 
 instance FromJSON LookbackConfiguration where
         parseJSON
@@ -10770,8 +10943,8 @@ data FloodlightActivityPublisherDynamicTag = FloodlightActivityPublisherDynamicT
     { _fapdtClickThrough         :: !(Maybe Bool)
     , _fapdtSiteIdDimensionValue :: !(Maybe DimensionValue)
     , _fapdtDynamicTag           :: !(Maybe FloodlightActivityDynamicTag)
-    , _fapdtDirectorySiteId      :: !(Maybe Int64)
-    , _fapdtSiteId               :: !(Maybe Int64)
+    , _fapdtDirectorySiteId      :: !(Maybe (JSONText Int64))
+    , _fapdtSiteId               :: !(Maybe (JSONText Int64))
     , _fapdtViewThrough          :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10828,11 +11001,13 @@ fapdtDirectorySiteId :: Lens' FloodlightActivityPublisherDynamicTag (Maybe Int64
 fapdtDirectorySiteId
   = lens _fapdtDirectorySiteId
       (\ s a -> s{_fapdtDirectorySiteId = a})
+      . mapping _Coerce
 
 -- | Site ID of this dynamic tag.
 fapdtSiteId :: Lens' FloodlightActivityPublisherDynamicTag (Maybe Int64)
 fapdtSiteId
-  = lens _fapdtSiteId (\ s a -> s{_fapdtSiteId = a})
+  = lens _fapdtSiteId (\ s a -> s{_fapdtSiteId = a}) .
+      mapping _Coerce
 
 -- | Whether this tag is applicable only for view-throughs.
 fapdtViewThrough :: Lens' FloodlightActivityPublisherDynamicTag (Maybe Bool)
@@ -10870,10 +11045,10 @@ instance ToJSON FloodlightActivityPublisherDynamicTag
 --
 -- /See:/ 'accountActiveAdSummary' smart constructor.
 data AccountActiveAdSummary = AccountActiveAdSummary
-    { _aaasAvailableAds       :: !(Maybe Int64)
+    { _aaasAvailableAds       :: !(Maybe (JSONText Int64))
     , _aaasKind               :: !Text
-    , _aaasAccountId          :: !(Maybe Int64)
-    , _aaasActiveAds          :: !(Maybe Int64)
+    , _aaasAccountId          :: !(Maybe (JSONText Int64))
+    , _aaasActiveAds          :: !(Maybe (JSONText Int64))
     , _aaasActiveAdsLimitTier :: !(Maybe AccountActiveAdSummaryActiveAdsLimitTier)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10906,6 +11081,7 @@ aaasAvailableAds :: Lens' AccountActiveAdSummary (Maybe Int64)
 aaasAvailableAds
   = lens _aaasAvailableAds
       (\ s a -> s{_aaasAvailableAds = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#accountActiveAdSummary\".
@@ -10917,12 +11093,14 @@ aaasAccountId :: Lens' AccountActiveAdSummary (Maybe Int64)
 aaasAccountId
   = lens _aaasAccountId
       (\ s a -> s{_aaasAccountId = a})
+      . mapping _Coerce
 
 -- | Ads that have been activated for the account
 aaasActiveAds :: Lens' AccountActiveAdSummary (Maybe Int64)
 aaasActiveAds
   = lens _aaasActiveAds
       (\ s a -> s{_aaasActiveAds = a})
+      . mapping _Coerce
 
 -- | Maximum number of active ads allowed for the account.
 aaasActiveAdsLimitTier :: Lens' AccountActiveAdSummary (Maybe AccountActiveAdSummaryActiveAdsLimitTier)
@@ -10957,8 +11135,8 @@ instance ToJSON AccountActiveAdSummary where
 --
 -- /See:/ 'offSetPosition' smart constructor.
 data OffSetPosition = OffSetPosition
-    { _ospLeft :: !(Maybe Int32)
-    , _ospTop  :: !(Maybe Int32)
+    { _ospLeft :: !(Maybe (JSONText Int32))
+    , _ospTop  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffSetPosition' with the minimum fields required to make a request.
@@ -10978,11 +11156,15 @@ offSetPosition =
 
 -- | Offset distance from left side of an asset or a window.
 ospLeft :: Lens' OffSetPosition (Maybe Int32)
-ospLeft = lens _ospLeft (\ s a -> s{_ospLeft = a})
+ospLeft
+  = lens _ospLeft (\ s a -> s{_ospLeft = a}) .
+      mapping _Coerce
 
 -- | Offset distance from top side of an asset or a window.
 ospTop :: Lens' OffSetPosition (Maybe Int32)
-ospTop = lens _ospTop (\ s a -> s{_ospTop = a})
+ospTop
+  = lens _ospTop (\ s a -> s{_ospTop = a}) .
+      mapping _Coerce
 
 instance FromJSON OffSetPosition where
         parseJSON
@@ -11048,10 +11230,10 @@ instance ToJSON Metric where
 --
 -- /See:/ 'remarketingListShare' smart constructor.
 data RemarketingListShare = RemarketingListShare
-    { _rlsSharedAdvertiserIds :: !(Maybe [Int64])
+    { _rlsSharedAdvertiserIds :: !(Maybe [JSONText Int64])
     , _rlsKind                :: !Text
-    , _rlsRemarketingListId   :: !(Maybe Int64)
-    , _rlsSharedAccountIds    :: !(Maybe [Int64])
+    , _rlsRemarketingListId   :: !(Maybe (JSONText Int64))
+    , _rlsSharedAccountIds    :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListShare' with the minimum fields required to make a request.
@@ -11093,6 +11275,7 @@ rlsRemarketingListId :: Lens' RemarketingListShare (Maybe Int64)
 rlsRemarketingListId
   = lens _rlsRemarketingListId
       (\ s a -> s{_rlsRemarketingListId = a})
+      . mapping _Coerce
 
 -- | Accounts that the remarketing list is shared with.
 rlsSharedAccountIds :: Lens' RemarketingListShare [Int64]
@@ -11354,8 +11537,8 @@ instance ToJSON CompatibleFields where
 -- /See:/ 'audienceSegment' smart constructor.
 data AudienceSegment = AudienceSegment
     { _asName       :: !(Maybe Text)
-    , _asId         :: !(Maybe Int64)
-    , _asAllocation :: !(Maybe Int32)
+    , _asId         :: !(Maybe (JSONText Int64))
+    , _asAllocation :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudienceSegment' with the minimum fields required to make a request.
@@ -11383,7 +11566,9 @@ asName = lens _asName (\ s a -> s{_asName = a})
 
 -- | ID of this audience segment. This is a read-only, auto-generated field.
 asId :: Lens' AudienceSegment (Maybe Int64)
-asId = lens _asId (\ s a -> s{_asId = a})
+asId
+  = lens _asId (\ s a -> s{_asId = a}) .
+      mapping _Coerce
 
 -- | Weight allocated to this segment. Must be between 1 and 1000. The weight
 -- assigned will be understood in proportion to the weights assigned to
@@ -11391,6 +11576,7 @@ asId = lens _asId (\ s a -> s{_asId = a})
 asAllocation :: Lens' AudienceSegment (Maybe Int32)
 asAllocation
   = lens _asAllocation (\ s a -> s{_asAllocation = a})
+      . mapping _Coerce
 
 instance FromJSON AudienceSegment where
         parseJSON
@@ -11609,12 +11795,12 @@ data City = City
     { _ccMetroCode     :: !(Maybe Text)
     , _ccRegionCode    :: !(Maybe Text)
     , _ccKind          :: !Text
-    , _ccRegionDartId  :: !(Maybe Int64)
-    , _ccMetroDmaId    :: !(Maybe Int64)
+    , _ccRegionDartId  :: !(Maybe (JSONText Int64))
+    , _ccMetroDmaId    :: !(Maybe (JSONText Int64))
     , _ccName          :: !(Maybe Text)
     , _ccCountryCode   :: !(Maybe Text)
-    , _ccCountryDartId :: !(Maybe Int64)
-    , _ccDartId        :: !(Maybe Int64)
+    , _ccCountryDartId :: !(Maybe (JSONText Int64))
+    , _ccDartId        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'City' with the minimum fields required to make a request.
@@ -11673,11 +11859,13 @@ ccRegionDartId :: Lens' City (Maybe Int64)
 ccRegionDartId
   = lens _ccRegionDartId
       (\ s a -> s{_ccRegionDartId = a})
+      . mapping _Coerce
 
 -- | ID of the metro region (DMA) to which this city belongs.
 ccMetroDmaId :: Lens' City (Maybe Int64)
 ccMetroDmaId
   = lens _ccMetroDmaId (\ s a -> s{_ccMetroDmaId = a})
+      . mapping _Coerce
 
 -- | Name of this city.
 ccName :: Lens' City (Maybe Text)
@@ -11694,11 +11882,14 @@ ccCountryDartId :: Lens' City (Maybe Int64)
 ccCountryDartId
   = lens _ccCountryDartId
       (\ s a -> s{_ccCountryDartId = a})
+      . mapping _Coerce
 
 -- | DART ID of this city. This is the ID used for targeting and generating
 -- reports.
 ccDartId :: Lens' City (Maybe Int64)
-ccDartId = lens _ccDartId (\ s a -> s{_ccDartId = a})
+ccDartId
+  = lens _ccDartId (\ s a -> s{_ccDartId = a}) .
+      mapping _Coerce
 
 instance FromJSON City where
         parseJSON
@@ -11734,7 +11925,7 @@ instance ToJSON City where
 data PlatformType = PlatformType
     { _ptKind :: !Text
     , _ptName :: !(Maybe Text)
-    , _ptId   :: !(Maybe Int64)
+    , _ptId   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformType' with the minimum fields required to make a request.
@@ -11766,7 +11957,9 @@ ptName = lens _ptName (\ s a -> s{_ptName = a})
 
 -- | ID of this platform type.
 ptId :: Lens' PlatformType (Maybe Int64)
-ptId = lens _ptId (\ s a -> s{_ptId = a})
+ptId
+  = lens _ptId (\ s a -> s{_ptId = a}) .
+      mapping _Coerce
 
 instance FromJSON PlatformType where
         parseJSON
@@ -11824,7 +12017,7 @@ instance ToJSON KeyValueTargetingExpression where
 --
 -- /See:/ 'companionClickThroughOverride' smart constructor.
 data CompanionClickThroughOverride = CompanionClickThroughOverride
-    { _cctoCreativeId      :: !(Maybe Int64)
+    { _cctoCreativeId      :: !(Maybe (JSONText Int64))
     , _cctoClickThroughURL :: !(Maybe ClickThroughURL)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11848,6 +12041,7 @@ cctoCreativeId :: Lens' CompanionClickThroughOverride (Maybe Int64)
 cctoCreativeId
   = lens _cctoCreativeId
       (\ s a -> s{_cctoCreativeId = a})
+      . mapping _Coerce
 
 -- | Click-through URL of this companion click-through override.
 cctoClickThroughURL :: Lens' CompanionClickThroughOverride (Maybe ClickThroughURL)
@@ -12176,7 +12370,7 @@ instance ToJSON PopupWindowProperties where
 -- /See:/ 'eventTagOverride' smart constructor.
 data EventTagOverride = EventTagOverride
     { _etoEnabled :: !(Maybe Bool)
-    , _etoId      :: !(Maybe Int64)
+    , _etoId      :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagOverride' with the minimum fields required to make a request.
@@ -12202,7 +12396,9 @@ etoEnabled
 -- | ID of this event tag override. This is a read-only, auto-generated
 -- field.
 etoId :: Lens' EventTagOverride (Maybe Int64)
-etoId = lens _etoId (\ s a -> s{_etoId = a})
+etoId
+  = lens _etoId (\ s a -> s{_etoId = a}) .
+      mapping _Coerce
 
 instance FromJSON EventTagOverride where
         parseJSON
@@ -12228,7 +12424,7 @@ data OperatingSystemVersion = OperatingSystemVersion
     , _osvOperatingSystem :: !(Maybe OperatingSystem)
     , _osvMajorVersion    :: !(Maybe Text)
     , _osvName            :: !(Maybe Text)
-    , _osvId              :: !(Maybe Int64)
+    , _osvId              :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersion' with the minimum fields required to make a request.
@@ -12288,7 +12484,9 @@ osvName = lens _osvName (\ s a -> s{_osvName = a})
 
 -- | ID of this operating system version.
 osvId :: Lens' OperatingSystemVersion (Maybe Int64)
-osvId = lens _osvId (\ s a -> s{_osvId = a})
+osvId
+  = lens _osvId (\ s a -> s{_osvId = a}) .
+      mapping _Coerce
 
 instance FromJSON OperatingSystemVersion where
         parseJSON
@@ -12322,9 +12520,9 @@ data AccountPermission = AccountPermission
     { _acccKind              :: !Text
     , _acccAccountProFiles   :: !(Maybe [AccountPermissionAccountProFilesItem])
     , _acccName              :: !(Maybe Text)
-    , _acccId                :: !(Maybe Int64)
+    , _acccId                :: !(Maybe (JSONText Int64))
     , _acccLevel             :: !(Maybe AccountPermissionLevel)
-    , _acccPermissionGroupId :: !(Maybe Int64)
+    , _acccPermissionGroupId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermission' with the minimum fields required to make a request.
@@ -12374,7 +12572,9 @@ acccName = lens _acccName (\ s a -> s{_acccName = a})
 
 -- | ID of this account permission.
 acccId :: Lens' AccountPermission (Maybe Int64)
-acccId = lens _acccId (\ s a -> s{_acccId = a})
+acccId
+  = lens _acccId (\ s a -> s{_acccId = a}) .
+      mapping _Coerce
 
 -- | Administrative level required to enable this account permission.
 acccLevel :: Lens' AccountPermission (Maybe AccountPermissionLevel)
@@ -12386,6 +12586,7 @@ acccPermissionGroupId :: Lens' AccountPermission (Maybe Int64)
 acccPermissionGroupId
   = lens _acccPermissionGroupId
       (\ s a -> s{_acccPermissionGroupId = a})
+      . mapping _Coerce
 
 instance FromJSON AccountPermission where
         parseJSON
@@ -12416,11 +12617,11 @@ data UserProFile = UserProFile
     { _upfEtag           :: !(Maybe Text)
     , _upfKind           :: !Text
     , _upfAccountName    :: !(Maybe Text)
-    , _upfProFileId      :: !(Maybe Int64)
+    , _upfProFileId      :: !(Maybe (JSONText Int64))
     , _upfUserName       :: !(Maybe Text)
-    , _upfAccountId      :: !(Maybe Int64)
+    , _upfAccountId      :: !(Maybe (JSONText Int64))
     , _upfSubAccountName :: !(Maybe Text)
-    , _upfSubAccountId   :: !(Maybe Int64)
+    , _upfSubAccountId   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
@@ -12474,6 +12675,7 @@ upfAccountName
 upfProFileId :: Lens' UserProFile (Maybe Int64)
 upfProFileId
   = lens _upfProFileId (\ s a -> s{_upfProFileId = a})
+      . mapping _Coerce
 
 -- | The user name.
 upfUserName :: Lens' UserProFile (Maybe Text)
@@ -12484,6 +12686,7 @@ upfUserName
 upfAccountId :: Lens' UserProFile (Maybe Int64)
 upfAccountId
   = lens _upfAccountId (\ s a -> s{_upfAccountId = a})
+      . mapping _Coerce
 
 -- | The sub account name this profile belongs to if applicable.
 upfSubAccountName :: Lens' UserProFile (Maybe Text)
@@ -12496,6 +12699,7 @@ upfSubAccountId :: Lens' UserProFile (Maybe Int64)
 upfSubAccountId
   = lens _upfSubAccountId
       (\ s a -> s{_upfSubAccountId = a})
+      . mapping _Coerce
 
 instance FromJSON UserProFile where
         parseJSON
@@ -12660,17 +12864,17 @@ instance ToJSON ReportDelivery where
 --
 -- /See:/ 'targetableRemarketingList' smart constructor.
 data TargetableRemarketingList = TargetableRemarketingList
-    { _trlListSize                   :: !(Maybe Int64)
-    , _trlLifeSpan                   :: !(Maybe Int64)
+    { _trlListSize                   :: !(Maybe (JSONText Int64))
+    , _trlLifeSpan                   :: !(Maybe (JSONText Int64))
     , _trlKind                       :: !Text
-    , _trlAdvertiserId               :: !(Maybe Int64)
+    , _trlAdvertiserId               :: !(Maybe (JSONText Int64))
     , _trlAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _trlActive                     :: !(Maybe Bool)
-    , _trlAccountId                  :: !(Maybe Int64)
+    , _trlAccountId                  :: !(Maybe (JSONText Int64))
     , _trlName                       :: !(Maybe Text)
     , _trlListSource                 :: !(Maybe TargetableRemarketingListListSource)
-    , _trlId                         :: !(Maybe Int64)
-    , _trlSubAccountId               :: !(Maybe Int64)
+    , _trlId                         :: !(Maybe (JSONText Int64))
+    , _trlSubAccountId               :: !(Maybe (JSONText Int64))
     , _trlDescription                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12722,13 +12926,15 @@ targetableRemarketingList =
 -- | Number of users currently in the list. This is a read-only field.
 trlListSize :: Lens' TargetableRemarketingList (Maybe Int64)
 trlListSize
-  = lens _trlListSize (\ s a -> s{_trlListSize = a})
+  = lens _trlListSize (\ s a -> s{_trlListSize = a}) .
+      mapping _Coerce
 
 -- | Number of days that a user should remain in the targetable remarketing
 -- list without an impression.
 trlLifeSpan :: Lens' TargetableRemarketingList (Maybe Int64)
 trlLifeSpan
-  = lens _trlLifeSpan (\ s a -> s{_trlLifeSpan = a})
+  = lens _trlLifeSpan (\ s a -> s{_trlLifeSpan = a}) .
+      mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#targetableRemarketingList\".
@@ -12741,6 +12947,7 @@ trlAdvertiserId :: Lens' TargetableRemarketingList (Maybe Int64)
 trlAdvertiserId
   = lens _trlAdvertiserId
       (\ s a -> s{_trlAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser.
 trlAdvertiserIdDimensionValue :: Lens' TargetableRemarketingList (Maybe DimensionValue)
@@ -12758,6 +12965,7 @@ trlActive
 trlAccountId :: Lens' TargetableRemarketingList (Maybe Int64)
 trlAccountId
   = lens _trlAccountId (\ s a -> s{_trlAccountId = a})
+      . mapping _Coerce
 
 -- | Name of the targetable remarketing list. Is no greater than 128
 -- characters long.
@@ -12772,7 +12980,9 @@ trlListSource
 
 -- | Targetable remarketing list ID.
 trlId :: Lens' TargetableRemarketingList (Maybe Int64)
-trlId = lens _trlId (\ s a -> s{_trlId = a})
+trlId
+  = lens _trlId (\ s a -> s{_trlId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this remarketing list. This is a read-only,
 -- auto-generated field that is only returned in GET requests.
@@ -12780,6 +12990,7 @@ trlSubAccountId :: Lens' TargetableRemarketingList (Maybe Int64)
 trlSubAccountId
   = lens _trlSubAccountId
       (\ s a -> s{_trlSubAccountId = a})
+      . mapping _Coerce
 
 -- | Targetable remarketing list description.
 trlDescription :: Lens' TargetableRemarketingList (Maybe Text)
@@ -12879,19 +13090,19 @@ instance ToJSON PostalCodesListResponse where
 --
 -- /See:/ 'changeLog' smart constructor.
 data ChangeLog = ChangeLog
-    { _chaUserProFileId   :: !(Maybe Int64)
+    { _chaUserProFileId   :: !(Maybe (JSONText Int64))
     , _chaObjectType      :: !(Maybe Text)
     , _chaUserProFileName :: !(Maybe Text)
     , _chaKind            :: !Text
-    , _chaObjectId        :: !(Maybe Int64)
+    , _chaObjectId        :: !(Maybe (JSONText Int64))
     , _chaAction          :: !(Maybe Text)
-    , _chaTransactionId   :: !(Maybe Int64)
+    , _chaTransactionId   :: !(Maybe (JSONText Int64))
     , _chaOldValue        :: !(Maybe Text)
-    , _chaAccountId       :: !(Maybe Int64)
+    , _chaAccountId       :: !(Maybe (JSONText Int64))
     , _chaNewValue        :: !(Maybe Text)
     , _chaFieldName       :: !(Maybe Text)
-    , _chaId              :: !(Maybe Int64)
-    , _chaSubAccountId    :: !(Maybe Int64)
+    , _chaId              :: !(Maybe (JSONText Int64))
+    , _chaSubAccountId    :: !(Maybe (JSONText Int64))
     , _chaChangeTime      :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12951,6 +13162,7 @@ chaUserProFileId :: Lens' ChangeLog (Maybe Int64)
 chaUserProFileId
   = lens _chaUserProFileId
       (\ s a -> s{_chaUserProFileId = a})
+      . mapping _Coerce
 
 -- | Object type of the change log.
 chaObjectType :: Lens' ChangeLog (Maybe Text)
@@ -12973,7 +13185,8 @@ chaKind = lens _chaKind (\ s a -> s{_chaKind = a})
 -- placement, ad, or other type.
 chaObjectId :: Lens' ChangeLog (Maybe Int64)
 chaObjectId
-  = lens _chaObjectId (\ s a -> s{_chaObjectId = a})
+  = lens _chaObjectId (\ s a -> s{_chaObjectId = a}) .
+      mapping _Coerce
 
 -- | Action which caused the change.
 chaAction :: Lens' ChangeLog (Maybe Text)
@@ -12987,6 +13200,7 @@ chaTransactionId :: Lens' ChangeLog (Maybe Int64)
 chaTransactionId
   = lens _chaTransactionId
       (\ s a -> s{_chaTransactionId = a})
+      . mapping _Coerce
 
 -- | Old value of the object field.
 chaOldValue :: Lens' ChangeLog (Maybe Text)
@@ -12997,6 +13211,7 @@ chaOldValue
 chaAccountId :: Lens' ChangeLog (Maybe Int64)
 chaAccountId
   = lens _chaAccountId (\ s a -> s{_chaAccountId = a})
+      . mapping _Coerce
 
 -- | New value of the object field.
 chaNewValue :: Lens' ChangeLog (Maybe Text)
@@ -13010,13 +13225,16 @@ chaFieldName
 
 -- | ID of this change log.
 chaId :: Lens' ChangeLog (Maybe Int64)
-chaId = lens _chaId (\ s a -> s{_chaId = a})
+chaId
+  = lens _chaId (\ s a -> s{_chaId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of the modified object.
 chaSubAccountId :: Lens' ChangeLog (Maybe Int64)
 chaSubAccountId
   = lens _chaSubAccountId
       (\ s a -> s{_chaSubAccountId = a})
+      . mapping _Coerce
 
 -- | Time when the object was modified.
 chaChangeTime :: Lens' ChangeLog (Maybe UTCTime)
@@ -13068,9 +13286,9 @@ instance ToJSON ChangeLog where
 -- /See:/ 'placementStrategy' smart constructor.
 data PlacementStrategy = PlacementStrategy
     { _psKind      :: !Text
-    , _psAccountId :: !(Maybe Int64)
+    , _psAccountId :: !(Maybe (JSONText Int64))
     , _psName      :: !(Maybe Text)
-    , _psId        :: !(Maybe Int64)
+    , _psId        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategy' with the minimum fields required to make a request.
@@ -13103,7 +13321,8 @@ psKind = lens _psKind (\ s a -> s{_psKind = a})
 -- be left blank.
 psAccountId :: Lens' PlacementStrategy (Maybe Int64)
 psAccountId
-  = lens _psAccountId (\ s a -> s{_psAccountId = a})
+  = lens _psAccountId (\ s a -> s{_psAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this placement strategy. This is a required field. It must be
 -- less than 256 characters long and unique among placement strategies of
@@ -13114,7 +13333,9 @@ psName = lens _psName (\ s a -> s{_psName = a})
 -- | ID of this placement strategy. This is a read-only, auto-generated
 -- field.
 psId :: Lens' PlacementStrategy (Maybe Int64)
-psId = lens _psId (\ s a -> s{_psId = a})
+psId
+  = lens _psId (\ s a -> s{_psId = a}) .
+      mapping _Coerce
 
 instance FromJSON PlacementStrategy where
         parseJSON
@@ -13143,27 +13364,27 @@ data FloodlightActivity = FloodlightActivity
     , _faSecure                                  :: !(Maybe Bool)
     , _faExpectedURL                             :: !(Maybe Text)
     , _faFloodlightActivityGroupTagString        :: !(Maybe Text)
-    , _faFloodlightConfigurationId               :: !(Maybe Int64)
+    , _faFloodlightConfigurationId               :: !(Maybe (JSONText Int64))
     , _faKind                                    :: !Text
     , _faImageTagEnabled                         :: !(Maybe Bool)
-    , _faAdvertiserId                            :: !(Maybe Int64)
+    , _faAdvertiserId                            :: !(Maybe (JSONText Int64))
     , _faAdvertiserIdDimensionValue              :: !(Maybe DimensionValue)
     , _faSSLCompliant                            :: !(Maybe Bool)
     , _faIdDimensionValue                        :: !(Maybe DimensionValue)
     , _faTagFormat                               :: !(Maybe FloodlightActivityTagFormat)
     , _faCacheBustingType                        :: !(Maybe FloodlightActivityCacheBustingType)
-    , _faAccountId                               :: !(Maybe Int64)
+    , _faAccountId                               :: !(Maybe (JSONText Int64))
     , _faName                                    :: !(Maybe Text)
     , _faPublisherTags                           :: !(Maybe [FloodlightActivityPublisherDynamicTag])
-    , _faFloodlightActivityGroupId               :: !(Maybe Int64)
+    , _faFloodlightActivityGroupId               :: !(Maybe (JSONText Int64))
     , _faHidden                                  :: !(Maybe Bool)
     , _faFloodlightActivityGroupType             :: !(Maybe FloodlightActivityFloodlightActivityGroupType)
     , _faDefaultTags                             :: !(Maybe [FloodlightActivityDynamicTag])
     , _faFloodlightActivityGroupName             :: !(Maybe Text)
-    , _faId                                      :: !(Maybe Int64)
+    , _faId                                      :: !(Maybe (JSONText Int64))
     , _faSSLRequired                             :: !(Maybe Bool)
     , _faUserDefinedVariableTypes                :: !(Maybe [FloodlightActivityUserDefinedVariableTypesItem])
-    , _faSubAccountId                            :: !(Maybe Int64)
+    , _faSubAccountId                            :: !(Maybe (JSONText Int64))
     , _faNotes                                   :: !(Maybe Text)
     , _faFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13304,6 +13525,7 @@ faFloodlightConfigurationId :: Lens' FloodlightActivity (Maybe Int64)
 faFloodlightConfigurationId
   = lens _faFloodlightConfigurationId
       (\ s a -> s{_faFloodlightConfigurationId = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#floodlightActivity\".
@@ -13323,6 +13545,7 @@ faAdvertiserId :: Lens' FloodlightActivity (Maybe Int64)
 faAdvertiserId
   = lens _faAdvertiserId
       (\ s a -> s{_faAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
@@ -13361,7 +13584,8 @@ faCacheBustingType
 -- can be left blank.
 faAccountId :: Lens' FloodlightActivity (Maybe Int64)
 faAccountId
-  = lens _faAccountId (\ s a -> s{_faAccountId = a})
+  = lens _faAccountId (\ s a -> s{_faAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this floodlight activity. This is a required field. Must be less
 -- than 129 characters long and cannot contain quotes.
@@ -13382,6 +13606,7 @@ faFloodlightActivityGroupId :: Lens' FloodlightActivity (Maybe Int64)
 faFloodlightActivityGroupId
   = lens _faFloodlightActivityGroupId
       (\ s a -> s{_faFloodlightActivityGroupId = a})
+      . mapping _Coerce
 
 -- | Whether this activity is archived.
 faHidden :: Lens' FloodlightActivity (Maybe Bool)
@@ -13412,7 +13637,9 @@ faFloodlightActivityGroupName
 -- | ID of this floodlight activity. This is a read-only, auto-generated
 -- field.
 faId :: Lens' FloodlightActivity (Maybe Int64)
-faId = lens _faId (\ s a -> s{_faId = a})
+faId
+  = lens _faId (\ s a -> s{_faId = a}) .
+      mapping _Coerce
 
 -- | Whether this floodlight activity must be SSL-compliant.
 faSSLRequired :: Lens' FloodlightActivity (Maybe Bool)
@@ -13439,6 +13666,7 @@ faSubAccountId :: Lens' FloodlightActivity (Maybe Int64)
 faSubAccountId
   = lens _faSubAccountId
       (\ s a -> s{_faSubAccountId = a})
+      . mapping _Coerce
 
 -- | General notes or implementation instructions for the tag.
 faNotes :: Lens' FloodlightActivity (Maybe Text)
@@ -13584,7 +13812,7 @@ instance ToJSON PlatformTypesListResponse where
 --
 -- /See:/ 'lastModifiedInfo' smart constructor.
 newtype LastModifiedInfo = LastModifiedInfo
-    { _lmiTime :: Maybe Int64
+    { _lmiTime :: Maybe (JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LastModifiedInfo' with the minimum fields required to make a request.
@@ -13601,7 +13829,9 @@ lastModifiedInfo =
 
 -- | Timestamp of the last change in milliseconds since epoch.
 lmiTime :: Lens' LastModifiedInfo (Maybe Int64)
-lmiTime = lens _lmiTime (\ s a -> s{_lmiTime = a})
+lmiTime
+  = lens _lmiTime (\ s a -> s{_lmiTime = a}) .
+      mapping _Coerce
 
 instance FromJSON LastModifiedInfo where
         parseJSON
@@ -13669,7 +13899,7 @@ instance ToJSON TargetWindow where
 data AccountPermissionGroup = AccountPermissionGroup
     { _apgpKind :: !Text
     , _apgpName :: !(Maybe Text)
-    , _apgpId   :: !(Maybe Int64)
+    , _apgpId   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroup' with the minimum fields required to make a request.
@@ -13701,7 +13931,9 @@ apgpName = lens _apgpName (\ s a -> s{_apgpName = a})
 
 -- | ID of this account permission group.
 apgpId :: Lens' AccountPermissionGroup (Maybe Int64)
-apgpId = lens _apgpId (\ s a -> s{_apgpId = a})
+apgpId
+  = lens _apgpId (\ s a -> s{_apgpId = a}) .
+      mapping _Coerce
 
 instance FromJSON AccountPermissionGroup where
         parseJSON
@@ -13724,19 +13956,19 @@ instance ToJSON AccountPermissionGroup where
 --
 -- /See:/ 'advertiser' smart constructor.
 data Advertiser = Advertiser
-    { _advdOriginalFloodlightConfigurationId       :: !(Maybe Int64)
+    { _advdOriginalFloodlightConfigurationId       :: !(Maybe (JSONText Int64))
     , _advdStatus                                  :: !(Maybe AdvertiserStatus)
-    , _advdFloodlightConfigurationId               :: !(Maybe Int64)
+    , _advdFloodlightConfigurationId               :: !(Maybe (JSONText Int64))
     , _advdKind                                    :: !Text
     , _advdSuspended                               :: !(Maybe Bool)
     , _advdIdDimensionValue                        :: !(Maybe DimensionValue)
-    , _advdAccountId                               :: !(Maybe Int64)
+    , _advdAccountId                               :: !(Maybe (JSONText Int64))
     , _advdDefaultEmail                            :: !(Maybe Text)
     , _advdName                                    :: !(Maybe Text)
-    , _advdAdvertiserGroupId                       :: !(Maybe Int64)
-    , _advdDefaultClickThroughEventTagId           :: !(Maybe Int64)
-    , _advdId                                      :: !(Maybe Int64)
-    , _advdSubAccountId                            :: !(Maybe Int64)
+    , _advdAdvertiserGroupId                       :: !(Maybe (JSONText Int64))
+    , _advdDefaultClickThroughEventTagId           :: !(Maybe (JSONText Int64))
+    , _advdId                                      :: !(Maybe (JSONText Int64))
+    , _advdSubAccountId                            :: !(Maybe (JSONText Int64))
     , _advdFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     , _advdClickThroughURLSuffix                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13806,6 +14038,7 @@ advdOriginalFloodlightConfigurationId
   = lens _advdOriginalFloodlightConfigurationId
       (\ s a ->
          s{_advdOriginalFloodlightConfigurationId = a})
+      . mapping _Coerce
 
 -- | Status of this advertiser.
 advdStatus :: Lens' Advertiser (Maybe AdvertiserStatus)
@@ -13825,6 +14058,7 @@ advdFloodlightConfigurationId :: Lens' Advertiser (Maybe Int64)
 advdFloodlightConfigurationId
   = lens _advdFloodlightConfigurationId
       (\ s a -> s{_advdFloodlightConfigurationId = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#advertiser\".
@@ -13850,6 +14084,7 @@ advdAccountId :: Lens' Advertiser (Maybe Int64)
 advdAccountId
   = lens _advdAccountId
       (\ s a -> s{_advdAccountId = a})
+      . mapping _Coerce
 
 -- | Default email address used in sender field for tag emails.
 advdDefaultEmail :: Lens' Advertiser (Maybe Text)
@@ -13869,6 +14104,7 @@ advdAdvertiserGroupId :: Lens' Advertiser (Maybe Int64)
 advdAdvertiserGroupId
   = lens _advdAdvertiserGroupId
       (\ s a -> s{_advdAdvertiserGroupId = a})
+      . mapping _Coerce
 
 -- | ID of the click-through event tag to apply by default to the landing
 -- pages of this advertiser\'s campaigns.
@@ -13876,10 +14112,13 @@ advdDefaultClickThroughEventTagId :: Lens' Advertiser (Maybe Int64)
 advdDefaultClickThroughEventTagId
   = lens _advdDefaultClickThroughEventTagId
       (\ s a -> s{_advdDefaultClickThroughEventTagId = a})
+      . mapping _Coerce
 
 -- | ID of this advertiser. This is a read-only, auto-generated field.
 advdId :: Lens' Advertiser (Maybe Int64)
-advdId = lens _advdId (\ s a -> s{_advdId = a})
+advdId
+  = lens _advdId (\ s a -> s{_advdId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this advertiser.This is a read-only field that can be
 -- left blank.
@@ -13887,6 +14126,7 @@ advdSubAccountId :: Lens' Advertiser (Maybe Int64)
 advdSubAccountId
   = lens _advdSubAccountId
       (\ s a -> s{_advdSubAccountId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the floodlight configuration. This is a
 -- read-only, auto-generated field.
@@ -13953,14 +14193,14 @@ instance ToJSON Advertiser where
 --
 -- /See:/ 'userRole' smart constructor.
 data UserRole = UserRole
-    { _urParentUserRoleId :: !(Maybe Int64)
+    { _urParentUserRoleId :: !(Maybe (JSONText Int64))
     , _urKind             :: !Text
     , _urDefaultUserRole  :: !(Maybe Bool)
-    , _urAccountId        :: !(Maybe Int64)
+    , _urAccountId        :: !(Maybe (JSONText Int64))
     , _urName             :: !(Maybe Text)
-    , _urId               :: !(Maybe Int64)
+    , _urId               :: !(Maybe (JSONText Int64))
     , _urPermissions      :: !(Maybe [UserRolePermission])
-    , _urSubAccountId     :: !(Maybe Int64)
+    , _urSubAccountId     :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRole' with the minimum fields required to make a request.
@@ -14002,6 +14242,7 @@ urParentUserRoleId :: Lens' UserRole (Maybe Int64)
 urParentUserRoleId
   = lens _urParentUserRoleId
       (\ s a -> s{_urParentUserRoleId = a})
+      . mapping _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#userRole\".
@@ -14021,7 +14262,8 @@ urDefaultUserRole
 -- blank.
 urAccountId :: Lens' UserRole (Maybe Int64)
 urAccountId
-  = lens _urAccountId (\ s a -> s{_urAccountId = a})
+  = lens _urAccountId (\ s a -> s{_urAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this user role. This is a required field. Must be less than 256
 -- characters long. If this user role is under a subaccount, the name must
@@ -14033,7 +14275,9 @@ urName = lens _urName (\ s a -> s{_urName = a})
 
 -- | ID of this user role. This is a read-only, auto-generated field.
 urId :: Lens' UserRole (Maybe Int64)
-urId = lens _urId (\ s a -> s{_urId = a})
+urId
+  = lens _urId (\ s a -> s{_urId = a}) .
+      mapping _Coerce
 
 -- | List of permissions associated with this user role.
 urPermissions :: Lens' UserRole [UserRolePermission]
@@ -14049,6 +14293,7 @@ urSubAccountId :: Lens' UserRole (Maybe Int64)
 urSubAccountId
   = lens _urSubAccountId
       (\ s a -> s{_urSubAccountId = a})
+      . mapping _Coerce
 
 instance FromJSON UserRole where
         parseJSON
@@ -14145,9 +14390,9 @@ instance ToJSON DirectorySitesListResponse where
 -- /See:/ 'pricingSchedulePricingPeriod' smart constructor.
 data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod
     { _psppEndDate         :: !(Maybe Date')
-    , _psppRateOrCostNanos :: !(Maybe Int64)
+    , _psppRateOrCostNanos :: !(Maybe (JSONText Int64))
     , _psppStartDate       :: !(Maybe Date')
-    , _psppUnits           :: !(Maybe Int64)
+    , _psppUnits           :: !(Maybe (JSONText Int64))
     , _psppPricingComment  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -14192,6 +14437,7 @@ psppRateOrCostNanos :: Lens' PricingSchedulePricingPeriod (Maybe Int64)
 psppRateOrCostNanos
   = lens _psppRateOrCostNanos
       (\ s a -> s{_psppRateOrCostNanos = a})
+      . mapping _Coerce
 
 -- | Pricing period start date. This date must be later than, or the same day
 -- as, the placement start date. The hours, minutes, and seconds of the
@@ -14205,7 +14451,8 @@ psppStartDate
 -- | Units of this pricing period.
 psppUnits :: Lens' PricingSchedulePricingPeriod (Maybe Int64)
 psppUnits
-  = lens _psppUnits (\ s a -> s{_psppUnits = a})
+  = lens _psppUnits (\ s a -> s{_psppUnits = a}) .
+      mapping _Coerce
 
 -- | Comments for this pricing period.
 psppPricingComment :: Lens' PricingSchedulePricingPeriod (Maybe Text)
@@ -14309,8 +14556,8 @@ data Region = Region
     , _regKind          :: !Text
     , _regName          :: !(Maybe Text)
     , _regCountryCode   :: !(Maybe Text)
-    , _regCountryDartId :: !(Maybe Int64)
-    , _regDartId        :: !(Maybe Int64)
+    , _regCountryDartId :: !(Maybe (JSONText Int64))
+    , _regDartId        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Region' with the minimum fields required to make a request.
@@ -14366,11 +14613,13 @@ regCountryDartId :: Lens' Region (Maybe Int64)
 regCountryDartId
   = lens _regCountryDartId
       (\ s a -> s{_regCountryDartId = a})
+      . mapping _Coerce
 
 -- | DART ID of this region.
 regDartId :: Lens' Region (Maybe Int64)
 regDartId
-  = lens _regDartId (\ s a -> s{_regDartId = a})
+  = lens _regDartId (\ s a -> s{_regDartId = a}) .
+      mapping _Coerce
 
 instance FromJSON Region where
         parseJSON
@@ -14464,14 +14713,14 @@ instance ToJSON AdvertiserGroupsListResponse where
 data CreativeAssignment = CreativeAssignment
     { _caCreativeGroupAssignments   :: !(Maybe [CreativeGroupAssignment])
     , _caStartTime                  :: !(Maybe DateTime')
-    , _caWeight                     :: !(Maybe Int32)
+    , _caWeight                     :: !(Maybe (JSONText Int32))
     , _caRichMediaExitOverrides     :: !(Maybe [RichMediaExitOverride])
     , _caSSLCompliant               :: !(Maybe Bool)
-    , _caCreativeId                 :: !(Maybe Int64)
+    , _caCreativeId                 :: !(Maybe (JSONText Int64))
     , _caClickThroughURL            :: !(Maybe ClickThroughURL)
     , _caApplyEventTags             :: !(Maybe Bool)
     , _caActive                     :: !(Maybe Bool)
-    , _caSequence                   :: !(Maybe Int32)
+    , _caSequence                   :: !(Maybe (JSONText Int32))
     , _caEndTime                    :: !(Maybe DateTime')
     , _caCompanionCreativeOverrides :: !(Maybe [CompanionClickThroughOverride])
     , _caCreativeIdDimensionValue   :: !(Maybe DimensionValue)
@@ -14544,7 +14793,9 @@ caStartTime
 -- | Weight of the creative assignment, applicable when the rotation type is
 -- CREATIVE_ROTATION_TYPE_RANDOM.
 caWeight :: Lens' CreativeAssignment (Maybe Int32)
-caWeight = lens _caWeight (\ s a -> s{_caWeight = a})
+caWeight
+  = lens _caWeight (\ s a -> s{_caWeight = a}) .
+      mapping _Coerce
 
 -- | Rich media exit overrides for this creative assignment. Applicable when
 -- the creative type is any of the following: - RICH_MEDIA_INPAGE -
@@ -14571,6 +14822,7 @@ caSSLCompliant
 caCreativeId :: Lens' CreativeAssignment (Maybe Int64)
 caCreativeId
   = lens _caCreativeId (\ s a -> s{_caCreativeId = a})
+      . mapping _Coerce
 
 -- | Click-through URL of the creative assignment.
 caClickThroughURL :: Lens' CreativeAssignment (Maybe ClickThroughURL)
@@ -14596,7 +14848,8 @@ caActive = lens _caActive (\ s a -> s{_caActive = a})
 -- type is CREATIVE_ROTATION_TYPE_SEQUENTIAL.
 caSequence :: Lens' CreativeAssignment (Maybe Int32)
 caSequence
-  = lens _caSequence (\ s a -> s{_caSequence = a})
+  = lens _caSequence (\ s a -> s{_caSequence = a}) .
+      mapping _Coerce
 
 -- | Date and time that the assigned creative should stop serving. Must be
 -- later than the start time.
@@ -14787,17 +15040,17 @@ data FloodlightConfiguration = FloodlightConfiguration
     , _fcInAppAttributionTrackingEnabled          :: !(Maybe Bool)
     , _fcThirdPartyAuthenticationTokens           :: !(Maybe [ThirdPartyAuthenticationToken])
     , _fcKind                                     :: !Text
-    , _fcAdvertiserId                             :: !(Maybe Int64)
+    , _fcAdvertiserId                             :: !(Maybe (JSONText Int64))
     , _fcAnalyticsDataSharingEnabled              :: !(Maybe Bool)
     , _fcAdvertiserIdDimensionValue               :: !(Maybe DimensionValue)
     , _fcIdDimensionValue                         :: !(Maybe DimensionValue)
     , _fcLookbackConfiguration                    :: !(Maybe LookbackConfiguration)
-    , _fcAccountId                                :: !(Maybe Int64)
-    , _fcId                                       :: !(Maybe Int64)
+    , _fcAccountId                                :: !(Maybe (JSONText Int64))
+    , _fcId                                       :: !(Maybe (JSONText Int64))
     , _fcSSLRequired                              :: !(Maybe Bool)
     , _fcNATuralSearchConversionAttributionOption :: !(Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
     , _fcUserDefinedVariableConfigurations        :: !(Maybe [UserDefinedVariableConfiguration])
-    , _fcSubAccountId                             :: !(Maybe Int64)
+    , _fcSubAccountId                             :: !(Maybe (JSONText Int64))
     , _fcFirstDayOfWeek                           :: !(Maybe FloodlightConfigurationFirstDayOfWeek)
     , _fcOmnitureSettings                         :: !(Maybe OmnitureSettings)
     , _fcStandardVariableTypes                    :: !(Maybe [FloodlightConfigurationStandardVariableTypesItem])
@@ -14908,6 +15161,7 @@ fcAdvertiserId :: Lens' FloodlightConfiguration (Maybe Int64)
 fcAdvertiserId
   = lens _fcAdvertiserId
       (\ s a -> s{_fcAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Whether advertiser data is shared with Google Analytics.
 fcAnalyticsDataSharingEnabled :: Lens' FloodlightConfiguration (Maybe Bool)
@@ -14939,12 +15193,15 @@ fcLookbackConfiguration
 -- that can be left blank.
 fcAccountId :: Lens' FloodlightConfiguration (Maybe Int64)
 fcAccountId
-  = lens _fcAccountId (\ s a -> s{_fcAccountId = a})
+  = lens _fcAccountId (\ s a -> s{_fcAccountId = a}) .
+      mapping _Coerce
 
 -- | ID of this floodlight configuration. This is a read-only, auto-generated
 -- field.
 fcId :: Lens' FloodlightConfiguration (Maybe Int64)
-fcId = lens _fcId (\ s a -> s{_fcId = a})
+fcId
+  = lens _fcId (\ s a -> s{_fcId = a}) .
+      mapping _Coerce
 
 -- | Whether floodlight activities owned by this configuration are required
 -- to be SSL-compliant.
@@ -14975,6 +15232,7 @@ fcSubAccountId :: Lens' FloodlightConfiguration (Maybe Int64)
 fcSubAccountId
   = lens _fcSubAccountId
       (\ s a -> s{_fcSubAccountId = a})
+      . mapping _Coerce
 
 -- | Day that will be counted as the first day of the week in reports. This
 -- is a required field.
@@ -15202,7 +15460,7 @@ instance ToJSON CreativeFieldValuesListResponse where
 -- /See:/ 'richMediaExitOverride' smart constructor.
 data RichMediaExitOverride = RichMediaExitOverride
     { _rmeoUseCustomExitURL :: !(Maybe Bool)
-    , _rmeoExitId           :: !(Maybe Int64)
+    , _rmeoExitId           :: !(Maybe (JSONText Int64))
     , _rmeoCustomExitURL    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -15233,7 +15491,8 @@ rmeoUseCustomExitURL
 -- | ID for the override to refer to a specific exit in the creative.
 rmeoExitId :: Lens' RichMediaExitOverride (Maybe Int64)
 rmeoExitId
-  = lens _rmeoExitId (\ s a -> s{_rmeoExitId = a})
+  = lens _rmeoExitId (\ s a -> s{_rmeoExitId = a}) .
+      mapping _Coerce
 
 -- | Click-through URL to override the default exit URL. Applicable if the
 -- useCustomExitUrl field is set to true.
@@ -15436,13 +15695,13 @@ instance ToJSON PlacementsGenerateTagsResponse where
 --
 -- /See:/ 'creativeAsset' smart constructor.
 data CreativeAsset = CreativeAsset
-    { _caaZIndex                :: !(Maybe Int32)
+    { _caaZIndex                :: !(Maybe (JSONText Int32))
     , _caaPushdown              :: !(Maybe Bool)
-    , _caaVideoDuration         :: !(Maybe Float)
+    , _caaVideoDuration         :: !(Maybe (JSONText Float))
     , _caaOriginalBackup        :: !(Maybe Bool)
     , _caaWindowMode            :: !(Maybe CreativeAssetWindowMode)
-    , _caaFlashVersion          :: !(Maybe Int32)
-    , _caaPushdownDuration      :: !(Maybe Float)
+    , _caaFlashVersion          :: !(Maybe (JSONText Int32))
+    , _caaPushdownDuration      :: !(Maybe (JSONText Float))
     , _caaSize                  :: !(Maybe Size)
     , _caaVerticallyLocked      :: !(Maybe Bool)
     , _caaOffSet                :: !(Maybe OffSetPosition)
@@ -15451,7 +15710,7 @@ data CreativeAsset = CreativeAsset
     , _caaTransparency          :: !(Maybe Bool)
     , _caaHideSelectionBoxes    :: !(Maybe Bool)
     , _caaSSLCompliant          :: !(Maybe Bool)
-    , _caaFileSize              :: !(Maybe Int64)
+    , _caaFileSize              :: !(Maybe (JSONText Int64))
     , _caaAssetIdentifier       :: !(Maybe CreativeAssetId)
     , _caaDurationType          :: !(Maybe CreativeAssetDurationType)
     , _caaProgressiveServingURL :: !(Maybe Text)
@@ -15467,11 +15726,11 @@ data CreativeAsset = CreativeAsset
     , _caaDisplayType           :: !(Maybe CreativeAssetDisplayType)
     , _caaChildAssetType        :: !(Maybe CreativeAssetChildAssetType)
     , _caaCollapsedSize         :: !(Maybe Size)
-    , _caaId                    :: !(Maybe Int64)
-    , _caaBitRate               :: !(Maybe Int32)
-    , _caaCustomStartTimeValue  :: !(Maybe Int32)
+    , _caaId                    :: !(Maybe (JSONText Int64))
+    , _caaBitRate               :: !(Maybe (JSONText Int32))
+    , _caaCustomStartTimeValue  :: !(Maybe (JSONText Int32))
     , _caaStartTimeType         :: !(Maybe CreativeAssetStartTimeType)
-    , _caaDuration              :: !(Maybe Int32)
+    , _caaDuration              :: !(Maybe (JSONText Int32))
     , _caaArtworkType           :: !(Maybe CreativeAssetArtworkType)
     , _caaHideFlashObjects      :: !(Maybe Bool)
     , _caaDetectedFeatures      :: !(Maybe [CreativeAssetDetectedFeaturesItem])
@@ -15621,7 +15880,8 @@ creativeAsset =
 -- ASSET_DISPLAY_TYPE_INPAGE or ASSET_DISPLAY_TYPE_OVERLAY.
 caaZIndex :: Lens' CreativeAsset (Maybe Int32)
 caaZIndex
-  = lens _caaZIndex (\ s a -> s{_caaZIndex = a})
+  = lens _caaZIndex (\ s a -> s{_caaZIndex = a}) .
+      mapping _Coerce
 
 -- | Whether the asset pushes down other content. Applicable to the following
 -- creative types: all RICH_MEDIA. Additionally, only applicable when the
@@ -15638,6 +15898,7 @@ caaVideoDuration :: Lens' CreativeAsset (Maybe Float)
 caaVideoDuration
   = lens _caaVideoDuration
       (\ s a -> s{_caaVideoDuration = a})
+      . mapping _Coerce
 
 -- | Whether the backup asset is original or changed by the user in DCM.
 -- Applicable to the following creative types: all RICH_MEDIA.
@@ -15661,6 +15922,7 @@ caaFlashVersion :: Lens' CreativeAsset (Maybe Int32)
 caaFlashVersion
   = lens _caaFlashVersion
       (\ s a -> s{_caaFlashVersion = a})
+      . mapping _Coerce
 
 -- | Pushdown duration in seconds for an asset. Must be between 0 and 9.99.
 -- Applicable to the following creative types: all RICH_MEDIA.Additionally,
@@ -15671,6 +15933,7 @@ caaPushdownDuration :: Lens' CreativeAsset (Maybe Float)
 caaPushdownDuration
   = lens _caaPushdownDuration
       (\ s a -> s{_caaPushdownDuration = a})
+      . mapping _Coerce
 
 -- | Size associated with this creative asset. This is a required field when
 -- applicable; however for IMAGE and FLASH_INPAGE creatives, if left blank,
@@ -15737,7 +16000,8 @@ caaSSLCompliant
 -- and TRACKING_TEXT.
 caaFileSize :: Lens' CreativeAsset (Maybe Int64)
 caaFileSize
-  = lens _caaFileSize (\ s a -> s{_caaFileSize = a})
+  = lens _caaFileSize (\ s a -> s{_caaFileSize = a}) .
+      mapping _Coerce
 
 -- | Identifier of this asset. This is the same identifier returned during
 -- creative asset insert operation. This is a required field. Applicable to
@@ -15869,13 +16133,16 @@ caaCollapsedSize
 -- not be modified. Applicable to all but the following creative types: all
 -- REDIRECT and TRACKING_TEXT.
 caaId :: Lens' CreativeAsset (Maybe Int64)
-caaId = lens _caaId (\ s a -> s{_caaId = a})
+caaId
+  = lens _caaId (\ s a -> s{_caaId = a}) .
+      mapping _Coerce
 
 -- | Detected bit-rate for video asset. This is a read-only field. Applicable
 -- to the following creative types: INSTREAM_VIDEO and all VPAID.
 caaBitRate :: Lens' CreativeAsset (Maybe Int32)
 caaBitRate
-  = lens _caaBitRate (\ s a -> s{_caaBitRate = a})
+  = lens _caaBitRate (\ s a -> s{_caaBitRate = a}) .
+      mapping _Coerce
 
 -- | Custom start time in seconds for making the asset visible. Applicable to
 -- the following creative types: all RICH_MEDIA.
@@ -15883,6 +16150,7 @@ caaCustomStartTimeValue :: Lens' CreativeAsset (Maybe Int32)
 caaCustomStartTimeValue
   = lens _caaCustomStartTimeValue
       (\ s a -> s{_caaCustomStartTimeValue = a})
+      . mapping _Coerce
 
 -- | Initial wait time type before making the asset visible. Applicable to
 -- the following creative types: all RICH_MEDIA.
@@ -15895,7 +16163,8 @@ caaStartTimeType
 -- the following creative types: INSTREAM_VIDEO and VPAID_LINEAR.
 caaDuration :: Lens' CreativeAsset (Maybe Int32)
 caaDuration
-  = lens _caaDuration (\ s a -> s{_caaDuration = a})
+  = lens _caaDuration (\ s a -> s{_caaDuration = a}) .
+      mapping _Coerce
 
 -- | Artwork type of rich media creative. This is a read-only field.
 -- Applicable to the following creative types: all RICH_MEDIA.
@@ -16109,7 +16378,7 @@ instance ToJSON PlacementsListResponse where
 --
 -- /See:/ 'reportSchedule' smart constructor.
 data ReportSchedule = ReportSchedule
-    { _rsEvery             :: !(Maybe Int32)
+    { _rsEvery             :: !(Maybe (JSONText Int32))
     , _rsActive            :: !(Maybe Bool)
     , _rsRepeats           :: !(Maybe Text)
     , _rsStartDate         :: !(Maybe Date')
@@ -16152,7 +16421,9 @@ reportSchedule =
 -- Needs to be set when \"repeats\" is either \"DAILY\", \"WEEKLY\" or
 -- \"MONTHLY\".
 rsEvery :: Lens' ReportSchedule (Maybe Int32)
-rsEvery = lens _rsEvery (\ s a -> s{_rsEvery = a})
+rsEvery
+  = lens _rsEvery (\ s a -> s{_rsEvery = a}) .
+      mapping _Coerce
 
 -- | Whether the schedule is active or not. Must be set to either true or
 -- false.
@@ -16559,11 +16830,11 @@ data Site = Site
     , _ssSiteSettings                  :: !(Maybe SiteSettings)
     , _ssIdDimensionValue              :: !(Maybe DimensionValue)
     , _ssDirectorySiteIdDimensionValue :: !(Maybe DimensionValue)
-    , _ssAccountId                     :: !(Maybe Int64)
+    , _ssAccountId                     :: !(Maybe (JSONText Int64))
     , _ssName                          :: !(Maybe Text)
-    , _ssDirectorySiteId               :: !(Maybe Int64)
-    , _ssId                            :: !(Maybe Int64)
-    , _ssSubAccountId                  :: !(Maybe Int64)
+    , _ssDirectorySiteId               :: !(Maybe (JSONText Int64))
+    , _ssId                            :: !(Maybe (JSONText Int64))
+    , _ssSubAccountId                  :: !(Maybe (JSONText Int64))
     , _ssApproved                      :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -16654,7 +16925,8 @@ ssDirectorySiteIdDimensionValue
 -- blank.
 ssAccountId :: Lens' Site (Maybe Int64)
 ssAccountId
-  = lens _ssAccountId (\ s a -> s{_ssAccountId = a})
+  = lens _ssAccountId (\ s a -> s{_ssAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this site.This is a required field. Must be less than 128
 -- characters long. If this site is under a subaccount, the name must be
@@ -16670,10 +16942,13 @@ ssDirectorySiteId :: Lens' Site (Maybe Int64)
 ssDirectorySiteId
   = lens _ssDirectorySiteId
       (\ s a -> s{_ssDirectorySiteId = a})
+      . mapping _Coerce
 
 -- | ID of this site. This is a read-only, auto-generated field.
 ssId :: Lens' Site (Maybe Int64)
-ssId = lens _ssId (\ s a -> s{_ssId = a})
+ssId
+  = lens _ssId (\ s a -> s{_ssId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this site. This is a read-only field that can be left
 -- blank.
@@ -16681,6 +16956,7 @@ ssSubAccountId :: Lens' Site (Maybe Int64)
 ssSubAccountId
   = lens _ssSubAccountId
       (\ s a -> s{_ssSubAccountId = a})
+      . mapping _Coerce
 
 -- | Whether this site is approved.
 ssApproved :: Lens' Site (Maybe Bool)
@@ -17029,23 +17305,23 @@ data Order = Order
     { _oSellerOrderId          :: !(Maybe Text)
     , _oSellerOrganizationName :: !(Maybe Text)
     , _oKind                   :: !Text
-    , _oAdvertiserId           :: !(Maybe Int64)
-    , _oPlanningTermId         :: !(Maybe Int64)
-    , _oAccountId              :: !(Maybe Int64)
+    , _oAdvertiserId           :: !(Maybe (JSONText Int64))
+    , _oPlanningTermId         :: !(Maybe (JSONText Int64))
+    , _oAccountId              :: !(Maybe (JSONText Int64))
     , _oName                   :: !(Maybe Text)
     , _oSiteNames              :: !(Maybe [Text])
     , _oLastModifiedInfo       :: !(Maybe LastModifiedInfo)
     , _oBuyerOrganizationName  :: !(Maybe Text)
-    , _oId                     :: !(Maybe Int64)
+    , _oId                     :: !(Maybe (JSONText Int64))
     , _oBuyerInvoiceId         :: !(Maybe Text)
     , _oComments               :: !(Maybe Text)
-    , _oProjectId              :: !(Maybe Int64)
-    , _oSubAccountId           :: !(Maybe Int64)
+    , _oProjectId              :: !(Maybe (JSONText Int64))
+    , _oSubAccountId           :: !(Maybe (JSONText Int64))
     , _oNotes                  :: !(Maybe Text)
     , _oContacts               :: !(Maybe [OrderContact])
-    , _oSiteId                 :: !(Maybe [Int64])
+    , _oSiteId                 :: !(Maybe [JSONText Int64])
     , _oTermsAndConditions     :: !(Maybe Text)
-    , _oApproverUserProFileIds :: !(Maybe [Int64])
+    , _oApproverUserProFileIds :: !(Maybe [JSONText Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
@@ -17139,17 +17415,20 @@ oAdvertiserId :: Lens' Order (Maybe Int64)
 oAdvertiserId
   = lens _oAdvertiserId
       (\ s a -> s{_oAdvertiserId = a})
+      . mapping _Coerce
 
 -- | ID of the terms and conditions template used in this order.
 oPlanningTermId :: Lens' Order (Maybe Int64)
 oPlanningTermId
   = lens _oPlanningTermId
       (\ s a -> s{_oPlanningTermId = a})
+      . mapping _Coerce
 
 -- | Account ID of this order.
 oAccountId :: Lens' Order (Maybe Int64)
 oAccountId
-  = lens _oAccountId (\ s a -> s{_oAccountId = a})
+  = lens _oAccountId (\ s a -> s{_oAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this order.
 oName :: Lens' Order (Maybe Text)
@@ -17176,7 +17455,8 @@ oBuyerOrganizationName
 
 -- | ID of this order. This is a read-only, auto-generated field.
 oId :: Lens' Order (Maybe Int64)
-oId = lens _oId (\ s a -> s{_oId = a})
+oId
+  = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
 -- | Buyer invoice ID associated with this order.
 oBuyerInvoiceId :: Lens' Order (Maybe Text)
@@ -17192,13 +17472,15 @@ oComments
 -- | Project ID of this order.
 oProjectId :: Lens' Order (Maybe Int64)
 oProjectId
-  = lens _oProjectId (\ s a -> s{_oProjectId = a})
+  = lens _oProjectId (\ s a -> s{_oProjectId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this order.
 oSubAccountId :: Lens' Order (Maybe Int64)
 oSubAccountId
   = lens _oSubAccountId
       (\ s a -> s{_oSubAccountId = a})
+      . mapping _Coerce
 
 -- | Notes of this order.
 oNotes :: Lens' Order (Maybe Text)
@@ -17337,8 +17619,8 @@ instance ToJSON CreativeAssetId where
 --
 -- /See:/ 'frequencyCap' smart constructor.
 data FrequencyCap = FrequencyCap
-    { _fcImpressions :: !(Maybe Int64)
-    , _fcDuration    :: !(Maybe Int64)
+    { _fcImpressions :: !(Maybe (JSONText Int64))
+    , _fcDuration    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FrequencyCap' with the minimum fields required to make a request.
@@ -17362,12 +17644,14 @@ fcImpressions :: Lens' FrequencyCap (Maybe Int64)
 fcImpressions
   = lens _fcImpressions
       (\ s a -> s{_fcImpressions = a})
+      . mapping _Coerce
 
 -- | Duration of time, in seconds, for this frequency cap. The maximum
 -- duration is 90 days in seconds, or 7,776,000.
 fcDuration :: Lens' FrequencyCap (Maybe Int64)
 fcDuration
-  = lens _fcDuration (\ s a -> s{_fcDuration = a})
+  = lens _fcDuration (\ s a -> s{_fcDuration = a}) .
+      mapping _Coerce
 
 instance FromJSON FrequencyCap where
         parseJSON
@@ -17394,11 +17678,11 @@ data File = File
     , _filEtag             :: !(Maybe Text)
     , _filKind             :: !Text
     , _filURLs             :: !(Maybe FileURLs)
-    , _filReportId         :: !(Maybe Int64)
+    , _filReportId         :: !(Maybe (JSONText Int64))
     , _filDateRange        :: !(Maybe DateRange)
     , _filFormat           :: !(Maybe FileFormat)
-    , _filLastModifiedTime :: !(Maybe Int64)
-    , _filId               :: !(Maybe Int64)
+    , _filLastModifiedTime :: !(Maybe (JSONText Int64))
+    , _filId               :: !(Maybe (JSONText Int64))
     , _filFileName         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -17461,7 +17745,8 @@ filURLs = lens _filURLs (\ s a -> s{_filURLs = a})
 -- | The ID of the report this file was generated from.
 filReportId :: Lens' File (Maybe Int64)
 filReportId
-  = lens _filReportId (\ s a -> s{_filReportId = a})
+  = lens _filReportId (\ s a -> s{_filReportId = a}) .
+      mapping _Coerce
 
 -- | The date range for which the file has report data. The date range will
 -- always be the absolute date range for which the report is run.
@@ -17481,10 +17766,13 @@ filLastModifiedTime :: Lens' File (Maybe Int64)
 filLastModifiedTime
   = lens _filLastModifiedTime
       (\ s a -> s{_filLastModifiedTime = a})
+      . mapping _Coerce
 
 -- | The unique ID of this report file.
 filId :: Lens' File (Maybe Int64)
-filId = lens _filId (\ s a -> s{_filId = a})
+filId
+  = lens _filId (\ s a -> s{_filId = a}) .
+      mapping _Coerce
 
 -- | The filename of the file.
 filFileName :: Lens' File (Maybe Text)
@@ -17911,7 +18199,7 @@ instance ToJSON OmnitureSettings where
 data ConnectionType = ConnectionType
     { _cttKind :: !Text
     , _cttName :: !(Maybe Text)
-    , _cttId   :: !(Maybe Int64)
+    , _cttId   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionType' with the minimum fields required to make a request.
@@ -17943,7 +18231,9 @@ cttName = lens _cttName (\ s a -> s{_cttName = a})
 
 -- | ID of this connection type.
 cttId :: Lens' ConnectionType (Maybe Int64)
-cttId = lens _cttId (\ s a -> s{_cttId = a})
+cttId
+  = lens _cttId (\ s a -> s{_cttId = a}) .
+      mapping _Coerce
 
 instance FromJSON ConnectionType where
         parseJSON
@@ -17965,31 +18255,31 @@ instance ToJSON ConnectionType where
 --
 -- /See:/ 'placementGroup' smart constructor.
 data PlacementGroup = PlacementGroup
-    { _plalPlacementStrategyId              :: !(Maybe Int64)
+    { _plalPlacementStrategyId              :: !(Maybe (JSONText Int64))
     , _plalSiteIdDimensionValue             :: !(Maybe DimensionValue)
     , _plalPricingSchedule                  :: !(Maybe PricingSchedule)
     , _plalKind                             :: !Text
     , _plalCampaignIdDimensionValue         :: !(Maybe DimensionValue)
-    , _plalAdvertiserId                     :: !(Maybe Int64)
+    , _plalAdvertiserId                     :: !(Maybe (JSONText Int64))
     , _plalAdvertiserIdDimensionValue       :: !(Maybe DimensionValue)
-    , _plalCampaignId                       :: !(Maybe Int64)
+    , _plalCampaignId                       :: !(Maybe (JSONText Int64))
     , _plalIdDimensionValue                 :: !(Maybe DimensionValue)
     , _plalPlacementGroupType               :: !(Maybe PlacementGroupPlacementGroupType)
-    , _plalContentCategoryId                :: !(Maybe Int64)
+    , _plalContentCategoryId                :: !(Maybe (JSONText Int64))
     , _plalDirectorySiteIdDimensionValue    :: !(Maybe DimensionValue)
-    , _plalAccountId                        :: !(Maybe Int64)
+    , _plalAccountId                        :: !(Maybe (JSONText Int64))
     , _plalName                             :: !(Maybe Text)
-    , _plalDirectorySiteId                  :: !(Maybe Int64)
+    , _plalDirectorySiteId                  :: !(Maybe (JSONText Int64))
     , _plalCreateInfo                       :: !(Maybe LastModifiedInfo)
-    , _plalChildPlacementIds                :: !(Maybe [Int64])
+    , _plalChildPlacementIds                :: !(Maybe [JSONText Int64])
     , _plalLastModifiedInfo                 :: !(Maybe LastModifiedInfo)
-    , _plalId                               :: !(Maybe Int64)
-    , _plalPrimaryPlacementId               :: !(Maybe Int64)
-    , _plalSubAccountId                     :: !(Maybe Int64)
+    , _plalId                               :: !(Maybe (JSONText Int64))
+    , _plalPrimaryPlacementId               :: !(Maybe (JSONText Int64))
+    , _plalSubAccountId                     :: !(Maybe (JSONText Int64))
     , _plalExternalId                       :: !(Maybe Text)
     , _plalComment                          :: !(Maybe Text)
     , _plalPrimaryPlacementIdDimensionValue :: !(Maybe DimensionValue)
-    , _plalSiteId                           :: !(Maybe Int64)
+    , _plalSiteId                           :: !(Maybe (JSONText Int64))
     , _plalArchived                         :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -18085,6 +18375,7 @@ plalPlacementStrategyId :: Lens' PlacementGroup (Maybe Int64)
 plalPlacementStrategyId
   = lens _plalPlacementStrategyId
       (\ s a -> s{_plalPlacementStrategyId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the site. This is a read-only,
 -- auto-generated field.
@@ -18118,6 +18409,7 @@ plalAdvertiserId :: Lens' PlacementGroup (Maybe Int64)
 plalAdvertiserId
   = lens _plalAdvertiserId
       (\ s a -> s{_plalAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
@@ -18132,6 +18424,7 @@ plalCampaignId :: Lens' PlacementGroup (Maybe Int64)
 plalCampaignId
   = lens _plalCampaignId
       (\ s a -> s{_plalCampaignId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of this placement group. This is a read-only,
 -- auto-generated field.
@@ -18156,6 +18449,7 @@ plalContentCategoryId :: Lens' PlacementGroup (Maybe Int64)
 plalContentCategoryId
   = lens _plalContentCategoryId
       (\ s a -> s{_plalContentCategoryId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the directory site. This is a read-only,
 -- auto-generated field.
@@ -18170,6 +18464,7 @@ plalAccountId :: Lens' PlacementGroup (Maybe Int64)
 plalAccountId
   = lens _plalAccountId
       (\ s a -> s{_plalAccountId = a})
+      . mapping _Coerce
 
 -- | Name of this placement group. This is a required field and must be less
 -- than 256 characters long.
@@ -18184,6 +18479,7 @@ plalDirectorySiteId :: Lens' PlacementGroup (Maybe Int64)
 plalDirectorySiteId
   = lens _plalDirectorySiteId
       (\ s a -> s{_plalDirectorySiteId = a})
+      . mapping _Coerce
 
 -- | Information about the creation of this placement group. This is a
 -- read-only field.
@@ -18210,7 +18506,9 @@ plalLastModifiedInfo
 
 -- | ID of this placement group. This is a read-only, auto-generated field.
 plalId :: Lens' PlacementGroup (Maybe Int64)
-plalId = lens _plalId (\ s a -> s{_plalId = a})
+plalId
+  = lens _plalId (\ s a -> s{_plalId = a}) .
+      mapping _Coerce
 
 -- | ID of the primary placement, used to calculate the media cost of a
 -- roadblock (placement group). Modifying this field will automatically
@@ -18219,6 +18517,7 @@ plalPrimaryPlacementId :: Lens' PlacementGroup (Maybe Int64)
 plalPrimaryPlacementId
   = lens _plalPrimaryPlacementId
       (\ s a -> s{_plalPrimaryPlacementId = a})
+      . mapping _Coerce
 
 -- | Subaccount ID of this placement group. This is a read-only field that
 -- can be left blank.
@@ -18226,6 +18525,7 @@ plalSubAccountId :: Lens' PlacementGroup (Maybe Int64)
 plalSubAccountId
   = lens _plalSubAccountId
       (\ s a -> s{_plalSubAccountId = a})
+      . mapping _Coerce
 
 -- | External ID for this placement.
 plalExternalId :: Lens' PlacementGroup (Maybe Text)
@@ -18252,7 +18552,8 @@ plalPrimaryPlacementIdDimensionValue
 -- read-only after insertion.
 plalSiteId :: Lens' PlacementGroup (Maybe Int64)
 plalSiteId
-  = lens _plalSiteId (\ s a -> s{_plalSiteId = a})
+  = lens _plalSiteId (\ s a -> s{_plalSiteId = a}) .
+      mapping _Coerce
 
 -- | Whether this placement group is archived.
 plalArchived :: Lens' PlacementGroup (Maybe Bool)
@@ -18339,17 +18640,17 @@ data EventTag = EventTag
     , _etEnabledByDefault           :: !(Maybe Bool)
     , _etKind                       :: !Text
     , _etCampaignIdDimensionValue   :: !(Maybe DimensionValue)
-    , _etAdvertiserId               :: !(Maybe Int64)
+    , _etAdvertiserId               :: !(Maybe (JSONText Int64))
     , _etURL                        :: !(Maybe Text)
     , _etAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _etSSLCompliant               :: !(Maybe Bool)
-    , _etCampaignId                 :: !(Maybe Int64)
-    , _etAccountId                  :: !(Maybe Int64)
+    , _etCampaignId                 :: !(Maybe (JSONText Int64))
+    , _etAccountId                  :: !(Maybe (JSONText Int64))
     , _etName                       :: !(Maybe Text)
-    , _etURLEscapeLevels            :: !(Maybe Int32)
-    , _etSiteIds                    :: !(Maybe [Int64])
-    , _etId                         :: !(Maybe Int64)
-    , _etSubAccountId               :: !(Maybe Int64)
+    , _etURLEscapeLevels            :: !(Maybe (JSONText Int32))
+    , _etSiteIds                    :: !(Maybe [JSONText Int64])
+    , _etId                         :: !(Maybe (JSONText Int64))
+    , _etSubAccountId               :: !(Maybe (JSONText Int64))
     , _etType                       :: !(Maybe EventTagType)
     , _etSiteFilterType             :: !(Maybe EventTagSiteFilterType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -18456,6 +18757,7 @@ etAdvertiserId :: Lens' EventTag (Maybe Int64)
 etAdvertiserId
   = lens _etAdvertiserId
       (\ s a -> s{_etAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Payload URL for this event tag. The URL on a click-through event tag
 -- should have a landing page URL appended to the end of it. This field is
@@ -18481,12 +18783,14 @@ etSSLCompliant
 etCampaignId :: Lens' EventTag (Maybe Int64)
 etCampaignId
   = lens _etCampaignId (\ s a -> s{_etCampaignId = a})
+      . mapping _Coerce
 
 -- | Account ID of this event tag. This is a read-only field that can be left
 -- blank.
 etAccountId :: Lens' EventTag (Maybe Int64)
 etAccountId
-  = lens _etAccountId (\ s a -> s{_etAccountId = a})
+  = lens _etAccountId (\ s a -> s{_etAccountId = a}) .
+      mapping _Coerce
 
 -- | Name of this event tag. This is a required field and must be less than
 -- 256 characters long.
@@ -18500,6 +18804,7 @@ etURLEscapeLevels :: Lens' EventTag (Maybe Int32)
 etURLEscapeLevels
   = lens _etURLEscapeLevels
       (\ s a -> s{_etURLEscapeLevels = a})
+      . mapping _Coerce
 
 -- | Filter list of site IDs associated with this event tag. The
 -- siteFilterType determines whether this is a whitelist or blacklist
@@ -18512,7 +18817,9 @@ etSiteIds
 
 -- | ID of this event tag. This is a read-only, auto-generated field.
 etId :: Lens' EventTag (Maybe Int64)
-etId = lens _etId (\ s a -> s{_etId = a})
+etId
+  = lens _etId (\ s a -> s{_etId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this event tag. This is a read-only field that can be
 -- left blank.
@@ -18520,6 +18827,7 @@ etSubAccountId :: Lens' EventTag (Maybe Int64)
 etSubAccountId
   = lens _etSubAccountId
       (\ s a -> s{_etSubAccountId = a})
+      . mapping _Coerce
 
 -- | Event tag type. Can be used to specify whether to use a third-party
 -- pixel, a third-party JavaScript URL, or a third-party click-through URL
@@ -18589,8 +18897,8 @@ data UserRolePermission = UserRolePermission
     { _useKind              :: !Text
     , _useAvailability      :: !(Maybe UserRolePermissionAvailability)
     , _useName              :: !(Maybe Text)
-    , _useId                :: !(Maybe Int64)
-    , _usePermissionGroupId :: !(Maybe Int64)
+    , _useId                :: !(Maybe (JSONText Int64))
+    , _usePermissionGroupId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermission' with the minimum fields required to make a request.
@@ -18634,13 +18942,16 @@ useName = lens _useName (\ s a -> s{_useName = a})
 
 -- | ID of this user role permission.
 useId :: Lens' UserRolePermission (Maybe Int64)
-useId = lens _useId (\ s a -> s{_useId = a})
+useId
+  = lens _useId (\ s a -> s{_useId = a}) .
+      mapping _Coerce
 
 -- | ID of the permission group that this user role permission belongs to.
 usePermissionGroupId :: Lens' UserRolePermission (Maybe Int64)
 usePermissionGroupId
   = lens _usePermissionGroupId
       (\ s a -> s{_usePermissionGroupId = a})
+      . mapping _Coerce
 
 instance FromJSON UserRolePermission where
         parseJSON
@@ -18666,7 +18977,7 @@ instance ToJSON UserRolePermission where
 --
 -- /See:/ 'orderContact' smart constructor.
 data OrderContact = OrderContact
-    { _ocSignatureUserProFileId :: !(Maybe Int64)
+    { _ocSignatureUserProFileId :: !(Maybe (JSONText Int64))
     , _ocContactName            :: !(Maybe Text)
     , _ocContactTitle           :: !(Maybe Text)
     , _ocContactType            :: !(Maybe OrderContactContactType)
@@ -18703,6 +19014,7 @@ ocSignatureUserProFileId :: Lens' OrderContact (Maybe Int64)
 ocSignatureUserProFileId
   = lens _ocSignatureUserProFileId
       (\ s a -> s{_ocSignatureUserProFileId = a})
+      . mapping _Coerce
 
 -- | Name of this contact.
 ocContactName :: Lens' OrderContact (Maybe Text)
@@ -18812,7 +19124,7 @@ instance ToJSON
 -- /See:/ 'directorySiteContactAssignment' smart constructor.
 data DirectorySiteContactAssignment = DirectorySiteContactAssignment
     { _dscaVisibility :: !(Maybe DirectorySiteContactAssignmentVisibility)
-    , _dscaContactId  :: !(Maybe Int64)
+    , _dscaContactId  :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactAssignment' with the minimum fields required to make a request.
@@ -18844,6 +19156,7 @@ dscaContactId :: Lens' DirectorySiteContactAssignment (Maybe Int64)
 dscaContactId
   = lens _dscaContactId
       (\ s a -> s{_dscaContactId = a})
+      . mapping _Coerce
 
 instance FromJSON DirectorySiteContactAssignment
          where
@@ -18864,10 +19177,10 @@ instance ToJSON DirectorySiteContactAssignment where
 --
 -- /See:/ 'adSlot' smart constructor.
 data AdSlot = AdSlot
-    { _assHeight            :: !(Maybe Int64)
+    { _assHeight            :: !(Maybe (JSONText Int64))
     , _assPaymentSourceType :: !(Maybe AdSlotPaymentSourceType)
-    , _assLinkedPlacementId :: !(Maybe Int64)
-    , _assWidth             :: !(Maybe Int64)
+    , _assLinkedPlacementId :: !(Maybe (JSONText Int64))
+    , _assWidth             :: !(Maybe (JSONText Int64))
     , _assPrimary           :: !(Maybe Bool)
     , _assName              :: !(Maybe Text)
     , _assComment           :: !(Maybe Text)
@@ -18910,7 +19223,8 @@ adSlot =
 -- | Height of this ad slot.
 assHeight :: Lens' AdSlot (Maybe Int64)
 assHeight
-  = lens _assHeight (\ s a -> s{_assHeight = a})
+  = lens _assHeight (\ s a -> s{_assHeight = a}) .
+      mapping _Coerce
 
 -- | Payment source type of this ad slot.
 assPaymentSourceType :: Lens' AdSlot (Maybe AdSlotPaymentSourceType)
@@ -18924,10 +19238,13 @@ assLinkedPlacementId :: Lens' AdSlot (Maybe Int64)
 assLinkedPlacementId
   = lens _assLinkedPlacementId
       (\ s a -> s{_assLinkedPlacementId = a})
+      . mapping _Coerce
 
 -- | Width of this ad slot.
 assWidth :: Lens' AdSlot (Maybe Int64)
-assWidth = lens _assWidth (\ s a -> s{_assWidth = a})
+assWidth
+  = lens _assWidth (\ s a -> s{_assWidth = a}) .
+      mapping _Coerce
 
 -- | Primary ad slot of a roadblock inventory item.
 assPrimary :: Lens' AdSlot (Maybe Bool)
@@ -19032,19 +19349,19 @@ instance ToJSON ThirdPartyTrackingURL where
 data OrderDocument = OrderDocument
     { _odSigned                   :: !(Maybe Bool)
     , _odKind                     :: !Text
-    , _odAdvertiserId             :: !(Maybe Int64)
+    , _odAdvertiserId             :: !(Maybe (JSONText Int64))
     , _odLastSentTime             :: !(Maybe DateTime')
-    , _odAmendedOrderDocumentId   :: !(Maybe Int64)
+    , _odAmendedOrderDocumentId   :: !(Maybe (JSONText Int64))
     , _odLastSentRecipients       :: !(Maybe [Text])
     , _odEffectiveDate            :: !(Maybe Date')
-    , _odApprovedByUserProFileIds :: !(Maybe [Int64])
-    , _odAccountId                :: !(Maybe Int64)
-    , _odId                       :: !(Maybe Int64)
-    , _odProjectId                :: !(Maybe Int64)
+    , _odApprovedByUserProFileIds :: !(Maybe [JSONText Int64])
+    , _odAccountId                :: !(Maybe (JSONText Int64))
+    , _odId                       :: !(Maybe (JSONText Int64))
+    , _odProjectId                :: !(Maybe (JSONText Int64))
     , _odTitle                    :: !(Maybe Text)
-    , _odSubAccountId             :: !(Maybe Int64)
+    , _odSubAccountId             :: !(Maybe (JSONText Int64))
     , _odType                     :: !(Maybe OrderDocumentType)
-    , _odOrderId                  :: !(Maybe Int64)
+    , _odOrderId                  :: !(Maybe (JSONText Int64))
     , _odCancelled                :: !(Maybe Bool)
     , _odCreatedInfo              :: !(Maybe LastModifiedInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -19123,6 +19440,7 @@ odAdvertiserId :: Lens' OrderDocument (Maybe Int64)
 odAdvertiserId
   = lens _odAdvertiserId
       (\ s a -> s{_odAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Timestamp of the last email sent with this order document.
 odLastSentTime :: Lens' OrderDocument (Maybe UTCTime)
@@ -19138,6 +19456,7 @@ odAmendedOrderDocumentId :: Lens' OrderDocument (Maybe Int64)
 odAmendedOrderDocumentId
   = lens _odAmendedOrderDocumentId
       (\ s a -> s{_odAmendedOrderDocumentId = a})
+      . mapping _Coerce
 
 -- | List of email addresses that received the last sent document.
 odLastSentRecipients :: Lens' OrderDocument [Text]
@@ -19165,16 +19484,20 @@ odApprovedByUserProFileIds
 -- | Account ID of this order document.
 odAccountId :: Lens' OrderDocument (Maybe Int64)
 odAccountId
-  = lens _odAccountId (\ s a -> s{_odAccountId = a})
+  = lens _odAccountId (\ s a -> s{_odAccountId = a}) .
+      mapping _Coerce
 
 -- | ID of this order document.
 odId :: Lens' OrderDocument (Maybe Int64)
-odId = lens _odId (\ s a -> s{_odId = a})
+odId
+  = lens _odId (\ s a -> s{_odId = a}) .
+      mapping _Coerce
 
 -- | Project ID of this order document.
 odProjectId :: Lens' OrderDocument (Maybe Int64)
 odProjectId
-  = lens _odProjectId (\ s a -> s{_odProjectId = a})
+  = lens _odProjectId (\ s a -> s{_odProjectId = a}) .
+      mapping _Coerce
 
 -- | Title of this order document.
 odTitle :: Lens' OrderDocument (Maybe Text)
@@ -19185,6 +19508,7 @@ odSubAccountId :: Lens' OrderDocument (Maybe Int64)
 odSubAccountId
   = lens _odSubAccountId
       (\ s a -> s{_odSubAccountId = a})
+      . mapping _Coerce
 
 -- | Type of this order document
 odType :: Lens' OrderDocument (Maybe OrderDocumentType)
@@ -19193,7 +19517,8 @@ odType = lens _odType (\ s a -> s{_odType = a})
 -- | ID of the order from which this order document is created.
 odOrderId :: Lens' OrderDocument (Maybe Int64)
 odOrderId
-  = lens _odOrderId (\ s a -> s{_odOrderId = a})
+  = lens _odOrderId (\ s a -> s{_odOrderId = a}) .
+      mapping _Coerce
 
 -- | Whether this order document is cancelled.
 odCancelled :: Lens' OrderDocument (Maybe Bool)
@@ -19261,9 +19586,9 @@ data Metro = Metro
     , _metKind          :: !Text
     , _metName          :: !(Maybe Text)
     , _metCountryCode   :: !(Maybe Text)
-    , _metDmaId         :: !(Maybe Int64)
-    , _metCountryDartId :: !(Maybe Int64)
-    , _metDartId        :: !(Maybe Int64)
+    , _metDmaId         :: !(Maybe (JSONText Int64))
+    , _metCountryDartId :: !(Maybe (JSONText Int64))
+    , _metDartId        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Metro' with the minimum fields required to make a request.
@@ -19319,18 +19644,22 @@ metCountryCode
 -- | DMA ID of this metro region. This is the ID used for targeting and
 -- generating reports, and is equivalent to metro_code.
 metDmaId :: Lens' Metro (Maybe Int64)
-metDmaId = lens _metDmaId (\ s a -> s{_metDmaId = a})
+metDmaId
+  = lens _metDmaId (\ s a -> s{_metDmaId = a}) .
+      mapping _Coerce
 
 -- | DART ID of the country to which this metro region belongs.
 metCountryDartId :: Lens' Metro (Maybe Int64)
 metCountryDartId
   = lens _metCountryDartId
       (\ s a -> s{_metCountryDartId = a})
+      . mapping _Coerce
 
 -- | DART ID of this metro region.
 metDartId :: Lens' Metro (Maybe Int64)
 metDartId
-  = lens _metDartId (\ s a -> s{_metDartId = a})
+  = lens _metDartId (\ s a -> s{_metDartId = a}) .
+      mapping _Coerce
 
 instance FromJSON Metro where
         parseJSON
@@ -19361,7 +19690,7 @@ instance ToJSON Metro where
 -- /See:/ 'placement' smart constructor.
 data Placement = Placement
     { _p1Status                         :: !(Maybe PlacementStatus)
-    , _p1PlacementStrategyId            :: !(Maybe Int64)
+    , _p1PlacementStrategyId            :: !(Maybe (JSONText Int64))
     , _p1TagFormats                     :: !(Maybe [PlacementTagFormatsItem])
     , _p1SiteIdDimensionValue           :: !(Maybe DimensionValue)
     , _p1PricingSchedule                :: !(Maybe PricingSchedule)
@@ -19369,29 +19698,29 @@ data Placement = Placement
     , _p1Kind                           :: !Text
     , _p1KeyName                        :: !(Maybe Text)
     , _p1CampaignIdDimensionValue       :: !(Maybe DimensionValue)
-    , _p1AdvertiserId                   :: !(Maybe Int64)
+    , _p1AdvertiserId                   :: !(Maybe (JSONText Int64))
     , _p1AdvertiserIdDimensionValue     :: !(Maybe DimensionValue)
-    , _p1CampaignId                     :: !(Maybe Int64)
+    , _p1CampaignId                     :: !(Maybe (JSONText Int64))
     , _p1IdDimensionValue               :: !(Maybe DimensionValue)
     , _p1Primary                        :: !(Maybe Bool)
     , _p1LookbackConfiguration          :: !(Maybe LookbackConfiguration)
     , _p1TagSetting                     :: !(Maybe TagSetting)
-    , _p1ContentCategoryId              :: !(Maybe Int64)
+    , _p1ContentCategoryId              :: !(Maybe (JSONText Int64))
     , _p1DirectorySiteIdDimensionValue  :: !(Maybe DimensionValue)
-    , _p1AccountId                      :: !(Maybe Int64)
+    , _p1AccountId                      :: !(Maybe (JSONText Int64))
     , _p1PaymentSource                  :: !(Maybe PlacementPaymentSource)
     , _p1Name                           :: !(Maybe Text)
-    , _p1DirectorySiteId                :: !(Maybe Int64)
+    , _p1DirectorySiteId                :: !(Maybe (JSONText Int64))
     , _p1CreateInfo                     :: !(Maybe LastModifiedInfo)
     , _p1LastModifiedInfo               :: !(Maybe LastModifiedInfo)
-    , _p1Id                             :: !(Maybe Int64)
+    , _p1Id                             :: !(Maybe (JSONText Int64))
     , _p1SSLRequired                    :: !(Maybe Bool)
-    , _p1SubAccountId                   :: !(Maybe Int64)
+    , _p1SubAccountId                   :: !(Maybe (JSONText Int64))
     , _p1PlacementGroupIdDimensionValue :: !(Maybe DimensionValue)
     , _p1ExternalId                     :: !(Maybe Text)
-    , _p1PlacementGroupId               :: !(Maybe Int64)
+    , _p1PlacementGroupId               :: !(Maybe (JSONText Int64))
     , _p1Comment                        :: !(Maybe Text)
-    , _p1SiteId                         :: !(Maybe Int64)
+    , _p1SiteId                         :: !(Maybe (JSONText Int64))
     , _p1Compatibility                  :: !(Maybe PlacementCompatibility)
     , _p1Archived                       :: !(Maybe Bool)
     , _p1PaymentApproved                :: !(Maybe Bool)
@@ -19524,6 +19853,7 @@ p1PlacementStrategyId :: Lens' Placement (Maybe Int64)
 p1PlacementStrategyId
   = lens _p1PlacementStrategyId
       (\ s a -> s{_p1PlacementStrategyId = a})
+      . mapping _Coerce
 
 -- | Tag formats to generate for this placement. This field is required on
 -- insertion. Acceptable values are: - \"PLACEMENT_TAG_STANDARD\" -
@@ -19584,6 +19914,7 @@ p1AdvertiserId :: Lens' Placement (Maybe Int64)
 p1AdvertiserId
   = lens _p1AdvertiserId
       (\ s a -> s{_p1AdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
@@ -19597,6 +19928,7 @@ p1AdvertiserIdDimensionValue
 p1CampaignId :: Lens' Placement (Maybe Int64)
 p1CampaignId
   = lens _p1CampaignId (\ s a -> s{_p1CampaignId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of this placement. This is a read-only,
 -- auto-generated field.
@@ -19631,6 +19963,7 @@ p1ContentCategoryId :: Lens' Placement (Maybe Int64)
 p1ContentCategoryId
   = lens _p1ContentCategoryId
       (\ s a -> s{_p1ContentCategoryId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the directory site. This is a read-only,
 -- auto-generated field.
@@ -19642,7 +19975,8 @@ p1DirectorySiteIdDimensionValue
 -- | Account ID of this placement. This field can be left blank.
 p1AccountId :: Lens' Placement (Maybe Int64)
 p1AccountId
-  = lens _p1AccountId (\ s a -> s{_p1AccountId = a})
+  = lens _p1AccountId (\ s a -> s{_p1AccountId = a}) .
+      mapping _Coerce
 
 -- | Payment source for this placement. This is a required field that is
 -- read-only after insertion.
@@ -19663,6 +19997,7 @@ p1DirectorySiteId :: Lens' Placement (Maybe Int64)
 p1DirectorySiteId
   = lens _p1DirectorySiteId
       (\ s a -> s{_p1DirectorySiteId = a})
+      . mapping _Coerce
 
 -- | Information about the creation of this placement. This is a read-only
 -- field.
@@ -19679,7 +20014,9 @@ p1LastModifiedInfo
 
 -- | ID of this placement. This is a read-only, auto-generated field.
 p1Id :: Lens' Placement (Maybe Int64)
-p1Id = lens _p1Id (\ s a -> s{_p1Id = a})
+p1Id
+  = lens _p1Id (\ s a -> s{_p1Id = a}) .
+      mapping _Coerce
 
 -- | Whether creatives assigned to this placement must be SSL-compliant.
 p1SSLRequired :: Lens' Placement (Maybe Bool)
@@ -19692,6 +20029,7 @@ p1SubAccountId :: Lens' Placement (Maybe Int64)
 p1SubAccountId
   = lens _p1SubAccountId
       (\ s a -> s{_p1SubAccountId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the placement group. This is a read-only,
 -- auto-generated field.
@@ -19710,6 +20048,7 @@ p1PlacementGroupId :: Lens' Placement (Maybe Int64)
 p1PlacementGroupId
   = lens _p1PlacementGroupId
       (\ s a -> s{_p1PlacementGroupId = a})
+      . mapping _Coerce
 
 -- | Comments for this placement.
 p1Comment :: Lens' Placement (Maybe Text)
@@ -19721,7 +20060,9 @@ p1Comment
 -- with this placement. This is a required field that is read-only after
 -- insertion.
 p1SiteId :: Lens' Placement (Maybe Int64)
-p1SiteId = lens _p1SiteId (\ s a -> s{_p1SiteId = a})
+p1SiteId
+  = lens _p1SiteId (\ s a -> s{_p1SiteId = a}) .
+      mapping _Coerce
 
 -- | Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering
 -- either on desktop or on mobile devices for regular or interstitial ads,
@@ -19907,12 +20248,12 @@ instance ToJSON SitesListResponse where
 -- /See:/ 'creativeField' smart constructor.
 data CreativeField = CreativeField
     { _cffKind                       :: !Text
-    , _cffAdvertiserId               :: !(Maybe Int64)
+    , _cffAdvertiserId               :: !(Maybe (JSONText Int64))
     , _cffAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
-    , _cffAccountId                  :: !(Maybe Int64)
+    , _cffAccountId                  :: !(Maybe (JSONText Int64))
     , _cffName                       :: !(Maybe Text)
-    , _cffId                         :: !(Maybe Int64)
-    , _cffSubAccountId               :: !(Maybe Int64)
+    , _cffId                         :: !(Maybe (JSONText Int64))
+    , _cffSubAccountId               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeField' with the minimum fields required to make a request.
@@ -19956,6 +20297,7 @@ cffAdvertiserId :: Lens' CreativeField (Maybe Int64)
 cffAdvertiserId
   = lens _cffAdvertiserId
       (\ s a -> s{_cffAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
@@ -19969,6 +20311,7 @@ cffAdvertiserIdDimensionValue
 cffAccountId :: Lens' CreativeField (Maybe Int64)
 cffAccountId
   = lens _cffAccountId (\ s a -> s{_cffAccountId = a})
+      . mapping _Coerce
 
 -- | Name of this creative field. This is a required field and must be less
 -- than 256 characters long and unique among creative fields of the same
@@ -19978,7 +20321,9 @@ cffName = lens _cffName (\ s a -> s{_cffName = a})
 
 -- | ID of this creative field. This is a read-only, auto-generated field.
 cffId :: Lens' CreativeField (Maybe Int64)
-cffId = lens _cffId (\ s a -> s{_cffId = a})
+cffId
+  = lens _cffId (\ s a -> s{_cffId = a}) .
+      mapping _Coerce
 
 -- | Subaccount ID of this creative field. This is a read-only field that can
 -- be left blank.
@@ -19986,6 +20331,7 @@ cffSubAccountId :: Lens' CreativeField (Maybe Int64)
 cffSubAccountId
   = lens _cffSubAccountId
       (\ s a -> s{_cffSubAccountId = a})
+      . mapping _Coerce
 
 instance FromJSON CreativeField where
         parseJSON
@@ -20019,7 +20365,7 @@ instance ToJSON CreativeField where
 -- /See:/ 'defaultClickThroughEventTagProperties' smart constructor.
 data DefaultClickThroughEventTagProperties = DefaultClickThroughEventTagProperties
     { _dctetpOverrideInheritedEventTag     :: !(Maybe Bool)
-    , _dctetpDefaultClickThroughEventTagId :: !(Maybe Int64)
+    , _dctetpDefaultClickThroughEventTagId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultClickThroughEventTagProperties' with the minimum fields required to make a request.
@@ -20051,6 +20397,7 @@ dctetpDefaultClickThroughEventTagId
   = lens _dctetpDefaultClickThroughEventTagId
       (\ s a ->
          s{_dctetpDefaultClickThroughEventTagId = a})
+      . mapping _Coerce
 
 instance FromJSON
          DefaultClickThroughEventTagProperties where

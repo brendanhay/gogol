@@ -12,6 +12,7 @@
 --
 module Network.Google.Data.JSON
     ( JSONValue
+    , JSONText (..)
     , parseJSONObject
     , parseJSONText
     , toJSONText
@@ -32,11 +33,26 @@ module Network.Google.Data.JSON
 
 import           Data.Aeson
 import           Data.Aeson.Types
+import           Data.Data
 import           Data.HashMap.Strict (HashMap)
 import           Data.Text           (Text)
+import qualified Data.Text           as Text
 import           Servant.API
 
 type JSONValue = Value
+
+newtype JSONText a = JSONText a
+    deriving (Eq, Ord, Read, Show, Data, Typeable, FromText, ToText)
+
+instance (FromJSON a, FromText a) => FromJSON (JSONText a) where
+    parseJSON (String s) =
+        case fromText s of
+            Just x  -> pure (JSONText x)
+            Nothing -> fail $ "Failed to parse value from " ++ Text.unpack s
+    parseJSON o          = JSONText <$> parseJSON o
+
+instance ToText a => ToJSON (JSONText a) where
+    toJSON (JSONText x) = String (toText x)
 
 parseJSONObject :: FromJSON a => HashMap Text Value -> Parser a
 parseJSONObject = parseJSON . Object

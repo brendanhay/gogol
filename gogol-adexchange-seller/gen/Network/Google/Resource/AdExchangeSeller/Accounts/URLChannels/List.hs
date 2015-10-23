@@ -54,7 +54,7 @@ type AccountsURLChannelsListResource =
                Capture "adClientId" Text :>
                  "urlchannels" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
 
 -- | List all URL channels in the specified ad client for this Ad Exchange
@@ -65,7 +65,7 @@ data AccountsURLChannelsList = AccountsURLChannelsList
     { _auclAdClientId :: !Text
     , _auclAccountId  :: !Text
     , _auclPageToken  :: !(Maybe Text)
-    , _auclMaxResults :: !(Maybe Word32)
+    , _auclMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsURLChannelsList' with the minimum fields required to make a request.
@@ -117,6 +117,7 @@ auclMaxResults :: Lens' AccountsURLChannelsList (Maybe Word32)
 auclMaxResults
   = lens _auclMaxResults
       (\ s a -> s{_auclMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsURLChannelsList where
         type Rs AccountsURLChannelsList = URLChannels

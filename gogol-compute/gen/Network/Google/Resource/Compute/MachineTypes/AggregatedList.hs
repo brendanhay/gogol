@@ -53,7 +53,7 @@ type MachineTypesAggregatedListResource =
                "machineTypes" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] MachineTypeAggregatedList
 
@@ -64,7 +64,7 @@ data MachineTypesAggregatedList = MachineTypesAggregatedList
     { _mtalProject    :: !Text
     , _mtalFilter     :: !(Maybe Text)
     , _mtalPageToken  :: !(Maybe Text)
-    , _mtalMaxResults :: !Word32
+    , _mtalMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesAggregatedList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ mtalMaxResults :: Lens' MachineTypesAggregatedList Word32
 mtalMaxResults
   = lens _mtalMaxResults
       (\ s a -> s{_mtalMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest MachineTypesAggregatedList
          where

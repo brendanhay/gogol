@@ -74,7 +74,7 @@ type AccountsOrdersListResource =
                                QueryParam "bearer_token" Text :>
                                  QueryParam "name" Text :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "pageSize" Int32 :>
+                                     QueryParam "pageSize" (JSONText Int32) :>
                                        QueryParam "callback" Text :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListOrdersResponse
@@ -98,7 +98,7 @@ data AccountsOrdersList = AccountsOrdersList
     , _aolBearerToken    :: !(Maybe Text)
     , _aolName           :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
-    , _aolPageSize       :: !(Maybe Int32)
+    , _aolPageSize       :: !(Maybe (JSONText Int32))
     , _aolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -234,7 +234,8 @@ aolPageToken
 -- | See _List methods rules_ for info about this field.
 aolPageSize :: Lens' AccountsOrdersList (Maybe Int32)
 aolPageSize
-  = lens _aolPageSize (\ s a -> s{_aolPageSize = a})
+  = lens _aolPageSize (\ s a -> s{_aolPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 aolCallback :: Lens' AccountsOrdersList (Maybe Text)

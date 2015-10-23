@@ -57,7 +57,7 @@ type ResourceRecordSetsListResource =
                    QueryParam "name" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "type" Text :>
-                         QueryParam "maxResults" Int32 :>
+                         QueryParam "maxResults" (JSONText Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ResourceRecordSetsListResponse
 
@@ -70,7 +70,7 @@ data ResourceRecordSetsList = ResourceRecordSetsList
     , _rrslPageToken   :: !(Maybe Text)
     , _rrslType        :: !(Maybe Text)
     , _rrslManagedZone :: !Text
-    , _rrslMaxResults  :: !(Maybe Int32)
+    , _rrslMaxResults  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSetsList' with the minimum fields required to make a request.
@@ -137,6 +137,7 @@ rrslMaxResults :: Lens' ResourceRecordSetsList (Maybe Int32)
 rrslMaxResults
   = lens _rrslMaxResults
       (\ s a -> s{_rrslMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ResourceRecordSetsList where
         type Rs ResourceRecordSetsList =

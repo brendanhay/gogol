@@ -57,7 +57,7 @@ type PostsPatchResource =
                Capture "postId" Text :>
                  QueryParam "fetchBody" Bool :>
                    QueryParam "fetchImages" Bool :>
-                     QueryParam "maxComments" Word32 :>
+                     QueryParam "maxComments" (JSONText Word32) :>
                        QueryParam "revert" Bool :>
                          QueryParam "publish" Bool :>
                            QueryParam "alt" AltJSON :>
@@ -71,7 +71,7 @@ data PostsPatch = PostsPatch
     , _posoFetchImages :: !(Maybe Bool)
     , _posoBlogId      :: !Text
     , _posoPayload     :: !Post'
-    , _posoMaxComments :: !(Maybe Word32)
+    , _posoMaxComments :: !(Maybe (JSONText Word32))
     , _posoRevert      :: !(Maybe Bool)
     , _posoPostId      :: !Text
     , _posoPublish     :: !(Maybe Bool)
@@ -142,6 +142,7 @@ posoMaxComments :: Lens' PostsPatch (Maybe Word32)
 posoMaxComments
   = lens _posoMaxComments
       (\ s a -> s{_posoMaxComments = a})
+      . mapping _Coerce
 
 -- | Whether a revert action should be performed when the post is updated
 -- (default: false).

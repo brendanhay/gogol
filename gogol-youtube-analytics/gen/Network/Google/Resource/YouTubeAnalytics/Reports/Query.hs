@@ -63,8 +63,8 @@ type ReportsQueryResource =
                        QueryParam "currency" Text :>
                          QueryParam "sort" Text :>
                            QueryParam "dimensions" Text :>
-                             QueryParam "start-index" Int32 :>
-                               QueryParam "max-results" Int32 :>
+                             QueryParam "start-index" (JSONText Int32) :>
+                               QueryParam "max-results" (JSONText Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ResultTable
 
@@ -79,8 +79,8 @@ data ReportsQuery = ReportsQuery
     , _rqCurrency   :: !(Maybe Text)
     , _rqSort       :: !(Maybe Text)
     , _rqDimensions :: !(Maybe Text)
-    , _rqStartIndex :: !(Maybe Int32)
-    , _rqMaxResults :: !(Maybe Int32)
+    , _rqStartIndex :: !(Maybe (JSONText Int32))
+    , _rqMaxResults :: !(Maybe (JSONText Int32))
     , _rqStartDate  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -191,11 +191,13 @@ rqDimensions
 rqStartIndex :: Lens' ReportsQuery (Maybe Int32)
 rqStartIndex
   = lens _rqStartIndex (\ s a -> s{_rqStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of rows to include in the response.
 rqMaxResults :: Lens' ReportsQuery (Maybe Int32)
 rqMaxResults
   = lens _rqMaxResults (\ s a -> s{_rqMaxResults = a})
+      . mapping _Coerce
 
 -- | The start date for fetching YouTube Analytics data. The value should be
 -- in YYYY-MM-DD format.

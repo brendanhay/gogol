@@ -65,7 +65,7 @@ type CoursesStudentsListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" Int32 :>
+                           QueryParam "pageSize" (JSONText Int32) :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListStudentsResponse
@@ -85,7 +85,7 @@ data CoursesStudentsList = CoursesStudentsList
     , _cslUploadType     :: !(Maybe Text)
     , _cslBearerToken    :: !(Maybe Text)
     , _cslPageToken      :: !(Maybe Text)
-    , _cslPageSize       :: !(Maybe Int32)
+    , _cslPageSize       :: !(Maybe (JSONText Int32))
     , _cslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -178,7 +178,8 @@ cslPageToken
 -- return fewer than the specified number of results.
 cslPageSize :: Lens' CoursesStudentsList (Maybe Int32)
 cslPageSize
-  = lens _cslPageSize (\ s a -> s{_cslPageSize = a})
+  = lens _cslPageSize (\ s a -> s{_cslPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 cslCallback :: Lens' CoursesStudentsList (Maybe Text)

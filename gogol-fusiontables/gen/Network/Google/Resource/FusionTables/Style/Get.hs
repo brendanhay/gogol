@@ -48,14 +48,14 @@ type StyleGetResource =
          "tables" :>
            Capture "tableId" Text :>
              "styles" :>
-               Capture "styleId" Int32 :>
+               Capture "styleId" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] StyleSetting
 
 -- | Gets a specific style.
 --
 -- /See:/ 'styleGet' smart constructor.
 data StyleGet = StyleGet
-    { _sgStyleId :: !Int32
+    { _sgStyleId :: !(JSONText Int32)
     , _sgTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ styleGet pSgStyleId_ pSgTableId_ =
 -- | Identifier (integer) for a specific style in a table
 sgStyleId :: Lens' StyleGet Int32
 sgStyleId
-  = lens _sgStyleId (\ s a -> s{_sgStyleId = a})
+  = lens _sgStyleId (\ s a -> s{_sgStyleId = a}) .
+      _Coerce
 
 -- | Table to which the requested style belongs
 sgTableId :: Lens' StyleGet Text

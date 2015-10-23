@@ -56,7 +56,7 @@ type MachineTypesListResource =
                  "machineTypes" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] MachineTypeList
 
@@ -69,7 +69,7 @@ data MachineTypesList = MachineTypesList
     , _mtlZone       :: !Text
     , _mtlFilter     :: !(Maybe Text)
     , _mtlPageToken  :: !(Maybe Text)
-    , _mtlMaxResults :: !Word32
+    , _mtlMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesList' with the minimum fields required to make a request.
@@ -134,6 +134,7 @@ mtlMaxResults :: Lens' MachineTypesList Word32
 mtlMaxResults
   = lens _mtlMaxResults
       (\ s a -> s{_mtlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest MachineTypesList where
         type Rs MachineTypesList = MachineTypeList

@@ -58,7 +58,7 @@ instance ToJSON ReportRow where
 --
 -- /See:/ 'reportRequest' smart constructor.
 data ReportRequest = ReportRequest
-    { _rrMaxRowsPerFile         :: !(Maybe Int32)
+    { _rrMaxRowsPerFile         :: !(Maybe (JSONText Int32))
     , _rrReportScope            :: !(Maybe ReportRequestReportScope)
     , _rrStatisticsCurrency     :: !(Maybe Text)
     , _rrTimeRange              :: !(Maybe ReportRequestTimeRange)
@@ -67,11 +67,11 @@ data ReportRequest = ReportRequest
     , _rrIncludeRemovedEntities :: !Bool
     , _rrIncludeDeletedEntities :: !Bool
     , _rrDownloadFormat         :: !(Maybe Text)
-    , _rrStartRow               :: !Int32
+    , _rrStartRow               :: !(JSONText Int32)
     , _rrColumns                :: !(Maybe [ReportAPIColumnSpec])
     , _rrReportType             :: !(Maybe Text)
     , _rrVerifySingleTimeZone   :: !Bool
-    , _rrRowCount               :: !Int32
+    , _rrRowCount               :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
@@ -132,6 +132,7 @@ rrMaxRowsPerFile :: Lens' ReportRequest (Maybe Int32)
 rrMaxRowsPerFile
   = lens _rrMaxRowsPerFile
       (\ s a -> s{_rrMaxRowsPerFile = a})
+      . mapping _Coerce
 
 -- | The reportScope is a set of IDs that are used to determine which subset
 -- of entities will be returned in the report. The full lineage of IDs from
@@ -198,7 +199,8 @@ rrDownloadFormat
 -- Acceptable values are 0 to 50000, inclusive. Defaults to 0.
 rrStartRow :: Lens' ReportRequest Int32
 rrStartRow
-  = lens _rrStartRow (\ s a -> s{_rrStartRow = a})
+  = lens _rrStartRow (\ s a -> s{_rrStartRow = a}) .
+      _Coerce
 
 -- | The columns to include in the report. This includes both DoubleClick
 -- Search columns and saved columns. For DoubleClick Search columns, only
@@ -231,7 +233,8 @@ rrVerifySingleTimeZone
 -- inclusive. Defaults to 10000.
 rrRowCount :: Lens' ReportRequest Int32
 rrRowCount
-  = lens _rrRowCount (\ s a -> s{_rrRowCount = a})
+  = lens _rrRowCount (\ s a -> s{_rrRowCount = a}) .
+      _Coerce
 
 instance FromJSON ReportRequest where
         parseJSON
@@ -337,7 +340,7 @@ data Report = Report
     , _rFiles                  :: !(Maybe [ReportFilesItem])
     , _rId                     :: !(Maybe Text)
     , _rStatisticsTimeZone     :: !(Maybe Text)
-    , _rRowCount               :: !(Maybe Int32)
+    , _rRowCount               :: !(Maybe (JSONText Int32))
     , _rRequest                :: !(Maybe ReportRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -426,7 +429,8 @@ rStatisticsTimeZone
 -- headers.
 rRowCount :: Lens' Report (Maybe Int32)
 rRowCount
-  = lens _rRowCount (\ s a -> s{_rRowCount = a})
+  = lens _rRowCount (\ s a -> s{_rRowCount = a}) .
+      mapping _Coerce
 
 -- | The request that created the report. Optional fields not specified in
 -- the original request are filled with default values.
@@ -465,7 +469,7 @@ instance ToJSON Report where
 -- /See:/ 'reportFilesItem' smart constructor.
 data ReportFilesItem = ReportFilesItem
     { _rfiURL       :: !(Maybe Text)
-    , _rfiByteCount :: !(Maybe Int64)
+    , _rfiByteCount :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportFilesItem' with the minimum fields required to make a request.
@@ -491,6 +495,7 @@ rfiURL = lens _rfiURL (\ s a -> s{_rfiURL = a})
 rfiByteCount :: Lens' ReportFilesItem (Maybe Int64)
 rfiByteCount
   = lens _rfiByteCount (\ s a -> s{_rfiByteCount = a})
+      . mapping _Coerce
 
 instance FromJSON ReportFilesItem where
         parseJSON
@@ -571,11 +576,11 @@ instance ToJSON ReportRequestFiltersItem where
 --
 -- /See:/ 'availability' smart constructor.
 data Availability = Availability
-    { _aAgencyId              :: !(Maybe Int64)
-    , _aAdvertiserId          :: !(Maybe Int64)
-    , _aSegmentationId        :: !(Maybe Int64)
+    { _aAgencyId              :: !(Maybe (JSONText Int64))
+    , _aAdvertiserId          :: !(Maybe (JSONText Int64))
+    , _aSegmentationId        :: !(Maybe (JSONText Int64))
     , _aSegmentationName      :: !(Maybe Text)
-    , _aAvailabilityTimestamp :: !(Maybe Word64)
+    , _aAvailabilityTimestamp :: !(Maybe (JSONText Word64))
     , _aSegmentationType      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -609,13 +614,15 @@ availability =
 -- | DS agency ID.
 aAgencyId :: Lens' Availability (Maybe Int64)
 aAgencyId
-  = lens _aAgencyId (\ s a -> s{_aAgencyId = a})
+  = lens _aAgencyId (\ s a -> s{_aAgencyId = a}) .
+      mapping _Coerce
 
 -- | DS advertiser ID.
 aAdvertiserId :: Lens' Availability (Maybe Int64)
 aAdvertiserId
   = lens _aAdvertiserId
       (\ s a -> s{_aAdvertiserId = a})
+      . mapping _Coerce
 
 -- | The numeric segmentation identifier (for example, DoubleClick Search
 -- Floodlight activity ID).
@@ -623,6 +630,7 @@ aSegmentationId :: Lens' Availability (Maybe Int64)
 aSegmentationId
   = lens _aSegmentationId
       (\ s a -> s{_aSegmentationId = a})
+      . mapping _Coerce
 
 -- | The friendly segmentation identifier (for example, DoubleClick Search
 -- Floodlight activity name).
@@ -637,6 +645,7 @@ aAvailabilityTimestamp :: Lens' Availability (Maybe Word64)
 aAvailabilityTimestamp
   = lens _aAvailabilityTimestamp
       (\ s a -> s{_aAvailabilityTimestamp = a})
+      . mapping _Coerce
 
 -- | The segmentation type that this availability is for (its default value
 -- is FLOODLIGHT).
@@ -712,7 +721,7 @@ instance ToJSON UpdateAvailabilityRequest where
 --
 -- /See:/ 'customMetric' smart constructor.
 data CustomMetric = CustomMetric
-    { _cmValue :: !(Maybe Double)
+    { _cmValue :: !(Maybe (JSONText Double))
     , _cmName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -733,7 +742,9 @@ customMetric =
 
 -- | Custom metric numeric value.
 cmValue :: Lens' CustomMetric (Maybe Double)
-cmValue = lens _cmValue (\ s a -> s{_cmValue = a})
+cmValue
+  = lens _cmValue (\ s a -> s{_cmValue = a}) .
+      mapping _Coerce
 
 -- | Custom metric name.
 cmName :: Lens' CustomMetric (Maybe Text)
@@ -1053,39 +1064,39 @@ instance ToJSON ReportRequestTimeRange where
 --
 -- /See:/ 'conversion' smart constructor.
 data Conversion = Conversion
-    { _cAdGroupId                   :: !(Maybe Int64)
-    , _cConversionModifiedTimestamp :: !(Maybe Word64)
+    { _cAdGroupId                   :: !(Maybe (JSONText Int64))
+    , _cConversionModifiedTimestamp :: !(Maybe (JSONText Word64))
     , _cState                       :: !(Maybe Text)
-    , _cEngineAccountId             :: !(Maybe Int64)
-    , _cAgencyId                    :: !(Maybe Int64)
+    , _cEngineAccountId             :: !(Maybe (JSONText Int64))
+    , _cAgencyId                    :: !(Maybe (JSONText Int64))
     , _cCurrencyCode                :: !(Maybe Text)
     , _cStoreId                     :: !(Maybe Text)
-    , _cDsConversionId              :: !(Maybe Int64)
+    , _cDsConversionId              :: !(Maybe (JSONText Int64))
     , _cConversionId                :: !(Maybe Text)
-    , _cAdvertiserId                :: !(Maybe Int64)
-    , _cSegmentationId              :: !(Maybe Int64)
+    , _cAdvertiserId                :: !(Maybe (JSONText Int64))
+    , _cSegmentationId              :: !(Maybe (JSONText Int64))
     , _cChannel                     :: !(Maybe Text)
     , _cProductCountry              :: !(Maybe Text)
-    , _cCampaignId                  :: !(Maybe Int64)
-    , _cCriterionId                 :: !(Maybe Int64)
-    , _cConversionTimestamp         :: !(Maybe Word64)
+    , _cCampaignId                  :: !(Maybe (JSONText Int64))
+    , _cCriterionId                 :: !(Maybe (JSONText Int64))
+    , _cConversionTimestamp         :: !(Maybe (JSONText Word64))
     , _cAttributionModel            :: !(Maybe Text)
     , _cSegmentationName            :: !(Maybe Text)
     , _cProductLanguage             :: !(Maybe Text)
     , _cCustomMetric                :: !(Maybe [CustomMetric])
-    , _cCountMillis                 :: !(Maybe Int64)
-    , _cQuantityMillis              :: !(Maybe Int64)
-    , _cAdId                        :: !(Maybe Int64)
+    , _cCountMillis                 :: !(Maybe (JSONText Int64))
+    , _cQuantityMillis              :: !(Maybe (JSONText Int64))
+    , _cAdId                        :: !(Maybe (JSONText Int64))
     , _cDeviceType                  :: !(Maybe Text)
     , _cType                        :: !(Maybe Text)
     , _cCustomDimension             :: !(Maybe [CustomDimension])
     , _cFloodlightOrderId           :: !(Maybe Text)
-    , _cRevenueMicros               :: !(Maybe Int64)
+    , _cRevenueMicros               :: !(Maybe (JSONText Int64))
     , _cClickId                     :: !(Maybe Text)
-    , _cInventoryAccountId          :: !(Maybe Int64)
+    , _cInventoryAccountId          :: !(Maybe (JSONText Int64))
     , _cSegmentationType            :: !(Maybe Text)
     , _cProductId                   :: !(Maybe Text)
-    , _cProductGroupId              :: !(Maybe Int64)
+    , _cProductGroupId              :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Conversion' with the minimum fields required to make a request.
@@ -1199,13 +1210,15 @@ conversion =
 -- | DS ad group ID.
 cAdGroupId :: Lens' Conversion (Maybe Int64)
 cAdGroupId
-  = lens _cAdGroupId (\ s a -> s{_cAdGroupId = a})
+  = lens _cAdGroupId (\ s a -> s{_cAdGroupId = a}) .
+      mapping _Coerce
 
 -- | The time at which the conversion was last modified, in epoch millis UTC.
 cConversionModifiedTimestamp :: Lens' Conversion (Maybe Word64)
 cConversionModifiedTimestamp
   = lens _cConversionModifiedTimestamp
       (\ s a -> s{_cConversionModifiedTimestamp = a})
+      . mapping _Coerce
 
 -- | The state of the conversion, that is, either ACTIVE or REMOVED. Note:
 -- state DELETED is deprecated.
@@ -1217,11 +1230,13 @@ cEngineAccountId :: Lens' Conversion (Maybe Int64)
 cEngineAccountId
   = lens _cEngineAccountId
       (\ s a -> s{_cEngineAccountId = a})
+      . mapping _Coerce
 
 -- | DS agency ID.
 cAgencyId :: Lens' Conversion (Maybe Int64)
 cAgencyId
-  = lens _cAgencyId (\ s a -> s{_cAgencyId = a})
+  = lens _cAgencyId (\ s a -> s{_cAgencyId = a}) .
+      mapping _Coerce
 
 -- | The currency code for the conversion\'s revenue. Should be in ISO 4217
 -- alphabetic (3-char) format.
@@ -1240,6 +1255,7 @@ cDsConversionId :: Lens' Conversion (Maybe Int64)
 cDsConversionId
   = lens _cDsConversionId
       (\ s a -> s{_cDsConversionId = a})
+      . mapping _Coerce
 
 -- | For offline conversions, this is an ID provided by advertisers.
 -- Advertisers can use this property to specify an ID that is meaningful to
@@ -1257,6 +1273,7 @@ cAdvertiserId :: Lens' Conversion (Maybe Int64)
 cAdvertiserId
   = lens _cAdvertiserId
       (\ s a -> s{_cAdvertiserId = a})
+      . mapping _Coerce
 
 -- | The numeric segmentation identifier (for example, DoubleClick Search
 -- Floodlight activity ID).
@@ -1264,6 +1281,7 @@ cSegmentationId :: Lens' Conversion (Maybe Int64)
 cSegmentationId
   = lens _cSegmentationId
       (\ s a -> s{_cSegmentationId = a})
+      . mapping _Coerce
 
 -- | Sales channel for the product. Acceptable values are: - \"local\": a
 -- physical store - \"online\": an online store
@@ -1280,18 +1298,21 @@ cProductCountry
 -- | DS campaign ID.
 cCampaignId :: Lens' Conversion (Maybe Int64)
 cCampaignId
-  = lens _cCampaignId (\ s a -> s{_cCampaignId = a})
+  = lens _cCampaignId (\ s a -> s{_cCampaignId = a}) .
+      mapping _Coerce
 
 -- | DS criterion (keyword) ID.
 cCriterionId :: Lens' Conversion (Maybe Int64)
 cCriterionId
   = lens _cCriterionId (\ s a -> s{_cCriterionId = a})
+      . mapping _Coerce
 
 -- | The time at which the conversion took place, in epoch millis UTC.
 cConversionTimestamp :: Lens' Conversion (Maybe Word64)
 cConversionTimestamp
   = lens _cConversionTimestamp
       (\ s a -> s{_cConversionTimestamp = a})
+      . mapping _Coerce
 
 -- | This field is ignored.
 cAttributionModel :: Lens' Conversion (Maybe Text)
@@ -1325,16 +1346,20 @@ cCustomMetric
 cCountMillis :: Lens' Conversion (Maybe Int64)
 cCountMillis
   = lens _cCountMillis (\ s a -> s{_cCountMillis = a})
+      . mapping _Coerce
 
 -- | The quantity of this conversion, in millis.
 cQuantityMillis :: Lens' Conversion (Maybe Int64)
 cQuantityMillis
   = lens _cQuantityMillis
       (\ s a -> s{_cQuantityMillis = a})
+      . mapping _Coerce
 
 -- | DS ad ID.
 cAdId :: Lens' Conversion (Maybe Int64)
-cAdId = lens _cAdId (\ s a -> s{_cAdId = a})
+cAdId
+  = lens _cAdId (\ s a -> s{_cAdId = a}) .
+      mapping _Coerce
 
 -- | The type of device on which the conversion occurred.
 cDeviceType :: Lens' Conversion (Maybe Text)
@@ -1369,6 +1394,7 @@ cRevenueMicros :: Lens' Conversion (Maybe Int64)
 cRevenueMicros
   = lens _cRevenueMicros
       (\ s a -> s{_cRevenueMicros = a})
+      . mapping _Coerce
 
 -- | DS click ID for the conversion.
 cClickId :: Lens' Conversion (Maybe Text)
@@ -1380,6 +1406,7 @@ cInventoryAccountId :: Lens' Conversion (Maybe Int64)
 cInventoryAccountId
   = lens _cInventoryAccountId
       (\ s a -> s{_cInventoryAccountId = a})
+      . mapping _Coerce
 
 -- | The segmentation type of this conversion (for example, FLOODLIGHT).
 cSegmentationType :: Lens' Conversion (Maybe Text)
@@ -1397,6 +1424,7 @@ cProductGroupId :: Lens' Conversion (Maybe Int64)
 cProductGroupId
   = lens _cProductGroupId
       (\ s a -> s{_cProductGroupId = a})
+      . mapping _Coerce
 
 instance FromJSON Conversion where
         parseJSON
@@ -1624,13 +1652,13 @@ instance ToJSON UpdateAvailabilityResponse where
 --
 -- /See:/ 'reportRequestReportScope' smart constructor.
 data ReportRequestReportScope = ReportRequestReportScope
-    { _rrrsKeywordId       :: !(Maybe Int64)
-    , _rrrsAdGroupId       :: !(Maybe Int64)
-    , _rrrsEngineAccountId :: !(Maybe Int64)
-    , _rrrsAgencyId        :: !(Maybe Int64)
-    , _rrrsAdvertiserId    :: !(Maybe Int64)
-    , _rrrsCampaignId      :: !(Maybe Int64)
-    , _rrrsAdId            :: !(Maybe Int64)
+    { _rrrsKeywordId       :: !(Maybe (JSONText Int64))
+    , _rrrsAdGroupId       :: !(Maybe (JSONText Int64))
+    , _rrrsEngineAccountId :: !(Maybe (JSONText Int64))
+    , _rrrsAgencyId        :: !(Maybe (JSONText Int64))
+    , _rrrsAdvertiserId    :: !(Maybe (JSONText Int64))
+    , _rrrsCampaignId      :: !(Maybe (JSONText Int64))
+    , _rrrsAdId            :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequestReportScope' with the minimum fields required to make a request.
@@ -1668,39 +1696,47 @@ rrrsKeywordId :: Lens' ReportRequestReportScope (Maybe Int64)
 rrrsKeywordId
   = lens _rrrsKeywordId
       (\ s a -> s{_rrrsKeywordId = a})
+      . mapping _Coerce
 
 -- | DS ad group ID.
 rrrsAdGroupId :: Lens' ReportRequestReportScope (Maybe Int64)
 rrrsAdGroupId
   = lens _rrrsAdGroupId
       (\ s a -> s{_rrrsAdGroupId = a})
+      . mapping _Coerce
 
 -- | DS engine account ID.
 rrrsEngineAccountId :: Lens' ReportRequestReportScope (Maybe Int64)
 rrrsEngineAccountId
   = lens _rrrsEngineAccountId
       (\ s a -> s{_rrrsEngineAccountId = a})
+      . mapping _Coerce
 
 -- | DS agency ID.
 rrrsAgencyId :: Lens' ReportRequestReportScope (Maybe Int64)
 rrrsAgencyId
   = lens _rrrsAgencyId (\ s a -> s{_rrrsAgencyId = a})
+      . mapping _Coerce
 
 -- | DS advertiser ID.
 rrrsAdvertiserId :: Lens' ReportRequestReportScope (Maybe Int64)
 rrrsAdvertiserId
   = lens _rrrsAdvertiserId
       (\ s a -> s{_rrrsAdvertiserId = a})
+      . mapping _Coerce
 
 -- | DS campaign ID.
 rrrsCampaignId :: Lens' ReportRequestReportScope (Maybe Int64)
 rrrsCampaignId
   = lens _rrrsCampaignId
       (\ s a -> s{_rrrsCampaignId = a})
+      . mapping _Coerce
 
 -- | DS ad ID.
 rrrsAdId :: Lens' ReportRequestReportScope (Maybe Int64)
-rrrsAdId = lens _rrrsAdId (\ s a -> s{_rrrsAdId = a})
+rrrsAdId
+  = lens _rrrsAdId (\ s a -> s{_rrrsAdId = a}) .
+      mapping _Coerce
 
 instance FromJSON ReportRequestReportScope where
         parseJSON

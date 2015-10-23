@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "orders" :>
              Capture "orderId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] Order
@@ -54,7 +54,7 @@ type OrdersGetResource =
 --
 -- /See:/ 'ordersGet' smart constructor.
 data OrdersGet = OrdersGet
-    { _ogMerchantId :: !Word64
+    { _ogMerchantId :: !(JSONText Word64)
     , _ogOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,6 +79,7 @@ ordersGet pOgMerchantId_ pOgOrderId_ =
 ogMerchantId :: Lens' OrdersGet Word64
 ogMerchantId
   = lens _ogMerchantId (\ s a -> s{_ogMerchantId = a})
+      . _Coerce
 
 -- | The ID of the order.
 ogOrderId :: Lens' OrdersGet Text

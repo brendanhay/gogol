@@ -60,7 +60,7 @@ type JobsListResource =
                  QueryParam "projection" JobsListProjection :>
                    QueryParam "pageToken" Text :>
                      QueryParam "allUsers" Bool :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] JobList
 
 -- | Lists all jobs that you started in the specified project. Job
@@ -76,7 +76,7 @@ data JobsList = JobsList
     , _jlPageToken   :: !(Maybe Text)
     , _jlProjectId   :: !Text
     , _jlAllUsers    :: !(Maybe Bool)
-    , _jlMaxResults  :: !(Maybe Word32)
+    , _jlMaxResults  :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList' with the minimum fields required to make a request.
@@ -140,6 +140,7 @@ jlAllUsers
 jlMaxResults :: Lens' JobsList (Maybe Word32)
 jlMaxResults
   = lens _jlMaxResults (\ s a -> s{_jlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest JobsList where
         type Rs JobsList = JobList

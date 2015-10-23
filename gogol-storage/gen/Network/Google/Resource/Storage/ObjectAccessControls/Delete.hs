@@ -54,7 +54,7 @@ type ObjectAccessControlsDeleteResource =
                Capture "object" Text :>
                  "acl" :>
                    Capture "entity" Text :>
-                     QueryParam "generation" Int64 :>
+                     QueryParam "generation" (JSONText Int64) :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
@@ -65,7 +65,7 @@ data ObjectAccessControlsDelete = ObjectAccessControlsDelete
     { _oacdBucket     :: !Text
     , _oacdObject     :: !Text
     , _oacdEntity     :: !Text
-    , _oacdGeneration :: !(Maybe Int64)
+    , _oacdGeneration :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsDelete' with the minimum fields required to make a request.
@@ -116,6 +116,7 @@ oacdGeneration :: Lens' ObjectAccessControlsDelete (Maybe Int64)
 oacdGeneration
   = lens _oacdGeneration
       (\ s a -> s{_oacdGeneration = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectAccessControlsDelete
          where

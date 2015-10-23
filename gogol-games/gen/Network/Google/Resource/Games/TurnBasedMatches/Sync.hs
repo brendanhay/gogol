@@ -53,11 +53,11 @@ type TurnBasedMatchesSyncResource =
        "v1" :>
          "turnbasedmatches" :>
            "sync" :>
-             QueryParam "maxCompletedMatches" Int32 :>
+             QueryParam "maxCompletedMatches" (JSONText Int32) :>
                QueryParam "includeMatchData" Bool :>
                  QueryParam "language" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TurnBasedMatchSync
 
@@ -68,11 +68,11 @@ type TurnBasedMatchesSyncResource =
 --
 -- /See:/ 'turnBasedMatchesSync' smart constructor.
 data TurnBasedMatchesSync = TurnBasedMatchesSync
-    { _tbmsMaxCompletedMatches :: !(Maybe Int32)
+    { _tbmsMaxCompletedMatches :: !(Maybe (JSONText Int32))
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
     , _tbmsPageToken           :: !(Maybe Text)
-    , _tbmsMaxResults          :: !(Maybe Int32)
+    , _tbmsMaxResults          :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesSync' with the minimum fields required to make a request.
@@ -106,6 +106,7 @@ tbmsMaxCompletedMatches :: Lens' TurnBasedMatchesSync (Maybe Int32)
 tbmsMaxCompletedMatches
   = lens _tbmsMaxCompletedMatches
       (\ s a -> s{_tbmsMaxCompletedMatches = a})
+      . mapping _Coerce
 
 -- | True if match data should be returned in the response. Note that not all
 -- data will necessarily be returned if include_match_data is true; the
@@ -135,6 +136,7 @@ tbmsMaxResults :: Lens' TurnBasedMatchesSync (Maybe Int32)
 tbmsMaxResults
   = lens _tbmsMaxResults
       (\ s a -> s{_tbmsMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest TurnBasedMatchesSync where
         type Rs TurnBasedMatchesSync = TurnBasedMatchSync

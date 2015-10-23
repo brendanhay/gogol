@@ -54,7 +54,7 @@ type EventsPatchResource =
            Capture "calendarId" Text :>
              "events" :>
                Capture "eventId" Text :>
-                 QueryParam "maxAttendees" Int32 :>
+                 QueryParam "maxAttendees" (JSONText Int32) :>
                    QueryParam "sendNotifications" Bool :>
                      QueryParam "supportsAttachments" Bool :>
                        QueryParam "alwaysIncludeEmail" Bool :>
@@ -67,7 +67,7 @@ type EventsPatchResource =
 data EventsPatch = EventsPatch
     { _epCalendarId          :: !Text
     , _epPayload             :: !Event
-    , _epMaxAttendees        :: !(Maybe Int32)
+    , _epMaxAttendees        :: !(Maybe (JSONText Int32))
     , _epSendNotifications   :: !(Maybe Bool)
     , _epSupportsAttachments :: !(Maybe Bool)
     , _epAlwaysIncludeEmail  :: !(Maybe Bool)
@@ -126,6 +126,7 @@ epMaxAttendees :: Lens' EventsPatch (Maybe Int32)
 epMaxAttendees
   = lens _epMaxAttendees
       (\ s a -> s{_epMaxAttendees = a})
+      . mapping _Coerce
 
 -- | Whether to send notifications about the event update (e.g. attendee\'s
 -- responses, title changes, etc.). Optional. The default is False.

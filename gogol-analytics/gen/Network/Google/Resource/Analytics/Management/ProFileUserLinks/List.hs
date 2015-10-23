@@ -56,8 +56,8 @@ type ManagementProFileUserLinksListResource =
                    "profiles" :>
                      Capture "profileId" Text :>
                        "entityUserLinks" :>
-                         QueryParam "start-index" Int32 :>
-                           QueryParam "max-results" Int32 :>
+                         QueryParam "start-index" (JSONText Int32) :>
+                           QueryParam "max-results" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] EntityUserLinks
 
@@ -68,8 +68,8 @@ data ManagementProFileUserLinksList = ManagementProFileUserLinksList
     { _mpfullWebPropertyId :: !Text
     , _mpfullProFileId     :: !Text
     , _mpfullAccountId     :: !Text
-    , _mpfullStartIndex    :: !(Maybe Int32)
-    , _mpfullMaxResults    :: !(Maybe Int32)
+    , _mpfullStartIndex    :: !(Maybe (JSONText Int32))
+    , _mpfullMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileUserLinksList' with the minimum fields required to make a request.
@@ -127,12 +127,14 @@ mpfullStartIndex :: Lens' ManagementProFileUserLinksList (Maybe Int32)
 mpfullStartIndex
   = lens _mpfullStartIndex
       (\ s a -> s{_mpfullStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of profile-user links to include in this response.
 mpfullMaxResults :: Lens' ManagementProFileUserLinksList (Maybe Int32)
 mpfullMaxResults
   = lens _mpfullMaxResults
       (\ s a -> s{_mpfullMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementProFileUserLinksList
          where

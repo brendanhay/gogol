@@ -53,8 +53,8 @@ type ManagementProFilesListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "profiles" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
+                     QueryParam "start-index" (JSONText Int32) :>
+                       QueryParam "max-results" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ProFiles
 
 -- | Lists views (profiles) to which the user has access.
@@ -63,8 +63,8 @@ type ManagementProFilesListResource =
 data ManagementProFilesList = ManagementProFilesList
     { _mpflWebPropertyId :: !Text
     , _mpflAccountId     :: !Text
-    , _mpflStartIndex    :: !(Maybe Int32)
-    , _mpflMaxResults    :: !(Maybe Int32)
+    , _mpflStartIndex    :: !(Maybe (JSONText Int32))
+    , _mpflMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFilesList' with the minimum fields required to make a request.
@@ -112,12 +112,14 @@ mpflStartIndex :: Lens' ManagementProFilesList (Maybe Int32)
 mpflStartIndex
   = lens _mpflStartIndex
       (\ s a -> s{_mpflStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of views (profiles) to include in this response.
 mpflMaxResults :: Lens' ManagementProFilesList (Maybe Int32)
 mpflMaxResults
   = lens _mpflMaxResults
       (\ s a -> s{_mpflMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementProFilesList where
         type Rs ManagementProFilesList = ProFiles

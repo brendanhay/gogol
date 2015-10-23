@@ -48,8 +48,8 @@ type PretargetingConfigPatchResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "pretargetingconfigs" :>
-           Capture "accountId" Int64 :>
-             Capture "configId" Int64 :>
+           Capture "accountId" (JSONText Int64) :>
+             Capture "configId" (JSONText Int64) :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] PretargetingConfig :>
                    Patch '[JSON] PretargetingConfig
@@ -60,8 +60,8 @@ type PretargetingConfigPatchResource =
 -- /See:/ 'pretargetingConfigPatch' smart constructor.
 data PretargetingConfigPatch = PretargetingConfigPatch
     { _pcpPayload   :: !PretargetingConfig
-    , _pcpAccountId :: !Int64
-    , _pcpConfigId  :: !Int64
+    , _pcpAccountId :: !(JSONText Int64)
+    , _pcpConfigId  :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigPatch' with the minimum fields required to make a request.
@@ -94,11 +94,13 @@ pcpPayload
 pcpAccountId :: Lens' PretargetingConfigPatch Int64
 pcpAccountId
   = lens _pcpAccountId (\ s a -> s{_pcpAccountId = a})
+      . _Coerce
 
 -- | The specific id of the configuration to update.
 pcpConfigId :: Lens' PretargetingConfigPatch Int64
 pcpConfigId
-  = lens _pcpConfigId (\ s a -> s{_pcpConfigId = a})
+  = lens _pcpConfigId (\ s a -> s{_pcpConfigId = a}) .
+      _Coerce
 
 instance GoogleRequest PretargetingConfigPatch where
         type Rs PretargetingConfigPatch = PretargetingConfig

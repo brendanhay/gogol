@@ -56,8 +56,8 @@ type ManagementGoalsListResource =
                    "profiles" :>
                      Capture "profileId" Text :>
                        "goals" :>
-                         QueryParam "start-index" Int32 :>
-                           QueryParam "max-results" Int32 :>
+                         QueryParam "start-index" (JSONText Int32) :>
+                           QueryParam "max-results" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Goals
 
 -- | Lists goals to which the user has access.
@@ -67,8 +67,8 @@ data ManagementGoalsList = ManagementGoalsList
     { _mglWebPropertyId :: !Text
     , _mglProFileId     :: !Text
     , _mglAccountId     :: !Text
-    , _mglStartIndex    :: !(Maybe Int32)
-    , _mglMaxResults    :: !(Maybe Int32)
+    , _mglStartIndex    :: !(Maybe (JSONText Int32))
+    , _mglMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsList' with the minimum fields required to make a request.
@@ -125,12 +125,14 @@ mglStartIndex :: Lens' ManagementGoalsList (Maybe Int32)
 mglStartIndex
   = lens _mglStartIndex
       (\ s a -> s{_mglStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of goals to include in this response.
 mglMaxResults :: Lens' ManagementGoalsList (Maybe Int32)
 mglMaxResults
   = lens _mglMaxResults
       (\ s a -> s{_mglMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementGoalsList where
         type Rs ManagementGoalsList = Goals

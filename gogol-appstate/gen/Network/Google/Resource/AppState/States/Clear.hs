@@ -48,7 +48,7 @@ type StatesClearResource =
      "appstate" :>
        "v1" :>
          "states" :>
-           Capture "stateKey" Int32 :>
+           Capture "stateKey" (JSONText Int32) :>
              "clear" :>
                QueryParam "currentDataVersion" Text :>
                  QueryParam "alt" AltJSON :> Post '[JSON] WriteResult
@@ -59,7 +59,7 @@ type StatesClearResource =
 --
 -- /See:/ 'statesClear' smart constructor.
 data StatesClear = StatesClear
-    { _scStateKey           :: !Int32
+    { _scStateKey           :: !(JSONText Int32)
     , _scCurrentDataVersion :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,7 +82,8 @@ statesClear pScStateKey_ =
 -- | The key for the data to be retrieved.
 scStateKey :: Lens' StatesClear Int32
 scStateKey
-  = lens _scStateKey (\ s a -> s{_scStateKey = a})
+  = lens _scStateKey (\ s a -> s{_scStateKey = a}) .
+      _Coerce
 
 -- | The version of the data to be cleared. Version strings are returned by
 -- the server.

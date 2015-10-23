@@ -46,9 +46,9 @@ type AdvertiserGroupsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "advertiserGroups" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AdvertiserGroup
 
@@ -56,8 +56,8 @@ type AdvertiserGroupsGetResource =
 --
 -- /See:/ 'advertiserGroupsGet' smart constructor.
 data AdvertiserGroupsGet = AdvertiserGroupsGet
-    { _agggProFileId :: !Int64
-    , _agggId        :: !Int64
+    { _agggProFileId :: !(JSONText Int64)
+    , _agggId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsGet' with the minimum fields required to make a request.
@@ -82,10 +82,12 @@ agggProFileId :: Lens' AdvertiserGroupsGet Int64
 agggProFileId
   = lens _agggProFileId
       (\ s a -> s{_agggProFileId = a})
+      . _Coerce
 
 -- | Advertiser group ID.
 agggId :: Lens' AdvertiserGroupsGet Int64
-agggId = lens _agggId (\ s a -> s{_agggId = a})
+agggId
+  = lens _agggId (\ s a -> s{_agggId = a}) . _Coerce
 
 instance GoogleRequest AdvertiserGroupsGet where
         type Rs AdvertiserGroupsGet = AdvertiserGroup

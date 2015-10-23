@@ -46,17 +46,17 @@ type MobileCarriersGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "mobileCarriers" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] MobileCarrier
 
 -- | Gets one mobile carrier by ID.
 --
 -- /See:/ 'mobileCarriersGet' smart constructor.
 data MobileCarriersGet = MobileCarriersGet
-    { _mcgProFileId :: !Int64
-    , _mcgId        :: !Int64
+    { _mcgProFileId :: !(JSONText Int64)
+    , _mcgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileCarriersGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ mobileCarriersGet pMcgProFileId_ pMcgId_ =
 mcgProFileId :: Lens' MobileCarriersGet Int64
 mcgProFileId
   = lens _mcgProFileId (\ s a -> s{_mcgProFileId = a})
+      . _Coerce
 
 -- | Mobile carrier ID.
 mcgId :: Lens' MobileCarriersGet Int64
-mcgId = lens _mcgId (\ s a -> s{_mcgId = a})
+mcgId
+  = lens _mcgId (\ s a -> s{_mcgId = a}) . _Coerce
 
 instance GoogleRequest MobileCarriersGet where
         type Rs MobileCarriersGet = MobileCarrier

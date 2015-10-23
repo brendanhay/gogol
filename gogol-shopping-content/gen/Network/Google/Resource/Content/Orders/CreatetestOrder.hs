@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersCreatetestOrderResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "testorders" :>
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] OrdersCreateTestOrderRequest :>
@@ -55,7 +55,7 @@ type OrdersCreatetestOrderResource =
 --
 -- /See:/ 'ordersCreatetestOrder' smart constructor.
 data OrdersCreatetestOrder = OrdersCreatetestOrder
-    { _ocoMerchantId :: !Word64
+    { _ocoMerchantId :: !(JSONText Word64)
     , _ocoPayload    :: !OrdersCreateTestOrderRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,6 +81,7 @@ ocoMerchantId :: Lens' OrdersCreatetestOrder Word64
 ocoMerchantId
   = lens _ocoMerchantId
       (\ s a -> s{_ocoMerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 ocoPayload :: Lens' OrdersCreatetestOrder OrdersCreateTestOrderRequest

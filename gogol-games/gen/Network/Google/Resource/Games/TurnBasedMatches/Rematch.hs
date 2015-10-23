@@ -52,7 +52,7 @@ type TurnBasedMatchesRematchResource =
          "turnbasedmatches" :>
            Capture "matchId" Text :>
              "rematch" :>
-               QueryParam "requestId" Int64 :>
+               QueryParam "requestId" (JSONText Int64) :>
                  QueryParam "language" Text :>
                    QueryParam "alt" AltJSON :>
                      Post '[JSON] TurnBasedMatchRematch
@@ -64,7 +64,7 @@ type TurnBasedMatchesRematchResource =
 --
 -- /See:/ 'turnBasedMatchesRematch' smart constructor.
 data TurnBasedMatchesRematch = TurnBasedMatchesRematch
-    { _tbmrRequestId :: !(Maybe Int64)
+    { _tbmrRequestId :: !(Maybe (JSONText Int64))
     , _tbmrLanguage  :: !(Maybe Text)
     , _tbmrMatchId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,6 +95,7 @@ tbmrRequestId :: Lens' TurnBasedMatchesRematch (Maybe Int64)
 tbmrRequestId
   = lens _tbmrRequestId
       (\ s a -> s{_tbmrRequestId = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 tbmrLanguage :: Lens' TurnBasedMatchesRematch (Maybe Text)

@@ -50,7 +50,7 @@ type AccountsAdClientsListResource =
            Capture "accountId" Text :>
              "adclients" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
 -- | List all hosted ad clients in the specified hosted account.
@@ -59,7 +59,7 @@ type AccountsAdClientsListResource =
 data AccountsAdClientsList = AccountsAdClientsList
     { _aaclAccountId  :: !Text
     , _aaclPageToken  :: !(Maybe Text)
-    , _aaclMaxResults :: !(Maybe Word32)
+    , _aaclMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdClientsList' with the minimum fields required to make a request.
@@ -101,6 +101,7 @@ aaclMaxResults :: Lens' AccountsAdClientsList (Maybe Word32)
 aaclMaxResults
   = lens _aaclMaxResults
       (\ s a -> s{_aaclMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsAdClientsList where
         type Rs AccountsAdClientsList = AdClients

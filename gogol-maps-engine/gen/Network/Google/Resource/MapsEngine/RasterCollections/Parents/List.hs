@@ -50,7 +50,7 @@ type RasterCollectionsParentsListResource =
            Capture "id" Text :>
              "parents" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ParentsListResponse
 
@@ -60,7 +60,7 @@ type RasterCollectionsParentsListResource =
 data RasterCollectionsParentsList = RasterCollectionsParentsList
     { _rcplcId         :: !Text
     , _rcplcPageToken  :: !(Maybe Text)
-    , _rcplcMaxResults :: !(Maybe Word32)
+    , _rcplcMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsParentsList' with the minimum fields required to make a request.
@@ -100,6 +100,7 @@ rcplcMaxResults :: Lens' RasterCollectionsParentsList (Maybe Word32)
 rcplcMaxResults
   = lens _rcplcMaxResults
       (\ s a -> s{_rcplcMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest RasterCollectionsParentsList
          where

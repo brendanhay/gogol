@@ -51,7 +51,7 @@ type InstancesListResource =
            Capture "project" Text :>
              "instances" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] InstancesListResponse
 
@@ -62,7 +62,7 @@ type InstancesListResource =
 data InstancesList = InstancesList
     { _ilProject    :: !Text
     , _ilPageToken  :: !(Maybe Text)
-    , _ilMaxResults :: !(Maybe Word32)
+    , _ilMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesList' with the minimum fields required to make a request.
@@ -99,6 +99,7 @@ ilPageToken
 ilMaxResults :: Lens' InstancesList (Maybe Word32)
 ilMaxResults
   = lens _ilMaxResults (\ s a -> s{_ilMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest InstancesList where
         type Rs InstancesList = InstancesListResponse

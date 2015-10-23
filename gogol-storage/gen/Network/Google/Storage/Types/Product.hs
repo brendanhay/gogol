@@ -247,9 +247,9 @@ instance ToJSON ObjectMetadata where
 --
 -- /See:/ 'bucketLifecycleRuleItemCondition' smart constructor.
 data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition
-    { _blricAge              :: !(Maybe Int32)
+    { _blricAge              :: !(Maybe (JSONText Int32))
     , _blricIsLive           :: !(Maybe Bool)
-    , _blricNumNewerVersions :: !(Maybe Int32)
+    , _blricNumNewerVersions :: !(Maybe (JSONText Int32))
     , _blricCreatedBefore    :: !(Maybe Date')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -277,7 +277,9 @@ bucketLifecycleRuleItemCondition =
 -- | Age of an object (in days). This condition is satisfied when an object
 -- reaches the specified age.
 blricAge :: Lens' BucketLifecycleRuleItemCondition (Maybe Int32)
-blricAge = lens _blricAge (\ s a -> s{_blricAge = a})
+blricAge
+  = lens _blricAge (\ s a -> s{_blricAge = a}) .
+      mapping _Coerce
 
 -- | Relevant only for versioned objects. If the value is true, this
 -- condition matches live objects; if the value is false, it matches
@@ -293,6 +295,7 @@ blricNumNewerVersions :: Lens' BucketLifecycleRuleItemCondition (Maybe Int32)
 blricNumNewerVersions
   = lens _blricNumNewerVersions
       (\ s a -> s{_blricNumNewerVersions = a})
+      . mapping _Coerce
 
 -- | A date in RFC 3339 format with only the date part (for instance,
 -- \"2013-01-15\"). This condition is satisfied when an object is created
@@ -367,7 +370,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe Int64)
+    , _cExpiration  :: !(Maybe (JSONText Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -435,7 +438,8 @@ cKind = lens _cKind (\ s a -> s{_cKind = a})
 -- timestamp, in milliseconds. Optional.
 cExpiration :: Lens' Channel (Maybe Int64)
 cExpiration
-  = lens _cExpiration (\ s a -> s{_cExpiration = a})
+  = lens _cExpiration (\ s a -> s{_cExpiration = a}) .
+      mapping _Coerce
 
 -- | An arbitrary string delivered to the target address with each
 -- notification delivered over this channel. Optional.
@@ -541,7 +545,7 @@ instance ToJSON BucketLifecycleRuleItem where
 --
 -- /See:/ 'bucketCORSItem' smart constructor.
 data BucketCORSItem = BucketCORSItem
-    { _bciMaxAgeSeconds  :: !(Maybe Int32)
+    { _bciMaxAgeSeconds  :: !(Maybe (JSONText Int32))
     , _bciOrigin         :: !(Maybe [Text])
     , _bciResponseHeader :: !(Maybe [Text])
     , _bciMethod         :: !(Maybe [Text])
@@ -574,6 +578,7 @@ bciMaxAgeSeconds :: Lens' BucketCORSItem (Maybe Int32)
 bciMaxAgeSeconds
   = lens _bciMaxAgeSeconds
       (\ s a -> s{_bciMaxAgeSeconds = a})
+      . mapping _Coerce
 
 -- | The list of Origins eligible to receive CORS response headers. Note:
 -- \"*\" is permitted in the list of origins, and means \"any Origin\".
@@ -677,7 +682,7 @@ data Bucket = Bucket
     , _bucLocation         :: !(Maybe Text)
     , _bucKind             :: !Text
     , _bucWebsite          :: !(Maybe BucketWebsite)
-    , _bucProjectNumber    :: !(Maybe Word64)
+    , _bucProjectNumber    :: !(Maybe (JSONText Word64))
     , _bucLifecycle        :: !(Maybe BucketLifecycle)
     , _bucOwner            :: !(Maybe BucketOwner)
     , _bucSelfLink         :: !(Maybe Text)
@@ -689,7 +694,7 @@ data Bucket = Bucket
     , _bucId               :: !(Maybe Text)
     , _bucUpdated          :: !(Maybe DateTime')
     , _bucDefaultObjectACL :: !(Maybe [ObjectAccessControl])
-    , _bucMetageneration   :: !(Maybe Int64)
+    , _bucMetageneration   :: !(Maybe (JSONText Int64))
     , _bucLogging          :: !(Maybe BucketLogging)
     , _bucACL              :: !(Maybe [BucketAccessControl])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -785,6 +790,7 @@ bucProjectNumber :: Lens' Bucket (Maybe Word64)
 bucProjectNumber
   = lens _bucProjectNumber
       (\ s a -> s{_bucProjectNumber = a})
+      . mapping _Coerce
 
 -- | The bucket\'s lifecycle configuration. See lifecycle management for more
 -- information.
@@ -856,6 +862,7 @@ bucMetageneration :: Lens' Bucket (Maybe Int64)
 bucMetageneration
   = lens _bucMetageneration
       (\ s a -> s{_bucMetageneration = a})
+      . mapping _Coerce
 
 -- | The bucket\'s logging configuration, which defines the destination
 -- bucket and optional name prefix for the current bucket\'s logs.
@@ -1155,7 +1162,7 @@ instance ToJSON BucketOwner where
 data ComposeRequestSourceObjectsItem = ComposeRequestSourceObjectsItem
     { _crsoiName                :: !(Maybe Text)
     , _crsoiObjectPreconditions :: !(Maybe ComposeRequestSourceObjectsItemObjectPreconditions)
-    , _crsoiGeneration          :: !(Maybe Int64)
+    , _crsoiGeneration          :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ComposeRequestSourceObjectsItem' with the minimum fields required to make a request.
@@ -1193,6 +1200,7 @@ crsoiGeneration :: Lens' ComposeRequestSourceObjectsItem (Maybe Int64)
 crsoiGeneration
   = lens _crsoiGeneration
       (\ s a -> s{_crsoiGeneration = a})
+      . mapping _Coerce
 
 instance FromJSON ComposeRequestSourceObjectsItem
          where
@@ -1250,7 +1258,7 @@ instance ToJSON ChannelParams where
 -- /See:/ 'object'' smart constructor.
 data Object = Object
     { _objEtag               :: !(Maybe Text)
-    , _objSize               :: !(Maybe Word64)
+    , _objSize               :: !(Maybe (JSONText Word64))
     , _objKind               :: !Text
     , _objTimeDeleted        :: !(Maybe DateTime')
     , _objCrc32c             :: !(Maybe Text)
@@ -1258,7 +1266,7 @@ data Object = Object
     , _objOwner              :: !(Maybe ObjectOwner)
     , _objSelfLink           :: !(Maybe Text)
     , _objMediaLink          :: !(Maybe Text)
-    , _objComponentCount     :: !(Maybe Int32)
+    , _objComponentCount     :: !(Maybe (JSONText Int32))
     , _objName               :: !(Maybe Text)
     , _objStorageClass       :: !(Maybe Text)
     , _objContentEncoding    :: !(Maybe Text)
@@ -1268,8 +1276,8 @@ data Object = Object
     , _objUpdated            :: !(Maybe DateTime')
     , _objContentLanguage    :: !(Maybe Text)
     , _objCacheControl       :: !(Maybe Text)
-    , _objMetageneration     :: !(Maybe Int64)
-    , _objGeneration         :: !(Maybe Int64)
+    , _objMetageneration     :: !(Maybe (JSONText Int64))
+    , _objGeneration         :: !(Maybe (JSONText Int64))
     , _objACL                :: !(Maybe [ObjectAccessControl])
     , _objContentDisPosition :: !(Maybe Text)
     , _objMD5Hash            :: !(Maybe Text)
@@ -1366,7 +1374,9 @@ objEtag = lens _objEtag (\ s a -> s{_objEtag = a})
 
 -- | Content-Length of the data in bytes.
 objSize :: Lens' Object (Maybe Word64)
-objSize = lens _objSize (\ s a -> s{_objSize = a})
+objSize
+  = lens _objSize (\ s a -> s{_objSize = a}) .
+      mapping _Coerce
 
 -- | The kind of item this is. For objects, this is always storage#object.
 objKind :: Lens' Object Text
@@ -1412,6 +1422,7 @@ objComponentCount :: Lens' Object (Maybe Int32)
 objComponentCount
   = lens _objComponentCount
       (\ s a -> s{_objComponentCount = a})
+      . mapping _Coerce
 
 -- | The name of this object. Required if not specified by URL parameter.
 objName :: Lens' Object (Maybe Text)
@@ -1471,12 +1482,14 @@ objMetageneration :: Lens' Object (Maybe Int64)
 objMetageneration
   = lens _objMetageneration
       (\ s a -> s{_objMetageneration = a})
+      . mapping _Coerce
 
 -- | The content generation of this object. Used for object versioning.
 objGeneration :: Lens' Object (Maybe Int64)
 objGeneration
   = lens _objGeneration
       (\ s a -> s{_objGeneration = a})
+      . mapping _Coerce
 
 -- | Access controls on the object.
 objACL :: Lens' Object [ObjectAccessControl]
@@ -1564,7 +1577,7 @@ instance ToJSON Object where
 --
 -- /See:/ 'composeRequestSourceObjectsItemObjectPreconditions' smart constructor.
 newtype ComposeRequestSourceObjectsItemObjectPreconditions = ComposeRequestSourceObjectsItemObjectPreconditions
-    { _crsoiopIfGenerationMatch :: Maybe Int64
+    { _crsoiopIfGenerationMatch :: Maybe (JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ComposeRequestSourceObjectsItemObjectPreconditions' with the minimum fields required to make a request.
@@ -1586,6 +1599,7 @@ crsoiopIfGenerationMatch :: Lens' ComposeRequestSourceObjectsItemObjectPrecondit
 crsoiopIfGenerationMatch
   = lens _crsoiopIfGenerationMatch
       (\ s a -> s{_crsoiopIfGenerationMatch = a})
+      . mapping _Coerce
 
 instance FromJSON
          ComposeRequestSourceObjectsItemObjectPreconditions
@@ -1955,7 +1969,7 @@ data ObjectAccessControl = ObjectAccessControl
     , _oacaId          :: !(Maybe Text)
     , _oacaProjectTeam :: !(Maybe ObjectAccessControlProjectTeam)
     , _oacaEntity      :: !(Maybe Text)
-    , _oacaGeneration  :: !(Maybe Int64)
+    , _oacaGeneration  :: !(Maybe (JSONText Int64))
     , _oacaEntityId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2071,6 +2085,7 @@ oacaGeneration :: Lens' ObjectAccessControl (Maybe Int64)
 oacaGeneration
   = lens _oacaGeneration
       (\ s a -> s{_oacaGeneration = a})
+      . mapping _Coerce
 
 -- | The ID for the entity, if any.
 oacaEntityId :: Lens' ObjectAccessControl (Maybe Text)
@@ -2119,8 +2134,8 @@ data RewriteResponse = RewriteResponse
     { _rrKind                :: !Text
     , _rrDone                :: !(Maybe Bool)
     , _rrResource            :: !(Maybe Object)
-    , _rrObjectSize          :: !(Maybe Word64)
-    , _rrTotalBytesRewritten :: !(Maybe Word64)
+    , _rrObjectSize          :: !(Maybe (JSONText Word64))
+    , _rrTotalBytesRewritten :: !(Maybe (JSONText Word64))
     , _rrRewriteToken        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2171,6 +2186,7 @@ rrResource
 rrObjectSize :: Lens' RewriteResponse (Maybe Word64)
 rrObjectSize
   = lens _rrObjectSize (\ s a -> s{_rrObjectSize = a})
+      . mapping _Coerce
 
 -- | The total bytes written so far, which can be used to provide a waiting
 -- user with a progress indicator. This property is always present in the
@@ -2179,6 +2195,7 @@ rrTotalBytesRewritten :: Lens' RewriteResponse (Maybe Word64)
 rrTotalBytesRewritten
   = lens _rrTotalBytesRewritten
       (\ s a -> s{_rrTotalBytesRewritten = a})
+      . mapping _Coerce
 
 -- | A token to use in subsequent requests to continue copying data. This
 -- token is present in the response only when there is more data to copy.

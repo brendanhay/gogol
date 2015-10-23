@@ -63,7 +63,7 @@ type ProjectsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListProjectsResponse
@@ -82,7 +82,7 @@ data ProjectsList = ProjectsList
     , _plBearerToken    :: !(Maybe Text)
     , _plFilter         :: !(Maybe Text)
     , _plPageToken      :: !(Maybe Text)
-    , _plPageSize       :: !(Maybe Int32)
+    , _plPageSize       :: !(Maybe (JSONText Int32))
     , _plCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -183,7 +183,8 @@ plPageToken
 -- ignores this field. Optional.
 plPageSize :: Lens' ProjectsList (Maybe Int32)
 plPageSize
-  = lens _plPageSize (\ s a -> s{_plPageSize = a})
+  = lens _plPageSize (\ s a -> s{_plPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 plCallback :: Lens' ProjectsList (Maybe Text)

@@ -47,9 +47,9 @@ type CreativesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creatives" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Creative :> Patch '[JSON] Creative
 
@@ -57,9 +57,9 @@ type CreativesPatchResource =
 --
 -- /See:/ 'creativesPatch' smart constructor.
 data CreativesPatch = CreativesPatch
-    { _cppProFileId :: !Int64
+    { _cppProFileId :: !(JSONText Int64)
     , _cppPayload   :: !Creative
-    , _cppId        :: !Int64
+    , _cppId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesPatch' with the minimum fields required to make a request.
@@ -87,6 +87,7 @@ creativesPatch pCppProFileId_ pCppPayload_ pCppId_ =
 cppProFileId :: Lens' CreativesPatch Int64
 cppProFileId
   = lens _cppProFileId (\ s a -> s{_cppProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 cppPayload :: Lens' CreativesPatch Creative
@@ -95,7 +96,8 @@ cppPayload
 
 -- | Creative ID.
 cppId :: Lens' CreativesPatch Int64
-cppId = lens _cppId (\ s a -> s{_cppId = a})
+cppId
+  = lens _cppId (\ s a -> s{_cppId = a}) . _Coerce
 
 instance GoogleRequest CreativesPatch where
         type Rs CreativesPatch = Creative

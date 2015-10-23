@@ -74,31 +74,39 @@ type ObjectsRewriteResource =
                            QueryParam "destinationPredefinedAcl"
                              ObjectsRewriteDestinationPredefinedACL
                              :>
-                             QueryParam "ifSourceGenerationMatch" Int64 :>
-                               QueryParam "ifMetagenerationMatch" Int64 :>
-                                 QueryParam "ifGenerationNotMatch" Int64 :>
+                             QueryParam "ifSourceGenerationMatch"
+                               (JSONText Int64)
+                               :>
+                               QueryParam "ifMetagenerationMatch"
+                                 (JSONText Int64)
+                                 :>
+                                 QueryParam "ifGenerationNotMatch"
+                                   (JSONText Int64)
+                                   :>
                                    QueryParam "ifSourceMetagenerationNotMatch"
-                                     Int64
+                                     (JSONText Int64)
                                      :>
                                      QueryParam "ifSourceMetagenerationMatch"
-                                       Int64
+                                       (JSONText Int64)
                                        :>
-                                       QueryParam "ifGenerationMatch" Int64 :>
+                                       QueryParam "ifGenerationMatch"
+                                         (JSONText Int64)
+                                         :>
                                          QueryParam "maxBytesRewrittenPerCall"
-                                           Int64
+                                           (JSONText Int64)
                                            :>
                                            QueryParam "ifMetagenerationNotMatch"
-                                             Int64
+                                             (JSONText Int64)
                                              :>
                                              QueryParam
                                                "ifSourceGenerationNotMatch"
-                                               Int64
+                                               (JSONText Int64)
                                                :>
                                                QueryParam "projection"
                                                  ObjectsRewriteProjection
                                                  :>
                                                  QueryParam "sourceGeneration"
-                                                   Int64
+                                                   (JSONText Int64)
                                                    :>
                                                    QueryParam "rewriteToken"
                                                      Text
@@ -114,21 +122,21 @@ type ObjectsRewriteResource =
 -- /See:/ 'objectsRewrite' smart constructor.
 data ObjectsRewrite = ObjectsRewrite
     { _orDestinationPredefinedACL       :: !(Maybe ObjectsRewriteDestinationPredefinedACL)
-    , _orIfSourceGenerationMatch        :: !(Maybe Int64)
-    , _orIfMetagenerationMatch          :: !(Maybe Int64)
-    , _orIfGenerationNotMatch           :: !(Maybe Int64)
-    , _orIfSourceMetagenerationNotMatch :: !(Maybe Int64)
-    , _orIfSourceMetagenerationMatch    :: !(Maybe Int64)
-    , _orIfGenerationMatch              :: !(Maybe Int64)
+    , _orIfSourceGenerationMatch        :: !(Maybe (JSONText Int64))
+    , _orIfMetagenerationMatch          :: !(Maybe (JSONText Int64))
+    , _orIfGenerationNotMatch           :: !(Maybe (JSONText Int64))
+    , _orIfSourceMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _orIfSourceMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    , _orIfGenerationMatch              :: !(Maybe (JSONText Int64))
     , _orSourceObject                   :: !Text
-    , _orMaxBytesRewrittenPerCall       :: !(Maybe Int64)
+    , _orMaxBytesRewrittenPerCall       :: !(Maybe (JSONText Int64))
     , _orSourceBucket                   :: !Text
     , _orPayload                        :: !Object
     , _orDestinationBucket              :: !Text
-    , _orIfMetagenerationNotMatch       :: !(Maybe Int64)
-    , _orIfSourceGenerationNotMatch     :: !(Maybe Int64)
+    , _orIfMetagenerationNotMatch       :: !(Maybe (JSONText Int64))
+    , _orIfSourceGenerationNotMatch     :: !(Maybe (JSONText Int64))
     , _orProjection                     :: !(Maybe ObjectsRewriteProjection)
-    , _orSourceGeneration               :: !(Maybe Int64)
+    , _orSourceGeneration               :: !(Maybe (JSONText Int64))
     , _orRewriteToken                   :: !(Maybe Text)
     , _orDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -213,6 +221,7 @@ orIfSourceGenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceGenerationMatch
   = lens _orIfSourceGenerationMatch
       (\ s a -> s{_orIfSourceGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current metageneration matches the given value.
@@ -220,6 +229,7 @@ orIfMetagenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfMetagenerationMatch
   = lens _orIfMetagenerationMatch
       (\ s a -> s{_orIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation does not match the given value.
@@ -227,6 +237,7 @@ orIfGenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfGenerationNotMatch
   = lens _orIfGenerationNotMatch
       (\ s a -> s{_orIfGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration does not match the given value.
@@ -234,6 +245,7 @@ orIfSourceMetagenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceMetagenerationNotMatch
   = lens _orIfSourceMetagenerationNotMatch
       (\ s a -> s{_orIfSourceMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration matches the given value.
@@ -241,6 +253,7 @@ orIfSourceMetagenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceMetagenerationMatch
   = lens _orIfSourceMetagenerationMatch
       (\ s a -> s{_orIfSourceMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation matches the given value.
@@ -248,6 +261,7 @@ orIfGenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfGenerationMatch
   = lens _orIfGenerationMatch
       (\ s a -> s{_orIfGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Name of the source object. For information about how to URL encode
 -- object names to be path safe, see Encoding URI Path Parts.
@@ -267,6 +281,7 @@ orMaxBytesRewrittenPerCall :: Lens' ObjectsRewrite (Maybe Int64)
 orMaxBytesRewrittenPerCall
   = lens _orMaxBytesRewrittenPerCall
       (\ s a -> s{_orMaxBytesRewrittenPerCall = a})
+      . mapping _Coerce
 
 -- | Name of the bucket in which to find the source object.
 orSourceBucket :: Lens' ObjectsRewrite Text
@@ -292,6 +307,7 @@ orIfMetagenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfMetagenerationNotMatch
   = lens _orIfMetagenerationNotMatch
       (\ s a -> s{_orIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation does not match the given value.
@@ -299,6 +315,7 @@ orIfSourceGenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceGenerationNotMatch
   = lens _orIfSourceGenerationNotMatch
       (\ s a -> s{_orIfSourceGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
@@ -312,6 +329,7 @@ orSourceGeneration :: Lens' ObjectsRewrite (Maybe Int64)
 orSourceGeneration
   = lens _orSourceGeneration
       (\ s a -> s{_orSourceGeneration = a})
+      . mapping _Coerce
 
 -- | Include this field (from the previous rewrite response) on each rewrite
 -- request after the first one, until the rewrite response \'done\' flag is

@@ -46,7 +46,7 @@ type CreativesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creatives" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Creative :> Post '[JSON] Creative
@@ -55,7 +55,7 @@ type CreativesInsertResource =
 --
 -- /See:/ 'creativesInsert' smart constructor.
 data CreativesInsert = CreativesInsert
-    { _ciProFileId :: !Int64
+    { _ciProFileId :: !(JSONText Int64)
     , _ciPayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ creativesInsert pCiProFileId_ pCiPayload_ =
 -- | User profile ID associated with this request.
 ciProFileId :: Lens' CreativesInsert Int64
 ciProFileId
-  = lens _ciProFileId (\ s a -> s{_ciProFileId = a})
+  = lens _ciProFileId (\ s a -> s{_ciProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 ciPayload :: Lens' CreativesInsert Creative

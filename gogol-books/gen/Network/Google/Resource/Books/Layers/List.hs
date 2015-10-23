@@ -54,7 +54,7 @@ type LayersListResource =
                QueryParam "contentVersion" Text :>
                  QueryParam "source" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] Layersummaries
 
@@ -66,7 +66,7 @@ data LayersList = LayersList
     , _llVolumeId       :: !Text
     , _llSource         :: !(Maybe Text)
     , _llPageToken      :: !(Maybe Text)
-    , _llMaxResults     :: !(Maybe Word32)
+    , _llMaxResults     :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList' with the minimum fields required to make a request.
@@ -118,6 +118,7 @@ llPageToken
 llMaxResults :: Lens' LayersList (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest LayersList where
         type Rs LayersList = Layersummaries

@@ -53,7 +53,7 @@ type EditsAPKListingsGetResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" Int32 :>
+                   Capture "apkVersionCode" (JSONText Int32) :>
                      "listings" :>
                        Capture "language" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] APKListing
@@ -64,7 +64,7 @@ type EditsAPKListingsGetResource =
 -- /See:/ 'editsAPKListingsGet' smart constructor.
 data EditsAPKListingsGet = EditsAPKListingsGet
     { _eapklgPackageName    :: !Text
-    , _eapklgAPKVersionCode :: !Int32
+    , _eapklgAPKVersionCode :: !(JSONText Int32)
     , _eapklgLanguage       :: !Text
     , _eapklgEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -107,6 +107,7 @@ eapklgAPKVersionCode :: Lens' EditsAPKListingsGet Int32
 eapklgAPKVersionCode
   = lens _eapklgAPKVersionCode
       (\ s a -> s{_eapklgAPKVersionCode = a})
+      . _Coerce
 
 -- | The language code (a BCP-47 language tag) of the APK-specific localized
 -- listing to read or modify. For example, to select Austrian German, pass

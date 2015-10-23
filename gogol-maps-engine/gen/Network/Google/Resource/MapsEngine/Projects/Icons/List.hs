@@ -50,7 +50,7 @@ type ProjectsIconsListResource =
            Capture "projectId" Text :>
              "icons" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] IconsListResponse
 
@@ -60,7 +60,7 @@ type ProjectsIconsListResource =
 data ProjectsIconsList = ProjectsIconsList
     { _pilPageToken  :: !(Maybe Text)
     , _pilProjectId  :: !Text
-    , _pilMaxResults :: !(Maybe Word32)
+    , _pilMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsIconsList' with the minimum fields required to make a request.
@@ -100,6 +100,7 @@ pilMaxResults :: Lens' ProjectsIconsList (Maybe Word32)
 pilMaxResults
   = lens _pilMaxResults
       (\ s a -> s{_pilMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ProjectsIconsList where
         type Rs ProjectsIconsList = IconsListResponse

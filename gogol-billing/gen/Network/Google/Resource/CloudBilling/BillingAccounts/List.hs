@@ -60,7 +60,7 @@ type BillingAccountsListResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" Int32 :>
+                       QueryParam "pageSize" (JSONText Int32) :>
                          QueryParam "callback" Text :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListBillingAccountsResponse
@@ -77,7 +77,7 @@ data BillingAccountsList = BillingAccountsList
     , _balUploadType     :: !(Maybe Text)
     , _balBearerToken    :: !(Maybe Text)
     , _balPageToken      :: !(Maybe Text)
-    , _balPageSize       :: !(Maybe Int32)
+    , _balPageSize       :: !(Maybe (JSONText Int32))
     , _balCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -161,7 +161,8 @@ balPageToken
 -- default.
 balPageSize :: Lens' BillingAccountsList (Maybe Int32)
 balPageSize
-  = lens _balPageSize (\ s a -> s{_balPageSize = a})
+  = lens _balPageSize (\ s a -> s{_balPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 balCallback :: Lens' BillingAccountsList (Maybe Text)

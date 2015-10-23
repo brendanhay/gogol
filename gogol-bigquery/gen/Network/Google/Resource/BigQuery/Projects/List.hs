@@ -47,7 +47,7 @@ type ProjectsListResource =
        "v2" :>
          "projects" :>
            QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
+             QueryParam "maxResults" (JSONText Word32) :>
                QueryParam "alt" AltJSON :> Get '[JSON] ProjectList
 
 -- | Lists all projects to which you have been granted any project role.
@@ -55,7 +55,7 @@ type ProjectsListResource =
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList = ProjectsList
     { _plPageToken  :: !(Maybe Text)
-    , _plMaxResults :: !(Maybe Word32)
+    , _plMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
@@ -83,6 +83,7 @@ plPageToken
 plMaxResults :: Lens' ProjectsList (Maybe Word32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectList

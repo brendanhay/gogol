@@ -53,7 +53,7 @@ type CommentsListResource =
              "comments" :>
                QueryParam "updatedMin" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
+                   QueryParam "maxResults" (JSONText Int32) :>
                      QueryParam "includeDeleted" Bool :>
                        QueryParam "alt" AltJSON :> Get '[JSON] CommentList
 
@@ -64,7 +64,7 @@ data CommentsList = CommentsList
     { _cllUpdatedMin     :: !(Maybe Text)
     , _cllPageToken      :: !(Maybe Text)
     , _cllFileId         :: !Text
-    , _cllMaxResults     :: !Int32
+    , _cllMaxResults     :: !(JSONText Int32)
     , _cllIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -118,6 +118,7 @@ cllMaxResults :: Lens' CommentsList Int32
 cllMaxResults
   = lens _cllMaxResults
       (\ s a -> s{_cllMaxResults = a})
+      . _Coerce
 
 -- | If set, all comments and replies, including deleted comments and replies
 -- (with content stripped) will be returned.

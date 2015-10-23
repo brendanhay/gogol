@@ -46,9 +46,9 @@ type OperatingSystemsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "operatingSystems" :>
-               Capture "dartId" Int64 :>
+               Capture "dartId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] OperatingSystem
 
@@ -56,8 +56,8 @@ type OperatingSystemsGetResource =
 --
 -- /See:/ 'operatingSystemsGet' smart constructor.
 data OperatingSystemsGet = OperatingSystemsGet
-    { _osgProFileId :: !Int64
-    , _osgDartId    :: !Int64
+    { _osgProFileId :: !(JSONText Int64)
+    , _osgDartId    :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemsGet' with the minimum fields required to make a request.
@@ -81,11 +81,13 @@ operatingSystemsGet pOsgProFileId_ pOsgDartId_ =
 osgProFileId :: Lens' OperatingSystemsGet Int64
 osgProFileId
   = lens _osgProFileId (\ s a -> s{_osgProFileId = a})
+      . _Coerce
 
 -- | Operating system DART ID.
 osgDartId :: Lens' OperatingSystemsGet Int64
 osgDartId
-  = lens _osgDartId (\ s a -> s{_osgDartId = a})
+  = lens _osgDartId (\ s a -> s{_osgDartId = a}) .
+      _Coerce
 
 instance GoogleRequest OperatingSystemsGet where
         type Rs OperatingSystemsGet = OperatingSystem

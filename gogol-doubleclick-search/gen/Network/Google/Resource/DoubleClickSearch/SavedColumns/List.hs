@@ -46,9 +46,9 @@ type SavedColumnsListResource =
      "doubleclicksearch" :>
        "v2" :>
          "agency" :>
-           Capture "agencyId" Int64 :>
+           Capture "agencyId" (JSONText Int64) :>
              "advertiser" :>
-               Capture "advertiserId" Int64 :>
+               Capture "advertiserId" (JSONText Int64) :>
                  "savedcolumns" :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SavedColumnList
@@ -57,8 +57,8 @@ type SavedColumnsListResource =
 --
 -- /See:/ 'savedColumnsList' smart constructor.
 data SavedColumnsList = SavedColumnsList
-    { _sclAgencyId     :: !Int64
-    , _sclAdvertiserId :: !Int64
+    { _sclAgencyId     :: !(JSONText Int64)
+    , _sclAdvertiserId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedColumnsList' with the minimum fields required to make a request.
@@ -81,13 +81,15 @@ savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
 -- | DS ID of the agency.
 sclAgencyId :: Lens' SavedColumnsList Int64
 sclAgencyId
-  = lens _sclAgencyId (\ s a -> s{_sclAgencyId = a})
+  = lens _sclAgencyId (\ s a -> s{_sclAgencyId = a}) .
+      _Coerce
 
 -- | DS ID of the advertiser.
 sclAdvertiserId :: Lens' SavedColumnsList Int64
 sclAdvertiserId
   = lens _sclAdvertiserId
       (\ s a -> s{_sclAdvertiserId = a})
+      . _Coerce
 
 instance GoogleRequest SavedColumnsList where
         type Rs SavedColumnsList = SavedColumnList

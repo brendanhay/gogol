@@ -51,16 +51,16 @@ type AdvertiserGroupsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "advertiserGroups" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
+                 QueryParams "ids" (JSONText Int64) :>
                    QueryParam "sortOrder" AdvertiserGroupsListSortOrder
                      :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" AdvertiserGroupsListSortField
                          :>
-                         QueryParam "maxResults" Int32 :>
+                         QueryParam "maxResults" (JSONText Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] AdvertiserGroupsListResponse
 
@@ -69,12 +69,12 @@ type AdvertiserGroupsListResource =
 -- /See:/ 'advertiserGroupsList' smart constructor.
 data AdvertiserGroupsList = AdvertiserGroupsList
     { _aglSearchString :: !(Maybe Text)
-    , _aglIds          :: !(Maybe [Int64])
-    , _aglProFileId    :: !Int64
+    , _aglIds          :: !(Maybe [JSONText Int64])
+    , _aglProFileId    :: !(JSONText Int64)
     , _aglSortOrder    :: !(Maybe AdvertiserGroupsListSortOrder)
     , _aglPageToken    :: !(Maybe Text)
     , _aglSortField    :: !(Maybe AdvertiserGroupsListSortField)
-    , _aglMaxResults   :: !(Maybe Int32)
+    , _aglMaxResults   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsList' with the minimum fields required to make a request.
@@ -131,6 +131,7 @@ aglIds
 aglProFileId :: Lens' AdvertiserGroupsList Int64
 aglProFileId
   = lens _aglProFileId (\ s a -> s{_aglProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 aglSortOrder :: Lens' AdvertiserGroupsList (Maybe AdvertiserGroupsListSortOrder)
@@ -152,6 +153,7 @@ aglMaxResults :: Lens' AdvertiserGroupsList (Maybe Int32)
 aglMaxResults
   = lens _aglMaxResults
       (\ s a -> s{_aglMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AdvertiserGroupsList where
         type Rs AdvertiserGroupsList =

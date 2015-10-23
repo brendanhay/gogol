@@ -53,7 +53,7 @@ type GlobalAddressesListResource =
                "addresses" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
 -- | Retrieves the list of global address resources.
@@ -63,7 +63,7 @@ data GlobalAddressesList = GlobalAddressesList
     { _galProject    :: !Text
     , _galFilter     :: !(Maybe Text)
     , _galPageToken  :: !(Maybe Text)
-    , _galMaxResults :: !Word32
+    , _galMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesList' with the minimum fields required to make a request.
@@ -120,6 +120,7 @@ galMaxResults :: Lens' GlobalAddressesList Word32
 galMaxResults
   = lens _galMaxResults
       (\ s a -> s{_galMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest GlobalAddressesList where
         type Rs GlobalAddressesList = AddressList

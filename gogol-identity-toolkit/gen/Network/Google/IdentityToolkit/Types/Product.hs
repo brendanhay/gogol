@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- /See:/ 'uploadAccountResponseErrorItem' smart constructor.
 data UploadAccountResponseErrorItem = UploadAccountResponseErrorItem
     { _uareiMessage :: !(Maybe Text)
-    , _uareiIndex   :: !(Maybe Int32)
+    , _uareiIndex   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UploadAccountResponseErrorItem' with the minimum fields required to make a request.
@@ -50,7 +50,8 @@ uareiMessage
 -- | The index of the malformed account, starting from 0.
 uareiIndex :: Lens' UploadAccountResponseErrorItem (Maybe Int32)
 uareiIndex
-  = lens _uareiIndex (\ s a -> s{_uareiIndex = a})
+  = lens _uareiIndex (\ s a -> s{_uareiIndex = a}) .
+      mapping _Coerce
 
 instance FromJSON UploadAccountResponseErrorItem
          where
@@ -149,13 +150,13 @@ data UserInfo = UserInfo
     , _uiPhotoURL          :: !(Maybe Text)
     , _uiDisabled          :: !(Maybe Bool)
     , _uiProviderUserInfo  :: !(Maybe [UserInfoProviderUserInfoItem])
-    , _uiValidSince        :: !(Maybe Int64)
-    , _uiPasswordUpdatedAt :: !(Maybe Double)
-    , _uiVersion           :: !(Maybe Int32)
+    , _uiValidSince        :: !(Maybe (JSONText Int64))
+    , _uiPasswordUpdatedAt :: !(Maybe (JSONText Double))
+    , _uiVersion           :: !(Maybe (JSONText Int32))
     , _uiEmailVerified     :: !(Maybe Bool)
-    , _uiSalt              :: !(Maybe Word8)
+    , _uiSalt              :: !(Maybe (JSONText Word8))
     , _uiDisplayName       :: !(Maybe Text)
-    , _uiPasswordHash      :: !(Maybe Word8)
+    , _uiPasswordHash      :: !(Maybe (JSONText Word8))
     , _uiLocalId           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -230,17 +231,20 @@ uiProviderUserInfo
 uiValidSince :: Lens' UserInfo (Maybe Int64)
 uiValidSince
   = lens _uiValidSince (\ s a -> s{_uiValidSince = a})
+      . mapping _Coerce
 
 -- | The timestamp when the password was last updated.
 uiPasswordUpdatedAt :: Lens' UserInfo (Maybe Double)
 uiPasswordUpdatedAt
   = lens _uiPasswordUpdatedAt
       (\ s a -> s{_uiPasswordUpdatedAt = a})
+      . mapping _Coerce
 
 -- | Version of the user\'s password.
 uiVersion :: Lens' UserInfo (Maybe Int32)
 uiVersion
-  = lens _uiVersion (\ s a -> s{_uiVersion = a})
+  = lens _uiVersion (\ s a -> s{_uiVersion = a}) .
+      mapping _Coerce
 
 -- | Whether the email has been verified.
 uiEmailVerified :: Lens' UserInfo (Maybe Bool)
@@ -250,7 +254,9 @@ uiEmailVerified
 
 -- | The user\'s password salt.
 uiSalt :: Lens' UserInfo (Maybe Word8)
-uiSalt = lens _uiSalt (\ s a -> s{_uiSalt = a})
+uiSalt
+  = lens _uiSalt (\ s a -> s{_uiSalt = a}) .
+      mapping _Coerce
 
 -- | The name of the user.
 uiDisplayName :: Lens' UserInfo (Maybe Text)
@@ -263,6 +269,7 @@ uiPasswordHash :: Lens' UserInfo (Maybe Word8)
 uiPasswordHash
   = lens _uiPasswordHash
       (\ s a -> s{_uiPasswordHash = a})
+      . mapping _Coerce
 
 -- | The local ID of the user.
 uiLocalId :: Lens' UserInfo (Maybe Text)
@@ -466,7 +473,7 @@ data IdentitytoolkitRelyingPartySetAccountInfoRequest = IdentitytoolkitRelyingPa
     { _irpsairUpgradeToFederatedLogin :: !(Maybe Bool)
     , _irpsairEmail                   :: !(Maybe Text)
     , _irpsairCaptchaChallenge        :: !(Maybe Text)
-    , _irpsairValidSince              :: !(Maybe Int64)
+    , _irpsairValidSince              :: !(Maybe (JSONText Int64))
     , _irpsairOOBCode                 :: !(Maybe Text)
     , _irpsairPassword                :: !(Maybe Text)
     , _irpsairCaptchaResponse         :: !(Maybe Text)
@@ -548,6 +555,7 @@ irpsairValidSince :: Lens' IdentitytoolkitRelyingPartySetAccountInfoRequest (May
 irpsairValidSince
   = lens _irpsairValidSince
       (\ s a -> s{_irpsairValidSince = a})
+      . mapping _Coerce
 
 -- | The out-of-band code of the change email request.
 irpsairOOBCode :: Lens' IdentitytoolkitRelyingPartySetAccountInfoRequest (Maybe Text)
@@ -1250,11 +1258,11 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartyUploadAccountRequest' smart constructor.
 data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPartyUploadAccountRequest
     { _irpuarUsers         :: !(Maybe [UserInfo])
-    , _irpuarMemoryCost    :: !(Maybe Int32)
-    , _irpuarSaltSeparator :: !(Maybe Word8)
+    , _irpuarMemoryCost    :: !(Maybe (JSONText Int32))
+    , _irpuarSaltSeparator :: !(Maybe (JSONText Word8))
     , _irpuarHashAlgorithm :: !(Maybe Text)
-    , _irpuarSignerKey     :: !(Maybe Word8)
-    , _irpuarRounds        :: !(Maybe Int32)
+    , _irpuarSignerKey     :: !(Maybe (JSONText Word8))
+    , _irpuarRounds        :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyUploadAccountRequest' with the minimum fields required to make a request.
@@ -1296,12 +1304,14 @@ irpuarMemoryCost :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe
 irpuarMemoryCost
   = lens _irpuarMemoryCost
       (\ s a -> s{_irpuarMemoryCost = a})
+      . mapping _Coerce
 
 -- | The salt separator.
 irpuarSaltSeparator :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Word8)
 irpuarSaltSeparator
   = lens _irpuarSaltSeparator
       (\ s a -> s{_irpuarSaltSeparator = a})
+      . mapping _Coerce
 
 -- | The password hash algorithm.
 irpuarHashAlgorithm :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Text)
@@ -1314,11 +1324,13 @@ irpuarSignerKey :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe 
 irpuarSignerKey
   = lens _irpuarSignerKey
       (\ s a -> s{_irpuarSignerKey = a})
+      . mapping _Coerce
 
 -- | Rounds for hash calculation. Used by scrypt and similar algorithms.
 irpuarRounds :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Int32)
 irpuarRounds
   = lens _irpuarRounds (\ s a -> s{_irpuarRounds = a})
+      . mapping _Coerce
 
 instance FromJSON
          IdentitytoolkitRelyingPartyUploadAccountRequest where
@@ -1726,7 +1738,7 @@ instance ToJSON GetOOBConfirmationCodeResponse where
 -- /See:/ 'identitytoolkitRelyingPartyDownloadAccountRequest' smart constructor.
 data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingPartyDownloadAccountRequest
     { _irpdarNextPageToken :: !(Maybe Text)
-    , _irpdarMaxResults    :: !(Maybe Word32)
+    , _irpdarMaxResults    :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyDownloadAccountRequest' with the minimum fields required to make a request.
@@ -1756,6 +1768,7 @@ irpdarMaxResults :: Lens' IdentitytoolkitRelyingPartyDownloadAccountRequest (May
 irpdarMaxResults
   = lens _irpdarMaxResults
       (\ s a -> s{_irpdarMaxResults = a})
+      . mapping _Coerce
 
 instance FromJSON
          IdentitytoolkitRelyingPartyDownloadAccountRequest
@@ -1785,7 +1798,7 @@ data VerifyPasswordResponse = VerifyPasswordResponse
     , _vprPhotoURL               :: !(Maybe Text)
     , _vprOAuthAccessToken       :: !(Maybe Text)
     , _vprKind                   :: !Text
-    , _vprOAuthExpireIn          :: !(Maybe Int32)
+    , _vprOAuthExpireIn          :: !(Maybe (JSONText Int32))
     , _vprDisplayName            :: !(Maybe Text)
     , _vprLocalId                :: !(Maybe Text)
     , _vprRegistered             :: !(Maybe Bool)
@@ -1857,6 +1870,7 @@ vprOAuthExpireIn :: Lens' VerifyPasswordResponse (Maybe Int32)
 vprOAuthExpireIn
   = lens _vprOAuthExpireIn
       (\ s a -> s{_vprOAuthExpireIn = a})
+      . mapping _Coerce
 
 -- | The name of the user.
 vprDisplayName :: Lens' VerifyPasswordResponse (Maybe Text)
@@ -2033,7 +2047,7 @@ data VerifyAssertionResponse = VerifyAssertionResponse
     , _varOAuthAccessToken       :: !(Maybe Text)
     , _varDateOfBirth            :: !(Maybe Text)
     , _varKind                   :: !Text
-    , _varOAuthExpireIn          :: !(Maybe Int32)
+    , _varOAuthExpireIn          :: !(Maybe (JSONText Int32))
     , _varAppInstallationURL     :: !(Maybe Text)
     , _varAction                 :: !(Maybe Text)
     , _varNeedEmail              :: !(Maybe Bool)
@@ -2242,6 +2256,7 @@ varOAuthExpireIn :: Lens' VerifyAssertionResponse (Maybe Int32)
 varOAuthExpireIn
   = lens _varOAuthExpireIn
       (\ s a -> s{_varOAuthExpireIn = a})
+      . mapping _Coerce
 
 -- | URL for OTA app installation.
 varAppInstallationURL :: Lens' VerifyAssertionResponse (Maybe Text)

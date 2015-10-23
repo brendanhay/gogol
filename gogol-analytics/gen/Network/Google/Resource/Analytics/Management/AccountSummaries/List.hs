@@ -48,8 +48,8 @@ type ManagementAccountSummariesListResource =
        "v3" :>
          "management" :>
            "accountSummaries" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :>
+             QueryParam "start-index" (JSONText Int32) :>
+               QueryParam "max-results" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountSummaries
 
@@ -58,8 +58,8 @@ type ManagementAccountSummariesListResource =
 --
 -- /See:/ 'managementAccountSummariesList' smart constructor.
 data ManagementAccountSummariesList = ManagementAccountSummariesList
-    { _maslStartIndex :: !(Maybe Int32)
-    , _maslMaxResults :: !(Maybe Int32)
+    { _maslStartIndex :: !(Maybe (JSONText Int32))
+    , _maslMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountSummariesList' with the minimum fields required to make a request.
@@ -83,6 +83,7 @@ maslStartIndex :: Lens' ManagementAccountSummariesList (Maybe Int32)
 maslStartIndex
   = lens _maslStartIndex
       (\ s a -> s{_maslStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of account summaries to include in this response,
 -- where the largest acceptable value is 1000.
@@ -90,6 +91,7 @@ maslMaxResults :: Lens' ManagementAccountSummariesList (Maybe Int32)
 maslMaxResults
   = lens _maslMaxResults
       (\ s a -> s{_maslMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementAccountSummariesList
          where

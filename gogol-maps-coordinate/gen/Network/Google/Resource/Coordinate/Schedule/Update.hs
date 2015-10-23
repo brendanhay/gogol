@@ -53,12 +53,12 @@ type ScheduleUpdateResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" Word64 :>
+               Capture "jobId" (JSONText Word64) :>
                  "schedule" :>
                    QueryParam "allDay" Bool :>
-                     QueryParam "startTime" Word64 :>
-                       QueryParam "endTime" Word64 :>
-                         QueryParam "duration" Word64 :>
+                     QueryParam "startTime" (JSONText Word64) :>
+                       QueryParam "endTime" (JSONText Word64) :>
+                         QueryParam "duration" (JSONText Word64) :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Schedule :> Put '[JSON] Schedule
 
@@ -66,13 +66,13 @@ type ScheduleUpdateResource =
 --
 -- /See:/ 'scheduleUpdate' smart constructor.
 data ScheduleUpdate = ScheduleUpdate
-    { _suJobId     :: !Word64
+    { _suJobId     :: !(JSONText Word64)
     , _suAllDay    :: !(Maybe Bool)
-    , _suStartTime :: !(Maybe Word64)
+    , _suStartTime :: !(Maybe (JSONText Word64))
     , _suTeamId    :: !Text
     , _suPayload   :: !Schedule
-    , _suEndTime   :: !(Maybe Word64)
-    , _suDuration  :: !(Maybe Word64)
+    , _suEndTime   :: !(Maybe (JSONText Word64))
+    , _suDuration  :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScheduleUpdate' with the minimum fields required to make a request.
@@ -110,7 +110,8 @@ scheduleUpdate pSuJobId_ pSuTeamId_ pSuPayload_ =
 
 -- | Job number
 suJobId :: Lens' ScheduleUpdate Word64
-suJobId = lens _suJobId (\ s a -> s{_suJobId = a})
+suJobId
+  = lens _suJobId (\ s a -> s{_suJobId = a}) . _Coerce
 
 -- | Whether the job is scheduled for the whole day. Time of day in
 -- start\/end times is ignored if this is true.
@@ -120,7 +121,8 @@ suAllDay = lens _suAllDay (\ s a -> s{_suAllDay = a})
 -- | Scheduled start time in milliseconds since epoch.
 suStartTime :: Lens' ScheduleUpdate (Maybe Word64)
 suStartTime
-  = lens _suStartTime (\ s a -> s{_suStartTime = a})
+  = lens _suStartTime (\ s a -> s{_suStartTime = a}) .
+      mapping _Coerce
 
 -- | Team ID
 suTeamId :: Lens' ScheduleUpdate Text
@@ -134,12 +136,14 @@ suPayload
 -- | Scheduled end time in milliseconds since epoch.
 suEndTime :: Lens' ScheduleUpdate (Maybe Word64)
 suEndTime
-  = lens _suEndTime (\ s a -> s{_suEndTime = a})
+  = lens _suEndTime (\ s a -> s{_suEndTime = a}) .
+      mapping _Coerce
 
 -- | Job duration in milliseconds.
 suDuration :: Lens' ScheduleUpdate (Maybe Word64)
 suDuration
-  = lens _suDuration (\ s a -> s{_suDuration = a})
+  = lens _suDuration (\ s a -> s{_suDuration = a}) .
+      mapping _Coerce
 
 instance GoogleRequest ScheduleUpdate where
         type Rs ScheduleUpdate = Schedule

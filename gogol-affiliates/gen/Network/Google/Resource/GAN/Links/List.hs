@@ -67,7 +67,7 @@ type LinksListResource =
                      QueryParam "relationshipStatus"
                        LinksListRelationshipStatus
                        :>
-                       QueryParams "advertiserId" Int64 :>
+                       QueryParams "advertiserId" (JSONText Int64) :>
                          QueryParam "searchText" Text :>
                            QueryParams "promotionType" LinksListPromotionType :>
                              QueryParam "createDateMin" Text :>
@@ -75,7 +75,8 @@ type LinksListResource =
                                  QueryParam "pageToken" Text :>
                                    QueryParam "startDateMax" Text :>
                                      QueryParam "startDateMin" Text :>
-                                       QueryParam "maxResults" Word32 :>
+                                       QueryParam "maxResults" (JSONText Word32)
+                                         :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] Links
 
@@ -87,7 +88,7 @@ data LinksList = LinksList
     , _llAuthorship         :: !(Maybe LinksListAuthorship)
     , _llAssetSize          :: !(Maybe [Text])
     , _llRelationshipStatus :: !(Maybe LinksListRelationshipStatus)
-    , _llAdvertiserId       :: !(Maybe [Int64])
+    , _llAdvertiserId       :: !(Maybe [JSONText Int64])
     , _llSearchText         :: !(Maybe Text)
     , _llPromotionType      :: !(Maybe [LinksListPromotionType])
     , _llRoleId             :: !Text
@@ -97,7 +98,7 @@ data LinksList = LinksList
     , _llPageToken          :: !(Maybe Text)
     , _llStartDateMax       :: !(Maybe Text)
     , _llStartDateMin       :: !(Maybe Text)
-    , _llMaxResults         :: !(Maybe Word32)
+    , _llMaxResults         :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksList' with the minimum fields required to make a request.
@@ -244,6 +245,7 @@ llStartDateMin
 llMaxResults :: Lens' LinksList (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest LinksList where
         type Rs LinksList = Links

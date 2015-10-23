@@ -54,7 +54,7 @@ type BackupRunsListResource =
                Capture "instance" Text :>
                  "backupRuns" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] BackupRunsListResponse
 
@@ -65,7 +65,7 @@ type BackupRunsListResource =
 data BackupRunsList = BackupRunsList
     { _brlProject    :: !Text
     , _brlPageToken  :: !(Maybe Text)
-    , _brlMaxResults :: !(Maybe Int32)
+    , _brlMaxResults :: !(Maybe (JSONText Int32))
     , _brlInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -108,6 +108,7 @@ brlMaxResults :: Lens' BackupRunsList (Maybe Int32)
 brlMaxResults
   = lens _brlMaxResults
       (\ s a -> s{_brlMaxResults = a})
+      . mapping _Coerce
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 brlInstance :: Lens' BackupRunsList Text

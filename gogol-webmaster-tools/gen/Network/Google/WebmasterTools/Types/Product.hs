@@ -24,9 +24,9 @@ import           Network.Google.WebmasterTools.Types.Sum
 --
 -- /See:/ 'wmxSitemapContent' smart constructor.
 data WmxSitemapContent = WmxSitemapContent
-    { _wscIndexed   :: !(Maybe Int64)
+    { _wscIndexed   :: !(Maybe (JSONText Int64))
     , _wscType      :: !(Maybe Text)
-    , _wscSubmitted :: !(Maybe Int64)
+    , _wscSubmitted :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WmxSitemapContent' with the minimum fields required to make a request.
@@ -51,7 +51,8 @@ wmxSitemapContent =
 -- type).
 wscIndexed :: Lens' WmxSitemapContent (Maybe Int64)
 wscIndexed
-  = lens _wscIndexed (\ s a -> s{_wscIndexed = a})
+  = lens _wscIndexed (\ s a -> s{_wscIndexed = a}) .
+      mapping _Coerce
 
 -- | The specific type of content in this sitemap. For example: web.
 wscType :: Lens' WmxSitemapContent (Maybe Text)
@@ -61,6 +62,7 @@ wscType = lens _wscType (\ s a -> s{_wscType = a})
 wscSubmitted :: Lens' WmxSitemapContent (Maybe Int64)
 wscSubmitted
   = lens _wscSubmitted (\ s a -> s{_wscSubmitted = a})
+      . mapping _Coerce
 
 instance FromJSON WmxSitemapContent where
         parseJSON
@@ -247,11 +249,11 @@ instance ToJSON URLCrawlErrorCountsPerType where
 --
 -- /See:/ 'apiDataRow' smart constructor.
 data APIDataRow = APIDataRow
-    { _adrImpressions :: !(Maybe Double)
+    { _adrImpressions :: !(Maybe (JSONText Double))
     , _adrKeys        :: !(Maybe [Text])
-    , _adrCtr         :: !(Maybe Double)
-    , _adrClicks      :: !(Maybe Double)
-    , _adrPosition    :: !(Maybe Double)
+    , _adrCtr         :: !(Maybe (JSONText Double))
+    , _adrClicks      :: !(Maybe (JSONText Double))
+    , _adrPosition    :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIDataRow' with the minimum fields required to make a request.
@@ -282,6 +284,7 @@ adrImpressions :: Lens' APIDataRow (Maybe Double)
 adrImpressions
   = lens _adrImpressions
       (\ s a -> s{_adrImpressions = a})
+      . mapping _Coerce
 
 adrKeys :: Lens' APIDataRow [Text]
 adrKeys
@@ -289,15 +292,19 @@ adrKeys
       . _Coerce
 
 adrCtr :: Lens' APIDataRow (Maybe Double)
-adrCtr = lens _adrCtr (\ s a -> s{_adrCtr = a})
+adrCtr
+  = lens _adrCtr (\ s a -> s{_adrCtr = a}) .
+      mapping _Coerce
 
 adrClicks :: Lens' APIDataRow (Maybe Double)
 adrClicks
-  = lens _adrClicks (\ s a -> s{_adrClicks = a})
+  = lens _adrClicks (\ s a -> s{_adrClicks = a}) .
+      mapping _Coerce
 
 adrPosition :: Lens' APIDataRow (Maybe Double)
 adrPosition
-  = lens _adrPosition (\ s a -> s{_adrPosition = a})
+  = lens _adrPosition (\ s a -> s{_adrPosition = a}) .
+      mapping _Coerce
 
 instance FromJSON APIDataRow where
         parseJSON
@@ -376,7 +383,7 @@ instance ToJSON APIdimensionFilter where
 --
 -- /See:/ 'urlCrawlErrorCount' smart constructor.
 data URLCrawlErrorCount = URLCrawlErrorCount
-    { _ucecCount     :: !(Maybe Int64)
+    { _ucecCount     :: !(Maybe (JSONText Int64))
     , _ucecTimestamp :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -398,7 +405,8 @@ urlCrawlErrorCount =
 -- | The error count at the given timestamp.
 ucecCount :: Lens' URLCrawlErrorCount (Maybe Int64)
 ucecCount
-  = lens _ucecCount (\ s a -> s{_ucecCount = a})
+  = lens _ucecCount (\ s a -> s{_ucecCount = a}) .
+      mapping _Coerce
 
 -- | The date and time when the crawl attempt took place, in RFC 3339 format.
 ucecTimestamp :: Lens' URLCrawlErrorCount (Maybe UTCTime)
@@ -567,7 +575,7 @@ instance ToJSON URLCrawlErrorsCountsQueryResponse
 --
 -- /See:/ 'urlCrawlErrorsSample' smart constructor.
 data URLCrawlErrorsSample = URLCrawlErrorsSample
-    { _ucesResponseCode  :: !(Maybe Int32)
+    { _ucesResponseCode  :: !(Maybe (JSONText Int32))
     , _ucesURLDetails    :: !(Maybe URLSampleDetails)
     , _ucesLastCrawled   :: !(Maybe DateTime')
     , _ucesPageURL       :: !(Maybe Text)
@@ -603,6 +611,7 @@ ucesResponseCode :: Lens' URLCrawlErrorsSample (Maybe Int32)
 ucesResponseCode
   = lens _ucesResponseCode
       (\ s a -> s{_ucesResponseCode = a})
+      . mapping _Coerce
 
 -- | Additional details about the URL, set only when calling get().
 ucesURLDetails :: Lens' URLCrawlErrorsSample (Maybe URLSampleDetails)
@@ -658,11 +667,11 @@ data WmxSitemap = WmxSitemap
     , _wsPath            :: !(Maybe Text)
     , _wsIsSitemapsIndex :: !(Maybe Bool)
     , _wsLastSubmitted   :: !(Maybe DateTime')
-    , _wsWarnings        :: !(Maybe Int64)
+    , _wsWarnings        :: !(Maybe (JSONText Int64))
     , _wsLastDownloaded  :: !(Maybe DateTime')
     , _wsIsPending       :: !(Maybe Bool)
     , _wsType            :: !(Maybe Text)
-    , _wsErrors          :: !(Maybe Int64)
+    , _wsErrors          :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WmxSitemap' with the minimum fields required to make a request.
@@ -730,7 +739,8 @@ wsLastSubmitted
 -- issues with URLs in the sitemaps.
 wsWarnings :: Lens' WmxSitemap (Maybe Int64)
 wsWarnings
-  = lens _wsWarnings (\ s a -> s{_wsWarnings = a})
+  = lens _wsWarnings (\ s a -> s{_wsWarnings = a}) .
+      mapping _Coerce
 
 -- | Date & time in which this sitemap was last downloaded. Date format is in
 -- RFC 3339 format (yyyy-mm-dd).
@@ -752,7 +762,9 @@ wsType = lens _wsType (\ s a -> s{_wsType = a})
 -- | Number of errors in the sitemap. These are issues with the sitemap
 -- itself that need to be fixed before it can be processed correctly.
 wsErrors :: Lens' WmxSitemap (Maybe Int64)
-wsErrors = lens _wsErrors (\ s a -> s{_wsErrors = a})
+wsErrors
+  = lens _wsErrors (\ s a -> s{_wsErrors = a}) .
+      mapping _Coerce
 
 instance FromJSON WmxSitemap where
         parseJSON
@@ -824,7 +836,7 @@ instance ToJSON SitemapsListResponse where
 -- /See:/ 'searchAnalyticsQueryRequest' smart constructor.
 data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest
     { _saqrAggregationType       :: !(Maybe Text)
-    , _saqrRowLimit              :: !(Maybe Int32)
+    , _saqrRowLimit              :: !(Maybe (JSONText Int32))
     , _saqrEndDate               :: !(Maybe Text)
     , _saqrSearchType            :: !(Maybe Text)
     , _saqrDimensionFilterGroups :: !(Maybe [APIdimensionFilterGroup])
@@ -883,6 +895,7 @@ saqrAggregationType
 saqrRowLimit :: Lens' SearchAnalyticsQueryRequest (Maybe Int32)
 saqrRowLimit
   = lens _saqrRowLimit (\ s a -> s{_saqrRowLimit = a})
+      . mapping _Coerce
 
 -- | [Required] End date of the requested date range, in YYYY-MM-DD format,
 -- in PST (UTC - 8:00). Must be greater than or equal to the start date.

@@ -603,7 +603,7 @@ data Report = Report
     , _rRows             :: !(Maybe [[Text]])
     , _rTotals           :: !(Maybe [Text])
     , _rHeaders          :: !(Maybe [ReportHeadersItem])
-    , _rTotalMatchedRows :: !(Maybe Int64)
+    , _rTotalMatchedRows :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
@@ -687,6 +687,7 @@ rTotalMatchedRows :: Lens' Report (Maybe Int64)
 rTotalMatchedRows
   = lens _rTotalMatchedRows
       (\ s a -> s{_rTotalMatchedRows = a})
+      . mapping _Coerce
 
 instance FromJSON Report where
         parseJSON
@@ -1293,12 +1294,12 @@ instance ToJSON URLChannel where
 data PreferredDeal = PreferredDeal
     { _pAdvertiserName   :: !(Maybe Text)
     , _pCurrencyCode     :: !(Maybe Text)
-    , _pStartTime        :: !(Maybe Word64)
+    , _pStartTime        :: !(Maybe (JSONText Word64))
     , _pKind             :: !Text
     , _pBuyerNetworkName :: !(Maybe Text)
-    , _pEndTime          :: !(Maybe Word64)
-    , _pId               :: !(Maybe Int64)
-    , _pFixedCpm         :: !(Maybe Int64)
+    , _pEndTime          :: !(Maybe (JSONText Word64))
+    , _pId               :: !(Maybe (JSONText Int64))
+    , _pFixedCpm         :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PreferredDeal' with the minimum fields required to make a request.
@@ -1351,7 +1352,8 @@ pCurrencyCode
 -- not set then this deal is active immediately upon creation.
 pStartTime :: Lens' PreferredDeal (Maybe Word64)
 pStartTime
-  = lens _pStartTime (\ s a -> s{_pStartTime = a})
+  = lens _pStartTime (\ s a -> s{_pStartTime = a}) .
+      mapping _Coerce
 
 -- | Kind of resource this is, in this case adexchangeseller#preferredDeal.
 pKind :: Lens' PreferredDeal Text
@@ -1367,11 +1369,14 @@ pBuyerNetworkName
 -- If not set then this deal is valid until manually disabled by the
 -- publisher.
 pEndTime :: Lens' PreferredDeal (Maybe Word64)
-pEndTime = lens _pEndTime (\ s a -> s{_pEndTime = a})
+pEndTime
+  = lens _pEndTime (\ s a -> s{_pEndTime = a}) .
+      mapping _Coerce
 
 -- | Unique identifier of this preferred deal.
 pId :: Lens' PreferredDeal (Maybe Int64)
-pId = lens _pId (\ s a -> s{_pId = a})
+pId
+  = lens _pId (\ s a -> s{_pId = a}) . mapping _Coerce
 
 -- | The fixed price for this preferred deal. In cpm micros of currency
 -- according to currencyCode. If set, then this preferred deal is eligible
@@ -1379,7 +1384,8 @@ pId = lens _pId (\ s a -> s{_pId = a})
 -- configured fixed price).
 pFixedCpm :: Lens' PreferredDeal (Maybe Int64)
 pFixedCpm
-  = lens _pFixedCpm (\ s a -> s{_pFixedCpm = a})
+  = lens _pFixedCpm (\ s a -> s{_pFixedCpm = a}) .
+      mapping _Coerce
 
 instance FromJSON PreferredDeal where
         parseJSON

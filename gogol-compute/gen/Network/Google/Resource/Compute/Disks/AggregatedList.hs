@@ -53,7 +53,7 @@ type DisksAggregatedListResource =
                "disks" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] DiskAggregatedList
 
@@ -64,7 +64,7 @@ data DisksAggregatedList = DisksAggregatedList
     { _dalProject    :: !Text
     , _dalFilter     :: !(Maybe Text)
     , _dalPageToken  :: !(Maybe Text)
-    , _dalMaxResults :: !Word32
+    , _dalMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksAggregatedList' with the minimum fields required to make a request.
@@ -121,6 +121,7 @@ dalMaxResults :: Lens' DisksAggregatedList Word32
 dalMaxResults
   = lens _dalMaxResults
       (\ s a -> s{_dalMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest DisksAggregatedList where
         type Rs DisksAggregatedList = DiskAggregatedList

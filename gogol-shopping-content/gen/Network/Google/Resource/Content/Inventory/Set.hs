@@ -50,7 +50,7 @@ import           Network.Google.ShoppingContent.Types
 type InventorySetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "inventory" :>
              Capture "storeCode" Text :>
                "products" :>
@@ -66,7 +66,7 @@ type InventorySetResource =
 --
 -- /See:/ 'inventorySet' smart constructor.
 data InventorySet = InventorySet
-    { _isMerchantId :: !Word64
+    { _isMerchantId :: !(JSONText Word64)
     , _isStoreCode  :: !Text
     , _isPayload    :: !InventorySetRequest
     , _isProductId  :: !Text
@@ -105,6 +105,7 @@ inventorySet pIsMerchantId_ pIsStoreCode_ pIsPayload_ pIsProductId_ =
 isMerchantId :: Lens' InventorySet Word64
 isMerchantId
   = lens _isMerchantId (\ s a -> s{_isMerchantId = a})
+      . _Coerce
 
 -- | The code of the store for which to update price and availability. Use
 -- online to update price and availability of an online product.

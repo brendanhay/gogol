@@ -53,16 +53,16 @@ type CreativeGroupsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeGroups" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
+                 QueryParams "ids" (JSONText Int64) :>
                    QueryParam "sortOrder" CreativeGroupsListSortOrder :>
-                     QueryParam "groupNumber" Int32 :>
+                     QueryParam "groupNumber" (JSONText Int32) :>
                        QueryParam "pageToken" Text :>
                          QueryParam "sortField" CreativeGroupsListSortField :>
-                           QueryParams "advertiserIds" Int64 :>
-                             QueryParam "maxResults" Int32 :>
+                           QueryParams "advertiserIds" (JSONText Int64) :>
+                             QueryParam "maxResults" (JSONText Int32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CreativeGroupsListResponse
 
@@ -71,14 +71,14 @@ type CreativeGroupsListResource =
 -- /See:/ 'creativeGroupsList' smart constructor.
 data CreativeGroupsList = CreativeGroupsList
     { _cglSearchString  :: !(Maybe Text)
-    , _cglIds           :: !(Maybe [Int64])
-    , _cglProFileId     :: !Int64
+    , _cglIds           :: !(Maybe [JSONText Int64])
+    , _cglProFileId     :: !(JSONText Int64)
     , _cglSortOrder     :: !(Maybe CreativeGroupsListSortOrder)
-    , _cglGroupNumber   :: !(Maybe Int32)
+    , _cglGroupNumber   :: !(Maybe (JSONText Int32))
     , _cglPageToken     :: !(Maybe Text)
     , _cglSortField     :: !(Maybe CreativeGroupsListSortField)
-    , _cglAdvertiserIds :: !(Maybe [Int64])
-    , _cglMaxResults    :: !(Maybe Int32)
+    , _cglAdvertiserIds :: !(Maybe [JSONText Int64])
+    , _cglMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsList' with the minimum fields required to make a request.
@@ -141,6 +141,7 @@ cglIds
 cglProFileId :: Lens' CreativeGroupsList Int64
 cglProFileId
   = lens _cglProFileId (\ s a -> s{_cglProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 cglSortOrder :: Lens' CreativeGroupsList (Maybe CreativeGroupsListSortOrder)
@@ -152,6 +153,7 @@ cglGroupNumber :: Lens' CreativeGroupsList (Maybe Int32)
 cglGroupNumber
   = lens _cglGroupNumber
       (\ s a -> s{_cglGroupNumber = a})
+      . mapping _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
 cglPageToken :: Lens' CreativeGroupsList (Maybe Text)
@@ -176,6 +178,7 @@ cglMaxResults :: Lens' CreativeGroupsList (Maybe Int32)
 cglMaxResults
   = lens _cglMaxResults
       (\ s a -> s{_cglMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest CreativeGroupsList where
         type Rs CreativeGroupsList =

@@ -162,12 +162,12 @@ instance ToJSON LocationsListResponse where
 -- /See:/ 'location' smart constructor.
 data Location = Location
     { _lKind        :: !Text
-    , _lLatitude    :: !(Maybe Double)
+    , _lLatitude    :: !(Maybe (JSONText Double))
     , _lAddress     :: !(Maybe Text)
     , _lDisplayName :: !(Maybe Text)
     , _lId          :: !(Maybe Text)
-    , _lAccuracy    :: !(Maybe Double)
-    , _lLongitude   :: !(Maybe Double)
+    , _lAccuracy    :: !(Maybe (JSONText Double))
+    , _lLongitude   :: !(Maybe (JSONText Double))
     , _lTimestamp   :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -211,7 +211,8 @@ lKind = lens _lKind (\ s a -> s{_lKind = a})
 -- | The latitude, in degrees.
 lLatitude :: Lens' Location (Maybe Double)
 lLatitude
-  = lens _lLatitude (\ s a -> s{_lLatitude = a})
+  = lens _lLatitude (\ s a -> s{_lLatitude = a}) .
+      mapping _Coerce
 
 -- | The full address of the location.
 lAddress :: Lens' Location (Maybe Text)
@@ -230,12 +231,14 @@ lId = lens _lId (\ s a -> s{_lId = a})
 -- | The accuracy of the location fix in meters.
 lAccuracy :: Lens' Location (Maybe Double)
 lAccuracy
-  = lens _lAccuracy (\ s a -> s{_lAccuracy = a})
+  = lens _lAccuracy (\ s a -> s{_lAccuracy = a}) .
+      mapping _Coerce
 
 -- | The longitude, in degrees.
 lLongitude :: Lens' Location (Maybe Double)
 lLongitude
-  = lens _lLongitude (\ s a -> s{_lLongitude = a})
+  = lens _lLongitude (\ s a -> s{_lLongitude = a}) .
+      mapping _Coerce
 
 -- | The time at which this location was captured, formatted according to RFC
 -- 3339.
@@ -371,7 +374,7 @@ data Contact = Contact
     { _conAcceptCommands  :: !(Maybe [Command])
     , _conSharingFeatures :: !(Maybe [Text])
     , _conImageURLs       :: !(Maybe [Text])
-    , _conPriority        :: !(Maybe Word32)
+    , _conPriority        :: !(Maybe (JSONText Word32))
     , _conKind            :: !Text
     , _conAcceptTypes     :: !(Maybe [Text])
     , _conPhoneNumber     :: !(Maybe Text)
@@ -461,7 +464,8 @@ conImageURLs
 -- priorities.
 conPriority :: Lens' Contact (Maybe Word32)
 conPriority
-  = lens _conPriority (\ s a -> s{_conPriority = a})
+  = lens _conPriority (\ s a -> s{_conPriority = a}) .
+      mapping _Coerce
 
 -- | The type of resource. This is always mirror#contact.
 conKind :: Lens' Contact Text
@@ -1401,7 +1405,7 @@ data TimelineItem = TimelineItem
     , _tiDisplayTime   :: !(Maybe DateTime')
     , _tiEtag          :: !(Maybe Text)
     , _tiIsDeleted     :: !(Maybe Bool)
-    , _tiPinScore      :: !(Maybe Int32)
+    , _tiPinScore      :: !(Maybe (JSONText Int32))
     , _tiAttachments   :: !(Maybe [Attachment])
     , _tiLocation      :: !(Maybe Location)
     , _tiMenuItems     :: !(Maybe [MenuItem])
@@ -1543,7 +1547,8 @@ tiIsDeleted
 -- clock. Note: setting this field is currently not supported.
 tiPinScore :: Lens' TimelineItem (Maybe Int32)
 tiPinScore
-  = lens _tiPinScore (\ s a -> s{_tiPinScore = a})
+  = lens _tiPinScore (\ s a -> s{_tiPinScore = a}) .
+      mapping _Coerce
 
 -- | A list of media attachments associated with this item. As a convenience,
 -- you can refer to attachments in your HTML payloads with the attachment

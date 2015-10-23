@@ -65,7 +65,7 @@ type VideosListResource =
                          QueryParam "videoCategoryId" Text :>
                            QueryParam "id" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] VideoListResponse
 
@@ -83,7 +83,7 @@ data VideosList = VideosList
     , _vlVideoCategoryId        :: !Text
     , _vlId                     :: !(Maybe Text)
     , _vlPageToken              :: !(Maybe Text)
-    , _vlMaxResults             :: !Word32
+    , _vlMaxResults             :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosList' with the minimum fields required to make a request.
@@ -219,6 +219,7 @@ vlPageToken
 vlMaxResults :: Lens' VideosList Word32
 vlMaxResults
   = lens _vlMaxResults (\ s a -> s{_vlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest VideosList where
         type Rs VideosList = VideoListResponse

@@ -56,11 +56,14 @@ type ObjectsDeleteResource =
            Capture "bucket" Text :>
              "o" :>
                Capture "object" Text :>
-                 QueryParam "ifMetagenerationMatch" Int64 :>
-                   QueryParam "ifGenerationNotMatch" Int64 :>
-                     QueryParam "ifGenerationMatch" Int64 :>
-                       QueryParam "ifMetagenerationNotMatch" Int64 :>
-                         QueryParam "generation" Int64 :>
+                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                   :>
+                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                       QueryParam "ifMetagenerationNotMatch"
+                         (JSONText Int64)
+                         :>
+                         QueryParam "generation" (JSONText Int64) :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an object and its metadata. Deletions are permanent if
@@ -69,13 +72,13 @@ type ObjectsDeleteResource =
 --
 -- /See:/ 'objectsDelete' smart constructor.
 data ObjectsDelete = ObjectsDelete
-    { _odIfMetagenerationMatch    :: !(Maybe Int64)
-    , _odIfGenerationNotMatch     :: !(Maybe Int64)
-    , _odIfGenerationMatch        :: !(Maybe Int64)
+    { _odIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    , _odIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
+    , _odIfGenerationMatch        :: !(Maybe (JSONText Int64))
     , _odBucket                   :: !Text
-    , _odIfMetagenerationNotMatch :: !(Maybe Int64)
+    , _odIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
     , _odObject                   :: !Text
-    , _odGeneration               :: !(Maybe Int64)
+    , _odGeneration               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsDelete' with the minimum fields required to make a request.
@@ -116,6 +119,7 @@ odIfMetagenerationMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfMetagenerationMatch
   = lens _odIfMetagenerationMatch
       (\ s a -> s{_odIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
@@ -123,6 +127,7 @@ odIfGenerationNotMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfGenerationNotMatch
   = lens _odIfGenerationNotMatch
       (\ s a -> s{_odIfGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
@@ -130,6 +135,7 @@ odIfGenerationMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfGenerationMatch
   = lens _odIfGenerationMatch
       (\ s a -> s{_odIfGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Name of the bucket in which the object resides.
 odBucket :: Lens' ObjectsDelete Text
@@ -141,6 +147,7 @@ odIfMetagenerationNotMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfMetagenerationNotMatch
   = lens _odIfMetagenerationNotMatch
       (\ s a -> s{_odIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
@@ -152,6 +159,7 @@ odObject = lens _odObject (\ s a -> s{_odObject = a})
 odGeneration :: Lens' ObjectsDelete (Maybe Int64)
 odGeneration
   = lens _odGeneration (\ s a -> s{_odGeneration = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectsDelete where
         type Rs ObjectsDelete = ()

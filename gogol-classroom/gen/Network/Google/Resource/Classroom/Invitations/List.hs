@@ -67,7 +67,7 @@ type InvitationsListResource =
                      QueryParam "userId" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" Int32 :>
+                           QueryParam "pageSize" (JSONText Int32) :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListInvitationsResponse
@@ -89,7 +89,7 @@ data InvitationsList = InvitationsList
     , _ilUserId         :: !(Maybe Text)
     , _ilBearerToken    :: !(Maybe Text)
     , _ilPageToken      :: !(Maybe Text)
-    , _ilPageSize       :: !(Maybe Int32)
+    , _ilPageSize       :: !(Maybe (JSONText Int32))
     , _ilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -190,7 +190,8 @@ ilPageToken
 -- return fewer than the specified number of results.
 ilPageSize :: Lens' InvitationsList (Maybe Int32)
 ilPageSize
-  = lens _ilPageSize (\ s a -> s{_ilPageSize = a})
+  = lens _ilPageSize (\ s a -> s{_ilPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 ilCallback :: Lens' InvitationsList (Maybe Text)

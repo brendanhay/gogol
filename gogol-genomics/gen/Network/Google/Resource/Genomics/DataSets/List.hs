@@ -61,7 +61,7 @@ type DataSetsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "projectId" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListDataSetsResponse
@@ -78,7 +78,7 @@ data DataSetsList = DataSetsList
     , _dslBearerToken    :: !(Maybe Text)
     , _dslPageToken      :: !(Maybe Text)
     , _dslProjectId      :: !(Maybe Text)
-    , _dslPageSize       :: !(Maybe Int32)
+    , _dslPageSize       :: !(Maybe (JSONText Int32))
     , _dslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -169,7 +169,8 @@ dslProjectId
 -- defaults to 50. The maximum value is 1024.
 dslPageSize :: Lens' DataSetsList (Maybe Int32)
 dslPageSize
-  = lens _dslPageSize (\ s a -> s{_dslPageSize = a})
+  = lens _dslPageSize (\ s a -> s{_dslPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 dslCallback :: Lens' DataSetsList (Maybe Text)

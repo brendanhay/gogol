@@ -46,17 +46,17 @@ type AdvertiserGroupsDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "advertiserGroups" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsDelete' smart constructor.
 data AdvertiserGroupsDelete = AdvertiserGroupsDelete
-    { _agdProFileId :: !Int64
-    , _agdId        :: !Int64
+    { _agdProFileId :: !(JSONText Int64)
+    , _agdId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsDelete' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ advertiserGroupsDelete pAgdProFileId_ pAgdId_ =
 agdProFileId :: Lens' AdvertiserGroupsDelete Int64
 agdProFileId
   = lens _agdProFileId (\ s a -> s{_agdProFileId = a})
+      . _Coerce
 
 -- | Advertiser group ID.
 agdId :: Lens' AdvertiserGroupsDelete Int64
-agdId = lens _agdId (\ s a -> s{_agdId = a})
+agdId
+  = lens _agdId (\ s a -> s{_agdId = a}) . _Coerce
 
 instance GoogleRequest AdvertiserGroupsDelete where
         type Rs AdvertiserGroupsDelete = ()

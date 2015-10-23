@@ -54,7 +54,7 @@ type GlobalForwardingRulesListResource =
                "forwardingRules" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ForwardingRuleList
 
@@ -66,7 +66,7 @@ data GlobalForwardingRulesList = GlobalForwardingRulesList
     { _gfrlProject    :: !Text
     , _gfrlFilter     :: !(Maybe Text)
     , _gfrlPageToken  :: !(Maybe Text)
-    , _gfrlMaxResults :: !Word32
+    , _gfrlMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesList' with the minimum fields required to make a request.
@@ -124,6 +124,7 @@ gfrlMaxResults :: Lens' GlobalForwardingRulesList Word32
 gfrlMaxResults
   = lens _gfrlMaxResults
       (\ s a -> s{_gfrlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest GlobalForwardingRulesList
          where

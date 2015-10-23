@@ -51,7 +51,7 @@ type UsersSessionsUpdateResource =
            Capture "userId" Text :>
              "sessions" :>
                Capture "sessionId" Text :>
-                 QueryParam "currentTimeMillis" Int64 :>
+                 QueryParam "currentTimeMillis" (JSONText Int64) :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Session :> Put '[JSON] Session
 
@@ -61,7 +61,7 @@ type UsersSessionsUpdateResource =
 data UsersSessionsUpdate = UsersSessionsUpdate
     { _usuPayload           :: !Session
     , _usuUserId            :: !Text
-    , _usuCurrentTimeMillis :: !(Maybe Int64)
+    , _usuCurrentTimeMillis :: !(Maybe (JSONText Int64))
     , _usuSessionId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -105,6 +105,7 @@ usuCurrentTimeMillis :: Lens' UsersSessionsUpdate (Maybe Int64)
 usuCurrentTimeMillis
   = lens _usuCurrentTimeMillis
       (\ s a -> s{_usuCurrentTimeMillis = a})
+      . mapping _Coerce
 
 -- | The ID of the session to be created.
 usuSessionId :: Lens' UsersSessionsUpdate Text

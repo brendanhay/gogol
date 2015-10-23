@@ -64,7 +64,7 @@ type BeaconsDiagnosticsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "alertFilter" Text :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
@@ -84,7 +84,7 @@ data BeaconsDiagnosticsList = BeaconsDiagnosticsList
     , _bdlUploadType     :: !(Maybe Text)
     , _bdlBearerToken    :: !(Maybe Text)
     , _bdlPageToken      :: !(Maybe Text)
-    , _bdlPageSize       :: !(Maybe Int32)
+    , _bdlPageSize       :: !(Maybe (JSONText Int32))
     , _bdlAlertFilter    :: !(Maybe Text)
     , _bdlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -180,7 +180,8 @@ bdlPageToken
 -- Maximum 1000. Optional.
 bdlPageSize :: Lens' BeaconsDiagnosticsList (Maybe Int32)
 bdlPageSize
-  = lens _bdlPageSize (\ s a -> s{_bdlPageSize = a})
+  = lens _bdlPageSize (\ s a -> s{_bdlPageSize = a}) .
+      mapping _Coerce
 
 -- | Requests only beacons that have the given alert. For example, to find
 -- beacons that have low batteries use \`alert_filter=LOW_BATTERY\`.

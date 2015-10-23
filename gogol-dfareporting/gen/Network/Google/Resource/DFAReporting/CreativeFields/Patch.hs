@@ -48,9 +48,9 @@ type CreativeFieldsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeFields" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] CreativeField :>
                      Patch '[JSON] CreativeField
@@ -60,9 +60,9 @@ type CreativeFieldsPatchResource =
 --
 -- /See:/ 'creativeFieldsPatch' smart constructor.
 data CreativeFieldsPatch = CreativeFieldsPatch
-    { _cfpProFileId :: !Int64
+    { _cfpProFileId :: !(JSONText Int64)
     , _cfpPayload   :: !CreativeField
-    , _cfpId        :: !Int64
+    , _cfpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsPatch' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ creativeFieldsPatch pCfpProFileId_ pCfpPayload_ pCfpId_ =
 cfpProFileId :: Lens' CreativeFieldsPatch Int64
 cfpProFileId
   = lens _cfpProFileId (\ s a -> s{_cfpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 cfpPayload :: Lens' CreativeFieldsPatch CreativeField
@@ -98,7 +99,8 @@ cfpPayload
 
 -- | Creative Field ID
 cfpId :: Lens' CreativeFieldsPatch Int64
-cfpId = lens _cfpId (\ s a -> s{_cfpId = a})
+cfpId
+  = lens _cfpId (\ s a -> s{_cfpId = a}) . _Coerce
 
 instance GoogleRequest CreativeFieldsPatch where
         type Rs CreativeFieldsPatch = CreativeField

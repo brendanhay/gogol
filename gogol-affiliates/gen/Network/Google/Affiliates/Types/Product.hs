@@ -33,13 +33,13 @@ data Event = Event
     , _eMemberId            :: !(Maybe Text)
     , _eKind                :: !Text
     , _eNetworkFee          :: !(Maybe Money)
-    , _eAdvertiserId        :: !(Maybe Int64)
+    , _eAdvertiserId        :: !(Maybe (JSONText Int64))
     , _eEventDate           :: !(Maybe DateTime')
     , _eProducts            :: !(Maybe [EventProductsItem])
     , _ePublisherFee        :: !(Maybe Money)
     , _eType                :: !(Maybe Text)
     , _eOrderId             :: !(Maybe Text)
-    , _ePublisherId         :: !(Maybe Int64)
+    , _ePublisherId         :: !(Maybe (JSONText Int64))
     , _eEarnings            :: !(Maybe Money)
     , _ePublisherName       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -164,6 +164,7 @@ eAdvertiserId :: Lens' Event (Maybe Int64)
 eAdvertiserId
   = lens _eAdvertiserId
       (\ s a -> s{_eAdvertiserId = a})
+      . mapping _Coerce
 
 -- | The date-time this event was initiated as a RFC 3339 date-time value.
 eEventDate :: Lens' Event (Maybe UTCTime)
@@ -196,6 +197,7 @@ eOrderId = lens _eOrderId (\ s a -> s{_eOrderId = a})
 ePublisherId :: Lens' Event (Maybe Int64)
 ePublisherId
   = lens _ePublisherId (\ s a -> s{_ePublisherId = a})
+      . mapping _Coerce
 
 -- | Earnings by the publisher.
 eEarnings :: Lens' Event (Maybe Money)
@@ -257,7 +259,7 @@ instance ToJSON Event where
 --
 -- /See:/ 'money' smart constructor.
 data Money = Money
-    { _mAmount       :: !(Maybe Double)
+    { _mAmount       :: !(Maybe (JSONText Double))
     , _mCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -278,7 +280,9 @@ money =
 
 -- | The amount of money.
 mAmount :: Lens' Money (Maybe Double)
-mAmount = lens _mAmount (\ s a -> s{_mAmount = a})
+mAmount
+  = lens _mAmount (\ s a -> s{_mAmount = a}) .
+      mapping _Coerce
 
 -- | The 3-letter code of the currency in question.
 mCurrencyCode :: Lens' Money (Maybe Text)
@@ -309,7 +313,7 @@ data Link = Link
     , _lClickTrackingURL      :: !(Maybe Text)
     , _lCreateDate            :: !(Maybe DateTime')
     , _lKind                  :: !Text
-    , _lAdvertiserId          :: !(Maybe Int64)
+    , _lAdvertiserId          :: !(Maybe (JSONText Int64))
     , _lEndDate               :: !(Maybe DateTime')
     , _lImageAltText          :: !(Maybe Text)
     , _lPromotionType         :: !(Maybe Text)
@@ -319,7 +323,7 @@ data Link = Link
     , _lImpressionTrackingURL :: !(Maybe Text)
     , _lSpecialOffers         :: !(Maybe LinkSpecialOffers)
     , _lEpcSevenDayAverage    :: !(Maybe Money)
-    , _lId                    :: !(Maybe Int64)
+    , _lId                    :: !(Maybe (JSONText Int64))
     , _lEpcNinetyDayAverage   :: !(Maybe Money)
     , _lLinkType              :: !(Maybe Text)
     , _lIsActive              :: !(Maybe Bool)
@@ -431,6 +435,7 @@ lAdvertiserId :: Lens' Link (Maybe Int64)
 lAdvertiserId
   = lens _lAdvertiserId
       (\ s a -> s{_lAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Date that this link becomes inactive.
 lEndDate :: Lens' Link (Maybe UTCTime)
@@ -488,7 +493,8 @@ lEpcSevenDayAverage
 
 -- | The ID of this link.
 lId :: Lens' Link (Maybe Int64)
-lId = lens _lId (\ s a -> s{_lId = a})
+lId
+  = lens _lId (\ s a -> s{_lId = a}) . mapping _Coerce
 
 -- | The sum of fees paid to publishers divided by the total number of clicks
 -- over the past three months on this link. This value should be multiplied
@@ -622,9 +628,9 @@ instance ToJSON CcOffers where
 -- /See:/ 'ccOfferDefaultFeesItem' smart constructor.
 data CcOfferDefaultFeesItem = CcOfferDefaultFeesItem
     { _codfiRateType :: !(Maybe Text)
-    , _codfiMinRate  :: !(Maybe Double)
+    , _codfiMinRate  :: !(Maybe (JSONText Double))
     , _codfiCategory :: !(Maybe Text)
-    , _codfiMaxRate  :: !(Maybe Double)
+    , _codfiMaxRate  :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CcOfferDefaultFeesItem' with the minimum fields required to make a request.
@@ -659,6 +665,7 @@ codfiRateType
 codfiMinRate :: Lens' CcOfferDefaultFeesItem (Maybe Double)
 codfiMinRate
   = lens _codfiMinRate (\ s a -> s{_codfiMinRate = a})
+      . mapping _Coerce
 
 -- | The type of charge, for example Purchases.
 codfiCategory :: Lens' CcOfferDefaultFeesItem (Maybe Text)
@@ -671,6 +678,7 @@ codfiCategory
 codfiMaxRate :: Lens' CcOfferDefaultFeesItem (Maybe Double)
 codfiMaxRate
   = lens _codfiMaxRate (\ s a -> s{_codfiMaxRate = a})
+      . mapping _Coerce
 
 instance FromJSON CcOfferDefaultFeesItem where
         parseJSON
@@ -700,7 +708,7 @@ data Report = Report
     , _rKind             :: !Text
     , _rStartDate        :: !(Maybe Text)
     , _rRows             :: !(Maybe [[JSONValue]])
-    , _rMatchingRowCount :: !(Maybe Int64)
+    , _rMatchingRowCount :: !(Maybe (JSONText Int64))
     , _rColumnNames      :: !(Maybe [Text])
     , _rType             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -769,6 +777,7 @@ rMatchingRowCount :: Lens' Report (Maybe Int64)
 rMatchingRowCount
   = lens _rMatchingRowCount
       (\ s a -> s{_rMatchingRowCount = a})
+      . mapping _Coerce
 
 -- | The column names for the report
 rColumnNames :: Lens' Report [Text]
@@ -872,7 +881,7 @@ instance ToJSON Advertisers where
 data EventProductsItem = EventProductsItem
     { _epiSKUName      :: !(Maybe Text)
     , _epiNetworkFee   :: !(Maybe Money)
-    , _epiQuantity     :: !(Maybe Int64)
+    , _epiQuantity     :: !(Maybe (JSONText Int64))
     , _epiCategoryName :: !(Maybe Text)
     , _epiCategoryId   :: !(Maybe Text)
     , _epiSKU          :: !(Maybe Text)
@@ -932,7 +941,8 @@ epiNetworkFee
 -- | Quantity of this product bought\/exchanged.
 epiQuantity :: Lens' EventProductsItem (Maybe Int64)
 epiQuantity
-  = lens _epiQuantity (\ s a -> s{_epiQuantity = a})
+  = lens _epiQuantity (\ s a -> s{_epiQuantity = a}) .
+      mapping _Coerce
 
 -- | Name of the category this product belongs to.
 epiCategoryName :: Lens' EventProductsItem (Maybe Text)
@@ -997,7 +1007,7 @@ instance ToJSON EventProductsItem where
 --
 -- /See:/ 'ccOfferBonusRewardsItem' smart constructor.
 data CcOfferBonusRewardsItem = CcOfferBonusRewardsItem
-    { _cobriAmount  :: !(Maybe Double)
+    { _cobriAmount  :: !(Maybe (JSONText Double))
     , _cobriDetails :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1019,7 +1029,8 @@ ccOfferBonusRewardsItem =
 -- | How many units of reward will be granted.
 cobriAmount :: Lens' CcOfferBonusRewardsItem (Maybe Double)
 cobriAmount
-  = lens _cobriAmount (\ s a -> s{_cobriAmount = a})
+  = lens _cobriAmount (\ s a -> s{_cobriAmount = a}) .
+      mapping _Coerce
 
 -- | The circumstances under which this rule applies, for example, booking a
 -- flight via Orbitz.
@@ -1107,7 +1118,7 @@ instance ToJSON Events where
 -- /See:/ 'linkSpecialOffers' smart constructor.
 data LinkSpecialOffers = LinkSpecialOffers
     { _lsoFreeShippingMin :: !(Maybe Money)
-    , _lsoPercentOff      :: !(Maybe Double)
+    , _lsoPercentOff      :: !(Maybe (JSONText Double))
     , _lsoPriceCut        :: !(Maybe Money)
     , _lsoPriceCutMin     :: !(Maybe Money)
     , _lsoPercentOffMin   :: !(Maybe Money)
@@ -1160,6 +1171,7 @@ lsoPercentOff :: Lens' LinkSpecialOffers (Maybe Double)
 lsoPercentOff
   = lens _lsoPercentOff
       (\ s a -> s{_lsoPercentOff = a})
+      . mapping _Coerce
 
 -- | Price cut on the purchase
 lsoPriceCut :: Lens' LinkSpecialOffers (Maybe Money)
@@ -1296,16 +1308,16 @@ data Advertiser = Advertiser
     , _advSiteURL                    :: !(Maybe Text)
     , _advPayoutRank                 :: !(Maybe Text)
     , _advJoinDate                   :: !(Maybe DateTime')
-    , _advDefaultLinkId              :: !(Maybe Int64)
+    , _advDefaultLinkId              :: !(Maybe (JSONText Int64))
     , _advRedirectDomains            :: !(Maybe [Text])
     , _advName                       :: !(Maybe Text)
     , _advProductFeedsEnabled        :: !(Maybe Bool)
-    , _advMerchantCenterIds          :: !(Maybe [Int64])
+    , _advMerchantCenterIds          :: !(Maybe [JSONText Int64])
     , _advEpcSevenDayAverage         :: !(Maybe Money)
     , _advItem                       :: !(Maybe Advertiser)
-    , _advId                         :: !(Maybe Int64)
+    , _advId                         :: !(Maybe (JSONText Int64))
     , _advEpcNinetyDayAverage        :: !(Maybe Money)
-    , _advCommissionDuration         :: !(Maybe Int32)
+    , _advCommissionDuration         :: !(Maybe (JSONText Int32))
     , _advDescription                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1445,6 +1457,7 @@ advDefaultLinkId :: Lens' Advertiser (Maybe Int64)
 advDefaultLinkId
   = lens _advDefaultLinkId
       (\ s a -> s{_advDefaultLinkId = a})
+      . mapping _Coerce
 
 -- | List of redirect URLs for this advertiser
 advRedirectDomains :: Lens' Advertiser [Text]
@@ -1486,7 +1499,9 @@ advItem = lens _advItem (\ s a -> s{_advItem = a})
 
 -- | The ID of this advertiser.
 advId :: Lens' Advertiser (Maybe Int64)
-advId = lens _advId (\ s a -> s{_advId = a})
+advId
+  = lens _advId (\ s a -> s{_advId = a}) .
+      mapping _Coerce
 
 -- | The sum of fees paid to publishers divided by the total number of clicks
 -- over the past three months. This value should be multiplied by 100 at
@@ -1502,6 +1517,7 @@ advCommissionDuration :: Lens' Advertiser (Maybe Int32)
 advCommissionDuration
   = lens _advCommissionDuration
       (\ s a -> s{_advCommissionDuration = a})
+      . mapping _Coerce
 
 -- | Description of the website the advertiser advertises from.
 advDescription :: Lens' Advertiser (Maybe Text)
@@ -1581,13 +1597,13 @@ data CcOffer = CcOffer
     , _cReturnedPaymentFee            :: !(Maybe Text)
     , _cAgeMinimumDetails             :: !(Maybe Text)
     , _cVariableRatesUpdateFrequency  :: !(Maybe Text)
-    , _cCreditLimitMin                :: !(Maybe Double)
+    , _cCreditLimitMin                :: !(Maybe (JSONText Double))
     , _cTravelInsurance               :: !(Maybe Text)
     , _cApprovedCategories            :: !(Maybe [Text])
     , _cAnnualFeeDisplay              :: !(Maybe Text)
     , _cOverLimitFee                  :: !(Maybe Text)
-    , _cMaxPurchaseRate               :: !(Maybe Double)
-    , _cAgeMinimum                    :: !(Maybe Double)
+    , _cMaxPurchaseRate               :: !(Maybe (JSONText Double))
+    , _cAgeMinimum                    :: !(Maybe (JSONText Double))
     , _cVariableRatesLastUpdated      :: !(Maybe Text)
     , _cIntroCashAdvanceTerms         :: !(Maybe Text)
     , _cIssuerWebsite                 :: !(Maybe Text)
@@ -1606,11 +1622,11 @@ data CcOffer = CcOffer
     , _cRewards                       :: !(Maybe [CcOfferRewardsItem])
     , _cCardType                      :: !(Maybe Text)
     , _cImageURL                      :: !(Maybe Text)
-    , _cCreditLimitMax                :: !(Maybe Double)
+    , _cCreditLimitMax                :: !(Maybe (JSONText Double))
     , _cLandingPageURL                :: !(Maybe Text)
-    , _cAnnualFee                     :: !(Maybe Double)
+    , _cAnnualFee                     :: !(Maybe (JSONText Double))
     , _cRewardsExpire                 :: !(Maybe Bool)
-    , _cFirstYearAnnualFee            :: !(Maybe Double)
+    , _cFirstYearAnnualFee            :: !(Maybe (JSONText Double))
     , _cCarRentalInsurance            :: !(Maybe Text)
     , _cPurchaseRateAdditionalDetails :: !(Maybe Text)
     , _cOfferId                       :: !(Maybe Text)
@@ -1622,11 +1638,11 @@ data CcOffer = CcOffer
     , _cCardBenefits                  :: !(Maybe [Text])
     , _cIssuer                        :: !(Maybe Text)
     , _cCardName                      :: !(Maybe Text)
-    , _cMinPurchaseRate               :: !(Maybe Double)
+    , _cMinPurchaseRate               :: !(Maybe (JSONText Double))
     , _cFraudLiability                :: !(Maybe Text)
     , _cForeignCurrencyTransactionFee :: !(Maybe Text)
     , _cExtendedWarranty              :: !(Maybe Text)
-    , _cAnnualRewardMaximum           :: !(Maybe Double)
+    , _cAnnualRewardMaximum           :: !(Maybe (JSONText Double))
     , _cIssuerId                      :: !(Maybe Text)
     , _cIntroBalanceTransferTerms     :: !(Maybe Text)
     , _cDefaultFees                   :: !(Maybe [CcOfferDefaultFeesItem])
@@ -1893,6 +1909,7 @@ cCreditLimitMin :: Lens' CcOffer (Maybe Double)
 cCreditLimitMin
   = lens _cCreditLimitMin
       (\ s a -> s{_cCreditLimitMin = a})
+      . mapping _Coerce
 
 -- | If you get coverage when you use the card for the given activity, this
 -- field describes it.
@@ -1929,11 +1946,13 @@ cMaxPurchaseRate :: Lens' CcOffer (Maybe Double)
 cMaxPurchaseRate
   = lens _cMaxPurchaseRate
       (\ s a -> s{_cMaxPurchaseRate = a})
+      . mapping _Coerce
 
 -- | The youngest a recipient of this card may be.
 cAgeMinimum :: Lens' CcOffer (Maybe Double)
 cAgeMinimum
-  = lens _cAgeMinimum (\ s a -> s{_cAgeMinimum = a})
+  = lens _cAgeMinimum (\ s a -> s{_cAgeMinimum = a}) .
+      mapping _Coerce
 
 -- | When variable rates were last updated.
 cVariableRatesLastUpdated :: Lens' CcOffer (Maybe Text)
@@ -2052,6 +2071,7 @@ cCreditLimitMax :: Lens' CcOffer (Maybe Double)
 cCreditLimitMax
   = lens _cCreditLimitMax
       (\ s a -> s{_cCreditLimitMax = a})
+      . mapping _Coerce
 
 -- | The link to the issuer\'s page for this card. A summary field.
 cLandingPageURL :: Lens' CcOffer (Maybe Text)
@@ -2062,7 +2082,8 @@ cLandingPageURL
 -- | The ongoing annual fee, in dollars.
 cAnnualFee :: Lens' CcOffer (Maybe Double)
 cAnnualFee
-  = lens _cAnnualFee (\ s a -> s{_cAnnualFee = a})
+  = lens _cAnnualFee (\ s a -> s{_cAnnualFee = a}) .
+      mapping _Coerce
 
 -- | Whether accumulated rewards ever expire.
 cRewardsExpire :: Lens' CcOffer (Maybe Bool)
@@ -2076,6 +2097,7 @@ cFirstYearAnnualFee :: Lens' CcOffer (Maybe Double)
 cFirstYearAnnualFee
   = lens _cFirstYearAnnualFee
       (\ s a -> s{_cFirstYearAnnualFee = a})
+      . mapping _Coerce
 
 -- | If you get coverage when you use the card for the given activity, this
 -- field describes it.
@@ -2155,6 +2177,7 @@ cMinPurchaseRate :: Lens' CcOffer (Maybe Double)
 cMinPurchaseRate
   = lens _cMinPurchaseRate
       (\ s a -> s{_cMinPurchaseRate = a})
+      . mapping _Coerce
 
 -- | If you get coverage when you use the card for the given activity, this
 -- field describes it.
@@ -2181,6 +2204,7 @@ cAnnualRewardMaximum :: Lens' CcOffer (Maybe Double)
 cAnnualRewardMaximum
   = lens _cAnnualRewardMaximum
       (\ s a -> s{_cAnnualRewardMaximum = a})
+      . mapping _Coerce
 
 -- | The Google Affiliate Network ID of the advertiser making this offer.
 cIssuerId :: Lens' CcOffer (Maybe Text)
@@ -2469,7 +2493,7 @@ data Publisher = Publisher
     , _pubName                :: !(Maybe Text)
     , _pubEpcSevenDayAverage  :: !(Maybe Money)
     , _pubItem                :: !(Maybe Publisher)
-    , _pubId                  :: !(Maybe Int64)
+    , _pubId                  :: !(Maybe (JSONText Int64))
     , _pubEpcNinetyDayAverage :: !(Maybe Money)
     , _pubSites               :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2567,7 +2591,9 @@ pubItem = lens _pubItem (\ s a -> s{_pubItem = a})
 
 -- | The ID of this publisher.
 pubId :: Lens' Publisher (Maybe Int64)
-pubId = lens _pubId (\ s a -> s{_pubId = a})
+pubId
+  = lens _pubId (\ s a -> s{_pubId = a}) .
+      mapping _Coerce
 
 -- | The sum of fees paid to this publisher divided by the total number of
 -- clicks over the past three months. Values are multiplied by 100 for
@@ -2620,12 +2646,12 @@ instance ToJSON Publisher where
 --
 -- /See:/ 'ccOfferRewardsItem' smart constructor.
 data CcOfferRewardsItem = CcOfferRewardsItem
-    { _coriAmount            :: !(Maybe Double)
-    , _coriExpirationMonths  :: !(Maybe Double)
+    { _coriAmount            :: !(Maybe (JSONText Double))
+    , _coriExpirationMonths  :: !(Maybe (JSONText Double))
     , _coriCategory          :: !(Maybe Text)
     , _coriAdditionalDetails :: !(Maybe Text)
-    , _coriMaxRewardTier     :: !(Maybe Double)
-    , _coriMinRewardTier     :: !(Maybe Double)
+    , _coriMaxRewardTier     :: !(Maybe (JSONText Double))
+    , _coriMinRewardTier     :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CcOfferRewardsItem' with the minimum fields required to make a request.
@@ -2658,13 +2684,15 @@ ccOfferRewardsItem =
 -- | The number of units rewarded per purchase dollar.
 coriAmount :: Lens' CcOfferRewardsItem (Maybe Double)
 coriAmount
-  = lens _coriAmount (\ s a -> s{_coriAmount = a})
+  = lens _coriAmount (\ s a -> s{_coriAmount = a}) .
+      mapping _Coerce
 
 -- | How long rewards granted by this rule last.
 coriExpirationMonths :: Lens' CcOfferRewardsItem (Maybe Double)
 coriExpirationMonths
   = lens _coriExpirationMonths
       (\ s a -> s{_coriExpirationMonths = a})
+      . mapping _Coerce
 
 -- | The kind of purchases covered by this rule.
 coriCategory :: Lens' CcOfferRewardsItem (Maybe Text)
@@ -2684,6 +2712,7 @@ coriMaxRewardTier :: Lens' CcOfferRewardsItem (Maybe Double)
 coriMaxRewardTier
   = lens _coriMaxRewardTier
       (\ s a -> s{_coriMaxRewardTier = a})
+      . mapping _Coerce
 
 -- | The minimum purchase amount in the given category before this rule
 -- applies.
@@ -2691,6 +2720,7 @@ coriMinRewardTier :: Lens' CcOfferRewardsItem (Maybe Double)
 coriMinRewardTier
   = lens _coriMinRewardTier
       (\ s a -> s{_coriMinRewardTier = a})
+      . mapping _Coerce
 
 instance FromJSON CcOfferRewardsItem where
         parseJSON

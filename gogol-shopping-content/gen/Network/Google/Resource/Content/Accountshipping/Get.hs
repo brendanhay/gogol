@@ -45,9 +45,9 @@ import           Network.Google.ShoppingContent.Types
 type AccountshippingGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accountshipping" :>
-             Capture "accountId" Word64 :>
+             Capture "accountId" (JSONText Word64) :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] AccountShipping
 
@@ -55,8 +55,8 @@ type AccountshippingGetResource =
 --
 -- /See:/ 'accountshippingGet' smart constructor.
 data AccountshippingGet = AccountshippingGet
-    { _acccMerchantId :: !Word64
-    , _acccAccountId  :: !Word64
+    { _acccMerchantId :: !(JSONText Word64)
+    , _acccAccountId  :: !(JSONText Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountshippingGet' with the minimum fields required to make a request.
@@ -81,6 +81,7 @@ acccMerchantId :: Lens' AccountshippingGet Word64
 acccMerchantId
   = lens _acccMerchantId
       (\ s a -> s{_acccMerchantId = a})
+      . _Coerce
 
 -- | The ID of the account for which to get\/update account shipping
 -- settings.
@@ -88,6 +89,7 @@ acccAccountId :: Lens' AccountshippingGet Word64
 acccAccountId
   = lens _acccAccountId
       (\ s a -> s{_acccAccountId = a})
+      . _Coerce
 
 instance GoogleRequest AccountshippingGet where
         type Rs AccountshippingGet = AccountShipping

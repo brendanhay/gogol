@@ -50,7 +50,7 @@ type PeopleListByCircleResource =
            Capture "circleId" Text :>
              "people" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people who are members of a circle.
@@ -59,7 +59,7 @@ type PeopleListByCircleResource =
 data PeopleListByCircle = PeopleListByCircle
     { _plbcCircleId   :: !Text
     , _plbcPageToken  :: !(Maybe Text)
-    , _plbcMaxResults :: !Word32
+    , _plbcMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByCircle' with the minimum fields required to make a request.
@@ -101,6 +101,7 @@ plbcMaxResults :: Lens' PeopleListByCircle Word32
 plbcMaxResults
   = lens _plbcMaxResults
       (\ s a -> s{_plbcMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest PeopleListByCircle where
         type Rs PeopleListByCircle = PeopleFeed

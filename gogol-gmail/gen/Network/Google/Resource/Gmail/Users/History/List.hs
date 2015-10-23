@@ -52,10 +52,10 @@ type UsersHistoryListResource =
          "users" :>
            Capture "userId" Text :>
              "history" :>
-               QueryParam "startHistoryId" Word64 :>
+               QueryParam "startHistoryId" (JSONText Word64) :>
                  QueryParam "pageToken" Text :>
                    QueryParam "labelId" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ListHistoryResponse
 
@@ -65,10 +65,10 @@ type UsersHistoryListResource =
 -- /See:/ 'usersHistoryList' smart constructor.
 data UsersHistoryList = UsersHistoryList
     { _uhlUserId         :: !Text
-    , _uhlStartHistoryId :: !(Maybe Word64)
+    , _uhlStartHistoryId :: !(Maybe (JSONText Word64))
     , _uhlPageToken      :: !(Maybe Text)
     , _uhlLabelId        :: !(Maybe Text)
-    , _uhlMaxResults     :: !Word32
+    , _uhlMaxResults     :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersHistoryList' with the minimum fields required to make a request.
@@ -117,6 +117,7 @@ uhlStartHistoryId :: Lens' UsersHistoryList (Maybe Word64)
 uhlStartHistoryId
   = lens _uhlStartHistoryId
       (\ s a -> s{_uhlStartHistoryId = a})
+      . mapping _Coerce
 
 -- | Page token to retrieve a specific page of results in the list.
 uhlPageToken :: Lens' UsersHistoryList (Maybe Text)
@@ -133,6 +134,7 @@ uhlMaxResults :: Lens' UsersHistoryList Word32
 uhlMaxResults
   = lens _uhlMaxResults
       (\ s a -> s{_uhlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest UsersHistoryList where
         type Rs UsersHistoryList = ListHistoryResponse

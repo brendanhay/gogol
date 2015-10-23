@@ -55,7 +55,7 @@ type MetricDescriptorsListResource =
          "projects" :>
            Capture "project" Text :>
              "metricDescriptors" :>
-               QueryParam "count" Int32 :>
+               QueryParam "count" (JSONText Int32) :>
                  QueryParam "query" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "alt" AltJSON :>
@@ -71,7 +71,7 @@ type MetricDescriptorsListResource =
 -- /See:/ 'metricDescriptorsList' smart constructor.
 data MetricDescriptorsList = MetricDescriptorsList
     { _mdlProject   :: !Text
-    , _mdlCount     :: !Int32
+    , _mdlCount     :: !(JSONText Int32)
     , _mdlPayload   :: !ListMetricDescriptorsRequest
     , _mdlQuery     :: !(Maybe Text)
     , _mdlPageToken :: !(Maybe Text)
@@ -112,7 +112,9 @@ mdlProject
 -- | Maximum number of metric descriptors per page. Used for pagination. If
 -- not specified, count = 100.
 mdlCount :: Lens' MetricDescriptorsList Int32
-mdlCount = lens _mdlCount (\ s a -> s{_mdlCount = a})
+mdlCount
+  = lens _mdlCount (\ s a -> s{_mdlCount = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 mdlPayload :: Lens' MetricDescriptorsList ListMetricDescriptorsRequest

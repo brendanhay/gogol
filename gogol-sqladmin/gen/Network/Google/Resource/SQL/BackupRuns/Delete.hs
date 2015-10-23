@@ -51,7 +51,7 @@ type BackupRunsDeleteResource =
              "instances" :>
                Capture "instance" Text :>
                  "backupRuns" :>
-                   Capture "id" Int64 :>
+                   Capture "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the backup taken by a backup run.
@@ -59,7 +59,7 @@ type BackupRunsDeleteResource =
 -- /See:/ 'backupRunsDelete' smart constructor.
 data BackupRunsDelete = BackupRunsDelete
     { _brdProject  :: !Text
-    , _brdId       :: !Int64
+    , _brdId       :: !(JSONText Int64)
     , _brdInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -92,7 +92,8 @@ brdProject
 -- | The ID of the Backup Run to delete. To find a Backup Run ID, use the
 -- list method.
 brdId :: Lens' BackupRunsDelete Int64
-brdId = lens _brdId (\ s a -> s{_brdId = a})
+brdId
+  = lens _brdId (\ s a -> s{_brdId = a}) . _Coerce
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 brdInstance :: Lens' BackupRunsDelete Text

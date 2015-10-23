@@ -46,7 +46,7 @@ type NegotiationRoundsInsertResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "negotiations" :>
-           Capture "negotiationId" Int64 :>
+           Capture "negotiationId" (JSONText Int64) :>
              "negotiationrounds" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] NegotiationRoundDTO :>
@@ -57,7 +57,7 @@ type NegotiationRoundsInsertResource =
 -- /See:/ 'negotiationRoundsInsert' smart constructor.
 data NegotiationRoundsInsert = NegotiationRoundsInsert
     { _nriPayload       :: !NegotiationRoundDTO
-    , _nriNegotiationId :: !Int64
+    , _nriNegotiationId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationRoundsInsert' with the minimum fields required to make a request.
@@ -86,6 +86,7 @@ nriNegotiationId :: Lens' NegotiationRoundsInsert Int64
 nriNegotiationId
   = lens _nriNegotiationId
       (\ s a -> s{_nriNegotiationId = a})
+      . _Coerce
 
 instance GoogleRequest NegotiationRoundsInsert where
         type Rs NegotiationRoundsInsert = NegotiationRoundDTO

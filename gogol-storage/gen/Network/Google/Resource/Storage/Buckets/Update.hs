@@ -52,13 +52,16 @@ type BucketsUpdateResource =
        "v1" :>
          "b" :>
            Capture "bucket" Text :>
-             QueryParam "ifMetagenerationMatch" Int64 :>
+             QueryParam "ifMetagenerationMatch" (JSONText Int64)
+               :>
                QueryParam "predefinedAcl" BucketsUpdatePredefinedACL
                  :>
                  QueryParam "predefinedDefaultObjectAcl"
                    BucketsUpdatePredefinedDefaultObjectACL
                    :>
-                   QueryParam "ifMetagenerationNotMatch" Int64 :>
+                   QueryParam "ifMetagenerationNotMatch"
+                     (JSONText Int64)
+                     :>
                      QueryParam "projection" BucketsUpdateProjection :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
@@ -67,12 +70,12 @@ type BucketsUpdateResource =
 --
 -- /See:/ 'bucketsUpdate' smart constructor.
 data BucketsUpdate = BucketsUpdate
-    { _buIfMetagenerationMatch      :: !(Maybe Int64)
+    { _buIfMetagenerationMatch      :: !(Maybe (JSONText Int64))
     , _buPredefinedACL              :: !(Maybe BucketsUpdatePredefinedACL)
     , _buBucket                     :: !Text
     , _buPayload                    :: !Bucket
     , _buPredefinedDefaultObjectACL :: !(Maybe BucketsUpdatePredefinedDefaultObjectACL)
-    , _buIfMetagenerationNotMatch   :: !(Maybe Int64)
+    , _buIfMetagenerationNotMatch   :: !(Maybe (JSONText Int64))
     , _buProjection                 :: !(Maybe BucketsUpdateProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -114,6 +117,7 @@ buIfMetagenerationMatch :: Lens' BucketsUpdate (Maybe Int64)
 buIfMetagenerationMatch
   = lens _buIfMetagenerationMatch
       (\ s a -> s{_buIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Apply a predefined set of access controls to this bucket.
 buPredefinedACL :: Lens' BucketsUpdate (Maybe BucketsUpdatePredefinedACL)
@@ -142,6 +146,7 @@ buIfMetagenerationNotMatch :: Lens' BucketsUpdate (Maybe Int64)
 buIfMetagenerationNotMatch
   = lens _buIfMetagenerationNotMatch
       (\ s a -> s{_buIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Set of properties to return. Defaults to full.
 buProjection :: Lens' BucketsUpdate (Maybe BucketsUpdateProjection)

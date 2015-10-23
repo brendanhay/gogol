@@ -70,14 +70,14 @@ type ReadGroupSetsCoverageBucketsListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
-                     QueryParam "start" Int64 :>
+                     QueryParam "start" (JSONText Int64) :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "targetBucketWidth" Int64 :>
+                         QueryParam "targetBucketWidth" (JSONText Int64) :>
                            QueryParam "referenceName" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "end" Int64 :>
+                               QueryParam "end" (JSONText Int64) :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "pageSize" Int32 :>
+                                   QueryParam "pageSize" (JSONText Int32) :>
                                      QueryParam "callback" Text :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListCoverageBucketsResponse
@@ -98,14 +98,14 @@ data ReadGroupSetsCoverageBucketsList = ReadGroupSetsCoverageBucketsList
     , _rgscblUploadProtocol    :: !(Maybe Text)
     , _rgscblPp                :: !Bool
     , _rgscblAccessToken       :: !(Maybe Text)
-    , _rgscblStart             :: !(Maybe Int64)
+    , _rgscblStart             :: !(Maybe (JSONText Int64))
     , _rgscblUploadType        :: !(Maybe Text)
-    , _rgscblTargetBucketWidth :: !(Maybe Int64)
+    , _rgscblTargetBucketWidth :: !(Maybe (JSONText Int64))
     , _rgscblReferenceName     :: !(Maybe Text)
     , _rgscblBearerToken       :: !(Maybe Text)
-    , _rgscblEnd               :: !(Maybe Int64)
+    , _rgscblEnd               :: !(Maybe (JSONText Int64))
     , _rgscblPageToken         :: !(Maybe Text)
-    , _rgscblPageSize          :: !(Maybe Int32)
+    , _rgscblPageSize          :: !(Maybe (JSONText Int32))
     , _rgscblCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -192,7 +192,8 @@ rgscblAccessToken
 -- specified, \`referenceName\` must also be specified. Defaults to 0.
 rgscblStart :: Lens' ReadGroupSetsCoverageBucketsList (Maybe Int64)
 rgscblStart
-  = lens _rgscblStart (\ s a -> s{_rgscblStart = a})
+  = lens _rgscblStart (\ s a -> s{_rgscblStart = a}) .
+      mapping _Coerce
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 rgscblUploadType :: Lens' ReadGroupSetsCoverageBucketsList (Maybe Text)
@@ -210,6 +211,7 @@ rgscblTargetBucketWidth :: Lens' ReadGroupSetsCoverageBucketsList (Maybe Int64)
 rgscblTargetBucketWidth
   = lens _rgscblTargetBucketWidth
       (\ s a -> s{_rgscblTargetBucketWidth = a})
+      . mapping _Coerce
 
 -- | The name of the reference to query, within the reference set associated
 -- with this query. Optional.
@@ -229,7 +231,8 @@ rgscblBearerToken
 -- defaults to the length of the reference.
 rgscblEnd :: Lens' ReadGroupSetsCoverageBucketsList (Maybe Int64)
 rgscblEnd
-  = lens _rgscblEnd (\ s a -> s{_rgscblEnd = a})
+  = lens _rgscblEnd (\ s a -> s{_rgscblEnd = a}) .
+      mapping _Coerce
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
@@ -245,6 +248,7 @@ rgscblPageSize :: Lens' ReadGroupSetsCoverageBucketsList (Maybe Int32)
 rgscblPageSize
   = lens _rgscblPageSize
       (\ s a -> s{_rgscblPageSize = a})
+      . mapping _Coerce
 
 -- | JSONP
 rgscblCallback :: Lens' ReadGroupSetsCoverageBucketsList (Maybe Text)

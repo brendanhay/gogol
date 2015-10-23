@@ -48,7 +48,7 @@ type ReportsGetFileResource =
          "reports" :>
            Capture "reportId" Text :>
              "files" :>
-               Capture "reportFragment" Int32 :>
+               Capture "reportFragment" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
        "doubleclicksearch" :>
@@ -56,7 +56,7 @@ type ReportsGetFileResource =
            "reports" :>
              Capture "reportId" Text :>
                "files" :>
-                 Capture "reportFragment" Int32 :>
+                 Capture "reportFragment" (JSONText Int32) :>
                    QueryParam "alt" AltMedia :>
                      Get '[OctetStream] Stream
 
@@ -65,7 +65,7 @@ type ReportsGetFileResource =
 -- /See:/ 'reportsGetFile' smart constructor.
 data ReportsGetFile = ReportsGetFile
     { _rgfReportId       :: !Text
-    , _rgfReportFragment :: !Int32
+    , _rgfReportFragment :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGetFile' with the minimum fields required to make a request.
@@ -95,6 +95,7 @@ rgfReportFragment :: Lens' ReportsGetFile Int32
 rgfReportFragment
   = lens _rgfReportFragment
       (\ s a -> s{_rgfReportFragment = a})
+      . _Coerce
 
 instance GoogleRequest ReportsGetFile where
         type Rs ReportsGetFile = ()

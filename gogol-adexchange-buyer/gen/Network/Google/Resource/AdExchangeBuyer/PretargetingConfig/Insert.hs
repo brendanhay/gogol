@@ -46,7 +46,7 @@ type PretargetingConfigInsertResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "pretargetingconfigs" :>
-           Capture "accountId" Int64 :>
+           Capture "accountId" (JSONText Int64) :>
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] PretargetingConfig :>
                  Post '[JSON] PretargetingConfig
@@ -56,7 +56,7 @@ type PretargetingConfigInsertResource =
 -- /See:/ 'pretargetingConfigInsert' smart constructor.
 data PretargetingConfigInsert = PretargetingConfigInsert
     { _pciPayload   :: !PretargetingConfig
-    , _pciAccountId :: !Int64
+    , _pciAccountId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigInsert' with the minimum fields required to make a request.
@@ -85,6 +85,7 @@ pciPayload
 pciAccountId :: Lens' PretargetingConfigInsert Int64
 pciAccountId
   = lens _pciAccountId (\ s a -> s{_pciAccountId = a})
+      . _Coerce
 
 instance GoogleRequest PretargetingConfigInsert where
         type Rs PretargetingConfigInsert = PretargetingConfig

@@ -155,7 +155,7 @@ data Group = Group
     , _gSelfLink          :: !(Maybe Text)
     , _gName              :: !(Maybe Text)
     , _gCreationTimestamp :: !(Maybe Text)
-    , _gId                :: !(Maybe Word64)
+    , _gId                :: !(Maybe (JSONText Word64))
     , _gDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -220,7 +220,8 @@ gCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 gId :: Lens' Group (Maybe Word64)
-gId = lens _gId (\ s a -> s{_gId = a})
+gId
+  = lens _gId (\ s a -> s{_gId = a}) . mapping _Coerce
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
@@ -337,24 +338,24 @@ instance ToJSON GroupList where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe Word64)
+    { _oTargetId            :: !(Maybe (JSONText Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe Int32)
+    , _oProgress            :: !(Maybe (JSONText Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe Int32)
+    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe Word64)
+    , _oId                  :: !(Maybe (JSONText Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -440,7 +441,8 @@ operation =
 -- of the target.
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
-  = lens _oTargetId (\ s a -> s{_oTargetId = a})
+  = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
@@ -460,7 +462,8 @@ oInsertTime
 -- operation progresses.
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
-  = lens _oProgress (\ s a -> s{_oProgress = a})
+  = lens _oProgress (\ s a -> s{_oProgress = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The time that this operation was started by the server.
 -- This is in RFC3339 text format.
@@ -503,6 +506,7 @@ oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
       (\ s a -> s{_oHTTPErrorStatusCode = a})
+      . mapping _Coerce
 
 -- | [Output Only] User who requested the operation, for example:
 -- user\'example.com.
@@ -538,7 +542,8 @@ oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 oId :: Lens' Operation (Maybe Word64)
-oId = lens _oId (\ s a -> s{_oId = a})
+oId
+  = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
 -- | [Output Only] Type of the operation, such as insert,
 -- compute.instanceGroups.update, or compute.instanceGroups.delete.
@@ -863,7 +868,7 @@ data User = User
     , _uSelfLink          :: !(Maybe Text)
     , _uName              :: !(Maybe Text)
     , _uCreationTimestamp :: !(Maybe Text)
-    , _uId                :: !(Maybe Word64)
+    , _uId                :: !(Maybe (JSONText Word64))
     , _uDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -946,7 +951,8 @@ uCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 uId :: Lens' User (Maybe Word64)
-uId = lens _uId (\ s a -> s{_uId = a})
+uId
+  = lens _uId (\ s a -> s{_uId = a}) . mapping _Coerce
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
@@ -1023,7 +1029,7 @@ instance ToJSON GroupsAddMemberRequest where
 -- /See:/ 'linuxGroupView' smart constructor.
 data LinuxGroupView = LinuxGroupView
     { _lgvMembers   :: !(Maybe [Text])
-    , _lgvGid       :: !(Maybe Word32)
+    , _lgvGid       :: !(Maybe (JSONText Word32))
     , _lgvGroupName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1054,7 +1060,9 @@ lgvMembers
 
 -- | [Output Only] The Group ID.
 lgvGid :: Lens' LinuxGroupView (Maybe Word32)
-lgvGid = lens _lgvGid (\ s a -> s{_lgvGid = a})
+lgvGid
+  = lens _lgvGid (\ s a -> s{_lgvGid = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Group name.
 lgvGroupName :: Lens' LinuxGroupView (Maybe Text)
@@ -1082,10 +1090,10 @@ instance ToJSON LinuxGroupView where
 -- /See:/ 'linuxUserView' smart constructor.
 data LinuxUserView = LinuxUserView
     { _luvGecos         :: !(Maybe Text)
-    , _luvUid           :: !(Maybe Word32)
+    , _luvUid           :: !(Maybe (JSONText Word32))
     , _luvUsername      :: !(Maybe Text)
     , _luvShell         :: !(Maybe Text)
-    , _luvGid           :: !(Maybe Word32)
+    , _luvGid           :: !(Maybe (JSONText Word32))
     , _luvHomeDirectory :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1122,7 +1130,9 @@ luvGecos = lens _luvGecos (\ s a -> s{_luvGecos = a})
 
 -- | [Output Only] User ID.
 luvUid :: Lens' LinuxUserView (Maybe Word32)
-luvUid = lens _luvUid (\ s a -> s{_luvUid = a})
+luvUid
+  = lens _luvUid (\ s a -> s{_luvUid = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The username of the account.
 luvUsername :: Lens' LinuxUserView (Maybe Text)
@@ -1135,7 +1145,9 @@ luvShell = lens _luvShell (\ s a -> s{_luvShell = a})
 
 -- | [Output Only] User\'s default group ID.
 luvGid :: Lens' LinuxUserView (Maybe Word32)
-luvGid = lens _luvGid (\ s a -> s{_luvGid = a})
+luvGid
+  = lens _luvGid (\ s a -> s{_luvGid = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The path to the home directory for this account.
 luvHomeDirectory :: Lens' LinuxUserView (Maybe Text)

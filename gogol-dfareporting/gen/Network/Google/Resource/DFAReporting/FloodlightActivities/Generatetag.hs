@@ -46,10 +46,10 @@ type FloodlightActivitiesGeneratetagResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivities" :>
                "generatetag" :>
-                 QueryParam "floodlightActivityId" Int64 :>
+                 QueryParam "floodlightActivityId" (JSONText Int64) :>
                    QueryParam "alt" AltJSON :>
                      Post '[JSON] FloodlightActivitiesGenerateTagResponse
 
@@ -57,8 +57,8 @@ type FloodlightActivitiesGeneratetagResource =
 --
 -- /See:/ 'floodlightActivitiesGeneratetag' smart constructor.
 data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag
-    { _fagFloodlightActivityId :: !(Maybe Int64)
-    , _fagProFileId            :: !Int64
+    { _fagFloodlightActivityId :: !(Maybe (JSONText Int64))
+    , _fagProFileId            :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGeneratetag' with the minimum fields required to make a request.
@@ -82,11 +82,13 @@ fagFloodlightActivityId :: Lens' FloodlightActivitiesGeneratetag (Maybe Int64)
 fagFloodlightActivityId
   = lens _fagFloodlightActivityId
       (\ s a -> s{_fagFloodlightActivityId = a})
+      . mapping _Coerce
 
 -- | User profile ID associated with this request.
 fagProFileId :: Lens' FloodlightActivitiesGeneratetag Int64
 fagProFileId
   = lens _fagProFileId (\ s a -> s{_fagProFileId = a})
+      . _Coerce
 
 instance GoogleRequest
          FloodlightActivitiesGeneratetag where

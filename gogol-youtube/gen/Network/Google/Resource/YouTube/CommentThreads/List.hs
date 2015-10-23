@@ -69,7 +69,7 @@ type CommentThreadsListResource =
                              QueryParam "textFormat"
                                CommentThreadsListTextFormat
                                :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CommentThreadListResponse
 
@@ -87,7 +87,7 @@ data CommentThreadsList = CommentThreadsList
     , _ctlPageToken                    :: !(Maybe Text)
     , _ctlOrder                        :: !CommentThreadsListOrder
     , _ctlTextFormat                   :: !CommentThreadsListTextFormat
-    , _ctlMaxResults                   :: !Word32
+    , _ctlMaxResults                   :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsList' with the minimum fields required to make a request.
@@ -211,6 +211,7 @@ ctlMaxResults :: Lens' CommentThreadsList Word32
 ctlMaxResults
   = lens _ctlMaxResults
       (\ s a -> s{_ctlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest CommentThreadsList where
         type Rs CommentThreadsList =

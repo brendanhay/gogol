@@ -99,9 +99,9 @@ instance ToJSON CreateClusterRequest where
 data Cluster = Cluster
     { _cStatus                :: !(Maybe Text)
     , _cNodeConfig            :: !(Maybe NodeConfig)
-    , _cNodeIPv4CIdRSize      :: !(Maybe Int32)
+    , _cNodeIPv4CIdRSize      :: !(Maybe (JSONText Int32))
     , _cClusterIPv4CIdR       :: !(Maybe Text)
-    , _cInitialNodeCount      :: !(Maybe Int32)
+    , _cInitialNodeCount      :: !(Maybe (JSONText Int32))
     , _cCurrentNodeVersion    :: !(Maybe Text)
     , _cNetwork               :: !(Maybe Text)
     , _cInitialClusterVersion :: !(Maybe Text)
@@ -210,6 +210,7 @@ cNodeIPv4CIdRSize :: Lens' Cluster (Maybe Int32)
 cNodeIPv4CIdRSize
   = lens _cNodeIPv4CIdRSize
       (\ s a -> s{_cNodeIPv4CIdRSize = a})
+      . mapping _Coerce
 
 -- | The IP address range of the container pods in this cluster, in
 -- [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)
@@ -228,6 +229,7 @@ cInitialNodeCount :: Lens' Cluster (Maybe Int32)
 cInitialNodeCount
   = lens _cInitialNodeCount
       (\ s a -> s{_cInitialNodeCount = a})
+      . mapping _Coerce
 
 -- | [Output only] The current version of the node software components. If
 -- they are currently at different versions because they\'re in the process
@@ -435,7 +437,7 @@ instance ToJSON UpdateClusterRequest where
 --
 -- /See:/ 'nodeConfig' smart constructor.
 data NodeConfig = NodeConfig
-    { _ncDiskSizeGb  :: !(Maybe Int32)
+    { _ncDiskSizeGb  :: !(Maybe (JSONText Int32))
     , _ncOAuthScopes :: !(Maybe [Text])
     , _ncMachineType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -464,6 +466,7 @@ nodeConfig =
 ncDiskSizeGb :: Lens' NodeConfig (Maybe Int32)
 ncDiskSizeGb
   = lens _ncDiskSizeGb (\ s a -> s{_ncDiskSizeGb = a})
+      . mapping _Coerce
 
 -- | The set of Google API scopes to be made available on all of the node VMs
 -- under the \"default\" service account. The following scopes are

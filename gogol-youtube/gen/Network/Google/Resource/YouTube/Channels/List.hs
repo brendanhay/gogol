@@ -66,7 +66,7 @@ type ChannelsListResource =
                          QueryParam "mySubscribers" Bool :>
                            QueryParam "pageToken" Text :>
                              QueryParam "managedByMe" Bool :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ChannelListResponse
 
@@ -85,7 +85,7 @@ data ChannelsList = ChannelsList
     , _cMySubscribers          :: !(Maybe Bool)
     , _cPageToken              :: !(Maybe Text)
     , _cManagedByMe            :: !(Maybe Bool)
-    , _cMaxResults             :: !Word32
+    , _cMaxResults             :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsList' with the minimum fields required to make a request.
@@ -212,7 +212,8 @@ cManagedByMe
 -- should be returned in the result set.
 cMaxResults :: Lens' ChannelsList Word32
 cMaxResults
-  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
+  = lens _cMaxResults (\ s a -> s{_cMaxResults = a}) .
+      _Coerce
 
 instance GoogleRequest ChannelsList where
         type Rs ChannelsList = ChannelListResponse

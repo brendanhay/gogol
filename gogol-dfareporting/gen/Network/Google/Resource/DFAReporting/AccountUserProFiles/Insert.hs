@@ -46,7 +46,7 @@ type AccountUserProFilesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "accountUserProfiles" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] AccountUserProFile :>
@@ -56,7 +56,7 @@ type AccountUserProFilesInsertResource =
 --
 -- /See:/ 'accountUserProFilesInsert' smart constructor.
 data AccountUserProFilesInsert = AccountUserProFilesInsert
-    { _aupfiProFileId :: !Int64
+    { _aupfiProFileId :: !(JSONText Int64)
     , _aupfiPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,6 +82,7 @@ aupfiProFileId :: Lens' AccountUserProFilesInsert Int64
 aupfiProFileId
   = lens _aupfiProFileId
       (\ s a -> s{_aupfiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 aupfiPayload :: Lens' AccountUserProFilesInsert AccountUserProFile

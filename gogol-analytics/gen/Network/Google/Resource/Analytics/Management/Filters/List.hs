@@ -50,8 +50,8 @@ type ManagementFiltersListResource =
            "accounts" :>
              Capture "accountId" Text :>
                "filters" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
+                 QueryParam "start-index" (JSONText Int32) :>
+                   QueryParam "max-results" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Filters
 
 -- | Lists all filters for an account
@@ -59,8 +59,8 @@ type ManagementFiltersListResource =
 -- /See:/ 'managementFiltersList' smart constructor.
 data ManagementFiltersList = ManagementFiltersList
     { _mflAccountId  :: !Text
-    , _mflStartIndex :: !(Maybe Int32)
-    , _mflMaxResults :: !(Maybe Int32)
+    , _mflStartIndex :: !(Maybe (JSONText Int32))
+    , _mflMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersList' with the minimum fields required to make a request.
@@ -93,12 +93,14 @@ mflStartIndex :: Lens' ManagementFiltersList (Maybe Int32)
 mflStartIndex
   = lens _mflStartIndex
       (\ s a -> s{_mflStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of filters to include in this response.
 mflMaxResults :: Lens' ManagementFiltersList (Maybe Int32)
 mflMaxResults
   = lens _mflMaxResults
       (\ s a -> s{_mflMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementFiltersList where
         type Rs ManagementFiltersList = Filters

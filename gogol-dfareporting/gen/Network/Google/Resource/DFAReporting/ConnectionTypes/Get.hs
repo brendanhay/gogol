@@ -46,9 +46,9 @@ type ConnectionTypesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "connectionTypes" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] ConnectionType
 
@@ -56,8 +56,8 @@ type ConnectionTypesGetResource =
 --
 -- /See:/ 'connectionTypesGet' smart constructor.
 data ConnectionTypesGet = ConnectionTypesGet
-    { _ctgProFileId :: !Int64
-    , _ctgId        :: !Int64
+    { _ctgProFileId :: !(JSONText Int64)
+    , _ctgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionTypesGet' with the minimum fields required to make a request.
@@ -81,10 +81,12 @@ connectionTypesGet pCtgProFileId_ pCtgId_ =
 ctgProFileId :: Lens' ConnectionTypesGet Int64
 ctgProFileId
   = lens _ctgProFileId (\ s a -> s{_ctgProFileId = a})
+      . _Coerce
 
 -- | Connection type ID.
 ctgId :: Lens' ConnectionTypesGet Int64
-ctgId = lens _ctgId (\ s a -> s{_ctgId = a})
+ctgId
+  = lens _ctgId (\ s a -> s{_ctgId = a}) . _Coerce
 
 instance GoogleRequest ConnectionTypesGet where
         type Rs ConnectionTypesGet = ConnectionType

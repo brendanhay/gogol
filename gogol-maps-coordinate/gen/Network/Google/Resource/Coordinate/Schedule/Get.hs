@@ -48,7 +48,7 @@ type ScheduleGetResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" Word64 :>
+               Capture "jobId" (JSONText Word64) :>
                  "schedule" :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Schedule
 
@@ -56,7 +56,7 @@ type ScheduleGetResource =
 --
 -- /See:/ 'scheduleGet' smart constructor.
 data ScheduleGet = ScheduleGet
-    { _sgJobId  :: !Word64
+    { _sgJobId  :: !(JSONText Word64)
     , _sgTeamId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ scheduleGet pSgJobId_ pSgTeamId_ =
 
 -- | Job number
 sgJobId :: Lens' ScheduleGet Word64
-sgJobId = lens _sgJobId (\ s a -> s{_sgJobId = a})
+sgJobId
+  = lens _sgJobId (\ s a -> s{_sgJobId = a}) . _Coerce
 
 -- | Team ID
 sgTeamId :: Lens' ScheduleGet Text

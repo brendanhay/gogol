@@ -54,7 +54,7 @@ type EditsAPKListingsPatchResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" Int32 :>
+                   Capture "apkVersionCode" (JSONText Int32) :>
                      "listings" :>
                        Capture "language" Text :>
                          QueryParam "alt" AltJSON :>
@@ -67,7 +67,7 @@ type EditsAPKListingsPatchResource =
 -- /See:/ 'editsAPKListingsPatch' smart constructor.
 data EditsAPKListingsPatch = EditsAPKListingsPatch
     { _eapklpPackageName    :: !Text
-    , _eapklpAPKVersionCode :: !Int32
+    , _eapklpAPKVersionCode :: !(JSONText Int32)
     , _eapklpPayload        :: !APKListing
     , _eapklpLanguage       :: !Text
     , _eapklpEditId         :: !Text
@@ -115,6 +115,7 @@ eapklpAPKVersionCode :: Lens' EditsAPKListingsPatch Int32
 eapklpAPKVersionCode
   = lens _eapklpAPKVersionCode
       (\ s a -> s{_eapklpAPKVersionCode = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 eapklpPayload :: Lens' EditsAPKListingsPatch APKListing

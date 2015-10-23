@@ -61,7 +61,7 @@ type ProjectsTopicsSubscriptionsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListTopicSubscriptionsResponse
@@ -78,7 +78,7 @@ data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList
     , _ptslTopic          :: !Text
     , _ptslBearerToken    :: !(Maybe Text)
     , _ptslPageToken      :: !(Maybe Text)
-    , _ptslPageSize       :: !(Maybe Int32)
+    , _ptslPageSize       :: !(Maybe (JSONText Int32))
     , _ptslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -173,6 +173,7 @@ ptslPageToken
 ptslPageSize :: Lens' ProjectsTopicsSubscriptionsList (Maybe Int32)
 ptslPageSize
   = lens _ptslPageSize (\ s a -> s{_ptslPageSize = a})
+      . mapping _Coerce
 
 -- | JSONP
 ptslCallback :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)

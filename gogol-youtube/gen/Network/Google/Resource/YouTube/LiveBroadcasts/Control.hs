@@ -59,7 +59,7 @@ type LiveBroadcastsControlResource =
                    QueryParam "onBehalfOfContentOwnerChannel" Text :>
                      QueryParam "displaySlate" Bool :>
                        QueryParam "walltime" DateTime' :>
-                         QueryParam "offsetTimeMs" Word64 :>
+                         QueryParam "offsetTimeMs" (JSONText Word64) :>
                            QueryParam "alt" AltJSON :>
                              Post '[JSON] LiveBroadcast
 
@@ -74,7 +74,7 @@ data LiveBroadcastsControl = LiveBroadcastsControl
     , _lbcId                            :: !Text
     , _lbcDisplaySlate                  :: !(Maybe Bool)
     , _lbcWalltime                      :: !(Maybe DateTime')
-    , _lbcOffSetTimeMs                  :: !(Maybe Word64)
+    , _lbcOffSetTimeMs                  :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsControl' with the minimum fields required to make a request.
@@ -186,6 +186,7 @@ lbcOffSetTimeMs :: Lens' LiveBroadcastsControl (Maybe Word64)
 lbcOffSetTimeMs
   = lens _lbcOffSetTimeMs
       (\ s a -> s{_lbcOffSetTimeMs = a})
+      . mapping _Coerce
 
 instance GoogleRequest LiveBroadcastsControl where
         type Rs LiveBroadcastsControl = LiveBroadcast

@@ -53,8 +53,8 @@ type ManagementWebPropertyAdWordsLinksListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "entityAdWordsLinks" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
+                     QueryParam "start-index" (JSONText Int32) :>
+                       QueryParam "max-results" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] EntityAdWordsLinks
 
@@ -64,8 +64,8 @@ type ManagementWebPropertyAdWordsLinksListResource =
 data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksList
     { _mwpawllWebPropertyId :: !Text
     , _mwpawllAccountId     :: !Text
-    , _mwpawllStartIndex    :: !(Maybe Int32)
-    , _mwpawllMaxResults    :: !(Maybe Int32)
+    , _mwpawllStartIndex    :: !(Maybe (JSONText Int32))
+    , _mwpawllMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList' with the minimum fields required to make a request.
@@ -110,6 +110,7 @@ mwpawllStartIndex :: Lens' ManagementWebPropertyAdWordsLinksList (Maybe Int32)
 mwpawllStartIndex
   = lens _mwpawllStartIndex
       (\ s a -> s{_mwpawllStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of webProperty-AdWords links to include in this
 -- response.
@@ -117,6 +118,7 @@ mwpawllMaxResults :: Lens' ManagementWebPropertyAdWordsLinksList (Maybe Int32)
 mwpawllMaxResults
   = lens _mwpawllMaxResults
       (\ s a -> s{_mwpawllMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksList where

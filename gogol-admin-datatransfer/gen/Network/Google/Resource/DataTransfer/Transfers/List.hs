@@ -57,7 +57,7 @@ type TransfersListResource =
                  QueryParam "newOwnerUserId" Text :>
                    QueryParam "customerId" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
+                       QueryParam "maxResults" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] DataTransfersListResponse
 
@@ -71,7 +71,7 @@ data TransfersList = TransfersList
     , _tlNewOwnerUserId :: !(Maybe Text)
     , _tlCustomerId     :: !(Maybe Text)
     , _tlPageToken      :: !(Maybe Text)
-    , _tlMaxResults     :: !(Maybe Int32)
+    , _tlMaxResults     :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransfersList' with the minimum fields required to make a request.
@@ -131,6 +131,7 @@ tlPageToken
 tlMaxResults :: Lens' TransfersList (Maybe Int32)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest TransfersList where
         type Rs TransfersList = DataTransfersListResponse

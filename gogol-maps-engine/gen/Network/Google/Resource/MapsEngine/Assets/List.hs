@@ -67,7 +67,7 @@ type AssetsListResource =
                          QueryParam "projectId" Text :>
                            QueryParam "type" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -87,7 +87,7 @@ data AssetsList = AssetsList
     , _alProjectId      :: !(Maybe Text)
     , _alType           :: !(Maybe Text)
     , _alSearch         :: !(Maybe Text)
-    , _alMaxResults     :: !(Maybe Word32)
+    , _alMaxResults     :: !(Maybe (JSONText Word32))
     , _alTags           :: !(Maybe Text)
     , _alCreatedBefore  :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -212,6 +212,7 @@ alSearch = lens _alSearch (\ s a -> s{_alSearch = a})
 alMaxResults :: Lens' AssetsList (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.

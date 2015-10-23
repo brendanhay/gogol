@@ -69,7 +69,7 @@ type LayersListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "projectId" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -89,7 +89,7 @@ data LayersList = LayersList
     , _llPageToken        :: !(Maybe Text)
     , _llProjectId        :: !(Maybe Text)
     , _llSearch           :: !(Maybe Text)
-    , _llMaxResults       :: !(Maybe Word32)
+    , _llMaxResults       :: !(Maybe (JSONText Word32))
     , _llTags             :: !(Maybe Text)
     , _llCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -213,6 +213,7 @@ llSearch = lens _llSearch (\ s a -> s{_llSearch = a})
 llMaxResults :: Lens' LayersList (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
+      . mapping _Coerce
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.

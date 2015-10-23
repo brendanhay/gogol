@@ -51,10 +51,10 @@ type PlacementStrategiesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placementStrategies" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
+                 QueryParams "ids" (JSONText Int64) :>
                    QueryParam "sortOrder"
                      PlacementStrategiesListSortOrder
                      :>
@@ -62,7 +62,7 @@ type PlacementStrategiesListResource =
                        QueryParam "sortField"
                          PlacementStrategiesListSortField
                          :>
-                         QueryParam "maxResults" Int32 :>
+                         QueryParam "maxResults" (JSONText Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] PlacementStrategiesListResponse
 
@@ -71,12 +71,12 @@ type PlacementStrategiesListResource =
 -- /See:/ 'placementStrategiesList' smart constructor.
 data PlacementStrategiesList = PlacementStrategiesList
     { _pslSearchString :: !(Maybe Text)
-    , _pslIds          :: !(Maybe [Int64])
-    , _pslProFileId    :: !Int64
+    , _pslIds          :: !(Maybe [JSONText Int64])
+    , _pslProFileId    :: !(JSONText Int64)
     , _pslSortOrder    :: !(Maybe PlacementStrategiesListSortOrder)
     , _pslPageToken    :: !(Maybe Text)
     , _pslSortField    :: !(Maybe PlacementStrategiesListSortField)
-    , _pslMaxResults   :: !(Maybe Int32)
+    , _pslMaxResults   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesList' with the minimum fields required to make a request.
@@ -133,6 +133,7 @@ pslIds
 pslProFileId :: Lens' PlacementStrategiesList Int64
 pslProFileId
   = lens _pslProFileId (\ s a -> s{_pslProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 pslSortOrder :: Lens' PlacementStrategiesList (Maybe PlacementStrategiesListSortOrder)
@@ -154,6 +155,7 @@ pslMaxResults :: Lens' PlacementStrategiesList (Maybe Int32)
 pslMaxResults
   = lens _pslMaxResults
       (\ s a -> s{_pslMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest PlacementStrategiesList where
         type Rs PlacementStrategiesList =

@@ -45,17 +45,17 @@ import           Network.Google.ShoppingContent.Types
 type AccounttaxGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accounttax" :>
-             Capture "accountId" Word64 :>
+             Capture "accountId" (JSONText Word64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] AccountTax
 
 -- | Retrieves the tax settings of the account.
 --
 -- /See:/ 'accounttaxGet' smart constructor.
 data AccounttaxGet = AccounttaxGet
-    { _aggMerchantId :: !Word64
-    , _aggAccountId  :: !Word64
+    { _aggMerchantId :: !(JSONText Word64)
+    , _aggAccountId  :: !(JSONText Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxGet' with the minimum fields required to make a request.
@@ -80,11 +80,13 @@ aggMerchantId :: Lens' AccounttaxGet Word64
 aggMerchantId
   = lens _aggMerchantId
       (\ s a -> s{_aggMerchantId = a})
+      . _Coerce
 
 -- | The ID of the account for which to get\/update account tax settings.
 aggAccountId :: Lens' AccounttaxGet Word64
 aggAccountId
   = lens _aggAccountId (\ s a -> s{_aggAccountId = a})
+      . _Coerce
 
 instance GoogleRequest AccounttaxGet where
         type Rs AccounttaxGet = AccountTax

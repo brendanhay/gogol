@@ -152,7 +152,7 @@ instance ToJSON LanguagesListResponse where
 --
 -- /See:/ 'detectionsResourceItem' smart constructor.
 data DetectionsResourceItem = DetectionsResourceItem
-    { _driConfidence :: !(Maybe Float)
+    { _driConfidence :: !(Maybe (JSONText Float))
     , _driIsReliable :: !(Maybe Bool)
     , _driLanguage   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -180,6 +180,7 @@ driConfidence :: Lens' DetectionsResourceItem (Maybe Float)
 driConfidence
   = lens _driConfidence
       (\ s a -> s{_driConfidence = a})
+      . mapping _Coerce
 
 -- | A boolean to indicate is the language detection result reliable.
 driIsReliable :: Lens' DetectionsResourceItem (Maybe Bool)

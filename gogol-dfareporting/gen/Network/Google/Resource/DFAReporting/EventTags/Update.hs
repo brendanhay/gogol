@@ -46,7 +46,7 @@ type EventTagsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "eventTags" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
@@ -55,7 +55,7 @@ type EventTagsUpdateResource =
 --
 -- /See:/ 'eventTagsUpdate' smart constructor.
 data EventTagsUpdate = EventTagsUpdate
-    { _etuProFileId :: !Int64
+    { _etuProFileId :: !(JSONText Int64)
     , _etuPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,6 +80,7 @@ eventTagsUpdate pEtuProFileId_ pEtuPayload_ =
 etuProFileId :: Lens' EventTagsUpdate Int64
 etuProFileId
   = lens _etuProFileId (\ s a -> s{_etuProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 etuPayload :: Lens' EventTagsUpdate EventTag

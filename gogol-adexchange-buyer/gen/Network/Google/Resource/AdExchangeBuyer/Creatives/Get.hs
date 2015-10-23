@@ -47,7 +47,7 @@ type CreativesGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "creatives" :>
-           Capture "accountId" Int32 :>
+           Capture "accountId" (JSONText Int32) :>
              Capture "buyerCreativeId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
@@ -57,7 +57,7 @@ type CreativesGetResource =
 -- /See:/ 'creativesGet' smart constructor.
 data CreativesGet = CreativesGet
     { _cgBuyerCreativeId :: !Text
-    , _cgAccountId       :: !Int32
+    , _cgAccountId       :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesGet' with the minimum fields required to make a request.
@@ -86,7 +86,8 @@ cgBuyerCreativeId
 -- | The id for the account that will serve this creative.
 cgAccountId :: Lens' CreativesGet Int32
 cgAccountId
-  = lens _cgAccountId (\ s a -> s{_cgAccountId = a})
+  = lens _cgAccountId (\ s a -> s{_cgAccountId = a}) .
+      _Coerce
 
 instance GoogleRequest CreativesGet where
         type Rs CreativesGet = Creative

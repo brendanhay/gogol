@@ -47,9 +47,9 @@ type SitesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "sites" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Site :> Patch '[JSON] Site
 
@@ -57,9 +57,9 @@ type SitesPatchResource =
 --
 -- /See:/ 'sitesPatch' smart constructor.
 data SitesPatch = SitesPatch
-    { _spProFileId :: !Int64
+    { _spProFileId :: !(JSONText Int64)
     , _spPayload   :: !Site
-    , _spId        :: !Int64
+    , _spId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesPatch' with the minimum fields required to make a request.
@@ -86,7 +86,8 @@ sitesPatch pSpProFileId_ pSpPayload_ pSpId_ =
 -- | User profile ID associated with this request.
 spProFileId :: Lens' SitesPatch Int64
 spProFileId
-  = lens _spProFileId (\ s a -> s{_spProFileId = a})
+  = lens _spProFileId (\ s a -> s{_spProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 spPayload :: Lens' SitesPatch Site
@@ -95,7 +96,7 @@ spPayload
 
 -- | Site ID.
 spId :: Lens' SitesPatch Int64
-spId = lens _spId (\ s a -> s{_spId = a})
+spId = lens _spId (\ s a -> s{_spId = a}) . _Coerce
 
 instance GoogleRequest SitesPatch where
         type Rs SitesPatch = Site

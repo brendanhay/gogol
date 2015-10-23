@@ -51,7 +51,7 @@ type PeopleSearchResource =
            QueryParam "query" Text :>
              QueryParam "language" Text :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | Search all public profiles.
@@ -61,7 +61,7 @@ data PeopleSearch = PeopleSearch
     { _psQuery      :: !Text
     , _psLanguage   :: !Text
     , _psPageToken  :: !(Maybe Text)
-    , _psMaxResults :: !Word32
+    , _psMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleSearch' with the minimum fields required to make a request.
@@ -111,6 +111,7 @@ psPageToken
 psMaxResults :: Lens' PeopleSearch Word32
 psMaxResults
   = lens _psMaxResults (\ s a -> s{_psMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest PeopleSearch where
         type Rs PeopleSearch = PeopleFeed

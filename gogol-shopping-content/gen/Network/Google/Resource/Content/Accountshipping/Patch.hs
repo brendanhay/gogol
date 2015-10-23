@@ -48,9 +48,9 @@ import           Network.Google.ShoppingContent.Types
 type AccountshippingPatchResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accountshipping" :>
-             Capture "accountId" Word64 :>
+             Capture "accountId" (JSONText Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AccountShipping :>
@@ -61,9 +61,9 @@ type AccountshippingPatchResource =
 --
 -- /See:/ 'accountshippingPatch' smart constructor.
 data AccountshippingPatch = AccountshippingPatch
-    { _ap1MerchantId :: !Word64
+    { _ap1MerchantId :: !(JSONText Word64)
     , _ap1Payload    :: !AccountShipping
-    , _ap1AccountId  :: !Word64
+    , _ap1AccountId  :: !(JSONText Word64)
     , _ap1DryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -96,6 +96,7 @@ ap1MerchantId :: Lens' AccountshippingPatch Word64
 ap1MerchantId
   = lens _ap1MerchantId
       (\ s a -> s{_ap1MerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 ap1Payload :: Lens' AccountshippingPatch AccountShipping
@@ -107,6 +108,7 @@ ap1Payload
 ap1AccountId :: Lens' AccountshippingPatch Word64
 ap1AccountId
   = lens _ap1AccountId (\ s a -> s{_ap1AccountId = a})
+      . _Coerce
 
 -- | Flag to run the request in dry-run mode.
 ap1DryRun :: Lens' AccountshippingPatch (Maybe Bool)

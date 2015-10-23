@@ -986,8 +986,8 @@ data RoleAssignment = RoleAssignment
     , _rolScopeType        :: !(Maybe Text)
     , _rolKind             :: !Text
     , _rolAssignedTo       :: !(Maybe Text)
-    , _rolRoleId           :: !(Maybe Int64)
-    , _rolRoleAssignmentId :: !(Maybe Int64)
+    , _rolRoleId           :: !(Maybe (JSONText Int64))
+    , _rolRoleAssignmentId :: !(Maybe (JSONText Int64))
     , _rolOrgUnitId        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1045,13 +1045,15 @@ rolAssignedTo
 -- | The ID of the role that is assigned.
 rolRoleId :: Lens' RoleAssignment (Maybe Int64)
 rolRoleId
-  = lens _rolRoleId (\ s a -> s{_rolRoleId = a})
+  = lens _rolRoleId (\ s a -> s{_rolRoleId = a}) .
+      mapping _Coerce
 
 -- | ID of this roleAssignment.
 rolRoleAssignmentId :: Lens' RoleAssignment (Maybe Int64)
 rolRoleAssignmentId
   = lens _rolRoleAssignmentId
       (\ s a -> s{_rolRoleAssignmentId = a})
+      . mapping _Coerce
 
 -- | If the role is restricted to an organization unit, this contains the ID
 -- for the organization unit the exercise of this role is restricted to.
@@ -1089,7 +1091,7 @@ instance ToJSON RoleAssignment where
 data Group = Group
     { _groEmail              :: !(Maybe Text)
     , _groEtag               :: !(Maybe Text)
-    , _groDirectMembersCount :: !(Maybe Int64)
+    , _groDirectMembersCount :: !(Maybe (JSONText Int64))
     , _groKind               :: !Text
     , _groAliases            :: !(Maybe [Text])
     , _groNonEditableAliases :: !(Maybe [Text])
@@ -1151,6 +1153,7 @@ groDirectMembersCount :: Lens' Group (Maybe Int64)
 groDirectMembersCount
   = lens _groDirectMembersCount
       (\ s a -> s{_groDirectMembersCount = a})
+      . mapping _Coerce
 
 -- | Kind of resource this is.
 groKind :: Lens' Group Text
@@ -1626,12 +1629,12 @@ instance ToJSON Users where
 --
 -- /See:/ 'asp' smart constructor.
 data Asp = Asp
-    { _aCreationTime :: !(Maybe Int64)
+    { _aCreationTime :: !(Maybe (JSONText Int64))
     , _aEtag         :: !(Maybe Text)
-    , _aCodeId       :: !(Maybe Int32)
+    , _aCodeId       :: !(Maybe (JSONText Int32))
     , _aKind         :: !Text
     , _aName         :: !(Maybe Text)
-    , _aLastTimeUsed :: !(Maybe Int64)
+    , _aLastTimeUsed :: !(Maybe (JSONText Int64))
     , _aUserKey      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1670,6 +1673,7 @@ aCreationTime :: Lens' Asp (Maybe Int64)
 aCreationTime
   = lens _aCreationTime
       (\ s a -> s{_aCreationTime = a})
+      . mapping _Coerce
 
 -- | ETag of the ASP.
 aEtag :: Lens' Asp (Maybe Text)
@@ -1677,7 +1681,9 @@ aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
 
 -- | The unique ID of the ASP.
 aCodeId :: Lens' Asp (Maybe Int32)
-aCodeId = lens _aCodeId (\ s a -> s{_aCodeId = a})
+aCodeId
+  = lens _aCodeId (\ s a -> s{_aCodeId = a}) .
+      mapping _Coerce
 
 -- | The type of the API resource. This is always admin#directory#asp.
 aKind :: Lens' Asp Text
@@ -1693,6 +1699,7 @@ aLastTimeUsed :: Lens' Asp (Maybe Int64)
 aLastTimeUsed
   = lens _aLastTimeUsed
       (\ s a -> s{_aLastTimeUsed = a})
+      . mapping _Coerce
 
 -- | The unique ID of the user who issued the ASP.
 aUserKey :: Lens' Asp (Maybe Text)
@@ -2302,7 +2309,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe Int64)
+    , _cExpiration  :: !(Maybe (JSONText Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -2370,7 +2377,8 @@ cKind = lens _cKind (\ s a -> s{_cKind = a})
 -- timestamp, in milliseconds. Optional.
 cExpiration :: Lens' Channel (Maybe Int64)
 cExpiration
-  = lens _cExpiration (\ s a -> s{_cExpiration = a})
+  = lens _cExpiration (\ s a -> s{_cExpiration = a}) .
+      mapping _Coerce
 
 -- | An arbitrary string delivered to the target address with each
 -- notification delivered over this channel. Optional.
@@ -2722,7 +2730,7 @@ instance ToJSON ChromeOSDeviceRecentUsersItem where
 --
 -- /See:/ 'domainAlias' smart constructor.
 data DomainAlias = DomainAlias
-    { _dCreationTime     :: !(Maybe Int64)
+    { _dCreationTime     :: !(Maybe (JSONText Int64))
     , _dEtag             :: !(Maybe Text)
     , _dKind             :: !Text
     , _dVerified         :: !(Maybe Bool)
@@ -2762,6 +2770,7 @@ dCreationTime :: Lens' DomainAlias (Maybe Int64)
 dCreationTime
   = lens _dCreationTime
       (\ s a -> s{_dCreationTime = a})
+      . mapping _Coerce
 
 -- | ETag of the resource.
 dEtag :: Lens' DomainAlias (Maybe Text)
@@ -3396,7 +3405,7 @@ data Role = Role
     , _rrKind             :: !Text
     , _rrRoleName         :: !(Maybe Text)
     , _rrIsSystemRole     :: !(Maybe Bool)
-    , _rrRoleId           :: !(Maybe Int64)
+    , _rrRoleId           :: !(Maybe (JSONText Int64))
     , _rrRoleDescription  :: !(Maybe Text)
     , _rrIsSuperAdminRole :: !(Maybe Bool)
     , _rrRolePrivileges   :: !(Maybe [RoleRolePrivilegesItem])
@@ -3456,7 +3465,9 @@ rrIsSystemRole
 
 -- | ID of the role.
 rrRoleId :: Lens' Role (Maybe Int64)
-rrRoleId = lens _rrRoleId (\ s a -> s{_rrRoleId = a})
+rrRoleId
+  = lens _rrRoleId (\ s a -> s{_rrRoleId = a}) .
+      mapping _Coerce
 
 -- | A short description of the role.
 rrRoleDescription :: Lens' Role (Maybe Text)
@@ -3637,7 +3648,7 @@ instance ToJSON Customer where
 --
 -- /See:/ 'mobileDeviceApplicationsItem' smart constructor.
 data MobileDeviceApplicationsItem = MobileDeviceApplicationsItem
-    { _mdaiVersionCode :: !(Maybe Int32)
+    { _mdaiVersionCode :: !(Maybe (JSONText Int32))
     , _mdaiVersionName :: !(Maybe Text)
     , _mdaiPackageName :: !(Maybe Text)
     , _mdaiDisplayName :: !(Maybe Text)
@@ -3673,6 +3684,7 @@ mdaiVersionCode :: Lens' MobileDeviceApplicationsItem (Maybe Int32)
 mdaiVersionCode
   = lens _mdaiVersionCode
       (\ s a -> s{_mdaiVersionCode = a})
+      . mapping _Coerce
 
 -- | Version name of application
 mdaiVersionName :: Lens' MobileDeviceApplicationsItem (Maybe Text)
@@ -4149,7 +4161,7 @@ instance ToJSON UserWebsite where
 -- /See:/ 'chromeOSDeviceActiveTimeRangesItem' smart constructor.
 data ChromeOSDeviceActiveTimeRangesItem = ChromeOSDeviceActiveTimeRangesItem
     { _codatriDate       :: !(Maybe Date')
-    , _codatriActiveTime :: !(Maybe Int32)
+    , _codatriActiveTime :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeOSDeviceActiveTimeRangesItem' with the minimum fields required to make a request.
@@ -4178,6 +4190,7 @@ codatriActiveTime :: Lens' ChromeOSDeviceActiveTimeRangesItem (Maybe Int32)
 codatriActiveTime
   = lens _codatriActiveTime
       (\ s a -> s{_codatriActiveTime = a})
+      . mapping _Coerce
 
 instance FromJSON ChromeOSDeviceActiveTimeRangesItem
          where
@@ -4343,11 +4356,11 @@ instance ToJSON UserPhone where
 --
 -- /See:/ 'userPhoto' smart constructor.
 data UserPhoto = UserPhoto
-    { _upPhotoData    :: !(Maybe Word8)
+    { _upPhotoData    :: !(Maybe (JSONText Word8))
     , _upEtag         :: !(Maybe Text)
-    , _upHeight       :: !(Maybe Int32)
+    , _upHeight       :: !(Maybe (JSONText Int32))
     , _upKind         :: !Text
-    , _upWidth        :: !(Maybe Int32)
+    , _upWidth        :: !(Maybe (JSONText Int32))
     , _upMimeType     :: !(Maybe Text)
     , _upId           :: !(Maybe Text)
     , _upPrimaryEmail :: !(Maybe Text)
@@ -4389,7 +4402,8 @@ userPhoto =
 -- | Base64 encoded photo data
 upPhotoData :: Lens' UserPhoto (Maybe Word8)
 upPhotoData
-  = lens _upPhotoData (\ s a -> s{_upPhotoData = a})
+  = lens _upPhotoData (\ s a -> s{_upPhotoData = a}) .
+      mapping _Coerce
 
 -- | ETag of the resource.
 upEtag :: Lens' UserPhoto (Maybe Text)
@@ -4397,7 +4411,9 @@ upEtag = lens _upEtag (\ s a -> s{_upEtag = a})
 
 -- | Height in pixels of the photo
 upHeight :: Lens' UserPhoto (Maybe Int32)
-upHeight = lens _upHeight (\ s a -> s{_upHeight = a})
+upHeight
+  = lens _upHeight (\ s a -> s{_upHeight = a}) .
+      mapping _Coerce
 
 -- | Kind of resource this is.
 upKind :: Lens' UserPhoto Text
@@ -4405,7 +4421,9 @@ upKind = lens _upKind (\ s a -> s{_upKind = a})
 
 -- | Width in pixels of the photo
 upWidth :: Lens' UserPhoto (Maybe Int32)
-upWidth = lens _upWidth (\ s a -> s{_upWidth = a})
+upWidth
+  = lens _upWidth (\ s a -> s{_upWidth = a}) .
+      mapping _Coerce
 
 -- | Mime Type of the photo
 upMimeType :: Lens' UserPhoto (Maybe Text)
@@ -4956,7 +4974,7 @@ instance ToJSON UserCustomProperties where
 --
 -- /See:/ 'domains' smart constructor.
 data Domains = Domains
-    { _domCreationTime  :: !(Maybe Int64)
+    { _domCreationTime  :: !(Maybe (JSONText Int64))
     , _domEtag          :: !(Maybe Text)
     , _domKind          :: !Text
     , _domDomainAliases :: !(Maybe [DomainAlias])
@@ -5000,6 +5018,7 @@ domCreationTime :: Lens' Domains (Maybe Int64)
 domCreationTime
   = lens _domCreationTime
       (\ s a -> s{_domCreationTime = a})
+      . mapping _Coerce
 
 -- | ETag of the resource.
 domEtag :: Lens' Domains (Maybe Text)
@@ -5064,7 +5083,7 @@ data Notifications = Notifications
     , _notNextPageToken            :: !(Maybe Text)
     , _notKind                     :: !Text
     , _notItems                    :: !(Maybe [Notification])
-    , _notUnreadNotificationsCount :: !(Maybe Int32)
+    , _notUnreadNotificationsCount :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Notifications' with the minimum fields required to make a request.
@@ -5117,6 +5136,7 @@ notUnreadNotificationsCount :: Lens' Notifications (Maybe Int32)
 notUnreadNotificationsCount
   = lens _notUnreadNotificationsCount
       (\ s a -> s{_notUnreadNotificationsCount = a})
+      . mapping _Coerce
 
 instance FromJSON Notifications where
         parseJSON
@@ -5145,8 +5165,8 @@ instance ToJSON Notifications where
 --
 -- /See:/ 'schemaFieldSpecNumericIndexingSpec' smart constructor.
 data SchemaFieldSpecNumericIndexingSpec = SchemaFieldSpecNumericIndexingSpec
-    { _sfsnisMaxValue :: !(Maybe Double)
-    , _sfsnisMinValue :: !(Maybe Double)
+    { _sfsnisMaxValue :: !(Maybe (JSONText Double))
+    , _sfsnisMinValue :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemaFieldSpecNumericIndexingSpec' with the minimum fields required to make a request.
@@ -5171,6 +5191,7 @@ sfsnisMaxValue :: Lens' SchemaFieldSpecNumericIndexingSpec (Maybe Double)
 sfsnisMaxValue
   = lens _sfsnisMaxValue
       (\ s a -> s{_sfsnisMaxValue = a})
+      . mapping _Coerce
 
 -- | Minimum value of this field. This is meant to be indicative rather than
 -- enforced. Values outside this range will still be indexed, but search
@@ -5179,6 +5200,7 @@ sfsnisMinValue :: Lens' SchemaFieldSpecNumericIndexingSpec (Maybe Double)
 sfsnisMinValue
   = lens _sfsnisMinValue
       (\ s a -> s{_sfsnisMinValue = a})
+      . mapping _Coerce
 
 instance FromJSON SchemaFieldSpecNumericIndexingSpec
          where

@@ -54,18 +54,18 @@ type InventoryItemsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "projects" :>
-               Capture "projectId" Int64 :>
+               Capture "projectId" (JSONText Int64) :>
                  "inventoryItems" :>
-                   QueryParams "ids" Int64 :>
+                   QueryParams "ids" (JSONText Int64) :>
                      QueryParam "sortOrder" InventoryItemsListSortOrder :>
                        QueryParam "inPlan" Bool :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField" InventoryItemsListSortField :>
-                             QueryParams "orderId" Int64 :>
-                               QueryParams "siteId" Int64 :>
-                                 QueryParam "maxResults" Int32 :>
+                             QueryParams "orderId" (JSONText Int64) :>
+                               QueryParams "siteId" (JSONText Int64) :>
+                                 QueryParam "maxResults" (JSONText Int32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] InventoryItemsListResponse
 
@@ -73,16 +73,16 @@ type InventoryItemsListResource =
 --
 -- /See:/ 'inventoryItemsList' smart constructor.
 data InventoryItemsList = InventoryItemsList
-    { _iilIds        :: !(Maybe [Int64])
-    , _iilProFileId  :: !Int64
+    { _iilIds        :: !(Maybe [JSONText Int64])
+    , _iilProFileId  :: !(JSONText Int64)
     , _iilSortOrder  :: !(Maybe InventoryItemsListSortOrder)
     , _iilInPlan     :: !(Maybe Bool)
     , _iilPageToken  :: !(Maybe Text)
-    , _iilProjectId  :: !Int64
+    , _iilProjectId  :: !(JSONText Int64)
     , _iilSortField  :: !(Maybe InventoryItemsListSortField)
-    , _iilOrderId    :: !(Maybe [Int64])
-    , _iilSiteId     :: !(Maybe [Int64])
-    , _iilMaxResults :: !(Maybe Int32)
+    , _iilOrderId    :: !(Maybe [JSONText Int64])
+    , _iilSiteId     :: !(Maybe [JSONText Int64])
+    , _iilMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsList' with the minimum fields required to make a request.
@@ -136,6 +136,7 @@ iilIds
 iilProFileId :: Lens' InventoryItemsList Int64
 iilProFileId
   = lens _iilProFileId (\ s a -> s{_iilProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 iilSortOrder :: Lens' InventoryItemsList (Maybe InventoryItemsListSortOrder)
@@ -156,6 +157,7 @@ iilPageToken
 iilProjectId :: Lens' InventoryItemsList Int64
 iilProjectId
   = lens _iilProjectId (\ s a -> s{_iilProjectId = a})
+      . _Coerce
 
 -- | Field by which to sort the list.
 iilSortField :: Lens' InventoryItemsList (Maybe InventoryItemsListSortField)
@@ -181,6 +183,7 @@ iilMaxResults :: Lens' InventoryItemsList (Maybe Int32)
 iilMaxResults
   = lens _iilMaxResults
       (\ s a -> s{_iilMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest InventoryItemsList where
         type Rs InventoryItemsList =

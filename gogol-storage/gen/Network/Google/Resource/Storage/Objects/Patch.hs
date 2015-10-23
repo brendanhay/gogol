@@ -57,14 +57,17 @@ type ObjectsPatchResource =
            Capture "bucket" Text :>
              "o" :>
                Capture "object" Text :>
-                 QueryParam "ifMetagenerationMatch" Int64 :>
-                   QueryParam "ifGenerationNotMatch" Int64 :>
-                     QueryParam "ifGenerationMatch" Int64 :>
+                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                   :>
+                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
                        QueryParam "predefinedAcl" ObjectsPatchPredefinedACL
                          :>
-                         QueryParam "ifMetagenerationNotMatch" Int64 :>
+                         QueryParam "ifMetagenerationNotMatch"
+                           (JSONText Int64)
+                           :>
                            QueryParam "projection" ObjectsPatchProjection :>
-                             QueryParam "generation" Int64 :>
+                             QueryParam "generation" (JSONText Int64) :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Object :> Patch '[JSON] Object
 
@@ -72,16 +75,16 @@ type ObjectsPatchResource =
 --
 -- /See:/ 'objectsPatch' smart constructor.
 data ObjectsPatch = ObjectsPatch
-    { _opIfMetagenerationMatch    :: !(Maybe Int64)
-    , _opIfGenerationNotMatch     :: !(Maybe Int64)
-    , _opIfGenerationMatch        :: !(Maybe Int64)
+    { _opIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    , _opIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
+    , _opIfGenerationMatch        :: !(Maybe (JSONText Int64))
     , _opPredefinedACL            :: !(Maybe ObjectsPatchPredefinedACL)
     , _opBucket                   :: !Text
     , _opPayload                  :: !Object
-    , _opIfMetagenerationNotMatch :: !(Maybe Int64)
+    , _opIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
     , _opObject                   :: !Text
     , _opProjection               :: !(Maybe ObjectsPatchProjection)
-    , _opGeneration               :: !(Maybe Int64)
+    , _opGeneration               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsPatch' with the minimum fields required to make a request.
@@ -132,6 +135,7 @@ opIfMetagenerationMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfMetagenerationMatch
   = lens _opIfMetagenerationMatch
       (\ s a -> s{_opIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
@@ -139,6 +143,7 @@ opIfGenerationNotMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfGenerationNotMatch
   = lens _opIfGenerationNotMatch
       (\ s a -> s{_opIfGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
@@ -146,6 +151,7 @@ opIfGenerationMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfGenerationMatch
   = lens _opIfGenerationMatch
       (\ s a -> s{_opIfGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Apply a predefined set of access controls to this object.
 opPredefinedACL :: Lens' ObjectsPatch (Maybe ObjectsPatchPredefinedACL)
@@ -168,6 +174,7 @@ opIfMetagenerationNotMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfMetagenerationNotMatch
   = lens _opIfMetagenerationNotMatch
       (\ s a -> s{_opIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
@@ -184,6 +191,7 @@ opProjection
 opGeneration :: Lens' ObjectsPatch (Maybe Int64)
 opGeneration
   = lens _opGeneration (\ s a -> s{_opGeneration = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectsPatch where
         type Rs ObjectsPatch = Object

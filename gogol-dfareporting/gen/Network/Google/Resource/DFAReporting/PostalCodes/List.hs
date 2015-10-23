@@ -45,7 +45,7 @@ type PostalCodesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "postalCodes" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] PostalCodesListResponse
@@ -54,7 +54,7 @@ type PostalCodesListResource =
 --
 -- /See:/ 'postalCodesList' smart constructor.
 newtype PostalCodesList = PostalCodesList
-    { _pclProFileId :: Int64
+    { _pclProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostalCodesList' with the minimum fields required to make a request.
@@ -74,6 +74,7 @@ postalCodesList pPclProFileId_ =
 pclProFileId :: Lens' PostalCodesList Int64
 pclProFileId
   = lens _pclProFileId (\ s a -> s{_pclProFileId = a})
+      . _Coerce
 
 instance GoogleRequest PostalCodesList where
         type Rs PostalCodesList = PostalCodesListResponse

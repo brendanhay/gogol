@@ -72,14 +72,16 @@ type EventsListResource =
                          QueryParam "showDeleted" Bool :>
                            QueryParam "q" Text :>
                              QueryParams "sharedExtendedProperty" Text :>
-                               QueryParam "maxAttendees" Int32 :>
+                               QueryParam "maxAttendees" (JSONText Int32) :>
                                  QueryParam "iCalUID" Text :>
                                    QueryParam "updatedMin" DateTime' :>
                                      QueryParam "pageToken" Text :>
                                        QueryParam "timeZone" Text :>
                                          QueryParam "showHiddenInvitations" Bool
                                            :>
-                                           QueryParam "maxResults" Int32 :>
+                                           QueryParam "maxResults"
+                                             (JSONText Int32)
+                                             :>
                                              QueryParam "alwaysIncludeEmail"
                                                Bool
                                                :>
@@ -100,13 +102,13 @@ data EventsList = EventsList
     , _elShowDeleted             :: !(Maybe Bool)
     , _elQ                       :: !(Maybe Text)
     , _elSharedExtendedProperty  :: !(Maybe [Text])
-    , _elMaxAttendees            :: !(Maybe Int32)
+    , _elMaxAttendees            :: !(Maybe (JSONText Int32))
     , _elICalUId                 :: !(Maybe Text)
     , _elUpdatedMin              :: !(Maybe DateTime')
     , _elPageToken               :: !(Maybe Text)
     , _elTimeZone                :: !(Maybe Text)
     , _elShowHiddenInvitations   :: !(Maybe Bool)
-    , _elMaxResults              :: !(Maybe Int32)
+    , _elMaxResults              :: !(Maybe (JSONText Int32))
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
     , _elTimeMax                 :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -265,6 +267,7 @@ elMaxAttendees :: Lens' EventsList (Maybe Int32)
 elMaxAttendees
   = lens _elMaxAttendees
       (\ s a -> s{_elMaxAttendees = a})
+      . mapping _Coerce
 
 -- | Specifies event ID in the iCalendar format to be included in the
 -- response. Optional.
@@ -305,6 +308,7 @@ elShowHiddenInvitations
 elMaxResults :: Lens' EventsList (Maybe Int32)
 elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
+      . mapping _Coerce
 
 -- | Whether to always include a value in the email field for the organizer,
 -- creator and attendees, even if no real email is available (i.e. a

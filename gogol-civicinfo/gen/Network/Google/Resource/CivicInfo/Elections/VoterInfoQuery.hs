@@ -49,7 +49,7 @@ type ElectionsVoterInfoQueryResource =
        "v2" :>
          "voterinfo" :>
            QueryParam "address" Text :>
-             QueryParam "electionId" Int64 :>
+             QueryParam "electionId" (JSONText Int64) :>
                QueryParam "officialOnly" Bool :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] VoterInfoResponse
@@ -59,7 +59,7 @@ type ElectionsVoterInfoQueryResource =
 --
 -- /See:/ 'electionsVoterInfoQuery' smart constructor.
 data ElectionsVoterInfoQuery = ElectionsVoterInfoQuery
-    { _eviqElectionId   :: !Int64
+    { _eviqElectionId   :: !(JSONText Int64)
     , _eviqAddress      :: !Text
     , _eviqOfficialOnly :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,6 +90,7 @@ eviqElectionId :: Lens' ElectionsVoterInfoQuery Int64
 eviqElectionId
   = lens _eviqElectionId
       (\ s a -> s{_eviqElectionId = a})
+      . _Coerce
 
 -- | The registered address of the voter to look up.
 eviqAddress :: Lens' ElectionsVoterInfoQuery Text

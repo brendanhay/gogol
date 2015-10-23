@@ -200,7 +200,7 @@ instance ToJSON OrganizationOwner where
 -- /See:/ 'project' smart constructor.
 data Project = Project
     { _pParent         :: !(Maybe ResourceId)
-    , _pProjectNumber  :: !(Maybe Int64)
+    , _pProjectNumber  :: !(Maybe (JSONText Int64))
     , _pName           :: !(Maybe Text)
     , _pLabels         :: !(Maybe ProjectLabels)
     , _pProjectId      :: !(Maybe Text)
@@ -250,6 +250,7 @@ pProjectNumber :: Lens' Project (Maybe Int64)
 pProjectNumber
   = lens _pProjectNumber
       (\ s a -> s{_pProjectNumber = a})
+      . mapping _Coerce
 
 -- | The user-assigned name of the project. It must be 4 to 30 characters.
 -- Allowed characters are: lowercase and uppercase letters, numbers,
@@ -468,8 +469,8 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy
-    { _pEtag     :: !(Maybe Word8)
-    , _pVersion  :: !(Maybe Int32)
+    { _pEtag     :: !(Maybe (JSONText Word8))
+    , _pVersion  :: !(Maybe (JSONText Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -493,11 +494,15 @@ policy =
 
 -- | Can be used to perform a read-modify-write.
 pEtag :: Lens' Policy (Maybe Word8)
-pEtag = lens _pEtag (\ s a -> s{_pEtag = a})
+pEtag
+  = lens _pEtag (\ s a -> s{_pEtag = a}) .
+      mapping _Coerce
 
 -- | Version of the \`Policy\`. The default version is 0.
 pVersion :: Lens' Policy (Maybe Int32)
-pVersion = lens _pVersion (\ s a -> s{_pVersion = a})
+pVersion
+  = lens _pVersion (\ s a -> s{_pVersion = a}) .
+      mapping _Coerce
 
 -- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
 -- must not be specified for the same \`role\`. \`bindings\` with no

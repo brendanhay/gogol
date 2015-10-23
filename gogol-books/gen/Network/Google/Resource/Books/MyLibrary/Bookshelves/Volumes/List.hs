@@ -61,8 +61,8 @@ type MyLibraryBookshelvesVolumesListResource =
                        QueryParam "projection"
                          MyLibraryBookshelvesVolumesListProjection
                          :>
-                         QueryParam "startIndex" Word32 :>
-                           QueryParam "maxResults" Word32 :>
+                         QueryParam "startIndex" (JSONText Word32) :>
+                           QueryParam "maxResults" (JSONText Word32) :>
                              QueryParam "showPreorders" Bool :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
@@ -75,8 +75,8 @@ data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList
     , _mlbvlShelf         :: !Text
     , _mlbvlSource        :: !(Maybe Text)
     , _mlbvlProjection    :: !(Maybe MyLibraryBookshelvesVolumesListProjection)
-    , _mlbvlStartIndex    :: !(Maybe Word32)
-    , _mlbvlMaxResults    :: !(Maybe Word32)
+    , _mlbvlStartIndex    :: !(Maybe (JSONText Word32))
+    , _mlbvlMaxResults    :: !(Maybe (JSONText Word32))
     , _mlbvlShowPreOrders :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -144,12 +144,14 @@ mlbvlStartIndex :: Lens' MyLibraryBookshelvesVolumesList (Maybe Word32)
 mlbvlStartIndex
   = lens _mlbvlStartIndex
       (\ s a -> s{_mlbvlStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum number of results to return
 mlbvlMaxResults :: Lens' MyLibraryBookshelvesVolumesList (Maybe Word32)
 mlbvlMaxResults
   = lens _mlbvlMaxResults
       (\ s a -> s{_mlbvlMaxResults = a})
+      . mapping _Coerce
 
 -- | Set to true to show pre-ordered books. Defaults to false.
 mlbvlShowPreOrders :: Lens' MyLibraryBookshelvesVolumesList (Maybe Bool)

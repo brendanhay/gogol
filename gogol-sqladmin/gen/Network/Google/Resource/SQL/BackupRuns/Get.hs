@@ -51,7 +51,7 @@ type BackupRunsGetResource =
              "instances" :>
                Capture "instance" Text :>
                  "backupRuns" :>
-                   Capture "id" Int64 :>
+                   Capture "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] BackupRun
 
 -- | Retrieves a resource containing information about a backup run.
@@ -59,7 +59,7 @@ type BackupRunsGetResource =
 -- /See:/ 'backupRunsGet' smart constructor.
 data BackupRunsGet = BackupRunsGet
     { _brgProject  :: !Text
-    , _brgId       :: !Int64
+    , _brgId       :: !(JSONText Int64)
     , _brgInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -91,7 +91,8 @@ brgProject
 
 -- | The ID of this Backup Run.
 brgId :: Lens' BackupRunsGet Int64
-brgId = lens _brgId (\ s a -> s{_brgId = a})
+brgId
+  = lens _brgId (\ s a -> s{_brgId = a}) . _Coerce
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 brgInstance :: Lens' BackupRunsGet Text

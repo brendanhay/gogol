@@ -56,8 +56,8 @@ type ManagementUploadsListResource =
                    "customDataSources" :>
                      Capture "customDataSourceId" Text :>
                        "uploads" :>
-                         QueryParam "start-index" Int32 :>
-                           QueryParam "max-results" Int32 :>
+                         QueryParam "start-index" (JSONText Int32) :>
+                           QueryParam "max-results" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Uploads
 
 -- | List uploads to which the user has access.
@@ -67,8 +67,8 @@ data ManagementUploadsList = ManagementUploadsList
     { _mulWebPropertyId      :: !Text
     , _mulCustomDataSourceId :: !Text
     , _mulAccountId          :: !Text
-    , _mulStartIndex         :: !(Maybe Int32)
-    , _mulMaxResults         :: !(Maybe Int32)
+    , _mulStartIndex         :: !(Maybe (JSONText Int32))
+    , _mulMaxResults         :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsList' with the minimum fields required to make a request.
@@ -121,12 +121,14 @@ mulStartIndex :: Lens' ManagementUploadsList (Maybe Int32)
 mulStartIndex
   = lens _mulStartIndex
       (\ s a -> s{_mulStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of uploads to include in this response.
 mulMaxResults :: Lens' ManagementUploadsList (Maybe Int32)
 mulMaxResults
   = lens _mulMaxResults
       (\ s a -> s{_mulMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementUploadsList where
         type Rs ManagementUploadsList = Uploads

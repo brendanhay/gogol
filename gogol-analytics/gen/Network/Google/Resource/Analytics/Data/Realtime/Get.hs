@@ -56,7 +56,7 @@ type DataRealtimeGetResource =
                  QueryParam "filters" Text :>
                    QueryParam "sort" Text :>
                      QueryParam "dimensions" Text :>
-                       QueryParam "max-results" Int32 :>
+                       QueryParam "max-results" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] RealtimeData
 
 -- | Returns real time data for a view (profile).
@@ -68,7 +68,7 @@ data DataRealtimeGet = DataRealtimeGet
     , _drgIds        :: !Text
     , _drgSort       :: !(Maybe Text)
     , _drgDimensions :: !(Maybe Text)
-    , _drgMaxResults :: !(Maybe Int32)
+    , _drgMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataRealtimeGet' with the minimum fields required to make a request.
@@ -134,6 +134,7 @@ drgMaxResults :: Lens' DataRealtimeGet (Maybe Int32)
 drgMaxResults
   = lens _drgMaxResults
       (\ s a -> s{_drgMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest DataRealtimeGet where
         type Rs DataRealtimeGet = RealtimeData

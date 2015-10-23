@@ -69,7 +69,7 @@ instance ToJSON CommentContext where
 --
 -- /See:/ 'appIconsItem' smart constructor.
 data AppIconsItem = AppIconsItem
-    { _aiiSize     :: !(Maybe Int32)
+    { _aiiSize     :: !(Maybe (JSONText Int32))
     , _aiiCategory :: !(Maybe Text)
     , _aiiIconURL  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -94,7 +94,9 @@ appIconsItem =
 
 -- | Size of the icon. Represented as the maximum of the width and height.
 aiiSize :: Lens' AppIconsItem (Maybe Int32)
-aiiSize = lens _aiiSize (\ s a -> s{_aiiSize = a})
+aiiSize
+  = lens _aiiSize (\ s a -> s{_aiiSize = a}) .
+      mapping _Coerce
 
 -- | Category of the icon. Allowed values are: - application - icon for the
 -- application - document - icon for a file associated with the app -
@@ -387,7 +389,7 @@ instance ToJSON Property where
 --
 -- /See:/ 'fileThumbnail' smart constructor.
 data FileThumbnail = FileThumbnail
-    { _ftImage    :: !(Maybe Word8)
+    { _ftImage    :: !(Maybe (JSONText Word8))
     , _ftMimeType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -409,7 +411,9 @@ fileThumbnail =
 -- | The URL-safe Base64 encoded bytes of the thumbnail image. It should
 -- conform to RFC 4648 section 5.
 ftImage :: Lens' FileThumbnail (Maybe Word8)
-ftImage = lens _ftImage (\ s a -> s{_ftImage = a})
+ftImage
+  = lens _ftImage (\ s a -> s{_ftImage = a}) .
+      mapping _Coerce
 
 -- | The MIME type of the thumbnail.
 ftMimeType :: Lens' FileThumbnail (Maybe Text)
@@ -800,7 +804,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe Int64)
+    , _cExpiration  :: !(Maybe (JSONText Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -868,7 +872,8 @@ cKind = lens _cKind (\ s a -> s{_cKind = a})
 -- timestamp, in milliseconds. Optional.
 cExpiration :: Lens' Channel (Maybe Int64)
 cExpiration
-  = lens _cExpiration (\ s a -> s{_cExpiration = a})
+  = lens _cExpiration (\ s a -> s{_cExpiration = a}) .
+      mapping _Coerce
 
 -- | An arbitrary string delivered to the target address with each
 -- notification delivered over this channel. Optional.
@@ -1011,9 +1016,9 @@ instance ToJSON CommentReplyList where
 --
 -- /See:/ 'fileVideoMediaMetadata' smart constructor.
 data FileVideoMediaMetadata = FileVideoMediaMetadata
-    { _fvmmHeight         :: !(Maybe Int32)
-    , _fvmmWidth          :: !(Maybe Int32)
-    , _fvmmDurationMillis :: !(Maybe Int64)
+    { _fvmmHeight         :: !(Maybe (JSONText Int32))
+    , _fvmmWidth          :: !(Maybe (JSONText Int32))
+    , _fvmmDurationMillis :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileVideoMediaMetadata' with the minimum fields required to make a request.
@@ -1037,18 +1042,21 @@ fileVideoMediaMetadata =
 -- | The height of the video in pixels.
 fvmmHeight :: Lens' FileVideoMediaMetadata (Maybe Int32)
 fvmmHeight
-  = lens _fvmmHeight (\ s a -> s{_fvmmHeight = a})
+  = lens _fvmmHeight (\ s a -> s{_fvmmHeight = a}) .
+      mapping _Coerce
 
 -- | The width of the video in pixels.
 fvmmWidth :: Lens' FileVideoMediaMetadata (Maybe Int32)
 fvmmWidth
-  = lens _fvmmWidth (\ s a -> s{_fvmmWidth = a})
+  = lens _fvmmWidth (\ s a -> s{_fvmmWidth = a}) .
+      mapping _Coerce
 
 -- | The duration of the video in milliseconds.
 fvmmDurationMillis :: Lens' FileVideoMediaMetadata (Maybe Int64)
 fvmmDurationMillis
   = lens _fvmmDurationMillis
       (\ s a -> s{_fvmmDurationMillis = a})
+      . mapping _Coerce
 
 instance FromJSON FileVideoMediaMetadata where
         parseJSON
@@ -1073,7 +1081,7 @@ data Change = Change
     { _chaKind             :: !Text
     , _chaSelfLink         :: !(Maybe Text)
     , _chaModificationDate :: !(Maybe DateTime')
-    , _chaId               :: !(Maybe Int64)
+    , _chaId               :: !(Maybe (JSONText Int64))
     , _chaDeleted          :: !(Maybe Bool)
     , _chaFileId           :: !(Maybe Text)
     , _chaFile             :: !(Maybe File)
@@ -1127,7 +1135,9 @@ chaModificationDate
 
 -- | The ID of the change.
 chaId :: Lens' Change (Maybe Int64)
-chaId = lens _chaId (\ s a -> s{_chaId = a})
+chaId
+  = lens _chaId (\ s a -> s{_chaId = a}) .
+      mapping _Coerce
 
 -- | Whether the file has been deleted.
 chaDeleted :: Lens' Change (Maybe Bool)
@@ -1559,7 +1569,7 @@ instance ToJSON ChildReference where
 --
 -- /See:/ 'aboutMaxUploadSizesItem' smart constructor.
 data AboutMaxUploadSizesItem = AboutMaxUploadSizesItem
-    { _amusiSize :: !(Maybe Int64)
+    { _amusiSize :: !(Maybe (JSONText Int64))
     , _amusiType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1581,7 +1591,8 @@ aboutMaxUploadSizesItem =
 -- | The max upload size for this type.
 amusiSize :: Lens' AboutMaxUploadSizesItem (Maybe Int64)
 amusiSize
-  = lens _amusiSize (\ s a -> s{_amusiSize = a})
+  = lens _amusiSize (\ s a -> s{_amusiSize = a}) .
+      mapping _Coerce
 
 -- | The file type.
 amusiType :: Lens' AboutMaxUploadSizesItem (Maybe Text)
@@ -1741,7 +1752,7 @@ instance ToJSON CommentReply where
 --
 -- /See:/ 'aboutQuotaBytesByServiceItem' smart constructor.
 data AboutQuotaBytesByServiceItem = AboutQuotaBytesByServiceItem
-    { _aqbbsiBytesUsed   :: !(Maybe Int64)
+    { _aqbbsiBytesUsed   :: !(Maybe (JSONText Int64))
     , _aqbbsiServiceName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1765,6 +1776,7 @@ aqbbsiBytesUsed :: Lens' AboutQuotaBytesByServiceItem (Maybe Int64)
 aqbbsiBytesUsed
   = lens _aqbbsiBytesUsed
       (\ s a -> s{_aqbbsiBytesUsed = a})
+      . mapping _Coerce
 
 -- | The service\'s name, e.g. DRIVE, GMAIL, or PHOTOS.
 aqbbsiServiceName :: Lens' AboutQuotaBytesByServiceItem (Maybe Text)
@@ -1939,7 +1951,7 @@ data ChangeList = ChangeList
     , _cllKind            :: !Text
     , _cllItems           :: !(Maybe [Change])
     , _cllSelfLink        :: !(Maybe Text)
-    , _cllLargestChangeId :: !(Maybe Int64)
+    , _cllLargestChangeId :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeList' with the minimum fields required to make a request.
@@ -2008,6 +2020,7 @@ cllLargestChangeId :: Lens' ChangeList (Maybe Int64)
 cllLargestChangeId
   = lens _cllLargestChangeId
       (\ s a -> s{_cllLargestChangeId = a})
+      . mapping _Coerce
 
 instance FromJSON ChangeList where
         parseJSON
@@ -2101,7 +2114,7 @@ instance ToJSON FileIndexableText where
 --
 -- /See:/ 'aboutFeaturesItem' smart constructor.
 data AboutFeaturesItem = AboutFeaturesItem
-    { _afiFeatureRate :: !(Maybe Double)
+    { _afiFeatureRate :: !(Maybe (JSONText Double))
     , _afiFeatureName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2125,6 +2138,7 @@ afiFeatureRate :: Lens' AboutFeaturesItem (Maybe Double)
 afiFeatureRate
   = lens _afiFeatureRate
       (\ s a -> s{_afiFeatureRate = a})
+      . mapping _Coerce
 
 -- | The name of the feature.
 afiFeatureName :: Lens' AboutFeaturesItem (Maybe Text)
@@ -2184,13 +2198,13 @@ instance ToJSON ChannelParams where
 -- /See:/ 'about' smart constructor.
 data About = About
     { _aboExportFormats           :: !(Maybe [AboutExportFormatsItem])
-    , _aboRemainingChangeIds      :: !(Maybe Int64)
+    , _aboRemainingChangeIds      :: !(Maybe (JSONText Int64))
     , _aboLanguageCode            :: !(Maybe Text)
     , _aboEtag                    :: !(Maybe Text)
     , _aboImportFormats           :: !(Maybe [AboutImportFormatsItem])
     , _aboKind                    :: !Text
     , _aboDomainSharingPolicy     :: !(Maybe Text)
-    , _aboQuotaBytesUsedInTrash   :: !(Maybe Int64)
+    , _aboQuotaBytesUsedInTrash   :: !(Maybe (JSONText Int64))
     , _aboQuotaType               :: !(Maybe Text)
     , _aboMaxUploadSizes          :: !(Maybe [AboutMaxUploadSizesItem])
     , _aboUser                    :: !(Maybe User)
@@ -2198,15 +2212,15 @@ data About = About
     , _aboName                    :: !(Maybe Text)
     , _aboFeatures                :: !(Maybe [AboutFeaturesItem])
     , _aboIsCurrentAppInstalled   :: !(Maybe Bool)
-    , _aboQuotaBytesTotal         :: !(Maybe Int64)
+    , _aboQuotaBytesTotal         :: !(Maybe (JSONText Int64))
     , _aboRootFolderId            :: !(Maybe Text)
-    , _aboQuotaBytesUsed          :: !(Maybe Int64)
+    , _aboQuotaBytesUsed          :: !(Maybe (JSONText Int64))
     , _aboAdditionalRoleInfo      :: !(Maybe [AboutAdditionalRoleInfoItem])
     , _aboFolderColorPalette      :: !(Maybe [Text])
     , _aboPermissionId            :: !(Maybe Text)
-    , _aboQuotaBytesUsedAggregate :: !(Maybe Int64)
+    , _aboQuotaBytesUsedAggregate :: !(Maybe (JSONText Int64))
     , _aboQuotaBytesByService     :: !(Maybe [AboutQuotaBytesByServiceItem])
-    , _aboLargestChangeId         :: !(Maybe Int64)
+    , _aboLargestChangeId         :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'About' with the minimum fields required to make a request.
@@ -2303,6 +2317,7 @@ aboRemainingChangeIds :: Lens' About (Maybe Int64)
 aboRemainingChangeIds
   = lens _aboRemainingChangeIds
       (\ s a -> s{_aboRemainingChangeIds = a})
+      . mapping _Coerce
 
 -- | The user\'s language or locale code, as defined by BCP 47, with some
 -- extensions from Unicode\'s LDML format
@@ -2340,6 +2355,7 @@ aboQuotaBytesUsedInTrash :: Lens' About (Maybe Int64)
 aboQuotaBytesUsedInTrash
   = lens _aboQuotaBytesUsedInTrash
       (\ s a -> s{_aboQuotaBytesUsedInTrash = a})
+      . mapping _Coerce
 
 -- | The type of the user\'s storage quota. Possible values are: - LIMITED -
 -- UNLIMITED
@@ -2388,6 +2404,7 @@ aboQuotaBytesTotal :: Lens' About (Maybe Int64)
 aboQuotaBytesTotal
   = lens _aboQuotaBytesTotal
       (\ s a -> s{_aboQuotaBytesTotal = a})
+      . mapping _Coerce
 
 -- | The id of the root folder.
 aboRootFolderId :: Lens' About (Maybe Text)
@@ -2400,6 +2417,7 @@ aboQuotaBytesUsed :: Lens' About (Maybe Int64)
 aboQuotaBytesUsed
   = lens _aboQuotaBytesUsed
       (\ s a -> s{_aboQuotaBytesUsed = a})
+      . mapping _Coerce
 
 -- | Information about supported additional roles per file type. The most
 -- specific type takes precedence.
@@ -2429,6 +2447,7 @@ aboQuotaBytesUsedAggregate :: Lens' About (Maybe Int64)
 aboQuotaBytesUsedAggregate
   = lens _aboQuotaBytesUsedAggregate
       (\ s a -> s{_aboQuotaBytesUsedAggregate = a})
+      . mapping _Coerce
 
 -- | The amount of storage quota used by different Google services.
 aboQuotaBytesByService :: Lens' About [AboutQuotaBytesByServiceItem]
@@ -2443,6 +2462,7 @@ aboLargestChangeId :: Lens' About (Maybe Int64)
 aboLargestChangeId
   = lens _aboLargestChangeId
       (\ s a -> s{_aboLargestChangeId = a})
+      . mapping _Coerce
 
 instance FromJSON About where
         parseJSON
@@ -2512,9 +2532,9 @@ instance ToJSON About where
 --
 -- /See:/ 'fileImageMediaMetadataLocation' smart constructor.
 data FileImageMediaMetadataLocation = FileImageMediaMetadataLocation
-    { _fimmlLatitude  :: !(Maybe Double)
-    , _fimmlAltitude  :: !(Maybe Double)
-    , _fimmlLongitude :: !(Maybe Double)
+    { _fimmlLatitude  :: !(Maybe (JSONText Double))
+    , _fimmlAltitude  :: !(Maybe (JSONText Double))
+    , _fimmlLongitude :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileImageMediaMetadataLocation' with the minimum fields required to make a request.
@@ -2540,18 +2560,21 @@ fimmlLatitude :: Lens' FileImageMediaMetadataLocation (Maybe Double)
 fimmlLatitude
   = lens _fimmlLatitude
       (\ s a -> s{_fimmlLatitude = a})
+      . mapping _Coerce
 
 -- | The altitude stored in the image.
 fimmlAltitude :: Lens' FileImageMediaMetadataLocation (Maybe Double)
 fimmlAltitude
   = lens _fimmlAltitude
       (\ s a -> s{_fimmlAltitude = a})
+      . mapping _Coerce
 
 -- | The longitude stored in the image.
 fimmlLongitude :: Lens' FileImageMediaMetadataLocation (Maybe Double)
 fimmlLongitude
   = lens _fimmlLongitude
       (\ s a -> s{_fimmlLongitude = a})
+      . mapping _Coerce
 
 instance FromJSON FileImageMediaMetadataLocation
          where
@@ -2624,23 +2647,23 @@ instance ToJSON AboutImportFormatsItem where
 --
 -- /See:/ 'fileImageMediaMetadata' smart constructor.
 data FileImageMediaMetadata = FileImageMediaMetadata
-    { _fimmRotation         :: !(Maybe Int32)
-    , _fimmHeight           :: !(Maybe Int32)
-    , _fimmSubjectDistance  :: !(Maybe Int32)
-    , _fimmMaxApertureValue :: !(Maybe Float)
-    , _fimmIsoSpeed         :: !(Maybe Int32)
+    { _fimmRotation         :: !(Maybe (JSONText Int32))
+    , _fimmHeight           :: !(Maybe (JSONText Int32))
+    , _fimmSubjectDistance  :: !(Maybe (JSONText Int32))
+    , _fimmMaxApertureValue :: !(Maybe (JSONText Float))
+    , _fimmIsoSpeed         :: !(Maybe (JSONText Int32))
     , _fimmLocation         :: !(Maybe FileImageMediaMetadataLocation)
-    , _fimmAperture         :: !(Maybe Float)
-    , _fimmFocalLength      :: !(Maybe Float)
+    , _fimmAperture         :: !(Maybe (JSONText Float))
+    , _fimmFocalLength      :: !(Maybe (JSONText Float))
     , _fimmCameraMake       :: !(Maybe Text)
-    , _fimmWidth            :: !(Maybe Int32)
-    , _fimmExposureTime     :: !(Maybe Float)
+    , _fimmWidth            :: !(Maybe (JSONText Int32))
+    , _fimmExposureTime     :: !(Maybe (JSONText Float))
     , _fimmCameraModel      :: !(Maybe Text)
     , _fimmWhiteBalance     :: !(Maybe Text)
     , _fimmDate             :: !(Maybe Text)
     , _fimmLens             :: !(Maybe Text)
     , _fimmFlashUsed        :: !(Maybe Bool)
-    , _fimmExposureBias     :: !(Maybe Float)
+    , _fimmExposureBias     :: !(Maybe (JSONText Float))
     , _fimmMeteringMode     :: !(Maybe Text)
     , _fimmExposureMode     :: !(Maybe Text)
     , _fimmSensor           :: !(Maybe Text)
@@ -2724,17 +2747,20 @@ fileImageMediaMetadata =
 fimmRotation :: Lens' FileImageMediaMetadata (Maybe Int32)
 fimmRotation
   = lens _fimmRotation (\ s a -> s{_fimmRotation = a})
+      . mapping _Coerce
 
 -- | The height of the image in pixels.
 fimmHeight :: Lens' FileImageMediaMetadata (Maybe Int32)
 fimmHeight
-  = lens _fimmHeight (\ s a -> s{_fimmHeight = a})
+  = lens _fimmHeight (\ s a -> s{_fimmHeight = a}) .
+      mapping _Coerce
 
 -- | The distance to the subject of the photo, in meters.
 fimmSubjectDistance :: Lens' FileImageMediaMetadata (Maybe Int32)
 fimmSubjectDistance
   = lens _fimmSubjectDistance
       (\ s a -> s{_fimmSubjectDistance = a})
+      . mapping _Coerce
 
 -- | The smallest f-number of the lens at the focal length used to create the
 -- photo (APEX value).
@@ -2742,11 +2768,13 @@ fimmMaxApertureValue :: Lens' FileImageMediaMetadata (Maybe Float)
 fimmMaxApertureValue
   = lens _fimmMaxApertureValue
       (\ s a -> s{_fimmMaxApertureValue = a})
+      . mapping _Coerce
 
 -- | The ISO speed used to create the photo.
 fimmIsoSpeed :: Lens' FileImageMediaMetadata (Maybe Int32)
 fimmIsoSpeed
   = lens _fimmIsoSpeed (\ s a -> s{_fimmIsoSpeed = a})
+      . mapping _Coerce
 
 -- | Geographic location information stored in the image.
 fimmLocation :: Lens' FileImageMediaMetadata (Maybe FileImageMediaMetadataLocation)
@@ -2757,12 +2785,14 @@ fimmLocation
 fimmAperture :: Lens' FileImageMediaMetadata (Maybe Float)
 fimmAperture
   = lens _fimmAperture (\ s a -> s{_fimmAperture = a})
+      . mapping _Coerce
 
 -- | The focal length used to create the photo, in millimeters.
 fimmFocalLength :: Lens' FileImageMediaMetadata (Maybe Float)
 fimmFocalLength
   = lens _fimmFocalLength
       (\ s a -> s{_fimmFocalLength = a})
+      . mapping _Coerce
 
 -- | The make of the camera used to create the photo.
 fimmCameraMake :: Lens' FileImageMediaMetadata (Maybe Text)
@@ -2773,13 +2803,15 @@ fimmCameraMake
 -- | The width of the image in pixels.
 fimmWidth :: Lens' FileImageMediaMetadata (Maybe Int32)
 fimmWidth
-  = lens _fimmWidth (\ s a -> s{_fimmWidth = a})
+  = lens _fimmWidth (\ s a -> s{_fimmWidth = a}) .
+      mapping _Coerce
 
 -- | The length of the exposure, in seconds.
 fimmExposureTime :: Lens' FileImageMediaMetadata (Maybe Float)
 fimmExposureTime
   = lens _fimmExposureTime
       (\ s a -> s{_fimmExposureTime = a})
+      . mapping _Coerce
 
 -- | The model of the camera used to create the photo.
 fimmCameraModel :: Lens' FileImageMediaMetadata (Maybe Text)
@@ -2812,6 +2844,7 @@ fimmExposureBias :: Lens' FileImageMediaMetadata (Maybe Float)
 fimmExposureBias
   = lens _fimmExposureBias
       (\ s a -> s{_fimmExposureBias = a})
+      . mapping _Coerce
 
 -- | The metering mode used to create the photo.
 fimmMeteringMode :: Lens' FileImageMediaMetadata (Maybe Text)
@@ -3180,7 +3213,7 @@ data Revision = Revision
     , _rPinned                 :: !(Maybe Bool)
     , _rPublished              :: !(Maybe Bool)
     , _rLastModifyingUser      :: !(Maybe User)
-    , _rFileSize               :: !(Maybe Int64)
+    , _rFileSize               :: !(Maybe (JSONText Int64))
     , _rPublishAuto            :: !(Maybe Bool)
     , _rMD5Checksum            :: !(Maybe Text)
     , _rMimeType               :: !(Maybe Text)
@@ -3301,7 +3334,8 @@ rLastModifyingUser
 -- with content stored in Drive.
 rFileSize :: Lens' Revision (Maybe Int64)
 rFileSize
-  = lens _rFileSize (\ s a -> s{_rFileSize = a})
+  = lens _rFileSize (\ s a -> s{_rFileSize = a}) .
+      mapping _Coerce
 
 -- | Whether subsequent revisions will be automatically republished. This is
 -- only populated and can only be modified for Google Docs.
@@ -3664,7 +3698,7 @@ data File = File
     , _fLastModifyingUser     :: !(Maybe User)
     , _fIconLink              :: !(Maybe Text)
     , _fEmbedLink             :: !(Maybe Text)
-    , _fFileSize              :: !(Maybe Int64)
+    , _fFileSize              :: !(Maybe (JSONText Int64))
     , _fAppDataContents       :: !(Maybe Bool)
     , _fImageMediaMetadata    :: !(Maybe FileImageMediaMetadata)
     , _fExplicitlyTrashed     :: !(Maybe Bool)
@@ -3685,7 +3719,7 @@ data File = File
     , _fParents               :: !(Maybe [ParentReference])
     , _fSharedWithMeDate      :: !(Maybe DateTime')
     , _fSpaces                :: !(Maybe [Text])
-    , _fVersion               :: !(Maybe Int64)
+    , _fVersion               :: !(Maybe (JSONText Int64))
     , _fUserPermission        :: !(Maybe Permission)
     , _fWritersCanShare       :: !(Maybe Bool)
     , _fDefaultOpenWithLink   :: !(Maybe Text)
@@ -3693,7 +3727,7 @@ data File = File
     , _fLabels                :: !(Maybe FileLabels)
     , _fModifiedDate          :: !(Maybe DateTime')
     , _fPermissions           :: !(Maybe [Permission])
-    , _fQuotaBytesUsed        :: !(Maybe Int64)
+    , _fQuotaBytesUsed        :: !(Maybe (JSONText Int64))
     , _fTitle                 :: !(Maybe Text)
     , _fAlternateLink         :: !(Maybe Text)
     , _fVideoMediaMetadata    :: !(Maybe FileVideoMediaMetadata)
@@ -3998,7 +4032,8 @@ fEmbedLink
 -- shortcut files.
 fFileSize :: Lens' File (Maybe Int64)
 fFileSize
-  = lens _fFileSize (\ s a -> s{_fFileSize = a})
+  = lens _fFileSize (\ s a -> s{_fFileSize = a}) .
+      mapping _Coerce
 
 -- | Whether this file is in the Application Data folder.
 fAppDataContents :: Lens' File (Maybe Bool)
@@ -4136,7 +4171,9 @@ fSpaces
 -- every change made to the file on the server, even those not visible to
 -- the requesting user.
 fVersion :: Lens' File (Maybe Int64)
-fVersion = lens _fVersion (\ s a -> s{_fVersion = a})
+fVersion
+  = lens _fVersion (\ s a -> s{_fVersion = a}) .
+      mapping _Coerce
 
 -- | The permissions for the authenticated user on this file.
 fUserPermission :: Lens' File (Maybe Permission)
@@ -4186,6 +4223,7 @@ fQuotaBytesUsed :: Lens' File (Maybe Int64)
 fQuotaBytesUsed
   = lens _fQuotaBytesUsed
       (\ s a -> s{_fQuotaBytesUsed = a})
+      . mapping _Coerce
 
 -- | The title of this file.
 fTitle :: Lens' File (Maybe Text)

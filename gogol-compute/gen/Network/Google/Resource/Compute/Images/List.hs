@@ -59,7 +59,7 @@ type ImagesListResource =
                "images" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ImageList
 
 -- | Retrieves the list of private images available to the specified project.
@@ -75,7 +75,7 @@ data ImagesList = ImagesList
     { _illProject    :: !Text
     , _illFilter     :: !(Maybe Text)
     , _illPageToken  :: !(Maybe Text)
-    , _illMaxResults :: !Word32
+    , _illMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesList' with the minimum fields required to make a request.
@@ -132,6 +132,7 @@ illMaxResults :: Lens' ImagesList Word32
 illMaxResults
   = lens _illMaxResults
       (\ s a -> s{_illMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest ImagesList where
         type Rs ImagesList = ImageList

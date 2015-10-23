@@ -52,9 +52,9 @@ type TargetableRemarketingListsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "targetableRemarketingLists" :>
-               QueryParam "advertiserId" Int64 :>
+               QueryParam "advertiserId" (JSONText Int64) :>
                  QueryParam "sortOrder"
                    TargetableRemarketingListsListSortOrder
                    :>
@@ -64,7 +64,7 @@ type TargetableRemarketingListsListResource =
                          QueryParam "sortField"
                            TargetableRemarketingListsListSortField
                            :>
-                           QueryParam "maxResults" Int32 :>
+                           QueryParam "maxResults" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON]
                                  TargetableRemarketingListsListResponse
@@ -73,14 +73,14 @@ type TargetableRemarketingListsListResource =
 --
 -- /See:/ 'targetableRemarketingListsList' smart constructor.
 data TargetableRemarketingListsList = TargetableRemarketingListsList
-    { _trllAdvertiserId :: !Int64
-    , _trllProFileId    :: !Int64
+    { _trllAdvertiserId :: !(JSONText Int64)
+    , _trllProFileId    :: !(JSONText Int64)
     , _trllSortOrder    :: !(Maybe TargetableRemarketingListsListSortOrder)
     , _trllActive       :: !(Maybe Bool)
     , _trllName         :: !(Maybe Text)
     , _trllPageToken    :: !(Maybe Text)
     , _trllSortField    :: !(Maybe TargetableRemarketingListsListSortField)
-    , _trllMaxResults   :: !(Maybe Int32)
+    , _trllMaxResults   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsList' with the minimum fields required to make a request.
@@ -124,12 +124,14 @@ trllAdvertiserId :: Lens' TargetableRemarketingListsList Int64
 trllAdvertiserId
   = lens _trllAdvertiserId
       (\ s a -> s{_trllAdvertiserId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 trllProFileId :: Lens' TargetableRemarketingListsList Int64
 trllProFileId
   = lens _trllProFileId
       (\ s a -> s{_trllProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 trllSortOrder :: Lens' TargetableRemarketingListsList (Maybe TargetableRemarketingListsListSortOrder)
@@ -170,6 +172,7 @@ trllMaxResults :: Lens' TargetableRemarketingListsList (Maybe Int32)
 trllMaxResults
   = lens _trllMaxResults
       (\ s a -> s{_trllMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest TargetableRemarketingListsList
          where

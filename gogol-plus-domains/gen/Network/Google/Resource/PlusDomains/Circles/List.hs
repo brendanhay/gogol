@@ -50,7 +50,7 @@ type CirclesListResource =
            Capture "userId" Text :>
              "circles" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] CircleFeed
 
 -- | List all of the circles for a user.
@@ -59,7 +59,7 @@ type CirclesListResource =
 data CirclesList = CirclesList
     { _cUserId     :: !Text
     , _cPageToken  :: !(Maybe Text)
-    , _cMaxResults :: !Word32
+    , _cMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesList' with the minimum fields required to make a request.
@@ -98,7 +98,8 @@ cPageToken
 -- than the specified maxResults.
 cMaxResults :: Lens' CirclesList Word32
 cMaxResults
-  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
+  = lens _cMaxResults (\ s a -> s{_cMaxResults = a}) .
+      _Coerce
 
 instance GoogleRequest CirclesList where
         type Rs CirclesList = CircleFeed

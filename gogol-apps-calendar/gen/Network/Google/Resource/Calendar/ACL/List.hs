@@ -54,7 +54,7 @@ type ACLListResource =
                QueryParam "syncToken" Text :>
                  QueryParam "showDeleted" Bool :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ACL
 
 -- | Returns the rules in the access control list for the calendar.
@@ -65,7 +65,7 @@ data ACLList = ACLList
     , _alCalendarId  :: !Text
     , _alShowDeleted :: !(Maybe Bool)
     , _alPageToken   :: !(Maybe Text)
-    , _alMaxResults  :: !(Maybe Int32)
+    , _alMaxResults  :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLList' with the minimum fields required to make a request.
@@ -132,6 +132,7 @@ alPageToken
 alMaxResults :: Lens' ACLList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ACLList where
         type Rs ACLList = ACL

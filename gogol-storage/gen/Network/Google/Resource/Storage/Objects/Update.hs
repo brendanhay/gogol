@@ -57,14 +57,17 @@ type ObjectsUpdateResource =
            Capture "bucket" Text :>
              "o" :>
                Capture "object" Text :>
-                 QueryParam "ifMetagenerationMatch" Int64 :>
-                   QueryParam "ifGenerationNotMatch" Int64 :>
-                     QueryParam "ifGenerationMatch" Int64 :>
+                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                   :>
+                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
                        QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
                          :>
-                         QueryParam "ifMetagenerationNotMatch" Int64 :>
+                         QueryParam "ifMetagenerationNotMatch"
+                           (JSONText Int64)
+                           :>
                            QueryParam "projection" ObjectsUpdateProjection :>
-                             QueryParam "generation" Int64 :>
+                             QueryParam "generation" (JSONText Int64) :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Object :> Put '[JSON] Object
        :<|>
@@ -74,14 +77,17 @@ type ObjectsUpdateResource =
              Capture "bucket" Text :>
                "o" :>
                  Capture "object" Text :>
-                   QueryParam "ifMetagenerationMatch" Int64 :>
-                     QueryParam "ifGenerationNotMatch" Int64 :>
-                       QueryParam "ifGenerationMatch" Int64 :>
+                   QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                     :>
+                     QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
+                       QueryParam "ifGenerationMatch" (JSONText Int64) :>
                          QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
                            :>
-                           QueryParam "ifMetagenerationNotMatch" Int64 :>
+                           QueryParam "ifMetagenerationNotMatch"
+                             (JSONText Int64)
+                             :>
                              QueryParam "projection" ObjectsUpdateProjection :>
-                               QueryParam "generation" Int64 :>
+                               QueryParam "generation" (JSONText Int64) :>
                                  QueryParam "alt" AltMedia :>
                                    Get '[OctetStream] Stream
 
@@ -89,16 +95,16 @@ type ObjectsUpdateResource =
 --
 -- /See:/ 'objectsUpdate' smart constructor.
 data ObjectsUpdate = ObjectsUpdate
-    { _ouIfMetagenerationMatch    :: !(Maybe Int64)
-    , _ouIfGenerationNotMatch     :: !(Maybe Int64)
-    , _ouIfGenerationMatch        :: !(Maybe Int64)
+    { _ouIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    , _ouIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
+    , _ouIfGenerationMatch        :: !(Maybe (JSONText Int64))
     , _ouPredefinedACL            :: !(Maybe ObjectsUpdatePredefinedACL)
     , _ouBucket                   :: !Text
     , _ouPayload                  :: !Object
-    , _ouIfMetagenerationNotMatch :: !(Maybe Int64)
+    , _ouIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
     , _ouObject                   :: !Text
     , _ouProjection               :: !(Maybe ObjectsUpdateProjection)
-    , _ouGeneration               :: !(Maybe Int64)
+    , _ouGeneration               :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsUpdate' with the minimum fields required to make a request.
@@ -149,6 +155,7 @@ ouIfMetagenerationMatch :: Lens' ObjectsUpdate (Maybe Int64)
 ouIfMetagenerationMatch
   = lens _ouIfMetagenerationMatch
       (\ s a -> s{_ouIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
@@ -156,6 +163,7 @@ ouIfGenerationNotMatch :: Lens' ObjectsUpdate (Maybe Int64)
 ouIfGenerationNotMatch
   = lens _ouIfGenerationNotMatch
       (\ s a -> s{_ouIfGenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
@@ -163,6 +171,7 @@ ouIfGenerationMatch :: Lens' ObjectsUpdate (Maybe Int64)
 ouIfGenerationMatch
   = lens _ouIfGenerationMatch
       (\ s a -> s{_ouIfGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Apply a predefined set of access controls to this object.
 ouPredefinedACL :: Lens' ObjectsUpdate (Maybe ObjectsUpdatePredefinedACL)
@@ -185,6 +194,7 @@ ouIfMetagenerationNotMatch :: Lens' ObjectsUpdate (Maybe Int64)
 ouIfMetagenerationNotMatch
   = lens _ouIfMetagenerationNotMatch
       (\ s a -> s{_ouIfMetagenerationNotMatch = a})
+      . mapping _Coerce
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
@@ -201,6 +211,7 @@ ouProjection
 ouGeneration :: Lens' ObjectsUpdate (Maybe Int64)
 ouGeneration
   = lens _ouGeneration (\ s a -> s{_ouGeneration = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectsUpdate where
         type Rs ObjectsUpdate = Object

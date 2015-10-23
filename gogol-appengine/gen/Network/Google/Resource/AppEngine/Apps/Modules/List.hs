@@ -62,7 +62,7 @@ type AppsModulesListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" Int32 :>
+                           QueryParam "pageSize" (JSONText Int32) :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListModulesResponse
@@ -79,7 +79,7 @@ data AppsModulesList = AppsModulesList
     , _amlBearerToken    :: !(Maybe Text)
     , _amlAppsId         :: !Text
     , _amlPageToken      :: !(Maybe Text)
-    , _amlPageSize       :: !(Maybe Int32)
+    , _amlPageSize       :: !(Maybe (JSONText Int32))
     , _amlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -169,7 +169,8 @@ amlPageToken
 -- | Maximum results to return per page.
 amlPageSize :: Lens' AppsModulesList (Maybe Int32)
 amlPageSize
-  = lens _amlPageSize (\ s a -> s{_amlPageSize = a})
+  = lens _amlPageSize (\ s a -> s{_amlPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 amlCallback :: Lens' AppsModulesList (Maybe Text)

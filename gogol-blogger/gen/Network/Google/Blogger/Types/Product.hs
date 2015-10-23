@@ -299,9 +299,9 @@ instance ToJSON Pageviews where
 -- /See:/ 'postLocation' smart constructor.
 data PostLocation = PostLocation
     { _plSpan :: !(Maybe Text)
-    , _plLat  :: !(Maybe Double)
+    , _plLat  :: !(Maybe (JSONText Double))
     , _plName :: !(Maybe Text)
-    , _plLng  :: !(Maybe Double)
+    , _plLng  :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostLocation' with the minimum fields required to make a request.
@@ -331,7 +331,9 @@ plSpan = lens _plSpan (\ s a -> s{_plSpan = a})
 
 -- | Location\'s latitude.
 plLat :: Lens' PostLocation (Maybe Double)
-plLat = lens _plLat (\ s a -> s{_plLat = a})
+plLat
+  = lens _plLat (\ s a -> s{_plLat = a}) .
+      mapping _Coerce
 
 -- | Location name.
 plName :: Lens' PostLocation (Maybe Text)
@@ -339,7 +341,9 @@ plName = lens _plName (\ s a -> s{_plName = a})
 
 -- | Location\'s longitude.
 plLng :: Lens' PostLocation (Maybe Double)
-plLng = lens _plLng (\ s a -> s{_plLng = a})
+plLng
+  = lens _plLng (\ s a -> s{_plLng = a}) .
+      mapping _Coerce
 
 instance FromJSON PostLocation where
         parseJSON
@@ -360,7 +364,7 @@ instance ToJSON PostLocation where
 --
 -- /See:/ 'blogPosts' smart constructor.
 data BlogPosts = BlogPosts
-    { _bpTotalItems :: !(Maybe Int32)
+    { _bpTotalItems :: !(Maybe (JSONText Int32))
     , _bpItems      :: !(Maybe [Post'])
     , _bpSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -387,6 +391,7 @@ blogPosts =
 bpTotalItems :: Lens' BlogPosts (Maybe Int32)
 bpTotalItems
   = lens _bpTotalItems (\ s a -> s{_bpTotalItems = a})
+      . mapping _Coerce
 
 -- | The List of Posts for this Blog.
 bpItems :: Lens' BlogPosts [Post']
@@ -1086,7 +1091,7 @@ instance ToJSON Blog where
 --
 -- /See:/ 'blogPages' smart constructor.
 data BlogPages = BlogPages
-    { _bpsTotalItems :: !(Maybe Int32)
+    { _bpsTotalItems :: !(Maybe (JSONText Int32))
     , _bpsSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1110,6 +1115,7 @@ bpsTotalItems :: Lens' BlogPages (Maybe Int32)
 bpsTotalItems
   = lens _bpsTotalItems
       (\ s a -> s{_bpsTotalItems = a})
+      . mapping _Coerce
 
 -- | The URL of the container for pages in this blog.
 bpsSelfLink :: Lens' BlogPages (Maybe Text)
@@ -1475,7 +1481,7 @@ instance ToJSON UserBlogs where
 --
 -- /See:/ 'postReplies' smart constructor.
 data PostReplies = PostReplies
-    { _prTotalItems :: !(Maybe Int64)
+    { _prTotalItems :: !(Maybe (JSONText Int64))
     , _prItems      :: !(Maybe [Comment])
     , _prSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1502,6 +1508,7 @@ postReplies =
 prTotalItems :: Lens' PostReplies (Maybe Int64)
 prTotalItems
   = lens _prTotalItems (\ s a -> s{_prTotalItems = a})
+      . mapping _Coerce
 
 -- | The List of Comments for this Post.
 prItems :: Lens' PostReplies [Comment]
@@ -1772,7 +1779,7 @@ instance ToJSON PostPerUserInfo where
 -- /See:/ 'pageviewsCountsItem' smart constructor.
 data PageviewsCountsItem = PageviewsCountsItem
     { _pciTimeRange :: !(Maybe Text)
-    , _pciCount     :: !(Maybe Int64)
+    , _pciCount     :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageviewsCountsItem' with the minimum fields required to make a request.
@@ -1797,7 +1804,9 @@ pciTimeRange
 
 -- | Count of page views for the given time range
 pciCount :: Lens' PageviewsCountsItem (Maybe Int64)
-pciCount = lens _pciCount (\ s a -> s{_pciCount = a})
+pciCount
+  = lens _pciCount (\ s a -> s{_pciCount = a}) .
+      mapping _Coerce
 
 instance FromJSON PageviewsCountsItem where
         parseJSON

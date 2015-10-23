@@ -49,11 +49,11 @@ type TurnBasedMatchesListResource =
      "games" :>
        "v1" :>
          "turnbasedmatches" :>
-           QueryParam "maxCompletedMatches" Int32 :>
+           QueryParam "maxCompletedMatches" (JSONText Int32) :>
              QueryParam "includeMatchData" Bool :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
+                   QueryParam "maxResults" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] TurnBasedMatchList
 
@@ -61,11 +61,11 @@ type TurnBasedMatchesListResource =
 --
 -- /See:/ 'turnBasedMatchesList' smart constructor.
 data TurnBasedMatchesList = TurnBasedMatchesList
-    { _tMaxCompletedMatches :: !(Maybe Int32)
+    { _tMaxCompletedMatches :: !(Maybe (JSONText Int32))
     , _tIncludeMatchData    :: !(Maybe Bool)
     , _tLanguage            :: !(Maybe Text)
     , _tPageToken           :: !(Maybe Text)
-    , _tMaxResults          :: !(Maybe Int32)
+    , _tMaxResults          :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesList' with the minimum fields required to make a request.
@@ -99,6 +99,7 @@ tMaxCompletedMatches :: Lens' TurnBasedMatchesList (Maybe Int32)
 tMaxCompletedMatches
   = lens _tMaxCompletedMatches
       (\ s a -> s{_tMaxCompletedMatches = a})
+      . mapping _Coerce
 
 -- | True if match data should be returned in the response. Note that not all
 -- data will necessarily be returned if include_match_data is true; the
@@ -125,7 +126,8 @@ tPageToken
 -- less than the specified maxResults.
 tMaxResults :: Lens' TurnBasedMatchesList (Maybe Int32)
 tMaxResults
-  = lens _tMaxResults (\ s a -> s{_tMaxResults = a})
+  = lens _tMaxResults (\ s a -> s{_tMaxResults = a}) .
+      mapping _Coerce
 
 instance GoogleRequest TurnBasedMatchesList where
         type Rs TurnBasedMatchesList = TurnBasedMatchList

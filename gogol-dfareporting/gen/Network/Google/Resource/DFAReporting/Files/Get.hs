@@ -46,17 +46,17 @@ type FilesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "reports" :>
-           Capture "reportId" Int64 :>
+           Capture "reportId" (JSONText Int64) :>
              "files" :>
-               Capture "fileId" Int64 :>
+               Capture "fileId" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
          "v2.2" :>
            "reports" :>
-             Capture "reportId" Int64 :>
+             Capture "reportId" (JSONText Int64) :>
                "files" :>
-                 Capture "fileId" Int64 :>
+                 Capture "fileId" (JSONText Int64) :>
                    QueryParam "alt" AltMedia :>
                      Get '[OctetStream] Stream
 
@@ -64,8 +64,8 @@ type FilesGetResource =
 --
 -- /See:/ 'filesGet' smart constructor.
 data FilesGet = FilesGet
-    { _fgReportId :: !Int64
-    , _fgFileId   :: !Int64
+    { _fgReportId :: !(JSONText Int64)
+    , _fgFileId   :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGet' with the minimum fields required to make a request.
@@ -88,11 +88,14 @@ filesGet pFgReportId_ pFgFileId_ =
 -- | The ID of the report.
 fgReportId :: Lens' FilesGet Int64
 fgReportId
-  = lens _fgReportId (\ s a -> s{_fgReportId = a})
+  = lens _fgReportId (\ s a -> s{_fgReportId = a}) .
+      _Coerce
 
 -- | The ID of the report file.
 fgFileId :: Lens' FilesGet Int64
-fgFileId = lens _fgFileId (\ s a -> s{_fgFileId = a})
+fgFileId
+  = lens _fgFileId (\ s a -> s{_fgFileId = a}) .
+      _Coerce
 
 instance GoogleRequest FilesGet where
         type Rs FilesGet = File

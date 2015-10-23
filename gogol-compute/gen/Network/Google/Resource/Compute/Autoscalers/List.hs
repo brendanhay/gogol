@@ -56,7 +56,7 @@ type AutoscalersListResource =
                  "autoscalers" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AutoscalerList
 
@@ -69,7 +69,7 @@ data AutoscalersList = AutoscalersList
     , _aZone       :: !Text
     , _aFilter     :: !(Maybe Text)
     , _aPageToken  :: !(Maybe Text)
-    , _aMaxResults :: !Word32
+    , _aMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersList' with the minimum fields required to make a request.
@@ -130,7 +130,8 @@ aPageToken
 -- | Maximum count of results to be returned.
 aMaxResults :: Lens' AutoscalersList Word32
 aMaxResults
-  = lens _aMaxResults (\ s a -> s{_aMaxResults = a})
+  = lens _aMaxResults (\ s a -> s{_aMaxResults = a}) .
+      _Coerce
 
 instance GoogleRequest AutoscalersList where
         type Rs AutoscalersList = AutoscalerList

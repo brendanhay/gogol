@@ -52,7 +52,7 @@ type ZonesListResource =
              "zones" :>
                QueryParam "filter" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
 
 -- | Retrieves the list of zone resources available to the specified project.
@@ -62,7 +62,7 @@ data ZonesList = ZonesList
     { _zlProject    :: !Text
     , _zlFilter     :: !(Maybe Text)
     , _zlPageToken  :: !(Maybe Text)
-    , _zlMaxResults :: !Word32
+    , _zlMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZonesList' with the minimum fields required to make a request.
@@ -117,6 +117,7 @@ zlPageToken
 zlMaxResults :: Lens' ZonesList Word32
 zlMaxResults
   = lens _zlMaxResults (\ s a -> s{_zlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest ZonesList where
         type Rs ZonesList = ZoneList

@@ -68,7 +68,7 @@ type AppsOperationsListResource =
                        QueryParam "bearer_token" Text :>
                          QueryParam "filter" Text :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" Int32 :>
+                             QueryParam "pageSize" (JSONText Int32) :>
                                QueryParam "callback" Text :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListOperationsResponse
@@ -90,7 +90,7 @@ data AppsOperationsList = AppsOperationsList
     , _aolAppsId         :: !Text
     , _aolFilter         :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
-    , _aolPageSize       :: !(Maybe Int32)
+    , _aolPageSize       :: !(Maybe (JSONText Int32))
     , _aolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -187,7 +187,8 @@ aolPageToken
 -- | The standard list page size.
 aolPageSize :: Lens' AppsOperationsList (Maybe Int32)
 aolPageSize
-  = lens _aolPageSize (\ s a -> s{_aolPageSize = a})
+  = lens _aolPageSize (\ s a -> s{_aolPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 aolCallback :: Lens' AppsOperationsList (Maybe Text)

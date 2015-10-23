@@ -50,8 +50,8 @@ type ManagementWebPropertiesListResource =
            "accounts" :>
              Capture "accountId" Text :>
                "webproperties" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
+                 QueryParam "start-index" (JSONText Int32) :>
+                   QueryParam "max-results" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] WebProperties
 
 -- | Lists web properties to which the user has access.
@@ -59,8 +59,8 @@ type ManagementWebPropertiesListResource =
 -- /See:/ 'managementWebPropertiesList' smart constructor.
 data ManagementWebPropertiesList = ManagementWebPropertiesList
     { _mwplAccountId  :: !Text
-    , _mwplStartIndex :: !(Maybe Int32)
-    , _mwplMaxResults :: !(Maybe Int32)
+    , _mwplStartIndex :: !(Maybe (JSONText Int32))
+    , _mwplMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesList' with the minimum fields required to make a request.
@@ -96,12 +96,14 @@ mwplStartIndex :: Lens' ManagementWebPropertiesList (Maybe Int32)
 mwplStartIndex
   = lens _mwplStartIndex
       (\ s a -> s{_mwplStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of web properties to include in this response.
 mwplMaxResults :: Lens' ManagementWebPropertiesList (Maybe Int32)
 mwplMaxResults
   = lens _mwplMaxResults
       (\ s a -> s{_mwplMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementWebPropertiesList
          where

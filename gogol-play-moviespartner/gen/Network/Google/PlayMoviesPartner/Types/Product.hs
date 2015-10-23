@@ -671,7 +671,7 @@ data Order = Order
     , _oEarliestAvailStartTime :: !(Maybe Text)
     , _oStudioName             :: !(Maybe Text)
     , _oReceivedTime           :: !(Maybe Text)
-    , _oPriority               :: !(Maybe Double)
+    , _oPriority               :: !(Maybe (JSONText Double))
     , _oChannelId              :: !(Maybe Text)
     , _oCustomId               :: !(Maybe Text)
     , _oApprovedTime           :: !(Maybe Text)
@@ -803,7 +803,8 @@ oReceivedTime
 -- the priority. Example: 90
 oPriority :: Lens' Order (Maybe Double)
 oPriority
-  = lens _oPriority (\ s a -> s{_oPriority = a})
+  = lens _oPriority (\ s a -> s{_oPriority = a}) .
+      mapping _Coerce
 
 -- | YouTube Channel ID that should be used to fulfill the Order. Example:
 -- \"UCRG64darCZhb\".
@@ -973,7 +974,7 @@ data ExperienceLocale = ExperienceLocale
     , _elInventoryId            :: !(Maybe Text)
     , _elEarliestAvailStartTime :: !(Maybe Text)
     , _elStudioName             :: !(Maybe Text)
-    , _elPriority               :: !(Maybe Double)
+    , _elPriority               :: !(Maybe (JSONText Double))
     , _elCustomIds              :: !(Maybe [Text])
     , _elCreatedTime            :: !(Maybe Text)
     , _elCountry                :: !(Maybe Text)
@@ -1109,7 +1110,8 @@ elStudioName
 -- the higher the priority. Example: 90
 elPriority :: Lens' ExperienceLocale (Maybe Double)
 elPriority
-  = lens _elPriority (\ s a -> s{_elPriority = a})
+  = lens _elPriority (\ s a -> s{_elPriority = a}) .
+      mapping _Coerce
 
 -- | List of custom IDs (defined by the partner) linked to this
 -- ExperienceLocale. Example: \"R86241\"

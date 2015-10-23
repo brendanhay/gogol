@@ -61,7 +61,7 @@ type ReportTypesListResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListReportTypesResponse
@@ -78,7 +78,7 @@ data ReportTypesList = ReportTypesList
     , _rtlOnBehalfOfContentOwner :: !(Maybe Text)
     , _rtlBearerToken            :: !(Maybe Text)
     , _rtlPageToken              :: !(Maybe Text)
-    , _rtlPageSize               :: !(Maybe Int32)
+    , _rtlPageSize               :: !(Maybe (JSONText Int32))
     , _rtlCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -172,7 +172,8 @@ rtlPageToken
 -- requested. If unspecified, server will pick an appropriate default.
 rtlPageSize :: Lens' ReportTypesList (Maybe Int32)
 rtlPageSize
-  = lens _rtlPageSize (\ s a -> s{_rtlPageSize = a})
+  = lens _rtlPageSize (\ s a -> s{_rtlPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 rtlCallback :: Lens' ReportTypesList (Maybe Text)

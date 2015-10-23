@@ -48,9 +48,9 @@ type ContentCategoriesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "contentCategories" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] ContentCategory :>
                      Patch '[JSON] ContentCategory
@@ -60,9 +60,9 @@ type ContentCategoriesPatchResource =
 --
 -- /See:/ 'contentCategoriesPatch' smart constructor.
 data ContentCategoriesPatch = ContentCategoriesPatch
-    { _ccpProFileId :: !Int64
+    { _ccpProFileId :: !(JSONText Int64)
     , _ccpPayload   :: !ContentCategory
-    , _ccpId        :: !Int64
+    , _ccpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesPatch' with the minimum fields required to make a request.
@@ -90,6 +90,7 @@ contentCategoriesPatch pCcpProFileId_ pCcpPayload_ pCcpId_ =
 ccpProFileId :: Lens' ContentCategoriesPatch Int64
 ccpProFileId
   = lens _ccpProFileId (\ s a -> s{_ccpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 ccpPayload :: Lens' ContentCategoriesPatch ContentCategory
@@ -98,7 +99,8 @@ ccpPayload
 
 -- | Content category ID.
 ccpId :: Lens' ContentCategoriesPatch Int64
-ccpId = lens _ccpId (\ s a -> s{_ccpId = a})
+ccpId
+  = lens _ccpId (\ s a -> s{_ccpId = a}) . _Coerce
 
 instance GoogleRequest ContentCategoriesPatch where
         type Rs ContentCategoriesPatch = ContentCategory

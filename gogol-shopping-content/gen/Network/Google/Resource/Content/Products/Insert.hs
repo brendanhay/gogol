@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type ProductsInsertResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "products" :>
              QueryParam "dryRun" Bool :>
                QueryParam "alt" AltJSON :>
@@ -56,7 +56,7 @@ type ProductsInsertResource =
 --
 -- /See:/ 'productsInsert' smart constructor.
 data ProductsInsert = ProductsInsert
-    { _piMerchantId :: !Word64
+    { _piMerchantId :: !(JSONText Word64)
     , _piPayload    :: !Product
     , _piDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,6 +85,7 @@ productsInsert pPiMerchantId_ pPiPayload_ =
 piMerchantId :: Lens' ProductsInsert Word64
 piMerchantId
   = lens _piMerchantId (\ s a -> s{_piMerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 piPayload :: Lens' ProductsInsert Product

@@ -47,8 +47,8 @@ type BudgetGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "billinginfo" :>
-           Capture "accountId" Int64 :>
-             Capture "billingId" Int64 :>
+           Capture "accountId" (JSONText Int64) :>
+             Capture "billingId" (JSONText Int64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Budget
 
 -- | Returns the budget information for the adgroup specified by the
@@ -56,8 +56,8 @@ type BudgetGetResource =
 --
 -- /See:/ 'budgetGet' smart constructor.
 data BudgetGet = BudgetGet
-    { _bgAccountId :: !Int64
-    , _bgBillingId :: !Int64
+    { _bgAccountId :: !(JSONText Int64)
+    , _bgBillingId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetGet' with the minimum fields required to make a request.
@@ -80,12 +80,14 @@ budgetGet pBgAccountId_ pBgBillingId_ =
 -- | The account id to get the budget information for.
 bgAccountId :: Lens' BudgetGet Int64
 bgAccountId
-  = lens _bgAccountId (\ s a -> s{_bgAccountId = a})
+  = lens _bgAccountId (\ s a -> s{_bgAccountId = a}) .
+      _Coerce
 
 -- | The billing id to get the budget information for.
 bgBillingId :: Lens' BudgetGet Int64
 bgBillingId
-  = lens _bgBillingId (\ s a -> s{_bgBillingId = a})
+  = lens _bgBillingId (\ s a -> s{_bgBillingId = a}) .
+      _Coerce
 
 instance GoogleRequest BudgetGet where
         type Rs BudgetGet = Budget

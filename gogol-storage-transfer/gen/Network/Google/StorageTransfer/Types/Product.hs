@@ -25,7 +25,7 @@ import           Network.Google.StorageTransfer.Types.Sum
 --
 -- /See:/ 'errorSummary' smart constructor.
 data ErrorSummary = ErrorSummary
-    { _esErrorCount      :: !(Maybe Int64)
+    { _esErrorCount      :: !(Maybe (JSONText Int64))
     , _esErrorCode       :: !(Maybe Text)
     , _esErrorLogEntries :: !(Maybe [ErrorLogEntry])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -52,6 +52,7 @@ errorSummary =
 esErrorCount :: Lens' ErrorSummary (Maybe Int64)
 esErrorCount
   = lens _esErrorCount (\ s a -> s{_esErrorCount = a})
+      . mapping _Coerce
 
 -- | Required.
 esErrorCode :: Lens' ErrorSummary (Maybe Text)
@@ -122,7 +123,7 @@ instance ToJSON ErrorSummary where
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe Int32)
+    , _sCode    :: !(Maybe (JSONText Int32))
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -155,7 +156,9 @@ sDetails
 -- | The status code, which should be an enum value of
 -- [google.rpc.Code][google.rpc.Code].
 sCode :: Lens' Status (Maybe Int32)
-sCode = lens _sCode (\ s a -> s{_sCode = a})
+sCode
+  = lens _sCode (\ s a -> s{_sCode = a}) .
+      mapping _Coerce
 
 -- | A developer-facing error message, which should be in English. Any
 -- user-facing error message should be localized and sent in the
@@ -618,9 +621,9 @@ instance ToJSON StatusDetailsItem where
 --
 -- /See:/ 'date' smart constructor.
 data Date = Date
-    { _dDay   :: !(Maybe Int32)
-    , _dYear  :: !(Maybe Int32)
-    , _dMonth :: !(Maybe Int32)
+    { _dDay   :: !(Maybe (JSONText Int32))
+    , _dYear  :: !(Maybe (JSONText Int32))
+    , _dMonth :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
@@ -644,16 +647,22 @@ date =
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
 -- 0 if specifying a year\/month where the day is not sigificant.
 dDay :: Lens' Date (Maybe Int32)
-dDay = lens _dDay (\ s a -> s{_dDay = a})
+dDay
+  = lens _dDay (\ s a -> s{_dDay = a}) .
+      mapping _Coerce
 
 -- | Year of date. Must be from 1 to 9,999, or 0 if specifying a date without
 -- a year.
 dYear :: Lens' Date (Maybe Int32)
-dYear = lens _dYear (\ s a -> s{_dYear = a})
+dYear
+  = lens _dYear (\ s a -> s{_dYear = a}) .
+      mapping _Coerce
 
 -- | Month of year of date. Must be from 1 to 12.
 dMonth :: Lens' Date (Maybe Int32)
-dMonth = lens _dMonth (\ s a -> s{_dMonth = a})
+dMonth
+  = lens _dMonth (\ s a -> s{_dMonth = a}) .
+      mapping _Coerce
 
 instance FromJSON Date where
         parseJSON
@@ -742,22 +751,22 @@ instance ToJSON UpdateTransferJobRequest where
 --
 -- /See:/ 'transferCounters' smart constructor.
 data TransferCounters = TransferCounters
-    { _tcBytesFoundOnlyFromSink         :: !(Maybe Int64)
-    , _tcBytesDeletedFromSink           :: !(Maybe Int64)
-    , _tcObjectsDeletedFromSource       :: !(Maybe Int64)
-    , _tcObjectsFoundFromSource         :: !(Maybe Int64)
-    , _tcBytesFailedToDeleteFromSink    :: !(Maybe Int64)
-    , _tcBytesFromSourceFailed          :: !(Maybe Int64)
-    , _tcBytesCopiedToSink              :: !(Maybe Int64)
-    , _tcBytesFoundFromSource           :: !(Maybe Int64)
-    , _tcBytesDeletedFromSource         :: !(Maybe Int64)
-    , _tcObjectsDeletedFromSink         :: !(Maybe Int64)
-    , _tcObjectsFoundOnlyFromSink       :: !(Maybe Int64)
-    , _tcBytesFromSourceSkippedBySync   :: !(Maybe Int64)
-    , _tcObjectsCopiedToSink            :: !(Maybe Int64)
-    , _tcObjectsFromSourceFailed        :: !(Maybe Int64)
-    , _tcObjectsFailedToDeleteFromSink  :: !(Maybe Int64)
-    , _tcObjectsFromSourceSkippedBySync :: !(Maybe Int64)
+    { _tcBytesFoundOnlyFromSink         :: !(Maybe (JSONText Int64))
+    , _tcBytesDeletedFromSink           :: !(Maybe (JSONText Int64))
+    , _tcObjectsDeletedFromSource       :: !(Maybe (JSONText Int64))
+    , _tcObjectsFoundFromSource         :: !(Maybe (JSONText Int64))
+    , _tcBytesFailedToDeleteFromSink    :: !(Maybe (JSONText Int64))
+    , _tcBytesFromSourceFailed          :: !(Maybe (JSONText Int64))
+    , _tcBytesCopiedToSink              :: !(Maybe (JSONText Int64))
+    , _tcBytesFoundFromSource           :: !(Maybe (JSONText Int64))
+    , _tcBytesDeletedFromSource         :: !(Maybe (JSONText Int64))
+    , _tcObjectsDeletedFromSink         :: !(Maybe (JSONText Int64))
+    , _tcObjectsFoundOnlyFromSink       :: !(Maybe (JSONText Int64))
+    , _tcBytesFromSourceSkippedBySync   :: !(Maybe (JSONText Int64))
+    , _tcObjectsCopiedToSink            :: !(Maybe (JSONText Int64))
+    , _tcObjectsFromSourceFailed        :: !(Maybe (JSONText Int64))
+    , _tcObjectsFailedToDeleteFromSink  :: !(Maybe (JSONText Int64))
+    , _tcObjectsFromSourceSkippedBySync :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferCounters' with the minimum fields required to make a request.
@@ -822,18 +831,21 @@ tcBytesFoundOnlyFromSink :: Lens' TransferCounters (Maybe Int64)
 tcBytesFoundOnlyFromSink
   = lens _tcBytesFoundOnlyFromSink
       (\ s a -> s{_tcBytesFoundOnlyFromSink = a})
+      . mapping _Coerce
 
 -- | Bytes that are deleted from the data sink.
 tcBytesDeletedFromSink :: Lens' TransferCounters (Maybe Int64)
 tcBytesDeletedFromSink
   = lens _tcBytesDeletedFromSink
       (\ s a -> s{_tcBytesDeletedFromSink = a})
+      . mapping _Coerce
 
 -- | Objects that are deleted from the data source.
 tcObjectsDeletedFromSource :: Lens' TransferCounters (Maybe Int64)
 tcObjectsDeletedFromSource
   = lens _tcObjectsDeletedFromSource
       (\ s a -> s{_tcObjectsDeletedFromSource = a})
+      . mapping _Coerce
 
 -- | Objects found in the data source that are scheduled to be transferred,
 -- which will be copied, excluded based on conditions, or skipped due to
@@ -842,24 +854,28 @@ tcObjectsFoundFromSource :: Lens' TransferCounters (Maybe Int64)
 tcObjectsFoundFromSource
   = lens _tcObjectsFoundFromSource
       (\ s a -> s{_tcObjectsFoundFromSource = a})
+      . mapping _Coerce
 
 -- | Bytes that failed to be deleted from the data sink.
 tcBytesFailedToDeleteFromSink :: Lens' TransferCounters (Maybe Int64)
 tcBytesFailedToDeleteFromSink
   = lens _tcBytesFailedToDeleteFromSink
       (\ s a -> s{_tcBytesFailedToDeleteFromSink = a})
+      . mapping _Coerce
 
 -- | Bytes in the data source that failed during the transfer.
 tcBytesFromSourceFailed :: Lens' TransferCounters (Maybe Int64)
 tcBytesFromSourceFailed
   = lens _tcBytesFromSourceFailed
       (\ s a -> s{_tcBytesFromSourceFailed = a})
+      . mapping _Coerce
 
 -- | Bytes that are copied to the data sink.
 tcBytesCopiedToSink :: Lens' TransferCounters (Maybe Int64)
 tcBytesCopiedToSink
   = lens _tcBytesCopiedToSink
       (\ s a -> s{_tcBytesCopiedToSink = a})
+      . mapping _Coerce
 
 -- | Bytes found in the data source that are scheduled to be transferred,
 -- which will be copied, excluded based on conditions, or skipped due to
@@ -868,24 +884,28 @@ tcBytesFoundFromSource :: Lens' TransferCounters (Maybe Int64)
 tcBytesFoundFromSource
   = lens _tcBytesFoundFromSource
       (\ s a -> s{_tcBytesFoundFromSource = a})
+      . mapping _Coerce
 
 -- | Bytes that are deleted from the data source.
 tcBytesDeletedFromSource :: Lens' TransferCounters (Maybe Int64)
 tcBytesDeletedFromSource
   = lens _tcBytesDeletedFromSource
       (\ s a -> s{_tcBytesDeletedFromSource = a})
+      . mapping _Coerce
 
 -- | Objects that are deleted from the data sink.
 tcObjectsDeletedFromSink :: Lens' TransferCounters (Maybe Int64)
 tcObjectsDeletedFromSink
   = lens _tcObjectsDeletedFromSink
       (\ s a -> s{_tcObjectsDeletedFromSink = a})
+      . mapping _Coerce
 
 -- | Objects found only in the data sink that are scheduled to be deleted.
 tcObjectsFoundOnlyFromSink :: Lens' TransferCounters (Maybe Int64)
 tcObjectsFoundOnlyFromSink
   = lens _tcObjectsFoundOnlyFromSink
       (\ s a -> s{_tcObjectsFoundOnlyFromSink = a})
+      . mapping _Coerce
 
 -- | Bytes in the data source that are not transferred because they already
 -- exist in the data sink.
@@ -893,24 +913,28 @@ tcBytesFromSourceSkippedBySync :: Lens' TransferCounters (Maybe Int64)
 tcBytesFromSourceSkippedBySync
   = lens _tcBytesFromSourceSkippedBySync
       (\ s a -> s{_tcBytesFromSourceSkippedBySync = a})
+      . mapping _Coerce
 
 -- | Objects that are copied to the data sink.
 tcObjectsCopiedToSink :: Lens' TransferCounters (Maybe Int64)
 tcObjectsCopiedToSink
   = lens _tcObjectsCopiedToSink
       (\ s a -> s{_tcObjectsCopiedToSink = a})
+      . mapping _Coerce
 
 -- | Objects in the data source that failed during the transfer.
 tcObjectsFromSourceFailed :: Lens' TransferCounters (Maybe Int64)
 tcObjectsFromSourceFailed
   = lens _tcObjectsFromSourceFailed
       (\ s a -> s{_tcObjectsFromSourceFailed = a})
+      . mapping _Coerce
 
 -- | Objects that failed to be deleted from the data sink.
 tcObjectsFailedToDeleteFromSink :: Lens' TransferCounters (Maybe Int64)
 tcObjectsFailedToDeleteFromSink
   = lens _tcObjectsFailedToDeleteFromSink
       (\ s a -> s{_tcObjectsFailedToDeleteFromSink = a})
+      . mapping _Coerce
 
 -- | Objects in the data source that are not transferred because they already
 -- exist in the data sink.
@@ -918,6 +942,7 @@ tcObjectsFromSourceSkippedBySync :: Lens' TransferCounters (Maybe Int64)
 tcObjectsFromSourceSkippedBySync
   = lens _tcObjectsFromSourceSkippedBySync
       (\ s a -> s{_tcObjectsFromSourceSkippedBySync = a})
+      . mapping _Coerce
 
 instance FromJSON TransferCounters where
         parseJSON
@@ -1271,10 +1296,10 @@ instance ToJSON HTTPData where
 --
 -- /See:/ 'timeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-    { _todNanos   :: !(Maybe Int32)
-    , _todHours   :: !(Maybe Int32)
-    , _todMinutes :: !(Maybe Int32)
-    , _todSeconds :: !(Maybe Int32)
+    { _todNanos   :: !(Maybe (JSONText Int32))
+    , _todHours   :: !(Maybe (JSONText Int32))
+    , _todMinutes :: !(Maybe (JSONText Int32))
+    , _todSeconds :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
@@ -1300,24 +1325,30 @@ timeOfDay =
 
 -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
 todNanos :: Lens' TimeOfDay' (Maybe Int32)
-todNanos = lens _todNanos (\ s a -> s{_todNanos = a})
+todNanos
+  = lens _todNanos (\ s a -> s{_todNanos = a}) .
+      mapping _Coerce
 
 -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may
 -- choose to allow the value \"24:00:00\" for scenarios like business
 -- closing time.
 todHours :: Lens' TimeOfDay' (Maybe Int32)
-todHours = lens _todHours (\ s a -> s{_todHours = a})
+todHours
+  = lens _todHours (\ s a -> s{_todHours = a}) .
+      mapping _Coerce
 
 -- | Minutes of hour of day. Must be from 0 to 59.
 todMinutes :: Lens' TimeOfDay' (Maybe Int32)
 todMinutes
-  = lens _todMinutes (\ s a -> s{_todMinutes = a})
+  = lens _todMinutes (\ s a -> s{_todMinutes = a}) .
+      mapping _Coerce
 
 -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API
 -- may allow the value 60 if it allows leap-seconds.
 todSeconds :: Lens' TimeOfDay' (Maybe Int32)
 todSeconds
-  = lens _todSeconds (\ s a -> s{_todSeconds = a})
+  = lens _todSeconds (\ s a -> s{_todSeconds = a}) .
+      mapping _Coerce
 
 instance FromJSON TimeOfDay' where
         parseJSON

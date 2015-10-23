@@ -376,7 +376,7 @@ instance ToJSON ListTriggersResponse where
 --
 -- /See:/ 'macro' smart constructor.
 data Macro = Macro
-    { _mScheduleEndMs   :: !(Maybe Int64)
+    { _mScheduleEndMs   :: !(Maybe (JSONText Int64))
     , _mParentFolderId  :: !(Maybe Text)
     , _mContainerId     :: !(Maybe Text)
     , _mDisablingRuleId :: !(Maybe [Text])
@@ -386,7 +386,7 @@ data Macro = Macro
     , _mEnablingRuleId  :: !(Maybe [Text])
     , _mMacroId         :: !(Maybe Text)
     , _mType            :: !(Maybe Text)
-    , _mScheduleStartMs :: !(Maybe Int64)
+    , _mScheduleStartMs :: !(Maybe (JSONText Int64))
     , _mNotes           :: !(Maybe Text)
     , _mParameter       :: !(Maybe [Parameter])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -444,6 +444,7 @@ mScheduleEndMs :: Lens' Macro (Maybe Int64)
 mScheduleEndMs
   = lens _mScheduleEndMs
       (\ s a -> s{_mScheduleEndMs = a})
+      . mapping _Coerce
 
 -- | Parent folder id.
 mParentFolderId :: Lens' Macro (Maybe Text)
@@ -504,6 +505,7 @@ mScheduleStartMs :: Lens' Macro (Maybe Int64)
 mScheduleStartMs
   = lens _mScheduleStartMs
       (\ s a -> s{_mScheduleStartMs = a})
+      . mapping _Coerce
 
 -- | User notes on how to apply this macro in the container.
 mNotes :: Lens' Macro (Maybe Text)
@@ -556,7 +558,7 @@ instance ToJSON Macro where
 -- /See:/ 'tag' smart constructor.
 data Tag = Tag
     { _tBlockingTriggerId :: !(Maybe [Text])
-    , _tScheduleEndMs     :: !(Maybe Int64)
+    , _tScheduleEndMs     :: !(Maybe (JSONText Int64))
     , _tParentFolderId    :: !(Maybe Text)
     , _tLiveOnly          :: !(Maybe Bool)
     , _tContainerId       :: !(Maybe Text)
@@ -571,7 +573,7 @@ data Tag = Tag
     , _tSetupTag          :: !(Maybe [SetupTag])
     , _tFiringTriggerId   :: !(Maybe [Text])
     , _tType              :: !(Maybe Text)
-    , _tScheduleStartMs   :: !(Maybe Int64)
+    , _tScheduleStartMs   :: !(Maybe (JSONText Int64))
     , _tNotes             :: !(Maybe Text)
     , _tFiringRuleId      :: !(Maybe [Text])
     , _tParameter         :: !(Maybe [Parameter])
@@ -660,6 +662,7 @@ tScheduleEndMs :: Lens' Tag (Maybe Int64)
 tScheduleEndMs
   = lens _tScheduleEndMs
       (\ s a -> s{_tScheduleEndMs = a})
+      . mapping _Coerce
 
 -- | Parent folder id.
 tParentFolderId :: Lens' Tag (Maybe Text)
@@ -752,6 +755,7 @@ tScheduleStartMs :: Lens' Tag (Maybe Int64)
 tScheduleStartMs
   = lens _tScheduleStartMs
       (\ s a -> s{_tScheduleStartMs = a})
+      . mapping _Coerce
 
 -- | User notes on how to apply this tag in the container.
 tNotes :: Lens' Tag (Maybe Text)
@@ -1286,7 +1290,7 @@ instance ToJSON Folder where
 --
 -- /See:/ 'variable' smart constructor.
 data Variable = Variable
-    { _vScheduleEndMs      :: !(Maybe Int64)
+    { _vScheduleEndMs      :: !(Maybe (JSONText Int64))
     , _vParentFolderId     :: !(Maybe Text)
     , _vContainerId        :: !(Maybe Text)
     , _vFingerprint        :: !(Maybe Text)
@@ -1295,7 +1299,7 @@ data Variable = Variable
     , _vDisablingTriggerId :: !(Maybe [Text])
     , _vName               :: !(Maybe Text)
     , _vType               :: !(Maybe Text)
-    , _vScheduleStartMs    :: !(Maybe Int64)
+    , _vScheduleStartMs    :: !(Maybe (JSONText Int64))
     , _vNotes              :: !(Maybe Text)
     , _vEnablingTriggerId  :: !(Maybe [Text])
     , _vParameter          :: !(Maybe [Parameter])
@@ -1354,6 +1358,7 @@ vScheduleEndMs :: Lens' Variable (Maybe Int64)
 vScheduleEndMs
   = lens _vScheduleEndMs
       (\ s a -> s{_vScheduleEndMs = a})
+      . mapping _Coerce
 
 -- | Parent folder id.
 vParentFolderId :: Lens' Variable (Maybe Text)
@@ -1406,6 +1411,7 @@ vScheduleStartMs :: Lens' Variable (Maybe Int64)
 vScheduleStartMs
   = lens _vScheduleStartMs
       (\ s a -> s{_vScheduleStartMs = a})
+      . mapping _Coerce
 
 -- | User notes on how to apply this variable in the container.
 vNotes :: Lens' Variable (Maybe Text)

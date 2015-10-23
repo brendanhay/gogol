@@ -533,45 +533,45 @@ internalType = \case
 
 externalLit :: Lit -> Type
 externalLit = \case
-    Text     -> TyCon "Text"
-    Bool     -> TyCon "Bool"
-    Time     -> TyCon "TimeOfDay"
-    Date     -> TyCon "Day"
-    DateTime -> TyCon "UTCTime"
-    Nat      -> TyCon "Natural"
-    Float    -> TyCon "Float"
-    Double   -> TyCon "Double"
-    Byte     -> TyCon "Word8"
-    UInt32   -> TyCon "Word32"
-    UInt64   -> TyCon "Word64"
-    Int32    -> TyCon "Int32"
-    Int64    -> TyCon "Int64"
+    Text      -> TyCon "Text"
+    Bool      -> TyCon "Bool"
+    Time      -> TyCon "TimeOfDay"
+    Date      -> TyCon "Day"
+    DateTime  -> TyCon "UTCTime"
+    Nat       -> TyCon "Natural"
+    Float     -> TyCon "Float"
+    Double    -> TyCon "Double"
+    Byte      -> TyCon "Word8"
+    UInt32    -> TyCon "Word32"
+    UInt64    -> TyCon "Word64"
+    Int32     -> TyCon "Int32"
+    Int64     -> TyCon "Int64"
 
-    Alt t      -> TyCon (unqual (Text.unpack t))
-    RqBody     -> TyCon "RequestBody"
-    RsBody     -> TyCon "Stream"
-    JSONValue  -> TyCon "JSONValue"
+    Alt t     -> TyCon (unqual (Text.unpack t))
+    RqBody    -> TyCon "RequestBody"
+    RsBody    -> TyCon "Stream"
+    JSONValue -> TyCon "JSONValue"
 
 internalLit :: Lit -> Type
 internalLit = \case
-    Text     -> TyCon "Text"
-    Bool     -> TyCon "Bool"
-    Time     -> TyCon "Time'"
-    Date     -> TyCon "Date'"
-    DateTime -> TyCon "DateTime'"
-    Nat      -> TyCon "Nat"
-    Float    -> TyCon "Float"
-    Double   -> TyCon "Double"
-    Byte     -> TyCon "Word8"
-    UInt32   -> TyCon "Word32"
-    UInt64   -> TyCon "Word64"
-    Int32    -> TyCon "Int32"
-    Int64    -> TyCon "Int64"
+    Text      -> TyCon "Text"
+    Bool      -> TyCon "Bool"
+    Time      -> TyCon "Time'"
+    Date      -> TyCon "Date'"
+    DateTime  -> TyCon "DateTime'"
+    Nat       -> TyApp (TyCon "JSONText") (TyCon "Nat")
+    Float     -> TyApp (TyCon "JSONText") (TyCon "Float")
+    Double    -> TyApp (TyCon "JSONText") (TyCon "Double")
+    Byte      -> TyApp (TyCon "JSONText") (TyCon "Word8")
+    UInt32    -> TyApp (TyCon "JSONText") (TyCon "Word32")
+    UInt64    -> TyApp (TyCon "JSONText") (TyCon "Word64")
+    Int32     -> TyApp (TyCon "JSONText") (TyCon "Int32")
+    Int64     -> TyApp (TyCon "JSONText") (TyCon "Int64")
 
-    Alt t      -> TyCon (unqual (Text.unpack t))
-    RqBody     -> TyCon "RequestBody"
-    RsBody     -> TyCon "Stream"
-    JSONValue  -> TyCon "JSONValue"
+    Alt t     -> TyCon (unqual (Text.unpack t))
+    RqBody    -> TyCon "RequestBody"
+    RsBody    -> TyCon "Stream"
+    JSONValue -> TyCon "JSONValue"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)
@@ -591,6 +591,13 @@ iso = \case
     TLit Time     -> Just (var "_Time")
     TLit Date     -> Just (var "_Date")
     TLit DateTime -> Just (var "_DateTime")
+    TLit Float    -> Just (var "_Coerce")
+    TLit Double   -> Just (var "_Coerce")
+    TLit Byte     -> Just (var "_Coerce")
+    TLit UInt32   -> Just (var "_Coerce")
+    TLit UInt64   -> Just (var "_Coerce")
+    TLit Int32    -> Just (var "_Coerce")
+    TLit Int64    -> Just (var "_Coerce")
     _             -> Nothing
 
 require :: TType -> TType

@@ -56,8 +56,8 @@ type ManagementProFileFilterLinksListResource =
                    "profiles" :>
                      Capture "profileId" Text :>
                        "profileFilterLinks" :>
-                         QueryParam "start-index" Int32 :>
-                           QueryParam "max-results" Int32 :>
+                         QueryParam "start-index" (JSONText Int32) :>
+                           QueryParam "max-results" (JSONText Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ProFileFilterLinks
 
@@ -68,8 +68,8 @@ data ManagementProFileFilterLinksList = ManagementProFileFilterLinksList
     { _mpffllWebPropertyId :: !Text
     , _mpffllProFileId     :: !Text
     , _mpffllAccountId     :: !Text
-    , _mpffllStartIndex    :: !(Maybe Int32)
-    , _mpffllMaxResults    :: !(Maybe Int32)
+    , _mpffllStartIndex    :: !(Maybe (JSONText Int32))
+    , _mpffllMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksList' with the minimum fields required to make a request.
@@ -127,12 +127,14 @@ mpffllStartIndex :: Lens' ManagementProFileFilterLinksList (Maybe Int32)
 mpffllStartIndex
   = lens _mpffllStartIndex
       (\ s a -> s{_mpffllStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of profile filter links to include in this response.
 mpffllMaxResults :: Lens' ManagementProFileFilterLinksList (Maybe Int32)
 mpffllMaxResults
   = lens _mpffllMaxResults
       (\ s a -> s{_mpffllMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest
          ManagementProFileFilterLinksList where

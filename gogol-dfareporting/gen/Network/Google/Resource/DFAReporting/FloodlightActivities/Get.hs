@@ -46,9 +46,9 @@ type FloodlightActivitiesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivities" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] FloodlightActivity
 
@@ -56,8 +56,8 @@ type FloodlightActivitiesGetResource =
 --
 -- /See:/ 'floodlightActivitiesGet' smart constructor.
 data FloodlightActivitiesGet = FloodlightActivitiesGet
-    { _fProFileId :: !Int64
-    , _fId        :: !Int64
+    { _fProFileId :: !(JSONText Int64)
+    , _fId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGet' with the minimum fields required to make a request.
@@ -80,11 +80,12 @@ floodlightActivitiesGet pFProFileId_ pFId_ =
 -- | User profile ID associated with this request.
 fProFileId :: Lens' FloodlightActivitiesGet Int64
 fProFileId
-  = lens _fProFileId (\ s a -> s{_fProFileId = a})
+  = lens _fProFileId (\ s a -> s{_fProFileId = a}) .
+      _Coerce
 
 -- | Floodlight activity ID.
 fId :: Lens' FloodlightActivitiesGet Int64
-fId = lens _fId (\ s a -> s{_fId = a})
+fId = lens _fId (\ s a -> s{_fId = a}) . _Coerce
 
 instance GoogleRequest FloodlightActivitiesGet where
         type Rs FloodlightActivitiesGet = FloodlightActivity

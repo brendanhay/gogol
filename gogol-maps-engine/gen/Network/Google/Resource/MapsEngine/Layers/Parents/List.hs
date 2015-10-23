@@ -50,7 +50,7 @@ type LayersParentsListResource =
            Capture "id" Text :>
              "parents" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ParentsListResponse
 
@@ -60,7 +60,7 @@ type LayersParentsListResource =
 data LayersParentsList = LayersParentsList
     { _lId         :: !Text
     , _lPageToken  :: !(Maybe Text)
-    , _lMaxResults :: !(Maybe Word32)
+    , _lMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersParentsList' with the minimum fields required to make a request.
@@ -97,7 +97,8 @@ lPageToken
 -- maximum supported value is 50.
 lMaxResults :: Lens' LayersParentsList (Maybe Word32)
 lMaxResults
-  = lens _lMaxResults (\ s a -> s{_lMaxResults = a})
+  = lens _lMaxResults (\ s a -> s{_lMaxResults = a}) .
+      mapping _Coerce
 
 instance GoogleRequest LayersParentsList where
         type Rs LayersParentsList = ParentsListResponse

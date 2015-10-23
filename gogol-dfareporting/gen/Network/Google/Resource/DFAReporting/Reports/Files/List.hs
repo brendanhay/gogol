@@ -50,26 +50,26 @@ type ReportsFilesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
-               Capture "reportId" Int64 :>
+               Capture "reportId" (JSONText Int64) :>
                  "files" :>
                    QueryParam "sortOrder" ReportsFilesListSortOrder :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" ReportsFilesListSortField :>
-                         QueryParam "maxResults" Int32 :>
+                         QueryParam "maxResults" (JSONText Int32) :>
                            QueryParam "alt" AltJSON :> Get '[JSON] FileList
 
 -- | Lists files for a report.
 --
 -- /See:/ 'reportsFilesList' smart constructor.
 data ReportsFilesList = ReportsFilesList
-    { _rflReportId   :: !Int64
-    , _rflProFileId  :: !Int64
+    { _rflReportId   :: !(JSONText Int64)
+    , _rflProFileId  :: !(JSONText Int64)
     , _rflSortOrder  :: !ReportsFilesListSortOrder
     , _rflPageToken  :: !(Maybe Text)
     , _rflSortField  :: !ReportsFilesListSortField
-    , _rflMaxResults :: !(Maybe Int32)
+    , _rflMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesList' with the minimum fields required to make a request.
@@ -104,12 +104,14 @@ reportsFilesList pRflReportId_ pRflProFileId_ =
 -- | The ID of the parent report.
 rflReportId :: Lens' ReportsFilesList Int64
 rflReportId
-  = lens _rflReportId (\ s a -> s{_rflReportId = a})
+  = lens _rflReportId (\ s a -> s{_rflReportId = a}) .
+      _Coerce
 
 -- | The DFA profile ID.
 rflProFileId :: Lens' ReportsFilesList Int64
 rflProFileId
   = lens _rflProFileId (\ s a -> s{_rflProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is \'DESCENDING\'.
 rflSortOrder :: Lens' ReportsFilesList ReportsFilesListSortOrder
@@ -131,6 +133,7 @@ rflMaxResults :: Lens' ReportsFilesList (Maybe Int32)
 rflMaxResults
   = lens _rflMaxResults
       (\ s a -> s{_rflMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ReportsFilesList where
         type Rs ReportsFilesList = FileList

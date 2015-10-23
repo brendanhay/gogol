@@ -46,9 +46,9 @@ type TargetableRemarketingListsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "targetableRemarketingLists" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] TargetableRemarketingList
 
@@ -56,8 +56,8 @@ type TargetableRemarketingListsGetResource =
 --
 -- /See:/ 'targetableRemarketingListsGet' smart constructor.
 data TargetableRemarketingListsGet = TargetableRemarketingListsGet
-    { _trlgProFileId :: !Int64
-    , _trlgId        :: !Int64
+    { _trlgProFileId :: !(JSONText Int64)
+    , _trlgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsGet' with the minimum fields required to make a request.
@@ -82,10 +82,12 @@ trlgProFileId :: Lens' TargetableRemarketingListsGet Int64
 trlgProFileId
   = lens _trlgProFileId
       (\ s a -> s{_trlgProFileId = a})
+      . _Coerce
 
 -- | Remarketing list ID.
 trlgId :: Lens' TargetableRemarketingListsGet Int64
-trlgId = lens _trlgId (\ s a -> s{_trlgId = a})
+trlgId
+  = lens _trlgId (\ s a -> s{_trlgId = a}) . _Coerce
 
 instance GoogleRequest TargetableRemarketingListsGet
          where

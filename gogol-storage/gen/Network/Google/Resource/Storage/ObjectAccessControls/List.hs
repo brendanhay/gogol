@@ -51,7 +51,7 @@ type ObjectAccessControlsListResource =
              "o" :>
                Capture "object" Text :>
                  "acl" :>
-                   QueryParam "generation" Int64 :>
+                   QueryParam "generation" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] ObjectAccessControls
 
@@ -61,7 +61,7 @@ type ObjectAccessControlsListResource =
 data ObjectAccessControlsList = ObjectAccessControlsList
     { _oaclBucket     :: !Text
     , _oaclObject     :: !Text
-    , _oaclGeneration :: !(Maybe Int64)
+    , _oaclGeneration :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsList' with the minimum fields required to make a request.
@@ -101,6 +101,7 @@ oaclGeneration :: Lens' ObjectAccessControlsList (Maybe Int64)
 oaclGeneration
   = lens _oaclGeneration
       (\ s a -> s{_oaclGeneration = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectAccessControlsList where
         type Rs ObjectAccessControlsList =

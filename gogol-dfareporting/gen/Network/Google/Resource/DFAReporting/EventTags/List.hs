@@ -55,19 +55,19 @@ type EventTagsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "eventTags" :>
                QueryParam "definitionsOnly" Bool :>
                  QueryParams "eventTagTypes"
                    EventTagsListEventTagTypes
                    :>
                    QueryParam "enabled" Bool :>
-                     QueryParam "advertiserId" Int64 :>
+                     QueryParam "advertiserId" (JSONText Int64) :>
                        QueryParam "searchString" Text :>
-                         QueryParam "campaignId" Int64 :>
-                           QueryParams "ids" Int64 :>
+                         QueryParam "campaignId" (JSONText Int64) :>
+                           QueryParams "ids" (JSONText Int64) :>
                              QueryParam "sortOrder" EventTagsListSortOrder :>
-                               QueryParam "adId" Int64 :>
+                               QueryParam "adId" (JSONText Int64) :>
                                  QueryParam "sortField" EventTagsListSortField
                                    :>
                                    QueryParam "alt" AltJSON :>
@@ -80,13 +80,13 @@ data EventTagsList = EventTagsList
     { _etlDefinitionsOnly :: !(Maybe Bool)
     , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
-    , _etlAdvertiserId    :: !(Maybe Int64)
+    , _etlAdvertiserId    :: !(Maybe (JSONText Int64))
     , _etlSearchString    :: !(Maybe Text)
-    , _etlCampaignId      :: !(Maybe Int64)
-    , _etlIds             :: !(Maybe [Int64])
-    , _etlProFileId       :: !Int64
+    , _etlCampaignId      :: !(Maybe (JSONText Int64))
+    , _etlIds             :: !(Maybe [JSONText Int64])
+    , _etlProFileId       :: !(JSONText Int64)
     , _etlSortOrder       :: !(Maybe EventTagsListSortOrder)
-    , _etlAdId            :: !(Maybe Int64)
+    , _etlAdId            :: !(Maybe (JSONText Int64))
     , _etlSortField       :: !(Maybe EventTagsListSortField)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -171,6 +171,7 @@ etlAdvertiserId :: Lens' EventTagsList (Maybe Int64)
 etlAdvertiserId
   = lens _etlAdvertiserId
       (\ s a -> s{_etlAdvertiserId = a})
+      . mapping _Coerce
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"eventtag*2015\" will return objects with names like
@@ -189,6 +190,7 @@ etlCampaignId :: Lens' EventTagsList (Maybe Int64)
 etlCampaignId
   = lens _etlCampaignId
       (\ s a -> s{_etlCampaignId = a})
+      . mapping _Coerce
 
 -- | Select only event tags with these IDs.
 etlIds :: Lens' EventTagsList [Int64]
@@ -200,6 +202,7 @@ etlIds
 etlProFileId :: Lens' EventTagsList Int64
 etlProFileId
   = lens _etlProFileId (\ s a -> s{_etlProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 etlSortOrder :: Lens' EventTagsList (Maybe EventTagsListSortOrder)
@@ -208,7 +211,9 @@ etlSortOrder
 
 -- | Select only event tags that belong to this ad.
 etlAdId :: Lens' EventTagsList (Maybe Int64)
-etlAdId = lens _etlAdId (\ s a -> s{_etlAdId = a})
+etlAdId
+  = lens _etlAdId (\ s a -> s{_etlAdId = a}) .
+      mapping _Coerce
 
 -- | Field by which to sort the list.
 etlSortField :: Lens' EventTagsList (Maybe EventTagsListSortField)

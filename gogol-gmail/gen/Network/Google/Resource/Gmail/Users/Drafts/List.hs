@@ -50,7 +50,7 @@ type UsersDraftsListResource =
            Capture "userId" Text :>
              "drafts" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ListDraftsResponse
 
@@ -60,7 +60,7 @@ type UsersDraftsListResource =
 data UsersDraftsList = UsersDraftsList
     { _udlUserId     :: !Text
     , _udlPageToken  :: !(Maybe Text)
-    , _udlMaxResults :: !Word32
+    , _udlMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsList' with the minimum fields required to make a request.
@@ -98,6 +98,7 @@ udlMaxResults :: Lens' UsersDraftsList Word32
 udlMaxResults
   = lens _udlMaxResults
       (\ s a -> s{_udlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest UsersDraftsList where
         type Rs UsersDraftsList = ListDraftsResponse

@@ -48,9 +48,9 @@ type AccountUserProFilesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "accountUserProfiles" :>
-               QueryParam "id" Int64 :>
+               QueryParam "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AccountUserProFile :>
                      Patch '[JSON] AccountUserProFile
@@ -60,9 +60,9 @@ type AccountUserProFilesPatchResource =
 --
 -- /See:/ 'accountUserProFilesPatch' smart constructor.
 data AccountUserProFilesPatch = AccountUserProFilesPatch
-    { _aupfpProFileId :: !Int64
+    { _aupfpProFileId :: !(JSONText Int64)
     , _aupfpPayload   :: !AccountUserProFile
-    , _aupfpId        :: !Int64
+    , _aupfpId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProFilesPatch' with the minimum fields required to make a request.
@@ -91,6 +91,7 @@ aupfpProFileId :: Lens' AccountUserProFilesPatch Int64
 aupfpProFileId
   = lens _aupfpProFileId
       (\ s a -> s{_aupfpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 aupfpPayload :: Lens' AccountUserProFilesPatch AccountUserProFile
@@ -99,7 +100,8 @@ aupfpPayload
 
 -- | User profile ID.
 aupfpId :: Lens' AccountUserProFilesPatch Int64
-aupfpId = lens _aupfpId (\ s a -> s{_aupfpId = a})
+aupfpId
+  = lens _aupfpId (\ s a -> s{_aupfpId = a}) . _Coerce
 
 instance GoogleRequest AccountUserProFilesPatch where
         type Rs AccountUserProFilesPatch = AccountUserProFile

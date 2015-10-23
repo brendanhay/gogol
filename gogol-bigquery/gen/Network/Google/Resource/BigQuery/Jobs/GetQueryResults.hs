@@ -53,10 +53,10 @@ type JobsGetQueryResultsResource =
            Capture "projectId" Text :>
              "queries" :>
                Capture "jobId" Text :>
-                 QueryParam "timeoutMs" Word32 :>
+                 QueryParam "timeoutMs" (JSONText Word32) :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "startIndex" Word64 :>
-                       QueryParam "maxResults" Word32 :>
+                     QueryParam "startIndex" (JSONText Word64) :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] GetQueryResultsResponse
 
@@ -65,11 +65,11 @@ type JobsGetQueryResultsResource =
 -- /See:/ 'jobsGetQueryResults' smart constructor.
 data JobsGetQueryResults = JobsGetQueryResults
     { _jgqrJobId      :: !Text
-    , _jgqrTimeoutMs  :: !(Maybe Word32)
+    , _jgqrTimeoutMs  :: !(Maybe (JSONText Word32))
     , _jgqrPageToken  :: !(Maybe Text)
     , _jgqrProjectId  :: !Text
-    , _jgqrStartIndex :: !(Maybe Word64)
-    , _jgqrMaxResults :: !(Maybe Word32)
+    , _jgqrStartIndex :: !(Maybe (JSONText Word64))
+    , _jgqrMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGetQueryResults' with the minimum fields required to make a request.
@@ -113,6 +113,7 @@ jgqrTimeoutMs :: Lens' JobsGetQueryResults (Maybe Word32)
 jgqrTimeoutMs
   = lens _jgqrTimeoutMs
       (\ s a -> s{_jgqrTimeoutMs = a})
+      . mapping _Coerce
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results
@@ -132,12 +133,14 @@ jgqrStartIndex :: Lens' JobsGetQueryResults (Maybe Word64)
 jgqrStartIndex
   = lens _jgqrStartIndex
       (\ s a -> s{_jgqrStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum number of results to read
 jgqrMaxResults :: Lens' JobsGetQueryResults (Maybe Word32)
 jgqrMaxResults
   = lens _jgqrMaxResults
       (\ s a -> s{_jgqrMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest JobsGetQueryResults where
         type Rs JobsGetQueryResults = GetQueryResultsResponse

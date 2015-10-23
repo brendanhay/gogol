@@ -50,7 +50,7 @@ type LayersListPublishedResource =
            "published" :>
              QueryParam "pageToken" Text :>
                QueryParam "projectId" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] PublishedLayersListResponse
 
@@ -60,7 +60,7 @@ type LayersListPublishedResource =
 data LayersListPublished = LayersListPublished
     { _llpPageToken  :: !(Maybe Text)
     , _llpProjectId  :: !(Maybe Text)
-    , _llpMaxResults :: !(Maybe Word32)
+    , _llpMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersListPublished' with the minimum fields required to make a request.
@@ -102,6 +102,7 @@ llpMaxResults :: Lens' LayersListPublished (Maybe Word32)
 llpMaxResults
   = lens _llpMaxResults
       (\ s a -> s{_llpMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest LayersListPublished where
         type Rs LayersListPublished =

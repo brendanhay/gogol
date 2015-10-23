@@ -60,11 +60,11 @@ type TablesFeaturesListResource =
                  QueryParam "where" Text :>
                    QueryParam "orderBy" Text :>
                      QueryParam "version" TablesFeaturesListVersion :>
-                       QueryParam "limit" Word32 :>
+                       QueryParam "limit" (JSONText Word32) :>
                          QueryParam "pageToken" Text :>
                            QueryParam "select" Text :>
                              QueryParam "intersects" Text :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] FeaturesListResponse
 
@@ -77,11 +77,11 @@ data TablesFeaturesList = TablesFeaturesList
     , _tflOrderBy    :: !(Maybe Text)
     , _tflVersion    :: !(Maybe TablesFeaturesListVersion)
     , _tflId         :: !Text
-    , _tflLimit      :: !(Maybe Word32)
+    , _tflLimit      :: !(Maybe (JSONText Word32))
     , _tflPageToken  :: !(Maybe Text)
     , _tflSelect     :: !(Maybe Text)
     , _tflIntersects :: !(Maybe Text)
-    , _tflMaxResults :: !(Maybe Word32)
+    , _tflMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesList' with the minimum fields required to make a request.
@@ -152,7 +152,9 @@ tflId = lens _tflId (\ s a -> s{_tflId = a})
 -- | The total number of features to return from the query, irrespective of
 -- the number of pages.
 tflLimit :: Lens' TablesFeaturesList (Maybe Word32)
-tflLimit = lens _tflLimit (\ s a -> s{_tflLimit = a})
+tflLimit
+  = lens _tflLimit (\ s a -> s{_tflLimit = a}) .
+      mapping _Coerce
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
@@ -179,6 +181,7 @@ tflMaxResults :: Lens' TablesFeaturesList (Maybe Word32)
 tflMaxResults
   = lens _tflMaxResults
       (\ s a -> s{_tflMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest TablesFeaturesList where
         type Rs TablesFeaturesList = FeaturesListResponse

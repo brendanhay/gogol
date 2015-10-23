@@ -46,10 +46,10 @@ import           Network.Google.ShoppingContent.Types
 type AccountsListResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accounts" :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
+               QueryParam "maxResults" (JSONText Word32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountsListResponse
 
@@ -57,9 +57,9 @@ type AccountsListResource =
 --
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList = AccountsList
-    { _alMerchantId :: !Word64
+    { _alMerchantId :: !(JSONText Word64)
     , _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !(Maybe Word32)
+    , _alMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
@@ -85,6 +85,7 @@ accountsList pAlMerchantId_ =
 alMerchantId :: Lens' AccountsList Word64
 alMerchantId
   = lens _alMerchantId (\ s a -> s{_alMerchantId = a})
+      . _Coerce
 
 -- | The token returned by the previous request.
 alPageToken :: Lens' AccountsList (Maybe Text)
@@ -96,6 +97,7 @@ alPageToken
 alMaxResults :: Lens' AccountsList (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = AccountsListResponse

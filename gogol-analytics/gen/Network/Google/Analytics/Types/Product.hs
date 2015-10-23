@@ -28,12 +28,12 @@ import           Network.Google.Prelude
 -- /See:/ 'unSampledReports' smart constructor.
 data UnSampledReports = UnSampledReports
     { _usrNextLink     :: !(Maybe Text)
-    , _usrItemsPerPage :: !(Maybe Int32)
+    , _usrItemsPerPage :: !(Maybe (JSONText Int32))
     , _usrKind         :: !Text
     , _usrUsername     :: !(Maybe Text)
     , _usrItems        :: !(Maybe [UnSampledReport])
-    , _usrTotalResults :: !(Maybe Int32)
-    , _usrStartIndex   :: !(Maybe Int32)
+    , _usrTotalResults :: !(Maybe (JSONText Int32))
+    , _usrStartIndex   :: !(Maybe (JSONText Int32))
     , _usrPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -83,6 +83,7 @@ usrItemsPerPage :: Lens' UnSampledReports (Maybe Int32)
 usrItemsPerPage
   = lens _usrItemsPerPage
       (\ s a -> s{_usrItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 usrKind :: Lens' UnSampledReports Text
@@ -106,6 +107,7 @@ usrTotalResults :: Lens' UnSampledReports (Maybe Int32)
 usrTotalResults
   = lens _usrTotalResults
       (\ s a -> s{_usrTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
@@ -113,6 +115,7 @@ usrStartIndex :: Lens' UnSampledReports (Maybe Int32)
 usrStartIndex
   = lens _usrStartIndex
       (\ s a -> s{_usrStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this unsampled report collection.
 usrPreviousLink :: Lens' UnSampledReports (Maybe Text)
@@ -151,7 +154,7 @@ instance ToJSON UnSampledReports where
 data GoalURLDestinationDetailsStepsItem = GoalURLDestinationDetailsStepsItem
     { _guddsiURL    :: !(Maybe Text)
     , _guddsiName   :: !(Maybe Text)
-    , _guddsiNumber :: !(Maybe Int32)
+    , _guddsiNumber :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GoalURLDestinationDetailsStepsItem' with the minimum fields required to make a request.
@@ -186,6 +189,7 @@ guddsiName
 guddsiNumber :: Lens' GoalURLDestinationDetailsStepsItem (Maybe Int32)
 guddsiNumber
   = lens _guddsiNumber (\ s a -> s{_guddsiNumber = a})
+      . mapping _Coerce
 
 instance FromJSON GoalURLDestinationDetailsStepsItem
          where
@@ -216,8 +220,8 @@ data GaDataQuery = GaDataQuery
     , _gdqEndDate       :: !(Maybe Text)
     , _gdqSort          :: !(Maybe [Text])
     , _gdqDimensions    :: !(Maybe Text)
-    , _gdqStartIndex    :: !(Maybe Int32)
-    , _gdqMaxResults    :: !(Maybe Int32)
+    , _gdqStartIndex    :: !(Maybe (JSONText Int32))
+    , _gdqMaxResults    :: !(Maybe (JSONText Int32))
     , _gdqSegment       :: !(Maybe Text)
     , _gdqStartDate     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -308,12 +312,14 @@ gdqStartIndex :: Lens' GaDataQuery (Maybe Int32)
 gdqStartIndex
   = lens _gdqStartIndex
       (\ s a -> s{_gdqStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum results per page.
 gdqMaxResults :: Lens' GaDataQuery (Maybe Int32)
 gdqMaxResults
   = lens _gdqMaxResults
       (\ s a -> s{_gdqMaxResults = a})
+      . mapping _Coerce
 
 -- | Analytics advanced segment.
 gdqSegment :: Lens' GaDataQuery (Maybe Text)
@@ -1016,7 +1022,7 @@ instance ToJSON
 --
 -- /See:/ 'filterExpression' smart constructor.
 data FilterExpression = FilterExpression
-    { _feFieldIndex      :: !(Maybe Int32)
+    { _feFieldIndex      :: !(Maybe (JSONText Int32))
     , _feField           :: !(Maybe Text)
     , _feKind            :: !Text
     , _feMatchType       :: !(Maybe Text)
@@ -1056,6 +1062,7 @@ filterExpression =
 feFieldIndex :: Lens' FilterExpression (Maybe Int32)
 feFieldIndex
   = lens _feFieldIndex (\ s a -> s{_feFieldIndex = a})
+      . mapping _Coerce
 
 -- | Field to filter. Possible values: - Content and Traffic -
 -- PAGE_REQUEST_URI, - PAGE_HOSTNAME, - PAGE_TITLE, - REFERRAL, -
@@ -1244,12 +1251,12 @@ instance ToJSON ProFileRef where
 -- /See:/ 'accounts' smart constructor.
 data Accounts = Accounts
     { _aNextLink     :: !(Maybe Text)
-    , _aItemsPerPage :: !(Maybe Int32)
+    , _aItemsPerPage :: !(Maybe (JSONText Int32))
     , _aKind         :: !Text
     , _aUsername     :: !(Maybe Text)
     , _aItems        :: !(Maybe [Account])
-    , _aTotalResults :: !(Maybe Int32)
-    , _aStartIndex   :: !(Maybe Int32)
+    , _aTotalResults :: !(Maybe (JSONText Int32))
+    , _aStartIndex   :: !(Maybe (JSONText Int32))
     , _aPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1299,6 +1306,7 @@ aItemsPerPage :: Lens' Accounts (Maybe Int32)
 aItemsPerPage
   = lens _aItemsPerPage
       (\ s a -> s{_aItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 aKind :: Lens' Accounts Text
@@ -1321,12 +1329,14 @@ aTotalResults :: Lens' Accounts (Maybe Int32)
 aTotalResults
   = lens _aTotalResults
       (\ s a -> s{_aTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the entries, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 aStartIndex :: Lens' Accounts (Maybe Int32)
 aStartIndex
-  = lens _aStartIndex (\ s a -> s{_aStartIndex = a})
+  = lens _aStartIndex (\ s a -> s{_aStartIndex = a}) .
+      mapping _Coerce
 
 -- | Previous link for this account collection.
 aPreviousLink :: Lens' Accounts (Maybe Text)
@@ -1368,12 +1378,12 @@ instance ToJSON Accounts where
 -- /See:/ 'experiments' smart constructor.
 data Experiments = Experiments
     { _eNextLink     :: !(Maybe Text)
-    , _eItemsPerPage :: !(Maybe Int32)
+    , _eItemsPerPage :: !(Maybe (JSONText Int32))
     , _eKind         :: !Text
     , _eUsername     :: !(Maybe Text)
     , _eItems        :: !(Maybe [Experiment])
-    , _eTotalResults :: !(Maybe Int32)
-    , _eStartIndex   :: !(Maybe Int32)
+    , _eTotalResults :: !(Maybe (JSONText Int32))
+    , _eStartIndex   :: !(Maybe (JSONText Int32))
     , _ePreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1423,6 +1433,7 @@ eItemsPerPage :: Lens' Experiments (Maybe Int32)
 eItemsPerPage
   = lens _eItemsPerPage
       (\ s a -> s{_eItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 eKind :: Lens' Experiments Text
@@ -1445,12 +1456,14 @@ eTotalResults :: Lens' Experiments (Maybe Int32)
 eTotalResults
   = lens _eTotalResults
       (\ s a -> s{_eTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 eStartIndex :: Lens' Experiments (Maybe Int32)
 eStartIndex
-  = lens _eStartIndex (\ s a -> s{_eStartIndex = a})
+  = lens _eStartIndex (\ s a -> s{_eStartIndex = a}) .
+      mapping _Coerce
 
 -- | Link to previous page for this experiment collection.
 ePreviousLink :: Lens' Experiments (Maybe Text)
@@ -1676,12 +1689,12 @@ instance ToJSON McfDataProFileInfo where
 -- /See:/ 'customDataSources' smart constructor.
 data CustomDataSources = CustomDataSources
     { _cdsNextLink     :: !(Maybe Text)
-    , _cdsItemsPerPage :: !(Maybe Int32)
+    , _cdsItemsPerPage :: !(Maybe (JSONText Int32))
     , _cdsKind         :: !Text
     , _cdsUsername     :: !(Maybe Text)
     , _cdsItems        :: !(Maybe [CustomDataSource])
-    , _cdsTotalResults :: !(Maybe Int32)
-    , _cdsStartIndex   :: !(Maybe Int32)
+    , _cdsTotalResults :: !(Maybe (JSONText Int32))
+    , _cdsStartIndex   :: !(Maybe (JSONText Int32))
     , _cdsPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1731,6 +1744,7 @@ cdsItemsPerPage :: Lens' CustomDataSources (Maybe Int32)
 cdsItemsPerPage
   = lens _cdsItemsPerPage
       (\ s a -> s{_cdsItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 cdsKind :: Lens' CustomDataSources Text
@@ -1754,6 +1768,7 @@ cdsTotalResults :: Lens' CustomDataSources (Maybe Int32)
 cdsTotalResults
   = lens _cdsTotalResults
       (\ s a -> s{_cdsTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
@@ -1761,6 +1776,7 @@ cdsStartIndex :: Lens' CustomDataSources (Maybe Int32)
 cdsStartIndex
   = lens _cdsStartIndex
       (\ s a -> s{_cdsStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this custom data source collection.
 cdsPreviousLink :: Lens' CustomDataSources (Maybe Text)
@@ -1846,17 +1862,17 @@ instance ToJSON WebPropertyChildLink where
 -- /See:/ 'mcfData' smart constructor.
 data McfData = McfData
     { _mdNextLink            :: !(Maybe Text)
-    , _mdSampleSpace         :: !(Maybe Int64)
-    , _mdItemsPerPage        :: !(Maybe Int32)
+    , _mdSampleSpace         :: !(Maybe (JSONText Int64))
+    , _mdItemsPerPage        :: !(Maybe (JSONText Int32))
     , _mdProFileInfo         :: !(Maybe McfDataProFileInfo)
     , _mdKind                :: !Text
-    , _mdSampleSize          :: !(Maybe Int64)
+    , _mdSampleSize          :: !(Maybe (JSONText Int64))
     , _mdRows                :: !(Maybe [[McfDataRowsItemItem]])
     , _mdSelfLink            :: !(Maybe Text)
     , _mdQuery               :: !(Maybe McfDataQuery)
     , _mdColumnHeaders       :: !(Maybe [McfDataColumnHeadersItem])
     , _mdId                  :: !(Maybe Text)
-    , _mdTotalResults        :: !(Maybe Int32)
+    , _mdTotalResults        :: !(Maybe (JSONText Int32))
     , _mdContainsSampledData :: !(Maybe Bool)
     , _mdTotalsForAllResults :: !(Maybe McfDataTotalsForAllResults)
     , _mdPreviousLink        :: !(Maybe Text)
@@ -1926,6 +1942,7 @@ mdSampleSpace :: Lens' McfData (Maybe Int64)
 mdSampleSpace
   = lens _mdSampleSpace
       (\ s a -> s{_mdSampleSpace = a})
+      . mapping _Coerce
 
 -- | The maximum number of rows the response can contain, regardless of the
 -- actual number of rows returned. Its value ranges from 1 to 10,000 with a
@@ -1935,6 +1952,7 @@ mdItemsPerPage :: Lens' McfData (Maybe Int32)
 mdItemsPerPage
   = lens _mdItemsPerPage
       (\ s a -> s{_mdItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Information for the view (profile), for which the Analytics data was
 -- requested.
@@ -1951,6 +1969,7 @@ mdKind = lens _mdKind (\ s a -> s{_mdKind = a})
 mdSampleSize :: Lens' McfData (Maybe Int64)
 mdSampleSize
   = lens _mdSampleSize (\ s a -> s{_mdSampleSize = a})
+      . mapping _Coerce
 
 -- | Analytics data rows, where each row contains a list of dimension values
 -- followed by the metric values. The order of dimensions and metrics is
@@ -1988,6 +2007,7 @@ mdTotalResults :: Lens' McfData (Maybe Int32)
 mdTotalResults
   = lens _mdTotalResults
       (\ s a -> s{_mdTotalResults = a})
+      . mapping _Coerce
 
 -- | Determines if the Analytics data contains sampled data.
 mdContainsSampledData :: Lens' McfData (Maybe Bool)
@@ -2109,7 +2129,7 @@ instance ToJSON UserRef where
 --
 -- /See:/ 'goalVisitNumPagesDetails' smart constructor.
 data GoalVisitNumPagesDetails = GoalVisitNumPagesDetails
-    { _gvnpdComparisonValue :: !(Maybe Int64)
+    { _gvnpdComparisonValue :: !(Maybe (JSONText Int64))
     , _gvnpdComparisonType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2133,6 +2153,7 @@ gvnpdComparisonValue :: Lens' GoalVisitNumPagesDetails (Maybe Int64)
 gvnpdComparisonValue
   = lens _gvnpdComparisonValue
       (\ s a -> s{_gvnpdComparisonValue = a})
+      . mapping _Coerce
 
 -- | Type of comparison. Possible values are LESS_THAN, GREATER_THAN, or
 -- EQUAL.
@@ -2287,11 +2308,11 @@ instance ToJSON AccountRef where
 -- /See:/ 'entityAdWordsLinks' smart constructor.
 data EntityAdWordsLinks = EntityAdWordsLinks
     { _eawlNextLink     :: !(Maybe Text)
-    , _eawlItemsPerPage :: !(Maybe Int32)
+    , _eawlItemsPerPage :: !(Maybe (JSONText Int32))
     , _eawlKind         :: !Text
     , _eawlItems        :: !(Maybe [EntityAdWordsLink])
-    , _eawlTotalResults :: !(Maybe Int32)
-    , _eawlStartIndex   :: !(Maybe Int32)
+    , _eawlTotalResults :: !(Maybe (JSONText Int32))
+    , _eawlStartIndex   :: !(Maybe (JSONText Int32))
     , _eawlPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2338,6 +2359,7 @@ eawlItemsPerPage :: Lens' EntityAdWordsLinks (Maybe Int32)
 eawlItemsPerPage
   = lens _eawlItemsPerPage
       (\ s a -> s{_eawlItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 eawlKind :: Lens' EntityAdWordsLinks Text
@@ -2356,6 +2378,7 @@ eawlTotalResults :: Lens' EntityAdWordsLinks (Maybe Int32)
 eawlTotalResults
   = lens _eawlTotalResults
       (\ s a -> s{_eawlTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the entries, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
@@ -2363,6 +2386,7 @@ eawlStartIndex :: Lens' EntityAdWordsLinks (Maybe Int32)
 eawlStartIndex
   = lens _eawlStartIndex
       (\ s a -> s{_eawlStartIndex = a})
+      . mapping _Coerce
 
 -- | Previous link for this AdWords link collection.
 eawlPreviousLink :: Lens' EntityAdWordsLinks (Maybe Text)
@@ -2401,12 +2425,12 @@ instance ToJSON EntityAdWordsLinks where
 -- /See:/ 'proFiles' smart constructor.
 data ProFiles = ProFiles
     { _pfNextLink     :: !(Maybe Text)
-    , _pfItemsPerPage :: !(Maybe Int32)
+    , _pfItemsPerPage :: !(Maybe (JSONText Int32))
     , _pfKind         :: !Text
     , _pfUsername     :: !(Maybe Text)
     , _pfItems        :: !(Maybe [ProFile])
-    , _pfTotalResults :: !(Maybe Int32)
-    , _pfStartIndex   :: !(Maybe Int32)
+    , _pfTotalResults :: !(Maybe (JSONText Int32))
+    , _pfStartIndex   :: !(Maybe (JSONText Int32))
     , _pfPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2456,6 +2480,7 @@ pfItemsPerPage :: Lens' ProFiles (Maybe Int32)
 pfItemsPerPage
   = lens _pfItemsPerPage
       (\ s a -> s{_pfItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 pfKind :: Lens' ProFiles Text
@@ -2478,12 +2503,14 @@ pfTotalResults :: Lens' ProFiles (Maybe Int32)
 pfTotalResults
   = lens _pfTotalResults
       (\ s a -> s{_pfTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 pfStartIndex :: Lens' ProFiles (Maybe Int32)
 pfStartIndex
   = lens _pfStartIndex (\ s a -> s{_pfStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this view (profile) collection.
 pfPreviousLink :: Lens' ProFiles (Maybe Text)
@@ -2671,7 +2698,7 @@ instance ToJSON EntityAdWordsLink where
 --
 -- /See:/ 'filterSearchAndReplaceDetails' smart constructor.
 data FilterSearchAndReplaceDetails = FilterSearchAndReplaceDetails
-    { _fsardFieldIndex    :: !(Maybe Int32)
+    { _fsardFieldIndex    :: !(Maybe (JSONText Int32))
     , _fsardField         :: !(Maybe Text)
     , _fsardSearchString  :: !(Maybe Text)
     , _fsardReplaceString :: !(Maybe Text)
@@ -2708,6 +2735,7 @@ fsardFieldIndex :: Lens' FilterSearchAndReplaceDetails (Maybe Int32)
 fsardFieldIndex
   = lens _fsardFieldIndex
       (\ s a -> s{_fsardFieldIndex = a})
+      . mapping _Coerce
 
 -- | Field to use in the filter.
 fsardField :: Lens' FilterSearchAndReplaceDetails (Maybe Text)
@@ -3112,12 +3140,12 @@ instance ToJSON ProFile where
 -- /See:/ 'accountSummaries' smart constructor.
 data AccountSummaries = AccountSummaries
     { _asNextLink     :: !(Maybe Text)
-    , _asItemsPerPage :: !(Maybe Int32)
+    , _asItemsPerPage :: !(Maybe (JSONText Int32))
     , _asKind         :: !Text
     , _asUsername     :: !(Maybe Text)
     , _asItems        :: !(Maybe [AccountSummary])
-    , _asTotalResults :: !(Maybe Int32)
-    , _asStartIndex   :: !(Maybe Int32)
+    , _asTotalResults :: !(Maybe (JSONText Int32))
+    , _asStartIndex   :: !(Maybe (JSONText Int32))
     , _asPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3167,6 +3195,7 @@ asItemsPerPage :: Lens' AccountSummaries (Maybe Int32)
 asItemsPerPage
   = lens _asItemsPerPage
       (\ s a -> s{_asItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 asKind :: Lens' AccountSummaries Text
@@ -3189,12 +3218,14 @@ asTotalResults :: Lens' AccountSummaries (Maybe Int32)
 asTotalResults
   = lens _asTotalResults
       (\ s a -> s{_asTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 asStartIndex :: Lens' AccountSummaries (Maybe Int32)
 asStartIndex
   = lens _asStartIndex (\ s a -> s{_asStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this AccountSummary collection.
 asPreviousLink :: Lens' AccountSummaries (Maybe Text)
@@ -3391,12 +3422,12 @@ instance ToJSON WebPropertySummary where
 -- /See:/ 'filters' smart constructor.
 data Filters = Filters
     { _fNextLink     :: !(Maybe Text)
-    , _fItemsPerPage :: !(Maybe Int32)
+    , _fItemsPerPage :: !(Maybe (JSONText Int32))
     , _fKind         :: !Text
     , _fUsername     :: !(Maybe Text)
     , _fItems        :: !(Maybe [Filter])
-    , _fTotalResults :: !(Maybe Int32)
-    , _fStartIndex   :: !(Maybe Int32)
+    , _fTotalResults :: !(Maybe (JSONText Int32))
+    , _fStartIndex   :: !(Maybe (JSONText Int32))
     , _fPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3446,6 +3477,7 @@ fItemsPerPage :: Lens' Filters (Maybe Int32)
 fItemsPerPage
   = lens _fItemsPerPage
       (\ s a -> s{_fItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 fKind :: Lens' Filters Text
@@ -3468,12 +3500,14 @@ fTotalResults :: Lens' Filters (Maybe Int32)
 fTotalResults
   = lens _fTotalResults
       (\ s a -> s{_fTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 fStartIndex :: Lens' Filters (Maybe Int32)
 fStartIndex
-  = lens _fStartIndex (\ s a -> s{_fStartIndex = a})
+  = lens _fStartIndex (\ s a -> s{_fStartIndex = a}) .
+      mapping _Coerce
 
 -- | Link to previous page for this filter collection.
 fPreviousLink :: Lens' Filters (Maybe Text)
@@ -3512,17 +3546,17 @@ instance ToJSON Filters where
 -- /See:/ 'gaData' smart constructor.
 data GaData = GaData
     { _gdNextLink            :: !(Maybe Text)
-    , _gdSampleSpace         :: !(Maybe Int64)
-    , _gdItemsPerPage        :: !(Maybe Int32)
+    , _gdSampleSpace         :: !(Maybe (JSONText Int64))
+    , _gdItemsPerPage        :: !(Maybe (JSONText Int32))
     , _gdProFileInfo         :: !(Maybe GaDataProFileInfo)
     , _gdKind                :: !Text
-    , _gdSampleSize          :: !(Maybe Int64)
+    , _gdSampleSize          :: !(Maybe (JSONText Int64))
     , _gdRows                :: !(Maybe [[Text]])
     , _gdSelfLink            :: !(Maybe Text)
     , _gdQuery               :: !(Maybe GaDataQuery)
     , _gdColumnHeaders       :: !(Maybe [GaDataColumnHeadersItem])
     , _gdId                  :: !(Maybe Text)
-    , _gdTotalResults        :: !(Maybe Int32)
+    , _gdTotalResults        :: !(Maybe (JSONText Int32))
     , _gdDataTable           :: !(Maybe GaDataDataTable)
     , _gdContainsSampledData :: !(Maybe Bool)
     , _gdTotalsForAllResults :: !(Maybe GaDataTotalsForAllResults)
@@ -3596,6 +3630,7 @@ gdSampleSpace :: Lens' GaData (Maybe Int64)
 gdSampleSpace
   = lens _gdSampleSpace
       (\ s a -> s{_gdSampleSpace = a})
+      . mapping _Coerce
 
 -- | The maximum number of rows the response can contain, regardless of the
 -- actual number of rows returned. Its value ranges from 1 to 10,000 with a
@@ -3605,6 +3640,7 @@ gdItemsPerPage :: Lens' GaData (Maybe Int32)
 gdItemsPerPage
   = lens _gdItemsPerPage
       (\ s a -> s{_gdItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Information for the view (profile), for which the Analytics data was
 -- requested.
@@ -3621,6 +3657,7 @@ gdKind = lens _gdKind (\ s a -> s{_gdKind = a})
 gdSampleSize :: Lens' GaData (Maybe Int64)
 gdSampleSize
   = lens _gdSampleSize (\ s a -> s{_gdSampleSize = a})
+      . mapping _Coerce
 
 -- | Analytics data rows, where each row contains a list of dimension values
 -- followed by the metric values. The order of dimensions and metrics is
@@ -3658,6 +3695,7 @@ gdTotalResults :: Lens' GaData (Maybe Int32)
 gdTotalResults
   = lens _gdTotalResults
       (\ s a -> s{_gdTotalResults = a})
+      . mapping _Coerce
 
 gdDataTable :: Lens' GaData (Maybe GaDataDataTable)
 gdDataTable
@@ -4053,12 +4091,12 @@ instance ToJSON WebPropertyRef where
 -- /See:/ 'goals' smart constructor.
 data Goals = Goals
     { _gNextLink     :: !(Maybe Text)
-    , _gItemsPerPage :: !(Maybe Int32)
+    , _gItemsPerPage :: !(Maybe (JSONText Int32))
     , _gKind         :: !Text
     , _gUsername     :: !(Maybe Text)
     , _gItems        :: !(Maybe [Goal])
-    , _gTotalResults :: !(Maybe Int32)
-    , _gStartIndex   :: !(Maybe Int32)
+    , _gTotalResults :: !(Maybe (JSONText Int32))
+    , _gStartIndex   :: !(Maybe (JSONText Int32))
     , _gPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4108,6 +4146,7 @@ gItemsPerPage :: Lens' Goals (Maybe Int32)
 gItemsPerPage
   = lens _gItemsPerPage
       (\ s a -> s{_gItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 gKind :: Lens' Goals Text
@@ -4130,12 +4169,14 @@ gTotalResults :: Lens' Goals (Maybe Int32)
 gTotalResults
   = lens _gTotalResults
       (\ s a -> s{_gTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 gStartIndex :: Lens' Goals (Maybe Int32)
 gStartIndex
-  = lens _gStartIndex (\ s a -> s{_gStartIndex = a})
+  = lens _gStartIndex (\ s a -> s{_gStartIndex = a}) .
+      mapping _Coerce
 
 -- | Link to previous page for this goal collection.
 gPreviousLink :: Lens' Goals (Maybe Text)
@@ -4453,9 +4494,9 @@ data Experiment = Experiment
     , _expKind                           :: !Text
     , _expCreated                        :: !(Maybe DateTime')
     , _expReasonExperimentEnded          :: !(Maybe Text)
-    , _expTrafficCoverage                :: !(Maybe Double)
+    , _expTrafficCoverage                :: !(Maybe (JSONText Double))
     , _expEditableInGaUi                 :: !(Maybe Bool)
-    , _expMinimumExperimentLengthInDays  :: !(Maybe Int32)
+    , _expMinimumExperimentLengthInDays  :: !(Maybe (JSONText Int32))
     , _expProFileId                      :: !(Maybe Text)
     , _expOptimizationType               :: !(Maybe Text)
     , _expSelfLink                       :: !(Maybe Text)
@@ -4469,7 +4510,7 @@ data Experiment = Experiment
     , _expUpdated                        :: !(Maybe DateTime')
     , _expRewriteVariationURLsAsOriginal :: !(Maybe Bool)
     , _expObjectiveMetric                :: !(Maybe Text)
-    , _expWinnerConfidenceLevel          :: !(Maybe Double)
+    , _expWinnerConfidenceLevel          :: !(Maybe (JSONText Double))
     , _expServingFramework               :: !(Maybe Text)
     , _expDescription                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4642,6 +4683,7 @@ expTrafficCoverage :: Lens' Experiment (Maybe Double)
 expTrafficCoverage
   = lens _expTrafficCoverage
       (\ s a -> s{_expTrafficCoverage = a})
+      . mapping _Coerce
 
 -- | If true, the end user will be able to edit the experiment via the Google
 -- Analytics user interface.
@@ -4657,6 +4699,7 @@ expMinimumExperimentLengthInDays :: Lens' Experiment (Maybe Int32)
 expMinimumExperimentLengthInDays
   = lens _expMinimumExperimentLengthInDays
       (\ s a -> s{_expMinimumExperimentLengthInDays = a})
+      . mapping _Coerce
 
 -- | View (Profile) ID to which this experiment belongs. This field is
 -- read-only.
@@ -4757,6 +4800,7 @@ expWinnerConfidenceLevel :: Lens' Experiment (Maybe Double)
 expWinnerConfidenceLevel
   = lens _expWinnerConfidenceLevel
       (\ s a -> s{_expWinnerConfidenceLevel = a})
+      . mapping _Coerce
 
 -- | The framework used to serve the experiment variations and evaluate the
 -- results. One of: - REDIRECT: Google Analytics redirects traffic to
@@ -4854,11 +4898,11 @@ instance ToJSON Experiment where
 -- /See:/ 'entityUserLinks' smart constructor.
 data EntityUserLinks = EntityUserLinks
     { _eulNextLink     :: !(Maybe Text)
-    , _eulItemsPerPage :: !(Maybe Int32)
+    , _eulItemsPerPage :: !(Maybe (JSONText Int32))
     , _eulKind         :: !Text
     , _eulItems        :: !(Maybe [EntityUserLink])
-    , _eulTotalResults :: !(Maybe Int32)
-    , _eulStartIndex   :: !(Maybe Int32)
+    , _eulTotalResults :: !(Maybe (JSONText Int32))
+    , _eulStartIndex   :: !(Maybe (JSONText Int32))
     , _eulPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4905,6 +4949,7 @@ eulItemsPerPage :: Lens' EntityUserLinks (Maybe Int32)
 eulItemsPerPage
   = lens _eulItemsPerPage
       (\ s a -> s{_eulItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 eulKind :: Lens' EntityUserLinks Text
@@ -4923,6 +4968,7 @@ eulTotalResults :: Lens' EntityUserLinks (Maybe Int32)
 eulTotalResults
   = lens _eulTotalResults
       (\ s a -> s{_eulTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the entries, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
@@ -4930,6 +4976,7 @@ eulStartIndex :: Lens' EntityUserLinks (Maybe Int32)
 eulStartIndex
   = lens _eulStartIndex
       (\ s a -> s{_eulStartIndex = a})
+      . mapping _Coerce
 
 -- | Previous link for this account collection.
 eulPreviousLink :: Lens' EntityUserLinks (Maybe Text)
@@ -5102,7 +5149,7 @@ instance ToJSON FilterRef where
 --
 -- /See:/ 'goalVisitTimeOnSiteDetails' smart constructor.
 data GoalVisitTimeOnSiteDetails = GoalVisitTimeOnSiteDetails
-    { _gvtosdComparisonValue :: !(Maybe Int64)
+    { _gvtosdComparisonValue :: !(Maybe (JSONText Int64))
     , _gvtosdComparisonType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5126,6 +5173,7 @@ gvtosdComparisonValue :: Lens' GoalVisitTimeOnSiteDetails (Maybe Int64)
 gvtosdComparisonValue
   = lens _gvtosdComparisonValue
       (\ s a -> s{_gvtosdComparisonValue = a})
+      . mapping _Coerce
 
 -- | Type of comparison. Possible values are LESS_THAN or GREATER_THAN.
 gvtosdComparisonType :: Lens' GoalVisitTimeOnSiteDetails (Maybe Text)
@@ -5155,12 +5203,12 @@ instance ToJSON GoalVisitTimeOnSiteDetails where
 -- /See:/ 'webProperties' smart constructor.
 data WebProperties = WebProperties
     { _wpNextLink     :: !(Maybe Text)
-    , _wpItemsPerPage :: !(Maybe Int32)
+    , _wpItemsPerPage :: !(Maybe (JSONText Int32))
     , _wpKind         :: !Text
     , _wpUsername     :: !(Maybe Text)
     , _wpItems        :: !(Maybe [WebProperty])
-    , _wpTotalResults :: !(Maybe Int32)
-    , _wpStartIndex   :: !(Maybe Int32)
+    , _wpTotalResults :: !(Maybe (JSONText Int32))
+    , _wpStartIndex   :: !(Maybe (JSONText Int32))
     , _wpPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5210,6 +5258,7 @@ wpItemsPerPage :: Lens' WebProperties (Maybe Int32)
 wpItemsPerPage
   = lens _wpItemsPerPage
       (\ s a -> s{_wpItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 wpKind :: Lens' WebProperties Text
@@ -5232,12 +5281,14 @@ wpTotalResults :: Lens' WebProperties (Maybe Int32)
 wpTotalResults
   = lens _wpTotalResults
       (\ s a -> s{_wpTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 wpStartIndex :: Lens' WebProperties (Maybe Int32)
 wpStartIndex
   = lens _wpStartIndex (\ s a -> s{_wpStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this web property collection.
 wpPreviousLink :: Lens' WebProperties (Maybe Text)
@@ -5278,12 +5329,12 @@ instance ToJSON WebProperties where
 -- /See:/ 'customMetrics' smart constructor.
 data CustomMetrics = CustomMetrics
     { _cmNextLink     :: !(Maybe Text)
-    , _cmItemsPerPage :: !(Maybe Int32)
+    , _cmItemsPerPage :: !(Maybe (JSONText Int32))
     , _cmKind         :: !Text
     , _cmUsername     :: !(Maybe Text)
     , _cmItems        :: !(Maybe [CustomMetric])
-    , _cmTotalResults :: !(Maybe Int32)
-    , _cmStartIndex   :: !(Maybe Int32)
+    , _cmTotalResults :: !(Maybe (JSONText Int32))
+    , _cmStartIndex   :: !(Maybe (JSONText Int32))
     , _cmPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5333,6 +5384,7 @@ cmItemsPerPage :: Lens' CustomMetrics (Maybe Int32)
 cmItemsPerPage
   = lens _cmItemsPerPage
       (\ s a -> s{_cmItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 cmKind :: Lens' CustomMetrics Text
@@ -5355,12 +5407,14 @@ cmTotalResults :: Lens' CustomMetrics (Maybe Int32)
 cmTotalResults
   = lens _cmTotalResults
       (\ s a -> s{_cmTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 cmStartIndex :: Lens' CustomMetrics (Maybe Int32)
 cmStartIndex
   = lens _cmStartIndex (\ s a -> s{_cmStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this custom metric collection.
 cmPreviousLink :: Lens' CustomMetrics (Maybe Text)
@@ -5401,13 +5455,13 @@ data FilterAdvancedDetails = FilterAdvancedDetails
     { _fadExtractA            :: !(Maybe Text)
     , _fadFieldARequired      :: !(Maybe Bool)
     , _fadFieldA              :: !(Maybe Text)
-    , _fadFieldBIndex         :: !(Maybe Int32)
+    , _fadFieldBIndex         :: !(Maybe (JSONText Int32))
     , _fadOutputToField       :: !(Maybe Text)
     , _fadOutputConstructor   :: !(Maybe Text)
     , _fadExtractB            :: !(Maybe Text)
-    , _fadFieldAIndex         :: !(Maybe Int32)
+    , _fadFieldAIndex         :: !(Maybe (JSONText Int32))
     , _fadCaseSensitive       :: !(Maybe Bool)
-    , _fadOutputToFieldIndex  :: !(Maybe Int32)
+    , _fadOutputToFieldIndex  :: !(Maybe (JSONText Int32))
     , _fadFieldB              :: !(Maybe Text)
     , _fadFieldBRequired      :: !(Maybe Bool)
     , _fadOverrideOutputField :: !(Maybe Bool)
@@ -5483,6 +5537,7 @@ fadFieldBIndex :: Lens' FilterAdvancedDetails (Maybe Int32)
 fadFieldBIndex
   = lens _fadFieldBIndex
       (\ s a -> s{_fadFieldBIndex = a})
+      . mapping _Coerce
 
 -- | Output field.
 fadOutputToField :: Lens' FilterAdvancedDetails (Maybe Text)
@@ -5507,6 +5562,7 @@ fadFieldAIndex :: Lens' FilterAdvancedDetails (Maybe Int32)
 fadFieldAIndex
   = lens _fadFieldAIndex
       (\ s a -> s{_fadFieldAIndex = a})
+      . mapping _Coerce
 
 -- | Indicates if the filter expressions are case sensitive.
 fadCaseSensitive :: Lens' FilterAdvancedDetails (Maybe Bool)
@@ -5520,6 +5576,7 @@ fadOutputToFieldIndex :: Lens' FilterAdvancedDetails (Maybe Int32)
 fadOutputToFieldIndex
   = lens _fadOutputToFieldIndex
       (\ s a -> s{_fadOutputToFieldIndex = a})
+      . mapping _Coerce
 
 -- | Field B.
 fadFieldB :: Lens' FilterAdvancedDetails (Maybe Text)
@@ -5580,7 +5637,7 @@ instance ToJSON FilterAdvancedDetails where
 --
 -- /See:/ 'filterUppercaseDetails' smart constructor.
 data FilterUppercaseDetails = FilterUppercaseDetails
-    { _fudFieldIndex :: !(Maybe Int32)
+    { _fudFieldIndex :: !(Maybe (JSONText Int32))
     , _fudField      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5605,6 +5662,7 @@ fudFieldIndex :: Lens' FilterUppercaseDetails (Maybe Int32)
 fudFieldIndex
   = lens _fudFieldIndex
       (\ s a -> s{_fudFieldIndex = a})
+      . mapping _Coerce
 
 -- | Field to use in the filter.
 fudField :: Lens' FilterUppercaseDetails (Maybe Text)
@@ -5729,7 +5787,7 @@ data RealtimeData = RealtimeData
     , _rdQuery               :: !(Maybe RealtimeDataQuery)
     , _rdColumnHeaders       :: !(Maybe [RealtimeDataColumnHeadersItem])
     , _rdId                  :: !(Maybe Text)
-    , _rdTotalResults        :: !(Maybe Int32)
+    , _rdTotalResults        :: !(Maybe (JSONText Int32))
     , _rdTotalsForAllResults :: !(Maybe RealtimeDataTotalsForAllResults)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5816,6 +5874,7 @@ rdTotalResults :: Lens' RealtimeData (Maybe Int32)
 rdTotalResults
   = lens _rdTotalResults
       (\ s a -> s{_rdTotalResults = a})
+      . mapping _Coerce
 
 -- | Total values for the requested metrics over all the results, not just
 -- the results returned in this response. The order of the metric totals is
@@ -5872,7 +5931,7 @@ data CustomMetric = CustomMetric
     , _cusId            :: !(Maybe Text)
     , _cusUpdated       :: !(Maybe DateTime')
     , _cusType          :: !(Maybe Text)
-    , _cusIndex         :: !(Maybe Int32)
+    , _cusIndex         :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomMetric' with the minimum fields required to make a request.
@@ -6002,7 +6061,9 @@ cusType = lens _cusType (\ s a -> s{_cusType = a})
 
 -- | Index of the custom metric.
 cusIndex :: Lens' CustomMetric (Maybe Int32)
-cusIndex = lens _cusIndex (\ s a -> s{_cusIndex = a})
+cusIndex
+  = lens _cusIndex (\ s a -> s{_cusIndex = a}) .
+      mapping _Coerce
 
 instance FromJSON CustomMetric where
         parseJSON
@@ -6160,7 +6221,7 @@ instance ToJSON CustomDimensionParentLink where
 data WebProperty = WebProperty
     { _wParentLink            :: !(Maybe WebPropertyParentLink)
     , _wChildLink             :: !(Maybe WebPropertyChildLink)
-    , _wDefaultProFileId      :: !(Maybe Int64)
+    , _wDefaultProFileId      :: !(Maybe (JSONText Int64))
     , _wKind                  :: !Text
     , _wCreated               :: !(Maybe DateTime')
     , _wSelfLink              :: !(Maybe Text)
@@ -6169,7 +6230,7 @@ data WebProperty = WebProperty
     , _wInternalWebPropertyId :: !(Maybe Text)
     , _wId                    :: !(Maybe Text)
     , _wUpdated               :: !(Maybe DateTime')
-    , _wProFileCount          :: !(Maybe Int32)
+    , _wProFileCount          :: !(Maybe (JSONText Int32))
     , _wPermissions           :: !(Maybe WebPropertyPermissions)
     , _wWebsiteURL            :: !(Maybe Text)
     , _wIndustryVertical      :: !(Maybe Text)
@@ -6250,6 +6311,7 @@ wDefaultProFileId :: Lens' WebProperty (Maybe Int64)
 wDefaultProFileId
   = lens _wDefaultProFileId
       (\ s a -> s{_wDefaultProFileId = a})
+      . mapping _Coerce
 
 -- | Resource type for Analytics WebProperty.
 wKind :: Lens' WebProperty Text
@@ -6296,6 +6358,7 @@ wProFileCount :: Lens' WebProperty (Maybe Int32)
 wProFileCount
   = lens _wProFileCount
       (\ s a -> s{_wProFileCount = a})
+      . mapping _Coerce
 
 -- | Permissions the user has for this web property.
 wPermissions :: Lens' WebProperty (Maybe WebPropertyPermissions)
@@ -6546,7 +6609,7 @@ instance ToJSON CustomDataSourceParentLink where
 data GoalEventDetailsEventConditionsItem = GoalEventDetailsEventConditionsItem
     { _gedeciMatchType       :: !(Maybe Text)
     , _gedeciExpression      :: !(Maybe Text)
-    , _gedeciComparisonValue :: !(Maybe Int64)
+    , _gedeciComparisonValue :: !(Maybe (JSONText Int64))
     , _gedeciType            :: !(Maybe Text)
     , _gedeciComparisonType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6593,6 +6656,7 @@ gedeciComparisonValue :: Lens' GoalEventDetailsEventConditionsItem (Maybe Int64)
 gedeciComparisonValue
   = lens _gedeciComparisonValue
       (\ s a -> s{_gedeciComparisonValue = a})
+      . mapping _Coerce
 
 -- | Type of this event condition. Possible values are CATEGORY, ACTION,
 -- LABEL, or VALUE.
@@ -6640,8 +6704,8 @@ data McfDataQuery = McfDataQuery
     , _mdqEndDate       :: !(Maybe Text)
     , _mdqSort          :: !(Maybe [Text])
     , _mdqDimensions    :: !(Maybe Text)
-    , _mdqStartIndex    :: !(Maybe Int32)
-    , _mdqMaxResults    :: !(Maybe Int32)
+    , _mdqStartIndex    :: !(Maybe (JSONText Int32))
+    , _mdqMaxResults    :: !(Maybe (JSONText Int32))
     , _mdqSegment       :: !(Maybe Text)
     , _mdqStartDate     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6732,12 +6796,14 @@ mdqStartIndex :: Lens' McfDataQuery (Maybe Int32)
 mdqStartIndex
   = lens _mdqStartIndex
       (\ s a -> s{_mdqStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum results per page.
 mdqMaxResults :: Lens' McfDataQuery (Maybe Int32)
 mdqMaxResults
   = lens _mdqMaxResults
       (\ s a -> s{_mdqMaxResults = a})
+      . mapping _Coerce
 
 -- | Analytics advanced segment.
 mdqSegment :: Lens' McfDataQuery (Maybe Text)
@@ -6790,7 +6856,7 @@ data Goal = Goal
     , _goaWebPropertyId          :: !(Maybe Text)
     , _goaKind                   :: !Text
     , _goaCreated                :: !(Maybe DateTime')
-    , _goaValue                  :: !(Maybe Float)
+    , _goaValue                  :: !(Maybe (JSONText Float))
     , _goaProFileId              :: !(Maybe Text)
     , _goaEventDetails           :: !(Maybe GoalEventDetails)
     , _goaActive                 :: !(Maybe Bool)
@@ -6895,7 +6961,9 @@ goaCreated
 
 -- | Goal value.
 goaValue :: Lens' Goal (Maybe Float)
-goaValue = lens _goaValue (\ s a -> s{_goaValue = a})
+goaValue
+  = lens _goaValue (\ s a -> s{_goaValue = a}) .
+      mapping _Coerce
 
 -- | View (Profile) ID to which this goal belongs.
 goaProFileId :: Lens' Goal (Maybe Text)
@@ -7190,7 +7258,7 @@ data RealtimeDataQuery = RealtimeDataQuery
     , _rdqIds        :: !(Maybe Text)
     , _rdqSort       :: !(Maybe [Text])
     , _rdqDimensions :: !(Maybe Text)
-    , _rdqMaxResults :: !(Maybe Int32)
+    , _rdqMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeDataQuery' with the minimum fields required to make a request.
@@ -7253,6 +7321,7 @@ rdqMaxResults :: Lens' RealtimeDataQuery (Maybe Int32)
 rdqMaxResults
   = lens _rdqMaxResults
       (\ s a -> s{_rdqMaxResults = a})
+      . mapping _Coerce
 
 instance FromJSON RealtimeDataQuery where
         parseJSON
@@ -7282,7 +7351,7 @@ data Columns = Columns
     { _colEtag           :: !(Maybe Text)
     , _colKind           :: !Text
     , _colItems          :: !(Maybe [Column])
-    , _colTotalResults   :: !(Maybe Int32)
+    , _colTotalResults   :: !(Maybe (JSONText Int32))
     , _colAttributeNames :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7331,6 +7400,7 @@ colTotalResults :: Lens' Columns (Maybe Int32)
 colTotalResults
   = lens _colTotalResults
       (\ s a -> s{_colTotalResults = a})
+      . mapping _Coerce
 
 -- | List of attributes names returned by columns.
 colAttributeNames :: Lens' Columns [Text]
@@ -7364,7 +7434,7 @@ instance ToJSON Columns where
 --
 -- /See:/ 'filterLowercaseDetails' smart constructor.
 data FilterLowercaseDetails = FilterLowercaseDetails
-    { _fldFieldIndex :: !(Maybe Int32)
+    { _fldFieldIndex :: !(Maybe (JSONText Int32))
     , _fldField      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7389,6 +7459,7 @@ fldFieldIndex :: Lens' FilterLowercaseDetails (Maybe Int32)
 fldFieldIndex
   = lens _fldFieldIndex
       (\ s a -> s{_fldFieldIndex = a})
+      . mapping _Coerce
 
 -- | Field to use in the filter.
 fldField :: Lens' FilterLowercaseDetails (Maybe Text)
@@ -7612,11 +7683,11 @@ instance ToJSON Filter where
 -- /See:/ 'uploads' smart constructor.
 data Uploads = Uploads
     { _uplNextLink     :: !(Maybe Text)
-    , _uplItemsPerPage :: !(Maybe Int32)
+    , _uplItemsPerPage :: !(Maybe (JSONText Int32))
     , _uplKind         :: !Text
     , _uplItems        :: !(Maybe [Upload])
-    , _uplTotalResults :: !(Maybe Int32)
-    , _uplStartIndex   :: !(Maybe Int32)
+    , _uplTotalResults :: !(Maybe (JSONText Int32))
+    , _uplStartIndex   :: !(Maybe (JSONText Int32))
     , _uplPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7663,6 +7734,7 @@ uplItemsPerPage :: Lens' Uploads (Maybe Int32)
 uplItemsPerPage
   = lens _uplItemsPerPage
       (\ s a -> s{_uplItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 uplKind :: Lens' Uploads Text
@@ -7681,6 +7753,7 @@ uplTotalResults :: Lens' Uploads (Maybe Int32)
 uplTotalResults
   = lens _uplTotalResults
       (\ s a -> s{_uplTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
@@ -7688,6 +7761,7 @@ uplStartIndex :: Lens' Uploads (Maybe Int32)
 uplStartIndex
   = lens _uplStartIndex
       (\ s a -> s{_uplStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this upload collection.
 uplPreviousLink :: Lens' Uploads (Maybe Text)
@@ -7726,12 +7800,12 @@ instance ToJSON Uploads where
 -- /See:/ 'customDimensions' smart constructor.
 data CustomDimensions = CustomDimensions
     { _cdNextLink     :: !(Maybe Text)
-    , _cdItemsPerPage :: !(Maybe Int32)
+    , _cdItemsPerPage :: !(Maybe (JSONText Int32))
     , _cdKind         :: !Text
     , _cdUsername     :: !(Maybe Text)
     , _cdItems        :: !(Maybe [CustomDimension])
-    , _cdTotalResults :: !(Maybe Int32)
-    , _cdStartIndex   :: !(Maybe Int32)
+    , _cdTotalResults :: !(Maybe (JSONText Int32))
+    , _cdStartIndex   :: !(Maybe (JSONText Int32))
     , _cdPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7781,6 +7855,7 @@ cdItemsPerPage :: Lens' CustomDimensions (Maybe Int32)
 cdItemsPerPage
   = lens _cdItemsPerPage
       (\ s a -> s{_cdItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 cdKind :: Lens' CustomDimensions Text
@@ -7803,12 +7878,14 @@ cdTotalResults :: Lens' CustomDimensions (Maybe Int32)
 cdTotalResults
   = lens _cdTotalResults
       (\ s a -> s{_cdTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 cdStartIndex :: Lens' CustomDimensions (Maybe Int32)
 cdStartIndex
   = lens _cdStartIndex (\ s a -> s{_cdStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this custom dimension collection.
 cdPreviousLink :: Lens' CustomDimensions (Maybe Text)
@@ -7849,12 +7926,12 @@ instance ToJSON CustomDimensions where
 -- /See:/ 'segments' smart constructor.
 data Segments = Segments
     { _sNextLink     :: !(Maybe Text)
-    , _sItemsPerPage :: !(Maybe Int32)
+    , _sItemsPerPage :: !(Maybe (JSONText Int32))
     , _sKind         :: !Text
     , _sUsername     :: !(Maybe Text)
     , _sItems        :: !(Maybe [Segment])
-    , _sTotalResults :: !(Maybe Int32)
-    , _sStartIndex   :: !(Maybe Int32)
+    , _sTotalResults :: !(Maybe (JSONText Int32))
+    , _sStartIndex   :: !(Maybe (JSONText Int32))
     , _sPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7904,6 +7981,7 @@ sItemsPerPage :: Lens' Segments (Maybe Int32)
 sItemsPerPage
   = lens _sItemsPerPage
       (\ s a -> s{_sItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type for segments.
 sKind :: Lens' Segments Text
@@ -7926,12 +8004,14 @@ sTotalResults :: Lens' Segments (Maybe Int32)
 sTotalResults
   = lens _sTotalResults
       (\ s a -> s{_sTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
 sStartIndex :: Lens' Segments (Maybe Int32)
 sStartIndex
-  = lens _sStartIndex (\ s a -> s{_sStartIndex = a})
+  = lens _sStartIndex (\ s a -> s{_sStartIndex = a}) .
+      mapping _Coerce
 
 -- | Link to previous page for this segment collection.
 sPreviousLink :: Lens' Segments (Maybe Text)
@@ -8142,12 +8222,12 @@ instance ToJSON GoalURLDestinationDetails where
 -- /See:/ 'proFileFilterLinks' smart constructor.
 data ProFileFilterLinks = ProFileFilterLinks
     { _pfflNextLink     :: !(Maybe Text)
-    , _pfflItemsPerPage :: !(Maybe Int32)
+    , _pfflItemsPerPage :: !(Maybe (JSONText Int32))
     , _pfflKind         :: !Text
     , _pfflUsername     :: !(Maybe Text)
     , _pfflItems        :: !(Maybe [ProFileFilterLink])
-    , _pfflTotalResults :: !(Maybe Int32)
-    , _pfflStartIndex   :: !(Maybe Int32)
+    , _pfflTotalResults :: !(Maybe (JSONText Int32))
+    , _pfflStartIndex   :: !(Maybe (JSONText Int32))
     , _pfflPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8197,6 +8277,7 @@ pfflItemsPerPage :: Lens' ProFileFilterLinks (Maybe Int32)
 pfflItemsPerPage
   = lens _pfflItemsPerPage
       (\ s a -> s{_pfflItemsPerPage = a})
+      . mapping _Coerce
 
 -- | Collection type.
 pfflKind :: Lens' ProFileFilterLinks Text
@@ -8220,6 +8301,7 @@ pfflTotalResults :: Lens' ProFileFilterLinks (Maybe Int32)
 pfflTotalResults
   = lens _pfflTotalResults
       (\ s a -> s{_pfflTotalResults = a})
+      . mapping _Coerce
 
 -- | The starting index of the resources, which is 1 by default or otherwise
 -- specified by the start-index query parameter.
@@ -8227,6 +8309,7 @@ pfflStartIndex :: Lens' ProFileFilterLinks (Maybe Int32)
 pfflStartIndex
   = lens _pfflStartIndex
       (\ s a -> s{_pfflStartIndex = a})
+      . mapping _Coerce
 
 -- | Link to previous page for this profile filter link collection.
 pfflPreviousLink :: Lens' ProFileFilterLinks (Maybe Text)
@@ -8412,7 +8495,7 @@ data Upload = Upload
     { _uuStatus             :: !(Maybe Text)
     , _uuKind               :: !Text
     , _uuCustomDataSourceId :: !(Maybe Text)
-    , _uuAccountId          :: !(Maybe Int64)
+    , _uuAccountId          :: !(Maybe (JSONText Int64))
     , _uuId                 :: !(Maybe Text)
     , _uuErrors             :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8462,7 +8545,8 @@ uuCustomDataSourceId
 -- | Account Id to which this upload belongs.
 uuAccountId :: Lens' Upload (Maybe Int64)
 uuAccountId
-  = lens _uuAccountId (\ s a -> s{_uuAccountId = a})
+  = lens _uuAccountId (\ s a -> s{_uuAccountId = a}) .
+      mapping _Coerce
 
 -- | A unique ID for this upload.
 uuId :: Lens' Upload (Maybe Text)
@@ -8512,7 +8596,7 @@ data CustomDimension = CustomDimension
     , _cddScope         :: !(Maybe Text)
     , _cddId            :: !(Maybe Text)
     , _cddUpdated       :: !(Maybe DateTime')
-    , _cddIndex         :: !(Maybe Int32)
+    , _cddIndex         :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomDimension' with the minimum fields required to make a request.
@@ -8619,7 +8703,9 @@ cddUpdated
 
 -- | Index of the custom dimension.
 cddIndex :: Lens' CustomDimension (Maybe Int32)
-cddIndex = lens _cddIndex (\ s a -> s{_cddIndex = a})
+cddIndex
+  = lens _cddIndex (\ s a -> s{_cddIndex = a}) .
+      mapping _Coerce
 
 instance FromJSON CustomDimension where
         parseJSON
@@ -8833,7 +8919,7 @@ data ProFileFilterLink = ProFileFilterLink
     , _proFilterRef  :: !(Maybe FilterRef)
     , _proSelfLink   :: !(Maybe Text)
     , _proId         :: !(Maybe Text)
-    , _proRank       :: !(Maybe Int32)
+    , _proRank       :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProFileFilterLink' with the minimum fields required to make a request.
@@ -8899,7 +8985,9 @@ proId = lens _proId (\ s a -> s{_proId = a})
 -- list. After the link is inserted\/updated\/deleted all profile filter
 -- links will be renumbered starting at 1.
 proRank :: Lens' ProFileFilterLink (Maybe Int32)
-proRank = lens _proRank (\ s a -> s{_proRank = a})
+proRank
+  = lens _proRank (\ s a -> s{_proRank = a}) .
+      mapping _Coerce
 
 instance FromJSON ProFileFilterLink where
         parseJSON
@@ -9083,7 +9171,7 @@ instance ToJSON GaDataDataTableColsItem where
 -- /See:/ 'experimentVariationsItem' smart constructor.
 data ExperimentVariationsItem = ExperimentVariationsItem
     { _eviStatus :: !(Maybe Text)
-    , _eviWeight :: !(Maybe Double)
+    , _eviWeight :: !(Maybe (JSONText Double))
     , _eviURL    :: !(Maybe Text)
     , _eviWon    :: !(Maybe Bool)
     , _eviName   :: !(Maybe Text)
@@ -9124,7 +9212,8 @@ eviStatus
 -- experiment is running. This field is read-only.
 eviWeight :: Lens' ExperimentVariationsItem (Maybe Double)
 eviWeight
-  = lens _eviWeight (\ s a -> s{_eviWeight = a})
+  = lens _eviWeight (\ s a -> s{_eviWeight = a}) .
+      mapping _Coerce
 
 -- | The URL of the variation. This field may not be changed for an
 -- experiment whose status is RUNNING or ENDED.

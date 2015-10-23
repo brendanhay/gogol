@@ -58,15 +58,15 @@ type DirectorySitesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "directorySites" :>
                QueryParam "searchString" Text :>
                  QueryParam "acceptsInterstitialPlacements" Bool :>
                    QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                     QueryParams "ids" Int64 :>
+                     QueryParams "ids" (JSONText Int64) :>
                        QueryParam "sortOrder" DirectorySitesListSortOrder :>
                          QueryParam "active" Bool :>
-                           QueryParam "countryId" Int64 :>
+                           QueryParam "countryId" (JSONText Int64) :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField"
                                  DirectorySitesListSortField
@@ -74,8 +74,8 @@ type DirectorySitesListResource =
                                  QueryParam "acceptsInStreamVideoPlacements"
                                    Bool
                                    :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "parentId" Int64 :>
+                                   QueryParam "maxResults" (JSONText Int32) :>
+                                     QueryParam "parentId" (JSONText Int64) :>
                                        QueryParam "dfp_network_code" Text :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
@@ -88,16 +88,16 @@ data DirectorySitesList = DirectorySitesList
     { _dslSearchString                   :: !(Maybe Text)
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
-    , _dslIds                            :: !(Maybe [Int64])
-    , _dslProFileId                      :: !Int64
+    , _dslIds                            :: !(Maybe [JSONText Int64])
+    , _dslProFileId                      :: !(JSONText Int64)
     , _dslSortOrder                      :: !(Maybe DirectorySitesListSortOrder)
     , _dslActive                         :: !(Maybe Bool)
-    , _dslCountryId                      :: !(Maybe Int64)
+    , _dslCountryId                      :: !(Maybe (JSONText Int64))
     , _dslPageToken                      :: !(Maybe Text)
     , _dslSortField                      :: !(Maybe DirectorySitesListSortField)
     , _dslAcceptsInStreamVideoPlacements :: !(Maybe Bool)
-    , _dslMaxResults                     :: !(Maybe Int32)
-    , _dslParentId                       :: !(Maybe Int64)
+    , _dslMaxResults                     :: !(Maybe (JSONText Int32))
+    , _dslParentId                       :: !(Maybe (JSONText Int64))
     , _dslDfpNetworkCode                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -190,6 +190,7 @@ dslIds
 dslProFileId :: Lens' DirectorySitesList Int64
 dslProFileId
   = lens _dslProFileId (\ s a -> s{_dslProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 dslSortOrder :: Lens' DirectorySitesList (Maybe DirectorySitesListSortOrder)
@@ -206,6 +207,7 @@ dslActive
 dslCountryId :: Lens' DirectorySitesList (Maybe Int64)
 dslCountryId
   = lens _dslCountryId (\ s a -> s{_dslCountryId = a})
+      . mapping _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
 dslPageToken :: Lens' DirectorySitesList (Maybe Text)
@@ -229,11 +231,13 @@ dslMaxResults :: Lens' DirectorySitesList (Maybe Int32)
 dslMaxResults
   = lens _dslMaxResults
       (\ s a -> s{_dslMaxResults = a})
+      . mapping _Coerce
 
 -- | Select only directory sites with this parent ID.
 dslParentId :: Lens' DirectorySitesList (Maybe Int64)
 dslParentId
-  = lens _dslParentId (\ s a -> s{_dslParentId = a})
+  = lens _dslParentId (\ s a -> s{_dslParentId = a}) .
+      mapping _Coerce
 
 -- | Select only directory sites with this DFP network code.
 dslDfpNetworkCode :: Lens' DirectorySitesList (Maybe Text)

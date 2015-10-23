@@ -66,7 +66,7 @@ type TransferOperationsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListOperationsResponse
@@ -88,7 +88,7 @@ data TransferOperationsList = TransferOperationsList
     , _tolName           :: !Text
     , _tolFilter         :: !(Maybe Text)
     , _tolPageToken      :: !(Maybe Text)
-    , _tolPageSize       :: !(Maybe Int32)
+    , _tolPageSize       :: !(Maybe (JSONText Int32))
     , _tolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -184,7 +184,8 @@ tolPageToken
 -- | The standard list page size.
 tolPageSize :: Lens' TransferOperationsList (Maybe Int32)
 tolPageSize
-  = lens _tolPageSize (\ s a -> s{_tolPageSize = a})
+  = lens _tolPageSize (\ s a -> s{_tolPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 tolCallback :: Lens' TransferOperationsList (Maybe Text)

@@ -53,7 +53,7 @@ type TypesListResource =
                "types" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TypesListResponse
 
@@ -64,7 +64,7 @@ data TypesList = TypesList
     { _tlProject    :: !Text
     , _tlFilter     :: !(Maybe Text)
     , _tlPageToken  :: !(Maybe Text)
-    , _tlMaxResults :: !Word32
+    , _tlMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TypesList' with the minimum fields required to make a request.
@@ -119,6 +119,7 @@ tlPageToken
 tlMaxResults :: Lens' TypesList Word32
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest TypesList where
         type Rs TypesList = TypesListResponse

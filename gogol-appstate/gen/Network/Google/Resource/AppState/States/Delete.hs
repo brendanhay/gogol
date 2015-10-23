@@ -49,7 +49,7 @@ type StatesDeleteResource =
      "appstate" :>
        "v1" :>
          "states" :>
-           Capture "stateKey" Int32 :>
+           Capture "stateKey" (JSONText Int32) :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a key and the data associated with it. The key is removed and no
@@ -60,7 +60,7 @@ type StatesDeleteResource =
 --
 -- /See:/ 'statesDelete' smart constructor.
 newtype StatesDelete = StatesDelete
-    { _sdStateKey :: Int32
+    { _sdStateKey :: JSONText Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesDelete' with the minimum fields required to make a request.
@@ -79,7 +79,8 @@ statesDelete pSdStateKey_ =
 -- | The key for the data to be retrieved.
 sdStateKey :: Lens' StatesDelete Int32
 sdStateKey
-  = lens _sdStateKey (\ s a -> s{_sdStateKey = a})
+  = lens _sdStateKey (\ s a -> s{_sdStateKey = a}) .
+      _Coerce
 
 instance GoogleRequest StatesDelete where
         type Rs StatesDelete = ()

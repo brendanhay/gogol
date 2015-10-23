@@ -50,25 +50,25 @@ type FilesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "files" :>
                QueryParam "sortOrder" FilesListSortOrder :>
                  QueryParam "scope" FilesListScope :>
                    QueryParam "pageToken" Text :>
                      QueryParam "sortField" FilesListSortField :>
-                       QueryParam "maxResults" Int32 :>
+                       QueryParam "maxResults" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] FileList
 
 -- | Lists files for a user profile.
 --
 -- /See:/ 'filesList' smart constructor.
 data FilesList = FilesList
-    { _flProFileId  :: !Int64
+    { _flProFileId  :: !(JSONText Int64)
     , _flSortOrder  :: !FilesListSortOrder
     , _flScope      :: !FilesListScope
     , _flPageToken  :: !(Maybe Text)
     , _flSortField  :: !FilesListSortField
-    , _flMaxResults :: !(Maybe Int32)
+    , _flMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.
@@ -102,7 +102,8 @@ filesList pFlProFileId_ =
 -- | The DFA profile ID.
 flProFileId :: Lens' FilesList Int64
 flProFileId
-  = lens _flProFileId (\ s a -> s{_flProFileId = a})
+  = lens _flProFileId (\ s a -> s{_flProFileId = a}) .
+      _Coerce
 
 -- | Order of sorted results, default is \'DESCENDING\'.
 flSortOrder :: Lens' FilesList FilesListSortOrder
@@ -127,6 +128,7 @@ flSortField
 flMaxResults :: Lens' FilesList (Maybe Int32)
 flMaxResults
   = lens _flMaxResults (\ s a -> s{_flMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest FilesList where
         type Rs FilesList = FileList

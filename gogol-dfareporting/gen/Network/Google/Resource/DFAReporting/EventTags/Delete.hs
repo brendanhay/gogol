@@ -46,17 +46,17 @@ type EventTagsDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "eventTags" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing event tag.
 --
 -- /See:/ 'eventTagsDelete' smart constructor.
 data EventTagsDelete = EventTagsDelete
-    { _etdProFileId :: !Int64
-    , _etdId        :: !Int64
+    { _etdProFileId :: !(JSONText Int64)
+    , _etdId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsDelete' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ eventTagsDelete pEtdProFileId_ pEtdId_ =
 etdProFileId :: Lens' EventTagsDelete Int64
 etdProFileId
   = lens _etdProFileId (\ s a -> s{_etdProFileId = a})
+      . _Coerce
 
 -- | Event tag ID.
 etdId :: Lens' EventTagsDelete Int64
-etdId = lens _etdId (\ s a -> s{_etdId = a})
+etdId
+  = lens _etdId (\ s a -> s{_etdId = a}) . _Coerce
 
 instance GoogleRequest EventTagsDelete where
         type Rs EventTagsDelete = ()

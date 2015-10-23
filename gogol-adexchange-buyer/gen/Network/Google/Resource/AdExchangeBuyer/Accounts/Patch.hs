@@ -46,7 +46,7 @@ type AccountsPatchResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "accounts" :>
-           Capture "id" Int32 :>
+           Capture "id" (JSONText Int32) :>
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] Account :> Patch '[JSON] Account
 
@@ -55,7 +55,7 @@ type AccountsPatchResource =
 -- /See:/ 'accountsPatch' smart constructor.
 data AccountsPatch = AccountsPatch
     { _apPayload :: !Account
-    , _apId      :: !Int32
+    , _apId      :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
@@ -82,7 +82,7 @@ apPayload
 
 -- | The account id
 apId :: Lens' AccountsPatch Int32
-apId = lens _apId (\ s a -> s{_apId = a})
+apId = lens _apId (\ s a -> s{_apId = a}) . _Coerce
 
 instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account

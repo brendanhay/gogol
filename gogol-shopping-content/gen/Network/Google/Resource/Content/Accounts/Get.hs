@@ -45,17 +45,17 @@ import           Network.Google.ShoppingContent.Types
 type AccountsGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accounts" :>
-             Capture "accountId" Word64 :>
+             Capture "accountId" (JSONText Word64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Retrieves a Merchant Center account.
 --
 -- /See:/ 'accountsGet' smart constructor.
 data AccountsGet = AccountsGet
-    { _agMerchantId :: !Word64
-    , _agAccountId  :: !Word64
+    { _agMerchantId :: !(JSONText Word64)
+    , _agAccountId  :: !(JSONText Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
@@ -79,11 +79,13 @@ accountsGet pAgMerchantId_ pAgAccountId_ =
 agMerchantId :: Lens' AccountsGet Word64
 agMerchantId
   = lens _agMerchantId (\ s a -> s{_agMerchantId = a})
+      . _Coerce
 
 -- | The ID of the account.
 agAccountId :: Lens' AccountsGet Word64
 agAccountId
-  = lens _agAccountId (\ s a -> s{_agAccountId = a})
+  = lens _agAccountId (\ s a -> s{_agAccountId = a}) .
+      _Coerce
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account

@@ -56,7 +56,7 @@ type GlobalAccountsOperationsListResource =
                  QueryParam "orderBy" Text :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of operation resources contained within the specified
@@ -68,7 +68,7 @@ data GlobalAccountsOperationsList = GlobalAccountsOperationsList
     , _gaolProject    :: !Text
     , _gaolFilter     :: !(Maybe Text)
     , _gaolPageToken  :: !(Maybe Text)
-    , _gaolMaxResults :: !Word32
+    , _gaolMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAccountsOperationsList' with the minimum fields required to make a request.
@@ -141,6 +141,7 @@ gaolMaxResults :: Lens' GlobalAccountsOperationsList Word32
 gaolMaxResults
   = lens _gaolMaxResults
       (\ s a -> s{_gaolMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest GlobalAccountsOperationsList
          where

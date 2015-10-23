@@ -52,9 +52,9 @@ type EntitlementsListResource =
            Capture "packageName" Text :>
              "entitlements" :>
                QueryParam "token" Text :>
-                 QueryParam "startIndex" Word32 :>
+                 QueryParam "startIndex" (JSONText Word32) :>
                    QueryParam "productId" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] EntitlementsListResponse
 
@@ -64,9 +64,9 @@ type EntitlementsListResource =
 data EntitlementsList = EntitlementsList
     { _elPackageName :: !Text
     , _elToken       :: !(Maybe Text)
-    , _elStartIndex  :: !(Maybe Word32)
+    , _elStartIndex  :: !(Maybe (JSONText Word32))
     , _elProductId   :: !(Maybe Text)
-    , _elMaxResults  :: !(Maybe Word32)
+    , _elMaxResults  :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsList' with the minimum fields required to make a request.
@@ -107,6 +107,7 @@ elToken = lens _elToken (\ s a -> s{_elToken = a})
 elStartIndex :: Lens' EntitlementsList (Maybe Word32)
 elStartIndex
   = lens _elStartIndex (\ s a -> s{_elStartIndex = a})
+      . mapping _Coerce
 
 -- | The product id of the inapp product (for example, \'sku1\'). This can be
 -- used to restrict the result set.
@@ -117,6 +118,7 @@ elProductId
 elMaxResults :: Lens' EntitlementsList (Maybe Word32)
 elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest EntitlementsList where
         type Rs EntitlementsList = EntitlementsListResponse

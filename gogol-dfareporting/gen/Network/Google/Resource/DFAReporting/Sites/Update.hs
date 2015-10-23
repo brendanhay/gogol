@@ -46,7 +46,7 @@ type SitesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "sites" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Site :> Put '[JSON] Site
@@ -55,7 +55,7 @@ type SitesUpdateResource =
 --
 -- /See:/ 'sitesUpdate' smart constructor.
 data SitesUpdate = SitesUpdate
-    { _suProFileId :: !Int64
+    { _suProFileId :: !(JSONText Int64)
     , _suPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,8 @@ sitesUpdate pSuProFileId_ pSuPayload_ =
 -- | User profile ID associated with this request.
 suProFileId :: Lens' SitesUpdate Int64
 suProFileId
-  = lens _suProFileId (\ s a -> s{_suProFileId = a})
+  = lens _suProFileId (\ s a -> s{_suProFileId = a}) .
+      _Coerce
 
 -- | Multipart request metadata.
 suPayload :: Lens' SitesUpdate Site

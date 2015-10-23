@@ -118,8 +118,8 @@ data TraceSpan = TraceSpan
     , _tsName         :: !(Maybe Text)
     , _tsEndTime      :: !(Maybe Text)
     , _tsLabels       :: !(Maybe TraceSpanLabels)
-    , _tsParentSpanId :: !(Maybe Word64)
-    , _tsSpanId       :: !(Maybe Word64)
+    , _tsParentSpanId :: !(Maybe (JSONText Word64))
+    , _tsSpanId       :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TraceSpan' with the minimum fields required to make a request.
@@ -186,11 +186,14 @@ tsParentSpanId :: Lens' TraceSpan (Maybe Word64)
 tsParentSpanId
   = lens _tsParentSpanId
       (\ s a -> s{_tsParentSpanId = a})
+      . mapping _Coerce
 
 -- | Identifier of the span within the trace. Each span should have an
 -- identifier that is unique per trace.
 tsSpanId :: Lens' TraceSpan (Maybe Word64)
-tsSpanId = lens _tsSpanId (\ s a -> s{_tsSpanId = a})
+tsSpanId
+  = lens _tsSpanId (\ s a -> s{_tsSpanId = a}) .
+      mapping _Coerce
 
 instance FromJSON TraceSpan where
         parseJSON

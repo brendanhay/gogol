@@ -45,7 +45,7 @@ type ConnectionTypesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "connectionTypes" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] ConnectionTypesListResponse
@@ -54,7 +54,7 @@ type ConnectionTypesListResource =
 --
 -- /See:/ 'connectionTypesList' smart constructor.
 newtype ConnectionTypesList = ConnectionTypesList
-    { _ctlProFileId :: Int64
+    { _ctlProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionTypesList' with the minimum fields required to make a request.
@@ -74,6 +74,7 @@ connectionTypesList pCtlProFileId_ =
 ctlProFileId :: Lens' ConnectionTypesList Int64
 ctlProFileId
   = lens _ctlProFileId (\ s a -> s{_ctlProFileId = a})
+      . _Coerce
 
 instance GoogleRequest ConnectionTypesList where
         type Rs ConnectionTypesList =

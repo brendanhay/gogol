@@ -49,11 +49,11 @@ type CreativeFieldValuesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
+               Capture "creativeFieldId" (JSONText Int64) :>
                  "creativeFieldValues" :>
-                   QueryParam "id" Int64 :>
+                   QueryParam "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CreativeFieldValue :>
                          Patch '[JSON] CreativeFieldValue
@@ -63,10 +63,10 @@ type CreativeFieldValuesPatchResource =
 --
 -- /See:/ 'creativeFieldValuesPatch' smart constructor.
 data CreativeFieldValuesPatch = CreativeFieldValuesPatch
-    { _cfvpCreativeFieldId :: !Int64
-    , _cfvpProFileId       :: !Int64
+    { _cfvpCreativeFieldId :: !(JSONText Int64)
+    , _cfvpProFileId       :: !(JSONText Int64)
     , _cfvpPayload         :: !CreativeFieldValue
-    , _cfvpId              :: !Int64
+    , _cfvpId              :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesPatch' with the minimum fields required to make a request.
@@ -99,12 +99,14 @@ cfvpCreativeFieldId :: Lens' CreativeFieldValuesPatch Int64
 cfvpCreativeFieldId
   = lens _cfvpCreativeFieldId
       (\ s a -> s{_cfvpCreativeFieldId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 cfvpProFileId :: Lens' CreativeFieldValuesPatch Int64
 cfvpProFileId
   = lens _cfvpProFileId
       (\ s a -> s{_cfvpProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 cfvpPayload :: Lens' CreativeFieldValuesPatch CreativeFieldValue
@@ -113,7 +115,8 @@ cfvpPayload
 
 -- | Creative Field Value ID
 cfvpId :: Lens' CreativeFieldValuesPatch Int64
-cfvpId = lens _cfvpId (\ s a -> s{_cfvpId = a})
+cfvpId
+  = lens _cfvpId (\ s a -> s{_cfvpId = a}) . _Coerce
 
 instance GoogleRequest CreativeFieldValuesPatch where
         type Rs CreativeFieldValuesPatch = CreativeFieldValue

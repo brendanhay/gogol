@@ -56,7 +56,7 @@ type TimelineListResource =
                QueryParam "bundleId" Text :>
                  QueryParam "sourceItemId" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "includeDeleted" Bool :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TimelineListResponse
@@ -70,7 +70,7 @@ data TimelineList = TimelineList
     , _tlBundleId       :: !(Maybe Text)
     , _tlSourceItemId   :: !(Maybe Text)
     , _tlPageToken      :: !(Maybe Text)
-    , _tlMaxResults     :: !(Maybe Word32)
+    , _tlMaxResults     :: !(Maybe (JSONText Word32))
     , _tlIncludeDeleted :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -134,6 +134,7 @@ tlPageToken
 tlMaxResults :: Lens' TimelineList (Maybe Word32)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
+      . mapping _Coerce
 
 -- | If true, tombstone records for deleted items will be returned.
 tlIncludeDeleted :: Lens' TimelineList (Maybe Bool)

@@ -206,10 +206,10 @@ instance ToJSON WorkerListResponse where
 -- /See:/ 'schedule' smart constructor.
 data Schedule = Schedule
     { _sAllDay    :: !(Maybe Bool)
-    , _sStartTime :: !(Maybe Word64)
+    , _sStartTime :: !(Maybe (JSONText Word64))
     , _sKind      :: !Text
-    , _sEndTime   :: !(Maybe Word64)
-    , _sDuration  :: !(Maybe Word64)
+    , _sEndTime   :: !(Maybe (JSONText Word64))
+    , _sDuration  :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
@@ -244,7 +244,8 @@ sAllDay = lens _sAllDay (\ s a -> s{_sAllDay = a})
 -- | Scheduled start time in milliseconds since epoch.
 sStartTime :: Lens' Schedule (Maybe Word64)
 sStartTime
-  = lens _sStartTime (\ s a -> s{_sStartTime = a})
+  = lens _sStartTime (\ s a -> s{_sStartTime = a}) .
+      mapping _Coerce
 
 -- | Identifies this object as a job schedule.
 sKind :: Lens' Schedule Text
@@ -252,12 +253,15 @@ sKind = lens _sKind (\ s a -> s{_sKind = a})
 
 -- | Scheduled end time in milliseconds since epoch.
 sEndTime :: Lens' Schedule (Maybe Word64)
-sEndTime = lens _sEndTime (\ s a -> s{_sEndTime = a})
+sEndTime
+  = lens _sEndTime (\ s a -> s{_sEndTime = a}) .
+      mapping _Coerce
 
 -- | Job duration in milliseconds.
 sDuration :: Lens' Schedule (Maybe Word64)
 sDuration
-  = lens _sDuration (\ s a -> s{_sDuration = a})
+  = lens _sDuration (\ s a -> s{_sDuration = a}) .
+      mapping _Coerce
 
 instance FromJSON Schedule where
         parseJSON
@@ -285,8 +289,8 @@ instance ToJSON Schedule where
 data Location = Location
     { _lAddressLine :: !(Maybe [Text])
     , _lKind        :: !Text
-    , _lLat         :: !(Maybe Double)
-    , _lLng         :: !(Maybe Double)
+    , _lLat         :: !(Maybe (JSONText Double))
+    , _lLng         :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
@@ -323,11 +327,15 @@ lKind = lens _lKind (\ s a -> s{_lKind = a})
 
 -- | Latitude.
 lLat :: Lens' Location (Maybe Double)
-lLat = lens _lLat (\ s a -> s{_lLat = a})
+lLat
+  = lens _lLat (\ s a -> s{_lLat = a}) .
+      mapping _Coerce
 
 -- | Longitude.
 lLng :: Lens' Location (Maybe Double)
-lLng = lens _lLng (\ s a -> s{_lLng = a})
+lLng
+  = lens _lLng (\ s a -> s{_lLng = a}) .
+      mapping _Coerce
 
 instance FromJSON Location where
         parseJSON
@@ -482,7 +490,7 @@ data CustomFieldDef = CustomFieldDef
     , _cfdKind                :: !Text
     , _cfdName                :: !(Maybe Text)
     , _cfdRequiredForCheckout :: !(Maybe Bool)
-    , _cfdId                  :: !(Maybe Int64)
+    , _cfdId                  :: !(Maybe (JSONText Int64))
     , _cfdEnumitems           :: !(Maybe [EnumItemDef])
     , _cfdType                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -538,7 +546,9 @@ cfdRequiredForCheckout
 
 -- | Custom field id.
 cfdId :: Lens' CustomFieldDef (Maybe Int64)
-cfdId = lens _cfdId (\ s a -> s{_cfdId = a})
+cfdId
+  = lens _cfdId (\ s a -> s{_cfdId = a}) .
+      mapping _Coerce
 
 -- | List of enum items for this custom field. Populated only if the field
 -- type is enum. Enum fields appear as \'lists\' in the Coordinate web and
@@ -645,7 +655,7 @@ instance ToJSON JobListResponse where
 data JobChange = JobChange
     { _jcState     :: !(Maybe JobState)
     , _jcKind      :: !Text
-    , _jcTimestamp :: !(Maybe Word64)
+    , _jcTimestamp :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobChange' with the minimum fields required to make a request.
@@ -677,7 +687,8 @@ jcKind = lens _jcKind (\ s a -> s{_jcKind = a})
 -- | Time at which this change was applied.
 jcTimestamp :: Lens' JobChange (Maybe Word64)
 jcTimestamp
-  = lens _jcTimestamp (\ s a -> s{_jcTimestamp = a})
+  = lens _jcTimestamp (\ s a -> s{_jcTimestamp = a}) .
+      mapping _Coerce
 
 instance FromJSON JobChange where
         parseJSON
@@ -802,7 +813,7 @@ data Job = Job
     { _jState     :: !(Maybe JobState)
     , _jKind      :: !Text
     , _jJobChange :: !(Maybe [JobChange])
-    , _jId        :: !(Maybe Word64)
+    , _jId        :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
@@ -844,7 +855,8 @@ jJobChange
 
 -- | Job id.
 jId :: Lens' Job (Maybe Word64)
-jId = lens _jId (\ s a -> s{_jId = a})
+jId
+  = lens _jId (\ s a -> s{_jId = a}) . mapping _Coerce
 
 instance FromJSON Job where
         parseJSON
@@ -975,10 +987,10 @@ instance ToJSON Team where
 -- /See:/ 'locationRecord' smart constructor.
 data LocationRecord = LocationRecord
     { _lrKind             :: !Text
-    , _lrLatitude         :: !(Maybe Double)
-    , _lrConfidenceRadius :: !(Maybe Double)
-    , _lrLongitude        :: !(Maybe Double)
-    , _lrCollectionTime   :: !(Maybe Int64)
+    , _lrLatitude         :: !(Maybe (JSONText Double))
+    , _lrConfidenceRadius :: !(Maybe (JSONText Double))
+    , _lrLongitude        :: !(Maybe (JSONText Double))
+    , _lrCollectionTime   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationRecord' with the minimum fields required to make a request.
@@ -1012,7 +1024,8 @@ lrKind = lens _lrKind (\ s a -> s{_lrKind = a})
 -- | Latitude.
 lrLatitude :: Lens' LocationRecord (Maybe Double)
 lrLatitude
-  = lens _lrLatitude (\ s a -> s{_lrLatitude = a})
+  = lens _lrLatitude (\ s a -> s{_lrLatitude = a}) .
+      mapping _Coerce
 
 -- | The location accuracy in meters. This is the radius of a 95% confidence
 -- interval around the location measurement.
@@ -1020,17 +1033,20 @@ lrConfidenceRadius :: Lens' LocationRecord (Maybe Double)
 lrConfidenceRadius
   = lens _lrConfidenceRadius
       (\ s a -> s{_lrConfidenceRadius = a})
+      . mapping _Coerce
 
 -- | Longitude.
 lrLongitude :: Lens' LocationRecord (Maybe Double)
 lrLongitude
-  = lens _lrLongitude (\ s a -> s{_lrLongitude = a})
+  = lens _lrLongitude (\ s a -> s{_lrLongitude = a}) .
+      mapping _Coerce
 
 -- | The collection time in milliseconds since the epoch.
 lrCollectionTime :: Lens' LocationRecord (Maybe Int64)
 lrCollectionTime
   = lens _lrCollectionTime
       (\ s a -> s{_lrCollectionTime = a})
+      . mapping _Coerce
 
 instance FromJSON LocationRecord where
         parseJSON
@@ -1103,7 +1119,7 @@ instance ToJSON Worker where
 --
 -- /See:/ 'customField' smart constructor.
 data CustomField = CustomField
-    { _cCustomFieldId :: !(Maybe Int64)
+    { _cCustomFieldId :: !(Maybe (JSONText Int64))
     , _cKind          :: !Text
     , _cValue         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1131,6 +1147,7 @@ cCustomFieldId :: Lens' CustomField (Maybe Int64)
 cCustomFieldId
   = lens _cCustomFieldId
       (\ s a -> s{_cCustomFieldId = a})
+      . mapping _Coerce
 
 -- | Identifies this object as a custom field.
 cKind :: Lens' CustomField Text

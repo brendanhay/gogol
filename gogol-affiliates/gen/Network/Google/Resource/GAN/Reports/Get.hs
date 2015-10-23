@@ -70,8 +70,9 @@ type ReportsGetResource =
                              QueryParams "linkId" Text :>
                                QueryParams "orderId" Text :>
                                  QueryParams "publisherId" Text :>
-                                   QueryParam "startIndex" Word32 :>
-                                     QueryParam "maxResults" Word32 :>
+                                   QueryParam "startIndex" (JSONText Word32) :>
+                                     QueryParam "maxResults" (JSONText Word32)
+                                       :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Report
 
@@ -91,8 +92,8 @@ data ReportsGet = ReportsGet
     , _rgOrderId         :: !(Maybe [Text])
     , _rgPublisherId     :: !(Maybe [Text])
     , _rgReportType      :: !ReportsGetReportType
-    , _rgStartIndex      :: !(Maybe Word32)
-    , _rgMaxResults      :: !(Maybe Word32)
+    , _rgStartIndex      :: !(Maybe (JSONText Word32))
+    , _rgMaxResults      :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.
@@ -229,12 +230,14 @@ rgReportType
 rgStartIndex :: Lens' ReportsGet (Maybe Word32)
 rgStartIndex
   = lens _rgStartIndex (\ s a -> s{_rgStartIndex = a})
+      . mapping _Coerce
 
 -- | Max number of items to return in this page. Optional. Defaults to return
 -- all results.
 rgMaxResults :: Lens' ReportsGet (Maybe Word32)
 rgMaxResults
   = lens _rgMaxResults (\ s a -> s{_rgMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report

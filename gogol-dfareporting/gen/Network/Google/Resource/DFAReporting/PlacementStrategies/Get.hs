@@ -46,9 +46,9 @@ type PlacementStrategiesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placementStrategies" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] PlacementStrategy
 
@@ -56,8 +56,8 @@ type PlacementStrategiesGetResource =
 --
 -- /See:/ 'placementStrategiesGet' smart constructor.
 data PlacementStrategiesGet = PlacementStrategiesGet
-    { _psgProFileId :: !Int64
-    , _psgId        :: !Int64
+    { _psgProFileId :: !(JSONText Int64)
+    , _psgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesGet' with the minimum fields required to make a request.
@@ -81,10 +81,12 @@ placementStrategiesGet pPsgProFileId_ pPsgId_ =
 psgProFileId :: Lens' PlacementStrategiesGet Int64
 psgProFileId
   = lens _psgProFileId (\ s a -> s{_psgProFileId = a})
+      . _Coerce
 
 -- | Placement strategy ID.
 psgId :: Lens' PlacementStrategiesGet Int64
-psgId = lens _psgId (\ s a -> s{_psgId = a})
+psgId
+  = lens _psgId (\ s a -> s{_psgId = a}) . _Coerce
 
 instance GoogleRequest PlacementStrategiesGet where
         type Rs PlacementStrategiesGet = PlacementStrategy

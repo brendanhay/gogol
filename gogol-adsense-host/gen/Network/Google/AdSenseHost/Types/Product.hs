@@ -607,7 +607,7 @@ data Report = Report
     , _rRows             :: !(Maybe [[Text]])
     , _rTotals           :: !(Maybe [Text])
     , _rHeaders          :: !(Maybe [ReportHeadersItem])
-    , _rTotalMatchedRows :: !(Maybe Int64)
+    , _rTotalMatchedRows :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
@@ -691,6 +691,7 @@ rTotalMatchedRows :: Lens' Report (Maybe Int64)
 rTotalMatchedRows
   = lens _rTotalMatchedRows
       (\ s a -> s{_rTotalMatchedRows = a})
+      . mapping _Coerce
 
 instance FromJSON Report where
         parseJSON

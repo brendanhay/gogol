@@ -639,8 +639,8 @@ instance ToJSON Operation where
 data Settings = Settings
     { _sReplicationType             :: !(Maybe Text)
     , _sActivationPolicy            :: !(Maybe Text)
-    , _sSettingsVersion             :: !(Maybe Int64)
-    , _sDataDiskSizeGb              :: !(Maybe Int64)
+    , _sSettingsVersion             :: !(Maybe (JSONText Int64))
+    , _sDataDiskSizeGb              :: !(Maybe (JSONText Int64))
     , _sAuthorizedGaeApplications   :: !(Maybe [Text])
     , _sKind                        :: !Text
     , _sPricingPlan                 :: !(Maybe Text)
@@ -729,6 +729,7 @@ sSettingsVersion :: Lens' Settings (Maybe Int64)
 sSettingsVersion
   = lens _sSettingsVersion
       (\ s a -> s{_sSettingsVersion = a})
+      . mapping _Coerce
 
 -- | The size of data disk for the performance instance, specified in GB.
 -- Setting this value for non-performance instances will result in an
@@ -737,6 +738,7 @@ sDataDiskSizeGb :: Lens' Settings (Maybe Int64)
 sDataDiskSizeGb
   = lens _sDataDiskSizeGb
       (\ s a -> s{_sDataDiskSizeGb = a})
+      . mapping _Coerce
 
 -- | The App Engine app IDs that can access this instance.
 sAuthorizedGaeApplications :: Lens' Settings [Text]
@@ -1051,7 +1053,7 @@ instance ToJSON SSLCertsCreateEphemeralRequest where
 --
 -- /See:/ 'binLogCoordinates' smart constructor.
 data BinLogCoordinates = BinLogCoordinates
-    { _blcBinLogPosition :: !(Maybe Int64)
+    { _blcBinLogPosition :: !(Maybe (JSONText Int64))
     , _blcKind           :: !Text
     , _blcBinLogFileName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1079,6 +1081,7 @@ blcBinLogPosition :: Lens' BinLogCoordinates (Maybe Int64)
 blcBinLogPosition
   = lens _blcBinLogPosition
       (\ s a -> s{_blcBinLogPosition = a})
+      . mapping _Coerce
 
 -- | This is always sql#binLogCoordinates.
 blcKind :: Lens' BinLogCoordinates Text
@@ -1717,7 +1720,7 @@ instance ToJSON User where
 --
 -- /See:/ 'databaseInstance' smart constructor.
 data DatabaseInstance = DatabaseInstance
-    { _datMaxDiskSize                :: !(Maybe Int64)
+    { _datMaxDiskSize                :: !(Maybe (JSONText Int64))
     , _datOnPremisesConfiguration    :: !(Maybe OnPremisesConfiguration)
     , _datEtag                       :: !(Maybe Text)
     , _datState                      :: !(Maybe Text)
@@ -1727,7 +1730,7 @@ data DatabaseInstance = DatabaseInstance
     , _datProject                    :: !(Maybe Text)
     , _datSettings                   :: !(Maybe Settings)
     , _datKind                       :: !Text
-    , _datCurrentDiskSize            :: !(Maybe Int64)
+    , _datCurrentDiskSize            :: !(Maybe (JSONText Int64))
     , _datInstanceType               :: !(Maybe Text)
     , _datReplicaNames               :: !(Maybe [Text])
     , _datSelfLink                   :: !(Maybe Text)
@@ -1813,6 +1816,7 @@ datMaxDiskSize :: Lens' DatabaseInstance (Maybe Int64)
 datMaxDiskSize
   = lens _datMaxDiskSize
       (\ s a -> s{_datMaxDiskSize = a})
+      . mapping _Coerce
 
 -- | Configuration specific to on-premises instances.
 datOnPremisesConfiguration :: Lens' DatabaseInstance (Maybe OnPremisesConfiguration)
@@ -1873,6 +1877,7 @@ datCurrentDiskSize :: Lens' DatabaseInstance (Maybe Int64)
 datCurrentDiskSize
   = lens _datCurrentDiskSize
       (\ s a -> s{_datCurrentDiskSize = a})
+      . mapping _Coerce
 
 -- | The instance type. This can be one of the following. CLOUD_SQL_INSTANCE:
 -- A Cloud SQL instance that is not replicating from a master.
@@ -2056,13 +2061,13 @@ instance ToJSON CloneContext where
 --
 -- /See:/ 'flag' smart constructor.
 data Flag = Flag
-    { _fMaxValue            :: !(Maybe Int64)
+    { _fMaxValue            :: !(Maybe (JSONText Int64))
     , _fKind                :: !Text
     , _fAppliesTo           :: !(Maybe [Text])
     , _fName                :: !(Maybe Text)
     , _fAllowedStringValues :: !(Maybe [Text])
     , _fType                :: !(Maybe Text)
-    , _fMinValue            :: !(Maybe Int64)
+    , _fMinValue            :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Flag' with the minimum fields required to make a request.
@@ -2098,7 +2103,8 @@ flag =
 -- | For INTEGER flags, the maximum allowed value.
 fMaxValue :: Lens' Flag (Maybe Int64)
 fMaxValue
-  = lens _fMaxValue (\ s a -> s{_fMaxValue = a})
+  = lens _fMaxValue (\ s a -> s{_fMaxValue = a}) .
+      mapping _Coerce
 
 -- | This is always sql#flag.
 fKind :: Lens' Flag Text
@@ -2134,7 +2140,8 @@ fType = lens _fType (\ s a -> s{_fType = a})
 -- | For INTEGER flags, the minimum allowed value.
 fMinValue :: Lens' Flag (Maybe Int64)
 fMinValue
-  = lens _fMinValue (\ s a -> s{_fMinValue = a})
+  = lens _fMinValue (\ s a -> s{_fMinValue = a}) .
+      mapping _Coerce
 
 instance FromJSON Flag where
         parseJSON
@@ -2209,7 +2216,7 @@ data BackupRun = BackupRun
     , _brWindowStartTime :: !(Maybe DateTime')
     , _brSelfLink        :: !(Maybe Text)
     , _brEndTime         :: !(Maybe DateTime')
-    , _brId              :: !(Maybe Int64)
+    , _brId              :: !(Maybe (JSONText Int64))
     , _brEnqueuedTime    :: !(Maybe DateTime')
     , _brInstance        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2296,7 +2303,9 @@ brEndTime
 -- | A unique identifier for this backup run. Note that this is unique only
 -- within the scope of a particular Cloud SQL instance.
 brId :: Lens' BackupRun (Maybe Int64)
-brId = lens _brId (\ s a -> s{_brId = a})
+brId
+  = lens _brId (\ s a -> s{_brId = a}) .
+      mapping _Coerce
 
 -- | The time the run was enqueued in UTC timezone in RFC 3339 format, for
 -- example 2012-11-15T16:19:00.094Z.
@@ -2463,8 +2472,8 @@ data Tier = Tier
     { _tKind      :: !Text
     , _tTier      :: !(Maybe Text)
     , _tRegion    :: !(Maybe [Text])
-    , _tDiskQuota :: !(Maybe Int64)
-    , _tRAM       :: !(Maybe Int64)
+    , _tDiskQuota :: !(Maybe (JSONText Int64))
+    , _tRAM       :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tier' with the minimum fields required to make a request.
@@ -2510,11 +2519,14 @@ tRegion
 -- | The maximum disk size of this tier in bytes.
 tDiskQuota :: Lens' Tier (Maybe Int64)
 tDiskQuota
-  = lens _tDiskQuota (\ s a -> s{_tDiskQuota = a})
+  = lens _tDiskQuota (\ s a -> s{_tDiskQuota = a}) .
+      mapping _Coerce
 
 -- | The maximum RAM usage of this tier in bytes.
 tRAM :: Lens' Tier (Maybe Int64)
-tRAM = lens _tRAM (\ s a -> s{_tRAM = a})
+tRAM
+  = lens _tRAM (\ s a -> s{_tRAM = a}) .
+      mapping _Coerce
 
 instance FromJSON Tier where
         parseJSON
@@ -2544,8 +2556,8 @@ data MySQLReplicaConfiguration = MySQLReplicaConfiguration
     , _msqlrcClientKey               :: !(Maybe Text)
     , _msqlrcUsername                :: !(Maybe Text)
     , _msqlrcSSLCipher               :: !(Maybe Text)
-    , _msqlrcMasterHeartbeatPeriod   :: !(Maybe Int64)
-    , _msqlrcConnectRetryInterval    :: !(Maybe Int32)
+    , _msqlrcMasterHeartbeatPeriod   :: !(Maybe (JSONText Int64))
+    , _msqlrcConnectRetryInterval    :: !(Maybe (JSONText Int32))
     , _msqlrcClientCertificate       :: !(Maybe Text)
     , _msqlrcCaCertificate           :: !(Maybe Text)
     , _msqlrcDumpFilePath            :: !(Maybe Text)
@@ -2630,12 +2642,14 @@ msqlrcMasterHeartbeatPeriod :: Lens' MySQLReplicaConfiguration (Maybe Int64)
 msqlrcMasterHeartbeatPeriod
   = lens _msqlrcMasterHeartbeatPeriod
       (\ s a -> s{_msqlrcMasterHeartbeatPeriod = a})
+      . mapping _Coerce
 
 -- | Seconds to wait between connect retries. MySQL\'s default is 60 seconds.
 msqlrcConnectRetryInterval :: Lens' MySQLReplicaConfiguration (Maybe Int32)
 msqlrcConnectRetryInterval
   = lens _msqlrcConnectRetryInterval
       (\ s a -> s{_msqlrcConnectRetryInterval = a})
+      . mapping _Coerce
 
 -- | PEM representation of the slave\'s x509 certificate.
 msqlrcClientCertificate :: Lens' MySQLReplicaConfiguration (Maybe Text)
@@ -3021,7 +3035,7 @@ instance ToJSON ReplicaConfiguration where
 --
 -- /See:/ 'failoverContext' smart constructor.
 data FailoverContext = FailoverContext
-    { _fcSettingsVersion :: !(Maybe Int64)
+    { _fcSettingsVersion :: !(Maybe (JSONText Int64))
     , _fcKind            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3046,6 +3060,7 @@ fcSettingsVersion :: Lens' FailoverContext (Maybe Int64)
 fcSettingsVersion
   = lens _fcSettingsVersion
       (\ s a -> s{_fcSettingsVersion = a})
+      . mapping _Coerce
 
 -- | This is always sql#failoverContext.
 fcKind :: Lens' FailoverContext Text
@@ -3470,7 +3485,7 @@ instance ToJSON ExportContextSQLExportOptions where
 -- /See:/ 'restoreBackupContext' smart constructor.
 data RestoreBackupContext = RestoreBackupContext
     { _rbcInstanceId  :: !(Maybe Text)
-    , _rbcBackupRunId :: !(Maybe Int64)
+    , _rbcBackupRunId :: !(Maybe (JSONText Int64))
     , _rbcKind        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3503,6 +3518,7 @@ rbcBackupRunId :: Lens' RestoreBackupContext (Maybe Int64)
 rbcBackupRunId
   = lens _rbcBackupRunId
       (\ s a -> s{_rbcBackupRunId = a})
+      . mapping _Coerce
 
 -- | This is always sql#restoreBackupContext.
 rbcKind :: Lens' RestoreBackupContext Text

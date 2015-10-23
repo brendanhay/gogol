@@ -61,7 +61,7 @@ type JobsListResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
+                         QueryParam "pageSize" (JSONText Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListJobsResponse
@@ -78,7 +78,7 @@ data JobsList = JobsList
     , _jlOnBehalfOfContentOwner :: !(Maybe Text)
     , _jlBearerToken            :: !(Maybe Text)
     , _jlPageToken              :: !(Maybe Text)
-    , _jlPageSize               :: !(Maybe Int32)
+    , _jlPageSize               :: !(Maybe (JSONText Int32))
     , _jlCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -170,7 +170,8 @@ jlPageToken
 -- unspecified, server will pick an appropriate default.
 jlPageSize :: Lens' JobsList (Maybe Int32)
 jlPageSize
-  = lens _jlPageSize (\ s a -> s{_jlPageSize = a})
+  = lens _jlPageSize (\ s a -> s{_jlPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 jlCallback :: Lens' JobsList (Maybe Text)

@@ -55,7 +55,7 @@ type TargetPoolsSetBackupResource =
                  "targetPools" :>
                    Capture "targetPool" Text :>
                      "setBackup" :>
-                       QueryParam "failoverRatio" Float :>
+                       QueryParam "failoverRatio" (JSONText Float) :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] TargetReference :>
                              Post '[JSON] Operation
@@ -67,7 +67,7 @@ data TargetPoolsSetBackup = TargetPoolsSetBackup
     { _tpsbProject       :: !Text
     , _tpsbTargetPool    :: !Text
     , _tpsbPayload       :: !TargetReference
-    , _tpsbFailoverRatio :: !(Maybe Float)
+    , _tpsbFailoverRatio :: !(Maybe (JSONText Float))
     , _tpsbRegion        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -120,6 +120,7 @@ tpsbFailoverRatio :: Lens' TargetPoolsSetBackup (Maybe Float)
 tpsbFailoverRatio
   = lens _tpsbFailoverRatio
       (\ s a -> s{_tpsbFailoverRatio = a})
+      . mapping _Coerce
 
 -- | Name of the region scoping this request.
 tpsbRegion :: Lens' TargetPoolsSetBackup Text

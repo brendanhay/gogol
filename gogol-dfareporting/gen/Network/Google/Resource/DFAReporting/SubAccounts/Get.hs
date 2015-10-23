@@ -46,17 +46,17 @@ type SubAccountsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "subaccounts" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] SubAccount
 
 -- | Gets one subaccount by ID.
 --
 -- /See:/ 'subAccountsGet' smart constructor.
 data SubAccountsGet = SubAccountsGet
-    { _sagProFileId :: !Int64
-    , _sagId        :: !Int64
+    { _sagProFileId :: !(JSONText Int64)
+    , _sagId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ subAccountsGet pSagProFileId_ pSagId_ =
 sagProFileId :: Lens' SubAccountsGet Int64
 sagProFileId
   = lens _sagProFileId (\ s a -> s{_sagProFileId = a})
+      . _Coerce
 
 -- | Subaccount ID.
 sagId :: Lens' SubAccountsGet Int64
-sagId = lens _sagId (\ s a -> s{_sagId = a})
+sagId
+  = lens _sagId (\ s a -> s{_sagId = a}) . _Coerce
 
 instance GoogleRequest SubAccountsGet where
         type Rs SubAccountsGet = SubAccount

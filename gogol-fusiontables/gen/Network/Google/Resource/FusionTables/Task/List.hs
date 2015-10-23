@@ -51,8 +51,8 @@ type TaskListResource =
            Capture "tableId" Text :>
              "tasks" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "startIndex" Word32 :>
-                   QueryParam "maxResults" Word32 :>
+                 QueryParam "startIndex" (JSONText Word32) :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] TaskList
 
 -- | Retrieves a list of tasks.
@@ -61,8 +61,8 @@ type TaskListResource =
 data TaskList' = TaskList'
     { _tlPageToken  :: !(Maybe Text)
     , _tlTableId    :: !Text
-    , _tlStartIndex :: !(Maybe Word32)
-    , _tlMaxResults :: !(Maybe Word32)
+    , _tlStartIndex :: !(Maybe (JSONText Word32))
+    , _tlMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList'' with the minimum fields required to make a request.
@@ -101,11 +101,13 @@ tlTableId
 tlStartIndex :: Lens' TaskList' (Maybe Word32)
 tlStartIndex
   = lens _tlStartIndex (\ s a -> s{_tlStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum number of tasks to return. Default is 5.
 tlMaxResults :: Lens' TaskList' (Maybe Word32)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest TaskList' where
         type Rs TaskList' = TaskList

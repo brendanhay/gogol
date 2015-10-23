@@ -55,7 +55,7 @@ type RoleAssignmentsListResource =
                  QueryParam "roleId" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "userKey" Text :>
-                       QueryParam "maxResults" Int32 :>
+                       QueryParam "maxResults" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] RoleAssignments
 
@@ -67,7 +67,7 @@ data RoleAssignmentsList = RoleAssignmentsList
     , _ralCustomer   :: !Text
     , _ralPageToken  :: !(Maybe Text)
     , _ralUserKey    :: !(Maybe Text)
-    , _ralMaxResults :: !(Maybe Int32)
+    , _ralMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoleAssignmentsList' with the minimum fields required to make a request.
@@ -123,6 +123,7 @@ ralMaxResults :: Lens' RoleAssignmentsList (Maybe Int32)
 ralMaxResults
   = lens _ralMaxResults
       (\ s a -> s{_ralMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest RoleAssignmentsList where
         type Rs RoleAssignmentsList = RoleAssignments

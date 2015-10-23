@@ -51,16 +51,16 @@ type ContentCategoriesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "contentCategories" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
+                 QueryParams "ids" (JSONText Int64) :>
                    QueryParam "sortOrder" ContentCategoriesListSortOrder
                      :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" ContentCategoriesListSortField
                          :>
-                         QueryParam "maxResults" Int32 :>
+                         QueryParam "maxResults" (JSONText Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ContentCategoriesListResponse
 
@@ -69,12 +69,12 @@ type ContentCategoriesListResource =
 -- /See:/ 'contentCategoriesList' smart constructor.
 data ContentCategoriesList = ContentCategoriesList
     { _cclSearchString :: !(Maybe Text)
-    , _cclIds          :: !(Maybe [Int64])
-    , _cclProFileId    :: !Int64
+    , _cclIds          :: !(Maybe [JSONText Int64])
+    , _cclProFileId    :: !(JSONText Int64)
     , _cclSortOrder    :: !(Maybe ContentCategoriesListSortOrder)
     , _cclPageToken    :: !(Maybe Text)
     , _cclSortField    :: !(Maybe ContentCategoriesListSortField)
-    , _cclMaxResults   :: !(Maybe Int32)
+    , _cclMaxResults   :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesList' with the minimum fields required to make a request.
@@ -131,6 +131,7 @@ cclIds
 cclProFileId :: Lens' ContentCategoriesList Int64
 cclProFileId
   = lens _cclProFileId (\ s a -> s{_cclProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 cclSortOrder :: Lens' ContentCategoriesList (Maybe ContentCategoriesListSortOrder)
@@ -152,6 +153,7 @@ cclMaxResults :: Lens' ContentCategoriesList (Maybe Int32)
 cclMaxResults
   = lens _cclMaxResults
       (\ s a -> s{_cclMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ContentCategoriesList where
         type Rs ContentCategoriesList =

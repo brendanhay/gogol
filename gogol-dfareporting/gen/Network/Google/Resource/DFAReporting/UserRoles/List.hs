@@ -53,16 +53,16 @@ type UserRolesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "userRoles" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
+                 QueryParams "ids" (JSONText Int64) :>
                    QueryParam "sortOrder" UserRolesListSortOrder :>
                      QueryParam "accountUserRoleOnly" Bool :>
                        QueryParam "pageToken" Text :>
                          QueryParam "sortField" UserRolesListSortField :>
-                           QueryParam "subaccountId" Int64 :>
-                             QueryParam "maxResults" Int32 :>
+                           QueryParam "subaccountId" (JSONText Int64) :>
+                             QueryParam "maxResults" (JSONText Int32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] UserRolesListResponse
 
@@ -71,14 +71,14 @@ type UserRolesListResource =
 -- /See:/ 'userRolesList' smart constructor.
 data UserRolesList = UserRolesList
     { _urlSearchString        :: !(Maybe Text)
-    , _urlIds                 :: !(Maybe [Int64])
-    , _urlProFileId           :: !Int64
+    , _urlIds                 :: !(Maybe [JSONText Int64])
+    , _urlProFileId           :: !(JSONText Int64)
     , _urlSortOrder           :: !(Maybe UserRolesListSortOrder)
     , _urlAccountUserRoleOnly :: !(Maybe Bool)
     , _urlPageToken           :: !(Maybe Text)
     , _urlSortField           :: !(Maybe UserRolesListSortField)
-    , _urlSubAccountId        :: !(Maybe Int64)
-    , _urlMaxResults          :: !(Maybe Int32)
+    , _urlSubAccountId        :: !(Maybe (JSONText Int64))
+    , _urlMaxResults          :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesList' with the minimum fields required to make a request.
@@ -140,6 +140,7 @@ urlIds
 urlProFileId :: Lens' UserRolesList Int64
 urlProFileId
   = lens _urlProFileId (\ s a -> s{_urlProFileId = a})
+      . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
 urlSortOrder :: Lens' UserRolesList (Maybe UserRolesListSortOrder)
@@ -168,12 +169,14 @@ urlSubAccountId :: Lens' UserRolesList (Maybe Int64)
 urlSubAccountId
   = lens _urlSubAccountId
       (\ s a -> s{_urlSubAccountId = a})
+      . mapping _Coerce
 
 -- | Maximum number of results to return.
 urlMaxResults :: Lens' UserRolesList (Maybe Int32)
 urlMaxResults
   = lens _urlMaxResults
       (\ s a -> s{_urlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest UserRolesList where
         type Rs UserRolesList = UserRolesListResponse

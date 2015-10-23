@@ -68,7 +68,7 @@ type ActivitiesWatchResource =
                                QueryParam "endTime" Text :>
                                  QueryParam "pageToken" Text :>
                                    QueryParam "eventName" Text :>
-                                     QueryParam "maxResults" Int32 :>
+                                     QueryParam "maxResults" (JSONText Int32) :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Channel :>
                                            Post '[JSON] Channel
@@ -87,7 +87,7 @@ data ActivitiesWatch = ActivitiesWatch
     , _awPageToken       :: !(Maybe Text)
     , _awEventName       :: !(Maybe Text)
     , _awUserKey         :: !Text
-    , _awMaxResults      :: !(Maybe Int32)
+    , _awMaxResults      :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesWatch' with the minimum fields required to make a request.
@@ -195,6 +195,7 @@ awUserKey
 awMaxResults :: Lens' ActivitiesWatch (Maybe Int32)
 awMaxResults
   = lens _awMaxResults (\ s a -> s{_awMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ActivitiesWatch where
         type Rs ActivitiesWatch = Channel

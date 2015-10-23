@@ -51,8 +51,8 @@ type ReportsSavedGenerateResource =
          "reports" :>
            Capture "savedReportId" Text :>
              QueryParam "locale" Text :>
-               QueryParam "startIndex" Int32 :>
-                 QueryParam "maxResults" Int32 :>
+               QueryParam "startIndex" (JSONText Int32) :>
+                 QueryParam "maxResults" (JSONText Int32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] AdsenseReportsGenerateResponse
 
@@ -63,8 +63,8 @@ type ReportsSavedGenerateResource =
 data ReportsSavedGenerate = ReportsSavedGenerate
     { _rsgLocale        :: !(Maybe Text)
     , _rsgSavedReportId :: !Text
-    , _rsgStartIndex    :: !(Maybe Int32)
-    , _rsgMaxResults    :: !(Maybe Int32)
+    , _rsgStartIndex    :: !(Maybe (JSONText Int32))
+    , _rsgMaxResults    :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedGenerate' with the minimum fields required to make a request.
@@ -106,12 +106,14 @@ rsgStartIndex :: Lens' ReportsSavedGenerate (Maybe Int32)
 rsgStartIndex
   = lens _rsgStartIndex
       (\ s a -> s{_rsgStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of rows of report data to return.
 rsgMaxResults :: Lens' ReportsSavedGenerate (Maybe Int32)
 rsgMaxResults
   = lens _rsgMaxResults
       (\ s a -> s{_rsgMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ReportsSavedGenerate where
         type Rs ReportsSavedGenerate =

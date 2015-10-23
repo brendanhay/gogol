@@ -45,7 +45,7 @@ type UserRolePermissionGroupsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "userRolePermissionGroups" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] UserRolePermissionGroupsListResponse
@@ -54,7 +54,7 @@ type UserRolePermissionGroupsListResource =
 --
 -- /See:/ 'userRolePermissionGroupsList' smart constructor.
 newtype UserRolePermissionGroupsList = UserRolePermissionGroupsList
-    { _urpglProFileId :: Int64
+    { _urpglProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionGroupsList' with the minimum fields required to make a request.
@@ -75,6 +75,7 @@ urpglProFileId :: Lens' UserRolePermissionGroupsList Int64
 urpglProFileId
   = lens _urpglProFileId
       (\ s a -> s{_urpglProFileId = a})
+      . _Coerce
 
 instance GoogleRequest UserRolePermissionGroupsList
          where

@@ -47,9 +47,9 @@ type ReportsRunResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "reports" :>
-               Capture "reportId" Int64 :>
+               Capture "reportId" (JSONText Int64) :>
                  "run" :>
                    QueryParam "synchronous" Bool :>
                      QueryParam "alt" AltJSON :> Post '[JSON] File
@@ -59,8 +59,8 @@ type ReportsRunResource =
 -- /See:/ 'reportsRun' smart constructor.
 data ReportsRun = ReportsRun
     { _rrSynchronous :: !(Maybe Bool)
-    , _rrReportId    :: !Int64
-    , _rrProFileId   :: !Int64
+    , _rrReportId    :: !(JSONText Int64)
+    , _rrProFileId   :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsRun' with the minimum fields required to make a request.
@@ -92,12 +92,14 @@ rrSynchronous
 -- | The ID of the report.
 rrReportId :: Lens' ReportsRun Int64
 rrReportId
-  = lens _rrReportId (\ s a -> s{_rrReportId = a})
+  = lens _rrReportId (\ s a -> s{_rrReportId = a}) .
+      _Coerce
 
 -- | The DFA profile ID.
 rrProFileId :: Lens' ReportsRun Int64
 rrProFileId
-  = lens _rrProFileId (\ s a -> s{_rrProFileId = a})
+  = lens _rrProFileId (\ s a -> s{_rrProFileId = a}) .
+      _Coerce
 
 instance GoogleRequest ReportsRun where
         type Rs ReportsRun = File

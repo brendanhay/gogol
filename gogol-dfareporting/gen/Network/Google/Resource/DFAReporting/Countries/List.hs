@@ -45,7 +45,7 @@ type CountriesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "countries" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] CountriesListResponse
@@ -54,7 +54,7 @@ type CountriesListResource =
 --
 -- /See:/ 'countriesList' smart constructor.
 newtype CountriesList = CountriesList
-    { _couProFileId :: Int64
+    { _couProFileId :: JSONText Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CountriesList' with the minimum fields required to make a request.
@@ -74,6 +74,7 @@ countriesList pCouProFileId_ =
 couProFileId :: Lens' CountriesList Int64
 couProFileId
   = lens _couProFileId (\ s a -> s{_couProFileId = a})
+      . _Coerce
 
 instance GoogleRequest CountriesList where
         type Rs CountriesList = CountriesListResponse

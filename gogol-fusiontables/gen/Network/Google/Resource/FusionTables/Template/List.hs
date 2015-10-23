@@ -50,7 +50,7 @@ type TemplateListResource =
            Capture "tableId" Text :>
              "templates" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
+                 QueryParam "maxResults" (JSONText Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] TemplateList
 
 -- | Retrieves a list of templates.
@@ -59,7 +59,7 @@ type TemplateListResource =
 data TemplateList' = TemplateList'
     { _tllPageToken  :: !(Maybe Text)
     , _tllTableId    :: !Text
-    , _tllMaxResults :: !(Maybe Word32)
+    , _tllMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateList'' with the minimum fields required to make a request.
@@ -96,6 +96,7 @@ tllMaxResults :: Lens' TemplateList' (Maybe Word32)
 tllMaxResults
   = lens _tllMaxResults
       (\ s a -> s{_tllMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest TemplateList' where
         type Rs TemplateList' = TemplateList

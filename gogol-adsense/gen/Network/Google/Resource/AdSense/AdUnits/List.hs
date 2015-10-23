@@ -52,7 +52,7 @@ type AdUnitsListResource =
              "adunits" :>
                QueryParam "includeInactive" Bool :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
+                   QueryParam "maxResults" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified ad client for this AdSense account.
@@ -62,7 +62,7 @@ data AdUnitsList = AdUnitsList
     { _aulIncludeInactive :: !(Maybe Bool)
     , _aulAdClientId      :: !Text
     , _aulPageToken       :: !(Maybe Text)
-    , _aulMaxResults      :: !(Maybe Int32)
+    , _aulMaxResults      :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitsList' with the minimum fields required to make a request.
@@ -112,6 +112,7 @@ aulMaxResults :: Lens' AdUnitsList (Maybe Int32)
 aulMaxResults
   = lens _aulMaxResults
       (\ s a -> s{_aulMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AdUnitsList where
         type Rs AdUnitsList = AdUnits

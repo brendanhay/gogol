@@ -54,7 +54,7 @@ type AccountsURLChannelsListResource =
                Capture "adClientId" Text :>
                  "urlchannels" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
+                     QueryParam "maxResults" (JSONText Int32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
 
 -- | List all URL channels in the specified ad client for the specified
@@ -65,7 +65,7 @@ data AccountsURLChannelsList = AccountsURLChannelsList
     { _auclAdClientId :: !Text
     , _auclAccountId  :: !Text
     , _auclPageToken  :: !(Maybe Text)
-    , _auclMaxResults :: !(Maybe Int32)
+    , _auclMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsURLChannelsList' with the minimum fields required to make a request.
@@ -117,6 +117,7 @@ auclMaxResults :: Lens' AccountsURLChannelsList (Maybe Int32)
 auclMaxResults
   = lens _auclMaxResults
       (\ s a -> s{_auclMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest AccountsURLChannelsList where
         type Rs AccountsURLChannelsList = URLChannels

@@ -48,7 +48,7 @@ type CampaignsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
                QueryParam "defaultLandingPageName" Text :>
                  QueryParam "defaultLandingPageUrl" Text :>
@@ -59,7 +59,7 @@ type CampaignsInsertResource =
 --
 -- /See:/ 'campaignsInsert' smart constructor.
 data CampaignsInsert = CampaignsInsert
-    { _camProFileId              :: !Int64
+    { _camProFileId              :: !(JSONText Int64)
     , _camPayload                :: !Campaign
     , _camDefaultLandingPageURL  :: !Text
     , _camDefaultLandingPageName :: !Text
@@ -94,6 +94,7 @@ campaignsInsert pCamProFileId_ pCamPayload_ pCamDefaultLandingPageURL_ pCamDefau
 camProFileId :: Lens' CampaignsInsert Int64
 camProFileId
   = lens _camProFileId (\ s a -> s{_camProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 camPayload :: Lens' CampaignsInsert Campaign

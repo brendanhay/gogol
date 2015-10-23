@@ -63,12 +63,12 @@ type ReferencesBasesListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
-                     QueryParam "start" Int64 :>
+                     QueryParam "start" (JSONText Int64) :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "end" Int64 :>
+                           QueryParam "end" (JSONText Int64) :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "pageSize" Int32 :>
+                               QueryParam "pageSize" (JSONText Int32) :>
                                  QueryParam "callback" Text :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListBasesResponse
@@ -83,13 +83,13 @@ data ReferencesBasesList = ReferencesBasesList
     , _rblUploadProtocol :: !(Maybe Text)
     , _rblPp             :: !Bool
     , _rblAccessToken    :: !(Maybe Text)
-    , _rblStart          :: !(Maybe Int64)
+    , _rblStart          :: !(Maybe (JSONText Int64))
     , _rblUploadType     :: !(Maybe Text)
     , _rblReferenceId    :: !Text
     , _rblBearerToken    :: !(Maybe Text)
-    , _rblEnd            :: !(Maybe Int64)
+    , _rblEnd            :: !(Maybe (JSONText Int64))
     , _rblPageToken      :: !(Maybe Text)
-    , _rblPageSize       :: !(Maybe Int32)
+    , _rblPageSize       :: !(Maybe (JSONText Int32))
     , _rblCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -161,7 +161,9 @@ rblAccessToken
 
 -- | The start position (0-based) of this query. Defaults to 0.
 rblStart :: Lens' ReferencesBasesList (Maybe Int64)
-rblStart = lens _rblStart (\ s a -> s{_rblStart = a})
+rblStart
+  = lens _rblStart (\ s a -> s{_rblStart = a}) .
+      mapping _Coerce
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 rblUploadType :: Lens' ReferencesBasesList (Maybe Text)
@@ -184,7 +186,9 @@ rblBearerToken
 -- | The end position (0-based, exclusive) of this query. Defaults to the
 -- length of this reference.
 rblEnd :: Lens' ReferencesBasesList (Maybe Int64)
-rblEnd = lens _rblEnd (\ s a -> s{_rblEnd = a})
+rblEnd
+  = lens _rblEnd (\ s a -> s{_rblEnd = a}) .
+      mapping _Coerce
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
@@ -196,7 +200,8 @@ rblPageToken
 -- | Specifies the maximum number of bases to return in a single page.
 rblPageSize :: Lens' ReferencesBasesList (Maybe Int32)
 rblPageSize
-  = lens _rblPageSize (\ s a -> s{_rblPageSize = a})
+  = lens _rblPageSize (\ s a -> s{_rblPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 rblCallback :: Lens' ReferencesBasesList (Maybe Text)

@@ -59,8 +59,8 @@ type VolumesMybooksListResource =
                  :>
                  QueryParam "locale" Text :>
                    QueryParam "source" Text :>
-                     QueryParam "startIndex" Word32 :>
-                       QueryParam "maxResults" Word32 :>
+                     QueryParam "startIndex" (JSONText Word32) :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books in My Library.
@@ -71,8 +71,8 @@ data VolumesMybooksList = VolumesMybooksList
     , _vmlAcquireMethod   :: !(Maybe [VolumesMybooksListAcquireMethod])
     , _vmlLocale          :: !(Maybe Text)
     , _vmlSource          :: !(Maybe Text)
-    , _vmlStartIndex      :: !(Maybe Word32)
-    , _vmlMaxResults      :: !(Maybe Word32)
+    , _vmlStartIndex      :: !(Maybe (JSONText Word32))
+    , _vmlMaxResults      :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesMybooksList' with the minimum fields required to make a request.
@@ -135,12 +135,14 @@ vmlStartIndex :: Lens' VolumesMybooksList (Maybe Word32)
 vmlStartIndex
   = lens _vmlStartIndex
       (\ s a -> s{_vmlStartIndex = a})
+      . mapping _Coerce
 
 -- | Maximum number of results to return.
 vmlMaxResults :: Lens' VolumesMybooksList (Maybe Word32)
 vmlMaxResults
   = lens _vmlMaxResults
       (\ s a -> s{_vmlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest VolumesMybooksList where
         type Rs VolumesMybooksList = Volumes

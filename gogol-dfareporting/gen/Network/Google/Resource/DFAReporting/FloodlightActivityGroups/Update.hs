@@ -46,7 +46,7 @@ type FloodlightActivityGroupsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivityGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] FloodlightActivityGroup :>
@@ -56,7 +56,7 @@ type FloodlightActivityGroupsUpdateResource =
 --
 -- /See:/ 'floodlightActivityGroupsUpdate' smart constructor.
 data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate
-    { _faguProFileId :: !Int64
+    { _faguProFileId :: !(JSONText Int64)
     , _faguPayload   :: !FloodlightActivityGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,6 +82,7 @@ faguProFileId :: Lens' FloodlightActivityGroupsUpdate Int64
 faguProFileId
   = lens _faguProFileId
       (\ s a -> s{_faguProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 faguPayload :: Lens' FloodlightActivityGroupsUpdate FloodlightActivityGroup

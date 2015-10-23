@@ -49,11 +49,11 @@ type LandingPagesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               Capture "campaignId" Int64 :>
+               Capture "campaignId" (JSONText Int64) :>
                  "landingPages" :>
-                   QueryParam "id" Int64 :>
+                   QueryParam "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] LandingPage :>
                          Patch '[JSON] LandingPage
@@ -63,10 +63,10 @@ type LandingPagesPatchResource =
 --
 -- /See:/ 'landingPagesPatch' smart constructor.
 data LandingPagesPatch = LandingPagesPatch
-    { _lppCampaignId :: !Int64
-    , _lppProFileId  :: !Int64
+    { _lppCampaignId :: !(JSONText Int64)
+    , _lppProFileId  :: !(JSONText Int64)
     , _lppPayload    :: !LandingPage
-    , _lppId         :: !Int64
+    , _lppId         :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesPatch' with the minimum fields required to make a request.
@@ -99,11 +99,13 @@ lppCampaignId :: Lens' LandingPagesPatch Int64
 lppCampaignId
   = lens _lppCampaignId
       (\ s a -> s{_lppCampaignId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 lppProFileId :: Lens' LandingPagesPatch Int64
 lppProFileId
   = lens _lppProFileId (\ s a -> s{_lppProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 lppPayload :: Lens' LandingPagesPatch LandingPage
@@ -112,7 +114,8 @@ lppPayload
 
 -- | Landing page ID.
 lppId :: Lens' LandingPagesPatch Int64
-lppId = lens _lppId (\ s a -> s{_lppId = a})
+lppId
+  = lens _lppId (\ s a -> s{_lppId = a}) . _Coerce
 
 instance GoogleRequest LandingPagesPatch where
         type Rs LandingPagesPatch = LandingPage

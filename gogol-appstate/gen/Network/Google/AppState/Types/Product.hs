@@ -26,7 +26,7 @@ import           Network.Google.Prelude
 data WriteResult = WriteResult
     { _wrCurrentStateVersion :: !(Maybe Text)
     , _wrKind                :: !Text
-    , _wrStateKey            :: !(Maybe Int32)
+    , _wrStateKey            :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteResult' with the minimum fields required to make a request.
@@ -61,7 +61,8 @@ wrKind = lens _wrKind (\ s a -> s{_wrKind = a})
 -- | The written key.
 wrStateKey :: Lens' WriteResult (Maybe Int32)
 wrStateKey
-  = lens _wrStateKey (\ s a -> s{_wrStateKey = a})
+  = lens _wrStateKey (\ s a -> s{_wrStateKey = a}) .
+      mapping _Coerce
 
 instance FromJSON WriteResult where
         parseJSON
@@ -85,7 +86,7 @@ instance ToJSON WriteResult where
 --
 -- /See:/ 'listResponse' smart constructor.
 data ListResponse = ListResponse
-    { _lrMaximumKeyCount :: !(Maybe Int32)
+    { _lrMaximumKeyCount :: !(Maybe (JSONText Int32))
     , _lrKind            :: !Text
     , _lrItems           :: !(Maybe [GetResponse])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -113,6 +114,7 @@ lrMaximumKeyCount :: Lens' ListResponse (Maybe Int32)
 lrMaximumKeyCount
   = lens _lrMaximumKeyCount
       (\ s a -> s{_lrMaximumKeyCount = a})
+      . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string appstate#listResponse.
@@ -148,7 +150,7 @@ data GetResponse = GetResponse
     { _grCurrentStateVersion :: !(Maybe Text)
     , _grKind                :: !Text
     , _grData                :: !(Maybe Text)
-    , _grStateKey            :: !(Maybe Int32)
+    , _grStateKey            :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetResponse' with the minimum fields required to make a request.
@@ -190,7 +192,8 @@ grData = lens _grData (\ s a -> s{_grData = a})
 -- | The key for the data.
 grStateKey :: Lens' GetResponse (Maybe Int32)
 grStateKey
-  = lens _grStateKey (\ s a -> s{_grStateKey = a})
+  = lens _grStateKey (\ s a -> s{_grStateKey = a}) .
+      mapping _Coerce
 
 instance FromJSON GetResponse where
         parseJSON

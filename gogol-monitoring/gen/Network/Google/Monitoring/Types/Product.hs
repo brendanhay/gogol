@@ -397,8 +397,8 @@ instance ToJSON MetricDescriptorLabelDescriptor where
 --
 -- /See:/ 'pointDistributionUnderflowBucket' smart constructor.
 data PointDistributionUnderflowBucket = PointDistributionUnderflowBucket
-    { _pdubUpperBound :: !(Maybe Double)
-    , _pdubCount      :: !(Maybe Int64)
+    { _pdubUpperBound :: !(Maybe (JSONText Double))
+    , _pdubCount      :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionUnderflowBucket' with the minimum fields required to make a request.
@@ -421,12 +421,14 @@ pdubUpperBound :: Lens' PointDistributionUnderflowBucket (Maybe Double)
 pdubUpperBound
   = lens _pdubUpperBound
       (\ s a -> s{_pdubUpperBound = a})
+      . mapping _Coerce
 
 -- | The number of events whose values are in the interval defined by this
 -- bucket.
 pdubCount :: Lens' PointDistributionUnderflowBucket (Maybe Int64)
 pdubCount
-  = lens _pdubCount (\ s a -> s{_pdubCount = a})
+  = lens _pdubCount (\ s a -> s{_pdubCount = a}) .
+      mapping _Coerce
 
 instance FromJSON PointDistributionUnderflowBucket
          where
@@ -589,9 +591,9 @@ instance ToJSON TimeseriesDescriptorLabels where
 --
 -- /See:/ 'pointDistributionBucket' smart constructor.
 data PointDistributionBucket = PointDistributionBucket
-    { _pdbUpperBound :: !(Maybe Double)
-    , _pdbCount      :: !(Maybe Int64)
-    , _pdbLowerBound :: !(Maybe Double)
+    { _pdbUpperBound :: !(Maybe (JSONText Double))
+    , _pdbCount      :: !(Maybe (JSONText Int64))
+    , _pdbLowerBound :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionBucket' with the minimum fields required to make a request.
@@ -617,17 +619,21 @@ pdbUpperBound :: Lens' PointDistributionBucket (Maybe Double)
 pdbUpperBound
   = lens _pdbUpperBound
       (\ s a -> s{_pdbUpperBound = a})
+      . mapping _Coerce
 
 -- | The number of events whose values are in the interval defined by this
 -- bucket.
 pdbCount :: Lens' PointDistributionBucket (Maybe Int64)
-pdbCount = lens _pdbCount (\ s a -> s{_pdbCount = a})
+pdbCount
+  = lens _pdbCount (\ s a -> s{_pdbCount = a}) .
+      mapping _Coerce
 
 -- | The lower bound of the value interval of this bucket (inclusive).
 pdbLowerBound :: Lens' PointDistributionBucket (Maybe Double)
 pdbLowerBound
   = lens _pdbLowerBound
       (\ s a -> s{_pdbLowerBound = a})
+      . mapping _Coerce
 
 instance FromJSON PointDistributionBucket where
         parseJSON
@@ -797,11 +803,11 @@ instance ToJSON PointDistribution where
 data Point = Point
     { _pBoolValue         :: !(Maybe Bool)
     , _pStart             :: !(Maybe DateTime')
-    , _pDoubleValue       :: !(Maybe Double)
+    , _pDoubleValue       :: !(Maybe (JSONText Double))
     , _pStringValue       :: !(Maybe Text)
     , _pDistributionValue :: !(Maybe PointDistribution)
     , _pEnd               :: !(Maybe DateTime')
-    , _pInt64Value        :: !(Maybe Int64)
+    , _pInt64Value        :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
@@ -854,6 +860,7 @@ pStart
 pDoubleValue :: Lens' Point (Maybe Double)
 pDoubleValue
   = lens _pDoubleValue (\ s a -> s{_pDoubleValue = a})
+      . mapping _Coerce
 
 -- | The value of this data point in string format.
 pStringValue :: Lens' Point (Maybe Text)
@@ -882,7 +889,8 @@ pEnd
 -- | The value of this data point as a 64-bit integer.
 pInt64Value :: Lens' Point (Maybe Int64)
 pInt64Value
-  = lens _pInt64Value (\ s a -> s{_pInt64Value = a})
+  = lens _pInt64Value (\ s a -> s{_pInt64Value = a}) .
+      mapping _Coerce
 
 instance FromJSON Point where
         parseJSON
@@ -914,8 +922,8 @@ instance ToJSON Point where
 --
 -- /See:/ 'pointDistributionOverflowBucket' smart constructor.
 data PointDistributionOverflowBucket = PointDistributionOverflowBucket
-    { _pdobCount      :: !(Maybe Int64)
-    , _pdobLowerBound :: !(Maybe Double)
+    { _pdobCount      :: !(Maybe (JSONText Int64))
+    , _pdobLowerBound :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionOverflowBucket' with the minimum fields required to make a request.
@@ -937,13 +945,15 @@ pointDistributionOverflowBucket =
 -- bucket.
 pdobCount :: Lens' PointDistributionOverflowBucket (Maybe Int64)
 pdobCount
-  = lens _pdobCount (\ s a -> s{_pdobCount = a})
+  = lens _pdobCount (\ s a -> s{_pdobCount = a}) .
+      mapping _Coerce
 
 -- | The lower bound of the value interval of this bucket (inclusive).
 pdobLowerBound :: Lens' PointDistributionOverflowBucket (Maybe Double)
 pdobLowerBound
   = lens _pdobLowerBound
       (\ s a -> s{_pdobLowerBound = a})
+      . mapping _Coerce
 
 instance FromJSON PointDistributionOverflowBucket
          where

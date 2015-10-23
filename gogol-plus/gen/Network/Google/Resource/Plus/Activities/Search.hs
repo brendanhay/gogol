@@ -53,7 +53,7 @@ type ActivitiesSearchResource =
              QueryParam "orderBy" ActivitiesSearchOrderBy :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
+                   QueryParam "maxResults" (JSONText Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
 -- | Search public activities.
@@ -64,7 +64,7 @@ data ActivitiesSearch = ActivitiesSearch
     , _asQuery      :: !Text
     , _asLanguage   :: !Text
     , _asPageToken  :: !(Maybe Text)
-    , _asMaxResults :: !Word32
+    , _asMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesSearch' with the minimum fields required to make a request.
@@ -121,6 +121,7 @@ asPageToken
 asMaxResults :: Lens' ActivitiesSearch Word32
 asMaxResults
   = lens _asMaxResults (\ s a -> s{_asMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest ActivitiesSearch where
         type Rs ActivitiesSearch = ActivityFeed

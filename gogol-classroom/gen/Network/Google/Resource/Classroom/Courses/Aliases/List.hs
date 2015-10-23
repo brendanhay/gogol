@@ -65,7 +65,7 @@ type CoursesAliasesListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" Int32 :>
+                           QueryParam "pageSize" (JSONText Int32) :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListCourseAliasesResponse
@@ -85,7 +85,7 @@ data CoursesAliasesList = CoursesAliasesList
     , _calUploadType     :: !(Maybe Text)
     , _calBearerToken    :: !(Maybe Text)
     , _calPageToken      :: !(Maybe Text)
-    , _calPageSize       :: !(Maybe Int32)
+    , _calPageSize       :: !(Maybe (JSONText Int32))
     , _calCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -179,7 +179,8 @@ calPageToken
 -- specified number of results.
 calPageSize :: Lens' CoursesAliasesList (Maybe Int32)
 calPageSize
-  = lens _calPageSize (\ s a -> s{_calPageSize = a})
+  = lens _calPageSize (\ s a -> s{_calPageSize = a}) .
+      mapping _Coerce
 
 -- | JSONP
 calCallback :: Lens' CoursesAliasesList (Maybe Text)

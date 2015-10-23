@@ -50,8 +50,8 @@ type ManagementAccountUserLinksListResource =
            "accounts" :>
              Capture "accountId" Text :>
                "entityUserLinks" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
+                 QueryParam "start-index" (JSONText Int32) :>
+                   QueryParam "max-results" (JSONText Int32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] EntityUserLinks
 
@@ -60,8 +60,8 @@ type ManagementAccountUserLinksListResource =
 -- /See:/ 'managementAccountUserLinksList' smart constructor.
 data ManagementAccountUserLinksList = ManagementAccountUserLinksList
     { _maullAccountId  :: !Text
-    , _maullStartIndex :: !(Maybe Int32)
-    , _maullMaxResults :: !(Maybe Int32)
+    , _maullStartIndex :: !(Maybe (JSONText Int32))
+    , _maullMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksList' with the minimum fields required to make a request.
@@ -95,12 +95,14 @@ maullStartIndex :: Lens' ManagementAccountUserLinksList (Maybe Int32)
 maullStartIndex
   = lens _maullStartIndex
       (\ s a -> s{_maullStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of account-user links to include in this response.
 maullMaxResults :: Lens' ManagementAccountUserLinksList (Maybe Int32)
 maullMaxResults
   = lens _maullMaxResults
       (\ s a -> s{_maullMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementAccountUserLinksList
          where

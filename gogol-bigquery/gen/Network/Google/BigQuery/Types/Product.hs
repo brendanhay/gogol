@@ -70,7 +70,7 @@ instance ToJSON JobReference where
 --
 -- /See:/ 'tableList' smart constructor.
 data TableList = TableList
-    { _tlTotalItems    :: !(Maybe Int32)
+    { _tlTotalItems    :: !(Maybe (JSONText Int32))
     , _tlEtag          :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
@@ -105,6 +105,7 @@ tableList =
 tlTotalItems :: Lens' TableList (Maybe Int32)
 tlTotalItems
   = lens _tlTotalItems (\ s a -> s{_tlTotalItems = a})
+      . mapping _Coerce
 
 -- | A hash of this page of results.
 tlEtag :: Lens' TableList (Maybe Text)
@@ -226,7 +227,7 @@ data TableDataList = TableDataList
     , _tdlKind      :: !Text
     , _tdlRows      :: !(Maybe [TableRow])
     , _tdlPageToken :: !(Maybe Text)
-    , _tdlTotalRows :: !(Maybe Int64)
+    , _tdlTotalRows :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataList' with the minimum fields required to make a request.
@@ -278,6 +279,7 @@ tdlPageToken
 tdlTotalRows :: Lens' TableDataList (Maybe Int64)
 tdlTotalRows
   = lens _tdlTotalRows (\ s a -> s{_tdlTotalRows = a})
+      . mapping _Coerce
 
 instance FromJSON TableDataList where
         parseJSON
@@ -513,7 +515,7 @@ instance ToJSON TableSchema where
 --
 -- /See:/ 'projectList' smart constructor.
 data ProjectList = ProjectList
-    { _plTotalItems    :: !(Maybe Int32)
+    { _plTotalItems    :: !(Maybe (JSONText Int32))
     , _plEtag          :: !(Maybe Text)
     , _plNextPageToken :: !(Maybe Text)
     , _plKind          :: !Text
@@ -548,6 +550,7 @@ projectList =
 plTotalItems :: Lens' ProjectList (Maybe Int32)
 plTotalItems
   = lens _plTotalItems (\ s a -> s{_plTotalItems = a})
+      . mapping _Coerce
 
 -- | A hash of the page of results
 plEtag :: Lens' ProjectList (Maybe Text)
@@ -593,11 +596,11 @@ instance ToJSON ProjectList where
 --
 -- /See:/ 'jobStatistics' smart constructor.
 data JobStatistics = JobStatistics
-    { _jsCreationTime        :: !(Maybe Int64)
-    , _jsStartTime           :: !(Maybe Int64)
+    { _jsCreationTime        :: !(Maybe (JSONText Int64))
+    , _jsStartTime           :: !(Maybe (JSONText Int64))
     , _jsLoad                :: !(Maybe JobStatistics3)
-    , _jsTotalBytesProcessed :: !(Maybe Int64)
-    , _jsEndTime             :: !(Maybe Int64)
+    , _jsTotalBytesProcessed :: !(Maybe (JSONText Int64))
+    , _jsEndTime             :: !(Maybe (JSONText Int64))
     , _jsQuery               :: !(Maybe JobStatistics2)
     , _jsExtract             :: !(Maybe JobStatistics4)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -638,13 +641,15 @@ jsCreationTime :: Lens' JobStatistics (Maybe Int64)
 jsCreationTime
   = lens _jsCreationTime
       (\ s a -> s{_jsCreationTime = a})
+      . mapping _Coerce
 
 -- | [Output-only] Start time of this job, in milliseconds since the epoch.
 -- This field will be present when the job transitions from the PENDING
 -- state to either RUNNING or DONE.
 jsStartTime :: Lens' JobStatistics (Maybe Int64)
 jsStartTime
-  = lens _jsStartTime (\ s a -> s{_jsStartTime = a})
+  = lens _jsStartTime (\ s a -> s{_jsStartTime = a}) .
+      mapping _Coerce
 
 -- | [Output-only] Statistics for a load job.
 jsLoad :: Lens' JobStatistics (Maybe JobStatistics3)
@@ -656,12 +661,14 @@ jsTotalBytesProcessed :: Lens' JobStatistics (Maybe Int64)
 jsTotalBytesProcessed
   = lens _jsTotalBytesProcessed
       (\ s a -> s{_jsTotalBytesProcessed = a})
+      . mapping _Coerce
 
 -- | [Output-only] End time of this job, in milliseconds since the epoch.
 -- This field will be present whenever a job is in the DONE state.
 jsEndTime :: Lens' JobStatistics (Maybe Int64)
 jsEndTime
-  = lens _jsEndTime (\ s a -> s{_jsEndTime = a})
+  = lens _jsEndTime (\ s a -> s{_jsEndTime = a}) .
+      mapping _Coerce
 
 -- | [Output-only] Statistics for a query job.
 jsQuery :: Lens' JobStatistics (Maybe JobStatistics2)
@@ -700,17 +707,17 @@ instance ToJSON JobStatistics where
 --
 -- /See:/ 'dataSet' smart constructor.
 data DataSet = DataSet
-    { _dsCreationTime             :: !(Maybe Int64)
+    { _dsCreationTime             :: !(Maybe (JSONText Int64))
     , _dsAccess                   :: !(Maybe [DataSetAccessItem])
     , _dsEtag                     :: !(Maybe Text)
     , _dsLocation                 :: !(Maybe Text)
     , _dsFriendlyName             :: !(Maybe Text)
     , _dsKind                     :: !Text
-    , _dsLastModifiedTime         :: !(Maybe Int64)
+    , _dsLastModifiedTime         :: !(Maybe (JSONText Int64))
     , _dsDataSetReference         :: !(Maybe DataSetReference)
     , _dsSelfLink                 :: !(Maybe Text)
     , _dsId                       :: !(Maybe Text)
-    , _dsDefaultTableExpirationMs :: !(Maybe Int64)
+    , _dsDefaultTableExpirationMs :: !(Maybe (JSONText Int64))
     , _dsDescription              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -765,6 +772,7 @@ dsCreationTime :: Lens' DataSet (Maybe Int64)
 dsCreationTime
   = lens _dsCreationTime
       (\ s a -> s{_dsCreationTime = a})
+      . mapping _Coerce
 
 -- | [Optional] An array of objects that define dataset access for one or
 -- more entities. You can set this property when inserting or updating a
@@ -806,6 +814,7 @@ dsLastModifiedTime :: Lens' DataSet (Maybe Int64)
 dsLastModifiedTime
   = lens _dsLastModifiedTime
       (\ s a -> s{_dsLastModifiedTime = a})
+      . mapping _Coerce
 
 -- | [Required] A reference that identifies the dataset.
 dsDataSetReference :: Lens' DataSet (Maybe DataSetReference)
@@ -840,6 +849,7 @@ dsDefaultTableExpirationMs :: Lens' DataSet (Maybe Int64)
 dsDefaultTableExpirationMs
   = lens _dsDefaultTableExpirationMs
       (\ s a -> s{_dsDefaultTableExpirationMs = a})
+      . mapping _Coerce
 
 -- | [Optional] A user-friendly description of the dataset.
 dsDescription :: Lens' DataSet (Maybe Text)
@@ -888,7 +898,7 @@ data ExternalDataConfiguration = ExternalDataConfiguration
     , _edcCompression         :: !(Maybe Text)
     , _edcSourceFormat        :: !(Maybe Text)
     , _edcSchema              :: !(Maybe TableSchema)
-    , _edcMaxBadRecords       :: !(Maybe Int32)
+    , _edcMaxBadRecords       :: !(Maybe (JSONText Int32))
     , _edcSourceURIs          :: !(Maybe [Text])
     , _edcCSVOptions          :: !(Maybe CSVOptions)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -962,6 +972,7 @@ edcMaxBadRecords :: Lens' ExternalDataConfiguration (Maybe Int32)
 edcMaxBadRecords
   = lens _edcMaxBadRecords
       (\ s a -> s{_edcMaxBadRecords = a})
+      . mapping _Coerce
 
 -- | [Required] The fully-qualified URIs that point to your data in Google
 -- Cloud Storage. Each URI can contain one \'*\' wildcard character and it
@@ -1156,10 +1167,10 @@ data GetQueryResultsResponse = GetQueryResultsResponse
     , _gqrrEtag                :: !(Maybe Text)
     , _gqrrKind                :: !Text
     , _gqrrSchema              :: !(Maybe TableSchema)
-    , _gqrrTotalBytesProcessed :: !(Maybe Int64)
+    , _gqrrTotalBytesProcessed :: !(Maybe (JSONText Int64))
     , _gqrrRows                :: !(Maybe [TableRow])
     , _gqrrPageToken           :: !(Maybe Text)
-    , _gqrrTotalRows           :: !(Maybe Word64)
+    , _gqrrTotalRows           :: !(Maybe (JSONText Word64))
     , _gqrrErrors              :: !(Maybe [ErrorProto])
     , _gqrrJobComplete         :: !(Maybe Bool)
     , _gqrrCacheHit            :: !(Maybe Bool)
@@ -1237,6 +1248,7 @@ gqrrTotalBytesProcessed :: Lens' GetQueryResultsResponse (Maybe Int64)
 gqrrTotalBytesProcessed
   = lens _gqrrTotalBytesProcessed
       (\ s a -> s{_gqrrTotalBytesProcessed = a})
+      . mapping _Coerce
 
 -- | An object with as many results as can be contained within the maximum
 -- permitted reply size. To get any additional rows, you can call
@@ -1261,6 +1273,7 @@ gqrrTotalRows :: Lens' GetQueryResultsResponse (Maybe Word64)
 gqrrTotalRows
   = lens _gqrrTotalRows
       (\ s a -> s{_gqrrTotalRows = a})
+      . mapping _Coerce
 
 -- | [Output-only] All errors and warnings encountered during the running of
 -- the job. Errors here do not necessarily mean that the job has completed
@@ -1399,9 +1412,9 @@ data QueryRequest = QueryRequest
     , _qrPreserveNulls  :: !(Maybe Bool)
     , _qrKind           :: !Text
     , _qrQuery          :: !(Maybe Text)
-    , _qrTimeoutMs      :: !(Maybe Word32)
+    , _qrTimeoutMs      :: !(Maybe (JSONText Word32))
     , _qrDryRun         :: !(Maybe Bool)
-    , _qrMaxResults     :: !(Maybe Word32)
+    , _qrMaxResults     :: !(Maybe (JSONText Word32))
     , _qrDefaultDataSet :: !(Maybe DataSetReference)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1471,7 +1484,8 @@ qrQuery = lens _qrQuery (\ s a -> s{_qrQuery = a})
 -- is 10000 milliseconds (10 seconds).
 qrTimeoutMs :: Lens' QueryRequest (Maybe Word32)
 qrTimeoutMs
-  = lens _qrTimeoutMs (\ s a -> s{_qrTimeoutMs = a})
+  = lens _qrTimeoutMs (\ s a -> s{_qrTimeoutMs = a}) .
+      mapping _Coerce
 
 -- | [Optional] If set to true, BigQuery doesn\'t run the job. Instead, if
 -- the query is valid, BigQuery returns statistics about the job such as
@@ -1489,6 +1503,7 @@ qrDryRun = lens _qrDryRun (\ s a -> s{_qrDryRun = a})
 qrMaxResults :: Lens' QueryRequest (Maybe Word32)
 qrMaxResults
   = lens _qrMaxResults (\ s a -> s{_qrMaxResults = a})
+      . mapping _Coerce
 
 -- | [Optional] Specifies the default datasetId and projectId to assume for
 -- any unqualified table names in the query. If not set, all table names in
@@ -1527,7 +1542,7 @@ instance ToJSON QueryRequest where
 --
 -- /See:/ 'jobStatistics4' smart constructor.
 newtype JobStatistics4 = JobStatistics4
-    { _jsDestinationURIFileCounts :: Maybe [Int64]
+    { _jsDestinationURIFileCounts :: Maybe [JSONText Int64]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics4' with the minimum fields required to make a request.
@@ -1603,7 +1618,7 @@ instance ToJSON ProjectReference where
 --
 -- /See:/ 'jobConfigurationLoad' smart constructor.
 data JobConfigurationLoad = JobConfigurationLoad
-    { _jclSkipLeadingRows     :: !(Maybe Int32)
+    { _jclSkipLeadingRows     :: !(Maybe (JSONText Int32))
     , _jclProjectionFields    :: !(Maybe [Text])
     , _jclDestinationTable    :: !(Maybe TableReference)
     , _jclWriteDisPosition    :: !(Maybe Text)
@@ -1616,7 +1631,7 @@ data JobConfigurationLoad = JobConfigurationLoad
     , _jclSourceFormat        :: !(Maybe Text)
     , _jclSchema              :: !(Maybe TableSchema)
     , _jclQuote               :: !Text
-    , _jclMaxBadRecords       :: !(Maybe Int32)
+    , _jclMaxBadRecords       :: !(Maybe (JSONText Int32))
     , _jclSourceURIs          :: !(Maybe [Text])
     , _jclEncoding            :: !(Maybe Text)
     , _jclFieldDelimiter      :: !(Maybe Text)
@@ -1689,6 +1704,7 @@ jclSkipLeadingRows :: Lens' JobConfigurationLoad (Maybe Int32)
 jclSkipLeadingRows
   = lens _jclSkipLeadingRows
       (\ s a -> s{_jclSkipLeadingRows = a})
+      . mapping _Coerce
 
 -- | [Experimental] If sourceFormat is set to \"DATASTORE_BACKUP\", indicates
 -- which entity properties to load into BigQuery from a Cloud Datastore
@@ -1811,6 +1827,7 @@ jclMaxBadRecords :: Lens' JobConfigurationLoad (Maybe Int32)
 jclMaxBadRecords
   = lens _jclMaxBadRecords
       (\ s a -> s{_jclMaxBadRecords = a})
+      . mapping _Coerce
 
 -- | [Required] The fully-qualified URIs that point to your data in Google
 -- Cloud Storage. Each URI can contain one \'*\' wildcard character and it
@@ -2021,7 +2038,7 @@ data ProjectListProjectsItem = ProjectListProjectsItem
     , _plpiKind             :: !Text
     , _plpiProjectReference :: !(Maybe ProjectReference)
     , _plpiId               :: !(Maybe Text)
-    , _plpiNumericId        :: !(Maybe Word64)
+    , _plpiNumericId        :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectListProjectsItem' with the minimum fields required to make a request.
@@ -2073,6 +2090,7 @@ plpiNumericId :: Lens' ProjectListProjectsItem (Maybe Word64)
 plpiNumericId
   = lens _plpiNumericId
       (\ s a -> s{_plpiNumericId = a})
+      . mapping _Coerce
 
 instance FromJSON ProjectListProjectsItem where
         parseJSON
@@ -2098,9 +2116,9 @@ instance ToJSON ProjectListProjectsItem where
 --
 -- /See:/ 'streamingbuffer' smart constructor.
 data Streamingbuffer = Streamingbuffer
-    { _sEstimatedBytes  :: !(Maybe Word64)
-    , _sOldestEntryTime :: !(Maybe Word64)
-    , _sEstimatedRows   :: !(Maybe Word64)
+    { _sEstimatedBytes  :: !(Maybe (JSONText Word64))
+    , _sOldestEntryTime :: !(Maybe (JSONText Word64))
+    , _sEstimatedRows   :: !(Maybe (JSONText Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Streamingbuffer' with the minimum fields required to make a request.
@@ -2127,6 +2145,7 @@ sEstimatedBytes :: Lens' Streamingbuffer (Maybe Word64)
 sEstimatedBytes
   = lens _sEstimatedBytes
       (\ s a -> s{_sEstimatedBytes = a})
+      . mapping _Coerce
 
 -- | [Output-only] Contains the timestamp of the oldest entry in the
 -- streaming buffer, in milliseconds since the epoch, if the streaming
@@ -2135,6 +2154,7 @@ sOldestEntryTime :: Lens' Streamingbuffer (Maybe Word64)
 sOldestEntryTime
   = lens _sOldestEntryTime
       (\ s a -> s{_sOldestEntryTime = a})
+      . mapping _Coerce
 
 -- | [Output-only] A lower-bound estimate of the number of rows currently in
 -- the streaming buffer.
@@ -2142,6 +2162,7 @@ sEstimatedRows :: Lens' Streamingbuffer (Maybe Word64)
 sEstimatedRows
   = lens _sEstimatedRows
       (\ s a -> s{_sEstimatedRows = a})
+      . mapping _Coerce
 
 instance FromJSON Streamingbuffer where
         parseJSON
@@ -2619,7 +2640,7 @@ instance ToJSON JobConfigurationLink where
 -- /See:/ 'tableDataInsertAllResponseInsertErrorsItem' smart constructor.
 data TableDataInsertAllResponseInsertErrorsItem = TableDataInsertAllResponseInsertErrorsItem
     { _tdiarieiErrors :: !(Maybe [ErrorProto])
-    , _tdiarieiIndex  :: !(Maybe Word32)
+    , _tdiarieiIndex  :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataInsertAllResponseInsertErrorsItem' with the minimum fields required to make a request.
@@ -2650,6 +2671,7 @@ tdiarieiIndex :: Lens' TableDataInsertAllResponseInsertErrorsItem (Maybe Word32)
 tdiarieiIndex
   = lens _tdiarieiIndex
       (\ s a -> s{_tdiarieiIndex = a})
+      . mapping _Coerce
 
 instance FromJSON
          TableDataInsertAllResponseInsertErrorsItem where
@@ -3331,10 +3353,10 @@ instance ToJSON UserDefinedFunctionResource where
 --
 -- /See:/ 'jobStatistics2' smart constructor.
 data JobStatistics2 = JobStatistics2
-    { _jTotalBytesProcessed :: !(Maybe Int64)
-    , _jBillingTier         :: !(Maybe Int32)
+    { _jTotalBytesProcessed :: !(Maybe (JSONText Int64))
+    , _jBillingTier         :: !(Maybe (JSONText Int32))
     , _jCacheHit            :: !(Maybe Bool)
-    , _jTotalBytesBilled    :: !(Maybe Int64)
+    , _jTotalBytesBilled    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics2' with the minimum fields required to make a request.
@@ -3363,11 +3385,13 @@ jTotalBytesProcessed :: Lens' JobStatistics2 (Maybe Int64)
 jTotalBytesProcessed
   = lens _jTotalBytesProcessed
       (\ s a -> s{_jTotalBytesProcessed = a})
+      . mapping _Coerce
 
 -- | [Output-only] Billing tier for the job.
 jBillingTier :: Lens' JobStatistics2 (Maybe Int32)
 jBillingTier
   = lens _jBillingTier (\ s a -> s{_jBillingTier = a})
+      . mapping _Coerce
 
 -- | [Output-only] Whether the query result was fetched from the query cache.
 jCacheHit :: Lens' JobStatistics2 (Maybe Bool)
@@ -3379,6 +3403,7 @@ jTotalBytesBilled :: Lens' JobStatistics2 (Maybe Int64)
 jTotalBytesBilled
   = lens _jTotalBytesBilled
       (\ s a -> s{_jTotalBytesBilled = a})
+      . mapping _Coerce
 
 instance FromJSON JobStatistics2 where
         parseJSON
@@ -3617,23 +3642,23 @@ instance ToJSON TableDataInsertAllResponse where
 --
 -- /See:/ 'table' smart constructor.
 data Table = Table
-    { _tabCreationTime              :: !(Maybe Int64)
+    { _tabCreationTime              :: !(Maybe (JSONText Int64))
     , _tabEtag                      :: !(Maybe Text)
-    , _tabNumBytes                  :: !(Maybe Int64)
+    , _tabNumBytes                  :: !(Maybe (JSONText Int64))
     , _tabExternalDataConfiguration :: !(Maybe ExternalDataConfiguration)
     , _tabLocation                  :: !(Maybe Text)
     , _tabTableReference            :: !(Maybe TableReference)
     , _tabFriendlyName              :: !(Maybe Text)
     , _tabKind                      :: !Text
-    , _tabLastModifiedTime          :: !(Maybe Word64)
+    , _tabLastModifiedTime          :: !(Maybe (JSONText Word64))
     , _tabSchema                    :: !(Maybe TableSchema)
     , _tabStreamingBuffer           :: !(Maybe Streamingbuffer)
     , _tabSelfLink                  :: !(Maybe Text)
-    , _tabNumRows                   :: !(Maybe Word64)
+    , _tabNumRows                   :: !(Maybe (JSONText Word64))
     , _tabView                      :: !(Maybe ViewDefinition)
     , _tabId                        :: !(Maybe Text)
     , _tabType                      :: !(Maybe Text)
-    , _tabExpirationTime            :: !(Maybe Int64)
+    , _tabExpirationTime            :: !(Maybe (JSONText Int64))
     , _tabDescription               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3706,6 +3731,7 @@ tabCreationTime :: Lens' Table (Maybe Int64)
 tabCreationTime
   = lens _tabCreationTime
       (\ s a -> s{_tabCreationTime = a})
+      . mapping _Coerce
 
 -- | [Output-only] A hash of this resource.
 tabEtag :: Lens' Table (Maybe Text)
@@ -3715,7 +3741,8 @@ tabEtag = lens _tabEtag (\ s a -> s{_tabEtag = a})
 -- streaming buffer.
 tabNumBytes :: Lens' Table (Maybe Int64)
 tabNumBytes
-  = lens _tabNumBytes (\ s a -> s{_tabNumBytes = a})
+  = lens _tabNumBytes (\ s a -> s{_tabNumBytes = a}) .
+      mapping _Coerce
 
 -- | [Experimental] Describes the data format, location, and other properties
 -- of a table stored outside of BigQuery. By defining these properties, the
@@ -3753,6 +3780,7 @@ tabLastModifiedTime :: Lens' Table (Maybe Word64)
 tabLastModifiedTime
   = lens _tabLastModifiedTime
       (\ s a -> s{_tabLastModifiedTime = a})
+      . mapping _Coerce
 
 -- | [Optional] Describes the schema of this table.
 tabSchema :: Lens' Table (Maybe TableSchema)
@@ -3776,7 +3804,8 @@ tabSelfLink
 -- data in the streaming buffer.
 tabNumRows :: Lens' Table (Maybe Word64)
 tabNumRows
-  = lens _tabNumRows (\ s a -> s{_tabNumRows = a})
+  = lens _tabNumRows (\ s a -> s{_tabNumRows = a}) .
+      mapping _Coerce
 
 -- | [Optional] The view definition.
 tabView :: Lens' Table (Maybe ViewDefinition)
@@ -3799,6 +3828,7 @@ tabExpirationTime :: Lens' Table (Maybe Int64)
 tabExpirationTime
   = lens _tabExpirationTime
       (\ s a -> s{_tabExpirationTime = a})
+      . mapping _Coerce
 
 -- | [Optional] A user-friendly description of this table.
 tabDescription :: Lens' Table (Maybe Text)
@@ -3923,7 +3953,7 @@ instance ToJSON ErrorProto where
 --
 -- /See:/ 'csvOptions' smart constructor.
 data CSVOptions = CSVOptions
-    { _coSkipLeadingRows     :: !(Maybe Int32)
+    { _coSkipLeadingRows     :: !(Maybe (JSONText Int32))
     , _coAllowJaggedRows     :: !(Maybe Bool)
     , _coAllowQuotedNewlines :: !(Maybe Bool)
     , _coQuote               :: !Text
@@ -3965,6 +3995,7 @@ coSkipLeadingRows :: Lens' CSVOptions (Maybe Int32)
 coSkipLeadingRows
   = lens _coSkipLeadingRows
       (\ s a -> s{_coSkipLeadingRows = a})
+      . mapping _Coerce
 
 -- | [Optional] Indicates if BigQuery should accept rows that are missing
 -- trailing optional columns. If true, BigQuery treats missing trailing
@@ -4038,10 +4069,10 @@ instance ToJSON CSVOptions where
 --
 -- /See:/ 'jobStatistics3' smart constructor.
 data JobStatistics3 = JobStatistics3
-    { _jsInputFiles     :: !(Maybe Int64)
-    , _jsOutputRows     :: !(Maybe Int64)
-    , _jsOutputBytes    :: !(Maybe Int64)
-    , _jsInputFileBytes :: !(Maybe Int64)
+    { _jsInputFiles     :: !(Maybe (JSONText Int64))
+    , _jsOutputRows     :: !(Maybe (JSONText Int64))
+    , _jsOutputBytes    :: !(Maybe (JSONText Int64))
+    , _jsInputFileBytes :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics3' with the minimum fields required to make a request.
@@ -4069,12 +4100,14 @@ jobStatistics3 =
 jsInputFiles :: Lens' JobStatistics3 (Maybe Int64)
 jsInputFiles
   = lens _jsInputFiles (\ s a -> s{_jsInputFiles = a})
+      . mapping _Coerce
 
 -- | [Output-only] Number of rows imported in a load job. Note that while an
 -- import job is in the running state, this value may change.
 jsOutputRows :: Lens' JobStatistics3 (Maybe Int64)
 jsOutputRows
   = lens _jsOutputRows (\ s a -> s{_jsOutputRows = a})
+      . mapping _Coerce
 
 -- | [Output-only] Size of the loaded data in bytes. Note that while a load
 -- job is in the running state, this value may change.
@@ -4082,12 +4115,14 @@ jsOutputBytes :: Lens' JobStatistics3 (Maybe Int64)
 jsOutputBytes
   = lens _jsOutputBytes
       (\ s a -> s{_jsOutputBytes = a})
+      . mapping _Coerce
 
 -- | [Output-only] Number of bytes of source data in a load job.
 jsInputFileBytes :: Lens' JobStatistics3 (Maybe Int64)
 jsInputFileBytes
   = lens _jsInputFileBytes
       (\ s a -> s{_jsInputFileBytes = a})
+      . mapping _Coerce
 
 instance FromJSON JobStatistics3 where
         parseJSON
@@ -4113,10 +4148,10 @@ data QueryResponse = QueryResponse
     { _qJobReference        :: !(Maybe JobReference)
     , _qKind                :: !Text
     , _qSchema              :: !(Maybe TableSchema)
-    , _qTotalBytesProcessed :: !(Maybe Int64)
+    , _qTotalBytesProcessed :: !(Maybe (JSONText Int64))
     , _qRows                :: !(Maybe [TableRow])
     , _qPageToken           :: !(Maybe Text)
-    , _qTotalRows           :: !(Maybe Word64)
+    , _qTotalRows           :: !(Maybe (JSONText Word64))
     , _qErrors              :: !(Maybe [ErrorProto])
     , _qJobComplete         :: !(Maybe Bool)
     , _qCacheHit            :: !(Maybe Bool)
@@ -4188,6 +4223,7 @@ qTotalBytesProcessed :: Lens' QueryResponse (Maybe Int64)
 qTotalBytesProcessed
   = lens _qTotalBytesProcessed
       (\ s a -> s{_qTotalBytesProcessed = a})
+      . mapping _Coerce
 
 -- | An object with as many results as can be contained within the maximum
 -- permitted reply size. To get any additional rows, you can call
@@ -4206,7 +4242,8 @@ qPageToken
 -- more than the number of rows in this single page of results.
 qTotalRows :: Lens' QueryResponse (Maybe Word64)
 qTotalRows
-  = lens _qTotalRows (\ s a -> s{_qTotalRows = a})
+  = lens _qTotalRows (\ s a -> s{_qTotalRows = a}) .
+      mapping _Coerce
 
 -- | [Output-only] All errors and warnings encountered during the running of
 -- the job. Errors here do not necessarily mean that the job has completed

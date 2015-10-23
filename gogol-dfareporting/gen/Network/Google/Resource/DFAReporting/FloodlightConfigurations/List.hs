@@ -46,9 +46,9 @@ type FloodlightConfigurationsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightConfigurations" :>
-               QueryParams "ids" Int64 :>
+               QueryParams "ids" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] FloodlightConfigurationsListResponse
 
@@ -56,8 +56,8 @@ type FloodlightConfigurationsListResource =
 --
 -- /See:/ 'floodlightConfigurationsList' smart constructor.
 data FloodlightConfigurationsList = FloodlightConfigurationsList
-    { _fclIds       :: !(Maybe [Int64])
-    , _fclProFileId :: !Int64
+    { _fclIds       :: !(Maybe [JSONText Int64])
+    , _fclProFileId :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsList' with the minimum fields required to make a request.
@@ -87,6 +87,7 @@ fclIds
 fclProFileId :: Lens' FloodlightConfigurationsList Int64
 fclProFileId
   = lens _fclProFileId (\ s a -> s{_fclProFileId = a})
+      . _Coerce
 
 instance GoogleRequest FloodlightConfigurationsList
          where

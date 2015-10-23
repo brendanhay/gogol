@@ -713,14 +713,14 @@ instance ToJSON DeprecationStatus where
 data Snapshot = Snapshot
     { _sStorageBytesStatus :: !(Maybe SnapshotStorageBytesStatus)
     , _sStatus             :: !(Maybe SnapshotStatus)
-    , _sDiskSizeGb         :: !(Maybe Int64)
+    , _sDiskSizeGb         :: !(Maybe (JSONText Int64))
     , _sSourceDiskId       :: !(Maybe Text)
     , _sKind               :: !Text
-    , _sStorageBytes       :: !(Maybe Int64)
+    , _sStorageBytes       :: !(Maybe (JSONText Int64))
     , _sSelfLink           :: !(Maybe Text)
     , _sName               :: !(Maybe Text)
     , _sCreationTimestamp  :: !(Maybe Text)
-    , _sId                 :: !(Maybe Word64)
+    , _sId                 :: !(Maybe (JSONText Word64))
     , _sLicenses           :: !(Maybe [Text])
     , _sSourceDisk         :: !(Maybe Text)
     , _sDescription        :: !(Maybe Text)
@@ -788,7 +788,8 @@ sStatus = lens _sStatus (\ s a -> s{_sStatus = a})
 -- | [Output Only] Size of the snapshot, specified in GB.
 sDiskSizeGb :: Lens' Snapshot (Maybe Int64)
 sDiskSizeGb
-  = lens _sDiskSizeGb (\ s a -> s{_sDiskSizeGb = a})
+  = lens _sDiskSizeGb (\ s a -> s{_sDiskSizeGb = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The ID value of the disk used to create this snapshot.
 -- This value may be used to determine whether the snapshot was taken from
@@ -810,6 +811,7 @@ sStorageBytes :: Lens' Snapshot (Maybe Int64)
 sStorageBytes
   = lens _sStorageBytes
       (\ s a -> s{_sStorageBytes = a})
+      . mapping _Coerce
 
 -- | [Output Only] Server-defined URL for the resource.
 sSelfLink :: Lens' Snapshot (Maybe Text)
@@ -834,7 +836,8 @@ sCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 sId :: Lens' Snapshot (Maybe Word64)
-sId = lens _sId (\ s a -> s{_sId = a})
+sId
+  = lens _sId (\ s a -> s{_sId = a}) . mapping _Coerce
 
 -- | Public visible licenses.
 sLicenses :: Lens' Snapshot [Text]
@@ -893,7 +896,7 @@ instance ToJSON Snapshot where
 --
 -- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
 data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
-    { _apcmuUtilizationTarget     :: !(Maybe Double)
+    { _apcmuUtilizationTarget     :: !(Maybe (JSONText Double))
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -922,6 +925,7 @@ apcmuUtilizationTarget :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe 
 apcmuUtilizationTarget
   = lens _apcmuUtilizationTarget
       (\ s a -> s{_apcmuUtilizationTarget = a})
+      . mapping _Coerce
 
 -- | Identifier of the metric. It should be a Cloud Monitoring metric. The
 -- metric can not have negative values. The metric should be an utilization
@@ -1095,7 +1099,7 @@ instance ToJSON VPNTunnelsScopedList where
 --
 -- /See:/ 'instanceGroupsSetNamedPortsRequest' smart constructor.
 data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest
-    { _igsnprFingerprint :: !(Maybe Word8)
+    { _igsnprFingerprint :: !(Maybe (JSONText Word8))
     , _igsnprNamedPorts  :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1124,6 +1128,7 @@ igsnprFingerprint :: Lens' InstanceGroupsSetNamedPortsRequest (Maybe Word8)
 igsnprFingerprint
   = lens _igsnprFingerprint
       (\ s a -> s{_igsnprFingerprint = a})
+      . mapping _Coerce
 
 -- | The list of named ports to set for this instance group.
 igsnprNamedPorts :: Lens' InstanceGroupsSetNamedPortsRequest [NamedPort]
@@ -1480,16 +1485,16 @@ instance ToJSON InstanceGroupManagerList where
 -- /See:/ 'image' smart constructor.
 data Image = Image
     { _iStatus            :: !(Maybe ImageStatus)
-    , _iDiskSizeGb        :: !(Maybe Int64)
+    , _iDiskSizeGb        :: !(Maybe (JSONText Int64))
     , _iSourceType        :: !ImageSourceType
     , _iSourceDiskId      :: !(Maybe Text)
     , _iKind              :: !Text
-    , _iArchiveSizeBytes  :: !(Maybe Int64)
+    , _iArchiveSizeBytes  :: !(Maybe (JSONText Int64))
     , _iRawDisk           :: !(Maybe ImageRawDisk)
     , _iSelfLink          :: !(Maybe Text)
     , _iName              :: !(Maybe Text)
     , _iCreationTimestamp :: !(Maybe Text)
-    , _iId                :: !(Maybe Word64)
+    , _iId                :: !(Maybe (JSONText Word64))
     , _iLicenses          :: !(Maybe [Text])
     , _iSourceDisk        :: !(Maybe Text)
     , _iDescription       :: !(Maybe Text)
@@ -1560,7 +1565,8 @@ iStatus = lens _iStatus (\ s a -> s{_iStatus = a})
 -- | Size of the image when restored onto a persistent disk (in GB).
 iDiskSizeGb :: Lens' Image (Maybe Int64)
 iDiskSizeGb
-  = lens _iDiskSizeGb (\ s a -> s{_iDiskSizeGb = a})
+  = lens _iDiskSizeGb (\ s a -> s{_iDiskSizeGb = a}) .
+      mapping _Coerce
 
 -- | The type of the image used to create this disk. The default and only
 -- value is RAW
@@ -1586,6 +1592,7 @@ iArchiveSizeBytes :: Lens' Image (Maybe Int64)
 iArchiveSizeBytes
   = lens _iArchiveSizeBytes
       (\ s a -> s{_iArchiveSizeBytes = a})
+      . mapping _Coerce
 
 -- | The parameters of the raw disk image.
 iRawDisk :: Lens' Image (Maybe ImageRawDisk)
@@ -1614,7 +1621,8 @@ iCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 iId :: Lens' Image (Maybe Word64)
-iId = lens _iId (\ s a -> s{_iId = a})
+iId
+  = lens _iId (\ s a -> s{_iId = a}) . mapping _Coerce
 
 -- | Any applicable publicly visible licenses.
 iLicenses :: Lens' Image [Text]
@@ -1691,13 +1699,13 @@ instance ToJSON Image where
 data URLMap = URLMap
     { _umTests             :: !(Maybe [URLMapTest])
     , _umKind              :: !Text
-    , _umFingerprint       :: !(Maybe Word8)
+    , _umFingerprint       :: !(Maybe (JSONText Word8))
     , _umDefaultService    :: !(Maybe Text)
     , _umSelfLink          :: !(Maybe Text)
     , _umName              :: !(Maybe Text)
     , _umCreationTimestamp :: !(Maybe Text)
     , _umPathMatchers      :: !(Maybe [PathMatcher])
-    , _umId                :: !(Maybe Word64)
+    , _umId                :: !(Maybe (JSONText Word64))
     , _umHostRules         :: !(Maybe [HostRule])
     , _umDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1763,6 +1771,7 @@ umFingerprint :: Lens' URLMap (Maybe Word8)
 umFingerprint
   = lens _umFingerprint
       (\ s a -> s{_umFingerprint = a})
+      . mapping _Coerce
 
 -- | The URL of the BackendService resource if none of the hostRules match.
 umDefaultService :: Lens' URLMap (Maybe Text)
@@ -1801,7 +1810,9 @@ umPathMatchers
 
 -- | [Output Only] Unique identifier for the resource. Set by the server.
 umId :: Lens' URLMap (Maybe Word64)
-umId = lens _umId (\ s a -> s{_umId = a})
+umId
+  = lens _umId (\ s a -> s{_umId = a}) .
+      mapping _Coerce
 
 -- | The list of HostRules to use against the URL.
 umHostRules :: Lens' URLMap [HostRule]
@@ -2509,7 +2520,7 @@ instance ToJSON OperationsScopedList where
 -- /See:/ 'namedPort' smart constructor.
 data NamedPort = NamedPort
     { _npName :: !(Maybe Text)
-    , _npPort :: !(Maybe Int32)
+    , _npPort :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NamedPort' with the minimum fields required to make a request.
@@ -2534,7 +2545,9 @@ npName = lens _npName (\ s a -> s{_npName = a})
 
 -- | The port number, which can be a value between 1 and 65535.
 npPort :: Lens' NamedPort (Maybe Int32)
-npPort = lens _npPort (\ s a -> s{_npPort = a})
+npPort
+  = lens _npPort (\ s a -> s{_npPort = a}) .
+      mapping _Coerce
 
 instance FromJSON NamedPort where
         parseJSON
@@ -3018,8 +3031,8 @@ data TargetPool = TargetPool
     , _tpName              :: !(Maybe Text)
     , _tpCreationTimestamp :: !(Maybe Text)
     , _tpInstances         :: !(Maybe [Text])
-    , _tpId                :: !(Maybe Word64)
-    , _tpFailoverRatio     :: !(Maybe Float)
+    , _tpId                :: !(Maybe (JSONText Word64))
+    , _tpFailoverRatio     :: !(Maybe (JSONText Float))
     , _tpRegion            :: !(Maybe Text)
     , _tpDescription       :: !(Maybe Text)
     , _tpHealthChecks      :: !(Maybe [Text])
@@ -3132,7 +3145,9 @@ tpInstances
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 tpId :: Lens' TargetPool (Maybe Word64)
-tpId = lens _tpId (\ s a -> s{_tpId = a})
+tpId
+  = lens _tpId (\ s a -> s{_tpId = a}) .
+      mapping _Coerce
 
 -- | This field is applicable only when the containing target pool is serving
 -- a forwarding rule as the primary pool (i.e., not as a backup pool to
@@ -3150,6 +3165,7 @@ tpFailoverRatio :: Lens' TargetPool (Maybe Float)
 tpFailoverRatio
   = lens _tpFailoverRatio
       (\ s a -> s{_tpFailoverRatio = a})
+      . mapping _Coerce
 
 -- | [Output Only] URL of the region where the target pool resides.
 tpRegion :: Lens' TargetPool (Maybe Text)
@@ -3361,7 +3377,7 @@ data ForwardingRule = ForwardingRule
     , _frName              :: !(Maybe Text)
     , _frIPProtocol        :: !(Maybe ForwardingRuleIPProtocol)
     , _frCreationTimestamp :: !(Maybe Text)
-    , _frId                :: !(Maybe Word64)
+    , _frId                :: !(Maybe (JSONText Word64))
     , _frRegion            :: !(Maybe Text)
     , _frDescription       :: !(Maybe Text)
     , _frTarget            :: !(Maybe Text)
@@ -3459,7 +3475,9 @@ frCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 frId :: Lens' ForwardingRule (Maybe Word64)
-frId = lens _frId (\ s a -> s{_frId = a})
+frId
+  = lens _frId (\ s a -> s{_frId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] URL of the region where the regional forwarding rule
 -- resides. This field is not applicable to global forwarding rules.
@@ -3707,7 +3725,7 @@ data Project = Project
     , _pCreationTimestamp      :: !(Maybe Text)
     , _pEnabledFeatures        :: !(Maybe [Text])
     , _pQuotas                 :: !(Maybe [Quota])
-    , _pId                     :: !(Maybe Word64)
+    , _pId                     :: !(Maybe (JSONText Word64))
     , _pDescription            :: !(Maybe Text)
     , _pCommonInstanceMetadata :: !(Maybe Metadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3793,7 +3811,8 @@ pQuotas
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 pId :: Lens' Project (Maybe Word64)
-pId = lens _pId (\ s a -> s{_pId = a})
+pId
+  = lens _pId (\ s a -> s{_pId = a}) . mapping _Coerce
 
 -- | An optional textual description of the resource.
 pDescription :: Lens' Project (Maybe Text)
@@ -3842,24 +3861,24 @@ instance ToJSON Project where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe Word64)
+    { _oTargetId            :: !(Maybe (JSONText Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe Int32)
+    , _oProgress            :: !(Maybe (JSONText Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe Int32)
+    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe Word64)
+    , _oId                  :: !(Maybe (JSONText Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -3945,7 +3964,8 @@ operation =
 -- of the target.
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
-  = lens _oTargetId (\ s a -> s{_oTargetId = a})
+  = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
@@ -3965,7 +3985,8 @@ oInsertTime
 -- operation progresses.
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
-  = lens _oProgress (\ s a -> s{_oProgress = a})
+  = lens _oProgress (\ s a -> s{_oProgress = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The time that this operation was started by the server.
 -- This is in RFC3339 text format.
@@ -4008,6 +4029,7 @@ oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
       (\ s a -> s{_oHTTPErrorStatusCode = a})
+      . mapping _Coerce
 
 -- | [Output Only] User who requested the operation, for example:
 -- user\'example.com.
@@ -4043,7 +4065,8 @@ oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 oId :: Lens' Operation (Maybe Word64)
-oId = lens _oId (\ s a -> s{_oId = a})
+oId
+  = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
 -- | [Output Only] Type of the operation, such as insert,
 -- compute.instanceGroups.update, or compute.instanceGroups.delete.
@@ -4178,7 +4201,7 @@ data Disk = Disk
     , _dLastAttachTimestamp :: !(Maybe Text)
     , _dUsers               :: !(Maybe [Text])
     , _dSourceImage         :: !(Maybe Text)
-    , _dSizeGb              :: !(Maybe Int64)
+    , _dSizeGb              :: !(Maybe (JSONText Int64))
     , _dKind                :: !Text
     , _dLastDetachTimestamp :: !(Maybe Text)
     , _dZone                :: !(Maybe Text)
@@ -4186,7 +4209,7 @@ data Disk = Disk
     , _dName                :: !(Maybe Text)
     , _dSourceImageId       :: !(Maybe Text)
     , _dCreationTimestamp   :: !(Maybe Text)
-    , _dId                  :: !(Maybe Word64)
+    , _dId                  :: !(Maybe (JSONText Word64))
     , _dLicenses            :: !(Maybe [Text])
     , _dOptions             :: !(Maybe Text)
     , _dType                :: !(Maybe Text)
@@ -4311,7 +4334,9 @@ dSourceImage
 -- value of sizeGb must not be less than the size of the sourceImage or the
 -- size of the snapshot.
 dSizeGb :: Lens' Disk (Maybe Int64)
-dSizeGb = lens _dSizeGb (\ s a -> s{_dSizeGb = a})
+dSizeGb
+  = lens _dSizeGb (\ s a -> s{_dSizeGb = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Type of the resource. Always compute#disk for disks.
 dKind :: Lens' Disk Text
@@ -4360,7 +4385,8 @@ dCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 dId :: Lens' Disk (Maybe Word64)
-dId = lens _dId (\ s a -> s{_dId = a})
+dId
+  = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
 -- | Any applicable publicly visible licenses.
 dLicenses :: Lens' Disk [Text]
@@ -4499,7 +4525,7 @@ instance ToJSON DiskMoveRequest where
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
 newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
-    { _aplbuUtilizationTarget :: Maybe Double
+    { _aplbuUtilizationTarget :: Maybe (JSONText Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyLoadBalancingUtilization' with the minimum fields required to make a request.
@@ -4524,6 +4550,7 @@ aplbuUtilizationTarget :: Lens' AutoscalingPolicyLoadBalancingUtilization (Maybe
 aplbuUtilizationTarget
   = lens _aplbuUtilizationTarget
       (\ s a -> s{_aplbuUtilizationTarget = a})
+      . mapping _Coerce
 
 instance FromJSON
          AutoscalingPolicyLoadBalancingUtilization where
@@ -4595,16 +4622,16 @@ instance ToJSON TargetPoolsScopedListWarningDataItem
 -- /See:/ 'instanceGroupManager' smart constructor.
 data InstanceGroupManager = InstanceGroupManager
     { _igmKind              :: !Text
-    , _igmFingerprint       :: !(Maybe Word8)
+    , _igmFingerprint       :: !(Maybe (JSONText Word8))
     , _igmBaseInstanceName  :: !(Maybe Text)
     , _igmZone              :: !(Maybe Text)
     , _igmInstanceTemplate  :: !(Maybe Text)
-    , _igmTargetSize        :: !(Maybe Int32)
+    , _igmTargetSize        :: !(Maybe (JSONText Int32))
     , _igmSelfLink          :: !(Maybe Text)
     , _igmCurrentActions    :: !(Maybe InstanceGroupManagerActionsSummary)
     , _igmName              :: !(Maybe Text)
     , _igmCreationTimestamp :: !(Maybe Text)
-    , _igmId                :: !(Maybe Word64)
+    , _igmId                :: !(Maybe (JSONText Word64))
     , _igmTargetPools       :: !(Maybe [Text])
     , _igmDescription       :: !(Maybe Text)
     , _igmInstanceGroup     :: !(Maybe Text)
@@ -4673,6 +4700,7 @@ igmFingerprint :: Lens' InstanceGroupManager (Maybe Word8)
 igmFingerprint
   = lens _igmFingerprint
       (\ s a -> s{_igmFingerprint = a})
+      . mapping _Coerce
 
 -- | The base instance name to use for instances in this group. The value
 -- must be 1-58 characters long. Instances are named by appending a hyphen
@@ -4702,6 +4730,7 @@ igmTargetSize :: Lens' InstanceGroupManager (Maybe Int32)
 igmTargetSize
   = lens _igmTargetSize
       (\ s a -> s{_igmTargetSize = a})
+      . mapping _Coerce
 
 -- | [Output Only] The URL for this managed instance group. The server
 -- defines this URL.
@@ -4732,7 +4761,9 @@ igmCreationTimestamp
 -- | [Output Only] A unique identifier for this resource type. The server
 -- generates this identifier.
 igmId :: Lens' InstanceGroupManager (Maybe Word64)
-igmId = lens _igmId (\ s a -> s{_igmId = a})
+igmId
+  = lens _igmId (\ s a -> s{_igmId = a}) .
+      mapping _Coerce
 
 -- | The URLs for all TargetPool resources to which instances in the
 -- instanceGroup field are added. The target pools automatically apply to
@@ -5177,7 +5208,7 @@ data TargetInstance = TargetInstance
     , _tiSelfLink          :: !(Maybe Text)
     , _tiName              :: !(Maybe Text)
     , _tiCreationTimestamp :: !(Maybe Text)
-    , _tiId                :: !(Maybe Word64)
+    , _tiId                :: !(Maybe (JSONText Word64))
     , _tiDescription       :: !(Maybe Text)
     , _tiInstance          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5255,7 +5286,9 @@ tiCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 tiId :: Lens' TargetInstance (Maybe Word64)
-tiId = lens _tiId (\ s a -> s{_tiId = a})
+tiId
+  = lens _tiId (\ s a -> s{_tiId = a}) .
+      mapping _Coerce
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
@@ -5613,7 +5646,7 @@ instance ToJSON DiskTypesScopedListWarning where
 -- /See:/ 'attachedDiskInitializeParams' smart constructor.
 data AttachedDiskInitializeParams = AttachedDiskInitializeParams
     { _adipSourceImage :: !(Maybe Text)
-    , _adipDiskSizeGb  :: !(Maybe Int64)
+    , _adipDiskSizeGb  :: !(Maybe (JSONText Int64))
     , _adipDiskName    :: !(Maybe Text)
     , _adipDiskType    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5658,6 +5691,7 @@ adipDiskSizeGb :: Lens' AttachedDiskInitializeParams (Maybe Int64)
 adipDiskSizeGb
   = lens _adipDiskSizeGb
       (\ s a -> s{_adipDiskSizeGb = a})
+      . mapping _Coerce
 
 -- | Specifies the disk name. If not specified, the default is to use the
 -- name of the instance.
@@ -6263,7 +6297,7 @@ data Network = Network
     , _nSelfLink          :: !(Maybe Text)
     , _nName              :: !(Maybe Text)
     , _nCreationTimestamp :: !(Maybe Text)
-    , _nId                :: !(Maybe Word64)
+    , _nId                :: !(Maybe (JSONText Word64))
     , _nGatewayIPv4       :: !(Maybe Text)
     , _nDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6335,7 +6369,8 @@ nCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 nId :: Lens' Network (Maybe Word64)
-nId = lens _nId (\ s a -> s{_nId = a})
+nId
+  = lens _nId (\ s a -> s{_nId = a}) . mapping _Coerce
 
 -- | A gateway address for default routing to other networks. This value is
 -- read only and is selected by the Google Compute Engine, typically as the
@@ -6589,7 +6624,7 @@ data Address = Address
     , _aSelfLink          :: !(Maybe Text)
     , _aName              :: !(Maybe Text)
     , _aCreationTimestamp :: !(Maybe Text)
-    , _aId                :: !(Maybe Word64)
+    , _aId                :: !(Maybe (JSONText Word64))
     , _aRegion            :: !(Maybe Text)
     , _aDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6678,7 +6713,8 @@ aCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 aId :: Lens' Address (Maybe Word64)
-aId = lens _aId (\ s a -> s{_aId = a})
+aId
+  = lens _aId (\ s a -> s{_aId = a}) . mapping _Coerce
 
 -- | [Output Only] URL of the region where the regional address resides. This
 -- field is not applicable to global addresses.
@@ -6729,7 +6765,7 @@ data Zone = Zone
     , _zSelfLink           :: !(Maybe Text)
     , _zName               :: !(Maybe Text)
     , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe Word64)
+    , _zId                 :: !(Maybe (JSONText Word64))
     , _zRegion             :: !(Maybe Text)
     , _zDescription        :: !(Maybe Text)
     , _zDeprecated         :: !(Maybe DeprecationStatus)
@@ -6809,7 +6845,8 @@ zCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 zId :: Lens' Zone (Maybe Word64)
-zId = lens _zId (\ s a -> s{_zId = a})
+zId
+  = lens _zId (\ s a -> s{_zId = a}) . mapping _Coerce
 
 -- | [Output Only] Full URL reference to the region which hosts the zone.
 zRegion :: Lens' Zone (Maybe Text)
@@ -7119,7 +7156,7 @@ instance ToJSON InstanceGroupAggregatedList where
 --
 -- /See:/ 'route' smart constructor.
 data Route = Route
-    { _rPriority          :: !(Maybe Word32)
+    { _rPriority          :: !(Maybe (JSONText Word32))
     , _rKind              :: !Text
     , _rNextHopGateway    :: !(Maybe Text)
     , _rNextHopNetwork    :: !(Maybe Text)
@@ -7130,7 +7167,7 @@ data Route = Route
     , _rSelfLink          :: !(Maybe Text)
     , _rName              :: !(Maybe Text)
     , _rCreationTimestamp :: !(Maybe Text)
-    , _rId                :: !(Maybe Word64)
+    , _rId                :: !(Maybe (JSONText Word64))
     , _rNextHopVPNTunnel  :: !(Maybe Text)
     , _rDescription       :: !(Maybe Text)
     , _rTags              :: !(Maybe [Text])
@@ -7199,7 +7236,8 @@ route =
 -- 1000. A valid range is between 0 and 65535.
 rPriority :: Lens' Route (Maybe Word32)
 rPriority
-  = lens _rPriority (\ s a -> s{_rPriority = a})
+  = lens _rPriority (\ s a -> s{_rPriority = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Type of this resource. Always compute#routes for Route
 -- resources.
@@ -7266,7 +7304,8 @@ rCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 rId :: Lens' Route (Maybe Word64)
-rId = lens _rId (\ s a -> s{_rId = a})
+rId
+  = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
 
 -- | The URL to a VpnTunnel that should handle matching packets.
 rNextHopVPNTunnel :: Lens' Route (Maybe Text)
@@ -7440,7 +7479,7 @@ data InstanceTemplate = InstanceTemplate
     , _itSelfLink          :: !(Maybe Text)
     , _itName              :: !(Maybe Text)
     , _itCreationTimestamp :: !(Maybe Text)
-    , _itId                :: !(Maybe Word64)
+    , _itId                :: !(Maybe (JSONText Word64))
     , _itDescription       :: !(Maybe Text)
     , _itProperties        :: !(Maybe InstanceProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7506,7 +7545,9 @@ itCreationTimestamp
 -- | [Output Only] A unique identifier for this instance template. The server
 -- defines this identifier.
 itId :: Lens' InstanceTemplate (Maybe Word64)
-itId = lens _itId (\ s a -> s{_itId = a})
+itId
+  = lens _itId (\ s a -> s{_itId = a}) .
+      mapping _Coerce
 
 -- | An optional text description for the instance template.
 itDescription :: Lens' InstanceTemplate (Maybe Text)
@@ -7623,7 +7664,7 @@ data TargetVPNGateway = TargetVPNGateway
     , _tvgSelfLink          :: !(Maybe Text)
     , _tvgName              :: !(Maybe Text)
     , _tvgCreationTimestamp :: !(Maybe Text)
-    , _tvgId                :: !(Maybe Word64)
+    , _tvgId                :: !(Maybe (JSONText Word64))
     , _tvgRegion            :: !(Maybe Text)
     , _tvgTunnels           :: !(Maybe [Text])
     , _tvgDescription       :: !(Maybe Text)
@@ -7711,7 +7752,9 @@ tvgCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 tvgId :: Lens' TargetVPNGateway (Maybe Word64)
-tvgId = lens _tvgId (\ s a -> s{_tvgId = a})
+tvgId
+  = lens _tvgId (\ s a -> s{_tvgId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] URL of the region where the target VPN gateway resides.
 tvgRegion :: Lens' TargetVPNGateway (Maybe Text)
@@ -7817,7 +7860,7 @@ data SSLCertificate = SSLCertificate
     , _scSelfLink          :: !(Maybe Text)
     , _scName              :: !(Maybe Text)
     , _scCreationTimestamp :: !(Maybe Text)
-    , _scId                :: !(Maybe Word64)
+    , _scId                :: !(Maybe (JSONText Word64))
     , _scCertificate       :: !(Maybe Text)
     , _scDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7889,7 +7932,9 @@ scCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 scId :: Lens' SSLCertificate (Maybe Word64)
-scId = lens _scId (\ s a -> s{_scId = a})
+scId
+  = lens _scId (\ s a -> s{_scId = a}) .
+      mapping _Coerce
 
 -- | A local certificate file. The certificate must be in PEM format. The
 -- certificate chain must be no greater than 5 certs long. The chain must
@@ -8182,7 +8227,7 @@ instance ToJSON ZoneList where
 data ManagedInstance = ManagedInstance
     { _miLastAttempt    :: !(Maybe ManagedInstanceLastAttempt)
     , _miCurrentAction  :: !(Maybe ManagedInstanceCurrentAction)
-    , _miId             :: !(Maybe Word64)
+    , _miId             :: !(Maybe (JSONText Word64))
     , _miInstanceStatus :: !(Maybe ManagedInstanceInstanceStatus)
     , _miInstance       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8240,7 +8285,9 @@ miCurrentAction
 -- | [Output only] The unique identifier for this resource. This field is
 -- empty when instance does not exist.
 miId :: Lens' ManagedInstance (Maybe Word64)
-miId = lens _miId (\ s a -> s{_miId = a})
+miId
+  = lens _miId (\ s a -> s{_miId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The status of the instance. This field is empty when the
 -- instance does not exist.
@@ -8364,11 +8411,11 @@ instance ToJSON
 data Backend = Backend
     { _bGroup              :: !(Maybe Text)
     , _bBalancingMode      :: !(Maybe BackendBalancingMode)
-    , _bMaxUtilization     :: !(Maybe Float)
-    , _bMaxRate            :: !(Maybe Int32)
-    , _bMaxRatePerInstance :: !(Maybe Float)
+    , _bMaxUtilization     :: !(Maybe (JSONText Float))
+    , _bMaxRate            :: !(Maybe (JSONText Int32))
+    , _bMaxRatePerInstance :: !(Maybe (JSONText Float))
     , _bDescription        :: !(Maybe Text)
-    , _bCapacityScaler     :: !(Maybe Float)
+    , _bCapacityScaler     :: !(Maybe (JSONText Float))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
@@ -8425,12 +8472,15 @@ bMaxUtilization :: Lens' Backend (Maybe Float)
 bMaxUtilization
   = lens _bMaxUtilization
       (\ s a -> s{_bMaxUtilization = a})
+      . mapping _Coerce
 
 -- | The max RPS of the group. Can be used with either balancing mode, but
 -- required if RATE mode. For RATE mode, either maxRate or
 -- maxRatePerInstance must be set.
 bMaxRate :: Lens' Backend (Maybe Int32)
-bMaxRate = lens _bMaxRate (\ s a -> s{_bMaxRate = a})
+bMaxRate
+  = lens _bMaxRate (\ s a -> s{_bMaxRate = a}) .
+      mapping _Coerce
 
 -- | The max RPS that a single backed instance can handle. This is used to
 -- calculate the capacity of the group. Can be used in either balancing
@@ -8439,6 +8489,7 @@ bMaxRatePerInstance :: Lens' Backend (Maybe Float)
 bMaxRatePerInstance
   = lens _bMaxRatePerInstance
       (\ s a -> s{_bMaxRatePerInstance = a})
+      . mapping _Coerce
 
 -- | An optional textual description of the resource. Provided by the client
 -- when the resource is created.
@@ -8455,6 +8506,7 @@ bCapacityScaler :: Lens' Backend (Maybe Float)
 bCapacityScaler
   = lens _bCapacityScaler
       (\ s a -> s{_bCapacityScaler = a})
+      . mapping _Coerce
 
 instance FromJSON Backend where
         parseJSON
@@ -8701,13 +8753,13 @@ instance ToJSON OperationAggregatedListItems where
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
 data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary
-    { _igmasDeleting   :: !(Maybe Int32)
-    , _igmasRestarting :: !(Maybe Int32)
-    , _igmasNone       :: !(Maybe Int32)
-    , _igmasCreating   :: !(Maybe Int32)
-    , _igmasRefreshing :: !(Maybe Int32)
-    , _igmasRecreating :: !(Maybe Int32)
-    , _igmasAbandoning :: !(Maybe Int32)
+    { _igmasDeleting   :: !(Maybe (JSONText Int32))
+    , _igmasRestarting :: !(Maybe (JSONText Int32))
+    , _igmasNone       :: !(Maybe (JSONText Int32))
+    , _igmasCreating   :: !(Maybe (JSONText Int32))
+    , _igmasRefreshing :: !(Maybe (JSONText Int32))
+    , _igmasRecreating :: !(Maybe (JSONText Int32))
+    , _igmasAbandoning :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagerActionsSummary' with the minimum fields required to make a request.
@@ -8746,6 +8798,7 @@ igmasDeleting :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasDeleting
   = lens _igmasDeleting
       (\ s a -> s{_igmasDeleting = a})
+      . mapping _Coerce
 
 -- | [Output Only] The number of instances in the managed instance group that
 -- are scheduled to be restarted or are currently being restarted.
@@ -8753,12 +8806,14 @@ igmasRestarting :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasRestarting
   = lens _igmasRestarting
       (\ s a -> s{_igmasRestarting = a})
+      . mapping _Coerce
 
 -- | [Output Only] The number of instances in the managed instance group that
 -- are running and have no scheduled actions.
 igmasNone :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasNone
-  = lens _igmasNone (\ s a -> s{_igmasNone = a})
+  = lens _igmasNone (\ s a -> s{_igmasNone = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The number of instances in the managed instance group that
 -- are scheduled to be created or are currently being created.
@@ -8766,6 +8821,7 @@ igmasCreating :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasCreating
   = lens _igmasCreating
       (\ s a -> s{_igmasCreating = a})
+      . mapping _Coerce
 
 -- | [Output Only] The number of instances in the managed instance group that
 -- are being reconfigured with properties that do not require a restart or
@@ -8775,6 +8831,7 @@ igmasRefreshing :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasRefreshing
   = lens _igmasRefreshing
       (\ s a -> s{_igmasRefreshing = a})
+      . mapping _Coerce
 
 -- | [Output Only] The number of instances in the managed instance group that
 -- are scheduled to be recreated or are currently being being recreated.
@@ -8785,6 +8842,7 @@ igmasRecreating :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasRecreating
   = lens _igmasRecreating
       (\ s a -> s{_igmasRecreating = a})
+      . mapping _Coerce
 
 -- | [Output Only] The total number of instances in the managed instance
 -- group that are scheduled to be abandoned. Abandoning an instance removes
@@ -8793,6 +8851,7 @@ igmasAbandoning :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasAbandoning
   = lens _igmasAbandoning
       (\ s a -> s{_igmasAbandoning = a})
+      . mapping _Coerce
 
 instance FromJSON InstanceGroupManagerActionsSummary
          where
@@ -9287,7 +9346,7 @@ data AttachedDisk = AttachedDisk
     , _adSource           :: !(Maybe Text)
     , _adLicenses         :: !(Maybe [Text])
     , _adType             :: !(Maybe AttachedDiskType)
-    , _adIndex            :: !(Maybe Int32)
+    , _adIndex            :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachedDisk' with the minimum fields required to make a request.
@@ -9404,7 +9463,9 @@ adType = lens _adType (\ s a -> s{_adType = a})
 -- each disk would have a unique index number. If not specified, the server
 -- will choose an appropriate value.
 adIndex :: Lens' AttachedDisk (Maybe Int32)
-adIndex = lens _adIndex (\ s a -> s{_adIndex = a})
+adIndex
+  = lens _adIndex (\ s a -> s{_adIndex = a}) .
+      mapping _Coerce
 
 instance FromJSON AttachedDisk where
         parseJSON
@@ -9823,19 +9884,19 @@ instance ToJSON DiskTypeAggregatedList where
 --
 -- /See:/ 'hTTPHealthCheck' smart constructor.
 data HTTPHealthCheck = HTTPHealthCheck
-    { _httphcHealthyThreshold   :: !(Maybe Int32)
+    { _httphcHealthyThreshold   :: !(Maybe (JSONText Int32))
     , _httphcKind               :: !Text
     , _httphcRequestPath        :: !(Maybe Text)
     , _httphcSelfLink           :: !(Maybe Text)
-    , _httphcCheckIntervalSec   :: !(Maybe Int32)
+    , _httphcCheckIntervalSec   :: !(Maybe (JSONText Int32))
     , _httphcName               :: !(Maybe Text)
     , _httphcCreationTimestamp  :: !(Maybe Text)
-    , _httphcId                 :: !(Maybe Word64)
+    , _httphcId                 :: !(Maybe (JSONText Word64))
     , _httphcHost               :: !(Maybe Text)
-    , _httphcTimeoutSec         :: !(Maybe Int32)
+    , _httphcTimeoutSec         :: !(Maybe (JSONText Int32))
     , _httphcDescription        :: !(Maybe Text)
-    , _httphcUnhealthyThreshold :: !(Maybe Int32)
-    , _httphcPort               :: !(Maybe Int32)
+    , _httphcUnhealthyThreshold :: !(Maybe (JSONText Int32))
+    , _httphcPort               :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthCheck' with the minimum fields required to make a request.
@@ -9892,6 +9953,7 @@ httphcHealthyThreshold :: Lens' HTTPHealthCheck (Maybe Int32)
 httphcHealthyThreshold
   = lens _httphcHealthyThreshold
       (\ s a -> s{_httphcHealthyThreshold = a})
+      . mapping _Coerce
 
 -- | Type of the resource.
 httphcKind :: Lens' HTTPHealthCheck Text
@@ -9917,6 +9979,7 @@ httphcCheckIntervalSec :: Lens' HTTPHealthCheck (Maybe Int32)
 httphcCheckIntervalSec
   = lens _httphcCheckIntervalSec
       (\ s a -> s{_httphcCheckIntervalSec = a})
+      . mapping _Coerce
 
 -- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -9937,7 +10000,9 @@ httphcCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 httphcId :: Lens' HTTPHealthCheck (Maybe Word64)
-httphcId = lens _httphcId (\ s a -> s{_httphcId = a})
+httphcId
+  = lens _httphcId (\ s a -> s{_httphcId = a}) .
+      mapping _Coerce
 
 -- | The value of the host header in the HTTP health check request. If left
 -- empty (default value), the public IP on behalf of which this health
@@ -9953,6 +10018,7 @@ httphcTimeoutSec :: Lens' HTTPHealthCheck (Maybe Int32)
 httphcTimeoutSec
   = lens _httphcTimeoutSec
       (\ s a -> s{_httphcTimeoutSec = a})
+      . mapping _Coerce
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
@@ -9967,12 +10033,14 @@ httphcUnhealthyThreshold :: Lens' HTTPHealthCheck (Maybe Int32)
 httphcUnhealthyThreshold
   = lens _httphcUnhealthyThreshold
       (\ s a -> s{_httphcUnhealthyThreshold = a})
+      . mapping _Coerce
 
 -- | The TCP port number for the HTTP health check request. The default value
 -- is 80.
 httphcPort :: Lens' HTTPHealthCheck (Maybe Int32)
 httphcPort
-  = lens _httphcPort (\ s a -> s{_httphcPort = a})
+  = lens _httphcPort (\ s a -> s{_httphcPort = a}) .
+      mapping _Coerce
 
 instance FromJSON HTTPHealthCheck where
         parseJSON
@@ -10194,11 +10262,11 @@ instance ToJSON AutoscalerAggregatedList where
 -- /See:/ 'autoscalingPolicy' smart constructor.
 data AutoscalingPolicy = AutoscalingPolicy
     { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
-    , _apMaxNumReplicas           :: !(Maybe Int32)
+    , _apMaxNumReplicas           :: !(Maybe (JSONText Int32))
     , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
     , _apLoadBalancingUtilization :: !(Maybe AutoscalingPolicyLoadBalancingUtilization)
-    , _apMinNumReplicas           :: !(Maybe Int32)
-    , _apCoolDownPeriodSec        :: !(Maybe Int32)
+    , _apMinNumReplicas           :: !(Maybe (JSONText Int32))
+    , _apCoolDownPeriodSec        :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicy' with the minimum fields required to make a request.
@@ -10244,6 +10312,7 @@ apMaxNumReplicas :: Lens' AutoscalingPolicy (Maybe Int32)
 apMaxNumReplicas
   = lens _apMaxNumReplicas
       (\ s a -> s{_apMaxNumReplicas = a})
+      . mapping _Coerce
 
 -- | TODO(jbartosik): Add support for scaling based on muliple utilization
 -- metrics (take max recommendation). Exactly one utilization policy should
@@ -10266,6 +10335,7 @@ apMinNumReplicas :: Lens' AutoscalingPolicy (Maybe Int32)
 apMinNumReplicas
   = lens _apMinNumReplicas
       (\ s a -> s{_apMinNumReplicas = a})
+      . mapping _Coerce
 
 -- | The number of seconds that the Autoscaler should wait between two
 -- succeeding changes to the number of virtual machines. You should define
@@ -10276,6 +10346,7 @@ apCoolDownPeriodSec :: Lens' AutoscalingPolicy (Maybe Int32)
 apCoolDownPeriodSec
   = lens _apCoolDownPeriodSec
       (\ s a -> s{_apCoolDownPeriodSec = a})
+      . mapping _Coerce
 
 instance FromJSON AutoscalingPolicy where
         parseJSON
@@ -10471,7 +10542,7 @@ instance ToJSON VPNTunnelList where
 --
 -- /See:/ 'machineTypeScratchDisksItem' smart constructor.
 newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem
-    { _mtsdiDiskGb :: Maybe Int32
+    { _mtsdiDiskGb :: Maybe (JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypeScratchDisksItem' with the minimum fields required to make a request.
@@ -10489,7 +10560,8 @@ machineTypeScratchDisksItem =
 -- | Size of the scratch disk, defined in GB.
 mtsdiDiskGb :: Lens' MachineTypeScratchDisksItem (Maybe Int32)
 mtsdiDiskGb
-  = lens _mtsdiDiskGb (\ s a -> s{_mtsdiDiskGb = a})
+  = lens _mtsdiDiskGb (\ s a -> s{_mtsdiDiskGb = a}) .
+      mapping _Coerce
 
 instance FromJSON MachineTypeScratchDisksItem where
         parseJSON
@@ -10642,10 +10714,10 @@ data DiskType = DiskType
     , _dtSelfLink          :: !(Maybe Text)
     , _dtName              :: !(Maybe Text)
     , _dtCreationTimestamp :: !(Maybe Text)
-    , _dtId                :: !(Maybe Word64)
+    , _dtId                :: !(Maybe (JSONText Word64))
     , _dtValidDiskSize     :: !(Maybe Text)
     , _dtDescription       :: !(Maybe Text)
-    , _dtDefaultDiskSizeGb :: !(Maybe Int64)
+    , _dtDefaultDiskSizeGb :: !(Maybe (JSONText Int64))
     , _dtDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10714,7 +10786,9 @@ dtCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 dtId :: Lens' DiskType (Maybe Word64)
-dtId = lens _dtId (\ s a -> s{_dtId = a})
+dtId
+  = lens _dtId (\ s a -> s{_dtId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] An optional textual description of the valid disk size,
 -- such as \"10GB-10TB\".
@@ -10734,6 +10808,7 @@ dtDefaultDiskSizeGb :: Lens' DiskType (Maybe Int64)
 dtDefaultDiskSizeGb
   = lens _dtDefaultDiskSizeGb
       (\ s a -> s{_dtDefaultDiskSizeGb = a})
+      . mapping _Coerce
 
 -- | [Output Only] The deprecation status associated with this disk type.
 dtDeprecated :: Lens' DiskType (Maybe DeprecationStatus)
@@ -10853,7 +10928,7 @@ instance ToJSON URLMapValidationResult where
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata
     { _mKind        :: !Text
-    , _mFingerprint :: !(Maybe Word8)
+    , _mFingerprint :: !(Maybe (JSONText Word8))
     , _mItems       :: !(Maybe [MetadataItemsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10888,6 +10963,7 @@ mKind = lens _mKind (\ s a -> s{_mKind = a})
 mFingerprint :: Lens' Metadata (Maybe Word8)
 mFingerprint
   = lens _mFingerprint (\ s a -> s{_mFingerprint = a})
+      . mapping _Coerce
 
 -- | Array of key\/value pairs. The total size of all keys and values must be
 -- less than 512 KB.
@@ -11074,7 +11150,7 @@ data TargetHTTPProxy = TargetHTTPProxy
     , _thttppSelfLink          :: !(Maybe Text)
     , _thttppName              :: !(Maybe Text)
     , _thttppCreationTimestamp :: !(Maybe Text)
-    , _thttppId                :: !(Maybe Word64)
+    , _thttppId                :: !(Maybe (JSONText Word64))
     , _thttppDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11145,7 +11221,9 @@ thttppCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 thttppId :: Lens' TargetHTTPProxy (Maybe Word64)
-thttppId = lens _thttppId (\ s a -> s{_thttppId = a})
+thttppId
+  = lens _thttppId (\ s a -> s{_thttppId = a}) .
+      mapping _Coerce
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
@@ -11185,17 +11263,17 @@ instance ToJSON TargetHTTPProxy where
 -- /See:/ 'machineType' smart constructor.
 data MachineType = MachineType
     { _mtKind                         :: !Text
-    , _mtImageSpaceGb                 :: !(Maybe Int32)
+    , _mtImageSpaceGb                 :: !(Maybe (JSONText Int32))
     , _mtZone                         :: !(Maybe Text)
     , _mtSelfLink                     :: !(Maybe Text)
     , _mtName                         :: !(Maybe Text)
     , _mtCreationTimestamp            :: !(Maybe Text)
     , _mtScratchDisks                 :: !(Maybe [MachineTypeScratchDisksItem])
-    , _mtId                           :: !(Maybe Word64)
-    , _mtGuestCPUs                    :: !(Maybe Int32)
-    , _mtMaximumPersistentDisksSizeGb :: !(Maybe Int64)
-    , _mtMaximumPersistentDisks       :: !(Maybe Int32)
-    , _mtMemoryMb                     :: !(Maybe Int32)
+    , _mtId                           :: !(Maybe (JSONText Word64))
+    , _mtGuestCPUs                    :: !(Maybe (JSONText Int32))
+    , _mtMaximumPersistentDisksSizeGb :: !(Maybe (JSONText Int64))
+    , _mtMaximumPersistentDisks       :: !(Maybe (JSONText Int32))
+    , _mtMemoryMb                     :: !(Maybe (JSONText Int32))
     , _mtDescription                  :: !(Maybe Text)
     , _mtDeprecated                   :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11261,6 +11339,7 @@ mtImageSpaceGb :: Lens' MachineType (Maybe Int32)
 mtImageSpaceGb
   = lens _mtImageSpaceGb
       (\ s a -> s{_mtImageSpaceGb = a})
+      . mapping _Coerce
 
 -- | [Output Only] The name of the zone where the machine type resides, such
 -- as us-central1-a.
@@ -11292,30 +11371,36 @@ mtScratchDisks
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 mtId :: Lens' MachineType (Maybe Word64)
-mtId = lens _mtId (\ s a -> s{_mtId = a})
+mtId
+  = lens _mtId (\ s a -> s{_mtId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The tumber of CPUs exposed to the instance.
 mtGuestCPUs :: Lens' MachineType (Maybe Int32)
 mtGuestCPUs
-  = lens _mtGuestCPUs (\ s a -> s{_mtGuestCPUs = a})
+  = lens _mtGuestCPUs (\ s a -> s{_mtGuestCPUs = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Maximum total persistent disks size (GB) allowed.
 mtMaximumPersistentDisksSizeGb :: Lens' MachineType (Maybe Int64)
 mtMaximumPersistentDisksSizeGb
   = lens _mtMaximumPersistentDisksSizeGb
       (\ s a -> s{_mtMaximumPersistentDisksSizeGb = a})
+      . mapping _Coerce
 
 -- | [Output Only] Maximum persistent disks allowed.
 mtMaximumPersistentDisks :: Lens' MachineType (Maybe Int32)
 mtMaximumPersistentDisks
   = lens _mtMaximumPersistentDisks
       (\ s a -> s{_mtMaximumPersistentDisks = a})
+      . mapping _Coerce
 
 -- | [Output Only] The amount of physical memory available to the instance,
 -- defined in MB.
 mtMemoryMb :: Lens' MachineType (Maybe Int32)
 mtMemoryMb
-  = lens _mtMemoryMb (\ s a -> s{_mtMemoryMb = a})
+  = lens _mtMemoryMb (\ s a -> s{_mtMemoryMb = a}) .
+      mapping _Coerce
 
 -- | [Output Only] An optional textual description of the resource.
 mtDescription :: Lens' MachineType (Maybe Text)
@@ -11610,7 +11695,7 @@ data Autoscaler = Autoscaler
     , _aaName              :: !(Maybe Text)
     , _aaCreationTimestamp :: !(Maybe Text)
     , _aaAutoscalingPolicy :: !(Maybe AutoscalingPolicy)
-    , _aaId                :: !(Maybe Word64)
+    , _aaId                :: !(Maybe (JSONText Word64))
     , _aaDescription       :: !(Maybe Text)
     , _aaTarget            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11688,7 +11773,9 @@ aaAutoscalingPolicy
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 aaId :: Lens' Autoscaler (Maybe Word64)
-aaId = lens _aaId (\ s a -> s{_aaId = a})
+aaId
+  = lens _aaId (\ s a -> s{_aaId = a}) .
+      mapping _Coerce
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
@@ -11895,7 +11982,7 @@ instance ToJSON TargetPoolsScopedListWarning where
 data HealthStatus = HealthStatus
     { _hsIPAddress   :: !(Maybe Text)
     , _hsHealthState :: !(Maybe HealthStatusHealthState)
-    , _hsPort        :: !(Maybe Int32)
+    , _hsPort        :: !(Maybe (JSONText Int32))
     , _hsInstance    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11933,7 +12020,9 @@ hsHealthState
 
 -- | The port on the instance.
 hsPort :: Lens' HealthStatus (Maybe Int32)
-hsPort = lens _hsPort (\ s a -> s{_hsPort = a})
+hsPort
+  = lens _hsPort (\ s a -> s{_hsPort = a}) .
+      mapping _Coerce
 
 -- | URL of the instance resource.
 hsInstance :: Lens' HealthStatus (Maybe Text)
@@ -11969,7 +12058,7 @@ data Region = Region
     , _rrName              :: !(Maybe Text)
     , _rrCreationTimestamp :: !(Maybe Text)
     , _rrQuotas            :: !(Maybe [Quota])
-    , _rrId                :: !(Maybe Word64)
+    , _rrId                :: !(Maybe (JSONText Word64))
     , _rrDescription       :: !(Maybe Text)
     , _rrDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12053,7 +12142,9 @@ rrQuotas
 -- | [Output Only] Unique identifier for the resource; defined by the server
 -- .
 rrId :: Lens' Region (Maybe Word64)
-rrId = lens _rrId (\ s a -> s{_rrId = a})
+rrId
+  = lens _rrId (\ s a -> s{_rrId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Textual description of the resource.
 rrDescription :: Lens' Region (Maybe Text)
@@ -12107,8 +12198,8 @@ data VPNTunnel = VPNTunnel
     , _vtName              :: !(Maybe Text)
     , _vtCreationTimestamp :: !(Maybe Text)
     , _vtSharedSecretHash  :: !(Maybe Text)
-    , _vtId                :: !(Maybe Word64)
-    , _vtIkeVersion        :: !(Maybe Int32)
+    , _vtId                :: !(Maybe (JSONText Word64))
+    , _vtIkeVersion        :: !(Maybe (JSONText Int32))
     , _vtRegion            :: !(Maybe Text)
     , _vtDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12226,13 +12317,16 @@ vtSharedSecretHash
 
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 vtId :: Lens' VPNTunnel (Maybe Word64)
-vtId = lens _vtId (\ s a -> s{_vtId = a})
+vtId
+  = lens _vtId (\ s a -> s{_vtId = a}) .
+      mapping _Coerce
 
 -- | IKE protocol version to use when establishing the VPN tunnel with peer
 -- VPN gateway. Acceptable IKE versions are 1 or 2. Default version is 2.
 vtIkeVersion :: Lens' VPNTunnel (Maybe Int32)
 vtIkeVersion
   = lens _vtIkeVersion (\ s a -> s{_vtIkeVersion = a})
+      . mapping _Coerce
 
 -- | [Output Only] URL of the region where the VPN tunnel resides.
 vtRegion :: Lens' VPNTunnel (Maybe Text)
@@ -12707,7 +12801,7 @@ instance ToJSON URLMapsValidateRequest where
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
 data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest
-    { _igmstprFingerprint :: !(Maybe Word8)
+    { _igmstprFingerprint :: !(Maybe (JSONText Word8))
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12736,6 +12830,7 @@ igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe Wo
 igmstprFingerprint
   = lens _igmstprFingerprint
       (\ s a -> s{_igmstprFingerprint = a})
+      . mapping _Coerce
 
 -- | The list of target pool URLs that instances in this managed instance
 -- group belong to. The managed instance group applies these target pools
@@ -13294,7 +13389,7 @@ instance ToJSON InstanceGroupsScopedListWarning where
 --
 -- /See:/ 'autoscalingPolicyCPUUtilization' smart constructor.
 newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
-    { _apcuUtilizationTarget :: Maybe Double
+    { _apcuUtilizationTarget :: Maybe (JSONText Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyCPUUtilization' with the minimum fields required to make a request.
@@ -13317,6 +13412,7 @@ apcuUtilizationTarget :: Lens' AutoscalingPolicyCPUUtilization (Maybe Double)
 apcuUtilizationTarget
   = lens _apcuUtilizationTarget
       (\ s a -> s{_apcuUtilizationTarget = a})
+      . mapping _Coerce
 
 instance FromJSON AutoscalingPolicyCPUUtilization
          where
@@ -13426,7 +13522,7 @@ data Firewall = Firewall
     , _fSelfLink          :: !(Maybe Text)
     , _fName              :: !(Maybe Text)
     , _fCreationTimestamp :: !(Maybe Text)
-    , _fId                :: !(Maybe Word64)
+    , _fId                :: !(Maybe (JSONText Word64))
     , _fAllowed           :: !(Maybe [FirewallAllowedItem])
     , _fDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13546,7 +13642,8 @@ fCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 fId :: Lens' Firewall (Maybe Word64)
-fId = lens _fId (\ s a -> s{_fId = a})
+fId
+  = lens _fId (\ s a -> s{_fId = a}) . mapping _Coerce
 
 -- | The list of rules specified by this firewall. Each rule specifies a
 -- protocol and port-range tuple that describes a permitted connection.
@@ -13664,8 +13761,8 @@ instance ToJSON HostRule where
 -- /See:/ 'quota' smart constructor.
 data Quota = Quota
     { _qMetric :: !(Maybe QuotaMetric)
-    , _qLimit  :: !(Maybe Double)
-    , _qUsage  :: !(Maybe Double)
+    , _qLimit  :: !(Maybe (JSONText Double))
+    , _qUsage  :: !(Maybe (JSONText Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
@@ -13692,11 +13789,15 @@ qMetric = lens _qMetric (\ s a -> s{_qMetric = a})
 
 -- | [Output Only] Quota limit for this metric.
 qLimit :: Lens' Quota (Maybe Double)
-qLimit = lens _qLimit (\ s a -> s{_qLimit = a})
+qLimit
+  = lens _qLimit (\ s a -> s{_qLimit = a}) .
+      mapping _Coerce
 
 -- | [Output Only] Current usage of this metric.
 qUsage :: Lens' Quota (Maybe Double)
-qUsage = lens _qUsage (\ s a -> s{_qUsage = a})
+qUsage
+  = lens _qUsage (\ s a -> s{_qUsage = a}) .
+      mapping _Coerce
 
 instance FromJSON Quota where
         parseJSON
@@ -13716,15 +13817,15 @@ instance ToJSON Quota where
 --
 -- /See:/ 'instanceGroup' smart constructor.
 data InstanceGroup = InstanceGroup
-    { _iiSize              :: !(Maybe Int32)
+    { _iiSize              :: !(Maybe (JSONText Int32))
     , _iiKind              :: !Text
-    , _iiFingerprint       :: !(Maybe Word8)
+    , _iiFingerprint       :: !(Maybe (JSONText Word8))
     , _iiNetwork           :: !(Maybe Text)
     , _iiZone              :: !(Maybe Text)
     , _iiSelfLink          :: !(Maybe Text)
     , _iiName              :: !(Maybe Text)
     , _iiCreationTimestamp :: !(Maybe Text)
-    , _iiId                :: !(Maybe Word64)
+    , _iiId                :: !(Maybe (JSONText Word64))
     , _iiDescription       :: !(Maybe Text)
     , _iiNamedPorts        :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13773,7 +13874,9 @@ instanceGroup =
 
 -- | [Output Only] The total number of instances in the instance group.
 iiSize :: Lens' InstanceGroup (Maybe Int32)
-iiSize = lens _iiSize (\ s a -> s{_iiSize = a})
+iiSize
+  = lens _iiSize (\ s a -> s{_iiSize = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The resource type, which is always compute#instanceGroup
 -- for instance groups.
@@ -13787,6 +13890,7 @@ iiFingerprint :: Lens' InstanceGroup (Maybe Word8)
 iiFingerprint
   = lens _iiFingerprint
       (\ s a -> s{_iiFingerprint = a})
+      . mapping _Coerce
 
 -- | [Output Only] The URL of the network to which all instances in the
 -- instance group belong.
@@ -13819,7 +13923,9 @@ iiCreationTimestamp
 -- | [Output Only] A unique identifier for this resource type. The server
 -- generates this identifier.
 iiId :: Lens' InstanceGroup (Maybe Word64)
-iiId = lens _iiId (\ s a -> s{_iiId = a})
+iiId
+  = lens _iiId (\ s a -> s{_iiId = a}) .
+      mapping _Coerce
 
 -- | An optional text description for the instance group.
 iiDescription :: Lens' InstanceGroup (Maybe Text)
@@ -14217,7 +14323,7 @@ data TargetHTTPSProxy = TargetHTTPSProxy
     , _thpSelfLink          :: !(Maybe Text)
     , _thpName              :: !(Maybe Text)
     , _thpCreationTimestamp :: !(Maybe Text)
-    , _thpId                :: !(Maybe Word64)
+    , _thpId                :: !(Maybe (JSONText Word64))
     , _thpDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -14297,7 +14403,9 @@ thpCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 thpId :: Lens' TargetHTTPSProxy (Maybe Word64)
-thpId = lens _thpId (\ s a -> s{_thpId = a})
+thpId
+  = lens _thpId (\ s a -> s{_thpId = a}) .
+      mapping _Coerce
 
 -- | An optional textual description of the resource. Provided by the client
 -- when the resource is created.
@@ -14573,17 +14681,17 @@ instance ToJSON InstancesScopedListWarningDataItem
 data BackendService = BackendService
     { _bsBackends          :: !(Maybe [Backend])
     , _bsKind              :: !Text
-    , _bsFingerprint       :: !(Maybe Word8)
+    , _bsFingerprint       :: !(Maybe (JSONText Word8))
     , _bsProtocol          :: !(Maybe BackendServiceProtocol)
     , _bsSelfLink          :: !(Maybe Text)
     , _bsName              :: !(Maybe Text)
     , _bsCreationTimestamp :: !(Maybe Text)
-    , _bsId                :: !(Maybe Word64)
-    , _bsTimeoutSec        :: !(Maybe Int32)
+    , _bsId                :: !(Maybe (JSONText Word64))
+    , _bsTimeoutSec        :: !(Maybe (JSONText Int32))
     , _bsDescription       :: !(Maybe Text)
     , _bsPortName          :: !(Maybe Text)
     , _bsHealthChecks      :: !(Maybe [Text])
-    , _bsPort              :: !(Maybe Int32)
+    , _bsPort              :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendService' with the minimum fields required to make a request.
@@ -14654,6 +14762,7 @@ bsFingerprint :: Lens' BackendService (Maybe Word8)
 bsFingerprint
   = lens _bsFingerprint
       (\ s a -> s{_bsFingerprint = a})
+      . mapping _Coerce
 
 bsProtocol :: Lens' BackendService (Maybe BackendServiceProtocol)
 bsProtocol
@@ -14682,13 +14791,16 @@ bsCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 bsId :: Lens' BackendService (Maybe Word64)
-bsId = lens _bsId (\ s a -> s{_bsId = a})
+bsId
+  = lens _bsId (\ s a -> s{_bsId = a}) .
+      mapping _Coerce
 
 -- | How many seconds to wait for the backend before considering it a failed
 -- request. Default is 30 seconds.
 bsTimeoutSec :: Lens' BackendService (Maybe Int32)
 bsTimeoutSec
   = lens _bsTimeoutSec (\ s a -> s{_bsTimeoutSec = a})
+      . mapping _Coerce
 
 -- | An optional textual description of the resource. Provided by the client
 -- when the resource is created.
@@ -14716,7 +14828,9 @@ bsHealthChecks
 -- | Deprecated in favor of port name. The TCP port to connect on the
 -- backend. The default value is 80.
 bsPort :: Lens' BackendService (Maybe Int32)
-bsPort = lens _bsPort (\ s a -> s{_bsPort = a})
+bsPort
+  = lens _bsPort (\ s a -> s{_bsPort = a}) .
+      mapping _Coerce
 
 instance FromJSON BackendService where
         parseJSON
@@ -14869,19 +14983,19 @@ instance ToJSON InstanceGroupsScopedList where
 --
 -- /See:/ 'httpsHealthCheck' smart constructor.
 data HTTPSHealthCheck = HTTPSHealthCheck
-    { _hhcHealthyThreshold   :: !(Maybe Int32)
+    { _hhcHealthyThreshold   :: !(Maybe (JSONText Int32))
     , _hhcKind               :: !Text
     , _hhcRequestPath        :: !(Maybe Text)
     , _hhcSelfLink           :: !(Maybe Text)
-    , _hhcCheckIntervalSec   :: !(Maybe Int32)
+    , _hhcCheckIntervalSec   :: !(Maybe (JSONText Int32))
     , _hhcName               :: !(Maybe Text)
     , _hhcCreationTimestamp  :: !(Maybe Text)
-    , _hhcId                 :: !(Maybe Word64)
+    , _hhcId                 :: !(Maybe (JSONText Word64))
     , _hhcHost               :: !(Maybe Text)
-    , _hhcTimeoutSec         :: !(Maybe Int32)
+    , _hhcTimeoutSec         :: !(Maybe (JSONText Int32))
     , _hhcDescription        :: !(Maybe Text)
-    , _hhcUnhealthyThreshold :: !(Maybe Int32)
-    , _hhcPort               :: !(Maybe Int32)
+    , _hhcUnhealthyThreshold :: !(Maybe (JSONText Int32))
+    , _hhcPort               :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPSHealthCheck' with the minimum fields required to make a request.
@@ -14938,6 +15052,7 @@ hhcHealthyThreshold :: Lens' HTTPSHealthCheck (Maybe Int32)
 hhcHealthyThreshold
   = lens _hhcHealthyThreshold
       (\ s a -> s{_hhcHealthyThreshold = a})
+      . mapping _Coerce
 
 -- | Type of the resource.
 hhcKind :: Lens' HTTPSHealthCheck Text
@@ -14961,6 +15076,7 @@ hhcCheckIntervalSec :: Lens' HTTPSHealthCheck (Maybe Int32)
 hhcCheckIntervalSec
   = lens _hhcCheckIntervalSec
       (\ s a -> s{_hhcCheckIntervalSec = a})
+      . mapping _Coerce
 
 -- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -14980,7 +15096,9 @@ hhcCreationTimestamp
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 hhcId :: Lens' HTTPSHealthCheck (Maybe Word64)
-hhcId = lens _hhcId (\ s a -> s{_hhcId = a})
+hhcId
+  = lens _hhcId (\ s a -> s{_hhcId = a}) .
+      mapping _Coerce
 
 -- | The value of the host header in the HTTPS health check request. If left
 -- empty (default value), the public IP on behalf of which this health
@@ -14995,6 +15113,7 @@ hhcTimeoutSec :: Lens' HTTPSHealthCheck (Maybe Int32)
 hhcTimeoutSec
   = lens _hhcTimeoutSec
       (\ s a -> s{_hhcTimeoutSec = a})
+      . mapping _Coerce
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
@@ -15009,11 +15128,14 @@ hhcUnhealthyThreshold :: Lens' HTTPSHealthCheck (Maybe Int32)
 hhcUnhealthyThreshold
   = lens _hhcUnhealthyThreshold
       (\ s a -> s{_hhcUnhealthyThreshold = a})
+      . mapping _Coerce
 
 -- | The TCP port number for the HTTPS health check request. The default
 -- value is 443.
 hhcPort :: Lens' HTTPSHealthCheck (Maybe Int32)
-hhcPort = lens _hhcPort (\ s a -> s{_hhcPort = a})
+hhcPort
+  = lens _hhcPort (\ s a -> s{_hhcPort = a}) .
+      mapping _Coerce
 
 instance FromJSON HTTPSHealthCheck where
         parseJSON
@@ -15090,7 +15212,7 @@ instance ToJSON VPNTunnelAggregatedListItems where
 --
 -- /See:/ 'tags' smart constructor.
 data Tags = Tags
-    { _tFingerprint :: !(Maybe Word8)
+    { _tFingerprint :: !(Maybe (JSONText Word8))
     , _tItems       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -15118,6 +15240,7 @@ tags =
 tFingerprint :: Lens' Tags (Maybe Word8)
 tFingerprint
   = lens _tFingerprint (\ s a -> s{_tFingerprint = a})
+      . mapping _Coerce
 
 -- | An array of tags. Each tag must be 1-63 characters long, and comply with
 -- RFC1035.
@@ -15359,7 +15482,7 @@ data Instance = Instance
     , _insnCreationTimestamp :: !(Maybe Text)
     , _insnMachineType       :: !(Maybe Text)
     , _insnMetadata          :: !(Maybe Metadata)
-    , _insnId                :: !(Maybe Word64)
+    , _insnId                :: !(Maybe (JSONText Word64))
     , _insnScheduling        :: !(Maybe Scheduling)
     , _insnDisks             :: !(Maybe [AttachedDisk])
     , _insnCanIPForward      :: !(Maybe Bool)
@@ -15517,7 +15640,9 @@ insnMetadata
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 insnId :: Lens' Instance (Maybe Word64)
-insnId = lens _insnId (\ s a -> s{_insnId = a})
+insnId
+  = lens _insnId (\ s a -> s{_insnId = a}) .
+      mapping _Coerce
 
 -- | Scheduling options for this instance.
 insnScheduling :: Lens' Instance (Maybe Scheduling)

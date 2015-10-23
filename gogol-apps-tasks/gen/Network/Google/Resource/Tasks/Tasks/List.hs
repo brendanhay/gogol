@@ -66,7 +66,7 @@ type TasksListResource =
                            QueryParam "updatedMin" Text :>
                              QueryParam "completedMin" Text :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "maxResults" Int64 :>
+                                 QueryParam "maxResults" (JSONText Int64) :>
                                    QueryParam "alt" AltJSON :> Get '[JSON] Tasks
 
 -- | Returns all tasks in the specified task list.
@@ -83,7 +83,7 @@ data TasksList = TasksList
     , _tlTaskList      :: !Text
     , _tlCompletedMin  :: !(Maybe Text)
     , _tlPageToken     :: !(Maybe Text)
-    , _tlMaxResults    :: !(Maybe Int64)
+    , _tlMaxResults    :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksList' with the minimum fields required to make a request.
@@ -195,6 +195,7 @@ tlPageToken
 tlMaxResults :: Lens' TasksList (Maybe Int64)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest TasksList where
         type Rs TasksList = Tasks

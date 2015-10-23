@@ -25,7 +25,7 @@ import           Network.Google.Prelude
 -- /See:/ 'subscriptionTrialSettings' smart constructor.
 data SubscriptionTrialSettings = SubscriptionTrialSettings
     { _stsIsInTrial    :: !(Maybe Bool)
-    , _stsTrialEndTime :: !(Maybe Int64)
+    , _stsTrialEndTime :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionTrialSettings' with the minimum fields required to make a request.
@@ -53,6 +53,7 @@ stsTrialEndTime :: Lens' SubscriptionTrialSettings (Maybe Int64)
 stsTrialEndTime
   = lens _stsTrialEndTime
       (\ s a -> s{_stsTrialEndTime = a})
+      . mapping _Coerce
 
 instance FromJSON SubscriptionTrialSettings where
         parseJSON
@@ -388,8 +389,8 @@ instance ToJSON ChangePlanRequest where
 --
 -- /See:/ 'subscriptionPlanCommitmentInterval' smart constructor.
 data SubscriptionPlanCommitmentInterval = SubscriptionPlanCommitmentInterval
-    { _spciStartTime :: !(Maybe Int64)
-    , _spciEndTime   :: !(Maybe Int64)
+    { _spciStartTime :: !(Maybe (JSONText Int64))
+    , _spciEndTime   :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPlanCommitmentInterval' with the minimum fields required to make a request.
@@ -412,11 +413,13 @@ spciStartTime :: Lens' SubscriptionPlanCommitmentInterval (Maybe Int64)
 spciStartTime
   = lens _spciStartTime
       (\ s a -> s{_spciStartTime = a})
+      . mapping _Coerce
 
 -- | End time of the commitment interval in milliseconds since Unix epoch.
 spciEndTime :: Lens' SubscriptionPlanCommitmentInterval (Maybe Int64)
 spciEndTime
-  = lens _spciEndTime (\ s a -> s{_spciEndTime = a})
+  = lens _spciEndTime (\ s a -> s{_spciEndTime = a}) .
+      mapping _Coerce
 
 instance FromJSON SubscriptionPlanCommitmentInterval
          where
@@ -562,9 +565,9 @@ instance ToJSON Subscriptions where
 --
 -- /See:/ 'seats' smart constructor.
 data Seats = Seats
-    { _seaNumberOfSeats         :: !(Maybe Int32)
-    , _seaMaximumNumberOfSeats  :: !(Maybe Int32)
-    , _seaLicensedNumberOfSeats :: !(Maybe Int32)
+    { _seaNumberOfSeats         :: !(Maybe (JSONText Int32))
+    , _seaMaximumNumberOfSeats  :: !(Maybe (JSONText Int32))
+    , _seaLicensedNumberOfSeats :: !(Maybe (JSONText Int32))
     , _seaKind                  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -595,6 +598,7 @@ seaNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaNumberOfSeats
   = lens _seaNumberOfSeats
       (\ s a -> s{_seaNumberOfSeats = a})
+      . mapping _Coerce
 
 -- | Maximum number of seats that can be purchased. This needs to be provided
 -- only for a non-commitment plan. For a commitment plan it is decided by
@@ -603,6 +607,7 @@ seaMaximumNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaMaximumNumberOfSeats
   = lens _seaMaximumNumberOfSeats
       (\ s a -> s{_seaMaximumNumberOfSeats = a})
+      . mapping _Coerce
 
 -- | Read-only field containing the current number of licensed seats for
 -- FLEXIBLE Google-Apps subscriptions and secondary subscriptions such as
@@ -611,6 +616,7 @@ seaLicensedNumberOfSeats :: Lens' Seats (Maybe Int32)
 seaLicensedNumberOfSeats
   = lens _seaLicensedNumberOfSeats
       (\ s a -> s{_seaLicensedNumberOfSeats = a})
+      . mapping _Coerce
 
 -- | Identifies the resource as a subscription change plan request.
 seaKind :: Lens' Seats Text
@@ -689,7 +695,7 @@ instance ToJSON RenewalSettings where
 --
 -- /See:/ 'subscription' smart constructor.
 data Subscription = Subscription
-    { _subCreationTime      :: !(Maybe Int64)
+    { _subCreationTime      :: !(Maybe (JSONText Int64))
     , _subBillingMethod     :: !(Maybe Text)
     , _subStatus            :: !(Maybe Text)
     , _subTrialSettings     :: !(Maybe SubscriptionTrialSettings)
@@ -765,6 +771,7 @@ subCreationTime :: Lens' Subscription (Maybe Int64)
 subCreationTime
   = lens _subCreationTime
       (\ s a -> s{_subCreationTime = a})
+      . mapping _Coerce
 
 -- | Billing method of this subscription.
 subBillingMethod :: Lens' Subscription (Maybe Text)
@@ -886,8 +893,8 @@ instance ToJSON Subscription where
 --
 -- /See:/ 'subscriptionTransferInfo' smart constructor.
 data SubscriptionTransferInfo = SubscriptionTransferInfo
-    { _stiTransferabilityExpirationTime :: !(Maybe Int64)
-    , _stiMinimumTransferableSeats      :: !(Maybe Int32)
+    { _stiTransferabilityExpirationTime :: !(Maybe (JSONText Int64))
+    , _stiMinimumTransferableSeats      :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionTransferInfo' with the minimum fields required to make a request.
@@ -910,11 +917,13 @@ stiTransferabilityExpirationTime :: Lens' SubscriptionTransferInfo (Maybe Int64)
 stiTransferabilityExpirationTime
   = lens _stiTransferabilityExpirationTime
       (\ s a -> s{_stiTransferabilityExpirationTime = a})
+      . mapping _Coerce
 
 stiMinimumTransferableSeats :: Lens' SubscriptionTransferInfo (Maybe Int32)
 stiMinimumTransferableSeats
   = lens _stiMinimumTransferableSeats
       (\ s a -> s{_stiMinimumTransferableSeats = a})
+      . mapping _Coerce
 
 instance FromJSON SubscriptionTransferInfo where
         parseJSON

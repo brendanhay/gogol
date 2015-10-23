@@ -49,9 +49,9 @@ type CampaignCreativeAssociationsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               Capture "campaignId" Int64 :>
+               Capture "campaignId" (JSONText Int64) :>
                  "campaignCreativeAssociations" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] CampaignCreativeAssociation :>
@@ -63,8 +63,8 @@ type CampaignCreativeAssociationsInsertResource =
 --
 -- /See:/ 'campaignCreativeAssociationsInsert' smart constructor.
 data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert
-    { _ccaiCampaignId :: !Int64
-    , _ccaiProFileId  :: !Int64
+    { _ccaiCampaignId :: !(JSONText Int64)
+    , _ccaiProFileId  :: !(JSONText Int64)
     , _ccaiPayload    :: !CampaignCreativeAssociation
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -94,12 +94,14 @@ ccaiCampaignId :: Lens' CampaignCreativeAssociationsInsert Int64
 ccaiCampaignId
   = lens _ccaiCampaignId
       (\ s a -> s{_ccaiCampaignId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 ccaiProFileId :: Lens' CampaignCreativeAssociationsInsert Int64
 ccaiProFileId
   = lens _ccaiProFileId
       (\ s a -> s{_ccaiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 ccaiPayload :: Lens' CampaignCreativeAssociationsInsert CampaignCreativeAssociation

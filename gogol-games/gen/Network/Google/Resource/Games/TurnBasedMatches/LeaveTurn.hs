@@ -51,7 +51,7 @@ type TurnBasedMatchesLeaveTurnResource =
          "turnbasedmatches" :>
            Capture "matchId" Text :>
              "leaveTurn" :>
-               QueryParam "matchVersion" Int32 :>
+               QueryParam "matchVersion" (JSONText Int32) :>
                  QueryParam "language" Text :>
                    QueryParam "pendingParticipantId" Text :>
                      QueryParam "alt" AltJSON :>
@@ -65,7 +65,7 @@ data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn
     { _tbmltLanguage             :: !(Maybe Text)
     , _tbmltPendingParticipantId :: !(Maybe Text)
     , _tbmltMatchId              :: !Text
-    , _tbmltMatchVersion         :: !Int32
+    , _tbmltMatchVersion         :: !(JSONText Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesLeaveTurn' with the minimum fields required to make a request.
@@ -116,6 +116,7 @@ tbmltMatchVersion :: Lens' TurnBasedMatchesLeaveTurn Int32
 tbmltMatchVersion
   = lens _tbmltMatchVersion
       (\ s a -> s{_tbmltMatchVersion = a})
+      . _Coerce
 
 instance GoogleRequest TurnBasedMatchesLeaveTurn
          where

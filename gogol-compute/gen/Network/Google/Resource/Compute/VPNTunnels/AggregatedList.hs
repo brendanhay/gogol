@@ -53,7 +53,7 @@ type VPNTunnelsAggregatedListResource =
                "vpnTunnels" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
+                     QueryParam "maxResults" (JSONText Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] VPNTunnelAggregatedList
 
@@ -64,7 +64,7 @@ data VPNTunnelsAggregatedList = VPNTunnelsAggregatedList
     { _vtalProject    :: !Text
     , _vtalFilter     :: !(Maybe Text)
     , _vtalPageToken  :: !(Maybe Text)
-    , _vtalMaxResults :: !Word32
+    , _vtalMaxResults :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsAggregatedList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ vtalMaxResults :: Lens' VPNTunnelsAggregatedList Word32
 vtalMaxResults
   = lens _vtalMaxResults
       (\ s a -> s{_vtalMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest VPNTunnelsAggregatedList where
         type Rs VPNTunnelsAggregatedList =

@@ -46,17 +46,17 @@ type ChangeLogsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "changeLogs" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] ChangeLog
 
 -- | Gets one change log by ID.
 --
 -- /See:/ 'changeLogsGet' smart constructor.
 data ChangeLogsGet = ChangeLogsGet
-    { _clgProFileId :: !Int64
-    , _clgId        :: !Int64
+    { _clgProFileId :: !(JSONText Int64)
+    , _clgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ changeLogsGet pClgProFileId_ pClgId_ =
 clgProFileId :: Lens' ChangeLogsGet Int64
 clgProFileId
   = lens _clgProFileId (\ s a -> s{_clgProFileId = a})
+      . _Coerce
 
 -- | Change log ID.
 clgId :: Lens' ChangeLogsGet Int64
-clgId = lens _clgId (\ s a -> s{_clgId = a})
+clgId
+  = lens _clgId (\ s a -> s{_clgId = a}) . _Coerce
 
 instance GoogleRequest ChangeLogsGet where
         type Rs ChangeLogsGet = ChangeLog

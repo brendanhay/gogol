@@ -55,7 +55,7 @@ type ObjectAccessControlsPatchResource =
                Capture "object" Text :>
                  "acl" :>
                    Capture "entity" Text :>
-                     QueryParam "generation" Int64 :>
+                     QueryParam "generation" (JSONText Int64) :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ObjectAccessControl :>
                            Patch '[JSON] ObjectAccessControl
@@ -69,7 +69,7 @@ data ObjectAccessControlsPatch = ObjectAccessControlsPatch
     , _oacpPayload    :: !ObjectAccessControl
     , _oacpObject     :: !Text
     , _oacpEntity     :: !Text
-    , _oacpGeneration :: !(Maybe Int64)
+    , _oacpGeneration :: !(Maybe (JSONText Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsPatch' with the minimum fields required to make a request.
@@ -129,6 +129,7 @@ oacpGeneration :: Lens' ObjectAccessControlsPatch (Maybe Int64)
 oacpGeneration
   = lens _oacpGeneration
       (\ s a -> s{_oacpGeneration = a})
+      . mapping _Coerce
 
 instance GoogleRequest ObjectAccessControlsPatch
          where

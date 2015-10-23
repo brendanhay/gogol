@@ -61,7 +61,7 @@ type UserUsageReportGetResource =
                        QueryParam "customerId" Text :>
                          QueryParam "parameters" Text :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" Word32 :>
+                             QueryParam "maxResults" (JSONText Word32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] UsageReports
 
@@ -76,7 +76,7 @@ data UserUsageReportGet = UserUsageReportGet
     , _uurgParameters :: !(Maybe Text)
     , _uurgPageToken  :: !(Maybe Text)
     , _uurgUserKey    :: !Text
-    , _uurgMaxResults :: !(Maybe Word32)
+    , _uurgMaxResults :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserUsageReportGet' with the minimum fields required to make a request.
@@ -151,6 +151,7 @@ uurgMaxResults :: Lens' UserUsageReportGet (Maybe Word32)
 uurgMaxResults
   = lens _uurgMaxResults
       (\ s a -> s{_uurgMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest UserUsageReportGet where
         type Rs UserUsageReportGet = UsageReports

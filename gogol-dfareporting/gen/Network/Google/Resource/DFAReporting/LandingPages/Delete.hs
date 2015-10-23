@@ -47,20 +47,20 @@ type LandingPagesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "campaigns" :>
-               Capture "campaignId" Int64 :>
+               Capture "campaignId" (JSONText Int64) :>
                  "landingPages" :>
-                   Capture "id" Int64 :>
+                   Capture "id" (JSONText Int64) :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing campaign landing page.
 --
 -- /See:/ 'landingPagesDelete' smart constructor.
 data LandingPagesDelete = LandingPagesDelete
-    { _lpdCampaignId :: !Int64
-    , _lpdProFileId  :: !Int64
-    , _lpdId         :: !Int64
+    { _lpdCampaignId :: !(JSONText Int64)
+    , _lpdProFileId  :: !(JSONText Int64)
+    , _lpdId         :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesDelete' with the minimum fields required to make a request.
@@ -89,15 +89,18 @@ lpdCampaignId :: Lens' LandingPagesDelete Int64
 lpdCampaignId
   = lens _lpdCampaignId
       (\ s a -> s{_lpdCampaignId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 lpdProFileId :: Lens' LandingPagesDelete Int64
 lpdProFileId
   = lens _lpdProFileId (\ s a -> s{_lpdProFileId = a})
+      . _Coerce
 
 -- | Landing page ID.
 lpdId :: Lens' LandingPagesDelete Int64
-lpdId = lens _lpdId (\ s a -> s{_lpdId = a})
+lpdId
+  = lens _lpdId (\ s a -> s{_lpdId = a}) . _Coerce
 
 instance GoogleRequest LandingPagesDelete where
         type Rs LandingPagesDelete = ()

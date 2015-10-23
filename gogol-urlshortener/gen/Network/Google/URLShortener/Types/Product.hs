@@ -113,7 +113,7 @@ instance ToJSON URL where
 --
 -- /See:/ 'stringCount' smart constructor.
 data StringCount = StringCount
-    { _scCount :: !(Maybe Int64)
+    { _scCount :: !(Maybe (JSONText Int64))
     , _scId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -135,7 +135,9 @@ stringCount =
 -- | Number of clicks for this top entry, e.g. for this particular country or
 -- browser.
 scCount :: Lens' StringCount (Maybe Int64)
-scCount = lens _scCount (\ s a -> s{_scCount = a})
+scCount
+  = lens _scCount (\ s a -> s{_scCount = a}) .
+      mapping _Coerce
 
 -- | Label assigned to this top entry, e.g. \"US\" or \"Chrome\".
 scId :: Lens' StringCount (Maybe Text)
@@ -157,10 +159,10 @@ instance ToJSON StringCount where
 -- /See:/ 'analyticsSnapshot' smart constructor.
 data AnalyticsSnapshot = AnalyticsSnapshot
     { _asPlatforms      :: !(Maybe [StringCount])
-    , _asShortURLClicks :: !(Maybe Int64)
+    , _asShortURLClicks :: !(Maybe (JSONText Int64))
     , _asReferrers      :: !(Maybe [StringCount])
     , _asCountries      :: !(Maybe [StringCount])
-    , _asLongURLClicks  :: !(Maybe Int64)
+    , _asLongURLClicks  :: !(Maybe (JSONText Int64))
     , _asBrowsers       :: !(Maybe [StringCount])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -204,6 +206,7 @@ asShortURLClicks :: Lens' AnalyticsSnapshot (Maybe Int64)
 asShortURLClicks
   = lens _asShortURLClicks
       (\ s a -> s{_asShortURLClicks = a})
+      . mapping _Coerce
 
 -- | Top referring hosts, e.g. \"www.google.com\"; sorted by (descending)
 -- click counts. Only present if this data is available.
@@ -227,6 +230,7 @@ asLongURLClicks :: Lens' AnalyticsSnapshot (Maybe Int64)
 asLongURLClicks
   = lens _asLongURLClicks
       (\ s a -> s{_asLongURLClicks = a})
+      . mapping _Coerce
 
 -- | Top browsers, e.g. \"Chrome\"; sorted by (descending) click counts. Only
 -- present if this data is available.
@@ -337,9 +341,9 @@ instance ToJSON AnalyticsSummary where
 --
 -- /See:/ 'urlHistory' smart constructor.
 data URLHistory = URLHistory
-    { _uhTotalItems    :: !(Maybe Int32)
+    { _uhTotalItems    :: !(Maybe (JSONText Int32))
     , _uhNextPageToken :: !(Maybe Text)
-    , _uhItemsPerPage  :: !(Maybe Int32)
+    , _uhItemsPerPage  :: !(Maybe (JSONText Int32))
     , _uhKind          :: !Text
     , _uhItems         :: !(Maybe [URL])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -373,6 +377,7 @@ urlHistory =
 uhTotalItems :: Lens' URLHistory (Maybe Int32)
 uhTotalItems
   = lens _uhTotalItems (\ s a -> s{_uhTotalItems = a})
+      . mapping _Coerce
 
 -- | A token to provide to get the next page of results.
 uhNextPageToken :: Lens' URLHistory (Maybe Text)
@@ -386,6 +391,7 @@ uhItemsPerPage :: Lens' URLHistory (Maybe Int32)
 uhItemsPerPage
   = lens _uhItemsPerPage
       (\ s a -> s{_uhItemsPerPage = a})
+      . mapping _Coerce
 
 -- | The fixed string \"urlshortener#urlHistory\".
 uhKind :: Lens' URLHistory Text

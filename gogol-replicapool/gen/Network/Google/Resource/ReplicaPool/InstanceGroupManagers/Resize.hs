@@ -57,7 +57,7 @@ type InstanceGroupManagersResizeResource =
                  "instanceGroupManagers" :>
                    Capture "instanceGroupManager" Text :>
                      "resize" :>
-                       QueryParam "size" Int32 :>
+                       QueryParam "size" (JSONText Int32) :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Resizes the managed instance group up or down. If resized up, new
@@ -68,7 +68,7 @@ type InstanceGroupManagersResizeResource =
 -- /See:/ 'instanceGroupManagersResize' smart constructor.
 data InstanceGroupManagersResize = InstanceGroupManagersResize
     { _igmrProject              :: !Text
-    , _igmrSize                 :: !Int32
+    , _igmrSize                 :: !(JSONText Int32)
     , _igmrInstanceGroupManager :: !Text
     , _igmrZone                 :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -105,7 +105,9 @@ igmrProject
 
 -- | Number of instances that should exist in this Instance Group Manager.
 igmrSize :: Lens' InstanceGroupManagersResize Int32
-igmrSize = lens _igmrSize (\ s a -> s{_igmrSize = a})
+igmrSize
+  = lens _igmrSize (\ s a -> s{_igmrSize = a}) .
+      _Coerce
 
 -- | The name of the instance group manager.
 igmrInstanceGroupManager :: Lens' InstanceGroupManagersResize Text

@@ -46,7 +46,7 @@ type AccountUserProFilesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "accountUserProfiles" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] AccountUserProFile :>
@@ -56,7 +56,7 @@ type AccountUserProFilesUpdateResource =
 --
 -- /See:/ 'accountUserProFilesUpdate' smart constructor.
 data AccountUserProFilesUpdate = AccountUserProFilesUpdate
-    { _aupfuProFileId :: !Int64
+    { _aupfuProFileId :: !(JSONText Int64)
     , _aupfuPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,6 +82,7 @@ aupfuProFileId :: Lens' AccountUserProFilesUpdate Int64
 aupfuProFileId
   = lens _aupfuProFileId
       (\ s a -> s{_aupfuProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 aupfuPayload :: Lens' AccountUserProFilesUpdate AccountUserProFile

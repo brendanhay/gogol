@@ -51,7 +51,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersListResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "orders" :>
              QueryParam "placedDateEnd" Text :>
                QueryParam "orderBy" OrdersListOrderBy :>
@@ -59,7 +59,7 @@ type OrdersListResource =
                    QueryParams "statuses" OrdersListStatuses :>
                      QueryParam "pageToken" Text :>
                        QueryParam "placedDateStart" Text :>
-                         QueryParam "maxResults" Word32 :>
+                         QueryParam "maxResults" (JSONText Word32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] OrdersListResponse
 
@@ -68,13 +68,13 @@ type OrdersListResource =
 -- /See:/ 'ordersList' smart constructor.
 data OrdersList = OrdersList
     { _olPlacedDateEnd   :: !(Maybe Text)
-    , _olMerchantId      :: !Word64
+    , _olMerchantId      :: !(JSONText Word64)
     , _olOrderBy         :: !(Maybe OrdersListOrderBy)
     , _olAcknowledged    :: !(Maybe Bool)
     , _olStatuses        :: !(Maybe [OrdersListStatuses])
     , _olPageToken       :: !(Maybe Text)
     , _olPlacedDateStart :: !(Maybe Text)
-    , _olMaxResults      :: !(Maybe Word32)
+    , _olMaxResults      :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList' with the minimum fields required to make a request.
@@ -122,6 +122,7 @@ olPlacedDateEnd
 olMerchantId :: Lens' OrdersList Word64
 olMerchantId
   = lens _olMerchantId (\ s a -> s{_olMerchantId = a})
+      . _Coerce
 
 -- | The ordering of the returned list. The only supported value are
 -- placedDate desc and placedDate asc for now, which returns orders sorted
@@ -172,6 +173,7 @@ olPlacedDateStart
 olMaxResults :: Lens' OrdersList (Maybe Word32)
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest OrdersList where
         type Rs OrdersList = OrdersListResponse

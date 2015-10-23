@@ -64,7 +64,7 @@ type MyLibraryAnnotationsListResource =
                          QueryParam "source" Text :>
                            QueryParam "pageToken" Text :>
                              QueryParam "layerId" Text :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] Annotations
 
@@ -81,7 +81,7 @@ data MyLibraryAnnotationsList = MyLibraryAnnotationsList
     , _mlalSource         :: !(Maybe Text)
     , _mlalPageToken      :: !(Maybe Text)
     , _mlalLayerId        :: !(Maybe Text)
-    , _mlalMaxResults     :: !(Maybe Word32)
+    , _mlalMaxResults     :: !(Maybe (JSONText Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyLibraryAnnotationsList' with the minimum fields required to make a request.
@@ -183,6 +183,7 @@ mlalMaxResults :: Lens' MyLibraryAnnotationsList (Maybe Word32)
 mlalMaxResults
   = lens _mlalMaxResults
       (\ s a -> s{_mlalMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest MyLibraryAnnotationsList where
         type Rs MyLibraryAnnotationsList = Annotations

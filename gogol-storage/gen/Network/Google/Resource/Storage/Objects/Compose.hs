@@ -58,8 +58,9 @@ type ObjectsComposeResource =
                    QueryParam "destinationPredefinedAcl"
                      ObjectsComposeDestinationPredefinedACL
                      :>
-                     QueryParam "ifMetagenerationMatch" Int64 :>
-                       QueryParam "ifGenerationMatch" Int64 :>
+                     QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                       :>
+                       QueryParam "ifGenerationMatch" (JSONText Int64) :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ComposeRequest :> Post '[JSON] Object
        :<|>
@@ -73,8 +74,9 @@ type ObjectsComposeResource =
                      QueryParam "destinationPredefinedAcl"
                        ObjectsComposeDestinationPredefinedACL
                        :>
-                       QueryParam "ifMetagenerationMatch" Int64 :>
-                         QueryParam "ifGenerationMatch" Int64 :>
+                       QueryParam "ifMetagenerationMatch" (JSONText Int64)
+                         :>
+                         QueryParam "ifGenerationMatch" (JSONText Int64) :>
                            QueryParam "alt" AltMedia :>
                              Get '[OctetStream] Stream
 
@@ -84,8 +86,8 @@ type ObjectsComposeResource =
 -- /See:/ 'objectsCompose' smart constructor.
 data ObjectsCompose = ObjectsCompose
     { _oDestinationPredefinedACL :: !(Maybe ObjectsComposeDestinationPredefinedACL)
-    , _oIfMetagenerationMatch    :: !(Maybe Int64)
-    , _oIfGenerationMatch        :: !(Maybe Int64)
+    , _oIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    , _oIfGenerationMatch        :: !(Maybe (JSONText Int64))
     , _oPayload                  :: !ComposeRequest
     , _oDestinationBucket        :: !Text
     , _oDestinationObject        :: !Text
@@ -133,6 +135,7 @@ oIfMetagenerationMatch :: Lens' ObjectsCompose (Maybe Int64)
 oIfMetagenerationMatch
   = lens _oIfMetagenerationMatch
       (\ s a -> s{_oIfMetagenerationMatch = a})
+      . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
@@ -140,6 +143,7 @@ oIfGenerationMatch :: Lens' ObjectsCompose (Maybe Int64)
 oIfGenerationMatch
   = lens _oIfGenerationMatch
       (\ s a -> s{_oIfGenerationMatch = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 oPayload :: Lens' ObjectsCompose ComposeRequest

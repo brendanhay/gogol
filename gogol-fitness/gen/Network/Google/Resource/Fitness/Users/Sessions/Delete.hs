@@ -50,7 +50,7 @@ type UsersSessionsDeleteResource =
            Capture "userId" Text :>
              "sessions" :>
                Capture "sessionId" Text :>
-                 QueryParam "currentTimeMillis" Int64 :>
+                 QueryParam "currentTimeMillis" (JSONText Int64) :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a session specified by the given session ID.
@@ -58,7 +58,7 @@ type UsersSessionsDeleteResource =
 -- /See:/ 'usersSessionsDelete' smart constructor.
 data UsersSessionsDelete = UsersSessionsDelete
     { _usdUserId            :: !Text
-    , _usdCurrentTimeMillis :: !(Maybe Int64)
+    , _usdCurrentTimeMillis :: !(Maybe (JSONText Int64))
     , _usdSessionId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -93,6 +93,7 @@ usdCurrentTimeMillis :: Lens' UsersSessionsDelete (Maybe Int64)
 usdCurrentTimeMillis
   = lens _usdCurrentTimeMillis
       (\ s a -> s{_usdCurrentTimeMillis = a})
+      . mapping _Coerce
 
 -- | The ID of the session to be deleted.
 usdSessionId :: Lens' UsersSessionsDelete Text

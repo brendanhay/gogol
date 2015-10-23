@@ -46,17 +46,17 @@ type FloodlightActivityGroupsDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "floodlightActivityGroups" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity group.
 --
 -- /See:/ 'floodlightActivityGroupsDelete' smart constructor.
 data FloodlightActivityGroupsDelete = FloodlightActivityGroupsDelete
-    { _fagdProFileId :: !Int64
-    , _fagdId        :: !Int64
+    { _fagdProFileId :: !(JSONText Int64)
+    , _fagdId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsDelete' with the minimum fields required to make a request.
@@ -81,10 +81,12 @@ fagdProFileId :: Lens' FloodlightActivityGroupsDelete Int64
 fagdProFileId
   = lens _fagdProFileId
       (\ s a -> s{_fagdProFileId = a})
+      . _Coerce
 
 -- | Floodlight activity Group ID.
 fagdId :: Lens' FloodlightActivityGroupsDelete Int64
-fagdId = lens _fagdId (\ s a -> s{_fagdId = a})
+fagdId
+  = lens _fagdId (\ s a -> s{_fagdId = a}) . _Coerce
 
 instance GoogleRequest FloodlightActivityGroupsDelete
          where

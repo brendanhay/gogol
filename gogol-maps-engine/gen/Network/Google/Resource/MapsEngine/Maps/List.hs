@@ -69,7 +69,7 @@ type MapsListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "projectId" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" Word32 :>
+                               QueryParam "maxResults" (JSONText Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -89,7 +89,7 @@ data MapsList = MapsList
     , _mlPageToken        :: !(Maybe Text)
     , _mlProjectId        :: !(Maybe Text)
     , _mlSearch           :: !(Maybe Text)
-    , _mlMaxResults       :: !(Maybe Word32)
+    , _mlMaxResults       :: !(Maybe (JSONText Word32))
     , _mlTags             :: !(Maybe Text)
     , _mlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -213,6 +213,7 @@ mlSearch = lens _mlSearch (\ s a -> s{_mlSearch = a})
 mlMaxResults :: Lens' MapsList (Maybe Word32)
 mlMaxResults
   = lens _mlMaxResults (\ s a -> s{_mlMaxResults = a})
+      . mapping _Coerce
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.

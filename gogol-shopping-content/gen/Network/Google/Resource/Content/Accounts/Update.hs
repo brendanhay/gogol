@@ -47,9 +47,9 @@ import           Network.Google.ShoppingContent.Types
 type AccountsUpdateResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "accounts" :>
-             Capture "accountId" Word64 :>
+             Capture "accountId" (JSONText Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Account :> Put '[JSON] Account
@@ -58,9 +58,9 @@ type AccountsUpdateResource =
 --
 -- /See:/ 'accountsUpdate' smart constructor.
 data AccountsUpdate = AccountsUpdate
-    { _au1MerchantId :: !Word64
+    { _au1MerchantId :: !(JSONText Word64)
     , _au1Payload    :: !Account
-    , _au1AccountId  :: !Word64
+    , _au1AccountId  :: !(JSONText Word64)
     , _au1DryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -93,6 +93,7 @@ au1MerchantId :: Lens' AccountsUpdate Word64
 au1MerchantId
   = lens _au1MerchantId
       (\ s a -> s{_au1MerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 au1Payload :: Lens' AccountsUpdate Account
@@ -103,6 +104,7 @@ au1Payload
 au1AccountId :: Lens' AccountsUpdate Word64
 au1AccountId
   = lens _au1AccountId (\ s a -> s{_au1AccountId = a})
+      . _Coerce
 
 -- | Flag to run the request in dry-run mode.
 au1DryRun :: Lens' AccountsUpdate (Maybe Bool)

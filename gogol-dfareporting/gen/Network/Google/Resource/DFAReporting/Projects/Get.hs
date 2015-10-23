@@ -46,17 +46,17 @@ type ProjectsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "projects" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Gets one project by ID.
 --
 -- /See:/ 'projectsGet' smart constructor.
 data ProjectsGet = ProjectsGet
-    { _proProFileId :: !Int64
-    , _proId        :: !Int64
+    { _proProFileId :: !(JSONText Int64)
+    , _proId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
@@ -80,10 +80,12 @@ projectsGet pProProFileId_ pProId_ =
 proProFileId :: Lens' ProjectsGet Int64
 proProFileId
   = lens _proProFileId (\ s a -> s{_proProFileId = a})
+      . _Coerce
 
 -- | Project ID.
 proId :: Lens' ProjectsGet Int64
-proId = lens _proId (\ s a -> s{_proId = a})
+proId
+  = lens _proId (\ s a -> s{_proId = a}) . _Coerce
 
 instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project

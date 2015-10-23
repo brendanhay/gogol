@@ -47,9 +47,9 @@ type CreativeAssetsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "creativeAssets" :>
-               Capture "advertiserId" Int64 :>
+               Capture "advertiserId" (JSONText Int64) :>
                  "creativeAssets" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] CreativeAssetMetadata :>
@@ -59,9 +59,9 @@ type CreativeAssetsInsertResource =
          "dfareporting" :>
            "v2.2" :>
              "userprofiles" :>
-               Capture "profileId" Int64 :>
+               Capture "profileId" (JSONText Int64) :>
                  "creativeAssets" :>
-                   Capture "advertiserId" Int64 :>
+                   Capture "advertiserId" (JSONText Int64) :>
                      "creativeAssets" :>
                        QueryParam "alt" AltJSON :>
                          QueryParam "uploadType" AltMedia :>
@@ -73,8 +73,8 @@ type CreativeAssetsInsertResource =
 --
 -- /See:/ 'creativeAssetsInsert' smart constructor.
 data CreativeAssetsInsert = CreativeAssetsInsert
-    { _caiAdvertiserId :: !Int64
-    , _caiProFileId    :: !Int64
+    { _caiAdvertiserId :: !(JSONText Int64)
+    , _caiProFileId    :: !(JSONText Int64)
     , _caiPayload      :: !CreativeAssetMetadata
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -104,11 +104,13 @@ caiAdvertiserId :: Lens' CreativeAssetsInsert Int64
 caiAdvertiserId
   = lens _caiAdvertiserId
       (\ s a -> s{_caiAdvertiserId = a})
+      . _Coerce
 
 -- | User profile ID associated with this request.
 caiProFileId :: Lens' CreativeAssetsInsert Int64
 caiProFileId
   = lens _caiProFileId (\ s a -> s{_caiProFileId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 caiPayload :: Lens' CreativeAssetsInsert CreativeAssetMetadata

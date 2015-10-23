@@ -46,17 +46,17 @@ type PlacementsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placements" :>
-               Capture "id" Int64 :>
+               Capture "id" (JSONText Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Placement
 
 -- | Gets one placement by ID.
 --
 -- /See:/ 'placementsGet' smart constructor.
 data PlacementsGet = PlacementsGet
-    { _pgProFileId :: !Int64
-    , _pgId        :: !Int64
+    { _pgProFileId :: !(JSONText Int64)
+    , _pgId        :: !(JSONText Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsGet' with the minimum fields required to make a request.
@@ -79,11 +79,12 @@ placementsGet pPgProFileId_ pPgId_ =
 -- | User profile ID associated with this request.
 pgProFileId :: Lens' PlacementsGet Int64
 pgProFileId
-  = lens _pgProFileId (\ s a -> s{_pgProFileId = a})
+  = lens _pgProFileId (\ s a -> s{_pgProFileId = a}) .
+      _Coerce
 
 -- | Placement ID.
 pgId :: Lens' PlacementsGet Int64
-pgId = lens _pgId (\ s a -> s{_pgId = a})
+pgId = lens _pgId (\ s a -> s{_pgId = a}) . _Coerce
 
 instance GoogleRequest PlacementsGet where
         type Rs PlacementsGet = Placement

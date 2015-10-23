@@ -64,7 +64,7 @@ type ActivitiesListResource =
                    QueryParam "regionCode" Text :>
                      QueryParam "channelId" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" Word32 :>
+                         QueryParam "maxResults" (JSONText Word32) :>
                            QueryParam "publishedBefore" DateTime' :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ActivityListResponse
@@ -84,7 +84,7 @@ data ActivitiesList = ActivitiesList
     , _alRegionCode      :: !(Maybe Text)
     , _alChannelId       :: !(Maybe Text)
     , _alPageToken       :: !(Maybe Text)
-    , _alMaxResults      :: !Word32
+    , _alMaxResults      :: !(JSONText Word32)
     , _alPublishedBefore :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -185,6 +185,7 @@ alPageToken
 alMaxResults :: Lens' ActivitiesList Word32
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+      . _Coerce
 
 -- | The publishedBefore parameter specifies the date and time before which
 -- an activity must have occurred for that activity to be included in the

@@ -47,16 +47,16 @@ type ManagementSegmentsListResource =
        "v3" :>
          "management" :>
            "segments" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :>
+             QueryParam "start-index" (JSONText Int32) :>
+               QueryParam "max-results" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Segments
 
 -- | Lists segments to which the user has access.
 --
 -- /See:/ 'managementSegmentsList' smart constructor.
 data ManagementSegmentsList = ManagementSegmentsList
-    { _mslStartIndex :: !(Maybe Int32)
-    , _mslMaxResults :: !(Maybe Int32)
+    { _mslStartIndex :: !(Maybe (JSONText Int32))
+    , _mslMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementSegmentsList' with the minimum fields required to make a request.
@@ -80,12 +80,14 @@ mslStartIndex :: Lens' ManagementSegmentsList (Maybe Int32)
 mslStartIndex
   = lens _mslStartIndex
       (\ s a -> s{_mslStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of segments to include in this response.
 mslMaxResults :: Lens' ManagementSegmentsList (Maybe Int32)
 mslMaxResults
   = lens _mslMaxResults
       (\ s a -> s{_mslMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ManagementSegmentsList where
         type Rs ManagementSegmentsList = Segments

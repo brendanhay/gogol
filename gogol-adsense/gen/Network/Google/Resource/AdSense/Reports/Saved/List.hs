@@ -48,7 +48,7 @@ type ReportsSavedListResource =
          "reports" :>
            "saved" :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
+               QueryParam "maxResults" (JSONText Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
 
 -- | List all saved reports in this AdSense account.
@@ -56,7 +56,7 @@ type ReportsSavedListResource =
 -- /See:/ 'reportsSavedList' smart constructor.
 data ReportsSavedList = ReportsSavedList
     { _rslPageToken  :: !(Maybe Text)
-    , _rslMaxResults :: !(Maybe Int32)
+    , _rslMaxResults :: !(Maybe (JSONText Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedList' with the minimum fields required to make a request.
@@ -87,6 +87,7 @@ rslMaxResults :: Lens' ReportsSavedList (Maybe Int32)
 rslMaxResults
   = lens _rslMaxResults
       (\ s a -> s{_rslMaxResults = a})
+      . mapping _Coerce
 
 instance GoogleRequest ReportsSavedList where
         type Rs ReportsSavedList = SavedReports

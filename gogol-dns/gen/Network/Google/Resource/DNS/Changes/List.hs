@@ -56,7 +56,7 @@ type ChangesListResource =
                  "changes" :>
                    QueryParam "sortOrder" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
+                       QueryParam "maxResults" (JSONText Int32) :>
                          QueryParam "sortBy" ChangesListSortBy :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ChangesListResponse
@@ -69,7 +69,7 @@ data ChangesList = ChangesList
     , _clSortOrder   :: !(Maybe Text)
     , _clPageToken   :: !(Maybe Text)
     , _clManagedZone :: !Text
-    , _clMaxResults  :: !(Maybe Int32)
+    , _clMaxResults  :: !(Maybe (JSONText Int32))
     , _clSortBy      :: !ChangesListSortBy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -130,6 +130,7 @@ clManagedZone
 clMaxResults :: Lens' ChangesList (Maybe Int32)
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
+      . mapping _Coerce
 
 -- | Sorting criterion. The only supported value is change sequence.
 clSortBy :: Lens' ChangesList ChangesListSortBy

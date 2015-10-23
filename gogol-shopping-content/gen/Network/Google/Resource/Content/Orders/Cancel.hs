@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersCancelResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" Word64 :>
+         Capture "merchantId" (JSONText Word64) :>
            "orders" :>
              Capture "orderId" Text :>
                "cancel" :>
@@ -58,7 +58,7 @@ type OrdersCancelResource =
 --
 -- /See:/ 'ordersCancel' smart constructor.
 data OrdersCancel = OrdersCancel
-    { _occMerchantId :: !Word64
+    { _occMerchantId :: !(JSONText Word64)
     , _occPayload    :: !OrdersCancelRequest
     , _occOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,6 +89,7 @@ occMerchantId :: Lens' OrdersCancel Word64
 occMerchantId
   = lens _occMerchantId
       (\ s a -> s{_occMerchantId = a})
+      . _Coerce
 
 -- | Multipart request metadata.
 occPayload :: Lens' OrdersCancel OrdersCancelRequest

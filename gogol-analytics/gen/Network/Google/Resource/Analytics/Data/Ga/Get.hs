@@ -66,8 +66,8 @@ type DataGaGetResource =
                          QueryParam "output" DataGaGetOutput :>
                            QueryParam "sort" Text :>
                              QueryParam "dimensions" Text :>
-                               QueryParam "start-index" Int32 :>
-                                 QueryParam "max-results" Int32 :>
+                               QueryParam "start-index" (JSONText Int32) :>
+                                 QueryParam "max-results" (JSONText Int32) :>
                                    QueryParam "segment" Text :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] GaData
@@ -84,8 +84,8 @@ data DataGaGet = DataGaGet
     , _dggOutput        :: !(Maybe DataGaGetOutput)
     , _dggSort          :: !(Maybe Text)
     , _dggDimensions    :: !(Maybe Text)
-    , _dggStartIndex    :: !(Maybe Int32)
-    , _dggMaxResults    :: !(Maybe Int32)
+    , _dggStartIndex    :: !(Maybe (JSONText Int32))
+    , _dggMaxResults    :: !(Maybe (JSONText Int32))
     , _dggSegment       :: !(Maybe Text)
     , _dggStartDate     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -192,12 +192,14 @@ dggStartIndex :: Lens' DataGaGet (Maybe Int32)
 dggStartIndex
   = lens _dggStartIndex
       (\ s a -> s{_dggStartIndex = a})
+      . mapping _Coerce
 
 -- | The maximum number of entries to include in this feed.
 dggMaxResults :: Lens' DataGaGet (Maybe Int32)
 dggMaxResults
   = lens _dggMaxResults
       (\ s a -> s{_dggMaxResults = a})
+      . mapping _Coerce
 
 -- | An Analytics segment to be applied to data.
 dggSegment :: Lens' DataGaGet (Maybe Text)

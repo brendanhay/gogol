@@ -67,26 +67,28 @@ type PlacementsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" Int64 :>
+           Capture "profileId" (JSONText Int64) :>
              "placements" :>
-               QueryParams "placementStrategyIds" Int64 :>
-                 QueryParams "contentCategoryIds" Int64 :>
+               QueryParams "placementStrategyIds" (JSONText Int64)
+                 :>
+                 QueryParams "contentCategoryIds" (JSONText Int64) :>
                    QueryParam "maxEndDate" Text :>
-                     QueryParams "campaignIds" Int64 :>
+                     QueryParams "campaignIds" (JSONText Int64) :>
                        QueryParams "pricingTypes" PlacementsListPricingTypes
                          :>
                          QueryParam "searchString" Text :>
-                           QueryParams "sizeIds" Int64 :>
-                             QueryParams "ids" Int64 :>
-                               QueryParams "groupIds" Int64 :>
-                                 QueryParams "directorySiteIds" Int64 :>
+                           QueryParams "sizeIds" (JSONText Int64) :>
+                             QueryParams "ids" (JSONText Int64) :>
+                               QueryParams "groupIds" (JSONText Int64) :>
+                                 QueryParams "directorySiteIds" (JSONText Int64)
+                                   :>
                                    QueryParam "sortOrder"
                                      PlacementsListSortOrder
                                      :>
                                      QueryParam "paymentSource"
                                        PlacementsListPaymentSource
                                        :>
-                                       QueryParams "siteIds" Int64 :>
+                                       QueryParams "siteIds" (JSONText Int64) :>
                                          QueryParam "pageToken" Text :>
                                            QueryParam "sortField"
                                              PlacementsListSortField
@@ -96,7 +98,7 @@ type PlacementsListResource =
                                                :>
                                                QueryParam "maxStartDate" Text :>
                                                  QueryParams "advertiserIds"
-                                                   Int64
+                                                   (JSONText Int64)
                                                    :>
                                                    QueryParam "minStartDate"
                                                      Text
@@ -104,7 +106,7 @@ type PlacementsListResource =
                                                      QueryParam "archived" Bool
                                                        :>
                                                        QueryParam "maxResults"
-                                                         Int32
+                                                         (JSONText Int32)
                                                          :>
                                                          QueryParam "minEndDate"
                                                            Text
@@ -119,28 +121,28 @@ type PlacementsListResource =
 --
 -- /See:/ 'placementsList' smart constructor.
 data PlacementsList = PlacementsList
-    { _pPlacementStrategyIds :: !(Maybe [Int64])
-    , _pContentCategoryIds   :: !(Maybe [Int64])
+    { _pPlacementStrategyIds :: !(Maybe [JSONText Int64])
+    , _pContentCategoryIds   :: !(Maybe [JSONText Int64])
     , _pMaxEndDate           :: !(Maybe Text)
-    , _pCampaignIds          :: !(Maybe [Int64])
+    , _pCampaignIds          :: !(Maybe [JSONText Int64])
     , _pPricingTypes         :: !(Maybe [PlacementsListPricingTypes])
     , _pSearchString         :: !(Maybe Text)
-    , _pSizeIds              :: !(Maybe [Int64])
-    , _pIds                  :: !(Maybe [Int64])
-    , _pProFileId            :: !Int64
-    , _pGroupIds             :: !(Maybe [Int64])
-    , _pDirectorySiteIds     :: !(Maybe [Int64])
+    , _pSizeIds              :: !(Maybe [JSONText Int64])
+    , _pIds                  :: !(Maybe [JSONText Int64])
+    , _pProFileId            :: !(JSONText Int64)
+    , _pGroupIds             :: !(Maybe [JSONText Int64])
+    , _pDirectorySiteIds     :: !(Maybe [JSONText Int64])
     , _pSortOrder            :: !(Maybe PlacementsListSortOrder)
     , _pPaymentSource        :: !(Maybe PlacementsListPaymentSource)
-    , _pSiteIds              :: !(Maybe [Int64])
+    , _pSiteIds              :: !(Maybe [JSONText Int64])
     , _pPageToken            :: !(Maybe Text)
     , _pSortField            :: !(Maybe PlacementsListSortField)
     , _pCompatibilities      :: !(Maybe [PlacementsListCompatibilities])
     , _pMaxStartDate         :: !(Maybe Text)
-    , _pAdvertiserIds        :: !(Maybe [Int64])
+    , _pAdvertiserIds        :: !(Maybe [JSONText Int64])
     , _pMinStartDate         :: !(Maybe Text)
     , _pArchived             :: !(Maybe Bool)
-    , _pMaxResults           :: !(Maybe Int32)
+    , _pMaxResults           :: !(Maybe (JSONText Int32))
     , _pMinEndDate           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -291,7 +293,8 @@ pIds
 -- | User profile ID associated with this request.
 pProFileId :: Lens' PlacementsList Int64
 pProFileId
-  = lens _pProFileId (\ s a -> s{_pProFileId = a})
+  = lens _pProFileId (\ s a -> s{_pProFileId = a}) .
+      _Coerce
 
 -- | Select only placements that belong to these placement groups.
 pGroupIds :: Lens' PlacementsList [Int64]
@@ -381,7 +384,8 @@ pArchived
 -- | Maximum number of results to return.
 pMaxResults :: Lens' PlacementsList (Maybe Int32)
 pMaxResults
-  = lens _pMaxResults (\ s a -> s{_pMaxResults = a})
+  = lens _pMaxResults (\ s a -> s{_pMaxResults = a}) .
+      mapping _Coerce
 
 -- | Select only placements or placement groups whose end date is on or after
 -- the specified minEndDate. The date should be formatted as

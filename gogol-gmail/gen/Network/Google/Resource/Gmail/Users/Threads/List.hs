@@ -56,7 +56,7 @@ type UsersThreadsListResource =
                  QueryParam "includeSpamTrash" Bool :>
                    QueryParams "labelIds" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
+                       QueryParam "maxResults" (JSONText Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListThreadsResponse
 
@@ -69,7 +69,7 @@ data UsersThreadsList = UsersThreadsList
     , _utlIncludeSpamTrash :: !Bool
     , _utlLabelIds         :: !(Maybe [Text])
     , _utlPageToken        :: !(Maybe Text)
-    , _utlMaxResults       :: !Word32
+    , _utlMaxResults       :: !(JSONText Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsList' with the minimum fields required to make a request.
@@ -136,6 +136,7 @@ utlMaxResults :: Lens' UsersThreadsList Word32
 utlMaxResults
   = lens _utlMaxResults
       (\ s a -> s{_utlMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest UsersThreadsList where
         type Rs UsersThreadsList = ListThreadsResponse
