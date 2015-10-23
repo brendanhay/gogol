@@ -139,11 +139,12 @@ renderMethod s root suf m@Method {..} = do
 
     i   <- pp Print $ requestDecl  _unique _prefix alias url (props _schema) m
     dl  <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
+    ul  <- pp Print $ uploadDecl   _unique _prefix alias url (props _schema) m
 
-    let is = i : [dl | _mSupportsMediaDownload]
+    let is = i : [dl | _mSupportsMediaDownload] ++ [ul | _mSupportsMediaUpload]
 
     Action (commasep _mId) _unique (root <> mkNS ns) _mDescription alias
-        <$> pp Print (verbAlias alias m)
+        <$> pp Print (verbAlias s alias m)
         <*> pure (insts is d)
   where
     (alias, typ', ns) = mname (_sCanonicalName s) suf _mId

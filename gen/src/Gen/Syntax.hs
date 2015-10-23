@@ -42,7 +42,6 @@ urlDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
     rhs = appFun (var "defaultService")
         [ app (var "ServiceId") (str (s ^. dId))
         , str . stripSuffix "/" $ stripPrefix "https://" (s ^. dRootUrl)
-        , str (s ^. dServicePath)
         ]
 
 scopeSig :: Name -> Decl
@@ -59,82 +58,154 @@ apiAlias n ls = TypeDecl noLoc n [] alias
         []   -> unit_tycon
         x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
 
--- type Method = :> ...
-verbAlias :: Name -> Method Solved -> Decl
-verbAlias n m
-    | _mSupportsMediaDownload m = TypeDecl noLoc n [] download
-    | otherwise                 = TypeDecl noLoc n [] rest
+verbAlias :: HasDescription a s => a -> Name -> Method Solved -> Decl
+verbAlias d n m = TypeDecl noLoc n [] $ servantOr meta (catMaybes [down, up])
   where
-    rest     = alias verb (path ++ qry params ++ media)
-    download = TyInfix rest (UnQual (sym ":<|>")) $
-        alias (TyApp (TyApp meth octet) (TyCon "Stream"))
-        (path ++ qry (Map.delete "alt" (_mParameters m)) ++ [alt] ++ media)
+    meta = path  $  metadataAlias m
+    down = path <$> downloadAlias m
+    up   = uploadAlias root m
 
-    alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r)
+    path = flip servantSub root
 
-    path :: [Type]
-    path = map match $ extractPath (_mPath m)
+    root = subPaths (d ^. dServicePath) ++ requestPath m (_mPath m)
+
+metadataAlias :: Method Solved -> Type
+metadataAlias m = servantSub (jsonVerb m) (params ++ media)
+  where
+    params = requestQuery m (requestQueryParams m)
+    media  = case _mRequest m of
+        Nothing -> []
+        Just b  ->
+            [ TyApp (TyApp (TyCon "ReqBody") jsonMedia)
+                    (tycon (ref b))
+            ]
+
+downloadAlias :: Method Solved -> Maybe Type
+downloadAlias m
+    | _mSupportsMediaDownload m = Just download
+    | otherwise                 = Nothing
+  where
+    download = servantSub downloadVerb (params ++ [altParam])
+
+    params = requestQuery m . Map.delete "alt" $ requestQueryParams m
+
+uploadAlias :: [Type] -> Method Solved -> Maybe Type
+uploadAlias sub m
+    | _mSupportsMediaUpload m = Just upload
+    | otherwise               = Nothing
+  where
+    upload = servantSub (jsonVerb m) (path ++ params ++ [uploadParam, media])
+
+    params = requestQuery m (requestQueryParams m)
+
+    path = case _mMediaUpload m of
+        Nothing -> sub
+        Just u  -> requestPath m (_muSimplePath u)
+
+    media = case _mRequest m of
+        Just b ->
+            TyApp (TyApp (TyApp (TyCon "MultipartRelated") jsonMedia)
+                         (tycon (ref b)))
+                  (TyCon "RequestBody")
+
+        Nothing ->
+            TyApp (TyApp (TyCon "ReqBody") streamMedia)
+                  (TyCon "RequestBody")
+
+requestPath :: Method Solved -> Text -> [Type]
+requestPath m = map go . extractPath
+  where
+    go (Left  t)      = sing t
+    go (Right (l, c)) = case Map.lookup l (_mParameters m) of
+        Nothing -> error $ "Unable to find path parameter " ++ show l
+        Just x  -> case c of
+            Nothing | x ^. iRepeated ->
+                TyApp (TyApp (TyCon "Captures")
+                             (sing (local l)))
+                      (terminalType (_type (_pParam x)))
+
+            Nothing ->
+                TyApp (TyApp (TyCon "Capture")
+                             (sing (local l)))
+                      (terminalType (_type (_pParam x)))
+
+            Just y  ->
+                TyApp (TyApp (TyApp (TyCon "CaptureMode")
+                                    (sing (local l)))
+                             (sing y))
+                      (terminalType (_type (_pParam x)))
+
+requestQuery :: Method Solved -> Map Local (Param Solved) -> [Type]
+requestQuery m xs = mapMaybe go $
+    orderParams fst (Map.toList xs) (_mParameterOrder m)
+  where
+    go (k, x) = case _pLocation x of
+        Query | x ^. iRepeated
+               -> Just $ TyApp (TyApp (TyCon "QueryParams") n) t
+        Query  -> Just $ TyApp (TyApp (TyCon "QueryParam")  n) t
+        Path   -> Nothing
       where
-        match (Left  t)      = sing t
-        match (Right (l, c)) =
-            case Map.lookup l (_mParameters m) of
-                Nothing -> error $ "Unable to find path parameter " ++ show l
-                Just x  ->
-                    case c of
-                        Nothing | x ^. iRepeated ->
-                            TyApp (TyApp (TyCon "Captures")
-                                         (sing (local l)))
-                                  (terminalType (_type (_pParam x)))
+        t = terminalType (_type (_pParam x))
+        n = sing (local k)
 
-                        Nothing ->
-                            TyApp (TyApp (TyCon "Capture")
-                                         (sing (local l)))
-                                  (terminalType (_type (_pParam x)))
+requestQueryParams :: Method a -> Map Local (Param a)
+requestQueryParams = Map.filter ((/= Path) . _pLocation) . _mParameters
 
-                        Just y  ->
-                            TyApp (TyApp (TyApp (TyCon "CaptureMode")
-                                                (sing (local l)))
-                                         (sing y))
-                                  (terminalType (_type (_pParam x)))
+servantOr, servantSub :: Type -> [Type] -> Type
+servantOr  = foldl' (\l r -> TyInfix l (UnQual (sym ":<|>")) r)
+servantSub = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r)
 
+jsonVerb :: Method a -> Type
+jsonVerb m =
+    TyApp (TyApp (httpMethod m) jsonMedia)
+        $ maybe (TyCon "()") (tycon . ref) (_mResponse m)
 
-    qry xs = mapMaybe f $ orderParams fst (Map.toList xs) (_mParameterOrder m)
-      where
-        f (k, x) =
-           let t = terminalType (_type (_pParam x))
-               n = sing (local k)
-            in case _pLocation x of
-                Query | x ^. iRepeated
-                       -> Just $ TyApp (TyApp (TyCon "QueryParams") n) t
-                Query  -> Just $ TyApp (TyApp (TyCon "QueryParam")  n) t
-                Path   -> Nothing
+downloadVerb :: Type
+downloadVerb = TyApp (TyApp (TyCon "Get") streamMedia) (TyCon "Stream")
 
-    media :: [Type]
-    media | Just b <- _mRequest m
-          , _mSupportsMediaUpload m =
-              [TyApp (TyApp (TyApp (TyCon "MultipartRelated") json)
-                            (tycon (ref b)))
-                     (TyCon "Body")]
+httpMethod :: Method a -> Type
+httpMethod = TyCon . unqual . Text.unpack . Text.toTitle . _mHttpMethod
 
-          | Just b <- _mRequest m =
-              [TyApp (TyApp (TyCon "ReqBody") json) (tycon (ref b))]
+subPaths :: Text -> [Type]
+subPaths = map sing . filter (not . Text.null) . Text.split (== '/')
 
-          | _mSupportsMediaUpload m =
-              [TyApp (TyApp (TyCon "ReqBody") octet) (TyCon "Body")]
+jsonMedia   = tylist ["JSON"]
+streamMedia = tylist ["OctetStream"]
 
-          | otherwise = []
+altParam :: Type
+altParam =
+    TyApp (TyApp (TyCon "QueryParam") (sing "alt"))
+          (TyCon "AltMedia")
 
-    verb = TyApp (TyApp meth json) $
-        maybe (TyCon "()") (tycon . ref) (_mResponse m)
+uploadParam :: Type
+uploadParam =
+    TyApp (TyApp (TyCon "QueryParam") (sing "uploadType"))
+          (TyCon "AltMedia")
 
-    meth  = TyCon . unqual . Text.unpack $ Text.toTitle (_mHttpMethod m)
+metadataPat = pattern 1
+downloadPat = pattern 2
+uploadPat   = pattern 3
 
-    octet = tylist ["OctetStream"]
-    json  = tylist ["JSON"]
+pattern n m = case (n, down, up) of
+    (1, True, True) -> infixOr (infixOr go   wild) wild
+    (2, True, True) -> infixOr (infixOr wild go)   wild
+    (_, True, True) -> infixOr (infixOr wild wild) go
 
-    alt = TyApp (TyApp (TyCon "QueryParam") (sing "alt")) (TyCon "AltMedia")
+    (1, True, _)    -> infixOr go   wild
+    (_, True, _)    -> infixOr wild go
 
-    params = Map.filter ((/= Path) . _pLocation) (_mParameters m)
+    (1, _,    True) -> infixOr go   wild
+    (_, _,    True) -> infixOr wild go
+
+    (_, _,    _)    -> go
+  where
+    down = _mSupportsMediaDownload m
+    up   = _mSupportsMediaUpload   m
+
+    go   = pvar "go"
+    wild = PWildCard
+
+    infixOr l r = PInfixApp l (UnQual (sym ":<|>")) r
 
 downloadDecl :: Global
              -> Prefix
@@ -144,19 +215,48 @@ downloadDecl :: Global
              -> Method Solved
              -> Decl
 downloadDecl n p api url fs m =
-    googleRequestDecl n ty rs alt p api url fs m pat prec
+    googleRequestDecl n ty rs [alt] p api url fs m pat prec
   where
     ty = TyApp (TyCon "Download") (tycon n)
     rs = InsType noLoc (TyApp (TyCon "Rs") ty) (TyCon "Stream")
 
-    alt = Just (var "AltMedia")
-
-    pat | _mSupportsMediaDownload m = PInfixApp PWildCard (UnQual (sym ":<|>")) (pvar "go")
-        | otherwise                 = pvar "go"
+    alt = app (var "Just") (var "AltMedia")
+    pat = downloadPat m
 
     prec = PApp (UnQual "Download")
         [ PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
         ]
+
+uploadDecl :: Global
+             -> Prefix
+             -> Name
+             -> Name
+             -> [Local]
+             -> Method Solved
+             -> Decl
+uploadDecl n p api url fs m =
+    googleRequestDecl n ty rs extras p api url fs m pat prec
+  where
+    ty = TyApp (TyCon "Upload") (tycon n)
+    rs = InsType noLoc (TyApp (TyCon "Rs") ty) $
+        maybe unit_tycon (tycon . ref) (_mResponse m)
+
+    extras = maybeToList alt ++ [upl, payload, var media]
+      where
+        upl = app (var "Just") (var "AltMedia")
+        alt = app (var "Just") . var . name . Text.unpack . alternate <$>
+             (Map.lookup "alt" (_mParameters m) >>= view iDefault)
+
+        payload = var (fname p "payload")
+
+    pat = uploadPat m
+
+    prec = PApp (UnQual "Upload")
+        [ PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
+        , PVar media
+        ]
+
+    media = name "body"
 
 requestDecl :: Global
             -> Prefix
@@ -166,23 +266,28 @@ requestDecl :: Global
             -> Method Solved
             -> Decl
 requestDecl n p api url fs m =
-    googleRequestDecl n (tycon n) rs alt p api url fs m pat prec
+    googleRequestDecl n (tycon n) rs extras p api url fs m pat prec
   where
     rs = InsType noLoc (TyApp (TyCon "Rs") (tycon n)) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
 
-    alt = var . name . Text.unpack . alternate <$>
-        (Map.lookup "alt" (_mParameters m) >>= view iDefault)
+    extras = catMaybes [alt, payload]
+      where
+        alt = app (var "Just") . var . name . Text.unpack . alternate <$>
+             (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 
-    pat | _mSupportsMediaDownload m = PInfixApp (pvar "go") (UnQual (sym ":<|>")) PWildCard
-        | otherwise                 = pvar "go"
+        payload
+            | isJust (_mRequest m) = Just $ var (fname p "payload")
+            | otherwise            = Nothing
+
+    pat = metadataPat m
 
     prec = PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
 
 googleRequestDecl :: Global
                   -> Type
                   -> InstDecl
-                  -> Maybe Exp
+                  -> [Exp]
                   -> Prefix
                   -> Name
                   -> Name
@@ -191,7 +296,7 @@ googleRequestDecl :: Global
                   -> Pat
                   -> Pat
                   -> Decl
-googleRequestDecl g n assoc alt p api url fields m pat prec =
+googleRequestDecl g n assoc extras p api url fields m pat prec =
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n]
         [ assoc
         , request
@@ -210,11 +315,7 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
                     ]
             ]
 
-        rhs = UnGuardedRhs . appFun (var "go") $ map go fs'
-            ++ maybeToList (app (var "Just") <$> alt)
-            ++ maybeToList (go <$> rq)
-            ++ maybeToList (go <$> pay)
-            ++ [var url]
+        rhs = UnGuardedRhs . appFun (var "go") $ map go fs ++ extras ++ [var url]
           where
             go l = case Map.lookup l ps of
                 Just p | _pLocation p == Query
@@ -233,12 +334,6 @@ googleRequestDecl g n assoc alt p api url fields m pat prec =
 
             ps = _mParameters m
             v  = var . fname p
-
-            (fs', rq) | Just _ <- _mRequest m = (delete "payload" fs, Just "payload")
-                      | otherwise             = (fs, Nothing)
-
-            pay | _mSupportsMediaUpload m = Just "media"
-                | otherwise               = Nothing
 
     fs = delete "alt"
        . orderParams id (Map.keys (_mParameters m))
@@ -451,7 +546,7 @@ externalLit = \case
     Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
-    RqBody     -> TyCon "Body"
+    RqBody     -> TyCon "RequestBody"
     RsBody     -> TyCon "Stream"
     JSONValue  -> TyCon "JSONValue"
 
@@ -472,7 +567,7 @@ internalLit = \case
     Int64    -> TyCon "Int64"
 
     Alt t      -> TyCon (unqual (Text.unpack t))
-    RqBody     -> TyCon "Body"
+    RqBody     -> TyCon "RequestBody"
     RsBody     -> TyCon "Stream"
     JSONValue  -> TyCon "JSONValue"
 

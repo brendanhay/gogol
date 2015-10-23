@@ -158,7 +158,7 @@ method qs suf m@Method {..} = do
     b   <- body typ
 
     let params = ps <> qs
-        fields = Map.delete "alt" $ b (upload (Map.map _pParam params))
+        fields = Map.delete "alt" $ b (Map.map _pParam params)
 
     void $ insert typ (SObj schemaInfo (Obj Nothing fields))
     pure $! m { _mParameters = params }
@@ -172,24 +172,6 @@ method qs suf m@Method {..} = do
             let f = "payload" -- localise (ref x)
             g <- localSchema p f (Fix (SRef bodyInfo x))
             pure (Map.insert f g)
-
-    -- FIXME: Add maxSize to media field description.
-    upload
-        | _mSupportsMediaUpload = Map.insert "media" "Body"
-        | otherwise             = id
-
-    -- download = id
-
-    -- media
-    --   insert 'media' property of type 'Body'
-    --   insert 'mediaType' property of type 'MediaType'
-
-    --   ensure the rendering of api aliases gets request bodies
-    --   set to 'Multipart'
-
-    --   error if multipart + simple is not supported.
-
-    --   otherwise ensure servants 'ReqBody' is set.
 
 insert :: Global -> Schema Global -> AST Global
 insert g s = do
