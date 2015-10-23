@@ -45,6 +45,14 @@ module Network.Google
     -- ** Media Downloads
     , download
 
+    -- ** Media Uploads
+    , upload
+
+    , ToBody      (..)
+    , RequestBody
+    , requestBodySource
+    , requestBodySourceChunked
+
     -- ** Service Configuration
     -- ** Overriding Defaults
     , configure
@@ -53,10 +61,6 @@ module Network.Google
     -- *** Scoped Actions
     , reconfigure
     , timeout
-
-    -- ** Media Uploads
-    , Body
-    , ToBody      (..)
 
     -- * Running Asynchronous Actions
     -- $async
@@ -109,6 +113,8 @@ import           Network.Google.Internal.HTTP
 import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
 import           Network.Google.Types
+import           Network.HTTP.Conduit           (requestBodySource,
+                                                 requestBodySourceChunked)
 
 newtype Google a = Google { unGoogle :: ReaderT Env (ResourceT IO) a }
     deriving
@@ -189,6 +195,15 @@ download :: (MonadGoogle m, GoogleRequest (Download a))
          => a
          -> m (Rs (Download a))
 download = send . Download
+
+-- | Send a request with an attached multipart/related media upload.
+--
+-- Throws 'Error'.
+upload :: (MonadGoogle m, GoogleRequest (Upload a))
+       => a
+       -> RequestBody
+       -> m (Rs (Upload a))
+upload = send . Upload
 
 hoistError :: MonadThrow m => Either Error a -> m a
 hoistError = either (throwingM _Error) return

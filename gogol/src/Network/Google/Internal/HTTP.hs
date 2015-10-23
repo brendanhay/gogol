@@ -120,10 +120,7 @@ getContent :: MonadIO m
            -> m ([Header] -> [Header], RequestBody)
 getContent = \case
     Nothing           -> pure (id, mempty)
-    Just (Body t s)   -> pure
-        ( ((hContentType, renderHeader t) :)
-        , Client.requestBodySourceChunked s
-        )
+    Just (Body t s)   -> pure (((hContentType, renderHeader t) :), s)
     Just (Related ps) -> do
         b <- genBoundary
         pure ( (multipartHeader b :)

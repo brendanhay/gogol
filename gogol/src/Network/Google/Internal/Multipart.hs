@@ -72,5 +72,5 @@ renderParts b = (<> part b) . foldMap go
            <> copy ": "
            <> copy v) hs
         <> copy "\r\n\r\n"
-        <> Client.requestBodySourceChunked x
+        <> x
         <> copy "\r\n"

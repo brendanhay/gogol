@@ -187,9 +187,9 @@ downloadPat = pattern 2
 uploadPat   = pattern 3
 
 pattern n m = case (n, down, up) of
-    (1, True, True) -> infixOr (infixOr go   wild) wild
-    (2, True, True) -> infixOr (infixOr wild go)   wild
-    (_, True, True) -> infixOr (infixOr wild wild) go
+    (1, True, True) -> infixOr go   (infixOr wild wild)
+    (2, True, True) -> infixOr wild (infixOr go   wild)
+    (_, True, True) -> infixOr wild (infixOr wild go)
 
     (1, True, _)    -> infixOr go   wild
     (_, True, _)    -> infixOr wild go

@@ -48,7 +48,7 @@ import           Data.Text.Lazy.Builder                (Builder)
 import qualified Data.Text.Lazy.Builder                as Build
 import           GHC.Generics
 import           GHC.TypeLits
-import           Network.HTTP.Client                   (HttpException)
+import           Network.HTTP.Client                   (HttpException, RequestBody (..))
 import           Network.HTTP.Media                    hiding (Accept)
 import           Network.HTTP.Types                    hiding (Header)
 import qualified Network.HTTP.Types                    as HTTP
@@ -83,8 +83,7 @@ instance ToJSON OAuthToken where
 
 newtype Download a = Download a
 
-_Download :: Iso' (Download a) a
-_Download = iso (\(Download x) -> x) Download
+data Upload a = Upload a RequestBody
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -97,7 +96,6 @@ _Default = iso f Just
     f (Just x) = x
     f Nothing  = mempty
 
-type Body   = Source IO ByteString
 type Stream = ResumableSource (ResourceT IO) ByteString
 
 newtype ClientId = ClientId { clientIdToText :: Text }
@@ -167,29 +165,22 @@ instance AsError Error where
 data Service = Service
     { _svcId      :: !ServiceId
     , _svcHost    :: !ByteString
-    , _svcPath    :: !Builder
     , _svcPort    :: !Int
     , _svcSecure  :: !Bool
     , _svcTimeout :: !(Maybe Seconds)
-    , _svcScopes  :: ![OAuthScope]
     }
 
-defaultService :: ServiceId -> ByteString -> Builder -> Service
-defaultService i h p = Service
+defaultService :: ServiceId -> ByteString -> Service
+defaultService i h = Service
     { _svcId      = i
     , _svcHost    = h
-    , _svcPath    = p
     , _svcPort    = 443
     , _svcSecure  = True
     , _svcTimeout = Just 70
-    , _svcScopes  = []
     }
 
 serviceHost :: Lens' Service ByteString
 serviceHost = lens _svcHost (\s a -> s { _svcHost = a })
-
-servicePath :: Lens' Service Builder
-servicePath = lens _svcPath (\s a -> s { _svcPath = a })
 
 servicePort :: Lens' Service Int
 servicePort = lens _svcPort (\s a -> s { _svcPort = a })
@@ -201,10 +192,10 @@ serviceTimeout :: Lens' Service (Maybe Seconds)
 serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
 
 -- | A single part of a multipart message.
-data Part = Part MediaType [(HeaderName, ByteString)] Body
+data Part = Part MediaType [(HeaderName, ByteString)] RequestBody
 
 data Payload
-    = Body    !MediaType !Body
+    = Body    !MediaType !RequestBody
     | Related ![Part]
 
 -- | An intermediary request builder.
@@ -221,7 +212,7 @@ instance Monoid Request where
         (_rqPath    a <>  "/" <> _rqPath b)
         (_rqQuery   a <>  _rqQuery b)
         (_rqHeaders a <>  _rqHeaders b)
-        (_rqBody b <|> _rqBody a)
+        (_rqBody    b <|> _rqBody a)
 
 appendPath :: Request -> Builder -> Request
 appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
@@ -240,7 +231,7 @@ appendHeader rq k (Just v) = rq
     { _rqHeaders = DList.snoc (_rqHeaders rq) (k, Text.encodeUtf8 v)
     }
 
-setBody :: Request -> MediaType -> Body -> Request
+setBody :: Request -> MediaType -> RequestBody -> Request
 setBody rq c x = rq { _rqBody = Just (Body c x) }
 
 setRelated :: Request -> [Part] -> Request
@@ -282,25 +273,25 @@ client f cs m ns rq s = Client
     }
 
 class Accept c => ToBody c a where
-    toBody :: Proxy c -> a -> Body
+    toBody :: Proxy c -> a -> RequestBody
 
-instance ToBody OctetStream Body where
+instance ToBody OctetStream RequestBody where
     toBody Proxy = id
 
 instance ToBody OctetStream ByteString where
-    toBody Proxy = CL.sourceList . (:[])
+    toBody Proxy = RequestBodyBS
 
 instance ToBody OctetStream LBS.ByteString where
-    toBody Proxy = CL.sourceList . LBS.toChunks
+    toBody Proxy = RequestBodyLBS
 
 instance ToBody PlainText ByteString where
-    toBody Proxy = CL.sourceList . (:[])
+    toBody Proxy = RequestBodyBS
 
 instance ToBody PlainText LBS.ByteString where
-    toBody Proxy = CL.sourceList . LBS.toChunks
+    toBody Proxy = RequestBodyLBS
 
 instance ToJSON a => ToBody JSON a where
-    toBody Proxy = CL.sourceList . LBS.toChunks . encode
+    toBody Proxy = RequestBodyLBS . encode
 
 class Accept c => FromStream c a where
     fromStream :: Proxy c -> Stream -> ResourceT IO (Either String a)
