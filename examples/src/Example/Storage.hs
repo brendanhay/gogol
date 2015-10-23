@@ -29,5 +29,5 @@ example bkt f = do
 
     runResourceT . runGoogle e $ do
         _ <- upload   (objectsInsert bkt obj & oiName ?~ key) src
-        _ <- download (objectsInsert bkt obj & oiName ?~ key)
+        _ <- download (objectsGet bkt key)
         pure ()
