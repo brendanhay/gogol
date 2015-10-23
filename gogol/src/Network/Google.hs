@@ -203,7 +203,7 @@ upload :: (MonadGoogle m, GoogleRequest (Upload a))
        => a
        -> RequestBody
        -> m (Rs (Upload a))
-upload = send . Upload
+upload x = send . Upload x
 
 hoistError :: MonadThrow m => Either Error a -> m a
 hoistError = either (throwingM _Error) return

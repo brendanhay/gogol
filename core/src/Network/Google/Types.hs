@@ -165,6 +165,7 @@ instance AsError Error where
 data Service = Service
     { _svcId      :: !ServiceId
     , _svcHost    :: !ByteString
+    , _svcPath    :: !Builder
     , _svcPort    :: !Int
     , _svcSecure  :: !Bool
     , _svcTimeout :: !(Maybe Seconds)
@@ -174,6 +175,7 @@ defaultService :: ServiceId -> ByteString -> Service
 defaultService i h = Service
     { _svcId      = i
     , _svcHost    = h
+    , _svcPath    = mempty
     , _svcPort    = 443
     , _svcSecure  = True
     , _svcTimeout = Just 70
@@ -181,6 +183,9 @@ defaultService i h = Service
 
 serviceHost :: Lens' Service ByteString
 serviceHost = lens _svcHost (\s a -> s { _svcHost = a })
+
+servicePath :: Lens' Service Builder
+servicePath = lens _svcPath (\s a -> s { _svcPath = a })
 
 servicePort :: Lens' Service Int
 servicePort = lens _svcPort (\s a -> s { _svcPort = a })
