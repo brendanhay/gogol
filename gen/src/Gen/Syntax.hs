@@ -241,13 +241,15 @@ uploadDecl n p api url fs m =
     rs = InsType noLoc (TyApp (TyCon "Rs") ty) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
 
-    extras = maybeToList alt ++ [upl, payload, var media]
+    extras = maybeToList alt ++ [upl] ++ payload ++ [var media]
       where
         upl = app (var "Just") (var "AltMedia")
         alt = app (var "Just") . var . name . Text.unpack . alternate <$>
              (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 
-        payload = var (fname p "payload")
+        payload
+            | isJust (_mRequest m) = [var (fname p "payload")]
+            | otherwise            = []
 
     pat = uploadPat m
 
