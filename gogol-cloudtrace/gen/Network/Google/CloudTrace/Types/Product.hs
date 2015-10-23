@@ -60,12 +60,13 @@ traceSpanLabels
     -> TraceSpanLabels
 traceSpanLabels pTslAddtional_ =
     TraceSpanLabels
-    { _tslAddtional = pTslAddtional_
+    { _tslAddtional = _Coerce # pTslAddtional_
     }
 
 tslAddtional :: Lens' TraceSpanLabels (HashMap Text Text)
 tslAddtional
   = lens _tslAddtional (\ s a -> s{_tslAddtional = a})
+      . _Coerce
 
 instance FromJSON TraceSpanLabels where
         parseJSON

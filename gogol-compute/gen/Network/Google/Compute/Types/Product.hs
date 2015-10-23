@@ -256,7 +256,7 @@ machineTypeAggregatedListItems
     -> MachineTypeAggregatedListItems
 machineTypeAggregatedListItems pMtaliAddtional_ =
     MachineTypeAggregatedListItems
-    { _mtaliAddtional = pMtaliAddtional_
+    { _mtaliAddtional = _Coerce # pMtaliAddtional_
     }
 
 -- | [Output Only] Name of the scope containing this set of machine types.
@@ -264,6 +264,7 @@ mtaliAddtional :: Lens' MachineTypeAggregatedListItems (HashMap Text MachineType
 mtaliAddtional
   = lens _mtaliAddtional
       (\ s a -> s{_mtaliAddtional = a})
+      . _Coerce
 
 instance FromJSON MachineTypeAggregatedListItems
          where
@@ -293,7 +294,7 @@ diskTypeAggregatedListItems
     -> DiskTypeAggregatedListItems
 diskTypeAggregatedListItems pDtaliAddtional_ =
     DiskTypeAggregatedListItems
-    { _dtaliAddtional = pDtaliAddtional_
+    { _dtaliAddtional = _Coerce # pDtaliAddtional_
     }
 
 -- | [Output Only] Name of the scope containing this set of disk types.
@@ -301,6 +302,7 @@ dtaliAddtional :: Lens' DiskTypeAggregatedListItems (HashMap Text DiskTypesScope
 dtaliAddtional
   = lens _dtaliAddtional
       (\ s a -> s{_dtaliAddtional = a})
+      . _Coerce
 
 instance FromJSON DiskTypeAggregatedListItems where
         parseJSON
@@ -554,7 +556,7 @@ autoscalerAggregatedListItems
     -> AutoscalerAggregatedListItems
 autoscalerAggregatedListItems pAaliAddtional_ =
     AutoscalerAggregatedListItems
-    { _aaliAddtional = pAaliAddtional_
+    { _aaliAddtional = _Coerce # pAaliAddtional_
     }
 
 -- | Name of the scope containing this set of autoscalers.
@@ -562,6 +564,7 @@ aaliAddtional :: Lens' AutoscalerAggregatedListItems (HashMap Text AutoscalersSc
 aaliAddtional
   = lens _aaliAddtional
       (\ s a -> s{_aaliAddtional = a})
+      . _Coerce
 
 instance FromJSON AutoscalerAggregatedListItems where
         parseJSON
@@ -1877,7 +1880,7 @@ instanceGroupAggregatedListItems
     -> InstanceGroupAggregatedListItems
 instanceGroupAggregatedListItems pIgaliAddtional_ =
     InstanceGroupAggregatedListItems
-    { _igaliAddtional = pIgaliAddtional_
+    { _igaliAddtional = _Coerce # pIgaliAddtional_
     }
 
 -- | The name of the scope that contains this set of instance groups.
@@ -1885,6 +1888,7 @@ igaliAddtional :: Lens' InstanceGroupAggregatedListItems (HashMap Text InstanceG
 igaliAddtional
   = lens _igaliAddtional
       (\ s a -> s{_igaliAddtional = a})
+      . _Coerce
 
 instance FromJSON InstanceGroupAggregatedListItems
          where
@@ -4928,7 +4932,7 @@ instanceAggregatedListItems
     -> InstanceAggregatedListItems
 instanceAggregatedListItems pIaliAddtional_ =
     InstanceAggregatedListItems
-    { _ialiAddtional = pIaliAddtional_
+    { _ialiAddtional = _Coerce # pIaliAddtional_
     }
 
 -- | Name of the scope containing this set of instances.
@@ -4936,6 +4940,7 @@ ialiAddtional :: Lens' InstanceAggregatedListItems (HashMap Text InstancesScoped
 ialiAddtional
   = lens _ialiAddtional
       (\ s a -> s{_ialiAddtional = a})
+      . _Coerce
 
 instance FromJSON InstanceAggregatedListItems where
         parseJSON
@@ -7034,7 +7039,7 @@ targetInstanceAggregatedListItems
     -> TargetInstanceAggregatedListItems
 targetInstanceAggregatedListItems pTialiAddtional_ =
     TargetInstanceAggregatedListItems
-    { _tialiAddtional = pTialiAddtional_
+    { _tialiAddtional = _Coerce # pTialiAddtional_
     }
 
 -- | Name of the scope containing this set of target instances.
@@ -7042,6 +7047,7 @@ tialiAddtional :: Lens' TargetInstanceAggregatedListItems (HashMap Text TargetIn
 tialiAddtional
   = lens _tialiAddtional
       (\ s a -> s{_tialiAddtional = a})
+      . _Coerce
 
 instance FromJSON TargetInstanceAggregatedListItems
          where
@@ -8067,7 +8073,7 @@ diskAggregatedListItems
     -> DiskAggregatedListItems
 diskAggregatedListItems pDaliAddtional_ =
     DiskAggregatedListItems
-    { _daliAddtional = pDaliAddtional_
+    { _daliAddtional = _Coerce # pDaliAddtional_
     }
 
 -- | [Output Only] Name of the scope containing this set of disks.
@@ -8075,6 +8081,7 @@ daliAddtional :: Lens' DiskAggregatedListItems (HashMap Text DisksScopedList)
 daliAddtional
   = lens _daliAddtional
       (\ s a -> s{_daliAddtional = a})
+      . _Coerce
 
 instance FromJSON DiskAggregatedListItems where
         parseJSON
@@ -8339,7 +8346,7 @@ instanceGroupManagerAggregatedListItems
     -> InstanceGroupManagerAggregatedListItems
 instanceGroupManagerAggregatedListItems pIgmaliAddtional_ =
     InstanceGroupManagerAggregatedListItems
-    { _igmaliAddtional = pIgmaliAddtional_
+    { _igmaliAddtional = _Coerce # pIgmaliAddtional_
     }
 
 -- | [Output Only] The name of the scope that contains this set of managed
@@ -8348,6 +8355,7 @@ igmaliAddtional :: Lens' InstanceGroupManagerAggregatedListItems (HashMap Text I
 igmaliAddtional
   = lens _igmaliAddtional
       (\ s a -> s{_igmaliAddtional = a})
+      . _Coerce
 
 instance FromJSON
          InstanceGroupManagerAggregatedListItems where
@@ -8694,7 +8702,7 @@ forwardingRuleAggregatedListItems
     -> ForwardingRuleAggregatedListItems
 forwardingRuleAggregatedListItems pFraliAddtional_ =
     ForwardingRuleAggregatedListItems
-    { _fraliAddtional = pFraliAddtional_
+    { _fraliAddtional = _Coerce # pFraliAddtional_
     }
 
 -- | Name of the scope containing this set of addresses.
@@ -8702,6 +8710,7 @@ fraliAddtional :: Lens' ForwardingRuleAggregatedListItems (HashMap Text Forwardi
 fraliAddtional
   = lens _fraliAddtional
       (\ s a -> s{_fraliAddtional = a})
+      . _Coerce
 
 instance FromJSON ForwardingRuleAggregatedListItems
          where
@@ -8732,7 +8741,7 @@ operationAggregatedListItems
     -> OperationAggregatedListItems
 operationAggregatedListItems pOaliAddtional_ =
     OperationAggregatedListItems
-    { _oaliAddtional = pOaliAddtional_
+    { _oaliAddtional = _Coerce # pOaliAddtional_
     }
 
 -- | [Output Only] Name of the scope containing this set of operations.
@@ -8740,6 +8749,7 @@ oaliAddtional :: Lens' OperationAggregatedListItems (HashMap Text OperationsScop
 oaliAddtional
   = lens _oaliAddtional
       (\ s a -> s{_oaliAddtional = a})
+      . _Coerce
 
 instance FromJSON OperationAggregatedListItems where
         parseJSON
@@ -9066,7 +9076,7 @@ targetPoolAggregatedListItems
     -> TargetPoolAggregatedListItems
 targetPoolAggregatedListItems pTpaliAddtional_ =
     TargetPoolAggregatedListItems
-    { _tpaliAddtional = pTpaliAddtional_
+    { _tpaliAddtional = _Coerce # pTpaliAddtional_
     }
 
 -- | Name of the scope containing this set of target pools.
@@ -9074,6 +9084,7 @@ tpaliAddtional :: Lens' TargetPoolAggregatedListItems (HashMap Text TargetPoolsS
 tpaliAddtional
   = lens _tpaliAddtional
       (\ s a -> s{_tpaliAddtional = a})
+      . _Coerce
 
 instance FromJSON TargetPoolAggregatedListItems where
         parseJSON
@@ -9153,13 +9164,14 @@ addressAggregatedListItems
     -> AddressAggregatedListItems
 addressAggregatedListItems pAAddtional_ =
     AddressAggregatedListItems
-    { _aAddtional = pAAddtional_
+    { _aAddtional = _Coerce # pAAddtional_
     }
 
 -- | [Output Only] Name of the scope containing this set of addresses.
 aAddtional :: Lens' AddressAggregatedListItems (HashMap Text AddressesScopedList)
 aAddtional
-  = lens _aAddtional (\ s a -> s{_aAddtional = a})
+  = lens _aAddtional (\ s a -> s{_aAddtional = a}) .
+      _Coerce
 
 instance FromJSON AddressAggregatedListItems where
         parseJSON
@@ -11894,7 +11906,7 @@ targetVPNGatewayAggregatedListItems
     -> TargetVPNGatewayAggregatedListItems
 targetVPNGatewayAggregatedListItems pTvgaliAddtional_ =
     TargetVPNGatewayAggregatedListItems
-    { _tvgaliAddtional = pTvgaliAddtional_
+    { _tvgaliAddtional = _Coerce # pTvgaliAddtional_
     }
 
 -- | [Output Only] Name of the scope containing this set of target vpn
@@ -11903,6 +11915,7 @@ tvgaliAddtional :: Lens' TargetVPNGatewayAggregatedListItems (HashMap Text Targe
 tvgaliAddtional
   = lens _tvgaliAddtional
       (\ s a -> s{_tvgaliAddtional = a})
+      . _Coerce
 
 instance FromJSON TargetVPNGatewayAggregatedListItems
          where
@@ -15190,7 +15203,7 @@ vpnTunnelAggregatedListItems
     -> VPNTunnelAggregatedListItems
 vpnTunnelAggregatedListItems pVtaliAddtional_ =
     VPNTunnelAggregatedListItems
-    { _vtaliAddtional = pVtaliAddtional_
+    { _vtaliAddtional = _Coerce # pVtaliAddtional_
     }
 
 -- | Name of the scope containing this set of vpn tunnels.
@@ -15198,6 +15211,7 @@ vtaliAddtional :: Lens' VPNTunnelAggregatedListItems (HashMap Text VPNTunnelsSco
 vtaliAddtional
   = lens _vtaliAddtional
       (\ s a -> s{_vtaliAddtional = a})
+      . _Coerce
 
 instance FromJSON VPNTunnelAggregatedListItems where
         parseJSON

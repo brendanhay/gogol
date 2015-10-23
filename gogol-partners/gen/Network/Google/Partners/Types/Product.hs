@@ -1142,13 +1142,14 @@ logMessageRequestClientInfo
     -> LogMessageRequestClientInfo
 logMessageRequestClientInfo pLmrciAddtional_ =
     LogMessageRequestClientInfo
-    { _lmrciAddtional = pLmrciAddtional_
+    { _lmrciAddtional = _Coerce # pLmrciAddtional_
     }
 
 lmrciAddtional :: Lens' LogMessageRequestClientInfo (HashMap Text Text)
 lmrciAddtional
   = lens _lmrciAddtional
       (\ s a -> s{_lmrciAddtional = a})
+      . _Coerce
 
 instance FromJSON LogMessageRequestClientInfo where
         parseJSON

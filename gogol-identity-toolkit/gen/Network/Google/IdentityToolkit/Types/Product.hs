@@ -1046,13 +1046,14 @@ identitytoolkitRelyingPartyGetPublicKeysResponse
     -> IdentitytoolkitRelyingPartyGetPublicKeysResponse
 identitytoolkitRelyingPartyGetPublicKeysResponse pIrpgpkrAddtional_ =
     IdentitytoolkitRelyingPartyGetPublicKeysResponse
-    { _irpgpkrAddtional = pIrpgpkrAddtional_
+    { _irpgpkrAddtional = _Coerce # pIrpgpkrAddtional_
     }
 
 irpgpkrAddtional :: Lens' IdentitytoolkitRelyingPartyGetPublicKeysResponse (HashMap Text Text)
 irpgpkrAddtional
   = lens _irpgpkrAddtional
       (\ s a -> s{_irpgpkrAddtional = a})
+      . _Coerce
 
 instance FromJSON
          IdentitytoolkitRelyingPartyGetPublicKeysResponse

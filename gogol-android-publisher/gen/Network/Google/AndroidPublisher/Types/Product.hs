@@ -37,7 +37,7 @@ inAppProductListings
     -> InAppProductListings
 inAppProductListings pIaplAddtional_ =
     InAppProductListings
-    { _iaplAddtional = pIaplAddtional_
+    { _iaplAddtional = _Coerce # pIaplAddtional_
     }
 
 -- | The language of the localized data, as defined by BCP 47. i.e.:
@@ -46,6 +46,7 @@ iaplAddtional :: Lens' InAppProductListings (HashMap Text InAppProductListing)
 iaplAddtional
   = lens _iaplAddtional
       (\ s a -> s{_iaplAddtional = a})
+      . _Coerce
 
 instance FromJSON InAppProductListings where
         parseJSON
@@ -1301,7 +1302,7 @@ inAppProductPrices
     -> InAppProductPrices
 inAppProductPrices pIAppAddtional_ =
     InAppProductPrices
-    { _iAppAddtional = pIAppAddtional_
+    { _iAppAddtional = _Coerce # pIAppAddtional_
     }
 
 -- | Region code, as defined by ISO 3166-2.
@@ -1309,6 +1310,7 @@ iAppAddtional :: Lens' InAppProductPrices (HashMap Text Price)
 iAppAddtional
   = lens _iAppAddtional
       (\ s a -> s{_iAppAddtional = a})
+      . _Coerce
 
 instance FromJSON InAppProductPrices where
         parseJSON

@@ -227,13 +227,14 @@ objectMetadata
     -> ObjectMetadata
 objectMetadata pOmAddtional_ =
     ObjectMetadata
-    { _omAddtional = pOmAddtional_
+    { _omAddtional = _Coerce # pOmAddtional_
     }
 
 -- | An individual metadata entry.
 omAddtional :: Lens' ObjectMetadata (HashMap Text Text)
 omAddtional
-  = lens _omAddtional (\ s a -> s{_omAddtional = a})
+  = lens _omAddtional (\ s a -> s{_omAddtional = a}) .
+      _Coerce
 
 instance FromJSON ObjectMetadata where
         parseJSON
@@ -1237,13 +1238,14 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams
-    { _cpAddtional = pCpAddtional_
+    { _cpAddtional = _Coerce # pCpAddtional_
     }
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
 cpAddtional
-  = lens _cpAddtional (\ s a -> s{_cpAddtional = a})
+  = lens _cpAddtional (\ s a -> s{_cpAddtional = a}) .
+      _Coerce
 
 instance FromJSON ChannelParams where
         parseJSON

@@ -69,13 +69,14 @@ restDescriptionParameters
     -> RestDescriptionParameters
 restDescriptionParameters pRdpAddtional_ =
     RestDescriptionParameters
-    { _rdpAddtional = pRdpAddtional_
+    { _rdpAddtional = _Coerce # pRdpAddtional_
     }
 
 -- | Description of a single parameter.
 rdpAddtional :: Lens' RestDescriptionParameters (HashMap Text JSONSchema)
 rdpAddtional
   = lens _rdpAddtional (\ s a -> s{_rdpAddtional = a})
+      . _Coerce
 
 instance FromJSON RestDescriptionParameters where
         parseJSON
@@ -360,7 +361,7 @@ restDescriptionAuthOAuth2Scopes
     -> RestDescriptionAuthOAuth2Scopes
 restDescriptionAuthOAuth2Scopes pRdaoasAddtional_ =
     RestDescriptionAuthOAuth2Scopes
-    { _rdaoasAddtional = pRdaoasAddtional_
+    { _rdaoasAddtional = _Coerce # pRdaoasAddtional_
     }
 
 -- | The scope value.
@@ -368,6 +369,7 @@ rdaoasAddtional :: Lens' RestDescriptionAuthOAuth2Scopes (HashMap Text RestDescr
 rdaoasAddtional
   = lens _rdaoasAddtional
       (\ s a -> s{_rdaoasAddtional = a})
+      . _Coerce
 
 instance FromJSON RestDescriptionAuthOAuth2Scopes
          where
@@ -397,13 +399,14 @@ restDescriptionMethods
     -> RestDescriptionMethods
 restDescriptionMethods pRdmAddtional_ =
     RestDescriptionMethods
-    { _rdmAddtional = pRdmAddtional_
+    { _rdmAddtional = _Coerce # pRdmAddtional_
     }
 
 -- | An individual method description.
 rdmAddtional :: Lens' RestDescriptionMethods (HashMap Text RestMethod)
 rdmAddtional
   = lens _rdmAddtional (\ s a -> s{_rdmAddtional = a})
+      . _Coerce
 
 instance FromJSON RestDescriptionMethods where
         parseJSON
@@ -634,13 +637,14 @@ restResourceResources
     -> RestResourceResources
 restResourceResources pRrrAddtional_ =
     RestResourceResources
-    { _rrrAddtional = pRrrAddtional_
+    { _rrrAddtional = _Coerce # pRrrAddtional_
     }
 
 -- | Description for any sub-resources on this resource.
 rrrAddtional :: Lens' RestResourceResources (HashMap Text RestResource)
 rrrAddtional
   = lens _rrrAddtional (\ s a -> s{_rrrAddtional = a})
+      . _Coerce
 
 instance FromJSON RestResourceResources where
         parseJSON
@@ -889,13 +893,14 @@ restResourceMethods
     -> RestResourceMethods
 restResourceMethods pRrmAddtional_ =
     RestResourceMethods
-    { _rrmAddtional = pRrmAddtional_
+    { _rrmAddtional = _Coerce # pRrmAddtional_
     }
 
 -- | Description for any methods on this resource.
 rrmAddtional :: Lens' RestResourceMethods (HashMap Text RestMethod)
 rrmAddtional
   = lens _rrmAddtional (\ s a -> s{_rrmAddtional = a})
+      . _Coerce
 
 instance FromJSON RestResourceMethods where
         parseJSON
@@ -1565,13 +1570,14 @@ restDescriptionSchemas
     -> RestDescriptionSchemas
 restDescriptionSchemas pRdsAddtional_ =
     RestDescriptionSchemas
-    { _rdsAddtional = pRdsAddtional_
+    { _rdsAddtional = _Coerce # pRdsAddtional_
     }
 
 -- | An individual schema description.
 rdsAddtional :: Lens' RestDescriptionSchemas (HashMap Text JSONSchema)
 rdsAddtional
   = lens _rdsAddtional (\ s a -> s{_rdsAddtional = a})
+      . _Coerce
 
 instance FromJSON RestDescriptionSchemas where
         parseJSON
@@ -1643,7 +1649,7 @@ restDescriptionResources
     -> RestDescriptionResources
 restDescriptionResources pRdrAddtional_ =
     RestDescriptionResources
-    { _rdrAddtional = pRdrAddtional_
+    { _rdrAddtional = _Coerce # pRdrAddtional_
     }
 
 -- | An individual resource description. Contains methods and sub-resources
@@ -1651,6 +1657,7 @@ restDescriptionResources pRdrAddtional_ =
 rdrAddtional :: Lens' RestDescriptionResources (HashMap Text RestResource)
 rdrAddtional
   = lens _rdrAddtional (\ s a -> s{_rdrAddtional = a})
+      . _Coerce
 
 instance FromJSON RestDescriptionResources where
         parseJSON
@@ -1765,13 +1772,14 @@ restMethodParameters
     -> RestMethodParameters
 restMethodParameters pRmpAddtional_ =
     RestMethodParameters
-    { _rmpAddtional = pRmpAddtional_
+    { _rmpAddtional = _Coerce # pRmpAddtional_
     }
 
 -- | Details for a single parameter in this method.
 rmpAddtional :: Lens' RestMethodParameters (HashMap Text JSONSchema)
 rmpAddtional
   = lens _rmpAddtional (\ s a -> s{_rmpAddtional = a})
+      . _Coerce
 
 instance FromJSON RestMethodParameters where
         parseJSON
@@ -1860,7 +1868,7 @@ jsonSchemaProperties
     -> JSONSchemaProperties
 jsonSchemaProperties pJspAddtional_ =
     JSONSchemaProperties
-    { _jspAddtional = pJspAddtional_
+    { _jspAddtional = _Coerce # pJspAddtional_
     }
 
 -- | A single property of this object. The value is itself a JSON Schema
@@ -1868,6 +1876,7 @@ jsonSchemaProperties pJspAddtional_ =
 jspAddtional :: Lens' JSONSchemaProperties (HashMap Text JSONSchema)
 jspAddtional
   = lens _jspAddtional (\ s a -> s{_jspAddtional = a})
+      . _Coerce
 
 instance FromJSON JSONSchemaProperties where
         parseJSON

@@ -320,7 +320,7 @@ writeTimeseriesRequestCommonLabels
     -> WriteTimeseriesRequestCommonLabels
 writeTimeseriesRequestCommonLabels pWtrclAddtional_ =
     WriteTimeseriesRequestCommonLabels
-    { _wtrclAddtional = pWtrclAddtional_
+    { _wtrclAddtional = _Coerce # pWtrclAddtional_
     }
 
 -- | The label\'s name.
@@ -328,6 +328,7 @@ wtrclAddtional :: Lens' WriteTimeseriesRequestCommonLabels (HashMap Text Text)
 wtrclAddtional
   = lens _wtrclAddtional
       (\ s a -> s{_wtrclAddtional = a})
+      . _Coerce
 
 instance FromJSON WriteTimeseriesRequestCommonLabels
          where
@@ -567,13 +568,14 @@ timeseriesDescriptorLabels
     -> TimeseriesDescriptorLabels
 timeseriesDescriptorLabels pTdlAddtional_ =
     TimeseriesDescriptorLabels
-    { _tdlAddtional = pTdlAddtional_
+    { _tdlAddtional = _Coerce # pTdlAddtional_
     }
 
 -- | The label\'s name.
 tdlAddtional :: Lens' TimeseriesDescriptorLabels (HashMap Text Text)
 tdlAddtional
   = lens _tdlAddtional (\ s a -> s{_tdlAddtional = a})
+      . _Coerce
 
 instance FromJSON TimeseriesDescriptorLabels where
         parseJSON

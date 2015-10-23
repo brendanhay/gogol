@@ -611,12 +611,13 @@ pubsubMessageAttributes
     -> PubsubMessageAttributes
 pubsubMessageAttributes pPmaAddtional_ =
     PubsubMessageAttributes
-    { _pmaAddtional = pPmaAddtional_
+    { _pmaAddtional = _Coerce # pPmaAddtional_
     }
 
 pmaAddtional :: Lens' PubsubMessageAttributes (HashMap Text Text)
 pmaAddtional
   = lens _pmaAddtional (\ s a -> s{_pmaAddtional = a})
+      . _Coerce
 
 instance FromJSON PubsubMessageAttributes where
         parseJSON
@@ -891,12 +892,13 @@ pushConfigAttributes
     -> PushConfigAttributes
 pushConfigAttributes pPcaAddtional_ =
     PushConfigAttributes
-    { _pcaAddtional = pPcaAddtional_
+    { _pcaAddtional = _Coerce # pPcaAddtional_
     }
 
 pcaAddtional :: Lens' PushConfigAttributes (HashMap Text Text)
 pcaAddtional
   = lens _pcaAddtional (\ s a -> s{_pcaAddtional = a})
+      . _Coerce
 
 instance FromJSON PushConfigAttributes where
         parseJSON

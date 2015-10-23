@@ -727,13 +727,14 @@ fileOpenWithLinks
     -> FileOpenWithLinks
 fileOpenWithLinks pFowlAddtional_ =
     FileOpenWithLinks
-    { _fowlAddtional = pFowlAddtional_
+    { _fowlAddtional = _Coerce # pFowlAddtional_
     }
 
 fowlAddtional :: Lens' FileOpenWithLinks (HashMap Text Text)
 fowlAddtional
   = lens _fowlAddtional
       (\ s a -> s{_fowlAddtional = a})
+      . _Coerce
 
 instance FromJSON FileOpenWithLinks where
         parseJSON
@@ -2063,13 +2064,14 @@ revisionExportLinks
     -> RevisionExportLinks
 revisionExportLinks pRelAddtional_ =
     RevisionExportLinks
-    { _relAddtional = pRelAddtional_
+    { _relAddtional = _Coerce # pRelAddtional_
     }
 
 -- | A mapping from export format to URL
 relAddtional :: Lens' RevisionExportLinks (HashMap Text Text)
 relAddtional
   = lens _relAddtional (\ s a -> s{_relAddtional = a})
+      . _Coerce
 
 instance FromJSON RevisionExportLinks where
         parseJSON
@@ -2177,13 +2179,14 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams
-    { _cpAddtional = pCpAddtional_
+    { _cpAddtional = _Coerce # pCpAddtional_
     }
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
 cpAddtional
-  = lens _cpAddtional (\ s a -> s{_cpAddtional = a})
+  = lens _cpAddtional (\ s a -> s{_cpAddtional = a}) .
+      _Coerce
 
 instance FromJSON ChannelParams where
         parseJSON
@@ -4591,13 +4594,14 @@ fileExportLinks
     -> FileExportLinks
 fileExportLinks pFelAddtional_ =
     FileExportLinks
-    { _felAddtional = pFelAddtional_
+    { _felAddtional = _Coerce # pFelAddtional_
     }
 
 -- | A mapping from export format to URL
 felAddtional :: Lens' FileExportLinks (HashMap Text Text)
 felAddtional
   = lens _felAddtional (\ s a -> s{_felAddtional = a})
+      . _Coerce
 
 instance FromJSON FileExportLinks where
         parseJSON

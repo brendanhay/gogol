@@ -140,13 +140,14 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
     OperationSchema
-    { _osAddtional = pOsAddtional_
+    { _osAddtional = _Coerce # pOsAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
 osAddtional
-  = lens _osAddtional (\ s a -> s{_osAddtional = a})
+  = lens _osAddtional (\ s a -> s{_osAddtional = a}) .
+      _Coerce
 
 instance FromJSON OperationSchema where
         parseJSON
@@ -701,12 +702,13 @@ versionEnvVariables
     -> VersionEnvVariables
 versionEnvVariables pVevAddtional_ =
     VersionEnvVariables
-    { _vevAddtional = pVevAddtional_
+    { _vevAddtional = _Coerce # pVevAddtional_
     }
 
 vevAddtional :: Lens' VersionEnvVariables (HashMap Text Text)
 vevAddtional
   = lens _vevAddtional (\ s a -> s{_vevAddtional = a})
+      . _Coerce
 
 instance FromJSON VersionEnvVariables where
         parseJSON
@@ -825,12 +827,13 @@ versionBetaSettings
     -> VersionBetaSettings
 versionBetaSettings pVbsAddtional_ =
     VersionBetaSettings
-    { _vbsAddtional = pVbsAddtional_
+    { _vbsAddtional = _Coerce # pVbsAddtional_
     }
 
 vbsAddtional :: Lens' VersionBetaSettings (HashMap Text Text)
 vbsAddtional
   = lens _vbsAddtional (\ s a -> s{_vbsAddtional = a})
+      . _Coerce
 
 instance FromJSON VersionBetaSettings where
         parseJSON
@@ -1011,13 +1014,14 @@ staticDirectoryHandlerHTTPHeaders
     -> StaticDirectoryHandlerHTTPHeaders
 staticDirectoryHandlerHTTPHeaders pSdhhttphAddtional_ =
     StaticDirectoryHandlerHTTPHeaders
-    { _sdhhttphAddtional = pSdhhttphAddtional_
+    { _sdhhttphAddtional = _Coerce # pSdhhttphAddtional_
     }
 
 sdhhttphAddtional :: Lens' StaticDirectoryHandlerHTTPHeaders (HashMap Text Text)
 sdhhttphAddtional
   = lens _sdhhttphAddtional
       (\ s a -> s{_sdhhttphAddtional = a})
+      . _Coerce
 
 instance FromJSON StaticDirectoryHandlerHTTPHeaders
          where
@@ -1396,13 +1400,14 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
-    { _sdiAddtional = pSdiAddtional_
+    { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
 sdiAddtional
   = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
+      . _Coerce
 
 instance FromJSON StatusDetailsItem where
         parseJSON
@@ -1493,13 +1498,14 @@ staticFilesHandlerHTTPHeaders
     -> StaticFilesHandlerHTTPHeaders
 staticFilesHandlerHTTPHeaders pSfhhttphAddtional_ =
     StaticFilesHandlerHTTPHeaders
-    { _sfhhttphAddtional = pSfhhttphAddtional_
+    { _sfhhttphAddtional = _Coerce # pSfhhttphAddtional_
     }
 
 sfhhttphAddtional :: Lens' StaticFilesHandlerHTTPHeaders (HashMap Text Text)
 sfhhttphAddtional
   = lens _sfhhttphAddtional
       (\ s a -> s{_sfhhttphAddtional = a})
+      . _Coerce
 
 instance FromJSON StaticFilesHandlerHTTPHeaders where
         parseJSON
@@ -1590,12 +1596,13 @@ deploymentFiles
     -> DeploymentFiles
 deploymentFiles pDfAddtional_ =
     DeploymentFiles
-    { _dfAddtional = pDfAddtional_
+    { _dfAddtional = _Coerce # pDfAddtional_
     }
 
 dfAddtional :: Lens' DeploymentFiles (HashMap Text FileInfo)
 dfAddtional
-  = lens _dfAddtional (\ s a -> s{_dfAddtional = a})
+  = lens _dfAddtional (\ s a -> s{_dfAddtional = a}) .
+      _Coerce
 
 instance FromJSON DeploymentFiles where
         parseJSON
@@ -1681,12 +1688,13 @@ trafficSplitAllocations
     -> TrafficSplitAllocations
 trafficSplitAllocations pTsaAddtional_ =
     TrafficSplitAllocations
-    { _tsaAddtional = pTsaAddtional_
+    { _tsaAddtional = _Coerce # pTsaAddtional_
     }
 
 tsaAddtional :: Lens' TrafficSplitAllocations (HashMap Text Double)
 tsaAddtional
   = lens _tsaAddtional (\ s a -> s{_tsaAddtional = a})
+      . _Coerce
 
 instance FromJSON TrafficSplitAllocations where
         parseJSON
@@ -2565,13 +2573,14 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
     OperationResponse
-    { _orAddtional = pOrAddtional_
+    { _orAddtional = _Coerce # pOrAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
 orAddtional
-  = lens _orAddtional (\ s a -> s{_orAddtional = a})
+  = lens _orAddtional (\ s a -> s{_orAddtional = a}) .
+      _Coerce
 
 instance FromJSON OperationResponse where
         parseJSON

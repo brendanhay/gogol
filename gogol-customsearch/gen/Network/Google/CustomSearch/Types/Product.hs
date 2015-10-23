@@ -135,12 +135,13 @@ searchQueries
     -> SearchQueries
 searchQueries pSqAddtional_ =
     SearchQueries
-    { _sqAddtional = pSqAddtional_
+    { _sqAddtional = _Coerce # pSqAddtional_
     }
 
 sqAddtional :: Lens' SearchQueries (HashMap Text [Query])
 sqAddtional
-  = lens _sqAddtional (\ s a -> s{_sqAddtional = a})
+  = lens _sqAddtional (\ s a -> s{_sqAddtional = a}) .
+      _Coerce
 
 instance FromJSON SearchQueries where
         parseJSON
@@ -166,13 +167,14 @@ resultPagemapAdditionalItem
     -> ResultPagemapAdditionalItem
 resultPagemapAdditionalItem pRpaiAddtional_ =
     ResultPagemapAdditionalItem
-    { _rpaiAddtional = pRpaiAddtional_
+    { _rpaiAddtional = _Coerce # pRpaiAddtional_
     }
 
 rpaiAddtional :: Lens' ResultPagemapAdditionalItem (HashMap Text JSONValue)
 rpaiAddtional
   = lens _rpaiAddtional
       (\ s a -> s{_rpaiAddtional = a})
+      . _Coerce
 
 instance FromJSON ResultPagemapAdditionalItem where
         parseJSON
@@ -394,12 +396,13 @@ resultPagemap
     -> ResultPagemap
 resultPagemap pRpAddtional_ =
     ResultPagemap
-    { _rpAddtional = pRpAddtional_
+    { _rpAddtional = _Coerce # pRpAddtional_
     }
 
 rpAddtional :: Lens' ResultPagemap (HashMap Text [ResultPagemapAdditionalItem])
 rpAddtional
-  = lens _rpAddtional (\ s a -> s{_rpAddtional = a})
+  = lens _rpAddtional (\ s a -> s{_rpAddtional = a}) .
+      _Coerce
 
 instance FromJSON ResultPagemap where
         parseJSON

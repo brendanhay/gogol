@@ -85,7 +85,7 @@ geoJSONProperties
     -> GeoJSONProperties
 geoJSONProperties pGjpAddtional_ =
     GeoJSONProperties
-    { _gjpAddtional = pGjpAddtional_
+    { _gjpAddtional = _Coerce # pGjpAddtional_
     }
 
 -- | An arbitrary key-value pair. The key must be the name of a column in the
@@ -94,6 +94,7 @@ geoJSONProperties pGjpAddtional_ =
 gjpAddtional :: Lens' GeoJSONProperties (HashMap Text JSONValue)
 gjpAddtional
   = lens _gjpAddtional (\ s a -> s{_gjpAddtional = a})
+      . _Coerce
 
 instance FromJSON GeoJSONProperties where
         parseJSON

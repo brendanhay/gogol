@@ -2065,12 +2065,13 @@ userCustomSchemas
     -> UserCustomSchemas
 userCustomSchemas pUcsAddtional_ =
     UserCustomSchemas
-    { _ucsAddtional = pUcsAddtional_
+    { _ucsAddtional = _Coerce # pUcsAddtional_
     }
 
 ucsAddtional :: Lens' UserCustomSchemas (HashMap Text UserCustomProperties)
 ucsAddtional
   = lens _ucsAddtional (\ s a -> s{_ucsAddtional = a})
+      . _Coerce
 
 instance FromJSON UserCustomSchemas where
         parseJSON
@@ -3925,13 +3926,14 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams
-    { _cpAddtional = pCpAddtional_
+    { _cpAddtional = _Coerce # pCpAddtional_
     }
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
 cpAddtional
-  = lens _cpAddtional (\ s a -> s{_cpAddtional = a})
+  = lens _cpAddtional (\ s a -> s{_cpAddtional = a}) .
+      _Coerce
 
 instance FromJSON ChannelParams where
         parseJSON
@@ -4955,12 +4957,13 @@ userCustomProperties
     -> UserCustomProperties
 userCustomProperties pUcpAddtional_ =
     UserCustomProperties
-    { _ucpAddtional = pUcpAddtional_
+    { _ucpAddtional = _Coerce # pUcpAddtional_
     }
 
 ucpAddtional :: Lens' UserCustomProperties (HashMap Text JSONValue)
 ucpAddtional
   = lens _ucpAddtional (\ s a -> s{_ucpAddtional = a})
+      . _Coerce
 
 instance FromJSON UserCustomProperties where
         parseJSON

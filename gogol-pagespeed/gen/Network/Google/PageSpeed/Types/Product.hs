@@ -1097,13 +1097,14 @@ resultRuleGroups
     -> ResultRuleGroups
 resultRuleGroups pRrgAddtional_ =
     ResultRuleGroups
-    { _rrgAddtional = pRrgAddtional_
+    { _rrgAddtional = _Coerce # pRrgAddtional_
     }
 
 -- | The name of this rule group: one of \"SPEED\" or \"USABILITY\".
 rrgAddtional :: Lens' ResultRuleGroups (HashMap Text ResultRuleGroupsAdditional)
 rrgAddtional
   = lens _rrgAddtional (\ s a -> s{_rrgAddtional = a})
+      . _Coerce
 
 instance FromJSON ResultRuleGroups where
         parseJSON
@@ -1182,7 +1183,7 @@ resultFormattedResultsRuleResults
     -> ResultFormattedResultsRuleResults
 resultFormattedResultsRuleResults pRfrrrAddtional_ =
     ResultFormattedResultsRuleResults
-    { _rfrrrAddtional = pRfrrrAddtional_
+    { _rfrrrAddtional = _Coerce # pRfrrrAddtional_
     }
 
 -- | The enum-like identifier for this rule. For instance \"EnableKeepAlive\"
@@ -1191,6 +1192,7 @@ rfrrrAddtional :: Lens' ResultFormattedResultsRuleResults (HashMap Text ResultFo
 rfrrrAddtional
   = lens _rfrrrAddtional
       (\ s a -> s{_rfrrrAddtional = a})
+      . _Coerce
 
 instance FromJSON ResultFormattedResultsRuleResults
          where

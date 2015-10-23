@@ -38,12 +38,13 @@ readInfo
     -> ReadInfo
 readInfo pRiAddtional_ =
     ReadInfo
-    { _riAddtional = pRiAddtional_
+    { _riAddtional = _Coerce # pRiAddtional_
     }
 
 riAddtional :: Lens' ReadInfo (HashMap Text [JSONValue])
 riAddtional
-  = lens _riAddtional (\ s a -> s{_riAddtional = a})
+  = lens _riAddtional (\ s a -> s{_riAddtional = a}) .
+      _Coerce
 
 instance FromJSON ReadInfo where
         parseJSON
@@ -168,13 +169,14 @@ operationSchema
     -> OperationSchema
 operationSchema pOsAddtional_ =
     OperationSchema
-    { _osAddtional = pOsAddtional_
+    { _osAddtional = _Coerce # pOsAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
 osAddtional
-  = lens _osAddtional (\ s a -> s{_osAddtional = a})
+  = lens _osAddtional (\ s a -> s{_osAddtional = a}) .
+      _Coerce
 
 instance FromJSON OperationSchema where
         parseJSON
@@ -1880,12 +1882,13 @@ variantCallInfo
     -> VariantCallInfo
 variantCallInfo pVciAddtional_ =
     VariantCallInfo
-    { _vciAddtional = pVciAddtional_
+    { _vciAddtional = _Coerce # pVciAddtional_
     }
 
 vciAddtional :: Lens' VariantCallInfo (HashMap Text [JSONValue])
 vciAddtional
   = lens _vciAddtional (\ s a -> s{_vciAddtional = a})
+      . _Coerce
 
 instance FromJSON VariantCallInfo where
         parseJSON
@@ -1913,12 +1916,13 @@ readGroupInfo
     -> ReadGroupInfo
 readGroupInfo pRgiAddtional_ =
     ReadGroupInfo
-    { _rgiAddtional = pRgiAddtional_
+    { _rgiAddtional = _Coerce # pRgiAddtional_
     }
 
 rgiAddtional :: Lens' ReadGroupInfo (HashMap Text [JSONValue])
 rgiAddtional
   = lens _rgiAddtional (\ s a -> s{_rgiAddtional = a})
+      . _Coerce
 
 instance FromJSON ReadGroupInfo where
         parseJSON
@@ -1944,13 +1948,14 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
-    { _sdiAddtional = pSdiAddtional_
+    { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
 sdiAddtional
   = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
+      . _Coerce
 
 instance FromJSON StatusDetailsItem where
         parseJSON
@@ -2193,13 +2198,14 @@ operationMetadataRequest
     -> OperationMetadataRequest
 operationMetadataRequest pOmrAddtional_ =
     OperationMetadataRequest
-    { _omrAddtional = pOmrAddtional_
+    { _omrAddtional = _Coerce # pOmrAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 omrAddtional :: Lens' OperationMetadataRequest (HashMap Text JSONValue)
 omrAddtional
   = lens _omrAddtional (\ s a -> s{_omrAddtional = a})
+      . _Coerce
 
 instance FromJSON OperationMetadataRequest where
         parseJSON
@@ -2228,12 +2234,13 @@ variantInfo
     -> VariantInfo
 variantInfo pViAddtional_ =
     VariantInfo
-    { _viAddtional = pViAddtional_
+    { _viAddtional = _Coerce # pViAddtional_
     }
 
 viAddtional :: Lens' VariantInfo (HashMap Text [JSONValue])
 viAddtional
-  = lens _viAddtional (\ s a -> s{_viAddtional = a})
+  = lens _viAddtional (\ s a -> s{_viAddtional = a}) .
+      _Coerce
 
 instance FromJSON VariantInfo where
         parseJSON
@@ -4168,12 +4175,13 @@ callSetInfo
     -> CallSetInfo
 callSetInfo pCsiAddtional_ =
     CallSetInfo
-    { _csiAddtional = pCsiAddtional_
+    { _csiAddtional = _Coerce # pCsiAddtional_
     }
 
 csiAddtional :: Lens' CallSetInfo (HashMap Text [JSONValue])
 csiAddtional
   = lens _csiAddtional (\ s a -> s{_csiAddtional = a})
+      . _Coerce
 
 instance FromJSON CallSetInfo where
         parseJSON
@@ -4201,13 +4209,14 @@ variantSetMetadataInfo
     -> VariantSetMetadataInfo
 variantSetMetadataInfo pVsmiAddtional_ =
     VariantSetMetadataInfo
-    { _vsmiAddtional = pVsmiAddtional_
+    { _vsmiAddtional = _Coerce # pVsmiAddtional_
     }
 
 vsmiAddtional :: Lens' VariantSetMetadataInfo (HashMap Text [JSONValue])
 vsmiAddtional
   = lens _vsmiAddtional
       (\ s a -> s{_vsmiAddtional = a})
+      . _Coerce
 
 instance FromJSON VariantSetMetadataInfo where
         parseJSON
@@ -4237,13 +4246,14 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
     OperationResponse
-    { _orAddtional = pOrAddtional_
+    { _orAddtional = _Coerce # pOrAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
 orAddtional
-  = lens _orAddtional (\ s a -> s{_orAddtional = a})
+  = lens _orAddtional (\ s a -> s{_orAddtional = a}) .
+      _Coerce
 
 instance FromJSON OperationResponse where
         parseJSON
@@ -4559,13 +4569,14 @@ readGroupSetInfo
     -> ReadGroupSetInfo
 readGroupSetInfo pRgsiAddtional_ =
     ReadGroupSetInfo
-    { _rgsiAddtional = pRgsiAddtional_
+    { _rgsiAddtional = _Coerce # pRgsiAddtional_
     }
 
 rgsiAddtional :: Lens' ReadGroupSetInfo (HashMap Text [JSONValue])
 rgsiAddtional
   = lens _rgsiAddtional
       (\ s a -> s{_rgsiAddtional = a})
+      . _Coerce
 
 instance FromJSON ReadGroupSetInfo where
         parseJSON

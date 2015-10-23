@@ -37,14 +37,15 @@ reportRow
     -> ReportRow
 reportRow pRrAddtional_ =
     ReportRow
-    { _rrAddtional = pRrAddtional_
+    { _rrAddtional = _Coerce # pRrAddtional_
     }
 
 -- | Indicates the columns that are represented in this row. That is, each
 -- key corresponds to a column with a non-empty cell in this row.
 rrAddtional :: Lens' ReportRow (HashMap Text JSONValue)
 rrAddtional
-  = lens _rrAddtional (\ s a -> s{_rrAddtional = a})
+  = lens _rrAddtional (\ s a -> s{_rrAddtional = a}) .
+      _Coerce
 
 instance FromJSON ReportRow where
         parseJSON

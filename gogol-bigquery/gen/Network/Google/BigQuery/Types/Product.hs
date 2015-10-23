@@ -2869,12 +2869,13 @@ jsonObject
     -> JSONObject
 jsonObject pJoAddtional_ =
     JSONObject
-    { _joAddtional = pJoAddtional_
+    { _joAddtional = _Coerce # pJoAddtional_
     }
 
 joAddtional :: Lens' JSONObject (HashMap Text JSONValue)
 joAddtional
-  = lens _joAddtional (\ s a -> s{_joAddtional = a})
+  = lens _joAddtional (\ s a -> s{_joAddtional = a}) .
+      _Coerce
 
 instance FromJSON JSONObject where
         parseJSON
@@ -3218,13 +3219,14 @@ jobConfigurationQueryTableDefinitions
     -> JobConfigurationQueryTableDefinitions
 jobConfigurationQueryTableDefinitions pJcqtdAddtional_ =
     JobConfigurationQueryTableDefinitions
-    { _jcqtdAddtional = pJcqtdAddtional_
+    { _jcqtdAddtional = _Coerce # pJcqtdAddtional_
     }
 
 jcqtdAddtional :: Lens' JobConfigurationQueryTableDefinitions (HashMap Text ExternalDataConfiguration)
 jcqtdAddtional
   = lens _jcqtdAddtional
       (\ s a -> s{_jcqtdAddtional = a})
+      . _Coerce
 
 instance FromJSON
          JobConfigurationQueryTableDefinitions where

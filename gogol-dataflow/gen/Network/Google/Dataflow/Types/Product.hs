@@ -37,13 +37,14 @@ jobExecutionInfoStages
     -> JobExecutionInfoStages
 jobExecutionInfoStages pJeisAddtional_ =
     JobExecutionInfoStages
-    { _jeisAddtional = pJeisAddtional_
+    { _jeisAddtional = _Coerce # pJeisAddtional_
     }
 
 jeisAddtional :: Lens' JobExecutionInfoStages (HashMap Text JobExecutionStageInfo)
 jeisAddtional
   = lens _jeisAddtional
       (\ s a -> s{_jeisAddtional = a})
+      . _Coerce
 
 instance FromJSON JobExecutionInfoStages where
         parseJSON
@@ -603,12 +604,13 @@ workerPoolMetadata
     -> WorkerPoolMetadata
 workerPoolMetadata pWpmAddtional_ =
     WorkerPoolMetadata
-    { _wpmAddtional = pWpmAddtional_
+    { _wpmAddtional = _Coerce # pWpmAddtional_
     }
 
 wpmAddtional :: Lens' WorkerPoolMetadata (HashMap Text Text)
 wpmAddtional
   = lens _wpmAddtional (\ s a -> s{_wpmAddtional = a})
+      . _Coerce
 
 instance FromJSON WorkerPoolMetadata where
         parseJSON
@@ -852,13 +854,14 @@ environmentVersion
     -> EnvironmentVersion
 environmentVersion pEvAddtional_ =
     EnvironmentVersion
-    { _evAddtional = pEvAddtional_
+    { _evAddtional = _Coerce # pEvAddtional_
     }
 
 -- | Properties of the object.
 evAddtional :: Lens' EnvironmentVersion (HashMap Text JSONValue)
 evAddtional
-  = lens _evAddtional (\ s a -> s{_evAddtional = a})
+  = lens _evAddtional (\ s a -> s{_evAddtional = a}) .
+      _Coerce
 
 instance FromJSON EnvironmentVersion where
         parseJSON
@@ -1035,13 +1038,14 @@ environmentUserAgent
     -> EnvironmentUserAgent
 environmentUserAgent pEuaAddtional_ =
     EnvironmentUserAgent
-    { _euaAddtional = pEuaAddtional_
+    { _euaAddtional = _Coerce # pEuaAddtional_
     }
 
 -- | Properties of the object.
 euaAddtional :: Lens' EnvironmentUserAgent (HashMap Text JSONValue)
 euaAddtional
   = lens _euaAddtional (\ s a -> s{_euaAddtional = a})
+      . _Coerce
 
 instance FromJSON EnvironmentUserAgent where
         parseJSON
@@ -1518,13 +1522,14 @@ metricStructuredNameContext
     -> MetricStructuredNameContext
 metricStructuredNameContext pMsncAddtional_ =
     MetricStructuredNameContext
-    { _msncAddtional = pMsncAddtional_
+    { _msncAddtional = _Coerce # pMsncAddtional_
     }
 
 msncAddtional :: Lens' MetricStructuredNameContext (HashMap Text Text)
 msncAddtional
   = lens _msncAddtional
       (\ s a -> s{_msncAddtional = a})
+      . _Coerce
 
 instance FromJSON MetricStructuredNameContext where
         parseJSON
@@ -1927,13 +1932,14 @@ jobTransformNameMApping
     -> JobTransformNameMApping
 jobTransformNameMApping pJtnmaAddtional_ =
     JobTransformNameMApping
-    { _jtnmaAddtional = pJtnmaAddtional_
+    { _jtnmaAddtional = _Coerce # pJtnmaAddtional_
     }
 
 jtnmaAddtional :: Lens' JobTransformNameMApping (HashMap Text Text)
 jtnmaAddtional
   = lens _jtnmaAddtional
       (\ s a -> s{_jtnmaAddtional = a})
+      . _Coerce
 
 instance FromJSON JobTransformNameMApping where
         parseJSON
@@ -1961,13 +1967,14 @@ sourceSpec
     -> SourceSpec
 sourceSpec pSsAddtional_ =
     SourceSpec
-    { _ssAddtional = pSsAddtional_
+    { _ssAddtional = _Coerce # pSsAddtional_
     }
 
 -- | Properties of the object.
 ssAddtional :: Lens' SourceSpec (HashMap Text JSONValue)
 ssAddtional
-  = lens _ssAddtional (\ s a -> s{_ssAddtional = a})
+  = lens _ssAddtional (\ s a -> s{_ssAddtional = a}) .
+      _Coerce
 
 instance FromJSON SourceSpec where
         parseJSON
@@ -2061,13 +2068,14 @@ environmentInternalExperiments
     -> EnvironmentInternalExperiments
 environmentInternalExperiments pEieAddtional_ =
     EnvironmentInternalExperiments
-    { _eieAddtional = pEieAddtional_
+    { _eieAddtional = _Coerce # pEieAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 eieAddtional :: Lens' EnvironmentInternalExperiments (HashMap Text JSONValue)
 eieAddtional
   = lens _eieAddtional (\ s a -> s{_eieAddtional = a})
+      . _Coerce
 
 instance FromJSON EnvironmentInternalExperiments
          where
@@ -2368,7 +2376,7 @@ environmentSdkPipelineOptions
     -> EnvironmentSdkPipelineOptions
 environmentSdkPipelineOptions pEspoAddtional_ =
     EnvironmentSdkPipelineOptions
-    { _espoAddtional = pEspoAddtional_
+    { _espoAddtional = _Coerce # pEspoAddtional_
     }
 
 -- | Properties of the object.
@@ -2376,6 +2384,7 @@ espoAddtional :: Lens' EnvironmentSdkPipelineOptions (HashMap Text JSONValue)
 espoAddtional
   = lens _espoAddtional
       (\ s a -> s{_espoAddtional = a})
+      . _Coerce
 
 instance FromJSON EnvironmentSdkPipelineOptions where
         parseJSON
@@ -2546,13 +2555,14 @@ topologyConfigUserStageToComputationNameMap
     -> TopologyConfigUserStageToComputationNameMap
 topologyConfigUserStageToComputationNameMap pTcustcnmAddtional_ =
     TopologyConfigUserStageToComputationNameMap
-    { _tcustcnmAddtional = pTcustcnmAddtional_
+    { _tcustcnmAddtional = _Coerce # pTcustcnmAddtional_
     }
 
 tcustcnmAddtional :: Lens' TopologyConfigUserStageToComputationNameMap (HashMap Text Text)
 tcustcnmAddtional
   = lens _tcustcnmAddtional
       (\ s a -> s{_tcustcnmAddtional = a})
+      . _Coerce
 
 instance FromJSON
          TopologyConfigUserStageToComputationNameMap where
@@ -2631,13 +2641,14 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
-    { _sdiAddtional = pSdiAddtional_
+    { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
 sdiAddtional
   = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
+      . _Coerce
 
 instance FromJSON StatusDetailsItem where
         parseJSON
@@ -2665,13 +2676,14 @@ stepProperties
     -> StepProperties
 stepProperties pSpAddtional_ =
     StepProperties
-    { _spAddtional = pSpAddtional_
+    { _spAddtional = _Coerce # pSpAddtional_
     }
 
 -- | Properties of the object.
 spAddtional :: Lens' StepProperties (HashMap Text JSONValue)
 spAddtional
-  = lens _spAddtional (\ s a -> s{_spAddtional = a})
+  = lens _spAddtional (\ s a -> s{_spAddtional = a}) .
+      _Coerce
 
 instance FromJSON StepProperties where
         parseJSON
@@ -2873,7 +2885,7 @@ workItemServiceStateHarnessData
     -> WorkItemServiceStateHarnessData
 workItemServiceStateHarnessData pWisshdAddtional_ =
     WorkItemServiceStateHarnessData
-    { _wisshdAddtional = pWisshdAddtional_
+    { _wisshdAddtional = _Coerce # pWisshdAddtional_
     }
 
 -- | Properties of the object.
@@ -2881,6 +2893,7 @@ wisshdAddtional :: Lens' WorkItemServiceStateHarnessData (HashMap Text JSONValue
 wisshdAddtional
   = lens _wisshdAddtional
       (\ s a -> s{_wisshdAddtional = a})
+      . _Coerce
 
 instance FromJSON WorkItemServiceStateHarnessData
          where
@@ -3139,7 +3152,7 @@ partialGroupByKeyInstructionInputElementCodec
     -> PartialGroupByKeyInstructionInputElementCodec
 partialGroupByKeyInstructionInputElementCodec pPgbkiiecAddtional_ =
     PartialGroupByKeyInstructionInputElementCodec
-    { _pgbkiiecAddtional = pPgbkiiecAddtional_
+    { _pgbkiiecAddtional = _Coerce # pPgbkiiecAddtional_
     }
 
 -- | Properties of the object.
@@ -3147,6 +3160,7 @@ pgbkiiecAddtional :: Lens' PartialGroupByKeyInstructionInputElementCodec (HashMa
 pgbkiiecAddtional
   = lens _pgbkiiecAddtional
       (\ s a -> s{_pgbkiiecAddtional = a})
+      . _Coerce
 
 instance FromJSON
          PartialGroupByKeyInstructionInputElementCodec where
@@ -3280,13 +3294,14 @@ sinkCodec
     -> SinkCodec
 sinkCodec pScAddtional_ =
     SinkCodec
-    { _scAddtional = pScAddtional_
+    { _scAddtional = _Coerce # pScAddtional_
     }
 
 -- | Properties of the object.
 scAddtional :: Lens' SinkCodec (HashMap Text JSONValue)
 scAddtional
-  = lens _scAddtional (\ s a -> s{_scAddtional = a})
+  = lens _scAddtional (\ s a -> s{_scAddtional = a}) .
+      _Coerce
 
 instance FromJSON SinkCodec where
         parseJSON
@@ -3313,7 +3328,7 @@ parDoInstructionUserFn
     -> ParDoInstructionUserFn
 parDoInstructionUserFn pPdiufAddtional_ =
     ParDoInstructionUserFn
-    { _pdiufAddtional = pPdiufAddtional_
+    { _pdiufAddtional = _Coerce # pPdiufAddtional_
     }
 
 -- | Properties of the object.
@@ -3321,6 +3336,7 @@ pdiufAddtional :: Lens' ParDoInstructionUserFn (HashMap Text JSONValue)
 pdiufAddtional
   = lens _pdiufAddtional
       (\ s a -> s{_pdiufAddtional = a})
+      . _Coerce
 
 instance FromJSON ParDoInstructionUserFn where
         parseJSON
@@ -3348,13 +3364,14 @@ instructionOutputCodec
     -> InstructionOutputCodec
 instructionOutputCodec pIocAddtional_ =
     InstructionOutputCodec
-    { _iocAddtional = pIocAddtional_
+    { _iocAddtional = _Coerce # pIocAddtional_
     }
 
 -- | Properties of the object.
 iocAddtional :: Lens' InstructionOutputCodec (HashMap Text JSONValue)
 iocAddtional
   = lens _iocAddtional (\ s a -> s{_iocAddtional = a})
+      . _Coerce
 
 instance FromJSON InstructionOutputCodec where
         parseJSON
@@ -3460,7 +3477,7 @@ workerPoolPoolArgs
     -> WorkerPoolPoolArgs
 workerPoolPoolArgs pWppaAddtional_ =
     WorkerPoolPoolArgs
-    { _wppaAddtional = pWppaAddtional_
+    { _wppaAddtional = _Coerce # pWppaAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
@@ -3468,6 +3485,7 @@ wppaAddtional :: Lens' WorkerPoolPoolArgs (HashMap Text JSONValue)
 wppaAddtional
   = lens _wppaAddtional
       (\ s a -> s{_wppaAddtional = a})
+      . _Coerce
 
 instance FromJSON WorkerPoolPoolArgs where
         parseJSON
@@ -3755,7 +3773,7 @@ seqMapTaskUserFn
     -> SeqMapTaskUserFn
 seqMapTaskUserFn pSmtufAddtional_ =
     SeqMapTaskUserFn
-    { _smtufAddtional = pSmtufAddtional_
+    { _smtufAddtional = _Coerce # pSmtufAddtional_
     }
 
 -- | Properties of the object.
@@ -3763,6 +3781,7 @@ smtufAddtional :: Lens' SeqMapTaskUserFn (HashMap Text JSONValue)
 smtufAddtional
   = lens _smtufAddtional
       (\ s a -> s{_smtufAddtional = a})
+      . _Coerce
 
 instance FromJSON SeqMapTaskUserFn where
         parseJSON
@@ -3789,7 +3808,7 @@ partialGroupByKeyInstructionValueCombiningFn
     -> PartialGroupByKeyInstructionValueCombiningFn
 partialGroupByKeyInstructionValueCombiningFn pPgbkivcfAddtional_ =
     PartialGroupByKeyInstructionValueCombiningFn
-    { _pgbkivcfAddtional = pPgbkivcfAddtional_
+    { _pgbkivcfAddtional = _Coerce # pPgbkivcfAddtional_
     }
 
 -- | Properties of the object.
@@ -3797,6 +3816,7 @@ pgbkivcfAddtional :: Lens' PartialGroupByKeyInstructionValueCombiningFn (HashMap
 pgbkivcfAddtional
   = lens _pgbkivcfAddtional
       (\ s a -> s{_pgbkivcfAddtional = a})
+      . _Coerce
 
 instance FromJSON
          PartialGroupByKeyInstructionValueCombiningFn where
@@ -4081,13 +4101,14 @@ sinkSpec
     -> SinkSpec
 sinkSpec pSAddtional_ =
     SinkSpec
-    { _sAddtional = pSAddtional_
+    { _sAddtional = _Coerce # pSAddtional_
     }
 
 -- | Properties of the object.
 sAddtional :: Lens' SinkSpec (HashMap Text JSONValue)
 sAddtional
-  = lens _sAddtional (\ s a -> s{_sAddtional = a})
+  = lens _sAddtional (\ s a -> s{_sAddtional = a}) .
+      _Coerce
 
 instance FromJSON SinkSpec where
         parseJSON
@@ -5226,7 +5247,7 @@ sourceBaseSpecsItem
     -> SourceBaseSpecsItem
 sourceBaseSpecsItem pSbsiAddtional_ =
     SourceBaseSpecsItem
-    { _sbsiAddtional = pSbsiAddtional_
+    { _sbsiAddtional = _Coerce # pSbsiAddtional_
     }
 
 -- | Properties of the object.
@@ -5234,6 +5255,7 @@ sbsiAddtional :: Lens' SourceBaseSpecsItem (HashMap Text JSONValue)
 sbsiAddtional
   = lens _sbsiAddtional
       (\ s a -> s{_sbsiAddtional = a})
+      . _Coerce
 
 instance FromJSON SourceBaseSpecsItem where
         parseJSON
@@ -5371,7 +5393,7 @@ sideInputInfoKind
     -> SideInputInfoKind
 sideInputInfoKind pSiikAddtional_ =
     SideInputInfoKind
-    { _siikAddtional = pSiikAddtional_
+    { _siikAddtional = _Coerce # pSiikAddtional_
     }
 
 -- | Properties of the object.
@@ -5379,6 +5401,7 @@ siikAddtional :: Lens' SideInputInfoKind (HashMap Text JSONValue)
 siikAddtional
   = lens _siikAddtional
       (\ s a -> s{_siikAddtional = a})
+      . _Coerce
 
 instance FromJSON SideInputInfoKind where
         parseJSON
@@ -5548,13 +5571,14 @@ sourceCodec
     -> SourceCodec
 sourceCodec pSouAddtional_ =
     SourceCodec
-    { _souAddtional = pSouAddtional_
+    { _souAddtional = _Coerce # pSouAddtional_
     }
 
 -- | Properties of the object.
 souAddtional :: Lens' SourceCodec (HashMap Text JSONValue)
 souAddtional
   = lens _souAddtional (\ s a -> s{_souAddtional = a})
+      . _Coerce
 
 instance FromJSON SourceCodec where
         parseJSON

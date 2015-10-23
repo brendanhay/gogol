@@ -37,7 +37,7 @@ representativeInfoResponseDivisions
     -> RepresentativeInfoResponseDivisions
 representativeInfoResponseDivisions pRirdAddtional_ =
     RepresentativeInfoResponseDivisions
-    { _rirdAddtional = pRirdAddtional_
+    { _rirdAddtional = _Coerce # pRirdAddtional_
     }
 
 -- | The unique Open Civic Data identifier for this division.
@@ -45,6 +45,7 @@ rirdAddtional :: Lens' RepresentativeInfoResponseDivisions (HashMap Text Geograp
 rirdAddtional
   = lens _rirdAddtional
       (\ s a -> s{_rirdAddtional = a})
+      . _Coerce
 
 instance FromJSON RepresentativeInfoResponseDivisions
          where
@@ -1538,7 +1539,7 @@ representativeInfoDataDivisions
     -> RepresentativeInfoDataDivisions
 representativeInfoDataDivisions pRiddAddtional_ =
     RepresentativeInfoDataDivisions
-    { _riddAddtional = pRiddAddtional_
+    { _riddAddtional = _Coerce # pRiddAddtional_
     }
 
 -- | The unique Open Civic Data identifier for this division.
@@ -1546,6 +1547,7 @@ riddAddtional :: Lens' RepresentativeInfoDataDivisions (HashMap Text GeographicD
 riddAddtional
   = lens _riddAddtional
       (\ s a -> s{_riddAddtional = a})
+      . _Coerce
 
 instance FromJSON RepresentativeInfoDataDivisions
          where

@@ -145,13 +145,14 @@ analyzeModelDescriptionConfusionMatrixRowTotals
     -> AnalyzeModelDescriptionConfusionMatrixRowTotals
 analyzeModelDescriptionConfusionMatrixRowTotals pAmdcmrtAddtional_ =
     AnalyzeModelDescriptionConfusionMatrixRowTotals
-    { _amdcmrtAddtional = pAmdcmrtAddtional_
+    { _amdcmrtAddtional = _Coerce # pAmdcmrtAddtional_
     }
 
 amdcmrtAddtional :: Lens' AnalyzeModelDescriptionConfusionMatrixRowTotals (HashMap Text Text)
 amdcmrtAddtional
   = lens _amdcmrtAddtional
       (\ s a -> s{_amdcmrtAddtional = a})
+      . _Coerce
 
 instance FromJSON
          AnalyzeModelDescriptionConfusionMatrixRowTotals where
@@ -375,12 +376,13 @@ insertUtilityItem
     -> InsertUtilityItem
 insertUtilityItem pIuiAddtional_ =
     InsertUtilityItem
-    { _iuiAddtional = pIuiAddtional_
+    { _iuiAddtional = _Coerce # pIuiAddtional_
     }
 
 iuiAddtional :: Lens' InsertUtilityItem (HashMap Text Double)
 iuiAddtional
   = lens _iuiAddtional (\ s a -> s{_iuiAddtional = a})
+      . _Coerce
 
 instance FromJSON InsertUtilityItem where
         parseJSON
@@ -1045,7 +1047,7 @@ analyzeModelDescriptionConfusionMatrix
     -> AnalyzeModelDescriptionConfusionMatrix
 analyzeModelDescriptionConfusionMatrix pAmdcmAddtional_ =
     AnalyzeModelDescriptionConfusionMatrix
-    { _amdcmAddtional = pAmdcmAddtional_
+    { _amdcmAddtional = _Coerce # pAmdcmAddtional_
     }
 
 -- | Confusion matrix information for the true class label.
@@ -1053,6 +1055,7 @@ amdcmAddtional :: Lens' AnalyzeModelDescriptionConfusionMatrix (HashMap Text Ana
 amdcmAddtional
   = lens _amdcmAddtional
       (\ s a -> s{_amdcmAddtional = a})
+      . _Coerce
 
 instance FromJSON
          AnalyzeModelDescriptionConfusionMatrix where
@@ -1236,13 +1239,14 @@ analyzeErrorsItem
     -> AnalyzeErrorsItem
 analyzeErrorsItem pAeiAddtional_ =
     AnalyzeErrorsItem
-    { _aeiAddtional = pAeiAddtional_
+    { _aeiAddtional = _Coerce # pAeiAddtional_
     }
 
 -- | Error level followed by a detailed error message.
 aeiAddtional :: Lens' AnalyzeErrorsItem (HashMap Text Text)
 aeiAddtional
   = lens _aeiAddtional (\ s a -> s{_aeiAddtional = a})
+      . _Coerce
 
 instance FromJSON AnalyzeErrorsItem where
         parseJSON
@@ -1425,7 +1429,7 @@ analyzeModelDescriptionConfusionMatrixAdditional
     -> AnalyzeModelDescriptionConfusionMatrixAdditional
 analyzeModelDescriptionConfusionMatrixAdditional pAmdcmaAddtional_ =
     AnalyzeModelDescriptionConfusionMatrixAdditional
-    { _amdcmaAddtional = pAmdcmaAddtional_
+    { _amdcmaAddtional = _Coerce # pAmdcmaAddtional_
     }
 
 -- | Average number of times an instance with correct class label
@@ -1435,6 +1439,7 @@ amdcmaAddtional :: Lens' AnalyzeModelDescriptionConfusionMatrixAdditional (HashM
 amdcmaAddtional
   = lens _amdcmaAddtional
       (\ s a -> s{_amdcmaAddtional = a})
+      . _Coerce
 
 instance FromJSON
          AnalyzeModelDescriptionConfusionMatrixAdditional

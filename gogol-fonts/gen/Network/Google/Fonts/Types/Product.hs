@@ -202,13 +202,14 @@ webfontFiles
     -> WebfontFiles
 webfontFiles pWfAddtional_ =
     WebfontFiles
-    { _wfAddtional = pWfAddtional_
+    { _wfAddtional = _Coerce # pWfAddtional_
     }
 
 -- | The font file URL (value) for an specific variant (key).
 wfAddtional :: Lens' WebfontFiles (HashMap Text Text)
 wfAddtional
-  = lens _wfAddtional (\ s a -> s{_wfAddtional = a})
+  = lens _wfAddtional (\ s a -> s{_wfAddtional = a}) .
+      _Coerce
 
 instance FromJSON WebfontFiles where
         parseJSON

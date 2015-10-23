@@ -834,7 +834,7 @@ listResourceResponseItemEndpoints
     -> ListResourceResponseItemEndpoints
 listResourceResponseItemEndpoints pLrrieAddtional_ =
     ListResourceResponseItemEndpoints
-    { _lrrieAddtional = pLrrieAddtional_
+    { _lrrieAddtional = _Coerce # pLrrieAddtional_
     }
 
 -- | The name of the service end point.
@@ -842,6 +842,7 @@ lrrieAddtional :: Lens' ListResourceResponseItemEndpoints (HashMap Text [Int32])
 lrrieAddtional
   = lens _lrrieAddtional
       (\ s a -> s{_lrrieAddtional = a})
+      . _Coerce
 
 instance FromJSON ListResourceResponseItemEndpoints
          where

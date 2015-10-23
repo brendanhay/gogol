@@ -289,13 +289,14 @@ usageReportParametersItemMsgValueItem
     -> UsageReportParametersItemMsgValueItem
 usageReportParametersItemMsgValueItem pUrpimviAddtional_ =
     UsageReportParametersItemMsgValueItem
-    { _urpimviAddtional = pUrpimviAddtional_
+    { _urpimviAddtional = _Coerce # pUrpimviAddtional_
     }
 
 urpimviAddtional :: Lens' UsageReportParametersItemMsgValueItem (HashMap Text JSONValue)
 urpimviAddtional
   = lens _urpimviAddtional
       (\ s a -> s{_urpimviAddtional = a})
+      . _Coerce
 
 instance FromJSON
          UsageReportParametersItemMsgValueItem where
@@ -770,13 +771,14 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams
-    { _cpAddtional = pCpAddtional_
+    { _cpAddtional = _Coerce # pCpAddtional_
     }
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
 cpAddtional
-  = lens _cpAddtional (\ s a -> s{_cpAddtional = a})
+  = lens _cpAddtional (\ s a -> s{_cpAddtional = a}) .
+      _Coerce
 
 instance FromJSON ChannelParams where
         parseJSON

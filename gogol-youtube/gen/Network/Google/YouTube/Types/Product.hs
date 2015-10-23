@@ -4838,13 +4838,14 @@ channelLocalizations
     -> ChannelLocalizations
 channelLocalizations pClAddtional_ =
     ChannelLocalizations
-    { _clAddtional = pClAddtional_
+    { _clAddtional = _Coerce # pClAddtional_
     }
 
 -- | The language tag, using string since map_key require simple types.
 clAddtional :: Lens' ChannelLocalizations (HashMap Text ChannelLocalization)
 clAddtional
-  = lens _clAddtional (\ s a -> s{_clAddtional = a})
+  = lens _clAddtional (\ s a -> s{_clAddtional = a}) .
+      _Coerce
 
 instance FromJSON ChannelLocalizations where
         parseJSON
@@ -5335,13 +5336,14 @@ playListLocalizations
     -> PlayListLocalizations
 playListLocalizations pPllAddtional_ =
     PlayListLocalizations
-    { _pllAddtional = pPllAddtional_
+    { _pllAddtional = _Coerce # pPllAddtional_
     }
 
 -- | The language tag, using string since map_key require simple types.
 pllAddtional :: Lens' PlayListLocalizations (HashMap Text PlayListLocalization)
 pllAddtional
   = lens _pllAddtional (\ s a -> s{_pllAddtional = a})
+      . _Coerce
 
 instance FromJSON PlayListLocalizations where
         parseJSON
@@ -6125,13 +6127,14 @@ videoLocalizations
     -> VideoLocalizations
 videoLocalizations pVlAddtional_ =
     VideoLocalizations
-    { _vlAddtional = pVlAddtional_
+    { _vlAddtional = _Coerce # pVlAddtional_
     }
 
 -- | The language tag, using string since map_key require simple types.
 vlAddtional :: Lens' VideoLocalizations (HashMap Text VideoLocalization)
 vlAddtional
-  = lens _vlAddtional (\ s a -> s{_vlAddtional = a})
+  = lens _vlAddtional (\ s a -> s{_vlAddtional = a}) .
+      _Coerce
 
 instance FromJSON VideoLocalizations where
         parseJSON
@@ -8306,13 +8309,14 @@ channelSectionLocalizations
     -> ChannelSectionLocalizations
 channelSectionLocalizations pCslAddtional_ =
     ChannelSectionLocalizations
-    { _cslAddtional = pCslAddtional_
+    { _cslAddtional = _Coerce # pCslAddtional_
     }
 
 -- | The language tag, using string since map_key require simple types.
 cslAddtional :: Lens' ChannelSectionLocalizations (HashMap Text ChannelSectionLocalization)
 cslAddtional
   = lens _cslAddtional (\ s a -> s{_cslAddtional = a})
+      . _Coerce
 
 instance FromJSON ChannelSectionLocalizations where
         parseJSON

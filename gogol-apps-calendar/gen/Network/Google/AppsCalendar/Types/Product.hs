@@ -887,13 +887,14 @@ colorsEvent
     -> ColorsEvent
 colorsEvent pCeAddtional_ =
     ColorsEvent
-    { _ceAddtional = pCeAddtional_
+    { _ceAddtional = _Coerce # pCeAddtional_
     }
 
 -- | An event color definition.
 ceAddtional :: Lens' ColorsEvent (HashMap Text ColorDefinition)
 ceAddtional
-  = lens _ceAddtional (\ s a -> s{_ceAddtional = a})
+  = lens _ceAddtional (\ s a -> s{_ceAddtional = a}) .
+      _Coerce
 
 instance FromJSON ColorsEvent where
         parseJSON
@@ -1571,7 +1572,7 @@ freeBusyResponseGroups
     -> FreeBusyResponseGroups
 freeBusyResponseGroups pFbrgAddtional_ =
     FreeBusyResponseGroups
-    { _fbrgAddtional = pFbrgAddtional_
+    { _fbrgAddtional = _Coerce # pFbrgAddtional_
     }
 
 -- | List of calendars that are members of this group.
@@ -1579,6 +1580,7 @@ fbrgAddtional :: Lens' FreeBusyResponseGroups (HashMap Text FreeBusyGroup)
 fbrgAddtional
   = lens _fbrgAddtional
       (\ s a -> s{_fbrgAddtional = a})
+      . _Coerce
 
 instance FromJSON FreeBusyResponseGroups where
         parseJSON
@@ -1661,13 +1663,14 @@ colorsCalendar
     -> ColorsCalendar
 colorsCalendar pCcAddtional_ =
     ColorsCalendar
-    { _ccAddtional = pCcAddtional_
+    { _ccAddtional = _Coerce # pCcAddtional_
     }
 
 -- | A calendar color defintion.
 ccAddtional :: Lens' ColorsCalendar (HashMap Text ColorDefinition)
 ccAddtional
-  = lens _ccAddtional (\ s a -> s{_ccAddtional = a})
+  = lens _ccAddtional (\ s a -> s{_ccAddtional = a}) .
+      _Coerce
 
 instance FromJSON ColorsCalendar where
         parseJSON
@@ -1749,7 +1752,7 @@ eventExtendedPropertiesPrivate
     -> EventExtendedPropertiesPrivate
 eventExtendedPropertiesPrivate pEeppAddtional_ =
     EventExtendedPropertiesPrivate
-    { _eeppAddtional = pEeppAddtional_
+    { _eeppAddtional = _Coerce # pEeppAddtional_
     }
 
 -- | The name of the private property and the corresponding value.
@@ -1757,6 +1760,7 @@ eeppAddtional :: Lens' EventExtendedPropertiesPrivate (HashMap Text Text)
 eeppAddtional
   = lens _eeppAddtional
       (\ s a -> s{_eeppAddtional = a})
+      . _Coerce
 
 instance FromJSON EventExtendedPropertiesPrivate
          where
@@ -1786,13 +1790,14 @@ channelParams
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams
-    { _cpAddtional = pCpAddtional_
+    { _cpAddtional = _Coerce # pCpAddtional_
     }
 
 -- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
 cpAddtional
-  = lens _cpAddtional (\ s a -> s{_cpAddtional = a})
+  = lens _cpAddtional (\ s a -> s{_cpAddtional = a}) .
+      _Coerce
 
 instance FromJSON ChannelParams where
         parseJSON
@@ -2745,13 +2750,14 @@ eventGadgetPreferences
     -> EventGadgetPreferences
 eventGadgetPreferences pEgpAddtional_ =
     EventGadgetPreferences
-    { _egpAddtional = pEgpAddtional_
+    { _egpAddtional = _Coerce # pEgpAddtional_
     }
 
 -- | The preference name and corresponding value.
 egpAddtional :: Lens' EventGadgetPreferences (HashMap Text Text)
 egpAddtional
   = lens _egpAddtional (\ s a -> s{_egpAddtional = a})
+      . _Coerce
 
 instance FromJSON EventGadgetPreferences where
         parseJSON
@@ -2962,7 +2968,7 @@ eventExtendedPropertiesShared
     -> EventExtendedPropertiesShared
 eventExtendedPropertiesShared pEepsAddtional_ =
     EventExtendedPropertiesShared
-    { _eepsAddtional = pEepsAddtional_
+    { _eepsAddtional = _Coerce # pEepsAddtional_
     }
 
 -- | The name of the shared property and the corresponding value.
@@ -2970,6 +2976,7 @@ eepsAddtional :: Lens' EventExtendedPropertiesShared (HashMap Text Text)
 eepsAddtional
   = lens _eepsAddtional
       (\ s a -> s{_eepsAddtional = a})
+      . _Coerce
 
 instance FromJSON EventExtendedPropertiesShared where
         parseJSON
@@ -2998,7 +3005,7 @@ freeBusyResponseCalendars
     -> FreeBusyResponseCalendars
 freeBusyResponseCalendars pFbrcAddtional_ =
     FreeBusyResponseCalendars
-    { _fbrcAddtional = pFbrcAddtional_
+    { _fbrcAddtional = _Coerce # pFbrcAddtional_
     }
 
 -- | Free\/busy expansions for a single calendar.
@@ -3006,6 +3013,7 @@ fbrcAddtional :: Lens' FreeBusyResponseCalendars (HashMap Text FreeBusyCalendar)
 fbrcAddtional
   = lens _fbrcAddtional
       (\ s a -> s{_fbrcAddtional = a})
+      . _Coerce
 
 instance FromJSON FreeBusyResponseCalendars where
         parseJSON

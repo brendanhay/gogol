@@ -392,7 +392,7 @@ entityProperties
     -> EntityProperties
 entityProperties pEpAddtional_ =
     EntityProperties
-    { _epAddtional = pEpAddtional_
+    { _epAddtional = _Coerce # pEpAddtional_
     }
 
 -- | The name of the property. A property name matching regex \"__.*__\" is
@@ -401,7 +401,8 @@ entityProperties pEpAddtional_ =
 -- \"\".
 epAddtional :: Lens' EntityProperties (HashMap Text Property)
 epAddtional
-  = lens _epAddtional (\ s a -> s{_epAddtional = a})
+  = lens _epAddtional (\ s a -> s{_epAddtional = a}) .
+      _Coerce
 
 instance FromJSON EntityProperties where
         parseJSON

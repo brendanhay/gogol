@@ -548,7 +548,6 @@ externalLit = \case
     UInt64    -> TyCon "Word64"
     Int32     -> TyCon "Int32"
     Int64     -> TyCon "Int64"
-
     Alt t     -> TyCon (unqual (Text.unpack t))
     RqBody    -> TyCon "RequestBody"
     RsBody    -> TyCon "Stream"
@@ -569,7 +568,6 @@ internalLit = \case
     UInt64    -> TyApp (TyCon "JSONText") (TyCon "Word64")
     Int32     -> TyApp (TyCon "JSONText") (TyCon "Int32")
     Int64     -> TyApp (TyCon "JSONText") (TyCon "Int64")
-
     Alt t     -> TyCon (unqual (Text.unpack t))
     RqBody    -> TyCon "RequestBody"
     RsBody    -> TyCon "Stream"
@@ -589,6 +587,7 @@ mapping t e = infixE e "." (go t)
 iso :: TType -> Maybe Exp
 iso = \case
     TList {}      -> Just (var "_Coerce")
+    TMap  {}      -> Just (var "_Coerce")
     TLit Nat      -> Just (var "_Nat")
     TLit Time     -> Just (var "_Time")
     TLit Date     -> Just (var "_Date")

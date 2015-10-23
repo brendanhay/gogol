@@ -162,12 +162,13 @@ beaconProperties
     -> BeaconProperties
 beaconProperties pBpAddtional_ =
     BeaconProperties
-    { _bpAddtional = pBpAddtional_
+    { _bpAddtional = _Coerce # pBpAddtional_
     }
 
 bpAddtional :: Lens' BeaconProperties (HashMap Text Text)
 bpAddtional
-  = lens _bpAddtional (\ s a -> s{_bpAddtional = a})
+  = lens _bpAddtional (\ s a -> s{_bpAddtional = a}) .
+      _Coerce
 
 instance FromJSON BeaconProperties where
         parseJSON

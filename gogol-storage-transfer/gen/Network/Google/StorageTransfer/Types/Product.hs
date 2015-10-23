@@ -594,13 +594,14 @@ statusDetailsItem
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
-    { _sdiAddtional = pSdiAddtional_
+    { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
 sdiAddtional
   = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
+      . _Coerce
 
 instance FromJSON StatusDetailsItem where
         parseJSON
@@ -1435,13 +1436,14 @@ operationMetadata
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
     OperationMetadata
-    { _omAddtional = pOmAddtional_
+    { _omAddtional = _Coerce # pOmAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
 omAddtional
-  = lens _omAddtional (\ s a -> s{_omAddtional = a})
+  = lens _omAddtional (\ s a -> s{_omAddtional = a}) .
+      _Coerce
 
 instance FromJSON OperationMetadata where
         parseJSON
@@ -1827,13 +1829,14 @@ operationResponse
     -> OperationResponse
 operationResponse pOrAddtional_ =
     OperationResponse
-    { _orAddtional = pOrAddtional_
+    { _orAddtional = _Coerce # pOrAddtional_
     }
 
 -- | Properties of the object. Contains field \'ype with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
 orAddtional
-  = lens _orAddtional (\ s a -> s{_orAddtional = a})
+  = lens _orAddtional (\ s a -> s{_orAddtional = a}) .
+      _Coerce
 
 instance FromJSON OperationResponse where
         parseJSON

@@ -1317,12 +1317,13 @@ debuggeeLabels
     -> DebuggeeLabels
 debuggeeLabels pDlAddtional_ =
     DebuggeeLabels
-    { _dlAddtional = pDlAddtional_
+    { _dlAddtional = _Coerce # pDlAddtional_
     }
 
 dlAddtional :: Lens' DebuggeeLabels (HashMap Text Text)
 dlAddtional
-  = lens _dlAddtional (\ s a -> s{_dlAddtional = a})
+  = lens _dlAddtional (\ s a -> s{_dlAddtional = a}) .
+      _Coerce
 
 instance FromJSON DebuggeeLabels where
         parseJSON

@@ -554,12 +554,13 @@ projectLabels
     -> ProjectLabels
 projectLabels pPlAddtional_ =
     ProjectLabels
-    { _plAddtional = pPlAddtional_
+    { _plAddtional = _Coerce # pPlAddtional_
     }
 
 plAddtional :: Lens' ProjectLabels (HashMap Text Text)
 plAddtional
-  = lens _plAddtional (\ s a -> s{_plAddtional = a})
+  = lens _plAddtional (\ s a -> s{_plAddtional = a}) .
+      _Coerce
 
 instance FromJSON ProjectLabels where
         parseJSON

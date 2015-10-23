@@ -711,7 +711,7 @@ gaDataTotalsForAllResults
     -> GaDataTotalsForAllResults
 gaDataTotalsForAllResults pGdtfarAddtional_ =
     GaDataTotalsForAllResults
-    { _gdtfarAddtional = pGdtfarAddtional_
+    { _gdtfarAddtional = _Coerce # pGdtfarAddtional_
     }
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
@@ -720,6 +720,7 @@ gdtfarAddtional :: Lens' GaDataTotalsForAllResults (HashMap Text Text)
 gdtfarAddtional
   = lens _gdtfarAddtional
       (\ s a -> s{_gdtfarAddtional = a})
+      . _Coerce
 
 instance FromJSON GaDataTotalsForAllResults where
         parseJSON
@@ -3784,7 +3785,7 @@ realtimeDataTotalsForAllResults
     -> RealtimeDataTotalsForAllResults
 realtimeDataTotalsForAllResults pRdtfarAddtional_ =
     RealtimeDataTotalsForAllResults
-    { _rdtfarAddtional = pRdtfarAddtional_
+    { _rdtfarAddtional = _Coerce # pRdtfarAddtional_
     }
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
@@ -3793,6 +3794,7 @@ rdtfarAddtional :: Lens' RealtimeDataTotalsForAllResults (HashMap Text Text)
 rdtfarAddtional
   = lens _rdtfarAddtional
       (\ s a -> s{_rdtfarAddtional = a})
+      . _Coerce
 
 instance FromJSON RealtimeDataTotalsForAllResults
          where
@@ -9269,7 +9271,7 @@ mcfDataTotalsForAllResults
     -> McfDataTotalsForAllResults
 mcfDataTotalsForAllResults pMdtfarAddtional_ =
     McfDataTotalsForAllResults
-    { _mdtfarAddtional = pMdtfarAddtional_
+    { _mdtfarAddtional = _Coerce # pMdtfarAddtional_
     }
 
 -- | Key-value pair for the total value of a metric. Key is the metric name
@@ -9278,6 +9280,7 @@ mdtfarAddtional :: Lens' McfDataTotalsForAllResults (HashMap Text Text)
 mdtfarAddtional
   = lens _mdtfarAddtional
       (\ s a -> s{_mdtfarAddtional = a})
+      . _Coerce
 
 instance FromJSON McfDataTotalsForAllResults where
         parseJSON
@@ -9512,13 +9515,14 @@ columnAttributes
     -> ColumnAttributes
 columnAttributes pCaAddtional_ =
     ColumnAttributes
-    { _caAddtional = pCaAddtional_
+    { _caAddtional = _Coerce # pCaAddtional_
     }
 
 -- | The name of the attribute.
 caAddtional :: Lens' ColumnAttributes (HashMap Text Text)
 caAddtional
-  = lens _caAddtional (\ s a -> s{_caAddtional = a})
+  = lens _caAddtional (\ s a -> s{_caAddtional = a}) .
+      _Coerce
 
 instance FromJSON ColumnAttributes where
         parseJSON
