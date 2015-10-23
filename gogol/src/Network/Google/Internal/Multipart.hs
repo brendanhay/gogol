@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+ {-# LANGUAGE OverloadedStrings #-}
 
 -- |
 -- Module      : Network.Google.Internal.Multipart
@@ -18,7 +18,6 @@ import qualified Data.CaseInsensitive                  as CI
 import           Data.Monoid
 import           Network.Google.Types
 import           Network.HTTP.Client
-import qualified Network.HTTP.Client.Conduit           as Client
 import           Network.HTTP.Client.MultipartFormData (webkitBoundary)
 import           Network.HTTP.Media
 import           Network.HTTP.Types
@@ -47,7 +46,7 @@ genBoundary = Boundary <$> liftIO webkitBoundary
 multipartHeader :: Boundary -> Header
 multipartHeader (Boundary bs) =
     ( hContentType
-    , "multipart/related; boundary=\"" <> bs <> "\""
+    , "multipart/related; boundary=" <> bs
     )
 
 start :: Boundary -> RequestBody

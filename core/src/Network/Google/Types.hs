@@ -8,6 +8,7 @@
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
+{-# LANGUAGE TupleSections              #-}
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE TypeOperators              #-}
 {-# LANGUAGE UndecidableInstances       #-}
@@ -25,7 +26,6 @@ module Network.Google.Types where
 import           Control.Applicative
 import           Control.Exception.Lens                (exception)
 import           Control.Lens                          hiding (coerce)
-import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
@@ -116,14 +116,15 @@ data SerializeError = SerializeError'
     { _serializeId      :: !ServiceId
     , _serializeHeaders :: [HTTP.Header]
     , _serializeStatus  :: !Status
-    , _serializeMessage :: String
+    , _serializeMessage :: !String
+    , _serializeBody    :: !(Maybe LBS.ByteString)
     } deriving (Eq, Show, Typeable)
 
 data ServiceError = ServiceError'
     { _serviceId      :: !ServiceId
     , _serviceStatus  :: !Status
-    , _serviceHeaders :: [HTTP.Header]
-    , _serviceBody    :: Maybe LBS.ByteString
+    , _serviceHeaders :: ![HTTP.Header]
+    , _serviceBody    :: !(Maybe LBS.ByteString)
     } deriving (Eq, Show, Typeable)
 
 class AsError a where
@@ -249,7 +250,7 @@ data Client a = Client
     , _cliCheck    :: !(Status -> Bool)
     , _cliService  :: !Service
     , _cliRequest  :: !Request
-    , _cliResponse :: !(Stream -> ResourceT IO (Either String a))
+    , _cliResponse :: !(Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
     }
 
 clientService :: Lens' (Client a) Service
@@ -261,7 +262,7 @@ mime p = client (fromStream p) (Just (contentType p))
 discard :: Method -> [Int] -> Request -> Service -> Client ()
 discard = client (\b -> closeResumableSource b >> pure (Right ())) Nothing
 
-client :: (Stream -> ResourceT IO (Either String a))
+client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
        -> Maybe MediaType
        -> Method
        -> [Int]
@@ -299,13 +300,19 @@ instance ToJSON a => ToBody JSON a where
     toBody Proxy = RequestBodyLBS . encode
 
 class Accept c => FromStream c a where
-    fromStream :: Proxy c -> Stream -> ResourceT IO (Either String a)
+    fromStream :: Proxy c
+               -> Stream
+               -> ResourceT IO (Either (String, LBS.ByteString) a)
 
 instance FromStream OctetStream Stream where
     fromStream Proxy = pure . Right
 
 instance FromJSON a => FromStream JSON a where
-    fromStream Proxy = sinkLBS >=> pure . eitherDecode
+    fromStream Proxy  s = do
+        bs <- sinkLBS s
+        case eitherDecode bs of
+            Left  e -> pure $! Left (e, bs)
+            Right x -> pure $! Right x
 
 class GoogleRequest a where
     type Rs a :: *

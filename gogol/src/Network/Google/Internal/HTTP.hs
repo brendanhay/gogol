@@ -68,12 +68,13 @@ perform Env{..} x = catches go handlers
         r       <- _cliResponse (responseBody rs)
 
         pure $! case r of
-            Right y -> Right y
-            Left  e -> Left . SerializeError $ SerializeError'
+            Right y       -> Right y
+            Left  (e, bs) -> Left . SerializeError $ SerializeError'
                 { _serializeId      = _svcId
                 , _serializeHeaders = responseHeaders rs
                 , _serializeStatus  = responseStatus rs
                 , _serializeMessage = e
+                , _serializeBody    = Just bs
                 }
 
     request ct b = def
