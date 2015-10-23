@@ -89,7 +89,7 @@ type ObjectsUpdateResource =
                              QueryParam "projection" ObjectsUpdateProjection :>
                                QueryParam "generation" (JSONText Int64) :>
                                  QueryParam "alt" AltMedia :>
-                                   Get '[OctetStream] Stream
+                                   Put '[OctetStream] Stream
 
 -- | Updates an object\'s metadata.
 --

@@ -73,7 +73,7 @@ placementGroupsInsert
     -> PlacementGroupsInsert
 placementGroupsInsert pPgiProFileId_ pPgiPayload_ =
     PlacementGroupsInsert
-    { _pgiProFileId = pPgiProFileId_
+    { _pgiProFileId = _Coerce # pPgiProFileId_
     , _pgiPayload = pPgiPayload_
     }
 

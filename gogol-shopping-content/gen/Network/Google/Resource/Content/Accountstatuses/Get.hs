@@ -71,8 +71,8 @@ accountstatusesGet
     -> AccountstatusesGet
 accountstatusesGet pAg1MerchantId_ pAg1AccountId_ =
     AccountstatusesGet
-    { _ag1MerchantId = pAg1MerchantId_
-    , _ag1AccountId = pAg1AccountId_
+    { _ag1MerchantId = _Coerce # pAg1MerchantId_
+    , _ag1AccountId = _Coerce # pAg1AccountId_
     }
 
 -- | The ID of the managing account.

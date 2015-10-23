@@ -80,7 +80,7 @@ backupRunsGet
 backupRunsGet pBrgProject_ pBrgId_ pBrgInstance_ =
     BackupRunsGet
     { _brgProject = pBrgProject_
-    , _brgId = pBrgId_
+    , _brgId = _Coerce # pBrgId_
     , _brgInstance = pBrgInstance_
     }
 

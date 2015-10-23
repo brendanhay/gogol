@@ -80,7 +80,7 @@ usersMessagesAttachmentsGet
     -> UsersMessagesAttachmentsGet
 usersMessagesAttachmentsGet pUmagUserId_ pUmagId_ pUmagMessageId_ =
     UsersMessagesAttachmentsGet
-    { _umagUserId = pUmagUserId_
+    { _umagUserId = "me"
     , _umagId = pUmagId_
     , _umagMessageId = pUmagMessageId_
     }

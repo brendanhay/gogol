@@ -72,8 +72,8 @@ campaignsGet
     -> CampaignsGet
 campaignsGet pCggProFileId_ pCggId_ =
     CampaignsGet
-    { _cggProFileId = pCggProFileId_
-    , _cggId = pCggId_
+    { _cggProFileId = _Coerce # pCggProFileId_
+    , _cggId = _Coerce # pCggId_
     }
 
 -- | User profile ID associated with this request.

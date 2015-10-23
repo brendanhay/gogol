@@ -83,7 +83,7 @@ usersMessagesGet
 usersMessagesGet pUmgUserId_ pUmgId_ =
     UsersMessagesGet
     { _umgFormat = Full
-    , _umgUserId = pUmgUserId_
+    , _umgUserId = "me"
     , _umgId = pUmgId_
     , _umgMetadataHeaders = Nothing
     }

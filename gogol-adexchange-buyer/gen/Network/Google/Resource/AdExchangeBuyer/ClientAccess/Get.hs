@@ -69,8 +69,8 @@ clientAccessGet
     -> ClientAccessGet
 clientAccessGet pCagSponsorAccountId_ pCagClientAccountId_ =
     ClientAccessGet
-    { _cagSponsorAccountId = pCagSponsorAccountId_
-    , _cagClientAccountId = pCagClientAccountId_
+    { _cagSponsorAccountId = _Coerce # pCagSponsorAccountId_
+    , _cagClientAccountId = _Coerce # pCagClientAccountId_
     }
 
 cagSponsorAccountId :: Lens' ClientAccessGet Int32

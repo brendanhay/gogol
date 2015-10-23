@@ -153,7 +153,7 @@ type ObjectsCopyResource =
                                                    (JSONText Int64)
                                                    :>
                                                    QueryParam "alt" AltMedia :>
-                                                     Get '[OctetStream] Stream
+                                                     Post '[OctetStream] Stream
 
 -- | Copies a source object to a destination object. Optionally overrides
 -- metadata.

@@ -73,7 +73,7 @@ remarketingListsUpdate
     -> RemarketingListsUpdate
 remarketingListsUpdate pRluProFileId_ pRluPayload_ =
     RemarketingListsUpdate
-    { _rluProFileId = pRluProFileId_
+    { _rluProFileId = _Coerce # pRluProFileId_
     , _rluPayload = pRluPayload_
     }
 

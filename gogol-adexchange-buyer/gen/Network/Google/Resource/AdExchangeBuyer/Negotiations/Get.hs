@@ -73,7 +73,7 @@ negotiationsGet
 negotiationsGet pNgPayload_ pNgNegotiationId_ =
     NegotiationsGet
     { _ngPayload = pNgPayload_
-    , _ngNegotiationId = pNgNegotiationId_
+    , _ngNegotiationId = _Coerce # pNgNegotiationId_
     }
 
 -- | Multipart request metadata.

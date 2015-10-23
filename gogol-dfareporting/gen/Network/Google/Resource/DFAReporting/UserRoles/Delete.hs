@@ -72,8 +72,8 @@ userRolesDelete
     -> UserRolesDelete
 userRolesDelete pUrdProFileId_ pUrdId_ =
     UserRolesDelete
-    { _urdProFileId = pUrdProFileId_
-    , _urdId = pUrdId_
+    { _urdProFileId = _Coerce # pUrdProFileId_
+    , _urdId = _Coerce # pUrdId_
     }
 
 -- | User profile ID associated with this request.

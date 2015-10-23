@@ -88,7 +88,7 @@ translationsList
 translationsList pTlQ_ pTlTarget_ =
     TranslationsList
     { _tlFormat = Nothing
-    , _tlQ = pTlQ_
+    , _tlQ = _Coerce # pTlQ_
     , _tlSource = Nothing
     , _tlCid = Nothing
     , _tlTarget = pTlTarget_

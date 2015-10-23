@@ -99,7 +99,7 @@ subAccountsList pSalProFileId_ =
     SubAccountsList
     { _salSearchString = Nothing
     , _salIds = Nothing
-    , _salProFileId = pSalProFileId_
+    , _salProFileId = _Coerce # pSalProFileId_
     , _salSortOrder = Nothing
     , _salPageToken = Nothing
     , _salSortField = Nothing

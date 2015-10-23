@@ -81,7 +81,7 @@ usersMessagesModify
 usersMessagesModify pUmmPayload_ pUmmUserId_ pUmmId_ =
     UsersMessagesModify
     { _ummPayload = pUmmPayload_
-    , _ummUserId = pUmmUserId_
+    , _ummUserId = "me"
     , _ummId = pUmmId_
     }
 

@@ -67,7 +67,7 @@ metrosList
     -> MetrosList
 metrosList pMlProFileId_ =
     MetrosList
-    { _mlProFileId = pMlProFileId_
+    { _mlProFileId = _Coerce # pMlProFileId_
     }
 
 -- | User profile ID associated with this request.

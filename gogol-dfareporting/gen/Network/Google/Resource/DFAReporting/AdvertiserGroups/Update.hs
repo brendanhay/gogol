@@ -73,7 +73,7 @@ advertiserGroupsUpdate
     -> AdvertiserGroupsUpdate
 advertiserGroupsUpdate pAguProFileId_ pAguPayload_ =
     AdvertiserGroupsUpdate
-    { _aguProFileId = pAguProFileId_
+    { _aguProFileId = _Coerce # pAguProFileId_
     , _aguPayload = pAguPayload_
     }
 

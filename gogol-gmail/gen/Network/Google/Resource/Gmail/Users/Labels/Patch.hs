@@ -79,7 +79,7 @@ usersLabelsPatch
 usersLabelsPatch pUlpPayload_ pUlpUserId_ pUlpId_ =
     UsersLabelsPatch
     { _ulpPayload = pUlpPayload_
-    , _ulpUserId = pUlpUserId_
+    , _ulpUserId = "me"
     , _ulpId = pUlpId_
     }
 

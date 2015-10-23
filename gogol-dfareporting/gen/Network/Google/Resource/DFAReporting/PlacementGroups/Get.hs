@@ -73,8 +73,8 @@ placementGroupsGet
     -> PlacementGroupsGet
 placementGroupsGet pPggProFileId_ pPggId_ =
     PlacementGroupsGet
-    { _pggProFileId = pPggProFileId_
-    , _pggId = pPggId_
+    { _pggProFileId = _Coerce # pPggProFileId_
+    , _pggId = _Coerce # pPggId_
     }
 
 -- | User profile ID associated with this request.

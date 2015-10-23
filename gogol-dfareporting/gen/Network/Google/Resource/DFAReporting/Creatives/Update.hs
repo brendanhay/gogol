@@ -72,7 +72,7 @@ creativesUpdate
     -> CreativesUpdate
 creativesUpdate pCreProFileId_ pCrePayload_ =
     CreativesUpdate
-    { _creProFileId = pCreProFileId_
+    { _creProFileId = _Coerce # pCreProFileId_
     , _crePayload = pCrePayload_
     }
 

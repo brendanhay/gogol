@@ -88,10 +88,10 @@ landingPagesPatch
     -> LandingPagesPatch
 landingPagesPatch pLppCampaignId_ pLppProFileId_ pLppPayload_ pLppId_ =
     LandingPagesPatch
-    { _lppCampaignId = pLppCampaignId_
-    , _lppProFileId = pLppProFileId_
+    { _lppCampaignId = _Coerce # pLppCampaignId_
+    , _lppProFileId = _Coerce # pLppProFileId_
     , _lppPayload = pLppPayload_
-    , _lppId = pLppId_
+    , _lppId = _Coerce # pLppId_
     }
 
 -- | Landing page campaign ID.

@@ -73,7 +73,7 @@ advertiserGroupsInsert
     -> AdvertiserGroupsInsert
 advertiserGroupsInsert pAgiProFileId_ pAgiPayload_ =
     AdvertiserGroupsInsert
-    { _agiProFileId = pAgiProFileId_
+    { _agiProFileId = _Coerce # pAgiProFileId_
     , _agiPayload = pAgiPayload_
     }
 

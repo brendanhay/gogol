@@ -72,7 +72,7 @@ advertisersUpdate
     -> AdvertisersUpdate
 advertisersUpdate pAuProFileId_ pAuPayload_ =
     AdvertisersUpdate
-    { _auProFileId = pAuProFileId_
+    { _auProFileId = _Coerce # pAuProFileId_
     , _auPayload = pAuPayload_
     }
 

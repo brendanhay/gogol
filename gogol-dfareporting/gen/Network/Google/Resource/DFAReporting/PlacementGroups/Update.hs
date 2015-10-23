@@ -73,7 +73,7 @@ placementGroupsUpdate
     -> PlacementGroupsUpdate
 placementGroupsUpdate pPguProFileId_ pPguPayload_ =
     PlacementGroupsUpdate
-    { _pguProFileId = pPguProFileId_
+    { _pguProFileId = _Coerce # pPguProFileId_
     , _pguPayload = pPguPayload_
     }
 

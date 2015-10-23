@@ -121,10 +121,10 @@ orderDocumentsList pOdlProFileId_ pOdlProjectId_ =
     OrderDocumentsList
     { _odlSearchString = Nothing
     , _odlIds = Nothing
-    , _odlProFileId = pOdlProFileId_
+    , _odlProFileId = _Coerce # pOdlProFileId_
     , _odlSortOrder = Nothing
     , _odlPageToken = Nothing
-    , _odlProjectId = pOdlProjectId_
+    , _odlProjectId = _Coerce # pOdlProjectId_
     , _odlSortField = Nothing
     , _odlOrderId = Nothing
     , _odlApproved = Nothing

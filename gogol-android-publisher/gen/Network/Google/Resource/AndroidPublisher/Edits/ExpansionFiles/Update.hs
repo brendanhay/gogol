@@ -100,7 +100,7 @@ editsExpansionFilesUpdate
 editsExpansionFilesUpdate pEefuPackageName_ pEefuAPKVersionCode_ pEefuPayload_ pEefuExpansionFileType_ pEefuEditId_ =
     EditsExpansionFilesUpdate
     { _eefuPackageName = pEefuPackageName_
-    , _eefuAPKVersionCode = pEefuAPKVersionCode_
+    , _eefuAPKVersionCode = _Coerce # pEefuAPKVersionCode_
     , _eefuPayload = pEefuPayload_
     , _eefuExpansionFileType = pEefuExpansionFileType_
     , _eefuEditId = pEefuEditId_

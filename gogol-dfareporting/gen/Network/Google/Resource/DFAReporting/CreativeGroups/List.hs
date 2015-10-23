@@ -109,7 +109,7 @@ creativeGroupsList pCglProFileId_ =
     CreativeGroupsList
     { _cglSearchString = Nothing
     , _cglIds = Nothing
-    , _cglProFileId = pCglProFileId_
+    , _cglProFileId = _Coerce # pCglProFileId_
     , _cglSortOrder = Nothing
     , _cglGroupNumber = Nothing
     , _cglPageToken = Nothing

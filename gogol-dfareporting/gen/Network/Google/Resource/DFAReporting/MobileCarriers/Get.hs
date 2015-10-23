@@ -72,8 +72,8 @@ mobileCarriersGet
     -> MobileCarriersGet
 mobileCarriersGet pMcgProFileId_ pMcgId_ =
     MobileCarriersGet
-    { _mcgProFileId = pMcgProFileId_
-    , _mcgId = pMcgId_
+    { _mcgProFileId = _Coerce # pMcgProFileId_
+    , _mcgId = _Coerce # pMcgId_
     }
 
 -- | User profile ID associated with this request.

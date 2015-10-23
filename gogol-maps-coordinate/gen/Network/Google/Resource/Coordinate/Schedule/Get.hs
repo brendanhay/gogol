@@ -73,7 +73,7 @@ scheduleGet
     -> ScheduleGet
 scheduleGet pSgJobId_ pSgTeamId_ =
     ScheduleGet
-    { _sgJobId = pSgJobId_
+    { _sgJobId = _Coerce # pSgJobId_
     , _sgTeamId = pSgTeamId_
     }
 

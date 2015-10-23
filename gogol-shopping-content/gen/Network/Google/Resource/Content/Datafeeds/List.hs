@@ -76,7 +76,7 @@ datafeedsList
     -> DatafeedsList
 datafeedsList pDatMerchantId_ =
     DatafeedsList
-    { _datMerchantId = pDatMerchantId_
+    { _datMerchantId = _Coerce # pDatMerchantId_
     , _datPageToken = Nothing
     , _datMaxResults = Nothing
     }

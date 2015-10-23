@@ -65,7 +65,7 @@ userProFilesGet
     -> UserProFilesGet
 userProFilesGet pUpfgProFileId_ =
     UserProFilesGet
-    { _upfgProFileId = pUpfgProFileId_
+    { _upfgProFileId = _Coerce # pUpfgProFileId_
     }
 
 -- | The user profile ID.

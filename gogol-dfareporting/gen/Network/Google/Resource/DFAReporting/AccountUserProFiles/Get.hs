@@ -73,8 +73,8 @@ accountUserProFilesGet
     -> AccountUserProFilesGet
 accountUserProFilesGet pAupfgProFileId_ pAupfgId_ =
     AccountUserProFilesGet
-    { _aupfgProFileId = pAupfgProFileId_
-    , _aupfgId = pAupfgId_
+    { _aupfgProFileId = _Coerce # pAupfgProFileId_
+    , _aupfgId = _Coerce # pAupfgId_
     }
 
 -- | User profile ID associated with this request.

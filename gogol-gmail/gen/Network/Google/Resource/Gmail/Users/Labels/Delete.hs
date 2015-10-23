@@ -74,7 +74,7 @@ usersLabelsDelete
     -> UsersLabelsDelete
 usersLabelsDelete pUldUserId_ pUldId_ =
     UsersLabelsDelete
-    { _uldUserId = pUldUserId_
+    { _uldUserId = "me"
     , _uldId = pUldId_
     }
 

@@ -72,8 +72,8 @@ placementStrategiesDelete
     -> PlacementStrategiesDelete
 placementStrategiesDelete pPsdProFileId_ pPsdId_ =
     PlacementStrategiesDelete
-    { _psdProFileId = pPsdProFileId_
-    , _psdId = pPsdId_
+    { _psdProFileId = _Coerce # pPsdProFileId_
+    , _psdId = _Coerce # pPsdId_
     }
 
 -- | User profile ID associated with this request.

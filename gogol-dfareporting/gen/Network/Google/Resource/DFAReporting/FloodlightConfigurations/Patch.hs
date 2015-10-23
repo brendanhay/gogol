@@ -81,9 +81,9 @@ floodlightConfigurationsPatch
     -> FloodlightConfigurationsPatch
 floodlightConfigurationsPatch pFcpProFileId_ pFcpPayload_ pFcpId_ =
     FloodlightConfigurationsPatch
-    { _fcpProFileId = pFcpProFileId_
+    { _fcpProFileId = _Coerce # pFcpProFileId_
     , _fcpPayload = pFcpPayload_
-    , _fcpId = pFcpId_
+    , _fcpId = _Coerce # pFcpId_
     }
 
 -- | User profile ID associated with this request.

@@ -67,7 +67,7 @@ operatingSystemsList
     -> OperatingSystemsList
 operatingSystemsList pOslProFileId_ =
     OperatingSystemsList
-    { _oslProFileId = pOslProFileId_
+    { _oslProFileId = _Coerce # pOslProFileId_
     }
 
 -- | User profile ID associated with this request.

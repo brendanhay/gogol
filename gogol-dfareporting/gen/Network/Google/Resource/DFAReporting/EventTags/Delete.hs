@@ -72,8 +72,8 @@ eventTagsDelete
     -> EventTagsDelete
 eventTagsDelete pEtdProFileId_ pEtdId_ =
     EventTagsDelete
-    { _etdProFileId = pEtdProFileId_
-    , _etdId = pEtdId_
+    { _etdProFileId = _Coerce # pEtdProFileId_
+    , _etdId = _Coerce # pEtdId_
     }
 
 -- | User profile ID associated with this request.

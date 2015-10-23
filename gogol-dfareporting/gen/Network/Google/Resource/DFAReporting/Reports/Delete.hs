@@ -72,8 +72,8 @@ reportsDelete
     -> ReportsDelete
 reportsDelete pRdReportId_ pRdProFileId_ =
     ReportsDelete
-    { _rdReportId = pRdReportId_
-    , _rdProFileId = pRdProFileId_
+    { _rdReportId = _Coerce # pRdReportId_
+    , _rdProFileId = _Coerce # pRdProFileId_
     }
 
 -- | The ID of the report.

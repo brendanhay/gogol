@@ -88,7 +88,7 @@ performanceReportList'
     -> PerformanceReportList'
 performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
     PerformanceReportList'
-    { _prlAccountId = pPrlAccountId_
+    { _prlAccountId = _Coerce # pPrlAccountId_
     , _prlPageToken = Nothing
     , _prlEndDateTime = pPrlEndDateTime_
     , _prlMaxResults = Nothing

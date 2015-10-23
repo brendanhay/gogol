@@ -93,8 +93,8 @@ reportsFilesList
     -> ReportsFilesList
 reportsFilesList pRflReportId_ pRflProFileId_ =
     ReportsFilesList
-    { _rflReportId = pRflReportId_
-    , _rflProFileId = pRflProFileId_
+    { _rflReportId = _Coerce # pRflReportId_
+    , _rflProFileId = _Coerce # pRflProFileId_
     , _rflSortOrder = RFLSODescending
     , _rflPageToken = Nothing
     , _rflSortField = RFLSFLastModifiedTime

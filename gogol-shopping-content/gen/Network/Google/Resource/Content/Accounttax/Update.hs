@@ -82,9 +82,9 @@ accounttaxUpdate
     -> AccounttaxUpdate
 accounttaxUpdate pAuuMerchantId_ pAuuPayload_ pAuuAccountId_ =
     AccounttaxUpdate
-    { _auuMerchantId = pAuuMerchantId_
+    { _auuMerchantId = _Coerce # pAuuMerchantId_
     , _auuPayload = pAuuPayload_
-    , _auuAccountId = pAuuAccountId_
+    , _auuAccountId = _Coerce # pAuuAccountId_
     , _auuDryRun = Nothing
     }
 

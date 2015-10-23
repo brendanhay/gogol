@@ -88,7 +88,7 @@ usersMessagesSend
 usersMessagesSend pUmsPayload_ pUmsUserId_ =
     UsersMessagesSend
     { _umsPayload = pUmsPayload_
-    , _umsUserId = pUmsUserId_
+    , _umsUserId = "me"
     }
 
 -- | Multipart request metadata.

@@ -68,7 +68,7 @@ pretargetingConfigList'
     -> PretargetingConfigList'
 pretargetingConfigList' pPclAccountId_ =
     PretargetingConfigList'
-    { _pclAccountId = pPclAccountId_
+    { _pclAccountId = _Coerce # pPclAccountId_
     }
 
 -- | The account id to get the pretargeting configs for.

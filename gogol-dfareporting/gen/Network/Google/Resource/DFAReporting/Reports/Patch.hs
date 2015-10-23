@@ -78,8 +78,8 @@ reportsPatch
     -> ReportsPatch
 reportsPatch pRpReportId_ pRpProFileId_ pRpPayload_ =
     ReportsPatch
-    { _rpReportId = pRpReportId_
-    , _rpProFileId = pRpProFileId_
+    { _rpReportId = _Coerce # pRpReportId_
+    , _rpProFileId = _Coerce # pRpProFileId_
     , _rpPayload = pRpPayload_
     }
 

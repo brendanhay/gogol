@@ -84,7 +84,7 @@ campaignsInsert
     -> CampaignsInsert
 campaignsInsert pCamProFileId_ pCamPayload_ pCamDefaultLandingPageURL_ pCamDefaultLandingPageName_ =
     CampaignsInsert
-    { _camProFileId = pCamProFileId_
+    { _camProFileId = _Coerce # pCamProFileId_
     , _camPayload = pCamPayload_
     , _camDefaultLandingPageURL = pCamDefaultLandingPageURL_
     , _camDefaultLandingPageName = pCamDefaultLandingPageName_

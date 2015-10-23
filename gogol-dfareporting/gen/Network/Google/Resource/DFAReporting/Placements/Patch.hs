@@ -78,9 +78,9 @@ placementsPatch
     -> PlacementsPatch
 placementsPatch pPpProFileId_ pPpPayload_ pPpId_ =
     PlacementsPatch
-    { _ppProFileId = pPpProFileId_
+    { _ppProFileId = _Coerce # pPpProFileId_
     , _ppPayload = pPpPayload_
-    , _ppId = pPpId_
+    , _ppId = _Coerce # pPpId_
     }
 
 -- | User profile ID associated with this request.

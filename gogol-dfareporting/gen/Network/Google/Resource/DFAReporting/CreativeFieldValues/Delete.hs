@@ -79,9 +79,9 @@ creativeFieldValuesDelete
     -> CreativeFieldValuesDelete
 creativeFieldValuesDelete pCfvdCreativeFieldId_ pCfvdProFileId_ pCfvdId_ =
     CreativeFieldValuesDelete
-    { _cfvdCreativeFieldId = pCfvdCreativeFieldId_
-    , _cfvdProFileId = pCfvdProFileId_
-    , _cfvdId = pCfvdId_
+    { _cfvdCreativeFieldId = _Coerce # pCfvdCreativeFieldId_
+    , _cfvdProFileId = _Coerce # pCfvdProFileId_
+    , _cfvdId = _Coerce # pCfvdId_
     }
 
 -- | Creative field ID for this creative field value.

@@ -74,8 +74,8 @@ landingPagesList
     -> LandingPagesList
 landingPagesList pLplCampaignId_ pLplProFileId_ =
     LandingPagesList
-    { _lplCampaignId = pLplCampaignId_
-    , _lplProFileId = pLplProFileId_
+    { _lplCampaignId = _Coerce # pLplCampaignId_
+    , _lplProFileId = _Coerce # pLplProFileId_
     }
 
 -- | Landing page campaign ID.

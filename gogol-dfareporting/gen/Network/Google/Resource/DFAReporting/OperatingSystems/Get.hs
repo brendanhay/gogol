@@ -73,8 +73,8 @@ operatingSystemsGet
     -> OperatingSystemsGet
 operatingSystemsGet pOsgProFileId_ pOsgDartId_ =
     OperatingSystemsGet
-    { _osgProFileId = pOsgProFileId_
-    , _osgDartId = pOsgDartId_
+    { _osgProFileId = _Coerce # pOsgProFileId_
+    , _osgDartId = _Coerce # pOsgDartId_
     }
 
 -- | User profile ID associated with this request.

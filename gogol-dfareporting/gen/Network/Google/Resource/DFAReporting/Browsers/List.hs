@@ -67,7 +67,7 @@ browsersList
     -> BrowsersList
 browsersList pBlProFileId_ =
     BrowsersList
-    { _blProFileId = pBlProFileId_
+    { _blProFileId = _Coerce # pBlProFileId_
     }
 
 -- | User profile ID associated with this request.

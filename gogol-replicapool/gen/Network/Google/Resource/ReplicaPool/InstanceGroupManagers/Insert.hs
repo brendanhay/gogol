@@ -89,7 +89,7 @@ instanceGroupManagersInsert
 instanceGroupManagersInsert pIgmiProject_ pIgmiSize_ pIgmiZone_ pIgmiPayload_ =
     InstanceGroupManagersInsert
     { _igmiProject = pIgmiProject_
-    , _igmiSize = pIgmiSize_
+    , _igmiSize = _Coerce # pIgmiSize_
     , _igmiZone = pIgmiZone_
     , _igmiPayload = pIgmiPayload_
     }

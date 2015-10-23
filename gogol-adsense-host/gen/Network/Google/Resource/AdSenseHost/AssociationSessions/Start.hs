@@ -90,7 +90,7 @@ associationSessionsStart pAssWebsiteURL_ pAssProductCode_ =
     { _assWebsiteLocale = Nothing
     , _assUserLocale = Nothing
     , _assWebsiteURL = pAssWebsiteURL_
-    , _assProductCode = pAssProductCode_
+    , _assProductCode = _Coerce # pAssProductCode_
     }
 
 -- | The locale of the user\'s hosted website.

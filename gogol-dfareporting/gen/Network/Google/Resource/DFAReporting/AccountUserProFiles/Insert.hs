@@ -73,7 +73,7 @@ accountUserProFilesInsert
     -> AccountUserProFilesInsert
 accountUserProFilesInsert pAupfiProFileId_ pAupfiPayload_ =
     AccountUserProFilesInsert
-    { _aupfiProFileId = pAupfiProFileId_
+    { _aupfiProFileId = _Coerce # pAupfiProFileId_
     , _aupfiPayload = pAupfiPayload_
     }
 

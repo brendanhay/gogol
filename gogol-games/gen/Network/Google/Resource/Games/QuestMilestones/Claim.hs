@@ -83,7 +83,7 @@ questMilestonesClaim
     -> QuestMilestonesClaim
 questMilestonesClaim pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
     QuestMilestonesClaim
-    { _qmcRequestId = pQmcRequestId_
+    { _qmcRequestId = _Coerce # pQmcRequestId_
     , _qmcMilestoneId = pQmcMilestoneId_
     , _qmcQuestId = pQmcQuestId_
     }

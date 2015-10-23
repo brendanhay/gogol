@@ -73,7 +73,7 @@ floodlightActivitiesUpdate
     -> FloodlightActivitiesUpdate
 floodlightActivitiesUpdate pFauProFileId_ pFauPayload_ =
     FloodlightActivitiesUpdate
-    { _fauProFileId = pFauProFileId_
+    { _fauProFileId = _Coerce # pFauProFileId_
     , _fauPayload = pFauPayload_
     }
 

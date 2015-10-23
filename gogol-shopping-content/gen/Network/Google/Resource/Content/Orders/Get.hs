@@ -71,7 +71,7 @@ ordersGet
     -> OrdersGet
 ordersGet pOgMerchantId_ pOgOrderId_ =
     OrdersGet
-    { _ogMerchantId = pOgMerchantId_
+    { _ogMerchantId = _Coerce # pOgMerchantId_
     , _ogOrderId = pOgOrderId_
     }
 

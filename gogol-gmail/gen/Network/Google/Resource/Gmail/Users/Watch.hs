@@ -74,7 +74,7 @@ usersWatch
 usersWatch pUwPayload_ pUwUserId_ =
     UsersWatch
     { _uwPayload = pUwPayload_
-    , _uwUserId = pUwUserId_
+    , _uwUserId = "me"
     }
 
 -- | Multipart request metadata.

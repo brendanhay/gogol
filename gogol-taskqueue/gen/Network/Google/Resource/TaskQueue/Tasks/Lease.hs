@@ -99,8 +99,8 @@ tasksLease pTlTaskqueue_ pTlProject_ pTlNumTasks_ pTlLeaseSecs_ =
     { _tlTaskqueue = pTlTaskqueue_
     , _tlTag = Nothing
     , _tlProject = pTlProject_
-    , _tlNumTasks = pTlNumTasks_
-    , _tlLeaseSecs = pTlLeaseSecs_
+    , _tlNumTasks = _Coerce # pTlNumTasks_
+    , _tlLeaseSecs = _Coerce # pTlLeaseSecs_
     , _tlGroupByTag = Nothing
     }
 

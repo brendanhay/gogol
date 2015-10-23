@@ -67,7 +67,7 @@ accountPermissionGroupsList
     -> AccountPermissionGroupsList
 accountPermissionGroupsList pApglProFileId_ =
     AccountPermissionGroupsList
-    { _apglProFileId = pApglProFileId_
+    { _apglProFileId = _Coerce # pApglProFileId_
     }
 
 -- | User profile ID associated with this request.

@@ -79,7 +79,7 @@ usersLabelsUpdate
 usersLabelsUpdate pUluPayload_ pUluUserId_ pUluId_ =
     UsersLabelsUpdate
     { _uluPayload = pUluPayload_
-    , _uluUserId = pUluUserId_
+    , _uluUserId = "me"
     , _uluId = pUluId_
     }
 

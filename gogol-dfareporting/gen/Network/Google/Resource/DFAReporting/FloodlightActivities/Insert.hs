@@ -73,7 +73,7 @@ floodlightActivitiesInsert
     -> FloodlightActivitiesInsert
 floodlightActivitiesInsert pFaiProFileId_ pFaiPayload_ =
     FloodlightActivitiesInsert
-    { _faiProFileId = pFaiProFileId_
+    { _faiProFileId = _Coerce # pFaiProFileId_
     , _faiPayload = pFaiPayload_
     }
 

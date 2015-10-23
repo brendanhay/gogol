@@ -110,14 +110,14 @@ conversionPatch
     -> ConversionPatch
 conversionPatch pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpPayload_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
     ConversionPatch
-    { _cpEngineAccountId = pCpEngineAccountId_
-    , _cpAgencyId = pCpAgencyId_
-    , _cpAdvertiserId = pCpAdvertiserId_
-    , _cpEndDate = pCpEndDate_
+    { _cpEngineAccountId = _Coerce # pCpEngineAccountId_
+    , _cpAgencyId = _Coerce # pCpAgencyId_
+    , _cpAdvertiserId = _Coerce # pCpAdvertiserId_
+    , _cpEndDate = _Coerce # pCpEndDate_
     , _cpPayload = pCpPayload_
-    , _cpStartDate = pCpStartDate_
-    , _cpStartRow = pCpStartRow_
-    , _cpRowCount = pCpRowCount_
+    , _cpStartDate = _Coerce # pCpStartDate_
+    , _cpStartRow = _Coerce # pCpStartRow_
+    , _cpRowCount = _Coerce # pCpRowCount_
     }
 
 -- | Numeric ID of the engine account.

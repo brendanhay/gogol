@@ -79,7 +79,7 @@ ordersAcknowledge
     -> OrdersAcknowledge
 ordersAcknowledge pOaMerchantId_ pOaPayload_ pOaOrderId_ =
     OrdersAcknowledge
-    { _oaMerchantId = pOaMerchantId_
+    { _oaMerchantId = _Coerce # pOaMerchantId_
     , _oaPayload = pOaPayload_
     , _oaOrderId = pOaOrderId_
     }

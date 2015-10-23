@@ -72,8 +72,8 @@ floodlightActivityGroupsDelete
     -> FloodlightActivityGroupsDelete
 floodlightActivityGroupsDelete pFagdProFileId_ pFagdId_ =
     FloodlightActivityGroupsDelete
-    { _fagdProFileId = pFagdProFileId_
-    , _fagdId = pFagdId_
+    { _fagdProFileId = _Coerce # pFagdProFileId_
+    , _fagdId = _Coerce # pFagdId_
     }
 
 -- | User profile ID associated with this request.

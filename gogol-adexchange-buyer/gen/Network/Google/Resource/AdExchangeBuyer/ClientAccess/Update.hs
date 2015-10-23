@@ -75,9 +75,9 @@ clientAccessUpdate
     -> ClientAccessUpdate
 clientAccessUpdate pCauSponsorAccountId_ pCauPayload_ pCauClientAccountId_ =
     ClientAccessUpdate
-    { _cauSponsorAccountId = pCauSponsorAccountId_
+    { _cauSponsorAccountId = _Coerce # pCauSponsorAccountId_
     , _cauPayload = pCauPayload_
-    , _cauClientAccountId = pCauClientAccountId_
+    , _cauClientAccountId = _Coerce # pCauClientAccountId_
     }
 
 cauSponsorAccountId :: Lens' ClientAccessUpdate Int32

@@ -80,8 +80,8 @@ creativeFieldValuesInsert
     -> CreativeFieldValuesInsert
 creativeFieldValuesInsert pCfviCreativeFieldId_ pCfviProFileId_ pCfviPayload_ =
     CreativeFieldValuesInsert
-    { _cfviCreativeFieldId = pCfviCreativeFieldId_
-    , _cfviProFileId = pCfviProFileId_
+    { _cfviCreativeFieldId = _Coerce # pCfviCreativeFieldId_
+    , _cfviProFileId = _Coerce # pCfviProFileId_
     , _cfviPayload = pCfviPayload_
     }
 

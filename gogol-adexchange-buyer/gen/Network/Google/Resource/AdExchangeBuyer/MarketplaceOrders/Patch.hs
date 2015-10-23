@@ -87,7 +87,7 @@ marketplaceOrdersPatch
 marketplaceOrdersPatch pMopUpdateAction_ pMopRevisionNumber_ pMopPayload_ pMopOrderId_ =
     MarketplaceOrdersPatch
     { _mopUpdateAction = pMopUpdateAction_
-    , _mopRevisionNumber = pMopRevisionNumber_
+    , _mopRevisionNumber = _Coerce # pMopRevisionNumber_
     , _mopPayload = pMopPayload_
     , _mopOrderId = pMopOrderId_
     }

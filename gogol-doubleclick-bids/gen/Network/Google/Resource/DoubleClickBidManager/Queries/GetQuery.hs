@@ -65,7 +65,7 @@ queriesGetQuery
     -> QueriesGetQuery
 queriesGetQuery pQgqQueryId_ =
     QueriesGetQuery
-    { _qgqQueryId = pQgqQueryId_
+    { _qgqQueryId = _Coerce # pQgqQueryId_
     }
 
 -- | Query ID to retrieve.

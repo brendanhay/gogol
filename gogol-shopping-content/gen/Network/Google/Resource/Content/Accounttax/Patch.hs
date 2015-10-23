@@ -85,9 +85,9 @@ accounttaxPatch
     -> AccounttaxPatch
 accounttaxPatch pAppMerchantId_ pAppPayload_ pAppAccountId_ =
     AccounttaxPatch
-    { _appMerchantId = pAppMerchantId_
+    { _appMerchantId = _Coerce # pAppMerchantId_
     , _appPayload = pAppPayload_
-    , _appAccountId = pAppAccountId_
+    , _appAccountId = _Coerce # pAppAccountId_
     , _appDryRun = Nothing
     }
 

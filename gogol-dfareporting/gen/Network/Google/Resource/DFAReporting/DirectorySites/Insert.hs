@@ -73,7 +73,7 @@ directorySitesInsert
     -> DirectorySitesInsert
 directorySitesInsert pDsiProFileId_ pDsiPayload_ =
     DirectorySitesInsert
-    { _dsiProFileId = pDsiProFileId_
+    { _dsiProFileId = _Coerce # pDsiProFileId_
     , _dsiPayload = pDsiPayload_
     }
 

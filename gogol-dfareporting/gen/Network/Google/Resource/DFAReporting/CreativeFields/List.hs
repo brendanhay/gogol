@@ -104,7 +104,7 @@ creativeFieldsList pCflProFileId_ =
     CreativeFieldsList
     { _cflSearchString = Nothing
     , _cflIds = Nothing
-    , _cflProFileId = pCflProFileId_
+    , _cflProFileId = _Coerce # pCflProFileId_
     , _cflSortOrder = Nothing
     , _cflPageToken = Nothing
     , _cflSortField = Nothing

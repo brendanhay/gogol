@@ -78,9 +78,9 @@ userRolesPatch
     -> UserRolesPatch
 userRolesPatch pUrpProFileId_ pUrpPayload_ pUrpId_ =
     UserRolesPatch
-    { _urpProFileId = pUrpProFileId_
+    { _urpProFileId = _Coerce # pUrpProFileId_
     , _urpPayload = pUrpPayload_
-    , _urpId = pUrpId_
+    , _urpId = _Coerce # pUrpId_
     }
 
 -- | User profile ID associated with this request.

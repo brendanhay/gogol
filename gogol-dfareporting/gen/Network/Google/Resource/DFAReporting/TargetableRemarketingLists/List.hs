@@ -108,8 +108,8 @@ targetableRemarketingListsList
     -> TargetableRemarketingListsList
 targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
     TargetableRemarketingListsList
-    { _trllAdvertiserId = pTrllAdvertiserId_
-    , _trllProFileId = pTrllProFileId_
+    { _trllAdvertiserId = _Coerce # pTrllAdvertiserId_
+    , _trllProFileId = _Coerce # pTrllProFileId_
     , _trllSortOrder = Nothing
     , _trllActive = Nothing
     , _trllName = Nothing

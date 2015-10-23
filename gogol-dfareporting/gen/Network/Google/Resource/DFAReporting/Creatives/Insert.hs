@@ -72,7 +72,7 @@ creativesInsert
     -> CreativesInsert
 creativesInsert pCiProFileId_ pCiPayload_ =
     CreativesInsert
-    { _ciProFileId = pCiProFileId_
+    { _ciProFileId = _Coerce # pCiProFileId_
     , _ciPayload = pCiPayload_
     }
 

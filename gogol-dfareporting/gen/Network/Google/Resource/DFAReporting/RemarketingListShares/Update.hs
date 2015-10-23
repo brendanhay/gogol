@@ -73,7 +73,7 @@ remarketingListSharesUpdate
     -> RemarketingListSharesUpdate
 remarketingListSharesUpdate pRlsuProFileId_ pRlsuPayload_ =
     RemarketingListSharesUpdate
-    { _rlsuProFileId = pRlsuProFileId_
+    { _rlsuProFileId = _Coerce # pRlsuProFileId_
     , _rlsuPayload = pRlsuPayload_
     }
 

@@ -73,8 +73,8 @@ userRolePermissionGroupsGet
     -> UserRolePermissionGroupsGet
 userRolePermissionGroupsGet pUrpggProFileId_ pUrpggId_ =
     UserRolePermissionGroupsGet
-    { _urpggProFileId = pUrpggProFileId_
-    , _urpggId = pUrpggId_
+    { _urpggProFileId = _Coerce # pUrpggProFileId_
+    , _urpggId = _Coerce # pUrpggId_
     }
 
 -- | User profile ID associated with this request.

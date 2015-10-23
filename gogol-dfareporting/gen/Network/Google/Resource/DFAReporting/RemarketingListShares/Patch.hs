@@ -81,9 +81,9 @@ remarketingListSharesPatch
     -> RemarketingListSharesPatch
 remarketingListSharesPatch pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
     RemarketingListSharesPatch
-    { _rlspProFileId = pRlspProFileId_
+    { _rlspProFileId = _Coerce # pRlspProFileId_
     , _rlspPayload = pRlspPayload_
-    , _rlspRemarketingListId = pRlspRemarketingListId_
+    , _rlspRemarketingListId = _Coerce # pRlspRemarketingListId_
     }
 
 -- | User profile ID associated with this request.

@@ -78,7 +78,7 @@ usersDraftsGet
 usersDraftsGet pUdgUserId_ pUdgId_ =
     UsersDraftsGet
     { _udgFormat = UDGFFull
-    , _udgUserId = pUdgUserId_
+    , _udgUserId = "me"
     , _udgId = pUdgId_
     }
 

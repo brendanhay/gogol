@@ -91,7 +91,7 @@ reportsList
     -> ReportsList
 reportsList pRlProFileId_ =
     ReportsList
-    { _rlProFileId = pRlProFileId_
+    { _rlProFileId = _Coerce # pRlProFileId_
     , _rlSortOrder = RLSODescending
     , _rlScope = Mine
     , _rlPageToken = Nothing

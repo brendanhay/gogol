@@ -128,16 +128,16 @@ conversionGet
 conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
     ConversionGet
     { _cgAdGroupId = Nothing
-    , _cgEngineAccountId = pCgEngineAccountId_
-    , _cgAgencyId = pCgAgencyId_
-    , _cgAdvertiserId = pCgAdvertiserId_
-    , _cgEndDate = pCgEndDate_
+    , _cgEngineAccountId = _Coerce # pCgEngineAccountId_
+    , _cgAgencyId = _Coerce # pCgAgencyId_
+    , _cgAdvertiserId = _Coerce # pCgAdvertiserId_
+    , _cgEndDate = _Coerce # pCgEndDate_
     , _cgCampaignId = Nothing
     , _cgCriterionId = Nothing
-    , _cgStartDate = pCgStartDate_
-    , _cgStartRow = pCgStartRow_
+    , _cgStartDate = _Coerce # pCgStartDate_
+    , _cgStartRow = _Coerce # pCgStartRow_
     , _cgAdId = Nothing
-    , _cgRowCount = pCgRowCount_
+    , _cgRowCount = _Coerce # pCgRowCount_
     }
 
 -- | Numeric ID of the ad group.

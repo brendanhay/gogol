@@ -83,7 +83,7 @@ usersThreadsGet
 usersThreadsGet pUtgUserId_ pUtgId_ =
     UsersThreadsGet
     { _utgFormat = UTGFFull
-    , _utgUserId = pUtgUserId_
+    , _utgUserId = "me"
     , _utgId = pUtgId_
     , _utgMetadataHeaders = Nothing
     }

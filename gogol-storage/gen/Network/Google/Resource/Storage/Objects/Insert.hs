@@ -90,7 +90,7 @@ type ObjectsInsertResource =
                                QueryParam "projection" ObjectsInsertProjection
                                  :>
                                  QueryParam "alt" AltMedia :>
-                                   Get '[OctetStream] Stream
+                                   Post '[OctetStream] Stream
        :<|>
        "upload" :>
          "storage" :>
@@ -260,24 +260,6 @@ instance GoogleRequest ObjectsInsert where
               _oiPayload
               storageService
           where go :<|> (_ :<|> _)
-                  = buildClient (Proxy :: Proxy ObjectsInsertResource)
-                      mempty
-
-instance GoogleRequest (MediaDownload ObjectsInsert)
-         where
-        type Rs (MediaDownload ObjectsInsert) = Stream
-        requestClient (MediaDownload ObjectsInsert{..})
-          = go _oiBucket _oiIfMetagenerationMatch
-              _oiIfGenerationNotMatch
-              _oiIfGenerationMatch
-              _oiPredefinedACL
-              _oiName
-              _oiIfMetagenerationNotMatch
-              _oiContentEncoding
-              _oiProjection
-              (Just AltMedia)
-              storageService
-          where _ :<|> (go :<|> _)
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty
 

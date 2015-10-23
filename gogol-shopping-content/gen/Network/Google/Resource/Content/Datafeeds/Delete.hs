@@ -76,8 +76,8 @@ datafeedsDelete
     -> DatafeedsDelete
 datafeedsDelete pDdMerchantId_ pDdDatafeedId_ =
     DatafeedsDelete
-    { _ddMerchantId = pDdMerchantId_
-    , _ddDatafeedId = pDdDatafeedId_
+    { _ddMerchantId = _Coerce # pDdMerchantId_
+    , _ddDatafeedId = _Coerce # pDdDatafeedId_
     , _ddDryRun = Nothing
     }
 

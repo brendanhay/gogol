@@ -78,7 +78,7 @@ templatePatch
     -> TemplatePatch
 templatePatch pTppTemplateId_ pTppPayload_ pTppTableId_ =
     TemplatePatch
-    { _tppTemplateId = pTppTemplateId_
+    { _tppTemplateId = _Coerce # pTppTemplateId_
     , _tppPayload = pTppPayload_
     , _tppTableId = pTppTableId_
     }

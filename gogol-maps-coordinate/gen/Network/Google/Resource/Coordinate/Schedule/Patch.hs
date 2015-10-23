@@ -101,7 +101,7 @@ schedulePatch
     -> SchedulePatch
 schedulePatch pSpJobId_ pSpTeamId_ pSpPayload_ =
     SchedulePatch
-    { _spJobId = pSpJobId_
+    { _spJobId = _Coerce # pSpJobId_
     , _spAllDay = Nothing
     , _spStartTime = Nothing
     , _spTeamId = pSpTeamId_

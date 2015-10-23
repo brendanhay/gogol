@@ -76,7 +76,7 @@ productstatusesList
     -> ProductstatusesList
 productstatusesList pPlMerchantId_ =
     ProductstatusesList
-    { _plMerchantId = pPlMerchantId_
+    { _plMerchantId = _Coerce # pPlMerchantId_
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }

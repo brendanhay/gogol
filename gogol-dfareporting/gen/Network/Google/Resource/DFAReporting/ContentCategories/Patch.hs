@@ -81,9 +81,9 @@ contentCategoriesPatch
     -> ContentCategoriesPatch
 contentCategoriesPatch pCcpProFileId_ pCcpPayload_ pCcpId_ =
     ContentCategoriesPatch
-    { _ccpProFileId = pCcpProFileId_
+    { _ccpProFileId = _Coerce # pCcpProFileId_
     , _ccpPayload = pCcpPayload_
-    , _ccpId = pCcpId_
+    , _ccpId = _Coerce # pCcpId_
     }
 
 -- | User profile ID associated with this request.

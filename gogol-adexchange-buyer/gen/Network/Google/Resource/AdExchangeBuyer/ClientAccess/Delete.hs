@@ -68,8 +68,8 @@ clientAccessDelete
     -> ClientAccessDelete
 clientAccessDelete pCadSponsorAccountId_ pCadClientAccountId_ =
     ClientAccessDelete
-    { _cadSponsorAccountId = pCadSponsorAccountId_
-    , _cadClientAccountId = pCadClientAccountId_
+    { _cadSponsorAccountId = _Coerce # pCadSponsorAccountId_
+    , _cadClientAccountId = _Coerce # pCadClientAccountId_
     }
 
 cadSponsorAccountId :: Lens' ClientAccessDelete Int32

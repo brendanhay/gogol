@@ -76,8 +76,8 @@ accountsDelete
     -> AccountsDelete
 accountsDelete pAdMerchantId_ pAdAccountId_ =
     AccountsDelete
-    { _adMerchantId = pAdMerchantId_
-    , _adAccountId = pAdAccountId_
+    { _adMerchantId = _Coerce # pAdMerchantId_
+    , _adAccountId = _Coerce # pAdAccountId_
     , _adDryRun = Nothing
     }
 

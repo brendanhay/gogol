@@ -65,7 +65,7 @@ billingInfoGet
     -> BillingInfoGet
 billingInfoGet pBigAccountId_ =
     BillingInfoGet
-    { _bigAccountId = pBigAccountId_
+    { _bigAccountId = _Coerce # pBigAccountId_
     }
 
 -- | The account id.

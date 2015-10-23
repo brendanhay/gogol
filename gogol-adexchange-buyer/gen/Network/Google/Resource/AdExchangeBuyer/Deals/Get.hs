@@ -74,7 +74,7 @@ dealsGet
 dealsGet pDgPayload_ pDgDealId_ =
     DealsGet
     { _dgPayload = pDgPayload_
-    , _dgDealId = pDgDealId_
+    , _dgDealId = _Coerce # pDgDealId_
     }
 
 -- | Multipart request metadata.

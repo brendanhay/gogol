@@ -72,7 +72,7 @@ sizesInsert
     -> SizesInsert
 sizesInsert pSiProFileId_ pSiPayload_ =
     SizesInsert
-    { _siProFileId = pSiProFileId_
+    { _siProFileId = _Coerce # pSiProFileId_
     , _siPayload = pSiPayload_
     }
 

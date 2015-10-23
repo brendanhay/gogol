@@ -94,7 +94,7 @@ inventorySet
     -> InventorySet
 inventorySet pIsMerchantId_ pIsStoreCode_ pIsPayload_ pIsProductId_ =
     InventorySet
-    { _isMerchantId = pIsMerchantId_
+    { _isMerchantId = _Coerce # pIsMerchantId_
     , _isStoreCode = pIsStoreCode_
     , _isPayload = pIsPayload_
     , _isProductId = pIsProductId_

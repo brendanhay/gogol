@@ -73,7 +73,7 @@ usersLabelsCreate
 usersLabelsCreate pUlcPayload_ pUlcUserId_ =
     UsersLabelsCreate
     { _ulcPayload = pUlcPayload_
-    , _ulcUserId = pUlcUserId_
+    , _ulcUserId = "me"
     }
 
 -- | Multipart request metadata.

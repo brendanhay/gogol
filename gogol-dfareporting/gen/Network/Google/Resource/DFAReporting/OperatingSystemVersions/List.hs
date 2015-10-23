@@ -67,7 +67,7 @@ operatingSystemVersionsList
     -> OperatingSystemVersionsList
 operatingSystemVersionsList pOsvlProFileId_ =
     OperatingSystemVersionsList
-    { _osvlProFileId = pOsvlProFileId_
+    { _osvlProFileId = _Coerce # pOsvlProFileId_
     }
 
 -- | User profile ID associated with this request.

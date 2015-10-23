@@ -78,7 +78,7 @@ type ObjectsComposeResource =
                          :>
                          QueryParam "ifGenerationMatch" (JSONText Int64) :>
                            QueryParam "alt" AltMedia :>
-                             Get '[OctetStream] Stream
+                             Post '[OctetStream] Stream
 
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.

@@ -88,7 +88,7 @@ citiesList
 citiesList pCitProFileId_ =
     CitiesList
     { _citRegionDartIds = Nothing
-    , _citProFileId = pCitProFileId_
+    , _citProFileId = _Coerce # pCitProFileId_
     , _citNamePrefix = Nothing
     , _citCountryDartIds = Nothing
     , _citDartIds = Nothing

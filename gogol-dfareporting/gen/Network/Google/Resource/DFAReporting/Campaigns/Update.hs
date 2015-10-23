@@ -72,7 +72,7 @@ campaignsUpdate
     -> CampaignsUpdate
 campaignsUpdate pCuProFileId_ pCuPayload_ =
     CampaignsUpdate
-    { _cuProFileId = pCuProFileId_
+    { _cuProFileId = _Coerce # pCuProFileId_
     , _cuPayload = pCuPayload_
     }
 

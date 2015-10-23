@@ -73,7 +73,7 @@ placementStrategiesInsert
     -> PlacementStrategiesInsert
 placementStrategiesInsert pPsiProFileId_ pPsiPayload_ =
     PlacementStrategiesInsert
-    { _psiProFileId = pPsiProFileId_
+    { _psiProFileId = _Coerce # pPsiProFileId_
     , _psiPayload = pPsiPayload_
     }
 

@@ -81,8 +81,8 @@ pretargetingConfigPatch
 pretargetingConfigPatch pPcpPayload_ pPcpAccountId_ pPcpConfigId_ =
     PretargetingConfigPatch
     { _pcpPayload = pPcpPayload_
-    , _pcpAccountId = pPcpAccountId_
-    , _pcpConfigId = pPcpConfigId_
+    , _pcpAccountId = _Coerce # pPcpAccountId_
+    , _pcpConfigId = _Coerce # pPcpConfigId_
     }
 
 -- | Multipart request metadata.

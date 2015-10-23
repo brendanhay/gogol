@@ -73,7 +73,7 @@ floodlightActivityGroupsUpdate
     -> FloodlightActivityGroupsUpdate
 floodlightActivityGroupsUpdate pFaguProFileId_ pFaguPayload_ =
     FloodlightActivityGroupsUpdate
-    { _faguProFileId = pFaguProFileId_
+    { _faguProFileId = _Coerce # pFaguProFileId_
     , _faguPayload = pFaguPayload_
     }
 

@@ -80,7 +80,7 @@ styleUpdate
 styleUpdate pSuPayload_ pSuStyleId_ pSuTableId_ =
     StyleUpdate
     { _suPayload = pSuPayload_
-    , _suStyleId = pSuStyleId_
+    , _suStyleId = _Coerce # pSuStyleId_
     , _suTableId = pSuTableId_
     }
 

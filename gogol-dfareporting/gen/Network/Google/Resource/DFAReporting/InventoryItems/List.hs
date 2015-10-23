@@ -115,11 +115,11 @@ inventoryItemsList
 inventoryItemsList pIilProFileId_ pIilProjectId_ =
     InventoryItemsList
     { _iilIds = Nothing
-    , _iilProFileId = pIilProFileId_
+    , _iilProFileId = _Coerce # pIilProFileId_
     , _iilSortOrder = Nothing
     , _iilInPlan = Nothing
     , _iilPageToken = Nothing
-    , _iilProjectId = pIilProjectId_
+    , _iilProjectId = _Coerce # pIilProjectId_
     , _iilSortField = Nothing
     , _iilOrderId = Nothing
     , _iilSiteId = Nothing

@@ -111,10 +111,10 @@ ordersList pOlProFileId_ pOlProjectId_ =
     OrdersList
     { _olSearchString = Nothing
     , _olIds = Nothing
-    , _olProFileId = pOlProFileId_
+    , _olProFileId = _Coerce # pOlProFileId_
     , _olSortOrder = Nothing
     , _olPageToken = Nothing
-    , _olProjectId = pOlProjectId_
+    , _olProjectId = _Coerce # pOlProjectId_
     , _olSortField = Nothing
     , _olSiteId = Nothing
     , _olMaxResults = Nothing

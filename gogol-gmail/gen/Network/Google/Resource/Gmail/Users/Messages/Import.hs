@@ -118,7 +118,7 @@ usersMessagesImport
 usersMessagesImport pUmiPayload_ pUmiUserId_ =
     UsersMessagesImport
     { _umiPayload = pUmiPayload_
-    , _umiUserId = pUmiUserId_
+    , _umiUserId = "me"
     , _umiProcessForCalendar = False
     , _umiDeleted = False
     , _umiNeverMarkSpam = False

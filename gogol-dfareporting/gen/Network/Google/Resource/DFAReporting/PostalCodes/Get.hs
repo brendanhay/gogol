@@ -72,7 +72,7 @@ postalCodesGet
     -> PostalCodesGet
 postalCodesGet pPcgProFileId_ pPcgCode_ =
     PostalCodesGet
-    { _pcgProFileId = pPcgProFileId_
+    { _pcgProFileId = _Coerce # pPcgProFileId_
     , _pcgCode = pPcgCode_
     }
 

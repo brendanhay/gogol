@@ -108,7 +108,7 @@ directorySiteContactsList pDsclProFileId_ =
     DirectorySiteContactsList
     { _dsclSearchString = Nothing
     , _dsclIds = Nothing
-    , _dsclProFileId = pDsclProFileId_
+    , _dsclProFileId = _Coerce # pDsclProFileId_
     , _dsclDirectorySiteIds = Nothing
     , _dsclSortOrder = Nothing
     , _dsclPageToken = Nothing

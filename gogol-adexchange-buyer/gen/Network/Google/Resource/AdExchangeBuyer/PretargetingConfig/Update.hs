@@ -79,8 +79,8 @@ pretargetingConfigUpdate
 pretargetingConfigUpdate pPcuPayload_ pPcuAccountId_ pPcuConfigId_ =
     PretargetingConfigUpdate
     { _pcuPayload = pPcuPayload_
-    , _pcuAccountId = pPcuAccountId_
-    , _pcuConfigId = pPcuConfigId_
+    , _pcuAccountId = _Coerce # pPcuAccountId_
+    , _pcuConfigId = _Coerce # pPcuConfigId_
     }
 
 -- | Multipart request metadata.

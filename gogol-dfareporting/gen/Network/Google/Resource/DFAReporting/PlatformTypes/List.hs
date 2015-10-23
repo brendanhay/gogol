@@ -67,7 +67,7 @@ platformTypesList
     -> PlatformTypesList
 platformTypesList pPtlProFileId_ =
     PlatformTypesList
-    { _ptlProFileId = pPtlProFileId_
+    { _ptlProFileId = _Coerce # pPtlProFileId_
     }
 
 -- | User profile ID associated with this request.

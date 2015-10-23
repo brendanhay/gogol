@@ -101,7 +101,7 @@ advertiserGroupsList pAglProFileId_ =
     AdvertiserGroupsList
     { _aglSearchString = Nothing
     , _aglIds = Nothing
-    , _aglProFileId = pAglProFileId_
+    , _aglProFileId = _Coerce # pAglProFileId_
     , _aglSortOrder = Nothing
     , _aglPageToken = Nothing
     , _aglSortField = Nothing

@@ -73,8 +73,8 @@ floodlightActivityGroupsGet
     -> FloodlightActivityGroupsGet
 floodlightActivityGroupsGet pFaggProFileId_ pFaggId_ =
     FloodlightActivityGroupsGet
-    { _faggProFileId = pFaggProFileId_
-    , _faggId = pFaggId_
+    { _faggProFileId = _Coerce # pFaggProFileId_
+    , _faggId = _Coerce # pFaggId_
     }
 
 -- | User profile ID associated with this request.

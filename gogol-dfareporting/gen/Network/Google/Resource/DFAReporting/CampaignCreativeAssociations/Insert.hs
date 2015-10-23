@@ -84,8 +84,8 @@ campaignCreativeAssociationsInsert
     -> CampaignCreativeAssociationsInsert
 campaignCreativeAssociationsInsert pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
     CampaignCreativeAssociationsInsert
-    { _ccaiCampaignId = pCcaiCampaignId_
-    , _ccaiProFileId = pCcaiProFileId_
+    { _ccaiCampaignId = _Coerce # pCcaiCampaignId_
+    , _ccaiProFileId = _Coerce # pCcaiProFileId_
     , _ccaiPayload = pCcaiPayload_
     }
 

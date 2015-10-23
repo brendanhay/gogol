@@ -80,8 +80,8 @@ budgetUpdate
 budgetUpdate pBuPayload_ pBuAccountId_ pBuBillingId_ =
     BudgetUpdate
     { _buPayload = pBuPayload_
-    , _buAccountId = pBuAccountId_
-    , _buBillingId = pBuBillingId_
+    , _buAccountId = _Coerce # pBuAccountId_
+    , _buBillingId = _Coerce # pBuBillingId_
     }
 
 -- | Multipart request metadata.

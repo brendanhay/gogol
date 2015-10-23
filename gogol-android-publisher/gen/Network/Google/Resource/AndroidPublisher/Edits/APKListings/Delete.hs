@@ -89,7 +89,7 @@ editsAPKListingsDelete
 editsAPKListingsDelete pEapkldPackageName_ pEapkldAPKVersionCode_ pEapkldLanguage_ pEapkldEditId_ =
     EditsAPKListingsDelete
     { _eapkldPackageName = pEapkldPackageName_
-    , _eapkldAPKVersionCode = pEapkldAPKVersionCode_
+    , _eapkldAPKVersionCode = _Coerce # pEapkldAPKVersionCode_
     , _eapkldLanguage = pEapkldLanguage_
     , _eapkldEditId = pEapkldEditId_
     }

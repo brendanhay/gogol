@@ -69,7 +69,7 @@ type FilesWatchResource =
                      QueryParam "acknowledgeAbuse" Bool :>
                        QueryParam "revisionId" Text :>
                          QueryParam "alt" AltMedia :>
-                           Get '[OctetStream] Stream
+                           Post '[OctetStream] Stream
 
 -- | Subscribe to changes on a file
 --

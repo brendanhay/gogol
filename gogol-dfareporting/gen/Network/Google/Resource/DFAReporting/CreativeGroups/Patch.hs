@@ -81,9 +81,9 @@ creativeGroupsPatch
     -> CreativeGroupsPatch
 creativeGroupsPatch pCgpProFileId_ pCgpPayload_ pCgpId_ =
     CreativeGroupsPatch
-    { _cgpProFileId = pCgpProFileId_
+    { _cgpProFileId = _Coerce # pCgpProFileId_
     , _cgpPayload = pCgpPayload_
-    , _cgpId = pCgpId_
+    , _cgpId = _Coerce # pCgpId_
     }
 
 -- | User profile ID associated with this request.

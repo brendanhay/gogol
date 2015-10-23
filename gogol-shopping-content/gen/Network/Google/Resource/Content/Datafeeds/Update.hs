@@ -82,9 +82,9 @@ datafeedsUpdate
     -> DatafeedsUpdate
 datafeedsUpdate pDuMerchantId_ pDuPayload_ pDuDatafeedId_ =
     DatafeedsUpdate
-    { _duMerchantId = pDuMerchantId_
+    { _duMerchantId = _Coerce # pDuMerchantId_
     , _duPayload = pDuPayload_
-    , _duDatafeedId = pDuDatafeedId_
+    , _duDatafeedId = _Coerce # pDuDatafeedId_
     , _duDryRun = Nothing
     }
 

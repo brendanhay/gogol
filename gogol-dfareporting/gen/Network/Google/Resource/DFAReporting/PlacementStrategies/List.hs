@@ -103,7 +103,7 @@ placementStrategiesList pPslProFileId_ =
     PlacementStrategiesList
     { _pslSearchString = Nothing
     , _pslIds = Nothing
-    , _pslProFileId = pPslProFileId_
+    , _pslProFileId = _Coerce # pPslProFileId_
     , _pslSortOrder = Nothing
     , _pslPageToken = Nothing
     , _pslSortField = Nothing

@@ -73,7 +73,7 @@ aspsDelete
     -> AspsDelete
 aspsDelete pAdCodeId_ pAdUserKey_ =
     AspsDelete
-    { _adCodeId = pAdCodeId_
+    { _adCodeId = _Coerce # pAdCodeId_
     , _adUserKey = pAdUserKey_
     }
 

@@ -72,7 +72,7 @@ reportsInsert
     -> ReportsInsert
 reportsInsert pRiProFileId_ pRiPayload_ =
     ReportsInsert
-    { _riProFileId = pRiProFileId_
+    { _riProFileId = _Coerce # pRiProFileId_
     , _riPayload = pRiPayload_
     }
 

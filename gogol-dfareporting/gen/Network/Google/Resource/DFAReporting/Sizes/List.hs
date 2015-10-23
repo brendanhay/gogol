@@ -90,7 +90,7 @@ sizesList pSlProFileId_ =
     { _slHeight = Nothing
     , _slIds = Nothing
     , _slWidth = Nothing
-    , _slProFileId = pSlProFileId_
+    , _slProFileId = _Coerce # pSlProFileId_
     , _slIabStandard = Nothing
     }
 

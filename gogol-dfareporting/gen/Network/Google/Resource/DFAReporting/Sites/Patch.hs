@@ -78,9 +78,9 @@ sitesPatch
     -> SitesPatch
 sitesPatch pSpProFileId_ pSpPayload_ pSpId_ =
     SitesPatch
-    { _spProFileId = pSpProFileId_
+    { _spProFileId = _Coerce # pSpProFileId_
     , _spPayload = pSpPayload_
-    , _spId = pSpId_
+    , _spId = _Coerce # pSpId_
     }
 
 -- | User profile ID associated with this request.

@@ -79,9 +79,9 @@ advertisersPatch
     -> AdvertisersPatch
 advertisersPatch pApProFileId_ pApPayload_ pApId_ =
     AdvertisersPatch
-    { _apProFileId = pApProFileId_
+    { _apProFileId = _Coerce # pApProFileId_
     , _apPayload = pApPayload_
-    , _apId = pApId_
+    , _apId = _Coerce # pApId_
     }
 
 -- | User profile ID associated with this request.

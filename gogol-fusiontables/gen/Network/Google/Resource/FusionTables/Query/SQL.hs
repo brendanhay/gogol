@@ -60,7 +60,7 @@ type QuerySQLResource =
                QueryParam "typed" Bool :>
                  QueryParam "hdrs" Bool :>
                    QueryParam "alt" AltMedia :>
-                     Get '[OctetStream] Stream
+                     Post '[OctetStream] Stream
 
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.

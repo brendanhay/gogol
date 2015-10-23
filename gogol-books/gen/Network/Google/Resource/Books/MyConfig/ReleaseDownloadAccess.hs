@@ -85,7 +85,7 @@ myConfigReleaseDownloadAccess pMcrdaCpksver_ pMcrdaVolumeIds_ =
     MyConfigReleaseDownloadAccess
     { _mcrdaCpksver = pMcrdaCpksver_
     , _mcrdaLocale = Nothing
-    , _mcrdaVolumeIds = pMcrdaVolumeIds_
+    , _mcrdaVolumeIds = _Coerce # pMcrdaVolumeIds_
     , _mcrdaSource = Nothing
     }
 

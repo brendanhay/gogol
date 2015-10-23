@@ -73,8 +73,8 @@ budgetGet
     -> BudgetGet
 budgetGet pBgAccountId_ pBgBillingId_ =
     BudgetGet
-    { _bgAccountId = pBgAccountId_
-    , _bgBillingId = pBgBillingId_
+    { _bgAccountId = _Coerce # pBgAccountId_
+    , _bgBillingId = _Coerce # pBgBillingId_
     }
 
 -- | The account id to get the budget information for.

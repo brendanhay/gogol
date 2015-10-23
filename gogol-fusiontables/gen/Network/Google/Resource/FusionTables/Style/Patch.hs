@@ -80,7 +80,7 @@ stylePatch
 stylePatch pSpPayload_ pSpStyleId_ pSpTableId_ =
     StylePatch
     { _spPayload = pSpPayload_
-    , _spStyleId = pSpStyleId_
+    , _spStyleId = _Coerce # pSpStyleId_
     , _spTableId = pSpTableId_
     }
 

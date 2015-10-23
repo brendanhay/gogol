@@ -67,7 +67,7 @@ accountPermissionsList
     -> AccountPermissionsList
 accountPermissionsList pAplProFileId_ =
     AccountPermissionsList
-    { _aplProFileId = pAplProFileId_
+    { _aplProFileId = _Coerce # pAplProFileId_
     }
 
 -- | User profile ID associated with this request.

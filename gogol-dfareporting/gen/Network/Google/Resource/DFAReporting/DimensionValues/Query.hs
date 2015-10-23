@@ -84,7 +84,7 @@ dimensionValuesQuery
     -> DimensionValuesQuery
 dimensionValuesQuery pDvqProFileId_ pDvqPayload_ =
     DimensionValuesQuery
-    { _dvqProFileId = pDvqProFileId_
+    { _dvqProFileId = _Coerce # pDvqProFileId_
     , _dvqPayload = pDvqPayload_
     , _dvqPageToken = Nothing
     , _dvqMaxResults = Nothing

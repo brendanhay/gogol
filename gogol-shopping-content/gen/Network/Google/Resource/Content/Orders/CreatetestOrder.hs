@@ -72,7 +72,7 @@ ordersCreatetestOrder
     -> OrdersCreatetestOrder
 ordersCreatetestOrder pOcoMerchantId_ pOcoPayload_ =
     OrdersCreatetestOrder
-    { _ocoMerchantId = pOcoMerchantId_
+    { _ocoMerchantId = _Coerce # pOcoMerchantId_
     , _ocoPayload = pOcoPayload_
     }
 

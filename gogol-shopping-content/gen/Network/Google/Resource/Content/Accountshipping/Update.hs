@@ -83,9 +83,9 @@ accountshippingUpdate
     -> AccountshippingUpdate
 accountshippingUpdate pAuMerchantId_ pAuPayload_ pAuAccountId_ =
     AccountshippingUpdate
-    { _auMerchantId = pAuMerchantId_
+    { _auMerchantId = _Coerce # pAuMerchantId_
     , _auPayload = pAuPayload_
-    , _auAccountId = pAuAccountId_
+    , _auAccountId = _Coerce # pAuAccountId_
     , _auDryRun = Nothing
     }
 

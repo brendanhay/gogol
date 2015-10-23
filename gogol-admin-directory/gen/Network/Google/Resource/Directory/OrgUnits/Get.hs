@@ -73,7 +73,7 @@ orgUnitsGet
     -> OrgUnitsGet
 orgUnitsGet pOugOrgUnitPath_ pOugCustomerId_ =
     OrgUnitsGet
-    { _ougOrgUnitPath = pOugOrgUnitPath_
+    { _ougOrgUnitPath = _Coerce # pOugOrgUnitPath_
     , _ougCustomerId = pOugCustomerId_
     }
 

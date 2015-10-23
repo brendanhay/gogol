@@ -93,7 +93,7 @@ usersThreadsList
 usersThreadsList pUtlUserId_ =
     UsersThreadsList
     { _utlQ = Nothing
-    , _utlUserId = pUtlUserId_
+    , _utlUserId = "me"
     , _utlIncludeSpamTrash = False
     , _utlLabelIds = Nothing
     , _utlPageToken = Nothing

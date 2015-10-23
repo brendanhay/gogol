@@ -80,7 +80,7 @@ orgUnitsUpdate
 orgUnitsUpdate pOuuPayload_ pOuuOrgUnitPath_ pOuuCustomerId_ =
     OrgUnitsUpdate
     { _ouuPayload = pOuuPayload_
-    , _ouuOrgUnitPath = pOuuOrgUnitPath_
+    , _ouuOrgUnitPath = _Coerce # pOuuOrgUnitPath_
     , _ouuCustomerId = pOuuCustomerId_
     }
 

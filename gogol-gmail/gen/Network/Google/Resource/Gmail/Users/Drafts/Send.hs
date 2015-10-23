@@ -88,7 +88,7 @@ usersDraftsSend
 usersDraftsSend pUdsPayload_ pUdsUserId_ =
     UsersDraftsSend
     { _udsPayload = pUdsPayload_
-    , _udsUserId = pUdsUserId_
+    , _udsUserId = "me"
     }
 
 -- | Multipart request metadata.

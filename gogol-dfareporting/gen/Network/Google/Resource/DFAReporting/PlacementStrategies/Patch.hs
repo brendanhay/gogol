@@ -81,9 +81,9 @@ placementStrategiesPatch
     -> PlacementStrategiesPatch
 placementStrategiesPatch pPspProFileId_ pPspPayload_ pPspId_ =
     PlacementStrategiesPatch
-    { _pspProFileId = pPspProFileId_
+    { _pspProFileId = _Coerce # pPspProFileId_
     , _pspPayload = pPspPayload_
-    , _pspId = pPspId_
+    , _pspId = _Coerce # pPspId_
     }
 
 -- | User profile ID associated with this request.

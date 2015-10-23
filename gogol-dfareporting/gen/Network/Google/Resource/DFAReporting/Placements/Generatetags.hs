@@ -87,7 +87,7 @@ placementsGeneratetags pPgsProFileId_ =
     PlacementsGeneratetags
     { _pgsTagFormats = Nothing
     , _pgsCampaignId = Nothing
-    , _pgsProFileId = pPgsProFileId_
+    , _pgsProFileId = _Coerce # pPgsProFileId_
     , _pgsPlacementIds = Nothing
     }
 

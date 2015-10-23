@@ -74,7 +74,7 @@ usersThreadsDelete
     -> UsersThreadsDelete
 usersThreadsDelete pUtdUserId_ pUtdId_ =
     UsersThreadsDelete
-    { _utdUserId = pUtdUserId_
+    { _utdUserId = "me"
     , _utdId = pUtdId_
     }
 

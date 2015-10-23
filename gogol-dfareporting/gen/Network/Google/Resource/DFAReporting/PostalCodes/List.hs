@@ -67,7 +67,7 @@ postalCodesList
     -> PostalCodesList
 postalCodesList pPclProFileId_ =
     PostalCodesList
-    { _pclProFileId = pPclProFileId_
+    { _pclProFileId = _Coerce # pPclProFileId_
     }
 
 -- | User profile ID associated with this request.

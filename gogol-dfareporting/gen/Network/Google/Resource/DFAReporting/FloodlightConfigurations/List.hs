@@ -73,7 +73,7 @@ floodlightConfigurationsList
 floodlightConfigurationsList pFclProFileId_ =
     FloodlightConfigurationsList
     { _fclIds = Nothing
-    , _fclProFileId = pFclProFileId_
+    , _fclProFileId = _Coerce # pFclProFileId_
     }
 
 -- | Set of IDs of floodlight configurations to retrieve. Required field;

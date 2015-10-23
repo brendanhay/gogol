@@ -81,9 +81,9 @@ creativeFieldsPatch
     -> CreativeFieldsPatch
 creativeFieldsPatch pCfpProFileId_ pCfpPayload_ pCfpId_ =
     CreativeFieldsPatch
-    { _cfpProFileId = pCfpProFileId_
+    { _cfpProFileId = _Coerce # pCfpProFileId_
     , _cfpPayload = pCfpPayload_
-    , _cfpId = pCfpId_
+    , _cfpId = _Coerce # pCfpId_
     }
 
 -- | User profile ID associated with this request.

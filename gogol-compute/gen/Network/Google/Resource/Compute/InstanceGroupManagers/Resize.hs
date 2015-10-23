@@ -99,7 +99,7 @@ instanceGroupManagersResize
 instanceGroupManagersResize pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
     InstanceGroupManagersResize
     { _igmrProject = pIgmrProject_
-    , _igmrSize = pIgmrSize_
+    , _igmrSize = _Coerce # pIgmrSize_
     , _igmrInstanceGroupManager = pIgmrInstanceGroupManager_
     , _igmrZone = pIgmrZone_
     }

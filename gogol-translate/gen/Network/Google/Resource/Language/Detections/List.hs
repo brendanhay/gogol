@@ -67,7 +67,7 @@ detectionsList
     -> DetectionsList
 detectionsList pDlQ_ =
     DetectionsList
-    { _dlQ = pDlQ_
+    { _dlQ = _Coerce # pDlQ_
     }
 
 -- | The text to detect

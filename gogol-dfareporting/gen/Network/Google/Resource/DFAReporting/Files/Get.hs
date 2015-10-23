@@ -81,8 +81,8 @@ filesGet
     -> FilesGet
 filesGet pFgReportId_ pFgFileId_ =
     FilesGet
-    { _fgReportId = pFgReportId_
-    , _fgFileId = pFgFileId_
+    { _fgReportId = _Coerce # pFgReportId_
+    , _fgFileId = _Coerce # pFgFileId_
     }
 
 -- | The ID of the report.

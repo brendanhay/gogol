@@ -100,7 +100,7 @@ editsExpansionFilesPatch
 editsExpansionFilesPatch pEefpPackageName_ pEefpAPKVersionCode_ pEefpPayload_ pEefpExpansionFileType_ pEefpEditId_ =
     EditsExpansionFilesPatch
     { _eefpPackageName = pEefpPackageName_
-    , _eefpAPKVersionCode = pEefpAPKVersionCode_
+    , _eefpAPKVersionCode = _Coerce # pEefpAPKVersionCode_
     , _eefpPayload = pEefpPayload_
     , _eefpExpansionFileType = pEefpExpansionFileType_
     , _eefpEditId = pEefpEditId_

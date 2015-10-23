@@ -67,7 +67,7 @@ accountsList
     -> AccountsList
 accountsList pAlFilterAdClientId_ =
     AccountsList
-    { _alFilterAdClientId = pAlFilterAdClientId_
+    { _alFilterAdClientId = _Coerce # pAlFilterAdClientId_
     }
 
 -- | Ad clients to list accounts for.

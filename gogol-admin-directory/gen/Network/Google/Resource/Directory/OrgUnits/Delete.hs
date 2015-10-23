@@ -73,7 +73,7 @@ orgUnitsDelete
     -> OrgUnitsDelete
 orgUnitsDelete pOudOrgUnitPath_ pOudCustomerId_ =
     OrgUnitsDelete
-    { _oudOrgUnitPath = pOudOrgUnitPath_
+    { _oudOrgUnitPath = _Coerce # pOudOrgUnitPath_
     , _oudCustomerId = pOudCustomerId_
     }
 

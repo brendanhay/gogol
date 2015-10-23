@@ -82,8 +82,8 @@ budgetPatch
 budgetPatch pBpPayload_ pBpAccountId_ pBpBillingId_ =
     BudgetPatch
     { _bpPayload = pBpPayload_
-    , _bpAccountId = pBpAccountId_
-    , _bpBillingId = pBpBillingId_
+    , _bpAccountId = _Coerce # pBpAccountId_
+    , _bpBillingId = _Coerce # pBpBillingId_
     }
 
 -- | Multipart request metadata.

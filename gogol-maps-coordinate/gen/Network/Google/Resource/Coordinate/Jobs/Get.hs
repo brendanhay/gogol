@@ -72,7 +72,7 @@ jobsGet
     -> JobsGet
 jobsGet pJgJobId_ pJgTeamId_ =
     JobsGet
-    { _jgJobId = pJgJobId_
+    { _jgJobId = _Coerce # pJgJobId_
     , _jgTeamId = pJgTeamId_
     }
 

@@ -72,7 +72,7 @@ eventTagsUpdate
     -> EventTagsUpdate
 eventTagsUpdate pEtuProFileId_ pEtuPayload_ =
     EventTagsUpdate
-    { _etuProFileId = pEtuProFileId_
+    { _etuProFileId = _Coerce # pEtuProFileId_
     , _etuPayload = pEtuPayload_
     }
 

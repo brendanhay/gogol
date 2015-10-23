@@ -74,7 +74,7 @@ floodlightActivitiesGeneratetag
 floodlightActivitiesGeneratetag pFagProFileId_ =
     FloodlightActivitiesGeneratetag
     { _fagFloodlightActivityId = Nothing
-    , _fagProFileId = pFagProFileId_
+    , _fagProFileId = _Coerce # pFagProFileId_
     }
 
 -- | Floodlight activity ID for which we want to generate a tag.

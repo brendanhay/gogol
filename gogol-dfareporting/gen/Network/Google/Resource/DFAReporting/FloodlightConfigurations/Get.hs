@@ -73,8 +73,8 @@ floodlightConfigurationsGet
     -> FloodlightConfigurationsGet
 floodlightConfigurationsGet pFcgProFileId_ pFcgId_ =
     FloodlightConfigurationsGet
-    { _fcgProFileId = pFcgProFileId_
-    , _fcgId = pFcgId_
+    { _fcgProFileId = _Coerce # pFcgProFileId_
+    , _fcgId = _Coerce # pFcgId_
     }
 
 -- | User profile ID associated with this request.

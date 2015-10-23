@@ -76,7 +76,7 @@ accountsInsert
     -> AccountsInsert
 accountsInsert pAMerchantId_ pAPayload_ =
     AccountsInsert
-    { _aMerchantId = pAMerchantId_
+    { _aMerchantId = _Coerce # pAMerchantId_
     , _aPayload = pAPayload_
     , _aDryRun = Nothing
     }

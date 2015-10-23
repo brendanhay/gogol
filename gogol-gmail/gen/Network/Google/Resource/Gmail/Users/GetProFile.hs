@@ -66,7 +66,7 @@ usersGetProFile
     -> UsersGetProFile
 usersGetProFile pUgpfUserId_ =
     UsersGetProFile
-    { _ugpfUserId = pUgpfUserId_
+    { _ugpfUserId = "me"
     }
 
 -- | The user\'s email address. The special value me can be used to indicate

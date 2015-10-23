@@ -80,9 +80,9 @@ creativeFieldValuesGet
     -> CreativeFieldValuesGet
 creativeFieldValuesGet pCfvgCreativeFieldId_ pCfvgProFileId_ pCfvgId_ =
     CreativeFieldValuesGet
-    { _cfvgCreativeFieldId = pCfvgCreativeFieldId_
-    , _cfvgProFileId = pCfvgProFileId_
-    , _cfvgId = pCfvgId_
+    { _cfvgCreativeFieldId = _Coerce # pCfvgCreativeFieldId_
+    , _cfvgProFileId = _Coerce # pCfvgProFileId_
+    , _cfvgId = _Coerce # pCfvgId_
     }
 
 -- | Creative field ID for this creative field value.

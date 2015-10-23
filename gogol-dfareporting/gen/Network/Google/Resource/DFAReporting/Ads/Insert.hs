@@ -72,7 +72,7 @@ adsInsert
     -> AdsInsert
 adsInsert pAiProFileId_ pAiPayload_ =
     AdsInsert
-    { _aiProFileId = pAiProFileId_
+    { _aiProFileId = _Coerce # pAiProFileId_
     , _aiPayload = pAiPayload_
     }
 

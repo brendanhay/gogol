@@ -72,8 +72,8 @@ accountsGet
     -> AccountsGet
 accountsGet pAggProFileId_ pAggId_ =
     AccountsGet
-    { _aggProFileId = pAggProFileId_
-    , _aggId = pAggId_
+    { _aggProFileId = _Coerce # pAggProFileId_
+    , _aggId = _Coerce # pAggId_
     }
 
 -- | User profile ID associated with this request.

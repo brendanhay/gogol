@@ -95,7 +95,7 @@ tasksUpdate pTuTaskqueue_ pTuProject_ pTuPayload_ pTuTask_ pTuNewLeaseSeconds_ =
     , _tuProject = pTuProject_
     , _tuPayload = pTuPayload_
     , _tuTask = pTuTask_
-    , _tuNewLeaseSeconds = pTuNewLeaseSeconds_
+    , _tuNewLeaseSeconds = _Coerce # pTuNewLeaseSeconds_
     }
 
 tuTaskqueue :: Lens' TasksUpdate Text

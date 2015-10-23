@@ -72,8 +72,8 @@ sitesGet
     -> SitesGet
 sitesGet pSggProFileId_ pSggId_ =
     SitesGet
-    { _sggProFileId = pSggProFileId_
-    , _sggId = pSggId_
+    { _sggProFileId = _Coerce # pSggProFileId_
+    , _sggId = _Coerce # pSggId_
     }
 
 -- | User profile ID associated with this request.

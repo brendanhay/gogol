@@ -72,7 +72,7 @@ advertisersInsert
     -> AdvertisersInsert
 advertisersInsert pAiiProFileId_ pAiiPayload_ =
     AdvertisersInsert
-    { _aiiProFileId = pAiiProFileId_
+    { _aiiProFileId = _Coerce # pAiiProFileId_
     , _aiiPayload = pAiiPayload_
     }
 

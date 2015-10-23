@@ -73,8 +73,8 @@ accountPermissionsGet
     -> AccountPermissionsGet
 accountPermissionsGet pApgProFileId_ pApgId_ =
     AccountPermissionsGet
-    { _apgProFileId = pApgProFileId_
-    , _apgId = pApgId_
+    { _apgProFileId = _Coerce # pApgProFileId_
+    , _apgId = _Coerce # pApgId_
     }
 
 -- | User profile ID associated with this request.

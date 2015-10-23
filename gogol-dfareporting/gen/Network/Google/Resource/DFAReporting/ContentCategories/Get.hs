@@ -73,8 +73,8 @@ contentCategoriesGet
     -> ContentCategoriesGet
 contentCategoriesGet pCcgProFileId_ pCcgId_ =
     ContentCategoriesGet
-    { _ccgProFileId = pCcgProFileId_
-    , _ccgId = pCcgId_
+    { _ccgProFileId = _Coerce # pCcgProFileId_
+    , _ccgId = _Coerce # pCcgId_
     }
 
 -- | User profile ID associated with this request.

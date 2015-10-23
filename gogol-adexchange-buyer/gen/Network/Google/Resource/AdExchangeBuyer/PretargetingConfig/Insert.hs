@@ -73,7 +73,7 @@ pretargetingConfigInsert
 pretargetingConfigInsert pPciPayload_ pPciAccountId_ =
     PretargetingConfigInsert
     { _pciPayload = pPciPayload_
-    , _pciAccountId = pPciAccountId_
+    , _pciAccountId = _Coerce # pPciAccountId_
     }
 
 -- | Multipart request metadata.

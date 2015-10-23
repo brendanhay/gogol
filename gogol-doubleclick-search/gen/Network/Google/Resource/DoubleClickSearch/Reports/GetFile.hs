@@ -82,7 +82,7 @@ reportsGetFile
 reportsGetFile pRgfReportId_ pRgfReportFragment_ =
     ReportsGetFile
     { _rgfReportId = pRgfReportId_
-    , _rgfReportFragment = pRgfReportFragment_
+    , _rgfReportFragment = _Coerce # pRgfReportFragment_
     }
 
 -- | ID of the report.

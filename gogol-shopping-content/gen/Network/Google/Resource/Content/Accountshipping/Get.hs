@@ -72,8 +72,8 @@ accountshippingGet
     -> AccountshippingGet
 accountshippingGet pAcccMerchantId_ pAcccAccountId_ =
     AccountshippingGet
-    { _acccMerchantId = pAcccMerchantId_
-    , _acccAccountId = pAcccAccountId_
+    { _acccMerchantId = _Coerce # pAcccMerchantId_
+    , _acccAccountId = _Coerce # pAcccAccountId_
     }
 
 -- | The ID of the managing account.

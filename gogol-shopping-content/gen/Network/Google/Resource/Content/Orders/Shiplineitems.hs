@@ -79,7 +79,7 @@ ordersShiplineitems
     -> OrdersShiplineitems
 ordersShiplineitems pOsMerchantId_ pOsPayload_ pOsOrderId_ =
     OrdersShiplineitems
-    { _osMerchantId = pOsMerchantId_
+    { _osMerchantId = _Coerce # pOsMerchantId_
     , _osPayload = pOsPayload_
     , _osOrderId = pOsOrderId_
     }

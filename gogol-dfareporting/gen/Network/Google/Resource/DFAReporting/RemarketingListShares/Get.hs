@@ -73,8 +73,8 @@ remarketingListSharesGet
     -> RemarketingListSharesGet
 remarketingListSharesGet pRlsgProFileId_ pRlsgRemarketingListId_ =
     RemarketingListSharesGet
-    { _rlsgProFileId = pRlsgProFileId_
-    , _rlsgRemarketingListId = pRlsgRemarketingListId_
+    { _rlsgProFileId = _Coerce # pRlsgProFileId_
+    , _rlsgRemarketingListId = _Coerce # pRlsgRemarketingListId_
     }
 
 -- | User profile ID associated with this request.

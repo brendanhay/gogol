@@ -72,8 +72,8 @@ userRolesGet
     -> UserRolesGet
 userRolesGet pUrgProFileId_ pUrgId_ =
     UserRolesGet
-    { _urgProFileId = pUrgProFileId_
-    , _urgId = pUrgId_
+    { _urgProFileId = _Coerce # pUrgProFileId_
+    , _urgId = _Coerce # pUrgId_
     }
 
 -- | User profile ID associated with this request.

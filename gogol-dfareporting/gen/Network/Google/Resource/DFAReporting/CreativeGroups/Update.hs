@@ -73,7 +73,7 @@ creativeGroupsUpdate
     -> CreativeGroupsUpdate
 creativeGroupsUpdate pCguProFileId_ pCguPayload_ =
     CreativeGroupsUpdate
-    { _cguProFileId = pCguProFileId_
+    { _cguProFileId = _Coerce # pCguProFileId_
     , _cguPayload = pCguPayload_
     }
 

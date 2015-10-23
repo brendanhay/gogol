@@ -76,7 +76,7 @@ productsList
     -> ProductsList
 productsList pProMerchantId_ =
     ProductsList
-    { _proMerchantId = pProMerchantId_
+    { _proMerchantId = _Coerce # pProMerchantId_
     , _proPageToken = Nothing
     , _proMaxResults = Nothing
     }

@@ -72,7 +72,7 @@ subAccountsUpdate
     -> SubAccountsUpdate
 subAccountsUpdate pSauProFileId_ pSauPayload_ =
     SubAccountsUpdate
-    { _sauProFileId = pSauProFileId_
+    { _sauProFileId = _Coerce # pSauProFileId_
     , _sauPayload = pSauPayload_
     }
 

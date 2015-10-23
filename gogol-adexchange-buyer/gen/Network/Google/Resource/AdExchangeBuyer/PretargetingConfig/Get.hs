@@ -72,8 +72,8 @@ pretargetingConfigGet
     -> PretargetingConfigGet
 pretargetingConfigGet pPcgAccountId_ pPcgConfigId_ =
     PretargetingConfigGet
-    { _pcgAccountId = pPcgAccountId_
-    , _pcgConfigId = pPcgConfigId_
+    { _pcgAccountId = _Coerce # pPcgAccountId_
+    , _pcgConfigId = _Coerce # pPcgConfigId_
     }
 
 -- | The account id to get the pretargeting config for.

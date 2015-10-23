@@ -72,8 +72,8 @@ creativesGet
     -> CreativesGet
 creativesGet pCcProFileId_ pCcId_ =
     CreativesGet
-    { _ccProFileId = pCcProFileId_
-    , _ccId = pCcId_
+    { _ccProFileId = _Coerce # pCcProFileId_
+    , _ccId = _Coerce # pCcId_
     }
 
 -- | User profile ID associated with this request.

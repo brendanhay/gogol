@@ -72,7 +72,7 @@ accountsUpdate
 accountsUpdate pAuPayload_ pAuId_ =
     AccountsUpdate
     { _auPayload = pAuPayload_
-    , _auId = pAuId_
+    , _auId = _Coerce # pAuId_
     }
 
 -- | Multipart request metadata.

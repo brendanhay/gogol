@@ -73,7 +73,7 @@ aspsGet
     -> AspsGet
 aspsGet pAgCodeId_ pAgUserKey_ =
     AspsGet
-    { _agCodeId = pAgCodeId_
+    { _agCodeId = _Coerce # pAgCodeId_
     , _agUserKey = pAgUserKey_
     }
 

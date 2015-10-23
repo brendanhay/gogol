@@ -67,7 +67,7 @@ reportsListreports
     -> ReportsListreports
 reportsListreports pRlQueryId_ =
     ReportsListreports
-    { _rlQueryId = pRlQueryId_
+    { _rlQueryId = _Coerce # pRlQueryId_
     }
 
 -- | Query ID with which the reports are associated.

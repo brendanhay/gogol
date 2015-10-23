@@ -73,7 +73,7 @@ placementStrategiesUpdate
     -> PlacementStrategiesUpdate
 placementStrategiesUpdate pPsuProFileId_ pPsuPayload_ =
     PlacementStrategiesUpdate
-    { _psuProFileId = pPsuProFileId_
+    { _psuProFileId = _Coerce # pPsuProFileId_
     , _psuPayload = pPsuPayload_
     }
 

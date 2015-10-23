@@ -89,7 +89,7 @@ usersHistoryList
     -> UsersHistoryList
 usersHistoryList pUhlUserId_ =
     UsersHistoryList
-    { _uhlUserId = pUhlUserId_
+    { _uhlUserId = "me"
     , _uhlStartHistoryId = Nothing
     , _uhlPageToken = Nothing
     , _uhlLabelId = Nothing

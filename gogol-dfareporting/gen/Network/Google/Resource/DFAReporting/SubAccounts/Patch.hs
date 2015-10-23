@@ -79,9 +79,9 @@ subAccountsPatch
     -> SubAccountsPatch
 subAccountsPatch pSapProFileId_ pSapPayload_ pSapId_ =
     SubAccountsPatch
-    { _sapProFileId = pSapProFileId_
+    { _sapProFileId = _Coerce # pSapProFileId_
     , _sapPayload = pSapPayload_
-    , _sapId = pSapId_
+    , _sapId = _Coerce # pSapId_
     }
 
 -- | User profile ID associated with this request.

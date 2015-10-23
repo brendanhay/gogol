@@ -65,7 +65,7 @@ accountsGet
     -> AccountsGet
 accountsGet pAgId_ =
     AccountsGet
-    { _agId = pAgId_
+    { _agId = _Coerce # pAgId_
     }
 
 -- | The account id

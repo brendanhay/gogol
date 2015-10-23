@@ -72,7 +72,7 @@ styleGet
     -> StyleGet
 styleGet pSgStyleId_ pSgTableId_ =
     StyleGet
-    { _sgStyleId = pSgStyleId_
+    { _sgStyleId = _Coerce # pSgStyleId_
     , _sgTableId = pSgTableId_
     }
 

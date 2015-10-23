@@ -72,7 +72,7 @@ subAccountsInsert
     -> SubAccountsInsert
 subAccountsInsert pSaiProFileId_ pSaiPayload_ =
     SubAccountsInsert
-    { _saiProFileId = pSaiProFileId_
+    { _saiProFileId = _Coerce # pSaiProFileId_
     , _saiPayload = pSaiPayload_
     }
 

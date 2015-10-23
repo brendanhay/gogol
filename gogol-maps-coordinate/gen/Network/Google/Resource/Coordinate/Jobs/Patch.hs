@@ -130,7 +130,7 @@ jobsPatch
     -> JobsPatch
 jobsPatch pJpJobId_ pJpTeamId_ pJpPayload_ =
     JobsPatch
-    { _jpJobId = pJpJobId_
+    { _jpJobId = _Coerce # pJpJobId_
     , _jpProgress = Nothing
     , _jpNote = Nothing
     , _jpTeamId = pJpTeamId_

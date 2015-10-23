@@ -73,8 +73,8 @@ accountActiveAdSummariesGet
     -> AccountActiveAdSummariesGet
 accountActiveAdSummariesGet pAaasgProFileId_ pAaasgSummaryAccountId_ =
     AccountActiveAdSummariesGet
-    { _aaasgProFileId = pAaasgProFileId_
-    , _aaasgSummaryAccountId = pAaasgSummaryAccountId_
+    { _aaasgProFileId = _Coerce # pAaasgProFileId_
+    , _aaasgSummaryAccountId = _Coerce # pAaasgSummaryAccountId_
     }
 
 -- | User profile ID associated with this request.

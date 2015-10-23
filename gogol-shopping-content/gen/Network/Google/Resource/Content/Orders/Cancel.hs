@@ -79,7 +79,7 @@ ordersCancel
     -> OrdersCancel
 ordersCancel pOccMerchantId_ pOccPayload_ pOccOrderId_ =
     OrdersCancel
-    { _occMerchantId = pOccMerchantId_
+    { _occMerchantId = _Coerce # pOccMerchantId_
     , _occPayload = pOccPayload_
     , _occOrderId = pOccOrderId_
     }

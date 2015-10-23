@@ -79,9 +79,9 @@ ordersGet
     -> OrdersGet
 ordersGet pOgProFileId_ pOgId_ pOgProjectId_ =
     OrdersGet
-    { _ogProFileId = pOgProFileId_
-    , _ogId = pOgId_
-    , _ogProjectId = pOgProjectId_
+    { _ogProFileId = _Coerce # pOgProFileId_
+    , _ogId = _Coerce # pOgId_
+    , _ogProjectId = _Coerce # pOgProjectId_
     }
 
 -- | User profile ID associated with this request.

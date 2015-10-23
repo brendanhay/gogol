@@ -79,7 +79,7 @@ ordersUpdatemerchantOrderid
     -> OrdersUpdatemerchantOrderid
 ordersUpdatemerchantOrderid pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
     OrdersUpdatemerchantOrderid
-    { _ouoMerchantId = pOuoMerchantId_
+    { _ouoMerchantId = _Coerce # pOuoMerchantId_
     , _ouoPayload = pOuoPayload_
     , _ouoOrderId = pOuoOrderId_
     }

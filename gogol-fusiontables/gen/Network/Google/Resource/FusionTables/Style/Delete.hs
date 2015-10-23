@@ -72,7 +72,7 @@ styleDelete
     -> StyleDelete
 styleDelete pSdStyleId_ pSdTableId_ =
     StyleDelete
-    { _sdStyleId = pSdStyleId_
+    { _sdStyleId = _Coerce # pSdStyleId_
     , _sdTableId = pSdTableId_
     }
 

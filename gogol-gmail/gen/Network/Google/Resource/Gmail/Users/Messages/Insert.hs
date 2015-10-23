@@ -104,7 +104,7 @@ usersMessagesInsert
 usersMessagesInsert pUPayload_ pUUserId_ =
     UsersMessagesInsert
     { _uPayload = pUPayload_
-    , _uUserId = pUUserId_
+    , _uUserId = "me"
     , _uDeleted = False
     , _uInternalDateSource = UMIIDSReceivedTime
     }

@@ -67,7 +67,7 @@ countriesList
     -> CountriesList
 countriesList pCouProFileId_ =
     CountriesList
-    { _couProFileId = pCouProFileId_
+    { _couProFileId = _Coerce # pCouProFileId_
     }
 
 -- | User profile ID associated with this request.

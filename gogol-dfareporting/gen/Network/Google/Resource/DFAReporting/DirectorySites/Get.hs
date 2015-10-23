@@ -72,8 +72,8 @@ directorySitesGet
     -> DirectorySitesGet
 directorySitesGet pDsgProFileId_ pDsgId_ =
     DirectorySitesGet
-    { _dsgProFileId = pDsgProFileId_
-    , _dsgId = pDsgId_
+    { _dsgProFileId = _Coerce # pDsgProFileId_
+    , _dsgId = _Coerce # pDsgId_
     }
 
 -- | User profile ID associated with this request.

@@ -111,8 +111,8 @@ remarketingListsList
 remarketingListsList pRllAdvertiserId_ pRllProFileId_ =
     RemarketingListsList
     { _rllFloodlightActivityId = Nothing
-    , _rllAdvertiserId = pRllAdvertiserId_
-    , _rllProFileId = pRllProFileId_
+    , _rllAdvertiserId = _Coerce # pRllAdvertiserId_
+    , _rllProFileId = _Coerce # pRllProFileId_
     , _rllSortOrder = Nothing
     , _rllActive = Nothing
     , _rllName = Nothing

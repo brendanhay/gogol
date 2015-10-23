@@ -81,9 +81,9 @@ remarketingListsPatch
     -> RemarketingListsPatch
 remarketingListsPatch pRlpProFileId_ pRlpPayload_ pRlpId_ =
     RemarketingListsPatch
-    { _rlpProFileId = pRlpProFileId_
+    { _rlpProFileId = _Coerce # pRlpProFileId_
     , _rlpPayload = pRlpPayload_
-    , _rlpId = pRlpId_
+    , _rlpId = _Coerce # pRlpId_
     }
 
 -- | User profile ID associated with this request.

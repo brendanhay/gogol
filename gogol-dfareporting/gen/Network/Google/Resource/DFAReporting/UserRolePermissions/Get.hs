@@ -73,8 +73,8 @@ userRolePermissionsGet
     -> UserRolePermissionsGet
 userRolePermissionsGet pUProFileId_ pUId_ =
     UserRolePermissionsGet
-    { _uProFileId = pUProFileId_
-    , _uId = pUId_
+    { _uProFileId = _Coerce # pUProFileId_
+    , _uId = _Coerce # pUId_
     }
 
 -- | User profile ID associated with this request.

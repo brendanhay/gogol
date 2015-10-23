@@ -97,7 +97,7 @@ tasksPatch pTpTaskqueue_ pTpProject_ pTpPayload_ pTpTask_ pTpNewLeaseSeconds_ =
     , _tpProject = pTpProject_
     , _tpPayload = pTpPayload_
     , _tpTask = pTpTask_
-    , _tpNewLeaseSeconds = pTpNewLeaseSeconds_
+    , _tpNewLeaseSeconds = _Coerce # pTpNewLeaseSeconds_
     }
 
 tpTaskqueue :: Lens' TasksPatch Text

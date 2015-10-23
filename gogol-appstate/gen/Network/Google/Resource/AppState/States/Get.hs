@@ -67,7 +67,7 @@ statesGet
     -> StatesGet
 statesGet pSgStateKey_ =
     StatesGet
-    { _sgStateKey = pSgStateKey_
+    { _sgStateKey = _Coerce # pSgStateKey_
     }
 
 -- | The key for the data to be retrieved.

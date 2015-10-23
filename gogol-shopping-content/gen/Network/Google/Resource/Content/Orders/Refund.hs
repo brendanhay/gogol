@@ -79,7 +79,7 @@ ordersRefund
     -> OrdersRefund
 ordersRefund pOrMerchantId_ pOrPayload_ pOrOrderId_ =
     OrdersRefund
-    { _orMerchantId = pOrMerchantId_
+    { _orMerchantId = _Coerce # pOrMerchantId_
     , _orPayload = pOrPayload_
     , _orOrderId = pOrOrderId_
     }

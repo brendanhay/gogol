@@ -72,7 +72,7 @@ usersLabelsGet
     -> UsersLabelsGet
 usersLabelsGet pUlgUserId_ pUlgId_ =
     UsersLabelsGet
-    { _ulgUserId = pUlgUserId_
+    { _ulgUserId = "me"
     , _ulgId = pUlgId_
     }
 

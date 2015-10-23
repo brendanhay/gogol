@@ -73,7 +73,7 @@ userRolePermissionsList
 userRolePermissionsList pUrplProFileId_ =
     UserRolePermissionsList
     { _urplIds = Nothing
-    , _urplProFileId = pUrplProFileId_
+    , _urplProFileId = _Coerce # pUrplProFileId_
     }
 
 -- | Select only user role permissions with these IDs.

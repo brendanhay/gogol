@@ -67,7 +67,7 @@ mobileCarriersList
     -> MobileCarriersList
 mobileCarriersList pMclProFileId_ =
     MobileCarriersList
-    { _mclProFileId = pMclProFileId_
+    { _mclProFileId = _Coerce # pMclProFileId_
     }
 
 -- | User profile ID associated with this request.

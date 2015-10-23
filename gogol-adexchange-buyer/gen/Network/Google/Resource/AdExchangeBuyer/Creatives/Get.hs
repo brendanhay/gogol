@@ -74,7 +74,7 @@ creativesGet
 creativesGet pCgBuyerCreativeId_ pCgAccountId_ =
     CreativesGet
     { _cgBuyerCreativeId = pCgBuyerCreativeId_
-    , _cgAccountId = pCgAccountId_
+    , _cgAccountId = _Coerce # pCgAccountId_
     }
 
 -- | The buyer-specific id for this creative.

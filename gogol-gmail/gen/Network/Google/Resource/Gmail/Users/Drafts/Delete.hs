@@ -74,7 +74,7 @@ usersDraftsDelete
     -> UsersDraftsDelete
 usersDraftsDelete pUddUserId_ pUddId_ =
     UsersDraftsDelete
-    { _uddUserId = pUddUserId_
+    { _uddUserId = "me"
     , _uddId = pUddId_
     }
 

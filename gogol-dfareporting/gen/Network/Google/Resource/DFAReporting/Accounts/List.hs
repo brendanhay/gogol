@@ -104,7 +104,7 @@ accountsList pAccProFileId_ =
     AccountsList
     { _accSearchString = Nothing
     , _accIds = Nothing
-    , _accProFileId = pAccProFileId_
+    , _accProFileId = _Coerce # pAccProFileId_
     , _accSortOrder = Nothing
     , _accActive = Nothing
     , _accPageToken = Nothing

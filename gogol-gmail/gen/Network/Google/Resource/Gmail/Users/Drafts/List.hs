@@ -77,7 +77,7 @@ usersDraftsList
     -> UsersDraftsList
 usersDraftsList pUdlUserId_ =
     UsersDraftsList
-    { _udlUserId = pUdlUserId_
+    { _udlUserId = "me"
     , _udlPageToken = Nothing
     , _udlMaxResults = 100
     }

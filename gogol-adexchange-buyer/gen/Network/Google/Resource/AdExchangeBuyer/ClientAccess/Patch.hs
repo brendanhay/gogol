@@ -75,9 +75,9 @@ clientAccessPatch
     -> ClientAccessPatch
 clientAccessPatch pCapSponsorAccountId_ pCapPayload_ pCapClientAccountId_ =
     ClientAccessPatch
-    { _capSponsorAccountId = pCapSponsorAccountId_
+    { _capSponsorAccountId = _Coerce # pCapSponsorAccountId_
     , _capPayload = pCapPayload_
-    , _capClientAccountId = pCapClientAccountId_
+    , _capClientAccountId = _Coerce # pCapClientAccountId_
     }
 
 capSponsorAccountId :: Lens' ClientAccessPatch Int32

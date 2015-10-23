@@ -84,7 +84,7 @@ scoresSubmit
 scoresSubmit pSsScore_ pSsLeaderboardId_ =
     ScoresSubmit
     { _ssScoreTag = Nothing
-    , _ssScore = pSsScore_
+    , _ssScore = _Coerce # pSsScore_
     , _ssLeaderboardId = pSsLeaderboardId_
     , _ssLanguage = Nothing
     }

@@ -71,8 +71,8 @@ accounttaxGet
     -> AccounttaxGet
 accounttaxGet pAggMerchantId_ pAggAccountId_ =
     AccounttaxGet
-    { _aggMerchantId = pAggMerchantId_
-    , _aggAccountId = pAggAccountId_
+    { _aggMerchantId = _Coerce # pAggMerchantId_
+    , _aggAccountId = _Coerce # pAggAccountId_
     }
 
 -- | The ID of the managing account.

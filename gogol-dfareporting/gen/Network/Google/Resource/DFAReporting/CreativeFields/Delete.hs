@@ -72,8 +72,8 @@ creativeFieldsDelete
     -> CreativeFieldsDelete
 creativeFieldsDelete pCfdProFileId_ pCfdId_ =
     CreativeFieldsDelete
-    { _cfdProFileId = pCfdProFileId_
-    , _cfdId = pCfdId_
+    { _cfdProFileId = _Coerce # pCfdProFileId_
+    , _cfdId = _Coerce # pCfdId_
     }
 
 -- | User profile ID associated with this request.

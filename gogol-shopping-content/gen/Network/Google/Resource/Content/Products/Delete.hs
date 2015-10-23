@@ -76,7 +76,7 @@ productsDelete
     -> ProductsDelete
 productsDelete pPdMerchantId_ pPdProductId_ =
     ProductsDelete
-    { _pdMerchantId = pPdMerchantId_
+    { _pdMerchantId = _Coerce # pPdMerchantId_
     , _pdProductId = pPdProductId_
     , _pdDryRun = Nothing
     }

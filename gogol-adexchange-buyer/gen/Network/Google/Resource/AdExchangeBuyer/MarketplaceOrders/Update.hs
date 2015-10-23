@@ -87,7 +87,7 @@ marketplaceOrdersUpdate
 marketplaceOrdersUpdate pMouUpdateAction_ pMouRevisionNumber_ pMouPayload_ pMouOrderId_ =
     MarketplaceOrdersUpdate
     { _mouUpdateAction = pMouUpdateAction_
-    , _mouRevisionNumber = pMouRevisionNumber_
+    , _mouRevisionNumber = _Coerce # pMouRevisionNumber_
     , _mouPayload = pMouPayload_
     , _mouOrderId = pMouOrderId_
     }

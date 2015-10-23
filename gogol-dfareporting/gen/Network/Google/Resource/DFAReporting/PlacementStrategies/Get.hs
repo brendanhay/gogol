@@ -73,8 +73,8 @@ placementStrategiesGet
     -> PlacementStrategiesGet
 placementStrategiesGet pPsgProFileId_ pPsgId_ =
     PlacementStrategiesGet
-    { _psgProFileId = pPsgProFileId_
-    , _psgId = pPsgId_
+    { _psgProFileId = _Coerce # pPsgProFileId_
+    , _psgId = _Coerce # pPsgId_
     }
 
 -- | User profile ID associated with this request.

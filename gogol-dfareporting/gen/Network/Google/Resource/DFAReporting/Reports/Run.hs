@@ -79,8 +79,8 @@ reportsRun
 reportsRun pRrReportId_ pRrProFileId_ =
     ReportsRun
     { _rrSynchronous = Nothing
-    , _rrReportId = pRrReportId_
-    , _rrProFileId = pRrProFileId_
+    , _rrReportId = _Coerce # pRrReportId_
+    , _rrProFileId = _Coerce # pRrProFileId_
     }
 
 -- | If set and true, tries to run the report synchronously.

@@ -73,7 +73,7 @@ contentCategoriesInsert
     -> ContentCategoriesInsert
 contentCategoriesInsert pCciProFileId_ pCciPayload_ =
     ContentCategoriesInsert
-    { _cciProFileId = pCciProFileId_
+    { _cciProFileId = _Coerce # pCciProFileId_
     , _cciPayload = pCciPayload_
     }
 

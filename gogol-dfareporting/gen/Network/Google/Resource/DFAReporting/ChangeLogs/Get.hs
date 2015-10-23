@@ -72,8 +72,8 @@ changeLogsGet
     -> ChangeLogsGet
 changeLogsGet pClgProFileId_ pClgId_ =
     ChangeLogsGet
-    { _clgProFileId = pClgProFileId_
-    , _clgId = pClgId_
+    { _clgProFileId = _Coerce # pClgProFileId_
+    , _clgId = _Coerce # pClgId_
     }
 
 -- | User profile ID associated with this request.

@@ -78,7 +78,7 @@ accountshippingList
     -> AccountshippingList
 accountshippingList pAl1MerchantId_ =
     AccountshippingList
-    { _al1MerchantId = pAl1MerchantId_
+    { _al1MerchantId = _Coerce # pAl1MerchantId_
     , _al1PageToken = Nothing
     , _al1MaxResults = Nothing
     }

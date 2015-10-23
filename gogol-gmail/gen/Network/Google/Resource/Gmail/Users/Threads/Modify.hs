@@ -83,7 +83,7 @@ usersThreadsModify
 usersThreadsModify pUtmPayload_ pUtmUserId_ pUtmId_ =
     UsersThreadsModify
     { _utmPayload = pUtmPayload_
-    , _utmUserId = pUtmUserId_
+    , _utmUserId = "me"
     , _utmId = pUtmId_
     }
 

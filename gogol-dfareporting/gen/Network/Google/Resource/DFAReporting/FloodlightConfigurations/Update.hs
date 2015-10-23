@@ -73,7 +73,7 @@ floodlightConfigurationsUpdate
     -> FloodlightConfigurationsUpdate
 floodlightConfigurationsUpdate pFcuProFileId_ pFcuPayload_ =
     FloodlightConfigurationsUpdate
-    { _fcuProFileId = pFcuProFileId_
+    { _fcuProFileId = _Coerce # pFcuProFileId_
     , _fcuPayload = pFcuPayload_
     }
 

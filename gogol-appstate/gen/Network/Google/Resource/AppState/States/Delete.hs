@@ -73,7 +73,7 @@ statesDelete
     -> StatesDelete
 statesDelete pSdStateKey_ =
     StatesDelete
-    { _sdStateKey = pSdStateKey_
+    { _sdStateKey = _Coerce # pSdStateKey_
     }
 
 -- | The key for the data to be retrieved.

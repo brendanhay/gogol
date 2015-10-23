@@ -71,8 +71,8 @@ pretargetingConfigDelete
     -> PretargetingConfigDelete
 pretargetingConfigDelete pPcdAccountId_ pPcdConfigId_ =
     PretargetingConfigDelete
-    { _pcdAccountId = pPcdAccountId_
-    , _pcdConfigId = pPcdConfigId_
+    { _pcdAccountId = _Coerce # pPcdAccountId_
+    , _pcdConfigId = _Coerce # pPcdConfigId_
     }
 
 -- | The account id to delete the pretargeting config for.

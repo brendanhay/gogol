@@ -81,9 +81,9 @@ floodlightActivityGroupsPatch
     -> FloodlightActivityGroupsPatch
 floodlightActivityGroupsPatch pFagpProFileId_ pFagpPayload_ pFagpId_ =
     FloodlightActivityGroupsPatch
-    { _fagpProFileId = pFagpProFileId_
+    { _fagpProFileId = _Coerce # pFagpProFileId_
     , _fagpPayload = pFagpPayload_
-    , _fagpId = pFagpId_
+    , _fagpId = _Coerce # pFagpId_
     }
 
 -- | User profile ID associated with this request.

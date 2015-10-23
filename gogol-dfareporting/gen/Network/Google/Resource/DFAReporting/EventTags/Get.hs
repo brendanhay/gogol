@@ -72,8 +72,8 @@ eventTagsGet
     -> EventTagsGet
 eventTagsGet pEtgProFileId_ pEtgId_ =
     EventTagsGet
-    { _etgProFileId = pEtgProFileId_
-    , _etgId = pEtgId_
+    { _etgProFileId = _Coerce # pEtgProFileId_
+    , _etgId = _Coerce # pEtgId_
     }
 
 -- | User profile ID associated with this request.

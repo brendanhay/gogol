@@ -78,9 +78,9 @@ creativesPatch
     -> CreativesPatch
 creativesPatch pCppProFileId_ pCppPayload_ pCppId_ =
     CreativesPatch
-    { _cppProFileId = pCppProFileId_
+    { _cppProFileId = _Coerce # pCppProFileId_
     , _cppPayload = pCppPayload_
-    , _cppId = pCppId_
+    , _cppId = _Coerce # pCppId_
     }
 
 -- | User profile ID associated with this request.

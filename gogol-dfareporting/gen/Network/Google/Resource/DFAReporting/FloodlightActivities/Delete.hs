@@ -72,8 +72,8 @@ floodlightActivitiesDelete
     -> FloodlightActivitiesDelete
 floodlightActivitiesDelete pFadProFileId_ pFadId_ =
     FloodlightActivitiesDelete
-    { _fadProFileId = pFadProFileId_
-    , _fadId = pFadId_
+    { _fadProFileId = _Coerce # pFadProFileId_
+    , _fadId = _Coerce # pFadId_
     }
 
 -- | User profile ID associated with this request.

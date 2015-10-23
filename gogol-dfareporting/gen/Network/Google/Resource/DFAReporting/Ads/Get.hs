@@ -72,8 +72,8 @@ adsGet
     -> AdsGet
 adsGet pAdsProFileId_ pAdsId_ =
     AdsGet
-    { _adsProFileId = pAdsProFileId_
-    , _adsId = pAdsId_
+    { _adsProFileId = _Coerce # pAdsProFileId_
+    , _adsId = _Coerce # pAdsId_
     }
 
 -- | User profile ID associated with this request.

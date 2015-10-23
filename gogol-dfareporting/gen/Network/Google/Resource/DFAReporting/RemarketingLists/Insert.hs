@@ -73,7 +73,7 @@ remarketingListsInsert
     -> RemarketingListsInsert
 remarketingListsInsert pRliProFileId_ pRliPayload_ =
     RemarketingListsInsert
-    { _rliProFileId = pRliProFileId_
+    { _rliProFileId = _Coerce # pRliProFileId_
     , _rliPayload = pRliPayload_
     }
 

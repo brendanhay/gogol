@@ -65,7 +65,7 @@ usersStop
     -> UsersStop
 usersStop pUsUserId_ =
     UsersStop
-    { _usUserId = pUsUserId_
+    { _usUserId = "me"
     }
 
 -- | The user\'s email address. The special value me can be used to indicate

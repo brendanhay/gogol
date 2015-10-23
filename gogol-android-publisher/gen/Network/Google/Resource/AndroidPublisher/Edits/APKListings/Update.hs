@@ -95,7 +95,7 @@ editsAPKListingsUpdate
 editsAPKListingsUpdate pEapkluPackageName_ pEapkluAPKVersionCode_ pEapkluPayload_ pEapkluLanguage_ pEapkluEditId_ =
     EditsAPKListingsUpdate
     { _eapkluPackageName = pEapkluPackageName_
-    , _eapkluAPKVersionCode = pEapkluAPKVersionCode_
+    , _eapkluAPKVersionCode = _Coerce # pEapkluAPKVersionCode_
     , _eapkluPayload = pEapkluPayload_
     , _eapkluLanguage = pEapkluLanguage_
     , _eapkluEditId = pEapkluEditId_

@@ -80,8 +80,8 @@ creativeFieldValuesUpdate
     -> CreativeFieldValuesUpdate
 creativeFieldValuesUpdate pCfvuCreativeFieldId_ pCfvuProFileId_ pCfvuPayload_ =
     CreativeFieldValuesUpdate
-    { _cfvuCreativeFieldId = pCfvuCreativeFieldId_
-    , _cfvuProFileId = pCfvuProFileId_
+    { _cfvuCreativeFieldId = _Coerce # pCfvuCreativeFieldId_
+    , _cfvuProFileId = _Coerce # pCfvuProFileId_
     , _cfvuPayload = pCfvuPayload_
     }
 

@@ -85,9 +85,9 @@ accountshippingPatch
     -> AccountshippingPatch
 accountshippingPatch pAp1MerchantId_ pAp1Payload_ pAp1AccountId_ =
     AccountshippingPatch
-    { _ap1MerchantId = pAp1MerchantId_
+    { _ap1MerchantId = _Coerce # pAp1MerchantId_
     , _ap1Payload = pAp1Payload_
-    , _ap1AccountId = pAp1AccountId_
+    , _ap1AccountId = _Coerce # pAp1AccountId_
     , _ap1DryRun = Nothing
     }
 

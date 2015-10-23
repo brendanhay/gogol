@@ -73,8 +73,8 @@ remarketingListsGet
     -> RemarketingListsGet
 remarketingListsGet pRlgProFileId_ pRlgId_ =
     RemarketingListsGet
-    { _rlgProFileId = pRlgProFileId_
-    , _rlgId = pRlgId_
+    { _rlgProFileId = _Coerce # pRlgProFileId_
+    , _rlgId = _Coerce # pRlgId_
     }
 
 -- | User profile ID associated with this request.

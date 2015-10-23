@@ -71,7 +71,7 @@ productsGet
     -> ProductsGet
 productsGet pPggMerchantId_ pPggProductId_ =
     ProductsGet
-    { _pggMerchantId = pPggMerchantId_
+    { _pggMerchantId = _Coerce # pPggMerchantId_
     , _pggProductId = pPggProductId_
     }
 

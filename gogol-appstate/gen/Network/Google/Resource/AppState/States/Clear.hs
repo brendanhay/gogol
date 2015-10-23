@@ -75,7 +75,7 @@ statesClear
     -> StatesClear
 statesClear pScStateKey_ =
     StatesClear
-    { _scStateKey = pScStateKey_
+    { _scStateKey = _Coerce # pScStateKey_
     , _scCurrentDataVersion = Nothing
     }
 

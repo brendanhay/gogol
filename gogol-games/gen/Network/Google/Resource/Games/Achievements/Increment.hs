@@ -82,7 +82,7 @@ achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
     AchievementsIncrement
     { _aiRequestId = Nothing
     , _aiAchievementId = pAiAchievementId_
-    , _aiStepsToIncrement = pAiStepsToIncrement_
+    , _aiStepsToIncrement = _Coerce # pAiStepsToIncrement_
     }
 
 -- | A randomly generated numeric ID for each request specified by the

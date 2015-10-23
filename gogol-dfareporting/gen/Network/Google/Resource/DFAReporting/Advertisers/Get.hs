@@ -72,8 +72,8 @@ advertisersGet
     -> AdvertisersGet
 advertisersGet pAdvProFileId_ pAdvId_ =
     AdvertisersGet
-    { _advProFileId = pAdvProFileId_
-    , _advId = pAdvId_
+    { _advProFileId = _Coerce # pAdvProFileId_
+    , _advId = _Coerce # pAdvId_
     }
 
 -- | User profile ID associated with this request.

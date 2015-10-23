@@ -65,7 +65,7 @@ queriesDeleteQuery
     -> QueriesDeleteQuery
 queriesDeleteQuery pQdqQueryId_ =
     QueriesDeleteQuery
-    { _qdqQueryId = pQdqQueryId_
+    { _qdqQueryId = _Coerce # pQdqQueryId_
     }
 
 -- | Query ID to delete.

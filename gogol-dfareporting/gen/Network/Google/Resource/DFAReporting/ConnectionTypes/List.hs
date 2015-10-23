@@ -67,7 +67,7 @@ connectionTypesList
     -> ConnectionTypesList
 connectionTypesList pCtlProFileId_ =
     ConnectionTypesList
-    { _ctlProFileId = pCtlProFileId_
+    { _ctlProFileId = _Coerce # pCtlProFileId_
     }
 
 -- | User profile ID associated with this request.

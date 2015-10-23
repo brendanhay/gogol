@@ -96,7 +96,7 @@ editsAPKListingsPatch
 editsAPKListingsPatch pEapklpPackageName_ pEapklpAPKVersionCode_ pEapklpPayload_ pEapklpLanguage_ pEapklpEditId_ =
     EditsAPKListingsPatch
     { _eapklpPackageName = pEapklpPackageName_
-    , _eapklpAPKVersionCode = pEapklpAPKVersionCode_
+    , _eapklpAPKVersionCode = _Coerce # pEapklpAPKVersionCode_
     , _eapklpPayload = pEapklpPayload_
     , _eapklpLanguage = pEapklpLanguage_
     , _eapklpEditId = pEapklpEditId_

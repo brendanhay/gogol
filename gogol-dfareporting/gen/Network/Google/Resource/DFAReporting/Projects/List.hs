@@ -104,7 +104,7 @@ projectsList pPlProFileId_ =
     ProjectsList
     { _plSearchString = Nothing
     , _plIds = Nothing
-    , _plProFileId = pPlProFileId_
+    , _plProFileId = _Coerce # pPlProFileId_
     , _plSortOrder = Nothing
     , _plPageToken = Nothing
     , _plSortField = Nothing

@@ -79,9 +79,9 @@ landingPagesGet
     -> LandingPagesGet
 landingPagesGet pLpgCampaignId_ pLpgProFileId_ pLpgId_ =
     LandingPagesGet
-    { _lpgCampaignId = pLpgCampaignId_
-    , _lpgProFileId = pLpgProFileId_
-    , _lpgId = pLpgId_
+    { _lpgCampaignId = _Coerce # pLpgCampaignId_
+    , _lpgProFileId = _Coerce # pLpgProFileId_
+    , _lpgId = _Coerce # pLpgId_
     }
 
 -- | Landing page campaign ID.

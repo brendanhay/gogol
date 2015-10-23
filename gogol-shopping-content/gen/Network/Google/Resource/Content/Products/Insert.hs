@@ -76,7 +76,7 @@ productsInsert
     -> ProductsInsert
 productsInsert pPiMerchantId_ pPiPayload_ =
     ProductsInsert
-    { _piMerchantId = pPiMerchantId_
+    { _piMerchantId = _Coerce # pPiMerchantId_
     , _piPayload = pPiPayload_
     , _piDryRun = Nothing
     }

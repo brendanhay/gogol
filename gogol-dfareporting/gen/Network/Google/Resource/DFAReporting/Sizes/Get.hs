@@ -72,8 +72,8 @@ sizesGet
     -> SizesGet
 sizesGet pSgProFileId_ pSgId_ =
     SizesGet
-    { _sgProFileId = pSgProFileId_
-    , _sgId = pSgId_
+    { _sgProFileId = _Coerce # pSgProFileId_
+    , _sgId = _Coerce # pSgId_
     }
 
 -- | User profile ID associated with this request.

@@ -71,7 +71,7 @@ queriesRunQuery
     -> QueriesRunQuery
 queriesRunQuery pQrqQueryId_ pQrqPayload_ =
     QueriesRunQuery
-    { _qrqQueryId = pQrqQueryId_
+    { _qrqQueryId = _Coerce # pQrqQueryId_
     , _qrqPayload = pQrqPayload_
     }
 

@@ -81,9 +81,9 @@ floodlightActivitiesPatch
     -> FloodlightActivitiesPatch
 floodlightActivitiesPatch pFapProFileId_ pFapPayload_ pFapId_ =
     FloodlightActivitiesPatch
-    { _fapProFileId = pFapProFileId_
+    { _fapProFileId = _Coerce # pFapProFileId_
     , _fapPayload = pFapPayload_
-    , _fapId = pFapId_
+    , _fapId = _Coerce # pFapId_
     }
 
 -- | User profile ID associated with this request.

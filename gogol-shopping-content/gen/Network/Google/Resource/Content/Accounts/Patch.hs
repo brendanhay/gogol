@@ -82,9 +82,9 @@ accountsPatch
     -> AccountsPatch
 accountsPatch pApMerchantId_ pApPayload_ pApAccountId_ =
     AccountsPatch
-    { _apMerchantId = pApMerchantId_
+    { _apMerchantId = _Coerce # pApMerchantId_
     , _apPayload = pApPayload_
-    , _apAccountId = pApAccountId_
+    , _apAccountId = _Coerce # pApAccountId_
     , _apDryRun = Nothing
     }
 

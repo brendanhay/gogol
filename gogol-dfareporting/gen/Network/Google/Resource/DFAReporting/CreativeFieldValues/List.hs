@@ -108,10 +108,10 @@ creativeFieldValuesList
     -> CreativeFieldValuesList
 creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProFileId_ =
     CreativeFieldValuesList
-    { _cfvlCreativeFieldId = pCfvlCreativeFieldId_
+    { _cfvlCreativeFieldId = _Coerce # pCfvlCreativeFieldId_
     , _cfvlSearchString = Nothing
     , _cfvlIds = Nothing
-    , _cfvlProFileId = pCfvlProFileId_
+    , _cfvlProFileId = _Coerce # pCfvlProFileId_
     , _cfvlSortOrder = Nothing
     , _cfvlPageToken = Nothing
     , _cfvlSortField = Nothing

@@ -73,7 +73,7 @@ creativeGroupsInsert
     -> CreativeGroupsInsert
 creativeGroupsInsert pCgiProFileId_ pCgiPayload_ =
     CreativeGroupsInsert
-    { _cgiProFileId = pCgiProFileId_
+    { _cgiProFileId = _Coerce # pCgiProFileId_
     , _cgiPayload = pCgiPayload_
     }
 

@@ -78,7 +78,7 @@ templateUpdate
     -> TemplateUpdate
 templateUpdate pTuTemplateId_ pTuPayload_ pTuTableId_ =
     TemplateUpdate
-    { _tuTemplateId = pTuTemplateId_
+    { _tuTemplateId = _Coerce # pTuTemplateId_
     , _tuPayload = pTuPayload_
     , _tuTableId = pTuTableId_
     }

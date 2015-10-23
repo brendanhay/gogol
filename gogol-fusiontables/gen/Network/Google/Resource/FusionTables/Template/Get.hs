@@ -72,7 +72,7 @@ templateGet
     -> TemplateGet
 templateGet pTemeTemplateId_ pTemeTableId_ =
     TemplateGet
-    { _temeTemplateId = pTemeTemplateId_
+    { _temeTemplateId = _Coerce # pTemeTemplateId_
     , _temeTableId = pTemeTableId_
     }
 

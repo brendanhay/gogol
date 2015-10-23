@@ -128,8 +128,8 @@ jobsInsert pJiTeamId_ pJiAddress_ pJiPayload_ pJiLat_ pJiLng_ pJiTitle_ =
     , _jiAddress = pJiAddress_
     , _jiPayload = pJiPayload_
     , _jiAssignee = Nothing
-    , _jiLat = pJiLat_
-    , _jiLng = pJiLng_
+    , _jiLat = _Coerce # pJiLat_
+    , _jiLng = _Coerce # pJiLng_
     , _jiTitle = pJiTitle_
     , _jiCustomField = Nothing
     }

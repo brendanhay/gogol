@@ -91,7 +91,7 @@ filesList
     -> FilesList
 filesList pFlProFileId_ =
     FilesList
-    { _flProFileId = pFlProFileId_
+    { _flProFileId = _Coerce # pFlProFileId_
     , _flSortOrder = FLSODescending
     , _flScope = FLSMine
     , _flPageToken = Nothing

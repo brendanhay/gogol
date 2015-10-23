@@ -81,9 +81,9 @@ advertiserGroupsPatch
     -> AdvertiserGroupsPatch
 advertiserGroupsPatch pAgpProFileId_ pAgpPayload_ pAgpId_ =
     AdvertiserGroupsPatch
-    { _agpProFileId = pAgpProFileId_
+    { _agpProFileId = _Coerce # pAgpProFileId_
     , _agpPayload = pAgpPayload_
-    , _agpId = pAgpId_
+    , _agpId = _Coerce # pAgpId_
     }
 
 -- | User profile ID associated with this request.

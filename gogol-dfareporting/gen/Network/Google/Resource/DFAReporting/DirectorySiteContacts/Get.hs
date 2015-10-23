@@ -73,8 +73,8 @@ directorySiteContactsGet
     -> DirectorySiteContactsGet
 directorySiteContactsGet pDscgProFileId_ pDscgId_ =
     DirectorySiteContactsGet
-    { _dscgProFileId = pDscgProFileId_
-    , _dscgId = pDscgId_
+    { _dscgProFileId = _Coerce # pDscgProFileId_
+    , _dscgId = _Coerce # pDscgId_
     }
 
 -- | User profile ID associated with this request.

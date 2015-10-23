@@ -78,8 +78,8 @@ reportsUpdate
     -> ReportsUpdate
 reportsUpdate pRuReportId_ pRuProFileId_ pRuPayload_ =
     ReportsUpdate
-    { _ruReportId = pRuReportId_
-    , _ruProFileId = pRuProFileId_
+    { _ruReportId = _Coerce # pRuReportId_
+    , _ruProFileId = _Coerce # pRuProFileId_
     , _ruPayload = pRuPayload_
     }
 

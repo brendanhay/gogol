@@ -73,7 +73,7 @@ usersThreadsUntrash
     -> UsersThreadsUntrash
 usersThreadsUntrash pUtuUserId_ pUtuId_ =
     UsersThreadsUntrash
-    { _utuUserId = pUtuUserId_
+    { _utuUserId = "me"
     , _utuId = pUtuId_
     }
 

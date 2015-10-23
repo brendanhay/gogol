@@ -72,8 +72,8 @@ countriesGet
     -> CountriesGet
 countriesGet pCgProFileId_ pCgDartId_ =
     CountriesGet
-    { _cgProFileId = pCgProFileId_
-    , _cgDartId = pCgDartId_
+    { _cgProFileId = _Coerce # pCgProFileId_
+    , _cgDartId = _Coerce # pCgDartId_
     }
 
 -- | User profile ID associated with this request.

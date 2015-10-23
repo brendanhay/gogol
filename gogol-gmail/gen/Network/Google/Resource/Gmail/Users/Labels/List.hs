@@ -67,7 +67,7 @@ usersLabelsList
     -> UsersLabelsList
 usersLabelsList pUllUserId_ =
     UsersLabelsList
-    { _ullUserId = pUllUserId_
+    { _ullUserId = "me"
     }
 
 -- | The user\'s email address. The special value me can be used to indicate

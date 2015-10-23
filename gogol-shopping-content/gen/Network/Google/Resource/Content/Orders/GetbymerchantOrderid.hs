@@ -72,7 +72,7 @@ ordersGetbymerchantOrderid
     -> OrdersGetbymerchantOrderid
 ordersGetbymerchantOrderid pOgogMerchantId_ pOgogMerchantOrderId_ =
     OrdersGetbymerchantOrderid
-    { _ogogMerchantId = pOgogMerchantId_
+    { _ogogMerchantId = _Coerce # pOgogMerchantId_
     , _ogogMerchantOrderId = pOgogMerchantOrderId_
     }
 

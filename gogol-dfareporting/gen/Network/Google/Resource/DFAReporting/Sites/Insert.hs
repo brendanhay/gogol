@@ -72,7 +72,7 @@ sitesInsert
     -> SitesInsert
 sitesInsert pSProFileId_ pSPayload_ =
     SitesInsert
-    { _sProFileId = pSProFileId_
+    { _sProFileId = _Coerce # pSProFileId_
     , _sPayload = pSPayload_
     }
 

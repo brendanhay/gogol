@@ -94,8 +94,8 @@ creativeAssetsInsert
     -> CreativeAssetsInsert
 creativeAssetsInsert pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ =
     CreativeAssetsInsert
-    { _caiAdvertiserId = pCaiAdvertiserId_
-    , _caiProFileId = pCaiProFileId_
+    { _caiAdvertiserId = _Coerce # pCaiAdvertiserId_
+    , _caiProFileId = _Coerce # pCaiProFileId_
     , _caiPayload = pCaiPayload_
     }
 

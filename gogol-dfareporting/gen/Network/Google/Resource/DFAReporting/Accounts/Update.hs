@@ -72,7 +72,7 @@ accountsUpdate
     -> AccountsUpdate
 accountsUpdate pAuuProFileId_ pAuuPayload_ =
     AccountsUpdate
-    { _auuProFileId = pAuuProFileId_
+    { _auuProFileId = _Coerce # pAuuProFileId_
     , _auuPayload = pAuuPayload_
     }
 

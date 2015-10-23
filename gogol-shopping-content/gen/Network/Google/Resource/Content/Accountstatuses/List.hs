@@ -76,7 +76,7 @@ accountstatusesList
     -> AccountstatusesList
 accountstatusesList pAcc3MerchantId_ =
     AccountstatusesList
-    { _acc3MerchantId = pAcc3MerchantId_
+    { _acc3MerchantId = _Coerce # pAcc3MerchantId_
     , _acc3PageToken = Nothing
     , _acc3MaxResults = Nothing
     }

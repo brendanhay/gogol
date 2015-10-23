@@ -79,7 +79,7 @@ ordersReturnlineitem
     -> OrdersReturnlineitem
 ordersReturnlineitem pOMerchantId_ pOPayload_ pOOrderId_ =
     OrdersReturnlineitem
-    { _oMerchantId = pOMerchantId_
+    { _oMerchantId = _Coerce # pOMerchantId_
     , _oPayload = pOPayload_
     , _oOrderId = pOOrderId_
     }

@@ -93,8 +93,8 @@ campaignCreativeAssociationsList
     -> CampaignCreativeAssociationsList
 campaignCreativeAssociationsList pCcalCampaignId_ pCcalProFileId_ =
     CampaignCreativeAssociationsList
-    { _ccalCampaignId = pCcalCampaignId_
-    , _ccalProFileId = pCcalProFileId_
+    { _ccalCampaignId = _Coerce # pCcalCampaignId_
+    , _ccalProFileId = _Coerce # pCcalProFileId_
     , _ccalSortOrder = Nothing
     , _ccalPageToken = Nothing
     , _ccalMaxResults = Nothing

@@ -74,8 +74,8 @@ savedColumnsList
     -> SavedColumnsList
 savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
     SavedColumnsList
-    { _sclAgencyId = pSclAgencyId_
-    , _sclAdvertiserId = pSclAdvertiserId_
+    { _sclAgencyId = _Coerce # pSclAgencyId_
+    , _sclAdvertiserId = _Coerce # pSclAdvertiserId_
     }
 
 -- | DS ID of the agency.

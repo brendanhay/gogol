@@ -73,7 +73,7 @@ usersMessagesUntrash
     -> UsersMessagesUntrash
 usersMessagesUntrash pUmuUserId_ pUmuId_ =
     UsersMessagesUntrash
-    { _umuUserId = pUmuUserId_
+    { _umuUserId = "me"
     , _umuId = pUmuId_
     }
 

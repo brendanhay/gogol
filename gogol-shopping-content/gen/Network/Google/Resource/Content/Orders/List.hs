@@ -102,7 +102,7 @@ ordersList
 ordersList pOlMerchantId_ =
     OrdersList
     { _olPlacedDateEnd = Nothing
-    , _olMerchantId = pOlMerchantId_
+    , _olMerchantId = _Coerce # pOlMerchantId_
     , _olOrderBy = Nothing
     , _olAcknowledged = Nothing
     , _olStatuses = Nothing

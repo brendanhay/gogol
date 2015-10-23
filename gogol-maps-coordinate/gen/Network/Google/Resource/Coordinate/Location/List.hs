@@ -91,7 +91,7 @@ locationList
 locationList pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
     LocationList
     { _llWorkerEmail = pLlWorkerEmail_
-    , _llStartTimestampMs = pLlStartTimestampMs_
+    , _llStartTimestampMs = _Coerce # pLlStartTimestampMs_
     , _llTeamId = pLlTeamId_
     , _llPageToken = Nothing
     , _llMaxResults = Nothing

@@ -82,7 +82,7 @@ editsAPKListingsList
 editsAPKListingsList pEapkllPackageName_ pEapkllAPKVersionCode_ pEapkllEditId_ =
     EditsAPKListingsList
     { _eapkllPackageName = pEapkllPackageName_
-    , _eapkllAPKVersionCode = pEapkllAPKVersionCode_
+    , _eapkllAPKVersionCode = _Coerce # pEapkllAPKVersionCode_
     , _eapkllEditId = pEapkllEditId_
     }
 

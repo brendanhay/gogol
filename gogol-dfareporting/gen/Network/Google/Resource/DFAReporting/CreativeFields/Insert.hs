@@ -73,7 +73,7 @@ creativeFieldsInsert
     -> CreativeFieldsInsert
 creativeFieldsInsert pCfiProFileId_ pCfiPayload_ =
     CreativeFieldsInsert
-    { _cfiProFileId = pCfiProFileId_
+    { _cfiProFileId = _Coerce # pCfiProFileId_
     , _cfiPayload = pCfiPayload_
     }
 

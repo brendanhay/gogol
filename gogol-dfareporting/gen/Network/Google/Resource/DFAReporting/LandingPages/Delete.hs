@@ -79,9 +79,9 @@ landingPagesDelete
     -> LandingPagesDelete
 landingPagesDelete pLpdCampaignId_ pLpdProFileId_ pLpdId_ =
     LandingPagesDelete
-    { _lpdCampaignId = pLpdCampaignId_
-    , _lpdProFileId = pLpdProFileId_
-    , _lpdId = pLpdId_
+    { _lpdCampaignId = _Coerce # pLpdCampaignId_
+    , _lpdProFileId = _Coerce # pLpdProFileId_
+    , _lpdId = _Coerce # pLpdId_
     }
 
 -- | Landing page campaign ID.

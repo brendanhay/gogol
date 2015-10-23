@@ -73,7 +73,7 @@ creativeFieldsUpdate
     -> CreativeFieldsUpdate
 creativeFieldsUpdate pCfuProFileId_ pCfuPayload_ =
     CreativeFieldsUpdate
-    { _cfuProFileId = pCfuProFileId_
+    { _cfuProFileId = _Coerce # pCfuProFileId_
     , _cfuPayload = pCfuPayload_
     }
 

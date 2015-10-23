@@ -85,7 +85,7 @@ linksGet pLgRoleId_ pLgRole_ pLgLinkId_ =
     LinksGet
     { _lgRoleId = pLgRoleId_
     , _lgRole = pLgRole_
-    , _lgLinkId = pLgLinkId_
+    , _lgLinkId = _Coerce # pLgLinkId_
     }
 
 -- | The ID of the requesting advertiser or publisher.

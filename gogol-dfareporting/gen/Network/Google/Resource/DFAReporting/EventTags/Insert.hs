@@ -72,7 +72,7 @@ eventTagsInsert
     -> EventTagsInsert
 eventTagsInsert pEtiProFileId_ pEtiPayload_ =
     EventTagsInsert
-    { _etiProFileId = pEtiProFileId_
+    { _etiProFileId = _Coerce # pEtiProFileId_
     , _etiPayload = pEtiPayload_
     }
 

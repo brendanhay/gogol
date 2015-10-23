@@ -72,8 +72,8 @@ datafeedstatusesGet
     -> DatafeedstatusesGet
 datafeedstatusesGet pDggMerchantId_ pDggDatafeedId_ =
     DatafeedstatusesGet
-    { _dggMerchantId = pDggMerchantId_
-    , _dggDatafeedId = pDggDatafeedId_
+    { _dggMerchantId = _Coerce # pDggMerchantId_
+    , _dggDatafeedId = _Coerce # pDggDatafeedId_
     }
 
 dggMerchantId :: Lens' DatafeedstatusesGet Word64

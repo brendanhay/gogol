@@ -73,8 +73,8 @@ floodlightActivitiesGet
     -> FloodlightActivitiesGet
 floodlightActivitiesGet pFProFileId_ pFId_ =
     FloodlightActivitiesGet
-    { _fProFileId = pFProFileId_
-    , _fId = pFId_
+    { _fProFileId = _Coerce # pFProFileId_
+    , _fId = _Coerce # pFId_
     }
 
 -- | User profile ID associated with this request.

@@ -66,7 +66,7 @@ applicationsGet
     -> ApplicationsGet
 applicationsGet pAgApplicationId_ =
     ApplicationsGet
-    { _agApplicationId = pAgApplicationId_
+    { _agApplicationId = _Coerce # pAgApplicationId_
     }
 
 -- | ID of the application resource to be retrieved.

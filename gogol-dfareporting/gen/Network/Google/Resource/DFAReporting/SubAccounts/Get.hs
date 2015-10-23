@@ -72,8 +72,8 @@ subAccountsGet
     -> SubAccountsGet
 subAccountsGet pSagProFileId_ pSagId_ =
     SubAccountsGet
-    { _sagProFileId = pSagProFileId_
-    , _sagId = pSagId_
+    { _sagProFileId = _Coerce # pSagProFileId_
+    , _sagId = _Coerce # pSagId_
     }
 
 -- | User profile ID associated with this request.

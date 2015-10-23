@@ -78,9 +78,9 @@ accountsPatch
     -> AccountsPatch
 accountsPatch pAppProFileId_ pAppPayload_ pAppId_ =
     AccountsPatch
-    { _appProFileId = pAppProFileId_
+    { _appProFileId = _Coerce # pAppProFileId_
     , _appPayload = pAppPayload_
-    , _appId = pAppId_
+    , _appId = _Coerce # pAppId_
     }
 
 -- | User profile ID associated with this request.

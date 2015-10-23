@@ -79,7 +79,7 @@ ordersCancellineitem
     -> OrdersCancellineitem
 ordersCancellineitem pOrdMerchantId_ pOrdPayload_ pOrdOrderId_ =
     OrdersCancellineitem
-    { _ordMerchantId = pOrdMerchantId_
+    { _ordMerchantId = _Coerce # pOrdMerchantId_
     , _ordPayload = pOrdPayload_
     , _ordOrderId = pOrdOrderId_
     }

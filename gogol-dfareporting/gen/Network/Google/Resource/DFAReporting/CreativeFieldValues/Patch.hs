@@ -88,10 +88,10 @@ creativeFieldValuesPatch
     -> CreativeFieldValuesPatch
 creativeFieldValuesPatch pCfvpCreativeFieldId_ pCfvpProFileId_ pCfvpPayload_ pCfvpId_ =
     CreativeFieldValuesPatch
-    { _cfvpCreativeFieldId = pCfvpCreativeFieldId_
-    , _cfvpProFileId = pCfvpProFileId_
+    { _cfvpCreativeFieldId = _Coerce # pCfvpCreativeFieldId_
+    , _cfvpProFileId = _Coerce # pCfvpProFileId_
     , _cfvpPayload = pCfvpPayload_
-    , _cfvpId = pCfvpId_
+    , _cfvpId = _Coerce # pCfvpId_
     }
 
 -- | Creative field ID for this creative field value.

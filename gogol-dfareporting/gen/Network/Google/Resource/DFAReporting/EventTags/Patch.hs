@@ -78,9 +78,9 @@ eventTagsPatch
     -> EventTagsPatch
 eventTagsPatch pEtpProFileId_ pEtpPayload_ pEtpId_ =
     EventTagsPatch
-    { _etpProFileId = pEtpProFileId_
+    { _etpProFileId = _Coerce # pEtpProFileId_
     , _etpPayload = pEtpPayload_
-    , _etpId = pEtpId_
+    , _etpId = _Coerce # pEtpId_
     }
 
 -- | User profile ID associated with this request.

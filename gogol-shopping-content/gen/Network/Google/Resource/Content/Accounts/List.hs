@@ -76,7 +76,7 @@ accountsList
     -> AccountsList
 accountsList pAlMerchantId_ =
     AccountsList
-    { _alMerchantId = pAlMerchantId_
+    { _alMerchantId = _Coerce # pAlMerchantId_
     , _alPageToken = Nothing
     , _alMaxResults = Nothing
     }

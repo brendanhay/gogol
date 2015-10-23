@@ -72,8 +72,8 @@ creativeGroupsGet
     -> CreativeGroupsGet
 creativeGroupsGet pCgggProFileId_ pCgggId_ =
     CreativeGroupsGet
-    { _cgggProFileId = pCgggProFileId_
-    , _cgggId = pCgggId_
+    { _cgggProFileId = _Coerce # pCgggProFileId_
+    , _cgggId = _Coerce # pCgggId_
     }
 
 -- | User profile ID associated with this request.

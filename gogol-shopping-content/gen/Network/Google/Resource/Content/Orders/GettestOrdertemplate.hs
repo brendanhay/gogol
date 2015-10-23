@@ -76,7 +76,7 @@ ordersGettestOrdertemplate
     -> OrdersGettestOrdertemplate
 ordersGettestOrdertemplate pOgoMerchantId_ pOgoTemplateName_ =
     OrdersGettestOrdertemplate
-    { _ogoMerchantId = pOgoMerchantId_
+    { _ogoMerchantId = _Coerce # pOgoMerchantId_
     , _ogoTemplateName = pOgoTemplateName_
     }
 

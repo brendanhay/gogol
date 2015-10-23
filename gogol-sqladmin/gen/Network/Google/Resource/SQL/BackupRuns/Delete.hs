@@ -80,7 +80,7 @@ backupRunsDelete
 backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
     BackupRunsDelete
     { _brdProject = pBrdProject_
-    , _brdId = pBrdId_
+    , _brdId = _Coerce # pBrdId_
     , _brdInstance = pBrdInstance_
     }
 

@@ -71,7 +71,7 @@ productstatusesGet
     -> ProductstatusesGet
 productstatusesGet pPgMerchantId_ pPgProductId_ =
     ProductstatusesGet
-    { _pgMerchantId = pPgMerchantId_
+    { _pgMerchantId = _Coerce # pPgMerchantId_
     , _pgProductId = pPgProductId_
     }
 

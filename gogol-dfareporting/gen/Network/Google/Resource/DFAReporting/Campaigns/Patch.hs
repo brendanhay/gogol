@@ -78,9 +78,9 @@ campaignsPatch
     -> CampaignsPatch
 campaignsPatch pCpProFileId_ pCpPayload_ pCpId_ =
     CampaignsPatch
-    { _cpProFileId = pCpProFileId_
+    { _cpProFileId = _Coerce # pCpProFileId_
     , _cpPayload = pCpPayload_
-    , _cpId = pCpId_
+    , _cpId = _Coerce # pCpId_
     }
 
 -- | User profile ID associated with this request.

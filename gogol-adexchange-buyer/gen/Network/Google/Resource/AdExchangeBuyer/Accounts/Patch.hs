@@ -72,7 +72,7 @@ accountsPatch
 accountsPatch pApPayload_ pApId_ =
     AccountsPatch
     { _apPayload = pApPayload_
-    , _apId = pApId_
+    , _apId = _Coerce # pApId_
     }
 
 -- | Multipart request metadata.

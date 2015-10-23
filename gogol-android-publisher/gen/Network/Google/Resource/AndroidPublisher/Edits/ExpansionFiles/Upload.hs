@@ -108,7 +108,7 @@ editsExpansionFilesUpload
 editsExpansionFilesUpload pEPackageName_ pEAPKVersionCode_ pEExpansionFileType_ pEEditId_ =
     EditsExpansionFilesUpload
     { _ePackageName = pEPackageName_
-    , _eAPKVersionCode = pEAPKVersionCode_
+    , _eAPKVersionCode = _Coerce # pEAPKVersionCode_
     , _eExpansionFileType = pEExpansionFileType_
     , _eEditId = pEEditId_
     }

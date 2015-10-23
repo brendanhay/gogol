@@ -109,7 +109,7 @@ userRolesList pUrlProFileId_ =
     UserRolesList
     { _urlSearchString = Nothing
     , _urlIds = Nothing
-    , _urlProFileId = pUrlProFileId_
+    , _urlProFileId = _Coerce # pUrlProFileId_
     , _urlSortOrder = Nothing
     , _urlAccountUserRoleOnly = Nothing
     , _urlPageToken = Nothing

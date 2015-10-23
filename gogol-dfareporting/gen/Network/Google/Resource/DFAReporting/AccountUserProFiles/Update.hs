@@ -73,7 +73,7 @@ accountUserProFilesUpdate
     -> AccountUserProFilesUpdate
 accountUserProFilesUpdate pAupfuProFileId_ pAupfuPayload_ =
     AccountUserProFilesUpdate
-    { _aupfuProFileId = pAupfuProFileId_
+    { _aupfuProFileId = _Coerce # pAupfuProFileId_
     , _aupfuPayload = pAupfuPayload_
     }
 

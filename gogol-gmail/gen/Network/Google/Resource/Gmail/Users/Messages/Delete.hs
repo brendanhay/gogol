@@ -74,7 +74,7 @@ usersMessagesDelete
     -> UsersMessagesDelete
 usersMessagesDelete pUmdUserId_ pUmdId_ =
     UsersMessagesDelete
-    { _umdUserId = pUmdUserId_
+    { _umdUserId = "me"
     , _umdId = pUmdId_
     }
 

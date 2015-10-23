@@ -93,7 +93,7 @@ usersMessagesList
 usersMessagesList pUmlUserId_ =
     UsersMessagesList
     { _umlQ = Nothing
-    , _umlUserId = pUmlUserId_
+    , _umlUserId = "me"
     , _umlIncludeSpamTrash = False
     , _umlLabelIds = Nothing
     , _umlPageToken = Nothing

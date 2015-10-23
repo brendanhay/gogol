@@ -78,9 +78,9 @@ adsPatch
     -> AdsPatch
 adsPatch pAdsdProFileId_ pAdsdPayload_ pAdsdId_ =
     AdsPatch
-    { _adsdProFileId = pAdsdProFileId_
+    { _adsdProFileId = _Coerce # pAdsdProFileId_
     , _adsdPayload = pAdsdPayload_
-    , _adsdId = pAdsdId_
+    , _adsdId = _Coerce # pAdsdId_
     }
 
 -- | User profile ID associated with this request.

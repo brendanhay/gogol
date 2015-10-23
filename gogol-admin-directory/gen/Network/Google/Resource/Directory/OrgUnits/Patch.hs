@@ -80,7 +80,7 @@ orgUnitsPatch
 orgUnitsPatch pOupPayload_ pOupOrgUnitPath_ pOupCustomerId_ =
     OrgUnitsPatch
     { _oupPayload = pOupPayload_
-    , _oupOrgUnitPath = pOupOrgUnitPath_
+    , _oupOrgUnitPath = _Coerce # pOupOrgUnitPath_
     , _oupCustomerId = pOupCustomerId_
     }
 

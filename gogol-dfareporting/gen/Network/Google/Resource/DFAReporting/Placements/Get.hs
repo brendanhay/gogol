@@ -72,8 +72,8 @@ placementsGet
     -> PlacementsGet
 placementsGet pPgProFileId_ pPgId_ =
     PlacementsGet
-    { _pgProFileId = pPgProFileId_
-    , _pgId = pPgId_
+    { _pgProFileId = _Coerce # pPgProFileId_
+    , _pgId = _Coerce # pPgId_
     }
 
 -- | User profile ID associated with this request.

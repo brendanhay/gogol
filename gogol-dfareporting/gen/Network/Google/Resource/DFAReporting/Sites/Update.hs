@@ -72,7 +72,7 @@ sitesUpdate
     -> SitesUpdate
 sitesUpdate pSuProFileId_ pSuPayload_ =
     SitesUpdate
-    { _suProFileId = pSuProFileId_
+    { _suProFileId = _Coerce # pSuProFileId_
     , _suPayload = pSuPayload_
     }
 

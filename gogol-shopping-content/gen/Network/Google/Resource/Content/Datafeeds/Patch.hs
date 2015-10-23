@@ -84,9 +84,9 @@ datafeedsPatch
     -> DatafeedsPatch
 datafeedsPatch pDpMerchantId_ pDpPayload_ pDpDatafeedId_ =
     DatafeedsPatch
-    { _dpMerchantId = pDpMerchantId_
+    { _dpMerchantId = _Coerce # pDpMerchantId_
     , _dpPayload = pDpPayload_
-    , _dpDatafeedId = pDpDatafeedId_
+    , _dpDatafeedId = _Coerce # pDpDatafeedId_
     , _dpDryRun = Nothing
     }
 

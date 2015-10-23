@@ -81,9 +81,9 @@ accountUserProFilesPatch
     -> AccountUserProFilesPatch
 accountUserProFilesPatch pAupfpProFileId_ pAupfpPayload_ pAupfpId_ =
     AccountUserProFilesPatch
-    { _aupfpProFileId = pAupfpProFileId_
+    { _aupfpProFileId = _Coerce # pAupfpProFileId_
     , _aupfpPayload = pAupfpPayload_
-    , _aupfpId = pAupfpId_
+    , _aupfpId = _Coerce # pAupfpId_
     }
 
 -- | User profile ID associated with this request.

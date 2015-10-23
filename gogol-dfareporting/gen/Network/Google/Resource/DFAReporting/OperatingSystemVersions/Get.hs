@@ -73,8 +73,8 @@ operatingSystemVersionsGet
     -> OperatingSystemVersionsGet
 operatingSystemVersionsGet pOsvgProFileId_ pOsvgId_ =
     OperatingSystemVersionsGet
-    { _osvgProFileId = pOsvgProFileId_
-    , _osvgId = pOsvgId_
+    { _osvgProFileId = _Coerce # pOsvgProFileId_
+    , _osvgId = _Coerce # pOsvgId_
     }
 
 -- | User profile ID associated with this request.

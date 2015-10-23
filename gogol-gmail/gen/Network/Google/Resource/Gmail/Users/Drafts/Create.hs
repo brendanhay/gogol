@@ -84,7 +84,7 @@ usersDraftsCreate
 usersDraftsCreate pUdcPayload_ pUdcUserId_ =
     UsersDraftsCreate
     { _udcPayload = pUdcPayload_
-    , _udcUserId = pUdcUserId_
+    , _udcUserId = "me"
     }
 
 -- | Multipart request metadata.

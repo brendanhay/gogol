@@ -75,7 +75,7 @@ ordersAdvancetestOrder
     -> OrdersAdvancetestOrder
 ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
     OrdersAdvancetestOrder
-    { _oaoMerchantId = pOaoMerchantId_
+    { _oaoMerchantId = _Coerce # pOaoMerchantId_
     , _oaoOrderId = pOaoOrderId_
     }
 

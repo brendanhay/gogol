@@ -67,7 +67,7 @@ regionsList
     -> RegionsList
 regionsList pRProFileId_ =
     RegionsList
-    { _rProFileId = pRProFileId_
+    { _rProFileId = _Coerce # pRProFileId_
     }
 
 -- | User profile ID associated with this request.

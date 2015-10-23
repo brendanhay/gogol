@@ -72,8 +72,8 @@ platformTypesGet
     -> PlatformTypesGet
 platformTypesGet pPtgProFileId_ pPtgId_ =
     PlatformTypesGet
-    { _ptgProFileId = pPtgProFileId_
-    , _ptgId = pPtgId_
+    { _ptgProFileId = _Coerce # pPtgProFileId_
+    , _ptgId = _Coerce # pPtgId_
     }
 
 -- | User profile ID associated with this request.

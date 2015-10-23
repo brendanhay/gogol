@@ -79,7 +79,7 @@ reportsCompatibleFieldsQuery
     -> ReportsCompatibleFieldsQuery
 reportsCompatibleFieldsQuery pRcfqProFileId_ pRcfqPayload_ =
     ReportsCompatibleFieldsQuery
-    { _rcfqProFileId = pRcfqProFileId_
+    { _rcfqProFileId = _Coerce # pRcfqProFileId_
     , _rcfqPayload = pRcfqPayload_
     }
 

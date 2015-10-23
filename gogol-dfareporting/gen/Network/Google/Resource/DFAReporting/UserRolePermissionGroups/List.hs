@@ -67,7 +67,7 @@ userRolePermissionGroupsList
     -> UserRolePermissionGroupsList
 userRolePermissionGroupsList pUrpglProFileId_ =
     UserRolePermissionGroupsList
-    { _urpglProFileId = pUrpglProFileId_
+    { _urpglProFileId = _Coerce # pUrpglProFileId_
     }
 
 -- | User profile ID associated with this request.

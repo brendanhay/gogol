@@ -65,7 +65,7 @@ offersGet
     -> OffersGet
 offersGet pOgOfferId_ =
     OffersGet
-    { _ogOfferId = pOgOfferId_
+    { _ogOfferId = _Coerce # pOgOfferId_
     }
 
 ogOfferId :: Lens' OffersGet Int64

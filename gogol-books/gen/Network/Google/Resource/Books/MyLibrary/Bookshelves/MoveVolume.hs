@@ -87,7 +87,7 @@ myLibraryBookshelvesMoveVolume pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition
     { _mlbmvShelf = pMlbmvShelf_
     , _mlbmvVolumeId = pMlbmvVolumeId_
     , _mlbmvSource = Nothing
-    , _mlbmvVolumePosition = pMlbmvVolumePosition_
+    , _mlbmvVolumePosition = _Coerce # pMlbmvVolumePosition_
     }
 
 -- | ID of bookshelf with the volume.

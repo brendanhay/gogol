@@ -72,8 +72,8 @@ advertiserGroupsDelete
     -> AdvertiserGroupsDelete
 advertiserGroupsDelete pAgdProFileId_ pAgdId_ =
     AdvertiserGroupsDelete
-    { _agdProFileId = pAgdProFileId_
-    , _agdId = pAgdId_
+    { _agdProFileId = _Coerce # pAgdProFileId_
+    , _agdId = _Coerce # pAgdId_
     }
 
 -- | User profile ID associated with this request.

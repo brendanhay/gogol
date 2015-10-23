@@ -99,7 +99,7 @@ scheduleUpdate
     -> ScheduleUpdate
 scheduleUpdate pSuJobId_ pSuTeamId_ pSuPayload_ =
     ScheduleUpdate
-    { _suJobId = pSuJobId_
+    { _suJobId = _Coerce # pSuJobId_
     , _suAllDay = Nothing
     , _suStartTime = Nothing
     , _suTeamId = pSuTeamId_

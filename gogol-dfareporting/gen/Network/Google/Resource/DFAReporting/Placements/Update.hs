@@ -72,7 +72,7 @@ placementsUpdate
     -> PlacementsUpdate
 placementsUpdate pPuProFileId_ pPuPayload_ =
     PlacementsUpdate
-    { _puProFileId = pPuProFileId_
+    { _puProFileId = _Coerce # pPuProFileId_
     , _puPayload = pPuPayload_
     }
 

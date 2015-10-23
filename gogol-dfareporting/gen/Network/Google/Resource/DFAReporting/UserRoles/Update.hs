@@ -72,7 +72,7 @@ userRolesUpdate
     -> UserRolesUpdate
 userRolesUpdate pUruProFileId_ pUruPayload_ =
     UserRolesUpdate
-    { _uruProFileId = pUruProFileId_
+    { _uruProFileId = _Coerce # pUruProFileId_
     , _uruPayload = pUruPayload_
     }
 

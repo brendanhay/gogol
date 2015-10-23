@@ -82,9 +82,9 @@ accountsUpdate
     -> AccountsUpdate
 accountsUpdate pAu1MerchantId_ pAu1Payload_ pAu1AccountId_ =
     AccountsUpdate
-    { _au1MerchantId = pAu1MerchantId_
+    { _au1MerchantId = _Coerce # pAu1MerchantId_
     , _au1Payload = pAu1Payload_
-    , _au1AccountId = pAu1AccountId_
+    , _au1AccountId = _Coerce # pAu1AccountId_
     , _au1DryRun = Nothing
     }
 

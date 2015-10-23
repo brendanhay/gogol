@@ -72,7 +72,7 @@ userRolesInsert
     -> UserRolesInsert
 userRolesInsert pUriProFileId_ pUriPayload_ =
     UserRolesInsert
-    { _uriProFileId = pUriProFileId_
+    { _uriProFileId = _Coerce # pUriProFileId_
     , _uriPayload = pUriPayload_
     }
 

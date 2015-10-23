@@ -89,7 +89,7 @@ editsExpansionFilesGet
 editsExpansionFilesGet pEefgPackageName_ pEefgAPKVersionCode_ pEefgExpansionFileType_ pEefgEditId_ =
     EditsExpansionFilesGet
     { _eefgPackageName = pEefgPackageName_
-    , _eefgAPKVersionCode = pEefgAPKVersionCode_
+    , _eefgAPKVersionCode = _Coerce # pEefgAPKVersionCode_
     , _eefgExpansionFileType = pEefgExpansionFileType_
     , _eefgEditId = pEefgEditId_
     }

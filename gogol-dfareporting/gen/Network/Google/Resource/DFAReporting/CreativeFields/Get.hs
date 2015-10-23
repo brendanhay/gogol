@@ -72,8 +72,8 @@ creativeFieldsGet
     -> CreativeFieldsGet
 creativeFieldsGet pCfgProFileId_ pCfgId_ =
     CreativeFieldsGet
-    { _cfgProFileId = pCfgProFileId_
-    , _cfgId = pCfgId_
+    { _cfgProFileId = _Coerce # pCfgProFileId_
+    , _cfgId = _Coerce # pCfgId_
     }
 
 -- | User profile ID associated with this request.

@@ -73,7 +73,7 @@ floodlightActivityGroupsInsert
     -> FloodlightActivityGroupsInsert
 floodlightActivityGroupsInsert pFagiProFileId_ pFagiPayload_ =
     FloodlightActivityGroupsInsert
-    { _fagiProFileId = pFagiProFileId_
+    { _fagiProFileId = _Coerce # pFagiProFileId_
     , _fagiPayload = pFagiPayload_
     }
 

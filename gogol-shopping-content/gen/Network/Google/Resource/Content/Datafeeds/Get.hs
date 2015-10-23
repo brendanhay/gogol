@@ -71,8 +71,8 @@ datafeedsGet
     -> DatafeedsGet
 datafeedsGet pDgMerchantId_ pDgDatafeedId_ =
     DatafeedsGet
-    { _dgMerchantId = pDgMerchantId_
-    , _dgDatafeedId = pDgDatafeedId_
+    { _dgMerchantId = _Coerce # pDgMerchantId_
+    , _dgDatafeedId = _Coerce # pDgDatafeedId_
     }
 
 dgMerchantId :: Lens' DatafeedsGet Word64

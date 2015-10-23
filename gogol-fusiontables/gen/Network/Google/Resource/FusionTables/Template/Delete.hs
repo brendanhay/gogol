@@ -72,7 +72,7 @@ templateDelete
     -> TemplateDelete
 templateDelete pTTemplateId_ pTTableId_ =
     TemplateDelete
-    { _tTemplateId = pTTemplateId_
+    { _tTemplateId = _Coerce # pTTemplateId_
     , _tTableId = pTTableId_
     }
 

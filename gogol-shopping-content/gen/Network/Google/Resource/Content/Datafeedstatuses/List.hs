@@ -76,7 +76,7 @@ datafeedstatusesList
     -> DatafeedstatusesList
 datafeedstatusesList pDlMerchantId_ =
     DatafeedstatusesList
-    { _dlMerchantId = pDlMerchantId_
+    { _dlMerchantId = _Coerce # pDlMerchantId_
     , _dlPageToken = Nothing
     , _dlMaxResults = Nothing
     }

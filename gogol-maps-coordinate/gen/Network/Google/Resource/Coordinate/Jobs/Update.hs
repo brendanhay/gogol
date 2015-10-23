@@ -128,7 +128,7 @@ jobsUpdate
     -> JobsUpdate
 jobsUpdate pJuJobId_ pJuTeamId_ pJuPayload_ =
     JobsUpdate
-    { _juJobId = pJuJobId_
+    { _juJobId = _Coerce # pJuJobId_
     , _juProgress = Nothing
     , _juNote = Nothing
     , _juTeamId = pJuTeamId_

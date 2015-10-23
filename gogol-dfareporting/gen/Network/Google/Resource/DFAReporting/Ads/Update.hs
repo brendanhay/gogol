@@ -72,7 +72,7 @@ adsUpdate
     -> AdsUpdate
 adsUpdate pAProFileId_ pAPayload_ =
     AdsUpdate
-    { _aProFileId = pAProFileId_
+    { _aProFileId = _Coerce # pAProFileId_
     , _aPayload = pAPayload_
     }
 

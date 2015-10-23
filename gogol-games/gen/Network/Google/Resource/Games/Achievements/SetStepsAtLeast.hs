@@ -80,7 +80,7 @@ achievementsSetStepsAtLeast
 achievementsSetStepsAtLeast pAssalAchievementId_ pAssalSteps_ =
     AchievementsSetStepsAtLeast
     { _assalAchievementId = pAssalAchievementId_
-    , _assalSteps = pAssalSteps_
+    , _assalSteps = _Coerce # pAssalSteps_
     }
 
 -- | The ID of the achievement used by this method.

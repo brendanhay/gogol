@@ -79,9 +79,9 @@ inventoryItemsGet
     -> InventoryItemsGet
 inventoryItemsGet pIigProFileId_ pIigId_ pIigProjectId_ =
     InventoryItemsGet
-    { _iigProFileId = pIigProFileId_
-    , _iigId = pIigId_
-    , _iigProjectId = pIigProjectId_
+    { _iigProFileId = _Coerce # pIigProFileId_
+    , _iigId = _Coerce # pIigId_
+    , _iigProjectId = _Coerce # pIigProjectId_
     }
 
 -- | User profile ID associated with this request.

@@ -73,8 +73,8 @@ advertiserGroupsGet
     -> AdvertiserGroupsGet
 advertiserGroupsGet pAgggProFileId_ pAgggId_ =
     AdvertiserGroupsGet
-    { _agggProFileId = pAgggProFileId_
-    , _agggId = pAgggId_
+    { _agggProFileId = _Coerce # pAgggProFileId_
+    , _agggId = _Coerce # pAgggId_
     }
 
 -- | User profile ID associated with this request.

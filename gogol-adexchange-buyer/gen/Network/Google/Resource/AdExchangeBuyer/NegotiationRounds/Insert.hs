@@ -74,7 +74,7 @@ negotiationRoundsInsert
 negotiationRoundsInsert pNriPayload_ pNriNegotiationId_ =
     NegotiationRoundsInsert
     { _nriPayload = pNriPayload_
-    , _nriNegotiationId = pNriNegotiationId_
+    , _nriNegotiationId = _Coerce # pNriNegotiationId_
     }
 
 -- | Multipart request metadata.

@@ -90,9 +90,9 @@ reportsFilesGet
     -> ReportsFilesGet
 reportsFilesGet pRfgReportId_ pRfgProFileId_ pRfgFileId_ =
     ReportsFilesGet
-    { _rfgReportId = pRfgReportId_
-    , _rfgProFileId = pRfgProFileId_
-    , _rfgFileId = pRfgFileId_
+    { _rfgReportId = _Coerce # pRfgReportId_
+    , _rfgProFileId = _Coerce # pRfgProFileId_
+    , _rfgFileId = _Coerce # pRfgFileId_
     }
 
 -- | The ID of the report.

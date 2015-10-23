@@ -78,7 +78,7 @@ accounttaxList
     -> AccounttaxList
 accounttaxList pAllMerchantId_ =
     AccounttaxList
-    { _allMerchantId = pAllMerchantId_
+    { _allMerchantId = _Coerce # pAllMerchantId_
     , _allPageToken = Nothing
     , _allMaxResults = Nothing
     }

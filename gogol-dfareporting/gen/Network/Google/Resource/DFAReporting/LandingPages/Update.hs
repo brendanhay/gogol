@@ -80,8 +80,8 @@ landingPagesUpdate
     -> LandingPagesUpdate
 landingPagesUpdate pLpuCampaignId_ pLpuProFileId_ pLpuPayload_ =
     LandingPagesUpdate
-    { _lpuCampaignId = pLpuCampaignId_
-    , _lpuProFileId = pLpuProFileId_
+    { _lpuCampaignId = _Coerce # pLpuCampaignId_
+    , _lpuProFileId = _Coerce # pLpuProFileId_
     , _lpuPayload = pLpuPayload_
     }
 

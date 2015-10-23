@@ -76,7 +76,7 @@ datafeedsInsert
     -> DatafeedsInsert
 datafeedsInsert pDiMerchantId_ pDiPayload_ =
     DatafeedsInsert
-    { _diMerchantId = pDiMerchantId_
+    { _diMerchantId = _Coerce # pDiMerchantId_
     , _diPayload = pDiPayload_
     , _diDryRun = Nothing
     }

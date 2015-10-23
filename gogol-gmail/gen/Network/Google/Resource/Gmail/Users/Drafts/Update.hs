@@ -91,7 +91,7 @@ usersDraftsUpdate
 usersDraftsUpdate pUduPayload_ pUduUserId_ pUduId_ =
     UsersDraftsUpdate
     { _uduPayload = pUduPayload_
-    , _uduUserId = pUduUserId_
+    , _uduUserId = "me"
     , _uduId = pUduId_
     }
 

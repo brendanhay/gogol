@@ -80,8 +80,8 @@ landingPagesInsert
     -> LandingPagesInsert
 landingPagesInsert pLpiCampaignId_ pLpiProFileId_ pLpiPayload_ =
     LandingPagesInsert
-    { _lpiCampaignId = pLpiCampaignId_
-    , _lpiProFileId = pLpiProFileId_
+    { _lpiCampaignId = _Coerce # pLpiCampaignId_
+    , _lpiProFileId = _Coerce # pLpiProFileId_
     , _lpiPayload = pLpiPayload_
     }
 

@@ -81,9 +81,9 @@ placementGroupsPatch
     -> PlacementGroupsPatch
 placementGroupsPatch pPgpProFileId_ pPgpPayload_ pPgpId_ =
     PlacementGroupsPatch
-    { _pgpProFileId = pPgpProFileId_
+    { _pgpProFileId = _Coerce # pPgpProFileId_
     , _pgpPayload = pPgpPayload_
-    , _pgpId = pPgpId_
+    , _pgpId = _Coerce # pPgpId_
     }
 
 -- | User profile ID associated with this request.

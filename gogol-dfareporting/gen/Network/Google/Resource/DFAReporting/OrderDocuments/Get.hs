@@ -79,9 +79,9 @@ orderDocumentsGet
     -> OrderDocumentsGet
 orderDocumentsGet pOdgProFileId_ pOdgId_ pOdgProjectId_ =
     OrderDocumentsGet
-    { _odgProFileId = pOdgProFileId_
-    , _odgId = pOdgId_
-    , _odgProjectId = pOdgProjectId_
+    { _odgProFileId = _Coerce # pOdgProFileId_
+    , _odgId = _Coerce # pOdgId_
+    , _odgProjectId = _Coerce # pOdgProjectId_
     }
 
 -- | User profile ID associated with this request.

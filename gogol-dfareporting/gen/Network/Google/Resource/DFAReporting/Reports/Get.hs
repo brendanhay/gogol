@@ -72,8 +72,8 @@ reportsGet
     -> ReportsGet
 reportsGet pRgReportId_ pRgProFileId_ =
     ReportsGet
-    { _rgReportId = pRgReportId_
-    , _rgProFileId = pRgProFileId_
+    { _rgReportId = _Coerce # pRgReportId_
+    , _rgProFileId = _Coerce # pRgProFileId_
     }
 
 -- | The ID of the report.

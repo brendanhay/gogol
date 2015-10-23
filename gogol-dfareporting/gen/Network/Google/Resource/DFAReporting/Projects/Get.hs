@@ -72,8 +72,8 @@ projectsGet
     -> ProjectsGet
 projectsGet pProProFileId_ pProId_ =
     ProjectsGet
-    { _proProFileId = pProProFileId_
-    , _proId = pProId_
+    { _proProFileId = _Coerce # pProProFileId_
+    , _proId = _Coerce # pProId_
     }
 
 -- | User profile ID associated with this request.

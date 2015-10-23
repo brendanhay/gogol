@@ -81,7 +81,7 @@ editsAPKListingsDeleteall
 editsAPKListingsDeleteall pEapkldaPackageName_ pEapkldaAPKVersionCode_ pEapkldaEditId_ =
     EditsAPKListingsDeleteall
     { _eapkldaPackageName = pEapkldaPackageName_
-    , _eapkldaAPKVersionCode = pEapkldaAPKVersionCode_
+    , _eapkldaAPKVersionCode = _Coerce # pEapkldaAPKVersionCode_
     , _eapkldaEditId = pEapkldaEditId_
     }
 

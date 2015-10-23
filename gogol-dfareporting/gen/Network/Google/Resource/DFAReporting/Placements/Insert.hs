@@ -72,7 +72,7 @@ placementsInsert
     -> PlacementsInsert
 placementsInsert pPiProFileId_ pPiPayload_ =
     PlacementsInsert
-    { _piProFileId = pPiProFileId_
+    { _piProFileId = _Coerce # pPiProFileId_
     , _piPayload = pPiPayload_
     }
 

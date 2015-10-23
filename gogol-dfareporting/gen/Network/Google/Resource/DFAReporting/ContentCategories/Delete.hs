@@ -72,8 +72,8 @@ contentCategoriesDelete
     -> ContentCategoriesDelete
 contentCategoriesDelete pCcdProFileId_ pCcdId_ =
     ContentCategoriesDelete
-    { _ccdProFileId = pCcdProFileId_
-    , _ccdId = pCcdId_
+    { _ccdProFileId = _Coerce # pCcdProFileId_
+    , _ccdId = _Coerce # pCcdId_
     }
 
 -- | User profile ID associated with this request.

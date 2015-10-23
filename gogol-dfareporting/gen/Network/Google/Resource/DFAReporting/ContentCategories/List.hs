@@ -101,7 +101,7 @@ contentCategoriesList pCclProFileId_ =
     ContentCategoriesList
     { _cclSearchString = Nothing
     , _cclIds = Nothing
-    , _cclProFileId = pCclProFileId_
+    , _cclProFileId = _Coerce # pCclProFileId_
     , _cclSortOrder = Nothing
     , _cclPageToken = Nothing
     , _cclSortField = Nothing

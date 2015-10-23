@@ -88,7 +88,7 @@ turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
     { _tbmltLanguage = Nothing
     , _tbmltPendingParticipantId = Nothing
     , _tbmltMatchId = pTbmltMatchId_
-    , _tbmltMatchVersion = pTbmltMatchVersion_
+    , _tbmltMatchVersion = _Coerce # pTbmltMatchVersion_
     }
 
 -- | The preferred language to use for strings returned by this method.

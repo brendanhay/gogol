@@ -89,7 +89,7 @@ editsAPKListingsGet
 editsAPKListingsGet pEapklgPackageName_ pEapklgAPKVersionCode_ pEapklgLanguage_ pEapklgEditId_ =
     EditsAPKListingsGet
     { _eapklgPackageName = pEapklgPackageName_
-    , _eapklgAPKVersionCode = pEapklgAPKVersionCode_
+    , _eapklgAPKVersionCode = _Coerce # pEapklgAPKVersionCode_
     , _eapklgLanguage = pEapklgLanguage_
     , _eapklgEditId = pEapklgEditId_
     }

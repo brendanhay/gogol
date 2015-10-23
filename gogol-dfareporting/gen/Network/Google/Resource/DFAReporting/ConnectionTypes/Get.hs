@@ -73,8 +73,8 @@ connectionTypesGet
     -> ConnectionTypesGet
 connectionTypesGet pCtgProFileId_ pCtgId_ =
     ConnectionTypesGet
-    { _ctgProFileId = pCtgProFileId_
-    , _ctgId = pCtgId_
+    { _ctgProFileId = _Coerce # pCtgProFileId_
+    , _ctgId = _Coerce # pCtgId_
     }
 
 -- | User profile ID associated with this request.

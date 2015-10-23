@@ -74,7 +74,7 @@ myLibraryAnnotationsSummary
     -> MyLibraryAnnotationsSummary
 myLibraryAnnotationsSummary pMlasLayerIds_ pMlasVolumeId_ =
     MyLibraryAnnotationsSummary
-    { _mlasLayerIds = pMlasLayerIds_
+    { _mlasLayerIds = _Coerce # pMlasLayerIds_
     , _mlasVolumeId = pMlasVolumeId_
     }
 

@@ -73,7 +73,7 @@ contentCategoriesUpdate
     -> ContentCategoriesUpdate
 contentCategoriesUpdate pCcuProFileId_ pCcuPayload_ =
     ContentCategoriesUpdate
-    { _ccuProFileId = pCcuProFileId_
+    { _ccuProFileId = _Coerce # pCcuProFileId_
     , _ccuPayload = pCcuPayload_
     }
 

@@ -82,7 +82,7 @@ statesUpdate
 statesUpdate pSuStateKey_ pSuPayload_ =
     StatesUpdate
     { _suCurrentStateVersion = Nothing
-    , _suStateKey = pSuStateKey_
+    , _suStateKey = _Coerce # pSuStateKey_
     , _suPayload = pSuPayload_
     }
 
