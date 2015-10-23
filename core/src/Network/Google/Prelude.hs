@@ -12,7 +12,7 @@ module Network.Google.Prelude
 
 import           Control.Applicative         as Export (pure, (<$>), (<*>))
 import           Control.Lens                as Export (Lens', lens, mapping,
-                                                        (^.), _Just)
+                                                        ( # ), (^.), _Just)
 import           Data.Data                   as Export (Data, Typeable)
 import           Data.Hashable               as Export
 import           Data.HashMap.Strict         as Export (HashMap)

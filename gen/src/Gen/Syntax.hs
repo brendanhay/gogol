@@ -85,7 +85,7 @@ downloadAlias m
     | _mSupportsMediaDownload m = Just download
     | otherwise                 = Nothing
   where
-    download = servantSub downloadVerb (params ++ [altParam])
+    download = servantSub (downloadVerb m) (params ++ [altParam])
 
     params = requestQuery m . Map.delete "alt" $ requestQueryParams m
 
@@ -160,8 +160,10 @@ jsonVerb m =
     TyApp (TyApp (httpMethod m) jsonMedia)
         $ maybe (TyCon "()") (tycon . ref) (_mResponse m)
 
-downloadVerb :: Type
-downloadVerb = TyApp (TyApp (TyCon "Get") streamMedia) (TyCon "Stream")
+downloadVerb :: Method a -> Type
+downloadVerb m =
+    TyApp (TyApp (httpMethod m) streamMedia)
+          (TyCon "Stream")
 
 httpMethod :: Method a -> Type
 httpMethod = TyCon . unqual . Text.unpack . Text.toTitle . _mHttpMethod
@@ -464,10 +466,10 @@ ctorDecl n p rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
 fieldUpdate :: Prefix -> Local -> Solved -> FieldUpdate
 fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
   where
-    rhs | required s                      = v
-        | Just x <- def s, s ^. iRepeated = listE [x]
+    rhs | Just x <- def s, s ^. iRepeated = listE [x]
         | Just x <- def s                 = x
         | Just x <- iso (_type s)         = infixApp x "#" v
+        | required s                      = v
         | otherwise                       = var (name "Nothing")
 
     v = var (pname p l)

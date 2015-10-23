@@ -141,7 +141,8 @@ renderMethod s root suf m@Method {..} = do
     dl  <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
     ul  <- pp Print $ uploadDecl   _unique _prefix alias url (props _schema) m
 
-    let is = i : [dl | _mSupportsMediaDownload] ++ [ul | _mSupportsMediaUpload]
+    let is = i : [dl | _mSupportsMediaDownload && not _mSupportsMediaUpload]
+              ++ [ul | _mSupportsMediaUpload]
 
     Action (commasep _mId) _unique (root <> mkNS ns) _mDescription alias
         <$> pp Print (verbAlias s alias m)
