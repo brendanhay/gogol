@@ -143,10 +143,11 @@ instance GoogleRequest UsersMessagesInsert where
                       (Proxy :: Proxy UsersMessagesInsertResource)
                       mempty
 
-instance GoogleRequest (Upload UsersMessagesInsert)
-         where
-        type Rs (Upload UsersMessagesInsert) = Message
-        requestClient (Upload UsersMessagesInsert{..} body)
+instance GoogleRequest
+         (MediaUpload UsersMessagesInsert) where
+        type Rs (MediaUpload UsersMessagesInsert) = Message
+        requestClient
+          (MediaUpload UsersMessagesInsert{..} body)
           = go _uUserId (Just _uDeleted)
               (Just _uInternalDateSource)
               (Just AltJSON)

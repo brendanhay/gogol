@@ -103,9 +103,10 @@ instance GoogleRequest TimelineUpdate where
                   = buildClient (Proxy :: Proxy TimelineUpdateResource)
                       mempty
 
-instance GoogleRequest (Upload TimelineUpdate) where
-        type Rs (Upload TimelineUpdate) = TimelineItem
-        requestClient (Upload TimelineUpdate{..} body)
+instance GoogleRequest (MediaUpload TimelineUpdate)
+         where
+        type Rs (MediaUpload TimelineUpdate) = TimelineItem
+        requestClient (MediaUpload TimelineUpdate{..} body)
           = go _tuId (Just AltJSON) (Just AltMedia) _tuPayload
               body
               mirrorService

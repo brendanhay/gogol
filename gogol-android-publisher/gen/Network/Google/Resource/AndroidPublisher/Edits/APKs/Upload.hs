@@ -109,12 +109,12 @@ instance GoogleRequest EditsAPKsUpload where
                       (Proxy :: Proxy EditsAPKsUploadResource)
                       mempty
 
-instance GoogleRequest (Upload EditsAPKsUpload) where
-        type Rs (Upload EditsAPKsUpload) = APK
-        requestClient (Upload EditsAPKsUpload{..} body)
+instance GoogleRequest (MediaUpload EditsAPKsUpload)
+         where
+        type Rs (MediaUpload EditsAPKsUpload) = APK
+        requestClient (MediaUpload EditsAPKsUpload{..} body)
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               (Just AltMedia)
-              _eapkuPayload
               body
               androidPublisherService
           where _ :<|> go

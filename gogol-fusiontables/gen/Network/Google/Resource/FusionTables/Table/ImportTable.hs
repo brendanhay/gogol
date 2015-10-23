@@ -121,14 +121,13 @@ instance GoogleRequest TableImportTable where
                       (Proxy :: Proxy TableImportTableResource)
                       mempty
 
-instance GoogleRequest (Upload TableImportTable)
+instance GoogleRequest (MediaUpload TableImportTable)
          where
-        type Rs (Upload TableImportTable) = Table
-        requestClient (Upload TableImportTable{..} body)
+        type Rs (MediaUpload TableImportTable) = Table
+        requestClient (MediaUpload TableImportTable{..} body)
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
               (Just AltMedia)
-              _titPayload
               body
               fusionTablesService
           where _ :<|> go

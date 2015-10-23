@@ -105,10 +105,10 @@ instance GoogleRequest ReportsGetFile where
                   = buildClient (Proxy :: Proxy ReportsGetFileResource)
                       mempty
 
-instance GoogleRequest (Download ReportsGetFile)
+instance GoogleRequest (MediaDownload ReportsGetFile)
          where
-        type Rs (Download ReportsGetFile) = Stream
-        requestClient (Download ReportsGetFile{..})
+        type Rs (MediaDownload ReportsGetFile) = Stream
+        requestClient (MediaDownload ReportsGetFile{..})
           = go _rgfReportId _rgfReportFragment (Just AltMedia)
               doubleClickSearchService
           where _ :<|> go

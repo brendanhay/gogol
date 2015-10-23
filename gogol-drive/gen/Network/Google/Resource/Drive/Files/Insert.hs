@@ -200,9 +200,10 @@ instance GoogleRequest FilesInsert where
                   = buildClient (Proxy :: Proxy FilesInsertResource)
                       mempty
 
-instance GoogleRequest (Upload FilesInsert) where
-        type Rs (Upload FilesInsert) = File
-        requestClient (Upload FilesInsert{..} body)
+instance GoogleRequest (MediaUpload FilesInsert)
+         where
+        type Rs (MediaUpload FilesInsert) = File
+        requestClient (MediaUpload FilesInsert{..} body)
           = go (Just _fiPinned) (Just _fiVisibility)
               _fiTimedTextLanguage
               (Just _fiUseContentAsIndexableText)

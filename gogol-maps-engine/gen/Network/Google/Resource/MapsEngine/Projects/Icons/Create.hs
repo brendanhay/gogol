@@ -107,10 +107,11 @@ instance GoogleRequest ProjectsIconsCreate where
                       (Proxy :: Proxy ProjectsIconsCreateResource)
                       mempty
 
-instance GoogleRequest (Upload ProjectsIconsCreate)
-         where
-        type Rs (Upload ProjectsIconsCreate) = Icon
-        requestClient (Upload ProjectsIconsCreate{..} body)
+instance GoogleRequest
+         (MediaUpload ProjectsIconsCreate) where
+        type Rs (MediaUpload ProjectsIconsCreate) = Icon
+        requestClient
+          (MediaUpload ProjectsIconsCreate{..} body)
           = go _picProjectId (Just AltJSON) (Just AltMedia)
               _picPayload
               body

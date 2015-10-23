@@ -190,9 +190,10 @@ instance GoogleRequest ObjectsGet where
                   = buildClient (Proxy :: Proxy ObjectsGetResource)
                       mempty
 
-instance GoogleRequest (Download ObjectsGet) where
-        type Rs (Download ObjectsGet) = Stream
-        requestClient (Download ObjectsGet{..})
+instance GoogleRequest (MediaDownload ObjectsGet)
+         where
+        type Rs (MediaDownload ObjectsGet) = Stream
+        requestClient (MediaDownload ObjectsGet{..})
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch

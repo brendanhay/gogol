@@ -131,9 +131,10 @@ instance GoogleRequest WatermarksSet where
                   = buildClient (Proxy :: Proxy WatermarksSetResource)
                       mempty
 
-instance GoogleRequest (Upload WatermarksSet) where
-        type Rs (Upload WatermarksSet) = ()
-        requestClient (Upload WatermarksSet{..} body)
+instance GoogleRequest (MediaUpload WatermarksSet)
+         where
+        type Rs (MediaUpload WatermarksSet) = ()
+        requestClient (MediaUpload WatermarksSet{..} body)
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)
               (Just AltMedia)

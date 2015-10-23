@@ -119,13 +119,14 @@ instance GoogleRequest ThumbnailsSet where
                   = buildClient (Proxy :: Proxy ThumbnailsSetResource)
                       mempty
 
-instance GoogleRequest (Upload ThumbnailsSet) where
-        type Rs (Upload ThumbnailsSet) = ThumbnailSetResponse
-        requestClient (Upload ThumbnailsSet{..} body)
+instance GoogleRequest (MediaUpload ThumbnailsSet)
+         where
+        type Rs (MediaUpload ThumbnailsSet) =
+             ThumbnailSetResponse
+        requestClient (MediaUpload ThumbnailsSet{..} body)
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
               (Just AltMedia)
-              _tsPayload
               body
               youTubeService
           where _ :<|> go

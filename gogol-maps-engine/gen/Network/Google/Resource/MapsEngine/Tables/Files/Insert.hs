@@ -112,13 +112,13 @@ instance GoogleRequest TablesFilesInsert where
                       (Proxy :: Proxy TablesFilesInsertResource)
                       mempty
 
-instance GoogleRequest (Upload TablesFilesInsert)
-         where
-        type Rs (Upload TablesFilesInsert) = ()
-        requestClient (Upload TablesFilesInsert{..} body)
+instance GoogleRequest
+         (MediaUpload TablesFilesInsert) where
+        type Rs (MediaUpload TablesFilesInsert) = ()
+        requestClient
+          (MediaUpload TablesFilesInsert{..} body)
           = go _tfiId (Just _tfiFilename) (Just AltJSON)
               (Just AltMedia)
-              _tfiPayload
               body
               mapsEngineService
           where _ :<|> go

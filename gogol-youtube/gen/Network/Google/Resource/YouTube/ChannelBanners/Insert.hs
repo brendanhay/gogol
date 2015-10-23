@@ -135,11 +135,12 @@ instance GoogleRequest ChannelBannersInsert where
                       (Proxy :: Proxy ChannelBannersInsertResource)
                       mempty
 
-instance GoogleRequest (Upload ChannelBannersInsert)
-         where
-        type Rs (Upload ChannelBannersInsert) =
+instance GoogleRequest
+         (MediaUpload ChannelBannersInsert) where
+        type Rs (MediaUpload ChannelBannersInsert) =
              ChannelBannerResource
-        requestClient (Upload ChannelBannersInsert{..} body)
+        requestClient
+          (MediaUpload ChannelBannersInsert{..} body)
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               (Just AltMedia)
               _cbiPayload

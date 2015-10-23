@@ -126,11 +126,12 @@ instance GoogleRequest CreativeAssetsInsert where
                       (Proxy :: Proxy CreativeAssetsInsertResource)
                       mempty
 
-instance GoogleRequest (Upload CreativeAssetsInsert)
-         where
-        type Rs (Upload CreativeAssetsInsert) =
+instance GoogleRequest
+         (MediaUpload CreativeAssetsInsert) where
+        type Rs (MediaUpload CreativeAssetsInsert) =
              CreativeAssetMetadata
-        requestClient (Upload CreativeAssetsInsert{..} body)
+        requestClient
+          (MediaUpload CreativeAssetsInsert{..} body)
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
               (Just AltMedia)
               _caiPayload

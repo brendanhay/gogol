@@ -91,9 +91,10 @@ instance GoogleRequest TimelineInsert where
                   = buildClient (Proxy :: Proxy TimelineInsertResource)
                       mempty
 
-instance GoogleRequest (Upload TimelineInsert) where
-        type Rs (Upload TimelineInsert) = TimelineItem
-        requestClient (Upload TimelineInsert{..} body)
+instance GoogleRequest (MediaUpload TimelineInsert)
+         where
+        type Rs (MediaUpload TimelineInsert) = TimelineItem
+        requestClient (MediaUpload TimelineInsert{..} body)
           = go (Just AltJSON) (Just AltMedia) _tiPayload body
               mirrorService
           where _ :<|> go

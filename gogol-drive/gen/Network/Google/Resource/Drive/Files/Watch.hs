@@ -160,9 +160,10 @@ instance GoogleRequest FilesWatch where
                   = buildClient (Proxy :: Proxy FilesWatchResource)
                       mempty
 
-instance GoogleRequest (Download FilesWatch) where
-        type Rs (Download FilesWatch) = Stream
-        requestClient (Download FilesWatch{..})
+instance GoogleRequest (MediaDownload FilesWatch)
+         where
+        type Rs (MediaDownload FilesWatch) = Stream
+        requestClient (MediaDownload FilesWatch{..})
           = go _fwFileId (Just _fwUpdateViewedDate)
               _fwProjection
               (Just _fwAcknowledgeAbuse)

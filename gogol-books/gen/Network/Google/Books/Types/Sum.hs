@@ -662,7 +662,7 @@ data MyConfigRequestAccessLicenseTypes
     | Concurrent
       -- ^ @CONCURRENT@
       -- Concurrent access license.
-    | Download'
+    | Download
       -- ^ @DOWNLOAD@
       -- Offline download access license.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -673,14 +673,14 @@ instance FromText MyConfigRequestAccessLicenseTypes where
     fromText = \case
         "BOTH" -> Just Both
         "CONCURRENT" -> Just Concurrent
-        "DOWNLOAD" -> Just Download'
+        "DOWNLOAD" -> Just Download
         _ -> Nothing
 
 instance ToText MyConfigRequestAccessLicenseTypes where
     toText = \case
         Both -> "BOTH"
         Concurrent -> "CONCURRENT"
-        Download' -> "DOWNLOAD"
+        Download -> "DOWNLOAD"
 
 instance FromJSON MyConfigRequestAccessLicenseTypes where
     parseJSON = parseJSONText "MyConfigRequestAccessLicenseTypes"

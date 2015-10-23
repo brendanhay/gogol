@@ -103,9 +103,9 @@ instance GoogleRequest FilesGet where
                   = buildClient (Proxy :: Proxy FilesGetResource)
                       mempty
 
-instance GoogleRequest (Download FilesGet) where
-        type Rs (Download FilesGet) = Stream
-        requestClient (Download FilesGet{..})
+instance GoogleRequest (MediaDownload FilesGet) where
+        type Rs (MediaDownload FilesGet) = Stream
+        requestClient (MediaDownload FilesGet{..})
           = go _fgReportId _fgFileId (Just AltMedia)
               dFAReportingService
           where _ :<|> go

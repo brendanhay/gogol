@@ -106,9 +106,9 @@ instance GoogleRequest JobsInsert where
                   = buildClient (Proxy :: Proxy JobsInsertResource)
                       mempty
 
-instance GoogleRequest (Upload JobsInsert) where
-        type Rs (Upload JobsInsert) = Job
-        requestClient (Upload JobsInsert{..} body)
+instance GoogleRequest (MediaUpload JobsInsert) where
+        type Rs (MediaUpload JobsInsert) = Job
+        requestClient (MediaUpload JobsInsert{..} body)
           = go _jiProjectId (Just AltJSON) (Just AltMedia)
               _jiPayload
               body

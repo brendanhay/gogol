@@ -166,9 +166,10 @@ instance GoogleRequest CaptionsUpdate where
                   = buildClient (Proxy :: Proxy CaptionsUpdateResource)
                       mempty
 
-instance GoogleRequest (Upload CaptionsUpdate) where
-        type Rs (Upload CaptionsUpdate) = Caption
-        requestClient (Upload CaptionsUpdate{..} body)
+instance GoogleRequest (MediaUpload CaptionsUpdate)
+         where
+        type Rs (MediaUpload CaptionsUpdate) = Caption
+        requestClient (MediaUpload CaptionsUpdate{..} body)
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync

@@ -160,9 +160,10 @@ instance GoogleRequest CaptionsInsert where
                   = buildClient (Proxy :: Proxy CaptionsInsertResource)
                       mempty
 
-instance GoogleRequest (Upload CaptionsInsert) where
-        type Rs (Upload CaptionsInsert) = Caption
-        requestClient (Upload CaptionsInsert{..} body)
+instance GoogleRequest (MediaUpload CaptionsInsert)
+         where
+        type Rs (MediaUpload CaptionsInsert) = Caption
+        requestClient (MediaUpload CaptionsInsert{..} body)
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
               _ciSync

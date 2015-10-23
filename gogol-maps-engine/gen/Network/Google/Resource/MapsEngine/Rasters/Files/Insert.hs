@@ -106,13 +106,13 @@ instance GoogleRequest RastersFilesInsert where
                       (Proxy :: Proxy RastersFilesInsertResource)
                       mempty
 
-instance GoogleRequest (Upload RastersFilesInsert)
-         where
-        type Rs (Upload RastersFilesInsert) = ()
-        requestClient (Upload RastersFilesInsert{..} body)
+instance GoogleRequest
+         (MediaUpload RastersFilesInsert) where
+        type Rs (MediaUpload RastersFilesInsert) = ()
+        requestClient
+          (MediaUpload RastersFilesInsert{..} body)
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
               (Just AltMedia)
-              _rfiPayload
               body
               mapsEngineService
           where _ :<|> go

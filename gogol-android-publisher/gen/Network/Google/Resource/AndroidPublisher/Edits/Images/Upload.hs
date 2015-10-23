@@ -144,16 +144,16 @@ instance GoogleRequest EditsImagesUpload where
                       (Proxy :: Proxy EditsImagesUploadResource)
                       mempty
 
-instance GoogleRequest (Upload EditsImagesUpload)
-         where
-        type Rs (Upload EditsImagesUpload) =
+instance GoogleRequest
+         (MediaUpload EditsImagesUpload) where
+        type Rs (MediaUpload EditsImagesUpload) =
              ImagesUploadResponse
-        requestClient (Upload EditsImagesUpload{..} body)
+        requestClient
+          (MediaUpload EditsImagesUpload{..} body)
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               (Just AltJSON)
               (Just AltMedia)
-              _eiuPayload
               body
               androidPublisherService
           where _ :<|> go

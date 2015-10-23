@@ -219,9 +219,10 @@ instance GoogleRequest ObjectsUpdate where
                   = buildClient (Proxy :: Proxy ObjectsUpdateResource)
                       mempty
 
-instance GoogleRequest (Download ObjectsUpdate) where
-        type Rs (Download ObjectsUpdate) = Stream
-        requestClient (Download ObjectsUpdate{..})
+instance GoogleRequest (MediaDownload ObjectsUpdate)
+         where
+        type Rs (MediaDownload ObjectsUpdate) = Stream
+        requestClient (MediaDownload ObjectsUpdate{..})
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch

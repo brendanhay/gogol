@@ -108,10 +108,11 @@ instance GoogleRequest UsersDraftsCreate where
                       (Proxy :: Proxy UsersDraftsCreateResource)
                       mempty
 
-instance GoogleRequest (Upload UsersDraftsCreate)
-         where
-        type Rs (Upload UsersDraftsCreate) = Draft
-        requestClient (Upload UsersDraftsCreate{..} body)
+instance GoogleRequest
+         (MediaUpload UsersDraftsCreate) where
+        type Rs (MediaUpload UsersDraftsCreate) = Draft
+        requestClient
+          (MediaUpload UsersDraftsCreate{..} body)
           = go _udcUserId (Just AltJSON) (Just AltMedia)
               _udcPayload
               body

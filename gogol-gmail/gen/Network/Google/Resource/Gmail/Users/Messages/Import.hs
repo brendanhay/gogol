@@ -178,10 +178,11 @@ instance GoogleRequest UsersMessagesImport where
                       (Proxy :: Proxy UsersMessagesImportResource)
                       mempty
 
-instance GoogleRequest (Upload UsersMessagesImport)
-         where
-        type Rs (Upload UsersMessagesImport) = Message
-        requestClient (Upload UsersMessagesImport{..} body)
+instance GoogleRequest
+         (MediaUpload UsersMessagesImport) where
+        type Rs (MediaUpload UsersMessagesImport) = Message
+        requestClient
+          (MediaUpload UsersMessagesImport{..} body)
           = go _umiUserId (Just _umiProcessForCalendar)
               (Just _umiDeleted)
               (Just _umiNeverMarkSpam)

@@ -170,17 +170,16 @@ instance GoogleRequest TableReplaceRows where
                       (Proxy :: Proxy TableReplaceRowsResource)
                       mempty
 
-instance GoogleRequest (Upload TableReplaceRows)
+instance GoogleRequest (MediaUpload TableReplaceRows)
          where
-        type Rs (Upload TableReplaceRows) = Task
-        requestClient (Upload TableReplaceRows{..} body)
+        type Rs (MediaUpload TableReplaceRows) = Task
+        requestClient (MediaUpload TableReplaceRows{..} body)
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter
               _trrEncoding
               _trrIsStrict
               (Just AltJSON)
               (Just AltMedia)
-              _trrPayload
               body
               fusionTablesService
           where _ :<|> go

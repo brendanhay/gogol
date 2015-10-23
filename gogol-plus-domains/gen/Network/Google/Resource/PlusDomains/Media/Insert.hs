@@ -124,9 +124,10 @@ instance GoogleRequest MediaInsert where
                   = buildClient (Proxy :: Proxy MediaInsertResource)
                       mempty
 
-instance GoogleRequest (Upload MediaInsert) where
-        type Rs (Upload MediaInsert) = Media
-        requestClient (Upload MediaInsert{..} body)
+instance GoogleRequest (MediaUpload MediaInsert)
+         where
+        type Rs (MediaUpload MediaInsert) = Media
+        requestClient (MediaUpload MediaInsert{..} body)
           = go _miUserId _miCollection (Just AltJSON)
               (Just AltMedia)
               _miPayload

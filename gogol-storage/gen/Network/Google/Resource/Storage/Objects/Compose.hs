@@ -172,10 +172,10 @@ instance GoogleRequest ObjectsCompose where
                   = buildClient (Proxy :: Proxy ObjectsComposeResource)
                       mempty
 
-instance GoogleRequest (Download ObjectsCompose)
+instance GoogleRequest (MediaDownload ObjectsCompose)
          where
-        type Rs (Download ObjectsCompose) = Stream
-        requestClient (Download ObjectsCompose{..})
+        type Rs (MediaDownload ObjectsCompose) = Stream
+        requestClient (MediaDownload ObjectsCompose{..})
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL
               _oIfMetagenerationMatch

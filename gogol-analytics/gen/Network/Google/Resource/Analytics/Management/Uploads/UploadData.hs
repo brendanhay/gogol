@@ -134,15 +134,15 @@ instance GoogleRequest ManagementUploadsUploadData
                       mempty
 
 instance GoogleRequest
-         (Upload ManagementUploadsUploadData) where
-        type Rs (Upload ManagementUploadsUploadData) = Upload
+         (MediaUpload ManagementUploadsUploadData) where
+        type Rs (MediaUpload ManagementUploadsUploadData) =
+             Upload
         requestClient
-          (Upload ManagementUploadsUploadData{..} body)
+          (MediaUpload ManagementUploadsUploadData{..} body)
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
               (Just AltJSON)
               (Just AltMedia)
-              _muudPayload
               body
               analyticsService
           where _ :<|> go

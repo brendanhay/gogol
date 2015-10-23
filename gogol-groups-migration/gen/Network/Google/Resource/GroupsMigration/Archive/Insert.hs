@@ -93,12 +93,11 @@ instance GoogleRequest ArchiveInsert where
                   = buildClient (Proxy :: Proxy ArchiveInsertResource)
                       mempty
 
-instance GoogleRequest (Upload ArchiveInsert) where
-        type Rs (Upload ArchiveInsert) = Groups
-        requestClient (Upload ArchiveInsert{..} body)
-          = go _aiGroupId (Just AltJSON) (Just AltMedia)
-              _aiPayload
-              body
+instance GoogleRequest (MediaUpload ArchiveInsert)
+         where
+        type Rs (MediaUpload ArchiveInsert) = Groups
+        requestClient (MediaUpload ArchiveInsert{..} body)
+          = go _aiGroupId (Just AltJSON) (Just AltMedia) body
               groupsMigrationService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy ArchiveInsertResource)

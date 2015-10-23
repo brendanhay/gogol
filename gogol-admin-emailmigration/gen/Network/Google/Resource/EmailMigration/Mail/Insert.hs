@@ -106,9 +106,9 @@ instance GoogleRequest MailInsert where
                   = buildClient (Proxy :: Proxy MailInsertResource)
                       mempty
 
-instance GoogleRequest (Upload MailInsert) where
-        type Rs (Upload MailInsert) = ()
-        requestClient (Upload MailInsert{..} body)
+instance GoogleRequest (MediaUpload MailInsert) where
+        type Rs (MediaUpload MailInsert) = ()
+        requestClient (MediaUpload MailInsert{..} body)
           = go _miUserKey (Just AltJSON) (Just AltMedia)
               _miPayload
               body

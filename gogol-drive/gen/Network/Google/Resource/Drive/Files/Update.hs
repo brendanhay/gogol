@@ -294,9 +294,10 @@ instance GoogleRequest FilesUpdate where
                   = buildClient (Proxy :: Proxy FilesUpdateResource)
                       mempty
 
-instance GoogleRequest (Upload FilesUpdate) where
-        type Rs (Upload FilesUpdate) = File
-        requestClient (Upload FilesUpdate{..} body)
+instance GoogleRequest (MediaUpload FilesUpdate)
+         where
+        type Rs (MediaUpload FilesUpdate) = File
+        requestClient (MediaUpload FilesUpdate{..} body)
           = go _fuFileId (Just _fuNewRevision) (Just _fuPinned)
               _fuTimedTextLanguage
               (Just _fuUpdateViewedDate)

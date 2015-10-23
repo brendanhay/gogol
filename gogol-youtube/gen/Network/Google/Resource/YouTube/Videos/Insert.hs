@@ -211,9 +211,10 @@ instance GoogleRequest VideosInsert where
                   = buildClient (Proxy :: Proxy VideosInsertResource)
                       mempty
 
-instance GoogleRequest (Upload VideosInsert) where
-        type Rs (Upload VideosInsert) = Video
-        requestClient (Upload VideosInsert{..} body)
+instance GoogleRequest (MediaUpload VideosInsert)
+         where
+        type Rs (MediaUpload VideosInsert) = Video
+        requestClient (MediaUpload VideosInsert{..} body)
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
               _viOnBehalfOfContentOwnerChannel

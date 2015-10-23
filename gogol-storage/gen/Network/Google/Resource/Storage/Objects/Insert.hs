@@ -250,9 +250,10 @@ instance GoogleRequest ObjectsInsert where
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty
 
-instance GoogleRequest (Download ObjectsInsert) where
-        type Rs (Download ObjectsInsert) = Stream
-        requestClient (Download ObjectsInsert{..})
+instance GoogleRequest (MediaDownload ObjectsInsert)
+         where
+        type Rs (MediaDownload ObjectsInsert) = Stream
+        requestClient (MediaDownload ObjectsInsert{..})
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
@@ -267,9 +268,10 @@ instance GoogleRequest (Download ObjectsInsert) where
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty
 
-instance GoogleRequest (Upload ObjectsInsert) where
-        type Rs (Upload ObjectsInsert) = Object
-        requestClient (Upload ObjectsInsert{..} body)
+instance GoogleRequest (MediaUpload ObjectsInsert)
+         where
+        type Rs (MediaUpload ObjectsInsert) = Object
+        requestClient (MediaUpload ObjectsInsert{..} body)
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch

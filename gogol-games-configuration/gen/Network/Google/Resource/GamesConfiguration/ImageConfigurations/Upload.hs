@@ -117,14 +117,13 @@ instance GoogleRequest ImageConfigurationsUpload
                       mempty
 
 instance GoogleRequest
-         (Upload ImageConfigurationsUpload) where
-        type Rs (Upload ImageConfigurationsUpload) =
+         (MediaUpload ImageConfigurationsUpload) where
+        type Rs (MediaUpload ImageConfigurationsUpload) =
              ImageConfiguration
         requestClient
-          (Upload ImageConfigurationsUpload{..} body)
+          (MediaUpload ImageConfigurationsUpload{..} body)
           = go _icuResourceId _icuImageType (Just AltJSON)
               (Just AltMedia)
-              _icuPayload
               body
               gamesConfigurationService
           where _ :<|> go

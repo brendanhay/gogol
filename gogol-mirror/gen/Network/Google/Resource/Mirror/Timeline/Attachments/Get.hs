@@ -107,9 +107,11 @@ instance GoogleRequest TimelineAttachmentsGet where
                       mempty
 
 instance GoogleRequest
-         (Download TimelineAttachmentsGet) where
-        type Rs (Download TimelineAttachmentsGet) = Stream
-        requestClient (Download TimelineAttachmentsGet{..})
+         (MediaDownload TimelineAttachmentsGet) where
+        type Rs (MediaDownload TimelineAttachmentsGet) =
+             Stream
+        requestClient
+          (MediaDownload TimelineAttachmentsGet{..})
           = go _tagItemId _tagAttachmentId (Just AltMedia)
               mirrorService
           where _ :<|> go

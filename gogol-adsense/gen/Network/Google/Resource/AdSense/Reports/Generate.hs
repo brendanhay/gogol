@@ -255,10 +255,10 @@ instance GoogleRequest ReportsGenerate where
                       (Proxy :: Proxy ReportsGenerateResource)
                       mempty
 
-instance GoogleRequest (Download ReportsGenerate)
-         where
-        type Rs (Download ReportsGenerate) = Stream
-        requestClient (Download ReportsGenerate{..})
+instance GoogleRequest
+         (MediaDownload ReportsGenerate) where
+        type Rs (MediaDownload ReportsGenerate) = Stream
+        requestClient (MediaDownload ReportsGenerate{..})
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale

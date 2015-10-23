@@ -96,14 +96,12 @@ instance GoogleRequest TimelineAttachmentsInsert
                       mempty
 
 instance GoogleRequest
-         (Upload TimelineAttachmentsInsert) where
-        type Rs (Upload TimelineAttachmentsInsert) =
+         (MediaUpload TimelineAttachmentsInsert) where
+        type Rs (MediaUpload TimelineAttachmentsInsert) =
              Attachment
         requestClient
-          (Upload TimelineAttachmentsInsert{..} body)
-          = go _taiItemId (Just AltJSON) (Just AltMedia)
-              _taiPayload
-              body
+          (MediaUpload TimelineAttachmentsInsert{..} body)
+          = go _taiItemId (Just AltJSON) (Just AltMedia) body
               mirrorService
           where _ :<|> go
                   = buildClient

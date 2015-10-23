@@ -107,9 +107,10 @@ instance GoogleRequest RealtimeGet where
                   = buildClient (Proxy :: Proxy RealtimeGetResource)
                       mempty
 
-instance GoogleRequest (Download RealtimeGet) where
-        type Rs (Download RealtimeGet) = Stream
-        requestClient (Download RealtimeGet{..})
+instance GoogleRequest (MediaDownload RealtimeGet)
+         where
+        type Rs (MediaDownload RealtimeGet) = Stream
+        requestClient (MediaDownload RealtimeGet{..})
           = go _rrFileId _rrRevision (Just AltMedia)
               driveService
           where _ :<|> go

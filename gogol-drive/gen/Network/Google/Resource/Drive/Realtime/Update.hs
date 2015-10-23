@@ -112,12 +112,12 @@ instance GoogleRequest RealtimeUpdate where
                   = buildClient (Proxy :: Proxy RealtimeUpdateResource)
                       mempty
 
-instance GoogleRequest (Upload RealtimeUpdate) where
-        type Rs (Upload RealtimeUpdate) = ()
-        requestClient (Upload RealtimeUpdate{..} body)
+instance GoogleRequest (MediaUpload RealtimeUpdate)
+         where
+        type Rs (MediaUpload RealtimeUpdate) = ()
+        requestClient (MediaUpload RealtimeUpdate{..} body)
           = go _reaFileId _reaBaseRevision (Just AltJSON)
               (Just AltMedia)
-              _reaPayload
               body
               driveService
           where _ :<|> go

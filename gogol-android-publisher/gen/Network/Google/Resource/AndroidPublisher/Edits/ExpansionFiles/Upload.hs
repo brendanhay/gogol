@@ -150,16 +150,15 @@ instance GoogleRequest EditsExpansionFilesUpload
                       mempty
 
 instance GoogleRequest
-         (Upload EditsExpansionFilesUpload) where
-        type Rs (Upload EditsExpansionFilesUpload) =
+         (MediaUpload EditsExpansionFilesUpload) where
+        type Rs (MediaUpload EditsExpansionFilesUpload) =
              ExpansionFilesUploadResponse
         requestClient
-          (Upload EditsExpansionFilesUpload{..} body)
+          (MediaUpload EditsExpansionFilesUpload{..} body)
           = go _ePackageName _eEditId _eAPKVersionCode
               _eExpansionFileType
               (Just AltJSON)
               (Just AltMedia)
-              _ePayload
               body
               androidPublisherService
           where _ :<|> go
