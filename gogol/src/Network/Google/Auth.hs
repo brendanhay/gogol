@@ -373,10 +373,10 @@ instance FromJSON (UTCTime -> Bearer) where
         pure (Bearer t r . addUTCTime e)
 
 -- {
---   "private_key_id": "30edd1243ad77e5efdf2ce95223157bad5b33924",
+--   "private_key_id": "303ad77e5efdf2ce952DFa",
 --   "private_key": "-----BEGIN PRIVATE KEY-----\nMIIE...\n",
---   "client_email": "9910395191@er.gserviceaccount.com",
---   "client_id": "0351911-2310eusercontent.com",
+--   "client_email": "01395191@gserviceaccount.com",
+--   "client_id": "035-2-310eusercontent.com",
 --   "type": "service_account"
 -- }
 
@@ -405,7 +405,7 @@ instance FromJSON ServiceAccount where
 -- {
 --   "client_id": "32555940559.apps.googleusercontent.com",
 --   "client_secret": "ZmssLNjJy2998hD4CTg2ejr2",
---   "refresh_token": "1/B3gq9KM1xzIVtqffS1n5w-rSJLPVVPoRyJO7DljtvBY",
+--   "refresh_token": "1/B3gqKM1xzVtqffS1n5w-rSJ",
 --   "type": "authorized_user"
 -- }
 
