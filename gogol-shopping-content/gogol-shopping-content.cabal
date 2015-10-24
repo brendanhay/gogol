@@ -1,0 +1,102 @@
+name:                  gogol-shopping-content
+version:               0.0.1
+synopsis:              Google Content API for Shopping SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    Manage product items, inventory, and Merchant Center accounts for Google
+    Shopping.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.Content.Accounts.AuthInfo
+        , Network.Google.Resource.Content.Accounts.Custombatch
+        , Network.Google.Resource.Content.Accounts.Delete
+        , Network.Google.Resource.Content.Accounts.Get
+        , Network.Google.Resource.Content.Accounts.Insert
+        , Network.Google.Resource.Content.Accounts.List
+        , Network.Google.Resource.Content.Accounts.Patch
+        , Network.Google.Resource.Content.Accounts.Update
+        , Network.Google.Resource.Content.Accountshipping.Custombatch
+        , Network.Google.Resource.Content.Accountshipping.Get
+        , Network.Google.Resource.Content.Accountshipping.List
+        , Network.Google.Resource.Content.Accountshipping.Patch
+        , Network.Google.Resource.Content.Accountshipping.Update
+        , Network.Google.Resource.Content.Accountstatuses.Custombatch
+        , Network.Google.Resource.Content.Accountstatuses.Get
+        , Network.Google.Resource.Content.Accountstatuses.List
+        , Network.Google.Resource.Content.Accounttax.Custombatch
+        , Network.Google.Resource.Content.Accounttax.Get
+        , Network.Google.Resource.Content.Accounttax.List
+        , Network.Google.Resource.Content.Accounttax.Patch
+        , Network.Google.Resource.Content.Accounttax.Update
+        , Network.Google.Resource.Content.Datafeeds.Custombatch
+        , Network.Google.Resource.Content.Datafeeds.Delete
+        , Network.Google.Resource.Content.Datafeeds.Get
+        , Network.Google.Resource.Content.Datafeeds.Insert
+        , Network.Google.Resource.Content.Datafeeds.List
+        , Network.Google.Resource.Content.Datafeeds.Patch
+        , Network.Google.Resource.Content.Datafeeds.Update
+        , Network.Google.Resource.Content.Datafeedstatuses.Custombatch
+        , Network.Google.Resource.Content.Datafeedstatuses.Get
+        , Network.Google.Resource.Content.Datafeedstatuses.List
+        , Network.Google.Resource.Content.Inventory.Custombatch
+        , Network.Google.Resource.Content.Inventory.Set
+        , Network.Google.Resource.Content.Orders.Acknowledge
+        , Network.Google.Resource.Content.Orders.AdvancetestOrder
+        , Network.Google.Resource.Content.Orders.Cancel
+        , Network.Google.Resource.Content.Orders.Cancellineitem
+        , Network.Google.Resource.Content.Orders.CreatetestOrder
+        , Network.Google.Resource.Content.Orders.Custombatch
+        , Network.Google.Resource.Content.Orders.Get
+        , Network.Google.Resource.Content.Orders.GetbymerchantOrderid
+        , Network.Google.Resource.Content.Orders.GettestOrdertemplate
+        , Network.Google.Resource.Content.Orders.List
+        , Network.Google.Resource.Content.Orders.Refund
+        , Network.Google.Resource.Content.Orders.Returnlineitem
+        , Network.Google.Resource.Content.Orders.Shiplineitems
+        , Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
+        , Network.Google.Resource.Content.Orders.Updateshipment
+        , Network.Google.Resource.Content.Products.Custombatch
+        , Network.Google.Resource.Content.Products.Delete
+        , Network.Google.Resource.Content.Products.Get
+        , Network.Google.Resource.Content.Products.Insert
+        , Network.Google.Resource.Content.Products.List
+        , Network.Google.Resource.Content.Productstatuses.Custombatch
+        , Network.Google.Resource.Content.Productstatuses.Get
+        , Network.Google.Resource.Content.Productstatuses.List
+        , Network.Google.ShoppingContent
+        , Network.Google.ShoppingContent.Types
+
+    other-modules:
+          Network.Google.ShoppingContent.Types.Product
+        , Network.Google.ShoppingContent.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

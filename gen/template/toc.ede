@@ -1,0 +1,72 @@
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE TypeOperators     #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
+{% include "_include/license.ede" %}
+--
+-- {{ description | stripPrefix("-- | ") }}
+--
+-- /See:/ <{{ documentationLink }} {{ title }} Reference>
+module {{ moduleName }}
+    (
+    -- * Service Configuration
+      {{ api.url.name }}
+
+    -- * API Declaration
+    , {{ api.aliasName }}
+  {% for action in api.methods %}
+    {% if action.first %}
+
+    -- * Methods
+    {% endif %}
+
+    -- ** {{ action.value.id }}
+    , module {{ action.value.ns }}
+  {% endfor %}
+  {% for action in api.resources %}
+    {% if action.first %}
+
+    -- * Resources
+    {% endif %}
+
+    -- ** {{ action.value.id }}
+    , module {{ action.value.ns }}
+  {% endfor %}
+
+    -- * Types
+  {% for schema in schemas %}
+    {% case schema.value.type %}
+    {% when "prod" %}
+
+    -- ** {{ schema.value.name }}
+    , {{ schema.value.name }}
+    , {{ schema.value.ctor.name }}
+      {% for lens in schema.value.lenses %}
+    , {{ lens.value.name }}
+      {% endfor %}
+    {% when "sum" %}
+
+    -- ** {{ schema.value.name }}
+    , {{ schema.value.name }} (..)
+    {% endcase %}
+  {% endfor %}
+    ) where
+
+{% for import in moduleImports %}
+import {{ import.value }}
+{% endfor %}
+{% for module in exposedModules %}
+  {% if module.value != moduleName %}
+import {{ module.value }}
+  {% endif %}
+{% endfor %}
+
+{- $resources
+TODO
+-}
+
+-- | Represents the entirety of the methods and resources available for the {{ title }} service.
+{{ api.alias }}

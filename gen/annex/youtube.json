@@ -1,0 +1,56 @@
+{
+    "library": "youtube",
+    "canonicalName": "YouTube",
+    "resources": {
+        "subscriptions": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "order": {
+                            "default": "relevance"
+                        }
+                    }
+                }
+            }
+        },
+        "search": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "order": {
+                            "default": "relevance"
+                        }
+                    }
+                }
+            }
+        },
+        "comments": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "textFormat": {
+                            "default": "html"
+                        }
+                    }
+                }
+            }
+        },
+        "commentThreads": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "moderationStatus": {
+                            "default": "published"
+                        },
+                        "order": {
+                            "default": "time"
+                        },
+                        "textFormat": {
+                            "default": "html"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

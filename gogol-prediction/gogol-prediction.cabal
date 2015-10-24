@@ -1,0 +1,54 @@
+name:                  gogol-prediction
+version:               0.0.1
+synopsis:              Google Prediction SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    Lets you access a cloud hosted machine learning service that makes it
+    easy to build smart apps
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1.6@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Prediction
+        , Network.Google.Prediction.Types
+        , Network.Google.Resource.Prediction.HostedModels.Predict
+        , Network.Google.Resource.Prediction.TrainedModels.Analyze
+        , Network.Google.Resource.Prediction.TrainedModels.Delete
+        , Network.Google.Resource.Prediction.TrainedModels.Get
+        , Network.Google.Resource.Prediction.TrainedModels.Insert
+        , Network.Google.Resource.Prediction.TrainedModels.List
+        , Network.Google.Resource.Prediction.TrainedModels.Predict
+        , Network.Google.Resource.Prediction.TrainedModels.Update
+
+    other-modules:
+          Network.Google.Prediction.Types.Product
+        , Network.Google.Prediction.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

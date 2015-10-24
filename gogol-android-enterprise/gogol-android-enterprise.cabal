@@ -1,0 +1,95 @@
+name:                  gogol-android-enterprise
+version:               0.0.1
+synopsis:              Google Play EMM SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    Allows MDMs\/EMMs and enterprises to manage the deployment of apps to
+    Android for Work users.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.AndroidEnterprise
+        , Network.Google.AndroidEnterprise.Types
+        , Network.Google.Resource.AndroidEnterprise.Collections.Delete
+        , Network.Google.Resource.AndroidEnterprise.Collections.Get
+        , Network.Google.Resource.AndroidEnterprise.Collections.Insert
+        , Network.Google.Resource.AndroidEnterprise.Collections.List
+        , Network.Google.Resource.AndroidEnterprise.Collections.Patch
+        , Network.Google.Resource.AndroidEnterprise.Collections.Update
+        , Network.Google.Resource.AndroidEnterprise.Collectionviewers.Delete
+        , Network.Google.Resource.AndroidEnterprise.Collectionviewers.Get
+        , Network.Google.Resource.AndroidEnterprise.Collectionviewers.List
+        , Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
+        , Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
+        , Network.Google.Resource.AndroidEnterprise.Devices.Get
+        , Network.Google.Resource.AndroidEnterprise.Devices.GetState
+        , Network.Google.Resource.AndroidEnterprise.Devices.List
+        , Network.Google.Resource.AndroidEnterprise.Devices.SetState
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.Get
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.List
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
+        , Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
+        , Network.Google.Resource.AndroidEnterprise.Entitlements.Get
+        , Network.Google.Resource.AndroidEnterprise.Entitlements.List
+        , Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
+        , Network.Google.Resource.AndroidEnterprise.Entitlements.Update
+        , Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
+        , Network.Google.Resource.AndroidEnterprise.Grouplicenses.Get
+        , Network.Google.Resource.AndroidEnterprise.Grouplicenses.List
+        , Network.Google.Resource.AndroidEnterprise.Installs.Delete
+        , Network.Google.Resource.AndroidEnterprise.Installs.Get
+        , Network.Google.Resource.AndroidEnterprise.Installs.List
+        , Network.Google.Resource.AndroidEnterprise.Installs.Patch
+        , Network.Google.Resource.AndroidEnterprise.Installs.Update
+        , Network.Google.Resource.AndroidEnterprise.Permissions.Get
+        , Network.Google.Resource.AndroidEnterprise.Products.Approve
+        , Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
+        , Network.Google.Resource.AndroidEnterprise.Products.Get
+        , Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
+        , Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
+        , Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
+        , Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
+        , Network.Google.Resource.AndroidEnterprise.Users.Get
+        , Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
+        , Network.Google.Resource.AndroidEnterprise.Users.List
+        , Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
+        , Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
+
+    other-modules:
+          Network.Google.AndroidEnterprise.Types.Product
+        , Network.Google.AndroidEnterprise.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

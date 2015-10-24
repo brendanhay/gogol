@@ -1,0 +1,88 @@
+name:                  gogol-tagmanager
+version:               0.0.1
+synopsis:              Google Tag Manager SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    API for accessing Tag Manager accounts and containers.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.TagManager.Accounts.Containers.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
+        , Network.Google.Resource.TagManager.Accounts.Get
+        , Network.Google.Resource.TagManager.Accounts.List
+        , Network.Google.Resource.TagManager.Accounts.Permissions.Create
+        , Network.Google.Resource.TagManager.Accounts.Permissions.Delete
+        , Network.Google.Resource.TagManager.Accounts.Permissions.Get
+        , Network.Google.Resource.TagManager.Accounts.Permissions.List
+        , Network.Google.Resource.TagManager.Accounts.Permissions.Update
+        , Network.Google.Resource.TagManager.Accounts.Update
+        , Network.Google.TagManager
+        , Network.Google.TagManager.Types
+
+    other-modules:
+          Network.Google.TagManager.Types.Product
+        , Network.Google.TagManager.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

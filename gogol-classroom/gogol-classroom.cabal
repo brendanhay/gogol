@@ -1,0 +1,68 @@
+name:                  gogol-classroom
+version:               0.0.1
+synopsis:              Google Classroom SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    Google Classroom API
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Classroom
+        , Network.Google.Classroom.Types
+        , Network.Google.Resource.Classroom.Courses.Aliases.Create
+        , Network.Google.Resource.Classroom.Courses.Aliases.Delete
+        , Network.Google.Resource.Classroom.Courses.Aliases.List
+        , Network.Google.Resource.Classroom.Courses.Create
+        , Network.Google.Resource.Classroom.Courses.Delete
+        , Network.Google.Resource.Classroom.Courses.Get
+        , Network.Google.Resource.Classroom.Courses.List
+        , Network.Google.Resource.Classroom.Courses.Patch
+        , Network.Google.Resource.Classroom.Courses.Students.Create
+        , Network.Google.Resource.Classroom.Courses.Students.Delete
+        , Network.Google.Resource.Classroom.Courses.Students.Get
+        , Network.Google.Resource.Classroom.Courses.Students.List
+        , Network.Google.Resource.Classroom.Courses.Teachers.Create
+        , Network.Google.Resource.Classroom.Courses.Teachers.Delete
+        , Network.Google.Resource.Classroom.Courses.Teachers.Get
+        , Network.Google.Resource.Classroom.Courses.Teachers.List
+        , Network.Google.Resource.Classroom.Courses.Update
+        , Network.Google.Resource.Classroom.Invitations.Accept
+        , Network.Google.Resource.Classroom.Invitations.Create
+        , Network.Google.Resource.Classroom.Invitations.Delete
+        , Network.Google.Resource.Classroom.Invitations.Get
+        , Network.Google.Resource.Classroom.Invitations.List
+        , Network.Google.Resource.Classroom.UserProFiles.Get
+
+    other-modules:
+          Network.Google.Classroom.Types.Product
+        , Network.Google.Classroom.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

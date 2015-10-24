@@ -1,0 +1,97 @@
+name:                  gogol-android-publisher
+version:               0.0.1
+synopsis:              Google Play Developer SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    Lets Android application developers access their Google Play accounts.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.AndroidPublisher
+        , Network.Google.AndroidPublisher.Types
+        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Delete
+        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
+        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Get
+        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
+        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
+        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
+        , Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
+        , Network.Google.Resource.AndroidPublisher.Edits.APKs.List
+        , Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
+        , Network.Google.Resource.AndroidPublisher.Edits.Commit
+        , Network.Google.Resource.AndroidPublisher.Edits.Delete
+        , Network.Google.Resource.AndroidPublisher.Edits.Details.Get
+        , Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
+        , Network.Google.Resource.AndroidPublisher.Edits.Details.Update
+        , Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
+        , Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
+        , Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
+        , Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
+        , Network.Google.Resource.AndroidPublisher.Edits.Get
+        , Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
+        , Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
+        , Network.Google.Resource.AndroidPublisher.Edits.Images.List
+        , Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
+        , Network.Google.Resource.AndroidPublisher.Edits.Insert
+        , Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
+        , Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall
+        , Network.Google.Resource.AndroidPublisher.Edits.Listings.Get
+        , Network.Google.Resource.AndroidPublisher.Edits.Listings.List
+        , Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
+        , Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
+        , Network.Google.Resource.AndroidPublisher.Edits.Testers.Get
+        , Network.Google.Resource.AndroidPublisher.Edits.Testers.Patch
+        , Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
+        , Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
+        , Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
+        , Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
+        , Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
+        , Network.Google.Resource.AndroidPublisher.Edits.Validate
+        , Network.Google.Resource.AndroidPublisher.Entitlements.List
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Get
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.List
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
+        , Network.Google.Resource.AndroidPublisher.InAppProducts.Update
+        , Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
+        , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
+        , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
+        , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
+        , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
+        , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
+
+    other-modules:
+          Network.Google.AndroidPublisher.Types.Product
+        , Network.Google.AndroidPublisher.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

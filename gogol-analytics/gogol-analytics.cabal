@@ -1,0 +1,123 @@
+name:                  gogol-analytics
+version:               0.0.1
+synopsis:              Google Analytics SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    View and manage your Google Analytics data
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v3@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Analytics
+        , Network.Google.Analytics.Types
+        , Network.Google.Resource.Analytics.Data.Ga.Get
+        , Network.Google.Resource.Analytics.Data.Mcf.Get
+        , Network.Google.Resource.Analytics.Data.Realtime.Get
+        , Network.Google.Resource.Analytics.Management.AccountSummaries.List
+        , Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
+        , Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
+        , Network.Google.Resource.Analytics.Management.AccountUserLinks.List
+        , Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
+        , Network.Google.Resource.Analytics.Management.Accounts.List
+        , Network.Google.Resource.Analytics.Management.CustomDataSources.List
+        , Network.Google.Resource.Analytics.Management.CustomDimensions.Get
+        , Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
+        , Network.Google.Resource.Analytics.Management.CustomDimensions.List
+        , Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
+        , Network.Google.Resource.Analytics.Management.CustomDimensions.Update
+        , Network.Google.Resource.Analytics.Management.CustomMetrics.Get
+        , Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
+        , Network.Google.Resource.Analytics.Management.CustomMetrics.List
+        , Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
+        , Network.Google.Resource.Analytics.Management.CustomMetrics.Update
+        , Network.Google.Resource.Analytics.Management.Experiments.Delete
+        , Network.Google.Resource.Analytics.Management.Experiments.Get
+        , Network.Google.Resource.Analytics.Management.Experiments.Insert
+        , Network.Google.Resource.Analytics.Management.Experiments.List
+        , Network.Google.Resource.Analytics.Management.Experiments.Patch
+        , Network.Google.Resource.Analytics.Management.Experiments.Update
+        , Network.Google.Resource.Analytics.Management.Filters.Delete
+        , Network.Google.Resource.Analytics.Management.Filters.Get
+        , Network.Google.Resource.Analytics.Management.Filters.Insert
+        , Network.Google.Resource.Analytics.Management.Filters.List
+        , Network.Google.Resource.Analytics.Management.Filters.Patch
+        , Network.Google.Resource.Analytics.Management.Filters.Update
+        , Network.Google.Resource.Analytics.Management.Goals.Get
+        , Network.Google.Resource.Analytics.Management.Goals.Insert
+        , Network.Google.Resource.Analytics.Management.Goals.List
+        , Network.Google.Resource.Analytics.Management.Goals.Patch
+        , Network.Google.Resource.Analytics.Management.Goals.Update
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
+        , Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
+        , Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
+        , Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
+        , Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
+        , Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
+        , Network.Google.Resource.Analytics.Management.ProFiles.Delete
+        , Network.Google.Resource.Analytics.Management.ProFiles.Get
+        , Network.Google.Resource.Analytics.Management.ProFiles.Insert
+        , Network.Google.Resource.Analytics.Management.ProFiles.List
+        , Network.Google.Resource.Analytics.Management.ProFiles.Patch
+        , Network.Google.Resource.Analytics.Management.ProFiles.Update
+        , Network.Google.Resource.Analytics.Management.Segments.List
+        , Network.Google.Resource.Analytics.Management.UnSampledReports.Get
+        , Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
+        , Network.Google.Resource.Analytics.Management.UnSampledReports.List
+        , Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
+        , Network.Google.Resource.Analytics.Management.Uploads.Get
+        , Network.Google.Resource.Analytics.Management.Uploads.List
+        , Network.Google.Resource.Analytics.Management.Uploads.UploadData
+        , Network.Google.Resource.Analytics.Management.WebProperties.Get
+        , Network.Google.Resource.Analytics.Management.WebProperties.Insert
+        , Network.Google.Resource.Analytics.Management.WebProperties.List
+        , Network.Google.Resource.Analytics.Management.WebProperties.Patch
+        , Network.Google.Resource.Analytics.Management.WebProperties.Update
+        , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
+        , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
+        , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
+        , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
+        , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
+        , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
+        , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
+        , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
+        , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
+        , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
+        , Network.Google.Resource.Analytics.Metadata.Columns.List
+        , Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
+
+    other-modules:
+          Network.Google.Analytics.Types.Product
+        , Network.Google.Analytics.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

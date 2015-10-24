@@ -1,0 +1,6 @@
+resolver:   nightly-2015-10-18
+flags:      {}
+extra-deps:
+  - text-regex-replace-0.1.1.1
+packages:
+  - '.'

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -e
+
+docs=( documentation )
+core=( gogol-core gogol )
+examples=( gogol-examples )
+
+priority_=( compute drive appengine storage oauth2 gmail )
+priority=${priority_[@]/#/gogol-}
+
+library_=( $(ls -d gogol-*) )
+library=( $(echo ${library_[@]} ${priority[@]} | tr ' ' '\n' | sort | uniq -u) )
+
+entry() {
+    local ver="$1"
+    local lib="$2"
+
+cat <<-ENTRY
+    - env: GHCVER=${ver} LIBRARY=${lib}
+      addons: { apt: { packages: [ghc-${ver}], sources: [hvr-ghc] } }
+ENTRY
+}
+
+matrix() {
+    local title="$1"
+    declare -a versions=("${!2}")
+    declare -a selected=("${!3}")
+
+cat <<-TITLE
+
+    # ${title}
+TITLE
+
+    for lib in ${selected[@]}; do
+        for ver in ${versions[@]}; do
+            entry $ver $lib
+        done
+    done
+}
+
+ghc_710=( 7.10.2 )
+
+matrix "Documentation" ghc_710[@] docs[@]
+matrix "Core" ghc_710[@] core[@]
+matrix "Priority" ghc_710[@] priority[@]
+matrix "Remainder" ghc_710[@] library[@]
+matrix "Examples" ghc_710[@] examples[@]

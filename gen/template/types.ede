@@ -1,0 +1,55 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
+{-# LANGUAGE OverloadedStrings  #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+{% include "_include/license.ede" %}
+--
+module {{ moduleName }}
+    (
+    -- * Service Configuration
+      {{ api.url.name }}
+  {% for scope in api.scopes %}
+    {% if scope.first %}
+
+    -- * OAuth Scopes
+    {% endif %}
+    , {{ scope.value.name }}
+  {% endfor %}
+  {% for schema in schemas %}
+    {% case schema.value.type %}
+    {% when "prod" %}
+
+    -- * {{ schema.value.name }}
+    , {{ schema.value.name }}
+    , {{ schema.value.ctor.name }}
+      {% for lens in schema.value.lenses %}
+    , {{ lens.value.name }}
+      {% endfor %}
+    {% when "sum" %}
+
+    -- * {{ schema.value.name }}
+    , {{ schema.value.name }} (..)
+    {% endcase %}
+  {% endfor %}
+    ) where
+
+{% for import in moduleImports %}
+import {{ import.value }}
+{% endfor %}
+
+{% if api.url.help %}
+{{ api.url.help }}
+{% endif %}
+{{ api.url.sig }}
+{{ api.url.decl }}
+{% for scope in api.scopes %}
+
+{% if scope.value.help %}
+{{ scope.value.help }}
+{% endif %}
+{{ scope.value.sig }}
+{{ scope.value.decl }}
+{% endfor %}

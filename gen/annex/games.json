@@ -1,0 +1,23 @@
+{
+    "library": "games",
+    "canonicalName": "Games",
+    "resources": {
+        "players": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "collection": {
+                            "enum": [
+                                "played_with"
+                            ],
+                            "enumDescriptions": [
+                                "Retrieve a list of players you have played a multiplayer game (realtime or turn-based) with recently."
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

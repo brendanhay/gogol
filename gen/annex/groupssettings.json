@@ -1,0 +1,10 @@
+{
+    "library": "groups-settings",
+    "canonicalName": "GroupsSettings",
+    "parameters": {
+        "alt": {
+            "default": "json"
+
+        }
+    }
+}

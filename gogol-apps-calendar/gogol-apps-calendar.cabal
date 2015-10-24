@@ -1,0 +1,82 @@
+name:                  gogol-apps-calendar
+version:               0.0.1
+synopsis:              Google Calendar SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    Lets you manipulate events and other calendar data.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v3@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.AppsCalendar
+        , Network.Google.AppsCalendar.Types
+        , Network.Google.Resource.Calendar.ACL.Delete
+        , Network.Google.Resource.Calendar.ACL.Get
+        , Network.Google.Resource.Calendar.ACL.Insert
+        , Network.Google.Resource.Calendar.ACL.List
+        , Network.Google.Resource.Calendar.ACL.Patch
+        , Network.Google.Resource.Calendar.ACL.Update
+        , Network.Google.Resource.Calendar.ACL.Watch
+        , Network.Google.Resource.Calendar.CalendarList.Delete
+        , Network.Google.Resource.Calendar.CalendarList.Get
+        , Network.Google.Resource.Calendar.CalendarList.Insert
+        , Network.Google.Resource.Calendar.CalendarList.List
+        , Network.Google.Resource.Calendar.CalendarList.Patch
+        , Network.Google.Resource.Calendar.CalendarList.Update
+        , Network.Google.Resource.Calendar.CalendarList.Watch
+        , Network.Google.Resource.Calendar.Calendars.Clear
+        , Network.Google.Resource.Calendar.Calendars.Delete
+        , Network.Google.Resource.Calendar.Calendars.Get
+        , Network.Google.Resource.Calendar.Calendars.Insert
+        , Network.Google.Resource.Calendar.Calendars.Patch
+        , Network.Google.Resource.Calendar.Calendars.Update
+        , Network.Google.Resource.Calendar.Channels.Stop
+        , Network.Google.Resource.Calendar.Colors.Get
+        , Network.Google.Resource.Calendar.Events.Delete
+        , Network.Google.Resource.Calendar.Events.Get
+        , Network.Google.Resource.Calendar.Events.Import
+        , Network.Google.Resource.Calendar.Events.Insert
+        , Network.Google.Resource.Calendar.Events.Instances
+        , Network.Google.Resource.Calendar.Events.List
+        , Network.Google.Resource.Calendar.Events.Move
+        , Network.Google.Resource.Calendar.Events.Patch
+        , Network.Google.Resource.Calendar.Events.QuickAdd
+        , Network.Google.Resource.Calendar.Events.Update
+        , Network.Google.Resource.Calendar.Events.Watch
+        , Network.Google.Resource.Calendar.FreeBusy.Query
+        , Network.Google.Resource.Calendar.Settings.Get
+        , Network.Google.Resource.Calendar.Settings.List
+        , Network.Google.Resource.Calendar.Settings.Watch
+
+    other-modules:
+          Network.Google.AppsCalendar.Types.Product
+        , Network.Google.AppsCalendar.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

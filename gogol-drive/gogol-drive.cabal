@@ -1,0 +1,105 @@
+name:                  gogol-drive
+version:               0.0.1
+synopsis:              Google Drive SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    The API to interact with Drive.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Drive
+        , Network.Google.Drive.Types
+        , Network.Google.Resource.Drive.About.Get
+        , Network.Google.Resource.Drive.Apps.Get
+        , Network.Google.Resource.Drive.Apps.List
+        , Network.Google.Resource.Drive.Changes.Get
+        , Network.Google.Resource.Drive.Changes.List
+        , Network.Google.Resource.Drive.Changes.Watch
+        , Network.Google.Resource.Drive.Channels.Stop
+        , Network.Google.Resource.Drive.Children.Delete
+        , Network.Google.Resource.Drive.Children.Get
+        , Network.Google.Resource.Drive.Children.Insert
+        , Network.Google.Resource.Drive.Children.List
+        , Network.Google.Resource.Drive.Comments.Delete
+        , Network.Google.Resource.Drive.Comments.Get
+        , Network.Google.Resource.Drive.Comments.Insert
+        , Network.Google.Resource.Drive.Comments.List
+        , Network.Google.Resource.Drive.Comments.Patch
+        , Network.Google.Resource.Drive.Comments.Update
+        , Network.Google.Resource.Drive.Files.Copy
+        , Network.Google.Resource.Drive.Files.Delete
+        , Network.Google.Resource.Drive.Files.EmptyTrash
+        , Network.Google.Resource.Drive.Files.GenerateIds
+        , Network.Google.Resource.Drive.Files.Get
+        , Network.Google.Resource.Drive.Files.Insert
+        , Network.Google.Resource.Drive.Files.List
+        , Network.Google.Resource.Drive.Files.Patch
+        , Network.Google.Resource.Drive.Files.Touch
+        , Network.Google.Resource.Drive.Files.Trash
+        , Network.Google.Resource.Drive.Files.Untrash
+        , Network.Google.Resource.Drive.Files.Update
+        , Network.Google.Resource.Drive.Files.Watch
+        , Network.Google.Resource.Drive.Parents.Delete
+        , Network.Google.Resource.Drive.Parents.Get
+        , Network.Google.Resource.Drive.Parents.Insert
+        , Network.Google.Resource.Drive.Parents.List
+        , Network.Google.Resource.Drive.Permissions.Delete
+        , Network.Google.Resource.Drive.Permissions.Get
+        , Network.Google.Resource.Drive.Permissions.GetIdForEmail
+        , Network.Google.Resource.Drive.Permissions.Insert
+        , Network.Google.Resource.Drive.Permissions.List
+        , Network.Google.Resource.Drive.Permissions.Patch
+        , Network.Google.Resource.Drive.Permissions.Update
+        , Network.Google.Resource.Drive.Properties.Delete
+        , Network.Google.Resource.Drive.Properties.Get
+        , Network.Google.Resource.Drive.Properties.Insert
+        , Network.Google.Resource.Drive.Properties.List
+        , Network.Google.Resource.Drive.Properties.Patch
+        , Network.Google.Resource.Drive.Properties.Update
+        , Network.Google.Resource.Drive.Realtime.Get
+        , Network.Google.Resource.Drive.Realtime.Update
+        , Network.Google.Resource.Drive.Replies.Delete
+        , Network.Google.Resource.Drive.Replies.Get
+        , Network.Google.Resource.Drive.Replies.Insert
+        , Network.Google.Resource.Drive.Replies.List
+        , Network.Google.Resource.Drive.Replies.Patch
+        , Network.Google.Resource.Drive.Replies.Update
+        , Network.Google.Resource.Drive.Revisions.Delete
+        , Network.Google.Resource.Drive.Revisions.Get
+        , Network.Google.Resource.Drive.Revisions.List
+        , Network.Google.Resource.Drive.Revisions.Patch
+        , Network.Google.Resource.Drive.Revisions.Update
+
+    other-modules:
+          Network.Google.Drive.Types.Product
+        , Network.Google.Drive.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

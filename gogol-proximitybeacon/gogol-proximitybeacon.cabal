@@ -1,0 +1,60 @@
+name:                  gogol-proximitybeacon
+version:               0.0.1
+synopsis:              Google Proximity Beacon SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    This API provides services to register, manage, index, and search
+    beacons.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1beta1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.ProximityBeacon
+        , Network.Google.ProximityBeacon.Types
+        , Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
+        , Network.Google.Resource.ProximityBeacon.Beacons.Activate
+        , Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
+        , Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
+        , Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
+        , Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
+        , Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
+        , Network.Google.Resource.ProximityBeacon.Beacons.Decommission
+        , Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
+        , Network.Google.Resource.ProximityBeacon.Beacons.Get
+        , Network.Google.Resource.ProximityBeacon.Beacons.List
+        , Network.Google.Resource.ProximityBeacon.Beacons.Register
+        , Network.Google.Resource.ProximityBeacon.Beacons.Update
+        , Network.Google.Resource.ProximityBeacon.Namespaces.List
+
+    other-modules:
+          Network.Google.ProximityBeacon.Types.Product
+        , Network.Google.ProximityBeacon.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

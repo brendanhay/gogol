@@ -1,0 +1,89 @@
+name:                  gogol-genomics
+version:               0.0.1
+synopsis:              Google Genomics SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    An API to store, process, explore, and share DNA sequence reads,
+    reference-based alignments, and variant calls.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Genomics
+        , Network.Google.Genomics.Types
+        , Network.Google.Resource.Genomics.CallSets.Create
+        , Network.Google.Resource.Genomics.CallSets.Delete
+        , Network.Google.Resource.Genomics.CallSets.Get
+        , Network.Google.Resource.Genomics.CallSets.Patch
+        , Network.Google.Resource.Genomics.CallSets.Search
+        , Network.Google.Resource.Genomics.DataSets.Create
+        , Network.Google.Resource.Genomics.DataSets.Delete
+        , Network.Google.Resource.Genomics.DataSets.Get
+        , Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
+        , Network.Google.Resource.Genomics.DataSets.List
+        , Network.Google.Resource.Genomics.DataSets.Patch
+        , Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
+        , Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
+        , Network.Google.Resource.Genomics.DataSets.Undelete
+        , Network.Google.Resource.Genomics.Operations.Cancel
+        , Network.Google.Resource.Genomics.Operations.Delete
+        , Network.Google.Resource.Genomics.Operations.Get
+        , Network.Google.Resource.Genomics.Operations.List
+        , Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
+        , Network.Google.Resource.Genomics.ReadGroupSets.Delete
+        , Network.Google.Resource.Genomics.ReadGroupSets.Export
+        , Network.Google.Resource.Genomics.ReadGroupSets.Get
+        , Network.Google.Resource.Genomics.ReadGroupSets.Import
+        , Network.Google.Resource.Genomics.ReadGroupSets.Patch
+        , Network.Google.Resource.Genomics.ReadGroupSets.Search
+        , Network.Google.Resource.Genomics.Reads.Search
+        , Network.Google.Resource.Genomics.References.Bases.List
+        , Network.Google.Resource.Genomics.References.Get
+        , Network.Google.Resource.Genomics.References.Search
+        , Network.Google.Resource.Genomics.Referencesets.Get
+        , Network.Google.Resource.Genomics.Referencesets.Search
+        , Network.Google.Resource.Genomics.VariantSets.Create
+        , Network.Google.Resource.Genomics.VariantSets.Delete
+        , Network.Google.Resource.Genomics.VariantSets.Export
+        , Network.Google.Resource.Genomics.VariantSets.Get
+        , Network.Google.Resource.Genomics.VariantSets.Patch
+        , Network.Google.Resource.Genomics.VariantSets.Search
+        , Network.Google.Resource.Genomics.Variants.Create
+        , Network.Google.Resource.Genomics.Variants.Delete
+        , Network.Google.Resource.Genomics.Variants.Get
+        , Network.Google.Resource.Genomics.Variants.Import
+        , Network.Google.Resource.Genomics.Variants.Patch
+        , Network.Google.Resource.Genomics.Variants.Search
+
+    other-modules:
+          Network.Google.Genomics.Types.Product
+        , Network.Google.Genomics.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

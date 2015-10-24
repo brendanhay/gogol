@@ -1,0 +1,58 @@
+name:                  gogol-storage-transfer
+version:               0.0.1
+synopsis:              Google Storage Transfer SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    Transfers data from external data sources to a Google Cloud Storage
+    bucket or between Google Cloud Storage buckets.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
+        , Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
+        , Network.Google.Resource.StorageTransfer.TransferJobs.Create
+        , Network.Google.Resource.StorageTransfer.TransferJobs.Get
+        , Network.Google.Resource.StorageTransfer.TransferJobs.List
+        , Network.Google.Resource.StorageTransfer.TransferJobs.Patch
+        , Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
+        , Network.Google.Resource.StorageTransfer.TransferOperations.Delete
+        , Network.Google.Resource.StorageTransfer.TransferOperations.Get
+        , Network.Google.Resource.StorageTransfer.TransferOperations.List
+        , Network.Google.Resource.StorageTransfer.TransferOperations.Pause
+        , Network.Google.Resource.StorageTransfer.TransferOperations.Resume
+        , Network.Google.StorageTransfer
+        , Network.Google.StorageTransfer.Types
+
+    other-modules:
+          Network.Google.StorageTransfer.Types.Product
+        , Network.Google.StorageTransfer.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

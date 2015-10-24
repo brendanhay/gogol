@@ -1,0 +1,22 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
+{-# LANGUAGE OverloadedStrings  #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+{% include "_include/license.ede" %}
+--
+module {{ moduleName }} where
+
+{% for import in moduleImports %}
+import {{ import.value }}
+{% endfor %}
+{% for schema in schemas %}
+  {% case schema.value.type %}
+  {% when "sum" %}
+
+  {% include "_include/sum.ede" with type = schema.value %}
+  {% endcase %}
+{% endfor %}

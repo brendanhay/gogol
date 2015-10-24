@@ -1,0 +1,78 @@
+name:                  gogol-fusiontables
+version:               0.0.1
+synopsis:              Google Fusion Tables SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    API for working with Fusion Tables data.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.FusionTables
+        , Network.Google.FusionTables.Types
+        , Network.Google.Resource.FusionTables.Column.Delete
+        , Network.Google.Resource.FusionTables.Column.Get
+        , Network.Google.Resource.FusionTables.Column.Insert
+        , Network.Google.Resource.FusionTables.Column.List
+        , Network.Google.Resource.FusionTables.Column.Patch
+        , Network.Google.Resource.FusionTables.Column.Update
+        , Network.Google.Resource.FusionTables.Query.SQL
+        , Network.Google.Resource.FusionTables.Query.SQLGet
+        , Network.Google.Resource.FusionTables.Style.Delete
+        , Network.Google.Resource.FusionTables.Style.Get
+        , Network.Google.Resource.FusionTables.Style.Insert
+        , Network.Google.Resource.FusionTables.Style.List
+        , Network.Google.Resource.FusionTables.Style.Patch
+        , Network.Google.Resource.FusionTables.Style.Update
+        , Network.Google.Resource.FusionTables.Table.Copy
+        , Network.Google.Resource.FusionTables.Table.Delete
+        , Network.Google.Resource.FusionTables.Table.Get
+        , Network.Google.Resource.FusionTables.Table.ImportRows
+        , Network.Google.Resource.FusionTables.Table.ImportTable
+        , Network.Google.Resource.FusionTables.Table.Insert
+        , Network.Google.Resource.FusionTables.Table.List
+        , Network.Google.Resource.FusionTables.Table.Patch
+        , Network.Google.Resource.FusionTables.Table.ReplaceRows
+        , Network.Google.Resource.FusionTables.Table.Update
+        , Network.Google.Resource.FusionTables.Task.Delete
+        , Network.Google.Resource.FusionTables.Task.Get
+        , Network.Google.Resource.FusionTables.Task.List
+        , Network.Google.Resource.FusionTables.Template.Delete
+        , Network.Google.Resource.FusionTables.Template.Get
+        , Network.Google.Resource.FusionTables.Template.Insert
+        , Network.Google.Resource.FusionTables.Template.List
+        , Network.Google.Resource.FusionTables.Template.Patch
+        , Network.Google.Resource.FusionTables.Template.Update
+
+    other-modules:
+          Network.Google.FusionTables.Types.Product
+        , Network.Google.FusionTables.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

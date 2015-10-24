@@ -1,0 +1,66 @@
+name:                  gogol-plus-domains
+version:               0.0.1
+synopsis:              Google + Domains SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    The Google+ API enables developers to build on top of the Google+
+    platform.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.PlusDomains
+        , Network.Google.PlusDomains.Types
+        , Network.Google.Resource.PlusDomains.Activities.Get
+        , Network.Google.Resource.PlusDomains.Activities.Insert
+        , Network.Google.Resource.PlusDomains.Activities.List
+        , Network.Google.Resource.PlusDomains.Audiences.List
+        , Network.Google.Resource.PlusDomains.Circles.AddPeople
+        , Network.Google.Resource.PlusDomains.Circles.Get
+        , Network.Google.Resource.PlusDomains.Circles.Insert
+        , Network.Google.Resource.PlusDomains.Circles.List
+        , Network.Google.Resource.PlusDomains.Circles.Patch
+        , Network.Google.Resource.PlusDomains.Circles.Remove
+        , Network.Google.Resource.PlusDomains.Circles.RemovePeople
+        , Network.Google.Resource.PlusDomains.Circles.Update
+        , Network.Google.Resource.PlusDomains.Comments.Get
+        , Network.Google.Resource.PlusDomains.Comments.Insert
+        , Network.Google.Resource.PlusDomains.Comments.List
+        , Network.Google.Resource.PlusDomains.Media.Insert
+        , Network.Google.Resource.PlusDomains.People.Get
+        , Network.Google.Resource.PlusDomains.People.List
+        , Network.Google.Resource.PlusDomains.People.ListByActivity
+        , Network.Google.Resource.PlusDomains.People.ListByCircle
+
+    other-modules:
+          Network.Google.PlusDomains.Types.Product
+        , Network.Google.PlusDomains.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

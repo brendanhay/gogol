@@ -1,0 +1,145 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+
+-- |
+-- Module      : Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- Generate an AdSense report based on the saved report ID sent in the
+-- query parameters.
+--
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.reports.saved.generate@.
+module Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
+    (
+    -- * REST Resource
+      AccountsReportsSavedGenerateResource
+
+    -- * Creating a Request
+    , accountsReportsSavedGenerate
+    , AccountsReportsSavedGenerate
+
+    -- * Request Lenses
+    , arsgLocale
+    , arsgSavedReportId
+    , arsgAccountId
+    , arsgStartIndex
+    , arsgMaxResults
+    ) where
+
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
+
+-- | A resource alias for @adsense.accounts.reports.saved.generate@ method which the
+-- 'AccountsReportsSavedGenerate' request conforms to.
+type AccountsReportsSavedGenerateResource =
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               Capture "savedReportId" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "startIndex" (Textual Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] AdsenseReportsGenerateResponse
+
+-- | Generate an AdSense report based on the saved report ID sent in the
+-- query parameters.
+--
+-- /See:/ 'accountsReportsSavedGenerate' smart constructor.
+data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate
+    { _arsgLocale        :: !(Maybe Text)
+    , _arsgSavedReportId :: !Text
+    , _arsgAccountId     :: !Text
+    , _arsgStartIndex    :: !(Maybe (Textual Int32))
+    , _arsgMaxResults    :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountsReportsSavedGenerate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'arsgLocale'
+--
+-- * 'arsgSavedReportId'
+--
+-- * 'arsgAccountId'
+--
+-- * 'arsgStartIndex'
+--
+-- * 'arsgMaxResults'
+accountsReportsSavedGenerate
+    :: Text -- ^ 'arsgSavedReportId'
+    -> Text -- ^ 'arsgAccountId'
+    -> AccountsReportsSavedGenerate
+accountsReportsSavedGenerate pArsgSavedReportId_ pArsgAccountId_ =
+    AccountsReportsSavedGenerate
+    { _arsgLocale = Nothing
+    , _arsgSavedReportId = pArsgSavedReportId_
+    , _arsgAccountId = pArsgAccountId_
+    , _arsgStartIndex = Nothing
+    , _arsgMaxResults = Nothing
+    }
+
+-- | Optional locale to use for translating report output to a local
+-- language. Defaults to \"en_US\" if not specified.
+arsgLocale :: Lens' AccountsReportsSavedGenerate (Maybe Text)
+arsgLocale
+  = lens _arsgLocale (\ s a -> s{_arsgLocale = a})
+
+-- | The saved report to retrieve.
+arsgSavedReportId :: Lens' AccountsReportsSavedGenerate Text
+arsgSavedReportId
+  = lens _arsgSavedReportId
+      (\ s a -> s{_arsgSavedReportId = a})
+
+-- | Account to which the saved reports belong.
+arsgAccountId :: Lens' AccountsReportsSavedGenerate Text
+arsgAccountId
+  = lens _arsgAccountId
+      (\ s a -> s{_arsgAccountId = a})
+
+-- | Index of the first row of report data to return.
+arsgStartIndex :: Lens' AccountsReportsSavedGenerate (Maybe Int32)
+arsgStartIndex
+  = lens _arsgStartIndex
+      (\ s a -> s{_arsgStartIndex = a})
+      . mapping _Coerce
+
+-- | The maximum number of rows of report data to return.
+arsgMaxResults :: Lens' AccountsReportsSavedGenerate (Maybe Int32)
+arsgMaxResults
+  = lens _arsgMaxResults
+      (\ s a -> s{_arsgMaxResults = a})
+      . mapping _Coerce
+
+instance GoogleRequest AccountsReportsSavedGenerate
+         where
+        type Rs AccountsReportsSavedGenerate =
+             AdsenseReportsGenerateResponse
+        requestClient AccountsReportsSavedGenerate{..}
+          = go _arsgAccountId _arsgSavedReportId _arsgLocale
+              _arsgStartIndex
+              _arsgMaxResults
+              (Just AltJSON)
+              adSenseService
+          where go
+                  = buildClient
+                      (Proxy :: Proxy AccountsReportsSavedGenerateResource)
+                      mempty
