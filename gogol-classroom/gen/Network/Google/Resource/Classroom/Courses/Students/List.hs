@@ -65,7 +65,7 @@ type CoursesStudentsListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (JSONText Int32) :>
+                           QueryParam "pageSize" (Textual Int32) :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListStudentsResponse
@@ -85,7 +85,7 @@ data CoursesStudentsList = CoursesStudentsList
     , _cslUploadType     :: !(Maybe Text)
     , _cslBearerToken    :: !(Maybe Text)
     , _cslPageToken      :: !(Maybe Text)
-    , _cslPageSize       :: !(Maybe (JSONText Int32))
+    , _cslPageSize       :: !(Maybe (Textual Int32))
     , _cslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

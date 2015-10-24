@@ -53,10 +53,10 @@ type ChangesWatchResource =
          "changes" :>
            "watch" :>
              QueryParam "includeSubscribed" Bool :>
-               QueryParam "startChangeId" (JSONText Int64) :>
+               QueryParam "startChangeId" (Textual Int64) :>
                  QueryParam "spaces" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "includeDeleted" Bool :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Channel :> Post '[JSON] Channel
@@ -66,11 +66,11 @@ type ChangesWatchResource =
 -- /See:/ 'changesWatch' smart constructor.
 data ChangesWatch = ChangesWatch
     { _cwIncludeSubscribed :: !Bool
-    , _cwStartChangeId     :: !(Maybe (JSONText Int64))
+    , _cwStartChangeId     :: !(Maybe (Textual Int64))
     , _cwPayload           :: !Channel
     , _cwSpaces            :: !(Maybe Text)
     , _cwPageToken         :: !(Maybe Text)
-    , _cwMaxResults        :: !(JSONText Int32)
+    , _cwMaxResults        :: !(Textual Int32)
     , _cwIncludeDeleted    :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 

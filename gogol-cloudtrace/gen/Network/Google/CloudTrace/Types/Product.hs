@@ -119,8 +119,8 @@ data TraceSpan = TraceSpan
     , _tsName         :: !(Maybe Text)
     , _tsEndTime      :: !(Maybe Text)
     , _tsLabels       :: !(Maybe TraceSpanLabels)
-    , _tsParentSpanId :: !(Maybe (JSONText Word64))
-    , _tsSpanId       :: !(Maybe (JSONText Word64))
+    , _tsParentSpanId :: !(Maybe (Textual Word64))
+    , _tsSpanId       :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TraceSpan' with the minimum fields required to make a request.

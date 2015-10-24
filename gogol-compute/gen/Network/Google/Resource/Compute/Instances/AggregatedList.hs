@@ -53,7 +53,7 @@ type InstancesAggregatedListResource =
                "instances" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] InstanceAggregatedList
 
@@ -64,7 +64,7 @@ data InstancesAggregatedList = InstancesAggregatedList
     { _ialProject    :: !Text
     , _ialFilter     :: !(Maybe Text)
     , _ialPageToken  :: !(Maybe Text)
-    , _ialMaxResults :: !(JSONText Word32)
+    , _ialMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesAggregatedList' with the minimum fields required to make a request.

@@ -47,9 +47,9 @@ import           Network.Google.ShoppingContent.Types
 type AccountsPatchResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "accounts" :>
-             Capture "accountId" (JSONText Word64) :>
+             Capture "accountId" (Textual Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Account :> Patch '[JSON] Account
@@ -58,9 +58,9 @@ type AccountsPatchResource =
 --
 -- /See:/ 'accountsPatch' smart constructor.
 data AccountsPatch = AccountsPatch
-    { _apMerchantId :: !(JSONText Word64)
+    { _apMerchantId :: !(Textual Word64)
     , _apPayload    :: !Account
-    , _apAccountId  :: !(JSONText Word64)
+    , _apAccountId  :: !(Textual Word64)
     , _apDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

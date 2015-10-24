@@ -56,7 +56,7 @@ type InstanceGroupsListResource =
                  "instanceGroups" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] InstanceGroupList
 
@@ -69,7 +69,7 @@ data InstanceGroupsList = InstanceGroupsList
     , _iglZone       :: !Text
     , _iglFilter     :: !(Maybe Text)
     , _iglPageToken  :: !(Maybe Text)
-    , _iglMaxResults :: !(JSONText Word32)
+    , _iglMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsList' with the minimum fields required to make a request.

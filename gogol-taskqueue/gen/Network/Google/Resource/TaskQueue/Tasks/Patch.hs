@@ -55,7 +55,7 @@ type TasksPatchResource =
                Capture "taskqueue" Text :>
                  "tasks" :>
                    Capture "task" Text :>
-                     QueryParam "newLeaseSeconds" (JSONText Int32) :>
+                     QueryParam "newLeaseSeconds" (Textual Int32) :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Task :> Patch '[JSON] Task
 
@@ -68,7 +68,7 @@ data TasksPatch = TasksPatch
     , _tpProject         :: !Text
     , _tpPayload         :: !Task
     , _tpTask            :: !Text
-    , _tpNewLeaseSeconds :: !(JSONText Int32)
+    , _tpNewLeaseSeconds :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksPatch' with the minimum fields required to make a request.

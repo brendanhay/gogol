@@ -50,7 +50,7 @@ type ScoresSubmitResource =
          "leaderboards" :>
            Capture "leaderboardId" Text :>
              "scores" :>
-               QueryParam "score" (JSONText Int64) :>
+               QueryParam "score" (Textual Int64) :>
                  QueryParam "scoreTag" Text :>
                    QueryParam "language" Text :>
                      QueryParam "alt" AltJSON :>
@@ -61,7 +61,7 @@ type ScoresSubmitResource =
 -- /See:/ 'scoresSubmit' smart constructor.
 data ScoresSubmit = ScoresSubmit
     { _ssScoreTag      :: !(Maybe Text)
-    , _ssScore         :: !(JSONText Int64)
+    , _ssScore         :: !(Textual Int64)
     , _ssLeaderboardId :: !Text
     , _ssLanguage      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)

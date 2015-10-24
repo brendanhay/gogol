@@ -56,7 +56,7 @@ type MachineTypesListResource =
                  "machineTypes" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] MachineTypeList
 
@@ -69,7 +69,7 @@ data MachineTypesList = MachineTypesList
     , _mtlZone       :: !Text
     , _mtlFilter     :: !(Maybe Text)
     , _mtlPageToken  :: !(Maybe Text)
-    , _mtlMaxResults :: !(JSONText Word32)
+    , _mtlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesList' with the minimum fields required to make a request.

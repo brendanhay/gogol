@@ -70,9 +70,8 @@ type ReportsGetResource =
                              QueryParams "linkId" Text :>
                                QueryParams "orderId" Text :>
                                  QueryParams "publisherId" Text :>
-                                   QueryParam "startIndex" (JSONText Word32) :>
-                                     QueryParam "maxResults" (JSONText Word32)
-                                       :>
+                                   QueryParam "startIndex" (Textual Word32) :>
+                                     QueryParam "maxResults" (Textual Word32) :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] Report
 
@@ -92,8 +91,8 @@ data ReportsGet = ReportsGet
     , _rgOrderId         :: !(Maybe [Text])
     , _rgPublisherId     :: !(Maybe [Text])
     , _rgReportType      :: !ReportsGetReportType
-    , _rgStartIndex      :: !(Maybe (JSONText Word32))
-    , _rgMaxResults      :: !(Maybe (JSONText Word32))
+    , _rgStartIndex      :: !(Maybe (Textual Word32))
+    , _rgMaxResults      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.

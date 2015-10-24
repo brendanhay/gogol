@@ -46,9 +46,9 @@ type OperatingSystemVersionsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "operatingSystemVersions" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] OperatingSystemVersion
 
@@ -56,8 +56,8 @@ type OperatingSystemVersionsGetResource =
 --
 -- /See:/ 'operatingSystemVersionsGet' smart constructor.
 data OperatingSystemVersionsGet = OperatingSystemVersionsGet
-    { _osvgProFileId :: !(JSONText Int64)
-    , _osvgId        :: !(JSONText Int64)
+    { _osvgProFileId :: !(Textual Int64)
+    , _osvgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersionsGet' with the minimum fields required to make a request.

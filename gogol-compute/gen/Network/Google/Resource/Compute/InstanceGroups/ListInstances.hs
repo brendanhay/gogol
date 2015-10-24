@@ -59,7 +59,7 @@ type InstanceGroupsListInstancesResource =
                      "listInstances" :>
                        QueryParam "filter" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON]
                                  InstanceGroupsListInstancesRequest
@@ -75,7 +75,7 @@ data InstanceGroupsListInstances' = InstanceGroupsListInstances'
     , _igliFilter        :: !(Maybe Text)
     , _igliPageToken     :: !(Maybe Text)
     , _igliInstanceGroup :: !Text
-    , _igliMaxResults    :: !(JSONText Word32)
+    , _igliMaxResults    :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstances'' with the minimum fields required to make a request.

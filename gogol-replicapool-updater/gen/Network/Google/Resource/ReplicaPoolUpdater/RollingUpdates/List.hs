@@ -56,7 +56,7 @@ type RollingUpdatesListResource =
                  "rollingUpdates" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] RollingUpdateList
 
@@ -69,7 +69,7 @@ data RollingUpdatesList = RollingUpdatesList
     , _rulZone       :: !Text
     , _rulFilter     :: !(Maybe Text)
     , _rulPageToken  :: !(Maybe Text)
-    , _rulMaxResults :: !(JSONText Word32)
+    , _rulMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesList' with the minimum fields required to make a request.

@@ -60,26 +60,26 @@ type SitesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "sites" :>
                QueryParam "unmappedSite" Bool :>
-                 QueryParams "campaignIds" (JSONText Int64) :>
+                 QueryParams "campaignIds" (Textual Int64) :>
                    QueryParam "searchString" Text :>
                      QueryParam "acceptsInterstitialPlacements" Bool :>
                        QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                         QueryParams "ids" (JSONText Int64) :>
-                           QueryParams "directorySiteIds" (JSONText Int64) :>
+                         QueryParams "ids" (Textual Int64) :>
+                           QueryParams "directorySiteIds" (Textual Int64) :>
                              QueryParam "sortOrder" SitesListSortOrder :>
                                QueryParam "pageToken" Text :>
                                  QueryParam "sortField" SitesListSortField :>
-                                   QueryParam "subaccountId" (JSONText Int64) :>
+                                   QueryParam "subaccountId" (Textual Int64) :>
                                      QueryParam "acceptsInStreamVideoPlacements"
                                        Bool
                                        :>
                                        QueryParam "approved" Bool :>
                                          QueryParam "adWordsSite" Bool :>
                                            QueryParam "maxResults"
-                                             (JSONText Int32)
+                                             (Textual Int32)
                                              :>
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] SitesListResponse
@@ -89,21 +89,21 @@ type SitesListResource =
 -- /See:/ 'sitesList' smart constructor.
 data SitesList = SitesList
     { _sitUnmAppedSite                   :: !(Maybe Bool)
-    , _sitCampaignIds                    :: !(Maybe [JSONText Int64])
+    , _sitCampaignIds                    :: !(Maybe [Textual Int64])
     , _sitSearchString                   :: !(Maybe Text)
     , _sitAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _sitAcceptsPublisherPaidPlacements :: !(Maybe Bool)
-    , _sitIds                            :: !(Maybe [JSONText Int64])
-    , _sitProFileId                      :: !(JSONText Int64)
-    , _sitDirectorySiteIds               :: !(Maybe [JSONText Int64])
+    , _sitIds                            :: !(Maybe [Textual Int64])
+    , _sitProFileId                      :: !(Textual Int64)
+    , _sitDirectorySiteIds               :: !(Maybe [Textual Int64])
     , _sitSortOrder                      :: !(Maybe SitesListSortOrder)
     , _sitPageToken                      :: !(Maybe Text)
     , _sitSortField                      :: !(Maybe SitesListSortField)
-    , _sitSubAccountId                   :: !(Maybe (JSONText Int64))
+    , _sitSubAccountId                   :: !(Maybe (Textual Int64))
     , _sitAcceptsInStreamVideoPlacements :: !(Maybe Bool)
     , _sitApproved                       :: !(Maybe Bool)
     , _sitAdWordsSite                    :: !(Maybe Bool)
-    , _sitMaxResults                     :: !(Maybe (JSONText Int32))
+    , _sitMaxResults                     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesList' with the minimum fields required to make a request.

@@ -46,7 +46,7 @@ type SizesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "sizes" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Size :> Post '[JSON] Size
@@ -55,7 +55,7 @@ type SizesInsertResource =
 --
 -- /See:/ 'sizesInsert' smart constructor.
 data SizesInsert = SizesInsert
-    { _siProFileId :: !(JSONText Int64)
+    { _siProFileId :: !(Textual Int64)
     , _siPayload   :: !Size
     } deriving (Eq,Show,Data,Typeable,Generic)
 

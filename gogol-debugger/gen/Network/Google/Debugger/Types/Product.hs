@@ -733,7 +733,7 @@ instance ToJSON GetBreakpointResponse where
 -- /See:/ 'variable' smart constructor.
 data Variable = Variable
     { _vStatus        :: !(Maybe StatusMessage)
-    , _vVarTableIndex :: !(Maybe (JSONText Int32))
+    , _vVarTableIndex :: !(Maybe (Textual Int32))
     , _vMembers       :: !(Maybe [Variable])
     , _vValue         :: !(Maybe Text)
     , _vName          :: !(Maybe Text)
@@ -1122,7 +1122,7 @@ instance ToJSON GitSourceContext where
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation = SourceLocation
     { _slPath :: !(Maybe Text)
-    , _slLine :: !(Maybe (JSONText Int32))
+    , _slLine :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.

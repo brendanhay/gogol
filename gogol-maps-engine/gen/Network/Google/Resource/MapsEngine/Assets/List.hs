@@ -67,7 +67,7 @@ type AssetsListResource =
                          QueryParam "projectId" Text :>
                            QueryParam "type" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -87,7 +87,7 @@ data AssetsList = AssetsList
     , _alProjectId      :: !(Maybe Text)
     , _alType           :: !(Maybe Text)
     , _alSearch         :: !(Maybe Text)
-    , _alMaxResults     :: !(Maybe (JSONText Word32))
+    , _alMaxResults     :: !(Maybe (Textual Word32))
     , _alTags           :: !(Maybe Text)
     , _alCreatedBefore  :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -51,7 +51,7 @@ type UsersSessionsUpdateResource =
            Capture "userId" Text :>
              "sessions" :>
                Capture "sessionId" Text :>
-                 QueryParam "currentTimeMillis" (JSONText Int64) :>
+                 QueryParam "currentTimeMillis" (Textual Int64) :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Session :> Put '[JSON] Session
 
@@ -61,7 +61,7 @@ type UsersSessionsUpdateResource =
 data UsersSessionsUpdate = UsersSessionsUpdate
     { _usuPayload           :: !Session
     , _usuUserId            :: !Text
-    , _usuCurrentTimeMillis :: !(Maybe (JSONText Int64))
+    , _usuCurrentTimeMillis :: !(Maybe (Textual Int64))
     , _usuSessionId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

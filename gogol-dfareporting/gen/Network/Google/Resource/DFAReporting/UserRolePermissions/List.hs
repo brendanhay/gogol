@@ -46,9 +46,9 @@ type UserRolePermissionsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "userRolePermissions" :>
-               QueryParams "ids" (JSONText Int64) :>
+               QueryParams "ids" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] UserRolePermissionsListResponse
 
@@ -56,8 +56,8 @@ type UserRolePermissionsListResource =
 --
 -- /See:/ 'userRolePermissionsList' smart constructor.
 data UserRolePermissionsList = UserRolePermissionsList
-    { _urplIds       :: !(Maybe [JSONText Int64])
-    , _urplProFileId :: !(JSONText Int64)
+    { _urplIds       :: !(Maybe [Textual Int64])
+    , _urplProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionsList' with the minimum fields required to make a request.

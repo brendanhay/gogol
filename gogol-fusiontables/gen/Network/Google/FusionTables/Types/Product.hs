@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'columnList' smart constructor.
 data ColumnList = ColumnList
-    { _clTotalItems    :: !(Maybe (JSONText Int32))
+    { _clTotalItems    :: !(Maybe (Textual Int32))
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [Column])
@@ -236,8 +236,8 @@ instance ToJSON StyleFunction where
 --
 -- /See:/ 'columnBaseColumn' smart constructor.
 data ColumnBaseColumn = ColumnBaseColumn
-    { _cbcTableIndex :: !(Maybe (JSONText Int32))
-    , _cbcColumnId   :: !(Maybe (JSONText Int32))
+    { _cbcTableIndex :: !(Maybe (Textual Int32))
+    , _cbcColumnId   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnBaseColumn' with the minimum fields required to make a request.
@@ -350,7 +350,7 @@ instance ToJSON SQLresponse where
 -- /See:/ 'styleFunctionGradientColorsItem' smart constructor.
 data StyleFunctionGradientColorsItem = StyleFunctionGradientColorsItem
     { _sfgciColor   :: !(Maybe Text)
-    , _sfgciOpacity :: !(Maybe (JSONText Double))
+    , _sfgciOpacity :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleFunctionGradientColorsItem' with the minimum fields required to make a request.
@@ -398,7 +398,7 @@ instance ToJSON StyleFunctionGradientColorsItem where
 --
 -- /See:/ 'styleSettingList' smart constructor.
 data StyleSettingList = StyleSettingList
-    { _sslTotalItems    :: !(Maybe (JSONText Int32))
+    { _sslTotalItems    :: !(Maybe (Textual Int32))
     , _sslNextPageToken :: !(Maybe Text)
     , _sslKind          :: !Text
     , _sslItems         :: !(Maybe [StyleSetting])
@@ -474,12 +474,12 @@ instance ToJSON StyleSettingList where
 --
 -- /See:/ 'bucket' smart constructor.
 data Bucket = Bucket
-    { _bMax     :: !(Maybe (JSONText Double))
+    { _bMax     :: !(Maybe (Textual Double))
     , _bColor   :: !(Maybe Text)
-    , _bWeight  :: !(Maybe (JSONText Int32))
+    , _bWeight  :: !(Maybe (Textual Int32))
     , _bIcon    :: !(Maybe Text)
-    , _bOpacity :: !(Maybe (JSONText Double))
-    , _bMin     :: !(Maybe (JSONText Double))
+    , _bOpacity :: !(Maybe (Textual Double))
+    , _bMin     :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
@@ -566,7 +566,7 @@ instance ToJSON Bucket where
 --
 -- /See:/ 'line' smart constructor.
 data Line = Line
-    { _lCoordinates :: !(Maybe [[JSONText Double]])
+    { _lCoordinates :: !(Maybe [[Textual Double]])
     , _lType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -621,7 +621,7 @@ data StyleSetting = StyleSetting
     , _ssMarkerOptions   :: !(Maybe PointStyle)
     , _ssKind            :: !Text
     , _ssName            :: !(Maybe Text)
-    , _ssStyleId         :: !(Maybe (JSONText Int32))
+    , _ssStyleId         :: !(Maybe (Textual Int32))
     , _ssTableId         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -723,7 +723,7 @@ instance ToJSON StyleSetting where
 --
 -- /See:/ 'point' smart constructor.
 data Point = Point
-    { _pCoordinates :: !(Maybe [JSONText Double])
+    { _pCoordinates :: !(Maybe [Textual Double])
     , _pType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -772,7 +772,7 @@ instance ToJSON Point where
 --
 -- /See:/ 'polygon' smart constructor.
 data Polygon = Polygon
-    { _polCoordinates :: !(Maybe [[[JSONText Double]]])
+    { _polCoordinates :: !(Maybe [[[Textual Double]]])
     , _polType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -822,7 +822,7 @@ instance ToJSON Polygon where
 --
 -- /See:/ 'taskList' smart constructor.
 data TaskList = TaskList
-    { _tTotalItems    :: !(Maybe (JSONText Int32))
+    { _tTotalItems    :: !(Maybe (Textual Int32))
     , _tNextPageToken :: !(Maybe Text)
     , _tKind          :: !Text
     , _tItems         :: !(Maybe [Task])
@@ -952,7 +952,7 @@ instance ToJSON Geometry where
 --
 -- /See:/ 'templateList' smart constructor.
 data TemplateList = TemplateList
-    { _temTotalItems    :: !(Maybe (JSONText Int32))
+    { _temTotalItems    :: !(Maybe (Textual Int32))
     , _temNextPageToken :: !(Maybe Text)
     , _temKind          :: !Text
     , _temItems         :: !(Maybe [Template])
@@ -1028,7 +1028,7 @@ instance ToJSON TemplateList where
 -- /See:/ 'import'' smart constructor.
 data Import = Import
     { _iKind            :: !Text
-    , _iNumRowsReceived :: !(Maybe (JSONText Int64))
+    , _iNumRowsReceived :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Import' with the minimum fields required to make a request.
@@ -1079,7 +1079,7 @@ instance ToJSON Import where
 -- /See:/ 'task' smart constructor.
 data Task = Task
     { _tasProgress :: !(Maybe Text)
-    , _tasTaskId   :: !(Maybe (JSONText Int64))
+    , _tasTaskId   :: !(Maybe (Textual Int64))
     , _tasKind     :: !Text
     , _tasType     :: !(Maybe Text)
     , _tasStarted  :: !(Maybe Bool)
@@ -1158,7 +1158,7 @@ instance ToJSON Task where
 -- /See:/ 'template' smart constructor.
 data Template = Template
     { _ttAutomaticColumnNames :: !(Maybe [Text])
-    , _ttTemplateId           :: !(Maybe (JSONText Int32))
+    , _ttTemplateId           :: !(Maybe (Textual Int32))
     , _ttKind                 :: !Text
     , _ttBody                 :: !(Maybe Text)
     , _ttName                 :: !(Maybe Text)
@@ -1307,9 +1307,9 @@ data PolygonStyle = PolygonStyle
     { _psFillColorStyler    :: !(Maybe StyleFunction)
     , _psFillColor          :: !(Maybe Text)
     , _psStrokeColorStyler  :: !(Maybe StyleFunction)
-    , _psStrokeWeight       :: !(Maybe (JSONText Int32))
-    , _psStrokeOpacity      :: !(Maybe (JSONText Double))
-    , _psFillOpacity        :: !(Maybe (JSONText Double))
+    , _psStrokeWeight       :: !(Maybe (Textual Int32))
+    , _psStrokeOpacity      :: !(Maybe (Textual Double))
+    , _psFillOpacity        :: !(Maybe (Textual Double))
     , _psStrokeWeightStyler :: !(Maybe StyleFunction)
     , _psStrokeColor        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1432,8 +1432,8 @@ instance ToJSON PolygonStyle where
 --
 -- /See:/ 'styleFunctionGradient' smart constructor.
 data StyleFunctionGradient = StyleFunctionGradient
-    { _sfgMax    :: !(Maybe (JSONText Double))
-    , _sfgMin    :: !(Maybe (JSONText Double))
+    { _sfgMax    :: !(Maybe (Textual Double))
+    , _sfgMin    :: !(Maybe (Textual Double))
     , _sfgColors :: !(Maybe [StyleFunctionGradientColorsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1503,7 +1503,7 @@ data Column = Column
     , _cName                 :: !(Maybe Text)
     , _cType                 :: !(Maybe Text)
     , _cFormatPattern        :: !(Maybe Text)
-    , _cColumnId             :: !(Maybe (JSONText Int32))
+    , _cColumnId             :: !(Maybe (Textual Int32))
     , _cValidValues          :: !(Maybe [Text])
     , _cValidateData         :: !(Maybe Bool)
     , _cDescription          :: !(Maybe Text)
@@ -1869,8 +1869,8 @@ instance ToJSON Table where
 -- /See:/ 'lineStyle' smart constructor.
 data LineStyle = LineStyle
     { _lsStrokeColorStyler  :: !(Maybe StyleFunction)
-    , _lsStrokeWeight       :: !(Maybe (JSONText Int32))
-    , _lsStrokeOpacity      :: !(Maybe (JSONText Double))
+    , _lsStrokeWeight       :: !(Maybe (Textual Int32))
+    , _lsStrokeOpacity      :: !(Maybe (Textual Double))
     , _lsStrokeWeightStyler :: !(Maybe StyleFunction)
     , _lsStrokeColor        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)

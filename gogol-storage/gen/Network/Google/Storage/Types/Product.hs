@@ -248,9 +248,9 @@ instance ToJSON ObjectMetadata where
 --
 -- /See:/ 'bucketLifecycleRuleItemCondition' smart constructor.
 data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition
-    { _blricAge              :: !(Maybe (JSONText Int32))
+    { _blricAge              :: !(Maybe (Textual Int32))
     , _blricIsLive           :: !(Maybe Bool)
-    , _blricNumNewerVersions :: !(Maybe (JSONText Int32))
+    , _blricNumNewerVersions :: !(Maybe (Textual Int32))
     , _blricCreatedBefore    :: !(Maybe Date')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -371,7 +371,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe (JSONText Int64))
+    , _cExpiration  :: !(Maybe (Textual Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -546,7 +546,7 @@ instance ToJSON BucketLifecycleRuleItem where
 --
 -- /See:/ 'bucketCORSItem' smart constructor.
 data BucketCORSItem = BucketCORSItem
-    { _bciMaxAgeSeconds  :: !(Maybe (JSONText Int32))
+    { _bciMaxAgeSeconds  :: !(Maybe (Textual Int32))
     , _bciOrigin         :: !(Maybe [Text])
     , _bciResponseHeader :: !(Maybe [Text])
     , _bciMethod         :: !(Maybe [Text])
@@ -683,7 +683,7 @@ data Bucket = Bucket
     , _bucLocation         :: !(Maybe Text)
     , _bucKind             :: !Text
     , _bucWebsite          :: !(Maybe BucketWebsite)
-    , _bucProjectNumber    :: !(Maybe (JSONText Word64))
+    , _bucProjectNumber    :: !(Maybe (Textual Word64))
     , _bucLifecycle        :: !(Maybe BucketLifecycle)
     , _bucOwner            :: !(Maybe BucketOwner)
     , _bucSelfLink         :: !(Maybe Text)
@@ -695,7 +695,7 @@ data Bucket = Bucket
     , _bucId               :: !(Maybe Text)
     , _bucUpdated          :: !(Maybe DateTime')
     , _bucDefaultObjectACL :: !(Maybe [ObjectAccessControl])
-    , _bucMetageneration   :: !(Maybe (JSONText Int64))
+    , _bucMetageneration   :: !(Maybe (Textual Int64))
     , _bucLogging          :: !(Maybe BucketLogging)
     , _bucACL              :: !(Maybe [BucketAccessControl])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1163,7 +1163,7 @@ instance ToJSON BucketOwner where
 data ComposeRequestSourceObjectsItem = ComposeRequestSourceObjectsItem
     { _crsoiName                :: !(Maybe Text)
     , _crsoiObjectPreconditions :: !(Maybe ComposeRequestSourceObjectsItemObjectPreconditions)
-    , _crsoiGeneration          :: !(Maybe (JSONText Int64))
+    , _crsoiGeneration          :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ComposeRequestSourceObjectsItem' with the minimum fields required to make a request.
@@ -1260,7 +1260,7 @@ instance ToJSON ChannelParams where
 -- /See:/ 'object'' smart constructor.
 data Object = Object
     { _objEtag               :: !(Maybe Text)
-    , _objSize               :: !(Maybe (JSONText Word64))
+    , _objSize               :: !(Maybe (Textual Word64))
     , _objKind               :: !Text
     , _objTimeDeleted        :: !(Maybe DateTime')
     , _objCrc32c             :: !(Maybe Text)
@@ -1268,7 +1268,7 @@ data Object = Object
     , _objOwner              :: !(Maybe ObjectOwner)
     , _objSelfLink           :: !(Maybe Text)
     , _objMediaLink          :: !(Maybe Text)
-    , _objComponentCount     :: !(Maybe (JSONText Int32))
+    , _objComponentCount     :: !(Maybe (Textual Int32))
     , _objName               :: !(Maybe Text)
     , _objStorageClass       :: !(Maybe Text)
     , _objContentEncoding    :: !(Maybe Text)
@@ -1278,8 +1278,8 @@ data Object = Object
     , _objUpdated            :: !(Maybe DateTime')
     , _objContentLanguage    :: !(Maybe Text)
     , _objCacheControl       :: !(Maybe Text)
-    , _objMetageneration     :: !(Maybe (JSONText Int64))
-    , _objGeneration         :: !(Maybe (JSONText Int64))
+    , _objMetageneration     :: !(Maybe (Textual Int64))
+    , _objGeneration         :: !(Maybe (Textual Int64))
     , _objACL                :: !(Maybe [ObjectAccessControl])
     , _objContentDisPosition :: !(Maybe Text)
     , _objMD5Hash            :: !(Maybe Text)
@@ -1579,7 +1579,7 @@ instance ToJSON Object where
 --
 -- /See:/ 'composeRequestSourceObjectsItemObjectPreconditions' smart constructor.
 newtype ComposeRequestSourceObjectsItemObjectPreconditions = ComposeRequestSourceObjectsItemObjectPreconditions
-    { _crsoiopIfGenerationMatch :: Maybe (JSONText Int64)
+    { _crsoiopIfGenerationMatch :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ComposeRequestSourceObjectsItemObjectPreconditions' with the minimum fields required to make a request.
@@ -1971,7 +1971,7 @@ data ObjectAccessControl = ObjectAccessControl
     , _oacaId          :: !(Maybe Text)
     , _oacaProjectTeam :: !(Maybe ObjectAccessControlProjectTeam)
     , _oacaEntity      :: !(Maybe Text)
-    , _oacaGeneration  :: !(Maybe (JSONText Int64))
+    , _oacaGeneration  :: !(Maybe (Textual Int64))
     , _oacaEntityId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2136,8 +2136,8 @@ data RewriteResponse = RewriteResponse
     { _rrKind                :: !Text
     , _rrDone                :: !(Maybe Bool)
     , _rrResource            :: !(Maybe Object)
-    , _rrObjectSize          :: !(Maybe (JSONText Word64))
-    , _rrTotalBytesRewritten :: !(Maybe (JSONText Word64))
+    , _rrObjectSize          :: !(Maybe (Textual Word64))
+    , _rrTotalBytesRewritten :: !(Maybe (Textual Word64))
     , _rrRewriteToken        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

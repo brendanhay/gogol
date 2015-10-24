@@ -48,9 +48,9 @@ type FloodlightConfigurationsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] FloodlightConfiguration :>
                      Patch '[JSON] FloodlightConfiguration
@@ -60,9 +60,9 @@ type FloodlightConfigurationsPatchResource =
 --
 -- /See:/ 'floodlightConfigurationsPatch' smart constructor.
 data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch
-    { _fcpProFileId :: !(JSONText Int64)
+    { _fcpProFileId :: !(Textual Int64)
     , _fcpPayload   :: !FloodlightConfiguration
-    , _fcpId        :: !(JSONText Int64)
+    , _fcpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsPatch' with the minimum fields required to make a request.

@@ -57,7 +57,7 @@ type UsersDataSourcesDataSetsPatchResource =
                Capture "dataSourceId" Text :>
                  "datasets" :>
                    Capture "datasetId" Text :>
-                     QueryParam "currentTimeMillis" (JSONText Int64) :>
+                     QueryParam "currentTimeMillis" (Textual Int64) :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] DataSet :> Patch '[JSON] DataSet
 
@@ -72,7 +72,7 @@ data UsersDataSourcesDataSetsPatch = UsersDataSourcesDataSetsPatch
     , _udsdspPayload           :: !DataSet
     , _udsdspUserId            :: !Text
     , _udsdspDataSetId         :: !Text
-    , _udsdspCurrentTimeMillis :: !(Maybe (JSONText Int64))
+    , _udsdspCurrentTimeMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDataSetsPatch' with the minimum fields required to make a request.

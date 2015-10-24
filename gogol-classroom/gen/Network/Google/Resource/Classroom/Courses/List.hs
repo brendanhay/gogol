@@ -67,7 +67,7 @@ type CoursesListResource =
                      QueryParam "teacherId" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (JSONText Int32) :>
+                           QueryParam "pageSize" (Textual Int32) :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListCoursesResponse
@@ -89,7 +89,7 @@ data CoursesList = CoursesList
     , _clTeacherId      :: !(Maybe Text)
     , _clBearerToken    :: !(Maybe Text)
     , _clPageToken      :: !(Maybe Text)
-    , _clPageSize       :: !(Maybe (JSONText Int32))
+    , _clPageSize       :: !(Maybe (Textual Int32))
     , _clCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

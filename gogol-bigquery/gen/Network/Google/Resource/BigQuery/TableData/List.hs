@@ -58,8 +58,8 @@ type TableDataListResource =
                    Capture "tableId" Text :>
                      "data" :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "startIndex" (JSONText Word64) :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "startIndex" (Textual Word64) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TableDataList
 
@@ -72,8 +72,8 @@ data TableDataList' = TableDataList'
     , _tPageToken  :: !(Maybe Text)
     , _tProjectId  :: !Text
     , _tTableId    :: !Text
-    , _tStartIndex :: !(Maybe (JSONText Word64))
-    , _tMaxResults :: !(Maybe (JSONText Word32))
+    , _tStartIndex :: !(Maybe (Textual Word64))
+    , _tMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataList'' with the minimum fields required to make a request.

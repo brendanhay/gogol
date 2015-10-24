@@ -46,17 +46,17 @@ type EventTagsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "eventTags" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] EventTag
 
 -- | Gets one event tag by ID.
 --
 -- /See:/ 'eventTagsGet' smart constructor.
 data EventTagsGet = EventTagsGet
-    { _etgProFileId :: !(JSONText Int64)
-    , _etgId        :: !(JSONText Int64)
+    { _etgProFileId :: !(Textual Int64)
+    , _etgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsGet' with the minimum fields required to make a request.

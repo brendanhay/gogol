@@ -57,7 +57,7 @@ type InstanceGroupManagersResizeResource =
                  "instanceGroupManagers" :>
                    Capture "instanceGroupManager" Text :>
                      "resize" :>
-                       QueryParam "size" (JSONText Int32) :>
+                       QueryParam "size" (Textual Int32) :>
                          QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Resizes the managed instance group up or down. If resized up, new
@@ -68,7 +68,7 @@ type InstanceGroupManagersResizeResource =
 -- /See:/ 'instanceGroupManagersResize' smart constructor.
 data InstanceGroupManagersResize = InstanceGroupManagersResize
     { _igmrProject              :: !Text
-    , _igmrSize                 :: !(JSONText Int32)
+    , _igmrSize                 :: !(Textual Int32)
     , _igmrInstanceGroupManager :: !Text
     , _igmrZone                 :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

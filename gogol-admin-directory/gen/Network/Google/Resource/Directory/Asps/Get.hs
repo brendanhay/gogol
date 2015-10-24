@@ -49,14 +49,14 @@ type AspsGetResource =
            "users" :>
              Capture "userKey" Text :>
                "asps" :>
-                 Capture "codeId" (JSONText Int32) :>
+                 Capture "codeId" (Textual Int32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Asp
 
 -- | Get information about an ASP issued by a user.
 --
 -- /See:/ 'aspsGet' smart constructor.
 data AspsGet = AspsGet
-    { _agCodeId  :: !(JSONText Int32)
+    { _agCodeId  :: !(Textual Int32)
     , _agUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

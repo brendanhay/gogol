@@ -53,7 +53,7 @@ type SettingsWatchResource =
                "watch" :>
                  QueryParam "syncToken" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
@@ -64,7 +64,7 @@ data SettingsWatch = SettingsWatch
     { _swSyncToken  :: !(Maybe Text)
     , _swPayload    :: !Channel
     , _swPageToken  :: !(Maybe Text)
-    , _swMaxResults :: !(Maybe (JSONText Int32))
+    , _swMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsWatch' with the minimum fields required to make a request.

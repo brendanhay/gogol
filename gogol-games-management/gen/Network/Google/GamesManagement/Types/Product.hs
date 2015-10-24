@@ -25,10 +25,10 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'gamesPlayerExperienceInfoResource' smart constructor.
 data GamesPlayerExperienceInfoResource = GamesPlayerExperienceInfoResource
-    { _gpeirCurrentExperiencePoints    :: !(Maybe (JSONText Int64))
+    { _gpeirCurrentExperiencePoints    :: !(Maybe (Textual Int64))
     , _gpeirCurrentLevel               :: !(Maybe GamesPlayerLevelResource)
     , _gpeirNextLevel                  :: !(Maybe GamesPlayerLevelResource)
-    , _gpeirLastLevelUpTimestampMillis :: !(Maybe (JSONText Int64))
+    , _gpeirLastLevelUpTimestampMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayerExperienceInfoResource' with the minimum fields required to make a request.
@@ -211,7 +211,7 @@ instance ToJSON PlayerScoreResetAllResponse where
 -- /See:/ 'gamesPlayedResource' smart constructor.
 data GamesPlayedResource = GamesPlayedResource
     { _gprAutoMatched :: !(Maybe Bool)
-    , _gprTimeMillis  :: !(Maybe (JSONText Int64))
+    , _gprTimeMillis  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayedResource' with the minimum fields required to make a request.
@@ -262,9 +262,9 @@ instance ToJSON GamesPlayedResource where
 --
 -- /See:/ 'gamesPlayerLevelResource' smart constructor.
 data GamesPlayerLevelResource = GamesPlayerLevelResource
-    { _gplrMaxExperiencePoints :: !(Maybe (JSONText Int64))
-    , _gplrMinExperiencePoints :: !(Maybe (JSONText Int64))
-    , _gplrLevel               :: !(Maybe (JSONText Int32))
+    { _gplrMaxExperiencePoints :: !(Maybe (Textual Int64))
+    , _gplrMinExperiencePoints :: !(Maybe (Textual Int64))
+    , _gplrLevel               :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesPlayerLevelResource' with the minimum fields required to make a request.
@@ -678,7 +678,7 @@ instance ToJSON AchievementResetMultipleForAllRequest
 -- /See:/ 'hiddenPlayer' smart constructor.
 data HiddenPlayer = HiddenPlayer
     { _hpKind             :: !Text
-    , _hpHiddenTimeMillis :: !(Maybe (JSONText Int64))
+    , _hpHiddenTimeMillis :: !(Maybe (Textual Int64))
     , _hpPlayer           :: !(Maybe Player)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -50,8 +50,8 @@ type ManagementAccountUserLinksListResource =
            "accounts" :>
              Capture "accountId" Text :>
                "entityUserLinks" :>
-                 QueryParam "start-index" (JSONText Int32) :>
-                   QueryParam "max-results" (JSONText Int32) :>
+                 QueryParam "start-index" (Textual Int32) :>
+                   QueryParam "max-results" (Textual Int32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] EntityUserLinks
 
@@ -60,8 +60,8 @@ type ManagementAccountUserLinksListResource =
 -- /See:/ 'managementAccountUserLinksList' smart constructor.
 data ManagementAccountUserLinksList = ManagementAccountUserLinksList
     { _maullAccountId  :: !Text
-    , _maullStartIndex :: !(Maybe (JSONText Int32))
-    , _maullMaxResults :: !(Maybe (JSONText Int32))
+    , _maullStartIndex :: !(Maybe (Textual Int32))
+    , _maullMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksList' with the minimum fields required to make a request.

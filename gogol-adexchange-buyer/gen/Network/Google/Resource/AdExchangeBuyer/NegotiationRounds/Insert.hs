@@ -46,7 +46,7 @@ type NegotiationRoundsInsertResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "negotiations" :>
-           Capture "negotiationId" (JSONText Int64) :>
+           Capture "negotiationId" (Textual Int64) :>
              "negotiationrounds" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] NegotiationRoundDTO :>
@@ -57,7 +57,7 @@ type NegotiationRoundsInsertResource =
 -- /See:/ 'negotiationRoundsInsert' smart constructor.
 data NegotiationRoundsInsert = NegotiationRoundsInsert
     { _nriPayload       :: !NegotiationRoundDTO
-    , _nriNegotiationId :: !(JSONText Int64)
+    , _nriNegotiationId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationRoundsInsert' with the minimum fields required to make a request.

@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersAcknowledgeResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
                "acknowledge" :>
@@ -58,7 +58,7 @@ type OrdersAcknowledgeResource =
 --
 -- /See:/ 'ordersAcknowledge' smart constructor.
 data OrdersAcknowledge = OrdersAcknowledge
-    { _oaMerchantId :: !(JSONText Word64)
+    { _oaMerchantId :: !(Textual Word64)
     , _oaPayload    :: !OrdersAcknowledgeRequest
     , _oaOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -48,14 +48,14 @@ type JobsGetResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" (JSONText Word64) :>
+               Capture "jobId" (Textual Word64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Retrieves a job, including all the changes made to the job.
 --
 -- /See:/ 'jobsGet' smart constructor.
 data JobsGet = JobsGet
-    { _jgJobId  :: !(JSONText Word64)
+    { _jgJobId  :: !(Textual Word64)
     , _jgTeamId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

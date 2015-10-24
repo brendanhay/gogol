@@ -69,7 +69,7 @@ type MapsListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "projectId" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -89,7 +89,7 @@ data MapsList = MapsList
     , _mlPageToken        :: !(Maybe Text)
     , _mlProjectId        :: !(Maybe Text)
     , _mlSearch           :: !(Maybe Text)
-    , _mlMaxResults       :: !(Maybe (JSONText Word32))
+    , _mlMaxResults       :: !(Maybe (Textual Word32))
     , _mlTags             :: !(Maybe Text)
     , _mlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

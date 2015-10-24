@@ -46,8 +46,8 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng
-    { _llLatitude  :: !(Maybe (JSONText Double))
-    , _llLongitude :: !(Maybe (JSONText Double))
+    { _llLatitude  :: !(Maybe (Textual Double))
+    , _llLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
@@ -519,7 +519,7 @@ instance ToJSON PublicProFile where
 --
 -- /See:/ 'certificationExamStatus' smart constructor.
 data CertificationExamStatus = CertificationExamStatus
-    { _cesNumberUsersPass :: !(Maybe (JSONText Int32))
+    { _cesNumberUsersPass :: !(Maybe (Textual Int32))
     , _cesType            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -664,8 +664,8 @@ instance ToJSON TrafficSource where
 -- /See:/ 'money' smart constructor.
 data Money = Money
     { _mCurrencyCode :: !(Maybe Text)
-    , _mNanos        :: !(Maybe (JSONText Int32))
-    , _mUnits        :: !(Maybe (JSONText Int64))
+    , _mNanos        :: !(Maybe (Textual Int32))
+    , _mUnits        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Money' with the minimum fields required to make a request.
@@ -1660,7 +1660,7 @@ instance ToJSON LogUserEventRequest where
 --
 -- /See:/ 'rank' smart constructor.
 data Rank = Rank
-    { _rValue :: !(Maybe (JSONText Double))
+    { _rValue :: !(Maybe (Textual Double))
     , _rType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

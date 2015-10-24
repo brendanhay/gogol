@@ -46,9 +46,9 @@ type LandingPagesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "campaignId" (JSONText Int64) :>
+               Capture "campaignId" (Textual Int64) :>
                  "landingPages" :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] LandingPagesListResponse
@@ -57,8 +57,8 @@ type LandingPagesListResource =
 --
 -- /See:/ 'landingPagesList' smart constructor.
 data LandingPagesList = LandingPagesList
-    { _lplCampaignId :: !(JSONText Int64)
-    , _lplProFileId  :: !(JSONText Int64)
+    { _lplCampaignId :: !(Textual Int64)
+    , _lplProFileId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesList' with the minimum fields required to make a request.

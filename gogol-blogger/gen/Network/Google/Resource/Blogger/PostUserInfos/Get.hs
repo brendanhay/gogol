@@ -55,7 +55,7 @@ type PostUserInfosGetResource =
                Capture "blogId" Text :>
                  "posts" :>
                    Capture "postId" Text :>
-                     QueryParam "maxComments" (JSONText Word32) :>
+                     QueryParam "maxComments" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] PostUserInfo
 
 -- | Gets one post and user info pair, by post ID and user ID. The post user
@@ -65,7 +65,7 @@ type PostUserInfosGetResource =
 -- /See:/ 'postUserInfosGet' smart constructor.
 data PostUserInfosGet = PostUserInfosGet
     { _puigBlogId      :: !Text
-    , _puigMaxComments :: !(Maybe (JSONText Word32))
+    , _puigMaxComments :: !(Maybe (Textual Word32))
     , _puigUserId      :: !Text
     , _puigPostId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -53,12 +53,12 @@ type ScheduleUpdateResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" (JSONText Word64) :>
+               Capture "jobId" (Textual Word64) :>
                  "schedule" :>
                    QueryParam "allDay" Bool :>
-                     QueryParam "startTime" (JSONText Word64) :>
-                       QueryParam "endTime" (JSONText Word64) :>
-                         QueryParam "duration" (JSONText Word64) :>
+                     QueryParam "startTime" (Textual Word64) :>
+                       QueryParam "endTime" (Textual Word64) :>
+                         QueryParam "duration" (Textual Word64) :>
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Schedule :> Put '[JSON] Schedule
 
@@ -66,13 +66,13 @@ type ScheduleUpdateResource =
 --
 -- /See:/ 'scheduleUpdate' smart constructor.
 data ScheduleUpdate = ScheduleUpdate
-    { _suJobId     :: !(JSONText Word64)
+    { _suJobId     :: !(Textual Word64)
     , _suAllDay    :: !(Maybe Bool)
-    , _suStartTime :: !(Maybe (JSONText Word64))
+    , _suStartTime :: !(Maybe (Textual Word64))
     , _suTeamId    :: !Text
     , _suPayload   :: !Schedule
-    , _suEndTime   :: !(Maybe (JSONText Word64))
-    , _suDuration  :: !(Maybe (JSONText Word64))
+    , _suEndTime   :: !(Maybe (Textual Word64))
+    , _suDuration  :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScheduleUpdate' with the minimum fields required to make a request.

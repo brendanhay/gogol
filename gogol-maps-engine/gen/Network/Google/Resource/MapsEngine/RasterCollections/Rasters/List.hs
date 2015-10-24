@@ -66,7 +66,7 @@ type RasterCollectionsRastersListResource =
                          QueryParam "modifiedBefore" DateTime' :>
                            QueryParam "pageToken" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -86,7 +86,7 @@ data RasterCollectionsRastersList = RasterCollectionsRastersList
     , _rcrlModifiedBefore :: !(Maybe DateTime')
     , _rcrlPageToken      :: !(Maybe Text)
     , _rcrlSearch         :: !(Maybe Text)
-    , _rcrlMaxResults     :: !(Maybe (JSONText Word32))
+    , _rcrlMaxResults     :: !(Maybe (Textual Word32))
     , _rcrlTags           :: !(Maybe Text)
     , _rcrlCreatedBefore  :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -45,7 +45,7 @@ type MobileCarriersListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "mobileCarriers" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] MobileCarriersListResponse
@@ -54,7 +54,7 @@ type MobileCarriersListResource =
 --
 -- /See:/ 'mobileCarriersList' smart constructor.
 newtype MobileCarriersList = MobileCarriersList
-    { _mclProFileId :: JSONText Int64
+    { _mclProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileCarriersList' with the minimum fields required to make a request.

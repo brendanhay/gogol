@@ -68,7 +68,7 @@ type ActivitiesWatchResource =
                                QueryParam "endTime" Text :>
                                  QueryParam "pageToken" Text :>
                                    QueryParam "eventName" Text :>
-                                     QueryParam "maxResults" (JSONText Int32) :>
+                                     QueryParam "maxResults" (Textual Int32) :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Channel :>
                                            Post '[JSON] Channel
@@ -87,7 +87,7 @@ data ActivitiesWatch = ActivitiesWatch
     , _awPageToken       :: !(Maybe Text)
     , _awEventName       :: !(Maybe Text)
     , _awUserKey         :: !Text
-    , _awMaxResults      :: !(Maybe (JSONText Int32))
+    , _awMaxResults      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesWatch' with the minimum fields required to make a request.

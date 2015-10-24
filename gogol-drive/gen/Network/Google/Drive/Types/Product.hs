@@ -69,7 +69,7 @@ instance ToJSON CommentContext where
 --
 -- /See:/ 'appIconsItem' smart constructor.
 data AppIconsItem = AppIconsItem
-    { _aiiSize     :: !(Maybe (JSONText Int32))
+    { _aiiSize     :: !(Maybe (Textual Int32))
     , _aiiCategory :: !(Maybe Text)
     , _aiiIconURL  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -389,7 +389,7 @@ instance ToJSON Property where
 --
 -- /See:/ 'fileThumbnail' smart constructor.
 data FileThumbnail = FileThumbnail
-    { _ftImage    :: !(Maybe (JSONText Word8))
+    { _ftImage    :: !(Maybe (Textual Word8))
     , _ftMimeType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -805,7 +805,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe (JSONText Int64))
+    , _cExpiration  :: !(Maybe (Textual Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -1017,9 +1017,9 @@ instance ToJSON CommentReplyList where
 --
 -- /See:/ 'fileVideoMediaMetadata' smart constructor.
 data FileVideoMediaMetadata = FileVideoMediaMetadata
-    { _fvmmHeight         :: !(Maybe (JSONText Int32))
-    , _fvmmWidth          :: !(Maybe (JSONText Int32))
-    , _fvmmDurationMillis :: !(Maybe (JSONText Int64))
+    { _fvmmHeight         :: !(Maybe (Textual Int32))
+    , _fvmmWidth          :: !(Maybe (Textual Int32))
+    , _fvmmDurationMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileVideoMediaMetadata' with the minimum fields required to make a request.
@@ -1082,7 +1082,7 @@ data Change = Change
     { _chaKind             :: !Text
     , _chaSelfLink         :: !(Maybe Text)
     , _chaModificationDate :: !(Maybe DateTime')
-    , _chaId               :: !(Maybe (JSONText Int64))
+    , _chaId               :: !(Maybe (Textual Int64))
     , _chaDeleted          :: !(Maybe Bool)
     , _chaFileId           :: !(Maybe Text)
     , _chaFile             :: !(Maybe File)
@@ -1570,7 +1570,7 @@ instance ToJSON ChildReference where
 --
 -- /See:/ 'aboutMaxUploadSizesItem' smart constructor.
 data AboutMaxUploadSizesItem = AboutMaxUploadSizesItem
-    { _amusiSize :: !(Maybe (JSONText Int64))
+    { _amusiSize :: !(Maybe (Textual Int64))
     , _amusiType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1753,7 +1753,7 @@ instance ToJSON CommentReply where
 --
 -- /See:/ 'aboutQuotaBytesByServiceItem' smart constructor.
 data AboutQuotaBytesByServiceItem = AboutQuotaBytesByServiceItem
-    { _aqbbsiBytesUsed   :: !(Maybe (JSONText Int64))
+    { _aqbbsiBytesUsed   :: !(Maybe (Textual Int64))
     , _aqbbsiServiceName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1952,7 +1952,7 @@ data ChangeList = ChangeList
     , _cllKind            :: !Text
     , _cllItems           :: !(Maybe [Change])
     , _cllSelfLink        :: !(Maybe Text)
-    , _cllLargestChangeId :: !(Maybe (JSONText Int64))
+    , _cllLargestChangeId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeList' with the minimum fields required to make a request.
@@ -2116,7 +2116,7 @@ instance ToJSON FileIndexableText where
 --
 -- /See:/ 'aboutFeaturesItem' smart constructor.
 data AboutFeaturesItem = AboutFeaturesItem
-    { _afiFeatureRate :: !(Maybe (JSONText Double))
+    { _afiFeatureRate :: !(Maybe (Textual Double))
     , _afiFeatureName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2201,13 +2201,13 @@ instance ToJSON ChannelParams where
 -- /See:/ 'about' smart constructor.
 data About = About
     { _aboExportFormats           :: !(Maybe [AboutExportFormatsItem])
-    , _aboRemainingChangeIds      :: !(Maybe (JSONText Int64))
+    , _aboRemainingChangeIds      :: !(Maybe (Textual Int64))
     , _aboLanguageCode            :: !(Maybe Text)
     , _aboEtag                    :: !(Maybe Text)
     , _aboImportFormats           :: !(Maybe [AboutImportFormatsItem])
     , _aboKind                    :: !Text
     , _aboDomainSharingPolicy     :: !(Maybe Text)
-    , _aboQuotaBytesUsedInTrash   :: !(Maybe (JSONText Int64))
+    , _aboQuotaBytesUsedInTrash   :: !(Maybe (Textual Int64))
     , _aboQuotaType               :: !(Maybe Text)
     , _aboMaxUploadSizes          :: !(Maybe [AboutMaxUploadSizesItem])
     , _aboUser                    :: !(Maybe User)
@@ -2215,15 +2215,15 @@ data About = About
     , _aboName                    :: !(Maybe Text)
     , _aboFeatures                :: !(Maybe [AboutFeaturesItem])
     , _aboIsCurrentAppInstalled   :: !(Maybe Bool)
-    , _aboQuotaBytesTotal         :: !(Maybe (JSONText Int64))
+    , _aboQuotaBytesTotal         :: !(Maybe (Textual Int64))
     , _aboRootFolderId            :: !(Maybe Text)
-    , _aboQuotaBytesUsed          :: !(Maybe (JSONText Int64))
+    , _aboQuotaBytesUsed          :: !(Maybe (Textual Int64))
     , _aboAdditionalRoleInfo      :: !(Maybe [AboutAdditionalRoleInfoItem])
     , _aboFolderColorPalette      :: !(Maybe [Text])
     , _aboPermissionId            :: !(Maybe Text)
-    , _aboQuotaBytesUsedAggregate :: !(Maybe (JSONText Int64))
+    , _aboQuotaBytesUsedAggregate :: !(Maybe (Textual Int64))
     , _aboQuotaBytesByService     :: !(Maybe [AboutQuotaBytesByServiceItem])
-    , _aboLargestChangeId         :: !(Maybe (JSONText Int64))
+    , _aboLargestChangeId         :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'About' with the minimum fields required to make a request.
@@ -2535,9 +2535,9 @@ instance ToJSON About where
 --
 -- /See:/ 'fileImageMediaMetadataLocation' smart constructor.
 data FileImageMediaMetadataLocation = FileImageMediaMetadataLocation
-    { _fimmlLatitude  :: !(Maybe (JSONText Double))
-    , _fimmlAltitude  :: !(Maybe (JSONText Double))
-    , _fimmlLongitude :: !(Maybe (JSONText Double))
+    { _fimmlLatitude  :: !(Maybe (Textual Double))
+    , _fimmlAltitude  :: !(Maybe (Textual Double))
+    , _fimmlLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileImageMediaMetadataLocation' with the minimum fields required to make a request.
@@ -2650,23 +2650,23 @@ instance ToJSON AboutImportFormatsItem where
 --
 -- /See:/ 'fileImageMediaMetadata' smart constructor.
 data FileImageMediaMetadata = FileImageMediaMetadata
-    { _fimmRotation         :: !(Maybe (JSONText Int32))
-    , _fimmHeight           :: !(Maybe (JSONText Int32))
-    , _fimmSubjectDistance  :: !(Maybe (JSONText Int32))
-    , _fimmMaxApertureValue :: !(Maybe (JSONText Float))
-    , _fimmIsoSpeed         :: !(Maybe (JSONText Int32))
+    { _fimmRotation         :: !(Maybe (Textual Int32))
+    , _fimmHeight           :: !(Maybe (Textual Int32))
+    , _fimmSubjectDistance  :: !(Maybe (Textual Int32))
+    , _fimmMaxApertureValue :: !(Maybe (Textual Double))
+    , _fimmIsoSpeed         :: !(Maybe (Textual Int32))
     , _fimmLocation         :: !(Maybe FileImageMediaMetadataLocation)
-    , _fimmAperture         :: !(Maybe (JSONText Float))
-    , _fimmFocalLength      :: !(Maybe (JSONText Float))
+    , _fimmAperture         :: !(Maybe (Textual Double))
+    , _fimmFocalLength      :: !(Maybe (Textual Double))
     , _fimmCameraMake       :: !(Maybe Text)
-    , _fimmWidth            :: !(Maybe (JSONText Int32))
-    , _fimmExposureTime     :: !(Maybe (JSONText Float))
+    , _fimmWidth            :: !(Maybe (Textual Int32))
+    , _fimmExposureTime     :: !(Maybe (Textual Double))
     , _fimmCameraModel      :: !(Maybe Text)
     , _fimmWhiteBalance     :: !(Maybe Text)
     , _fimmDate             :: !(Maybe Text)
     , _fimmLens             :: !(Maybe Text)
     , _fimmFlashUsed        :: !(Maybe Bool)
-    , _fimmExposureBias     :: !(Maybe (JSONText Float))
+    , _fimmExposureBias     :: !(Maybe (Textual Double))
     , _fimmMeteringMode     :: !(Maybe Text)
     , _fimmExposureMode     :: !(Maybe Text)
     , _fimmSensor           :: !(Maybe Text)
@@ -3216,7 +3216,7 @@ data Revision = Revision
     , _rPinned                 :: !(Maybe Bool)
     , _rPublished              :: !(Maybe Bool)
     , _rLastModifyingUser      :: !(Maybe User)
-    , _rFileSize               :: !(Maybe (JSONText Int64))
+    , _rFileSize               :: !(Maybe (Textual Int64))
     , _rPublishAuto            :: !(Maybe Bool)
     , _rMD5Checksum            :: !(Maybe Text)
     , _rMimeType               :: !(Maybe Text)
@@ -3701,7 +3701,7 @@ data File = File
     , _fLastModifyingUser     :: !(Maybe User)
     , _fIconLink              :: !(Maybe Text)
     , _fEmbedLink             :: !(Maybe Text)
-    , _fFileSize              :: !(Maybe (JSONText Int64))
+    , _fFileSize              :: !(Maybe (Textual Int64))
     , _fAppDataContents       :: !(Maybe Bool)
     , _fImageMediaMetadata    :: !(Maybe FileImageMediaMetadata)
     , _fExplicitlyTrashed     :: !(Maybe Bool)
@@ -3722,7 +3722,7 @@ data File = File
     , _fParents               :: !(Maybe [ParentReference])
     , _fSharedWithMeDate      :: !(Maybe DateTime')
     , _fSpaces                :: !(Maybe [Text])
-    , _fVersion               :: !(Maybe (JSONText Int64))
+    , _fVersion               :: !(Maybe (Textual Int64))
     , _fUserPermission        :: !(Maybe Permission)
     , _fWritersCanShare       :: !(Maybe Bool)
     , _fDefaultOpenWithLink   :: !(Maybe Text)
@@ -3730,7 +3730,7 @@ data File = File
     , _fLabels                :: !(Maybe FileLabels)
     , _fModifiedDate          :: !(Maybe DateTime')
     , _fPermissions           :: !(Maybe [Permission])
-    , _fQuotaBytesUsed        :: !(Maybe (JSONText Int64))
+    , _fQuotaBytesUsed        :: !(Maybe (Textual Int64))
     , _fTitle                 :: !(Maybe Text)
     , _fAlternateLink         :: !(Maybe Text)
     , _fVideoMediaMetadata    :: !(Maybe FileVideoMediaMetadata)

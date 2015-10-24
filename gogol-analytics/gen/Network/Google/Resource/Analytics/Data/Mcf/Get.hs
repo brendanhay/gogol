@@ -63,8 +63,8 @@ type DataMcfGetResource =
                        QueryParam "filters" Text :>
                          QueryParam "sort" Text :>
                            QueryParam "dimensions" Text :>
-                             QueryParam "start-index" (JSONText Int32) :>
-                               QueryParam "max-results" (JSONText Int32) :>
+                             QueryParam "start-index" (Textual Int32) :>
+                               QueryParam "max-results" (Textual Int32) :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] McfData
 
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
@@ -78,8 +78,8 @@ data DataMcfGet = DataMcfGet
     , _dmgEndDate       :: !Text
     , _dmgSort          :: !(Maybe Text)
     , _dmgDimensions    :: !(Maybe Text)
-    , _dmgStartIndex    :: !(Maybe (JSONText Int32))
-    , _dmgMaxResults    :: !(Maybe (JSONText Int32))
+    , _dmgStartIndex    :: !(Maybe (Textual Int32))
+    , _dmgMaxResults    :: !(Maybe (Textual Int32))
     , _dmgStartDate     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

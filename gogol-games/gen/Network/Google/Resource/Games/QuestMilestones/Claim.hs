@@ -53,7 +53,7 @@ type QuestMilestonesClaimResource =
              "milestones" :>
                Capture "milestoneId" Text :>
                  "claim" :>
-                   QueryParam "requestId" (JSONText Int64) :>
+                   QueryParam "requestId" (Textual Int64) :>
                      QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Report that a reward for the milestone corresponding to milestoneId for
@@ -62,7 +62,7 @@ type QuestMilestonesClaimResource =
 --
 -- /See:/ 'questMilestonesClaim' smart constructor.
 data QuestMilestonesClaim = QuestMilestonesClaim
-    { _qmcRequestId   :: !(JSONText Int64)
+    { _qmcRequestId   :: !(Textual Int64)
     , _qmcMilestoneId :: !Text
     , _qmcQuestId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

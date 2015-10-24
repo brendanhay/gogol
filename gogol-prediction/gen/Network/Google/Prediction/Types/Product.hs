@@ -28,8 +28,8 @@ data Insert2ModelInfo = Insert2ModelInfo
     , _imiClassWeightedAccuracy  :: !(Maybe Text)
     , _imiClassificationAccuracy :: !(Maybe Text)
     , _imiMeanSquaredError       :: !(Maybe Text)
-    , _imiNumberLabels           :: !(Maybe (JSONText Int64))
-    , _imiNumberInstances        :: !(Maybe (JSONText Int64))
+    , _imiNumberLabels           :: !(Maybe (Textual Int64))
+    , _imiNumberInstances        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Insert2ModelInfo' with the minimum fields required to make a request.
@@ -363,7 +363,7 @@ instance ToJSON List where
 --
 -- /See:/ 'insertUtilityItem' smart constructor.
 newtype InsertUtilityItem = InsertUtilityItem
-    { _iuiAddtional :: HashMap Text (JSONText Double)
+    { _iuiAddtional :: HashMap Text (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InsertUtilityItem' with the minimum fields required to make a request.
@@ -638,7 +638,7 @@ instance ToJSON InputInput where
 -- /See:/ 'analyzeDataDescriptionFeaturesItemCategoricalValuesItem' smart constructor.
 data AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem = AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
     { _addficviValue :: !(Maybe Text)
-    , _addficviCount :: !(Maybe (JSONText Int64))
+    , _addficviCount :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem' with the minimum fields required to make a request.
@@ -694,7 +694,7 @@ instance ToJSON
 -- /See:/ 'analyzeDataDescriptionFeaturesItemNumeric' smart constructor.
 data AnalyzeDataDescriptionFeaturesItemNumeric = AnalyzeDataDescriptionFeaturesItemNumeric
     { _addfinMean     :: !(Maybe Text)
-    , _addfinCount    :: !(Maybe (JSONText Int64))
+    , _addfinCount    :: !(Maybe (Textual Int64))
     , _addfinVariance :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -788,7 +788,7 @@ instance ToJSON Input where
 -- /See:/ 'analyzeDataDescriptionFeaturesItemCategorical' smart constructor.
 data AnalyzeDataDescriptionFeaturesItemCategorical = AnalyzeDataDescriptionFeaturesItemCategorical
     { _addficValues :: !(Maybe [AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem])
-    , _addficCount  :: !(Maybe (JSONText Int64))
+    , _addficCount  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemCategorical' with the minimum fields required to make a request.
@@ -841,7 +841,7 @@ instance ToJSON
 -- /See:/ 'analyzeDataDescriptionOutputFeatureTextItem' smart constructor.
 data AnalyzeDataDescriptionOutputFeatureTextItem = AnalyzeDataDescriptionOutputFeatureTextItem
     { _addoftiValue :: !(Maybe Text)
-    , _addoftiCount :: !(Maybe (JSONText Int64))
+    , _addoftiCount :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionOutputFeatureTextItem' with the minimum fields required to make a request.
@@ -1165,7 +1165,7 @@ instance ToJSON Output where
 -- /See:/ 'analyzeDataDescriptionOutputFeatureNumeric' smart constructor.
 data AnalyzeDataDescriptionOutputFeatureNumeric = AnalyzeDataDescriptionOutputFeatureNumeric
     { _addofnMean     :: !(Maybe Text)
-    , _addofnCount    :: !(Maybe (JSONText Int64))
+    , _addofnCount    :: !(Maybe (Textual Int64))
     , _addofnVariance :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1378,7 +1378,7 @@ instance ToJSON AnalyzeModelDescription where
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItemText' smart constructor.
 newtype AnalyzeDataDescriptionFeaturesItemText = AnalyzeDataDescriptionFeaturesItemText
-    { _addfitCount :: Maybe (JSONText Int64)
+    { _addfitCount :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeDataDescriptionFeaturesItemText' with the minimum fields required to make a request.
@@ -1461,7 +1461,7 @@ instance ToJSON
 data AnalyzeDataDescriptionFeaturesItem = AnalyzeDataDescriptionFeaturesItem
     { _addfiText        :: !(Maybe AnalyzeDataDescriptionFeaturesItemText)
     , _addfiNumeric     :: !(Maybe AnalyzeDataDescriptionFeaturesItemNumeric)
-    , _addfiIndex       :: !(Maybe (JSONText Int64))
+    , _addfiIndex       :: !(Maybe (Textual Int64))
     , _addfiCategorical :: !(Maybe AnalyzeDataDescriptionFeaturesItemCategorical)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -49,7 +49,7 @@ type StyleUpdateResource =
          "tables" :>
            Capture "tableId" Text :>
              "styles" :>
-               Capture "styleId" (JSONText Int32) :>
+               Capture "styleId" (Textual Int32) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] StyleSetting :>
                      Put '[JSON] StyleSetting
@@ -59,7 +59,7 @@ type StyleUpdateResource =
 -- /See:/ 'styleUpdate' smart constructor.
 data StyleUpdate = StyleUpdate
     { _suPayload :: !StyleSetting
-    , _suStyleId :: !(JSONText Int32)
+    , _suStyleId :: !(Textual Int32)
     , _suTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

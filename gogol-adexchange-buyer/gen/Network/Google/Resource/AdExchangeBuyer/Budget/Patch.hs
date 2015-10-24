@@ -49,8 +49,8 @@ type BudgetPatchResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "billinginfo" :>
-           Capture "accountId" (JSONText Int64) :>
-             Capture "billingId" (JSONText Int64) :>
+           Capture "accountId" (Textual Int64) :>
+             Capture "billingId" (Textual Int64) :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Budget :> Patch '[JSON] Budget
 
@@ -61,8 +61,8 @@ type BudgetPatchResource =
 -- /See:/ 'budgetPatch' smart constructor.
 data BudgetPatch = BudgetPatch
     { _bpPayload   :: !Budget
-    , _bpAccountId :: !(JSONText Int64)
-    , _bpBillingId :: !(JSONText Int64)
+    , _bpAccountId :: !(Textual Int64)
+    , _bpBillingId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetPatch' with the minimum fields required to make a request.

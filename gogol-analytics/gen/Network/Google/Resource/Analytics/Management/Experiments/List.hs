@@ -56,8 +56,8 @@ type ManagementExperimentsListResource =
                    "profiles" :>
                      Capture "profileId" Text :>
                        "experiments" :>
-                         QueryParam "start-index" (JSONText Int32) :>
-                           QueryParam "max-results" (JSONText Int32) :>
+                         QueryParam "start-index" (Textual Int32) :>
+                           QueryParam "max-results" (Textual Int32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Experiments
 
 -- | Lists experiments to which the user has access.
@@ -67,8 +67,8 @@ data ManagementExperimentsList = ManagementExperimentsList
     { _melWebPropertyId :: !Text
     , _melProFileId     :: !Text
     , _melAccountId     :: !Text
-    , _melStartIndex    :: !(Maybe (JSONText Int32))
-    , _melMaxResults    :: !(Maybe (JSONText Int32))
+    , _melStartIndex    :: !(Maybe (Textual Int32))
+    , _melMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsList' with the minimum fields required to make a request.

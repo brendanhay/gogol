@@ -45,7 +45,7 @@ type OperatingSystemsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "operatingSystems" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] OperatingSystemsListResponse
@@ -54,7 +54,7 @@ type OperatingSystemsListResource =
 --
 -- /See:/ 'operatingSystemsList' smart constructor.
 newtype OperatingSystemsList = OperatingSystemsList
-    { _oslProFileId :: JSONText Int64
+    { _oslProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemsList' with the minimum fields required to make a request.

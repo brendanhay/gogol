@@ -25,8 +25,8 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'valueRange' smart constructor.
 data ValueRange = ValueRange
-    { _vrMax :: !(Maybe (JSONText Double))
-    , _vrMin :: !(Maybe (JSONText Double))
+    { _vrMax :: !(Maybe (Textual Double))
+    , _vrMin :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ValueRange' with the minimum fields required to make a request.
@@ -333,7 +333,7 @@ instance ToJSON PermissionsBatchDeleteRequest where
 --
 -- /See:/ 'rasterCollectionsListResponse' smart constructor.
 data RasterCollectionsListResponse = RasterCollectionsListResponse
-    { _rclrNextPageToken     :: !(Maybe (JSONText Word8))
+    { _rclrNextPageToken     :: !(Maybe (Textual Word8))
     , _rclrRasterCollections :: !(Maybe [RasterCollection])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -443,7 +443,7 @@ instance ToJSON GeoJSONGeometry where
 --
 -- /See:/ 'mapLayer' smart constructor.
 data MapLayer = MapLayer
-    { _mlDefaultViewport :: !(Maybe [JSONText Double])
+    { _mlDefaultViewport :: !(Maybe [Textual Double])
     , _mlVisibility      :: !(Maybe Text)
     , _mlKey             :: !(Maybe Text)
     , _mlName            :: !(Maybe Text)
@@ -537,8 +537,8 @@ instance ToJSON MapLayer where
 --
 -- /See:/ 'zoomLevels' smart constructor.
 data ZoomLevels = ZoomLevels
-    { _zlMax :: !(Maybe (JSONText Int32))
-    , _zlMin :: !(Maybe (JSONText Int32))
+    { _zlMax :: !(Maybe (Textual Int32))
+    , _zlMin :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoomLevels' with the minimum fields required to make a request.
@@ -619,8 +619,8 @@ instance ToJSON FeatureInfo where
 --
 -- /See:/ 'sizeRange' smart constructor.
 data SizeRange = SizeRange
-    { _srMax :: !(Maybe (JSONText Double))
-    , _srMin :: !(Maybe (JSONText Double))
+    { _srMax :: !(Maybe (Textual Double))
+    , _srMin :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizeRange' with the minimum fields required to make a request.
@@ -666,7 +666,7 @@ instance ToJSON SizeRange where
 -- /See:/ 'mapFolder' smart constructor.
 data MapFolder = MapFolder
     { _mfExpandable      :: !(Maybe Bool)
-    , _mfDefaultViewport :: !(Maybe [JSONText Double])
+    , _mfDefaultViewport :: !(Maybe [Textual Double])
     , _mfContents        :: !(Maybe [MapItem])
     , _mfVisibility      :: !(Maybe Text)
     , _mfKey             :: !(Maybe Text)
@@ -815,7 +815,7 @@ instance ToJSON Project where
 -- /See:/ 'color' smart constructor.
 data Color = Color
     { _cColor   :: !(Maybe Text)
-    , _cOpacity :: !(Maybe (JSONText Double))
+    , _cOpacity :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Color' with the minimum fields required to make a request.
@@ -869,7 +869,7 @@ data RasterCollection = RasterCollection
     , _rcLastModifiedTime          :: !(Maybe DateTime')
     , _rcLastModifierEmail         :: !(Maybe Text)
     , _rcName                      :: !(Maybe Text)
-    , _rcBbox                      :: !(Maybe [JSONText Double])
+    , _rcBbox                      :: !(Maybe [Textual Double])
     , _rcProcessingStatus          :: !(Maybe RasterCollectionProcessingStatus)
     , _rcMosaic                    :: !(Maybe Bool)
     , _rcId                        :: !(Maybe Text)
@@ -1102,8 +1102,8 @@ instance ToJSON RasterCollection where
 -- /See:/ 'lineStyleStroke' smart constructor.
 data LineStyleStroke = LineStyleStroke
     { _lssColor   :: !(Maybe Text)
-    , _lssWidth   :: !(Maybe (JSONText Double))
-    , _lssOpacity :: !(Maybe (JSONText Double))
+    , _lssWidth   :: !(Maybe (Textual Double))
+    , _lssOpacity :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineStyleStroke' with the minimum fields required to make a request.
@@ -1262,7 +1262,7 @@ data Asset = Asset
     , _aLastModifiedTime          :: !(Maybe DateTime')
     , _aLastModifierEmail         :: !(Maybe Text)
     , _aName                      :: !(Maybe Text)
-    , _aBbox                      :: !(Maybe [JSONText Double])
+    , _aBbox                      :: !(Maybe [Textual Double])
     , _aResource                  :: !(Maybe Text)
     , _aId                        :: !(Maybe Text)
     , _aProjectId                 :: !(Maybe Text)
@@ -1664,7 +1664,7 @@ instance ToJSON ParentsListResponse where
 -- /See:/ 'featuresListResponse' smart constructor.
 data FeaturesListResponse = FeaturesListResponse
     { _flrNextPageToken           :: !(Maybe Text)
-    , _flrAllowedQueriesPerSecond :: !(Maybe (JSONText Double))
+    , _flrAllowedQueriesPerSecond :: !(Maybe (Textual Double))
     , _flrSchema                  :: !(Maybe Schema)
     , _flrFeatures                :: !(Maybe [Feature])
     , _flrType                    :: !Text
@@ -1829,8 +1829,8 @@ instance ToJSON IconsListResponse where
 data LabelStyle = LabelStyle
     { _lsFontStyle  :: !(Maybe LabelStyleFontStyle)
     , _lsColor      :: !(Maybe Text)
-    , _lsSize       :: !(Maybe (JSONText Double))
-    , _lsOpacity    :: !(Maybe (JSONText Double))
+    , _lsSize       :: !(Maybe (Textual Double))
+    , _lsOpacity    :: !(Maybe (Textual Double))
     , _lsOutline    :: !(Maybe Color)
     , _lsFontWeight :: !(Maybe LabelStyleFontWeight)
     , _lsColumn     :: !(Maybe Text)
@@ -2095,7 +2095,7 @@ instance ToJSON
 --
 -- /See:/ 'publishedMap' smart constructor.
 data PublishedMap = PublishedMap
-    { _pmDefaultViewport :: !(Maybe [JSONText Double])
+    { _pmDefaultViewport :: !(Maybe [Textual Double])
     , _pmContents        :: !(Maybe [MapItem])
     , _pmName            :: !(Maybe Text)
     , _pmId              :: !(Maybe Text)
@@ -2257,7 +2257,7 @@ instance ToJSON AcquisitionTime where
 --
 -- /See:/ 'tablesListResponse' smart constructor.
 data TablesListResponse = TablesListResponse
-    { _tlrNextPageToken :: !(Maybe (JSONText Word8))
+    { _tlrNextPageToken :: !(Maybe (Textual Word8))
     , _tlrTables        :: !(Maybe [Table])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2479,8 +2479,8 @@ instance ToJSON DisplayRule where
 -- /See:/ 'bOrder' smart constructor.
 data BOrder = BOrder
     { _boColor   :: !(Maybe Text)
-    , _boWidth   :: !(Maybe (JSONText Double))
-    , _boOpacity :: !(Maybe (JSONText Double))
+    , _boWidth   :: !(Maybe (Textual Double))
+    , _boOpacity :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BOrder' with the minimum fields required to make a request.
@@ -2540,7 +2540,7 @@ data Map = Map
     { _mCreationTime              :: !(Maybe DateTime')
     , _mWritersCanEditPermissions :: !(Maybe Bool)
     , _mEtag                      :: !(Maybe Text)
-    , _mDefaultViewport           :: !(Maybe [JSONText Double])
+    , _mDefaultViewport           :: !(Maybe [Textual Double])
     , _mContents                  :: !(Maybe [MapItem])
     , _mPublishingStatus          :: !(Maybe MapPublishingStatus)
     , _mCreatorEmail              :: !(Maybe Text)
@@ -2548,7 +2548,7 @@ data Map = Map
     , _mLastModifierEmail         :: !(Maybe Text)
     , _mVersions                  :: !(Maybe [Text])
     , _mName                      :: !(Maybe Text)
-    , _mBbox                      :: !(Maybe [JSONText Double])
+    , _mBbox                      :: !(Maybe [Textual Double])
     , _mProcessingStatus          :: !(Maybe MapProcessingStatus)
     , _mId                        :: !(Maybe Text)
     , _mProjectId                 :: !(Maybe Text)
@@ -2868,7 +2868,7 @@ instance ToJSON RasterCollectionsRastersListResponse
 --
 -- /See:/ 'geoJSONMultiLineString' smart constructor.
 data GeoJSONMultiLineString = GeoJSONMultiLineString
-    { _gjmlsCoordinates :: !(Maybe [[[JSONText Double]]])
+    { _gjmlsCoordinates :: !(Maybe [[[Textual Double]]])
     , _gjmlsType        :: !(Maybe GeoJSONMultiLineStringType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2989,7 +2989,7 @@ instance ToJSON ScalingFunction where
 --
 -- /See:/ 'assetsListResponse' smart constructor.
 data AssetsListResponse = AssetsListResponse
-    { _alrNextPageToken :: !(Maybe (JSONText Word8))
+    { _alrNextPageToken :: !(Maybe (Textual Word8))
     , _alrAssets        :: !(Maybe [Asset])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3152,7 +3152,7 @@ data RasterCollectionsRaster = RasterCollectionsRaster
     , _rcrRasterType       :: !Text
     , _rcrLastModifiedTime :: !(Maybe DateTime')
     , _rcrName             :: !(Maybe Text)
-    , _rcrBbox             :: !(Maybe [JSONText Double])
+    , _rcrBbox             :: !(Maybe [Textual Double])
     , _rcrId               :: !(Maybe Text)
     , _rcrProjectId        :: !(Maybe Text)
     , _rcrDescription      :: !(Maybe Text)
@@ -3337,7 +3337,7 @@ instance ToJSON Filter where
 --
 -- /See:/ 'geoJSONMultiPoint' smart constructor.
 data GeoJSONMultiPoint = GeoJSONMultiPoint
-    { _gjmpCoordinates :: !(Maybe [[JSONText Double]])
+    { _gjmpCoordinates :: !(Maybe [[Textual Double]])
     , _gjmpType        :: !(Maybe GeoJSONMultiPointType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3385,7 +3385,7 @@ instance ToJSON GeoJSONMultiPoint where
 --
 -- /See:/ 'geoJSONMultiPolygon' smart constructor.
 data GeoJSONMultiPolygon = GeoJSONMultiPolygon
-    { _gjsonmpCoordinates :: !(Maybe [[[[JSONText Double]]]])
+    { _gjsonmpCoordinates :: !(Maybe [[[[Textual Double]]]])
     , _gjsonmpType        :: !(Maybe GeoJSONMultiPolygonType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3448,7 +3448,7 @@ data Layer = Layer
     , _layDatasources               :: !(Maybe [Datasource])
     , _layLastModifierEmail         :: !(Maybe Text)
     , _layName                      :: !(Maybe Text)
-    , _layBbox                      :: !(Maybe [JSONText Double])
+    , _layBbox                      :: !(Maybe [Textual Double])
     , _layProcessingStatus          :: !(Maybe LayerProcessingStatus)
     , _layId                        :: !(Maybe Text)
     , _layProjectId                 :: !(Maybe Text)
@@ -3784,7 +3784,7 @@ data Raster = Raster
     , _rrLastModifierEmail         :: !(Maybe Text)
     , _rrAcquisitionTime           :: !(Maybe AcquisitionTime)
     , _rrName                      :: !(Maybe Text)
-    , _rrBbox                      :: !(Maybe [JSONText Double])
+    , _rrBbox                      :: !(Maybe [Textual Double])
     , _rrProcessingStatus          :: !(Maybe RasterProcessingStatus)
     , _rrFiles                     :: !(Maybe [File])
     , _rrId                        :: !(Maybe Text)
@@ -4247,7 +4247,7 @@ data Table = Table
     , _tabSchema                    :: !(Maybe Schema)
     , _tabLastModifierEmail         :: !(Maybe Text)
     , _tabName                      :: !(Maybe Text)
-    , _tabBbox                      :: !(Maybe [JSONText Double])
+    , _tabBbox                      :: !(Maybe [Textual Double])
     , _tabProcessingStatus          :: !(Maybe TableProcessingStatus)
     , _tabFiles                     :: !(Maybe [File])
     , _tabId                        :: !(Maybe Text)
@@ -4504,7 +4504,7 @@ instance ToJSON Table where
 --
 -- /See:/ 'file' smart constructor.
 data File = File
-    { _fSize         :: !(Maybe (JSONText Int64))
+    { _fSize         :: !(Maybe (Textual Int64))
     , _fUploadStatus :: !(Maybe FileUploadStatus)
     , _fFilename     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4648,7 +4648,7 @@ instance ToJSON PermissionsBatchDeleteResponse where
 --
 -- /See:/ 'mapKmlLink' smart constructor.
 data MapKmlLink = MapKmlLink
-    { _mklDefaultViewport :: !(Maybe [JSONText Double])
+    { _mklDefaultViewport :: !(Maybe [Textual Double])
     , _mklVisibility      :: !(Maybe Text)
     , _mklName            :: !(Maybe Text)
     , _mklType            :: !(Maybe MapKmlLinkType)
@@ -4754,7 +4754,7 @@ instance ToJSON PermissionsBatchUpdateResponse where
 --
 -- /See:/ 'geoJSONLineString' smart constructor.
 data GeoJSONLineString = GeoJSONLineString
-    { _gjlsCoordinates :: !(Maybe [[JSONText Double]])
+    { _gjlsCoordinates :: !(Maybe [[Textual Double]])
     , _gjlsType        :: !(Maybe GeoJSONLineStringType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4804,7 +4804,7 @@ instance ToJSON GeoJSONLineString where
 -- /See:/ 'publishedMapsListResponse' smart constructor.
 data PublishedMapsListResponse = PublishedMapsListResponse
     { _pmlrMaps          :: !(Maybe [PublishedMap])
-    , _pmlrNextPageToken :: !(Maybe (JSONText Word8))
+    , _pmlrNextPageToken :: !(Maybe (Textual Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedMapsListResponse' with the minimum fields required to make a request.
@@ -4856,7 +4856,7 @@ instance ToJSON PublishedMapsListResponse where
 -- /See:/ 'mapsListResponse' smart constructor.
 data MapsListResponse = MapsListResponse
     { _mlrMaps          :: !(Maybe [Map])
-    , _mlrNextPageToken :: !(Maybe (JSONText Word8))
+    , _mlrNextPageToken :: !(Maybe (Textual Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListResponse' with the minimum fields required to make a request.
@@ -4955,7 +4955,7 @@ instance ToJSON GeoJSONGeometryCollection where
 --
 -- /See:/ 'geoJSONPolygon' smart constructor.
 data GeoJSONPolygon = GeoJSONPolygon
-    { _gjpCoordinates :: !(Maybe [[[JSONText Double]]])
+    { _gjpCoordinates :: !(Maybe [[[Textual Double]]])
     , _gjpType        :: !(Maybe GeoJSONPolygonType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5007,7 +5007,7 @@ instance ToJSON GeoJSONPolygon where
 --
 -- /See:/ 'geoJSONPoint' smart constructor.
 data GeoJSONPoint = GeoJSONPoint
-    { _gjsonpCoordinates :: !(Maybe [JSONText Double])
+    { _gjsonpCoordinates :: !(Maybe [Textual Double])
     , _gjsonpType        :: !(Maybe GeoJSONPointType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5061,7 +5061,7 @@ instance ToJSON GeoJSONPoint where
 --
 -- /See:/ 'layersListResponse' smart constructor.
 data LayersListResponse = LayersListResponse
-    { _llrNextPageToken :: !(Maybe (JSONText Word8))
+    { _llrNextPageToken :: !(Maybe (Textual Word8))
     , _llrLayers        :: !(Maybe [Layer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5204,7 +5204,7 @@ instance ToJSON PermissionsListResponse where
 data LineStyle = LineStyle
     { _lsStroke :: !(Maybe LineStyleStroke)
     , _lsBOrder :: !(Maybe BOrder)
-    , _lsDash   :: !(Maybe [JSONText Double])
+    , _lsDash   :: !(Maybe [Textual Double])
     , _lsLabel  :: !(Maybe LabelStyle)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5271,7 +5271,7 @@ instance ToJSON LineStyle where
 --
 -- /See:/ 'publishedLayersListResponse' smart constructor.
 data PublishedLayersListResponse = PublishedLayersListResponse
-    { _pllrNextPageToken :: !(Maybe (JSONText Word8))
+    { _pllrNextPageToken :: !(Maybe (Textual Word8))
     , _pllrLayers        :: !(Maybe [PublishedLayer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 

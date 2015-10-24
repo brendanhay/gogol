@@ -603,7 +603,7 @@ data Report = Report
     , _rRows             :: !(Maybe [[Text]])
     , _rTotals           :: !(Maybe [Text])
     , _rHeaders          :: !(Maybe [ReportHeadersItem])
-    , _rTotalMatchedRows :: !(Maybe (JSONText Int64))
+    , _rTotalMatchedRows :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
@@ -1294,12 +1294,12 @@ instance ToJSON URLChannel where
 data PreferredDeal = PreferredDeal
     { _pAdvertiserName   :: !(Maybe Text)
     , _pCurrencyCode     :: !(Maybe Text)
-    , _pStartTime        :: !(Maybe (JSONText Word64))
+    , _pStartTime        :: !(Maybe (Textual Word64))
     , _pKind             :: !Text
     , _pBuyerNetworkName :: !(Maybe Text)
-    , _pEndTime          :: !(Maybe (JSONText Word64))
-    , _pId               :: !(Maybe (JSONText Int64))
-    , _pFixedCpm         :: !(Maybe (JSONText Int64))
+    , _pEndTime          :: !(Maybe (Textual Word64))
+    , _pId               :: !(Maybe (Textual Int64))
+    , _pFixedCpm         :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PreferredDeal' with the minimum fields required to make a request.

@@ -46,7 +46,7 @@ type CampaignsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Campaign :> Put '[JSON] Campaign
@@ -55,7 +55,7 @@ type CampaignsUpdateResource =
 --
 -- /See:/ 'campaignsUpdate' smart constructor.
 data CampaignsUpdate = CampaignsUpdate
-    { _cuProFileId :: !(JSONText Int64)
+    { _cuProFileId :: !(Textual Int64)
     , _cuPayload   :: !Campaign
     } deriving (Eq,Show,Data,Typeable,Generic)
 

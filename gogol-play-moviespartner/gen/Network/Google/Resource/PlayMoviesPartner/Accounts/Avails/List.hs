@@ -76,7 +76,7 @@ type AccountsAvailsListResource =
                                  QueryParam "bearer_token" Text :>
                                    QueryParam "pageToken" Text :>
                                      QueryParam "title" Text :>
-                                       QueryParam "pageSize" (JSONText Int32) :>
+                                       QueryParam "pageSize" (Textual Int32) :>
                                          QueryParam "callback" Text :>
                                            QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListAvailsResponse
@@ -101,7 +101,7 @@ data AccountsAvailsList = AccountsAvailsList
     , _aalBearerToken    :: !(Maybe Text)
     , _aalPageToken      :: !(Maybe Text)
     , _aalTitle          :: !(Maybe Text)
-    , _aalPageSize       :: !(Maybe (JSONText Int32))
+    , _aalPageSize       :: !(Maybe (Textual Int32))
     , _aalCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

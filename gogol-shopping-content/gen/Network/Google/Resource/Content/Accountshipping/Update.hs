@@ -47,9 +47,9 @@ import           Network.Google.ShoppingContent.Types
 type AccountshippingUpdateResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "accountshipping" :>
-             Capture "accountId" (JSONText Word64) :>
+             Capture "accountId" (Textual Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AccountShipping :>
@@ -59,9 +59,9 @@ type AccountshippingUpdateResource =
 --
 -- /See:/ 'accountshippingUpdate' smart constructor.
 data AccountshippingUpdate = AccountshippingUpdate
-    { _auMerchantId :: !(JSONText Word64)
+    { _auMerchantId :: !(Textual Word64)
     , _auPayload    :: !AccountShipping
-    , _auAccountId  :: !(JSONText Word64)
+    , _auAccountId  :: !(Textual Word64)
     , _auDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

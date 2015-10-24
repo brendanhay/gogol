@@ -69,7 +69,7 @@ type PostUserInfosListResource =
                              QueryParam "view" PostUserInfosListView :>
                                QueryParam "labels" Text :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "maxResults" (JSONText Word32) :>
+                                   QueryParam "maxResults" (Textual Word32) :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] PostUserInfosList
 
@@ -89,7 +89,7 @@ data PostUserInfosList' = PostUserInfosList'
     , _puilView        :: !(Maybe PostUserInfosListView)
     , _puilLabels      :: !(Maybe Text)
     , _puilPageToken   :: !(Maybe Text)
-    , _puilMaxResults  :: !(Maybe (JSONText Word32))
+    , _puilMaxResults  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosList'' with the minimum fields required to make a request.

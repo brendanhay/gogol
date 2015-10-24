@@ -47,9 +47,9 @@ type LandingPagesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "campaignId" (JSONText Int64) :>
+               Capture "campaignId" (Textual Int64) :>
                  "landingPages" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] LandingPage :>
@@ -59,8 +59,8 @@ type LandingPagesInsertResource =
 --
 -- /See:/ 'landingPagesInsert' smart constructor.
 data LandingPagesInsert = LandingPagesInsert
-    { _lpiCampaignId :: !(JSONText Int64)
-    , _lpiProFileId  :: !(JSONText Int64)
+    { _lpiCampaignId :: !(Textual Int64)
+    , _lpiProFileId  :: !(Textual Int64)
     , _lpiPayload    :: !LandingPage
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -80,10 +80,10 @@ instance ToJSON
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' smart constructor.
 data PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-    { _pafsvaisiHeight :: !(Maybe (JSONText Int32))
-    , _pafsvaisiLeft   :: !(Maybe (JSONText Int32))
-    , _pafsvaisiWidth  :: !(Maybe (JSONText Int32))
-    , _pafsvaisiTop    :: !(Maybe (JSONText Int32))
+    { _pafsvaisiHeight :: !(Maybe (Textual Int32))
+    , _pafsvaisiLeft   :: !(Maybe (Textual Int32))
+    , _pafsvaisiWidth  :: !(Maybe (Textual Int32))
+    , _pafsvaisiTop    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' with the minimum fields required to make a request.
@@ -162,10 +162,10 @@ instance ToJSON
 --
 -- /See:/ 'pagespeedAPIImageV2' smart constructor.
 data PagespeedAPIImageV2 = PagespeedAPIImageV2
-    { _paivHeight   :: !(Maybe (JSONText Int32))
-    , _paivData     :: !(Maybe (JSONText Word8))
+    { _paivHeight   :: !(Maybe (Textual Int32))
+    , _paivData     :: !(Maybe (Textual Word8))
     , _paivMimeType :: !(Maybe Text)
-    , _paivWidth    :: !(Maybe (JSONText Int32))
+    , _paivWidth    :: !(Maybe (Textual Int32))
     , _paivPageRect :: !(Maybe PagespeedAPIImageV2Page_rect)
     , _paivKey      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -255,10 +255,10 @@ instance ToJSON PagespeedAPIImageV2 where
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItemRectsItem' smart constructor.
 data PagespeedAPIFormatStringV2ArgsItemRectsItem = PagespeedAPIFormatStringV2ArgsItemRectsItem
-    { _pafsvairiHeight :: !(Maybe (JSONText Int32))
-    , _pafsvairiLeft   :: !(Maybe (JSONText Int32))
-    , _pafsvairiWidth  :: !(Maybe (JSONText Int32))
-    , _pafsvairiTop    :: !(Maybe (JSONText Int32))
+    { _pafsvairiHeight :: !(Maybe (Textual Int32))
+    , _pafsvairiLeft   :: !(Maybe (Textual Int32))
+    , _pafsvairiWidth  :: !(Maybe (Textual Int32))
+    , _pafsvairiTop    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItemRectsItem' with the minimum fields required to make a request.
@@ -335,8 +335,8 @@ instance ToJSON
 --
 -- /See:/ 'resultVersion' smart constructor.
 data ResultVersion = ResultVersion
-    { _rvMinor :: !(Maybe (JSONText Int32))
-    , _rvMajor :: !(Maybe (JSONText Int32))
+    { _rvMinor :: !(Maybe (Textual Int32))
+    , _rvMajor :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultVersion' with the minimum fields required to make a request.
@@ -385,19 +385,19 @@ instance ToJSON ResultVersion where
 --
 -- /See:/ 'resultPageStats' smart constructor.
 data ResultPageStats = ResultPageStats
-    { _rpsHTMLResponseBytes       :: !(Maybe (JSONText Int64))
-    , _rpsTotalRequestBytes       :: !(Maybe (JSONText Int64))
-    , _rpsNumberResources         :: !(Maybe (JSONText Int32))
-    , _rpsNumberStaticResources   :: !(Maybe (JSONText Int32))
-    , _rpsNumberHosts             :: !(Maybe (JSONText Int32))
-    , _rpsNumberJsResources       :: !(Maybe (JSONText Int32))
-    , _rpsNumberCssResources      :: !(Maybe (JSONText Int32))
-    , _rpsTextResponseBytes       :: !(Maybe (JSONText Int64))
-    , _rpsFlashResponseBytes      :: !(Maybe (JSONText Int64))
-    , _rpsImageResponseBytes      :: !(Maybe (JSONText Int64))
-    , _rpsOtherResponseBytes      :: !(Maybe (JSONText Int64))
-    , _rpsJavascriptResponseBytes :: !(Maybe (JSONText Int64))
-    , _rpsCssResponseBytes        :: !(Maybe (JSONText Int64))
+    { _rpsHTMLResponseBytes       :: !(Maybe (Textual Int64))
+    , _rpsTotalRequestBytes       :: !(Maybe (Textual Int64))
+    , _rpsNumberResources         :: !(Maybe (Textual Int32))
+    , _rpsNumberStaticResources   :: !(Maybe (Textual Int32))
+    , _rpsNumberHosts             :: !(Maybe (Textual Int32))
+    , _rpsNumberJsResources       :: !(Maybe (Textual Int32))
+    , _rpsNumberCssResources      :: !(Maybe (Textual Int32))
+    , _rpsTextResponseBytes       :: !(Maybe (Textual Int64))
+    , _rpsFlashResponseBytes      :: !(Maybe (Textual Int64))
+    , _rpsImageResponseBytes      :: !(Maybe (Textual Int64))
+    , _rpsOtherResponseBytes      :: !(Maybe (Textual Int64))
+    , _rpsJavascriptResponseBytes :: !(Maybe (Textual Int64))
+    , _rpsCssResponseBytes        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultPageStats' with the minimum fields required to make a request.
@@ -586,10 +586,10 @@ instance ToJSON ResultPageStats where
 --
 -- /See:/ 'pagespeedAPIImageV2Page_rect' smart constructor.
 data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect
-    { _paivpHeight :: !(Maybe (JSONText Int32))
-    , _paivpLeft   :: !(Maybe (JSONText Int32))
-    , _paivpWidth  :: !(Maybe (JSONText Int32))
-    , _paivpTop    :: !(Maybe (JSONText Int32))
+    { _paivpHeight :: !(Maybe (Textual Int32))
+    , _paivpLeft   :: !(Maybe (Textual Int32))
+    , _paivpWidth  :: !(Maybe (Textual Int32))
+    , _paivpTop    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIImageV2Page_rect' with the minimum fields required to make a request.
@@ -660,7 +660,7 @@ instance ToJSON PagespeedAPIImageV2Page_rect where
 data Result = Result
     { _rScreenshot       :: !(Maybe PagespeedAPIImageV2)
     , _rKind             :: !Text
-    , _rResponseCode     :: !(Maybe (JSONText Int32))
+    , _rResponseCode     :: !(Maybe (Textual Int32))
     , _rInvalidRules     :: !(Maybe [Text])
     , _rFormattedResults :: !(Maybe ResultFormattedResults)
     , _rVersion          :: !(Maybe ResultVersion)
@@ -891,7 +891,7 @@ instance ToJSON PagespeedAPIFormatStringV2ArgsItem
 --
 -- /See:/ 'resultRuleGroupsAdditional' smart constructor.
 newtype ResultRuleGroupsAdditional = ResultRuleGroupsAdditional
-    { _rrgaScore :: Maybe (JSONText Int32)
+    { _rrgaScore :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultRuleGroupsAdditional' with the minimum fields required to make a request.
@@ -981,7 +981,7 @@ instance ToJSON ResultFormattedResults where
 -- /See:/ 'resultFormattedResultsRuleResultsAdditional' smart constructor.
 data ResultFormattedResultsRuleResultsAdditional = ResultFormattedResultsRuleResultsAdditional
     { _rfrrraSummary           :: !(Maybe PagespeedAPIFormatStringV2)
-    , _rfrrraRuleImpact        :: !(Maybe (JSONText Double))
+    , _rfrrraRuleImpact        :: !(Maybe (Textual Double))
     , _rfrrraGroups            :: !(Maybe [Text])
     , _rfrrraLocalizedRuleName :: !(Maybe Text)
     , _rfrrraURLBlocks         :: !(Maybe [ResultFormattedResultsRuleResultsAdditionalURLBlocksItem])

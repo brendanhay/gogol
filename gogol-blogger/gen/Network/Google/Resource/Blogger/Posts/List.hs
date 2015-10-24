@@ -66,7 +66,7 @@ type PostsListResource =
                            QueryParam "view" PostsListView :>
                              QueryParam "labels" Text :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "maxResults" (JSONText Word32) :>
+                                 QueryParam "maxResults" (Textual Word32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] PostList
 
@@ -84,7 +84,7 @@ data PostsList = PostsList
     , _pllView        :: !(Maybe PostsListView)
     , _pllLabels      :: !(Maybe Text)
     , _pllPageToken   :: !(Maybe Text)
-    , _pllMaxResults  :: !(Maybe (JSONText Word32))
+    , _pllMaxResults  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsList' with the minimum fields required to make a request.

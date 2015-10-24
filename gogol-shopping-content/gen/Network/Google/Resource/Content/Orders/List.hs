@@ -51,7 +51,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersListResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "orders" :>
              QueryParam "placedDateEnd" Text :>
                QueryParam "orderBy" OrdersListOrderBy :>
@@ -59,7 +59,7 @@ type OrdersListResource =
                    QueryParams "statuses" OrdersListStatuses :>
                      QueryParam "pageToken" Text :>
                        QueryParam "placedDateStart" Text :>
-                         QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "maxResults" (Textual Word32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] OrdersListResponse
 
@@ -68,13 +68,13 @@ type OrdersListResource =
 -- /See:/ 'ordersList' smart constructor.
 data OrdersList = OrdersList
     { _olPlacedDateEnd   :: !(Maybe Text)
-    , _olMerchantId      :: !(JSONText Word64)
+    , _olMerchantId      :: !(Textual Word64)
     , _olOrderBy         :: !(Maybe OrdersListOrderBy)
     , _olAcknowledged    :: !(Maybe Bool)
     , _olStatuses        :: !(Maybe [OrdersListStatuses])
     , _olPageToken       :: !(Maybe Text)
     , _olPlacedDateStart :: !(Maybe Text)
-    , _olMaxResults      :: !(Maybe (JSONText Word32))
+    , _olMaxResults      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList' with the minimum fields required to make a request.

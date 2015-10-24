@@ -48,9 +48,9 @@ type AdvertiserGroupsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AdvertiserGroup :>
                      Patch '[JSON] AdvertiserGroup
@@ -60,9 +60,9 @@ type AdvertiserGroupsPatchResource =
 --
 -- /See:/ 'advertiserGroupsPatch' smart constructor.
 data AdvertiserGroupsPatch = AdvertiserGroupsPatch
-    { _agpProFileId :: !(JSONText Int64)
+    { _agpProFileId :: !(Textual Int64)
     , _agpPayload   :: !AdvertiserGroup
-    , _agpId        :: !(JSONText Int64)
+    , _agpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsPatch' with the minimum fields required to make a request.

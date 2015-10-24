@@ -71,7 +71,7 @@ instance ToJSON OperationWarningsItemDataItem where
 -- /See:/ 'rollingUpdate' smart constructor.
 data RollingUpdate = RollingUpdate
     { _ruStatus               :: !(Maybe Text)
-    , _ruProgress             :: !(Maybe (JSONText Int32))
+    , _ruProgress             :: !(Maybe (Textual Int32))
     , _ruInstanceGroupManager :: !(Maybe Text)
     , _ruKind                 :: !Text
     , _ruError                :: !(Maybe RollingUpdateError)
@@ -545,24 +545,24 @@ instance ToJSON RollingUpdateErrorErrorsItem where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe (JSONText Word64))
+    { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (JSONText Int32))
+    , _oProgress            :: !(Maybe (Textual Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
+    , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (JSONText Word64))
+    , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -914,11 +914,11 @@ instance ToJSON InstanceUpdateError where
 --
 -- /See:/ 'rollingUpdatePolicy' smart constructor.
 data RollingUpdatePolicy = RollingUpdatePolicy
-    { _rupMinInstanceUpdateTimeSec  :: !(Maybe (JSONText Int32))
-    , _rupInstanceStartupTimeoutSec :: !(Maybe (JSONText Int32))
-    , _rupMaxNumFailedInstances     :: !(Maybe (JSONText Int32))
-    , _rupAutoPauseAfterInstances   :: !(Maybe (JSONText Int32))
-    , _rupMaxNumConcurrentInstances :: !(Maybe (JSONText Int32))
+    { _rupMinInstanceUpdateTimeSec  :: !(Maybe (Textual Int32))
+    , _rupInstanceStartupTimeoutSec :: !(Maybe (Textual Int32))
+    , _rupMaxNumFailedInstances     :: !(Maybe (Textual Int32))
+    , _rupAutoPauseAfterInstances   :: !(Maybe (Textual Int32))
+    , _rupMaxNumConcurrentInstances :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatePolicy' with the minimum fields required to make a request.

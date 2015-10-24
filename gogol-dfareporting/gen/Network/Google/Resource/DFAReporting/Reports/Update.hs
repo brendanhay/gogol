@@ -47,9 +47,9 @@ type ReportsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "reports" :>
-               Capture "reportId" (JSONText Int64) :>
+               Capture "reportId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Report :> Put '[JSON] Report
 
@@ -57,8 +57,8 @@ type ReportsUpdateResource =
 --
 -- /See:/ 'reportsUpdate' smart constructor.
 data ReportsUpdate = ReportsUpdate
-    { _ruReportId  :: !(JSONText Int64)
-    , _ruProFileId :: !(JSONText Int64)
+    { _ruReportId  :: !(Textual Int64)
+    , _ruProFileId :: !(Textual Int64)
     , _ruPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 

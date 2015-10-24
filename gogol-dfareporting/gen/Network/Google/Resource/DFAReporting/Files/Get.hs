@@ -46,17 +46,17 @@ type FilesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "reports" :>
-           Capture "reportId" (JSONText Int64) :>
+           Capture "reportId" (Textual Int64) :>
              "files" :>
-               Capture "fileId" (JSONText Int64) :>
+               Capture "fileId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
          "v2.2" :>
            "reports" :>
-             Capture "reportId" (JSONText Int64) :>
+             Capture "reportId" (Textual Int64) :>
                "files" :>
-                 Capture "fileId" (JSONText Int64) :>
+                 Capture "fileId" (Textual Int64) :>
                    QueryParam "alt" AltMedia :>
                      Get '[OctetStream] Stream
 
@@ -64,8 +64,8 @@ type FilesGetResource =
 --
 -- /See:/ 'filesGet' smart constructor.
 data FilesGet = FilesGet
-    { _fgReportId :: !(JSONText Int64)
-    , _fgFileId   :: !(JSONText Int64)
+    { _fgReportId :: !(Textual Int64)
+    , _fgFileId   :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGet' with the minimum fields required to make a request.

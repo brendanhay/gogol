@@ -46,17 +46,17 @@ type SizesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "sizes" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Size
 
 -- | Gets one size by ID.
 --
 -- /See:/ 'sizesGet' smart constructor.
 data SizesGet = SizesGet
-    { _sgProFileId :: !(JSONText Int64)
-    , _sgId        :: !(JSONText Int64)
+    { _sgProFileId :: !(Textual Int64)
+    , _sgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesGet' with the minimum fields required to make a request.

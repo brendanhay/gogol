@@ -70,7 +70,7 @@ type UsersWatchResource =
                                QueryParam "query" Text :>
                                  QueryParam "projection" UsersWatchProjection :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "maxResults" (JSONText Int32) :>
+                                     QueryParam "maxResults" (Textual Int32) :>
                                        QueryParam "alt" AltJSON :>
                                          ReqBody '[JSON] Channel :>
                                            Post '[JSON] Channel
@@ -91,7 +91,7 @@ data UsersWatch = UsersWatch
     , _uwQuery           :: !(Maybe Text)
     , _uwProjection      :: !UsersWatchProjection
     , _uwPageToken       :: !(Maybe Text)
-    , _uwMaxResults      :: !(Maybe (JSONText Int32))
+    , _uwMaxResults      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersWatch' with the minimum fields required to make a request.

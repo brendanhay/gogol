@@ -50,26 +50,26 @@ type ReportsFilesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "reports" :>
-               Capture "reportId" (JSONText Int64) :>
+               Capture "reportId" (Textual Int64) :>
                  "files" :>
                    QueryParam "sortOrder" ReportsFilesListSortOrder :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" ReportsFilesListSortField :>
-                         QueryParam "maxResults" (JSONText Int32) :>
+                         QueryParam "maxResults" (Textual Int32) :>
                            QueryParam "alt" AltJSON :> Get '[JSON] FileList
 
 -- | Lists files for a report.
 --
 -- /See:/ 'reportsFilesList' smart constructor.
 data ReportsFilesList = ReportsFilesList
-    { _rflReportId   :: !(JSONText Int64)
-    , _rflProFileId  :: !(JSONText Int64)
+    { _rflReportId   :: !(Textual Int64)
+    , _rflProFileId  :: !(Textual Int64)
     , _rflSortOrder  :: !ReportsFilesListSortOrder
     , _rflPageToken  :: !(Maybe Text)
     , _rflSortField  :: !ReportsFilesListSortField
-    , _rflMaxResults :: !(Maybe (JSONText Int32))
+    , _rflMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesList' with the minimum fields required to make a request.

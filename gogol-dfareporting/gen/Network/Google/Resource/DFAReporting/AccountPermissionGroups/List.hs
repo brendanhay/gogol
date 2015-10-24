@@ -45,7 +45,7 @@ type AccountPermissionGroupsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accountPermissionGroups" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] AccountPermissionGroupsListResponse
@@ -54,7 +54,7 @@ type AccountPermissionGroupsListResource =
 --
 -- /See:/ 'accountPermissionGroupsList' smart constructor.
 newtype AccountPermissionGroupsList = AccountPermissionGroupsList
-    { _apglProFileId :: JSONText Int64
+    { _apglProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroupsList' with the minimum fields required to make a request.

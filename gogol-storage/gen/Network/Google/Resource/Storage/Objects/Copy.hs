@@ -73,35 +73,35 @@ type ObjectsCopyResource =
                              ObjectsCopyDestinationPredefinedACL
                              :>
                              QueryParam "ifSourceGenerationMatch"
-                               (JSONText Int64)
+                               (Textual Int64)
                                :>
                                QueryParam "ifMetagenerationMatch"
-                                 (JSONText Int64)
+                                 (Textual Int64)
                                  :>
                                  QueryParam "ifGenerationNotMatch"
-                                   (JSONText Int64)
+                                   (Textual Int64)
                                    :>
                                    QueryParam "ifSourceMetagenerationNotMatch"
-                                     (JSONText Int64)
+                                     (Textual Int64)
                                      :>
                                      QueryParam "ifSourceMetagenerationMatch"
-                                       (JSONText Int64)
+                                       (Textual Int64)
                                        :>
                                        QueryParam "ifGenerationMatch"
-                                         (JSONText Int64)
+                                         (Textual Int64)
                                          :>
                                          QueryParam "ifMetagenerationNotMatch"
-                                           (JSONText Int64)
+                                           (Textual Int64)
                                            :>
                                            QueryParam
                                              "ifSourceGenerationNotMatch"
-                                             (JSONText Int64)
+                                             (Textual Int64)
                                              :>
                                              QueryParam "projection"
                                                ObjectsCopyProjection
                                                :>
                                                QueryParam "sourceGeneration"
-                                                 (JSONText Int64)
+                                                 (Textual Int64)
                                                  :>
                                                  QueryParam "alt" AltJSON :>
                                                    ReqBody '[JSON] Object :>
@@ -122,35 +122,35 @@ type ObjectsCopyResource =
                                ObjectsCopyDestinationPredefinedACL
                                :>
                                QueryParam "ifSourceGenerationMatch"
-                                 (JSONText Int64)
+                                 (Textual Int64)
                                  :>
                                  QueryParam "ifMetagenerationMatch"
-                                   (JSONText Int64)
+                                   (Textual Int64)
                                    :>
                                    QueryParam "ifGenerationNotMatch"
-                                     (JSONText Int64)
+                                     (Textual Int64)
                                      :>
                                      QueryParam "ifSourceMetagenerationNotMatch"
-                                       (JSONText Int64)
+                                       (Textual Int64)
                                        :>
                                        QueryParam "ifSourceMetagenerationMatch"
-                                         (JSONText Int64)
+                                         (Textual Int64)
                                          :>
                                          QueryParam "ifGenerationMatch"
-                                           (JSONText Int64)
+                                           (Textual Int64)
                                            :>
                                            QueryParam "ifMetagenerationNotMatch"
-                                             (JSONText Int64)
+                                             (Textual Int64)
                                              :>
                                              QueryParam
                                                "ifSourceGenerationNotMatch"
-                                               (JSONText Int64)
+                                               (Textual Int64)
                                                :>
                                                QueryParam "projection"
                                                  ObjectsCopyProjection
                                                  :>
                                                  QueryParam "sourceGeneration"
-                                                   (JSONText Int64)
+                                                   (Textual Int64)
                                                    :>
                                                    QueryParam "alt" AltMedia :>
                                                      Post '[OctetStream] Stream
@@ -161,20 +161,20 @@ type ObjectsCopyResource =
 -- /See:/ 'objectsCopy' smart constructor.
 data ObjectsCopy = ObjectsCopy
     { _ocDestinationPredefinedACL       :: !(Maybe ObjectsCopyDestinationPredefinedACL)
-    , _ocIfSourceGenerationMatch        :: !(Maybe (JSONText Int64))
-    , _ocIfMetagenerationMatch          :: !(Maybe (JSONText Int64))
-    , _ocIfGenerationNotMatch           :: !(Maybe (JSONText Int64))
-    , _ocIfSourceMetagenerationNotMatch :: !(Maybe (JSONText Int64))
-    , _ocIfSourceMetagenerationMatch    :: !(Maybe (JSONText Int64))
-    , _ocIfGenerationMatch              :: !(Maybe (JSONText Int64))
+    , _ocIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
+    , _ocIfMetagenerationMatch          :: !(Maybe (Textual Int64))
+    , _ocIfGenerationNotMatch           :: !(Maybe (Textual Int64))
+    , _ocIfSourceMetagenerationNotMatch :: !(Maybe (Textual Int64))
+    , _ocIfSourceMetagenerationMatch    :: !(Maybe (Textual Int64))
+    , _ocIfGenerationMatch              :: !(Maybe (Textual Int64))
     , _ocSourceObject                   :: !Text
     , _ocSourceBucket                   :: !Text
     , _ocPayload                        :: !Object
     , _ocDestinationBucket              :: !Text
-    , _ocIfMetagenerationNotMatch       :: !(Maybe (JSONText Int64))
-    , _ocIfSourceGenerationNotMatch     :: !(Maybe (JSONText Int64))
+    , _ocIfMetagenerationNotMatch       :: !(Maybe (Textual Int64))
+    , _ocIfSourceGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _ocProjection                     :: !(Maybe ObjectsCopyProjection)
-    , _ocSourceGeneration               :: !(Maybe (JSONText Int64))
+    , _ocSourceGeneration               :: !(Maybe (Textual Int64))
     , _ocDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

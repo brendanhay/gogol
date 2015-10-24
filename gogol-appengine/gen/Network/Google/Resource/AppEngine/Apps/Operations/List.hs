@@ -68,7 +68,7 @@ type AppsOperationsListResource =
                        QueryParam "bearer_token" Text :>
                          QueryParam "filter" Text :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (JSONText Int32) :>
+                             QueryParam "pageSize" (Textual Int32) :>
                                QueryParam "callback" Text :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListOperationsResponse
@@ -90,7 +90,7 @@ data AppsOperationsList = AppsOperationsList
     , _aolAppsId         :: !Text
     , _aolFilter         :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
-    , _aolPageSize       :: !(Maybe (JSONText Int32))
+    , _aolPageSize       :: !(Maybe (Textual Int32))
     , _aolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -61,7 +61,7 @@ type DataSetsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "projectId" Text :>
-                         QueryParam "pageSize" (JSONText Int32) :>
+                         QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListDataSetsResponse
@@ -78,7 +78,7 @@ data DataSetsList = DataSetsList
     , _dslBearerToken    :: !(Maybe Text)
     , _dslPageToken      :: !(Maybe Text)
     , _dslProjectId      :: !(Maybe Text)
-    , _dslPageSize       :: !(Maybe (JSONText Int32))
+    , _dslPageSize       :: !(Maybe (Textual Int32))
     , _dslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

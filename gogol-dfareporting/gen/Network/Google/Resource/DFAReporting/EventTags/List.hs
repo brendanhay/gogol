@@ -55,19 +55,19 @@ type EventTagsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "eventTags" :>
                QueryParam "definitionsOnly" Bool :>
                  QueryParams "eventTagTypes"
                    EventTagsListEventTagTypes
                    :>
                    QueryParam "enabled" Bool :>
-                     QueryParam "advertiserId" (JSONText Int64) :>
+                     QueryParam "advertiserId" (Textual Int64) :>
                        QueryParam "searchString" Text :>
-                         QueryParam "campaignId" (JSONText Int64) :>
-                           QueryParams "ids" (JSONText Int64) :>
+                         QueryParam "campaignId" (Textual Int64) :>
+                           QueryParams "ids" (Textual Int64) :>
                              QueryParam "sortOrder" EventTagsListSortOrder :>
-                               QueryParam "adId" (JSONText Int64) :>
+                               QueryParam "adId" (Textual Int64) :>
                                  QueryParam "sortField" EventTagsListSortField
                                    :>
                                    QueryParam "alt" AltJSON :>
@@ -80,13 +80,13 @@ data EventTagsList = EventTagsList
     { _etlDefinitionsOnly :: !(Maybe Bool)
     , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
-    , _etlAdvertiserId    :: !(Maybe (JSONText Int64))
+    , _etlAdvertiserId    :: !(Maybe (Textual Int64))
     , _etlSearchString    :: !(Maybe Text)
-    , _etlCampaignId      :: !(Maybe (JSONText Int64))
-    , _etlIds             :: !(Maybe [JSONText Int64])
-    , _etlProFileId       :: !(JSONText Int64)
+    , _etlCampaignId      :: !(Maybe (Textual Int64))
+    , _etlIds             :: !(Maybe [Textual Int64])
+    , _etlProFileId       :: !(Textual Int64)
     , _etlSortOrder       :: !(Maybe EventTagsListSortOrder)
-    , _etlAdId            :: !(Maybe (JSONText Int64))
+    , _etlAdId            :: !(Maybe (Textual Int64))
     , _etlSortField       :: !(Maybe EventTagsListSortField)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

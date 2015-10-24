@@ -68,7 +68,7 @@ type UsersListResource =
                              QueryParam "query" Text :>
                                QueryParam "projection" UsersListProjection :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "maxResults" (JSONText Int32) :>
+                                   QueryParam "maxResults" (Textual Int32) :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] Users
 
@@ -87,7 +87,7 @@ data UsersList = UsersList
     , _ulQuery           :: !(Maybe Text)
     , _ulProjection      :: !UsersListProjection
     , _ulPageToken       :: !(Maybe Text)
-    , _ulMaxResults      :: !(Maybe (JSONText Int32))
+    , _ulMaxResults      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersList' with the minimum fields required to make a request.

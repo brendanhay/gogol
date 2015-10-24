@@ -61,7 +61,7 @@ type ProjectsSubscriptionsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (JSONText Int32) :>
+                         QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListSubscriptionsResponse
@@ -78,7 +78,7 @@ data ProjectsSubscriptionsList = ProjectsSubscriptionsList
     , _pslUploadType     :: !(Maybe Text)
     , _pslBearerToken    :: !(Maybe Text)
     , _pslPageToken      :: !(Maybe Text)
-    , _pslPageSize       :: !(Maybe (JSONText Int32))
+    , _pslPageSize       :: !(Maybe (Textual Int32))
     , _pslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

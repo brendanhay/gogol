@@ -51,8 +51,8 @@ type ReportsSavedGenerateResource =
          "reports" :>
            Capture "savedReportId" Text :>
              QueryParam "locale" Text :>
-               QueryParam "startIndex" (JSONText Int32) :>
-                 QueryParam "maxResults" (JSONText Int32) :>
+               QueryParam "startIndex" (Textual Int32) :>
+                 QueryParam "maxResults" (Textual Int32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] AdsenseReportsGenerateResponse
 
@@ -63,8 +63,8 @@ type ReportsSavedGenerateResource =
 data ReportsSavedGenerate = ReportsSavedGenerate
     { _rsgLocale        :: !(Maybe Text)
     , _rsgSavedReportId :: !Text
-    , _rsgStartIndex    :: !(Maybe (JSONText Int32))
-    , _rsgMaxResults    :: !(Maybe (JSONText Int32))
+    , _rsgStartIndex    :: !(Maybe (Textual Int32))
+    , _rsgMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedGenerate' with the minimum fields required to make a request.

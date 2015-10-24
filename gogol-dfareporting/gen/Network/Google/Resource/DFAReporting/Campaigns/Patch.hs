@@ -47,9 +47,9 @@ type CampaignsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
 
@@ -57,9 +57,9 @@ type CampaignsPatchResource =
 --
 -- /See:/ 'campaignsPatch' smart constructor.
 data CampaignsPatch = CampaignsPatch
-    { _cpProFileId :: !(JSONText Int64)
+    { _cpProFileId :: !(Textual Int64)
     , _cpPayload   :: !Campaign
-    , _cpId        :: !(JSONText Int64)
+    , _cpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsPatch' with the minimum fields required to make a request.

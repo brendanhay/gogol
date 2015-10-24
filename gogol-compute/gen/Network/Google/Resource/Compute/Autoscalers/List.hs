@@ -56,7 +56,7 @@ type AutoscalersListResource =
                  "autoscalers" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] AutoscalerList
 
@@ -69,7 +69,7 @@ data AutoscalersList = AutoscalersList
     , _aZone       :: !Text
     , _aFilter     :: !(Maybe Text)
     , _aPageToken  :: !(Maybe Text)
-    , _aMaxResults :: !(JSONText Word32)
+    , _aMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersList' with the minimum fields required to make a request.

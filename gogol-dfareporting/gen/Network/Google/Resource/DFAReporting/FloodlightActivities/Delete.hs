@@ -46,17 +46,17 @@ type FloodlightActivitiesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesDelete' smart constructor.
 data FloodlightActivitiesDelete = FloodlightActivitiesDelete
-    { _fadProFileId :: !(JSONText Int64)
-    , _fadId        :: !(JSONText Int64)
+    { _fadProFileId :: !(Textual Int64)
+    , _fadId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesDelete' with the minimum fields required to make a request.

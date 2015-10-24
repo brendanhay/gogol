@@ -47,9 +47,9 @@ type UserRolesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "userRoles" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] UserRole :> Patch '[JSON] UserRole
 
@@ -57,9 +57,9 @@ type UserRolesPatchResource =
 --
 -- /See:/ 'userRolesPatch' smart constructor.
 data UserRolesPatch = UserRolesPatch
-    { _urpProFileId :: !(JSONText Int64)
+    { _urpProFileId :: !(Textual Int64)
     , _urpPayload   :: !UserRole
-    , _urpId        :: !(JSONText Int64)
+    , _urpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesPatch' with the minimum fields required to make a request.

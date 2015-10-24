@@ -46,7 +46,7 @@ type SubAccountsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] SubAccount :> Post '[JSON] SubAccount
@@ -55,7 +55,7 @@ type SubAccountsInsertResource =
 --
 -- /See:/ 'subAccountsInsert' smart constructor.
 data SubAccountsInsert = SubAccountsInsert
-    { _saiProFileId :: !(JSONText Int64)
+    { _saiProFileId :: !(Textual Int64)
     , _saiPayload   :: !SubAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
 

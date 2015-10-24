@@ -50,8 +50,8 @@ type ManagementFiltersListResource =
            "accounts" :>
              Capture "accountId" Text :>
                "filters" :>
-                 QueryParam "start-index" (JSONText Int32) :>
-                   QueryParam "max-results" (JSONText Int32) :>
+                 QueryParam "start-index" (Textual Int32) :>
+                   QueryParam "max-results" (Textual Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Filters
 
 -- | Lists all filters for an account
@@ -59,8 +59,8 @@ type ManagementFiltersListResource =
 -- /See:/ 'managementFiltersList' smart constructor.
 data ManagementFiltersList = ManagementFiltersList
     { _mflAccountId  :: !Text
-    , _mflStartIndex :: !(Maybe (JSONText Int32))
-    , _mflMaxResults :: !(Maybe (JSONText Int32))
+    , _mflStartIndex :: !(Maybe (Textual Int32))
+    , _mflMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersList' with the minimum fields required to make a request.

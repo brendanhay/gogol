@@ -67,7 +67,7 @@ type InvitationsListResource =
                      QueryParam "userId" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (JSONText Int32) :>
+                           QueryParam "pageSize" (Textual Int32) :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListInvitationsResponse
@@ -89,7 +89,7 @@ data InvitationsList = InvitationsList
     , _ilUserId         :: !(Maybe Text)
     , _ilBearerToken    :: !(Maybe Text)
     , _ilPageToken      :: !(Maybe Text)
-    , _ilPageSize       :: !(Maybe (JSONText Int32))
+    , _ilPageSize       :: !(Maybe (Textual Int32))
     , _ilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

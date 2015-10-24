@@ -560,14 +560,14 @@ internalLit = \case
     Time      -> TyCon "Time'"
     Date      -> TyCon "Date'"
     DateTime  -> TyCon "DateTime'"
-    Nat       -> TyApp (TyCon "JSONText") (TyCon "Nat")
-    Float     -> TyApp (TyCon "JSONText") (TyCon "Float")
-    Double    -> TyApp (TyCon "JSONText") (TyCon "Double")
-    Byte      -> TyApp (TyCon "JSONText") (TyCon "Word8")
-    UInt32    -> TyApp (TyCon "JSONText") (TyCon "Word32")
-    UInt64    -> TyApp (TyCon "JSONText") (TyCon "Word64")
-    Int32     -> TyApp (TyCon "JSONText") (TyCon "Int32")
-    Int64     -> TyApp (TyCon "JSONText") (TyCon "Int64")
+    Nat       -> TyApp (TyCon "Textual") (TyCon "Nat")
+    Float     -> TyApp (TyCon "Textual") (TyCon "Double")
+    Double    -> TyApp (TyCon "Textual") (TyCon "Double")
+    Byte      -> TyApp (TyCon "Textual") (TyCon "Word8")
+    UInt32    -> TyApp (TyCon "Textual") (TyCon "Word32")
+    UInt64    -> TyApp (TyCon "Textual") (TyCon "Word64")
+    Int32     -> TyApp (TyCon "Textual") (TyCon "Int32")
+    Int64     -> TyApp (TyCon "Textual") (TyCon "Int64")
     Alt t     -> TyCon (unqual (Text.unpack t))
     RqBody    -> TyCon "RequestBody"
     RsBody    -> TyCon "Stream"
@@ -588,7 +588,7 @@ iso :: TType -> Maybe Exp
 iso = \case
     TList {}      -> Just (var "_Coerce")
     TMap  {}      -> Just (var "_Coerce")
-    TLit Nat      -> Just (var "_Nat")
+    TLit Nat      -> Just (var "_Coerce")
     TLit Time     -> Just (var "_Time")
     TLit Date     -> Just (var "_Date")
     TLit DateTime -> Just (var "_DateTime")

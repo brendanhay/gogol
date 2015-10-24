@@ -46,9 +46,9 @@ type AccountPermissionsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accountPermissions" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountPermission
 
@@ -56,8 +56,8 @@ type AccountPermissionsGetResource =
 --
 -- /See:/ 'accountPermissionsGet' smart constructor.
 data AccountPermissionsGet = AccountPermissionsGet
-    { _apgProFileId :: !(JSONText Int64)
-    , _apgId        :: !(JSONText Int64)
+    { _apgProFileId :: !(Textual Int64)
+    , _apgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionsGet' with the minimum fields required to make a request.

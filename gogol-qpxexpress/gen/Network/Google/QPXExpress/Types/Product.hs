@@ -154,11 +154,11 @@ instance ToJSON CarrierData where
 -- /See:/ 'freeBaggageAllowance' smart constructor.
 data FreeBaggageAllowance = FreeBaggageAllowance
     { _fbaKind          :: !Text
-    , _fbaPounds        :: !(Maybe (JSONText Int32))
+    , _fbaPounds        :: !(Maybe (Textual Int32))
     , _fbaBagDescriptor :: !(Maybe [BagDescriptor])
-    , _fbaKilosPerPiece :: !(Maybe (JSONText Int32))
-    , _fbaKilos         :: !(Maybe (JSONText Int32))
-    , _fbaPieces        :: !(Maybe (JSONText Int32))
+    , _fbaKilosPerPiece :: !(Maybe (Textual Int32))
+    , _fbaKilos         :: !(Maybe (Textual Int32))
+    , _fbaPieces        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBaggageAllowance' with the minimum fields required to make a request.
@@ -483,16 +483,16 @@ data LegInfo = LegInfo
     , _liKind                :: !Text
     , _liAircraft            :: !(Maybe Text)
     , _liArrivalTime         :: !(Maybe Text)
-    , _liOnTimePerformance   :: !(Maybe (JSONText Int32))
+    , _liOnTimePerformance   :: !(Maybe (Textual Int32))
     , _liOperatingDisclosure :: !(Maybe Text)
     , _liMeal                :: !(Maybe Text)
     , _liId                  :: !(Maybe Text)
     , _liOriginTerminal      :: !(Maybe Text)
     , _liChangePlane         :: !(Maybe Bool)
     , _liDestinationTerminal :: !(Maybe Text)
-    , _liConnectionDuration  :: !(Maybe (JSONText Int32))
-    , _liDuration            :: !(Maybe (JSONText Int32))
-    , _liMileage             :: !(Maybe (JSONText Int32))
+    , _liConnectionDuration  :: !(Maybe (Textual Int32))
+    , _liDuration            :: !(Maybe (Textual Int32))
+    , _liMileage             :: !(Maybe (Textual Int32))
     , _liDePartureTime       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -859,7 +859,7 @@ instance ToJSON SegmentPricing where
 data SliceInfo = SliceInfo
     { _siKind     :: !Text
     , _siSegment  :: !(Maybe [SegmentInfo])
-    , _siDuration :: !(Maybe (JSONText Int32))
+    , _siDuration :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SliceInfo' with the minimum fields required to make a request.
@@ -1054,7 +1054,7 @@ instance ToJSON TripOption where
 data BagDescriptor = BagDescriptor
     { _bdKind           :: !Text
     , _bdCommercialName :: !(Maybe Text)
-    , _bdCount          :: !(Maybe (JSONText Int32))
+    , _bdCount          :: !(Maybe (Textual Int32))
     , _bdDescription    :: !(Maybe [Text])
     , _bdSubcode        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1208,12 +1208,12 @@ instance ToJSON CityData where
 --
 -- /See:/ 'passengerCounts' smart constructor.
 data PassengerCounts = PassengerCounts
-    { _pcSeniorCount       :: !(Maybe (JSONText Int32))
+    { _pcSeniorCount       :: !(Maybe (Textual Int32))
     , _pcKind              :: !Text
-    , _pcInfantInLapCount  :: !(Maybe (JSONText Int32))
-    , _pcChildCount        :: !(Maybe (JSONText Int32))
-    , _pcInfantInSeatCount :: !(Maybe (JSONText Int32))
-    , _pcAdultCount        :: !(Maybe (JSONText Int32))
+    , _pcInfantInLapCount  :: !(Maybe (Textual Int32))
+    , _pcChildCount        :: !(Maybe (Textual Int32))
+    , _pcInfantInSeatCount :: !(Maybe (Textual Int32))
+    , _pcAdultCount        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PassengerCounts' with the minimum fields required to make a request.
@@ -1314,14 +1314,14 @@ instance ToJSON PassengerCounts where
 data SegmentInfo = SegmentInfo
     { _sBookingCode                 :: !(Maybe Text)
     , _sCabin                       :: !(Maybe Text)
-    , _sBookingCodeCount            :: !(Maybe (JSONText Int32))
+    , _sBookingCodeCount            :: !(Maybe (Textual Int32))
     , _sSubjectToGovernmentApproval :: !(Maybe Bool)
     , _sKind                        :: !Text
     , _sFlight                      :: !(Maybe FlightInfo)
     , _sId                          :: !(Maybe Text)
     , _sMarriedSegmentGroup         :: !(Maybe Text)
-    , _sConnectionDuration          :: !(Maybe (JSONText Int32))
-    , _sDuration                    :: !(Maybe (JSONText Int32))
+    , _sConnectionDuration          :: !(Maybe (Textual Int32))
+    , _sDuration                    :: !(Maybe (Textual Int32))
     , _sLeg                         :: !(Maybe [LegInfo])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2001,7 +2001,7 @@ data TripOptionsRequest = TripOptionsRequest
     { _torRefundable  :: !(Maybe Bool)
     , _torSaleCountry :: !(Maybe Text)
     , _torPassengers  :: !(Maybe PassengerCounts)
-    , _torSolutions   :: !(Maybe (JSONText Int32))
+    , _torSolutions   :: !(Maybe (Textual Int32))
     , _torSlice       :: !(Maybe [SliceInput])
     , _torMaxPrice    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2106,11 +2106,11 @@ instance ToJSON TripOptionsRequest where
 data SliceInput = SliceInput
     { _sliDestination            :: !(Maybe Text)
     , _sliOrigin                 :: !(Maybe Text)
-    , _sliMaxStops               :: !(Maybe (JSONText Int32))
+    , _sliMaxStops               :: !(Maybe (Textual Int32))
     , _sliKind                   :: !Text
     , _sliProhibitedCarrier      :: !(Maybe [Text])
     , _sliDate                   :: !(Maybe Text)
-    , _sliMaxConnectionDuration  :: !(Maybe (JSONText Int32))
+    , _sliMaxConnectionDuration  :: !(Maybe (Textual Int32))
     , _sliPreferredCabin         :: !(Maybe Text)
     , _sliPermittedDePartureTime :: !(Maybe TimeOfDayRange)
     , _sliPermittedCarrier       :: !(Maybe [Text])

@@ -48,14 +48,14 @@ type TemplateDeleteResource =
          "tables" :>
            Capture "tableId" Text :>
              "templates" :>
-               Capture "templateId" (JSONText Int32) :>
+               Capture "templateId" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a template
 --
 -- /See:/ 'templateDelete' smart constructor.
 data TemplateDelete = TemplateDelete
-    { _tTemplateId :: !(JSONText Int32)
+    { _tTemplateId :: !(Textual Int32)
     , _tTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

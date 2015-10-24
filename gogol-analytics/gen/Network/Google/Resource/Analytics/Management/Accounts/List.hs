@@ -47,16 +47,16 @@ type ManagementAccountsListResource =
        "v3" :>
          "management" :>
            "accounts" :>
-             QueryParam "start-index" (JSONText Int32) :>
-               QueryParam "max-results" (JSONText Int32) :>
+             QueryParam "start-index" (Textual Int32) :>
+               QueryParam "max-results" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | Lists all accounts to which the user has access.
 --
 -- /See:/ 'managementAccountsList' smart constructor.
 data ManagementAccountsList = ManagementAccountsList
-    { _malStartIndex :: !(Maybe (JSONText Int32))
-    , _malMaxResults :: !(Maybe (JSONText Int32))
+    { _malStartIndex :: !(Maybe (Textual Int32))
+    , _malMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountsList' with the minimum fields required to make a request.

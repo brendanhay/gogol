@@ -47,9 +47,9 @@ type SubAccountsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] SubAccount :>
                      Patch '[JSON] SubAccount
@@ -58,9 +58,9 @@ type SubAccountsPatchResource =
 --
 -- /See:/ 'subAccountsPatch' smart constructor.
 data SubAccountsPatch = SubAccountsPatch
-    { _sapProFileId :: !(JSONText Int64)
+    { _sapProFileId :: !(Textual Int64)
     , _sapPayload   :: !SubAccount
-    , _sapId        :: !(JSONText Int64)
+    , _sapId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsPatch' with the minimum fields required to make a request.

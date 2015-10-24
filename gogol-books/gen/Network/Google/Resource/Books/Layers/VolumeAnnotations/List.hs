@@ -73,7 +73,7 @@ type LayersVolumeAnnotationsListResource =
                                  QueryParam "source" Text :>
                                    QueryParam "pageToken" Text :>
                                      QueryParam "endPosition" Text :>
-                                       QueryParam "maxResults" (JSONText Word32)
+                                       QueryParam "maxResults" (Textual Word32)
                                          :>
                                          QueryParam "startPosition" Text :>
                                            QueryParam "alt" AltJSON :>
@@ -96,7 +96,7 @@ data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
     , _lvalPageToken                :: !(Maybe Text)
     , _lvalEndPosition              :: !(Maybe Text)
     , _lvalLayerId                  :: !Text
-    , _lvalMaxResults               :: !(Maybe (JSONText Word32))
+    , _lvalMaxResults               :: !(Maybe (Textual Word32))
     , _lvalStartPosition            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

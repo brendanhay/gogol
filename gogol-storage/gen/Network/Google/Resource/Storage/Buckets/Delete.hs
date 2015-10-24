@@ -48,19 +48,17 @@ type BucketsDeleteResource =
        "v1" :>
          "b" :>
            Capture "bucket" Text :>
-             QueryParam "ifMetagenerationMatch" (JSONText Int64)
-               :>
-               QueryParam "ifMetagenerationNotMatch"
-                 (JSONText Int64)
+             QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+               QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                  :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes an empty bucket.
 --
 -- /See:/ 'bucketsDelete' smart constructor.
 data BucketsDelete = BucketsDelete
-    { _bdIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    { _bdIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _bdBucket                   :: !Text
-    , _bdIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _bdIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsDelete' with the minimum fields required to make a request.

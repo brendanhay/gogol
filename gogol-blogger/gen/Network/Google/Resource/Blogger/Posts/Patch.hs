@@ -57,7 +57,7 @@ type PostsPatchResource =
                Capture "postId" Text :>
                  QueryParam "fetchBody" Bool :>
                    QueryParam "fetchImages" Bool :>
-                     QueryParam "maxComments" (JSONText Word32) :>
+                     QueryParam "maxComments" (Textual Word32) :>
                        QueryParam "revert" Bool :>
                          QueryParam "publish" Bool :>
                            QueryParam "alt" AltJSON :>
@@ -71,7 +71,7 @@ data PostsPatch = PostsPatch
     , _posoFetchImages :: !(Maybe Bool)
     , _posoBlogId      :: !Text
     , _posoPayload     :: !Post'
-    , _posoMaxComments :: !(Maybe (JSONText Word32))
+    , _posoMaxComments :: !(Maybe (Textual Word32))
     , _posoRevert      :: !(Maybe Bool)
     , _posoPostId      :: !Text
     , _posoPublish     :: !(Maybe Bool)

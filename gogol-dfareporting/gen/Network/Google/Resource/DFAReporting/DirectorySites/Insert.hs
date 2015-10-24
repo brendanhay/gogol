@@ -46,7 +46,7 @@ type DirectorySitesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "directorySites" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] DirectorySite :>
@@ -56,7 +56,7 @@ type DirectorySitesInsertResource =
 --
 -- /See:/ 'directorySitesInsert' smart constructor.
 data DirectorySitesInsert = DirectorySitesInsert
-    { _dsiProFileId :: !(JSONText Int64)
+    { _dsiProFileId :: !(Textual Int64)
     , _dsiPayload   :: !DirectorySite
     } deriving (Eq,Show,Data,Typeable,Generic)
 

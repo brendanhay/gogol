@@ -53,8 +53,8 @@ type ManagementWebPropertyAdWordsLinksListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "entityAdWordsLinks" :>
-                     QueryParam "start-index" (JSONText Int32) :>
-                       QueryParam "max-results" (JSONText Int32) :>
+                     QueryParam "start-index" (Textual Int32) :>
+                       QueryParam "max-results" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] EntityAdWordsLinks
 
@@ -64,8 +64,8 @@ type ManagementWebPropertyAdWordsLinksListResource =
 data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksList
     { _mwpawllWebPropertyId :: !Text
     , _mwpawllAccountId     :: !Text
-    , _mwpawllStartIndex    :: !(Maybe (JSONText Int32))
-    , _mwpawllMaxResults    :: !(Maybe (JSONText Int32))
+    , _mwpawllStartIndex    :: !(Maybe (Textual Int32))
+    , _mwpawllMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList' with the minimum fields required to make a request.

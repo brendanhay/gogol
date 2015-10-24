@@ -70,14 +70,14 @@ type ReadGroupSetsCoverageBucketsListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
-                     QueryParam "start" (JSONText Int64) :>
+                     QueryParam "start" (Textual Int64) :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "targetBucketWidth" (JSONText Int64) :>
+                         QueryParam "targetBucketWidth" (Textual Int64) :>
                            QueryParam "referenceName" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "end" (JSONText Int64) :>
+                               QueryParam "end" (Textual Int64) :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "pageSize" (JSONText Int32) :>
+                                   QueryParam "pageSize" (Textual Int32) :>
                                      QueryParam "callback" Text :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListCoverageBucketsResponse
@@ -98,14 +98,14 @@ data ReadGroupSetsCoverageBucketsList = ReadGroupSetsCoverageBucketsList
     , _rgscblUploadProtocol    :: !(Maybe Text)
     , _rgscblPp                :: !Bool
     , _rgscblAccessToken       :: !(Maybe Text)
-    , _rgscblStart             :: !(Maybe (JSONText Int64))
+    , _rgscblStart             :: !(Maybe (Textual Int64))
     , _rgscblUploadType        :: !(Maybe Text)
-    , _rgscblTargetBucketWidth :: !(Maybe (JSONText Int64))
+    , _rgscblTargetBucketWidth :: !(Maybe (Textual Int64))
     , _rgscblReferenceName     :: !(Maybe Text)
     , _rgscblBearerToken       :: !(Maybe Text)
-    , _rgscblEnd               :: !(Maybe (JSONText Int64))
+    , _rgscblEnd               :: !(Maybe (Textual Int64))
     , _rgscblPageToken         :: !(Maybe Text)
-    , _rgscblPageSize          :: !(Maybe (JSONText Int32))
+    , _rgscblPageSize          :: !(Maybe (Textual Int32))
     , _rgscblCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

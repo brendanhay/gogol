@@ -12,7 +12,6 @@
 --
 module Network.Google.Data.Numeric
     ( Nat (..)
-    , _Nat
     ) where
 
 import           Control.Lens
@@ -32,9 +31,6 @@ import           Servant.API
 
 newtype Nat = Nat { unNat :: Natural }
     deriving (Eq, Ord, Enum, Show, Read, Num, Real, Integral, Data, Typeable)
-
-_Nat :: Iso' Nat Natural
-_Nat = iso unNat Nat
 
 instance FromJSON Nat where
     parseJSON = parseJSON >=> go

@@ -58,9 +58,8 @@ type ObjectsComposeResource =
                    QueryParam "destinationPredefinedAcl"
                      ObjectsComposeDestinationPredefinedACL
                      :>
-                     QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                       :>
-                       QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                     QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                       QueryParam "ifGenerationMatch" (Textual Int64) :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ComposeRequest :> Post '[JSON] Object
        :<|>
@@ -74,9 +73,8 @@ type ObjectsComposeResource =
                      QueryParam "destinationPredefinedAcl"
                        ObjectsComposeDestinationPredefinedACL
                        :>
-                       QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                         :>
-                         QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                       QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                         QueryParam "ifGenerationMatch" (Textual Int64) :>
                            QueryParam "alt" AltMedia :>
                              Post '[OctetStream] Stream
 
@@ -86,8 +84,8 @@ type ObjectsComposeResource =
 -- /See:/ 'objectsCompose' smart constructor.
 data ObjectsCompose = ObjectsCompose
     { _oDestinationPredefinedACL :: !(Maybe ObjectsComposeDestinationPredefinedACL)
-    , _oIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
-    , _oIfGenerationMatch        :: !(Maybe (JSONText Int64))
+    , _oIfMetagenerationMatch    :: !(Maybe (Textual Int64))
+    , _oIfGenerationMatch        :: !(Maybe (Textual Int64))
     , _oPayload                  :: !ComposeRequest
     , _oDestinationBucket        :: !Text
     , _oDestinationObject        :: !Text

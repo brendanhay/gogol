@@ -61,7 +61,7 @@ type OrganizationsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (JSONText Int32) :>
+                         QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListOrganizationsResponse
@@ -78,7 +78,7 @@ data OrganizationsList = OrganizationsList
     , _olBearerToken    :: !(Maybe Text)
     , _olFilter         :: !(Maybe Text)
     , _olPageToken      :: !(Maybe Text)
-    , _olPageSize       :: !(Maybe (JSONText Int32))
+    , _olPageSize       :: !(Maybe (Textual Int32))
     , _olCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

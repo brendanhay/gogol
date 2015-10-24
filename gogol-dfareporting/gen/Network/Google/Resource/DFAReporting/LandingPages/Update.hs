@@ -47,9 +47,9 @@ type LandingPagesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "campaignId" (JSONText Int64) :>
+               Capture "campaignId" (Textual Int64) :>
                  "landingPages" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] LandingPage :>
@@ -59,8 +59,8 @@ type LandingPagesUpdateResource =
 --
 -- /See:/ 'landingPagesUpdate' smart constructor.
 data LandingPagesUpdate = LandingPagesUpdate
-    { _lpuCampaignId :: !(JSONText Int64)
-    , _lpuProFileId  :: !(JSONText Int64)
+    { _lpuCampaignId :: !(Textual Int64)
+    , _lpuProFileId  :: !(Textual Int64)
     , _lpuPayload    :: !LandingPage
     } deriving (Eq,Show,Data,Typeable,Generic)
 

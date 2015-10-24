@@ -57,7 +57,7 @@ type TransfersListResource =
                  QueryParam "newOwnerUserId" Text :>
                    QueryParam "customerId" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Int32) :>
+                       QueryParam "maxResults" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] DataTransfersListResponse
 
@@ -71,7 +71,7 @@ data TransfersList = TransfersList
     , _tlNewOwnerUserId :: !(Maybe Text)
     , _tlCustomerId     :: !(Maybe Text)
     , _tlPageToken      :: !(Maybe Text)
-    , _tlMaxResults     :: !(Maybe (JSONText Int32))
+    , _tlMaxResults     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransfersList' with the minimum fields required to make a request.

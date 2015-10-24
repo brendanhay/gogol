@@ -47,9 +47,9 @@ type SitesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "sites" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Site :> Patch '[JSON] Site
 
@@ -57,9 +57,9 @@ type SitesPatchResource =
 --
 -- /See:/ 'sitesPatch' smart constructor.
 data SitesPatch = SitesPatch
-    { _spProFileId :: !(JSONText Int64)
+    { _spProFileId :: !(Textual Int64)
     , _spPayload   :: !Site
-    , _spId        :: !(JSONText Int64)
+    , _spId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesPatch' with the minimum fields required to make a request.

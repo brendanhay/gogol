@@ -46,7 +46,7 @@ type UserRolesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "userRoles" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
@@ -55,7 +55,7 @@ type UserRolesUpdateResource =
 --
 -- /See:/ 'userRolesUpdate' smart constructor.
 data UserRolesUpdate = UserRolesUpdate
-    { _uruProFileId :: !(JSONText Int64)
+    { _uruProFileId :: !(Textual Int64)
     , _uruPayload   :: !UserRole
     } deriving (Eq,Show,Data,Typeable,Generic)
 

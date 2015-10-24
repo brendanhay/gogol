@@ -30,8 +30,8 @@ data DataSet = DataSet
     { _dsNextPageToken  :: !(Maybe Text)
     , _dsDataSourceId   :: !(Maybe Text)
     , _dsPoint          :: !(Maybe [DataPoint])
-    , _dsMinStartTimeNs :: !(Maybe (JSONText Int64))
-    , _dsMaxEndTimeNs   :: !(Maybe (JSONText Int64))
+    , _dsMinStartTimeNs :: !(Maybe (Textual Int64))
+    , _dsMaxEndTimeNs   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataSet' with the minimum fields required to make a request.
@@ -288,7 +288,7 @@ instance ToJSON AggregateBy where
 --
 -- /See:/ 'bucketByActivity' smart constructor.
 data BucketByActivity = BucketByActivity
-    { _bbaMinDurationMillis    :: !(Maybe (JSONText Int64))
+    { _bbaMinDurationMillis    :: !(Maybe (Textual Int64))
     , _bbaActivityDataSourceId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -342,12 +342,12 @@ instance ToJSON BucketByActivity where
 --
 -- /See:/ 'aggregateRequest' smart constructor.
 data AggregateRequest = AggregateRequest
-    { _arEndTimeMillis           :: !(Maybe (JSONText Int64))
+    { _arEndTimeMillis           :: !(Maybe (Textual Int64))
     , _arAggregateBy             :: !(Maybe [AggregateBy])
     , _arBucketBySession         :: !(Maybe BucketBySession)
     , _arBucketByActivityType    :: !(Maybe BucketByActivity)
     , _arBucketByTime            :: !(Maybe BucketByTime)
-    , _arStartTimeMillis         :: !(Maybe (JSONText Int64))
+    , _arStartTimeMillis         :: !(Maybe (Textual Int64))
     , _arBucketByActivitySegment :: !(Maybe BucketByActivity)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -566,8 +566,8 @@ instance ToJSON Device where
 -- /See:/ 'value' smart constructor.
 data Value = Value
     { _vMapVal    :: !(Maybe [ValueMapValEntry])
-    , _vFpVal     :: !(Maybe (JSONText Double))
-    , _vIntVal    :: !(Maybe (JSONText Int32))
+    , _vFpVal     :: !(Maybe (Textual Double))
+    , _vIntVal    :: !(Maybe (Textual Int32))
     , _vStringVal :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -640,7 +640,7 @@ instance ToJSON Value where
 --
 -- /See:/ 'bucketBySession' smart constructor.
 newtype BucketBySession = BucketBySession
-    { _bbsMinDurationMillis :: Maybe (JSONText Int64)
+    { _bbsMinDurationMillis :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketBySession' with the minimum fields required to make a request.
@@ -688,13 +688,13 @@ instance ToJSON BucketBySession where
 -- /See:/ 'dataPoint' smart constructor.
 data DataPoint = DataPoint
     { _dpOriginDataSourceId    :: !(Maybe Text)
-    , _dpRawTimestampNanos     :: !(Maybe (JSONText Int64))
+    , _dpRawTimestampNanos     :: !(Maybe (Textual Int64))
     , _dpDataTypeName          :: !(Maybe Text)
     , _dpValue                 :: !(Maybe [Value])
-    , _dpComputationTimeMillis :: !(Maybe (JSONText Int64))
-    , _dpEndTimeNanos          :: !(Maybe (JSONText Int64))
-    , _dpModifiedTimeMillis    :: !(Maybe (JSONText Int64))
-    , _dpStartTimeNanos        :: !(Maybe (JSONText Int64))
+    , _dpComputationTimeMillis :: !(Maybe (Textual Int64))
+    , _dpEndTimeNanos          :: !(Maybe (Textual Int64))
+    , _dpModifiedTimeMillis    :: !(Maybe (Textual Int64))
+    , _dpStartTimeNanos        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataPoint' with the minimum fields required to make a request.
@@ -895,11 +895,11 @@ instance ToJSON ListSessionsResponse where
 --
 -- /See:/ 'aggregateBucket' smart constructor.
 data AggregateBucket = AggregateBucket
-    { _abEndTimeMillis   :: !(Maybe (JSONText Int64))
+    { _abEndTimeMillis   :: !(Maybe (Textual Int64))
     , _abDataSet         :: !(Maybe [DataSet])
-    , _abActivity        :: !(Maybe (JSONText Int32))
+    , _abActivity        :: !(Maybe (Textual Int32))
     , _abType            :: !(Maybe AggregateBucketType)
-    , _abStartTimeMillis :: !(Maybe (JSONText Int64))
+    , _abStartTimeMillis :: !(Maybe (Textual Int64))
     , _abSession         :: !(Maybe Session)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -998,7 +998,7 @@ instance ToJSON AggregateBucket where
 --
 -- /See:/ 'mapValue' smart constructor.
 newtype MapValue = MapValue
-    { _mvFpVal :: Maybe (JSONText Double)
+    { _mvFpVal :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapValue' with the minimum fields required to make a request.
@@ -1318,7 +1318,7 @@ instance ToJSON ValueMapValEntry where
 --
 -- /See:/ 'bucketByTime' smart constructor.
 newtype BucketByTime = BucketByTime
-    { _bbtDurationMillis :: Maybe (JSONText Int64)
+    { _bbtDurationMillis :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketByTime' with the minimum fields required to make a request.
@@ -1406,14 +1406,14 @@ instance ToJSON DataType where
 --
 -- /See:/ 'session' smart constructor.
 data Session = Session
-    { _sEndTimeMillis      :: !(Maybe (JSONText Int64))
-    , _sActiveTimeMillis   :: !(Maybe (JSONText Int64))
+    { _sEndTimeMillis      :: !(Maybe (Textual Int64))
+    , _sActiveTimeMillis   :: !(Maybe (Textual Int64))
     , _sApplication        :: !(Maybe Application)
-    , _sActivityType       :: !(Maybe (JSONText Int32))
+    , _sActivityType       :: !(Maybe (Textual Int32))
     , _sName               :: !(Maybe Text)
-    , _sModifiedTimeMillis :: !(Maybe (JSONText Int64))
+    , _sModifiedTimeMillis :: !(Maybe (Textual Int64))
     , _sId                 :: !(Maybe Text)
-    , _sStartTimeMillis    :: !(Maybe (JSONText Int64))
+    , _sStartTimeMillis    :: !(Maybe (Textual Int64))
     , _sDescription        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

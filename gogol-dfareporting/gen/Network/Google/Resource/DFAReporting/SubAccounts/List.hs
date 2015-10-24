@@ -51,14 +51,14 @@ type SubAccountsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" (JSONText Int64) :>
+                 QueryParams "ids" (Textual Int64) :>
                    QueryParam "sortOrder" SubAccountsListSortOrder :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" SubAccountsListSortField :>
-                         QueryParam "maxResults" (JSONText Int32) :>
+                         QueryParam "maxResults" (Textual Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SubAccountsListResponse
 
@@ -67,12 +67,12 @@ type SubAccountsListResource =
 -- /See:/ 'subAccountsList' smart constructor.
 data SubAccountsList = SubAccountsList
     { _salSearchString :: !(Maybe Text)
-    , _salIds          :: !(Maybe [JSONText Int64])
-    , _salProFileId    :: !(JSONText Int64)
+    , _salIds          :: !(Maybe [Textual Int64])
+    , _salProFileId    :: !(Textual Int64)
     , _salSortOrder    :: !(Maybe SubAccountsListSortOrder)
     , _salPageToken    :: !(Maybe Text)
     , _salSortField    :: !(Maybe SubAccountsListSortField)
-    , _salMaxResults   :: !(Maybe (JSONText Int32))
+    , _salMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsList' with the minimum fields required to make a request.

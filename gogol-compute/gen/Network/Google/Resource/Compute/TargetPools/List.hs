@@ -56,7 +56,7 @@ type TargetPoolsListResource =
                  "targetPools" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TargetPoolList
 
@@ -69,7 +69,7 @@ data TargetPoolsList = TargetPoolsList
     , _tplFilter     :: !(Maybe Text)
     , _tplRegion     :: !Text
     , _tplPageToken  :: !(Maybe Text)
-    , _tplMaxResults :: !(JSONText Word32)
+    , _tplMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsList' with the minimum fields required to make a request.

@@ -56,7 +56,7 @@ type ManifestsListResource =
                    "manifests" :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "maxResults" (Textual Word32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ManifestsListResponse
 
@@ -67,7 +67,7 @@ data ManifestsList = ManifestsList
     { _mlProject    :: !Text
     , _mlFilter     :: !(Maybe Text)
     , _mlPageToken  :: !(Maybe Text)
-    , _mlMaxResults :: !(JSONText Word32)
+    , _mlMaxResults :: !(Textual Word32)
     , _mlDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

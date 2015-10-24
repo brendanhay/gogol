@@ -62,10 +62,10 @@ type EventsInstancesResource =
                    QueryParam "timeMin" DateTime' :>
                      QueryParam "showDeleted" Bool :>
                        QueryParam "originalStart" Text :>
-                         QueryParam "maxAttendees" (JSONText Int32) :>
+                         QueryParam "maxAttendees" (Textual Int32) :>
                            QueryParam "pageToken" Text :>
                              QueryParam "timeZone" Text :>
-                               QueryParam "maxResults" (JSONText Int32) :>
+                               QueryParam "maxResults" (Textual Int32) :>
                                  QueryParam "alwaysIncludeEmail" Bool :>
                                    QueryParam "timeMax" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -79,10 +79,10 @@ data EventsInstances = EventsInstances
     , _eTimeMin            :: !(Maybe DateTime')
     , _eShowDeleted        :: !(Maybe Bool)
     , _eOriginalStart      :: !(Maybe Text)
-    , _eMaxAttendees       :: !(Maybe (JSONText Int32))
+    , _eMaxAttendees       :: !(Maybe (Textual Int32))
     , _ePageToken          :: !(Maybe Text)
     , _eTimeZone           :: !(Maybe Text)
-    , _eMaxResults         :: !(Maybe (JSONText Int32))
+    , _eMaxResults         :: !(Maybe (Textual Int32))
     , _eAlwaysIncludeEmail :: !(Maybe Bool)
     , _eTimeMax            :: !(Maybe DateTime')
     , _eEventId            :: !Text

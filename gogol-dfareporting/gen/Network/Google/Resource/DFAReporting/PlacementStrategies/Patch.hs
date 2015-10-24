@@ -48,9 +48,9 @@ type PlacementStrategiesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] PlacementStrategy :>
                      Patch '[JSON] PlacementStrategy
@@ -60,9 +60,9 @@ type PlacementStrategiesPatchResource =
 --
 -- /See:/ 'placementStrategiesPatch' smart constructor.
 data PlacementStrategiesPatch = PlacementStrategiesPatch
-    { _pspProFileId :: !(JSONText Int64)
+    { _pspProFileId :: !(Textual Int64)
     , _pspPayload   :: !PlacementStrategy
-    , _pspId        :: !(JSONText Int64)
+    , _pspId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesPatch' with the minimum fields required to make a request.

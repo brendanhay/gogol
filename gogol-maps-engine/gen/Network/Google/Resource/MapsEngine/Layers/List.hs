@@ -69,7 +69,7 @@ type LayersListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "projectId" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -89,7 +89,7 @@ data LayersList = LayersList
     , _llPageToken        :: !(Maybe Text)
     , _llProjectId        :: !(Maybe Text)
     , _llSearch           :: !(Maybe Text)
-    , _llMaxResults       :: !(Maybe (JSONText Word32))
+    , _llMaxResults       :: !(Maybe (Textual Word32))
     , _llTags             :: !(Maybe Text)
     , _llCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

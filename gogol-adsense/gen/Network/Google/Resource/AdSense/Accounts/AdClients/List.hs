@@ -50,7 +50,7 @@ type AccountsAdClientsListResource =
            Capture "accountId" Text :>
              "adclients" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Int32) :>
+                 QueryParam "maxResults" (Textual Int32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
 -- | List all ad clients in the specified account.
@@ -59,7 +59,7 @@ type AccountsAdClientsListResource =
 data AccountsAdClientsList = AccountsAdClientsList
     { _aaclAccountId  :: !Text
     , _aaclPageToken  :: !(Maybe Text)
-    , _aaclMaxResults :: !(Maybe (JSONText Int32))
+    , _aaclMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdClientsList' with the minimum fields required to make a request.

@@ -54,7 +54,7 @@ type AccountsCustomChannelsListResource =
                Capture "adClientId" Text :>
                  "customchannels" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CustomChannels
 
@@ -66,7 +66,7 @@ data AccountsCustomChannelsList = AccountsCustomChannelsList
     { _acclAdClientId :: !Text
     , _acclAccountId  :: !Text
     , _acclPageToken  :: !(Maybe Text)
-    , _acclMaxResults :: !(Maybe (JSONText Int32))
+    , _acclMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomChannelsList' with the minimum fields required to make a request.

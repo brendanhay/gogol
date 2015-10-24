@@ -72,8 +72,8 @@ instance ToJSON GeoLocationPolygon where
 --
 -- /See:/ 'geoLocationPoint' smart constructor.
 data GeoLocationPoint = GeoLocationPoint
-    { _glpLatitude  :: !(Maybe (JSONText Double))
-    , _glpLongitude :: !(Maybe (JSONText Double))
+    { _glpLatitude  :: !(Maybe (Textual Double))
+    , _glpLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocationPoint' with the minimum fields required to make a request.
@@ -1120,9 +1120,9 @@ instance ToJSON PawsGetSpectrumRequest where
 --
 -- /See:/ 'antennaCharacteristics' smart constructor.
 data AntennaCharacteristics = AntennaCharacteristics
-    { _acHeight            :: !(Maybe (JSONText Double))
+    { _acHeight            :: !(Maybe (Textual Double))
     , _acHeightType        :: !(Maybe Text)
-    , _acHeightUncertainty :: !(Maybe (JSONText Double))
+    , _acHeightUncertainty :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AntennaCharacteristics' with the minimum fields required to make a request.
@@ -1371,14 +1371,14 @@ data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse
     { _pNeedsSpectrumReport  :: !(Maybe Bool)
     , _pKind                 :: !Text
     , _pGeoSpectrumSchedules :: !(Maybe [GeoSpectrumSchedule])
-    , _pMaxContiguousBwHz    :: !(Maybe (JSONText Double))
+    , _pMaxContiguousBwHz    :: !(Maybe (Textual Double))
     , _pVersion              :: !(Maybe Text)
     , _pRulesetInfo          :: !(Maybe RulesetInfo)
     , _pType                 :: !(Maybe Text)
     , _pDatabaseChange       :: !(Maybe DBUpdateSpec)
     , _pTimestamp            :: !(Maybe Text)
     , _pDeviceDesc           :: !(Maybe DeviceDescriptor)
-    , _pMaxTotalBwHz         :: !(Maybe (JSONText Double))
+    , _pMaxTotalBwHz         :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatchResponse' with the minimum fields required to make a request.
@@ -1627,10 +1627,10 @@ instance ToJSON DeviceValidity where
 --
 -- /See:/ 'geoLocationEllipse' smart constructor.
 data GeoLocationEllipse = GeoLocationEllipse
-    { _gleSemiMajorAxis :: !(Maybe (JSONText Double))
+    { _gleSemiMajorAxis :: !(Maybe (Textual Double))
     , _gleCenter        :: !(Maybe GeoLocationPoint)
-    , _gleOrientation   :: !(Maybe (JSONText Double))
-    , _gleSemiMinorAxis :: !(Maybe (JSONText Double))
+    , _gleOrientation   :: !(Maybe (Textual Double))
+    , _gleSemiMinorAxis :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocationEllipse' with the minimum fields required to make a request.
@@ -1714,8 +1714,8 @@ instance ToJSON GeoLocationEllipse where
 -- /See:/ 'rulesetInfo' smart constructor.
 data RulesetInfo = RulesetInfo
     { _riRulesetIds        :: !(Maybe [Text])
-    , _riMaxPollingSecs    :: !(Maybe (JSONText Int32))
-    , _riMaxLocationChange :: !(Maybe (JSONText Double))
+    , _riMaxPollingSecs    :: !(Maybe (Textual Int32))
+    , _riMaxLocationChange :: !(Maybe (Textual Double))
     , _riAuthority         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2016,7 +2016,7 @@ instance ToJSON DatabaseSpec where
 --
 -- /See:/ 'spectrumMessage' smart constructor.
 data SpectrumMessage = SpectrumMessage
-    { _smBandwidth       :: !(Maybe (JSONText Double))
+    { _smBandwidth       :: !(Maybe (Textual Double))
     , _smFrequencyRanges :: !(Maybe [FrequencyRange])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2074,7 +2074,7 @@ instance ToJSON SpectrumMessage where
 --
 -- /See:/ 'geoLocation' smart constructor.
 data GeoLocation = GeoLocation
-    { _glConfidence :: !(Maybe (JSONText Int32))
+    { _glConfidence :: !(Maybe (Textual Int32))
     , _glPoint      :: !(Maybe GeoLocationEllipse)
     , _glRegion     :: !(Maybe GeoLocationPolygon)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2142,10 +2142,10 @@ instance ToJSON GeoLocation where
 --
 -- /See:/ 'frequencyRange' smart constructor.
 data FrequencyRange = FrequencyRange
-    { _frStopHz      :: !(Maybe (JSONText Double))
-    , _frMaxPowerDBm :: !(Maybe (JSONText Double))
+    { _frStopHz      :: !(Maybe (Textual Double))
+    , _frMaxPowerDBm :: !(Maybe (Textual Double))
     , _frChannelId   :: !(Maybe Text)
-    , _frStartHz     :: !(Maybe (JSONText Double))
+    , _frStartHz     :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FrequencyRange' with the minimum fields required to make a request.
@@ -2228,14 +2228,14 @@ data PawsGetSpectrumResponse = PawsGetSpectrumResponse
     { _pgsrgNeedsSpectrumReport :: !(Maybe Bool)
     , _pgsrgSpectrumSchedules   :: !(Maybe [SpectrumSchedule])
     , _pgsrgKind                :: !Text
-    , _pgsrgMaxContiguousBwHz   :: !(Maybe (JSONText Double))
+    , _pgsrgMaxContiguousBwHz   :: !(Maybe (Textual Double))
     , _pgsrgVersion             :: !(Maybe Text)
     , _pgsrgRulesetInfo         :: !(Maybe RulesetInfo)
     , _pgsrgType                :: !(Maybe Text)
     , _pgsrgDatabaseChange      :: !(Maybe DBUpdateSpec)
     , _pgsrgTimestamp           :: !(Maybe Text)
     , _pgsrgDeviceDesc          :: !(Maybe DeviceDescriptor)
-    , _pgsrgMaxTotalBwHz        :: !(Maybe (JSONText Double))
+    , _pgsrgMaxTotalBwHz        :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumResponse' with the minimum fields required to make a request.

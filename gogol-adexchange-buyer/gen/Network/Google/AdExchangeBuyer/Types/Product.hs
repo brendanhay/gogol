@@ -23,9 +23,9 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'brandDTO' smart constructor.
 data BrandDTO = BrandDTO
-    { _bdtoAdvertiserId :: !(Maybe (JSONText Int64))
+    { _bdtoAdvertiserId :: !(Maybe (Textual Int64))
     , _bdtoName         :: !(Maybe Text)
-    , _bdtoId           :: !(Maybe (JSONText Int64))
+    , _bdtoId           :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BrandDTO' with the minimum fields required to make a request.
@@ -82,12 +82,12 @@ instance ToJSON BrandDTO where
 data MarketplaceNote = MarketplaceNote
     { _mnNote                :: !(Maybe Text)
     , _mnKind                :: !Text
-    , _mnTimestampMs         :: !(Maybe (JSONText Int64))
+    , _mnTimestampMs         :: !(Maybe (Textual Int64))
     , _mnDealId              :: !(Maybe Text)
     , _mnNoteId              :: !(Maybe Text)
     , _mnCreatorRole         :: !(Maybe Text)
     , _mnOrderId             :: !(Maybe Text)
-    , _mnOrderRevisionNumber :: !(Maybe (JSONText Int64))
+    , _mnOrderRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNote' with the minimum fields required to make a request.
@@ -208,7 +208,7 @@ data CreativeNATiveAd = CreativeNATiveAd
     , _cnataStore                 :: !(Maybe Text)
     , _cnataPrice                 :: !(Maybe Text)
     , _cnataAdvertiser            :: !(Maybe Text)
-    , _cnataStarRating            :: !(Maybe (JSONText Double))
+    , _cnataStarRating            :: !(Maybe (Textual Double))
     , _cnataLogo                  :: !(Maybe CreativeNATiveAdLogo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -464,7 +464,7 @@ data CreativeServingRestrictionsItemContextsItem = CreativeServingRestrictionsIt
     { _csriciPlatform      :: !(Maybe [Text])
     , _csriciContextType   :: !(Maybe Text)
     , _csriciAuctionType   :: !(Maybe [Text])
-    , _csriciGeoCriteriaId :: !(Maybe [JSONText Int32])
+    , _csriciGeoCriteriaId :: !(Maybe [Textual Int32])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeServingRestrictionsItemContextsItem' with the minimum fields required to make a request.
@@ -555,11 +555,11 @@ data TermsDTO = TermsDTO
     , _tdtoCpm                        :: !(Maybe MoneyDTO)
     , _tdtoEstimatedSpend             :: !(Maybe MoneyDTO)
     , _tdtoAdvertisers                :: !(Maybe [AdvertiserDTO])
-    , _tdtoEstimatedImpressionsPerDay :: !(Maybe (JSONText Int64))
+    , _tdtoEstimatedImpressionsPerDay :: !(Maybe (Textual Int64))
     , _tdtoMonetizerType              :: !(Maybe Text)
     , _tdtoAudienceSegmentDescription :: !(Maybe Text)
     , _tdtoCreativeReviewPolicy       :: !(Maybe Text)
-    , _tdtoMinimumTrueLooks           :: !(Maybe (JSONText Int64))
+    , _tdtoMinimumTrueLooks           :: !(Maybe (Textual Int64))
     , _tdtoStartDate                  :: !(Maybe DateTime)
     , _tdtoCreativeBlockingLevel      :: !(Maybe Text)
     , _tdtoSemiTransparent            :: !(Maybe Bool)
@@ -570,7 +570,7 @@ data TermsDTO = TermsDTO
     , _tdtoTermsAttributes            :: !(Maybe [Text])
     , _tdtoInventorySegmentTargeting  :: !(Maybe InventorySegmentTargeting)
     , _tdtoDescriptiveName            :: !(Maybe Text)
-    , _tdtoMinimumSpendMicros         :: !(Maybe (JSONText Int64))
+    , _tdtoMinimumSpendMicros         :: !(Maybe (Textual Int64))
     , _tdtoTargetByDealId             :: !(Maybe Bool)
     , _tdtoBillingTerms               :: !(Maybe Text)
     , _tdtoDescription                :: !(Maybe Text)
@@ -946,7 +946,7 @@ instance ToJSON CreateOrdersResponse where
 -- /See:/ 'accountBidderLocationItem' smart constructor.
 data AccountBidderLocationItem = AccountBidderLocationItem
     { _abliURL        :: !(Maybe Text)
-    , _abliMaximumQps :: !(Maybe (JSONText Int32))
+    , _abliMaximumQps :: !(Maybe (Textual Int32))
     , _abliRegion     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1005,7 +1005,7 @@ instance ToJSON AccountBidderLocationItem where
 --
 -- /See:/ 'privateData' smart constructor.
 data PrivateData = PrivateData
-    { _pdReferencePayload :: !(Maybe (JSONText Word8))
+    { _pdReferencePayload :: !(Maybe (Textual Word8))
     , _pdReferenceId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1055,10 +1055,10 @@ instance ToJSON PrivateData where
 data Budget = Budget
     { _bCurrencyCode :: !(Maybe Text)
     , _bKind         :: !Text
-    , _bBudgetAmount :: !(Maybe (JSONText Int64))
-    , _bAccountId    :: !(Maybe (JSONText Int64))
+    , _bBudgetAmount :: !(Maybe (Textual Int64))
+    , _bAccountId    :: !(Maybe (Textual Int64))
     , _bId           :: !(Maybe Text)
-    , _bBillingId    :: !(Maybe (JSONText Int64))
+    , _bBillingId    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Budget' with the minimum fields required to make a request.
@@ -1224,8 +1224,8 @@ instance ToJSON
 --
 -- /See:/ 'deliveryControlFrequencyCap' smart constructor.
 data DeliveryControlFrequencyCap = DeliveryControlFrequencyCap
-    { _dcfcMaxImpressions :: !(Maybe (JSONText Int32))
-    , _dcfcNumTimeUnits   :: !(Maybe (JSONText Int32))
+    { _dcfcMaxImpressions :: !(Maybe (Textual Int32))
+    , _dcfcNumTimeUnits   :: !(Maybe (Textual Int32))
     , _dcfcTimeUnitType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1284,7 +1284,7 @@ instance ToJSON DeliveryControlFrequencyCap where
 -- /See:/ 'dealPartyDTO' smart constructor.
 data DealPartyDTO = DealPartyDTO
     { _dpdtoBuyerSellerRole :: !(Maybe Text)
-    , _dpdtoCustomerId      :: !(Maybe (JSONText Int32))
+    , _dpdtoCustomerId      :: !(Maybe (Textual Int32))
     , _dpdtoName            :: !(Maybe Text)
     , _dpdtoWebProperty     :: !(Maybe WebPropertyDTO)
     , _dpdtoBuyer           :: !(Maybe BuyerDTO)
@@ -1723,8 +1723,8 @@ instance ToJSON CreateOrdersRequest where
 --
 -- /See:/ 'adSize' smart constructor.
 data AdSize = AdSize
-    { _asHeight :: !(Maybe (JSONText Int32))
-    , _asWidth  :: !(Maybe (JSONText Int32))
+    { _asHeight :: !(Maybe (Textual Int32))
+    , _asWidth  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdSize' with the minimum fields required to make a request.
@@ -1817,7 +1817,7 @@ instance ToJSON CreativeCorrectionsItem where
 -- /See:/ 'addOrderDealsResponse' smart constructor.
 data AddOrderDealsResponse = AddOrderDealsResponse
     { _aodrDeals               :: !(Maybe [MarketplaceDeal])
-    , _aodrOrderRevisionNumber :: !(Maybe (JSONText Int64))
+    , _aodrOrderRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddOrderDealsResponse' with the minimum fields required to make a request.
@@ -1971,27 +1971,27 @@ instance ToJSON PricePerBuyer where
 --
 -- /See:/ 'creative' smart constructor.
 data Creative = Creative
-    { _cAttribute             :: !(Maybe [JSONText Int32])
+    { _cAttribute             :: !(Maybe [Textual Int32])
     , _cNATiveAd              :: !(Maybe CreativeNATiveAd)
-    , _cHeight                :: !(Maybe (JSONText Int32))
+    , _cHeight                :: !(Maybe (Textual Int32))
     , _cBuyerCreativeId       :: !(Maybe Text)
     , _cAdvertiserName        :: !(Maybe Text)
-    , _cAgencyId              :: !(Maybe (JSONText Int64))
+    , _cAgencyId              :: !(Maybe (Textual Int64))
     , _cCorrections           :: !(Maybe [CreativeCorrectionsItem])
-    , _cProductCategories     :: !(Maybe [JSONText Int32])
+    , _cProductCategories     :: !(Maybe [Textual Int32])
     , _cKind                  :: !Text
     , _cHTMLSnippet           :: !(Maybe Text)
-    , _cAdvertiserId          :: !(Maybe [JSONText Int64])
-    , _cRestrictedCategories  :: !(Maybe [JSONText Int32])
+    , _cAdvertiserId          :: !(Maybe [Textual Int64])
+    , _cRestrictedCategories  :: !(Maybe [Textual Int32])
     , _cDealsStatus           :: !(Maybe Text)
-    , _cWidth                 :: !(Maybe (JSONText Int32))
+    , _cWidth                 :: !(Maybe (Textual Int32))
     , _cClickThroughURL       :: !(Maybe [Text])
-    , _cVendorType            :: !(Maybe [JSONText Int32])
-    , _cAccountId             :: !(Maybe (JSONText Int32))
+    , _cVendorType            :: !(Maybe [Textual Int32])
+    , _cAccountId             :: !(Maybe (Textual Int32))
     , _cImpressionTrackingURL :: !(Maybe [Text])
     , _cFilteringReasons      :: !(Maybe CreativeFilteringReasons)
-    , _cVersion               :: !(Maybe (JSONText Int32))
-    , _cSensitiveCategories   :: !(Maybe [JSONText Int32])
+    , _cVersion               :: !(Maybe (Textual Int32))
+    , _cSensitiveCategories   :: !(Maybe [Textual Int32])
     , _cVideoURL              :: !(Maybe Text)
     , _cAPIUploadTimestamp    :: !(Maybe DateTime')
     , _cServingRestrictions   :: !(Maybe [CreativeServingRestrictionsItem])
@@ -2330,11 +2330,11 @@ instance ToJSON Creative where
 --
 -- /See:/ 'targetingValueDayPartTargetingDayPart' smart constructor.
 data TargetingValueDayPartTargetingDayPart = TargetingValueDayPartTargetingDayPart
-    { _tvdptdpEndHour     :: !(Maybe (JSONText Int32))
-    , _tvdptdpStartHour   :: !(Maybe (JSONText Int32))
-    , _tvdptdpStartMinute :: !(Maybe (JSONText Int32))
+    { _tvdptdpEndHour     :: !(Maybe (Textual Int32))
+    , _tvdptdpStartHour   :: !(Maybe (Textual Int32))
+    , _tvdptdpStartMinute :: !(Maybe (Textual Int32))
     , _tvdptdpDayOfWeek   :: !(Maybe Text)
-    , _tvdptdpEndMinute   :: !(Maybe (JSONText Int32))
+    , _tvdptdpEndMinute   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValueDayPartTargetingDayPart' with the minimum fields required to make a request.
@@ -2464,13 +2464,13 @@ instance ToJSON PretargetingConfigList where
 --
 -- /See:/ 'buyerDTO' smart constructor.
 data BuyerDTO = BuyerDTO
-    { _buySponsorAccountId                 :: !(Maybe (JSONText Int32))
+    { _buySponsorAccountId                 :: !(Maybe (Textual Int32))
     , _buyEnabledForInterestTargetingDeals :: !(Maybe Bool)
-    , _buyCustomerId                       :: !(Maybe (JSONText Int32))
+    , _buyCustomerId                       :: !(Maybe (Textual Int32))
     , _buyEnabledForPreferredDeals         :: !(Maybe Bool)
-    , _buyAccountId                        :: !(Maybe (JSONText Int32))
+    , _buyAccountId                        :: !(Maybe (Textual Int32))
     , _buyDisplayName                      :: !(Maybe Text)
-    , _buyId                               :: !(Maybe (JSONText Int32))
+    , _buyId                               :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BuyerDTO' with the minimum fields required to make a request.
@@ -2571,10 +2571,10 @@ instance ToJSON BuyerDTO where
 --
 -- /See:/ 'adSlotDTO' smart constructor.
 data AdSlotDTO = AdSlotDTO
-    { _asdtoWebPropertyId :: !(Maybe (JSONText Int32))
+    { _asdtoWebPropertyId :: !(Maybe (Textual Int32))
     , _asdtoSize          :: !(Maybe Text)
     , _asdtoChannelCode   :: !(Maybe Text)
-    , _asdtoChannelId     :: !(Maybe (JSONText Int32))
+    , _asdtoChannelId     :: !(Maybe (Textual Int32))
     , _asdtoName          :: !(Maybe Text)
     , _asdtoDescription   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2703,28 +2703,28 @@ instance ToJSON DealTermsNonGuaranteedFixedPriceTerms
 --
 -- /See:/ 'performanceReport' smart constructor.
 data PerformanceReport = PerformanceReport
-    { _prFilteredBidRate         :: !(Maybe (JSONText Double))
+    { _prFilteredBidRate         :: !(Maybe (Textual Double))
     , _prKind                    :: !Text
-    , _prLatency95thPercentile   :: !(Maybe (JSONText Double))
+    , _prLatency95thPercentile   :: !(Maybe (Textual Double))
     , _prCookieMatcherStatusRate :: !(Maybe [JSONValue])
     , _prHostedMatchStatusRate   :: !(Maybe [JSONValue])
-    , _prUnsuccessfulRequestRate :: !(Maybe (JSONText Double))
-    , _prBidRequestRate          :: !(Maybe (JSONText Double))
-    , _prQuotaThrottledLimit     :: !(Maybe (JSONText Double))
-    , _prQuotaConfiguredLimit    :: !(Maybe (JSONText Double))
-    , _prSuccessfulRequestRate   :: !(Maybe (JSONText Double))
-    , _prLatency85thPercentile   :: !(Maybe (JSONText Double))
+    , _prUnsuccessfulRequestRate :: !(Maybe (Textual Double))
+    , _prBidRequestRate          :: !(Maybe (Textual Double))
+    , _prQuotaThrottledLimit     :: !(Maybe (Textual Double))
+    , _prQuotaConfiguredLimit    :: !(Maybe (Textual Double))
+    , _prSuccessfulRequestRate   :: !(Maybe (Textual Double))
+    , _prLatency85thPercentile   :: !(Maybe (Textual Double))
     , _prCalloutStatusRate       :: !(Maybe [JSONValue])
-    , _prLatency50thPercentile   :: !(Maybe (JSONText Double))
-    , _prBidRate                 :: !(Maybe (JSONText Double))
+    , _prLatency50thPercentile   :: !(Maybe (Textual Double))
+    , _prBidRate                 :: !(Maybe (Textual Double))
     , _prCreativeStatusRate      :: !(Maybe [JSONValue])
-    , _prNoQuotaInRegion         :: !(Maybe (JSONText Double))
+    , _prNoQuotaInRegion         :: !(Maybe (Textual Double))
     , _prRegion                  :: !(Maybe Text)
-    , _prInventoryMatchRate      :: !(Maybe (JSONText Double))
-    , _prPixelMatchResponses     :: !(Maybe (JSONText Double))
-    , _prTimestamp               :: !(Maybe (JSONText Int64))
-    , _prPixelMatchRequests      :: !(Maybe (JSONText Double))
-    , _prOutOfQuota              :: !(Maybe (JSONText Double))
+    , _prInventoryMatchRate      :: !(Maybe (Textual Double))
+    , _prPixelMatchResponses     :: !(Maybe (Textual Double))
+    , _prTimestamp               :: !(Maybe (Textual Int64))
+    , _prPixelMatchRequests      :: !(Maybe (Textual Double))
+    , _prOutOfQuota              :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PerformanceReport' with the minimum fields required to make a request.
@@ -3128,13 +3128,13 @@ instance ToJSON Seller where
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account
-    { _aMaximumTotalQps        :: !(Maybe (JSONText Int32))
+    { _aMaximumTotalQps        :: !(Maybe (Textual Int32))
     , _aKind                   :: !Text
     , _aCookieMatchingURL      :: !(Maybe Text)
-    , _aMaximumActiveCreatives :: !(Maybe (JSONText Int32))
+    , _aMaximumActiveCreatives :: !(Maybe (Textual Int32))
     , _aCookieMatchingNid      :: !(Maybe Text)
-    , _aNumberActiveCreatives  :: !(Maybe (JSONText Int32))
-    , _aId                     :: !(Maybe (JSONText Int32))
+    , _aNumberActiveCreatives  :: !(Maybe (Textual Int32))
+    , _aId                     :: !(Maybe (Textual Int32))
     , _aBidderLocation         :: !(Maybe [AccountBidderLocationItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3262,7 +3262,7 @@ instance ToJSON Account where
 data DeleteOrderDealsRequest = DeleteOrderDealsRequest
     { _dodrUpdateAction        :: !(Maybe Text)
     , _dodrDealIds             :: !(Maybe [Text])
-    , _dodrOrderRevisionNumber :: !(Maybe (JSONText Int64))
+    , _dodrOrderRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteOrderDealsRequest' with the minimum fields required to make a request.
@@ -3367,9 +3367,9 @@ instance ToJSON ContactInformation where
 --
 -- /See:/ 'creativeNATiveAdLogo' smart constructor.
 data CreativeNATiveAdLogo = CreativeNATiveAdLogo
-    { _cnatalHeight :: !(Maybe (JSONText Int32))
+    { _cnatalHeight :: !(Maybe (Textual Int32))
     , _cnatalURL    :: !(Maybe Text)
-    , _cnatalWidth  :: !(Maybe (JSONText Int32))
+    , _cnatalWidth  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeNATiveAdLogo' with the minimum fields required to make a request.
@@ -3512,28 +3512,28 @@ instance ToJSON PerformanceReportList where
 -- /See:/ 'pretargetingConfig' smart constructor.
 data PretargetingConfig = PretargetingConfig
     { _pcPlatforms                     :: !(Maybe [Text])
-    , _pcMobileCarriers                :: !(Maybe [JSONText Int64])
-    , _pcVendorTypes                   :: !(Maybe [JSONText Int64])
-    , _pcExcludedGeoCriteriaIds        :: !(Maybe [JSONText Int64])
-    , _pcSupportedCreativeAttributes   :: !(Maybe [JSONText Int64])
-    , _pcUserLists                     :: !(Maybe [JSONText Int64])
+    , _pcMobileCarriers                :: !(Maybe [Textual Int64])
+    , _pcVendorTypes                   :: !(Maybe [Textual Int64])
+    , _pcExcludedGeoCriteriaIds        :: !(Maybe [Textual Int64])
+    , _pcSupportedCreativeAttributes   :: !(Maybe [Textual Int64])
+    , _pcUserLists                     :: !(Maybe [Textual Int64])
     , _pcKind                          :: !Text
     , _pcExcludedPlacements            :: !(Maybe [PretargetingConfigExcludedPlacementsItem])
-    , _pcMobileDevices                 :: !(Maybe [JSONText Int64])
+    , _pcMobileDevices                 :: !(Maybe [Textual Int64])
     , _pcLanguages                     :: !(Maybe [Text])
-    , _pcVerticals                     :: !(Maybe [JSONText Int64])
-    , _pcConfigId                      :: !(Maybe (JSONText Int64))
+    , _pcVerticals                     :: !(Maybe [Textual Int64])
+    , _pcConfigId                      :: !(Maybe (Textual Int64))
     , _pcPlacements                    :: !(Maybe [PretargetingConfigPlacementsItem])
-    , _pcExcludedUserLists             :: !(Maybe [JSONText Int64])
+    , _pcExcludedUserLists             :: !(Maybe [Textual Int64])
     , _pcConfigName                    :: !(Maybe Text)
-    , _pcGeoCriteriaIds                :: !(Maybe [JSONText Int64])
+    , _pcGeoCriteriaIds                :: !(Maybe [Textual Int64])
     , _pcDimensions                    :: !(Maybe [PretargetingConfigDimensionsItem])
-    , _pcExcludedVerticals             :: !(Maybe [JSONText Int64])
+    , _pcExcludedVerticals             :: !(Maybe [Textual Int64])
     , _pcCreativeType                  :: !(Maybe [Text])
     , _pcIsActive                      :: !(Maybe Bool)
-    , _pcExcludedContentLabels         :: !(Maybe [JSONText Int64])
-    , _pcBillingId                     :: !(Maybe (JSONText Int64))
-    , _pcMobileOperatingSystemVersions :: !(Maybe [JSONText Int64])
+    , _pcExcludedContentLabels         :: !(Maybe [Textual Int64])
+    , _pcBillingId                     :: !(Maybe (Textual Int64))
+    , _pcMobileOperatingSystemVersions :: !(Maybe [Textual Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfig' with the minimum fields required to make a request.
@@ -3973,7 +3973,7 @@ instance ToJSON TargetingValueCreativeSize where
 -- /See:/ 'negotiationDTO' smart constructor.
 data NegotiationDTO = NegotiationDTO
     { _ndtoNegotiationState    :: !(Maybe Text)
-    , _ndtoExternalDealId      :: !(Maybe (JSONText Int64))
+    , _ndtoExternalDealId      :: !(Maybe (Textual Int64))
     , _ndtoStatus              :: !(Maybe Text)
     , _ndtoDealType            :: !(Maybe Text)
     , _ndtoNegotiationRounds   :: !(Maybe [NegotiationRoundDTO])
@@ -3983,8 +3983,8 @@ data NegotiationDTO = NegotiationDTO
     , _ndtoStats               :: !(Maybe StatsDTO)
     , _ndtoSeller              :: !(Maybe DealPartyDTO)
     , _ndtoLabelNames          :: !(Maybe [Text])
-    , _ndtoOfferId             :: !(Maybe (JSONText Int64))
-    , _ndtoNegotiationId       :: !(Maybe (JSONText Int64))
+    , _ndtoOfferId             :: !(Maybe (Textual Int64))
+    , _ndtoNegotiationId       :: !(Maybe (Textual Int64))
     , _ndtoSellerEmailContacts :: !(Maybe [Text])
     , _ndtoBuyer               :: !(Maybe DealPartyDTO)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4191,7 +4191,7 @@ data OfferDTO = OfferDTO
     , _odtoOpenToDealParties   :: !(Maybe [DealPartyDTO])
     , _odtoEmailContacts       :: !(Maybe [Text])
     , _odtoLabelNames          :: !(Maybe [Text])
-    , _odtoOfferId             :: !(Maybe (JSONText Int64))
+    , _odtoOfferId             :: !(Maybe (Textual Int64))
     , _odtoClosedToDealParties :: !(Maybe [DealPartyDTO])
     , _odtoAnonymous           :: !(Maybe Bool)
     , _odtoIsOpen              :: !(Maybe Bool)
@@ -4376,9 +4376,9 @@ instance ToJSON OfferDTO where
 --
 -- /See:/ 'audienceSegment' smart constructor.
 data AudienceSegment = AudienceSegment
-    { _asNumCookies  :: !(Maybe (JSONText Int64))
+    { _asNumCookies  :: !(Maybe (Textual Int64))
     , _asName        :: !(Maybe Text)
-    , _asId          :: !(Maybe (JSONText Int64))
+    , _asId          :: !(Maybe (Textual Int64))
     , _asDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4500,17 +4500,17 @@ instance ToJSON BillingInfoList where
 data MarketplaceOffer = MarketplaceOffer
     { _moState               :: !(Maybe Text)
     , _moWebPropertyCode     :: !(Maybe Text)
-    , _moCreationTimeMs      :: !(Maybe (JSONText Int64))
+    , _moCreationTimeMs      :: !(Maybe (Textual Int64))
     , _moTerms               :: !(Maybe DealTerms)
-    , _moLastUpdateTimeMs    :: !(Maybe (JSONText Int64))
+    , _moLastUpdateTimeMs    :: !(Maybe (Textual Int64))
     , _moKind                :: !Text
-    , _moRevisionNumber      :: !(Maybe (JSONText Int64))
+    , _moRevisionNumber      :: !(Maybe (Textual Int64))
     , _moHasCreatorSignedOff :: !(Maybe Bool)
-    , _moFlightStartTimeMs   :: !(Maybe (JSONText Int64))
+    , _moFlightStartTimeMs   :: !(Maybe (Textual Int64))
     , _moSharedTargetings    :: !(Maybe [SharedTargeting])
     , _moSeller              :: !(Maybe Seller)
     , _moSyndicationProduct  :: !(Maybe Text)
-    , _moFlightEndTimeMs     :: !(Maybe (JSONText Int64))
+    , _moFlightEndTimeMs     :: !(Maybe (Textual Int64))
     , _moName                :: !(Maybe Text)
     , _moCreatorContacts     :: !(Maybe [ContactInformation])
     , _moOfferId             :: !(Maybe Text)
@@ -4769,8 +4769,8 @@ instance ToJSON AddOrderNotesResponse where
 --
 -- /See:/ 'targetingValueSize' smart constructor.
 data TargetingValueSize = TargetingValueSize
-    { _tvsHeight :: !(Maybe (JSONText Int32))
-    , _tvsWidth  :: !(Maybe (JSONText Int32))
+    { _tvsHeight :: !(Maybe (Textual Int32))
+    , _tvsWidth  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingValueSize' with the minimum fields required to make a request.
@@ -4817,7 +4817,7 @@ instance ToJSON TargetingValueSize where
 --
 -- /See:/ 'getNegotiationsRequest' smart constructor.
 data GetNegotiationsRequest = GetNegotiationsRequest
-    { _gnrSinceTimestampMillis   :: !(Maybe (JSONText Int64))
+    { _gnrSinceTimestampMillis   :: !(Maybe (Textual Int64))
     , _gnrFinalized              :: !(Maybe Bool)
     , _gnrIncludePrivateAuctions :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4878,7 +4878,7 @@ instance ToJSON GetNegotiationsRequest where
 -- /See:/ 'moneyDTO' smart constructor.
 data MoneyDTO = MoneyDTO
     { _mdtoCurrencyCode :: !(Maybe Text)
-    , _mdtoMicros       :: !(Maybe (JSONText Int64))
+    , _mdtoMicros       :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MoneyDTO' with the minimum fields required to make a request.
@@ -5006,8 +5006,8 @@ instance ToJSON ListOffersResponse where
 --
 -- /See:/ 'pretargetingConfigDimensionsItem' smart constructor.
 data PretargetingConfigDimensionsItem = PretargetingConfigDimensionsItem
-    { _pcdiHeight :: !(Maybe (JSONText Int64))
-    , _pcdiWidth  :: !(Maybe (JSONText Int64))
+    { _pcdiHeight :: !(Maybe (Textual Int64))
+    , _pcdiWidth  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigDimensionsItem' with the minimum fields required to make a request.
@@ -5059,7 +5059,7 @@ data AdvertiserDTO = AdvertiserDTO
     { _adtoStatus :: !(Maybe Text)
     , _adtoBrands :: !(Maybe [BrandDTO])
     , _adtoName   :: !(Maybe Text)
-    , _adtoId     :: !(Maybe (JSONText Int64))
+    , _adtoId     :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserDTO' with the minimum fields required to make a request.
@@ -5164,7 +5164,7 @@ instance ToJSON ListClientAccessCapabilitiesResponse
 data TargetingValue = TargetingValue
     { _tvCreativeSizeValue     :: !(Maybe TargetingValueCreativeSize)
     , _tvStringValue           :: !(Maybe Text)
-    , _tvLongValue             :: !(Maybe (JSONText Int64))
+    , _tvLongValue             :: !(Maybe (Textual Int64))
     , _tvDayPartTargetingValue :: !(Maybe TargetingValueDayPartTargeting)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5237,9 +5237,9 @@ instance ToJSON TargetingValue where
 --
 -- /See:/ 'creativeNATiveAdAppIcon' smart constructor.
 data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon
-    { _cnataaiHeight :: !(Maybe (JSONText Int32))
+    { _cnataaiHeight :: !(Maybe (Textual Int32))
     , _cnataaiURL    :: !(Maybe Text)
-    , _cnataaiWidth  :: !(Maybe (JSONText Int32))
+    , _cnataaiWidth  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeNATiveAdAppIcon' with the minimum fields required to make a request.
@@ -5295,7 +5295,7 @@ instance ToJSON CreativeNATiveAdAppIcon where
 -- /See:/ 'price' smart constructor.
 data Price = Price
     { _pCurrencyCode :: !(Maybe Text)
-    , _pAmountMicros :: !(Maybe (JSONText Double))
+    , _pAmountMicros :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Price' with the minimum fields required to make a request.
@@ -5346,7 +5346,7 @@ data EditAllOrderDealsRequest = EditAllOrderDealsRequest
     { _eUpdateAction        :: !(Maybe Text)
     , _eDeals               :: !(Maybe [MarketplaceDeal])
     , _eOrder               :: !(Maybe MarketplaceOrder)
-    , _eOrderRevisionNumber :: !(Maybe (JSONText Int64))
+    , _eOrderRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditAllOrderDealsRequest' with the minimum fields required to make a request.
@@ -5429,7 +5429,7 @@ instance ToJSON EditAllOrderDealsRequest where
 data BillingInfo = BillingInfo
     { _biKind        :: !Text
     , _biAccountName :: !(Maybe Text)
-    , _biAccountId   :: !(Maybe (JSONText Int32))
+    , _biAccountId   :: !(Maybe (Textual Int32))
     , _biBillingId   :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5611,7 +5611,7 @@ instance ToJSON SharedTargeting where
 --
 -- /See:/ 'listClientAccessCapabilitiesRequest' smart constructor.
 newtype ListClientAccessCapabilitiesRequest = ListClientAccessCapabilitiesRequest
-    { _lcacrSponsorAccountId :: Maybe (JSONText Int64)
+    { _lcacrSponsorAccountId :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListClientAccessCapabilitiesRequest' with the minimum fields required to make a request.
@@ -5650,42 +5650,42 @@ instance ToJSON ListClientAccessCapabilitiesRequest
 --
 -- /See:/ 'inventorySegmentTargeting' smart constructor.
 data InventorySegmentTargeting = InventorySegmentTargeting
-    { _istNegativeVideoDurationSegments   :: !(Maybe [JSONText Int64])
-    , _istNegativeIcmBrands               :: !(Maybe [JSONText Int64])
+    { _istNegativeVideoDurationSegments   :: !(Maybe [Textual Int64])
+    , _istNegativeIcmBrands               :: !(Maybe [Textual Int64])
     , _istNegativeKeyValues               :: !(Maybe [RuleKeyValuePair])
-    , _istPositiveAudienceSegments        :: !(Maybe [JSONText Int64])
-    , _istPositiveXfpPlacements           :: !(Maybe [JSONText Int64])
-    , _istNegativeXfpAdSlots              :: !(Maybe [JSONText Int64])
-    , _istPositiveOperatingSystemVersions :: !(Maybe [JSONText Int64])
-    , _istPositiveSizes                   :: !(Maybe [JSONText Int64])
-    , _istPositiveDeviceCategories        :: !(Maybe [JSONText Int64])
-    , _istPositiveLocations               :: !(Maybe [JSONText Int64])
+    , _istPositiveAudienceSegments        :: !(Maybe [Textual Int64])
+    , _istPositiveXfpPlacements           :: !(Maybe [Textual Int64])
+    , _istNegativeXfpAdSlots              :: !(Maybe [Textual Int64])
+    , _istPositiveOperatingSystemVersions :: !(Maybe [Textual Int64])
+    , _istPositiveSizes                   :: !(Maybe [Textual Int64])
+    , _istPositiveDeviceCategories        :: !(Maybe [Textual Int64])
+    , _istPositiveLocations               :: !(Maybe [Textual Int64])
     , _istNegativeAdSizes                 :: !(Maybe [AdSize])
-    , _istPositiveOperatingSystems        :: !(Maybe [JSONText Int64])
+    , _istPositiveOperatingSystems        :: !(Maybe [Textual Int64])
     , _istPositiveSiteURLs                :: !(Maybe [Text])
     , _istNegativeInventorySlots          :: !(Maybe [Text])
     , _istNegativeVideoAdPositionSegments :: !(Maybe [Text])
     , _istPositiveAdTypeSegments          :: !(Maybe [Text])
-    , _istPositiveIcmInterests            :: !(Maybe [JSONText Int64])
+    , _istPositiveIcmInterests            :: !(Maybe [Textual Int64])
     , _istPositiveMobileApps              :: !(Maybe [Text])
     , _istPositiveKeyValues               :: !(Maybe [RuleKeyValuePair])
-    , _istPositiveIcmBrands               :: !(Maybe [JSONText Int64])
-    , _istPositiveVideoDurationSegments   :: !(Maybe [JSONText Int64])
-    , _istNegativeAudienceSegments        :: !(Maybe [JSONText Int64])
-    , _istNegativeXfpPlacements           :: !(Maybe [JSONText Int64])
-    , _istPositiveXfpAdSlots              :: !(Maybe [JSONText Int64])
-    , _istNegativeOperatingSystemVersions :: !(Maybe [JSONText Int64])
-    , _istNegativeSizes                   :: !(Maybe [JSONText Int64])
-    , _istNegativeLocations               :: !(Maybe [JSONText Int64])
-    , _istNegativeDeviceCategories        :: !(Maybe [JSONText Int64])
-    , _istNegativeOperatingSystems        :: !(Maybe [JSONText Int64])
+    , _istPositiveIcmBrands               :: !(Maybe [Textual Int64])
+    , _istPositiveVideoDurationSegments   :: !(Maybe [Textual Int64])
+    , _istNegativeAudienceSegments        :: !(Maybe [Textual Int64])
+    , _istNegativeXfpPlacements           :: !(Maybe [Textual Int64])
+    , _istPositiveXfpAdSlots              :: !(Maybe [Textual Int64])
+    , _istNegativeOperatingSystemVersions :: !(Maybe [Textual Int64])
+    , _istNegativeSizes                   :: !(Maybe [Textual Int64])
+    , _istNegativeLocations               :: !(Maybe [Textual Int64])
+    , _istNegativeDeviceCategories        :: !(Maybe [Textual Int64])
+    , _istNegativeOperatingSystems        :: !(Maybe [Textual Int64])
     , _istPositiveAdSizes                 :: !(Maybe [AdSize])
     , _istNegativeSiteURLs                :: !(Maybe [Text])
     , _istNegativeAdTypeSegments          :: !(Maybe [Text])
     , _istPositiveVideoAdPositionSegments :: !(Maybe [Text])
     , _istPositiveInventorySlots          :: !(Maybe [Text])
     , _istNegativeMobileApps              :: !(Maybe [Text])
-    , _istNegativeIcmInterests            :: !(Maybe [JSONText Int64])
+    , _istNegativeIcmInterests            :: !(Maybe [Textual Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventorySegmentTargeting' with the minimum fields required to make a request.
@@ -6169,9 +6169,9 @@ instance ToJSON InventorySegmentTargeting where
 --
 -- /See:/ 'creativeNATiveAdImage' smart constructor.
 data CreativeNATiveAdImage = CreativeNATiveAdImage
-    { _cnataiHeight :: !(Maybe (JSONText Int32))
+    { _cnataiHeight :: !(Maybe (Textual Int32))
     , _cnataiURL    :: !(Maybe Text)
-    , _cnataiWidth  :: !(Maybe (JSONText Int32))
+    , _cnataiWidth  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeNATiveAdImage' with the minimum fields required to make a request.
@@ -6229,7 +6229,7 @@ data WebPropertyDTO = WebPropertyDTO
     , _wpdtoSyndicationProduct       :: !(Maybe Text)
     , _wpdtoName                     :: !(Maybe Text)
     , _wpdtoPropertyCode             :: !(Maybe Text)
-    , _wpdtoId                       :: !(Maybe (JSONText Int32))
+    , _wpdtoId                       :: !(Maybe (Textual Int32))
     , _wpdtoSiteURLs                 :: !(Maybe [Text])
     , _wpdtoAllowInterestTargetedAds :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6331,7 +6331,7 @@ instance ToJSON WebPropertyDTO where
 --
 -- /See:/ 'listOffersRequest' smart constructor.
 newtype ListOffersRequest = ListOffersRequest
-    { _lorSinceTimestampMillis :: Maybe (JSONText Int64)
+    { _lorSinceTimestampMillis :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOffersRequest' with the minimum fields required to make a request.
@@ -6368,8 +6368,8 @@ instance ToJSON ListOffersRequest where
 --
 -- /See:/ 'clientAccessCapabilities' smart constructor.
 data ClientAccessCapabilities = ClientAccessCapabilities
-    { _cacClientAccountId :: !(Maybe (JSONText Int64))
-    , _cacCapabilities    :: !(Maybe [JSONText Int32])
+    { _cacClientAccountId :: !(Maybe (Textual Int64))
+    , _cacCapabilities    :: !(Maybe [Textual Int32])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessCapabilities' with the minimum fields required to make a request.
@@ -6488,7 +6488,7 @@ instance ToJSON CreativeServingRestrictionsItem where
 -- /See:/ 'deleteOrderDealsResponse' smart constructor.
 data DeleteOrderDealsResponse = DeleteOrderDealsResponse
     { _dDeals               :: !(Maybe [MarketplaceDeal])
-    , _dOrderRevisionNumber :: !(Maybe (JSONText Int64))
+    , _dOrderRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteOrderDealsResponse' with the minimum fields required to make a request.
@@ -6592,18 +6592,18 @@ data MarketplaceDeal = MarketplaceDeal
     { _mdExternalDealId       :: !(Maybe Text)
     , _mdBuyerPrivateData     :: !(Maybe PrivateData)
     , _mdWebPropertyCode      :: !(Maybe Text)
-    , _mdCreationTimeMs       :: !(Maybe (JSONText Int64))
+    , _mdCreationTimeMs       :: !(Maybe (Textual Int64))
     , _mdTerms                :: !(Maybe DealTerms)
-    , _mdOfferRevisionNumber  :: !(Maybe (JSONText Int64))
-    , _mdLastUpdateTimeMs     :: !(Maybe (JSONText Int64))
+    , _mdOfferRevisionNumber  :: !(Maybe (Textual Int64))
+    , _mdLastUpdateTimeMs     :: !(Maybe (Textual Int64))
     , _mdKind                 :: !Text
     , _mdDeliveryControl      :: !(Maybe DeliveryControl)
-    , _mdFlightStartTimeMs    :: !(Maybe (JSONText Int64))
+    , _mdFlightStartTimeMs    :: !(Maybe (Textual Int64))
     , _mdSharedTargetings     :: !(Maybe [SharedTargeting])
     , _mdDealId               :: !(Maybe Text)
     , _mdInventoryDescription :: !(Maybe Text)
     , _mdSyndicationProduct   :: !(Maybe Text)
-    , _mdFlightEndTimeMs      :: !(Maybe (JSONText Int64))
+    , _mdFlightEndTimeMs      :: !(Maybe (Textual Int64))
     , _mdName                 :: !(Maybe Text)
     , _mdSellerContacts       :: !(Maybe [ContactInformation])
     , _mdOfferId              :: !(Maybe Text)
@@ -6887,12 +6887,12 @@ instance ToJSON GetOffersResponse where
 --
 -- /See:/ 'statsDTO' smart constructor.
 data StatsDTO = StatsDTO
-    { _sdtoBids        :: !(Maybe (JSONText Int64))
+    { _sdtoBids        :: !(Maybe (Textual Int64))
     , _sdtoSpend       :: !(Maybe MoneyDTO)
-    , _sdtoImpressions :: !(Maybe (JSONText Int64))
-    , _sdtoGoodBids    :: !(Maybe (JSONText Int64))
+    , _sdtoImpressions :: !(Maybe (Textual Int64))
+    , _sdtoGoodBids    :: !(Maybe (Textual Int64))
     , _sdtoRevenue     :: !(Maybe MoneyDTO)
-    , _sdtoRequests    :: !(Maybe (JSONText Int64))
+    , _sdtoRequests    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatsDTO' with the minimum fields required to make a request.
@@ -7030,8 +7030,8 @@ instance ToJSON DealTermsNonGuaranteedAuctionTerms
 --
 -- /See:/ 'creativeFilteringReasonsReasonsItem' smart constructor.
 data CreativeFilteringReasonsReasonsItem = CreativeFilteringReasonsReasonsItem
-    { _cfrriFilteringStatus :: !(Maybe (JSONText Int32))
-    , _cfrriFilteringCount  :: !(Maybe (JSONText Int64))
+    { _cfrriFilteringStatus :: !(Maybe (Textual Int32))
+    , _cfrriFilteringCount  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFilteringReasonsReasonsItem' with the minimum fields required to make a request.
@@ -7089,11 +7089,11 @@ data NegotiationRoundDTO = NegotiationRoundDTO
     , _nrdtoKind           :: !Text
     , _nrdtoOriginatorRole :: !(Maybe Text)
     , _nrdtoAction         :: !(Maybe Text)
-    , _nrdtoDBmPartnerId   :: !(Maybe (JSONText Int64))
+    , _nrdtoDBmPartnerId   :: !(Maybe (Textual Int64))
     , _nrdtoNotes          :: !(Maybe Text)
-    , _nrdtoNegotiationId  :: !(Maybe (JSONText Int64))
+    , _nrdtoNegotiationId  :: !(Maybe (Textual Int64))
     , _nrdtoEditHistory    :: !(Maybe EditHistoryDTO)
-    , _nrdtoRoundNumber    :: !(Maybe (JSONText Int64))
+    , _nrdtoRoundNumber    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationRoundDTO' with the minimum fields required to make a request.
@@ -7292,12 +7292,12 @@ instance ToJSON DealTerms where
 --
 -- /See:/ 'dateTime' smart constructor.
 data DateTime = DateTime
-    { _dtSecond     :: !(Maybe (JSONText Int32))
-    , _dtDay        :: !(Maybe (JSONText Int32))
-    , _dtYear       :: !(Maybe (JSONText Int32))
-    , _dtHour       :: !(Maybe (JSONText Int32))
-    , _dtMonth      :: !(Maybe (JSONText Int32))
-    , _dtMinute     :: !(Maybe (JSONText Int32))
+    { _dtSecond     :: !(Maybe (Textual Int32))
+    , _dtDay        :: !(Maybe (Textual Int32))
+    , _dtYear       :: !(Maybe (Textual Int32))
+    , _dtHour       :: !(Maybe (Textual Int32))
+    , _dtMonth      :: !(Maybe (Textual Int32))
+    , _dtMinute     :: !(Maybe (Textual Int32))
     , _dtTimeZoneId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7391,7 +7391,7 @@ instance ToJSON DateTime where
 data MarketplaceLabel = MarketplaceLabel
     { _mlDeprecatedMarketplaceDealParty :: !(Maybe MarketplaceDealParty)
     , _mlAccountId                      :: !(Maybe Text)
-    , _mlCreateTimeMs                   :: !(Maybe (JSONText Int64))
+    , _mlCreateTimeMs                   :: !(Maybe (Textual Int64))
     , _mlLabel                          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7463,8 +7463,8 @@ instance ToJSON MarketplaceLabel where
 data EditHistoryDTO = EditHistoryDTO
     { _ehdtoLastUpdatedByLoginName :: !(Maybe Text)
     , _ehdtoCreatedByLoginName     :: !(Maybe Text)
-    , _ehdtoLastUpdateTimeStamp    :: !(Maybe (JSONText Int64))
-    , _ehdtoCreatedTimeStamp       :: !(Maybe (JSONText Int64))
+    , _ehdtoLastUpdateTimeStamp    :: !(Maybe (Textual Int64))
+    , _ehdtoCreatedTimeStamp       :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditHistoryDTO' with the minimum fields required to make a request.
@@ -7580,7 +7580,7 @@ data MarketplaceOrder = MarketplaceOrder
     , _mBuyerContacts              :: !(Maybe [ContactInformation])
     , _mKind                       :: !Text
     , _mOriginatorRole             :: !(Maybe Text)
-    , _mRevisionNumber             :: !(Maybe (JSONText Int64))
+    , _mRevisionNumber             :: !(Maybe (Textual Int64))
     , _mBilledBuyer                :: !(Maybe Buyer)
     , _mIsRenegotiating            :: !(Maybe Bool)
     , _mHasSellerSignedOff         :: !(Maybe Bool)
@@ -7590,7 +7590,7 @@ data MarketplaceOrder = MarketplaceOrder
     , _mSellerContacts             :: !(Maybe [ContactInformation])
     , _mLastUpdaterRole            :: !(Maybe Text)
     , _mLabels                     :: !(Maybe [MarketplaceLabel])
-    , _mRevisionTimeMs             :: !(Maybe (JSONText Int64))
+    , _mRevisionTimeMs             :: !(Maybe (Textual Int64))
     , _mOrderId                    :: !(Maybe Text)
     , _mLastUpdaterOrCommentorRole :: !(Maybe Text)
     , _mHasBuyerSignedOff          :: !(Maybe Bool)
@@ -7844,7 +7844,7 @@ instance ToJSON MarketplaceOrder where
 data AddOrderDealsRequest = AddOrderDealsRequest
     { _aUpdateAction        :: !(Maybe Text)
     , _aDeals               :: !(Maybe [MarketplaceDeal])
-    , _aOrderRevisionNumber :: !(Maybe (JSONText Int64))
+    , _aOrderRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddOrderDealsRequest' with the minimum fields required to make a request.
@@ -7904,8 +7904,8 @@ instance ToJSON AddOrderDealsRequest where
 --
 -- /See:/ 'dealTermsGuaranteedFixedPriceTerms' smart constructor.
 data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms
-    { _dtgfptGuaranteedLooks       :: !(Maybe (JSONText Int64))
-    , _dtgfptGuaranteedImpressions :: !(Maybe (JSONText Int64))
+    { _dtgfptGuaranteedLooks       :: !(Maybe (Textual Int64))
+    , _dtgfptGuaranteedImpressions :: !(Maybe (Textual Int64))
     , _dtgfptFixedPrices           :: !(Maybe [PricePerBuyer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 

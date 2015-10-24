@@ -52,7 +52,7 @@ type EditsExpansionFilesGetResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" (JSONText Int32) :>
+                   Capture "apkVersionCode" (Textual Int32) :>
                      "expansionFiles" :>
                        Capture "expansionFileType"
                          EditsExpansionFilesGetExpansionFileType
@@ -64,7 +64,7 @@ type EditsExpansionFilesGetResource =
 -- /See:/ 'editsExpansionFilesGet' smart constructor.
 data EditsExpansionFilesGet = EditsExpansionFilesGet
     { _eefgPackageName       :: !Text
-    , _eefgAPKVersionCode    :: !(JSONText Int32)
+    , _eefgAPKVersionCode    :: !(Textual Int32)
     , _eefgExpansionFileType :: !EditsExpansionFilesGetExpansionFileType
     , _eefgEditId            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

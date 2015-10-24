@@ -56,14 +56,12 @@ type ObjectsDeleteResource =
            Capture "bucket" Text :>
              "o" :>
                Capture "object" Text :>
-                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                   :>
-                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
-                       QueryParam "ifMetagenerationNotMatch"
-                         (JSONText Int64)
+                 QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                   QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                     QueryParam "ifGenerationMatch" (Textual Int64) :>
+                       QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                          :>
-                         QueryParam "generation" (JSONText Int64) :>
+                         QueryParam "generation" (Textual Int64) :>
                            QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an object and its metadata. Deletions are permanent if
@@ -72,13 +70,13 @@ type ObjectsDeleteResource =
 --
 -- /See:/ 'objectsDelete' smart constructor.
 data ObjectsDelete = ObjectsDelete
-    { _odIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
-    , _odIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
-    , _odIfGenerationMatch        :: !(Maybe (JSONText Int64))
+    { _odIfMetagenerationMatch    :: !(Maybe (Textual Int64))
+    , _odIfGenerationNotMatch     :: !(Maybe (Textual Int64))
+    , _odIfGenerationMatch        :: !(Maybe (Textual Int64))
     , _odBucket                   :: !Text
-    , _odIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _odIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _odObject                   :: !Text
-    , _odGeneration               :: !(Maybe (JSONText Int64))
+    , _odGeneration               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsDelete' with the minimum fields required to make a request.

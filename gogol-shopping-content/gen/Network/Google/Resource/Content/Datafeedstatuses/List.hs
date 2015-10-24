@@ -46,10 +46,10 @@ import           Network.Google.ShoppingContent.Types
 type DatafeedstatusesListResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "datafeedstatuses" :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (JSONText Word32) :>
+               QueryParam "maxResults" (Textual Word32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] DatafeedstatusesListResponse
 
@@ -57,9 +57,9 @@ type DatafeedstatusesListResource =
 --
 -- /See:/ 'datafeedstatusesList' smart constructor.
 data DatafeedstatusesList = DatafeedstatusesList
-    { _dlMerchantId :: !(JSONText Word64)
+    { _dlMerchantId :: !(Textual Word64)
     , _dlPageToken  :: !(Maybe Text)
-    , _dlMaxResults :: !(Maybe (JSONText Word32))
+    , _dlMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedstatusesList' with the minimum fields required to make a request.

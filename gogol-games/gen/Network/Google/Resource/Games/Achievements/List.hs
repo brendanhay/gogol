@@ -55,7 +55,7 @@ type AchievementsListResource =
                QueryParam "state" AchievementsListState :>
                  QueryParam "language" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] PlayerAchievementListResponse
 
@@ -68,7 +68,7 @@ data AchievementsList = AchievementsList
     , _alLanguage   :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
     , _alPlayerId   :: !Text
-    , _alMaxResults :: !(Maybe (JSONText Int32))
+    , _alMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsList' with the minimum fields required to make a request.

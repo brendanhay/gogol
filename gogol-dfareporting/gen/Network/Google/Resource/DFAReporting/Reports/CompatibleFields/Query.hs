@@ -48,7 +48,7 @@ type ReportsCompatibleFieldsQueryResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "reports" :>
                "compatiblefields" :>
                  "query" :>
@@ -62,7 +62,7 @@ type ReportsCompatibleFieldsQueryResource =
 --
 -- /See:/ 'reportsCompatibleFieldsQuery' smart constructor.
 data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery
-    { _rcfqProFileId :: !(JSONText Int64)
+    { _rcfqProFileId :: !(Textual Int64)
     , _rcfqPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 

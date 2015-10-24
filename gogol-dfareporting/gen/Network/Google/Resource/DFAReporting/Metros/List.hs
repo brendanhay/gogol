@@ -45,7 +45,7 @@ type MetrosListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "metros" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] MetrosListResponse
@@ -54,7 +54,7 @@ type MetrosListResource =
 --
 -- /See:/ 'metrosList' smart constructor.
 newtype MetrosList = MetrosList
-    { _mlProFileId :: JSONText Int64
+    { _mlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetrosList' with the minimum fields required to make a request.

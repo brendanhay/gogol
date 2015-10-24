@@ -33,13 +33,13 @@ data Event = Event
     , _eMemberId            :: !(Maybe Text)
     , _eKind                :: !Text
     , _eNetworkFee          :: !(Maybe Money)
-    , _eAdvertiserId        :: !(Maybe (JSONText Int64))
+    , _eAdvertiserId        :: !(Maybe (Textual Int64))
     , _eEventDate           :: !(Maybe DateTime')
     , _eProducts            :: !(Maybe [EventProductsItem])
     , _ePublisherFee        :: !(Maybe Money)
     , _eType                :: !(Maybe Text)
     , _eOrderId             :: !(Maybe Text)
-    , _ePublisherId         :: !(Maybe (JSONText Int64))
+    , _ePublisherId         :: !(Maybe (Textual Int64))
     , _eEarnings            :: !(Maybe Money)
     , _ePublisherName       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -259,7 +259,7 @@ instance ToJSON Event where
 --
 -- /See:/ 'money' smart constructor.
 data Money = Money
-    { _mAmount       :: !(Maybe (JSONText Double))
+    { _mAmount       :: !(Maybe (Textual Double))
     , _mCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -313,7 +313,7 @@ data Link = Link
     , _lClickTrackingURL      :: !(Maybe Text)
     , _lCreateDate            :: !(Maybe DateTime')
     , _lKind                  :: !Text
-    , _lAdvertiserId          :: !(Maybe (JSONText Int64))
+    , _lAdvertiserId          :: !(Maybe (Textual Int64))
     , _lEndDate               :: !(Maybe DateTime')
     , _lImageAltText          :: !(Maybe Text)
     , _lPromotionType         :: !(Maybe Text)
@@ -323,7 +323,7 @@ data Link = Link
     , _lImpressionTrackingURL :: !(Maybe Text)
     , _lSpecialOffers         :: !(Maybe LinkSpecialOffers)
     , _lEpcSevenDayAverage    :: !(Maybe Money)
-    , _lId                    :: !(Maybe (JSONText Int64))
+    , _lId                    :: !(Maybe (Textual Int64))
     , _lEpcNinetyDayAverage   :: !(Maybe Money)
     , _lLinkType              :: !(Maybe Text)
     , _lIsActive              :: !(Maybe Bool)
@@ -628,9 +628,9 @@ instance ToJSON CcOffers where
 -- /See:/ 'ccOfferDefaultFeesItem' smart constructor.
 data CcOfferDefaultFeesItem = CcOfferDefaultFeesItem
     { _codfiRateType :: !(Maybe Text)
-    , _codfiMinRate  :: !(Maybe (JSONText Double))
+    , _codfiMinRate  :: !(Maybe (Textual Double))
     , _codfiCategory :: !(Maybe Text)
-    , _codfiMaxRate  :: !(Maybe (JSONText Double))
+    , _codfiMaxRate  :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CcOfferDefaultFeesItem' with the minimum fields required to make a request.
@@ -708,7 +708,7 @@ data Report = Report
     , _rKind             :: !Text
     , _rStartDate        :: !(Maybe Text)
     , _rRows             :: !(Maybe [[JSONValue]])
-    , _rMatchingRowCount :: !(Maybe (JSONText Int64))
+    , _rMatchingRowCount :: !(Maybe (Textual Int64))
     , _rColumnNames      :: !(Maybe [Text])
     , _rType             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -881,7 +881,7 @@ instance ToJSON Advertisers where
 data EventProductsItem = EventProductsItem
     { _epiSKUName      :: !(Maybe Text)
     , _epiNetworkFee   :: !(Maybe Money)
-    , _epiQuantity     :: !(Maybe (JSONText Int64))
+    , _epiQuantity     :: !(Maybe (Textual Int64))
     , _epiCategoryName :: !(Maybe Text)
     , _epiCategoryId   :: !(Maybe Text)
     , _epiSKU          :: !(Maybe Text)
@@ -1007,7 +1007,7 @@ instance ToJSON EventProductsItem where
 --
 -- /See:/ 'ccOfferBonusRewardsItem' smart constructor.
 data CcOfferBonusRewardsItem = CcOfferBonusRewardsItem
-    { _cobriAmount  :: !(Maybe (JSONText Double))
+    { _cobriAmount  :: !(Maybe (Textual Double))
     , _cobriDetails :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1118,7 +1118,7 @@ instance ToJSON Events where
 -- /See:/ 'linkSpecialOffers' smart constructor.
 data LinkSpecialOffers = LinkSpecialOffers
     { _lsoFreeShippingMin :: !(Maybe Money)
-    , _lsoPercentOff      :: !(Maybe (JSONText Double))
+    , _lsoPercentOff      :: !(Maybe (Textual Double))
     , _lsoPriceCut        :: !(Maybe Money)
     , _lsoPriceCutMin     :: !(Maybe Money)
     , _lsoPercentOffMin   :: !(Maybe Money)
@@ -1308,16 +1308,16 @@ data Advertiser = Advertiser
     , _advSiteURL                    :: !(Maybe Text)
     , _advPayoutRank                 :: !(Maybe Text)
     , _advJoinDate                   :: !(Maybe DateTime')
-    , _advDefaultLinkId              :: !(Maybe (JSONText Int64))
+    , _advDefaultLinkId              :: !(Maybe (Textual Int64))
     , _advRedirectDomains            :: !(Maybe [Text])
     , _advName                       :: !(Maybe Text)
     , _advProductFeedsEnabled        :: !(Maybe Bool)
-    , _advMerchantCenterIds          :: !(Maybe [JSONText Int64])
+    , _advMerchantCenterIds          :: !(Maybe [Textual Int64])
     , _advEpcSevenDayAverage         :: !(Maybe Money)
     , _advItem                       :: !(Maybe Advertiser)
-    , _advId                         :: !(Maybe (JSONText Int64))
+    , _advId                         :: !(Maybe (Textual Int64))
     , _advEpcNinetyDayAverage        :: !(Maybe Money)
-    , _advCommissionDuration         :: !(Maybe (JSONText Int32))
+    , _advCommissionDuration         :: !(Maybe (Textual Int32))
     , _advDescription                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1597,13 +1597,13 @@ data CcOffer = CcOffer
     , _cReturnedPaymentFee            :: !(Maybe Text)
     , _cAgeMinimumDetails             :: !(Maybe Text)
     , _cVariableRatesUpdateFrequency  :: !(Maybe Text)
-    , _cCreditLimitMin                :: !(Maybe (JSONText Double))
+    , _cCreditLimitMin                :: !(Maybe (Textual Double))
     , _cTravelInsurance               :: !(Maybe Text)
     , _cApprovedCategories            :: !(Maybe [Text])
     , _cAnnualFeeDisplay              :: !(Maybe Text)
     , _cOverLimitFee                  :: !(Maybe Text)
-    , _cMaxPurchaseRate               :: !(Maybe (JSONText Double))
-    , _cAgeMinimum                    :: !(Maybe (JSONText Double))
+    , _cMaxPurchaseRate               :: !(Maybe (Textual Double))
+    , _cAgeMinimum                    :: !(Maybe (Textual Double))
     , _cVariableRatesLastUpdated      :: !(Maybe Text)
     , _cIntroCashAdvanceTerms         :: !(Maybe Text)
     , _cIssuerWebsite                 :: !(Maybe Text)
@@ -1622,11 +1622,11 @@ data CcOffer = CcOffer
     , _cRewards                       :: !(Maybe [CcOfferRewardsItem])
     , _cCardType                      :: !(Maybe Text)
     , _cImageURL                      :: !(Maybe Text)
-    , _cCreditLimitMax                :: !(Maybe (JSONText Double))
+    , _cCreditLimitMax                :: !(Maybe (Textual Double))
     , _cLandingPageURL                :: !(Maybe Text)
-    , _cAnnualFee                     :: !(Maybe (JSONText Double))
+    , _cAnnualFee                     :: !(Maybe (Textual Double))
     , _cRewardsExpire                 :: !(Maybe Bool)
-    , _cFirstYearAnnualFee            :: !(Maybe (JSONText Double))
+    , _cFirstYearAnnualFee            :: !(Maybe (Textual Double))
     , _cCarRentalInsurance            :: !(Maybe Text)
     , _cPurchaseRateAdditionalDetails :: !(Maybe Text)
     , _cOfferId                       :: !(Maybe Text)
@@ -1638,11 +1638,11 @@ data CcOffer = CcOffer
     , _cCardBenefits                  :: !(Maybe [Text])
     , _cIssuer                        :: !(Maybe Text)
     , _cCardName                      :: !(Maybe Text)
-    , _cMinPurchaseRate               :: !(Maybe (JSONText Double))
+    , _cMinPurchaseRate               :: !(Maybe (Textual Double))
     , _cFraudLiability                :: !(Maybe Text)
     , _cForeignCurrencyTransactionFee :: !(Maybe Text)
     , _cExtendedWarranty              :: !(Maybe Text)
-    , _cAnnualRewardMaximum           :: !(Maybe (JSONText Double))
+    , _cAnnualRewardMaximum           :: !(Maybe (Textual Double))
     , _cIssuerId                      :: !(Maybe Text)
     , _cIntroBalanceTransferTerms     :: !(Maybe Text)
     , _cDefaultFees                   :: !(Maybe [CcOfferDefaultFeesItem])
@@ -2493,7 +2493,7 @@ data Publisher = Publisher
     , _pubName                :: !(Maybe Text)
     , _pubEpcSevenDayAverage  :: !(Maybe Money)
     , _pubItem                :: !(Maybe Publisher)
-    , _pubId                  :: !(Maybe (JSONText Int64))
+    , _pubId                  :: !(Maybe (Textual Int64))
     , _pubEpcNinetyDayAverage :: !(Maybe Money)
     , _pubSites               :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2646,12 +2646,12 @@ instance ToJSON Publisher where
 --
 -- /See:/ 'ccOfferRewardsItem' smart constructor.
 data CcOfferRewardsItem = CcOfferRewardsItem
-    { _coriAmount            :: !(Maybe (JSONText Double))
-    , _coriExpirationMonths  :: !(Maybe (JSONText Double))
+    { _coriAmount            :: !(Maybe (Textual Double))
+    , _coriExpirationMonths  :: !(Maybe (Textual Double))
     , _coriCategory          :: !(Maybe Text)
     , _coriAdditionalDetails :: !(Maybe Text)
-    , _coriMaxRewardTier     :: !(Maybe (JSONText Double))
-    , _coriMinRewardTier     :: !(Maybe (JSONText Double))
+    , _coriMaxRewardTier     :: !(Maybe (Textual Double))
+    , _coriMinRewardTier     :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CcOfferRewardsItem' with the minimum fields required to make a request.

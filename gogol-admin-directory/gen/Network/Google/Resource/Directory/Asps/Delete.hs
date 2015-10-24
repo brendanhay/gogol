@@ -49,14 +49,14 @@ type AspsDeleteResource =
            "users" :>
              Capture "userKey" Text :>
                "asps" :>
-                 Capture "codeId" (JSONText Int32) :>
+                 Capture "codeId" (Textual Int32) :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an ASP issued by a user.
 --
 -- /See:/ 'aspsDelete' smart constructor.
 data AspsDelete = AspsDelete
-    { _adCodeId  :: !(JSONText Int32)
+    { _adCodeId  :: !(Textual Int32)
     , _adUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

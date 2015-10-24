@@ -54,7 +54,7 @@ type SnapshotsListResource =
                "snapshots" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] SnapshotList
 
 -- | Retrieves the list of Snapshot resources contained within the specified
@@ -65,7 +65,7 @@ data SnapshotsList = SnapshotsList
     { _slProject    :: !Text
     , _slFilter     :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
-    , _slMaxResults :: !(JSONText Word32)
+    , _slMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.

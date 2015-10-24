@@ -52,7 +52,7 @@ type EventsGetResource =
            Capture "calendarId" Text :>
              "events" :>
                Capture "eventId" Text :>
-                 QueryParam "maxAttendees" (JSONText Int32) :>
+                 QueryParam "maxAttendees" (Textual Int32) :>
                    QueryParam "timeZone" Text :>
                      QueryParam "alwaysIncludeEmail" Bool :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Event
@@ -62,7 +62,7 @@ type EventsGetResource =
 -- /See:/ 'eventsGet' smart constructor.
 data EventsGet = EventsGet
     { _egCalendarId         :: !Text
-    , _egMaxAttendees       :: !(Maybe (JSONText Int32))
+    , _egMaxAttendees       :: !(Maybe (Textual Int32))
     , _egTimeZone           :: !(Maybe Text)
     , _egAlwaysIncludeEmail :: !(Maybe Bool)
     , _egEventId            :: !Text

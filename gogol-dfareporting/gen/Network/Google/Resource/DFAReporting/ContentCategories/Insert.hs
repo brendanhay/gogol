@@ -46,7 +46,7 @@ type ContentCategoriesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] ContentCategory :>
@@ -56,7 +56,7 @@ type ContentCategoriesInsertResource =
 --
 -- /See:/ 'contentCategoriesInsert' smart constructor.
 data ContentCategoriesInsert = ContentCategoriesInsert
-    { _cciProFileId :: !(JSONText Int64)
+    { _cciProFileId :: !(Textual Int64)
     , _cciPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
 

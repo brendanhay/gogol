@@ -49,10 +49,8 @@ type BucketsGetResource =
        "v1" :>
          "b" :>
            Capture "bucket" Text :>
-             QueryParam "ifMetagenerationMatch" (JSONText Int64)
-               :>
-               QueryParam "ifMetagenerationNotMatch"
-                 (JSONText Int64)
+             QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+               QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                  :>
                  QueryParam "projection" BucketsGetProjection :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Bucket
@@ -61,9 +59,9 @@ type BucketsGetResource =
 --
 -- /See:/ 'bucketsGet' smart constructor.
 data BucketsGet = BucketsGet
-    { _bgIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    { _bgIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _bgBucket                   :: !Text
-    , _bgIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _bgIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _bgProjection               :: !(Maybe BucketsGetProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- /See:/ 'uploadAccountResponseErrorItem' smart constructor.
 data UploadAccountResponseErrorItem = UploadAccountResponseErrorItem
     { _uareiMessage :: !(Maybe Text)
-    , _uareiIndex   :: !(Maybe (JSONText Int32))
+    , _uareiIndex   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UploadAccountResponseErrorItem' with the minimum fields required to make a request.
@@ -150,13 +150,13 @@ data UserInfo = UserInfo
     , _uiPhotoURL          :: !(Maybe Text)
     , _uiDisabled          :: !(Maybe Bool)
     , _uiProviderUserInfo  :: !(Maybe [UserInfoProviderUserInfoItem])
-    , _uiValidSince        :: !(Maybe (JSONText Int64))
-    , _uiPasswordUpdatedAt :: !(Maybe (JSONText Double))
-    , _uiVersion           :: !(Maybe (JSONText Int32))
+    , _uiValidSince        :: !(Maybe (Textual Int64))
+    , _uiPasswordUpdatedAt :: !(Maybe (Textual Double))
+    , _uiVersion           :: !(Maybe (Textual Int32))
     , _uiEmailVerified     :: !(Maybe Bool)
-    , _uiSalt              :: !(Maybe (JSONText Word8))
+    , _uiSalt              :: !(Maybe (Textual Word8))
     , _uiDisplayName       :: !(Maybe Text)
-    , _uiPasswordHash      :: !(Maybe (JSONText Word8))
+    , _uiPasswordHash      :: !(Maybe (Textual Word8))
     , _uiLocalId           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -473,7 +473,7 @@ data IdentitytoolkitRelyingPartySetAccountInfoRequest = IdentitytoolkitRelyingPa
     { _irpsairUpgradeToFederatedLogin :: !(Maybe Bool)
     , _irpsairEmail                   :: !(Maybe Text)
     , _irpsairCaptchaChallenge        :: !(Maybe Text)
-    , _irpsairValidSince              :: !(Maybe (JSONText Int64))
+    , _irpsairValidSince              :: !(Maybe (Textual Int64))
     , _irpsairOOBCode                 :: !(Maybe Text)
     , _irpsairPassword                :: !(Maybe Text)
     , _irpsairCaptchaResponse         :: !(Maybe Text)
@@ -1259,11 +1259,11 @@ instance ToJSON
 -- /See:/ 'identitytoolkitRelyingPartyUploadAccountRequest' smart constructor.
 data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPartyUploadAccountRequest
     { _irpuarUsers         :: !(Maybe [UserInfo])
-    , _irpuarMemoryCost    :: !(Maybe (JSONText Int32))
-    , _irpuarSaltSeparator :: !(Maybe (JSONText Word8))
+    , _irpuarMemoryCost    :: !(Maybe (Textual Int32))
+    , _irpuarSaltSeparator :: !(Maybe (Textual Word8))
     , _irpuarHashAlgorithm :: !(Maybe Text)
-    , _irpuarSignerKey     :: !(Maybe (JSONText Word8))
-    , _irpuarRounds        :: !(Maybe (JSONText Int32))
+    , _irpuarSignerKey     :: !(Maybe (Textual Word8))
+    , _irpuarRounds        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyUploadAccountRequest' with the minimum fields required to make a request.
@@ -1739,7 +1739,7 @@ instance ToJSON GetOOBConfirmationCodeResponse where
 -- /See:/ 'identitytoolkitRelyingPartyDownloadAccountRequest' smart constructor.
 data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingPartyDownloadAccountRequest
     { _irpdarNextPageToken :: !(Maybe Text)
-    , _irpdarMaxResults    :: !(Maybe (JSONText Word32))
+    , _irpdarMaxResults    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyDownloadAccountRequest' with the minimum fields required to make a request.
@@ -1799,7 +1799,7 @@ data VerifyPasswordResponse = VerifyPasswordResponse
     , _vprPhotoURL               :: !(Maybe Text)
     , _vprOAuthAccessToken       :: !(Maybe Text)
     , _vprKind                   :: !Text
-    , _vprOAuthExpireIn          :: !(Maybe (JSONText Int32))
+    , _vprOAuthExpireIn          :: !(Maybe (Textual Int32))
     , _vprDisplayName            :: !(Maybe Text)
     , _vprLocalId                :: !(Maybe Text)
     , _vprRegistered             :: !(Maybe Bool)
@@ -2048,7 +2048,7 @@ data VerifyAssertionResponse = VerifyAssertionResponse
     , _varOAuthAccessToken       :: !(Maybe Text)
     , _varDateOfBirth            :: !(Maybe Text)
     , _varKind                   :: !Text
-    , _varOAuthExpireIn          :: !(Maybe (JSONText Int32))
+    , _varOAuthExpireIn          :: !(Maybe (Textual Int32))
     , _varAppInstallationURL     :: !(Maybe Text)
     , _varAction                 :: !(Maybe Text)
     , _varNeedEmail              :: !(Maybe Bool)

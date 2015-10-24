@@ -53,8 +53,8 @@ type ManagementWebPropertyUserLinksListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "entityUserLinks" :>
-                     QueryParam "start-index" (JSONText Int32) :>
-                       QueryParam "max-results" (JSONText Int32) :>
+                     QueryParam "start-index" (Textual Int32) :>
+                       QueryParam "max-results" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] EntityUserLinks
 
@@ -64,8 +64,8 @@ type ManagementWebPropertyUserLinksListResource =
 data ManagementWebPropertyUserLinksList = ManagementWebPropertyUserLinksList
     { _mwpullWebPropertyId :: !Text
     , _mwpullAccountId     :: !Text
-    , _mwpullStartIndex    :: !(Maybe (JSONText Int32))
-    , _mwpullMaxResults    :: !(Maybe (JSONText Int32))
+    , _mwpullStartIndex    :: !(Maybe (Textual Int32))
+    , _mwpullMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyUserLinksList' with the minimum fields required to make a request.

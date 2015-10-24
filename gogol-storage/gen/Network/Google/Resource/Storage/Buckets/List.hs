@@ -53,7 +53,7 @@ type BucketsListResource =
              QueryParam "prefix" Text :>
                QueryParam "projection" BucketsListProjection :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Buckets
 
 -- | Retrieves a list of buckets for a given project.
@@ -64,7 +64,7 @@ data BucketsList = BucketsList
     , _blPrefix     :: !(Maybe Text)
     , _blProjection :: !(Maybe BucketsListProjection)
     , _blPageToken  :: !(Maybe Text)
-    , _blMaxResults :: !(Maybe (JSONText Word32))
+    , _blMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsList' with the minimum fields required to make a request.

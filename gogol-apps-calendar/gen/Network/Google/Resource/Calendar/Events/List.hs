@@ -72,7 +72,7 @@ type EventsListResource =
                          QueryParam "showDeleted" Bool :>
                            QueryParam "q" Text :>
                              QueryParams "sharedExtendedProperty" Text :>
-                               QueryParam "maxAttendees" (JSONText Int32) :>
+                               QueryParam "maxAttendees" (Textual Int32) :>
                                  QueryParam "iCalUID" Text :>
                                    QueryParam "updatedMin" DateTime' :>
                                      QueryParam "pageToken" Text :>
@@ -80,7 +80,7 @@ type EventsListResource =
                                          QueryParam "showHiddenInvitations" Bool
                                            :>
                                            QueryParam "maxResults"
-                                             (JSONText Int32)
+                                             (Textual Int32)
                                              :>
                                              QueryParam "alwaysIncludeEmail"
                                                Bool
@@ -102,13 +102,13 @@ data EventsList = EventsList
     , _elShowDeleted             :: !(Maybe Bool)
     , _elQ                       :: !(Maybe Text)
     , _elSharedExtendedProperty  :: !(Maybe [Text])
-    , _elMaxAttendees            :: !(Maybe (JSONText Int32))
+    , _elMaxAttendees            :: !(Maybe (Textual Int32))
     , _elICalUId                 :: !(Maybe Text)
     , _elUpdatedMin              :: !(Maybe DateTime')
     , _elPageToken               :: !(Maybe Text)
     , _elTimeZone                :: !(Maybe Text)
     , _elShowHiddenInvitations   :: !(Maybe Bool)
-    , _elMaxResults              :: !(Maybe (JSONText Int32))
+    , _elMaxResults              :: !(Maybe (Textual Int32))
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
     , _elTimeMax                 :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

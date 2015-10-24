@@ -48,7 +48,7 @@ type ReportsGetFileResource =
          "reports" :>
            Capture "reportId" Text :>
              "files" :>
-               Capture "reportFragment" (JSONText Int32) :>
+               Capture "reportFragment" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
        "doubleclicksearch" :>
@@ -56,7 +56,7 @@ type ReportsGetFileResource =
            "reports" :>
              Capture "reportId" Text :>
                "files" :>
-                 Capture "reportFragment" (JSONText Int32) :>
+                 Capture "reportFragment" (Textual Int32) :>
                    QueryParam "alt" AltMedia :>
                      Get '[OctetStream] Stream
 
@@ -65,7 +65,7 @@ type ReportsGetFileResource =
 -- /See:/ 'reportsGetFile' smart constructor.
 data ReportsGetFile = ReportsGetFile
     { _rgfReportId       :: !Text
-    , _rgfReportFragment :: !(JSONText Int32)
+    , _rgfReportFragment :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGetFile' with the minimum fields required to make a request.

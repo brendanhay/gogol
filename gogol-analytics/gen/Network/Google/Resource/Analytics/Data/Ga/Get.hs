@@ -66,8 +66,8 @@ type DataGaGetResource =
                          QueryParam "output" DataGaGetOutput :>
                            QueryParam "sort" Text :>
                              QueryParam "dimensions" Text :>
-                               QueryParam "start-index" (JSONText Int32) :>
-                                 QueryParam "max-results" (JSONText Int32) :>
+                               QueryParam "start-index" (Textual Int32) :>
+                                 QueryParam "max-results" (Textual Int32) :>
                                    QueryParam "segment" Text :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] GaData
@@ -84,8 +84,8 @@ data DataGaGet = DataGaGet
     , _dggOutput        :: !(Maybe DataGaGetOutput)
     , _dggSort          :: !(Maybe Text)
     , _dggDimensions    :: !(Maybe Text)
-    , _dggStartIndex    :: !(Maybe (JSONText Int32))
-    , _dggMaxResults    :: !(Maybe (JSONText Int32))
+    , _dggStartIndex    :: !(Maybe (Textual Int32))
+    , _dggMaxResults    :: !(Maybe (Textual Int32))
     , _dggSegment       :: !(Maybe Text)
     , _dggStartDate     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

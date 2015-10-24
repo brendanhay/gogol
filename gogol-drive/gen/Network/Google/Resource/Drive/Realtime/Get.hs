@@ -49,7 +49,7 @@ type RealtimeGetResource =
          "files" :>
            Capture "fileId" Text :>
              "realtime" :>
-               QueryParam "revision" (JSONText Int32) :>
+               QueryParam "revision" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
        "drive" :>
@@ -57,7 +57,7 @@ type RealtimeGetResource =
            "files" :>
              Capture "fileId" Text :>
                "realtime" :>
-                 QueryParam "revision" (JSONText Int32) :>
+                 QueryParam "revision" (Textual Int32) :>
                    QueryParam "alt" AltMedia :>
                      Get '[OctetStream] Stream
 
@@ -67,7 +67,7 @@ type RealtimeGetResource =
 -- /See:/ 'realtimeGet' smart constructor.
 data RealtimeGet = RealtimeGet
     { _rrFileId   :: !Text
-    , _rrRevision :: !(Maybe (JSONText Int32))
+    , _rrRevision :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeGet' with the minimum fields required to make a request.

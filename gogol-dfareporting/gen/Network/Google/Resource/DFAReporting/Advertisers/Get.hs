@@ -46,17 +46,17 @@ type AdvertisersGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertisers" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
 
 -- | Gets one advertiser by ID.
 --
 -- /See:/ 'advertisersGet' smart constructor.
 data AdvertisersGet = AdvertisersGet
-    { _advProFileId :: !(JSONText Int64)
-    , _advId        :: !(JSONText Int64)
+    { _advProFileId :: !(Textual Int64)
+    , _advId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersGet' with the minimum fields required to make a request.

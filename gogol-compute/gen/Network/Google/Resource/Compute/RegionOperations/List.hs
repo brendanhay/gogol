@@ -56,7 +56,7 @@ type RegionOperationsListResource =
                  "operations" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
@@ -68,7 +68,7 @@ data RegionOperationsList = RegionOperationsList
     , _rolFilter     :: !(Maybe Text)
     , _rolRegion     :: !Text
     , _rolPageToken  :: !(Maybe Text)
-    , _rolMaxResults :: !(JSONText Word32)
+    , _rolMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionOperationsList' with the minimum fields required to make a request.

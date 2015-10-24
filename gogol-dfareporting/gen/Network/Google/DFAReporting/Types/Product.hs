@@ -95,8 +95,8 @@ instance ToJSON FileList where
 --
 -- /See:/ 'optimizationActivity' smart constructor.
 data OptimizationActivity = OptimizationActivity
-    { _oaWeight                             :: !(Maybe (JSONText Int32))
-    , _oaFloodlightActivityId               :: !(Maybe (JSONText Int64))
+    { _oaWeight                             :: !(Maybe (Textual Int32))
+    , _oaFloodlightActivityId               :: !(Maybe (Textual Int64))
     , _oaFloodlightActivityIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -208,7 +208,7 @@ data CreativeCustomEvent = CreativeCustomEvent
     , _cceTargetType                :: !(Maybe CreativeCustomEventTargetType)
     , _ccePopupWindowProperties     :: !(Maybe PopupWindowProperties)
     , _cceVideoReportingId          :: !(Maybe Text)
-    , _cceId                        :: !(Maybe (JSONText Int64))
+    , _cceId                        :: !(Maybe (Textual Int64))
     , _cceArtworkLabel              :: !(Maybe Text)
     , _cceArtworkType               :: !(Maybe CreativeCustomEventArtworkType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -705,10 +705,10 @@ instance ToJSON ReachReportCompatibleFields where
 data Browser = Browser
     { _bMinorVersion     :: !(Maybe Text)
     , _bKind             :: !Text
-    , _bBrowserVersionId :: !(Maybe (JSONText Int64))
+    , _bBrowserVersionId :: !(Maybe (Textual Int64))
     , _bMajorVersion     :: !(Maybe Text)
     , _bName             :: !(Maybe Text)
-    , _bDartId           :: !(Maybe (JSONText Int64))
+    , _bDartId           :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Browser' with the minimum fields required to make a request.
@@ -814,7 +814,7 @@ instance ToJSON Browser where
 -- /See:/ 'creativeGroupAssignment' smart constructor.
 data CreativeGroupAssignment = CreativeGroupAssignment
     { _cgaCreativeGroupNumber :: !(Maybe CreativeGroupAssignmentCreativeGroupNumber)
-    , _cgaCreativeGroupId     :: !(Maybe (JSONText Int64))
+    , _cgaCreativeGroupId     :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupAssignment' with the minimum fields required to make a request.
@@ -982,7 +982,7 @@ instance ToJSON DirectorySiteSettings where
 -- /See:/ 'listPopulationRule' smart constructor.
 data ListPopulationRule = ListPopulationRule
     { _lprFloodlightActivityName :: !(Maybe Text)
-    , _lprFloodlightActivityId   :: !(Maybe (JSONText Int64))
+    , _lprFloodlightActivityId   :: !(Maybe (Textual Int64))
     , _lprListPopulationClauses  :: !(Maybe [ListPopulationClause])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1105,7 +1105,7 @@ instance ToJSON SizesListResponse where
 data CreativeRotation = CreativeRotation
     { _crWeightCalculationStrategy           :: !(Maybe CreativeRotationWeightCalculationStrategy)
     , _crCreativeAssignments                 :: !(Maybe [CreativeAssignment])
-    , _crCreativeOptimizationConfigurationId :: !(Maybe (JSONText Int64))
+    , _crCreativeOptimizationConfigurationId :: !(Maybe (Textual Int64))
     , _crType                                :: !(Maybe CreativeRotationType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1316,25 +1316,25 @@ instance ToJSON TechnologyTargeting where
 --
 -- /See:/ 'inventoryItem' smart constructor.
 data InventoryItem = InventoryItem
-    { _iiPlacementStrategyId       :: !(Maybe (JSONText Int64))
-    , _iiEstimatedClickThroughRate :: !(Maybe (JSONText Int64))
+    { _iiPlacementStrategyId       :: !(Maybe (Textual Int64))
+    , _iiEstimatedClickThroughRate :: !(Maybe (Textual Int64))
     , _iiPricing                   :: !(Maybe Pricing)
     , _iiKind                      :: !Text
-    , _iiAdvertiserId              :: !(Maybe (JSONText Int64))
-    , _iiRfpId                     :: !(Maybe (JSONText Int64))
-    , _iiContentCategoryId         :: !(Maybe (JSONText Int64))
+    , _iiAdvertiserId              :: !(Maybe (Textual Int64))
+    , _iiRfpId                     :: !(Maybe (Textual Int64))
+    , _iiContentCategoryId         :: !(Maybe (Textual Int64))
     , _iiInPlan                    :: !(Maybe Bool)
-    , _iiAccountId                 :: !(Maybe (JSONText Int64))
+    , _iiAccountId                 :: !(Maybe (Textual Int64))
     , _iiName                      :: !(Maybe Text)
     , _iiAdSlots                   :: !(Maybe [AdSlot])
-    , _iiNegotiationChannelId      :: !(Maybe (JSONText Int64))
+    , _iiNegotiationChannelId      :: !(Maybe (Textual Int64))
     , _iiLastModifiedInfo          :: !(Maybe LastModifiedInfo)
-    , _iiId                        :: !(Maybe (JSONText Int64))
-    , _iiEstimatedConversionRate   :: !(Maybe (JSONText Int64))
-    , _iiProjectId                 :: !(Maybe (JSONText Int64))
-    , _iiSubAccountId              :: !(Maybe (JSONText Int64))
-    , _iiOrderId                   :: !(Maybe (JSONText Int64))
-    , _iiSiteId                    :: !(Maybe (JSONText Int64))
+    , _iiId                        :: !(Maybe (Textual Int64))
+    , _iiEstimatedConversionRate   :: !(Maybe (Textual Int64))
+    , _iiProjectId                 :: !(Maybe (Textual Int64))
+    , _iiSubAccountId              :: !(Maybe (Textual Int64))
+    , _iiOrderId                   :: !(Maybe (Textual Int64))
+    , _iiSiteId                    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItem' with the minimum fields required to make a request.
@@ -1709,7 +1709,7 @@ data ListPopulationTerm = ListPopulationTerm
     , _lptVariableFriendlyName :: !(Maybe Text)
     , _lptNegation             :: !(Maybe Bool)
     , _lptVariableName         :: !(Maybe Text)
-    , _lptRemarketingListId    :: !(Maybe (JSONText Int64))
+    , _lptRemarketingListId    :: !(Maybe (Textual Int64))
     , _lptType                 :: !(Maybe ListPopulationTermType)
     , _lptContains             :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1958,7 +1958,7 @@ data DirectorySiteContact = DirectorySiteContact
     , _dscAddress   :: !(Maybe Text)
     , _dscRole      :: !(Maybe DirectorySiteContactRole)
     , _dscFirstName :: !(Maybe Text)
-    , _dscId        :: !(Maybe (JSONText Int64))
+    , _dscId        :: !(Maybe (Textual Int64))
     , _dscTitle     :: !(Maybe Text)
     , _dscType      :: !(Maybe DirectorySiteContactType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2136,7 +2136,7 @@ instance ToJSON RegionsListResponse where
 data FloodlightActivityDynamicTag = FloodlightActivityDynamicTag
     { _fadtTag  :: !(Maybe Text)
     , _fadtName :: !(Maybe Text)
-    , _fadtId   :: !(Maybe (JSONText Int64))
+    , _fadtId   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityDynamicTag' with the minimum fields required to make a request.
@@ -2191,7 +2191,7 @@ instance ToJSON FloodlightActivityDynamicTag where
 --
 -- /See:/ 'directorySite' smart constructor.
 data DirectorySite = DirectorySite
-    { _dsCurrencyId             :: !(Maybe (JSONText Int64))
+    { _dsCurrencyId             :: !(Maybe (Textual Int64))
     , _dsSettings               :: !(Maybe DirectorySiteSettings)
     , _dsInterstitialTagFormats :: !(Maybe [DirectorySiteInterstitialTagFormatsItem])
     , _dsKind                   :: !Text
@@ -2200,11 +2200,11 @@ data DirectorySite = DirectorySite
     , _dsInpageTagFormats       :: !(Maybe [DirectorySiteInpageTagFormatsItem])
     , _dsActive                 :: !(Maybe Bool)
     , _dsName                   :: !(Maybe Text)
-    , _dsId                     :: !(Maybe (JSONText Int64))
-    , _dsCountryId              :: !(Maybe (JSONText Int64))
+    , _dsId                     :: !(Maybe (Textual Int64))
+    , _dsCountryId              :: !(Maybe (Textual Int64))
     , _dsContactAssignments     :: !(Maybe [DirectorySiteContactAssignment])
     , _dsDescription            :: !(Maybe Text)
-    , _dsParentId               :: !(Maybe (JSONText Int64))
+    , _dsParentId               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySite' with the minimum fields required to make a request.
@@ -2472,15 +2472,15 @@ instance ToJSON
 -- /See:/ 'floodlightActivityGroup' smart constructor.
 data FloodlightActivityGroup = FloodlightActivityGroup
     { _fagTagString                               :: !(Maybe Text)
-    , _fagFloodlightConfigurationId               :: !(Maybe (JSONText Int64))
+    , _fagFloodlightConfigurationId               :: !(Maybe (Textual Int64))
     , _fagKind                                    :: !Text
-    , _fagAdvertiserId                            :: !(Maybe (JSONText Int64))
+    , _fagAdvertiserId                            :: !(Maybe (Textual Int64))
     , _fagAdvertiserIdDimensionValue              :: !(Maybe DimensionValue)
     , _fagIdDimensionValue                        :: !(Maybe DimensionValue)
-    , _fagAccountId                               :: !(Maybe (JSONText Int64))
+    , _fagAccountId                               :: !(Maybe (Textual Int64))
     , _fagName                                    :: !(Maybe Text)
-    , _fagId                                      :: !(Maybe (JSONText Int64))
-    , _fagSubAccountId                            :: !(Maybe (JSONText Int64))
+    , _fagId                                      :: !(Maybe (Textual Int64))
+    , _fagSubAccountId                            :: !(Maybe (Textual Int64))
     , _fagType                                    :: !(Maybe FloodlightActivityGroupType)
     , _fagFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2767,10 +2767,10 @@ instance ToJSON
 -- /See:/ 'fsCommand' smart constructor.
 data FsCommand = FsCommand
     { _fcPositionOption :: !(Maybe FsCommandPositionOption)
-    , _fcLeft           :: !(Maybe (JSONText Int32))
-    , _fcWindowHeight   :: !(Maybe (JSONText Int32))
-    , _fcWindowWidth    :: !(Maybe (JSONText Int32))
-    , _fcTop            :: !(Maybe (JSONText Int32))
+    , _fcLeft           :: !(Maybe (Textual Int32))
+    , _fcWindowHeight   :: !(Maybe (Textual Int32))
+    , _fcWindowWidth    :: !(Maybe (Textual Int32))
+    , _fcTop            :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FsCommand' with the minimum fields required to make a request.
@@ -2855,7 +2855,7 @@ instance ToJSON FsCommand where
 --
 -- /See:/ 'placementAssignment' smart constructor.
 data PlacementAssignment = PlacementAssignment
-    { _paPlacementId               :: !(Maybe (JSONText Int64))
+    { _paPlacementId               :: !(Maybe (Textual Int64))
     , _paPlacementIdDimensionValue :: !(Maybe DimensionValue)
     , _paActive                    :: !(Maybe Bool)
     , _paSSLRequired               :: !(Maybe Bool)
@@ -2934,7 +2934,7 @@ instance ToJSON PlacementAssignment where
 data CreativeFieldValue = CreativeFieldValue
     { _cfvKind  :: !Text
     , _cfvValue :: !(Maybe Text)
-    , _cfvId    :: !(Maybe (JSONText Int64))
+    , _cfvId    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValue' with the minimum fields required to make a request.
@@ -3203,8 +3203,8 @@ instance ToJSON FloodlightActivitiesListResponse
 --
 -- /See:/ 'creativeFieldAssignment' smart constructor.
 data CreativeFieldAssignment = CreativeFieldAssignment
-    { _cfaCreativeFieldId      :: !(Maybe (JSONText Int64))
-    , _cfaCreativeFieldValueId :: !(Maybe (JSONText Int64))
+    { _cfaCreativeFieldId      :: !(Maybe (Textual Int64))
+    , _cfaCreativeFieldValueId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldAssignment' with the minimum fields required to make a request.
@@ -3258,9 +3258,9 @@ instance ToJSON CreativeFieldAssignment where
 -- /See:/ 'advertiserGroup' smart constructor.
 data AdvertiserGroup = AdvertiserGroup
     { _agKind      :: !Text
-    , _agAccountId :: !(Maybe (JSONText Int64))
+    , _agAccountId :: !(Maybe (Textual Int64))
     , _agName      :: !(Maybe Text)
-    , _agId        :: !(Maybe (JSONText Int64))
+    , _agId        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroup' with the minimum fields required to make a request.
@@ -3332,8 +3332,8 @@ instance ToJSON AdvertiserGroup where
 data TagData = TagData
     { _tdClickTag      :: !(Maybe Text)
     , _tdFormat        :: !(Maybe TagDataFormat)
-    , _tdCreativeId    :: !(Maybe (JSONText Int64))
-    , _tdAdId          :: !(Maybe (JSONText Int64))
+    , _tdCreativeId    :: !(Maybe (Textual Int64))
+    , _tdAdId          :: !(Maybe (Textual Int64))
     , _tdImpressionTag :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3413,7 +3413,7 @@ instance ToJSON TagData where
 -- /See:/ 'dayPartTargeting' smart constructor.
 data DayPartTargeting = DayPartTargeting
     { _dptDaysOfWeek    :: !(Maybe [DayPartTargetingDaysOfWeekItem])
-    , _dptHoursOfDay    :: !(Maybe [JSONText Int32])
+    , _dptHoursOfDay    :: !(Maybe [Textual Int32])
     , _dptUserLocalTime :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3490,7 +3490,7 @@ data CreativeOptimizationConfiguration = CreativeOptimizationConfiguration
     { _cocOptimizationModel     :: !(Maybe CreativeOptimizationConfigurationOptimizationModel)
     , _cocName                  :: !(Maybe Text)
     , _cocOptimizationActivitys :: !(Maybe [OptimizationActivity])
-    , _cocId                    :: !(Maybe (JSONText Int64))
+    , _cocId                    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeOptimizationConfiguration' with the minimum fields required to make a request.
@@ -3738,10 +3738,10 @@ instance ToJSON PlacementStrategiesListResponse where
 -- /See:/ 'subAccount' smart constructor.
 data SubAccount = SubAccount
     { _saKind                   :: !Text
-    , _saAvailablePermissionIds :: !(Maybe [JSONText Int64])
-    , _saAccountId              :: !(Maybe (JSONText Int64))
+    , _saAvailablePermissionIds :: !(Maybe [Textual Int64])
+    , _saAccountId              :: !(Maybe (Textual Int64))
     , _saName                   :: !(Maybe Text)
-    , _saId                     :: !(Maybe (JSONText Int64))
+    , _saId                     :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccount' with the minimum fields required to make a request.
@@ -3893,32 +3893,32 @@ data Ad = Ad
     , _aGeoTargeting                          :: !(Maybe GeoTargeting)
     , _aCreativeRotation                      :: !(Maybe CreativeRotation)
     , _aTechnologyTargeting                   :: !(Maybe TechnologyTargeting)
-    , _aAudienceSegmentId                     :: !(Maybe (JSONText Int64))
+    , _aAudienceSegmentId                     :: !(Maybe (Textual Int64))
     , _aDayPartTargeting                      :: !(Maybe DayPartTargeting)
     , _aSize                                  :: !(Maybe Size)
     , _aStartTime                             :: !(Maybe DateTime')
     , _aKind                                  :: !Text
     , _aClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
     , _aCampaignIdDimensionValue              :: !(Maybe DimensionValue)
-    , _aAdvertiserId                          :: !(Maybe (JSONText Int64))
+    , _aAdvertiserId                          :: !(Maybe (Textual Int64))
     , _aAdvertiserIdDimensionValue            :: !(Maybe DimensionValue)
     , _aSSLCompliant                          :: !(Maybe Bool)
-    , _aCampaignId                            :: !(Maybe (JSONText Int64))
+    , _aCampaignId                            :: !(Maybe (Textual Int64))
     , _aIdDimensionValue                      :: !(Maybe DimensionValue)
     , _aClickThroughURL                       :: !(Maybe ClickThroughURL)
     , _aDeliverySchedule                      :: !(Maybe DeliverySchedule)
     , _aEventTagOverrides                     :: !(Maybe [EventTagOverride])
     , _aActive                                :: !(Maybe Bool)
-    , _aAccountId                             :: !(Maybe (JSONText Int64))
+    , _aAccountId                             :: !(Maybe (Textual Int64))
     , _aName                                  :: !(Maybe Text)
     , _aKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
     , _aEndTime                               :: !(Maybe DateTime')
     , _aCreateInfo                            :: !(Maybe LastModifiedInfo)
     , _aLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
-    , _aId                                    :: !(Maybe (JSONText Int64))
+    , _aId                                    :: !(Maybe (Textual Int64))
     , _aSSLRequired                           :: !(Maybe Bool)
     , _aComments                              :: !(Maybe Text)
-    , _aSubAccountId                          :: !(Maybe (JSONText Int64))
+    , _aSubAccountId                          :: !(Maybe (Textual Int64))
     , _aType                                  :: !(Maybe AdType)
     , _aRemarketingListExpression             :: !(Maybe ListTargetingExpression)
     , _aDynamicClickTracker                   :: !(Maybe Bool)
@@ -4399,27 +4399,27 @@ instance ToJSON Ad where
 --
 -- /See:/ 'project' smart constructor.
 data Project = Project
-    { _pTargetClicks      :: !(Maybe (JSONText Int64))
+    { _pTargetClicks      :: !(Maybe (Textual Int64))
     , _pClientBillingCode :: !(Maybe Text)
-    , _pTargetCpmNanos    :: !(Maybe (JSONText Int64))
-    , _pTargetConversions :: !(Maybe (JSONText Int64))
-    , _pBudget            :: !(Maybe (JSONText Int64))
+    , _pTargetCpmNanos    :: !(Maybe (Textual Int64))
+    , _pTargetConversions :: !(Maybe (Textual Int64))
+    , _pBudget            :: !(Maybe (Textual Int64))
     , _pKind              :: !Text
-    , _pAdvertiserId      :: !(Maybe (JSONText Int64))
+    , _pAdvertiserId      :: !(Maybe (Textual Int64))
     , _pEndDate           :: !(Maybe Date')
     , _pOverview          :: !(Maybe Text)
-    , _pTargetImpressions :: !(Maybe (JSONText Int64))
+    , _pTargetImpressions :: !(Maybe (Textual Int64))
     , _pStartDate         :: !(Maybe Date')
-    , _pTargetCpcNanos    :: !(Maybe (JSONText Int64))
-    , _pAccountId         :: !(Maybe (JSONText Int64))
+    , _pTargetCpcNanos    :: !(Maybe (Textual Int64))
+    , _pAccountId         :: !(Maybe (Textual Int64))
     , _pName              :: !(Maybe Text)
     , _pLastModifiedInfo  :: !(Maybe LastModifiedInfo)
-    , _pId                :: !(Maybe (JSONText Int64))
+    , _pId                :: !(Maybe (Textual Int64))
     , _pAudienceAgeGroup  :: !(Maybe ProjectAudienceAgeGroup)
-    , _pSubAccountId      :: !(Maybe (JSONText Int64))
+    , _pSubAccountId      :: !(Maybe (Textual Int64))
     , _pAudienceGender    :: !(Maybe ProjectAudienceGender)
     , _pClientName        :: !(Maybe Text)
-    , _pTargetCpaNanos    :: !(Maybe (JSONText Int64))
+    , _pTargetCpaNanos    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
@@ -4804,11 +4804,11 @@ instance ToJSON ReportFloodlightCriteria where
 --
 -- /See:/ 'size' smart constructor.
 data Size = Size
-    { _sHeight :: !(Maybe (JSONText Int32))
+    { _sHeight :: !(Maybe (Textual Int32))
     , _sKind   :: !Text
-    , _sWidth  :: !(Maybe (JSONText Int32))
+    , _sWidth  :: !(Maybe (Textual Int32))
     , _sIab    :: !(Maybe Bool)
-    , _sId     :: !(Maybe (JSONText Int64))
+    , _sId     :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Size' with the minimum fields required to make a request.
@@ -4886,7 +4886,7 @@ instance ToJSON Size where
 data ObjectFilter = ObjectFilter
     { _ofStatus    :: !(Maybe ObjectFilterStatus)
     , _ofKind      :: !Text
-    , _ofObjectIds :: !(Maybe [JSONText Int64])
+    , _ofObjectIds :: !(Maybe [Textual Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectFilter' with the minimum fields required to make a request.
@@ -4948,7 +4948,7 @@ instance ToJSON ObjectFilter where
 -- /See:/ 'reportsConfiguration' smart constructor.
 data ReportsConfiguration = ReportsConfiguration
     { _rcExposureToConversionEnabled :: !(Maybe Bool)
-    , _rcReportGenerationTimeZoneId  :: !(Maybe (JSONText Int64))
+    , _rcReportGenerationTimeZoneId  :: !(Maybe (Textual Int64))
     , _rcLookbackConfiguration       :: !(Maybe LookbackConfiguration)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5024,7 +5024,7 @@ instance ToJSON ReportsConfiguration where
 -- /See:/ 'pricingSchedule' smart constructor.
 data PricingSchedule = PricingSchedule
     { _psTestingStartDate      :: !(Maybe Date')
-    , _psFloodlightActivityId  :: !(Maybe (JSONText Int64))
+    , _psFloodlightActivityId  :: !(Maybe (Textual Int64))
     , _psEndDate               :: !(Maybe Date')
     , _psDisregardOverdelivery :: !(Maybe Bool)
     , _psStartDate             :: !(Maybe Date')
@@ -5177,7 +5177,7 @@ data PostalCode = PostalCode
     , _pcCode          :: !(Maybe Text)
     , _pcCountryCode   :: !(Maybe Text)
     , _pcId            :: !(Maybe Text)
-    , _pcCountryDartId :: !(Maybe (JSONText Int64))
+    , _pcCountryDartId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostalCode' with the minimum fields required to make a request.
@@ -5311,7 +5311,7 @@ data Country = Country
     { _cKind        :: !Text
     , _cName        :: !(Maybe Text)
     , _cCountryCode :: !(Maybe Text)
-    , _cDartId      :: !(Maybe (JSONText Int64))
+    , _cDartId      :: !(Maybe (Textual Int64))
     , _cSSLEnabled  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5608,7 +5608,7 @@ instance ToJSON Pricing where
 data AudienceSegmentGroup = AudienceSegmentGroup
     { _asgAudienceSegments :: !(Maybe [AudienceSegment])
     , _asgName             :: !(Maybe Text)
-    , _asgId               :: !(Maybe (JSONText Int64))
+    , _asgId               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudienceSegmentGroup' with the minimum fields required to make a request.
@@ -5675,7 +5675,7 @@ data OperatingSystem = OperatingSystem
     , _osKind    :: !Text
     , _osName    :: !(Maybe Text)
     , _osMobile  :: !(Maybe Bool)
-    , _osDartId  :: !(Maybe (JSONText Int64))
+    , _osDartId  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystem' with the minimum fields required to make a request.
@@ -5750,10 +5750,10 @@ instance ToJSON OperatingSystem where
 --
 -- /See:/ 'flight' smart constructor.
 data Flight = Flight
-    { _fRateOrCost :: !(Maybe (JSONText Int64))
+    { _fRateOrCost :: !(Maybe (Textual Int64))
     , _fEndDate    :: !(Maybe Date')
     , _fStartDate  :: !(Maybe Date')
-    , _fUnits      :: !(Maybe (JSONText Int64))
+    , _fUnits      :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Flight' with the minimum fields required to make a request.
@@ -6245,18 +6245,18 @@ data AccountUserProFile = AccountUserProFile
     { _aupfEmail            :: !(Maybe Text)
     , _aupfUserRoleFilter   :: !(Maybe ObjectFilter)
     , _aupfAdvertiserFilter :: !(Maybe ObjectFilter)
-    , _aupfUserRoleId       :: !(Maybe (JSONText Int64))
+    , _aupfUserRoleId       :: !(Maybe (Textual Int64))
     , _aupfKind             :: !Text
     , _aupfLocale           :: !(Maybe Text)
     , _aupfSiteFilter       :: !(Maybe ObjectFilter)
     , _aupfTraffickerType   :: !(Maybe AccountUserProFileTraffickerType)
     , _aupfActive           :: !(Maybe Bool)
-    , _aupfAccountId        :: !(Maybe (JSONText Int64))
+    , _aupfAccountId        :: !(Maybe (Textual Int64))
     , _aupfName             :: !(Maybe Text)
-    , _aupfId               :: !(Maybe (JSONText Int64))
+    , _aupfId               :: !(Maybe (Textual Int64))
     , _aupfUserAccessType   :: !(Maybe AccountUserProFileUserAccessType)
     , _aupfComments         :: !(Maybe Text)
-    , _aupfSubAccountId     :: !(Maybe (JSONText Int64))
+    , _aupfSubAccountId     :: !(Maybe (Textual Int64))
     , _aupfCampaignFilter   :: !(Maybe ObjectFilter)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6681,7 +6681,7 @@ instance ToJSON UserRolePermissionGroupsListResponse
 --
 -- /See:/ 'placementTag' smart constructor.
 data PlacementTag = PlacementTag
-    { _ptPlacementId :: !(Maybe (JSONText Int64))
+    { _ptPlacementId :: !(Maybe (Textual Int64))
     , _ptTagDatas    :: !(Maybe [TagData])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6802,8 +6802,8 @@ data Creative = Creative
     , _creBackupImageTargetWindow             :: !(Maybe TargetWindow)
     , _creRenderingIdDimensionValue           :: !(Maybe DimensionValue)
     , _creCustomKeyValues                     :: !(Maybe [Text])
-    , _creVideoDuration                       :: !(Maybe (JSONText Float))
-    , _creRenderingId                         :: !(Maybe (JSONText Int64))
+    , _creVideoDuration                       :: !(Maybe (Textual Double))
+    , _creRenderingId                         :: !(Maybe (Textual Int64))
     , _creThirdPartyBackupImageImpressionsURL :: !(Maybe Text)
     , _creFsCommand                           :: !(Maybe FsCommand)
     , _creAllowScriptAccess                   :: !(Maybe Bool)
@@ -6816,8 +6816,8 @@ data Creative = Creative
     , _creKind                                :: !Text
     , _creSSLOverride                         :: !(Maybe Bool)
     , _creHTMLCode                            :: !(Maybe Text)
-    , _creAdvertiserId                        :: !(Maybe (JSONText Int64))
-    , _creRequiredFlashVersion                :: !(Maybe (JSONText Int32))
+    , _creAdvertiserId                        :: !(Maybe (Textual Int64))
+    , _creRequiredFlashVersion                :: !(Maybe (Textual Int32))
     , _creBackgRoundColor                     :: !(Maybe Text)
     , _creAdTagKeys                           :: !(Maybe [Text])
     , _creSkippable                           :: !(Maybe Bool)
@@ -6827,31 +6827,31 @@ data Creative = Creative
     , _creCommercialId                        :: !(Maybe Text)
     , _creActive                              :: !(Maybe Bool)
     , _creExitCustomEvents                    :: !(Maybe [CreativeCustomEvent])
-    , _creAccountId                           :: !(Maybe (JSONText Int64))
+    , _creAccountId                           :: !(Maybe (Textual Int64))
     , _creBackupImageClickThroughURL          :: !(Maybe Text)
     , _creName                                :: !(Maybe Text)
     , _creOverrideCss                         :: !(Maybe Text)
     , _creVideoDescription                    :: !(Maybe Text)
     , _creClickTags                           :: !(Maybe [ClickTag])
     , _creAdParameters                        :: !(Maybe Text)
-    , _creVersion                             :: !(Maybe (JSONText Int32))
-    , _creLatestTraffickedCreativeId          :: !(Maybe (JSONText Int64))
+    , _creVersion                             :: !(Maybe (Textual Int32))
+    , _creLatestTraffickedCreativeId          :: !(Maybe (Textual Int64))
     , _creThirdPartyRichMediaImpressionsURL   :: !(Maybe Text)
     , _creLastModifiedInfo                    :: !(Maybe LastModifiedInfo)
-    , _creId                                  :: !(Maybe (JSONText Int64))
-    , _creStudioAdvertiserId                  :: !(Maybe (JSONText Int64))
+    , _creId                                  :: !(Maybe (Textual Int64))
+    , _creStudioAdvertiserId                  :: !(Maybe (Textual Int64))
     , _creCreativeAssets                      :: !(Maybe [CreativeAsset])
-    , _creSubAccountId                        :: !(Maybe (JSONText Int64))
+    , _creSubAccountId                        :: !(Maybe (Textual Int64))
     , _creType                                :: !(Maybe CreativeType)
     , _creTimerCustomEvents                   :: !(Maybe [CreativeCustomEvent])
-    , _creStudioCreativeId                    :: !(Maybe (JSONText Int64))
+    , _creStudioCreativeId                    :: !(Maybe (Textual Int64))
     , _creCompatibility                       :: !(Maybe [CreativeCompatibilityItem])
     , _creBackupImageFeatures                 :: !(Maybe [CreativeBackupImageFeaturesItem])
     , _creArtworkType                         :: !(Maybe CreativeArtworkType)
     , _creArchived                            :: !(Maybe Bool)
-    , _creCompanionCreatives                  :: !(Maybe [JSONText Int64])
-    , _creTotalFileSize                       :: !(Maybe (JSONText Int64))
-    , _creStudioTraffickedCreativeId          :: !(Maybe (JSONText Int64))
+    , _creCompanionCreatives                  :: !(Maybe [Textual Int64])
+    , _creTotalFileSize                       :: !(Maybe (Textual Int64))
+    , _creStudioTraffickedCreativeId          :: !(Maybe (Textual Int64))
     , _creRedirectURL                         :: !(Maybe Text)
     , _creAutoAdvanceImages                   :: !(Maybe Bool)
     , _creCreativeFieldAssignments            :: !(Maybe [CreativeFieldAssignment])
@@ -7672,7 +7672,7 @@ data SiteContact = SiteContact
     , _scLastName    :: !(Maybe Text)
     , _scAddress     :: !(Maybe Text)
     , _scFirstName   :: !(Maybe Text)
-    , _scId          :: !(Maybe (JSONText Int64))
+    , _scId          :: !(Maybe (Textual Int64))
     , _scTitle       :: !(Maybe Text)
     , _scContactType :: !(Maybe SiteContactContactType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7918,19 +7918,19 @@ instance ToJSON DateRange where
 data Report = Report
     { _rDelivery                    :: !(Maybe ReportDelivery)
     , _rEtag                        :: !(Maybe Text)
-    , _rOwnerProFileId              :: !(Maybe (JSONText Int64))
+    , _rOwnerProFileId              :: !(Maybe (Textual Int64))
     , _rSchedule                    :: !(Maybe ReportSchedule)
     , _rPathToConversionCriteria    :: !(Maybe ReportPathToConversionCriteria)
     , _rKind                        :: !Text
     , _rFormat                      :: !(Maybe ReportFormat)
     , _rReachCriteria               :: !(Maybe ReportReachCriteria)
-    , _rLastModifiedTime            :: !(Maybe (JSONText Word64))
-    , _rAccountId                   :: !(Maybe (JSONText Int64))
+    , _rLastModifiedTime            :: !(Maybe (Textual Word64))
+    , _rAccountId                   :: !(Maybe (Textual Int64))
     , _rName                        :: !(Maybe Text)
-    , _rId                          :: !(Maybe (JSONText Int64))
+    , _rId                          :: !(Maybe (Textual Int64))
     , _rCrossDimensionReachCriteria :: !(Maybe ReportCrossDimensionReachCriteria)
     , _rType                        :: !(Maybe ReportType)
-    , _rSubAccountId                :: !(Maybe (JSONText Int64))
+    , _rSubAccountId                :: !(Maybe (Textual Int64))
     , _rFloodlightCriteria          :: !(Maybe ReportFloodlightCriteria)
     , _rCriteria                    :: !(Maybe ReportCriteria)
     , _rFileName                    :: !(Maybe Text)
@@ -8151,26 +8151,26 @@ instance ToJSON Report where
 -- /See:/ 'campaign' smart constructor.
 data Campaign = Campaign
     { _camCreativeOptimizationConfiguration            :: !(Maybe CreativeOptimizationConfiguration)
-    , _camCreativeGroupIds                             :: !(Maybe [JSONText Int64])
+    , _camCreativeGroupIds                             :: !(Maybe [Textual Int64])
     , _camNielsenOCREnabled                            :: !(Maybe Bool)
     , _camKind                                         :: !Text
     , _camClickThroughURLSuffixProperties              :: !(Maybe ClickThroughURLSuffixProperties)
-    , _camAdvertiserId                                 :: !(Maybe (JSONText Int64))
+    , _camAdvertiserId                                 :: !(Maybe (Textual Int64))
     , _camEndDate                                      :: !(Maybe Date')
     , _camAdvertiserIdDimensionValue                   :: !(Maybe DimensionValue)
     , _camIdDimensionValue                             :: !(Maybe DimensionValue)
     , _camEventTagOverrides                            :: !(Maybe [EventTagOverride])
     , _camLookbackConfiguration                        :: !(Maybe LookbackConfiguration)
     , _camStartDate                                    :: !(Maybe Date')
-    , _camAccountId                                    :: !(Maybe (JSONText Int64))
+    , _camAccountId                                    :: !(Maybe (Textual Int64))
     , _camComscoreVceEnabled                           :: !(Maybe Bool)
     , _camName                                         :: !(Maybe Text)
-    , _camAdvertiserGroupId                            :: !(Maybe (JSONText Int64))
+    , _camAdvertiserGroupId                            :: !(Maybe (Textual Int64))
     , _camBillingInvoiceCode                           :: !(Maybe Text)
     , _camCreateInfo                                   :: !(Maybe LastModifiedInfo)
     , _camLastModifiedInfo                             :: !(Maybe LastModifiedInfo)
-    , _camId                                           :: !(Maybe (JSONText Int64))
-    , _camSubAccountId                                 :: !(Maybe (JSONText Int64))
+    , _camId                                           :: !(Maybe (Textual Int64))
+    , _camSubAccountId                                 :: !(Maybe (Textual Int64))
     , _camAdditionalCreativeOptimizationConfigurations :: !(Maybe [CreativeOptimizationConfiguration])
     , _camExternalId                                   :: !(Maybe Text)
     , _camComment                                      :: !(Maybe Text)
@@ -8603,7 +8603,7 @@ data ClickThroughURL = ClickThroughURL
     { _ctuDefaultLandingPage      :: !(Maybe Bool)
     , _ctuComputedClickThroughURL :: !(Maybe Text)
     , _ctuCustomClickThroughURL   :: !(Maybe Text)
-    , _ctuLandingPageId           :: !(Maybe (JSONText Int64))
+    , _ctuLandingPageId           :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClickThroughURL' with the minimum fields required to make a request.
@@ -8964,24 +8964,24 @@ instance ToJSON CreativesListResponse where
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account
-    { _aaAccountPermissionIds   :: !(Maybe [JSONText Int64])
-    , _aaMaximumImageSize       :: !(Maybe (JSONText Int64))
-    , _aaCurrencyId             :: !(Maybe (JSONText Int64))
+    { _aaAccountPermissionIds   :: !(Maybe [Textual Int64])
+    , _aaMaximumImageSize       :: !(Maybe (Textual Int64))
+    , _aaCurrencyId             :: !(Maybe (Textual Int64))
     , _aaReportsConfiguration   :: !(Maybe ReportsConfiguration)
     , _aaNielsenOCREnabled      :: !(Maybe Bool)
     , _aaKind                   :: !Text
     , _aaLocale                 :: !(Maybe Text)
     , _aaActive                 :: !(Maybe Bool)
-    , _aaAvailablePermissionIds :: !(Maybe [JSONText Int64])
-    , _aaTeaserSizeLimit        :: !(Maybe (JSONText Int64))
+    , _aaAvailablePermissionIds :: !(Maybe [Textual Int64])
+    , _aaTeaserSizeLimit        :: !(Maybe (Textual Int64))
     , _aaComscoreVceEnabled     :: !(Maybe Bool)
     , _aaActiveViewOptOut       :: !(Maybe Bool)
     , _aaName                   :: !(Maybe Text)
     , _aaAccountProFile         :: !(Maybe AccountAccountProFile)
-    , _aaId                     :: !(Maybe (JSONText Int64))
-    , _aaCountryId              :: !(Maybe (JSONText Int64))
+    , _aaId                     :: !(Maybe (Textual Int64))
+    , _aaCountryId              :: !(Maybe (Textual Int64))
     , _aaActiveAdsLimitTier     :: !(Maybe AccountActiveAdsLimitTier)
-    , _aaDefaultCreativeSizeId  :: !(Maybe (JSONText Int64))
+    , _aaDefaultCreativeSizeId  :: !(Maybe (Textual Int64))
     , _aaDescription            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9312,9 +9312,9 @@ instance ToJSON AccountUserProFilesListResponse where
 -- /See:/ 'contentCategory' smart constructor.
 data ContentCategory = ContentCategory
     { _conKind      :: !Text
-    , _conAccountId :: !(Maybe (JSONText Int64))
+    , _conAccountId :: !(Maybe (Textual Int64))
     , _conName      :: !(Maybe Text)
-    , _conId        :: !(Maybe (JSONText Int64))
+    , _conId        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategory' with the minimum fields required to make a request.
@@ -9485,7 +9485,7 @@ instance ToJSON ReportCompatibleFields where
 data DeliverySchedule = DeliverySchedule
     { _dsHardCutoff      :: !(Maybe Bool)
     , _dsPriority        :: !(Maybe DeliverySchedulePriority)
-    , _dsImpressionRatio :: !(Maybe (JSONText Int64))
+    , _dsImpressionRatio :: !(Maybe (Textual Int64))
     , _dsFrequencyCap    :: !(Maybe FrequencyCap)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9568,18 +9568,18 @@ instance ToJSON DeliverySchedule where
 --
 -- /See:/ 'remarketingList' smart constructor.
 data RemarketingList = RemarketingList
-    { _rlListSize                   :: !(Maybe (JSONText Int64))
+    { _rlListSize                   :: !(Maybe (Textual Int64))
     , _rlListPopulationRule         :: !(Maybe ListPopulationRule)
-    , _rlLifeSpan                   :: !(Maybe (JSONText Int64))
+    , _rlLifeSpan                   :: !(Maybe (Textual Int64))
     , _rlKind                       :: !Text
-    , _rlAdvertiserId               :: !(Maybe (JSONText Int64))
+    , _rlAdvertiserId               :: !(Maybe (Textual Int64))
     , _rlAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _rlActive                     :: !(Maybe Bool)
-    , _rlAccountId                  :: !(Maybe (JSONText Int64))
+    , _rlAccountId                  :: !(Maybe (Textual Int64))
     , _rlName                       :: !(Maybe Text)
     , _rlListSource                 :: !(Maybe RemarketingListListSource)
-    , _rlId                         :: !(Maybe (JSONText Int64))
-    , _rlSubAccountId               :: !(Maybe (JSONText Int64))
+    , _rlId                         :: !(Maybe (Textual Int64))
+    , _rlSubAccountId               :: !(Maybe (Textual Int64))
     , _rlDescription                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9912,7 +9912,7 @@ instance ToJSON FloodlightReportCompatibleFields
 data UserRolePermissionGroup = UserRolePermissionGroup
     { _urpgKind :: !Text
     , _urpgName :: !(Maybe Text)
-    , _urpgId   :: !(Maybe (JSONText Int64))
+    , _urpgId   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionGroup' with the minimum fields required to make a request.
@@ -10053,13 +10053,13 @@ instance ToJSON TagSetting where
 --
 -- /See:/ 'reportPathToConversionCriteriaReportProperties' smart constructor.
 data ReportPathToConversionCriteriaReportProperties = ReportPathToConversionCriteriaReportProperties
-    { _rptccrpMaximumInteractionGap                :: !(Maybe (JSONText Int32))
-    , _rptccrpMaximumClickInteractions             :: !(Maybe (JSONText Int32))
+    { _rptccrpMaximumInteractionGap                :: !(Maybe (Textual Int32))
+    , _rptccrpMaximumClickInteractions             :: !(Maybe (Textual Int32))
     , _rptccrpPivotOnInteractionPath               :: !(Maybe Bool)
-    , _rptccrpMaximumImpressionInteractions        :: !(Maybe (JSONText Int32))
+    , _rptccrpMaximumImpressionInteractions        :: !(Maybe (Textual Int32))
     , _rptccrpIncludeUnattributedIPConversions     :: !(Maybe Bool)
-    , _rptccrpImpressionsLookbackWindow            :: !(Maybe (JSONText Int32))
-    , _rptccrpClicksLookbackWindow                 :: !(Maybe (JSONText Int32))
+    , _rptccrpImpressionsLookbackWindow            :: !(Maybe (Textual Int32))
+    , _rptccrpClicksLookbackWindow                 :: !(Maybe (Textual Int32))
     , _rptccrpIncludeUnattributedCookieConversions :: !(Maybe Bool)
     , _rptccrpIncludeAttributedIPConversions       :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10348,8 +10348,8 @@ data MobileCarrier = MobileCarrier
     { _mcKind          :: !Text
     , _mcName          :: !(Maybe Text)
     , _mcCountryCode   :: !(Maybe Text)
-    , _mcId            :: !(Maybe (JSONText Int64))
-    , _mcCountryDartId :: !(Maybe (JSONText Int64))
+    , _mcId            :: !(Maybe (Textual Int64))
+    , _mcCountryDartId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileCarrier' with the minimum fields required to make a request.
@@ -10433,7 +10433,7 @@ data LandingPage = LandingPage
     , _lpDefault :: !(Maybe Bool)
     , _lpURL     :: !(Maybe Text)
     , _lpName    :: !(Maybe Text)
-    , _lpId      :: !(Maybe (JSONText Int64))
+    , _lpId      :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPage' with the minimum fields required to make a request.
@@ -10699,13 +10699,13 @@ instance ToJSON ReportList where
 -- /See:/ 'creativeGroup' smart constructor.
 data CreativeGroup = CreativeGroup
     { _cgKind                       :: !Text
-    , _cgAdvertiserId               :: !(Maybe (JSONText Int64))
+    , _cgAdvertiserId               :: !(Maybe (Textual Int64))
     , _cgAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
-    , _cgGroupNumber                :: !(Maybe (JSONText Int32))
-    , _cgAccountId                  :: !(Maybe (JSONText Int64))
+    , _cgGroupNumber                :: !(Maybe (Textual Int32))
+    , _cgAccountId                  :: !(Maybe (Textual Int64))
     , _cgName                       :: !(Maybe Text)
-    , _cgId                         :: !(Maybe (JSONText Int64))
-    , _cgSubAccountId               :: !(Maybe (JSONText Int64))
+    , _cgId                         :: !(Maybe (Textual Int64))
+    , _cgSubAccountId               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroup' with the minimum fields required to make a request.
@@ -10830,7 +10830,7 @@ instance ToJSON CreativeGroup where
 -- /See:/ 'campaignCreativeAssociation' smart constructor.
 data CampaignCreativeAssociation = CampaignCreativeAssociation
     { _ccaKind       :: !Text
-    , _ccaCreativeId :: !(Maybe (JSONText Int64))
+    , _ccaCreativeId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociation' with the minimum fields required to make a request.
@@ -10881,8 +10881,8 @@ instance ToJSON CampaignCreativeAssociation where
 --
 -- /See:/ 'lookbackConfiguration' smart constructor.
 data LookbackConfiguration = LookbackConfiguration
-    { _lcClickDuration                    :: !(Maybe (JSONText Int32))
-    , _lcPostImpressionActivitiesDuration :: !(Maybe (JSONText Int32))
+    { _lcClickDuration                    :: !(Maybe (Textual Int32))
+    , _lcPostImpressionActivitiesDuration :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LookbackConfiguration' with the minimum fields required to make a request.
@@ -10943,8 +10943,8 @@ data FloodlightActivityPublisherDynamicTag = FloodlightActivityPublisherDynamicT
     { _fapdtClickThrough         :: !(Maybe Bool)
     , _fapdtSiteIdDimensionValue :: !(Maybe DimensionValue)
     , _fapdtDynamicTag           :: !(Maybe FloodlightActivityDynamicTag)
-    , _fapdtDirectorySiteId      :: !(Maybe (JSONText Int64))
-    , _fapdtSiteId               :: !(Maybe (JSONText Int64))
+    , _fapdtDirectorySiteId      :: !(Maybe (Textual Int64))
+    , _fapdtSiteId               :: !(Maybe (Textual Int64))
     , _fapdtViewThrough          :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11045,10 +11045,10 @@ instance ToJSON FloodlightActivityPublisherDynamicTag
 --
 -- /See:/ 'accountActiveAdSummary' smart constructor.
 data AccountActiveAdSummary = AccountActiveAdSummary
-    { _aaasAvailableAds       :: !(Maybe (JSONText Int64))
+    { _aaasAvailableAds       :: !(Maybe (Textual Int64))
     , _aaasKind               :: !Text
-    , _aaasAccountId          :: !(Maybe (JSONText Int64))
-    , _aaasActiveAds          :: !(Maybe (JSONText Int64))
+    , _aaasAccountId          :: !(Maybe (Textual Int64))
+    , _aaasActiveAds          :: !(Maybe (Textual Int64))
     , _aaasActiveAdsLimitTier :: !(Maybe AccountActiveAdSummaryActiveAdsLimitTier)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11135,8 +11135,8 @@ instance ToJSON AccountActiveAdSummary where
 --
 -- /See:/ 'offSetPosition' smart constructor.
 data OffSetPosition = OffSetPosition
-    { _ospLeft :: !(Maybe (JSONText Int32))
-    , _ospTop  :: !(Maybe (JSONText Int32))
+    { _ospLeft :: !(Maybe (Textual Int32))
+    , _ospTop  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffSetPosition' with the minimum fields required to make a request.
@@ -11230,10 +11230,10 @@ instance ToJSON Metric where
 --
 -- /See:/ 'remarketingListShare' smart constructor.
 data RemarketingListShare = RemarketingListShare
-    { _rlsSharedAdvertiserIds :: !(Maybe [JSONText Int64])
+    { _rlsSharedAdvertiserIds :: !(Maybe [Textual Int64])
     , _rlsKind                :: !Text
-    , _rlsRemarketingListId   :: !(Maybe (JSONText Int64))
-    , _rlsSharedAccountIds    :: !(Maybe [JSONText Int64])
+    , _rlsRemarketingListId   :: !(Maybe (Textual Int64))
+    , _rlsSharedAccountIds    :: !(Maybe [Textual Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListShare' with the minimum fields required to make a request.
@@ -11537,8 +11537,8 @@ instance ToJSON CompatibleFields where
 -- /See:/ 'audienceSegment' smart constructor.
 data AudienceSegment = AudienceSegment
     { _asName       :: !(Maybe Text)
-    , _asId         :: !(Maybe (JSONText Int64))
-    , _asAllocation :: !(Maybe (JSONText Int32))
+    , _asId         :: !(Maybe (Textual Int64))
+    , _asAllocation :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudienceSegment' with the minimum fields required to make a request.
@@ -11795,12 +11795,12 @@ data City = City
     { _ccMetroCode     :: !(Maybe Text)
     , _ccRegionCode    :: !(Maybe Text)
     , _ccKind          :: !Text
-    , _ccRegionDartId  :: !(Maybe (JSONText Int64))
-    , _ccMetroDmaId    :: !(Maybe (JSONText Int64))
+    , _ccRegionDartId  :: !(Maybe (Textual Int64))
+    , _ccMetroDmaId    :: !(Maybe (Textual Int64))
     , _ccName          :: !(Maybe Text)
     , _ccCountryCode   :: !(Maybe Text)
-    , _ccCountryDartId :: !(Maybe (JSONText Int64))
-    , _ccDartId        :: !(Maybe (JSONText Int64))
+    , _ccCountryDartId :: !(Maybe (Textual Int64))
+    , _ccDartId        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'City' with the minimum fields required to make a request.
@@ -11925,7 +11925,7 @@ instance ToJSON City where
 data PlatformType = PlatformType
     { _ptKind :: !Text
     , _ptName :: !(Maybe Text)
-    , _ptId   :: !(Maybe (JSONText Int64))
+    , _ptId   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformType' with the minimum fields required to make a request.
@@ -12017,7 +12017,7 @@ instance ToJSON KeyValueTargetingExpression where
 --
 -- /See:/ 'companionClickThroughOverride' smart constructor.
 data CompanionClickThroughOverride = CompanionClickThroughOverride
-    { _cctoCreativeId      :: !(Maybe (JSONText Int64))
+    { _cctoCreativeId      :: !(Maybe (Textual Int64))
     , _cctoClickThroughURL :: !(Maybe ClickThroughURL)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12370,7 +12370,7 @@ instance ToJSON PopupWindowProperties where
 -- /See:/ 'eventTagOverride' smart constructor.
 data EventTagOverride = EventTagOverride
     { _etoEnabled :: !(Maybe Bool)
-    , _etoId      :: !(Maybe (JSONText Int64))
+    , _etoId      :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagOverride' with the minimum fields required to make a request.
@@ -12424,7 +12424,7 @@ data OperatingSystemVersion = OperatingSystemVersion
     , _osvOperatingSystem :: !(Maybe OperatingSystem)
     , _osvMajorVersion    :: !(Maybe Text)
     , _osvName            :: !(Maybe Text)
-    , _osvId              :: !(Maybe (JSONText Int64))
+    , _osvId              :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersion' with the minimum fields required to make a request.
@@ -12520,9 +12520,9 @@ data AccountPermission = AccountPermission
     { _acccKind              :: !Text
     , _acccAccountProFiles   :: !(Maybe [AccountPermissionAccountProFilesItem])
     , _acccName              :: !(Maybe Text)
-    , _acccId                :: !(Maybe (JSONText Int64))
+    , _acccId                :: !(Maybe (Textual Int64))
     , _acccLevel             :: !(Maybe AccountPermissionLevel)
-    , _acccPermissionGroupId :: !(Maybe (JSONText Int64))
+    , _acccPermissionGroupId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermission' with the minimum fields required to make a request.
@@ -12617,11 +12617,11 @@ data UserProFile = UserProFile
     { _upfEtag           :: !(Maybe Text)
     , _upfKind           :: !Text
     , _upfAccountName    :: !(Maybe Text)
-    , _upfProFileId      :: !(Maybe (JSONText Int64))
+    , _upfProFileId      :: !(Maybe (Textual Int64))
     , _upfUserName       :: !(Maybe Text)
-    , _upfAccountId      :: !(Maybe (JSONText Int64))
+    , _upfAccountId      :: !(Maybe (Textual Int64))
     , _upfSubAccountName :: !(Maybe Text)
-    , _upfSubAccountId   :: !(Maybe (JSONText Int64))
+    , _upfSubAccountId   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
@@ -12864,17 +12864,17 @@ instance ToJSON ReportDelivery where
 --
 -- /See:/ 'targetableRemarketingList' smart constructor.
 data TargetableRemarketingList = TargetableRemarketingList
-    { _trlListSize                   :: !(Maybe (JSONText Int64))
-    , _trlLifeSpan                   :: !(Maybe (JSONText Int64))
+    { _trlListSize                   :: !(Maybe (Textual Int64))
+    , _trlLifeSpan                   :: !(Maybe (Textual Int64))
     , _trlKind                       :: !Text
-    , _trlAdvertiserId               :: !(Maybe (JSONText Int64))
+    , _trlAdvertiserId               :: !(Maybe (Textual Int64))
     , _trlAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _trlActive                     :: !(Maybe Bool)
-    , _trlAccountId                  :: !(Maybe (JSONText Int64))
+    , _trlAccountId                  :: !(Maybe (Textual Int64))
     , _trlName                       :: !(Maybe Text)
     , _trlListSource                 :: !(Maybe TargetableRemarketingListListSource)
-    , _trlId                         :: !(Maybe (JSONText Int64))
-    , _trlSubAccountId               :: !(Maybe (JSONText Int64))
+    , _trlId                         :: !(Maybe (Textual Int64))
+    , _trlSubAccountId               :: !(Maybe (Textual Int64))
     , _trlDescription                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13090,19 +13090,19 @@ instance ToJSON PostalCodesListResponse where
 --
 -- /See:/ 'changeLog' smart constructor.
 data ChangeLog = ChangeLog
-    { _chaUserProFileId   :: !(Maybe (JSONText Int64))
+    { _chaUserProFileId   :: !(Maybe (Textual Int64))
     , _chaObjectType      :: !(Maybe Text)
     , _chaUserProFileName :: !(Maybe Text)
     , _chaKind            :: !Text
-    , _chaObjectId        :: !(Maybe (JSONText Int64))
+    , _chaObjectId        :: !(Maybe (Textual Int64))
     , _chaAction          :: !(Maybe Text)
-    , _chaTransactionId   :: !(Maybe (JSONText Int64))
+    , _chaTransactionId   :: !(Maybe (Textual Int64))
     , _chaOldValue        :: !(Maybe Text)
-    , _chaAccountId       :: !(Maybe (JSONText Int64))
+    , _chaAccountId       :: !(Maybe (Textual Int64))
     , _chaNewValue        :: !(Maybe Text)
     , _chaFieldName       :: !(Maybe Text)
-    , _chaId              :: !(Maybe (JSONText Int64))
-    , _chaSubAccountId    :: !(Maybe (JSONText Int64))
+    , _chaId              :: !(Maybe (Textual Int64))
+    , _chaSubAccountId    :: !(Maybe (Textual Int64))
     , _chaChangeTime      :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13286,9 +13286,9 @@ instance ToJSON ChangeLog where
 -- /See:/ 'placementStrategy' smart constructor.
 data PlacementStrategy = PlacementStrategy
     { _psKind      :: !Text
-    , _psAccountId :: !(Maybe (JSONText Int64))
+    , _psAccountId :: !(Maybe (Textual Int64))
     , _psName      :: !(Maybe Text)
-    , _psId        :: !(Maybe (JSONText Int64))
+    , _psId        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategy' with the minimum fields required to make a request.
@@ -13364,27 +13364,27 @@ data FloodlightActivity = FloodlightActivity
     , _faSecure                                  :: !(Maybe Bool)
     , _faExpectedURL                             :: !(Maybe Text)
     , _faFloodlightActivityGroupTagString        :: !(Maybe Text)
-    , _faFloodlightConfigurationId               :: !(Maybe (JSONText Int64))
+    , _faFloodlightConfigurationId               :: !(Maybe (Textual Int64))
     , _faKind                                    :: !Text
     , _faImageTagEnabled                         :: !(Maybe Bool)
-    , _faAdvertiserId                            :: !(Maybe (JSONText Int64))
+    , _faAdvertiserId                            :: !(Maybe (Textual Int64))
     , _faAdvertiserIdDimensionValue              :: !(Maybe DimensionValue)
     , _faSSLCompliant                            :: !(Maybe Bool)
     , _faIdDimensionValue                        :: !(Maybe DimensionValue)
     , _faTagFormat                               :: !(Maybe FloodlightActivityTagFormat)
     , _faCacheBustingType                        :: !(Maybe FloodlightActivityCacheBustingType)
-    , _faAccountId                               :: !(Maybe (JSONText Int64))
+    , _faAccountId                               :: !(Maybe (Textual Int64))
     , _faName                                    :: !(Maybe Text)
     , _faPublisherTags                           :: !(Maybe [FloodlightActivityPublisherDynamicTag])
-    , _faFloodlightActivityGroupId               :: !(Maybe (JSONText Int64))
+    , _faFloodlightActivityGroupId               :: !(Maybe (Textual Int64))
     , _faHidden                                  :: !(Maybe Bool)
     , _faFloodlightActivityGroupType             :: !(Maybe FloodlightActivityFloodlightActivityGroupType)
     , _faDefaultTags                             :: !(Maybe [FloodlightActivityDynamicTag])
     , _faFloodlightActivityGroupName             :: !(Maybe Text)
-    , _faId                                      :: !(Maybe (JSONText Int64))
+    , _faId                                      :: !(Maybe (Textual Int64))
     , _faSSLRequired                             :: !(Maybe Bool)
     , _faUserDefinedVariableTypes                :: !(Maybe [FloodlightActivityUserDefinedVariableTypesItem])
-    , _faSubAccountId                            :: !(Maybe (JSONText Int64))
+    , _faSubAccountId                            :: !(Maybe (Textual Int64))
     , _faNotes                                   :: !(Maybe Text)
     , _faFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13812,7 +13812,7 @@ instance ToJSON PlatformTypesListResponse where
 --
 -- /See:/ 'lastModifiedInfo' smart constructor.
 newtype LastModifiedInfo = LastModifiedInfo
-    { _lmiTime :: Maybe (JSONText Int64)
+    { _lmiTime :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LastModifiedInfo' with the minimum fields required to make a request.
@@ -13899,7 +13899,7 @@ instance ToJSON TargetWindow where
 data AccountPermissionGroup = AccountPermissionGroup
     { _apgpKind :: !Text
     , _apgpName :: !(Maybe Text)
-    , _apgpId   :: !(Maybe (JSONText Int64))
+    , _apgpId   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroup' with the minimum fields required to make a request.
@@ -13956,19 +13956,19 @@ instance ToJSON AccountPermissionGroup where
 --
 -- /See:/ 'advertiser' smart constructor.
 data Advertiser = Advertiser
-    { _advdOriginalFloodlightConfigurationId       :: !(Maybe (JSONText Int64))
+    { _advdOriginalFloodlightConfigurationId       :: !(Maybe (Textual Int64))
     , _advdStatus                                  :: !(Maybe AdvertiserStatus)
-    , _advdFloodlightConfigurationId               :: !(Maybe (JSONText Int64))
+    , _advdFloodlightConfigurationId               :: !(Maybe (Textual Int64))
     , _advdKind                                    :: !Text
     , _advdSuspended                               :: !(Maybe Bool)
     , _advdIdDimensionValue                        :: !(Maybe DimensionValue)
-    , _advdAccountId                               :: !(Maybe (JSONText Int64))
+    , _advdAccountId                               :: !(Maybe (Textual Int64))
     , _advdDefaultEmail                            :: !(Maybe Text)
     , _advdName                                    :: !(Maybe Text)
-    , _advdAdvertiserGroupId                       :: !(Maybe (JSONText Int64))
-    , _advdDefaultClickThroughEventTagId           :: !(Maybe (JSONText Int64))
-    , _advdId                                      :: !(Maybe (JSONText Int64))
-    , _advdSubAccountId                            :: !(Maybe (JSONText Int64))
+    , _advdAdvertiserGroupId                       :: !(Maybe (Textual Int64))
+    , _advdDefaultClickThroughEventTagId           :: !(Maybe (Textual Int64))
+    , _advdId                                      :: !(Maybe (Textual Int64))
+    , _advdSubAccountId                            :: !(Maybe (Textual Int64))
     , _advdFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     , _advdClickThroughURLSuffix                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14193,14 +14193,14 @@ instance ToJSON Advertiser where
 --
 -- /See:/ 'userRole' smart constructor.
 data UserRole = UserRole
-    { _urParentUserRoleId :: !(Maybe (JSONText Int64))
+    { _urParentUserRoleId :: !(Maybe (Textual Int64))
     , _urKind             :: !Text
     , _urDefaultUserRole  :: !(Maybe Bool)
-    , _urAccountId        :: !(Maybe (JSONText Int64))
+    , _urAccountId        :: !(Maybe (Textual Int64))
     , _urName             :: !(Maybe Text)
-    , _urId               :: !(Maybe (JSONText Int64))
+    , _urId               :: !(Maybe (Textual Int64))
     , _urPermissions      :: !(Maybe [UserRolePermission])
-    , _urSubAccountId     :: !(Maybe (JSONText Int64))
+    , _urSubAccountId     :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRole' with the minimum fields required to make a request.
@@ -14390,9 +14390,9 @@ instance ToJSON DirectorySitesListResponse where
 -- /See:/ 'pricingSchedulePricingPeriod' smart constructor.
 data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod
     { _psppEndDate         :: !(Maybe Date')
-    , _psppRateOrCostNanos :: !(Maybe (JSONText Int64))
+    , _psppRateOrCostNanos :: !(Maybe (Textual Int64))
     , _psppStartDate       :: !(Maybe Date')
-    , _psppUnits           :: !(Maybe (JSONText Int64))
+    , _psppUnits           :: !(Maybe (Textual Int64))
     , _psppPricingComment  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -14556,8 +14556,8 @@ data Region = Region
     , _regKind          :: !Text
     , _regName          :: !(Maybe Text)
     , _regCountryCode   :: !(Maybe Text)
-    , _regCountryDartId :: !(Maybe (JSONText Int64))
-    , _regDartId        :: !(Maybe (JSONText Int64))
+    , _regCountryDartId :: !(Maybe (Textual Int64))
+    , _regDartId        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Region' with the minimum fields required to make a request.
@@ -14713,14 +14713,14 @@ instance ToJSON AdvertiserGroupsListResponse where
 data CreativeAssignment = CreativeAssignment
     { _caCreativeGroupAssignments   :: !(Maybe [CreativeGroupAssignment])
     , _caStartTime                  :: !(Maybe DateTime')
-    , _caWeight                     :: !(Maybe (JSONText Int32))
+    , _caWeight                     :: !(Maybe (Textual Int32))
     , _caRichMediaExitOverrides     :: !(Maybe [RichMediaExitOverride])
     , _caSSLCompliant               :: !(Maybe Bool)
-    , _caCreativeId                 :: !(Maybe (JSONText Int64))
+    , _caCreativeId                 :: !(Maybe (Textual Int64))
     , _caClickThroughURL            :: !(Maybe ClickThroughURL)
     , _caApplyEventTags             :: !(Maybe Bool)
     , _caActive                     :: !(Maybe Bool)
-    , _caSequence                   :: !(Maybe (JSONText Int32))
+    , _caSequence                   :: !(Maybe (Textual Int32))
     , _caEndTime                    :: !(Maybe DateTime')
     , _caCompanionCreativeOverrides :: !(Maybe [CompanionClickThroughOverride])
     , _caCreativeIdDimensionValue   :: !(Maybe DimensionValue)
@@ -15040,17 +15040,17 @@ data FloodlightConfiguration = FloodlightConfiguration
     , _fcInAppAttributionTrackingEnabled          :: !(Maybe Bool)
     , _fcThirdPartyAuthenticationTokens           :: !(Maybe [ThirdPartyAuthenticationToken])
     , _fcKind                                     :: !Text
-    , _fcAdvertiserId                             :: !(Maybe (JSONText Int64))
+    , _fcAdvertiserId                             :: !(Maybe (Textual Int64))
     , _fcAnalyticsDataSharingEnabled              :: !(Maybe Bool)
     , _fcAdvertiserIdDimensionValue               :: !(Maybe DimensionValue)
     , _fcIdDimensionValue                         :: !(Maybe DimensionValue)
     , _fcLookbackConfiguration                    :: !(Maybe LookbackConfiguration)
-    , _fcAccountId                                :: !(Maybe (JSONText Int64))
-    , _fcId                                       :: !(Maybe (JSONText Int64))
+    , _fcAccountId                                :: !(Maybe (Textual Int64))
+    , _fcId                                       :: !(Maybe (Textual Int64))
     , _fcSSLRequired                              :: !(Maybe Bool)
     , _fcNATuralSearchConversionAttributionOption :: !(Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
     , _fcUserDefinedVariableConfigurations        :: !(Maybe [UserDefinedVariableConfiguration])
-    , _fcSubAccountId                             :: !(Maybe (JSONText Int64))
+    , _fcSubAccountId                             :: !(Maybe (Textual Int64))
     , _fcFirstDayOfWeek                           :: !(Maybe FloodlightConfigurationFirstDayOfWeek)
     , _fcOmnitureSettings                         :: !(Maybe OmnitureSettings)
     , _fcStandardVariableTypes                    :: !(Maybe [FloodlightConfigurationStandardVariableTypesItem])
@@ -15460,7 +15460,7 @@ instance ToJSON CreativeFieldValuesListResponse where
 -- /See:/ 'richMediaExitOverride' smart constructor.
 data RichMediaExitOverride = RichMediaExitOverride
     { _rmeoUseCustomExitURL :: !(Maybe Bool)
-    , _rmeoExitId           :: !(Maybe (JSONText Int64))
+    , _rmeoExitId           :: !(Maybe (Textual Int64))
     , _rmeoCustomExitURL    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -15695,13 +15695,13 @@ instance ToJSON PlacementsGenerateTagsResponse where
 --
 -- /See:/ 'creativeAsset' smart constructor.
 data CreativeAsset = CreativeAsset
-    { _caaZIndex                :: !(Maybe (JSONText Int32))
+    { _caaZIndex                :: !(Maybe (Textual Int32))
     , _caaPushdown              :: !(Maybe Bool)
-    , _caaVideoDuration         :: !(Maybe (JSONText Float))
+    , _caaVideoDuration         :: !(Maybe (Textual Double))
     , _caaOriginalBackup        :: !(Maybe Bool)
     , _caaWindowMode            :: !(Maybe CreativeAssetWindowMode)
-    , _caaFlashVersion          :: !(Maybe (JSONText Int32))
-    , _caaPushdownDuration      :: !(Maybe (JSONText Float))
+    , _caaFlashVersion          :: !(Maybe (Textual Int32))
+    , _caaPushdownDuration      :: !(Maybe (Textual Double))
     , _caaSize                  :: !(Maybe Size)
     , _caaVerticallyLocked      :: !(Maybe Bool)
     , _caaOffSet                :: !(Maybe OffSetPosition)
@@ -15710,7 +15710,7 @@ data CreativeAsset = CreativeAsset
     , _caaTransparency          :: !(Maybe Bool)
     , _caaHideSelectionBoxes    :: !(Maybe Bool)
     , _caaSSLCompliant          :: !(Maybe Bool)
-    , _caaFileSize              :: !(Maybe (JSONText Int64))
+    , _caaFileSize              :: !(Maybe (Textual Int64))
     , _caaAssetIdentifier       :: !(Maybe CreativeAssetId)
     , _caaDurationType          :: !(Maybe CreativeAssetDurationType)
     , _caaProgressiveServingURL :: !(Maybe Text)
@@ -15726,11 +15726,11 @@ data CreativeAsset = CreativeAsset
     , _caaDisplayType           :: !(Maybe CreativeAssetDisplayType)
     , _caaChildAssetType        :: !(Maybe CreativeAssetChildAssetType)
     , _caaCollapsedSize         :: !(Maybe Size)
-    , _caaId                    :: !(Maybe (JSONText Int64))
-    , _caaBitRate               :: !(Maybe (JSONText Int32))
-    , _caaCustomStartTimeValue  :: !(Maybe (JSONText Int32))
+    , _caaId                    :: !(Maybe (Textual Int64))
+    , _caaBitRate               :: !(Maybe (Textual Int32))
+    , _caaCustomStartTimeValue  :: !(Maybe (Textual Int32))
     , _caaStartTimeType         :: !(Maybe CreativeAssetStartTimeType)
-    , _caaDuration              :: !(Maybe (JSONText Int32))
+    , _caaDuration              :: !(Maybe (Textual Int32))
     , _caaArtworkType           :: !(Maybe CreativeAssetArtworkType)
     , _caaHideFlashObjects      :: !(Maybe Bool)
     , _caaDetectedFeatures      :: !(Maybe [CreativeAssetDetectedFeaturesItem])
@@ -16378,7 +16378,7 @@ instance ToJSON PlacementsListResponse where
 --
 -- /See:/ 'reportSchedule' smart constructor.
 data ReportSchedule = ReportSchedule
-    { _rsEvery             :: !(Maybe (JSONText Int32))
+    { _rsEvery             :: !(Maybe (Textual Int32))
     , _rsActive            :: !(Maybe Bool)
     , _rsRepeats           :: !(Maybe Text)
     , _rsStartDate         :: !(Maybe Date')
@@ -16830,11 +16830,11 @@ data Site = Site
     , _ssSiteSettings                  :: !(Maybe SiteSettings)
     , _ssIdDimensionValue              :: !(Maybe DimensionValue)
     , _ssDirectorySiteIdDimensionValue :: !(Maybe DimensionValue)
-    , _ssAccountId                     :: !(Maybe (JSONText Int64))
+    , _ssAccountId                     :: !(Maybe (Textual Int64))
     , _ssName                          :: !(Maybe Text)
-    , _ssDirectorySiteId               :: !(Maybe (JSONText Int64))
-    , _ssId                            :: !(Maybe (JSONText Int64))
-    , _ssSubAccountId                  :: !(Maybe (JSONText Int64))
+    , _ssDirectorySiteId               :: !(Maybe (Textual Int64))
+    , _ssId                            :: !(Maybe (Textual Int64))
+    , _ssSubAccountId                  :: !(Maybe (Textual Int64))
     , _ssApproved                      :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -17305,23 +17305,23 @@ data Order = Order
     { _oSellerOrderId          :: !(Maybe Text)
     , _oSellerOrganizationName :: !(Maybe Text)
     , _oKind                   :: !Text
-    , _oAdvertiserId           :: !(Maybe (JSONText Int64))
-    , _oPlanningTermId         :: !(Maybe (JSONText Int64))
-    , _oAccountId              :: !(Maybe (JSONText Int64))
+    , _oAdvertiserId           :: !(Maybe (Textual Int64))
+    , _oPlanningTermId         :: !(Maybe (Textual Int64))
+    , _oAccountId              :: !(Maybe (Textual Int64))
     , _oName                   :: !(Maybe Text)
     , _oSiteNames              :: !(Maybe [Text])
     , _oLastModifiedInfo       :: !(Maybe LastModifiedInfo)
     , _oBuyerOrganizationName  :: !(Maybe Text)
-    , _oId                     :: !(Maybe (JSONText Int64))
+    , _oId                     :: !(Maybe (Textual Int64))
     , _oBuyerInvoiceId         :: !(Maybe Text)
     , _oComments               :: !(Maybe Text)
-    , _oProjectId              :: !(Maybe (JSONText Int64))
-    , _oSubAccountId           :: !(Maybe (JSONText Int64))
+    , _oProjectId              :: !(Maybe (Textual Int64))
+    , _oSubAccountId           :: !(Maybe (Textual Int64))
     , _oNotes                  :: !(Maybe Text)
     , _oContacts               :: !(Maybe [OrderContact])
-    , _oSiteId                 :: !(Maybe [JSONText Int64])
+    , _oSiteId                 :: !(Maybe [Textual Int64])
     , _oTermsAndConditions     :: !(Maybe Text)
-    , _oApproverUserProFileIds :: !(Maybe [JSONText Int64])
+    , _oApproverUserProFileIds :: !(Maybe [Textual Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
@@ -17619,8 +17619,8 @@ instance ToJSON CreativeAssetId where
 --
 -- /See:/ 'frequencyCap' smart constructor.
 data FrequencyCap = FrequencyCap
-    { _fcImpressions :: !(Maybe (JSONText Int64))
-    , _fcDuration    :: !(Maybe (JSONText Int64))
+    { _fcImpressions :: !(Maybe (Textual Int64))
+    , _fcDuration    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FrequencyCap' with the minimum fields required to make a request.
@@ -17678,11 +17678,11 @@ data File = File
     , _filEtag             :: !(Maybe Text)
     , _filKind             :: !Text
     , _filURLs             :: !(Maybe FileURLs)
-    , _filReportId         :: !(Maybe (JSONText Int64))
+    , _filReportId         :: !(Maybe (Textual Int64))
     , _filDateRange        :: !(Maybe DateRange)
     , _filFormat           :: !(Maybe FileFormat)
-    , _filLastModifiedTime :: !(Maybe (JSONText Int64))
-    , _filId               :: !(Maybe (JSONText Int64))
+    , _filLastModifiedTime :: !(Maybe (Textual Int64))
+    , _filId               :: !(Maybe (Textual Int64))
     , _filFileName         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -18199,7 +18199,7 @@ instance ToJSON OmnitureSettings where
 data ConnectionType = ConnectionType
     { _cttKind :: !Text
     , _cttName :: !(Maybe Text)
-    , _cttId   :: !(Maybe (JSONText Int64))
+    , _cttId   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionType' with the minimum fields required to make a request.
@@ -18255,31 +18255,31 @@ instance ToJSON ConnectionType where
 --
 -- /See:/ 'placementGroup' smart constructor.
 data PlacementGroup = PlacementGroup
-    { _plalPlacementStrategyId              :: !(Maybe (JSONText Int64))
+    { _plalPlacementStrategyId              :: !(Maybe (Textual Int64))
     , _plalSiteIdDimensionValue             :: !(Maybe DimensionValue)
     , _plalPricingSchedule                  :: !(Maybe PricingSchedule)
     , _plalKind                             :: !Text
     , _plalCampaignIdDimensionValue         :: !(Maybe DimensionValue)
-    , _plalAdvertiserId                     :: !(Maybe (JSONText Int64))
+    , _plalAdvertiserId                     :: !(Maybe (Textual Int64))
     , _plalAdvertiserIdDimensionValue       :: !(Maybe DimensionValue)
-    , _plalCampaignId                       :: !(Maybe (JSONText Int64))
+    , _plalCampaignId                       :: !(Maybe (Textual Int64))
     , _plalIdDimensionValue                 :: !(Maybe DimensionValue)
     , _plalPlacementGroupType               :: !(Maybe PlacementGroupPlacementGroupType)
-    , _plalContentCategoryId                :: !(Maybe (JSONText Int64))
+    , _plalContentCategoryId                :: !(Maybe (Textual Int64))
     , _plalDirectorySiteIdDimensionValue    :: !(Maybe DimensionValue)
-    , _plalAccountId                        :: !(Maybe (JSONText Int64))
+    , _plalAccountId                        :: !(Maybe (Textual Int64))
     , _plalName                             :: !(Maybe Text)
-    , _plalDirectorySiteId                  :: !(Maybe (JSONText Int64))
+    , _plalDirectorySiteId                  :: !(Maybe (Textual Int64))
     , _plalCreateInfo                       :: !(Maybe LastModifiedInfo)
-    , _plalChildPlacementIds                :: !(Maybe [JSONText Int64])
+    , _plalChildPlacementIds                :: !(Maybe [Textual Int64])
     , _plalLastModifiedInfo                 :: !(Maybe LastModifiedInfo)
-    , _plalId                               :: !(Maybe (JSONText Int64))
-    , _plalPrimaryPlacementId               :: !(Maybe (JSONText Int64))
-    , _plalSubAccountId                     :: !(Maybe (JSONText Int64))
+    , _plalId                               :: !(Maybe (Textual Int64))
+    , _plalPrimaryPlacementId               :: !(Maybe (Textual Int64))
+    , _plalSubAccountId                     :: !(Maybe (Textual Int64))
     , _plalExternalId                       :: !(Maybe Text)
     , _plalComment                          :: !(Maybe Text)
     , _plalPrimaryPlacementIdDimensionValue :: !(Maybe DimensionValue)
-    , _plalSiteId                           :: !(Maybe (JSONText Int64))
+    , _plalSiteId                           :: !(Maybe (Textual Int64))
     , _plalArchived                         :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -18640,17 +18640,17 @@ data EventTag = EventTag
     , _etEnabledByDefault           :: !(Maybe Bool)
     , _etKind                       :: !Text
     , _etCampaignIdDimensionValue   :: !(Maybe DimensionValue)
-    , _etAdvertiserId               :: !(Maybe (JSONText Int64))
+    , _etAdvertiserId               :: !(Maybe (Textual Int64))
     , _etURL                        :: !(Maybe Text)
     , _etAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _etSSLCompliant               :: !(Maybe Bool)
-    , _etCampaignId                 :: !(Maybe (JSONText Int64))
-    , _etAccountId                  :: !(Maybe (JSONText Int64))
+    , _etCampaignId                 :: !(Maybe (Textual Int64))
+    , _etAccountId                  :: !(Maybe (Textual Int64))
     , _etName                       :: !(Maybe Text)
-    , _etURLEscapeLevels            :: !(Maybe (JSONText Int32))
-    , _etSiteIds                    :: !(Maybe [JSONText Int64])
-    , _etId                         :: !(Maybe (JSONText Int64))
-    , _etSubAccountId               :: !(Maybe (JSONText Int64))
+    , _etURLEscapeLevels            :: !(Maybe (Textual Int32))
+    , _etSiteIds                    :: !(Maybe [Textual Int64])
+    , _etId                         :: !(Maybe (Textual Int64))
+    , _etSubAccountId               :: !(Maybe (Textual Int64))
     , _etType                       :: !(Maybe EventTagType)
     , _etSiteFilterType             :: !(Maybe EventTagSiteFilterType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -18897,8 +18897,8 @@ data UserRolePermission = UserRolePermission
     { _useKind              :: !Text
     , _useAvailability      :: !(Maybe UserRolePermissionAvailability)
     , _useName              :: !(Maybe Text)
-    , _useId                :: !(Maybe (JSONText Int64))
-    , _usePermissionGroupId :: !(Maybe (JSONText Int64))
+    , _useId                :: !(Maybe (Textual Int64))
+    , _usePermissionGroupId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermission' with the minimum fields required to make a request.
@@ -18977,7 +18977,7 @@ instance ToJSON UserRolePermission where
 --
 -- /See:/ 'orderContact' smart constructor.
 data OrderContact = OrderContact
-    { _ocSignatureUserProFileId :: !(Maybe (JSONText Int64))
+    { _ocSignatureUserProFileId :: !(Maybe (Textual Int64))
     , _ocContactName            :: !(Maybe Text)
     , _ocContactTitle           :: !(Maybe Text)
     , _ocContactType            :: !(Maybe OrderContactContactType)
@@ -19124,7 +19124,7 @@ instance ToJSON
 -- /See:/ 'directorySiteContactAssignment' smart constructor.
 data DirectorySiteContactAssignment = DirectorySiteContactAssignment
     { _dscaVisibility :: !(Maybe DirectorySiteContactAssignmentVisibility)
-    , _dscaContactId  :: !(Maybe (JSONText Int64))
+    , _dscaContactId  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactAssignment' with the minimum fields required to make a request.
@@ -19177,10 +19177,10 @@ instance ToJSON DirectorySiteContactAssignment where
 --
 -- /See:/ 'adSlot' smart constructor.
 data AdSlot = AdSlot
-    { _assHeight            :: !(Maybe (JSONText Int64))
+    { _assHeight            :: !(Maybe (Textual Int64))
     , _assPaymentSourceType :: !(Maybe AdSlotPaymentSourceType)
-    , _assLinkedPlacementId :: !(Maybe (JSONText Int64))
-    , _assWidth             :: !(Maybe (JSONText Int64))
+    , _assLinkedPlacementId :: !(Maybe (Textual Int64))
+    , _assWidth             :: !(Maybe (Textual Int64))
     , _assPrimary           :: !(Maybe Bool)
     , _assName              :: !(Maybe Text)
     , _assComment           :: !(Maybe Text)
@@ -19349,19 +19349,19 @@ instance ToJSON ThirdPartyTrackingURL where
 data OrderDocument = OrderDocument
     { _odSigned                   :: !(Maybe Bool)
     , _odKind                     :: !Text
-    , _odAdvertiserId             :: !(Maybe (JSONText Int64))
+    , _odAdvertiserId             :: !(Maybe (Textual Int64))
     , _odLastSentTime             :: !(Maybe DateTime')
-    , _odAmendedOrderDocumentId   :: !(Maybe (JSONText Int64))
+    , _odAmendedOrderDocumentId   :: !(Maybe (Textual Int64))
     , _odLastSentRecipients       :: !(Maybe [Text])
     , _odEffectiveDate            :: !(Maybe Date')
-    , _odApprovedByUserProFileIds :: !(Maybe [JSONText Int64])
-    , _odAccountId                :: !(Maybe (JSONText Int64))
-    , _odId                       :: !(Maybe (JSONText Int64))
-    , _odProjectId                :: !(Maybe (JSONText Int64))
+    , _odApprovedByUserProFileIds :: !(Maybe [Textual Int64])
+    , _odAccountId                :: !(Maybe (Textual Int64))
+    , _odId                       :: !(Maybe (Textual Int64))
+    , _odProjectId                :: !(Maybe (Textual Int64))
     , _odTitle                    :: !(Maybe Text)
-    , _odSubAccountId             :: !(Maybe (JSONText Int64))
+    , _odSubAccountId             :: !(Maybe (Textual Int64))
     , _odType                     :: !(Maybe OrderDocumentType)
-    , _odOrderId                  :: !(Maybe (JSONText Int64))
+    , _odOrderId                  :: !(Maybe (Textual Int64))
     , _odCancelled                :: !(Maybe Bool)
     , _odCreatedInfo              :: !(Maybe LastModifiedInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -19586,9 +19586,9 @@ data Metro = Metro
     , _metKind          :: !Text
     , _metName          :: !(Maybe Text)
     , _metCountryCode   :: !(Maybe Text)
-    , _metDmaId         :: !(Maybe (JSONText Int64))
-    , _metCountryDartId :: !(Maybe (JSONText Int64))
-    , _metDartId        :: !(Maybe (JSONText Int64))
+    , _metDmaId         :: !(Maybe (Textual Int64))
+    , _metCountryDartId :: !(Maybe (Textual Int64))
+    , _metDartId        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Metro' with the minimum fields required to make a request.
@@ -19690,7 +19690,7 @@ instance ToJSON Metro where
 -- /See:/ 'placement' smart constructor.
 data Placement = Placement
     { _p1Status                         :: !(Maybe PlacementStatus)
-    , _p1PlacementStrategyId            :: !(Maybe (JSONText Int64))
+    , _p1PlacementStrategyId            :: !(Maybe (Textual Int64))
     , _p1TagFormats                     :: !(Maybe [PlacementTagFormatsItem])
     , _p1SiteIdDimensionValue           :: !(Maybe DimensionValue)
     , _p1PricingSchedule                :: !(Maybe PricingSchedule)
@@ -19698,29 +19698,29 @@ data Placement = Placement
     , _p1Kind                           :: !Text
     , _p1KeyName                        :: !(Maybe Text)
     , _p1CampaignIdDimensionValue       :: !(Maybe DimensionValue)
-    , _p1AdvertiserId                   :: !(Maybe (JSONText Int64))
+    , _p1AdvertiserId                   :: !(Maybe (Textual Int64))
     , _p1AdvertiserIdDimensionValue     :: !(Maybe DimensionValue)
-    , _p1CampaignId                     :: !(Maybe (JSONText Int64))
+    , _p1CampaignId                     :: !(Maybe (Textual Int64))
     , _p1IdDimensionValue               :: !(Maybe DimensionValue)
     , _p1Primary                        :: !(Maybe Bool)
     , _p1LookbackConfiguration          :: !(Maybe LookbackConfiguration)
     , _p1TagSetting                     :: !(Maybe TagSetting)
-    , _p1ContentCategoryId              :: !(Maybe (JSONText Int64))
+    , _p1ContentCategoryId              :: !(Maybe (Textual Int64))
     , _p1DirectorySiteIdDimensionValue  :: !(Maybe DimensionValue)
-    , _p1AccountId                      :: !(Maybe (JSONText Int64))
+    , _p1AccountId                      :: !(Maybe (Textual Int64))
     , _p1PaymentSource                  :: !(Maybe PlacementPaymentSource)
     , _p1Name                           :: !(Maybe Text)
-    , _p1DirectorySiteId                :: !(Maybe (JSONText Int64))
+    , _p1DirectorySiteId                :: !(Maybe (Textual Int64))
     , _p1CreateInfo                     :: !(Maybe LastModifiedInfo)
     , _p1LastModifiedInfo               :: !(Maybe LastModifiedInfo)
-    , _p1Id                             :: !(Maybe (JSONText Int64))
+    , _p1Id                             :: !(Maybe (Textual Int64))
     , _p1SSLRequired                    :: !(Maybe Bool)
-    , _p1SubAccountId                   :: !(Maybe (JSONText Int64))
+    , _p1SubAccountId                   :: !(Maybe (Textual Int64))
     , _p1PlacementGroupIdDimensionValue :: !(Maybe DimensionValue)
     , _p1ExternalId                     :: !(Maybe Text)
-    , _p1PlacementGroupId               :: !(Maybe (JSONText Int64))
+    , _p1PlacementGroupId               :: !(Maybe (Textual Int64))
     , _p1Comment                        :: !(Maybe Text)
-    , _p1SiteId                         :: !(Maybe (JSONText Int64))
+    , _p1SiteId                         :: !(Maybe (Textual Int64))
     , _p1Compatibility                  :: !(Maybe PlacementCompatibility)
     , _p1Archived                       :: !(Maybe Bool)
     , _p1PaymentApproved                :: !(Maybe Bool)
@@ -20248,12 +20248,12 @@ instance ToJSON SitesListResponse where
 -- /See:/ 'creativeField' smart constructor.
 data CreativeField = CreativeField
     { _cffKind                       :: !Text
-    , _cffAdvertiserId               :: !(Maybe (JSONText Int64))
+    , _cffAdvertiserId               :: !(Maybe (Textual Int64))
     , _cffAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
-    , _cffAccountId                  :: !(Maybe (JSONText Int64))
+    , _cffAccountId                  :: !(Maybe (Textual Int64))
     , _cffName                       :: !(Maybe Text)
-    , _cffId                         :: !(Maybe (JSONText Int64))
-    , _cffSubAccountId               :: !(Maybe (JSONText Int64))
+    , _cffId                         :: !(Maybe (Textual Int64))
+    , _cffSubAccountId               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeField' with the minimum fields required to make a request.
@@ -20365,7 +20365,7 @@ instance ToJSON CreativeField where
 -- /See:/ 'defaultClickThroughEventTagProperties' smart constructor.
 data DefaultClickThroughEventTagProperties = DefaultClickThroughEventTagProperties
     { _dctetpOverrideInheritedEventTag     :: !(Maybe Bool)
-    , _dctetpDefaultClickThroughEventTagId :: !(Maybe (JSONText Int64))
+    , _dctetpDefaultClickThroughEventTagId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultClickThroughEventTagProperties' with the minimum fields required to make a request.

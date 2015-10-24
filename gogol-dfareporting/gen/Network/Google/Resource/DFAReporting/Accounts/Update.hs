@@ -46,7 +46,7 @@ type AccountsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accounts" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Account :> Put '[JSON] Account
@@ -55,7 +55,7 @@ type AccountsUpdateResource =
 --
 -- /See:/ 'accountsUpdate' smart constructor.
 data AccountsUpdate = AccountsUpdate
-    { _auuProFileId :: !(JSONText Int64)
+    { _auuProFileId :: !(Textual Int64)
     , _auuPayload   :: !Account
     } deriving (Eq,Show,Data,Typeable,Generic)
 

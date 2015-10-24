@@ -59,7 +59,7 @@ type CalendarListListResource =
                    QueryParam "showDeleted" Bool :>
                      QueryParam "showHidden" Bool :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (JSONText Int32) :>
+                         QueryParam "maxResults" (Textual Int32) :>
                            QueryParam "alt" AltJSON :> Get '[JSON] CalendarList
 
 -- | Returns entries on the user\'s calendar list.
@@ -71,7 +71,7 @@ data CalendarListList = CalendarListList
     , _cllShowDeleted   :: !(Maybe Bool)
     , _cllShowHidden    :: !(Maybe Bool)
     , _cllPageToken     :: !(Maybe Text)
-    , _cllMaxResults    :: !(Maybe (JSONText Int32))
+    , _cllMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListList' with the minimum fields required to make a request.

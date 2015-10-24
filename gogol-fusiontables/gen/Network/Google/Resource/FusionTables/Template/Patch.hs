@@ -49,7 +49,7 @@ type TemplatePatchResource =
          "tables" :>
            Capture "tableId" Text :>
              "templates" :>
-               Capture "templateId" (JSONText Int32) :>
+               Capture "templateId" (Textual Int32) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Template :> Patch '[JSON] Template
 
@@ -57,7 +57,7 @@ type TemplatePatchResource =
 --
 -- /See:/ 'templatePatch' smart constructor.
 data TemplatePatch = TemplatePatch
-    { _tppTemplateId :: !(JSONText Int32)
+    { _tppTemplateId :: !(Textual Int32)
     , _tppPayload    :: !Template
     , _tppTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

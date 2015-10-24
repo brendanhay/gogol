@@ -28,12 +28,12 @@ import           Network.Google.Prelude
 -- /See:/ 'unSampledReports' smart constructor.
 data UnSampledReports = UnSampledReports
     { _usrNextLink     :: !(Maybe Text)
-    , _usrItemsPerPage :: !(Maybe (JSONText Int32))
+    , _usrItemsPerPage :: !(Maybe (Textual Int32))
     , _usrKind         :: !Text
     , _usrUsername     :: !(Maybe Text)
     , _usrItems        :: !(Maybe [UnSampledReport])
-    , _usrTotalResults :: !(Maybe (JSONText Int32))
-    , _usrStartIndex   :: !(Maybe (JSONText Int32))
+    , _usrTotalResults :: !(Maybe (Textual Int32))
+    , _usrStartIndex   :: !(Maybe (Textual Int32))
     , _usrPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -154,7 +154,7 @@ instance ToJSON UnSampledReports where
 data GoalURLDestinationDetailsStepsItem = GoalURLDestinationDetailsStepsItem
     { _guddsiURL    :: !(Maybe Text)
     , _guddsiName   :: !(Maybe Text)
-    , _guddsiNumber :: !(Maybe (JSONText Int32))
+    , _guddsiNumber :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GoalURLDestinationDetailsStepsItem' with the minimum fields required to make a request.
@@ -220,8 +220,8 @@ data GaDataQuery = GaDataQuery
     , _gdqEndDate       :: !(Maybe Text)
     , _gdqSort          :: !(Maybe [Text])
     , _gdqDimensions    :: !(Maybe Text)
-    , _gdqStartIndex    :: !(Maybe (JSONText Int32))
-    , _gdqMaxResults    :: !(Maybe (JSONText Int32))
+    , _gdqStartIndex    :: !(Maybe (Textual Int32))
+    , _gdqMaxResults    :: !(Maybe (Textual Int32))
     , _gdqSegment       :: !(Maybe Text)
     , _gdqStartDate     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1023,7 +1023,7 @@ instance ToJSON
 --
 -- /See:/ 'filterExpression' smart constructor.
 data FilterExpression = FilterExpression
-    { _feFieldIndex      :: !(Maybe (JSONText Int32))
+    { _feFieldIndex      :: !(Maybe (Textual Int32))
     , _feField           :: !(Maybe Text)
     , _feKind            :: !Text
     , _feMatchType       :: !(Maybe Text)
@@ -1252,12 +1252,12 @@ instance ToJSON ProFileRef where
 -- /See:/ 'accounts' smart constructor.
 data Accounts = Accounts
     { _aNextLink     :: !(Maybe Text)
-    , _aItemsPerPage :: !(Maybe (JSONText Int32))
+    , _aItemsPerPage :: !(Maybe (Textual Int32))
     , _aKind         :: !Text
     , _aUsername     :: !(Maybe Text)
     , _aItems        :: !(Maybe [Account])
-    , _aTotalResults :: !(Maybe (JSONText Int32))
-    , _aStartIndex   :: !(Maybe (JSONText Int32))
+    , _aTotalResults :: !(Maybe (Textual Int32))
+    , _aStartIndex   :: !(Maybe (Textual Int32))
     , _aPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1379,12 +1379,12 @@ instance ToJSON Accounts where
 -- /See:/ 'experiments' smart constructor.
 data Experiments = Experiments
     { _eNextLink     :: !(Maybe Text)
-    , _eItemsPerPage :: !(Maybe (JSONText Int32))
+    , _eItemsPerPage :: !(Maybe (Textual Int32))
     , _eKind         :: !Text
     , _eUsername     :: !(Maybe Text)
     , _eItems        :: !(Maybe [Experiment])
-    , _eTotalResults :: !(Maybe (JSONText Int32))
-    , _eStartIndex   :: !(Maybe (JSONText Int32))
+    , _eTotalResults :: !(Maybe (Textual Int32))
+    , _eStartIndex   :: !(Maybe (Textual Int32))
     , _ePreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1690,12 +1690,12 @@ instance ToJSON McfDataProFileInfo where
 -- /See:/ 'customDataSources' smart constructor.
 data CustomDataSources = CustomDataSources
     { _cdsNextLink     :: !(Maybe Text)
-    , _cdsItemsPerPage :: !(Maybe (JSONText Int32))
+    , _cdsItemsPerPage :: !(Maybe (Textual Int32))
     , _cdsKind         :: !Text
     , _cdsUsername     :: !(Maybe Text)
     , _cdsItems        :: !(Maybe [CustomDataSource])
-    , _cdsTotalResults :: !(Maybe (JSONText Int32))
-    , _cdsStartIndex   :: !(Maybe (JSONText Int32))
+    , _cdsTotalResults :: !(Maybe (Textual Int32))
+    , _cdsStartIndex   :: !(Maybe (Textual Int32))
     , _cdsPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1863,17 +1863,17 @@ instance ToJSON WebPropertyChildLink where
 -- /See:/ 'mcfData' smart constructor.
 data McfData = McfData
     { _mdNextLink            :: !(Maybe Text)
-    , _mdSampleSpace         :: !(Maybe (JSONText Int64))
-    , _mdItemsPerPage        :: !(Maybe (JSONText Int32))
+    , _mdSampleSpace         :: !(Maybe (Textual Int64))
+    , _mdItemsPerPage        :: !(Maybe (Textual Int32))
     , _mdProFileInfo         :: !(Maybe McfDataProFileInfo)
     , _mdKind                :: !Text
-    , _mdSampleSize          :: !(Maybe (JSONText Int64))
+    , _mdSampleSize          :: !(Maybe (Textual Int64))
     , _mdRows                :: !(Maybe [[McfDataRowsItemItem]])
     , _mdSelfLink            :: !(Maybe Text)
     , _mdQuery               :: !(Maybe McfDataQuery)
     , _mdColumnHeaders       :: !(Maybe [McfDataColumnHeadersItem])
     , _mdId                  :: !(Maybe Text)
-    , _mdTotalResults        :: !(Maybe (JSONText Int32))
+    , _mdTotalResults        :: !(Maybe (Textual Int32))
     , _mdContainsSampledData :: !(Maybe Bool)
     , _mdTotalsForAllResults :: !(Maybe McfDataTotalsForAllResults)
     , _mdPreviousLink        :: !(Maybe Text)
@@ -2130,7 +2130,7 @@ instance ToJSON UserRef where
 --
 -- /See:/ 'goalVisitNumPagesDetails' smart constructor.
 data GoalVisitNumPagesDetails = GoalVisitNumPagesDetails
-    { _gvnpdComparisonValue :: !(Maybe (JSONText Int64))
+    { _gvnpdComparisonValue :: !(Maybe (Textual Int64))
     , _gvnpdComparisonType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2309,11 +2309,11 @@ instance ToJSON AccountRef where
 -- /See:/ 'entityAdWordsLinks' smart constructor.
 data EntityAdWordsLinks = EntityAdWordsLinks
     { _eawlNextLink     :: !(Maybe Text)
-    , _eawlItemsPerPage :: !(Maybe (JSONText Int32))
+    , _eawlItemsPerPage :: !(Maybe (Textual Int32))
     , _eawlKind         :: !Text
     , _eawlItems        :: !(Maybe [EntityAdWordsLink])
-    , _eawlTotalResults :: !(Maybe (JSONText Int32))
-    , _eawlStartIndex   :: !(Maybe (JSONText Int32))
+    , _eawlTotalResults :: !(Maybe (Textual Int32))
+    , _eawlStartIndex   :: !(Maybe (Textual Int32))
     , _eawlPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2426,12 +2426,12 @@ instance ToJSON EntityAdWordsLinks where
 -- /See:/ 'proFiles' smart constructor.
 data ProFiles = ProFiles
     { _pfNextLink     :: !(Maybe Text)
-    , _pfItemsPerPage :: !(Maybe (JSONText Int32))
+    , _pfItemsPerPage :: !(Maybe (Textual Int32))
     , _pfKind         :: !Text
     , _pfUsername     :: !(Maybe Text)
     , _pfItems        :: !(Maybe [ProFile])
-    , _pfTotalResults :: !(Maybe (JSONText Int32))
-    , _pfStartIndex   :: !(Maybe (JSONText Int32))
+    , _pfTotalResults :: !(Maybe (Textual Int32))
+    , _pfStartIndex   :: !(Maybe (Textual Int32))
     , _pfPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2699,7 +2699,7 @@ instance ToJSON EntityAdWordsLink where
 --
 -- /See:/ 'filterSearchAndReplaceDetails' smart constructor.
 data FilterSearchAndReplaceDetails = FilterSearchAndReplaceDetails
-    { _fsardFieldIndex    :: !(Maybe (JSONText Int32))
+    { _fsardFieldIndex    :: !(Maybe (Textual Int32))
     , _fsardField         :: !(Maybe Text)
     , _fsardSearchString  :: !(Maybe Text)
     , _fsardReplaceString :: !(Maybe Text)
@@ -3141,12 +3141,12 @@ instance ToJSON ProFile where
 -- /See:/ 'accountSummaries' smart constructor.
 data AccountSummaries = AccountSummaries
     { _asNextLink     :: !(Maybe Text)
-    , _asItemsPerPage :: !(Maybe (JSONText Int32))
+    , _asItemsPerPage :: !(Maybe (Textual Int32))
     , _asKind         :: !Text
     , _asUsername     :: !(Maybe Text)
     , _asItems        :: !(Maybe [AccountSummary])
-    , _asTotalResults :: !(Maybe (JSONText Int32))
-    , _asStartIndex   :: !(Maybe (JSONText Int32))
+    , _asTotalResults :: !(Maybe (Textual Int32))
+    , _asStartIndex   :: !(Maybe (Textual Int32))
     , _asPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3423,12 +3423,12 @@ instance ToJSON WebPropertySummary where
 -- /See:/ 'filters' smart constructor.
 data Filters = Filters
     { _fNextLink     :: !(Maybe Text)
-    , _fItemsPerPage :: !(Maybe (JSONText Int32))
+    , _fItemsPerPage :: !(Maybe (Textual Int32))
     , _fKind         :: !Text
     , _fUsername     :: !(Maybe Text)
     , _fItems        :: !(Maybe [Filter])
-    , _fTotalResults :: !(Maybe (JSONText Int32))
-    , _fStartIndex   :: !(Maybe (JSONText Int32))
+    , _fTotalResults :: !(Maybe (Textual Int32))
+    , _fStartIndex   :: !(Maybe (Textual Int32))
     , _fPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3547,17 +3547,17 @@ instance ToJSON Filters where
 -- /See:/ 'gaData' smart constructor.
 data GaData = GaData
     { _gdNextLink            :: !(Maybe Text)
-    , _gdSampleSpace         :: !(Maybe (JSONText Int64))
-    , _gdItemsPerPage        :: !(Maybe (JSONText Int32))
+    , _gdSampleSpace         :: !(Maybe (Textual Int64))
+    , _gdItemsPerPage        :: !(Maybe (Textual Int32))
     , _gdProFileInfo         :: !(Maybe GaDataProFileInfo)
     , _gdKind                :: !Text
-    , _gdSampleSize          :: !(Maybe (JSONText Int64))
+    , _gdSampleSize          :: !(Maybe (Textual Int64))
     , _gdRows                :: !(Maybe [[Text]])
     , _gdSelfLink            :: !(Maybe Text)
     , _gdQuery               :: !(Maybe GaDataQuery)
     , _gdColumnHeaders       :: !(Maybe [GaDataColumnHeadersItem])
     , _gdId                  :: !(Maybe Text)
-    , _gdTotalResults        :: !(Maybe (JSONText Int32))
+    , _gdTotalResults        :: !(Maybe (Textual Int32))
     , _gdDataTable           :: !(Maybe GaDataDataTable)
     , _gdContainsSampledData :: !(Maybe Bool)
     , _gdTotalsForAllResults :: !(Maybe GaDataTotalsForAllResults)
@@ -4093,12 +4093,12 @@ instance ToJSON WebPropertyRef where
 -- /See:/ 'goals' smart constructor.
 data Goals = Goals
     { _gNextLink     :: !(Maybe Text)
-    , _gItemsPerPage :: !(Maybe (JSONText Int32))
+    , _gItemsPerPage :: !(Maybe (Textual Int32))
     , _gKind         :: !Text
     , _gUsername     :: !(Maybe Text)
     , _gItems        :: !(Maybe [Goal])
-    , _gTotalResults :: !(Maybe (JSONText Int32))
-    , _gStartIndex   :: !(Maybe (JSONText Int32))
+    , _gTotalResults :: !(Maybe (Textual Int32))
+    , _gStartIndex   :: !(Maybe (Textual Int32))
     , _gPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4496,9 +4496,9 @@ data Experiment = Experiment
     , _expKind                           :: !Text
     , _expCreated                        :: !(Maybe DateTime')
     , _expReasonExperimentEnded          :: !(Maybe Text)
-    , _expTrafficCoverage                :: !(Maybe (JSONText Double))
+    , _expTrafficCoverage                :: !(Maybe (Textual Double))
     , _expEditableInGaUi                 :: !(Maybe Bool)
-    , _expMinimumExperimentLengthInDays  :: !(Maybe (JSONText Int32))
+    , _expMinimumExperimentLengthInDays  :: !(Maybe (Textual Int32))
     , _expProFileId                      :: !(Maybe Text)
     , _expOptimizationType               :: !(Maybe Text)
     , _expSelfLink                       :: !(Maybe Text)
@@ -4512,7 +4512,7 @@ data Experiment = Experiment
     , _expUpdated                        :: !(Maybe DateTime')
     , _expRewriteVariationURLsAsOriginal :: !(Maybe Bool)
     , _expObjectiveMetric                :: !(Maybe Text)
-    , _expWinnerConfidenceLevel          :: !(Maybe (JSONText Double))
+    , _expWinnerConfidenceLevel          :: !(Maybe (Textual Double))
     , _expServingFramework               :: !(Maybe Text)
     , _expDescription                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4900,11 +4900,11 @@ instance ToJSON Experiment where
 -- /See:/ 'entityUserLinks' smart constructor.
 data EntityUserLinks = EntityUserLinks
     { _eulNextLink     :: !(Maybe Text)
-    , _eulItemsPerPage :: !(Maybe (JSONText Int32))
+    , _eulItemsPerPage :: !(Maybe (Textual Int32))
     , _eulKind         :: !Text
     , _eulItems        :: !(Maybe [EntityUserLink])
-    , _eulTotalResults :: !(Maybe (JSONText Int32))
-    , _eulStartIndex   :: !(Maybe (JSONText Int32))
+    , _eulTotalResults :: !(Maybe (Textual Int32))
+    , _eulStartIndex   :: !(Maybe (Textual Int32))
     , _eulPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5151,7 +5151,7 @@ instance ToJSON FilterRef where
 --
 -- /See:/ 'goalVisitTimeOnSiteDetails' smart constructor.
 data GoalVisitTimeOnSiteDetails = GoalVisitTimeOnSiteDetails
-    { _gvtosdComparisonValue :: !(Maybe (JSONText Int64))
+    { _gvtosdComparisonValue :: !(Maybe (Textual Int64))
     , _gvtosdComparisonType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5205,12 +5205,12 @@ instance ToJSON GoalVisitTimeOnSiteDetails where
 -- /See:/ 'webProperties' smart constructor.
 data WebProperties = WebProperties
     { _wpNextLink     :: !(Maybe Text)
-    , _wpItemsPerPage :: !(Maybe (JSONText Int32))
+    , _wpItemsPerPage :: !(Maybe (Textual Int32))
     , _wpKind         :: !Text
     , _wpUsername     :: !(Maybe Text)
     , _wpItems        :: !(Maybe [WebProperty])
-    , _wpTotalResults :: !(Maybe (JSONText Int32))
-    , _wpStartIndex   :: !(Maybe (JSONText Int32))
+    , _wpTotalResults :: !(Maybe (Textual Int32))
+    , _wpStartIndex   :: !(Maybe (Textual Int32))
     , _wpPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5331,12 +5331,12 @@ instance ToJSON WebProperties where
 -- /See:/ 'customMetrics' smart constructor.
 data CustomMetrics = CustomMetrics
     { _cmNextLink     :: !(Maybe Text)
-    , _cmItemsPerPage :: !(Maybe (JSONText Int32))
+    , _cmItemsPerPage :: !(Maybe (Textual Int32))
     , _cmKind         :: !Text
     , _cmUsername     :: !(Maybe Text)
     , _cmItems        :: !(Maybe [CustomMetric])
-    , _cmTotalResults :: !(Maybe (JSONText Int32))
-    , _cmStartIndex   :: !(Maybe (JSONText Int32))
+    , _cmTotalResults :: !(Maybe (Textual Int32))
+    , _cmStartIndex   :: !(Maybe (Textual Int32))
     , _cmPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5457,13 +5457,13 @@ data FilterAdvancedDetails = FilterAdvancedDetails
     { _fadExtractA            :: !(Maybe Text)
     , _fadFieldARequired      :: !(Maybe Bool)
     , _fadFieldA              :: !(Maybe Text)
-    , _fadFieldBIndex         :: !(Maybe (JSONText Int32))
+    , _fadFieldBIndex         :: !(Maybe (Textual Int32))
     , _fadOutputToField       :: !(Maybe Text)
     , _fadOutputConstructor   :: !(Maybe Text)
     , _fadExtractB            :: !(Maybe Text)
-    , _fadFieldAIndex         :: !(Maybe (JSONText Int32))
+    , _fadFieldAIndex         :: !(Maybe (Textual Int32))
     , _fadCaseSensitive       :: !(Maybe Bool)
-    , _fadOutputToFieldIndex  :: !(Maybe (JSONText Int32))
+    , _fadOutputToFieldIndex  :: !(Maybe (Textual Int32))
     , _fadFieldB              :: !(Maybe Text)
     , _fadFieldBRequired      :: !(Maybe Bool)
     , _fadOverrideOutputField :: !(Maybe Bool)
@@ -5639,7 +5639,7 @@ instance ToJSON FilterAdvancedDetails where
 --
 -- /See:/ 'filterUppercaseDetails' smart constructor.
 data FilterUppercaseDetails = FilterUppercaseDetails
-    { _fudFieldIndex :: !(Maybe (JSONText Int32))
+    { _fudFieldIndex :: !(Maybe (Textual Int32))
     , _fudField      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5789,7 +5789,7 @@ data RealtimeData = RealtimeData
     , _rdQuery               :: !(Maybe RealtimeDataQuery)
     , _rdColumnHeaders       :: !(Maybe [RealtimeDataColumnHeadersItem])
     , _rdId                  :: !(Maybe Text)
-    , _rdTotalResults        :: !(Maybe (JSONText Int32))
+    , _rdTotalResults        :: !(Maybe (Textual Int32))
     , _rdTotalsForAllResults :: !(Maybe RealtimeDataTotalsForAllResults)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5933,7 +5933,7 @@ data CustomMetric = CustomMetric
     , _cusId            :: !(Maybe Text)
     , _cusUpdated       :: !(Maybe DateTime')
     , _cusType          :: !(Maybe Text)
-    , _cusIndex         :: !(Maybe (JSONText Int32))
+    , _cusIndex         :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomMetric' with the minimum fields required to make a request.
@@ -6223,7 +6223,7 @@ instance ToJSON CustomDimensionParentLink where
 data WebProperty = WebProperty
     { _wParentLink            :: !(Maybe WebPropertyParentLink)
     , _wChildLink             :: !(Maybe WebPropertyChildLink)
-    , _wDefaultProFileId      :: !(Maybe (JSONText Int64))
+    , _wDefaultProFileId      :: !(Maybe (Textual Int64))
     , _wKind                  :: !Text
     , _wCreated               :: !(Maybe DateTime')
     , _wSelfLink              :: !(Maybe Text)
@@ -6232,7 +6232,7 @@ data WebProperty = WebProperty
     , _wInternalWebPropertyId :: !(Maybe Text)
     , _wId                    :: !(Maybe Text)
     , _wUpdated               :: !(Maybe DateTime')
-    , _wProFileCount          :: !(Maybe (JSONText Int32))
+    , _wProFileCount          :: !(Maybe (Textual Int32))
     , _wPermissions           :: !(Maybe WebPropertyPermissions)
     , _wWebsiteURL            :: !(Maybe Text)
     , _wIndustryVertical      :: !(Maybe Text)
@@ -6611,7 +6611,7 @@ instance ToJSON CustomDataSourceParentLink where
 data GoalEventDetailsEventConditionsItem = GoalEventDetailsEventConditionsItem
     { _gedeciMatchType       :: !(Maybe Text)
     , _gedeciExpression      :: !(Maybe Text)
-    , _gedeciComparisonValue :: !(Maybe (JSONText Int64))
+    , _gedeciComparisonValue :: !(Maybe (Textual Int64))
     , _gedeciType            :: !(Maybe Text)
     , _gedeciComparisonType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6706,8 +6706,8 @@ data McfDataQuery = McfDataQuery
     , _mdqEndDate       :: !(Maybe Text)
     , _mdqSort          :: !(Maybe [Text])
     , _mdqDimensions    :: !(Maybe Text)
-    , _mdqStartIndex    :: !(Maybe (JSONText Int32))
-    , _mdqMaxResults    :: !(Maybe (JSONText Int32))
+    , _mdqStartIndex    :: !(Maybe (Textual Int32))
+    , _mdqMaxResults    :: !(Maybe (Textual Int32))
     , _mdqSegment       :: !(Maybe Text)
     , _mdqStartDate     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6858,7 +6858,7 @@ data Goal = Goal
     , _goaWebPropertyId          :: !(Maybe Text)
     , _goaKind                   :: !Text
     , _goaCreated                :: !(Maybe DateTime')
-    , _goaValue                  :: !(Maybe (JSONText Float))
+    , _goaValue                  :: !(Maybe (Textual Double))
     , _goaProFileId              :: !(Maybe Text)
     , _goaEventDetails           :: !(Maybe GoalEventDetails)
     , _goaActive                 :: !(Maybe Bool)
@@ -7260,7 +7260,7 @@ data RealtimeDataQuery = RealtimeDataQuery
     , _rdqIds        :: !(Maybe Text)
     , _rdqSort       :: !(Maybe [Text])
     , _rdqDimensions :: !(Maybe Text)
-    , _rdqMaxResults :: !(Maybe (JSONText Int32))
+    , _rdqMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeDataQuery' with the minimum fields required to make a request.
@@ -7353,7 +7353,7 @@ data Columns = Columns
     { _colEtag           :: !(Maybe Text)
     , _colKind           :: !Text
     , _colItems          :: !(Maybe [Column])
-    , _colTotalResults   :: !(Maybe (JSONText Int32))
+    , _colTotalResults   :: !(Maybe (Textual Int32))
     , _colAttributeNames :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7436,7 +7436,7 @@ instance ToJSON Columns where
 --
 -- /See:/ 'filterLowercaseDetails' smart constructor.
 data FilterLowercaseDetails = FilterLowercaseDetails
-    { _fldFieldIndex :: !(Maybe (JSONText Int32))
+    { _fldFieldIndex :: !(Maybe (Textual Int32))
     , _fldField      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7685,11 +7685,11 @@ instance ToJSON Filter where
 -- /See:/ 'uploads' smart constructor.
 data Uploads = Uploads
     { _uplNextLink     :: !(Maybe Text)
-    , _uplItemsPerPage :: !(Maybe (JSONText Int32))
+    , _uplItemsPerPage :: !(Maybe (Textual Int32))
     , _uplKind         :: !Text
     , _uplItems        :: !(Maybe [Upload])
-    , _uplTotalResults :: !(Maybe (JSONText Int32))
-    , _uplStartIndex   :: !(Maybe (JSONText Int32))
+    , _uplTotalResults :: !(Maybe (Textual Int32))
+    , _uplStartIndex   :: !(Maybe (Textual Int32))
     , _uplPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7802,12 +7802,12 @@ instance ToJSON Uploads where
 -- /See:/ 'customDimensions' smart constructor.
 data CustomDimensions = CustomDimensions
     { _cdNextLink     :: !(Maybe Text)
-    , _cdItemsPerPage :: !(Maybe (JSONText Int32))
+    , _cdItemsPerPage :: !(Maybe (Textual Int32))
     , _cdKind         :: !Text
     , _cdUsername     :: !(Maybe Text)
     , _cdItems        :: !(Maybe [CustomDimension])
-    , _cdTotalResults :: !(Maybe (JSONText Int32))
-    , _cdStartIndex   :: !(Maybe (JSONText Int32))
+    , _cdTotalResults :: !(Maybe (Textual Int32))
+    , _cdStartIndex   :: !(Maybe (Textual Int32))
     , _cdPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7928,12 +7928,12 @@ instance ToJSON CustomDimensions where
 -- /See:/ 'segments' smart constructor.
 data Segments = Segments
     { _sNextLink     :: !(Maybe Text)
-    , _sItemsPerPage :: !(Maybe (JSONText Int32))
+    , _sItemsPerPage :: !(Maybe (Textual Int32))
     , _sKind         :: !Text
     , _sUsername     :: !(Maybe Text)
     , _sItems        :: !(Maybe [Segment])
-    , _sTotalResults :: !(Maybe (JSONText Int32))
-    , _sStartIndex   :: !(Maybe (JSONText Int32))
+    , _sTotalResults :: !(Maybe (Textual Int32))
+    , _sStartIndex   :: !(Maybe (Textual Int32))
     , _sPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8224,12 +8224,12 @@ instance ToJSON GoalURLDestinationDetails where
 -- /See:/ 'proFileFilterLinks' smart constructor.
 data ProFileFilterLinks = ProFileFilterLinks
     { _pfflNextLink     :: !(Maybe Text)
-    , _pfflItemsPerPage :: !(Maybe (JSONText Int32))
+    , _pfflItemsPerPage :: !(Maybe (Textual Int32))
     , _pfflKind         :: !Text
     , _pfflUsername     :: !(Maybe Text)
     , _pfflItems        :: !(Maybe [ProFileFilterLink])
-    , _pfflTotalResults :: !(Maybe (JSONText Int32))
-    , _pfflStartIndex   :: !(Maybe (JSONText Int32))
+    , _pfflTotalResults :: !(Maybe (Textual Int32))
+    , _pfflStartIndex   :: !(Maybe (Textual Int32))
     , _pfflPreviousLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8497,7 +8497,7 @@ data Upload = Upload
     { _uuStatus             :: !(Maybe Text)
     , _uuKind               :: !Text
     , _uuCustomDataSourceId :: !(Maybe Text)
-    , _uuAccountId          :: !(Maybe (JSONText Int64))
+    , _uuAccountId          :: !(Maybe (Textual Int64))
     , _uuId                 :: !(Maybe Text)
     , _uuErrors             :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8598,7 +8598,7 @@ data CustomDimension = CustomDimension
     , _cddScope         :: !(Maybe Text)
     , _cddId            :: !(Maybe Text)
     , _cddUpdated       :: !(Maybe DateTime')
-    , _cddIndex         :: !(Maybe (JSONText Int32))
+    , _cddIndex         :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomDimension' with the minimum fields required to make a request.
@@ -8921,7 +8921,7 @@ data ProFileFilterLink = ProFileFilterLink
     , _proFilterRef  :: !(Maybe FilterRef)
     , _proSelfLink   :: !(Maybe Text)
     , _proId         :: !(Maybe Text)
-    , _proRank       :: !(Maybe (JSONText Int32))
+    , _proRank       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProFileFilterLink' with the minimum fields required to make a request.
@@ -9173,7 +9173,7 @@ instance ToJSON GaDataDataTableColsItem where
 -- /See:/ 'experimentVariationsItem' smart constructor.
 data ExperimentVariationsItem = ExperimentVariationsItem
     { _eviStatus :: !(Maybe Text)
-    , _eviWeight :: !(Maybe (JSONText Double))
+    , _eviWeight :: !(Maybe (Textual Double))
     , _eviURL    :: !(Maybe Text)
     , _eviWon    :: !(Maybe Bool)
     , _eviName   :: !(Maybe Text)

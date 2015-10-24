@@ -46,17 +46,17 @@ type AdvertiserGroupsDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsDelete' smart constructor.
 data AdvertiserGroupsDelete = AdvertiserGroupsDelete
-    { _agdProFileId :: !(JSONText Int64)
-    , _agdId        :: !(JSONText Int64)
+    { _agdProFileId :: !(Textual Int64)
+    , _agdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsDelete' with the minimum fields required to make a request.

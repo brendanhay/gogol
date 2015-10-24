@@ -63,7 +63,7 @@ type BeaconsListResource =
                    QueryParam "q" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (JSONText Int32) :>
+                         QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListBeaconsResponse
@@ -82,7 +82,7 @@ data BeaconsList = BeaconsList
     , _blQ              :: !(Maybe Text)
     , _blBearerToken    :: !(Maybe Text)
     , _blPageToken      :: !(Maybe Text)
-    , _blPageSize       :: !(Maybe (JSONText Int32))
+    , _blPageSize       :: !(Maybe (Textual Int32))
     , _blCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

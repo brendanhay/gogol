@@ -112,7 +112,7 @@ instance ToJSON Photo where
 data Event = Event
     { _ePrimaryEventType     :: !(Maybe EventPrimaryEventType)
     , _eUser                 :: !(Maybe User)
-    , _eEventTimeMillis      :: !(Maybe (JSONText Word64))
+    , _eEventTimeMillis      :: !(Maybe (Textual Word64))
     , _eRename               :: !(Maybe Rename)
     , _eFromUserDeletion     :: !(Maybe Bool)
     , _eAdditionalEventTypes :: !(Maybe [EventAdditionalEventTypesItem])

@@ -54,7 +54,7 @@ type ChildrenListResource =
                QueryParam "orderBy" Text :>
                  QueryParam "q" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ChildList
 
 -- | Lists a folder\'s children.
@@ -65,7 +65,7 @@ data ChildrenList = ChildrenList
     , _cFolderId   :: !Text
     , _cQ          :: !(Maybe Text)
     , _cPageToken  :: !(Maybe Text)
-    , _cMaxResults :: !(JSONText Int32)
+    , _cMaxResults :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenList' with the minimum fields required to make a request.

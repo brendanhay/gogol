@@ -51,7 +51,7 @@ type AchievementsSetStepsAtLeastResource =
          "achievements" :>
            Capture "achievementId" Text :>
              "setStepsAtLeast" :>
-               QueryParam "steps" (JSONText Int32) :>
+               QueryParam "steps" (Textual Int32) :>
                  QueryParam "alt" AltJSON :>
                    Post '[JSON] AchievementSetStepsAtLeastResponse
 
@@ -63,7 +63,7 @@ type AchievementsSetStepsAtLeastResource =
 -- /See:/ 'achievementsSetStepsAtLeast' smart constructor.
 data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast
     { _assalAchievementId :: !Text
-    , _assalSteps         :: !(JSONText Int32)
+    , _assalSteps         :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsSetStepsAtLeast' with the minimum fields required to make a request.

@@ -46,9 +46,9 @@ type FloodlightActivitiesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] FloodlightActivity
 
@@ -56,8 +56,8 @@ type FloodlightActivitiesGetResource =
 --
 -- /See:/ 'floodlightActivitiesGet' smart constructor.
 data FloodlightActivitiesGet = FloodlightActivitiesGet
-    { _fProFileId :: !(JSONText Int64)
-    , _fId        :: !(JSONText Int64)
+    { _fProFileId :: !(Textual Int64)
+    , _fId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGet' with the minimum fields required to make a request.

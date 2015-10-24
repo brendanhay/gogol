@@ -45,8 +45,8 @@ type ClientAccessInsertResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "clientAccess" :>
-           QueryParam "sponsorAccountId" (JSONText Int32) :>
-             QueryParam "clientAccountId" (JSONText Int64) :>
+           QueryParam "sponsorAccountId" (Textual Int32) :>
+             QueryParam "clientAccountId" (Textual Int64) :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] ClientAccessCapabilities :>
                    Post '[JSON] ClientAccessCapabilities
@@ -54,9 +54,9 @@ type ClientAccessInsertResource =
 --
 -- /See:/ 'clientAccessInsert' smart constructor.
 data ClientAccessInsert = ClientAccessInsert
-    { _caiSponsorAccountId :: !(Maybe (JSONText Int32))
+    { _caiSponsorAccountId :: !(Maybe (Textual Int32))
     , _caiPayload          :: !ClientAccessCapabilities
-    , _caiClientAccountId  :: !(Maybe (JSONText Int64))
+    , _caiClientAccountId  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessInsert' with the minimum fields required to make a request.

@@ -47,20 +47,20 @@ type OrdersGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "projects" :>
-               Capture "projectId" (JSONText Int64) :>
+               Capture "projectId" (Textual Int64) :>
                  "orders" :>
-                   Capture "id" (JSONText Int64) :>
+                   Capture "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Gets one order by ID.
 --
 -- /See:/ 'ordersGet' smart constructor.
 data OrdersGet = OrdersGet
-    { _ogProFileId :: !(JSONText Int64)
-    , _ogId        :: !(JSONText Int64)
-    , _ogProjectId :: !(JSONText Int64)
+    { _ogProFileId :: !(Textual Int64)
+    , _ogId        :: !(Textual Int64)
+    , _ogProjectId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGet' with the minimum fields required to make a request.

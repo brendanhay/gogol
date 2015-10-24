@@ -45,8 +45,8 @@ type ClientAccessPatchResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "clientAccess" :>
-           Capture "clientAccountId" (JSONText Int64) :>
-             QueryParam "sponsorAccountId" (JSONText Int32) :>
+           Capture "clientAccountId" (Textual Int64) :>
+             QueryParam "sponsorAccountId" (Textual Int32) :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] ClientAccessCapabilities :>
                    Patch '[JSON] ClientAccessCapabilities
@@ -54,9 +54,9 @@ type ClientAccessPatchResource =
 --
 -- /See:/ 'clientAccessPatch' smart constructor.
 data ClientAccessPatch = ClientAccessPatch
-    { _capSponsorAccountId :: !(JSONText Int32)
+    { _capSponsorAccountId :: !(Textual Int32)
     , _capPayload          :: !ClientAccessCapabilities
-    , _capClientAccountId  :: !(JSONText Int64)
+    , _capClientAccountId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessPatch' with the minimum fields required to make a request.

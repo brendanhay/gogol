@@ -141,7 +141,7 @@ instance ToJSON DeprecationStatus where
 --
 -- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
 data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
-    { _apcmuUtilizationTarget     :: !(Maybe (JSONText Double))
+    { _apcmuUtilizationTarget     :: !(Maybe (Textual Double))
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -287,24 +287,24 @@ instance ToJSON OperationList where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe (JSONText Word64))
+    { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (JSONText Int32))
+    , _oProgress            :: !(Maybe (Textual Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
+    , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (JSONText Word64))
+    , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -535,7 +535,7 @@ instance ToJSON Operation where
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
 newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
-    { _aplbuUtilizationTarget :: Maybe (JSONText Double)
+    { _aplbuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyLoadBalancingUtilization' with the minimum fields required to make a request.
@@ -588,7 +588,7 @@ data Zone = Zone
     , _zSelfLink           :: !(Maybe Text)
     , _zName               :: !(Maybe Text)
     , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe (JSONText Word64))
+    , _zId                 :: !(Maybe (Textual Word64))
     , _zRegion             :: !(Maybe Text)
     , _zDescription        :: !(Maybe Text)
     , _zDeprecated         :: !(Maybe DeprecationStatus)
@@ -911,11 +911,11 @@ instance ToJSON AutoscalerListResponse where
 -- /See:/ 'autoscalingPolicy' smart constructor.
 data AutoscalingPolicy = AutoscalingPolicy
     { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
-    , _apMaxNumReplicas           :: !(Maybe (JSONText Int32))
+    , _apMaxNumReplicas           :: !(Maybe (Textual Int32))
     , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
     , _apLoadBalancingUtilization :: !(Maybe AutoscalingPolicyLoadBalancingUtilization)
-    , _apMinNumReplicas           :: !(Maybe (JSONText Int32))
-    , _apCoolDownPeriodSec        :: !(Maybe (JSONText Int32))
+    , _apMinNumReplicas           :: !(Maybe (Textual Int32))
+    , _apCoolDownPeriodSec        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicy' with the minimum fields required to make a request.
@@ -1059,7 +1059,7 @@ data Autoscaler = Autoscaler
     , _aName              :: !(Maybe Text)
     , _aCreationTimestamp :: !(Maybe Text)
     , _aAutoscalingPolicy :: !(Maybe AutoscalingPolicy)
-    , _aId                :: !(Maybe (JSONText Word64))
+    , _aId                :: !(Maybe (Textual Word64))
     , _aDescription       :: !(Maybe Text)
     , _aTarget            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1222,7 +1222,7 @@ instance ToJSON OperationErrorErrorsItem where
 --
 -- /See:/ 'autoscalingPolicyCPUUtilization' smart constructor.
 newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
-    { _apcuUtilizationTarget :: Maybe (JSONText Double)
+    { _apcuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyCPUUtilization' with the minimum fields required to make a request.

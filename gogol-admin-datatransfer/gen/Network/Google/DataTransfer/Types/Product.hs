@@ -28,7 +28,7 @@ data Application = Application
     , _aEtag           :: !(Maybe Text)
     , _aKind           :: !Text
     , _aName           :: !(Maybe Text)
-    , _aId             :: !(Maybe (JSONText Int64))
+    , _aId             :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
@@ -425,7 +425,7 @@ instance ToJSON DataTransfersListResponse where
 -- /See:/ 'applicationDataTransfer' smart constructor.
 data ApplicationDataTransfer = ApplicationDataTransfer
     { _adtApplicationTransferParams :: !(Maybe [ApplicationTransferParam])
-    , _adtApplicationId             :: !(Maybe (JSONText Int64))
+    , _adtApplicationId             :: !(Maybe (Textual Int64))
     , _adtApplicationTransferStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

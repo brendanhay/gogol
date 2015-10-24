@@ -50,7 +50,7 @@ type EventsListByPlayerResource =
          "events" :>
            QueryParam "language" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (JSONText Int32) :>
+               QueryParam "maxResults" (Textual Int32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] PlayerEventListResponse
 
@@ -61,7 +61,7 @@ type EventsListByPlayerResource =
 data EventsListByPlayer = EventsListByPlayer
     { _elbpLanguage   :: !(Maybe Text)
     , _elbpPageToken  :: !(Maybe Text)
-    , _elbpMaxResults :: !(Maybe (JSONText Int32))
+    , _elbpMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListByPlayer' with the minimum fields required to make a request.

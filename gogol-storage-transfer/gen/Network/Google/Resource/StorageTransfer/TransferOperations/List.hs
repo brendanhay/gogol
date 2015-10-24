@@ -66,7 +66,7 @@ type TransferOperationsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (JSONText Int32) :>
+                         QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListOperationsResponse
@@ -88,7 +88,7 @@ data TransferOperationsList = TransferOperationsList
     , _tolName           :: !Text
     , _tolFilter         :: !(Maybe Text)
     , _tolPageToken      :: !(Maybe Text)
-    , _tolPageSize       :: !(Maybe (JSONText Int32))
+    , _tolPageSize       :: !(Maybe (Textual Int32))
     , _tolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

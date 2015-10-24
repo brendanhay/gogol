@@ -60,8 +60,8 @@ type UsersDataSourcesDataSetsDeleteResource =
                Capture "dataSourceId" Text :>
                  "datasets" :>
                    Capture "datasetId" Text :>
-                     QueryParam "modifiedTimeMillis" (JSONText Int64) :>
-                       QueryParam "currentTimeMillis" (JSONText Int64) :>
+                     QueryParam "modifiedTimeMillis" (Textual Int64) :>
+                       QueryParam "currentTimeMillis" (Textual Int64) :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Performs an inclusive delete of all data points whose start and end
@@ -77,8 +77,8 @@ data UsersDataSourcesDataSetsDelete = UsersDataSourcesDataSetsDelete
     { _udsdsdDataSourceId       :: !Text
     , _udsdsdUserId             :: !Text
     , _udsdsdDataSetId          :: !Text
-    , _udsdsdModifiedTimeMillis :: !(Maybe (JSONText Int64))
-    , _udsdsdCurrentTimeMillis  :: !(Maybe (JSONText Int64))
+    , _udsdsdModifiedTimeMillis :: !(Maybe (Textual Int64))
+    , _udsdsdCurrentTimeMillis  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDataSetsDelete' with the minimum fields required to make a request.

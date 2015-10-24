@@ -49,11 +49,11 @@ type TurnBasedMatchesListResource =
      "games" :>
        "v1" :>
          "turnbasedmatches" :>
-           QueryParam "maxCompletedMatches" (JSONText Int32) :>
+           QueryParam "maxCompletedMatches" (Textual Int32) :>
              QueryParam "includeMatchData" Bool :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] TurnBasedMatchList
 
@@ -61,11 +61,11 @@ type TurnBasedMatchesListResource =
 --
 -- /See:/ 'turnBasedMatchesList' smart constructor.
 data TurnBasedMatchesList = TurnBasedMatchesList
-    { _tMaxCompletedMatches :: !(Maybe (JSONText Int32))
+    { _tMaxCompletedMatches :: !(Maybe (Textual Int32))
     , _tIncludeMatchData    :: !(Maybe Bool)
     , _tLanguage            :: !(Maybe Text)
     , _tPageToken           :: !(Maybe Text)
-    , _tMaxResults          :: !(Maybe (JSONText Int32))
+    , _tMaxResults          :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesList' with the minimum fields required to make a request.

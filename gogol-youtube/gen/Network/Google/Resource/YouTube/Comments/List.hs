@@ -54,7 +54,7 @@ type CommentsListResource =
              QueryParam "id" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "textFormat" CommentsListTextFormat :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "parentId" Text :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CommentListResponse
@@ -67,7 +67,7 @@ data CommentsList = CommentsList
     , _cllId         :: !(Maybe Text)
     , _cllPageToken  :: !(Maybe Text)
     , _cllTextFormat :: !CommentsListTextFormat
-    , _cllMaxResults :: !(JSONText Word32)
+    , _cllMaxResults :: !(Textual Word32)
     , _cllParentId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

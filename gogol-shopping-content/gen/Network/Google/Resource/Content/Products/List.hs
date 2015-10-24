@@ -46,10 +46,10 @@ import           Network.Google.ShoppingContent.Types
 type ProductsListResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "products" :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (JSONText Word32) :>
+               QueryParam "maxResults" (Textual Word32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] ProductsListResponse
 
@@ -57,9 +57,9 @@ type ProductsListResource =
 --
 -- /See:/ 'productsList' smart constructor.
 data ProductsList = ProductsList
-    { _proMerchantId :: !(JSONText Word64)
+    { _proMerchantId :: !(Textual Word64)
     , _proPageToken  :: !(Maybe Text)
-    , _proMaxResults :: !(Maybe (JSONText Word32))
+    , _proMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsList' with the minimum fields required to make a request.

@@ -53,8 +53,8 @@ type ManagementCustomDataSourcesListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "customDataSources" :>
-                     QueryParam "start-index" (JSONText Int32) :>
-                       QueryParam "max-results" (JSONText Int32) :>
+                     QueryParam "start-index" (Textual Int32) :>
+                       QueryParam "max-results" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] CustomDataSources
 
@@ -64,8 +64,8 @@ type ManagementCustomDataSourcesListResource =
 data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList
     { _mcdslWebPropertyId :: !Text
     , _mcdslAccountId     :: !Text
-    , _mcdslStartIndex    :: !(Maybe (JSONText Int32))
-    , _mcdslMaxResults    :: !(Maybe (JSONText Int32))
+    , _mcdslStartIndex    :: !(Maybe (Textual Int32))
+    , _mcdslMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDataSourcesList' with the minimum fields required to make a request.

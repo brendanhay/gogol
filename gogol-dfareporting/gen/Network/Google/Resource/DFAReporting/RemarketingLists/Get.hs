@@ -46,9 +46,9 @@ type RemarketingListsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] RemarketingList
 
@@ -56,8 +56,8 @@ type RemarketingListsGetResource =
 --
 -- /See:/ 'remarketingListsGet' smart constructor.
 data RemarketingListsGet = RemarketingListsGet
-    { _rlgProFileId :: !(JSONText Int64)
-    , _rlgId        :: !(JSONText Int64)
+    { _rlgProFileId :: !(Textual Int64)
+    , _rlgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsGet' with the minimum fields required to make a request.

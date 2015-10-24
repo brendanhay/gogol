@@ -63,7 +63,7 @@ type PlayListsListResource =
                      QueryParam "onBehalfOfContentOwnerChannel" Text :>
                        QueryParam "id" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] PlayListListResponse
 
@@ -81,7 +81,7 @@ data PlayListsList = PlayListsList
     , _pllOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _pllId                            :: !(Maybe Text)
     , _pllPageToken                     :: !(Maybe Text)
-    , _pllMaxResults                    :: !(JSONText Word32)
+    , _pllMaxResults                    :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListsList' with the minimum fields required to make a request.

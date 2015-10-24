@@ -47,7 +47,7 @@ type CreativesGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "creatives" :>
-           Capture "accountId" (JSONText Int32) :>
+           Capture "accountId" (Textual Int32) :>
              Capture "buyerCreativeId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
@@ -57,7 +57,7 @@ type CreativesGetResource =
 -- /See:/ 'creativesGet' smart constructor.
 data CreativesGet = CreativesGet
     { _cgBuyerCreativeId :: !Text
-    , _cgAccountId       :: !(JSONText Int32)
+    , _cgAccountId       :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesGet' with the minimum fields required to make a request.

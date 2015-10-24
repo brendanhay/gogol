@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type AccountsInsertResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "accounts" :>
              QueryParam "dryRun" Bool :>
                QueryParam "alt" AltJSON :>
@@ -56,7 +56,7 @@ type AccountsInsertResource =
 --
 -- /See:/ 'accountsInsert' smart constructor.
 data AccountsInsert = AccountsInsert
-    { _aMerchantId :: !(JSONText Word64)
+    { _aMerchantId :: !(Textual Word64)
     , _aPayload    :: !Account
     , _aDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)

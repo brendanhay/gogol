@@ -60,7 +60,7 @@ type BillingAccountsListResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (JSONText Int32) :>
+                       QueryParam "pageSize" (Textual Int32) :>
                          QueryParam "callback" Text :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListBillingAccountsResponse
@@ -77,7 +77,7 @@ data BillingAccountsList = BillingAccountsList
     , _balUploadType     :: !(Maybe Text)
     , _balBearerToken    :: !(Maybe Text)
     , _balPageToken      :: !(Maybe Text)
-    , _balPageSize       :: !(Maybe (JSONText Int32))
+    , _balPageSize       :: !(Maybe (Textual Int32))
     , _balCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

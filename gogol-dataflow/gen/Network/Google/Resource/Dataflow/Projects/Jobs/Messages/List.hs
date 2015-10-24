@@ -71,7 +71,7 @@ type ProjectsJobsMessagesListResource =
                                QueryParam "endTime" Text :>
                                  QueryParam "minimumImportance" Text :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "pageSize" (JSONText Int32) :>
+                                     QueryParam "pageSize" (Textual Int32) :>
                                        QueryParam "callback" Text :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListJobMessagesResponse
@@ -92,7 +92,7 @@ data ProjectsJobsMessagesList = ProjectsJobsMessagesList
     , _pjmlMinimumImportance :: !(Maybe Text)
     , _pjmlPageToken         :: !(Maybe Text)
     , _pjmlProjectId         :: !Text
-    , _pjmlPageSize          :: !(Maybe (JSONText Int32))
+    , _pjmlPageSize          :: !(Maybe (Textual Int32))
     , _pjmlCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

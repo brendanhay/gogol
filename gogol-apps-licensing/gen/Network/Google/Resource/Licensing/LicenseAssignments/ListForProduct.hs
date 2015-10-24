@@ -53,7 +53,7 @@ type LicenseAssignmentsListForProductResource =
                "users" :>
                  QueryParam "customerId" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] LicenseAssignmentList
 
@@ -64,7 +64,7 @@ data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct
     { _lalfpCustomerId :: !Text
     , _lalfpPageToken  :: !Text
     , _lalfpProductId  :: !Text
-    , _lalfpMaxResults :: !(JSONText Word32)
+    , _lalfpMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsListForProduct' with the minimum fields required to make a request.

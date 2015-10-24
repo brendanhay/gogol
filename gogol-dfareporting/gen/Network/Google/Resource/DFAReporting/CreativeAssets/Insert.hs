@@ -47,9 +47,9 @@ type CreativeAssetsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeAssets" :>
-               Capture "advertiserId" (JSONText Int64) :>
+               Capture "advertiserId" (Textual Int64) :>
                  "creativeAssets" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] CreativeAssetMetadata :>
@@ -59,9 +59,9 @@ type CreativeAssetsInsertResource =
          "dfareporting" :>
            "v2.2" :>
              "userprofiles" :>
-               Capture "profileId" (JSONText Int64) :>
+               Capture "profileId" (Textual Int64) :>
                  "creativeAssets" :>
-                   Capture "advertiserId" (JSONText Int64) :>
+                   Capture "advertiserId" (Textual Int64) :>
                      "creativeAssets" :>
                        QueryParam "alt" AltJSON :>
                          QueryParam "uploadType" AltMedia :>
@@ -73,8 +73,8 @@ type CreativeAssetsInsertResource =
 --
 -- /See:/ 'creativeAssetsInsert' smart constructor.
 data CreativeAssetsInsert = CreativeAssetsInsert
-    { _caiAdvertiserId :: !(JSONText Int64)
-    , _caiProFileId    :: !(JSONText Int64)
+    { _caiAdvertiserId :: !(Textual Int64)
+    , _caiProFileId    :: !(Textual Int64)
     , _caiPayload      :: !CreativeAssetMetadata
     } deriving (Eq,Show,Data,Typeable,Generic)
 

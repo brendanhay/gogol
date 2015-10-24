@@ -56,7 +56,7 @@ type InstanceGroupManagersListResource =
                  "instanceGroupManagers" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] InstanceGroupManagerList
 
@@ -69,7 +69,7 @@ data InstanceGroupManagersList = InstanceGroupManagersList
     , _igmlZone       :: !Text
     , _igmlFilter     :: !(Maybe Text)
     , _igmlPageToken  :: !(Maybe Text)
-    , _igmlMaxResults :: !(JSONText Word32)
+    , _igmlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersList' with the minimum fields required to make a request.

@@ -46,7 +46,7 @@ type FloodlightActivityGroupsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] FloodlightActivityGroup :>
@@ -56,7 +56,7 @@ type FloodlightActivityGroupsInsertResource =
 --
 -- /See:/ 'floodlightActivityGroupsInsert' smart constructor.
 data FloodlightActivityGroupsInsert = FloodlightActivityGroupsInsert
-    { _fagiProFileId :: !(JSONText Int64)
+    { _fagiProFileId :: !(Textual Int64)
     , _fagiPayload   :: !FloodlightActivityGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 

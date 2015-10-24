@@ -52,7 +52,7 @@ type PostsGetByPathResource =
              "posts" :>
                "bypath" :>
                  QueryParam "path" Text :>
-                   QueryParam "maxComments" (JSONText Word32) :>
+                   QueryParam "maxComments" (Textual Word32) :>
                      QueryParam "view" PostsGetByPathView :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
@@ -62,7 +62,7 @@ type PostsGetByPathResource =
 data PostsGetByPath = PostsGetByPath
     { _pgbpPath        :: !Text
     , _pgbpBlogId      :: !Text
-    , _pgbpMaxComments :: !(Maybe (JSONText Word32))
+    , _pgbpMaxComments :: !(Maybe (Textual Word32))
     , _pgbpView        :: !(Maybe PostsGetByPathView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

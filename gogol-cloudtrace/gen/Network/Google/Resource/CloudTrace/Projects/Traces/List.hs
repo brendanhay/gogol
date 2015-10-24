@@ -72,7 +72,7 @@ type ProjectsTracesListResource =
                                QueryParam "view" Text :>
                                  QueryParam "filter" Text :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "pageSize" (JSONText Int32) :>
+                                     QueryParam "pageSize" (Textual Int32) :>
                                        QueryParam "callback" Text :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListTracesResponse
@@ -94,7 +94,7 @@ data ProjectsTracesList = ProjectsTracesList
     , _ptlFilter         :: !(Maybe Text)
     , _ptlPageToken      :: !(Maybe Text)
     , _ptlProjectId      :: !Text
-    , _ptlPageSize       :: !(Maybe (JSONText Int32))
+    , _ptlPageSize       :: !(Maybe (Textual Int32))
     , _ptlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

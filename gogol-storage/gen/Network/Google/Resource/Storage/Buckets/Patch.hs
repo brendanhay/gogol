@@ -52,15 +52,13 @@ type BucketsPatchResource =
        "v1" :>
          "b" :>
            Capture "bucket" Text :>
-             QueryParam "ifMetagenerationMatch" (JSONText Int64)
-               :>
+             QueryParam "ifMetagenerationMatch" (Textual Int64) :>
                QueryParam "predefinedAcl" BucketsPatchPredefinedACL
                  :>
                  QueryParam "predefinedDefaultObjectAcl"
                    BucketsPatchPredefinedDefaultObjectACL
                    :>
-                   QueryParam "ifMetagenerationNotMatch"
-                     (JSONText Int64)
+                   QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                      :>
                      QueryParam "projection" BucketsPatchProjection :>
                        QueryParam "alt" AltJSON :>
@@ -70,12 +68,12 @@ type BucketsPatchResource =
 --
 -- /See:/ 'bucketsPatch' smart constructor.
 data BucketsPatch = BucketsPatch
-    { _bpIfMetagenerationMatch      :: !(Maybe (JSONText Int64))
+    { _bpIfMetagenerationMatch      :: !(Maybe (Textual Int64))
     , _bpPredefinedACL              :: !(Maybe BucketsPatchPredefinedACL)
     , _bpBucket                     :: !Text
     , _bpPayload                    :: !Bucket
     , _bpPredefinedDefaultObjectACL :: !(Maybe BucketsPatchPredefinedDefaultObjectACL)
-    , _bpIfMetagenerationNotMatch   :: !(Maybe (JSONText Int64))
+    , _bpIfMetagenerationNotMatch   :: !(Maybe (Textual Int64))
     , _bpProjection                 :: !(Maybe BucketsPatchProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

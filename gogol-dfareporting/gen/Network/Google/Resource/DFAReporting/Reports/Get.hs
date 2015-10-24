@@ -46,17 +46,17 @@ type ReportsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "reports" :>
-               Capture "reportId" (JSONText Int64) :>
+               Capture "reportId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Retrieves a report by its ID.
 --
 -- /See:/ 'reportsGet' smart constructor.
 data ReportsGet = ReportsGet
-    { _rgReportId  :: !(JSONText Int64)
-    , _rgProFileId :: !(JSONText Int64)
+    { _rgReportId  :: !(Textual Int64)
+    , _rgProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.

@@ -48,9 +48,9 @@ type CreativeGroupsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] CreativeGroup :>
                      Patch '[JSON] CreativeGroup
@@ -60,9 +60,9 @@ type CreativeGroupsPatchResource =
 --
 -- /See:/ 'creativeGroupsPatch' smart constructor.
 data CreativeGroupsPatch = CreativeGroupsPatch
-    { _cgpProFileId :: !(JSONText Int64)
+    { _cgpProFileId :: !(Textual Int64)
     , _cgpPayload   :: !CreativeGroup
-    , _cgpId        :: !(JSONText Int64)
+    , _cgpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsPatch' with the minimum fields required to make a request.

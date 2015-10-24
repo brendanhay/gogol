@@ -52,7 +52,7 @@ type TurnBasedMatchesRematchResource =
          "turnbasedmatches" :>
            Capture "matchId" Text :>
              "rematch" :>
-               QueryParam "requestId" (JSONText Int64) :>
+               QueryParam "requestId" (Textual Int64) :>
                  QueryParam "language" Text :>
                    QueryParam "alt" AltJSON :>
                      Post '[JSON] TurnBasedMatchRematch
@@ -64,7 +64,7 @@ type TurnBasedMatchesRematchResource =
 --
 -- /See:/ 'turnBasedMatchesRematch' smart constructor.
 data TurnBasedMatchesRematch = TurnBasedMatchesRematch
-    { _tbmrRequestId :: !(Maybe (JSONText Int64))
+    { _tbmrRequestId :: !(Maybe (Textual Int64))
     , _tbmrLanguage  :: !(Maybe Text)
     , _tbmrMatchId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

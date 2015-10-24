@@ -46,9 +46,9 @@ type PlacementGroupsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] PlacementGroup
 
@@ -56,8 +56,8 @@ type PlacementGroupsGetResource =
 --
 -- /See:/ 'placementGroupsGet' smart constructor.
 data PlacementGroupsGet = PlacementGroupsGet
-    { _pggProFileId :: !(JSONText Int64)
-    , _pggId        :: !(JSONText Int64)
+    { _pggProFileId :: !(Textual Int64)
+    , _pggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsGet' with the minimum fields required to make a request.

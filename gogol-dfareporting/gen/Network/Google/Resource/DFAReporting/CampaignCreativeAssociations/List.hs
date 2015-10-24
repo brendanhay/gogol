@@ -50,15 +50,15 @@ type CampaignCreativeAssociationsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "campaignId" (JSONText Int64) :>
+               Capture "campaignId" (Textual Int64) :>
                  "campaignCreativeAssociations" :>
                    QueryParam "sortOrder"
                      CampaignCreativeAssociationsListSortOrder
                      :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Int32) :>
+                       QueryParam "maxResults" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] CampaignCreativeAssociationsListResponse
 
@@ -67,11 +67,11 @@ type CampaignCreativeAssociationsListResource =
 --
 -- /See:/ 'campaignCreativeAssociationsList' smart constructor.
 data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList
-    { _ccalCampaignId :: !(JSONText Int64)
-    , _ccalProFileId  :: !(JSONText Int64)
+    { _ccalCampaignId :: !(Textual Int64)
+    , _ccalProFileId  :: !(Textual Int64)
     , _ccalSortOrder  :: !(Maybe CampaignCreativeAssociationsListSortOrder)
     , _ccalPageToken  :: !(Maybe Text)
-    , _ccalMaxResults :: !(Maybe (JSONText Int32))
+    , _ccalMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsList' with the minimum fields required to make a request.

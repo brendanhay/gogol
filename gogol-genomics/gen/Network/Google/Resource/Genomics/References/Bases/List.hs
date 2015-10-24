@@ -63,12 +63,12 @@ type ReferencesBasesListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
-                     QueryParam "start" (JSONText Int64) :>
+                     QueryParam "start" (Textual Int64) :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "end" (JSONText Int64) :>
+                           QueryParam "end" (Textual Int64) :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "pageSize" (JSONText Int32) :>
+                               QueryParam "pageSize" (Textual Int32) :>
                                  QueryParam "callback" Text :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListBasesResponse
@@ -83,13 +83,13 @@ data ReferencesBasesList = ReferencesBasesList
     , _rblUploadProtocol :: !(Maybe Text)
     , _rblPp             :: !Bool
     , _rblAccessToken    :: !(Maybe Text)
-    , _rblStart          :: !(Maybe (JSONText Int64))
+    , _rblStart          :: !(Maybe (Textual Int64))
     , _rblUploadType     :: !(Maybe Text)
     , _rblReferenceId    :: !Text
     , _rblBearerToken    :: !(Maybe Text)
-    , _rblEnd            :: !(Maybe (JSONText Int64))
+    , _rblEnd            :: !(Maybe (Textual Int64))
     , _rblPageToken      :: !(Maybe Text)
-    , _rblPageSize       :: !(Maybe (JSONText Int32))
+    , _rblPageSize       :: !(Maybe (Textual Int32))
     , _rblCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

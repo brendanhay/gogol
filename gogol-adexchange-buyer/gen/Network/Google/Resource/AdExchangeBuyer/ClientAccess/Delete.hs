@@ -44,15 +44,15 @@ type ClientAccessDeleteResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "clientAccess" :>
-           Capture "clientAccountId" (JSONText Int64) :>
-             QueryParam "sponsorAccountId" (JSONText Int32) :>
+           Capture "clientAccountId" (Textual Int64) :>
+             QueryParam "sponsorAccountId" (Textual Int32) :>
                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 --
 -- /See:/ 'clientAccessDelete' smart constructor.
 data ClientAccessDelete = ClientAccessDelete
-    { _cadSponsorAccountId :: !(JSONText Int32)
-    , _cadClientAccountId  :: !(JSONText Int64)
+    { _cadSponsorAccountId :: !(Textual Int32)
+    , _cadClientAccountId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientAccessDelete' with the minimum fields required to make a request.

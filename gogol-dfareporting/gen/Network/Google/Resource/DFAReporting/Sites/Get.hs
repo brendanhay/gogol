@@ -46,17 +46,17 @@ type SitesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "sites" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Site
 
 -- | Gets one site by ID.
 --
 -- /See:/ 'sitesGet' smart constructor.
 data SitesGet = SitesGet
-    { _sggProFileId :: !(JSONText Int64)
-    , _sggId        :: !(JSONText Int64)
+    { _sggProFileId :: !(Textual Int64)
+    , _sggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesGet' with the minimum fields required to make a request.

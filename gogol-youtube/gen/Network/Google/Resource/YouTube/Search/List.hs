@@ -135,7 +135,7 @@ type SearchListResource =
                                                                  :>
                                                                  QueryParam
                                                                    "maxResults"
-                                                                   (JSONText
+                                                                   (Textual
                                                                       Word32)
                                                                    :>
                                                                    QueryParam
@@ -192,7 +192,7 @@ data SearchList = SearchList
     , _slChannelType            :: !(Maybe SearchListChannelType)
     , _slRelevanceLanguage      :: !(Maybe Text)
     , _slOrder                  :: !SearchListOrder
-    , _slMaxResults             :: !(JSONText Word32)
+    , _slMaxResults             :: !(Textual Word32)
     , _slPublishedBefore        :: !(Maybe DateTime')
     , _slVideoType              :: !(Maybe SearchListVideoType)
     , _slVideoDimension         :: !(Maybe SearchListVideoDimension)

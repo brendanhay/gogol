@@ -52,7 +52,7 @@ type CommentsListResource =
              "comments" :>
                QueryParam "sortOrder" CommentsListSortOrder :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] CommentFeed
 
 -- | List all of the comments for an activity.
@@ -62,7 +62,7 @@ data CommentsList = CommentsList
     { _clActivityId :: !Text
     , _clSortOrder  :: !CommentsListSortOrder
     , _clPageToken  :: !(Maybe Text)
-    , _clMaxResults :: !(JSONText Word32)
+    , _clMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.

@@ -59,8 +59,8 @@ type VolumesMybooksListResource =
                  :>
                  QueryParam "locale" Text :>
                    QueryParam "source" Text :>
-                     QueryParam "startIndex" (JSONText Word32) :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "startIndex" (Textual Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books in My Library.
@@ -71,8 +71,8 @@ data VolumesMybooksList = VolumesMybooksList
     , _vmlAcquireMethod   :: !(Maybe [VolumesMybooksListAcquireMethod])
     , _vmlLocale          :: !(Maybe Text)
     , _vmlSource          :: !(Maybe Text)
-    , _vmlStartIndex      :: !(Maybe (JSONText Word32))
-    , _vmlMaxResults      :: !(Maybe (JSONText Word32))
+    , _vmlStartIndex      :: !(Maybe (Textual Word32))
+    , _vmlMaxResults      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesMybooksList' with the minimum fields required to make a request.

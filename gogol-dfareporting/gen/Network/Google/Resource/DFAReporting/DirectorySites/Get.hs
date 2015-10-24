@@ -46,17 +46,17 @@ type DirectorySitesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "directorySites" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] DirectorySite
 
 -- | Gets one directory site by ID.
 --
 -- /See:/ 'directorySitesGet' smart constructor.
 data DirectorySitesGet = DirectorySitesGet
-    { _dsgProFileId :: !(JSONText Int64)
-    , _dsgId        :: !(JSONText Int64)
+    { _dsgProFileId :: !(Textual Int64)
+    , _dsgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesGet' with the minimum fields required to make a request.

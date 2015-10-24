@@ -52,15 +52,15 @@ type ProjectsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "projects" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" (JSONText Int64) :>
+                 QueryParams "ids" (Textual Int64) :>
                    QueryParam "sortOrder" ProjectsListSortOrder :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" ProjectsListSortField :>
-                         QueryParams "advertiserIds" (JSONText Int64) :>
-                           QueryParam "maxResults" (JSONText Int32) :>
+                         QueryParams "advertiserIds" (Textual Int64) :>
+                           QueryParam "maxResults" (Textual Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ProjectsListResponse
 
@@ -69,13 +69,13 @@ type ProjectsListResource =
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList = ProjectsList
     { _plSearchString  :: !(Maybe Text)
-    , _plIds           :: !(Maybe [JSONText Int64])
-    , _plProFileId     :: !(JSONText Int64)
+    , _plIds           :: !(Maybe [Textual Int64])
+    , _plProFileId     :: !(Textual Int64)
     , _plSortOrder     :: !(Maybe ProjectsListSortOrder)
     , _plPageToken     :: !(Maybe Text)
     , _plSortField     :: !(Maybe ProjectsListSortField)
-    , _plAdvertiserIds :: !(Maybe [JSONText Int64])
-    , _plMaxResults    :: !(Maybe (JSONText Int32))
+    , _plAdvertiserIds :: !(Maybe [Textual Int64])
+    , _plMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.

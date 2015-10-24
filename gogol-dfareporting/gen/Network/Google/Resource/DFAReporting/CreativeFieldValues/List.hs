@@ -52,12 +52,12 @@ type CreativeFieldValuesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
-               Capture "creativeFieldId" (JSONText Int64) :>
+               Capture "creativeFieldId" (Textual Int64) :>
                  "creativeFieldValues" :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" (JSONText Int64) :>
+                     QueryParams "ids" (Textual Int64) :>
                        QueryParam "sortOrder"
                          CreativeFieldValuesListSortOrder
                          :>
@@ -65,7 +65,7 @@ type CreativeFieldValuesListResource =
                            QueryParam "sortField"
                              CreativeFieldValuesListSortField
                              :>
-                             QueryParam "maxResults" (JSONText Int32) :>
+                             QueryParam "maxResults" (Textual Int32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CreativeFieldValuesListResponse
 
@@ -73,14 +73,14 @@ type CreativeFieldValuesListResource =
 --
 -- /See:/ 'creativeFieldValuesList' smart constructor.
 data CreativeFieldValuesList = CreativeFieldValuesList
-    { _cfvlCreativeFieldId :: !(JSONText Int64)
+    { _cfvlCreativeFieldId :: !(Textual Int64)
     , _cfvlSearchString    :: !(Maybe Text)
-    , _cfvlIds             :: !(Maybe [JSONText Int64])
-    , _cfvlProFileId       :: !(JSONText Int64)
+    , _cfvlIds             :: !(Maybe [Textual Int64])
+    , _cfvlProFileId       :: !(Textual Int64)
     , _cfvlSortOrder       :: !(Maybe CreativeFieldValuesListSortOrder)
     , _cfvlPageToken       :: !(Maybe Text)
     , _cfvlSortField       :: !(Maybe CreativeFieldValuesListSortField)
-    , _cfvlMaxResults      :: !(Maybe (JSONText Int32))
+    , _cfvlMaxResults      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesList' with the minimum fields required to make a request.

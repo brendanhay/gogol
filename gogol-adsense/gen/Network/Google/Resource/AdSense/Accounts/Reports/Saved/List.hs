@@ -51,7 +51,7 @@ type AccountsReportsSavedListResource =
              "reports" :>
                "saved" :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
 
 -- | List all saved reports in the specified AdSense account.
@@ -60,7 +60,7 @@ type AccountsReportsSavedListResource =
 data AccountsReportsSavedList = AccountsReportsSavedList
     { _arslAccountId  :: !Text
     , _arslPageToken  :: !(Maybe Text)
-    , _arslMaxResults :: !(Maybe (JSONText Int32))
+    , _arslMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsSavedList' with the minimum fields required to make a request.

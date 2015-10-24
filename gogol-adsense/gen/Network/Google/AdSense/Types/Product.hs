@@ -1087,7 +1087,7 @@ instance ToJSON AdStyleFont where
 -- /See:/ 'account' smart constructor.
 data Account = Account
     { _accKind         :: !Text
-    , _accCreationTime :: !(Maybe (JSONText Int64))
+    , _accCreationTime :: !(Maybe (Textual Int64))
     , _accPremium      :: !(Maybe Bool)
     , _accName         :: !(Maybe Text)
     , _accId           :: !(Maybe Text)
@@ -1774,10 +1774,10 @@ instance ToJSON AdStyle where
 --
 -- /See:/ 'adUnitFeedAdsSettings' smart constructor.
 data AdUnitFeedAdsSettings = AdUnitFeedAdsSettings
-    { _aufasFrequency        :: !(Maybe (JSONText Int32))
+    { _aufasFrequency        :: !(Maybe (Textual Int32))
     , _aufasAdPosition       :: !(Maybe Text)
     , _aufasType             :: !(Maybe Text)
-    , _aufasMinimumWordCount :: !(Maybe (JSONText Int32))
+    , _aufasMinimumWordCount :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitFeedAdsSettings' with the minimum fields required to make a request.
@@ -2083,7 +2083,7 @@ data AdsenseReportsGenerateResponse = AdsenseReportsGenerateResponse
     , _argrTotals           :: !(Maybe [Text])
     , _argrStartDate        :: !(Maybe Text)
     , _argrHeaders          :: !(Maybe [AdsenseReportsGenerateResponseHeadersItem])
-    , _argrTotalMatchedRows :: !(Maybe (JSONText Int64))
+    , _argrTotalMatchedRows :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsenseReportsGenerateResponse' with the minimum fields required to make a request.

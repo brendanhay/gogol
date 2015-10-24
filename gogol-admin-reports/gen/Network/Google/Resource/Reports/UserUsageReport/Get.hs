@@ -61,7 +61,7 @@ type UserUsageReportGetResource =
                        QueryParam "customerId" Text :>
                          QueryParam "parameters" Text :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" (JSONText Word32) :>
+                             QueryParam "maxResults" (Textual Word32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] UsageReports
 
@@ -76,7 +76,7 @@ data UserUsageReportGet = UserUsageReportGet
     , _uurgParameters :: !(Maybe Text)
     , _uurgPageToken  :: !(Maybe Text)
     , _uurgUserKey    :: !Text
-    , _uurgMaxResults :: !(Maybe (JSONText Word32))
+    , _uurgMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserUsageReportGet' with the minimum fields required to make a request.

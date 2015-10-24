@@ -54,7 +54,7 @@ type HTTPHealthChecksListResource =
                "httpHealthChecks" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] HTTPHealthCheckList
 
@@ -66,7 +66,7 @@ data HTTPHealthChecksList = HTTPHealthChecksList
     { _httphclProject    :: !Text
     , _httphclFilter     :: !(Maybe Text)
     , _httphclPageToken  :: !(Maybe Text)
-    , _httphclMaxResults :: !(JSONText Word32)
+    , _httphclMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksList' with the minimum fields required to make a request.

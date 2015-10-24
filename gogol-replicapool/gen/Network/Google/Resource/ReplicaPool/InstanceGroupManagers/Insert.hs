@@ -53,7 +53,7 @@ type InstanceGroupManagersInsertResource =
              "zones" :>
                Capture "zone" Text :>
                  "instanceGroupManagers" :>
-                   QueryParam "size" (JSONText Int32) :>
+                   QueryParam "size" (Textual Int32) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] InstanceGroupManager :>
                          Post '[JSON] Operation
@@ -64,7 +64,7 @@ type InstanceGroupManagersInsertResource =
 -- /See:/ 'instanceGroupManagersInsert' smart constructor.
 data InstanceGroupManagersInsert = InstanceGroupManagersInsert
     { _igmiProject :: !Text
-    , _igmiSize    :: !(JSONText Int32)
+    , _igmiSize    :: !(Textual Int32)
     , _igmiZone    :: !Text
     , _igmiPayload :: !InstanceGroupManager
     } deriving (Eq,Show,Data,Typeable,Generic)

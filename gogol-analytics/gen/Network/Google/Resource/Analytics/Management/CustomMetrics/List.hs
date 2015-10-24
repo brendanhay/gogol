@@ -53,8 +53,8 @@ type ManagementCustomMetricsListResource =
                "webproperties" :>
                  Capture "webPropertyId" Text :>
                    "customMetrics" :>
-                     QueryParam "start-index" (JSONText Int32) :>
-                       QueryParam "max-results" (JSONText Int32) :>
+                     QueryParam "start-index" (Textual Int32) :>
+                       QueryParam "max-results" (Textual Int32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] CustomMetrics
 
 -- | Lists custom metrics to which the user has access.
@@ -63,8 +63,8 @@ type ManagementCustomMetricsListResource =
 data ManagementCustomMetricsList = ManagementCustomMetricsList
     { _mcmlWebPropertyId :: !Text
     , _mcmlAccountId     :: !Text
-    , _mcmlStartIndex    :: !(Maybe (JSONText Int32))
-    , _mcmlMaxResults    :: !(Maybe (JSONText Int32))
+    , _mcmlStartIndex    :: !(Maybe (Textual Int32))
+    , _mcmlMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsList' with the minimum fields required to make a request.

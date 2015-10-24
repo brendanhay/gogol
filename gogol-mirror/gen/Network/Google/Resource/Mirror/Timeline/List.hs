@@ -56,7 +56,7 @@ type TimelineListResource =
                QueryParam "bundleId" Text :>
                  QueryParam "sourceItemId" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "includeDeleted" Bool :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TimelineListResponse
@@ -70,7 +70,7 @@ data TimelineList = TimelineList
     , _tlBundleId       :: !(Maybe Text)
     , _tlSourceItemId   :: !(Maybe Text)
     , _tlPageToken      :: !(Maybe Text)
-    , _tlMaxResults     :: !(Maybe (JSONText Word32))
+    , _tlMaxResults     :: !(Maybe (Textual Word32))
     , _tlIncludeDeleted :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

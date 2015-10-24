@@ -55,8 +55,8 @@ type TasksLeaseResource =
                Capture "taskqueue" Text :>
                  "tasks" :>
                    "lease" :>
-                     QueryParam "numTasks" (JSONText Int32) :>
-                       QueryParam "leaseSecs" (JSONText Int32) :>
+                     QueryParam "numTasks" (Textual Int32) :>
+                       QueryParam "leaseSecs" (Textual Int32) :>
                          QueryParam "tag" Text :>
                            QueryParam "groupByTag" Bool :>
                              QueryParam "alt" AltJSON :> Post '[JSON] Tasks
@@ -68,8 +68,8 @@ data TasksLease = TasksLease
     { _tlTaskqueue  :: !Text
     , _tlTag        :: !(Maybe Text)
     , _tlProject    :: !Text
-    , _tlNumTasks   :: !(JSONText Int32)
-    , _tlLeaseSecs  :: !(JSONText Int32)
+    , _tlNumTasks   :: !(Textual Int32)
+    , _tlLeaseSecs  :: !(Textual Int32)
     , _tlGroupByTag :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

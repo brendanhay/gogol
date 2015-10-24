@@ -55,12 +55,12 @@ type CreativesListResource =
              QueryParam "openAuctionStatusFilter"
                CreativesListOpenAuctionStatusFilter
                :>
-               QueryParams "accountId" (JSONText Int32) :>
+               QueryParams "accountId" (Textual Int32) :>
                  QueryParam "pageToken" Text :>
                    QueryParam "dealsStatusFilter"
                      CreativesListDealsStatusFilter
                      :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] CreativesList
 
 -- | Retrieves a list of the authenticated user\'s active creatives. A
@@ -70,10 +70,10 @@ type CreativesListResource =
 data CreativesList' = CreativesList'
     { _clBuyerCreativeId         :: !(Maybe [Text])
     , _clOpenAuctionStatusFilter :: !(Maybe CreativesListOpenAuctionStatusFilter)
-    , _clAccountId               :: !(Maybe [JSONText Int32])
+    , _clAccountId               :: !(Maybe [Textual Int32])
     , _clPageToken               :: !(Maybe Text)
     , _clDealsStatusFilter       :: !(Maybe CreativesListDealsStatusFilter)
-    , _clMaxResults              :: !(Maybe (JSONText Word32))
+    , _clMaxResults              :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.

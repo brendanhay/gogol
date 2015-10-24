@@ -75,38 +75,38 @@ type ObjectsRewriteResource =
                              ObjectsRewriteDestinationPredefinedACL
                              :>
                              QueryParam "ifSourceGenerationMatch"
-                               (JSONText Int64)
+                               (Textual Int64)
                                :>
                                QueryParam "ifMetagenerationMatch"
-                                 (JSONText Int64)
+                                 (Textual Int64)
                                  :>
                                  QueryParam "ifGenerationNotMatch"
-                                   (JSONText Int64)
+                                   (Textual Int64)
                                    :>
                                    QueryParam "ifSourceMetagenerationNotMatch"
-                                     (JSONText Int64)
+                                     (Textual Int64)
                                      :>
                                      QueryParam "ifSourceMetagenerationMatch"
-                                       (JSONText Int64)
+                                       (Textual Int64)
                                        :>
                                        QueryParam "ifGenerationMatch"
-                                         (JSONText Int64)
+                                         (Textual Int64)
                                          :>
                                          QueryParam "maxBytesRewrittenPerCall"
-                                           (JSONText Int64)
+                                           (Textual Int64)
                                            :>
                                            QueryParam "ifMetagenerationNotMatch"
-                                             (JSONText Int64)
+                                             (Textual Int64)
                                              :>
                                              QueryParam
                                                "ifSourceGenerationNotMatch"
-                                               (JSONText Int64)
+                                               (Textual Int64)
                                                :>
                                                QueryParam "projection"
                                                  ObjectsRewriteProjection
                                                  :>
                                                  QueryParam "sourceGeneration"
-                                                   (JSONText Int64)
+                                                   (Textual Int64)
                                                    :>
                                                    QueryParam "rewriteToken"
                                                      Text
@@ -122,21 +122,21 @@ type ObjectsRewriteResource =
 -- /See:/ 'objectsRewrite' smart constructor.
 data ObjectsRewrite = ObjectsRewrite
     { _orDestinationPredefinedACL       :: !(Maybe ObjectsRewriteDestinationPredefinedACL)
-    , _orIfSourceGenerationMatch        :: !(Maybe (JSONText Int64))
-    , _orIfMetagenerationMatch          :: !(Maybe (JSONText Int64))
-    , _orIfGenerationNotMatch           :: !(Maybe (JSONText Int64))
-    , _orIfSourceMetagenerationNotMatch :: !(Maybe (JSONText Int64))
-    , _orIfSourceMetagenerationMatch    :: !(Maybe (JSONText Int64))
-    , _orIfGenerationMatch              :: !(Maybe (JSONText Int64))
+    , _orIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
+    , _orIfMetagenerationMatch          :: !(Maybe (Textual Int64))
+    , _orIfGenerationNotMatch           :: !(Maybe (Textual Int64))
+    , _orIfSourceMetagenerationNotMatch :: !(Maybe (Textual Int64))
+    , _orIfSourceMetagenerationMatch    :: !(Maybe (Textual Int64))
+    , _orIfGenerationMatch              :: !(Maybe (Textual Int64))
     , _orSourceObject                   :: !Text
-    , _orMaxBytesRewrittenPerCall       :: !(Maybe (JSONText Int64))
+    , _orMaxBytesRewrittenPerCall       :: !(Maybe (Textual Int64))
     , _orSourceBucket                   :: !Text
     , _orPayload                        :: !Object
     , _orDestinationBucket              :: !Text
-    , _orIfMetagenerationNotMatch       :: !(Maybe (JSONText Int64))
-    , _orIfSourceGenerationNotMatch     :: !(Maybe (JSONText Int64))
+    , _orIfMetagenerationNotMatch       :: !(Maybe (Textual Int64))
+    , _orIfSourceGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _orProjection                     :: !(Maybe ObjectsRewriteProjection)
-    , _orSourceGeneration               :: !(Maybe (JSONText Int64))
+    , _orSourceGeneration               :: !(Maybe (Textual Int64))
     , _orRewriteToken                   :: !(Maybe Text)
     , _orDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -47,20 +47,20 @@ type LandingPagesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "campaignId" (JSONText Int64) :>
+               Capture "campaignId" (Textual Int64) :>
                  "landingPages" :>
-                   Capture "id" (JSONText Int64) :>
+                   Capture "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing campaign landing page.
 --
 -- /See:/ 'landingPagesDelete' smart constructor.
 data LandingPagesDelete = LandingPagesDelete
-    { _lpdCampaignId :: !(JSONText Int64)
-    , _lpdProFileId  :: !(JSONText Int64)
-    , _lpdId         :: !(JSONText Int64)
+    { _lpdCampaignId :: !(Textual Int64)
+    , _lpdProFileId  :: !(Textual Int64)
+    , _lpdId         :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesDelete' with the minimum fields required to make a request.

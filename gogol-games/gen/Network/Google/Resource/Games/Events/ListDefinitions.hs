@@ -49,7 +49,7 @@ type EventsListDefinitionsResource =
          "eventDefinitions" :>
            QueryParam "language" Text :>
              QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (JSONText Int32) :>
+               QueryParam "maxResults" (Textual Int32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] EventDefinitionListResponse
 
@@ -59,7 +59,7 @@ type EventsListDefinitionsResource =
 data EventsListDefinitions = EventsListDefinitions
     { _eldLanguage   :: !(Maybe Text)
     , _eldPageToken  :: !(Maybe Text)
-    , _eldMaxResults :: !(Maybe (JSONText Int32))
+    , _eldMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListDefinitions' with the minimum fields required to make a request.

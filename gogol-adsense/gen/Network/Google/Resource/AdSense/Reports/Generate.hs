@@ -67,9 +67,9 @@ type ReportsGenerateResource =
                        QueryParam "currency" Text :>
                          QueryParams "sort" Text :>
                            QueryParams "filter" Text :>
-                             QueryParam "startIndex" (JSONText Int32) :>
+                             QueryParam "startIndex" (Textual Int32) :>
                                QueryParam "useTimezoneReporting" Bool :>
-                                 QueryParam "maxResults" (JSONText Int32) :>
+                                 QueryParam "maxResults" (Textual Int32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] AdsenseReportsGenerateResponse
        :<|>
@@ -85,9 +85,9 @@ type ReportsGenerateResource =
                          QueryParam "currency" Text :>
                            QueryParams "sort" Text :>
                              QueryParams "filter" Text :>
-                               QueryParam "startIndex" (JSONText Int32) :>
+                               QueryParam "startIndex" (Textual Int32) :>
                                  QueryParam "useTimezoneReporting" Bool :>
-                                   QueryParam "maxResults" (JSONText Int32) :>
+                                   QueryParam "maxResults" (Textual Int32) :>
                                      QueryParam "alt" AltMedia :>
                                        Get '[OctetStream] Stream
 
@@ -106,9 +106,9 @@ data ReportsGenerate = ReportsGenerate
     , _rgCurrency             :: !(Maybe Text)
     , _rgSort                 :: !(Maybe [Text])
     , _rgFilter               :: !(Maybe [Text])
-    , _rgStartIndex           :: !(Maybe (JSONText Int32))
+    , _rgStartIndex           :: !(Maybe (Textual Int32))
     , _rgUseTimezoneReporting :: !(Maybe Bool)
-    , _rgMaxResults           :: !(Maybe (JSONText Int32))
+    , _rgMaxResults           :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.

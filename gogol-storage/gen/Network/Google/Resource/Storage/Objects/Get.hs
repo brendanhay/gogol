@@ -55,15 +55,13 @@ type ObjectsGetResource =
            Capture "bucket" Text :>
              "o" :>
                Capture "object" Text :>
-                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                   :>
-                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
-                       QueryParam "ifMetagenerationNotMatch"
-                         (JSONText Int64)
+                 QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                   QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                     QueryParam "ifGenerationMatch" (Textual Int64) :>
+                       QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                          :>
                          QueryParam "projection" ObjectsGetProjection :>
-                           QueryParam "generation" (JSONText Int64) :>
+                           QueryParam "generation" (Textual Int64) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Object
        :<|>
        "storage" :>
@@ -72,15 +70,13 @@ type ObjectsGetResource =
              Capture "bucket" Text :>
                "o" :>
                  Capture "object" Text :>
-                   QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                     :>
-                     QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                       QueryParam "ifGenerationMatch" (JSONText Int64) :>
-                         QueryParam "ifMetagenerationNotMatch"
-                           (JSONText Int64)
+                   QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                     QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                       QueryParam "ifGenerationMatch" (Textual Int64) :>
+                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                            :>
                            QueryParam "projection" ObjectsGetProjection :>
-                             QueryParam "generation" (JSONText Int64) :>
+                             QueryParam "generation" (Textual Int64) :>
                                QueryParam "alt" AltMedia :>
                                  Get '[OctetStream] Stream
 
@@ -88,14 +84,14 @@ type ObjectsGetResource =
 --
 -- /See:/ 'objectsGet' smart constructor.
 data ObjectsGet = ObjectsGet
-    { _ogIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
-    , _ogIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
-    , _ogIfGenerationMatch        :: !(Maybe (JSONText Int64))
+    { _ogIfMetagenerationMatch    :: !(Maybe (Textual Int64))
+    , _ogIfGenerationNotMatch     :: !(Maybe (Textual Int64))
+    , _ogIfGenerationMatch        :: !(Maybe (Textual Int64))
     , _ogBucket                   :: !Text
-    , _ogIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _ogIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _ogObject                   :: !Text
     , _ogProjection               :: !(Maybe ObjectsGetProjection)
-    , _ogGeneration               :: !(Maybe (JSONText Int64))
+    , _ogGeneration               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsGet' with the minimum fields required to make a request.

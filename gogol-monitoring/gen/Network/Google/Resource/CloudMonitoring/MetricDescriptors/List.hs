@@ -55,7 +55,7 @@ type MetricDescriptorsListResource =
          "projects" :>
            Capture "project" Text :>
              "metricDescriptors" :>
-               QueryParam "count" (JSONText Int32) :>
+               QueryParam "count" (Textual Int32) :>
                  QueryParam "query" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "alt" AltJSON :>
@@ -71,7 +71,7 @@ type MetricDescriptorsListResource =
 -- /See:/ 'metricDescriptorsList' smart constructor.
 data MetricDescriptorsList = MetricDescriptorsList
     { _mdlProject   :: !Text
-    , _mdlCount     :: !(JSONText Int32)
+    , _mdlCount     :: !(Textual Int32)
     , _mdlPayload   :: !ListMetricDescriptorsRequest
     , _mdlQuery     :: !(Maybe Text)
     , _mdlPageToken :: !(Maybe Text)

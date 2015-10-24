@@ -55,7 +55,7 @@ type RoleAssignmentsListResource =
                  QueryParam "roleId" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "userKey" Text :>
-                       QueryParam "maxResults" (JSONText Int32) :>
+                       QueryParam "maxResults" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] RoleAssignments
 
@@ -67,7 +67,7 @@ data RoleAssignmentsList = RoleAssignmentsList
     , _ralCustomer   :: !Text
     , _ralPageToken  :: !(Maybe Text)
     , _ralUserKey    :: !(Maybe Text)
-    , _ralMaxResults :: !(Maybe (JSONText Int32))
+    , _ralMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoleAssignmentsList' with the minimum fields required to make a request.

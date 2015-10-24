@@ -162,12 +162,12 @@ instance ToJSON LocationsListResponse where
 -- /See:/ 'location' smart constructor.
 data Location = Location
     { _lKind        :: !Text
-    , _lLatitude    :: !(Maybe (JSONText Double))
+    , _lLatitude    :: !(Maybe (Textual Double))
     , _lAddress     :: !(Maybe Text)
     , _lDisplayName :: !(Maybe Text)
     , _lId          :: !(Maybe Text)
-    , _lAccuracy    :: !(Maybe (JSONText Double))
-    , _lLongitude   :: !(Maybe (JSONText Double))
+    , _lAccuracy    :: !(Maybe (Textual Double))
+    , _lLongitude   :: !(Maybe (Textual Double))
     , _lTimestamp   :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -374,7 +374,7 @@ data Contact = Contact
     { _conAcceptCommands  :: !(Maybe [Command])
     , _conSharingFeatures :: !(Maybe [Text])
     , _conImageURLs       :: !(Maybe [Text])
-    , _conPriority        :: !(Maybe (JSONText Word32))
+    , _conPriority        :: !(Maybe (Textual Word32))
     , _conKind            :: !Text
     , _conAcceptTypes     :: !(Maybe [Text])
     , _conPhoneNumber     :: !(Maybe Text)
@@ -1405,7 +1405,7 @@ data TimelineItem = TimelineItem
     , _tiDisplayTime   :: !(Maybe DateTime')
     , _tiEtag          :: !(Maybe Text)
     , _tiIsDeleted     :: !(Maybe Bool)
-    , _tiPinScore      :: !(Maybe (JSONText Int32))
+    , _tiPinScore      :: !(Maybe (Textual Int32))
     , _tiAttachments   :: !(Maybe [Attachment])
     , _tiLocation      :: !(Maybe Location)
     , _tiMenuItems     :: !(Maybe [MenuItem])

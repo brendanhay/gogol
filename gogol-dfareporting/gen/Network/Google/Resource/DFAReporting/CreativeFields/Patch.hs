@@ -48,9 +48,9 @@ type CreativeFieldsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] CreativeField :>
                      Patch '[JSON] CreativeField
@@ -60,9 +60,9 @@ type CreativeFieldsPatchResource =
 --
 -- /See:/ 'creativeFieldsPatch' smart constructor.
 data CreativeFieldsPatch = CreativeFieldsPatch
-    { _cfpProFileId :: !(JSONText Int64)
+    { _cfpProFileId :: !(Textual Int64)
     , _cfpPayload   :: !CreativeField
-    , _cfpId        :: !(JSONText Int64)
+    , _cfpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsPatch' with the minimum fields required to make a request.

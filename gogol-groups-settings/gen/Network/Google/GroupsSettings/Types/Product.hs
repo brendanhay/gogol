@@ -36,7 +36,7 @@ data Groups = Groups
     , _gWhoCanViewGroup                    :: !(Maybe Text)
     , _gWhoCanJoin                         :: !(Maybe Text)
     , _gArchiveOnly                        :: !(Maybe Text)
-    , _gMaxMessageBytes                    :: !(Maybe (JSONText Int32))
+    , _gMaxMessageBytes                    :: !(Maybe (Textual Int32))
     , _gReplyTo                            :: !(Maybe Text)
     , _gMessageModerationLevel             :: !(Maybe Text)
     , _gIncludeInGlobalAddressList         :: !(Maybe Text)

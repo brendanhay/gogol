@@ -376,7 +376,7 @@ instance ToJSON ListTriggersResponse where
 --
 -- /See:/ 'macro' smart constructor.
 data Macro = Macro
-    { _mScheduleEndMs   :: !(Maybe (JSONText Int64))
+    { _mScheduleEndMs   :: !(Maybe (Textual Int64))
     , _mParentFolderId  :: !(Maybe Text)
     , _mContainerId     :: !(Maybe Text)
     , _mDisablingRuleId :: !(Maybe [Text])
@@ -386,7 +386,7 @@ data Macro = Macro
     , _mEnablingRuleId  :: !(Maybe [Text])
     , _mMacroId         :: !(Maybe Text)
     , _mType            :: !(Maybe Text)
-    , _mScheduleStartMs :: !(Maybe (JSONText Int64))
+    , _mScheduleStartMs :: !(Maybe (Textual Int64))
     , _mNotes           :: !(Maybe Text)
     , _mParameter       :: !(Maybe [Parameter])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -558,7 +558,7 @@ instance ToJSON Macro where
 -- /See:/ 'tag' smart constructor.
 data Tag = Tag
     { _tBlockingTriggerId :: !(Maybe [Text])
-    , _tScheduleEndMs     :: !(Maybe (JSONText Int64))
+    , _tScheduleEndMs     :: !(Maybe (Textual Int64))
     , _tParentFolderId    :: !(Maybe Text)
     , _tLiveOnly          :: !(Maybe Bool)
     , _tContainerId       :: !(Maybe Text)
@@ -573,7 +573,7 @@ data Tag = Tag
     , _tSetupTag          :: !(Maybe [SetupTag])
     , _tFiringTriggerId   :: !(Maybe [Text])
     , _tType              :: !(Maybe Text)
-    , _tScheduleStartMs   :: !(Maybe (JSONText Int64))
+    , _tScheduleStartMs   :: !(Maybe (Textual Int64))
     , _tNotes             :: !(Maybe Text)
     , _tFiringRuleId      :: !(Maybe [Text])
     , _tParameter         :: !(Maybe [Parameter])
@@ -1290,7 +1290,7 @@ instance ToJSON Folder where
 --
 -- /See:/ 'variable' smart constructor.
 data Variable = Variable
-    { _vScheduleEndMs      :: !(Maybe (JSONText Int64))
+    { _vScheduleEndMs      :: !(Maybe (Textual Int64))
     , _vParentFolderId     :: !(Maybe Text)
     , _vContainerId        :: !(Maybe Text)
     , _vFingerprint        :: !(Maybe Text)
@@ -1299,7 +1299,7 @@ data Variable = Variable
     , _vDisablingTriggerId :: !(Maybe [Text])
     , _vName               :: !(Maybe Text)
     , _vType               :: !(Maybe Text)
-    , _vScheduleStartMs    :: !(Maybe (JSONText Int64))
+    , _vScheduleStartMs    :: !(Maybe (Textual Int64))
     , _vNotes              :: !(Maybe Text)
     , _vEnablingTriggerId  :: !(Maybe [Text])
     , _vParameter          :: !(Maybe [Parameter])

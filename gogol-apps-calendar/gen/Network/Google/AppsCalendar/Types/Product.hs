@@ -299,7 +299,7 @@ data Event = Event
     , _eGuestsCanInviteOthers   :: !Bool
     , _eRecurrence              :: !(Maybe [Text])
     , _eGadget                  :: !(Maybe EventGadget)
-    , _eSequence                :: !(Maybe (JSONText Int32))
+    , _eSequence                :: !(Maybe (Textual Int32))
     , _eICalUId                 :: !(Maybe Text)
     , _eEnd                     :: !(Maybe EventDateTime)
     , _eAttendeesOmitted        :: !Bool
@@ -1314,7 +1314,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe (JSONText Int64))
+    , _cExpiration  :: !(Maybe (Textual Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -1982,7 +1982,7 @@ data EventAttendee = EventAttendee
     , _eaResponseStatus   :: !(Maybe Text)
     , _eaSelf             :: !Bool
     , _eaResource         :: !Bool
-    , _eaAdditionalGuests :: !(JSONText Int32)
+    , _eaAdditionalGuests :: !(Textual Int32)
     , _eaDisplayName      :: !(Maybe Text)
     , _eaId               :: !(Maybe Text)
     , _eaComment          :: !(Maybe Text)
@@ -2302,7 +2302,7 @@ instance ToJSON FreeBusyResponse where
 -- /See:/ 'eventReminder' smart constructor.
 data EventReminder = EventReminder
     { _erMethod  :: !(Maybe Text)
-    , _erMinutes :: !(Maybe (JSONText Int32))
+    , _erMinutes :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventReminder' with the minimum fields required to make a request.
@@ -2621,12 +2621,12 @@ instance ToJSON CalendarList where
 --
 -- /See:/ 'eventGadget' smart constructor.
 data EventGadget = EventGadget
-    { _egHeight      :: !(Maybe (JSONText Int32))
+    { _egHeight      :: !(Maybe (Textual Int32))
     , _egDisplay     :: !(Maybe Text)
     , _egPreferences :: !(Maybe EventGadgetPreferences)
     , _egLink        :: !(Maybe Text)
     , _egIconLink    :: !(Maybe Text)
-    , _egWidth       :: !(Maybe (JSONText Int32))
+    , _egWidth       :: !(Maybe (Textual Int32))
     , _egTitle       :: !(Maybe Text)
     , _egType        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2771,10 +2771,10 @@ instance ToJSON EventGadgetPreferences where
 --
 -- /See:/ 'freeBusyRequest' smart constructor.
 data FreeBusyRequest = FreeBusyRequest
-    { _fCalendarExpansionMax :: !(Maybe (JSONText Int32))
+    { _fCalendarExpansionMax :: !(Maybe (Textual Int32))
     , _fTimeMin              :: !(Maybe DateTime')
     , _fItems                :: !(Maybe [FreeBusyRequestItem])
-    , _fGroupExpansionMax    :: !(Maybe (JSONText Int32))
+    , _fGroupExpansionMax    :: !(Maybe (Textual Int32))
     , _fTimeZone             :: !Text
     , _fTimeMax              :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

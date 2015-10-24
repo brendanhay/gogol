@@ -48,11 +48,11 @@ type DimensionValuesQueryResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "dimensionvalues" :>
                "query" :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DimensionValueRequest :>
                          Post '[JSON] DimensionValueList
@@ -61,10 +61,10 @@ type DimensionValuesQueryResource =
 --
 -- /See:/ 'dimensionValuesQuery' smart constructor.
 data DimensionValuesQuery = DimensionValuesQuery
-    { _dvqProFileId  :: !(JSONText Int64)
+    { _dvqProFileId  :: !(Textual Int64)
     , _dvqPayload    :: !DimensionValueRequest
     , _dvqPageToken  :: !(Maybe Text)
-    , _dvqMaxResults :: !(Maybe (JSONText Int32))
+    , _dvqMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DimensionValuesQuery' with the minimum fields required to make a request.

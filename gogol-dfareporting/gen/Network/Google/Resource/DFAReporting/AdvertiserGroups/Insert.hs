@@ -46,7 +46,7 @@ type AdvertiserGroupsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] AdvertiserGroup :>
@@ -56,7 +56,7 @@ type AdvertiserGroupsInsertResource =
 --
 -- /See:/ 'advertiserGroupsInsert' smart constructor.
 data AdvertiserGroupsInsert = AdvertiserGroupsInsert
-    { _agiProFileId :: !(JSONText Int64)
+    { _agiProFileId :: !(Textual Int64)
     , _agiPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 

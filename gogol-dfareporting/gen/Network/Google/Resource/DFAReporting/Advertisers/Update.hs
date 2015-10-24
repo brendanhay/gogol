@@ -46,7 +46,7 @@ type AdvertisersUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertisers" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Advertiser :> Put '[JSON] Advertiser
@@ -55,7 +55,7 @@ type AdvertisersUpdateResource =
 --
 -- /See:/ 'advertisersUpdate' smart constructor.
 data AdvertisersUpdate = AdvertisersUpdate
-    { _auProFileId :: !(JSONText Int64)
+    { _auProFileId :: !(Textual Int64)
     , _auPayload   :: !Advertiser
     } deriving (Eq,Show,Data,Typeable,Generic)
 

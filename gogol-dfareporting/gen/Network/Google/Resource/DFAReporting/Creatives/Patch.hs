@@ -47,9 +47,9 @@ type CreativesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creatives" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Creative :> Patch '[JSON] Creative
 
@@ -57,9 +57,9 @@ type CreativesPatchResource =
 --
 -- /See:/ 'creativesPatch' smart constructor.
 data CreativesPatch = CreativesPatch
-    { _cppProFileId :: !(JSONText Int64)
+    { _cppProFileId :: !(Textual Int64)
     , _cppPayload   :: !Creative
-    , _cppId        :: !(JSONText Int64)
+    , _cppId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesPatch' with the minimum fields required to make a request.

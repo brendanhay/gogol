@@ -62,7 +62,7 @@ type LiveBroadcastsListResource =
                    QueryParam "onBehalfOfContentOwnerChannel" Text :>
                      QueryParam "id" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "maxResults" (Textual Word32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] LiveBroadcastListResponse
 
@@ -78,7 +78,7 @@ data LiveBroadcastsList = LiveBroadcastsList
     , _lblOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lblId                            :: !(Maybe Text)
     , _lblPageToken                     :: !(Maybe Text)
-    , _lblMaxResults                    :: !(JSONText Word32)
+    , _lblMaxResults                    :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsList' with the minimum fields required to make a request.

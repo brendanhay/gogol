@@ -55,7 +55,7 @@ type EditsExpansionFilesUpdateResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" (JSONText Int32) :>
+                   Capture "apkVersionCode" (Textual Int32) :>
                      "expansionFiles" :>
                        Capture "expansionFileType"
                          EditsExpansionFilesUpdateExpansionFileType
@@ -71,7 +71,7 @@ type EditsExpansionFilesUpdateResource =
 -- /See:/ 'editsExpansionFilesUpdate' smart constructor.
 data EditsExpansionFilesUpdate = EditsExpansionFilesUpdate
     { _eefuPackageName       :: !Text
-    , _eefuAPKVersionCode    :: !(JSONText Int32)
+    , _eefuAPKVersionCode    :: !(Textual Int32)
     , _eefuPayload           :: !ExpansionFile
     , _eefuExpansionFileType :: !EditsExpansionFilesUpdateExpansionFileType
     , _eefuEditId            :: !Text

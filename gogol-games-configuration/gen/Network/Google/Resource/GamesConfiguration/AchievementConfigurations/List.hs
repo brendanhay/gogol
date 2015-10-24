@@ -50,7 +50,7 @@ type AchievementConfigurationsListResource =
            Capture "applicationId" Text :>
              "achievements" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Int32) :>
+                 QueryParam "maxResults" (Textual Int32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] AchievementConfigurationListResponse
 
@@ -60,7 +60,7 @@ type AchievementConfigurationsListResource =
 data AchievementConfigurationsList = AchievementConfigurationsList
     { _aclApplicationId :: !Text
     , _aclPageToken     :: !(Maybe Text)
-    , _aclMaxResults    :: !(Maybe (JSONText Int32))
+    , _aclMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsList' with the minimum fields required to make a request.

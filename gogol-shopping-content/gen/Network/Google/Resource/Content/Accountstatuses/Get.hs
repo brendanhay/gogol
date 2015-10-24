@@ -45,17 +45,17 @@ import           Network.Google.ShoppingContent.Types
 type AccountstatusesGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "accountstatuses" :>
-             Capture "accountId" (JSONText Word64) :>
+             Capture "accountId" (Textual Word64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] AccountStatus
 
 -- | Retrieves the status of a Merchant Center account.
 --
 -- /See:/ 'accountstatusesGet' smart constructor.
 data AccountstatusesGet = AccountstatusesGet
-    { _ag1MerchantId :: !(JSONText Word64)
-    , _ag1AccountId  :: !(JSONText Word64)
+    { _ag1MerchantId :: !(Textual Word64)
+    , _ag1AccountId  :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesGet' with the minimum fields required to make a request.

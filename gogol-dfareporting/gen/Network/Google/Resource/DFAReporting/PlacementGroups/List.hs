@@ -64,39 +64,37 @@ type PlacementGroupsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
-               QueryParams "placementStrategyIds" (JSONText Int64)
-                 :>
-                 QueryParams "contentCategoryIds" (JSONText Int64) :>
+               QueryParams "placementStrategyIds" (Textual Int64) :>
+                 QueryParams "contentCategoryIds" (Textual Int64) :>
                    QueryParam "maxEndDate" Text :>
-                     QueryParams "campaignIds" (JSONText Int64) :>
+                     QueryParams "campaignIds" (Textual Int64) :>
                        QueryParams "pricingTypes"
                          PlacementGroupsListPricingTypes
                          :>
                          QueryParam "searchString" Text :>
-                           QueryParams "ids" (JSONText Int64) :>
+                           QueryParams "ids" (Textual Int64) :>
                              QueryParam "placementGroupType"
                                PlacementGroupsListPlacementGroupType
                                :>
-                               QueryParams "directorySiteIds" (JSONText Int64)
-                                 :>
+                               QueryParams "directorySiteIds" (Textual Int64) :>
                                  QueryParam "sortOrder"
                                    PlacementGroupsListSortOrder
                                    :>
-                                   QueryParams "siteIds" (JSONText Int64) :>
+                                   QueryParams "siteIds" (Textual Int64) :>
                                      QueryParam "pageToken" Text :>
                                        QueryParam "sortField"
                                          PlacementGroupsListSortField
                                          :>
                                          QueryParam "maxStartDate" Text :>
                                            QueryParams "advertiserIds"
-                                             (JSONText Int64)
+                                             (Textual Int64)
                                              :>
                                              QueryParam "minStartDate" Text :>
                                                QueryParam "archived" Bool :>
                                                  QueryParam "maxResults"
-                                                   (JSONText Int32)
+                                                   (Textual Int32)
                                                    :>
                                                    QueryParam "minEndDate" Text
                                                      :>
@@ -108,25 +106,25 @@ type PlacementGroupsListResource =
 --
 -- /See:/ 'placementGroupsList' smart constructor.
 data PlacementGroupsList = PlacementGroupsList
-    { _pglPlacementStrategyIds :: !(Maybe [JSONText Int64])
-    , _pglContentCategoryIds   :: !(Maybe [JSONText Int64])
+    { _pglPlacementStrategyIds :: !(Maybe [Textual Int64])
+    , _pglContentCategoryIds   :: !(Maybe [Textual Int64])
     , _pglMaxEndDate           :: !(Maybe Text)
-    , _pglCampaignIds          :: !(Maybe [JSONText Int64])
+    , _pglCampaignIds          :: !(Maybe [Textual Int64])
     , _pglPricingTypes         :: !(Maybe [PlacementGroupsListPricingTypes])
     , _pglSearchString         :: !(Maybe Text)
-    , _pglIds                  :: !(Maybe [JSONText Int64])
-    , _pglProFileId            :: !(JSONText Int64)
+    , _pglIds                  :: !(Maybe [Textual Int64])
+    , _pglProFileId            :: !(Textual Int64)
     , _pglPlacementGroupType   :: !(Maybe PlacementGroupsListPlacementGroupType)
-    , _pglDirectorySiteIds     :: !(Maybe [JSONText Int64])
+    , _pglDirectorySiteIds     :: !(Maybe [Textual Int64])
     , _pglSortOrder            :: !(Maybe PlacementGroupsListSortOrder)
-    , _pglSiteIds              :: !(Maybe [JSONText Int64])
+    , _pglSiteIds              :: !(Maybe [Textual Int64])
     , _pglPageToken            :: !(Maybe Text)
     , _pglSortField            :: !(Maybe PlacementGroupsListSortField)
     , _pglMaxStartDate         :: !(Maybe Text)
-    , _pglAdvertiserIds        :: !(Maybe [JSONText Int64])
+    , _pglAdvertiserIds        :: !(Maybe [Textual Int64])
     , _pglMinStartDate         :: !(Maybe Text)
     , _pglArchived             :: !(Maybe Bool)
-    , _pglMaxResults           :: !(Maybe (JSONText Int32))
+    , _pglMaxResults           :: !(Maybe (Textual Int32))
     , _pglMinEndDate           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

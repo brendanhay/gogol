@@ -46,7 +46,7 @@ type QueriesRunQueryResource =
      "doubleclickbidmanager" :>
        "v1" :>
          "query" :>
-           Capture "queryId" (JSONText Int64) :>
+           Capture "queryId" (Textual Int64) :>
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] RunQueryRequest :> Post '[JSON] ()
 
@@ -54,7 +54,7 @@ type QueriesRunQueryResource =
 --
 -- /See:/ 'queriesRunQuery' smart constructor.
 data QueriesRunQuery = QueriesRunQuery
-    { _qrqQueryId :: !(JSONText Int64)
+    { _qrqQueryId :: !(Textual Int64)
     , _qrqPayload :: !RunQueryRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 

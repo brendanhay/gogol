@@ -53,7 +53,7 @@ type ActivitiesSearchResource =
              QueryParam "orderBy" ActivitiesSearchOrderBy :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
 -- | Search public activities.
@@ -64,7 +64,7 @@ data ActivitiesSearch = ActivitiesSearch
     , _asQuery      :: !Text
     , _asLanguage   :: !Text
     , _asPageToken  :: !(Maybe Text)
-    , _asMaxResults :: !(JSONText Word32)
+    , _asMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesSearch' with the minimum fields required to make a request.

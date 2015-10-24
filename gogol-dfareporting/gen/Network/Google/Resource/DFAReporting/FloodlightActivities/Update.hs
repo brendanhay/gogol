@@ -46,7 +46,7 @@ type FloodlightActivitiesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] FloodlightActivity :>
@@ -56,7 +56,7 @@ type FloodlightActivitiesUpdateResource =
 --
 -- /See:/ 'floodlightActivitiesUpdate' smart constructor.
 data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate
-    { _fauProFileId :: !(JSONText Int64)
+    { _fauProFileId :: !(Textual Int64)
     , _fauPayload   :: !FloodlightActivity
     } deriving (Eq,Show,Data,Typeable,Generic)
 

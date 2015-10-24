@@ -48,14 +48,14 @@ type TemplateGetResource =
          "tables" :>
            Capture "tableId" Text :>
              "templates" :>
-               Capture "templateId" (JSONText Int32) :>
+               Capture "templateId" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Template
 
 -- | Retrieves a specific template by its id
 --
 -- /See:/ 'templateGet' smart constructor.
 data TemplateGet = TemplateGet
-    { _temeTemplateId :: !(JSONText Int32)
+    { _temeTemplateId :: !(Textual Int32)
     , _temeTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

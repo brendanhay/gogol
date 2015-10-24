@@ -50,8 +50,8 @@ type AchievementsIncrementResource =
          "achievements" :>
            Capture "achievementId" Text :>
              "increment" :>
-               QueryParam "stepsToIncrement" (JSONText Int32) :>
-                 QueryParam "requestId" (JSONText Int64) :>
+               QueryParam "stepsToIncrement" (Textual Int32) :>
+                 QueryParam "requestId" (Textual Int64) :>
                    QueryParam "alt" AltJSON :>
                      Post '[JSON] AchievementIncrementResponse
 
@@ -60,9 +60,9 @@ type AchievementsIncrementResource =
 --
 -- /See:/ 'achievementsIncrement' smart constructor.
 data AchievementsIncrement = AchievementsIncrement
-    { _aiRequestId        :: !(Maybe (JSONText Int64))
+    { _aiRequestId        :: !(Maybe (Textual Int64))
     , _aiAchievementId    :: !Text
-    , _aiStepsToIncrement :: !(JSONText Int32)
+    , _aiStepsToIncrement :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsIncrement' with the minimum fields required to make a request.

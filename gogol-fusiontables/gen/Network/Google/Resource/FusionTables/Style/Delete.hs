@@ -48,14 +48,14 @@ type StyleDeleteResource =
          "tables" :>
            Capture "tableId" Text :>
              "styles" :>
-               Capture "styleId" (JSONText Int32) :>
+               Capture "styleId" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a style.
 --
 -- /See:/ 'styleDelete' smart constructor.
 data StyleDelete = StyleDelete
-    { _sdStyleId :: !(JSONText Int32)
+    { _sdStyleId :: !(Textual Int32)
     , _sdTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

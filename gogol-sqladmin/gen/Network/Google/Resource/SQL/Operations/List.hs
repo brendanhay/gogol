@@ -53,7 +53,7 @@ type OperationsListResource =
              "operations" :>
                QueryParam "instance" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] OperationsListResponse
 
@@ -64,7 +64,7 @@ type OperationsListResource =
 data OperationsList = OperationsList
     { _olProject    :: !Text
     , _olPageToken  :: !(Maybe Text)
-    , _olMaxResults :: !(Maybe (JSONText Word32))
+    , _olMaxResults :: !(Maybe (Textual Word32))
     , _olInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

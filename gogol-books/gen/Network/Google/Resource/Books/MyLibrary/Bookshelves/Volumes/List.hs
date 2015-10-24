@@ -61,8 +61,8 @@ type MyLibraryBookshelvesVolumesListResource =
                        QueryParam "projection"
                          MyLibraryBookshelvesVolumesListProjection
                          :>
-                         QueryParam "startIndex" (JSONText Word32) :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "startIndex" (Textual Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "showPreorders" Bool :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
@@ -75,8 +75,8 @@ data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList
     , _mlbvlShelf         :: !Text
     , _mlbvlSource        :: !(Maybe Text)
     , _mlbvlProjection    :: !(Maybe MyLibraryBookshelvesVolumesListProjection)
-    , _mlbvlStartIndex    :: !(Maybe (JSONText Word32))
-    , _mlbvlMaxResults    :: !(Maybe (JSONText Word32))
+    , _mlbvlStartIndex    :: !(Maybe (Textual Word32))
+    , _mlbvlMaxResults    :: !(Maybe (Textual Word32))
     , _mlbvlShowPreOrders :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

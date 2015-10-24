@@ -46,17 +46,17 @@ type PlatformTypesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "platformTypes" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] PlatformType
 
 -- | Gets one platform type by ID.
 --
 -- /See:/ 'platformTypesGet' smart constructor.
 data PlatformTypesGet = PlatformTypesGet
-    { _ptgProFileId :: !(JSONText Int64)
-    , _ptgId        :: !(JSONText Int64)
+    { _ptgProFileId :: !(Textual Int64)
+    , _ptgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformTypesGet' with the minimum fields required to make a request.

@@ -54,7 +54,7 @@ type GroupsListResource =
                QueryParam "customer" Text :>
                  QueryParam "pageToken" Text :>
                    QueryParam "userKey" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Groups
 
 -- | Retrieve all groups in a domain (paginated)
@@ -65,7 +65,7 @@ data GroupsList = GroupsList
     , _glCustomer   :: !(Maybe Text)
     , _glPageToken  :: !(Maybe Text)
     , _glUserKey    :: !(Maybe Text)
-    , _glMaxResults :: !(Maybe (JSONText Int32))
+    , _glMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList' with the minimum fields required to make a request.

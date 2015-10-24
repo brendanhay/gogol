@@ -46,9 +46,9 @@ type DirectorySiteContactsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "directorySiteContacts" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] DirectorySiteContact
 
@@ -56,8 +56,8 @@ type DirectorySiteContactsGetResource =
 --
 -- /See:/ 'directorySiteContactsGet' smart constructor.
 data DirectorySiteContactsGet = DirectorySiteContactsGet
-    { _dscgProFileId :: !(JSONText Int64)
-    , _dscgId        :: !(JSONText Int64)
+    { _dscgProFileId :: !(Textual Int64)
+    , _dscgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsGet' with the minimum fields required to make a request.

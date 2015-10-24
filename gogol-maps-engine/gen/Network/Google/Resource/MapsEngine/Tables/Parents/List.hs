@@ -50,7 +50,7 @@ type TablesParentsListResource =
            Capture "id" Text :>
              "parents" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ParentsListResponse
 
@@ -60,7 +60,7 @@ type TablesParentsListResource =
 data TablesParentsList = TablesParentsList
     { _tId         :: !Text
     , _tPageToken  :: !(Maybe Text)
-    , _tMaxResults :: !(Maybe (JSONText Word32))
+    , _tMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesParentsList' with the minimum fields required to make a request.

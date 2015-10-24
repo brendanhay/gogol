@@ -54,7 +54,7 @@ type TasksUpdateResource =
                Capture "taskqueue" Text :>
                  "tasks" :>
                    Capture "task" Text :>
-                     QueryParam "newLeaseSeconds" (JSONText Int32) :>
+                     QueryParam "newLeaseSeconds" (Textual Int32) :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Task :> Post '[JSON] Task
 
@@ -66,7 +66,7 @@ data TasksUpdate = TasksUpdate
     , _tuProject         :: !Text
     , _tuPayload         :: !Task
     , _tuTask            :: !Text
-    , _tuNewLeaseSeconds :: !(JSONText Int32)
+    , _tuNewLeaseSeconds :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksUpdate' with the minimum fields required to make a request.

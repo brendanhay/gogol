@@ -639,8 +639,8 @@ instance ToJSON Operation where
 data Settings = Settings
     { _sReplicationType             :: !(Maybe Text)
     , _sActivationPolicy            :: !(Maybe Text)
-    , _sSettingsVersion             :: !(Maybe (JSONText Int64))
-    , _sDataDiskSizeGb              :: !(Maybe (JSONText Int64))
+    , _sSettingsVersion             :: !(Maybe (Textual Int64))
+    , _sDataDiskSizeGb              :: !(Maybe (Textual Int64))
     , _sAuthorizedGaeApplications   :: !(Maybe [Text])
     , _sKind                        :: !Text
     , _sPricingPlan                 :: !(Maybe Text)
@@ -1053,7 +1053,7 @@ instance ToJSON SSLCertsCreateEphemeralRequest where
 --
 -- /See:/ 'binLogCoordinates' smart constructor.
 data BinLogCoordinates = BinLogCoordinates
-    { _blcBinLogPosition :: !(Maybe (JSONText Int64))
+    { _blcBinLogPosition :: !(Maybe (Textual Int64))
     , _blcKind           :: !Text
     , _blcBinLogFileName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1720,7 +1720,7 @@ instance ToJSON User where
 --
 -- /See:/ 'databaseInstance' smart constructor.
 data DatabaseInstance = DatabaseInstance
-    { _datMaxDiskSize                :: !(Maybe (JSONText Int64))
+    { _datMaxDiskSize                :: !(Maybe (Textual Int64))
     , _datOnPremisesConfiguration    :: !(Maybe OnPremisesConfiguration)
     , _datEtag                       :: !(Maybe Text)
     , _datState                      :: !(Maybe Text)
@@ -1730,7 +1730,7 @@ data DatabaseInstance = DatabaseInstance
     , _datProject                    :: !(Maybe Text)
     , _datSettings                   :: !(Maybe Settings)
     , _datKind                       :: !Text
-    , _datCurrentDiskSize            :: !(Maybe (JSONText Int64))
+    , _datCurrentDiskSize            :: !(Maybe (Textual Int64))
     , _datInstanceType               :: !(Maybe Text)
     , _datReplicaNames               :: !(Maybe [Text])
     , _datSelfLink                   :: !(Maybe Text)
@@ -2061,13 +2061,13 @@ instance ToJSON CloneContext where
 --
 -- /See:/ 'flag' smart constructor.
 data Flag = Flag
-    { _fMaxValue            :: !(Maybe (JSONText Int64))
+    { _fMaxValue            :: !(Maybe (Textual Int64))
     , _fKind                :: !Text
     , _fAppliesTo           :: !(Maybe [Text])
     , _fName                :: !(Maybe Text)
     , _fAllowedStringValues :: !(Maybe [Text])
     , _fType                :: !(Maybe Text)
-    , _fMinValue            :: !(Maybe (JSONText Int64))
+    , _fMinValue            :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Flag' with the minimum fields required to make a request.
@@ -2216,7 +2216,7 @@ data BackupRun = BackupRun
     , _brWindowStartTime :: !(Maybe DateTime')
     , _brSelfLink        :: !(Maybe Text)
     , _brEndTime         :: !(Maybe DateTime')
-    , _brId              :: !(Maybe (JSONText Int64))
+    , _brId              :: !(Maybe (Textual Int64))
     , _brEnqueuedTime    :: !(Maybe DateTime')
     , _brInstance        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2472,8 +2472,8 @@ data Tier = Tier
     { _tKind      :: !Text
     , _tTier      :: !(Maybe Text)
     , _tRegion    :: !(Maybe [Text])
-    , _tDiskQuota :: !(Maybe (JSONText Int64))
-    , _tRAM       :: !(Maybe (JSONText Int64))
+    , _tDiskQuota :: !(Maybe (Textual Int64))
+    , _tRAM       :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tier' with the minimum fields required to make a request.
@@ -2556,8 +2556,8 @@ data MySQLReplicaConfiguration = MySQLReplicaConfiguration
     , _msqlrcClientKey               :: !(Maybe Text)
     , _msqlrcUsername                :: !(Maybe Text)
     , _msqlrcSSLCipher               :: !(Maybe Text)
-    , _msqlrcMasterHeartbeatPeriod   :: !(Maybe (JSONText Int64))
-    , _msqlrcConnectRetryInterval    :: !(Maybe (JSONText Int32))
+    , _msqlrcMasterHeartbeatPeriod   :: !(Maybe (Textual Int64))
+    , _msqlrcConnectRetryInterval    :: !(Maybe (Textual Int32))
     , _msqlrcClientCertificate       :: !(Maybe Text)
     , _msqlrcCaCertificate           :: !(Maybe Text)
     , _msqlrcDumpFilePath            :: !(Maybe Text)
@@ -3035,7 +3035,7 @@ instance ToJSON ReplicaConfiguration where
 --
 -- /See:/ 'failoverContext' smart constructor.
 data FailoverContext = FailoverContext
-    { _fcSettingsVersion :: !(Maybe (JSONText Int64))
+    { _fcSettingsVersion :: !(Maybe (Textual Int64))
     , _fcKind            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3485,7 +3485,7 @@ instance ToJSON ExportContextSQLExportOptions where
 -- /See:/ 'restoreBackupContext' smart constructor.
 data RestoreBackupContext = RestoreBackupContext
     { _rbcInstanceId  :: !(Maybe Text)
-    , _rbcBackupRunId :: !(Maybe (JSONText Int64))
+    , _rbcBackupRunId :: !(Maybe (Textual Int64))
     , _rbcKind        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

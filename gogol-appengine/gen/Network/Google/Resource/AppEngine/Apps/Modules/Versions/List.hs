@@ -67,7 +67,7 @@ type AppsModulesVersionsListResource =
                            QueryParam "bearer_token" Text :>
                              QueryParam "view" Text :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "pageSize" (JSONText Int32) :>
+                                 QueryParam "pageSize" (Textual Int32) :>
                                    QueryParam "callback" Text :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] ListVersionsResponse
@@ -86,7 +86,7 @@ data AppsModulesVersionsList = AppsModulesVersionsList
     , _amvlAppsId         :: !Text
     , _amvlView           :: !(Maybe Text)
     , _amvlPageToken      :: !(Maybe Text)
-    , _amvlPageSize       :: !(Maybe (JSONText Int32))
+    , _amvlPageSize       :: !(Maybe (Textual Int32))
     , _amvlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

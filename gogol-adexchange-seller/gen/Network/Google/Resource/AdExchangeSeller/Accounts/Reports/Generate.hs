@@ -65,8 +65,8 @@ type AccountsReportsGenerateResource =
                        QueryParams "metric" Text :>
                          QueryParams "sort" Text :>
                            QueryParams "filter" Text :>
-                             QueryParam "startIndex" (JSONText Word32) :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                             QueryParam "startIndex" (Textual Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Report
        :<|>
        "adexchangeseller" :>
@@ -81,8 +81,8 @@ type AccountsReportsGenerateResource =
                          QueryParams "metric" Text :>
                            QueryParams "sort" Text :>
                              QueryParams "filter" Text :>
-                               QueryParam "startIndex" (JSONText Word32) :>
-                                 QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "startIndex" (Textual Word32) :>
+                                 QueryParam "maxResults" (Textual Word32) :>
                                    QueryParam "alt" AltMedia :>
                                      Get '[OctetStream] Stream
 
@@ -100,8 +100,8 @@ data AccountsReportsGenerate = AccountsReportsGenerate
     , _argMetric     :: !(Maybe [Text])
     , _argSort       :: !(Maybe [Text])
     , _argFilter     :: !(Maybe [Text])
-    , _argStartIndex :: !(Maybe (JSONText Word32))
-    , _argMaxResults :: !(Maybe (JSONText Word32))
+    , _argStartIndex :: !(Maybe (Textual Word32))
+    , _argMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsGenerate' with the minimum fields required to make a request.

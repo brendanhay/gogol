@@ -47,9 +47,9 @@ type AdvertisersPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertisers" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Advertiser :>
                      Patch '[JSON] Advertiser
@@ -58,9 +58,9 @@ type AdvertisersPatchResource =
 --
 -- /See:/ 'advertisersPatch' smart constructor.
 data AdvertisersPatch = AdvertisersPatch
-    { _apProFileId :: !(JSONText Int64)
+    { _apProFileId :: !(Textual Int64)
     , _apPayload   :: !Advertiser
-    , _apId        :: !(JSONText Int64)
+    , _apId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersPatch' with the minimum fields required to make a request.

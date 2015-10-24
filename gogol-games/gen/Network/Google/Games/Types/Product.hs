@@ -150,13 +150,13 @@ instance ToJSON PlayerName where
 --
 -- /See:/ 'snapshot' smart constructor.
 data Snapshot = Snapshot
-    { _sLastModifiedMillis :: !(Maybe (JSONText Int64))
+    { _sLastModifiedMillis :: !(Maybe (Textual Int64))
     , _sKind               :: !Text
-    , _sProgressValue      :: !(Maybe (JSONText Int64))
+    , _sProgressValue      :: !(Maybe (Textual Int64))
     , _sUniqueName         :: !(Maybe Text)
     , _sCoverImage         :: !(Maybe SnapshotImage)
     , _sId                 :: !(Maybe Text)
-    , _sDurationMillis     :: !(Maybe (JSONText Int64))
+    , _sDurationMillis     :: !(Maybe (Textual Int64))
     , _sTitle              :: !(Maybe Text)
     , _sType               :: !(Maybe Text)
     , _sDescription        :: !(Maybe Text)
@@ -304,13 +304,13 @@ instance ToJSON Snapshot where
 -- /See:/ 'room' smart constructor.
 data Room = Room
     { _rStatus               :: !(Maybe Text)
-    , _rVariant              :: !(Maybe (JSONText Int32))
+    , _rVariant              :: !(Maybe (Textual Int32))
     , _rKind                 :: !Text
     , _rAutoMatchingStatus   :: !(Maybe RoomAutoMatchStatus)
     , _rCreationDetails      :: !(Maybe RoomModification)
     , _rInviterId            :: !(Maybe Text)
     , _rLastUpdateDetails    :: !(Maybe RoomModification)
-    , _rRoomStatusVersion    :: !(Maybe (JSONText Int32))
+    , _rRoomStatusVersion    :: !(Maybe (Textual Int32))
     , _rParticipants         :: !(Maybe [RoomParticipant])
     , _rApplicationId        :: !(Maybe Text)
     , _rAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
@@ -559,9 +559,9 @@ instance ToJSON QuestListResponse where
 -- /See:/ 'turnBasedMatch' smart constructor.
 data TurnBasedMatch = TurnBasedMatch
     { _tbmStatus               :: !(Maybe Text)
-    , _tbmVariant              :: !(Maybe (JSONText Int32))
+    , _tbmVariant              :: !(Maybe (Textual Int32))
     , _tbmResults              :: !(Maybe [ParticipantResult])
-    , _tbmMatchNumber          :: !(Maybe (JSONText Int32))
+    , _tbmMatchNumber          :: !(Maybe (Textual Int32))
     , _tbmKind                 :: !Text
     , _tbmData                 :: !(Maybe TurnBasedMatchData)
     , _tbmWithParticipantId    :: !(Maybe Text)
@@ -577,7 +577,7 @@ data TurnBasedMatch = TurnBasedMatch
     , _tbmMatchId              :: !(Maybe Text)
     , _tbmDescription          :: !(Maybe Text)
     , _tbmRematchId            :: !(Maybe Text)
-    , _tbmMatchVersion         :: !(Maybe (JSONText Int32))
+    , _tbmMatchVersion         :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatch' with the minimum fields required to make a request.
@@ -847,7 +847,7 @@ instance ToJSON TurnBasedMatch where
 -- /See:/ 'turnBasedMatchData' smart constructor.
 data TurnBasedMatchData = TurnBasedMatchData
     { _tbmdKind          :: !Text
-    , _tbmdData          :: !(Maybe (JSONText Word8))
+    , _tbmdData          :: !(Maybe (Textual Word8))
     , _tbmdDataAvailable :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -910,7 +910,7 @@ instance ToJSON TurnBasedMatchData where
 -- /See:/ 'playerEvent' smart constructor.
 data PlayerEvent = PlayerEvent
     { _peKind               :: !Text
-    , _peNumEvents          :: !(Maybe (JSONText Int64))
+    , _peNumEvents          :: !(Maybe (Textual Int64))
     , _peFormattedNumEvents :: !(Maybe Text)
     , _peDefinitionId       :: !(Maybe Text)
     , _pePlayerId           :: !(Maybe Text)
@@ -998,12 +998,12 @@ data PlayerLeaderboardScore = PlayerLeaderboardScore
     { _plsScoreTag       :: !(Maybe Text)
     , _plsScoreString    :: !(Maybe Text)
     , _plsKind           :: !Text
-    , _plsScoreValue     :: !(Maybe (JSONText Int64))
+    , _plsScoreValue     :: !(Maybe (Textual Int64))
     , _plsTimeSpan       :: !(Maybe Text)
     , _plsPublicRank     :: !(Maybe LeaderboardScoreRank)
     , _plsSocialRank     :: !(Maybe LeaderboardScoreRank)
     , _plsLeaderboardId  :: !(Maybe Text)
-    , _plsWriteTimestamp :: !(Maybe (JSONText Int64))
+    , _plsWriteTimestamp :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerLeaderboardScore' with the minimum fields required to make a request.
@@ -1133,7 +1133,7 @@ instance ToJSON PlayerLeaderboardScore where
 -- /See:/ 'application' smart constructor.
 data Application = Application
     { _aThemeColor           :: !(Maybe Text)
-    , _aLeaderboardCount     :: !(Maybe (JSONText Int32))
+    , _aLeaderboardCount     :: !(Maybe (Textual Int32))
     , _aKind                 :: !Text
     , _aCategory             :: !(Maybe ApplicationCategory)
     , _aName                 :: !(Maybe Text)
@@ -1141,10 +1141,10 @@ data Application = Application
     , _aInstances            :: !(Maybe [Instance])
     , _aAuthor               :: !(Maybe Text)
     , _aId                   :: !(Maybe Text)
-    , _aAchievementCount     :: !(Maybe (JSONText Int32))
+    , _aAchievementCount     :: !(Maybe (Textual Int32))
     , _aAssets               :: !(Maybe [ImageAsset])
     , _aDescription          :: !(Maybe Text)
-    , _aLastUpdatedTimestamp :: !(Maybe (JSONText Int64))
+    , _aLastUpdatedTimestamp :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
@@ -1423,13 +1423,13 @@ instance ToJSON PlayerScoreListResponse where
 --
 -- /See:/ 'networkDiagnostics' smart constructor.
 data NetworkDiagnostics = NetworkDiagnostics
-    { _ndAndroidNetworkType        :: !(Maybe (JSONText Int32))
+    { _ndAndroidNetworkType        :: !(Maybe (Textual Int32))
     , _ndKind                      :: !Text
     , _ndNetworkOperatorCode       :: !(Maybe Text)
     , _ndNetworkOperatorName       :: !(Maybe Text)
-    , _ndRegistrationLatencyMillis :: !(Maybe (JSONText Int32))
-    , _ndIosNetworkType            :: !(Maybe (JSONText Int32))
-    , _ndAndroidNetworkSubtype     :: !(Maybe (JSONText Int32))
+    , _ndRegistrationLatencyMillis :: !(Maybe (Textual Int32))
+    , _ndIosNetworkType            :: !(Maybe (Textual Int32))
+    , _ndAndroidNetworkSubtype     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworkDiagnostics' with the minimum fields required to make a request.
@@ -1551,7 +1551,7 @@ data TurnBasedMatchTurn = TurnBasedMatchTurn
     , _tbmtKind                 :: !Text
     , _tbmtData                 :: !(Maybe TurnBasedMatchDataRequest)
     , _tbmtPendingParticipantId :: !(Maybe Text)
-    , _tbmtMatchVersion         :: !(Maybe (JSONText Int32))
+    , _tbmtMatchVersion         :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchTurn' with the minimum fields required to make a request.
@@ -1795,14 +1795,14 @@ instance ToJSON TurnBasedMatchList where
 --
 -- /See:/ 'peerChannelDiagnostics' smart constructor.
 data PeerChannelDiagnostics = PeerChannelDiagnostics
-    { _pcdNumMessagesLost        :: !(Maybe (JSONText Int32))
+    { _pcdNumMessagesLost        :: !(Maybe (Textual Int32))
     , _pcdBytesSent              :: !(Maybe AggregateStats)
     , _pcdKind                   :: !Text
     , _pcdRoundtripLatencyMillis :: !(Maybe AggregateStats)
     , _pcdBytesReceived          :: !(Maybe AggregateStats)
-    , _pcdNumMessagesReceived    :: !(Maybe (JSONText Int32))
-    , _pcdNumSendFailures        :: !(Maybe (JSONText Int32))
-    , _pcdNumMessagesSent        :: !(Maybe (JSONText Int32))
+    , _pcdNumMessagesReceived    :: !(Maybe (Textual Int32))
+    , _pcdNumSendFailures        :: !(Maybe (Textual Int32))
+    , _pcdNumMessagesSent        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeerChannelDiagnostics' with the minimum fields required to make a request.
@@ -2058,7 +2058,7 @@ data AchievementUpdateResponse = AchievementUpdateResponse
     , _aurKind           :: !Text
     , _aurCurrentState   :: !(Maybe Text)
     , _aurNewlyUnlocked  :: !(Maybe Bool)
-    , _aurCurrentSteps   :: !(Maybe (JSONText Int32))
+    , _aurCurrentSteps   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateResponse' with the minimum fields required to make a request.
@@ -2155,14 +2155,14 @@ instance ToJSON AchievementUpdateResponse where
 -- /See:/ 'leaderboardEntry' smart constructor.
 data LeaderboardEntry = LeaderboardEntry
     { _leScoreTag             :: !(Maybe Text)
-    , _leWriteTimestampMillis :: !(Maybe (JSONText Int64))
+    , _leWriteTimestampMillis :: !(Maybe (Textual Int64))
     , _leKind                 :: !Text
-    , _leScoreValue           :: !(Maybe (JSONText Int64))
+    , _leScoreValue           :: !(Maybe (Textual Int64))
     , _leFormattedScore       :: !(Maybe Text)
     , _leTimeSpan             :: !(Maybe Text)
     , _leFormattedScoreRank   :: !(Maybe Text)
     , _lePlayer               :: !(Maybe Player)
-    , _leScoreRank            :: !(Maybe (JSONText Int64))
+    , _leScoreRank            :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardEntry' with the minimum fields required to make a request.
@@ -2351,10 +2351,10 @@ instance ToJSON SnapshotListResponse where
 --
 -- /See:/ 'playerLevel' smart constructor.
 data PlayerLevel = PlayerLevel
-    { _plMaxExperiencePoints :: !(Maybe (JSONText Int64))
+    { _plMaxExperiencePoints :: !(Maybe (Textual Int64))
     , _plKind                :: !Text
-    , _plMinExperiencePoints :: !(Maybe (JSONText Int64))
-    , _plLevel               :: !(Maybe (JSONText Int32))
+    , _plMinExperiencePoints :: !(Maybe (Textual Int64))
+    , _plLevel               :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerLevel' with the minimum fields required to make a request.
@@ -2710,7 +2710,7 @@ instance ToJSON EventDefinitionListResponse where
 data Category = Category
     { _cKind             :: !Text
     , _cCategory         :: !(Maybe Text)
-    , _cExperiencePoints :: !(Maybe (JSONText Int64))
+    , _cExperiencePoints :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Category' with the minimum fields required to make a request.
@@ -3182,7 +3182,7 @@ instance ToJSON AnonymousPlayer where
 -- /See:/ 'questContribution' smart constructor.
 data QuestContribution = QuestContribution
     { _qKind           :: !Text
-    , _qValue          :: !(Maybe (JSONText Int64))
+    , _qValue          :: !(Maybe (Textual Int64))
     , _qFormattedValue :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3355,7 +3355,7 @@ instance ToJSON LeaderboardListResponse where
 -- /See:/ 'playerScore' smart constructor.
 data PlayerScore = PlayerScore
     { _psScoreTag       :: !(Maybe Text)
-    , _psScore          :: !(Maybe (JSONText Int64))
+    , _psScore          :: !(Maybe (Textual Int64))
     , _psKind           :: !Text
     , _psFormattedScore :: !(Maybe Text)
     , _psTimeSpan       :: !(Maybe Text)
@@ -3439,9 +3439,9 @@ instance ToJSON PlayerScore where
 -- /See:/ 'turnBasedAutoMatchingCriteria' smart constructor.
 data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria
     { _tbamcKind                   :: !Text
-    , _tbamcExclusiveBitmask       :: !(Maybe (JSONText Int64))
-    , _tbamcMaxAutoMatchingPlayers :: !(Maybe (JSONText Int32))
-    , _tbamcMinAutoMatchingPlayers :: !(Maybe (JSONText Int32))
+    , _tbamcExclusiveBitmask       :: !(Maybe (Textual Int64))
+    , _tbamcMaxAutoMatchingPlayers :: !(Maybe (Textual Int32))
+    , _tbamcMinAutoMatchingPlayers :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedAutoMatchingCriteria' with the minimum fields required to make a request.
@@ -3522,11 +3522,11 @@ instance ToJSON TurnBasedAutoMatchingCriteria where
 --
 -- /See:/ 'snapshotImage' smart constructor.
 data SnapshotImage = SnapshotImage
-    { _siHeight   :: !(Maybe (JSONText Int32))
+    { _siHeight   :: !(Maybe (Textual Int32))
     , _siKind     :: !Text
     , _siURL      :: !(Maybe Text)
     , _siMimeType :: !(Maybe Text)
-    , _siWidth    :: !(Maybe (JSONText Int32))
+    , _siWidth    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotImage' with the minimum fields required to make a request.
@@ -3608,7 +3608,7 @@ data RoomStatus = RoomStatus
     { _rsStatus             :: !(Maybe Text)
     , _rsKind               :: !Text
     , _rsAutoMatchingStatus :: !(Maybe RoomAutoMatchStatus)
-    , _rsStatusVersion      :: !(Maybe (JSONText Int32))
+    , _rsStatusVersion      :: !(Maybe (Textual Int32))
     , _rsParticipants       :: !(Maybe [RoomParticipant])
     , _rsRoomId             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4045,7 +4045,7 @@ data ParticipantResult = ParticipantResult
     { _prParticipantId :: !(Maybe Text)
     , _prKind          :: !Text
     , _prResult        :: !(Maybe Text)
-    , _prPlacing       :: !(Maybe (JSONText Int32))
+    , _prPlacing       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParticipantResult' with the minimum fields required to make a request.
@@ -4216,7 +4216,7 @@ instance ToJSON Leaderboard where
 -- /See:/ 'metagameConfig' smart constructor.
 data MetagameConfig = MetagameConfig
     { _mcKind           :: !Text
-    , _mcCurrentVersion :: !(Maybe (JSONText Int32))
+    , _mcCurrentVersion :: !(Maybe (Textual Int32))
     , _mcPlayerLevels   :: !(Maybe [PlayerLevel])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4347,8 +4347,8 @@ data RoomP2PStatus = RoomP2PStatus
     , _rppsKind                             :: !Text
     , _rppsError                            :: !(Maybe Text)
     , _rppsErrorReason                      :: !(Maybe Text)
-    , _rppsConnectionSetupLatencyMillis     :: !(Maybe (JSONText Int32))
-    , _rppsUnreliableRoundtripLatencyMillis :: !(Maybe (JSONText Int32))
+    , _rppsConnectionSetupLatencyMillis     :: !(Maybe (Textual Int32))
+    , _rppsUnreliableRoundtripLatencyMillis :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomP2PStatus' with the minimum fields required to make a request.
@@ -4465,7 +4465,7 @@ instance ToJSON RoomP2PStatus where
 data TurnBasedMatchModification = TurnBasedMatchModification
     { _tbmmParticipantId           :: !(Maybe Text)
     , _tbmmKind                    :: !Text
-    , _tbmmModifiedTimestampMillis :: !(Maybe (JSONText Int64))
+    , _tbmmModifiedTimestampMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchModification' with the minimum fields required to make a request.
@@ -4652,7 +4652,7 @@ instance ToJSON EventDefinition where
 data RoomModification = RoomModification
     { _rmParticipantId           :: !(Maybe Text)
     , _rmKind                    :: !Text
-    , _rmModifiedTimestampMillis :: !(Maybe (JSONText Int64))
+    , _rmModifiedTimestampMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomModification' with the minimum fields required to make a request.
@@ -4714,7 +4714,7 @@ instance ToJSON RoomModification where
 --
 -- /See:/ 'eventUpdateRequest' smart constructor.
 data EventUpdateRequest = EventUpdateRequest
-    { _eUpdateCount  :: !(Maybe (JSONText Int64))
+    { _eUpdateCount  :: !(Maybe (Textual Int64))
     , _eKind         :: !Text
     , _eDefinitionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4828,10 +4828,10 @@ data PlayerAchievement = PlayerAchievement
     { _paKind                        :: !Text
     , _paAchievementState            :: !(Maybe Text)
     , _paFormattedCurrentStepsString :: !(Maybe Text)
-    , _paExperiencePoints            :: !(Maybe (JSONText Int64))
+    , _paExperiencePoints            :: !(Maybe (Textual Int64))
     , _paId                          :: !(Maybe Text)
-    , _paCurrentSteps                :: !(Maybe (JSONText Int32))
-    , _paLastUpdatedTimestamp        :: !(Maybe (JSONText Int64))
+    , _paCurrentSteps                :: !(Maybe (Textual Int32))
+    , _paLastUpdatedTimestamp        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerAchievement' with the minimum fields required to make a request.
@@ -4992,10 +4992,10 @@ instance ToJSON RoomP2PStatuses where
 --
 -- /See:/ 'imageAsset' smart constructor.
 data ImageAsset = ImageAsset
-    { _iaHeight :: !(Maybe (JSONText Int32))
+    { _iaHeight :: !(Maybe (Textual Int32))
     , _iaKind   :: !Text
     , _iaURL    :: !(Maybe Text)
-    , _iaWidth  :: !(Maybe (JSONText Int32))
+    , _iaWidth  :: !(Maybe (Textual Int32))
     , _iaName   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5127,7 +5127,7 @@ instance ToJSON AchievementUpdateMultipleRequest
 -- /See:/ 'roomAutoMatchStatus' smart constructor.
 data RoomAutoMatchStatus = RoomAutoMatchStatus
     { _ramsKind                :: !Text
-    , _ramsWaitEstimateSeconds :: !(Maybe (JSONText Int32))
+    , _ramsWaitEstimateSeconds :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomAutoMatchStatus' with the minimum fields required to make a request.
@@ -5269,11 +5269,11 @@ instance ToJSON AchievementUpdateRequest where
 --
 -- /See:/ 'leaderboardScoreRank' smart constructor.
 data LeaderboardScoreRank = LeaderboardScoreRank
-    { _lsrNumScores          :: !(Maybe (JSONText Int64))
+    { _lsrNumScores          :: !(Maybe (Textual Int64))
     , _lsrKind               :: !Text
     , _lsrFormattedRank      :: !(Maybe Text)
     , _lsrFormattedNumScores :: !(Maybe Text)
-    , _lsrRank               :: !(Maybe (JSONText Int64))
+    , _lsrRank               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardScoreRank' with the minimum fields required to make a request.
@@ -5354,8 +5354,8 @@ instance ToJSON LeaderboardScoreRank where
 --
 -- /See:/ 'roomCreateRequest' smart constructor.
 data RoomCreateRequest = RoomCreateRequest
-    { _rooRequestId            :: !(Maybe (JSONText Int64))
-    , _rooVariant              :: !(Maybe (JSONText Int32))
+    { _rooRequestId            :: !(Maybe (Textual Int64))
+    , _rooVariant              :: !(Maybe (Textual Int32))
     , _rooNetworkDiagnostics   :: !(Maybe NetworkDiagnostics)
     , _rooKind                 :: !Text
     , _rooInvitedPlayerIds     :: !(Maybe [Text])
@@ -5545,7 +5545,7 @@ instance ToJSON PlayerListResponse where
 -- /See:/ 'leaderboardScores' smart constructor.
 data LeaderboardScores = LeaderboardScores
     { _lsNextPageToken :: !(Maybe Text)
-    , _lsNumScores     :: !(Maybe (JSONText Int64))
+    , _lsNumScores     :: !(Maybe (Textual Int64))
     , _lsKind          :: !Text
     , _lsPlayerScore   :: !(Maybe LeaderboardEntry)
     , _lsItems         :: !(Maybe [LeaderboardEntry])
@@ -5648,12 +5648,12 @@ data AchievementDefinition = AchievementDefinition
     , _adFormattedTotalSteps      :: !(Maybe Text)
     , _adRevealedIconURL          :: !(Maybe Text)
     , _adKind                     :: !Text
-    , _adExperiencePoints         :: !(Maybe (JSONText Int64))
+    , _adExperiencePoints         :: !(Maybe (Textual Int64))
     , _adInitialState             :: !(Maybe Text)
     , _adName                     :: !(Maybe Text)
     , _adId                       :: !(Maybe Text)
     , _adIsUnlockedIconURLDefault :: !(Maybe Bool)
-    , _adTotalSteps               :: !(Maybe (JSONText Int32))
+    , _adTotalSteps               :: !(Maybe (Textual Int32))
     , _adDescription              :: !(Maybe Text)
     , _adIsRevealedIconURLDefault :: !(Maybe Bool)
     , _adUnlockedIconURL          :: !(Maybe Text)
@@ -5830,8 +5830,8 @@ instance ToJSON AchievementDefinition where
 --
 -- /See:/ 'turnBasedMatchCreateRequest' smart constructor.
 data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest
-    { _tbmcrRequestId            :: !(Maybe (JSONText Int64))
-    , _tbmcrVariant              :: !(Maybe (JSONText Int32))
+    { _tbmcrRequestId            :: !(Maybe (Textual Int64))
+    , _tbmcrVariant              :: !(Maybe (Textual Int32))
     , _tbmcrKind                 :: !Text
     , _tbmcrInvitedPlayerIds     :: !(Maybe [Text])
     , _tbmcrAutoMatchingCriteria :: !(Maybe TurnBasedAutoMatchingCriteria)
@@ -5994,7 +5994,7 @@ data TurnBasedMatchResults = TurnBasedMatchResults
     { _tbmrResults      :: !(Maybe [ParticipantResult])
     , _tbmrKind         :: !Text
     , _tbmrData         :: !(Maybe TurnBasedMatchDataRequest)
-    , _tbmrMatchVersion :: !(Maybe (JSONText Int32))
+    , _tbmrMatchVersion :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchResults' with the minimum fields required to make a request.
@@ -6064,7 +6064,7 @@ instance ToJSON TurnBasedMatchResults where
 --
 -- /See:/ 'pushTokenIdIos' smart constructor.
 data PushTokenIdIos = PushTokenIdIos
-    { _ptiiAPNSDeviceToken :: !(Maybe (JSONText Word8))
+    { _ptiiAPNSDeviceToken :: !(Maybe (Textual Word8))
     , _ptiiAPNSEnvironment :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6196,7 +6196,7 @@ instance ToJSON RoomLeaveRequest where
 data Played = Played
     { _pKind        :: !Text
     , _pAutoMatched :: !(Maybe Bool)
-    , _pTimeMillis  :: !(Maybe (JSONText Int64))
+    , _pTimeMillis  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Played' with the minimum fields required to make a request.
@@ -6258,7 +6258,7 @@ instance ToJSON Played where
 data AchievementIncrementResponse = AchievementIncrementResponse
     { _airKind          :: !Text
     , _airNewlyUnlocked :: !(Maybe Bool)
-    , _airCurrentSteps  :: !(Maybe (JSONText Int32))
+    , _airCurrentSteps  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementIncrementResponse' with the minimum fields required to make a request.
@@ -6374,7 +6374,7 @@ instance ToJSON AchievementRevealResponse where
 data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse
     { _assalrKind          :: !Text
     , _assalrNewlyUnlocked :: !(Maybe Bool)
-    , _assalrCurrentSteps  :: !(Maybe (JSONText Int32))
+    , _assalrCurrentSteps  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementSetStepsAtLeastResponse' with the minimum fields required to make a request.
@@ -6502,9 +6502,9 @@ instance ToJSON PlayerAchievementListResponse where
 --
 -- /See:/ 'eventRecordRequest' smart constructor.
 data EventRecordRequest = EventRecordRequest
-    { _errRequestId         :: !(Maybe (JSONText Int64))
+    { _errRequestId         :: !(Maybe (Textual Int64))
     , _errKind              :: !Text
-    , _errCurrentTimeMillis :: !(Maybe (JSONText Int64))
+    , _errCurrentTimeMillis :: !(Maybe (Textual Int64))
     , _errTimePeriods       :: !(Maybe [EventPeriodUpdate])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6580,9 +6580,9 @@ instance ToJSON EventRecordRequest where
 -- /See:/ 'roomAutoMatchingCriteria' smart constructor.
 data RoomAutoMatchingCriteria = RoomAutoMatchingCriteria
     { _ramcKind                   :: !Text
-    , _ramcExclusiveBitmask       :: !(Maybe (JSONText Int64))
-    , _ramcMaxAutoMatchingPlayers :: !(Maybe (JSONText Int32))
-    , _ramcMinAutoMatchingPlayers :: !(Maybe (JSONText Int32))
+    , _ramcExclusiveBitmask       :: !(Maybe (Textual Int64))
+    , _ramcMaxAutoMatchingPlayers :: !(Maybe (Textual Int32))
+    , _ramcMinAutoMatchingPlayers :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomAutoMatchingCriteria' with the minimum fields required to make a request.
@@ -6664,7 +6664,7 @@ data QuestMilestone = QuestMilestone
     { _qmState                :: !(Maybe Text)
     , _qmKind                 :: !Text
     , _qmId                   :: !(Maybe Text)
-    , _qmCompletionRewardData :: !(Maybe (JSONText Word8))
+    , _qmCompletionRewardData :: !(Maybe (Textual Word8))
     , _qmCriteria             :: !(Maybe [QuestCriterion])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6751,7 +6751,7 @@ instance ToJSON QuestMilestone where
 --
 -- /See:/ 'peerSessionDiagnostics' smart constructor.
 data PeerSessionDiagnostics = PeerSessionDiagnostics
-    { _psdConnectedTimestampMillis :: !(Maybe (JSONText Int64))
+    { _psdConnectedTimestampMillis :: !(Maybe (Textual Int64))
     , _psdParticipantId            :: !(Maybe Text)
     , _psdKind                     :: !Text
     , _psdUnreliableChannel        :: !(Maybe PeerChannelDiagnostics)
@@ -7024,7 +7024,7 @@ instance ToJSON TurnBasedMatchSync where
 data ScoreSubmission = ScoreSubmission
     { _scoSignature     :: !(Maybe Text)
     , _scoScoreTag      :: !(Maybe Text)
-    , _scoScore         :: !(Maybe (JSONText Int64))
+    , _scoScore         :: !(Maybe (Textual Int64))
     , _scoKind          :: !Text
     , _scoLeaderboardId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7107,13 +7107,13 @@ instance ToJSON ScoreSubmission where
 -- /See:/ 'roomLeaveDiagnostics' smart constructor.
 data RoomLeaveDiagnostics = RoomLeaveDiagnostics
     { _rldPeerSession           :: !(Maybe [PeerSessionDiagnostics])
-    , _rldAndroidNetworkType    :: !(Maybe (JSONText Int32))
+    , _rldAndroidNetworkType    :: !(Maybe (Textual Int32))
     , _rldKind                  :: !Text
     , _rldNetworkOperatorCode   :: !(Maybe Text)
     , _rldNetworkOperatorName   :: !(Maybe Text)
     , _rldSocketsUsed           :: !(Maybe Bool)
-    , _rldIosNetworkType        :: !(Maybe (JSONText Int32))
-    , _rldAndroidNetworkSubtype :: !(Maybe (JSONText Int32))
+    , _rldIosNetworkType        :: !(Maybe (Textual Int32))
+    , _rldAndroidNetworkSubtype :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomLeaveDiagnostics' with the minimum fields required to make a request.
@@ -7243,11 +7243,11 @@ instance ToJSON RoomLeaveDiagnostics where
 --
 -- /See:/ 'aggregateStats' smart constructor.
 data AggregateStats = AggregateStats
-    { _asMax   :: !(Maybe (JSONText Int64))
+    { _asMax   :: !(Maybe (Textual Int64))
     , _asKind  :: !Text
-    , _asCount :: !(Maybe (JSONText Int64))
-    , _asMin   :: !(Maybe (JSONText Int64))
-    , _asSum   :: !(Maybe (JSONText Int64))
+    , _asCount :: !(Maybe (Textual Int64))
+    , _asMin   :: !(Maybe (Textual Int64))
+    , _asSum   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateStats' with the minimum fields required to make a request.
@@ -7448,10 +7448,10 @@ instance ToJSON TurnBasedMatchRematch where
 -- /See:/ 'playerExperienceInfo' smart constructor.
 data PlayerExperienceInfo = PlayerExperienceInfo
     { _peiKind                       :: !Text
-    , _peiCurrentExperiencePoints    :: !(Maybe (JSONText Int64))
+    , _peiCurrentExperiencePoints    :: !(Maybe (Textual Int64))
     , _peiCurrentLevel               :: !(Maybe PlayerLevel)
     , _peiNextLevel                  :: !(Maybe PlayerLevel)
-    , _peiLastLevelUpTimestampMillis :: !(Maybe (JSONText Int64))
+    , _peiLastLevelUpTimestampMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerExperienceInfo' with the minimum fields required to make a request.
@@ -7539,7 +7539,7 @@ instance ToJSON PlayerExperienceInfo where
 -- /See:/ 'gamesAchievementSetStepsAtLeast' smart constructor.
 data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast
     { _gassalKind  :: !Text
-    , _gassalSteps :: !(Maybe (JSONText Int32))
+    , _gassalSteps :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesAchievementSetStepsAtLeast' with the minimum fields required to make a request.
@@ -7709,9 +7709,9 @@ instance ToJSON Player where
 --
 -- /See:/ 'gamesAchievementIncrement' smart constructor.
 data GamesAchievementIncrement = GamesAchievementIncrement
-    { _gaiRequestId :: !(Maybe (JSONText Int64))
+    { _gaiRequestId :: !(Maybe (Textual Int64))
     , _gaiKind      :: !Text
-    , _gaiSteps     :: !(Maybe (JSONText Int32))
+    , _gaiSteps     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesAchievementIncrement' with the minimum fields required to make a request.
@@ -7770,22 +7770,22 @@ instance ToJSON GamesAchievementIncrement where
 --
 -- /See:/ 'quest' smart constructor.
 data Quest = Quest
-    { _queLastUpdatedTimestampMillis :: !(Maybe (JSONText Int64))
+    { _queLastUpdatedTimestampMillis :: !(Maybe (Textual Int64))
     , _queBannerURL                  :: !(Maybe Text)
     , _queState                      :: !(Maybe Text)
     , _queMilestones                 :: !(Maybe [QuestMilestone])
     , _queKind                       :: !Text
     , _queApplicationId              :: !(Maybe Text)
-    , _queEndTimestampMillis         :: !(Maybe (JSONText Int64))
+    , _queEndTimestampMillis         :: !(Maybe (Textual Int64))
     , _queName                       :: !(Maybe Text)
     , _queId                         :: !(Maybe Text)
     , _queIconURL                    :: !(Maybe Text)
-    , _queStartTimestampMillis       :: !(Maybe (JSONText Int64))
-    , _queNotifyTimestampMillis      :: !(Maybe (JSONText Int64))
+    , _queStartTimestampMillis       :: !(Maybe (Textual Int64))
+    , _queNotifyTimestampMillis      :: !(Maybe (Textual Int64))
     , _queDescription                :: !(Maybe Text)
     , _queIsDefaultBannerURL         :: !(Maybe Bool)
     , _queIsDefaultIconURL           :: !(Maybe Bool)
-    , _queAcceptedTimestampMillis    :: !(Maybe (JSONText Int64))
+    , _queAcceptedTimestampMillis    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quest' with the minimum fields required to make a request.
@@ -8115,7 +8115,7 @@ instance ToJSON PlayerEventListResponse where
 -- /See:/ 'turnBasedMatchDataRequest' smart constructor.
 data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest
     { _tbmdrKind :: !Text
-    , _tbmdrData :: !(Maybe (JSONText Word8))
+    , _tbmdrData :: !(Maybe (Textual Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
@@ -8166,8 +8166,8 @@ instance ToJSON TurnBasedMatchDataRequest where
 -- /See:/ 'eventPeriodRange' smart constructor.
 data EventPeriodRange = EventPeriodRange
     { _eprKind              :: !Text
-    , _eprPeriodStartMillis :: !(Maybe (JSONText Int64))
-    , _eprPeriodEndMillis   :: !(Maybe (JSONText Int64))
+    , _eprPeriodStartMillis :: !(Maybe (Textual Int64))
+    , _eprPeriodEndMillis   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventPeriodRange' with the minimum fields required to make a request.

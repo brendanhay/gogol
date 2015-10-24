@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type ProductsDeleteResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "products" :>
              Capture "productId" Text :>
                QueryParam "dryRun" Bool :>
@@ -56,7 +56,7 @@ type ProductsDeleteResource =
 --
 -- /See:/ 'productsDelete' smart constructor.
 data ProductsDelete = ProductsDelete
-    { _pdMerchantId :: !(JSONText Word64)
+    { _pdMerchantId :: !(Textual Word64)
     , _pdProductId  :: !Text
     , _pdDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)

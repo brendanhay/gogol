@@ -46,7 +46,7 @@ type SitesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "sites" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Site :> Put '[JSON] Site
@@ -55,7 +55,7 @@ type SitesUpdateResource =
 --
 -- /See:/ 'sitesUpdate' smart constructor.
 data SitesUpdate = SitesUpdate
-    { _suProFileId :: !(JSONText Int64)
+    { _suProFileId :: !(Textual Int64)
     , _suPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
 

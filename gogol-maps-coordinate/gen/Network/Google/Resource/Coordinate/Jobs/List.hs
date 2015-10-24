@@ -51,11 +51,11 @@ type JobsListResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               QueryParam "minModifiedTimestampMs" (JSONText Word64)
+               QueryParam "minModifiedTimestampMs" (Textual Word64)
                  :>
                  QueryParam "omitJobChanges" Bool :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] JobListResponse
 
@@ -64,10 +64,10 @@ type JobsListResource =
 -- /See:/ 'jobsList' smart constructor.
 data JobsList = JobsList
     { _jlTeamId                 :: !Text
-    , _jlMinModifiedTimestampMs :: !(Maybe (JSONText Word64))
+    , _jlMinModifiedTimestampMs :: !(Maybe (Textual Word64))
     , _jlOmitJobChanges         :: !(Maybe Bool)
     , _jlPageToken              :: !(Maybe Text)
-    , _jlMaxResults             :: !(Maybe (JSONText Word32))
+    , _jlMaxResults             :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList' with the minimum fields required to make a request.

@@ -59,12 +59,12 @@ type PublishersListResource =
                QueryParam "relationshipStatus"
                  PublishersListRelationshipStatus
                  :>
-                 QueryParam "minSevenDayEpc" (JSONText Double) :>
-                   QueryParam "minNinetyDayEpc" (JSONText Double) :>
-                     QueryParam "minPayoutRank" (JSONText Int32) :>
+                 QueryParam "minSevenDayEpc" (Textual Double) :>
+                   QueryParam "minNinetyDayEpc" (Textual Double) :>
+                     QueryParam "minPayoutRank" (Textual Int32) :>
                        QueryParam "pageToken" Text :>
                          QueryParam "publisherCategory" Text :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Publishers
 
 -- | Retrieves data about all publishers that the requesting
@@ -73,14 +73,14 @@ type PublishersListResource =
 -- /See:/ 'publishersList' smart constructor.
 data PublishersList = PublishersList
     { _plRelationshipStatus :: !(Maybe PublishersListRelationshipStatus)
-    , _plMinSevenDayEpc     :: !(Maybe (JSONText Double))
+    , _plMinSevenDayEpc     :: !(Maybe (Textual Double))
     , _plRoleId             :: !Text
-    , _plMinNinetyDayEpc    :: !(Maybe (JSONText Double))
+    , _plMinNinetyDayEpc    :: !(Maybe (Textual Double))
     , _plRole               :: !PublishersListRole
-    , _plMinPayoutRank      :: !(Maybe (JSONText Int32))
+    , _plMinPayoutRank      :: !(Maybe (Textual Int32))
     , _plPageToken          :: !(Maybe Text)
     , _plPublisherCategory  :: !(Maybe Text)
-    , _plMaxResults         :: !(Maybe (JSONText Word32))
+    , _plMaxResults         :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersList' with the minimum fields required to make a request.

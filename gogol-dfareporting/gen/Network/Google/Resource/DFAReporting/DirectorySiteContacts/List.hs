@@ -52,11 +52,11 @@ type DirectorySiteContactsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "directorySiteContacts" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" (JSONText Int64) :>
-                   QueryParams "directorySiteIds" (JSONText Int64) :>
+                 QueryParams "ids" (Textual Int64) :>
+                   QueryParams "directorySiteIds" (Textual Int64) :>
                      QueryParam "sortOrder"
                        DirectorySiteContactsListSortOrder
                        :>
@@ -64,7 +64,7 @@ type DirectorySiteContactsListResource =
                          QueryParam "sortField"
                            DirectorySiteContactsListSortField
                            :>
-                           QueryParam "maxResults" (JSONText Int32) :>
+                           QueryParam "maxResults" (Textual Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] DirectorySiteContactsListResponse
 
@@ -73,13 +73,13 @@ type DirectorySiteContactsListResource =
 -- /See:/ 'directorySiteContactsList' smart constructor.
 data DirectorySiteContactsList = DirectorySiteContactsList
     { _dsclSearchString     :: !(Maybe Text)
-    , _dsclIds              :: !(Maybe [JSONText Int64])
-    , _dsclProFileId        :: !(JSONText Int64)
-    , _dsclDirectorySiteIds :: !(Maybe [JSONText Int64])
+    , _dsclIds              :: !(Maybe [Textual Int64])
+    , _dsclProFileId        :: !(Textual Int64)
+    , _dsclDirectorySiteIds :: !(Maybe [Textual Int64])
     , _dsclSortOrder        :: !(Maybe DirectorySiteContactsListSortOrder)
     , _dsclPageToken        :: !(Maybe Text)
     , _dsclSortField        :: !(Maybe DirectorySiteContactsListSortField)
-    , _dsclMaxResults       :: !(Maybe (JSONText Int32))
+    , _dsclMaxResults       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsList' with the minimum fields required to make a request.

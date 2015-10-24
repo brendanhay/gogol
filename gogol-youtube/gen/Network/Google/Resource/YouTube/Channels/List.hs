@@ -66,7 +66,7 @@ type ChannelsListResource =
                          QueryParam "mySubscribers" Bool :>
                            QueryParam "pageToken" Text :>
                              QueryParam "managedByMe" Bool :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ChannelListResponse
 
@@ -85,7 +85,7 @@ data ChannelsList = ChannelsList
     , _cMySubscribers          :: !(Maybe Bool)
     , _cPageToken              :: !(Maybe Text)
     , _cManagedByMe            :: !(Maybe Bool)
-    , _cMaxResults             :: !(JSONText Word32)
+    , _cMaxResults             :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsList' with the minimum fields required to make a request.

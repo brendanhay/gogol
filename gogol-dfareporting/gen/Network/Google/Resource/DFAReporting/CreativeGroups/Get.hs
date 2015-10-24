@@ -46,17 +46,17 @@ type CreativeGroupsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] CreativeGroup
 
 -- | Gets one creative group by ID.
 --
 -- /See:/ 'creativeGroupsGet' smart constructor.
 data CreativeGroupsGet = CreativeGroupsGet
-    { _cgggProFileId :: !(JSONText Int64)
-    , _cgggId        :: !(JSONText Int64)
+    { _cgggProFileId :: !(Textual Int64)
+    , _cgggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsGet' with the minimum fields required to make a request.

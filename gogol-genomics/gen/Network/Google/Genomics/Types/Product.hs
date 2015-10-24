@@ -93,7 +93,7 @@ instance ToJSON ReadInfo where
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (JSONText Int32))
+    , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -197,15 +197,15 @@ instance ToJSON OperationSchema where
 -- /See:/ 'variant' smart constructor.
 data Variant = Variant
     { _vVariantSetId   :: !(Maybe Text)
-    , _vCreated        :: !(Maybe (JSONText Int64))
-    , _vStart          :: !(Maybe (JSONText Int64))
+    , _vCreated        :: !(Maybe (Textual Int64))
+    , _vStart          :: !(Maybe (Textual Int64))
     , _vAlternateBases :: !(Maybe [Text])
     , _vReferenceName  :: !(Maybe Text)
     , _vNames          :: !(Maybe [Text])
-    , _vEnd            :: !(Maybe (JSONText Int64))
+    , _vEnd            :: !(Maybe (Textual Int64))
     , _vReferenceBases :: !(Maybe Text)
     , _vId             :: !(Maybe Text)
-    , _vQuality        :: !(Maybe (JSONText Double))
+    , _vQuality        :: !(Maybe (Textual Double))
     , _vFilter         :: !(Maybe [Text])
     , _vInfo           :: !(Maybe VariantInfo)
     , _vCalls          :: !(Maybe [VariantCall])
@@ -381,7 +381,7 @@ instance ToJSON Variant where
 -- /See:/ 'listBasesResponse' smart constructor.
 data ListBasesResponse = ListBasesResponse
     { _lbrNextPageToken :: !(Maybe Text)
-    , _lbrOffSet        :: !(Maybe (JSONText Int64))
+    , _lbrOffSet        :: !(Maybe (Textual Int64))
     , _lbrSequence      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -629,14 +629,14 @@ instance ToJSON DataSet where
 --
 -- /See:/ 'read'' smart constructor.
 data Read' = Read'
-    { _rFragmentLength            :: !(Maybe (JSONText Int32))
+    { _rFragmentLength            :: !(Maybe (Textual Int32))
     , _rDuplicateFragment         :: !(Maybe Bool)
     , _rReadGroupSetId            :: !(Maybe Text)
     , _rNextMatePosition          :: !(Maybe Position)
     , _rFailedVendorQualityChecks :: !(Maybe Bool)
     , _rAlignment                 :: !(Maybe LinearAlignment)
     , _rFragmentName              :: !(Maybe Text)
-    , _rNumberReads               :: !(Maybe (JSONText Int32))
+    , _rNumberReads               :: !(Maybe (Textual Int32))
     , _rId                        :: !(Maybe Text)
     , _rSecondaryAlignment        :: !(Maybe Bool)
     , _rReadGroupId               :: !(Maybe Text)
@@ -644,8 +644,8 @@ data Read' = Read'
     , _rAlignedSequence           :: !(Maybe Text)
     , _rProperPlacement           :: !(Maybe Bool)
     , _rInfo                      :: !(Maybe ReadInfo)
-    , _rReadNumber                :: !(Maybe (JSONText Int32))
-    , _rAlignedQuality            :: !(Maybe [JSONText Int32])
+    , _rReadNumber                :: !(Maybe (Textual Int32))
+    , _rAlignedQuality            :: !(Maybe [Textual Int32])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Read' with the minimum fields required to make a request.
@@ -897,11 +897,11 @@ instance ToJSON Read' where
 --
 -- /See:/ 'variantCall' smart constructor.
 data VariantCall = VariantCall
-    { _vcGenotypeLikelihood :: !(Maybe [JSONText Double])
+    { _vcGenotypeLikelihood :: !(Maybe [Textual Double])
     , _vcCallSetName        :: !(Maybe Text)
     , _vcPhaseset           :: !(Maybe Text)
     , _vcCallSetId          :: !(Maybe Text)
-    , _vcGenotype           :: !(Maybe [JSONText Int32])
+    , _vcGenotype           :: !(Maybe [Textual Int32])
     , _vcInfo               :: !(Maybe VariantCallInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1021,7 +1021,7 @@ data ReadGroup = ReadGroup
     , _reaDataSetId           :: !(Maybe Text)
     , _reaId                  :: !(Maybe Text)
     , _reaSampleId            :: !(Maybe Text)
-    , _reaPredictedInsertSize :: !(Maybe (JSONText Int32))
+    , _reaPredictedInsertSize :: !(Maybe (Textual Int32))
     , _reaDescription         :: !(Maybe Text)
     , _reaInfo                :: !(Maybe ReadGroupInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1254,7 +1254,7 @@ data SearchReferenceSetsRequest = SearchReferenceSetsRequest
     , _srsrAccessions   :: !(Maybe [Text])
     , _srsrPageToken    :: !(Maybe Text)
     , _srsrAssemblyId   :: !(Maybe Text)
-    , _srsrPageSize     :: !(Maybe (JSONText Int32))
+    , _srsrPageSize     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReferenceSetsRequest' with the minimum fields required to make a request.
@@ -1528,7 +1528,7 @@ instance ToJSON VariantSetMetadata where
 --
 -- /See:/ 'callSet' smart constructor.
 data CallSet = CallSet
-    { _csCreated       :: !(Maybe (JSONText Int64))
+    { _csCreated       :: !(Maybe (Textual Int64))
     , _csName          :: !(Maybe Text)
     , _csId            :: !(Maybe Text)
     , _csSampleId      :: !(Maybe Text)
@@ -1624,7 +1624,7 @@ instance ToJSON CallSet where
 -- /See:/ 'coverageBucket' smart constructor.
 data CoverageBucket = CoverageBucket
     { _cbRange        :: !(Maybe Range)
-    , _cbMeanCoverage :: !(Maybe (JSONText Float))
+    , _cbMeanCoverage :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoverageBucket' with the minimum fields required to make a request.
@@ -1675,7 +1675,7 @@ data SearchReadGroupSetsRequest = SearchReadGroupSetsRequest
     { _srgsrDataSetIds :: !(Maybe [Text])
     , _srgsrName       :: !(Maybe Text)
     , _srgsrPageToken  :: !(Maybe Text)
-    , _srgsrPageSize   :: !(Maybe (JSONText Int32))
+    , _srgsrPageSize   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReadGroupSetsRequest' with the minimum fields required to make a request.
@@ -1755,11 +1755,11 @@ instance ToJSON SearchReadGroupSetsRequest where
 --
 -- /See:/ 'reference' smart constructor.
 data Reference = Reference
-    { _refLength           :: !(Maybe (JSONText Int64))
+    { _refLength           :: !(Maybe (Textual Int64))
     , _refSourceAccessions :: !(Maybe [Text])
     , _refMD5checksum      :: !(Maybe Text)
     , _refName             :: !(Maybe Text)
-    , _refNcbiTaxonId      :: !(Maybe (JSONText Int32))
+    , _refNcbiTaxonId      :: !(Maybe (Textual Int32))
     , _refId               :: !(Maybe Text)
     , _refSourceURI        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2059,12 +2059,12 @@ instance ToJSON SetIAMPolicyRequest where
 --
 -- /See:/ 'searchReadsRequest' smart constructor.
 data SearchReadsRequest = SearchReadsRequest
-    { _srrStart           :: !(Maybe (JSONText Int64))
+    { _srrStart           :: !(Maybe (Textual Int64))
     , _srrReadGroupIds    :: !(Maybe [Text])
     , _srrReferenceName   :: !(Maybe Text)
-    , _srrEnd             :: !(Maybe (JSONText Int64))
+    , _srrEnd             :: !(Maybe (Textual Int64))
     , _srrPageToken       :: !(Maybe Text)
-    , _srrPageSize        :: !(Maybe (JSONText Int32))
+    , _srrPageSize        :: !(Maybe (Textual Int32))
     , _srrReadGroupSetIds :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2332,7 +2332,7 @@ instance ToJSON Experiment where
 data SearchVariantSetsRequest = SearchVariantSetsRequest
     { _svsrDataSetIds :: !(Maybe [Text])
     , _svsrPageToken  :: !(Maybe Text)
-    , _svsrPageSize   :: !(Maybe (JSONText Int32))
+    , _svsrPageSize   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchVariantSetsRequest' with the minimum fields required to make a request.
@@ -2454,7 +2454,7 @@ data SearchCallSetsRequest = SearchCallSetsRequest
     { _scsrName          :: !(Maybe Text)
     , _scsrPageToken     :: !(Maybe Text)
     , _scsrVariantSetIds :: !(Maybe [Text])
-    , _scsrPageSize      :: !(Maybe (JSONText Int32))
+    , _scsrPageSize      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchCallSetsRequest' with the minimum fields required to make a request.
@@ -2666,7 +2666,7 @@ data SearchReferencesRequest = SearchReferencesRequest
     , _sMD5checksums   :: !(Maybe [Text])
     , _sAccessions     :: !(Maybe [Text])
     , _sPageToken      :: !(Maybe Text)
-    , _sPageSize       :: !(Maybe (JSONText Int32))
+    , _sPageSize       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReferencesRequest' with the minimum fields required to make a request.
@@ -2811,9 +2811,9 @@ instance ToJSON SearchReferenceSetsResponse where
 --
 -- /See:/ 'range' smart constructor.
 data Range = Range
-    { _rStart         :: !(Maybe (JSONText Int64))
+    { _rStart         :: !(Maybe (Textual Int64))
     , _rReferenceName :: !(Maybe Text)
-    , _rEnd           :: !(Maybe (JSONText Int64))
+    , _rEnd           :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Range' with the minimum fields required to make a request.
@@ -3089,7 +3089,7 @@ instance ToJSON ImportVariantsResponse where
 -- /See:/ 'listCoverageBucketsResponse' smart constructor.
 data ListCoverageBucketsResponse = ListCoverageBucketsResponse
     { _lcbrNextPageToken   :: !(Maybe Text)
-    , _lcbrBucketWidth     :: !(Maybe (JSONText Int64))
+    , _lcbrBucketWidth     :: !(Maybe (Textual Int64))
     , _lcbrCoverageBuckets :: !(Maybe [CoverageBucket])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3247,7 +3247,7 @@ instance ToJSON ImportReadGroupSetsResponse where
 -- /See:/ 'linearAlignment' smart constructor.
 data LinearAlignment = LinearAlignment
     { _laCigar          :: !(Maybe [CigarUnit])
-    , _laMAppingQuality :: !(Maybe (JSONText Int32))
+    , _laMAppingQuality :: !(Maybe (Textual Int32))
     , _laPosition       :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3652,7 +3652,7 @@ instance ToJSON ImportVariantsRequest where
 -- /See:/ 'cigarUnit' smart constructor.
 data CigarUnit = CigarUnit
     { _cuOperation         :: !(Maybe Text)
-    , _cuOperationLength   :: !(Maybe (JSONText Int64))
+    , _cuOperationLength   :: !(Maybe (Textual Int64))
     , _cuReferenceSequence :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3725,8 +3725,8 @@ instance ToJSON CigarUnit where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy
-    { _polEtag     :: !(Maybe (JSONText Word8))
-    , _polVersion  :: !(Maybe (JSONText Int32))
+    { _polEtag     :: !(Maybe (Textual Word8))
+    , _polVersion  :: !(Maybe (Textual Int32))
     , _polBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4012,15 +4012,15 @@ instance ToJSON SearchVariantSetsResponse where
 --
 -- /See:/ 'searchVariantsRequest' smart constructor.
 data SearchVariantsRequest = SearchVariantsRequest
-    { _svrStart         :: !(Maybe (JSONText Int64))
+    { _svrStart         :: !(Maybe (Textual Int64))
     , _svrCallSetIds    :: !(Maybe [Text])
     , _svrReferenceName :: !(Maybe Text)
-    , _svrEnd           :: !(Maybe (JSONText Int64))
-    , _svrMaxCalls      :: !(Maybe (JSONText Int32))
+    , _svrEnd           :: !(Maybe (Textual Int64))
+    , _svrMaxCalls      :: !(Maybe (Textual Int32))
     , _svrPageToken     :: !(Maybe Text)
     , _svrVariantName   :: !(Maybe Text)
     , _svrVariantSetIds :: !(Maybe [Text])
-    , _svrPageSize      :: !(Maybe (JSONText Int32))
+    , _svrPageSize      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchVariantsRequest' with the minimum fields required to make a request.
@@ -4303,7 +4303,7 @@ instance ToJSON OperationEvent where
 --
 -- /See:/ 'referenceBound' smart constructor.
 data ReferenceBound = ReferenceBound
-    { _rbUpperBound    :: !(Maybe (JSONText Int64))
+    { _rbUpperBound    :: !(Maybe (Textual Int64))
     , _rbReferenceName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4440,7 +4440,7 @@ instance ToJSON Binding where
 data Position = Position
     { _pReverseStrand :: !(Maybe Bool)
     , _pReferenceName :: !(Maybe Text)
-    , _pPosition      :: !(Maybe (JSONText Int64))
+    , _pPosition      :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Position' with the minimum fields required to make a request.
@@ -4597,7 +4597,7 @@ data ReferenceSet = ReferenceSet
     { _rsSourceAccessions :: !(Maybe [Text])
     , _rsReferenceIds     :: !(Maybe [Text])
     , _rsMD5checksum      :: !(Maybe Text)
-    , _rsNcbiTaxonId      :: !(Maybe (JSONText Int32))
+    , _rsNcbiTaxonId      :: !(Maybe (Textual Int32))
     , _rsId               :: !(Maybe Text)
     , _rsAssemblyId       :: !(Maybe Text)
     , _rsSourceURI        :: !(Maybe Text)

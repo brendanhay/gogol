@@ -53,7 +53,7 @@ type RegionsListResource =
              "regions" :>
                QueryParam "filter" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] RegionList
 
 -- | Retrieves the list of region resources available to the specified
@@ -64,7 +64,7 @@ data RegionsList = RegionsList
     { _rProject    :: !Text
     , _rFilter     :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
-    , _rMaxResults :: !(JSONText Word32)
+    , _rMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsList' with the minimum fields required to make a request.

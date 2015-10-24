@@ -53,10 +53,10 @@ type RemarketingListsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
-               QueryParam "advertiserId" (JSONText Int64) :>
-                 QueryParam "floodlightActivityId" (JSONText Int64) :>
+               QueryParam "advertiserId" (Textual Int64) :>
+                 QueryParam "floodlightActivityId" (Textual Int64) :>
                    QueryParam "sortOrder" RemarketingListsListSortOrder
                      :>
                      QueryParam "active" Bool :>
@@ -64,7 +64,7 @@ type RemarketingListsListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField" RemarketingListsListSortField
                              :>
-                             QueryParam "maxResults" (JSONText Int32) :>
+                             QueryParam "maxResults" (Textual Int32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] RemarketingListsListResponse
 
@@ -72,15 +72,15 @@ type RemarketingListsListResource =
 --
 -- /See:/ 'remarketingListsList' smart constructor.
 data RemarketingListsList = RemarketingListsList
-    { _rllFloodlightActivityId :: !(Maybe (JSONText Int64))
-    , _rllAdvertiserId         :: !(JSONText Int64)
-    , _rllProFileId            :: !(JSONText Int64)
+    { _rllFloodlightActivityId :: !(Maybe (Textual Int64))
+    , _rllAdvertiserId         :: !(Textual Int64)
+    , _rllProFileId            :: !(Textual Int64)
     , _rllSortOrder            :: !(Maybe RemarketingListsListSortOrder)
     , _rllActive               :: !(Maybe Bool)
     , _rllName                 :: !(Maybe Text)
     , _rllPageToken            :: !(Maybe Text)
     , _rllSortField            :: !(Maybe RemarketingListsListSortField)
-    , _rllMaxResults           :: !(Maybe (JSONText Int32))
+    , _rllMaxResults           :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsList' with the minimum fields required to make a request.

@@ -47,8 +47,8 @@ type BudgetGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "billinginfo" :>
-           Capture "accountId" (JSONText Int64) :>
-             Capture "billingId" (JSONText Int64) :>
+           Capture "accountId" (Textual Int64) :>
+             Capture "billingId" (Textual Int64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Budget
 
 -- | Returns the budget information for the adgroup specified by the
@@ -56,8 +56,8 @@ type BudgetGetResource =
 --
 -- /See:/ 'budgetGet' smart constructor.
 data BudgetGet = BudgetGet
-    { _bgAccountId :: !(JSONText Int64)
-    , _bgBillingId :: !(JSONText Int64)
+    { _bgAccountId :: !(Textual Int64)
+    , _bgBillingId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetGet' with the minimum fields required to make a request.

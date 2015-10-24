@@ -47,20 +47,20 @@ type LandingPagesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "campaignId" (JSONText Int64) :>
+               Capture "campaignId" (Textual Int64) :>
                  "landingPages" :>
-                   Capture "id" (JSONText Int64) :>
+                   Capture "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] LandingPage
 
 -- | Gets one campaign landing page by ID.
 --
 -- /See:/ 'landingPagesGet' smart constructor.
 data LandingPagesGet = LandingPagesGet
-    { _lpgCampaignId :: !(JSONText Int64)
-    , _lpgProFileId  :: !(JSONText Int64)
-    , _lpgId         :: !(JSONText Int64)
+    { _lpgCampaignId :: !(Textual Int64)
+    , _lpgProFileId  :: !(Textual Int64)
+    , _lpgId         :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesGet' with the minimum fields required to make a request.

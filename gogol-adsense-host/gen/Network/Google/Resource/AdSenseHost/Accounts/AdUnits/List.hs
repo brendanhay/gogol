@@ -55,7 +55,7 @@ type AccountsAdUnitsListResource =
                  "adunits" :>
                    QueryParam "includeInactive" Bool :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified publisher\'s AdSense account.
@@ -66,7 +66,7 @@ data AccountsAdUnitsList = AccountsAdUnitsList
     , _aaulAdClientId      :: !Text
     , _aaulAccountId       :: !Text
     , _aaulPageToken       :: !(Maybe Text)
-    , _aaulMaxResults      :: !(Maybe (JSONText Word32))
+    , _aaulMaxResults      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdUnitsList' with the minimum fields required to make a request.

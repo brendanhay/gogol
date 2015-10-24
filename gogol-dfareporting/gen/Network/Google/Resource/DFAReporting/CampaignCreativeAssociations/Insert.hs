@@ -49,9 +49,9 @@ type CampaignCreativeAssociationsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "campaignId" (JSONText Int64) :>
+               Capture "campaignId" (Textual Int64) :>
                  "campaignCreativeAssociations" :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] CampaignCreativeAssociation :>
@@ -63,8 +63,8 @@ type CampaignCreativeAssociationsInsertResource =
 --
 -- /See:/ 'campaignCreativeAssociationsInsert' smart constructor.
 data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert
-    { _ccaiCampaignId :: !(JSONText Int64)
-    , _ccaiProFileId  :: !(JSONText Int64)
+    { _ccaiCampaignId :: !(Textual Int64)
+    , _ccaiProFileId  :: !(Textual Int64)
     , _ccaiPayload    :: !CampaignCreativeAssociation
     } deriving (Eq,Show,Data,Typeable,Generic)
 

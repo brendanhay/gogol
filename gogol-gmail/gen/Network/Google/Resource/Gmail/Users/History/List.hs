@@ -52,10 +52,10 @@ type UsersHistoryListResource =
          "users" :>
            Capture "userId" Text :>
              "history" :>
-               QueryParam "startHistoryId" (JSONText Word64) :>
+               QueryParam "startHistoryId" (Textual Word64) :>
                  QueryParam "pageToken" Text :>
                    QueryParam "labelId" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ListHistoryResponse
 
@@ -65,10 +65,10 @@ type UsersHistoryListResource =
 -- /See:/ 'usersHistoryList' smart constructor.
 data UsersHistoryList = UsersHistoryList
     { _uhlUserId         :: !Text
-    , _uhlStartHistoryId :: !(Maybe (JSONText Word64))
+    , _uhlStartHistoryId :: !(Maybe (Textual Word64))
     , _uhlPageToken      :: !(Maybe Text)
     , _uhlLabelId        :: !(Maybe Text)
-    , _uhlMaxResults     :: !(JSONText Word32)
+    , _uhlMaxResults     :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersHistoryList' with the minimum fields required to make a request.

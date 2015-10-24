@@ -54,7 +54,7 @@ type InstancesGetSerialPortOutputResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "serialPort" :>
-                       QueryParam "port" (JSONText Int32) :>
+                       QueryParam "port" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] SerialPortOutput
 
@@ -64,7 +64,7 @@ type InstancesGetSerialPortOutputResource =
 data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput
     { _igspoProject  :: !Text
     , _igspoZone     :: !Text
-    , _igspoPort     :: !(JSONText Int32)
+    , _igspoPort     :: !(Textual Int32)
     , _igspoInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

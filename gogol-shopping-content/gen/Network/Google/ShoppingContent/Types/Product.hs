@@ -61,7 +61,7 @@ instance ToJSON OrdersAcknowledgeRequest where
 data AccountTax = AccountTax
     { _atRules     :: !(Maybe [AccountTaxTaxRule])
     , _atKind      :: !Text
-    , _atAccountId :: !(Maybe (JSONText Word64))
+    , _atAccountId :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountTax' with the minimum fields required to make a request.
@@ -371,7 +371,7 @@ instance ToJSON DatafeedstatusesCustomBatchResponse
 --
 -- /See:/ 'orderReturn' smart constructor.
 data OrderReturn = OrderReturn
-    { _orQuantity     :: !(Maybe (JSONText Word32))
+    { _orQuantity     :: !(Maybe (Textual Word32))
     , _orActor        :: !(Maybe Text)
     , _orReason       :: !(Maybe Text)
     , _orCreationDate :: !(Maybe Text)
@@ -454,7 +454,7 @@ data AccounttaxCustomBatchResponseEntry = AccounttaxCustomBatchResponseEntry
     { _acbreAccountTax :: !(Maybe AccountTax)
     , _acbreKind       :: !Text
     , _acbreErrors     :: !(Maybe Errors)
-    , _acbreBatchId    :: !(Maybe (JSONText Word32))
+    , _acbreBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -683,7 +683,7 @@ data AccountTaxTaxRule = AccountTaxTaxRule
     { _attrUseGlobalRate :: !(Maybe Bool)
     , _attrCountry       :: !(Maybe Text)
     , _attrShippingTaxed :: !(Maybe Bool)
-    , _attrLocationId    :: !(Maybe (JSONText Word64))
+    , _attrLocationId    :: !(Maybe (Textual Word64))
     , _attrRatePercent   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -850,7 +850,7 @@ instance ToJSON DatafeedsCustomBatchRequest where
 --
 -- /See:/ 'ordersCustomBatchRequestEntry' smart constructor.
 data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry
-    { _ocbreMerchantId      :: !(Maybe (JSONText Word64))
+    { _ocbreMerchantId      :: !(Maybe (Textual Word64))
     , _ocbreCancelLineItem  :: !(Maybe OrdersCustomBatchRequestEntryCancelLineItem)
     , _ocbreRefund          :: !(Maybe OrdersCustomBatchRequestEntryRefund)
     , _ocbreUpdateShipment  :: !(Maybe OrdersCustomBatchRequestEntryUpdateShipment)
@@ -861,7 +861,7 @@ data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry
     , _ocbreOperationId     :: !(Maybe Text)
     , _ocbreOrderId         :: !(Maybe Text)
     , _ocbreCancel          :: !(Maybe OrdersCustomBatchRequestEntryCancel)
-    , _ocbreBatchId         :: !(Maybe (JSONText Word32))
+    , _ocbreBatchId         :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -1179,7 +1179,7 @@ instance ToJSON
 --
 -- /See:/ 'ordersCustomBatchRequestEntryCancelLineItem' smart constructor.
 data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntryCancelLineItem
-    { _ocbrecliQuantity   :: !(Maybe (JSONText Word32))
+    { _ocbrecliQuantity   :: !(Maybe (Textual Word32))
     , _ocbrecliLineItemId :: !(Maybe Text)
     , _ocbrecliReason     :: !(Maybe Text)
     , _ocbrecliReasonText :: !(Maybe Text)
@@ -1258,8 +1258,8 @@ instance ToJSON
 data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod
     { _olisdmCarrier          :: !(Maybe Text)
     , _olisdmMethodName       :: !(Maybe Text)
-    , _olisdmMaxDaysInTransit :: !(Maybe (JSONText Word32))
-    , _olisdmMinDaysInTransit :: !(Maybe (JSONText Word32))
+    , _olisdmMaxDaysInTransit :: !(Maybe (Textual Word32))
+    , _olisdmMinDaysInTransit :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemShippingDetailsMethod' with the minimum fields required to make a request.
@@ -1340,7 +1340,7 @@ data Datafeed = Datafeed
     , _dFetchSchedule        :: !(Maybe DatafeedFetchSchedule)
     , _dName                 :: !(Maybe Text)
     , _dIntendedDestinations :: !(Maybe [Text])
-    , _dId                   :: !(Maybe (JSONText Int64))
+    , _dId                   :: !(Maybe (Textual Int64))
     , _dContentLanguage      :: !(Maybe Text)
     , _dContentType          :: !(Maybe Text)
     , _dFileName             :: !(Maybe Text)
@@ -1540,7 +1540,7 @@ data AccountsCustomBatchResponseEntry = AccountsCustomBatchResponseEntry
     { _aKind    :: !Text
     , _aAccount :: !(Maybe Account)
     , _aErrors  :: !(Maybe Errors)
-    , _aBatchId :: !(Maybe (JSONText Word32))
+    , _aBatchId :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -1609,8 +1609,8 @@ instance ToJSON AccountsCustomBatchResponseEntry
 --
 -- /See:/ 'accountIdentifier' smart constructor.
 data AccountIdentifier = AccountIdentifier
-    { _aiMerchantId   :: !(Maybe (JSONText Word64))
-    , _aiAggregatorId :: !(Maybe (JSONText Word64))
+    { _aiMerchantId   :: !(Maybe (Textual Word64))
+    , _aiAggregatorId :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountIdentifier' with the minimum fields required to make a request.
@@ -1659,8 +1659,8 @@ instance ToJSON AccountIdentifier where
 --
 -- /See:/ 'testOrderPaymentMethod' smart constructor.
 data TestOrderPaymentMethod = TestOrderPaymentMethod
-    { _topmExpirationMonth          :: !(Maybe (JSONText Int32))
-    , _topmExpirationYear           :: !(Maybe (JSONText Int32))
+    { _topmExpirationMonth          :: !(Maybe (Textual Int32))
+    , _topmExpirationYear           :: !(Maybe (Textual Int32))
     , _topmLastFourDigits           :: !(Maybe Text)
     , _topmType                     :: !(Maybe Text)
     , _topmPredefinedBillingAddress :: !(Maybe Text)
@@ -1746,18 +1746,18 @@ instance ToJSON TestOrderPaymentMethod where
 --
 -- /See:/ 'orderLineItem' smart constructor.
 data OrderLineItem = OrderLineItem
-    { _oliQuantityOrdered   :: !(Maybe (JSONText Word32))
+    { _oliQuantityOrdered   :: !(Maybe (Textual Word32))
     , _oliReturnInfo        :: !(Maybe OrderLineItemReturnInfo)
-    , _oliQuantityDelivered :: !(Maybe (JSONText Word32))
+    , _oliQuantityDelivered :: !(Maybe (Textual Word32))
     , _oliShippingDetails   :: !(Maybe OrderLineItemShippingDetails)
-    , _oliQuantityPending   :: !(Maybe (JSONText Word32))
+    , _oliQuantityPending   :: !(Maybe (Textual Word32))
     , _oliCancellations     :: !(Maybe [OrderCancellation])
-    , _oliQuantityCanceled  :: !(Maybe (JSONText Word32))
+    , _oliQuantityCanceled  :: !(Maybe (Textual Word32))
     , _oliId                :: !(Maybe Text)
     , _oliTax               :: !(Maybe Price)
     , _oliPrice             :: !(Maybe Price)
-    , _oliQuantityShipped   :: !(Maybe (JSONText Word32))
-    , _oliQuantityReturned  :: !(Maybe (JSONText Word32))
+    , _oliQuantityShipped   :: !(Maybe (Textual Word32))
+    , _oliQuantityReturned  :: !(Maybe (Textual Word32))
     , _oliProduct           :: !(Maybe OrderLineItemProduct)
     , _oliReturns           :: !(Maybe [OrderReturn])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1994,7 +1994,7 @@ instance ToJSON ProductstatusesCustomBatchResponse
 --
 -- /See:/ 'productUnitPricingMeasure' smart constructor.
 data ProductUnitPricingMeasure = ProductUnitPricingMeasure
-    { _pupmValue :: !(Maybe (JSONText Double))
+    { _pupmValue :: !(Maybe (Textual Double))
     , _pupmUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2122,7 +2122,7 @@ instance ToJSON OrdersUpdateShipmentRequest where
 --
 -- /See:/ 'orderShipmentLineItemShipment' smart constructor.
 data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment
-    { _oslisQuantity   :: !(Maybe (JSONText Word32))
+    { _oslisQuantity   :: !(Maybe (Textual Word32))
     , _oslisLineItemId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2171,8 +2171,8 @@ instance ToJSON OrderShipmentLineItemShipment where
 --
 -- /See:/ 'loyaltyPoints' smart constructor.
 data LoyaltyPoints = LoyaltyPoints
-    { _lpRatio       :: !(Maybe (JSONText Double))
-    , _lpPointsValue :: !(Maybe (JSONText Int64))
+    { _lpRatio       :: !(Maybe (Textual Double))
+    , _lpPointsValue :: !(Maybe (Textual Int64))
     , _lpName        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2412,7 +2412,7 @@ instance ToJSON AccountStatus where
 --
 -- /See:/ 'ordersReturnLineItemRequest' smart constructor.
 data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest
-    { _orlirQuantity    :: !(Maybe (JSONText Word32))
+    { _orlirQuantity    :: !(Maybe (Textual Word32))
     , _orlirLineItemId  :: !(Maybe Text)
     , _orlirReason      :: !(Maybe Text)
     , _orlirOperationId :: !(Maybe Text)
@@ -2647,11 +2647,11 @@ instance ToJSON OrdersGetTestOrderTemplateResponse
 --
 -- /See:/ 'accountsCustomBatchRequestEntry' smart constructor.
 data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry
-    { _accMerchantId :: !(Maybe (JSONText Word64))
+    { _accMerchantId :: !(Maybe (Textual Word64))
     , _accAccount    :: !(Maybe Account)
-    , _accAccountId  :: !(Maybe (JSONText Word64))
+    , _accAccountId  :: !(Maybe (Textual Word64))
     , _accMethod     :: !(Maybe Text)
-    , _accBatchId    :: !(Maybe (JSONText Word32))
+    , _accBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -2775,7 +2775,7 @@ instance ToJSON Weight where
 -- /See:/ 'productInstallment' smart constructor.
 data ProductInstallment = ProductInstallment
     { _piAmount :: !(Maybe Price)
-    , _piMonths :: !(Maybe (JSONText Int64))
+    , _piMonths :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductInstallment' with the minimum fields required to make a request.
@@ -3164,11 +3164,11 @@ instance ToJSON AccountStatusExampleItem where
 --
 -- /See:/ 'datafeedsCustomBatchRequestEntry' smart constructor.
 data DatafeedsCustomBatchRequestEntry = DatafeedsCustomBatchRequestEntry
-    { _dcbreMerchantId :: !(Maybe (JSONText Word64))
+    { _dcbreMerchantId :: !(Maybe (Textual Word64))
     , _dcbreDatafeed   :: !(Maybe Datafeed)
     , _dcbreMethod     :: !(Maybe Text)
-    , _dcbreDatafeedId :: !(Maybe (JSONText Word64))
-    , _dcbreBatchId    :: !(Maybe (JSONText Word32))
+    , _dcbreDatafeedId :: !(Maybe (Textual Word64))
+    , _dcbreBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedsCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -3257,8 +3257,8 @@ data DatafeedFetchSchedule = DatafeedFetchSchedule
     { _dfsFetchURL   :: !(Maybe Text)
     , _dfsUsername   :: !(Maybe Text)
     , _dfsPassword   :: !(Maybe Text)
-    , _dfsDayOfMonth :: !(Maybe (JSONText Word32))
-    , _dfsHour       :: !(Maybe (JSONText Word32))
+    , _dfsDayOfMonth :: !(Maybe (Textual Word32))
+    , _dfsHour       :: !(Maybe (Textual Word32))
     , _dfsWeekday    :: !(Maybe Text)
     , _dfsTimeZone   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3716,9 +3716,9 @@ data ProductTax = ProductTax
     { _ptTaxShip    :: !(Maybe Bool)
     , _ptCountry    :: !(Maybe Text)
     , _ptPostalCode :: !(Maybe Text)
-    , _ptRate       :: !(Maybe (JSONText Double))
+    , _ptRate       :: !(Maybe (Textual Double))
     , _ptRegion     :: !(Maybe Text)
-    , _ptLocationId :: !(Maybe (JSONText Int64))
+    , _ptLocationId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductTax' with the minimum fields required to make a request.
@@ -3914,7 +3914,7 @@ instance ToJSON OrderShipment where
 data OrderLineItemReturnInfo = OrderLineItemReturnInfo
     { _oliriIsReturnable :: !(Maybe Bool)
     , _oliriPolicyURL    :: !(Maybe Text)
-    , _oliriDaysToReturn :: !(Maybe (JSONText Int32))
+    , _oliriDaysToReturn :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItemReturnInfo' with the minimum fields required to make a request.
@@ -4030,7 +4030,7 @@ data Account = Account
     , _aaSellerId     :: !(Maybe Text)
     , _aaName         :: !(Maybe Text)
     , _aaReviewsURL   :: !(Maybe Text)
-    , _aaId           :: !(Maybe (JSONText Word64))
+    , _aaId           :: !(Maybe (Textual Word64))
     , _aaWebsiteURL   :: !(Maybe Text)
     , _aaAdwordsLinks :: !(Maybe [AccountAdwordsLink])
     , _aaAdultContent :: !(Maybe Bool)
@@ -4158,11 +4158,11 @@ instance ToJSON Account where
 --
 -- /See:/ 'inventorySetRequest' smart constructor.
 data InventorySetRequest = InventorySetRequest
-    { _isrQuantity               :: !(Maybe (JSONText Word32))
+    { _isrQuantity               :: !(Maybe (Textual Word32))
     , _isrSalePrice              :: !(Maybe Price)
     , _isrAvailability           :: !(Maybe Text)
     , _isrSalePriceEffectiveDate :: !(Maybe Text)
-    , _isrSellOnGoogleQuantity   :: !(Maybe (JSONText Word32))
+    , _isrSellOnGoogleQuantity   :: !(Maybe (Textual Word32))
     , _isrPrice                  :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4335,7 +4335,7 @@ instance ToJSON
 --
 -- /See:/ 'ordersCancelLineItemRequest' smart constructor.
 data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest
-    { _oclirQuantity    :: !(Maybe (JSONText Word32))
+    { _oclirQuantity    :: !(Maybe (Textual Word32))
     , _oclirLineItemId  :: !(Maybe Text)
     , _oclirReason      :: !(Maybe Text)
     , _oclirOperationId :: !(Maybe Text)
@@ -4419,7 +4419,7 @@ instance ToJSON OrdersCancelLineItemRequest where
 --
 -- /See:/ 'productShippingWeight' smart constructor.
 data ProductShippingWeight = ProductShippingWeight
-    { _pswValue :: !(Maybe (JSONText Double))
+    { _pswValue :: !(Maybe (Textual Double))
     , _pswUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4467,10 +4467,10 @@ instance ToJSON ProductShippingWeight where
 --
 -- /See:/ 'accountstatusesCustomBatchRequestEntry' smart constructor.
 data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestEntry
-    { _acbrecMerchantId :: !(Maybe (JSONText Word64))
-    , _acbrecAccountId  :: !(Maybe (JSONText Word64))
+    { _acbrecMerchantId :: !(Maybe (Textual Word64))
+    , _acbrecAccountId  :: !(Maybe (Textual Word64))
     , _acbrecMethod     :: !(Maybe Text)
-    , _acbrecBatchId    :: !(Maybe (JSONText Word32))
+    , _acbrecBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -4547,7 +4547,7 @@ data ProductstatusesCustomBatchResponseEntry = ProductstatusesCustomBatchRespons
     { _pcbreKind          :: !Text
     , _pcbreProductStatus :: !(Maybe ProductStatus)
     , _pcbreErrors        :: !(Maybe Errors)
-    , _pcbreBatchId       :: !(Maybe (JSONText Word32))
+    , _pcbreBatchId       :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -4740,7 +4740,7 @@ data ProductShipping = ProductShipping
     , _psPostalCode        :: !(Maybe Text)
     , _psPrice             :: !(Maybe Price)
     , _psRegion            :: !(Maybe Text)
-    , _psLocationId        :: !(Maybe (JSONText Int64))
+    , _psLocationId        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductShipping' with the minimum fields required to make a request.
@@ -4840,11 +4840,11 @@ instance ToJSON ProductShipping where
 --
 -- /See:/ 'accountshippingCustomBatchRequestEntry' smart constructor.
 data AccountshippingCustomBatchRequestEntry = AccountshippingCustomBatchRequestEntry
-    { _aaMerchantId      :: !(Maybe (JSONText Word64))
-    , _aaAccountId       :: !(Maybe (JSONText Word64))
+    { _aaMerchantId      :: !(Maybe (Textual Word64))
+    , _aaAccountId       :: !(Maybe (Textual Word64))
     , _aaMethod          :: !(Maybe Text)
     , _aaAccountShipping :: !(Maybe AccountShipping)
-    , _aaBatchId         :: !(Maybe (JSONText Word32))
+    , _aaBatchId         :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountshippingCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -5860,11 +5860,11 @@ instance ToJSON AccounttaxCustomBatchRequest where
 --
 -- /See:/ 'productsCustomBatchRequestEntry' smart constructor.
 data ProductsCustomBatchRequestEntry = ProductsCustomBatchRequestEntry
-    { _pMerchantId :: !(Maybe (JSONText Word64))
+    { _pMerchantId :: !(Maybe (Textual Word64))
     , _pMethod     :: !(Maybe Text)
     , _pProduct    :: !(Maybe Product)
     , _pProductId  :: !(Maybe Text)
-    , _pBatchId    :: !(Maybe (JSONText Word32))
+    , _pBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -5941,10 +5941,10 @@ instance ToJSON ProductsCustomBatchRequestEntry where
 --
 -- /See:/ 'datafeedstatusesCustomBatchRequestEntry' smart constructor.
 data DatafeedstatusesCustomBatchRequestEntry = DatafeedstatusesCustomBatchRequestEntry
-    { _dMerchantId :: !(Maybe (JSONText Word64))
+    { _dMerchantId :: !(Maybe (Textual Word64))
     , _dMethod     :: !(Maybe Text)
-    , _dDatafeedId :: !(Maybe (JSONText Word64))
-    , _dBatchId    :: !(Maybe (JSONText Word32))
+    , _dDatafeedId :: !(Maybe (Textual Word64))
+    , _dBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -6078,7 +6078,7 @@ instance ToJSON OrderCustomer where
 data InventoryCustomBatchResponseEntry = InventoryCustomBatchResponseEntry
     { _icbreKind    :: !Text
     , _icbreErrors  :: !(Maybe Errors)
-    , _icbreBatchId :: !(Maybe (JSONText Word32))
+    , _icbreBatchId :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -6203,11 +6203,11 @@ instance ToJSON AccountshippingListResponse where
 -- /See:/ 'inventory' smart constructor.
 data Inventory = Inventory
     { _iKind                   :: !Text
-    , _iQuantity               :: !(Maybe (JSONText Word32))
+    , _iQuantity               :: !(Maybe (Textual Word32))
     , _iSalePrice              :: !(Maybe Price)
     , _iAvailability           :: !(Maybe Text)
     , _iSalePriceEffectiveDate :: !(Maybe Text)
-    , _iSellOnGoogleQuantity   :: !(Maybe (JSONText Word32))
+    , _iSellOnGoogleQuantity   :: !(Maybe (Textual Word32))
     , _iPrice                  :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6478,7 +6478,7 @@ data OrdersCustomBatchResponseEntry = OrdersCustomBatchResponseEntry
     , _oExecutionStatus :: !(Maybe Text)
     , _oErrors          :: !(Maybe Errors)
     , _oOrder           :: !(Maybe Order)
-    , _oBatchId         :: !(Maybe (JSONText Word32))
+    , _oBatchId         :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -7038,7 +7038,7 @@ instance ToJSON TestOrder where
 data DatafeedstatusesCustomBatchResponseEntry = DatafeedstatusesCustomBatchResponseEntry
     { _datErrors         :: !(Maybe Errors)
     , _datDatafeedStatus :: !(Maybe DatafeedStatus)
-    , _datBatchId        :: !(Maybe (JSONText Word32))
+    , _datBatchId        :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -7400,11 +7400,11 @@ instance ToJSON AccounttaxCustomBatchResponse where
 --
 -- /See:/ 'inventoryCustomBatchRequestEntry' smart constructor.
 data InventoryCustomBatchRequestEntry = InventoryCustomBatchRequestEntry
-    { _iMerchantId :: !(Maybe (JSONText Word64))
+    { _iMerchantId :: !(Maybe (Textual Word64))
     , _iStoreCode  :: !(Maybe Text)
     , _iInventory  :: !(Maybe Inventory)
     , _iProductId  :: !(Maybe Text)
-    , _iBatchId    :: !(Maybe (JSONText Word32))
+    , _iBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -7607,7 +7607,7 @@ instance ToJSON OrderAddress where
 --
 -- /See:/ 'productUnitPricingBaseMeasure' smart constructor.
 data ProductUnitPricingBaseMeasure = ProductUnitPricingBaseMeasure
-    { _pupbmValue :: !(Maybe (JSONText Int64))
+    { _pupbmValue :: !(Maybe (Textual Int64))
     , _pupbmUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7659,7 +7659,7 @@ data AccountShippingCondition = AccountShippingCondition
     , _ascDeliveryLocationGroup   :: !(Maybe Text)
     , _ascPriceMax                :: !(Maybe Price)
     , _ascShippingLabel           :: !(Maybe Text)
-    , _ascDeliveryLocationId      :: !(Maybe (JSONText Int64))
+    , _ascDeliveryLocationId      :: !(Maybe (Textual Int64))
     , _ascDeliveryPostalCodeRange :: !(Maybe AccountShippingPostalCodeRange)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7831,7 +7831,7 @@ data ProductsCustomBatchResponseEntry = ProductsCustomBatchResponseEntry
     { _proKind    :: !Text
     , _proProduct :: !(Maybe Product)
     , _proErrors  :: !(Maybe Errors)
-    , _proBatchId :: !(Maybe (JSONText Word32))
+    , _proBatchId :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -7902,8 +7902,8 @@ instance ToJSON ProductsCustomBatchResponseEntry
 --
 -- /See:/ 'orderPaymentMethod' smart constructor.
 data OrderPaymentMethod = OrderPaymentMethod
-    { _opmExpirationMonth :: !(Maybe (JSONText Int32))
-    , _opmExpirationYear  :: !(Maybe (JSONText Int32))
+    { _opmExpirationMonth :: !(Maybe (Textual Int32))
+    , _opmExpirationYear  :: !(Maybe (Textual Int32))
     , _opmPhoneNumber     :: !(Maybe Text)
     , _opmBillingAddress  :: !(Maybe OrderAddress)
     , _opmLastFourDigits  :: !(Maybe Text)
@@ -8005,14 +8005,14 @@ data Product = Product
     , _ppShippingWidth          :: !(Maybe ProductShippingDimension)
     , _ppCustomGroups           :: !(Maybe [ProductCustomGroup])
     , _ppImageLink              :: !(Maybe Text)
-    , _ppDisplayAdsValue        :: !(Maybe (JSONText Double))
+    , _ppDisplayAdsValue        :: !(Maybe (Textual Double))
     , _ppLoyaltyPoints          :: !(Maybe LoyaltyPoints)
     , _ppAdditionalImageLinks   :: !(Maybe [Text])
     , _ppValidatedDestinations  :: !(Maybe [Text])
     , _ppColor                  :: !(Maybe Text)
     , _ppCustomLabel0           :: !(Maybe Text)
     , _ppKind                   :: !Text
-    , _ppMultipack              :: !(Maybe (JSONText Int64))
+    , _ppMultipack              :: !(Maybe (Textual Int64))
     , _ppPattern                :: !(Maybe Text)
     , _ppLink                   :: !(Maybe Text)
     , _ppSizeSystem             :: !(Maybe Text)
@@ -8048,7 +8048,7 @@ data Product = Product
     , _ppShipping               :: !(Maybe [ProductShipping])
     , _ppAdwordsRedirect        :: !(Maybe Text)
     , _ppShippingWeight         :: !(Maybe ProductShippingWeight)
-    , _ppSellOnGoogleQuantity   :: !(Maybe (JSONText Int64))
+    , _ppSellOnGoogleQuantity   :: !(Maybe (Textual Int64))
     , _ppShippingHeight         :: !(Maybe ProductShippingDimension)
     , _ppAvailabilityDate       :: !(Maybe Text)
     , _ppOfferId                :: !(Maybe Text)
@@ -8873,7 +8873,7 @@ instance ToJSON Product where
 --
 -- /See:/ 'errors' smart constructor.
 data Errors = Errors
-    { _errCode    :: !(Maybe (JSONText Word32))
+    { _errCode    :: !(Maybe (Textual Word32))
     , _errMessage :: !(Maybe Text)
     , _errErrors  :: !(Maybe [Error'])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8936,7 +8936,7 @@ instance ToJSON Errors where
 data AccountstatusesCustomBatchResponseEntry = AccountstatusesCustomBatchResponseEntry
     { _acccAccountStatus :: !(Maybe AccountStatus)
     , _acccErrors        :: !(Maybe Errors)
-    , _acccBatchId       :: !(Maybe (JSONText Word32))
+    , _acccBatchId       :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -9081,7 +9081,7 @@ instance ToJSON OrdersCancelLineItemResponse where
 --
 -- /See:/ 'testOrderLineItem' smart constructor.
 data TestOrderLineItem = TestOrderLineItem
-    { _toliQuantityOrdered :: !(Maybe (JSONText Word32))
+    { _toliQuantityOrdered :: !(Maybe (Textual Word32))
     , _toliReturnInfo      :: !(Maybe OrderLineItemReturnInfo)
     , _toliShippingDetails :: !(Maybe OrderLineItemShippingDetails)
     , _toliProduct         :: !(Maybe TestOrderLineItemProduct)
@@ -9165,10 +9165,10 @@ instance ToJSON TestOrderLineItem where
 --
 -- /See:/ 'productstatusesCustomBatchRequestEntry' smart constructor.
 data ProductstatusesCustomBatchRequestEntry = ProductstatusesCustomBatchRequestEntry
-    { _pcbrecMerchantId :: !(Maybe (JSONText Word64))
+    { _pcbrecMerchantId :: !(Maybe (Textual Word64))
     , _pcbrecMethod     :: !(Maybe Text)
     , _pcbrecProductId  :: !(Maybe Text)
-    , _pcbrecBatchId    :: !(Maybe (JSONText Word32))
+    , _pcbrecBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -9243,7 +9243,7 @@ data AccountshippingCustomBatchResponseEntry = AccountshippingCustomBatchRespons
     { _acbre1Kind            :: !Text
     , _acbre1Errors          :: !(Maybe Errors)
     , _acbre1AccountShipping :: !(Maybe AccountShipping)
-    , _acbre1BatchId         :: !(Maybe (JSONText Word32))
+    , _acbre1BatchId         :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountshippingCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -9380,7 +9380,7 @@ data AccountShipping = AccountShipping
     , _assCarrierRates   :: !(Maybe [AccountShippingCarrierRate])
     , _assKind           :: !Text
     , _assLocationGroups :: !(Maybe [AccountShippingLocationGroup])
-    , _assAccountId      :: !(Maybe (JSONText Word64))
+    , _assAccountId      :: !(Maybe (Textual Word64))
     , _assServices       :: !(Maybe [AccountShippingShippingService])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9532,7 +9532,7 @@ instance ToJSON OrdersUpdateMerchantOrderIdResponse
 --
 -- /See:/ 'datafeedStatusExample' smart constructor.
 data DatafeedStatusExample = DatafeedStatusExample
-    { _dseLineNumber :: !(Maybe (JSONText Word64))
+    { _dseLineNumber :: !(Maybe (Textual Word64))
     , _dseItemId     :: !(Maybe Text)
     , _dseValue      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9640,7 +9640,7 @@ instance ToJSON OrdersAcknowledgeResponse where
 -- /See:/ 'order' smart constructor.
 data Order = Order
     { _ooStatus          :: !(Maybe Text)
-    , _ooMerchantId      :: !(Maybe (JSONText Word64))
+    , _ooMerchantId      :: !(Maybe (Textual Word64))
     , _ooRefunds         :: !(Maybe [OrderRefund])
     , _ooKind            :: !Text
     , _ooLineItems       :: !(Maybe [OrderLineItem])
@@ -10122,10 +10122,10 @@ instance ToJSON OrderLineItemProduct where
 -- /See:/ 'accounttaxCustomBatchRequestEntry' smart constructor.
 data AccounttaxCustomBatchRequestEntry = AccounttaxCustomBatchRequestEntry
     { _a2AccountTax :: !(Maybe AccountTax)
-    , _a2MerchantId :: !(Maybe (JSONText Word64))
-    , _a2AccountId  :: !(Maybe (JSONText Word64))
+    , _a2MerchantId :: !(Maybe (Textual Word64))
+    , _a2AccountId  :: !(Maybe (Textual Word64))
     , _a2Method     :: !(Maybe Text)
-    , _a2BatchId    :: !(Maybe (JSONText Word32))
+    , _a2BatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -10205,7 +10205,7 @@ instance ToJSON AccounttaxCustomBatchRequestEntry
 --
 -- /See:/ 'datafeedStatusError' smart constructor.
 data DatafeedStatusError = DatafeedStatusError
-    { _dseCount    :: !(Maybe (JSONText Word64))
+    { _dseCount    :: !(Maybe (Textual Word64))
     , _dseCode     :: !(Maybe Text)
     , _dseMessage  :: !(Maybe Text)
     , _dseExamples :: !(Maybe [DatafeedStatusExample])
@@ -10312,7 +10312,7 @@ instance ToJSON ProductsCustomBatchRequest where
 --
 -- /See:/ 'ordersCustomBatchRequestEntryReturnLineItem' smart constructor.
 data OrdersCustomBatchRequestEntryReturnLineItem = OrdersCustomBatchRequestEntryReturnLineItem
-    { _ocbrerliQuantity   :: !(Maybe (JSONText Word32))
+    { _ocbrerliQuantity   :: !(Maybe (Textual Word32))
     , _ocbrerliLineItemId :: !(Maybe Text)
     , _ocbrerliReason     :: !(Maybe Text)
     , _ocbrerliReasonText :: !(Maybe Text)
@@ -10467,13 +10467,13 @@ instance ToJSON
 --
 -- /See:/ 'datafeedStatus' smart constructor.
 data DatafeedStatus = DatafeedStatus
-    { _dsItemsTotal       :: !(Maybe (JSONText Word64))
+    { _dsItemsTotal       :: !(Maybe (Textual Word64))
     , _dsKind             :: !Text
     , _dsWarnings         :: !(Maybe [DatafeedStatusError])
-    , _dsDatafeedId       :: !(Maybe (JSONText Word64))
+    , _dsDatafeedId       :: !(Maybe (Textual Word64))
     , _dsProcessingStatus :: !(Maybe Text)
     , _dsLastUploadDate   :: !(Maybe Text)
-    , _dsItemsValid       :: !(Maybe (JSONText Word64))
+    , _dsItemsValid       :: !(Maybe (Textual Word64))
     , _dsErrors           :: !(Maybe [DatafeedStatusError])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10631,7 +10631,7 @@ instance ToJSON DatafeedstatusesCustomBatchRequest
 -- /See:/ 'accountShippingLocationGroup' smart constructor.
 data AccountShippingLocationGroup = AccountShippingLocationGroup
     { _aslgCountry          :: !(Maybe Text)
-    , _aslgLocationIds      :: !(Maybe [JSONText Int64])
+    , _aslgLocationIds      :: !(Maybe [Textual Int64])
     , _aslgPostalCodeRanges :: !(Maybe [AccountShippingPostalCodeRange])
     , _aslgName             :: !(Maybe Text)
     , _aslgPostalCodes      :: !(Maybe [Text])
@@ -10724,7 +10724,7 @@ data AccountStatusDataQualityIssue = AccountStatusDataQualityIssue
     { _asdqiSubmittedValue :: !(Maybe Text)
     , _asdqiCountry        :: !(Maybe Text)
     , _asdqiDisplayedValue :: !(Maybe Text)
-    , _asdqiNumItems       :: !(Maybe (JSONText Word32))
+    , _asdqiNumItems       :: !(Maybe (Textual Word32))
     , _asdqiSeverity       :: !(Maybe Text)
     , _asdqiExampleItems   :: !(Maybe [AccountStatusExampleItem])
     , _asdqiLastChecked    :: !(Maybe Text)
@@ -10841,7 +10841,7 @@ instance ToJSON AccountStatusDataQualityIssue where
 --
 -- /See:/ 'productShippingDimension' smart constructor.
 data ProductShippingDimension = ProductShippingDimension
-    { _psdValue :: !(Maybe (JSONText Double))
+    { _psdValue :: !(Maybe (Textual Double))
     , _psdUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10891,7 +10891,7 @@ instance ToJSON ProductShippingDimension where
 data DatafeedsCustomBatchResponseEntry = DatafeedsCustomBatchResponseEntry
     { _dcbrecDatafeed :: !(Maybe Datafeed)
     , _dcbrecErrors   :: !(Maybe Errors)
-    , _dcbrecBatchId  :: !(Maybe (JSONText Word32))
+    , _dcbrecBatchId  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedsCustomBatchResponseEntry' with the minimum fields required to make a request.
@@ -11136,7 +11136,7 @@ instance ToJSON ProductsListResponse where
 -- /See:/ 'accountAdwordsLink' smart constructor.
 data AccountAdwordsLink = AccountAdwordsLink
     { _aalStatus    :: !(Maybe Text)
-    , _aalAdwordsId :: !(Maybe (JSONText Word64))
+    , _aalAdwordsId :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountAdwordsLink' with the minimum fields required to make a request.
@@ -11191,7 +11191,7 @@ instance ToJSON AccountAdwordsLink where
 --
 -- /See:/ 'orderCancellation' smart constructor.
 data OrderCancellation = OrderCancellation
-    { _ocQuantity     :: !(Maybe (JSONText Word32))
+    { _ocQuantity     :: !(Maybe (Textual Word32))
     , _ocActor        :: !(Maybe Text)
     , _ocReason       :: !(Maybe Text)
     , _ocCreationDate :: !(Maybe Text)

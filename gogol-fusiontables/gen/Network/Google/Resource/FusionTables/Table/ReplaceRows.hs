@@ -53,8 +53,8 @@ type TableReplaceRowsResource =
          "tables" :>
            Capture "tableId" Text :>
              "replace" :>
-               QueryParam "startLine" (JSONText Int32) :>
-                 QueryParam "endLine" (JSONText Int32) :>
+               QueryParam "startLine" (Textual Int32) :>
+                 QueryParam "endLine" (Textual Int32) :>
                    QueryParam "delimiter" Text :>
                      QueryParam "encoding" Text :>
                        QueryParam "isStrict" Bool :>
@@ -66,8 +66,8 @@ type TableReplaceRowsResource =
              "tables" :>
                Capture "tableId" Text :>
                  "replace" :>
-                   QueryParam "startLine" (JSONText Int32) :>
-                     QueryParam "endLine" (JSONText Int32) :>
+                   QueryParam "startLine" (Textual Int32) :>
+                     QueryParam "endLine" (Textual Int32) :>
                        QueryParam "delimiter" Text :>
                          QueryParam "encoding" Text :>
                            QueryParam "isStrict" Bool :>
@@ -81,8 +81,8 @@ type TableReplaceRowsResource =
 --
 -- /See:/ 'tableReplaceRows' smart constructor.
 data TableReplaceRows = TableReplaceRows
-    { _trrStartLine :: !(Maybe (JSONText Int32))
-    , _trrEndLine   :: !(Maybe (JSONText Int32))
+    { _trrStartLine :: !(Maybe (Textual Int32))
+    , _trrEndLine   :: !(Maybe (Textual Int32))
     , _trrTableId   :: !Text
     , _trrDelimiter :: !(Maybe Text)
     , _trrEncoding  :: !(Maybe Text)

@@ -63,8 +63,8 @@ type ReportsQueryResource =
                        QueryParam "currency" Text :>
                          QueryParam "sort" Text :>
                            QueryParam "dimensions" Text :>
-                             QueryParam "start-index" (JSONText Int32) :>
-                               QueryParam "max-results" (JSONText Int32) :>
+                             QueryParam "start-index" (Textual Int32) :>
+                               QueryParam "max-results" (Textual Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ResultTable
 
@@ -79,8 +79,8 @@ data ReportsQuery = ReportsQuery
     , _rqCurrency   :: !(Maybe Text)
     , _rqSort       :: !(Maybe Text)
     , _rqDimensions :: !(Maybe Text)
-    , _rqStartIndex :: !(Maybe (JSONText Int32))
-    , _rqMaxResults :: !(Maybe (JSONText Int32))
+    , _rqStartIndex :: !(Maybe (Textual Int32))
+    , _rqMaxResults :: !(Maybe (Textual Int32))
     , _rqStartDate  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

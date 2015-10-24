@@ -49,11 +49,11 @@ type CreativeFieldValuesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
-               Capture "creativeFieldId" (JSONText Int64) :>
+               Capture "creativeFieldId" (Textual Int64) :>
                  "creativeFieldValues" :>
-                   QueryParam "id" (JSONText Int64) :>
+                   QueryParam "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] CreativeFieldValue :>
                          Patch '[JSON] CreativeFieldValue
@@ -63,10 +63,10 @@ type CreativeFieldValuesPatchResource =
 --
 -- /See:/ 'creativeFieldValuesPatch' smart constructor.
 data CreativeFieldValuesPatch = CreativeFieldValuesPatch
-    { _cfvpCreativeFieldId :: !(JSONText Int64)
-    , _cfvpProFileId       :: !(JSONText Int64)
+    { _cfvpCreativeFieldId :: !(Textual Int64)
+    , _cfvpProFileId       :: !(Textual Int64)
     , _cfvpPayload         :: !CreativeFieldValue
-    , _cfvpId              :: !(JSONText Int64)
+    , _cfvpId              :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesPatch' with the minimum fields required to make a request.

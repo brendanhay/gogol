@@ -54,7 +54,7 @@ type TablesListResource =
                Capture "datasetId" Text :>
                  "tables" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] TableList
 
 -- | Lists all tables in the specified dataset. Requires the READER dataset
@@ -65,7 +65,7 @@ data TablesList = TablesList
     { _tlDataSetId  :: !Text
     , _tlPageToken  :: !(Maybe Text)
     , _tlProjectId  :: !Text
-    , _tlMaxResults :: !(Maybe (JSONText Word32))
+    , _tlMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesList' with the minimum fields required to make a request.

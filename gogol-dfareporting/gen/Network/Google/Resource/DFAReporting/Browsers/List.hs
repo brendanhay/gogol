@@ -45,7 +45,7 @@ type BrowsersListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "browsers" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] BrowsersListResponse
@@ -54,7 +54,7 @@ type BrowsersListResource =
 --
 -- /See:/ 'browsersList' smart constructor.
 newtype BrowsersList = BrowsersList
-    { _blProFileId :: JSONText Int64
+    { _blProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BrowsersList' with the minimum fields required to make a request.

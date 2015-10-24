@@ -51,7 +51,7 @@ type BackupRunsDeleteResource =
              "instances" :>
                Capture "instance" Text :>
                  "backupRuns" :>
-                   Capture "id" (JSONText Int64) :>
+                   Capture "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the backup taken by a backup run.
@@ -59,7 +59,7 @@ type BackupRunsDeleteResource =
 -- /See:/ 'backupRunsDelete' smart constructor.
 data BackupRunsDelete = BackupRunsDelete
     { _brdProject  :: !Text
-    , _brdId       :: !(JSONText Int64)
+    , _brdId       :: !(Textual Int64)
     , _brdInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

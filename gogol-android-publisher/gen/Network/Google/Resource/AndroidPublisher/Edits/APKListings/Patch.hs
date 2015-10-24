@@ -54,7 +54,7 @@ type EditsAPKListingsPatchResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" (JSONText Int32) :>
+                   Capture "apkVersionCode" (Textual Int32) :>
                      "listings" :>
                        Capture "language" Text :>
                          QueryParam "alt" AltJSON :>
@@ -67,7 +67,7 @@ type EditsAPKListingsPatchResource =
 -- /See:/ 'editsAPKListingsPatch' smart constructor.
 data EditsAPKListingsPatch = EditsAPKListingsPatch
     { _eapklpPackageName    :: !Text
-    , _eapklpAPKVersionCode :: !(JSONText Int32)
+    , _eapklpAPKVersionCode :: !(Textual Int32)
     , _eapklpPayload        :: !APKListing
     , _eapklpLanguage       :: !Text
     , _eapklpEditId         :: !Text

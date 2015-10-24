@@ -46,7 +46,7 @@ type RemarketingListsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] RemarketingList :>
@@ -56,7 +56,7 @@ type RemarketingListsUpdateResource =
 --
 -- /See:/ 'remarketingListsUpdate' smart constructor.
 data RemarketingListsUpdate = RemarketingListsUpdate
-    { _rluProFileId :: !(JSONText Int64)
+    { _rluProFileId :: !(Textual Int64)
     , _rluPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
 

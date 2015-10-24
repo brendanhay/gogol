@@ -52,8 +52,8 @@ type TableImportRowsResource =
          "tables" :>
            Capture "tableId" Text :>
              "import" :>
-               QueryParam "startLine" (JSONText Int32) :>
-                 QueryParam "endLine" (JSONText Int32) :>
+               QueryParam "startLine" (Textual Int32) :>
+                 QueryParam "endLine" (Textual Int32) :>
                    QueryParam "delimiter" Text :>
                      QueryParam "encoding" Text :>
                        QueryParam "isStrict" Bool :>
@@ -65,8 +65,8 @@ type TableImportRowsResource =
              "tables" :>
                Capture "tableId" Text :>
                  "import" :>
-                   QueryParam "startLine" (JSONText Int32) :>
-                     QueryParam "endLine" (JSONText Int32) :>
+                   QueryParam "startLine" (Textual Int32) :>
+                     QueryParam "endLine" (Textual Int32) :>
                        QueryParam "delimiter" Text :>
                          QueryParam "encoding" Text :>
                            QueryParam "isStrict" Bool :>
@@ -79,8 +79,8 @@ type TableImportRowsResource =
 --
 -- /See:/ 'tableImportRows' smart constructor.
 data TableImportRows = TableImportRows
-    { _tirStartLine :: !(Maybe (JSONText Int32))
-    , _tirEndLine   :: !(Maybe (JSONText Int32))
+    { _tirStartLine :: !(Maybe (Textual Int32))
+    , _tirEndLine   :: !(Maybe (Textual Int32))
     , _tirTableId   :: !Text
     , _tirDelimiter :: !(Maybe Text)
     , _tirEncoding  :: !(Maybe Text)

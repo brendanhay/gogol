@@ -47,9 +47,9 @@ type ReportsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "reports" :>
-               Capture "reportId" (JSONText Int64) :>
+               Capture "reportId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Report :> Patch '[JSON] Report
 
@@ -57,8 +57,8 @@ type ReportsPatchResource =
 --
 -- /See:/ 'reportsPatch' smart constructor.
 data ReportsPatch = ReportsPatch
-    { _rpReportId  :: !(JSONText Int64)
-    , _rpProFileId :: !(JSONText Int64)
+    { _rpReportId  :: !(Textual Int64)
+    , _rpProFileId :: !(Textual Int64)
     , _rpPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 

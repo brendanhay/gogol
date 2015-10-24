@@ -54,7 +54,7 @@ type FirewallsListResource =
                "firewalls" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] FirewallList
 
 -- | Retrieves the list of firewall resources available to the specified
@@ -65,7 +65,7 @@ data FirewallsList = FirewallsList
     { _flProject    :: !Text
     , _flFilter     :: !(Maybe Text)
     , _flPageToken  :: !(Maybe Text)
-    , _flMaxResults :: !(JSONText Word32)
+    , _flMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsList' with the minimum fields required to make a request.

@@ -48,14 +48,14 @@ type StyleGetResource =
          "tables" :>
            Capture "tableId" Text :>
              "styles" :>
-               Capture "styleId" (JSONText Int32) :>
+               Capture "styleId" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] StyleSetting
 
 -- | Gets a specific style.
 --
 -- /See:/ 'styleGet' smart constructor.
 data StyleGet = StyleGet
-    { _sgStyleId :: !(JSONText Int32)
+    { _sgStyleId :: !(Textual Int32)
     , _sgTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -53,16 +53,16 @@ type CreativeGroupsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" (JSONText Int64) :>
+                 QueryParams "ids" (Textual Int64) :>
                    QueryParam "sortOrder" CreativeGroupsListSortOrder :>
-                     QueryParam "groupNumber" (JSONText Int32) :>
+                     QueryParam "groupNumber" (Textual Int32) :>
                        QueryParam "pageToken" Text :>
                          QueryParam "sortField" CreativeGroupsListSortField :>
-                           QueryParams "advertiserIds" (JSONText Int64) :>
-                             QueryParam "maxResults" (JSONText Int32) :>
+                           QueryParams "advertiserIds" (Textual Int64) :>
+                             QueryParam "maxResults" (Textual Int32) :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CreativeGroupsListResponse
 
@@ -71,14 +71,14 @@ type CreativeGroupsListResource =
 -- /See:/ 'creativeGroupsList' smart constructor.
 data CreativeGroupsList = CreativeGroupsList
     { _cglSearchString  :: !(Maybe Text)
-    , _cglIds           :: !(Maybe [JSONText Int64])
-    , _cglProFileId     :: !(JSONText Int64)
+    , _cglIds           :: !(Maybe [Textual Int64])
+    , _cglProFileId     :: !(Textual Int64)
     , _cglSortOrder     :: !(Maybe CreativeGroupsListSortOrder)
-    , _cglGroupNumber   :: !(Maybe (JSONText Int32))
+    , _cglGroupNumber   :: !(Maybe (Textual Int32))
     , _cglPageToken     :: !(Maybe Text)
     , _cglSortField     :: !(Maybe CreativeGroupsListSortField)
-    , _cglAdvertiserIds :: !(Maybe [JSONText Int64])
-    , _cglMaxResults    :: !(Maybe (JSONText Int32))
+    , _cglAdvertiserIds :: !(Maybe [Textual Int64])
+    , _cglMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsList' with the minimum fields required to make a request.

@@ -56,8 +56,8 @@ type ManagementGoalsListResource =
                    "profiles" :>
                      Capture "profileId" Text :>
                        "goals" :>
-                         QueryParam "start-index" (JSONText Int32) :>
-                           QueryParam "max-results" (JSONText Int32) :>
+                         QueryParam "start-index" (Textual Int32) :>
+                           QueryParam "max-results" (Textual Int32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Goals
 
 -- | Lists goals to which the user has access.
@@ -67,8 +67,8 @@ data ManagementGoalsList = ManagementGoalsList
     { _mglWebPropertyId :: !Text
     , _mglProFileId     :: !Text
     , _mglAccountId     :: !Text
-    , _mglStartIndex    :: !(Maybe (JSONText Int32))
-    , _mglMaxResults    :: !(Maybe (JSONText Int32))
+    , _mglStartIndex    :: !(Maybe (Textual Int32))
+    , _mglMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsList' with the minimum fields required to make a request.

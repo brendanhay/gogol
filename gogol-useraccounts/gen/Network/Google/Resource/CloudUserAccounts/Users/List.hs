@@ -55,7 +55,7 @@ type UsersListResource =
                  QueryParam "orderBy" Text :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] UserList
 
 -- | Retrieves a list of users contained within the specified project.
@@ -66,7 +66,7 @@ data UsersList = UsersList
     , _ulProject    :: !Text
     , _ulFilter     :: !(Maybe Text)
     , _ulPageToken  :: !(Maybe Text)
-    , _ulMaxResults :: !(JSONText Word32)
+    , _ulMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersList' with the minimum fields required to make a request.

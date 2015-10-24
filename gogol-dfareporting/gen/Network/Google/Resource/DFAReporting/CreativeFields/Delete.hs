@@ -46,17 +46,17 @@ type CreativeFieldsDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing creative field.
 --
 -- /See:/ 'creativeFieldsDelete' smart constructor.
 data CreativeFieldsDelete = CreativeFieldsDelete
-    { _cfdProFileId :: !(JSONText Int64)
-    , _cfdId        :: !(JSONText Int64)
+    { _cfdProFileId :: !(Textual Int64)
+    , _cfdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsDelete' with the minimum fields required to make a request.

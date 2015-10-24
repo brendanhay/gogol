@@ -99,9 +99,9 @@ instance ToJSON CreateClusterRequest where
 data Cluster = Cluster
     { _cStatus                :: !(Maybe Text)
     , _cNodeConfig            :: !(Maybe NodeConfig)
-    , _cNodeIPv4CIdRSize      :: !(Maybe (JSONText Int32))
+    , _cNodeIPv4CIdRSize      :: !(Maybe (Textual Int32))
     , _cClusterIPv4CIdR       :: !(Maybe Text)
-    , _cInitialNodeCount      :: !(Maybe (JSONText Int32))
+    , _cInitialNodeCount      :: !(Maybe (Textual Int32))
     , _cCurrentNodeVersion    :: !(Maybe Text)
     , _cNetwork               :: !(Maybe Text)
     , _cInitialClusterVersion :: !(Maybe Text)
@@ -437,7 +437,7 @@ instance ToJSON UpdateClusterRequest where
 --
 -- /See:/ 'nodeConfig' smart constructor.
 data NodeConfig = NodeConfig
-    { _ncDiskSizeGb  :: !(Maybe (JSONText Int32))
+    { _ncDiskSizeGb  :: !(Maybe (Textual Int32))
     , _ncOAuthScopes :: !(Maybe [Text])
     , _ncMachineType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)

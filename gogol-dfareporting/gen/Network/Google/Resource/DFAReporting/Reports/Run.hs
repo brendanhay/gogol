@@ -47,9 +47,9 @@ type ReportsRunResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "reports" :>
-               Capture "reportId" (JSONText Int64) :>
+               Capture "reportId" (Textual Int64) :>
                  "run" :>
                    QueryParam "synchronous" Bool :>
                      QueryParam "alt" AltJSON :> Post '[JSON] File
@@ -59,8 +59,8 @@ type ReportsRunResource =
 -- /See:/ 'reportsRun' smart constructor.
 data ReportsRun = ReportsRun
     { _rrSynchronous :: !(Maybe Bool)
-    , _rrReportId    :: !(JSONText Int64)
-    , _rrProFileId   :: !(JSONText Int64)
+    , _rrReportId    :: !(Textual Int64)
+    , _rrProFileId   :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsRun' with the minimum fields required to make a request.

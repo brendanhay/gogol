@@ -113,7 +113,7 @@ instance ToJSON URL where
 --
 -- /See:/ 'stringCount' smart constructor.
 data StringCount = StringCount
-    { _scCount :: !(Maybe (JSONText Int64))
+    { _scCount :: !(Maybe (Textual Int64))
     , _scId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -159,10 +159,10 @@ instance ToJSON StringCount where
 -- /See:/ 'analyticsSnapshot' smart constructor.
 data AnalyticsSnapshot = AnalyticsSnapshot
     { _asPlatforms      :: !(Maybe [StringCount])
-    , _asShortURLClicks :: !(Maybe (JSONText Int64))
+    , _asShortURLClicks :: !(Maybe (Textual Int64))
     , _asReferrers      :: !(Maybe [StringCount])
     , _asCountries      :: !(Maybe [StringCount])
-    , _asLongURLClicks  :: !(Maybe (JSONText Int64))
+    , _asLongURLClicks  :: !(Maybe (Textual Int64))
     , _asBrowsers       :: !(Maybe [StringCount])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -341,9 +341,9 @@ instance ToJSON AnalyticsSummary where
 --
 -- /See:/ 'urlHistory' smart constructor.
 data URLHistory = URLHistory
-    { _uhTotalItems    :: !(Maybe (JSONText Int32))
+    { _uhTotalItems    :: !(Maybe (Textual Int32))
     , _uhNextPageToken :: !(Maybe Text)
-    , _uhItemsPerPage  :: !(Maybe (JSONText Int32))
+    , _uhItemsPerPage  :: !(Maybe (Textual Int32))
     , _uhKind          :: !Text
     , _uhItems         :: !(Maybe [URL])
     } deriving (Eq,Show,Data,Typeable,Generic)

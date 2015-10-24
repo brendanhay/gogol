@@ -68,8 +68,8 @@ type VolumesListResource =
                        QueryParam "projection" VolumesListProjection :>
                          QueryParam "filter" VolumesListFilter :>
                            QueryParam "langRestrict" Text :>
-                             QueryParam "startIndex" (JSONText Word32) :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                             QueryParam "startIndex" (Textual Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "showPreorders" Bool :>
                                    QueryParam "printType" VolumesListPrintType
                                      :>
@@ -89,8 +89,8 @@ data VolumesList = VolumesList
     , _vlProjection      :: !(Maybe VolumesListProjection)
     , _vlFilter          :: !(Maybe VolumesListFilter)
     , _vlLangRestrict    :: !(Maybe Text)
-    , _vlStartIndex      :: !(Maybe (JSONText Word32))
-    , _vlMaxResults      :: !(Maybe (JSONText Word32))
+    , _vlStartIndex      :: !(Maybe (Textual Word32))
+    , _vlMaxResults      :: !(Maybe (Textual Word32))
     , _vlShowPreOrders   :: !(Maybe Bool)
     , _vlPrintType       :: !(Maybe VolumesListPrintType)
     } deriving (Eq,Show,Data,Typeable,Generic)

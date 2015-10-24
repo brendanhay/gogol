@@ -41,8 +41,8 @@ import           Network.Google.Prelude
 -- /See:/ 'groupLicense' smart constructor.
 data GroupLicense = GroupLicense
     { _glKind            :: !Text
-    , _glNumProvisioned  :: !(Maybe (JSONText Int32))
-    , _glNumPurchased    :: !(Maybe (JSONText Int32))
+    , _glNumProvisioned  :: !(Maybe (Textual Int32))
+    , _glNumPurchased    :: !(Maybe (Textual Int32))
     , _glApproval        :: !(Maybe Text)
     , _glProductId       :: !(Maybe Text)
     , _glAcquisitionKind :: !(Maybe Text)
@@ -255,7 +255,7 @@ instance ToJSON CollectionsListResponse where
 data AppRestrictionsSchemaRestrictionRestrictionValue = AppRestrictionsSchemaRestrictionRestrictionValue
     { _arsrrvValueMultiselect :: !(Maybe [Text])
     , _arsrrvValueBool        :: !(Maybe Bool)
-    , _arsrrvValueInteger     :: !(Maybe (JSONText Int32))
+    , _arsrrvValueInteger     :: !(Maybe (Textual Int32))
     , _arsrrvType             :: !(Maybe Text)
     , _arsrrvValueString      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -843,7 +843,7 @@ instance ToJSON UsersListResponse where
 --
 -- /See:/ 'appVersion' smart constructor.
 data AppVersion = AppVersion
-    { _avVersionCode   :: !(Maybe (JSONText Int32))
+    { _avVersionCode   :: !(Maybe (Textual Int32))
     , _avVersionString :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1116,7 +1116,7 @@ instance ToJSON ProductSet where
 --
 -- /See:/ 'install' smart constructor.
 data Install = Install
-    { _iVersionCode  :: !(Maybe (JSONText Int32))
+    { _iVersionCode  :: !(Maybe (Textual Int32))
     , _iKind         :: !Text
     , _iInstallState :: !(Maybe Text)
     , _iProductId    :: !(Maybe Text)

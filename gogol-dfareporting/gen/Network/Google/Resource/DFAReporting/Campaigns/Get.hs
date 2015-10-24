@@ -46,17 +46,17 @@ type CampaignsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Campaign
 
 -- | Gets one campaign by ID.
 --
 -- /See:/ 'campaignsGet' smart constructor.
 data CampaignsGet = CampaignsGet
-    { _cggProFileId :: !(JSONText Int64)
-    , _cggId        :: !(JSONText Int64)
+    { _cggProFileId :: !(Textual Int64)
+    , _cggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsGet' with the minimum fields required to make a request.

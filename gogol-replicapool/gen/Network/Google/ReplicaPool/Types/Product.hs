@@ -316,24 +316,24 @@ instance ToJSON InstanceGroupManagerList where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe (JSONText Word64))
+    { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (JSONText Int32))
+    , _oProgress            :: !(Maybe (Textual Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
+    , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (JSONText Word64))
+    , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -603,18 +603,18 @@ instance ToJSON Operation where
 --
 -- /See:/ 'instanceGroupManager' smart constructor.
 data InstanceGroupManager = InstanceGroupManager
-    { _igmCurrentSize         :: !(Maybe (JSONText Int32))
+    { _igmCurrentSize         :: !(Maybe (Textual Int32))
     , _igmGroup               :: !(Maybe Text)
     , _igmKind                :: !Text
-    , _igmFingerprint         :: !(Maybe (JSONText Word8))
+    , _igmFingerprint         :: !(Maybe (Textual Word8))
     , _igmBaseInstanceName    :: !(Maybe Text)
     , _igmAutoHealingPolicies :: !(Maybe [ReplicaPoolAutoHealingPolicy])
     , _igmInstanceTemplate    :: !(Maybe Text)
-    , _igmTargetSize          :: !(Maybe (JSONText Int32))
+    , _igmTargetSize          :: !(Maybe (Textual Int32))
     , _igmSelfLink            :: !(Maybe Text)
     , _igmName                :: !(Maybe Text)
     , _igmCreationTimestamp   :: !(Maybe Text)
-    , _igmId                  :: !(Maybe (JSONText Word64))
+    , _igmId                  :: !(Maybe (Textual Word64))
     , _igmTargetPools         :: !(Maybe [Text])
     , _igmDescription         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -992,7 +992,7 @@ instance ToJSON OperationError where
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
 data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest
-    { _igmstprFingerprint :: !(Maybe (JSONText Word8))
+    { _igmstprFingerprint :: !(Maybe (Textual Word8))
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -54,7 +54,7 @@ type LayersListResource =
                QueryParam "contentVersion" Text :>
                  QueryParam "source" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] Layersummaries
 
@@ -66,7 +66,7 @@ data LayersList = LayersList
     , _llVolumeId       :: !Text
     , _llSource         :: !(Maybe Text)
     , _llPageToken      :: !(Maybe Text)
-    , _llMaxResults     :: !(Maybe (JSONText Word32))
+    , _llMaxResults     :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList' with the minimum fields required to make a request.

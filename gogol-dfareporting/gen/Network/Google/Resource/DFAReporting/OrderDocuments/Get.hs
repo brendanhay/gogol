@@ -47,20 +47,20 @@ type OrderDocumentsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "projects" :>
-               Capture "projectId" (JSONText Int64) :>
+               Capture "projectId" (Textual Int64) :>
                  "orderDocuments" :>
-                   Capture "id" (JSONText Int64) :>
+                   Capture "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] OrderDocument
 
 -- | Gets one order document by ID.
 --
 -- /See:/ 'orderDocumentsGet' smart constructor.
 data OrderDocumentsGet = OrderDocumentsGet
-    { _odgProFileId :: !(JSONText Int64)
-    , _odgId        :: !(JSONText Int64)
-    , _odgProjectId :: !(JSONText Int64)
+    { _odgProFileId :: !(Textual Int64)
+    , _odgId        :: !(Textual Int64)
+    , _odgProjectId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsGet' with the minimum fields required to make a request.

@@ -48,9 +48,9 @@ type FloodlightActivitiesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] FloodlightActivity :>
                      Patch '[JSON] FloodlightActivity
@@ -60,9 +60,9 @@ type FloodlightActivitiesPatchResource =
 --
 -- /See:/ 'floodlightActivitiesPatch' smart constructor.
 data FloodlightActivitiesPatch = FloodlightActivitiesPatch
-    { _fapProFileId :: !(JSONText Int64)
+    { _fapProFileId :: !(Textual Int64)
     , _fapPayload   :: !FloodlightActivity
-    , _fapId        :: !(JSONText Int64)
+    , _fapId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesPatch' with the minimum fields required to make a request.

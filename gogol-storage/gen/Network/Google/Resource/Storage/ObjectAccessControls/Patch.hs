@@ -55,7 +55,7 @@ type ObjectAccessControlsPatchResource =
                Capture "object" Text :>
                  "acl" :>
                    Capture "entity" Text :>
-                     QueryParam "generation" (JSONText Int64) :>
+                     QueryParam "generation" (Textual Int64) :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ObjectAccessControl :>
                            Patch '[JSON] ObjectAccessControl
@@ -69,7 +69,7 @@ data ObjectAccessControlsPatch = ObjectAccessControlsPatch
     , _oacpPayload    :: !ObjectAccessControl
     , _oacpObject     :: !Text
     , _oacpEntity     :: !Text
-    , _oacpGeneration :: !(Maybe (JSONText Int64))
+    , _oacpGeneration :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsPatch' with the minimum fields required to make a request.

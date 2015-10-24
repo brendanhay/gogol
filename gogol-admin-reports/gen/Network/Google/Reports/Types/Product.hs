@@ -25,7 +25,7 @@ import           Network.Google.Reports.Types.Sum
 data UsageReportParametersItem = UsageReportParametersItem
     { _urpiDatetimeValue :: !(Maybe DateTime')
     , _urpiBoolValue     :: !(Maybe Bool)
-    , _urpiIntValue      :: !(Maybe (JSONText Int64))
+    , _urpiIntValue      :: !(Maybe (Textual Int64))
     , _urpiStringValue   :: !(Maybe Text)
     , _urpiName          :: !(Maybe Text)
     , _urpiMsgValue      :: !(Maybe [UsageReportParametersItemMsgValueItem])
@@ -121,7 +121,7 @@ instance ToJSON UsageReportParametersItem where
 -- /See:/ 'activityId' smart constructor.
 data ActivityId = ActivityId
     { _aiTime            :: !(Maybe DateTime')
-    , _aiUniqueQualifier :: !(Maybe (JSONText Int64))
+    , _aiUniqueQualifier :: !(Maybe (Textual Int64))
     , _aiCustomerId      :: !(Maybe Text)
     , _aiApplicationName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -385,7 +385,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe (JSONText Int64))
+    , _cExpiration  :: !(Maybe (Textual Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -961,9 +961,9 @@ instance ToJSON UsageReportEntity where
 -- /See:/ 'activityEventsItemParametersItem' smart constructor.
 data ActivityEventsItemParametersItem = ActivityEventsItemParametersItem
     { _aeipiBoolValue     :: !(Maybe Bool)
-    , _aeipiIntValue      :: !(Maybe (JSONText Int64))
+    , _aeipiIntValue      :: !(Maybe (Textual Int64))
     , _aeipiValue         :: !(Maybe Text)
-    , _aeipiMultiIntValue :: !(Maybe [JSONText Int64])
+    , _aeipiMultiIntValue :: !(Maybe [Textual Int64])
     , _aeipiName          :: !(Maybe Text)
     , _aeipiMultiValue    :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)

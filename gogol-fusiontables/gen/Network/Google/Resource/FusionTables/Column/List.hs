@@ -50,7 +50,7 @@ type ColumnListResource =
            Capture "tableId" Text :>
              "columns" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] ColumnList
 
 -- | Retrieves a list of columns.
@@ -59,7 +59,7 @@ type ColumnListResource =
 data ColumnList' = ColumnList'
     { _clPageToken  :: !(Maybe Text)
     , _clTableId    :: !Text
-    , _clMaxResults :: !(Maybe (JSONText Word32))
+    , _clMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnList'' with the minimum fields required to make a request.

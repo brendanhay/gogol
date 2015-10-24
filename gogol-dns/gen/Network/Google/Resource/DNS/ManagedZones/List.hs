@@ -52,7 +52,7 @@ type ManagedZonesListResource =
              "managedZones" :>
                QueryParam "pageToken" Text :>
                  QueryParam "dnsName" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] ManagedZonesListResponse
 
@@ -63,7 +63,7 @@ data ManagedZonesList = ManagedZonesList
     { _mzlProject    :: !Text
     , _mzlPageToken  :: !(Maybe Text)
     , _mzlDNSName    :: !(Maybe Text)
-    , _mzlMaxResults :: !(Maybe (JSONText Int32))
+    , _mzlMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesList' with the minimum fields required to make a request.

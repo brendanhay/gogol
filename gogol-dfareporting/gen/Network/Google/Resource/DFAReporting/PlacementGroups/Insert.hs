@@ -46,7 +46,7 @@ type PlacementGroupsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] PlacementGroup :>
@@ -56,7 +56,7 @@ type PlacementGroupsInsertResource =
 --
 -- /See:/ 'placementGroupsInsert' smart constructor.
 data PlacementGroupsInsert = PlacementGroupsInsert
-    { _pgiProFileId :: !(JSONText Int64)
+    { _pgiProFileId :: !(Textual Int64)
     , _pgiPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 

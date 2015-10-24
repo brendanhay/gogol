@@ -98,7 +98,7 @@ instance ToJSON ChangesListResponse where
 data Project = Project
     { _pKind   :: !Text
     , _pId     :: !(Maybe Text)
-    , _pNumber :: !(Maybe (JSONText Word64))
+    , _pNumber :: !(Maybe (Textual Word64))
     , _pQuota  :: !(Maybe Quota)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -329,7 +329,7 @@ instance ToJSON ResourceRecordSetsListResponse where
 --
 -- /See:/ 'resourceRecordSet' smart constructor.
 data ResourceRecordSet = ResourceRecordSet
-    { _rrsTtl     :: !(Maybe (JSONText Int32))
+    { _rrsTtl     :: !(Maybe (Textual Int32))
     , _rrsKind    :: !Text
     , _rrsName    :: !(Maybe Text)
     , _rrsType    :: !(Maybe Text)
@@ -417,7 +417,7 @@ data ManagedZone = ManagedZone
     , _mzKind          :: !Text
     , _mzNameServerSet :: !(Maybe Text)
     , _mzName          :: !(Maybe Text)
-    , _mzId            :: !(Maybe (JSONText Word64))
+    , _mzId            :: !(Maybe (Textual Word64))
     , _mzDNSName       :: !(Maybe Text)
     , _mzDescription   :: !(Maybe Text)
     , _mzNameServers   :: !(Maybe [Text])
@@ -541,13 +541,13 @@ instance ToJSON ManagedZone where
 --
 -- /See:/ 'quota' smart constructor.
 data Quota = Quota
-    { _qRrSetDeletionsPerChange  :: !(Maybe (JSONText Int32))
-    , _qRrSetsPerManagedZone     :: !(Maybe (JSONText Int32))
+    { _qRrSetDeletionsPerChange  :: !(Maybe (Textual Int32))
+    , _qRrSetsPerManagedZone     :: !(Maybe (Textual Int32))
     , _qKind                     :: !Text
-    , _qResourceRecordsPerRrSet  :: !(Maybe (JSONText Int32))
-    , _qRrSetAdditionsPerChange  :: !(Maybe (JSONText Int32))
-    , _qManagedZones             :: !(Maybe (JSONText Int32))
-    , _qTotalRrDataSizePerChange :: !(Maybe (JSONText Int32))
+    , _qResourceRecordsPerRrSet  :: !(Maybe (Textual Int32))
+    , _qRrSetAdditionsPerChange  :: !(Maybe (Textual Int32))
+    , _qManagedZones             :: !(Maybe (Textual Int32))
+    , _qTotalRrDataSizePerChange :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.

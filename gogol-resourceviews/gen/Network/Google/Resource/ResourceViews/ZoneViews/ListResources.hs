@@ -64,7 +64,7 @@ type ZoneViewsListResourcesResource =
                          QueryParam "format" ZoneViewsListResourcesFormat :>
                            QueryParam "serviceName" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" (JSONText Int32) :>
+                               QueryParam "maxResults" (Textual Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ZoneViewsListResourcesResponse
 
@@ -79,7 +79,7 @@ data ZoneViewsListResources = ZoneViewsListResources
     , _zvlrZone         :: !Text
     , _zvlrServiceName  :: !(Maybe Text)
     , _zvlrPageToken    :: !(Maybe Text)
-    , _zvlrMaxResults   :: !(JSONText Int32)
+    , _zvlrMaxResults   :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsListResources' with the minimum fields required to make a request.

@@ -46,7 +46,7 @@ type AccountUserProFilesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] AccountUserProFile :>
@@ -56,7 +56,7 @@ type AccountUserProFilesInsertResource =
 --
 -- /See:/ 'accountUserProFilesInsert' smart constructor.
 data AccountUserProFilesInsert = AccountUserProFilesInsert
-    { _aupfiProFileId :: !(JSONText Int64)
+    { _aupfiProFileId :: !(Textual Int64)
     , _aupfiPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
 

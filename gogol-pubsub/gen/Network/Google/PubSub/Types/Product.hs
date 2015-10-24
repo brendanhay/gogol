@@ -134,7 +134,7 @@ instance ToJSON ReceivedMessage where
 -- /See:/ 'modifyAckDeadlineRequest' smart constructor.
 data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest
     { _madrAckIds             :: !(Maybe [Text])
-    , _madrAckDeadlineSeconds :: !(Maybe (JSONText Int32))
+    , _madrAckDeadlineSeconds :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ModifyAckDeadlineRequest' with the minimum fields required to make a request.
@@ -254,7 +254,7 @@ instance ToJSON Empty where
 --
 -- /See:/ 'pubsubMessage' smart constructor.
 data PubsubMessage = PubsubMessage
-    { _pmData       :: !(Maybe (JSONText Word8))
+    { _pmData       :: !(Maybe (Textual Word8))
     , _pmAttributes :: !(Maybe PubsubMessageAttributes)
     , _pmMessageId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -542,7 +542,7 @@ instance ToJSON Topic where
 --
 -- /See:/ 'pullRequest' smart constructor.
 data PullRequest = PullRequest
-    { _prMaxMessages       :: !(Maybe (JSONText Int32))
+    { _prMaxMessages       :: !(Maybe (Textual Int32))
     , _prReturnImmediately :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -801,8 +801,8 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy
-    { _pEtag     :: !(Maybe (JSONText Word8))
-    , _pVersion  :: !(Maybe (JSONText Int32))
+    { _pEtag     :: !(Maybe (Textual Word8))
+    , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -915,7 +915,7 @@ data Subscription = Subscription
     { _sPushConfig         :: !(Maybe PushConfig)
     , _sTopic              :: !(Maybe Text)
     , _sName               :: !(Maybe Text)
-    , _sAckDeadlineSeconds :: !(Maybe (JSONText Int32))
+    , _sAckDeadlineSeconds :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.

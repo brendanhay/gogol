@@ -47,11 +47,11 @@ type CreativeFieldValuesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
-               Capture "creativeFieldId" (JSONText Int64) :>
+               Capture "creativeFieldId" (Textual Int64) :>
                  "creativeFieldValues" :>
-                   Capture "id" (JSONText Int64) :>
+                   Capture "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] CreativeFieldValue
 
@@ -59,9 +59,9 @@ type CreativeFieldValuesGetResource =
 --
 -- /See:/ 'creativeFieldValuesGet' smart constructor.
 data CreativeFieldValuesGet = CreativeFieldValuesGet
-    { _cfvgCreativeFieldId :: !(JSONText Int64)
-    , _cfvgProFileId       :: !(JSONText Int64)
-    , _cfvgId              :: !(JSONText Int64)
+    { _cfvgCreativeFieldId :: !(Textual Int64)
+    , _cfvgProFileId       :: !(Textual Int64)
+    , _cfvgId              :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesGet' with the minimum fields required to make a request.

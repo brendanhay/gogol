@@ -48,7 +48,7 @@ type FilesGenerateIdsResource =
          "files" :>
            "generateIds" :>
              QueryParam "space" Text :>
-               QueryParam "maxResults" (JSONText Int32) :>
+               QueryParam "maxResults" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] GeneratedIds
 
 -- | Generates a set of file IDs which can be provided in insert requests.
@@ -56,7 +56,7 @@ type FilesGenerateIdsResource =
 -- /See:/ 'filesGenerateIds' smart constructor.
 data FilesGenerateIds = FilesGenerateIds
     { _fgiSpace      :: !Text
-    , _fgiMaxResults :: !(JSONText Int32)
+    , _fgiMaxResults :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGenerateIds' with the minimum fields required to make a request.

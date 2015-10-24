@@ -152,7 +152,7 @@ instance ToJSON LanguagesListResponse where
 --
 -- /See:/ 'detectionsResourceItem' smart constructor.
 data DetectionsResourceItem = DetectionsResourceItem
-    { _driConfidence :: !(Maybe (JSONText Float))
+    { _driConfidence :: !(Maybe (Textual Double))
     , _driIsReliable :: !(Maybe Bool)
     , _driLanguage   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)

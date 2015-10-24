@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersShiplineitemsResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
                "shipLineItems" :>
@@ -58,7 +58,7 @@ type OrdersShiplineitemsResource =
 --
 -- /See:/ 'ordersShiplineitems' smart constructor.
 data OrdersShiplineitems = OrdersShiplineitems
-    { _osMerchantId :: !(JSONText Word64)
+    { _osMerchantId :: !(Textual Word64)
     , _osPayload    :: !OrdersShipLineItemsRequest
     , _osOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

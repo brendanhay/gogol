@@ -54,18 +54,18 @@ type InventoryItemsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "projects" :>
-               Capture "projectId" (JSONText Int64) :>
+               Capture "projectId" (Textual Int64) :>
                  "inventoryItems" :>
-                   QueryParams "ids" (JSONText Int64) :>
+                   QueryParams "ids" (Textual Int64) :>
                      QueryParam "sortOrder" InventoryItemsListSortOrder :>
                        QueryParam "inPlan" Bool :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField" InventoryItemsListSortField :>
-                             QueryParams "orderId" (JSONText Int64) :>
-                               QueryParams "siteId" (JSONText Int64) :>
-                                 QueryParam "maxResults" (JSONText Int32) :>
+                             QueryParams "orderId" (Textual Int64) :>
+                               QueryParams "siteId" (Textual Int64) :>
+                                 QueryParam "maxResults" (Textual Int32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] InventoryItemsListResponse
 
@@ -73,16 +73,16 @@ type InventoryItemsListResource =
 --
 -- /See:/ 'inventoryItemsList' smart constructor.
 data InventoryItemsList = InventoryItemsList
-    { _iilIds        :: !(Maybe [JSONText Int64])
-    , _iilProFileId  :: !(JSONText Int64)
+    { _iilIds        :: !(Maybe [Textual Int64])
+    , _iilProFileId  :: !(Textual Int64)
     , _iilSortOrder  :: !(Maybe InventoryItemsListSortOrder)
     , _iilInPlan     :: !(Maybe Bool)
     , _iilPageToken  :: !(Maybe Text)
-    , _iilProjectId  :: !(JSONText Int64)
+    , _iilProjectId  :: !(Textual Int64)
     , _iilSortField  :: !(Maybe InventoryItemsListSortField)
-    , _iilOrderId    :: !(Maybe [JSONText Int64])
-    , _iilSiteId     :: !(Maybe [JSONText Int64])
-    , _iilMaxResults :: !(Maybe (JSONText Int32))
+    , _iilOrderId    :: !(Maybe [Textual Int64])
+    , _iilSiteId     :: !(Maybe [Textual Int64])
+    , _iilMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsList' with the minimum fields required to make a request.

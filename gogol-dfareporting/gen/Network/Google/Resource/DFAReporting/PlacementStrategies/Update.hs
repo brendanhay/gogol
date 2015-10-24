@@ -46,7 +46,7 @@ type PlacementStrategiesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] PlacementStrategy :>
@@ -56,7 +56,7 @@ type PlacementStrategiesUpdateResource =
 --
 -- /See:/ 'placementStrategiesUpdate' smart constructor.
 data PlacementStrategiesUpdate = PlacementStrategiesUpdate
-    { _psuProFileId :: !(JSONText Int64)
+    { _psuProFileId :: !(Textual Int64)
     , _psuPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -49,8 +49,8 @@ type AboutGetResource =
        "v2" :>
          "about" :>
            QueryParam "includeSubscribed" Bool :>
-             QueryParam "startChangeId" (JSONText Int64) :>
-               QueryParam "maxChangeIdCount" (JSONText Int64) :>
+             QueryParam "startChangeId" (Textual Int64) :>
+               QueryParam "maxChangeIdCount" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] About
 
 -- | Gets the information about the current user along with Drive API
@@ -59,8 +59,8 @@ type AboutGetResource =
 -- /See:/ 'aboutGet' smart constructor.
 data AboutGet = AboutGet
     { _agIncludeSubscribed :: !Bool
-    , _agStartChangeId     :: !(Maybe (JSONText Int64))
-    , _agMaxChangeIdCount  :: !(JSONText Int64)
+    , _agStartChangeId     :: !(Maybe (Textual Int64))
+    , _agMaxChangeIdCount  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AboutGet' with the minimum fields required to make a request.

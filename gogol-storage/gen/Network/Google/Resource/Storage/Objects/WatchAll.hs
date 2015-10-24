@@ -60,7 +60,7 @@ type ObjectsWatchAllResource =
                      QueryParam "projection" ObjectsWatchAllProjection :>
                        QueryParam "pageToken" Text :>
                          QueryParam "delimiter" Text :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :>
                                ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
@@ -75,7 +75,7 @@ data ObjectsWatchAll = ObjectsWatchAll
     , _owaProjection :: !(Maybe ObjectsWatchAllProjection)
     , _owaPageToken  :: !(Maybe Text)
     , _owaDelimiter  :: !(Maybe Text)
-    , _owaMaxResults :: !(Maybe (JSONText Word32))
+    , _owaMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsWatchAll' with the minimum fields required to make a request.

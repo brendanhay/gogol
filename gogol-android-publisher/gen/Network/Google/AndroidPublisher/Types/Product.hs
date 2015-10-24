@@ -95,8 +95,8 @@ instance ToJSON InAppProductsUpdateResponse where
 --
 -- /See:/ 'monthDay' smart constructor.
 data MonthDay = MonthDay
-    { _mdDay   :: !(Maybe (JSONText Word32))
-    , _mdMonth :: !(Maybe (JSONText Word32))
+    { _mdDay   :: !(Maybe (Textual Word32))
+    , _mdMonth :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MonthDay' with the minimum fields required to make a request.
@@ -142,9 +142,9 @@ instance ToJSON MonthDay where
 --
 -- /See:/ 'track' smart constructor.
 data Track = Track
-    { _tVersionCodes :: !(Maybe [JSONText Int32])
+    { _tVersionCodes :: !(Maybe [Textual Int32])
     , _tTrack        :: !(Maybe Text)
-    , _tUserFraction :: !(Maybe (JSONText Double))
+    , _tUserFraction :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Track' with the minimum fields required to make a request.
@@ -255,7 +255,7 @@ data InAppProductsBatchRequestEntry = InAppProductsBatchRequestEntry
     { _iapbreMethodName                 :: !(Maybe Text)
     , _iapbreInAppProductsinsertrequest :: !(Maybe InAppProductsInsertRequest)
     , _iapbreInAppProductsupdaterequest :: !(Maybe InAppProductsUpdateRequest)
-    , _iapbreBatchId                    :: !(Maybe (JSONText Word32))
+    , _iapbreBatchId                    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductsBatchRequestEntry' with the minimum fields required to make a request.
@@ -453,8 +453,8 @@ instance ToJSON TokenPagination where
 --
 -- /See:/ 'expansionFile' smart constructor.
 data ExpansionFile = ExpansionFile
-    { _efFileSize          :: !(Maybe (JSONText Int64))
-    , _efReferencesVersion :: !(Maybe (JSONText Int32))
+    { _efFileSize          :: !(Maybe (Textual Int64))
+    , _efReferencesVersion :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExpansionFile' with the minimum fields required to make a request.
@@ -638,7 +638,7 @@ instance ToJSON Listing where
 --
 -- /See:/ 'aPK' smart constructor.
 data APK = APK
-    { _aVersionCode :: !(Maybe (JSONText Int32))
+    { _aVersionCode :: !(Maybe (Textual Int32))
     , _aBinary      :: !(Maybe APKBinary)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -812,9 +812,9 @@ instance ToJSON Season where
 --
 -- /See:/ 'pageInfo' smart constructor.
 data PageInfo = PageInfo
-    { _piResultPerPage :: !(Maybe (JSONText Int32))
-    , _piTotalResults  :: !(Maybe (JSONText Int32))
-    , _piStartIndex    :: !(Maybe (JSONText Int32))
+    { _piResultPerPage :: !(Maybe (Textual Int32))
+    , _piTotalResults  :: !(Maybe (Textual Int32))
+    , _piStartIndex    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
@@ -956,10 +956,10 @@ instance ToJSON AppEdit where
 --
 -- /See:/ 'productPurchase' smart constructor.
 data ProductPurchase = ProductPurchase
-    { _ppPurchaseState      :: !(Maybe (JSONText Int32))
-    , _ppConsumptionState   :: !(Maybe (JSONText Int32))
+    { _ppPurchaseState      :: !(Maybe (Textual Int32))
+    , _ppConsumptionState   :: !(Maybe (Textual Int32))
     , _ppKind               :: !Text
-    , _ppPurchaseTimeMillis :: !(Maybe (JSONText Int64))
+    , _ppPurchaseTimeMillis :: !(Maybe (Textual Int64))
     , _ppDeveloperPayload   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1048,7 +1048,7 @@ instance ToJSON ProductPurchase where
 --
 -- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
 newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
-    { _spdrNewExpiryTimeMillis :: Maybe (JSONText Int64)
+    { _spdrNewExpiryTimeMillis :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchasesDeferResponse' with the minimum fields required to make a request.
@@ -1140,9 +1140,9 @@ instance ToJSON APKListing where
 -- /See:/ 'subscriptionPurchase' smart constructor.
 data SubscriptionPurchase = SubscriptionPurchase
     { _spKind             :: !Text
-    , _spExpiryTimeMillis :: !(Maybe (JSONText Int64))
+    , _spExpiryTimeMillis :: !(Maybe (Textual Int64))
     , _spAutoRenewing     :: !(Maybe Bool)
-    , _spStartTimeMillis  :: !(Maybe (JSONText Int64))
+    , _spStartTimeMillis  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
@@ -1363,17 +1363,17 @@ instance ToJSON InAppProductsBatchRequest where
 -- /See:/ 'externallyHostedAPK' smart constructor.
 data ExternallyHostedAPK = ExternallyHostedAPK
     { _ehapkApplicationLabel    :: !(Maybe Text)
-    , _ehapkMaximumSdk          :: !(Maybe (JSONText Int32))
+    , _ehapkMaximumSdk          :: !(Maybe (Textual Int32))
     , _ehapkNATiveCodes         :: !(Maybe [Text])
-    , _ehapkVersionCode         :: !(Maybe (JSONText Int32))
+    , _ehapkVersionCode         :: !(Maybe (Textual Int32))
     , _ehapkFileSha256Base64    :: !(Maybe Text)
     , _ehapkExternallyHostedURL :: !(Maybe Text)
     , _ehapkVersionName         :: !(Maybe Text)
     , _ehapkPackageName         :: !(Maybe Text)
-    , _ehapkFileSize            :: !(Maybe (JSONText Int64))
+    , _ehapkFileSize            :: !(Maybe (Textual Int64))
     , _ehapkIconBase64          :: !(Maybe Text)
     , _ehapkUsesFeatures        :: !(Maybe [Text])
-    , _ehapkMinimumSdk          :: !(Maybe (JSONText Int32))
+    , _ehapkMinimumSdk          :: !(Maybe (Textual Int32))
     , _ehapkFileSha1Base64      :: !(Maybe Text)
     , _ehapkUsesPermissions     :: !(Maybe [ExternallyHostedAPKUsesPermission])
     , _ehapkCertificateBase64s  :: !(Maybe [Text])
@@ -1849,8 +1849,8 @@ instance ToJSON APKsAddExternallyHostedResponse where
 --
 -- /See:/ 'subscriptionDeferralInfo' smart constructor.
 data SubscriptionDeferralInfo = SubscriptionDeferralInfo
-    { _sdiDesiredExpiryTimeMillis  :: !(Maybe (JSONText Int64))
-    , _sdiExpectedExpiryTimeMillis :: !(Maybe (JSONText Int64))
+    { _sdiDesiredExpiryTimeMillis  :: !(Maybe (Textual Int64))
+    , _sdiExpectedExpiryTimeMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionDeferralInfo' with the minimum fields required to make a request.
@@ -2063,7 +2063,7 @@ instance ToJSON InAppProduct where
 data InAppProductsBatchResponseEntry = InAppProductsBatchResponseEntry
     { _iInAppProductsupdateresponse :: !(Maybe InAppProductsUpdateResponse)
     , _iInAppProductsinsertresponse :: !(Maybe InAppProductsInsertResponse)
-    , _iBatchId                     :: !(Maybe (JSONText Word32))
+    , _iBatchId                     :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductsBatchResponseEntry' with the minimum fields required to make a request.
@@ -2254,7 +2254,7 @@ instance ToJSON APKsListResponse where
 -- /See:/ 'externallyHostedAPKUsesPermission' smart constructor.
 data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission
     { _ehapkupName          :: !(Maybe Text)
-    , _ehapkupMaxSdkVersion :: !(Maybe (JSONText Int32))
+    , _ehapkupMaxSdkVersion :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExternallyHostedAPKUsesPermission' with the minimum fields required to make a request.

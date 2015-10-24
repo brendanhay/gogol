@@ -64,7 +64,7 @@ type ScoresGetResource =
                        :>
                        QueryParam "language" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (JSONText Int32) :>
+                           QueryParam "maxResults" (Textual Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] PlayerLeaderboardScoreListResponse
 
@@ -82,7 +82,7 @@ data ScoresGet = ScoresGet
     , _sgLanguage        :: !(Maybe Text)
     , _sgPageToken       :: !(Maybe Text)
     , _sgPlayerId        :: !Text
-    , _sgMaxResults      :: !(Maybe (JSONText Int32))
+    , _sgMaxResults      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresGet' with the minimum fields required to make a request.

@@ -67,20 +67,19 @@ type PlacementsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placements" :>
-               QueryParams "placementStrategyIds" (JSONText Int64)
-                 :>
-                 QueryParams "contentCategoryIds" (JSONText Int64) :>
+               QueryParams "placementStrategyIds" (Textual Int64) :>
+                 QueryParams "contentCategoryIds" (Textual Int64) :>
                    QueryParam "maxEndDate" Text :>
-                     QueryParams "campaignIds" (JSONText Int64) :>
+                     QueryParams "campaignIds" (Textual Int64) :>
                        QueryParams "pricingTypes" PlacementsListPricingTypes
                          :>
                          QueryParam "searchString" Text :>
-                           QueryParams "sizeIds" (JSONText Int64) :>
-                             QueryParams "ids" (JSONText Int64) :>
-                               QueryParams "groupIds" (JSONText Int64) :>
-                                 QueryParams "directorySiteIds" (JSONText Int64)
+                           QueryParams "sizeIds" (Textual Int64) :>
+                             QueryParams "ids" (Textual Int64) :>
+                               QueryParams "groupIds" (Textual Int64) :>
+                                 QueryParams "directorySiteIds" (Textual Int64)
                                    :>
                                    QueryParam "sortOrder"
                                      PlacementsListSortOrder
@@ -88,7 +87,7 @@ type PlacementsListResource =
                                      QueryParam "paymentSource"
                                        PlacementsListPaymentSource
                                        :>
-                                       QueryParams "siteIds" (JSONText Int64) :>
+                                       QueryParams "siteIds" (Textual Int64) :>
                                          QueryParam "pageToken" Text :>
                                            QueryParam "sortField"
                                              PlacementsListSortField
@@ -98,7 +97,7 @@ type PlacementsListResource =
                                                :>
                                                QueryParam "maxStartDate" Text :>
                                                  QueryParams "advertiserIds"
-                                                   (JSONText Int64)
+                                                   (Textual Int64)
                                                    :>
                                                    QueryParam "minStartDate"
                                                      Text
@@ -106,7 +105,7 @@ type PlacementsListResource =
                                                      QueryParam "archived" Bool
                                                        :>
                                                        QueryParam "maxResults"
-                                                         (JSONText Int32)
+                                                         (Textual Int32)
                                                          :>
                                                          QueryParam "minEndDate"
                                                            Text
@@ -121,28 +120,28 @@ type PlacementsListResource =
 --
 -- /See:/ 'placementsList' smart constructor.
 data PlacementsList = PlacementsList
-    { _pPlacementStrategyIds :: !(Maybe [JSONText Int64])
-    , _pContentCategoryIds   :: !(Maybe [JSONText Int64])
+    { _pPlacementStrategyIds :: !(Maybe [Textual Int64])
+    , _pContentCategoryIds   :: !(Maybe [Textual Int64])
     , _pMaxEndDate           :: !(Maybe Text)
-    , _pCampaignIds          :: !(Maybe [JSONText Int64])
+    , _pCampaignIds          :: !(Maybe [Textual Int64])
     , _pPricingTypes         :: !(Maybe [PlacementsListPricingTypes])
     , _pSearchString         :: !(Maybe Text)
-    , _pSizeIds              :: !(Maybe [JSONText Int64])
-    , _pIds                  :: !(Maybe [JSONText Int64])
-    , _pProFileId            :: !(JSONText Int64)
-    , _pGroupIds             :: !(Maybe [JSONText Int64])
-    , _pDirectorySiteIds     :: !(Maybe [JSONText Int64])
+    , _pSizeIds              :: !(Maybe [Textual Int64])
+    , _pIds                  :: !(Maybe [Textual Int64])
+    , _pProFileId            :: !(Textual Int64)
+    , _pGroupIds             :: !(Maybe [Textual Int64])
+    , _pDirectorySiteIds     :: !(Maybe [Textual Int64])
     , _pSortOrder            :: !(Maybe PlacementsListSortOrder)
     , _pPaymentSource        :: !(Maybe PlacementsListPaymentSource)
-    , _pSiteIds              :: !(Maybe [JSONText Int64])
+    , _pSiteIds              :: !(Maybe [Textual Int64])
     , _pPageToken            :: !(Maybe Text)
     , _pSortField            :: !(Maybe PlacementsListSortField)
     , _pCompatibilities      :: !(Maybe [PlacementsListCompatibilities])
     , _pMaxStartDate         :: !(Maybe Text)
-    , _pAdvertiserIds        :: !(Maybe [JSONText Int64])
+    , _pAdvertiserIds        :: !(Maybe [Textual Int64])
     , _pMinStartDate         :: !(Maybe Text)
     , _pArchived             :: !(Maybe Bool)
-    , _pMaxResults           :: !(Maybe (JSONText Int32))
+    , _pMaxResults           :: !(Maybe (Textual Int32))
     , _pMinEndDate           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

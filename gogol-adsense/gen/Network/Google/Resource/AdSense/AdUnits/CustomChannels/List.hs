@@ -53,7 +53,7 @@ type AdUnitsCustomChannelsListResource =
                Capture "adUnitId" Text :>
                  "customchannels" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] CustomChannels
 
@@ -64,7 +64,7 @@ data AdUnitsCustomChannelsList = AdUnitsCustomChannelsList
     { _aucclAdUnitId   :: !Text
     , _aucclAdClientId :: !Text
     , _aucclPageToken  :: !(Maybe Text)
-    , _aucclMaxResults :: !(Maybe (JSONText Int32))
+    , _aucclMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnitsCustomChannelsList' with the minimum fields required to make a request.

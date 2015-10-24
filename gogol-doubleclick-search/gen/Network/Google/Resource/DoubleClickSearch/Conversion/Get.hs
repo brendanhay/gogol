@@ -56,20 +56,20 @@ type ConversionGetResource =
      "doubleclicksearch" :>
        "v2" :>
          "agency" :>
-           Capture "agencyId" (JSONText Int64) :>
+           Capture "agencyId" (Textual Int64) :>
              "advertiser" :>
-               Capture "advertiserId" (JSONText Int64) :>
+               Capture "advertiserId" (Textual Int64) :>
                  "engine" :>
-                   Capture "engineAccountId" (JSONText Int64) :>
+                   Capture "engineAccountId" (Textual Int64) :>
                      "conversion" :>
-                       QueryParam "endDate" (JSONText Int32) :>
-                         QueryParam "rowCount" (JSONText Int32) :>
-                           QueryParam "startDate" (JSONText Int32) :>
-                             QueryParam "startRow" (JSONText Word32) :>
-                               QueryParam "adGroupId" (JSONText Int64) :>
-                                 QueryParam "campaignId" (JSONText Int64) :>
-                                   QueryParam "criterionId" (JSONText Int64) :>
-                                     QueryParam "adId" (JSONText Int64) :>
+                       QueryParam "endDate" (Textual Int32) :>
+                         QueryParam "rowCount" (Textual Int32) :>
+                           QueryParam "startDate" (Textual Int32) :>
+                             QueryParam "startRow" (Textual Word32) :>
+                               QueryParam "adGroupId" (Textual Int64) :>
+                                 QueryParam "campaignId" (Textual Int64) :>
+                                   QueryParam "criterionId" (Textual Int64) :>
+                                     QueryParam "adId" (Textual Int64) :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] ConversionList
 
@@ -78,17 +78,17 @@ type ConversionGetResource =
 --
 -- /See:/ 'conversionGet' smart constructor.
 data ConversionGet = ConversionGet
-    { _cgAdGroupId       :: !(Maybe (JSONText Int64))
-    , _cgEngineAccountId :: !(JSONText Int64)
-    , _cgAgencyId        :: !(JSONText Int64)
-    , _cgAdvertiserId    :: !(JSONText Int64)
-    , _cgEndDate         :: !(JSONText Int32)
-    , _cgCampaignId      :: !(Maybe (JSONText Int64))
-    , _cgCriterionId     :: !(Maybe (JSONText Int64))
-    , _cgStartDate       :: !(JSONText Int32)
-    , _cgStartRow        :: !(JSONText Word32)
-    , _cgAdId            :: !(Maybe (JSONText Int64))
-    , _cgRowCount        :: !(JSONText Int32)
+    { _cgAdGroupId       :: !(Maybe (Textual Int64))
+    , _cgEngineAccountId :: !(Textual Int64)
+    , _cgAgencyId        :: !(Textual Int64)
+    , _cgAdvertiserId    :: !(Textual Int64)
+    , _cgEndDate         :: !(Textual Int32)
+    , _cgCampaignId      :: !(Maybe (Textual Int64))
+    , _cgCriterionId     :: !(Maybe (Textual Int64))
+    , _cgStartDate       :: !(Textual Int32)
+    , _cgStartRow        :: !(Textual Word32)
+    , _cgAdId            :: !(Maybe (Textual Int64))
+    , _cgRowCount        :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionGet' with the minimum fields required to make a request.

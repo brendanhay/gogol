@@ -716,14 +716,14 @@ instance ToJSON DeprecationStatus where
 data Snapshot = Snapshot
     { _sStorageBytesStatus :: !(Maybe SnapshotStorageBytesStatus)
     , _sStatus             :: !(Maybe SnapshotStatus)
-    , _sDiskSizeGb         :: !(Maybe (JSONText Int64))
+    , _sDiskSizeGb         :: !(Maybe (Textual Int64))
     , _sSourceDiskId       :: !(Maybe Text)
     , _sKind               :: !Text
-    , _sStorageBytes       :: !(Maybe (JSONText Int64))
+    , _sStorageBytes       :: !(Maybe (Textual Int64))
     , _sSelfLink           :: !(Maybe Text)
     , _sName               :: !(Maybe Text)
     , _sCreationTimestamp  :: !(Maybe Text)
-    , _sId                 :: !(Maybe (JSONText Word64))
+    , _sId                 :: !(Maybe (Textual Word64))
     , _sLicenses           :: !(Maybe [Text])
     , _sSourceDisk         :: !(Maybe Text)
     , _sDescription        :: !(Maybe Text)
@@ -899,7 +899,7 @@ instance ToJSON Snapshot where
 --
 -- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
 data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
-    { _apcmuUtilizationTarget     :: !(Maybe (JSONText Double))
+    { _apcmuUtilizationTarget     :: !(Maybe (Textual Double))
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1102,7 +1102,7 @@ instance ToJSON VPNTunnelsScopedList where
 --
 -- /See:/ 'instanceGroupsSetNamedPortsRequest' smart constructor.
 data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest
-    { _igsnprFingerprint :: !(Maybe (JSONText Word8))
+    { _igsnprFingerprint :: !(Maybe (Textual Word8))
     , _igsnprNamedPorts  :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1488,16 +1488,16 @@ instance ToJSON InstanceGroupManagerList where
 -- /See:/ 'image' smart constructor.
 data Image = Image
     { _iStatus            :: !(Maybe ImageStatus)
-    , _iDiskSizeGb        :: !(Maybe (JSONText Int64))
+    , _iDiskSizeGb        :: !(Maybe (Textual Int64))
     , _iSourceType        :: !ImageSourceType
     , _iSourceDiskId      :: !(Maybe Text)
     , _iKind              :: !Text
-    , _iArchiveSizeBytes  :: !(Maybe (JSONText Int64))
+    , _iArchiveSizeBytes  :: !(Maybe (Textual Int64))
     , _iRawDisk           :: !(Maybe ImageRawDisk)
     , _iSelfLink          :: !(Maybe Text)
     , _iName              :: !(Maybe Text)
     , _iCreationTimestamp :: !(Maybe Text)
-    , _iId                :: !(Maybe (JSONText Word64))
+    , _iId                :: !(Maybe (Textual Word64))
     , _iLicenses          :: !(Maybe [Text])
     , _iSourceDisk        :: !(Maybe Text)
     , _iDescription       :: !(Maybe Text)
@@ -1702,13 +1702,13 @@ instance ToJSON Image where
 data URLMap = URLMap
     { _umTests             :: !(Maybe [URLMapTest])
     , _umKind              :: !Text
-    , _umFingerprint       :: !(Maybe (JSONText Word8))
+    , _umFingerprint       :: !(Maybe (Textual Word8))
     , _umDefaultService    :: !(Maybe Text)
     , _umSelfLink          :: !(Maybe Text)
     , _umName              :: !(Maybe Text)
     , _umCreationTimestamp :: !(Maybe Text)
     , _umPathMatchers      :: !(Maybe [PathMatcher])
-    , _umId                :: !(Maybe (JSONText Word64))
+    , _umId                :: !(Maybe (Textual Word64))
     , _umHostRules         :: !(Maybe [HostRule])
     , _umDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2524,7 +2524,7 @@ instance ToJSON OperationsScopedList where
 -- /See:/ 'namedPort' smart constructor.
 data NamedPort = NamedPort
     { _npName :: !(Maybe Text)
-    , _npPort :: !(Maybe (JSONText Int32))
+    , _npPort :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NamedPort' with the minimum fields required to make a request.
@@ -3035,8 +3035,8 @@ data TargetPool = TargetPool
     , _tpName              :: !(Maybe Text)
     , _tpCreationTimestamp :: !(Maybe Text)
     , _tpInstances         :: !(Maybe [Text])
-    , _tpId                :: !(Maybe (JSONText Word64))
-    , _tpFailoverRatio     :: !(Maybe (JSONText Float))
+    , _tpId                :: !(Maybe (Textual Word64))
+    , _tpFailoverRatio     :: !(Maybe (Textual Double))
     , _tpRegion            :: !(Maybe Text)
     , _tpDescription       :: !(Maybe Text)
     , _tpHealthChecks      :: !(Maybe [Text])
@@ -3381,7 +3381,7 @@ data ForwardingRule = ForwardingRule
     , _frName              :: !(Maybe Text)
     , _frIPProtocol        :: !(Maybe ForwardingRuleIPProtocol)
     , _frCreationTimestamp :: !(Maybe Text)
-    , _frId                :: !(Maybe (JSONText Word64))
+    , _frId                :: !(Maybe (Textual Word64))
     , _frRegion            :: !(Maybe Text)
     , _frDescription       :: !(Maybe Text)
     , _frTarget            :: !(Maybe Text)
@@ -3729,7 +3729,7 @@ data Project = Project
     , _pCreationTimestamp      :: !(Maybe Text)
     , _pEnabledFeatures        :: !(Maybe [Text])
     , _pQuotas                 :: !(Maybe [Quota])
-    , _pId                     :: !(Maybe (JSONText Word64))
+    , _pId                     :: !(Maybe (Textual Word64))
     , _pDescription            :: !(Maybe Text)
     , _pCommonInstanceMetadata :: !(Maybe Metadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3865,24 +3865,24 @@ instance ToJSON Project where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe (JSONText Word64))
+    { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (JSONText Int32))
+    , _oProgress            :: !(Maybe (Textual Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
+    , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (JSONText Word64))
+    , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -4205,7 +4205,7 @@ data Disk = Disk
     , _dLastAttachTimestamp :: !(Maybe Text)
     , _dUsers               :: !(Maybe [Text])
     , _dSourceImage         :: !(Maybe Text)
-    , _dSizeGb              :: !(Maybe (JSONText Int64))
+    , _dSizeGb              :: !(Maybe (Textual Int64))
     , _dKind                :: !Text
     , _dLastDetachTimestamp :: !(Maybe Text)
     , _dZone                :: !(Maybe Text)
@@ -4213,7 +4213,7 @@ data Disk = Disk
     , _dName                :: !(Maybe Text)
     , _dSourceImageId       :: !(Maybe Text)
     , _dCreationTimestamp   :: !(Maybe Text)
-    , _dId                  :: !(Maybe (JSONText Word64))
+    , _dId                  :: !(Maybe (Textual Word64))
     , _dLicenses            :: !(Maybe [Text])
     , _dOptions             :: !(Maybe Text)
     , _dType                :: !(Maybe Text)
@@ -4529,7 +4529,7 @@ instance ToJSON DiskMoveRequest where
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
 newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
-    { _aplbuUtilizationTarget :: Maybe (JSONText Double)
+    { _aplbuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyLoadBalancingUtilization' with the minimum fields required to make a request.
@@ -4626,16 +4626,16 @@ instance ToJSON TargetPoolsScopedListWarningDataItem
 -- /See:/ 'instanceGroupManager' smart constructor.
 data InstanceGroupManager = InstanceGroupManager
     { _igmKind              :: !Text
-    , _igmFingerprint       :: !(Maybe (JSONText Word8))
+    , _igmFingerprint       :: !(Maybe (Textual Word8))
     , _igmBaseInstanceName  :: !(Maybe Text)
     , _igmZone              :: !(Maybe Text)
     , _igmInstanceTemplate  :: !(Maybe Text)
-    , _igmTargetSize        :: !(Maybe (JSONText Int32))
+    , _igmTargetSize        :: !(Maybe (Textual Int32))
     , _igmSelfLink          :: !(Maybe Text)
     , _igmCurrentActions    :: !(Maybe InstanceGroupManagerActionsSummary)
     , _igmName              :: !(Maybe Text)
     , _igmCreationTimestamp :: !(Maybe Text)
-    , _igmId                :: !(Maybe (JSONText Word64))
+    , _igmId                :: !(Maybe (Textual Word64))
     , _igmTargetPools       :: !(Maybe [Text])
     , _igmDescription       :: !(Maybe Text)
     , _igmInstanceGroup     :: !(Maybe Text)
@@ -5213,7 +5213,7 @@ data TargetInstance = TargetInstance
     , _tiSelfLink          :: !(Maybe Text)
     , _tiName              :: !(Maybe Text)
     , _tiCreationTimestamp :: !(Maybe Text)
-    , _tiId                :: !(Maybe (JSONText Word64))
+    , _tiId                :: !(Maybe (Textual Word64))
     , _tiDescription       :: !(Maybe Text)
     , _tiInstance          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5651,7 +5651,7 @@ instance ToJSON DiskTypesScopedListWarning where
 -- /See:/ 'attachedDiskInitializeParams' smart constructor.
 data AttachedDiskInitializeParams = AttachedDiskInitializeParams
     { _adipSourceImage :: !(Maybe Text)
-    , _adipDiskSizeGb  :: !(Maybe (JSONText Int64))
+    , _adipDiskSizeGb  :: !(Maybe (Textual Int64))
     , _adipDiskName    :: !(Maybe Text)
     , _adipDiskType    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6302,7 +6302,7 @@ data Network = Network
     , _nSelfLink          :: !(Maybe Text)
     , _nName              :: !(Maybe Text)
     , _nCreationTimestamp :: !(Maybe Text)
-    , _nId                :: !(Maybe (JSONText Word64))
+    , _nId                :: !(Maybe (Textual Word64))
     , _nGatewayIPv4       :: !(Maybe Text)
     , _nDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6629,7 +6629,7 @@ data Address = Address
     , _aSelfLink          :: !(Maybe Text)
     , _aName              :: !(Maybe Text)
     , _aCreationTimestamp :: !(Maybe Text)
-    , _aId                :: !(Maybe (JSONText Word64))
+    , _aId                :: !(Maybe (Textual Word64))
     , _aRegion            :: !(Maybe Text)
     , _aDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6770,7 +6770,7 @@ data Zone = Zone
     , _zSelfLink           :: !(Maybe Text)
     , _zName               :: !(Maybe Text)
     , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe (JSONText Word64))
+    , _zId                 :: !(Maybe (Textual Word64))
     , _zRegion             :: !(Maybe Text)
     , _zDescription        :: !(Maybe Text)
     , _zDeprecated         :: !(Maybe DeprecationStatus)
@@ -7162,7 +7162,7 @@ instance ToJSON InstanceGroupAggregatedList where
 --
 -- /See:/ 'route' smart constructor.
 data Route = Route
-    { _rPriority          :: !(Maybe (JSONText Word32))
+    { _rPriority          :: !(Maybe (Textual Word32))
     , _rKind              :: !Text
     , _rNextHopGateway    :: !(Maybe Text)
     , _rNextHopNetwork    :: !(Maybe Text)
@@ -7173,7 +7173,7 @@ data Route = Route
     , _rSelfLink          :: !(Maybe Text)
     , _rName              :: !(Maybe Text)
     , _rCreationTimestamp :: !(Maybe Text)
-    , _rId                :: !(Maybe (JSONText Word64))
+    , _rId                :: !(Maybe (Textual Word64))
     , _rNextHopVPNTunnel  :: !(Maybe Text)
     , _rDescription       :: !(Maybe Text)
     , _rTags              :: !(Maybe [Text])
@@ -7485,7 +7485,7 @@ data InstanceTemplate = InstanceTemplate
     , _itSelfLink          :: !(Maybe Text)
     , _itName              :: !(Maybe Text)
     , _itCreationTimestamp :: !(Maybe Text)
-    , _itId                :: !(Maybe (JSONText Word64))
+    , _itId                :: !(Maybe (Textual Word64))
     , _itDescription       :: !(Maybe Text)
     , _itProperties        :: !(Maybe InstanceProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7670,7 +7670,7 @@ data TargetVPNGateway = TargetVPNGateway
     , _tvgSelfLink          :: !(Maybe Text)
     , _tvgName              :: !(Maybe Text)
     , _tvgCreationTimestamp :: !(Maybe Text)
-    , _tvgId                :: !(Maybe (JSONText Word64))
+    , _tvgId                :: !(Maybe (Textual Word64))
     , _tvgRegion            :: !(Maybe Text)
     , _tvgTunnels           :: !(Maybe [Text])
     , _tvgDescription       :: !(Maybe Text)
@@ -7866,7 +7866,7 @@ data SSLCertificate = SSLCertificate
     , _scSelfLink          :: !(Maybe Text)
     , _scName              :: !(Maybe Text)
     , _scCreationTimestamp :: !(Maybe Text)
-    , _scId                :: !(Maybe (JSONText Word64))
+    , _scId                :: !(Maybe (Textual Word64))
     , _scCertificate       :: !(Maybe Text)
     , _scDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8234,7 +8234,7 @@ instance ToJSON ZoneList where
 data ManagedInstance = ManagedInstance
     { _miLastAttempt    :: !(Maybe ManagedInstanceLastAttempt)
     , _miCurrentAction  :: !(Maybe ManagedInstanceCurrentAction)
-    , _miId             :: !(Maybe (JSONText Word64))
+    , _miId             :: !(Maybe (Textual Word64))
     , _miInstanceStatus :: !(Maybe ManagedInstanceInstanceStatus)
     , _miInstance       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8419,11 +8419,11 @@ instance ToJSON
 data Backend = Backend
     { _bGroup              :: !(Maybe Text)
     , _bBalancingMode      :: !(Maybe BackendBalancingMode)
-    , _bMaxUtilization     :: !(Maybe (JSONText Float))
-    , _bMaxRate            :: !(Maybe (JSONText Int32))
-    , _bMaxRatePerInstance :: !(Maybe (JSONText Float))
+    , _bMaxUtilization     :: !(Maybe (Textual Double))
+    , _bMaxRate            :: !(Maybe (Textual Int32))
+    , _bMaxRatePerInstance :: !(Maybe (Textual Double))
     , _bDescription        :: !(Maybe Text)
-    , _bCapacityScaler     :: !(Maybe (JSONText Float))
+    , _bCapacityScaler     :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
@@ -8763,13 +8763,13 @@ instance ToJSON OperationAggregatedListItems where
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
 data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary
-    { _igmasDeleting   :: !(Maybe (JSONText Int32))
-    , _igmasRestarting :: !(Maybe (JSONText Int32))
-    , _igmasNone       :: !(Maybe (JSONText Int32))
-    , _igmasCreating   :: !(Maybe (JSONText Int32))
-    , _igmasRefreshing :: !(Maybe (JSONText Int32))
-    , _igmasRecreating :: !(Maybe (JSONText Int32))
-    , _igmasAbandoning :: !(Maybe (JSONText Int32))
+    { _igmasDeleting   :: !(Maybe (Textual Int32))
+    , _igmasRestarting :: !(Maybe (Textual Int32))
+    , _igmasNone       :: !(Maybe (Textual Int32))
+    , _igmasCreating   :: !(Maybe (Textual Int32))
+    , _igmasRefreshing :: !(Maybe (Textual Int32))
+    , _igmasRecreating :: !(Maybe (Textual Int32))
+    , _igmasAbandoning :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagerActionsSummary' with the minimum fields required to make a request.
@@ -9358,7 +9358,7 @@ data AttachedDisk = AttachedDisk
     , _adSource           :: !(Maybe Text)
     , _adLicenses         :: !(Maybe [Text])
     , _adType             :: !(Maybe AttachedDiskType)
-    , _adIndex            :: !(Maybe (JSONText Int32))
+    , _adIndex            :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachedDisk' with the minimum fields required to make a request.
@@ -9896,19 +9896,19 @@ instance ToJSON DiskTypeAggregatedList where
 --
 -- /See:/ 'hTTPHealthCheck' smart constructor.
 data HTTPHealthCheck = HTTPHealthCheck
-    { _httphcHealthyThreshold   :: !(Maybe (JSONText Int32))
+    { _httphcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _httphcKind               :: !Text
     , _httphcRequestPath        :: !(Maybe Text)
     , _httphcSelfLink           :: !(Maybe Text)
-    , _httphcCheckIntervalSec   :: !(Maybe (JSONText Int32))
+    , _httphcCheckIntervalSec   :: !(Maybe (Textual Int32))
     , _httphcName               :: !(Maybe Text)
     , _httphcCreationTimestamp  :: !(Maybe Text)
-    , _httphcId                 :: !(Maybe (JSONText Word64))
+    , _httphcId                 :: !(Maybe (Textual Word64))
     , _httphcHost               :: !(Maybe Text)
-    , _httphcTimeoutSec         :: !(Maybe (JSONText Int32))
+    , _httphcTimeoutSec         :: !(Maybe (Textual Int32))
     , _httphcDescription        :: !(Maybe Text)
-    , _httphcUnhealthyThreshold :: !(Maybe (JSONText Int32))
-    , _httphcPort               :: !(Maybe (JSONText Int32))
+    , _httphcUnhealthyThreshold :: !(Maybe (Textual Int32))
+    , _httphcPort               :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthCheck' with the minimum fields required to make a request.
@@ -10274,11 +10274,11 @@ instance ToJSON AutoscalerAggregatedList where
 -- /See:/ 'autoscalingPolicy' smart constructor.
 data AutoscalingPolicy = AutoscalingPolicy
     { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
-    , _apMaxNumReplicas           :: !(Maybe (JSONText Int32))
+    , _apMaxNumReplicas           :: !(Maybe (Textual Int32))
     , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
     , _apLoadBalancingUtilization :: !(Maybe AutoscalingPolicyLoadBalancingUtilization)
-    , _apMinNumReplicas           :: !(Maybe (JSONText Int32))
-    , _apCoolDownPeriodSec        :: !(Maybe (JSONText Int32))
+    , _apMinNumReplicas           :: !(Maybe (Textual Int32))
+    , _apCoolDownPeriodSec        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicy' with the minimum fields required to make a request.
@@ -10554,7 +10554,7 @@ instance ToJSON VPNTunnelList where
 --
 -- /See:/ 'machineTypeScratchDisksItem' smart constructor.
 newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem
-    { _mtsdiDiskGb :: Maybe (JSONText Int32)
+    { _mtsdiDiskGb :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypeScratchDisksItem' with the minimum fields required to make a request.
@@ -10726,10 +10726,10 @@ data DiskType = DiskType
     , _dtSelfLink          :: !(Maybe Text)
     , _dtName              :: !(Maybe Text)
     , _dtCreationTimestamp :: !(Maybe Text)
-    , _dtId                :: !(Maybe (JSONText Word64))
+    , _dtId                :: !(Maybe (Textual Word64))
     , _dtValidDiskSize     :: !(Maybe Text)
     , _dtDescription       :: !(Maybe Text)
-    , _dtDefaultDiskSizeGb :: !(Maybe (JSONText Int64))
+    , _dtDefaultDiskSizeGb :: !(Maybe (Textual Int64))
     , _dtDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10940,7 +10940,7 @@ instance ToJSON URLMapValidationResult where
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata
     { _mKind        :: !Text
-    , _mFingerprint :: !(Maybe (JSONText Word8))
+    , _mFingerprint :: !(Maybe (Textual Word8))
     , _mItems       :: !(Maybe [MetadataItemsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11162,7 +11162,7 @@ data TargetHTTPProxy = TargetHTTPProxy
     , _thttppSelfLink          :: !(Maybe Text)
     , _thttppName              :: !(Maybe Text)
     , _thttppCreationTimestamp :: !(Maybe Text)
-    , _thttppId                :: !(Maybe (JSONText Word64))
+    , _thttppId                :: !(Maybe (Textual Word64))
     , _thttppDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11275,17 +11275,17 @@ instance ToJSON TargetHTTPProxy where
 -- /See:/ 'machineType' smart constructor.
 data MachineType = MachineType
     { _mtKind                         :: !Text
-    , _mtImageSpaceGb                 :: !(Maybe (JSONText Int32))
+    , _mtImageSpaceGb                 :: !(Maybe (Textual Int32))
     , _mtZone                         :: !(Maybe Text)
     , _mtSelfLink                     :: !(Maybe Text)
     , _mtName                         :: !(Maybe Text)
     , _mtCreationTimestamp            :: !(Maybe Text)
     , _mtScratchDisks                 :: !(Maybe [MachineTypeScratchDisksItem])
-    , _mtId                           :: !(Maybe (JSONText Word64))
-    , _mtGuestCPUs                    :: !(Maybe (JSONText Int32))
-    , _mtMaximumPersistentDisksSizeGb :: !(Maybe (JSONText Int64))
-    , _mtMaximumPersistentDisks       :: !(Maybe (JSONText Int32))
-    , _mtMemoryMb                     :: !(Maybe (JSONText Int32))
+    , _mtId                           :: !(Maybe (Textual Word64))
+    , _mtGuestCPUs                    :: !(Maybe (Textual Int32))
+    , _mtMaximumPersistentDisksSizeGb :: !(Maybe (Textual Int64))
+    , _mtMaximumPersistentDisks       :: !(Maybe (Textual Int32))
+    , _mtMemoryMb                     :: !(Maybe (Textual Int32))
     , _mtDescription                  :: !(Maybe Text)
     , _mtDeprecated                   :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11707,7 +11707,7 @@ data Autoscaler = Autoscaler
     , _aaName              :: !(Maybe Text)
     , _aaCreationTimestamp :: !(Maybe Text)
     , _aaAutoscalingPolicy :: !(Maybe AutoscalingPolicy)
-    , _aaId                :: !(Maybe (JSONText Word64))
+    , _aaId                :: !(Maybe (Textual Word64))
     , _aaDescription       :: !(Maybe Text)
     , _aaTarget            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11995,7 +11995,7 @@ instance ToJSON TargetPoolsScopedListWarning where
 data HealthStatus = HealthStatus
     { _hsIPAddress   :: !(Maybe Text)
     , _hsHealthState :: !(Maybe HealthStatusHealthState)
-    , _hsPort        :: !(Maybe (JSONText Int32))
+    , _hsPort        :: !(Maybe (Textual Int32))
     , _hsInstance    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12071,7 +12071,7 @@ data Region = Region
     , _rrName              :: !(Maybe Text)
     , _rrCreationTimestamp :: !(Maybe Text)
     , _rrQuotas            :: !(Maybe [Quota])
-    , _rrId                :: !(Maybe (JSONText Word64))
+    , _rrId                :: !(Maybe (Textual Word64))
     , _rrDescription       :: !(Maybe Text)
     , _rrDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12211,8 +12211,8 @@ data VPNTunnel = VPNTunnel
     , _vtName              :: !(Maybe Text)
     , _vtCreationTimestamp :: !(Maybe Text)
     , _vtSharedSecretHash  :: !(Maybe Text)
-    , _vtId                :: !(Maybe (JSONText Word64))
-    , _vtIkeVersion        :: !(Maybe (JSONText Int32))
+    , _vtId                :: !(Maybe (Textual Word64))
+    , _vtIkeVersion        :: !(Maybe (Textual Int32))
     , _vtRegion            :: !(Maybe Text)
     , _vtDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12814,7 +12814,7 @@ instance ToJSON URLMapsValidateRequest where
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
 data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest
-    { _igmstprFingerprint :: !(Maybe (JSONText Word8))
+    { _igmstprFingerprint :: !(Maybe (Textual Word8))
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13402,7 +13402,7 @@ instance ToJSON InstanceGroupsScopedListWarning where
 --
 -- /See:/ 'autoscalingPolicyCPUUtilization' smart constructor.
 newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
-    { _apcuUtilizationTarget :: Maybe (JSONText Double)
+    { _apcuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyCPUUtilization' with the minimum fields required to make a request.
@@ -13535,7 +13535,7 @@ data Firewall = Firewall
     , _fSelfLink          :: !(Maybe Text)
     , _fName              :: !(Maybe Text)
     , _fCreationTimestamp :: !(Maybe Text)
-    , _fId                :: !(Maybe (JSONText Word64))
+    , _fId                :: !(Maybe (Textual Word64))
     , _fAllowed           :: !(Maybe [FirewallAllowedItem])
     , _fDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13774,8 +13774,8 @@ instance ToJSON HostRule where
 -- /See:/ 'quota' smart constructor.
 data Quota = Quota
     { _qMetric :: !(Maybe QuotaMetric)
-    , _qLimit  :: !(Maybe (JSONText Double))
-    , _qUsage  :: !(Maybe (JSONText Double))
+    , _qLimit  :: !(Maybe (Textual Double))
+    , _qUsage  :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
@@ -13830,15 +13830,15 @@ instance ToJSON Quota where
 --
 -- /See:/ 'instanceGroup' smart constructor.
 data InstanceGroup = InstanceGroup
-    { _iiSize              :: !(Maybe (JSONText Int32))
+    { _iiSize              :: !(Maybe (Textual Int32))
     , _iiKind              :: !Text
-    , _iiFingerprint       :: !(Maybe (JSONText Word8))
+    , _iiFingerprint       :: !(Maybe (Textual Word8))
     , _iiNetwork           :: !(Maybe Text)
     , _iiZone              :: !(Maybe Text)
     , _iiSelfLink          :: !(Maybe Text)
     , _iiName              :: !(Maybe Text)
     , _iiCreationTimestamp :: !(Maybe Text)
-    , _iiId                :: !(Maybe (JSONText Word64))
+    , _iiId                :: !(Maybe (Textual Word64))
     , _iiDescription       :: !(Maybe Text)
     , _iiNamedPorts        :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14336,7 +14336,7 @@ data TargetHTTPSProxy = TargetHTTPSProxy
     , _thpSelfLink          :: !(Maybe Text)
     , _thpName              :: !(Maybe Text)
     , _thpCreationTimestamp :: !(Maybe Text)
-    , _thpId                :: !(Maybe (JSONText Word64))
+    , _thpId                :: !(Maybe (Textual Word64))
     , _thpDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -14694,17 +14694,17 @@ instance ToJSON InstancesScopedListWarningDataItem
 data BackendService = BackendService
     { _bsBackends          :: !(Maybe [Backend])
     , _bsKind              :: !Text
-    , _bsFingerprint       :: !(Maybe (JSONText Word8))
+    , _bsFingerprint       :: !(Maybe (Textual Word8))
     , _bsProtocol          :: !(Maybe BackendServiceProtocol)
     , _bsSelfLink          :: !(Maybe Text)
     , _bsName              :: !(Maybe Text)
     , _bsCreationTimestamp :: !(Maybe Text)
-    , _bsId                :: !(Maybe (JSONText Word64))
-    , _bsTimeoutSec        :: !(Maybe (JSONText Int32))
+    , _bsId                :: !(Maybe (Textual Word64))
+    , _bsTimeoutSec        :: !(Maybe (Textual Int32))
     , _bsDescription       :: !(Maybe Text)
     , _bsPortName          :: !(Maybe Text)
     , _bsHealthChecks      :: !(Maybe [Text])
-    , _bsPort              :: !(Maybe (JSONText Int32))
+    , _bsPort              :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendService' with the minimum fields required to make a request.
@@ -14996,19 +14996,19 @@ instance ToJSON InstanceGroupsScopedList where
 --
 -- /See:/ 'httpsHealthCheck' smart constructor.
 data HTTPSHealthCheck = HTTPSHealthCheck
-    { _hhcHealthyThreshold   :: !(Maybe (JSONText Int32))
+    { _hhcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _hhcKind               :: !Text
     , _hhcRequestPath        :: !(Maybe Text)
     , _hhcSelfLink           :: !(Maybe Text)
-    , _hhcCheckIntervalSec   :: !(Maybe (JSONText Int32))
+    , _hhcCheckIntervalSec   :: !(Maybe (Textual Int32))
     , _hhcName               :: !(Maybe Text)
     , _hhcCreationTimestamp  :: !(Maybe Text)
-    , _hhcId                 :: !(Maybe (JSONText Word64))
+    , _hhcId                 :: !(Maybe (Textual Word64))
     , _hhcHost               :: !(Maybe Text)
-    , _hhcTimeoutSec         :: !(Maybe (JSONText Int32))
+    , _hhcTimeoutSec         :: !(Maybe (Textual Int32))
     , _hhcDescription        :: !(Maybe Text)
-    , _hhcUnhealthyThreshold :: !(Maybe (JSONText Int32))
-    , _hhcPort               :: !(Maybe (JSONText Int32))
+    , _hhcUnhealthyThreshold :: !(Maybe (Textual Int32))
+    , _hhcPort               :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPSHealthCheck' with the minimum fields required to make a request.
@@ -15226,7 +15226,7 @@ instance ToJSON VPNTunnelAggregatedListItems where
 --
 -- /See:/ 'tags' smart constructor.
 data Tags = Tags
-    { _tFingerprint :: !(Maybe (JSONText Word8))
+    { _tFingerprint :: !(Maybe (Textual Word8))
     , _tItems       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -15496,7 +15496,7 @@ data Instance = Instance
     , _insnCreationTimestamp :: !(Maybe Text)
     , _insnMachineType       :: !(Maybe Text)
     , _insnMetadata          :: !(Maybe Metadata)
-    , _insnId                :: !(Maybe (JSONText Word64))
+    , _insnId                :: !(Maybe (Textual Word64))
     , _insnScheduling        :: !(Maybe Scheduling)
     , _insnDisks             :: !(Maybe [AttachedDisk])
     , _insnCanIPForward      :: !(Maybe Bool)

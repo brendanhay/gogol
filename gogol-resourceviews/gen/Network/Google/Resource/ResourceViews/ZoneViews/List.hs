@@ -53,7 +53,7 @@ type ZoneViewsListResource =
                Capture "zone" Text :>
                  "resourceViews" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ZoneViewsList
 
 -- | List resource views.
@@ -63,7 +63,7 @@ data ZoneViewsList' = ZoneViewsList'
     { _zvlProject    :: !Text
     , _zvlZone       :: !Text
     , _zvlPageToken  :: !(Maybe Text)
-    , _zvlMaxResults :: !(JSONText Int32)
+    , _zvlMaxResults :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsList'' with the minimum fields required to make a request.

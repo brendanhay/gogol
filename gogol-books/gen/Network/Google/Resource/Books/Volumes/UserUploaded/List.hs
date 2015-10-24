@@ -57,8 +57,8 @@ type VolumesUserUploadedListResource =
                QueryParam "locale" Text :>
                  QueryParams "volumeId" Text :>
                    QueryParam "source" Text :>
-                     QueryParam "startIndex" (JSONText Word32) :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "startIndex" (Textual Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books uploaded by the current user.
@@ -69,8 +69,8 @@ data VolumesUserUploadedList = VolumesUserUploadedList
     , _vuulLocale          :: !(Maybe Text)
     , _vuulVolumeId        :: !(Maybe [Text])
     , _vuulSource          :: !(Maybe Text)
-    , _vuulStartIndex      :: !(Maybe (JSONText Word32))
-    , _vuulMaxResults      :: !(Maybe (JSONText Word32))
+    , _vuulStartIndex      :: !(Maybe (Textual Word32))
+    , _vuulMaxResults      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesUserUploadedList' with the minimum fields required to make a request.

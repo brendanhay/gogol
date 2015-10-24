@@ -50,7 +50,7 @@ type LayersListPublishedResource =
            "published" :>
              QueryParam "pageToken" Text :>
                QueryParam "projectId" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] PublishedLayersListResponse
 
@@ -60,7 +60,7 @@ type LayersListPublishedResource =
 data LayersListPublished = LayersListPublished
     { _llpPageToken  :: !(Maybe Text)
     , _llpProjectId  :: !(Maybe Text)
-    , _llpMaxResults :: !(Maybe (JSONText Word32))
+    , _llpMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersListPublished' with the minimum fields required to make a request.

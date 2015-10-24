@@ -56,7 +56,7 @@ type OnboardingListCategoryVolumesResource =
                  :>
                  QueryParams "categoryId" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" (JSONText Word32) :>
+                     QueryParam "pageSize" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Volume2
 
 -- | List available volumes under categories for onboarding experience.
@@ -67,7 +67,7 @@ data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes
     , _olcvMaxAllowedMaturityRating :: !(Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
     , _olcvCategoryId               :: !(Maybe [Text])
     , _olcvPageToken                :: !(Maybe Text)
-    , _olcvPageSize                 :: !(Maybe (JSONText Word32))
+    , _olcvPageSize                 :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OnboardingListCategoryVolumes' with the minimum fields required to make a request.

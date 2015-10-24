@@ -46,7 +46,7 @@ type UserRolesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "userRoles" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] UserRole :> Post '[JSON] UserRole
@@ -55,7 +55,7 @@ type UserRolesInsertResource =
 --
 -- /See:/ 'userRolesInsert' smart constructor.
 data UserRolesInsert = UserRolesInsert
-    { _uriProFileId :: !(JSONText Int64)
+    { _uriProFileId :: !(Textual Int64)
     , _uriPayload   :: !UserRole
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -48,7 +48,7 @@ type ScheduleGetResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" (JSONText Word64) :>
+               Capture "jobId" (Textual Word64) :>
                  "schedule" :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Schedule
 
@@ -56,7 +56,7 @@ type ScheduleGetResource =
 --
 -- /See:/ 'scheduleGet' smart constructor.
 data ScheduleGet = ScheduleGet
-    { _sgJobId  :: !(JSONText Word64)
+    { _sgJobId  :: !(Textual Word64)
     , _sgTeamId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

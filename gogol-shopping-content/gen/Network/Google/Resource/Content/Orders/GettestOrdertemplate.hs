@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersGettestOrdertemplateResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "testordertemplates" :>
              Capture "templateName"
                OrdersGettestOrdertemplateTemplateName
@@ -59,7 +59,7 @@ type OrdersGettestOrdertemplateResource =
 --
 -- /See:/ 'ordersGettestOrdertemplate' smart constructor.
 data OrdersGettestOrdertemplate = OrdersGettestOrdertemplate
-    { _ogoMerchantId   :: !(JSONText Word64)
+    { _ogoMerchantId   :: !(Textual Word64)
     , _ogoTemplateName :: !OrdersGettestOrdertemplateTemplateName
     } deriving (Eq,Show,Data,Typeable,Generic)
 

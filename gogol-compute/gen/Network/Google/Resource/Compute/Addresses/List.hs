@@ -56,7 +56,7 @@ type AddressesListResource =
                  "addresses" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
 -- | Retrieves the list of address resources contained within the specified
@@ -68,7 +68,7 @@ data AddressesList = AddressesList
     , _alFilter     :: !(Maybe Text)
     , _alRegion     :: !Text
     , _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !(JSONText Word32)
+    , _alMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesList' with the minimum fields required to make a request.

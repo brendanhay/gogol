@@ -58,22 +58,22 @@ type CampaignsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               QueryParams "excludedIds" (JSONText Int64) :>
+               QueryParams "excludedIds" (Textual Int64) :>
                  QueryParam "searchString" Text :>
-                   QueryParams "ids" (JSONText Int64) :>
+                   QueryParams "ids" (Textual Int64) :>
                      QueryParam "sortOrder" CampaignsListSortOrder :>
-                       QueryParams "advertiserGroupIds" (JSONText Int64) :>
+                       QueryParams "advertiserGroupIds" (Textual Int64) :>
                          QueryParam "atLeastOneOptimizationActivity" Bool :>
-                           QueryParam "overriddenEventTagId" (JSONText Int64) :>
+                           QueryParam "overriddenEventTagId" (Textual Int64) :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField" CampaignsListSortField :>
-                                 QueryParam "subaccountId" (JSONText Int64) :>
-                                   QueryParams "advertiserIds" (JSONText Int64)
+                                 QueryParam "subaccountId" (Textual Int64) :>
+                                   QueryParams "advertiserIds" (Textual Int64)
                                      :>
                                      QueryParam "archived" Bool :>
-                                       QueryParam "maxResults" (JSONText Int32)
+                                       QueryParam "maxResults" (Textual Int32)
                                          :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] CampaignsListResponse
@@ -82,20 +82,20 @@ type CampaignsListResource =
 --
 -- /See:/ 'campaignsList' smart constructor.
 data CampaignsList = CampaignsList
-    { _clExcludedIds                    :: !(Maybe [JSONText Int64])
+    { _clExcludedIds                    :: !(Maybe [Textual Int64])
     , _clSearchString                   :: !(Maybe Text)
-    , _clIds                            :: !(Maybe [JSONText Int64])
-    , _clProFileId                      :: !(JSONText Int64)
+    , _clIds                            :: !(Maybe [Textual Int64])
+    , _clProFileId                      :: !(Textual Int64)
     , _clSortOrder                      :: !(Maybe CampaignsListSortOrder)
-    , _clAdvertiserGroupIds             :: !(Maybe [JSONText Int64])
+    , _clAdvertiserGroupIds             :: !(Maybe [Textual Int64])
     , _clAtLeastOneOptimizationActivity :: !(Maybe Bool)
-    , _clOverriddenEventTagId           :: !(Maybe (JSONText Int64))
+    , _clOverriddenEventTagId           :: !(Maybe (Textual Int64))
     , _clPageToken                      :: !(Maybe Text)
     , _clSortField                      :: !(Maybe CampaignsListSortField)
-    , _clSubAccountId                   :: !(Maybe (JSONText Int64))
-    , _clAdvertiserIds                  :: !(Maybe [JSONText Int64])
+    , _clSubAccountId                   :: !(Maybe (Textual Int64))
+    , _clAdvertiserIds                  :: !(Maybe [Textual Int64])
     , _clArchived                       :: !(Maybe Bool)
-    , _clMaxResults                     :: !(Maybe (JSONText Int32))
+    , _clMaxResults                     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsList' with the minimum fields required to make a request.

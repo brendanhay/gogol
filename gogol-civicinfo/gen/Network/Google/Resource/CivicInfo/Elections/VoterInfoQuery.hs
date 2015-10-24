@@ -49,7 +49,7 @@ type ElectionsVoterInfoQueryResource =
        "v2" :>
          "voterinfo" :>
            QueryParam "address" Text :>
-             QueryParam "electionId" (JSONText Int64) :>
+             QueryParam "electionId" (Textual Int64) :>
                QueryParam "officialOnly" Bool :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] VoterInfoResponse
@@ -59,7 +59,7 @@ type ElectionsVoterInfoQueryResource =
 --
 -- /See:/ 'electionsVoterInfoQuery' smart constructor.
 data ElectionsVoterInfoQuery = ElectionsVoterInfoQuery
-    { _eviqElectionId   :: !(JSONText Int64)
+    { _eviqElectionId   :: !(Textual Int64)
     , _eviqAddress      :: !Text
     , _eviqOfficialOnly :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)

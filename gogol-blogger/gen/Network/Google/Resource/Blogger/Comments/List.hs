@@ -63,7 +63,7 @@ type CommentsListResource =
                          QueryParam "fetchBodies" Bool :>
                            QueryParam "view" CommentsListView :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] CommentList
 
@@ -79,7 +79,7 @@ data CommentsList = CommentsList
     , _clView        :: !(Maybe CommentsListView)
     , _clPostId      :: !Text
     , _clPageToken   :: !(Maybe Text)
-    , _clMaxResults  :: !(Maybe (JSONText Word32))
+    , _clMaxResults  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.

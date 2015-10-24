@@ -58,18 +58,18 @@ type FloodlightActivitiesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
                QueryParam "tagString" Text :>
                  QueryParam "floodlightActivityGroupTagString" Text :>
                    QueryParam "floodlightConfigurationId"
-                     (JSONText Int64)
+                     (Textual Int64)
                      :>
-                     QueryParam "advertiserId" (JSONText Int64) :>
+                     QueryParam "advertiserId" (Textual Int64) :>
                        QueryParam "searchString" Text :>
-                         QueryParams "ids" (JSONText Int64) :>
+                         QueryParams "ids" (Textual Int64) :>
                            QueryParams "floodlightActivityGroupIds"
-                             (JSONText Int64)
+                             (Textual Int64)
                              :>
                              QueryParam "sortOrder"
                                FloodlightActivitiesListSortOrder
@@ -83,7 +83,7 @@ type FloodlightActivitiesListResource =
                                      QueryParam "sortField"
                                        FloodlightActivitiesListSortField
                                        :>
-                                       QueryParam "maxResults" (JSONText Int32)
+                                       QueryParam "maxResults" (Textual Int32)
                                          :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
@@ -95,18 +95,18 @@ type FloodlightActivitiesListResource =
 data FloodlightActivitiesList = FloodlightActivitiesList
     { _falTagString                        :: !(Maybe Text)
     , _falFloodlightActivityGroupTagString :: !(Maybe Text)
-    , _falFloodlightConfigurationId        :: !(Maybe (JSONText Int64))
-    , _falAdvertiserId                     :: !(Maybe (JSONText Int64))
+    , _falFloodlightConfigurationId        :: !(Maybe (Textual Int64))
+    , _falAdvertiserId                     :: !(Maybe (Textual Int64))
     , _falSearchString                     :: !(Maybe Text)
-    , _falIds                              :: !(Maybe [JSONText Int64])
-    , _falProFileId                        :: !(JSONText Int64)
-    , _falFloodlightActivityGroupIds       :: !(Maybe [JSONText Int64])
+    , _falIds                              :: !(Maybe [Textual Int64])
+    , _falProFileId                        :: !(Textual Int64)
+    , _falFloodlightActivityGroupIds       :: !(Maybe [Textual Int64])
     , _falSortOrder                        :: !(Maybe FloodlightActivitiesListSortOrder)
     , _falFloodlightActivityGroupType      :: !(Maybe FloodlightActivitiesListFloodlightActivityGroupType)
     , _falFloodlightActivityGroupName      :: !(Maybe Text)
     , _falPageToken                        :: !(Maybe Text)
     , _falSortField                        :: !(Maybe FloodlightActivitiesListSortField)
-    , _falMaxResults                       :: !(Maybe (JSONText Int32))
+    , _falMaxResults                       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesList' with the minimum fields required to make a request.

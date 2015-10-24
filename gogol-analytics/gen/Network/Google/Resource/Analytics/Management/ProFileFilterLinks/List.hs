@@ -56,8 +56,8 @@ type ManagementProFileFilterLinksListResource =
                    "profiles" :>
                      Capture "profileId" Text :>
                        "profileFilterLinks" :>
-                         QueryParam "start-index" (JSONText Int32) :>
-                           QueryParam "max-results" (JSONText Int32) :>
+                         QueryParam "start-index" (Textual Int32) :>
+                           QueryParam "max-results" (Textual Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ProFileFilterLinks
 
@@ -68,8 +68,8 @@ data ManagementProFileFilterLinksList = ManagementProFileFilterLinksList
     { _mpffllWebPropertyId :: !Text
     , _mpffllProFileId     :: !Text
     , _mpffllAccountId     :: !Text
-    , _mpffllStartIndex    :: !(Maybe (JSONText Int32))
-    , _mpffllMaxResults    :: !(Maybe (JSONText Int32))
+    , _mpffllStartIndex    :: !(Maybe (Textual Int32))
+    , _mpffllMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProFileFilterLinksList' with the minimum fields required to make a request.

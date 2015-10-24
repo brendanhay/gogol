@@ -49,11 +49,11 @@ type SizesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "sizes" :>
-               QueryParam "height" (JSONText Int32) :>
-                 QueryParams "ids" (JSONText Int64) :>
-                   QueryParam "width" (JSONText Int32) :>
+               QueryParam "height" (Textual Int32) :>
+                 QueryParams "ids" (Textual Int64) :>
+                   QueryParam "width" (Textual Int32) :>
                      QueryParam "iabStandard" Bool :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] SizesListResponse
@@ -62,10 +62,10 @@ type SizesListResource =
 --
 -- /See:/ 'sizesList' smart constructor.
 data SizesList = SizesList
-    { _slHeight      :: !(Maybe (JSONText Int32))
-    , _slIds         :: !(Maybe [JSONText Int64])
-    , _slWidth       :: !(Maybe (JSONText Int32))
-    , _slProFileId   :: !(JSONText Int64)
+    { _slHeight      :: !(Maybe (Textual Int32))
+    , _slIds         :: !(Maybe [Textual Int64])
+    , _slWidth       :: !(Maybe (Textual Int32))
+    , _slProFileId   :: !(Textual Int64)
     , _slIabStandard :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

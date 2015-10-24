@@ -25,10 +25,10 @@ import           Network.Google.Prelude
 -- /See:/ 'requestLog' smart constructor.
 data RequestLog = RequestLog
     { _rlTraceId           :: !(Maybe Text)
-    , _rlInstanceId        :: !(Maybe (JSONText Word8))
-    , _rlStatus            :: !(Maybe (JSONText Int32))
-    , _rlRequestId         :: !(Maybe (JSONText Word8))
-    , _rlInstanceIndex     :: !(Maybe (JSONText Int32))
+    , _rlInstanceId        :: !(Maybe (Textual Word8))
+    , _rlStatus            :: !(Maybe (Textual Int32))
+    , _rlRequestId         :: !(Maybe (Textual Word8))
+    , _rlInstanceIndex     :: !(Maybe (Textual Int32))
     , _rlModuleId          :: !(Maybe Text)
     , _rlVersionId         :: !(Maybe Text)
     , _rlHTTPVersion       :: !(Maybe Text)
@@ -38,7 +38,7 @@ data RequestLog = RequestLog
     , _rlStartTime         :: !(Maybe Text)
     , _rlLatency           :: !(Maybe Text)
     , _rlURLMapEntry       :: !(Maybe Text)
-    , _rlCost              :: !(Maybe (JSONText Double))
+    , _rlCost              :: !(Maybe (Textual Double))
     , _rlReferrer          :: !(Maybe Text)
     , _rlLine              :: !(Maybe [LogLine])
     , _rlIP                :: !(Maybe Text)
@@ -47,12 +47,12 @@ data RequestLog = RequestLog
     , _rlResource          :: !(Maybe Text)
     , _rlEndTime           :: !(Maybe Text)
     , _rlFinished          :: !(Maybe Bool)
-    , _rlMegaCycles        :: !(Maybe (JSONText Int64))
+    , _rlMegaCycles        :: !(Maybe (Textual Int64))
     , _rlUserAgent         :: !(Maybe Text)
     , _rlNickname          :: !(Maybe Text)
     , _rlHost              :: !(Maybe Text)
     , _rlTaskQueueName     :: !(Maybe Text)
-    , _rlResponseSize      :: !(Maybe (JSONText Int64))
+    , _rlResponseSize      :: !(Maybe (Textual Int64))
     , _rlSourceReference   :: !(Maybe [SourceReference])
     , _rlAppEngineRelease  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -493,7 +493,7 @@ instance ToJSON LogLine where
 --
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation = SourceLocation
-    { _slLine         :: !(Maybe (JSONText Int64))
+    { _slLine         :: !(Maybe (Textual Int64))
     , _slFunctionName :: !(Maybe Text)
     , _slFile         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)

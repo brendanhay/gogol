@@ -46,7 +46,7 @@ type AccountsUpdateResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "accounts" :>
-           Capture "id" (JSONText Int32) :>
+           Capture "id" (Textual Int32) :>
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] Account :> Put '[JSON] Account
 
@@ -55,7 +55,7 @@ type AccountsUpdateResource =
 -- /See:/ 'accountsUpdate' smart constructor.
 data AccountsUpdate = AccountsUpdate
     { _auPayload :: !Account
-    , _auId      :: !(JSONText Int32)
+    , _auId      :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.

@@ -54,11 +54,11 @@ type AccountUserProFilesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
-               QueryParam "userRoleId" (JSONText Int64) :>
+               QueryParam "userRoleId" (Textual Int64) :>
                  QueryParam "searchString" Text :>
-                   QueryParams "ids" (JSONText Int64) :>
+                   QueryParams "ids" (Textual Int64) :>
                      QueryParam "sortOrder"
                        AccountUserProFilesListSortOrder
                        :>
@@ -67,8 +67,8 @@ type AccountUserProFilesListResource =
                            QueryParam "sortField"
                              AccountUserProFilesListSortField
                              :>
-                             QueryParam "subaccountId" (JSONText Int64) :>
-                               QueryParam "maxResults" (JSONText Int32) :>
+                             QueryParam "subaccountId" (Textual Int64) :>
+                               QueryParam "maxResults" (Textual Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] AccountUserProFilesListResponse
 
@@ -76,16 +76,16 @@ type AccountUserProFilesListResource =
 --
 -- /See:/ 'accountUserProFilesList' smart constructor.
 data AccountUserProFilesList = AccountUserProFilesList
-    { _aupflUserRoleId   :: !(Maybe (JSONText Int64))
+    { _aupflUserRoleId   :: !(Maybe (Textual Int64))
     , _aupflSearchString :: !(Maybe Text)
-    , _aupflIds          :: !(Maybe [JSONText Int64])
-    , _aupflProFileId    :: !(JSONText Int64)
+    , _aupflIds          :: !(Maybe [Textual Int64])
+    , _aupflProFileId    :: !(Textual Int64)
     , _aupflSortOrder    :: !(Maybe AccountUserProFilesListSortOrder)
     , _aupflActive       :: !(Maybe Bool)
     , _aupflPageToken    :: !(Maybe Text)
     , _aupflSortField    :: !(Maybe AccountUserProFilesListSortField)
-    , _aupflSubAccountId :: !(Maybe (JSONText Int64))
-    , _aupflMaxResults   :: !(Maybe (JSONText Int32))
+    , _aupflSubAccountId :: !(Maybe (Textual Int64))
+    , _aupflMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProFilesList' with the minimum fields required to make a request.

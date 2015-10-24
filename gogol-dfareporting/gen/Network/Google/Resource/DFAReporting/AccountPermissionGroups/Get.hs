@@ -46,9 +46,9 @@ type AccountPermissionGroupsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accountPermissionGroups" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountPermissionGroup
 
@@ -56,8 +56,8 @@ type AccountPermissionGroupsGetResource =
 --
 -- /See:/ 'accountPermissionGroupsGet' smart constructor.
 data AccountPermissionGroupsGet = AccountPermissionGroupsGet
-    { _apggProFileId :: !(JSONText Int64)
-    , _apggId        :: !(JSONText Int64)
+    { _apggProFileId :: !(Textual Int64)
+    , _apggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroupsGet' with the minimum fields required to make a request.

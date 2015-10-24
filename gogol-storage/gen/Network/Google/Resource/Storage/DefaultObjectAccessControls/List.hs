@@ -49,10 +49,8 @@ type DefaultObjectAccessControlsListResource =
          "b" :>
            Capture "bucket" Text :>
              "defaultObjectAcl" :>
-               QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                 :>
-                 QueryParam "ifMetagenerationNotMatch"
-                   (JSONText Int64)
+               QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                 QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                    :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ObjectAccessControls
@@ -61,9 +59,9 @@ type DefaultObjectAccessControlsListResource =
 --
 -- /See:/ 'defaultObjectAccessControlsList' smart constructor.
 data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList
-    { _doaclIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
+    { _doaclIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _doaclBucket                   :: !Text
-    , _doaclIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _doaclIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsList' with the minimum fields required to make a request.

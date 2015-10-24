@@ -607,7 +607,7 @@ data Report = Report
     , _rRows             :: !(Maybe [[Text]])
     , _rTotals           :: !(Maybe [Text])
     , _rHeaders          :: !(Maybe [ReportHeadersItem])
-    , _rTotalMatchedRows :: !(Maybe (JSONText Int64))
+    , _rTotalMatchedRows :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.

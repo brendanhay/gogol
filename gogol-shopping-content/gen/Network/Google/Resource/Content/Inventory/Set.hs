@@ -50,7 +50,7 @@ import           Network.Google.ShoppingContent.Types
 type InventorySetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "inventory" :>
              Capture "storeCode" Text :>
                "products" :>
@@ -66,7 +66,7 @@ type InventorySetResource =
 --
 -- /See:/ 'inventorySet' smart constructor.
 data InventorySet = InventorySet
-    { _isMerchantId :: !(JSONText Word64)
+    { _isMerchantId :: !(Textual Word64)
     , _isStoreCode  :: !Text
     , _isPayload    :: !InventorySetRequest
     , _isProductId  :: !Text

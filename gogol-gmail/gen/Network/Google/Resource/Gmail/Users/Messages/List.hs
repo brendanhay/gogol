@@ -56,7 +56,7 @@ type UsersMessagesListResource =
                  QueryParam "includeSpamTrash" Bool :>
                    QueryParams "labelIds" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListMessagesResponse
 
@@ -69,7 +69,7 @@ data UsersMessagesList = UsersMessagesList
     , _umlIncludeSpamTrash :: !Bool
     , _umlLabelIds         :: !(Maybe [Text])
     , _umlPageToken        :: !(Maybe Text)
-    , _umlMaxResults       :: !(JSONText Word32)
+    , _umlMaxResults       :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesList' with the minimum fields required to make a request.

@@ -45,14 +45,14 @@ type QueriesGetQueryResource =
      "doubleclickbidmanager" :>
        "v1" :>
          "query" :>
-           Capture "queryId" (JSONText Int64) :>
+           Capture "queryId" (Textual Int64) :>
              QueryParam "alt" AltJSON :> Get '[JSON] Query
 
 -- | Retrieves a stored query.
 --
 -- /See:/ 'queriesGetQuery' smart constructor.
 newtype QueriesGetQuery = QueriesGetQuery
-    { _qgqQueryId :: JSONText Int64
+    { _qgqQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesGetQuery' with the minimum fields required to make a request.

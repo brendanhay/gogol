@@ -47,7 +47,7 @@ type AccountsListResource =
        "v1.4" :>
          "accounts" :>
            QueryParam "pageToken" Text :>
-             QueryParam "maxResults" (JSONText Int32) :>
+             QueryParam "maxResults" (Textual Int32) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | List all accounts available to this AdSense account.
@@ -55,7 +55,7 @@ type AccountsListResource =
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList = AccountsList
     { _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !(Maybe (JSONText Int32))
+    , _alMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.

@@ -53,7 +53,7 @@ type TypesListResource =
                "types" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TypesListResponse
 
@@ -64,7 +64,7 @@ data TypesList = TypesList
     { _tlProject    :: !Text
     , _tlFilter     :: !(Maybe Text)
     , _tlPageToken  :: !(Maybe Text)
-    , _tlMaxResults :: !(JSONText Word32)
+    , _tlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TypesList' with the minimum fields required to make a request.

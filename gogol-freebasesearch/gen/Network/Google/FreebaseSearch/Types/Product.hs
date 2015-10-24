@@ -81,8 +81,8 @@ instance ToJSON ReconcileGetWarningItem where
 --
 -- /See:/ 'reconcileGetCosts' smart constructor.
 data ReconcileGetCosts = ReconcileGetCosts
-    { _rgcHits :: !(Maybe (JSONText Int32))
-    , _rgcMs   :: !(Maybe (JSONText Int32))
+    { _rgcHits :: !(Maybe (Textual Int32))
+    , _rgcMs   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReconcileGetCosts' with the minimum fields required to make a request.
@@ -251,7 +251,7 @@ instance ToJSON ReconcileCandidateNotable where
 -- /See:/ 'reconcileCandidate' smart constructor.
 data ReconcileCandidate = ReconcileCandidate
     { _rcLang       :: !(Maybe Text)
-    , _rcConfidence :: !(Maybe (JSONText Float))
+    , _rcConfidence :: !(Maybe (Textual Double))
     , _rcName       :: !(Maybe Text)
     , _rcNotable    :: !(Maybe ReconcileCandidateNotable)
     , _rcMid        :: !(Maybe Text)

@@ -65,7 +65,7 @@ type SubscriptionsListResource =
                          QueryParam "forChannelId" Text :>
                            QueryParam "pageToken" Text :>
                              QueryParam "order" SubscriptionsListOrder :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] SubscriptionListResponse
 
@@ -83,7 +83,7 @@ data SubscriptionsList = SubscriptionsList
     , _sForChannelId                  :: !(Maybe Text)
     , _sPageToken                     :: !(Maybe Text)
     , _sOrder                         :: !SubscriptionsListOrder
-    , _sMaxResults                    :: !(JSONText Word32)
+    , _sMaxResults                    :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.

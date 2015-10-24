@@ -46,17 +46,17 @@ type ReportsDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "reports" :>
-               Capture "reportId" (JSONText Int64) :>
+               Capture "reportId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a report by its ID.
 --
 -- /See:/ 'reportsDelete' smart constructor.
 data ReportsDelete = ReportsDelete
-    { _rdReportId  :: !(JSONText Int64)
-    , _rdProFileId :: !(JSONText Int64)
+    { _rdReportId  :: !(Textual Int64)
+    , _rdProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsDelete' with the minimum fields required to make a request.

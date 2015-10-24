@@ -54,7 +54,7 @@ type RoutesListResource =
                "routes" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] RouteList
 
 -- | Retrieves the list of route resources available to the specified
@@ -65,7 +65,7 @@ data RoutesList = RoutesList
     { _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
-    , _rlMaxResults :: !(JSONText Word32)
+    , _rlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesList' with the minimum fields required to make a request.

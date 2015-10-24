@@ -56,7 +56,7 @@ type TargetInstancesListResource =
                  "targetInstances" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] TargetInstanceList
 
@@ -69,7 +69,7 @@ data TargetInstancesList = TargetInstancesList
     , _tilZone       :: !Text
     , _tilFilter     :: !(Maybe Text)
     , _tilPageToken  :: !(Maybe Text)
-    , _tilMaxResults :: !(JSONText Word32)
+    , _tilMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesList' with the minimum fields required to make a request.

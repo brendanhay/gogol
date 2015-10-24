@@ -78,7 +78,7 @@ type AccountsExperienceLocalesListResource =
                                    QueryParam "bearer_token" Text :>
                                      QueryParam "editLevelEidr" Text :>
                                        QueryParam "pageToken" Text :>
-                                         QueryParam "pageSize" (JSONText Int32)
+                                         QueryParam "pageSize" (Textual Int32)
                                            :>
                                            QueryParam "callback" Text :>
                                              QueryParam "alt" AltJSON :>
@@ -106,7 +106,7 @@ data AccountsExperienceLocalesList = AccountsExperienceLocalesList
     , _aellBearerToken    :: !(Maybe Text)
     , _aellEditLevelEidr  :: !(Maybe Text)
     , _aellPageToken      :: !(Maybe Text)
-    , _aellPageSize       :: !(Maybe (JSONText Int32))
+    , _aellPageSize       :: !(Maybe (Textual Int32))
     , _aellCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

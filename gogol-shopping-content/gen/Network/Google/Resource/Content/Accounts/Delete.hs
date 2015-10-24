@@ -46,9 +46,9 @@ import           Network.Google.ShoppingContent.Types
 type AccountsDeleteResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "accounts" :>
-             Capture "accountId" (JSONText Word64) :>
+             Capture "accountId" (Textual Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -56,8 +56,8 @@ type AccountsDeleteResource =
 --
 -- /See:/ 'accountsDelete' smart constructor.
 data AccountsDelete = AccountsDelete
-    { _adMerchantId :: !(JSONText Word64)
-    , _adAccountId  :: !(JSONText Word64)
+    { _adMerchantId :: !(Textual Word64)
+    , _adAccountId  :: !(Textual Word64)
     , _adDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

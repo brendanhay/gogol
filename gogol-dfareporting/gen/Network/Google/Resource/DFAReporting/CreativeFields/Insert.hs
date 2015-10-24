@@ -46,7 +46,7 @@ type CreativeFieldsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] CreativeField :>
@@ -56,7 +56,7 @@ type CreativeFieldsInsertResource =
 --
 -- /See:/ 'creativeFieldsInsert' smart constructor.
 data CreativeFieldsInsert = CreativeFieldsInsert
-    { _cfiProFileId :: !(JSONText Int64)
+    { _cfiProFileId :: !(Textual Int64)
     , _cfiPayload   :: !CreativeField
     } deriving (Eq,Show,Data,Typeable,Generic)
 

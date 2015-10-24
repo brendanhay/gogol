@@ -48,9 +48,9 @@ type RemarketingListSharesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
-               QueryParam "remarketingListId" (JSONText Int64) :>
+               QueryParam "remarketingListId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] RemarketingListShare :>
                      Patch '[JSON] RemarketingListShare
@@ -60,9 +60,9 @@ type RemarketingListSharesPatchResource =
 --
 -- /See:/ 'remarketingListSharesPatch' smart constructor.
 data RemarketingListSharesPatch = RemarketingListSharesPatch
-    { _rlspProFileId         :: !(JSONText Int64)
+    { _rlspProFileId         :: !(Textual Int64)
     , _rlspPayload           :: !RemarketingListShare
-    , _rlspRemarketingListId :: !(JSONText Int64)
+    , _rlspRemarketingListId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesPatch' with the minimum fields required to make a request.

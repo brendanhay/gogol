@@ -45,17 +45,17 @@ import           Network.Google.ShoppingContent.Types
 type AccounttaxGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "accounttax" :>
-             Capture "accountId" (JSONText Word64) :>
+             Capture "accountId" (Textual Word64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] AccountTax
 
 -- | Retrieves the tax settings of the account.
 --
 -- /See:/ 'accounttaxGet' smart constructor.
 data AccounttaxGet = AccounttaxGet
-    { _aggMerchantId :: !(JSONText Word64)
-    , _aggAccountId  :: !(JSONText Word64)
+    { _aggMerchantId :: !(Textual Word64)
+    , _aggAccountId  :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxGet' with the minimum fields required to make a request.

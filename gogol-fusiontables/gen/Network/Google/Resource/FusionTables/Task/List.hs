@@ -51,8 +51,8 @@ type TaskListResource =
            Capture "tableId" Text :>
              "tasks" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "startIndex" (JSONText Word32) :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "startIndex" (Textual Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] TaskList
 
 -- | Retrieves a list of tasks.
@@ -61,8 +61,8 @@ type TaskListResource =
 data TaskList' = TaskList'
     { _tlPageToken  :: !(Maybe Text)
     , _tlTableId    :: !Text
-    , _tlStartIndex :: !(Maybe (JSONText Word32))
-    , _tlMaxResults :: !(Maybe (JSONText Word32))
+    , _tlStartIndex :: !(Maybe (Textual Word32))
+    , _tlMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList'' with the minimum fields required to make a request.

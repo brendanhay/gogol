@@ -59,7 +59,7 @@ instance ToJSON ReportRow where
 --
 -- /See:/ 'reportRequest' smart constructor.
 data ReportRequest = ReportRequest
-    { _rrMaxRowsPerFile         :: !(Maybe (JSONText Int32))
+    { _rrMaxRowsPerFile         :: !(Maybe (Textual Int32))
     , _rrReportScope            :: !(Maybe ReportRequestReportScope)
     , _rrStatisticsCurrency     :: !(Maybe Text)
     , _rrTimeRange              :: !(Maybe ReportRequestTimeRange)
@@ -68,11 +68,11 @@ data ReportRequest = ReportRequest
     , _rrIncludeRemovedEntities :: !Bool
     , _rrIncludeDeletedEntities :: !Bool
     , _rrDownloadFormat         :: !(Maybe Text)
-    , _rrStartRow               :: !(JSONText Int32)
+    , _rrStartRow               :: !(Textual Int32)
     , _rrColumns                :: !(Maybe [ReportAPIColumnSpec])
     , _rrReportType             :: !(Maybe Text)
     , _rrVerifySingleTimeZone   :: !Bool
-    , _rrRowCount               :: !(JSONText Int32)
+    , _rrRowCount               :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
@@ -341,7 +341,7 @@ data Report = Report
     , _rFiles                  :: !(Maybe [ReportFilesItem])
     , _rId                     :: !(Maybe Text)
     , _rStatisticsTimeZone     :: !(Maybe Text)
-    , _rRowCount               :: !(Maybe (JSONText Int32))
+    , _rRowCount               :: !(Maybe (Textual Int32))
     , _rRequest                :: !(Maybe ReportRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -470,7 +470,7 @@ instance ToJSON Report where
 -- /See:/ 'reportFilesItem' smart constructor.
 data ReportFilesItem = ReportFilesItem
     { _rfiURL       :: !(Maybe Text)
-    , _rfiByteCount :: !(Maybe (JSONText Int64))
+    , _rfiByteCount :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportFilesItem' with the minimum fields required to make a request.
@@ -577,11 +577,11 @@ instance ToJSON ReportRequestFiltersItem where
 --
 -- /See:/ 'availability' smart constructor.
 data Availability = Availability
-    { _aAgencyId              :: !(Maybe (JSONText Int64))
-    , _aAdvertiserId          :: !(Maybe (JSONText Int64))
-    , _aSegmentationId        :: !(Maybe (JSONText Int64))
+    { _aAgencyId              :: !(Maybe (Textual Int64))
+    , _aAdvertiserId          :: !(Maybe (Textual Int64))
+    , _aSegmentationId        :: !(Maybe (Textual Int64))
     , _aSegmentationName      :: !(Maybe Text)
-    , _aAvailabilityTimestamp :: !(Maybe (JSONText Word64))
+    , _aAvailabilityTimestamp :: !(Maybe (Textual Word64))
     , _aSegmentationType      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -722,7 +722,7 @@ instance ToJSON UpdateAvailabilityRequest where
 --
 -- /See:/ 'customMetric' smart constructor.
 data CustomMetric = CustomMetric
-    { _cmValue :: !(Maybe (JSONText Double))
+    { _cmValue :: !(Maybe (Textual Double))
     , _cmName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1065,39 +1065,39 @@ instance ToJSON ReportRequestTimeRange where
 --
 -- /See:/ 'conversion' smart constructor.
 data Conversion = Conversion
-    { _cAdGroupId                   :: !(Maybe (JSONText Int64))
-    , _cConversionModifiedTimestamp :: !(Maybe (JSONText Word64))
+    { _cAdGroupId                   :: !(Maybe (Textual Int64))
+    , _cConversionModifiedTimestamp :: !(Maybe (Textual Word64))
     , _cState                       :: !(Maybe Text)
-    , _cEngineAccountId             :: !(Maybe (JSONText Int64))
-    , _cAgencyId                    :: !(Maybe (JSONText Int64))
+    , _cEngineAccountId             :: !(Maybe (Textual Int64))
+    , _cAgencyId                    :: !(Maybe (Textual Int64))
     , _cCurrencyCode                :: !(Maybe Text)
     , _cStoreId                     :: !(Maybe Text)
-    , _cDsConversionId              :: !(Maybe (JSONText Int64))
+    , _cDsConversionId              :: !(Maybe (Textual Int64))
     , _cConversionId                :: !(Maybe Text)
-    , _cAdvertiserId                :: !(Maybe (JSONText Int64))
-    , _cSegmentationId              :: !(Maybe (JSONText Int64))
+    , _cAdvertiserId                :: !(Maybe (Textual Int64))
+    , _cSegmentationId              :: !(Maybe (Textual Int64))
     , _cChannel                     :: !(Maybe Text)
     , _cProductCountry              :: !(Maybe Text)
-    , _cCampaignId                  :: !(Maybe (JSONText Int64))
-    , _cCriterionId                 :: !(Maybe (JSONText Int64))
-    , _cConversionTimestamp         :: !(Maybe (JSONText Word64))
+    , _cCampaignId                  :: !(Maybe (Textual Int64))
+    , _cCriterionId                 :: !(Maybe (Textual Int64))
+    , _cConversionTimestamp         :: !(Maybe (Textual Word64))
     , _cAttributionModel            :: !(Maybe Text)
     , _cSegmentationName            :: !(Maybe Text)
     , _cProductLanguage             :: !(Maybe Text)
     , _cCustomMetric                :: !(Maybe [CustomMetric])
-    , _cCountMillis                 :: !(Maybe (JSONText Int64))
-    , _cQuantityMillis              :: !(Maybe (JSONText Int64))
-    , _cAdId                        :: !(Maybe (JSONText Int64))
+    , _cCountMillis                 :: !(Maybe (Textual Int64))
+    , _cQuantityMillis              :: !(Maybe (Textual Int64))
+    , _cAdId                        :: !(Maybe (Textual Int64))
     , _cDeviceType                  :: !(Maybe Text)
     , _cType                        :: !(Maybe Text)
     , _cCustomDimension             :: !(Maybe [CustomDimension])
     , _cFloodlightOrderId           :: !(Maybe Text)
-    , _cRevenueMicros               :: !(Maybe (JSONText Int64))
+    , _cRevenueMicros               :: !(Maybe (Textual Int64))
     , _cClickId                     :: !(Maybe Text)
-    , _cInventoryAccountId          :: !(Maybe (JSONText Int64))
+    , _cInventoryAccountId          :: !(Maybe (Textual Int64))
     , _cSegmentationType            :: !(Maybe Text)
     , _cProductId                   :: !(Maybe Text)
-    , _cProductGroupId              :: !(Maybe (JSONText Int64))
+    , _cProductGroupId              :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Conversion' with the minimum fields required to make a request.
@@ -1653,13 +1653,13 @@ instance ToJSON UpdateAvailabilityResponse where
 --
 -- /See:/ 'reportRequestReportScope' smart constructor.
 data ReportRequestReportScope = ReportRequestReportScope
-    { _rrrsKeywordId       :: !(Maybe (JSONText Int64))
-    , _rrrsAdGroupId       :: !(Maybe (JSONText Int64))
-    , _rrrsEngineAccountId :: !(Maybe (JSONText Int64))
-    , _rrrsAgencyId        :: !(Maybe (JSONText Int64))
-    , _rrrsAdvertiserId    :: !(Maybe (JSONText Int64))
-    , _rrrsCampaignId      :: !(Maybe (JSONText Int64))
-    , _rrrsAdId            :: !(Maybe (JSONText Int64))
+    { _rrrsKeywordId       :: !(Maybe (Textual Int64))
+    , _rrrsAdGroupId       :: !(Maybe (Textual Int64))
+    , _rrrsEngineAccountId :: !(Maybe (Textual Int64))
+    , _rrrsAgencyId        :: !(Maybe (Textual Int64))
+    , _rrrsAdvertiserId    :: !(Maybe (Textual Int64))
+    , _rrrsCampaignId      :: !(Maybe (Textual Int64))
+    , _rrrsAdId            :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequestReportScope' with the minimum fields required to make a request.

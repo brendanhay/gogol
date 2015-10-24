@@ -299,9 +299,9 @@ instance ToJSON Pageviews where
 -- /See:/ 'postLocation' smart constructor.
 data PostLocation = PostLocation
     { _plSpan :: !(Maybe Text)
-    , _plLat  :: !(Maybe (JSONText Double))
+    , _plLat  :: !(Maybe (Textual Double))
     , _plName :: !(Maybe Text)
-    , _plLng  :: !(Maybe (JSONText Double))
+    , _plLng  :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostLocation' with the minimum fields required to make a request.
@@ -364,7 +364,7 @@ instance ToJSON PostLocation where
 --
 -- /See:/ 'blogPosts' smart constructor.
 data BlogPosts = BlogPosts
-    { _bpTotalItems :: !(Maybe (JSONText Int32))
+    { _bpTotalItems :: !(Maybe (Textual Int32))
     , _bpItems      :: !(Maybe [Post'])
     , _bpSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1091,7 +1091,7 @@ instance ToJSON Blog where
 --
 -- /See:/ 'blogPages' smart constructor.
 data BlogPages = BlogPages
-    { _bpsTotalItems :: !(Maybe (JSONText Int32))
+    { _bpsTotalItems :: !(Maybe (Textual Int32))
     , _bpsSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1481,7 +1481,7 @@ instance ToJSON UserBlogs where
 --
 -- /See:/ 'postReplies' smart constructor.
 data PostReplies = PostReplies
-    { _prTotalItems :: !(Maybe (JSONText Int64))
+    { _prTotalItems :: !(Maybe (Textual Int64))
     , _prItems      :: !(Maybe [Comment])
     , _prSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1779,7 +1779,7 @@ instance ToJSON PostPerUserInfo where
 -- /See:/ 'pageviewsCountsItem' smart constructor.
 data PageviewsCountsItem = PageviewsCountsItem
     { _pciTimeRange :: !(Maybe Text)
-    , _pciCount     :: !(Maybe (JSONText Int64))
+    , _pciCount     :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageviewsCountsItem' with the minimum fields required to make a request.

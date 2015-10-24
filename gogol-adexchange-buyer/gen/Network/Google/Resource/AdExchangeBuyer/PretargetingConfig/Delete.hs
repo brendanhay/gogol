@@ -46,16 +46,16 @@ type PretargetingConfigDeleteResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "pretargetingconfigs" :>
-           Capture "accountId" (JSONText Int64) :>
-             Capture "configId" (JSONText Int64) :>
+           Capture "accountId" (Textual Int64) :>
+             Capture "configId" (Textual Int64) :>
                QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing pretargeting config.
 --
 -- /See:/ 'pretargetingConfigDelete' smart constructor.
 data PretargetingConfigDelete = PretargetingConfigDelete
-    { _pcdAccountId :: !(JSONText Int64)
-    , _pcdConfigId  :: !(JSONText Int64)
+    { _pcdAccountId :: !(Textual Int64)
+    , _pcdConfigId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigDelete' with the minimum fields required to make a request.

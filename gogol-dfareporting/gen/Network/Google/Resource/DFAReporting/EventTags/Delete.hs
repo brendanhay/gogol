@@ -46,17 +46,17 @@ type EventTagsDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "eventTags" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing event tag.
 --
 -- /See:/ 'eventTagsDelete' smart constructor.
 data EventTagsDelete = EventTagsDelete
-    { _etdProFileId :: !(JSONText Int64)
-    , _etdId        :: !(JSONText Int64)
+    { _etdProFileId :: !(Textual Int64)
+    , _etdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsDelete' with the minimum fields required to make a request.

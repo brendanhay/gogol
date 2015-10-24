@@ -53,10 +53,10 @@ type JobsGetQueryResultsResource =
            Capture "projectId" Text :>
              "queries" :>
                Capture "jobId" Text :>
-                 QueryParam "timeoutMs" (JSONText Word32) :>
+                 QueryParam "timeoutMs" (Textual Word32) :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "startIndex" (JSONText Word64) :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "startIndex" (Textual Word64) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] GetQueryResultsResponse
 
@@ -65,11 +65,11 @@ type JobsGetQueryResultsResource =
 -- /See:/ 'jobsGetQueryResults' smart constructor.
 data JobsGetQueryResults = JobsGetQueryResults
     { _jgqrJobId      :: !Text
-    , _jgqrTimeoutMs  :: !(Maybe (JSONText Word32))
+    , _jgqrTimeoutMs  :: !(Maybe (Textual Word32))
     , _jgqrPageToken  :: !(Maybe Text)
     , _jgqrProjectId  :: !Text
-    , _jgqrStartIndex :: !(Maybe (JSONText Word64))
-    , _jgqrMaxResults :: !(Maybe (JSONText Word32))
+    , _jgqrStartIndex :: !(Maybe (Textual Word64))
+    , _jgqrMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGetQueryResults' with the minimum fields required to make a request.

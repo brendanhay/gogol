@@ -50,7 +50,7 @@ type CirclesListResource =
            Capture "userId" Text :>
              "circles" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] CircleFeed
 
 -- | List all of the circles for a user.
@@ -59,7 +59,7 @@ type CirclesListResource =
 data CirclesList = CirclesList
     { _cUserId     :: !Text
     , _cPageToken  :: !(Maybe Text)
-    , _cMaxResults :: !(JSONText Word32)
+    , _cMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesList' with the minimum fields required to make a request.

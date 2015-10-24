@@ -57,17 +57,15 @@ type ObjectsUpdateResource =
            Capture "bucket" Text :>
              "o" :>
                Capture "object" Text :>
-                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                   :>
-                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                 QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                   QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                     QueryParam "ifGenerationMatch" (Textual Int64) :>
                        QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
                          :>
-                         QueryParam "ifMetagenerationNotMatch"
-                           (JSONText Int64)
+                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                            :>
                            QueryParam "projection" ObjectsUpdateProjection :>
-                             QueryParam "generation" (JSONText Int64) :>
+                             QueryParam "generation" (Textual Int64) :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Object :> Put '[JSON] Object
        :<|>
@@ -77,17 +75,15 @@ type ObjectsUpdateResource =
              Capture "bucket" Text :>
                "o" :>
                  Capture "object" Text :>
-                   QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                     :>
-                     QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                       QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                   QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                     QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                       QueryParam "ifGenerationMatch" (Textual Int64) :>
                          QueryParam "predefinedAcl" ObjectsUpdatePredefinedACL
                            :>
-                           QueryParam "ifMetagenerationNotMatch"
-                             (JSONText Int64)
+                           QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                              :>
                              QueryParam "projection" ObjectsUpdateProjection :>
-                               QueryParam "generation" (JSONText Int64) :>
+                               QueryParam "generation" (Textual Int64) :>
                                  QueryParam "alt" AltMedia :>
                                    Put '[OctetStream] Stream
 
@@ -95,16 +91,16 @@ type ObjectsUpdateResource =
 --
 -- /See:/ 'objectsUpdate' smart constructor.
 data ObjectsUpdate = ObjectsUpdate
-    { _ouIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
-    , _ouIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
-    , _ouIfGenerationMatch        :: !(Maybe (JSONText Int64))
+    { _ouIfMetagenerationMatch    :: !(Maybe (Textual Int64))
+    , _ouIfGenerationNotMatch     :: !(Maybe (Textual Int64))
+    , _ouIfGenerationMatch        :: !(Maybe (Textual Int64))
     , _ouPredefinedACL            :: !(Maybe ObjectsUpdatePredefinedACL)
     , _ouBucket                   :: !Text
     , _ouPayload                  :: !Object
-    , _ouIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _ouIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _ouObject                   :: !Text
     , _ouProjection               :: !(Maybe ObjectsUpdateProjection)
-    , _ouGeneration               :: !(Maybe (JSONText Int64))
+    , _ouGeneration               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsUpdate' with the minimum fields required to make a request.

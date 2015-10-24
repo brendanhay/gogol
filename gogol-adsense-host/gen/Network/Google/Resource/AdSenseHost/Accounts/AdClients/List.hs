@@ -50,7 +50,7 @@ type AccountsAdClientsListResource =
            Capture "accountId" Text :>
              "adclients" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] AdClients
 
 -- | List all hosted ad clients in the specified hosted account.
@@ -59,7 +59,7 @@ type AccountsAdClientsListResource =
 data AccountsAdClientsList = AccountsAdClientsList
     { _aaclAccountId  :: !Text
     , _aaclPageToken  :: !(Maybe Text)
-    , _aaclMaxResults :: !(Maybe (JSONText Word32))
+    , _aaclMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdClientsList' with the minimum fields required to make a request.

@@ -55,7 +55,7 @@ type PostsGetResource =
                Capture "postId" Text :>
                  QueryParam "fetchBody" Bool :>
                    QueryParam "fetchImages" Bool :>
-                     QueryParam "maxComments" (JSONText Word32) :>
+                     QueryParam "maxComments" (Textual Word32) :>
                        QueryParam "view" PostsGetView :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
@@ -66,7 +66,7 @@ data PostsGet = PostsGet
     { _pggFetchBody   :: !Bool
     , _pggFetchImages :: !(Maybe Bool)
     , _pggBlogId      :: !Text
-    , _pggMaxComments :: !(Maybe (JSONText Word32))
+    , _pggMaxComments :: !(Maybe (Textual Word32))
     , _pggView        :: !(Maybe PostsGetView)
     , _pggPostId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -314,11 +314,11 @@ instance ToJSON AchievementConfigurationListResponse
 --
 -- /See:/ 'leaderboardConfiguration' smart constructor.
 data LeaderboardConfiguration = LeaderboardConfiguration
-    { _lcScoreMax   :: !(Maybe (JSONText Int64))
+    { _lcScoreMax   :: !(Maybe (Textual Int64))
     , _lcKind       :: !Text
     , _lcPublished  :: !(Maybe LeaderboardConfigurationDetail)
     , _lcToken      :: !(Maybe Text)
-    , _lcScoreMin   :: !(Maybe (JSONText Int64))
+    , _lcScoreMin   :: !(Maybe (Textual Int64))
     , _lcDraft      :: !(Maybe LeaderboardConfigurationDetail)
     , _lcId         :: !(Maybe Text)
     , _lcScoreOrder :: !(Maybe Text)
@@ -430,7 +430,7 @@ instance ToJSON LeaderboardConfiguration where
 -- /See:/ 'achievementConfiguration' smart constructor.
 data AchievementConfiguration = AchievementConfiguration
     { _acAchievementType :: !(Maybe Text)
-    , _acStepsToUnlock   :: !(Maybe (JSONText Int32))
+    , _acStepsToUnlock   :: !(Maybe (Textual Int32))
     , _acKind            :: !Text
     , _acPublished       :: !(Maybe AchievementConfigurationDetail)
     , _acToken           :: !(Maybe Text)
@@ -609,7 +609,7 @@ data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration
     { _gnfcSuffix           :: !(Maybe GamesNumberAffixConfiguration)
     , _gnfcCurrencyCode     :: !(Maybe Text)
     , _gnfcNumberFormatType :: !(Maybe Text)
-    , _gnfcNumDecimalPlaces :: !(Maybe (JSONText Int32))
+    , _gnfcNumDecimalPlaces :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesNumberFormatConfiguration' with the minimum fields required to make a request.
@@ -689,7 +689,7 @@ instance ToJSON GamesNumberFormatConfiguration where
 data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
     { _lcdKind        :: !Text
     , _lcdScoreFormat :: !(Maybe GamesNumberFormatConfiguration)
-    , _lcdSortRank    :: !(Maybe (JSONText Int32))
+    , _lcdSortRank    :: !(Maybe (Textual Int32))
     , _lcdName        :: !(Maybe LocalizedStringBundle)
     , _lcdIconURL     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -772,9 +772,9 @@ instance ToJSON LeaderboardConfigurationDetail where
 -- /See:/ 'achievementConfigurationDetail' smart constructor.
 data AchievementConfigurationDetail = AchievementConfigurationDetail
     { _acdKind        :: !Text
-    , _acdSortRank    :: !(Maybe (JSONText Int32))
+    , _acdSortRank    :: !(Maybe (Textual Int32))
     , _acdName        :: !(Maybe LocalizedStringBundle)
-    , _acdPointValue  :: !(Maybe (JSONText Int32))
+    , _acdPointValue  :: !(Maybe (Textual Int32))
     , _acdIconURL     :: !(Maybe Text)
     , _acdDescription :: !(Maybe LocalizedStringBundle)
     } deriving (Eq,Show,Data,Typeable,Generic)

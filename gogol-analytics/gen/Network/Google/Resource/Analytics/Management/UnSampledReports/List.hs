@@ -56,8 +56,8 @@ type ManagementUnSampledReportsListResource =
                    "profiles" :>
                      Capture "profileId" Text :>
                        "unsampledReports" :>
-                         QueryParam "start-index" (JSONText Int32) :>
-                           QueryParam "max-results" (JSONText Int32) :>
+                         QueryParam "start-index" (Textual Int32) :>
+                           QueryParam "max-results" (Textual Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] UnSampledReports
 
@@ -68,8 +68,8 @@ data ManagementUnSampledReportsList = ManagementUnSampledReportsList
     { _musrlWebPropertyId :: !Text
     , _musrlProFileId     :: !Text
     , _musrlAccountId     :: !Text
-    , _musrlStartIndex    :: !(Maybe (JSONText Int32))
-    , _musrlMaxResults    :: !(Maybe (JSONText Int32))
+    , _musrlStartIndex    :: !(Maybe (Textual Int32))
+    , _musrlMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnSampledReportsList' with the minimum fields required to make a request.

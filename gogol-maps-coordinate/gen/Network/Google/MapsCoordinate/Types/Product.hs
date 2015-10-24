@@ -206,10 +206,10 @@ instance ToJSON WorkerListResponse where
 -- /See:/ 'schedule' smart constructor.
 data Schedule = Schedule
     { _sAllDay    :: !(Maybe Bool)
-    , _sStartTime :: !(Maybe (JSONText Word64))
+    , _sStartTime :: !(Maybe (Textual Word64))
     , _sKind      :: !Text
-    , _sEndTime   :: !(Maybe (JSONText Word64))
-    , _sDuration  :: !(Maybe (JSONText Word64))
+    , _sEndTime   :: !(Maybe (Textual Word64))
+    , _sDuration  :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
@@ -289,8 +289,8 @@ instance ToJSON Schedule where
 data Location = Location
     { _lAddressLine :: !(Maybe [Text])
     , _lKind        :: !Text
-    , _lLat         :: !(Maybe (JSONText Double))
-    , _lLng         :: !(Maybe (JSONText Double))
+    , _lLat         :: !(Maybe (Textual Double))
+    , _lLng         :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
@@ -490,7 +490,7 @@ data CustomFieldDef = CustomFieldDef
     , _cfdKind                :: !Text
     , _cfdName                :: !(Maybe Text)
     , _cfdRequiredForCheckout :: !(Maybe Bool)
-    , _cfdId                  :: !(Maybe (JSONText Int64))
+    , _cfdId                  :: !(Maybe (Textual Int64))
     , _cfdEnumitems           :: !(Maybe [EnumItemDef])
     , _cfdType                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -655,7 +655,7 @@ instance ToJSON JobListResponse where
 data JobChange = JobChange
     { _jcState     :: !(Maybe JobState)
     , _jcKind      :: !Text
-    , _jcTimestamp :: !(Maybe (JSONText Word64))
+    , _jcTimestamp :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobChange' with the minimum fields required to make a request.
@@ -813,7 +813,7 @@ data Job = Job
     { _jState     :: !(Maybe JobState)
     , _jKind      :: !Text
     , _jJobChange :: !(Maybe [JobChange])
-    , _jId        :: !(Maybe (JSONText Word64))
+    , _jId        :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
@@ -987,10 +987,10 @@ instance ToJSON Team where
 -- /See:/ 'locationRecord' smart constructor.
 data LocationRecord = LocationRecord
     { _lrKind             :: !Text
-    , _lrLatitude         :: !(Maybe (JSONText Double))
-    , _lrConfidenceRadius :: !(Maybe (JSONText Double))
-    , _lrLongitude        :: !(Maybe (JSONText Double))
-    , _lrCollectionTime   :: !(Maybe (JSONText Int64))
+    , _lrLatitude         :: !(Maybe (Textual Double))
+    , _lrConfidenceRadius :: !(Maybe (Textual Double))
+    , _lrLongitude        :: !(Maybe (Textual Double))
+    , _lrCollectionTime   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationRecord' with the minimum fields required to make a request.
@@ -1119,7 +1119,7 @@ instance ToJSON Worker where
 --
 -- /See:/ 'customField' smart constructor.
 data CustomField = CustomField
-    { _cCustomFieldId :: !(Maybe (JSONText Int64))
+    { _cCustomFieldId :: !(Maybe (Textual Int64))
     , _cKind          :: !Text
     , _cValue         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)

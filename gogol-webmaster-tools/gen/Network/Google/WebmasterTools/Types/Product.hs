@@ -24,9 +24,9 @@ import           Network.Google.WebmasterTools.Types.Sum
 --
 -- /See:/ 'wmxSitemapContent' smart constructor.
 data WmxSitemapContent = WmxSitemapContent
-    { _wscIndexed   :: !(Maybe (JSONText Int64))
+    { _wscIndexed   :: !(Maybe (Textual Int64))
     , _wscType      :: !(Maybe Text)
-    , _wscSubmitted :: !(Maybe (JSONText Int64))
+    , _wscSubmitted :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WmxSitemapContent' with the minimum fields required to make a request.
@@ -249,11 +249,11 @@ instance ToJSON URLCrawlErrorCountsPerType where
 --
 -- /See:/ 'apiDataRow' smart constructor.
 data APIDataRow = APIDataRow
-    { _adrImpressions :: !(Maybe (JSONText Double))
+    { _adrImpressions :: !(Maybe (Textual Double))
     , _adrKeys        :: !(Maybe [Text])
-    , _adrCtr         :: !(Maybe (JSONText Double))
-    , _adrClicks      :: !(Maybe (JSONText Double))
-    , _adrPosition    :: !(Maybe (JSONText Double))
+    , _adrCtr         :: !(Maybe (Textual Double))
+    , _adrClicks      :: !(Maybe (Textual Double))
+    , _adrPosition    :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIDataRow' with the minimum fields required to make a request.
@@ -383,7 +383,7 @@ instance ToJSON APIdimensionFilter where
 --
 -- /See:/ 'urlCrawlErrorCount' smart constructor.
 data URLCrawlErrorCount = URLCrawlErrorCount
-    { _ucecCount     :: !(Maybe (JSONText Int64))
+    { _ucecCount     :: !(Maybe (Textual Int64))
     , _ucecTimestamp :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -575,7 +575,7 @@ instance ToJSON URLCrawlErrorsCountsQueryResponse
 --
 -- /See:/ 'urlCrawlErrorsSample' smart constructor.
 data URLCrawlErrorsSample = URLCrawlErrorsSample
-    { _ucesResponseCode  :: !(Maybe (JSONText Int32))
+    { _ucesResponseCode  :: !(Maybe (Textual Int32))
     , _ucesURLDetails    :: !(Maybe URLSampleDetails)
     , _ucesLastCrawled   :: !(Maybe DateTime')
     , _ucesPageURL       :: !(Maybe Text)
@@ -667,11 +667,11 @@ data WmxSitemap = WmxSitemap
     , _wsPath            :: !(Maybe Text)
     , _wsIsSitemapsIndex :: !(Maybe Bool)
     , _wsLastSubmitted   :: !(Maybe DateTime')
-    , _wsWarnings        :: !(Maybe (JSONText Int64))
+    , _wsWarnings        :: !(Maybe (Textual Int64))
     , _wsLastDownloaded  :: !(Maybe DateTime')
     , _wsIsPending       :: !(Maybe Bool)
     , _wsType            :: !(Maybe Text)
-    , _wsErrors          :: !(Maybe (JSONText Int64))
+    , _wsErrors          :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WmxSitemap' with the minimum fields required to make a request.
@@ -836,7 +836,7 @@ instance ToJSON SitemapsListResponse where
 -- /See:/ 'searchAnalyticsQueryRequest' smart constructor.
 data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest
     { _saqrAggregationType       :: !(Maybe Text)
-    , _saqrRowLimit              :: !(Maybe (JSONText Int32))
+    , _saqrRowLimit              :: !(Maybe (Textual Int32))
     , _saqrEndDate               :: !(Maybe Text)
     , _saqrSearchType            :: !(Maybe Text)
     , _saqrDimensionFilterGroups :: !(Maybe [APIdimensionFilterGroup])

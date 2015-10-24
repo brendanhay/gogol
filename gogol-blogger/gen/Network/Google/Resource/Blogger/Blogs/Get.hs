@@ -48,7 +48,7 @@ type BlogsGetResource =
        "v3" :>
          "blogs" :>
            Capture "blogId" Text :>
-             QueryParam "maxPosts" (JSONText Word32) :>
+             QueryParam "maxPosts" (Textual Word32) :>
                QueryParam "view" BlogsGetView :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Blog
 
@@ -57,7 +57,7 @@ type BlogsGetResource =
 -- /See:/ 'blogsGet' smart constructor.
 data BlogsGet = BlogsGet
     { _bgBlogId   :: !Text
-    , _bgMaxPosts :: !(Maybe (JSONText Word32))
+    , _bgMaxPosts :: !(Maybe (Textual Word32))
     , _bgView     :: !(Maybe BlogsGetView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

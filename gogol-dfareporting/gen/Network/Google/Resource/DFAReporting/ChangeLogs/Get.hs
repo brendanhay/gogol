@@ -46,17 +46,17 @@ type ChangeLogsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] ChangeLog
 
 -- | Gets one change log by ID.
 --
 -- /See:/ 'changeLogsGet' smart constructor.
 data ChangeLogsGet = ChangeLogsGet
-    { _clgProFileId :: !(JSONText Int64)
-    , _clgId        :: !(JSONText Int64)
+    { _clgProFileId :: !(Textual Int64)
+    , _clgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsGet' with the minimum fields required to make a request.

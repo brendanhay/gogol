@@ -46,17 +46,17 @@ type PlacementStrategiesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesDelete' smart constructor.
 data PlacementStrategiesDelete = PlacementStrategiesDelete
-    { _psdProFileId :: !(JSONText Int64)
-    , _psdId        :: !(JSONText Int64)
+    { _psdProFileId :: !(Textual Int64)
+    , _psdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesDelete' with the minimum fields required to make a request.

@@ -46,9 +46,9 @@ type FloodlightConfigurationsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] FloodlightConfiguration
 
@@ -56,8 +56,8 @@ type FloodlightConfigurationsGetResource =
 --
 -- /See:/ 'floodlightConfigurationsGet' smart constructor.
 data FloodlightConfigurationsGet = FloodlightConfigurationsGet
-    { _fcgProFileId :: !(JSONText Int64)
-    , _fcgId        :: !(JSONText Int64)
+    { _fcgProFileId :: !(Textual Int64)
+    , _fcgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsGet' with the minimum fields required to make a request.

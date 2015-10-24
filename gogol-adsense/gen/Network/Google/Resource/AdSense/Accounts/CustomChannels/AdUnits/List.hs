@@ -58,7 +58,7 @@ type AccountsCustomChannelsAdUnitsListResource =
                      "adunits" :>
                        QueryParam "includeInactive" Bool :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (JSONText Int32) :>
+                           QueryParam "maxResults" (Textual Int32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified custom channel.
@@ -70,7 +70,7 @@ data AccountsCustomChannelsAdUnitsList = AccountsCustomChannelsAdUnitsList
     , _accaulAdClientId      :: !Text
     , _accaulAccountId       :: !Text
     , _accaulPageToken       :: !(Maybe Text)
-    , _accaulMaxResults      :: !(Maybe (JSONText Int32))
+    , _accaulMaxResults      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomChannelsAdUnitsList' with the minimum fields required to make a request.

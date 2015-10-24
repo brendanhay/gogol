@@ -46,7 +46,7 @@ type EventTagsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "eventTags" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
@@ -55,7 +55,7 @@ type EventTagsUpdateResource =
 --
 -- /See:/ 'eventTagsUpdate' smart constructor.
 data EventTagsUpdate = EventTagsUpdate
-    { _etuProFileId :: !(JSONText Int64)
+    { _etuProFileId :: !(Textual Int64)
     , _etuPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
 

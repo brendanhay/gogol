@@ -49,7 +49,7 @@ type TaskListsListResource =
            "@me" :>
              "lists" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Int64) :>
+                 QueryParam "maxResults" (Textual Int64) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] TaskLists
 
 -- | Returns all the authenticated user\'s task lists.
@@ -57,7 +57,7 @@ type TaskListsListResource =
 -- /See:/ 'taskListsList' smart constructor.
 data TaskListsList = TaskListsList
     { _tllPageToken  :: !(Maybe Text)
-    , _tllMaxResults :: !(Maybe (JSONText Int64))
+    , _tllMaxResults :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskListsList' with the minimum fields required to make a request.

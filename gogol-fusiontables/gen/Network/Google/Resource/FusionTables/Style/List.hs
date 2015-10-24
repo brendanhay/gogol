@@ -50,7 +50,7 @@ type StyleListResource =
            Capture "tableId" Text :>
              "styles" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] StyleSettingList
 
@@ -60,7 +60,7 @@ type StyleListResource =
 data StyleList = StyleList
     { _slPageToken  :: !(Maybe Text)
     , _slTableId    :: !Text
-    , _slMaxResults :: !(Maybe (JSONText Word32))
+    , _slMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleList' with the minimum fields required to make a request.

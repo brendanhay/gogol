@@ -46,7 +46,7 @@ type CreativesUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creatives" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Creative :> Put '[JSON] Creative
@@ -55,7 +55,7 @@ type CreativesUpdateResource =
 --
 -- /See:/ 'creativesUpdate' smart constructor.
 data CreativesUpdate = CreativesUpdate
-    { _creProFileId :: !(JSONText Int64)
+    { _creProFileId :: !(Textual Int64)
     , _crePayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 

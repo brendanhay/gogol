@@ -398,8 +398,8 @@ instance ToJSON MetricDescriptorLabelDescriptor where
 --
 -- /See:/ 'pointDistributionUnderflowBucket' smart constructor.
 data PointDistributionUnderflowBucket = PointDistributionUnderflowBucket
-    { _pdubUpperBound :: !(Maybe (JSONText Double))
-    , _pdubCount      :: !(Maybe (JSONText Int64))
+    { _pdubUpperBound :: !(Maybe (Textual Double))
+    , _pdubCount      :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionUnderflowBucket' with the minimum fields required to make a request.
@@ -593,9 +593,9 @@ instance ToJSON TimeseriesDescriptorLabels where
 --
 -- /See:/ 'pointDistributionBucket' smart constructor.
 data PointDistributionBucket = PointDistributionBucket
-    { _pdbUpperBound :: !(Maybe (JSONText Double))
-    , _pdbCount      :: !(Maybe (JSONText Int64))
-    , _pdbLowerBound :: !(Maybe (JSONText Double))
+    { _pdbUpperBound :: !(Maybe (Textual Double))
+    , _pdbCount      :: !(Maybe (Textual Int64))
+    , _pdbLowerBound :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionBucket' with the minimum fields required to make a request.
@@ -805,11 +805,11 @@ instance ToJSON PointDistribution where
 data Point = Point
     { _pBoolValue         :: !(Maybe Bool)
     , _pStart             :: !(Maybe DateTime')
-    , _pDoubleValue       :: !(Maybe (JSONText Double))
+    , _pDoubleValue       :: !(Maybe (Textual Double))
     , _pStringValue       :: !(Maybe Text)
     , _pDistributionValue :: !(Maybe PointDistribution)
     , _pEnd               :: !(Maybe DateTime')
-    , _pInt64Value        :: !(Maybe (JSONText Int64))
+    , _pInt64Value        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
@@ -924,8 +924,8 @@ instance ToJSON Point where
 --
 -- /See:/ 'pointDistributionOverflowBucket' smart constructor.
 data PointDistributionOverflowBucket = PointDistributionOverflowBucket
-    { _pdobCount      :: !(Maybe (JSONText Int64))
-    , _pdobLowerBound :: !(Maybe (JSONText Double))
+    { _pdobCount      :: !(Maybe (Textual Int64))
+    , _pdobLowerBound :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistributionOverflowBucket' with the minimum fields required to make a request.

@@ -74,7 +74,7 @@ type EventsWatchResource =
                            QueryParam "showDeleted" Bool :>
                              QueryParam "q" Text :>
                                QueryParams "sharedExtendedProperty" Text :>
-                                 QueryParam "maxAttendees" (JSONText Int32) :>
+                                 QueryParam "maxAttendees" (Textual Int32) :>
                                    QueryParam "iCalUID" Text :>
                                      QueryParam "updatedMin" DateTime' :>
                                        QueryParam "pageToken" Text :>
@@ -83,7 +83,7 @@ type EventsWatchResource =
                                              Bool
                                              :>
                                              QueryParam "maxResults"
-                                               (JSONText Int32)
+                                               (Textual Int32)
                                                :>
                                                QueryParam "alwaysIncludeEmail"
                                                  Bool
@@ -108,13 +108,13 @@ data EventsWatch = EventsWatch
     , _ewPayload                 :: !Channel
     , _ewQ                       :: !(Maybe Text)
     , _ewSharedExtendedProperty  :: !(Maybe [Text])
-    , _ewMaxAttendees            :: !(Maybe (JSONText Int32))
+    , _ewMaxAttendees            :: !(Maybe (Textual Int32))
     , _ewICalUId                 :: !(Maybe Text)
     , _ewUpdatedMin              :: !(Maybe DateTime')
     , _ewPageToken               :: !(Maybe Text)
     , _ewTimeZone                :: !(Maybe Text)
     , _ewShowHiddenInvitations   :: !(Maybe Bool)
-    , _ewMaxResults              :: !(Maybe (JSONText Int32))
+    , _ewMaxResults              :: !(Maybe (Textual Int32))
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
     , _ewTimeMax                 :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

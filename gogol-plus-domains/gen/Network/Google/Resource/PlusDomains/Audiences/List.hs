@@ -50,7 +50,7 @@ type AudiencesListResource =
            Capture "userId" Text :>
              "audiences" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] AudiencesFeed
 
 -- | List all of the audiences to which a user can share.
@@ -59,7 +59,7 @@ type AudiencesListResource =
 data AudiencesList = AudiencesList
     { _aUserId     :: !Text
     , _aPageToken  :: !(Maybe Text)
-    , _aMaxResults :: !(JSONText Word32)
+    , _aMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudiencesList' with the minimum fields required to make a request.

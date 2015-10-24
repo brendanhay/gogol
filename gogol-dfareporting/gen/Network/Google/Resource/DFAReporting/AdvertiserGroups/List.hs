@@ -51,16 +51,16 @@ type AdvertiserGroupsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" (JSONText Int64) :>
+                 QueryParams "ids" (Textual Int64) :>
                    QueryParam "sortOrder" AdvertiserGroupsListSortOrder
                      :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" AdvertiserGroupsListSortField
                          :>
-                         QueryParam "maxResults" (JSONText Int32) :>
+                         QueryParam "maxResults" (Textual Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] AdvertiserGroupsListResponse
 
@@ -69,12 +69,12 @@ type AdvertiserGroupsListResource =
 -- /See:/ 'advertiserGroupsList' smart constructor.
 data AdvertiserGroupsList = AdvertiserGroupsList
     { _aglSearchString :: !(Maybe Text)
-    , _aglIds          :: !(Maybe [JSONText Int64])
-    , _aglProFileId    :: !(JSONText Int64)
+    , _aglIds          :: !(Maybe [Textual Int64])
+    , _aglProFileId    :: !(Textual Int64)
     , _aglSortOrder    :: !(Maybe AdvertiserGroupsListSortOrder)
     , _aglPageToken    :: !(Maybe Text)
     , _aglSortField    :: !(Maybe AdvertiserGroupsListSortField)
-    , _aglMaxResults   :: !(Maybe (JSONText Int32))
+    , _aglMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsList' with the minimum fields required to make a request.

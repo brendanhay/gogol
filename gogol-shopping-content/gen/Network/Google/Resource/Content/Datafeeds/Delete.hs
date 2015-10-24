@@ -46,9 +46,9 @@ import           Network.Google.ShoppingContent.Types
 type DatafeedsDeleteResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "datafeeds" :>
-             Capture "datafeedId" (JSONText Word64) :>
+             Capture "datafeedId" (Textual Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
@@ -56,8 +56,8 @@ type DatafeedsDeleteResource =
 --
 -- /See:/ 'datafeedsDelete' smart constructor.
 data DatafeedsDelete = DatafeedsDelete
-    { _ddMerchantId :: !(JSONText Word64)
-    , _ddDatafeedId :: !(JSONText Word64)
+    { _ddMerchantId :: !(Textual Word64)
+    , _ddDatafeedId :: !(Textual Word64)
     , _ddDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

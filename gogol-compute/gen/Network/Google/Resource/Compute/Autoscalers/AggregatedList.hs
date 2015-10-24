@@ -53,7 +53,7 @@ type AutoscalersAggregatedListResource =
                "autoscalers" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] AutoscalerAggregatedList
 
@@ -64,7 +64,7 @@ data AutoscalersAggregatedList = AutoscalersAggregatedList
     { _autProject    :: !Text
     , _autFilter     :: !(Maybe Text)
     , _autPageToken  :: !(Maybe Text)
-    , _autMaxResults :: !(JSONText Word32)
+    , _autMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersAggregatedList' with the minimum fields required to make a request.

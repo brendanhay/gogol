@@ -53,7 +53,7 @@ type DataSetsListResource =
              "datasets" :>
                QueryParam "all" Bool :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] DataSetList
 
 -- | Lists all datasets in the specified project to which you have been
@@ -64,7 +64,7 @@ data DataSetsList = DataSetsList
     { _dslAll        :: !(Maybe Bool)
     , _dslPageToken  :: !(Maybe Text)
     , _dslProjectId  :: !Text
-    , _dslMaxResults :: !(Maybe (JSONText Word32))
+    , _dslMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataSetsList' with the minimum fields required to make a request.

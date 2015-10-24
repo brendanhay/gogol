@@ -26,7 +26,7 @@ import           Network.Google.Prelude
 data WriteResult = WriteResult
     { _wrCurrentStateVersion :: !(Maybe Text)
     , _wrKind                :: !Text
-    , _wrStateKey            :: !(Maybe (JSONText Int32))
+    , _wrStateKey            :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteResult' with the minimum fields required to make a request.
@@ -86,7 +86,7 @@ instance ToJSON WriteResult where
 --
 -- /See:/ 'listResponse' smart constructor.
 data ListResponse = ListResponse
-    { _lrMaximumKeyCount :: !(Maybe (JSONText Int32))
+    { _lrMaximumKeyCount :: !(Maybe (Textual Int32))
     , _lrKind            :: !Text
     , _lrItems           :: !(Maybe [GetResponse])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -150,7 +150,7 @@ data GetResponse = GetResponse
     { _grCurrentStateVersion :: !(Maybe Text)
     , _grKind                :: !Text
     , _grData                :: !(Maybe Text)
-    , _grStateKey            :: !(Maybe (JSONText Int32))
+    , _grStateKey            :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetResponse' with the minimum fields required to make a request.

@@ -45,9 +45,9 @@ import           Network.Google.ShoppingContent.Types
 type DatafeedstatusesGetResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "datafeedstatuses" :>
-             Capture "datafeedId" (JSONText Word64) :>
+             Capture "datafeedId" (Textual Word64) :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] DatafeedStatus
 
@@ -55,8 +55,8 @@ type DatafeedstatusesGetResource =
 --
 -- /See:/ 'datafeedstatusesGet' smart constructor.
 data DatafeedstatusesGet = DatafeedstatusesGet
-    { _dggMerchantId :: !(JSONText Word64)
-    , _dggDatafeedId :: !(JSONText Word64)
+    { _dggMerchantId :: !(Textual Word64)
+    , _dggDatafeedId :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedstatusesGet' with the minimum fields required to make a request.

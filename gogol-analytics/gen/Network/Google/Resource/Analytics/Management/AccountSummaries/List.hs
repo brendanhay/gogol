@@ -48,8 +48,8 @@ type ManagementAccountSummariesListResource =
        "v3" :>
          "management" :>
            "accountSummaries" :>
-             QueryParam "start-index" (JSONText Int32) :>
-               QueryParam "max-results" (JSONText Int32) :>
+             QueryParam "start-index" (Textual Int32) :>
+               QueryParam "max-results" (Textual Int32) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountSummaries
 
@@ -58,8 +58,8 @@ type ManagementAccountSummariesListResource =
 --
 -- /See:/ 'managementAccountSummariesList' smart constructor.
 data ManagementAccountSummariesList = ManagementAccountSummariesList
-    { _maslStartIndex :: !(Maybe (JSONText Int32))
-    , _maslMaxResults :: !(Maybe (JSONText Int32))
+    { _maslStartIndex :: !(Maybe (Textual Int32))
+    , _maslMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountSummariesList' with the minimum fields required to make a request.

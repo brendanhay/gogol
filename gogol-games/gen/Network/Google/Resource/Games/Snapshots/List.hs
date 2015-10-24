@@ -53,7 +53,7 @@ type SnapshotsListResource =
              "snapshots" :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] SnapshotListResponse
 
@@ -65,7 +65,7 @@ data SnapshotsList = SnapshotsList
     { _slLanguage   :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
     , _slPlayerId   :: !Text
-    , _slMaxResults :: !(Maybe (JSONText Int32))
+    , _slMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.

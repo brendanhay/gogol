@@ -53,7 +53,7 @@ type QuestsListResource =
              "quests" :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] QuestListResponse
 
@@ -65,7 +65,7 @@ data QuestsList = QuestsList
     { _qlLanguage   :: !(Maybe Text)
     , _qlPageToken  :: !(Maybe Text)
     , _qlPlayerId   :: !Text
-    , _qlMaxResults :: !(Maybe (JSONText Int32))
+    , _qlMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsList' with the minimum fields required to make a request.

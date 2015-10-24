@@ -61,7 +61,7 @@ type ProjectsTopicsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (JSONText Int32) :>
+                         QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListTopicsResponse
@@ -78,7 +78,7 @@ data ProjectsTopicsList = ProjectsTopicsList
     , _ptlUploadType     :: !(Maybe Text)
     , _ptlBearerToken    :: !(Maybe Text)
     , _ptlPageToken      :: !(Maybe Text)
-    , _ptlPageSize       :: !(Maybe (JSONText Int32))
+    , _ptlPageSize       :: !(Maybe (Textual Int32))
     , _ptlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

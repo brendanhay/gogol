@@ -45,7 +45,7 @@ type AccountPermissionsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accountPermissions" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] AccountPermissionsListResponse
@@ -54,7 +54,7 @@ type AccountPermissionsListResource =
 --
 -- /See:/ 'accountPermissionsList' smart constructor.
 newtype AccountPermissionsList = AccountPermissionsList
-    { _aplProFileId :: JSONText Int64
+    { _aplProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionsList' with the minimum fields required to make a request.

@@ -53,11 +53,11 @@ type TurnBasedMatchesSyncResource =
        "v1" :>
          "turnbasedmatches" :>
            "sync" :>
-             QueryParam "maxCompletedMatches" (JSONText Int32) :>
+             QueryParam "maxCompletedMatches" (Textual Int32) :>
                QueryParam "includeMatchData" Bool :>
                  QueryParam "language" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TurnBasedMatchSync
 
@@ -68,11 +68,11 @@ type TurnBasedMatchesSyncResource =
 --
 -- /See:/ 'turnBasedMatchesSync' smart constructor.
 data TurnBasedMatchesSync = TurnBasedMatchesSync
-    { _tbmsMaxCompletedMatches :: !(Maybe (JSONText Int32))
+    { _tbmsMaxCompletedMatches :: !(Maybe (Textual Int32))
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
     , _tbmsPageToken           :: !(Maybe Text)
-    , _tbmsMaxResults          :: !(Maybe (JSONText Int32))
+    , _tbmsMaxResults          :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesSync' with the minimum fields required to make a request.

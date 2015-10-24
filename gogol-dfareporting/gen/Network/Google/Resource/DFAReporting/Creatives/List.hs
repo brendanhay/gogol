@@ -61,32 +61,31 @@ type CreativesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creatives" :>
-               QueryParams "renderingIds" (JSONText Int64) :>
-                 QueryParam "advertiserId" (JSONText Int64) :>
+               QueryParams "renderingIds" (Textual Int64) :>
+                 QueryParam "advertiserId" (Textual Int64) :>
                    QueryParam "searchString" Text :>
-                     QueryParams "sizeIds" (JSONText Int64) :>
-                       QueryParams "companionCreativeIds" (JSONText Int64)
-                         :>
-                         QueryParam "campaignId" (JSONText Int64) :>
+                     QueryParams "sizeIds" (Textual Int64) :>
+                       QueryParams "companionCreativeIds" (Textual Int64) :>
+                         QueryParam "campaignId" (Textual Int64) :>
                            QueryParams "types" CreativesListTypes :>
-                             QueryParams "ids" (JSONText Int64) :>
+                             QueryParams "ids" (Textual Int64) :>
                                QueryParam "sortOrder" CreativesListSortOrder :>
                                  QueryParam "active" Bool :>
                                    QueryParams "creativeFieldIds"
-                                     (JSONText Int64)
+                                     (Textual Int64)
                                      :>
                                      QueryParam "pageToken" Text :>
                                        QueryParam "sortField"
                                          CreativesListSortField
                                          :>
                                          QueryParam "studioCreativeId"
-                                           (JSONText Int64)
+                                           (Textual Int64)
                                            :>
                                            QueryParam "archived" Bool :>
                                              QueryParam "maxResults"
-                                               (JSONText Int32)
+                                               (Textual Int32)
                                                :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON]
@@ -96,23 +95,23 @@ type CreativesListResource =
 --
 -- /See:/ 'creativesList' smart constructor.
 data CreativesList = CreativesList
-    { _cRenderingIds         :: !(Maybe [JSONText Int64])
-    , _cAdvertiserId         :: !(Maybe (JSONText Int64))
+    { _cRenderingIds         :: !(Maybe [Textual Int64])
+    , _cAdvertiserId         :: !(Maybe (Textual Int64))
     , _cSearchString         :: !(Maybe Text)
-    , _cSizeIds              :: !(Maybe [JSONText Int64])
-    , _cCompanionCreativeIds :: !(Maybe [JSONText Int64])
-    , _cCampaignId           :: !(Maybe (JSONText Int64))
+    , _cSizeIds              :: !(Maybe [Textual Int64])
+    , _cCompanionCreativeIds :: !(Maybe [Textual Int64])
+    , _cCampaignId           :: !(Maybe (Textual Int64))
     , _cTypes                :: !(Maybe [CreativesListTypes])
-    , _cIds                  :: !(Maybe [JSONText Int64])
-    , _cProFileId            :: !(JSONText Int64)
+    , _cIds                  :: !(Maybe [Textual Int64])
+    , _cProFileId            :: !(Textual Int64)
     , _cSortOrder            :: !(Maybe CreativesListSortOrder)
     , _cActive               :: !(Maybe Bool)
-    , _cCreativeFieldIds     :: !(Maybe [JSONText Int64])
+    , _cCreativeFieldIds     :: !(Maybe [Textual Int64])
     , _cPageToken            :: !(Maybe Text)
     , _cSortField            :: !(Maybe CreativesListSortField)
-    , _cStudioCreativeId     :: !(Maybe (JSONText Int64))
+    , _cStudioCreativeId     :: !(Maybe (Textual Int64))
     , _cArchived             :: !(Maybe Bool)
-    , _cMaxResults           :: !(Maybe (JSONText Int32))
+    , _cMaxResults           :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList' with the minimum fields required to make a request.

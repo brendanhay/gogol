@@ -46,17 +46,17 @@ type UserRolesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "userRoles" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] UserRole
 
 -- | Gets one user role by ID.
 --
 -- /See:/ 'userRolesGet' smart constructor.
 data UserRolesGet = UserRolesGet
-    { _urgProFileId :: !(JSONText Int64)
-    , _urgId        :: !(JSONText Int64)
+    { _urgProFileId :: !(Textual Int64)
+    , _urgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesGet' with the minimum fields required to make a request.

@@ -47,16 +47,16 @@ type ManagementSegmentsListResource =
        "v3" :>
          "management" :>
            "segments" :>
-             QueryParam "start-index" (JSONText Int32) :>
-               QueryParam "max-results" (JSONText Int32) :>
+             QueryParam "start-index" (Textual Int32) :>
+               QueryParam "max-results" (Textual Int32) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Segments
 
 -- | Lists segments to which the user has access.
 --
 -- /See:/ 'managementSegmentsList' smart constructor.
 data ManagementSegmentsList = ManagementSegmentsList
-    { _mslStartIndex :: !(Maybe (JSONText Int32))
-    , _mslMaxResults :: !(Maybe (JSONText Int32))
+    { _mslStartIndex :: !(Maybe (Textual Int32))
+    , _mslMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementSegmentsList' with the minimum fields required to make a request.

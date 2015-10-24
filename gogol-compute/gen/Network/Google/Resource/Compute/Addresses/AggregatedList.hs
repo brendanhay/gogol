@@ -53,7 +53,7 @@ type AddressesAggregatedListResource =
                "addresses" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] AddressAggregatedList
 
@@ -64,7 +64,7 @@ data AddressesAggregatedList = AddressesAggregatedList
     { _aalProject    :: !Text
     , _aalFilter     :: !(Maybe Text)
     , _aalPageToken  :: !(Maybe Text)
-    , _aalMaxResults :: !(JSONText Word32)
+    , _aalMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesAggregatedList' with the minimum fields required to make a request.

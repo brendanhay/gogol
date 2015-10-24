@@ -148,7 +148,7 @@ instance ToJSON OperationList where
 --
 -- /See:/ 'resourceView' smart constructor.
 data ResourceView = ResourceView
-    { _rvSize              :: !(Maybe (JSONText Word32))
+    { _rvSize              :: !(Maybe (Textual Word32))
     , _rvKind              :: !Text
     , _rvFingerprint       :: !(Maybe Text)
     , _rvNetwork           :: !(Maybe Text)
@@ -384,24 +384,24 @@ instance ToJSON ZoneViewsList where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe (JSONText Word64))
+    { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (JSONText Int32))
+    , _oProgress            :: !(Maybe (Textual Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
+    , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (JSONText Word64))
+    , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -736,7 +736,7 @@ instance ToJSON ZoneViewsListResourcesResponse where
 -- /See:/ 'serviceEndpoint' smart constructor.
 data ServiceEndpoint = ServiceEndpoint
     { _seName :: !(Maybe Text)
-    , _sePort :: !(Maybe (JSONText Int32))
+    , _sePort :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ServiceEndpoint' with the minimum fields required to make a request.
@@ -821,7 +821,7 @@ instance ToJSON ZoneViewsRemoveResourcesRequest where
 --
 -- /See:/ 'listResourceResponseItemEndpoints' smart constructor.
 newtype ListResourceResponseItemEndpoints = ListResourceResponseItemEndpoints
-    { _lrrieAddtional :: HashMap Text [JSONText Int32]
+    { _lrrieAddtional :: HashMap Text [Textual Int32]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListResourceResponseItemEndpoints' with the minimum fields required to make a request.

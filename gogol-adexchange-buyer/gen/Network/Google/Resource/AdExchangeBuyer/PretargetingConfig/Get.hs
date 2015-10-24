@@ -46,8 +46,8 @@ type PretargetingConfigGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "pretargetingconfigs" :>
-           Capture "accountId" (JSONText Int64) :>
-             Capture "configId" (JSONText Int64) :>
+           Capture "accountId" (Textual Int64) :>
+             Capture "configId" (Textual Int64) :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] PretargetingConfig
 
@@ -55,8 +55,8 @@ type PretargetingConfigGetResource =
 --
 -- /See:/ 'pretargetingConfigGet' smart constructor.
 data PretargetingConfigGet = PretargetingConfigGet
-    { _pcgAccountId :: !(JSONText Int64)
-    , _pcgConfigId  :: !(JSONText Int64)
+    { _pcgAccountId :: !(Textual Int64)
+    , _pcgConfigId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigGet' with the minimum fields required to make a request.

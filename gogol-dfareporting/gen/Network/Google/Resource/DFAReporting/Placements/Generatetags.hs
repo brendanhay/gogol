@@ -48,14 +48,14 @@ type PlacementsGeneratetagsResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placements" :>
                "generatetags" :>
                  QueryParams "tagFormats"
                    PlacementsGeneratetagsTagFormats
                    :>
-                   QueryParam "campaignId" (JSONText Int64) :>
-                     QueryParams "placementIds" (JSONText Int64) :>
+                   QueryParam "campaignId" (Textual Int64) :>
+                     QueryParams "placementIds" (Textual Int64) :>
                        QueryParam "alt" AltJSON :>
                          Post '[JSON] PlacementsGenerateTagsResponse
 
@@ -64,9 +64,9 @@ type PlacementsGeneratetagsResource =
 -- /See:/ 'placementsGeneratetags' smart constructor.
 data PlacementsGeneratetags = PlacementsGeneratetags
     { _pgsTagFormats   :: !(Maybe [PlacementsGeneratetagsTagFormats])
-    , _pgsCampaignId   :: !(Maybe (JSONText Int64))
-    , _pgsProFileId    :: !(JSONText Int64)
-    , _pgsPlacementIds :: !(Maybe [JSONText Int64])
+    , _pgsCampaignId   :: !(Maybe (Textual Int64))
+    , _pgsProFileId    :: !(Textual Int64)
+    , _pgsPlacementIds :: !(Maybe [Textual Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsGeneratetags' with the minimum fields required to make a request.

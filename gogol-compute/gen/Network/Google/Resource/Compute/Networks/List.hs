@@ -54,7 +54,7 @@ type NetworksListResource =
                "networks" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] NetworkList
 
 -- | Retrieves the list of network resources available to the specified
@@ -65,7 +65,7 @@ data NetworksList = NetworksList
     { _nlProject    :: !Text
     , _nlFilter     :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
-    , _nlMaxResults :: !(JSONText Word32)
+    , _nlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksList' with the minimum fields required to make a request.

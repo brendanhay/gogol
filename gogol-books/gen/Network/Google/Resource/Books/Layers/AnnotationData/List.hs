@@ -62,16 +62,16 @@ type LayersAnnotationDataListResource =
                Capture "layerId" Text :>
                  "data" :>
                    QueryParam "contentVersion" Text :>
-                     QueryParam "w" (JSONText Int32) :>
-                       QueryParam "scale" (JSONText Int32) :>
+                     QueryParam "w" (Textual Int32) :>
+                       QueryParam "scale" (Textual Int32) :>
                          QueryParam "locale" Text :>
                            QueryParam "updatedMax" Text :>
                              QueryParam "updatedMin" Text :>
                                QueryParams "annotationDataId" Text :>
                                  QueryParam "source" Text :>
-                                   QueryParam "h" (JSONText Int32) :>
+                                   QueryParam "h" (Textual Int32) :>
                                      QueryParam "pageToken" Text :>
-                                       QueryParam "maxResults" (JSONText Word32)
+                                       QueryParam "maxResults" (Textual Word32)
                                          :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] AnnotationsData
@@ -80,8 +80,8 @@ type LayersAnnotationDataListResource =
 --
 -- /See:/ 'layersAnnotationDataList' smart constructor.
 data LayersAnnotationDataList = LayersAnnotationDataList
-    { _ladlW                :: !(Maybe (JSONText Int32))
-    , _ladlScale            :: !(Maybe (JSONText Int32))
+    { _ladlW                :: !(Maybe (Textual Int32))
+    , _ladlScale            :: !(Maybe (Textual Int32))
     , _ladlLocale           :: !(Maybe Text)
     , _ladlContentVersion   :: !Text
     , _ladlUpdatedMax       :: !(Maybe Text)
@@ -89,10 +89,10 @@ data LayersAnnotationDataList = LayersAnnotationDataList
     , _ladlAnnotationDataId :: !(Maybe [Text])
     , _ladlVolumeId         :: !Text
     , _ladlSource           :: !(Maybe Text)
-    , _ladlH                :: !(Maybe (JSONText Int32))
+    , _ladlH                :: !(Maybe (Textual Int32))
     , _ladlPageToken        :: !(Maybe Text)
     , _ladlLayerId          :: !Text
-    , _ladlMaxResults       :: !(Maybe (JSONText Word32))
+    , _ladlMaxResults       :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersAnnotationDataList' with the minimum fields required to make a request.

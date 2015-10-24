@@ -51,7 +51,7 @@ type TrainedModelsListResource =
              "trainedmodels" :>
                "list" :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] List
 
 -- | List available models.
@@ -60,7 +60,7 @@ type TrainedModelsListResource =
 data TrainedModelsList = TrainedModelsList
     { _tmlProject    :: !Text
     , _tmlPageToken  :: !(Maybe Text)
-    , _tmlMaxResults :: !(Maybe (JSONText Word32))
+    , _tmlMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedModelsList' with the minimum fields required to make a request.

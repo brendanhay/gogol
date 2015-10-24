@@ -56,15 +56,13 @@ type ObjectsInsertResource =
          "b" :>
            Capture "bucket" Text :>
              "o" :>
-               QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                 :>
-                 QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                   QueryParam "ifGenerationMatch" (JSONText Int64) :>
+               QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                 QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                   QueryParam "ifGenerationMatch" (Textual Int64) :>
                      QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
                        :>
                        QueryParam "name" Text :>
-                         QueryParam "ifMetagenerationNotMatch"
-                           (JSONText Int64)
+                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                            :>
                            QueryParam "contentEncoding" Text :>
                              QueryParam "projection" ObjectsInsertProjection :>
@@ -76,15 +74,13 @@ type ObjectsInsertResource =
            "b" :>
              Capture "bucket" Text :>
                "o" :>
-                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                   :>
-                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                 QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                   QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                     QueryParam "ifGenerationMatch" (Textual Int64) :>
                        QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
                          :>
                          QueryParam "name" Text :>
-                           QueryParam "ifMetagenerationNotMatch"
-                             (JSONText Int64)
+                           QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                              :>
                              QueryParam "contentEncoding" Text :>
                                QueryParam "projection" ObjectsInsertProjection
@@ -98,15 +94,14 @@ type ObjectsInsertResource =
              "b" :>
                Capture "bucket" Text :>
                  "o" :>
-                   QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                     :>
-                     QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                       QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                   QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                     QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                       QueryParam "ifGenerationMatch" (Textual Int64) :>
                          QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
                            :>
                            QueryParam "name" Text :>
                              QueryParam "ifMetagenerationNotMatch"
-                               (JSONText Int64)
+                               (Textual Int64)
                                :>
                                QueryParam "contentEncoding" Text :>
                                  QueryParam "projection" ObjectsInsertProjection
@@ -121,14 +116,14 @@ type ObjectsInsertResource =
 --
 -- /See:/ 'objectsInsert' smart constructor.
 data ObjectsInsert = ObjectsInsert
-    { _oiIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
-    , _oiIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
-    , _oiIfGenerationMatch        :: !(Maybe (JSONText Int64))
+    { _oiIfMetagenerationMatch    :: !(Maybe (Textual Int64))
+    , _oiIfGenerationNotMatch     :: !(Maybe (Textual Int64))
+    , _oiIfGenerationMatch        :: !(Maybe (Textual Int64))
     , _oiPredefinedACL            :: !(Maybe ObjectsInsertPredefinedACL)
     , _oiBucket                   :: !Text
     , _oiPayload                  :: !Object
     , _oiName                     :: !(Maybe Text)
-    , _oiIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _oiIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _oiContentEncoding          :: !(Maybe Text)
     , _oiProjection               :: !(Maybe ObjectsInsertProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -56,8 +56,8 @@ type ManagementUploadsListResource =
                    "customDataSources" :>
                      Capture "customDataSourceId" Text :>
                        "uploads" :>
-                         QueryParam "start-index" (JSONText Int32) :>
-                           QueryParam "max-results" (JSONText Int32) :>
+                         QueryParam "start-index" (Textual Int32) :>
+                           QueryParam "max-results" (Textual Int32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Uploads
 
 -- | List uploads to which the user has access.
@@ -67,8 +67,8 @@ data ManagementUploadsList = ManagementUploadsList
     { _mulWebPropertyId      :: !Text
     , _mulCustomDataSourceId :: !Text
     , _mulAccountId          :: !Text
-    , _mulStartIndex         :: !(Maybe (JSONText Int32))
-    , _mulMaxResults         :: !(Maybe (JSONText Int32))
+    , _mulStartIndex         :: !(Maybe (Textual Int32))
+    , _mulMaxResults         :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsList' with the minimum fields required to make a request.

@@ -55,18 +55,18 @@ type ChangeLogsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
-               QueryParams "userProfileIds" (JSONText Int64) :>
+               QueryParams "userProfileIds" (Textual Int64) :>
                  QueryParam "objectType" ChangeLogsListObjectType :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" (JSONText Int64) :>
+                     QueryParams "ids" (Textual Int64) :>
                        QueryParam "action" ChangeLogsListAction :>
                          QueryParam "minChangeTime" Text :>
                            QueryParam "maxChangeTime" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParams "objectIds" (JSONText Int64) :>
-                                 QueryParam "maxResults" (JSONText Int32) :>
+                               QueryParams "objectIds" (Textual Int64) :>
+                                 QueryParam "maxResults" (Textual Int32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ChangeLogsListResponse
 
@@ -74,17 +74,17 @@ type ChangeLogsListResource =
 --
 -- /See:/ 'changeLogsList' smart constructor.
 data ChangeLogsList = ChangeLogsList
-    { _cllUserProFileIds :: !(Maybe [JSONText Int64])
+    { _cllUserProFileIds :: !(Maybe [Textual Int64])
     , _cllObjectType     :: !(Maybe ChangeLogsListObjectType)
     , _cllSearchString   :: !(Maybe Text)
-    , _cllIds            :: !(Maybe [JSONText Int64])
-    , _cllProFileId      :: !(JSONText Int64)
+    , _cllIds            :: !(Maybe [Textual Int64])
+    , _cllProFileId      :: !(Textual Int64)
     , _cllAction         :: !(Maybe ChangeLogsListAction)
     , _cllMinChangeTime  :: !(Maybe Text)
     , _cllMaxChangeTime  :: !(Maybe Text)
     , _cllPageToken      :: !(Maybe Text)
-    , _cllObjectIds      :: !(Maybe [JSONText Int64])
-    , _cllMaxResults     :: !(Maybe (JSONText Int32))
+    , _cllObjectIds      :: !(Maybe [Textual Int64])
+    , _cllMaxResults     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsList' with the minimum fields required to make a request.

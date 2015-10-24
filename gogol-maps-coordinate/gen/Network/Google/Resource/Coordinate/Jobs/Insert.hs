@@ -58,8 +58,8 @@ type JobsInsertResource =
            Capture "teamId" Text :>
              "jobs" :>
                QueryParam "address" Text :>
-                 QueryParam "lat" (JSONText Double) :>
-                   QueryParam "lng" (JSONText Double) :>
+                 QueryParam "lat" (Textual Double) :>
+                   QueryParam "lng" (Textual Double) :>
                      QueryParam "title" Text :>
                        QueryParam "note" Text :>
                          QueryParam "customerPhoneNumber" Text :>
@@ -80,8 +80,8 @@ data JobsInsert = JobsInsert
     , _jiAddress             :: !Text
     , _jiPayload             :: !Job
     , _jiAssignee            :: !(Maybe Text)
-    , _jiLat                 :: !(JSONText Double)
-    , _jiLng                 :: !(JSONText Double)
+    , _jiLat                 :: !(Textual Double)
+    , _jiLng                 :: !(Textual Double)
     , _jiTitle               :: !Text
     , _jiCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)

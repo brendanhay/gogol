@@ -47,8 +47,8 @@ type PretargetingConfigUpdateResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "pretargetingconfigs" :>
-           Capture "accountId" (JSONText Int64) :>
-             Capture "configId" (JSONText Int64) :>
+           Capture "accountId" (Textual Int64) :>
+             Capture "configId" (Textual Int64) :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] PretargetingConfig :>
                    Put '[JSON] PretargetingConfig
@@ -58,8 +58,8 @@ type PretargetingConfigUpdateResource =
 -- /See:/ 'pretargetingConfigUpdate' smart constructor.
 data PretargetingConfigUpdate = PretargetingConfigUpdate
     { _pcuPayload   :: !PretargetingConfig
-    , _pcuAccountId :: !(JSONText Int64)
-    , _pcuConfigId  :: !(JSONText Int64)
+    , _pcuAccountId :: !(Textual Int64)
+    , _pcuConfigId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigUpdate' with the minimum fields required to make a request.

@@ -56,7 +56,7 @@ type ACLWatchResource =
                  QueryParam "syncToken" Text :>
                    QueryParam "showDeleted" Bool :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Int32) :>
+                       QueryParam "maxResults" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
@@ -69,7 +69,7 @@ data ACLWatch = ACLWatch
     , _awShowDeleted :: !(Maybe Bool)
     , _awPayload     :: !Channel
     , _awPageToken   :: !(Maybe Text)
-    , _awMaxResults  :: !(Maybe (JSONText Int32))
+    , _awMaxResults  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLWatch' with the minimum fields required to make a request.

@@ -80,7 +80,7 @@ type EventsListResource =
                                          QueryParam "publisherId" Text :>
                                            QueryParam "productCategory" Text :>
                                              QueryParam "maxResults"
-                                               (JSONText Word32)
+                                               (Textual Word32)
                                                :>
                                                QueryParam "alt" AltJSON :>
                                                  Get '[JSON] Events
@@ -106,7 +106,7 @@ data EventsList = EventsList
     , _elOrderId         :: !(Maybe Text)
     , _elPublisherId     :: !(Maybe Text)
     , _elProductCategory :: !(Maybe Text)
-    , _elMaxResults      :: !(Maybe (JSONText Word32))
+    , _elMaxResults      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList' with the minimum fields required to make a request.

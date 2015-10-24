@@ -56,7 +56,7 @@ type ScoresListResource =
                  QueryParam "timeSpan" ScoresListTimeSpan :>
                    QueryParam "language" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Int32) :>
+                       QueryParam "maxResults" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] LeaderboardScores
 
@@ -69,7 +69,7 @@ data ScoresList = ScoresList
     , _sllLeaderboardId :: !Text
     , _sllLanguage      :: !(Maybe Text)
     , _sllPageToken     :: !(Maybe Text)
-    , _sllMaxResults    :: !(Maybe (JSONText Int32))
+    , _sllMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresList' with the minimum fields required to make a request.

@@ -48,7 +48,7 @@ type StatesClearResource =
      "appstate" :>
        "v1" :>
          "states" :>
-           Capture "stateKey" (JSONText Int32) :>
+           Capture "stateKey" (Textual Int32) :>
              "clear" :>
                QueryParam "currentDataVersion" Text :>
                  QueryParam "alt" AltJSON :> Post '[JSON] WriteResult
@@ -59,7 +59,7 @@ type StatesClearResource =
 --
 -- /See:/ 'statesClear' smart constructor.
 data StatesClear = StatesClear
-    { _scStateKey           :: !(JSONText Int32)
+    { _scStateKey           :: !(Textual Int32)
     , _scCurrentDataVersion :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

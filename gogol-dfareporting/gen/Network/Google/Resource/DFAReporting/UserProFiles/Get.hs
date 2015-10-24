@@ -45,14 +45,14 @@ type UserProFilesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              QueryParam "alt" AltJSON :> Get '[JSON] UserProFile
 
 -- | Gets one user profile by ID.
 --
 -- /See:/ 'userProFilesGet' smart constructor.
 newtype UserProFilesGet = UserProFilesGet
-    { _upfgProFileId :: JSONText Int64
+    { _upfgProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProFilesGet' with the minimum fields required to make a request.

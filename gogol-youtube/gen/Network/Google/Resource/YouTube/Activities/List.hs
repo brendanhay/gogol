@@ -64,7 +64,7 @@ type ActivitiesListResource =
                    QueryParam "regionCode" Text :>
                      QueryParam "channelId" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "maxResults" (Textual Word32) :>
                            QueryParam "publishedBefore" DateTime' :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ActivityListResponse
@@ -84,7 +84,7 @@ data ActivitiesList = ActivitiesList
     , _alRegionCode      :: !(Maybe Text)
     , _alChannelId       :: !(Maybe Text)
     , _alPageToken       :: !(Maybe Text)
-    , _alMaxResults      :: !(JSONText Word32)
+    , _alMaxResults      :: !(Textual Word32)
     , _alPublishedBefore :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 

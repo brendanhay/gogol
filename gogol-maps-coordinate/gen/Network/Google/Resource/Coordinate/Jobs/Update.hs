@@ -59,15 +59,15 @@ type JobsUpdateResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" (JSONText Word64) :>
+               Capture "jobId" (Textual Word64) :>
                  QueryParam "progress" JobsUpdateProgress :>
                    QueryParam "note" Text :>
                      QueryParam "customerPhoneNumber" Text :>
                        QueryParam "customerName" Text :>
                          QueryParam "address" Text :>
                            QueryParam "assignee" Text :>
-                             QueryParam "lat" (JSONText Double) :>
-                               QueryParam "lng" (JSONText Double) :>
+                             QueryParam "lat" (Textual Double) :>
+                               QueryParam "lng" (Textual Double) :>
                                  QueryParam "title" Text :>
                                    QueryParams "customField" Text :>
                                      QueryParam "alt" AltJSON :>
@@ -77,7 +77,7 @@ type JobsUpdateResource =
 --
 -- /See:/ 'jobsUpdate' smart constructor.
 data JobsUpdate = JobsUpdate
-    { _juJobId               :: !(JSONText Word64)
+    { _juJobId               :: !(Textual Word64)
     , _juProgress            :: !(Maybe JobsUpdateProgress)
     , _juNote                :: !(Maybe Text)
     , _juTeamId              :: !Text
@@ -86,8 +86,8 @@ data JobsUpdate = JobsUpdate
     , _juAddress             :: !(Maybe Text)
     , _juPayload             :: !Job
     , _juAssignee            :: !(Maybe Text)
-    , _juLat                 :: !(Maybe (JSONText Double))
-    , _juLng                 :: !(Maybe (JSONText Double))
+    , _juLat                 :: !(Maybe (Textual Double))
+    , _juLng                 :: !(Maybe (Textual Double))
     , _juTitle               :: !(Maybe Text)
     , _juCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)

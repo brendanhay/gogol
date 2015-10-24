@@ -48,9 +48,9 @@ type PlacementGroupsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] PlacementGroup :>
                      Patch '[JSON] PlacementGroup
@@ -60,9 +60,9 @@ type PlacementGroupsPatchResource =
 --
 -- /See:/ 'placementGroupsPatch' smart constructor.
 data PlacementGroupsPatch = PlacementGroupsPatch
-    { _pgpProFileId :: !(JSONText Int64)
+    { _pgpProFileId :: !(Textual Int64)
     , _pgpPayload   :: !PlacementGroup
-    , _pgpId        :: !(JSONText Int64)
+    , _pgpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsPatch' with the minimum fields required to make a request.

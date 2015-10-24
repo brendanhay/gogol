@@ -58,7 +58,7 @@ type CommentsListByBlogResource =
                    QueryParam "startDate" DateTime' :>
                      QueryParam "fetchBodies" Bool :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "maxResults" (Textual Word32) :>
                            QueryParam "alt" AltJSON :> Get '[JSON] CommentList
 
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
@@ -71,7 +71,7 @@ data CommentsListByBlog = CommentsListByBlog
     , _clbbStartDate   :: !(Maybe DateTime')
     , _clbbFetchBodies :: !(Maybe Bool)
     , _clbbPageToken   :: !(Maybe Text)
-    , _clbbMaxResults  :: !(Maybe (JSONText Word32))
+    , _clbbMaxResults  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsListByBlog' with the minimum fields required to make a request.

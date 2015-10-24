@@ -54,7 +54,7 @@ type RepliesListResource =
                Capture "commentId" Text :>
                  "replies" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "includeDeleted" Bool :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] CommentReplyList
@@ -66,7 +66,7 @@ data RepliesList = RepliesList
     { _rlPageToken      :: !(Maybe Text)
     , _rlFileId         :: !Text
     , _rlCommentId      :: !Text
-    , _rlMaxResults     :: !(JSONText Int32)
+    , _rlMaxResults     :: !(Textual Int32)
     , _rlIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 

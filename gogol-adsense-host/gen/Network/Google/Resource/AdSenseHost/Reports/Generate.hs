@@ -62,8 +62,8 @@ type ReportsGenerateResource =
                    QueryParams "metric" Text :>
                      QueryParams "sort" Text :>
                        QueryParams "filter" Text :>
-                         QueryParam "startIndex" (JSONText Word32) :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "startIndex" (Textual Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Generate an AdSense report based on the report request sent in the query
@@ -79,8 +79,8 @@ data ReportsGenerate = ReportsGenerate
     , _rgMetric     :: !(Maybe [Text])
     , _rgSort       :: !(Maybe [Text])
     , _rgFilter     :: !(Maybe [Text])
-    , _rgStartIndex :: !(Maybe (JSONText Word32))
-    , _rgMaxResults :: !(Maybe (JSONText Word32))
+    , _rgStartIndex :: !(Maybe (Textual Word32))
+    , _rgMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.

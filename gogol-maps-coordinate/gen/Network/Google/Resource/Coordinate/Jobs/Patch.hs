@@ -60,15 +60,15 @@ type JobsPatchResource =
          "teams" :>
            Capture "teamId" Text :>
              "jobs" :>
-               Capture "jobId" (JSONText Word64) :>
+               Capture "jobId" (Textual Word64) :>
                  QueryParam "progress" JobsPatchProgress :>
                    QueryParam "note" Text :>
                      QueryParam "customerPhoneNumber" Text :>
                        QueryParam "customerName" Text :>
                          QueryParam "address" Text :>
                            QueryParam "assignee" Text :>
-                             QueryParam "lat" (JSONText Double) :>
-                               QueryParam "lng" (JSONText Double) :>
+                             QueryParam "lat" (Textual Double) :>
+                               QueryParam "lng" (Textual Double) :>
                                  QueryParam "title" Text :>
                                    QueryParams "customField" Text :>
                                      QueryParam "alt" AltJSON :>
@@ -79,7 +79,7 @@ type JobsPatchResource =
 --
 -- /See:/ 'jobsPatch' smart constructor.
 data JobsPatch = JobsPatch
-    { _jpJobId               :: !(JSONText Word64)
+    { _jpJobId               :: !(Textual Word64)
     , _jpProgress            :: !(Maybe JobsPatchProgress)
     , _jpNote                :: !(Maybe Text)
     , _jpTeamId              :: !Text
@@ -88,8 +88,8 @@ data JobsPatch = JobsPatch
     , _jpAddress             :: !(Maybe Text)
     , _jpPayload             :: !Job
     , _jpAssignee            :: !(Maybe Text)
-    , _jpLat                 :: !(Maybe (JSONText Double))
-    , _jpLng                 :: !(Maybe (JSONText Double))
+    , _jpLat                 :: !(Maybe (Textual Double))
+    , _jpLng                 :: !(Maybe (Textual Double))
     , _jpTitle               :: !(Maybe Text)
     , _jpCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)

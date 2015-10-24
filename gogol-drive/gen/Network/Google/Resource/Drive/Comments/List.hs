@@ -53,7 +53,7 @@ type CommentsListResource =
              "comments" :>
                QueryParam "updatedMin" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "includeDeleted" Bool :>
                        QueryParam "alt" AltJSON :> Get '[JSON] CommentList
 
@@ -64,7 +64,7 @@ data CommentsList = CommentsList
     { _cllUpdatedMin     :: !(Maybe Text)
     , _cllPageToken      :: !(Maybe Text)
     , _cllFileId         :: !Text
-    , _cllMaxResults     :: !(JSONText Int32)
+    , _cllMaxResults     :: !(Textual Int32)
     , _cllIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 

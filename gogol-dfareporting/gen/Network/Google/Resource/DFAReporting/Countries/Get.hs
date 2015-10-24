@@ -46,17 +46,17 @@ type CountriesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "countries" :>
-               Capture "dartId" (JSONText Int64) :>
+               Capture "dartId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Country
 
 -- | Gets one country by ID.
 --
 -- /See:/ 'countriesGet' smart constructor.
 data CountriesGet = CountriesGet
-    { _cgProFileId :: !(JSONText Int64)
-    , _cgDartId    :: !(JSONText Int64)
+    { _cgProFileId :: !(Textual Int64)
+    , _cgDartId    :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CountriesGet' with the minimum fields required to make a request.

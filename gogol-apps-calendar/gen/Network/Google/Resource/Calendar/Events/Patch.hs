@@ -54,7 +54,7 @@ type EventsPatchResource =
            Capture "calendarId" Text :>
              "events" :>
                Capture "eventId" Text :>
-                 QueryParam "maxAttendees" (JSONText Int32) :>
+                 QueryParam "maxAttendees" (Textual Int32) :>
                    QueryParam "sendNotifications" Bool :>
                      QueryParam "supportsAttachments" Bool :>
                        QueryParam "alwaysIncludeEmail" Bool :>
@@ -67,7 +67,7 @@ type EventsPatchResource =
 data EventsPatch = EventsPatch
     { _epCalendarId          :: !Text
     , _epPayload             :: !Event
-    , _epMaxAttendees        :: !(Maybe (JSONText Int32))
+    , _epMaxAttendees        :: !(Maybe (Textual Int32))
     , _epSendNotifications   :: !(Maybe Bool)
     , _epSupportsAttachments :: !(Maybe Bool)
     , _epAlwaysIncludeEmail  :: !(Maybe Bool)

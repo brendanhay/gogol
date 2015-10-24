@@ -46,9 +46,9 @@ type ConnectionTypesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "connectionTypes" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] ConnectionType
 
@@ -56,8 +56,8 @@ type ConnectionTypesGetResource =
 --
 -- /See:/ 'connectionTypesGet' smart constructor.
 data ConnectionTypesGet = ConnectionTypesGet
-    { _ctgProFileId :: !(JSONText Int64)
-    , _ctgId        :: !(JSONText Int64)
+    { _ctgProFileId :: !(Textual Int64)
+    , _ctgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionTypesGet' with the minimum fields required to make a request.

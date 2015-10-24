@@ -68,9 +68,9 @@ type AccountsReportsGenerateResource =
                          QueryParam "currency" Text :>
                            QueryParams "sort" Text :>
                              QueryParams "filter" Text :>
-                               QueryParam "startIndex" (JSONText Int32) :>
+                               QueryParam "startIndex" (Textual Int32) :>
                                  QueryParam "useTimezoneReporting" Bool :>
-                                   QueryParam "maxResults" (JSONText Int32) :>
+                                   QueryParam "maxResults" (Textual Int32) :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON]
                                          AdsenseReportsGenerateResponse
@@ -88,9 +88,9 @@ type AccountsReportsGenerateResource =
                            QueryParam "currency" Text :>
                              QueryParams "sort" Text :>
                                QueryParams "filter" Text :>
-                                 QueryParam "startIndex" (JSONText Int32) :>
+                                 QueryParam "startIndex" (Textual Int32) :>
                                    QueryParam "useTimezoneReporting" Bool :>
-                                     QueryParam "maxResults" (JSONText Int32) :>
+                                     QueryParam "maxResults" (Textual Int32) :>
                                        QueryParam "alt" AltMedia :>
                                          Get '[OctetStream] Stream
 
@@ -109,9 +109,9 @@ data AccountsReportsGenerate = AccountsReportsGenerate
     , _argCurrency             :: !(Maybe Text)
     , _argSort                 :: !(Maybe [Text])
     , _argFilter               :: !(Maybe [Text])
-    , _argStartIndex           :: !(Maybe (JSONText Int32))
+    , _argStartIndex           :: !(Maybe (Textual Int32))
     , _argUseTimezoneReporting :: !(Maybe Bool)
-    , _argMaxResults           :: !(Maybe (JSONText Int32))
+    , _argMaxResults           :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsGenerate' with the minimum fields required to make a request.

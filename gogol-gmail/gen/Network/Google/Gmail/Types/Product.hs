@@ -135,7 +135,7 @@ data History = History
     , _hMessagesDeleted :: !(Maybe [HistoryMessageDeleted])
     , _hMessagesAdded   :: !(Maybe [HistoryMessageAdded])
     , _hLabelsAdded     :: !(Maybe [HistoryLabelAdded])
-    , _hId              :: !(Maybe (JSONText Word64))
+    , _hId              :: !(Maybe (Textual Word64))
     , _hMessages        :: !(Maybe [Message])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -238,9 +238,9 @@ instance ToJSON History where
 --
 -- /See:/ 'proFile' smart constructor.
 data ProFile = ProFile
-    { _pfMessagesTotal :: !(Maybe (JSONText Int32))
-    , _pfThreadsTotal  :: !(Maybe (JSONText Int32))
-    , _pfHistoryId     :: !(Maybe (JSONText Word64))
+    { _pfMessagesTotal :: !(Maybe (Textual Int32))
+    , _pfThreadsTotal  :: !(Maybe (Textual Int32))
+    , _pfHistoryId     :: !(Maybe (Textual Word64))
     , _pfEmailAddress  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -359,7 +359,7 @@ instance ToJSON MessagePartHeader where
 data ListHistoryResponse = ListHistoryResponse
     { _lhrNextPageToken :: !(Maybe Text)
     , _lhrHistory       :: !(Maybe [History])
-    , _lhrHistoryId     :: !(Maybe (JSONText Word64))
+    , _lhrHistoryId     :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListHistoryResponse' with the minimum fields required to make a request.
@@ -421,7 +421,7 @@ instance ToJSON ListHistoryResponse where
 -- /See:/ 'listThreadsResponse' smart constructor.
 data ListThreadsResponse = ListThreadsResponse
     { _ltrNextPageToken      :: !(Maybe Text)
-    , _ltrResultSizeEstimate :: !(Maybe (JSONText Word32))
+    , _ltrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _ltrThreads            :: !(Maybe [Thread])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -695,8 +695,8 @@ instance ToJSON HistoryMessageDeleted where
 --
 -- /See:/ 'messagePartBody' smart constructor.
 data MessagePartBody = MessagePartBody
-    { _mpbSize         :: !(Maybe (JSONText Int32))
-    , _mpbData         :: !(Maybe (JSONText Word8))
+    { _mpbSize         :: !(Maybe (Textual Int32))
+    , _mpbData         :: !(Maybe (Textual Word8))
     , _mpbAttachmentId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -761,7 +761,7 @@ instance ToJSON MessagePartBody where
 -- /See:/ 'listDraftsResponse' smart constructor.
 data ListDraftsResponse = ListDraftsResponse
     { _ldrNextPageToken      :: !(Maybe Text)
-    , _ldrResultSizeEstimate :: !(Maybe (JSONText Word32))
+    , _ldrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _ldrDrafts             :: !(Maybe [Draft])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -824,8 +824,8 @@ instance ToJSON ListDraftsResponse where
 --
 -- /See:/ 'watchResponse' smart constructor.
 data WatchResponse = WatchResponse
-    { _wrExpiration :: !(Maybe (JSONText Int64))
-    , _wrHistoryId  :: !(Maybe (JSONText Word64))
+    { _wrExpiration :: !(Maybe (Textual Int64))
+    , _wrHistoryId  :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatchResponse' with the minimum fields required to make a request.
@@ -985,15 +985,15 @@ instance ToJSON WatchRequest where
 --
 -- /See:/ 'message' smart constructor.
 data Message = Message
-    { _mRaw          :: !(Maybe (JSONText Word8))
+    { _mRaw          :: !(Maybe (Textual Word8))
     , _mSnippet      :: !(Maybe Text)
-    , _mSizeEstimate :: !(Maybe (JSONText Int32))
+    , _mSizeEstimate :: !(Maybe (Textual Int32))
     , _mPayload      :: !(Maybe MessagePart)
-    , _mHistoryId    :: !(Maybe (JSONText Word64))
+    , _mHistoryId    :: !(Maybe (Textual Word64))
     , _mId           :: !(Maybe Text)
     , _mLabelIds     :: !(Maybe [Text])
     , _mThreadId     :: !(Maybe Text)
-    , _mInternalDate :: !(Maybe (JSONText Int64))
+    , _mInternalDate :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Message' with the minimum fields required to make a request.
@@ -1171,7 +1171,7 @@ instance ToJSON HistoryLabelRemoved where
 -- /See:/ 'thread' smart constructor.
 data Thread = Thread
     { _tSnippet   :: !(Maybe Text)
-    , _tHistoryId :: !(Maybe (JSONText Word64))
+    , _tHistoryId :: !(Maybe (Textual Word64))
     , _tId        :: !(Maybe Text)
     , _tMessages  :: !(Maybe [Message])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1240,12 +1240,12 @@ instance ToJSON Thread where
 --
 -- /See:/ 'label' smart constructor.
 data Label = Label
-    { _lThreadsUnread         :: !(Maybe (JSONText Int32))
+    { _lThreadsUnread         :: !(Maybe (Textual Int32))
     , _lMessageListVisibility :: !(Maybe LabelMessageListVisibility)
-    , _lMessagesTotal         :: !(Maybe (JSONText Int32))
-    , _lMessagesUnread        :: !(Maybe (JSONText Int32))
+    , _lMessagesTotal         :: !(Maybe (Textual Int32))
+    , _lMessagesUnread        :: !(Maybe (Textual Int32))
     , _lName                  :: !(Maybe Text)
-    , _lThreadsTotal          :: !(Maybe (JSONText Int32))
+    , _lThreadsTotal          :: !(Maybe (Textual Int32))
     , _lLabelListVisibility   :: !(Maybe LabelLabelListVisibility)
     , _lId                    :: !(Maybe Text)
     , _lType                  :: !(Maybe LabelType)
@@ -1381,7 +1381,7 @@ instance ToJSON Label where
 -- /See:/ 'listMessagesResponse' smart constructor.
 data ListMessagesResponse = ListMessagesResponse
     { _lmrNextPageToken      :: !(Maybe Text)
-    , _lmrResultSizeEstimate :: !(Maybe (JSONText Word32))
+    , _lmrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _lmrMessages           :: !(Maybe [Message])
     } deriving (Eq,Show,Data,Typeable,Generic)
 

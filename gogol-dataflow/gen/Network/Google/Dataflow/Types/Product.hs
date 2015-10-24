@@ -278,7 +278,7 @@ instance ToJSON SourceSplitResponse where
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (JSONText Int32))
+    , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -346,12 +346,12 @@ data WorkItem = WorkItem
     , _wiReportStatusInterval     :: !(Maybe Text)
     , _wiShellTask                :: !(Maybe ShellTask)
     , _wiStreamingSetupTask       :: !(Maybe StreamingSetupTask)
-    , _wiInitialReportIndex       :: !(Maybe (JSONText Int64))
+    , _wiInitialReportIndex       :: !(Maybe (Textual Int64))
     , _wiMapTask                  :: !(Maybe MapTask)
     , _wiPackages                 :: !(Maybe [Package])
     , _wiStreamingComputationTask :: !(Maybe StreamingComputationTask)
     , _wiSourceOperationTask      :: !(Maybe SourceOperationRequest)
-    , _wiId                       :: !(Maybe (JSONText Int64))
+    , _wiId                       :: !(Maybe (Textual Int64))
     , _wiProjectId                :: !(Maybe Text)
     , _wiLeaseExpireTime          :: !(Maybe Text)
     , _wiConfiguration            :: !(Maybe Text)
@@ -536,8 +536,8 @@ instance ToJSON WorkItem where
 --
 -- /See:/ 'sourceSplitOptions' smart constructor.
 data SourceSplitOptions = SourceSplitOptions
-    { _ssoDesiredShardSizeBytes  :: !(Maybe (JSONText Int64))
-    , _ssoDesiredBundleSizeBytes :: !(Maybe (JSONText Int64))
+    { _ssoDesiredShardSizeBytes  :: !(Maybe (Textual Int64))
+    , _ssoDesiredBundleSizeBytes :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceSplitOptions' with the minimum fields required to make a request.
@@ -624,7 +624,7 @@ instance ToJSON WorkerPoolMetadata where
 --
 -- /See:/ 'autoscalingSettings' smart constructor.
 data AutoscalingSettings = AutoscalingSettings
-    { _asMaxNumWorkers :: !(Maybe (JSONText Int32))
+    { _asMaxNumWorkers :: !(Maybe (Textual Int32))
     , _asAlgorithm     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1059,7 +1059,7 @@ instance ToJSON EnvironmentUserAgent where
 --
 -- /See:/ 'disk' smart constructor.
 data Disk = Disk
-    { _dSizeGb     :: !(Maybe (JSONText Int32))
+    { _dSizeGb     :: !(Maybe (Textual Int32))
     , _dDiskType   :: !(Maybe Text)
     , _dMountPoint :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1457,7 +1457,7 @@ instance ToJSON Environment where
 --
 -- /See:/ 'concatPosition' smart constructor.
 data ConcatPosition = ConcatPosition
-    { _cpIndex    :: !(Maybe (JSONText Int32))
+    { _cpIndex    :: !(Maybe (Textual Int32))
     , _cpPosition :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1690,7 +1690,7 @@ data WorkItemStatus = WorkItemStatus
     , _wisDynamicSourceSplit      :: !(Maybe DynamicSourceSplit)
     , _wisCompleted               :: !(Maybe Bool)
     , _wisSourceFork              :: !(Maybe SourceFork)
-    , _wisReportIndex             :: !(Maybe (JSONText Int64))
+    , _wisReportIndex             :: !(Maybe (Textual Int64))
     , _wisRequestedLeaseDuration  :: !(Maybe Text)
     , _wisErrors                  :: !(Maybe [Status])
     , _wisMetricUpdates           :: !(Maybe [MetricUpdate])
@@ -1989,7 +1989,7 @@ instance ToJSON SourceSpec where
 --
 -- /See:/ 'sourceMetadata' smart constructor.
 data SourceMetadata = SourceMetadata
-    { _smEstimatedSizeBytes :: !(Maybe (JSONText Int64))
+    { _smEstimatedSizeBytes :: !(Maybe (Textual Int64))
     , _smProducesSortedKeys :: !(Maybe Bool)
     , _smInfinite           :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2582,7 +2582,7 @@ instance ToJSON
 -- /See:/ 'shellTask' smart constructor.
 data ShellTask = ShellTask
     { _stCommand  :: !(Maybe Text)
-    , _stExitCode :: !(Maybe (JSONText Int32))
+    , _stExitCode :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ShellTask' with the minimum fields required to make a request.
@@ -2966,7 +2966,7 @@ instance ToJSON DataDiskAssignment where
 --
 -- /See:/ 'workItemServiceState' smart constructor.
 data WorkItemServiceState = WorkItemServiceState
-    { _wissNextReportIndex       :: !(Maybe (JSONText Int64))
+    { _wissNextReportIndex       :: !(Maybe (Textual Int64))
     , _wissReportStatusInterval  :: !(Maybe Text)
     , _wissHarnessData           :: !(Maybe WorkItemServiceStateHarnessData)
     , _wissSuggestedStopPoint    :: !(Maybe ApproximateProgress)
@@ -3073,8 +3073,8 @@ instance ToJSON WorkItemServiceState where
 -- /See:/ 'streamingSetupTask' smart constructor.
 data StreamingSetupTask = StreamingSetupTask
     { _sstStreamingComputationTopology :: !(Maybe TopologyConfig)
-    , _sstReceiveWorkPort              :: !(Maybe (JSONText Int32))
-    , _sstWorkerHarnessPort            :: !(Maybe (JSONText Int32))
+    , _sstReceiveWorkPort              :: !(Maybe (Textual Int32))
+    , _sstWorkerHarnessPort            :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StreamingSetupTask' with the minimum fields required to make a request.
@@ -4126,10 +4126,10 @@ instance ToJSON SinkSpec where
 -- /See:/ 'workerPool' smart constructor.
 data WorkerPool = WorkerPool
     { _wpAutoscalingSettings :: !(Maybe AutoscalingSettings)
-    , _wpDiskSizeGb          :: !(Maybe (JSONText Int32))
+    , _wpDiskSizeGb          :: !(Maybe (Textual Int32))
     , _wpKind                :: !(Maybe Text)
     , _wpTaskrunnerSettings  :: !(Maybe TaskRunnerSettings)
-    , _wpNumWorkers          :: !(Maybe (JSONText Int32))
+    , _wpNumWorkers          :: !(Maybe (Textual Int32))
     , _wpNetwork             :: !(Maybe Text)
     , _wpZone                :: !(Maybe Text)
     , _wpPackages            :: !(Maybe [Package])
@@ -4867,7 +4867,7 @@ instance ToJSON Source where
 -- /See:/ 'approximateProgress' smart constructor.
 data ApproximateProgress = ApproximateProgress
     { _apRemainingTime   :: !(Maybe Text)
-    , _apPercentComplete :: !(Maybe (JSONText Float))
+    , _apPercentComplete :: !(Maybe (Textual Double))
     , _apPosition        :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5113,7 +5113,7 @@ instance ToJSON PartialGroupByKeyInstruction where
 --
 -- /See:/ 'parDoInstruction' smart constructor.
 data ParDoInstruction = ParDoInstruction
-    { _pdiNumOutputs       :: !(Maybe (JSONText Int32))
+    { _pdiNumOutputs       :: !(Maybe (Textual Int32))
     , _pdiMultiOutputInfos :: !(Maybe [MultiOutputInfo])
     , _pdiSideInputs       :: !(Maybe [SideInputInfo])
     , _pdiInput            :: !(Maybe InstructionInput)
@@ -5914,8 +5914,8 @@ instance ToJSON PubsubLocation where
 --
 -- /See:/ 'instructionInput' smart constructor.
 data InstructionInput = InstructionInput
-    { _iiProducerInstructionIndex :: !(Maybe (JSONText Int32))
-    , _iiOutputNum                :: !(Maybe (JSONText Int32))
+    { _iiProducerInstructionIndex :: !(Maybe (Textual Int32))
+    , _iiOutputNum                :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstructionInput' with the minimum fields required to make a request.
@@ -6153,9 +6153,9 @@ instance ToJSON LeaseWorkItemResponse where
 --
 -- /See:/ 'position' smart constructor.
 data Position = Position
-    { _pByteOffSet      :: !(Maybe (JSONText Int64))
+    { _pByteOffSet      :: !(Maybe (Textual Int64))
     , _pConcatPosition  :: !(Maybe ConcatPosition)
-    , _pRecordIndex     :: !(Maybe (JSONText Int64))
+    , _pRecordIndex     :: !(Maybe (Textual Int64))
     , _pShufflePosition :: !(Maybe Text)
     , _pKey             :: !(Maybe Text)
     , _pEnd             :: !(Maybe Bool)

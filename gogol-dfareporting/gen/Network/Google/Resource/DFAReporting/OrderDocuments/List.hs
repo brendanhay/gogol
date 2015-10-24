@@ -55,19 +55,19 @@ type OrderDocumentsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "projects" :>
-               Capture "projectId" (JSONText Int64) :>
+               Capture "projectId" (Textual Int64) :>
                  "orderDocuments" :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" (JSONText Int64) :>
+                     QueryParams "ids" (Textual Int64) :>
                        QueryParam "sortOrder" OrderDocumentsListSortOrder :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField" OrderDocumentsListSortField :>
-                             QueryParams "orderId" (JSONText Int64) :>
+                             QueryParams "orderId" (Textual Int64) :>
                                QueryParam "approved" Bool :>
-                                 QueryParams "siteId" (JSONText Int64) :>
-                                   QueryParam "maxResults" (JSONText Int32) :>
+                                 QueryParams "siteId" (Textual Int64) :>
+                                   QueryParam "maxResults" (Textual Int32) :>
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] OrderDocumentsListResponse
 
@@ -76,16 +76,16 @@ type OrderDocumentsListResource =
 -- /See:/ 'orderDocumentsList' smart constructor.
 data OrderDocumentsList = OrderDocumentsList
     { _odlSearchString :: !(Maybe Text)
-    , _odlIds          :: !(Maybe [JSONText Int64])
-    , _odlProFileId    :: !(JSONText Int64)
+    , _odlIds          :: !(Maybe [Textual Int64])
+    , _odlProFileId    :: !(Textual Int64)
     , _odlSortOrder    :: !(Maybe OrderDocumentsListSortOrder)
     , _odlPageToken    :: !(Maybe Text)
-    , _odlProjectId    :: !(JSONText Int64)
+    , _odlProjectId    :: !(Textual Int64)
     , _odlSortField    :: !(Maybe OrderDocumentsListSortField)
-    , _odlOrderId      :: !(Maybe [JSONText Int64])
+    , _odlOrderId      :: !(Maybe [Textual Int64])
     , _odlApproved     :: !(Maybe Bool)
-    , _odlSiteId       :: !(Maybe [JSONText Int64])
-    , _odlMaxResults   :: !(Maybe (JSONText Int32))
+    , _odlSiteId       :: !(Maybe [Textual Int64])
+    , _odlMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsList' with the minimum fields required to make a request.

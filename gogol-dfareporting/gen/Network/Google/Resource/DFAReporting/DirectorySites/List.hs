@@ -58,15 +58,15 @@ type DirectorySitesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "directorySites" :>
                QueryParam "searchString" Text :>
                  QueryParam "acceptsInterstitialPlacements" Bool :>
                    QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                     QueryParams "ids" (JSONText Int64) :>
+                     QueryParams "ids" (Textual Int64) :>
                        QueryParam "sortOrder" DirectorySitesListSortOrder :>
                          QueryParam "active" Bool :>
-                           QueryParam "countryId" (JSONText Int64) :>
+                           QueryParam "countryId" (Textual Int64) :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField"
                                  DirectorySitesListSortField
@@ -74,8 +74,8 @@ type DirectorySitesListResource =
                                  QueryParam "acceptsInStreamVideoPlacements"
                                    Bool
                                    :>
-                                   QueryParam "maxResults" (JSONText Int32) :>
-                                     QueryParam "parentId" (JSONText Int64) :>
+                                   QueryParam "maxResults" (Textual Int32) :>
+                                     QueryParam "parentId" (Textual Int64) :>
                                        QueryParam "dfp_network_code" Text :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
@@ -88,16 +88,16 @@ data DirectorySitesList = DirectorySitesList
     { _dslSearchString                   :: !(Maybe Text)
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
-    , _dslIds                            :: !(Maybe [JSONText Int64])
-    , _dslProFileId                      :: !(JSONText Int64)
+    , _dslIds                            :: !(Maybe [Textual Int64])
+    , _dslProFileId                      :: !(Textual Int64)
     , _dslSortOrder                      :: !(Maybe DirectorySitesListSortOrder)
     , _dslActive                         :: !(Maybe Bool)
-    , _dslCountryId                      :: !(Maybe (JSONText Int64))
+    , _dslCountryId                      :: !(Maybe (Textual Int64))
     , _dslPageToken                      :: !(Maybe Text)
     , _dslSortField                      :: !(Maybe DirectorySitesListSortField)
     , _dslAcceptsInStreamVideoPlacements :: !(Maybe Bool)
-    , _dslMaxResults                     :: !(Maybe (JSONText Int32))
-    , _dslParentId                       :: !(Maybe (JSONText Int64))
+    , _dslMaxResults                     :: !(Maybe (Textual Int32))
+    , _dslParentId                       :: !(Maybe (Textual Int64))
     , _dslDfpNetworkCode                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

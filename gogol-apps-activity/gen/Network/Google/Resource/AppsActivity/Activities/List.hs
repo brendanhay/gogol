@@ -64,7 +64,7 @@ type ActivitiesListResource =
                  QueryParam "userId" Text :>
                    QueryParam "source" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (JSONText Int32) :>
+                       QueryParam "pageSize" (Textual Int32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListActivitiesResponse
 
@@ -83,7 +83,7 @@ data ActivitiesList = ActivitiesList
     , _alUserId           :: !Text
     , _alSource           :: !(Maybe Text)
     , _alPageToken        :: !(Maybe Text)
-    , _alPageSize         :: !(JSONText Int32)
+    , _alPageSize         :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.

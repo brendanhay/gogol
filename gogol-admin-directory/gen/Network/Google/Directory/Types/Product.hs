@@ -986,8 +986,8 @@ data RoleAssignment = RoleAssignment
     , _rolScopeType        :: !(Maybe Text)
     , _rolKind             :: !Text
     , _rolAssignedTo       :: !(Maybe Text)
-    , _rolRoleId           :: !(Maybe (JSONText Int64))
-    , _rolRoleAssignmentId :: !(Maybe (JSONText Int64))
+    , _rolRoleId           :: !(Maybe (Textual Int64))
+    , _rolRoleAssignmentId :: !(Maybe (Textual Int64))
     , _rolOrgUnitId        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1091,7 +1091,7 @@ instance ToJSON RoleAssignment where
 data Group = Group
     { _groEmail              :: !(Maybe Text)
     , _groEtag               :: !(Maybe Text)
-    , _groDirectMembersCount :: !(Maybe (JSONText Int64))
+    , _groDirectMembersCount :: !(Maybe (Textual Int64))
     , _groKind               :: !Text
     , _groAliases            :: !(Maybe [Text])
     , _groNonEditableAliases :: !(Maybe [Text])
@@ -1629,12 +1629,12 @@ instance ToJSON Users where
 --
 -- /See:/ 'asp' smart constructor.
 data Asp = Asp
-    { _aCreationTime :: !(Maybe (JSONText Int64))
+    { _aCreationTime :: !(Maybe (Textual Int64))
     , _aEtag         :: !(Maybe Text)
-    , _aCodeId       :: !(Maybe (JSONText Int32))
+    , _aCodeId       :: !(Maybe (Textual Int32))
     , _aKind         :: !Text
     , _aName         :: !(Maybe Text)
-    , _aLastTimeUsed :: !(Maybe (JSONText Int64))
+    , _aLastTimeUsed :: !(Maybe (Textual Int64))
     , _aUserKey      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2310,7 +2310,7 @@ data Channel = Channel
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe (JSONText Int64))
+    , _cExpiration  :: !(Maybe (Textual Int64))
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
     , _cPayload     :: !(Maybe Bool)
@@ -2731,7 +2731,7 @@ instance ToJSON ChromeOSDeviceRecentUsersItem where
 --
 -- /See:/ 'domainAlias' smart constructor.
 data DomainAlias = DomainAlias
-    { _dCreationTime     :: !(Maybe (JSONText Int64))
+    { _dCreationTime     :: !(Maybe (Textual Int64))
     , _dEtag             :: !(Maybe Text)
     , _dKind             :: !Text
     , _dVerified         :: !(Maybe Bool)
@@ -3406,7 +3406,7 @@ data Role = Role
     , _rrKind             :: !Text
     , _rrRoleName         :: !(Maybe Text)
     , _rrIsSystemRole     :: !(Maybe Bool)
-    , _rrRoleId           :: !(Maybe (JSONText Int64))
+    , _rrRoleId           :: !(Maybe (Textual Int64))
     , _rrRoleDescription  :: !(Maybe Text)
     , _rrIsSuperAdminRole :: !(Maybe Bool)
     , _rrRolePrivileges   :: !(Maybe [RoleRolePrivilegesItem])
@@ -3649,7 +3649,7 @@ instance ToJSON Customer where
 --
 -- /See:/ 'mobileDeviceApplicationsItem' smart constructor.
 data MobileDeviceApplicationsItem = MobileDeviceApplicationsItem
-    { _mdaiVersionCode :: !(Maybe (JSONText Int32))
+    { _mdaiVersionCode :: !(Maybe (Textual Int32))
     , _mdaiVersionName :: !(Maybe Text)
     , _mdaiPackageName :: !(Maybe Text)
     , _mdaiDisplayName :: !(Maybe Text)
@@ -4163,7 +4163,7 @@ instance ToJSON UserWebsite where
 -- /See:/ 'chromeOSDeviceActiveTimeRangesItem' smart constructor.
 data ChromeOSDeviceActiveTimeRangesItem = ChromeOSDeviceActiveTimeRangesItem
     { _codatriDate       :: !(Maybe Date')
-    , _codatriActiveTime :: !(Maybe (JSONText Int32))
+    , _codatriActiveTime :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeOSDeviceActiveTimeRangesItem' with the minimum fields required to make a request.
@@ -4358,11 +4358,11 @@ instance ToJSON UserPhone where
 --
 -- /See:/ 'userPhoto' smart constructor.
 data UserPhoto = UserPhoto
-    { _upPhotoData    :: !(Maybe (JSONText Word8))
+    { _upPhotoData    :: !(Maybe (Textual Word8))
     , _upEtag         :: !(Maybe Text)
-    , _upHeight       :: !(Maybe (JSONText Int32))
+    , _upHeight       :: !(Maybe (Textual Int32))
     , _upKind         :: !Text
-    , _upWidth        :: !(Maybe (JSONText Int32))
+    , _upWidth        :: !(Maybe (Textual Int32))
     , _upMimeType     :: !(Maybe Text)
     , _upId           :: !(Maybe Text)
     , _upPrimaryEmail :: !(Maybe Text)
@@ -4977,7 +4977,7 @@ instance ToJSON UserCustomProperties where
 --
 -- /See:/ 'domains' smart constructor.
 data Domains = Domains
-    { _domCreationTime  :: !(Maybe (JSONText Int64))
+    { _domCreationTime  :: !(Maybe (Textual Int64))
     , _domEtag          :: !(Maybe Text)
     , _domKind          :: !Text
     , _domDomainAliases :: !(Maybe [DomainAlias])
@@ -5086,7 +5086,7 @@ data Notifications = Notifications
     , _notNextPageToken            :: !(Maybe Text)
     , _notKind                     :: !Text
     , _notItems                    :: !(Maybe [Notification])
-    , _notUnreadNotificationsCount :: !(Maybe (JSONText Int32))
+    , _notUnreadNotificationsCount :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Notifications' with the minimum fields required to make a request.
@@ -5168,8 +5168,8 @@ instance ToJSON Notifications where
 --
 -- /See:/ 'schemaFieldSpecNumericIndexingSpec' smart constructor.
 data SchemaFieldSpecNumericIndexingSpec = SchemaFieldSpecNumericIndexingSpec
-    { _sfsnisMaxValue :: !(Maybe (JSONText Double))
-    , _sfsnisMinValue :: !(Maybe (JSONText Double))
+    { _sfsnisMaxValue :: !(Maybe (Textual Double))
+    , _sfsnisMinValue :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemaFieldSpecNumericIndexingSpec' with the minimum fields required to make a request.

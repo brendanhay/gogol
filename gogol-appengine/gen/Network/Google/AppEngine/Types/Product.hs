@@ -60,7 +60,7 @@ import           Network.Google.Prelude
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (JSONText Int32))
+    , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -492,13 +492,13 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'healthCheck' smart constructor.
 data HealthCheck = HealthCheck
-    { _hcHealthyThreshold   :: !(Maybe (JSONText Word32))
+    { _hcHealthyThreshold   :: !(Maybe (Textual Word32))
     , _hcDisableHealthCheck :: !(Maybe Bool)
     , _hcCheckInterval      :: !(Maybe Text)
-    , _hcRestartThreshold   :: !(Maybe (JSONText Word32))
+    , _hcRestartThreshold   :: !(Maybe (Textual Word32))
     , _hcHost               :: !(Maybe Text)
     , _hcTimeout            :: !(Maybe Text)
-    , _hcUnhealthyThreshold :: !(Maybe (JSONText Word32))
+    , _hcUnhealthyThreshold :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
@@ -1152,13 +1152,13 @@ instance ToJSON FileInfo where
 --
 -- /See:/ 'automaticScaling' smart constructor.
 data AutomaticScaling = AutomaticScaling
-    { _asMaxTotalInstances     :: !(Maybe (JSONText Int32))
-    , _asMinIdleInstances      :: !(Maybe (JSONText Int32))
+    { _asMaxTotalInstances     :: !(Maybe (Textual Int32))
+    , _asMinIdleInstances      :: !(Maybe (Textual Int32))
     , _asMinPendingLatency     :: !(Maybe Text)
     , _asCPUUtilization        :: !(Maybe CPUUtilization)
-    , _asMaxIdleInstances      :: !(Maybe (JSONText Int32))
-    , _asMinTotalInstances     :: !(Maybe (JSONText Int32))
-    , _asMaxConcurrentRequests :: !(Maybe (JSONText Int32))
+    , _asMaxIdleInstances      :: !(Maybe (Textual Int32))
+    , _asMinTotalInstances     :: !(Maybe (Textual Int32))
+    , _asMaxConcurrentRequests :: !(Maybe (Textual Int32))
     , _asCoolDownPeriod        :: !(Maybe Text)
     , _asMaxPendingLatency     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1521,9 +1521,9 @@ instance ToJSON StaticFilesHandlerHTTPHeaders where
 --
 -- /See:/ 'resources' smart constructor.
 data Resources = Resources
-    { _rMemoryGb :: !(Maybe (JSONText Double))
-    , _rDiskGb   :: !(Maybe (JSONText Double))
-    , _rCPU      :: !(Maybe (JSONText Double))
+    { _rMemoryGb :: !(Maybe (Textual Double))
+    , _rDiskGb   :: !(Maybe (Textual Double))
+    , _rCPU      :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Resources' with the minimum fields required to make a request.
@@ -1617,7 +1617,7 @@ instance ToJSON DeploymentFiles where
 -- /See:/ 'cpuUtilization' smart constructor.
 data CPUUtilization = CPUUtilization
     { _cuAggregationWindowLength :: !(Maybe Text)
-    , _cuTargetUtilization       :: !(Maybe (JSONText Double))
+    , _cuTargetUtilization       :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CPUUtilization' with the minimum fields required to make a request.
@@ -1675,7 +1675,7 @@ instance ToJSON CPUUtilization where
 --
 -- /See:/ 'trafficSplitAllocations' smart constructor.
 newtype TrafficSplitAllocations = TrafficSplitAllocations
-    { _tsaAddtional :: HashMap Text (JSONText Double)
+    { _tsaAddtional :: HashMap Text (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
@@ -1710,7 +1710,7 @@ instance ToJSON TrafficSplitAllocations where
 --
 -- /See:/ 'manualScaling' smart constructor.
 newtype ManualScaling = ManualScaling
-    { _msInstances :: Maybe (JSONText Int32)
+    { _msInstances :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManualScaling' with the minimum fields required to make a request.
@@ -1751,7 +1751,7 @@ instance ToJSON ManualScaling where
 --
 -- /See:/ 'basicScaling' smart constructor.
 data BasicScaling = BasicScaling
-    { _bsMaxInstances :: !(Maybe (JSONText Int32))
+    { _bsMaxInstances :: !(Maybe (Textual Int32))
     , _bsIdleTimeout  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

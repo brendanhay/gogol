@@ -60,11 +60,11 @@ type TablesFeaturesListResource =
                  QueryParam "where" Text :>
                    QueryParam "orderBy" Text :>
                      QueryParam "version" TablesFeaturesListVersion :>
-                       QueryParam "limit" (JSONText Word32) :>
+                       QueryParam "limit" (Textual Word32) :>
                          QueryParam "pageToken" Text :>
                            QueryParam "select" Text :>
                              QueryParam "intersects" Text :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] FeaturesListResponse
 
@@ -77,11 +77,11 @@ data TablesFeaturesList = TablesFeaturesList
     , _tflOrderBy    :: !(Maybe Text)
     , _tflVersion    :: !(Maybe TablesFeaturesListVersion)
     , _tflId         :: !Text
-    , _tflLimit      :: !(Maybe (JSONText Word32))
+    , _tflLimit      :: !(Maybe (Textual Word32))
     , _tflPageToken  :: !(Maybe Text)
     , _tflSelect     :: !(Maybe Text)
     , _tflIntersects :: !(Maybe Text)
-    , _tflMaxResults :: !(Maybe (JSONText Word32))
+    , _tflMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesList' with the minimum fields required to make a request.

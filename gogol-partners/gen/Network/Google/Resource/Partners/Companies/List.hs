@@ -76,7 +76,7 @@ type CompaniesListResource =
        "companies" :>
          QueryParams "languageCodes" Text :>
            QueryParam "$.xgafv" Text :>
-             QueryParam "maxMonthlyBudget.units" (JSONText Int64)
+             QueryParam "maxMonthlyBudget.units" (Textual Int64)
                :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "orderBy" Text :>
@@ -85,8 +85,7 @@ type CompaniesListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "address" Text :>
-                             QueryParam "minMonthlyBudget.nanos"
-                               (JSONText Int32)
+                             QueryParam "minMonthlyBudget.nanos" (Textual Int32)
                                :>
                                QueryParams "industries" Text :>
                                  QueryParam "requestMetadata.partnersSessionId"
@@ -94,7 +93,7 @@ type CompaniesListResource =
                                    :>
                                    QueryParam "bearer_token" Text :>
                                      QueryParam "maxMonthlyBudget.nanos"
-                                       (JSONText Int32)
+                                       (Textual Int32)
                                        :>
                                        QueryParam "requestMetadata.locale" Text
                                          :>
@@ -123,7 +122,7 @@ type CompaniesListResource =
                                                          Text
                                                          :>
                                                          QueryParam "pageSize"
-                                                           (JSONText Int32)
+                                                           (Textual Int32)
                                                            :>
                                                            QueryParam
                                                              "minMonthlyBudget.currencyCode"
@@ -139,7 +138,7 @@ type CompaniesListResource =
                                                                  :>
                                                                  QueryParam
                                                                    "minMonthlyBudget.units"
-                                                                   (JSONText
+                                                                   (Textual
                                                                       Int64)
                                                                    :>
                                                                    QueryParam
@@ -164,7 +163,7 @@ type CompaniesListResource =
 data CompaniesList = CompaniesList
     { _clLanguageCodes                               :: !(Maybe [Text])
     , _clXgafv                                       :: !(Maybe Text)
-    , _clMaxMonthlyBudgetUnits                       :: !(Maybe (JSONText Int64))
+    , _clMaxMonthlyBudgetUnits                       :: !(Maybe (Textual Int64))
     , _clUploadProtocol                              :: !(Maybe Text)
     , _clOrderBy                                     :: !(Maybe Text)
     , _clPp                                          :: !Bool
@@ -172,11 +171,11 @@ data CompaniesList = CompaniesList
     , _clAccessToken                                 :: !(Maybe Text)
     , _clUploadType                                  :: !(Maybe Text)
     , _clAddress                                     :: !(Maybe Text)
-    , _clMinMonthlyBudgetNanos                       :: !(Maybe (JSONText Int32))
+    , _clMinMonthlyBudgetNanos                       :: !(Maybe (Textual Int32))
     , _clIndustries                                  :: !(Maybe [Text])
     , _clRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _clBearerToken                                 :: !(Maybe Text)
-    , _clMaxMonthlyBudgetNanos                       :: !(Maybe (JSONText Int32))
+    , _clMaxMonthlyBudgetNanos                       :: !(Maybe (Textual Int32))
     , _clRequestMetadataLocale                       :: !(Maybe Text)
     , _clView                                        :: !(Maybe Text)
     , _clRequestMetadataExperimentIds                :: !(Maybe [Text])
@@ -186,11 +185,11 @@ data CompaniesList = CompaniesList
     , _clPageToken                                   :: !(Maybe Text)
     , _clRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
     , _clGpsMotivations                              :: !(Maybe [Text])
-    , _clPageSize                                    :: !(Maybe (JSONText Int32))
+    , _clPageSize                                    :: !(Maybe (Textual Int32))
     , _clMinMonthlyBudgetCurrencyCode                :: !(Maybe Text)
     , _clServices                                    :: !(Maybe [Text])
     , _clRequestMetadataUserOverridesUserId          :: !(Maybe Text)
-    , _clMinMonthlyBudgetUnits                       :: !(Maybe (JSONText Int64))
+    , _clMinMonthlyBudgetUnits                       :: !(Maybe (Textual Int64))
     , _clRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _clCallback                                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -50,7 +50,7 @@ type URLChannelsListResource =
            Capture "adClientId" Text :>
              "urlchannels" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
 
 -- | List all host URL channels in the host AdSense account.
@@ -59,7 +59,7 @@ type URLChannelsListResource =
 data URLChannelsList = URLChannelsList
     { _uclAdClientId :: !Text
     , _uclPageToken  :: !(Maybe Text)
-    , _uclMaxResults :: !(Maybe (JSONText Word32))
+    , _uclMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannelsList' with the minimum fields required to make a request.

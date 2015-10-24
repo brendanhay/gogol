@@ -52,9 +52,9 @@ type TargetableRemarketingListsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "targetableRemarketingLists" :>
-               QueryParam "advertiserId" (JSONText Int64) :>
+               QueryParam "advertiserId" (Textual Int64) :>
                  QueryParam "sortOrder"
                    TargetableRemarketingListsListSortOrder
                    :>
@@ -64,7 +64,7 @@ type TargetableRemarketingListsListResource =
                          QueryParam "sortField"
                            TargetableRemarketingListsListSortField
                            :>
-                           QueryParam "maxResults" (JSONText Int32) :>
+                           QueryParam "maxResults" (Textual Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON]
                                  TargetableRemarketingListsListResponse
@@ -73,14 +73,14 @@ type TargetableRemarketingListsListResource =
 --
 -- /See:/ 'targetableRemarketingListsList' smart constructor.
 data TargetableRemarketingListsList = TargetableRemarketingListsList
-    { _trllAdvertiserId :: !(JSONText Int64)
-    , _trllProFileId    :: !(JSONText Int64)
+    { _trllAdvertiserId :: !(Textual Int64)
+    , _trllProFileId    :: !(Textual Int64)
     , _trllSortOrder    :: !(Maybe TargetableRemarketingListsListSortOrder)
     , _trllActive       :: !(Maybe Bool)
     , _trllName         :: !(Maybe Text)
     , _trllPageToken    :: !(Maybe Text)
     , _trllSortField    :: !(Maybe TargetableRemarketingListsListSortField)
-    , _trllMaxResults   :: !(Maybe (JSONText Int32))
+    , _trllMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsList' with the minimum fields required to make a request.

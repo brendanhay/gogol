@@ -155,7 +155,7 @@ data Group = Group
     , _gSelfLink          :: !(Maybe Text)
     , _gName              :: !(Maybe Text)
     , _gCreationTimestamp :: !(Maybe Text)
-    , _gId                :: !(Maybe (JSONText Word64))
+    , _gId                :: !(Maybe (Textual Word64))
     , _gDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -338,24 +338,24 @@ instance ToJSON GroupList where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe (JSONText Word64))
+    { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (JSONText Int32))
+    , _oProgress            :: !(Maybe (Textual Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
+    , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (JSONText Word64))
+    , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -868,7 +868,7 @@ data User = User
     , _uSelfLink          :: !(Maybe Text)
     , _uName              :: !(Maybe Text)
     , _uCreationTimestamp :: !(Maybe Text)
-    , _uId                :: !(Maybe (JSONText Word64))
+    , _uId                :: !(Maybe (Textual Word64))
     , _uDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1029,7 +1029,7 @@ instance ToJSON GroupsAddMemberRequest where
 -- /See:/ 'linuxGroupView' smart constructor.
 data LinuxGroupView = LinuxGroupView
     { _lgvMembers   :: !(Maybe [Text])
-    , _lgvGid       :: !(Maybe (JSONText Word32))
+    , _lgvGid       :: !(Maybe (Textual Word32))
     , _lgvGroupName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1090,10 +1090,10 @@ instance ToJSON LinuxGroupView where
 -- /See:/ 'linuxUserView' smart constructor.
 data LinuxUserView = LinuxUserView
     { _luvGecos         :: !(Maybe Text)
-    , _luvUid           :: !(Maybe (JSONText Word32))
+    , _luvUid           :: !(Maybe (Textual Word32))
     , _luvUsername      :: !(Maybe Text)
     , _luvShell         :: !(Maybe Text)
-    , _luvGid           :: !(Maybe (JSONText Word32))
+    , _luvGid           :: !(Maybe (Textual Word32))
     , _luvHomeDirectory :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

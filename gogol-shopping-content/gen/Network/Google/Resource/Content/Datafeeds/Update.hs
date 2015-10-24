@@ -47,9 +47,9 @@ import           Network.Google.ShoppingContent.Types
 type DatafeedsUpdateResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "datafeeds" :>
-             Capture "datafeedId" (JSONText Word64) :>
+             Capture "datafeedId" (Textual Word64) :>
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Datafeed :> Put '[JSON] Datafeed
@@ -58,9 +58,9 @@ type DatafeedsUpdateResource =
 --
 -- /See:/ 'datafeedsUpdate' smart constructor.
 data DatafeedsUpdate = DatafeedsUpdate
-    { _duMerchantId :: !(JSONText Word64)
+    { _duMerchantId :: !(Textual Word64)
     , _duPayload    :: !Datafeed
-    , _duDatafeedId :: !(JSONText Word64)
+    , _duDatafeedId :: !(Textual Word64)
     , _duDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

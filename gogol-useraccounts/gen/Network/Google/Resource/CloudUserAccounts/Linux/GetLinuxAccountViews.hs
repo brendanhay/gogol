@@ -60,7 +60,7 @@ type LinuxGetLinuxAccountViewsResource =
                      QueryParam "orderBy" Text :>
                        QueryParam "filter" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :>
                                Post '[JSON] LinuxGetLinuxAccountViewsResponse
 
@@ -74,7 +74,7 @@ data LinuxGetLinuxAccountViews = LinuxGetLinuxAccountViews
     , _lglavZone       :: !Text
     , _lglavFilter     :: !(Maybe Text)
     , _lglavPageToken  :: !(Maybe Text)
-    , _lglavMaxResults :: !(JSONText Word32)
+    , _lglavMaxResults :: !(Textual Word32)
     , _lglavInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

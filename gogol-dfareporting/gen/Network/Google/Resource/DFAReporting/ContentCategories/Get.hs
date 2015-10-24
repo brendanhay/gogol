@@ -46,9 +46,9 @@ type ContentCategoriesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] ContentCategory
 
@@ -56,8 +56,8 @@ type ContentCategoriesGetResource =
 --
 -- /See:/ 'contentCategoriesGet' smart constructor.
 data ContentCategoriesGet = ContentCategoriesGet
-    { _ccgProFileId :: !(JSONText Int64)
-    , _ccgId        :: !(JSONText Int64)
+    { _ccgProFileId :: !(Textual Int64)
+    , _ccgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesGet' with the minimum fields required to make a request.

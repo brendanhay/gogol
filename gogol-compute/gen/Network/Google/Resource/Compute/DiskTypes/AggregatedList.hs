@@ -53,7 +53,7 @@ type DiskTypesAggregatedListResource =
                "diskTypes" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] DiskTypeAggregatedList
 
@@ -64,7 +64,7 @@ data DiskTypesAggregatedList = DiskTypesAggregatedList
     { _dtalProject    :: !Text
     , _dtalFilter     :: !(Maybe Text)
     , _dtalPageToken  :: !(Maybe Text)
-    , _dtalMaxResults :: !(JSONText Word32)
+    , _dtalMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesAggregatedList' with the minimum fields required to make a request.

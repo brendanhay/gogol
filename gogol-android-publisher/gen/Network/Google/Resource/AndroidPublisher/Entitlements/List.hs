@@ -52,9 +52,9 @@ type EntitlementsListResource =
            Capture "packageName" Text :>
              "entitlements" :>
                QueryParam "token" Text :>
-                 QueryParam "startIndex" (JSONText Word32) :>
+                 QueryParam "startIndex" (Textual Word32) :>
                    QueryParam "productId" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] EntitlementsListResponse
 
@@ -64,9 +64,9 @@ type EntitlementsListResource =
 data EntitlementsList = EntitlementsList
     { _elPackageName :: !Text
     , _elToken       :: !(Maybe Text)
-    , _elStartIndex  :: !(Maybe (JSONText Word32))
+    , _elStartIndex  :: !(Maybe (Textual Word32))
     , _elProductId   :: !(Maybe Text)
-    , _elMaxResults  :: !(Maybe (JSONText Word32))
+    , _elMaxResults  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsList' with the minimum fields required to make a request.

@@ -46,17 +46,17 @@ type UserRolesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "userRoles" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing user role.
 --
 -- /See:/ 'userRolesDelete' smart constructor.
 data UserRolesDelete = UserRolesDelete
-    { _urdProFileId :: !(JSONText Int64)
-    , _urdId        :: !(JSONText Int64)
+    { _urdProFileId :: !(Textual Int64)
+    , _urdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesDelete' with the minimum fields required to make a request.

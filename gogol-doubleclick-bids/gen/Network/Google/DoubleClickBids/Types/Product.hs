@@ -82,8 +82,8 @@ data QueryMetadata = QueryMetadata
     , _qmShareEmailAddress                     :: !(Maybe [Text])
     , _qmRunning                               :: !(Maybe Bool)
     , _qmDataRange                             :: !(Maybe QueryMetadataDataRange)
-    , _qmLatestReportRunTimeMs                 :: !(Maybe (JSONText Int64))
-    , _qmReportCount                           :: !(Maybe (JSONText Int32))
+    , _qmLatestReportRunTimeMs                 :: !(Maybe (Textual Int64))
+    , _qmReportCount                           :: !(Maybe (Textual Int32))
     , _qmTitle                                 :: !(Maybe Text)
     , _qmSendNotification                      :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -240,9 +240,9 @@ instance ToJSON QueryMetadata where
 --
 -- /See:/ 'runQueryRequest' smart constructor.
 data RunQueryRequest = RunQueryRequest
-    { _rqrReportDataEndTimeMs   :: !(Maybe (JSONText Int64))
+    { _rqrReportDataEndTimeMs   :: !(Maybe (Textual Int64))
     , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
-    , _rqrReportDataStartTimeMs :: !(Maybe (JSONText Int64))
+    , _rqrReportDataStartTimeMs :: !(Maybe (Textual Int64))
     , _rqrTimezoneCode          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -428,7 +428,7 @@ data DownloadLineItemsRequest = DownloadLineItemsRequest
     { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
     , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
     , _dlirFileSpec   :: !(Maybe DownloadLineItemsRequestFileSpec)
-    , _dlirFilterIds  :: !(Maybe [JSONText Int64])
+    , _dlirFilterIds  :: !(Maybe [Textual Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
@@ -589,9 +589,9 @@ instance ToJSON UploadLineItemsResponse where
 -- /See:/ 'reportMetadata' smart constructor.
 data ReportMetadata = ReportMetadata
     { _rmStatus                 :: !(Maybe ReportStatus)
-    , _rmReportDataEndTimeMs    :: !(Maybe (JSONText Int64))
+    , _rmReportDataEndTimeMs    :: !(Maybe (Textual Int64))
     , _rmGoogleCloudStoragePath :: !(Maybe Text)
-    , _rmReportDataStartTimeMs  :: !(Maybe (JSONText Int64))
+    , _rmReportDataStartTimeMs  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportMetadata' with the minimum fields required to make a request.
@@ -723,9 +723,9 @@ data RowStatus = RowStatus
     { _rsEntityName :: !(Maybe Text)
     , _rsChanged    :: !(Maybe Bool)
     , _rsPersisted  :: !(Maybe Bool)
-    , _rsRowNumber  :: !(Maybe (JSONText Int32))
+    , _rsRowNumber  :: !(Maybe (Textual Int32))
     , _rsErrors     :: !(Maybe [Text])
-    , _rsEntityId   :: !(Maybe (JSONText Int64))
+    , _rsEntityId   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RowStatus' with the minimum fields required to make a request.
@@ -815,8 +815,8 @@ instance ToJSON RowStatus where
 --
 -- /See:/ 'reportKey' smart constructor.
 data ReportKey = ReportKey
-    { _rkQueryId  :: !(Maybe (JSONText Int64))
-    , _rkReportId :: !(Maybe (JSONText Int64))
+    { _rkQueryId  :: !(Maybe (Textual Int64))
+    , _rkReportId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportKey' with the minimum fields required to make a request.
@@ -917,8 +917,8 @@ instance ToJSON UploadStatus where
 -- /See:/ 'querySchedule' smart constructor.
 data QuerySchedule = QuerySchedule
     { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
-    , _qsEndTimeMs           :: !(Maybe (JSONText Int64))
-    , _qsNextRunMinuteOfDay  :: !(Maybe (JSONText Int32))
+    , _qsEndTimeMs           :: !(Maybe (Textual Int64))
+    , _qsNextRunMinuteOfDay  :: !(Maybe (Textual Int32))
     , _qsNextRunTimezoneCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1031,7 +1031,7 @@ instance ToJSON DownloadLineItemsResponse where
 -- /See:/ 'reportStatus' smart constructor.
 data ReportStatus = ReportStatus
     { _rsState        :: !(Maybe ReportStatusState)
-    , _rsFinishTimeMs :: !(Maybe (JSONText Int64))
+    , _rsFinishTimeMs :: !(Maybe (Textual Int64))
     , _rsFormat       :: !(Maybe ReportStatusFormat)
     , _rsFailure      :: !(Maybe ReportFailure)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1099,13 +1099,13 @@ instance ToJSON ReportStatus where
 --
 -- /See:/ 'query' smart constructor.
 data Query = Query
-    { _qQueryId               :: !(Maybe (JSONText Int64))
-    , _qReportDataEndTimeMs   :: !(Maybe (JSONText Int64))
+    { _qQueryId               :: !(Maybe (Textual Int64))
+    , _qReportDataEndTimeMs   :: !(Maybe (Textual Int64))
     , _qSchedule              :: !(Maybe QuerySchedule)
     , _qKind                  :: !Text
     , _qParams                :: !(Maybe Parameters)
     , _qMetadata              :: !(Maybe QueryMetadata)
-    , _qReportDataStartTimeMs :: !(Maybe (JSONText Int64))
+    , _qReportDataStartTimeMs :: !(Maybe (Textual Int64))
     , _qTimezoneCode          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

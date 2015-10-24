@@ -54,7 +54,7 @@ type EventsUpdateResource =
            Capture "calendarId" Text :>
              "events" :>
                Capture "eventId" Text :>
-                 QueryParam "maxAttendees" (JSONText Int32) :>
+                 QueryParam "maxAttendees" (Textual Int32) :>
                    QueryParam "sendNotifications" Bool :>
                      QueryParam "supportsAttachments" Bool :>
                        QueryParam "alwaysIncludeEmail" Bool :>
@@ -67,7 +67,7 @@ type EventsUpdateResource =
 data EventsUpdate = EventsUpdate
     { _euCalendarId          :: !Text
     , _euPayload             :: !Event
-    , _euMaxAttendees        :: !(Maybe (JSONText Int32))
+    , _euMaxAttendees        :: !(Maybe (Textual Int32))
     , _euSendNotifications   :: !(Maybe Bool)
     , _euSupportsAttachments :: !(Maybe Bool)
     , _euAlwaysIncludeEmail  :: !(Maybe Bool)

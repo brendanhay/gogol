@@ -371,7 +371,7 @@ instance ToJSON PollingLocation where
 -- /See:/ 'geographicDivision' smart constructor.
 data GeographicDivision = GeographicDivision
     { _gdName          :: !(Maybe Text)
-    , _gdOfficeIndices :: !(Maybe [JSONText Word32])
+    , _gdOfficeIndices :: !(Maybe [Textual Word32])
     , _gdAlsoKnownAs   :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -448,7 +448,7 @@ data Candidate = Candidate
     , _cPhotoURL      :: !(Maybe Text)
     , _cChannels      :: !(Maybe [Channel])
     , _cCandidateURL  :: !(Maybe Text)
-    , _cOrderOnBallot :: !(Maybe (JSONText Int64))
+    , _cOrderOnBallot :: !(Maybe (Textual Int64))
     , _cName          :: !(Maybe Text)
     , _cParty         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -557,7 +557,7 @@ instance ToJSON Candidate where
 data Office = Office
     { _oDivisionId      :: !(Maybe Text)
     , _oRoles           :: !(Maybe [Text])
-    , _oOfficialIndices :: !(Maybe [JSONText Word32])
+    , _oOfficialIndices :: !(Maybe [Textual Word32])
     , _oSources         :: !(Maybe [Source])
     , _oName            :: !(Maybe Text)
     , _oLevels          :: !(Maybe [Text])
@@ -707,7 +707,7 @@ data Election = Election
     { _eOcdDivisionId :: !(Maybe Text)
     , _eElectionDay   :: !(Maybe Text)
     , _eName          :: !(Maybe Text)
-    , _eId            :: !(Maybe (JSONText Int64))
+    , _eId            :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Election' with the minimum fields required to make a request.
@@ -1131,13 +1131,13 @@ data Contest = Contest
     , _conReferendumURL              :: !(Maybe Text)
     , _conReferendumEffectOfAbstain  :: !(Maybe Text)
     , _conReferendumSubtitle         :: !(Maybe Text)
-    , _conNumberVotingFor            :: !(Maybe (JSONText Int64))
+    , _conNumberVotingFor            :: !(Maybe (Textual Int64))
     , _conOffice                     :: !(Maybe Text)
     , _conReferendumConStatement     :: !(Maybe Text)
     , _conSources                    :: !(Maybe [Source])
     , _conReferendumProStatement     :: !(Maybe Text)
     , _conReferendumBallotResponses  :: !(Maybe [Text])
-    , _conNumberElected              :: !(Maybe (JSONText Int64))
+    , _conNumberElected              :: !(Maybe (Textual Int64))
     , _conSpecial                    :: !(Maybe Text)
     , _conReferendumText             :: !(Maybe Text)
     , _conPrimaryParty               :: !(Maybe Text)
@@ -1149,7 +1149,7 @@ data Contest = Contest
     , _conLevel                      :: !(Maybe [Text])
     , _conCandidates                 :: !(Maybe [Candidate])
     , _conReferendumTitle            :: !(Maybe Text)
-    , _conBallotPlacement            :: !(Maybe (JSONText Int64))
+    , _conBallotPlacement            :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Contest' with the minimum fields required to make a request.

@@ -50,25 +50,25 @@ type FilesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "files" :>
                QueryParam "sortOrder" FilesListSortOrder :>
                  QueryParam "scope" FilesListScope :>
                    QueryParam "pageToken" Text :>
                      QueryParam "sortField" FilesListSortField :>
-                       QueryParam "maxResults" (JSONText Int32) :>
+                       QueryParam "maxResults" (Textual Int32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] FileList
 
 -- | Lists files for a user profile.
 --
 -- /See:/ 'filesList' smart constructor.
 data FilesList = FilesList
-    { _flProFileId  :: !(JSONText Int64)
+    { _flProFileId  :: !(Textual Int64)
     , _flSortOrder  :: !FilesListSortOrder
     , _flScope      :: !FilesListScope
     , _flPageToken  :: !(Maybe Text)
     , _flSortField  :: !FilesListSortField
-    , _flMaxResults :: !(Maybe (JSONText Int32))
+    , _flMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.

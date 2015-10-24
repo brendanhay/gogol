@@ -70,7 +70,7 @@ instance ToJSON JobReference where
 --
 -- /See:/ 'tableList' smart constructor.
 data TableList = TableList
-    { _tlTotalItems    :: !(Maybe (JSONText Int32))
+    { _tlTotalItems    :: !(Maybe (Textual Int32))
     , _tlEtag          :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
@@ -227,7 +227,7 @@ data TableDataList = TableDataList
     , _tdlKind      :: !Text
     , _tdlRows      :: !(Maybe [TableRow])
     , _tdlPageToken :: !(Maybe Text)
-    , _tdlTotalRows :: !(Maybe (JSONText Int64))
+    , _tdlTotalRows :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataList' with the minimum fields required to make a request.
@@ -515,7 +515,7 @@ instance ToJSON TableSchema where
 --
 -- /See:/ 'projectList' smart constructor.
 data ProjectList = ProjectList
-    { _plTotalItems    :: !(Maybe (JSONText Int32))
+    { _plTotalItems    :: !(Maybe (Textual Int32))
     , _plEtag          :: !(Maybe Text)
     , _plNextPageToken :: !(Maybe Text)
     , _plKind          :: !Text
@@ -596,11 +596,11 @@ instance ToJSON ProjectList where
 --
 -- /See:/ 'jobStatistics' smart constructor.
 data JobStatistics = JobStatistics
-    { _jsCreationTime        :: !(Maybe (JSONText Int64))
-    , _jsStartTime           :: !(Maybe (JSONText Int64))
+    { _jsCreationTime        :: !(Maybe (Textual Int64))
+    , _jsStartTime           :: !(Maybe (Textual Int64))
     , _jsLoad                :: !(Maybe JobStatistics3)
-    , _jsTotalBytesProcessed :: !(Maybe (JSONText Int64))
-    , _jsEndTime             :: !(Maybe (JSONText Int64))
+    , _jsTotalBytesProcessed :: !(Maybe (Textual Int64))
+    , _jsEndTime             :: !(Maybe (Textual Int64))
     , _jsQuery               :: !(Maybe JobStatistics2)
     , _jsExtract             :: !(Maybe JobStatistics4)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -707,17 +707,17 @@ instance ToJSON JobStatistics where
 --
 -- /See:/ 'dataSet' smart constructor.
 data DataSet = DataSet
-    { _dsCreationTime             :: !(Maybe (JSONText Int64))
+    { _dsCreationTime             :: !(Maybe (Textual Int64))
     , _dsAccess                   :: !(Maybe [DataSetAccessItem])
     , _dsEtag                     :: !(Maybe Text)
     , _dsLocation                 :: !(Maybe Text)
     , _dsFriendlyName             :: !(Maybe Text)
     , _dsKind                     :: !Text
-    , _dsLastModifiedTime         :: !(Maybe (JSONText Int64))
+    , _dsLastModifiedTime         :: !(Maybe (Textual Int64))
     , _dsDataSetReference         :: !(Maybe DataSetReference)
     , _dsSelfLink                 :: !(Maybe Text)
     , _dsId                       :: !(Maybe Text)
-    , _dsDefaultTableExpirationMs :: !(Maybe (JSONText Int64))
+    , _dsDefaultTableExpirationMs :: !(Maybe (Textual Int64))
     , _dsDescription              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -898,7 +898,7 @@ data ExternalDataConfiguration = ExternalDataConfiguration
     , _edcCompression         :: !(Maybe Text)
     , _edcSourceFormat        :: !(Maybe Text)
     , _edcSchema              :: !(Maybe TableSchema)
-    , _edcMaxBadRecords       :: !(Maybe (JSONText Int32))
+    , _edcMaxBadRecords       :: !(Maybe (Textual Int32))
     , _edcSourceURIs          :: !(Maybe [Text])
     , _edcCSVOptions          :: !(Maybe CSVOptions)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1167,10 +1167,10 @@ data GetQueryResultsResponse = GetQueryResultsResponse
     , _gqrrEtag                :: !(Maybe Text)
     , _gqrrKind                :: !Text
     , _gqrrSchema              :: !(Maybe TableSchema)
-    , _gqrrTotalBytesProcessed :: !(Maybe (JSONText Int64))
+    , _gqrrTotalBytesProcessed :: !(Maybe (Textual Int64))
     , _gqrrRows                :: !(Maybe [TableRow])
     , _gqrrPageToken           :: !(Maybe Text)
-    , _gqrrTotalRows           :: !(Maybe (JSONText Word64))
+    , _gqrrTotalRows           :: !(Maybe (Textual Word64))
     , _gqrrErrors              :: !(Maybe [ErrorProto])
     , _gqrrJobComplete         :: !(Maybe Bool)
     , _gqrrCacheHit            :: !(Maybe Bool)
@@ -1412,9 +1412,9 @@ data QueryRequest = QueryRequest
     , _qrPreserveNulls  :: !(Maybe Bool)
     , _qrKind           :: !Text
     , _qrQuery          :: !(Maybe Text)
-    , _qrTimeoutMs      :: !(Maybe (JSONText Word32))
+    , _qrTimeoutMs      :: !(Maybe (Textual Word32))
     , _qrDryRun         :: !(Maybe Bool)
-    , _qrMaxResults     :: !(Maybe (JSONText Word32))
+    , _qrMaxResults     :: !(Maybe (Textual Word32))
     , _qrDefaultDataSet :: !(Maybe DataSetReference)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1542,7 +1542,7 @@ instance ToJSON QueryRequest where
 --
 -- /See:/ 'jobStatistics4' smart constructor.
 newtype JobStatistics4 = JobStatistics4
-    { _jsDestinationURIFileCounts :: Maybe [JSONText Int64]
+    { _jsDestinationURIFileCounts :: Maybe [Textual Int64]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics4' with the minimum fields required to make a request.
@@ -1618,7 +1618,7 @@ instance ToJSON ProjectReference where
 --
 -- /See:/ 'jobConfigurationLoad' smart constructor.
 data JobConfigurationLoad = JobConfigurationLoad
-    { _jclSkipLeadingRows     :: !(Maybe (JSONText Int32))
+    { _jclSkipLeadingRows     :: !(Maybe (Textual Int32))
     , _jclProjectionFields    :: !(Maybe [Text])
     , _jclDestinationTable    :: !(Maybe TableReference)
     , _jclWriteDisPosition    :: !(Maybe Text)
@@ -1631,7 +1631,7 @@ data JobConfigurationLoad = JobConfigurationLoad
     , _jclSourceFormat        :: !(Maybe Text)
     , _jclSchema              :: !(Maybe TableSchema)
     , _jclQuote               :: !Text
-    , _jclMaxBadRecords       :: !(Maybe (JSONText Int32))
+    , _jclMaxBadRecords       :: !(Maybe (Textual Int32))
     , _jclSourceURIs          :: !(Maybe [Text])
     , _jclEncoding            :: !(Maybe Text)
     , _jclFieldDelimiter      :: !(Maybe Text)
@@ -2038,7 +2038,7 @@ data ProjectListProjectsItem = ProjectListProjectsItem
     , _plpiKind             :: !Text
     , _plpiProjectReference :: !(Maybe ProjectReference)
     , _plpiId               :: !(Maybe Text)
-    , _plpiNumericId        :: !(Maybe (JSONText Word64))
+    , _plpiNumericId        :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectListProjectsItem' with the minimum fields required to make a request.
@@ -2116,9 +2116,9 @@ instance ToJSON ProjectListProjectsItem where
 --
 -- /See:/ 'streamingbuffer' smart constructor.
 data Streamingbuffer = Streamingbuffer
-    { _sEstimatedBytes  :: !(Maybe (JSONText Word64))
-    , _sOldestEntryTime :: !(Maybe (JSONText Word64))
-    , _sEstimatedRows   :: !(Maybe (JSONText Word64))
+    { _sEstimatedBytes  :: !(Maybe (Textual Word64))
+    , _sOldestEntryTime :: !(Maybe (Textual Word64))
+    , _sEstimatedRows   :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Streamingbuffer' with the minimum fields required to make a request.
@@ -2640,7 +2640,7 @@ instance ToJSON JobConfigurationLink where
 -- /See:/ 'tableDataInsertAllResponseInsertErrorsItem' smart constructor.
 data TableDataInsertAllResponseInsertErrorsItem = TableDataInsertAllResponseInsertErrorsItem
     { _tdiarieiErrors :: !(Maybe [ErrorProto])
-    , _tdiarieiIndex  :: !(Maybe (JSONText Word32))
+    , _tdiarieiIndex  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataInsertAllResponseInsertErrorsItem' with the minimum fields required to make a request.
@@ -3355,10 +3355,10 @@ instance ToJSON UserDefinedFunctionResource where
 --
 -- /See:/ 'jobStatistics2' smart constructor.
 data JobStatistics2 = JobStatistics2
-    { _jTotalBytesProcessed :: !(Maybe (JSONText Int64))
-    , _jBillingTier         :: !(Maybe (JSONText Int32))
+    { _jTotalBytesProcessed :: !(Maybe (Textual Int64))
+    , _jBillingTier         :: !(Maybe (Textual Int32))
     , _jCacheHit            :: !(Maybe Bool)
-    , _jTotalBytesBilled    :: !(Maybe (JSONText Int64))
+    , _jTotalBytesBilled    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics2' with the minimum fields required to make a request.
@@ -3644,23 +3644,23 @@ instance ToJSON TableDataInsertAllResponse where
 --
 -- /See:/ 'table' smart constructor.
 data Table = Table
-    { _tabCreationTime              :: !(Maybe (JSONText Int64))
+    { _tabCreationTime              :: !(Maybe (Textual Int64))
     , _tabEtag                      :: !(Maybe Text)
-    , _tabNumBytes                  :: !(Maybe (JSONText Int64))
+    , _tabNumBytes                  :: !(Maybe (Textual Int64))
     , _tabExternalDataConfiguration :: !(Maybe ExternalDataConfiguration)
     , _tabLocation                  :: !(Maybe Text)
     , _tabTableReference            :: !(Maybe TableReference)
     , _tabFriendlyName              :: !(Maybe Text)
     , _tabKind                      :: !Text
-    , _tabLastModifiedTime          :: !(Maybe (JSONText Word64))
+    , _tabLastModifiedTime          :: !(Maybe (Textual Word64))
     , _tabSchema                    :: !(Maybe TableSchema)
     , _tabStreamingBuffer           :: !(Maybe Streamingbuffer)
     , _tabSelfLink                  :: !(Maybe Text)
-    , _tabNumRows                   :: !(Maybe (JSONText Word64))
+    , _tabNumRows                   :: !(Maybe (Textual Word64))
     , _tabView                      :: !(Maybe ViewDefinition)
     , _tabId                        :: !(Maybe Text)
     , _tabType                      :: !(Maybe Text)
-    , _tabExpirationTime            :: !(Maybe (JSONText Int64))
+    , _tabExpirationTime            :: !(Maybe (Textual Int64))
     , _tabDescription               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3955,7 +3955,7 @@ instance ToJSON ErrorProto where
 --
 -- /See:/ 'csvOptions' smart constructor.
 data CSVOptions = CSVOptions
-    { _coSkipLeadingRows     :: !(Maybe (JSONText Int32))
+    { _coSkipLeadingRows     :: !(Maybe (Textual Int32))
     , _coAllowJaggedRows     :: !(Maybe Bool)
     , _coAllowQuotedNewlines :: !(Maybe Bool)
     , _coQuote               :: !Text
@@ -4071,10 +4071,10 @@ instance ToJSON CSVOptions where
 --
 -- /See:/ 'jobStatistics3' smart constructor.
 data JobStatistics3 = JobStatistics3
-    { _jsInputFiles     :: !(Maybe (JSONText Int64))
-    , _jsOutputRows     :: !(Maybe (JSONText Int64))
-    , _jsOutputBytes    :: !(Maybe (JSONText Int64))
-    , _jsInputFileBytes :: !(Maybe (JSONText Int64))
+    { _jsInputFiles     :: !(Maybe (Textual Int64))
+    , _jsOutputRows     :: !(Maybe (Textual Int64))
+    , _jsOutputBytes    :: !(Maybe (Textual Int64))
+    , _jsInputFileBytes :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics3' with the minimum fields required to make a request.
@@ -4150,10 +4150,10 @@ data QueryResponse = QueryResponse
     { _qJobReference        :: !(Maybe JobReference)
     , _qKind                :: !Text
     , _qSchema              :: !(Maybe TableSchema)
-    , _qTotalBytesProcessed :: !(Maybe (JSONText Int64))
+    , _qTotalBytesProcessed :: !(Maybe (Textual Int64))
     , _qRows                :: !(Maybe [TableRow])
     , _qPageToken           :: !(Maybe Text)
-    , _qTotalRows           :: !(Maybe (JSONText Word64))
+    , _qTotalRows           :: !(Maybe (Textual Word64))
     , _qErrors              :: !(Maybe [ErrorProto])
     , _qJobComplete         :: !(Maybe Bool)
     , _qCacheHit            :: !(Maybe Bool)

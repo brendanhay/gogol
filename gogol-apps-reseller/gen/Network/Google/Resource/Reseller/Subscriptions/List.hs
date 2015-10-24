@@ -55,7 +55,7 @@ type SubscriptionsListResource =
                QueryParam "customerId" Text :>
                  QueryParam "customerAuthToken" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Subscriptions
 
 -- | Lists subscriptions of a reseller, optionally filtered by a customer
@@ -67,7 +67,7 @@ data SubscriptionsList = SubscriptionsList
     , _slCustomerId         :: !(Maybe Text)
     , _slCustomerAuthToken  :: !(Maybe Text)
     , _slPageToken          :: !(Maybe Text)
-    , _slMaxResults         :: !(Maybe (JSONText Word32))
+    , _slMaxResults         :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.

@@ -200,7 +200,7 @@ instance ToJSON OrganizationOwner where
 -- /See:/ 'project' smart constructor.
 data Project = Project
     { _pParent         :: !(Maybe ResourceId)
-    , _pProjectNumber  :: !(Maybe (JSONText Int64))
+    , _pProjectNumber  :: !(Maybe (Textual Int64))
     , _pName           :: !(Maybe Text)
     , _pLabels         :: !(Maybe ProjectLabels)
     , _pProjectId      :: !(Maybe Text)
@@ -469,8 +469,8 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy
-    { _pEtag     :: !(Maybe (JSONText Word8))
-    , _pVersion  :: !(Maybe (JSONText Int32))
+    { _pEtag     :: !(Maybe (Textual Word8))
+    , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
 

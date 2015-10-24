@@ -53,9 +53,9 @@ type LocationListResource =
              "workers" :>
                Capture "workerEmail" Text :>
                  "locations" :>
-                   QueryParam "startTimestampMs" (JSONText Word64) :>
+                   QueryParam "startTimestampMs" (Textual Word64) :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] LocationListResponse
 
@@ -64,10 +64,10 @@ type LocationListResource =
 -- /See:/ 'locationList' smart constructor.
 data LocationList = LocationList
     { _llWorkerEmail      :: !Text
-    , _llStartTimestampMs :: !(JSONText Word64)
+    , _llStartTimestampMs :: !(Textual Word64)
     , _llTeamId           :: !Text
     , _llPageToken        :: !(Maybe Text)
-    , _llMaxResults       :: !(Maybe (JSONText Word32))
+    , _llMaxResults       :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationList' with the minimum fields required to make a request.

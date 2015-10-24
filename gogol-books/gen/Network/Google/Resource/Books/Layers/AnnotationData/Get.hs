@@ -60,12 +60,12 @@ type LayersAnnotationDataGetResource =
                  "data" :>
                    Capture "annotationDataId" Text :>
                      QueryParam "contentVersion" Text :>
-                       QueryParam "w" (JSONText Int32) :>
-                         QueryParam "scale" (JSONText Int32) :>
+                       QueryParam "w" (Textual Int32) :>
+                         QueryParam "scale" (Textual Int32) :>
                            QueryParam "locale" Text :>
                              QueryParam "allowWebDefinitions" Bool :>
                                QueryParam "source" Text :>
-                                 QueryParam "h" (JSONText Int32) :>
+                                 QueryParam "h" (Textual Int32) :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] AnnotationData
 
@@ -73,15 +73,15 @@ type LayersAnnotationDataGetResource =
 --
 -- /See:/ 'layersAnnotationDataGet' smart constructor.
 data LayersAnnotationDataGet = LayersAnnotationDataGet
-    { _ladgW                   :: !(Maybe (JSONText Int32))
-    , _ladgScale               :: !(Maybe (JSONText Int32))
+    { _ladgW                   :: !(Maybe (Textual Int32))
+    , _ladgScale               :: !(Maybe (Textual Int32))
     , _ladgLocale              :: !(Maybe Text)
     , _ladgContentVersion      :: !Text
     , _ladgAllowWebDefinitions :: !(Maybe Bool)
     , _ladgAnnotationDataId    :: !Text
     , _ladgVolumeId            :: !Text
     , _ladgSource              :: !(Maybe Text)
-    , _ladgH                   :: !(Maybe (JSONText Int32))
+    , _ladgH                   :: !(Maybe (Textual Int32))
     , _ladgLayerId             :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

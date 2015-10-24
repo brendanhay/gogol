@@ -104,7 +104,7 @@ instance ToJSON ActivityObjectAttachmentsItemEmbed
 --
 -- /See:/ 'commentPlusoners' smart constructor.
 newtype CommentPlusoners = CommentPlusoners
-    { _cpTotalItems :: Maybe (JSONText Word32)
+    { _cpTotalItems :: Maybe (Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentPlusoners' with the minimum fields required to make a request.
@@ -224,7 +224,7 @@ instance ToJSON
 --
 -- /See:/ 'activityObjectPlusoners' smart constructor.
 data ActivityObjectPlusoners = ActivityObjectPlusoners
-    { _aopTotalItems :: !(Maybe (JSONText Word32))
+    { _aopTotalItems :: !(Maybe (Textual Word32))
     , _aopSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -354,9 +354,9 @@ instance ToJSON CommentActorImage where
 --
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItemImage' smart constructor.
 data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachmentsItemThumbnailsItemImage
-    { _aoaitiiHeight :: !(Maybe (JSONText Word32))
+    { _aoaitiiHeight :: !(Maybe (Textual Word32))
     , _aoaitiiURL    :: !(Maybe Text)
-    , _aoaitiiWidth  :: !(Maybe (JSONText Word32))
+    , _aoaitiiWidth  :: !(Maybe (Textual Word32))
     , _aoaitiiType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -432,8 +432,8 @@ instance ToJSON
 --
 -- /See:/ 'placePosition' smart constructor.
 data PlacePosition = PlacePosition
-    { _ppLatitude  :: !(Maybe (JSONText Double))
-    , _ppLongitude :: !(Maybe (JSONText Double))
+    { _ppLatitude  :: !(Maybe (Textual Double))
+    , _ppLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacePosition' with the minimum fields required to make a request.
@@ -575,7 +575,7 @@ data Person = Person
     , _pImage              :: !(Maybe PersonImage)
     , _pBraggingRights     :: !(Maybe Text)
     , _pPlacesLived        :: !(Maybe [PersonPlacesLivedItem])
-    , _pPlusOneCount       :: !(Maybe (JSONText Int32))
+    , _pPlusOneCount       :: !(Maybe (Textual Int32))
     , _pObjectType         :: !(Maybe Text)
     , _pCover              :: !(Maybe PersonCover)
     , _pKind               :: !Text
@@ -598,7 +598,7 @@ data Person = Person
     , _pId                 :: !(Maybe Text)
     , _pNickname           :: !(Maybe Text)
     , _pOrganizations      :: !(Maybe [PersonOrganizationsItem])
-    , _pCircledByCount     :: !(Maybe (JSONText Int32))
+    , _pCircledByCount     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Person' with the minimum fields required to make a request.
@@ -942,9 +942,9 @@ instance ToJSON Person where
 --
 -- /See:/ 'activityObjectAttachmentsItemImage' smart constructor.
 data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage
-    { _aoaiiHeight :: !(Maybe (JSONText Word32))
+    { _aoaiiHeight :: !(Maybe (Textual Word32))
     , _aoaiiURL    :: !(Maybe Text)
-    , _aoaiiWidth  :: !(Maybe (JSONText Word32))
+    , _aoaiiWidth  :: !(Maybe (Textual Word32))
     , _aoaiiType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1441,9 +1441,9 @@ instance ToJSON ActivityObjectActor where
 --
 -- /See:/ 'activityObjectAttachmentsItemFullImage' smart constructor.
 data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullImage
-    { _aoaifiHeight :: !(Maybe (JSONText Word32))
+    { _aoaifiHeight :: !(Maybe (Textual Word32))
     , _aoaifiURL    :: !(Maybe Text)
-    , _aoaifiWidth  :: !(Maybe (JSONText Word32))
+    , _aoaifiWidth  :: !(Maybe (Textual Word32))
     , _aoaifiType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1547,7 +1547,7 @@ instance ToJSON ActivityActorImage where
 --
 -- /See:/ 'peopleFeed' smart constructor.
 data PeopleFeed = PeopleFeed
-    { _pfTotalItems    :: !(Maybe (JSONText Int32))
+    { _pfTotalItems    :: !(Maybe (Textual Int32))
     , _pfEtag          :: !(Maybe Text)
     , _pfNextPageToken :: !(Maybe Text)
     , _pfKind          :: !Text
@@ -1655,9 +1655,9 @@ instance ToJSON PeopleFeed where
 --
 -- /See:/ 'personCoverCoverPhoto' smart constructor.
 data PersonCoverCoverPhoto = PersonCoverCoverPhoto
-    { _pccpHeight :: !(Maybe (JSONText Int32))
+    { _pccpHeight :: !(Maybe (Textual Int32))
     , _pccpURL    :: !(Maybe Text)
-    , _pccpWidth  :: !(Maybe (JSONText Int32))
+    , _pccpWidth  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PersonCoverCoverPhoto' with the minimum fields required to make a request.
@@ -1716,8 +1716,8 @@ instance ToJSON PersonCoverCoverPhoto where
 --
 -- /See:/ 'personAgeRange' smart constructor.
 data PersonAgeRange = PersonAgeRange
-    { _parMax :: !(Maybe (JSONText Int32))
-    , _parMin :: !(Maybe (JSONText Int32))
+    { _parMax :: !(Maybe (Textual Int32))
+    , _parMin :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PersonAgeRange' with the minimum fields required to make a request.
@@ -1843,7 +1843,7 @@ instance ToJSON
 --
 -- /See:/ 'activityObjectReplies' smart constructor.
 data ActivityObjectReplies = ActivityObjectReplies
-    { _aorTotalItems :: !(Maybe (JSONText Word32))
+    { _aorTotalItems :: !(Maybe (Textual Word32))
     , _aorSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1942,7 +1942,7 @@ data ItemScope = ItemScope
     , _isAttendees           :: !(Maybe [ItemScope])
     , _isText                :: !(Maybe Text)
     , _isKind                :: !Text
-    , _isLatitude            :: !(Maybe (JSONText Double))
+    , _isLatitude            :: !(Maybe (Textual Double))
     , _isPostalCode          :: !(Maybe Text)
     , _isEndDate             :: !(Maybe Text)
     , _isAssociatedMedia     :: !(Maybe [ItemScope])
@@ -1973,12 +1973,12 @@ data ItemScope = ItemScope
     , _isGeo                 :: !(Maybe ItemScope)
     , _isId                  :: !(Maybe Text)
     , _isPerformers          :: !(Maybe [ItemScope])
-    , _isAttendeeCount       :: !(Maybe (JSONText Int32))
+    , _isAttendeeCount       :: !(Maybe (Textual Int32))
     , _isInAlbum             :: !(Maybe ItemScope)
     , _isEmbedURL            :: !(Maybe Text)
     , _isType                :: !(Maybe Text)
     , _isContributor         :: !(Maybe [ItemScope])
-    , _isLongitude           :: !(Maybe (JSONText Double))
+    , _isLongitude           :: !(Maybe (Textual Double))
     , _isDuration            :: !(Maybe Text)
     , _isAddressRegion       :: !(Maybe Text)
     , _isAudio               :: !(Maybe ItemScope)
@@ -3816,8 +3816,8 @@ instance ToJSON PersonURLsItem where
 --
 -- /See:/ 'personCoverCoverInfo' smart constructor.
 data PersonCoverCoverInfo = PersonCoverCoverInfo
-    { _pcciTopImageOffSet  :: !(Maybe (JSONText Int32))
-    , _pcciLeftImageOffSet :: !(Maybe (JSONText Int32))
+    { _pcciTopImageOffSet  :: !(Maybe (Textual Int32))
+    , _pcciLeftImageOffSet :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PersonCoverCoverInfo' with the minimum fields required to make a request.
@@ -3870,7 +3870,7 @@ instance ToJSON PersonCoverCoverInfo where
 --
 -- /See:/ 'activityObjectResharers' smart constructor.
 data ActivityObjectResharers = ActivityObjectResharers
-    { _aTotalItems :: !(Maybe (JSONText Word32))
+    { _aTotalItems :: !(Maybe (Textual Word32))
     , _aSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

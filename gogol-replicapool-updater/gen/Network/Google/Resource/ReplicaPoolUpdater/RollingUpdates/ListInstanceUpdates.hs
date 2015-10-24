@@ -58,7 +58,7 @@ type RollingUpdatesListInstanceUpdatesResource =
                      "instanceUpdates" :>
                        QueryParam "filter" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceUpdateList
 
@@ -71,7 +71,7 @@ data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates
     , _ruliuZone          :: !Text
     , _ruliuFilter        :: !(Maybe Text)
     , _ruliuPageToken     :: !(Maybe Text)
-    , _ruliuMaxResults    :: !(JSONText Word32)
+    , _ruliuMaxResults    :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesListInstanceUpdates' with the minimum fields required to make a request.

@@ -52,8 +52,8 @@ type InAppProductsListResource =
            Capture "packageName" Text :>
              "inappproducts" :>
                QueryParam "token" Text :>
-                 QueryParam "startIndex" (JSONText Word32) :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "startIndex" (Textual Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] InAppProductsListResponse
 
@@ -64,8 +64,8 @@ type InAppProductsListResource =
 data InAppProductsList = InAppProductsList
     { _iaplPackageName :: !Text
     , _iaplToken       :: !(Maybe Text)
-    , _iaplStartIndex  :: !(Maybe (JSONText Word32))
-    , _iaplMaxResults  :: !(Maybe (JSONText Word32))
+    , _iaplStartIndex  :: !(Maybe (Textual Word32))
+    , _iaplMaxResults  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InAppProductsList' with the minimum fields required to make a request.

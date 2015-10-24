@@ -50,7 +50,7 @@ type RasterCollectionsParentsListResource =
            Capture "id" Text :>
              "parents" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ParentsListResponse
 
@@ -60,7 +60,7 @@ type RasterCollectionsParentsListResource =
 data RasterCollectionsParentsList = RasterCollectionsParentsList
     { _rcplcId         :: !Text
     , _rcplcPageToken  :: !(Maybe Text)
-    , _rcplcMaxResults :: !(Maybe (JSONText Word32))
+    , _rcplcMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsParentsList' with the minimum fields required to make a request.

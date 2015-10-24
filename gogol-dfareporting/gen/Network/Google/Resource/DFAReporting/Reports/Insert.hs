@@ -46,7 +46,7 @@ type ReportsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "reports" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Report :> Post '[JSON] Report
@@ -55,7 +55,7 @@ type ReportsInsertResource =
 --
 -- /See:/ 'reportsInsert' smart constructor.
 data ReportsInsert = ReportsInsert
-    { _riProFileId :: !(JSONText Int64)
+    { _riProFileId :: !(Textual Int64)
     , _riPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 

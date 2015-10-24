@@ -64,7 +64,7 @@ type TimeseriesListResource =
                Capture "metric" Text :>
                  QueryParam "youngest" Text :>
                    QueryParam "window" Text :>
-                     QueryParam "count" (JSONText Int32) :>
+                     QueryParam "count" (Textual Int32) :>
                        QueryParam "aggregator" TimeseriesListAggregator :>
                          QueryParam "timespan" Text :>
                            QueryParam "oldest" Text :>
@@ -84,7 +84,7 @@ type TimeseriesListResource =
 data TimeseriesList = TimeseriesList
     { _tlWindow     :: !(Maybe Text)
     , _tlProject    :: !Text
-    , _tlCount      :: !(JSONText Int32)
+    , _tlCount      :: !(Textual Int32)
     , _tlPayload    :: !ListTimeseriesRequest
     , _tlAggregator :: !(Maybe TimeseriesListAggregator)
     , _tlTimespan   :: !(Maybe Text)

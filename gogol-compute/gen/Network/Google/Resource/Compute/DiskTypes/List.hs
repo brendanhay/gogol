@@ -56,7 +56,7 @@ type DiskTypesListResource =
                  "diskTypes" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] DiskTypeList
 
 -- | Retrieves the list of disk type resources available to the specified
@@ -68,7 +68,7 @@ data DiskTypesList = DiskTypesList
     , _dtlZone       :: !Text
     , _dtlFilter     :: !(Maybe Text)
     , _dtlPageToken  :: !(Maybe Text)
-    , _dtlMaxResults :: !(JSONText Word32)
+    , _dtlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesList' with the minimum fields required to make a request.

@@ -50,7 +50,7 @@ type LeaderboardConfigurationsListResource =
            Capture "applicationId" Text :>
              "leaderboards" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Int32) :>
+                 QueryParam "maxResults" (Textual Int32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] LeaderboardConfigurationListResponse
 
@@ -60,7 +60,7 @@ type LeaderboardConfigurationsListResource =
 data LeaderboardConfigurationsList = LeaderboardConfigurationsList
     { _lclApplicationId :: !Text
     , _lclPageToken     :: !(Maybe Text)
-    , _lclMaxResults    :: !(Maybe (JSONText Int32))
+    , _lclMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsList' with the minimum fields required to make a request.

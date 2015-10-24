@@ -56,7 +56,7 @@ type PagesListResource =
                  QueryParam "fetchBodies" Bool :>
                    QueryParam "view" PagesListView :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] PageList
 
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
@@ -68,7 +68,7 @@ data PagesList = PagesList
     , _plFetchBodies :: !(Maybe Bool)
     , _plView        :: !(Maybe PagesListView)
     , _plPageToken   :: !(Maybe Text)
-    , _plMaxResults  :: !(Maybe (JSONText Word32))
+    , _plMaxResults  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesList' with the minimum fields required to make a request.

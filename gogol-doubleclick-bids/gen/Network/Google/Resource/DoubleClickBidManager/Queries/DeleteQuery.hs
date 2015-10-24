@@ -45,14 +45,14 @@ type QueriesDeleteQueryResource =
      "doubleclickbidmanager" :>
        "v1" :>
          "query" :>
-           Capture "queryId" (JSONText Int64) :>
+           Capture "queryId" (Textual Int64) :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a stored query as well as the associated stored reports.
 --
 -- /See:/ 'queriesDeleteQuery' smart constructor.
 newtype QueriesDeleteQuery = QueriesDeleteQuery
-    { _qdqQueryId :: JSONText Int64
+    { _qdqQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesDeleteQuery' with the minimum fields required to make a request.

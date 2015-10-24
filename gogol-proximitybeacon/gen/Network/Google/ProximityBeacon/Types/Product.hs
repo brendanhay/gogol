@@ -46,8 +46,8 @@ import           Network.Google.ProximityBeacon.Types.Sum
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng
-    { _llLatitude  :: !(Maybe (JSONText Double))
-    , _llLongitude :: !(Maybe (JSONText Double))
+    { _llLatitude  :: !(Maybe (Textual Double))
+    , _llLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
@@ -97,7 +97,7 @@ instance ToJSON LatLng where
 --
 -- /See:/ 'attachmentInfo' smart constructor.
 data AttachmentInfo = AttachmentInfo
-    { _aiData           :: !(Maybe (JSONText Word8))
+    { _aiData           :: !(Maybe (Textual Word8))
     , _aiNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -205,7 +205,7 @@ instance ToJSON Empty where
 --
 -- /See:/ 'deleteAttachmentsResponse' smart constructor.
 newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse
-    { _darNumDeleted :: Maybe (JSONText Int32)
+    { _darNumDeleted :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeleteAttachmentsResponse' with the minimum fields required to make a request.
@@ -404,9 +404,9 @@ instance ToJSON ListNamespacesResponse where
 --
 -- /See:/ 'date' smart constructor.
 data Date = Date
-    { _dDay   :: !(Maybe (JSONText Int32))
-    , _dYear  :: !(Maybe (JSONText Int32))
-    , _dMonth :: !(Maybe (JSONText Int32))
+    { _dDay   :: !(Maybe (Textual Int32))
+    , _dYear  :: !(Maybe (Textual Int32))
+    , _dMonth :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
@@ -820,7 +820,7 @@ instance ToJSON BeaconInfo where
 --
 -- /See:/ 'observation' smart constructor.
 data Observation = Observation
-    { _oTelemetry    :: !(Maybe (JSONText Word8))
+    { _oTelemetry    :: !(Maybe (Textual Word8))
     , _oTimestampMs  :: !(Maybe Text)
     , _oAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -883,7 +883,7 @@ instance ToJSON Observation where
 --
 -- /See:/ 'beaconAttachment' smart constructor.
 data BeaconAttachment = BeaconAttachment
-    { _baData           :: !(Maybe (JSONText Word8))
+    { _baData           :: !(Maybe (Textual Word8))
     , _baAttachmentName :: !(Maybe Text)
     , _baNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1006,7 +1006,7 @@ instance ToJSON ListDiagnosticsResponse where
 --
 -- /See:/ 'advertisedId' smart constructor.
 data AdvertisedId = AdvertisedId
-    { _aiId   :: !(Maybe (JSONText Word8))
+    { _aiId   :: !(Maybe (Textual Word8))
     , _aiType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1057,7 +1057,7 @@ instance ToJSON AdvertisedId where
 data ListBeaconsResponse = ListBeaconsResponse
     { _lbrNextPageToken :: !(Maybe Text)
     , _lbrBeacons       :: !(Maybe [Beacon])
-    , _lbrTotalCount    :: !(Maybe (JSONText Int64))
+    , _lbrTotalCount    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBeaconsResponse' with the minimum fields required to make a request.

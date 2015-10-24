@@ -57,17 +57,15 @@ type ObjectsPatchResource =
            Capture "bucket" Text :>
              "o" :>
                Capture "object" Text :>
-                 QueryParam "ifMetagenerationMatch" (JSONText Int64)
-                   :>
-                   QueryParam "ifGenerationNotMatch" (JSONText Int64) :>
-                     QueryParam "ifGenerationMatch" (JSONText Int64) :>
+                 QueryParam "ifMetagenerationMatch" (Textual Int64) :>
+                   QueryParam "ifGenerationNotMatch" (Textual Int64) :>
+                     QueryParam "ifGenerationMatch" (Textual Int64) :>
                        QueryParam "predefinedAcl" ObjectsPatchPredefinedACL
                          :>
-                         QueryParam "ifMetagenerationNotMatch"
-                           (JSONText Int64)
+                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                            :>
                            QueryParam "projection" ObjectsPatchProjection :>
-                             QueryParam "generation" (JSONText Int64) :>
+                             QueryParam "generation" (Textual Int64) :>
                                QueryParam "alt" AltJSON :>
                                  ReqBody '[JSON] Object :> Patch '[JSON] Object
 
@@ -75,16 +73,16 @@ type ObjectsPatchResource =
 --
 -- /See:/ 'objectsPatch' smart constructor.
 data ObjectsPatch = ObjectsPatch
-    { _opIfMetagenerationMatch    :: !(Maybe (JSONText Int64))
-    , _opIfGenerationNotMatch     :: !(Maybe (JSONText Int64))
-    , _opIfGenerationMatch        :: !(Maybe (JSONText Int64))
+    { _opIfMetagenerationMatch    :: !(Maybe (Textual Int64))
+    , _opIfGenerationNotMatch     :: !(Maybe (Textual Int64))
+    , _opIfGenerationMatch        :: !(Maybe (Textual Int64))
     , _opPredefinedACL            :: !(Maybe ObjectsPatchPredefinedACL)
     , _opBucket                   :: !Text
     , _opPayload                  :: !Object
-    , _opIfMetagenerationNotMatch :: !(Maybe (JSONText Int64))
+    , _opIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _opObject                   :: !Text
     , _opProjection               :: !(Maybe ObjectsPatchProjection)
-    , _opGeneration               :: !(Maybe (JSONText Int64))
+    , _opGeneration               :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsPatch' with the minimum fields required to make a request.

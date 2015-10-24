@@ -50,8 +50,8 @@ type ManagementWebPropertiesListResource =
            "accounts" :>
              Capture "accountId" Text :>
                "webproperties" :>
-                 QueryParam "start-index" (JSONText Int32) :>
-                   QueryParam "max-results" (JSONText Int32) :>
+                 QueryParam "start-index" (Textual Int32) :>
+                   QueryParam "max-results" (Textual Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] WebProperties
 
 -- | Lists web properties to which the user has access.
@@ -59,8 +59,8 @@ type ManagementWebPropertiesListResource =
 -- /See:/ 'managementWebPropertiesList' smart constructor.
 data ManagementWebPropertiesList = ManagementWebPropertiesList
     { _mwplAccountId  :: !Text
-    , _mwplStartIndex :: !(Maybe (JSONText Int32))
-    , _mwplMaxResults :: !(Maybe (JSONText Int32))
+    , _mwplStartIndex :: !(Maybe (Textual Int32))
+    , _mwplMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertiesList' with the minimum fields required to make a request.

@@ -51,16 +51,16 @@ type ContentCategoriesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" (JSONText Int64) :>
+                 QueryParams "ids" (Textual Int64) :>
                    QueryParam "sortOrder" ContentCategoriesListSortOrder
                      :>
                      QueryParam "pageToken" Text :>
                        QueryParam "sortField" ContentCategoriesListSortField
                          :>
-                         QueryParam "maxResults" (JSONText Int32) :>
+                         QueryParam "maxResults" (Textual Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ContentCategoriesListResponse
 
@@ -69,12 +69,12 @@ type ContentCategoriesListResource =
 -- /See:/ 'contentCategoriesList' smart constructor.
 data ContentCategoriesList = ContentCategoriesList
     { _cclSearchString :: !(Maybe Text)
-    , _cclIds          :: !(Maybe [JSONText Int64])
-    , _cclProFileId    :: !(JSONText Int64)
+    , _cclIds          :: !(Maybe [Textual Int64])
+    , _cclProFileId    :: !(Textual Int64)
     , _cclSortOrder    :: !(Maybe ContentCategoriesListSortOrder)
     , _cclPageToken    :: !(Maybe Text)
     , _cclSortField    :: !(Maybe ContentCategoriesListSortField)
-    , _cclMaxResults   :: !(Maybe (JSONText Int32))
+    , _cclMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesList' with the minimum fields required to make a request.

@@ -47,7 +47,7 @@ type SavedadstylesListResource =
        "v1.4" :>
          "savedadstyles" :>
            QueryParam "pageToken" Text :>
-             QueryParam "maxResults" (JSONText Int32) :>
+             QueryParam "maxResults" (Textual Int32) :>
                QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the user\'s account.
@@ -55,7 +55,7 @@ type SavedadstylesListResource =
 -- /See:/ 'savedadstylesList' smart constructor.
 data SavedadstylesList = SavedadstylesList
     { _slPageToken  :: !(Maybe Text)
-    , _slMaxResults :: !(Maybe (JSONText Int32))
+    , _slMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesList' with the minimum fields required to make a request.

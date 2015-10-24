@@ -45,14 +45,14 @@ type BillingInfoGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "billinginfo" :>
-           Capture "accountId" (JSONText Int32) :>
+           Capture "accountId" (Textual Int32) :>
              QueryParam "alt" AltJSON :> Get '[JSON] BillingInfo
 
 -- | Returns the billing information for one account specified by account ID.
 --
 -- /See:/ 'billingInfoGet' smart constructor.
 newtype BillingInfoGet = BillingInfoGet
-    { _bigAccountId :: JSONText Int32
+    { _bigAccountId :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfoGet' with the minimum fields required to make a request.

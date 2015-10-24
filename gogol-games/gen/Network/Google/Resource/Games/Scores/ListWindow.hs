@@ -59,9 +59,9 @@ type ScoresListWindowResource =
                  QueryParam "timeSpan" ScoresListWindowTimeSpan :>
                    QueryParam "returnTopIfAbsent" Bool :>
                      QueryParam "language" Text :>
-                       QueryParam "resultsAbove" (JSONText Int32) :>
+                       QueryParam "resultsAbove" (Textual Int32) :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (JSONText Int32) :>
+                           QueryParam "maxResults" (Textual Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] LeaderboardScores
 
@@ -75,9 +75,9 @@ data ScoresListWindow = ScoresListWindow
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
     , _slwLeaderboardId     :: !Text
     , _slwLanguage          :: !(Maybe Text)
-    , _slwResultsAbove      :: !(Maybe (JSONText Int32))
+    , _slwResultsAbove      :: !(Maybe (Textual Int32))
     , _slwPageToken         :: !(Maybe Text)
-    , _slwMaxResults        :: !(Maybe (JSONText Int32))
+    , _slwMaxResults        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresListWindow' with the minimum fields required to make a request.

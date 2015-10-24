@@ -45,7 +45,7 @@ type PlatformTypesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "platformTypes" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] PlatformTypesListResponse
@@ -54,7 +54,7 @@ type PlatformTypesListResource =
 --
 -- /See:/ 'platformTypesList' smart constructor.
 newtype PlatformTypesList = PlatformTypesList
-    { _ptlProFileId :: JSONText Int64
+    { _ptlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformTypesList' with the minimum fields required to make a request.

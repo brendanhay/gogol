@@ -56,7 +56,7 @@ type DisksListResource =
                  "disks" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] DiskList
 
 -- | Retrieves the list of persistent disks contained within the specified
@@ -68,7 +68,7 @@ data DisksList = DisksList
     , _dlZone       :: !Text
     , _dlFilter     :: !(Maybe Text)
     , _dlPageToken  :: !(Maybe Text)
-    , _dlMaxResults :: !(JSONText Word32)
+    , _dlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksList' with the minimum fields required to make a request.

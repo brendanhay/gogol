@@ -49,7 +49,7 @@ type StatesDeleteResource =
      "appstate" :>
        "v1" :>
          "states" :>
-           Capture "stateKey" (JSONText Int32) :>
+           Capture "stateKey" (Textual Int32) :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a key and the data associated with it. The key is removed and no
@@ -60,7 +60,7 @@ type StatesDeleteResource =
 --
 -- /See:/ 'statesDelete' smart constructor.
 newtype StatesDelete = StatesDelete
-    { _sdStateKey :: JSONText Int32
+    { _sdStateKey :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesDelete' with the minimum fields required to make a request.

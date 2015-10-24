@@ -46,9 +46,9 @@ type PlacementStrategiesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] PlacementStrategy
 
@@ -56,8 +56,8 @@ type PlacementStrategiesGetResource =
 --
 -- /See:/ 'placementStrategiesGet' smart constructor.
 data PlacementStrategiesGet = PlacementStrategiesGet
-    { _psgProFileId :: !(JSONText Int64)
-    , _psgId        :: !(JSONText Int64)
+    { _psgProFileId :: !(Textual Int64)
+    , _psgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesGet' with the minimum fields required to make a request.

@@ -46,7 +46,7 @@ type CreativesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creatives" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Creative :> Post '[JSON] Creative
@@ -55,7 +55,7 @@ type CreativesInsertResource =
 --
 -- /See:/ 'creativesInsert' smart constructor.
 data CreativesInsert = CreativesInsert
-    { _ciProFileId :: !(JSONText Int64)
+    { _ciProFileId :: !(Textual Int64)
     , _ciPayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 

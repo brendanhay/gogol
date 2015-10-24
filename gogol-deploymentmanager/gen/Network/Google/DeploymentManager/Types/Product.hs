@@ -254,24 +254,24 @@ instance ToJSON TypesListResponse where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oTargetId            :: !(Maybe (JSONText Word64))
+    { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (JSONText Int32))
+    , _oProgress            :: !(Maybe (Textual Int32))
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
     , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarningsItem])
-    , _oHTTPErrorStatusCode :: !(Maybe (JSONText Int32))
+    , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
     , _oStatusMessage       :: !(Maybe Text)
     , _oCreationTimestamp   :: !(Maybe Text)
     , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (JSONText Word64))
+    , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
@@ -742,7 +742,7 @@ data Manifest = Manifest
     , _mImports        :: !(Maybe [ImportFile])
     , _mSelfLink       :: !(Maybe Text)
     , _mName           :: !(Maybe Text)
-    , _mId             :: !(Maybe (JSONText Word64))
+    , _mId             :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Manifest' with the minimum fields required to make a request.
@@ -907,7 +907,7 @@ instance ToJSON ResourceUpdateWarningsItem where
 --
 -- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
 newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest
-    { _dcprFingerprint :: Maybe (JSONText Word8)
+    { _dcprFingerprint :: Maybe (Textual Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsCancelPreviewRequest' with the minimum fields required to make a request.
@@ -961,7 +961,7 @@ data Resource = Resource
     , _rName            :: !(Maybe Text)
     , _rManifest        :: !(Maybe Text)
     , _rFinalProperties :: !(Maybe Text)
-    , _rId              :: !(Maybe (JSONText Word64))
+    , _rId              :: !(Maybe (Textual Word64))
     , _rType            :: !(Maybe Text)
     , _rUpdate          :: !(Maybe ResourceUpdate)
     , _rProperties      :: !(Maybe Text)
@@ -1257,7 +1257,7 @@ data Type = Type
     { _tInsertTime :: !(Maybe Text)
     , _tSelfLink   :: !(Maybe Text)
     , _tName       :: !(Maybe Text)
-    , _tId         :: !(Maybe (JSONText Word64))
+    , _tId         :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
@@ -1424,7 +1424,7 @@ instance ToJSON OperationErrorErrorsItem where
 --
 -- /See:/ 'deploymentsStopRequest' smart constructor.
 newtype DeploymentsStopRequest = DeploymentsStopRequest
-    { _dsrFingerprint :: Maybe (JSONText Word8)
+    { _dsrFingerprint :: Maybe (Textual Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsStopRequest' with the minimum fields required to make a request.
@@ -1769,10 +1769,10 @@ instance ToJSON OperationWarningsItem where
 data Deployment = Deployment
     { _dInsertTime  :: !(Maybe Text)
     , _dOperation   :: !(Maybe Operation)
-    , _dFingerprint :: !(Maybe (JSONText Word8))
+    , _dFingerprint :: !(Maybe (Textual Word8))
     , _dName        :: !(Maybe Text)
     , _dManifest    :: !(Maybe Text)
-    , _dId          :: !(Maybe (JSONText Word64))
+    , _dId          :: !(Maybe (Textual Word64))
     , _dDescription :: !(Maybe Text)
     , _dUpdate      :: !(Maybe DeploymentUpdate)
     , _dTarget      :: !(Maybe TargetConfiguration)

@@ -25,7 +25,7 @@ import           Network.Google.Prelude
 -- /See:/ 'subscriptionTrialSettings' smart constructor.
 data SubscriptionTrialSettings = SubscriptionTrialSettings
     { _stsIsInTrial    :: !(Maybe Bool)
-    , _stsTrialEndTime :: !(Maybe (JSONText Int64))
+    , _stsTrialEndTime :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionTrialSettings' with the minimum fields required to make a request.
@@ -389,8 +389,8 @@ instance ToJSON ChangePlanRequest where
 --
 -- /See:/ 'subscriptionPlanCommitmentInterval' smart constructor.
 data SubscriptionPlanCommitmentInterval = SubscriptionPlanCommitmentInterval
-    { _spciStartTime :: !(Maybe (JSONText Int64))
-    , _spciEndTime   :: !(Maybe (JSONText Int64))
+    { _spciStartTime :: !(Maybe (Textual Int64))
+    , _spciEndTime   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPlanCommitmentInterval' with the minimum fields required to make a request.
@@ -565,9 +565,9 @@ instance ToJSON Subscriptions where
 --
 -- /See:/ 'seats' smart constructor.
 data Seats = Seats
-    { _seaNumberOfSeats         :: !(Maybe (JSONText Int32))
-    , _seaMaximumNumberOfSeats  :: !(Maybe (JSONText Int32))
-    , _seaLicensedNumberOfSeats :: !(Maybe (JSONText Int32))
+    { _seaNumberOfSeats         :: !(Maybe (Textual Int32))
+    , _seaMaximumNumberOfSeats  :: !(Maybe (Textual Int32))
+    , _seaLicensedNumberOfSeats :: !(Maybe (Textual Int32))
     , _seaKind                  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -695,7 +695,7 @@ instance ToJSON RenewalSettings where
 --
 -- /See:/ 'subscription' smart constructor.
 data Subscription = Subscription
-    { _subCreationTime      :: !(Maybe (JSONText Int64))
+    { _subCreationTime      :: !(Maybe (Textual Int64))
     , _subBillingMethod     :: !(Maybe Text)
     , _subStatus            :: !(Maybe Text)
     , _subTrialSettings     :: !(Maybe SubscriptionTrialSettings)
@@ -893,8 +893,8 @@ instance ToJSON Subscription where
 --
 -- /See:/ 'subscriptionTransferInfo' smart constructor.
 data SubscriptionTransferInfo = SubscriptionTransferInfo
-    { _stiTransferabilityExpirationTime :: !(Maybe (JSONText Int64))
-    , _stiMinimumTransferableSeats      :: !(Maybe (JSONText Int32))
+    { _stiTransferabilityExpirationTime :: !(Maybe (Textual Int64))
+    , _stiMinimumTransferableSeats      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionTransferInfo' with the minimum fields required to make a request.

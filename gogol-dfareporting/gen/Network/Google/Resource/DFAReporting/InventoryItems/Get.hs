@@ -47,20 +47,20 @@ type InventoryItemsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "projects" :>
-               Capture "projectId" (JSONText Int64) :>
+               Capture "projectId" (Textual Int64) :>
                  "inventoryItems" :>
-                   Capture "id" (JSONText Int64) :>
+                   Capture "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] InventoryItem
 
 -- | Gets one inventory item by ID.
 --
 -- /See:/ 'inventoryItemsGet' smart constructor.
 data InventoryItemsGet = InventoryItemsGet
-    { _iigProFileId :: !(JSONText Int64)
-    , _iigId        :: !(JSONText Int64)
-    , _iigProjectId :: !(JSONText Int64)
+    { _iigProFileId :: !(Textual Int64)
+    , _iigId        :: !(Textual Int64)
+    , _iigProjectId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsGet' with the minimum fields required to make a request.

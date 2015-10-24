@@ -54,7 +54,7 @@ type TargetHTTPProxiesListResource =
                "targetHttpProxies" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] TargetHTTPProxyList
 
@@ -66,7 +66,7 @@ data TargetHTTPProxiesList = TargetHTTPProxiesList
     { _thttpplProject    :: !Text
     , _thttpplFilter     :: !(Maybe Text)
     , _thttpplPageToken  :: !(Maybe Text)
-    , _thttpplMaxResults :: !(JSONText Word32)
+    , _thttpplMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesList' with the minimum fields required to make a request.

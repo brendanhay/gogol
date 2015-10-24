@@ -46,7 +46,7 @@ type AdvertisersInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertisers" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Advertiser :> Post '[JSON] Advertiser
@@ -55,7 +55,7 @@ type AdvertisersInsertResource =
 --
 -- /See:/ 'advertisersInsert' smart constructor.
 data AdvertisersInsert = AdvertisersInsert
-    { _aiiProFileId :: !(JSONText Int64)
+    { _aiiProFileId :: !(Textual Int64)
     , _aiiPayload   :: !Advertiser
     } deriving (Eq,Show,Data,Typeable,Generic)
 

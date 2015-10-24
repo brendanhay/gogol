@@ -61,7 +61,7 @@ type ReportTypesListResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (JSONText Int32) :>
+                         QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListReportTypesResponse
@@ -78,7 +78,7 @@ data ReportTypesList = ReportTypesList
     , _rtlOnBehalfOfContentOwner :: !(Maybe Text)
     , _rtlBearerToken            :: !(Maybe Text)
     , _rtlPageToken              :: !(Maybe Text)
-    , _rtlPageSize               :: !(Maybe (JSONText Int32))
+    , _rtlPageSize               :: !(Maybe (Textual Int32))
     , _rtlCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -48,9 +48,9 @@ type AccountUserProFilesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AccountUserProFile :>
                      Patch '[JSON] AccountUserProFile
@@ -60,9 +60,9 @@ type AccountUserProFilesPatchResource =
 --
 -- /See:/ 'accountUserProFilesPatch' smart constructor.
 data AccountUserProFilesPatch = AccountUserProFilesPatch
-    { _aupfpProFileId :: !(JSONText Int64)
+    { _aupfpProFileId :: !(Textual Int64)
     , _aupfpPayload   :: !AccountUserProFile
-    , _aupfpId        :: !(JSONText Int64)
+    , _aupfpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProFilesPatch' with the minimum fields required to make a request.

@@ -45,7 +45,7 @@ type ReportsListreportsResource =
      "doubleclickbidmanager" :>
        "v1" :>
          "queries" :>
-           Capture "queryId" (JSONText Int64) :>
+           Capture "queryId" (Textual Int64) :>
              "reports" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] ListReportsResponse
@@ -54,7 +54,7 @@ type ReportsListreportsResource =
 --
 -- /See:/ 'reportsListreports' smart constructor.
 newtype ReportsListreports = ReportsListreports
-    { _rlQueryId :: JSONText Int64
+    { _rlQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsListreports' with the minimum fields required to make a request.

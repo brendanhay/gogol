@@ -49,7 +49,7 @@ type MarketplaceOrdersPatchResource =
        "v1.4" :>
          "marketplaceOrders" :>
            Capture "orderId" Text :>
-             Capture "revisionNumber" (JSONText Int64) :>
+             Capture "revisionNumber" (Textual Int64) :>
                Capture "updateAction"
                  MarketplaceOrdersPatchUpdateAction
                  :>
@@ -62,7 +62,7 @@ type MarketplaceOrdersPatchResource =
 -- /See:/ 'marketplaceOrdersPatch' smart constructor.
 data MarketplaceOrdersPatch = MarketplaceOrdersPatch
     { _mopUpdateAction   :: !MarketplaceOrdersPatchUpdateAction
-    , _mopRevisionNumber :: !(JSONText Int64)
+    , _mopRevisionNumber :: !(Textual Int64)
     , _mopPayload        :: !MarketplaceOrder
     , _mopOrderId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

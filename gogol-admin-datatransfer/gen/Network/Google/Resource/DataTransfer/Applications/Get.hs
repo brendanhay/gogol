@@ -46,14 +46,14 @@ type ApplicationsGetResource =
        "datatransfer" :>
          "v1" :>
            "applications" :>
-             Capture "applicationId" (JSONText Int64) :>
+             Capture "applicationId" (Textual Int64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Retrieves information about an application for the given application ID.
 --
 -- /See:/ 'applicationsGet' smart constructor.
 newtype ApplicationsGet = ApplicationsGet
-    { _agApplicationId :: JSONText Int64
+    { _agApplicationId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.

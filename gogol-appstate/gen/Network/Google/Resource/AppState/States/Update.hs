@@ -49,7 +49,7 @@ type StatesUpdateResource =
      "appstate" :>
        "v1" :>
          "states" :>
-           Capture "stateKey" (JSONText Int32) :>
+           Capture "stateKey" (Textual Int32) :>
              QueryParam "currentStateVersion" Text :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] UpdateRequest :>
@@ -62,7 +62,7 @@ type StatesUpdateResource =
 -- /See:/ 'statesUpdate' smart constructor.
 data StatesUpdate = StatesUpdate
     { _suCurrentStateVersion :: !(Maybe Text)
-    , _suStateKey            :: !(JSONText Int32)
+    , _suStateKey            :: !(Textual Int32)
     , _suPayload             :: !UpdateRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 

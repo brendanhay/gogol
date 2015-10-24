@@ -81,7 +81,7 @@ instance ToJSON UserSettings where
 --
 -- /See:/ 'annotations' smart constructor.
 data Annotations = Annotations
-    { _aTotalItems    :: !(Maybe (JSONText Int32))
+    { _aTotalItems    :: !(Maybe (Textual Int32))
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
     , _aItems         :: !(Maybe [Annotation])
@@ -152,7 +152,7 @@ instance ToJSON Annotations where
 --
 -- /See:/ 'annotationsData' smart constructor.
 data AnnotationsData = AnnotationsData
-    { _adTotalItems    :: !(Maybe (JSONText Int32))
+    { _adTotalItems    :: !(Maybe (Textual Int32))
     , _adNextPageToken :: !(Maybe Text)
     , _adKind          :: !Text
     , _adItems         :: !(Maybe [AnnotationData])
@@ -261,7 +261,7 @@ instance ToJSON
 --
 -- /See:/ 'volumeannotations' smart constructor.
 data Volumeannotations = Volumeannotations
-    { _vTotalItems    :: !(Maybe (JSONText Int32))
+    { _vTotalItems    :: !(Maybe (Textual Int32))
     , _vNextPageToken :: !(Maybe Text)
     , _vKind          :: !Text
     , _vItems         :: !(Maybe [Volumeannotation])
@@ -404,7 +404,7 @@ instance ToJSON ReviewSource where
 --
 -- /See:/ 'annotationData' smart constructor.
 data AnnotationData = AnnotationData
-    { _annEncodedData    :: !(Maybe (JSONText Word8))
+    { _annEncodedData    :: !(Maybe (Textual Word8))
     , _annKind           :: !Text
     , _annData           :: !(Maybe JSONValue)
     , _annSelfLink       :: !(Maybe Text)
@@ -1078,8 +1078,8 @@ data VolumeUserInfo = VolumeUserInfo
     { _vuiCopy                   :: !(Maybe VolumeUserInfoCopy)
     , _vuiUserUploadedVolumeInfo :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
     , _vuiIsPurchased            :: !(Maybe Bool)
-    , _vuiEntitlementType        :: !(Maybe (JSONText Int32))
-    , _vuiAcquisitionType        :: !(Maybe (JSONText Int32))
+    , _vuiEntitlementType        :: !(Maybe (Textual Int32))
+    , _vuiAcquisitionType        :: !(Maybe (Textual Int32))
     , _vuiRentalState            :: !(Maybe Text)
     , _vuiIsPreOrdered           :: !(Maybe Bool)
     , _vuiReview                 :: !(Maybe Review)
@@ -1262,10 +1262,10 @@ data Layersummary = Layersummary
     { _lAnnotationsDataLink      :: !(Maybe Text)
     , _lAnnotationsLink          :: !(Maybe Text)
     , _lKind                     :: !Text
-    , _lDataCount                :: !(Maybe (JSONText Int32))
+    , _lDataCount                :: !(Maybe (Textual Int32))
     , _lContentVersion           :: !(Maybe Text)
     , _lVolumeAnnotationsVersion :: !(Maybe Text)
-    , _lAnnotationCount          :: !(Maybe (JSONText Int32))
+    , _lAnnotationCount          :: !(Maybe (Textual Int32))
     , _lAnnotationTypes          :: !(Maybe [Text])
     , _lSelfLink                 :: !(Maybe Text)
     , _lVolumeId                 :: !(Maybe Text)
@@ -1858,9 +1858,9 @@ instance ToJSON VolumeUserInfoUserUploadedVolumeInfo
 -- /See:/ 'volumeUserInfoCopy' smart constructor.
 data VolumeUserInfoCopy = VolumeUserInfoCopy
     { _vuicLimitType               :: !(Maybe Text)
-    , _vuicAllowedCharacterCount   :: !(Maybe (JSONText Int32))
+    , _vuicAllowedCharacterCount   :: !(Maybe (Textual Int32))
     , _vuicUpdated                 :: !(Maybe DateTime')
-    , _vuicRemainingCharacterCount :: !(Maybe (JSONText Int32))
+    , _vuicRemainingCharacterCount :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeUserInfoCopy' with the minimum fields required to make a request.
@@ -1973,9 +1973,9 @@ data Bookshelf = Bookshelf
     , _bVolumesLastUpdated :: !(Maybe DateTime')
     , _bKind               :: !Text
     , _bCreated            :: !(Maybe DateTime')
-    , _bVolumeCount        :: !(Maybe (JSONText Int32))
+    , _bVolumeCount        :: !(Maybe (Textual Int32))
     , _bSelfLink           :: !(Maybe Text)
-    , _bId                 :: !(Maybe (JSONText Int32))
+    , _bId                 :: !(Maybe (Textual Int32))
     , _bUpdated            :: !(Maybe DateTime')
     , _bTitle              :: !(Maybe Text)
     , _bDescription        :: !(Maybe Text)
@@ -2178,10 +2178,10 @@ instance ToJSON Notification where
 -- /See:/ 'annotationsSummaryLayersItem' smart constructor.
 data AnnotationsSummaryLayersItem = AnnotationsSummaryLayersItem
     { _asliLimitType               :: !(Maybe Text)
-    , _asliAllowedCharacterCount   :: !(Maybe (JSONText Int32))
+    , _asliAllowedCharacterCount   :: !(Maybe (Textual Int32))
     , _asliUpdated                 :: !(Maybe DateTime')
     , _asliLayerId                 :: !(Maybe Text)
-    , _asliRemainingCharacterCount :: !(Maybe (JSONText Int32))
+    , _asliRemainingCharacterCount :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsSummaryLayersItem' with the minimum fields required to make a request.
@@ -2261,7 +2261,7 @@ instance ToJSON AnnotationsSummaryLayersItem where
 --
 -- /See:/ 'volumeSaleInfoOffersItemRentalDuration' smart constructor.
 data VolumeSaleInfoOffersItemRentalDuration = VolumeSaleInfoOffersItemRentalDuration
-    { _vsioirdCount :: !(Maybe (JSONText Double))
+    { _vsioirdCount :: !(Maybe (Textual Double))
     , _vsioirdUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2421,8 +2421,8 @@ instance ToJSON OffersItemsItem where
 -- /See:/ 'annotationLayerSummary' smart constructor.
 data AnnotationLayerSummary = AnnotationLayerSummary
     { _alsLimitType               :: !(Maybe Text)
-    , _alsAllowedCharacterCount   :: !(Maybe (JSONText Int32))
-    , _alsRemainingCharacterCount :: !(Maybe (JSONText Int32))
+    , _alsAllowedCharacterCount   :: !(Maybe (Textual Int32))
+    , _alsRemainingCharacterCount :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationLayerSummary' with the minimum fields required to make a request.
@@ -2859,8 +2859,8 @@ instance ToJSON Volume where
 --
 -- /See:/ 'geolayerDataGeoBoundaryItemItem' smart constructor.
 data GeolayerDataGeoBoundaryItemItem = GeolayerDataGeoBoundaryItemItem
-    { _gdgbiiLatitude  :: !(Maybe (JSONText Word32))
-    , _gdgbiiLongitude :: !(Maybe (JSONText Word32))
+    { _gdgbiiLatitude  :: !(Maybe (Textual Word32))
+    , _gdgbiiLongitude :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeolayerDataGeoBoundaryItemItem' with the minimum fields required to make a request.
@@ -3132,10 +3132,10 @@ data GeolayerDataGeo = GeolayerDataGeo
     , _gdgCachePolicy :: !(Maybe Text)
     , _gdgViewport    :: !(Maybe GeolayerDataGeoViewport)
     , _gdgBoundary    :: !(Maybe [[GeolayerDataGeoBoundaryItemItem]])
-    , _gdgLatitude    :: !(Maybe (JSONText Double))
-    , _gdgZoom        :: !(Maybe (JSONText Int32))
+    , _gdgLatitude    :: !(Maybe (Textual Double))
+    , _gdgZoom        :: !(Maybe (Textual Int32))
     , _gdgCountryCode :: !(Maybe Text)
-    , _gdgLongitude   :: !(Maybe (JSONText Double))
+    , _gdgLongitude   :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeolayerDataGeo' with the minimum fields required to make a request.
@@ -3822,8 +3822,8 @@ instance ToJSON
 --
 -- /See:/ 'geolayerDataGeoViewportLo' smart constructor.
 data GeolayerDataGeoViewportLo = GeolayerDataGeoViewportLo
-    { _gdgvlLatitude  :: !(Maybe (JSONText Double))
-    , _gdgvlLongitude :: !(Maybe (JSONText Double))
+    { _gdgvlLatitude  :: !(Maybe (Textual Double))
+    , _gdgvlLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeolayerDataGeoViewportLo' with the minimum fields required to make a request.
@@ -3872,7 +3872,7 @@ instance ToJSON GeolayerDataGeoViewportLo where
 -- /See:/ 'volumeSaleInfoOffersItemListPrice' smart constructor.
 data VolumeSaleInfoOffersItemListPrice = VolumeSaleInfoOffersItemListPrice
     { _vsioilpCurrencyCode   :: !(Maybe Text)
-    , _vsioilpAmountInMicros :: !(Maybe (JSONText Double))
+    , _vsioilpAmountInMicros :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeSaleInfoOffersItemListPrice' with the minimum fields required to make a request.
@@ -3923,8 +3923,8 @@ data DownloadAccessRestriction = DownloadAccessRestriction
     { _darJustAcquired       :: !(Maybe Bool)
     , _darSignature          :: !(Maybe Text)
     , _darKind               :: !Text
-    , _darMaxDownloadDevices :: !(Maybe (JSONText Int32))
-    , _darDownloadsAcquired  :: !(Maybe (JSONText Int32))
+    , _darMaxDownloadDevices :: !(Maybe (Textual Int32))
+    , _darDownloadsAcquired  :: !(Maybe (Textual Int32))
     , _darReasonCode         :: !(Maybe Text)
     , _darVolumeId           :: !(Maybe Text)
     , _darRestricted         :: !(Maybe Bool)
@@ -4123,7 +4123,7 @@ instance ToJSON DictlayerDataCommon where
 data DiscoveryclustersClustersItem = DiscoveryclustersClustersItem
     { _dciBannerWithContentContainer :: !(Maybe DiscoveryclustersClustersItemBanner_with_content_container)
     , _dciUid                        :: !(Maybe Text)
-    , _dciTotalVolumes               :: !(Maybe (JSONText Int32))
+    , _dciTotalVolumes               :: !(Maybe (Textual Int32))
     , _dciSubTitle                   :: !(Maybe Text)
     , _dciTitle                      :: !(Maybe Text)
     , _dciVolumes                    :: !(Maybe [Volume])
@@ -4213,7 +4213,7 @@ instance ToJSON DiscoveryclustersClustersItem where
 --
 -- /See:/ 'volumeSaleInfoRetailPrice' smart constructor.
 data VolumeSaleInfoRetailPrice = VolumeSaleInfoRetailPrice
-    { _vsirpAmount       :: !(Maybe (JSONText Double))
+    { _vsirpAmount       :: !(Maybe (Textual Double))
     , _vsirpCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4262,7 +4262,7 @@ instance ToJSON VolumeSaleInfoRetailPrice where
 --
 -- /See:/ 'volumeSaleInfoListPrice' smart constructor.
 data VolumeSaleInfoListPrice = VolumeSaleInfoListPrice
-    { _vsilpAmount       :: !(Maybe (JSONText Double))
+    { _vsilpAmount       :: !(Maybe (Textual Double))
     , _vsilpCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4549,8 +4549,8 @@ instance ToJSON Review where
 --
 -- /See:/ 'volumeUserInfoRentalPeriod' smart constructor.
 data VolumeUserInfoRentalPeriod = VolumeUserInfoRentalPeriod
-    { _vuirpEndUtcSec   :: !(Maybe (JSONText Int64))
-    , _vuirpStartUtcSec :: !(Maybe (JSONText Int64))
+    { _vuirpEndUtcSec   :: !(Maybe (Textual Int64))
+    , _vuirpStartUtcSec :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeUserInfoRentalPeriod' with the minimum fields required to make a request.
@@ -5483,7 +5483,7 @@ instance ToJSON ReadingPosition where
 --
 -- /See:/ 'volumeSaleInfoOffersItem' smart constructor.
 data VolumeSaleInfoOffersItem = VolumeSaleInfoOffersItem
-    { _vsioiFinskyOfferType :: !(Maybe (JSONText Int32))
+    { _vsioiFinskyOfferType :: !(Maybe (Textual Int32))
     , _vsioiRentalDuration  :: !(Maybe VolumeSaleInfoOffersItemRentalDuration)
     , _vsioiListPrice       :: !(Maybe VolumeSaleInfoOffersItemListPrice)
     , _vsioiRetailPrice     :: !(Maybe VolumeSaleInfoOffersItemRetailPrice)
@@ -5809,7 +5809,7 @@ instance ToJSON Offers where
 -- /See:/ 'discoveryclusters' smart constructor.
 data Discoveryclusters = Discoveryclusters
     { _dKind          :: !Text
-    , _dTotalClusters :: !(Maybe (JSONText Int32))
+    , _dTotalClusters :: !(Maybe (Textual Int32))
     , _dClusters      :: !(Maybe [DiscoveryclustersClustersItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5914,9 +5914,9 @@ instance ToJSON UserSettingsNotesExport where
 --
 -- /See:/ 'concurrentAccessRestriction' smart constructor.
 data ConcurrentAccessRestriction = ConcurrentAccessRestriction
-    { _carMaxConcurrentDevices :: !(Maybe (JSONText Int32))
+    { _carMaxConcurrentDevices :: !(Maybe (Textual Int32))
     , _carSignature            :: !(Maybe Text)
-    , _carTimeWindowSeconds    :: !(Maybe (JSONText Int32))
+    , _carTimeWindowSeconds    :: !(Maybe (Textual Int32))
     , _carKind                 :: !Text
     , _carReasonCode           :: !(Maybe Text)
     , _carVolumeId             :: !(Maybe Text)
@@ -6070,7 +6070,7 @@ instance ToJSON ConcurrentAccessRestriction where
 --
 -- /See:/ 'volumes' smart constructor.
 data Volumes = Volumes
-    { _v1TotalItems :: !(Maybe (JSONText Int32))
+    { _v1TotalItems :: !(Maybe (Textual Int32))
     , _v1Kind       :: !Text
     , _v1Items      :: !(Maybe [Volume])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6271,8 +6271,8 @@ instance ToJSON DownloadAccesses where
 --
 -- /See:/ 'geolayerDataGeoViewportHi' smart constructor.
 data GeolayerDataGeoViewportHi = GeolayerDataGeoViewportHi
-    { _gdgvhLatitude  :: !(Maybe (JSONText Double))
-    , _gdgvhLongitude :: !(Maybe (JSONText Double))
+    { _gdgvhLatitude  :: !(Maybe (Textual Double))
+    , _gdgvhLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeolayerDataGeoViewportHi' with the minimum fields required to make a request.
@@ -6321,15 +6321,15 @@ instance ToJSON GeolayerDataGeoViewportHi where
 -- /See:/ 'volumeVolumeInfo' smart constructor.
 data VolumeVolumeInfo = VolumeVolumeInfo
     { _vviImageLinks          :: !(Maybe VolumeVolumeInfoImageLinks)
-    , _vviAverageRating       :: !(Maybe (JSONText Double))
-    , _vviRatingsCount        :: !(Maybe (JSONText Int32))
+    , _vviAverageRating       :: !(Maybe (Textual Double))
+    , _vviRatingsCount        :: !(Maybe (Textual Int32))
     , _vviCanonicalVolumeLink :: !(Maybe Text)
     , _vviReadingModes        :: !(Maybe JSONValue)
     , _vviIndustryIdentifiers :: !(Maybe [VolumeVolumeInfoIndustryIdentifiersItem])
-    , _vviPrintedPageCount    :: !(Maybe (JSONText Int32))
+    , _vviPrintedPageCount    :: !(Maybe (Textual Int32))
     , _vviMainCategory        :: !(Maybe Text)
     , _vviContentVersion      :: !(Maybe Text)
-    , _vviSamplePageCount     :: !(Maybe (JSONText Int32))
+    , _vviSamplePageCount     :: !(Maybe (Textual Int32))
     , _vviCategories          :: !(Maybe [Text])
     , _vviAuthors             :: !(Maybe [Text])
     , _vviAllowAnonLogging    :: !(Maybe Bool)
@@ -6339,7 +6339,7 @@ data VolumeVolumeInfo = VolumeVolumeInfo
     , _vviPreviewLink         :: !(Maybe Text)
     , _vviLanguage            :: !(Maybe Text)
     , _vviTitle               :: !(Maybe Text)
-    , _vviPageCount           :: !(Maybe (JSONText Int32))
+    , _vviPageCount           :: !(Maybe (Textual Int32))
     , _vviDimensions          :: !(Maybe VolumeVolumeInfoDimensions)
     , _vviInfoLink            :: !(Maybe Text)
     , _vviPublisher           :: !(Maybe Text)
@@ -6656,8 +6656,8 @@ instance ToJSON VolumeVolumeInfo where
 --
 -- /See:/ 'metadataItemsItem' smart constructor.
 data MetadataItemsItem = MetadataItemsItem
-    { _miiSize         :: !(Maybe (JSONText Int64))
-    , _miiVersion      :: !(Maybe (JSONText Int64))
+    { _miiSize         :: !(Maybe (Textual Int64))
+    , _miiVersion      :: !(Maybe (Textual Int64))
     , _miiLanguage     :: !(Maybe Text)
     , _miiDownloadURL  :: !(Maybe Text)
     , _miiEncryptedKey :: !(Maybe Text)
@@ -6784,7 +6784,7 @@ instance ToJSON
 -- /See:/ 'volumeSaleInfoOffersItemRetailPrice' smart constructor.
 data VolumeSaleInfoOffersItemRetailPrice = VolumeSaleInfoOffersItemRetailPrice
     { _vsioirpCurrencyCode   :: !(Maybe Text)
-    , _vsioirpAmountInMicros :: !(Maybe (JSONText Double))
+    , _vsioirpAmountInMicros :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeSaleInfoOffersItemRetailPrice' with the minimum fields required to make a request.
@@ -6953,7 +6953,7 @@ instance ToJSON BooksAnnotationsRange where
 --
 -- /See:/ 'layersummaries' smart constructor.
 data Layersummaries = Layersummaries
-    { _layTotalItems :: !(Maybe (JSONText Int32))
+    { _layTotalItems :: !(Maybe (Textual Int32))
     , _layKind       :: !Text
     , _layItems      :: !(Maybe [Layersummary])
     } deriving (Eq,Show,Data,Typeable,Generic)

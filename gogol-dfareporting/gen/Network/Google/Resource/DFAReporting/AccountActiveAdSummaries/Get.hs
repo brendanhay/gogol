@@ -46,9 +46,9 @@ type AccountActiveAdSummariesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accountActiveAdSummaries" :>
-               Capture "summaryAccountId" (JSONText Int64) :>
+               Capture "summaryAccountId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountActiveAdSummary
 
@@ -56,8 +56,8 @@ type AccountActiveAdSummariesGetResource =
 --
 -- /See:/ 'accountActiveAdSummariesGet' smart constructor.
 data AccountActiveAdSummariesGet = AccountActiveAdSummariesGet
-    { _aaasgProFileId        :: !(JSONText Int64)
-    , _aaasgSummaryAccountId :: !(JSONText Int64)
+    { _aaasgProFileId        :: !(Textual Int64)
+    , _aaasgSummaryAccountId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountActiveAdSummariesGet' with the minimum fields required to make a request.

@@ -52,7 +52,7 @@ type LinksGetResource =
          Capture "role" LinksGetRole :>
            Capture "roleId" Text :>
              "link" :>
-               Capture "linkId" (JSONText Int64) :>
+               Capture "linkId" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Link
 
 -- | Retrieves data about a single link if the requesting
@@ -64,7 +64,7 @@ type LinksGetResource =
 data LinksGet = LinksGet
     { _lgRoleId :: !Text
     , _lgRole   :: !LinksGetRole
-    , _lgLinkId :: !(JSONText Int64)
+    , _lgLinkId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksGet' with the minimum fields required to make a request.

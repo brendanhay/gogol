@@ -51,10 +51,10 @@ type PlacementStrategiesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" (JSONText Int64) :>
+                 QueryParams "ids" (Textual Int64) :>
                    QueryParam "sortOrder"
                      PlacementStrategiesListSortOrder
                      :>
@@ -62,7 +62,7 @@ type PlacementStrategiesListResource =
                        QueryParam "sortField"
                          PlacementStrategiesListSortField
                          :>
-                         QueryParam "maxResults" (JSONText Int32) :>
+                         QueryParam "maxResults" (Textual Int32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] PlacementStrategiesListResponse
 
@@ -71,12 +71,12 @@ type PlacementStrategiesListResource =
 -- /See:/ 'placementStrategiesList' smart constructor.
 data PlacementStrategiesList = PlacementStrategiesList
     { _pslSearchString :: !(Maybe Text)
-    , _pslIds          :: !(Maybe [JSONText Int64])
-    , _pslProFileId    :: !(JSONText Int64)
+    , _pslIds          :: !(Maybe [Textual Int64])
+    , _pslProFileId    :: !(Textual Int64)
     , _pslSortOrder    :: !(Maybe PlacementStrategiesListSortOrder)
     , _pslPageToken    :: !(Maybe Text)
     , _pslSortField    :: !(Maybe PlacementStrategiesListSortField)
-    , _pslMaxResults   :: !(Maybe (JSONText Int32))
+    , _pslMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesList' with the minimum fields required to make a request.

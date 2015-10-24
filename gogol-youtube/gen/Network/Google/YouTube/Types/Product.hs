@@ -247,9 +247,9 @@ instance ToJSON ChannelAuditDetails where
 --
 -- /See:/ 'thumbnail' smart constructor.
 data Thumbnail = Thumbnail
-    { _tHeight :: !(Maybe (JSONText Word32))
+    { _tHeight :: !(Maybe (Textual Word32))
     , _tURL    :: !(Maybe Text)
-    , _tWidth  :: !(Maybe (JSONText Word32))
+    , _tWidth  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
@@ -503,7 +503,7 @@ data ChannelSectionSnippet = ChannelSectionSnippet
     , _cssLocalized       :: !(Maybe ChannelSectionLocalization)
     , _cssTitle           :: !(Maybe Text)
     , _cssType            :: !(Maybe ChannelSectionSnippetType)
-    , _cssPosition        :: !(Maybe (JSONText Word32))
+    , _cssPosition        :: !(Maybe (Textual Word32))
     , _cssDefaultLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2781,7 +2781,7 @@ instance ToJSON ActivityContentDetailsLike where
 --
 -- /See:/ 'playListContentDetails' smart constructor.
 newtype PlayListContentDetails = PlayListContentDetails
-    { _plcdItemCount :: Maybe (JSONText Word32)
+    { _plcdItemCount :: Maybe (Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListContentDetails' with the minimum fields required to make a request.
@@ -2819,8 +2819,8 @@ instance ToJSON PlayListContentDetails where
 --
 -- /See:/ 'pageInfo' smart constructor.
 data PageInfo = PageInfo
-    { _piResultsPerPage :: !(Maybe (JSONText Int32))
-    , _piTotalResults   :: !(Maybe (JSONText Int32))
+    { _piResultsPerPage :: !(Maybe (Textual Int32))
+    , _piTotalResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
@@ -3000,11 +3000,11 @@ instance ToJSON VideoStatus where
 --
 -- /See:/ 'videoFileDetails' smart constructor.
 data VideoFileDetails = VideoFileDetails
-    { _vfdBitrateBps        :: !(Maybe (JSONText Word64))
+    { _vfdBitrateBps        :: !(Maybe (Textual Word64))
     , _vfdCreationTime      :: !(Maybe Text)
     , _vfdRecordingLocation :: !(Maybe GeoPoint)
-    , _vfdDurationMs        :: !(Maybe (JSONText Word64))
-    , _vfdFileSize          :: !(Maybe (JSONText Word64))
+    , _vfdDurationMs        :: !(Maybe (Textual Word64))
+    , _vfdFileSize          :: !(Maybe (Textual Word64))
     , _vfdFileType          :: !(Maybe VideoFileDetailsFileType)
     , _vfdContainer         :: !(Maybe Text)
     , _vfdVideoStreams      :: !(Maybe [VideoFileDetailsVideoStream])
@@ -4120,7 +4120,7 @@ data CommentThreadSnippet = CommentThreadSnippet
     , _ctsChannelId       :: !(Maybe Text)
     , _ctsCanReply        :: !(Maybe Bool)
     , _ctsVideoId         :: !(Maybe Text)
-    , _ctsTotalReplyCount :: !(Maybe (JSONText Word32))
+    , _ctsTotalReplyCount :: !(Maybe (Textual Word32))
     , _ctsTopLevelComment :: !(Maybe Comment)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5257,8 +5257,8 @@ instance ToJSON VideoContentDetailsRegionRestriction
 --
 -- /See:/ 'invideoTiming' smart constructor.
 data InvideoTiming = InvideoTiming
-    { _itDurationMs :: !(Maybe (JSONText Word64))
-    , _itOffSetMs   :: !(Maybe (JSONText Word64))
+    { _itDurationMs :: !(Maybe (Textual Word64))
+    , _itOffSetMs   :: !(Maybe (Textual Word64))
     , _itType       :: !(Maybe InvideoTimingType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5358,9 +5358,9 @@ instance ToJSON PlayListLocalizations where
 --
 -- /See:/ 'videoProcessingDetailsProcessingProgress' smart constructor.
 data VideoProcessingDetailsProcessingProgress = VideoProcessingDetailsProcessingProgress
-    { _vpdppTimeLeftMs     :: !(Maybe (JSONText Word64))
-    , _vpdppPartsTotal     :: !(Maybe (JSONText Word64))
-    , _vpdppPartsProcessed :: !(Maybe (JSONText Word64))
+    { _vpdppTimeLeftMs     :: !(Maybe (Textual Word64))
+    , _vpdppPartsTotal     :: !(Maybe (Textual Word64))
+    , _vpdppPartsProcessed :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoProcessingDetailsProcessingProgress' with the minimum fields required to make a request.
@@ -5620,7 +5620,7 @@ instance ToJSON ThumbnailDetails where
 --
 -- /See:/ 'monitorStreamInfo' smart constructor.
 data MonitorStreamInfo = MonitorStreamInfo
-    { _msiBroadcastStreamDelayMs :: !(Maybe (JSONText Word32))
+    { _msiBroadcastStreamDelayMs :: !(Maybe (Textual Word32))
     , _msiEmbedHTML              :: !(Maybe Text)
     , _msiEnableMonitorStream    :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5760,11 +5760,11 @@ instance ToJSON I18nRegion where
 --
 -- /See:/ 'channelStatistics' smart constructor.
 data ChannelStatistics = ChannelStatistics
-    { _csCommentCount          :: !(Maybe (JSONText Word64))
-    , _csSubscriberCount       :: !(Maybe (JSONText Word64))
-    , _csVideoCount            :: !(Maybe (JSONText Word64))
+    { _csCommentCount          :: !(Maybe (Textual Word64))
+    , _csSubscriberCount       :: !(Maybe (Textual Word64))
+    , _csVideoCount            :: !(Maybe (Textual Word64))
     , _csHiddenSubscriberCount :: !(Maybe Bool)
-    , _csViewCount             :: !(Maybe (JSONText Word64))
+    , _csViewCount             :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelStatistics' with the minimum fields required to make a request.
@@ -7336,8 +7336,8 @@ instance ToJSON CdnSettings where
 --
 -- /See:/ 'liveBroadcastStatistics' smart constructor.
 data LiveBroadcastStatistics = LiveBroadcastStatistics
-    { _lbsTotalChatCount    :: !(Maybe (JSONText Word64))
-    , _lbsConcurrentViewers :: !(Maybe (JSONText Word64))
+    { _lbsTotalChatCount    :: !(Maybe (Textual Word64))
+    , _lbsConcurrentViewers :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastStatistics' with the minimum fields required to make a request.
@@ -7526,11 +7526,11 @@ instance ToJSON I18nLanguage where
 --
 -- /See:/ 'videoStatistics' smart constructor.
 data VideoStatistics = VideoStatistics
-    { _vsLikeCount     :: !(Maybe (JSONText Word64))
-    , _vsCommentCount  :: !(Maybe (JSONText Word64))
-    , _vsFavoriteCount :: !(Maybe (JSONText Word64))
-    , _vsDislikeCount  :: !(Maybe (JSONText Word64))
-    , _vsViewCount     :: !(Maybe (JSONText Word64))
+    { _vsLikeCount     :: !(Maybe (Textual Word64))
+    , _vsCommentCount  :: !(Maybe (Textual Word64))
+    , _vsFavoriteCount :: !(Maybe (Textual Word64))
+    , _vsDislikeCount  :: !(Maybe (Textual Word64))
+    , _vsViewCount     :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoStatistics' with the minimum fields required to make a request.
@@ -7864,10 +7864,10 @@ instance ToJSON VideoAbuseReport where
 --
 -- /See:/ 'videoFileDetailsAudioStream' smart constructor.
 data VideoFileDetailsAudioStream = VideoFileDetailsAudioStream
-    { _vfdasBitrateBps   :: !(Maybe (JSONText Word64))
+    { _vfdasBitrateBps   :: !(Maybe (Textual Word64))
     , _vfdasVendor       :: !(Maybe Text)
     , _vfdasCodec        :: !(Maybe Text)
-    , _vfdasChannelCount :: !(Maybe (JSONText Word32))
+    , _vfdasChannelCount :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoFileDetailsAudioStream' with the minimum fields required to make a request.
@@ -8232,7 +8232,7 @@ instance ToJSON InvideoPosition where
 data LiveStreamHealthStatus = LiveStreamHealthStatus
     { _lshsStatus                :: !(Maybe LiveStreamHealthStatusStatus)
     , _lshsConfigurationIssues   :: !(Maybe [LiveStreamConfigurationIssue])
-    , _lshsLastUpdateTimeSeconds :: !(Maybe (JSONText Word64))
+    , _lshsLastUpdateTimeSeconds :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamHealthStatus' with the minimum fields required to make a request.
@@ -9346,7 +9346,7 @@ data InvideoBranding = InvideoBranding
     { _ibImageURL        :: !(Maybe Text)
     , _ibTargetChannelId :: !(Maybe Text)
     , _ibTiming          :: !(Maybe InvideoTiming)
-    , _ibImageBytes      :: !(Maybe (JSONText Word8))
+    , _ibImageBytes      :: !(Maybe (Textual Word8))
     , _ibPosition        :: !(Maybe InvideoPosition)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9791,8 +9791,8 @@ instance ToJSON PlayListLocalization where
 -- /See:/ 'subscriptionContentDetails' smart constructor.
 data SubscriptionContentDetails = SubscriptionContentDetails
     { _scdActivityType   :: !(Maybe SubscriptionContentDetailsActivityType)
-    , _scdTotalItemCount :: !(Maybe (JSONText Word32))
-    , _scdNewItemCount   :: !(Maybe (JSONText Word32))
+    , _scdTotalItemCount :: !(Maybe (Textual Word32))
+    , _scdNewItemCount   :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionContentDetails' with the minimum fields required to make a request.
@@ -10229,14 +10229,14 @@ instance ToJSON LanguageTag where
 --
 -- /See:/ 'videoFileDetailsVideoStream' smart constructor.
 data VideoFileDetailsVideoStream = VideoFileDetailsVideoStream
-    { _vfdvsHeightPixels :: !(Maybe (JSONText Word32))
-    , _vfdvsBitrateBps   :: !(Maybe (JSONText Word64))
+    { _vfdvsHeightPixels :: !(Maybe (Textual Word32))
+    , _vfdvsBitrateBps   :: !(Maybe (Textual Word64))
     , _vfdvsVendor       :: !(Maybe Text)
     , _vfdvsRotation     :: !(Maybe VideoFileDetailsVideoStreamRotation)
-    , _vfdvsFrameRateFps :: !(Maybe (JSONText Double))
+    , _vfdvsFrameRateFps :: !(Maybe (Textual Double))
     , _vfdvsCodec        :: !(Maybe Text)
-    , _vfdvsAspectRatio  :: !(Maybe (JSONText Double))
-    , _vfdvsWidthPixels  :: !(Maybe (JSONText Word32))
+    , _vfdvsAspectRatio  :: !(Maybe (Textual Double))
+    , _vfdvsWidthPixels  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoFileDetailsVideoStream' with the minimum fields required to make a request.
@@ -11160,7 +11160,7 @@ data CommentSnippet = CommentSnippet
     , _cPublishedAt                :: !(Maybe DateTime')
     , _cAuthorChannelURL           :: !(Maybe Text)
     , _cModerationStatus           :: !(Maybe CommentSnippetModerationStatus)
-    , _cLikeCount                  :: !(Maybe (JSONText Word32))
+    , _cLikeCount                  :: !(Maybe (Textual Word32))
     , _cChannelId                  :: !(Maybe Text)
     , _cTextOriginal               :: !(Maybe Text)
     , _cVideoId                    :: !(Maybe Text)
@@ -11546,7 +11546,7 @@ data PlayListItemSnippet = PlayListItemSnippet
     , _plisTitle        :: !(Maybe Text)
     , _plisPlayListId   :: !(Maybe Text)
     , _plisDescription  :: !(Maybe Text)
-    , _plisPosition     :: !(Maybe (JSONText Word32))
+    , _plisPosition     :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListItemSnippet' with the minimum fields required to make a request.
@@ -12958,7 +12958,7 @@ instance ToJSON SubscriptionSnippet where
 -- /See:/ 'videoLiveStreamingDetails' smart constructor.
 data VideoLiveStreamingDetails = VideoLiveStreamingDetails
     { _vlsdActualEndTime      :: !(Maybe DateTime')
-    , _vlsdConcurrentViewers  :: !(Maybe (JSONText Word64))
+    , _vlsdConcurrentViewers  :: !(Maybe (Textual Word64))
     , _vlsdScheduledEndTime   :: !(Maybe DateTime')
     , _vlsdScheduledStartTime :: !(Maybe DateTime')
     , _vlsdActualStartTime    :: !(Maybe DateTime')
@@ -13274,9 +13274,9 @@ instance ToJSON VideoConversionPing where
 --
 -- /See:/ 'geoPoint' smart constructor.
 data GeoPoint = GeoPoint
-    { _gpLatitude  :: !(Maybe (JSONText Double))
-    , _gpAltitude  :: !(Maybe (JSONText Double))
-    , _gpLongitude :: !(Maybe (JSONText Double))
+    { _gpLatitude  :: !(Maybe (Textual Double))
+    , _gpAltitude  :: !(Maybe (Textual Double))
+    , _gpLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoPoint' with the minimum fields required to make a request.

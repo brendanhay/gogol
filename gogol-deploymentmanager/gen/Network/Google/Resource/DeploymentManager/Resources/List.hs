@@ -56,7 +56,7 @@ type ResourcesListResource =
                    "resources" :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (JSONText Word32) :>
+                         QueryParam "maxResults" (Textual Word32) :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ResourcesListResponse
 
@@ -67,7 +67,7 @@ data ResourcesList = ResourcesList
     { _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
-    , _rlMaxResults :: !(JSONText Word32)
+    , _rlMaxResults :: !(Textual Word32)
     , _rlDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

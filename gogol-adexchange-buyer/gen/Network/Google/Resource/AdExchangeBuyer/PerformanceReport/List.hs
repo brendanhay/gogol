@@ -49,11 +49,11 @@ type PerformanceReportListResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "performancereport" :>
-           QueryParam "accountId" (JSONText Int64) :>
+           QueryParam "accountId" (Textual Int64) :>
              QueryParam "endDateTime" Text :>
                QueryParam "startDateTime" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] PerformanceReportList
 
@@ -61,10 +61,10 @@ type PerformanceReportListResource =
 --
 -- /See:/ 'performanceReportList'' smart constructor.
 data PerformanceReportList' = PerformanceReportList'
-    { _prlAccountId     :: !(JSONText Int64)
+    { _prlAccountId     :: !(Textual Int64)
     , _prlPageToken     :: !(Maybe Text)
     , _prlEndDateTime   :: !Text
-    , _prlMaxResults    :: !(Maybe (JSONText Word32))
+    , _prlMaxResults    :: !(Maybe (Textual Word32))
     , _prlStartDateTime :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

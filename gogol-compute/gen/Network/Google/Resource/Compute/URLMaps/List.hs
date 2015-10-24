@@ -54,7 +54,7 @@ type URLMapsListResource =
                "urlMaps" :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] URLMapList
 
 -- | Retrieves the list of UrlMap resources available to the specified
@@ -65,7 +65,7 @@ data URLMapsList = URLMapsList
     { _umlProject    :: !Text
     , _umlFilter     :: !(Maybe Text)
     , _umlPageToken  :: !(Maybe Text)
-    , _umlMaxResults :: !(JSONText Word32)
+    , _umlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsList' with the minimum fields required to make a request.

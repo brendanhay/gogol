@@ -54,8 +54,8 @@ type AccountsReportsSavedGenerateResource =
              "reports" :>
                Capture "savedReportId" Text :>
                  QueryParam "locale" Text :>
-                   QueryParam "startIndex" (JSONText Int32) :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "startIndex" (Textual Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Generate an Ad Exchange report based on the saved report ID sent in the
@@ -66,8 +66,8 @@ data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate
     { _arsgLocale        :: !(Maybe Text)
     , _arsgSavedReportId :: !Text
     , _arsgAccountId     :: !Text
-    , _arsgStartIndex    :: !(Maybe (JSONText Int32))
-    , _arsgMaxResults    :: !(Maybe (JSONText Int32))
+    , _arsgStartIndex    :: !(Maybe (Textual Int32))
+    , _arsgMaxResults    :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsSavedGenerate' with the minimum fields required to make a request.

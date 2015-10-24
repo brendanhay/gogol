@@ -59,12 +59,12 @@ type AdvertisersListResource =
                QueryParam "relationshipStatus"
                  AdvertisersListRelationshipStatus
                  :>
-                 QueryParam "minSevenDayEpc" (JSONText Double) :>
-                   QueryParam "minNinetyDayEpc" (JSONText Double) :>
-                     QueryParam "minPayoutRank" (JSONText Int32) :>
+                 QueryParam "minSevenDayEpc" (Textual Double) :>
+                   QueryParam "minNinetyDayEpc" (Textual Double) :>
+                     QueryParam "minPayoutRank" (Textual Int32) :>
                        QueryParam "advertiserCategory" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (JSONText Word32) :>
+                           QueryParam "maxResults" (Textual Word32) :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Advertisers
 
 -- | Retrieves data about all advertisers that the requesting
@@ -73,14 +73,14 @@ type AdvertisersListResource =
 -- /See:/ 'advertisersList' smart constructor.
 data AdvertisersList = AdvertisersList
     { _alRelationshipStatus :: !(Maybe AdvertisersListRelationshipStatus)
-    , _alMinSevenDayEpc     :: !(Maybe (JSONText Double))
+    , _alMinSevenDayEpc     :: !(Maybe (Textual Double))
     , _alRoleId             :: !Text
-    , _alMinNinetyDayEpc    :: !(Maybe (JSONText Double))
+    , _alMinNinetyDayEpc    :: !(Maybe (Textual Double))
     , _alRole               :: !AdvertisersListRole
-    , _alMinPayoutRank      :: !(Maybe (JSONText Int32))
+    , _alMinPayoutRank      :: !(Maybe (Textual Int32))
     , _alAdvertiserCategory :: !(Maybe Text)
     , _alPageToken          :: !(Maybe Text)
-    , _alMaxResults         :: !(Maybe (JSONText Word32))
+    , _alMaxResults         :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.

@@ -56,7 +56,7 @@ type MomentsListResource =
                  QueryParam "targetUrl" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "type" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] MomentsFeed
 
 -- | List all of the moments for a particular user.
@@ -68,7 +68,7 @@ data MomentsList = MomentsList
     , _mlUserId     :: !Text
     , _mlPageToken  :: !(Maybe Text)
     , _mlType       :: !(Maybe Text)
-    , _mlMaxResults :: !(JSONText Word32)
+    , _mlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MomentsList' with the minimum fields required to make a request.

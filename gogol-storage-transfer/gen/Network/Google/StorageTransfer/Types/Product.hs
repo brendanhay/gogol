@@ -25,7 +25,7 @@ import           Network.Google.StorageTransfer.Types.Sum
 --
 -- /See:/ 'errorSummary' smart constructor.
 data ErrorSummary = ErrorSummary
-    { _esErrorCount      :: !(Maybe (JSONText Int64))
+    { _esErrorCount      :: !(Maybe (Textual Int64))
     , _esErrorCode       :: !(Maybe Text)
     , _esErrorLogEntries :: !(Maybe [ErrorLogEntry])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -123,7 +123,7 @@ instance ToJSON ErrorSummary where
 -- /See:/ 'status' smart constructor.
 data Status = Status
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (JSONText Int32))
+    , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -622,9 +622,9 @@ instance ToJSON StatusDetailsItem where
 --
 -- /See:/ 'date' smart constructor.
 data Date = Date
-    { _dDay   :: !(Maybe (JSONText Int32))
-    , _dYear  :: !(Maybe (JSONText Int32))
-    , _dMonth :: !(Maybe (JSONText Int32))
+    { _dDay   :: !(Maybe (Textual Int32))
+    , _dYear  :: !(Maybe (Textual Int32))
+    , _dMonth :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
@@ -752,22 +752,22 @@ instance ToJSON UpdateTransferJobRequest where
 --
 -- /See:/ 'transferCounters' smart constructor.
 data TransferCounters = TransferCounters
-    { _tcBytesFoundOnlyFromSink         :: !(Maybe (JSONText Int64))
-    , _tcBytesDeletedFromSink           :: !(Maybe (JSONText Int64))
-    , _tcObjectsDeletedFromSource       :: !(Maybe (JSONText Int64))
-    , _tcObjectsFoundFromSource         :: !(Maybe (JSONText Int64))
-    , _tcBytesFailedToDeleteFromSink    :: !(Maybe (JSONText Int64))
-    , _tcBytesFromSourceFailed          :: !(Maybe (JSONText Int64))
-    , _tcBytesCopiedToSink              :: !(Maybe (JSONText Int64))
-    , _tcBytesFoundFromSource           :: !(Maybe (JSONText Int64))
-    , _tcBytesDeletedFromSource         :: !(Maybe (JSONText Int64))
-    , _tcObjectsDeletedFromSink         :: !(Maybe (JSONText Int64))
-    , _tcObjectsFoundOnlyFromSink       :: !(Maybe (JSONText Int64))
-    , _tcBytesFromSourceSkippedBySync   :: !(Maybe (JSONText Int64))
-    , _tcObjectsCopiedToSink            :: !(Maybe (JSONText Int64))
-    , _tcObjectsFromSourceFailed        :: !(Maybe (JSONText Int64))
-    , _tcObjectsFailedToDeleteFromSink  :: !(Maybe (JSONText Int64))
-    , _tcObjectsFromSourceSkippedBySync :: !(Maybe (JSONText Int64))
+    { _tcBytesFoundOnlyFromSink         :: !(Maybe (Textual Int64))
+    , _tcBytesDeletedFromSink           :: !(Maybe (Textual Int64))
+    , _tcObjectsDeletedFromSource       :: !(Maybe (Textual Int64))
+    , _tcObjectsFoundFromSource         :: !(Maybe (Textual Int64))
+    , _tcBytesFailedToDeleteFromSink    :: !(Maybe (Textual Int64))
+    , _tcBytesFromSourceFailed          :: !(Maybe (Textual Int64))
+    , _tcBytesCopiedToSink              :: !(Maybe (Textual Int64))
+    , _tcBytesFoundFromSource           :: !(Maybe (Textual Int64))
+    , _tcBytesDeletedFromSource         :: !(Maybe (Textual Int64))
+    , _tcObjectsDeletedFromSink         :: !(Maybe (Textual Int64))
+    , _tcObjectsFoundOnlyFromSink       :: !(Maybe (Textual Int64))
+    , _tcBytesFromSourceSkippedBySync   :: !(Maybe (Textual Int64))
+    , _tcObjectsCopiedToSink            :: !(Maybe (Textual Int64))
+    , _tcObjectsFromSourceFailed        :: !(Maybe (Textual Int64))
+    , _tcObjectsFailedToDeleteFromSink  :: !(Maybe (Textual Int64))
+    , _tcObjectsFromSourceSkippedBySync :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferCounters' with the minimum fields required to make a request.
@@ -1297,10 +1297,10 @@ instance ToJSON HTTPData where
 --
 -- /See:/ 'timeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-    { _todNanos   :: !(Maybe (JSONText Int32))
-    , _todHours   :: !(Maybe (JSONText Int32))
-    , _todMinutes :: !(Maybe (JSONText Int32))
-    , _todSeconds :: !(Maybe (JSONText Int32))
+    { _todNanos   :: !(Maybe (Textual Int32))
+    , _todHours   :: !(Maybe (Textual Int32))
+    , _todMinutes :: !(Maybe (Textual Int32))
+    , _todSeconds :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.

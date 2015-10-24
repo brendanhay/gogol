@@ -46,9 +46,9 @@ type AdvertiserGroupsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AdvertiserGroup
 
@@ -56,8 +56,8 @@ type AdvertiserGroupsGetResource =
 --
 -- /See:/ 'advertiserGroupsGet' smart constructor.
 data AdvertiserGroupsGet = AdvertiserGroupsGet
-    { _agggProFileId :: !(JSONText Int64)
-    , _agggId        :: !(JSONText Int64)
+    { _agggProFileId :: !(Textual Int64)
+    , _agggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsGet' with the minimum fields required to make a request.

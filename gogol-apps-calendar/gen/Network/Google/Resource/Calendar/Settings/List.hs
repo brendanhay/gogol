@@ -51,7 +51,7 @@ type SettingsListResource =
              "settings" :>
                QueryParam "syncToken" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Settings
 
 -- | Returns all user settings for the authenticated user.
@@ -60,7 +60,7 @@ type SettingsListResource =
 data SettingsList = SettingsList
     { _slSyncToken  :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
-    , _slMaxResults :: !(Maybe (JSONText Int32))
+    , _slMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsList' with the minimum fields required to make a request.

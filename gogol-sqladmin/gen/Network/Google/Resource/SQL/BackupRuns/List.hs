@@ -54,7 +54,7 @@ type BackupRunsListResource =
                Capture "instance" Text :>
                  "backupRuns" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (JSONText Int32) :>
+                     QueryParam "maxResults" (Textual Int32) :>
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] BackupRunsListResponse
 
@@ -65,7 +65,7 @@ type BackupRunsListResource =
 data BackupRunsList = BackupRunsList
     { _brlProject    :: !Text
     , _brlPageToken  :: !(Maybe Text)
-    , _brlMaxResults :: !(Maybe (JSONText Int32))
+    , _brlMaxResults :: !(Maybe (Textual Int32))
     , _brlInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -52,15 +52,15 @@ type AccountsListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "accounts" :>
                QueryParam "searchString" Text :>
-                 QueryParams "ids" (JSONText Int64) :>
+                 QueryParams "ids" (Textual Int64) :>
                    QueryParam "sortOrder" AccountsListSortOrder :>
                      QueryParam "active" Bool :>
                        QueryParam "pageToken" Text :>
                          QueryParam "sortField" AccountsListSortField :>
-                           QueryParam "maxResults" (JSONText Int32) :>
+                           QueryParam "maxResults" (Textual Int32) :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AccountsListResponse
 
@@ -69,13 +69,13 @@ type AccountsListResource =
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList = AccountsList
     { _accSearchString :: !(Maybe Text)
-    , _accIds          :: !(Maybe [JSONText Int64])
-    , _accProFileId    :: !(JSONText Int64)
+    , _accIds          :: !(Maybe [Textual Int64])
+    , _accProFileId    :: !(Textual Int64)
     , _accSortOrder    :: !(Maybe AccountsListSortOrder)
     , _accActive       :: !(Maybe Bool)
     , _accPageToken    :: !(Maybe Text)
     , _accSortField    :: !(Maybe AccountsListSortField)
-    , _accMaxResults   :: !(Maybe (JSONText Int32))
+    , _accMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.

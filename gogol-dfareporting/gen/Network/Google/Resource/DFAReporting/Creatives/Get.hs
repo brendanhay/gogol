@@ -46,17 +46,17 @@ type CreativesGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "creatives" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
 -- | Gets one creative by ID.
 --
 -- /See:/ 'creativesGet' smart constructor.
 data CreativesGet = CreativesGet
-    { _ccProFileId :: !(JSONText Int64)
-    , _ccId        :: !(JSONText Int64)
+    { _ccProFileId :: !(Textual Int64)
+    , _ccId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesGet' with the minimum fields required to make a request.

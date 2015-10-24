@@ -23,8 +23,8 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'promotionImage' smart constructor.
 data PromotionImage = PromotionImage
-    { _piHeight :: !(Maybe (JSONText Int32))
-    , _piWidth  :: !(Maybe (JSONText Int32))
+    { _piHeight :: !(Maybe (Textual Int32))
+    , _piWidth  :: !(Maybe (Textual Int32))
     , _piSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -281,12 +281,12 @@ instance ToJSON SearchSpelling where
 -- /See:/ 'resultImage' smart constructor.
 data ResultImage = ResultImage
     { _riThumbnailLink   :: !(Maybe Text)
-    , _riHeight          :: !(Maybe (JSONText Int32))
-    , _riByteSize        :: !(Maybe (JSONText Int32))
+    , _riHeight          :: !(Maybe (Textual Int32))
+    , _riByteSize        :: !(Maybe (Textual Int32))
     , _riContextLink     :: !(Maybe Text)
-    , _riThumbnailHeight :: !(Maybe (JSONText Int32))
-    , _riWidth           :: !(Maybe (JSONText Int32))
-    , _riThumbnailWidth  :: !(Maybe (JSONText Int32))
+    , _riThumbnailHeight :: !(Maybe (Textual Int32))
+    , _riWidth           :: !(Maybe (Textual Int32))
+    , _riThumbnailWidth  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultImage' with the minimum fields required to make a request.
@@ -637,9 +637,9 @@ instance ToJSON ResultLabelsItem where
 --
 -- /See:/ 'searchSearchInformation' smart constructor.
 data SearchSearchInformation = SearchSearchInformation
-    { _ssiSearchTime            :: !(Maybe (JSONText Double))
+    { _ssiSearchTime            :: !(Maybe (Textual Double))
     , _ssiFormattedSearchTime   :: !(Maybe Text)
-    , _ssiTotalResults          :: !(Maybe (JSONText Int64))
+    , _ssiTotalResults          :: !(Maybe (Textual Int64))
     , _ssiFormattedTotalResults :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -716,9 +716,9 @@ data Query = Query
     , _qInputEncoding          :: !(Maybe Text)
     , _qOrTerms                :: !(Maybe Text)
     , _qSearchTerms            :: !(Maybe Text)
-    , _qStartPage              :: !(Maybe (JSONText Int32))
+    , _qStartPage              :: !(Maybe (Textual Int32))
     , _qRights                 :: !(Maybe Text)
-    , _qCount                  :: !(Maybe (JSONText Int32))
+    , _qCount                  :: !(Maybe (Textual Int32))
     , _qExcludeTerms           :: !(Maybe Text)
     , _qFileType               :: !(Maybe Text)
     , _qSearchType             :: !(Maybe Text)
@@ -731,7 +731,7 @@ data Query = Query
     , _qLanguage               :: !(Maybe Text)
     , _qSiteSearch             :: !(Maybe Text)
     , _qFilter                 :: !(Maybe Text)
-    , _qTotalResults           :: !(Maybe (JSONText Int64))
+    , _qTotalResults           :: !(Maybe (Textual Int64))
     , _qDateRestrict           :: !(Maybe Text)
     , _qTitle                  :: !(Maybe Text)
     , _qLinkSite               :: !(Maybe Text)
@@ -742,7 +742,7 @@ data Query = Query
     , _qImgColorType           :: !(Maybe Text)
     , _qImgSize                :: !(Maybe Text)
     , _qExactTerms             :: !(Maybe Text)
-    , _qStartIndex             :: !(Maybe (JSONText Int32))
+    , _qStartIndex             :: !(Maybe (Textual Int32))
     , _qCr                     :: !(Maybe Text)
     , _qSafe                   :: !(Maybe Text)
     , _qHq                     :: !(Maybe Text)

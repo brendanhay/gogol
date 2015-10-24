@@ -46,17 +46,17 @@ type ContentCategoriesDeleteResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing content category.
 --
 -- /See:/ 'contentCategoriesDelete' smart constructor.
 data ContentCategoriesDelete = ContentCategoriesDelete
-    { _ccdProFileId :: !(JSONText Int64)
-    , _ccdId        :: !(JSONText Int64)
+    { _ccdProFileId :: !(Textual Int64)
+    , _ccdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesDelete' with the minimum fields required to make a request.

@@ -58,7 +58,7 @@ type UsersDataSourcesDataSetsGetResource =
                Capture "dataSourceId" Text :>
                  "datasets" :>
                    Capture "datasetId" Text :>
-                     QueryParam "limit" (JSONText Int32) :>
+                     QueryParam "limit" (Textual Int32) :>
                        QueryParam "pageToken" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] DataSet
 
@@ -73,7 +73,7 @@ data UsersDataSourcesDataSetsGet = UsersDataSourcesDataSetsGet
     { _udsdsgDataSourceId :: !Text
     , _udsdsgUserId       :: !Text
     , _udsdsgDataSetId    :: !Text
-    , _udsdsgLimit        :: !(Maybe (JSONText Int32))
+    , _udsdsgLimit        :: !(Maybe (Textual Int32))
     , _udsdsgPageToken    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

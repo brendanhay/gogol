@@ -57,24 +57,24 @@ type AdvertisersListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "advertisers" :>
                QueryParam "status" AdvertisersListStatus :>
                  QueryParam "onlyParent" Bool :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" (JSONText Int64) :>
+                     QueryParams "ids" (Textual Int64) :>
                        QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
                          :>
                          QueryParam "sortOrder" AdvertisersListSortOrder :>
-                           QueryParams "advertiserGroupIds" (JSONText Int64) :>
+                           QueryParams "advertiserGroupIds" (Textual Int64) :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField" AdvertisersListSortField
                                  :>
-                                 QueryParam "subaccountId" (JSONText Int64) :>
+                                 QueryParam "subaccountId" (Textual Int64) :>
                                    QueryParams "floodlightConfigurationIds"
-                                     (JSONText Int64)
+                                     (Textual Int64)
                                      :>
-                                     QueryParam "maxResults" (JSONText Int32) :>
+                                     QueryParam "maxResults" (Textual Int32) :>
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] AdvertisersListResponse
 
@@ -85,16 +85,16 @@ data AdvertisersList = AdvertisersList
     { _allStatus                              :: !(Maybe AdvertisersListStatus)
     , _allOnlyParent                          :: !(Maybe Bool)
     , _allSearchString                        :: !(Maybe Text)
-    , _allIds                                 :: !(Maybe [JSONText Int64])
+    , _allIds                                 :: !(Maybe [Textual Int64])
     , _allIncludeAdvertisersWithoutGroupsOnly :: !(Maybe Bool)
-    , _allProFileId                           :: !(JSONText Int64)
+    , _allProFileId                           :: !(Textual Int64)
     , _allSortOrder                           :: !(Maybe AdvertisersListSortOrder)
-    , _allAdvertiserGroupIds                  :: !(Maybe [JSONText Int64])
+    , _allAdvertiserGroupIds                  :: !(Maybe [Textual Int64])
     , _allPageToken                           :: !(Maybe Text)
     , _allSortField                           :: !(Maybe AdvertisersListSortField)
-    , _allSubAccountId                        :: !(Maybe (JSONText Int64))
-    , _allFloodlightConfigurationIds          :: !(Maybe [JSONText Int64])
-    , _allMaxResults                          :: !(Maybe (JSONText Int32))
+    , _allSubAccountId                        :: !(Maybe (Textual Int64))
+    , _allFloodlightConfigurationIds          :: !(Maybe [Textual Int64])
+    , _allMaxResults                          :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.

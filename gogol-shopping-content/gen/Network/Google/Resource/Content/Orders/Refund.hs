@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 type OrdersRefundResource =
      "content" :>
        "v2" :>
-         Capture "merchantId" (JSONText Word64) :>
+         Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
                "refund" :>
@@ -58,7 +58,7 @@ type OrdersRefundResource =
 --
 -- /See:/ 'ordersRefund' smart constructor.
 data OrdersRefund = OrdersRefund
-    { _orMerchantId :: !(JSONText Word64)
+    { _orMerchantId :: !(Textual Word64)
     , _orPayload    :: !OrdersRefundRequest
     , _orOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'rollbackRequest' smart constructor.
 newtype RollbackRequest = RollbackRequest
-    { _rrTransaction :: Maybe (JSONText Word8)
+    { _rrTransaction :: Maybe (Textual Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
@@ -62,15 +62,15 @@ data Property = Property
     { _pKeyValue      :: !(Maybe Key)
     , _pBlobKeyValue  :: !(Maybe Text)
     , _pDateTimeValue :: !(Maybe DateTime')
-    , _pIntegerValue  :: !(Maybe (JSONText Int64))
+    , _pIntegerValue  :: !(Maybe (Textual Int64))
     , _pEntityValue   :: !(Maybe Entity)
-    , _pDoubleValue   :: !(Maybe (JSONText Double))
+    , _pDoubleValue   :: !(Maybe (Textual Double))
     , _pStringValue   :: !(Maybe Text)
     , _pListValue     :: !(Maybe [Value])
     , _pIndexed       :: !(Maybe Bool)
     , _pBooleanValue  :: !(Maybe Bool)
-    , _pMeaning       :: !(Maybe (JSONText Int32))
-    , _pBlobValue     :: !(Maybe (JSONText Word8))
+    , _pMeaning       :: !(Maybe (Textual Int32))
+    , _pBlobValue     :: !(Maybe (Textual Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Property' with the minimum fields required to make a request.
@@ -285,11 +285,11 @@ instance ToJSON PartitionId where
 --
 -- /See:/ 'queryResultBatch' smart constructor.
 data QueryResultBatch = QueryResultBatch
-    { _qrbSkippedResults   :: !(Maybe (JSONText Int32))
+    { _qrbSkippedResults   :: !(Maybe (Textual Int32))
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
     , _qrbEntityResults    :: !(Maybe [EntityResult])
     , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
-    , _qrbEndCursor        :: !(Maybe (JSONText Word8))
+    , _qrbEndCursor        :: !(Maybe (Textual Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
@@ -618,7 +618,7 @@ instance ToJSON CompositeFilter where
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
 data BeginTransactionResponse = BeginTransactionResponse
-    { _btrTransaction :: !(Maybe (JSONText Word8))
+    { _btrTransaction :: !(Maybe (Textual Word8))
     , _btrHeader      :: !(Maybe ResponseHeader)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -666,7 +666,7 @@ instance ToJSON BeginTransactionResponse where
 -- /See:/ 'mutationResult' smart constructor.
 data MutationResult = MutationResult
     { _mrInsertAutoIdKeys :: !(Maybe [Key])
-    , _mrIndexUpdates     :: !(Maybe (JSONText Int32))
+    , _mrIndexUpdates     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MutationResult' with the minimum fields required to make a request.
@@ -895,15 +895,15 @@ data Value = Value
     { _vKeyValue      :: !(Maybe Key)
     , _vBlobKeyValue  :: !(Maybe Text)
     , _vDateTimeValue :: !(Maybe DateTime')
-    , _vIntegerValue  :: !(Maybe (JSONText Int64))
+    , _vIntegerValue  :: !(Maybe (Textual Int64))
     , _vEntityValue   :: !(Maybe Entity)
-    , _vDoubleValue   :: !(Maybe (JSONText Double))
+    , _vDoubleValue   :: !(Maybe (Textual Double))
     , _vStringValue   :: !(Maybe Text)
     , _vListValue     :: !(Maybe [Value])
     , _vIndexed       :: !(Maybe Bool)
     , _vBooleanValue  :: !(Maybe Bool)
-    , _vMeaning       :: !(Maybe (JSONText Int32))
-    , _vBlobValue     :: !(Maybe (JSONText Word8))
+    , _vMeaning       :: !(Maybe (Textual Int32))
+    , _vBlobValue     :: !(Maybe (Textual Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
@@ -1258,7 +1258,7 @@ instance ToJSON ResponseHeader where
 data KeyPathElement = KeyPathElement
     { _kpeKind :: !(Maybe Text)
     , _kpeName :: !(Maybe Text)
-    , _kpeId   :: !(Maybe (JSONText Int64))
+    , _kpeId   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'KeyPathElement' with the minimum fields required to make a request.
@@ -1348,7 +1348,7 @@ instance ToJSON PropertyReference where
 --
 -- /See:/ 'gqlQueryArg' smart constructor.
 data GqlQueryArg = GqlQueryArg
-    { _gqaCursor :: !(Maybe (JSONText Word8))
+    { _gqaCursor :: !(Maybe (Textual Word8))
     , _gqaValue  :: !(Maybe Value)
     , _gqaName   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1523,10 +1523,10 @@ instance ToJSON PropertyFilter where
 -- /See:/ 'query' smart constructor.
 data Query = Query
     { _qGroupBy     :: !(Maybe [PropertyReference])
-    , _qStartCursor :: !(Maybe (JSONText Word8))
-    , _qOffSet      :: !(Maybe (JSONText Int32))
-    , _qEndCursor   :: !(Maybe (JSONText Word8))
-    , _qLimit       :: !(Maybe (JSONText Int32))
+    , _qStartCursor :: !(Maybe (Textual Word8))
+    , _qOffSet      :: !(Maybe (Textual Int32))
+    , _qEndCursor   :: !(Maybe (Textual Word8))
+    , _qLimit       :: !(Maybe (Textual Int32))
     , _qProjection  :: !(Maybe [PropertyExpression])
     , _qFilter      :: !(Maybe Filter)
     , _qKinds       :: !(Maybe [KindExpression])
@@ -1770,7 +1770,7 @@ instance ToJSON KindExpression where
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
-    , _roTransaction     :: !(Maybe (JSONText Word8))
+    , _roTransaction     :: !(Maybe (Textual Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
@@ -1956,7 +1956,7 @@ instance ToJSON Filter where
 data CommitRequest = CommitRequest
     { _crMode           :: !(Maybe CommitRequestMode)
     , _crMutation       :: !(Maybe Mutation)
-    , _crTransaction    :: !(Maybe (JSONText Word8))
+    , _crTransaction    :: !(Maybe (Textual Word8))
     , _crIgnoreReadOnly :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

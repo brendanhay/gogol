@@ -53,17 +53,17 @@ type OrdersListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "projects" :>
-               Capture "projectId" (JSONText Int64) :>
+               Capture "projectId" (Textual Int64) :>
                  "orders" :>
                    QueryParam "searchString" Text :>
-                     QueryParams "ids" (JSONText Int64) :>
+                     QueryParams "ids" (Textual Int64) :>
                        QueryParam "sortOrder" OrdersListSortOrder :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField" OrdersListSortField :>
-                             QueryParams "siteId" (JSONText Int64) :>
-                               QueryParam "maxResults" (JSONText Int32) :>
+                             QueryParams "siteId" (Textual Int64) :>
+                               QueryParam "maxResults" (Textual Int32) :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] OrdersListResponse
 
@@ -72,14 +72,14 @@ type OrdersListResource =
 -- /See:/ 'ordersList' smart constructor.
 data OrdersList = OrdersList
     { _olSearchString :: !(Maybe Text)
-    , _olIds          :: !(Maybe [JSONText Int64])
-    , _olProFileId    :: !(JSONText Int64)
+    , _olIds          :: !(Maybe [Textual Int64])
+    , _olProFileId    :: !(Textual Int64)
     , _olSortOrder    :: !(Maybe OrdersListSortOrder)
     , _olPageToken    :: !(Maybe Text)
-    , _olProjectId    :: !(JSONText Int64)
+    , _olProjectId    :: !(Textual Int64)
     , _olSortField    :: !(Maybe OrdersListSortField)
-    , _olSiteId       :: !(Maybe [JSONText Int64])
-    , _olMaxResults   :: !(Maybe (JSONText Int32))
+    , _olSiteId       :: !(Maybe [Textual Int64])
+    , _olMaxResults   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList' with the minimum fields required to make a request.

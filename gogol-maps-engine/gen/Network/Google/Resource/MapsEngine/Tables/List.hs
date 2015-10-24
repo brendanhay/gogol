@@ -69,7 +69,7 @@ type TablesListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "projectId" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -89,7 +89,7 @@ data TablesList = TablesList
     , _tlPageToken        :: !(Maybe Text)
     , _tlProjectId        :: !(Maybe Text)
     , _tlSearch           :: !(Maybe Text)
-    , _tlMaxResults       :: !(Maybe (JSONText Word32))
+    , _tlMaxResults       :: !(Maybe (Textual Word32))
     , _tlTags             :: !(Maybe Text)
     , _tlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

@@ -54,7 +54,7 @@ type ObjectAccessControlsUpdateResource =
                Capture "object" Text :>
                  "acl" :>
                    Capture "entity" Text :>
-                     QueryParam "generation" (JSONText Int64) :>
+                     QueryParam "generation" (Textual Int64) :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] ObjectAccessControl :>
                            Put '[JSON] ObjectAccessControl
@@ -67,7 +67,7 @@ data ObjectAccessControlsUpdate = ObjectAccessControlsUpdate
     , _oacuPayload    :: !ObjectAccessControl
     , _oacuObject     :: !Text
     , _oacuEntity     :: !Text
-    , _oacuGeneration :: !(Maybe (JSONText Int64))
+    , _oacuGeneration :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsUpdate' with the minimum fields required to make a request.

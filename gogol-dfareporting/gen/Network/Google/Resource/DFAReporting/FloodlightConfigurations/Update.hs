@@ -46,7 +46,7 @@ type FloodlightConfigurationsUpdateResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] FloodlightConfiguration :>
@@ -56,7 +56,7 @@ type FloodlightConfigurationsUpdateResource =
 --
 -- /See:/ 'floodlightConfigurationsUpdate' smart constructor.
 data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate
-    { _fcuProFileId :: !(JSONText Int64)
+    { _fcuProFileId :: !(Textual Int64)
     , _fcuPayload   :: !FloodlightConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
 

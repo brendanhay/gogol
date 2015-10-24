@@ -47,9 +47,9 @@ type EventTagsPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "eventTags" :>
-               QueryParam "id" (JSONText Int64) :>
+               QueryParam "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] EventTag :> Patch '[JSON] EventTag
 
@@ -57,9 +57,9 @@ type EventTagsPatchResource =
 --
 -- /See:/ 'eventTagsPatch' smart constructor.
 data EventTagsPatch = EventTagsPatch
-    { _etpProFileId :: !(JSONText Int64)
+    { _etpProFileId :: !(Textual Int64)
     , _etpPayload   :: !EventTag
-    , _etpId        :: !(JSONText Int64)
+    , _etpId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsPatch' with the minimum fields required to make a request.

@@ -83,10 +83,10 @@ type CSEListResource =
                :>
                QueryParam "c2coff" Text :>
                  QueryParam "orTerms" Text :>
-                   QueryParam "start" (JSONText Word32) :>
+                   QueryParam "start" (Textual Word32) :>
                      QueryParam "rights" Text :>
                        QueryParam "excludeTerms" Text :>
-                         QueryParam "num" (JSONText Word32) :>
+                         QueryParam "num" (Textual Word32) :>
                            QueryParam "fileType" Text :>
                              QueryParam "searchType" CSEListSearchType :>
                                QueryParam "lr" CSEListLr :>
@@ -150,10 +150,10 @@ data CSEList = CSEList
     , _cselSiteSearchFilter :: !(Maybe CSEListSiteSearchFilter)
     , _cselC2coff           :: !(Maybe Text)
     , _cselOrTerms          :: !(Maybe Text)
-    , _cselStart            :: !(Maybe (JSONText Word32))
+    , _cselStart            :: !(Maybe (Textual Word32))
     , _cselRights           :: !(Maybe Text)
     , _cselExcludeTerms     :: !(Maybe Text)
-    , _cselNum              :: !(JSONText Word32)
+    , _cselNum              :: !(Textual Word32)
     , _cselFileType         :: !(Maybe Text)
     , _cselSearchType       :: !(Maybe CSEListSearchType)
     , _cselLr               :: !(Maybe CSEListLr)

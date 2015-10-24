@@ -49,11 +49,11 @@ type LandingPagesPatchResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               Capture "campaignId" (JSONText Int64) :>
+               Capture "campaignId" (Textual Int64) :>
                  "landingPages" :>
-                   QueryParam "id" (JSONText Int64) :>
+                   QueryParam "id" (Textual Int64) :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] LandingPage :>
                          Patch '[JSON] LandingPage
@@ -63,10 +63,10 @@ type LandingPagesPatchResource =
 --
 -- /See:/ 'landingPagesPatch' smart constructor.
 data LandingPagesPatch = LandingPagesPatch
-    { _lppCampaignId :: !(JSONText Int64)
-    , _lppProFileId  :: !(JSONText Int64)
+    { _lppCampaignId :: !(Textual Int64)
+    , _lppProFileId  :: !(Textual Int64)
     , _lppPayload    :: !LandingPage
-    , _lppId         :: !(JSONText Int64)
+    , _lppId         :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesPatch' with the minimum fields required to make a request.

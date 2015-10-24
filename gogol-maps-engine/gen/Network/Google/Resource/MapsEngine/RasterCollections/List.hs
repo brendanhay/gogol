@@ -69,7 +69,7 @@ type RasterCollectionsListResource =
                          QueryParam "pageToken" Text :>
                            QueryParam "projectId" Text :>
                              QueryParam "search" Text :>
-                               QueryParam "maxResults" (JSONText Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
                                  QueryParam "tags" Text :>
                                    QueryParam "createdBefore" DateTime' :>
                                      QueryParam "alt" AltJSON :>
@@ -89,7 +89,7 @@ data RasterCollectionsList = RasterCollectionsList
     , _rclPageToken        :: !(Maybe Text)
     , _rclProjectId        :: !(Maybe Text)
     , _rclSearch           :: !(Maybe Text)
-    , _rclMaxResults       :: !(Maybe (JSONText Word32))
+    , _rclMaxResults       :: !(Maybe (Textual Word32))
     , _rclTags             :: !(Maybe Text)
     , _rclCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)

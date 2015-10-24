@@ -61,7 +61,7 @@ type TransferJobsListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (JSONText Int32) :>
+                         QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListTransferJobsResponse
@@ -78,7 +78,7 @@ data TransferJobsList = TransferJobsList
     , _tjlBearerToken    :: !(Maybe Text)
     , _tjlFilter         :: !(Maybe Text)
     , _tjlPageToken      :: !(Maybe Text)
-    , _tjlPageSize       :: !(Maybe (JSONText Int32))
+    , _tjlPageSize       :: !(Maybe (Textual Int32))
     , _tjlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

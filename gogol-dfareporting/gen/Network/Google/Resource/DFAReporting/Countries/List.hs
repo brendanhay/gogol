@@ -45,7 +45,7 @@ type CountriesListResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "countries" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] CountriesListResponse
@@ -54,7 +54,7 @@ type CountriesListResource =
 --
 -- /See:/ 'countriesList' smart constructor.
 newtype CountriesList = CountriesList
-    { _couProFileId :: JSONText Int64
+    { _couProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CountriesList' with the minimum fields required to make a request.

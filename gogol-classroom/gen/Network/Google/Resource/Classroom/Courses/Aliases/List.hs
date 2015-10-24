@@ -65,7 +65,7 @@ type CoursesAliasesListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (JSONText Int32) :>
+                           QueryParam "pageSize" (Textual Int32) :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListCourseAliasesResponse
@@ -85,7 +85,7 @@ data CoursesAliasesList = CoursesAliasesList
     , _calUploadType     :: !(Maybe Text)
     , _calBearerToken    :: !(Maybe Text)
     , _calPageToken      :: !(Maybe Text)
-    , _calPageSize       :: !(Maybe (JSONText Int32))
+    , _calPageSize       :: !(Maybe (Textual Int32))
     , _calCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

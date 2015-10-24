@@ -48,7 +48,7 @@ type CampaignsInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "campaigns" :>
                QueryParam "defaultLandingPageName" Text :>
                  QueryParam "defaultLandingPageUrl" Text :>
@@ -59,7 +59,7 @@ type CampaignsInsertResource =
 --
 -- /See:/ 'campaignsInsert' smart constructor.
 data CampaignsInsert = CampaignsInsert
-    { _camProFileId              :: !(JSONText Int64)
+    { _camProFileId              :: !(Textual Int64)
     , _camPayload                :: !Campaign
     , _camDefaultLandingPageURL  :: !Text
     , _camDefaultLandingPageName :: !Text

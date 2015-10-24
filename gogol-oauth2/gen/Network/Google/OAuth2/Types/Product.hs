@@ -25,7 +25,7 @@ import           Network.Google.Prelude
 data TokenInfo = TokenInfo
     { _tiAudience      :: !(Maybe Text)
     , _tiEmail         :: !(Maybe Text)
-    , _tiExpiresIn     :: !(Maybe (JSONText Int32))
+    , _tiExpiresIn     :: !(Maybe (Textual Int32))
     , _tiAccessType    :: !(Maybe Text)
     , _tiScope         :: !(Maybe Text)
     , _tiVerifiedEmail :: !(Maybe Bool)

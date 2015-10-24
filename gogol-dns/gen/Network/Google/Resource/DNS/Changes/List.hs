@@ -56,7 +56,7 @@ type ChangesListResource =
                  "changes" :>
                    QueryParam "sortOrder" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Int32) :>
+                       QueryParam "maxResults" (Textual Int32) :>
                          QueryParam "sortBy" ChangesListSortBy :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ChangesListResponse
@@ -69,7 +69,7 @@ data ChangesList = ChangesList
     , _clSortOrder   :: !(Maybe Text)
     , _clPageToken   :: !(Maybe Text)
     , _clManagedZone :: !Text
-    , _clMaxResults  :: !(Maybe (JSONText Int32))
+    , _clMaxResults  :: !(Maybe (Textual Int32))
     , _clSortBy      :: !ChangesListSortBy
     } deriving (Eq,Show,Data,Typeable,Generic)
 

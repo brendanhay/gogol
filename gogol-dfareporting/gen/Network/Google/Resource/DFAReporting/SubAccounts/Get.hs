@@ -46,17 +46,17 @@ type SubAccountsGetResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
-               Capture "id" (JSONText Int64) :>
+               Capture "id" (Textual Int64) :>
                  QueryParam "alt" AltJSON :> Get '[JSON] SubAccount
 
 -- | Gets one subaccount by ID.
 --
 -- /See:/ 'subAccountsGet' smart constructor.
 data SubAccountsGet = SubAccountsGet
-    { _sagProFileId :: !(JSONText Int64)
-    , _sagId        :: !(JSONText Int64)
+    { _sagProFileId :: !(Textual Int64)
+    , _sagId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsGet' with the minimum fields required to make a request.

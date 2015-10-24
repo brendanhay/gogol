@@ -52,9 +52,9 @@ type ReconcileMethod =
          "reconcile" :>
            QueryParams "kind" Text :>
              QueryParams "lang" Text :>
-               QueryParam "confidence" (JSONText Float) :>
+               QueryParam "confidence" (Textual Double) :>
                  QueryParam "name" Text :>
-                   QueryParam "limit" (JSONText Int32) :>
+                   QueryParam "limit" (Textual Int32) :>
                      QueryParams "prop" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ReconcileGet
 
@@ -64,9 +64,9 @@ type ReconcileMethod =
 data Reconcile = Reconcile
     { _rKind       :: !(Maybe [Text])
     , _rLang       :: !(Maybe [Text])
-    , _rConfidence :: !(JSONText Float)
+    , _rConfidence :: !(Textual Double)
     , _rName       :: !(Maybe Text)
-    , _rLimit      :: !(JSONText Int32)
+    , _rLimit      :: !(Textual Int32)
     , _rProp       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 

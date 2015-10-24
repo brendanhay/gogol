@@ -45,14 +45,14 @@ type AccountsGetResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "accounts" :>
-           Capture "id" (JSONText Int32) :>
+           Capture "id" (Textual Int32) :>
              QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
 newtype AccountsGet = AccountsGet
-    { _agId :: JSONText Int32
+    { _agId :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.

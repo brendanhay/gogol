@@ -55,8 +55,8 @@ type BookshelvesVolumesListResource =
                Capture "shelf" Text :>
                  "volumes" :>
                    QueryParam "source" Text :>
-                     QueryParam "startIndex" (JSONText Word32) :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                     QueryParam "startIndex" (Textual Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "showPreorders" Bool :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
@@ -67,8 +67,8 @@ data BookshelvesVolumesList = BookshelvesVolumesList
     { _bvlUserId        :: !Text
     , _bvlShelf         :: !Text
     , _bvlSource        :: !(Maybe Text)
-    , _bvlStartIndex    :: !(Maybe (JSONText Word32))
-    , _bvlMaxResults    :: !(Maybe (JSONText Word32))
+    , _bvlStartIndex    :: !(Maybe (Textual Word32))
+    , _bvlMaxResults    :: !(Maybe (Textual Word32))
     , _bvlShowPreOrders :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

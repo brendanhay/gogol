@@ -51,10 +51,10 @@ type ChangesListResource =
        "v2" :>
          "changes" :>
            QueryParam "includeSubscribed" Bool :>
-             QueryParam "startChangeId" (JSONText Int64) :>
+             QueryParam "startChangeId" (Textual Int64) :>
                QueryParam "spaces" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Int32) :>
+                   QueryParam "maxResults" (Textual Int32) :>
                      QueryParam "includeDeleted" Bool :>
                        QueryParam "alt" AltJSON :> Get '[JSON] ChangeList
 
@@ -63,10 +63,10 @@ type ChangesListResource =
 -- /See:/ 'changesList' smart constructor.
 data ChangesList = ChangesList
     { _clIncludeSubscribed :: !Bool
-    , _clStartChangeId     :: !(Maybe (JSONText Int64))
+    , _clStartChangeId     :: !(Maybe (Textual Int64))
     , _clSpaces            :: !(Maybe Text)
     , _clPageToken         :: !(Maybe Text)
-    , _clMaxResults        :: !(JSONText Int32)
+    , _clMaxResults        :: !(Textual Int32)
     , _clIncludeDeleted    :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 

@@ -46,9 +46,9 @@ type SavedColumnsListResource =
      "doubleclicksearch" :>
        "v2" :>
          "agency" :>
-           Capture "agencyId" (JSONText Int64) :>
+           Capture "agencyId" (Textual Int64) :>
              "advertiser" :>
-               Capture "advertiserId" (JSONText Int64) :>
+               Capture "advertiserId" (Textual Int64) :>
                  "savedcolumns" :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SavedColumnList
@@ -57,8 +57,8 @@ type SavedColumnsListResource =
 --
 -- /See:/ 'savedColumnsList' smart constructor.
 data SavedColumnsList = SavedColumnsList
-    { _sclAgencyId     :: !(JSONText Int64)
-    , _sclAdvertiserId :: !(JSONText Int64)
+    { _sclAgencyId     :: !(Textual Int64)
+    , _sclAdvertiserId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedColumnsList' with the minimum fields required to make a request.

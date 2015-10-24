@@ -64,7 +64,7 @@ type ProjectsJobsListResource =
                        QueryParam "bearer_token" Text :>
                          QueryParam "view" Text :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (JSONText Int32) :>
+                             QueryParam "pageSize" (Textual Int32) :>
                                QueryParam "callback" Text :>
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListJobsResponse
@@ -82,7 +82,7 @@ data ProjectsJobsList = ProjectsJobsList
     , _pjlView           :: !(Maybe Text)
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlProjectId      :: !Text
-    , _pjlPageSize       :: !(Maybe (JSONText Int32))
+    , _pjlPageSize       :: !(Maybe (Textual Int32))
     , _pjlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 

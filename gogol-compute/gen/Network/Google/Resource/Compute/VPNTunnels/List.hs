@@ -56,7 +56,7 @@ type VPNTunnelsListResource =
                  "vpnTunnels" :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (JSONText Word32) :>
+                       QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnelList
 
 -- | Retrieves the list of VpnTunnel resources contained in the specified
@@ -68,7 +68,7 @@ data VPNTunnelsList = VPNTunnelsList
     , _vtlFilter     :: !(Maybe Text)
     , _vtlRegion     :: !Text
     , _vtlPageToken  :: !(Maybe Text)
-    , _vtlMaxResults :: !(JSONText Word32)
+    , _vtlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsList' with the minimum fields required to make a request.

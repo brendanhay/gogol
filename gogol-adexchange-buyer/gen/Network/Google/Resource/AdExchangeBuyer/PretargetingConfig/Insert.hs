@@ -46,7 +46,7 @@ type PretargetingConfigInsertResource =
      "adexchangebuyer" :>
        "v1.4" :>
          "pretargetingconfigs" :>
-           Capture "accountId" (JSONText Int64) :>
+           Capture "accountId" (Textual Int64) :>
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] PretargetingConfig :>
                  Post '[JSON] PretargetingConfig
@@ -56,7 +56,7 @@ type PretargetingConfigInsertResource =
 -- /See:/ 'pretargetingConfigInsert' smart constructor.
 data PretargetingConfigInsert = PretargetingConfigInsert
     { _pciPayload   :: !PretargetingConfig
-    , _pciAccountId :: !(JSONText Int64)
+    , _pciAccountId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigInsert' with the minimum fields required to make a request.

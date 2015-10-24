@@ -71,7 +71,7 @@ instance ToJSON Tasks2 where
 data TaskQueue = TaskQueue
     { _tqKind      :: !Text
     , _tqStats     :: !(Maybe TaskQueueStats)
-    , _tqMaxLeases :: !(Maybe (JSONText Int32))
+    , _tqMaxLeases :: !(Maybe (Textual Int32))
     , _tqId        :: !(Maybe Text)
     , _tqACL       :: !(Maybe TaskQueueACL)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -217,10 +217,10 @@ instance ToJSON TaskQueueACL where
 --
 -- /See:/ 'taskQueueStats' smart constructor.
 data TaskQueueStats = TaskQueueStats
-    { _tqsTotalTasks       :: !(Maybe (JSONText Int32))
-    , _tqsOldestTask       :: !(Maybe (JSONText Int64))
-    , _tqsLeasedLastHour   :: !(Maybe (JSONText Int64))
-    , _tqsLeasedLastMinute :: !(Maybe (JSONText Int64))
+    { _tqsTotalTasks       :: !(Maybe (Textual Int32))
+    , _tqsOldestTask       :: !(Maybe (Textual Int64))
+    , _tqsLeasedLastHour   :: !(Maybe (Textual Int64))
+    , _tqsLeasedLastMinute :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskQueueStats' with the minimum fields required to make a request.
@@ -342,14 +342,14 @@ instance ToJSON Tasks where
 --
 -- /See:/ 'task' smart constructor.
 data Task = Task
-    { _ttRetryCount       :: !(Maybe (JSONText Int32))
-    , _ttEnqueueTimestamp :: !(Maybe (JSONText Int64))
+    { _ttRetryCount       :: !(Maybe (Textual Int32))
+    , _ttEnqueueTimestamp :: !(Maybe (Textual Int64))
     , _ttTag              :: !(Maybe Text)
     , _ttKind             :: !Text
     , _ttQueueName        :: !(Maybe Text)
     , _ttPayloadBase64    :: !(Maybe Text)
     , _ttId               :: !(Maybe Text)
-    , _ttLeaseTimestamp   :: !(Maybe (JSONText Int64))
+    , _ttLeaseTimestamp   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Task' with the minimum fields required to make a request.

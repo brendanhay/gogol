@@ -53,7 +53,7 @@ type ActivitiesListResource =
              "activities" :>
                Capture "collection" ActivitiesListCollection :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (JSONText Word32) :>
+                   QueryParam "maxResults" (Textual Word32) :>
                      QueryParam "alt" AltJSON :> Get '[JSON] ActivityFeed
 
 -- | List all of the activities in the specified collection for a particular
@@ -64,7 +64,7 @@ data ActivitiesList = ActivitiesList
     { _alCollection :: !ActivitiesListCollection
     , _alUserId     :: !Text
     , _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !(JSONText Word32)
+    , _alMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.

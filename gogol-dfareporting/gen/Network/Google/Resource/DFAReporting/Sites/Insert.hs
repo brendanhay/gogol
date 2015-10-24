@@ -46,7 +46,7 @@ type SitesInsertResource =
      "dfareporting" :>
        "v2.2" :>
          "userprofiles" :>
-           Capture "profileId" (JSONText Int64) :>
+           Capture "profileId" (Textual Int64) :>
              "sites" :>
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Site :> Post '[JSON] Site
@@ -55,7 +55,7 @@ type SitesInsertResource =
 --
 -- /See:/ 'sitesInsert' smart constructor.
 data SitesInsert = SitesInsert
-    { _sProFileId :: !(JSONText Int64)
+    { _sProFileId :: !(Textual Int64)
     , _sPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
 

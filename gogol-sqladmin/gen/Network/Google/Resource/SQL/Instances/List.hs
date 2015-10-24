@@ -51,7 +51,7 @@ type InstancesListResource =
            Capture "project" Text :>
              "instances" :>
                QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (JSONText Word32) :>
+                 QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] InstancesListResponse
 
@@ -62,7 +62,7 @@ type InstancesListResource =
 data InstancesList = InstancesList
     { _ilProject    :: !Text
     , _ilPageToken  :: !(Maybe Text)
-    , _ilMaxResults :: !(Maybe (JSONText Word32))
+    , _ilMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesList' with the minimum fields required to make a request.

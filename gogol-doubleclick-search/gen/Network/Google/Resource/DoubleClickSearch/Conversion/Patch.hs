@@ -53,13 +53,13 @@ type ConversionPatchResource =
      "doubleclicksearch" :>
        "v2" :>
          "conversion" :>
-           QueryParam "advertiserId" (JSONText Int64) :>
-             QueryParam "agencyId" (JSONText Int64) :>
-               QueryParam "endDate" (JSONText Int32) :>
-                 QueryParam "engineAccountId" (JSONText Int64) :>
-                   QueryParam "rowCount" (JSONText Int32) :>
-                     QueryParam "startDate" (JSONText Int32) :>
-                       QueryParam "startRow" (JSONText Word32) :>
+           QueryParam "advertiserId" (Textual Int64) :>
+             QueryParam "agencyId" (Textual Int64) :>
+               QueryParam "endDate" (Textual Int32) :>
+                 QueryParam "engineAccountId" (Textual Int64) :>
+                   QueryParam "rowCount" (Textual Int32) :>
+                     QueryParam "startDate" (Textual Int32) :>
+                       QueryParam "startRow" (Textual Word32) :>
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] ConversionList :>
                              Patch '[JSON] ConversionList
@@ -69,14 +69,14 @@ type ConversionPatchResource =
 --
 -- /See:/ 'conversionPatch' smart constructor.
 data ConversionPatch = ConversionPatch
-    { _cpEngineAccountId :: !(JSONText Int64)
-    , _cpAgencyId        :: !(JSONText Int64)
-    , _cpAdvertiserId    :: !(JSONText Int64)
-    , _cpEndDate         :: !(JSONText Int32)
+    { _cpEngineAccountId :: !(Textual Int64)
+    , _cpAgencyId        :: !(Textual Int64)
+    , _cpAdvertiserId    :: !(Textual Int64)
+    , _cpEndDate         :: !(Textual Int32)
     , _cpPayload         :: !ConversionList
-    , _cpStartDate       :: !(JSONText Int32)
-    , _cpStartRow        :: !(JSONText Word32)
-    , _cpRowCount        :: !(JSONText Int32)
+    , _cpStartDate       :: !(Textual Int32)
+    , _cpStartRow        :: !(Textual Word32)
+    , _cpRowCount        :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionPatch' with the minimum fields required to make a request.

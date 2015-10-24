@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'intValue' smart constructor.
 data IntValue = IntValue
-    { _ivValue :: !(Maybe (JSONText Int64))
+    { _ivValue :: !(Maybe (Textual Int64))
     , _ivLabel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ instance ToJSON IntValue where
 --
 -- /See:/ 'doubleValue' smart constructor.
 data DoubleValue = DoubleValue
-    { _dvValue :: !(Maybe (JSONText Float))
+    { _dvValue :: !(Maybe (Textual Double))
     , _dvLabel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -182,7 +182,7 @@ instance ToJSON AggregatedStatsReply where
 --
 -- /See:/ 'stats' smart constructor.
 data Stats = Stats
-    { _sTime         :: !(Maybe (JSONText Double))
+    { _sTime         :: !(Maybe (Textual Double))
     , _sDoubleValues :: !(Maybe [DoubleValue])
     , _sStringValues :: !(Maybe [StringValue])
     , _sIntValues    :: !(Maybe [IntValue])

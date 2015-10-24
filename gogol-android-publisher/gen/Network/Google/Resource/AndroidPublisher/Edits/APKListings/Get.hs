@@ -53,7 +53,7 @@ type EditsAPKListingsGetResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   Capture "apkVersionCode" (JSONText Int32) :>
+                   Capture "apkVersionCode" (Textual Int32) :>
                      "listings" :>
                        Capture "language" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] APKListing
@@ -64,7 +64,7 @@ type EditsAPKListingsGetResource =
 -- /See:/ 'editsAPKListingsGet' smart constructor.
 data EditsAPKListingsGet = EditsAPKListingsGet
     { _eapklgPackageName    :: !Text
-    , _eapklgAPKVersionCode :: !(JSONText Int32)
+    , _eapklgAPKVersionCode :: !(Textual Int32)
     , _eapklgLanguage       :: !Text
     , _eapklgEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)

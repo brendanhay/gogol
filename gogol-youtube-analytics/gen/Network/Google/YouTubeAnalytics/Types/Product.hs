@@ -24,7 +24,7 @@ import           Network.Google.YouTubeAnalytics.Types.Sum
 -- /See:/ 'groupContentDetails' smart constructor.
 data GroupContentDetails = GroupContentDetails
     { _gcdItemType  :: !(Maybe Text)
-    , _gcdItemCount :: !(Maybe (JSONText Word64))
+    , _gcdItemCount :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupContentDetails' with the minimum fields required to make a request.
