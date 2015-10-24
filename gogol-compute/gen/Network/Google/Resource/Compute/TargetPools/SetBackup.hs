@@ -116,7 +116,7 @@ tpsbPayload
   = lens _tpsbPayload (\ s a -> s{_tpsbPayload = a})
 
 -- | New failoverRatio value for the containing target pool.
-tpsbFailoverRatio :: Lens' TargetPoolsSetBackup (Maybe Float)
+tpsbFailoverRatio :: Lens' TargetPoolsSetBackup (Maybe Double)
 tpsbFailoverRatio
   = lens _tpsbFailoverRatio
       (\ s a -> s{_tpsbFailoverRatio = a})

@@ -2767,7 +2767,7 @@ fimmSubjectDistance
 
 -- | The smallest f-number of the lens at the focal length used to create the
 -- photo (APEX value).
-fimmMaxApertureValue :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmMaxApertureValue :: Lens' FileImageMediaMetadata (Maybe Double)
 fimmMaxApertureValue
   = lens _fimmMaxApertureValue
       (\ s a -> s{_fimmMaxApertureValue = a})
@@ -2785,13 +2785,13 @@ fimmLocation
   = lens _fimmLocation (\ s a -> s{_fimmLocation = a})
 
 -- | The aperture used to create the photo (f-number).
-fimmAperture :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmAperture :: Lens' FileImageMediaMetadata (Maybe Double)
 fimmAperture
   = lens _fimmAperture (\ s a -> s{_fimmAperture = a})
       . mapping _Coerce
 
 -- | The focal length used to create the photo, in millimeters.
-fimmFocalLength :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmFocalLength :: Lens' FileImageMediaMetadata (Maybe Double)
 fimmFocalLength
   = lens _fimmFocalLength
       (\ s a -> s{_fimmFocalLength = a})
@@ -2810,7 +2810,7 @@ fimmWidth
       mapping _Coerce
 
 -- | The length of the exposure, in seconds.
-fimmExposureTime :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmExposureTime :: Lens' FileImageMediaMetadata (Maybe Double)
 fimmExposureTime
   = lens _fimmExposureTime
       (\ s a -> s{_fimmExposureTime = a})
@@ -2843,7 +2843,7 @@ fimmFlashUsed
       (\ s a -> s{_fimmFlashUsed = a})
 
 -- | The exposure bias of the photo (APEX value).
-fimmExposureBias :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmExposureBias :: Lens' FileImageMediaMetadata (Maybe Double)
 fimmExposureBias
   = lens _fimmExposureBias
       (\ s a -> s{_fimmExposureBias = a})

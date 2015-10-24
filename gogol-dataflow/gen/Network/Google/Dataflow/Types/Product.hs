@@ -4897,7 +4897,7 @@ apRemainingTime
 
 -- | Completion as percentage of the work, from 0.0 (beginning, nothing
 -- complete), to 1.0 (end of the work range, entire WorkItem complete).
-apPercentComplete :: Lens' ApproximateProgress (Maybe Float)
+apPercentComplete :: Lens' ApproximateProgress (Maybe Double)
 apPercentComplete
   = lens _apPercentComplete
       (\ s a -> s{_apPercentComplete = a})

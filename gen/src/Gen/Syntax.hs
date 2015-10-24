@@ -541,7 +541,7 @@ externalLit = \case
     Date      -> TyCon "Day"
     DateTime  -> TyCon "UTCTime"
     Nat       -> TyCon "Natural"
-    Float     -> TyCon "Float"
+    Float     -> TyCon "Double"
     Double    -> TyCon "Double"
     Byte      -> TyCon "Word8"
     UInt32    -> TyCon "Word32"

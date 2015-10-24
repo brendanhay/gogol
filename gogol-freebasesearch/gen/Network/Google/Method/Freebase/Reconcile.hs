@@ -111,7 +111,7 @@ rLang
       _Coerce
 
 -- | Required confidence for a candidate to match. Must be between .5 and 1.0
-rConfidence :: Lens' Reconcile Float
+rConfidence :: Lens' Reconcile Double
 rConfidence
   = lens _rConfidence (\ s a -> s{_rConfidence = a}) .
       _Coerce

@@ -287,7 +287,7 @@ rcLang = lens _rcLang (\ s a -> s{_rcLang = a})
 
 -- | Percentage likelihood that this candidate is the unique matching entity.
 -- Value will be between 0.0 and 1.0
-rcConfidence :: Lens' ReconcileCandidate (Maybe Float)
+rcConfidence :: Lens' ReconcileCandidate (Maybe Double)
 rcConfidence
   = lens _rcConfidence (\ s a -> s{_rcConfidence = a})
       . mapping _Coerce

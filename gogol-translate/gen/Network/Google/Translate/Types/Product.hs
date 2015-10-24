@@ -176,7 +176,7 @@ detectionsResourceItem =
     }
 
 -- | The confidence of the detection resul of this language.
-driConfidence :: Lens' DetectionsResourceItem (Maybe Float)
+driConfidence :: Lens' DetectionsResourceItem (Maybe Double)
 driConfidence
   = lens _driConfidence
       (\ s a -> s{_driConfidence = a})

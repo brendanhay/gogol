@@ -1648,7 +1648,7 @@ cbRange = lens _cbRange (\ s a -> s{_cbRange = a})
 
 -- | The average number of reads which are aligned to each individual
 -- reference base in this bucket.
-cbMeanCoverage :: Lens' CoverageBucket (Maybe Float)
+cbMeanCoverage :: Lens' CoverageBucket (Maybe Double)
 cbMeanCoverage
   = lens _cbMeanCoverage
       (\ s a -> s{_cbMeanCoverage = a})

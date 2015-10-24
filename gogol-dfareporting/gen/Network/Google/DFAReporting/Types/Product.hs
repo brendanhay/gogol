@@ -7076,7 +7076,7 @@ creCustomKeyValues
 -- | Creative video duration in seconds. This is a read-only field.
 -- Applicable to the following creative types: INSTREAM_VIDEO, all
 -- RICH_MEDIA, and all VPAID.
-creVideoDuration :: Lens' Creative (Maybe Float)
+creVideoDuration :: Lens' Creative (Maybe Double)
 creVideoDuration
   = lens _creVideoDuration
       (\ s a -> s{_creVideoDuration = a})
@@ -15894,7 +15894,7 @@ caaPushdown
 -- | Detected video duration for video asset. This is a read-only field.
 -- Applicable to the following creative types: INSTREAM_VIDEO and all
 -- VPAID.
-caaVideoDuration :: Lens' CreativeAsset (Maybe Float)
+caaVideoDuration :: Lens' CreativeAsset (Maybe Double)
 caaVideoDuration
   = lens _caaVideoDuration
       (\ s a -> s{_caaVideoDuration = a})
@@ -15929,7 +15929,7 @@ caaFlashVersion
 -- only applicable when the asset pushdown field is true, the offsets are
 -- 0, the collapsedSize.width matches size.width, and the
 -- collapsedSize.height is less than size.height.
-caaPushdownDuration :: Lens' CreativeAsset (Maybe Float)
+caaPushdownDuration :: Lens' CreativeAsset (Maybe Double)
 caaPushdownDuration
   = lens _caaPushdownDuration
       (\ s a -> s{_caaPushdownDuration = a})

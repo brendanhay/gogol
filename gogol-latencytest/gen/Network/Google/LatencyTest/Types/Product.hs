@@ -85,7 +85,7 @@ doubleValue =
     , _dvLabel = Nothing
     }
 
-dvValue :: Lens' DoubleValue (Maybe Float)
+dvValue :: Lens' DoubleValue (Maybe Double)
 dvValue
   = lens _dvValue (\ s a -> s{_dvValue = a}) .
       mapping _Coerce

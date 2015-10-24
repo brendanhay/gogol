@@ -3165,7 +3165,7 @@ tpId
 -- pool in the \"force\" mode, where traffic will be spread to the healthy
 -- instances with the best effort, or to all instances when no instance is
 -- healthy.
-tpFailoverRatio :: Lens' TargetPool (Maybe Float)
+tpFailoverRatio :: Lens' TargetPool (Maybe Double)
 tpFailoverRatio
   = lens _tpFailoverRatio
       (\ s a -> s{_tpFailoverRatio = a})
@@ -8476,7 +8476,7 @@ bBalancingMode
 -- | Used when balancingMode is UTILIZATION. This ratio defines the CPU
 -- utilization target for the group. The default is 0.8. Valid range is
 -- [0.0, 1.0].
-bMaxUtilization :: Lens' Backend (Maybe Float)
+bMaxUtilization :: Lens' Backend (Maybe Double)
 bMaxUtilization
   = lens _bMaxUtilization
       (\ s a -> s{_bMaxUtilization = a})
@@ -8493,7 +8493,7 @@ bMaxRate
 -- | The max RPS that a single backed instance can handle. This is used to
 -- calculate the capacity of the group. Can be used in either balancing
 -- mode. For RATE mode, either maxRate or maxRatePerInstance must be set.
-bMaxRatePerInstance :: Lens' Backend (Maybe Float)
+bMaxRatePerInstance :: Lens' Backend (Maybe Double)
 bMaxRatePerInstance
   = lens _bMaxRatePerInstance
       (\ s a -> s{_bMaxRatePerInstance = a})
@@ -8510,7 +8510,7 @@ bDescription
 -- serve up to 100% of its configured CPU or RPS (depending on
 -- balancingMode). A setting of 0 means the group is completely drained,
 -- offering 0% of its available CPU or RPS. Valid range is [0.0,1.0].
-bCapacityScaler :: Lens' Backend (Maybe Float)
+bCapacityScaler :: Lens' Backend (Maybe Double)
 bCapacityScaler
   = lens _bCapacityScaler
       (\ s a -> s{_bCapacityScaler = a})

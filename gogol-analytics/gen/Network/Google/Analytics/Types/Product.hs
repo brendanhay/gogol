@@ -6962,7 +6962,7 @@ goaCreated
       mapping _DateTime
 
 -- | Goal value.
-goaValue :: Lens' Goal (Maybe Float)
+goaValue :: Lens' Goal (Maybe Double)
 goaValue
   = lens _goaValue (\ s a -> s{_goaValue = a}) .
       mapping _Coerce
