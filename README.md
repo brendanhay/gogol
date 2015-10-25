@@ -5,7 +5,7 @@ under heavy development and not intended for public consumption, caveat emptor!
 
 [![Build Status](https://travis-ci.org/brendanhay/gogol.svg?branch=develop)](https://travis-ci.org/brendanhay/gogol)
 [![Hackage Version](https://img.shields.io/hackage/v/gogol.svg)](http://hackage.haskell.org/package/gogol)
-
+[![Gitter Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/brendanhay/gogol)
 
 * [Description](#description)
 * [Contribute](#contribute)
