@@ -3,6 +3,9 @@
 **Warning:** This is an experimental prototype/preview release which is still
 under heavy development and not intended for public consumption, caveat emptor!
 
+[![Build Status](https://travis-ci.org/brendanhay/gogol.svg?branch=develop)](https://travis-ci.org/brendanhay/gogol)
+[![Hackage Version](https://img.shields.io/hackage/v/gogol.svg)](http://hackage.haskell.org/package/gogol)
+
 
 * [Description](#description)
 * [Contribute](#contribute)
