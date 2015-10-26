@@ -50,8 +50,7 @@ module Network.Google
 
     , ToBody      (..)
     , RequestBody
-    , requestBodySource
-    , requestBodySourceChunked
+    , sourceBody
 
     -- ** Service Configuration
     -- ** Overriding Defaults
@@ -109,12 +108,11 @@ import qualified Control.Monad.Writer.Lazy      as LW
 import qualified Control.Monad.Writer.Strict    as W
 import           Network.Google.Auth
 import           Network.Google.Env
+import           Network.Google.Internal.Body
 import           Network.Google.Internal.HTTP
 import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
 import           Network.Google.Types
-import           Network.HTTP.Conduit           (requestBodySource,
-                                                 requestBodySourceChunked)
 
 newtype Google a = Google { unGoogle :: ReaderT Env (ResourceT IO) a }
     deriving

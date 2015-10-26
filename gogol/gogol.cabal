@@ -45,7 +45,8 @@ library
         , Network.Google.Env
 
     other-modules:
-          Network.Google.Internal.HTTP
+          Network.Google.Internal.Body
+        , Network.Google.Internal.HTTP
         , Network.Google.Internal.Logger
         , Network.Google.Internal.Multipart
 
@@ -54,6 +55,7 @@ library
         , base                 >= 4.7 && < 5
         , bytestring           >= 0.9
         , case-insensitive     >= 1.2
+        , conduit-extra        >= 1.1
         , cryptonite           >= 0.6
         , data-default-class   >= 0.0.1
         , directory            >= 1.2
