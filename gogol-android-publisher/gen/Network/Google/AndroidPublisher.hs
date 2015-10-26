@@ -21,6 +21,9 @@ module Network.Google.AndroidPublisher
     -- * Service Configuration
       androidPublisherService
 
+    -- * OAuth Scopes
+    , androidpublisherScope
+
     -- * API Declaration
     , AndroidPublisherAPI
 

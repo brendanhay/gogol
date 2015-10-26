@@ -21,6 +21,14 @@ module Network.Google.Classroom
     -- * Service Configuration
       classroomService
 
+    -- * OAuth Scopes
+    , classroomRostersReadonlyScope
+    , classroomCoursesScope
+    , classroomProfileEmailsScope
+    , classroomProfilePhotosScope
+    , classroomRostersScope
+    , classroomCoursesReadonlyScope
+
     -- * API Declaration
     , ClassroomAPI
 

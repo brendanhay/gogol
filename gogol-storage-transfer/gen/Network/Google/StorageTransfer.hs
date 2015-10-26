@@ -22,6 +22,9 @@ module Network.Google.StorageTransfer
     -- * Service Configuration
       storageTransferService
 
+    -- * OAuth Scopes
+    , cloudPlatformScope
+
     -- * API Declaration
     , StorageTransferAPI
 

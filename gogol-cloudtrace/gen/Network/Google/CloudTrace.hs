@@ -22,6 +22,9 @@ module Network.Google.CloudTrace
     -- * Service Configuration
       cloudTraceService
 
+    -- * OAuth Scopes
+    , cloudPlatformScope
+
     -- * API Declaration
     , CloudTraceAPI
 

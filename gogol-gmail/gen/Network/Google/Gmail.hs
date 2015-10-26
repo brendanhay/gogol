@@ -21,6 +21,15 @@ module Network.Google.Gmail
     -- * Service Configuration
       gmailService
 
+    -- * OAuth Scopes
+    , gmailAllScope
+    , gmailModifyScope
+    , gmailLabelsScope
+    , gmailSendScope
+    , gmailInsertScope
+    , gmailComposeScope
+    , gmailReadonlyScope
+
     -- * API Declaration
     , GmailAPI
 

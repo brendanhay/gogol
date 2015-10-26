@@ -21,6 +21,11 @@ module Network.Google.Datastore
     -- * Service Configuration
       datastoreService
 
+    -- * OAuth Scopes
+    , userinfoEmailScope
+    , cloudPlatformScope
+    , datastoreScope
+
     -- * API Declaration
     , DatastoreAPI
 

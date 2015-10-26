@@ -22,6 +22,9 @@ module Network.Google.ResourceManager
     -- * Service Configuration
       resourceManagerService
 
+    -- * OAuth Scopes
+    , cloudPlatformScope
+
     -- * API Declaration
     , ResourceManagerAPI
 

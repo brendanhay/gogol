@@ -21,6 +21,10 @@ module Network.Google.DFAReporting
     -- * Service Configuration
       dFAReportingService
 
+    -- * OAuth Scopes
+    , dfareportingScope
+    , dfatraffickingScope
+
     -- * API Declaration
     , DFAReportingAPI
 

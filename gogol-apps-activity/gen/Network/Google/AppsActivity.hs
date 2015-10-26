@@ -21,6 +21,13 @@ module Network.Google.AppsActivity
     -- * Service Configuration
       appsActivityService
 
+    -- * OAuth Scopes
+    , driveMetadataReadonlyScope
+    , activityScope
+    , driveReadonlyScope
+    , driveScope
+    , driveMetadataScope
+
     -- * API Declaration
     , AppsActivityAPI
 

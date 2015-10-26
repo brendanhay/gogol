@@ -21,6 +21,9 @@ module Network.Google.GroupsSettings
     -- * Service Configuration
       groupsSettingsService
 
+    -- * OAuth Scopes
+    , appsGroupsSettingsScope
+
     -- * API Declaration
     , GroupsSettingsAPI
 

@@ -21,6 +21,12 @@ module Network.Google.UserAccounts
     -- * Service Configuration
       userAccountsService
 
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , cloudUseraccountsScope
+    , cloudUseraccountsReadonlyScope
+
     -- * API Declaration
     , UserAccountsAPI
 

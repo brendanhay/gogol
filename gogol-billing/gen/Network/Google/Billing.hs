@@ -22,6 +22,9 @@ module Network.Google.Billing
     -- * Service Configuration
       billingService
 
+    -- * OAuth Scopes
+    , cloudPlatformScope
+
     -- * API Declaration
     , BillingAPI
 

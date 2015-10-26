@@ -21,6 +21,14 @@ module Network.Google.Compute
     -- * Service Configuration
       computeService
 
+    -- * OAuth Scopes
+    , computeScope
+    , cloudPlatformScope
+    , devstorageReadOnlyScope
+    , devstorageReadWriteScope
+    , computeReadonlyScope
+    , devstorageFullControlScope
+
     -- * API Declaration
     , ComputeAPI
 

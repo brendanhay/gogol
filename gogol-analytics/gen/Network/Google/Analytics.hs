@@ -21,6 +21,14 @@ module Network.Google.Analytics
     -- * Service Configuration
       analyticsService
 
+    -- * OAuth Scopes
+    , analyticsManageUsersScope
+    , analyticsProvisionScope
+    , analyticsManageUsersReadonlyScope
+    , analyticsScope
+    , analyticsReadonlyScope
+    , analyticsEditScope
+
     -- * API Declaration
     , AnalyticsAPI
 

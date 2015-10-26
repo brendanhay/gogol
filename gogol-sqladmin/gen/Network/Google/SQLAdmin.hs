@@ -21,6 +21,10 @@ module Network.Google.SQLAdmin
     -- * Service Configuration
       sQLAdminService
 
+    -- * OAuth Scopes
+    , sqlserviceAdminScope
+    , cloudPlatformScope
+
     -- * API Declaration
     , SQLAdminAPI
 

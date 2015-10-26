@@ -22,6 +22,10 @@ module Network.Google.SiteVerification
     -- * Service Configuration
       siteVerificationService
 
+    -- * OAuth Scopes
+    , siteverificationVerifyOnlyScope
+    , siteverificationScope
+
     -- * API Declaration
     , SiteVerificationAPI
 

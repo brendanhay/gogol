@@ -22,6 +22,12 @@ module Network.Google.Prediction
     -- * Service Configuration
       predictionService
 
+    -- * OAuth Scopes
+    , devstorageReadOnlyScope
+    , devstorageReadWriteScope
+    , predictionScope
+    , devstorageFullControlScope
+
     -- * API Declaration
     , PredictionAPI
 

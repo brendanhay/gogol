@@ -21,6 +21,9 @@ module Network.Google.AppState
     -- * Service Configuration
       appStateService
 
+    -- * OAuth Scopes
+    , appstateScope
+
     -- * API Declaration
     , AppStateAPI
 

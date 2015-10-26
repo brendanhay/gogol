@@ -21,6 +21,17 @@ module Network.Google.Drive
     -- * Service Configuration
       driveService
 
+    -- * OAuth Scopes
+    , driveMetadataReadonlyScope
+    , driveAppsReadonlyScope
+    , drivePhotosReadonlyScope
+    , driveAppdataScope
+    , driveReadonlyScope
+    , driveScope
+    , driveFileScope
+    , driveMetadataScope
+    , driveScriptsScope
+
     -- * API Declaration
     , DriveAPI
 

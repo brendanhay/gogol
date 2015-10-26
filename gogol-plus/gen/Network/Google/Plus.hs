@@ -22,6 +22,12 @@ module Network.Google.Plus
     -- * Service Configuration
       plusService
 
+    -- * OAuth Scopes
+    , userinfoProfileScope
+    , plusLoginScope
+    , userinfoEmailScope
+    , plusMeScope
+
     -- * API Declaration
     , PlusAPI
 

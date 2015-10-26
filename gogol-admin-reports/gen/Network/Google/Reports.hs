@@ -22,6 +22,10 @@ module Network.Google.Reports
     -- * Service Configuration
       reportsService
 
+    -- * OAuth Scopes
+    , adminReportsUsageReadonlyScope
+    , adminReportsAuditReadonlyScope
+
     -- * API Declaration
     , ReportsAPI
 

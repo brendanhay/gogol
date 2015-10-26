@@ -21,6 +21,9 @@ module Network.Google.GroupsMigration
     -- * Service Configuration
       groupsMigrationService
 
+    -- * OAuth Scopes
+    , appsGroupsMigrationScope
+
     -- * API Declaration
     , GroupsMigrationAPI
 

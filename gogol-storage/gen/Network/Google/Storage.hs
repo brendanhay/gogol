@@ -21,6 +21,13 @@ module Network.Google.Storage
     -- * Service Configuration
       storageService
 
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , devstorageReadOnlyScope
+    , devstorageReadWriteScope
+    , devstorageFullControlScope
+
     -- * API Declaration
     , StorageAPI
 

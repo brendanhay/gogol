@@ -21,6 +21,9 @@ module Network.Google.Books
     -- * Service Configuration
       booksService
 
+    -- * OAuth Scopes
+    , booksScope
+
     -- * API Declaration
     , BooksAPI
 

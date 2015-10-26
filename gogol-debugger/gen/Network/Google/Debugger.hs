@@ -22,6 +22,11 @@ module Network.Google.Debugger
     -- * Service Configuration
       debuggerService
 
+    -- * OAuth Scopes
+    , cloudDebuggerScope
+    , cloudDebugletcontrollerScope
+    , cloudPlatformScope
+
     -- * API Declaration
     , DebuggerAPI
 

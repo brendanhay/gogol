@@ -22,6 +22,9 @@ module Network.Google.PlayMoviesPartner
     -- * Service Configuration
       playMoviesPartnerService
 
+    -- * OAuth Scopes
+    , playmoviesPartnerReadonlyScope
+
     -- * API Declaration
     , PlayMoviesPartnerAPI
 

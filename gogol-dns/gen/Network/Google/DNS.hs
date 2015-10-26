@@ -22,6 +22,12 @@ module Network.Google.DNS
     -- * Service Configuration
       dNSService
 
+    -- * OAuth Scopes
+    , ndevClouddnsReadonlyScope
+    , cloudPlatformReadOnlyScope
+    , ndevClouddnsReadwriteScope
+    , cloudPlatformScope
+
     -- * API Declaration
     , DNSAPI
 

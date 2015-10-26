@@ -23,6 +23,33 @@ module Network.Google.Directory
     -- * Service Configuration
       directoryService
 
+    -- * OAuth Scopes
+    , adminDirectoryRolemanagementReadonlyScope
+    , adminDirectoryGroupReadonlyScope
+    , adminDirectoryDeviceChromeosReadonlyScope
+    , adminDirectoryDeviceChromeosScope
+    , adminDirectoryUserScope
+    , adminDirectoryGroupMemberReadonlyScope
+    , adminDirectoryUserAliasScope
+    , adminDirectoryDeviceMobileActionScope
+    , adminDirectoryDomainReadonlyScope
+    , adminDirectoryUserschemaScope
+    , adminDirectoryUserschemaReadonlyScope
+    , adminDirectoryDomainScope
+    , adminDirectoryRolemanagementScope
+    , adminDirectoryGroupScope
+    , adminDirectoryOrgunitReadonlyScope
+    , adminDirectoryCustomerScope
+    , adminDirectoryCustomerReadonlyScope
+    , adminDirectoryOrgunitScope
+    , adminDirectoryUserReadonlyScope
+    , adminDirectoryUserAliasReadonlyScope
+    , adminDirectoryUserSecurityScope
+    , adminDirectoryGroupMemberScope
+    , adminDirectoryNotificationsScope
+    , adminDirectoryDeviceMobileScope
+    , adminDirectoryDeviceMobileReadonlyScope
+
     -- * API Declaration
     , DirectoryAPI
 

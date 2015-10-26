@@ -22,6 +22,9 @@ module Network.Google.AndroidEnterprise
     -- * Service Configuration
       androidEnterpriseService
 
+    -- * OAuth Scopes
+    , androidenterpriseScope
+
     -- * API Declaration
     , AndroidEnterpriseAPI
 

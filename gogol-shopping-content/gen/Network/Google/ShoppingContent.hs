@@ -22,6 +22,9 @@ module Network.Google.ShoppingContent
     -- * Service Configuration
       shoppingContentService
 
+    -- * OAuth Scopes
+    , contentScope
+
     -- * API Declaration
     , ShoppingContentAPI
 

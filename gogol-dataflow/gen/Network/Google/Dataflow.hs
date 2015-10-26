@@ -21,6 +21,10 @@ module Network.Google.Dataflow
     -- * Service Configuration
       dataflowService
 
+    -- * OAuth Scopes
+    , userinfoEmailScope
+    , cloudPlatformScope
+
     -- * API Declaration
     , DataflowAPI
 

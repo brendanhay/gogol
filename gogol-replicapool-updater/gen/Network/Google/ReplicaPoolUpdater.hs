@@ -22,6 +22,12 @@ module Network.Google.ReplicaPoolUpdater
     -- * Service Configuration
       replicaPoolUpdaterService
 
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , replicapoolScope
+    , replicapoolReadonlyScope
+
     -- * API Declaration
     , ReplicaPoolUpdaterAPI
 

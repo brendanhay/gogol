@@ -23,6 +23,9 @@ module Network.Google.Container
     -- * Service Configuration
       containerService
 
+    -- * OAuth Scopes
+    , cloudPlatformScope
+
     -- * API Declaration
     , ContainerAPI
 

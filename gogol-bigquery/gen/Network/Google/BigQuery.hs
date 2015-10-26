@@ -21,6 +21,15 @@ module Network.Google.BigQuery
     -- * Service Configuration
       bigQueryService
 
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , devstorageReadOnlyScope
+    , bigqueryInsertdataScope
+    , devstorageReadWriteScope
+    , bigqueryScope
+    , devstorageFullControlScope
+
     -- * API Declaration
     , BigQueryAPI
 

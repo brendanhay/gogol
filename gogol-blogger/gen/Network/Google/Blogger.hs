@@ -21,6 +21,10 @@ module Network.Google.Blogger
     -- * Service Configuration
       bloggerService
 
+    -- * OAuth Scopes
+    , bloggerScope
+    , bloggerReadonlyScope
+
     -- * API Declaration
     , BloggerAPI
 

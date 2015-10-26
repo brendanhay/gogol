@@ -21,6 +21,12 @@ module Network.Google.OAuth2
     -- * Service Configuration
       oAuth2Service
 
+    -- * OAuth Scopes
+    , userinfoProfileScope
+    , plusLoginScope
+    , userinfoEmailScope
+    , plusMeScope
+
     -- * API Declaration
     , OAuth2API
 

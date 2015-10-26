@@ -23,6 +23,9 @@ module Network.Google.AdExchangeBuyer
     -- * Service Configuration
       adExchangeBuyerService
 
+    -- * OAuth Scopes
+    , adexchangeBuyerScope
+
     -- * API Declaration
     , AdExchangeBuyerAPI
 

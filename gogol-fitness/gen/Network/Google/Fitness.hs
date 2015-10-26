@@ -21,6 +21,14 @@ module Network.Google.Fitness
     -- * Service Configuration
       fitnessService
 
+    -- * OAuth Scopes
+    , fitnessBodyReadScope
+    , fitnessActivityReadScope
+    , fitnessActivityWriteScope
+    , fitnessLocationReadScope
+    , fitnessLocationWriteScope
+    , fitnessBodyWriteScope
+
     -- * API Declaration
     , FitnessAPI
 

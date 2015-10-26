@@ -21,6 +21,10 @@ module Network.Google.Mirror
     -- * Service Configuration
       mirrorService
 
+    -- * OAuth Scopes
+    , glassTimelineScope
+    , glassLocationScope
+
     -- * API Declaration
     , MirrorAPI
 

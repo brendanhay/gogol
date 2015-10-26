@@ -21,6 +21,10 @@ module Network.Google.MapsCoordinate
     -- * Service Configuration
       mapsCoordinateService
 
+    -- * OAuth Scopes
+    , coordinateScope
+    , coordinateReadonlyScope
+
     -- * API Declaration
     , MapsCoordinateAPI
 

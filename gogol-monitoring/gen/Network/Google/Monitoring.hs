@@ -21,6 +21,10 @@ module Network.Google.Monitoring
     -- * Service Configuration
       monitoringService
 
+    -- * OAuth Scopes
+    , cloudPlatformScope
+    , monitoringScope
+
     -- * API Declaration
     , MonitoringAPI
 

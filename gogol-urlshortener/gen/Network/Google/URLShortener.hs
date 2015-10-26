@@ -21,6 +21,9 @@ module Network.Google.URLShortener
     -- * Service Configuration
       uRLShortenerService
 
+    -- * OAuth Scopes
+    , urlshortenerScope
+
     -- * API Declaration
     , URLShortenerAPI
 

@@ -21,6 +21,10 @@ module Network.Google.FusionTables
     -- * Service Configuration
       fusionTablesService
 
+    -- * OAuth Scopes
+    , fusiontablesReadonlyScope
+    , fusiontablesScope
+
     -- * API Declaration
     , FusionTablesAPI
 
