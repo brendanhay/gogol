@@ -119,10 +119,3 @@ newEnvWith :: (MonadIO m, MonadCatch m)
            -> Manager
            -> m Env
 newEnvWith c ss l m = Env l mempty m <$> getAuth c ss l m
-
--- Maybe make it so scope is a part of service, configurable?
---   - needs to be per service .. but the initial authorise, what?
---   - investigate how the credentials are cached by oauth2client,
---       is it storing multiple per service you're using?
---       this would mean the initial refresh is invalid, since the
---       scope is wrong.

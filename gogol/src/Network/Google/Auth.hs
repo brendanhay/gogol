@@ -23,7 +23,7 @@ module Network.Google.Auth
    -- * Authentication
    -- ** Retrieving Authentication
      getAuth
-   , Credentials (..)
+   , Credentials    (..)
    , Auth
 
    -- ** Authorising Requests
@@ -46,15 +46,23 @@ module Network.Google.Auth
    , fromFile
    , fromFilePath
 
+   -- *** Authorised User
+   , AuthorisedUser (..)
+   , fromAuthorisedUser
+
+   -- *** Service Account
+   , ServiceAccount (..)
+   , fromServiceAccount
+
    -- ** Handling Errors
-   , AsAuthError (..)
-   , AuthError   (..)
+   , AsAuthError    (..)
+   , AuthError      (..)
 
    -- ** Re-exported Types
-   , OAuthScope  (..)
-   , OAuthToken  (..)
-   , ServiceId   (..)
-   , ClientId    (..)
+   , OAuthScope     (..)
+   , OAuthToken     (..)
+   , ServiceId      (..)
+   , ClientId       (..)
    ) where
 
 import           Control.Applicative
@@ -278,11 +286,25 @@ fromFilePath ss f l m = do
     e <- liftIO (LBS.readFile f) >>=
         either (throwM . InvalidFileError f) pure . parseLBS
     case e of
-        ParsedUser    u -> refresh u l m >>= fmap AuthUser . liftIO . newMVar
-        -- Add a check to ensure scopes isn't empty for service_account here.
-        ParsedService a -> do
-            let s = a { _serviceScope = ss }
-            refresh s l m >>= fmap AuthSign . liftIO . newMVar
+        ParsedUser    u -> fromAuthorisedUser u l m
+        ParsedService a -> fromServiceAccount (a { _serviceScope = ss }) l m
+
+fromAuthorisedUser :: (MonadIO m, MonadCatch m)
+                   => AuthorisedUser
+                   -> Logger
+                   -> Manager
+                   -> m Auth
+fromAuthorisedUser u l m =
+    refresh u l m >>= fmap AuthUser . liftIO . newMVar
+
+fromServiceAccount :: (MonadIO m, MonadCatch m)
+                   => ServiceAccount
+                   -> Logger
+                   -> Manager
+                   -> m Auth
+fromServiceAccount s l m =
+    -- Add a check to ensure scopes aren't empty.
+    refresh s l m >>= fmap AuthSign . liftIO . newMVar
 
 -- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
 -- default application credentials filepath.
