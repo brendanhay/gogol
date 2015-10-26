@@ -105,7 +105,7 @@ timeout s = local (override (serviceTimeout ?~ s))
 -- and uses 'getAuth' to expand/discover the supplied 'Credentials'.
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
--- /See:/ 'newEnvWith'.
+-- /See:/ 'newEnvWith', 'defaultScopes'.
 newEnv :: (MonadIO m, MonadCatch m) => Credentials -> [OAuthScope] -> m Env
 newEnv c ss = liftIO (newManager tlsManagerSettings) >>= newEnvWith c ss logger
   where

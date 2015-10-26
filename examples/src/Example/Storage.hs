@@ -21,7 +21,7 @@ import           System.IO
 example :: Text -> FilePath -> IO ()
 example bkt f = do
     l  <- newLogger Debug stdout
-    e  <- newEnv Discover <&> envLogger .~ l
+    e  <- newEnv Discover ["https://accounts.google.com"] <&> envLogger .~ l
 
     let key = Text.pack f
         src = requestBodySourceChunked (sourceFile f)
