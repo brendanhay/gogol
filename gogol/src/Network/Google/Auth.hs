@@ -198,19 +198,24 @@ data Credentials
 
 -- | Retrieve authentication information via the specified 'Credentials' mechanism.
 --
+-- The specified 'OAuthScope's are used to authorise any @service_account@
+-- with the appropriate scopes. See the top-level module of each individual
+-- @gogol-*@ library for a list of available scopes, such as @Network.Google.Compute.computeScope@.
+--
 -- Throws 'AuthError' when environment variables or service account information
 -- cannot be read, and credentials files are invalid or cannot be found.
 getAuth :: (MonadIO m, MonadCatch m)
         => Credentials
+        -> [OAuthScope]
         -> Logger
         -> Manager
         -> m Auth
-getAuth c l m = case c of
+getAuth c ss l m = case c of
     FromToken   t -> pure (AuthToken t)
-    FromFile    f -> fromFilePath f l m
-    FromAccount s -> fromMetadata s l m
+    FromFile    f -> fromFilePath ss f l m
+    FromAccount s -> fromMetadata    s l m
     Discover      ->
-        catching _MissingFileError (fromFile l m) $ \f -> do
+        catching _MissingFileError (fromFile ss l m) $ \f -> do
             p <- isGCE m
             unless p $
                 throwingM _MissingFileError f
@@ -227,14 +232,14 @@ fromMetadata s l = refresh s l >=> fmap AuthMeta . liftIO . newMVar
 
 -- | Attempt to load either a @service_account@ or @authorized_user@ formatted
 -- file to obtain the credentials neccessary to perform a token refresh.
-fromFile :: (MonadIO m, MonadCatch m) => Logger -> Manager -> m Auth
-fromFile l m = do
+fromFile :: (MonadIO m, MonadCatch m) => [OAuthScope] -> Logger -> Manager -> m Auth
+fromFile ss l m = do
     f <- defaultCredentialsPath
     case f of
-        Just x  -> fromFilePath x l m
+        Just x  -> fromFilePath ss x l m
         Nothing -> do
             x <- cloudSDKConfigPath
-            fromFilePath x l m
+            fromFilePath ss x l m
 
 -- | An internal type inhabited by the supported JSON formats
 -- for Application Default Credentials.
@@ -260,11 +265,12 @@ instance FromJSON AccountJSON where
 -- file to obtain the credentials neccessary to perform a token refresh from
 -- the specified file.
 fromFilePath :: (MonadIO m, MonadCatch m)
-             => FilePath
+             => [OAuthScope]
+             -> FilePath
              -> Logger
              -> Manager
              -> m Auth
-fromFilePath f l m = do
+fromFilePath ss f l m = do
     logDebug l $ "Trying to read credentials from " <> build f
     p <- liftIO (doesFileExist f)
     unless p $
@@ -272,8 +278,11 @@ fromFilePath f l m = do
     e <- liftIO (LBS.readFile f) >>=
         either (throwM . InvalidFileError f) pure . parseLBS
     case e of
-        ParsedService a -> refresh a l m >>= fmap AuthSign . liftIO . newMVar
         ParsedUser    u -> refresh u l m >>= fmap AuthUser . liftIO . newMVar
+        -- Add a check to ensure scopes isn't empty for service_account here.
+        ParsedService a -> do
+            let s = a { _serviceScope = ss }
+            refresh s l m >>= fmap AuthSign . liftIO . newMVar
 
 -- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
 -- default application credentials filepath.
@@ -399,6 +408,7 @@ instance FromJSON (UTCTime -> Bearer) where
 data ServiceAccount = ServiceAccount
     { _serviceId    :: !ClientId
     , _serviceEmail :: !Text
+    , _serviceScope :: ![OAuthScope]
     , _serviceKeyId :: !Text
     , _serviceKey   :: !PrivateKey
     }
@@ -409,6 +419,7 @@ instance FromJSON ServiceAccount where
         ServiceAccount
             <$> o .: "client_id"
             <*> o .: "client_email"
+            <*> pure mempty
             <*> o .: "private_key_id"
             <*> case listToMaybe (readKeyFileFromMemory bs) of
                 Just (PrivKeyRSA k) -> pure k
@@ -452,7 +463,9 @@ instance Refresh ServiceAccount where
                }
         refreshRequest s rq l m
 
-jwtEncode :: (MonadIO m, MonadThrow m) => ServiceAccount -> m ByteString
+jwtEncode :: (MonadIO m, MonadThrow m)
+          => ServiceAccount
+          -> m ByteString
 jwtEncode s = liftIO $ do
     i <- input . truncate <$> getPOSIXTime
     r <- signSafer (Just SHA256) (_serviceKey s) i
@@ -477,8 +490,8 @@ jwtEncode s = liftIO $ do
             ]
 
         payload = base64Encode
-            [ "aud"   .= Text.decodeUtf8 (Client.host accountsRequest)
-            , "scope" .= ([] :: [Text])
+            [ "aud"   .= Text.pack "https://accounts.google.com/o/oauth2/token"
+            , "scope" .= concatScopes (_serviceScope s)
             , "iat"   .= n
             , "exp"   .= (n + maxTokenLifetimeSeconds)
             , "iss"   .= _serviceEmail s
@@ -520,18 +533,19 @@ refreshRequest :: (MonadIO m, MonadCatch m)
                -> Manager
                -> m (Expires a)
 refreshRequest r rq l m = do
-    logDebug l rq -- debug:ClientRequest
+    logDebug l rq                          -- debug:ClientRequest
 
     rs <- liftIO (httpLbs rq m) `catch` (throwM . RetrievalError)
-
-    logDebug l rs -- debug:ClientResponse
 
     let bs = responseBody   rs
         s  = responseStatus rs
 
+    logDebug l rs                          -- debug:ClientResponse
+    logTrace l $ "[Response Body]\n" <> bs -- trace:ResponseBody
+
     if fromEnum s == 200
         then success s bs
-        else failure s
+        else failure s bs
   where
     success s bs = do
         f  <- parseErr s bs
@@ -539,10 +553,12 @@ refreshRequest r rq l m = do
         let Bearer {..} = f ts
         pure $! Expires _bearerExpiry _bearerAccess r
 
-    failure s = do
+    failure s bs = do
         let e = "Failure refreshing token from " <> host <> path
         logError l $ "[Refresh Error] " <> build e
-        refreshErr s e Nothing
+        case parseLBS bs of
+            Right x -> refreshErr s (_error x) (_description x)
+            Left  _ -> refreshErr s e Nothing
 
     parseErr s bs =
         case parseLBS bs of
@@ -563,6 +579,5 @@ parseLBS = either (Left . Text.pack) Right . eitherDecode'
 base64Encode :: [Pair] -> ByteString
 base64Encode = base64 . LBS.toStrict . encode . object
 
--- base64 :: ToJSON a =>
 base64 :: ByteArray a => a -> ByteString
 base64 = convertToBase Base64URLUnpadded

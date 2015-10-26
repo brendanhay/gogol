@@ -25,6 +25,7 @@ module Network.Google.Internal.Logger
     , logError
     , logInfo
     , logDebug
+    , logTrace
 
     -- * Building Messages
     , ToLog    (..)
@@ -63,6 +64,7 @@ data LogLevel
     = Info  -- ^ Info messages supplied by the user - this level is not emitted by the library.
     | Error -- ^ Error messages only.
     | Debug -- ^ Useful debug information + info + error levels.
+    | Trace -- ^ Includes potentially credentials metadata, and non-streaming response bodies.
       deriving (Eq, Ord, Enum, Show, Data, Typeable)
 
 instance FromText LogLevel where
@@ -71,6 +73,7 @@ instance FromText LogLevel where
             "info"  -> Just Info
             "error" -> Just Error
             "debug" -> Just Debug
+            "trace" -> Just Trace
             _       -> Nothing
 
 instance ToText LogLevel where
@@ -78,6 +81,7 @@ instance ToText LogLevel where
         Info  -> "info"
         Error -> "error"
         Debug -> "debug"
+        Trace -> "trace"
 
 -- | This is a primitive logger which can be used to log builds to a 'Handle'.
 --
@@ -93,10 +97,12 @@ newLogger x hd = liftIO $ do
         when (x >= y) $
             Build.hPutBuilder hd (b <> "\n")
 
-logError, logInfo, logDebug :: (MonadIO m, ToLog a) => Logger -> a -> m ()
+logError, logInfo, logDebug, logTrace
+ :: (MonadIO m, ToLog a) => Logger -> a -> m ()
 logError f = liftIO . f Error . build
 logInfo  f = liftIO . f Info  . build
 logDebug f = liftIO . f Debug . build
+logTrace f = liftIO . f Trace . build
 
 class ToLog a where
     -- | Convert a value to a loggable builder.

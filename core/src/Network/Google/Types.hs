@@ -43,6 +43,7 @@ import           Data.Foldable                         (foldl')
 import           Data.Monoid
 import           Data.String
 import           Data.Text                             (Text)
+import qualified Data.Text                             as Text
 import qualified Data.Text.Encoding                    as Text
 import           Data.Text.Lazy.Builder                (Builder)
 import qualified Data.Text.Lazy.Builder                as Build
@@ -72,6 +73,11 @@ newtype AuthKey = AuthKey Text
 newtype OAuthScope = OAuthScope { scopeToText :: Text }
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
+concatScopes :: [OAuthScope] -> OAuthScope
+concatScopes = OAuthScope
+    . Text.intercalate " "
+    . (coerce :: [OAuthScope] -> [Text])
+
 newtype OAuthToken = OAuthToken { tokenToBS :: ByteString }
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable)
 
@@ -80,6 +86,12 @@ instance FromJSON OAuthToken where
 
 instance ToJSON OAuthToken where
     toJSON = toJSON . Text.decodeUtf8 . tokenToBS
+
+instance FromText OAuthToken where
+    fromText = Just . OAuthToken . Text.encodeUtf8
+
+instance ToText OAuthToken where
+    toText = Text.decodeUtf8 . tokenToBS
 
 newtype MediaDownload a = MediaDownload a
 

@@ -106,11 +106,23 @@ timeout s = local (override (serviceTimeout ?~ s))
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
 -- /See:/ 'newEnvWith'.
-newEnv :: (MonadIO m, MonadCatch m) => Credentials -> m Env
-newEnv c = liftIO (newManager tlsManagerSettings) >>= newEnvWith c logger
+newEnv :: (MonadIO m, MonadCatch m) => Credentials -> [OAuthScope] -> m Env
+newEnv c ss = liftIO (newManager tlsManagerSettings) >>= newEnvWith c ss logger
   where
     logger _ _ = pure ()
 
 -- | /See:/ 'newEnv'
-newEnvWith :: (MonadIO m, MonadCatch m) => Credentials -> Logger -> Manager -> m Env
-newEnvWith c l m = Env l mempty m <$> getAuth c l m
+newEnvWith :: (MonadIO m, MonadCatch m)
+           => Credentials
+           -> [OAuthScope]
+           -> Logger
+           -> Manager
+           -> m Env
+newEnvWith c ss l m = Env l mempty m <$> getAuth c ss l m
+
+-- Maybe make it so scope is a part of service, configurable?
+--   - needs to be per service .. but the initial authorise, what?
+--   - investigate how the credentials are cached by oauth2client,
+--       is it storing multiple per service you're using?
+--       this would mean the initial refresh is invalid, since the
+--       scope is wrong.
