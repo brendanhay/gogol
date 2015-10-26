@@ -236,10 +236,25 @@ fromFile l m = do
             x <- cloudSDKConfigPath
             fromFilePath x l m
 
-data Parse = SA !ServiceAccount | AU !AuthorisedUser
+-- | An internal type inhabited by the supported JSON formats
+-- for Application Default Credentials.
+data AccountJSON
+    = ParsedService !ServiceAccount
+    | ParsedUser    !AuthorisedUser
 
-instance FromJSON Parse where
-    parseJSON o = SA <$> parseJSON o <|> AU <$> parseJSON o
+-- The following instance accumulates all error messages if all parsers fail.
+-- If there is a success, the entire parse succeeds with the single
+-- successful parse.
+instance FromJSON AccountJSON where
+    parseJSON o =
+        let x = ParsedService <$> parseEither parseJSON o
+            y = ParsedUser    <$> parseEither parseJSON o
+         in either fail pure $
+            case (x, y) of
+                (Left e, Left e') -> Left $
+                      "Failed parsing service_account: " ++ e ++
+                    ", Failed parsing authorized_user: " ++ e'
+                _                 -> x <|> y
 
 -- | Attempt to load either a @service_account@ or @authorized_user@ formatted
 -- file to obtain the credentials neccessary to perform a token refresh from
@@ -250,14 +265,15 @@ fromFilePath :: (MonadIO m, MonadCatch m)
              -> Manager
              -> m Auth
 fromFilePath f l m = do
+    logDebug l $ "Trying to read credentials from " <> build f
     p <- liftIO (doesFileExist f)
     unless p $
         throwM (MissingFileError f)
     e <- liftIO (LBS.readFile f) >>=
         either (throwM . InvalidFileError f) pure . parseLBS
     case e of
-        SA a -> refresh a l m >>= fmap AuthSign . liftIO . newMVar
-        AU u -> refresh u l m >>= fmap AuthUser . liftIO . newMVar
+        ParsedService a -> refresh a l m >>= fmap AuthSign . liftIO . newMVar
+        ParsedUser    u -> refresh u l m >>= fmap AuthUser . liftIO . newMVar
 
 -- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
 -- default application credentials filepath.
@@ -389,18 +405,15 @@ data ServiceAccount = ServiceAccount
 
 instance FromJSON ServiceAccount where
     parseJSON = withObject "service_account" $ \o -> do
-        bs <- Text.encodeUtf8 <$> o .: "private_key_id"
+        bs <- Text.encodeUtf8 <$> o .: "private_key"
         ServiceAccount
             <$> o .: "client_id"
             <*> o .: "client_email"
-            <*> o .: "private_key"
-            <*> parseKey bs
-      where
-        parseKey bs =
-            case listToMaybe (readKeyFileFromMemory bs) of
+            <*> o .: "private_key_id"
+            <*> case listToMaybe (readKeyFileFromMemory bs) of
                 Just (PrivKeyRSA k) -> pure k
                 _                   ->
-                    fail "Unable to parse key contents from 'private_key_id'"
+                    fail "Unable to parse key contents from \"private_key\""
 
 -- {
 --   "client_id": "32555940559.apps.googleusercontent.com",
