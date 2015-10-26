@@ -11,23 +11,25 @@
 module Example.Storage where
 
 import           Control.Lens
-import           Data.Conduit.Binary
 import           Data.Text              (Text)
 import qualified Data.Text              as Text
 import           Network.Google
+import           Network.Google.Env
 import           Network.Google.Storage
+import           Network.HTTP.Conduit
 import           System.IO
 
 example :: Text -> FilePath -> IO ()
 example bkt f = do
-    l  <- newLogger Debug stdout
-    e  <- newEnv Discover ["https://accounts.google.com"] <&> envLogger .~ l
+    l <- newLogger Debug stdout
+    m <- newManager tlsManagerSettings
+    e <- newEnv Discover [cloudPlatformScope] <&> envLogger .~ l
+    b <- sourceBody f
 
     let key = Text.pack f
-        src = requestBodySourceChunked (sourceFile f)
         obj = object' & objContentType ?~ "application/octet-stream"
 
     runResourceT . runGoogle e $ do
-        _ <- upload   (objectsInsert bkt obj & oiName ?~ key) src
+        _ <- upload   (objectsInsert bkt obj & oiName ?~ key) b
         _ <- download (objectsGet bkt key)
         pure ()
