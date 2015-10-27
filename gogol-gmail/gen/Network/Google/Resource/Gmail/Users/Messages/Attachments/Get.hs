@@ -76,9 +76,8 @@ data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet
 usersMessagesAttachmentsGet
     :: Text -- ^ 'umagId'
     -> Text -- ^ 'umagMessageId'
-    -> Text
     -> UsersMessagesAttachmentsGet
-usersMessagesAttachmentsGet pUmagUserId_ pUmagId_ pUmagMessageId_ =
+usersMessagesAttachmentsGet pUmagId_ pUmagMessageId_ =
     UsersMessagesAttachmentsGet
     { _umagUserId = "me"
     , _umagId = pUmagId_

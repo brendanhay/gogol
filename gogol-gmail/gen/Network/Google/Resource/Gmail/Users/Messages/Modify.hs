@@ -76,9 +76,8 @@ data UsersMessagesModify = UsersMessagesModify
 usersMessagesModify
     :: ModifyMessageRequest -- ^ 'ummPayload'
     -> Text -- ^ 'ummId'
-    -> Text
     -> UsersMessagesModify
-usersMessagesModify pUmmPayload_ pUmmUserId_ pUmmId_ =
+usersMessagesModify pUmmPayload_ pUmmId_ =
     UsersMessagesModify
     { _ummPayload = pUmmPayload_
     , _ummUserId = "me"

@@ -83,9 +83,8 @@ data UsersDraftsSend = UsersDraftsSend
 -- * 'udsUserId'
 usersDraftsSend
     :: Draft -- ^ 'udsPayload'
-    -> Text
     -> UsersDraftsSend
-usersDraftsSend pUdsPayload_ pUdsUserId_ =
+usersDraftsSend pUdsPayload_ =
     UsersDraftsSend
     { _udsPayload = pUdsPayload_
     , _udsUserId = "me"

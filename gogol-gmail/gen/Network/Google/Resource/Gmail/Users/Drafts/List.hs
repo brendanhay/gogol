@@ -73,9 +73,8 @@ data UsersDraftsList = UsersDraftsList
 --
 -- * 'udlMaxResults'
 usersDraftsList
-    :: Text
-    -> UsersDraftsList
-usersDraftsList pUdlUserId_ =
+    :: UsersDraftsList
+usersDraftsList =
     UsersDraftsList
     { _udlUserId = "me"
     , _udlPageToken = Nothing

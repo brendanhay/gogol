@@ -69,9 +69,8 @@ data UsersMessagesUntrash = UsersMessagesUntrash
 -- * 'umuId'
 usersMessagesUntrash
     :: Text -- ^ 'umuId'
-    -> Text
     -> UsersMessagesUntrash
-usersMessagesUntrash pUmuUserId_ pUmuId_ =
+usersMessagesUntrash pUmuId_ =
     UsersMessagesUntrash
     { _umuUserId = "me"
     , _umuId = pUmuId_

@@ -113,9 +113,8 @@ data UsersMessagesImport = UsersMessagesImport
 -- * 'umiInternalDateSource'
 usersMessagesImport
     :: Message -- ^ 'umiPayload'
-    -> Text
     -> UsersMessagesImport
-usersMessagesImport pUmiPayload_ pUmiUserId_ =
+usersMessagesImport pUmiPayload_ =
     UsersMessagesImport
     { _umiPayload = pUmiPayload_
     , _umiUserId = "me"

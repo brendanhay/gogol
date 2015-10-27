@@ -69,9 +69,8 @@ data UsersThreadsTrash = UsersThreadsTrash
 -- * 'uttId'
 usersThreadsTrash
     :: Text -- ^ 'uttId'
-    -> Text
     -> UsersThreadsTrash
-usersThreadsTrash pUttUserId_ pUttId_ =
+usersThreadsTrash pUttId_ =
     UsersThreadsTrash
     { _uttUserId = "me"
     , _uttId = pUttId_

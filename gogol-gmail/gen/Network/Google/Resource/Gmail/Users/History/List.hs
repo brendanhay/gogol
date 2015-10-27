@@ -85,9 +85,8 @@ data UsersHistoryList = UsersHistoryList
 --
 -- * 'uhlMaxResults'
 usersHistoryList
-    :: Text
-    -> UsersHistoryList
-usersHistoryList pUhlUserId_ =
+    :: UsersHistoryList
+usersHistoryList =
     UsersHistoryList
     { _uhlUserId = "me"
     , _uhlStartHistoryId = Nothing

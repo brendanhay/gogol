@@ -99,9 +99,8 @@ data UsersMessagesInsert = UsersMessagesInsert
 -- * 'uInternalDateSource'
 usersMessagesInsert
     :: Message -- ^ 'uPayload'
-    -> Text
     -> UsersMessagesInsert
-usersMessagesInsert pUPayload_ pUUserId_ =
+usersMessagesInsert pUPayload_ =
     UsersMessagesInsert
     { _uPayload = pUPayload_
     , _uUserId = "me"

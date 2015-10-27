@@ -86,9 +86,8 @@ data UsersDraftsUpdate = UsersDraftsUpdate
 usersDraftsUpdate
     :: Draft -- ^ 'uduPayload'
     -> Text -- ^ 'uduId'
-    -> Text
     -> UsersDraftsUpdate
-usersDraftsUpdate pUduPayload_ pUduUserId_ pUduId_ =
+usersDraftsUpdate pUduPayload_ pUduId_ =
     UsersDraftsUpdate
     { _uduPayload = pUduPayload_
     , _uduUserId = "me"

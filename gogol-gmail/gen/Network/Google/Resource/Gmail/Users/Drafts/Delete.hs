@@ -70,9 +70,8 @@ data UsersDraftsDelete = UsersDraftsDelete
 -- * 'uddId'
 usersDraftsDelete
     :: Text -- ^ 'uddId'
-    -> Text
     -> UsersDraftsDelete
-usersDraftsDelete pUddUserId_ pUddId_ =
+usersDraftsDelete pUddId_ =
     UsersDraftsDelete
     { _uddUserId = "me"
     , _uddId = pUddId_

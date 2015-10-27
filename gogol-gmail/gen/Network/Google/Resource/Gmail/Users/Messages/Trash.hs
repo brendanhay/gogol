@@ -69,9 +69,8 @@ data UsersMessagesTrash = UsersMessagesTrash
 -- * 'umtId'
 usersMessagesTrash
     :: Text -- ^ 'umtId'
-    -> Text
     -> UsersMessagesTrash
-usersMessagesTrash pUmtUserId_ pUmtId_ =
+usersMessagesTrash pUmtId_ =
     UsersMessagesTrash
     { _umtUserId = "me"
     , _umtId = pUmtId_

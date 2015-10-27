@@ -79,9 +79,8 @@ data UsersDraftsCreate = UsersDraftsCreate
 -- * 'udcUserId'
 usersDraftsCreate
     :: Draft -- ^ 'udcPayload'
-    -> Text
     -> UsersDraftsCreate
-usersDraftsCreate pUdcPayload_ pUdcUserId_ =
+usersDraftsCreate pUdcPayload_ =
     UsersDraftsCreate
     { _udcPayload = pUdcPayload_
     , _udcUserId = "me"

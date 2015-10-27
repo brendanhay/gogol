@@ -88,9 +88,8 @@ data UsersThreadsList = UsersThreadsList
 --
 -- * 'utlMaxResults'
 usersThreadsList
-    :: Text
-    -> UsersThreadsList
-usersThreadsList pUtlUserId_ =
+    :: UsersThreadsList
+usersThreadsList =
     UsersThreadsList
     { _utlQ = Nothing
     , _utlUserId = "me"

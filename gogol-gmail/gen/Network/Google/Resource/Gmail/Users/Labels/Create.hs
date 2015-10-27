@@ -68,9 +68,8 @@ data UsersLabelsCreate = UsersLabelsCreate
 -- * 'ulcUserId'
 usersLabelsCreate
     :: Label -- ^ 'ulcPayload'
-    -> Text
     -> UsersLabelsCreate
-usersLabelsCreate pUlcPayload_ pUlcUserId_ =
+usersLabelsCreate pUlcPayload_ =
     UsersLabelsCreate
     { _ulcPayload = pUlcPayload_
     , _ulcUserId = "me"

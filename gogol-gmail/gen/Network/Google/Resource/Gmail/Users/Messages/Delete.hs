@@ -70,9 +70,8 @@ data UsersMessagesDelete = UsersMessagesDelete
 -- * 'umdId'
 usersMessagesDelete
     :: Text -- ^ 'umdId'
-    -> Text
     -> UsersMessagesDelete
-usersMessagesDelete pUmdUserId_ pUmdId_ =
+usersMessagesDelete pUmdId_ =
     UsersMessagesDelete
     { _umdUserId = "me"
     , _umdId = pUmdId_

@@ -62,9 +62,8 @@ newtype UsersGetProFile = UsersGetProFile
 --
 -- * 'ugpfUserId'
 usersGetProFile
-    :: Text
-    -> UsersGetProFile
-usersGetProFile pUgpfUserId_ =
+    :: UsersGetProFile
+usersGetProFile =
     UsersGetProFile
     { _ugpfUserId = "me"
     }

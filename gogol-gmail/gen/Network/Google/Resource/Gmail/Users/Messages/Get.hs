@@ -78,9 +78,8 @@ data UsersMessagesGet = UsersMessagesGet
 -- * 'umgMetadataHeaders'
 usersMessagesGet
     :: Text -- ^ 'umgId'
-    -> Text
     -> UsersMessagesGet
-usersMessagesGet pUmgUserId_ pUmgId_ =
+usersMessagesGet pUmgId_ =
     UsersMessagesGet
     { _umgFormat = Full
     , _umgUserId = "me"
