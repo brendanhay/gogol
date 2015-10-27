@@ -65,16 +65,16 @@ module Network.Google.Auth
 
    -- * OAuth Types
    , OAuthClient    (..)
+   , OAuthToken     (..)
    , OAuthCode      (..)
    , OAuthScope     (..)
-   , OAuthToken     (..)
 
    -- * Re-exported Types
-   , ServiceId      (..)
-   , ClientId       (..)
    , AccessToken    (..)
    , RefreshToken   (..)
    , Secret         (..)
+   , ServiceId      (..)
+   , ClientId       (..)
 
    -- * Exchange and Refresh Internals
    , getToken
