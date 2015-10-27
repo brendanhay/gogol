@@ -251,11 +251,11 @@ from the Google Developer console of the following form:
 
 @
 {
-  "type": "service_account",
-  "private_key_id": "303ad77e5efdf2ce952DFa",
-  "private_key": "-----BEGIN PRIVATE KEY-----\n...\n",
-  "client_email": "email@serviceaccount.com",
-  "client_id": "035-2-310.useraccount.com"
+  \"type\": \"service_account\",
+  \"private_key_id\": \"303ad77e5efdf2ce952DFa\",
+  \"private_key\": \"-----BEGIN PRIVATE KEY-----\n...\n\",
+  \"client_email\": \"email@serviceaccount.com\",
+  \"client_id\": \"035-2-310.useraccount.com\"
 }
 @
 
@@ -292,10 +292,10 @@ tools such as @gcloud init@, of the following form:
 
 @
 {
-  "type": "authorized_user",
-  "client_id": "32555940559.apps.googleusercontent.com",
-  "client_secret": "Zms2qjJy2998hD4CTg2ejr2",
-  "refresh_token": "1/B3gM1x35v.VtqffS1n5w-rSJ"
+  \"type\": \"authorized_user\",
+  \"client_id\": \"32555940559.apps.googleusercontent.com\",
+  \"client_secret\": \"Zms2qjJy2998hD4CTg2ejr2\",
+  \"refresh_token\": \"1/B3gM1x35v.VtqffS1n5w-rSJ\"
 }
 @
 
@@ -327,10 +327,10 @@ data OAuthClient = OAuthClient
 
 @
 {
-  "token_type": "Bearer",
-  "access_token": "eyJhbGci...",
-  "refresh_token": "1/B3gq9K...",
-  "expires_in": 3600,
+  \"token_type\": \"Bearer\",
+  \"access_token\": \"eyJhbGci...\",
+  \"refresh_token\": \"1/B3gq9K...\",
+  \"expires_in\": 3600,
   ...
 }
 @
