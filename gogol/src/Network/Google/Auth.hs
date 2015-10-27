@@ -19,56 +19,75 @@
 --
 -- Explicitly specify your Google credentials, or retrieve them
 -- from the underlying OS.
-module Network.Google.Auth where
-   -- (
-   -- -- * Authentication
-   -- -- ** Retrieving Authentication
-   --   getAuth
-   -- , Credentials    (..)
-   -- , Auth
+module Network.Google.Auth
+   (
+   -- * Credentials
+   -- ** Discovery
+   , discover
+   , fromFile
+   , fromFilePath
+   , fromJSONCredentials
 
-   -- -- ** Authorising Requests
-   -- , authorize
+   , Credentials    (..)
+   , Auth           (..)
 
-   -- -- ** Default Constants
-   -- -- *** Google Compute Engine
-   -- , checkGCEVar
+   -- ** Thread-safe Storage
+   , Store
+   , emptyStore
 
-   -- -- *** Cloud SDK
-   -- , cloudSDKConfigDir
-   -- , cloudSDKConfigPath
+   -- ** Authorizing Requests
+   , authorize
 
-   -- -- *** Application Default Credentials
-   -- , defaultCredentialsFile
-   -- , defaultCredentialsPath
+   -- ** Constructing Callback URLs
+   , formURL
+   , redirectURI
+   , accountsURL
 
-   -- -- ** Credential Styles
-   -- , fromMetadata
-   -- , fromFile
-   -- , fromFilePath
+   -- ** Default Constants
+   -- *** Google Compute Engine
+   , checkGCEVar
 
-   -- -- *** OAuth Token
-   -- , Bearer         (..)
-   -- , fromToken
+   -- *** Cloud SDK
+   , cloudSDKConfigDir
+   , cloudSDKConfigPath
 
-   -- -- *** Authorized User
-   -- , AuthorizedUser (..)
-   -- , fromAuthorizedUser
+   -- *** Application Default Credentials
+   , defaultCredentialsFile
+   , defaultCredentialsPath
 
-   -- -- *** Service Account
-   -- , ServiceAccount (..)
-   -- , fromServiceAccount
+   -- ** Handling Errors
+   , AsAuthError    (..)
+   , AuthError      (..)
 
-   -- -- ** Handling Errors
-   -- , AsAuthError    (..)
-   -- , AuthError      (..)
+   -- * Credential Types
+   , ServiceAccount (..)
+   , AuthorizedUser (..)
 
-   -- -- ** Re-exported Types
-   -- , Scope     (..)
-   -- , OAuthToken     (..)
-   -- , ServiceId      (..)
-   -- , ClientId       (..)
-   -- ) where
+   -- * OAuth Types
+   , OAuthClient    (..)
+   , OAuthCode      (..)
+   , OAuthScope     (..)
+   , OAuthToken     (..)
+
+   -- * Re-exported Types
+   , ServiceId      (..)
+   , ClientId       (..)
+   , AccessToken    (..)
+   , RefreshToken   (..)
+   , Secret         (..)
+
+   -- * Exchange and Refresh Internals
+   , getToken
+   , validateToken
+
+   , exchange
+   , exchangeCode
+
+   , refresh
+   , refreshMetadata
+   , refreshToken
+   , refreshAssertion
+   ) where
 
 import           Control.Applicative
 import           Control.Concurrent
@@ -213,15 +232,21 @@ getConfigDirectory = do
         then pure h
         else pure $! h </> ".config"
 
-data RefreshError = RefreshError
-    { _error       :: !Text
-    , _description :: !(Maybe Text)
-    }
+-- | Given a client identifier, client secret, and a list of scopes to authorize,
+-- construct a URL that can be used to obtain the 'OAuthCode' required to
+-- instantiate 'FromClient'-style credentials.
+formURL :: OAuthClient -> [OAuthScope] -> Text
+formURL OAuthClient{..} ss =
+    LText.toStrict . LText.decodeUtf8 . Build.toLazyByteString $
+           buildText accountsURL
+        <> "?response_type=code"
+        <> "&client_id="    <> buildText _clientId
+        <> "&redirect_uri=" <> buildText redirectURI
+        <> "&scope="        <> queryEncodeScopes ss
 
-instance FromJSON RefreshError where
-    parseJSON = withObject "refresh_error" $ \o -> RefreshError
-        <$> o .:  "error"
-        <*> o .:? "error_description"
+-- | @urn:ietf:wg:oauth:2.0:oob@.
+redirectURI :: Text
+redirectURI = "urn:ietf:wg:oauth:2.0:oob"
 
 {-| Service Account credentials which are typically generated/download
 from the Google Developer console of the following form:
@@ -369,20 +394,10 @@ data Auth
 
 type Store = MVar Auth
 
+-- | Construct storage containing the credentials which have not yet been
+-- exchanged or refreshed.
 emptyStore :: MonadIO m => Credentials -> m Store
 emptyStore !c = liftIO . newMVar $ Exchange c
-
--- FIXME: support for generating the url using scopes to obtain the OAuthCode.
-
--- FIXME:
--- The parameter is include_granted_scopes and the allowed values are true and
--- false (the default is false). When the value is true, the effect is that if
--- your scope authorization request is granted, the Google authorization server
--- will roll this authorization together with all the previous authorizations
--- granted to the requesting user from the requesting app.
-
--- FIXME: Get around to replacing the threading of Logger, Manager through
--- every exchange/refresh call.
 
 -- | Attempt credentials discovery via the following steps:
 --
@@ -521,18 +536,6 @@ exchange c l m =
         FromUser     AuthorizedUser{..} ->
             refreshToken _userId _userSecret (Just _userRefresh) l m
 
-formURL :: OAuthClient -> [OAuthScope] -> Text
-formURL OAuthClient{..} ss =
-    LText.toStrict . LText.decodeUtf8 . Build.toLazyByteString $
-           buildText accountsURL
-        <> "?response_type=code"
-        <> "&client_id="    <> buildText _clientId
-        <> "&redirect_uri=" <> buildText redirectURI
-        <> "&scope="        <> queryEncodeScopes ss
-
-redirectURI :: Text
-redirectURI = "urn:ietf:wg:oauth:2.0:oob"
-
 exchangeCode :: (MonadIO m, MonadCatch m)
              => OAuthClient
              -> OAuthCode
@@ -646,21 +649,6 @@ encodeJWTBearer s ss = liftIO $ do
             , "iss"   .= _serviceEmail s
             ]
 
-queryEncodeScopes :: [OAuthScope] -> Build.Builder
-queryEncodeScopes =
-      mconcat
-    . intersperse "+"
-    . map (urlEncodeBuilder True . Text.encodeUtf8)
-    . coerce
-
-concatScopes :: [OAuthScope] -> LText.Text
-concatScopes =
-      TBuild.toLazyText
-    . mconcat
-    . intersperse " "
-    . map TBuild.fromText
-    . coerce
-
 accountsURL :: Text
 accountsURL = "https://accounts.google.com/o/oauth2/token"
 
@@ -737,3 +725,28 @@ buildBody = RequestBodyLBS . Build.toLazyByteString
 
 buildText :: ToText a => a -> Builder
 buildText = build . toText
+
+queryEncodeScopes :: [OAuthScope] -> Build.Builder
+queryEncodeScopes =
+      mconcat
+    . intersperse "+"
+    . map (urlEncodeBuilder True . Text.encodeUtf8)
+    . coerce
+
+concatScopes :: [OAuthScope] -> LText.Text
+concatScopes =
+      TBuild.toLazyText
+    . mconcat
+    . intersperse " "
+    . map TBuild.fromText
+    . coerce
+
+data RefreshError = RefreshError
+    { _error       :: !Text
+    , _description :: !(Maybe Text)
+    }
+
+instance FromJSON RefreshError where
+    parseJSON = withObject "refresh_error" $ \o -> RefreshError
+        <$> o .:  "error"
+        <*> o .:? "error_description"
