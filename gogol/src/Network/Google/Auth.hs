@@ -22,16 +22,16 @@
 module Network.Google.Auth
    (
    -- * Credentials
+     Credentials    (..)
+
    -- ** Discovery
    , discover
    , fromFile
    , fromFilePath
    , fromJSONCredentials
 
-   , Credentials    (..)
-   , Auth           (..)
-
    -- ** Thread-safe Storage
+   , Auth           (..)
    , Store
    , emptyStore
 
