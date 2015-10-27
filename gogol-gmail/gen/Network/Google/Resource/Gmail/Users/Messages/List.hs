@@ -88,9 +88,8 @@ data UsersMessagesList = UsersMessagesList
 --
 -- * 'umlMaxResults'
 usersMessagesList
-    :: Text
-    -> UsersMessagesList
-usersMessagesList pUmlUserId_ =
+    :: UsersMessagesList
+usersMessagesList =
     UsersMessagesList
     { _umlQ = Nothing
     , _umlUserId = "me"

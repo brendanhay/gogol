@@ -68,9 +68,8 @@ data UsersLabelsGet = UsersLabelsGet
 -- * 'ulgId'
 usersLabelsGet
     :: Text -- ^ 'ulgId'
-    -> Text
     -> UsersLabelsGet
-usersLabelsGet pUlgUserId_ pUlgId_ =
+usersLabelsGet pUlgId_ =
     UsersLabelsGet
     { _ulgUserId = "me"
     , _ulgId = pUlgId_

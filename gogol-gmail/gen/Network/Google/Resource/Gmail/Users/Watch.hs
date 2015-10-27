@@ -69,9 +69,8 @@ data UsersWatch = UsersWatch
 -- * 'uwUserId'
 usersWatch
     :: WatchRequest -- ^ 'uwPayload'
-    -> Text
     -> UsersWatch
-usersWatch pUwPayload_ pUwUserId_ =
+usersWatch pUwPayload_ =
     UsersWatch
     { _uwPayload = pUwPayload_
     , _uwUserId = "me"

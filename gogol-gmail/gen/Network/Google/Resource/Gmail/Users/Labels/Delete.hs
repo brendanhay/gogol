@@ -70,9 +70,8 @@ data UsersLabelsDelete = UsersLabelsDelete
 -- * 'uldId'
 usersLabelsDelete
     :: Text -- ^ 'uldId'
-    -> Text
     -> UsersLabelsDelete
-usersLabelsDelete pUldUserId_ pUldId_ =
+usersLabelsDelete pUldId_ =
     UsersLabelsDelete
     { _uldUserId = "me"
     , _uldId = pUldId_

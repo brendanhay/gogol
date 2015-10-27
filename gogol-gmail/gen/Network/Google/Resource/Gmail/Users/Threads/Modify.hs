@@ -78,9 +78,8 @@ data UsersThreadsModify = UsersThreadsModify
 usersThreadsModify
     :: ModifyThreadRequest -- ^ 'utmPayload'
     -> Text -- ^ 'utmId'
-    -> Text
     -> UsersThreadsModify
-usersThreadsModify pUtmPayload_ pUtmUserId_ pUtmId_ =
+usersThreadsModify pUtmPayload_ pUtmId_ =
     UsersThreadsModify
     { _utmPayload = pUtmPayload_
     , _utmUserId = "me"

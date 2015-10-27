@@ -69,9 +69,8 @@ data UsersThreadsUntrash = UsersThreadsUntrash
 -- * 'utuId'
 usersThreadsUntrash
     :: Text -- ^ 'utuId'
-    -> Text
     -> UsersThreadsUntrash
-usersThreadsUntrash pUtuUserId_ pUtuId_ =
+usersThreadsUntrash pUtuId_ =
     UsersThreadsUntrash
     { _utuUserId = "me"
     , _utuId = pUtuId_

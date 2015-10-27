@@ -74,9 +74,8 @@ data UsersLabelsPatch = UsersLabelsPatch
 usersLabelsPatch
     :: Label -- ^ 'ulpPayload'
     -> Text -- ^ 'ulpId'
-    -> Text
     -> UsersLabelsPatch
-usersLabelsPatch pUlpPayload_ pUlpUserId_ pUlpId_ =
+usersLabelsPatch pUlpPayload_ pUlpId_ =
     UsersLabelsPatch
     { _ulpPayload = pUlpPayload_
     , _ulpUserId = "me"

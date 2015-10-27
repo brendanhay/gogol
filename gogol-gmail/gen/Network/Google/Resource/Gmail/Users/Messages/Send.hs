@@ -83,9 +83,8 @@ data UsersMessagesSend = UsersMessagesSend
 -- * 'umsUserId'
 usersMessagesSend
     :: Message -- ^ 'umsPayload'
-    -> Text
     -> UsersMessagesSend
-usersMessagesSend pUmsPayload_ pUmsUserId_ =
+usersMessagesSend pUmsPayload_ =
     UsersMessagesSend
     { _umsPayload = pUmsPayload_
     , _umsUserId = "me"

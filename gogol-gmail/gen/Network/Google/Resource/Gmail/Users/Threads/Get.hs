@@ -78,9 +78,8 @@ data UsersThreadsGet = UsersThreadsGet
 -- * 'utgMetadataHeaders'
 usersThreadsGet
     :: Text -- ^ 'utgId'
-    -> Text
     -> UsersThreadsGet
-usersThreadsGet pUtgUserId_ pUtgId_ =
+usersThreadsGet pUtgId_ =
     UsersThreadsGet
     { _utgFormat = UTGFFull
     , _utgUserId = "me"

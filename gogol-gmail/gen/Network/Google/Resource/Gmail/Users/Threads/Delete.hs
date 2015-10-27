@@ -70,9 +70,8 @@ data UsersThreadsDelete = UsersThreadsDelete
 -- * 'utdId'
 usersThreadsDelete
     :: Text -- ^ 'utdId'
-    -> Text
     -> UsersThreadsDelete
-usersThreadsDelete pUtdUserId_ pUtdId_ =
+usersThreadsDelete pUtdId_ =
     UsersThreadsDelete
     { _utdUserId = "me"
     , _utdId = pUtdId_

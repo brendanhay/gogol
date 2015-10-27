@@ -74,9 +74,8 @@ data UsersLabelsUpdate = UsersLabelsUpdate
 usersLabelsUpdate
     :: Label -- ^ 'uluPayload'
     -> Text -- ^ 'uluId'
-    -> Text
     -> UsersLabelsUpdate
-usersLabelsUpdate pUluPayload_ pUluUserId_ pUluId_ =
+usersLabelsUpdate pUluPayload_ pUluId_ =
     UsersLabelsUpdate
     { _uluPayload = pUluPayload_
     , _uluUserId = "me"

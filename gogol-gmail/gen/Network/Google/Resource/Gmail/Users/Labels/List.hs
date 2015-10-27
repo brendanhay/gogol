@@ -63,9 +63,8 @@ newtype UsersLabelsList = UsersLabelsList
 --
 -- * 'ullUserId'
 usersLabelsList
-    :: Text
-    -> UsersLabelsList
-usersLabelsList pUllUserId_ =
+    :: UsersLabelsList
+usersLabelsList =
     UsersLabelsList
     { _ullUserId = "me"
     }

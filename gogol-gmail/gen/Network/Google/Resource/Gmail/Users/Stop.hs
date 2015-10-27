@@ -61,9 +61,8 @@ newtype UsersStop = UsersStop
 --
 -- * 'usUserId'
 usersStop
-    :: Text
-    -> UsersStop
-usersStop pUsUserId_ =
+    :: UsersStop
+usersStop =
     UsersStop
     { _usUserId = "me"
     }

@@ -73,9 +73,8 @@ data UsersDraftsGet = UsersDraftsGet
 -- * 'udgId'
 usersDraftsGet
     :: Text -- ^ 'udgId'
-    -> Text
     -> UsersDraftsGet
-usersDraftsGet pUdgUserId_ pUdgId_ =
+usersDraftsGet pUdgId_ =
     UsersDraftsGet
     { _udgFormat = UDGFFull
     , _udgUserId = "me"
