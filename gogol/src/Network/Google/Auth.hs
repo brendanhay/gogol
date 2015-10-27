@@ -411,7 +411,8 @@ emptyStore !c = liftIO . newMVar $ Exchange c
 -- variable @CLOUDSDK_CONFIG@ if it exists.
 --
 -- * Retrieve the default service account application credentials if
--- running on GCE.
+-- running on GCE. The environment variable @NO_GCE_CHECK@ can be used to
+-- skip this check if set to a truthy value such as @1@ or @true@.
 --
 -- The specified 'Scope's are used to authorize any @service_account@ that is
 -- found with the appropriate scopes, otherwise they are not used. See the
