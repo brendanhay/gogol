@@ -36,9 +36,6 @@ module Network.Google
     , Env
     , HasEnv      (..)
 
-    -- ** Credential Discovery
-    , Credentials (..)
-
     -- * Sending Requests
     , send
 

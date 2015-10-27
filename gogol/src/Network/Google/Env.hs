@@ -105,6 +105,11 @@ timeout s = local (override (serviceTimeout ?~ s))
 -- Credentials are determined by calling 'discover'. Use 'newEnvWith' to supply
 -- custom credentials such as an 'OAuthClient' and 'OAuthCode'.
 --
+-- The specified 'Scope's are used to authorize any @service_account@ that is
+-- found with the appropriate scopes, otherwise they are not used. See the
+-- top-level module of each individual @gogol-*@ library for a list of available
+-- scopes, such as @Network.Google.Compute.computeScope@.
+--
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
 -- /See:/ 'newEnvWith', 'discover'.
