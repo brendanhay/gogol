@@ -14,16 +14,13 @@ import           Control.Lens
 import           Data.Text              (Text)
 import qualified Data.Text              as Text
 import           Network.Google
-import           Network.Google.Env
 import           Network.Google.Storage
-import           Network.HTTP.Conduit
 import           System.IO
 
 example :: Text -> FilePath -> IO ()
 example bkt f = do
     l <- newLogger Debug stdout
-    m <- newManager tlsManagerSettings
-    e <- newEnv Discover [cloudPlatformScope] <&> envLogger .~ l
+    e <- newEnv [cloudPlatformScope] <&> envLogger .~ l
     b <- sourceBody f
 
     let key = Text.pack f
