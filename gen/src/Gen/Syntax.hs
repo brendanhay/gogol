@@ -461,7 +461,7 @@ ctorDecl n p rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
         | otherwise   = RecConstr (UnQual d) $
             map (uncurry (fieldUpdate p)) (Map.toList rs)
 
-    ps = map (pname p) . Map.keys $ Map.filter required rs
+    ps = map (pname p) . Map.keys $ Map.filter parameter rs
 
 fieldUpdate :: Prefix -> Local -> Solved -> FieldUpdate
 fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
@@ -469,7 +469,7 @@ fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
     rhs | Just x <- def s, s ^. iRepeated = listE [x]
         | Just x <- def s                 = x
         | Just x <- iso (_type s)         = infixApp x "#" v
-        | required s                      = v
+        | parameter s                     = v
         | otherwise                       = var (name "Nothing")
 
     v = var (pname p l)
@@ -491,7 +491,7 @@ lensDecl p l s = sfun noLoc (lname p l) [] (UnGuardedRhs rhs) noBinds
                    (RecUpdate (var "s") [FieldUpdate (UnQual f) (var "a")])))
 
 parameters :: [Solved] -> [Type]
-parameters = map (externalType . _type) . filter required
+parameters = map (externalType . _type) . filter parameter
 
 def :: Solved -> Maybe Exp
 def s
