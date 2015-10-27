@@ -55,47 +55,32 @@ import           Network.HTTP.Types                    hiding (Header)
 import qualified Network.HTTP.Types                    as HTTP
 import           Servant.API
 
-data AltJSON = AltJSON
-    deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data AltJSON  = AltJSON  deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
-instance ToText AltJSON where
-   toText = const "json"
-
-data AltMedia = AltMedia
-    deriving (Eq, Ord, Show, Read, Generic, Typeable)
-
-instance ToText AltMedia where
-   toText = const "media"
-
-newtype AuthKey = AuthKey Text
-    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
+instance ToText AltJSON  where toText = const "json"
+instance ToText AltMedia where toText = const "media"
 
 newtype OAuthScope = OAuthScope { scopeToText :: Text }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
+
+newtype AccessToken = AccessToken { accessToText :: Text }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
+
+newtype RefreshToken = RefreshToken { refreshToText :: Text }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
+
+newtype ClientId = ClientId { clientIdToText :: Text }
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-concatScopes :: [OAuthScope] -> OAuthScope
-concatScopes = OAuthScope
-    . Text.intercalate " "
-    . (coerce :: [OAuthScope] -> [Text])
+newtype Secret = Secret { secretToText :: Text }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype OAuthToken = OAuthToken { tokenToBS :: ByteString }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable)
-
-instance FromJSON OAuthToken where
-    parseJSON = withText "oauth_token" (pure . OAuthToken . Text.encodeUtf8)
-
-instance ToJSON OAuthToken where
-    toJSON = toJSON . Text.decodeUtf8 . tokenToBS
-
-instance FromText OAuthToken where
-    fromText = Just . OAuthToken . Text.encodeUtf8
-
-instance ToText OAuthToken where
-    toText = Text.decodeUtf8 . tokenToBS
+newtype ServiceId = ServiceId { serviceIdToText :: Text }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype MediaDownload a = MediaDownload a
-
-data MediaUpload a = MediaUpload a RequestBody
+data    MediaUpload   a = MediaUpload   a RequestBody
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -109,12 +94,6 @@ _Default = iso f Just
     f Nothing  = mempty
 
 type Stream = ResumableSource (ResourceT IO) ByteString
-
-newtype ClientId = ClientId { clientIdToText :: Text }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
-
-newtype ServiceId = ServiceId { serviceIdToText :: Text }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 data Error
     = TransportError HttpException

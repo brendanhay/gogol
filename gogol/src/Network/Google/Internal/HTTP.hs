@@ -57,7 +57,7 @@ perform Env{..} x = catches go handlers
 
     go = liftResourceT $ do
         (ct, b) <- getContent _rqBody
-        rq      <- authorise _envLogger _envManager (request ct b) _envAuth
+        rq      <- authorize (request ct b) _envStore _envLogger _envManager
 
         logDebug _envLogger rq -- debug:ClientRequest
 

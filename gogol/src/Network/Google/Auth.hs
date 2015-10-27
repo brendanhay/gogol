@@ -1,5 +1,6 @@
 {-# LANGUAGE BangPatterns               #-}
 {-# LANGUAGE DeriveDataTypeable         #-}
+{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GADTs                      #-}
@@ -18,57 +19,61 @@
 --
 -- Explicitly specify your Google credentials, or retrieve them
 -- from the underlying OS.
-module Network.Google.Auth
-   (
-   -- * Authentication
-   -- ** Retrieving Authentication
-     getAuth
-   , Credentials    (..)
-   , Auth
+module Network.Google.Auth where
+   -- (
+   -- -- * Authentication
+   -- -- ** Retrieving Authentication
+   --   getAuth
+   -- , Credentials    (..)
+   -- , Auth
 
-   -- ** Authorising Requests
-   , authorise
+   -- -- ** Authorising Requests
+   -- , authorize
 
-   -- ** Default Constants
-   -- *** Google Compute Engine
-   , checkGCEVar
+   -- -- ** Default Constants
+   -- -- *** Google Compute Engine
+   -- , checkGCEVar
 
-   -- *** Cloud SDK
-   , cloudSDKConfigDir
-   , cloudSDKConfigPath
+   -- -- *** Cloud SDK
+   -- , cloudSDKConfigDir
+   -- , cloudSDKConfigPath
 
-   -- *** Application Default Credentials
-   , defaultCredentialsFile
-   , defaultCredentialsPath
+   -- -- *** Application Default Credentials
+   -- , defaultCredentialsFile
+   -- , defaultCredentialsPath
 
-   -- ** Credentials
-   , fromMetadata
-   , fromFile
-   , fromFilePath
+   -- -- ** Credential Styles
+   -- , fromMetadata
+   -- , fromFile
+   -- , fromFilePath
 
-   -- *** Authorised User
-   , AuthorisedUser (..)
-   , fromAuthorisedUser
+   -- -- *** OAuth Token
+   -- , Bearer         (..)
+   -- , fromToken
 
-   -- *** Service Account
-   , ServiceAccount (..)
-   , fromServiceAccount
+   -- -- *** Authorized User
+   -- , AuthorizedUser (..)
+   -- , fromAuthorizedUser
 
-   -- ** Handling Errors
-   , AsAuthError    (..)
-   , AuthError      (..)
+   -- -- *** Service Account
+   -- , ServiceAccount (..)
+   -- , fromServiceAccount
 
-   -- ** Re-exported Types
-   , OAuthScope     (..)
-   , OAuthToken     (..)
-   , ServiceId      (..)
-   , ClientId       (..)
-   ) where
+   -- -- ** Handling Errors
+   -- , AsAuthError    (..)
+   -- , AuthError      (..)
+
+   -- -- ** Re-exported Types
+   -- , Scope     (..)
+   -- , OAuthToken     (..)
+   -- , ServiceId      (..)
+   -- , ClientId       (..)
+   -- ) where
 
 import           Control.Applicative
 import           Control.Concurrent
 import           Control.Exception.Lens
-import           Control.Lens                    hiding ((.=))
+import           Control.Lens                    hiding (coerce, (.=))
 import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
@@ -80,11 +85,19 @@ import           Data.Aeson.Types
 import           Data.ByteArray
 import           Data.ByteArray.Encoding
 import           Data.ByteString                 (ByteString)
+import           Data.ByteString.Builder         (Builder)
+import qualified Data.ByteString.Builder         as Build
 import qualified Data.ByteString.Char8           as BS8
 import qualified Data.ByteString.Lazy            as LBS
+import           Data.Coerce
 import           Data.Default.Class              (def)
+import           Data.List                       (intersperse)
+import           Data.String
 import qualified Data.Text                       as Text
 import qualified Data.Text.Encoding              as Text
+import qualified Data.Text.Lazy                  as LText
+import qualified Data.Text.Lazy.Builder          as TBuild
+import qualified Data.Text.Lazy.Encoding         as LText
 import           Data.Time
 import           Data.Time.Clock.POSIX
 import           Data.Typeable
@@ -92,7 +105,7 @@ import           Data.X509
 import           Data.X509.Memory
 import           Network.Google.Compute.Metadata
 import           Network.Google.Internal.Logger
-import           Network.Google.Prelude
+import           Network.Google.Prelude          hiding (buildText)
 import           Network.HTTP.Conduit            hiding (Request)
 import qualified Network.HTTP.Conduit            as Client
 import           Network.HTTP.Types
@@ -177,135 +190,6 @@ instance AsAuthError AuthError where
             TokenRefreshError s e d -> Right (s, e, d)
             x                       -> Left  x)
 
--- | Determines how AuthN/AuthZ information is retrieved.
-data Credentials
-    = FromToken !OAuthToken
-      -- ^ Supply an explicit access token. See 'fromToken'.
-
-    | FromFile !FilePath
-      -- ^ Load the Application Default Credentials from a specific file path.
-      -- The file can be formatted as either a @service_account@ or an @authorized_user@.
-
-    | FromAccount !ServiceId
-      -- ^ Retrieve the Application Default Credentials using the speicfic
-      -- 'ServiceId' from the local metadata endpoint.
-
-    | Discover
-      -- ^ Attempt credentials discovery via the following steps:
-      --
-      -- * Read the default credentials from a file specified by
-      -- the environment variable @GOOGLE_APPLICATION_CREDENTIALS@ if it exists.
-      --
-      -- * Read the platform equivalent of @~\/.config\/gcloud\/application_default_credentials.json@ if it exists.
-      -- The @~/.config@ component of the path can be overriden by the environment
-      -- variable @CLOUDSDK_CONFIG@ if it exists.
-      --
-      -- * Retrieve the default service account application credentials if
-      -- running on GCE.
-      deriving (Eq, Show)
-
--- | Retrieve authentication information via the specified 'Credentials' mechanism.
---
--- The specified 'OAuthScope's are used to authorise any @service_account@
--- with the appropriate scopes. See the top-level module of each individual
--- @gogol-*@ library for a list of available scopes, such as @Network.Google.Compute.computeScope@.
---
--- Throws 'AuthError' when environment variables or service account information
--- cannot be read, and credentials files are invalid or cannot be found.
-getAuth :: (MonadIO m, MonadCatch m)
-        => Credentials
-        -> [OAuthScope]
-        -> Logger
-        -> Manager
-        -> m Auth
-getAuth c ss l m = case c of
-    FromToken   t -> pure (AuthToken t)
-    FromFile    f -> fromFilePath ss f l m
-    FromAccount s -> fromMetadata    s l m
-    Discover      ->
-        catching _MissingFileError (fromFile ss l m) $ \f -> do
-            p <- isGCE m
-            unless p $
-                throwingM _MissingFileError f
-            fromMetadata "default" l m
-
--- | Refresh a token from the local GCE metadata endpoint for the specified
--- 'ServiceId'.
-fromMetadata :: (MonadIO m, MonadCatch m)
-             => ServiceId
-             -> Logger
-             -> Manager
-             -> m Auth
-fromMetadata s l = refresh s l >=> fmap AuthMeta . liftIO . newMVar
-
--- | Attempt to load either a @service_account@ or @authorized_user@ formatted
--- file to obtain the credentials neccessary to perform a token refresh.
-fromFile :: (MonadIO m, MonadCatch m) => [OAuthScope] -> Logger -> Manager -> m Auth
-fromFile ss l m = do
-    f <- defaultCredentialsPath
-    case f of
-        Just x  -> fromFilePath ss x l m
-        Nothing -> do
-            x <- cloudSDKConfigPath
-            fromFilePath ss x l m
-
--- | An internal type inhabited by the supported JSON formats
--- for Application Default Credentials.
-data AccountJSON
-    = ParsedService !ServiceAccount
-    | ParsedUser    !AuthorisedUser
-
--- The following instance accumulates all error messages if all parsers fail.
--- If there is a success, the entire parse succeeds with the single
--- successful parse.
-instance FromJSON AccountJSON where
-    parseJSON o =
-        let x = ParsedService <$> parseEither parseJSON o
-            y = ParsedUser    <$> parseEither parseJSON o
-         in either fail pure $
-            case (x, y) of
-                (Left e, Left e') -> Left $
-                      "Failed parsing service_account: " ++ e ++
-                    ", Failed parsing authorized_user: " ++ e'
-                _                 -> x <|> y
-
--- | Attempt to load either a @service_account@ or @authorized_user@ formatted
--- file to obtain the credentials neccessary to perform a token refresh from
--- the specified file.
-fromFilePath :: (MonadIO m, MonadCatch m)
-             => [OAuthScope]
-             -> FilePath
-             -> Logger
-             -> Manager
-             -> m Auth
-fromFilePath ss f l m = do
-    logDebug l $ "Trying to read credentials from " <> build f
-    p <- liftIO (doesFileExist f)
-    unless p $
-        throwM (MissingFileError f)
-    e <- liftIO (LBS.readFile f) >>=
-        either (throwM . InvalidFileError f) pure . parseLBS
-    case e of
-        ParsedUser    u -> fromAuthorisedUser u l m
-        ParsedService a -> fromServiceAccount (a { _serviceScope = ss }) l m
-
-fromAuthorisedUser :: (MonadIO m, MonadCatch m)
-                   => AuthorisedUser
-                   -> Logger
-                   -> Manager
-                   -> m Auth
-fromAuthorisedUser u l m =
-    refresh u l m >>= fmap AuthUser . liftIO . newMVar
-
-fromServiceAccount :: (MonadIO m, MonadCatch m)
-                   => ServiceAccount
-                   -> Logger
-                   -> Manager
-                   -> m Auth
-fromServiceAccount s l m =
-    -- Add a check to ensure scopes aren't empty.
-    refresh s l m >>= fmap AuthSign . liftIO . newMVar
-
 -- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
 -- default application credentials filepath.
 defaultCredentialsPath :: MonadIO m => m (Maybe FilePath)
@@ -339,160 +223,425 @@ instance FromJSON RefreshError where
         <$> o .:  "error"
         <*> o .:? "error_description"
 
-data Expires a = Expires
-    { _expiry  :: !UTCTime
-    , _token   :: !OAuthToken
-    , _details :: !a
-    }
+{-| Service Account credentials which are typically generated/download
+from the Google Developer console of the following form:
 
-isValid :: MonadIO m => Expires a -> m Bool
-isValid r = (< _expiry r) <$> liftIO getCurrentTime
+@
+{
+  "type": "service_account",
+  "private_key_id": "303ad77e5efdf2ce952DFa",
+  "private_key": "-----BEGIN PRIVATE KEY-----\n...\n",
+  "client_email": "email@serviceaccount.com",
+  "client_id": "035-2-310.useraccount.com"
+}
+@
 
-data Auth
-    = AuthToken !OAuthToken
-    | AuthSign  !(MVar (Expires ServiceAccount))
-    | AuthMeta  !(MVar (Expires ServiceId))
-    | AuthUser  !(MVar (Expires AuthorisedUser))
+The private key is used to sign a JSON Web Token (JWT) of the
+grant_type @urn:ietf:params:oauth:grant-type:jwt-bearer@, which is sent to
+'accountsURL' to obtain a valid 'OAuthToken'. This process requires explicitly
+specifying which 'Scope's the resulting 'OAuthToken' is authorized to access.
 
-authorise :: (MonadIO m, MonadCatch m)
-          => Logger
-          -> Manager
-          -> Client.Request
-          -> Auth
-          -> m Client.Request
-authorise l m rq = \case
-    AuthToken t -> pure $! authoriseBearer rq t
-    AuthSign  r -> authoriseToken l m r rq
-    AuthMeta  r -> authoriseToken l m r rq
-    AuthUser  r -> authoriseToken l m r rq
-
-authoriseBearer :: Client.Request -> OAuthToken -> Client.Request
-authoriseBearer rq t = rq
-    { Client.requestHeaders = (hAuthorization, "Bearer " <> tokenToBS t)
-        : Client.requestHeaders rq
-    }
-
-authoriseToken :: (MonadIO m, MonadCatch m, Refresh a)
-               => Logger
-               -> Manager
-               -> MVar (Expires a)
-               -> Client.Request
-               -> m Client.Request
-authoriseToken l m r rq = authoriseBearer rq <$> refreshToken l m r
-
-refreshToken :: (MonadIO m, MonadCatch m, Refresh a)
-             => Logger
-             -> Manager
-             -> MVar (Expires a)
-             -> m OAuthToken
-refreshToken l m r = do
-    x  <- liftIO (readMVar r)
-    xv <- isValid x
-    if xv
-        then pure (_token x)
-        else liftIO . modifyMVar r $ \y -> do
-            yv <- isValid y
-            if yv
-                then pure (y, _token y)
-                else do
-                    z <- refresh (_details y) l m
-                    pure (z, _token z)
-
--- {
---   "access_token": "sadsdasd",
---   "expires_in": 3600,
---   "id_token": "eyJhbGciOiJSd",
---   "refresh_token": "1/B3gq9K",
---   "token_type": "Bearer"
--- }
-
-data Bearer = Bearer
-    { _bearerAccess  :: !OAuthToken
-    , _bearerRefresh :: !(Maybe Text)
-    , _bearerExpiry  :: !UTCTime
-    }
-
-instance FromJSON (UTCTime -> Bearer) where
-    parseJSON = withObject "bearer" $ \o -> do
-        t <- o .:  "access_token"
-        r <- o .:? "refresh_token"
-        e <- o .:  "expires_in" <&> fromInteger
-        pure (Bearer t r . addUTCTime e)
-
--- {
---   "private_key_id": "303ad77e5efdf2ce952DFa",
---   "private_key": "-----BEGIN PRIVATE KEY-----\nMIIE...\n",
---   "client_email": "01395191@gserviceaccount.com",
---   "client_id": "035-2-310eusercontent.com",
---   "type": "service_account"
--- }
-
+A 'ServiceAccount' is typically generated through the
+Google Developer Console.
+-}
 data ServiceAccount = ServiceAccount
-    { _serviceId    :: !ClientId
-    , _serviceEmail :: !Text
-    , _serviceScope :: ![OAuthScope]
-    , _serviceKeyId :: !Text
-    , _serviceKey   :: !PrivateKey
-    }
+    { _serviceId         :: !ClientId
+    , _serviceEmail      :: !Text
+    , _serviceKeyId      :: !Text
+    , _servicePrivateKey :: !PrivateKey
+    } deriving (Eq, Show)
 
 instance FromJSON ServiceAccount where
     parseJSON = withObject "service_account" $ \o -> do
         bs <- Text.encodeUtf8 <$> o .: "private_key"
+        k  <- case listToMaybe (readKeyFileFromMemory bs) of
+            Just (PrivKeyRSA k) -> pure k
+            _                   ->
+                fail "Unable to parse key contents from \"private_key\""
         ServiceAccount
             <$> o .: "client_id"
             <*> o .: "client_email"
-            <*> pure mempty
             <*> o .: "private_key_id"
-            <*> case listToMaybe (readKeyFileFromMemory bs) of
-                Just (PrivKeyRSA k) -> pure k
-                _                   ->
-                    fail "Unable to parse key contents from \"private_key\""
+            <*> pure k
 
--- {
---   "client_id": "32555940559.apps.googleusercontent.com",
---   "client_secret": "ZmssLNjJy2998hD4CTg2ejr2",
---   "refresh_token": "1/B3gqKM1xzVtqffS1n5w-rSJ",
---   "type": "authorized_user"
--- }
+{-| Authorized User credentials which are typically generated by the Cloud SDK
+tools such as @gcloud init@, of the following form:
 
-data AuthorisedUser = AuthorisedUser
+{
+  "type": "authorized_user",
+  "client_id": "32555940559.apps.googleusercontent.com",
+  "client_secret": "Zms2qjJy2998hD4CTg2ejr2",
+  "refresh_token": "1/B3gM1x35v.VtqffS1n5w-rSJ"
+}
+
+The secret and refresh token are used to obtain a valid 'OAuthToken' from
+'accountsURL' using grant_type @refresh_token@.
+
+An 'AuthorizedUser' is typically generated by the @gcloud init@ command
+of the Google CloudSDK Tools.
+-}
+data AuthorizedUser = AuthorizedUser
     { _userId      :: !ClientId
-    , _userSecret  :: !Text
-    , _userRefresh :: !Text
-    }
+    , _userRefresh :: !RefreshToken
+    , _userSecret  :: !Secret
+    } deriving (Eq, Show)
 
-instance FromJSON AuthorisedUser where
-    parseJSON = withObject "authorized_user" $ \o -> AuthorisedUser
+instance FromJSON AuthorizedUser where
+    parseJSON = withObject "authorized_user" $ \o -> AuthorizedUser
         <$> o .: "client_id"
-        <*> o .: "client_secret"
         <*> o .: "refresh_token"
+        <*> o .: "client_secret"
 
-class Refresh a where
-    refresh :: (MonadIO m, MonadCatch m)
-            => a
-            -> Logger
-            -> Manager
-            -> m (Expires a)
+-- | A client identifier and accompanying secret used to obtain/refresh a token.
+data OAuthClient = OAuthClient
+    { _clientId     :: !ClientId
+    , _clientSecret :: !Secret
+    } deriving (Eq, Show)
 
-instance Refresh ServiceAccount where
-    refresh s l m = do
-        b <- jwtEncode s
-        let rq = accountsRequest
-               { Client.requestBody = RequestBodyBS $
-                      "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
-                   <> "&assertion="
-                   <> b
-               }
-        refreshRequest s rq l m
+{-| An OAuth bearer type token of the following form:
 
-jwtEncode :: (MonadIO m, MonadThrow m)
-          => ServiceAccount
-          -> m ByteString
-jwtEncode s = liftIO $ do
-    i <- input . truncate <$> getPOSIXTime
-    r <- signSafer (Just SHA256) (_serviceKey s) i
-    either failure (\x -> pure (i <> "." <> signature (base64 x))) r
+@
+{
+  "token_type": "Bearer",
+  "access_token": "eyJhbGci...",
+  "refresh_token": "1/B3gq9K...",
+  "expires_in": 3600,
+  ...
+}
+@
+
+The '_tokenAccess' field will be inserted verbatim into the
+@Authorization: Bearer ...@ header for all HTTP requests.
+-}
+data OAuthToken = OAuthToken
+    { _tokenAccess  :: !AccessToken
+    , _tokenRefresh :: !(Maybe RefreshToken)
+    , _tokenExpiry  :: !UTCTime
+    } deriving (Eq, Show)
+
+instance FromJSON (UTCTime -> OAuthToken) where
+    parseJSON = withObject "bearer" $ \o -> do
+        t <- o .:  "access_token"
+        r <- o .:? "refresh_token"
+        e <- o .:  "expires_in" <&> fromInteger
+        pure (OAuthToken t r . addUTCTime e)
+
+newtype OAuthCode = OAuthCode { codeToText :: Text }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
+
+-- | The supported credential mechanisms.
+data Credentials
+    = FromMetadata !ServiceId
+      -- ^ Obtain and refresh access tokens from the underlying GCE host metadata
+      -- at @http:\/\/169.254.169.254@.
+
+    | FromClient !OAuthClient !OAuthCode
+      -- ^ Obtain and refresh access tokens using the specified client secret
+      -- and authorization code obtained from.
+      --
+      -- See the <https://developers.google.com/accounts/docs/OAuth2InstalledApp OAuth2 Installed Application>
+      -- documentation for more information.
+
+    | FromAccount  !ServiceAccount ![OAuthScope]
+      -- ^ Use the specified @service_account@ and scopes to sign and request
+      -- an access token. The 'ServiceAccount' will also be used for subsequent
+      -- token refreshes.
+      --
+      -- A 'ServiceAccount' is typically generated through the
+      -- Google Developer Console.
+
+    | FromUser !AuthorizedUser
+      -- ^ Use the specified @authorized_user@ to obtain and refresh access tokens.
+      --
+      -- An 'AuthorizedUser' is typically created by the @gcloud init@ command
+      -- of the Google CloudSDK Tools.
+
+-- | A credentials value in one of two possible states, pre-exchange and
+-- containing a valid, but possibly expired access token.
+data Auth
+    = Exchange !Credentials
+      -- ^ Signifies that the initial token refresh has not occured, and the
+      -- 'Credentials' need to be signed and exchanged for a valid 'OAuthToken'.
+
+    | Refresh  !Credentials !OAuthToken
+      -- ^ An 'OAuthToken' that can potentially be expired, with the original
+      -- credentials that can be used to perform a refresh.
+
+type Store = MVar Auth
+
+emptyStore :: MonadIO m => Credentials -> m Store
+emptyStore !c = liftIO . newMVar $ Exchange c
+
+-- FIXME: support for generating the url using scopes to obtain the OAuthCode.
+
+-- FIXME:
+-- The parameter is include_granted_scopes and the allowed values are true and
+-- false (the default is false). When the value is true, the effect is that if
+-- your scope authorization request is granted, the Google authorization server
+-- will roll this authorization together with all the previous authorizations
+-- granted to the requesting user from the requesting app.
+
+-- FIXME: Get around to replacing the threading of Logger, Manager through
+-- every exchange/refresh call.
+
+-- | Retrieve authentication information via the specified 'Credentials' mechanism.
+--
+--
+-- Throws 'AuthError' when environment variables or service account information
+-- cannot be read, and credentials files are invalid or cannot be found.
+-- getAuth :: (MonadIO m, MonadCatch m)
+--         => Credentials
+--         -> [Scope]
+--         -> Logger
+--         -> Manager
+--         -> m Auth
+-- getAuth c ss l m = case c of
+--     FromToken   t -> pure (AuthToken t)
+--     FromFile    f -> fromFilePath ss f l m
+--     FromAccount s -> fromMetadata    s l m
+--     Discover      ->
+--         catching _MissingFileError (fromFile ss l m) $ \f -> do
+--             p <- isGCE m
+--             unless p $
+--                 throwingM _MissingFileError f
+--             fromMetadata "default" l m
+
+-- | Attempt credentials discovery via the following steps:
+--
+-- * Read the default credentials from a file specified by
+-- the environment variable @GOOGLE_APPLICATION_CREDENTIALS@ if it exists.
+--
+-- * Read the platform equivalent of @~\/.config\/gcloud\/application_default_credentials.json@ if it exists.
+-- The @~/.config@ component of the path can be overriden by the environment
+-- variable @CLOUDSDK_CONFIG@ if it exists.
+--
+-- * Retrieve the default service account application credentials if
+-- running on GCE.
+--
+-- The specified 'Scope's are used to authorize any @service_account@ that is
+-- found with the appropriate scopes, otherwise they are not used. See the
+-- top-level module of each individual @gogol-*@ library for a list of available
+-- scopes, such as @Network.Google.Compute.computeScope@.
+discover :: (MonadIO m, MonadCatch m)
+         => [OAuthScope]
+         -> Manager
+         -> m Credentials
+discover ss m =
+    catching _MissingFileError (fromFile ss) $ \f -> do
+        p <- isGCE m
+        unless p $
+            throwingM _MissingFileError f
+        pure $! FromMetadata "default"
+
+-- | Attempt to load either a @service_account@ or @authorized_user@ formatted
+-- file to obtain the credentials neccessary to perform a token refresh.
+--
+-- The specified 'Scope's are used to authorize any @service_account@ that is
+-- found with the appropriate scopes, otherwise they are not used. See the
+-- top-level module of each individual @gogol-*@ library for a list of available
+-- scopes, such as @Network.Google.Compute.computeScope@.
+--
+-- /See:/ 'cloudSDKConfigPath', 'defaultCredentialsPath'.
+fromFile :: (MonadIO m, MonadCatch m) => [OAuthScope] -> m Credentials
+fromFile ss = do
+    f <- defaultCredentialsPath
+    case f of
+        Just x  -> fromFilePath ss x
+        Nothing -> do
+            x <- cloudSDKConfigPath
+            fromFilePath ss x
+
+-- | Attempt to load either a @service_account@ or @authorized_user@ formatted
+-- file to obtain the credentials neccessary to perform a token refresh from
+-- the specified file.
+--
+-- The specified 'Scope's are used to authorize any @service_account@ that is
+-- found with the appropriate scopes, otherwise they are not used. See the
+-- top-level module of each individual @gogol-*@ library for a list of available
+-- scopes, such as @Network.Google.Compute.computeScope@.
+fromFilePath :: (MonadIO m, MonadCatch m)
+             => [OAuthScope]
+             -> FilePath
+             -> m Credentials
+fromFilePath ss f = do
+    p  <- liftIO (doesFileExist f)
+    unless p $
+        throwM (MissingFileError f)
+    bs <- liftIO (LBS.readFile f)
+    either (throwM . InvalidFileError f . Text.pack) pure
+           (fromJSONCredentials ss bs)
+
+fromJSONCredentials :: [OAuthScope]
+                    -> LBS.ByteString
+                    -> Either String Credentials
+fromJSONCredentials ss bs = do
+    v <- eitherDecode' bs
+    let x = (`FromAccount` ss) <$> parseEither parseJSON v
+        y = FromUser           <$> parseEither parseJSON v
+    case (x, y) of
+        (Left xe, Left ye) -> Left $
+              "Failed parsing service_account: " ++ xe ++
+            ", Failed parsing authorized_user: " ++ ye
+        _                  -> x <|> y
+
+authorize :: (MonadIO m, MonadCatch m)
+          => Client.Request
+          -> Store
+          -> Logger
+          -> Manager
+          -> m Client.Request
+authorize rq s l m = bearer <$> getToken s l m
   where
+    bearer t = rq
+        { Client.requestHeaders =
+            ( hAuthorization
+            , "Bearer " <> Text.encodeUtf8 (accessToText (_tokenAccess t))
+            ) : Client.requestHeaders rq
+        }
+
+getToken :: (MonadIO m, MonadCatch m)
+         => Store
+         -> Logger
+         -> Manager
+         -> m OAuthToken
+getToken s l m = do
+    x  <- liftIO (readMVar s)
+    mx <- validateToken x
+    case mx of
+        Just t  -> pure t
+        Nothing -> liftIO . modifyMVar s $ \y -> do
+            my <- validateToken y
+            case my of
+                Just t  -> pure (y, t)
+                Nothing ->
+                    case y of
+                        Exchange c -> do
+                            t <- exchange c   l m
+                            pure (Refresh c t, t)
+                        Refresh c t -> do
+                            t' <- refresh c t l m
+                            pure (Refresh c t', t')
+
+validateToken :: MonadIO m => Auth -> m (Maybe OAuthToken)
+validateToken Exchange {}   = pure Nothing
+validateToken (Refresh _ t) = do
+    ts <- liftIO getCurrentTime
+    if ts < _tokenExpiry t
+        then pure (Just t)
+        else pure Nothing
+
+exchange :: (MonadIO m, MonadCatch m)
+         => Credentials
+         -> Logger
+         -> Manager
+         -> m OAuthToken
+exchange c l m =
+    case c of
+        FromMetadata s                  -> refreshMetadata  s    l m
+        FromAccount  a  ss              -> refreshAssertion a ss l m
+        FromClient   c' n               -> exchangeCode     c' n l m
+        FromUser     AuthorizedUser{..} ->
+            refreshToken _userId _userSecret (Just _userRefresh) l m
+
+formURL :: OAuthClient -> [OAuthScope] -> Text
+formURL OAuthClient{..} ss =
+    LText.toStrict . LText.decodeUtf8 . Build.toLazyByteString $
+           buildText accountsURL
+        <> "?response_type=code"
+        <> "&client_id="    <> buildText _clientId
+        <> "&redirect_uri=" <> buildText redirectURI
+        <> "&scope="        <> queryEncodeScopes ss
+
+redirectURI :: Text
+redirectURI = "urn:ietf:wg:oauth:2.0:oob"
+
+exchangeCode :: (MonadIO m, MonadCatch m)
+             => OAuthClient
+             -> OAuthCode
+             -> Logger
+             -> Manager
+             -> m OAuthToken
+exchangeCode OAuthClient{..} n = refreshRequest $
+    accountsRequest
+        { Client.requestBody = buildBody $
+               "grant_type=authorization_code"
+            <> "&client_id="     <> buildText _clientId
+            <> "&client_secret=" <> buildText _clientSecret
+            <> "&code="          <> buildText n
+            <> "&redirect_uri="  <> buildText redirectURI
+        }
+
+refresh :: (MonadIO m, MonadCatch m)
+        => Credentials
+        -> OAuthToken
+        -> Logger
+        -> Manager
+        -> m OAuthToken
+refresh c OAuthToken{..} l m =
+    case c of
+        FromMetadata s                  -> refreshMetadata  s    l m
+        FromAccount  a ss               -> refreshAssertion a ss l m
+        FromClient   OAuthClient{..} _  ->
+            refreshToken _clientId _clientSecret _tokenRefresh   l m
+        FromUser     AuthorizedUser{..} ->
+            refreshToken _userId _userSecret
+                (_tokenRefresh <|> Just _userRefresh)            l m
+
+refreshMetadata :: (MonadIO m, MonadCatch m)
+                => ServiceId
+                -> Logger
+                -> Manager
+                -> m OAuthToken
+refreshMetadata s = refreshRequest $
+    metadataRequest
+        { Client.path = "instance/service-accounts/"
+            <> Text.encodeUtf8 (serviceIdToText s)
+            <> "/token"
+        }
+
+refreshToken :: (MonadIO m, MonadCatch m)
+             => ClientId
+             -> Secret
+             -> Maybe RefreshToken
+             -> Logger
+             -> Manager
+             -> m OAuthToken
+refreshToken c s r = refreshRequest $
+    accountsRequest
+        { Client.requestBody = buildBody $
+               "grant_type=refresh_token"
+            <> "&client_id="     <> buildText c
+            <> "&client_secret=" <> buildText s
+            <> maybe mempty ("&refresh_token=" <>) (buildText <$> r)
+        }
+
+refreshAssertion :: (MonadIO m, MonadCatch m)
+                 => ServiceAccount
+                 -> [OAuthScope]
+                 -> Logger
+                 -> Manager
+                 -> m OAuthToken
+refreshAssertion s ss l m = do
+    b <- encodeJWTBearer s ss
+    let rq = accountsRequest
+           { Client.requestBody = buildBody $
+                  "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
+               <> "&assertion="
+               <> Build.byteString b
+           }
+    refreshRequest rq l m
+
+encodeJWTBearer :: (MonadIO m, MonadThrow m)
+                => ServiceAccount
+                -> [OAuthScope]
+                -> m ByteString
+encodeJWTBearer s ss = liftIO $ do
+    i <- input . truncate <$> getPOSIXTime
+    r <- signSafer (Just SHA256) (_servicePrivateKey s) i
+    either failure (pure . concat' i) r
+  where
+    concat' i x = i <> "." <> signature (base64 x)
+
     failure e = throwM $
         TokenRefreshError (toEnum 400) (Text.pack (show e)) Nothing
 
@@ -512,30 +661,30 @@ jwtEncode s = liftIO $ do
             ]
 
         payload = base64Encode
-            [ "aud"   .= Text.pack "https://accounts.google.com/o/oauth2/token"
-            , "scope" .= concatScopes (_serviceScope s)
+            [ "aud"   .= accountsURL
+            , "scope" .= concatScopes ss
             , "iat"   .= n
             , "exp"   .= (n + maxTokenLifetimeSeconds)
             , "iss"   .= _serviceEmail s
             ]
 
-instance Refresh AuthorisedUser where
-    refresh u@AuthorisedUser{..} = refreshRequest u $
-        accountsRequest
-            { Client.requestBody = RequestBodyBS . Text.encodeUtf8 $
-                   "grant_type=refresh_token"
-                <> "&client_id="     <> clientIdToText _userId
-                <> "&client_secret=" <> _userSecret
-                <> "&refresh_token=" <> _userRefresh
-            }
+queryEncodeScopes :: [OAuthScope] -> Build.Builder
+queryEncodeScopes =
+      mconcat
+    . intersperse "+"
+    . map (urlEncodeBuilder True . Text.encodeUtf8)
+    . coerce
 
-instance Refresh ServiceId where
-    refresh sid = refreshRequest sid $
-        metadataRequest
-            { Client.path = "instance/service-accounts/"
-                <> Text.encodeUtf8 (serviceIdToText sid)
-                <> "/token"
-            }
+concatScopes :: [OAuthScope] -> LText.Text
+concatScopes =
+      TBuild.toLazyText
+    . mconcat
+    . intersperse " "
+    . map TBuild.fromText
+    . coerce
+
+accountsURL :: Text
+accountsURL = "https://accounts.google.com/o/oauth2/token"
 
 accountsRequest :: Client.Request
 accountsRequest = def
@@ -545,16 +694,17 @@ accountsRequest = def
     , Client.checkStatus    = \_ _ _ -> Nothing
     , Client.method         = "POST"
     , Client.path           = "/o/oauth2/token"
-    , Client.requestHeaders = [(hContentType, "application/x-www-form-urlencoded")]
+    , Client.requestHeaders =
+        [ (hContentType, "application/x-www-form-urlencoded")
+        ]
     }
 
 refreshRequest :: (MonadIO m, MonadCatch m)
-               => a
-               -> Client.Request
+               => Client.Request
                -> Logger
                -> Manager
-               -> m (Expires a)
-refreshRequest r rq l m = do
+               -> m OAuthToken
+refreshRequest rq l m = do
     logDebug l rq                          -- debug:ClientRequest
 
     rs <- liftIO (httpLbs rq m) `catch` (throwM . RetrievalError)
@@ -572,8 +722,7 @@ refreshRequest r rq l m = do
     success s bs = do
         f  <- parseErr s bs
         ts <- liftIO getCurrentTime
-        let Bearer {..} = f ts
-        pure $! Expires _bearerExpiry _bearerAccess r
+        pure (f ts)
 
     failure s bs = do
         let e = "Failure refreshing token from " <> host <> path
@@ -586,7 +735,8 @@ refreshRequest r rq l m = do
         case parseLBS bs of
             Right !x -> pure x
             Left   e -> do
-                logError l $ "[Parse Error] Failure parsing token refresh " <> build e
+                logError l $
+                    "[Parse Error] Failure parsing token refresh " <> build e
                 refreshErr s e Nothing
 
     refreshErr :: MonadThrow m => Status -> Text -> Maybe Text -> m a
@@ -603,3 +753,9 @@ base64Encode = base64 . LBS.toStrict . encode . object
 
 base64 :: ByteArray a => a -> ByteString
 base64 = convertToBase Base64URLUnpadded
+
+buildBody :: Builder -> RequestBody
+buildBody = RequestBodyLBS . Build.toLazyByteString
+
+buildText :: ToText a => a -> Builder
+buildText = build . toText

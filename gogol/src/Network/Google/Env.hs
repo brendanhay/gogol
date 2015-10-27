@@ -25,7 +25,7 @@ data Env = Env
     { _envLogger   :: !Logger
     , _envOverride :: !(Dual (Endo Service))
     , _envManager  :: !Manager
-    , _envAuth     :: !Auth
+    , _envStore    :: !Store
     }
 
 -- Note: The strictness annotations aobe are applied to ensure
@@ -44,13 +44,13 @@ class HasEnv a where
     -- | The 'Manager' used to create and manage open HTTP connections.
     envManager  :: Lens' a Manager
 
-    -- | The credentials used to sign requests for authentication with Google.
-    envAuth     :: Lens' a Auth
+    -- | The credential store used to sign requests for authentication with Google.
+    envStore    :: Lens' a Store
 
-    envLogger   = environment . lens _envLogger   (\s a -> s { _envLogger     = a })
+    envLogger   = environment . lens _envLogger   (\s a -> s { _envLogger   = a })
     envOverride = environment . lens _envOverride (\s a -> s { _envOverride = a })
     envManager  = environment . lens _envManager  (\s a -> s { _envManager  = a })
-    envAuth     = environment . lens _envAuth     (\s a -> s { _envAuth     = a })
+    envStore    = environment . lens _envStore    (\s a -> s { _envStore    = a })
 
 instance HasEnv Env where
     environment = id
@@ -101,21 +101,35 @@ reconfigure = local . configure
 timeout :: (MonadReader r m, HasEnv r) => Seconds -> m a -> m a
 timeout s = local (override (serviceTimeout ?~ s))
 
--- | Creates a new environment with a new 'Manager' without debug logging
--- and uses 'getAuth' to expand/discover the supplied 'Credentials'.
+-- | Creates a new environment with a new 'Manager', without logging.
+-- Credentials are determined by calling 'discover'. Use 'newEnvWith' to supply
+-- custom credentials such as an 'OAuthClient' and 'OAuthCode'.
+--
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
--- /See:/ 'newEnvWith', 'defaultScopes'.
-newEnv :: (MonadIO m, MonadCatch m) => Credentials -> [OAuthScope] -> m Env
-newEnv c ss = liftIO (newManager tlsManagerSettings) >>= newEnvWith c ss logger
-  where
-    logger _ _ = pure ()
+-- /See:/ 'newEnvWith', 'discover'.
+newEnv :: (MonadIO m, MonadCatch m) => [OAuthScope] -> m Env
+newEnv ss = do
+    m <- liftIO (newManager tlsManagerSettings)
+    c <- discover ss m
+    newEnvWith c m
 
--- | /See:/ 'newEnv'
+-- | Creates a new environment without logging, using the supplied 'Manager' and
+-- credentials. Use either the 'Credentials' constructor or
+-- see one of following functions from "Network.Google.Auth" for how to instantiate
+-- a 'Credentials' value:
+--
+-- * 'discover' - Attempt to discover credentials from the underlying host.
+--
+-- * 'fromFile' - Attempt to load credentials from the well known file locations.
+--
+-- * 'fromFilePath' - Supply a file path to load credentials from.
+--
+-- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
+--
+-- /See:/ 'newEnv'.
 newEnvWith :: (MonadIO m, MonadCatch m)
            => Credentials
-           -> [OAuthScope]
-           -> Logger
            -> Manager
            -> m Env
-newEnvWith c ss l m = Env l mempty m <$> getAuth c ss l m
+newEnvWith c m = Env (\_ _ -> pure ()) mempty m <$> emptyStore c
