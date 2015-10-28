@@ -69,15 +69,6 @@ metadataFlavorHeader = "Metadata-Flavor"
 metadataFlavorDesired :: ByteString
 metadataFlavorDesired = "Google"
 
-metadataRequest :: Client.Request
-metadataRequest = def
-    { Client.host           = "metadata.google.internal"
-    , Client.port           = 80
-    , Client.secure         = False
-    , Client.method         = "GET"
-    , Client.requestHeaders = [(metadataFlavorHeader, metadataFlavorDesired)]
-    }
-
 -- | Detect if the underlying host is running on GCE.
 --
 -- The environment variable @NO_GCE_CHECK@ can be set to @1@, @true@, @yes@, or @on@
@@ -243,3 +234,11 @@ metadata path ss m =
                  else Just . toException $ StatusCodeException s hs cj
         }
 
+metadataRequest :: Client.Request
+metadataRequest = def
+    { Client.host           = "metadata.google.internal"
+    , Client.port           = 80
+    , Client.secure         = False
+    , Client.method         = "GET"
+    , Client.requestHeaders = [(metadataFlavorHeader, metadataFlavorDesired)]
+    }

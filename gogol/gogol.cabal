@@ -41,11 +41,16 @@ library
     exposed-modules:
           Network.Google
         , Network.Google.Auth
+        , Network.Google.Auth.ApplicationDefaultCredentials
+        , Network.Google.Auth.Device
+        , Network.Google.Auth.InstalledApplication
+        , Network.Google.Auth.ServiceAccount
         , Network.Google.Compute.Metadata
         , Network.Google.Env
 
     other-modules:
-          Network.Google.Internal.Body
+          Network.Google.Internal.Auth
+        , Network.Google.Internal.Body
         , Network.Google.Internal.HTTP
         , Network.Google.Internal.Logger
         , Network.Google.Internal.Multipart
