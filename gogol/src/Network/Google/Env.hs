@@ -112,11 +112,11 @@ timeout s = local (override (serviceTimeout ?~ s))
 --
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
--- /See:/ 'newEnvWith', 'discover'.
+-- /See:/ 'newEnvWith', 'getApplicationDefault'.
 newEnv :: (MonadIO m, MonadCatch m) => [OAuthScope] -> m Env
 newEnv ss = do
     m <- liftIO (newManager tlsManagerSettings)
-    c <- discover ss m
+    c <- getApplicationDefault ss m
     newEnvWith c (\_ _ -> pure ()) m
 
 -- | Creates a new environment without logging, using the supplied 'Manager' and

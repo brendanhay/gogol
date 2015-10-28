@@ -50,9 +50,16 @@ import           Network.HTTP.Conduit           hiding (Request)
 import qualified Network.HTTP.Conduit           as Client
 import           Network.HTTP.Types
 
--- | Given a client identifier, client secret, and a list of scopes to authorize,
+-- | @urn:ietf:wg:oauth:2.0:oob@.
+redirectURI :: Text
+redirectURI = "urn:ietf:wg:oauth:2.0:oob"
+
+-- | Given an 'OAuthClient' and a list of scopes to authorize,
 -- construct a URL that can be used to obtain the 'OAuthCode' required to
--- instantiate 'FromClient'-style credentials.
+-- instantiate 'FromClient'-style credentials. The received code can be used
+-- with 'exchangeCode'.
+--
+-- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#formingtheurl Forming the URL>.
 formURL :: OAuthClient -> [OAuthScope] -> Text
 formURL c ss = accountsURL
     <> "?response_type=code"
@@ -60,10 +67,10 @@ formURL c ss = accountsURL
     <> "&redirect_uri=" <> redirectURI
     <> "&scope="        <> Text.decodeUtf8 (queryEncodeScopes ss)
 
--- | @urn:ietf:wg:oauth:2.0:oob@.
-redirectURI :: Text
-redirectURI = "urn:ietf:wg:oauth:2.0:oob"
-
+-- | Exchange your 'OAuthClient' details and the 'OAuthCode' you received from
+-- using 'formURL' with a valid 'OAuthToken'.
+--
+-- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#handlingtheresponse Exchanging the code>.
 exchangeCode :: (MonadIO m, MonadCatch m)
              => OAuthClient
              -> OAuthCode
@@ -80,6 +87,9 @@ exchangeCode c n = refreshRequest $
             <> "&redirect_uri="  <> redirectURI
         }
 
+-- | Perform a refresh to obtain a valid 'OAuthToken' with a new expiry time.
+--
+-- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#refresh Refreshing tokens>.
 refreshToken :: (MonadIO m, MonadCatch m)
              => OAuthClient
              -> OAuthToken

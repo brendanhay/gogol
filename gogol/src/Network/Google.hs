@@ -77,6 +77,10 @@ module Network.Google
     -- ** Constructing a Logger
     , newLogger
 
+    -- * Constructing a HTTP Manager
+    , newManager
+    , tlsManagerSettings
+
     -- * Re-exported Types
     , Proxy       (..)
     , OctetStream
@@ -110,6 +114,7 @@ import           Network.Google.Internal.HTTP
 import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
 import           Network.Google.Types
+import           Network.HTTP.Conduit           (newManager, tlsManagerSettings)
 
 newtype Google a = Google { unGoogle :: ReaderT Env (ResourceT IO) a }
     deriving

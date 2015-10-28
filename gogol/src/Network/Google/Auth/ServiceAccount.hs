@@ -56,48 +56,48 @@ import           System.Environment              (lookupEnv)
 import           System.FilePath                 ((</>))
 import           System.Info                     (os)
 
--- | 1 hour in seconds.
-maxTokenLifetimeSeconds :: Int
-maxTokenLifetimeSeconds = 3600
+-- | The maximum lifetime of a @service_account@ token which is 1 hour, in seconds.
+maxTokenLifetime :: Seconds
+maxTokenLifetime = 3600
 
-{-| Service Account credentials which are typically generated/download
-from the Google Developer console of the following form:
+-- | Obtain an 'OAuthToken' from the local instace metadata
+-- using the specific 'ServiceId'.
+--
+-- For example: @http:\/\/169.254.169.254\/instance\/service-accounts\/default\/token@
+-- will be retrieved if the given 'ServiceId' is @\"default\"@.
+metadataToken :: (MonadIO m, MonadCatch m)
+              => ServiceId
+              -> Logger
+              -> Manager
+              -> m OAuthToken
+metadataToken s = refreshRequest $
+    metadataRequest
+        { Client.path = "instance/service-accounts/"
+            <> Text.encodeUtf8 (toText s)
+            <> "/token"
+        }
 
-@
-{
-  \"type\": \"service_account\",
-  \"private_key_id\": \"303ad77e5efdf2ce952DFa\",
-  \"private_key\": \"-----BEGIN PRIVATE KEY-----\n...\n\",
-  \"client_email\": \"email@serviceaccount.com\",
-  \"client_id\": \"035-2-310.useraccount.com\"
-}
-@
+-- | Use the 'AuthorizedUser' to obtain a new 'OAuthToken'. If the supplied
+-- 'RefreshToken' is 'Nothing', the original 'RefreshToken' from he user will
+-- be used.
+authorizedUserToken :: (MonadIO m, MonadCatch m)
+                    => AuthorizedUser
+                    -> Maybe RefreshToken
+                    -> Logger
+                    -> Manager
+                    -> m OAuthToken
+authorizedUserToken u r = refreshRequest $
+    accountsRequest
+        { Client.requestBody = textBody $
+               "grant_type=refresh_token"
+            <> "&client_id="     <> toText (_userId     u)
+            <> "&client_secret=" <> toText (_userSecret u)
+            <> "&refresh_token=" <> toText (fromMaybe (_userRefresh u) r)
+        }
 
-The private key is used to sign a JSON Web Token (JWT) of the
-grant_type @urn:ietf:params:oauth:grant-type:jwt-bearer@, which is sent to
-'accountsURL' to obtain a valid 'OAuthToken'. This process requires explicitly
-specifying which 'Scope's the resulting 'OAuthToken' is authorized to access.
--}
-data ServiceAccount = ServiceAccount
-    { _serviceId         :: !ClientId
-    , _serviceEmail      :: !Text
-    , _serviceKeyId      :: !Text
-    , _servicePrivateKey :: !PrivateKey
-    } deriving (Eq, Show)
 
-instance FromJSON ServiceAccount where
-    parseJSON = withObject "service_account" $ \o -> do
-        bs <- Text.encodeUtf8 <$> o .: "private_key"
-        k  <- case listToMaybe (readKeyFileFromMemory bs) of
-            Just (PrivKeyRSA k) -> pure k
-            _                   ->
-                fail "Unable to parse key contents from \"private_key\""
-        ServiceAccount
-            <$> o .: "client_id"
-            <*> o .: "client_email"
-            <*> o .: "private_key_id"
-            <*> pure k
-
+-- | Obtain an 'OAuthToken' from 'accountsURL' by signing and
+-- sending a JSON Web Token (JWT) using the supplied 'ServiceAccount'.
 serviceAccountToken :: (MonadIO m, MonadCatch m)
                     => ServiceAccount
                     -> [OAuthScope]
@@ -114,18 +114,8 @@ serviceAccountToken s ss l m = do
            }
     refreshRequest rq l m
 
-metadataToken :: (MonadIO m, MonadCatch m)
-              => ServiceId
-              -> Logger
-              -> Manager
-              -> m OAuthToken
-metadataToken s = refreshRequest $
-    metadataRequest
-        { Client.path = "instance/service-accounts/"
-            <> Text.encodeUtf8 (toText s)
-            <> "/token"
-        }
-
+-- | Encode the supplied 'ServiceAccount's key id, email, and scopes using the
+-- private key in the JSON Web Token (JWT) format.
 encodeBearerJWT :: (MonadIO m, MonadThrow m)
                 => ServiceAccount
                 -> [OAuthScope]
@@ -159,6 +149,6 @@ encodeBearerJWT s ss = liftIO $ do
             [ "aud"   .= accountsURL
             , "scope" .= concatScopes ss
             , "iat"   .= n
-            , "exp"   .= (n + maxTokenLifetimeSeconds)
+            , "exp"   .= (n + seconds maxTokenLifetime)
             , "iss"   .= _serviceEmail s
             ]

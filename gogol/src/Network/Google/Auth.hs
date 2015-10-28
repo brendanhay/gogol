@@ -22,22 +22,22 @@ module Network.Google.Auth
    -- * Credentials
      Credentials    (..)
 
-   -- ** Discovery
-   , discover
-   , fromFile
+   -- ** Application Default Credentials
+   , getApplicationDefault
+   , fromWellKnownPath
    , fromFilePath
-   , fromJSONCredentials
+
+   -- ** Installed Application Credentials
+   , formURL
 
    -- ** Authorizing Requests
    , authorize
 
-   -- ** Constructing Callback URLs
-   , formURL
-
    -- ** Thread-safe Storage
-   , Auth           (..)
    , Store
    , initStore
+
+   , Auth           (..)
    , exchange
    , refresh
 
@@ -113,114 +113,6 @@ import           System.Environment                                (lookupEnv)
 import           System.FilePath                                   ((</>))
 import           System.Info                                       (os)
 
--- | The supported credential mechanisms.
-data Credentials
-    = FromMetadata !ServiceId
-      -- ^ Obtain and refresh access tokens from the underlying GCE host metadata
-      -- at @http:\/\/169.254.169.254@.
-
-    | FromClient !OAuthClient !OAuthCode
-      -- ^ Obtain and refresh access tokens using the specified client secret
-      -- and authorization code obtained from.
-      --
-      -- See the <https://developers.google.com/accounts/docs/OAuth2InstalledApp OAuth2 Installed Application>
-      -- documentation for more information.
-
-    | FromAccount  !ServiceAccount ![OAuthScope]
-      -- ^ Use the specified @service_account@ and scopes to sign and request
-      -- an access token. The 'ServiceAccount' will also be used for subsequent
-      -- token refreshes.
-      --
-      -- A 'ServiceAccount' is typically generated through the
-      -- Google Developer Console.
-
-    | FromUser !AuthorizedUser
-      -- ^ Use the specified @authorized_user@ to obtain and refresh access tokens.
-      --
-      -- An 'AuthorizedUser' is typically created by the @gcloud init@ command
-      -- of the Google CloudSDK Tools.
-
--- | Attempt credentials discovery via the following steps:
---
--- * Read the default credentials from a file specified by
--- the environment variable @GOOGLE_APPLICATION_CREDENTIALS@ if it exists.
---
--- * Read the platform equivalent of @~\/.config\/gcloud\/application_default_credentials.json@ if it exists.
--- The @~/.config@ component of the path can be overriden by the environment
--- variable @CLOUDSDK_CONFIG@ if it exists.
---
--- * Retrieve the default service account application credentials if
--- running on GCE. The environment variable @NO_GCE_CHECK@ can be used to
--- skip this check if set to a truthy value such as @1@ or @true@.
---
--- The specified 'Scope's are used to authorize any @service_account@ that is
--- found with the appropriate scopes, otherwise they are not used. See the
--- top-level module of each individual @gogol-*@ library for a list of available
--- scopes, such as @Network.Google.Compute.computeScope@.
-discover :: (MonadIO m, MonadCatch m)
-         => [OAuthScope]
-         -> Manager
-         -> m Credentials
-discover ss m =
-    catching _MissingFileError (fromFile ss) $ \f -> do
-        p <- isGCE m
-        unless p $
-            throwingM _MissingFileError f
-        pure $! FromMetadata "default"
-
--- | Attempt to load either a @service_account@ or @authorized_user@ formatted
--- file to obtain the credentials neccessary to perform a token refresh.
---
--- The specified 'Scope's are used to authorize any @service_account@ that is
--- found with the appropriate scopes, otherwise they are not used. See the
--- top-level module of each individual @gogol-*@ library for a list of available
--- scopes, such as @Network.Google.Compute.computeScope@.
---
--- /See:/ 'cloudSDKConfigPath', 'defaultCredentialsPath'.
-fromFile :: (MonadIO m, MonadCatch m) => [OAuthScope] -> m Credentials
-fromFile ss = do
-    f <- defaultCredentialsPath
-    case f of
-        Just x  -> fromFilePath ss x
-        Nothing -> do
-            x <- cloudSDKConfigPath
-            fromFilePath ss x
-
--- | Attempt to load either a @service_account@ or @authorized_user@ formatted
--- file to obtain the credentials neccessary to perform a token refresh from
--- the specified file.
---
--- The specified 'Scope's are used to authorize any @service_account@ that is
--- found with the appropriate scopes, otherwise they are not used. See the
--- top-level module of each individual @gogol-*@ library for a list of available
--- scopes, such as @Network.Google.Compute.computeScope@.
-fromFilePath :: (MonadIO m, MonadCatch m)
-             => [OAuthScope]
-             -> FilePath
-             -> m Credentials
-fromFilePath ss f = do
-    p  <- liftIO (doesFileExist f)
-    unless p $
-        throwM (MissingFileError f)
-    bs <- liftIO (LBS.readFile f)
-    either (throwM . InvalidFileError f . Text.pack) pure
-           (fromJSONCredentials ss bs)
-
--- | Attempt to parse either a @service_account@ or @authorized_user@ formatted
--- JSON value to obtain credentials.
-fromJSONCredentials :: [OAuthScope]
-                    -> LBS.ByteString
-                    -> Either String Credentials
-fromJSONCredentials ss bs = do
-    v <- eitherDecode' bs
-    let x = (`FromAccount` ss) <$> parseEither parseJSON v
-        y = FromUser           <$> parseEither parseJSON v
-    case (x, y) of
-        (Left xe, Left ye) -> Left $
-              "Failed parsing service_account: " ++ xe ++
-            ", Failed parsing authorized_user: " ++ ye
-        _                  -> x <|> y
-
 -- | An 'OAuthToken' that can potentially be expired, with the original
 -- credentials that can be used to perform a refresh.
 data Auth = Auth
@@ -230,6 +122,11 @@ data Auth = Auth
 
 -- | Check if the given token is still valid, ie. younger than the projected
 -- expiry time.
+--
+-- This deliberately makes no external calls due to the absolute construction of
+-- the '_tokenExpiry' field, unlike the
+-- <https://developers.google.com/accounts/docs/OAuth2Login#validatingtoken documented>
+-- validation method.
 validate :: MonadIO m => Auth -> m Bool
 validate a = (< _tokenExpiry (_token a)) <$> liftIO getCurrentTime
 
