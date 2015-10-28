@@ -133,34 +133,10 @@ import           Network.HTTP.Conduit                              hiding
                                                                     (Request)
 import qualified Network.HTTP.Conduit                              as Client
 import           Network.HTTP.Types
-
--- | Attempt credentials discovery via the following steps:
---
--- * Read the default credentials from a file specified by
--- the environment variable @GOOGLE_APPLICATION_CREDENTIALS@ if it exists.
---
--- * Read the platform equivalent of @~\/.config\/gcloud\/application_default_credentials.json@ if it exists.
--- The @~/.config@ component of the path can be overriden by the environment
--- variable @CLOUDSDK_CONFIG@ if it exists.
---
--- * Retrieve the default service account application credentials if
--- running on GCE. The environment variable @NO_GCE_CHECK@ can be used to
--- skip this check if set to a truthy value such as @1@ or @true@.
---
--- The specified 'Scope's are used to authorize any @service_account@ that is
--- found with the appropriate scopes, otherwise they are not used. See the
--- top-level module of each individual @gogol-*@ library for a list of available
--- scopes, such as @Network.Google.Compute.computeScope@.
--- discover :: (MonadIO m, MonadCatch m)
---          => [OAuthScope]
---          -> Manager
---          -> m Credentials
--- discover ss m =
---     catching _MissingFileError (fromFile ss) $ \f -> do
---         p <- isGCE m
---         unless p $
---             throwingM _MissingFileError f
---         pure $! FromMetadata "default"
+import           System.Directory                                  (doesFileExist, getHomeDirectory)
+import           System.Environment                                (lookupEnv)
+import           System.FilePath                                   ((</>))
+import           System.Info                                       (os)
 
 -- | The supported credential mechanisms.
 data Credentials
@@ -188,6 +164,85 @@ data Credentials
       --
       -- An 'AuthorizedUser' is typically created by the @gcloud init@ command
       -- of the Google CloudSDK Tools.
+
+-- | Attempt credentials discovery via the following steps:
+--
+-- * Read the default credentials from a file specified by
+-- the environment variable @GOOGLE_APPLICATION_CREDENTIALS@ if it exists.
+--
+-- * Read the platform equivalent of @~\/.config\/gcloud\/application_default_credentials.json@ if it exists.
+-- The @~/.config@ component of the path can be overriden by the environment
+-- variable @CLOUDSDK_CONFIG@ if it exists.
+--
+-- * Retrieve the default service account application credentials if
+-- running on GCE. The environment variable @NO_GCE_CHECK@ can be used to
+-- skip this check if set to a truthy value such as @1@ or @true@.
+--
+-- The specified 'Scope's are used to authorize any @service_account@ that is
+-- found with the appropriate scopes, otherwise they are not used. See the
+-- top-level module of each individual @gogol-*@ library for a list of available
+-- scopes, such as @Network.Google.Compute.computeScope@.
+discover :: (MonadIO m, MonadCatch m)
+         => [OAuthScope]
+         -> Manager
+         -> m Credentials
+discover ss m =
+    catching _MissingFileError (fromFile ss) $ \f -> do
+        p <- isGCE m
+        unless p $
+            throwingM _MissingFileError f
+        pure $! FromMetadata "default"
+
+-- | Attempt to load either a @service_account@ or @authorized_user@ formatted
+-- file to obtain the credentials neccessary to perform a token refresh.
+--
+-- The specified 'Scope's are used to authorize any @service_account@ that is
+-- found with the appropriate scopes, otherwise they are not used. See the
+-- top-level module of each individual @gogol-*@ library for a list of available
+-- scopes, such as @Network.Google.Compute.computeScope@.
+--
+-- /See:/ 'cloudSDKConfigPath', 'defaultCredentialsPath'.
+fromFile :: (MonadIO m, MonadCatch m) => [OAuthScope] -> m Credentials
+fromFile ss = do
+    f <- defaultCredentialsPath
+    case f of
+        Just x  -> fromFilePath ss x
+        Nothing -> do
+            x <- cloudSDKConfigPath
+            fromFilePath ss x
+
+-- | Attempt to load either a @service_account@ or @authorized_user@ formatted
+-- file to obtain the credentials neccessary to perform a token refresh from
+-- the specified file.
+--
+-- The specified 'Scope's are used to authorize any @service_account@ that is
+-- found with the appropriate scopes, otherwise they are not used. See the
+-- top-level module of each individual @gogol-*@ library for a list of available
+-- scopes, such as @Network.Google.Compute.computeScope@.
+fromFilePath :: (MonadIO m, MonadCatch m)
+             => [OAuthScope]
+             -> FilePath
+             -> m Credentials
+fromFilePath ss f = do
+    p  <- liftIO (doesFileExist f)
+    unless p $
+        throwM (MissingFileError f)
+    bs <- liftIO (LBS.readFile f)
+    either (throwM . InvalidFileError f . Text.pack) pure
+           (fromJSONCredentials ss bs)
+
+fromJSONCredentials :: [OAuthScope]
+                    -> LBS.ByteString
+                    -> Either String Credentials
+fromJSONCredentials ss bs = do
+    v <- eitherDecode' bs
+    let x = (`FromAccount` ss) <$> parseEither parseJSON v
+        y = FromUser           <$> parseEither parseJSON v
+    case (x, y) of
+        (Left xe, Left ye) -> Left $
+              "Failed parsing service_account: " ++ xe ++
+            ", Failed parsing authorized_user: " ++ ye
+        _                  -> x <|> y
 
 exchange :: (MonadIO m, MonadCatch m)
          => Credentials

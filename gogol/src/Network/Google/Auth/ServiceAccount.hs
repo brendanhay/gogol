@@ -105,7 +105,7 @@ serviceAccountToken :: (MonadIO m, MonadCatch m)
                     -> Manager
                     -> m OAuthToken
 serviceAccountToken s ss l m = do
-    b <- encodeJWTBearer s ss
+    b <- encodeBearerJWT s ss
     let rq = accountsRequest
            { Client.requestBody = RequestBodyBS $
                   "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
@@ -126,11 +126,11 @@ metadataToken s = refreshRequest $
             <> "/token"
         }
 
-encodeJWTBearer :: (MonadIO m, MonadThrow m)
+encodeBearerJWT :: (MonadIO m, MonadThrow m)
                 => ServiceAccount
                 -> [OAuthScope]
                 -> m ByteString
-encodeJWTBearer s ss = liftIO $ do
+encodeBearerJWT s ss = liftIO $ do
     i <- input . truncate <$> getPOSIXTime
     r <- signSafer (Just SHA256) (_servicePrivateKey s) i
     either failure (pure . concat' i) r
