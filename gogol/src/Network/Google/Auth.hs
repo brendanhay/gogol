@@ -17,75 +17,52 @@
 --
 -- Explicitly specify your Google credentials, or retrieve them
 -- from the underlying OS.
-module Network.Google.Auth where
-   -- (
-   -- -- * Credentials
-   --   Credentials    (..)
+module Network.Google.Auth
+   (
+   -- * Credentials
+     Credentials    (..)
 
-   -- -- ** Discovery
-   -- , discover
-   -- , fromFile
-   -- , fromFilePath
-   -- , fromJSONCredentials
+   -- ** Discovery
+   , discover
+   , fromFile
+   , fromFilePath
+   , fromJSONCredentials
 
-   -- -- ** Thread-safe Storage
-   -- , Auth           (..)
-   -- , Store
-   -- , emptyStore
+   -- ** Authorizing Requests
+   , authorize
 
-   -- -- ** Authorizing Requests
-   -- , authorize
+   -- ** Constructing Callback URLs
+   , formURL
 
-   -- -- ** Constructing Callback URLs
-   -- , formURL
-   -- , redirectURI
-   -- , accountsURL
+   -- ** Thread-safe Storage
+   , Auth           (..)
+   , Store
+   , initStore
+   , exchange
+   , refresh
 
-   -- -- ** Default Constants
-   -- -- *** Google Compute Engine
-   -- , checkGCEVar
+   -- ** Default Constants
+   , checkGCEVar
+   , cloudSDKConfigDir
+   , defaultCredentialsFile
 
-   -- -- *** Cloud SDK
-   -- , cloudSDKConfigDir
-   -- , cloudSDKConfigPath
+   -- ** Handling Errors
+   , AsAuthError    (..)
+   , AuthError      (..)
 
-   -- -- *** Application Default Credentials
-   -- , defaultCredentialsFile
-   -- , defaultCredentialsPath
+   -- * OAuth Types
+   , OAuthClient    (..)
+   , OAuthToken     (..)
+   , OAuthCode      (..)
+   , OAuthScope     (..)
 
-   -- -- ** Handling Errors
-   -- , AsAuthError    (..)
-   -- , AuthError      (..)
-
-   -- -- * Credential Types
-   -- , ServiceAccount (..)
-   -- , AuthorizedUser (..)
-
-   -- -- * OAuth Types
-   -- , OAuthClient    (..)
-   -- , OAuthToken     (..)
-   -- , OAuthCode      (..)
-   -- , OAuthScope     (..)
-
-   -- -- * Re-exported Types
-   -- , AccessToken    (..)
-   -- , RefreshToken   (..)
-   -- , Secret         (..)
-   -- , ServiceId      (..)
-   -- , ClientId       (..)
-
-   -- -- * Exchange and Refresh Internals
-   -- , getToken
-   -- , validateToken
-
-   -- , exchange
-   -- , exchangeCode
-
-   -- , refresh
-   -- , refreshMetadata
-   -- , refreshToken
-   -- , refreshAssertion
-   -- ) where
+   -- * Re-exported Types
+   , AccessToken    (..)
+   , RefreshToken   (..)
+   , Secret         (..)
+   , ServiceId      (..)
+   , ClientId       (..)
+   ) where
 
 import           Control.Applicative
 import           Control.Concurrent

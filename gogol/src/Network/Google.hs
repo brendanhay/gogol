@@ -105,7 +105,6 @@ import qualified Control.Monad.Writer.Lazy      as LW
 import qualified Control.Monad.Writer.Strict    as W
 import           Network.Google.Auth
 import           Network.Google.Env
-import           Network.Google.Internal.Auth
 import           Network.Google.Internal.Body
 import           Network.Google.Internal.HTTP
 import           Network.Google.Internal.Logger
