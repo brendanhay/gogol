@@ -61,22 +61,22 @@ data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic, Typeable)
 instance ToText AltJSON  where toText = const "json"
 instance ToText AltMedia where toText = const "media"
 
-newtype OAuthScope = OAuthScope { scopeToText :: Text }
+newtype OAuthScope = OAuthScope Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
 
-newtype AccessToken = AccessToken { accessToText :: Text }
+newtype AccessToken = AccessToken Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
 
-newtype RefreshToken = RefreshToken { refreshToText :: Text }
+newtype RefreshToken = RefreshToken Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
 
-newtype ClientId = ClientId { clientIdToText :: Text }
+newtype ClientId = ClientId Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype Secret = Secret { secretToText :: Text }
+newtype Secret = Secret Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype ServiceId = ServiceId { serviceIdToText :: Text }
+newtype ServiceId = ServiceId Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype MediaDownload a = MediaDownload a
