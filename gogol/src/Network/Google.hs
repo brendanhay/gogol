@@ -26,7 +26,7 @@
 module Network.Google
     (
     -- * Running Google Actions
-      Google
+      Google      (..)
     , MonadGoogle (..)
     , runGoogle
     , runResourceT
@@ -72,7 +72,7 @@ module Network.Google
     -- $logging
 
     , Logger
-    , LogLevel     (..)
+    , LogLevel    (..)
 
     -- ** Constructing a Logger
     , newLogger
