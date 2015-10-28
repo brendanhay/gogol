@@ -22,8 +22,8 @@ import           Network.HTTP.Conduit
 
 -- | The environment containing the parameters required to make Google requests.
 data Env = Env
-    { _envLogger   :: !Logger
-    , _envOverride :: !(Dual (Endo Service))
+    { _envOverride :: !(Dual (Endo Service))
+    , _envLogger   :: !Logger
     , _envManager  :: !Manager
     , _envStore    :: !Store
     }
@@ -35,11 +35,11 @@ class HasEnv a where
     environment :: Lens' a Env
     {-# MINIMAL environment #-}
 
-    -- | The function used to output log messages.
-    envLogger   :: Lens' a Logger
-
     -- | The currently applied overrides to all 'Service' configuration.
     envOverride :: Lens' a (Dual (Endo Service))
+
+    -- | The function used to output log messages.
+    envLogger   :: Lens' a Logger
 
     -- | The 'Manager' used to create and manage open HTTP connections.
     envManager  :: Lens' a Manager
@@ -47,8 +47,8 @@ class HasEnv a where
     -- | The credential store used to sign requests for authentication with Google.
     envStore    :: Lens' a Store
 
-    envLogger   = environment . lens _envLogger   (\s a -> s { _envLogger   = a })
     envOverride = environment . lens _envOverride (\s a -> s { _envOverride = a })
+    envLogger   = environment . lens _envLogger   (\s a -> s { _envLogger   = a })
     envManager  = environment . lens _envManager  (\s a -> s { _envManager  = a })
     envStore    = environment . lens _envStore    (\s a -> s { _envStore    = a })
 
@@ -117,7 +117,7 @@ newEnv :: (MonadIO m, MonadCatch m) => [OAuthScope] -> m Env
 newEnv ss = do
     m <- liftIO (newManager tlsManagerSettings)
     c <- discover ss m
-    newEnvWith c m
+    newEnvWith c (\_ _ -> pure ()) m
 
 -- | Creates a new environment without logging, using the supplied 'Manager' and
 -- credentials. Use either the 'Credentials' constructor or
@@ -135,6 +135,7 @@ newEnv ss = do
 -- /See:/ 'newEnv'.
 newEnvWith :: (MonadIO m, MonadCatch m)
            => Credentials
+           -> Logger
            -> Manager
            -> m Env
-newEnvWith c m = Env (\_ _ -> pure ()) mempty m <$> emptyStore c
+newEnvWith c l m = Env mempty l m <$> initStore c l m

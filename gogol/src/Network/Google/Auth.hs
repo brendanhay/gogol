@@ -1,9 +1,7 @@
-{-# LANGUAGE BangPatterns               #-}
 {-# LANGUAGE DeriveDataTypeable         #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE GADTs                      #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
@@ -231,6 +229,8 @@ fromFilePath ss f = do
     either (throwM . InvalidFileError f . Text.pack) pure
            (fromJSONCredentials ss bs)
 
+-- | Attempt to parse either a @service_account@ or @authorized_user@ formatted
+-- JSON value to obtain credentials.
 fromJSONCredentials :: [OAuthScope]
                     -> LBS.ByteString
                     -> Either String Credentials
@@ -244,57 +244,80 @@ fromJSONCredentials ss bs = do
             ", Failed parsing authorized_user: " ++ ye
         _                  -> x <|> y
 
-exchange :: (MonadIO m, MonadCatch m)
-         => Credentials
-         -> Logger
-         -> Manager
-         -> m OAuthToken
-exchange c l m =
-    case c of
-        FromMetadata s     -> metadataToken       s         l m
-        FromAccount  a  ss -> serviceAccountToken a ss      l m
-        FromClient   c' n  -> exchangeCode        c' n      l m
-        FromUser     u     -> authorizedUserToken u Nothing l m
+-- | An 'OAuthToken' that can potentially be expired, with the original
+-- credentials that can be used to perform a refresh.
+data Auth = Auth
+    { _credentials :: !Credentials
+    , _token       :: !OAuthToken
+    }
 
-refresh :: (MonadIO m, MonadCatch m)
-        => Credentials
-        -> OAuthToken
-        -> Logger
-        -> Manager
-        -> m OAuthToken
-refresh c t l m =
-    case c of
-        FromMetadata s    -> metadataToken       s                   l m
-        FromAccount  a ss -> serviceAccountToken a ss                l m
-        FromClient   c _  -> refreshToken        c t                 l m
-        FromUser     u    -> authorizedUserToken u (_tokenRefresh t) l m
-
--- | A credentials value in one of two possible states, pre-exchange and
--- containing a valid, but possibly expired access token.
-data Auth
-    = Exchange !Credentials
-      -- ^ Signifies that the initial token refresh has not occured, and the
-      -- 'Credentials' need to be signed and exchanged for a valid 'OAuthToken'.
-
-    | Refresh  !Credentials !OAuthToken
-      -- ^ An 'OAuthToken' that can potentially be expired, with the original
-      -- credentials that can be used to perform a refresh.
-
-validateToken :: MonadIO m => Auth -> m (Maybe OAuthToken)
-validateToken Exchange {}   = pure Nothing
-validateToken (Refresh _ t) = do
-    ts <- liftIO getCurrentTime
-    if ts < _tokenExpiry t
-        then pure (Just t)
-        else pure Nothing
+-- | Check if the given token is still valid, ie. younger than the projected
+-- expiry time.
+validate :: MonadIO m => Auth -> m Bool
+validate a = (< _tokenExpiry (_token a)) <$> liftIO getCurrentTime
 
 type Store = MVar Auth
 
 -- | Construct storage containing the credentials which have not yet been
 -- exchanged or refreshed.
-emptyStore :: MonadIO m => Credentials -> m Store
-emptyStore !c = liftIO . newMVar $ Exchange c
+initStore :: (MonadIO m, MonadCatch m)
+          => Credentials
+          -> Logger
+          -> Manager
+          -> m Store
+initStore c l m = exchange c l m >>= liftIO . newMVar
 
+-- | Concurrently read the current token, and if expired, then
+-- safely perform a single serial refresh.
+getToken :: (MonadIO m, MonadCatch m)
+         => Store
+         -> Logger
+         -> Manager
+         -> m OAuthToken
+getToken s l m = do
+    x  <- liftIO (readMVar s)
+    mx <- validate x
+    if mx
+        then pure (_token x)
+        else liftIO . modifyMVar s $ \y -> do
+            my <- validate y
+            if my
+                then pure (y, _token y)
+                else do
+                    z <- refresh y l m
+                    pure (z, _token z)
+
+-- | Perform the initial credentials exchange to obtain a valid 'OAuthToken'
+-- suitable for authorizing requests.
+exchange :: (MonadIO m, MonadCatch m)
+         => Credentials
+         -> Logger
+         -> Manager
+         -> m Auth
+exchange c l = fmap (Auth c) . action l
+  where
+    action = case c of
+        FromMetadata s    -> metadataToken       s
+        FromAccount  a ss -> serviceAccountToken a ss
+        FromClient   c n  -> exchangeCode        c n
+        FromUser     u    -> authorizedUserToken u Nothing
+
+-- | Refresh an existing 'OAuthToken' using
+refresh :: (MonadIO m, MonadCatch m)
+        => Auth
+        -> Logger
+        -> Manager
+        -> m Auth
+refresh (Auth c t) l = fmap (Auth c) . action l
+  where
+    action = case c of
+        FromMetadata s    -> metadataToken       s
+        FromAccount  a ss -> serviceAccountToken a ss
+        FromClient   x _  -> refreshToken        x t
+        FromUser     u    -> authorizedUserToken u (_tokenRefresh t)
+
+-- | Apply the (by way of possible token refresh) a bearer token to the
+-- authentication header of a request.
 authorize :: (MonadIO m, MonadCatch m)
           => Client.Request
           -> Store
@@ -309,26 +332,3 @@ authorize rq s l m = bearer <$> getToken s l m
             , "Bearer " <> Text.encodeUtf8 (toText (_tokenAccess t))
             ) : Client.requestHeaders rq
         }
-
-getToken :: (MonadIO m, MonadCatch m)
-         => Store
-         -> Logger
-         -> Manager
-         -> m OAuthToken
-getToken s l m = do
-    x  <- liftIO (readMVar s)
-    mx <- validateToken x
-    case mx of
-        Just t  -> pure t
-        Nothing -> liftIO . modifyMVar s $ \y -> do
-            my <- validateToken y
-            case my of
-                Just t  -> pure (y, t)
-                Nothing ->
-                    case y of
-                        Exchange c -> do
-                            t <- exchange c   l m
-                            pure (Refresh c t, t)
-                        Refresh c t -> do
-                            t' <- refresh c t l m
-                            pure (Refresh c t', t')
