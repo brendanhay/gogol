@@ -1,8 +1,10 @@
 {-# LANGUAGE BangPatterns               #-}
+{-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
 
@@ -49,6 +51,7 @@ import           Data.Time.Clock.POSIX
 import           Data.Typeable
 import           Data.X509
 import           Data.X509.Memory
+import           GHC.TypeLits
 import           Network.Google.Compute.Metadata
 import           Network.Google.Internal.Logger
 import           Network.Google.Prelude          hiding (buildText)
@@ -62,7 +65,7 @@ import           System.FilePath                 ((</>))
 import           System.Info                     (os)
 
 -- | The supported credential mechanisms.
-data Credentials
+data Credentials (s :: [*])
     = FromMetadata !ServiceId
       -- ^ Obtain and refresh access tokens from the underlying GCE host metadata
       -- at @http:\/\/169.254.169.254@.
@@ -74,7 +77,7 @@ data Credentials
       -- See the <https://developers.google.com/accounts/docs/OAuth2InstalledApp OAuth2 Installed Application>
       -- documentation for more information.
 
-    | FromAccount !ServiceAccount ![OAuthScope]
+    | FromAccount !ServiceAccount
       -- ^ Use the specified @service_account@ and scopes to sign and request
       -- an access token. The 'ServiceAccount' will also be used for subsequent
       -- token refreshes.
@@ -188,6 +191,16 @@ instance FromJSON (UTCTime -> OAuthToken) where
         r <- o .:? "refresh_token"
         e <- o .:  "expires_in" <&> fromInteger
         pure (OAuthToken t r . addUTCTime e)
+
+-- | Check if the given token is still valid, ie. younger than the projected
+-- expiry time.
+--
+-- This deliberately makes no external calls due to the absolute construction of
+-- the '_tokenExpiry' field, unlike the
+-- <https://developers.google.com/accounts/docs/OAuth2Login#validatingtoken documented>
+-- validation method.
+validate :: MonadIO m => OAuthToken -> m Bool
+validate t = (< _tokenExpiry t) <$> liftIO getCurrentTime
 
 newtype OAuthCode = OAuthCode Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)

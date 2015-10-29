@@ -9,7 +9,7 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 
-module Network.Google.Auth.ApplicationDefaultCredentials where
+module Network.Google.Auth.ApplicationDefault where
 
 import           Control.Applicative
 import           Control.Concurrent
@@ -102,11 +102,10 @@ defaultCredentialsPath = liftIO (lookupEnv defaultCredentialsFile)
 -- top-level module of each individual @gogol-*@ library for a list of available
 -- scopes, such as @Network.Google.Compute.computeScope@.
 getApplicationDefault :: (MonadIO m, MonadCatch m)
-                      => [OAuthScope]
-                      -> Manager
-                      -> m Credentials
-getApplicationDefault ss m =
-    catching _MissingFileError (fromWellKnownPath ss) $ \f -> do
+                      => Manager
+                      -> m (Credentials s)
+getApplicationDefault m =
+    catching _MissingFileError fromWellKnownPath $ \f -> do
         p <- isGCE m
         unless p $
             throwingM _MissingFileError f
@@ -121,14 +120,14 @@ getApplicationDefault ss m =
 -- scopes, such as @Network.Google.Compute.computeScope@.
 --
 -- /See:/ 'cloudSDKConfigPath', 'defaultCredentialsPath'.
-fromWellKnownPath :: (MonadIO m, MonadCatch m) => [OAuthScope] -> m Credentials
-fromWellKnownPath ss = do
+fromWellKnownPath :: (MonadIO m, MonadCatch m) => m (Credentials s)
+fromWellKnownPath = do
     f <- defaultCredentialsPath
     case f of
-        Just x  -> fromFilePath ss x
+        Just x  -> fromFilePath x
         Nothing -> do
             x <- cloudSDKConfigPath
-            fromFilePath ss x
+            fromFilePath x
 
 -- | Attempt to load either a @service_account@ or @authorized_user@ formatted
 -- file to obtain the credentials neccessary to perform a token refresh from
@@ -138,27 +137,22 @@ fromWellKnownPath ss = do
 -- found with the appropriate scopes, otherwise they are not used. See the
 -- top-level module of each individual @gogol-*@ library for a list of available
 -- scopes, such as @Network.Google.Compute.computeScope@.
-fromFilePath :: (MonadIO m, MonadCatch m)
-             => [OAuthScope]
-             -> FilePath
-             -> m Credentials
-fromFilePath ss f = do
+fromFilePath :: (MonadIO m, MonadCatch m) => FilePath -> m (Credentials s)
+fromFilePath f = do
     p  <- liftIO (doesFileExist f)
     unless p $
         throwM (MissingFileError f)
     bs <- liftIO (LBS.readFile f)
     either (throwM . InvalidFileError f . Text.pack) pure
-           (fromJSONCredentials ss bs)
+           (fromJSONCredentials bs)
 
 -- | Attempt to parse either a @service_account@ or @authorized_user@ formatted
 -- JSON value to obtain credentials.
-fromJSONCredentials :: [OAuthScope]
-                    -> LBS.ByteString
-                    -> Either String Credentials
-fromJSONCredentials ss bs = do
+fromJSONCredentials :: LBS.ByteString -> Either String (Credentials s)
+fromJSONCredentials bs = do
     v <- eitherDecode' bs
-    let x = (`FromAccount` ss) <$> parseEither parseJSON v
-        y = FromUser           <$> parseEither parseJSON v
+    let x = FromAccount <$> parseEither parseJSON v
+        y = FromUser    <$> parseEither parseJSON v
     case (x, y) of
         (Left xe, Left ye) -> Left $
               "Failed parsing service_account: " ++ xe ++
