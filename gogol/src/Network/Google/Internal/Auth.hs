@@ -7,6 +7,11 @@
 {-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE PolyKinds                  #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
+{-# LANGUAGE TypeFamilies               #-}
+{-# LANGUAGE TypeOperators              #-}
+{-# LANGUAGE UndecidableInstances       #-}
 
 -- |
 -- Module      : Network.Google.Internal.Auth
@@ -40,7 +45,9 @@ import qualified Data.ByteString.Lazy            as LBS
 import           Data.Coerce
 import           Data.Default.Class              (def)
 import           Data.List                       (intersperse)
+import           Data.Monoid
 import           Data.String
+import           Data.Text                       (Text)
 import qualified Data.Text                       as Text
 import qualified Data.Text.Encoding              as Text
 import qualified Data.Text.Lazy                  as LText
@@ -48,24 +55,22 @@ import qualified Data.Text.Lazy.Builder          as TBuild
 import qualified Data.Text.Lazy.Encoding         as LText
 import           Data.Time
 import           Data.Time.Clock.POSIX
+import           Data.Type.Bool
+import           Data.Type.Equality
 import           Data.Typeable
 import           Data.X509
 import           Data.X509.Memory
+import           GHC.Exts                        (Constraint)
 import           GHC.TypeLits
 import           Network.Google.Compute.Metadata
 import           Network.Google.Internal.Logger
-import           Network.Google.Prelude          hiding (buildText)
-import           Network.HTTP.Conduit            hiding (Request)
+import           Network.Google.Prelude
+import           Network.HTTP.Conduit            hiding (Proxy, Request)
 import qualified Network.HTTP.Conduit            as Client
 import           Network.HTTP.Types
-import           System.Directory                (doesFileExist,
-                                                  getHomeDirectory)
-import           System.Environment              (lookupEnv)
-import           System.FilePath                 ((</>))
-import           System.Info                     (os)
 
 -- | The supported credential mechanisms.
-data Credentials (s :: [*])
+data Credentials (s :: [Symbol])
     = FromMetadata !ServiceId
       -- ^ Obtain and refresh access tokens from the underlying GCE host metadata
       -- at @http:\/\/169.254.169.254@.
@@ -191,16 +196,6 @@ instance FromJSON (UTCTime -> OAuthToken) where
         r <- o .:? "refresh_token"
         e <- o .:  "expires_in" <&> fromInteger
         pure (OAuthToken t r . addUTCTime e)
-
--- | Check if the given token is still valid, ie. younger than the projected
--- expiry time.
---
--- This deliberately makes no external calls due to the absolute construction of
--- the '_tokenExpiry' field, unlike the
--- <https://developers.google.com/accounts/docs/OAuth2Login#validatingtoken documented>
--- validation method.
-validate :: MonadIO m => OAuthToken -> m Bool
-validate t = (< _tokenExpiry t) <$> liftIO getCurrentTime
 
 newtype OAuthCode = OAuthCode Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)

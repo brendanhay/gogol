@@ -3,6 +3,7 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE KindSignatures         #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
+
 -- |
 -- Module      : Network.Google.Env
 -- Copyright   : (c) 2015-2016 Brendan Hay
@@ -29,7 +30,7 @@ import           Network.Google.Types
 import           Network.HTTP.Conduit
 
 -- | The environment containing the parameters required to make Google requests.
-data Env (s :: [*]) = Env
+data Env (s :: [Symbol]) = Env
     { _envOverride :: !(Dual (Endo Service))
     , _envLogger   :: !Logger
     , _envManager  :: !Manager
@@ -63,85 +64,73 @@ class HasEnv s a | a -> s where
 instance HasEnv s (Env s) where
     environment = id
 
--- -- | Provide a function which will be added to the existing stack
--- -- of overrides applied to all service configuration.
--- --
--- -- To override a specific service, it's suggested you use
--- -- either 'configure' or 'reconfigure' with a modified version of the default
--- -- service, such as @Network.Google.Gmail.gmailService@.
--- override :: HasEnv a => (Service -> Service) -> a -> a
--- override f = envOverride <>~ Dual (Endo f)
+-- | Provide a function which will be added to the existing stack
+-- of overrides applied to all service configuration.
+--
+-- To override a specific service, it's suggested you use
+-- either 'configure' or 'reconfigure' with a modified version of the default
+-- service, such as @Network.Google.Gmail.gmailService@.
+override :: HasEnv s a => (Service -> Service) -> a -> a
+override f = envOverride <>~ Dual (Endo f)
 
--- -- | Configure a specific service. All requests belonging to the
--- -- supplied service will use this configuration instead of the default.
--- --
--- -- It's suggested you use a modified version of the default service, such
--- -- as @Network.Google.Gmail.gmailService@.
--- --
--- -- /See:/ 'reconfigure'.
--- configure :: HasEnv a => Service -> a -> a
--- configure s = override f
---   where
---     f x | on (==) _svcId s x = s
---         | otherwise          = x
+-- | Configure a specific service. All requests belonging to the
+-- supplied service will use this configuration instead of the default.
+--
+-- It's suggested you use a modified version of the default service, such
+-- as @Network.Google.Gmail.gmailService@.
+--
+-- /See:/ 'reconfigure'.
+configure :: HasEnv s a => Service -> a -> a
+configure s = override f
+  where
+    f x | on (==) _svcId s x = s
+        | otherwise          = x
 
--- -- | Scope an action such that all requests belonging to the supplied service
--- -- will use this configuration instead of the default.
--- --
--- -- It's suggested you use a modified version of the default service, such
--- -- as @Network.Google.Gmail.gmailService@.
--- --
--- -- /See:/ 'configure'.
--- reconfigure :: (MonadReader r m, HasEnv r) => Service -> m a -> m a
--- reconfigure = local . configure
+-- | Scope an action such that all requests belonging to the supplied service
+-- will use this configuration instead of the default.
+--
+-- It's suggested you use a modified version of the default service, such
+-- as @Network.Google.Gmail.gmailService@.
+--
+-- /See:/ 'configure'.
+reconfigure :: (MonadReader r m, HasEnv s r) => Service -> m a -> m a
+reconfigure = local . configure
 
--- -- | Scope an action such that any HTTP response will use this timeout value.
--- --
--- -- Default timeouts are chosen by considering:
--- --
--- -- * This 'timeout', if set.
--- --
--- -- * The related 'Service' timeout for the sent request if set. (Usually 70s)
--- --
--- -- * The 'envManager' timeout if set.
--- --
--- -- * The default 'ClientRequest' timeout. (Approximately 30s)
--- timeout :: (MonadReader r m, HasEnv r) => Seconds -> m a -> m a
--- timeout s = local (override (serviceTimeout ?~ s))
+-- | Scope an action such that any HTTP response will use this timeout value.
+--
+-- Default timeouts are chosen by considering:
+--
+-- * This 'timeout', if set.
+--
+-- * The related 'Service' timeout for the sent request if set. (Usually 70s)
+--
+-- * The 'envManager' timeout if set.
+--
+-- * The default 'ClientRequest' timeout. (Approximately 30s)
+timeout :: (MonadReader r m, HasEnv s r) => Seconds -> m a -> m a
+timeout s = local (override (serviceTimeout ?~ s))
 
 -- | Creates a new environment with a new 'Manager', without logging.
--- Credentials are determined by calling 'discover'. Use 'newEnvWith' to supply
--- custom credentials such as an 'OAuthClient' and 'OAuthCode'.
+-- Credentials are determined by calling 'getApplicationDefault'.
+-- Use 'newEnvWith' to supply custom credentials such as an 'OAuthClient'
+-- and 'OAuthCode'.
 --
--- The specified 'Scope's are used to authorize any @service_account@ that is
--- found with the appropriate scopes, otherwise they are not used. See the
--- top-level module of each individual @gogol-*@ library for a list of available
--- scopes, such as @Network.Google.Compute.computeScope@.
+-- The 'Allow'ed 'OAuthScope's are used to authorize any @service_account@ that is
+-- found with the appropriate scopes. See the top-level module of each individual
+-- @gogol-*@ library for a list of available scopes, such as
+-- @Network.Google.Compute.computeScope@.
 --
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
 -- /See:/ 'newEnvWith', 'getApplicationDefault'.
-newEnv :: (MonadIO m, MonadCatch m) => m (Env s)
+newEnv :: (MonadIO m, MonadCatch m, Allow s) => m (Env s)
 newEnv = do
     m <- liftIO (newManager tlsManagerSettings)
     c <- getApplicationDefault m
     newEnvWith c (\_ _ -> pure ()) m
 
--- | Creates a new environment without logging, using the supplied 'Manager' and
--- credentials. Use either the 'Credentials' constructor or
--- see one of following functions from "Network.Google.Auth" for how to instantiate
--- a 'Credentials' value:
---
--- * 'discover' - Attempt to discover credentials from the underlying host.
---
--- * 'fromFile' - Attempt to load credentials from the well known file locations.
---
--- * 'fromFilePath' - Supply a file path to load credentials from.
---
--- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
---
 -- /See:/ 'newEnv'.
-newEnvWith :: (MonadIO m, MonadCatch m)
+newEnvWith :: (MonadIO m, MonadCatch m, Allow s)
            => Credentials s
            -> Logger
            -> Manager

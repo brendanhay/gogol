@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -24,6 +25,7 @@ import qualified Data.Text.Encoding                as Text
 import qualified Data.Text.Lazy                    as LText
 import qualified Data.Text.Lazy.Builder            as Build
 import           GHC.Exts                          (toList)
+import           GHC.TypeLits
 import           Network.Google.Auth
 import           Network.Google.Env                (Env (..))
 import           Network.Google.Internal.Logger
@@ -42,8 +44,8 @@ import           Network.HTTP.Types
 --
 -- "resumable" or "multipart" needs to go into the "uploadType" param
 
-perform :: (MonadCatch m, MonadResource m, GoogleRequest a)
-        => Env
+perform :: (MonadCatch m, MonadResource m, Allow s, GoogleRequest a)
+        => Env s
         -> a
         -> m (Either Error (Rs a))
 perform Env{..} x = catches go handlers

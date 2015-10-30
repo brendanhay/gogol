@@ -1,8 +1,10 @@
 {-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE FunctionalDependencies     #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
+{-# LANGUAGE PolyKinds                  #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE UndecidableInstances       #-}
@@ -24,71 +26,75 @@
 -- A 'MonadGoogle' typeclass is used as a function constraint to provide automatic
 -- lifting of functions when embedding 'Google' as a layer inside your own
 -- application stack.
-module Network.Google where
-    -- (
-    -- -- * Running Google Actions
-    --   Google      (..)
-    -- , MonadGoogle (..)
-    -- , runGoogle
-    -- , runResourceT
+module Network.Google
+    (
+    -- * Running Google Actions
+      Google      (..)
+    , MonadGoogle (..)
+    , runGoogle
+    , runResourceT
 
-    -- -- * Authentication and Environment
-    -- , newEnv
-    -- , Env
-    -- , HasEnv      (..)
+    -- * Authentication and Environment
+    , Env
+    , HasEnv      (..)
+    , newEnv
 
-    -- -- * Sending Requests
-    -- , send
+    -- ** Customized Environment
+    , newEnvWith
+    , getApplicationDefault
 
-    -- -- ** Media Downloads
-    -- , download
+    -- * Sending Requests
+    , send
 
-    -- -- ** Media Uploads
-    -- , upload
+    -- ** Media Downloads
+    , download
 
-    -- , ToBody      (..)
-    -- , RequestBody
-    -- , sourceBody
+    -- ** Media Uploads
+    , upload
 
-    -- -- ** Service Configuration
-    -- -- ** Overriding Defaults
-    -- , configure
-    -- , override
+    , ToBody      (..)
+    , RequestBody
+    , sourceBody
 
-    -- -- *** Scoped Actions
-    -- , reconfigure
-    -- , timeout
+    -- ** Service Configuration
+    -- ** Overriding Defaults
+    , configure
+    , override
 
-    -- -- * Running Asynchronous Actions
-    -- -- $async
+    -- *** Scoped Actions
+    , reconfigure
+    , timeout
 
-    -- -- * Handling Errors
-    -- , AsError     (..)
-    -- , AsAuthError (..)
+    -- * Running Asynchronous Actions
+    -- $async
 
-    -- , trying
-    -- , catching
+    -- * Handling Errors
+    , AsError     (..)
+    , AsAuthError (..)
 
-    -- -- * Logging
-    -- -- $logging
+    , trying
+    , catching
 
-    -- , Logger
-    -- , LogLevel    (..)
+    -- * Logging
+    -- $logging
 
-    -- -- ** Constructing a Logger
-    -- , newLogger
+    , Logger
+    , LogLevel    (..)
 
-    -- -- * Constructing a HTTP Manager
-    -- , newManager
-    -- , tlsManagerSettings
+    -- ** Constructing a Logger
+    , newLogger
 
-    -- -- * Re-exported Types
-    -- , Proxy       (..)
-    -- , OctetStream
-    -- , PlainText
-    -- , JSON
-    -- , module Network.Google.Types
-    -- ) where
+    -- * Constructing a HTTP Manager
+    , newManager
+    , tlsManagerSettings
+
+    -- * Re-exported Types
+    , Proxy       (..)
+    , OctetStream
+    , PlainText
+    , JSON
+    , module Network.Google.Types
+    ) where
 
 import           Control.Applicative
 import           Control.Exception.Lens
@@ -129,131 +135,120 @@ newtype Google s a = Google { unGoogle :: ReaderT (Env s) (ResourceT IO) a }
         , MonadCatch
         , MonadMask
         , MonadBase IO
---        , MonadReader (Env s)
+        , MonadReader (Env s)
         , MonadResource
         )
 
--- | Run a 'Google' aciton using the specified environment.
--- runGoogle :: (MonadResource m, HasEnv s r) => r -> Google s a -> m a
--- runGoogle e m = liftResourceT $ runReaderT (unGoogle m) (e ^. environment)
+-- | Run a 'Google' aciton using the specified environment containing
+-- credentials with sufficient authorization scopes.
+runGoogle :: (MonadResource m, HasEnv s r) => r -> Google s a -> m a
+runGoogle e m = liftResourceT $ runReaderT (unGoogle m) (e ^. environment)
 
-runGoogle :: MonadResource m => Env s -> Google s a -> m a
-runGoogle e m = liftResourceT $ runReaderT (unGoogle m) e
+-- | Monads in which 'Google' actions may be embedded.
+class ( Allow       s
+      , Functor     m
+      , Applicative m
+      , Monad       m
+      , MonadIO     m
+      , MonadCatch  m
+      ) => MonadGoogle s m | m -> s where
+    -- | Lift a computation to the 'Google' monad.
+    liftGoogle :: Google s a -> m a
 
-test :: IO ()
-test = runResourceT $ do
-    e <- newEnv
-    runGoogle e $ do
-        Bar <- send Foo
-        pure ()
+instance Allow s => MonadGoogle s (Google s) where
+    liftGoogle = id
 
-send :: (GoogleRequest a, IsSubList s (Ss a)) => a -> Google s (Rs a)
-send = undefined
+instance MonadBaseControl IO (Google s) where
+    type StM (Google s) a = StM (ReaderT (Env s) (ResourceT IO)) a
 
--- do
-    -- e <- ask
-    -- r <- perform e x
-    -- hoistError r
+    liftBaseWith f = Google . liftBaseWith $ \g -> f (g . unGoogle)
+    restoreM       = Google . restoreM
 
-data Foo = Foo
-data Bar = Bar
+instance MonadGoogle s m => MonadGoogle s (IdentityT m) where
+    liftGoogle = lift . liftGoogle
 
-instance GoogleRequest Foo where
-    type Rs Foo = Bar
-    type Ss Foo = '[Foo]
+instance MonadGoogle s m => MonadGoogle s (ListT m) where
+    liftGoogle = lift . liftGoogle
 
-    requestClient = undefined
+instance MonadGoogle s m => MonadGoogle s (MaybeT m) where
+    liftGoogle = lift . liftGoogle
 
+instance MonadGoogle s m => MonadGoogle s (ExceptT e m) where
+    liftGoogle = lift . liftGoogle
 
--- instance MonadBaseControl IO Google where
---     type StM Google a = StM (ReaderT Env (ResourceT IO)) a
+instance MonadGoogle s m => MonadGoogle s (ReaderT r m) where
+    liftGoogle = lift . liftGoogle
 
---     liftBaseWith f = Google . liftBaseWith $ \g -> f (g . unGoogle)
---     restoreM       = Google . restoreM
+instance MonadGoogle s m => MonadGoogle s (S.StateT s' m) where
+    liftGoogle = lift . liftGoogle
 
--- -- | Monads in which 'Google' actions may be embedded.
--- class ( Functor     m
---       , Applicative m
---       , Monad       m
---       , MonadIO     m
---       , MonadCatch  m
---       ) => MonadGoogle m where
---     -- | Lift a computation to the 'Google' monad.
---     liftGoogle :: Google a -> m a
+instance MonadGoogle s m => MonadGoogle s (LS.StateT s' m) where
+    liftGoogle = lift . liftGoogle
 
--- instance MonadGoogle Google where
---     liftGoogle = id
+instance (Monoid w, MonadGoogle s m) => MonadGoogle s (W.WriterT w m) where
+    liftGoogle = lift . liftGoogle
 
--- instance MonadGoogle m => MonadGoogle (IdentityT   m) where liftGoogle = lift . liftGoogle
--- instance MonadGoogle m => MonadGoogle (ListT       m) where liftGoogle = lift . liftGoogle
--- instance MonadGoogle m => MonadGoogle (MaybeT      m) where liftGoogle = lift . liftGoogle
--- instance MonadGoogle m => MonadGoogle (ExceptT   e m) where liftGoogle = lift . liftGoogle
--- instance MonadGoogle m => MonadGoogle (ReaderT   r m) where liftGoogle = lift . liftGoogle
--- instance MonadGoogle m => MonadGoogle (S.StateT  s m) where liftGoogle = lift . liftGoogle
--- instance MonadGoogle m => MonadGoogle (LS.StateT s m) where liftGoogle = lift . liftGoogle
+instance (Monoid w, MonadGoogle s m) => MonadGoogle s (LW.WriterT w m) where
+    liftGoogle = lift . liftGoogle
 
--- instance (Monoid w, MonadGoogle m) => MonadGoogle (W.WriterT w m) where
---     liftGoogle = lift . liftGoogle
+instance (Monoid w, MonadGoogle s m) => MonadGoogle s (RW.RWST r w s' m) where
+    liftGoogle = lift . liftGoogle
 
--- instance (Monoid w, MonadGoogle m) => MonadGoogle (LW.WriterT w m) where
---     liftGoogle = lift . liftGoogle
+instance (Monoid w, MonadGoogle s m) => MonadGoogle s (LRW.RWST r w s' m) where
+    liftGoogle = lift . liftGoogle
 
--- instance (Monoid w, MonadGoogle m) => MonadGoogle (RW.RWST r w s m) where
---     liftGoogle = lift . liftGoogle
+-- | Send a request, returning the associated response if successful.
+--
+-- Throws 'Error'.
+send :: (MonadGoogle s m, Authorize s a, GoogleRequest a) => a -> m (Rs a)
+send x = liftGoogle $ do
+    e <- ask
+    r <- perform e x
+    hoistError r
 
--- instance (Monoid w, MonadGoogle m) => MonadGoogle (LRW.RWST r w s m) where
---     liftGoogle = lift . liftGoogle
+-- | Send a request returning the associated streaming media response if successful.
+--
+-- Some request data types have two possible responses, the JSON metadata and
+-- a streaming media response. Use 'send' to retrieve the metadata and 'download'
+-- to retrieve the streaming media.
+--
+-- Throws 'Error'.
+download :: ( MonadGoogle s m
+            , Authorize   s (MediaDownload a)
+            , GoogleRequest (MediaDownload a)
+            )
+         => a
+         -> m (Rs (MediaDownload a))
+download = send . MediaDownload
 
--- -- | Run a 'Google' aciton using the specified environment.
--- runGoogle :: (MonadResource m, HasEnv r) => r -> Google a -> m a
--- runGoogle e m = liftResourceT $ runReaderT (unGoogle m) (e ^. environment)
+-- | Send a request with an attached multipart/related media upload.
+--
+-- Throws 'Error'.
+upload :: ( MonadGoogle s m
+          , Authorize   s (MediaUpload a)
+          , GoogleRequest (MediaUpload a)
+          )
+       => a
+       -> RequestBody
+       -> m (Rs (MediaUpload a))
+upload x = send . MediaUpload x
 
--- -- | Send a request, returning the associated response if successful.
--- --
--- -- Throws 'Error'.
--- send :: (MonadGoogle m, GoogleRequest a) => a -> m (Rs a)
--- send x = liftGoogle $ do
---     e <- ask
---     r <- perform e x
---     hoistError r
+hoistError :: MonadThrow m => Either Error a -> m a
+hoistError = either (throwingM _Error) return
 
--- -- | Send a request returning the associated streaming media response if successful.
--- --
--- -- Some request data types have two possible responses, the JSON metadata and
--- -- a streaming media response. Use 'send' to retrieve the metadata and 'download'
--- -- to retrieve the streaming media.
--- --
--- -- Throws 'Error'.
--- download :: (MonadGoogle m, GoogleRequest (MediaDownload a))
---          => a
---          -> m (Rs (MediaDownload a))
--- download = send . MediaDownload
+{- $async
+Requests can be sent asynchronously, but due to guarantees about resource closure
+require the use of <http://hackage.haskell.org/package/lifted-async lifted-async>.
+-}
 
--- -- | Send a request with an attached multipart/related media upload.
--- --
--- -- Throws 'Error'.
--- upload :: (MonadGoogle m, GoogleRequest (MediaUpload a))
---        => a
---        -> RequestBody
---        -> m (Rs (MediaUpload a))
--- upload x = send . MediaUpload x
+{- $logging
+The exposed logging interface is a primitive 'Logger' function which gets
+threaded through service calls and serialisation routines. This allows the
+library to output useful information and diagnostics.
 
--- hoistError :: MonadThrow m => Either Error a -> m a
--- hoistError = either (throwingM _Error) return
-
--- {- $async
--- Requests can be sent asynchronously, but due to guarantees about resource closure
--- require the use of <http://hackage.haskell.org/package/lifted-async lifted-async>.
--- -}
-
--- {- $logging
--- The exposed logging interface is a primitive 'Logger' function which gets
--- threaded through service calls and serialisation routines. This allows the
--- library to output useful information and diagnostics.
-
--- The 'newLogger' function can be used to construct a simple logger which writes
--- output to a 'Handle', but in most production code you should probably consider
--- using a more robust logging library such as
--- <http://hackage.haskell.org/package/tiny-log tiny-log> or
--- <http://hackage.haskell.org/package/fast-logger fast-logger>.
--- -}
+The 'newLogger' function can be used to construct a simple logger which writes
+output to a 'Handle', but in most production code you should probably consider
+using a more robust logging library such as
+<http://hackage.haskell.org/package/tiny-log tiny-log> or
+<http://hackage.haskell.org/package/fast-logger fast-logger>.
+-}

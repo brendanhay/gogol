@@ -41,6 +41,7 @@ library
     exposed-modules:
           Network.Google
         , Network.Google.Auth
+        , Network.Google.Auth.Scope
         , Network.Google.Auth.ApplicationDefault
         , Network.Google.Auth.Device
         , Network.Google.Auth.InstalledApplication
