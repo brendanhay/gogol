@@ -110,7 +110,7 @@ renderAPI s = do
 
     API alias d rs ms
        <$> svc
-       <*> traverse scp (maybe mempty (Map.toList . scopes) (s ^. dAuth))
+       <*> traverse scope (maybe mempty (Map.toList . scopes) (s ^. dAuth))
   where
     alias = aname (_sCanonicalName s)
 
@@ -124,9 +124,9 @@ renderAPI s = do
                      "@ of the " % stext % ". This contains the host and root path used as a starting point for constructing service requests.")
                      (s ^. dVersion) (s ^. dTitle)
 
-    scp (k, h) = Fun' n (Just h)
-        <$> pp None (scopeSig  n)
-        <*> pp None (scopeDecl n k)
+    scope (k, h) = Fun' n (Just h)
+        <$> pp None (scopeSig  n k)
+        <*> pp None (scopeDecl n)
       where
         n = name (scopeName s k)
 

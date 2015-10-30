@@ -44,11 +44,13 @@ serviceDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
         , str . stripSuffix "/" $ stripPrefix "https://" (s ^. dRootUrl)
         ]
 
-scopeSig :: Name -> Decl
-scopeSig n = TypeSig noLoc [n] (TyCon "OAuthScope")
+scopeSig :: Name -> Text -> Decl
+scopeSig n v = TypeSig noLoc [n] $
+    TyApp (TyCon "Proxy") $
+        TyPromoted $ PromotedList True [PromotedString (Text.unpack v)]
 
-scopeDecl :: Name -> Text -> Decl
-scopeDecl n s = sfun noLoc n [] (UnGuardedRhs (str s)) noBinds
+scopeDecl :: Name -> Decl
+scopeDecl n = sfun noLoc n [] (UnGuardedRhs (var "Proxy")) noBinds
 
 apiAlias :: Name -> [Name] -> Decl
 apiAlias n ls = TypeDecl noLoc n [] alias
@@ -302,6 +304,7 @@ googleRequestDecl :: Global
 googleRequestDecl g n assoc extras p api url fields m pat prec =
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n]
         [ assoc
+        , ss
         , request
         ]
   where
@@ -337,6 +340,11 @@ googleRequestDecl g n assoc extras p api url fields m pat prec =
 
             ps = _mParameters m
             v  = var . fname p
+
+    ss = InsType noLoc (TyApp (TyCon "Ss") (tycon g)) $
+        TyPromoted (PromotedList True (map scope (_mScopes m)))
+      where
+        scope = PromotedString . Text.unpack
 
     fs = delete "alt"
        . orderParams id (Map.keys (_mParameters m))
