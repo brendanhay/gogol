@@ -3,6 +3,7 @@
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE OverloadedStrings          #-}
@@ -316,6 +317,7 @@ instance FromJSON a => FromStream JSON a where
 
 class GoogleRequest a where
     type Rs a :: *
+    type Ss a :: [Symbol]
 
     requestClient :: a -> Client (Rs a)
 
