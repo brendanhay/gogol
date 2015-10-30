@@ -33,11 +33,11 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
 
-urlSig :: Name -> Decl
-urlSig n = TypeSig noLoc [n] (TyCon "ServiceConfig")
+serviceSig :: Name -> Decl
+serviceSig n = TypeSig noLoc [n] (TyCon "Service")
 
-urlDecl :: Service a -> Name -> Decl
-urlDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
+serviceDecl :: Service a -> Name -> Decl
+serviceDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
   where
     rhs = appFun (var "defaultService")
         [ app (var "ServiceId") (str (s ^. dId))

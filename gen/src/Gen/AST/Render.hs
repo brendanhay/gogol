@@ -117,8 +117,8 @@ renderAPI s = do
     url = name (serviceName s)
 
     svc = Fun' url (Just (rawHelpText h))
-        <$> pp None  (urlSig url)
-        <*> pp Print (urlDecl s url)
+        <$> pp None  (serviceSig    url)
+        <*> pp Print (serviceDecl s url)
       where
         h = sformat ("Default request referring to version @" % stext %
                      "@ of the " % stext % ". This contains the host and root path used as a starting point for constructing service requests.")
