@@ -105,6 +105,8 @@ instance GoogleRequest OrdersUpdatemerchantOrderid
          where
         type Rs OrdersUpdatemerchantOrderid =
              OrdersUpdateMerchantOrderIdResponse
+        type Scopes OrdersUpdatemerchantOrderid =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersUpdatemerchantOrderid{..}
           = go _ouoMerchantId _ouoOrderId (Just AltJSON)
               _ouoPayload

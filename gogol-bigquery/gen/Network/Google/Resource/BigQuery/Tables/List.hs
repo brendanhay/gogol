@@ -115,6 +115,10 @@ tlMaxResults
 
 instance GoogleRequest TablesList where
         type Rs TablesList = TableList
+        type Scopes TablesList =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient TablesList{..}
           = go _tlProjectId _tlDataSetId _tlPageToken
               _tlMaxResults

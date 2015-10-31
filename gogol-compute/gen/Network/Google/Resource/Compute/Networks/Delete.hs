@@ -89,6 +89,9 @@ ndNetwork
 
 instance GoogleRequest NetworksDelete where
         type Rs NetworksDelete = Operation
+        type Scopes NetworksDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient NetworksDelete{..}
           = go _ndProject _ndNetwork (Just AltJSON)
               computeService

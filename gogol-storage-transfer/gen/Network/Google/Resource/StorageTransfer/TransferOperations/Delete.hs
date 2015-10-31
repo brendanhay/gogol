@@ -151,6 +151,8 @@ todCallback
 
 instance GoogleRequest TransferOperationsDelete where
         type Rs TransferOperationsDelete = Empty
+        type Scopes TransferOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsDelete{..}
           = go _todName _todXgafv _todUploadProtocol
               (Just _todPp)

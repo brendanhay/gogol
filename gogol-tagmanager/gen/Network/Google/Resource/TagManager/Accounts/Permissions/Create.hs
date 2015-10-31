@@ -89,6 +89,8 @@ apcAccountId
 instance GoogleRequest AccountsPermissionsCreate
          where
         type Rs AccountsPermissionsCreate = UserAccess
+        type Scopes AccountsPermissionsCreate =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
         requestClient AccountsPermissionsCreate{..}
           = go _apcAccountId (Just AltJSON) _apcPayload
               tagManagerService

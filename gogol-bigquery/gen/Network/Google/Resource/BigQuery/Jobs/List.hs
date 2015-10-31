@@ -144,6 +144,10 @@ jlMaxResults
 
 instance GoogleRequest JobsList where
         type Rs JobsList = JobList
+        type Scopes JobsList =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient JobsList{..}
           = go _jlProjectId (_jlStateFilter ^. _Default)
               _jlProjection

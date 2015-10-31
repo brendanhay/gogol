@@ -173,6 +173,11 @@ plilMaxResults
 
 instance GoogleRequest PlayListItemsList where
         type Rs PlayListItemsList = PlayListItemListResponse
+        type Scopes PlayListItemsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListItemsList{..}
           = go (Just _plilPart) _plilOnBehalfOfContentOwner
               _plilVideoId

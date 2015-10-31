@@ -129,6 +129,11 @@ instance GoogleRequest LinuxGetAuthorizedKeysView
          where
         type Rs LinuxGetAuthorizedKeysView =
              LinuxGetAuthorizedKeysViewResponse
+        type Scopes LinuxGetAuthorizedKeysView =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
         requestClient LinuxGetAuthorizedKeysView{..}
           = go _lgakvProject _lgakvZone _lgakvUser
               (Just _lgakvInstance)

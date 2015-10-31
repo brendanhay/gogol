@@ -91,6 +91,9 @@ gaodOperation
 instance GoogleRequest GlobalAccountsOperationsDelete
          where
         type Rs GlobalAccountsOperationsDelete = ()
+        type Scopes GlobalAccountsOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient GlobalAccountsOperationsDelete{..}
           = go _gaodProject _gaodOperation (Just AltJSON)
               userAccountsService

@@ -99,6 +99,8 @@ miUserKey
 
 instance GoogleRequest MailInsert where
         type Rs MailInsert = ()
+        type Scopes MailInsert =
+             '["https://www.googleapis.com/auth/email.migration"]
         requestClient MailInsert{..}
           = go _miUserKey (Just AltJSON) _miPayload
               emailMigrationService
@@ -108,6 +110,8 @@ instance GoogleRequest MailInsert where
 
 instance GoogleRequest (MediaUpload MailInsert) where
         type Rs (MediaUpload MailInsert) = ()
+        type Scopes (MediaUpload MailInsert) =
+             Scopes MailInsert
         requestClient (MediaUpload MailInsert{..} body)
           = go _miUserKey (Just AltJSON) (Just AltMedia)
               _miPayload

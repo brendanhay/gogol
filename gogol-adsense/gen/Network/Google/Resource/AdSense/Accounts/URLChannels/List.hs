@@ -121,6 +121,9 @@ auclMaxResults
 
 instance GoogleRequest AccountsURLChannelsList where
         type Rs AccountsURLChannelsList = URLChannels
+        type Scopes AccountsURLChannelsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsURLChannelsList{..}
           = go _auclAccountId _auclAdClientId _auclPageToken
               _auclMaxResults

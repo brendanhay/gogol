@@ -88,6 +88,13 @@ pgPermissionId
 
 instance GoogleRequest PermissionsGet where
         type Rs PermissionsGet = Permission
+        type Scopes PermissionsGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient PermissionsGet{..}
           = go _pgFileId _pgPermissionId (Just AltJSON)
               driveService

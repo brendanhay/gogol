@@ -157,6 +157,8 @@ tirIsStrict
 
 instance GoogleRequest TableImportRows where
         type Rs TableImportRows = Import
+        type Scopes TableImportRows =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TableImportRows{..}
           = go _tirTableId _tirStartLine _tirEndLine
               _tirDelimiter
@@ -172,6 +174,8 @@ instance GoogleRequest TableImportRows where
 instance GoogleRequest (MediaUpload TableImportRows)
          where
         type Rs (MediaUpload TableImportRows) = Import
+        type Scopes (MediaUpload TableImportRows) =
+             Scopes TableImportRows
         requestClient (MediaUpload TableImportRows{..} body)
           = go _tirTableId _tirStartLine _tirEndLine
               _tirDelimiter

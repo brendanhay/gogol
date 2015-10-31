@@ -163,6 +163,8 @@ posoPublish
 
 instance GoogleRequest PostsPatch where
         type Rs PostsPatch = Post'
+        type Scopes PostsPatch =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsPatch{..}
           = go _posoBlogId _posoPostId (Just _posoFetchBody)
               _posoFetchImages

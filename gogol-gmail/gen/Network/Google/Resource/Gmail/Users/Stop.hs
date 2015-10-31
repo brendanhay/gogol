@@ -74,6 +74,10 @@ usUserId = lens _usUserId (\ s a -> s{_usUserId = a})
 
 instance GoogleRequest UsersStop where
         type Rs UsersStop = ()
+        type Scopes UsersStop =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersStop{..}
           = go _usUserId (Just AltJSON) gmailService
           where go

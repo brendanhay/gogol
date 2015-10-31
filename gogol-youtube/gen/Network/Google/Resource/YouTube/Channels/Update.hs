@@ -116,6 +116,10 @@ chaOnBehalfOfContentOwner
 
 instance GoogleRequest ChannelsUpdate where
         type Rs ChannelsUpdate = Channel
+        type Scopes ChannelsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient ChannelsUpdate{..}
           = go (Just _chaPart) _chaOnBehalfOfContentOwner
               (Just AltJSON)

@@ -90,6 +90,8 @@ psdId
 instance GoogleRequest PlacementStrategiesDelete
          where
         type Rs PlacementStrategiesDelete = ()
+        type Scopes PlacementStrategiesDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementStrategiesDelete{..}
           = go _psdProFileId _psdId (Just AltJSON)
               dFAReportingService

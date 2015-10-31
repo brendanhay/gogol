@@ -157,6 +157,9 @@ dsdCallback
 
 instance GoogleRequest DataSetsDelete where
         type Rs DataSetsDelete = Empty
+        type Scopes DataSetsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient DataSetsDelete{..}
           = go _dsdDataSetId _dsdXgafv _dsdUploadProtocol
               (Just _dsdPp)

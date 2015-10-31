@@ -134,6 +134,8 @@ eiuEditId
 
 instance GoogleRequest EditsImagesUpload where
         type Rs EditsImagesUpload = ImagesUploadResponse
+        type Scopes EditsImagesUpload =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsImagesUpload{..}
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
@@ -148,6 +150,8 @@ instance GoogleRequest
          (MediaUpload EditsImagesUpload) where
         type Rs (MediaUpload EditsImagesUpload) =
              ImagesUploadResponse
+        type Scopes (MediaUpload EditsImagesUpload) =
+             Scopes EditsImagesUpload
         requestClient
           (MediaUpload EditsImagesUpload{..} body)
           = go _eiuPackageName _eiuEditId _eiuLanguage

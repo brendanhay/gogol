@@ -100,6 +100,8 @@ cuColumnId
 
 instance GoogleRequest ColumnUpdate where
         type Rs ColumnUpdate = Column
+        type Scopes ColumnUpdate =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient ColumnUpdate{..}
           = go _cuTableId _cuColumnId (Just AltJSON) _cuPayload
               fusionTablesService

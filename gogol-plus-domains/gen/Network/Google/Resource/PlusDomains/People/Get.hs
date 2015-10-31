@@ -75,6 +75,12 @@ pgUserId = lens _pgUserId (\ s a -> s{_pgUserId = a})
 
 instance GoogleRequest PeopleGet where
         type Rs PeopleGet = Person
+        type Scopes PeopleGet =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me",
+               "https://www.googleapis.com/auth/plus.profiles.read",
+               "https://www.googleapis.com/auth/userinfo.email",
+               "https://www.googleapis.com/auth/userinfo.profile"]
         requestClient PeopleGet{..}
           = go _pgUserId (Just AltJSON) plusDomainsService
           where go

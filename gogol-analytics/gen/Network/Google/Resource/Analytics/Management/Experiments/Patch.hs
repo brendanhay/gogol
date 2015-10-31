@@ -131,6 +131,9 @@ mepExperimentId
 instance GoogleRequest ManagementExperimentsPatch
          where
         type Rs ManagementExperimentsPatch = Experiment
+        type Scopes ManagementExperimentsPatch =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementExperimentsPatch{..}
           = go _mepAccountId _mepWebPropertyId _mepProFileId
               _mepExperimentId

@@ -76,6 +76,8 @@ niPayload
 
 instance GoogleRequest NegotiationsInsert where
         type Rs NegotiationsInsert = NegotiationDTO
+        type Scopes NegotiationsInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient NegotiationsInsert{..}
           = go (Just AltJSON) _niPayload adExchangeBuyerService
           where go

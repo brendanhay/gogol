@@ -101,6 +101,8 @@ etpId
 
 instance GoogleRequest EventTagsPatch where
         type Rs EventTagsPatch = EventTag
+        type Scopes EventTagsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient EventTagsPatch{..}
           = go _etpProFileId (Just _etpId) (Just AltJSON)
               _etpPayload

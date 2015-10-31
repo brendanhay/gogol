@@ -177,6 +177,11 @@ csgCallback
 
 instance GoogleRequest CoursesStudentsGet where
         type Rs CoursesStudentsGet = Student
+        type Scopes CoursesStudentsGet =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient CoursesStudentsGet{..}
           = go _csgCourseId _csgUserId _csgXgafv
               _csgUploadProtocol

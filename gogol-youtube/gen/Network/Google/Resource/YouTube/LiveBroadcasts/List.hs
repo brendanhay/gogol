@@ -211,6 +211,10 @@ lblMaxResults
 instance GoogleRequest LiveBroadcastsList where
         type Rs LiveBroadcastsList =
              LiveBroadcastListResponse
+        type Scopes LiveBroadcastsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient LiveBroadcastsList{..}
           = go (Just _lblPart) _lblMine _lblBroadcastStatus
               _lblOnBehalfOfContentOwner

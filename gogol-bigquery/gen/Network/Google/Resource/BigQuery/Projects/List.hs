@@ -87,6 +87,10 @@ plMaxResults
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectList
+        type Scopes ProjectsList =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsList{..}
           = go _plPageToken _plMaxResults (Just AltJSON)
               bigQueryService

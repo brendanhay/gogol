@@ -186,6 +186,7 @@ plMaxResults
 
 instance GoogleRequest PublishersList where
         type Rs PublishersList = Publishers
+        type Scopes PublishersList = '[]
         requestClient PublishersList{..}
           = go _plRole _plRoleId _plRelationshipStatus
               _plMinSevenDayEpc

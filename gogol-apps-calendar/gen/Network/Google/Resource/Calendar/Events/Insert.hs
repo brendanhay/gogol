@@ -132,6 +132,8 @@ eveSupportsAttachments
 
 instance GoogleRequest EventsInsert where
         type Rs EventsInsert = Event
+        type Scopes EventsInsert =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient EventsInsert{..}
           = go _eveCalendarId _eveMaxAttendees
               _eveSendNotifications

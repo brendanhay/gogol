@@ -137,6 +137,10 @@ rlMaxResults
 
 instance GoogleRequest RoutesList where
         type Rs RoutesList = RouteList
+        type Scopes RoutesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RoutesList{..}
           = go _rlProject _rlFilter _rlPageToken
               (Just _rlMaxResults)

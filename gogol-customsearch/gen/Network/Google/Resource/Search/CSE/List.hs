@@ -466,6 +466,7 @@ cselHighRange
 
 instance GoogleRequest CSEList where
         type Rs CSEList = Search
+        type Scopes CSEList = '[]
         requestClient CSEList{..}
           = go (Just _cselQ) _cselImgDominantColor
               _cselSiteSearchFilter

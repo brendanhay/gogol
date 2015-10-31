@@ -89,6 +89,8 @@ dsgId
 
 instance GoogleRequest DirectorySitesGet where
         type Rs DirectorySitesGet = DirectorySite
+        type Scopes DirectorySitesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient DirectorySitesGet{..}
           = go _dsgProFileId _dsgId (Just AltJSON)
               dFAReportingService

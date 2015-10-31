@@ -99,6 +99,9 @@ alMaxResults
 
 instance GoogleRequest ApplicationsList where
         type Rs ApplicationsList = ApplicationsListResponse
+        type Scopes ApplicationsList =
+             '["https://www.googleapis.com/auth/admin.datatransfer",
+               "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
         requestClient ApplicationsList{..}
           = go _alCustomerId _alPageToken _alMaxResults
               (Just AltJSON)

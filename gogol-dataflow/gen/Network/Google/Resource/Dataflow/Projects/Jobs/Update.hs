@@ -177,6 +177,9 @@ pjuCallback
 
 instance GoogleRequest ProjectsJobsUpdate where
         type Rs ProjectsJobsUpdate = Job
+        type Scopes ProjectsJobsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsUpdate{..}
           = go _pjuProjectId _pjuJobId _pjuXgafv
               _pjuUploadProtocol

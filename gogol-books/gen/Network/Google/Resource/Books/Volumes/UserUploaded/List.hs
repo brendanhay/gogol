@@ -143,6 +143,8 @@ vuulMaxResults
 
 instance GoogleRequest VolumesUserUploadedList where
         type Rs VolumesUserUploadedList = Volumes
+        type Scopes VolumesUserUploadedList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient VolumesUserUploadedList{..}
           = go (_vuulProcessingState ^. _Default) _vuulLocale
               (_vuulVolumeId ^. _Default)

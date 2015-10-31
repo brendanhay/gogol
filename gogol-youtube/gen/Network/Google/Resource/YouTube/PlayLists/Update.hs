@@ -117,6 +117,10 @@ pluOnBehalfOfContentOwner
 
 instance GoogleRequest PlayListsUpdate where
         type Rs PlayListsUpdate = PlayList
+        type Scopes PlayListsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListsUpdate{..}
           = go (Just _pluPart) _pluOnBehalfOfContentOwner
               (Just AltJSON)

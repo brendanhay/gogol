@@ -141,6 +141,10 @@ tMaxResults
 
 instance GoogleRequest TableDataList' where
         type Rs TableDataList' = TableDataList
+        type Scopes TableDataList' =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient TableDataList'{..}
           = go _tProjectId _tDataSetId _tTableId _tPageToken
               _tStartIndex

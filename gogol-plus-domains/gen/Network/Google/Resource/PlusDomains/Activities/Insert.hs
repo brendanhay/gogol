@@ -101,6 +101,10 @@ aiPreview
 
 instance GoogleRequest ActivitiesInsert where
         type Rs ActivitiesInsert = Activity
+        type Scopes ActivitiesInsert =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me",
+               "https://www.googleapis.com/auth/plus.stream.write"]
         requestClient ActivitiesInsert{..}
           = go _aiUserId _aiPreview (Just AltJSON) _aiPayload
               plusDomainsService

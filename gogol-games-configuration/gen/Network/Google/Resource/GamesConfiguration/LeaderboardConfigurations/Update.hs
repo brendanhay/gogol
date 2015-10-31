@@ -91,6 +91,8 @@ instance GoogleRequest
          LeaderboardConfigurationsUpdate where
         type Rs LeaderboardConfigurationsUpdate =
              LeaderboardConfiguration
+        type Scopes LeaderboardConfigurationsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient LeaderboardConfigurationsUpdate{..}
           = go _lcuLeaderboardId (Just AltJSON) _lcuPayload
               gamesConfigurationService

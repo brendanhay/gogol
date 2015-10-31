@@ -91,6 +91,8 @@ ngNotificationId
 
 instance GoogleRequest NotificationsGet where
         type Rs NotificationsGet = Notification
+        type Scopes NotificationsGet =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
         requestClient NotificationsGet{..}
           = go _ngCustomer _ngNotificationId (Just AltJSON)
               directoryService

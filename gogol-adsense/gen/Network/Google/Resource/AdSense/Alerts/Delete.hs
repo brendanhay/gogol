@@ -77,6 +77,8 @@ adAlertId
 
 instance GoogleRequest AlertsDelete where
         type Rs AlertsDelete = ()
+        type Scopes AlertsDelete =
+             '["https://www.googleapis.com/auth/adsense"]
         requestClient AlertsDelete{..}
           = go _adAlertId (Just AltJSON) adSenseService
           where go

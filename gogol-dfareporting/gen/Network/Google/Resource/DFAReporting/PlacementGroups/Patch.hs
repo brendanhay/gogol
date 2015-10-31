@@ -104,6 +104,8 @@ pgpId
 
 instance GoogleRequest PlacementGroupsPatch where
         type Rs PlacementGroupsPatch = PlacementGroup
+        type Scopes PlacementGroupsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementGroupsPatch{..}
           = go _pgpProFileId (Just _pgpId) (Just AltJSON)
               _pgpPayload

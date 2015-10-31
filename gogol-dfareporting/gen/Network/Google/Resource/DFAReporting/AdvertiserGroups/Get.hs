@@ -91,6 +91,8 @@ agggId
 
 instance GoogleRequest AdvertiserGroupsGet where
         type Rs AdvertiserGroupsGet = AdvertiserGroup
+        type Scopes AdvertiserGroupsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertiserGroupsGet{..}
           = go _agggProFileId _agggId (Just AltJSON)
               dFAReportingService

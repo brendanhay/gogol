@@ -115,6 +115,8 @@ igDeviceId
 
 instance GoogleRequest InstallsGet where
         type Rs InstallsGet = Install
+        type Scopes InstallsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient InstallsGet{..}
           = go _igEnterpriseId _igUserId _igDeviceId
               _igInstallId

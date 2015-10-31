@@ -86,6 +86,9 @@ bgbuView = lens _bgbuView (\ s a -> s{_bgbuView = a})
 
 instance GoogleRequest BlogsGetByURL where
         type Rs BlogsGetByURL = Blog
+        type Scopes BlogsGetByURL =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient BlogsGetByURL{..}
           = go (Just _bgbuURL) _bgbuView (Just AltJSON)
               bloggerService

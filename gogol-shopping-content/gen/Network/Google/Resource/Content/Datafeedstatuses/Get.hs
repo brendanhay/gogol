@@ -90,6 +90,8 @@ dggDatafeedId
 
 instance GoogleRequest DatafeedstatusesGet where
         type Rs DatafeedstatusesGet = DatafeedStatus
+        type Scopes DatafeedstatusesGet =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedstatusesGet{..}
           = go _dggMerchantId _dggDatafeedId (Just AltJSON)
               shoppingContentService

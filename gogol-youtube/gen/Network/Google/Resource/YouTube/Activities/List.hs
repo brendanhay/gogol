@@ -201,6 +201,10 @@ alPublishedBefore
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = ActivityListResponse
+        type Scopes ActivitiesList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient ActivitiesList{..}
           = go (Just _alPart) _alPublishedAfter _alHome _alMine
               _alRegionCode

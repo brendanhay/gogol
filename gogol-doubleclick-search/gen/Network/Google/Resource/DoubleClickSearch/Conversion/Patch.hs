@@ -173,6 +173,8 @@ cpRowCount
 
 instance GoogleRequest ConversionPatch where
         type Rs ConversionPatch = ConversionList
+        type Scopes ConversionPatch =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ConversionPatch{..}
           = go (Just _cpAdvertiserId) (Just _cpAgencyId)
               (Just _cpEndDate)

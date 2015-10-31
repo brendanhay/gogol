@@ -102,6 +102,8 @@ spTableId
 
 instance GoogleRequest StylePatch where
         type Rs StylePatch = StyleSetting
+        type Scopes StylePatch =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient StylePatch{..}
           = go _spTableId _spStyleId (Just AltJSON) _spPayload
               fusionTablesService

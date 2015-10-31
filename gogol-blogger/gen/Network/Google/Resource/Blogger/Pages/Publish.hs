@@ -89,6 +89,8 @@ pagaPageId
 
 instance GoogleRequest PagesPublish where
         type Rs PagesPublish = Page
+        type Scopes PagesPublish =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PagesPublish{..}
           = go _pagaBlogId _pagaPageId (Just AltJSON)
               bloggerService

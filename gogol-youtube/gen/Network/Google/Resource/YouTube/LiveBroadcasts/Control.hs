@@ -190,6 +190,9 @@ lbcOffSetTimeMs
 
 instance GoogleRequest LiveBroadcastsControl where
         type Rs LiveBroadcastsControl = LiveBroadcast
+        type Scopes LiveBroadcastsControl =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveBroadcastsControl{..}
           = go (Just _lbcId) (Just _lbcPart)
               _lbcOnBehalfOfContentOwner

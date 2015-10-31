@@ -84,6 +84,8 @@ sdStateKey
 
 instance GoogleRequest StatesDelete where
         type Rs StatesDelete = ()
+        type Scopes StatesDelete =
+             '["https://www.googleapis.com/auth/appstate"]
         requestClient StatesDelete{..}
           = go _sdStateKey (Just AltJSON) appStateService
           where go

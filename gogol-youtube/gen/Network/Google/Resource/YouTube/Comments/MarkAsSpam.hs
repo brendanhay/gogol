@@ -78,6 +78,8 @@ cmasId = lens _cmasId (\ s a -> s{_cmasId = a})
 
 instance GoogleRequest CommentsMarkAsSpam where
         type Rs CommentsMarkAsSpam = ()
+        type Scopes CommentsMarkAsSpam =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentsMarkAsSpam{..}
           = go (Just _cmasId) (Just AltJSON) youTubeService
           where go

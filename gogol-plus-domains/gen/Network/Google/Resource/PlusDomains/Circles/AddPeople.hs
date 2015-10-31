@@ -104,6 +104,9 @@ capCircleId
 
 instance GoogleRequest CirclesAddPeople where
         type Rs CirclesAddPeople = Circle
+        type Scopes CirclesAddPeople =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient CirclesAddPeople{..}
           = go _capCircleId (_capEmail ^. _Default)
               (_capUserId ^. _Default)

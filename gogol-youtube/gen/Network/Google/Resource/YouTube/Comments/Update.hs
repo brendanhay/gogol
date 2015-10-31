@@ -89,6 +89,8 @@ cuPayload
 
 instance GoogleRequest CommentsUpdate where
         type Rs CommentsUpdate = Comment
+        type Scopes CommentsUpdate =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentsUpdate{..}
           = go (Just _cuPart) (Just AltJSON) _cuPayload
               youTubeService

@@ -157,6 +157,8 @@ bagCallback
 
 instance GoogleRequest BillingAccountsGet where
         type Rs BillingAccountsGet = BillingAccount
+        type Scopes BillingAccountsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsGet{..}
           = go _bagName _bagXgafv _bagUploadProtocol
               (Just _bagPp)

@@ -90,6 +90,10 @@ dsrqDataSetId
 
 instance GoogleRequest DataSetsRunQuery where
         type Rs DataSetsRunQuery = RunQueryResponse
+        type Scopes DataSetsRunQuery =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/datastore",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient DataSetsRunQuery{..}
           = go _dsrqDataSetId (Just AltJSON) _dsrqPayload
               datastoreService

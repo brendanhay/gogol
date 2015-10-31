@@ -87,6 +87,10 @@ fgiCount
 
 instance GoogleRequest FilesGenerateIds where
         type Rs FilesGenerateIds = GeneratedIds
+        type Scopes FilesGenerateIds =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient FilesGenerateIds{..}
           = go (Just _fgiSpace) (Just _fgiCount) (Just AltJSON)
               driveService

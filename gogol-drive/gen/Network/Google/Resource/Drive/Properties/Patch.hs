@@ -111,6 +111,11 @@ ppFileId = lens _ppFileId (\ s a -> s{_ppFileId = a})
 
 instance GoogleRequest PropertiesPatch where
         type Rs PropertiesPatch = Property
+        type Scopes PropertiesPatch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata"]
         requestClient PropertiesPatch{..}
           = go _ppFileId _ppPropertyKey (Just _ppVisibility)
               (Just AltJSON)

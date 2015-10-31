@@ -89,6 +89,9 @@ mfgAccountId
 
 instance GoogleRequest ManagementFiltersGet where
         type Rs ManagementFiltersGet = Filter
+        type Scopes ManagementFiltersGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementFiltersGet{..}
           = go _mfgAccountId _mfgFilterId (Just AltJSON)
               analyticsService

@@ -91,6 +91,9 @@ pmiPayload
 
 instance GoogleRequest ProjectsMoveInstance where
         type Rs ProjectsMoveInstance = Operation
+        type Scopes ProjectsMoveInstance =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ProjectsMoveInstance{..}
           = go _pmiProject (Just AltJSON) _pmiPayload
               computeService

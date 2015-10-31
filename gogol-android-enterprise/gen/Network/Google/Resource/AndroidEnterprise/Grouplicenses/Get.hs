@@ -91,6 +91,8 @@ ggGroupLicenseId
 
 instance GoogleRequest GrouplicensesGet where
         type Rs GrouplicensesGet = GroupLicense
+        type Scopes GrouplicensesGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient GrouplicensesGet{..}
           = go _ggEnterpriseId _ggGroupLicenseId (Just AltJSON)
               androidEnterpriseService

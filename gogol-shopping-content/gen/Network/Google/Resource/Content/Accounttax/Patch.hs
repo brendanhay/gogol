@@ -116,6 +116,8 @@ appDryRun
 
 instance GoogleRequest AccounttaxPatch where
         type Rs AccounttaxPatch = AccountTax
+        type Scopes AccounttaxPatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccounttaxPatch{..}
           = go _appMerchantId _appAccountId _appDryRun
               (Just AltJSON)

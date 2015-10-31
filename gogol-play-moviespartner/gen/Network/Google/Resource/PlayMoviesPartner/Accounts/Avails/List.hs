@@ -259,6 +259,8 @@ aalCallback
 
 instance GoogleRequest AccountsAvailsList where
         type Rs AccountsAvailsList = ListAvailsResponse
+        type Scopes AccountsAvailsList =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
         requestClient AccountsAvailsList{..}
           = go _aalAccountId _aalAltId
               (_aalPphNames ^. _Default)

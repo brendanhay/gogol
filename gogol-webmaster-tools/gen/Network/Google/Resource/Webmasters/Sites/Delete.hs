@@ -75,6 +75,8 @@ sSiteURL = lens _sSiteURL (\ s a -> s{_sSiteURL = a})
 
 instance GoogleRequest SitesDelete where
         type Rs SitesDelete = ()
+        type Scopes SitesDelete =
+             '["https://www.googleapis.com/auth/webmasters"]
         requestClient SitesDelete{..}
           = go _sSiteURL (Just AltJSON) webmasterToolsService
           where go

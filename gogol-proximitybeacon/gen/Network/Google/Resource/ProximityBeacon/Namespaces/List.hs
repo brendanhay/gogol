@@ -145,6 +145,7 @@ nlCallback
 
 instance GoogleRequest NamespacesList where
         type Rs NamespacesList = ListNamespacesResponse
+        type Scopes NamespacesList = '[]
         requestClient NamespacesList{..}
           = go _nlXgafv _nlUploadProtocol (Just _nlPp)
               _nlAccessToken

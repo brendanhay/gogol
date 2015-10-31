@@ -102,6 +102,10 @@ dtgDiskType
 
 instance GoogleRequest DiskTypesGet where
         type Rs DiskTypesGet = DiskType
+        type Scopes DiskTypesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DiskTypesGet{..}
           = go _dtgProject _dtgZone _dtgDiskType (Just AltJSON)
               computeService

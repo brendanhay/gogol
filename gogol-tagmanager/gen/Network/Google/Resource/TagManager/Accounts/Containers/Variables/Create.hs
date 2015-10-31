@@ -104,6 +104,8 @@ acvcAccountId
 instance GoogleRequest
          AccountsContainersVariablesCreate where
         type Rs AccountsContainersVariablesCreate = Variable
+        type Scopes AccountsContainersVariablesCreate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersVariablesCreate{..}
           = go _acvcAccountId _acvcContainerId (Just AltJSON)
               _acvcPayload

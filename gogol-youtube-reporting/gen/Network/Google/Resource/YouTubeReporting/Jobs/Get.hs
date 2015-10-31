@@ -164,6 +164,9 @@ jgCallback
 
 instance GoogleRequest JobsGet where
         type Rs JobsGet = Job
+        type Scopes JobsGet =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsGet{..}
           = go _jgJobId _jgXgafv _jgUploadProtocol (Just _jgPp)
               _jgAccessToken

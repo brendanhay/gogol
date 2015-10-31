@@ -175,6 +175,9 @@ pssipCallback
 instance GoogleRequest
          ProjectsSubscriptionsSetIAMPolicy where
         type Rs ProjectsSubscriptionsSetIAMPolicy = Policy
+        type Scopes ProjectsSubscriptionsSetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsSetIAMPolicy{..}
           = go _pssipResource _pssipXgafv _pssipUploadProtocol
               (Just _pssipPp)

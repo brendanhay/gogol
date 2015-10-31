@@ -211,6 +211,10 @@ ouGeneration
 
 instance GoogleRequest ObjectsUpdate where
         type Rs ObjectsUpdate = Object
+        type Scopes ObjectsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsUpdate{..}
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
@@ -229,6 +233,8 @@ instance GoogleRequest ObjectsUpdate where
 instance GoogleRequest (MediaDownload ObjectsUpdate)
          where
         type Rs (MediaDownload ObjectsUpdate) = Stream
+        type Scopes (MediaDownload ObjectsUpdate) =
+             Scopes ObjectsUpdate
         requestClient (MediaDownload ObjectsUpdate{..})
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch

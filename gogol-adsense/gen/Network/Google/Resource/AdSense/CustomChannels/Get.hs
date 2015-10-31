@@ -90,6 +90,9 @@ ccgAdClientId
 
 instance GoogleRequest CustomChannelsGet where
         type Rs CustomChannelsGet = CustomChannel
+        type Scopes CustomChannelsGet =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient CustomChannelsGet{..}
           = go _ccgAdClientId _ccgCustomChannelId
               (Just AltJSON)

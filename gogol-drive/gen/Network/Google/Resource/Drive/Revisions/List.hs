@@ -76,6 +76,14 @@ rllFileId
 
 instance GoogleRequest RevisionsList where
         type Rs RevisionsList = RevisionList
+        type Scopes RevisionsList =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient RevisionsList{..}
           = go _rllFileId (Just AltJSON) driveService
           where go

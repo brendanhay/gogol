@@ -66,6 +66,9 @@ eventsResetAllForAllPlayers = EventsResetAllForAllPlayers
 instance GoogleRequest EventsResetAllForAllPlayers
          where
         type Rs EventsResetAllForAllPlayers = ()
+        type Scopes EventsResetAllForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient EventsResetAllForAllPlayers{}
           = go (Just AltJSON) gamesManagementService
           where go

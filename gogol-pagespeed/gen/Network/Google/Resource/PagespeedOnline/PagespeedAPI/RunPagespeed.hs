@@ -140,6 +140,7 @@ parpRule
 
 instance GoogleRequest PagespeedAPIRunPagespeed where
         type Rs PagespeedAPIRunPagespeed = Result
+        type Scopes PagespeedAPIRunPagespeed = '[]
         requestClient PagespeedAPIRunPagespeed{..}
           = go (Just _parpURL) (Just _parpScreenshot)
               _parpLocale

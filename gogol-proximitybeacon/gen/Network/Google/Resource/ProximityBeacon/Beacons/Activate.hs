@@ -157,6 +157,7 @@ baCallback
 
 instance GoogleRequest BeaconsActivate where
         type Rs BeaconsActivate = Empty
+        type Scopes BeaconsActivate = '[]
         requestClient BeaconsActivate{..}
           = go _baBeaconName _baXgafv _baUploadProtocol
               (Just _baPp)

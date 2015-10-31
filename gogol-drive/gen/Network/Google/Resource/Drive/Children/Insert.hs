@@ -89,6 +89,10 @@ ciPayload
 
 instance GoogleRequest ChildrenInsert where
         type Rs ChildrenInsert = ChildReference
+        type Scopes ChildrenInsert =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient ChildrenInsert{..}
           = go _ciFolderId (Just AltJSON) _ciPayload
               driveService

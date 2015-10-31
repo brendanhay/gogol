@@ -116,6 +116,8 @@ curgPageToken
 
 instance GoogleRequest CustomerUsageReportsGet where
         type Rs CustomerUsageReportsGet = UsageReports
+        type Scopes CustomerUsageReportsGet =
+             '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
         requestClient CustomerUsageReportsGet{..}
           = go _curgDate _curgCustomerId _curgParameters
               _curgPageToken

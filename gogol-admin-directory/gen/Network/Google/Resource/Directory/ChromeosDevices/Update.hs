@@ -118,6 +118,8 @@ cduProjection
 
 instance GoogleRequest ChromeosDevicesUpdate where
         type Rs ChromeosDevicesUpdate = ChromeOSDevice
+        type Scopes ChromeosDevicesUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
         requestClient ChromeosDevicesUpdate{..}
           = go _cduCustomerId _cduDeviceId _cduProjection
               (Just AltJSON)

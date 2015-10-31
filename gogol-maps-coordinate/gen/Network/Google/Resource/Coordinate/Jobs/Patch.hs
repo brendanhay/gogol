@@ -221,6 +221,8 @@ jpCustomField
 
 instance GoogleRequest JobsPatch where
         type Rs JobsPatch = Job
+        type Scopes JobsPatch =
+             '["https://www.googleapis.com/auth/coordinate"]
         requestClient JobsPatch{..}
           = go _jpTeamId _jpJobId _jpProgress _jpNote
               _jpCustomerPhoneNumber

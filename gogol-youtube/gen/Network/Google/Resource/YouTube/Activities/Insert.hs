@@ -100,6 +100,9 @@ aiPayload
 
 instance GoogleRequest ActivitiesInsert where
         type Rs ActivitiesInsert = Activity
+        type Scopes ActivitiesInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient ActivitiesInsert{..}
           = go (Just _aiPart) (Just AltJSON) _aiPayload
               youTubeService

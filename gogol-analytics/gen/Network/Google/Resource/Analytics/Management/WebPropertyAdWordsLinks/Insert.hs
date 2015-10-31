@@ -109,6 +109,8 @@ instance GoogleRequest
          ManagementWebPropertyAdWordsLinksInsert where
         type Rs ManagementWebPropertyAdWordsLinksInsert =
              EntityAdWordsLink
+        type Scopes ManagementWebPropertyAdWordsLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
           ManagementWebPropertyAdWordsLinksInsert{..}
           = go _mwpawliAccountId _mwpawliWebPropertyId

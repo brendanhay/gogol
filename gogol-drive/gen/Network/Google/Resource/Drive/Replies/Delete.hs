@@ -100,6 +100,9 @@ rdCommentId
 
 instance GoogleRequest RepliesDelete where
         type Rs RepliesDelete = ()
+        type Scopes RepliesDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient RepliesDelete{..}
           = go _rdFileId _rdCommentId _rdReplyId (Just AltJSON)
               driveService

@@ -87,6 +87,8 @@ tmdId = lens _tmdId (\ s a -> s{_tmdId = a})
 
 instance GoogleRequest TrainedModelsDelete where
         type Rs TrainedModelsDelete = ()
+        type Scopes TrainedModelsDelete =
+             '["https://www.googleapis.com/auth/prediction"]
         requestClient TrainedModelsDelete{..}
           = go _tmdProject _tmdId (Just AltJSON)
               predictionService

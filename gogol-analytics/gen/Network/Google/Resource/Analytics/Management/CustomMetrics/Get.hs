@@ -106,6 +106,9 @@ mcmgAccountId
 instance GoogleRequest ManagementCustomMetricsGet
          where
         type Rs ManagementCustomMetricsGet = CustomMetric
+        type Scopes ManagementCustomMetricsGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementCustomMetricsGet{..}
           = go _mcmgAccountId _mcmgWebPropertyId
               _mcmgCustomMetricId

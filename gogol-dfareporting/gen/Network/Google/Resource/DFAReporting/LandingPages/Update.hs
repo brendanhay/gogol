@@ -105,6 +105,8 @@ lpuPayload
 
 instance GoogleRequest LandingPagesUpdate where
         type Rs LandingPagesUpdate = LandingPage
+        type Scopes LandingPagesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient LandingPagesUpdate{..}
           = go _lpuProFileId _lpuCampaignId (Just AltJSON)
               _lpuPayload

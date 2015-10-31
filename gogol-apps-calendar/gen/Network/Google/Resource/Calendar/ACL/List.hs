@@ -136,6 +136,8 @@ alMaxResults
 
 instance GoogleRequest ACLList where
         type Rs ACLList = ACL
+        type Scopes ACLList =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient ACLList{..}
           = go _alCalendarId _alSyncToken _alShowDeleted
               _alPageToken

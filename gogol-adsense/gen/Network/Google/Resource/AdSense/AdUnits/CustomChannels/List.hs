@@ -121,6 +121,9 @@ aucclMaxResults
 instance GoogleRequest AdUnitsCustomChannelsList
          where
         type Rs AdUnitsCustomChannelsList = CustomChannels
+        type Scopes AdUnitsCustomChannelsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AdUnitsCustomChannelsList{..}
           = go _aucclAdClientId _aucclAdUnitId _aucclPageToken
               _aucclMaxResults

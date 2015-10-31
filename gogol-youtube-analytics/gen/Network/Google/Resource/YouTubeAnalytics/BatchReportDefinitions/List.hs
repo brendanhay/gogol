@@ -81,6 +81,9 @@ instance GoogleRequest BatchReportDefinitionsList
          where
         type Rs BatchReportDefinitionsList =
              BatchReportDefinitionList
+        type Scopes BatchReportDefinitionsList =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient BatchReportDefinitionsList{..}
           = go (Just _brdlOnBehalfOfContentOwner)
               (Just AltJSON)

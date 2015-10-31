@@ -107,6 +107,8 @@ instance GoogleRequest
          SubscriptionsChangeRenewalSettings where
         type Rs SubscriptionsChangeRenewalSettings =
              Subscription
+        type Scopes SubscriptionsChangeRenewalSettings =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsChangeRenewalSettings{..}
           = go _scrsCustomerId _scrsSubscriptionId
               (Just AltJSON)

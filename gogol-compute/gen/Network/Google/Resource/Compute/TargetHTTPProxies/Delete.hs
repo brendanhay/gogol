@@ -91,6 +91,9 @@ thttppdTargetHTTPProxy
 
 instance GoogleRequest TargetHTTPProxiesDelete where
         type Rs TargetHTTPProxiesDelete = Operation
+        type Scopes TargetHTTPProxiesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetHTTPProxiesDelete{..}
           = go _thttppdProject _thttppdTargetHTTPProxy
               (Just AltJSON)

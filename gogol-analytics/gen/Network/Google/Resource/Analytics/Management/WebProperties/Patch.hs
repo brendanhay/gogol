@@ -105,6 +105,8 @@ mwppAccountId
 instance GoogleRequest ManagementWebPropertiesPatch
          where
         type Rs ManagementWebPropertiesPatch = WebProperty
+        type Scopes ManagementWebPropertiesPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementWebPropertiesPatch{..}
           = go _mwppAccountId _mwppWebPropertyId (Just AltJSON)
               _mwppPayload

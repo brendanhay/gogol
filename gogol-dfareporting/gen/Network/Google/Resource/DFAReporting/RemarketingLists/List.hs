@@ -182,6 +182,8 @@ rllMaxResults
 instance GoogleRequest RemarketingListsList where
         type Rs RemarketingListsList =
              RemarketingListsListResponse
+        type Scopes RemarketingListsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListsList{..}
           = go _rllProFileId (Just _rllAdvertiserId)
               _rllFloodlightActivityId

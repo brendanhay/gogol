@@ -123,6 +123,9 @@ lsdId = lens _lsdId (\ s a -> s{_lsdId = a})
 
 instance GoogleRequest LiveStreamsDelete where
         type Rs LiveStreamsDelete = ()
+        type Scopes LiveStreamsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveStreamsDelete{..}
           = go (Just _lsdId) _lsdOnBehalfOfContentOwner
               _lsdOnBehalfOfContentOwnerChannel

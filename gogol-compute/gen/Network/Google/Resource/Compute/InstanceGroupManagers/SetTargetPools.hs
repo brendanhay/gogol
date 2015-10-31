@@ -131,6 +131,9 @@ instance GoogleRequest
          InstanceGroupManagersSetTargetPools where
         type Rs InstanceGroupManagersSetTargetPools =
              Operation
+        type Scopes InstanceGroupManagersSetTargetPools =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupManagersSetTargetPools{..}
           = go _igmstpProject _igmstpZone
               _igmstpInstanceGroupManager

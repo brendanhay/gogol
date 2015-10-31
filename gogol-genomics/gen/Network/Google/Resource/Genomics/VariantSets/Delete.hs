@@ -160,6 +160,9 @@ vsdCallback
 
 instance GoogleRequest VariantSetsDelete where
         type Rs VariantSetsDelete = Empty
+        type Scopes VariantSetsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantSetsDelete{..}
           = go _vsdVariantSetId _vsdXgafv _vsdUploadProtocol
               (Just _vsdPp)

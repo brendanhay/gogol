@@ -115,6 +115,8 @@ mlbavSource
 instance GoogleRequest MyLibraryBookshelvesAddVolume
          where
         type Rs MyLibraryBookshelvesAddVolume = ()
+        type Scopes MyLibraryBookshelvesAddVolume =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesAddVolume{..}
           = go _mlbavShelf (Just _mlbavVolumeId) _mlbavReason
               _mlbavSource

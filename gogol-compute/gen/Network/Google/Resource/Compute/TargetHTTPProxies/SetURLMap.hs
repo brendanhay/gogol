@@ -106,6 +106,9 @@ thttppsumTargetHTTPProxy
 instance GoogleRequest TargetHTTPProxiesSetURLMap
          where
         type Rs TargetHTTPProxiesSetURLMap = Operation
+        type Scopes TargetHTTPProxiesSetURLMap =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetHTTPProxiesSetURLMap{..}
           = go _thttppsumProject _thttppsumTargetHTTPProxy
               (Just AltJSON)

@@ -62,6 +62,8 @@ webResourceList = WebResourceList
 instance GoogleRequest WebResourceList where
         type Rs WebResourceList =
              SiteVerificationWebResourceListResponse
+        type Scopes WebResourceList =
+             '["https://www.googleapis.com/auth/siteverification"]
         requestClient WebResourceList{}
           = go (Just AltJSON) siteVerificationService
           where go

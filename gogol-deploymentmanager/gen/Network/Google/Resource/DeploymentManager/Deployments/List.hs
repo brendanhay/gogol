@@ -136,6 +136,11 @@ dlMaxResults
 
 instance GoogleRequest DeploymentsList where
         type Rs DeploymentsList = DeploymentsListResponse
+        type Scopes DeploymentsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient DeploymentsList{..}
           = go _dlProject _dlFilter _dlPageToken
               (Just _dlMaxResults)

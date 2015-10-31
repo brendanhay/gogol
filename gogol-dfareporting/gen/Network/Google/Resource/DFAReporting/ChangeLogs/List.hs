@@ -213,6 +213,8 @@ cllMaxResults
 
 instance GoogleRequest ChangeLogsList where
         type Rs ChangeLogsList = ChangeLogsListResponse
+        type Scopes ChangeLogsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ChangeLogsList{..}
           = go _cllProFileId (_cllUserProFileIds ^. _Default)
               _cllObjectType

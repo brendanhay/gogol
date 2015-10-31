@@ -98,6 +98,8 @@ pdDryRun = lens _pdDryRun (\ s a -> s{_pdDryRun = a})
 
 instance GoogleRequest ProductsDelete where
         type Rs ProductsDelete = ()
+        type Scopes ProductsDelete =
+             '["https://www.googleapis.com/auth/content"]
         requestClient ProductsDelete{..}
           = go _pdMerchantId _pdProductId _pdDryRun
               (Just AltJSON)

@@ -197,6 +197,8 @@ aolCallback
 
 instance GoogleRequest AppsOperationsList where
         type Rs AppsOperationsList = ListOperationsResponse
+        type Scopes AppsOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsOperationsList{..}
           = go _aolAppsId _aolXgafv _aolUploadProtocol
               (Just _aolPp)

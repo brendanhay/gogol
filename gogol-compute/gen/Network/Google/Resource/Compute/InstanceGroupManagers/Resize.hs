@@ -131,6 +131,9 @@ igmrZone = lens _igmrZone (\ s a -> s{_igmrZone = a})
 instance GoogleRequest InstanceGroupManagersResize
          where
         type Rs InstanceGroupManagersResize = Operation
+        type Scopes InstanceGroupManagersResize =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupManagersResize{..}
           = go _igmrProject _igmrZone _igmrInstanceGroupManager
               (Just _igmrSize)

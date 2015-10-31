@@ -120,6 +120,8 @@ assProductCode
 
 instance GoogleRequest AssociationSessionsStart where
         type Rs AssociationSessionsStart = AssociationSession
+        type Scopes AssociationSessionsStart =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AssociationSessionsStart{..}
           = go _assProductCode (Just _assWebsiteURL)
               _assWebsiteLocale

@@ -122,6 +122,8 @@ instance GoogleRequest
          ManagementWebPropertyAdWordsLinksUpdate where
         type Rs ManagementWebPropertyAdWordsLinksUpdate =
              EntityAdWordsLink
+        type Scopes ManagementWebPropertyAdWordsLinksUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
           ManagementWebPropertyAdWordsLinksUpdate{..}
           = go _mwpawluAccountId _mwpawluWebPropertyId

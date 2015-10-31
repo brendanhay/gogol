@@ -157,6 +157,8 @@ idCallback
 
 instance GoogleRequest InvitationsDelete where
         type Rs InvitationsDelete = Empty
+        type Scopes InvitationsDelete =
+             '["https://www.googleapis.com/auth/classroom.rosters"]
         requestClient InvitationsDelete{..}
           = go _idId _idXgafv _idUploadProtocol (Just _idPp)
               _idAccessToken

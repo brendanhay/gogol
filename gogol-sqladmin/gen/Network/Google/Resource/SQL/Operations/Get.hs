@@ -88,6 +88,9 @@ ogOperation
 
 instance GoogleRequest OperationsGet where
         type Rs OperationsGet = Operation
+        type Scopes OperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient OperationsGet{..}
           = go _ogProject _ogOperation (Just AltJSON)
               sQLAdminService

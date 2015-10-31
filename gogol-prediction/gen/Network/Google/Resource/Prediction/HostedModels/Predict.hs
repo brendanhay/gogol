@@ -102,6 +102,8 @@ hmpHostedModelName
 
 instance GoogleRequest HostedModelsPredict where
         type Rs HostedModelsPredict = Output
+        type Scopes HostedModelsPredict =
+             '["https://www.googleapis.com/auth/prediction"]
         requestClient HostedModelsPredict{..}
           = go _hmpProject _hmpHostedModelName (Just AltJSON)
               _hmpPayload

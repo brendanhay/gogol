@@ -102,6 +102,8 @@ ruPayload
 
 instance GoogleRequest ReportsUpdate where
         type Rs ReportsUpdate = Report
+        type Scopes ReportsUpdate =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsUpdate{..}
           = go _ruProFileId _ruReportId (Just AltJSON)
               _ruPayload

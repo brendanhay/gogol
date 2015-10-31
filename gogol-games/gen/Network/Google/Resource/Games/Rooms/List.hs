@@ -99,6 +99,9 @@ rMaxResults
 
 instance GoogleRequest RoomsList where
         type Rs RoomsList = RoomList
+        type Scopes RoomsList =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsList{..}
           = go _rLanguage _rPageToken _rMaxResults
               (Just AltJSON)

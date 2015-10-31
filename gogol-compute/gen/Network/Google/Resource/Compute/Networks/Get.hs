@@ -91,6 +91,10 @@ ngNetwork
 
 instance GoogleRequest NetworksGet where
         type Rs NetworksGet = Network
+        type Scopes NetworksGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient NetworksGet{..}
           = go _ngProject _ngNetwork (Just AltJSON)
               computeService

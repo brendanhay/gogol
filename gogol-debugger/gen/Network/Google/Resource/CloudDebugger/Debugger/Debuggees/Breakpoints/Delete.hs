@@ -185,6 +185,9 @@ ddbdCallback
 instance GoogleRequest
          DebuggerDebuggeesBreakpointsDelete where
         type Rs DebuggerDebuggeesBreakpointsDelete = Empty
+        type Scopes DebuggerDebuggeesBreakpointsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient DebuggerDebuggeesBreakpointsDelete{..}
           = go _ddbdDebuggeeId _ddbdBreakpointId _ddbdXgafv
               _ddbdUploadProtocol

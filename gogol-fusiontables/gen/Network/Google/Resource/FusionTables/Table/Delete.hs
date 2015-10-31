@@ -75,6 +75,8 @@ tddTableId
 
 instance GoogleRequest TableDelete where
         type Rs TableDelete = ()
+        type Scopes TableDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TableDelete{..}
           = go _tddTableId (Just AltJSON) fusionTablesService
           where go

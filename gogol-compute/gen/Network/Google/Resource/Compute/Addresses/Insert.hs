@@ -102,6 +102,9 @@ aiRegion = lens _aiRegion (\ s a -> s{_aiRegion = a})
 
 instance GoogleRequest AddressesInsert where
         type Rs AddressesInsert = Operation
+        type Scopes AddressesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient AddressesInsert{..}
           = go _aiProject _aiRegion (Just AltJSON) _aiPayload
               computeService

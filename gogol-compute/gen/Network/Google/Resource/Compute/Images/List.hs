@@ -149,6 +149,10 @@ illMaxResults
 
 instance GoogleRequest ImagesList where
         type Rs ImagesList = ImageList
+        type Scopes ImagesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ImagesList{..}
           = go _illProject _illFilter _illPageToken
               (Just _illMaxResults)

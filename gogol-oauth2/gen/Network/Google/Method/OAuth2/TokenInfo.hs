@@ -89,6 +89,7 @@ tIdToken = lens _tIdToken (\ s a -> s{_tIdToken = a})
 
 instance GoogleRequest TokenInfo' where
         type Rs TokenInfo' = TokenInfo
+        type Scopes TokenInfo' = '[]
         requestClient TokenInfo'{..}
           = go _tAccessToken _tTokenHandle _tIdToken
               (Just AltJSON)

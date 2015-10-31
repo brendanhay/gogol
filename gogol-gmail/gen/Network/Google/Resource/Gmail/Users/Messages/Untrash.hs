@@ -88,6 +88,9 @@ umuId = lens _umuId (\ s a -> s{_umuId = a})
 
 instance GoogleRequest UsersMessagesUntrash where
         type Rs UsersMessagesUntrash = Message
+        type Scopes UsersMessagesUntrash =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersMessagesUntrash{..}
           = go _umuUserId _umuId (Just AltJSON) gmailService
           where go

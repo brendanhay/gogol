@@ -76,6 +76,8 @@ udUserKey
 
 instance GoogleRequest UsersDelete where
         type Rs UsersDelete = ()
+        type Scopes UsersDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersDelete{..}
           = go _udUserKey (Just AltJSON) directoryService
           where go

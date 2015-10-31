@@ -106,6 +106,8 @@ instance GoogleRequest FloodlightActivitiesPatch
          where
         type Rs FloodlightActivitiesPatch =
              FloodlightActivity
+        type Scopes FloodlightActivitiesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivitiesPatch{..}
           = go _fapProFileId (Just _fapId) (Just AltJSON)
               _fapPayload

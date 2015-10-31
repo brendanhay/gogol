@@ -89,6 +89,8 @@ dgDealId
 
 instance GoogleRequest DealsGet where
         type Rs DealsGet = NegotiationDTO
+        type Scopes DealsGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient DealsGet{..}
           = go _dgDealId (Just AltJSON) _dgPayload
               adExchangeBuyerService

@@ -102,6 +102,9 @@ tvgdRegion
 
 instance GoogleRequest TargetVPNGatewaysDelete where
         type Rs TargetVPNGatewaysDelete = Operation
+        type Scopes TargetVPNGatewaysDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetVPNGatewaysDelete{..}
           = go _tvgdProject _tvgdRegion _tvgdTargetVPNGateway
               (Just AltJSON)

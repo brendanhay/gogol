@@ -78,6 +78,7 @@ luPayload
 instance GoogleRequest LineitemsUploadlineitems where
         type Rs LineitemsUploadlineitems =
              UploadLineItemsResponse
+        type Scopes LineitemsUploadlineitems = '[]
         requestClient LineitemsUploadlineitems{..}
           = go (Just AltJSON) _luPayload doubleClickBidsService
           where go

@@ -87,6 +87,9 @@ cpCircleId
 
 instance GoogleRequest CirclesPatch where
         type Rs CirclesPatch = Circle
+        type Scopes CirclesPatch =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient CirclesPatch{..}
           = go _cpCircleId (Just AltJSON) _cpPayload
               plusDomainsService

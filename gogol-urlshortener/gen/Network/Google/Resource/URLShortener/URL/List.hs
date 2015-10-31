@@ -86,6 +86,8 @@ ulProjection
 
 instance GoogleRequest URLList where
         type Rs URLList = URLHistory
+        type Scopes URLList =
+             '["https://www.googleapis.com/auth/urlshortener"]
         requestClient URLList{..}
           = go _ulStartToken _ulProjection (Just AltJSON)
               uRLShortenerService

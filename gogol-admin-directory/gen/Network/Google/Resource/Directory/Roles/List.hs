@@ -100,6 +100,9 @@ rlMaxResults
 
 instance GoogleRequest RolesList where
         type Rs RolesList = Roles
+        type Scopes RolesList =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient RolesList{..}
           = go _rlCustomer _rlPageToken _rlMaxResults
               (Just AltJSON)

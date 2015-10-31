@@ -78,6 +78,9 @@ agApplicationId
 
 instance GoogleRequest ApplicationsGet where
         type Rs ApplicationsGet = Application
+        type Scopes ApplicationsGet =
+             '["https://www.googleapis.com/auth/admin.datatransfer",
+               "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
         requestClient ApplicationsGet{..}
           = go _agApplicationId (Just AltJSON)
               dataTransferService

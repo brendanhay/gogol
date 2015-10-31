@@ -202,6 +202,9 @@ ulMaxResults
 
 instance GoogleRequest UsersList where
         type Rs UsersList = Users
+        type Scopes UsersList =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
         requestClient UsersList{..}
           = go _ulEvent _ulOrderBy (Just _ulViewType)
               _ulCustomFieldMask

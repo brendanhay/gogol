@@ -117,6 +117,9 @@ brlInstance
 
 instance GoogleRequest BackupRunsList where
         type Rs BackupRunsList = BackupRunsListResponse
+        type Scopes BackupRunsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient BackupRunsList{..}
           = go _brlProject _brlInstance _brlPageToken
               _brlMaxResults

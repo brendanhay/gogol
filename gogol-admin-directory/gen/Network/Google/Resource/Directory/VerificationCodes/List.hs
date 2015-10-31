@@ -81,6 +81,8 @@ vclUserKey
 
 instance GoogleRequest VerificationCodesList where
         type Rs VerificationCodesList = VerificationCodes
+        type Scopes VerificationCodesList =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient VerificationCodesList{..}
           = go _vclUserKey (Just AltJSON) directoryService
           where go

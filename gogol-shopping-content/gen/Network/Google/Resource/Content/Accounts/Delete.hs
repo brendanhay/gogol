@@ -99,6 +99,8 @@ adDryRun = lens _adDryRun (\ s a -> s{_adDryRun = a})
 
 instance GoogleRequest AccountsDelete where
         type Rs AccountsDelete = ()
+        type Scopes AccountsDelete =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountsDelete{..}
           = go _adMerchantId _adAccountId _adDryRun
               (Just AltJSON)

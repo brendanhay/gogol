@@ -132,6 +132,8 @@ mcmpAccountId
 instance GoogleRequest ManagementCustomMetricsPatch
          where
         type Rs ManagementCustomMetricsPatch = CustomMetric
+        type Scopes ManagementCustomMetricsPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementCustomMetricsPatch{..}
           = go _mcmpAccountId _mcmpWebPropertyId
               _mcmpCustomMetricId

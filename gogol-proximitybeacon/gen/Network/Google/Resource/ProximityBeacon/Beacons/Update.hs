@@ -178,6 +178,7 @@ buCallback
 
 instance GoogleRequest BeaconsUpdate where
         type Rs BeaconsUpdate = Beacon
+        type Scopes BeaconsUpdate = '[]
         requestClient BeaconsUpdate{..}
           = go _buBeaconName _buXgafv _buUploadProtocol
               (Just _buPp)

@@ -172,6 +172,8 @@ balCallback
 instance GoogleRequest BillingAccountsList where
         type Rs BillingAccountsList =
              ListBillingAccountsResponse
+        type Scopes BillingAccountsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsList{..}
           = go _balXgafv _balUploadProtocol (Just _balPp)
               _balAccessToken

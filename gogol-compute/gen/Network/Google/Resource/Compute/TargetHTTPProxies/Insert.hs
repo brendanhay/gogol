@@ -94,6 +94,9 @@ thttppiPayload
 
 instance GoogleRequest TargetHTTPProxiesInsert where
         type Rs TargetHTTPProxiesInsert = Operation
+        type Scopes TargetHTTPProxiesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetHTTPProxiesInsert{..}
           = go _thttppiProject (Just AltJSON) _thttppiPayload
               computeService

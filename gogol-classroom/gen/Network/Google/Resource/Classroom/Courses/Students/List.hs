@@ -188,6 +188,11 @@ cslCallback
 
 instance GoogleRequest CoursesStudentsList where
         type Rs CoursesStudentsList = ListStudentsResponse
+        type Scopes CoursesStudentsList =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient CoursesStudentsList{..}
           = go _cslCourseId _cslXgafv _cslUploadProtocol
               (Just _cslPp)

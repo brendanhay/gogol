@@ -164,6 +164,8 @@ topCallback
 
 instance GoogleRequest TransferOperationsPause where
         type Rs TransferOperationsPause = Empty
+        type Scopes TransferOperationsPause =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsPause{..}
           = go _topName _topXgafv _topUploadProtocol
               (Just _topPp)

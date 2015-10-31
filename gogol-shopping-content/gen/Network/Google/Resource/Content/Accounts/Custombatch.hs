@@ -90,6 +90,8 @@ aaDryRun = lens _aaDryRun (\ s a -> s{_aaDryRun = a})
 instance GoogleRequest AccountsCustombatch where
         type Rs AccountsCustombatch =
              AccountsCustomBatchResponse
+        type Scopes AccountsCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountsCustombatch{..}
           = go _aaDryRun (Just AltJSON) _aaPayload
               shoppingContentService

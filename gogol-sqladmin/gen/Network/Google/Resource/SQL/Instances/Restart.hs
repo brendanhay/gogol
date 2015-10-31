@@ -89,6 +89,9 @@ irInstance
 
 instance GoogleRequest InstancesRestart where
         type Rs InstancesRestart = Operation
+        type Scopes InstancesRestart =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesRestart{..}
           = go _irProject _irInstance (Just AltJSON)
               sQLAdminService

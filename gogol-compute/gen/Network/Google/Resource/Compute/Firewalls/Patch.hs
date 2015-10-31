@@ -103,6 +103,9 @@ fpFirewall
 
 instance GoogleRequest FirewallsPatch where
         type Rs FirewallsPatch = Operation
+        type Scopes FirewallsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient FirewallsPatch{..}
           = go _fpProject _fpFirewall (Just AltJSON) _fpPayload
               computeService

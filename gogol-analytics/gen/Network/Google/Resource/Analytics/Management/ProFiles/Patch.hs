@@ -119,6 +119,8 @@ mpfpAccountId
 
 instance GoogleRequest ManagementProFilesPatch where
         type Rs ManagementProFilesPatch = ProFile
+        type Scopes ManagementProFilesPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementProFilesPatch{..}
           = go _mpfpAccountId _mpfpWebPropertyId _mpfpProFileId
               (Just AltJSON)

@@ -141,6 +141,10 @@ instance GoogleRequest
          TargetVPNGatewaysAggregatedList where
         type Rs TargetVPNGatewaysAggregatedList =
              TargetVPNGatewayAggregatedList
+        type Scopes TargetVPNGatewaysAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetVPNGatewaysAggregatedList{..}
           = go _tvgalProject _tvgalFilter _tvgalPageToken
               (Just _tvgalMaxResults)

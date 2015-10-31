@@ -89,6 +89,9 @@ fdFirewall
 
 instance GoogleRequest FirewallsDelete where
         type Rs FirewallsDelete = Operation
+        type Scopes FirewallsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient FirewallsDelete{..}
           = go _fdProject _fdFirewall (Just AltJSON)
               computeService

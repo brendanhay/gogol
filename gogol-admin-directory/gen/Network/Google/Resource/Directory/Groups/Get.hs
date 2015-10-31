@@ -76,6 +76,9 @@ ggGroupKey
 
 instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Group
+        type Scopes GroupsGet =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
         requestClient GroupsGet{..}
           = go _ggGroupKey (Just AltJSON) directoryService
           where go

@@ -154,6 +154,9 @@ cllMaxResults
 
 instance GoogleRequest CalendarListList where
         type Rs CalendarListList = CalendarList
+        type Scopes CalendarListList =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient CalendarListList{..}
           = go _cllSyncToken _cllMinAccessRole _cllShowDeleted
               _cllShowHidden

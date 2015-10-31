@@ -108,6 +108,8 @@ instance GoogleRequest CreativeFieldValuesUpdate
          where
         type Rs CreativeFieldValuesUpdate =
              CreativeFieldValue
+        type Scopes CreativeFieldValuesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldValuesUpdate{..}
           = go _cfvuProFileId _cfvuCreativeFieldId
               (Just AltJSON)

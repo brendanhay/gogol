@@ -89,6 +89,8 @@ apgPermissionId
 
 instance GoogleRequest AccountsPermissionsGet where
         type Rs AccountsPermissionsGet = UserAccess
+        type Scopes AccountsPermissionsGet =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
         requestClient AccountsPermissionsGet{..}
           = go _apgAccountId _apgPermissionId (Just AltJSON)
               tagManagerService

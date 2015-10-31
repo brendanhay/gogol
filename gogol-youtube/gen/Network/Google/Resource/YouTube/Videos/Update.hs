@@ -123,6 +123,10 @@ vuOnBehalfOfContentOwner
 
 instance GoogleRequest VideosUpdate where
         type Rs VideosUpdate = Video
+        type Scopes VideosUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosUpdate{..}
           = go (Just _vuPart) _vuOnBehalfOfContentOwner
               (Just AltJSON)

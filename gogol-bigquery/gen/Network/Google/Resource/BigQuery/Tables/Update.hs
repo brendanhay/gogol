@@ -117,6 +117,9 @@ tuTableId
 
 instance GoogleRequest TablesUpdate where
         type Rs TablesUpdate = Table
+        type Scopes TablesUpdate =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient TablesUpdate{..}
           = go _tuProjectId _tuDataSetId _tuTableId
               (Just AltJSON)

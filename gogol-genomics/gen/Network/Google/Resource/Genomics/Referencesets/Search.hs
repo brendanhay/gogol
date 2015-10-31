@@ -165,6 +165,10 @@ rsCallback
 instance GoogleRequest ReferencesetsSearch where
         type Rs ReferencesetsSearch =
              SearchReferenceSetsResponse
+        type Scopes ReferencesetsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient ReferencesetsSearch{..}
           = go _rsXgafv _rsUploadProtocol (Just _rsPp)
               _rsAccessToken

@@ -122,6 +122,10 @@ instance GoogleRequest ManagementUnSampledReportsGet
          where
         type Rs ManagementUnSampledReportsGet =
              UnSampledReport
+        type Scopes ManagementUnSampledReportsGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementUnSampledReportsGet{..}
           = go _musrgAccountId _musrgWebPropertyId
               _musrgProFileId

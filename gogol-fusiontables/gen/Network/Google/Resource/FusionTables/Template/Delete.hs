@@ -88,6 +88,8 @@ tTableId = lens _tTableId (\ s a -> s{_tTableId = a})
 
 instance GoogleRequest TemplateDelete where
         type Rs TemplateDelete = ()
+        type Scopes TemplateDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TemplateDelete{..}
           = go _tTableId _tTemplateId (Just AltJSON)
               fusionTablesService

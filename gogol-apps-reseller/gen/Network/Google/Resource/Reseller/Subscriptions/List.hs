@@ -127,6 +127,9 @@ slMaxResults
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = Subscriptions
+        type Scopes SubscriptionsList =
+             '["https://www.googleapis.com/auth/apps.order",
+               "https://www.googleapis.com/auth/apps.order.readonly"]
         requestClient SubscriptionsList{..}
           = go _slCustomerNamePrefix _slCustomerId
               _slCustomerAuthToken

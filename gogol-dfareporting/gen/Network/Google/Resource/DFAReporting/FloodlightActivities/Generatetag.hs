@@ -94,6 +94,8 @@ instance GoogleRequest
          FloodlightActivitiesGeneratetag where
         type Rs FloodlightActivitiesGeneratetag =
              FloodlightActivitiesGenerateTagResponse
+        type Scopes FloodlightActivitiesGeneratetag =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivitiesGeneratetag{..}
           = go _fagProFileId _fagFloodlightActivityId
               (Just AltJSON)

@@ -138,6 +138,11 @@ clSortBy = lens _clSortBy (\ s a -> s{_clSortBy = a})
 
 instance GoogleRequest ChangesList where
         type Rs ChangesList = ChangesListResponse
+        type Scopes ChangesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ChangesList{..}
           = go _clProject _clManagedZone _clSortOrder
               _clPageToken

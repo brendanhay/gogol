@@ -86,6 +86,8 @@ cuId = lens _cuId (\ s a -> s{_cuId = a})
 
 instance GoogleRequest ContactsUpdate where
         type Rs ContactsUpdate = Contact
+        type Scopes ContactsUpdate =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient ContactsUpdate{..}
           = go _cuId (Just AltJSON) _cuPayload mirrorService
           where go

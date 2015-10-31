@@ -168,6 +168,8 @@ mcsvlNonce
 instance GoogleRequest MyConfigSyncVolumeLicenses
          where
         type Rs MyConfigSyncVolumeLicenses = Volumes
+        type Scopes MyConfigSyncVolumeLicenses =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyConfigSyncVolumeLicenses{..}
           = go (Just _mcsvlSource) (Just _mcsvlNonce)
               (Just _mcsvlCpksver)

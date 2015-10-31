@@ -130,6 +130,8 @@ olcvPageSize
 instance GoogleRequest OnboardingListCategoryVolumes
          where
         type Rs OnboardingListCategoryVolumes = Volume2
+        type Scopes OnboardingListCategoryVolumes =
+             '["https://www.googleapis.com/auth/books"]
         requestClient OnboardingListCategoryVolumes{..}
           = go _olcvLocale _olcvMaxAllowedMaturityRating
               (_olcvCategoryId ^. _Default)

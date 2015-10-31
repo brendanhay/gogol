@@ -92,6 +92,8 @@ icDryRun = lens _icDryRun (\ s a -> s{_icDryRun = a})
 instance GoogleRequest InventoryCustombatch where
         type Rs InventoryCustombatch =
              InventoryCustomBatchResponse
+        type Scopes InventoryCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient InventoryCustombatch{..}
           = go _icDryRun (Just AltJSON) _icPayload
               shoppingContentService

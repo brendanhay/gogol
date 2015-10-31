@@ -88,6 +88,8 @@ pcDryRun = lens _pcDryRun (\ s a -> s{_pcDryRun = a})
 instance GoogleRequest ProductsCustombatch where
         type Rs ProductsCustombatch =
              ProductsCustomBatchResponse
+        type Scopes ProductsCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient ProductsCustombatch{..}
           = go _pcDryRun (Just AltJSON) _pcPayload
               shoppingContentService

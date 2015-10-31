@@ -131,6 +131,9 @@ meuExperimentId
 instance GoogleRequest ManagementExperimentsUpdate
          where
         type Rs ManagementExperimentsUpdate = Experiment
+        type Scopes ManagementExperimentsUpdate =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementExperimentsUpdate{..}
           = go _meuAccountId _meuWebPropertyId _meuProFileId
               _meuExperimentId

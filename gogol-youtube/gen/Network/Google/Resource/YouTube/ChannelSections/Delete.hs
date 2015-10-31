@@ -97,6 +97,10 @@ csdId = lens _csdId (\ s a -> s{_csdId = a})
 
 instance GoogleRequest ChannelSectionsDelete where
         type Rs ChannelSectionsDelete = ()
+        type Scopes ChannelSectionsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient ChannelSectionsDelete{..}
           = go (Just _csdId) _csdOnBehalfOfContentOwner
               (Just AltJSON)

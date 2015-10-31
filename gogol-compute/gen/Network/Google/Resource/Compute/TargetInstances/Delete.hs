@@ -101,6 +101,9 @@ tidZone = lens _tidZone (\ s a -> s{_tidZone = a})
 
 instance GoogleRequest TargetInstancesDelete where
         type Rs TargetInstancesDelete = Operation
+        type Scopes TargetInstancesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetInstancesDelete{..}
           = go _tidProject _tidZone _tidTargetInstance
               (Just AltJSON)

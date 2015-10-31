@@ -122,6 +122,7 @@ elMaxResults
 
 instance GoogleRequest EntitlementsList where
         type Rs EntitlementsList = EntitlementsListResponse
+        type Scopes EntitlementsList = '[]
         requestClient EntitlementsList{..}
           = go _elPackageName _elToken _elStartIndex
               _elProductId

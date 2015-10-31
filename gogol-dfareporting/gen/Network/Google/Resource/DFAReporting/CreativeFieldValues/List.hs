@@ -173,6 +173,8 @@ cfvlMaxResults
 instance GoogleRequest CreativeFieldValuesList where
         type Rs CreativeFieldValuesList =
              CreativeFieldValuesListResponse
+        type Scopes CreativeFieldValuesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldValuesList{..}
           = go _cfvlProFileId _cfvlCreativeFieldId
               _cfvlSearchString

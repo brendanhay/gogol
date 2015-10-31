@@ -102,6 +102,8 @@ orOrderId
 
 instance GoogleRequest OrdersRefund where
         type Rs OrdersRefund = OrdersRefundResponse
+        type Scopes OrdersRefund =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersRefund{..}
           = go _orMerchantId _orOrderId (Just AltJSON)
               _orPayload

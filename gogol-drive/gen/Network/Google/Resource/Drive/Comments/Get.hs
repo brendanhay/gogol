@@ -100,6 +100,10 @@ cgIncludeDeleted
 
 instance GoogleRequest CommentsGet where
         type Rs CommentsGet = Comment
+        type Scopes CommentsGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient CommentsGet{..}
           = go _cgFileId _cgCommentId (Just _cgIncludeDeleted)
               (Just AltJSON)

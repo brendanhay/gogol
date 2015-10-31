@@ -109,6 +109,8 @@ duDryRun = lens _duDryRun (\ s a -> s{_duDryRun = a})
 
 instance GoogleRequest DatafeedsUpdate where
         type Rs DatafeedsUpdate = Datafeed
+        type Scopes DatafeedsUpdate =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsUpdate{..}
           = go _duMerchantId _duDatafeedId _duDryRun
               (Just AltJSON)

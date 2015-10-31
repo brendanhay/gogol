@@ -131,6 +131,9 @@ arsgMaxResults
 instance GoogleRequest AccountsReportsSavedGenerate
          where
         type Rs AccountsReportsSavedGenerate = Report
+        type Scopes AccountsReportsSavedGenerate =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsReportsSavedGenerate{..}
           = go _arsgAccountId _arsgSavedReportId _arsgLocale
               _arsgStartIndex

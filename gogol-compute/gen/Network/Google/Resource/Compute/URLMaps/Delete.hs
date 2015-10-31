@@ -89,6 +89,9 @@ umdProject
 
 instance GoogleRequest URLMapsDelete where
         type Rs URLMapsDelete = Operation
+        type Scopes URLMapsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient URLMapsDelete{..}
           = go _umdProject _umdURLMap (Just AltJSON)
               computeService

@@ -112,6 +112,8 @@ auAutoscaler
 
 instance GoogleRequest AutoscalersUpdate where
         type Rs AutoscalersUpdate = Operation
+        type Scopes AutoscalersUpdate =
+             '["https://www.googleapis.com/auth/compute"]
         requestClient AutoscalersUpdate{..}
           = go _auProject _auZone _auAutoscaler (Just AltJSON)
               _auPayload

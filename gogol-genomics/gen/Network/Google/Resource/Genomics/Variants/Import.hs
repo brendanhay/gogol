@@ -181,6 +181,10 @@ viCallback
 
 instance GoogleRequest VariantsImport where
         type Rs VariantsImport = Operation
+        type Scopes VariantsImport =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.read_write",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantsImport{..}
           = go _viXgafv _viUploadProtocol (Just _viPp)
               _viAccessToken

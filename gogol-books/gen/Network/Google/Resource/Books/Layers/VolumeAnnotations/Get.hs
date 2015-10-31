@@ -127,6 +127,8 @@ lvagLayerId
 instance GoogleRequest LayersVolumeAnnotationsGet
          where
         type Rs LayersVolumeAnnotationsGet = Volumeannotation
+        type Scopes LayersVolumeAnnotationsGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient LayersVolumeAnnotationsGet{..}
           = go _lvagVolumeId _lvagLayerId _lvagAnnotationId
               _lvagLocale

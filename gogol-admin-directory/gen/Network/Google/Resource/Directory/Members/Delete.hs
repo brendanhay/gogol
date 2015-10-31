@@ -89,6 +89,9 @@ mdGroupKey
 
 instance GoogleRequest MembersDelete where
         type Rs MembersDelete = ()
+        type Scopes MembersDelete =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member"]
         requestClient MembersDelete{..}
           = go _mdGroupKey _mdMemberKey (Just AltJSON)
               directoryService

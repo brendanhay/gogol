@@ -61,6 +61,8 @@ contactsList = ContactsList
 
 instance GoogleRequest ContactsList where
         type Rs ContactsList = ContactsListResponse
+        type Scopes ContactsList =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient ContactsList{}
           = go (Just AltJSON) mirrorService
           where go

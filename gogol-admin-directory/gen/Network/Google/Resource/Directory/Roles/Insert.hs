@@ -89,6 +89,8 @@ riCustomer
 
 instance GoogleRequest RolesInsert where
         type Rs RolesInsert = Role
+        type Scopes RolesInsert =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
         requestClient RolesInsert{..}
           = go _riCustomer (Just AltJSON) _riPayload
               directoryService

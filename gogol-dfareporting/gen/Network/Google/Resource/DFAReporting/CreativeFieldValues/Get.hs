@@ -106,6 +106,8 @@ cfvgId
 
 instance GoogleRequest CreativeFieldValuesGet where
         type Rs CreativeFieldValuesGet = CreativeFieldValue
+        type Scopes CreativeFieldValuesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldValuesGet{..}
           = go _cfvgProFileId _cfvgCreativeFieldId _cfvgId
               (Just AltJSON)

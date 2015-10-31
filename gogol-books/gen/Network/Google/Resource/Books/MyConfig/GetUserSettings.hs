@@ -61,6 +61,8 @@ myConfigGetUserSettings = MyConfigGetUserSettings
 
 instance GoogleRequest MyConfigGetUserSettings where
         type Rs MyConfigGetUserSettings = UserSettings
+        type Scopes MyConfigGetUserSettings =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyConfigGetUserSettings{}
           = go (Just AltJSON) booksService
           where go

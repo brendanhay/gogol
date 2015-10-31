@@ -91,6 +91,12 @@ iiPayload
 
 instance GoogleRequest ImagesInsert where
         type Rs ImagesInsert = Operation
+        type Scopes ImagesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ImagesInsert{..}
           = go _iiProject (Just AltJSON) _iiPayload
               computeService

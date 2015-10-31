@@ -92,6 +92,10 @@ dsaiDataSetId
 
 instance GoogleRequest DataSetsAllocateIds where
         type Rs DataSetsAllocateIds = AllocateIdsResponse
+        type Scopes DataSetsAllocateIds =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/datastore",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient DataSetsAllocateIds{..}
           = go _dsaiDataSetId (Just AltJSON) _dsaiPayload
               datastoreService

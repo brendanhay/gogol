@@ -88,6 +88,9 @@ tProject = lens _tProject (\ s a -> s{_tProject = a})
 
 instance GoogleRequest TasksList where
         type Rs TasksList = Tasks2
+        type Scopes TasksList =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksList{..}
           = go _tProject _tTaskqueue (Just AltJSON)
               taskQueueService

@@ -92,6 +92,8 @@ mdiProposalId
 instance GoogleRequest MarketplaceDealsInsert where
         type Rs MarketplaceDealsInsert =
              AddOrderDealsResponse
+        type Scopes MarketplaceDealsInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceDealsInsert{..}
           = go _mdiProposalId (Just AltJSON) _mdiPayload
               adExchangeBuyerService

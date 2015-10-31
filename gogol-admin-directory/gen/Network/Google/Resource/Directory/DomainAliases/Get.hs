@@ -90,6 +90,9 @@ dagCustomer
 
 instance GoogleRequest DomainAliasesGet where
         type Rs DomainAliasesGet = DomainAlias
+        type Scopes DomainAliasesGet =
+             '["https://www.googleapis.com/auth/admin.directory.domain",
+               "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
         requestClient DomainAliasesGet{..}
           = go _dagCustomer _dagDomainAliasName (Just AltJSON)
               directoryService

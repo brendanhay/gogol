@@ -77,6 +77,8 @@ tiPayload
 
 instance GoogleRequest TransfersInsert where
         type Rs TransfersInsert = DataTransfer
+        type Scopes TransfersInsert =
+             '["https://www.googleapis.com/auth/admin.datatransfer"]
         requestClient TransfersInsert{..}
           = go (Just AltJSON) _tiPayload dataTransferService
           where go

@@ -105,6 +105,9 @@ accgAccountId
 instance GoogleRequest AccountsCustomChannelsGet
          where
         type Rs AccountsCustomChannelsGet = CustomChannel
+        type Scopes AccountsCustomChannelsGet =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsCustomChannelsGet{..}
           = go _accgAccountId _accgAdClientId
               _accgCustomChannelId

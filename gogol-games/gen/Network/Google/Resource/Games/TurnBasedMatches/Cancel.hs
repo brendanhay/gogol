@@ -76,6 +76,9 @@ tbmcMatchId
 
 instance GoogleRequest TurnBasedMatchesCancel where
         type Rs TurnBasedMatchesCancel = ()
+        type Scopes TurnBasedMatchesCancel =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesCancel{..}
           = go _tbmcMatchId (Just AltJSON) gamesService
           where go

@@ -91,6 +91,9 @@ niPayload
 
 instance GoogleRequest NetworksInsert where
         type Rs NetworksInsert = Operation
+        type Scopes NetworksInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient NetworksInsert{..}
           = go _niProject (Just AltJSON) _niPayload
               computeService

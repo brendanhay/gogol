@@ -121,6 +121,8 @@ ppPublish
 
 instance GoogleRequest PagesPatch where
         type Rs PagesPatch = Page
+        type Scopes PagesPatch =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PagesPatch{..}
           = go _ppBlogId _ppPageId _ppRevert _ppPublish
               (Just AltJSON)

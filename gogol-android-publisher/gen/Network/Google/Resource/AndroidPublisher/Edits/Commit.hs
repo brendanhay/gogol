@@ -89,6 +89,8 @@ ecEditId = lens _ecEditId (\ s a -> s{_ecEditId = a})
 
 instance GoogleRequest EditsCommit where
         type Rs EditsCommit = AppEdit
+        type Scopes EditsCommit =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsCommit{..}
           = go _ecPackageName _ecEditId (Just AltJSON)
               androidPublisherService

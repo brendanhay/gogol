@@ -103,6 +103,10 @@ cMaxResults
 
 instance GoogleRequest CirclesList where
         type Rs CirclesList = CircleFeed
+        type Scopes CirclesList =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient CirclesList{..}
           = go _cUserId _cPageToken (Just _cMaxResults)
               (Just AltJSON)

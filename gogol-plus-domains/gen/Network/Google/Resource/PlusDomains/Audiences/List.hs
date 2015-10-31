@@ -103,6 +103,10 @@ aMaxResults
 
 instance GoogleRequest AudiencesList where
         type Rs AudiencesList = AudiencesFeed
+        type Scopes AudiencesList =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient AudiencesList{..}
           = go _aUserId _aPageToken (Just _aMaxResults)
               (Just AltJSON)

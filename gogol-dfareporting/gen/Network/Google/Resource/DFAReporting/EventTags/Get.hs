@@ -89,6 +89,8 @@ etgId
 
 instance GoogleRequest EventTagsGet where
         type Rs EventTagsGet = EventTag
+        type Scopes EventTagsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient EventTagsGet{..}
           = go _etgProFileId _etgId (Just AltJSON)
               dFAReportingService

@@ -80,6 +80,7 @@ instance GoogleRequest RelyingPartyDownloadAccount
          where
         type Rs RelyingPartyDownloadAccount =
              DownloadAccountResponse
+        type Scopes RelyingPartyDownloadAccount = '[]
         requestClient RelyingPartyDownloadAccount{..}
           = go (Just AltJSON) _rpdaPayload
               identityToolkitService

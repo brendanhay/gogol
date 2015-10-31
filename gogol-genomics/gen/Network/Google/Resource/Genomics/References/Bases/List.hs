@@ -218,6 +218,10 @@ rblCallback
 
 instance GoogleRequest ReferencesBasesList where
         type Rs ReferencesBasesList = ListBasesResponse
+        type Scopes ReferencesBasesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient ReferencesBasesList{..}
           = go _rblReferenceId _rblXgafv _rblUploadProtocol
               (Just _rblPp)

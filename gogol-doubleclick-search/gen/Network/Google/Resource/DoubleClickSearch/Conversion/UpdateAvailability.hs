@@ -81,6 +81,8 @@ instance GoogleRequest ConversionUpdateAvailability
          where
         type Rs ConversionUpdateAvailability =
              UpdateAvailabilityResponse
+        type Scopes ConversionUpdateAvailability =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ConversionUpdateAvailability{..}
           = go (Just AltJSON) _cuaPayload
               doubleClickSearchService

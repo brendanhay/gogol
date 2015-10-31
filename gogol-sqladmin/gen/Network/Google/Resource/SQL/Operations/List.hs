@@ -115,6 +115,9 @@ olInstance
 
 instance GoogleRequest OperationsList where
         type Rs OperationsList = OperationsListResponse
+        type Scopes OperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient OperationsList{..}
           = go _olProject (Just _olInstance) _olPageToken
               _olMaxResults

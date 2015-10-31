@@ -105,6 +105,10 @@ tvggRegion
 
 instance GoogleRequest TargetVPNGatewaysGet where
         type Rs TargetVPNGatewaysGet = TargetVPNGateway
+        type Scopes TargetVPNGatewaysGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetVPNGatewaysGet{..}
           = go _tvggProject _tvggRegion _tvggTargetVPNGateway
               (Just AltJSON)

@@ -89,6 +89,8 @@ pcdConfigId
 
 instance GoogleRequest PretargetingConfigDelete where
         type Rs PretargetingConfigDelete = ()
+        type Scopes PretargetingConfigDelete =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient PretargetingConfigDelete{..}
           = go _pcdAccountId _pcdConfigId (Just AltJSON)
               adExchangeBuyerService

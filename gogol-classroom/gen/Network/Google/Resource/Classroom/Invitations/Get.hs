@@ -157,6 +157,9 @@ igCallback
 
 instance GoogleRequest InvitationsGet where
         type Rs InvitationsGet = Invitation
+        type Scopes InvitationsGet =
+             '["https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient InvitationsGet{..}
           = go _igId _igXgafv _igUploadProtocol (Just _igPp)
               _igAccessToken

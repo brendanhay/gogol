@@ -104,6 +104,8 @@ edpEditId
 
 instance GoogleRequest EditsDetailsPatch where
         type Rs EditsDetailsPatch = AppDetails
+        type Scopes EditsDetailsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsDetailsPatch{..}
           = go _edpPackageName _edpEditId (Just AltJSON)
               _edpPayload

@@ -118,6 +118,7 @@ tlTarget = lens _tlTarget (\ s a -> s{_tlTarget = a})
 
 instance GoogleRequest TranslationsList where
         type Rs TranslationsList = TranslationsListResponse
+        type Scopes TranslationsList = '[]
         requestClient TranslationsList{..}
           = go _tlQ (Just _tlTarget) _tlFormat _tlSource
               (_tlCid ^. _Default)

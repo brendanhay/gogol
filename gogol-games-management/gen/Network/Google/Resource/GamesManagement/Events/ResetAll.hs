@@ -65,6 +65,9 @@ eventsResetAll = EventsResetAll
 
 instance GoogleRequest EventsResetAll where
         type Rs EventsResetAll = ()
+        type Scopes EventsResetAll =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient EventsResetAll{}
           = go (Just AltJSON) gamesManagementService
           where go

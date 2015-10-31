@@ -99,6 +99,8 @@ capClientAccountId
 
 instance GoogleRequest ClientAccessPatch where
         type Rs ClientAccessPatch = ClientAccessCapabilities
+        type Scopes ClientAccessPatch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ClientAccessPatch{..}
           = go _capClientAccountId (Just _capSponsorAccountId)
               (Just AltJSON)

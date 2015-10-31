@@ -111,6 +111,9 @@ isInstance
 
 instance GoogleRequest InstancesStop where
         type Rs InstancesStop = Operation
+        type Scopes InstancesStop =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesStop{..}
           = go _isProject _isZone _isInstance (Just AltJSON)
               computeService

@@ -355,6 +355,8 @@ pglMinEndDate
 instance GoogleRequest PlacementGroupsList where
         type Rs PlacementGroupsList =
              PlacementGroupsListResponse
+        type Scopes PlacementGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementGroupsList{..}
           = go _pglProFileId
               (_pglPlacementStrategyIds ^. _Default)

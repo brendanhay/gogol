@@ -80,6 +80,8 @@ aplAccountId
 instance GoogleRequest AccountsPermissionsList where
         type Rs AccountsPermissionsList =
              ListAccountUsersResponse
+        type Scopes AccountsPermissionsList =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
         requestClient AccountsPermissionsList{..}
           = go _aplAccountId (Just AltJSON) tagManagerService
           where go

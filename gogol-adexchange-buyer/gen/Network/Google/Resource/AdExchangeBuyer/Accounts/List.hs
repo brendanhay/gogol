@@ -60,6 +60,8 @@ accountsList' = AccountsList'
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsList
+        type Scopes AccountsList' =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient AccountsList'{}
           = go (Just AltJSON) adExchangeBuyerService
           where go

@@ -104,6 +104,9 @@ rucZone = lens _rucZone (\ s a -> s{_rucZone = a})
 
 instance GoogleRequest RollingUpdatesCancel where
         type Rs RollingUpdatesCancel = Operation
+        type Scopes RollingUpdatesCancel =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
         requestClient RollingUpdatesCancel{..}
           = go _rucProject _rucZone _rucRollingUpdate
               (Just AltJSON)

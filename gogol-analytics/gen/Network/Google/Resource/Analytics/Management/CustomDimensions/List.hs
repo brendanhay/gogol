@@ -122,6 +122,9 @@ instance GoogleRequest ManagementCustomDimensionsList
          where
         type Rs ManagementCustomDimensionsList =
              CustomDimensions
+        type Scopes ManagementCustomDimensionsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementCustomDimensionsList{..}
           = go _mcdlAccountId _mcdlWebPropertyId
               _mcdlStartIndex

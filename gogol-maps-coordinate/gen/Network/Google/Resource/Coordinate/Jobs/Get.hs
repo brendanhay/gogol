@@ -87,6 +87,9 @@ jgTeamId = lens _jgTeamId (\ s a -> s{_jgTeamId = a})
 
 instance GoogleRequest JobsGet where
         type Rs JobsGet = Job
+        type Scopes JobsGet =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
         requestClient JobsGet{..}
           = go _jgTeamId _jgJobId (Just AltJSON)
               mapsCoordinateService

@@ -105,6 +105,9 @@ reaFileId
 
 instance GoogleRequest RealtimeUpdate where
         type Rs RealtimeUpdate = ()
+        type Scopes RealtimeUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient RealtimeUpdate{..}
           = go _reaFileId _reaBaseRevision (Just AltJSON)
               driveService
@@ -115,6 +118,8 @@ instance GoogleRequest RealtimeUpdate where
 instance GoogleRequest (MediaUpload RealtimeUpdate)
          where
         type Rs (MediaUpload RealtimeUpdate) = ()
+        type Scopes (MediaUpload RealtimeUpdate) =
+             Scopes RealtimeUpdate
         requestClient (MediaUpload RealtimeUpdate{..} body)
           = go _reaFileId _reaBaseRevision (Just AltJSON)
               (Just AltMedia)

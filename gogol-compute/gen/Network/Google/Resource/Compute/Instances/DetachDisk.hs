@@ -114,6 +114,9 @@ iddInstance
 
 instance GoogleRequest InstancesDetachDisk where
         type Rs InstancesDetachDisk = Operation
+        type Scopes InstancesDetachDisk =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesDetachDisk{..}
           = go _iddProject _iddZone _iddInstance
               (Just _iddDeviceName)

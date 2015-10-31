@@ -131,6 +131,10 @@ uInternalDateSource
 
 instance GoogleRequest UsersMessagesInsert where
         type Rs UsersMessagesInsert = Message
+        type Scopes UsersMessagesInsert =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.insert",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersMessagesInsert{..}
           = go _uUserId (Just _uDeleted)
               (Just _uInternalDateSource)
@@ -145,6 +149,8 @@ instance GoogleRequest UsersMessagesInsert where
 instance GoogleRequest
          (MediaUpload UsersMessagesInsert) where
         type Rs (MediaUpload UsersMessagesInsert) = Message
+        type Scopes (MediaUpload UsersMessagesInsert) =
+             Scopes UsersMessagesInsert
         requestClient
           (MediaUpload UsersMessagesInsert{..} body)
           = go _uUserId (Just _uDeleted)

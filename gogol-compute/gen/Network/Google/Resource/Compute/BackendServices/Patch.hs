@@ -109,6 +109,9 @@ bspBackendService
 
 instance GoogleRequest BackendServicesPatch where
         type Rs BackendServicesPatch = Operation
+        type Scopes BackendServicesPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient BackendServicesPatch{..}
           = go _bspProject _bspBackendService (Just AltJSON)
               _bspPayload

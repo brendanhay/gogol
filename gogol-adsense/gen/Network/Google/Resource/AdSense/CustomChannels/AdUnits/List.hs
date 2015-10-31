@@ -132,6 +132,9 @@ ccaulMaxResults
 instance GoogleRequest CustomChannelsAdUnitsList
          where
         type Rs CustomChannelsAdUnitsList = AdUnits
+        type Scopes CustomChannelsAdUnitsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient CustomChannelsAdUnitsList{..}
           = go _ccaulAdClientId _ccaulCustomChannelId
               _ccaulIncludeInactive

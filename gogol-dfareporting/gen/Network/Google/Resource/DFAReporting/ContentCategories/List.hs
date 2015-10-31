@@ -158,6 +158,8 @@ cclMaxResults
 instance GoogleRequest ContentCategoriesList where
         type Rs ContentCategoriesList =
              ContentCategoriesListResponse
+        type Scopes ContentCategoriesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ContentCategoriesList{..}
           = go _cclProFileId _cclSearchString
               (_cclIds ^. _Default)

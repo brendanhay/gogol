@@ -76,6 +76,8 @@ rgPayload
 
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate = Report
+        type Scopes ReportsGenerate =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ReportsGenerate{..}
           = go (Just AltJSON) _rgPayload
               doubleClickSearchService

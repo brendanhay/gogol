@@ -179,6 +179,9 @@ pscCallback
 instance GoogleRequest ProjectsSubscriptionsCreate
          where
         type Rs ProjectsSubscriptionsCreate = Subscription
+        type Scopes ProjectsSubscriptionsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsCreate{..}
           = go _pscName _pscXgafv _pscUploadProtocol
               (Just _pscPp)

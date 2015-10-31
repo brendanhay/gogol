@@ -92,6 +92,9 @@ ougCustomerId
 
 instance GoogleRequest OrgUnitsGet where
         type Rs OrgUnitsGet = OrgUnit
+        type Scopes OrgUnitsGet =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit",
+               "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"]
         requestClient OrgUnitsGet{..}
           = go _ougCustomerId _ougOrgUnitPath (Just AltJSON)
               directoryService

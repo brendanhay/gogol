@@ -89,6 +89,8 @@ gaiPayload
 
 instance GoogleRequest GroupsAliasesInsert where
         type Rs GroupsAliasesInsert = Alias
+        type Scopes GroupsAliasesInsert =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
         requestClient GroupsAliasesInsert{..}
           = go _gaiGroupKey (Just AltJSON) _gaiPayload
               directoryService

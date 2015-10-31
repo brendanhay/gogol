@@ -90,6 +90,8 @@ aguPayload
 
 instance GoogleRequest AdvertiserGroupsUpdate where
         type Rs AdvertiserGroupsUpdate = AdvertiserGroup
+        type Scopes AdvertiserGroupsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertiserGroupsUpdate{..}
           = go _aguProFileId (Just AltJSON) _aguPayload
               dFAReportingService

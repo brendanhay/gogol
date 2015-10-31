@@ -93,6 +93,10 @@ thpgTargetHTTPSProxy
 
 instance GoogleRequest TargetHTTPSProxiesGet where
         type Rs TargetHTTPSProxiesGet = TargetHTTPSProxy
+        type Scopes TargetHTTPSProxiesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetHTTPSProxiesGet{..}
           = go _thpgProject _thpgTargetHTTPSProxy
               (Just AltJSON)

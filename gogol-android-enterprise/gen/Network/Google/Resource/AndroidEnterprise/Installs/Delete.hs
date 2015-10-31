@@ -119,6 +119,8 @@ idDeviceId
 
 instance GoogleRequest InstallsDelete where
         type Rs InstallsDelete = ()
+        type Scopes InstallsDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient InstallsDelete{..}
           = go _idEnterpriseId _idUserId _idDeviceId
               _idInstallId

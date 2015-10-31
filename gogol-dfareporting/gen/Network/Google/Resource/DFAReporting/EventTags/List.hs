@@ -222,6 +222,8 @@ etlSortField
 
 instance GoogleRequest EventTagsList where
         type Rs EventTagsList = EventTagsListResponse
+        type Scopes EventTagsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient EventTagsList{..}
           = go _etlProFileId _etlDefinitionsOnly
               (_etlEventTagTypes ^. _Default)

@@ -90,6 +90,10 @@ rouRoute = lens _rouRoute (\ s a -> s{_rouRoute = a})
 
 instance GoogleRequest RoutesGet where
         type Rs RoutesGet = Route
+        type Scopes RoutesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RoutesGet{..}
           = go _rouProject _rouRoute (Just AltJSON)
               computeService

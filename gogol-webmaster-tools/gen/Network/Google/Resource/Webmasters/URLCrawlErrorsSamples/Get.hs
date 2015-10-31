@@ -123,6 +123,9 @@ ucesgURL = lens _ucesgURL (\ s a -> s{_ucesgURL = a})
 instance GoogleRequest URLCrawlErrorsSamplesGet where
         type Rs URLCrawlErrorsSamplesGet =
              URLCrawlErrorsSample
+        type Scopes URLCrawlErrorsSamplesGet =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
         requestClient URLCrawlErrorsSamplesGet{..}
           = go _ucesgSiteURL _ucesgURL (Just _ucesgCategory)
               (Just _ucesgPlatform)

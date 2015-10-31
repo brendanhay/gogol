@@ -198,6 +198,8 @@ jiCustomField
 
 instance GoogleRequest JobsInsert where
         type Rs JobsInsert = Job
+        type Scopes JobsInsert =
+             '["https://www.googleapis.com/auth/coordinate"]
         requestClient JobsInsert{..}
           = go _jiTeamId (Just _jiAddress) (Just _jiLat)
               (Just _jiLng)

@@ -86,6 +86,8 @@ lppId = lens _lppId (\ s a -> s{_lppId = a})
 
 instance GoogleRequest LayersPatch where
         type Rs LayersPatch = ()
+        type Scopes LayersPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient LayersPatch{..}
           = go _lppId (Just AltJSON) _lppPayload
               mapsEngineService

@@ -128,6 +128,11 @@ rulMaxResults
 
 instance GoogleRequest RollingUpdatesList where
         type Rs RollingUpdatesList = RollingUpdateList
+        type Scopes RollingUpdatesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/replicapool",
+               "https://www.googleapis.com/auth/replicapool.readonly"]
         requestClient RollingUpdatesList{..}
           = go _rulProject _rulZone _rulFilter _rulPageToken
               (Just _rulMaxResults)

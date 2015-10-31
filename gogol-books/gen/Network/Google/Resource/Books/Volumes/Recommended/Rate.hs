@@ -114,6 +114,8 @@ vrrSource
 instance GoogleRequest VolumesRecommendedRate where
         type Rs VolumesRecommendedRate =
              BooksVolumesRecommendedRateResponse
+        type Scopes VolumesRecommendedRate =
+             '["https://www.googleapis.com/auth/books"]
         requestClient VolumesRecommendedRate{..}
           = go (Just _vrrRating) (Just _vrrVolumeId) _vrrLocale
               _vrrSource

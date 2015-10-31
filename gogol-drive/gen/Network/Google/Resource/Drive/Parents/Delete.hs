@@ -88,6 +88,9 @@ pddParentId
 
 instance GoogleRequest ParentsDelete where
         type Rs ParentsDelete = ()
+        type Scopes ParentsDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient ParentsDelete{..}
           = go _pddFileId _pddParentId (Just AltJSON)
               driveService

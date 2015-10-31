@@ -104,6 +104,9 @@ rrsLanguage
 
 instance GoogleRequest RoomsReportStatus where
         type Rs RoomsReportStatus = RoomStatus
+        type Scopes RoomsReportStatus =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsReportStatus{..}
           = go _rrsRoomId _rrsLanguage (Just AltJSON)
               _rrsPayload

@@ -127,6 +127,9 @@ iaacInstance
 
 instance GoogleRequest InstancesAddAccessConfig where
         type Rs InstancesAddAccessConfig = Operation
+        type Scopes InstancesAddAccessConfig =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesAddAccessConfig{..}
           = go _iaacProject _iaacZone _iaacInstance
               (Just _iaacNetworkInterface)

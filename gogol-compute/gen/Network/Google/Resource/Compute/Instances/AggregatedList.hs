@@ -139,6 +139,10 @@ ialMaxResults
 instance GoogleRequest InstancesAggregatedList where
         type Rs InstancesAggregatedList =
              InstanceAggregatedList
+        type Scopes InstancesAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstancesAggregatedList{..}
           = go _ialProject _ialFilter _ialPageToken
               (Just _ialMaxResults)

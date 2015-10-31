@@ -118,6 +118,8 @@ ediEditId
 instance GoogleRequest EditsImagesDeleteall where
         type Rs EditsImagesDeleteall =
              ImagesDeleteAllResponse
+        type Scopes EditsImagesDeleteall =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsImagesDeleteall{..}
           = go _ediPackageName _ediEditId _ediLanguage
               _ediImageType

@@ -125,6 +125,9 @@ asMaxResults
 
 instance GoogleRequest ActivitiesSearch where
         type Rs ActivitiesSearch = ActivityFeed
+        type Scopes ActivitiesSearch =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ActivitiesSearch{..}
           = go (Just _asQuery) (Just _asOrderBy)
               (Just _asLanguage)

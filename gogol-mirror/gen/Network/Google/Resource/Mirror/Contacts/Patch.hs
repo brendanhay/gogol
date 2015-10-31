@@ -86,6 +86,8 @@ cpId = lens _cpId (\ s a -> s{_cpId = a})
 
 instance GoogleRequest ContactsPatch where
         type Rs ContactsPatch = Contact
+        type Scopes ContactsPatch =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient ContactsPatch{..}
           = go _cpId (Just AltJSON) _cpPayload mirrorService
           where go

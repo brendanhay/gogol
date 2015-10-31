@@ -157,6 +157,10 @@ csgCallback
 
 instance GoogleRequest CallSetsGet where
         type Rs CallSetsGet = CallSet
+        type Scopes CallSetsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient CallSetsGet{..}
           = go _csgCallSetId _csgXgafv _csgUploadProtocol
               (Just _csgPp)

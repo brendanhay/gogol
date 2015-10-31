@@ -105,6 +105,9 @@ cdgProjection
 
 instance GoogleRequest ChromeosDevicesGet where
         type Rs ChromeosDevicesGet = ChromeOSDevice
+        type Scopes ChromeosDevicesGet =
+             '["https://www.googleapis.com/auth/admin.directory.device.chromeos",
+               "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"]
         requestClient ChromeosDevicesGet{..}
           = go _cdgCustomerId _cdgDeviceId _cdgProjection
               (Just AltJSON)

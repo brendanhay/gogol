@@ -79,6 +79,11 @@ csPayload
 
 instance GoogleRequest ChannelsStop where
         type Rs ChannelsStop = ()
+        type Scopes ChannelsStop =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.alias",
+               "https://www.googleapis.com/auth/admin.directory.user.alias.readonly",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
         requestClient ChannelsStop{..}
           = go (Just AltJSON) _csPayload directoryService
           where go

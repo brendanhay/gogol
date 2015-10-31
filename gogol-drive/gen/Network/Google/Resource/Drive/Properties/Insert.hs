@@ -87,6 +87,11 @@ piFileId = lens _piFileId (\ s a -> s{_piFileId = a})
 
 instance GoogleRequest PropertiesInsert where
         type Rs PropertiesInsert = Property
+        type Scopes PropertiesInsert =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata"]
         requestClient PropertiesInsert{..}
           = go _piFileId (Just AltJSON) _piPayload driveService
           where go

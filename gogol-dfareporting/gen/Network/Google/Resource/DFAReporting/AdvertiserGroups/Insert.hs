@@ -90,6 +90,8 @@ agiPayload
 
 instance GoogleRequest AdvertiserGroupsInsert where
         type Rs AdvertiserGroupsInsert = AdvertiserGroup
+        type Scopes AdvertiserGroupsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertiserGroupsInsert{..}
           = go _agiProFileId (Just AltJSON) _agiPayload
               dFAReportingService

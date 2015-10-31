@@ -134,6 +134,9 @@ egEventId
 
 instance GoogleRequest EventsGet where
         type Rs EventsGet = Event
+        type Scopes EventsGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient EventsGet{..}
           = go _egCalendarId _egEventId _egMaxAttendees
               _egTimeZone

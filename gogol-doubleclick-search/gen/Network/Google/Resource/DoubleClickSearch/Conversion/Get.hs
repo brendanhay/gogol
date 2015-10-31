@@ -213,6 +213,8 @@ cgRowCount
 
 instance GoogleRequest ConversionGet where
         type Rs ConversionGet = ConversionList
+        type Scopes ConversionGet =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ConversionGet{..}
           = go _cgAgencyId _cgAdvertiserId _cgEngineAccountId
               (Just _cgEndDate)

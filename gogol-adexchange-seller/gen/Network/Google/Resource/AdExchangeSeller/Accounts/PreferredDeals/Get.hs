@@ -90,6 +90,9 @@ apdgAccountId
 instance GoogleRequest AccountsPreferredDealsGet
          where
         type Rs AccountsPreferredDealsGet = PreferredDeal
+        type Scopes AccountsPreferredDealsGet =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsPreferredDealsGet{..}
           = go _apdgAccountId _apdgDealId (Just AltJSON)
               adExchangeSellerService

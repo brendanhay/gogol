@@ -106,6 +106,9 @@ instance GoogleRequest RasterCollectionsParentsList
          where
         type Rs RasterCollectionsParentsList =
              ParentsListResponse
+        type Scopes RasterCollectionsParentsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient RasterCollectionsParentsList{..}
           = go _rcplcId _rcplcPageToken _rcplcMaxResults
               (Just AltJSON)

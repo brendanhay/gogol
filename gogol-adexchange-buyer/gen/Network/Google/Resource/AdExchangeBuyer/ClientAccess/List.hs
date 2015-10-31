@@ -74,6 +74,8 @@ calPayload
 instance GoogleRequest ClientAccessList where
         type Rs ClientAccessList =
              ListClientAccessCapabilitiesResponse
+        type Scopes ClientAccessList =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ClientAccessList{..}
           = go (Just AltJSON) _calPayload
               adExchangeBuyerService

@@ -177,6 +177,10 @@ lslMaxResults
 
 instance GoogleRequest LiveStreamsList where
         type Rs LiveStreamsList = LiveStreamListResponse
+        type Scopes LiveStreamsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient LiveStreamsList{..}
           = go (Just _lslPart) _lslMine
               _lslOnBehalfOfContentOwner

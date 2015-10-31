@@ -90,6 +90,8 @@ daiCustomer
 
 instance GoogleRequest DomainAliasesInsert where
         type Rs DomainAliasesInsert = DomainAlias
+        type Scopes DomainAliasesInsert =
+             '["https://www.googleapis.com/auth/admin.directory.domain"]
         requestClient DomainAliasesInsert{..}
           = go _daiCustomer (Just AltJSON) _daiPayload
               directoryService

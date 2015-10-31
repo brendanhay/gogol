@@ -166,6 +166,8 @@ accMaxResults
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = AccountsListResponse
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountsList{..}
           = go _accProFileId _accSearchString
               (_accIds ^. _Default)

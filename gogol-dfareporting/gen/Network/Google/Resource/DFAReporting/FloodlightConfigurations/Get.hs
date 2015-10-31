@@ -92,6 +92,8 @@ instance GoogleRequest FloodlightConfigurationsGet
          where
         type Rs FloodlightConfigurationsGet =
              FloodlightConfiguration
+        type Scopes FloodlightConfigurationsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightConfigurationsGet{..}
           = go _fcgProFileId _fcgId (Just AltJSON)
               dFAReportingService

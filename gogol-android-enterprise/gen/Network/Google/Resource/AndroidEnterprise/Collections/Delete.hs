@@ -90,6 +90,8 @@ cddCollectionId
 
 instance GoogleRequest CollectionsDelete where
         type Rs CollectionsDelete = ()
+        type Scopes CollectionsDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionsDelete{..}
           = go _cddEnterpriseId _cddCollectionId (Just AltJSON)
               androidEnterpriseService

@@ -100,6 +100,13 @@ zogZone = lens _zogZone (\ s a -> s{_zogZone = a})
 
 instance GoogleRequest ZoneOperationsGet where
         type Rs ZoneOperationsGet = Operation
+        type Scopes ZoneOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient ZoneOperationsGet{..}
           = go _zogProject _zogZone _zogOperation
               (Just AltJSON)

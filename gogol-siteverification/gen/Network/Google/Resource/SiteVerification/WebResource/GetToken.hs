@@ -80,6 +80,9 @@ wrgtPayload
 instance GoogleRequest WebResourceGetToken where
         type Rs WebResourceGetToken =
              SiteVerificationWebResourceGettokenResponse
+        type Scopes WebResourceGetToken =
+             '["https://www.googleapis.com/auth/siteverification",
+               "https://www.googleapis.com/auth/siteverification.verify_only"]
         requestClient WebResourceGetToken{..}
           = go (Just AltJSON) _wrgtPayload
               siteVerificationService

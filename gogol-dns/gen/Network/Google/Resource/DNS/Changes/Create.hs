@@ -103,6 +103,9 @@ ccManagedZone
 
 instance GoogleRequest ChangesCreate where
         type Rs ChangesCreate = Change
+        type Scopes ChangesCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ChangesCreate{..}
           = go _ccProject _ccManagedZone (Just AltJSON)
               _ccPayload

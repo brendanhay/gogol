@@ -115,6 +115,9 @@ pppPermissionId
 
 instance GoogleRequest PermissionsPatch where
         type Rs PermissionsPatch = Permission
+        type Scopes PermissionsPatch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient PermissionsPatch{..}
           = go _pppFileId _pppPermissionId
               (Just _pppTransferOwnership)

@@ -89,6 +89,9 @@ agRuleId = lens _agRuleId (\ s a -> s{_agRuleId = a})
 
 instance GoogleRequest ACLGet where
         type Rs ACLGet = ACLRule
+        type Scopes ACLGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient ACLGet{..}
           = go _agCalendarId _agRuleId (Just AltJSON)
               appsCalendarService

@@ -201,6 +201,8 @@ aupflMaxResults
 instance GoogleRequest AccountUserProFilesList where
         type Rs AccountUserProFilesList =
              AccountUserProFilesListResponse
+        type Scopes AccountUserProFilesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountUserProFilesList{..}
           = go _aupflProFileId _aupflUserRoleId
               _aupflSearchString

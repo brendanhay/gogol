@@ -93,6 +93,8 @@ edgEditId
 
 instance GoogleRequest EditsDetailsGet where
         type Rs EditsDetailsGet = AppDetails
+        type Scopes EditsDetailsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsDetailsGet{..}
           = go _edgPackageName _edgEditId (Just AltJSON)
               androidPublisherService

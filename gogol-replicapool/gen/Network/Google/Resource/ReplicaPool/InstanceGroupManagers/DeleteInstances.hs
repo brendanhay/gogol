@@ -125,6 +125,9 @@ instance GoogleRequest
          InstanceGroupManagersDeleteInstances where
         type Rs InstanceGroupManagersDeleteInstances =
              Operation
+        type Scopes InstanceGroupManagersDeleteInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
           InstanceGroupManagersDeleteInstances{..}
           = go _igmdiProject _igmdiZone

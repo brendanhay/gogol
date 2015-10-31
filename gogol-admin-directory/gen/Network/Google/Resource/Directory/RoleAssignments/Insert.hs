@@ -90,6 +90,8 @@ raiCustomer
 
 instance GoogleRequest RoleAssignmentsInsert where
         type Rs RoleAssignmentsInsert = RoleAssignment
+        type Scopes RoleAssignmentsInsert =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
         requestClient RoleAssignmentsInsert{..}
           = go _raiCustomer (Just AltJSON) _raiPayload
               directoryService

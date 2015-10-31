@@ -104,6 +104,10 @@ tpgRegion
 
 instance GoogleRequest TargetPoolsGet where
         type Rs TargetPoolsGet = TargetPool
+        type Scopes TargetPoolsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetPoolsGet{..}
           = go _tpgProject _tpgRegion _tpgTargetPool
               (Just AltJSON)

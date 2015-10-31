@@ -90,6 +90,9 @@ wriVerificationMethod
 instance GoogleRequest WebResourceInsert where
         type Rs WebResourceInsert =
              SiteVerificationWebResourceResource
+        type Scopes WebResourceInsert =
+             '["https://www.googleapis.com/auth/siteverification",
+               "https://www.googleapis.com/auth/siteverification.verify_only"]
         requestClient WebResourceInsert{..}
           = go (Just _wriVerificationMethod) (Just AltJSON)
               _wriPayload

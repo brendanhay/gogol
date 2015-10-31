@@ -90,6 +90,9 @@ mzdManagedZone
 
 instance GoogleRequest ManagedZonesDelete where
         type Rs ManagedZonesDelete = ()
+        type Scopes ManagedZonesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesDelete{..}
           = go _mzdProject _mzdManagedZone (Just AltJSON)
               dNSService

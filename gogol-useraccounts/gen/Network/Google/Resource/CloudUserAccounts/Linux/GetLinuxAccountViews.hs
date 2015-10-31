@@ -186,6 +186,11 @@ instance GoogleRequest LinuxGetLinuxAccountViews
          where
         type Rs LinuxGetLinuxAccountViews =
              LinuxGetLinuxAccountViewsResponse
+        type Scopes LinuxGetLinuxAccountViews =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
         requestClient LinuxGetLinuxAccountViews{..}
           = go _lglavProject _lglavZone (Just _lglavInstance)
               _lglavOrderBy

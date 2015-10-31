@@ -183,6 +183,8 @@ tjlCallback
 
 instance GoogleRequest TransferJobsList where
         type Rs TransferJobsList = ListTransferJobsResponse
+        type Scopes TransferJobsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferJobsList{..}
           = go _tjlXgafv _tjlUploadProtocol (Just _tjlPp)
               _tjlAccessToken

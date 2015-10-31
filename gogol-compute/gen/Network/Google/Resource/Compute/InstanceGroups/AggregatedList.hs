@@ -141,6 +141,10 @@ instance GoogleRequest InstanceGroupsAggregatedList
          where
         type Rs InstanceGroupsAggregatedList =
              InstanceGroupAggregatedList
+        type Scopes InstanceGroupsAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupsAggregatedList{..}
           = go _igalProject _igalFilter _igalPageToken
               (Just _igalMaxResults)

@@ -95,6 +95,9 @@ irscInstance
 
 instance GoogleRequest InstancesResetSSLConfig where
         type Rs InstancesResetSSLConfig = Operation
+        type Scopes InstancesResetSSLConfig =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesResetSSLConfig{..}
           = go _irscProject _irscInstance (Just AltJSON)
               sQLAdminService

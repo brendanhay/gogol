@@ -76,6 +76,8 @@ mogOrderId
 
 instance GoogleRequest MarketplaceOrdersGet where
         type Rs MarketplaceOrdersGet = MarketplaceOrder
+        type Scopes MarketplaceOrdersGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceOrdersGet{..}
           = go _mogOrderId (Just AltJSON)
               adExchangeBuyerService

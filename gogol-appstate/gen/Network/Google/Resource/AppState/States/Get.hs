@@ -78,6 +78,8 @@ sgStateKey
 
 instance GoogleRequest StatesGet where
         type Rs StatesGet = GetResponse
+        type Scopes StatesGet =
+             '["https://www.googleapis.com/auth/appstate"]
         requestClient StatesGet{..}
           = go _sgStateKey (Just AltJSON) appStateService
           where go

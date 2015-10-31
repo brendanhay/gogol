@@ -98,6 +98,8 @@ rfiFilename
 
 instance GoogleRequest RastersFilesInsert where
         type Rs RastersFilesInsert = ()
+        type Scopes RastersFilesInsert =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RastersFilesInsert{..}
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
               mapsEngineService
@@ -109,6 +111,8 @@ instance GoogleRequest RastersFilesInsert where
 instance GoogleRequest
          (MediaUpload RastersFilesInsert) where
         type Rs (MediaUpload RastersFilesInsert) = ()
+        type Scopes (MediaUpload RastersFilesInsert) =
+             Scopes RastersFilesInsert
         requestClient
           (MediaUpload RastersFilesInsert{..} body)
           = go _rfiId (Just _rfiFilename) (Just AltJSON)

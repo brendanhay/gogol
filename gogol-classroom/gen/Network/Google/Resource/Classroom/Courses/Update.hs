@@ -172,6 +172,8 @@ cuCallback
 
 instance GoogleRequest CoursesUpdate where
         type Rs CoursesUpdate = Course
+        type Scopes CoursesUpdate =
+             '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesUpdate{..}
           = go _cuId _cuXgafv _cuUploadProtocol (Just _cuPp)
               _cuAccessToken

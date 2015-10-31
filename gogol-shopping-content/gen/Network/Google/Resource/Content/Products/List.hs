@@ -117,6 +117,8 @@ proMaxResults
 
 instance GoogleRequest ProductsList where
         type Rs ProductsList = ProductsListResponse
+        type Scopes ProductsList =
+             '["https://www.googleapis.com/auth/content"]
         requestClient ProductsList{..}
           = go _proMerchantId _proIncludeInvalidInsertedItems
               _proPageToken

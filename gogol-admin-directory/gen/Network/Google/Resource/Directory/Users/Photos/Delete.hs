@@ -78,6 +78,8 @@ updUserKey
 
 instance GoogleRequest UsersPhotosDelete where
         type Rs UsersPhotosDelete = ()
+        type Scopes UsersPhotosDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersPhotosDelete{..}
           = go _updUserKey (Just AltJSON) directoryService
           where go

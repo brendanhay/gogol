@@ -124,6 +124,8 @@ posPayload
 
 instance GoogleRequest PostsInsert where
         type Rs PostsInsert = Post'
+        type Scopes PostsInsert =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsInsert{..}
           = go _posBlogId (Just _posFetchBody) _posIsDraft
               _posFetchImages

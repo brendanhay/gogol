@@ -124,6 +124,9 @@ tuNewLeaseSeconds
 
 instance GoogleRequest TasksUpdate where
         type Rs TasksUpdate = Task
+        type Scopes TasksUpdate =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksUpdate{..}
           = go _tuProject _tuTaskqueue _tuTask
               (Just _tuNewLeaseSeconds)

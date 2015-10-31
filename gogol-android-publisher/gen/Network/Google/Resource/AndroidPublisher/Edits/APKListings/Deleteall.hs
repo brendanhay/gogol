@@ -109,6 +109,8 @@ eapkldaEditId
 instance GoogleRequest EditsAPKListingsDeleteall
          where
         type Rs EditsAPKListingsDeleteall = ()
+        type Scopes EditsAPKListingsDeleteall =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsAPKListingsDeleteall{..}
           = go _eapkldaPackageName _eapkldaEditId
               _eapkldaAPKVersionCode

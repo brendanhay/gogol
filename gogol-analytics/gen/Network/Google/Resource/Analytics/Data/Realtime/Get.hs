@@ -138,6 +138,9 @@ drgMaxResults
 
 instance GoogleRequest DataRealtimeGet where
         type Rs DataRealtimeGet = RealtimeData
+        type Scopes DataRealtimeGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient DataRealtimeGet{..}
           = go (Just _drgIds) (Just _drgMetrics) _drgFilters
               _drgSort

@@ -86,6 +86,8 @@ tpId = lens _tpId (\ s a -> s{_tpId = a})
 
 instance GoogleRequest TablesPatch where
         type Rs TablesPatch = ()
+        type Scopes TablesPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesPatch{..}
           = go _tpId (Just AltJSON) _tpPayload
               mapsEngineService

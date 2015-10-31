@@ -76,6 +76,9 @@ cgCustomerId
 
 instance GoogleRequest CustomersGet where
         type Rs CustomersGet = Customer
+        type Scopes CustomersGet =
+             '["https://www.googleapis.com/auth/apps.order",
+               "https://www.googleapis.com/auth/apps.order.readonly"]
         requestClient CustomersGet{..}
           = go _cgCustomerId (Just AltJSON) appsResellerService
           where go

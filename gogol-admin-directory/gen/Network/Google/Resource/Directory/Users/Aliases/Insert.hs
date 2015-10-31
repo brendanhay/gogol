@@ -89,6 +89,9 @@ uaiUserKey
 
 instance GoogleRequest UsersAliasesInsert where
         type Rs UsersAliasesInsert = Alias
+        type Scopes UsersAliasesInsert =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.alias"]
         requestClient UsersAliasesInsert{..}
           = go _uaiUserKey (Just AltJSON) _uaiPayload
               directoryService

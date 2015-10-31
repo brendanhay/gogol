@@ -89,6 +89,9 @@ isrInstance
 
 instance GoogleRequest InstancesStopReplica where
         type Rs InstancesStopReplica = Operation
+        type Scopes InstancesStopReplica =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesStopReplica{..}
           = go _isrProject _isrInstance (Just AltJSON)
               sQLAdminService

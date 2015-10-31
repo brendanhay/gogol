@@ -115,6 +115,10 @@ zvarPayload
 
 instance GoogleRequest ZoneViewsAddResources where
         type Rs ZoneViewsAddResources = Operation
+        type Scopes ZoneViewsAddResources =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient ZoneViewsAddResources{..}
           = go _zvarProject _zvarZone _zvarResourceView
               (Just AltJSON)

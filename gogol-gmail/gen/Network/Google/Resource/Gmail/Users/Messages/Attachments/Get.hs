@@ -103,6 +103,10 @@ umagMessageId
 instance GoogleRequest UsersMessagesAttachmentsGet
          where
         type Rs UsersMessagesAttachmentsGet = MessagePartBody
+        type Scopes UsersMessagesAttachmentsGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersMessagesAttachmentsGet{..}
           = go _umagUserId _umagMessageId _umagId
               (Just AltJSON)

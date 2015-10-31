@@ -204,6 +204,9 @@ clCallback
 
 instance GoogleRequest CoursesList where
         type Rs CoursesList = ListCoursesResponse
+        type Scopes CoursesList =
+             '["https://www.googleapis.com/auth/classroom.courses",
+               "https://www.googleapis.com/auth/classroom.courses.readonly"]
         requestClient CoursesList{..}
           = go _clStudentId _clXgafv _clUploadProtocol
               (Just _clPp)

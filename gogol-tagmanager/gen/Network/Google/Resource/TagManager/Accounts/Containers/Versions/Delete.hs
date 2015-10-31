@@ -105,6 +105,8 @@ acvdcAccountId
 instance GoogleRequest
          AccountsContainersVersionsDelete where
         type Rs AccountsContainersVersionsDelete = ()
+        type Scopes AccountsContainersVersionsDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
         requestClient AccountsContainersVersionsDelete{..}
           = go _acvdcAccountId _acvdcContainerId
               _acvdcContainerVersionId

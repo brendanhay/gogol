@@ -74,6 +74,8 @@ agId = lens _agId (\ s a -> s{_agId = a}) . _Coerce
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient AccountsGet{..}
           = go _agId (Just AltJSON) adExchangeBuyerService
           where go

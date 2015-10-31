@@ -141,6 +141,10 @@ instance GoogleRequest ForwardingRulesAggregatedList
          where
         type Rs ForwardingRulesAggregatedList =
              ForwardingRuleAggregatedList
+        type Scopes ForwardingRulesAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ForwardingRulesAggregatedList{..}
           = go _fralProject _fralFilter _fralPageToken
               (Just _fralMaxResults)

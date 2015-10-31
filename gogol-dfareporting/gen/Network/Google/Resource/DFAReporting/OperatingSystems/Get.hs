@@ -91,6 +91,8 @@ osgDartId
 
 instance GoogleRequest OperatingSystemsGet where
         type Rs OperatingSystemsGet = OperatingSystem
+        type Scopes OperatingSystemsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OperatingSystemsGet{..}
           = go _osgProFileId _osgDartId (Just AltJSON)
               dFAReportingService

@@ -106,6 +106,8 @@ instance GoogleRequest AchievementConfigurationsList
          where
         type Rs AchievementConfigurationsList =
              AchievementConfigurationListResponse
+        type Scopes AchievementConfigurationsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient AchievementConfigurationsList{..}
           = go _aclApplicationId _aclPageToken _aclMaxResults
               (Just AltJSON)

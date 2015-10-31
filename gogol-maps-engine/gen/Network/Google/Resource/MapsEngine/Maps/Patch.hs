@@ -86,6 +86,8 @@ mpId = lens _mpId (\ s a -> s{_mpId = a})
 
 instance GoogleRequest MapsPatch where
         type Rs MapsPatch = ()
+        type Scopes MapsPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient MapsPatch{..}
           = go _mpId (Just AltJSON) _mpPayload
               mapsEngineService

@@ -105,6 +105,7 @@ lgLinkId
 
 instance GoogleRequest LinksGet where
         type Rs LinksGet = Link
+        type Scopes LinksGet = '[]
         requestClient LinksGet{..}
           = go _lgRole _lgRoleId _lgLinkId (Just AltJSON)
               affiliatesService

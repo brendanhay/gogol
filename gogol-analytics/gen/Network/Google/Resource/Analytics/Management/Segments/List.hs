@@ -91,6 +91,10 @@ mslMaxResults
 
 instance GoogleRequest ManagementSegmentsList where
         type Rs ManagementSegmentsList = Segments
+        type Scopes ManagementSegmentsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementSegmentsList{..}
           = go _mslStartIndex _mslMaxResults (Just AltJSON)
               analyticsService

@@ -113,6 +113,8 @@ auDryRun = lens _auDryRun (\ s a -> s{_auDryRun = a})
 
 instance GoogleRequest AccountshippingUpdate where
         type Rs AccountshippingUpdate = AccountShipping
+        type Scopes AccountshippingUpdate =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountshippingUpdate{..}
           = go _auMerchantId _auAccountId _auDryRun
               (Just AltJSON)

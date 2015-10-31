@@ -126,6 +126,9 @@ instance GoogleRequest
          ManagementWebPropertyUserLinksList where
         type Rs ManagementWebPropertyUserLinksList =
              EntityUserLinks
+        type Scopes ManagementWebPropertyUserLinksList =
+             '["https://www.googleapis.com/auth/analytics.manage.users",
+               "https://www.googleapis.com/auth/analytics.manage.users.readonly"]
         requestClient ManagementWebPropertyUserLinksList{..}
           = go _mwpullAccountId _mwpullWebPropertyId
               _mwpullStartIndex

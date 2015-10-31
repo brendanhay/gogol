@@ -97,6 +97,8 @@ ddDryRun = lens _ddDryRun (\ s a -> s{_ddDryRun = a})
 
 instance GoogleRequest DatafeedsDelete where
         type Rs DatafeedsDelete = ()
+        type Scopes DatafeedsDelete =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsDelete{..}
           = go _ddMerchantId _ddDatafeedId _ddDryRun
               (Just AltJSON)

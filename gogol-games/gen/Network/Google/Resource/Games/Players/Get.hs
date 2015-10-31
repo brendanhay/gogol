@@ -89,6 +89,9 @@ pgPlayerId
 
 instance GoogleRequest PlayersGet where
         type Rs PlayersGet = Player
+        type Scopes PlayersGet =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient PlayersGet{..}
           = go _pgPlayerId _pgLanguage (Just AltJSON)
               gamesService

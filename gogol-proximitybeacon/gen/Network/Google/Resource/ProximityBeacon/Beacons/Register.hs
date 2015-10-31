@@ -156,6 +156,7 @@ brCallback
 
 instance GoogleRequest BeaconsRegister where
         type Rs BeaconsRegister = Beacon
+        type Scopes BeaconsRegister = '[]
         requestClient BeaconsRegister{..}
           = go _brXgafv _brUploadProtocol (Just _brPp)
               _brAccessToken

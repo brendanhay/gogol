@@ -102,6 +102,8 @@ rpPayload
 
 instance GoogleRequest ReportsPatch where
         type Rs ReportsPatch = Report
+        type Scopes ReportsPatch =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsPatch{..}
           = go _rpProFileId _rpReportId (Just AltJSON)
               _rpPayload

@@ -88,6 +88,10 @@ ulcUserId
 
 instance GoogleRequest UsersLabelsCreate where
         type Rs UsersLabelsCreate = Label
+        type Scopes UsersLabelsCreate =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersLabelsCreate{..}
           = go _ulcUserId (Just AltJSON) _ulcPayload
               gmailService

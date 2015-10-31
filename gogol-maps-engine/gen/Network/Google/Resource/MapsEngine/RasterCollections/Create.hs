@@ -76,6 +76,8 @@ rccPayload
 
 instance GoogleRequest RasterCollectionsCreate where
         type Rs RasterCollectionsCreate = RasterCollection
+        type Scopes RasterCollectionsCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RasterCollectionsCreate{..}
           = go (Just AltJSON) _rccPayload mapsEngineService
           where go

@@ -88,6 +88,8 @@ pgProductId
 
 instance GoogleRequest ProductstatusesGet where
         type Rs ProductstatusesGet = ProductStatus
+        type Scopes ProductstatusesGet =
+             '["https://www.googleapis.com/auth/content"]
         requestClient ProductstatusesGet{..}
           = go _pgMerchantId _pgProductId (Just AltJSON)
               shoppingContentService

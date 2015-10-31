@@ -151,6 +151,10 @@ iglMaxResults
 
 instance GoogleRequest InstanceGroupsList where
         type Rs InstanceGroupsList = InstanceGroupList
+        type Scopes InstanceGroupsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupsList{..}
           = go _iglProject _iglZone _iglFilter _iglPageToken
               (Just _iglMaxResults)

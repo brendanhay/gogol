@@ -248,6 +248,8 @@ dslDfpNetworkCode
 instance GoogleRequest DirectorySitesList where
         type Rs DirectorySitesList =
              DirectorySitesListResponse
+        type Scopes DirectorySitesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient DirectorySitesList{..}
           = go _dslProFileId _dslSearchString
               _dslAcceptsInterstitialPlacements

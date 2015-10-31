@@ -213,6 +213,9 @@ argMaxResults
 
 instance GoogleRequest AccountsReportsGenerate where
         type Rs AccountsReportsGenerate = Report
+        type Scopes AccountsReportsGenerate =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsReportsGenerate{..}
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
@@ -234,6 +237,8 @@ instance GoogleRequest
          (MediaDownload AccountsReportsGenerate) where
         type Rs (MediaDownload AccountsReportsGenerate) =
              Stream
+        type Scopes (MediaDownload AccountsReportsGenerate) =
+             Scopes AccountsReportsGenerate
         requestClient
           (MediaDownload AccountsReportsGenerate{..})
           = go _argAccountId (Just _argStartDate)

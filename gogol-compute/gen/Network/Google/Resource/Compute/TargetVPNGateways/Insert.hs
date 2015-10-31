@@ -104,6 +104,9 @@ tvgiRegion
 
 instance GoogleRequest TargetVPNGatewaysInsert where
         type Rs TargetVPNGatewaysInsert = Operation
+        type Scopes TargetVPNGatewaysInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetVPNGatewaysInsert{..}
           = go _tvgiProject _tvgiRegion (Just AltJSON)
               _tvgiPayload

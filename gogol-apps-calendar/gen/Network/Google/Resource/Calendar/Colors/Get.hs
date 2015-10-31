@@ -60,6 +60,9 @@ colorsGet = ColorsGet
 
 instance GoogleRequest ColorsGet where
         type Rs ColorsGet = Colors
+        type Scopes ColorsGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient ColorsGet{}
           = go (Just AltJSON) appsCalendarService
           where go

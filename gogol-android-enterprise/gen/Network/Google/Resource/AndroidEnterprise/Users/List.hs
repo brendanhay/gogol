@@ -89,6 +89,8 @@ ulEnterpriseId
 
 instance GoogleRequest UsersList where
         type Rs UsersList = UsersListResponse
+        type Scopes UsersList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient UsersList{..}
           = go _ulEnterpriseId (Just _ulEmail) (Just AltJSON)
               androidEnterpriseService

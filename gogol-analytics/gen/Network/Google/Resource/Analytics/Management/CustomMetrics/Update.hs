@@ -132,6 +132,8 @@ mcmuAccountId
 instance GoogleRequest ManagementCustomMetricsUpdate
          where
         type Rs ManagementCustomMetricsUpdate = CustomMetric
+        type Scopes ManagementCustomMetricsUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementCustomMetricsUpdate{..}
           = go _mcmuAccountId _mcmuWebPropertyId
               _mcmuCustomMetricId

@@ -89,6 +89,8 @@ cggId
 
 instance GoogleRequest CampaignsGet where
         type Rs CampaignsGet = Campaign
+        type Scopes CampaignsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsGet{..}
           = go _cggProFileId _cggId (Just AltJSON)
               dFAReportingService

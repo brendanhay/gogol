@@ -61,6 +61,9 @@ metadataDimensionsList = MetadataDimensionsList
 
 instance GoogleRequest MetadataDimensionsList where
         type Rs MetadataDimensionsList = Metadata
+        type Scopes MetadataDimensionsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient MetadataDimensionsList{}
           = go (Just AltJSON) adSenseService
           where go

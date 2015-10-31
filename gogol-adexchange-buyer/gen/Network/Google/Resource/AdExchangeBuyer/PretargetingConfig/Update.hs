@@ -102,6 +102,8 @@ pcuConfigId
 
 instance GoogleRequest PretargetingConfigUpdate where
         type Rs PretargetingConfigUpdate = PretargetingConfig
+        type Scopes PretargetingConfigUpdate =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient PretargetingConfigUpdate{..}
           = go _pcuAccountId _pcuConfigId (Just AltJSON)
               _pcuPayload

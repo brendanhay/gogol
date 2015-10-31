@@ -139,6 +139,9 @@ lsiOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest LiveStreamsInsert where
         type Rs LiveStreamsInsert = LiveStream
+        type Scopes LiveStreamsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveStreamsInsert{..}
           = go (Just _lsiPart) _lsiOnBehalfOfContentOwner
               _lsiOnBehalfOfContentOwnerChannel

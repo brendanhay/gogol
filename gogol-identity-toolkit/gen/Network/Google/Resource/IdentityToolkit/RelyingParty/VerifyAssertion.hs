@@ -80,6 +80,7 @@ instance GoogleRequest RelyingPartyVerifyAssertion
          where
         type Rs RelyingPartyVerifyAssertion =
              VerifyAssertionResponse
+        type Scopes RelyingPartyVerifyAssertion = '[]
         requestClient RelyingPartyVerifyAssertion{..}
           = go (Just AltJSON) _rpvaPayload
               identityToolkitService

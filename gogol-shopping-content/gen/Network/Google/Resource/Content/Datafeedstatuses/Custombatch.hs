@@ -76,6 +76,8 @@ instance GoogleRequest DatafeedstatusesCustombatch
          where
         type Rs DatafeedstatusesCustombatch =
              DatafeedstatusesCustomBatchResponse
+        type Scopes DatafeedstatusesCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedstatusesCustombatch{..}
           = go (Just AltJSON) _dcPayload shoppingContentService
           where go

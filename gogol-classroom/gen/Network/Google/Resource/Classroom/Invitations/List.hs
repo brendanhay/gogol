@@ -200,6 +200,9 @@ ilCallback
 
 instance GoogleRequest InvitationsList where
         type Rs InvitationsList = ListInvitationsResponse
+        type Scopes InvitationsList =
+             '["https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient InvitationsList{..}
           = go _ilXgafv _ilUploadProtocol (Just _ilPp)
               _ilCourseId

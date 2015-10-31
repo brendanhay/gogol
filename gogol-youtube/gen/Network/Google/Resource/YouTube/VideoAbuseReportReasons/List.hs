@@ -92,6 +92,10 @@ instance GoogleRequest VideoAbuseReportReasonsList
          where
         type Rs VideoAbuseReportReasonsList =
              VideoAbuseReportReasonListResponse
+        type Scopes VideoAbuseReportReasonsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient VideoAbuseReportReasonsList{..}
           = go (Just _varrlPart) (Just _varrlHl) (Just AltJSON)
               youTubeService

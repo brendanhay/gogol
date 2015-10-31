@@ -108,6 +108,8 @@ suPayload
 
 instance GoogleRequest StatesUpdate where
         type Rs StatesUpdate = WriteResult
+        type Scopes StatesUpdate =
+             '["https://www.googleapis.com/auth/appstate"]
         requestClient StatesUpdate{..}
           = go _suStateKey _suCurrentStateVersion
               (Just AltJSON)

@@ -213,6 +213,8 @@ vlPrintType
 
 instance GoogleRequest VolumesList where
         type Rs VolumesList = Volumes
+        type Scopes VolumesList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient VolumesList{..}
           = go (Just _vlQ) _vlOrderBy _vlLibraryRestrict
               _vlPartner

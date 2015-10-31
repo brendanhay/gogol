@@ -123,6 +123,9 @@ instance GoogleRequest
          InstanceGroupManagersAbandonInstances where
         type Rs InstanceGroupManagersAbandonInstances =
              Operation
+        type Scopes InstanceGroupManagersAbandonInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
           InstanceGroupManagersAbandonInstances{..}
           = go _igmaiProject _igmaiZone

@@ -75,6 +75,9 @@ agActivityId
 
 instance GoogleRequest ActivitiesGet where
         type Rs ActivitiesGet = Activity
+        type Scopes ActivitiesGet =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ActivitiesGet{..}
           = go _agActivityId (Just AltJSON) plusService
           where go

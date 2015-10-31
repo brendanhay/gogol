@@ -107,6 +107,8 @@ mwpawldWebPropertyAdWordsLinkId
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksDelete where
         type Rs ManagementWebPropertyAdWordsLinksDelete = ()
+        type Scopes ManagementWebPropertyAdWordsLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
           ManagementWebPropertyAdWordsLinksDelete{..}
           = go _mwpawldAccountId _mwpawldWebPropertyId

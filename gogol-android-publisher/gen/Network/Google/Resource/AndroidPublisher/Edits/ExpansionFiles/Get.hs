@@ -121,6 +121,8 @@ eefgEditId
 
 instance GoogleRequest EditsExpansionFilesGet where
         type Rs EditsExpansionFilesGet = ExpansionFile
+        type Scopes EditsExpansionFilesGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsExpansionFilesGet{..}
           = go _eefgPackageName _eefgEditId _eefgAPKVersionCode
               _eefgExpansionFileType

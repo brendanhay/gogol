@@ -63,6 +63,9 @@ applicationsPlayed = ApplicationsPlayed
 
 instance GoogleRequest ApplicationsPlayed where
         type Rs ApplicationsPlayed = ()
+        type Scopes ApplicationsPlayed =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient ApplicationsPlayed{}
           = go (Just AltJSON) gamesService
           where go

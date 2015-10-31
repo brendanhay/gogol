@@ -88,6 +88,9 @@ cdChildId
 
 instance GoogleRequest ChildrenDelete where
         type Rs ChildrenDelete = ()
+        type Scopes ChildrenDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient ChildrenDelete{..}
           = go _cdFolderId _cdChildId (Just AltJSON)
               driveService

@@ -109,6 +109,8 @@ instance GoogleRequest RemarketingListSharesPatch
          where
         type Rs RemarketingListSharesPatch =
              RemarketingListShare
+        type Scopes RemarketingListSharesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListSharesPatch{..}
           = go _rlspProFileId (Just _rlspRemarketingListId)
               (Just AltJSON)

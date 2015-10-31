@@ -108,6 +108,10 @@ mwplMaxResults
 instance GoogleRequest ManagementWebPropertiesList
          where
         type Rs ManagementWebPropertiesList = WebProperties
+        type Scopes ManagementWebPropertiesList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementWebPropertiesList{..}
           = go _mwplAccountId _mwplStartIndex _mwplMaxResults
               (Just AltJSON)

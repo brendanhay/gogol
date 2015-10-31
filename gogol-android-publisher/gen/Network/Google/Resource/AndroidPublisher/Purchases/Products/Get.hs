@@ -105,6 +105,8 @@ ppgProductId
 
 instance GoogleRequest PurchasesProductsGet where
         type Rs PurchasesProductsGet = ProductPurchase
+        type Scopes PurchasesProductsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient PurchasesProductsGet{..}
           = go _ppgPackageName _ppgProductId _ppgToken
               (Just AltJSON)

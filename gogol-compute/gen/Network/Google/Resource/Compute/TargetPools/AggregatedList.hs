@@ -141,6 +141,10 @@ instance GoogleRequest TargetPoolsAggregatedList
          where
         type Rs TargetPoolsAggregatedList =
              TargetPoolAggregatedList
+        type Scopes TargetPoolsAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetPoolsAggregatedList{..}
           = go _tpalProject _tpalFilter _tpalPageToken
               (Just _tpalMaxResults)

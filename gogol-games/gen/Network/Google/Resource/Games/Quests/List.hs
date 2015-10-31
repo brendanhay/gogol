@@ -117,6 +117,9 @@ qlMaxResults
 
 instance GoogleRequest QuestsList where
         type Rs QuestsList = QuestListResponse
+        type Scopes QuestsList =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient QuestsList{..}
           = go _qlPlayerId _qlLanguage _qlPageToken
               _qlMaxResults

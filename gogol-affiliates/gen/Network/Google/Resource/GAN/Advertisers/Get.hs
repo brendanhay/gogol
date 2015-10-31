@@ -104,6 +104,7 @@ agRole = lens _agRole (\ s a -> s{_agRole = a})
 
 instance GoogleRequest AdvertisersGet where
         type Rs AdvertisersGet = Advertiser
+        type Scopes AdvertisersGet = '[]
         requestClient AdvertisersGet{..}
           = go _agRole _agRoleId _agAdvertiserId (Just AltJSON)
               affiliatesService

@@ -112,6 +112,8 @@ mlaiSource
 instance GoogleRequest MyLibraryAnnotationsInsert
          where
         type Rs MyLibraryAnnotationsInsert = Annotation
+        type Scopes MyLibraryAnnotationsInsert =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsInsert{..}
           = go _mlaiCountry _mlaiShowOnlySummaryInResponse
               _mlaiSource

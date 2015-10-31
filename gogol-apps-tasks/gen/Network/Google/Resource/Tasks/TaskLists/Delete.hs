@@ -77,6 +77,8 @@ tldTaskList
 
 instance GoogleRequest TaskListsDelete where
         type Rs TaskListsDelete = ()
+        type Scopes TaskListsDelete =
+             '["https://www.googleapis.com/auth/tasks"]
         requestClient TaskListsDelete{..}
           = go _tldTaskList (Just AltJSON) appsTasksService
           where go

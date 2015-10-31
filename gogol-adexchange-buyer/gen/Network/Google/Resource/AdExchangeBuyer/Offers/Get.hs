@@ -75,6 +75,8 @@ ogOfferId
 
 instance GoogleRequest OffersGet where
         type Rs OffersGet = OfferDTO
+        type Scopes OffersGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient OffersGet{..}
           = go _ogOfferId (Just AltJSON) adExchangeBuyerService
           where go

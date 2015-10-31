@@ -93,6 +93,9 @@ actlAccountId
 instance GoogleRequest AccountsContainersTagsList
          where
         type Rs AccountsContainersTagsList = ListTagsResponse
+        type Scopes AccountsContainersTagsList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersTagsList{..}
           = go _actlAccountId _actlContainerId (Just AltJSON)
               tagManagerService

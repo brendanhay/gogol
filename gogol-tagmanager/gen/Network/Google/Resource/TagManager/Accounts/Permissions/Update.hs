@@ -102,6 +102,8 @@ apuPermissionId
 instance GoogleRequest AccountsPermissionsUpdate
          where
         type Rs AccountsPermissionsUpdate = UserAccess
+        type Scopes AccountsPermissionsUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
         requestClient AccountsPermissionsUpdate{..}
           = go _apuAccountId _apuPermissionId (Just AltJSON)
               _apuPayload

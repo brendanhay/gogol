@@ -86,6 +86,10 @@ sSnapshotId
 
 instance GoogleRequest SnapshotsGet where
         type Rs SnapshotsGet = Snapshot
+        type Scopes SnapshotsGet =
+             '["https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient SnapshotsGet{..}
           = go _sSnapshotId _sLanguage (Just AltJSON)
               gamesService

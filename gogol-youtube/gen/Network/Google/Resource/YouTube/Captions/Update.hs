@@ -155,6 +155,9 @@ capSync = lens _capSync (\ s a -> s{_capSync = a})
 
 instance GoogleRequest CaptionsUpdate where
         type Rs CaptionsUpdate = Caption
+        type Scopes CaptionsUpdate =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsUpdate{..}
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
@@ -169,6 +172,8 @@ instance GoogleRequest CaptionsUpdate where
 instance GoogleRequest (MediaUpload CaptionsUpdate)
          where
         type Rs (MediaUpload CaptionsUpdate) = Caption
+        type Scopes (MediaUpload CaptionsUpdate) =
+             Scopes CaptionsUpdate
         requestClient (MediaUpload CaptionsUpdate{..} body)
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner

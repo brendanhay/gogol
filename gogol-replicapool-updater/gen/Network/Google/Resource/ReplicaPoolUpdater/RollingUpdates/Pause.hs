@@ -104,6 +104,9 @@ rupZone = lens _rupZone (\ s a -> s{_rupZone = a})
 
 instance GoogleRequest RollingUpdatesPause where
         type Rs RollingUpdatesPause = Operation
+        type Scopes RollingUpdatesPause =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
         requestClient RollingUpdatesPause{..}
           = go _rupProject _rupZone _rupRollingUpdate
               (Just AltJSON)

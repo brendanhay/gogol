@@ -121,6 +121,9 @@ mududAccountId
 instance GoogleRequest
          ManagementUploadsDeleteUploadData where
         type Rs ManagementUploadsDeleteUploadData = ()
+        type Scopes ManagementUploadsDeleteUploadData =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementUploadsDeleteUploadData{..}
           = go _mududAccountId _mududWebPropertyId
               _mududCustomDataSourceId

@@ -89,6 +89,8 @@ aiiPayload
 
 instance GoogleRequest AdvertisersInsert where
         type Rs AdvertisersInsert = Advertiser
+        type Scopes AdvertisersInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertisersInsert{..}
           = go _aiiProFileId (Just AltJSON) _aiiPayload
               dFAReportingService

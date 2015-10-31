@@ -192,6 +192,8 @@ cpCallback
 
 instance GoogleRequest CoursesPatch where
         type Rs CoursesPatch = Course
+        type Scopes CoursesPatch =
+             '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesPatch{..}
           = go _cpId _cpXgafv _cpUploadProtocol _cpUpdateMask
               (Just _cpPp)

@@ -109,6 +109,9 @@ instance GoogleRequest
          TargetHTTPSProxiesSetSSLCertificates where
         type Rs TargetHTTPSProxiesSetSSLCertificates =
              Operation
+        type Scopes TargetHTTPSProxiesSetSSLCertificates =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
           TargetHTTPSProxiesSetSSLCertificates{..}
           = go _thpsscProject _thpsscTargetHTTPSProxy

@@ -94,6 +94,9 @@ httphciPayload
 
 instance GoogleRequest HTTPHealthChecksInsert where
         type Rs HTTPHealthChecksInsert = Operation
+        type Scopes HTTPHealthChecksInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient HTTPHealthChecksInsert{..}
           = go _httphciProject (Just AltJSON) _httphciPayload
               computeService

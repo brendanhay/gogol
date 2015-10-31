@@ -76,6 +76,8 @@ bigAccountId
 
 instance GoogleRequest BillingInfoGet where
         type Rs BillingInfoGet = BillingInfo
+        type Scopes BillingInfoGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient BillingInfoGet{..}
           = go _bigAccountId (Just AltJSON)
               adExchangeBuyerService

@@ -78,6 +78,8 @@ clEnterpriseId
 
 instance GoogleRequest CollectionsList where
         type Rs CollectionsList = CollectionsListResponse
+        type Scopes CollectionsList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionsList{..}
           = go _clEnterpriseId (Just AltJSON)
               androidEnterpriseService

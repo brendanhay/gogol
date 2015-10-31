@@ -234,6 +234,9 @@ jrlCallback
 
 instance GoogleRequest JobsReportsList where
         type Rs JobsReportsList = ListReportsResponse
+        type Scopes JobsReportsList =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsReportsList{..}
           = go _jrlJobId _jrlCreatedAfter _jrlXgafv
               _jrlUploadProtocol

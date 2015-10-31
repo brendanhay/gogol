@@ -148,6 +148,10 @@ dlMaxResults
 
 instance GoogleRequest DisksList where
         type Rs DisksList = DiskList
+        type Scopes DisksList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DisksList{..}
           = go _dlProject _dlZone _dlFilter _dlPageToken
               (Just _dlMaxResults)

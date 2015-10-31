@@ -89,6 +89,9 @@ alMaxResults
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = Accounts
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsList{..}
           = go _alPageToken _alMaxResults (Just AltJSON)
               adSenseService

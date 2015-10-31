@@ -89,6 +89,8 @@ sdTableId
 
 instance GoogleRequest StyleDelete where
         type Rs StyleDelete = ()
+        type Scopes StyleDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient StyleDelete{..}
           = go _sdTableId _sdStyleId (Just AltJSON)
               fusionTablesService

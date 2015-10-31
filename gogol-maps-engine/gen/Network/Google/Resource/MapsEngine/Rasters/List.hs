@@ -231,6 +231,9 @@ rlCreatedBefore
 
 instance GoogleRequest RastersList where
         type Rs RastersList = RastersListResponse
+        type Scopes RastersList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient RastersList{..}
           = go (Just _rlProjectId) _rlCreatedAfter
               _rlCreatorEmail

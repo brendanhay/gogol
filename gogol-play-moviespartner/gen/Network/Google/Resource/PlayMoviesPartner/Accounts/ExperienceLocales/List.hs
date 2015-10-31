@@ -277,6 +277,8 @@ instance GoogleRequest AccountsExperienceLocalesList
          where
         type Rs AccountsExperienceLocalesList =
              ListExperienceLocalesResponse
+        type Scopes AccountsExperienceLocalesList =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
         requestClient AccountsExperienceLocalesList{..}
           = go _aellAccountId _aellTitleLevelEidr
               (_aellStatus ^. _Default)

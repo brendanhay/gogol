@@ -108,6 +108,9 @@ scceInstance
 
 instance GoogleRequest SSLCertsCreateEphemeral where
         type Rs SSLCertsCreateEphemeral = SSLCert
+        type Scopes SSLCertsCreateEphemeral =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient SSLCertsCreateEphemeral{..}
           = go _scceProject _scceInstance (Just AltJSON)
               _sccePayload

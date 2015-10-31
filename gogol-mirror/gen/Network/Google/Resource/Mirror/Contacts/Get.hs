@@ -74,6 +74,8 @@ cgId = lens _cgId (\ s a -> s{_cgId = a})
 
 instance GoogleRequest ContactsGet where
         type Rs ContactsGet = Contact
+        type Scopes ContactsGet =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient ContactsGet{..}
           = go _cgId (Just AltJSON) mirrorService
           where go

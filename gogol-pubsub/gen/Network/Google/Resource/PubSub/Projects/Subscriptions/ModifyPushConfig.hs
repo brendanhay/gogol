@@ -179,6 +179,9 @@ psmpcCallback
 instance GoogleRequest
          ProjectsSubscriptionsModifyPushConfig where
         type Rs ProjectsSubscriptionsModifyPushConfig = Empty
+        type Scopes ProjectsSubscriptionsModifyPushConfig =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient
           ProjectsSubscriptionsModifyPushConfig{..}
           = go _psmpcSubscription _psmpcXgafv

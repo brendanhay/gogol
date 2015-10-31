@@ -81,6 +81,8 @@ instance GoogleRequest AchievementConfigurationsGet
          where
         type Rs AchievementConfigurationsGet =
              AchievementConfiguration
+        type Scopes AchievementConfigurationsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient AchievementConfigurationsGet{..}
           = go _acgAchievementId (Just AltJSON)
               gamesConfigurationService

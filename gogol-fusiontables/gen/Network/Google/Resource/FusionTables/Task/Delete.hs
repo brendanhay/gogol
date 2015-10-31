@@ -89,6 +89,8 @@ tdTableId
 
 instance GoogleRequest TaskDelete where
         type Rs TaskDelete = ()
+        type Scopes TaskDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TaskDelete{..}
           = go _tdTableId _tdTaskId (Just AltJSON)
               fusionTablesService

@@ -76,6 +76,8 @@ siPayload
 
 instance GoogleRequest SubscriptionsInsert where
         type Rs SubscriptionsInsert = Subscription
+        type Scopes SubscriptionsInsert =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient SubscriptionsInsert{..}
           = go (Just AltJSON) _siPayload mirrorService
           where go

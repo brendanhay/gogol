@@ -91,6 +91,9 @@ uiPayload
 
 instance GoogleRequest UsersInsert where
         type Rs UsersInsert = Operation
+        type Scopes UsersInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient UsersInsert{..}
           = go _uiProject (Just AltJSON) _uiPayload
               userAccountsService

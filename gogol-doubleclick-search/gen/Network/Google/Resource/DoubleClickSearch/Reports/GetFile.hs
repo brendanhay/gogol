@@ -99,6 +99,8 @@ rgfReportFragment
 
 instance GoogleRequest ReportsGetFile where
         type Rs ReportsGetFile = ()
+        type Scopes ReportsGetFile =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ReportsGetFile{..}
           = go _rgfReportId _rgfReportFragment (Just AltJSON)
               doubleClickSearchService
@@ -109,6 +111,8 @@ instance GoogleRequest ReportsGetFile where
 instance GoogleRequest (MediaDownload ReportsGetFile)
          where
         type Rs (MediaDownload ReportsGetFile) = Stream
+        type Scopes (MediaDownload ReportsGetFile) =
+             Scopes ReportsGetFile
         requestClient (MediaDownload ReportsGetFile{..})
           = go _rgfReportId _rgfReportFragment (Just AltMedia)
               doubleClickSearchService

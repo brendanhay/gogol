@@ -90,6 +90,8 @@ ccuAdClientId
 
 instance GoogleRequest CustomChannelsUpdate where
         type Rs CustomChannelsUpdate = CustomChannel
+        type Scopes CustomChannelsUpdate =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient CustomChannelsUpdate{..}
           = go _ccuAdClientId (Just AltJSON) _ccuPayload
               adSenseHostService

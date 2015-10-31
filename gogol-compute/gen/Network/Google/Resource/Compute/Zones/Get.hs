@@ -89,6 +89,10 @@ zgZone = lens _zgZone (\ s a -> s{_zgZone = a})
 
 instance GoogleRequest ZonesGet where
         type Rs ZonesGet = Zone
+        type Scopes ZonesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ZonesGet{..}
           = go _zgProject _zgZone (Just AltJSON) computeService
           where go

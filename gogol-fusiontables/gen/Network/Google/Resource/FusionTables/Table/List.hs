@@ -86,6 +86,9 @@ tMaxResults
 
 instance GoogleRequest TableList' where
         type Rs TableList' = TableList
+        type Scopes TableList' =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient TableList'{..}
           = go _tPageToken _tMaxResults (Just AltJSON)
               fusionTablesService

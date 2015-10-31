@@ -149,6 +149,8 @@ clMaxResults
 
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList
+        type Scopes CreativesList' =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient CreativesList'{..}
           = go (_clBuyerCreativeId ^. _Default)
               _clOpenAuctionStatusFilter

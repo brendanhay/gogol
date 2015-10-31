@@ -103,6 +103,8 @@ aaugAccountId
 
 instance GoogleRequest AccountsAdUnitsGet where
         type Rs AccountsAdUnitsGet = AdUnit
+        type Scopes AccountsAdUnitsGet =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AccountsAdUnitsGet{..}
           = go _aaugAccountId _aaugAdClientId _aaugAdUnitId
               (Just AltJSON)

@@ -241,6 +241,9 @@ instance GoogleRequest
          DebuggerDebuggeesBreakpointsList where
         type Rs DebuggerDebuggeesBreakpointsList =
              ListBreakpointsResponse
+        type Scopes DebuggerDebuggeesBreakpointsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient DebuggerDebuggeesBreakpointsList{..}
           = go _ddblDebuggeeId _ddblXgafv _ddblIncludeInactive
               _ddblUploadProtocol

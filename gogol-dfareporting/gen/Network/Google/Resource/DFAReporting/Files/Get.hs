@@ -99,6 +99,8 @@ fgFileId
 
 instance GoogleRequest FilesGet where
         type Rs FilesGet = File
+        type Scopes FilesGet =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient FilesGet{..}
           = go _fgReportId _fgFileId (Just AltJSON)
               dFAReportingService
@@ -108,6 +110,8 @@ instance GoogleRequest FilesGet where
 
 instance GoogleRequest (MediaDownload FilesGet) where
         type Rs (MediaDownload FilesGet) = Stream
+        type Scopes (MediaDownload FilesGet) =
+             Scopes FilesGet
         requestClient (MediaDownload FilesGet{..})
           = go _fgReportId _fgFileId (Just AltMedia)
               dFAReportingService

@@ -160,6 +160,8 @@ epEventId
 
 instance GoogleRequest EventsPatch where
         type Rs EventsPatch = Event
+        type Scopes EventsPatch =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient EventsPatch{..}
           = go _epCalendarId _epEventId _epMaxAttendees
               _epSendNotifications

@@ -118,6 +118,10 @@ instance GoogleRequest InstancesGetSerialPortOutput
          where
         type Rs InstancesGetSerialPortOutput =
              SerialPortOutput
+        type Scopes InstancesGetSerialPortOutput =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstancesGetSerialPortOutput{..}
           = go _igspoProject _igspoZone _igspoInstance
               (Just _igspoPort)

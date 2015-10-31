@@ -198,6 +198,7 @@ bdlCallback
 instance GoogleRequest BeaconsDiagnosticsList where
         type Rs BeaconsDiagnosticsList =
              ListDiagnosticsResponse
+        type Scopes BeaconsDiagnosticsList = '[]
         requestClient BeaconsDiagnosticsList{..}
           = go _bdlBeaconName _bdlXgafv _bdlUploadProtocol
               (Just _bdlPp)

@@ -104,6 +104,8 @@ sdSubscriptionId
 
 instance GoogleRequest SubscriptionsDelete where
         type Rs SubscriptionsDelete = ()
+        type Scopes SubscriptionsDelete =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsDelete{..}
           = go _sdCustomerId _sdSubscriptionId
               (Just _sdDeletionType)

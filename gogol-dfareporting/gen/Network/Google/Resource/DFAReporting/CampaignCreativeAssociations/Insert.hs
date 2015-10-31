@@ -112,6 +112,8 @@ instance GoogleRequest
          CampaignCreativeAssociationsInsert where
         type Rs CampaignCreativeAssociationsInsert =
              CampaignCreativeAssociation
+        type Scopes CampaignCreativeAssociationsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignCreativeAssociationsInsert{..}
           = go _ccaiProFileId _ccaiCampaignId (Just AltJSON)
               _ccaiPayload

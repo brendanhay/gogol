@@ -105,6 +105,8 @@ paProductId
 
 instance GoogleRequest ProductsApprove where
         type Rs ProductsApprove = ()
+        type Scopes ProductsApprove =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsApprove{..}
           = go _paEnterpriseId _paProductId (Just AltJSON)
               _paPayload

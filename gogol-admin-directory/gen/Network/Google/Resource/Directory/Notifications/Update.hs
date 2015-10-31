@@ -103,6 +103,8 @@ nuNotificationId
 
 instance GoogleRequest NotificationsUpdate where
         type Rs NotificationsUpdate = Notification
+        type Scopes NotificationsUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
         requestClient NotificationsUpdate{..}
           = go _nuCustomer _nuNotificationId (Just AltJSON)
               _nuPayload

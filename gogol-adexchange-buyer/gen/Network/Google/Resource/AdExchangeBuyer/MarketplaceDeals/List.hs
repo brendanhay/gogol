@@ -78,6 +78,8 @@ mdlProposalId
 
 instance GoogleRequest MarketplaceDealsList where
         type Rs MarketplaceDealsList = GetOrderDealsResponse
+        type Scopes MarketplaceDealsList =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceDealsList{..}
           = go _mdlProposalId (Just AltJSON)
               adExchangeBuyerService

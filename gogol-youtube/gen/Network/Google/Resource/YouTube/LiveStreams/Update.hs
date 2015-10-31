@@ -145,6 +145,9 @@ lsuOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest LiveStreamsUpdate where
         type Rs LiveStreamsUpdate = LiveStream
+        type Scopes LiveStreamsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveStreamsUpdate{..}
           = go (Just _lsuPart) _lsuOnBehalfOfContentOwner
               _lsuOnBehalfOfContentOwnerChannel

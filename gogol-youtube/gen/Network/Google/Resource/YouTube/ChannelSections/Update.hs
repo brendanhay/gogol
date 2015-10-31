@@ -111,6 +111,10 @@ csuOnBehalfOfContentOwner
 
 instance GoogleRequest ChannelSectionsUpdate where
         type Rs ChannelSectionsUpdate = ChannelSection
+        type Scopes ChannelSectionsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient ChannelSectionsUpdate{..}
           = go (Just _csuPart) _csuOnBehalfOfContentOwner
               (Just AltJSON)

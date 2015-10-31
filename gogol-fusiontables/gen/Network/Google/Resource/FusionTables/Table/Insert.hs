@@ -75,6 +75,8 @@ tiPayload
 
 instance GoogleRequest TableInsert where
         type Rs TableInsert = Table
+        type Scopes TableInsert =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TableInsert{..}
           = go (Just AltJSON) _tiPayload fusionTablesService
           where go

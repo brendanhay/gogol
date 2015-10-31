@@ -189,6 +189,8 @@ ladgLayerId
 
 instance GoogleRequest LayersAnnotationDataGet where
         type Rs LayersAnnotationDataGet = AnnotationData
+        type Scopes LayersAnnotationDataGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient LayersAnnotationDataGet{..}
           = go _ladgVolumeId _ladgLayerId _ladgAnnotationDataId
               (Just _ladgContentVersion)

@@ -215,6 +215,9 @@ uwMaxResults
 
 instance GoogleRequest UsersWatch where
         type Rs UsersWatch = Channel
+        type Scopes UsersWatch =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
         requestClient UsersWatch{..}
           = go _uwEvent _uwOrderBy (Just _uwViewType)
               _uwCustomFieldMask

@@ -107,6 +107,9 @@ gfrstPayload
 instance GoogleRequest GlobalForwardingRulesSetTarget
          where
         type Rs GlobalForwardingRulesSetTarget = Operation
+        type Scopes GlobalForwardingRulesSetTarget =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient GlobalForwardingRulesSetTarget{..}
           = go _gfrstProject _gfrstForwardingRule
               (Just AltJSON)

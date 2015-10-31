@@ -115,6 +115,10 @@ zvrrPayload
 
 instance GoogleRequest ZoneViewsRemoveResources where
         type Rs ZoneViewsRemoveResources = Operation
+        type Scopes ZoneViewsRemoveResources =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient ZoneViewsRemoveResources{..}
           = go _zvrrProject _zvrrZone _zvrrResourceView
               (Just AltJSON)

@@ -133,6 +133,7 @@ rProp
 
 instance GoogleRequest Reconcile where
         type Rs Reconcile = ReconcileGet
+        type Scopes Reconcile = '[]
         requestClient Reconcile{..}
           = go (_rKind ^. _Default) (_rLang ^. _Default)
               (Just _rConfidence)

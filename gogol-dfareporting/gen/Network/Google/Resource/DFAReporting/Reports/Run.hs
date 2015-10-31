@@ -103,6 +103,8 @@ rrProFileId
 
 instance GoogleRequest ReportsRun where
         type Rs ReportsRun = File
+        type Scopes ReportsRun =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsRun{..}
           = go _rrProFileId _rrReportId _rrSynchronous
               (Just AltJSON)

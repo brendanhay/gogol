@@ -184,6 +184,8 @@ olCallback
 
 instance GoogleRequest OrganizationsList where
         type Rs OrganizationsList = ListOrganizationsResponse
+        type Scopes OrganizationsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient OrganizationsList{..}
           = go _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken

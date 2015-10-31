@@ -101,6 +101,8 @@ pgSource = lens _pgSource (\ s a -> s{_pgSource = a})
 
 instance GoogleRequest PersonalizedstreamGet where
         type Rs PersonalizedstreamGet = Discoveryclusters
+        type Scopes PersonalizedstreamGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient PersonalizedstreamGet{..}
           = go _pgLocale _pgMaxAllowedMaturityRating _pgSource
               (Just AltJSON)

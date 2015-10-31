@@ -105,6 +105,8 @@ acc3MaxResults
 instance GoogleRequest AccountstatusesList where
         type Rs AccountstatusesList =
              AccountstatusesListResponse
+        type Scopes AccountstatusesList =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountstatusesList{..}
           = go _acc3MerchantId _acc3PageToken _acc3MaxResults
               (Just AltJSON)

@@ -140,6 +140,15 @@ cwIncludeRemoved
 
 instance GoogleRequest ChangesWatch where
         type Rs ChangesWatch = Channel
+        type Scopes ChangesWatch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient ChangesWatch{..}
           = go (Just _cwPageToken) (Just _cwRestrictToMyDrive)
               (Just _cwSpaces)

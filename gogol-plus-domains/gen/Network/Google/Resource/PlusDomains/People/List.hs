@@ -126,6 +126,10 @@ plMaxResults
 
 instance GoogleRequest PeopleList where
         type Rs PeopleList = PeopleFeed
+        type Scopes PeopleList =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient PeopleList{..}
           = go _plUserId _plCollection _plOrderBy _plPageToken
               (Just _plMaxResults)

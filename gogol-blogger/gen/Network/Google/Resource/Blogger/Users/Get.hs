@@ -74,6 +74,9 @@ ugUserId = lens _ugUserId (\ s a -> s{_ugUserId = a})
 
 instance GoogleRequest UsersGet where
         type Rs UsersGet = User
+        type Scopes UsersGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient UsersGet{..}
           = go _ugUserId (Just AltJSON) bloggerService
           where go

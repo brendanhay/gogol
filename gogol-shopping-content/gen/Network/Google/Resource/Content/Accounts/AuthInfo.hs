@@ -62,6 +62,8 @@ accountsAuthInfo = AccountsAuthInfo
 
 instance GoogleRequest AccountsAuthInfo where
         type Rs AccountsAuthInfo = AccountsAuthInfoResponse
+        type Scopes AccountsAuthInfo =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountsAuthInfo{}
           = go (Just AltJSON) shoppingContentService
           where go

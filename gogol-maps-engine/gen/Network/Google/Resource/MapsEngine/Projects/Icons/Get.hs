@@ -96,6 +96,9 @@ pigProjectId
 
 instance GoogleRequest ProjectsIconsGet where
         type Rs ProjectsIconsGet = Icon
+        type Scopes ProjectsIconsGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient ProjectsIconsGet{..}
           = go _pigProjectId _pigId (Just AltJSON)
               mapsEngineService
@@ -107,6 +110,8 @@ instance GoogleRequest ProjectsIconsGet where
 instance GoogleRequest
          (MediaDownload ProjectsIconsGet) where
         type Rs (MediaDownload ProjectsIconsGet) = Stream
+        type Scopes (MediaDownload ProjectsIconsGet) =
+             Scopes ProjectsIconsGet
         requestClient (MediaDownload ProjectsIconsGet{..})
           = go _pigProjectId _pigId (Just AltMedia)
               mapsEngineService

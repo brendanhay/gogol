@@ -119,6 +119,8 @@ iAppSKU = lens _iAppSKU (\ s a -> s{_iAppSKU = a})
 
 instance GoogleRequest InAppProductsPatch where
         type Rs InAppProductsPatch = InAppProduct
+        type Scopes InAppProductsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient InAppProductsPatch{..}
           = go _iAppPackageName _iAppSKU
               _iAppAutoConvertMissingPrices

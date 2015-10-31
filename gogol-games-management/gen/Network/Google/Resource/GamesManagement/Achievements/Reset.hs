@@ -82,6 +82,9 @@ arAchievementId
 
 instance GoogleRequest AchievementsReset where
         type Rs AchievementsReset = AchievementResetResponse
+        type Scopes AchievementsReset =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementsReset{..}
           = go _arAchievementId (Just AltJSON)
               gamesManagementService

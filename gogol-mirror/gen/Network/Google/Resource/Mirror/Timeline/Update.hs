@@ -97,6 +97,9 @@ tuId = lens _tuId (\ s a -> s{_tuId = a})
 
 instance GoogleRequest TimelineUpdate where
         type Rs TimelineUpdate = TimelineItem
+        type Scopes TimelineUpdate =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelineUpdate{..}
           = go _tuId (Just AltJSON) _tuPayload mirrorService
           where go :<|> _
@@ -106,6 +109,8 @@ instance GoogleRequest TimelineUpdate where
 instance GoogleRequest (MediaUpload TimelineUpdate)
          where
         type Rs (MediaUpload TimelineUpdate) = TimelineItem
+        type Scopes (MediaUpload TimelineUpdate) =
+             Scopes TimelineUpdate
         requestClient (MediaUpload TimelineUpdate{..} body)
           = go _tuId (Just AltJSON) (Just AltMedia) _tuPayload
               body

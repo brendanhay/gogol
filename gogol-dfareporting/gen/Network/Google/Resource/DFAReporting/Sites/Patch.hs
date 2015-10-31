@@ -100,6 +100,8 @@ spId = lens _spId (\ s a -> s{_spId = a}) . _Coerce
 
 instance GoogleRequest SitesPatch where
         type Rs SitesPatch = Site
+        type Scopes SitesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SitesPatch{..}
           = go _spProFileId (Just _spId) (Just AltJSON)
               _spPayload

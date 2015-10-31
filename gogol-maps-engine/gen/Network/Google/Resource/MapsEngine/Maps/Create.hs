@@ -75,6 +75,8 @@ mcPayload
 
 instance GoogleRequest MapsCreate where
         type Rs MapsCreate = Map
+        type Scopes MapsCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient MapsCreate{..}
           = go (Just AltJSON) _mcPayload mapsEngineService
           where go

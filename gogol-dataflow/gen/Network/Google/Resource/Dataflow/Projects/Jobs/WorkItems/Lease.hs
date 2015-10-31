@@ -185,6 +185,9 @@ instance GoogleRequest ProjectsJobsWorkItemsLease
          where
         type Rs ProjectsJobsWorkItemsLease =
              LeaseWorkItemResponse
+        type Scopes ProjectsJobsWorkItemsLease =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsWorkItemsLease{..}
           = go _pjwilProjectId _pjwilJobId _pjwilXgafv
               _pjwilUploadProtocol

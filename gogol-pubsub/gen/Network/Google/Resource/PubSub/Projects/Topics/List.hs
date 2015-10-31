@@ -179,6 +179,9 @@ ptlCallback
 
 instance GoogleRequest ProjectsTopicsList where
         type Rs ProjectsTopicsList = ListTopicsResponse
+        type Scopes ProjectsTopicsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsList{..}
           = go _ptlProject _ptlXgafv _ptlUploadProtocol
               (Just _ptlPp)

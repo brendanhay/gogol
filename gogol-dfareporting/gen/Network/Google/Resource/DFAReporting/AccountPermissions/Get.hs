@@ -90,6 +90,8 @@ apgId
 
 instance GoogleRequest AccountPermissionsGet where
         type Rs AccountPermissionsGet = AccountPermission
+        type Scopes AccountPermissionsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountPermissionsGet{..}
           = go _apgProFileId _apgId (Just AltJSON)
               dFAReportingService

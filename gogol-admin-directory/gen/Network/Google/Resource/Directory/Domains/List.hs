@@ -77,6 +77,9 @@ dlCustomer
 
 instance GoogleRequest DomainsList where
         type Rs DomainsList = Domains2
+        type Scopes DomainsList =
+             '["https://www.googleapis.com/auth/admin.directory.domain",
+               "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
         requestClient DomainsList{..}
           = go _dlCustomer (Just AltJSON) directoryService
           where go

@@ -92,6 +92,8 @@ mniProposalId
 instance GoogleRequest MarketplaceNotesInsert where
         type Rs MarketplaceNotesInsert =
              AddOrderNotesResponse
+        type Scopes MarketplaceNotesInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceNotesInsert{..}
           = go _mniProposalId (Just AltJSON) _mniPayload
               adExchangeBuyerService

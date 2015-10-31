@@ -141,6 +141,10 @@ instance GoogleRequest MachineTypesAggregatedList
          where
         type Rs MachineTypesAggregatedList =
              MachineTypeAggregatedList
+        type Scopes MachineTypesAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient MachineTypesAggregatedList{..}
           = go _mtalProject _mtalFilter _mtalPageToken
               (Just _mtalMaxResults)

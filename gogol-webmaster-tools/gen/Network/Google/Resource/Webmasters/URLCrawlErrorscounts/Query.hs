@@ -123,6 +123,9 @@ instance GoogleRequest URLCrawlErrorscountsQuery
          where
         type Rs URLCrawlErrorscountsQuery =
              URLCrawlErrorsCountsQueryResponse
+        type Scopes URLCrawlErrorscountsQuery =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
         requestClient URLCrawlErrorscountsQuery{..}
           = go _uceqSiteURL _uceqPlatform _uceqCategory
               (Just _uceqLatestCountsOnly)

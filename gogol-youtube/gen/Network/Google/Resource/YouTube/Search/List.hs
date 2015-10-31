@@ -573,6 +573,11 @@ slVideoDimension
 
 instance GoogleRequest SearchList where
         type Rs SearchList = SearchListResponse
+        type Scopes SearchList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient SearchList{..}
           = go (Just _slPart) _slPublishedAfter
               _slVideoDefinition

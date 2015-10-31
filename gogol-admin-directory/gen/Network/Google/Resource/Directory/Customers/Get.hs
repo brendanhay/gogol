@@ -77,6 +77,9 @@ cgCustomerKey
 
 instance GoogleRequest CustomersGet where
         type Rs CustomersGet = Customer
+        type Scopes CustomersGet =
+             '["https://www.googleapis.com/auth/admin.directory.customer",
+               "https://www.googleapis.com/auth/admin.directory.customer.readonly"]
         requestClient CustomersGet{..}
           = go _cgCustomerKey (Just AltJSON) directoryService
           where go

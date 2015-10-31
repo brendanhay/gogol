@@ -183,6 +183,9 @@ pjgmCallback
 
 instance GoogleRequest ProjectsJobsGetMetrics where
         type Rs ProjectsJobsGetMetrics = JobMetrics
+        type Scopes ProjectsJobsGetMetrics =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsGetMetrics{..}
           = go _pjgmProjectId _pjgmJobId _pjgmXgafv
               _pjgmUploadProtocol

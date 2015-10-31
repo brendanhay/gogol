@@ -75,6 +75,9 @@ cgCircleId
 
 instance GoogleRequest CirclesGet where
         type Rs CirclesGet = Circle
+        type Scopes CirclesGet =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient CirclesGet{..}
           = go _cgCircleId (Just AltJSON) plusDomainsService
           where go

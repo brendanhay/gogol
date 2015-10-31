@@ -91,6 +91,9 @@ rslMaxResults
 
 instance GoogleRequest ReportsSavedList where
         type Rs ReportsSavedList = SavedReports
+        type Scopes ReportsSavedList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient ReportsSavedList{..}
           = go _rslPageToken _rslMaxResults (Just AltJSON)
               adSenseService

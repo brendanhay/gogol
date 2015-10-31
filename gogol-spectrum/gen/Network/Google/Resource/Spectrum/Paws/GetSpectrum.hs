@@ -81,6 +81,7 @@ pgsPayload
 
 instance GoogleRequest PawsGetSpectrum where
         type Rs PawsGetSpectrum = PawsGetSpectrumResponse
+        type Scopes PawsGetSpectrum = '[]
         requestClient PawsGetSpectrum{..}
           = go (Just AltJSON) _pgsPayload spectrumService
           where go

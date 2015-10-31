@@ -134,6 +134,8 @@ instance GoogleRequest
          ManagementProFileUserLinksUpdate where
         type Rs ManagementProFileUserLinksUpdate =
              EntityUserLink
+        type Scopes ManagementProFileUserLinksUpdate =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient ManagementProFileUserLinksUpdate{..}
           = go _mpfuluAccountId _mpfuluWebPropertyId
               _mpfuluProFileId

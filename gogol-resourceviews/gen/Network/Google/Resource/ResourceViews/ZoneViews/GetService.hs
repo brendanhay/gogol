@@ -117,6 +117,10 @@ zvgsZone = lens _zvgsZone (\ s a -> s{_zvgsZone = a})
 instance GoogleRequest ZoneViewsGetService where
         type Rs ZoneViewsGetService =
              ZoneViewsGetServiceResponse
+        type Scopes ZoneViewsGetService =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient ZoneViewsGetService{..}
           = go _zvgsProject _zvgsZone _zvgsResourceView
               _zvgsResourceName

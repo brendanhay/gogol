@@ -174,6 +174,8 @@ cacCallback
 
 instance GoogleRequest CoursesAliasesCreate where
         type Rs CoursesAliasesCreate = CourseAlias
+        type Scopes CoursesAliasesCreate =
+             '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesAliasesCreate{..}
           = go _cacCourseId _cacXgafv _cacUploadProtocol
               (Just _cacPp)

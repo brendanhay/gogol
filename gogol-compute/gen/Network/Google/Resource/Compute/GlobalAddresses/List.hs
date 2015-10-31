@@ -137,6 +137,10 @@ galMaxResults
 
 instance GoogleRequest GlobalAddressesList where
         type Rs GlobalAddressesList = AddressList
+        type Scopes GlobalAddressesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalAddressesList{..}
           = go _galProject _galFilter _galPageToken
               (Just _galMaxResults)

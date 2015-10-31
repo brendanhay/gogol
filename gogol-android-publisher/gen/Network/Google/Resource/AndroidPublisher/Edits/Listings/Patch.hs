@@ -118,6 +118,8 @@ elpEditId
 
 instance GoogleRequest EditsListingsPatch where
         type Rs EditsListingsPatch = Listing
+        type Scopes EditsListingsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsPatch{..}
           = go _elpPackageName _elpEditId _elpLanguage
               (Just AltJSON)

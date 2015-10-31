@@ -91,6 +91,8 @@ ocoPayload
 instance GoogleRequest OrdersCreatetestOrder where
         type Rs OrdersCreatetestOrder =
              OrdersCreateTestOrderResponse
+        type Scopes OrdersCreatetestOrder =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCreatetestOrder{..}
           = go _ocoMerchantId (Just AltJSON) _ocoPayload
               shoppingContentService

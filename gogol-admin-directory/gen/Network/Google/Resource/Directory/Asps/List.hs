@@ -78,6 +78,8 @@ alUserKey
 
 instance GoogleRequest AspsList where
         type Rs AspsList = Asps
+        type Scopes AspsList =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient AspsList{..}
           = go _alUserKey (Just AltJSON) directoryService
           where go

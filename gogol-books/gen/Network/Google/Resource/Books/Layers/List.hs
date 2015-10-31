@@ -122,6 +122,8 @@ llMaxResults
 
 instance GoogleRequest LayersList where
         type Rs LayersList = Layersummaries
+        type Scopes LayersList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient LayersList{..}
           = go _llVolumeId _llContentVersion _llSource
               _llPageToken

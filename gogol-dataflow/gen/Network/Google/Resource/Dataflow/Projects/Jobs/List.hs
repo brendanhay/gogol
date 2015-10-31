@@ -191,6 +191,9 @@ pjlCallback
 
 instance GoogleRequest ProjectsJobsList where
         type Rs ProjectsJobsList = ListJobsResponse
+        type Scopes ProjectsJobsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsList{..}
           = go _pjlProjectId _pjlXgafv _pjlUploadProtocol
               (Just _pjlPp)

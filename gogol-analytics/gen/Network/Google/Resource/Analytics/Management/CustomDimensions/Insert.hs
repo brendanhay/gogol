@@ -107,6 +107,8 @@ instance GoogleRequest
          ManagementCustomDimensionsInsert where
         type Rs ManagementCustomDimensionsInsert =
              CustomDimension
+        type Scopes ManagementCustomDimensionsInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementCustomDimensionsInsert{..}
           = go _mcdiAccountId _mcdiWebPropertyId (Just AltJSON)
               _mcdiPayload

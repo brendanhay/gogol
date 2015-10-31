@@ -135,6 +135,10 @@ flMaxResults
 
 instance GoogleRequest FirewallsList where
         type Rs FirewallsList = FirewallList
+        type Scopes FirewallsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient FirewallsList{..}
           = go _flProject _flFilter _flPageToken
               (Just _flMaxResults)

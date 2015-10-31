@@ -105,6 +105,7 @@ eviqOfficialOnly
 
 instance GoogleRequest ElectionsVoterInfoQuery where
         type Rs ElectionsVoterInfoQuery = VoterInfoResponse
+        type Scopes ElectionsVoterInfoQuery = '[]
         requestClient ElectionsVoterInfoQuery{..}
           = go (Just _eviqAddress) (Just _eviqElectionId)
               (Just _eviqOfficialOnly)

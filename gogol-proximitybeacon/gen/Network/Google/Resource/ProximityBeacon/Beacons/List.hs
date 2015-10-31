@@ -224,6 +224,7 @@ blCallback
 
 instance GoogleRequest BeaconsList where
         type Rs BeaconsList = ListBeaconsResponse
+        type Scopes BeaconsList = '[]
         requestClient BeaconsList{..}
           = go _blXgafv _blUploadProtocol (Just _blPp)
               _blAccessToken

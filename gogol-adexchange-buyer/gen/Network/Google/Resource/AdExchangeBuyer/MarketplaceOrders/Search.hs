@@ -76,6 +76,8 @@ mosPqlQuery
 
 instance GoogleRequest MarketplaceOrdersSearch where
         type Rs MarketplaceOrdersSearch = GetOrdersResponse
+        type Scopes MarketplaceOrdersSearch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceOrdersSearch{..}
           = go _mosPqlQuery (Just AltJSON)
               adExchangeBuyerService

@@ -76,6 +76,8 @@ iapbPayload
 instance GoogleRequest InAppProductsBatch where
         type Rs InAppProductsBatch =
              InAppProductsBatchResponse
+        type Scopes InAppProductsBatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient InAppProductsBatch{..}
           = go (Just AltJSON) _iapbPayload
               androidPublisherService

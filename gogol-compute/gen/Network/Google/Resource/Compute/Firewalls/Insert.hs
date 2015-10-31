@@ -91,6 +91,9 @@ fiPayload
 
 instance GoogleRequest FirewallsInsert where
         type Rs FirewallsInsert = Operation
+        type Scopes FirewallsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient FirewallsInsert{..}
           = go _fiProject (Just AltJSON) _fiPayload
               computeService

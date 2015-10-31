@@ -130,6 +130,9 @@ isdadInstance
 instance GoogleRequest InstancesSetDiskAutoDelete
          where
         type Rs InstancesSetDiskAutoDelete = Operation
+        type Scopes InstancesSetDiskAutoDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesSetDiskAutoDelete{..}
           = go _isdadProject _isdadZone _isdadInstance
               (Just _isdadAutoDelete)

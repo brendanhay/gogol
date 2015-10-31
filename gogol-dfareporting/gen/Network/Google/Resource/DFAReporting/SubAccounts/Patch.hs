@@ -102,6 +102,8 @@ sapId
 
 instance GoogleRequest SubAccountsPatch where
         type Rs SubAccountsPatch = SubAccount
+        type Scopes SubAccountsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SubAccountsPatch{..}
           = go _sapProFileId (Just _sapId) (Just AltJSON)
               _sapPayload

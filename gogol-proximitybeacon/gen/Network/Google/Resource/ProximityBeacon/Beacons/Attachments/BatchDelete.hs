@@ -182,6 +182,7 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete
          where
         type Rs BeaconsAttachmentsBatchDelete =
              DeleteAttachmentsResponse
+        type Scopes BeaconsAttachmentsBatchDelete = '[]
         requestClient BeaconsAttachmentsBatchDelete{..}
           = go _babdBeaconName _babdXgafv _babdUploadProtocol
               (Just _babdPp)

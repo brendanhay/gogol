@@ -80,6 +80,7 @@ instance GoogleRequest RelyingPartySetAccountInfo
          where
         type Rs RelyingPartySetAccountInfo =
              SetAccountInfoResponse
+        type Scopes RelyingPartySetAccountInfo = '[]
         requestClient RelyingPartySetAccountInfo{..}
           = go (Just AltJSON) _rpsaiPayload
               identityToolkitService

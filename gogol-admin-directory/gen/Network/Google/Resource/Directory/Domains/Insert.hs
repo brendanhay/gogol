@@ -89,6 +89,8 @@ diCustomer
 
 instance GoogleRequest DomainsInsert where
         type Rs DomainsInsert = Domains
+        type Scopes DomainsInsert =
+             '["https://www.googleapis.com/auth/admin.directory.domain"]
         requestClient DomainsInsert{..}
           = go _diCustomer (Just AltJSON) _diPayload
               directoryService

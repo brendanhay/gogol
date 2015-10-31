@@ -158,6 +158,8 @@ pcCallback
 
 instance GoogleRequest ProjectsCreate where
         type Rs ProjectsCreate = Project
+        type Scopes ProjectsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsCreate{..}
           = go _pcXgafv _pcUploadProtocol (Just _pcPp)
               _pcAccessToken

@@ -149,6 +149,11 @@ rlDeployment
 
 instance GoogleRequest ResourcesList where
         type Rs ResourcesList = ResourcesListResponse
+        type Scopes ResourcesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient ResourcesList{..}
           = go _rlProject _rlDeployment _rlFilter _rlPageToken
               (Just _rlMaxResults)

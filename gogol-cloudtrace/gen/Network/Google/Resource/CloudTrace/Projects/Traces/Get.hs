@@ -166,6 +166,8 @@ ptgCallback
 
 instance GoogleRequest ProjectsTracesGet where
         type Rs ProjectsTracesGet = Trace
+        type Scopes ProjectsTracesGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsTracesGet{..}
           = go _ptgProjectId _ptgTraceId _ptgXgafv
               _ptgUploadProtocol

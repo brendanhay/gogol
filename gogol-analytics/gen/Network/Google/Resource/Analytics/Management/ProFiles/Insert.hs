@@ -104,6 +104,8 @@ mpfiAccountId
 
 instance GoogleRequest ManagementProFilesInsert where
         type Rs ManagementProFilesInsert = ProFile
+        type Scopes ManagementProFilesInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementProFilesInsert{..}
           = go _mpfiAccountId _mpfiWebPropertyId (Just AltJSON)
               _mpfiPayload

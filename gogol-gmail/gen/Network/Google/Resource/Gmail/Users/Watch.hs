@@ -88,6 +88,10 @@ uwUserId = lens _uwUserId (\ s a -> s{_uwUserId = a})
 
 instance GoogleRequest UsersWatch where
         type Rs UsersWatch = WatchResponse
+        type Scopes UsersWatch =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersWatch{..}
           = go _uwUserId (Just AltJSON) _uwPayload gmailService
           where go

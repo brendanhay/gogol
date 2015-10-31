@@ -108,6 +108,8 @@ instance GoogleRequest ImageConfigurationsUpload
          where
         type Rs ImageConfigurationsUpload =
              ImageConfiguration
+        type Scopes ImageConfigurationsUpload =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient ImageConfigurationsUpload{..}
           = go _icuResourceId _icuImageType (Just AltJSON)
               gamesConfigurationService
@@ -120,6 +122,8 @@ instance GoogleRequest
          (MediaUpload ImageConfigurationsUpload) where
         type Rs (MediaUpload ImageConfigurationsUpload) =
              ImageConfiguration
+        type Scopes (MediaUpload ImageConfigurationsUpload) =
+             Scopes ImageConfigurationsUpload
         requestClient
           (MediaUpload ImageConfigurationsUpload{..} body)
           = go _icuResourceId _icuImageType (Just AltJSON)

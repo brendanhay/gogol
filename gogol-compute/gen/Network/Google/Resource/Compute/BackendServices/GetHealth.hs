@@ -105,6 +105,10 @@ bsghBackendService
 instance GoogleRequest BackendServicesGetHealth where
         type Rs BackendServicesGetHealth =
              BackendServiceGroupHealth
+        type Scopes BackendServicesGetHealth =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient BackendServicesGetHealth{..}
           = go _bsghProject _bsghBackendService (Just AltJSON)
               _bsghPayload

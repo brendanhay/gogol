@@ -122,6 +122,8 @@ instance GoogleRequest
          LicenseAssignmentsListForProduct where
         type Rs LicenseAssignmentsListForProduct =
              LicenseAssignmentList
+        type Scopes LicenseAssignmentsListForProduct =
+             '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient LicenseAssignmentsListForProduct{..}
           = go _lalfpProductId (Just _lalfpCustomerId)
               (Just _lalfpPageToken)

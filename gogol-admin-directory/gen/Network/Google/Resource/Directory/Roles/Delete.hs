@@ -88,6 +88,8 @@ rdCustomer
 
 instance GoogleRequest RolesDelete where
         type Rs RolesDelete = ()
+        type Scopes RolesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
         requestClient RolesDelete{..}
           = go _rdCustomer _rdRoleId (Just AltJSON)
               directoryService

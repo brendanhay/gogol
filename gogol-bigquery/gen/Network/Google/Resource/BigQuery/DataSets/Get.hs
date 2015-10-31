@@ -88,6 +88,10 @@ dsgProjectId
 
 instance GoogleRequest DataSetsGet where
         type Rs DataSetsGet = DataSet
+        type Scopes DataSetsGet =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient DataSetsGet{..}
           = go _dsgProjectId _dsgDataSetId (Just AltJSON)
               bigQueryService

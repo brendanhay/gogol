@@ -174,6 +174,9 @@ dsuCallback
 
 instance GoogleRequest DataSetsUndelete where
         type Rs DataSetsUndelete = DataSet
+        type Scopes DataSetsUndelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient DataSetsUndelete{..}
           = go _dsuDataSetId _dsuXgafv _dsuUploadProtocol
               (Just _dsuPp)

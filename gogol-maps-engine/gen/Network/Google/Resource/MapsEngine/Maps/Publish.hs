@@ -88,6 +88,8 @@ mapId = lens _mapId (\ s a -> s{_mapId = a})
 
 instance GoogleRequest MapsPublish where
         type Rs MapsPublish = PublishResponse
+        type Scopes MapsPublish =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient MapsPublish{..}
           = go _mapId _mapForce (Just AltJSON)
               mapsEngineService

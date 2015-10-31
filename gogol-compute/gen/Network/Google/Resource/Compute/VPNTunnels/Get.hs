@@ -103,6 +103,10 @@ vtgRegion
 
 instance GoogleRequest VPNTunnelsGet where
         type Rs VPNTunnelsGet = VPNTunnel
+        type Scopes VPNTunnelsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient VPNTunnelsGet{..}
           = go _vtgProject _vtgRegion _vtgVPNTunnel
               (Just AltJSON)

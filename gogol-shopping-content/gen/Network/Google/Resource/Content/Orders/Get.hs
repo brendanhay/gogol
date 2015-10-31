@@ -88,6 +88,8 @@ ogOrderId
 
 instance GoogleRequest OrdersGet where
         type Rs OrdersGet = Order
+        type Scopes OrdersGet =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersGet{..}
           = go _ogMerchantId _ogOrderId (Just AltJSON)
               shoppingContentService

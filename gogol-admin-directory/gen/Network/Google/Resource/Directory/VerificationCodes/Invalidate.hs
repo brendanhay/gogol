@@ -79,6 +79,8 @@ vciUserKey
 instance GoogleRequest VerificationCodesInvalidate
          where
         type Rs VerificationCodesInvalidate = ()
+        type Scopes VerificationCodesInvalidate =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient VerificationCodesInvalidate{..}
           = go _vciUserKey (Just AltJSON) directoryService
           where go

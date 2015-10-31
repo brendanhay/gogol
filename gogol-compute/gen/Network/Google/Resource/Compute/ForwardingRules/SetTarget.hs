@@ -118,6 +118,9 @@ frstRegion
 
 instance GoogleRequest ForwardingRulesSetTarget where
         type Rs ForwardingRulesSetTarget = Operation
+        type Scopes ForwardingRulesSetTarget =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ForwardingRulesSetTarget{..}
           = go _frstProject _frstRegion _frstForwardingRule
               (Just AltJSON)

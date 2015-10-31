@@ -116,6 +116,10 @@ miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
 instance GoogleRequest MediaInsert where
         type Rs MediaInsert = Media
+        type Scopes MediaInsert =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me",
+               "https://www.googleapis.com/auth/plus.media.upload"]
         requestClient MediaInsert{..}
           = go _miUserId _miCollection (Just AltJSON)
               _miPayload
@@ -127,6 +131,8 @@ instance GoogleRequest MediaInsert where
 instance GoogleRequest (MediaUpload MediaInsert)
          where
         type Rs (MediaUpload MediaInsert) = Media
+        type Scopes (MediaUpload MediaInsert) =
+             Scopes MediaInsert
         requestClient (MediaUpload MediaInsert{..} body)
           = go _miUserId _miCollection (Just AltJSON)
               (Just AltMedia)

@@ -76,6 +76,8 @@ nlPayload
 
 instance GoogleRequest NegotiationsList where
         type Rs NegotiationsList = GetNegotiationsResponse
+        type Scopes NegotiationsList =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient NegotiationsList{..}
           = go (Just AltJSON) _nlPayload adExchangeBuyerService
           where go

@@ -90,6 +90,8 @@ aggAccountId
 
 instance GoogleRequest AccounttaxGet where
         type Rs AccounttaxGet = AccountTax
+        type Scopes AccounttaxGet =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccounttaxGet{..}
           = go _aggMerchantId _aggAccountId (Just AltJSON)
               shoppingContentService

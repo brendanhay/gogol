@@ -113,6 +113,10 @@ dslMaxResults
 
 instance GoogleRequest DataSetsList where
         type Rs DataSetsList = DataSetList
+        type Scopes DataSetsList =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient DataSetsList{..}
           = go _dslProjectId _dslAll _dslPageToken
               _dslMaxResults

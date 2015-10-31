@@ -185,6 +185,9 @@ vpCallback
 
 instance GoogleRequest VariantsPatch where
         type Rs VariantsPatch = Variant
+        type Scopes VariantsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantsPatch{..}
           = go _vpVariantId _vpXgafv _vpUploadProtocol
               _vpUpdateMask

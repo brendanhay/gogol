@@ -104,6 +104,8 @@ acfdAccountId
 instance GoogleRequest
          AccountsContainersFoldersDelete where
         type Rs AccountsContainersFoldersDelete = ()
+        type Scopes AccountsContainersFoldersDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersFoldersDelete{..}
           = go _acfdAccountId _acfdContainerId _acfdFolderId
               (Just AltJSON)

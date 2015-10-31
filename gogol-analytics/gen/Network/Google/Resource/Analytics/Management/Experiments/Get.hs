@@ -117,6 +117,10 @@ megExperimentId
 
 instance GoogleRequest ManagementExperimentsGet where
         type Rs ManagementExperimentsGet = Experiment
+        type Scopes ManagementExperimentsGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementExperimentsGet{..}
           = go _megAccountId _megWebPropertyId _megProFileId
               _megExperimentId

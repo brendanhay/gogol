@@ -124,6 +124,9 @@ instance GoogleRequest
          ManagementWebPropertyAdWordsLinksList where
         type Rs ManagementWebPropertyAdWordsLinksList =
              EntityAdWordsLinks
+        type Scopes ManagementWebPropertyAdWordsLinksList =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient
           ManagementWebPropertyAdWordsLinksList{..}
           = go _mwpawllAccountId _mwpawllWebPropertyId

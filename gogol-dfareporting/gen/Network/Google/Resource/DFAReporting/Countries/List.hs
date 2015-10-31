@@ -78,6 +78,8 @@ couProFileId
 
 instance GoogleRequest CountriesList where
         type Rs CountriesList = CountriesListResponse
+        type Scopes CountriesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CountriesList{..}
           = go _couProFileId (Just AltJSON) dFAReportingService
           where go

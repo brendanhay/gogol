@@ -104,6 +104,8 @@ acfcAccountId
 instance GoogleRequest
          AccountsContainersFoldersCreate where
         type Rs AccountsContainersFoldersCreate = Folder
+        type Scopes AccountsContainersFoldersCreate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersFoldersCreate{..}
           = go _acfcAccountId _acfcContainerId (Just AltJSON)
               _acfcPayload

@@ -132,6 +132,10 @@ mulMaxResults
 
 instance GoogleRequest ManagementUploadsList where
         type Rs ManagementUploadsList = Uploads
+        type Scopes ManagementUploadsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementUploadsList{..}
           = go _mulAccountId _mulWebPropertyId
               _mulCustomDataSourceId

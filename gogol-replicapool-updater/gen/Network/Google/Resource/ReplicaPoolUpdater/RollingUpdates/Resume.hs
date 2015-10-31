@@ -103,6 +103,9 @@ rZone = lens _rZone (\ s a -> s{_rZone = a})
 
 instance GoogleRequest RollingUpdatesResume where
         type Rs RollingUpdatesResume = Operation
+        type Scopes RollingUpdatesResume =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
         requestClient RollingUpdatesResume{..}
           = go _rProject _rZone _rRollingUpdate (Just AltJSON)
               replicaPoolUpdaterService

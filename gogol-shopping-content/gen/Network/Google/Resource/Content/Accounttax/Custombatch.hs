@@ -91,6 +91,8 @@ acccDryRun
 instance GoogleRequest AccounttaxCustombatch where
         type Rs AccounttaxCustombatch =
              AccounttaxCustomBatchResponse
+        type Scopes AccounttaxCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccounttaxCustombatch{..}
           = go _acccDryRun (Just AltJSON) _acccPayload
               shoppingContentService

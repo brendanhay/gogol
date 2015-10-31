@@ -75,6 +75,9 @@ alLocale = lens _alLocale (\ s a -> s{_alLocale = a})
 
 instance GoogleRequest AlertsList where
         type Rs AlertsList = Alerts
+        type Scopes AlertsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AlertsList{..}
           = go _alLocale (Just AltJSON) adSenseService
           where go

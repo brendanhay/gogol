@@ -117,6 +117,9 @@ tpahcRegion
 instance GoogleRequest TargetPoolsAddHealthCheck
          where
         type Rs TargetPoolsAddHealthCheck = Operation
+        type Scopes TargetPoolsAddHealthCheck =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetPoolsAddHealthCheck{..}
           = go _tpahcProject _tpahcRegion _tpahcTargetPool
               (Just AltJSON)

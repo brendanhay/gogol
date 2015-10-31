@@ -170,6 +170,8 @@ cflMaxResults
 instance GoogleRequest CreativeFieldsList where
         type Rs CreativeFieldsList =
              CreativeFieldsListResponse
+        type Scopes CreativeFieldsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldsList{..}
           = go _cflProFileId _cflSearchString
               (_cflIds ^. _Default)

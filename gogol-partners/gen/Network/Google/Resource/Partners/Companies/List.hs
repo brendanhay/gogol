@@ -515,6 +515,7 @@ clCallback
 
 instance GoogleRequest CompaniesList where
         type Rs CompaniesList = ListCompaniesResponse
+        type Scopes CompaniesList = '[]
         requestClient CompaniesList{..}
           = go (_clLanguageCodes ^. _Default) _clXgafv
               _clMaxMonthlyBudgetUnits

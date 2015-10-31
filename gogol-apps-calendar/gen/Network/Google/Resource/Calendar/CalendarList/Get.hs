@@ -81,6 +81,9 @@ clgCalendarId
 
 instance GoogleRequest CalendarListGet where
         type Rs CalendarListGet = CalendarListEntry
+        type Scopes CalendarListGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient CalendarListGet{..}
           = go _clgCalendarId (Just AltJSON)
               appsCalendarService

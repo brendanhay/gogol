@@ -88,6 +88,9 @@ rdRoute = lens _rdRoute (\ s a -> s{_rdRoute = a})
 
 instance GoogleRequest RoutesDelete where
         type Rs RoutesDelete = Operation
+        type Scopes RoutesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient RoutesDelete{..}
           = go _rdProject _rdRoute (Just AltJSON)
               computeService

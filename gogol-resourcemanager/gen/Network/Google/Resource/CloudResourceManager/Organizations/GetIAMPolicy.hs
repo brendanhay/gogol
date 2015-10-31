@@ -171,6 +171,8 @@ ogipCallback
 instance GoogleRequest OrganizationsGetIAMPolicy
          where
         type Rs OrganizationsGetIAMPolicy = Policy
+        type Scopes OrganizationsGetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient OrganizationsGetIAMPolicy{..}
           = go _ogipResource _ogipXgafv _ogipUploadProtocol
               (Just _ogipPp)

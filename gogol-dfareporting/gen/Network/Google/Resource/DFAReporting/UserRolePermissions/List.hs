@@ -92,6 +92,8 @@ urplProFileId
 instance GoogleRequest UserRolePermissionsList where
         type Rs UserRolePermissionsList =
              UserRolePermissionsListResponse
+        type Scopes UserRolePermissionsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolePermissionsList{..}
           = go _urplProFileId (_urplIds ^. _Default)
               (Just AltJSON)

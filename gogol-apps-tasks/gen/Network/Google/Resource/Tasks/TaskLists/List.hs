@@ -90,6 +90,9 @@ tllMaxResults
 
 instance GoogleRequest TaskListsList where
         type Rs TaskListsList = TaskLists
+        type Scopes TaskListsList =
+             '["https://www.googleapis.com/auth/tasks",
+               "https://www.googleapis.com/auth/tasks.readonly"]
         requestClient TaskListsList{..}
           = go _tllPageToken _tllMaxResults (Just AltJSON)
               appsTasksService

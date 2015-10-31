@@ -112,6 +112,14 @@ rggRevisionId
 
 instance GoogleRequest RevisionsGet where
         type Rs RevisionsGet = Revision
+        type Scopes RevisionsGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient RevisionsGet{..}
           = go _rggFileId _rggRevisionId
               (Just _rggAcknowledgeAbuse)

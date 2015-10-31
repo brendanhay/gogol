@@ -90,6 +90,8 @@ ciCustomerAuthToken
 
 instance GoogleRequest CustomersInsert where
         type Rs CustomersInsert = Customer
+        type Scopes CustomersInsert =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient CustomersInsert{..}
           = go _ciCustomerAuthToken (Just AltJSON) _ciPayload
               appsResellerService

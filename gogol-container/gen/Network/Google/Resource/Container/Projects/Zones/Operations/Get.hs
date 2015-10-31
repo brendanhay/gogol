@@ -185,6 +185,8 @@ pzogCallback
 instance GoogleRequest ProjectsZonesOperationsGet
          where
         type Rs ProjectsZonesOperationsGet = Operation
+        type Scopes ProjectsZonesOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesOperationsGet{..}
           = go _pzogProjectId _pzogZone _pzogOperationId
               _pzogXgafv

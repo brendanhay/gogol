@@ -76,6 +76,8 @@ ciPayload
 
 instance GoogleRequest ConversionInsert where
         type Rs ConversionInsert = ConversionList
+        type Scopes ConversionInsert =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ConversionInsert{..}
           = go (Just AltJSON) _ciPayload
               doubleClickSearchService

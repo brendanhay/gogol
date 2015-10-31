@@ -103,6 +103,9 @@ grmGroupName
 
 instance GoogleRequest GroupsRemoveMember where
         type Rs GroupsRemoveMember = Operation
+        type Scopes GroupsRemoveMember =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient GroupsRemoveMember{..}
           = go _grmProject _grmGroupName (Just AltJSON)
               _grmPayload

@@ -89,6 +89,8 @@ adRuleId = lens _adRuleId (\ s a -> s{_adRuleId = a})
 
 instance GoogleRequest ACLDelete where
         type Rs ACLDelete = ()
+        type Scopes ACLDelete =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient ACLDelete{..}
           = go _adCalendarId _adRuleId (Just AltJSON)
               appsCalendarService

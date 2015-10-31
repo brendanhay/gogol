@@ -102,6 +102,9 @@ sqPayload
 instance GoogleRequest SearchanalyticsQuery where
         type Rs SearchanalyticsQuery =
              SearchAnalyticsQueryResponse
+        type Scopes SearchanalyticsQuery =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
         requestClient SearchanalyticsQuery{..}
           = go _sqSiteURL (Just AltJSON) _sqPayload
               webmasterToolsService

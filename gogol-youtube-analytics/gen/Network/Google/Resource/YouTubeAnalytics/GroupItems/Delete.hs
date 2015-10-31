@@ -97,6 +97,9 @@ gidId = lens _gidId (\ s a -> s{_gidId = a})
 
 instance GoogleRequest GroupItemsDelete where
         type Rs GroupItemsDelete = ()
+        type Scopes GroupItemsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient GroupItemsDelete{..}
           = go (Just _gidId) _gidOnBehalfOfContentOwner
               (Just AltJSON)

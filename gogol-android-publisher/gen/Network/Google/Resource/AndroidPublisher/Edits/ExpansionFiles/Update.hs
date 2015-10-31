@@ -139,6 +139,8 @@ eefuEditId
 instance GoogleRequest EditsExpansionFilesUpdate
          where
         type Rs EditsExpansionFilesUpdate = ExpansionFile
+        type Scopes EditsExpansionFilesUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsExpansionFilesUpdate{..}
           = go _eefuPackageName _eefuEditId _eefuAPKVersionCode
               _eefuExpansionFileType

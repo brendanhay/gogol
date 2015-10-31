@@ -271,6 +271,8 @@ sitMaxResults
 
 instance GoogleRequest SitesList where
         type Rs SitesList = SitesListResponse
+        type Scopes SitesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SitesList{..}
           = go _sitProFileId _sitUnmAppedSite
               (_sitCampaignIds ^. _Default)

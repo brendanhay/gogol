@@ -88,6 +88,9 @@ imaProject
 
 instance GoogleRequest ImagesDelete where
         type Rs ImagesDelete = Operation
+        type Scopes ImagesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ImagesDelete{..}
           = go _imaProject _imaImage (Just AltJSON)
               computeService

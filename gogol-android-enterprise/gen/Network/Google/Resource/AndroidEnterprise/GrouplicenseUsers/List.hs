@@ -96,6 +96,8 @@ gulGroupLicenseId
 instance GoogleRequest GrouplicenseUsersList where
         type Rs GrouplicenseUsersList =
              GroupLicenseUsersListResponse
+        type Scopes GrouplicenseUsersList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient GrouplicenseUsersList{..}
           = go _gulEnterpriseId _gulGroupLicenseId
               (Just AltJSON)

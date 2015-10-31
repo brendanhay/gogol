@@ -189,6 +189,7 @@ gdCallback
 
 instance GoogleRequest GetDiscovery where
         type Rs GetDiscovery = ()
+        type Scopes GetDiscovery = '[]
         requestClient GetDiscovery{..}
           = go _gdXgafv (_gdArgs ^. _Default) _gdUploadProtocol
               (Just _gdPp)

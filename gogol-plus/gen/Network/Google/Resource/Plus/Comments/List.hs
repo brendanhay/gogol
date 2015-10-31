@@ -114,6 +114,9 @@ clMaxResults
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentFeed
+        type Scopes CommentsList =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient CommentsList{..}
           = go _clActivityId (Just _clSortOrder) _clPageToken
               (Just _clMaxResults)

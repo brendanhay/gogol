@@ -114,6 +114,9 @@ iadInstance
 
 instance GoogleRequest InstancesAttachDisk where
         type Rs InstancesAttachDisk = Operation
+        type Scopes InstancesAttachDisk =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesAttachDisk{..}
           = go _iadProject _iadZone _iadInstance (Just AltJSON)
               _iadPayload

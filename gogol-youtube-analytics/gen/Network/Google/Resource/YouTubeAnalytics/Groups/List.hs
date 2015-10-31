@@ -126,6 +126,11 @@ glPageToken
 
 instance GoogleRequest GroupsList where
         type Rs GroupsList = GroupListResponse
+        type Scopes GroupsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient GroupsList{..}
           = go _glMine _glOnBehalfOfContentOwner _glId
               _glPageToken

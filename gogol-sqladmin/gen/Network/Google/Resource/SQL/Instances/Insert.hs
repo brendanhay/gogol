@@ -90,6 +90,9 @@ insPayload
 
 instance GoogleRequest InstancesInsert where
         type Rs InstancesInsert = Operation
+        type Scopes InstancesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesInsert{..}
           = go _insProject (Just AltJSON) _insPayload
               sQLAdminService

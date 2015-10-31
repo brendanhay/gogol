@@ -91,6 +91,10 @@ malMaxResults
 
 instance GoogleRequest ManagementAccountsList where
         type Rs ManagementAccountsList = Accounts
+        type Scopes ManagementAccountsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementAccountsList{..}
           = go _malStartIndex _malMaxResults (Just AltJSON)
               analyticsService

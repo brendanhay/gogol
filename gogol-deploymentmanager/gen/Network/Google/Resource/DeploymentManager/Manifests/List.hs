@@ -149,6 +149,11 @@ mlDeployment
 
 instance GoogleRequest ManifestsList where
         type Rs ManifestsList = ManifestsListResponse
+        type Scopes ManifestsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient ManifestsList{..}
           = go _mlProject _mlDeployment _mlFilter _mlPageToken
               (Just _mlMaxResults)

@@ -118,6 +118,8 @@ etuEditId
 
 instance GoogleRequest EditsTracksUpdate where
         type Rs EditsTracksUpdate = Track
+        type Scopes EditsTracksUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTracksUpdate{..}
           = go _etuPackageName _etuEditId _etuTrack
               (Just AltJSON)

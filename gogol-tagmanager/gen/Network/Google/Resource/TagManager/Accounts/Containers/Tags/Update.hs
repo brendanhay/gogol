@@ -129,6 +129,8 @@ actucTagId
 instance GoogleRequest AccountsContainersTagsUpdate
          where
         type Rs AccountsContainersTagsUpdate = Tag
+        type Scopes AccountsContainersTagsUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersTagsUpdate{..}
           = go _actucAccountId _actucContainerId _actucTagId
               _actucFingerprint

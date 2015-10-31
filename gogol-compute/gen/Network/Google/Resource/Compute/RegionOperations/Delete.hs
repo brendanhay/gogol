@@ -101,6 +101,9 @@ rodRegion
 
 instance GoogleRequest RegionOperationsDelete where
         type Rs RegionOperationsDelete = ()
+        type Scopes RegionOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient RegionOperationsDelete{..}
           = go _rodProject _rodRegion _rodOperation
               (Just AltJSON)

@@ -77,6 +77,8 @@ dlomCpksver
 instance GoogleRequest DictionaryListOfflineMetadata
          where
         type Rs DictionaryListOfflineMetadata = Metadata
+        type Scopes DictionaryListOfflineMetadata =
+             '["https://www.googleapis.com/auth/books"]
         requestClient DictionaryListOfflineMetadata{..}
           = go (Just _dlomCpksver) (Just AltJSON) booksService
           where go

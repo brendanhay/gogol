@@ -115,6 +115,8 @@ tmPrevious
 
 instance GoogleRequest TasksMove where
         type Rs TasksMove = Task
+        type Scopes TasksMove =
+             '["https://www.googleapis.com/auth/tasks"]
         requestClient TasksMove{..}
           = go _tmTaskList _tmTask _tmParent _tmPrevious
               (Just AltJSON)

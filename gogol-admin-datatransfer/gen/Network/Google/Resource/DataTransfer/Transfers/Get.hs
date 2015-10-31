@@ -78,6 +78,9 @@ tgDataTransferId
 
 instance GoogleRequest TransfersGet where
         type Rs TransfersGet = DataTransfer
+        type Scopes TransfersGet =
+             '["https://www.googleapis.com/auth/admin.datatransfer",
+               "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
         requestClient TransfersGet{..}
           = go _tgDataTransferId (Just AltJSON)
               dataTransferService

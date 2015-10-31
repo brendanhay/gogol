@@ -79,6 +79,9 @@ instance GoogleRequest AchievementsUpdateMultiple
          where
         type Rs AchievementsUpdateMultiple =
              AchievementUpdateMultipleResponse
+        type Scopes AchievementsUpdateMultiple =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementsUpdateMultiple{..}
           = go (Just AltJSON) _aumPayload gamesService
           where go

@@ -76,6 +76,10 @@ sdId = lens _sdId (\ s a -> s{_sdId = a})
 
 instance GoogleRequest SubscriptionsDelete where
         type Rs SubscriptionsDelete = ()
+        type Scopes SubscriptionsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient SubscriptionsDelete{..}
           = go (Just _sdId) (Just AltJSON) youTubeService
           where go

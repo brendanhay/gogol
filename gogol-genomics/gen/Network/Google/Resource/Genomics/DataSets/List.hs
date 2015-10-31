@@ -183,6 +183,10 @@ dslCallback
 
 instance GoogleRequest DataSetsList where
         type Rs DataSetsList = ListDataSetsResponse
+        type Scopes DataSetsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient DataSetsList{..}
           = go _dslXgafv _dslUploadProtocol (Just _dslPp)
               _dslAccessToken

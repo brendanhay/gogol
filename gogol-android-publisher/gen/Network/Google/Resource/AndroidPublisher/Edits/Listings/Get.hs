@@ -104,6 +104,8 @@ elgEditId
 
 instance GoogleRequest EditsListingsGet where
         type Rs EditsListingsGet = Listing
+        type Scopes EditsListingsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsGet{..}
           = go _elgPackageName _elgEditId _elgLanguage
               (Just AltJSON)

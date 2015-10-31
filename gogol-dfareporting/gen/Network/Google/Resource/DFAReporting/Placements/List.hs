@@ -395,6 +395,8 @@ pMinEndDate
 
 instance GoogleRequest PlacementsList where
         type Rs PlacementsList = PlacementsListResponse
+        type Scopes PlacementsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementsList{..}
           = go _pProFileId (_pPlacementStrategyIds ^. _Default)
               (_pContentCategoryIds ^. _Default)

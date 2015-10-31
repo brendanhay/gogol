@@ -93,6 +93,9 @@ gfriPayload
 instance GoogleRequest GlobalForwardingRulesInsert
          where
         type Rs GlobalForwardingRulesInsert = Operation
+        type Scopes GlobalForwardingRulesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient GlobalForwardingRulesInsert{..}
           = go _gfriProject (Just AltJSON) _gfriPayload
               computeService

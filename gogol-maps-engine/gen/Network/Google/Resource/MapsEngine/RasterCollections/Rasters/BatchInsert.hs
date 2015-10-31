@@ -100,6 +100,8 @@ instance GoogleRequest
          RasterCollectionsRastersBatchInsert where
         type Rs RasterCollectionsRastersBatchInsert =
              RasterCollectionsRastersBatchInsertResponse
+        type Scopes RasterCollectionsRastersBatchInsert =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RasterCollectionsRastersBatchInsert{..}
           = go _rcrbiId (Just AltJSON) _rcrbiPayload
               mapsEngineService

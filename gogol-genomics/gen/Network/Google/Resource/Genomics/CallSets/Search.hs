@@ -163,6 +163,10 @@ cssCallback
 
 instance GoogleRequest CallSetsSearch where
         type Rs CallSetsSearch = SearchCallSetsResponse
+        type Scopes CallSetsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient CallSetsSearch{..}
           = go _cssXgafv _cssUploadProtocol (Just _cssPp)
               _cssAccessToken

@@ -89,6 +89,9 @@ igInstance
 
 instance GoogleRequest InstancesGet where
         type Rs InstancesGet = DatabaseInstance
+        type Scopes InstancesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesGet{..}
           = go _igProject _igInstance (Just AltJSON)
               sQLAdminService

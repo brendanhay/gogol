@@ -143,6 +143,10 @@ instance GoogleRequest GlobalForwardingRulesList
          where
         type Rs GlobalForwardingRulesList =
              ForwardingRuleList
+        type Scopes GlobalForwardingRulesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalForwardingRulesList{..}
           = go _gfrlProject _gfrlFilter _gfrlPageToken
               (Just _gfrlMaxResults)

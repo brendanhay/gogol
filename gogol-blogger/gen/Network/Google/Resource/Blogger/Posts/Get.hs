@@ -137,6 +137,9 @@ pggPostId
 
 instance GoogleRequest PostsGet where
         type Rs PostsGet = Post'
+        type Scopes PostsGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostsGet{..}
           = go _pggBlogId _pggPostId (Just _pggFetchBody)
               _pggFetchImages

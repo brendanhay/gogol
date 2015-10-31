@@ -76,6 +76,8 @@ giPayload
 
 instance GoogleRequest GroupsInsert where
         type Rs GroupsInsert = Group
+        type Scopes GroupsInsert =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
         requestClient GroupsInsert{..}
           = go (Just AltJSON) _giPayload directoryService
           where go

@@ -76,6 +76,8 @@ rdId = lens _rdId (\ s a -> s{_rdId = a})
 
 instance GoogleRequest RastersDelete where
         type Rs RastersDelete = ()
+        type Scopes RastersDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RastersDelete{..}
           = go _rdId (Just AltJSON) mapsEngineService
           where go

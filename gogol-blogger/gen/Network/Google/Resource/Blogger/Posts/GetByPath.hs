@@ -112,6 +112,9 @@ pgbpView = lens _pgbpView (\ s a -> s{_pgbpView = a})
 
 instance GoogleRequest PostsGetByPath where
         type Rs PostsGetByPath = Post'
+        type Scopes PostsGetByPath =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostsGetByPath{..}
           = go _pgbpBlogId (Just _pgbpPath) _pgbpMaxComments
               _pgbpView

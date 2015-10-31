@@ -78,6 +78,7 @@ dsQuery = lens _dsQuery (\ s a -> s{_dsQuery = a})
 
 instance GoogleRequest DivisionsSearch where
         type Rs DivisionsSearch = DivisionSearchResponse
+        type Scopes DivisionsSearch = '[]
         requestClient DivisionsSearch{..}
           = go _dsQuery (Just AltJSON) civicInfoService
           where go

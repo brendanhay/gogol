@@ -90,6 +90,8 @@ tdUserKey
 
 instance GoogleRequest TokensDelete where
         type Rs TokensDelete = ()
+        type Scopes TokensDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient TokensDelete{..}
           = go _tdUserKey _tdClientId (Just AltJSON)
               directoryService

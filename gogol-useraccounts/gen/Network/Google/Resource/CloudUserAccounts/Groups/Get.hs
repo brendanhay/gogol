@@ -89,6 +89,11 @@ ggGroupName
 
 instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Group
+        type Scopes GroupsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
         requestClient GroupsGet{..}
           = go _ggProject _ggGroupName (Just AltJSON)
               userAccountsService

@@ -89,6 +89,8 @@ pagPageId
 
 instance GoogleRequest PagesRevert where
         type Rs PagesRevert = Page
+        type Scopes PagesRevert =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PagesRevert{..}
           = go _pagBlogId _pagPageId (Just AltJSON)
               bloggerService

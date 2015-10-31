@@ -103,6 +103,9 @@ umpPayload
 
 instance GoogleRequest URLMapsPatch where
         type Rs URLMapsPatch = Operation
+        type Scopes URLMapsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient URLMapsPatch{..}
           = go _umpProject _umpURLMap (Just AltJSON)
               _umpPayload

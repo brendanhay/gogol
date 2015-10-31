@@ -208,6 +208,9 @@ instance GoogleRequest
          ControllerDebuggeesBreakpointsList where
         type Rs ControllerDebuggeesBreakpointsList =
              ListActiveBreakpointsResponse
+        type Scopes ControllerDebuggeesBreakpointsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugletcontroller"]
         requestClient ControllerDebuggeesBreakpointsList{..}
           = go _cdblDebuggeeId _cdblXgafv _cdblUploadProtocol
               (Just _cdblPp)

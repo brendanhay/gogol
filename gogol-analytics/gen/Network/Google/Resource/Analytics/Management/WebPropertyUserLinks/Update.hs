@@ -120,6 +120,8 @@ instance GoogleRequest
          ManagementWebPropertyUserLinksUpdate where
         type Rs ManagementWebPropertyUserLinksUpdate =
              EntityUserLink
+        type Scopes ManagementWebPropertyUserLinksUpdate =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient
           ManagementWebPropertyUserLinksUpdate{..}
           = go _mwpuluAccountId _mwpuluWebPropertyId

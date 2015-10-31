@@ -104,6 +104,9 @@ friRegion
 
 instance GoogleRequest ForwardingRulesInsert where
         type Rs ForwardingRulesInsert = Operation
+        type Scopes ForwardingRulesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ForwardingRulesInsert{..}
           = go _friProject _friRegion (Just AltJSON)
               _friPayload

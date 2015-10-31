@@ -117,6 +117,8 @@ eilEditId
 
 instance GoogleRequest EditsImagesList where
         type Rs EditsImagesList = ImagesListResponse
+        type Scopes EditsImagesList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsImagesList{..}
           = go _eilPackageName _eilEditId _eilLanguage
               _eilImageType

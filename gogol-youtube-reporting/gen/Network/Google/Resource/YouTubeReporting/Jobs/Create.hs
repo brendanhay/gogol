@@ -165,6 +165,9 @@ jcCallback
 
 instance GoogleRequest JobsCreate where
         type Rs JobsCreate = Job
+        type Scopes JobsCreate =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsCreate{..}
           = go _jcXgafv _jcUploadProtocol (Just _jcPp)
               _jcAccessToken

@@ -116,6 +116,8 @@ mgiAccountId
 
 instance GoogleRequest ManagementGoalsInsert where
         type Rs ManagementGoalsInsert = Goal
+        type Scopes ManagementGoalsInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementGoalsInsert{..}
           = go _mgiAccountId _mgiWebPropertyId _mgiProFileId
               (Just AltJSON)

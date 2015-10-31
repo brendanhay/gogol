@@ -89,6 +89,8 @@ proId
 
 instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project
+        type Scopes ProjectsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ProjectsGet{..}
           = go _proProFileId _proId (Just AltJSON)
               dFAReportingService

@@ -89,6 +89,8 @@ ngNegotiationId
 
 instance GoogleRequest NegotiationsGet where
         type Rs NegotiationsGet = NegotiationDTO
+        type Scopes NegotiationsGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient NegotiationsGet{..}
           = go _ngNegotiationId (Just AltJSON) _ngPayload
               adExchangeBuyerService

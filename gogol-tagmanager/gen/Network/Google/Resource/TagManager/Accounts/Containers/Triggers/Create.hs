@@ -104,6 +104,8 @@ actcAccountId
 instance GoogleRequest
          AccountsContainersTriggersCreate where
         type Rs AccountsContainersTriggersCreate = Trigger
+        type Scopes AccountsContainersTriggersCreate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersTriggersCreate{..}
           = go _actcAccountId _actcContainerId (Just AltJSON)
               _actcPayload

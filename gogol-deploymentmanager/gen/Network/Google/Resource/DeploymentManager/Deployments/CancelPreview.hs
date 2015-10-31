@@ -106,6 +106,9 @@ dcpDeployment
 
 instance GoogleRequest DeploymentsCancelPreview where
         type Rs DeploymentsCancelPreview = Operation
+        type Scopes DeploymentsCancelPreview =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsCancelPreview{..}
           = go _dcpProject _dcpDeployment (Just AltJSON)
               _dcpPayload

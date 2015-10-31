@@ -105,6 +105,10 @@ tgTableId
 
 instance GoogleRequest TablesGet where
         type Rs TablesGet = Table
+        type Scopes TablesGet =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient TablesGet{..}
           = go _tgProjectId _tgDataSetId _tgTableId
               (Just AltJSON)

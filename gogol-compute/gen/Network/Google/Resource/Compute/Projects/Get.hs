@@ -75,6 +75,10 @@ pgProject
 
 instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project
+        type Scopes ProjectsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ProjectsGet{..}
           = go _pgProject (Just AltJSON) computeService
           where go

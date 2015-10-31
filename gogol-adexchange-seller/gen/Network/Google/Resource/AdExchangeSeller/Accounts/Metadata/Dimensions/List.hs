@@ -81,6 +81,9 @@ amdlAccountId
 instance GoogleRequest AccountsMetadataDimensionsList
          where
         type Rs AccountsMetadataDimensionsList = Metadata
+        type Scopes AccountsMetadataDimensionsList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsMetadataDimensionsList{..}
           = go _amdlAccountId (Just AltJSON)
               adExchangeSellerService

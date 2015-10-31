@@ -90,6 +90,9 @@ mdcPayload
 
 instance GoogleRequest MetricDescriptorsCreate where
         type Rs MetricDescriptorsCreate = MetricDescriptor
+        type Scopes MetricDescriptorsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient MetricDescriptorsCreate{..}
           = go _mdcProject (Just AltJSON) _mdcPayload
               monitoringService

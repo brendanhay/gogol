@@ -157,6 +157,9 @@ csdCallback
 
 instance GoogleRequest CallSetsDelete where
         type Rs CallSetsDelete = Empty
+        type Scopes CallSetsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient CallSetsDelete{..}
           = go _csdCallSetId _csdXgafv _csdUploadProtocol
               (Just _csdPp)

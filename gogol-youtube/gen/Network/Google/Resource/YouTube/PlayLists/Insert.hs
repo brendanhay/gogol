@@ -136,6 +136,10 @@ pliOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest PlayListsInsert where
         type Rs PlayListsInsert = PlayList
+        type Scopes PlayListsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListsInsert{..}
           = go (Just _pliPart) _pliOnBehalfOfContentOwner
               _pliOnBehalfOfContentOwnerChannel

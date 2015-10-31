@@ -77,6 +77,8 @@ acdAchievementId
 instance GoogleRequest
          AchievementConfigurationsDelete where
         type Rs AchievementConfigurationsDelete = ()
+        type Scopes AchievementConfigurationsDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient AchievementConfigurationsDelete{..}
           = go _acdAchievementId (Just AltJSON)
               gamesConfigurationService

@@ -128,6 +128,9 @@ instance GoogleRequest
          RepresentativesRepresentativeInfoByAddress where
         type Rs RepresentativesRepresentativeInfoByAddress =
              RepresentativeInfoResponse
+        type Scopes
+               RepresentativesRepresentativeInfoByAddress
+             = '[]
         requestClient
           RepresentativesRepresentativeInfoByAddress{..}
           = go (_rribaRoles ^. _Default) _rribaAddress

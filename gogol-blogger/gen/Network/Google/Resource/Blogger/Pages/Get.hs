@@ -95,6 +95,9 @@ pgView = lens _pgView (\ s a -> s{_pgView = a})
 
 instance GoogleRequest PagesGet where
         type Rs PagesGet = Page
+        type Scopes PagesGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PagesGet{..}
           = go _pgBlogId _pgPageId _pgView (Just AltJSON)
               bloggerService

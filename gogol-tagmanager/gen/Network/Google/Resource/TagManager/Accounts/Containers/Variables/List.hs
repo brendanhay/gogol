@@ -94,6 +94,9 @@ instance GoogleRequest
          AccountsContainersVariablesList where
         type Rs AccountsContainersVariablesList =
              ListVariablesResponse
+        type Scopes AccountsContainersVariablesList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersVariablesList{..}
           = go _acvlcAccountId _acvlcContainerId (Just AltJSON)
               tagManagerService

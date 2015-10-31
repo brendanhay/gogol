@@ -95,6 +95,8 @@ instance GoogleRequest TablesPermissionsBatchUpdate
          where
         type Rs TablesPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
+        type Scopes TablesPermissionsBatchUpdate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesPermissionsBatchUpdate{..}
           = go _tpbuId (Just AltJSON) _tpbuPayload
               mapsEngineService

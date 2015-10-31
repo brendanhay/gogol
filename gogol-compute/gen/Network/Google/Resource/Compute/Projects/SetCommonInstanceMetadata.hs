@@ -91,6 +91,9 @@ pscimPayload
 instance GoogleRequest
          ProjectsSetCommonInstanceMetadata where
         type Rs ProjectsSetCommonInstanceMetadata = Operation
+        type Scopes ProjectsSetCommonInstanceMetadata =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ProjectsSetCommonInstanceMetadata{..}
           = go _pscimProject (Just AltJSON) _pscimPayload
               computeService

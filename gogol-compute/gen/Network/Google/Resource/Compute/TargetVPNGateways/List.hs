@@ -153,6 +153,10 @@ tvglMaxResults
 
 instance GoogleRequest TargetVPNGatewaysList where
         type Rs TargetVPNGatewaysList = TargetVPNGatewayList
+        type Scopes TargetVPNGatewaysList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetVPNGatewaysList{..}
           = go _tvglProject _tvglRegion _tvglFilter
               _tvglPageToken

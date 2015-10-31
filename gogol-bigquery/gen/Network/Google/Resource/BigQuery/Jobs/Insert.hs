@@ -99,6 +99,12 @@ jiProjectId
 
 instance GoogleRequest JobsInsert where
         type Rs JobsInsert = Job
+        type Scopes JobsInsert =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient JobsInsert{..}
           = go _jiProjectId (Just AltJSON) _jiPayload
               bigQueryService
@@ -108,6 +114,8 @@ instance GoogleRequest JobsInsert where
 
 instance GoogleRequest (MediaUpload JobsInsert) where
         type Rs (MediaUpload JobsInsert) = Job
+        type Scopes (MediaUpload JobsInsert) =
+             Scopes JobsInsert
         requestClient (MediaUpload JobsInsert{..} body)
           = go _jiProjectId (Just AltJSON) (Just AltMedia)
               _jiPayload

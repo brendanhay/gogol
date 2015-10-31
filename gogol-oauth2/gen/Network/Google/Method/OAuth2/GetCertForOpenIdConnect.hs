@@ -57,6 +57,7 @@ getCertForOpenIdConnect = GetCertForOpenIdConnect
 
 instance GoogleRequest GetCertForOpenIdConnect where
         type Rs GetCertForOpenIdConnect = JWK
+        type Scopes GetCertForOpenIdConnect = '[]
         requestClient GetCertForOpenIdConnect{}
           = go (Just AltJSON) oAuth2Service
           where go

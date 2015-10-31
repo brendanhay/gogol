@@ -122,6 +122,9 @@ plbaMaxResults
 
 instance GoogleRequest PeopleListByActivity where
         type Rs PeopleListByActivity = PeopleFeed
+        type Scopes PeopleListByActivity =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.stream.read"]
         requestClient PeopleListByActivity{..}
           = go _plbaActivityId _plbaCollection _plbaPageToken
               (Just _plbaMaxResults)

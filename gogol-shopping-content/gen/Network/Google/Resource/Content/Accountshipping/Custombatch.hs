@@ -91,6 +91,8 @@ instance GoogleRequest AccountshippingCustombatch
          where
         type Rs AccountshippingCustombatch =
              AccountshippingCustomBatchResponse
+        type Scopes AccountshippingCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountshippingCustombatch{..}
           = go _acDryRun (Just AltJSON) _acPayload
               shoppingContentService

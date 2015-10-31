@@ -117,6 +117,8 @@ mlbmvVolumePosition
 instance GoogleRequest MyLibraryBookshelvesMoveVolume
          where
         type Rs MyLibraryBookshelvesMoveVolume = ()
+        type Scopes MyLibraryBookshelvesMoveVolume =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesMoveVolume{..}
           = go _mlbmvShelf (Just _mlbmvVolumeId)
               (Just _mlbmvVolumePosition)

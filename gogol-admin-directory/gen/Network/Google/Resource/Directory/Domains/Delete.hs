@@ -89,6 +89,8 @@ ddDomainName
 
 instance GoogleRequest DomainsDelete where
         type Rs DomainsDelete = ()
+        type Scopes DomainsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.domain"]
         requestClient DomainsDelete{..}
           = go _ddCustomer _ddDomainName (Just AltJSON)
               directoryService

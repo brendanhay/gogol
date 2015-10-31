@@ -98,6 +98,8 @@ instance GoogleRequest
          RasterCollectionsRastersBatchDelete where
         type Rs RasterCollectionsRastersBatchDelete =
              RasterCollectionsRastersBatchDeleteResponse
+        type Scopes RasterCollectionsRastersBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RasterCollectionsRastersBatchDelete{..}
           = go _rcrbdId (Just AltJSON) _rcrbdPayload
               mapsEngineService

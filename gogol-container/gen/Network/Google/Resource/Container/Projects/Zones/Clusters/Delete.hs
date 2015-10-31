@@ -189,6 +189,8 @@ pzcdCallback
 instance GoogleRequest ProjectsZonesClustersDelete
          where
         type Rs ProjectsZonesClustersDelete = Operation
+        type Scopes ProjectsZonesClustersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesClustersDelete{..}
           = go _pzcdProjectId _pzcdZone _pzcdClusterId
               _pzcdXgafv

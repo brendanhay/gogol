@@ -89,6 +89,8 @@ auuPayload
 
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
+        type Scopes AccountsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountsUpdate{..}
           = go _auuProFileId (Just AltJSON) _auuPayload
               dFAReportingService

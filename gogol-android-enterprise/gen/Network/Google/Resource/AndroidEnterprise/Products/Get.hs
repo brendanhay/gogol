@@ -101,6 +101,8 @@ proProductId
 
 instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
+        type Scopes ProductsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsGet{..}
           = go _proEnterpriseId _proProductId _proLanguage
               (Just AltJSON)

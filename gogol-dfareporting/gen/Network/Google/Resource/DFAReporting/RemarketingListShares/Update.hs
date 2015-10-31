@@ -93,6 +93,8 @@ instance GoogleRequest RemarketingListSharesUpdate
          where
         type Rs RemarketingListSharesUpdate =
              RemarketingListShare
+        type Scopes RemarketingListSharesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListSharesUpdate{..}
           = go _rlsuProFileId (Just AltJSON) _rlsuPayload
               dFAReportingService

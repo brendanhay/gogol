@@ -90,6 +90,8 @@ ag1AccountId
 
 instance GoogleRequest AccountstatusesGet where
         type Rs AccountstatusesGet = AccountStatus
+        type Scopes AccountstatusesGet =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountstatusesGet{..}
           = go _ag1MerchantId _ag1AccountId (Just AltJSON)
               shoppingContentService

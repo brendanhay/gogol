@@ -102,6 +102,9 @@ lMaxResults
 
 instance GoogleRequest LayersParentsList where
         type Rs LayersParentsList = ParentsListResponse
+        type Scopes LayersParentsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient LayersParentsList{..}
           = go _lId _lPageToken _lMaxResults (Just AltJSON)
               mapsEngineService

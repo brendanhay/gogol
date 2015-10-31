@@ -104,6 +104,8 @@ agpId
 
 instance GoogleRequest AdvertiserGroupsPatch where
         type Rs AdvertiserGroupsPatch = AdvertiserGroup
+        type Scopes AdvertiserGroupsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertiserGroupsPatch{..}
           = go _agpProFileId (Just _agpId) (Just AltJSON)
               _agpPayload

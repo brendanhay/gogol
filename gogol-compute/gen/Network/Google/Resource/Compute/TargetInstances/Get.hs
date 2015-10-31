@@ -104,6 +104,10 @@ tigZone = lens _tigZone (\ s a -> s{_tigZone = a})
 
 instance GoogleRequest TargetInstancesGet where
         type Rs TargetInstancesGet = TargetInstance
+        type Scopes TargetInstancesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetInstancesGet{..}
           = go _tigProject _tigZone _tigTargetInstance
               (Just AltJSON)

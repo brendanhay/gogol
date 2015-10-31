@@ -131,6 +131,8 @@ citDartIds
 
 instance GoogleRequest CitiesList where
         type Rs CitiesList = CitiesListResponse
+        type Scopes CitiesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CitiesList{..}
           = go _citProFileId (_citRegionDartIds ^. _Default)
               _citNamePrefix

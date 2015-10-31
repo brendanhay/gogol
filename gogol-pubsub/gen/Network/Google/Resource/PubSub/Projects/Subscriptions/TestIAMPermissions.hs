@@ -175,6 +175,9 @@ instance GoogleRequest
          ProjectsSubscriptionsTestIAMPermissions where
         type Rs ProjectsSubscriptionsTestIAMPermissions =
              TestIAMPermissionsResponse
+        type Scopes ProjectsSubscriptionsTestIAMPermissions =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient
           ProjectsSubscriptionsTestIAMPermissions{..}
           = go _pstipResource _pstipXgafv _pstipUploadProtocol

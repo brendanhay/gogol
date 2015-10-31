@@ -119,6 +119,8 @@ oacgGeneration
 
 instance GoogleRequest ObjectAccessControlsGet where
         type Rs ObjectAccessControlsGet = ObjectAccessControl
+        type Scopes ObjectAccessControlsGet =
+             '["https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsGet{..}
           = go _oacgBucket _oacgObject _oacgEntity
               _oacgGeneration

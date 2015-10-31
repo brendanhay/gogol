@@ -107,6 +107,8 @@ cggUserId
 
 instance GoogleRequest CollectionviewersGet where
         type Rs CollectionviewersGet = User
+        type Scopes CollectionviewersGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionviewersGet{..}
           = go _cggEnterpriseId _cggCollectionId _cggUserId
               (Just AltJSON)

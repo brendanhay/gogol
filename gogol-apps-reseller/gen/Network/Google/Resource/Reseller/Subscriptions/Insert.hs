@@ -104,6 +104,8 @@ siCustomerAuthToken
 
 instance GoogleRequest SubscriptionsInsert where
         type Rs SubscriptionsInsert = Subscription
+        type Scopes SubscriptionsInsert =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsInsert{..}
           = go _siCustomerId _siCustomerAuthToken
               (Just AltJSON)

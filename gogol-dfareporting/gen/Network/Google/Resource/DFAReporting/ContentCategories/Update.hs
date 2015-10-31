@@ -90,6 +90,8 @@ ccuPayload
 
 instance GoogleRequest ContentCategoriesUpdate where
         type Rs ContentCategoriesUpdate = ContentCategory
+        type Scopes ContentCategoriesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ContentCategoriesUpdate{..}
           = go _ccuProFileId (Just AltJSON) _ccuPayload
               dFAReportingService

@@ -126,6 +126,10 @@ instance GoogleRequest
          InstanceGroupManagersSetInstanceTemplate where
         type Rs InstanceGroupManagersSetInstanceTemplate =
              Operation
+        type Scopes InstanceGroupManagersSetInstanceTemplate
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
           InstanceGroupManagersSetInstanceTemplate{..}
           = go _igmsitProject _igmsitZone

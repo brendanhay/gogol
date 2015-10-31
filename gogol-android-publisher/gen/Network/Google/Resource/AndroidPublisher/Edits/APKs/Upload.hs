@@ -101,6 +101,8 @@ eapkuEditId
 
 instance GoogleRequest EditsAPKsUpload where
         type Rs EditsAPKsUpload = APK
+        type Scopes EditsAPKsUpload =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsAPKsUpload{..}
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               androidPublisherService
@@ -112,6 +114,8 @@ instance GoogleRequest EditsAPKsUpload where
 instance GoogleRequest (MediaUpload EditsAPKsUpload)
          where
         type Rs (MediaUpload EditsAPKsUpload) = APK
+        type Scopes (MediaUpload EditsAPKsUpload) =
+             Scopes EditsAPKsUpload
         requestClient (MediaUpload EditsAPKsUpload{..} body)
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               (Just AltMedia)

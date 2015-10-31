@@ -170,6 +170,9 @@ clMaxResults
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentList
+        type Scopes CommentsList =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient CommentsList{..}
           = go _clBlogId _clPostId (_clStatus ^. _Default)
               _clEndDate

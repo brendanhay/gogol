@@ -76,6 +76,8 @@ olPayload
 
 instance GoogleRequest OffersList where
         type Rs OffersList = ListOffersResponse
+        type Scopes OffersList =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient OffersList{..}
           = go (Just AltJSON) _olPayload adExchangeBuyerService
           where go

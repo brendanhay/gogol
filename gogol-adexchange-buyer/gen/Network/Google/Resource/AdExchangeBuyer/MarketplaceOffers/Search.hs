@@ -76,6 +76,8 @@ mPqlQuery
 
 instance GoogleRequest MarketplaceOffersSearch where
         type Rs MarketplaceOffersSearch = GetOffersResponse
+        type Scopes MarketplaceOffersSearch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceOffersSearch{..}
           = go _mPqlQuery (Just AltJSON) adExchangeBuyerService
           where go

@@ -151,6 +151,9 @@ ptgCallback
 
 instance GoogleRequest ProjectsTopicsGet where
         type Rs ProjectsTopicsGet = Topic
+        type Scopes ProjectsTopicsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsGet{..}
           = go _ptgTopic _ptgXgafv _ptgUploadProtocol
               (Just _ptgPp)

@@ -115,6 +115,8 @@ dvqMaxResults
 
 instance GoogleRequest DimensionValuesQuery where
         type Rs DimensionValuesQuery = DimensionValueList
+        type Scopes DimensionValuesQuery =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient DimensionValuesQuery{..}
           = go _dvqProFileId _dvqPageToken _dvqMaxResults
               (Just AltJSON)

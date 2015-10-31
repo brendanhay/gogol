@@ -86,6 +86,8 @@ apId = lens _apId (\ s a -> s{_apId = a}) . _Coerce
 
 instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
+        type Scopes AccountsPatch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient AccountsPatch{..}
           = go _apId (Just AltJSON) _apPayload
               adExchangeBuyerService

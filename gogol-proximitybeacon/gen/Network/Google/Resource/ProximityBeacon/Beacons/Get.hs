@@ -151,6 +151,7 @@ bgCallback
 
 instance GoogleRequest BeaconsGet where
         type Rs BeaconsGet = Beacon
+        type Scopes BeaconsGet = '[]
         requestClient BeaconsGet{..}
           = go _bgBeaconName _bgXgafv _bgUploadProtocol
               (Just _bgPp)

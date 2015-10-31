@@ -101,6 +101,8 @@ tuTableId
 
 instance GoogleRequest TemplateUpdate where
         type Rs TemplateUpdate = Template
+        type Scopes TemplateUpdate =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TemplateUpdate{..}
           = go _tuTableId _tuTemplateId (Just AltJSON)
               _tuPayload

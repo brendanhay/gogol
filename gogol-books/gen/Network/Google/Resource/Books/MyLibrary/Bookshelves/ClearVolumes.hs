@@ -89,6 +89,8 @@ mlbcvSource
 instance GoogleRequest
          MyLibraryBookshelvesClearVolumes where
         type Rs MyLibraryBookshelvesClearVolumes = ()
+        type Scopes MyLibraryBookshelvesClearVolumes =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesClearVolumes{..}
           = go _mlbcvShelf _mlbcvSource (Just AltJSON)
               booksService

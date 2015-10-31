@@ -129,6 +129,8 @@ isDryRun = lens _isDryRun (\ s a -> s{_isDryRun = a})
 
 instance GoogleRequest InventorySet where
         type Rs InventorySet = InventorySetResponse
+        type Scopes InventorySet =
+             '["https://www.googleapis.com/auth/content"]
         requestClient InventorySet{..}
           = go _isMerchantId _isStoreCode _isProductId
               _isDryRun

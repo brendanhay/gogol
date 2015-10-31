@@ -91,6 +91,10 @@ dsbtDataSetId
 instance GoogleRequest DataSetsBeginTransaction where
         type Rs DataSetsBeginTransaction =
              BeginTransactionResponse
+        type Scopes DataSetsBeginTransaction =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/datastore",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient DataSetsBeginTransaction{..}
           = go _dsbtDataSetId (Just AltJSON) _dsbtPayload
               datastoreService

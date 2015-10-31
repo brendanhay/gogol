@@ -76,6 +76,9 @@ sitSiteURL
 
 instance GoogleRequest SitesGet where
         type Rs SitesGet = WmxSite
+        type Scopes SitesGet =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
         requestClient SitesGet{..}
           = go _sitSiteURL (Just AltJSON) webmasterToolsService
           where go

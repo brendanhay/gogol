@@ -103,6 +103,9 @@ fuFirewall
 
 instance GoogleRequest FirewallsUpdate where
         type Rs FirewallsUpdate = Operation
+        type Scopes FirewallsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient FirewallsUpdate{..}
           = go _fuProject _fuFirewall (Just AltJSON) _fuPayload
               computeService

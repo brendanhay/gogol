@@ -84,6 +84,8 @@ tuPayload
 
 instance GoogleRequest TablesUpload where
         type Rs TablesUpload = Table
+        type Scopes TablesUpload =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesUpload{..}
           = go (Just AltJSON) _tuPayload mapsEngineService
           where go

@@ -79,6 +79,8 @@ instance GoogleRequest
          ProvisioningCreateAccountTicket where
         type Rs ProvisioningCreateAccountTicket =
              AccountTicket
+        type Scopes ProvisioningCreateAccountTicket =
+             '["https://www.googleapis.com/auth/analytics.provision"]
         requestClient ProvisioningCreateAccountTicket{..}
           = go (Just AltJSON) _pcatPayload analyticsService
           where go

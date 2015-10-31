@@ -149,6 +149,10 @@ mtlMaxResults
 
 instance GoogleRequest MachineTypesList where
         type Rs MachineTypesList = MachineTypeList
+        type Scopes MachineTypesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient MachineTypesList{..}
           = go _mtlProject _mtlZone _mtlFilter _mtlPageToken
               (Just _mtlMaxResults)

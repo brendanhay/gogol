@@ -90,6 +90,8 @@ dsiPayload
 
 instance GoogleRequest DirectorySitesInsert where
         type Rs DirectorySitesInsert = DirectorySite
+        type Scopes DirectorySitesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient DirectorySitesInsert{..}
           = go _dsiProFileId (Just AltJSON) _dsiPayload
               dFAReportingService

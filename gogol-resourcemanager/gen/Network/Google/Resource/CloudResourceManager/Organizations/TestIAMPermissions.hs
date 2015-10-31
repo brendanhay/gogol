@@ -171,6 +171,8 @@ instance GoogleRequest
          OrganizationsTestIAMPermissions where
         type Rs OrganizationsTestIAMPermissions =
              TestIAMPermissionsResponse
+        type Scopes OrganizationsTestIAMPermissions =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient OrganizationsTestIAMPermissions{..}
           = go _otipResource _otipXgafv _otipUploadProtocol
               (Just _otipPp)

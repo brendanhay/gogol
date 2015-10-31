@@ -93,6 +93,9 @@ jcProjectId
 
 instance GoogleRequest JobsCancel where
         type Rs JobsCancel = JobCancelResponse
+        type Scopes JobsCancel =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient JobsCancel{..}
           = go _jcProjectId _jcJobId (Just AltJSON)
               bigQueryService

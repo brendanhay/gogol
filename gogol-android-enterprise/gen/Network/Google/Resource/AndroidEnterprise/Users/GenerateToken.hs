@@ -94,6 +94,8 @@ ugtUserId
 
 instance GoogleRequest UsersGenerateToken where
         type Rs UsersGenerateToken = UserToken
+        type Scopes UsersGenerateToken =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient UsersGenerateToken{..}
           = go _ugtEnterpriseId _ugtUserId (Just AltJSON)
               androidEnterpriseService

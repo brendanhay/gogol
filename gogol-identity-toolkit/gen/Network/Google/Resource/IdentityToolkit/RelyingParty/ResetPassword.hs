@@ -80,6 +80,7 @@ instance GoogleRequest RelyingPartyResetPassword
          where
         type Rs RelyingPartyResetPassword =
              ResetPasswordResponse
+        type Scopes RelyingPartyResetPassword = '[]
         requestClient RelyingPartyResetPassword{..}
           = go (Just AltJSON) _rprpPayload
               identityToolkitService

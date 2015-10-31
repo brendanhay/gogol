@@ -151,6 +151,10 @@ rolMaxResults
 
 instance GoogleRequest RegionOperationsList where
         type Rs RegionOperationsList = OperationList
+        type Scopes RegionOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RegionOperationsList{..}
           = go _rolProject _rolRegion _rolFilter _rolPageToken
               (Just _rolMaxResults)

@@ -94,6 +94,9 @@ instance GoogleRequest AccountsContainersTriggersList
          where
         type Rs AccountsContainersTriggersList =
              ListTriggersResponse
+        type Scopes AccountsContainersTriggersList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersTriggersList{..}
           = go _actlcAccountId _actlcContainerId (Just AltJSON)
               tagManagerService

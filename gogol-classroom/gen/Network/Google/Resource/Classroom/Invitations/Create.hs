@@ -168,6 +168,8 @@ icCallback
 
 instance GoogleRequest InvitationsCreate where
         type Rs InvitationsCreate = Invitation
+        type Scopes InvitationsCreate =
+             '["https://www.googleapis.com/auth/classroom.rosters"]
         requestClient InvitationsCreate{..}
           = go _icXgafv _icUploadProtocol (Just _icPp)
               _icAccessToken

@@ -139,6 +139,10 @@ aalMaxResults
 instance GoogleRequest AddressesAggregatedList where
         type Rs AddressesAggregatedList =
              AddressAggregatedList
+        type Scopes AddressesAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient AddressesAggregatedList{..}
           = go _aalProject _aalFilter _aalPageToken
               (Just _aalMaxResults)

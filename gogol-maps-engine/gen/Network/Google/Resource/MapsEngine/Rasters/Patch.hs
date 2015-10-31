@@ -86,6 +86,8 @@ rppId = lens _rppId (\ s a -> s{_rppId = a})
 
 instance GoogleRequest RastersPatch where
         type Rs RastersPatch = ()
+        type Scopes RastersPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RastersPatch{..}
           = go _rppId (Just AltJSON) _rppPayload
               mapsEngineService

@@ -76,6 +76,8 @@ tpsId = lens _tpsId (\ s a -> s{_tpsId = a})
 
 instance GoogleRequest TablesProcess where
         type Rs TablesProcess = ProcessResponse
+        type Scopes TablesProcess =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesProcess{..}
           = go _tpsId (Just AltJSON) mapsEngineService
           where go

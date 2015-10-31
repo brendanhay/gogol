@@ -103,6 +103,8 @@ usapsUserId
 instance GoogleRequest UsersSetAvailableProductSet
          where
         type Rs UsersSetAvailableProductSet = ProductSet
+        type Scopes UsersSetAvailableProductSet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient UsersSetAvailableProductSet{..}
           = go _usapsEnterpriseId _usapsUserId (Just AltJSON)
               _usapsPayload

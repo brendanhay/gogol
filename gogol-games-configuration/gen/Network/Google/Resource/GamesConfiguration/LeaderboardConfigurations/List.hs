@@ -106,6 +106,8 @@ instance GoogleRequest LeaderboardConfigurationsList
          where
         type Rs LeaderboardConfigurationsList =
              LeaderboardConfigurationListResponse
+        type Scopes LeaderboardConfigurationsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient LeaderboardConfigurationsList{..}
           = go _lclApplicationId _lclPageToken _lclMaxResults
               (Just AltJSON)

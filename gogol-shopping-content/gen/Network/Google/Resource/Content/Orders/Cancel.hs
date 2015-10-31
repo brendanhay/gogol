@@ -103,6 +103,8 @@ occOrderId
 
 instance GoogleRequest OrdersCancel where
         type Rs OrdersCancel = OrdersCancelResponse
+        type Scopes OrdersCancel =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCancel{..}
           = go _occMerchantId _occOrderId (Just AltJSON)
               _occPayload

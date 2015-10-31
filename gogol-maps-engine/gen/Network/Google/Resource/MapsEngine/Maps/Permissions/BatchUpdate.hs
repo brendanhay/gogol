@@ -95,6 +95,8 @@ instance GoogleRequest MapsPermissionsBatchUpdate
          where
         type Rs MapsPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
+        type Scopes MapsPermissionsBatchUpdate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient MapsPermissionsBatchUpdate{..}
           = go _mpbuId (Just AltJSON) _mpbuPayload
               mapsEngineService

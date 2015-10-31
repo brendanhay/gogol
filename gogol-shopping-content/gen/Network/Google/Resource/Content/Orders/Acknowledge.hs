@@ -102,6 +102,8 @@ oaOrderId
 
 instance GoogleRequest OrdersAcknowledge where
         type Rs OrdersAcknowledge = OrdersAcknowledgeResponse
+        type Scopes OrdersAcknowledge =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersAcknowledge{..}
           = go _oaMerchantId _oaOrderId (Just AltJSON)
               _oaPayload

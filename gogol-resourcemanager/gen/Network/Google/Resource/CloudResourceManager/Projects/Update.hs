@@ -169,6 +169,8 @@ proCallback
 
 instance GoogleRequest ProjectsUpdate where
         type Rs ProjectsUpdate = Project
+        type Scopes ProjectsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsUpdate{..}
           = go _proProjectId _proXgafv _proUploadProtocol
               (Just _proPp)

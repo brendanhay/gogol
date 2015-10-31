@@ -129,6 +129,8 @@ acfuAccountId
 instance GoogleRequest
          AccountsContainersFoldersUpdate where
         type Rs AccountsContainersFoldersUpdate = Folder
+        type Scopes AccountsContainersFoldersUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersFoldersUpdate{..}
           = go _acfuAccountId _acfuContainerId _acfuFolderId
               _acfuFingerprint

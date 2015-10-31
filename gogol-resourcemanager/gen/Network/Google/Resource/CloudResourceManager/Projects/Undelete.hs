@@ -175,6 +175,8 @@ puCallback
 
 instance GoogleRequest ProjectsUndelete where
         type Rs ProjectsUndelete = Empty
+        type Scopes ProjectsUndelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsUndelete{..}
           = go _puProjectId _puXgafv _puUploadProtocol
               (Just _puPp)

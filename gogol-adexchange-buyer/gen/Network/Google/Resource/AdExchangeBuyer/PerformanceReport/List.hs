@@ -131,6 +131,8 @@ prlStartDateTime
 instance GoogleRequest PerformanceReportList' where
         type Rs PerformanceReportList' =
              PerformanceReportList
+        type Scopes PerformanceReportList' =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient PerformanceReportList'{..}
           = go (Just _prlAccountId) (Just _prlEndDateTime)
               (Just _prlStartDateTime)

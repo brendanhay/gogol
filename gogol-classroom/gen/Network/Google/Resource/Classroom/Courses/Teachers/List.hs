@@ -188,6 +188,11 @@ ctlCallback
 
 instance GoogleRequest CoursesTeachersList where
         type Rs CoursesTeachersList = ListTeachersResponse
+        type Scopes CoursesTeachersList =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient CoursesTeachersList{..}
           = go _ctlCourseId _ctlXgafv _ctlUploadProtocol
               (Just _ctlPp)

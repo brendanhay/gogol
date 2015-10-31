@@ -119,6 +119,8 @@ caiPayload
 
 instance GoogleRequest CreativeAssetsInsert where
         type Rs CreativeAssetsInsert = CreativeAssetMetadata
+        type Scopes CreativeAssetsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeAssetsInsert{..}
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
               _caiPayload
@@ -132,6 +134,8 @@ instance GoogleRequest
          (MediaUpload CreativeAssetsInsert) where
         type Rs (MediaUpload CreativeAssetsInsert) =
              CreativeAssetMetadata
+        type Scopes (MediaUpload CreativeAssetsInsert) =
+             Scopes CreativeAssetsInsert
         requestClient
           (MediaUpload CreativeAssetsInsert{..} body)
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)

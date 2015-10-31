@@ -101,6 +101,8 @@ auPayload
 
 instance GoogleRequest ACLUpdate where
         type Rs ACLUpdate = ACLRule
+        type Scopes ACLUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient ACLUpdate{..}
           = go _auCalendarId _auRuleId (Just AltJSON)
               _auPayload

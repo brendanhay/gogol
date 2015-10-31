@@ -105,6 +105,9 @@ mdaCustomerId
 
 instance GoogleRequest MobileDevicesAction where
         type Rs MobileDevicesAction = ()
+        type Scopes MobileDevicesAction =
+             '["https://www.googleapis.com/auth/admin.directory.device.mobile",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.action"]
         requestClient MobileDevicesAction{..}
           = go _mdaCustomerId _mdaResourceId (Just AltJSON)
               _mdaPayload

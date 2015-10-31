@@ -90,6 +90,8 @@ ccgId
 
 instance GoogleRequest ContentCategoriesGet where
         type Rs ContentCategoriesGet = ContentCategory
+        type Scopes ContentCategoriesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ContentCategoriesGet{..}
           = go _ccgProFileId _ccgId (Just AltJSON)
               dFAReportingService

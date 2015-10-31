@@ -104,6 +104,8 @@ ieInstance
 
 instance GoogleRequest InstancesExport where
         type Rs InstancesExport = Operation
+        type Scopes InstancesExport =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient InstancesExport{..}
           = go _ieProject _ieInstance (Just AltJSON) _iePayload
               sQLAdminService

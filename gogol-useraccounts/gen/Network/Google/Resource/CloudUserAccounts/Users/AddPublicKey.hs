@@ -103,6 +103,9 @@ uapkUser = lens _uapkUser (\ s a -> s{_uapkUser = a})
 
 instance GoogleRequest UsersAddPublicKey where
         type Rs UsersAddPublicKey = Operation
+        type Scopes UsersAddPublicKey =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient UsersAddPublicKey{..}
           = go _uapkProject _uapkUser (Just AltJSON)
               _uapkPayload

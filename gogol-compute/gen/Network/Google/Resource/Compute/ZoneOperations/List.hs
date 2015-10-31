@@ -150,6 +150,10 @@ zolMaxResults
 
 instance GoogleRequest ZoneOperationsList where
         type Rs ZoneOperationsList = OperationList
+        type Scopes ZoneOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ZoneOperationsList{..}
           = go _zolProject _zolZone _zolFilter _zolPageToken
               (Just _zolMaxResults)

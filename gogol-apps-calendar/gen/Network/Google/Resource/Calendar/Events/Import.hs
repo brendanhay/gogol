@@ -106,6 +106,8 @@ eiSupportsAttachments
 
 instance GoogleRequest EventsImport where
         type Rs EventsImport = Event
+        type Scopes EventsImport =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient EventsImport{..}
           = go _eiCalendarId _eiSupportsAttachments
               (Just AltJSON)

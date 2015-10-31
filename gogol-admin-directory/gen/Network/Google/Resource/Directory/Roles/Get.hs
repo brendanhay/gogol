@@ -88,6 +88,9 @@ rgCustomer
 
 instance GoogleRequest RolesGet where
         type Rs RolesGet = Role
+        type Scopes RolesGet =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient RolesGet{..}
           = go _rgCustomer _rgRoleId (Just AltJSON)
               directoryService

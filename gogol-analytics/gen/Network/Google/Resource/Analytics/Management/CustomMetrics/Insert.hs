@@ -106,6 +106,8 @@ mcmiAccountId
 instance GoogleRequest ManagementCustomMetricsInsert
          where
         type Rs ManagementCustomMetricsInsert = CustomMetric
+        type Scopes ManagementCustomMetricsInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementCustomMetricsInsert{..}
           = go _mcmiAccountId _mcmiWebPropertyId (Just AltJSON)
               _mcmiPayload

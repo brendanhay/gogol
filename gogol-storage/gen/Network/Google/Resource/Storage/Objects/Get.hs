@@ -184,6 +184,12 @@ ogGeneration
 
 instance GoogleRequest ObjectsGet where
         type Rs ObjectsGet = Object
+        type Scopes ObjectsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsGet{..}
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
@@ -200,6 +206,8 @@ instance GoogleRequest ObjectsGet where
 instance GoogleRequest (MediaDownload ObjectsGet)
          where
         type Rs (MediaDownload ObjectsGet) = Stream
+        type Scopes (MediaDownload ObjectsGet) =
+             Scopes ObjectsGet
         requestClient (MediaDownload ObjectsGet{..})
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch

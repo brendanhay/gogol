@@ -146,6 +146,10 @@ udsdsdCurrentTimeMillis
 instance GoogleRequest UsersDataSourcesDataSetsDelete
          where
         type Rs UsersDataSourcesDataSetsDelete = ()
+        type Scopes UsersDataSourcesDataSetsDelete =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersDataSourcesDataSetsDelete{..}
           = go _udsdsdUserId _udsdsdDataSourceId
               _udsdsdDataSetId

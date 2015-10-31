@@ -90,6 +90,8 @@ rgProFileId
 
 instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report
+        type Scopes ReportsGet =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsGet{..}
           = go _rgProFileId _rgReportId (Just AltJSON)
               dFAReportingService

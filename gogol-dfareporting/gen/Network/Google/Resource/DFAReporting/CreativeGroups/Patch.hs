@@ -104,6 +104,8 @@ cgpId
 
 instance GoogleRequest CreativeGroupsPatch where
         type Rs CreativeGroupsPatch = CreativeGroup
+        type Scopes CreativeGroupsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeGroupsPatch{..}
           = go _cgpProFileId (Just _cgpId) (Just AltJSON)
               _cgpPayload

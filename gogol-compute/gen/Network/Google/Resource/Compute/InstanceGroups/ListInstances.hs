@@ -180,6 +180,10 @@ instance GoogleRequest InstanceGroupsListInstances'
          where
         type Rs InstanceGroupsListInstances' =
              InstanceGroupsListInstances
+        type Scopes InstanceGroupsListInstances' =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupsListInstances'{..}
           = go _igliProject _igliZone _igliInstanceGroup
               _igliFilter

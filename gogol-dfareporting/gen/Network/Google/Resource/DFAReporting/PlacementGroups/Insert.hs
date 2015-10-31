@@ -90,6 +90,8 @@ pgiPayload
 
 instance GoogleRequest PlacementGroupsInsert where
         type Rs PlacementGroupsInsert = PlacementGroup
+        type Scopes PlacementGroupsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementGroupsInsert{..}
           = go _pgiProFileId (Just AltJSON) _pgiPayload
               dFAReportingService

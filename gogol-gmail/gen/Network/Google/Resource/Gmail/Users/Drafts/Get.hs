@@ -98,6 +98,11 @@ udgId = lens _udgId (\ s a -> s{_udgId = a})
 
 instance GoogleRequest UsersDraftsGet where
         type Rs UsersDraftsGet = Draft
+        type Scopes UsersDraftsGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersDraftsGet{..}
           = go _udgUserId _udgId (Just _udgFormat)
               (Just AltJSON)

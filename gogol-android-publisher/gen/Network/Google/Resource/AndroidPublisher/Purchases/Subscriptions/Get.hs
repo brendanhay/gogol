@@ -110,6 +110,8 @@ instance GoogleRequest PurchasesSubscriptionsGet
          where
         type Rs PurchasesSubscriptionsGet =
              SubscriptionPurchase
+        type Scopes PurchasesSubscriptionsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient PurchasesSubscriptionsGet{..}
           = go _psgPackageName _psgSubscriptionId _psgToken
               (Just AltJSON)

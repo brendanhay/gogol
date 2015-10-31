@@ -91,6 +91,8 @@ ccdAdClientId
 
 instance GoogleRequest CustomChannelsDelete where
         type Rs CustomChannelsDelete = CustomChannel
+        type Scopes CustomChannelsDelete =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient CustomChannelsDelete{..}
           = go _ccdAdClientId _ccdCustomChannelId
               (Just AltJSON)

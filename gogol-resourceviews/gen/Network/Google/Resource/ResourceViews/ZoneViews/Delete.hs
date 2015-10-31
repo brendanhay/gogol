@@ -101,6 +101,10 @@ zvdZone = lens _zvdZone (\ s a -> s{_zvdZone = a})
 
 instance GoogleRequest ZoneViewsDelete where
         type Rs ZoneViewsDelete = Operation
+        type Scopes ZoneViewsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient ZoneViewsDelete{..}
           = go _zvdProject _zvdZone _zvdResourceView
               (Just AltJSON)

@@ -101,6 +101,8 @@ ladProductId
 
 instance GoogleRequest LicenseAssignmentsDelete where
         type Rs LicenseAssignmentsDelete = ()
+        type Scopes LicenseAssignmentsDelete =
+             '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient LicenseAssignmentsDelete{..}
           = go _ladProductId _ladSKUId _ladUserId
               (Just AltJSON)

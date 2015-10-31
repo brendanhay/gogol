@@ -100,6 +100,8 @@ aiPayload
 
 instance GoogleRequest AutoscalersInsert where
         type Rs AutoscalersInsert = Operation
+        type Scopes AutoscalersInsert =
+             '["https://www.googleapis.com/auth/compute"]
         requestClient AutoscalersInsert{..}
           = go _aiProject _aiZone (Just AltJSON) _aiPayload
               autoscalerService

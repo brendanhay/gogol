@@ -88,6 +88,9 @@ comFileId
 
 instance GoogleRequest CommentsInsert where
         type Rs CommentsInsert = Comment
+        type Scopes CommentsInsert =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient CommentsInsert{..}
           = go _comFileId (Just AltJSON) _comPayload
               driveService

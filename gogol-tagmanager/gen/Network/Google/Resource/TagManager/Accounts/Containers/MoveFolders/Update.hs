@@ -158,6 +158,7 @@ acmfuTagId
 instance GoogleRequest
          AccountsContainersMoveFoldersUpdate where
         type Rs AccountsContainersMoveFoldersUpdate = ()
+        type Scopes AccountsContainersMoveFoldersUpdate = '[]
         requestClient AccountsContainersMoveFoldersUpdate{..}
           = go _acmfuAccountId _acmfuContainerId _acmfuFolderId
               (_acmfuTriggerId ^. _Default)

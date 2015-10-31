@@ -187,6 +187,7 @@ alMaxResults
 
 instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = Advertisers
+        type Scopes AdvertisersList = '[]
         requestClient AdvertisersList{..}
           = go _alRole _alRoleId _alRelationshipStatus
               _alMinSevenDayEpc

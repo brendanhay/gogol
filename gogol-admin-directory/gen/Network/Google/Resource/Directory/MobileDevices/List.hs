@@ -151,6 +151,10 @@ mdlMaxResults
 
 instance GoogleRequest MobileDevicesList where
         type Rs MobileDevicesList = MobileDevices
+        type Scopes MobileDevicesList =
+             '["https://www.googleapis.com/auth/admin.directory.device.mobile",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.action",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"]
         requestClient MobileDevicesList{..}
           = go _mdlCustomerId _mdlOrderBy _mdlSortOrder
               _mdlQuery

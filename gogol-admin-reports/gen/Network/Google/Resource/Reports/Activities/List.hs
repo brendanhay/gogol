@@ -186,6 +186,8 @@ alMaxResults
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = Activities
+        type Scopes ActivitiesList =
+             '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
         requestClient ActivitiesList{..}
           = go _alUserKey _alApplicationName _alStartTime
               _alFilters

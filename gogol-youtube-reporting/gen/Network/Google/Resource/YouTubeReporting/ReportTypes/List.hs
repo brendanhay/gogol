@@ -196,6 +196,9 @@ rtlCallback
 
 instance GoogleRequest ReportTypesList where
         type Rs ReportTypesList = ListReportTypesResponse
+        type Scopes ReportTypesList =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient ReportTypesList{..}
           = go _rtlXgafv _rtlUploadProtocol (Just _rtlPp)
               _rtlAccessToken

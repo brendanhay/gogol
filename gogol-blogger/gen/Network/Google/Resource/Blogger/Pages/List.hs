@@ -133,6 +133,9 @@ plMaxResults
 
 instance GoogleRequest PagesList where
         type Rs PagesList = PageList
+        type Scopes PagesList =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PagesList{..}
           = go _plBlogId (_plStatus ^. _Default) _plFetchBodies
               _plView

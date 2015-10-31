@@ -88,6 +88,10 @@ ciUserId = lens _ciUserId (\ s a -> s{_ciUserId = a})
 
 instance GoogleRequest CirclesInsert where
         type Rs CirclesInsert = Circle
+        type Scopes CirclesInsert =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient CirclesInsert{..}
           = go _ciUserId (Just AltJSON) _ciPayload
               plusDomainsService

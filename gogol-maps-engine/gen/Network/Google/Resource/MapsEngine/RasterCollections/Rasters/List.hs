@@ -221,6 +221,9 @@ instance GoogleRequest RasterCollectionsRastersList
          where
         type Rs RasterCollectionsRastersList =
              RasterCollectionsRastersListResponse
+        type Scopes RasterCollectionsRastersList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient RasterCollectionsRastersList{..}
           = go _rcrlId _rcrlCreatedAfter _rcrlCreatorEmail
               _rcrlRole

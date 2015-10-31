@@ -98,6 +98,8 @@ piDryRun = lens _piDryRun (\ s a -> s{_piDryRun = a})
 
 instance GoogleRequest ProductsInsert where
         type Rs ProductsInsert = Product
+        type Scopes ProductsInsert =
+             '["https://www.googleapis.com/auth/content"]
         requestClient ProductsInsert{..}
           = go _piMerchantId _piDryRun (Just AltJSON)
               _piPayload

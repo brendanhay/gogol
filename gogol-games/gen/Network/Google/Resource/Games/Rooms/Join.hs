@@ -100,6 +100,9 @@ rjLanguage
 
 instance GoogleRequest RoomsJoin where
         type Rs RoomsJoin = Room
+        type Scopes RoomsJoin =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsJoin{..}
           = go _rjRoomId _rjLanguage (Just AltJSON) _rjPayload
               gamesService

@@ -98,6 +98,10 @@ wusOnBehalfOfContentOwner
 
 instance GoogleRequest WatermarksUnSet where
         type Rs WatermarksUnSet = ()
+        type Scopes WatermarksUnSet =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient WatermarksUnSet{..}
           = go (Just _wusChannelId) _wusOnBehalfOfContentOwner
               (Just AltJSON)

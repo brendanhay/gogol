@@ -94,6 +94,8 @@ rlsgRemarketingListId
 instance GoogleRequest RemarketingListSharesGet where
         type Rs RemarketingListSharesGet =
              RemarketingListShare
+        type Scopes RemarketingListSharesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListSharesGet{..}
           = go _rlsgProFileId _rlsgRemarketingListId
               (Just AltJSON)

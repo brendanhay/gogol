@@ -122,6 +122,8 @@ instance GoogleRequest
          ManagementProFileFilterLinksInsert where
         type Rs ManagementProFileFilterLinksInsert =
              ProFileFilterLink
+        type Scopes ManagementProFileFilterLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementProFileFilterLinksInsert{..}
           = go _mpffliAccountId _mpffliWebPropertyId
               _mpffliProFileId

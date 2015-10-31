@@ -89,6 +89,9 @@ gadAddress
 
 instance GoogleRequest GlobalAddressesDelete where
         type Rs GlobalAddressesDelete = Operation
+        type Scopes GlobalAddressesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient GlobalAddressesDelete{..}
           = go _gadProject _gadAddress (Just AltJSON)
               computeService

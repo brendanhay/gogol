@@ -76,6 +76,8 @@ ruPayload
 
 instance GoogleRequest RastersUpload where
         type Rs RastersUpload = Raster
+        type Scopes RastersUpload =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RastersUpload{..}
           = go (Just AltJSON) _ruPayload mapsEngineService
           where go

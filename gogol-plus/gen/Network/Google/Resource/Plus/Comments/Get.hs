@@ -75,6 +75,9 @@ cgCommentId
 
 instance GoogleRequest CommentsGet where
         type Rs CommentsGet = Comment
+        type Scopes CommentsGet =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient CommentsGet{..}
           = go _cgCommentId (Just AltJSON) plusService
           where go

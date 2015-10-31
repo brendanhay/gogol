@@ -98,6 +98,9 @@ itiPayload
 
 instance GoogleRequest InstanceTemplatesInsert where
         type Rs InstanceTemplatesInsert = Operation
+        type Scopes InstanceTemplatesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceTemplatesInsert{..}
           = go _itiProject (Just AltJSON) _itiPayload
               computeService

@@ -102,6 +102,8 @@ lagProductId
 
 instance GoogleRequest LicenseAssignmentsGet where
         type Rs LicenseAssignmentsGet = LicenseAssignment
+        type Scopes LicenseAssignmentsGet =
+             '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient LicenseAssignmentsGet{..}
           = go _lagProductId _lagSKUId _lagUserId
               (Just AltJSON)

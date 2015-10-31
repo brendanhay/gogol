@@ -103,6 +103,8 @@ edEventId
 
 instance GoogleRequest EventsDelete where
         type Rs EventsDelete = ()
+        type Scopes EventsDelete =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient EventsDelete{..}
           = go _edCalendarId _edEventId _edSendNotifications
               (Just AltJSON)

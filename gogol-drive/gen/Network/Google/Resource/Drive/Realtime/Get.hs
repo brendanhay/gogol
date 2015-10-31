@@ -101,6 +101,10 @@ rrRevision
 
 instance GoogleRequest RealtimeGet where
         type Rs RealtimeGet = ()
+        type Scopes RealtimeGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient RealtimeGet{..}
           = go _rrFileId _rrRevision (Just AltJSON)
               driveService
@@ -111,6 +115,8 @@ instance GoogleRequest RealtimeGet where
 instance GoogleRequest (MediaDownload RealtimeGet)
          where
         type Rs (MediaDownload RealtimeGet) = Stream
+        type Scopes (MediaDownload RealtimeGet) =
+             Scopes RealtimeGet
         requestClient (MediaDownload RealtimeGet{..})
           = go _rrFileId _rrRevision (Just AltMedia)
               driveService

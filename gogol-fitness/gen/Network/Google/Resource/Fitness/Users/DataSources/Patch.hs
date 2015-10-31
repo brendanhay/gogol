@@ -113,6 +113,10 @@ udspUserId
 
 instance GoogleRequest UsersDataSourcesPatch where
         type Rs UsersDataSourcesPatch = DataSource
+        type Scopes UsersDataSourcesPatch =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersDataSourcesPatch{..}
           = go _udspUserId _udspDataSourceId (Just AltJSON)
               _udspPayload

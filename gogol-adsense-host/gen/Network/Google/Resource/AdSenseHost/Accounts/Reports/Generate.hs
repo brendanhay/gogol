@@ -196,6 +196,8 @@ argMaxResults
 
 instance GoogleRequest AccountsReportsGenerate where
         type Rs AccountsReportsGenerate = Report
+        type Scopes AccountsReportsGenerate =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AccountsReportsGenerate{..}
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)

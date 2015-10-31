@@ -136,6 +136,10 @@ sMaxResults
 
 instance GoogleRequest SnapshotsList where
         type Rs SnapshotsList = SnapshotList
+        type Scopes SnapshotsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient SnapshotsList{..}
           = go _sProject _sFilter _sPageToken
               (Just _sMaxResults)

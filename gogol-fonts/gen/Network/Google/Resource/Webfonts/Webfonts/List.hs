@@ -75,6 +75,7 @@ wlSort = lens _wlSort (\ s a -> s{_wlSort = a})
 
 instance GoogleRequest WebfontsList where
         type Rs WebfontsList = WebfontList
+        type Scopes WebfontsList = '[]
         requestClient WebfontsList{..}
           = go _wlSort (Just AltJSON) fontsService
           where go

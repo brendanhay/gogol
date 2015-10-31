@@ -115,6 +115,9 @@ puPermissionId
 
 instance GoogleRequest PermissionsUpdate where
         type Rs PermissionsUpdate = Permission
+        type Scopes PermissionsUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient PermissionsUpdate{..}
           = go _puFileId _puPermissionId
               (Just _puTransferOwnership)

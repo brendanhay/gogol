@@ -141,6 +141,10 @@ instance GoogleRequest
          InstanceGroupManagersAggregatedList where
         type Rs InstanceGroupManagersAggregatedList =
              InstanceGroupManagerAggregatedList
+        type Scopes InstanceGroupManagersAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupManagersAggregatedList{..}
           = go _igmalProject _igmalFilter _igmalPageToken
               (Just _igmalMaxResults)

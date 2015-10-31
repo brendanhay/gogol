@@ -78,6 +78,9 @@ instance GoogleRequest
          RasterCollectionsPermissionsList where
         type Rs RasterCollectionsPermissionsList =
              PermissionsListResponse
+        type Scopes RasterCollectionsPermissionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient RasterCollectionsPermissionsList{..}
           = go _rcplId (Just AltJSON) mapsEngineService
           where go

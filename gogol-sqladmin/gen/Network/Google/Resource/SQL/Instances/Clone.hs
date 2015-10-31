@@ -105,6 +105,9 @@ icInstance
 
 instance GoogleRequest InstancesClone where
         type Rs InstancesClone = Operation
+        type Scopes InstancesClone =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesClone{..}
           = go _icProject _icInstance (Just AltJSON) _icPayload
               sQLAdminService

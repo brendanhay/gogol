@@ -203,6 +203,8 @@ ampCallback
 
 instance GoogleRequest AppsModulesPatch where
         type Rs AppsModulesPatch = Operation
+        type Scopes AppsModulesPatch =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsModulesPatch{..}
           = go _ampAppsId _ampModulesId _ampXgafv
               _ampUploadProtocol

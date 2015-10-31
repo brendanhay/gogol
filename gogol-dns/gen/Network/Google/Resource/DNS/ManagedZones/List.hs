@@ -114,6 +114,11 @@ mzlMaxResults
 
 instance GoogleRequest ManagedZonesList where
         type Rs ManagedZonesList = ManagedZonesListResponse
+        type Scopes ManagedZonesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesList{..}
           = go _mzlProject _mzlPageToken _mzlDNSName
               _mzlMaxResults

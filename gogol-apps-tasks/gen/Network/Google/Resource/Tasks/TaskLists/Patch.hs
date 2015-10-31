@@ -91,6 +91,8 @@ tlpTaskList
 
 instance GoogleRequest TaskListsPatch where
         type Rs TaskListsPatch = TaskList
+        type Scopes TaskListsPatch =
+             '["https://www.googleapis.com/auth/tasks"]
         requestClient TaskListsPatch{..}
           = go _tlpTaskList (Just AltJSON) _tlpPayload
               appsTasksService

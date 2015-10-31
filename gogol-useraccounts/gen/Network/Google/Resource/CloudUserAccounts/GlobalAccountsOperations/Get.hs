@@ -91,6 +91,11 @@ gaogOperation
 instance GoogleRequest GlobalAccountsOperationsGet
          where
         type Rs GlobalAccountsOperationsGet = Operation
+        type Scopes GlobalAccountsOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
         requestClient GlobalAccountsOperationsGet{..}
           = go _gaogProject _gaogOperation (Just AltJSON)
               userAccountsService

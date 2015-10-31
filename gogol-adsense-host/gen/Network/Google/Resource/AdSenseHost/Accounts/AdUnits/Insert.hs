@@ -105,6 +105,8 @@ aauiAccountId
 
 instance GoogleRequest AccountsAdUnitsInsert where
         type Rs AccountsAdUnitsInsert = AdUnit
+        type Scopes AccountsAdUnitsInsert =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AccountsAdUnitsInsert{..}
           = go _aauiAccountId _aauiAdClientId (Just AltJSON)
               _aauiPayload

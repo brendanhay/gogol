@@ -78,6 +78,8 @@ mnlProposalId
 
 instance GoogleRequest MarketplaceNotesList where
         type Rs MarketplaceNotesList = GetOrderNotesResponse
+        type Scopes MarketplaceNotesList =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceNotesList{..}
           = go _mnlProposalId (Just AltJSON)
               adExchangeBuyerService

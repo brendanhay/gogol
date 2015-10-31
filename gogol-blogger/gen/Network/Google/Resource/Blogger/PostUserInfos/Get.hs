@@ -119,6 +119,9 @@ puigPostId
 
 instance GoogleRequest PostUserInfosGet where
         type Rs PostUserInfosGet = PostUserInfo
+        type Scopes PostUserInfosGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostUserInfosGet{..}
           = go _puigUserId _puigBlogId _puigPostId
               _puigMaxComments

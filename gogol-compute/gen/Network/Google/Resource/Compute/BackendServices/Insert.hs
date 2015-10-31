@@ -96,6 +96,9 @@ bsiPayload
 
 instance GoogleRequest BackendServicesInsert where
         type Rs BackendServicesInsert = Operation
+        type Scopes BackendServicesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient BackendServicesInsert{..}
           = go _bsiProject (Just AltJSON) _bsiPayload
               computeService

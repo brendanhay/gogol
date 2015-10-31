@@ -114,6 +114,8 @@ lapProductId
 
 instance GoogleRequest LicenseAssignmentsPatch where
         type Rs LicenseAssignmentsPatch = LicenseAssignment
+        type Scopes LicenseAssignmentsPatch =
+             '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient LicenseAssignmentsPatch{..}
           = go _lapProductId _lapSKUId _lapUserId
               (Just AltJSON)

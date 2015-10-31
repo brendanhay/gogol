@@ -63,6 +63,8 @@ billingInfoList' = BillingInfoList'
 
 instance GoogleRequest BillingInfoList' where
         type Rs BillingInfoList' = BillingInfoList
+        type Scopes BillingInfoList' =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient BillingInfoList'{}
           = go (Just AltJSON) adExchangeBuyerService
           where go

@@ -111,6 +111,9 @@ tlMaxResults
 
 instance GoogleRequest TaskList' where
         type Rs TaskList' = TaskList
+        type Scopes TaskList' =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient TaskList'{..}
           = go _tlTableId _tlPageToken _tlStartIndex
               _tlMaxResults

@@ -95,6 +95,8 @@ instance GoogleRequest AccountActiveAdSummariesGet
          where
         type Rs AccountActiveAdSummariesGet =
              AccountActiveAdSummary
+        type Scopes AccountActiveAdSummariesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountActiveAdSummariesGet{..}
           = go _aaasgProFileId _aaasgSummaryAccountId
               (Just AltJSON)

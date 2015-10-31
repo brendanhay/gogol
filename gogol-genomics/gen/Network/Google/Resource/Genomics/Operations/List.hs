@@ -191,6 +191,9 @@ olCallback
 
 instance GoogleRequest OperationsList where
         type Rs OperationsList = ListOperationsResponse
+        type Scopes OperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient OperationsList{..}
           = go _olName _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken

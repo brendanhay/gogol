@@ -120,6 +120,10 @@ tdiaTableId
 instance GoogleRequest TableDataInsertAll where
         type Rs TableDataInsertAll =
              TableDataInsertAllResponse
+        type Scopes TableDataInsertAll =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/bigquery.insertdata",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient TableDataInsertAll{..}
           = go _tdiaProjectId _tdiaDataSetId _tdiaTableId
               (Just AltJSON)

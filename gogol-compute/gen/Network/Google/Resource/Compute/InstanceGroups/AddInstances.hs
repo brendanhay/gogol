@@ -120,6 +120,9 @@ igaiInstanceGroup
 instance GoogleRequest InstanceGroupsAddInstances
          where
         type Rs InstanceGroupsAddInstances = Operation
+        type Scopes InstanceGroupsAddInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsAddInstances{..}
           = go _igaiProject _igaiZone _igaiInstanceGroup
               (Just AltJSON)

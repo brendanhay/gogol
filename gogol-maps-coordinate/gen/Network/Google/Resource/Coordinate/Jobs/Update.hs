@@ -219,6 +219,8 @@ juCustomField
 
 instance GoogleRequest JobsUpdate where
         type Rs JobsUpdate = Job
+        type Scopes JobsUpdate =
+             '["https://www.googleapis.com/auth/coordinate"]
         requestClient JobsUpdate{..}
           = go _juTeamId _juJobId _juProgress _juNote
               _juCustomerPhoneNumber

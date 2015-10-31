@@ -172,6 +172,8 @@ cadCallback
 
 instance GoogleRequest CoursesAliasesDelete where
         type Rs CoursesAliasesDelete = Empty
+        type Scopes CoursesAliasesDelete =
+             '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesAliasesDelete{..}
           = go _cadCourseId _cadAlias _cadXgafv
               _cadUploadProtocol

@@ -228,6 +228,9 @@ dggStartDate
 
 instance GoogleRequest DataGaGet where
         type Rs DataGaGet = GaData
+        type Scopes DataGaGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient DataGaGet{..}
           = go (Just _dggIds) (Just _dggStartDate)
               (Just _dggEndDate)

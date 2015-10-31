@@ -108,6 +108,8 @@ instance GoogleRequest
          AccountsContainersVersionsUndelete where
         type Rs AccountsContainersVersionsUndelete =
              ContainerVersion
+        type Scopes AccountsContainersVersionsUndelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
         requestClient AccountsContainersVersionsUndelete{..}
           = go _acvucAccountId _acvucContainerId
               _acvucContainerVersionId

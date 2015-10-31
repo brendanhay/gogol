@@ -75,6 +75,8 @@ elDomain = lens _elDomain (\ s a -> s{_elDomain = a})
 
 instance GoogleRequest EnterprisesList where
         type Rs EnterprisesList = EnterprisesListResponse
+        type Scopes EnterprisesList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesList{..}
           = go (Just _elDomain) (Just AltJSON)
               androidEnterpriseService

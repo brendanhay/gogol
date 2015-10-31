@@ -100,6 +100,9 @@ tdTask = lens _tdTask (\ s a -> s{_tdTask = a})
 
 instance GoogleRequest TasksDelete where
         type Rs TasksDelete = ()
+        type Scopes TasksDelete =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksDelete{..}
           = go _tdProject _tdTaskqueue _tdTask (Just AltJSON)
               taskQueueService

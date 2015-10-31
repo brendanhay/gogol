@@ -77,6 +77,9 @@ galGroupKey
 
 instance GoogleRequest GroupsAliasesList where
         type Rs GroupsAliasesList = Aliases
+        type Scopes GroupsAliasesList =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
         requestClient GroupsAliasesList{..}
           = go _galGroupKey (Just AltJSON) directoryService
           where go

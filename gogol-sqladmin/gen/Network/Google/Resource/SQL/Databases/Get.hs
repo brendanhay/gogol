@@ -103,6 +103,9 @@ dgInstance
 
 instance GoogleRequest DatabasesGet where
         type Rs DatabasesGet = Database
+        type Scopes DatabasesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesGet{..}
           = go _dgProject _dgInstance _dgDatabase
               (Just AltJSON)

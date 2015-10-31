@@ -115,6 +115,10 @@ zvssPayload
 
 instance GoogleRequest ZoneViewsSetService where
         type Rs ZoneViewsSetService = Operation
+        type Scopes ZoneViewsSetService =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient ZoneViewsSetService{..}
           = go _zvssProject _zvssZone _zvssResourceView
               (Just AltJSON)

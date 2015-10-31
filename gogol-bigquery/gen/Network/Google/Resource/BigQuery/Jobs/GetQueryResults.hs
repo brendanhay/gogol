@@ -144,6 +144,10 @@ jgqrMaxResults
 
 instance GoogleRequest JobsGetQueryResults where
         type Rs JobsGetQueryResults = GetQueryResultsResponse
+        type Scopes JobsGetQueryResults =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient JobsGetQueryResults{..}
           = go _jgqrProjectId _jgqrJobId _jgqrTimeoutMs
               _jgqrPageToken

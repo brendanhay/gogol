@@ -90,6 +90,8 @@ ctuPayload
 
 instance GoogleRequest CommentThreadsUpdate where
         type Rs CommentThreadsUpdate = CommentThread
+        type Scopes CommentThreadsUpdate =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentThreadsUpdate{..}
           = go (Just _ctuPart) (Just AltJSON) _ctuPayload
               youTubeService

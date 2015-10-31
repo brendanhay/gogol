@@ -88,6 +88,8 @@ pddPageId
 
 instance GoogleRequest PagesDelete where
         type Rs PagesDelete = ()
+        type Scopes PagesDelete =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PagesDelete{..}
           = go _pddBlogId _pddPageId (Just AltJSON)
               bloggerService

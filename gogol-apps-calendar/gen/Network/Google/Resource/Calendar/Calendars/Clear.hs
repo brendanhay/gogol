@@ -80,6 +80,8 @@ ccCalendarId
 
 instance GoogleRequest CalendarsClear where
         type Rs CalendarsClear = ()
+        type Scopes CalendarsClear =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient CalendarsClear{..}
           = go _ccCalendarId (Just AltJSON) appsCalendarService
           where go

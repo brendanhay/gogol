@@ -101,6 +101,9 @@ brgInstance
 
 instance GoogleRequest BackupRunsGet where
         type Rs BackupRunsGet = BackupRun
+        type Scopes BackupRunsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient BackupRunsGet{..}
           = go _brgProject _brgInstance _brgId (Just AltJSON)
               sQLAdminService

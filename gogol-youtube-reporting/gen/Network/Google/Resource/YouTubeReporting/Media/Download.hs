@@ -169,6 +169,9 @@ mdCallback
 
 instance GoogleRequest MediaDownload' where
         type Rs MediaDownload' = Media
+        type Scopes MediaDownload' =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient MediaDownload'{..}
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
@@ -185,6 +188,8 @@ instance GoogleRequest MediaDownload' where
 instance GoogleRequest (MediaDownload MediaDownload')
          where
         type Rs (MediaDownload MediaDownload') = Stream
+        type Scopes (MediaDownload MediaDownload') =
+             Scopes MediaDownload'
         requestClient (MediaDownload MediaDownload'{..})
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)

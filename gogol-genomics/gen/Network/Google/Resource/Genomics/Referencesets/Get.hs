@@ -161,6 +161,10 @@ rgCallback
 
 instance GoogleRequest ReferencesetsGet where
         type Rs ReferencesetsGet = ReferenceSet
+        type Scopes ReferencesetsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient ReferencesetsGet{..}
           = go _rgReferenceSetId _rgXgafv _rgUploadProtocol
               (Just _rgPp)

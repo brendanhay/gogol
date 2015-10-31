@@ -167,6 +167,8 @@ iaCallback
 
 instance GoogleRequest InvitationsAccept where
         type Rs InvitationsAccept = Empty
+        type Scopes InvitationsAccept =
+             '["https://www.googleapis.com/auth/classroom.rosters"]
         requestClient InvitationsAccept{..}
           = go _iaId _iaXgafv _iaUploadProtocol (Just _iaPp)
               _iaAccessToken

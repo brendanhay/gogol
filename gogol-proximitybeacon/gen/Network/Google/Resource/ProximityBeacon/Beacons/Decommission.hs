@@ -159,6 +159,7 @@ beaCallback
 
 instance GoogleRequest BeaconsDecommission where
         type Rs BeaconsDecommission = Empty
+        type Scopes BeaconsDecommission = '[]
         requestClient BeaconsDecommission{..}
           = go _beaBeaconName _beaXgafv _beaUploadProtocol
               (Just _beaPp)

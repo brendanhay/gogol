@@ -135,6 +135,9 @@ tlMaxResults
 
 instance GoogleRequest TransfersList where
         type Rs TransfersList = DataTransfersListResponse
+        type Scopes TransfersList =
+             '["https://www.googleapis.com/auth/admin.datatransfer",
+               "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
         requestClient TransfersList{..}
           = go _tlStatus _tlOldOwnerUserId _tlNewOwnerUserId
               _tlCustomerId

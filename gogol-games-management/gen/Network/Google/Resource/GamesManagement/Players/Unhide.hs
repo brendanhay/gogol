@@ -95,6 +95,9 @@ puPlayerId
 
 instance GoogleRequest PlayersUnhide where
         type Rs PlayersUnhide = ()
+        type Scopes PlayersUnhide =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient PlayersUnhide{..}
           = go _puApplicationId _puPlayerId (Just AltJSON)
               gamesManagementService

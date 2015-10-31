@@ -107,6 +107,8 @@ alAppFilterMimeTypes
 
 instance GoogleRequest AppsList where
         type Rs AppsList = AppList
+        type Scopes AppsList =
+             '["https://www.googleapis.com/auth/drive.apps.readonly"]
         requestClient AppsList{..}
           = go _alLanguageCode (Just _alAppFilterExtensions)
               (Just _alAppFilterMimeTypes)

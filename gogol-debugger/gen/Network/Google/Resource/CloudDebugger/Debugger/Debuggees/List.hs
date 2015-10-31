@@ -180,6 +180,9 @@ ddlCallback
 
 instance GoogleRequest DebuggerDebuggeesList where
         type Rs DebuggerDebuggeesList = ListDebuggeesResponse
+        type Scopes DebuggerDebuggeesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient DebuggerDebuggeesList{..}
           = go _ddlXgafv _ddlIncludeInactive _ddlUploadProtocol
               _ddlProject

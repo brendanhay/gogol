@@ -116,6 +116,8 @@ camDefaultLandingPageName
 
 instance GoogleRequest CampaignsInsert where
         type Rs CampaignsInsert = Campaign
+        type Scopes CampaignsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsInsert{..}
           = go _camProFileId (Just _camDefaultLandingPageName)
               (Just _camDefaultLandingPageURL)

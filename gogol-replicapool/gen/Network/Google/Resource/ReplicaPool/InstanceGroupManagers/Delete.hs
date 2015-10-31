@@ -106,6 +106,9 @@ igmdZone = lens _igmdZone (\ s a -> s{_igmdZone = a})
 instance GoogleRequest InstanceGroupManagersDelete
          where
         type Rs InstanceGroupManagersDelete = Operation
+        type Scopes InstanceGroupManagersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupManagersDelete{..}
           = go _igmdProject _igmdZone _igmdInstanceGroupManager
               (Just AltJSON)

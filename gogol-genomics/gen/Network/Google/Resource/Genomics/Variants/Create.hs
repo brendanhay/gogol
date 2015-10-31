@@ -156,6 +156,9 @@ vcCallback
 
 instance GoogleRequest VariantsCreate where
         type Rs VariantsCreate = Variant
+        type Scopes VariantsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantsCreate{..}
           = go _vcXgafv _vcUploadProtocol (Just _vcPp)
               _vcAccessToken

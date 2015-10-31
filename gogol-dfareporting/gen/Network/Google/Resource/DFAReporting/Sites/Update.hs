@@ -89,6 +89,8 @@ suPayload
 
 instance GoogleRequest SitesUpdate where
         type Rs SitesUpdate = Site
+        type Scopes SitesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SitesUpdate{..}
           = go _suProFileId (Just AltJSON) _suPayload
               dFAReportingService

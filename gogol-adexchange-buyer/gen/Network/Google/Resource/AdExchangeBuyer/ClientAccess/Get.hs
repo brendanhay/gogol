@@ -87,6 +87,8 @@ cagClientAccountId
 
 instance GoogleRequest ClientAccessGet where
         type Rs ClientAccessGet = ClientAccessCapabilities
+        type Scopes ClientAccessGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ClientAccessGet{..}
           = go _cagClientAccountId (Just _cagSponsorAccountId)
               (Just AltJSON)

@@ -90,6 +90,8 @@ cgDartId
 
 instance GoogleRequest CountriesGet where
         type Rs CountriesGet = Country
+        type Scopes CountriesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CountriesGet{..}
           = go _cgProFileId _cgDartId (Just AltJSON)
               dFAReportingService

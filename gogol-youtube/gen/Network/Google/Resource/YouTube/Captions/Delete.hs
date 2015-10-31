@@ -110,6 +110,9 @@ cddId = lens _cddId (\ s a -> s{_cddId = a})
 
 instance GoogleRequest CaptionsDelete where
         type Rs CaptionsDelete = ()
+        type Scopes CaptionsDelete =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsDelete{..}
           = go (Just _cddId) _cddOnBehalfOf
               _cddOnBehalfOfContentOwner

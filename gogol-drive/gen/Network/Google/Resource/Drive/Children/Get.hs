@@ -89,6 +89,14 @@ cgChildId
 
 instance GoogleRequest ChildrenGet where
         type Rs ChildrenGet = ChildReference
+        type Scopes ChildrenGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient ChildrenGet{..}
           = go _cgFolderId _cgChildId (Just AltJSON)
               driveService

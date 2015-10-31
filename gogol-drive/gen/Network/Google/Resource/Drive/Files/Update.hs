@@ -161,6 +161,13 @@ fuAddParents
 
 instance GoogleRequest FilesUpdate where
         type Rs FilesUpdate = File
+        type Scopes FilesUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.scripts"]
         requestClient FilesUpdate{..}
           = go _fuFileId _fuRemoveParents
               (Just _fuUseContentAsIndexableText)
@@ -177,6 +184,8 @@ instance GoogleRequest FilesUpdate where
 instance GoogleRequest (MediaUpload FilesUpdate)
          where
         type Rs (MediaUpload FilesUpdate) = File
+        type Scopes (MediaUpload FilesUpdate) =
+             Scopes FilesUpdate
         requestClient (MediaUpload FilesUpdate{..} body)
           = go _fuFileId _fuRemoveParents
               (Just _fuUseContentAsIndexableText)

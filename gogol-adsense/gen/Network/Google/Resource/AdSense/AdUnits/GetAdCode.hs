@@ -91,6 +91,9 @@ augacAdClientId
 
 instance GoogleRequest AdUnitsGetAdCode where
         type Rs AdUnitsGetAdCode = AdCode
+        type Scopes AdUnitsGetAdCode =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AdUnitsGetAdCode{..}
           = go _augacAdClientId _augacAdUnitId (Just AltJSON)
               adSenseService

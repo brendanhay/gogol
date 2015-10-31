@@ -105,6 +105,8 @@ lpiPayload
 
 instance GoogleRequest LandingPagesInsert where
         type Rs LandingPagesInsert = LandingPage
+        type Scopes LandingPagesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient LandingPagesInsert{..}
           = go _lpiProFileId _lpiCampaignId (Just AltJSON)
               _lpiPayload

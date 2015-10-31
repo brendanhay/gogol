@@ -115,6 +115,9 @@ igmiPayload
 instance GoogleRequest InstanceGroupManagersInsert
          where
         type Rs InstanceGroupManagersInsert = Operation
+        type Scopes InstanceGroupManagersInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupManagersInsert{..}
           = go _igmiProject _igmiZone (Just AltJSON)
               _igmiPayload

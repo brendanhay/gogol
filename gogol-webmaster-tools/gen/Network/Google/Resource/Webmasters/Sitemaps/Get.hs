@@ -90,6 +90,9 @@ sgSiteURL
 
 instance GoogleRequest SitemapsGet where
         type Rs SitemapsGet = WmxSitemap
+        type Scopes SitemapsGet =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
         requestClient SitemapsGet{..}
           = go _sgSiteURL _sgFeedpath (Just AltJSON)
               webmasterToolsService

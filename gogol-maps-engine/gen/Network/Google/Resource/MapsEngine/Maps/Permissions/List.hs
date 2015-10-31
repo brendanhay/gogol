@@ -76,6 +76,9 @@ mplId = lens _mplId (\ s a -> s{_mplId = a})
 
 instance GoogleRequest MapsPermissionsList where
         type Rs MapsPermissionsList = PermissionsListResponse
+        type Scopes MapsPermissionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient MapsPermissionsList{..}
           = go _mplId (Just AltJSON) mapsEngineService
           where go

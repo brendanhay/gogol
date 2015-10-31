@@ -82,6 +82,8 @@ edEnterpriseId
 
 instance GoogleRequest EnterprisesDelete where
         type Rs EnterprisesDelete = ()
+        type Scopes EnterprisesDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesDelete{..}
           = go _edEnterpriseId (Just AltJSON)
               androidEnterpriseService

@@ -117,6 +117,8 @@ ap1DryRun
 
 instance GoogleRequest AccountshippingPatch where
         type Rs AccountshippingPatch = AccountShipping
+        type Scopes AccountshippingPatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountshippingPatch{..}
           = go _ap1MerchantId _ap1AccountId _ap1DryRun
               (Just AltJSON)

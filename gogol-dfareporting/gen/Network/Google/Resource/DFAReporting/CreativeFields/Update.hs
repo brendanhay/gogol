@@ -90,6 +90,8 @@ cfuPayload
 
 instance GoogleRequest CreativeFieldsUpdate where
         type Rs CreativeFieldsUpdate = CreativeField
+        type Scopes CreativeFieldsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldsUpdate{..}
           = go _cfuProFileId (Just AltJSON) _cfuPayload
               dFAReportingService

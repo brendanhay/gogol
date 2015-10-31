@@ -76,6 +76,8 @@ olcLocale
 
 instance GoogleRequest OnboardingListCategories where
         type Rs OnboardingListCategories = Category
+        type Scopes OnboardingListCategories =
+             '["https://www.googleapis.com/auth/books"]
         requestClient OnboardingListCategories{..}
           = go _olcLocale (Just AltJSON) booksService
           where go

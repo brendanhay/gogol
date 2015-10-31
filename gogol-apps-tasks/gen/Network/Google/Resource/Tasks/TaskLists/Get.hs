@@ -77,6 +77,9 @@ tlgTaskList
 
 instance GoogleRequest TaskListsGet where
         type Rs TaskListsGet = TaskList
+        type Scopes TaskListsGet =
+             '["https://www.googleapis.com/auth/tasks",
+               "https://www.googleapis.com/auth/tasks.readonly"]
         requestClient TaskListsGet{..}
           = go _tlgTaskList (Just AltJSON) appsTasksService
           where go

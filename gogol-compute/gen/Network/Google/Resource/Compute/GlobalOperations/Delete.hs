@@ -89,6 +89,9 @@ godOperation
 
 instance GoogleRequest GlobalOperationsDelete where
         type Rs GlobalOperationsDelete = ()
+        type Scopes GlobalOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient GlobalOperationsDelete{..}
           = go _godProject _godOperation (Just AltJSON)
               computeService

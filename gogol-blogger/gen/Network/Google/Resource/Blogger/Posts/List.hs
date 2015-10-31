@@ -197,6 +197,9 @@ pllMaxResults
 
 instance GoogleRequest PostsList where
         type Rs PostsList = PostList
+        type Scopes PostsList =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostsList{..}
           = go _pllBlogId (_pllStatus ^. _Default)
               (Just _pllOrderBy)

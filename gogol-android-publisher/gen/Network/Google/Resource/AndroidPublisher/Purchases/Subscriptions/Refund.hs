@@ -108,6 +108,8 @@ psrSubscriptionId
 instance GoogleRequest PurchasesSubscriptionsRefund
          where
         type Rs PurchasesSubscriptionsRefund = ()
+        type Scopes PurchasesSubscriptionsRefund =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient PurchasesSubscriptionsRefund{..}
           = go _psrPackageName _psrSubscriptionId _psrToken
               (Just AltJSON)

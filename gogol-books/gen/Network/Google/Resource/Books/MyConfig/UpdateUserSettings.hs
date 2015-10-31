@@ -82,6 +82,8 @@ mcuusPayload
 instance GoogleRequest MyConfigUpdateUserSettings
          where
         type Rs MyConfigUpdateUserSettings = UserSettings
+        type Scopes MyConfigUpdateUserSettings =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyConfigUpdateUserSettings{..}
           = go (Just AltJSON) _mcuusPayload booksService
           where go

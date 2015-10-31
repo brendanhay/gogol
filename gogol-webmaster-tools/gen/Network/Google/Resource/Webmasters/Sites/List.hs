@@ -61,6 +61,9 @@ sitesList = SitesList
 
 instance GoogleRequest SitesList where
         type Rs SitesList = SitesListResponse
+        type Scopes SitesList =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
         requestClient SitesList{}
           = go (Just AltJSON) webmasterToolsService
           where go

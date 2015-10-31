@@ -157,6 +157,10 @@ dsgCallback
 
 instance GoogleRequest DataSetsGet where
         type Rs DataSetsGet = DataSet
+        type Scopes DataSetsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient DataSetsGet{..}
           = go _dsgDataSetId _dsgXgafv _dsgUploadProtocol
               (Just _dsgPp)

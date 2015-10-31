@@ -88,6 +88,9 @@ pdPermissionId
 
 instance GoogleRequest PermissionsDelete where
         type Rs PermissionsDelete = ()
+        type Scopes PermissionsDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient PermissionsDelete{..}
           = go _pdFileId _pdPermissionId (Just AltJSON)
               driveService

@@ -105,6 +105,9 @@ igdInstanceGroup
 
 instance GoogleRequest InstanceGroupsDelete where
         type Rs InstanceGroupsDelete = Operation
+        type Scopes InstanceGroupsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsDelete{..}
           = go _igdProject _igdZone _igdInstanceGroup
               (Just AltJSON)

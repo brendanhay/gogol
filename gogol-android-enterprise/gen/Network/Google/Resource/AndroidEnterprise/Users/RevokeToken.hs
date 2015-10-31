@@ -90,6 +90,8 @@ urtUserId
 
 instance GoogleRequest UsersRevokeToken where
         type Rs UsersRevokeToken = ()
+        type Scopes UsersRevokeToken =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient UsersRevokeToken{..}
           = go _urtEnterpriseId _urtUserId (Just AltJSON)
               androidEnterpriseService

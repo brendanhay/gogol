@@ -99,6 +99,11 @@ pdFileId = lens _pdFileId (\ s a -> s{_pdFileId = a})
 
 instance GoogleRequest PropertiesDelete where
         type Rs PropertiesDelete = ()
+        type Scopes PropertiesDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata"]
         requestClient PropertiesDelete{..}
           = go _pdFileId _pdPropertyKey (Just _pdVisibility)
               (Just AltJSON)

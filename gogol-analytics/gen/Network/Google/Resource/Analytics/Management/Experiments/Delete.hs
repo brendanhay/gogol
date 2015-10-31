@@ -118,6 +118,9 @@ medExperimentId
 instance GoogleRequest ManagementExperimentsDelete
          where
         type Rs ManagementExperimentsDelete = ()
+        type Scopes ManagementExperimentsDelete =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementExperimentsDelete{..}
           = go _medAccountId _medWebPropertyId _medProFileId
               _medExperimentId

@@ -103,6 +103,7 @@ colPublisher
 
 instance GoogleRequest CcOffersList where
         type Rs CcOffersList = CcOffers
+        type Scopes CcOffersList = '[]
         requestClient CcOffersList{..}
           = go _colPublisher (_colAdvertiser ^. _Default)
               _colProjection

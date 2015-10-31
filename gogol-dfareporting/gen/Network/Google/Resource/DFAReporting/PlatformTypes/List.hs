@@ -78,6 +78,8 @@ ptlProFileId
 
 instance GoogleRequest PlatformTypesList where
         type Rs PlatformTypesList = PlatformTypesListResponse
+        type Scopes PlatformTypesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlatformTypesList{..}
           = go _ptlProFileId (Just AltJSON) dFAReportingService
           where go

@@ -102,6 +102,8 @@ cpColumnId
 
 instance GoogleRequest ColumnPatch where
         type Rs ColumnPatch = Column
+        type Scopes ColumnPatch =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient ColumnPatch{..}
           = go _cpTableId _cpColumnId (Just AltJSON) _cpPayload
               fusionTablesService

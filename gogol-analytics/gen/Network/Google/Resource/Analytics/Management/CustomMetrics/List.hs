@@ -120,6 +120,9 @@ mcmlMaxResults
 instance GoogleRequest ManagementCustomMetricsList
          where
         type Rs ManagementCustomMetricsList = CustomMetrics
+        type Scopes ManagementCustomMetricsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementCustomMetricsList{..}
           = go _mcmlAccountId _mcmlWebPropertyId
               _mcmlStartIndex

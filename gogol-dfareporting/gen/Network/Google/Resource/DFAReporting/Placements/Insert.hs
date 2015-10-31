@@ -89,6 +89,8 @@ piPayload
 
 instance GoogleRequest PlacementsInsert where
         type Rs PlacementsInsert = Placement
+        type Scopes PlacementsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementsInsert{..}
           = go _piProFileId (Just AltJSON) _piPayload
               dFAReportingService

@@ -94,6 +94,10 @@ thttppgTargetHTTPProxy
 
 instance GoogleRequest TargetHTTPProxiesGet where
         type Rs TargetHTTPProxiesGet = TargetHTTPProxy
+        type Scopes TargetHTTPProxiesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetHTTPProxiesGet{..}
           = go _thttppgProject _thttppgTargetHTTPProxy
               (Just AltJSON)

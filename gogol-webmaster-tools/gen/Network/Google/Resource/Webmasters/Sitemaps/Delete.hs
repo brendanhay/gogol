@@ -90,6 +90,8 @@ sdSiteURL
 
 instance GoogleRequest SitemapsDelete where
         type Rs SitemapsDelete = ()
+        type Scopes SitemapsDelete =
+             '["https://www.googleapis.com/auth/webmasters"]
         requestClient SitemapsDelete{..}
           = go _sdSiteURL _sdFeedpath (Just AltJSON)
               webmasterToolsService

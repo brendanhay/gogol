@@ -206,6 +206,8 @@ amvlCallback
 instance GoogleRequest AppsModulesVersionsList where
         type Rs AppsModulesVersionsList =
              ListVersionsResponse
+        type Scopes AppsModulesVersionsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsModulesVersionsList{..}
           = go _amvlAppsId _amvlModulesId _amvlXgafv
               _amvlUploadProtocol

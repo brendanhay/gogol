@@ -75,6 +75,8 @@ tcPayload
 
 instance GoogleRequest TablesCreate where
         type Rs TablesCreate = Table
+        type Scopes TablesCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesCreate{..}
           = go (Just AltJSON) _tcPayload mapsEngineService
           where go

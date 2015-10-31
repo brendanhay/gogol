@@ -89,6 +89,8 @@ tluTaskList
 
 instance GoogleRequest TaskListsUpdate where
         type Rs TaskListsUpdate = TaskList
+        type Scopes TaskListsUpdate =
+             '["https://www.googleapis.com/auth/tasks"]
         requestClient TaskListsUpdate{..}
           = go _tluTaskList (Just AltJSON) _tluPayload
               appsTasksService

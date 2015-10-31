@@ -75,6 +75,8 @@ oiPayload
 
 instance GoogleRequest OffersInsert where
         type Rs OffersInsert = OfferDTO
+        type Scopes OffersInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient OffersInsert{..}
           = go (Just AltJSON) _oiPayload adExchangeBuyerService
           where go

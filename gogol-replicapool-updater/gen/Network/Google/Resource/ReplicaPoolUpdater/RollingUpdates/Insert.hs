@@ -101,6 +101,9 @@ ruiPayload
 
 instance GoogleRequest RollingUpdatesInsert where
         type Rs RollingUpdatesInsert = Operation
+        type Scopes RollingUpdatesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
         requestClient RollingUpdatesInsert{..}
           = go _ruiProject _ruiZone (Just AltJSON) _ruiPayload
               replicaPoolUpdaterService

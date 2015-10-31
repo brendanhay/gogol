@@ -89,6 +89,8 @@ siCustomerId
 
 instance GoogleRequest SchemasInsert where
         type Rs SchemasInsert = Schema
+        type Scopes SchemasInsert =
+             '["https://www.googleapis.com/auth/admin.directory.userschema"]
         requestClient SchemasInsert{..}
           = go _siCustomerId (Just AltJSON) _siPayload
               directoryService

@@ -111,6 +111,8 @@ apDryRun = lens _apDryRun (\ s a -> s{_apDryRun = a})
 
 instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
+        type Scopes AccountsPatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountsPatch{..}
           = go _apMerchantId _apAccountId _apDryRun
               (Just AltJSON)

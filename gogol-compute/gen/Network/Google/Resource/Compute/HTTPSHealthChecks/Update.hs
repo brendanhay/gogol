@@ -105,6 +105,9 @@ hhcuHTTPSHealthCheck
 
 instance GoogleRequest HTTPSHealthChecksUpdate where
         type Rs HTTPSHealthChecksUpdate = Operation
+        type Scopes HTTPSHealthChecksUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient HTTPSHealthChecksUpdate{..}
           = go _hhcuProject _hhcuHTTPSHealthCheck
               (Just AltJSON)

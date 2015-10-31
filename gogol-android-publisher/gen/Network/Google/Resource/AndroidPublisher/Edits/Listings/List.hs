@@ -92,6 +92,8 @@ ellEditId
 
 instance GoogleRequest EditsListingsList where
         type Rs EditsListingsList = ListingsListResponse
+        type Scopes EditsListingsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsList{..}
           = go _ellPackageName _ellEditId (Just AltJSON)
               androidPublisherService

@@ -106,6 +106,9 @@ arslMaxResults
 
 instance GoogleRequest AccountsReportsSavedList where
         type Rs AccountsReportsSavedList = SavedReports
+        type Scopes AccountsReportsSavedList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsReportsSavedList{..}
           = go _arslAccountId _arslPageToken _arslMaxResults
               (Just AltJSON)

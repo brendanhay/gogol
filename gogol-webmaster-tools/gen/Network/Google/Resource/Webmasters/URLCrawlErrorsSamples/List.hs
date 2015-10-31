@@ -112,6 +112,9 @@ instance GoogleRequest URLCrawlErrorsSamplesList
          where
         type Rs URLCrawlErrorsSamplesList =
              URLCrawlErrorsSamplesListResponse
+        type Scopes URLCrawlErrorsSamplesList =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
         requestClient URLCrawlErrorsSamplesList{..}
           = go _uceslSiteURL (Just _uceslCategory)
               (Just _uceslPlatform)

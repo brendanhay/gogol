@@ -130,6 +130,8 @@ acvuAccountId
 instance GoogleRequest
          AccountsContainersVariablesUpdate where
         type Rs AccountsContainersVariablesUpdate = Variable
+        type Scopes AccountsContainersVariablesUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersVariablesUpdate{..}
           = go _acvuAccountId _acvuContainerId _acvuVariableId
               _acvuFingerprint

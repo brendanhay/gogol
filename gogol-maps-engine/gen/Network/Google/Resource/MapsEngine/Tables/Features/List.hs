@@ -185,6 +185,9 @@ tflMaxResults
 
 instance GoogleRequest TablesFeaturesList where
         type Rs TablesFeaturesList = FeaturesListResponse
+        type Scopes TablesFeaturesList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient TablesFeaturesList{..}
           = go _tflId _tflInclude _tflWhere _tflOrderBy
               _tflVersion

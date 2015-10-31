@@ -74,6 +74,9 @@ tgId = lens _tgId (\ s a -> s{_tgId = a})
 
 instance GoogleRequest TimelineGet where
         type Rs TimelineGet = TimelineItem
+        type Scopes TimelineGet =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelineGet{..}
           = go _tgId (Just AltJSON) mirrorService
           where go

@@ -76,6 +76,8 @@ instance GoogleRequest AccountstatusesCustombatch
          where
         type Rs AccountstatusesCustombatch =
              AccountstatusesCustomBatchResponse
+        type Scopes AccountstatusesCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountstatusesCustombatch{..}
           = go (Just AltJSON) _accPayload
               shoppingContentService

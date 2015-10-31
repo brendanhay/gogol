@@ -165,6 +165,10 @@ vssCallback
 
 instance GoogleRequest VariantSetsSearch where
         type Rs VariantSetsSearch = SearchVariantSetsResponse
+        type Scopes VariantSetsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient VariantSetsSearch{..}
           = go _vssXgafv _vssUploadProtocol (Just _vssPp)
               _vssAccessToken

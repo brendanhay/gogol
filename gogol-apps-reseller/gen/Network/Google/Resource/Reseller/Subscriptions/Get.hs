@@ -90,6 +90,9 @@ sgSubscriptionId
 
 instance GoogleRequest SubscriptionsGet where
         type Rs SubscriptionsGet = Subscription
+        type Scopes SubscriptionsGet =
+             '["https://www.googleapis.com/auth/apps.order",
+               "https://www.googleapis.com/auth/apps.order.readonly"]
         requestClient SubscriptionsGet{..}
           = go _sgCustomerId _sgSubscriptionId (Just AltJSON)
               appsResellerService

@@ -91,6 +91,8 @@ egEditId = lens _egEditId (\ s a -> s{_egEditId = a})
 
 instance GoogleRequest EditsGet where
         type Rs EditsGet = AppEdit
+        type Scopes EditsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsGet{..}
           = go _egPackageName _egEditId (Just AltJSON)
               androidPublisherService

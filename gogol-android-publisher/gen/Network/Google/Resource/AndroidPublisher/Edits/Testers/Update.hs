@@ -111,6 +111,8 @@ etutEditId
 
 instance GoogleRequest EditsTestersUpdate where
         type Rs EditsTestersUpdate = Testers
+        type Scopes EditsTestersUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTestersUpdate{..}
           = go _etutPackageName _etutEditId _etutTrack
               (Just AltJSON)

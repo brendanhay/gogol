@@ -78,6 +78,8 @@ rProFileId
 
 instance GoogleRequest RegionsList where
         type Rs RegionsList = RegionsListResponse
+        type Scopes RegionsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RegionsList{..}
           = go _rProFileId (Just AltJSON) dFAReportingService
           where go

@@ -89,6 +89,9 @@ miPayload
 
 instance GoogleRequest MembersInsert where
         type Rs MembersInsert = Member
+        type Scopes MembersInsert =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member"]
         requestClient MembersInsert{..}
           = go _miGroupKey (Just AltJSON) _miPayload
               directoryService

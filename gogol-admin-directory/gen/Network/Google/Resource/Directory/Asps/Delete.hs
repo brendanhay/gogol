@@ -91,6 +91,8 @@ adUserKey
 
 instance GoogleRequest AspsDelete where
         type Rs AspsDelete = ()
+        type Scopes AspsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient AspsDelete{..}
           = go _adUserKey _adCodeId (Just AltJSON)
               directoryService

@@ -111,6 +111,9 @@ ugUserKey
 
 instance GoogleRequest UsersGet where
         type Rs UsersGet = User
+        type Scopes UsersGet =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
         requestClient UsersGet{..}
           = go _ugUserKey (Just _ugViewType) _ugCustomFieldMask
               (Just _ugProjection)

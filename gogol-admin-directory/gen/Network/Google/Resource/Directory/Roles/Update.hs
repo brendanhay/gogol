@@ -100,6 +100,8 @@ ruCustomer
 
 instance GoogleRequest RolesUpdate where
         type Rs RolesUpdate = Role
+        type Scopes RolesUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
         requestClient RolesUpdate{..}
           = go _ruCustomer _ruRoleId (Just AltJSON) _ruPayload
               directoryService

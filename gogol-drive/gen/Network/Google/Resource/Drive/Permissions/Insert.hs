@@ -113,6 +113,9 @@ piiSendNotificationEmails
 
 instance GoogleRequest PermissionsInsert where
         type Rs PermissionsInsert = Permission
+        type Scopes PermissionsInsert =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient PermissionsInsert{..}
           = go _piiFileId _piiEmailMessage
               (Just _piiSendNotificationEmails)

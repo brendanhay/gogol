@@ -101,6 +101,8 @@ tmlMaxResults
 
 instance GoogleRequest TrainedModelsList where
         type Rs TrainedModelsList = List
+        type Scopes TrainedModelsList =
+             '["https://www.googleapis.com/auth/prediction"]
         requestClient TrainedModelsList{..}
           = go _tmlProject _tmlPageToken _tmlMaxResults
               (Just AltJSON)

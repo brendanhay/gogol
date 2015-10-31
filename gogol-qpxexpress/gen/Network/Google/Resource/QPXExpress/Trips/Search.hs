@@ -77,6 +77,7 @@ tsPayload
 
 instance GoogleRequest TripsSearch where
         type Rs TripsSearch = TripsSearchResponse
+        type Scopes TripsSearch = '[]
         requestClient TripsSearch{..}
           = go (Just AltJSON) _tsPayload qPXExpressService
           where go

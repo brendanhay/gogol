@@ -65,6 +65,9 @@ roomsResetForAllPlayers = RoomsResetForAllPlayers
 
 instance GoogleRequest RoomsResetForAllPlayers where
         type Rs RoomsResetForAllPlayers = ()
+        type Scopes RoomsResetForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsResetForAllPlayers{}
           = go (Just AltJSON) gamesManagementService
           where go

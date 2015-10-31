@@ -103,6 +103,10 @@ mtgMachineType
 
 instance GoogleRequest MachineTypesGet where
         type Rs MachineTypesGet = MachineType
+        type Scopes MachineTypesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient MachineTypesGet{..}
           = go _mtgProject _mtgZone _mtgMachineType
               (Just AltJSON)

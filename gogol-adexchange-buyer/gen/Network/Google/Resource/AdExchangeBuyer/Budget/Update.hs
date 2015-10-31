@@ -103,6 +103,8 @@ buBillingId
 
 instance GoogleRequest BudgetUpdate where
         type Rs BudgetUpdate = Budget
+        type Scopes BudgetUpdate =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient BudgetUpdate{..}
           = go _buAccountId _buBillingId (Just AltJSON)
               _buPayload

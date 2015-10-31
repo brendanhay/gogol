@@ -174,6 +174,8 @@ instance GoogleRequest ProjectsZonesOperationsList
          where
         type Rs ProjectsZonesOperationsList =
              ListOperationsResponse
+        type Scopes ProjectsZonesOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesOperationsList{..}
           = go _pzolProjectId _pzolZone _pzolXgafv
               _pzolUploadProtocol

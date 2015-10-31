@@ -77,6 +77,9 @@ tMatchId = lens _tMatchId (\ s a -> s{_tMatchId = a})
 
 instance GoogleRequest TurnBasedMatchesDismiss where
         type Rs TurnBasedMatchesDismiss = ()
+        type Scopes TurnBasedMatchesDismiss =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesDismiss{..}
           = go _tMatchId (Just AltJSON) gamesService
           where go

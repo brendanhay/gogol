@@ -144,6 +144,11 @@ instance GoogleRequest
          RollingUpdatesListInstanceUpdates where
         type Rs RollingUpdatesListInstanceUpdates =
              InstanceUpdateList
+        type Scopes RollingUpdatesListInstanceUpdates =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/replicapool",
+               "https://www.googleapis.com/auth/replicapool.readonly"]
         requestClient RollingUpdatesListInstanceUpdates{..}
           = go _ruliuProject _ruliuZone _ruliuRollingUpdate
               _ruliuFilter

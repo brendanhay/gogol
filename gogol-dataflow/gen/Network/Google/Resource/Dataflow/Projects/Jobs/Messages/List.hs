@@ -235,6 +235,9 @@ pjmlCallback
 instance GoogleRequest ProjectsJobsMessagesList where
         type Rs ProjectsJobsMessagesList =
              ListJobMessagesResponse
+        type Scopes ProjectsJobsMessagesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsMessagesList{..}
           = go _pjmlProjectId _pjmlJobId _pjmlXgafv
               _pjmlUploadProtocol

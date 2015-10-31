@@ -104,6 +104,9 @@ scdInstance
 
 instance GoogleRequest SSLCertsDelete where
         type Rs SSLCertsDelete = Operation
+        type Scopes SSLCertsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient SSLCertsDelete{..}
           = go _scdProject _scdInstance _scdSha1Fingerprint
               (Just AltJSON)

@@ -77,6 +77,9 @@ assId = lens _assId (\ s a -> s{_assId = a})
 instance GoogleRequest AssetsPermissionsList where
         type Rs AssetsPermissionsList =
              PermissionsListResponse
+        type Scopes AssetsPermissionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient AssetsPermissionsList{..}
           = go _assId (Just AltJSON) mapsEngineService
           where go

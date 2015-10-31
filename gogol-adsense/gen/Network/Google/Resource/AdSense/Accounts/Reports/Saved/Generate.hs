@@ -133,6 +133,9 @@ instance GoogleRequest AccountsReportsSavedGenerate
          where
         type Rs AccountsReportsSavedGenerate =
              AdsenseReportsGenerateResponse
+        type Scopes AccountsReportsSavedGenerate =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsReportsSavedGenerate{..}
           = go _arsgAccountId _arsgSavedReportId _arsgLocale
               _arsgStartIndex

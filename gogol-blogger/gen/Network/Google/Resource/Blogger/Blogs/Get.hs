@@ -97,6 +97,9 @@ bgView = lens _bgView (\ s a -> s{_bgView = a})
 
 instance GoogleRequest BlogsGet where
         type Rs BlogsGet = Blog
+        type Scopes BlogsGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient BlogsGet{..}
           = go _bgBlogId _bgMaxPosts _bgView (Just AltJSON)
               bloggerService

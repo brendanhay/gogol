@@ -120,6 +120,8 @@ mopOrderId
 
 instance GoogleRequest MarketplaceOrdersPatch where
         type Rs MarketplaceOrdersPatch = MarketplaceOrder
+        type Scopes MarketplaceOrdersPatch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceOrdersPatch{..}
           = go _mopOrderId _mopRevisionNumber _mopUpdateAction
               (Just AltJSON)

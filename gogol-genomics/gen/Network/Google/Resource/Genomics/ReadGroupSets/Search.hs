@@ -167,6 +167,10 @@ rgssCallback
 instance GoogleRequest ReadGroupSetsSearch where
         type Rs ReadGroupSetsSearch =
              SearchReadGroupSetsResponse
+        type Scopes ReadGroupSetsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient ReadGroupSetsSearch{..}
           = go _rgssXgafv _rgssUploadProtocol (Just _rgssPp)
               _rgssAccessToken

@@ -78,6 +78,8 @@ mlProFileId
 
 instance GoogleRequest MetrosList where
         type Rs MetrosList = MetrosListResponse
+        type Scopes MetrosList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient MetrosList{..}
           = go _mlProFileId (Just AltJSON) dFAReportingService
           where go

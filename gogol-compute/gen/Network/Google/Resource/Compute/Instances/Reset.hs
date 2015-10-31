@@ -101,6 +101,9 @@ irInstance
 
 instance GoogleRequest InstancesReset where
         type Rs InstancesReset = Operation
+        type Scopes InstancesReset =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesReset{..}
           = go _irProject _irZone _irInstance (Just AltJSON)
               computeService

@@ -79,6 +79,8 @@ ctlProFileId
 instance GoogleRequest ConnectionTypesList where
         type Rs ConnectionTypesList =
              ConnectionTypesListResponse
+        type Scopes ConnectionTypesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ConnectionTypesList{..}
           = go _ctlProFileId (Just AltJSON) dFAReportingService
           where go

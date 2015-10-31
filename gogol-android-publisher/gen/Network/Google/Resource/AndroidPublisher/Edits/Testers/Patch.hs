@@ -110,6 +110,8 @@ etpEditId
 
 instance GoogleRequest EditsTestersPatch where
         type Rs EditsTestersPatch = Testers
+        type Scopes EditsTestersPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTestersPatch{..}
           = go _etpPackageName _etpEditId _etpTrack
               (Just AltJSON)

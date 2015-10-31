@@ -91,6 +91,10 @@ gagAddress
 
 instance GoogleRequest GlobalAddressesGet where
         type Rs GlobalAddressesGet = Address
+        type Scopes GlobalAddressesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalAddressesGet{..}
           = go _gagProject _gagAddress (Just AltJSON)
               computeService

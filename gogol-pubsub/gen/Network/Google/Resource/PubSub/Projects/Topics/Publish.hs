@@ -168,6 +168,9 @@ ptpCallback
 
 instance GoogleRequest ProjectsTopicsPublish where
         type Rs ProjectsTopicsPublish = PublishResponse
+        type Scopes ProjectsTopicsPublish =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsPublish{..}
           = go _ptpTopic _ptpXgafv _ptpUploadProtocol
               (Just _ptpPp)

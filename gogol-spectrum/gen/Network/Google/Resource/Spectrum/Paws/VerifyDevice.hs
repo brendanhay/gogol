@@ -81,6 +81,7 @@ pvdPayload
 
 instance GoogleRequest PawsVerifyDevice where
         type Rs PawsVerifyDevice = PawsVerifyDeviceResponse
+        type Scopes PawsVerifyDevice = '[]
         requestClient PawsVerifyDevice{..}
           = go (Just AltJSON) _pvdPayload spectrumService
           where go

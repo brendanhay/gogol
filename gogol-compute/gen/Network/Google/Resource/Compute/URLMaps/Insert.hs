@@ -91,6 +91,9 @@ umiPayload
 
 instance GoogleRequest URLMapsInsert where
         type Rs URLMapsInsert = Operation
+        type Scopes URLMapsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient URLMapsInsert{..}
           = go _umiProject (Just AltJSON) _umiPayload
               computeService

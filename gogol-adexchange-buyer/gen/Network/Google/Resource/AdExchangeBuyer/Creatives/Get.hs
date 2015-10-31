@@ -91,6 +91,8 @@ cgAccountId
 
 instance GoogleRequest CreativesGet where
         type Rs CreativesGet = Creative
+        type Scopes CreativesGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient CreativesGet{..}
           = go _cgAccountId _cgBuyerCreativeId (Just AltJSON)
               adExchangeBuyerService

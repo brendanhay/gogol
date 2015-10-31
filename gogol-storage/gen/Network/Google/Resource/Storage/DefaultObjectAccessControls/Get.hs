@@ -95,6 +95,8 @@ instance GoogleRequest DefaultObjectAccessControlsGet
          where
         type Rs DefaultObjectAccessControlsGet =
              ObjectAccessControl
+        type Scopes DefaultObjectAccessControlsGet =
+             '["https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsGet{..}
           = go _doacgBucket _doacgEntity (Just AltJSON)
               storageService

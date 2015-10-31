@@ -158,6 +158,8 @@ aglMaxResults
 instance GoogleRequest AdvertiserGroupsList where
         type Rs AdvertiserGroupsList =
              AdvertiserGroupsListResponse
+        type Scopes AdvertiserGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertiserGroupsList{..}
           = go _aglProFileId _aglSearchString
               (_aglIds ^. _Default)

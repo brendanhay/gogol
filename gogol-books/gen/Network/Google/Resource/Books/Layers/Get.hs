@@ -110,6 +110,8 @@ lgSummaryId
 
 instance GoogleRequest LayersGet where
         type Rs LayersGet = Layersummary
+        type Scopes LayersGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient LayersGet{..}
           = go _lgVolumeId _lgSummaryId _lgContentVersion
               _lgSource

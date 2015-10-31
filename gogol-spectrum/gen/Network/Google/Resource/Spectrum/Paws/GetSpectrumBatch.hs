@@ -80,6 +80,7 @@ pgsbPayload
 instance GoogleRequest PawsGetSpectrumBatch where
         type Rs PawsGetSpectrumBatch =
              PawsGetSpectrumBatchResponse
+        type Scopes PawsGetSpectrumBatch = '[]
         requestClient PawsGetSpectrumBatch{..}
           = go (Just AltJSON) _pgsbPayload spectrumService
           where go

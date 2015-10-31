@@ -100,6 +100,9 @@ oulType = lens _oulType (\ s a -> s{_oulType = a})
 
 instance GoogleRequest OrgUnitsList where
         type Rs OrgUnitsList = OrgUnits
+        type Scopes OrgUnitsList =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit",
+               "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"]
         requestClient OrgUnitsList{..}
           = go _oulCustomerId (Just _oulOrgUnitPath) _oulType
               (Just AltJSON)

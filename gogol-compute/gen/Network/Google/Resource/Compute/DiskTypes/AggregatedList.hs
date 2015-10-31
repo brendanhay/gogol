@@ -140,6 +140,10 @@ dtalMaxResults
 instance GoogleRequest DiskTypesAggregatedList where
         type Rs DiskTypesAggregatedList =
              DiskTypeAggregatedList
+        type Scopes DiskTypesAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DiskTypesAggregatedList{..}
           = go _dtalProject _dtalFilter _dtalPageToken
               (Just _dtalMaxResults)

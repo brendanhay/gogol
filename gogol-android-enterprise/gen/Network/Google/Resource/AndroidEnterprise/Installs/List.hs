@@ -103,6 +103,8 @@ ilDeviceId
 
 instance GoogleRequest InstallsList where
         type Rs InstallsList = InstallsListResponse
+        type Scopes InstallsList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient InstallsList{..}
           = go _ilEnterpriseId _ilUserId _ilDeviceId
               (Just AltJSON)

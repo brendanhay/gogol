@@ -195,6 +195,8 @@ tolCallback
 instance GoogleRequest TransferOperationsList where
         type Rs TransferOperationsList =
              ListOperationsResponse
+        type Scopes TransferOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsList{..}
           = go _tolName _tolXgafv _tolUploadProtocol
               (Just _tolPp)

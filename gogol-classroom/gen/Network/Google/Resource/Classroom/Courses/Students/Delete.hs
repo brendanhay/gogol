@@ -177,6 +177,8 @@ csdCallback
 
 instance GoogleRequest CoursesStudentsDelete where
         type Rs CoursesStudentsDelete = Empty
+        type Scopes CoursesStudentsDelete =
+             '["https://www.googleapis.com/auth/classroom.rosters"]
         requestClient CoursesStudentsDelete{..}
           = go _csdCourseId _csdUserId _csdXgafv
               _csdUploadProtocol

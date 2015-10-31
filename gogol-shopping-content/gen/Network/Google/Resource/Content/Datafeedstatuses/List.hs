@@ -102,6 +102,8 @@ dlMaxResults
 instance GoogleRequest DatafeedstatusesList where
         type Rs DatafeedstatusesList =
              DatafeedstatusesListResponse
+        type Scopes DatafeedstatusesList =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedstatusesList{..}
           = go _dlMerchantId _dlPageToken _dlMaxResults
               (Just AltJSON)

@@ -100,6 +100,8 @@ ppId = lens _ppId (\ s a -> s{_ppId = a}) . _Coerce
 
 instance GoogleRequest PlacementsPatch where
         type Rs PlacementsPatch = Placement
+        type Scopes PlacementsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementsPatch{..}
           = go _ppProFileId (Just _ppId) (Just AltJSON)
               _ppPayload

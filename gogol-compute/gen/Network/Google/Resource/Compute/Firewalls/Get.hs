@@ -89,6 +89,10 @@ fgFirewall
 
 instance GoogleRequest FirewallsGet where
         type Rs FirewallsGet = Firewall
+        type Scopes FirewallsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient FirewallsGet{..}
           = go _fgProject _fgFirewall (Just AltJSON)
               computeService

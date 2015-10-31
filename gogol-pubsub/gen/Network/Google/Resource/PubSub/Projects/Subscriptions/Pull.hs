@@ -173,6 +173,9 @@ pspCallback
 instance GoogleRequest ProjectsSubscriptionsPull
          where
         type Rs ProjectsSubscriptionsPull = PullResponse
+        type Scopes ProjectsSubscriptionsPull =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsPull{..}
           = go _pspSubscription _pspXgafv _pspUploadProtocol
               (Just _pspPp)

@@ -76,6 +76,7 @@ llTarget = lens _llTarget (\ s a -> s{_llTarget = a})
 
 instance GoogleRequest LanguagesList where
         type Rs LanguagesList = LanguagesListResponse
+        type Scopes LanguagesList = '[]
         requestClient LanguagesList{..}
           = go _llTarget (Just AltJSON) translateService
           where go

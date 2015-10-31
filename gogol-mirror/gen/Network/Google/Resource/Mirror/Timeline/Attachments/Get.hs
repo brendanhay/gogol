@@ -98,6 +98,8 @@ tagAttachmentId
 
 instance GoogleRequest TimelineAttachmentsGet where
         type Rs TimelineAttachmentsGet = Attachment
+        type Scopes TimelineAttachmentsGet =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelineAttachmentsGet{..}
           = go _tagItemId _tagAttachmentId (Just AltJSON)
               mirrorService
@@ -110,6 +112,8 @@ instance GoogleRequest
          (MediaDownload TimelineAttachmentsGet) where
         type Rs (MediaDownload TimelineAttachmentsGet) =
              Stream
+        type Scopes (MediaDownload TimelineAttachmentsGet) =
+             Scopes TimelineAttachmentsGet
         requestClient
           (MediaDownload TimelineAttachmentsGet{..})
           = go _tagItemId _tagAttachmentId (Just AltMedia)

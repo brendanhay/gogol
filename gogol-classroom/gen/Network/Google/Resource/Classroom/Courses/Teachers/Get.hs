@@ -177,6 +177,11 @@ ctgCallback
 
 instance GoogleRequest CoursesTeachersGet where
         type Rs CoursesTeachersGet = Teacher
+        type Scopes CoursesTeachersGet =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient CoursesTeachersGet{..}
           = go _ctgCourseId _ctgUserId _ctgXgafv
               _ctgUploadProtocol

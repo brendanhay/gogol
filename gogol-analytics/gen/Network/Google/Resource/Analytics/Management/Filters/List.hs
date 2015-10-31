@@ -104,6 +104,9 @@ mflMaxResults
 
 instance GoogleRequest ManagementFiltersList where
         type Rs ManagementFiltersList = Filters
+        type Scopes ManagementFiltersList =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementFiltersList{..}
           = go _mflAccountId _mflStartIndex _mflMaxResults
               (Just AltJSON)

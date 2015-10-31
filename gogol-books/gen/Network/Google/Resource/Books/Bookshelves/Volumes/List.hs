@@ -137,6 +137,8 @@ bvlShowPreOrders
 
 instance GoogleRequest BookshelvesVolumesList where
         type Rs BookshelvesVolumesList = Volumes
+        type Scopes BookshelvesVolumesList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient BookshelvesVolumesList{..}
           = go _bvlUserId _bvlShelf _bvlSource _bvlStartIndex
               _bvlMaxResults

@@ -249,6 +249,7 @@ uslCallback
 
 instance GoogleRequest UserStatesList where
         type Rs UserStatesList = ListUserStatesResponse
+        type Scopes UserStatesList = '[]
         requestClient UserStatesList{..}
           = go _uslXgafv _uslUploadProtocol (Just _uslPp)
               _uslAccessToken

@@ -61,6 +61,10 @@ accountsList = AccountsList
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = ListAccountsResponse
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.manage.accounts",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsList{}
           = go (Just AltJSON) tagManagerService
           where go

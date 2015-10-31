@@ -88,6 +88,8 @@ cdColumnId
 
 instance GoogleRequest ColumnDelete where
         type Rs ColumnDelete = ()
+        type Scopes ColumnDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient ColumnDelete{..}
           = go _cdTableId _cdColumnId (Just AltJSON)
               fusionTablesService

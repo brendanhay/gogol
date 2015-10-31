@@ -104,6 +104,8 @@ oupCustomerId
 
 instance GoogleRequest OrgUnitsPatch where
         type Rs OrgUnitsPatch = OrgUnit
+        type Scopes OrgUnitsPatch =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit"]
         requestClient OrgUnitsPatch{..}
           = go _oupCustomerId _oupOrgUnitPath (Just AltJSON)
               _oupPayload

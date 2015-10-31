@@ -97,6 +97,9 @@ guOnBehalfOfContentOwner
 
 instance GoogleRequest GroupsUpdate where
         type Rs GroupsUpdate = Group
+        type Scopes GroupsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient GroupsUpdate{..}
           = go _guOnBehalfOfContentOwner (Just AltJSON)
               _guPayload

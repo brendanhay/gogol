@@ -223,6 +223,11 @@ vlMaxResults
 
 instance GoogleRequest VideosList where
         type Rs VideosList = VideoListResponse
+        type Scopes VideosList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosList{..}
           = go (Just _vlPart) _vlChart _vlRegionCode _vlLocale
               _vlMyRating

@@ -90,6 +90,8 @@ uppUserKey
 
 instance GoogleRequest UsersPhotosPatch where
         type Rs UsersPhotosPatch = UserPhoto
+        type Scopes UsersPhotosPatch =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersPhotosPatch{..}
           = go _uppUserKey (Just AltJSON) _uppPayload
               directoryService

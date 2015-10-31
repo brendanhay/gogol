@@ -89,6 +89,8 @@ ccdId
 
 instance GoogleRequest ContentCategoriesDelete where
         type Rs ContentCategoriesDelete = ()
+        type Scopes ContentCategoriesDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ContentCategoriesDelete{..}
           = go _ccdProFileId _ccdId (Just AltJSON)
               dFAReportingService

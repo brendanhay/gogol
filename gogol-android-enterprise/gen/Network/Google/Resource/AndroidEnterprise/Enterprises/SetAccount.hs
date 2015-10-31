@@ -92,6 +92,8 @@ esaPayload
 
 instance GoogleRequest EnterprisesSetAccount where
         type Rs EnterprisesSetAccount = EnterpriseAccount
+        type Scopes EnterprisesSetAccount =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesSetAccount{..}
           = go _esaEnterpriseId (Just AltJSON) _esaPayload
               androidEnterpriseService

@@ -90,6 +90,9 @@ bsdBackendService
 
 instance GoogleRequest BackendServicesDelete where
         type Rs BackendServicesDelete = Operation
+        type Scopes BackendServicesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient BackendServicesDelete{..}
           = go _bsdProject _bsdBackendService (Just AltJSON)
               computeService

@@ -89,6 +89,8 @@ urgId
 
 instance GoogleRequest UserRolesGet where
         type Rs UserRolesGet = UserRole
+        type Scopes UserRolesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolesGet{..}
           = go _urgProFileId _urgId (Just AltJSON)
               dFAReportingService

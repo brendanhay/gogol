@@ -99,6 +99,8 @@ cauClientAccountId
 
 instance GoogleRequest ClientAccessUpdate where
         type Rs ClientAccessUpdate = ClientAccessCapabilities
+        type Scopes ClientAccessUpdate =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ClientAccessUpdate{..}
           = go _cauClientAccountId (Just _cauSponsorAccountId)
               (Just AltJSON)

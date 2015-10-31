@@ -139,6 +139,10 @@ utlMaxResults
 
 instance GoogleRequest UsersThreadsList where
         type Rs UsersThreadsList = ListThreadsResponse
+        type Scopes UsersThreadsList =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersThreadsList{..}
           = go _utlUserId _utlQ (Just _utlIncludeSpamTrash)
               (_utlLabelIds ^. _Default)

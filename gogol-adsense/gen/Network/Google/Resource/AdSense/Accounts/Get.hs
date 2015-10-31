@@ -85,6 +85,9 @@ agAccountId
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsGet{..}
           = go _agAccountId _agTree (Just AltJSON)
               adSenseService

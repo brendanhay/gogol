@@ -118,6 +118,8 @@ cdpProjection
 
 instance GoogleRequest ChromeosDevicesPatch where
         type Rs ChromeosDevicesPatch = ChromeOSDevice
+        type Scopes ChromeosDevicesPatch =
+             '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
         requestClient ChromeosDevicesPatch{..}
           = go _cdpCustomerId _cdpDeviceId _cdpProjection
               (Just AltJSON)

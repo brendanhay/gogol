@@ -90,6 +90,8 @@ radRoleAssignmentId
 
 instance GoogleRequest RoleAssignmentsDelete where
         type Rs RoleAssignmentsDelete = ()
+        type Scopes RoleAssignmentsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
         requestClient RoleAssignmentsDelete{..}
           = go _radCustomer _radRoleAssignmentId (Just AltJSON)
               directoryService

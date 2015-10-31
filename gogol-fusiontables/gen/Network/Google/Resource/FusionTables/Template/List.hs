@@ -100,6 +100,9 @@ tllMaxResults
 
 instance GoogleRequest TemplateList' where
         type Rs TemplateList' = TemplateList
+        type Scopes TemplateList' =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient TemplateList'{..}
           = go _tllTableId _tllPageToken _tllMaxResults
               (Just AltJSON)

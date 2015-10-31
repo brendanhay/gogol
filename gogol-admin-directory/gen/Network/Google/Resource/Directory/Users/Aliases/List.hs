@@ -87,6 +87,11 @@ ualUserKey
 
 instance GoogleRequest UsersAliasesList where
         type Rs UsersAliasesList = Aliases
+        type Scopes UsersAliasesList =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.alias",
+               "https://www.googleapis.com/auth/admin.directory.user.alias.readonly",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
         requestClient UsersAliasesList{..}
           = go _ualUserKey _ualEvent (Just AltJSON)
               directoryService

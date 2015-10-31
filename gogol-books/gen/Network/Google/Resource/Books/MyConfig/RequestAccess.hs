@@ -139,6 +139,8 @@ mcraNonce
 
 instance GoogleRequest MyConfigRequestAccess where
         type Rs MyConfigRequestAccess = RequestAccess
+        type Scopes MyConfigRequestAccess =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyConfigRequestAccess{..}
           = go (Just _mcraSource) (Just _mcraVolumeId)
               (Just _mcraNonce)

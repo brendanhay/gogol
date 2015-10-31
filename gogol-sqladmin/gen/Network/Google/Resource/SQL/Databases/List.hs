@@ -90,6 +90,9 @@ dlInstance
 
 instance GoogleRequest DatabasesList where
         type Rs DatabasesList = DatabasesListResponse
+        type Scopes DatabasesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesList{..}
           = go _dlProject _dlInstance (Just AltJSON)
               sQLAdminService

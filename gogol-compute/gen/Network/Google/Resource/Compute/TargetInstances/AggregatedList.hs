@@ -141,6 +141,10 @@ instance GoogleRequest TargetInstancesAggregatedList
          where
         type Rs TargetInstancesAggregatedList =
              TargetInstanceAggregatedList
+        type Scopes TargetInstancesAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetInstancesAggregatedList{..}
           = go _tialProject _tialFilter _tialPageToken
               (Just _tialMaxResults)

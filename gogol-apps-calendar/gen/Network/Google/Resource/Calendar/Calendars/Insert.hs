@@ -75,6 +75,8 @@ ciPayload
 
 instance GoogleRequest CalendarsInsert where
         type Rs CalendarsInsert = Calendar
+        type Scopes CalendarsInsert =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient CalendarsInsert{..}
           = go (Just AltJSON) _ciPayload appsCalendarService
           where go

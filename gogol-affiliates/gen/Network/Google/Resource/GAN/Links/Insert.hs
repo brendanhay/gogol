@@ -98,6 +98,7 @@ liRole = lens _liRole (\ s a -> s{_liRole = a})
 
 instance GoogleRequest LinksInsert where
         type Rs LinksInsert = Link
+        type Scopes LinksInsert = '[]
         requestClient LinksInsert{..}
           = go _liRole _liRoleId (Just AltJSON) _liPayload
               affiliatesService

@@ -112,6 +112,9 @@ dcsPayload
 
 instance GoogleRequest DisksCreateSnapshot where
         type Rs DisksCreateSnapshot = Operation
+        type Scopes DisksCreateSnapshot =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient DisksCreateSnapshot{..}
           = go _dcsProject _dcsZone _dcsDisk (Just AltJSON)
               _dcsPayload

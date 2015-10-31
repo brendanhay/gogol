@@ -179,6 +179,8 @@ amlCallback
 
 instance GoogleRequest AppsModulesList where
         type Rs AppsModulesList = ListModulesResponse
+        type Scopes AppsModulesList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsModulesList{..}
           = go _amlAppsId _amlXgafv _amlUploadProtocol
               (Just _amlPp)

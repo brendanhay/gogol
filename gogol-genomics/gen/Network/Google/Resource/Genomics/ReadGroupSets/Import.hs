@@ -179,6 +179,10 @@ rgsiCallback
 
 instance GoogleRequest ReadGroupSetsImport where
         type Rs ReadGroupSetsImport = Operation
+        type Scopes ReadGroupSetsImport =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.read_write",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient ReadGroupSetsImport{..}
           = go _rgsiXgafv _rgsiUploadProtocol (Just _rgsiPp)
               _rgsiAccessToken

@@ -96,6 +96,8 @@ instance GoogleRequest
          RasterCollectionsPermissionsBatchUpdate where
         type Rs RasterCollectionsPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
+        type Scopes RasterCollectionsPermissionsBatchUpdate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient
           RasterCollectionsPermissionsBatchUpdate{..}
           = go _rcpbuId (Just AltJSON) _rcpbuPayload

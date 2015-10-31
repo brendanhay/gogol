@@ -61,6 +61,9 @@ projectsList = ProjectsList
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse
+        type Scopes ProjectsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient ProjectsList{}
           = go (Just AltJSON) mapsEngineService
           where go

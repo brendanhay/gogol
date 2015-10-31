@@ -119,6 +119,10 @@ tpghRegion
 instance GoogleRequest TargetPoolsGetHealth where
         type Rs TargetPoolsGetHealth =
              TargetPoolInstanceHealth
+        type Scopes TargetPoolsGetHealth =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetPoolsGetHealth{..}
           = go _tpghProject _tpghRegion _tpghTargetPool
               (Just AltJSON)

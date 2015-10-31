@@ -90,6 +90,11 @@ mzgManagedZone
 
 instance GoogleRequest ManagedZonesGet where
         type Rs ManagedZonesGet = ManagedZone
+        type Scopes ManagedZonesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesGet{..}
           = go _mzgProject _mzgManagedZone (Just AltJSON)
               dNSService

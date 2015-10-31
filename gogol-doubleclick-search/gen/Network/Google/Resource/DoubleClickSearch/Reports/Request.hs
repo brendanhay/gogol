@@ -75,6 +75,8 @@ rrPayload
 
 instance GoogleRequest ReportsRequest where
         type Rs ReportsRequest = Report
+        type Scopes ReportsRequest =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ReportsRequest{..}
           = go (Just AltJSON) _rrPayload
               doubleClickSearchService

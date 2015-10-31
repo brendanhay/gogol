@@ -104,6 +104,8 @@ cfpId
 
 instance GoogleRequest CreativeFieldsPatch where
         type Rs CreativeFieldsPatch = CreativeField
+        type Scopes CreativeFieldsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldsPatch{..}
           = go _cfpProFileId (Just _cfpId) (Just AltJSON)
               _cfpPayload

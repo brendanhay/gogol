@@ -366,6 +366,7 @@ sCallback
 
 instance GoogleRequest Search where
         type Rs Search = ()
+        type Scopes Search = '[]
         requestClient Search{..}
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
@@ -396,6 +397,7 @@ instance GoogleRequest Search where
 
 instance GoogleRequest (MediaDownload Search) where
         type Rs (MediaDownload Search) = Stream
+        type Scopes (MediaDownload Search) = Scopes Search
         requestClient (MediaDownload Search{..})
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)

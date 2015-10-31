@@ -78,6 +78,11 @@ filFileId
 
 instance GoogleRequest FilesTrash where
         type Rs FilesTrash = File
+        type Scopes FilesTrash =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient FilesTrash{..}
           = go _filFileId (Just AltJSON) driveService
           where go

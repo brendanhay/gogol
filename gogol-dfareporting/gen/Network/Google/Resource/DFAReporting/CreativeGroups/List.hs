@@ -183,6 +183,8 @@ cglMaxResults
 instance GoogleRequest CreativeGroupsList where
         type Rs CreativeGroupsList =
              CreativeGroupsListResponse
+        type Scopes CreativeGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeGroupsList{..}
           = go _cglProFileId _cglSearchString
               (_cglIds ^. _Default)

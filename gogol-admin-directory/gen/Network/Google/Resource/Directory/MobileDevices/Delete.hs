@@ -92,6 +92,8 @@ mddCustomerId
 
 instance GoogleRequest MobileDevicesDelete where
         type Rs MobileDevicesDelete = ()
+        type Scopes MobileDevicesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.device.mobile"]
         requestClient MobileDevicesDelete{..}
           = go _mddCustomerId _mddResourceId (Just AltJSON)
               directoryService

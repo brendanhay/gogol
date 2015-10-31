@@ -87,6 +87,9 @@ cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
 
 instance GoogleRequest CommentsInsert where
         type Rs CommentsInsert = Comment
+        type Scopes CommentsInsert =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.stream.write"]
         requestClient CommentsInsert{..}
           = go _cActivityId (Just AltJSON) _cPayload
               plusDomainsService

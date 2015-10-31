@@ -106,6 +106,9 @@ uclMaxResults
 
 instance GoogleRequest URLChannelsList where
         type Rs URLChannelsList = URLChannels
+        type Scopes URLChannelsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient URLChannelsList{..}
           = go _uclAdClientId _uclPageToken _uclMaxResults
               (Just AltJSON)

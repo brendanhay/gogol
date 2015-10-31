@@ -89,6 +89,9 @@ pmdPayload
 
 instance GoogleRequest ProjectsMoveDisk where
         type Rs ProjectsMoveDisk = Operation
+        type Scopes ProjectsMoveDisk =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ProjectsMoveDisk{..}
           = go _pmdProject (Just AltJSON) _pmdPayload
               computeService

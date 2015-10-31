@@ -103,6 +103,8 @@ cpPayload
 
 instance GoogleRequest CollectionsPatch where
         type Rs CollectionsPatch = Collection
+        type Scopes CollectionsPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionsPatch{..}
           = go _cpEnterpriseId _cpCollectionId (Just AltJSON)
               _cpPayload

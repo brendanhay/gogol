@@ -113,6 +113,8 @@ au1DryRun
 
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
+        type Scopes AccountsUpdate =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountsUpdate{..}
           = go _au1MerchantId _au1AccountId _au1DryRun
               (Just AltJSON)

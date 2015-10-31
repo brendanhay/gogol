@@ -107,6 +107,9 @@ dsdDeleteContents
 
 instance GoogleRequest DataSetsDelete where
         type Rs DataSetsDelete = ()
+        type Scopes DataSetsDelete =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient DataSetsDelete{..}
           = go _dsdProjectId _dsdDataSetId _dsdDeleteContents
               (Just AltJSON)

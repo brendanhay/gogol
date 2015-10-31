@@ -158,6 +158,8 @@ cdCallback
 
 instance GoogleRequest CoursesDelete where
         type Rs CoursesDelete = Empty
+        type Scopes CoursesDelete =
+             '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesDelete{..}
           = go _cdId _cdXgafv _cdUploadProtocol (Just _cdPp)
               _cdAccessToken

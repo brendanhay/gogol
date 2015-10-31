@@ -143,6 +143,10 @@ thttpplMaxResults
 
 instance GoogleRequest TargetHTTPProxiesList where
         type Rs TargetHTTPProxiesList = TargetHTTPProxyList
+        type Scopes TargetHTTPProxiesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetHTTPProxiesList{..}
           = go _thttpplProject _thttpplFilter _thttpplPageToken
               (Just _thttpplMaxResults)

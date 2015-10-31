@@ -106,6 +106,8 @@ instance GoogleRequest FloodlightConfigurationsPatch
          where
         type Rs FloodlightConfigurationsPatch =
              FloodlightConfiguration
+        type Scopes FloodlightConfigurationsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightConfigurationsPatch{..}
           = go _fcpProFileId (Just _fcpId) (Just AltJSON)
               _fcpPayload

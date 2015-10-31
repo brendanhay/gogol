@@ -123,6 +123,9 @@ uuInstance
 
 instance GoogleRequest UsersUpdate where
         type Rs UsersUpdate = Operation
+        type Scopes UsersUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient UsersUpdate{..}
           = go _uuProject _uuInstance (Just _uuHost)
               (Just _uuName)

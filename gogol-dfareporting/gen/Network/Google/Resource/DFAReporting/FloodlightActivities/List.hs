@@ -267,6 +267,8 @@ falMaxResults
 instance GoogleRequest FloodlightActivitiesList where
         type Rs FloodlightActivitiesList =
              FloodlightActivitiesListResponse
+        type Scopes FloodlightActivitiesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivitiesList{..}
           = go _falProFileId _falTagString
               _falFloodlightActivityGroupTagString

@@ -78,6 +78,8 @@ talItemId
 instance GoogleRequest TimelineAttachmentsList where
         type Rs TimelineAttachmentsList =
              AttachmentsListResponse
+        type Scopes TimelineAttachmentsList =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelineAttachmentsList{..}
           = go _talItemId (Just AltJSON) mirrorService
           where go

@@ -161,6 +161,8 @@ pgbiCallback
 
 instance GoogleRequest ProjectsGetBillingInfo where
         type Rs ProjectsGetBillingInfo = ProjectBillingInfo
+        type Scopes ProjectsGetBillingInfo =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsGetBillingInfo{..}
           = go _pgbiName _pgbiXgafv _pgbiUploadProtocol
               (Just _pgbiPp)

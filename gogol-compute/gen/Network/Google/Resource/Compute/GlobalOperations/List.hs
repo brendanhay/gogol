@@ -139,6 +139,10 @@ golMaxResults
 
 instance GoogleRequest GlobalOperationsList where
         type Rs GlobalOperationsList = OperationList
+        type Scopes GlobalOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalOperationsList{..}
           = go _golProject _golFilter _golPageToken
               (Just _golMaxResults)

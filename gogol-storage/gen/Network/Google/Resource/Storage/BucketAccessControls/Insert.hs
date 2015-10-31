@@ -91,6 +91,8 @@ instance GoogleRequest BucketAccessControlsInsert
          where
         type Rs BucketAccessControlsInsert =
              BucketAccessControl
+        type Scopes BucketAccessControlsInsert =
+             '["https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsInsert{..}
           = go _baciBucket (Just AltJSON) _baciPayload
               storageService

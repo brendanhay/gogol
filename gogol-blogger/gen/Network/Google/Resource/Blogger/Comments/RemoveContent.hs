@@ -102,6 +102,8 @@ crcCommentId
 
 instance GoogleRequest CommentsRemoveContent where
         type Rs CommentsRemoveContent = Comment
+        type Scopes CommentsRemoveContent =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient CommentsRemoveContent{..}
           = go _crcBlogId _crcPostId _crcCommentId
               (Just AltJSON)

@@ -121,6 +121,9 @@ instance GoogleRequest
          ManagementProFileFilterLinksGet where
         type Rs ManagementProFileFilterLinksGet =
              ProFileFilterLink
+        type Scopes ManagementProFileFilterLinksGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementProFileFilterLinksGet{..}
           = go _mpfflgAccountId _mpfflgWebPropertyId
               _mpfflgProFileId

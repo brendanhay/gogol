@@ -101,6 +101,8 @@ apPayload
 
 instance GoogleRequest ACLPatch where
         type Rs ACLPatch = ACLRule
+        type Scopes ACLPatch =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient ACLPatch{..}
           = go _apCalendarId _apRuleId (Just AltJSON)
               _apPayload

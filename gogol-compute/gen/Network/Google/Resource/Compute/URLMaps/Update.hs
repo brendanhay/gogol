@@ -101,6 +101,9 @@ umuPayload
 
 instance GoogleRequest URLMapsUpdate where
         type Rs URLMapsUpdate = Operation
+        type Scopes URLMapsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient URLMapsUpdate{..}
           = go _umuProject _umuURLMap (Just AltJSON)
               _umuPayload

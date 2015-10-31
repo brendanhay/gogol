@@ -136,6 +136,9 @@ instance GoogleRequest
          AccountsAdUnitsCustomChannelsList where
         type Rs AccountsAdUnitsCustomChannelsList =
              CustomChannels
+        type Scopes AccountsAdUnitsCustomChannelsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsAdUnitsCustomChannelsList{..}
           = go _aaucclAccountId _aaucclAdClientId
               _aaucclAdUnitId

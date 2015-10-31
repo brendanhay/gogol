@@ -114,6 +114,8 @@ acuAccountId
 
 instance GoogleRequest AccountsContainersUpdate where
         type Rs AccountsContainersUpdate = Container
+        type Scopes AccountsContainersUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersUpdate{..}
           = go _acuAccountId _acuContainerId _acuFingerprint
               (Just AltJSON)

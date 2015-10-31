@@ -91,6 +91,8 @@ ssSubscriptionId
 
 instance GoogleRequest SubscriptionsSuspend where
         type Rs SubscriptionsSuspend = Subscription
+        type Scopes SubscriptionsSuspend =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsSuspend{..}
           = go _ssCustomerId _ssSubscriptionId (Just AltJSON)
               appsResellerService

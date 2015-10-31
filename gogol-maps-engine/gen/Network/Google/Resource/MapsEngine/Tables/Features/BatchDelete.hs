@@ -90,6 +90,8 @@ tfbdId = lens _tfbdId (\ s a -> s{_tfbdId = a})
 instance GoogleRequest TablesFeaturesBatchDelete
          where
         type Rs TablesFeaturesBatchDelete = ()
+        type Scopes TablesFeaturesBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesFeaturesBatchDelete{..}
           = go _tfbdId (Just AltJSON) _tfbdPayload
               mapsEngineService

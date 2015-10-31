@@ -244,6 +244,8 @@ aolCallback
 
 instance GoogleRequest AccountsOrdersList where
         type Rs AccountsOrdersList = ListOrdersResponse
+        type Scopes AccountsOrdersList =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
         requestClient AccountsOrdersList{..}
           = go _aolAccountId (_aolStatus ^. _Default)
               (_aolPphNames ^. _Default)

@@ -104,6 +104,8 @@ instance GoogleRequest
          AccountsContainersVersionsCreate where
         type Rs AccountsContainersVersionsCreate =
              CreateContainerVersionResponse
+        type Scopes AccountsContainersVersionsCreate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
         requestClient AccountsContainersVersionsCreate{..}
           = go _aAccountId _aContainerId (Just AltJSON)
               _aPayload

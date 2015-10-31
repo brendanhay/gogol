@@ -138,6 +138,10 @@ dalMaxResults
 
 instance GoogleRequest DisksAggregatedList where
         type Rs DisksAggregatedList = DiskAggregatedList
+        type Scopes DisksAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DisksAggregatedList{..}
           = go _dalProject _dalFilter _dalPageToken
               (Just _dalMaxResults)

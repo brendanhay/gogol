@@ -141,6 +141,10 @@ hhclMaxResults
 
 instance GoogleRequest HTTPSHealthChecksList where
         type Rs HTTPSHealthChecksList = HTTPSHealthCheckList
+        type Scopes HTTPSHealthChecksList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient HTTPSHealthChecksList{..}
           = go _hhclProject _hhclFilter _hhclPageToken
               (Just _hhclMaxResults)

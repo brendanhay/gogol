@@ -89,6 +89,10 @@ uldId = lens _uldId (\ s a -> s{_uldId = a})
 
 instance GoogleRequest UsersLabelsDelete where
         type Rs UsersLabelsDelete = ()
+        type Scopes UsersLabelsDelete =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersLabelsDelete{..}
           = go _uldUserId _uldId (Just AltJSON) gmailService
           where go

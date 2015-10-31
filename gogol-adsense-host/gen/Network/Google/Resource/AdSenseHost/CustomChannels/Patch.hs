@@ -105,6 +105,8 @@ ccpAdClientId
 
 instance GoogleRequest CustomChannelsPatch where
         type Rs CustomChannelsPatch = CustomChannel
+        type Scopes CustomChannelsPatch =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient CustomChannelsPatch{..}
           = go _ccpAdClientId (Just _ccpCustomChannelId)
               (Just AltJSON)

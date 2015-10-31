@@ -120,6 +120,9 @@ diPayload
 
 instance GoogleRequest DisksInsert where
         type Rs DisksInsert = Operation
+        type Scopes DisksInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient DisksInsert{..}
           = go _diProject _diZone _diSourceImage (Just AltJSON)
               _diPayload

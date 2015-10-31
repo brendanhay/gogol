@@ -76,6 +76,9 @@ sgSavedAdStyleId
 
 instance GoogleRequest SavedadstylesGet where
         type Rs SavedadstylesGet = SavedAdStyle
+        type Scopes SavedadstylesGet =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient SavedadstylesGet{..}
           = go _sgSavedAdStyleId (Just AltJSON) adSenseService
           where go

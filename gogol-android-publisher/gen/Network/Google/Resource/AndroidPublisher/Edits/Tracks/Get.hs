@@ -105,6 +105,8 @@ etgtEditId
 
 instance GoogleRequest EditsTracksGet where
         type Rs EditsTracksGet = Track
+        type Scopes EditsTracksGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTracksGet{..}
           = go _etgtPackageName _etgtEditId _etgtTrack
               (Just AltJSON)

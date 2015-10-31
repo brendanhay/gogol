@@ -195,6 +195,9 @@ instance GoogleRequest
          ControllerDebuggeesBreakpointsUpdate where
         type Rs ControllerDebuggeesBreakpointsUpdate =
              UpdateActiveBreakpointResponse
+        type Scopes ControllerDebuggeesBreakpointsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugletcontroller"]
         requestClient
           ControllerDebuggeesBreakpointsUpdate{..}
           = go _cdbuDebuggeeId _cdbuId _cdbuXgafv

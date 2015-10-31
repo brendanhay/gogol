@@ -88,6 +88,9 @@ cgColumnId
 
 instance GoogleRequest ColumnGet where
         type Rs ColumnGet = Column
+        type Scopes ColumnGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient ColumnGet{..}
           = go _cgTableId _cgColumnId (Just AltJSON)
               fusionTablesService

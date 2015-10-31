@@ -102,6 +102,8 @@ laiProductId
 
 instance GoogleRequest LicenseAssignmentsInsert where
         type Rs LicenseAssignmentsInsert = LicenseAssignment
+        type Scopes LicenseAssignmentsInsert =
+             '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient LicenseAssignmentsInsert{..}
           = go _laiProductId _laiSKUId (Just AltJSON)
               _laiPayload

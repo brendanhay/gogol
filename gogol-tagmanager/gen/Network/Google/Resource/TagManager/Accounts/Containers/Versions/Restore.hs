@@ -114,6 +114,8 @@ instance GoogleRequest
          AccountsContainersVersionsRestore where
         type Rs AccountsContainersVersionsRestore =
              ContainerVersion
+        type Scopes AccountsContainersVersionsRestore =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersVersionsRestore{..}
           = go _acvrAccountId _acvrContainerId
               _acvrContainerVersionId

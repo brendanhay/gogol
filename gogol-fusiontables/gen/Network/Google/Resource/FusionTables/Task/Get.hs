@@ -88,6 +88,9 @@ tggTableId
 
 instance GoogleRequest TaskGet where
         type Rs TaskGet = Task
+        type Scopes TaskGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient TaskGet{..}
           = go _tggTableId _tggTaskId (Just AltJSON)
               fusionTablesService

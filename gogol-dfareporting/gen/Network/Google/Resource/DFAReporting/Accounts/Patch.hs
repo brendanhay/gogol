@@ -101,6 +101,8 @@ appId
 
 instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
+        type Scopes AccountsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountsPatch{..}
           = go _appProFileId (Just _appId) (Just AltJSON)
               _appPayload

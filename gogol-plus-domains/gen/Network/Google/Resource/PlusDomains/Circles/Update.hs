@@ -87,6 +87,9 @@ cuCircleId
 
 instance GoogleRequest CirclesUpdate where
         type Rs CirclesUpdate = Circle
+        type Scopes CirclesUpdate =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient CirclesUpdate{..}
           = go _cuCircleId (Just AltJSON) _cuPayload
               plusDomainsService

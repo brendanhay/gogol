@@ -240,6 +240,7 @@ rgMaxResults
 
 instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report
+        type Scopes ReportsGet = '[]
         requestClient ReportsGet{..}
           = go _rgRole _rgRoleId _rgReportType _rgStatus
               (_rgAdvertiserId ^. _Default)

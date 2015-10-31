@@ -151,6 +151,9 @@ duDeployment
 
 instance GoogleRequest DeploymentsUpdate where
         type Rs DeploymentsUpdate = Operation
+        type Scopes DeploymentsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsUpdate{..}
           = go _duProject _duDeployment (Just _duCreatePolicy)
               (Just _duDeletePolicy)

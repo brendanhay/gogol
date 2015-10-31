@@ -88,6 +88,8 @@ sgId = lens _sgId (\ s a -> s{_sgId = a}) . _Coerce
 
 instance GoogleRequest SizesGet where
         type Rs SizesGet = Size
+        type Scopes SizesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SizesGet{..}
           = go _sgProFileId _sgId (Just AltJSON)
               dFAReportingService

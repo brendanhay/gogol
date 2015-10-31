@@ -101,6 +101,8 @@ oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
 instance GoogleRequest OrdersReturnlineitem where
         type Rs OrdersReturnlineitem =
              OrdersReturnLineItemResponse
+        type Scopes OrdersReturnlineitem =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersReturnlineitem{..}
           = go _oMerchantId _oOrderId (Just AltJSON) _oPayload
               shoppingContentService

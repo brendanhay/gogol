@@ -93,6 +93,8 @@ cliColorRgbFormat
 
 instance GoogleRequest CalendarListInsert where
         type Rs CalendarListInsert = CalendarListEntry
+        type Scopes CalendarListInsert =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient CalendarListInsert{..}
           = go _cliColorRgbFormat (Just AltJSON) _cliPayload
               appsCalendarService

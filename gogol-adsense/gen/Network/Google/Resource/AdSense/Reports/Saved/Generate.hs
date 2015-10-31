@@ -118,6 +118,9 @@ rsgMaxResults
 instance GoogleRequest ReportsSavedGenerate where
         type Rs ReportsSavedGenerate =
              AdsenseReportsGenerateResponse
+        type Scopes ReportsSavedGenerate =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient ReportsSavedGenerate{..}
           = go _rsgSavedReportId _rsgLocale _rsgStartIndex
               _rsgMaxResults

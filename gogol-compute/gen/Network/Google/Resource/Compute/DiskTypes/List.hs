@@ -148,6 +148,10 @@ dtlMaxResults
 
 instance GoogleRequest DiskTypesList where
         type Rs DiskTypesList = DiskTypeList
+        type Scopes DiskTypesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DiskTypesList{..}
           = go _dtlProject _dtlZone _dtlFilter _dtlPageToken
               (Just _dtlMaxResults)

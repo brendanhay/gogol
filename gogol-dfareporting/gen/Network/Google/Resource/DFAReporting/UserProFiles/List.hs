@@ -61,6 +61,9 @@ userProFilesList = UserProFilesList
 
 instance GoogleRequest UserProFilesList where
         type Rs UserProFilesList = UserProFileList
+        type Scopes UserProFilesList =
+             '["https://www.googleapis.com/auth/dfareporting",
+               "https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserProFilesList{}
           = go (Just AltJSON) dFAReportingService
           where go

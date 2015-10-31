@@ -266,6 +266,8 @@ asilCallback
 instance GoogleRequest AccountsStoreInfosList where
         type Rs AccountsStoreInfosList =
              ListStoreInfosResponse
+        type Scopes AccountsStoreInfosList =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
         requestClient AccountsStoreInfosList{..}
           = go _asilAccountId (_asilPphNames ^. _Default)
               _asilXgafv

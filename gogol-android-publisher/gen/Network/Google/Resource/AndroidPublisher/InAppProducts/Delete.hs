@@ -89,6 +89,8 @@ iapdSKU = lens _iapdSKU (\ s a -> s{_iapdSKU = a})
 
 instance GoogleRequest InAppProductsDelete where
         type Rs InAppProductsDelete = ()
+        type Scopes InAppProductsDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient InAppProductsDelete{..}
           = go _iapdPackageName _iapdSKU (Just AltJSON)
               androidPublisherService

@@ -131,6 +131,8 @@ iuDeviceId
 
 instance GoogleRequest InstallsUpdate where
         type Rs InstallsUpdate = Install
+        type Scopes InstallsUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient InstallsUpdate{..}
           = go _iuEnterpriseId _iuUserId _iuDeviceId
               _iuInstallId

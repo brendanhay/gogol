@@ -124,6 +124,8 @@ pgsPlacementIds
 instance GoogleRequest PlacementsGeneratetags where
         type Rs PlacementsGeneratetags =
              PlacementsGenerateTagsResponse
+        type Scopes PlacementsGeneratetags =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementsGeneratetags{..}
           = go _pgsProFileId (_pgsTagFormats ^. _Default)
               _pgsCampaignId

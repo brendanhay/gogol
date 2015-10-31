@@ -105,6 +105,8 @@ aupfpId
 
 instance GoogleRequest AccountUserProFilesPatch where
         type Rs AccountUserProFilesPatch = AccountUserProFile
+        type Scopes AccountUserProFilesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountUserProFilesPatch{..}
           = go _aupfpProFileId (Just _aupfpId) (Just AltJSON)
               _aupfpPayload

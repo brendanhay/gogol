@@ -66,6 +66,9 @@ turnBasedMatchesResetForAllPlayers = TurnBasedMatchesResetForAllPlayers
 instance GoogleRequest
          TurnBasedMatchesResetForAllPlayers where
         type Rs TurnBasedMatchesResetForAllPlayers = ()
+        type Scopes TurnBasedMatchesResetForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesResetForAllPlayers{}
           = go (Just AltJSON) gamesManagementService
           where go

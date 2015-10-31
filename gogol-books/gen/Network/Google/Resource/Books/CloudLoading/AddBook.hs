@@ -111,6 +111,8 @@ clabDriveDocumentId
 instance GoogleRequest CloudLoadingAddBook where
         type Rs CloudLoadingAddBook =
              BooksCloudLoadingResource
+        type Scopes CloudLoadingAddBook =
+             '["https://www.googleapis.com/auth/books"]
         requestClient CloudLoadingAddBook{..}
           = go _clabMimeType _clabUploadClientToken _clabName
               _clabDriveDocumentId

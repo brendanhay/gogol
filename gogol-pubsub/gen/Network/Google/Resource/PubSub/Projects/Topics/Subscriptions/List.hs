@@ -184,6 +184,9 @@ instance GoogleRequest
          ProjectsTopicsSubscriptionsList where
         type Rs ProjectsTopicsSubscriptionsList =
              ListTopicSubscriptionsResponse
+        type Scopes ProjectsTopicsSubscriptionsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsSubscriptionsList{..}
           = go _ptslTopic _ptslXgafv _ptslUploadProtocol
               (Just _ptslPp)

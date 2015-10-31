@@ -138,6 +138,8 @@ eefpEditId
 
 instance GoogleRequest EditsExpansionFilesPatch where
         type Rs EditsExpansionFilesPatch = ExpansionFile
+        type Scopes EditsExpansionFilesPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsExpansionFilesPatch{..}
           = go _eefpPackageName _eefpEditId _eefpAPKVersionCode
               _eefpExpansionFileType

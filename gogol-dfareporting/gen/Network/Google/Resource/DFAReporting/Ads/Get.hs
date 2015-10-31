@@ -89,6 +89,8 @@ adsId
 
 instance GoogleRequest AdsGet where
         type Rs AdsGet = Ad
+        type Scopes AdsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdsGet{..}
           = go _adsProFileId _adsId (Just AltJSON)
               dFAReportingService

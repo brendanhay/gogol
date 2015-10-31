@@ -112,6 +112,10 @@ umgMetadataHeaders
 
 instance GoogleRequest UsersMessagesGet where
         type Rs UsersMessagesGet = Message
+        type Scopes UsersMessagesGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersMessagesGet{..}
           = go _umgUserId _umgId (Just _umgFormat)
               (_umgMetadataHeaders ^. _Default)

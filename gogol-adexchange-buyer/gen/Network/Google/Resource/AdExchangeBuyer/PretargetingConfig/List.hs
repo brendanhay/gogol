@@ -80,6 +80,8 @@ pclAccountId
 instance GoogleRequest PretargetingConfigList' where
         type Rs PretargetingConfigList' =
              PretargetingConfigList
+        type Scopes PretargetingConfigList' =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient PretargetingConfigList'{..}
           = go _pclAccountId (Just AltJSON)
               adExchangeBuyerService

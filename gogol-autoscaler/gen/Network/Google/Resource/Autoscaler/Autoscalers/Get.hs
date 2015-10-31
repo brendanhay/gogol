@@ -100,6 +100,9 @@ agAutoscaler
 
 instance GoogleRequest AutoscalersGet where
         type Rs AutoscalersGet = Autoscaler
+        type Scopes AutoscalersGet =
+             '["https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient AutoscalersGet{..}
           = go _agProject _agZone _agAutoscaler (Just AltJSON)
               autoscalerService

@@ -97,6 +97,10 @@ vraOnBehalfOfContentOwner
 
 instance GoogleRequest VideosReportAbuse where
         type Rs VideosReportAbuse = ()
+        type Scopes VideosReportAbuse =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosReportAbuse{..}
           = go _vraOnBehalfOfContentOwner (Just AltJSON)
               _vraPayload

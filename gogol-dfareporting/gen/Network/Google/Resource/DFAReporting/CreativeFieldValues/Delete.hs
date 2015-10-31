@@ -106,6 +106,8 @@ cfvdId
 instance GoogleRequest CreativeFieldValuesDelete
          where
         type Rs CreativeFieldValuesDelete = ()
+        type Scopes CreativeFieldValuesDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldValuesDelete{..}
           = go _cfvdProFileId _cfvdCreativeFieldId _cfvdId
               (Just AltJSON)

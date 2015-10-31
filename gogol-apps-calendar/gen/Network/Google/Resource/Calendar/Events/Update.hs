@@ -160,6 +160,8 @@ euEventId
 
 instance GoogleRequest EventsUpdate where
         type Rs EventsUpdate = Event
+        type Scopes EventsUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient EventsUpdate{..}
           = go _euCalendarId _euEventId _euMaxAttendees
               _euSendNotifications

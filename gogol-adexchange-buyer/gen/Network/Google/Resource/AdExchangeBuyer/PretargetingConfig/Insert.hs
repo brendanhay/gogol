@@ -89,6 +89,8 @@ pciAccountId
 
 instance GoogleRequest PretargetingConfigInsert where
         type Rs PretargetingConfigInsert = PretargetingConfig
+        type Scopes PretargetingConfigInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient PretargetingConfigInsert{..}
           = go _pciAccountId (Just AltJSON) _pciPayload
               adExchangeBuyerService

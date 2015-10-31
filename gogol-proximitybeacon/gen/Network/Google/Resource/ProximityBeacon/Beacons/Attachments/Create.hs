@@ -179,6 +179,7 @@ bacCallback
 
 instance GoogleRequest BeaconsAttachmentsCreate where
         type Rs BeaconsAttachmentsCreate = BeaconAttachment
+        type Scopes BeaconsAttachmentsCreate = '[]
         requestClient BeaconsAttachmentsCreate{..}
           = go _bacBeaconName _bacXgafv _bacUploadProtocol
               (Just _bacPp)

@@ -89,6 +89,8 @@ sagId
 
 instance GoogleRequest SubAccountsGet where
         type Rs SubAccountsGet = SubAccount
+        type Scopes SubAccountsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SubAccountsGet{..}
           = go _sagProFileId _sagId (Just AltJSON)
               dFAReportingService

@@ -160,6 +160,9 @@ rgsdCallback
 
 instance GoogleRequest ReadGroupSetsDelete where
         type Rs ReadGroupSetsDelete = Empty
+        type Scopes ReadGroupSetsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient ReadGroupSetsDelete{..}
           = go _rgsdReadGroupSetId _rgsdXgafv
               _rgsdUploadProtocol

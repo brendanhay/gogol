@@ -103,6 +103,8 @@ odgProjectId
 
 instance GoogleRequest OrderDocumentsGet where
         type Rs OrderDocumentsGet = OrderDocument
+        type Scopes OrderDocumentsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OrderDocumentsGet{..}
           = go _odgProFileId _odgProjectId _odgId
               (Just AltJSON)

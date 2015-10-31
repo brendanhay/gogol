@@ -102,6 +102,8 @@ usdSessionId
 
 instance GoogleRequest UsersSessionsDelete where
         type Rs UsersSessionsDelete = ()
+        type Scopes UsersSessionsDelete =
+             '["https://www.googleapis.com/auth/fitness.activity.write"]
         requestClient UsersSessionsDelete{..}
           = go _usdUserId _usdSessionId _usdCurrentTimeMillis
               (Just AltJSON)

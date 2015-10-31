@@ -121,6 +121,8 @@ instance GoogleRequest ProductsGenerateApprovalURL
          where
         type Rs ProductsGenerateApprovalURL =
              ProductsGenerateApprovalURLResponse
+        type Scopes ProductsGenerateApprovalURL =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsGenerateApprovalURL{..}
           = go _pgauEnterpriseId _pgauProductId
               _pgauLanguageCode

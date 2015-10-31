@@ -175,6 +175,8 @@ pzgscCallback
 instance GoogleRequest ProjectsZonesGetServerConfig
          where
         type Rs ProjectsZonesGetServerConfig = ServerConfig
+        type Scopes ProjectsZonesGetServerConfig =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesGetServerConfig{..}
           = go _pzgscProjectId _pzgscZone _pzgscXgafv
               _pzgscUploadProtocol

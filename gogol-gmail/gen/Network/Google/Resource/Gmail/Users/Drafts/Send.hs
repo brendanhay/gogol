@@ -103,6 +103,10 @@ udsUserId
 
 instance GoogleRequest UsersDraftsSend where
         type Rs UsersDraftsSend = Message
+        type Scopes UsersDraftsSend =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersDraftsSend{..}
           = go _udsUserId (Just AltJSON) _udsPayload
               gmailService
@@ -114,6 +118,8 @@ instance GoogleRequest UsersDraftsSend where
 instance GoogleRequest (MediaUpload UsersDraftsSend)
          where
         type Rs (MediaUpload UsersDraftsSend) = Message
+        type Scopes (MediaUpload UsersDraftsSend) =
+             Scopes UsersDraftsSend
         requestClient (MediaUpload UsersDraftsSend{..} body)
           = go _udsUserId (Just AltJSON) (Just AltMedia)
               _udsPayload

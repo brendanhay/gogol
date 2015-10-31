@@ -136,6 +136,11 @@ tlMaxResults
 
 instance GoogleRequest TypesList where
         type Rs TypesList = TypesListResponse
+        type Scopes TypesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient TypesList{..}
           = go _tlProject _tlFilter _tlPageToken
               (Just _tlMaxResults)

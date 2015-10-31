@@ -76,6 +76,14 @@ proFileId
 
 instance GoogleRequest PropertiesList where
         type Rs PropertiesList = PropertyList
+        type Scopes PropertiesList =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient PropertiesList{..}
           = go _proFileId (Just AltJSON) driveService
           where go

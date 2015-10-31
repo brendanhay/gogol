@@ -106,6 +106,9 @@ qsqlgSQL = lens _qsqlgSQL (\ s a -> s{_qsqlgSQL = a})
 
 instance GoogleRequest QuerySQLGet where
         type Rs QuerySQLGet = SQLresponse
+        type Scopes QuerySQLGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient QuerySQLGet{..}
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               (Just AltJSON)
@@ -117,6 +120,8 @@ instance GoogleRequest QuerySQLGet where
 instance GoogleRequest (MediaDownload QuerySQLGet)
          where
         type Rs (MediaDownload QuerySQLGet) = Stream
+        type Scopes (MediaDownload QuerySQLGet) =
+             Scopes QuerySQLGet
         requestClient (MediaDownload QuerySQLGet{..})
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               (Just AltMedia)

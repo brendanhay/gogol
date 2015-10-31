@@ -199,6 +199,9 @@ tlMaxResults
 
 instance GoogleRequest TasksList where
         type Rs TasksList = Tasks
+        type Scopes TasksList =
+             '["https://www.googleapis.com/auth/tasks",
+               "https://www.googleapis.com/auth/tasks.readonly"]
         requestClient TasksList{..}
           = go _tlTaskList _tlDueMax _tlShowDeleted
               _tlShowCompleted

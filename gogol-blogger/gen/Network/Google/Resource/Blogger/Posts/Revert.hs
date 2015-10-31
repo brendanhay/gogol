@@ -87,6 +87,8 @@ prPostId = lens _prPostId (\ s a -> s{_prPostId = a})
 
 instance GoogleRequest PostsRevert where
         type Rs PostsRevert = Post'
+        type Scopes PostsRevert =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsRevert{..}
           = go _prBlogId _prPostId (Just AltJSON)
               bloggerService

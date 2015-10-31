@@ -90,6 +90,8 @@ rdProFileId
 
 instance GoogleRequest ReportsDelete where
         type Rs ReportsDelete = ()
+        type Scopes ReportsDelete =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsDelete{..}
           = go _rdProFileId _rdReportId (Just AltJSON)
               dFAReportingService

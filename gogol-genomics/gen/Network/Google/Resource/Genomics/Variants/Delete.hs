@@ -156,6 +156,9 @@ vdCallback
 
 instance GoogleRequest VariantsDelete where
         type Rs VariantsDelete = Empty
+        type Scopes VariantsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantsDelete{..}
           = go _vdVariantId _vdXgafv _vdUploadProtocol
               (Just _vdPp)

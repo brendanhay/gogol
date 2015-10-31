@@ -89,6 +89,8 @@ cuPayload
 
 instance GoogleRequest CampaignsUpdate where
         type Rs CampaignsUpdate = Campaign
+        type Scopes CampaignsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsUpdate{..}
           = go _cuProFileId (Just AltJSON) _cuPayload
               dFAReportingService

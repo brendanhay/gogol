@@ -90,6 +90,9 @@ sclInstance
 
 instance GoogleRequest SSLCertsList where
         type Rs SSLCertsList = SSLCertsListResponse
+        type Scopes SSLCertsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient SSLCertsList{..}
           = go _sclProject _sclInstance (Just AltJSON)
               sQLAdminService

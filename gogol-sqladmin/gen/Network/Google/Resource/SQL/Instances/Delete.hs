@@ -88,6 +88,9 @@ idInstance
 
 instance GoogleRequest InstancesDelete where
         type Rs InstancesDelete = Operation
+        type Scopes InstancesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesDelete{..}
           = go _idProject _idInstance (Just AltJSON)
               sQLAdminService

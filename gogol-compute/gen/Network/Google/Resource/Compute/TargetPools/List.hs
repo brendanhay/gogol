@@ -152,6 +152,10 @@ tplMaxResults
 
 instance GoogleRequest TargetPoolsList where
         type Rs TargetPoolsList = TargetPoolList
+        type Scopes TargetPoolsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetPoolsList{..}
           = go _tplProject _tplRegion _tplFilter _tplPageToken
               (Just _tplMaxResults)

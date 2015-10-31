@@ -81,6 +81,9 @@ arAchievementId
 instance GoogleRequest AchievementsReveal where
         type Rs AchievementsReveal =
              AchievementRevealResponse
+        type Scopes AchievementsReveal =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementsReveal{..}
           = go _arAchievementId (Just AltJSON) gamesService
           where go

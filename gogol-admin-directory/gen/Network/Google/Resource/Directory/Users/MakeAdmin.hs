@@ -89,6 +89,8 @@ umaUserKey
 
 instance GoogleRequest UsersMakeAdmin where
         type Rs UsersMakeAdmin = ()
+        type Scopes UsersMakeAdmin =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersMakeAdmin{..}
           = go _umaUserKey (Just AltJSON) _umaPayload
               directoryService

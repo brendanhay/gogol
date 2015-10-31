@@ -117,6 +117,9 @@ meiAccountId
 instance GoogleRequest ManagementExperimentsInsert
          where
         type Rs ManagementExperimentsInsert = Experiment
+        type Scopes ManagementExperimentsInsert =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementExperimentsInsert{..}
           = go _meiAccountId _meiWebPropertyId _meiProFileId
               (Just AltJSON)

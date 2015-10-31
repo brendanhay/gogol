@@ -155,6 +155,8 @@ togCallback
 
 instance GoogleRequest TransferOperationsGet where
         type Rs TransferOperationsGet = Operation
+        type Scopes TransferOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsGet{..}
           = go _togName _togXgafv _togUploadProtocol
               (Just _togPp)

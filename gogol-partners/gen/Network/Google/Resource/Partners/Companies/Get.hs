@@ -313,6 +313,7 @@ cgCallback
 
 instance GoogleRequest CompaniesGet where
         type Rs CompaniesGet = GetCompanyResponse
+        type Scopes CompaniesGet = '[]
         requestClient CompaniesGet{..}
           = go _cgCompanyId _cgXgafv _cgCurrencyCode
               _cgUploadProtocol

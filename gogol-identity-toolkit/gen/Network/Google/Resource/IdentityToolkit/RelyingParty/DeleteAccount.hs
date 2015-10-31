@@ -79,6 +79,7 @@ instance GoogleRequest RelyingPartyDeleteAccount
          where
         type Rs RelyingPartyDeleteAccount =
              DeleteAccountResponse
+        type Scopes RelyingPartyDeleteAccount = '[]
         requestClient RelyingPartyDeleteAccount{..}
           = go (Just AltJSON) _rPayload identityToolkitService
           where go

@@ -74,6 +74,8 @@ cdId = lens _cdId (\ s a -> s{_cdId = a})
 
 instance GoogleRequest ContactsDelete where
         type Rs ContactsDelete = ()
+        type Scopes ContactsDelete =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient ContactsDelete{..}
           = go _cdId (Just AltJSON) mirrorService
           where go

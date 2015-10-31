@@ -76,6 +76,8 @@ uiPayload
 
 instance GoogleRequest UsersInsert where
         type Rs UsersInsert = User
+        type Scopes UsersInsert =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersInsert{..}
           = go (Just AltJSON) _uiPayload directoryService
           where go

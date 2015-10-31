@@ -97,6 +97,8 @@ diDryRun = lens _diDryRun (\ s a -> s{_diDryRun = a})
 
 instance GoogleRequest DatafeedsInsert where
         type Rs DatafeedsInsert = Datafeed
+        type Scopes DatafeedsInsert =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsInsert{..}
           = go _diMerchantId _diDryRun (Just AltJSON)
               _diPayload

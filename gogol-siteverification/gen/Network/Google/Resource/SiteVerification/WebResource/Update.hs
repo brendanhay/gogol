@@ -88,6 +88,8 @@ wruId = lens _wruId (\ s a -> s{_wruId = a})
 instance GoogleRequest WebResourceUpdate where
         type Rs WebResourceUpdate =
              SiteVerificationWebResourceResource
+        type Scopes WebResourceUpdate =
+             '["https://www.googleapis.com/auth/siteverification"]
         requestClient WebResourceUpdate{..}
           = go _wruId (Just AltJSON) _wruPayload
               siteVerificationService

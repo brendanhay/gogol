@@ -101,6 +101,9 @@ buigMaxPosts
 
 instance GoogleRequest BlogUserInfosGet where
         type Rs BlogUserInfosGet = BlogUserInfo
+        type Scopes BlogUserInfosGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient BlogUserInfosGet{..}
           = go _buigUserId _buigBlogId _buigMaxPosts
               (Just AltJSON)

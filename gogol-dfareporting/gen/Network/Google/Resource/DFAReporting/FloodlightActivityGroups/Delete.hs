@@ -91,6 +91,8 @@ fagdId
 instance GoogleRequest FloodlightActivityGroupsDelete
          where
         type Rs FloodlightActivityGroupsDelete = ()
+        type Scopes FloodlightActivityGroupsDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivityGroupsDelete{..}
           = go _fagdProFileId _fagdId (Just AltJSON)
               dFAReportingService

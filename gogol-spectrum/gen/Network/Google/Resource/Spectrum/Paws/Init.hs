@@ -79,6 +79,7 @@ piPayload
 
 instance GoogleRequest PawsInit where
         type Rs PawsInit = PawsInitResponse
+        type Scopes PawsInit = '[]
         requestClient PawsInit{..}
           = go (Just AltJSON) _piPayload spectrumService
           where go

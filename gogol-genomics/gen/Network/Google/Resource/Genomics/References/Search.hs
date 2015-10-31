@@ -165,6 +165,10 @@ refCallback
 
 instance GoogleRequest ReferencesSearch where
         type Rs ReferencesSearch = SearchReferencesResponse
+        type Scopes ReferencesSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient ReferencesSearch{..}
           = go _refXgafv _refUploadProtocol (Just _refPp)
               _refAccessToken

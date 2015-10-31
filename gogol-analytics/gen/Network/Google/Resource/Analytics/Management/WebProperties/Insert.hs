@@ -96,6 +96,8 @@ mwpiAccountId
 instance GoogleRequest ManagementWebPropertiesInsert
          where
         type Rs ManagementWebPropertiesInsert = WebProperty
+        type Scopes ManagementWebPropertiesInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementWebPropertiesInsert{..}
           = go _mwpiAccountId (Just AltJSON) _mwpiPayload
               analyticsService

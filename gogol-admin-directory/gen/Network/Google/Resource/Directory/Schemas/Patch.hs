@@ -101,6 +101,8 @@ spSchemaKey
 
 instance GoogleRequest SchemasPatch where
         type Rs SchemasPatch = Schema
+        type Scopes SchemasPatch =
+             '["https://www.googleapis.com/auth/admin.directory.userschema"]
         requestClient SchemasPatch{..}
           = go _spCustomerId _spSchemaKey (Just AltJSON)
               _spPayload

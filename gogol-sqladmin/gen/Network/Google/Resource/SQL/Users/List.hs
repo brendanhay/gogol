@@ -90,6 +90,9 @@ ulInstance
 
 instance GoogleRequest UsersList where
         type Rs UsersList = UsersListResponse
+        type Scopes UsersList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient UsersList{..}
           = go _ulProject _ulInstance (Just AltJSON)
               sQLAdminService

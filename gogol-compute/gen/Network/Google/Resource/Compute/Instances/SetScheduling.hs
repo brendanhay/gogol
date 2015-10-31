@@ -113,6 +113,9 @@ issInstance
 
 instance GoogleRequest InstancesSetScheduling where
         type Rs InstancesSetScheduling = Operation
+        type Scopes InstancesSetScheduling =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesSetScheduling{..}
           = go _issProject _issZone _issInstance (Just AltJSON)
               _issPayload

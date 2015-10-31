@@ -99,6 +99,9 @@ tasGetStats
 
 instance GoogleRequest TaskqueuesGet where
         type Rs TaskqueuesGet = TaskQueue
+        type Scopes TaskqueuesGet =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TaskqueuesGet{..}
           = go _tasProject _tasTaskqueue _tasGetStats
               (Just AltJSON)

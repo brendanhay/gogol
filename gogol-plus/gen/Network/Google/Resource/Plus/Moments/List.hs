@@ -136,6 +136,9 @@ mlMaxResults
 
 instance GoogleRequest MomentsList where
         type Rs MomentsList = MomentsFeed
+        type Scopes MomentsList =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient MomentsList{..}
           = go _mlUserId _mlCollection _mlTargetURL
               _mlPageToken

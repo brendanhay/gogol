@@ -107,6 +107,9 @@ bsuBackendService
 
 instance GoogleRequest BackendServicesUpdate where
         type Rs BackendServicesUpdate = Operation
+        type Scopes BackendServicesUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient BackendServicesUpdate{..}
           = go _bsuProject _bsuBackendService (Just AltJSON)
               _bsuPayload

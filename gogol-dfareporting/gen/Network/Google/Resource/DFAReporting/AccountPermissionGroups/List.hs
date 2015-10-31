@@ -81,6 +81,8 @@ instance GoogleRequest AccountPermissionGroupsList
          where
         type Rs AccountPermissionGroupsList =
              AccountPermissionGroupsListResponse
+        type Scopes AccountPermissionGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountPermissionGroupsList{..}
           = go _apglProFileId (Just AltJSON)
               dFAReportingService

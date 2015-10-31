@@ -101,6 +101,10 @@ vgrId = lens _vgrId (\ s a -> s{_vgrId = a})
 
 instance GoogleRequest VideosGetRating where
         type Rs VideosGetRating = VideoGetRatingResponse
+        type Scopes VideosGetRating =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosGetRating{..}
           = go (Just _vgrId) _vgrOnBehalfOfContentOwner
               (Just AltJSON)

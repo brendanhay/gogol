@@ -119,6 +119,9 @@ igriInstanceGroup
 instance GoogleRequest InstanceGroupsRemoveInstances
          where
         type Rs InstanceGroupsRemoveInstances = Operation
+        type Scopes InstanceGroupsRemoveInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsRemoveInstances{..}
           = go _igriProject _igriZone _igriInstanceGroup
               (Just AltJSON)

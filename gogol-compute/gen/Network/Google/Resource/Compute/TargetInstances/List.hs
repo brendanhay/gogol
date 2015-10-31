@@ -151,6 +151,10 @@ tilMaxResults
 
 instance GoogleRequest TargetInstancesList where
         type Rs TargetInstancesList = TargetInstanceList
+        type Scopes TargetInstancesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetInstancesList{..}
           = go _tilProject _tilZone _tilFilter _tilPageToken
               (Just _tilMaxResults)

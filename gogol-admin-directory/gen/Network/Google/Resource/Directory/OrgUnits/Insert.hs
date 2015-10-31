@@ -90,6 +90,8 @@ ouiCustomerId
 
 instance GoogleRequest OrgUnitsInsert where
         type Rs OrgUnitsInsert = OrgUnit
+        type Scopes OrgUnitsInsert =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit"]
         requestClient OrgUnitsInsert{..}
           = go _ouiCustomerId (Just AltJSON) _ouiPayload
               directoryService

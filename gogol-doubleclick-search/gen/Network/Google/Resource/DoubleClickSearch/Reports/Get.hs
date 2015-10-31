@@ -75,6 +75,8 @@ rgReportId
 
 instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report
+        type Scopes ReportsGet =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ReportsGet{..}
           = go _rgReportId (Just AltJSON)
               doubleClickSearchService

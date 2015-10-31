@@ -75,6 +75,9 @@ tgTableId
 
 instance GoogleRequest TableGet where
         type Rs TableGet = Table
+        type Scopes TableGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient TableGet{..}
           = go _tgTableId (Just AltJSON) fusionTablesService
           where go

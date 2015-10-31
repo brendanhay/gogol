@@ -90,6 +90,9 @@ scdSSLCertificate
 
 instance GoogleRequest SSLCertificatesDelete where
         type Rs SSLCertificatesDelete = Operation
+        type Scopes SSLCertificatesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient SSLCertificatesDelete{..}
           = go _scdProject _scdSSLCertificate (Just AltJSON)
               computeService

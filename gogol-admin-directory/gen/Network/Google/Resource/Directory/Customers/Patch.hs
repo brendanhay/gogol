@@ -89,6 +89,8 @@ cpPayload
 
 instance GoogleRequest CustomersPatch where
         type Rs CustomersPatch = Customer
+        type Scopes CustomersPatch =
+             '["https://www.googleapis.com/auth/admin.directory.customer"]
         requestClient CustomersPatch{..}
           = go _cpCustomerKey (Just AltJSON) _cpPayload
               directoryService

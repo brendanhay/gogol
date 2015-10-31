@@ -164,6 +164,8 @@ torCallback
 
 instance GoogleRequest TransferOperationsResume where
         type Rs TransferOperationsResume = Empty
+        type Scopes TransferOperationsResume =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsResume{..}
           = go _torName _torXgafv _torUploadProtocol
               (Just _torPp)

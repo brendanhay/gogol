@@ -115,6 +115,9 @@ duInstance
 
 instance GoogleRequest DatabasesUpdate where
         type Rs DatabasesUpdate = Operation
+        type Scopes DatabasesUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesUpdate{..}
           = go _duProject _duInstance _duDatabase
               (Just AltJSON)

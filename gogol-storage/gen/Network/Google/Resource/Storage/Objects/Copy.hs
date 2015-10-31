@@ -360,6 +360,10 @@ ocDestinationObject
 
 instance GoogleRequest ObjectsCopy where
         type Rs ObjectsCopy = Object
+        type Scopes ObjectsCopy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsCopy{..}
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
@@ -385,6 +389,8 @@ instance GoogleRequest ObjectsCopy where
 instance GoogleRequest (MediaDownload ObjectsCopy)
          where
         type Rs (MediaDownload ObjectsCopy) = Stream
+        type Scopes (MediaDownload ObjectsCopy) =
+             Scopes ObjectsCopy
         requestClient (MediaDownload ObjectsCopy{..})
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket

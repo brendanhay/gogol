@@ -90,6 +90,9 @@ tbmlMatchId
 
 instance GoogleRequest TurnBasedMatchesLeave where
         type Rs TurnBasedMatchesLeave = TurnBasedMatch
+        type Scopes TurnBasedMatchesLeave =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesLeave{..}
           = go _tbmlMatchId _tbmlLanguage (Just AltJSON)
               gamesService

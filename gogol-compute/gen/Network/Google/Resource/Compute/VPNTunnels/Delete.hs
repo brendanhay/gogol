@@ -101,6 +101,9 @@ vtdRegion
 
 instance GoogleRequest VPNTunnelsDelete where
         type Rs VPNTunnelsDelete = Operation
+        type Scopes VPNTunnelsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient VPNTunnelsDelete{..}
           = go _vtdProject _vtdRegion _vtdVPNTunnel
               (Just AltJSON)

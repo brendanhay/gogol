@@ -105,6 +105,9 @@ mpfgAccountId
 
 instance GoogleRequest ManagementProFilesGet where
         type Rs ManagementProFilesGet = ProFile
+        type Scopes ManagementProFilesGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementProFilesGet{..}
           = go _mpfgAccountId _mpfgWebPropertyId _mpfgProFileId
               (Just AltJSON)

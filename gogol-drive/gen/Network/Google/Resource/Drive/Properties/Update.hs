@@ -111,6 +111,11 @@ puFileId = lens _puFileId (\ s a -> s{_puFileId = a})
 
 instance GoogleRequest PropertiesUpdate where
         type Rs PropertiesUpdate = Property
+        type Scopes PropertiesUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata"]
         requestClient PropertiesUpdate{..}
           = go _puFileId _puPropertyKey (Just _puVisibility)
               (Just AltJSON)

@@ -200,6 +200,8 @@ pzccCallback
 instance GoogleRequest ProjectsZonesClustersCreate
          where
         type Rs ProjectsZonesClustersCreate = Operation
+        type Scopes ProjectsZonesClustersCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesClustersCreate{..}
           = go _pzccProjectId _pzccZone _pzccXgafv
               _pzccUploadProtocol

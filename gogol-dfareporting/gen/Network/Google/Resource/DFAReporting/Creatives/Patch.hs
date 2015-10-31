@@ -101,6 +101,8 @@ cppId
 
 instance GoogleRequest CreativesPatch where
         type Rs CreativesPatch = Creative
+        type Scopes CreativesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativesPatch{..}
           = go _cppProFileId (Just _cppId) (Just AltJSON)
               _cppPayload

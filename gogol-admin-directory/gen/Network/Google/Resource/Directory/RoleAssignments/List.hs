@@ -127,6 +127,9 @@ ralMaxResults
 
 instance GoogleRequest RoleAssignmentsList where
         type Rs RoleAssignmentsList = RoleAssignments
+        type Scopes RoleAssignmentsList =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient RoleAssignmentsList{..}
           = go _ralCustomer _ralRoleId _ralPageToken
               _ralUserKey

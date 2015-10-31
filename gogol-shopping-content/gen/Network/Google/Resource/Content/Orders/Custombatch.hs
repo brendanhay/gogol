@@ -77,6 +77,8 @@ ocPayload
 
 instance GoogleRequest OrdersCustombatch where
         type Rs OrdersCustombatch = OrdersCustomBatchResponse
+        type Scopes OrdersCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCustombatch{..}
           = go (Just AltJSON) _ocPayload shoppingContentService
           where go

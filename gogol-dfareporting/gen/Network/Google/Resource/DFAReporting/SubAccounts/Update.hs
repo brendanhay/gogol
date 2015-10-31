@@ -89,6 +89,8 @@ sauPayload
 
 instance GoogleRequest SubAccountsUpdate where
         type Rs SubAccountsUpdate = SubAccount
+        type Scopes SubAccountsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SubAccountsUpdate{..}
           = go _sauProFileId (Just AltJSON) _sauPayload
               dFAReportingService

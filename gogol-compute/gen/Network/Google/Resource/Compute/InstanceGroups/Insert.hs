@@ -103,6 +103,9 @@ igiPayload
 
 instance GoogleRequest InstanceGroupsInsert where
         type Rs InstanceGroupsInsert = Operation
+        type Scopes InstanceGroupsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsInsert{..}
           = go _igiProject _igiZone (Just AltJSON) _igiPayload
               computeService

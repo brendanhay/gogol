@@ -142,6 +142,11 @@ rrslMaxResults
 instance GoogleRequest ResourceRecordSetsList where
         type Rs ResourceRecordSetsList =
              ResourceRecordSetsListResponse
+        type Scopes ResourceRecordSetsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ResourceRecordSetsList{..}
           = go _rrslProject _rrslManagedZone _rrslName
               _rrslPageToken

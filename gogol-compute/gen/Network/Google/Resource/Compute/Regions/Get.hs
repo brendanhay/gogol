@@ -89,6 +89,10 @@ rgRegion = lens _rgRegion (\ s a -> s{_rgRegion = a})
 
 instance GoogleRequest RegionsGet where
         type Rs RegionsGet = Region
+        type Scopes RegionsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RegionsGet{..}
           = go _rgProject _rgRegion (Just AltJSON)
               computeService

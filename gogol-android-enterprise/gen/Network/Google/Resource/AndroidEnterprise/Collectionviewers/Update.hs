@@ -118,6 +118,8 @@ cuUserId = lens _cuUserId (\ s a -> s{_cuUserId = a})
 
 instance GoogleRequest CollectionviewersUpdate where
         type Rs CollectionviewersUpdate = User
+        type Scopes CollectionviewersUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionviewersUpdate{..}
           = go _cuEnterpriseId _cuCollectionId _cuUserId
               (Just AltJSON)

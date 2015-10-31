@@ -162,6 +162,11 @@ upfgCallback
 
 instance GoogleRequest UserProFilesGet where
         type Rs UserProFilesGet = UserProFile
+        type Scopes UserProFilesGet =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient UserProFilesGet{..}
           = go _upfgUserId _upfgXgafv _upfgUploadProtocol
               (Just _upfgPp)

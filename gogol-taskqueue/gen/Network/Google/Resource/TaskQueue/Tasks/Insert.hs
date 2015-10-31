@@ -101,6 +101,9 @@ tiPayload
 
 instance GoogleRequest TasksInsert where
         type Rs TasksInsert = Task
+        type Scopes TasksInsert =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksInsert{..}
           = go _tiProject _tiTaskqueue (Just AltJSON)
               _tiPayload

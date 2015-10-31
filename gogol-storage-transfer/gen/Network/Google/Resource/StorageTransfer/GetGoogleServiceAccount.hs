@@ -168,6 +168,8 @@ ggsaCallback
 instance GoogleRequest GetGoogleServiceAccount where
         type Rs GetGoogleServiceAccount =
              GoogleServiceAccount
+        type Scopes GetGoogleServiceAccount =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient GetGoogleServiceAccount{..}
           = go _ggsaXgafv _ggsaUploadProtocol (Just _ggsaPp)
               _ggsaAccessToken

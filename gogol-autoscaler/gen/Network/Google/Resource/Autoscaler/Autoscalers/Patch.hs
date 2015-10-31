@@ -114,6 +114,8 @@ apAutoscaler
 
 instance GoogleRequest AutoscalersPatch where
         type Rs AutoscalersPatch = Operation
+        type Scopes AutoscalersPatch =
+             '["https://www.googleapis.com/auth/compute"]
         requestClient AutoscalersPatch{..}
           = go _apProject _apZone _apAutoscaler (Just AltJSON)
               _apPayload

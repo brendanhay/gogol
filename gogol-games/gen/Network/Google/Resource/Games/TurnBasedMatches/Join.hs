@@ -88,6 +88,9 @@ tbmjMatchId
 
 instance GoogleRequest TurnBasedMatchesJoin where
         type Rs TurnBasedMatchesJoin = TurnBasedMatch
+        type Scopes TurnBasedMatchesJoin =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesJoin{..}
           = go _tbmjMatchId _tbmjLanguage (Just AltJSON)
               gamesService

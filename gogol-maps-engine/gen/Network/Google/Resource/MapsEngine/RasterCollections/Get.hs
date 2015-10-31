@@ -75,6 +75,9 @@ rcgId = lens _rcgId (\ s a -> s{_rcgId = a})
 
 instance GoogleRequest RasterCollectionsGet where
         type Rs RasterCollectionsGet = RasterCollection
+        type Scopes RasterCollectionsGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient RasterCollectionsGet{..}
           = go _rcgId (Just AltJSON) mapsEngineService
           where go

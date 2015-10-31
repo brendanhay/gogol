@@ -89,6 +89,9 @@ dgDomainName
 
 instance GoogleRequest DomainsGet where
         type Rs DomainsGet = Domains
+        type Scopes DomainsGet =
+             '["https://www.googleapis.com/auth/admin.directory.domain",
+               "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
         requestClient DomainsGet{..}
           = go _dgCustomer _dgDomainName (Just AltJSON)
               directoryService

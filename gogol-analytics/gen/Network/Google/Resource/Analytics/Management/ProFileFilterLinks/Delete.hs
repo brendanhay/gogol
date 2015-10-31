@@ -119,6 +119,8 @@ mpffldLinkId
 instance GoogleRequest
          ManagementProFileFilterLinksDelete where
         type Rs ManagementProFileFilterLinksDelete = ()
+        type Scopes ManagementProFileFilterLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementProFileFilterLinksDelete{..}
           = go _mpffldAccountId _mpffldWebPropertyId
               _mpffldProFileId

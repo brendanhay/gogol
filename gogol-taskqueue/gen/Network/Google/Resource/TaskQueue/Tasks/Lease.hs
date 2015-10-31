@@ -140,6 +140,9 @@ tlGroupByTag
 
 instance GoogleRequest TasksLease where
         type Rs TasksLease = Tasks
+        type Scopes TasksLease =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksLease{..}
           = go _tlProject _tlTaskqueue (Just _tlNumTasks)
               (Just _tlLeaseSecs)

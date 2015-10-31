@@ -103,6 +103,9 @@ vtiRegion
 
 instance GoogleRequest VPNTunnelsInsert where
         type Rs VPNTunnelsInsert = Operation
+        type Scopes VPNTunnelsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient VPNTunnelsInsert{..}
           = go _vtiProject _vtiRegion (Just AltJSON)
               _vtiPayload

@@ -89,6 +89,8 @@ riPayload
 
 instance GoogleRequest ReportsInsert where
         type Rs ReportsInsert = Report
+        type Scopes ReportsInsert =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsInsert{..}
           = go _riProFileId (Just AltJSON) _riPayload
               dFAReportingService

@@ -102,6 +102,8 @@ suTableId
 
 instance GoogleRequest StyleUpdate where
         type Rs StyleUpdate = StyleSetting
+        type Scopes StyleUpdate =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient StyleUpdate{..}
           = go _suTableId _suStyleId (Just AltJSON) _suPayload
               fusionTablesService

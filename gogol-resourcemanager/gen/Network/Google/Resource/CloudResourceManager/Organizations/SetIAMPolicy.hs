@@ -172,6 +172,8 @@ osipCallback
 instance GoogleRequest OrganizationsSetIAMPolicy
          where
         type Rs OrganizationsSetIAMPolicy = Policy
+        type Scopes OrganizationsSetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient OrganizationsSetIAMPolicy{..}
           = go _osipResource _osipXgafv _osipUploadProtocol
               (Just _osipPp)

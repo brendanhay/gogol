@@ -164,6 +164,10 @@ umiInternalDateSource
 
 instance GoogleRequest UsersMessagesImport where
         type Rs UsersMessagesImport = Message
+        type Scopes UsersMessagesImport =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.insert",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersMessagesImport{..}
           = go _umiUserId (Just _umiProcessForCalendar)
               (Just _umiDeleted)
@@ -180,6 +184,8 @@ instance GoogleRequest UsersMessagesImport where
 instance GoogleRequest
          (MediaUpload UsersMessagesImport) where
         type Rs (MediaUpload UsersMessagesImport) = Message
+        type Scopes (MediaUpload UsersMessagesImport) =
+             Scopes UsersMessagesImport
         requestClient
           (MediaUpload UsersMessagesImport{..} body)
           = go _umiUserId (Just _umiProcessForCalendar)

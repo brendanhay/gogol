@@ -159,6 +159,8 @@ puPublish
 
 instance GoogleRequest PostsUpdate where
         type Rs PostsUpdate = Post'
+        type Scopes PostsUpdate =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsUpdate{..}
           = go _puBlogId _puPostId (Just _puFetchBody)
               _puFetchImages

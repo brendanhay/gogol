@@ -177,6 +177,9 @@ psaCallback
 instance GoogleRequest
          ProjectsSubscriptionsAcknowledge where
         type Rs ProjectsSubscriptionsAcknowledge = Empty
+        type Scopes ProjectsSubscriptionsAcknowledge =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsAcknowledge{..}
           = go _psaSubscription _psaXgafv _psaUploadProtocol
               (Just _psaPp)

@@ -158,6 +158,9 @@ cgCallback
 
 instance GoogleRequest CoursesGet where
         type Rs CoursesGet = Course
+        type Scopes CoursesGet =
+             '["https://www.googleapis.com/auth/classroom.courses",
+               "https://www.googleapis.com/auth/classroom.courses.readonly"]
         requestClient CoursesGet{..}
           = go _cgId _cgXgafv _cgUploadProtocol (Just _cgPp)
               _cgAccessToken

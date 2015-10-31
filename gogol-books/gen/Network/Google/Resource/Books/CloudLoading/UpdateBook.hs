@@ -78,6 +78,8 @@ clubPayload
 instance GoogleRequest CloudLoadingUpdateBook where
         type Rs CloudLoadingUpdateBook =
              BooksCloudLoadingResource
+        type Scopes CloudLoadingUpdateBook =
+             '["https://www.googleapis.com/auth/books"]
         requestClient CloudLoadingUpdateBook{..}
           = go (Just AltJSON) _clubPayload booksService
           where go

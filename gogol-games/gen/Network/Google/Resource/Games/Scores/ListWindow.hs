@@ -171,6 +171,9 @@ slwMaxResults
 
 instance GoogleRequest ScoresListWindow where
         type Rs ScoresListWindow = LeaderboardScores
+        type Scopes ScoresListWindow =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient ScoresListWindow{..}
           = go _slwLeaderboardId _slwCollection
               (Just _slwTimeSpan)

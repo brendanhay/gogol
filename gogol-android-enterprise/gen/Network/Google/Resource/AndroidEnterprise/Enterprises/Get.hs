@@ -76,6 +76,8 @@ eEnterpriseId
 
 instance GoogleRequest EnterprisesGet where
         type Rs EnterprisesGet = Enterprise
+        type Scopes EnterprisesGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesGet{..}
           = go _eEnterpriseId (Just AltJSON)
               androidEnterpriseService

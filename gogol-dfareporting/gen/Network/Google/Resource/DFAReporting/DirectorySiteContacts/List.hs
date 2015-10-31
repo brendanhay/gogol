@@ -181,6 +181,8 @@ instance GoogleRequest DirectorySiteContactsList
          where
         type Rs DirectorySiteContactsList =
              DirectorySiteContactsListResponse
+        type Scopes DirectorySiteContactsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient DirectorySiteContactsList{..}
           = go _dsclProFileId _dsclSearchString
               (_dsclIds ^. _Default)

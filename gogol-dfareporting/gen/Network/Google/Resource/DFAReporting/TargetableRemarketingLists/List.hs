@@ -178,6 +178,8 @@ instance GoogleRequest TargetableRemarketingListsList
          where
         type Rs TargetableRemarketingListsList =
              TargetableRemarketingListsListResponse
+        type Scopes TargetableRemarketingListsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient TargetableRemarketingListsList{..}
           = go _trllProFileId (Just _trllAdvertiserId)
               _trllSortOrder

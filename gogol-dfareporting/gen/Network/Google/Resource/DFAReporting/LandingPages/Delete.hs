@@ -104,6 +104,8 @@ lpdId
 
 instance GoogleRequest LandingPagesDelete where
         type Rs LandingPagesDelete = ()
+        type Scopes LandingPagesDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient LandingPagesDelete{..}
           = go _lpdProFileId _lpdCampaignId _lpdId
               (Just AltJSON)

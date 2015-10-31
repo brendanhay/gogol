@@ -89,6 +89,8 @@ cpPayload
 
 instance GoogleRequest CalendarsPatch where
         type Rs CalendarsPatch = Calendar
+        type Scopes CalendarsPatch =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient CalendarsPatch{..}
           = go _cpCalendarId (Just AltJSON) _cpPayload
               appsCalendarService

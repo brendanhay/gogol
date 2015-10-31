@@ -97,6 +97,8 @@ instance GoogleRequest OrdersGettestOrdertemplate
          where
         type Rs OrdersGettestOrdertemplate =
              OrdersGetTestOrderTemplateResponse
+        type Scopes OrdersGettestOrdertemplate =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersGettestOrdertemplate{..}
           = go _ogoMerchantId _ogoTemplateName (Just AltJSON)
               shoppingContentService

@@ -131,6 +131,11 @@ instance GoogleRequest InstanceGroupManagersList
          where
         type Rs InstanceGroupManagersList =
              InstanceGroupManagerList
+        type Scopes InstanceGroupManagersList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupManagersList{..}
           = go _igmlProject _igmlZone _igmlFilter
               _igmlPageToken

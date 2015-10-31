@@ -102,6 +102,9 @@ frdRegion
 
 instance GoogleRequest ForwardingRulesDelete where
         type Rs ForwardingRulesDelete = Operation
+        type Scopes ForwardingRulesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ForwardingRulesDelete{..}
           = go _frdProject _frdRegion _frdForwardingRule
               (Just AltJSON)

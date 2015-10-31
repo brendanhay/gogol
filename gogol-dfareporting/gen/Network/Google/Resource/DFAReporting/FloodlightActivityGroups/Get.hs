@@ -93,6 +93,8 @@ instance GoogleRequest FloodlightActivityGroupsGet
          where
         type Rs FloodlightActivityGroupsGet =
              FloodlightActivityGroup
+        type Scopes FloodlightActivityGroupsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivityGroupsGet{..}
           = go _faggProFileId _faggId (Just AltJSON)
               dFAReportingService

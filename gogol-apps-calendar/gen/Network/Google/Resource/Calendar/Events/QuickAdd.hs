@@ -104,6 +104,8 @@ eqaSendNotifications
 
 instance GoogleRequest EventsQuickAdd where
         type Rs EventsQuickAdd = Event
+        type Scopes EventsQuickAdd =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient EventsQuickAdd{..}
           = go _eqaCalendarId (Just _eqaText)
               _eqaSendNotifications

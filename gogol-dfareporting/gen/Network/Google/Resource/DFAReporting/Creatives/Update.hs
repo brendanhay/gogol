@@ -89,6 +89,8 @@ crePayload
 
 instance GoogleRequest CreativesUpdate where
         type Rs CreativesUpdate = Creative
+        type Scopes CreativesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativesUpdate{..}
           = go _creProFileId (Just AltJSON) _crePayload
               dFAReportingService

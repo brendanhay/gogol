@@ -97,6 +97,10 @@ pldId = lens _pldId (\ s a -> s{_pldId = a})
 
 instance GoogleRequest PlayListsDelete where
         type Rs PlayListsDelete = ()
+        type Scopes PlayListsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListsDelete{..}
           = go (Just _pldId) _pldOnBehalfOfContentOwner
               (Just AltJSON)

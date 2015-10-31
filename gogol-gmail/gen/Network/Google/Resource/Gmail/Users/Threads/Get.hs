@@ -112,6 +112,10 @@ utgMetadataHeaders
 
 instance GoogleRequest UsersThreadsGet where
         type Rs UsersThreadsGet = Thread
+        type Scopes UsersThreadsGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersThreadsGet{..}
           = go _utgUserId _utgId (Just _utgFormat)
               (_utgMetadataHeaders ^. _Default)

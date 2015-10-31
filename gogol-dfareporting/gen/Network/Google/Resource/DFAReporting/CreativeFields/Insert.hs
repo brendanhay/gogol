@@ -90,6 +90,8 @@ cfiPayload
 
 instance GoogleRequest CreativeFieldsInsert where
         type Rs CreativeFieldsInsert = CreativeField
+        type Scopes CreativeFieldsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldsInsert{..}
           = go _cfiProFileId (Just AltJSON) _cfiPayload
               dFAReportingService

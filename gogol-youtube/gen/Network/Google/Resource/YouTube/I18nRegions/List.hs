@@ -87,6 +87,11 @@ irlHl = lens _irlHl (\ s a -> s{_irlHl = a})
 
 instance GoogleRequest I18nRegionsList where
         type Rs I18nRegionsList = I18nRegionListResponse
+        type Scopes I18nRegionsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient I18nRegionsList{..}
           = go (Just _irlPart) (Just _irlHl) (Just AltJSON)
               youTubeService

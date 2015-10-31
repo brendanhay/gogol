@@ -102,6 +102,8 @@ egUserId = lens _egUserId (\ s a -> s{_egUserId = a})
 
 instance GoogleRequest EntitlementsGet where
         type Rs EntitlementsGet = Entitlement
+        type Scopes EntitlementsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EntitlementsGet{..}
           = go _egEnterpriseId _egUserId _egEntitlementId
               (Just AltJSON)

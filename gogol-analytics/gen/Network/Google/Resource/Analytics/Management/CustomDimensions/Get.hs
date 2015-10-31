@@ -108,6 +108,9 @@ instance GoogleRequest ManagementCustomDimensionsGet
          where
         type Rs ManagementCustomDimensionsGet =
              CustomDimension
+        type Scopes ManagementCustomDimensionsGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementCustomDimensionsGet{..}
           = go _mcdgAccountId _mcdgWebPropertyId
               _mcdgCustomDimensionId

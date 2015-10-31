@@ -92,6 +92,8 @@ etlEditId
 
 instance GoogleRequest EditsTracksList where
         type Rs EditsTracksList = TracksListResponse
+        type Scopes EditsTracksList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTracksList{..}
           = go _etlPackageName _etlEditId (Just AltJSON)
               androidPublisherService

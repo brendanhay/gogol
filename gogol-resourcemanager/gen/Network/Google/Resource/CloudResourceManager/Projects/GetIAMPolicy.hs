@@ -173,6 +173,8 @@ pgipCallback
 
 instance GoogleRequest ProjectsGetIAMPolicy where
         type Rs ProjectsGetIAMPolicy = Policy
+        type Scopes ProjectsGetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsGetIAMPolicy{..}
           = go _pgipResource _pgipXgafv _pgipUploadProtocol
               (Just _pgipPp)

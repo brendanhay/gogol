@@ -97,6 +97,8 @@ aDryRun = lens _aDryRun (\ s a -> s{_aDryRun = a})
 
 instance GoogleRequest AccountsInsert where
         type Rs AccountsInsert = Account
+        type Scopes AccountsInsert =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountsInsert{..}
           = go _aMerchantId _aDryRun (Just AltJSON) _aPayload
               shoppingContentService

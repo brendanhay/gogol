@@ -115,6 +115,9 @@ psMaxResults
 
 instance GoogleRequest PeopleSearch where
         type Rs PeopleSearch = PeopleFeed
+        type Scopes PeopleSearch =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient PeopleSearch{..}
           = go (Just _psQuery) (Just _psLanguage) _psPageToken
               (Just _psMaxResults)

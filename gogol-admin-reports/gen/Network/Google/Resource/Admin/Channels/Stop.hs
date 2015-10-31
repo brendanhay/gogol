@@ -79,6 +79,8 @@ csPayload
 
 instance GoogleRequest ChannelsStop where
         type Rs ChannelsStop = ()
+        type Scopes ChannelsStop =
+             '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
         requestClient ChannelsStop{..}
           = go (Just AltJSON) _csPayload reportsService
           where go

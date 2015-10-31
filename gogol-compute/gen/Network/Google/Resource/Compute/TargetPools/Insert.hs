@@ -103,6 +103,9 @@ tpiRegion
 
 instance GoogleRequest TargetPoolsInsert where
         type Rs TargetPoolsInsert = Operation
+        type Scopes TargetPoolsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetPoolsInsert{..}
           = go _tpiProject _tpiRegion (Just AltJSON)
               _tpiPayload

@@ -158,6 +158,11 @@ cslId = lens _cslId (\ s a -> s{_cslId = a})
 instance GoogleRequest ChannelSectionsList where
         type Rs ChannelSectionsList =
              ChannelSectionListResponse
+        type Scopes ChannelSectionsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient ChannelSectionsList{..}
           = go (Just _cslPart) _cslMine _cslChannelId _cslHl
               _cslOnBehalfOfContentOwner

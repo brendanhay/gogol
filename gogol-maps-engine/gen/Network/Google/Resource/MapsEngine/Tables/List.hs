@@ -230,6 +230,9 @@ tlCreatedBefore
 
 instance GoogleRequest TablesList where
         type Rs TablesList = TablesListResponse
+        type Scopes TablesList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient TablesList{..}
           = go _tlCreatedAfter _tlCreatorEmail _tlRole _tlBbox
               _tlProcessingStatus

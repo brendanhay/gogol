@@ -111,6 +111,9 @@ udInstance
 
 instance GoogleRequest UsersDelete where
         type Rs UsersDelete = Operation
+        type Scopes UsersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient UsersDelete{..}
           = go _udProject _udInstance (Just _udHost)
               (Just _udName)

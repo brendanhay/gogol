@@ -89,6 +89,8 @@ etuPayload
 
 instance GoogleRequest EventTagsUpdate where
         type Rs EventTagsUpdate = EventTag
+        type Scopes EventTagsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient EventTagsUpdate{..}
           = go _etuProFileId (Just AltJSON) _etuPayload
               dFAReportingService

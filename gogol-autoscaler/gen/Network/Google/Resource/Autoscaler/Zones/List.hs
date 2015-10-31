@@ -104,6 +104,9 @@ zlMaxResults
 
 instance GoogleRequest ZonesList where
         type Rs ZonesList = ZoneList
+        type Scopes ZonesList =
+             '["https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ZonesList{..}
           = go _zlProject _zlFilter _zlPageToken
               (Just _zlMaxResults)

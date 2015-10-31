@@ -76,6 +76,9 @@ fbqPayload
 
 instance GoogleRequest FreeBusyQuery where
         type Rs FreeBusyQuery = FreeBusyResponse
+        type Scopes FreeBusyQuery =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient FreeBusyQuery{..}
           = go (Just AltJSON) _fbqPayload appsCalendarService
           where go

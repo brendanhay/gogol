@@ -100,6 +100,11 @@ uawUserKey
 
 instance GoogleRequest UsersAliasesWatch where
         type Rs UsersAliasesWatch = Channel
+        type Scopes UsersAliasesWatch =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.alias",
+               "https://www.googleapis.com/auth/admin.directory.user.alias.readonly",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
         requestClient UsersAliasesWatch{..}
           = go _uawUserKey _uawEvent (Just AltJSON) _uawPayload
               directoryService

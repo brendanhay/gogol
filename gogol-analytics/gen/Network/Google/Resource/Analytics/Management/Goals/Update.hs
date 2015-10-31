@@ -128,6 +128,8 @@ mguAccountId
 
 instance GoogleRequest ManagementGoalsUpdate where
         type Rs ManagementGoalsUpdate = Goal
+        type Scopes ManagementGoalsUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementGoalsUpdate{..}
           = go _mguAccountId _mguWebPropertyId _mguProFileId
               _mguGoalId

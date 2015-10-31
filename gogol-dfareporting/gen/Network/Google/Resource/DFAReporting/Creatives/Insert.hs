@@ -89,6 +89,8 @@ ciPayload
 
 instance GoogleRequest CreativesInsert where
         type Rs CreativesInsert = Creative
+        type Scopes CreativesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativesInsert{..}
           = go _ciProFileId (Just AltJSON) _ciPayload
               dFAReportingService

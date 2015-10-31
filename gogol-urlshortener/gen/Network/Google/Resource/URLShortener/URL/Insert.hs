@@ -75,6 +75,8 @@ uiPayload
 
 instance GoogleRequest URLInsert where
         type Rs URLInsert = URL
+        type Scopes URLInsert =
+             '["https://www.googleapis.com/auth/urlshortener"]
         requestClient URLInsert{..}
           = go (Just AltJSON) _uiPayload uRLShortenerService
           where go

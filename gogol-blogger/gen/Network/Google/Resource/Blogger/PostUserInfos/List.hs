@@ -202,6 +202,9 @@ puilMaxResults
 
 instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList
+        type Scopes PostUserInfosList' =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostUserInfosList'{..}
           = go _puilUserId _puilBlogId
               (_puilStatus ^. _Default)

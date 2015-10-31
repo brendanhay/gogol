@@ -97,6 +97,8 @@ cCollectionId
 instance GoogleRequest CollectionviewersList where
         type Rs CollectionviewersList =
              CollectionViewersListResponse
+        type Scopes CollectionviewersList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionviewersList{..}
           = go _cEnterpriseId _cCollectionId (Just AltJSON)
               androidEnterpriseService

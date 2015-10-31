@@ -115,6 +115,8 @@ instance GoogleRequest MyConfigReleaseDownloadAccess
          where
         type Rs MyConfigReleaseDownloadAccess =
              DownloadAccesses
+        type Scopes MyConfigReleaseDownloadAccess =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyConfigReleaseDownloadAccess{..}
           = go _mcrdaVolumeIds (Just _mcrdaCpksver)
               _mcrdaLocale

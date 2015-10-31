@@ -188,6 +188,8 @@ asicgCallback
 instance GoogleRequest AccountsStoreInfosCountryGet
          where
         type Rs AccountsStoreInfosCountryGet = StoreInfo
+        type Scopes AccountsStoreInfosCountryGet =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
         requestClient AccountsStoreInfosCountryGet{..}
           = go _asicgAccountId _asicgVideoId _asicgCountry
               _asicgXgafv

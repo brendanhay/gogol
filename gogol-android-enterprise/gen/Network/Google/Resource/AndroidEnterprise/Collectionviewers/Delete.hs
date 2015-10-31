@@ -106,6 +106,8 @@ cdUserId = lens _cdUserId (\ s a -> s{_cdUserId = a})
 
 instance GoogleRequest CollectionviewersDelete where
         type Rs CollectionviewersDelete = ()
+        type Scopes CollectionviewersDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionviewersDelete{..}
           = go _cdEnterpriseId _cdCollectionId _cdUserId
               (Just AltJSON)

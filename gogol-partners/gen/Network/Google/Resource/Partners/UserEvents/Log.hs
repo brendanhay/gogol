@@ -154,6 +154,7 @@ uelCallback
 
 instance GoogleRequest UserEventsLog where
         type Rs UserEventsLog = LogUserEventResponse
+        type Scopes UserEventsLog = '[]
         requestClient UserEventsLog{..}
           = go _uelXgafv _uelUploadProtocol (Just _uelPp)
               _uelAccessToken

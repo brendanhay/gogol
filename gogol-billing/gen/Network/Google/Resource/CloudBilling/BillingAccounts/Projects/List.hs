@@ -190,6 +190,8 @@ instance GoogleRequest BillingAccountsProjectsList
          where
         type Rs BillingAccountsProjectsList =
              ListProjectBillingInfoResponse
+        type Scopes BillingAccountsProjectsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsProjectsList{..}
           = go _baplName _baplXgafv _baplUploadProtocol
               (Just _baplPp)

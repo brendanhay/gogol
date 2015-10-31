@@ -90,6 +90,8 @@ comPayload
 
 instance GoogleRequest CommentsInsert where
         type Rs CommentsInsert = Comment
+        type Scopes CommentsInsert =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentsInsert{..}
           = go (Just _comPart) (Just AltJSON) _comPayload
               youTubeService

@@ -104,6 +104,9 @@ urpkUser = lens _urpkUser (\ s a -> s{_urpkUser = a})
 
 instance GoogleRequest UsersRemovePublicKey where
         type Rs UsersRemovePublicKey = Operation
+        type Scopes UsersRemovePublicKey =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient UsersRemovePublicKey{..}
           = go _urpkProject _urpkUser (Just _urpkFingerprint)
               (Just AltJSON)

@@ -128,6 +128,8 @@ mgpAccountId
 
 instance GoogleRequest ManagementGoalsPatch where
         type Rs ManagementGoalsPatch = Goal
+        type Scopes ManagementGoalsPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementGoalsPatch{..}
           = go _mgpAccountId _mgpWebPropertyId _mgpProFileId
               _mgpGoalId

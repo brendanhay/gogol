@@ -89,6 +89,8 @@ puPayload
 
 instance GoogleRequest PlacementsUpdate where
         type Rs PlacementsUpdate = Placement
+        type Scopes PlacementsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementsUpdate{..}
           = go _puProFileId (Just AltJSON) _puPayload
               dFAReportingService

@@ -76,6 +76,9 @@ wlTeamId = lens _wlTeamId (\ s a -> s{_wlTeamId = a})
 
 instance GoogleRequest WorkerList where
         type Rs WorkerList = WorkerListResponse
+        type Scopes WorkerList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
         requestClient WorkerList{..}
           = go _wlTeamId (Just AltJSON) mapsCoordinateService
           where go

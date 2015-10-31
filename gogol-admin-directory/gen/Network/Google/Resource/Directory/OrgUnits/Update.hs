@@ -104,6 +104,8 @@ ouuCustomerId
 
 instance GoogleRequest OrgUnitsUpdate where
         type Rs OrgUnitsUpdate = OrgUnit
+        type Scopes OrgUnitsUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit"]
         requestClient OrgUnitsUpdate{..}
           = go _ouuCustomerId _ouuOrgUnitPath (Just AltJSON)
               _ouuPayload

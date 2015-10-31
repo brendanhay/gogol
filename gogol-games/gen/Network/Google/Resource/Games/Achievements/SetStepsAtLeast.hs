@@ -99,6 +99,9 @@ instance GoogleRequest AchievementsSetStepsAtLeast
          where
         type Rs AchievementsSetStepsAtLeast =
              AchievementSetStepsAtLeastResponse
+        type Scopes AchievementsSetStepsAtLeast =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementsSetStepsAtLeast{..}
           = go _assalAchievementId (Just _assalSteps)
               (Just AltJSON)

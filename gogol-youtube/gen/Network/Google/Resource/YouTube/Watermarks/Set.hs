@@ -122,6 +122,11 @@ wsOnBehalfOfContentOwner
 
 instance GoogleRequest WatermarksSet where
         type Rs WatermarksSet = ()
+        type Scopes WatermarksSet =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.upload",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient WatermarksSet{..}
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)
@@ -134,6 +139,8 @@ instance GoogleRequest WatermarksSet where
 instance GoogleRequest (MediaUpload WatermarksSet)
          where
         type Rs (MediaUpload WatermarksSet) = ()
+        type Scopes (MediaUpload WatermarksSet) =
+             Scopes WatermarksSet
         requestClient (MediaUpload WatermarksSet{..} body)
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)

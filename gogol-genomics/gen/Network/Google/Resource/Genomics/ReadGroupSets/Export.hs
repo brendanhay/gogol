@@ -183,6 +183,10 @@ rgseCallback
 
 instance GoogleRequest ReadGroupSetsExport where
         type Rs ReadGroupSetsExport = Operation
+        type Scopes ReadGroupSetsExport =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.read_write",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient ReadGroupSetsExport{..}
           = go _rgseReadGroupSetId _rgseXgafv
               _rgseUploadProtocol

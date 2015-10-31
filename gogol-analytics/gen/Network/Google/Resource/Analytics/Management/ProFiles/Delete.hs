@@ -105,6 +105,8 @@ mpfdAccountId
 
 instance GoogleRequest ManagementProFilesDelete where
         type Rs ManagementProFilesDelete = ()
+        type Scopes ManagementProFilesDelete =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementProFilesDelete{..}
           = go _mpfdAccountId _mpfdWebPropertyId _mpfdProFileId
               (Just AltJSON)

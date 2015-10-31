@@ -93,6 +93,8 @@ sspsSubscriptionId
 instance GoogleRequest SubscriptionsStartPaidService
          where
         type Rs SubscriptionsStartPaidService = Subscription
+        type Scopes SubscriptionsStartPaidService =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsStartPaidService{..}
           = go _sspsCustomerId _sspsSubscriptionId
               (Just AltJSON)

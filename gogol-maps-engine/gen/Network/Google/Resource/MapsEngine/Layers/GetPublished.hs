@@ -76,6 +76,9 @@ lgpId = lens _lgpId (\ s a -> s{_lgpId = a})
 
 instance GoogleRequest LayersGetPublished where
         type Rs LayersGetPublished = PublishedLayer
+        type Scopes LayersGetPublished =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient LayersGetPublished{..}
           = go _lgpId (Just AltJSON) mapsEngineService
           where go

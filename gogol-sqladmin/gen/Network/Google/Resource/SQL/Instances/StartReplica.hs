@@ -88,6 +88,9 @@ iInstance
 
 instance GoogleRequest InstancesStartReplica where
         type Rs InstancesStartReplica = Operation
+        type Scopes InstancesStartReplica =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesStartReplica{..}
           = go _iProject _iInstance (Just AltJSON)
               sQLAdminService

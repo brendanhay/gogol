@@ -89,6 +89,9 @@ ssmLanguage
 instance GoogleRequest ScoresSubmitMultiple where
         type Rs ScoresSubmitMultiple =
              PlayerScoreListResponse
+        type Scopes ScoresSubmitMultiple =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient ScoresSubmitMultiple{..}
           = go _ssmLanguage (Just AltJSON) _ssmPayload
               gamesService

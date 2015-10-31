@@ -88,6 +88,9 @@ uadUserKey
 
 instance GoogleRequest UsersAliasesDelete where
         type Rs UsersAliasesDelete = ()
+        type Scopes UsersAliasesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.alias"]
         requestClient UsersAliasesDelete{..}
           = go _uadUserKey _uadAlias (Just AltJSON)
               directoryService

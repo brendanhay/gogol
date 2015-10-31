@@ -121,6 +121,8 @@ cppUserId
 
 instance GoogleRequest CollectionviewersPatch where
         type Rs CollectionviewersPatch = User
+        type Scopes CollectionviewersPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionviewersPatch{..}
           = go _cppEnterpriseId _cppCollectionId _cppUserId
               (Just AltJSON)

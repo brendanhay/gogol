@@ -112,6 +112,9 @@ cgCommentId
 
 instance GoogleRequest CommentsGet where
         type Rs CommentsGet = Comment
+        type Scopes CommentsGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient CommentsGet{..}
           = go _cgBlogId _cgPostId _cgCommentId _cgView
               (Just AltJSON)

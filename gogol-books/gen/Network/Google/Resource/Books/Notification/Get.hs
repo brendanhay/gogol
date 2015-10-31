@@ -98,6 +98,8 @@ ngSource = lens _ngSource (\ s a -> s{_ngSource = a})
 
 instance GoogleRequest NotificationGet where
         type Rs NotificationGet = Notification
+        type Scopes NotificationGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient NotificationGet{..}
           = go (Just _ngNotificationId) _ngLocale _ngSource
               (Just AltJSON)

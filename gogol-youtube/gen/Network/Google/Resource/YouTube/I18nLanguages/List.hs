@@ -89,6 +89,11 @@ illHl = lens _illHl (\ s a -> s{_illHl = a})
 
 instance GoogleRequest I18nLanguagesList where
         type Rs I18nLanguagesList = I18nLanguageListResponse
+        type Scopes I18nLanguagesList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient I18nLanguagesList{..}
           = go (Just _illPart) (Just _illHl) (Just AltJSON)
               youTubeService

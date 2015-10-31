@@ -88,6 +88,8 @@ pgId = lens _pgId (\ s a -> s{_pgId = a}) . _Coerce
 
 instance GoogleRequest PlacementsGet where
         type Rs PlacementsGet = Placement
+        type Scopes PlacementsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementsGet{..}
           = go _pgProFileId _pgId (Just AltJSON)
               dFAReportingService

@@ -91,6 +91,8 @@ ctiPayload
 
 instance GoogleRequest CommentThreadsInsert where
         type Rs CommentThreadsInsert = CommentThread
+        type Scopes CommentThreadsInsert =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentThreadsInsert{..}
           = go (Just _ctiPart) (Just AltJSON) _ctiPayload
               youTubeService

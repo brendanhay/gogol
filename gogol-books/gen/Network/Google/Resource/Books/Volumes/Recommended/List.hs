@@ -102,6 +102,8 @@ vrlSource
 
 instance GoogleRequest VolumesRecommendedList where
         type Rs VolumesRecommendedList = Volumes
+        type Scopes VolumesRecommendedList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient VolumesRecommendedList{..}
           = go _vrlLocale _vrlMaxAllowedMaturityRating
               _vrlSource

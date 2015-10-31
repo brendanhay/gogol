@@ -88,6 +88,11 @@ ugUser = lens _ugUser (\ s a -> s{_ugUser = a})
 
 instance GoogleRequest UsersGet where
         type Rs UsersGet = User
+        type Scopes UsersGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
         requestClient UsersGet{..}
           = go _ugProject _ugUser (Just AltJSON)
               userAccountsService

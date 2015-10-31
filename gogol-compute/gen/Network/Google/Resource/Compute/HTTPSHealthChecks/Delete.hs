@@ -90,6 +90,9 @@ hhcdHTTPSHealthCheck
 
 instance GoogleRequest HTTPSHealthChecksDelete where
         type Rs HTTPSHealthChecksDelete = Operation
+        type Scopes HTTPSHealthChecksDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient HTTPSHealthChecksDelete{..}
           = go _hhcdProject _hhcdHTTPSHealthCheck
               (Just AltJSON)

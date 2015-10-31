@@ -91,6 +91,8 @@ eldlEditId
 
 instance GoogleRequest EditsListingsDeleteall where
         type Rs EditsListingsDeleteall = ()
+        type Scopes EditsListingsDeleteall =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsDeleteall{..}
           = go _eldlPackageName _eldlEditId (Just AltJSON)
               androidPublisherService

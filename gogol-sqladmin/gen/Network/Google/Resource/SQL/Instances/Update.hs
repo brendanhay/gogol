@@ -105,6 +105,9 @@ iuInstance
 
 instance GoogleRequest InstancesUpdate where
         type Rs InstancesUpdate = Operation
+        type Scopes InstancesUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesUpdate{..}
           = go _iuProject _iuInstance (Just AltJSON) _iuPayload
               sQLAdminService

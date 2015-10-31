@@ -152,6 +152,9 @@ cdlMaxResults
 
 instance GoogleRequest ChromeosDevicesList where
         type Rs ChromeosDevicesList = ChromeOSDevices
+        type Scopes ChromeosDevicesList =
+             '["https://www.googleapis.com/auth/admin.directory.device.chromeos",
+               "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"]
         requestClient ChromeosDevicesList{..}
           = go _cdlCustomerId _cdlOrderBy _cdlSortOrder
               _cdlQuery

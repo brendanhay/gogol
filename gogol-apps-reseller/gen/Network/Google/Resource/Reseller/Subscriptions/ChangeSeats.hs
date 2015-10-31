@@ -104,6 +104,8 @@ scsSubscriptionId
 
 instance GoogleRequest SubscriptionsChangeSeats where
         type Rs SubscriptionsChangeSeats = Subscription
+        type Scopes SubscriptionsChangeSeats =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsChangeSeats{..}
           = go _scsCustomerId _scsSubscriptionId (Just AltJSON)
               _scsPayload

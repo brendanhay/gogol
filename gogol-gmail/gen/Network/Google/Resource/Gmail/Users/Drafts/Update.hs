@@ -111,6 +111,10 @@ uduId = lens _uduId (\ s a -> s{_uduId = a})
 
 instance GoogleRequest UsersDraftsUpdate where
         type Rs UsersDraftsUpdate = Draft
+        type Scopes UsersDraftsUpdate =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersDraftsUpdate{..}
           = go _uduUserId _uduId (Just AltJSON) _uduPayload
               gmailService
@@ -122,6 +126,8 @@ instance GoogleRequest UsersDraftsUpdate where
 instance GoogleRequest
          (MediaUpload UsersDraftsUpdate) where
         type Rs (MediaUpload UsersDraftsUpdate) = Draft
+        type Scopes (MediaUpload UsersDraftsUpdate) =
+             Scopes UsersDraftsUpdate
         requestClient
           (MediaUpload UsersDraftsUpdate{..} body)
           = go _uduUserId _uduId (Just AltJSON) (Just AltMedia)

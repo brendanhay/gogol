@@ -78,6 +78,10 @@ mclReportType
 
 instance GoogleRequest MetadataColumnsList where
         type Rs MetadataColumnsList = Columns
+        type Scopes MetadataColumnsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient MetadataColumnsList{..}
           = go _mclReportType (Just AltJSON) analyticsService
           where go

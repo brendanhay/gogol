@@ -140,6 +140,9 @@ clId = lens _clId (\ s a -> s{_clId = a})
 
 instance GoogleRequest CaptionsList where
         type Rs CaptionsList = CaptionListResponse
+        type Scopes CaptionsList =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsList{..}
           = go (Just _clPart) (Just _clVideoId) _clOnBehalfOf
               _clOnBehalfOfContentOwner

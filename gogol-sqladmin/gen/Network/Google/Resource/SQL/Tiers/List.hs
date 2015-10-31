@@ -79,6 +79,9 @@ tlProject
 
 instance GoogleRequest TiersList where
         type Rs TiersList = TiersListResponse
+        type Scopes TiersList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient TiersList{..}
           = go _tlProject (Just AltJSON) sQLAdminService
           where go

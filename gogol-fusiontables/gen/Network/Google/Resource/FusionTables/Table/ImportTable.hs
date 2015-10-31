@@ -112,6 +112,8 @@ titEncoding
 
 instance GoogleRequest TableImportTable where
         type Rs TableImportTable = Table
+        type Scopes TableImportTable =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TableImportTable{..}
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
@@ -124,6 +126,8 @@ instance GoogleRequest TableImportTable where
 instance GoogleRequest (MediaUpload TableImportTable)
          where
         type Rs (MediaUpload TableImportTable) = Table
+        type Scopes (MediaUpload TableImportTable) =
+             Scopes TableImportTable
         requestClient (MediaUpload TableImportTable{..} body)
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)

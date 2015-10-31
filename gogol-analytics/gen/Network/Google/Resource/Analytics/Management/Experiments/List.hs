@@ -132,6 +132,10 @@ melMaxResults
 instance GoogleRequest ManagementExperimentsList
          where
         type Rs ManagementExperimentsList = Experiments
+        type Scopes ManagementExperimentsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementExperimentsList{..}
           = go _melAccountId _melWebPropertyId _melProFileId
               _melStartIndex

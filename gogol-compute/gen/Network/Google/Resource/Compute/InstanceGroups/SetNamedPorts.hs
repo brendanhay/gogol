@@ -117,6 +117,9 @@ igsnpInstanceGroup
 instance GoogleRequest InstanceGroupsSetNamedPorts
          where
         type Rs InstanceGroupsSetNamedPorts = Operation
+        type Scopes InstanceGroupsSetNamedPorts =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsSetNamedPorts{..}
           = go _igsnpProject _igsnpZone _igsnpInstanceGroup
               (Just AltJSON)

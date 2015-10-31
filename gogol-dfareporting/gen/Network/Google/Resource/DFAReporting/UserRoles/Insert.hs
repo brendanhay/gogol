@@ -89,6 +89,8 @@ uriPayload
 
 instance GoogleRequest UserRolesInsert where
         type Rs UserRolesInsert = UserRole
+        type Scopes UserRolesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolesInsert{..}
           = go _uriProFileId (Just AltJSON) _uriPayload
               dFAReportingService

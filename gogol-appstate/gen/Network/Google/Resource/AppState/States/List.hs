@@ -75,6 +75,8 @@ slIncludeData
 
 instance GoogleRequest StatesList where
         type Rs StatesList = ListResponse
+        type Scopes StatesList =
+             '["https://www.googleapis.com/auth/appstate"]
         requestClient StatesList{..}
           = go (Just _slIncludeData) (Just AltJSON)
               appStateService

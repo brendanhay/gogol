@@ -112,6 +112,9 @@ psFetchBodies
 
 instance GoogleRequest PostsSearch where
         type Rs PostsSearch = PostList
+        type Scopes PostsSearch =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostsSearch{..}
           = go _psBlogId (Just _psQ) (Just _psOrderBy)
               (Just _psFetchBodies)

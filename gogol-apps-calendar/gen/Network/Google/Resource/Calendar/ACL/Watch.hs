@@ -149,6 +149,8 @@ awMaxResults
 
 instance GoogleRequest ACLWatch where
         type Rs ACLWatch = Channel
+        type Scopes ACLWatch =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient ACLWatch{..}
           = go _awCalendarId _awSyncToken _awShowDeleted
               _awPageToken

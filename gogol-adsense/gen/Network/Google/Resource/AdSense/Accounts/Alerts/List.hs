@@ -89,6 +89,9 @@ aalAccountId
 
 instance GoogleRequest AccountsAlertsList where
         type Rs AccountsAlertsList = Alerts
+        type Scopes AccountsAlertsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsAlertsList{..}
           = go _aalAccountId _aalLocale (Just AltJSON)
               adSenseService

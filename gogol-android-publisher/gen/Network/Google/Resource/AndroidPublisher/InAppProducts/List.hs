@@ -115,6 +115,8 @@ iaplMaxResults
 
 instance GoogleRequest InAppProductsList where
         type Rs InAppProductsList = InAppProductsListResponse
+        type Scopes InAppProductsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient InAppProductsList{..}
           = go _iaplPackageName _iaplToken _iaplStartIndex
               _iaplMaxResults

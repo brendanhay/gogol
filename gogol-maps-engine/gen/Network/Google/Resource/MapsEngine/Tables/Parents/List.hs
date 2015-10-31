@@ -102,6 +102,9 @@ tMaxResults
 
 instance GoogleRequest TablesParentsList where
         type Rs TablesParentsList = ParentsListResponse
+        type Scopes TablesParentsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient TablesParentsList{..}
           = go _tId _tPageToken _tMaxResults (Just AltJSON)
               mapsEngineService

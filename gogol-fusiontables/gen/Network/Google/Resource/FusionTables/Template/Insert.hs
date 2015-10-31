@@ -88,6 +88,8 @@ temTableId
 
 instance GoogleRequest TemplateInsert where
         type Rs TemplateInsert = Template
+        type Scopes TemplateInsert =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TemplateInsert{..}
           = go _temTableId (Just AltJSON) _temPayload
               fusionTablesService

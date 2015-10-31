@@ -185,6 +185,8 @@ amvdCallback
 instance GoogleRequest AppsModulesVersionsDelete
          where
         type Rs AppsModulesVersionsDelete = Operation
+        type Scopes AppsModulesVersionsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsModulesVersionsDelete{..}
           = go _amvdAppsId _amvdModulesId _amvdVersionsId
               _amvdXgafv

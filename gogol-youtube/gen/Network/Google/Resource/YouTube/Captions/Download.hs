@@ -154,6 +154,9 @@ capaTfmt = lens _capaTfmt (\ s a -> s{_capaTfmt = a})
 
 instance GoogleRequest CaptionsDownload where
         type Rs CaptionsDownload = ()
+        type Scopes CaptionsDownload =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsDownload{..}
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
@@ -168,6 +171,8 @@ instance GoogleRequest CaptionsDownload where
 instance GoogleRequest
          (MediaDownload CaptionsDownload) where
         type Rs (MediaDownload CaptionsDownload) = Stream
+        type Scopes (MediaDownload CaptionsDownload) =
+             Scopes CaptionsDownload
         requestClient (MediaDownload CaptionsDownload{..})
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner

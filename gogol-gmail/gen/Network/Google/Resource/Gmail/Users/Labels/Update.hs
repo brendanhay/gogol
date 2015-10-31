@@ -99,6 +99,10 @@ uluId = lens _uluId (\ s a -> s{_uluId = a})
 
 instance GoogleRequest UsersLabelsUpdate where
         type Rs UsersLabelsUpdate = Label
+        type Scopes UsersLabelsUpdate =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersLabelsUpdate{..}
           = go _uluUserId _uluId (Just AltJSON) _uluPayload
               gmailService

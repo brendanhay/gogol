@@ -89,6 +89,9 @@ slMaxResults
 
 instance GoogleRequest SavedadstylesList where
         type Rs SavedadstylesList = SavedAdStyles
+        type Scopes SavedadstylesList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient SavedadstylesList{..}
           = go _slPageToken _slMaxResults (Just AltJSON)
               adSenseService

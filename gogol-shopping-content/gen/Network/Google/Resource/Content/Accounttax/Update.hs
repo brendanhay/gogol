@@ -113,6 +113,8 @@ auuDryRun
 
 instance GoogleRequest AccounttaxUpdate where
         type Rs AccounttaxUpdate = AccountTax
+        type Scopes AccounttaxUpdate =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccounttaxUpdate{..}
           = go _auuMerchantId _auuAccountId _auuDryRun
               (Just AltJSON)

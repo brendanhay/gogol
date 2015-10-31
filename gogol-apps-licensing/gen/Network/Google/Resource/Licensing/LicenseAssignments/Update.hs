@@ -114,6 +114,8 @@ lauProductId
 
 instance GoogleRequest LicenseAssignmentsUpdate where
         type Rs LicenseAssignmentsUpdate = LicenseAssignment
+        type Scopes LicenseAssignmentsUpdate =
+             '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient LicenseAssignmentsUpdate{..}
           = go _lauProductId _lauSKUId _lauUserId
               (Just AltJSON)

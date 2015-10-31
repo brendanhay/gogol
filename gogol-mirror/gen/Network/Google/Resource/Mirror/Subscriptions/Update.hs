@@ -87,6 +87,8 @@ suId = lens _suId (\ s a -> s{_suId = a})
 
 instance GoogleRequest SubscriptionsUpdate where
         type Rs SubscriptionsUpdate = Subscription
+        type Scopes SubscriptionsUpdate =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient SubscriptionsUpdate{..}
           = go _suId (Just AltJSON) _suPayload mirrorService
           where go

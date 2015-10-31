@@ -167,6 +167,7 @@ clcCallback
 
 instance GoogleRequest CompaniesLeadsCreate where
         type Rs CompaniesLeadsCreate = CreateLeadResponse
+        type Scopes CompaniesLeadsCreate = '[]
         requestClient CompaniesLeadsCreate{..}
           = go _clcCompanyId _clcXgafv _clcUploadProtocol
               (Just _clcPp)

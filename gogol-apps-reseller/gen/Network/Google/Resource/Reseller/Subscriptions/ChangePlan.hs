@@ -105,6 +105,8 @@ scpSubscriptionId
 
 instance GoogleRequest SubscriptionsChangePlan where
         type Rs SubscriptionsChangePlan = Subscription
+        type Scopes SubscriptionsChangePlan =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsChangePlan{..}
           = go _scpCustomerId _scpSubscriptionId (Just AltJSON)
               _scpPayload

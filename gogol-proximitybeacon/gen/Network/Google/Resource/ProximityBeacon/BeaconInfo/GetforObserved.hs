@@ -158,6 +158,7 @@ bigoCallback
 instance GoogleRequest BeaconInfoGetforObserved where
         type Rs BeaconInfoGetforObserved =
              GetInfoForObservedBeaconsResponse
+        type Scopes BeaconInfoGetforObserved = '[]
         requestClient BeaconInfoGetforObserved{..}
           = go _bigoXgafv _bigoUploadProtocol (Just _bigoPp)
               _bigoAccessToken

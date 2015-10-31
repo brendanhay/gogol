@@ -89,6 +89,8 @@ uuUserKey
 
 instance GoogleRequest UsersUndelete where
         type Rs UsersUndelete = ()
+        type Scopes UsersUndelete =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersUndelete{..}
           = go _uuUserKey (Just AltJSON) _uuPayload
               directoryService

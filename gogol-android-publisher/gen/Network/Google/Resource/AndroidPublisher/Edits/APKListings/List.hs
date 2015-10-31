@@ -109,6 +109,8 @@ eapkllEditId
 instance GoogleRequest EditsAPKListingsList where
         type Rs EditsAPKListingsList =
              APKListingsListResponse
+        type Scopes EditsAPKListingsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsAPKListingsList{..}
           = go _eapkllPackageName _eapkllEditId
               _eapkllAPKVersionCode

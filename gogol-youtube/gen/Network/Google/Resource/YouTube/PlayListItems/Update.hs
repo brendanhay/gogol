@@ -101,6 +101,10 @@ pliuPayload
 
 instance GoogleRequest PlayListItemsUpdate where
         type Rs PlayListItemsUpdate = PlayListItem
+        type Scopes PlayListItemsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListItemsUpdate{..}
           = go (Just _pliuPart) (Just AltJSON) _pliuPayload
               youTubeService

@@ -101,6 +101,8 @@ dgDeviceId
 
 instance GoogleRequest DevicesGet where
         type Rs DevicesGet = Device
+        type Scopes DevicesGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient DevicesGet{..}
           = go _dgEnterpriseId _dgUserId _dgDeviceId
               (Just AltJSON)

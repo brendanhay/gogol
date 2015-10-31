@@ -104,6 +104,8 @@ actdcTagId
 instance GoogleRequest AccountsContainersTagsDelete
          where
         type Rs AccountsContainersTagsDelete = ()
+        type Scopes AccountsContainersTagsDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersTagsDelete{..}
           = go _actdcAccountId _actdcContainerId _actdcTagId
               (Just AltJSON)

@@ -167,6 +167,8 @@ amgCallback
 
 instance GoogleRequest AppsModulesGet where
         type Rs AppsModulesGet = Module
+        type Scopes AppsModulesGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsModulesGet{..}
           = go _amgAppsId _amgModulesId _amgXgafv
               _amgUploadProtocol

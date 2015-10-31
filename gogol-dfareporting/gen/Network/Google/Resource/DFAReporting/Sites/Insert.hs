@@ -88,6 +88,8 @@ sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
 
 instance GoogleRequest SitesInsert where
         type Rs SitesInsert = Site
+        type Scopes SitesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SitesInsert{..}
           = go _sProFileId (Just AltJSON) _sPayload
               dFAReportingService

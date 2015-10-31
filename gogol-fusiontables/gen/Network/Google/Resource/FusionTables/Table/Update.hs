@@ -103,6 +103,8 @@ tabTableId
 
 instance GoogleRequest TableUpdate where
         type Rs TableUpdate = Table
+        type Scopes TableUpdate =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TableUpdate{..}
           = go _tabTableId _tabReplaceViewDefinition
               (Just AltJSON)

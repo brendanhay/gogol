@@ -87,6 +87,9 @@ tgTask = lens _tgTask (\ s a -> s{_tgTask = a})
 
 instance GoogleRequest TasksGet where
         type Rs TasksGet = Task
+        type Scopes TasksGet =
+             '["https://www.googleapis.com/auth/tasks",
+               "https://www.googleapis.com/auth/tasks.readonly"]
         requestClient TasksGet{..}
           = go _tgTaskList _tgTask (Just AltJSON)
               appsTasksService

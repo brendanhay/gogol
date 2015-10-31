@@ -103,6 +103,9 @@ instance GoogleRequest AchievementDefinitionsList
          where
         type Rs AchievementDefinitionsList =
              AchievementDefinitionsListResponse
+        type Scopes AchievementDefinitionsList =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementDefinitionsList{..}
           = go _adlLanguage _adlPageToken _adlMaxResults
               (Just AltJSON)

@@ -94,6 +94,9 @@ instance GoogleRequest AccountsContainersFoldersList
          where
         type Rs AccountsContainersFoldersList =
              ListFoldersResponse
+        type Scopes AccountsContainersFoldersList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersFoldersList{..}
           = go _acflAccountId _acflContainerId (Just AltJSON)
               tagManagerService

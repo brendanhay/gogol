@@ -140,6 +140,8 @@ instance GoogleRequest EditsExpansionFilesUpload
          where
         type Rs EditsExpansionFilesUpload =
              ExpansionFilesUploadResponse
+        type Scopes EditsExpansionFilesUpload =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsExpansionFilesUpload{..}
           = go _ePackageName _eEditId _eAPKVersionCode
               _eExpansionFileType
@@ -154,6 +156,8 @@ instance GoogleRequest
          (MediaUpload EditsExpansionFilesUpload) where
         type Rs (MediaUpload EditsExpansionFilesUpload) =
              ExpansionFilesUploadResponse
+        type Scopes (MediaUpload EditsExpansionFilesUpload) =
+             Scopes EditsExpansionFilesUpload
         requestClient
           (MediaUpload EditsExpansionFilesUpload{..} body)
           = go _ePackageName _eEditId _eAPKVersionCode

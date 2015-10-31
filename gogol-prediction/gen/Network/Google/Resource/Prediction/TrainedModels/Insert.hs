@@ -88,6 +88,11 @@ tmiPayload
 
 instance GoogleRequest TrainedModelsInsert where
         type Rs TrainedModelsInsert = Insert2
+        type Scopes TrainedModelsInsert =
+             '["https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write",
+               "https://www.googleapis.com/auth/prediction"]
         requestClient TrainedModelsInsert{..}
           = go _tmiProject (Just AltJSON) _tmiPayload
               predictionService

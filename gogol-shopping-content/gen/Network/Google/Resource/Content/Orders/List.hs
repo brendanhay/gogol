@@ -177,6 +177,8 @@ olMaxResults
 
 instance GoogleRequest OrdersList where
         type Rs OrdersList = OrdersListResponse
+        type Scopes OrdersList =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersList{..}
           = go _olMerchantId _olPlacedDateEnd _olOrderBy
               _olAcknowledged

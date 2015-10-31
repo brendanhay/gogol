@@ -115,6 +115,9 @@ dpInstance
 
 instance GoogleRequest DatabasesPatch where
         type Rs DatabasesPatch = Operation
+        type Scopes DatabasesPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesPatch{..}
           = go _dpProject _dpInstance _dpDatabase
               (Just AltJSON)

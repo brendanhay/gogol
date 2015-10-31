@@ -149,6 +149,9 @@ ciSync = lens _ciSync (\ s a -> s{_ciSync = a})
 
 instance GoogleRequest CaptionsInsert where
         type Rs CaptionsInsert = Caption
+        type Scopes CaptionsInsert =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsInsert{..}
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
@@ -163,6 +166,8 @@ instance GoogleRequest CaptionsInsert where
 instance GoogleRequest (MediaUpload CaptionsInsert)
          where
         type Rs (MediaUpload CaptionsInsert) = Caption
+        type Scopes (MediaUpload CaptionsInsert) =
+             Scopes CaptionsInsert
         requestClient (MediaUpload CaptionsInsert{..} body)
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner

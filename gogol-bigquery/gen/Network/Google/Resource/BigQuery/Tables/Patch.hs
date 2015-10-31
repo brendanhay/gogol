@@ -119,6 +119,9 @@ tpTableId
 
 instance GoogleRequest TablesPatch where
         type Rs TablesPatch = Table
+        type Scopes TablesPatch =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient TablesPatch{..}
           = go _tpProjectId _tpDataSetId _tpTableId
               (Just AltJSON)

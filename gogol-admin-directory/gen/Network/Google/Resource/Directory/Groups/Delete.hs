@@ -76,6 +76,8 @@ gdGroupKey
 
 instance GoogleRequest GroupsDelete where
         type Rs GroupsDelete = ()
+        type Scopes GroupsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
         requestClient GroupsDelete{..}
           = go _gdGroupKey (Just AltJSON) directoryService
           where go

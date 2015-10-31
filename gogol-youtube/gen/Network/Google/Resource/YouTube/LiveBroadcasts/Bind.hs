@@ -159,6 +159,9 @@ lbbStreamId
 
 instance GoogleRequest LiveBroadcastsBind where
         type Rs LiveBroadcastsBind = LiveBroadcast
+        type Scopes LiveBroadcastsBind =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveBroadcastsBind{..}
           = go (Just _lbbId) (Just _lbbPart)
               _lbbOnBehalfOfContentOwner

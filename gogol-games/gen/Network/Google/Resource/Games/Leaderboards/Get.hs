@@ -87,6 +87,9 @@ lgLanguage
 
 instance GoogleRequest LeaderboardsGet where
         type Rs LeaderboardsGet = Leaderboard
+        type Scopes LeaderboardsGet =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient LeaderboardsGet{..}
           = go _lgLeaderboardId _lgLanguage (Just AltJSON)
               gamesService

@@ -77,6 +77,9 @@ slCustomerId
 
 instance GoogleRequest SchemasList where
         type Rs SchemasList = Schemas
+        type Scopes SchemasList =
+             '["https://www.googleapis.com/auth/admin.directory.userschema",
+               "https://www.googleapis.com/auth/admin.directory.userschema.readonly"]
         requestClient SchemasList{..}
           = go _slCustomerId (Just AltJSON) directoryService
           where go

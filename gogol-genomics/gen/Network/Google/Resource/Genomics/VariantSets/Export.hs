@@ -175,6 +175,10 @@ vseCallback
 
 instance GoogleRequest VariantSetsExport where
         type Rs VariantSetsExport = Operation
+        type Scopes VariantSetsExport =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantSetsExport{..}
           = go _vseVariantSetId _vseXgafv _vseUploadProtocol
               (Just _vsePp)

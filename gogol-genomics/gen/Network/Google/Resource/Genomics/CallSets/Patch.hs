@@ -185,6 +185,9 @@ cspCallback
 
 instance GoogleRequest CallSetsPatch where
         type Rs CallSetsPatch = CallSet
+        type Scopes CallSetsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient CallSetsPatch{..}
           = go _cspCallSetId _cspXgafv _cspUploadProtocol
               _cspUpdateMask

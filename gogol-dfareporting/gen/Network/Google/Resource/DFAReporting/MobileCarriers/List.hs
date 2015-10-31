@@ -79,6 +79,8 @@ mclProFileId
 instance GoogleRequest MobileCarriersList where
         type Rs MobileCarriersList =
              MobileCarriersListResponse
+        type Scopes MobileCarriersList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient MobileCarriersList{..}
           = go _mclProFileId (Just AltJSON) dFAReportingService
           where go

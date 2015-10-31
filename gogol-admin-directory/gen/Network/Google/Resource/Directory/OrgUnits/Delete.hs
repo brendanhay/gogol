@@ -92,6 +92,8 @@ oudCustomerId
 
 instance GoogleRequest OrgUnitsDelete where
         type Rs OrgUnitsDelete = ()
+        type Scopes OrgUnitsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit"]
         requestClient OrgUnitsDelete{..}
           = go _oudCustomerId _oudOrgUnitPath (Just AltJSON)
               directoryService

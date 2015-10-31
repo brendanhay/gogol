@@ -91,6 +91,9 @@ gaiPayload
 
 instance GoogleRequest GlobalAddressesInsert where
         type Rs GlobalAddressesInsert = Operation
+        type Scopes GlobalAddressesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient GlobalAddressesInsert{..}
           = go _gaiProject (Just AltJSON) _gaiPayload
               computeService

@@ -139,6 +139,9 @@ lbiOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest LiveBroadcastsInsert where
         type Rs LiveBroadcastsInsert = LiveBroadcast
+        type Scopes LiveBroadcastsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveBroadcastsInsert{..}
           = go (Just _lbiPart) _lbiOnBehalfOfContentOwner
               _lbiOnBehalfOfContentOwnerChannel

@@ -90,6 +90,10 @@ udsdUserId
 
 instance GoogleRequest UsersDataSourcesDelete where
         type Rs UsersDataSourcesDelete = DataSource
+        type Scopes UsersDataSourcesDelete =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersDataSourcesDelete{..}
           = go _udsdUserId _udsdDataSourceId (Just AltJSON)
               fitnessService

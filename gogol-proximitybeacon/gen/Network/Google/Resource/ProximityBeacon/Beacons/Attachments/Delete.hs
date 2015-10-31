@@ -164,6 +164,7 @@ badCallback
 
 instance GoogleRequest BeaconsAttachmentsDelete where
         type Rs BeaconsAttachmentsDelete = Empty
+        type Scopes BeaconsAttachmentsDelete = '[]
         requestClient BeaconsAttachmentsDelete{..}
           = go _badAttachmentName _badXgafv _badUploadProtocol
               (Just _badPp)

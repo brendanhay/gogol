@@ -130,6 +130,8 @@ actuAccountId
 instance GoogleRequest
          AccountsContainersTriggersUpdate where
         type Rs AccountsContainersTriggersUpdate = Trigger
+        type Scopes AccountsContainersTriggersUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersTriggersUpdate{..}
           = go _actuAccountId _actuContainerId _actuTriggerId
               _actuFingerprint

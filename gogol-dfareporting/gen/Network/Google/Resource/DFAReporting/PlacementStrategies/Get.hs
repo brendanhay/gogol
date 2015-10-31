@@ -90,6 +90,8 @@ psgId
 
 instance GoogleRequest PlacementStrategiesGet where
         type Rs PlacementStrategiesGet = PlacementStrategy
+        type Scopes PlacementStrategiesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementStrategiesGet{..}
           = go _psgProFileId _psgId (Just AltJSON)
               dFAReportingService

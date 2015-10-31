@@ -91,6 +91,9 @@ ragRoleAssignmentId
 
 instance GoogleRequest RoleAssignmentsGet where
         type Rs RoleAssignmentsGet = RoleAssignment
+        type Scopes RoleAssignmentsGet =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient RoleAssignmentsGet{..}
           = go _ragCustomer _ragRoleAssignmentId (Just AltJSON)
               directoryService

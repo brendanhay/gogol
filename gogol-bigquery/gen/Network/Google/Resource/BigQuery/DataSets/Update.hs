@@ -104,6 +104,9 @@ dsuProjectId
 
 instance GoogleRequest DataSetsUpdate where
         type Rs DataSetsUpdate = DataSet
+        type Scopes DataSetsUpdate =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient DataSetsUpdate{..}
           = go _dsuProjectId _dsuDataSetId (Just AltJSON)
               _dsuPayload

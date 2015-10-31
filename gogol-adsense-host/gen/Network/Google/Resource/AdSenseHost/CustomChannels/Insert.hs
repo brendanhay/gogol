@@ -90,6 +90,8 @@ cciAdClientId
 
 instance GoogleRequest CustomChannelsInsert where
         type Rs CustomChannelsInsert = CustomChannel
+        type Scopes CustomChannelsInsert =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient CustomChannelsInsert{..}
           = go _cciAdClientId (Just AltJSON) _cciPayload
               adSenseHostService

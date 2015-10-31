@@ -77,6 +77,9 @@ cgCalendarId
 
 instance GoogleRequest CalendarsGet where
         type Rs CalendarsGet = Calendar
+        type Scopes CalendarsGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient CalendarsGet{..}
           = go _cgCalendarId (Just AltJSON) appsCalendarService
           where go

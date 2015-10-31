@@ -130,6 +130,8 @@ pogAndroidId
 
 instance GoogleRequest PromoOfferGet where
         type Rs PromoOfferGet = Offers
+        type Scopes PromoOfferGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient PromoOfferGet{..}
           = go _pogManufacturer _pogSerial _pogDevice _pogModel
               _pogProduct

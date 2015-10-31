@@ -104,6 +104,11 @@ cgManagedZone
 
 instance GoogleRequest ChangesGet where
         type Rs ChangesGet = Change
+        type Scopes ChangesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ChangesGet{..}
           = go _cgProject _cgManagedZone _cgChangeId
               (Just AltJSON)

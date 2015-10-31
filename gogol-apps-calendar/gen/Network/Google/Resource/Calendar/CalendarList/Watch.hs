@@ -167,6 +167,9 @@ clwMaxResults
 
 instance GoogleRequest CalendarListWatch where
         type Rs CalendarListWatch = Channel
+        type Scopes CalendarListWatch =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient CalendarListWatch{..}
           = go _clwSyncToken _clwMinAccessRole _clwShowDeleted
               _clwShowHidden

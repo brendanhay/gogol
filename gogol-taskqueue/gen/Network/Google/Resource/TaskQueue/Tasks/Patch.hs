@@ -126,6 +126,9 @@ tpNewLeaseSeconds
 
 instance GoogleRequest TasksPatch where
         type Rs TasksPatch = Task
+        type Scopes TasksPatch =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksPatch{..}
           = go _tpProject _tpTaskqueue _tpTask
               (Just _tpNewLeaseSeconds)

@@ -159,6 +159,7 @@ bdCallback
 
 instance GoogleRequest BeaconsDeactivate where
         type Rs BeaconsDeactivate = Empty
+        type Scopes BeaconsDeactivate = '[]
         requestClient BeaconsDeactivate{..}
           = go _bdBeaconName _bdXgafv _bdUploadProtocol
               (Just _bdPp)

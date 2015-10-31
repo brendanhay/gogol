@@ -266,6 +266,10 @@ instance GoogleRequest
          ReadGroupSetsCoverageBucketsList where
         type Rs ReadGroupSetsCoverageBucketsList =
              ListCoverageBucketsResponse
+        type Scopes ReadGroupSetsCoverageBucketsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient ReadGroupSetsCoverageBucketsList{..}
           = go _rgscblReadGroupSetId _rgscblXgafv
               _rgscblUploadProtocol

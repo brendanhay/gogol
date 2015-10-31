@@ -123,6 +123,10 @@ mpflMaxResults
 
 instance GoogleRequest ManagementProFilesList where
         type Rs ManagementProFilesList = ProFiles
+        type Scopes ManagementProFilesList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementProFilesList{..}
           = go _mpflAccountId _mpflWebPropertyId
               _mpflStartIndex

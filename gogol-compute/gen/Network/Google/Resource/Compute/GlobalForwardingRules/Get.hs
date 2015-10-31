@@ -93,6 +93,10 @@ gfrgForwardingRule
 
 instance GoogleRequest GlobalForwardingRulesGet where
         type Rs GlobalForwardingRulesGet = ForwardingRule
+        type Scopes GlobalForwardingRulesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalForwardingRulesGet{..}
           = go _gfrgProject _gfrgForwardingRule (Just AltJSON)
               computeService

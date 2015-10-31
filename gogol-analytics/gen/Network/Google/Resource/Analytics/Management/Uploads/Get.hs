@@ -117,6 +117,10 @@ mugUploadId
 
 instance GoogleRequest ManagementUploadsGet where
         type Rs ManagementUploadsGet = Upload
+        type Scopes ManagementUploadsGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementUploadsGet{..}
           = go _mugAccountId _mugWebPropertyId
               _mugCustomDataSourceId

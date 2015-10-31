@@ -91,6 +91,9 @@ iprInstance
 
 instance GoogleRequest InstancesPromoteReplica where
         type Rs InstancesPromoteReplica = Operation
+        type Scopes InstancesPromoteReplica =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesPromoteReplica{..}
           = go _iprProject _iprInstance (Just AltJSON)
               sQLAdminService

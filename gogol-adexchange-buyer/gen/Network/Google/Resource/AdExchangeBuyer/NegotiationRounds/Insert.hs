@@ -90,6 +90,8 @@ nriNegotiationId
 
 instance GoogleRequest NegotiationRoundsInsert where
         type Rs NegotiationRoundsInsert = NegotiationRoundDTO
+        type Scopes NegotiationRoundsInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient NegotiationRoundsInsert{..}
           = go _nriNegotiationId (Just AltJSON) _nriPayload
               adExchangeBuyerService

@@ -238,6 +238,9 @@ rgMaxResults
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate =
              AdsenseReportsGenerateResponse
+        type Scopes ReportsGenerate =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient ReportsGenerate{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
@@ -260,6 +263,8 @@ instance GoogleRequest ReportsGenerate where
 instance GoogleRequest
          (MediaDownload ReportsGenerate) where
         type Rs (MediaDownload ReportsGenerate) = Stream
+        type Scopes (MediaDownload ReportsGenerate) =
+             Scopes ReportsGenerate
         requestClient (MediaDownload ReportsGenerate{..})
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)

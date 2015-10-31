@@ -77,6 +77,9 @@ lplId = lens _lplId (\ s a -> s{_lplId = a})
 instance GoogleRequest LayersPermissionsList where
         type Rs LayersPermissionsList =
              PermissionsListResponse
+        type Scopes LayersPermissionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient LayersPermissionsList{..}
           = go _lplId (Just AltJSON) mapsEngineService
           where go

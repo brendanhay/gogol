@@ -131,6 +131,8 @@ epUserId = lens _epUserId (\ s a -> s{_epUserId = a})
 
 instance GoogleRequest EntitlementsPatch where
         type Rs EntitlementsPatch = Entitlement
+        type Scopes EntitlementsPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EntitlementsPatch{..}
           = go _epEnterpriseId _epUserId _epEntitlementId
               _epInstall

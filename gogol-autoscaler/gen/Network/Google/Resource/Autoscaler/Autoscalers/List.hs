@@ -119,6 +119,9 @@ alMaxResults
 
 instance GoogleRequest AutoscalersList where
         type Rs AutoscalersList = AutoscalerListResponse
+        type Scopes AutoscalersList =
+             '["https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient AutoscalersList{..}
           = go _alProject _alZone _alFilter _alPageToken
               (Just _alMaxResults)

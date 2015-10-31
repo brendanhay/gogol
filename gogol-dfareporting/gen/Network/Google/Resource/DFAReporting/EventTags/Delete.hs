@@ -89,6 +89,8 @@ etdId
 
 instance GoogleRequest EventTagsDelete where
         type Rs EventTagsDelete = ()
+        type Scopes EventTagsDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient EventTagsDelete{..}
           = go _etdProFileId _etdId (Just AltJSON)
               dFAReportingService

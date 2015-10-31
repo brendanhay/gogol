@@ -101,6 +101,10 @@ zviPayload
 
 instance GoogleRequest ZoneViewsInsert where
         type Rs ZoneViewsInsert = Operation
+        type Scopes ZoneViewsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient ZoneViewsInsert{..}
           = go _zviProject _zviZone (Just AltJSON) _zviPayload
               resourceViewsService

@@ -117,6 +117,11 @@ gclId = lens _gclId (\ s a -> s{_gclId = a})
 instance GoogleRequest GuideCategoriesList where
         type Rs GuideCategoriesList =
              GuideCategoryListResponse
+        type Scopes GuideCategoriesList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient GuideCategoriesList{..}
           = go (Just _gclPart) _gclRegionCode (Just _gclHl)
               _gclId

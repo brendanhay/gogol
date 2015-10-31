@@ -153,6 +153,8 @@ mlrpspPosition
 instance GoogleRequest
          MyLibraryReadingPositionsSetPosition where
         type Rs MyLibraryReadingPositionsSetPosition = ()
+        type Scopes MyLibraryReadingPositionsSetPosition =
+             '["https://www.googleapis.com/auth/books"]
         requestClient
           MyLibraryReadingPositionsSetPosition{..}
           = go _mlrpspVolumeId (Just _mlrpspTimestamp)

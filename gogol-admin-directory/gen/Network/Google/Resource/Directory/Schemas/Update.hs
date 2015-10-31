@@ -101,6 +101,8 @@ suSchemaKey
 
 instance GoogleRequest SchemasUpdate where
         type Rs SchemasUpdate = Schema
+        type Scopes SchemasUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.userschema"]
         requestClient SchemasUpdate{..}
           = go _suCustomerId _suSchemaKey (Just AltJSON)
               _suPayload

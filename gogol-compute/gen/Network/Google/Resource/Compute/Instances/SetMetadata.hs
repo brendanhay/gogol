@@ -115,6 +115,9 @@ ismInstance
 
 instance GoogleRequest InstancesSetMetadata where
         type Rs InstancesSetMetadata = Operation
+        type Scopes InstancesSetMetadata =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesSetMetadata{..}
           = go _ismProject _ismZone _ismInstance (Just AltJSON)
               _ismPayload

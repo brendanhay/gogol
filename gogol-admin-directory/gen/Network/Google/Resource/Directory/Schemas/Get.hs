@@ -89,6 +89,9 @@ sgSchemaKey
 
 instance GoogleRequest SchemasGet where
         type Rs SchemasGet = Schema
+        type Scopes SchemasGet =
+             '["https://www.googleapis.com/auth/admin.directory.userschema",
+               "https://www.googleapis.com/auth/admin.directory.userschema.readonly"]
         requestClient SchemasGet{..}
           = go _sgCustomerId _sgSchemaKey (Just AltJSON)
               directoryService

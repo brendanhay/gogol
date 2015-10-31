@@ -121,6 +121,9 @@ instance GoogleRequest
          ManagementUnSampledReportsInsert where
         type Rs ManagementUnSampledReportsInsert =
              UnSampledReport
+        type Scopes ManagementUnSampledReportsInsert =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementUnSampledReportsInsert{..}
           = go _musriAccountId _musriWebPropertyId
               _musriProFileId

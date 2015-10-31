@@ -123,6 +123,9 @@ glMaxResults
 
 instance GoogleRequest GroupsList where
         type Rs GroupsList = Groups
+        type Scopes GroupsList =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
         requestClient GroupsList{..}
           = go _glDomain _glCustomer _glPageToken _glUserKey
               _glMaxResults

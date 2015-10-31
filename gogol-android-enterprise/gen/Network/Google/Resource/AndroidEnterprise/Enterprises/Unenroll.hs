@@ -77,6 +77,8 @@ euuEnterpriseId
 
 instance GoogleRequest EnterprisesUnenroll where
         type Rs EnterprisesUnenroll = ()
+        type Scopes EnterprisesUnenroll =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesUnenroll{..}
           = go _euuEnterpriseId (Just AltJSON)
               androidEnterpriseService

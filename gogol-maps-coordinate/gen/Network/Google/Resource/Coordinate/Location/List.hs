@@ -127,6 +127,9 @@ llMaxResults
 
 instance GoogleRequest LocationList where
         type Rs LocationList = LocationListResponse
+        type Scopes LocationList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
         requestClient LocationList{..}
           = go _llTeamId _llWorkerEmail
               (Just _llStartTimestampMs)

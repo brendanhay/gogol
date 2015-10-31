@@ -183,6 +183,10 @@ ctcCallback
 
 instance GoogleRequest CoursesTeachersCreate where
         type Rs CoursesTeachersCreate = Teacher
+        type Scopes CoursesTeachersCreate =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters"]
         requestClient CoursesTeachersCreate{..}
           = go _ctcCourseId _ctcXgafv _ctcUploadProtocol
               (Just _ctcPp)

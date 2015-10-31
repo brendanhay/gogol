@@ -79,6 +79,9 @@ plCustomer
 
 instance GoogleRequest PrivilegesList where
         type Rs PrivilegesList = Privileges
+        type Scopes PrivilegesList =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient PrivilegesList{..}
           = go _plCustomer (Just AltJSON) directoryService
           where go

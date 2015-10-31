@@ -140,6 +140,10 @@ instance GoogleRequest AutoscalersAggregatedList
          where
         type Rs AutoscalersAggregatedList =
              AutoscalerAggregatedList
+        type Scopes AutoscalersAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient AutoscalersAggregatedList{..}
           = go _autProject _autFilter _autPageToken
               (Just _autMaxResults)

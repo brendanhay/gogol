@@ -79,6 +79,7 @@ prPayload
 
 instance GoogleRequest PawsRegister where
         type Rs PawsRegister = PawsRegisterResponse
+        type Scopes PawsRegister = '[]
         requestClient PawsRegister{..}
           = go (Just AltJSON) _prPayload spectrumService
           where go

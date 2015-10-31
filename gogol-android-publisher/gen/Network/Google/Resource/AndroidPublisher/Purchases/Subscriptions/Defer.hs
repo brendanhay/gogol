@@ -122,6 +122,8 @@ instance GoogleRequest PurchasesSubscriptionsDefer
          where
         type Rs PurchasesSubscriptionsDefer =
              SubscriptionPurchasesDeferResponse
+        type Scopes PurchasesSubscriptionsDefer =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient PurchasesSubscriptionsDefer{..}
           = go _psdPackageName _psdSubscriptionId _psdToken
               (Just AltJSON)

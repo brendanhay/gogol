@@ -115,6 +115,9 @@ istInstance
 
 instance GoogleRequest InstancesSetTags where
         type Rs InstancesSetTags = Operation
+        type Scopes InstancesSetTags =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesSetTags{..}
           = go _istProject _istZone _istInstance (Just AltJSON)
               _istPayload

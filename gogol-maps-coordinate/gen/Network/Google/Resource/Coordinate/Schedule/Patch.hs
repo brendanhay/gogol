@@ -149,6 +149,8 @@ spDuration
 
 instance GoogleRequest SchedulePatch where
         type Rs SchedulePatch = Schedule
+        type Scopes SchedulePatch =
+             '["https://www.googleapis.com/auth/coordinate"]
         requestClient SchedulePatch{..}
           = go _spTeamId _spJobId _spAllDay _spStartTime
               _spEndTime

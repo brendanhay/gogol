@@ -103,6 +103,9 @@ gamGroupName
 
 instance GoogleRequest GroupsAddMember where
         type Rs GroupsAddMember = Operation
+        type Scopes GroupsAddMember =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient GroupsAddMember{..}
           = go _gamProject _gamGroupName (Just AltJSON)
               _gamPayload

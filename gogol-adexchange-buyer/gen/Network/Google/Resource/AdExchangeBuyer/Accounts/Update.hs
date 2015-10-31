@@ -86,6 +86,8 @@ auId = lens _auId (\ s a -> s{_auId = a}) . _Coerce
 
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
+        type Scopes AccountsUpdate =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient AccountsUpdate{..}
           = go _auId (Just AltJSON) _auPayload
               adExchangeBuyerService

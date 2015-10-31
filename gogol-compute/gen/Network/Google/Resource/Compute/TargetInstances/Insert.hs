@@ -103,6 +103,9 @@ tiiPayload
 
 instance GoogleRequest TargetInstancesInsert where
         type Rs TargetInstancesInsert = Operation
+        type Scopes TargetInstancesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetInstancesInsert{..}
           = go _tiiProject _tiiZone (Just AltJSON) _tiiPayload
               computeService

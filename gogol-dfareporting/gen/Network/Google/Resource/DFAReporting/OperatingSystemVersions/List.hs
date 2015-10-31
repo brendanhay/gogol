@@ -81,6 +81,8 @@ instance GoogleRequest OperatingSystemVersionsList
          where
         type Rs OperatingSystemVersionsList =
              OperatingSystemVersionsListResponse
+        type Scopes OperatingSystemVersionsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OperatingSystemVersionsList{..}
           = go _osvlProFileId (Just AltJSON)
               dFAReportingService

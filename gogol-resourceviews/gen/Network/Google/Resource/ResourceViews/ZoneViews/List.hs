@@ -115,6 +115,13 @@ zvlMaxResults
 
 instance GoogleRequest ZoneViewsList' where
         type Rs ZoneViewsList' = ZoneViewsList
+        type Scopes ZoneViewsList' =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient ZoneViewsList'{..}
           = go _zvlProject _zvlZone _zvlPageToken
               (Just _zvlMaxResults)

@@ -88,6 +88,9 @@ dsiProjectId
 
 instance GoogleRequest DataSetsInsert where
         type Rs DataSetsInsert = DataSet
+        type Scopes DataSetsInsert =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient DataSetsInsert{..}
           = go _dsiProjectId (Just AltJSON) _dsiPayload
               bigQueryService

@@ -89,6 +89,9 @@ ddDeployment
 
 instance GoogleRequest DeploymentsDelete where
         type Rs DeploymentsDelete = Operation
+        type Scopes DeploymentsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsDelete{..}
           = go _ddProject _ddDeployment (Just AltJSON)
               deploymentManagerService

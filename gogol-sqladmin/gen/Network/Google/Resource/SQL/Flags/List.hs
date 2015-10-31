@@ -61,6 +61,9 @@ flagsList = FlagsList
 
 instance GoogleRequest FlagsList where
         type Rs FlagsList = FlagsListResponse
+        type Scopes FlagsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient FlagsList{}
           = go (Just AltJSON) sQLAdminService
           where go

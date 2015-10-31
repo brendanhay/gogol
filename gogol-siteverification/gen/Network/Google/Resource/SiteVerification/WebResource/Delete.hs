@@ -74,6 +74,8 @@ wrdId = lens _wrdId (\ s a -> s{_wrdId = a})
 
 instance GoogleRequest WebResourceDelete where
         type Rs WebResourceDelete = ()
+        type Scopes WebResourceDelete =
+             '["https://www.googleapis.com/auth/siteverification"]
         requestClient WebResourceDelete{..}
           = go _wrdId (Just AltJSON) siteVerificationService
           where go

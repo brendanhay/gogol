@@ -150,6 +150,9 @@ clbbMaxResults
 
 instance GoogleRequest CommentsListByBlog where
         type Rs CommentsListByBlog = CommentList
+        type Scopes CommentsListByBlog =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient CommentsListByBlog{..}
           = go _clbbBlogId (_clbbStatus ^. _Default)
               _clbbEndDate

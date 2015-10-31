@@ -103,6 +103,9 @@ diInstance
 
 instance GoogleRequest DatabasesInsert where
         type Rs DatabasesInsert = Operation
+        type Scopes DatabasesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesInsert{..}
           = go _diProject _diInstance (Just AltJSON) _diPayload
               sQLAdminService

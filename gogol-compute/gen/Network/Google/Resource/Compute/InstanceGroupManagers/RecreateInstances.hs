@@ -129,6 +129,9 @@ instance GoogleRequest
          InstanceGroupManagersRecreateInstances where
         type Rs InstanceGroupManagersRecreateInstances =
              Operation
+        type Scopes InstanceGroupManagersRecreateInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
           InstanceGroupManagersRecreateInstances{..}
           = go _igmriProject _igmriZone

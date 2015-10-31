@@ -88,6 +88,8 @@ aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
 
 instance GoogleRequest AdsUpdate where
         type Rs AdsUpdate = Ad
+        type Scopes AdsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdsUpdate{..}
           = go _aProFileId (Just AltJSON) _aPayload
               dFAReportingService

@@ -116,6 +116,9 @@ mggAccountId
 
 instance GoogleRequest ManagementGoalsGet where
         type Rs ManagementGoalsGet = Goal
+        type Scopes ManagementGoalsGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementGoalsGet{..}
           = go _mggAccountId _mggWebPropertyId _mggProFileId
               _mggGoalId

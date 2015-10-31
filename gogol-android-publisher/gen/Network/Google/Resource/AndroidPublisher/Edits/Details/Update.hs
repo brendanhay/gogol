@@ -103,6 +103,8 @@ eduEditId
 
 instance GoogleRequest EditsDetailsUpdate where
         type Rs EditsDetailsUpdate = AppDetails
+        type Scopes EditsDetailsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsDetailsUpdate{..}
           = go _eduPackageName _eduEditId (Just AltJSON)
               _eduPayload

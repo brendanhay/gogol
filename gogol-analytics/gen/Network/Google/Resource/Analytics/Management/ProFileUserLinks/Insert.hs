@@ -122,6 +122,8 @@ instance GoogleRequest
          ManagementProFileUserLinksInsert where
         type Rs ManagementProFileUserLinksInsert =
              EntityUserLink
+        type Scopes ManagementProFileUserLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient ManagementProFileUserLinksInsert{..}
           = go _mpfuliAccountId _mpfuliWebPropertyId
               _mpfuliProFileId

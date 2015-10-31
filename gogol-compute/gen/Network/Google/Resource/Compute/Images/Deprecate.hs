@@ -105,6 +105,9 @@ imamPayload
 
 instance GoogleRequest ImagesDeprecate where
         type Rs ImagesDeprecate = Operation
+        type Scopes ImagesDeprecate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ImagesDeprecate{..}
           = go _imamProject _imamImage (Just AltJSON)
               _imamPayload

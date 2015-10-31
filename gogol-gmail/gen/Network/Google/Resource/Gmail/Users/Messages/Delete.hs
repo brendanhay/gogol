@@ -89,6 +89,8 @@ umdId = lens _umdId (\ s a -> s{_umdId = a})
 
 instance GoogleRequest UsersMessagesDelete where
         type Rs UsersMessagesDelete = ()
+        type Scopes UsersMessagesDelete =
+             '["https://mail.google.com/"]
         requestClient UsersMessagesDelete{..}
           = go _umdUserId _umdId (Just AltJSON) gmailService
           where go

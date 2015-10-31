@@ -117,6 +117,9 @@ alMaxResults
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = ActivityFeed
+        type Scopes ActivitiesList =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient ActivitiesList{..}
           = go _alUserId _alCollection _alPageToken
               (Just _alMaxResults)

@@ -146,6 +146,9 @@ accaulMaxResults
 instance GoogleRequest
          AccountsCustomChannelsAdUnitsList where
         type Rs AccountsCustomChannelsAdUnitsList = AdUnits
+        type Scopes AccountsCustomChannelsAdUnitsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsCustomChannelsAdUnitsList{..}
           = go _accaulAccountId _accaulAdClientId
               _accaulCustomChannelId

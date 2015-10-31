@@ -107,6 +107,8 @@ instance GoogleRequest BucketAccessControlsPatch
          where
         type Rs BucketAccessControlsPatch =
              BucketAccessControl
+        type Scopes BucketAccessControlsPatch =
+             '["https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsPatch{..}
           = go _bacpBucket _bacpEntity (Just AltJSON)
               _bacpPayload

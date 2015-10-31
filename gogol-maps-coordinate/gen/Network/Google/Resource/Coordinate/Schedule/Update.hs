@@ -147,6 +147,8 @@ suDuration
 
 instance GoogleRequest ScheduleUpdate where
         type Rs ScheduleUpdate = Schedule
+        type Scopes ScheduleUpdate =
+             '["https://www.googleapis.com/auth/coordinate"]
         requestClient ScheduleUpdate{..}
           = go _suTeamId _suJobId _suAllDay _suStartTime
               _suEndTime

@@ -153,6 +153,11 @@ glMaxResults
 
 instance GoogleRequest GroupsList where
         type Rs GroupsList = GroupList
+        type Scopes GroupsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
         requestClient GroupsList{..}
           = go _glProject _glOrderBy _glFilter _glPageToken
               (Just _glMaxResults)

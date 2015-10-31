@@ -230,6 +230,9 @@ mlCreatedBefore
 
 instance GoogleRequest MapsList where
         type Rs MapsList = MapsListResponse
+        type Scopes MapsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient MapsList{..}
           = go _mlCreatedAfter _mlCreatorEmail _mlRole _mlBbox
               _mlProcessingStatus

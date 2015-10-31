@@ -152,6 +152,10 @@ frlMaxResults
 
 instance GoogleRequest ForwardingRulesList where
         type Rs ForwardingRulesList = ForwardingRuleList
+        type Scopes ForwardingRulesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ForwardingRulesList{..}
           = go _frlProject _frlRegion _frlFilter _frlPageToken
               (Just _frlMaxResults)

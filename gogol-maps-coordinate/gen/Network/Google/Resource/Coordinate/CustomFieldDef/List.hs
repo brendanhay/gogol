@@ -78,6 +78,9 @@ cfdlTeamId
 instance GoogleRequest CustomFieldDefList where
         type Rs CustomFieldDefList =
              CustomFieldDefListResponse
+        type Scopes CustomFieldDefList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
         requestClient CustomFieldDefList{..}
           = go _cfdlTeamId (Just AltJSON) mapsCoordinateService
           where go

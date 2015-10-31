@@ -89,6 +89,8 @@ sdSchemaKey
 
 instance GoogleRequest SchemasDelete where
         type Rs SchemasDelete = ()
+        type Scopes SchemasDelete =
+             '["https://www.googleapis.com/auth/admin.directory.userschema"]
         requestClient SchemasDelete{..}
           = go _sdCustomerId _sdSchemaKey (Just AltJSON)
               directoryService

@@ -92,6 +92,8 @@ apdPermissionId
 instance GoogleRequest AccountsPermissionsDelete
          where
         type Rs AccountsPermissionsDelete = ()
+        type Scopes AccountsPermissionsDelete =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
         requestClient AccountsPermissionsDelete{..}
           = go _apdAccountId _apdPermissionId (Just AltJSON)
               tagManagerService

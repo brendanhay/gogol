@@ -193,6 +193,9 @@ dmgStartDate
 
 instance GoogleRequest DataMcfGet where
         type Rs DataMcfGet = McfData
+        type Scopes DataMcfGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient DataMcfGet{..}
           = go (Just _dmgIds) (Just _dmgStartDate)
               (Just _dmgEndDate)

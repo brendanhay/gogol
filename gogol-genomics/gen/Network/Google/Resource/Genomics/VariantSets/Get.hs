@@ -158,6 +158,10 @@ vsgCallback
 
 instance GoogleRequest VariantSetsGet where
         type Rs VariantSetsGet = VariantSet
+        type Scopes VariantSetsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient VariantSetsGet{..}
           = go _vsgVariantSetId _vsgXgafv _vsgUploadProtocol
               (Just _vsgPp)

@@ -89,6 +89,8 @@ cuPayload
 
 instance GoogleRequest CalendarsUpdate where
         type Rs CalendarsUpdate = Calendar
+        type Scopes CalendarsUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient CalendarsUpdate{..}
           = go _cuCalendarId (Just AltJSON) _cuPayload
               appsCalendarService

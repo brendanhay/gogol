@@ -104,6 +104,9 @@ agLanguage
 
 instance GoogleRequest ApplicationsGet where
         type Rs ApplicationsGet = Application
+        type Scopes ApplicationsGet =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient ApplicationsGet{..}
           = go _agApplicationId _agPlatformType _agLanguage
               (Just AltJSON)

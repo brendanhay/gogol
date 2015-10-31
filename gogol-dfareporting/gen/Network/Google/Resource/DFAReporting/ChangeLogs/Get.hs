@@ -89,6 +89,8 @@ clgId
 
 instance GoogleRequest ChangeLogsGet where
         type Rs ChangeLogsGet = ChangeLog
+        type Scopes ChangeLogsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ChangeLogsGet{..}
           = go _clgProFileId _clgId (Just AltJSON)
               dFAReportingService

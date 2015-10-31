@@ -120,6 +120,9 @@ swMaxResults
 
 instance GoogleRequest SettingsWatch where
         type Rs SettingsWatch = Channel
+        type Scopes SettingsWatch =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient SettingsWatch{..}
           = go _swSyncToken _swPageToken _swMaxResults
               (Just AltJSON)

@@ -91,6 +91,8 @@ agUserKey
 
 instance GoogleRequest AspsGet where
         type Rs AspsGet = Asp
+        type Scopes AspsGet =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient AspsGet{..}
           = go _agUserKey _agCodeId (Just AltJSON)
               directoryService

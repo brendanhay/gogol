@@ -230,6 +230,9 @@ llCreatedBefore
 
 instance GoogleRequest LayersList where
         type Rs LayersList = LayersListResponse
+        type Scopes LayersList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient LayersList{..}
           = go _llCreatedAfter _llCreatorEmail _llRole _llBbox
               _llProcessingStatus

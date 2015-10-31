@@ -190,6 +190,9 @@ calCallback
 instance GoogleRequest CoursesAliasesList where
         type Rs CoursesAliasesList =
              ListCourseAliasesResponse
+        type Scopes CoursesAliasesList =
+             '["https://www.googleapis.com/auth/classroom.courses",
+               "https://www.googleapis.com/auth/classroom.courses.readonly"]
         requestClient CoursesAliasesList{..}
           = go _calCourseId _calXgafv _calUploadProtocol
               (Just _calPp)

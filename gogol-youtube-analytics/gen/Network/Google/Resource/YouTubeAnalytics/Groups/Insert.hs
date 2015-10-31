@@ -97,6 +97,9 @@ giOnBehalfOfContentOwner
 
 instance GoogleRequest GroupsInsert where
         type Rs GroupsInsert = Group
+        type Scopes GroupsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient GroupsInsert{..}
           = go _giOnBehalfOfContentOwner (Just AltJSON)
               _giPayload

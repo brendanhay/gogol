@@ -78,6 +78,8 @@ pclProFileId
 
 instance GoogleRequest PostalCodesList where
         type Rs PostalCodesList = PostalCodesListResponse
+        type Scopes PostalCodesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PostalCodesList{..}
           = go _pclProFileId (Just AltJSON) dFAReportingService
           where go

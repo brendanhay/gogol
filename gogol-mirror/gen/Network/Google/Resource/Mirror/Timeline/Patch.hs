@@ -87,6 +87,9 @@ tpId = lens _tpId (\ s a -> s{_tpId = a})
 
 instance GoogleRequest TimelinePatch where
         type Rs TimelinePatch = TimelineItem
+        type Scopes TimelinePatch =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelinePatch{..}
           = go _tpId (Just AltJSON) _tpPayload mirrorService
           where go

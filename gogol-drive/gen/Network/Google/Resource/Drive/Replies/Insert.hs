@@ -101,6 +101,9 @@ riCommentId
 
 instance GoogleRequest RepliesInsert where
         type Rs RepliesInsert = CommentReply
+        type Scopes RepliesInsert =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient RepliesInsert{..}
           = go _riFileId _riCommentId (Just AltJSON) _riPayload
               driveService

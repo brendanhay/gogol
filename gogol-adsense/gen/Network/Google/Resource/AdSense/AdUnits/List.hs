@@ -116,6 +116,9 @@ aulMaxResults
 
 instance GoogleRequest AdUnitsList where
         type Rs AdUnitsList = AdUnits
+        type Scopes AdUnitsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AdUnitsList{..}
           = go _aulAdClientId _aulIncludeInactive _aulPageToken
               _aulMaxResults

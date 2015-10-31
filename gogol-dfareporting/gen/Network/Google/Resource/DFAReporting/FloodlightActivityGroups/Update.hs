@@ -93,6 +93,8 @@ instance GoogleRequest FloodlightActivityGroupsUpdate
          where
         type Rs FloodlightActivityGroupsUpdate =
              FloodlightActivityGroup
+        type Scopes FloodlightActivityGroupsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivityGroupsUpdate{..}
           = go _faguProFileId (Just AltJSON) _faguPayload
               dFAReportingService

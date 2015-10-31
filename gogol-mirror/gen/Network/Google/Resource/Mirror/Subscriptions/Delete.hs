@@ -74,6 +74,8 @@ sdId = lens _sdId (\ s a -> s{_sdId = a})
 
 instance GoogleRequest SubscriptionsDelete where
         type Rs SubscriptionsDelete = ()
+        type Scopes SubscriptionsDelete =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient SubscriptionsDelete{..}
           = go _sdId (Just AltJSON) mirrorService
           where go

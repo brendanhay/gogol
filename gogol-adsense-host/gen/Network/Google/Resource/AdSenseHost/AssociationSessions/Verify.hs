@@ -80,6 +80,8 @@ instance GoogleRequest AssociationSessionsVerify
          where
         type Rs AssociationSessionsVerify =
              AssociationSession
+        type Scopes AssociationSessionsVerify =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AssociationSessionsVerify{..}
           = go (Just _asvToken) (Just AltJSON)
               adSenseHostService

@@ -236,6 +236,8 @@ allMaxResults
 
 instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = AdvertisersListResponse
+        type Scopes AdvertisersList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertisersList{..}
           = go _allProFileId _allStatus _allOnlyParent
               _allSearchString

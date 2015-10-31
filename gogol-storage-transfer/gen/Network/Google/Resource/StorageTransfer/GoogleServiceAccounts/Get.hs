@@ -170,6 +170,8 @@ gsagCallback
 instance GoogleRequest GoogleServiceAccountsGet where
         type Rs GoogleServiceAccountsGet =
              GoogleServiceAccount
+        type Scopes GoogleServiceAccountsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient GoogleServiceAccountsGet{..}
           = go _gsagProjectId _gsagXgafv _gsagUploadProtocol
               (Just _gsagPp)

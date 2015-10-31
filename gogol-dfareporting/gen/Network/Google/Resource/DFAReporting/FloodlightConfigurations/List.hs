@@ -93,6 +93,8 @@ instance GoogleRequest FloodlightConfigurationsList
          where
         type Rs FloodlightConfigurationsList =
              FloodlightConfigurationsListResponse
+        type Scopes FloodlightConfigurationsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightConfigurationsList{..}
           = go _fclProFileId (_fclIds ^. _Default)
               (Just AltJSON)

@@ -61,6 +61,7 @@ queriesListqueries = QueriesListqueries
 
 instance GoogleRequest QueriesListqueries where
         type Rs QueriesListqueries = ListQueriesResponse
+        type Scopes QueriesListqueries = '[]
         requestClient QueriesListqueries{}
           = go (Just AltJSON) doubleClickBidsService
           where go

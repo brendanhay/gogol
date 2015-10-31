@@ -135,6 +135,10 @@ rMaxResults
 
 instance GoogleRequest RegionsList where
         type Rs RegionsList = RegionList
+        type Scopes RegionsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RegionsList{..}
           = go _rProject _rFilter _rPageToken
               (Just _rMaxResults)

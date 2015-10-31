@@ -89,6 +89,9 @@ acgAccountId
 
 instance GoogleRequest AccountsContainersGet where
         type Rs AccountsContainersGet = Container
+        type Scopes AccountsContainersGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersGet{..}
           = go _acgAccountId _acgContainerId (Just AltJSON)
               tagManagerService

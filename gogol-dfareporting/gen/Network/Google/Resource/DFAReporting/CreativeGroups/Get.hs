@@ -90,6 +90,8 @@ cgggId
 
 instance GoogleRequest CreativeGroupsGet where
         type Rs CreativeGroupsGet = CreativeGroup
+        type Scopes CreativeGroupsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeGroupsGet{..}
           = go _cgggProFileId _cgggId (Just AltJSON)
               dFAReportingService

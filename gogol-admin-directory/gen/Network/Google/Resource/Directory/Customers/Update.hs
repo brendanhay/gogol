@@ -89,6 +89,8 @@ cuPayload
 
 instance GoogleRequest CustomersUpdate where
         type Rs CustomersUpdate = Customer
+        type Scopes CustomersUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.customer"]
         requestClient CustomersUpdate{..}
           = go _cuCustomerKey (Just AltJSON) _cuPayload
               directoryService

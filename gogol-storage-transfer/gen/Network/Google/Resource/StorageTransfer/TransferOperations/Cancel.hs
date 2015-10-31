@@ -153,6 +153,8 @@ tocCallback
 
 instance GoogleRequest TransferOperationsCancel where
         type Rs TransferOperationsCancel = Empty
+        type Scopes TransferOperationsCancel =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsCancel{..}
           = go _tocName _tocXgafv _tocUploadProtocol
               (Just _tocPp)

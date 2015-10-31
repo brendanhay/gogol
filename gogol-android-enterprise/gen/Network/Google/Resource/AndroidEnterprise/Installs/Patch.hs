@@ -131,6 +131,8 @@ ipDeviceId
 
 instance GoogleRequest InstallsPatch where
         type Rs InstallsPatch = Install
+        type Scopes InstallsPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient InstallsPatch{..}
           = go _ipEnterpriseId _ipUserId _ipDeviceId
               _ipInstallId

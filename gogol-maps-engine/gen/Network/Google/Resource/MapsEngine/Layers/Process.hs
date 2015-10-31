@@ -76,6 +76,8 @@ lpsId = lens _lpsId (\ s a -> s{_lpsId = a})
 
 instance GoogleRequest LayersProcess where
         type Rs LayersProcess = ProcessResponse
+        type Scopes LayersProcess =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient LayersProcess{..}
           = go _lpsId (Just AltJSON) mapsEngineService
           where go

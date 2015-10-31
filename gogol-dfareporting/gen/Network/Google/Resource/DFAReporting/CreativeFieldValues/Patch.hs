@@ -120,6 +120,8 @@ cfvpId
 
 instance GoogleRequest CreativeFieldValuesPatch where
         type Rs CreativeFieldValuesPatch = CreativeFieldValue
+        type Scopes CreativeFieldValuesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldValuesPatch{..}
           = go _cfvpProFileId _cfvpCreativeFieldId
               (Just _cfvpId)

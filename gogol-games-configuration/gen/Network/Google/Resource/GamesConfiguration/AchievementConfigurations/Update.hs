@@ -91,6 +91,8 @@ instance GoogleRequest
          AchievementConfigurationsUpdate where
         type Rs AchievementConfigurationsUpdate =
              AchievementConfiguration
+        type Scopes AchievementConfigurationsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient AchievementConfigurationsUpdate{..}
           = go _acuAchievementId (Just AltJSON) _acuPayload
               gamesConfigurationService

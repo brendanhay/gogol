@@ -164,6 +164,9 @@ jdCallback
 
 instance GoogleRequest JobsDelete where
         type Rs JobsDelete = Empty
+        type Scopes JobsDelete =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsDelete{..}
           = go _jdJobId _jdXgafv _jdUploadProtocol (Just _jdPp)
               _jdAccessToken

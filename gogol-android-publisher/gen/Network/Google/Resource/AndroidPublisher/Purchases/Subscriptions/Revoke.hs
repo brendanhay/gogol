@@ -109,6 +109,8 @@ pSubscriptionId
 instance GoogleRequest PurchasesSubscriptionsRevoke
          where
         type Rs PurchasesSubscriptionsRevoke = ()
+        type Scopes PurchasesSubscriptionsRevoke =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient PurchasesSubscriptionsRevoke{..}
           = go _pPackageName _pSubscriptionId _pToken
               (Just AltJSON)

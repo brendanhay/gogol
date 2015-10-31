@@ -76,6 +76,8 @@ cuPayload
 
 instance GoogleRequest ConversionUpdate where
         type Rs ConversionUpdate = ConversionList
+        type Scopes ConversionUpdate =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ConversionUpdate{..}
           = go (Just AltJSON) _cuPayload
               doubleClickSearchService

@@ -78,6 +78,8 @@ blProFileId
 
 instance GoogleRequest BrowsersList where
         type Rs BrowsersList = BrowsersListResponse
+        type Scopes BrowsersList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient BrowsersList{..}
           = go _blProFileId (Just AltJSON) dFAReportingService
           where go

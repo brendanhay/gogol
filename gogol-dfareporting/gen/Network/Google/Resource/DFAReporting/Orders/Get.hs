@@ -102,6 +102,8 @@ ogProjectId
 
 instance GoogleRequest OrdersGet where
         type Rs OrdersGet = Order
+        type Scopes OrdersGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OrdersGet{..}
           = go _ogProFileId _ogProjectId _ogId (Just AltJSON)
               dFAReportingService

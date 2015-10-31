@@ -100,6 +100,9 @@ llMaxResults
 
 instance GoogleRequest LeaderboardsList where
         type Rs LeaderboardsList = LeaderboardListResponse
+        type Scopes LeaderboardsList =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient LeaderboardsList{..}
           = go _llLanguage _llPageToken _llMaxResults
               (Just AltJSON)

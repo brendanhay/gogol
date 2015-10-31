@@ -91,6 +91,9 @@ riPayload
 
 instance GoogleRequest RoutesInsert where
         type Rs RoutesInsert = Operation
+        type Scopes RoutesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient RoutesInsert{..}
           = go _riProject (Just AltJSON) _riPayload
               computeService

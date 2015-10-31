@@ -93,6 +93,8 @@ instance GoogleRequest MyLibraryAnnotationsSummary
          where
         type Rs MyLibraryAnnotationsSummary =
              AnnotationsSummary
+        type Scopes MyLibraryAnnotationsSummary =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsSummary{..}
           = go _mlasLayerIds (Just _mlasVolumeId)
               (Just AltJSON)

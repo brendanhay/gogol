@@ -180,6 +180,8 @@ rgMaxResults
 
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate = Report
+        type Scopes ReportsGenerate =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient ReportsGenerate{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)

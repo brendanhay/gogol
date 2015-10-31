@@ -103,6 +103,9 @@ insInstance
 
 instance GoogleRequest InstancesStart where
         type Rs InstancesStart = Operation
+        type Scopes InstancesStart =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesStart{..}
           = go _insProject _insZone _insInstance (Just AltJSON)
               computeService

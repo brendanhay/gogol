@@ -101,6 +101,9 @@ ddInstance
 
 instance GoogleRequest DatabasesDelete where
         type Rs DatabasesDelete = Operation
+        type Scopes DatabasesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesDelete{..}
           = go _ddProject _ddInstance _ddDatabase
               (Just AltJSON)

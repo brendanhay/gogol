@@ -88,6 +88,9 @@ lgId = lens _lgId (\ s a -> s{_lgId = a})
 
 instance GoogleRequest LayersGet where
         type Rs LayersGet = Layer
+        type Scopes LayersGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient LayersGet{..}
           = go _lgId _lgVersion (Just AltJSON)
               mapsEngineService

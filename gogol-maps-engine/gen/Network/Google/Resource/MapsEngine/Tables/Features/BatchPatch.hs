@@ -111,6 +111,8 @@ tfbpId = lens _tfbpId (\ s a -> s{_tfbpId = a})
 
 instance GoogleRequest TablesFeaturesBatchPatch where
         type Rs TablesFeaturesBatchPatch = ()
+        type Scopes TablesFeaturesBatchPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesFeaturesBatchPatch{..}
           = go _tfbpId (Just AltJSON) _tfbpPayload
               mapsEngineService

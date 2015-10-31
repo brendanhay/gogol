@@ -114,6 +114,8 @@ usuSessionId
 
 instance GoogleRequest UsersSessionsUpdate where
         type Rs UsersSessionsUpdate = Session
+        type Scopes UsersSessionsUpdate =
+             '["https://www.googleapis.com/auth/fitness.activity.write"]
         requestClient UsersSessionsUpdate{..}
           = go _usuUserId _usuSessionId _usuCurrentTimeMillis
               (Just AltJSON)

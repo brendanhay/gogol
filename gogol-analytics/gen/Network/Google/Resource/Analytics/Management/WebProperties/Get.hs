@@ -92,6 +92,9 @@ mwpgAccountId
 instance GoogleRequest ManagementWebPropertiesGet
          where
         type Rs ManagementWebPropertiesGet = WebProperty
+        type Scopes ManagementWebPropertiesGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementWebPropertiesGet{..}
           = go _mwpgAccountId _mwpgWebPropertyId (Just AltJSON)
               analyticsService

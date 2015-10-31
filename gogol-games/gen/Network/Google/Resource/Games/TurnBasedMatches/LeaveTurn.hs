@@ -121,6 +121,9 @@ tbmltMatchVersion
 instance GoogleRequest TurnBasedMatchesLeaveTurn
          where
         type Rs TurnBasedMatchesLeaveTurn = TurnBasedMatch
+        type Scopes TurnBasedMatchesLeaveTurn =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesLeaveTurn{..}
           = go _tbmltMatchId (Just _tbmltMatchVersion)
               _tbmltLanguage

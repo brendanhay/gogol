@@ -104,6 +104,9 @@ acfgAccountId
 instance GoogleRequest AccountsContainersFoldersGet
          where
         type Rs AccountsContainersFoldersGet = Folder
+        type Scopes AccountsContainersFoldersGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersFoldersGet{..}
           = go _acfgAccountId _acfgContainerId _acfgFolderId
               (Just AltJSON)

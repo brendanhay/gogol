@@ -104,6 +104,8 @@ iiInstance
 
 instance GoogleRequest InstancesImport where
         type Rs InstancesImport = Operation
+        type Scopes InstancesImport =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient InstancesImport{..}
           = go _iiProject _iiInstance (Just AltJSON) _iiPayload
               sQLAdminService

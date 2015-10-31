@@ -93,6 +93,9 @@ slSitemapIndex
 
 instance GoogleRequest SitemapsList where
         type Rs SitemapsList = SitemapsListResponse
+        type Scopes SitemapsList =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
         requestClient SitemapsList{..}
           = go _slSiteURL _slSitemapIndex (Just AltJSON)
               webmasterToolsService

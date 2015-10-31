@@ -154,6 +154,9 @@ ogCallback
 
 instance GoogleRequest OperationsGet where
         type Rs OperationsGet = Operation
+        type Scopes OperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient OperationsGet{..}
           = go _ogName _ogXgafv _ogUploadProtocol (Just _ogPp)
               _ogAccessToken

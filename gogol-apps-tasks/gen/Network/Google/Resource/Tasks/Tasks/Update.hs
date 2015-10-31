@@ -99,6 +99,8 @@ tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
 instance GoogleRequest TasksUpdate where
         type Rs TasksUpdate = Task
+        type Scopes TasksUpdate =
+             '["https://www.googleapis.com/auth/tasks"]
         requestClient TasksUpdate{..}
           = go _tuTaskList _tuTask (Just AltJSON) _tuPayload
               appsTasksService

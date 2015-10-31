@@ -171,6 +171,9 @@ ocCallback
 
 instance GoogleRequest OperationsCancel where
         type Rs OperationsCancel = Empty
+        type Scopes OperationsCancel =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient OperationsCancel{..}
           = go _ocName _ocXgafv _ocUploadProtocol (Just _ocPp)
               _ocAccessToken

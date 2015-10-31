@@ -75,6 +75,9 @@ agAccountId
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsGet{..}
           = go _agAccountId (Just AltJSON)
               adExchangeSellerService

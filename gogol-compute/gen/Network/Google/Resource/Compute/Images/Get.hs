@@ -89,6 +89,10 @@ iProject = lens _iProject (\ s a -> s{_iProject = a})
 
 instance GoogleRequest ImagesGet where
         type Rs ImagesGet = Image
+        type Scopes ImagesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ImagesGet{..}
           = go _iProject _iImage (Just AltJSON) computeService
           where go

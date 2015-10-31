@@ -105,6 +105,8 @@ allMaxResults
 
 instance GoogleRequest AccounttaxList where
         type Rs AccounttaxList = AccounttaxListResponse
+        type Scopes AccounttaxList =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccounttaxList{..}
           = go _allMerchantId _allPageToken _allMaxResults
               (Just AltJSON)

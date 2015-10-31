@@ -79,6 +79,8 @@ vcgUserKey
 instance GoogleRequest VerificationCodesGenerate
          where
         type Rs VerificationCodesGenerate = ()
+        type Scopes VerificationCodesGenerate =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient VerificationCodesGenerate{..}
           = go _vcgUserKey (Just AltJSON) directoryService
           where go

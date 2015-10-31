@@ -113,6 +113,7 @@ aiAccountType
 
 instance GoogleRequest AccountsInsert where
         type Rs AccountsInsert = Account
+        type Scopes AccountsInsert = '[]
         requestClient AccountsInsert{..}
           = go _aiUserToken _aiAccountType _aiAccountName
               (Just AltJSON)

@@ -93,6 +93,8 @@ instance GoogleRequest TargetableRemarketingListsGet
          where
         type Rs TargetableRemarketingListsGet =
              TargetableRemarketingList
+        type Scopes TargetableRemarketingListsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient TargetableRemarketingListsGet{..}
           = go _trlgProFileId _trlgId (Just AltJSON)
               dFAReportingService

@@ -90,6 +90,8 @@ tadAttachmentId
 instance GoogleRequest TimelineAttachmentsDelete
          where
         type Rs TimelineAttachmentsDelete = ()
+        type Scopes TimelineAttachmentsDelete =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelineAttachmentsDelete{..}
           = go _tadItemId _tadAttachmentId (Just AltJSON)
               mirrorService

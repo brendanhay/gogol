@@ -78,6 +78,10 @@ fdFileId = lens _fdFileId (\ s a -> s{_fdFileId = a})
 
 instance GoogleRequest FilesDelete where
         type Rs FilesDelete = ()
+        type Scopes FilesDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient FilesDelete{..}
           = go _fdFileId (Just AltJSON) driveService
           where go

@@ -77,6 +77,9 @@ sgSetting
 
 instance GoogleRequest SettingsGet where
         type Rs SettingsGet = Setting
+        type Scopes SettingsGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient SettingsGet{..}
           = go _sgSetting (Just AltJSON) appsCalendarService
           where go

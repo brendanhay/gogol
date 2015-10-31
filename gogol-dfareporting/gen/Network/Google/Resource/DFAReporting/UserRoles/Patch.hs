@@ -101,6 +101,8 @@ urpId
 
 instance GoogleRequest UserRolesPatch where
         type Rs UserRolesPatch = UserRole
+        type Scopes UserRolesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolesPatch{..}
           = go _urpProFileId (Just _urpId) (Just AltJSON)
               _urpPayload

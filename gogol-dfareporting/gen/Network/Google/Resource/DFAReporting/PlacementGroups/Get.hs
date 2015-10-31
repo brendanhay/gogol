@@ -90,6 +90,8 @@ pggId
 
 instance GoogleRequest PlacementGroupsGet where
         type Rs PlacementGroupsGet = PlacementGroup
+        type Scopes PlacementGroupsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementGroupsGet{..}
           = go _pggProFileId _pggId (Just AltJSON)
               dFAReportingService

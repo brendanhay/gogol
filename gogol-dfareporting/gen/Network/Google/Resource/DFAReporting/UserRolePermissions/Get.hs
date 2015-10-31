@@ -89,6 +89,8 @@ uId = lens _uId (\ s a -> s{_uId = a}) . _Coerce
 
 instance GoogleRequest UserRolePermissionsGet where
         type Rs UserRolePermissionsGet = UserRolePermission
+        type Scopes UserRolePermissionsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolePermissionsGet{..}
           = go _uProFileId _uId (Just AltJSON)
               dFAReportingService

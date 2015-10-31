@@ -101,6 +101,10 @@ revRevisionId
 
 instance GoogleRequest RevisionsUpdate where
         type Rs RevisionsUpdate = Revision
+        type Scopes RevisionsUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient RevisionsUpdate{..}
           = go _revFileId _revRevisionId (Just AltJSON)
               _revPayload

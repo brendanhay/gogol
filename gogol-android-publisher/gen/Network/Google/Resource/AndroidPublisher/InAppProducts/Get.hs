@@ -87,6 +87,8 @@ iapgSKU = lens _iapgSKU (\ s a -> s{_iapgSKU = a})
 
 instance GoogleRequest InAppProductsGet where
         type Rs InAppProductsGet = InAppProduct
+        type Scopes InAppProductsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient InAppProductsGet{..}
           = go _iapgPackageName _iapgSKU (Just AltJSON)
               androidPublisherService

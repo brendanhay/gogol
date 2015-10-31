@@ -75,6 +75,8 @@ ciPayload
 
 instance GoogleRequest ContactsInsert where
         type Rs ContactsInsert = Contact
+        type Scopes ContactsInsert =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient ContactsInsert{..}
           = go (Just AltJSON) _ciPayload mirrorService
           where go

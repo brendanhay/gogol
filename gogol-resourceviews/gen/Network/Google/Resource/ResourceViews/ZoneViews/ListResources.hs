@@ -172,6 +172,13 @@ zvlrMaxResults
 instance GoogleRequest ZoneViewsListResources where
         type Rs ZoneViewsListResources =
              ZoneViewsListResourcesResponse
+        type Scopes ZoneViewsListResources =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient ZoneViewsListResources{..}
           = go _zvlrProject _zvlrZone _zvlrResourceView
               (Just _zvlrListState)

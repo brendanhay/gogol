@@ -76,6 +76,8 @@ cldbVolumeId
 
 instance GoogleRequest CloudLoadingDeleteBook where
         type Rs CloudLoadingDeleteBook = ()
+        type Scopes CloudLoadingDeleteBook =
+             '["https://www.googleapis.com/auth/books"]
         requestClient CloudLoadingDeleteBook{..}
           = go (Just _cldbVolumeId) (Just AltJSON) booksService
           where go

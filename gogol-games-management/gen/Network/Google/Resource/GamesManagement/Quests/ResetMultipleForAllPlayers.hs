@@ -83,6 +83,9 @@ qrmfapPayload
 instance GoogleRequest
          QuestsResetMultipleForAllPlayers where
         type Rs QuestsResetMultipleForAllPlayers = ()
+        type Scopes QuestsResetMultipleForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient QuestsResetMultipleForAllPlayers{..}
           = go (Just AltJSON) _qrmfapPayload
               gamesManagementService

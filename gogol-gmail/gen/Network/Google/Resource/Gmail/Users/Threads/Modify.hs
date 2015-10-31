@@ -103,6 +103,9 @@ utmId = lens _utmId (\ s a -> s{_utmId = a})
 
 instance GoogleRequest UsersThreadsModify where
         type Rs UsersThreadsModify = Thread
+        type Scopes UsersThreadsModify =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersThreadsModify{..}
           = go _utmUserId _utmId (Just AltJSON) _utmPayload
               gmailService

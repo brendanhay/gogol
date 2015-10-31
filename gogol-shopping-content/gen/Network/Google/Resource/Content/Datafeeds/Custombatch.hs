@@ -84,6 +84,8 @@ dDryRun = lens _dDryRun (\ s a -> s{_dDryRun = a})
 instance GoogleRequest DatafeedsCustombatch where
         type Rs DatafeedsCustombatch =
              DatafeedsCustomBatchResponse
+        type Scopes DatafeedsCustombatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsCustombatch{..}
           = go _dDryRun (Just AltJSON) _dPayload
               shoppingContentService

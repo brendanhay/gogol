@@ -89,6 +89,8 @@ cfgId
 
 instance GoogleRequest CreativeFieldsGet where
         type Rs CreativeFieldsGet = CreativeField
+        type Scopes CreativeFieldsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeFieldsGet{..}
           = go _cfgProFileId _cfgId (Just AltJSON)
               dFAReportingService

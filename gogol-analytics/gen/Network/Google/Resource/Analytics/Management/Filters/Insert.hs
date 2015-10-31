@@ -89,6 +89,8 @@ mfiAccountId
 
 instance GoogleRequest ManagementFiltersInsert where
         type Rs ManagementFiltersInsert = Filter
+        type Scopes ManagementFiltersInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementFiltersInsert{..}
           = go _mfiAccountId (Just AltJSON) _mfiPayload
               analyticsService

@@ -92,6 +92,8 @@ dscgId
 instance GoogleRequest DirectorySiteContactsGet where
         type Rs DirectorySiteContactsGet =
              DirectorySiteContact
+        type Scopes DirectorySiteContactsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient DirectorySiteContactsGet{..}
           = go _dscgProFileId _dscgId (Just AltJSON)
               dFAReportingService

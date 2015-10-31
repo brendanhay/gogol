@@ -111,6 +111,8 @@ instance GoogleRequest
          ProductsGetAppRestrictionsSchema where
         type Rs ProductsGetAppRestrictionsSchema =
              AppRestrictionsSchema
+        type Scopes ProductsGetAppRestrictionsSchema =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsGetAppRestrictionsSchema{..}
           = go _pgarsEnterpriseId _pgarsProductId
               _pgarsLanguage

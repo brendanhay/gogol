@@ -102,6 +102,9 @@ ifInstance
 
 instance GoogleRequest InstancesFailover where
         type Rs InstancesFailover = Operation
+        type Scopes InstancesFailover =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesFailover{..}
           = go _ifProject _ifInstance (Just AltJSON) _ifPayload
               sQLAdminService

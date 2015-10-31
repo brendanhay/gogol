@@ -289,6 +289,7 @@ elMaxResults
 
 instance GoogleRequest EventsList where
         type Rs EventsList = Events
+        type Scopes EventsList = '[]
         requestClient EventsList{..}
           = go _elRole _elRoleId _elStatus _elEventDateMin
               _elChargeType

@@ -123,6 +123,10 @@ instance GoogleRequest
          ManagementCustomDataSourcesList where
         type Rs ManagementCustomDataSourcesList =
              CustomDataSources
+        type Scopes ManagementCustomDataSourcesList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementCustomDataSourcesList{..}
           = go _mcdslAccountId _mcdslWebPropertyId
               _mcdslStartIndex

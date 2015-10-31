@@ -74,6 +74,9 @@ agId = lens _agId (\ s a -> s{_agId = a})
 
 instance GoogleRequest AssetsGet where
         type Rs AssetsGet = Asset
+        type Scopes AssetsGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient AssetsGet{..}
           = go _agId (Just AltJSON) mapsEngineService
           where go

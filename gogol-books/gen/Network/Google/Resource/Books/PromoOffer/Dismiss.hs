@@ -141,6 +141,8 @@ podAndroidId
 
 instance GoogleRequest PromoOfferDismiss where
         type Rs PromoOfferDismiss = ()
+        type Scopes PromoOfferDismiss =
+             '["https://www.googleapis.com/auth/books"]
         requestClient PromoOfferDismiss{..}
           = go _podManufacturer _podSerial _podDevice _podModel
               _podOfferId

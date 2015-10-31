@@ -144,6 +144,9 @@ tlIncludeDeleted
 
 instance GoogleRequest TimelineList where
         type Rs TimelineList = TimelineListResponse
+        type Scopes TimelineList =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelineList{..}
           = go _tlPinnedOnly _tlOrderBy _tlBundleId
               _tlSourceItemId

@@ -89,6 +89,10 @@ dslDataSetId
 
 instance GoogleRequest DataSetsLookup where
         type Rs DataSetsLookup = LookupResponse
+        type Scopes DataSetsLookup =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/datastore",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient DataSetsLookup{..}
           = go _dslDataSetId (Just AltJSON) _dslPayload
               datastoreService

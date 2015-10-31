@@ -230,6 +230,11 @@ subMaxResults
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = SubscriptionListResponse
+        type Scopes SubscriptionsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient SubscriptionsList{..}
           = go (Just _subPart) _subMine _subChannelId
               _subOnBehalfOfContentOwner

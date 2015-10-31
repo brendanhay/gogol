@@ -229,6 +229,9 @@ alCreatedBefore
 
 instance GoogleRequest AssetsList where
         type Rs AssetsList = AssetsListResponse
+        type Scopes AssetsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient AssetsList{..}
           = go _alCreatedAfter _alCreatorEmail _alRole _alBbox
               _alModifiedAfter

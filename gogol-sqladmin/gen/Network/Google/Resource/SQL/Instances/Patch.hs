@@ -107,6 +107,9 @@ ipInstance
 
 instance GoogleRequest InstancesPatch where
         type Rs InstancesPatch = Operation
+        type Scopes InstancesPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesPatch{..}
           = go _ipProject _ipInstance (Just AltJSON) _ipPayload
               sQLAdminService

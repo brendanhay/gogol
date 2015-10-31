@@ -109,6 +109,9 @@ diPreview
 
 instance GoogleRequest DeploymentsInsert where
         type Rs DeploymentsInsert = Operation
+        type Scopes DeploymentsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsInsert{..}
           = go _diProject _diPreview (Just AltJSON) _diPayload
               deploymentManagerService

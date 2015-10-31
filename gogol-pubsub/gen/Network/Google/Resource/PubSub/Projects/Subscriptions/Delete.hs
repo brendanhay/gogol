@@ -164,6 +164,9 @@ psdCallback
 instance GoogleRequest ProjectsSubscriptionsDelete
          where
         type Rs ProjectsSubscriptionsDelete = Empty
+        type Scopes ProjectsSubscriptionsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsDelete{..}
           = go _psdSubscription _psdXgafv _psdUploadProtocol
               (Just _psdPp)

@@ -168,6 +168,8 @@ amdCallback
 
 instance GoogleRequest AppsModulesDelete where
         type Rs AppsModulesDelete = Operation
+        type Scopes AppsModulesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsModulesDelete{..}
           = go _amdAppsId _amdModulesId _amdXgafv
               _amdUploadProtocol

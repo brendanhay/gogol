@@ -90,6 +90,9 @@ temeTableId
 
 instance GoogleRequest TemplateGet where
         type Rs TemplateGet = Template
+        type Scopes TemplateGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient TemplateGet{..}
           = go _temeTableId _temeTemplateId (Just AltJSON)
               fusionTablesService

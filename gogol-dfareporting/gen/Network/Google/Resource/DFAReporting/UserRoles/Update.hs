@@ -89,6 +89,8 @@ uruPayload
 
 instance GoogleRequest UserRolesUpdate where
         type Rs UserRolesUpdate = UserRole
+        type Scopes UserRolesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolesUpdate{..}
           = go _uruProFileId (Just AltJSON) _uruPayload
               dFAReportingService

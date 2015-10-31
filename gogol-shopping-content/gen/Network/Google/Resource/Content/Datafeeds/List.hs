@@ -103,6 +103,8 @@ datMaxResults
 
 instance GoogleRequest DatafeedsList where
         type Rs DatafeedsList = DatafeedsListResponse
+        type Scopes DatafeedsList =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsList{..}
           = go _datMerchantId _datPageToken _datMaxResults
               (Just AltJSON)

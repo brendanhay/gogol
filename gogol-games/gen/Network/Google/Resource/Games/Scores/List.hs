@@ -140,6 +140,9 @@ sllMaxResults
 
 instance GoogleRequest ScoresList where
         type Rs ScoresList = LeaderboardScores
+        type Scopes ScoresList =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient ScoresList{..}
           = go _sllLeaderboardId _sllCollection
               (Just _sllTimeSpan)

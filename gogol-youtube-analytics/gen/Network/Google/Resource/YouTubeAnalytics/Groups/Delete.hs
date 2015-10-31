@@ -97,6 +97,9 @@ gdId = lens _gdId (\ s a -> s{_gdId = a})
 
 instance GoogleRequest GroupsDelete where
         type Rs GroupsDelete = ()
+        type Scopes GroupsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient GroupsDelete{..}
           = go (Just _gdId) _gdOnBehalfOfContentOwner
               (Just AltJSON)

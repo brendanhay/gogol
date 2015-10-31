@@ -140,6 +140,10 @@ sclMaxResults
 
 instance GoogleRequest SSLCertificatesList where
         type Rs SSLCertificatesList = SSLCertificateList
+        type Scopes SSLCertificatesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient SSLCertificatesList{..}
           = go _sclProject _sclFilter _sclPageToken
               (Just _sclMaxResults)

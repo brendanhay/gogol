@@ -217,6 +217,12 @@ cMaxResults
 
 instance GoogleRequest ChannelsList where
         type Rs ChannelsList = ChannelListResponse
+        type Scopes ChannelsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner",
+               "https://www.googleapis.com/auth/youtubepartner-channel-audit"]
         requestClient ChannelsList{..}
           = go (Just _cPart) _cMine _cForUsername _cHl
               _cOnBehalfOfContentOwner

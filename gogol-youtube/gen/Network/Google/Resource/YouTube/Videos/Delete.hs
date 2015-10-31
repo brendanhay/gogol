@@ -97,6 +97,10 @@ vdId = lens _vdId (\ s a -> s{_vdId = a})
 
 instance GoogleRequest VideosDelete where
         type Rs VideosDelete = ()
+        type Scopes VideosDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosDelete{..}
           = go (Just _vdId) _vdOnBehalfOfContentOwner
               (Just AltJSON)

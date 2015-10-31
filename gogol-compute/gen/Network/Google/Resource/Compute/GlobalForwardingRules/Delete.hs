@@ -91,6 +91,9 @@ gfrdForwardingRule
 instance GoogleRequest GlobalForwardingRulesDelete
          where
         type Rs GlobalForwardingRulesDelete = Operation
+        type Scopes GlobalForwardingRulesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient GlobalForwardingRulesDelete{..}
           = go _gfrdProject _gfrdForwardingRule (Just AltJSON)
               computeService

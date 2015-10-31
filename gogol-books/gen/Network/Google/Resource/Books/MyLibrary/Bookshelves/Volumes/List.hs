@@ -162,6 +162,8 @@ mlbvlShowPreOrders
 instance GoogleRequest
          MyLibraryBookshelvesVolumesList where
         type Rs MyLibraryBookshelvesVolumesList = Volumes
+        type Scopes MyLibraryBookshelvesVolumesList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesVolumesList{..}
           = go _mlbvlShelf _mlbvlCountry _mlbvlQ _mlbvlSource
               _mlbvlProjection

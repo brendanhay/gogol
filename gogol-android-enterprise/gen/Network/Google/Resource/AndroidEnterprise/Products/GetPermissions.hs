@@ -91,6 +91,8 @@ pgpProductId
 
 instance GoogleRequest ProductsGetPermissions where
         type Rs ProductsGetPermissions = ProductPermissions
+        type Scopes ProductsGetPermissions =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsGetPermissions{..}
           = go _pgpEnterpriseId _pgpProductId (Just AltJSON)
               androidEnterpriseService

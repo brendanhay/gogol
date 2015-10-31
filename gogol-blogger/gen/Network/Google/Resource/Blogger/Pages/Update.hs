@@ -124,6 +124,8 @@ puuPublish
 
 instance GoogleRequest PagesUpdate where
         type Rs PagesUpdate = Page
+        type Scopes PagesUpdate =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PagesUpdate{..}
           = go _puuBlogId _puuPageId _puuRevert _puuPublish
               (Just AltJSON)

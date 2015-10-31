@@ -125,6 +125,9 @@ jlMaxResults
 
 instance GoogleRequest JobsList where
         type Rs JobsList = JobListResponse
+        type Scopes JobsList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
         requestClient JobsList{..}
           = go _jlTeamId _jlMinModifiedTimestampMs
               _jlOmitJobChanges

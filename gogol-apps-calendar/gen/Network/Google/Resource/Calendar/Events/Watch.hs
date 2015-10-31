@@ -348,6 +348,9 @@ ewTimeMax
 
 instance GoogleRequest EventsWatch where
         type Rs EventsWatch = Channel
+        type Scopes EventsWatch =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient EventsWatch{..}
           = go _ewCalendarId _ewSyncToken _ewTimeMin _ewOrderBy
               _ewSingleEvents

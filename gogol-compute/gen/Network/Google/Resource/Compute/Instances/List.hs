@@ -146,6 +146,10 @@ ilMaxResults
 
 instance GoogleRequest InstancesList where
         type Rs InstancesList = InstanceList
+        type Scopes InstancesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstancesList{..}
           = go _ilProject _ilZone _ilFilter _ilPageToken
               (Just _ilMaxResults)

@@ -110,6 +110,10 @@ udsuUserId
 
 instance GoogleRequest UsersDataSourcesUpdate where
         type Rs UsersDataSourcesUpdate = DataSource
+        type Scopes UsersDataSourcesUpdate =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersDataSourcesUpdate{..}
           = go _udsuUserId _udsuDataSourceId (Just AltJSON)
               _udsuPayload

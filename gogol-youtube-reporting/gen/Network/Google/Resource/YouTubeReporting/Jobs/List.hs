@@ -194,6 +194,9 @@ jlCallback
 
 instance GoogleRequest JobsList where
         type Rs JobsList = ListJobsResponse
+        type Scopes JobsList =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsList{..}
           = go _jlXgafv _jlUploadProtocol (Just _jlPp)
               _jlAccessToken

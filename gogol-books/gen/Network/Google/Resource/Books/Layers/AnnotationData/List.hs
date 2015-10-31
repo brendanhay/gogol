@@ -231,6 +231,8 @@ ladlMaxResults
 
 instance GoogleRequest LayersAnnotationDataList where
         type Rs LayersAnnotationDataList = AnnotationsData
+        type Scopes LayersAnnotationDataList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient LayersAnnotationDataList{..}
           = go _ladlVolumeId _ladlLayerId
               (Just _ladlContentVersion)

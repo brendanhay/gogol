@@ -140,6 +140,10 @@ vtalMaxResults
 instance GoogleRequest VPNTunnelsAggregatedList where
         type Rs VPNTunnelsAggregatedList =
              VPNTunnelAggregatedList
+        type Scopes VPNTunnelsAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient VPNTunnelsAggregatedList{..}
           = go _vtalProject _vtalFilter _vtalPageToken
               (Just _vtalMaxResults)

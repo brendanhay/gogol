@@ -61,6 +61,9 @@ metadataMetricsList = MetadataMetricsList
 
 instance GoogleRequest MetadataMetricsList where
         type Rs MetadataMetricsList = Metadata
+        type Scopes MetadataMetricsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient MetadataMetricsList{}
           = go (Just AltJSON) adSenseService
           where go

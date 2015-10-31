@@ -90,6 +90,8 @@ rlgId
 
 instance GoogleRequest RemarketingListsGet where
         type Rs RemarketingListsGet = RemarketingList
+        type Scopes RemarketingListsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListsGet{..}
           = go _rlgProFileId _rlgId (Just AltJSON)
               dFAReportingService

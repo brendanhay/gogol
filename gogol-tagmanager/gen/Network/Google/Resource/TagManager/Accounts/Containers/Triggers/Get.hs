@@ -105,6 +105,9 @@ actgcAccountId
 instance GoogleRequest AccountsContainersTriggersGet
          where
         type Rs AccountsContainersTriggersGet = Trigger
+        type Scopes AccountsContainersTriggersGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersTriggersGet{..}
           = go _actgcAccountId _actgcContainerId
               _actgcTriggerId

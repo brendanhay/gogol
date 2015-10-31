@@ -174,6 +174,8 @@ pptCallback
 
 instance GoogleRequest ProjectsPatchTraces where
         type Rs ProjectsPatchTraces = Empty
+        type Scopes ProjectsPatchTraces =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsPatchTraces{..}
           = go _pptProjectId _pptXgafv _pptUploadProtocol
               (Just _pptPp)

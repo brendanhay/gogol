@@ -91,6 +91,10 @@ jgProjectId
 
 instance GoogleRequest JobsGet where
         type Rs JobsGet = Job
+        type Scopes JobsGet =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient JobsGet{..}
           = go _jgProjectId _jgJobId (Just AltJSON)
               bigQueryService

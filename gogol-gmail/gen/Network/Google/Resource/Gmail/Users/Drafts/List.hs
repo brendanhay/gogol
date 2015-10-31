@@ -113,6 +113,11 @@ udlMaxResults
 
 instance GoogleRequest UsersDraftsList where
         type Rs UsersDraftsList = ListDraftsResponse
+        type Scopes UsersDraftsList =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersDraftsList{..}
           = go _udlUserId (Just _udlIncludeSpamTrash)
               _udlPageToken

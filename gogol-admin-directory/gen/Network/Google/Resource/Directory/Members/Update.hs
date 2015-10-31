@@ -103,6 +103,9 @@ muPayload
 
 instance GoogleRequest MembersUpdate where
         type Rs MembersUpdate = Member
+        type Scopes MembersUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member"]
         requestClient MembersUpdate{..}
           = go _muGroupKey _muMemberKey (Just AltJSON)
               _muPayload

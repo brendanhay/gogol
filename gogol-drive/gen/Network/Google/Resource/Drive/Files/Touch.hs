@@ -75,6 +75,12 @@ ftFileId = lens _ftFileId (\ s a -> s{_ftFileId = a})
 
 instance GoogleRequest FilesTouch where
         type Rs FilesTouch = File
+        type Scopes FilesTouch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata"]
         requestClient FilesTouch{..}
           = go _ftFileId (Just AltJSON) driveService
           where go

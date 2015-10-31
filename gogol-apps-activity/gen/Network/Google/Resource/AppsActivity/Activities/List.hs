@@ -160,6 +160,12 @@ alPageSize
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = ListActivitiesResponse
+        type Scopes ActivitiesList =
+             '["https://www.googleapis.com/auth/activity",
+               "https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient ActivitiesList{..}
           = go _alDriveFileId _alDriveAncestorId
               (Just _alGroupingStrategy)

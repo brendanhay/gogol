@@ -138,6 +138,10 @@ csiOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest ChannelSectionsInsert where
         type Rs ChannelSectionsInsert = ChannelSection
+        type Scopes ChannelSectionsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient ChannelSectionsInsert{..}
           = go (Just _csiPart) _csiOnBehalfOfContentOwner
               _csiOnBehalfOfContentOwnerChannel

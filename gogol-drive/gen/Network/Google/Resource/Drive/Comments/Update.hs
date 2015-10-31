@@ -99,6 +99,9 @@ cuCommentId
 
 instance GoogleRequest CommentsUpdate where
         type Rs CommentsUpdate = Comment
+        type Scopes CommentsUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient CommentsUpdate{..}
           = go _cuFileId _cuCommentId (Just AltJSON) _cuPayload
               driveService

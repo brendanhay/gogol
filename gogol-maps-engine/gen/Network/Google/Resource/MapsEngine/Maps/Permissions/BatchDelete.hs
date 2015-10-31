@@ -91,6 +91,8 @@ instance GoogleRequest MapsPermissionsBatchDelete
          where
         type Rs MapsPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
+        type Scopes MapsPermissionsBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient MapsPermissionsBatchDelete{..}
           = go _mpbdId (Just AltJSON) _mpbdPayload
               mapsEngineService

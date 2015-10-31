@@ -112,6 +112,9 @@ miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
 instance GoogleRequest MomentsInsert where
         type Rs MomentsInsert = Moment
+        type Scopes MomentsInsert =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
         requestClient MomentsInsert{..}
           = go _miUserId _miCollection _miDebug (Just AltJSON)
               _miPayload

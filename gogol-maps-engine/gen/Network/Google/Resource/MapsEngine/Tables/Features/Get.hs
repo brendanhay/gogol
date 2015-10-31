@@ -110,6 +110,9 @@ tfgTableId
 
 instance GoogleRequest TablesFeaturesGet where
         type Rs TablesFeaturesGet = Feature
+        type Scopes TablesFeaturesGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient TablesFeaturesGet{..}
           = go _tfgTableId _tfgId _tfgVersion _tfgSelect
               (Just AltJSON)

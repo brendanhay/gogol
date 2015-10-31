@@ -100,6 +100,8 @@ caCommentId
 
 instance GoogleRequest CommentsApprove where
         type Rs CommentsApprove = Comment
+        type Scopes CommentsApprove =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient CommentsApprove{..}
           = go _caBlogId _caPostId _caCommentId (Just AltJSON)
               bloggerService

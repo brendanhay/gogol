@@ -100,6 +100,8 @@ auAccountId
 
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
+        type Scopes AccountsUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
         requestClient AccountsUpdate{..}
           = go _auAccountId _auFingerprint (Just AltJSON)
               _auPayload

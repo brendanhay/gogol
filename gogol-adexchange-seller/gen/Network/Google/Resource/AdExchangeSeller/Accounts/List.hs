@@ -89,6 +89,9 @@ alMaxResults
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = Accounts
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsList{..}
           = go _alPageToken _alMaxResults (Just AltJSON)
               adExchangeSellerService

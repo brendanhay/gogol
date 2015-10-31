@@ -91,6 +91,8 @@ mauldLinkId
 instance GoogleRequest
          ManagementAccountUserLinksDelete where
         type Rs ManagementAccountUserLinksDelete = ()
+        type Scopes ManagementAccountUserLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient ManagementAccountUserLinksDelete{..}
           = go _mauldAccountId _mauldLinkId (Just AltJSON)
               analyticsService

@@ -92,6 +92,8 @@ instance GoogleRequest
          RasterCollectionsPermissionsBatchDelete where
         type Rs RasterCollectionsPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
+        type Scopes RasterCollectionsPermissionsBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient
           RasterCollectionsPermissionsBatchDelete{..}
           = go _rcpbdId (Just AltJSON) _rcpbdPayload

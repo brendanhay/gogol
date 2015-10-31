@@ -102,6 +102,9 @@ irbInstance
 
 instance GoogleRequest InstancesRestoreBackup where
         type Rs InstancesRestoreBackup = Operation
+        type Scopes InstancesRestoreBackup =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesRestoreBackup{..}
           = go _irbProject _irbInstance (Just AltJSON)
               _irbPayload

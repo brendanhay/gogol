@@ -76,6 +76,9 @@ aplAccountId
 
 instance GoogleRequest AccountsPaymentsList where
         type Rs AccountsPaymentsList = Payments
+        type Scopes AccountsPaymentsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsPaymentsList{..}
           = go _aplAccountId (Just AltJSON) adSenseService
           where go

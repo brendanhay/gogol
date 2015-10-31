@@ -420,6 +420,8 @@ alAudienceSegmentIds
 
 instance GoogleRequest AdsList where
         type Rs AdsList = AdsListResponse
+        type Scopes AdsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdsList{..}
           = go _alProFileId (_alRemarketingListIds ^. _Default)
               (_alLandingPageIds ^. _Default)

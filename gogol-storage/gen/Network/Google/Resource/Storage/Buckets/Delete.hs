@@ -102,6 +102,10 @@ bdIfMetagenerationNotMatch
 
 instance GoogleRequest BucketsDelete where
         type Rs BucketsDelete = ()
+        type Scopes BucketsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient BucketsDelete{..}
           = go _bdBucket _bdIfMetagenerationMatch
               _bdIfMetagenerationNotMatch

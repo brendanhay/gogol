@@ -88,6 +88,9 @@ sgTeamId = lens _sgTeamId (\ s a -> s{_sgTeamId = a})
 
 instance GoogleRequest ScheduleGet where
         type Rs ScheduleGet = Schedule
+        type Scopes ScheduleGet =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
         requestClient ScheduleGet{..}
           = go _sgTeamId _sgJobId (Just AltJSON)
               mapsCoordinateService

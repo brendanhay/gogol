@@ -96,6 +96,10 @@ udsaUserId
 
 instance GoogleRequest UsersDataSetAggregate where
         type Rs UsersDataSetAggregate = AggregateResponse
+        type Scopes UsersDataSetAggregate =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersDataSetAggregate{..}
           = go _udsaUserId (Just AltJSON) _udsaPayload
               fitnessService

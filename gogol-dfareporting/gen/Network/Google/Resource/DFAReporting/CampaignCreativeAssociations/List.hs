@@ -137,6 +137,8 @@ instance GoogleRequest
          CampaignCreativeAssociationsList where
         type Rs CampaignCreativeAssociationsList =
              CampaignCreativeAssociationsListResponse
+        type Scopes CampaignCreativeAssociationsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignCreativeAssociationsList{..}
           = go _ccalProFileId _ccalCampaignId _ccalSortOrder
               _ccalPageToken

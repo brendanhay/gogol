@@ -104,6 +104,9 @@ pilMaxResults
 
 instance GoogleRequest ProjectsIconsList where
         type Rs ProjectsIconsList = IconsListResponse
+        type Scopes ProjectsIconsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient ProjectsIconsList{..}
           = go _pilProjectId _pilPageToken _pilMaxResults
               (Just AltJSON)

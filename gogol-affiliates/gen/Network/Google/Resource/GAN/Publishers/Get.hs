@@ -104,6 +104,7 @@ pgPublisherId
 
 instance GoogleRequest PublishersGet where
         type Rs PublishersGet = Publisher
+        type Scopes PublishersGet = '[]
         requestClient PublishersGet{..}
           = go _pgRole _pgRoleId _pgPublisherId (Just AltJSON)
               affiliatesService

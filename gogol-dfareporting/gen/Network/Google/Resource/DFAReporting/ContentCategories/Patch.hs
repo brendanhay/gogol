@@ -104,6 +104,8 @@ ccpId
 
 instance GoogleRequest ContentCategoriesPatch where
         type Rs ContentCategoriesPatch = ContentCategory
+        type Scopes ContentCategoriesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ContentCategoriesPatch{..}
           = go _ccpProFileId (Just _ccpId) (Just AltJSON)
               _ccpPayload

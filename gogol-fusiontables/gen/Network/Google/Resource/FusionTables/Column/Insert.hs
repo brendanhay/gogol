@@ -88,6 +88,8 @@ ciTableId
 
 instance GoogleRequest ColumnInsert where
         type Rs ColumnInsert = Column
+        type Scopes ColumnInsert =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient ColumnInsert{..}
           = go _ciTableId (Just AltJSON) _ciPayload
               fusionTablesService

@@ -86,6 +86,8 @@ lcPayload
 
 instance GoogleRequest LayersCreate where
         type Rs LayersCreate = Layer
+        type Scopes LayersCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient LayersCreate{..}
           = go _lcProcess (Just AltJSON) _lcPayload
               mapsEngineService

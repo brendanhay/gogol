@@ -93,6 +93,8 @@ acccAccountId
 
 instance GoogleRequest AccountshippingGet where
         type Rs AccountshippingGet = AccountShipping
+        type Scopes AccountshippingGet =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountshippingGet{..}
           = go _acccMerchantId _acccAccountId (Just AltJSON)
               shoppingContentService

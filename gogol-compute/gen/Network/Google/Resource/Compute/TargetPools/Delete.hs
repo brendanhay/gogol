@@ -102,6 +102,9 @@ tpdRegion
 
 instance GoogleRequest TargetPoolsDelete where
         type Rs TargetPoolsDelete = Operation
+        type Scopes TargetPoolsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetPoolsDelete{..}
           = go _tpdProject _tpdRegion _tpdTargetPool
               (Just AltJSON)

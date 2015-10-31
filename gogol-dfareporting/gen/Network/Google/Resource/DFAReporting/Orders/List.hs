@@ -179,6 +179,8 @@ olMaxResults
 
 instance GoogleRequest OrdersList where
         type Rs OrdersList = OrdersListResponse
+        type Scopes OrdersList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OrdersList{..}
           = go _olProFileId _olProjectId _olSearchString
               (_olIds ^. _Default)

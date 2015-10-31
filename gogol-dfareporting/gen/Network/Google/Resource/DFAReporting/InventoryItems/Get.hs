@@ -103,6 +103,8 @@ iigProjectId
 
 instance GoogleRequest InventoryItemsGet where
         type Rs InventoryItemsGet = InventoryItem
+        type Scopes InventoryItemsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient InventoryItemsGet{..}
           = go _iigProFileId _iigProjectId _iigId
               (Just AltJSON)

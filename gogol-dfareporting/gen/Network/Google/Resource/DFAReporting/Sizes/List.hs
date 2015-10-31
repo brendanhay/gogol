@@ -126,6 +126,8 @@ slIabStandard
 
 instance GoogleRequest SizesList where
         type Rs SizesList = SizesListResponse
+        type Scopes SizesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SizesList{..}
           = go _slProFileId _slHeight (_slIds ^. _Default)
               _slWidth

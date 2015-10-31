@@ -121,6 +121,8 @@ instance GoogleRequest
          AccountsContainersVersionsPublish where
         type Rs AccountsContainersVersionsPublish =
              PublishContainerVersionResponse
+        type Scopes AccountsContainersVersionsPublish =
+             '["https://www.googleapis.com/auth/tagmanager.publish"]
         requestClient AccountsContainersVersionsPublish{..}
           = go _acvpAccountId _acvpContainerId
               _acvpContainerVersionId

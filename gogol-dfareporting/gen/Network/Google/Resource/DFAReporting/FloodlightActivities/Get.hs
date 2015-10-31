@@ -89,6 +89,8 @@ fId = lens _fId (\ s a -> s{_fId = a}) . _Coerce
 
 instance GoogleRequest FloodlightActivitiesGet where
         type Rs FloodlightActivitiesGet = FloodlightActivity
+        type Scopes FloodlightActivitiesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivitiesGet{..}
           = go _fProFileId _fId (Just AltJSON)
               dFAReportingService

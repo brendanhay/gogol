@@ -116,6 +116,8 @@ eluEditId
 
 instance GoogleRequest EditsListingsUpdate where
         type Rs EditsListingsUpdate = Listing
+        type Scopes EditsListingsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsUpdate{..}
           = go _eluPackageName _eluEditId _eluLanguage
               (Just AltJSON)

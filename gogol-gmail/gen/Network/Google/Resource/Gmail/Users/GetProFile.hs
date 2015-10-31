@@ -76,6 +76,11 @@ ugpfUserId
 
 instance GoogleRequest UsersGetProFile where
         type Rs UsersGetProFile = ProFile
+        type Scopes UsersGetProFile =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersGetProFile{..}
           = go _ugpfUserId (Just AltJSON) gmailService
           where go

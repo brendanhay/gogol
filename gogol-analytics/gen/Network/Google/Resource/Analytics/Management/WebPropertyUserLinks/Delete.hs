@@ -105,6 +105,8 @@ mwpuldLinkId
 instance GoogleRequest
          ManagementWebPropertyUserLinksDelete where
         type Rs ManagementWebPropertyUserLinksDelete = ()
+        type Scopes ManagementWebPropertyUserLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient
           ManagementWebPropertyUserLinksDelete{..}
           = go _mwpuldAccountId _mwpuldWebPropertyId

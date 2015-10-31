@@ -117,6 +117,8 @@ aaupAccountId
 
 instance GoogleRequest AccountsAdUnitsPatch where
         type Rs AccountsAdUnitsPatch = AdUnit
+        type Scopes AccountsAdUnitsPatch =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AccountsAdUnitsPatch{..}
           = go _aaupAccountId _aaupAdClientId
               (Just _aaupAdUnitId)

@@ -105,6 +105,8 @@ iapiPayload
 
 instance GoogleRequest InAppProductsInsert where
         type Rs InAppProductsInsert = InAppProduct
+        type Scopes InAppProductsInsert =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient InAppProductsInsert{..}
           = go _iapiPackageName _iapiAutoConvertMissingPrices
               (Just AltJSON)

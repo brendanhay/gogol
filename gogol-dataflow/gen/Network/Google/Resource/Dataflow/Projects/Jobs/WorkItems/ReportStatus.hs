@@ -186,6 +186,9 @@ instance GoogleRequest
          ProjectsJobsWorkItemsReportStatus where
         type Rs ProjectsJobsWorkItemsReportStatus =
              ReportWorkItemStatusResponse
+        type Scopes ProjectsJobsWorkItemsReportStatus =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsWorkItemsReportStatus{..}
           = go _pjwirsProjectId _pjwirsJobId _pjwirsXgafv
               _pjwirsUploadProtocol

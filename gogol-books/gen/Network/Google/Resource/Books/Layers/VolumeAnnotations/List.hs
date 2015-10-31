@@ -252,6 +252,8 @@ instance GoogleRequest LayersVolumeAnnotationsList
          where
         type Rs LayersVolumeAnnotationsList =
              Volumeannotations
+        type Scopes LayersVolumeAnnotationsList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient LayersVolumeAnnotationsList{..}
           = go _lvalVolumeId _lvalLayerId
               (Just _lvalContentVersion)

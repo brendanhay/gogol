@@ -61,6 +61,8 @@ filesEmptyTrash = FilesEmptyTrash
 
 instance GoogleRequest FilesEmptyTrash where
         type Rs FilesEmptyTrash = ()
+        type Scopes FilesEmptyTrash =
+             '["https://www.googleapis.com/auth/drive"]
         requestClient FilesEmptyTrash{}
           = go (Just AltJSON) driveService
           where go

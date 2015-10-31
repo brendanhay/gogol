@@ -88,6 +88,8 @@ pcgCode = lens _pcgCode (\ s a -> s{_pcgCode = a})
 
 instance GoogleRequest PostalCodesGet where
         type Rs PostalCodesGet = PostalCode
+        type Scopes PostalCodesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PostalCodesGet{..}
           = go _pcgProFileId _pcgCode (Just AltJSON)
               dFAReportingService

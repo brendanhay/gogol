@@ -191,6 +191,8 @@ plCallback
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ListProjectsResponse
+        type Scopes ProjectsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsList{..}
           = go _plXgafv _plUploadProtocol (Just _plPp)
               _plAccessToken

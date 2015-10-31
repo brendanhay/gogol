@@ -106,6 +106,8 @@ al1MaxResults
 instance GoogleRequest AccountshippingList where
         type Rs AccountshippingList =
              AccountshippingListResponse
+        type Scopes AccountshippingList =
+             '["https://www.googleapis.com/auth/content"]
         requestClient AccountshippingList{..}
           = go _al1MerchantId _al1PageToken _al1MaxResults
               (Just AltJSON)

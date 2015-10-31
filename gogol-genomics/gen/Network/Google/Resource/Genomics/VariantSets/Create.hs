@@ -163,6 +163,9 @@ vscCallback
 
 instance GoogleRequest VariantSetsCreate where
         type Rs VariantSetsCreate = VariantSet
+        type Scopes VariantSetsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantSetsCreate{..}
           = go _vscXgafv _vscUploadProtocol (Just _vscPp)
               _vscAccessToken

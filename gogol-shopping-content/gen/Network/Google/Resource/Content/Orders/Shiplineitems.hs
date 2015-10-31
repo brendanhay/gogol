@@ -103,6 +103,8 @@ osOrderId
 instance GoogleRequest OrdersShiplineitems where
         type Rs OrdersShiplineitems =
              OrdersShipLineItemsResponse
+        type Scopes OrdersShiplineitems =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersShiplineitems{..}
           = go _osMerchantId _osOrderId (Just AltJSON)
               _osPayload

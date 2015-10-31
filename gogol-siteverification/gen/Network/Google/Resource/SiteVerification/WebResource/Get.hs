@@ -76,6 +76,8 @@ wrgId = lens _wrgId (\ s a -> s{_wrgId = a})
 instance GoogleRequest WebResourceGet where
         type Rs WebResourceGet =
              SiteVerificationWebResourceResource
+        type Scopes WebResourceGet =
+             '["https://www.googleapis.com/auth/siteverification"]
         requestClient WebResourceGet{..}
           = go _wrgId (Just AltJSON) siteVerificationService
           where go

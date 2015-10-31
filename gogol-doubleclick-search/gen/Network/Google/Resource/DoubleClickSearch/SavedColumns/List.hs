@@ -93,6 +93,8 @@ sclAdvertiserId
 
 instance GoogleRequest SavedColumnsList where
         type Rs SavedColumnsList = SavedColumnList
+        type Scopes SavedColumnsList =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient SavedColumnsList{..}
           = go _sclAgencyId _sclAdvertiserId (Just AltJSON)
               doubleClickSearchService

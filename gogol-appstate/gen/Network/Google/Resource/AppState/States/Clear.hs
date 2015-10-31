@@ -94,6 +94,8 @@ scCurrentDataVersion
 
 instance GoogleRequest StatesClear where
         type Rs StatesClear = WriteResult
+        type Scopes StatesClear =
+             '["https://www.googleapis.com/auth/appstate"]
         requestClient StatesClear{..}
           = go _scStateKey _scCurrentDataVersion (Just AltJSON)
               appStateService

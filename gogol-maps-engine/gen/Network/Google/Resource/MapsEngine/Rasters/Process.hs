@@ -76,6 +76,8 @@ rpId = lens _rpId (\ s a -> s{_rpId = a})
 
 instance GoogleRequest RastersProcess where
         type Rs RastersProcess = ProcessResponse
+        type Scopes RastersProcess =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RastersProcess{..}
           = go _rpId (Just AltJSON) mapsEngineService
           where go

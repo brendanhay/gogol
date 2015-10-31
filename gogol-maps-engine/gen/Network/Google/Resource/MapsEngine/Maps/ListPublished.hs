@@ -106,6 +106,9 @@ mlpMaxResults
 
 instance GoogleRequest MapsListPublished where
         type Rs MapsListPublished = PublishedMapsListResponse
+        type Scopes MapsListPublished =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient MapsListPublished{..}
           = go _mlpPageToken _mlpProjectId _mlpMaxResults
               (Just AltJSON)

@@ -151,6 +151,8 @@ poaAndroidId
 
 instance GoogleRequest PromoOfferAccept where
         type Rs PromoOfferAccept = ()
+        type Scopes PromoOfferAccept =
+             '["https://www.googleapis.com/auth/books"]
         requestClient PromoOfferAccept{..}
           = go _poaManufacturer _poaSerial _poaDevice _poaModel
               _poaVolumeId

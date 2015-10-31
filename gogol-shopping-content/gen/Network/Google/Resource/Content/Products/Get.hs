@@ -89,6 +89,8 @@ pggProductId
 
 instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
+        type Scopes ProductsGet =
+             '["https://www.googleapis.com/auth/content"]
         requestClient ProductsGet{..}
           = go _pggMerchantId _pggProductId (Just AltJSON)
               shoppingContentService

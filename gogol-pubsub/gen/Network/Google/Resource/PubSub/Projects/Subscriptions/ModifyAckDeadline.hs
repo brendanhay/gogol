@@ -177,6 +177,9 @@ instance GoogleRequest
          ProjectsSubscriptionsModifyAckDeadline where
         type Rs ProjectsSubscriptionsModifyAckDeadline =
              Empty
+        type Scopes ProjectsSubscriptionsModifyAckDeadline =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient
           ProjectsSubscriptionsModifyAckDeadline{..}
           = go _psmadSubscription _psmadXgafv

@@ -80,6 +80,7 @@ instance GoogleRequest RelyingPartyUploadAccount
          where
         type Rs RelyingPartyUploadAccount =
              UploadAccountResponse
+        type Scopes RelyingPartyUploadAccount = '[]
         requestClient RelyingPartyUploadAccount{..}
           = go (Just AltJSON) _rpuaPayload
               identityToolkitService

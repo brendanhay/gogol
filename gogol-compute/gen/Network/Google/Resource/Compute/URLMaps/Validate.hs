@@ -107,6 +107,9 @@ umvPayload
 
 instance GoogleRequest URLMapsValidate where
         type Rs URLMapsValidate = URLMapsValidateResponse
+        type Scopes URLMapsValidate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient URLMapsValidate{..}
           = go _umvProject _umvURLMap (Just AltJSON)
               _umvPayload

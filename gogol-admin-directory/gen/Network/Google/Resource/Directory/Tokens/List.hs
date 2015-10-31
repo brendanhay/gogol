@@ -80,6 +80,8 @@ tlUserKey
 
 instance GoogleRequest TokensList where
         type Rs TokensList = Tokens
+        type Scopes TokensList =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient TokensList{..}
           = go _tlUserKey (Just AltJSON) directoryService
           where go

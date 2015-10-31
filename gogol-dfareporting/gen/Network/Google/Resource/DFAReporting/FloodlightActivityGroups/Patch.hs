@@ -107,6 +107,8 @@ instance GoogleRequest FloodlightActivityGroupsPatch
          where
         type Rs FloodlightActivityGroupsPatch =
              FloodlightActivityGroup
+        type Scopes FloodlightActivityGroupsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivityGroupsPatch{..}
           = go _fagpProFileId (Just _fagpId) (Just AltJSON)
               _fagpPayload

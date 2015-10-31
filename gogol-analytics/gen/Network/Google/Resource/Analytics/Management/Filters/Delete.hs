@@ -89,6 +89,8 @@ mfdAccountId
 
 instance GoogleRequest ManagementFiltersDelete where
         type Rs ManagementFiltersDelete = Filter
+        type Scopes ManagementFiltersDelete =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementFiltersDelete{..}
           = go _mfdAccountId _mfdFilterId (Just AltJSON)
               analyticsService

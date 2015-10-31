@@ -103,6 +103,8 @@ ouOrderId
 instance GoogleRequest OrdersUpdateshipment where
         type Rs OrdersUpdateshipment =
              OrdersUpdateShipmentResponse
+        type Scopes OrdersUpdateshipment =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersUpdateshipment{..}
           = go _ouMerchantId _ouOrderId (Just AltJSON)
               _ouPayload

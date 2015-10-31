@@ -88,6 +88,8 @@ ccId = lens _ccId (\ s a -> s{_ccId = a}) . _Coerce
 
 instance GoogleRequest CreativesGet where
         type Rs CreativesGet = Creative
+        type Scopes CreativesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativesGet{..}
           = go _ccProFileId _ccId (Just AltJSON)
               dFAReportingService

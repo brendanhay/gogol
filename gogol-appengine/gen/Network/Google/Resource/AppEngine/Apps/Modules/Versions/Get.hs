@@ -194,6 +194,8 @@ amvgCallback
 
 instance GoogleRequest AppsModulesVersionsGet where
         type Rs AppsModulesVersionsGet = Version
+        type Scopes AppsModulesVersionsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsModulesVersionsGet{..}
           = go _amvgAppsId _amvgModulesId _amvgVersionsId
               _amvgXgafv

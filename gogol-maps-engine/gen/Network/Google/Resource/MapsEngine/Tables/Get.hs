@@ -84,6 +84,9 @@ tgId = lens _tgId (\ s a -> s{_tgId = a})
 
 instance GoogleRequest TablesGet where
         type Rs TablesGet = Table
+        type Scopes TablesGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient TablesGet{..}
           = go _tgId _tgVersion (Just AltJSON)
               mapsEngineService

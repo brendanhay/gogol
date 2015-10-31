@@ -249,6 +249,7 @@ llMaxResults
 
 instance GoogleRequest LinksList where
         type Rs LinksList = Links
+        type Scopes LinksList = '[]
         requestClient LinksList{..}
           = go _llRole _llRoleId _llCreateDateMax _llAuthorship
               (_llAssetSize ^. _Default)

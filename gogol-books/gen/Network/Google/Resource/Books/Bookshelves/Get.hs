@@ -96,6 +96,8 @@ bgSource = lens _bgSource (\ s a -> s{_bgSource = a})
 
 instance GoogleRequest BookshelvesGet where
         type Rs BookshelvesGet = Bookshelf
+        type Scopes BookshelvesGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient BookshelvesGet{..}
           = go _bgUserId _bgShelf _bgSource (Just AltJSON)
               booksService

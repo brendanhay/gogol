@@ -105,6 +105,8 @@ instance GoogleRequest
          ManagementAccountUserLinksUpdate where
         type Rs ManagementAccountUserLinksUpdate =
              EntityUserLink
+        type Scopes ManagementAccountUserLinksUpdate =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient ManagementAccountUserLinksUpdate{..}
           = go _mauluAccountId _mauluLinkId (Just AltJSON)
               _mauluPayload

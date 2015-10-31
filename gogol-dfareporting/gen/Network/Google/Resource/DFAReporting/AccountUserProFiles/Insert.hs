@@ -93,6 +93,8 @@ instance GoogleRequest AccountUserProFilesInsert
          where
         type Rs AccountUserProFilesInsert =
              AccountUserProFile
+        type Scopes AccountUserProFilesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountUserProFilesInsert{..}
           = go _aupfiProFileId (Just AltJSON) _aupfiPayload
               dFAReportingService

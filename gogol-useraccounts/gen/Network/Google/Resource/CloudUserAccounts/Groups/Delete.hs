@@ -89,6 +89,9 @@ gdGroupName
 
 instance GoogleRequest GroupsDelete where
         type Rs GroupsDelete = Operation
+        type Scopes GroupsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient GroupsDelete{..}
           = go _gdProject _gdGroupName (Just AltJSON)
               userAccountsService

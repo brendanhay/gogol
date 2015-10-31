@@ -111,6 +111,11 @@ tsVideoId
 
 instance GoogleRequest ThumbnailsSet where
         type Rs ThumbnailsSet = ThumbnailSetResponse
+        type Scopes ThumbnailsSet =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.upload",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient ThumbnailsSet{..}
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
@@ -123,6 +128,8 @@ instance GoogleRequest (MediaUpload ThumbnailsSet)
          where
         type Rs (MediaUpload ThumbnailsSet) =
              ThumbnailSetResponse
+        type Scopes (MediaUpload ThumbnailsSet) =
+             Scopes ThumbnailsSet
         requestClient (MediaUpload ThumbnailsSet{..} body)
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)

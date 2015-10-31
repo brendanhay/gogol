@@ -88,6 +88,7 @@ agrAPI = lens _agrAPI (\ s a -> s{_agrAPI = a})
 
 instance GoogleRequest APIsGetRest where
         type Rs APIsGetRest = RestDescription
+        type Scopes APIsGetRest = '[]
         requestClient APIsGetRest{..}
           = go _agrAPI _agrVersion (Just AltJSON)
               discoveryService

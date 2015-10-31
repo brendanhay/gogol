@@ -173,6 +173,8 @@ instance GoogleRequest ProjectsTestIAMPermissions
          where
         type Rs ProjectsTestIAMPermissions =
              TestIAMPermissionsResponse
+        type Scopes ProjectsTestIAMPermissions =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsTestIAMPermissions{..}
           = go _ptipResource _ptipXgafv _ptipUploadProtocol
               (Just _ptipPp)

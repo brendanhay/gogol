@@ -93,6 +93,8 @@ lplProFileId
 
 instance GoogleRequest LandingPagesList where
         type Rs LandingPagesList = LandingPagesListResponse
+        type Scopes LandingPagesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient LandingPagesList{..}
           = go _lplProFileId _lplCampaignId (Just AltJSON)
               dFAReportingService

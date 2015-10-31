@@ -180,6 +180,7 @@ balCallback
 instance GoogleRequest BeaconsAttachmentsList where
         type Rs BeaconsAttachmentsList =
              ListBeaconAttachmentsResponse
+        type Scopes BeaconsAttachmentsList = '[]
         requestClient BeaconsAttachmentsList{..}
           = go _balBeaconName _balXgafv _balUploadProtocol
               (Just _balPp)

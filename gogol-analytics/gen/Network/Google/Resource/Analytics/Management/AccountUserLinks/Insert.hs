@@ -93,6 +93,8 @@ instance GoogleRequest
          ManagementAccountUserLinksInsert where
         type Rs ManagementAccountUserLinksInsert =
              EntityUserLink
+        type Scopes ManagementAccountUserLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient ManagementAccountUserLinksInsert{..}
           = go _mauliAccountId (Just AltJSON) _mauliPayload
               analyticsService

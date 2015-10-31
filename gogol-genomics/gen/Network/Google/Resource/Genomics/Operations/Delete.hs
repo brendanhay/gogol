@@ -152,6 +152,9 @@ odCallback
 
 instance GoogleRequest OperationsDelete where
         type Rs OperationsDelete = Empty
+        type Scopes OperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient OperationsDelete{..}
           = go _odName _odXgafv _odUploadProtocol (Just _odPp)
               _odAccessToken

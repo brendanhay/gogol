@@ -102,6 +102,9 @@ brdInstance
 
 instance GoogleRequest BackupRunsDelete where
         type Rs BackupRunsDelete = Operation
+        type Scopes BackupRunsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient BackupRunsDelete{..}
           = go _brdProject _brdInstance _brdId (Just AltJSON)
               sQLAdminService

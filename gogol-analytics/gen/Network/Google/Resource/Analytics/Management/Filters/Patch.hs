@@ -101,6 +101,8 @@ mfpAccountId
 
 instance GoogleRequest ManagementFiltersPatch where
         type Rs ManagementFiltersPatch = Filter
+        type Scopes ManagementFiltersPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementFiltersPatch{..}
           = go _mfpAccountId _mfpFilterId (Just AltJSON)
               _mfpPayload

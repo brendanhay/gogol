@@ -99,6 +99,8 @@ picProjectId
 
 instance GoogleRequest ProjectsIconsCreate where
         type Rs ProjectsIconsCreate = Icon
+        type Scopes ProjectsIconsCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient ProjectsIconsCreate{..}
           = go _picProjectId (Just AltJSON) _picPayload
               mapsEngineService
@@ -110,6 +112,8 @@ instance GoogleRequest ProjectsIconsCreate where
 instance GoogleRequest
          (MediaUpload ProjectsIconsCreate) where
         type Rs (MediaUpload ProjectsIconsCreate) = Icon
+        type Scopes (MediaUpload ProjectsIconsCreate) =
+             Scopes ProjectsIconsCreate
         requestClient
           (MediaUpload ProjectsIconsCreate{..} body)
           = go _picProjectId (Just AltJSON) (Just AltMedia)

@@ -89,6 +89,9 @@ sgTableId
 
 instance GoogleRequest StyleGet where
         type Rs StyleGet = StyleSetting
+        type Scopes StyleGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient StyleGet{..}
           = go _sgTableId _sgStyleId (Just AltJSON)
               fusionTablesService

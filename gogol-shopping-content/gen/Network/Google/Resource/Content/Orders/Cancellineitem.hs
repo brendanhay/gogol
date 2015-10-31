@@ -104,6 +104,8 @@ ordOrderId
 instance GoogleRequest OrdersCancellineitem where
         type Rs OrdersCancellineitem =
              OrdersCancelLineItemResponse
+        type Scopes OrdersCancellineitem =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCancellineitem{..}
           = go _ordMerchantId _ordOrderId (Just AltJSON)
               _ordPayload

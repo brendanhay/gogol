@@ -86,6 +86,8 @@ pdPostId = lens _pdPostId (\ s a -> s{_pdPostId = a})
 
 instance GoogleRequest PostsDelete where
         type Rs PostsDelete = ()
+        type Scopes PostsDelete =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsDelete{..}
           = go _pdBlogId _pdPostId (Just AltJSON)
               bloggerService

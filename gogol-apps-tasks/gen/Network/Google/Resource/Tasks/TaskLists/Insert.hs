@@ -79,6 +79,8 @@ tliPayload
 
 instance GoogleRequest TaskListsInsert where
         type Rs TaskListsInsert = TaskList
+        type Scopes TaskListsInsert =
+             '["https://www.googleapis.com/auth/tasks"]
         requestClient TaskListsInsert{..}
           = go (Just AltJSON) _tliPayload appsTasksService
           where go

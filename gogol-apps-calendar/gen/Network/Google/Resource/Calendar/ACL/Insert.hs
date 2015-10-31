@@ -90,6 +90,8 @@ aiPayload
 
 instance GoogleRequest ACLInsert where
         type Rs ACLInsert = ACLRule
+        type Scopes ACLInsert =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient ACLInsert{..}
           = go _aiCalendarId (Just AltJSON) _aiPayload
               appsCalendarService

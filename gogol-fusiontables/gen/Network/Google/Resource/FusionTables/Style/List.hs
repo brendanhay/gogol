@@ -100,6 +100,9 @@ slMaxResults
 
 instance GoogleRequest StyleList where
         type Rs StyleList = StyleSettingList
+        type Scopes StyleList =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient StyleList{..}
           = go _slTableId _slPageToken _slMaxResults
               (Just AltJSON)

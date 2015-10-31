@@ -142,6 +142,10 @@ udsdspCurrentTimeMillis
 instance GoogleRequest UsersDataSourcesDataSetsPatch
          where
         type Rs UsersDataSourcesDataSetsPatch = DataSet
+        type Scopes UsersDataSourcesDataSetsPatch =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersDataSourcesDataSetsPatch{..}
           = go _udsdspUserId _udsdspDataSourceId
               _udsdspDataSetId

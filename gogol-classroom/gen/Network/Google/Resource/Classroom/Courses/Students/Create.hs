@@ -198,6 +198,10 @@ cscCallback
 
 instance GoogleRequest CoursesStudentsCreate where
         type Rs CoursesStudentsCreate = Student
+        type Scopes CoursesStudentsCreate =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters"]
         requestClient CoursesStudentsCreate{..}
           = go _cscCourseId _cscXgafv _cscUploadProtocol
               (Just _cscPp)

@@ -89,6 +89,10 @@ uddId = lens _uddId (\ s a -> s{_uddId = a})
 
 instance GoogleRequest UsersDraftsDelete where
         type Rs UsersDraftsDelete = ()
+        type Scopes UsersDraftsDelete =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersDraftsDelete{..}
           = go _uddUserId _uddId (Just AltJSON) gmailService
           where go

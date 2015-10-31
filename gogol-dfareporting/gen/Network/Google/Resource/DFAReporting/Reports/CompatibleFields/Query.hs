@@ -99,6 +99,8 @@ instance GoogleRequest ReportsCompatibleFieldsQuery
          where
         type Rs ReportsCompatibleFieldsQuery =
              CompatibleFields
+        type Scopes ReportsCompatibleFieldsQuery =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsCompatibleFieldsQuery{..}
           = go _rcfqProFileId (Just AltJSON) _rcfqPayload
               dFAReportingService

@@ -103,6 +103,9 @@ ilMaxResults
 
 instance GoogleRequest InstancesList where
         type Rs InstancesList = InstancesListResponse
+        type Scopes InstancesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesList{..}
           = go _ilProject _ilPageToken _ilMaxResults
               (Just AltJSON)

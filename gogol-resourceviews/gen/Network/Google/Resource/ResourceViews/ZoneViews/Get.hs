@@ -101,6 +101,13 @@ zvgZone = lens _zvgZone (\ s a -> s{_zvgZone = a})
 
 instance GoogleRequest ZoneViewsGet where
         type Rs ZoneViewsGet = ResourceView
+        type Scopes ZoneViewsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient ZoneViewsGet{..}
           = go _zvgProject _zvgZone _zvgResourceView
               (Just AltJSON)

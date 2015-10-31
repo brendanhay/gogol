@@ -90,6 +90,8 @@ cguPayload
 
 instance GoogleRequest CreativeGroupsUpdate where
         type Rs CreativeGroupsUpdate = CreativeGroup
+        type Scopes CreativeGroupsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeGroupsUpdate{..}
           = go _cguProFileId (Just AltJSON) _cguPayload
               dFAReportingService

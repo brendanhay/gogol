@@ -100,6 +100,8 @@ rpCustomer
 
 instance GoogleRequest RolesPatch where
         type Rs RolesPatch = Role
+        type Scopes RolesPatch =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
         requestClient RolesPatch{..}
           = go _rpCustomer _rpRoleId (Just AltJSON) _rpPayload
               directoryService

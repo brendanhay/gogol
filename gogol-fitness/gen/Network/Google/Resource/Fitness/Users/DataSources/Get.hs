@@ -90,6 +90,13 @@ udsgUserId
 
 instance GoogleRequest UsersDataSourcesGet where
         type Rs UsersDataSourcesGet = DataSource
+        type Scopes UsersDataSourcesGet =
+             '["https://www.googleapis.com/auth/fitness.activity.read",
+               "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.read",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.read",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersDataSourcesGet{..}
           = go _udsgUserId _udsgDataSourceId (Just AltJSON)
               fitnessService

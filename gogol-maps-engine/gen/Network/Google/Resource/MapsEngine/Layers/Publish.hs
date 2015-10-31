@@ -88,6 +88,8 @@ lpId = lens _lpId (\ s a -> s{_lpId = a})
 
 instance GoogleRequest LayersPublish where
         type Rs LayersPublish = PublishResponse
+        type Scopes LayersPublish =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient LayersPublish{..}
           = go _lpId _lpForce (Just AltJSON) mapsEngineService
           where go

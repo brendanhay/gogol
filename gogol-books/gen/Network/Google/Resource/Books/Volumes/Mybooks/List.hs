@@ -157,6 +157,8 @@ vmlMaxResults
 
 instance GoogleRequest VolumesMybooksList where
         type Rs VolumesMybooksList = Volumes
+        type Scopes VolumesMybooksList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient VolumesMybooksList{..}
           = go (_vmlProcessingState ^. _Default)
               (_vmlAcquireMethod ^. _Default)

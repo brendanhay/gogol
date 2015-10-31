@@ -167,6 +167,8 @@ plMaxResults
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse
+        type Scopes ProjectsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ProjectsList{..}
           = go _plProFileId _plSearchString
               (_plIds ^. _Default)

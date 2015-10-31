@@ -93,6 +93,8 @@ instance GoogleRequest LeaderboardConfigurationsPatch
          where
         type Rs LeaderboardConfigurationsPatch =
              LeaderboardConfiguration
+        type Scopes LeaderboardConfigurationsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient LeaderboardConfigurationsPatch{..}
           = go _lcpLeaderboardId (Just AltJSON) _lcpPayload
               gamesConfigurationService

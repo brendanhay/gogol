@@ -86,6 +86,8 @@ cadClientAccountId
 
 instance GoogleRequest ClientAccessDelete where
         type Rs ClientAccessDelete = ()
+        type Scopes ClientAccessDelete =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ClientAccessDelete{..}
           = go _cadClientAccountId (Just _cadSponsorAccountId)
               (Just AltJSON)

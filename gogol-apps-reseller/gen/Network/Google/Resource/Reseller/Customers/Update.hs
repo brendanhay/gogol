@@ -90,6 +90,8 @@ cuCustomerId
 
 instance GoogleRequest CustomersUpdate where
         type Rs CustomersUpdate = Customer
+        type Scopes CustomersUpdate =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient CustomersUpdate{..}
           = go _cuCustomerId (Just AltJSON) _cuPayload
               appsResellerService

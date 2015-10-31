@@ -177,6 +177,9 @@ instance GoogleRequest DataSetsTestIAMPermissions
          where
         type Rs DataSetsTestIAMPermissions =
              TestIAMPermissionsResponse
+        type Scopes DataSetsTestIAMPermissions =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient DataSetsTestIAMPermissions{..}
           = go _dstipResource _dstipXgafv _dstipUploadProtocol
               (Just _dstipPp)

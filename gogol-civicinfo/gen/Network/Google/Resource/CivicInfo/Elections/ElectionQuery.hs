@@ -62,6 +62,7 @@ electionsElectionQuery = ElectionsElectionQuery
 instance GoogleRequest ElectionsElectionQuery where
         type Rs ElectionsElectionQuery =
              ElectionsQueryResponse
+        type Scopes ElectionsElectionQuery = '[]
         requestClient ElectionsElectionQuery{}
           = go (Just AltJSON) civicInfoService
           where go

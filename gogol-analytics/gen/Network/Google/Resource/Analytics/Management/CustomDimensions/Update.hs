@@ -133,6 +133,8 @@ instance GoogleRequest
          ManagementCustomDimensionsUpdate where
         type Rs ManagementCustomDimensionsUpdate =
              CustomDimension
+        type Scopes ManagementCustomDimensionsUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementCustomDimensionsUpdate{..}
           = go _mcduAccountId _mcduWebPropertyId
               _mcduCustomDimensionId

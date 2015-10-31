@@ -108,6 +108,8 @@ pscSubscriptionId
 instance GoogleRequest PurchasesSubscriptionsCancel
          where
         type Rs PurchasesSubscriptionsCancel = ()
+        type Scopes PurchasesSubscriptionsCancel =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient PurchasesSubscriptionsCancel{..}
           = go _pscPackageName _pscSubscriptionId _pscToken
               (Just AltJSON)

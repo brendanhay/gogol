@@ -168,6 +168,8 @@ ouCallback
 
 instance GoogleRequest OrganizationsUpdate where
         type Rs OrganizationsUpdate = Organization
+        type Scopes OrganizationsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient OrganizationsUpdate{..}
           = go _ouOrganizationId _ouXgafv _ouUploadProtocol
               (Just _ouPp)

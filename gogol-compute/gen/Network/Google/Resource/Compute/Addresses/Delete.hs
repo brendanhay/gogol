@@ -100,6 +100,9 @@ aaRegion = lens _aaRegion (\ s a -> s{_aaRegion = a})
 
 instance GoogleRequest AddressesDelete where
         type Rs AddressesDelete = Operation
+        type Scopes AddressesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient AddressesDelete{..}
           = go _aaProject _aaRegion _aaAddress (Just AltJSON)
               computeService

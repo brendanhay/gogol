@@ -162,6 +162,10 @@ oDestinationObject
 
 instance GoogleRequest ObjectsCompose where
         type Rs ObjectsCompose = Object
+        type Scopes ObjectsCompose =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsCompose{..}
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL
@@ -177,6 +181,8 @@ instance GoogleRequest ObjectsCompose where
 instance GoogleRequest (MediaDownload ObjectsCompose)
          where
         type Rs (MediaDownload ObjectsCompose) = Stream
+        type Scopes (MediaDownload ObjectsCompose) =
+             Scopes ObjectsCompose
         requestClient (MediaDownload ObjectsCompose{..})
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL

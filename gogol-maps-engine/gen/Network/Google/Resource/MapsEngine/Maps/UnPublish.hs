@@ -76,6 +76,8 @@ mupId = lens _mupId (\ s a -> s{_mupId = a})
 
 instance GoogleRequest MapsUnPublish where
         type Rs MapsUnPublish = PublishResponse
+        type Scopes MapsUnPublish =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient MapsUnPublish{..}
           = go _mupId (Just AltJSON) mapsEngineService
           where go

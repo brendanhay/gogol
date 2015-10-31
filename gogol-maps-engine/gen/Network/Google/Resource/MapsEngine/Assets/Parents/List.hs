@@ -103,6 +103,9 @@ aplMaxResults
 
 instance GoogleRequest AssetsParentsList where
         type Rs AssetsParentsList = ParentsListResponse
+        type Scopes AssetsParentsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient AssetsParentsList{..}
           = go _aplId _aplPageToken _aplMaxResults
               (Just AltJSON)

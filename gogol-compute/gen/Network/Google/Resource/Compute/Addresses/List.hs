@@ -146,6 +146,10 @@ alMaxResults
 
 instance GoogleRequest AddressesList where
         type Rs AddressesList = AddressList
+        type Scopes AddressesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient AddressesList{..}
           = go _alProject _alRegion _alFilter _alPageToken
               (Just _alMaxResults)

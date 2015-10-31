@@ -89,6 +89,8 @@ mcgId
 
 instance GoogleRequest MobileCarriersGet where
         type Rs MobileCarriersGet = MobileCarrier
+        type Scopes MobileCarriersGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient MobileCarriersGet{..}
           = go _mcgProFileId _mcgId (Just AltJSON)
               dFAReportingService

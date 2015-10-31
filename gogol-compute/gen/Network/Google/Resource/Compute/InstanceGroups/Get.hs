@@ -103,6 +103,10 @@ iggInstanceGroup
 
 instance GoogleRequest InstanceGroupsGet where
         type Rs InstanceGroupsGet = InstanceGroup
+        type Scopes InstanceGroupsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupsGet{..}
           = go _iggProject _iggZone _iggInstanceGroup
               (Just AltJSON)

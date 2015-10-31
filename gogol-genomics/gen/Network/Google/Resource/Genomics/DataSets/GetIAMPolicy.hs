@@ -177,6 +177,9 @@ dsgipCallback
 
 instance GoogleRequest DataSetsGetIAMPolicy where
         type Rs DataSetsGetIAMPolicy = Policy
+        type Scopes DataSetsGetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient DataSetsGetIAMPolicy{..}
           = go _dsgipResource _dsgipXgafv _dsgipUploadProtocol
               (Just _dsgipPp)

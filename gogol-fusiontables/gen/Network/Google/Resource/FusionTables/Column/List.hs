@@ -99,6 +99,9 @@ clMaxResults
 
 instance GoogleRequest ColumnList' where
         type Rs ColumnList' = ColumnList
+        type Scopes ColumnList' =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient ColumnList'{..}
           = go _clTableId _clPageToken _clMaxResults
               (Just AltJSON)

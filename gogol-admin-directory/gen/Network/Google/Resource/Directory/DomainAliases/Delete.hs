@@ -90,6 +90,8 @@ dadCustomer
 
 instance GoogleRequest DomainAliasesDelete where
         type Rs DomainAliasesDelete = ()
+        type Scopes DomainAliasesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.domain"]
         requestClient DomainAliasesDelete{..}
           = go _dadCustomer _dadDomainAliasName (Just AltJSON)
               directoryService

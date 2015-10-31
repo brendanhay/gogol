@@ -105,6 +105,8 @@ bpBillingId
 
 instance GoogleRequest BudgetPatch where
         type Rs BudgetPatch = Budget
+        type Scopes BudgetPatch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient BudgetPatch{..}
           = go _bpAccountId _bpBillingId (Just AltJSON)
               _bpPayload

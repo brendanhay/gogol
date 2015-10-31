@@ -89,6 +89,8 @@ guPayload
 
 instance GoogleRequest GroupsUpdate where
         type Rs GroupsUpdate = Group
+        type Scopes GroupsUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
         requestClient GroupsUpdate{..}
           = go _guGroupKey (Just AltJSON) _guPayload
               directoryService

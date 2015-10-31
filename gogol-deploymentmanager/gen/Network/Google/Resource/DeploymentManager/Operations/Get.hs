@@ -89,6 +89,11 @@ ogOperation
 
 instance GoogleRequest OperationsGet where
         type Rs OperationsGet = Operation
+        type Scopes OperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient OperationsGet{..}
           = go _ogProject _ogOperation (Just AltJSON)
               deploymentManagerService

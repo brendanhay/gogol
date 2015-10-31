@@ -88,6 +88,9 @@ tcCopyPresentation
 
 instance GoogleRequest TableCopy where
         type Rs TableCopy = Table
+        type Scopes TableCopy =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
         requestClient TableCopy{..}
           = go _tcTableId _tcCopyPresentation (Just AltJSON)
               fusionTablesService

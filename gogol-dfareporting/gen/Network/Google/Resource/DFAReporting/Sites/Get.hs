@@ -89,6 +89,8 @@ sggId
 
 instance GoogleRequest SitesGet where
         type Rs SitesGet = Site
+        type Scopes SitesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SitesGet{..}
           = go _sggProFileId _sggId (Just AltJSON)
               dFAReportingService

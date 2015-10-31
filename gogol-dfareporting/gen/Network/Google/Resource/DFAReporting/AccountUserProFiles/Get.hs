@@ -91,6 +91,8 @@ aupfgId
 
 instance GoogleRequest AccountUserProFilesGet where
         type Rs AccountUserProFilesGet = AccountUserProFile
+        type Scopes AccountUserProFilesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountUserProFilesGet{..}
           = go _aupfgProFileId _aupfgId (Just AltJSON)
               dFAReportingService

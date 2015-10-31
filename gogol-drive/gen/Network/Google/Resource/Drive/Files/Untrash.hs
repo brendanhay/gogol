@@ -75,6 +75,11 @@ fFileId = lens _fFileId (\ s a -> s{_fFileId = a})
 
 instance GoogleRequest FilesUntrash where
         type Rs FilesUntrash = File
+        type Scopes FilesUntrash =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient FilesUntrash{..}
           = go _fFileId (Just AltJSON) driveService
           where go

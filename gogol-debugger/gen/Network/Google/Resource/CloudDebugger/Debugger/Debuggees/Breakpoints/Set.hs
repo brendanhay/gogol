@@ -186,6 +186,9 @@ instance GoogleRequest
          DebuggerDebuggeesBreakpointsSet where
         type Rs DebuggerDebuggeesBreakpointsSet =
              SetBreakpointResponse
+        type Scopes DebuggerDebuggeesBreakpointsSet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient DebuggerDebuggeesBreakpointsSet{..}
           = go _ddbsDebuggeeId _ddbsXgafv _ddbsUploadProtocol
               (Just _ddbsPp)

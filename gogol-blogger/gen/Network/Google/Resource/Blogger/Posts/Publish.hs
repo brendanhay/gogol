@@ -107,6 +107,8 @@ pppPostId
 
 instance GoogleRequest PostsPublish where
         type Rs PostsPublish = Post'
+        type Scopes PostsPublish =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsPublish{..}
           = go _pppBlogId _pppPostId _pppPublishDate
               (Just AltJSON)

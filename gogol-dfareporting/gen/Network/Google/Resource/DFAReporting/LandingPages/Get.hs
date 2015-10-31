@@ -104,6 +104,8 @@ lpgId
 
 instance GoogleRequest LandingPagesGet where
         type Rs LandingPagesGet = LandingPage
+        type Scopes LandingPagesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient LandingPagesGet{..}
           = go _lpgProFileId _lpgCampaignId _lpgId
               (Just AltJSON)

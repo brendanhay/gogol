@@ -161,6 +161,9 @@ ptdCallback
 
 instance GoogleRequest ProjectsTopicsDelete where
         type Rs ProjectsTopicsDelete = Empty
+        type Scopes ProjectsTopicsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsDelete{..}
           = go _ptdTopic _ptdXgafv _ptdUploadProtocol
               (Just _ptdPp)

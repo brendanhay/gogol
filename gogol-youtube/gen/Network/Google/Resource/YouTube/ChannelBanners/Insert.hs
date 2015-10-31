@@ -126,6 +126,10 @@ cbiOnBehalfOfContentOwner
 
 instance GoogleRequest ChannelBannersInsert where
         type Rs ChannelBannersInsert = ChannelBannerResource
+        type Scopes ChannelBannersInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.upload"]
         requestClient ChannelBannersInsert{..}
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               _cbiPayload
@@ -139,6 +143,8 @@ instance GoogleRequest
          (MediaUpload ChannelBannersInsert) where
         type Rs (MediaUpload ChannelBannersInsert) =
              ChannelBannerResource
+        type Scopes (MediaUpload ChannelBannersInsert) =
+             Scopes ChannelBannersInsert
         requestClient
           (MediaUpload ChannelBannersInsert{..} body)
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)

@@ -91,6 +91,9 @@ giPayload
 
 instance GoogleRequest GroupsInsert where
         type Rs GroupsInsert = Operation
+        type Scopes GroupsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient GroupsInsert{..}
           = go _giProject (Just AltJSON) _giPayload
               userAccountsService

@@ -100,6 +100,8 @@ cpId = lens _cpId (\ s a -> s{_cpId = a}) . _Coerce
 
 instance GoogleRequest CampaignsPatch where
         type Rs CampaignsPatch = Campaign
+        type Scopes CampaignsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsPatch{..}
           = go _cpProFileId (Just _cpId) (Just AltJSON)
               _cpPayload

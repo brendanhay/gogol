@@ -198,6 +198,11 @@ viAutoLevels
 
 instance GoogleRequest VideosInsert where
         type Rs VideosInsert = Video
+        type Scopes VideosInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.upload",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosInsert{..}
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
@@ -214,6 +219,8 @@ instance GoogleRequest VideosInsert where
 instance GoogleRequest (MediaUpload VideosInsert)
          where
         type Rs (MediaUpload VideosInsert) = Video
+        type Scopes (MediaUpload VideosInsert) =
+             Scopes VideosInsert
         requestClient (MediaUpload VideosInsert{..} body)
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner

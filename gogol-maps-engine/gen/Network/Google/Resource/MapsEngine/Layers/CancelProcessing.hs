@@ -76,6 +76,8 @@ lcpId = lens _lcpId (\ s a -> s{_lcpId = a})
 
 instance GoogleRequest LayersCancelProcessing where
         type Rs LayersCancelProcessing = ProcessResponse
+        type Scopes LayersCancelProcessing =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient LayersCancelProcessing{..}
           = go _lcpId (Just AltJSON) mapsEngineService
           where go

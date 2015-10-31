@@ -102,6 +102,9 @@ twPayload
 
 instance GoogleRequest TimeseriesWrite where
         type Rs TimeseriesWrite = WriteTimeseriesResponse
+        type Scopes TimeseriesWrite =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient TimeseriesWrite{..}
           = go _twProject (Just AltJSON) _twPayload
               monitoringService

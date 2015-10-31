@@ -104,6 +104,8 @@ pspId
 
 instance GoogleRequest PlacementStrategiesPatch where
         type Rs PlacementStrategiesPatch = PlacementStrategy
+        type Scopes PlacementStrategiesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementStrategiesPatch{..}
           = go _pspProFileId (Just _pspId) (Just AltJSON)
               _pspPayload

@@ -137,6 +137,10 @@ uhlMaxResults
 
 instance GoogleRequest UsersHistoryList where
         type Rs UsersHistoryList = ListHistoryResponse
+        type Scopes UsersHistoryList =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersHistoryList{..}
           = go _uhlUserId _uhlStartHistoryId _uhlPageToken
               _uhlLabelId

@@ -90,6 +90,8 @@ cciPayload
 
 instance GoogleRequest ContentCategoriesInsert where
         type Rs ContentCategoriesInsert = ContentCategory
+        type Scopes ContentCategoriesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ContentCategoriesInsert{..}
           = go _cciProFileId (Just AltJSON) _cciPayload
               dFAReportingService

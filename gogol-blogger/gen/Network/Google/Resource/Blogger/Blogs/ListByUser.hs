@@ -129,6 +129,9 @@ blbuView = lens _blbuView (\ s a -> s{_blbuView = a})
 
 instance GoogleRequest BlogsListByUser where
         type Rs BlogsListByUser = BlogList
+        type Scopes BlogsListByUser =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient BlogsListByUser{..}
           = go _blbuUserId _blbuStatus _blbuFetchUserInfo
               (_blbuRole ^. _Default)

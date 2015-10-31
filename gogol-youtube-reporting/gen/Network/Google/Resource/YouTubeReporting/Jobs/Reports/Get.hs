@@ -178,6 +178,9 @@ jrgCallback
 
 instance GoogleRequest JobsReportsGet where
         type Rs JobsReportsGet = Report
+        type Scopes JobsReportsGet =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsReportsGet{..}
           = go _jrgJobId _jrgReportId _jrgXgafv
               _jrgUploadProtocol

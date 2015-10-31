@@ -89,6 +89,9 @@ dalParentDomainName
 
 instance GoogleRequest DomainAliasesList where
         type Rs DomainAliasesList = DomainAliases
+        type Scopes DomainAliasesList =
+             '["https://www.googleapis.com/auth/admin.directory.domain",
+               "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
         requestClient DomainAliasesList{..}
           = go _dalCustomer _dalParentDomainName (Just AltJSON)
               directoryService

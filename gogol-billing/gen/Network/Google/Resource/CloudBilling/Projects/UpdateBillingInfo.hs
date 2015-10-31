@@ -221,6 +221,8 @@ instance GoogleRequest ProjectsUpdateBillingInfo
          where
         type Rs ProjectsUpdateBillingInfo =
              ProjectBillingInfo
+        type Scopes ProjectsUpdateBillingInfo =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsUpdateBillingInfo{..}
           = go _pubiName _pubiXgafv _pubiUploadProtocol
               (Just _pubiPp)

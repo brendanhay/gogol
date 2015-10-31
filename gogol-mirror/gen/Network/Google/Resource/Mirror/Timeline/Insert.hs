@@ -85,6 +85,9 @@ tiPayload
 
 instance GoogleRequest TimelineInsert where
         type Rs TimelineInsert = TimelineItem
+        type Scopes TimelineInsert =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelineInsert{..}
           = go (Just AltJSON) _tiPayload mirrorService
           where go :<|> _
@@ -94,6 +97,8 @@ instance GoogleRequest TimelineInsert where
 instance GoogleRequest (MediaUpload TimelineInsert)
          where
         type Rs (MediaUpload TimelineInsert) = TimelineItem
+        type Scopes (MediaUpload TimelineInsert) =
+             Scopes TimelineInsert
         requestClient (MediaUpload TimelineInsert{..} body)
           = go (Just AltJSON) (Just AltMedia) _tiPayload body
               mirrorService

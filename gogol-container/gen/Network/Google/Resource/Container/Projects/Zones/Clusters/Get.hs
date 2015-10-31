@@ -183,6 +183,8 @@ pzcgCallback
 
 instance GoogleRequest ProjectsZonesClustersGet where
         type Rs ProjectsZonesClustersGet = Cluster
+        type Scopes ProjectsZonesClustersGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesClustersGet{..}
           = go _pzcgProjectId _pzcgZone _pzcgClusterId
               _pzcgXgafv

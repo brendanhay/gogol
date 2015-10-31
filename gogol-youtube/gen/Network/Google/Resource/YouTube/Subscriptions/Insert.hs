@@ -89,6 +89,10 @@ siPayload
 
 instance GoogleRequest SubscriptionsInsert where
         type Rs SubscriptionsInsert = Subscription
+        type Scopes SubscriptionsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient SubscriptionsInsert{..}
           = go (Just _siPart) (Just AltJSON) _siPayload
               youTubeService

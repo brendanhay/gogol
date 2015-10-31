@@ -117,6 +117,10 @@ instance GoogleRequest AccountsContainersVersionsList
          where
         type Rs AccountsContainersVersionsList =
              ListContainerVersionsResponse
+        type Scopes AccountsContainersVersionsList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.edit.containerversions",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersVersionsList{..}
           = go _acvlAccountId _acvlContainerId
               (Just _acvlHeaders)

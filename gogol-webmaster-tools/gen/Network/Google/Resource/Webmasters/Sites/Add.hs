@@ -75,6 +75,8 @@ saSiteURL
 
 instance GoogleRequest SitesAdd where
         type Rs SitesAdd = ()
+        type Scopes SitesAdd =
+             '["https://www.googleapis.com/auth/webmasters"]
         requestClient SitesAdd{..}
           = go _saSiteURL (Just AltJSON) webmasterToolsService
           where go

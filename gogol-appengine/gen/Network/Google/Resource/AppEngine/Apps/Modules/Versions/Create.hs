@@ -184,6 +184,8 @@ amvcCallback
 instance GoogleRequest AppsModulesVersionsCreate
          where
         type Rs AppsModulesVersionsCreate = Operation
+        type Scopes AppsModulesVersionsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsModulesVersionsCreate{..}
           = go _amvcAppsId _amvcModulesId _amvcXgafv
               _amvcUploadProtocol

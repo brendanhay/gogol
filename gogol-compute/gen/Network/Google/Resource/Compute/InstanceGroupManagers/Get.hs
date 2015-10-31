@@ -107,6 +107,10 @@ igmgZone = lens _igmgZone (\ s a -> s{_igmgZone = a})
 instance GoogleRequest InstanceGroupManagersGet where
         type Rs InstanceGroupManagersGet =
              InstanceGroupManager
+        type Scopes InstanceGroupManagersGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupManagersGet{..}
           = go _igmgProject _igmgZone _igmgInstanceGroupManager
               (Just AltJSON)

@@ -75,6 +75,15 @@ cgChangeId
 
 instance GoogleRequest ChangesGet where
         type Rs ChangesGet = Change
+        type Scopes ChangesGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient ChangesGet{..}
           = go _cgChangeId (Just AltJSON) driveService
           where go

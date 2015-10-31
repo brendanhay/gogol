@@ -87,6 +87,9 @@ cdCommentId
 
 instance GoogleRequest CommentsDelete where
         type Rs CommentsDelete = ()
+        type Scopes CommentsDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient CommentsDelete{..}
           = go _cdFileId _cdCommentId (Just AltJSON)
               driveService

@@ -102,6 +102,8 @@ tfbiId = lens _tfbiId (\ s a -> s{_tfbiId = a})
 instance GoogleRequest TablesFeaturesBatchInsert
          where
         type Rs TablesFeaturesBatchInsert = ()
+        type Scopes TablesFeaturesBatchInsert =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesFeaturesBatchInsert{..}
           = go _tfbiId (Just AltJSON) _tfbiPayload
               mapsEngineService

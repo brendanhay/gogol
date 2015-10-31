@@ -90,6 +90,8 @@ ctgId
 
 instance GoogleRequest ConnectionTypesGet where
         type Rs ConnectionTypesGet = ConnectionType
+        type Scopes ConnectionTypesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ConnectionTypesGet{..}
           = go _ctgProFileId _ctgId (Just AltJSON)
               dFAReportingService

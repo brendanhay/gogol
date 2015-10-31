@@ -78,6 +78,8 @@ instance GoogleRequest
          RasterCollectionsCancelProcessing where
         type Rs RasterCollectionsCancelProcessing =
              ProcessResponse
+        type Scopes RasterCollectionsCancelProcessing =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RasterCollectionsCancelProcessing{..}
           = go _rccpId (Just AltJSON) mapsEngineService
           where go

@@ -87,6 +87,11 @@ ulgId = lens _ulgId (\ s a -> s{_ulgId = a})
 
 instance GoogleRequest UsersLabelsGet where
         type Rs UsersLabelsGet = Label
+        type Scopes UsersLabelsGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersLabelsGet{..}
           = go _ulgUserId _ulgId (Just AltJSON) gmailService
           where go

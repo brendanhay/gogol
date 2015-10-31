@@ -90,6 +90,8 @@ dlUserId = lens _dlUserId (\ s a -> s{_dlUserId = a})
 
 instance GoogleRequest DevicesList where
         type Rs DevicesList = DevicesListResponse
+        type Scopes DevicesList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient DevicesList{..}
           = go _dlEnterpriseId _dlUserId (Just AltJSON)
               androidEnterpriseService

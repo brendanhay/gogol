@@ -89,6 +89,10 @@ dsrDataSetId
 
 instance GoogleRequest DataSetsRollback where
         type Rs DataSetsRollback = RollbackResponse
+        type Scopes DataSetsRollback =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/datastore",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient DataSetsRollback{..}
           = go _dsrDataSetId (Just AltJSON) _dsrPayload
               datastoreService

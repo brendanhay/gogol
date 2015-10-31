@@ -89,6 +89,8 @@ agdId
 
 instance GoogleRequest AdvertiserGroupsDelete where
         type Rs AdvertiserGroupsDelete = ()
+        type Scopes AdvertiserGroupsDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertiserGroupsDelete{..}
           = go _agdProFileId _agdId (Just AltJSON)
               dFAReportingService

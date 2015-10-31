@@ -75,6 +75,8 @@ mlblSource
 
 instance GoogleRequest MyLibraryBookshelvesList where
         type Rs MyLibraryBookshelvesList = Bookshelves
+        type Scopes MyLibraryBookshelvesList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesList{..}
           = go _mlblSource (Just AltJSON) booksService
           where go

@@ -101,6 +101,8 @@ mlauSource
 instance GoogleRequest MyLibraryAnnotationsUpdate
          where
         type Rs MyLibraryAnnotationsUpdate = Annotation
+        type Scopes MyLibraryAnnotationsUpdate =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsUpdate{..}
           = go _mlauAnnotationId _mlauSource (Just AltJSON)
               _mlauPayload

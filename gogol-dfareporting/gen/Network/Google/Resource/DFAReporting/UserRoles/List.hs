@@ -180,6 +180,8 @@ urlMaxResults
 
 instance GoogleRequest UserRolesList where
         type Rs UserRolesList = UserRolesListResponse
+        type Scopes UserRolesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolesList{..}
           = go _urlProFileId _urlSearchString
               (_urlIds ^. _Default)

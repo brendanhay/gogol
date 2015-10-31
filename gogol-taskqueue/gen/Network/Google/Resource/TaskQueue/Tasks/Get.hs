@@ -100,6 +100,9 @@ tgTask = lens _tgTask (\ s a -> s{_tgTask = a})
 
 instance GoogleRequest TasksGet where
         type Rs TasksGet = Task
+        type Scopes TasksGet =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksGet{..}
           = go _tgProject _tgTaskqueue _tgTask (Just AltJSON)
               taskQueueService

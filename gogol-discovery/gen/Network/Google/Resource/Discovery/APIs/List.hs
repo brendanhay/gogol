@@ -84,6 +84,7 @@ alName = lens _alName (\ s a -> s{_alName = a})
 
 instance GoogleRequest APIsList where
         type Rs APIsList = DirectoryList
+        type Scopes APIsList = '[]
         requestClient APIsList{..}
           = go (Just _alPreferred) _alName (Just AltJSON)
               discoveryService

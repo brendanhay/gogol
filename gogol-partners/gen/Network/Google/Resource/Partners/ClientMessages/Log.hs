@@ -158,6 +158,7 @@ cmlCallback
 
 instance GoogleRequest ClientMessagesLog where
         type Rs ClientMessagesLog = LogMessageResponse
+        type Scopes ClientMessagesLog = '[]
         requestClient ClientMessagesLog{..}
           = go _cmlXgafv _cmlUploadProtocol (Just _cmlPp)
               _cmlAccessToken

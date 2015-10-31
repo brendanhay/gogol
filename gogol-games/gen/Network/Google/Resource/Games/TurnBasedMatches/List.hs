@@ -131,6 +131,9 @@ tMaxResults
 
 instance GoogleRequest TurnBasedMatchesList where
         type Rs TurnBasedMatchesList = TurnBasedMatchList
+        type Scopes TurnBasedMatchesList =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesList{..}
           = go _tMaxCompletedMatches _tIncludeMatchData
               _tLanguage

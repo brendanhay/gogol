@@ -91,6 +91,10 @@ dscDataSetId
 
 instance GoogleRequest DataSetsCommit where
         type Rs DataSetsCommit = CommitResponse
+        type Scopes DataSetsCommit =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/datastore",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient DataSetsCommit{..}
           = go _dscDataSetId (Just AltJSON) _dscPayload
               datastoreService

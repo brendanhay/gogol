@@ -88,6 +88,8 @@ gpGroupUniqueId
 
 instance GoogleRequest GroupsPatch where
         type Rs GroupsPatch = Groups
+        type Scopes GroupsPatch =
+             '["https://www.googleapis.com/auth/apps.groups.settings"]
         requestClient GroupsPatch{..}
           = go _gpGroupUniqueId (Just AltJSON) _gpPayload
               groupsSettingsService

@@ -87,6 +87,8 @@ eePayload
 
 instance GoogleRequest EnterprisesEnroll where
         type Rs EnterprisesEnroll = Enterprise
+        type Scopes EnterprisesEnroll =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesEnroll{..}
           = go (Just _eeToken) (Just AltJSON) _eePayload
               androidEnterpriseService

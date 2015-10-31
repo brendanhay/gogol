@@ -140,6 +140,9 @@ instance GoogleRequest ManagementProFileUserLinksList
          where
         type Rs ManagementProFileUserLinksList =
              EntityUserLinks
+        type Scopes ManagementProFileUserLinksList =
+             '["https://www.googleapis.com/auth/analytics.manage.users",
+               "https://www.googleapis.com/auth/analytics.manage.users.readonly"]
         requestClient ManagementProFileUserLinksList{..}
           = go _mpfullAccountId _mpfullWebPropertyId
               _mpfullProFileId

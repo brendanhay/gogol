@@ -153,6 +153,8 @@ ogCallback
 
 instance GoogleRequest OrganizationsGet where
         type Rs OrganizationsGet = Organization
+        type Scopes OrganizationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient OrganizationsGet{..}
           = go _ogOrganizationId _ogXgafv _ogUploadProtocol
               (Just _ogPp)

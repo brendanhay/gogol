@@ -333,6 +333,9 @@ elTimeMax
 
 instance GoogleRequest EventsList where
         type Rs EventsList = Events
+        type Scopes EventsList =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient EventsList{..}
           = go _elCalendarId _elSyncToken _elTimeMin _elOrderBy
               _elSingleEvents

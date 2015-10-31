@@ -188,6 +188,9 @@ pjcCallback
 
 instance GoogleRequest ProjectsJobsCreate where
         type Rs ProjectsJobsCreate = Job
+        type Scopes ProjectsJobsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsCreate{..}
           = go _pjcProjectId _pjcXgafv _pjcUploadProtocol
               (Just _pjcPp)

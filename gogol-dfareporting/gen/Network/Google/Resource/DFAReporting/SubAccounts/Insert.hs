@@ -89,6 +89,8 @@ saiPayload
 
 instance GoogleRequest SubAccountsInsert where
         type Rs SubAccountsInsert = SubAccount
+        type Scopes SubAccountsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SubAccountsInsert{..}
           = go _saiProFileId (Just AltJSON) _saiPayload
               dFAReportingService

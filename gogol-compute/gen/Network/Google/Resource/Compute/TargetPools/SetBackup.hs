@@ -129,6 +129,9 @@ tpsbRegion
 
 instance GoogleRequest TargetPoolsSetBackup where
         type Rs TargetPoolsSetBackup = Operation
+        type Scopes TargetPoolsSetBackup =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient TargetPoolsSetBackup{..}
           = go _tpsbProject _tpsbRegion _tpsbTargetPool
               _tpsbFailoverRatio

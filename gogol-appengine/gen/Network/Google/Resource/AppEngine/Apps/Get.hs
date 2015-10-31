@@ -169,6 +169,8 @@ agCallback
 
 instance GoogleRequest AppsGet where
         type Rs AppsGet = Application
+        type Scopes AppsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsGet{..}
           = go _agAppsId _agXgafv _agUploadProtocol
               (Just _agPp)

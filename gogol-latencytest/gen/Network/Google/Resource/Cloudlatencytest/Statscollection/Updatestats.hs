@@ -76,6 +76,8 @@ suPayload
 instance GoogleRequest StatscollectionUpdatestats
          where
         type Rs StatscollectionUpdatestats = StatsReply
+        type Scopes StatscollectionUpdatestats =
+             '["https://www.googleapis.com/auth/monitoring.readonly"]
         requestClient StatscollectionUpdatestats{..}
           = go (Just AltJSON) _suPayload latencyTestService
           where go

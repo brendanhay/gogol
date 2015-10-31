@@ -87,6 +87,8 @@ uUserKey = lens _uUserKey (\ s a -> s{_uUserKey = a})
 
 instance GoogleRequest UsersUpdate where
         type Rs UsersUpdate = User
+        type Scopes UsersUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersUpdate{..}
           = go _uUserKey (Just AltJSON) _uPayload
               directoryService

@@ -185,6 +185,11 @@ fiOCR = lens _fiOCR (\ s a -> s{_fiOCR = a})
 
 instance GoogleRequest FilesInsert where
         type Rs FilesInsert = File
+        type Scopes FilesInsert =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient FilesInsert{..}
           = go (Just _fiPinned) (Just _fiVisibility)
               _fiTimedTextLanguage
@@ -203,6 +208,8 @@ instance GoogleRequest FilesInsert where
 instance GoogleRequest (MediaUpload FilesInsert)
          where
         type Rs (MediaUpload FilesInsert) = File
+        type Scopes (MediaUpload FilesInsert) =
+             Scopes FilesInsert
         requestClient (MediaUpload FilesInsert{..} body)
           = go (Just _fiPinned) (Just _fiVisibility)
               _fiTimedTextLanguage

@@ -108,6 +108,9 @@ instance GoogleRequest ManagementAccountUserLinksList
          where
         type Rs ManagementAccountUserLinksList =
              EntityUserLinks
+        type Scopes ManagementAccountUserLinksList =
+             '["https://www.googleapis.com/auth/analytics.manage.users",
+               "https://www.googleapis.com/auth/analytics.manage.users.readonly"]
         requestClient ManagementAccountUserLinksList{..}
           = go _maullAccountId _maullStartIndex
               _maullMaxResults

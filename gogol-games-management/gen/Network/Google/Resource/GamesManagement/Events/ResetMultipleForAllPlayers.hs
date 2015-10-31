@@ -83,6 +83,9 @@ ermfapPayload
 instance GoogleRequest
          EventsResetMultipleForAllPlayers where
         type Rs EventsResetMultipleForAllPlayers = ()
+        type Scopes EventsResetMultipleForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient EventsResetMultipleForAllPlayers{..}
           = go (Just AltJSON) _ermfapPayload
               gamesManagementService

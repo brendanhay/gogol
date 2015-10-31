@@ -91,6 +91,8 @@ instance GoogleRequest TablesPermissionsBatchDelete
          where
         type Rs TablesPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
+        type Scopes TablesPermissionsBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesPermissionsBatchDelete{..}
           = go _tpbdId (Just AltJSON) _tpbdPayload
               mapsEngineService

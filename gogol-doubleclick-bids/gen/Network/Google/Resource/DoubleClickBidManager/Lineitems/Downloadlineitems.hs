@@ -79,6 +79,7 @@ instance GoogleRequest LineitemsDownloadlineitems
          where
         type Rs LineitemsDownloadlineitems =
              DownloadLineItemsResponse
+        type Scopes LineitemsDownloadlineitems = '[]
         requestClient LineitemsDownloadlineitems{..}
           = go (Just AltJSON) _ldPayload doubleClickBidsService
           where go

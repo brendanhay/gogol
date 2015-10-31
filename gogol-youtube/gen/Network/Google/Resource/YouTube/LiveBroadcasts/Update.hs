@@ -149,6 +149,9 @@ lbuOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest LiveBroadcastsUpdate where
         type Rs LiveBroadcastsUpdate = LiveBroadcast
+        type Scopes LiveBroadcastsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveBroadcastsUpdate{..}
           = go (Just _lbuPart) _lbuOnBehalfOfContentOwner
               _lbuOnBehalfOfContentOwnerChannel

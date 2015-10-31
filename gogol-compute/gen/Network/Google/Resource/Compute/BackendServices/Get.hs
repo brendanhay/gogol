@@ -93,6 +93,10 @@ bsgBackendService
 
 instance GoogleRequest BackendServicesGet where
         type Rs BackendServicesGet = BackendService
+        type Scopes BackendServicesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient BackendServicesGet{..}
           = go _bsgProject _bsgBackendService (Just AltJSON)
               computeService

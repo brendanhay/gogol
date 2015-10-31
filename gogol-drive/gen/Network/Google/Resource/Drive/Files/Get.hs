@@ -95,6 +95,15 @@ fgFileId = lens _fgFileId (\ s a -> s{_fgFileId = a})
 
 instance GoogleRequest FilesGet where
         type Rs FilesGet = File
+        type Scopes FilesGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient FilesGet{..}
           = go _fgFileId (Just _fgAcknowledgeAbuse)
               (Just AltJSON)
@@ -105,6 +114,8 @@ instance GoogleRequest FilesGet where
 
 instance GoogleRequest (MediaDownload FilesGet) where
         type Rs (MediaDownload FilesGet) = Stream
+        type Scopes (MediaDownload FilesGet) =
+             Scopes FilesGet
         requestClient (MediaDownload FilesGet{..})
           = go _fgFileId (Just _fgAcknowledgeAbuse)
               (Just AltMedia)

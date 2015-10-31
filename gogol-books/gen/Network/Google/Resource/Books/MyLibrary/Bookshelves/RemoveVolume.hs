@@ -115,6 +115,8 @@ mlbrvSource
 instance GoogleRequest
          MyLibraryBookshelvesRemoveVolume where
         type Rs MyLibraryBookshelvesRemoveVolume = ()
+        type Scopes MyLibraryBookshelvesRemoveVolume =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesRemoveVolume{..}
           = go _mlbrvShelf (Just _mlbrvVolumeId) _mlbrvReason
               _mlbrvSource

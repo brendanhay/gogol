@@ -88,6 +88,9 @@ udUser = lens _udUser (\ s a -> s{_udUser = a})
 
 instance GoogleRequest UsersDelete where
         type Rs UsersDelete = Operation
+        type Scopes UsersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
         requestClient UsersDelete{..}
           = go _udProject _udUser (Just AltJSON)
               userAccountsService

@@ -90,6 +90,8 @@ cgiPayload
 
 instance GoogleRequest CreativeGroupsInsert where
         type Rs CreativeGroupsInsert = CreativeGroup
+        type Scopes CreativeGroupsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeGroupsInsert{..}
           = go _cgiProFileId (Just AltJSON) _cgiPayload
               dFAReportingService

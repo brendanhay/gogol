@@ -120,6 +120,12 @@ blMaxResults
 
 instance GoogleRequest BucketsList where
         type Rs BucketsList = Buckets
+        type Scopes BucketsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient BucketsList{..}
           = go (Just _blProject) _blPrefix _blProjection
               _blPageToken

@@ -79,6 +79,8 @@ oslProFileId
 instance GoogleRequest OperatingSystemsList where
         type Rs OperatingSystemsList =
              OperatingSystemsListResponse
+        type Scopes OperatingSystemsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OperatingSystemsList{..}
           = go _oslProFileId (Just AltJSON) dFAReportingService
           where go

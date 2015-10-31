@@ -76,6 +76,8 @@ lupId = lens _lupId (\ s a -> s{_lupId = a})
 
 instance GoogleRequest LayersUnPublish where
         type Rs LayersUnPublish = PublishResponse
+        type Scopes LayersUnPublish =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient LayersUnPublish{..}
           = go _lupId (Just AltJSON) mapsEngineService
           where go

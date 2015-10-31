@@ -90,6 +90,8 @@ eiPayload
 
 instance GoogleRequest EditsInsert where
         type Rs EditsInsert = AppEdit
+        type Scopes EditsInsert =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsInsert{..}
           = go _eiPackageName (Just AltJSON) _eiPayload
               androidPublisherService

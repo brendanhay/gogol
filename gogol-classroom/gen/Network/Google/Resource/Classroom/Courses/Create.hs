@@ -166,6 +166,8 @@ ccCallback
 
 instance GoogleRequest CoursesCreate where
         type Rs CoursesCreate = Course
+        type Scopes CoursesCreate =
+             '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesCreate{..}
           = go _ccXgafv _ccUploadProtocol (Just _ccPp)
               _ccAccessToken

@@ -109,6 +109,9 @@ aiStepsToIncrement
 instance GoogleRequest AchievementsIncrement where
         type Rs AchievementsIncrement =
              AchievementIncrementResponse
+        type Scopes AchievementsIncrement =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementsIncrement{..}
           = go _aiAchievementId (Just _aiStepsToIncrement)
               _aiRequestId

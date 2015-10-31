@@ -104,6 +104,8 @@ rlpId
 
 instance GoogleRequest RemarketingListsPatch where
         type Rs RemarketingListsPatch = RemarketingList
+        type Scopes RemarketingListsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListsPatch{..}
           = go _rlpProFileId (Just _rlpId) (Just AltJSON)
               _rlpPayload

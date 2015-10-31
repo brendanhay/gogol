@@ -111,6 +111,8 @@ csmsId = lens _csmsId (\ s a -> s{_csmsId = a})
 instance GoogleRequest CommentsSetModerationStatus
          where
         type Rs CommentsSetModerationStatus = ()
+        type Scopes CommentsSetModerationStatus =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentsSetModerationStatus{..}
           = go (Just _csmsId) (Just _csmsModerationStatus)
               (Just _csmsBanAuthor)

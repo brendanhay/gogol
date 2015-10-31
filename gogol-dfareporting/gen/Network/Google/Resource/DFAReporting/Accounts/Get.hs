@@ -89,6 +89,8 @@ aggId
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountsGet{..}
           = go _aggProFileId _aggId (Just AltJSON)
               dFAReportingService

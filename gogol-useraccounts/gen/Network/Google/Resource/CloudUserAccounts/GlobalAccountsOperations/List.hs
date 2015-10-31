@@ -159,6 +159,11 @@ gaolMaxResults
 instance GoogleRequest GlobalAccountsOperationsList
          where
         type Rs GlobalAccountsOperationsList = OperationList
+        type Scopes GlobalAccountsOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
         requestClient GlobalAccountsOperationsList{..}
           = go _gaolProject _gaolOrderBy _gaolFilter
               _gaolPageToken

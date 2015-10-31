@@ -74,6 +74,9 @@ tdId = lens _tdId (\ s a -> s{_tdId = a})
 
 instance GoogleRequest TimelineDelete where
         type Rs TimelineDelete = ()
+        type Scopes TimelineDelete =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
         requestClient TimelineDelete{..}
           = go _tdId (Just AltJSON) mirrorService
           where go

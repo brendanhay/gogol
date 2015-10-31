@@ -169,6 +169,9 @@ ptcCallback
 
 instance GoogleRequest ProjectsTopicsCreate where
         type Rs ProjectsTopicsCreate = Topic
+        type Scopes ProjectsTopicsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsCreate{..}
           = go _ptcName _ptcXgafv _ptcUploadProtocol
               (Just _ptcPp)

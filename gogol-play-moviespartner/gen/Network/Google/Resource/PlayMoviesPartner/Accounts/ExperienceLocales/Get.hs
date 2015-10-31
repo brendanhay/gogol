@@ -174,6 +174,8 @@ instance GoogleRequest AccountsExperienceLocalesGet
          where
         type Rs AccountsExperienceLocalesGet =
              ExperienceLocale
+        type Scopes AccountsExperienceLocalesGet =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
         requestClient AccountsExperienceLocalesGet{..}
           = go _aelgAccountId _aelgElId _aelgXgafv
               _aelgUploadProtocol

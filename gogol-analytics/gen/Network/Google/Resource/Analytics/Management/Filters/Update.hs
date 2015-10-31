@@ -101,6 +101,8 @@ mfuAccountId
 
 instance GoogleRequest ManagementFiltersUpdate where
         type Rs ManagementFiltersUpdate = Filter
+        type Scopes ManagementFiltersUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementFiltersUpdate{..}
           = go _mfuAccountId _mfuFilterId (Just AltJSON)
               _mfuPayload

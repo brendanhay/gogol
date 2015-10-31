@@ -101,6 +101,11 @@ gilGroupId
 
 instance GoogleRequest GroupItemsList where
         type Rs GroupItemsList = GroupItemListResponse
+        type Scopes GroupItemsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient GroupItemsList{..}
           = go (Just _gilGroupId) _gilOnBehalfOfContentOwner
               (Just AltJSON)

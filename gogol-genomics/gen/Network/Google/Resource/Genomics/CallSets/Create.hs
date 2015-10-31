@@ -157,6 +157,9 @@ cscCallback
 
 instance GoogleRequest CallSetsCreate where
         type Rs CallSetsCreate = CallSet
+        type Scopes CallSetsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient CallSetsCreate{..}
           = go _cscXgafv _cscUploadProtocol (Just _cscPp)
               _cscAccessToken

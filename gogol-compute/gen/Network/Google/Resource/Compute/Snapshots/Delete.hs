@@ -97,6 +97,9 @@ snaProject
 
 instance GoogleRequest SnapshotsDelete where
         type Rs SnapshotsDelete = Operation
+        type Scopes SnapshotsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient SnapshotsDelete{..}
           = go _snaProject _snaSnapshot (Just AltJSON)
               computeService

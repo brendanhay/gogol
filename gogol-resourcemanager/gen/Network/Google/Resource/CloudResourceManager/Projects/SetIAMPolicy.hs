@@ -197,6 +197,8 @@ psipCallback
 
 instance GoogleRequest ProjectsSetIAMPolicy where
         type Rs ProjectsSetIAMPolicy = Policy
+        type Scopes ProjectsSetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsSetIAMPolicy{..}
           = go _psipResource _psipXgafv _psipUploadProtocol
               (Just _psipPp)

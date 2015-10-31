@@ -81,6 +81,8 @@ instance GoogleRequest UserRolePermissionGroupsList
          where
         type Rs UserRolePermissionGroupsList =
              UserRolePermissionGroupsListResponse
+        type Scopes UserRolePermissionGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolePermissionGroupsList{..}
           = go _urpglProFileId (Just AltJSON)
               dFAReportingService

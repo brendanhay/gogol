@@ -94,6 +94,8 @@ oaoOrderId
 instance GoogleRequest OrdersAdvancetestOrder where
         type Rs OrdersAdvancetestOrder =
              OrdersAdvanceTestOrderResponse
+        type Scopes OrdersAdvancetestOrder =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersAdvancetestOrder{..}
           = go _oaoMerchantId _oaoOrderId (Just AltJSON)
               shoppingContentService

@@ -89,6 +89,8 @@ siTableId
 
 instance GoogleRequest StyleInsert where
         type Rs StyleInsert = StyleSetting
+        type Scopes StyleInsert =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient StyleInsert{..}
           = go _siTableId (Just AltJSON) _siPayload
               fusionTablesService

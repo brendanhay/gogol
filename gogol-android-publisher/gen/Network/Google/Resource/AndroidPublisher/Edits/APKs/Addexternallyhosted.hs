@@ -113,6 +113,8 @@ instance GoogleRequest EditsAPKsAddexternallyhosted
          where
         type Rs EditsAPKsAddexternallyhosted =
              APKsAddExternallyHostedResponse
+        type Scopes EditsAPKsAddexternallyhosted =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsAPKsAddexternallyhosted{..}
           = go _eapkaPackageName _eapkaEditId (Just AltJSON)
               _eapkaPayload

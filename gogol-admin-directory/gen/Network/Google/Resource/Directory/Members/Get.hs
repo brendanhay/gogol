@@ -89,6 +89,11 @@ mgGroupKey
 
 instance GoogleRequest MembersGet where
         type Rs MembersGet = Member
+        type Scopes MembersGet =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member",
+               "https://www.googleapis.com/auth/admin.directory.group.member.readonly",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
         requestClient MembersGet{..}
           = go _mgGroupKey _mgMemberKey (Just AltJSON)
               directoryService

@@ -111,6 +111,8 @@ tiPrevious
 
 instance GoogleRequest TasksInsert where
         type Rs TasksInsert = Task
+        type Scopes TasksInsert =
+             '["https://www.googleapis.com/auth/tasks"]
         requestClient TasksInsert{..}
           = go _tiTaskList _tiParent _tiPrevious (Just AltJSON)
               _tiPayload

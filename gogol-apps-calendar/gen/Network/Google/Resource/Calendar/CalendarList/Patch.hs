@@ -110,6 +110,8 @@ clpColorRgbFormat
 
 instance GoogleRequest CalendarListPatch where
         type Rs CalendarListPatch = CalendarListEntry
+        type Scopes CalendarListPatch =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient CalendarListPatch{..}
           = go _clpCalendarId _clpColorRgbFormat (Just AltJSON)
               _clpPayload

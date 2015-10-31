@@ -172,6 +172,9 @@ instance GoogleRequest ControllerDebuggeesRegister
          where
         type Rs ControllerDebuggeesRegister =
              RegisterDebuggeeResponse
+        type Scopes ControllerDebuggeesRegister =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugletcontroller"]
         requestClient ControllerDebuggeesRegister{..}
           = go _cdrXgafv _cdrUploadProtocol (Just _cdrPp)
               _cdrAccessToken

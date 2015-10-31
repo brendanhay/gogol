@@ -106,6 +106,9 @@ dspProjectId
 
 instance GoogleRequest DataSetsPatch where
         type Rs DataSetsPatch = DataSet
+        type Scopes DataSetsPatch =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient DataSetsPatch{..}
           = go _dspProjectId _dspDataSetId (Just AltJSON)
               _dspPayload

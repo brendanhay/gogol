@@ -84,6 +84,7 @@ pnsuPayload
 instance GoogleRequest PawsNotifySpectrumUse where
         type Rs PawsNotifySpectrumUse =
              PawsNotifySpectrumUseResponse
+        type Scopes PawsNotifySpectrumUse = '[]
         requestClient PawsNotifySpectrumUse{..}
           = go (Just AltJSON) _pnsuPayload spectrumService
           where go

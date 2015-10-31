@@ -80,6 +80,8 @@ cldCalendarId
 
 instance GoogleRequest CalendarListDelete where
         type Rs CalendarListDelete = ()
+        type Scopes CalendarListDelete =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient CalendarListDelete{..}
           = go _cldCalendarId (Just AltJSON)
               appsCalendarService

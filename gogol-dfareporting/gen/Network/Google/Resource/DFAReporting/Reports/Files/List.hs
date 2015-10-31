@@ -137,6 +137,8 @@ rflMaxResults
 
 instance GoogleRequest ReportsFilesList where
         type Rs ReportsFilesList = FileList
+        type Scopes ReportsFilesList =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsFilesList{..}
           = go _rflProFileId _rflReportId (Just _rflSortOrder)
               _rflPageToken

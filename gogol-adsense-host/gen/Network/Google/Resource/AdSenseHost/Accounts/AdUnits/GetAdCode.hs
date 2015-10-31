@@ -121,6 +121,8 @@ aaugacHostCustomChannelId
 
 instance GoogleRequest AccountsAdUnitsGetAdCode where
         type Rs AccountsAdUnitsGetAdCode = AdCode
+        type Scopes AccountsAdUnitsGetAdCode =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AccountsAdUnitsGetAdCode{..}
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId

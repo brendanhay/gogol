@@ -87,6 +87,8 @@ aiGroupId
 
 instance GoogleRequest ArchiveInsert where
         type Rs ArchiveInsert = Groups
+        type Scopes ArchiveInsert =
+             '["https://www.googleapis.com/auth/apps.groups.migration"]
         requestClient ArchiveInsert{..}
           = go _aiGroupId (Just AltJSON) groupsMigrationService
           where go :<|> _
@@ -96,6 +98,8 @@ instance GoogleRequest ArchiveInsert where
 instance GoogleRequest (MediaUpload ArchiveInsert)
          where
         type Rs (MediaUpload ArchiveInsert) = Groups
+        type Scopes (MediaUpload ArchiveInsert) =
+             Scopes ArchiveInsert
         requestClient (MediaUpload ArchiveInsert{..} body)
           = go _aiGroupId (Just AltJSON) (Just AltMedia) body
               groupsMigrationService

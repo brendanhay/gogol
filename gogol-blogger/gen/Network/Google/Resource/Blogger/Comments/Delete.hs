@@ -99,6 +99,8 @@ cdCommentId
 
 instance GoogleRequest CommentsDelete where
         type Rs CommentsDelete = ()
+        type Scopes CommentsDelete =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient CommentsDelete{..}
           = go _cdBlogId _cdPostId _cdCommentId (Just AltJSON)
               bloggerService

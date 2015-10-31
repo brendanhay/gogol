@@ -105,6 +105,9 @@ plbcMaxResults
 
 instance GoogleRequest PeopleListByCircle where
         type Rs PeopleListByCircle = PeopleFeed
+        type Scopes PeopleListByCircle =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient PeopleListByCircle{..}
           = go _plbcCircleId _plbcPageToken
               (Just _plbcMaxResults)

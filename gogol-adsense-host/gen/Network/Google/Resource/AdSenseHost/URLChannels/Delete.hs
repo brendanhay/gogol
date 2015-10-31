@@ -90,6 +90,8 @@ ucdAdClientId
 
 instance GoogleRequest URLChannelsDelete where
         type Rs URLChannelsDelete = URLChannel
+        type Scopes URLChannelsDelete =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient URLChannelsDelete{..}
           = go _ucdAdClientId _ucdURLChannelId (Just AltJSON)
               adSenseHostService

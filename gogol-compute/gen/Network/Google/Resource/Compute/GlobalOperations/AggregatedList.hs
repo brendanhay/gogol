@@ -141,6 +141,10 @@ instance GoogleRequest GlobalOperationsAggregatedList
          where
         type Rs GlobalOperationsAggregatedList =
              OperationAggregatedList
+        type Scopes GlobalOperationsAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalOperationsAggregatedList{..}
           = go _goalProject _goalFilter _goalPageToken
               (Just _goalMaxResults)

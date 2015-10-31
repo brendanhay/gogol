@@ -105,6 +105,9 @@ dsDeployment
 
 instance GoogleRequest DeploymentsStop where
         type Rs DeploymentsStop = Operation
+        type Scopes DeploymentsStop =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsStop{..}
           = go _dsProject _dsDeployment (Just AltJSON)
               _dsPayload

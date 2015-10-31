@@ -103,6 +103,8 @@ npNotificationId
 
 instance GoogleRequest NotificationsPatch where
         type Rs NotificationsPatch = Notification
+        type Scopes NotificationsPatch =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
         requestClient NotificationsPatch{..}
           = go _npCustomer _npNotificationId (Just AltJSON)
               _npPayload

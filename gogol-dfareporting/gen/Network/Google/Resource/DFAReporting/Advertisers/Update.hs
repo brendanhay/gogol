@@ -89,6 +89,8 @@ auPayload
 
 instance GoogleRequest AdvertisersUpdate where
         type Rs AdvertisersUpdate = Advertiser
+        type Scopes AdvertisersUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertisersUpdate{..}
           = go _auProFileId (Just AltJSON) _auPayload
               dFAReportingService

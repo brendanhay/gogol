@@ -98,6 +98,8 @@ piPayload
 
 instance GoogleRequest PagesInsert where
         type Rs PagesInsert = Page
+        type Scopes PagesInsert =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PagesInsert{..}
           = go _piBlogId _piIsDraft (Just AltJSON) _piPayload
               bloggerService

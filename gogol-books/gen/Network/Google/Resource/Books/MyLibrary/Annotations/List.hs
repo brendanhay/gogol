@@ -187,6 +187,8 @@ mlalMaxResults
 
 instance GoogleRequest MyLibraryAnnotationsList where
         type Rs MyLibraryAnnotationsList = Annotations
+        type Scopes MyLibraryAnnotationsList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsList{..}
           = go _mlalContentVersion _mlalShowDeleted
               _mlalUpdatedMax

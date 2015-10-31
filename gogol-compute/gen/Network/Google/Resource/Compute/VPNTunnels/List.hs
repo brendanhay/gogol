@@ -151,6 +151,10 @@ vtlMaxResults
 
 instance GoogleRequest VPNTunnelsList where
         type Rs VPNTunnelsList = VPNTunnelList
+        type Scopes VPNTunnelsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient VPNTunnelsList{..}
           = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
               (Just _vtlMaxResults)

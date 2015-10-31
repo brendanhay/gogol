@@ -101,6 +101,9 @@ ummId = lens _ummId (\ s a -> s{_ummId = a})
 
 instance GoogleRequest UsersMessagesModify where
         type Rs UsersMessagesModify = Message
+        type Scopes UsersMessagesModify =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersMessagesModify{..}
           = go _ummUserId _ummId (Just AltJSON) _ummPayload
               gmailService

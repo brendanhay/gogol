@@ -108,6 +108,9 @@ instance GoogleRequest
          AccountsContainersFoldersEntitiesList where
         type Rs AccountsContainersFoldersEntitiesList =
              FolderEntities
+        type Scopes AccountsContainersFoldersEntitiesList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient
           AccountsContainersFoldersEntitiesList{..}
           = go _acfelAccountId _acfelContainerId _acfelFolderId

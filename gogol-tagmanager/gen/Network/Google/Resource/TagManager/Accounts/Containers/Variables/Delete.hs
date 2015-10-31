@@ -105,6 +105,8 @@ acvdAccountId
 instance GoogleRequest
          AccountsContainersVariablesDelete where
         type Rs AccountsContainersVariablesDelete = ()
+        type Scopes AccountsContainersVariablesDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersVariablesDelete{..}
           = go _acvdAccountId _acvdContainerId _acvdVariableId
               (Just AltJSON)

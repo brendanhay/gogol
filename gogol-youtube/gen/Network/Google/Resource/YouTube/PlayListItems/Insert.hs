@@ -110,6 +110,10 @@ pliiOnBehalfOfContentOwner
 
 instance GoogleRequest PlayListItemsInsert where
         type Rs PlayListItemsInsert = PlayListItem
+        type Scopes PlayListItemsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListItemsInsert{..}
           = go (Just _pliiPart) _pliiOnBehalfOfContentOwner
               (Just AltJSON)

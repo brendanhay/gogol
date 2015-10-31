@@ -91,6 +91,8 @@ instance GoogleRequest
          DefaultObjectAccessControlsInsert where
         type Rs DefaultObjectAccessControlsInsert =
              ObjectAccessControl
+        type Scopes DefaultObjectAccessControlsInsert =
+             '["https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsInsert{..}
           = go _doaciBucket (Just AltJSON) _doaciPayload
               storageService

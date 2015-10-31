@@ -119,6 +119,8 @@ lppId
 
 instance GoogleRequest LandingPagesPatch where
         type Rs LandingPagesPatch = LandingPage
+        type Scopes LandingPagesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient LandingPagesPatch{..}
           = go _lppProFileId _lppCampaignId (Just _lppId)
               (Just AltJSON)

@@ -144,6 +144,8 @@ cllParentId
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentListResponse
+        type Scopes CommentsList =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentsList{..}
           = go (Just _cllPart) _cllId _cllPageToken
               (Just _cllTextFormat)

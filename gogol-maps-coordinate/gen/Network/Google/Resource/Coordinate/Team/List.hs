@@ -95,6 +95,9 @@ tlWorker = lens _tlWorker (\ s a -> s{_tlWorker = a})
 
 instance GoogleRequest TeamList where
         type Rs TeamList = TeamListResponse
+        type Scopes TeamList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
         requestClient TeamList{..}
           = go _tlDispatcher _tlAdmin _tlWorker (Just AltJSON)
               mapsCoordinateService

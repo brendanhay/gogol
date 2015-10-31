@@ -167,6 +167,9 @@ lbtId = lens _lbtId (\ s a -> s{_lbtId = a})
 
 instance GoogleRequest LiveBroadcastsTransition where
         type Rs LiveBroadcastsTransition = LiveBroadcast
+        type Scopes LiveBroadcastsTransition =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveBroadcastsTransition{..}
           = go (Just _lbtBroadcastStatus) (Just _lbtId)
               (Just _lbtPart)

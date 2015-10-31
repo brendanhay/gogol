@@ -105,6 +105,8 @@ tpTableId
 
 instance GoogleRequest TablePatch where
         type Rs TablePatch = Table
+        type Scopes TablePatch =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TablePatch{..}
           = go _tpTableId _tpReplaceViewDefinition
               (Just AltJSON)

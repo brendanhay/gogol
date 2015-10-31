@@ -161,6 +161,10 @@ odGeneration
 
 instance GoogleRequest ObjectsDelete where
         type Rs ObjectsDelete = ()
+        type Scopes ObjectsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsDelete{..}
           = go _odBucket _odObject _odIfMetagenerationMatch
               _odIfGenerationNotMatch

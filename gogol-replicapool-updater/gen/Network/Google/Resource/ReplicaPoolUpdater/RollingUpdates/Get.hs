@@ -101,6 +101,11 @@ rugZone = lens _rugZone (\ s a -> s{_rugZone = a})
 
 instance GoogleRequest RollingUpdatesGet where
         type Rs RollingUpdatesGet = RollingUpdate
+        type Scopes RollingUpdatesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/replicapool",
+               "https://www.googleapis.com/auth/replicapool.readonly"]
         requestClient RollingUpdatesGet{..}
           = go _rugProject _rugZone _rugRollingUpdate
               (Just AltJSON)

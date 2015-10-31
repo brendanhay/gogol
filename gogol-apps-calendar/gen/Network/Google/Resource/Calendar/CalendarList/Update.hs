@@ -108,6 +108,8 @@ cluColorRgbFormat
 
 instance GoogleRequest CalendarListUpdate where
         type Rs CalendarListUpdate = CalendarListEntry
+        type Scopes CalendarListUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient CalendarListUpdate{..}
           = go _cluCalendarId _cluColorRgbFormat (Just AltJSON)
               _cluPayload

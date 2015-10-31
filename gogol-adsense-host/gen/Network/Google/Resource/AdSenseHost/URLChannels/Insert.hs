@@ -89,6 +89,8 @@ uciAdClientId
 
 instance GoogleRequest URLChannelsInsert where
         type Rs URLChannelsInsert = URLChannel
+        type Scopes URLChannelsInsert =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient URLChannelsInsert{..}
           = go _uciAdClientId (Just AltJSON) _uciPayload
               adSenseHostService

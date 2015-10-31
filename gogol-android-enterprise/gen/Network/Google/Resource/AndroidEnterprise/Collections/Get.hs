@@ -90,6 +90,8 @@ cgCollectionId
 
 instance GoogleRequest CollectionsGet where
         type Rs CollectionsGet = Collection
+        type Scopes CollectionsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionsGet{..}
           = go _cgEnterpriseId _cgCollectionId (Just AltJSON)
               androidEnterpriseService

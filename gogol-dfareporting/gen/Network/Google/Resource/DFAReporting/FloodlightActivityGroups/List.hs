@@ -213,6 +213,8 @@ instance GoogleRequest FloodlightActivityGroupsList
          where
         type Rs FloodlightActivityGroupsList =
              FloodlightActivityGroupsListResponse
+        type Scopes FloodlightActivityGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivityGroupsList{..}
           = go _faglProFileId _faglFloodlightConfigurationId
               _faglAdvertiserId

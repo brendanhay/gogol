@@ -112,6 +112,8 @@ nlMaxResults
 
 instance GoogleRequest NotificationsList where
         type Rs NotificationsList = Notifications
+        type Scopes NotificationsList =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
         requestClient NotificationsList{..}
           = go _nlCustomer _nlLanguage _nlPageToken
               _nlMaxResults

@@ -91,6 +91,8 @@ ugapsUserId
 instance GoogleRequest UsersGetAvailableProductSet
          where
         type Rs UsersGetAvailableProductSet = ProductSet
+        type Scopes UsersGetAvailableProductSet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient UsersGetAvailableProductSet{..}
           = go _ugapsEnterpriseId _ugapsUserId (Just AltJSON)
               androidEnterpriseService

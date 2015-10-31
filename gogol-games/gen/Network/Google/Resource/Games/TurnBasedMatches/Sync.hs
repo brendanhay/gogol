@@ -140,6 +140,9 @@ tbmsMaxResults
 
 instance GoogleRequest TurnBasedMatchesSync where
         type Rs TurnBasedMatchesSync = TurnBasedMatchSync
+        type Scopes TurnBasedMatchesSync =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesSync{..}
           = go _tbmsMaxCompletedMatches _tbmsIncludeMatchData
               _tbmsLanguage

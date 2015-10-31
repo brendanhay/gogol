@@ -90,6 +90,8 @@ ssSiteURL
 
 instance GoogleRequest SitemapsSubmit where
         type Rs SitemapsSubmit = ()
+        type Scopes SitemapsSubmit =
+             '["https://www.googleapis.com/auth/webmasters"]
         requestClient SitemapsSubmit{..}
           = go _ssSiteURL _ssFeedpath (Just AltJSON)
               webmasterToolsService

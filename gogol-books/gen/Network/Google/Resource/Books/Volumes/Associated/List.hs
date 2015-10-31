@@ -127,6 +127,8 @@ valAssociation
 
 instance GoogleRequest VolumesAssociatedList where
         type Rs VolumesAssociatedList = Volumes
+        type Scopes VolumesAssociatedList =
+             '["https://www.googleapis.com/auth/books"]
         requestClient VolumesAssociatedList{..}
           = go _valVolumeId _valLocale
               _valMaxAllowedMaturityRating

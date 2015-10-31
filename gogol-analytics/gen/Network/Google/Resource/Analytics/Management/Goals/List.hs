@@ -136,6 +136,10 @@ mglMaxResults
 
 instance GoogleRequest ManagementGoalsList where
         type Rs ManagementGoalsList = Goals
+        type Scopes ManagementGoalsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementGoalsList{..}
           = go _mglAccountId _mglWebPropertyId _mglProFileId
               _mglStartIndex

@@ -79,6 +79,8 @@ alFilterAdClientId
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = Accounts
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AccountsList{..}
           = go _alFilterAdClientId (Just AltJSON)
               adSenseHostService

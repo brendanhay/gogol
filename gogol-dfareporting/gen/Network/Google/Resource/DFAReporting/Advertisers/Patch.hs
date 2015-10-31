@@ -101,6 +101,8 @@ apId = lens _apId (\ s a -> s{_apId = a}) . _Coerce
 
 instance GoogleRequest AdvertisersPatch where
         type Rs AdvertisersPatch = Advertiser
+        type Scopes AdvertisersPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertisersPatch{..}
           = go _apProFileId (Just _apId) (Just AltJSON)
               _apPayload

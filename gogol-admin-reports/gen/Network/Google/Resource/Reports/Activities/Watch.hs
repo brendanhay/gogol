@@ -199,6 +199,8 @@ awMaxResults
 
 instance GoogleRequest ActivitiesWatch where
         type Rs ActivitiesWatch = Channel
+        type Scopes ActivitiesWatch =
+             '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
         requestClient ActivitiesWatch{..}
           = go _awUserKey _awApplicationName _awStartTime
               _awFilters

@@ -101,6 +101,9 @@ tiProjectId
 
 instance GoogleRequest TablesInsert where
         type Rs TablesInsert = Table
+        type Scopes TablesInsert =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient TablesInsert{..}
           = go _tiProjectId _tiDataSetId (Just AltJSON)
               _tiPayload

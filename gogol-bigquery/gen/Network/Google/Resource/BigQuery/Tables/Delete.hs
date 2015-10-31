@@ -103,6 +103,9 @@ tdTableId
 
 instance GoogleRequest TablesDelete where
         type Rs TablesDelete = ()
+        type Scopes TablesDelete =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient TablesDelete{..}
           = go _tdProjectId _tdDataSetId _tdTableId
               (Just AltJSON)

@@ -250,6 +250,13 @@ fpOCR = lens _fpOCR (\ s a -> s{_fpOCR = a})
 
 instance GoogleRequest FilesPatch where
         type Rs FilesPatch = File
+        type Scopes FilesPatch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.apps.readonly",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.scripts"]
         requestClient FilesPatch{..}
           = go _fpFileId (Just _fpNewRevision) (Just _fpPinned)
               _fpTimedTextLanguage

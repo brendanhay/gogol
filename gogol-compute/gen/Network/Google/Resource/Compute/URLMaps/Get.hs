@@ -91,6 +91,10 @@ umgProject
 
 instance GoogleRequest URLMapsGet where
         type Rs URLMapsGet = URLMap
+        type Scopes URLMapsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient URLMapsGet{..}
           = go _umgProject _umgURLMap (Just AltJSON)
               computeService

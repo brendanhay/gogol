@@ -63,6 +63,8 @@ subscriptionsList = SubscriptionsList
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = SubscriptionsListResponse
+        type Scopes SubscriptionsList =
+             '["https://www.googleapis.com/auth/glass.timeline"]
         requestClient SubscriptionsList{}
           = go (Just AltJSON) mirrorService
           where go

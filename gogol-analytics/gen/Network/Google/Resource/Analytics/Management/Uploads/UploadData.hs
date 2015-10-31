@@ -123,6 +123,9 @@ muudAccountId
 instance GoogleRequest ManagementUploadsUploadData
          where
         type Rs ManagementUploadsUploadData = Upload
+        type Scopes ManagementUploadsUploadData =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementUploadsUploadData{..}
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
@@ -137,6 +140,8 @@ instance GoogleRequest
          (MediaUpload ManagementUploadsUploadData) where
         type Rs (MediaUpload ManagementUploadsUploadData) =
              Upload
+        type Scopes (MediaUpload ManagementUploadsUploadData)
+             = Scopes ManagementUploadsUploadData
         requestClient
           (MediaUpload ManagementUploadsUploadData{..} body)
           = go _muudAccountId _muudWebPropertyId

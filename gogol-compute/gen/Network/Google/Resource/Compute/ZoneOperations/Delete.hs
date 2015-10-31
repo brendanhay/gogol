@@ -100,6 +100,9 @@ zodZone = lens _zodZone (\ s a -> s{_zodZone = a})
 
 instance GoogleRequest ZoneOperationsDelete where
         type Rs ZoneOperationsDelete = ()
+        type Scopes ZoneOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient ZoneOperationsDelete{..}
           = go _zodProject _zodZone _zodOperation
               (Just AltJSON)

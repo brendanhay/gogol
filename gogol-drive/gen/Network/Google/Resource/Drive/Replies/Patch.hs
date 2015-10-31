@@ -113,6 +113,9 @@ rpCommentId
 
 instance GoogleRequest RepliesPatch where
         type Rs RepliesPatch = CommentReply
+        type Scopes RepliesPatch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient RepliesPatch{..}
           = go _rpFileId _rpCommentId _rpReplyId (Just AltJSON)
               _rpPayload

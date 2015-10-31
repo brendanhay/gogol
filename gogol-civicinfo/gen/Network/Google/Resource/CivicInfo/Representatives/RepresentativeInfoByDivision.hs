@@ -128,6 +128,9 @@ instance GoogleRequest
          RepresentativesRepresentativeInfoByDivision where
         type Rs RepresentativesRepresentativeInfoByDivision =
              RepresentativeInfoData
+        type Scopes
+               RepresentativesRepresentativeInfoByDivision
+             = '[]
         requestClient
           RepresentativesRepresentativeInfoByDivision{..}
           = go _rribdOcdId (_rribdRoles ^. _Default)

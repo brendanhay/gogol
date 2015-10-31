@@ -102,6 +102,8 @@ cuuPayload
 
 instance GoogleRequest CollectionsUpdate where
         type Rs CollectionsUpdate = Collection
+        type Scopes CollectionsUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionsUpdate{..}
           = go _cuuEnterpriseId _cuuCollectionId (Just AltJSON)
               _cuuPayload

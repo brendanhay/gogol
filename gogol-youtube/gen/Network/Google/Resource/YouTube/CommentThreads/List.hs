@@ -216,6 +216,8 @@ ctlMaxResults
 instance GoogleRequest CommentThreadsList where
         type Rs CommentThreadsList =
              CommentThreadListResponse
+        type Scopes CommentThreadsList =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentThreadsList{..}
           = go (Just _ctlPart) (Just _ctlModerationStatus)
               _ctlSearchTerms

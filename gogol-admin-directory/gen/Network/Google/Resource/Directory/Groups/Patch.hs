@@ -89,6 +89,8 @@ gpPayload
 
 instance GoogleRequest GroupsPatch where
         type Rs GroupsPatch = Group
+        type Scopes GroupsPatch =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
         requestClient GroupsPatch{..}
           = go _gpGroupKey (Just AltJSON) _gpPayload
               directoryService

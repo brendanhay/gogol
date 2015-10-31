@@ -129,6 +129,13 @@ uslIncludeDeleted
 
 instance GoogleRequest UsersSessionsList where
         type Rs UsersSessionsList = ListSessionsResponse
+        type Scopes UsersSessionsList =
+             '["https://www.googleapis.com/auth/fitness.activity.read",
+               "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.read",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.read",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersSessionsList{..}
           = go _uslUserId _uslStartTime _uslEndTime
               _uslPageToken

@@ -86,6 +86,8 @@ ugShortURL
 
 instance GoogleRequest URLGet where
         type Rs URLGet = URL
+        type Scopes URLGet =
+             '["https://www.googleapis.com/auth/urlshortener"]
         requestClient URLGet{..}
           = go (Just _ugShortURL) _ugProjection (Just AltJSON)
               uRLShortenerService

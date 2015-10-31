@@ -157,6 +157,9 @@ dscCallback
 
 instance GoogleRequest DataSetsCreate where
         type Rs DataSetsCreate = DataSet
+        type Scopes DataSetsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient DataSetsCreate{..}
           = go _dscXgafv _dscUploadProtocol (Just _dscPp)
               _dscAccessToken

@@ -102,6 +102,8 @@ tppTableId
 
 instance GoogleRequest TemplatePatch where
         type Rs TemplatePatch = Template
+        type Scopes TemplatePatch =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TemplatePatch{..}
           = go _tppTableId _tppTemplateId (Just AltJSON)
               _tppPayload

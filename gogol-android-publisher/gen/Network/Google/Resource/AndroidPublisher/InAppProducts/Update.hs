@@ -117,6 +117,8 @@ iapuSKU = lens _iapuSKU (\ s a -> s{_iapuSKU = a})
 
 instance GoogleRequest InAppProductsUpdate where
         type Rs InAppProductsUpdate = InAppProduct
+        type Scopes InAppProductsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient InAppProductsUpdate{..}
           = go _iapuPackageName _iapuSKU
               _iapuAutoConvertMissingPrices

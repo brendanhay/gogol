@@ -80,6 +80,7 @@ instance GoogleRequest
          RelyingPartyGetOOBConfirmationCode where
         type Rs RelyingPartyGetOOBConfirmationCode =
              GetOOBConfirmationCodeResponse
+        type Scopes RelyingPartyGetOOBConfirmationCode = '[]
         requestClient RelyingPartyGetOOBConfirmationCode{..}
           = go (Just AltJSON) _rpgoobccPayload
               identityToolkitService

@@ -155,6 +155,8 @@ uurgMaxResults
 
 instance GoogleRequest UserUsageReportGet where
         type Rs UserUsageReportGet = UsageReports
+        type Scopes UserUsageReportGet =
+             '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
         requestClient UserUsageReportGet{..}
           = go _uurgUserKey _uurgDate _uurgFilters
               _uurgCustomerId

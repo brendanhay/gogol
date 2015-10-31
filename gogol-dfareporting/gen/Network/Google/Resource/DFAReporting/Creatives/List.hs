@@ -290,6 +290,8 @@ cMaxResults
 
 instance GoogleRequest CreativesList where
         type Rs CreativesList = CreativesListResponse
+        type Scopes CreativesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativesList{..}
           = go _cProFileId (_cRenderingIds ^. _Default)
               _cAdvertiserId

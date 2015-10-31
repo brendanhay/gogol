@@ -75,6 +75,11 @@ pgProject
 
 instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project
+        type Scopes ProjectsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ProjectsGet{..}
           = go _pgProject (Just AltJSON) dNSService
           where go

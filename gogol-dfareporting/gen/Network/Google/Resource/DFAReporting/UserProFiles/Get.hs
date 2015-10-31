@@ -77,6 +77,9 @@ upfgProFileId
 
 instance GoogleRequest UserProFilesGet where
         type Rs UserProFilesGet = UserProFile
+        type Scopes UserProFilesGet =
+             '["https://www.googleapis.com/auth/dfareporting",
+               "https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserProFilesGet{..}
           = go _upfgProFileId (Just AltJSON)
               dFAReportingService

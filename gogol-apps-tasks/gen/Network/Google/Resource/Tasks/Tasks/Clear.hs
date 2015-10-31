@@ -80,6 +80,8 @@ tcTaskList
 
 instance GoogleRequest TasksClear where
         type Rs TasksClear = ()
+        type Scopes TasksClear =
+             '["https://www.googleapis.com/auth/tasks"]
         requestClient TasksClear{..}
           = go _tcTaskList (Just AltJSON) appsTasksService
           where go

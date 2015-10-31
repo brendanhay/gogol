@@ -158,6 +158,10 @@ rCallback
 
 instance GoogleRequest ReferencesGet where
         type Rs ReferencesGet = Reference
+        type Scopes ReferencesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient ReferencesGet{..}
           = go _rReferenceId _rXgafv _rUploadProtocol
               (Just _rPp)

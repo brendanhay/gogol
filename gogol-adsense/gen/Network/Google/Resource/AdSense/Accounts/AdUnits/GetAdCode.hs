@@ -105,6 +105,9 @@ aaugacAccountId
 
 instance GoogleRequest AccountsAdUnitsGetAdCode where
         type Rs AccountsAdUnitsGetAdCode = AdCode
+        type Scopes AccountsAdUnitsGetAdCode =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsAdUnitsGetAdCode{..}
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId

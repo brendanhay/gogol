@@ -135,6 +135,10 @@ nlMaxResults
 
 instance GoogleRequest NetworksList where
         type Rs NetworksList = NetworkList
+        type Scopes NetworksList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient NetworksList{..}
           = go _nlProject _nlFilter _nlPageToken
               (Just _nlMaxResults)

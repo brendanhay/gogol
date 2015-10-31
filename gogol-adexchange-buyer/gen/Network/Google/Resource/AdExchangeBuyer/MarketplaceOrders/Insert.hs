@@ -78,6 +78,8 @@ moiPayload
 instance GoogleRequest MarketplaceOrdersInsert where
         type Rs MarketplaceOrdersInsert =
              CreateOrdersResponse
+        type Scopes MarketplaceOrdersInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceOrdersInsert{..}
           = go (Just AltJSON) _moiPayload
               adExchangeBuyerService

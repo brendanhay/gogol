@@ -91,6 +91,8 @@ ndNotificationId
 
 instance GoogleRequest NotificationsDelete where
         type Rs NotificationsDelete = ()
+        type Scopes NotificationsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
         requestClient NotificationsDelete{..}
           = go _ndCustomer _ndNotificationId (Just AltJSON)
               directoryService

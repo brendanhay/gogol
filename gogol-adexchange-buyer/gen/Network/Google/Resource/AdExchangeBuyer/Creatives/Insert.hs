@@ -75,6 +75,8 @@ ciPayload
 
 instance GoogleRequest CreativesInsert where
         type Rs CreativesInsert = Creative
+        type Scopes CreativesInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient CreativesInsert{..}
           = go (Just AltJSON) _ciPayload adExchangeBuyerService
           where go

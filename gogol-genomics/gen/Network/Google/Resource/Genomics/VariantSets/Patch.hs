@@ -185,6 +185,9 @@ vspCallback
 
 instance GoogleRequest VariantSetsPatch where
         type Rs VariantSetsPatch = VariantSet
+        type Scopes VariantSetsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantSetsPatch{..}
           = go _vspVariantSetId _vspXgafv _vspUploadProtocol
               _vspUpdateMask

@@ -93,6 +93,8 @@ instance GoogleRequest OrdersGetbymerchantOrderid
          where
         type Rs OrdersGetbymerchantOrderid =
              OrdersGetByMerchantOrderIdResponse
+        type Scopes OrdersGetbymerchantOrderid =
+             '["https://www.googleapis.com/auth/content"]
         requestClient OrdersGetbymerchantOrderid{..}
           = go _ogogMerchantId _ogogMerchantOrderId
               (Just AltJSON)

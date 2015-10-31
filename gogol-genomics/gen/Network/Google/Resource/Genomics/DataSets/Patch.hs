@@ -185,6 +185,9 @@ dspCallback
 
 instance GoogleRequest DataSetsPatch where
         type Rs DataSetsPatch = DataSet
+        type Scopes DataSetsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient DataSetsPatch{..}
           = go _dspDataSetId _dspXgafv _dspUploadProtocol
               _dspUpdateMask

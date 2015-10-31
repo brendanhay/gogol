@@ -89,6 +89,10 @@ paraFileId
 
 instance GoogleRequest ParentsInsert where
         type Rs ParentsInsert = ParentReference
+        type Scopes ParentsInsert =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient ParentsInsert{..}
           = go _paraFileId (Just AltJSON) _paraPayload
               driveService

@@ -106,6 +106,9 @@ scgInstance
 
 instance GoogleRequest SSLCertsGet where
         type Rs SSLCertsGet = SSLCert
+        type Scopes SSLCertsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient SSLCertsGet{..}
           = go _scgProject _scgInstance _scgSha1Fingerprint
               (Just AltJSON)

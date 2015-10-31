@@ -126,6 +126,10 @@ cIncludeDeleted
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentList
+        type Scopes CommentsList =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient CommentsList{..}
           = go _cFileId _cStartModifiedTime _cPageToken
               (Just _cPageSize)

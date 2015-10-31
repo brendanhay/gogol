@@ -88,6 +88,8 @@ gadAlias = lens _gadAlias (\ s a -> s{_gadAlias = a})
 
 instance GoogleRequest GroupsAliasesDelete where
         type Rs GroupsAliasesDelete = ()
+        type Scopes GroupsAliasesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
         requestClient GroupsAliasesDelete{..}
           = go _gadGroupKey _gadAlias (Just AltJSON)
               directoryService

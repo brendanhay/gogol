@@ -160,6 +160,8 @@ trrIsStrict
 
 instance GoogleRequest TableReplaceRows where
         type Rs TableReplaceRows = Task
+        type Scopes TableReplaceRows =
+             '["https://www.googleapis.com/auth/fusiontables"]
         requestClient TableReplaceRows{..}
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter
@@ -175,6 +177,8 @@ instance GoogleRequest TableReplaceRows where
 instance GoogleRequest (MediaUpload TableReplaceRows)
          where
         type Rs (MediaUpload TableReplaceRows) = Task
+        type Scopes (MediaUpload TableReplaceRows) =
+             Scopes TableReplaceRows
         requestClient (MediaUpload TableReplaceRows{..} body)
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter

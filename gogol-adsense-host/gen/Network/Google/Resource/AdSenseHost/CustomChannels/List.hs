@@ -105,6 +105,8 @@ cclMaxResults
 
 instance GoogleRequest CustomChannelsList where
         type Rs CustomChannelsList = CustomChannels
+        type Scopes CustomChannelsList =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient CustomChannelsList{..}
           = go _cclAdClientId _cclPageToken _cclMaxResults
               (Just AltJSON)

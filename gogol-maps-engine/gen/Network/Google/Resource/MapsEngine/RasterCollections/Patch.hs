@@ -86,6 +86,8 @@ rasId = lens _rasId (\ s a -> s{_rasId = a})
 
 instance GoogleRequest RasterCollectionsPatch where
         type Rs RasterCollectionsPatch = ()
+        type Scopes RasterCollectionsPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient RasterCollectionsPatch{..}
           = go _rasId (Just AltJSON) _rasPayload
               mapsEngineService

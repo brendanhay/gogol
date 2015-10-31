@@ -102,6 +102,9 @@ iiiPayload
 
 instance GoogleRequest InstancesInsert where
         type Rs InstancesInsert = Operation
+        type Scopes InstancesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesInsert{..}
           = go _iiiProject _iiiZone (Just AltJSON) _iiiPayload
               computeService

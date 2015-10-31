@@ -187,6 +187,10 @@ reaCallback
 
 instance GoogleRequest ReadsSearch where
         type Rs ReadsSearch = SearchReadsResponse
+        type Scopes ReadsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
         requestClient ReadsSearch{..}
           = go _reaXgafv _reaUploadProtocol (Just _reaPp)
               _reaAccessToken

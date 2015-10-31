@@ -103,6 +103,8 @@ entUserId
 
 instance GoogleRequest EntitlementsDelete where
         type Rs EntitlementsDelete = ()
+        type Scopes EntitlementsDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EntitlementsDelete{..}
           = go _entEnterpriseId _entUserId _entEntitlementId
               (Just AltJSON)

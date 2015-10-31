@@ -208,6 +208,8 @@ odlMaxResults
 instance GoogleRequest OrderDocumentsList where
         type Rs OrderDocumentsList =
              OrderDocumentsListResponse
+        type Scopes OrderDocumentsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OrderDocumentsList{..}
           = go _odlProFileId _odlProjectId _odlSearchString
               (_odlIds ^. _Default)

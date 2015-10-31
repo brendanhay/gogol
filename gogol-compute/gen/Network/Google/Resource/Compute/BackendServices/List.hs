@@ -140,6 +140,10 @@ bslMaxResults
 
 instance GoogleRequest BackendServicesList where
         type Rs BackendServicesList = BackendServiceList
+        type Scopes BackendServicesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient BackendServicesList{..}
           = go _bslProject _bslFilter _bslPageToken
               (Just _bslMaxResults)

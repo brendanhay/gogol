@@ -105,6 +105,9 @@ mpPayload
 
 instance GoogleRequest MembersPatch where
         type Rs MembersPatch = Member
+        type Scopes MembersPatch =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member"]
         requestClient MembersPatch{..}
           = go _mpGroupKey _mpMemberKey (Just AltJSON)
               _mpPayload

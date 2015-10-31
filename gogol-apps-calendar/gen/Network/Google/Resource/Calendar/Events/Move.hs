@@ -117,6 +117,8 @@ emEventId
 
 instance GoogleRequest EventsMove where
         type Rs EventsMove = Event
+        type Scopes EventsMove =
+             '["https://www.googleapis.com/auth/calendar"]
         requestClient EventsMove{..}
           = go _emCalendarId _emEventId (Just _emDestination)
               _emSendNotifications

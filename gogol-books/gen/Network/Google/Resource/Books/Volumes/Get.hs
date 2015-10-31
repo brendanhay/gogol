@@ -141,6 +141,8 @@ vgUserLibraryConsistentRead
 
 instance GoogleRequest VolumesGet where
         type Rs VolumesGet = Volume
+        type Scopes VolumesGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient VolumesGet{..}
           = go _vgVolumeId _vgCountry _vgIncludeNonComicsSeries
               _vgPartner

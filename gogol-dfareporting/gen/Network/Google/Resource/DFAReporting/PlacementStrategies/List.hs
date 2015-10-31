@@ -160,6 +160,8 @@ pslMaxResults
 instance GoogleRequest PlacementStrategiesList where
         type Rs PlacementStrategiesList =
              PlacementStrategiesListResponse
+        type Scopes PlacementStrategiesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementStrategiesList{..}
           = go _pslProFileId _pslSearchString
               (_pslIds ^. _Default)

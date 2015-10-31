@@ -89,6 +89,8 @@ upUserKey
 
 instance GoogleRequest UsersPatch where
         type Rs UsersPatch = User
+        type Scopes UsersPatch =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
         requestClient UsersPatch{..}
           = go _upUserKey (Just AltJSON) _upPayload
               directoryService

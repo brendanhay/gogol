@@ -78,6 +78,9 @@ upgUserKey
 
 instance GoogleRequest UsersPhotosGet where
         type Rs UsersPhotosGet = UserPhoto
+        type Scopes UsersPhotosGet =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
         requestClient UsersPhotosGet{..}
           = go _upgUserKey (Just AltJSON) directoryService
           where go

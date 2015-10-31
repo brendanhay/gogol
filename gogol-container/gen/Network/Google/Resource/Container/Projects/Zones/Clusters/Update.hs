@@ -197,6 +197,8 @@ pzcuCallback
 instance GoogleRequest ProjectsZonesClustersUpdate
          where
         type Rs ProjectsZonesClustersUpdate = Operation
+        type Scopes ProjectsZonesClustersUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesClustersUpdate{..}
           = go _pzcuProjectId _pzcuZone _pzcuClusterId
               _pzcuXgafv

@@ -89,6 +89,8 @@ mladSource
 instance GoogleRequest MyLibraryAnnotationsDelete
          where
         type Rs MyLibraryAnnotationsDelete = ()
+        type Scopes MyLibraryAnnotationsDelete =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsDelete{..}
           = go _mladAnnotationId _mladSource (Just AltJSON)
               booksService

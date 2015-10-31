@@ -176,6 +176,8 @@ pdCallback
 
 instance GoogleRequest ProjectsDelete where
         type Rs ProjectsDelete = Empty
+        type Scopes ProjectsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsDelete{..}
           = go _pdProjectId _pdXgafv _pdUploadProtocol
               (Just _pdPp)

@@ -91,6 +91,8 @@ saSubscriptionId
 
 instance GoogleRequest SubscriptionsActivate where
         type Rs SubscriptionsActivate = Subscription
+        type Scopes SubscriptionsActivate =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsActivate{..}
           = go _saCustomerId _saSubscriptionId (Just AltJSON)
               appsResellerService

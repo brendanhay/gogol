@@ -115,6 +115,8 @@ instance GoogleRequest ProductsUpdatePermissions
          where
         type Rs ProductsUpdatePermissions =
              ProductPermissions
+        type Scopes ProductsUpdatePermissions =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsUpdatePermissions{..}
           = go _pupEnterpriseId _pupProductId (Just AltJSON)
               _pupPayload

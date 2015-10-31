@@ -107,6 +107,9 @@ llpMaxResults
 instance GoogleRequest LayersListPublished where
         type Rs LayersListPublished =
              PublishedLayersListResponse
+        type Scopes LayersListPublished =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
         requestClient LayersListPublished{..}
           = go _llpPageToken _llpProjectId _llpMaxResults
               (Just AltJSON)

@@ -139,6 +139,10 @@ umlMaxResults
 
 instance GoogleRequest UsersMessagesList where
         type Rs UsersMessagesList = ListMessagesResponse
+        type Scopes UsersMessagesList =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersMessagesList{..}
           = go _umlUserId _umlQ (Just _umlIncludeSpamTrash)
               (_umlLabelIds ^. _Default)

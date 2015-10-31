@@ -89,6 +89,8 @@ siPayload
 
 instance GoogleRequest SizesInsert where
         type Rs SizesInsert = Size
+        type Scopes SizesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SizesInsert{..}
           = go _siProFileId (Just AltJSON) _siPayload
               dFAReportingService

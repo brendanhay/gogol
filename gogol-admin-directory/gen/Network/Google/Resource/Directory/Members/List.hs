@@ -110,6 +110,11 @@ mlMaxResults
 
 instance GoogleRequest MembersList where
         type Rs MembersList = Members
+        type Scopes MembersList =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member",
+               "https://www.googleapis.com/auth/admin.directory.group.member.readonly",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
         requestClient MembersList{..}
           = go _mlGroupKey _mlRoles _mlPageToken _mlMaxResults
               (Just AltJSON)

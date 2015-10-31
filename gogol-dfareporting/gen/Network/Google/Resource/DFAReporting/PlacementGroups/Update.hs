@@ -90,6 +90,8 @@ pguPayload
 
 instance GoogleRequest PlacementGroupsUpdate where
         type Rs PlacementGroupsUpdate = PlacementGroup
+        type Scopes PlacementGroupsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementGroupsUpdate{..}
           = go _pguProFileId (Just AltJSON) _pguPayload
               dFAReportingService

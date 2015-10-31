@@ -151,6 +151,9 @@ dpDeployment
 
 instance GoogleRequest DeploymentsPatch where
         type Rs DeploymentsPatch = Operation
+        type Scopes DeploymentsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsPatch{..}
           = go _dpProject _dpDeployment (Just _dpCreatePolicy)
               (Just _dpDeletePolicy)

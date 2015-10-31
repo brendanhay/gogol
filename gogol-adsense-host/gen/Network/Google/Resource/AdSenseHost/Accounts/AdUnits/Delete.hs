@@ -105,6 +105,8 @@ aaudAccountId
 
 instance GoogleRequest AccountsAdUnitsDelete where
         type Rs AccountsAdUnitsDelete = AdUnit
+        type Scopes AccountsAdUnitsDelete =
+             '["https://www.googleapis.com/auth/adsensehost"]
         requestClient AccountsAdUnitsDelete{..}
           = go _aaudAccountId _aaudAdClientId _aaudAdUnitId
               (Just AltJSON)

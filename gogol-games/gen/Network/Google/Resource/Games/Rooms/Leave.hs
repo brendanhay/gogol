@@ -100,6 +100,9 @@ rlLanguage
 
 instance GoogleRequest RoomsLeave where
         type Rs RoomsLeave = Room
+        type Scopes RoomsLeave =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsLeave{..}
           = go _rlRoomId _rlLanguage (Just AltJSON) _rlPayload
               gamesService

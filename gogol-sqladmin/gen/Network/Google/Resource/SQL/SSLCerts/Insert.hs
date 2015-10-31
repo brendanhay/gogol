@@ -107,6 +107,9 @@ sciInstance
 
 instance GoogleRequest SSLCertsInsert where
         type Rs SSLCertsInsert = SSLCertsInsertResponse
+        type Scopes SSLCertsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient SSLCertsInsert{..}
           = go _sciProject _sciInstance (Just AltJSON)
               _sciPayload

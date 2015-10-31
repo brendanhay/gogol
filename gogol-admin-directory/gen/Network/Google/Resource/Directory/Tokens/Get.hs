@@ -90,6 +90,8 @@ tgUserKey
 
 instance GoogleRequest TokensGet where
         type Rs TokensGet = Token
+        type Scopes TokensGet =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient TokensGet{..}
           = go _tgUserKey _tgClientId (Just AltJSON)
               directoryService

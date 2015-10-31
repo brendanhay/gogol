@@ -75,6 +75,9 @@ crCircleId
 
 instance GoogleRequest CirclesRemove where
         type Rs CirclesRemove = ()
+        type Scopes CirclesRemove =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient CirclesRemove{..}
           = go _crCircleId (Just AltJSON) plusDomainsService
           where go

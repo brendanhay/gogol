@@ -132,6 +132,8 @@ flMaxResults
 
 instance GoogleRequest FilesList where
         type Rs FilesList = FileList
+        type Scopes FilesList =
+             '["https://www.googleapis.com/auth/dfareporting"]
         requestClient FilesList{..}
           = go _flProFileId (Just _flSortOrder) (Just _flScope)
               _flPageToken

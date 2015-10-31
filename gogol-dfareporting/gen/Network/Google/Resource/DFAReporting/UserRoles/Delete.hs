@@ -89,6 +89,8 @@ urdId
 
 instance GoogleRequest UserRolesDelete where
         type Rs UserRolesDelete = ()
+        type Scopes UserRolesDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolesDelete{..}
           = go _urdProFileId _urdId (Just AltJSON)
               dFAReportingService

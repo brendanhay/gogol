@@ -128,6 +128,9 @@ idacInstance
 instance GoogleRequest InstancesDeleteAccessConfig
          where
         type Rs InstancesDeleteAccessConfig = Operation
+        type Scopes InstancesDeleteAccessConfig =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesDeleteAccessConfig{..}
           = go _idacProject _idacZone _idacInstance
               (Just _idacAccessConfig)

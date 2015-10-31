@@ -91,6 +91,8 @@ psuPayload
 instance GoogleRequest PlacementStrategiesUpdate
          where
         type Rs PlacementStrategiesUpdate = PlacementStrategy
+        type Scopes PlacementStrategiesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementStrategiesUpdate{..}
           = go _psuProFileId (Just AltJSON) _psuPayload
               dFAReportingService

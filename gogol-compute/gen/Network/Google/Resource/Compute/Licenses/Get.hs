@@ -91,6 +91,10 @@ lgLicense
 
 instance GoogleRequest LicensesGet where
         type Rs LicensesGet = License
+        type Scopes LicensesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient LicensesGet{..}
           = go _lgProject _lgLicense (Just AltJSON)
               computeService

@@ -101,6 +101,10 @@ rppRevisionId
 
 instance GoogleRequest RevisionsPatch where
         type Rs RevisionsPatch = Revision
+        type Scopes RevisionsPatch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient RevisionsPatch{..}
           = go _rppFileId _rppRevisionId (Just AltJSON)
               _rppPayload

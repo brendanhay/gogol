@@ -89,6 +89,8 @@ etiPayload
 
 instance GoogleRequest EventTagsInsert where
         type Rs EventTagsInsert = EventTag
+        type Scopes EventTagsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient EventTagsInsert{..}
           = go _etiProFileId (Just AltJSON) _etiPayload
               dFAReportingService

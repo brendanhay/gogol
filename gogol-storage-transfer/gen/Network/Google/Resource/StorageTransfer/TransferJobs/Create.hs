@@ -154,6 +154,8 @@ tjcCallback
 
 instance GoogleRequest TransferJobsCreate where
         type Rs TransferJobsCreate = TransferJob
+        type Scopes TransferJobsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferJobsCreate{..}
           = go _tjcXgafv _tjcUploadProtocol (Just _tjcPp)
               _tjcAccessToken

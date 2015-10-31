@@ -87,6 +87,10 @@ vrId = lens _vrId (\ s a -> s{_vrId = a})
 
 instance GoogleRequest VideosRate where
         type Rs VideosRate = ()
+        type Scopes VideosRate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosRate{..}
           = go (Just _vrId) (Just _vrRating) (Just AltJSON)
               youTubeService

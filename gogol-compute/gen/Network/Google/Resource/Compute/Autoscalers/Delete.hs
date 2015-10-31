@@ -100,6 +100,9 @@ adAutoscaler
 
 instance GoogleRequest AutoscalersDelete where
         type Rs AutoscalersDelete = Operation
+        type Scopes AutoscalersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient AutoscalersDelete{..}
           = go _adProject _adZone _adAutoscaler (Just AltJSON)
               computeService

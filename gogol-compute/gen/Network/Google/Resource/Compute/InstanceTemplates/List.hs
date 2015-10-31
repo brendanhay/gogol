@@ -140,6 +140,10 @@ itlMaxResults
 
 instance GoogleRequest InstanceTemplatesList where
         type Rs InstanceTemplatesList = InstanceTemplateList
+        type Scopes InstanceTemplatesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceTemplatesList{..}
           = go _itlProject _itlFilter _itlPageToken
               (Just _itlMaxResults)

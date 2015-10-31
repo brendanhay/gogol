@@ -139,6 +139,10 @@ umlMaxResults
 
 instance GoogleRequest URLMapsList where
         type Rs URLMapsList = URLMapList
+        type Scopes URLMapsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient URLMapsList{..}
           = go _umlProject _umlFilter _umlPageToken
               (Just _umlMaxResults)

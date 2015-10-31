@@ -93,6 +93,8 @@ instance GoogleRequest FloodlightActivityGroupsInsert
          where
         type Rs FloodlightActivityGroupsInsert =
              FloodlightActivityGroup
+        type Scopes FloodlightActivityGroupsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivityGroupsInsert{..}
           = go _fagiProFileId (Just AltJSON) _fagiPayload
               dFAReportingService

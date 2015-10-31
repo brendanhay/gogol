@@ -88,6 +88,8 @@ pvgRange
 
 instance GoogleRequest PageViewsGet where
         type Rs PageViewsGet = Pageviews
+        type Scopes PageViewsGet =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient PageViewsGet{..}
           = go _pvgBlogId (_pvgRange ^. _Default)
               (Just AltJSON)

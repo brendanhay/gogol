@@ -153,6 +153,11 @@ ulMaxResults
 
 instance GoogleRequest UsersList where
         type Rs UsersList = UserList
+        type Scopes UsersList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
         requestClient UsersList{..}
           = go _ulProject _ulOrderBy _ulFilter _ulPageToken
               (Just _ulMaxResults)

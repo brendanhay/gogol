@@ -154,6 +154,8 @@ salMaxResults
 
 instance GoogleRequest SubAccountsList where
         type Rs SubAccountsList = SubAccountsListResponse
+        type Scopes SubAccountsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SubAccountsList{..}
           = go _salProFileId _salSearchString
               (_salIds ^. _Default)

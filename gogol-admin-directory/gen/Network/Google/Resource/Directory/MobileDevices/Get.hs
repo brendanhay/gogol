@@ -104,6 +104,10 @@ mdgProjection
 
 instance GoogleRequest MobileDevicesGet where
         type Rs MobileDevicesGet = MobileDevice
+        type Scopes MobileDevicesGet =
+             '["https://www.googleapis.com/auth/admin.directory.device.mobile",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.action",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"]
         requestClient MobileDevicesGet{..}
           = go _mdgCustomerId _mdgResourceId _mdgProjection
               (Just AltJSON)

@@ -104,6 +104,8 @@ tfiFilename
 
 instance GoogleRequest TablesFilesInsert where
         type Rs TablesFilesInsert = ()
+        type Scopes TablesFilesInsert =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient TablesFilesInsert{..}
           = go _tfiId (Just _tfiFilename) (Just AltJSON)
               mapsEngineService
@@ -115,6 +117,8 @@ instance GoogleRequest TablesFilesInsert where
 instance GoogleRequest
          (MediaUpload TablesFilesInsert) where
         type Rs (MediaUpload TablesFilesInsert) = ()
+        type Scopes (MediaUpload TablesFilesInsert) =
+             Scopes TablesFilesInsert
         requestClient
           (MediaUpload TablesFilesInsert{..} body)
           = go _tfiId (Just _tfiFilename) (Just AltJSON)

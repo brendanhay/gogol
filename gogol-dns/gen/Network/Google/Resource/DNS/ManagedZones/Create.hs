@@ -89,6 +89,9 @@ mzcPayload
 
 instance GoogleRequest ManagedZonesCreate where
         type Rs ManagedZonesCreate = ManagedZone
+        type Scopes ManagedZonesCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesCreate{..}
           = go _mzcProject (Just AltJSON) _mzcPayload
               dNSService

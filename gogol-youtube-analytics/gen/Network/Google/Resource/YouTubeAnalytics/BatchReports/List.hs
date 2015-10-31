@@ -93,6 +93,9 @@ brlOnBehalfOfContentOwner
 
 instance GoogleRequest BatchReportsList where
         type Rs BatchReportsList = BatchReportList
+        type Scopes BatchReportsList =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient BatchReportsList{..}
           = go (Just _brlBatchReportDefinitionId)
               (Just _brlOnBehalfOfContentOwner)

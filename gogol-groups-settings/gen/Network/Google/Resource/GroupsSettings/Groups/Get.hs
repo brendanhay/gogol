@@ -76,6 +76,8 @@ ggGroupUniqueId
 
 instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Groups
+        type Scopes GroupsGet =
+             '["https://www.googleapis.com/auth/apps.groups.settings"]
         requestClient GroupsGet{..}
           = go _ggGroupUniqueId (Just AltJSON)
               groupsSettingsService

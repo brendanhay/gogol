@@ -105,6 +105,9 @@ ddZone = lens _ddZone (\ s a -> s{_ddZone = a})
 
 instance GoogleRequest DisksDelete where
         type Rs DisksDelete = Operation
+        type Scopes DisksDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient DisksDelete{..}
           = go _ddProject _ddZone _ddDisk (Just AltJSON)
               computeService

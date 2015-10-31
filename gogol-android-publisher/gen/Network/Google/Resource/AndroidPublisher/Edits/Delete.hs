@@ -93,6 +93,8 @@ edEditId = lens _edEditId (\ s a -> s{_edEditId = a})
 
 instance GoogleRequest EditsDelete where
         type Rs EditsDelete = ()
+        type Scopes EditsDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsDelete{..}
           = go _edPackageName _edEditId (Just AltJSON)
               androidPublisherService

@@ -189,6 +189,9 @@ rgspCallback
 
 instance GoogleRequest ReadGroupSetsPatch where
         type Rs ReadGroupSetsPatch = ReadGroupSet
+        type Scopes ReadGroupSetsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient ReadGroupSetsPatch{..}
           = go _rgspReadGroupSetId _rgspXgafv
               _rgspUploadProtocol

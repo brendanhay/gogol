@@ -119,6 +119,8 @@ mpfuldLinkId
 instance GoogleRequest
          ManagementProFileUserLinksDelete where
         type Rs ManagementProFileUserLinksDelete = ()
+        type Scopes ManagementProFileUserLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient ManagementProFileUserLinksDelete{..}
           = go _mpfuldAccountId _mpfuldWebPropertyId
               _mpfuldProFileId

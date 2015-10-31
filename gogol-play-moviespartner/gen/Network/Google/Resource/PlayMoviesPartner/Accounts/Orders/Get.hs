@@ -168,6 +168,8 @@ aogCallback
 
 instance GoogleRequest AccountsOrdersGet where
         type Rs AccountsOrdersGet = Order
+        type Scopes AccountsOrdersGet =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
         requestClient AccountsOrdersGet{..}
           = go _aogAccountId _aogOrderId _aogXgafv
               _aogUploadProtocol

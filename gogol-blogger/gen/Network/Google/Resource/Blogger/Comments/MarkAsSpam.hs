@@ -103,6 +103,8 @@ cmasCommentId
 
 instance GoogleRequest CommentsMarkAsSpam where
         type Rs CommentsMarkAsSpam = Comment
+        type Scopes CommentsMarkAsSpam =
+             '["https://www.googleapis.com/auth/blogger"]
         requestClient CommentsMarkAsSpam{..}
           = go _cmasBlogId _cmasPostId _cmasCommentId
               (Just AltJSON)

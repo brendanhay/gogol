@@ -90,6 +90,8 @@ cpCustomerId
 
 instance GoogleRequest CustomersPatch where
         type Rs CustomersPatch = Customer
+        type Scopes CustomersPatch =
+             '["https://www.googleapis.com/auth/apps.order"]
         requestClient CustomersPatch{..}
           = go _cpCustomerId (Just AltJSON) _cpPayload
               appsResellerService

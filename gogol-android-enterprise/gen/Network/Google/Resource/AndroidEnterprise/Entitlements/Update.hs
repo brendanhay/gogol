@@ -129,6 +129,8 @@ euUserId = lens _euUserId (\ s a -> s{_euUserId = a})
 
 instance GoogleRequest EntitlementsUpdate where
         type Rs EntitlementsUpdate = Entitlement
+        type Scopes EntitlementsUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EntitlementsUpdate{..}
           = go _euEnterpriseId _euUserId _euEntitlementId
               _euInstall

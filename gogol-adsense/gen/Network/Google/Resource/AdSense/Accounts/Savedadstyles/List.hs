@@ -104,6 +104,9 @@ aslMaxResults
 instance GoogleRequest AccountsSavedadstylesList
          where
         type Rs AccountsSavedadstylesList = SavedAdStyles
+        type Scopes AccountsSavedadstylesList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsSavedadstylesList{..}
           = go _aslAccountId _aslPageToken _aslMaxResults
               (Just AltJSON)

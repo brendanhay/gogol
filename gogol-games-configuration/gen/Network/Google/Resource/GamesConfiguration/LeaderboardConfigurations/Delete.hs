@@ -77,6 +77,8 @@ lcdLeaderboardId
 instance GoogleRequest
          LeaderboardConfigurationsDelete where
         type Rs LeaderboardConfigurationsDelete = ()
+        type Scopes LeaderboardConfigurationsDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient LeaderboardConfigurationsDelete{..}
           = go _lcdLeaderboardId (Just AltJSON)
               gamesConfigurationService

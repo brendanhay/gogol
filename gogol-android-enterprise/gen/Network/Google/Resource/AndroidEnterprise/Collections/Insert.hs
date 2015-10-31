@@ -89,6 +89,8 @@ ciPayload
 
 instance GoogleRequest CollectionsInsert where
         type Rs CollectionsInsert = Collection
+        type Scopes CollectionsInsert =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient CollectionsInsert{..}
           = go _ciEnterpriseId (Just AltJSON) _ciPayload
               androidEnterpriseService

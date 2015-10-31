@@ -89,6 +89,8 @@ eapklEditId
 
 instance GoogleRequest EditsAPKsList where
         type Rs EditsAPKsList = APKsListResponse
+        type Scopes EditsAPKsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsAPKsList{..}
           = go _eapklPackageName _eapklEditId (Just AltJSON)
               androidPublisherService

@@ -102,6 +102,8 @@ adsdId
 
 instance GoogleRequest AdsPatch where
         type Rs AdsPatch = Ad
+        type Scopes AdsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdsPatch{..}
           = go _adsdProFileId (Just _adsdId) (Just AltJSON)
               _adsdPayload

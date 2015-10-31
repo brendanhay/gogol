@@ -166,6 +166,12 @@ owaMaxResults
 
 instance GoogleRequest ObjectsWatchAll where
         type Rs ObjectsWatchAll = Channel
+        type Scopes ObjectsWatchAll =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsWatchAll{..}
           = go _owaBucket _owaPrefix _owaVersions
               _owaProjection

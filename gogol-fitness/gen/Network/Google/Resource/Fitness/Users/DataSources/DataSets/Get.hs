@@ -146,6 +146,13 @@ udsdsgPageToken
 instance GoogleRequest UsersDataSourcesDataSetsGet
          where
         type Rs UsersDataSourcesDataSetsGet = DataSet
+        type Scopes UsersDataSourcesDataSetsGet =
+             '["https://www.googleapis.com/auth/fitness.activity.read",
+               "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.read",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.read",
+               "https://www.googleapis.com/auth/fitness.location.write"]
         requestClient UsersDataSourcesDataSetsGet{..}
           = go _udsdsgUserId _udsdsgDataSourceId
               _udsdsgDataSetId

@@ -85,6 +85,9 @@ rgLanguage
 
 instance GoogleRequest RoomsGet where
         type Rs RoomsGet = Room
+        type Scopes RoomsGet =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsGet{..}
           = go _rgRoomId _rgLanguage (Just AltJSON)
               gamesService

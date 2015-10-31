@@ -101,6 +101,10 @@ dgZone = lens _dgZone (\ s a -> s{_dgZone = a})
 
 instance GoogleRequest DisksGet where
         type Rs DisksGet = Disk
+        type Scopes DisksGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DisksGet{..}
           = go _dgProject _dgZone _dgDisk (Just AltJSON)
               computeService

@@ -83,6 +83,9 @@ srLeaderboardId
 
 instance GoogleRequest ScoresReset where
         type Rs ScoresReset = PlayerScoreResetResponse
+        type Scopes ScoresReset =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient ScoresReset{..}
           = go _srLeaderboardId (Just AltJSON)
               gamesManagementService

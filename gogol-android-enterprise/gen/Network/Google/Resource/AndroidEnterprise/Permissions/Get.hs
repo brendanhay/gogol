@@ -90,6 +90,8 @@ pgPermissionId
 
 instance GoogleRequest PermissionsGet where
         type Rs PermissionsGet = Permission
+        type Scopes PermissionsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient PermissionsGet{..}
           = go _pgPermissionId _pgLanguage (Just AltJSON)
               androidEnterpriseService

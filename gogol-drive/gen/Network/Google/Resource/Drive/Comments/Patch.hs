@@ -99,6 +99,9 @@ cpCommentId
 
 instance GoogleRequest CommentsPatch where
         type Rs CommentsPatch = Comment
+        type Scopes CommentsPatch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient CommentsPatch{..}
           = go _cpFileId _cpCommentId (Just AltJSON) _cpPayload
               driveService

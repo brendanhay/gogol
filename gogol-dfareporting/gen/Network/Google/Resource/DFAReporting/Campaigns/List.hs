@@ -248,6 +248,8 @@ clMaxResults
 
 instance GoogleRequest CampaignsList where
         type Rs CampaignsList = CampaignsListResponse
+        type Scopes CampaignsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsList{..}
           = go _clProFileId (_clExcludedIds ^. _Default)
               _clSearchString

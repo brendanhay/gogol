@@ -149,6 +149,12 @@ olMaxResults
 
 instance GoogleRequest ObjectsList where
         type Rs ObjectsList = Objects
+        type Scopes ObjectsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsList{..}
           = go _olBucket _olPrefix _olVersions _olProjection
               _olPageToken

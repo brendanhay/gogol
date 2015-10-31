@@ -111,6 +111,8 @@ dpDryRun = lens _dpDryRun (\ s a -> s{_dpDryRun = a})
 
 instance GoogleRequest DatafeedsPatch where
         type Rs DatafeedsPatch = Datafeed
+        type Scopes DatafeedsPatch =
+             '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsPatch{..}
           = go _dpMerchantId _dpDatafeedId _dpDryRun
               (Just AltJSON)

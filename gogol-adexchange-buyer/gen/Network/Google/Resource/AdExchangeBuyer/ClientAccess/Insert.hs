@@ -97,6 +97,8 @@ caiClientAccountId
 
 instance GoogleRequest ClientAccessInsert where
         type Rs ClientAccessInsert = ClientAccessCapabilities
+        type Scopes ClientAccessInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ClientAccessInsert{..}
           = go _caiSponsorAccountId _caiClientAccountId
               (Just AltJSON)

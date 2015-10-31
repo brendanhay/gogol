@@ -102,6 +102,9 @@ crpCircleId
 
 instance GoogleRequest CirclesRemovePeople where
         type Rs CirclesRemovePeople = ()
+        type Scopes CirclesRemovePeople =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
         requestClient CirclesRemovePeople{..}
           = go _crpCircleId (_crpEmail ^. _Default)
               (_crpUserId ^. _Default)

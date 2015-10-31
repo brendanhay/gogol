@@ -103,6 +103,8 @@ instance GoogleRequest MyLibraryReadingPositionsGet
          where
         type Rs MyLibraryReadingPositionsGet =
              ReadingPosition
+        type Scopes MyLibraryReadingPositionsGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryReadingPositionsGet{..}
           = go _mlrpgVolumeId _mlrpgContentVersion _mlrpgSource
               (Just AltJSON)

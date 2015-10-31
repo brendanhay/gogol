@@ -136,6 +136,8 @@ instance GoogleRequest
          LicenseAssignmentsListForProductAndSKU where
         type Rs LicenseAssignmentsListForProductAndSKU =
              LicenseAssignmentList
+        type Scopes LicenseAssignmentsListForProductAndSKU =
+             '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient
           LicenseAssignmentsListForProductAndSKU{..}
           = go _lalfpaskuProductId _lalfpaskuSKUId

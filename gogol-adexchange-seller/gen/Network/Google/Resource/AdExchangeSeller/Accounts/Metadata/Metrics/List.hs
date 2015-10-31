@@ -79,6 +79,9 @@ ammlAccountId
 instance GoogleRequest AccountsMetadataMetricsList
          where
         type Rs AccountsMetadataMetricsList = Metadata
+        type Scopes AccountsMetadataMetricsList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
         requestClient AccountsMetadataMetricsList{..}
           = go _ammlAccountId (Just AltJSON)
               adExchangeSellerService

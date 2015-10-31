@@ -242,6 +242,10 @@ oiProjection
 
 instance GoogleRequest ObjectsInsert where
         type Rs ObjectsInsert = Object
+        type Scopes ObjectsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsInsert{..}
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
@@ -261,6 +265,8 @@ instance GoogleRequest ObjectsInsert where
 instance GoogleRequest (MediaUpload ObjectsInsert)
          where
         type Rs (MediaUpload ObjectsInsert) = Object
+        type Scopes (MediaUpload ObjectsInsert) =
+             Scopes ObjectsInsert
         requestClient (MediaUpload ObjectsInsert{..} body)
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch

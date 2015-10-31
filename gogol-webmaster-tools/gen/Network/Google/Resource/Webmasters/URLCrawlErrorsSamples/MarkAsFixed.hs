@@ -125,6 +125,8 @@ ucesmafURL
 instance GoogleRequest
          URLCrawlErrorsSamplesMarkAsFixed where
         type Rs URLCrawlErrorsSamplesMarkAsFixed = ()
+        type Scopes URLCrawlErrorsSamplesMarkAsFixed =
+             '["https://www.googleapis.com/auth/webmasters"]
         requestClient URLCrawlErrorsSamplesMarkAsFixed{..}
           = go _ucesmafSiteURL _ucesmafURL
               (Just _ucesmafCategory)

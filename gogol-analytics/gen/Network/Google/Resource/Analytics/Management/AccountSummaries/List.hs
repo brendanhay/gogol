@@ -97,6 +97,9 @@ instance GoogleRequest ManagementAccountSummariesList
          where
         type Rs ManagementAccountSummariesList =
              AccountSummaries
+        type Scopes ManagementAccountSummariesList =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient ManagementAccountSummariesList{..}
           = go _maslStartIndex _maslMaxResults (Just AltJSON)
               analyticsService
