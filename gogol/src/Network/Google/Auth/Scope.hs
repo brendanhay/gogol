@@ -35,17 +35,19 @@ import           Network.Google.Prelude       (GoogleRequest (..),
                                                OAuthScope (..))
 import           Network.HTTP.Types           (urlEncode)
 
--- | Type-restrict the supplied credentials/whatever to the specific scopes.
+-- | Type-restrict the supplied credentials etc. to the specific scopes.
 --
--- This simply exists to allow users to choose between 'getCredentials' and
--- 'getCredentialsP' styles, without having the two separate functions.
+-- This simply exists to allow users to choose between using 'getCredentials'
+-- with a 'Proxy' type, or explicitly specifying the type annotation without
+-- having separate functions.
 --
 -- This seems sufficiently general, does it already exist?
 --
--- /See:/ '(!)'.
+-- /See:/ '!'.
 allow :: proxy s -> k s -> k s
 allow _ = id
 
+-- | Type-restrict the supplied credentials etc. to no scopes.
 forbid :: k '[] -> k '[]
 forbid = id
 
@@ -61,11 +63,12 @@ forbid = id
 -- For error message/presentation purposes, this wraps the result of
 -- the membership checks below.
 type family Authorize (s :: [Symbol]) a :: Constraint where
-    Authorize s a = MatchAnyScope (Scopes a) s ~ 'True
+    Authorize s a = MatchAnyScope s (Scopes a) ~ 'True
 
-type family MatchAnyScope a s where
-    MatchAnyScope '[] s         = 'True
-    MatchAnyScope a   (x ': xs) = x ∈ a || MatchAnyScope a xs
+-- | Check if any scope exists in both parameters.
+type family MatchAnyScope a b where
+    MatchAnyScope a         '[] = 'True
+    MatchAnyScope (x ': xs) b   = x ∈ b || MatchAnyScope xs b
 
 -- | Set membership.
 type family (∈) a b where
