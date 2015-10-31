@@ -55,8 +55,8 @@ forbid = id
 (!) :: proxy xs -> proxy ys -> Proxy (xs ++ ys)
 (!) _ _ = Proxy
 
--- | Determine if _any_ of the scopes a request requires is a subset
--- of the scopes the credentials supports.
+-- | Determine if _any_ of the scopes a request requires is
+-- listed in the scopes the credentials supports.
 --
 -- For error message/presentation purposes, this wraps the result of
 -- the membership checks below.
@@ -67,10 +67,12 @@ type family MatchAnyScope a s where
     MatchAnyScope '[] s         = 'True
     MatchAnyScope a   (x ': xs) = x ∈ a || MatchAnyScope a xs
 
+-- | Set membership.
 type family (∈) a b where
     (∈) x '[]       = 'False
     (∈) x (y ': xs) = x == y || x ∈ xs
 
+-- | Append.
 type family (++) xs ys where
     (++) a  '[]       = a
     (++) '[] b        = b
