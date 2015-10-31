@@ -316,8 +316,8 @@ instance FromJSON a => FromStream JSON a where
             Right x -> pure $! Right x
 
 class GoogleRequest a where
-    type Rs a :: *
-    type Ss a :: [Symbol]
+    type Rs     a :: *
+    type Scopes a :: [Symbol]
 
     requestClient :: a -> Client (Rs a)
 
