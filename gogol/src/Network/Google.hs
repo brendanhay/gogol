@@ -139,7 +139,7 @@ newtype Google s a = Google { unGoogle :: ReaderT (Env s) (ResourceT IO) a }
         , MonadResource
         )
 
--- | Run a 'Google' aciton using the specified environment containing
+-- | Run a 'Google' actoin using the specified environment containing
 -- credentials with sufficient authorization scopes.
 runGoogle :: (MonadResource m, HasEnv s r) => r -> Google s a -> m a
 runGoogle e m = liftResourceT $ runReaderT (unGoogle m) (e ^. environment)

@@ -7,5 +7,5 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
-
+--
 module Network.Google.Auth.Device where

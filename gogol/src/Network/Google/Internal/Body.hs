@@ -5,6 +5,7 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
+--
 module Network.Google.Internal.Body where
 
 import           Control.Monad.IO.Class (MonadIO (..))
