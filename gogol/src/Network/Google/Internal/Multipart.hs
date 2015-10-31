@@ -10,17 +10,17 @@
 --
 module Network.Google.Internal.Multipart where
 
-import           Control.Monad.IO.Class
+import           Control.Monad.IO.Class                (MonadIO (..))
 import           Data.ByteString                       (ByteString)
-import qualified Data.ByteString                       as BS
-import           Data.ByteString.Builder.Extra
-import qualified Data.CaseInsensitive                  as CI
-import           Data.Monoid
-import           Network.Google.Types
+import qualified Data.ByteString as BS
+import           Data.ByteString.Builder.Extra         (byteStringCopy)
+import qualified Data.CaseInsensitive as CI
+import           Data.Monoid                           ((<>))
+import           Network.Google.Types                  (Part (..))
 import           Network.HTTP.Client
 import           Network.HTTP.Client.MultipartFormData (webkitBoundary)
-import           Network.HTTP.Media
-import           Network.HTTP.Types
+import           Network.HTTP.Media                    (RenderHeader(..))
+import           Network.HTTP.Types                    (Header, hContentType)
 
 -- POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1
 -- Host: www.googleapis.com

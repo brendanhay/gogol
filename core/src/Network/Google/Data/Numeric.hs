@@ -14,7 +14,7 @@ module Network.Google.Data.Numeric
     ( Nat (..)
     ) where
 
-import           Control.Lens
+
 import           Control.Monad
 import           Data.Aeson
 import           Data.Data

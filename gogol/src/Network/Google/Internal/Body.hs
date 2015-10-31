@@ -7,9 +7,9 @@
 -- Portability : non-portable (GHC extensions)
 module Network.Google.Internal.Body where
 
-import           Control.Monad.IO.Class
-import           Data.Conduit.Binary
-import           Network.HTTP.Conduit
+import           Control.Monad.IO.Class (MonadIO (..))
+import           Data.Conduit.Binary    (sourceFile)
+import           Network.HTTP.Conduit   (RequestBody, requestBodySource)
 import           System.IO
 
 -- | Convenience function for obtaining the size of a file.

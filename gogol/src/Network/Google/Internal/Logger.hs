@@ -32,8 +32,8 @@ module Network.Google.Internal.Logger
     , buildLines
     ) where
 
-import           Control.Monad
-import           Control.Monad.IO.Class
+import           Control.Monad                (when)
+import           Control.Monad.IO.Class       (MonadIO (..))
 import           Data.ByteString              (ByteString)
 import qualified Data.ByteString              as BS
 import           Data.ByteString.Builder      (Builder)
@@ -42,18 +42,17 @@ import qualified Data.ByteString.Lazy         as LBS
 import qualified Data.ByteString.Lazy.Builder as Build
 import           Data.CaseInsensitive         (CI)
 import qualified Data.CaseInsensitive         as CI
-import           Data.Int
+import           Data.Int                     (Int16, Int8)
 import           Data.List                    (intersperse)
-import           Data.Monoid
 import qualified Data.Text                    as Text
 import qualified Data.Text.Encoding           as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Encoding      as LText
-import           Data.Word
+import           Data.Word                    (Word16)
 import           Network.Google.Prelude       hiding (Header, Request)
 import           Network.HTTP.Conduit
 import           Network.HTTP.Types
-import           Numeric
+import           Numeric                      (showFFloat)
 import           System.IO
 
 -- | A function threaded through various request and serialisation routines

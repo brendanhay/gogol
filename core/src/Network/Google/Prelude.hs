@@ -10,7 +10,6 @@ module Network.Google.Prelude
     ( module Export
     ) where
 
-import           Control.Applicative         as Export (pure, (<$>), (<*>))
 import           Control.Lens                as Export (Lens', lens, mapping,
                                                         ( # ), (^.), _Just)
 import           Data.Data                   as Export (Data, Typeable)

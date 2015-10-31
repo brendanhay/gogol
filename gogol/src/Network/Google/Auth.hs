@@ -76,52 +76,23 @@ module Network.Google.Auth
    , module Network.Google.Auth.Scope
    ) where
 
-import           Control.Applicative
 import           Control.Concurrent
-import           Control.Exception.Lens
-import           Control.Lens                             hiding (coerce, (.=))
-import           Control.Monad
-import           Control.Monad.Catch
-import           Control.Monad.IO.Class
-import           Crypto.Hash.Algorithms                   (SHA256 (..))
-import           Crypto.PubKey.RSA.PKCS15                 (signSafer)
-import           Crypto.PubKey.RSA.Types                  (PrivateKey)
-import           Data.Aeson
-import           Data.Aeson.Types
-import           Data.ByteArray
-import           Data.ByteArray.Encoding
-import           Data.ByteString                          (ByteString)
-import           Data.ByteString.Builder                  (Builder)
-import qualified Data.ByteString.Builder                  as Build
-import qualified Data.ByteString.Char8                    as BS8
-import qualified Data.ByteString.Lazy                     as LBS
-import           Data.Coerce
-import           Data.Default.Class                       (def)
-import           Data.List
-import           Data.String
-import qualified Data.Text                                as Text
+import           Control.Monad.Catch                      (MonadCatch)
+import           Control.Monad.IO.Class                   (MonadIO (..))
 import qualified Data.Text.Encoding                       as Text
-import           Data.Time
-import           Data.Time.Clock.POSIX
-import           Data.Type.Bool
-import           Data.Type.Equality
-import           Data.Typeable
-import           Data.X509
-import           Data.X509.Memory
-import           GHC.Exts                                 (Constraint)
-import           GHC.TypeLits
+import           Data.Time                                (getCurrentTime)
+import           GHC.TypeLits                             (Symbol)
 import           Network.Google.Auth.ApplicationDefault
-import           Network.Google.Auth.Device
 import           Network.Google.Auth.InstalledApplication
 import           Network.Google.Auth.Scope
 import           Network.Google.Auth.ServiceAccount
-import           Network.Google.Compute.Metadata
+import           Network.Google.Compute.Metadata          (checkGCEVar)
 import           Network.Google.Internal.Auth
-import           Network.Google.Internal.Logger
+import           Network.Google.Internal.Logger           (Logger)
 import           Network.Google.Prelude
-import           Network.HTTP.Conduit                     hiding (Proxy)
+import           Network.HTTP.Conduit                     (Manager)
 import qualified Network.HTTP.Conduit                     as Client
-import           Network.HTTP.Types
+import           Network.HTTP.Types                       (hAuthorization)
 
 -- | An 'OAuthToken' that can potentially be expired, with the original
 -- credentials that can be used to perform a refresh.
@@ -183,7 +154,7 @@ exchange c l = fmap (Auth c) . action l
     action = case c of
         FromMetadata s    -> metadataToken       s
         FromAccount  a    -> serviceAccountToken a (getScopes c)
-        FromClient   c n  -> exchangeCode        c n
+        FromClient   x n  -> exchangeCode        x n
         FromUser     u    -> authorizedUserToken u Nothing
 
 -- | Refresh an existing 'OAuthToken' using

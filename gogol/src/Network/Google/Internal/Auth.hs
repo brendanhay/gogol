@@ -7,11 +7,7 @@
 {-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE PolyKinds                  #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
-{-# LANGUAGE TypeFamilies               #-}
-{-# LANGUAGE TypeOperators              #-}
-{-# LANGUAGE UndecidableInstances       #-}
 
 -- |
 -- Module      : Network.Google.Internal.Auth
@@ -23,51 +19,34 @@
 
 module Network.Google.Internal.Auth where
 
-import           Control.Applicative
-import           Control.Concurrent
-import           Control.Exception.Lens
-import           Control.Lens                    hiding (coerce, (.=))
-import           Control.Monad
+import           Control.Exception.Lens         (exception)
+import           Control.Lens                   (Prism', prism, (<&>))
 import           Control.Monad.Catch
-import           Control.Monad.IO.Class
-import           Crypto.Hash.Algorithms          (SHA256 (..))
-import           Crypto.PubKey.RSA.PKCS15        (signSafer)
-import           Crypto.PubKey.RSA.Types         (PrivateKey)
+import           Control.Monad.IO.Class         (MonadIO (..))
+import           Crypto.PubKey.RSA.Types        (PrivateKey)
 import           Data.Aeson
-import           Data.Aeson.Types
-import           Data.ByteArray
+import           Data.Aeson.Types               (Pair)
+import           Data.ByteArray                 (ByteArray)
 import           Data.ByteArray.Encoding
-import           Data.ByteString                 (ByteString)
-import           Data.ByteString.Builder         (Builder)
-import qualified Data.ByteString.Builder         as Build
-import qualified Data.ByteString.Char8           as BS8
-import qualified Data.ByteString.Lazy            as LBS
-import           Data.Coerce
-import           Data.Default.Class              (def)
-import           Data.List                       (intersperse)
-import           Data.Monoid
-import           Data.String
-import           Data.Text                       (Text)
-import qualified Data.Text                       as Text
-import qualified Data.Text.Encoding              as Text
-import qualified Data.Text.Lazy                  as LText
-import qualified Data.Text.Lazy.Builder          as TBuild
-import qualified Data.Text.Lazy.Encoding         as LText
+import           Data.ByteString                (ByteString)
+import           Data.ByteString.Builder        ()
+import qualified Data.ByteString.Char8          as BS8
+import qualified Data.ByteString.Lazy           as LBS
+import           Data.Coerce                    (coerce)
+import           Data.Default.Class             (def)
+import           Data.String                    (IsString)
+import qualified Data.Text                      as Text
+import qualified Data.Text.Encoding             as Text
 import           Data.Time
-import           Data.Time.Clock.POSIX
-import           Data.Type.Bool
-import           Data.Type.Equality
-import           Data.Typeable
-import           Data.X509
-import           Data.X509.Memory
-import           GHC.Exts                        (Constraint)
-import           GHC.TypeLits
-import           Network.Google.Compute.Metadata
+import           Data.X509                      (PrivKey (..))
+import           Data.X509.Memory               (readKeyFileFromMemory)
+import           GHC.TypeLits                   (Symbol)
 import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
-import           Network.HTTP.Conduit            hiding (Proxy, Request)
-import qualified Network.HTTP.Conduit            as Client
-import           Network.HTTP.Types
+import           Network.HTTP.Conduit           (HttpException, Manager)
+import qualified Network.HTTP.Conduit           as Client
+import           Network.HTTP.Types             (Status, hContentType,
+                                                 urlEncode)
 
 -- | The supported credential mechanisms.
 data Credentials (s :: [Symbol])
@@ -294,10 +273,10 @@ refreshRequest :: (MonadIO m, MonadCatch m)
 refreshRequest rq l m = do
     logDebug l rq                          -- debug:ClientRequest
 
-    rs <- liftIO (httpLbs rq m) `catch` (throwM . RetrievalError)
+    rs <- liftIO (Client.httpLbs rq m) `catch` (throwM . RetrievalError)
 
-    let bs = responseBody   rs
-        s  = responseStatus rs
+    let bs = Client.responseBody   rs
+        s  = Client.responseStatus rs
 
     logDebug l rs                          -- debug:ClientResponse
     logTrace l $ "[Response Body]\n" <> bs -- trace:ResponseBody
@@ -351,4 +330,4 @@ concatScopes :: [OAuthScope] -> Text
 concatScopes = Text.intercalate " " . coerce
 
 textBody :: Text -> RequestBody
-textBody = RequestBodyBS . Text.encodeUtf8
+textBody = Client.RequestBodyBS . Text.encodeUtf8

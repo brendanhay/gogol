@@ -15,17 +15,15 @@
 -- Environment and Google specific configuration for the 'Network.Google' monad.
 module Network.Google.Env where
 
-import           Control.Lens
-import           Control.Monad.Catch
-import           Control.Monad.IO.Class
-import           Control.Monad.Reader
-import           Data.Function                          (on)
-import           Data.Monoid
-import           GHC.TypeLits
+import           Control.Lens                   (Lens', lens, (<>~), (?~))
+import           Control.Monad.Catch            (MonadCatch)
+import           Control.Monad.IO.Class         (MonadIO (..))
+import           Control.Monad.Reader           (MonadReader (local))
+import           Data.Function                  (on)
+import           Data.Monoid                    (Dual (..), Endo (..))
+import           GHC.TypeLits                   (Symbol)
 import           Network.Google.Auth
-import           Network.Google.Auth.ApplicationDefault
-import           Network.Google.Internal.Auth
-import           Network.Google.Internal.Logger
+import           Network.Google.Internal.Logger (Logger)
 import           Network.Google.Types
 import           Network.HTTP.Conduit
 

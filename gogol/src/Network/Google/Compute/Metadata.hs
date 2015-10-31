@@ -40,8 +40,8 @@ module Network.Google.Compute.Metadata
     ) where
 
 import           Control.Monad.Catch
-import           Control.Monad.IO.Class
-import           Data.Aeson
+import           Control.Monad.IO.Class  (MonadIO (..))
+import           Data.Aeson              (eitherDecode')
 import           Data.ByteString         (ByteString)
 import qualified Data.ByteString.Lazy    as LBS
 import           Data.Char               (toLower)
@@ -49,12 +49,10 @@ import           Data.Default.Class      (def)
 import qualified Data.Text.Encoding      as Text
 import qualified Data.Text.Lazy          as LText
 import qualified Data.Text.Lazy.Encoding as LText
-import           Network.Google.Prelude
-import           Network.HTTP.Conduit    (HttpException (..), Manager, httpLbs,
-                                          responseBody, responseHeaders,
-                                          responseStatus)
+import           Network.Google.Prelude  (Text, (<>))
+import           Network.HTTP.Conduit    (HttpException (..), Manager)
 import qualified Network.HTTP.Conduit    as Client
-import           Network.HTTP.Types
+import           Network.HTTP.Types      (HeaderName)
 import           System.Environment      (lookupEnv)
 
 -- | @NO_GCE_CHECK@.
@@ -77,15 +75,15 @@ isGCE :: MonadIO m => Manager -> m Bool
 isGCE m = liftIO $ do
     p <- check <$> lookupEnv checkGCEVar
     if p
-        then (success <$> httpLbs rq m) `catch` failure
+        then (success <$> Client.httpLbs rq m) `catch` failure
         else pure False
   where
     check Nothing  = True
     check (Just x) = map toLower x `notElem` ["1", "true", "yes", "on"]
 
     success rs =
-           fromEnum (responseStatus rs) == 200
-        && (lookup metadataFlavorHeader (responseHeaders rs)
+           fromEnum (Client.responseStatus rs) == 200
+        && (lookup metadataFlavorHeader (Client.responseHeaders rs)
                == Just metadataFlavorDesired)
 
     failure :: HttpException -> IO Bool
@@ -153,7 +151,7 @@ getMachineType = metadataText "instance/machine-type"
 getTags :: MonadIO m => Manager -> m [Text]
 getTags m = do
     rs <- metadata "instance/tags" [] m
-    case eitherDecode' (responseBody rs) of
+    case eitherDecode' (Client.responseBody rs) of
         Left  _  -> pure []
         Right xs -> pure xs
 
@@ -208,15 +206,15 @@ metadataMaybe :: MonadIO m
               -> m (Maybe LBS.ByteString)
 metadataMaybe path m = do
     rs <- metadata path [404] m
-    if fromEnum (responseStatus rs) == 404
+    if fromEnum (Client.responseStatus rs) == 404
         then pure Nothing
-        else pure $ Just (responseBody rs)
+        else pure $ Just (Client.responseBody rs)
 
 metadataText :: MonadIO m
              => ByteString
              -> Manager
              -> m Text
-metadataText path m = LText.toStrict . LText.decodeUtf8 . responseBody
+metadataText path m = LText.toStrict . LText.decodeUtf8 . Client.responseBody
     <$> metadata path [] m
 
 metadata :: MonadIO m
@@ -225,7 +223,7 @@ metadata :: MonadIO m
          -> Manager
          -> m (Client.Response LBS.ByteString)
 metadata path ss m =
-    liftIO . flip httpLbs m $ metadataRequest
+    liftIO . flip Client.httpLbs m $ metadataRequest
         { Client.path        = "/computeMetadata/v1/" <> path
         , Client.checkStatus = \s hs cj ->
             let c = fromEnum s

@@ -15,25 +15,24 @@
 --
 module Network.Google.Internal.HTTP where
 
-import           Control.Lens
+import           Control.Lens                      ((%~), (&))
 import           Control.Monad.Catch
-import           Control.Monad.IO.Class
-import           Control.Monad.Trans.Resource
-import           Data.Default.Class
-import           Data.Monoid
+import           Control.Monad.IO.Class            (MonadIO)
+import           Control.Monad.Trans.Resource      (MonadResource (..))
+import           Data.Default.Class                (Default (..))
+import           Data.Monoid                       (Dual (..), Endo (..), (<>))
 import qualified Data.Text.Encoding                as Text
 import qualified Data.Text.Lazy                    as LText
 import qualified Data.Text.Lazy.Builder            as Build
 import           GHC.Exts                          (toList)
-import           GHC.TypeLits
-import           Network.Google.Auth
+import           Network.Google.Auth               (Allow, authorize)
 import           Network.Google.Env                (Env (..))
-import           Network.Google.Internal.Logger
+import           Network.Google.Internal.Logger    (logDebug)
 import           Network.Google.Internal.Multipart
 import           Network.Google.Types
 import qualified Network.HTTP.Client.Conduit       as Client
 import           Network.HTTP.Conduit
-import           Network.HTTP.Media
+import           Network.HTTP.Media                (RenderHeader (..))
 import           Network.HTTP.Types
 
 -- FIXME: "mediaType" param also comes/calculated from the request body?
