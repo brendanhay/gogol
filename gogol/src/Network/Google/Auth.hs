@@ -27,54 +27,54 @@
 -- Explicitly specify your Google credentials, or retrieve them
 -- from the underlying OS.
 module Network.Google.Auth
-   (
-   -- * Credentials
-     Credentials    (..)
+    (
+    -- * Credentials
+      Credentials    (..)
 
-   -- ** Application Default Credentials
-   , getApplicationDefault
-   , fromWellKnownPath
-   , fromFilePath
+    -- ** Application Default Credentials
+    , getApplicationDefault
+    , fromWellKnownPath
+    , fromFilePath
 
-   -- ** Installed Application Credentials
-   , formURL
+    -- ** Installed Application Credentials
+    , formURL
 
-   -- ** Authorizing Requests
-   , authorize
+    -- ** Authorizing Requests
+    , authorize
 
-   -- ** Thread-safe Storage
-   , Store
-   , initStore
+    -- ** Thread-safe Storage
+    , Store
+    , initStore
 
-   , Auth           (..)
-   , exchange
-   , refresh
+    , Auth           (..)
+    , exchange
+    , refresh
 
-   -- ** Default Constants
-   , checkGCEVar
-   , cloudSDKConfigDir
-   , defaultCredentialsFile
+    -- ** Default Constants
+    , checkGCEVar
+    , cloudSDKConfigDir
+    , defaultCredentialsFile
 
-   -- ** Handling Errors
-   , AsAuthError    (..)
-   , AuthError      (..)
+    -- ** Handling Errors
+    , AsAuthError    (..)
+    , AuthError      (..)
 
-   -- * OAuth Types
-   , OAuthClient    (..)
-   , OAuthToken     (..)
-   , OAuthCode      (..)
-   , OAuthScope     (..)
+    -- * OAuth Types
+    , OAuthClient    (..)
+    , OAuthToken     (..)
+    , OAuthCode      (..)
+    , OAuthScope     (..)
 
-   -- * Re-exported Types
-   , AccessToken    (..)
-   , RefreshToken   (..)
-   , Secret         (..)
-   , ServiceId      (..)
-   , ClientId       (..)
+    -- * Re-exported Types
+    , AccessToken    (..)
+    , RefreshToken   (..)
+    , Secret         (..)
+    , ServiceId      (..)
+    , ClientId       (..)
 
-   -- * Re-exported Modules
-   , module Network.Google.Auth.Scope
-   ) where
+    -- * Re-exported Modules
+    , module Network.Google.Auth.Scope
+    ) where
 
 import           Control.Concurrent
 import           Control.Monad.Catch                      (MonadCatch)

@@ -13,6 +13,7 @@ module Network.Google.Auth.InstalledApplication where
 import           Control.Monad.Catch            (MonadCatch)
 import           Control.Monad.IO.Class         (MonadIO)
 import qualified Data.Text.Encoding             as Text
+import           Network.Google.Auth.Scope      (queryEncodeScopes)
 import           Network.Google.Internal.Auth
 import           Network.Google.Internal.Logger (Logger)
 import           Network.Google.Prelude

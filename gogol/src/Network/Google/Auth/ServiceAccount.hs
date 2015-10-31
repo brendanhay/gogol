@@ -20,6 +20,7 @@ import qualified Data.ByteString.Char8           as BS8
 import qualified Data.Text                       as Text
 import qualified Data.Text.Encoding              as Text
 import           Data.Time.Clock.POSIX
+import           Network.Google.Auth.Scope       (concatScopes)
 import           Network.Google.Compute.Metadata
 import           Network.Google.Internal.Auth
 import           Network.Google.Internal.Logger

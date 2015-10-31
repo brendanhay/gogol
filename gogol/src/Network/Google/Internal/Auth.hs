@@ -30,9 +30,7 @@ import           Data.ByteArray                 (ByteArray)
 import           Data.ByteArray.Encoding
 import           Data.ByteString                (ByteString)
 import           Data.ByteString.Builder        ()
-import qualified Data.ByteString.Char8          as BS8
 import qualified Data.ByteString.Lazy           as LBS
-import           Data.Coerce                    (coerce)
 import           Data.Default.Class             (def)
 import           Data.String                    (IsString)
 import qualified Data.Text                      as Text
@@ -45,8 +43,7 @@ import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
 import           Network.HTTP.Conduit           (HttpException, Manager)
 import qualified Network.HTTP.Conduit           as Client
-import           Network.HTTP.Types             (Status, hContentType,
-                                                 urlEncode)
+import           Network.HTTP.Types             (Status, hContentType)
 
 -- | The supported credential mechanisms.
 data Credentials (s :: [Symbol])
@@ -319,15 +316,6 @@ base64Encode = base64 . LBS.toStrict . encode . object
 
 base64 :: ByteArray a => a -> ByteString
 base64 = convertToBase Base64URLUnpadded
-
-queryEncodeScopes :: [OAuthScope] -> ByteString
-queryEncodeScopes =
-      BS8.intercalate "+"
-    . map (urlEncode True . Text.encodeUtf8)
-    . coerce
-
-concatScopes :: [OAuthScope] -> Text
-concatScopes = Text.intercalate " " . coerce
 
 textBody :: Text -> RequestBody
 textBody = Client.RequestBodyBS . Text.encodeUtf8

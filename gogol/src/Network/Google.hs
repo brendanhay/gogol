@@ -43,6 +43,14 @@ module Network.Google
     , newEnvWith
     , getApplicationDefault
 
+    -- ** Authorization
+    , allow
+    , forbid
+    , (!)
+
+    , type Authorize
+    , type HasScope
+
     -- * Sending Requests
     , send
 

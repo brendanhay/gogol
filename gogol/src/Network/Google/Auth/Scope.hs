@@ -1,5 +1,6 @@
 {-# LANGUAGE DataKinds            #-}
 {-# LANGUAGE ExplicitNamespaces   #-}
+{-# LANGUAGE OverloadedStrings    #-}
 {-# LANGUAGE PolyKinds            #-}
 {-# LANGUAGE ScopedTypeVariables  #-}
 {-# LANGUAGE TypeFamilies         #-}
@@ -18,15 +19,21 @@
 -- from the underlying OS.
 module Network.Google.Auth.Scope where
 
+import           Data.ByteString              (ByteString)
+import qualified Data.ByteString.Char8        as BS8
+import           Data.Coerce                  (coerce)
+import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
-import           Data.Type.Bool               (type (||))
+import qualified Data.Text.Encoding           as Text
+import           Data.Type.Bool               (type (||), type If)
 import           Data.Type.Equality           (type (==))
 import           Data.Typeable                (Proxy (..))
 import           GHC.Exts                     (Constraint)
 import           GHC.TypeLits                 (KnownSymbol, Symbol, symbolVal)
 import           Network.Google.Internal.Auth (Credentials)
-import           Network.Google.Prelude       (GoogleRequest (Ss),
+import           Network.Google.Prelude       (GoogleRequest (..),
                                                OAuthScope (..))
+import           Network.HTTP.Types           (urlEncode)
 
 -- | Type-restrict the supplied credentials/whatever to the specific scopes.
 --
@@ -39,6 +46,9 @@ import           Network.Google.Prelude       (GoogleRequest (Ss),
 allow :: proxy s -> k s -> k s
 allow _ = id
 
+forbid :: k '[] -> k '[]
+forbid = id
+
 -- | Append the type-level lists of two 'Proxy' values.
 --
 -- /See:/ 'allow'.
@@ -47,25 +57,20 @@ allow _ = id
 
 -- | Determine if _any_ of the scopes a request requires is a subset
 -- of the scopes the credentials supports.
+--
+-- For error message/presentation purposes, this wraps the result of
+-- the membership checks below.
 type family Authorize (s :: [Symbol]) a :: Constraint where
-    Authorize s a = HasScope (Ss a ⊆ s) s
+    Authorize s a = HasScope (Scopes a) s ~ 'True
 
--- | For error message/presentation purposes, this wraps the result of
--- the membership checks below. When 'False fails to match, it will show
--- the reduced error case for '⊆' compared against the full
--- set of scopes the credentials ('s') have.
-type family HasScope p s :: Constraint where
-    HasScope 'True s = ()
+type family HasScope a s where
+    HasScope '[] s         = 'True
+    HasScope a   (x ': xs) = x ∈ a || HasScope a xs
 
-type family (⊆) a s where
-    (⊆) a (x ': xs) = x ∈ a || a ⊆ xs
-
--- | Is 'a :: *' an element of 'b :: [*]'.
 type family (∈) a b where
     (∈) x '[]       = 'False
     (∈) x (y ': xs) = x == y || x ∈ xs
 
--- | Type-level append.
 type family (++) xs ys where
     (++) a  '[]       = a
     (++) '[] b        = b
@@ -85,3 +90,12 @@ instance (KnownSymbol x, Allow xs) => Allow (x ': xs) where
 
 instance Allow s => Allow (Credentials s) where
     getScopes _ = getScopes (Proxy :: Proxy s)
+
+concatScopes :: [OAuthScope] -> Text
+concatScopes = Text.intercalate " " . coerce
+
+queryEncodeScopes :: [OAuthScope] -> ByteString
+queryEncodeScopes =
+      BS8.intercalate "+"
+    . map (urlEncode True . Text.encodeUtf8)
+    . coerce
