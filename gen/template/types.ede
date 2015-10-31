@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}

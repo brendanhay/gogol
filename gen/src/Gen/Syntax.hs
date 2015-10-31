@@ -218,10 +218,14 @@ downloadDecl :: Global
              -> Method Solved
              -> Decl
 downloadDecl n p api url fs m =
-    googleRequestDecl n ty rs [alt] p api url fs m pat prec
+    googleRequestDecl n ty [rs, ss] [alt] p api url fs m pat prec
   where
     ty = TyApp (TyCon "MediaDownload") (tycon n)
+
     rs = InsType noLoc (TyApp (TyCon "Rs") ty) (TyCon "Stream")
+
+    ss = InsType noLoc (TyApp (TyCon "Scopes") ty) $
+        TyApp (TyCon "Scopes") (tycon n)
 
     alt = app (var "Just") (var "AltMedia")
     pat = downloadPat m
@@ -238,11 +242,15 @@ uploadDecl :: Global
              -> Method Solved
              -> Decl
 uploadDecl n p api url fs m =
-    googleRequestDecl n ty rs extras p api url fs m pat prec
+    googleRequestDecl n ty [rs, ss] extras p api url fs m pat prec
   where
     ty = TyApp (TyCon "MediaUpload") (tycon n)
+
     rs = InsType noLoc (TyApp (TyCon "Rs") ty) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
+
+    ss = InsType noLoc (TyApp (TyCon "Scopes") ty) $
+        TyApp (TyCon "Scopes") (tycon n)
 
     extras = maybeToList alt ++ [upl] ++ payload ++ [var media]
       where
@@ -271,10 +279,14 @@ requestDecl :: Global
             -> Method Solved
             -> Decl
 requestDecl n p api url fs m =
-    googleRequestDecl n (tycon n) rs extras p api url fs m pat prec
+    googleRequestDecl n (tycon n) [rs, ss] extras p api url fs m pat prec
   where
     rs = InsType noLoc (TyApp (TyCon "Rs") (tycon n)) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
+
+    ss = InsType noLoc (TyApp (TyCon "Scopes") (tycon n)) $
+        TyPromoted $
+            PromotedList True (map (PromotedString . Text.unpack) (_mScopes m))
 
     extras = catMaybes [alt, payload]
       where
@@ -291,7 +303,7 @@ requestDecl n p api url fs m =
 
 googleRequestDecl :: Global
                   -> Type
-                  -> InstDecl
+                  -> [InstDecl]
                   -> [Exp]
                   -> Prefix
                   -> Name
@@ -302,49 +314,40 @@ googleRequestDecl :: Global
                   -> Pat
                   -> Decl
 googleRequestDecl g n assoc extras p api url fields m pat prec =
-    InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n]
-        [ assoc
-        , ss
-        , request
-        ]
+    InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n] (assoc ++ [request])
   where
     request = InsDecl (FunBind [match])
+
+    match = Match noLoc (name "requestClient") [prec] Nothing rhs (Just decls)
+
+    decls = BDecls
+        [ patBind noLoc pat $
+            appFun (var "buildClient") $
+                [ ExpTypeSig noLoc (var "Proxy") $
+                    TyApp (TyCon "Proxy") (TyCon (UnQual api))
+                , var "mempty"
+                ]
+        ]
+
+    rhs = UnGuardedRhs . appFun (var "go") $ map go fs ++ extras ++ [var url]
       where
-        match = Match noLoc (name "requestClient") [prec] Nothing rhs (Just decls)
+        go l = case Map.lookup l ps of
+            Just p | _pLocation p == Query
+                   , defaulted p
+                   , p ^. iRepeated -> v l
 
-        decls = BDecls
-            [ patBind noLoc pat $
-                appFun (var "buildClient") $
-                    [ ExpTypeSig noLoc (var "Proxy") $
-                        TyApp (TyCon "Proxy") (TyCon (UnQual api))
-                    , var "mempty"
-                    ]
-            ]
+            Just p | _pLocation p == Query
+                   , not (required p)
+                   , p ^. iRepeated -> infixApp (v l) "^." (var "_Default")
 
-        rhs = UnGuardedRhs . appFun (var "go") $ map go fs ++ extras ++ [var url]
-          where
-            go l = case Map.lookup l ps of
-                Just p | _pLocation p == Query
-                       , defaulted p
-                       , p ^. iRepeated -> v l
+            Just p | _pLocation p == Query
+                   , not (p ^. iRepeated)
+                   , parameter p || defaulted p -> app (var "Just") (v l)
 
-                Just p | _pLocation p == Query
-                       , not (required p)
-                       , p ^. iRepeated -> infixApp (v l) "^." (var "_Default")
+            _       -> v l
 
-                Just p | _pLocation p == Query
-                       , not (p ^. iRepeated)
-                       , parameter p || defaulted p -> app (var "Just") (v l)
-
-                _       -> v l
-
-            ps = _mParameters m
-            v  = var . fname p
-
-    ss = InsType noLoc (TyApp (TyCon "Ss") (tycon g)) $
-        TyPromoted (PromotedList True (map scope (_mScopes m)))
-      where
-        scope = PromotedString . Text.unpack
+        ps = _mParameters m
+        v  = var . fname p
 
     fs = delete "alt"
        . orderParams id (Map.keys (_mParameters m))
