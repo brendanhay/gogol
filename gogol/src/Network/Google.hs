@@ -49,7 +49,7 @@ module Network.Google
     , (!)
 
     , type Authorize
-    , type HasScope
+    , type MatchAnyScope
 
     -- * Sending Requests
     , send

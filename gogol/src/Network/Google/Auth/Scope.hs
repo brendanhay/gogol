@@ -61,11 +61,11 @@ forbid = id
 -- For error message/presentation purposes, this wraps the result of
 -- the membership checks below.
 type family Authorize (s :: [Symbol]) a :: Constraint where
-    Authorize s a = HasScope (Scopes a) s ~ 'True
+    Authorize s a = MatchAnyScope (Scopes a) s ~ 'True
 
-type family HasScope a s where
-    HasScope '[] s         = 'True
-    HasScope a   (x ': xs) = x ∈ a || HasScope a xs
+type family MatchAnyScope a s where
+    MatchAnyScope '[] s         = 'True
+    MatchAnyScope a   (x ': xs) = x ∈ a || MatchAnyScope a xs
 
 type family (∈) a b where
     (∈) x '[]       = 'False
