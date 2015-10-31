@@ -13,7 +13,7 @@ module Network.Google.Auth.InstalledApplication where
 import           Control.Monad.Catch            (MonadCatch)
 import           Control.Monad.IO.Class         (MonadIO)
 import qualified Data.Text.Encoding             as Text
-import           Network.Google.Auth.Scope      (queryEncodeScopes)
+import           Network.Google.Auth.Scope      (Allow (..), queryEncodeScopes)
 import           Network.Google.Internal.Auth
 import           Network.Google.Internal.Logger (Logger)
 import           Network.Google.Prelude
@@ -30,8 +30,14 @@ redirectURI = "urn:ietf:wg:oauth:2.0:oob"
 -- with 'exchangeCode'.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#formingtheurl Forming the URL>.
-formURL :: OAuthClient -> [OAuthScope] -> Text
-formURL c ss = accountsURL
+formURL :: Allow s => OAuthClient -> proxy s -> Text
+formURL c = formURLWith c . getScopes
+
+-- | Form a URL using 'OAuthScope' values.
+--
+-- /See:/ 'formURL'.
+formURLWith :: OAuthClient -> [OAuthScope] -> Text
+formURLWith c ss = accountsURL
     <> "?response_type=code"
     <> "&client_id="    <> toText (_clientId c)
     <> "&redirect_uri=" <> redirectURI

@@ -1,0 +1,7 @@
+resolver:   lts-3.10
+flags:      {}
+extra-deps:
+  - memory-0.10
+packages:
+  - '.'
+  - '../core'

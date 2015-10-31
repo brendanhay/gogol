@@ -25,7 +25,7 @@ import           Data.Coerce                  (coerce)
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import qualified Data.Text.Encoding           as Text
-import           Data.Type.Bool               (type (||), type If)
+import           Data.Type.Bool               (type (||))
 import           Data.Type.Equality           (type (==))
 import           Data.Typeable                (Proxy (..))
 import           GHC.Exts                     (Constraint)
