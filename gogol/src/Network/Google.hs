@@ -19,7 +19,7 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
--- This module provides a simple 'AWS' monad and a set of operations which
+-- This module provides a simple 'Google' monad and a set of operations which
 -- can be performed against remote Google Service APIs, for use with the types
 -- supplied by the various @gogol-*@ libraries.
 --
