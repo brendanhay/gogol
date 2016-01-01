@@ -31,6 +31,7 @@ module Network.Google.Data.JSON
     , (.!=)
     ) where
 
+import           Control.Applicative (pure, (<$>))
 import           Data.Aeson
 import           Data.Aeson.Types
 import           Data.Data
