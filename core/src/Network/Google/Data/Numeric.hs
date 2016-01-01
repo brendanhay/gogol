@@ -14,7 +14,6 @@ module Network.Google.Data.Numeric
     ( Nat (..)
     ) where
 
-import           Control.Lens
 import           Control.Monad
 import           Data.Aeson
 import           Data.Data
@@ -26,6 +25,7 @@ import           Data.Text.Lazy.Builder     (Builder)
 import qualified Data.Text.Lazy.Builder     as Build
 import qualified Data.Text.Lazy.Builder.Int as Build
 import qualified Data.Text.Read             as Read
+import           Data.Monoid                (mappend)
 import           Numeric.Natural
 import           Servant.API
 

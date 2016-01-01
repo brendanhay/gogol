@@ -20,6 +20,7 @@ module Network.Google.Data.Time
     , _DateTime
     ) where
 
+import           Control.Applicative    (pure, (<*))
 import           Control.Lens
 import           Data.Aeson
 import           Data.Aeson.Encode

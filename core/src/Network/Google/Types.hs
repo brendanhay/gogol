@@ -25,7 +25,7 @@ module Network.Google.Types where
 
 import           Control.Applicative
 import           Control.Exception.Lens                (exception)
-import           Control.Lens                          hiding (coerce)
+import           Control.Lens
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
@@ -39,11 +39,10 @@ import qualified Data.Conduit.List                     as CL
 import           Data.Data
 import           Data.DList                            (DList)
 import qualified Data.DList                            as DList
-import           Data.Foldable                         (foldl')
+import           Data.Foldable                         (foldl', foldMap)
 import           Data.Monoid
 import           Data.String
 import           Data.Text                             (Text)
-import qualified Data.Text                             as Text
 import qualified Data.Text.Encoding                    as Text
 import           Data.Text.Lazy.Builder                (Builder)
 import qualified Data.Text.Lazy.Builder                as Build
