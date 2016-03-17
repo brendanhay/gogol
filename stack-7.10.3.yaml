@@ -1,7 +1,6 @@
-resolver:   lts-3.10
+resolver:   5.4
 flags:      {}
-extra-deps:
-  - memory-0.10
+extra-deps: []
 packages:
   - core
   - gogol

@@ -30,7 +30,6 @@ import qualified Data.HashMap.Strict  as Map
 import qualified Data.HashSet         as Set
 import           Data.Maybe
 import           Data.Semigroup       ((<>))
-import qualified Data.Text            as Text
 import           Gen.Formatting
 import           Gen.Types
 import           Prelude              hiding (sum)
@@ -157,10 +156,10 @@ method qs suf m@Method {..} = do
     typ <- reserveType typ'
     b   <- body typ
 
-    let params = ps <> qs
-        fields = Map.delete "alt" $ b (Map.map _pParam params)
+    let params  = ps <> qs
+        fields' = Map.delete "alt" $ b (Map.map _pParam params)
 
-    void $ insert typ (SObj schemaInfo (Obj Nothing fields))
+    void $ insert typ (SObj schemaInfo (Obj Nothing fields'))
     pure $! m { _mParameters = params }
   where
     schemaInfo = emptyInfo { _iDescription = _mDescription }

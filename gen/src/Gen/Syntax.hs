@@ -308,7 +308,7 @@ googleRequestDecl g n assoc extras p api url fields m pat prec =
   where
     request = InsDecl (FunBind [match])
       where
-        match = Match noLoc (name "requestClient") [prec] Nothing rhs decls
+        match = Match noLoc (name "requestClient") [prec] Nothing rhs (Just decls)
 
         decls = BDecls
             [ patBind noLoc pat $
