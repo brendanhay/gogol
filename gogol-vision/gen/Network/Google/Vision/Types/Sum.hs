@@ -617,7 +617,7 @@ instance ToJSON LandmarkType where
     toJSON = toJSONText
 
 -- | V1 error format.
-data $Xgafv
+data Xgafv
     = $1
       -- ^ @1@
       -- v1 error format
@@ -626,23 +626,23 @@ data $Xgafv
       -- v2 error format
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable $Xgafv
+instance Hashable Xgafv
 
-instance FromText $Xgafv where
+instance FromText Xgafv where
     fromText = \case
         "1" -> Just $1
         "2" -> Just $2
         _ -> Nothing
 
-instance ToText $Xgafv where
+instance ToText Xgafv where
     toText = \case
         $1 -> "1"
         $2 -> "2"
 
-instance FromJSON $Xgafv where
-    parseJSON = parseJSONText "$Xgafv"
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
 
-instance ToJSON $Xgafv where
+instance ToJSON Xgafv where
     toJSON = toJSONText
 
 -- | Spoof likelihood. The likelihood that an obvious modification was made

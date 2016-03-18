@@ -51,7 +51,7 @@ import           Network.Google.Vision.Types
 type ImagesAnnotateResource =
      "v1" :>
        "images:annotate" :>
-         QueryParam "$.xgafv" $Xgafv :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -66,7 +66,7 @@ type ImagesAnnotateResource =
 --
 -- /See:/ 'imagesAnnotate' smart constructor.
 data ImagesAnnotate = ImagesAnnotate
-    { _iaXgafv          :: !(Maybe $ Xgafv)
+    { _iaXgafv          :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
     , _iaPp             :: !Bool
     , _iaAccessToken    :: !(Maybe Text)
@@ -111,7 +111,7 @@ imagesAnnotate pIaPayload_ =
     }
 
 -- | V1 error format.
-iaXgafv :: Lens' ImagesAnnotate (Maybe $Xgafv)
+iaXgafv :: Lens' ImagesAnnotate (Maybe Xgafv)
 iaXgafv = lens _iaXgafv (\ s a -> s{_iaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

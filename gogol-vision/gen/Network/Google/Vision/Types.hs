@@ -182,8 +182,8 @@ module Network.Google.Vision.Types
     -- * LandmarkType
     , LandmarkType (..)
 
-    -- * $Xgafv
-    , $Xgafv (..)
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * ImageSource
     , ImageSource
@@ -240,9 +240,9 @@ module Network.Google.Vision.Types
     , pY
     ) where
 
-import Network.Google.Prelude
-import Network.Google.Vision.Types.Product
-import Network.Google.Vision.Types.Sum
+import           Network.Google.Prelude
+import           Network.Google.Vision.Types.Product
+import           Network.Google.Vision.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Vision API. This contains the host and root path used as a starting point for constructing service requests.
 visionService :: ServiceConfig

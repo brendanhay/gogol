@@ -198,8 +198,8 @@ module Network.Google.Vision
     -- ** LandmarkType
     , LandmarkType (..)
 
-    -- ** $Xgafv
-    , $Xgafv (..)
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** ImageSource
     , ImageSource
@@ -256,9 +256,9 @@ module Network.Google.Vision
     , pY
     ) where
 
-import Network.Google.Prelude
-import Network.Google.Resource.Vision.Images.Annotate
-import Network.Google.Vision.Types
+import           Network.Google.Prelude
+import           Network.Google.Resource.Vision.Images.Annotate
+import           Network.Google.Vision.Types
 
 {- $resources
 TODO
