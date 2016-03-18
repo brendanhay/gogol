@@ -172,14 +172,14 @@ data PP
     | None
       deriving (Eq)
 
-pp :: Pretty a => PP -> a -> AST Rendered
+pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
 pp i x
     | i == Indent = result (reformat johanTibell Nothing p)
     | otherwise   = pure p
   where
     result = hoistEither . bimap e Build.toLazyText
 
-    e = flip mappend (", when formatting: " <> p) . LText.pack
+    e = flip mappend ("\nSyntax:\n" <> p <> "\nAST:\n" <> LText.pack (show x)) . LText.pack
 
     p = LText.dropWhile isSpace
       . LText.pack

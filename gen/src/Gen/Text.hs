@@ -124,6 +124,7 @@ renameReserved x
         , "Error"
         , "read"
         , "Read"
+        , "role"
         , "request"
         , "Get"
         , "Post"
