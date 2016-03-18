@@ -55,3 +55,11 @@ $(MODEL_DIR): vendor/google-api-go-client
 
 vendor/google-api-go-client:
 	git clone git@github.com:google/google-api-go-client $@
+
+.PHONY: audit
+
+ACTUAL = $(addsuffix \\n,$(sort $(notdir $(MODELS))))
+EXPECT = $(addsuffix -api.json\\n,$(sort $(notdir $(basename $(wildcard annex/*.json)))))
+
+audit: $(MODEL_DIR)
+	@diff -B -y <(echo -e $(ACTUAL)) <(echo -e $(EXPECT))
