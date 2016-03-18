@@ -62,6 +62,17 @@
                     }
                 }
             }
+        },
+        "sponsors": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "filter": {
+                            "default": "newest"
+                        }
+                    }
+                }
+            }
         }
     }
 }

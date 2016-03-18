@@ -82,7 +82,7 @@ sponsorsList
 sponsorsList pSPart_ =
     SponsorsList
     { _sPart = pSPart_
-    , _sFilter = SLFPollNewest
+    , _sFilter = SLFNewest
     , _sPageToken = Nothing
     , _sMaxResults = 5
     }

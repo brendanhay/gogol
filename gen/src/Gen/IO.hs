@@ -24,7 +24,7 @@ import           Gen.Formatting
 import           Gen.Types
 import           System.IO
 import qualified Text.EDE                  as EDE
-import           UnexceptionalIO           (Unexceptional, fromIO, runUIO)
+import           UnexceptionalIO           (fromIO, runUIO)
 
 run :: ExceptT Error IO a -> IO a
 run = runScript . fmapLT LText.unpack
