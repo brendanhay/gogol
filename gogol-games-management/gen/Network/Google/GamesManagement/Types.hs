@@ -109,13 +109,16 @@ module Network.Google.GamesManagement.Types
     -- * Player
     , Player
     , player
+    , pBannerURLLandscape
     , pLastPlayedWith
     , pAvatarImageURL
     , pKind
     , pExperienceInfo
     , pName
+    , pOriginalPlayerId
     , pDisplayName
     , pTitle
+    , pBannerURLPortrait
     , pPlayerId
 
     -- * AchievementResetResponse
@@ -132,13 +135,13 @@ import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1management' of the Google Play Game Services Management API. This contains the host and root path used as a starting point for constructing service requests.
-gamesManagementService :: Service
+gamesManagementService :: ServiceConfig
 gamesManagementService
   = defaultService
       (ServiceId "gamesManagement:v1management")
       "www.googleapis.com"
 
--- | Know your basic profile info and list of people in your circles.
+-- | Know the list of people in your circles, your age range, and language
 plusLoginScope :: OAuthScope
 plusLoginScope = "https://www.googleapis.com/auth/plus.login";
 

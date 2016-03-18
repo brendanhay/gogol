@@ -40,6 +40,7 @@ module Network.Google.Resource.DFAReporting.InventoryItems.List
     , iilPageToken
     , iilProjectId
     , iilSortField
+    , iilType
     , iilOrderId
     , iilSiteId
     , iilMaxResults
@@ -52,7 +53,7 @@ import           Network.Google.Prelude
 -- 'InventoryItemsList' request conforms to.
 type InventoryItemsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -63,11 +64,12 @@ type InventoryItemsListResource =
                        QueryParam "inPlan" Bool :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField" InventoryItemsListSortField :>
-                             QueryParams "orderId" (Textual Int64) :>
-                               QueryParams "siteId" (Textual Int64) :>
-                                 QueryParam "maxResults" (Textual Int32) :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] InventoryItemsListResponse
+                             QueryParam "type" InventoryItemsListType :>
+                               QueryParams "orderId" (Textual Int64) :>
+                                 QueryParams "siteId" (Textual Int64) :>
+                                   QueryParam "maxResults" (Textual Int32) :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] InventoryItemsListResponse
 
 -- | Retrieves a list of inventory items, possibly filtered.
 --
@@ -80,6 +82,7 @@ data InventoryItemsList = InventoryItemsList
     , _iilPageToken  :: !(Maybe Text)
     , _iilProjectId  :: !(Textual Int64)
     , _iilSortField  :: !(Maybe InventoryItemsListSortField)
+    , _iilType       :: !(Maybe InventoryItemsListType)
     , _iilOrderId    :: !(Maybe [Textual Int64])
     , _iilSiteId     :: !(Maybe [Textual Int64])
     , _iilMaxResults :: !(Maybe (Textual Int32))
@@ -103,6 +106,8 @@ data InventoryItemsList = InventoryItemsList
 --
 -- * 'iilSortField'
 --
+-- * 'iilType'
+--
 -- * 'iilOrderId'
 --
 -- * 'iilSiteId'
@@ -121,6 +126,7 @@ inventoryItemsList pIilProFileId_ pIilProjectId_ =
     , _iilPageToken = Nothing
     , _iilProjectId = _Coerce # pIilProjectId_
     , _iilSortField = Nothing
+    , _iilType = Nothing
     , _iilOrderId = Nothing
     , _iilSiteId = Nothing
     , _iilMaxResults = Nothing
@@ -164,6 +170,10 @@ iilSortField :: Lens' InventoryItemsList (Maybe InventoryItemsListSortField)
 iilSortField
   = lens _iilSortField (\ s a -> s{_iilSortField = a})
 
+-- | Select only inventory items with this type.
+iilType :: Lens' InventoryItemsList (Maybe InventoryItemsListType)
+iilType = lens _iilType (\ s a -> s{_iilType = a})
+
 -- | Select only inventory items that belong to specified orders.
 iilOrderId :: Lens' InventoryItemsList [Int64]
 iilOrderId
@@ -195,6 +205,7 @@ instance GoogleRequest InventoryItemsList where
               _iilInPlan
               _iilPageToken
               _iilSortField
+              _iilType
               (_iilOrderId ^. _Default)
               (_iilSiteId ^. _Default)
               _iilMaxResults

@@ -131,7 +131,9 @@ instance ToJSON DeviceType where
 
 -- | The different supported formats for each field in a data type.
 data DataTypeFieldFormat
-    = FloatList
+    = Blob
+      -- ^ @blob@
+    | FloatList
       -- ^ @floatList@
     | FloatPoint
       -- ^ @floatPoint@
@@ -149,6 +151,7 @@ instance Hashable DataTypeFieldFormat
 
 instance FromText DataTypeFieldFormat where
     fromText = \case
+        "blob" -> Just Blob
         "floatList" -> Just FloatList
         "floatPoint" -> Just FloatPoint
         "integer" -> Just Integer
@@ -159,6 +162,7 @@ instance FromText DataTypeFieldFormat where
 
 instance ToText DataTypeFieldFormat where
     toText = \case
+        Blob -> "blob"
         FloatList -> "floatList"
         FloatPoint -> "floatPoint"
         Integer -> "integer"

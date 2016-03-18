@@ -93,7 +93,7 @@ instanceGroupsSetNamedPorts pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpInst
     , _igsnpInstanceGroup = pIgsnpInstanceGroup_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igsnpProject :: Lens' InstanceGroupsSetNamedPorts Text
 igsnpProject
   = lens _igsnpProject (\ s a -> s{_igsnpProject = a})

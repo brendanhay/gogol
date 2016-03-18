@@ -82,7 +82,7 @@ umdURLMap :: Lens' URLMapsDelete Text
 umdURLMap
   = lens _umdURLMap (\ s a -> s{_umdURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umdProject :: Lens' URLMapsDelete Text
 umdProject
   = lens _umdProject (\ s a -> s{_umdProject = a})

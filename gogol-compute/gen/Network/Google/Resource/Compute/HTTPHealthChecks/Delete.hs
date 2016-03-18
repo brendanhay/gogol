@@ -77,7 +77,7 @@ hTTPHealthChecksDelete pHttphcdProject_ pHttphcdHTTPHealthCheck_ =
     , _httphcdHTTPHealthCheck = pHttphcdHTTPHealthCheck_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphcdProject :: Lens' HTTPHealthChecksDelete Text
 httphcdProject
   = lens _httphcdProject

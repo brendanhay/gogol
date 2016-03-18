@@ -59,7 +59,7 @@ import           Network.Google.GroupsSettings.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Groups Settings API. This contains the host and root path used as a starting point for constructing service requests.
-groupsSettingsService :: Service
+groupsSettingsService :: ServiceConfig
 groupsSettingsService
   = defaultService (ServiceId "groupssettings:v1")
       "www.googleapis.com"

@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    API for the Google Cloud User Accounts service.
+    Creates and manages users and groups for accessing Google Compute Engine
+    virtual machines.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

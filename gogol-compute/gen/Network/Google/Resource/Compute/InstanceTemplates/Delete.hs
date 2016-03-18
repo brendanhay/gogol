@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified instance template.
+-- Deletes the specified instance template. If you delete an instance
+-- template that is being referenced from another instance group, the
+-- instance group will not be able to create or recreate virtual machine
+-- instances. Deleting an instance template is permanent and cannot be
+-- undone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.delete@.
 module Network.Google.Resource.Compute.InstanceTemplates.Delete
@@ -52,7 +56,11 @@ type InstanceTemplatesDeleteResource =
                  Capture "instanceTemplate" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified instance template.
+-- | Deletes the specified instance template. If you delete an instance
+-- template that is being referenced from another instance group, the
+-- instance group will not be able to create or recreate virtual machine
+-- instances. Deleting an instance template is permanent and cannot be
+-- undone.
 --
 -- /See:/ 'instanceTemplatesDelete' smart constructor.
 data InstanceTemplatesDelete = InstanceTemplatesDelete
@@ -77,7 +85,7 @@ instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
     , _itdInstanceTemplate = pItdInstanceTemplate_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 itdProject :: Lens' InstanceTemplatesDelete Text
 itdProject
   = lens _itdProject (\ s a -> s{_itdProject = a})

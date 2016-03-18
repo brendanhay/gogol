@@ -13,10 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API to store, process, explore, and share DNA sequence reads,
--- reference-based alignments, and variant calls.
+-- Stores, processes, explores and shares genomic data. This API implements
+-- the Global Alliance for Genomics and Health (GA4GH) v0.5.1 API as well
+-- as several extensions.
 --
--- /See:/ < Genomics API Reference>
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference>
 module Network.Google.Genomics
     (
     -- * Service Configuration
@@ -79,9 +80,6 @@ module Network.Google.Genomics
     -- ** genomics.operations.cancel
     , module Network.Google.Resource.Genomics.Operations.Cancel
 
-    -- ** genomics.operations.delete
-    , module Network.Google.Resource.Genomics.Operations.Delete
-
     -- ** genomics.operations.get
     , module Network.Google.Resource.Genomics.Operations.Get
 
@@ -112,6 +110,9 @@ module Network.Google.Genomics
     -- ** genomics.reads.search
     , module Network.Google.Resource.Genomics.Reads.Search
 
+    -- ** genomics.reads.stream
+    , module Network.Google.Resource.Genomics.Reads.Stream
+
     -- ** genomics.references.bases.list
     , module Network.Google.Resource.Genomics.References.Bases.List
 
@@ -139,11 +140,17 @@ module Network.Google.Genomics
     -- ** genomics.variants.import
     , module Network.Google.Resource.Genomics.Variants.Import
 
+    -- ** genomics.variants.merge
+    , module Network.Google.Resource.Genomics.Variants.Merge
+
     -- ** genomics.variants.patch
     , module Network.Google.Resource.Genomics.Variants.Patch
 
     -- ** genomics.variants.search
     , module Network.Google.Resource.Genomics.Variants.Search
+
+    -- ** genomics.variants.stream
+    , module Network.Google.Resource.Genomics.Variants.Stream
 
     -- ** genomics.variantsets.create
     , module Network.Google.Resource.Genomics.VariantSets.Create
@@ -259,6 +266,12 @@ module Network.Google.Genomics
     , vcGenotype
     , vcInfo
 
+    -- ** MergeVariantsRequest
+    , MergeVariantsRequest
+    , mergeVariantsRequest
+    , mvrVariants
+    , mvrVariantSetId
+
     -- ** ReadGroup
     , ReadGroup
     , readGroup
@@ -357,10 +370,20 @@ module Network.Google.Genomics
     , readGroupInfo
     , rgiAddtional
 
+    -- ** StreamVariantsResponse
+    , StreamVariantsResponse
+    , streamVariantsResponse
+    , svrVariants
+
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- ** StreamReadsResponse
+    , StreamReadsResponse
+    , streamReadsResponse
+    , srrAlignments
 
     -- ** SearchCallSetsResponse
     , SearchCallSetsResponse
@@ -412,8 +435,19 @@ module Network.Google.Genomics
     -- ** SearchVariantsResponse
     , SearchVariantsResponse
     , searchVariantsResponse
-    , svrVariants
-    , svrNextPageToken
+    , sVariants
+    , sNextPageToken
+
+    -- ** StreamReadsRequest
+    , StreamReadsRequest
+    , streamReadsRequest
+    , sShard
+    , sReadGroupSetId
+    , sTotalShards
+    , sStart
+    , sReferenceName
+    , sEnd
+    , sProjectId
 
     -- ** SearchCallSetsRequest
     , SearchCallSetsRequest
@@ -426,8 +460,8 @@ module Network.Google.Genomics
     -- ** SearchReadsResponse
     , SearchReadsResponse
     , searchReadsResponse
-    , sNextPageToken
-    , sAlignments
+    , seaNextPageToken
+    , seaAlignments
 
     -- ** Program
     , Program
@@ -510,6 +544,7 @@ module Network.Google.Genomics
     -- ** VariantSet
     , VariantSet
     , variantSet
+    , vsReferenceSetId
     , vsDataSetId
     , vsReferenceBounds
     , vsMetadata
@@ -612,6 +647,16 @@ module Network.Google.Genomics
     , operationEvent
     , oeDescription
 
+    -- ** StreamVariantsRequest
+    , StreamVariantsRequest
+    , streamVariantsRequest
+    , strVariantSetId
+    , strStart
+    , strCallSetIds
+    , strReferenceName
+    , strEnd
+    , strProjectId
+
     -- ** ReferenceBound
     , ReferenceBound
     , referenceBound
@@ -676,7 +721,6 @@ import           Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
 import           Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
 import           Network.Google.Resource.Genomics.DataSets.Undelete
 import           Network.Google.Resource.Genomics.Operations.Cancel
-import           Network.Google.Resource.Genomics.Operations.Delete
 import           Network.Google.Resource.Genomics.Operations.Get
 import           Network.Google.Resource.Genomics.Operations.List
 import           Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
@@ -687,6 +731,7 @@ import           Network.Google.Resource.Genomics.ReadGroupSets.Import
 import           Network.Google.Resource.Genomics.ReadGroupSets.Patch
 import           Network.Google.Resource.Genomics.ReadGroupSets.Search
 import           Network.Google.Resource.Genomics.Reads.Search
+import           Network.Google.Resource.Genomics.Reads.Stream
 import           Network.Google.Resource.Genomics.References.Bases.List
 import           Network.Google.Resource.Genomics.References.Get
 import           Network.Google.Resource.Genomics.References.Search
@@ -696,8 +741,10 @@ import           Network.Google.Resource.Genomics.Variants.Create
 import           Network.Google.Resource.Genomics.Variants.Delete
 import           Network.Google.Resource.Genomics.Variants.Get
 import           Network.Google.Resource.Genomics.Variants.Import
+import           Network.Google.Resource.Genomics.Variants.Merge
 import           Network.Google.Resource.Genomics.Variants.Patch
 import           Network.Google.Resource.Genomics.Variants.Search
+import           Network.Google.Resource.Genomics.Variants.Stream
 import           Network.Google.Resource.Genomics.VariantSets.Create
 import           Network.Google.Resource.Genomics.VariantSets.Delete
 import           Network.Google.Resource.Genomics.VariantSets.Export
@@ -711,9 +758,11 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Genomics API service.
 type GenomicsAPI =
-     VariantsPatchResource :<|> VariantsGetResource :<|>
-       VariantsCreateResource
+     VariantsStreamResource :<|> VariantsPatchResource
+       :<|> VariantsGetResource
+       :<|> VariantsCreateResource
        :<|> VariantsImportResource
+       :<|> VariantsMergeResource
        :<|> VariantsSearchResource
        :<|> VariantsDeleteResource
        :<|> ReferencesBasesListResource
@@ -742,7 +791,7 @@ type GenomicsAPI =
        :<|> OperationsListResource
        :<|> OperationsGetResource
        :<|> OperationsCancelResource
-       :<|> OperationsDeleteResource
+       :<|> ReadsStreamResource
        :<|> ReadsSearchResource
        :<|> DataSetsListResource
        :<|> DataSetsUndeleteResource

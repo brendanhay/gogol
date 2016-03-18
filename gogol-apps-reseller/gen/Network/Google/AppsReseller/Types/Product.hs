@@ -214,18 +214,21 @@ instance ToJSON Address where
 --
 -- /See:/ 'customer' smart constructor.
 data Customer = Customer
-    { _cResourceUiURL  :: !(Maybe Text)
-    , _cKind           :: !Text
-    , _cCustomerId     :: !(Maybe Text)
-    , _cAlternateEmail :: !(Maybe Text)
-    , _cCustomerDomain :: !(Maybe Text)
-    , _cPhoneNumber    :: !(Maybe Text)
-    , _cPostalAddress  :: !(Maybe Address)
+    { _cCustomerDomainVerified :: !(Maybe Bool)
+    , _cResourceUiURL          :: !(Maybe Text)
+    , _cKind                   :: !Text
+    , _cCustomerId             :: !(Maybe Text)
+    , _cAlternateEmail         :: !(Maybe Text)
+    , _cCustomerDomain         :: !(Maybe Text)
+    , _cPhoneNumber            :: !(Maybe Text)
+    , _cPostalAddress          :: !(Maybe Address)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Customer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cCustomerDomainVerified'
 --
 -- * 'cResourceUiURL'
 --
@@ -244,7 +247,8 @@ customer
     :: Customer
 customer =
     Customer
-    { _cResourceUiURL = Nothing
+    { _cCustomerDomainVerified = Nothing
+    , _cResourceUiURL = Nothing
     , _cKind = "reseller#customer"
     , _cCustomerId = Nothing
     , _cAlternateEmail = Nothing
@@ -252,6 +256,12 @@ customer =
     , _cPhoneNumber = Nothing
     , _cPostalAddress = Nothing
     }
+
+-- | Whether the customer\'s primary domain has been verified.
+cCustomerDomainVerified :: Lens' Customer (Maybe Bool)
+cCustomerDomainVerified
+  = lens _cCustomerDomainVerified
+      (\ s a -> s{_cCustomerDomainVerified = a})
 
 -- | Ui url for customer resource.
 cResourceUiURL :: Lens' Customer (Maybe Text)
@@ -296,8 +306,9 @@ instance FromJSON Customer where
           = withObject "Customer"
               (\ o ->
                  Customer <$>
-                   (o .:? "resourceUiUrl") <*>
-                     (o .:? "kind" .!= "reseller#customer")
+                   (o .:? "customerDomainVerified") <*>
+                     (o .:? "resourceUiUrl")
+                     <*> (o .:? "kind" .!= "reseller#customer")
                      <*> (o .:? "customerId")
                      <*> (o .:? "alternateEmail")
                      <*> (o .:? "customerDomain")
@@ -308,7 +319,9 @@ instance ToJSON Customer where
         toJSON Customer{..}
           = object
               (catMaybes
-                 [("resourceUiUrl" .=) <$> _cResourceUiURL,
+                 [("customerDomainVerified" .=) <$>
+                    _cCustomerDomainVerified,
+                  ("resourceUiUrl" .=) <$> _cResourceUiURL,
                   Just ("kind" .= _cKind),
                   ("customerId" .=) <$> _cCustomerId,
                   ("alternateEmail" .=) <$> _cAlternateEmail,
@@ -704,6 +717,7 @@ data Subscription = Subscription
     , _subSKUId             :: !(Maybe Text)
     , _subPlan              :: !(Maybe SubscriptionPlan)
     , _subCustomerId        :: !(Maybe Text)
+    , _subCustomerDomain    :: !(Maybe Text)
     , _subSuspensionReasons :: !(Maybe [Text])
     , _subTransferInfo      :: !(Maybe SubscriptionTransferInfo)
     , _subPurchaseOrderId   :: !(Maybe Text)
@@ -734,6 +748,8 @@ data Subscription = Subscription
 --
 -- * 'subCustomerId'
 --
+-- * 'subCustomerDomain'
+--
 -- * 'subSuspensionReasons'
 --
 -- * 'subTransferInfo'
@@ -758,6 +774,7 @@ subscription =
     , _subSKUId = Nothing
     , _subPlan = Nothing
     , _subCustomerId = Nothing
+    , _subCustomerDomain = Nothing
     , _subSuspensionReasons = Nothing
     , _subTransferInfo = Nothing
     , _subPurchaseOrderId = Nothing
@@ -814,7 +831,23 @@ subCustomerId
   = lens _subCustomerId
       (\ s a -> s{_subCustomerId = a})
 
--- | Suspension Reasons
+-- | Primary domain name of the customer
+subCustomerDomain :: Lens' Subscription (Maybe Text)
+subCustomerDomain
+  = lens _subCustomerDomain
+      (\ s a -> s{_subCustomerDomain = a})
+
+-- | field listing all current reasons the subscription is suspended. It is
+-- possible for a subscription to have multiple suspension reasons. A
+-- subscription\'s status is SUSPENDED until all pending suspensions are
+-- removed. Possible options include: - PENDING_TOS_ACCEPTANCE — The
+-- customer has not logged in and accepted the Google Apps Resold Terms of
+-- Services. - RENEWAL_WITH_TYPE_CANCEL — The customer\'s commitment ended
+-- and their service was cancelled at the end of their term. -
+-- RESELLER_INITIATED — A manual suspension invoked by a Reseller. -
+-- TRIAL_ENDED — The customer\'s trial expired without a plan selected. -
+-- OTHER — The customer is suspended for an internal Google reason (e.g.
+-- abuse or otherwise).
 subSuspensionReasons :: Lens' Subscription [Text]
 subSuspensionReasons
   = lens _subSuspensionReasons
@@ -863,6 +896,7 @@ instance FromJSON Subscription where
                      <*> (o .:? "skuId")
                      <*> (o .:? "plan")
                      <*> (o .:? "customerId")
+                     <*> (o .:? "customerDomain")
                      <*> (o .:? "suspensionReasons" .!= mempty)
                      <*> (o .:? "transferInfo")
                      <*> (o .:? "purchaseOrderId")
@@ -882,6 +916,7 @@ instance ToJSON Subscription where
                   Just ("kind" .= _subKind),
                   ("skuId" .=) <$> _subSKUId, ("plan" .=) <$> _subPlan,
                   ("customerId" .=) <$> _subCustomerId,
+                  ("customerDomain" .=) <$> _subCustomerDomain,
                   ("suspensionReasons" .=) <$> _subSuspensionReasons,
                   ("transferInfo" .=) <$> _subTransferInfo,
                   ("purchaseOrderId" .=) <$> _subPurchaseOrderId,

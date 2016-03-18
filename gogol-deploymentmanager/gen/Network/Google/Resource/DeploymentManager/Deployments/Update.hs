@@ -132,8 +132,8 @@ duDeletePolicy
 
 -- | If set to true, updates the deployment and creates and updates the
 -- \"shell\" resources but does not actually alter or instantiate these
--- resources. This allows you to preview what your deployment looks like.
--- You can use this intent to preview how an update would affect your
+-- resources. This allows you to preview what your deployment will look
+-- like. You can use this intent to preview how an update would affect your
 -- deployment. You must provide a target.config with a configuration if
 -- this is set to true. After previewing a deployment, you can deploy your
 -- resources by making a request with the update() or you can

@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a variant by ID.
+-- Gets a variant by ID. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.get@.
 module Network.Google.Resource.Genomics.Variants.Get
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type VariantsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Variant
 
--- | Gets a variant by ID.
+-- | Gets a variant by ID. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantsGet' smart constructor.
 data VariantsGet = VariantsGet

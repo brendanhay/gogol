@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesList' request conforms to.
 type PlacementStrategiesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>

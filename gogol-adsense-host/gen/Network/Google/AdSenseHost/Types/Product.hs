@@ -165,7 +165,8 @@ asAccountId :: Lens' AssociationSession (Maybe Text)
 asAccountId
   = lens _asAccountId (\ s a -> s{_asAccountId = a})
 
--- | The products to associate with the user. Options: AFC, AFF, AFS, AFMC
+-- | The products to associate with the user. Options: AFC, AFG, AFV, AFS
+-- (deprecated), AFMC (deprecated)
 asProductCodes :: Lens' AssociationSession [Text]
 asProductCodes
   = lens _asProductCodes
@@ -535,7 +536,7 @@ auuStatus :: Lens' AdUnit (Maybe Text)
 auuStatus
   = lens _auuStatus (\ s a -> s{_auuStatus = a})
 
--- | Settings specific to WAP mobile content ads (AFMC).
+-- | Settings specific to WAP mobile content ads (AFMC - deprecated).
 auuMobileContentAdsSettings :: Lens' AdUnit (Maybe AdUnitMobileContentAdsSettings)
 auuMobileContentAdsSettings
   = lens _auuMobileContentAdsSettings
@@ -556,7 +557,7 @@ auuName :: Lens' AdUnit (Maybe Text)
 auuName = lens _auuName (\ s a -> s{_auuName = a})
 
 -- | Settings specific to content ads (AFC) and highend mobile content ads
--- (AFMC).
+-- (AFMC - deprecated).
 auuContentAdsSettings :: Lens' AdUnit (Maybe AdUnitContentAdsSettings)
 auuContentAdsSettings
   = lens _auuContentAdsSettings
@@ -829,7 +830,7 @@ instance ToJSON Account where
                   Just ("kind" .= _accKind), ("name" .=) <$> _accName,
                   ("id" .=) <$> _accId])
 
--- | Settings specific to WAP mobile content ads (AFMC).
+-- | Settings specific to WAP mobile content ads (AFMC - deprecated).
 --
 -- /See:/ 'adUnitMobileContentAdsSettings' smart constructor.
 data AdUnitMobileContentAdsSettings = AdUnitMobileContentAdsSettings
@@ -1418,7 +1419,7 @@ instance ToJSON AdCode where
                   ("adCode" .=) <$> _aaAdCode])
 
 -- | Settings specific to content ads (AFC) and highend mobile content ads
--- (AFMC).
+-- (AFMC - deprecated).
 --
 -- /See:/ 'adUnitContentAdsSettings' smart constructor.
 data AdUnitContentAdsSettings = AdUnitContentAdsSettings

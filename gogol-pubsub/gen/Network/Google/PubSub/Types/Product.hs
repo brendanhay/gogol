@@ -254,9 +254,10 @@ instance ToJSON Empty where
 --
 -- /See:/ 'pubsubMessage' smart constructor.
 data PubsubMessage = PubsubMessage
-    { _pmData       :: !(Maybe (Textual Word8))
-    , _pmAttributes :: !(Maybe PubsubMessageAttributes)
-    , _pmMessageId  :: !(Maybe Text)
+    { _pmData        :: !(Maybe (Textual Word8))
+    , _pmPublishTime :: !(Maybe Text)
+    , _pmAttributes  :: !(Maybe PubsubMessageAttributes)
+    , _pmMessageId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PubsubMessage' with the minimum fields required to make a request.
@@ -264,6 +265,8 @@ data PubsubMessage = PubsubMessage
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pmData'
+--
+-- * 'pmPublishTime'
 --
 -- * 'pmAttributes'
 --
@@ -273,6 +276,7 @@ pubsubMessage
 pubsubMessage =
     PubsubMessage
     { _pmData = Nothing
+    , _pmPublishTime = Nothing
     , _pmAttributes = Nothing
     , _pmMessageId = Nothing
     }
@@ -284,16 +288,24 @@ pmData
   = lens _pmData (\ s a -> s{_pmData = a}) .
       mapping _Coerce
 
+-- | The time at which the message was published, populated by the server
+-- when it receives the \`Publish\` call. It must not be populated by the
+-- publisher in a \`Publish\` call.
+pmPublishTime :: Lens' PubsubMessage (Maybe Text)
+pmPublishTime
+  = lens _pmPublishTime
+      (\ s a -> s{_pmPublishTime = a})
+
 -- | Optional attributes for this message.
 pmAttributes :: Lens' PubsubMessage (Maybe PubsubMessageAttributes)
 pmAttributes
   = lens _pmAttributes (\ s a -> s{_pmAttributes = a})
 
--- | ID of this message assigned by the server at publication time.
--- Guaranteed to be unique within the topic. This value may be read by a
--- subscriber that receives a \`PubsubMessage\` via a \`Pull\` call or a
--- push delivery. It must not be populated by a publisher in a \`Publish\`
--- call.
+-- | ID of this message, assigned by the server when the message is
+-- published. Guaranteed to be unique within the topic. This value may be
+-- read by a subscriber that receives a \`PubsubMessage\` via a \`Pull\`
+-- call or a push delivery. It must not be populated by the publisher in a
+-- \`Publish\` call.
 pmMessageId :: Lens' PubsubMessage (Maybe Text)
 pmMessageId
   = lens _pmMessageId (\ s a -> s{_pmMessageId = a})
@@ -303,14 +315,16 @@ instance FromJSON PubsubMessage where
           = withObject "PubsubMessage"
               (\ o ->
                  PubsubMessage <$>
-                   (o .:? "data") <*> (o .:? "attributes") <*>
-                     (o .:? "messageId"))
+                   (o .:? "data") <*> (o .:? "publishTime") <*>
+                     (o .:? "attributes")
+                     <*> (o .:? "messageId"))
 
 instance ToJSON PubsubMessage where
         toJSON PubsubMessage{..}
           = object
               (catMaybes
                  [("data" .=) <$> _pmData,
+                  ("publishTime" .=) <$> _pmPublishTime,
                   ("attributes" .=) <$> _pmAttributes,
                   ("messageId" .=) <$> _pmMessageId])
 

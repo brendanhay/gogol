@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a revision.
+-- Updates a revision with patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.update@.
 module Network.Google.Resource.Drive.Revisions.Update
@@ -45,15 +45,15 @@ import           Network.Google.Prelude
 -- 'RevisionsUpdate' request conforms to.
 type RevisionsUpdateResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "revisions" :>
                Capture "revisionId" Text :>
                  QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Revision :> Put '[JSON] Revision
+                   ReqBody '[JSON] Revision :> Patch '[JSON] Revision
 
--- | Updates a revision.
+-- | Updates a revision with patch semantics.
 --
 -- /See:/ 'revisionsUpdate' smart constructor.
 data RevisionsUpdate = RevisionsUpdate
@@ -88,12 +88,12 @@ revPayload :: Lens' RevisionsUpdate Revision
 revPayload
   = lens _revPayload (\ s a -> s{_revPayload = a})
 
--- | The ID for the file.
+-- | The ID of the file.
 revFileId :: Lens' RevisionsUpdate Text
 revFileId
   = lens _revFileId (\ s a -> s{_revFileId = a})
 
--- | The ID for the revision.
+-- | The ID of the revision.
 revRevisionId :: Lens' RevisionsUpdate Text
 revRevisionId
   = lens _revRevisionId

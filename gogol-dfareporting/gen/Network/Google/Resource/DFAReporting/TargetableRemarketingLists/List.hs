@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'TargetableRemarketingListsList' request conforms to.
 type TargetableRemarketingListsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetableRemarketingLists" :>

@@ -910,8 +910,10 @@ racsEndDate :: Lens' ReportAPIColumnSpec (Maybe Text)
 racsEndDate
   = lens _racsEndDate (\ s a -> s{_racsEndDate = a})
 
--- | Provide different source for product items. Acceptable values are
--- \"advertised\" and \"sold\".
+-- | Returns metrics only for a specific type of product activity. Accepted
+-- values are: - \"sold\": returns metrics only for products that were sold
+-- - \"advertised\": returns metrics only for products that were advertised
+-- in a Shopping campaign, and that might or might not have been sold
 racsProductReportPerspective :: Lens' ReportAPIColumnSpec (Maybe Text)
 racsProductReportPerspective
   = lens _racsProductReportPerspective
@@ -1258,12 +1260,11 @@ cDsConversionId
       (\ s a -> s{_cDsConversionId = a})
       . mapping _Coerce
 
--- | For offline conversions, this is an ID provided by advertisers.
--- Advertisers can use this property to specify an ID that is meaningful to
--- them. If an advertiser doesn\'t specify a conversionId, DoubleClick
--- Search generates one. For online conversions, DS copies the
--- dsConversionId or floodlightOrderId into this property depending on the
--- advertiser\'s Floodlight instructions.
+-- | For offline conversions, this is an ID that advertisers are required to
+-- provide. Advertisers can specify any ID that is meaningful to them. For
+-- online conversions, DS copies the dsConversionId or floodlightOrderId
+-- into this property depending on the advertiser\'s Floodlight
+-- instructions.
 cConversionId :: Lens' Conversion (Maybe Text)
 cConversionId
   = lens _cConversionId
@@ -1390,7 +1391,9 @@ cFloodlightOrderId
   = lens _cFloodlightOrderId
       (\ s a -> s{_cFloodlightOrderId = a})
 
--- | The revenue amount of this TRANSACTION conversion, in micros.
+-- | The revenue amount of this TRANSACTION conversion, in micros (value
+-- multiplied by 1000, no decimal). For example, to specify a revenue value
+-- of \"10\" enter \"10000\" in your request.
 cRevenueMicros :: Lens' Conversion (Maybe Int64)
 cRevenueMicros
   = lens _cRevenueMicros

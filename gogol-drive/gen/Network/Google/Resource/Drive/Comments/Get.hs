@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CommentsGet' request conforms to.
 type CommentsGetResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
@@ -91,8 +91,8 @@ cgCommentId :: Lens' CommentsGet Text
 cgCommentId
   = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
 
--- | If set, this will succeed when retrieving a deleted comment, and will
--- include any deleted replies.
+-- | Whether to return deleted comments. Deleted comments will not include
+-- their original content.
 cgIncludeDeleted :: Lens' CommentsGet Bool
 cgIncludeDeleted
   = lens _cgIncludeDeleted

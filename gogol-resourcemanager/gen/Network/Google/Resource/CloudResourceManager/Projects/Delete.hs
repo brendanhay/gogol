@@ -20,30 +20,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks the project identified by the specified \`project_id\` (for
+-- Marks the Project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`) for deletion. This method will only affect
--- the project if the following criteria are met: + The project does not
--- have a billing account associated with it. + The project has a lifecycle
--- state of
--- [ACTIVE][google.cloudresourcemanager.projects.v1beta1.LifecycleState.ACTIVE].
--- This method changes the project\'s lifecycle state from
--- [ACTIVE][google.cloudresourcemanager.projects.v1beta1.LifecycleState.ACTIVE]
--- to [DELETE_REQUESTED]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED].
--- The deletion starts at an unspecified time, at which point the lifecycle
--- state changes to [DELETE_IN_PROGRESS]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_IN_PROGRESS].
--- Until the deletion completes, you can check the lifecycle state checked
--- by retrieving the project with [GetProject]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.GetProject],
--- and the project remains visible to [ListProjects]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects].
--- However, you cannot update the project. After the deletion completes,
--- the project is not retrievable by the [GetProject]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.GetProject]
--- and [ListProjects]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
--- methods. The caller must have modify permissions for this project.
+-- the Project if the following criteria are met: + The Project does not
+-- have a billing account associated with it. + The Project has a lifecycle
+-- state of ACTIVE. This method changes the Project\'s lifecycle state from
+-- ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time,
+-- at which point the lifecycle state changes to DELETE_IN_PROGRESS. Until
+-- the deletion completes, you can check the lifecycle state checked by
+-- retrieving the Project with GetProject, and the Project remains visible
+-- to ListProjects. However, you cannot update the project. After the
+-- deletion completes, the Project is not retrievable by the GetProject and
+-- ListProjects methods. The caller must have modify permissions for this
+-- Project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.delete@.
 module Network.Google.Resource.CloudResourceManager.Projects.Delete
@@ -72,7 +61,7 @@ import           Network.Google.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.delete@ method which the
 -- 'ProjectsDelete' request conforms to.
 type ProjectsDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
@@ -84,30 +73,19 @@ type ProjectsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Marks the project identified by the specified \`project_id\` (for
+-- | Marks the Project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`) for deletion. This method will only affect
--- the project if the following criteria are met: + The project does not
--- have a billing account associated with it. + The project has a lifecycle
--- state of
--- [ACTIVE][google.cloudresourcemanager.projects.v1beta1.LifecycleState.ACTIVE].
--- This method changes the project\'s lifecycle state from
--- [ACTIVE][google.cloudresourcemanager.projects.v1beta1.LifecycleState.ACTIVE]
--- to [DELETE_REQUESTED]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED].
--- The deletion starts at an unspecified time, at which point the lifecycle
--- state changes to [DELETE_IN_PROGRESS]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_IN_PROGRESS].
--- Until the deletion completes, you can check the lifecycle state checked
--- by retrieving the project with [GetProject]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.GetProject],
--- and the project remains visible to [ListProjects]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects].
--- However, you cannot update the project. After the deletion completes,
--- the project is not retrievable by the [GetProject]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.GetProject]
--- and [ListProjects]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
--- methods. The caller must have modify permissions for this project.
+-- the Project if the following criteria are met: + The Project does not
+-- have a billing account associated with it. + The Project has a lifecycle
+-- state of ACTIVE. This method changes the Project\'s lifecycle state from
+-- ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time,
+-- at which point the lifecycle state changes to DELETE_IN_PROGRESS. Until
+-- the deletion completes, you can check the lifecycle state checked by
+-- retrieving the Project with GetProject, and the Project remains visible
+-- to ListProjects. However, you cannot update the project. After the
+-- deletion completes, the Project is not retrievable by the GetProject and
+-- ListProjects methods. The caller must have modify permissions for this
+-- Project.
 --
 -- /See:/ 'projectsDelete' smart constructor.
 data ProjectsDelete = ProjectsDelete
@@ -186,7 +164,7 @@ pdBearerToken
   = lens _pdBearerToken
       (\ s a -> s{_pdBearerToken = a})
 
--- | The project ID (for example, \`foo-bar-123\`). Required.
+-- | The Project ID (for example, \`foo-bar-123\`). Required.
 pdProjectId :: Lens' ProjectsDelete Text
 pdProjectId
   = lens _pdProjectId (\ s a -> s{_pdProjectId = a})

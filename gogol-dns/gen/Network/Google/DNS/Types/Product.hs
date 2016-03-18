@@ -210,8 +210,8 @@ cAdditions
       _Default
       . _Coerce
 
--- | The time that this operation was started by the server. This is in
--- RFC3339 text format.
+-- | The time that this operation was started by the server (output only).
+-- This is in RFC3339 text format.
 cStartTime :: Lens' Change (Maybe Text)
 cStartTime
   = lens _cStartTime (\ s a -> s{_cStartTime = a})

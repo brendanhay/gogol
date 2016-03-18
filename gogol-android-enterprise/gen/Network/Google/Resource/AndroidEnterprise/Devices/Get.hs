@@ -22,7 +22,7 @@
 --
 -- Retrieves the details of a device.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.devices.get@.
 module Network.Google.Resource.AndroidEnterprise.Devices.Get
     (
     -- * REST Resource

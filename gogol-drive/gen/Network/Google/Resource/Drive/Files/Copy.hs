@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a copy of the specified file.
+-- Creates a copy of a file and applies any requested updates with patch
+-- semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.copy@.
 module Network.Google.Resource.Drive.Files.Copy
@@ -33,15 +34,11 @@ module Network.Google.Resource.Drive.Files.Copy
     , FilesCopy
 
     -- * Request Lenses
-    , fcPinned
-    , fcVisibility
-    , fcTimedTextLanguage
-    , fcPayload
-    , fcTimedTextTrackName
-    , fcOCRLanguage
-    , fcConvert
-    , fcFileId
-    , fcOCR
+    , fPayload
+    , fOCRLanguage
+    , fKeepRevisionForever
+    , fIgnoreDefaultVisibility
+    , fFileId
     ) where
 
 import           Network.Google.Drive.Types
@@ -51,132 +48,92 @@ import           Network.Google.Prelude
 -- 'FilesCopy' request conforms to.
 type FilesCopyResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "copy" :>
-               QueryParam "pinned" Bool :>
-                 QueryParam "visibility" FilesCopyVisibility :>
-                   QueryParam "timedTextLanguage" Text :>
-                     QueryParam "timedTextTrackName" Text :>
-                       QueryParam "ocrLanguage" Text :>
-                         QueryParam "convert" Bool :>
-                           QueryParam "ocr" Bool :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] File :> Post '[JSON] File
+               QueryParam "ocrLanguage" Text :>
+                 QueryParam "keepRevisionForever" Bool :>
+                   QueryParam "ignoreDefaultVisibility" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] File :> Post '[JSON] File
 
--- | Creates a copy of the specified file.
+-- | Creates a copy of a file and applies any requested updates with patch
+-- semantics.
 --
 -- /See:/ 'filesCopy' smart constructor.
 data FilesCopy = FilesCopy
-    { _fcPinned             :: !Bool
-    , _fcVisibility         :: !FilesCopyVisibility
-    , _fcTimedTextLanguage  :: !(Maybe Text)
-    , _fcPayload            :: !File
-    , _fcTimedTextTrackName :: !(Maybe Text)
-    , _fcOCRLanguage        :: !(Maybe Text)
-    , _fcConvert            :: !Bool
-    , _fcFileId             :: !Text
-    , _fcOCR                :: !Bool
+    { _fPayload                 :: !File
+    , _fOCRLanguage             :: !(Maybe Text)
+    , _fKeepRevisionForever     :: !Bool
+    , _fIgnoreDefaultVisibility :: !Bool
+    , _fFileId                  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesCopy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fcPinned'
+-- * 'fPayload'
 --
--- * 'fcVisibility'
+-- * 'fOCRLanguage'
 --
--- * 'fcTimedTextLanguage'
+-- * 'fKeepRevisionForever'
 --
--- * 'fcPayload'
+-- * 'fIgnoreDefaultVisibility'
 --
--- * 'fcTimedTextTrackName'
---
--- * 'fcOCRLanguage'
---
--- * 'fcConvert'
---
--- * 'fcFileId'
---
--- * 'fcOCR'
+-- * 'fFileId'
 filesCopy
-    :: File -- ^ 'fcPayload'
-    -> Text -- ^ 'fcFileId'
+    :: File -- ^ 'fPayload'
+    -> Text -- ^ 'fFileId'
     -> FilesCopy
-filesCopy pFcPayload_ pFcFileId_ =
+filesCopy pFPayload_ pFFileId_ =
     FilesCopy
-    { _fcPinned = False
-    , _fcVisibility = FCVDefault
-    , _fcTimedTextLanguage = Nothing
-    , _fcPayload = pFcPayload_
-    , _fcTimedTextTrackName = Nothing
-    , _fcOCRLanguage = Nothing
-    , _fcConvert = False
-    , _fcFileId = pFcFileId_
-    , _fcOCR = False
+    { _fPayload = pFPayload_
+    , _fOCRLanguage = Nothing
+    , _fKeepRevisionForever = False
+    , _fIgnoreDefaultVisibility = False
+    , _fFileId = pFFileId_
     }
 
--- | Whether to pin the head revision of the new copy. A file can have a
--- maximum of 200 pinned revisions.
-fcPinned :: Lens' FilesCopy Bool
-fcPinned = lens _fcPinned (\ s a -> s{_fcPinned = a})
-
--- | The visibility of the new file. This parameter is only relevant when the
--- source is not a native Google Doc and convert=false.
-fcVisibility :: Lens' FilesCopy FilesCopyVisibility
-fcVisibility
-  = lens _fcVisibility (\ s a -> s{_fcVisibility = a})
-
--- | The language of the timed text.
-fcTimedTextLanguage :: Lens' FilesCopy (Maybe Text)
-fcTimedTextLanguage
-  = lens _fcTimedTextLanguage
-      (\ s a -> s{_fcTimedTextLanguage = a})
-
 -- | Multipart request metadata.
-fcPayload :: Lens' FilesCopy File
-fcPayload
-  = lens _fcPayload (\ s a -> s{_fcPayload = a})
+fPayload :: Lens' FilesCopy File
+fPayload = lens _fPayload (\ s a -> s{_fPayload = a})
 
--- | The timed text track name.
-fcTimedTextTrackName :: Lens' FilesCopy (Maybe Text)
-fcTimedTextTrackName
-  = lens _fcTimedTextTrackName
-      (\ s a -> s{_fcTimedTextTrackName = a})
+-- | A language hint for OCR processing during image import (ISO 639-1 code).
+fOCRLanguage :: Lens' FilesCopy (Maybe Text)
+fOCRLanguage
+  = lens _fOCRLanguage (\ s a -> s{_fOCRLanguage = a})
 
--- | If ocr is true, hints at the language to use. Valid values are BCP 47
--- codes.
-fcOCRLanguage :: Lens' FilesCopy (Maybe Text)
-fcOCRLanguage
-  = lens _fcOCRLanguage
-      (\ s a -> s{_fcOCRLanguage = a})
+-- | Whether to set the \'keepForever\' field in the new head revision. This
+-- is only applicable to files with binary content in Drive.
+fKeepRevisionForever :: Lens' FilesCopy Bool
+fKeepRevisionForever
+  = lens _fKeepRevisionForever
+      (\ s a -> s{_fKeepRevisionForever = a})
 
--- | Whether to convert this file to the corresponding Google Docs format.
-fcConvert :: Lens' FilesCopy Bool
-fcConvert
-  = lens _fcConvert (\ s a -> s{_fcConvert = a})
+-- | Whether to ignore the domain\'s default visibility settings for the
+-- created file. Domain administrators can choose to make all uploaded
+-- files visible to the domain by default; this parameter bypasses that
+-- behavior for the request. Permissions are still inherited from parent
+-- folders.
+fIgnoreDefaultVisibility :: Lens' FilesCopy Bool
+fIgnoreDefaultVisibility
+  = lens _fIgnoreDefaultVisibility
+      (\ s a -> s{_fIgnoreDefaultVisibility = a})
 
--- | The ID of the file to copy.
-fcFileId :: Lens' FilesCopy Text
-fcFileId = lens _fcFileId (\ s a -> s{_fcFileId = a})
-
--- | Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
-fcOCR :: Lens' FilesCopy Bool
-fcOCR = lens _fcOCR (\ s a -> s{_fcOCR = a})
+-- | The ID of the file.
+fFileId :: Lens' FilesCopy Text
+fFileId = lens _fFileId (\ s a -> s{_fFileId = a})
 
 instance GoogleRequest FilesCopy where
         type Rs FilesCopy = File
         requestClient FilesCopy{..}
-          = go _fcFileId (Just _fcPinned) (Just _fcVisibility)
-              _fcTimedTextLanguage
-              _fcTimedTextTrackName
-              _fcOCRLanguage
-              (Just _fcConvert)
-              (Just _fcOCR)
+          = go _fFileId _fOCRLanguage
+              (Just _fKeepRevisionForever)
+              (Just _fIgnoreDefaultVisibility)
               (Just AltJSON)
-              _fcPayload
+              _fPayload
               driveService
           where go
                   = buildClient (Proxy :: Proxy FilesCopyResource)

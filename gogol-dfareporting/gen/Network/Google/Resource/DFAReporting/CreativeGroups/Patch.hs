@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsPatch' request conforms to.
 type CreativeGroupsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>

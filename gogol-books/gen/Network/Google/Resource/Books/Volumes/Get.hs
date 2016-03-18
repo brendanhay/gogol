@@ -34,6 +34,7 @@ module Network.Google.Resource.Books.Volumes.Get
 
     -- * Request Lenses
     , vgCountry
+    , vgIncludeNonComicsSeries
     , vgPartner
     , vgVolumeId
     , vgSource
@@ -52,17 +53,19 @@ type VolumesGetResource =
          "volumes" :>
            Capture "volumeId" Text :>
              QueryParam "country" Text :>
-               QueryParam "partner" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "projection" VolumesGetProjection :>
-                     QueryParam "user_library_consistent_read" Bool :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Volume
+               QueryParam "includeNonComicsSeries" Bool :>
+                 QueryParam "partner" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "projection" VolumesGetProjection :>
+                       QueryParam "user_library_consistent_read" Bool :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Volume
 
 -- | Gets volume information for a single volume.
 --
 -- /See:/ 'volumesGet' smart constructor.
 data VolumesGet = VolumesGet
     { _vgCountry                   :: !(Maybe Text)
+    , _vgIncludeNonComicsSeries    :: !(Maybe Bool)
     , _vgPartner                   :: !(Maybe Text)
     , _vgVolumeId                  :: !Text
     , _vgSource                    :: !(Maybe Text)
@@ -75,6 +78,8 @@ data VolumesGet = VolumesGet
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vgCountry'
+--
+-- * 'vgIncludeNonComicsSeries'
 --
 -- * 'vgPartner'
 --
@@ -91,6 +96,7 @@ volumesGet
 volumesGet pVgVolumeId_ =
     VolumesGet
     { _vgCountry = Nothing
+    , _vgIncludeNonComicsSeries = Nothing
     , _vgPartner = Nothing
     , _vgVolumeId = pVgVolumeId_
     , _vgSource = Nothing
@@ -102,6 +108,12 @@ volumesGet pVgVolumeId_ =
 vgCountry :: Lens' VolumesGet (Maybe Text)
 vgCountry
   = lens _vgCountry (\ s a -> s{_vgCountry = a})
+
+-- | Set to true to include non-comics series. Defaults to false.
+vgIncludeNonComicsSeries :: Lens' VolumesGet (Maybe Bool)
+vgIncludeNonComicsSeries
+  = lens _vgIncludeNonComicsSeries
+      (\ s a -> s{_vgIncludeNonComicsSeries = a})
 
 -- | Brand results for partner ID.
 vgPartner :: Lens' VolumesGet (Maybe Text)
@@ -130,7 +142,9 @@ vgUserLibraryConsistentRead
 instance GoogleRequest VolumesGet where
         type Rs VolumesGet = Volume
         requestClient VolumesGet{..}
-          = go _vgVolumeId _vgCountry _vgPartner _vgSource
+          = go _vgVolumeId _vgCountry _vgIncludeNonComicsSeries
+              _vgPartner
+              _vgSource
               _vgProjection
               _vgUserLibraryConsistentRead
               (Just AltJSON)

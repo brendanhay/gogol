@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified image resource.
+-- Deletes the specified image.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.delete@.
 module Network.Google.Resource.Compute.Images.Delete
@@ -52,7 +52,7 @@ type ImagesDeleteResource =
                  Capture "image" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified image resource.
+-- | Deletes the specified image.
 --
 -- /See:/ 'imagesDelete' smart constructor.
 data ImagesDelete = ImagesDelete

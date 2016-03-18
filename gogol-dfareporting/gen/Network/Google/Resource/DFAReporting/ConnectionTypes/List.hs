@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'ConnectionTypesList' request conforms to.
 type ConnectionTypesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "connectionTypes" :>

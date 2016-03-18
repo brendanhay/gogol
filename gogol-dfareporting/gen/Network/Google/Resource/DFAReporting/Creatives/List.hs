@@ -59,7 +59,7 @@ import           Network.Google.Prelude
 -- 'CreativesList' request conforms to.
 type CreativesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>

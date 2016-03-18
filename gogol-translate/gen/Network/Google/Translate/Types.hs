@@ -61,7 +61,7 @@ import           Network.Google.Translate.Types.Product
 import           Network.Google.Translate.Types.Sum
 
 -- | Default request referring to version 'v2' of the Translate API. This contains the host and root path used as a starting point for constructing service requests.
-translateService :: Service
+translateService :: ServiceConfig
 translateService
   = defaultService (ServiceId "translate:v2")
       "www.googleapis.com"

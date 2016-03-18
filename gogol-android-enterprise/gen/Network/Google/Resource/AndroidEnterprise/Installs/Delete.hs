@@ -24,7 +24,7 @@
 -- still show the app as installed on the device until it is actually
 -- removed.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.delete@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.delete@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Delete
     (
     -- * REST Resource

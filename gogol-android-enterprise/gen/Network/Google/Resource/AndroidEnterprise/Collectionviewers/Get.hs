@@ -24,7 +24,7 @@
 -- see the collection. If the collection\'s visibility is set to
 -- viewersOnly then only these users will see the collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collectionviewers.get@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Get
     (
     -- * REST Resource

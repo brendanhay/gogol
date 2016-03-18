@@ -23,7 +23,7 @@
 -- Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.list@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.urlcrawlerrorssamples.list@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
     (
     -- * REST Resource

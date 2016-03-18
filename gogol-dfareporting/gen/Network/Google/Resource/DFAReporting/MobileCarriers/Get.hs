@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'MobileCarriersGet' request conforms to.
 type MobileCarriersGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "mobileCarriers" :>

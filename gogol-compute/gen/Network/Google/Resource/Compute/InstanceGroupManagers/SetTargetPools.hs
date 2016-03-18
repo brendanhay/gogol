@@ -104,7 +104,7 @@ instanceGroupManagersSetTargetPools pIgmstpProject_ pIgmstpInstanceGroupManager_
     , _igmstpPayload = pIgmstpPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmstpProject :: Lens' InstanceGroupManagersSetTargetPools Text
 igmstpProject
   = lens _igmstpProject

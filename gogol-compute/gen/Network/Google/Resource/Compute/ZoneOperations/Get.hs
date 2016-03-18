@@ -94,7 +94,7 @@ zogOperation :: Lens' ZoneOperationsGet Text
 zogOperation
   = lens _zogOperation (\ s a -> s{_zogOperation = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 zogZone :: Lens' ZoneOperationsGet Text
 zogZone = lens _zogZone (\ s a -> s{_zogZone = a})
 

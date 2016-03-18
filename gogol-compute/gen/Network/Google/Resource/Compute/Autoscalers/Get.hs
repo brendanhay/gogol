@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified autoscaler resource.
+-- Returns the specified autoscaler resource. Get a list of available
+-- autoscalers by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.get@.
 module Network.Google.Resource.Compute.Autoscalers.Get
@@ -54,7 +55,8 @@ type AutoscalersGetResource =
                    Capture "autoscaler" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Autoscaler
 
--- | Returns the specified autoscaler resource.
+-- | Returns the specified autoscaler resource. Get a list of available
+-- autoscalers by making a list() request.
 --
 -- /See:/ 'autoscalersGet' smart constructor.
 data AutoscalersGet = AutoscalersGet
@@ -84,16 +86,16 @@ autoscalersGet pAgProject_ pAgZone_ pAgAutoscaler_ =
     , _agAutoscaler = pAgAutoscaler_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 agProject :: Lens' AutoscalersGet Text
 agProject
   = lens _agProject (\ s a -> s{_agProject = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 agZone :: Lens' AutoscalersGet Text
 agZone = lens _agZone (\ s a -> s{_agZone = a})
 
--- | Name of the persistent autoscaler resource to return.
+-- | Name of the autoscaler to return.
 agAutoscaler :: Lens' AutoscalersGet Text
 agAutoscaler
   = lens _agAutoscaler (\ s a -> s{_agAutoscaler = a})

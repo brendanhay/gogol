@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'RepliesDelete' request conforms to.
 type RepliesDeleteResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Run static validation for the UrlMap. In particular, the tests of the
+-- Runs static validation for the UrlMap. In particular, the tests of the
 -- provided UrlMap will be run. Calling this method does NOT create the
 -- UrlMap.
 --
@@ -58,7 +58,7 @@ type URLMapsValidateResource =
                        ReqBody '[JSON] URLMapsValidateRequest :>
                          Post '[JSON] URLMapsValidateResponse
 
--- | Run static validation for the UrlMap. In particular, the tests of the
+-- | Runs static validation for the UrlMap. In particular, the tests of the
 -- provided UrlMap will be run. Calling this method does NOT create the
 -- UrlMap.
 --
@@ -95,7 +95,7 @@ umvURLMap :: Lens' URLMapsValidate Text
 umvURLMap
   = lens _umvURLMap (\ s a -> s{_umvURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umvProject :: Lens' URLMapsValidate Text
 umvProject
   = lens _umvProject (\ s a -> s{_umvProject = a})

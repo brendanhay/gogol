@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ < Genomics API Reference> for @genomics.operations.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.get@.
 module Network.Google.Resource.Genomics.Operations.Get
     (
     -- * REST Resource

@@ -27,6 +27,11 @@ module Network.Google.Gmail.Types
     , gmailComposeScope
     , gmailReadonlyScope
 
+    -- * BatchDeleteMessagesRequest
+    , BatchDeleteMessagesRequest
+    , batchDeleteMessagesRequest
+    , bdmrIds
+
     -- * UsersMessagesGetFormat
     , UsersMessagesGetFormat (..)
 
@@ -221,7 +226,7 @@ import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
-gmailService :: Service
+gmailService :: ServiceConfig
 gmailService
   = defaultService (ServiceId "gmail:v1")
       "www.googleapis.com"

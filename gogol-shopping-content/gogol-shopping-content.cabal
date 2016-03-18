@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Manage product items, inventory, and Merchant Center accounts for Google
-    Shopping.
+    Manages product items, inventory, and Merchant Center accounts for
+    Google Shopping.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

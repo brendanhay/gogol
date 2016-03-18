@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified UrlMap resource.
+-- Returns the specified UrlMap resource. Get a list of available URL maps
+-- by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.get@.
 module Network.Google.Resource.Compute.URLMaps.Get
@@ -52,7 +53,8 @@ type URLMapsGetResource =
                  Capture "urlMap" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] URLMap
 
--- | Returns the specified UrlMap resource.
+-- | Returns the specified UrlMap resource. Get a list of available URL maps
+-- by making a list() request.
 --
 -- /See:/ 'urlMapsGet' smart constructor.
 data URLMapsGet = URLMapsGet
@@ -82,7 +84,7 @@ umgURLMap :: Lens' URLMapsGet Text
 umgURLMap
   = lens _umgURLMap (\ s a -> s{_umgURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umgProject :: Lens' URLMapsGet Text
 umgProject
   = lens _umgProject (\ s a -> s{_umgProject = a})

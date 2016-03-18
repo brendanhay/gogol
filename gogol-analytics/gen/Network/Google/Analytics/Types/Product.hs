@@ -2836,8 +2836,10 @@ data ProFile = ProFile
     , _pCreated                           :: !(Maybe DateTime')
     , _pSelfLink                          :: !(Maybe Text)
     , _pAccountId                         :: !(Maybe Text)
+    , _pBotFilteringEnabled               :: !(Maybe Bool)
     , _pName                              :: !(Maybe Text)
     , _pCurrency                          :: !(Maybe Text)
+    , _pStarred                           :: !(Maybe Bool)
     , _pInternalWebPropertyId             :: !(Maybe Text)
     , _pId                                :: !(Maybe Text)
     , _pUpdated                           :: !(Maybe DateTime')
@@ -2877,9 +2879,13 @@ data ProFile = ProFile
 --
 -- * 'pAccountId'
 --
+-- * 'pBotFilteringEnabled'
+--
 -- * 'pName'
 --
 -- * 'pCurrency'
+--
+-- * 'pStarred'
 --
 -- * 'pInternalWebPropertyId'
 --
@@ -2917,8 +2923,10 @@ proFile =
     , _pCreated = Nothing
     , _pSelfLink = Nothing
     , _pAccountId = Nothing
+    , _pBotFilteringEnabled = Nothing
     , _pName = Nothing
     , _pCurrency = Nothing
+    , _pStarred = Nothing
     , _pInternalWebPropertyId = Nothing
     , _pId = Nothing
     , _pUpdated = Nothing
@@ -2994,6 +3002,12 @@ pAccountId :: Lens' ProFile (Maybe Text)
 pAccountId
   = lens _pAccountId (\ s a -> s{_pAccountId = a})
 
+-- | Indicates whether bot filtering is enabled for this view (profile).
+pBotFilteringEnabled :: Lens' ProFile (Maybe Bool)
+pBotFilteringEnabled
+  = lens _pBotFilteringEnabled
+      (\ s a -> s{_pBotFilteringEnabled = a})
+
 -- | Name of this view (profile).
 pName :: Lens' ProFile (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
@@ -3005,6 +3019,10 @@ pName = lens _pName (\ s a -> s{_pName = a})
 pCurrency :: Lens' ProFile (Maybe Text)
 pCurrency
   = lens _pCurrency (\ s a -> s{_pCurrency = a})
+
+-- | Indicates whether this view (profile) is starred or not.
+pStarred :: Lens' ProFile (Maybe Bool)
+pStarred = lens _pStarred (\ s a -> s{_pStarred = a})
 
 -- | Internal ID for the web property to which this view (profile) belongs.
 pInternalWebPropertyId :: Lens' ProFile (Maybe Text)
@@ -3085,8 +3103,10 @@ instance FromJSON ProFile where
                      <*> (o .:? "created")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "accountId")
+                     <*> (o .:? "botFilteringEnabled")
                      <*> (o .:? "name")
                      <*> (o .:? "currency")
+                     <*> (o .:? "starred")
                      <*> (o .:? "internalWebPropertyId")
                      <*> (o .:? "id")
                      <*> (o .:? "updated")
@@ -3116,8 +3136,10 @@ instance ToJSON ProFile where
                   ("created" .=) <$> _pCreated,
                   ("selfLink" .=) <$> _pSelfLink,
                   ("accountId" .=) <$> _pAccountId,
+                  ("botFilteringEnabled" .=) <$> _pBotFilteringEnabled,
                   ("name" .=) <$> _pName,
                   ("currency" .=) <$> _pCurrency,
+                  ("starred" .=) <$> _pStarred,
                   ("internalWebPropertyId" .=) <$>
                     _pInternalWebPropertyId,
                   ("id" .=) <$> _pId, ("updated" .=) <$> _pUpdated,
@@ -3320,6 +3342,7 @@ data WebPropertySummary = WebPropertySummary
     { _wpsKind                  :: !Text
     , _wpsProFiles              :: !(Maybe [ProFileSummary])
     , _wpsName                  :: !(Maybe Text)
+    , _wpsStarred               :: !(Maybe Bool)
     , _wpsInternalWebPropertyId :: !(Maybe Text)
     , _wpsId                    :: !(Maybe Text)
     , _wpsWebsiteURL            :: !(Maybe Text)
@@ -3336,6 +3359,8 @@ data WebPropertySummary = WebPropertySummary
 --
 -- * 'wpsName'
 --
+-- * 'wpsStarred'
+--
 -- * 'wpsInternalWebPropertyId'
 --
 -- * 'wpsId'
@@ -3350,6 +3375,7 @@ webPropertySummary =
     { _wpsKind = "analytics#webPropertySummary"
     , _wpsProFiles = Nothing
     , _wpsName = Nothing
+    , _wpsStarred = Nothing
     , _wpsInternalWebPropertyId = Nothing
     , _wpsId = Nothing
     , _wpsWebsiteURL = Nothing
@@ -3370,6 +3396,11 @@ wpsProFiles
 -- | Web property name.
 wpsName :: Lens' WebPropertySummary (Maybe Text)
 wpsName = lens _wpsName (\ s a -> s{_wpsName = a})
+
+-- | Indicates whether this web property is starred or not.
+wpsStarred :: Lens' WebPropertySummary (Maybe Bool)
+wpsStarred
+  = lens _wpsStarred (\ s a -> s{_wpsStarred = a})
 
 -- | Internal ID for this web property.
 wpsInternalWebPropertyId :: Lens' WebPropertySummary (Maybe Text)
@@ -3399,6 +3430,7 @@ instance FromJSON WebPropertySummary where
                    (o .:? "kind" .!= "analytics#webPropertySummary") <*>
                      (o .:? "profiles" .!= mempty)
                      <*> (o .:? "name")
+                     <*> (o .:? "starred")
                      <*> (o .:? "internalWebPropertyId")
                      <*> (o .:? "id")
                      <*> (o .:? "websiteUrl")
@@ -3411,6 +3443,7 @@ instance ToJSON WebPropertySummary where
                  [Just ("kind" .= _wpsKind),
                   ("profiles" .=) <$> _wpsProFiles,
                   ("name" .=) <$> _wpsName,
+                  ("starred" .=) <$> _wpsStarred,
                   ("internalWebPropertyId" .=) <$>
                     _wpsInternalWebPropertyId,
                   ("id" .=) <$> _wpsId,
@@ -4378,6 +4411,7 @@ data Account = Account
     , _accCreated     :: !(Maybe DateTime')
     , _accSelfLink    :: !(Maybe Text)
     , _accName        :: !(Maybe Text)
+    , _accStarred     :: !(Maybe Bool)
     , _accId          :: !(Maybe Text)
     , _accUpdated     :: !(Maybe DateTime')
     , _accPermissions :: !(Maybe AccountPermissions)
@@ -4397,6 +4431,8 @@ data Account = Account
 --
 -- * 'accName'
 --
+-- * 'accStarred'
+--
 -- * 'accId'
 --
 -- * 'accUpdated'
@@ -4411,6 +4447,7 @@ account =
     , _accCreated = Nothing
     , _accSelfLink = Nothing
     , _accName = Nothing
+    , _accStarred = Nothing
     , _accId = Nothing
     , _accUpdated = Nothing
     , _accPermissions = Nothing
@@ -4441,6 +4478,11 @@ accSelfLink
 accName :: Lens' Account (Maybe Text)
 accName = lens _accName (\ s a -> s{_accName = a})
 
+-- | Indicates whether this account is starred or not.
+accStarred :: Lens' Account (Maybe Bool)
+accStarred
+  = lens _accStarred (\ s a -> s{_accStarred = a})
+
 -- | Account ID.
 accId :: Lens' Account (Maybe Text)
 accId = lens _accId (\ s a -> s{_accId = a})
@@ -4467,6 +4509,7 @@ instance FromJSON Account where
                      <*> (o .:? "created")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
+                     <*> (o .:? "starred")
                      <*> (o .:? "id")
                      <*> (o .:? "updated")
                      <*> (o .:? "permissions"))
@@ -4479,7 +4522,8 @@ instance ToJSON Account where
                   Just ("kind" .= _accKind),
                   ("created" .=) <$> _accCreated,
                   ("selfLink" .=) <$> _accSelfLink,
-                  ("name" .=) <$> _accName, ("id" .=) <$> _accId,
+                  ("name" .=) <$> _accName,
+                  ("starred" .=) <$> _accStarred, ("id" .=) <$> _accId,
                   ("updated" .=) <$> _accUpdated,
                   ("permissions" .=) <$> _accPermissions])
 
@@ -6110,10 +6154,11 @@ instance ToJSON CustomMetric where
 --
 -- /See:/ 'proFileSummary' smart constructor.
 data ProFileSummary = ProFileSummary
-    { _pfsKind :: !Text
-    , _pfsName :: !(Maybe Text)
-    , _pfsId   :: !(Maybe Text)
-    , _pfsType :: !(Maybe Text)
+    { _pfsKind    :: !Text
+    , _pfsName    :: !(Maybe Text)
+    , _pfsStarred :: !(Maybe Bool)
+    , _pfsId      :: !(Maybe Text)
+    , _pfsType    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProFileSummary' with the minimum fields required to make a request.
@@ -6124,6 +6169,8 @@ data ProFileSummary = ProFileSummary
 --
 -- * 'pfsName'
 --
+-- * 'pfsStarred'
+--
 -- * 'pfsId'
 --
 -- * 'pfsType'
@@ -6133,6 +6180,7 @@ proFileSummary =
     ProFileSummary
     { _pfsKind = "analytics#profileSummary"
     , _pfsName = Nothing
+    , _pfsStarred = Nothing
     , _pfsId = Nothing
     , _pfsType = Nothing
     }
@@ -6144,6 +6192,11 @@ pfsKind = lens _pfsKind (\ s a -> s{_pfsKind = a})
 -- | View (profile) name.
 pfsName :: Lens' ProFileSummary (Maybe Text)
 pfsName = lens _pfsName (\ s a -> s{_pfsName = a})
+
+-- | Indicates whether this view (profile) is starred or not.
+pfsStarred :: Lens' ProFileSummary (Maybe Bool)
+pfsStarred
+  = lens _pfsStarred (\ s a -> s{_pfsStarred = a})
 
 -- | View (profile) ID.
 pfsId :: Lens' ProFileSummary (Maybe Text)
@@ -6160,6 +6213,7 @@ instance FromJSON ProFileSummary where
                  ProFileSummary <$>
                    (o .:? "kind" .!= "analytics#profileSummary") <*>
                      (o .:? "name")
+                     <*> (o .:? "starred")
                      <*> (o .:? "id")
                      <*> (o .:? "type"))
 
@@ -6168,7 +6222,8 @@ instance ToJSON ProFileSummary where
           = object
               (catMaybes
                  [Just ("kind" .= _pfsKind), ("name" .=) <$> _pfsName,
-                  ("id" .=) <$> _pfsId, ("type" .=) <$> _pfsType])
+                  ("starred" .=) <$> _pfsStarred, ("id" .=) <$> _pfsId,
+                  ("type" .=) <$> _pfsType])
 
 -- | Parent link for the custom dimension. Points to the property to which
 -- the custom dimension belongs.
@@ -6229,6 +6284,7 @@ data WebProperty = WebProperty
     , _wSelfLink              :: !(Maybe Text)
     , _wAccountId             :: !(Maybe Text)
     , _wName                  :: !(Maybe Text)
+    , _wStarred               :: !(Maybe Bool)
     , _wInternalWebPropertyId :: !(Maybe Text)
     , _wId                    :: !(Maybe Text)
     , _wUpdated               :: !(Maybe DateTime')
@@ -6259,6 +6315,8 @@ data WebProperty = WebProperty
 --
 -- * 'wName'
 --
+-- * 'wStarred'
+--
 -- * 'wInternalWebPropertyId'
 --
 -- * 'wId'
@@ -6286,6 +6344,7 @@ webProperty =
     , _wSelfLink = Nothing
     , _wAccountId = Nothing
     , _wName = Nothing
+    , _wStarred = Nothing
     , _wInternalWebPropertyId = Nothing
     , _wId = Nothing
     , _wUpdated = Nothing
@@ -6338,6 +6397,10 @@ wAccountId
 -- | Name of this web property.
 wName :: Lens' WebProperty (Maybe Text)
 wName = lens _wName (\ s a -> s{_wName = a})
+
+-- | Indicates whether this web property is starred or not.
+wStarred :: Lens' WebProperty (Maybe Bool)
+wStarred = lens _wStarred (\ s a -> s{_wStarred = a})
 
 -- | Internal ID for this web property.
 wInternalWebPropertyId :: Lens' WebProperty (Maybe Text)
@@ -6394,6 +6457,7 @@ instance FromJSON WebProperty where
                      <*> (o .:? "selfLink")
                      <*> (o .:? "accountId")
                      <*> (o .:? "name")
+                     <*> (o .:? "starred")
                      <*> (o .:? "internalWebPropertyId")
                      <*> (o .:? "id")
                      <*> (o .:? "updated")
@@ -6414,7 +6478,7 @@ instance ToJSON WebProperty where
                   ("created" .=) <$> _wCreated,
                   ("selfLink" .=) <$> _wSelfLink,
                   ("accountId" .=) <$> _wAccountId,
-                  ("name" .=) <$> _wName,
+                  ("name" .=) <$> _wName, ("starred" .=) <$> _wStarred,
                   ("internalWebPropertyId" .=) <$>
                     _wInternalWebPropertyId,
                   ("id" .=) <$> _wId, ("updated" .=) <$> _wUpdated,
@@ -7189,6 +7253,7 @@ data AccountSummary = AccountSummary
     { _assKind          :: !Text
     , _assWebProperties :: !(Maybe [WebPropertySummary])
     , _assName          :: !(Maybe Text)
+    , _assStarred       :: !(Maybe Bool)
     , _assId            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7202,6 +7267,8 @@ data AccountSummary = AccountSummary
 --
 -- * 'assName'
 --
+-- * 'assStarred'
+--
 -- * 'assId'
 accountSummary
     :: AccountSummary
@@ -7210,6 +7277,7 @@ accountSummary =
     { _assKind = "analytics#accountSummary"
     , _assWebProperties = Nothing
     , _assName = Nothing
+    , _assStarred = Nothing
     , _assId = Nothing
     }
 
@@ -7229,6 +7297,11 @@ assWebProperties
 assName :: Lens' AccountSummary (Maybe Text)
 assName = lens _assName (\ s a -> s{_assName = a})
 
+-- | Indicates whether this account is starred or not.
+assStarred :: Lens' AccountSummary (Maybe Bool)
+assStarred
+  = lens _assStarred (\ s a -> s{_assStarred = a})
+
 -- | Account ID.
 assId :: Lens' AccountSummary (Maybe Text)
 assId = lens _assId (\ s a -> s{_assId = a})
@@ -7241,6 +7314,7 @@ instance FromJSON AccountSummary where
                    (o .:? "kind" .!= "analytics#accountSummary") <*>
                      (o .:? "webProperties" .!= mempty)
                      <*> (o .:? "name")
+                     <*> (o .:? "starred")
                      <*> (o .:? "id"))
 
 instance ToJSON AccountSummary where
@@ -7249,7 +7323,9 @@ instance ToJSON AccountSummary where
               (catMaybes
                  [Just ("kind" .= _assKind),
                   ("webProperties" .=) <$> _assWebProperties,
-                  ("name" .=) <$> _assName, ("id" .=) <$> _assId])
+                  ("name" .=) <$> _assName,
+                  ("starred" .=) <$> _assStarred,
+                  ("id" .=) <$> _assId])
 
 -- | Real time data request query parameters.
 --

@@ -20,10 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches for read group sets matching the criteria. Implements
+-- Searches for read group sets matching the criteria. For the definitions
+-- of read group sets and other genomics resources, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.search@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Search
     (
     -- * REST Resource
@@ -64,7 +68,11 @@ type ReadGroupSetsSearchResource =
                            ReqBody '[JSON] SearchReadGroupSetsRequest :>
                              Post '[JSON] SearchReadGroupSetsResponse
 
--- | Searches for read group sets matching the criteria. Implements
+-- | Searches for read group sets matching the criteria. For the definitions
+-- of read group sets and other genomics resources, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
 -- /See:/ 'readGroupSetsSearch' smart constructor.

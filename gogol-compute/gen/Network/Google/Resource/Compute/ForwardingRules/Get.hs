@@ -85,7 +85,7 @@ forwardingRulesGet pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
     , _frgRegion = pFrgRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 frgProject :: Lens' ForwardingRulesGet Text
 frgProject
   = lens _frgProject (\ s a -> s{_frgProject = a})

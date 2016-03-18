@@ -94,6 +94,46 @@ instance ToJSON ListFoldersResponse where
         toJSON ListFoldersResponse{..}
           = object (catMaybes [("folders" .=) <$> _lfrFolders])
 
+-- | List Environments Response.
+--
+-- /See:/ 'listEnvironmentsResponse' smart constructor.
+newtype ListEnvironmentsResponse = ListEnvironmentsResponse
+    { _lerEnvironments :: Maybe [Environment]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListEnvironmentsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lerEnvironments'
+listEnvironmentsResponse
+    :: ListEnvironmentsResponse
+listEnvironmentsResponse =
+    ListEnvironmentsResponse
+    { _lerEnvironments = Nothing
+    }
+
+-- | All Environments of a GTM Container.
+lerEnvironments :: Lens' ListEnvironmentsResponse [Environment]
+lerEnvironments
+  = lens _lerEnvironments
+      (\ s a -> s{_lerEnvironments = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListEnvironmentsResponse where
+        parseJSON
+          = withObject "ListEnvironmentsResponse"
+              (\ o ->
+                 ListEnvironmentsResponse <$>
+                   (o .:? "environments" .!= mempty))
+
+instance ToJSON ListEnvironmentsResponse where
+        toJSON ListEnvironmentsResponse{..}
+          = object
+              (catMaybes
+                 [("environments" .=) <$> _lerEnvironments])
+
 -- | Publish container version response.
 --
 -- /See:/ 'publishContainerVersionResponse' smart constructor.
@@ -1027,6 +1067,171 @@ instance ToJSON UserAccess where
                   ("emailAddress" .=) <$> _uaEmailAddress,
                   ("containerAccess" .=) <$> _uaContainerAccess,
                   ("permissionId" .=) <$> _uaPermissionId])
+
+-- | Represents a Google Tag Manager Environment. Note that a user can
+-- create, delete and update environments of type USER, but can only update
+-- the enable_debug and url fields of environments of other types.
+--
+-- /See:/ 'environment' smart constructor.
+data Environment = Environment
+    { _eContainerId              :: !(Maybe Text)
+    , _eFingerprint              :: !(Maybe Text)
+    , _eContainerVersionId       :: !(Maybe Text)
+    , _eURL                      :: !(Maybe Text)
+    , _eAuthorizationCode        :: !(Maybe Text)
+    , _eAccountId                :: !(Maybe Text)
+    , _eName                     :: !(Maybe Text)
+    , _eEnableDebug              :: !(Maybe Bool)
+    , _eEnvironmentId            :: !(Maybe Text)
+    , _eType                     :: !(Maybe EnvironmentType)
+    , _eAuthorizationTimestampMs :: !(Maybe (Textual Int64))
+    , _eDescription              :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Environment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eContainerId'
+--
+-- * 'eFingerprint'
+--
+-- * 'eContainerVersionId'
+--
+-- * 'eURL'
+--
+-- * 'eAuthorizationCode'
+--
+-- * 'eAccountId'
+--
+-- * 'eName'
+--
+-- * 'eEnableDebug'
+--
+-- * 'eEnvironmentId'
+--
+-- * 'eType'
+--
+-- * 'eAuthorizationTimestampMs'
+--
+-- * 'eDescription'
+environment
+    :: Environment
+environment =
+    Environment
+    { _eContainerId = Nothing
+    , _eFingerprint = Nothing
+    , _eContainerVersionId = Nothing
+    , _eURL = Nothing
+    , _eAuthorizationCode = Nothing
+    , _eAccountId = Nothing
+    , _eName = Nothing
+    , _eEnableDebug = Nothing
+    , _eEnvironmentId = Nothing
+    , _eType = Nothing
+    , _eAuthorizationTimestampMs = Nothing
+    , _eDescription = Nothing
+    }
+
+-- | GTM Container ID.
+eContainerId :: Lens' Environment (Maybe Text)
+eContainerId
+  = lens _eContainerId (\ s a -> s{_eContainerId = a})
+
+-- | The fingerprint of the GTM environment as computed at storage time. This
+-- value is recomputed whenever the environment is modified.
+eFingerprint :: Lens' Environment (Maybe Text)
+eFingerprint
+  = lens _eFingerprint (\ s a -> s{_eFingerprint = a})
+
+-- |
+eContainerVersionId :: Lens' Environment (Maybe Text)
+eContainerVersionId
+  = lens _eContainerVersionId
+      (\ s a -> s{_eContainerVersionId = a})
+
+-- | Default preview page url for the environment.
+eURL :: Lens' Environment (Maybe Text)
+eURL = lens _eURL (\ s a -> s{_eURL = a})
+
+-- | The environment authorization code.
+eAuthorizationCode :: Lens' Environment (Maybe Text)
+eAuthorizationCode
+  = lens _eAuthorizationCode
+      (\ s a -> s{_eAuthorizationCode = a})
+
+-- | GTM Account ID.
+eAccountId :: Lens' Environment (Maybe Text)
+eAccountId
+  = lens _eAccountId (\ s a -> s{_eAccountId = a})
+
+-- | The environment display name. Can be set or changed only on USER type
+-- environments.
+eName :: Lens' Environment (Maybe Text)
+eName = lens _eName (\ s a -> s{_eName = a})
+
+-- | Whether or not to enable debug by default on for the environment.
+eEnableDebug :: Lens' Environment (Maybe Bool)
+eEnableDebug
+  = lens _eEnableDebug (\ s a -> s{_eEnableDebug = a})
+
+-- | GTM Environment ID uniquely identifies the GTM Environment.
+eEnvironmentId :: Lens' Environment (Maybe Text)
+eEnvironmentId
+  = lens _eEnvironmentId
+      (\ s a -> s{_eEnvironmentId = a})
+
+-- | The type of this environment.
+eType :: Lens' Environment (Maybe EnvironmentType)
+eType = lens _eType (\ s a -> s{_eType = a})
+
+-- | The last update time-stamp for the authorization code.
+eAuthorizationTimestampMs :: Lens' Environment (Maybe Int64)
+eAuthorizationTimestampMs
+  = lens _eAuthorizationTimestampMs
+      (\ s a -> s{_eAuthorizationTimestampMs = a})
+      . mapping _Coerce
+
+-- | The environment description. Can be set or changed only on USER type
+-- environments.
+eDescription :: Lens' Environment (Maybe Text)
+eDescription
+  = lens _eDescription (\ s a -> s{_eDescription = a})
+
+instance FromJSON Environment where
+        parseJSON
+          = withObject "Environment"
+              (\ o ->
+                 Environment <$>
+                   (o .:? "containerId") <*> (o .:? "fingerprint") <*>
+                     (o .:? "containerVersionId")
+                     <*> (o .:? "url")
+                     <*> (o .:? "authorizationCode")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "enableDebug")
+                     <*> (o .:? "environmentId")
+                     <*> (o .:? "type")
+                     <*> (o .:? "authorizationTimestampMs")
+                     <*> (o .:? "description"))
+
+instance ToJSON Environment where
+        toJSON Environment{..}
+          = object
+              (catMaybes
+                 [("containerId" .=) <$> _eContainerId,
+                  ("fingerprint" .=) <$> _eFingerprint,
+                  ("containerVersionId" .=) <$> _eContainerVersionId,
+                  ("url" .=) <$> _eURL,
+                  ("authorizationCode" .=) <$> _eAuthorizationCode,
+                  ("accountId" .=) <$> _eAccountId,
+                  ("name" .=) <$> _eName,
+                  ("enableDebug" .=) <$> _eEnableDebug,
+                  ("environmentId" .=) <$> _eEnvironmentId,
+                  ("type" .=) <$> _eType,
+                  ("authorizationTimestampMs" .=) <$>
+                    _eAuthorizationTimestampMs,
+                  ("description" .=) <$> _eDescription])
 
 -- | Defines the Google Tag Manager Account access permissions.
 --

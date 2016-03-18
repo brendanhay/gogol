@@ -113,6 +113,12 @@ module Network.Google.Books.Types
     , bclrAuthor
     , bclrTitle
 
+    -- * VolumeseriesInfoVolumeSeriesItemIssueItem
+    , VolumeseriesInfoVolumeSeriesItemIssueItem
+    , volumeseriesInfoVolumeSeriesItemIssueItem
+    , vivsiiiIssueOrderNumber
+    , vivsiiiIssueDisplayNumber
+
     -- * Annotation
     , Annotation
     , annotation
@@ -148,14 +154,18 @@ module Network.Google.Books.Types
     -- * VolumeUserInfo
     , VolumeUserInfo
     , volumeUserInfo
+    , vuiIsFamilySharingAllowed
+    , vuiIsFamilySharedToUser
     , vuiCopy
     , vuiUserUploadedVolumeInfo
     , vuiIsPurchased
     , vuiEntitlementType
     , vuiAcquisitionType
+    , vuiAcquiredTime
     , vuiRentalState
     , vuiIsPreOrdered
     , vuiReview
+    , vuiIsFamilySharedFromUser
     , vuiRentalPeriod
     , vuiUpdated
     , vuiIsUploaded
@@ -242,6 +252,14 @@ module Network.Google.Books.Types
     , booksVolumesRecommendedRateResponse
     , bvrrrConsistencyToken
 
+    -- * VolumeseriesInfo
+    , VolumeseriesInfo
+    , volumeseriesInfo
+    , viBookDisplayNumber
+    , viKind
+    , viShortSeriesBookTitle
+    , viVolumeSeries
+
     -- * Bookshelf
     , Bookshelf
     , bookshelf
@@ -259,9 +277,14 @@ module Network.Google.Books.Types
     -- * Notification
     , Notification
     , notification
+    , nTargetURL
+    , nShowNotificationSettingsAction
     , nKind
     , nBody
-    , nLinkURL
+    , nPcampaignId
+    , nReason
+    , nDontShowNotification
+    , nNotificationType
     , nIconURL
     , nTitle
 
@@ -357,6 +380,12 @@ module Network.Google.Books.Types
     , geolayerDataGeoBoundaryItemItem
     , gdgbiiLatitude
     , gdgbiiLongitude
+
+    -- * Series
+    , Series
+    , series
+    , sKind
+    , sSeries
 
     -- * OffersItemsItemItemsItem
     , OffersItemsItemItemsItem
@@ -465,6 +494,13 @@ module Network.Google.Books.Types
     , dictlayerDataDictWordsItemSensesItemSynonymsItemSource
     , dddwisisisURL
     , dddwisisisAttribution
+
+    -- * Seriesmembership
+    , Seriesmembership
+    , seriesmembership
+    , serNextPageToken
+    , serKind
+    , serMember
 
     -- * VolumesListFilter
     , VolumesListFilter (..)
@@ -585,6 +621,15 @@ module Network.Google.Books.Types
 
     -- * MyLibraryBookshelvesAddVolumeReason
     , MyLibraryBookshelvesAddVolumeReason (..)
+
+    -- * SeriesSeriesItem
+    , SeriesSeriesItem
+    , seriesSeriesItem
+    , ssiSeriesId
+    , ssiImageURL
+    , ssiBannerImageURL
+    , ssiTitle
+    , ssiSeriesType
 
     -- * Metadata
     , Metadata
@@ -728,6 +773,14 @@ module Network.Google.Books.Types
     , dTotalClusters
     , dClusters
 
+    -- * VolumeseriesInfoVolumeSeriesItem
+    , VolumeseriesInfoVolumeSeriesItem
+    , volumeseriesInfoVolumeSeriesItem
+    , vivsiSeriesId
+    , vivsiSeriesBookType
+    , vivsiOrderNumber
+    , vivsiIssue
+
     -- * UserSettingsNotesExport
     , UserSettingsNotesExport
     , userSettingsNotesExport
@@ -795,6 +848,7 @@ module Network.Google.Books.Types
     , vviCanonicalVolumeLink
     , vviReadingModes
     , vviIndustryIdentifiers
+    , vviSeriesInfo
     , vviPrintedPageCount
     , vviMainCategory
     , vviContentVersion
@@ -863,7 +917,7 @@ import           Network.Google.Books.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Books API. This contains the host and root path used as a starting point for constructing service requests.
-booksService :: Service
+booksService :: ServiceConfig
 booksService
   = defaultService (ServiceId "books:v1")
       "www.googleapis.com"

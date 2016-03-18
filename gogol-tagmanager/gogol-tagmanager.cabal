@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    API for accessing Tag Manager accounts and containers.
+    Accesses Tag Manager accounts and containers.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -35,6 +35,12 @@ library
     exposed-modules:
           Network.Google.Resource.TagManager.Accounts.Containers.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Patch
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
@@ -44,6 +50,7 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.List
         , Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.ReauthorizeEnvironments.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get

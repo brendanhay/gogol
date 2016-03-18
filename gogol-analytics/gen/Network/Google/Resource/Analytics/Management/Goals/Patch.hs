@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing view (profile). This method supports patch
--- semantics.
+-- Updates an existing goal. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.patch@.
 module Network.Google.Resource.Analytics.Management.Goals.Patch
@@ -61,8 +60,7 @@ type ManagementGoalsPatchResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Goal :> Patch '[JSON] Goal
 
--- | Updates an existing view (profile). This method supports patch
--- semantics.
+-- | Updates an existing goal. This method supports patch semantics.
 --
 -- /See:/ 'managementGoalsPatch' smart constructor.
 data ManagementGoalsPatch = ManagementGoalsPatch

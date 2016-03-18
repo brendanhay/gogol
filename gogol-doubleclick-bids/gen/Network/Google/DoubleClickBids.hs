@@ -50,6 +50,9 @@ module Network.Google.DoubleClickBids
     -- ** doubleclickbidmanager.reports.listreports
     , module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
+    -- ** doubleclickbidmanager.rubicon.notifyproposalchange
+    , module Network.Google.Resource.DoubleClickBidManager.Rubicon.Notifyproposalchange
+
     -- * Types
 
     -- ** ListReportsResponse
@@ -121,6 +124,15 @@ module Network.Google.DoubleClickBids
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
+
+    -- ** Note
+    , Note
+    , note
+    , nUsername
+    , nSource
+    , nId
+    , nMessage
+    , nTimestamp
 
     -- ** QueryMetadataDataRange
     , QueryMetadataDataRange (..)
@@ -225,6 +237,15 @@ module Network.Google.DoubleClickBids
     -- ** ReportStatusState
     , ReportStatusState (..)
 
+    -- ** NotifyProposalChangeRequest
+    , NotifyProposalChangeRequest
+    , notifyProposalChangeRequest
+    , npcrToken
+    , npcrAction
+    , npcrHref
+    , npcrId
+    , npcrNotes
+
     -- ** ParametersGroupBysItem
     , ParametersGroupBysItem (..)
 
@@ -253,6 +274,7 @@ import           Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
 import           Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
 import           Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
 import           Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
+import           Network.Google.Resource.DoubleClickBidManager.Rubicon.Notifyproposalchange
 
 {- $resources
 TODO
@@ -267,3 +289,4 @@ type DoubleClickBidsAPI =
        :<|> ReportsListreportsResource
        :<|> LineitemsUploadlineitemsResource
        :<|> LineitemsDownloadlineitemsResource
+       :<|> RubiconNotifyproposalchangeResource

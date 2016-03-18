@@ -50,7 +50,7 @@ import           Network.Google.Fonts.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Fonts Developer API. This contains the host and root path used as a starting point for constructing service requests.
-fontsService :: Service
+fontsService :: ServiceConfig
 fontsService
   = defaultService (ServiceId "webfonts:v1")
       "www.googleapis.com"

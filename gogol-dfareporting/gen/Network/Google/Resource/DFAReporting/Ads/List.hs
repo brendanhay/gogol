@@ -67,7 +67,7 @@ import           Network.Google.Prelude
 -- 'AdsList' request conforms to.
 type AdsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
@@ -389,7 +389,7 @@ alDynamicClickTracker
       (\ s a -> s{_alDynamicClickTracker = a})
 
 -- | Select default ads with the specified compatibility. Applicable when
--- type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to
+-- type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to
 -- rendering either on desktop or on mobile devices for regular or
 -- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
 -- rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified address resource.
+-- Returns the specified address resource. Get a list of available
+-- addresses by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalAddresses.get@.
 module Network.Google.Resource.Compute.GlobalAddresses.Get
@@ -52,7 +53,8 @@ type GlobalAddressesGetResource =
                  Capture "address" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Address
 
--- | Returns the specified address resource.
+-- | Returns the specified address resource. Get a list of available
+-- addresses by making a list() request.
 --
 -- /See:/ 'globalAddressesGet' smart constructor.
 data GlobalAddressesGet = GlobalAddressesGet

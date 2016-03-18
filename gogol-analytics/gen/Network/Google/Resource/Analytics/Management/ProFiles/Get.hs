@@ -85,19 +85,19 @@ managementProFilesGet pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
     , _mpfgAccountId = pMpfgAccountId_
     }
 
--- | Web property ID to retrieve the goal for.
+-- | Web property ID to retrieve the view (profile) for.
 mpfgWebPropertyId :: Lens' ManagementProFilesGet Text
 mpfgWebPropertyId
   = lens _mpfgWebPropertyId
       (\ s a -> s{_mpfgWebPropertyId = a})
 
--- | View (Profile) ID to retrieve the goal for.
+-- | View (Profile) ID to retrieve the view (profile) for.
 mpfgProFileId :: Lens' ManagementProFilesGet Text
 mpfgProFileId
   = lens _mpfgProFileId
       (\ s a -> s{_mpfgProFileId = a})
 
--- | Account ID to retrieve the goal for.
+-- | Account ID to retrieve the view (profile) for.
 mpfgAccountId :: Lens' ManagementProFilesGet Text
 mpfgAccountId
   = lens _mpfgAccountId

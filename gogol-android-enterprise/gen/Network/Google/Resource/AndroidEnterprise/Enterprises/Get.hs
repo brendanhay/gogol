@@ -22,7 +22,7 @@
 --
 -- Retrieves the name and domain of an enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.get@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
     (
     -- * REST Resource

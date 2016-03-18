@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesGet' request conforms to.
 type RemarketingListSharesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>

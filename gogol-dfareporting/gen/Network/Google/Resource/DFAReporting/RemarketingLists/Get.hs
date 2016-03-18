@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsGet' request conforms to.
 type RemarketingListsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>

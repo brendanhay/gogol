@@ -58,6 +58,9 @@ module Network.Google.Games
     -- ** games.applications.played
     , module Network.Google.Resource.Games.Applications.Played
 
+    -- ** games.applications.verify
+    , module Network.Google.Resource.Games.Applications.Verify
+
     -- ** games.events.listByPlayer
     , module Network.Google.Resource.Games.Events.ListByPlayer
 
@@ -988,13 +991,16 @@ module Network.Google.Games
     -- ** Player
     , Player
     , player
+    , plaBannerURLLandscape
     , plaLastPlayedWith
     , plaAvatarImageURL
     , plaKind
     , plaExperienceInfo
     , plaName
+    , plaOriginalPlayerId
     , plaDisplayName
     , plaTitle
+    , plaBannerURLPortrait
     , plaPlayerId
 
     -- ** GamesAchievementIncrement
@@ -1029,6 +1035,13 @@ module Network.Google.Games
     , eventChild
     , ecKind
     , ecChildId
+
+    -- ** ApplicationVerifyResponse
+    , ApplicationVerifyResponse
+    , applicationVerifyResponse
+    , avrKind
+    , avrAlternatePlayerId
+    , avrPlayerId
 
     -- ** PlayerEventListResponse
     , PlayerEventListResponse
@@ -1094,6 +1107,7 @@ import           Network.Google.Resource.Games.Achievements.Unlock
 import           Network.Google.Resource.Games.Achievements.UpdateMultiple
 import           Network.Google.Resource.Games.Applications.Get
 import           Network.Google.Resource.Games.Applications.Played
+import           Network.Google.Resource.Games.Applications.Verify
 import           Network.Google.Resource.Games.Events.ListByPlayer
 import           Network.Google.Resource.Games.Events.ListDefinitions
 import           Network.Google.Resource.Games.Events.Record
@@ -1193,5 +1207,6 @@ type GamesAPI =
        :<|> TurnBasedMatchesDismissResource
        :<|> TurnBasedMatchesLeaveResource
        :<|> TurnBasedMatchesCancelResource
+       :<|> ApplicationsVerifyResource
        :<|> ApplicationsGetResource
        :<|> ApplicationsPlayedResource

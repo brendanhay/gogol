@@ -20,12 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the binding between the MDM and enterprise. This is now
+-- Deletes the binding between the EMM and enterprise. This is now
 -- deprecated; use this to unenroll customers that were previously enrolled
 -- with the \'insert\' call, then enroll them again with the \'enroll\'
 -- call.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.delete@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.delete@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ type EnterprisesDeleteResource =
            Capture "enterpriseId" Text :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes the binding between the MDM and enterprise. This is now
+-- | Deletes the binding between the EMM and enterprise. This is now
 -- deprecated; use this to unenroll customers that were previously enrolled
 -- with the \'insert\' call, then enroll them again with the \'enroll\'
 -- call.

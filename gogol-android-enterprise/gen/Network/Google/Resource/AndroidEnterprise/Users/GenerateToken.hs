@@ -22,9 +22,9 @@
 --
 -- Generates a token (activation code) to allow this user to configure
 -- their work account in the Android Setup Wizard. Revokes any previously
--- generated token.
+-- generated token. This call only works with Google managed accounts.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.generateToken@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.generateToken@.
 module Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type UsersGenerateTokenResource =
 
 -- | Generates a token (activation code) to allow this user to configure
 -- their work account in the Android Setup Wizard. Revokes any previously
--- generated token.
+-- generated token. This call only works with Google managed accounts.
 --
 -- /See:/ 'usersGenerateToken' smart constructor.
 data UsersGenerateToken = UsersGenerateToken

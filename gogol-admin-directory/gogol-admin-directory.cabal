@@ -87,6 +87,12 @@ library
         , Network.Google.Resource.Directory.OrgUnits.Patch
         , Network.Google.Resource.Directory.OrgUnits.Update
         , Network.Google.Resource.Directory.Privileges.List
+        , Network.Google.Resource.Directory.Resources.Calendars.Delete
+        , Network.Google.Resource.Directory.Resources.Calendars.Get
+        , Network.Google.Resource.Directory.Resources.Calendars.Insert
+        , Network.Google.Resource.Directory.Resources.Calendars.List
+        , Network.Google.Resource.Directory.Resources.Calendars.Patch
+        , Network.Google.Resource.Directory.Resources.Calendars.Update
         , Network.Google.Resource.Directory.RoleAssignments.Delete
         , Network.Google.Resource.Directory.RoleAssignments.Get
         , Network.Google.Resource.Directory.RoleAssignments.Insert

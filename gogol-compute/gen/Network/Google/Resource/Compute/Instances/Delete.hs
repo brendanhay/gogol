@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified Instance resource. For more information, see
--- Shutting down an instance.
+-- Stopping or Deleting an Instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.delete@.
 module Network.Google.Resource.Compute.Instances.Delete
@@ -56,7 +56,7 @@ type InstancesDeleteResource =
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Instance resource. For more information, see
--- Shutting down an instance.
+-- Stopping or Deleting an Instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
 data InstancesDelete = InstancesDelete

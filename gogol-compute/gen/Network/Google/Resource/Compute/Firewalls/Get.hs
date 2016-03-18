@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified firewall resource.
+-- Returns the specified firewall.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.get@.
 module Network.Google.Resource.Compute.Firewalls.Get
@@ -52,7 +52,7 @@ type FirewallsGetResource =
                  Capture "firewall" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Firewall
 
--- | Returns the specified firewall resource.
+-- | Returns the specified firewall.
 --
 -- /See:/ 'firewallsGet' smart constructor.
 data FirewallsGet = FirewallsGet
@@ -82,7 +82,7 @@ fgProject :: Lens' FirewallsGet Text
 fgProject
   = lens _fgProject (\ s a -> s{_fgProject = a})
 
--- | Name of the firewall resource to return.
+-- | Name of the firewall rule to return.
 fgFirewall :: Lens' FirewallsGet Text
 fgFirewall
   = lens _fgFirewall (\ s a -> s{_fgFirewall = a})

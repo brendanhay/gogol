@@ -188,11 +188,14 @@ instance ToJSON OperationSchema where
 
 -- | A variant represents a change in DNA sequence relative to a reference
 -- sequence. For example, a variant could represent a SNP or an insertion.
--- Variants belong to a variant set. Each of the calls on a variant
--- represent a determination of genotype with respect to that variant. For
--- example, a call might assign probability of 0.32 to the occurrence of a
--- SNP named rs1234 in a sample named NA12345. A call belongs to a call
--- set, which contains related calls typically from one sample.
+-- Variants belong to a variant set. For more genomics resource
+-- definitions, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Each of the calls on a variant represent a determination of genotype
+-- with respect to that variant. For example, a call might assign
+-- probability of 0.32 to the occurrence of a SNP named rs1234 in a sample
+-- named NA12345. A call belongs to a call set, which contains related
+-- calls typically from one sample.
 --
 -- /See:/ 'variant' smart constructor.
 data Variant = Variant
@@ -535,7 +538,9 @@ instance FromJSON CancelOperationRequest where
 instance ToJSON CancelOperationRequest where
         toJSON = const emptyObject
 
--- | A Dataset is a collection of genomic data.
+-- | A Dataset is a collection of genomic data. For more genomics resource
+-- definitions, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSet' smart constructor.
 data DataSet = DataSet
@@ -605,7 +610,24 @@ instance ToJSON DataSet where
 -- reference sequence, in addition to metadata about the fragment (the
 -- molecule of DNA sequenced) and the read (the bases which were read by
 -- the sequencer). A read is equivalent to a line in a SAM file. A read
--- belongs to exactly one read group and exactly one read group set. ###
+-- belongs to exactly one read group and exactly one read group set. For
+-- more genomics resource definitions, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- ### Reverse-stranded reads Mapped reads (reads having a non-null
+-- \`alignment\`) can be aligned to either the forward or the reverse
+-- strand of their associated reference. Strandedness of a mapped read is
+-- encoded by \`alignment.position.reverseStrand\`. If we consider the
+-- reference to be a forward-stranded coordinate space of \`[0,
+-- reference.length)\` with \`0\` as the left-most position and
+-- \`reference.length\` as the right-most position, reads are always
+-- aligned left to right. That is, \`alignment.position.position\` always
+-- refers to the left-most reference coordinate and \`alignment.cigar\`
+-- describes the alignment of this read to the reference from left to
+-- right. All per-base fields such as \`alignedSequence\` and
+-- \`alignedQuality\` share this same left-to-right orientation; this is
+-- true of reads which are aligned to either strand. For reverse-stranded
+-- reads, this means that \`alignedSequence\` is the reverse complement of
+-- the bases that were originally reported by the sequencing machine. ###
 -- Generating a reference-aligned sequence string When interacting with
 -- mapped reads, it\'s often useful to produce a string representing the
 -- local alignment of the read to reference. The following pseudocode
@@ -715,14 +737,14 @@ rFragmentLength
       (\ s a -> s{_rFragmentLength = a})
       . mapping _Coerce
 
--- | The fragment is a PCR or optical duplicate (SAM flag 0x400)
+-- | The fragment is a PCR or optical duplicate (SAM flag 0x400).
 rDuplicateFragment :: Lens' Read' (Maybe Bool)
 rDuplicateFragment
   = lens _rDuplicateFragment
       (\ s a -> s{_rDuplicateFragment = a})
 
--- | The ID of the read group set this read belongs to. (Every read must
--- belong to exactly one read group set.)
+-- | The ID of the read group set this read belongs to. A read belongs to
+-- exactly one read group set.
 rReadGroupSetId :: Lens' Read' (Maybe Text)
 rReadGroupSetId
   = lens _rReadGroupSetId
@@ -736,14 +758,15 @@ rNextMatePosition
   = lens _rNextMatePosition
       (\ s a -> s{_rNextMatePosition = a})
 
--- | SAM flag 0x200
+-- | Whether this read did not pass filters, such as platform or vendor
+-- quality controls (SAM flag 0x200).
 rFailedVendorQualityChecks :: Lens' Read' (Maybe Bool)
 rFailedVendorQualityChecks
   = lens _rFailedVendorQualityChecks
       (\ s a -> s{_rFailedVendorQualityChecks = a})
 
--- | The linear alignment for this alignment record. This field will be null
--- if the read is unmapped.
+-- | The linear alignment for this alignment record. This field is null for
+-- unmapped reads.
 rAlignment :: Lens' Read' (Maybe LinearAlignment)
 rAlignment
   = lens _rAlignment (\ s a -> s{_rAlignment = a})
@@ -776,8 +799,9 @@ rSecondaryAlignment
   = lens _rSecondaryAlignment
       (\ s a -> s{_rSecondaryAlignment = a})
 
--- | The ID of the read group this read belongs to. (Every read must belong
--- to exactly one read group.)
+-- | The ID of the read group this read belongs to. A read belongs to exactly
+-- one read group. This is a server-generated ID which is distinct from
+-- SAM\'s RG tag (for that value, see ReadGroup.name).
 rReadGroupId :: Lens' Read' (Maybe Text)
 rReadGroupId
   = lens _rReadGroupId (\ s a -> s{_rReadGroupId = a})
@@ -799,19 +823,19 @@ rSupplementaryAlignment
       (\ s a -> s{_rSupplementaryAlignment = a})
 
 -- | The bases of the read sequence contained in this alignment record,
--- *without CIGAR operations applied*. \`alignedSequence\` and
--- \`alignedQuality\` may be shorter than the full read sequence and
--- quality. This will occur if the alignment is part of a chimeric
--- alignment, or if the read was trimmed. When this occurs, the CIGAR for
--- this read will begin\/end with a hard clip operator that will indicate
--- the length of the excised sequence.
+-- **without CIGAR operations applied** (equivalent to SEQ in SAM).
+-- \`alignedSequence\` and \`alignedQuality\` may be shorter than the full
+-- read sequence and quality. This will occur if the alignment is part of a
+-- chimeric alignment, or if the read was trimmed. When this occurs, the
+-- CIGAR for this read will begin\/end with a hard clip operator that will
+-- indicate the length of the excised sequence.
 rAlignedSequence :: Lens' Read' (Maybe Text)
 rAlignedSequence
   = lens _rAlignedSequence
       (\ s a -> s{_rAlignedSequence = a})
 
 -- | The orientation and the distance between reads from the fragment are
--- consistent with the sequencing protocol (SAM flag 0x2)
+-- consistent with the sequencing protocol (SAM flag 0x2).
 rProperPlacement :: Lens' Read' (Maybe Bool)
 rProperPlacement
   = lens _rProperPlacement
@@ -829,12 +853,13 @@ rReadNumber
   = lens _rReadNumber (\ s a -> s{_rReadNumber = a}) .
       mapping _Coerce
 
--- | The quality of the read sequence contained in this alignment record.
--- \`alignedSequence\` and \`alignedQuality\` may be shorter than the full
--- read sequence and quality. This will occur if the alignment is part of a
--- chimeric alignment, or if the read was trimmed. When this occurs, the
--- CIGAR for this read will begin\/end with a hard clip operator that will
--- indicate the length of the excised sequence.
+-- | The quality of the read sequence contained in this alignment record
+-- (equivalent to QUAL in SAM). \`alignedSequence\` and \`alignedQuality\`
+-- may be shorter than the full read sequence and quality. This will occur
+-- if the alignment is part of a chimeric alignment, or if the read was
+-- trimmed. When this occurs, the CIGAR for this read will begin\/end with
+-- a hard clip operator that will indicate the length of the excised
+-- sequence.
 rAlignedQuality :: Lens' Read' [Int32]
 rAlignedQuality
   = lens _rAlignedQuality
@@ -1009,6 +1034,56 @@ instance ToJSON VariantCall where
                   ("genotype" .=) <$> _vcGenotype,
                   ("info" .=) <$> _vcInfo])
 
+--
+-- /See:/ 'mergeVariantsRequest' smart constructor.
+data MergeVariantsRequest = MergeVariantsRequest
+    { _mvrVariants     :: !(Maybe [Variant])
+    , _mvrVariantSetId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MergeVariantsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mvrVariants'
+--
+-- * 'mvrVariantSetId'
+mergeVariantsRequest
+    :: MergeVariantsRequest
+mergeVariantsRequest =
+    MergeVariantsRequest
+    { _mvrVariants = Nothing
+    , _mvrVariantSetId = Nothing
+    }
+
+-- | The variants to be merged with existing variants.
+mvrVariants :: Lens' MergeVariantsRequest [Variant]
+mvrVariants
+  = lens _mvrVariants (\ s a -> s{_mvrVariants = a}) .
+      _Default
+      . _Coerce
+
+-- | The destination variant set.
+mvrVariantSetId :: Lens' MergeVariantsRequest (Maybe Text)
+mvrVariantSetId
+  = lens _mvrVariantSetId
+      (\ s a -> s{_mvrVariantSetId = a})
+
+instance FromJSON MergeVariantsRequest where
+        parseJSON
+          = withObject "MergeVariantsRequest"
+              (\ o ->
+                 MergeVariantsRequest <$>
+                   (o .:? "variants" .!= mempty) <*>
+                     (o .:? "variantSetId"))
+
+instance ToJSON MergeVariantsRequest where
+        toJSON MergeVariantsRequest{..}
+          = object
+              (catMaybes
+                 [("variants" .=) <$> _mvrVariants,
+                  ("variantSetId" .=) <$> _mvrVariantSetId])
+
 -- | A read group is all the data that\'s processed the same way by the
 -- sequencer.
 --
@@ -1065,8 +1140,7 @@ readGroup =
     , _reaInfo = Nothing
     }
 
--- | The reference set the reads in this read group are aligned to. Required
--- if there are any read alignments.
+-- | The reference set the reads in this read group are aligned to.
 reaReferenceSetId :: Lens' ReadGroup (Maybe Text)
 reaReferenceSetId
   = lens _reaReferenceSetId
@@ -1093,20 +1167,18 @@ reaExperiment
 reaName :: Lens' ReadGroup (Maybe Text)
 reaName = lens _reaName (\ s a -> s{_reaName = a})
 
--- | The ID of the dataset this read group belongs to.
+-- | The dataset to which this read group belongs.
 reaDataSetId :: Lens' ReadGroup (Maybe Text)
 reaDataSetId
   = lens _reaDataSetId (\ s a -> s{_reaDataSetId = a})
 
 -- | The server-generated read group ID, unique for all read groups. Note:
--- This is different than the \`\'RG ID\` field in the SAM spec. For that
--- value, see the \`name\` field.
+-- This is different than the \'RG ID field in the SAM spec. For that
+-- value, see name.
 reaId :: Lens' ReadGroup (Maybe Text)
 reaId = lens _reaId (\ s a -> s{_reaId = a})
 
--- | The sample this read group\'s data was generated from. Note: This is not
--- an actual ID within this repository, but rather an identifier for a
--- sample which may be meaningful to some external system.
+-- | A client-supplied sample identifier for the reads in this read group.
 reaSampleId :: Lens' ReadGroup (Maybe Text)
 reaSampleId
   = lens _reaSampleId (\ s a -> s{_reaSampleId = a})
@@ -1281,8 +1353,8 @@ searchReferenceSetsRequest =
     , _srsrPageSize = Nothing
     }
 
--- | If present, return references for which the \`md5checksum\` matches. See
--- \`ReferenceSet.md5checksum\` for details.
+-- | If present, return reference sets for which the md5checksum matches
+-- exactly.
 srsrMD5checksums :: Lens' SearchReferenceSetsRequest [Text]
 srsrMD5checksums
   = lens _srsrMD5checksums
@@ -1290,11 +1362,9 @@ srsrMD5checksums
       . _Default
       . _Coerce
 
--- | If present, return references for which the accession matches any of
--- these strings. Best to give a version number, for example
--- \`GCF_000001405.26\`. If only the main accession number is given then
--- all records with that main accession will be returned, whichever
--- version. Note that different versions will have different sequences.
+-- | If present, return reference sets for which a prefix of any of
+-- sourceAccessions match any of these strings. Accession numbers typically
+-- have a main number and a version, for example \`NC_000001.11\`.
 srsrAccessions :: Lens' SearchReferenceSetsRequest [Text]
 srsrAccessions
   = lens _srsrAccessions
@@ -1317,7 +1387,8 @@ srsrAssemblyId
   = lens _srsrAssemblyId
       (\ s a -> s{_srsrAssemblyId = a})
 
--- | Specifies the maximum number of results to return in a single page.
+-- | The maximum number of results to return in a single page. If
+-- unspecified, defaults to 1024. The maximum value is 4096.
 srsrPageSize :: Lens' SearchReferenceSetsRequest (Maybe Int32)
 srsrPageSize
   = lens _srsrPageSize (\ s a -> s{_srsrPageSize = a})
@@ -1524,7 +1595,9 @@ instance ToJSON VariantSetMetadata where
                   ("info" .=) <$> _vsmInfo])
 
 -- | A call set is a collection of variant calls, typically for one sample.
--- It belongs to a variant set.
+-- It belongs to a variant set. For more genomics resource definitions, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSet' smart constructor.
 data CallSet = CallSet
@@ -1722,8 +1795,8 @@ srgsrPageToken
   = lens _srgsrPageToken
       (\ s a -> s{_srgsrPageToken = a})
 
--- | Specifies number of results to return in a single page. If unspecified,
--- it will default to 256. The maximum value is 1024.
+-- | The maximum number of results to return in a single page. If
+-- unspecified, defaults to 256. The maximum value is 1024.
 srgsrPageSize :: Lens' SearchReadGroupSetsRequest (Maybe Int32)
 srgsrPageSize
   = lens _srgsrPageSize
@@ -1751,7 +1824,9 @@ instance ToJSON SearchReadGroupSetsRequest where
 -- | A reference is a canonical assembled DNA sequence, intended to act as a
 -- reference coordinate space for other genomic annotations. A single
 -- reference might represent the human chromosome 1 or mitochandrial DNA,
--- for instance. A reference belongs to one or more reference sets.
+-- for instance. A reference belongs to one or more reference sets. For
+-- more genomics resource definitions, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'reference' smart constructor.
 data Reference = Reference
@@ -1821,8 +1896,8 @@ refMD5checksum
 refName :: Lens' Reference (Maybe Text)
 refName = lens _refName (\ s a -> s{_refName = a})
 
--- | ID from http:\/\/www.ncbi.nlm.nih.gov\/taxonomy (e.g. 9606->human) if
--- not specified by the containing reference set.
+-- | ID from http:\/\/www.ncbi.nlm.nih.gov\/taxonomy. For example, 9606 for
+-- human.
 refNcbiTaxonId :: Lens' Reference (Maybe Int32)
 refNcbiTaxonId
   = lens _refNcbiTaxonId
@@ -1833,8 +1908,8 @@ refNcbiTaxonId
 refId :: Lens' Reference (Maybe Text)
 refId = lens _refId (\ s a -> s{_refId = a})
 
--- | The URI from which the sequence was obtained. Specifies a FASTA format
--- file\/string with one name, sequence pair.
+-- | The URI from which the sequence was obtained. Typically specifies a
+-- FASTA format file.
 refSourceURI :: Lens' Reference (Maybe Text)
 refSourceURI
   = lens _refSourceURI (\ s a -> s{_refSourceURI = a})
@@ -1933,6 +2008,42 @@ instance ToJSON ReadGroupInfo where
         toJSON = toJSON . _rgiAddtional
 
 --
+-- /See:/ 'streamVariantsResponse' smart constructor.
+newtype StreamVariantsResponse = StreamVariantsResponse
+    { _svrVariants :: Maybe [Variant]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StreamVariantsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'svrVariants'
+streamVariantsResponse
+    :: StreamVariantsResponse
+streamVariantsResponse =
+    StreamVariantsResponse
+    { _svrVariants = Nothing
+    }
+
+svrVariants :: Lens' StreamVariantsResponse [Variant]
+svrVariants
+  = lens _svrVariants (\ s a -> s{_svrVariants = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StreamVariantsResponse where
+        parseJSON
+          = withObject "StreamVariantsResponse"
+              (\ o ->
+                 StreamVariantsResponse <$>
+                   (o .:? "variants" .!= mempty))
+
+instance ToJSON StreamVariantsResponse where
+        toJSON StreamVariantsResponse{..}
+          = object
+              (catMaybes [("variants" .=) <$> _svrVariants])
+
+--
 -- /See:/ 'statusDetailsItem' smart constructor.
 newtype StatusDetailsItem = StatusDetailsItem
     { _sdiAddtional :: HashMap Text JSONValue
@@ -1964,6 +2075,43 @@ instance FromJSON StatusDetailsItem where
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
+
+--
+-- /See:/ 'streamReadsResponse' smart constructor.
+newtype StreamReadsResponse = StreamReadsResponse
+    { _srrAlignments :: Maybe [Read']
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StreamReadsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'srrAlignments'
+streamReadsResponse
+    :: StreamReadsResponse
+streamReadsResponse =
+    StreamReadsResponse
+    { _srrAlignments = Nothing
+    }
+
+srrAlignments :: Lens' StreamReadsResponse [Read']
+srrAlignments
+  = lens _srrAlignments
+      (\ s a -> s{_srrAlignments = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON StreamReadsResponse where
+        parseJSON
+          = withObject "StreamReadsResponse"
+              (\ o ->
+                 StreamReadsResponse <$>
+                   (o .:? "alignments" .!= mempty))
+
+instance ToJSON StreamReadsResponse where
+        toJSON StreamReadsResponse{..}
+          = object
+              (catMaybes [("alignments" .=) <$> _srrAlignments])
 
 -- | The call set search response.
 --
@@ -2116,7 +2264,8 @@ srrReadGroupIds
       . _Coerce
 
 -- | The reference sequence name, for example \`chr1\`, \`1\`, or \`chrX\`.
--- If set to *, only unmapped reads are returned.
+-- If set to \`*\`, only unmapped reads are returned. If unspecified, all
+-- reads (mapped and unmapped) are returned.
 srrReferenceName :: Lens' SearchReadsRequest (Maybe Text)
 srrReferenceName
   = lens _srrReferenceName
@@ -2136,8 +2285,8 @@ srrPageToken :: Lens' SearchReadsRequest (Maybe Text)
 srrPageToken
   = lens _srrPageToken (\ s a -> s{_srrPageToken = a})
 
--- | Specifies number of results to return in a single page. If unspecified,
--- it will default to 256. The maximum value is 2048.
+-- | The maximum number of results to return in a single page. If
+-- unspecified, defaults to 256. The maximum value is 2048.
 srrPageSize :: Lens' SearchReadsRequest (Maybe Int32)
 srrPageSize
   = lens _srrPageSize (\ s a -> s{_srrPageSize = a}) .
@@ -2281,13 +2430,13 @@ experiment =
     }
 
 -- | The instrument model used as part of this experiment. This maps to
--- sequencing technology in BAM.
+-- sequencing technology in the SAM spec.
 eInstrumentModel :: Lens' Experiment (Maybe Text)
 eInstrumentModel
   = lens _eInstrumentModel
       (\ s a -> s{_eInstrumentModel = a})
 
--- | The platform unit used as part of this experiment e.g.
+-- | The platform unit used as part of this experiment, for example
 -- flowcell-barcode.lane for Illumina or slide for SOLiD. Corresponds to
 -- the \'RG PU field in the SAM spec.
 ePlatformUnit :: Lens' Experiment (Maybe Text)
@@ -2301,9 +2450,10 @@ eSequencingCenter
   = lens _eSequencingCenter
       (\ s a -> s{_eSequencingCenter = a})
 
--- | The library used as part of this experiment. Note: This is not an actual
--- ID within this repository, but rather an identifier for a library which
--- may be meaningful to some external system.
+-- | A client-supplied library identifier; a library is a collection of DNA
+-- fragments which have been prepared for sequencing from a sample. This
+-- field is important for quality control as error or bias can be
+-- introduced during sample preparation.
 eLibraryId :: Lens' Experiment (Maybe Text)
 eLibraryId
   = lens _eLibraryId (\ s a -> s{_eLibraryId = a})
@@ -2370,7 +2520,8 @@ svsrPageToken
   = lens _svsrPageToken
       (\ s a -> s{_svsrPageToken = a})
 
--- | The maximum number of variant sets to return in a request.
+-- | The maximum number of results to return in a single page. If
+-- unspecified, defaults to 1024.
 svsrPageSize :: Lens' SearchVariantSetsRequest (Maybe Int32)
 svsrPageSize
   = lens _svsrPageSize (\ s a -> s{_svsrPageSize = a})
@@ -2397,29 +2548,29 @@ instance ToJSON SearchVariantSetsRequest where
 --
 -- /See:/ 'searchVariantsResponse' smart constructor.
 data SearchVariantsResponse = SearchVariantsResponse
-    { _svrVariants      :: !(Maybe [Variant])
-    , _svrNextPageToken :: !(Maybe Text)
+    { _sVariants      :: !(Maybe [Variant])
+    , _sNextPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchVariantsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'svrVariants'
+-- * 'sVariants'
 --
--- * 'svrNextPageToken'
+-- * 'sNextPageToken'
 searchVariantsResponse
     :: SearchVariantsResponse
 searchVariantsResponse =
     SearchVariantsResponse
-    { _svrVariants = Nothing
-    , _svrNextPageToken = Nothing
+    { _sVariants = Nothing
+    , _sNextPageToken = Nothing
     }
 
 -- | The list of matching Variants.
-svrVariants :: Lens' SearchVariantsResponse [Variant]
-svrVariants
-  = lens _svrVariants (\ s a -> s{_svrVariants = a}) .
+sVariants :: Lens' SearchVariantsResponse [Variant]
+sVariants
+  = lens _sVariants (\ s a -> s{_sVariants = a}) .
       _Default
       . _Coerce
 
@@ -2427,10 +2578,10 @@ svrVariants
 -- Provide this value in a subsequent request to return the next page of
 -- results. This field will be empty if there aren\'t any additional
 -- results.
-svrNextPageToken :: Lens' SearchVariantsResponse (Maybe Text)
-svrNextPageToken
-  = lens _svrNextPageToken
-      (\ s a -> s{_svrNextPageToken = a})
+sNextPageToken :: Lens' SearchVariantsResponse (Maybe Text)
+sNextPageToken
+  = lens _sNextPageToken
+      (\ s a -> s{_sNextPageToken = a})
 
 instance FromJSON SearchVariantsResponse where
         parseJSON
@@ -2444,8 +2595,137 @@ instance ToJSON SearchVariantsResponse where
         toJSON SearchVariantsResponse{..}
           = object
               (catMaybes
-                 [("variants" .=) <$> _svrVariants,
-                  ("nextPageToken" .=) <$> _svrNextPageToken])
+                 [("variants" .=) <$> _sVariants,
+                  ("nextPageToken" .=) <$> _sNextPageToken])
+
+-- | The stream reads request.
+--
+-- /See:/ 'streamReadsRequest' smart constructor.
+data StreamReadsRequest = StreamReadsRequest
+    { _sShard          :: !(Maybe (Textual Int32))
+    , _sReadGroupSetId :: !(Maybe Text)
+    , _sTotalShards    :: !(Maybe (Textual Int32))
+    , _sStart          :: !(Maybe (Textual Int64))
+    , _sReferenceName  :: !(Maybe Text)
+    , _sEnd            :: !(Maybe (Textual Int64))
+    , _sProjectId      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StreamReadsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sShard'
+--
+-- * 'sReadGroupSetId'
+--
+-- * 'sTotalShards'
+--
+-- * 'sStart'
+--
+-- * 'sReferenceName'
+--
+-- * 'sEnd'
+--
+-- * 'sProjectId'
+streamReadsRequest
+    :: StreamReadsRequest
+streamReadsRequest =
+    StreamReadsRequest
+    { _sShard = Nothing
+    , _sReadGroupSetId = Nothing
+    , _sTotalShards = Nothing
+    , _sStart = Nothing
+    , _sReferenceName = Nothing
+    , _sEnd = Nothing
+    , _sProjectId = Nothing
+    }
+
+-- | Restricts results to a shard containing approximately \`1\/totalShards\`
+-- of the normal response payload for this query. Results from a sharded
+-- request are disjoint from those returned by all queries which differ
+-- only in their shard parameter. A shard may yield 0 results; this is
+-- especially likely for large values of \`totalShards\`. Valid values are
+-- \`[0, totalShards)\`.
+sShard :: Lens' StreamReadsRequest (Maybe Int32)
+sShard
+  = lens _sShard (\ s a -> s{_sShard = a}) .
+      mapping _Coerce
+
+-- | The ID of the read group set from which to stream reads.
+sReadGroupSetId :: Lens' StreamReadsRequest (Maybe Text)
+sReadGroupSetId
+  = lens _sReadGroupSetId
+      (\ s a -> s{_sReadGroupSetId = a})
+
+-- | Specifying \`totalShards\` causes a disjoint subset of the normal
+-- response payload to be returned for each query with a unique \`shard\`
+-- parameter specified. A best effort is made to yield equally sized
+-- shards. Sharding can be used to distribute processing amongst workers,
+-- where each worker is assigned a unique \`shard\` number and all workers
+-- specify the same \`totalShards\` number. The union of reads returned for
+-- all sharded queries \`[0, totalShards)\` is equal to those returned by a
+-- single unsharded query. Queries for different values of \`totalShards\`
+-- with common divisors will share shard boundaries. For example, streaming
+-- \`shard\` 2 of 5 \`totalShards\` yields the same results as streaming
+-- \`shard\`s 4 and 5 of 10 \`totalShards\`. This property can be leveraged
+-- for adaptive retries.
+sTotalShards :: Lens' StreamReadsRequest (Maybe Int32)
+sTotalShards
+  = lens _sTotalShards (\ s a -> s{_sTotalShards = a})
+      . mapping _Coerce
+
+-- | The start position of the range on the reference, 0-based inclusive. If
+-- specified, \`referenceName\` must also be specified.
+sStart :: Lens' StreamReadsRequest (Maybe Int64)
+sStart
+  = lens _sStart (\ s a -> s{_sStart = a}) .
+      mapping _Coerce
+
+-- | The reference sequence name, for example \`chr1\`, \`1\`, or \`chrX\`.
+-- If set to *, only unmapped reads are returned.
+sReferenceName :: Lens' StreamReadsRequest (Maybe Text)
+sReferenceName
+  = lens _sReferenceName
+      (\ s a -> s{_sReferenceName = a})
+
+-- | The end position of the range on the reference, 0-based exclusive. If
+-- specified, \`referenceName\` must also be specified.
+sEnd :: Lens' StreamReadsRequest (Maybe Int64)
+sEnd
+  = lens _sEnd (\ s a -> s{_sEnd = a}) .
+      mapping _Coerce
+
+-- | The Google Developers Console project ID or number which will be billed
+-- for this access. The caller must have WRITE access to this project.
+-- Required.
+sProjectId :: Lens' StreamReadsRequest (Maybe Text)
+sProjectId
+  = lens _sProjectId (\ s a -> s{_sProjectId = a})
+
+instance FromJSON StreamReadsRequest where
+        parseJSON
+          = withObject "StreamReadsRequest"
+              (\ o ->
+                 StreamReadsRequest <$>
+                   (o .:? "shard") <*> (o .:? "readGroupSetId") <*>
+                     (o .:? "totalShards")
+                     <*> (o .:? "start")
+                     <*> (o .:? "referenceName")
+                     <*> (o .:? "end")
+                     <*> (o .:? "projectId"))
+
+instance ToJSON StreamReadsRequest where
+        toJSON StreamReadsRequest{..}
+          = object
+              (catMaybes
+                 [("shard" .=) <$> _sShard,
+                  ("readGroupSetId" .=) <$> _sReadGroupSetId,
+                  ("totalShards" .=) <$> _sTotalShards,
+                  ("start" .=) <$> _sStart,
+                  ("referenceName" .=) <$> _sReferenceName,
+                  ("end" .=) <$> _sEnd,
+                  ("projectId" .=) <$> _sProjectId])
 
 -- | The call set search request.
 --
@@ -2500,8 +2780,8 @@ scsrVariantSetIds
       . _Default
       . _Coerce
 
--- | The maximum number of call sets to return. If unspecified, defaults to
--- 1000.
+-- | The maximum number of results to return in a single page. If
+-- unspecified, defaults to 1024.
 scsrPageSize :: Lens' SearchCallSetsRequest (Maybe Int32)
 scsrPageSize
   = lens _scsrPageSize (\ s a -> s{_scsrPageSize = a})
@@ -2529,42 +2809,43 @@ instance ToJSON SearchCallSetsRequest where
 --
 -- /See:/ 'searchReadsResponse' smart constructor.
 data SearchReadsResponse = SearchReadsResponse
-    { _sNextPageToken :: !(Maybe Text)
-    , _sAlignments    :: !(Maybe [Read'])
+    { _seaNextPageToken :: !(Maybe Text)
+    , _seaAlignments    :: !(Maybe [Read'])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReadsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sNextPageToken'
+-- * 'seaNextPageToken'
 --
--- * 'sAlignments'
+-- * 'seaAlignments'
 searchReadsResponse
     :: SearchReadsResponse
 searchReadsResponse =
     SearchReadsResponse
-    { _sNextPageToken = Nothing
-    , _sAlignments = Nothing
+    { _seaNextPageToken = Nothing
+    , _seaAlignments = Nothing
     }
 
 -- | The continuation token, which is used to page through large result sets.
 -- Provide this value in a subsequent request to return the next page of
 -- results. This field will be empty if there aren\'t any additional
 -- results.
-sNextPageToken :: Lens' SearchReadsResponse (Maybe Text)
-sNextPageToken
-  = lens _sNextPageToken
-      (\ s a -> s{_sNextPageToken = a})
+seaNextPageToken :: Lens' SearchReadsResponse (Maybe Text)
+seaNextPageToken
+  = lens _seaNextPageToken
+      (\ s a -> s{_seaNextPageToken = a})
 
 -- | The list of matching alignments sorted by mapped genomic coordinate, if
 -- any, ascending in position within the same reference. Unmapped reads,
 -- which have no position, are returned contiguously and are sorted in
 -- ascending lexicographic order by fragment name.
-sAlignments :: Lens' SearchReadsResponse [Read']
-sAlignments
-  = lens _sAlignments (\ s a -> s{_sAlignments = a}) .
-      _Default
+seaAlignments :: Lens' SearchReadsResponse [Read']
+seaAlignments
+  = lens _seaAlignments
+      (\ s a -> s{_seaAlignments = a})
+      . _Default
       . _Coerce
 
 instance FromJSON SearchReadsResponse where
@@ -2579,8 +2860,8 @@ instance ToJSON SearchReadsResponse where
         toJSON SearchReadsResponse{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _sNextPageToken,
-                  ("alignments" .=) <$> _sAlignments])
+                 [("nextPageToken" .=) <$> _seaNextPageToken,
+                  ("alignments" .=) <$> _seaAlignments])
 
 --
 -- /See:/ 'program' smart constructor.
@@ -2622,7 +2903,8 @@ pPrevProgramId
   = lens _pPrevProgramId
       (\ s a -> s{_pPrevProgramId = a})
 
--- | The name of the program.
+-- | The display name of the program. This is typically the colloquial name
+-- of the tool used, for example \'bwa\' or \'picard\'.
 pName :: Lens' Program (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
@@ -2699,8 +2981,7 @@ sReferenceSetId
   = lens _sReferenceSetId
       (\ s a -> s{_sReferenceSetId = a})
 
--- | If present, return references for which the \`md5checksum\` matches. See
--- \`Reference.md5checksum\` for construction details.
+-- | If present, return references for which the md5checksum matches exactly.
 sMD5checksums :: Lens' SearchReferencesRequest [Text]
 sMD5checksums
   = lens _sMD5checksums
@@ -2708,11 +2989,9 @@ sMD5checksums
       . _Default
       . _Coerce
 
--- | If present, return references for which the accession matches this
--- string. Best to give a version number, for example \`GCF_000001405.26\`.
--- If only the main accession number is given then all records with that
--- main accession will be returned, whichever version. Note that different
--- versions will have different sequences.
+-- | If present, return references for which a prefix of any of
+-- sourceAccessions match any of these strings. Accession numbers typically
+-- have a main number and a version, for example \`GCF_000001405.26\`.
 sAccessions :: Lens' SearchReferencesRequest [Text]
 sAccessions
   = lens _sAccessions (\ s a -> s{_sAccessions = a}) .
@@ -2726,7 +3005,8 @@ sPageToken :: Lens' SearchReferencesRequest (Maybe Text)
 sPageToken
   = lens _sPageToken (\ s a -> s{_sPageToken = a})
 
--- | Specifies the maximum number of results to return in a single page.
+-- | The maximum number of results to return in a single page. If
+-- unspecified, defaults to 1024. The maximum value is 4096.
 sPageSize :: Lens' SearchReferencesRequest (Maybe Int32)
 sPageSize
   = lens _sPageSize (\ s a -> s{_sPageSize = a}) .
@@ -2872,7 +3152,9 @@ instance ToJSON Range where
 -- collections of reads produced by a sequencer. A read group set typically
 -- models reads corresponding to one sample, sequenced one way, and aligned
 -- one way. * A read group set belongs to one dataset. * A read group
--- belongs to one read group set. * A read belongs to one read group.
+-- belongs to one read group set. * A read belongs to one read group. For
+-- more genomics resource definitions, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'readGroupSet' smart constructor.
 data ReadGroupSet = ReadGroupSet
@@ -2915,7 +3197,7 @@ readGroupSet =
     , _rgsFilename = Nothing
     }
 
--- | The reference set the reads in this read group set are aligned to.
+-- | The reference set to which the reads in this read group set are aligned.
 rgsReferenceSetId :: Lens' ReadGroupSet (Maybe Text)
 rgsReferenceSetId
   = lens _rgsReferenceSetId
@@ -2926,7 +3208,7 @@ rgsReferenceSetId
 rgsName :: Lens' ReadGroupSet (Maybe Text)
 rgsName = lens _rgsName (\ s a -> s{_rgsName = a})
 
--- | The dataset ID.
+-- | The dataset to which this read group set belongs.
 rgsDataSetId :: Lens' ReadGroupSet (Maybe Text)
 rgsDataSetId
   = lens _rgsDataSetId (\ s a -> s{_rgsDataSetId = a})
@@ -3023,7 +3305,7 @@ ergsrExportURI
       (\ s a -> s{_ergsrExportURI = a})
 
 -- | Required. The Google Developers Console project ID that owns this
--- export.
+-- export. The caller must have WRITE access to this project.
 ergsrProjectId :: Lens' ExportReadGroupSetRequest (Maybe Text)
 ergsrProjectId
   = lens _ergsrProjectId
@@ -3065,7 +3347,7 @@ importVariantsResponse =
     { _ivrCallSetIds = Nothing
     }
 
--- | IDs of the call sets that were created.
+-- | IDs of the call sets created during the import.
 ivrCallSetIds :: Lens' ImportVariantsResponse [Text]
 ivrCallSetIds
   = lens _ivrCallSetIds
@@ -3277,7 +3559,9 @@ laCigar
       . _Coerce
 
 -- | The mapping quality of this alignment. Represents how likely the read
--- maps to this position as opposed to other locations.
+-- maps to this position as opposed to other locations. Specifically, this
+-- is -10 log10 Pr(mapping position is wrong), rounded to the nearest
+-- integer.
 laMAppingQuality :: Lens' LinearAlignment (Maybe Int32)
 laMAppingQuality
   = lens _laMAppingQuality
@@ -3308,11 +3592,14 @@ instance ToJSON LinearAlignment where
 
 -- | A variant set is a collection of call sets and variants. It contains
 -- summary statistics of those contents. A variant set belongs to a
--- dataset.
+-- dataset. For more genomics resource definitions, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSet' smart constructor.
 data VariantSet = VariantSet
-    { _vsDataSetId       :: !(Maybe Text)
+    { _vsReferenceSetId  :: !(Maybe Text)
+    , _vsDataSetId       :: !(Maybe Text)
     , _vsReferenceBounds :: !(Maybe [ReferenceBound])
     , _vsMetadata        :: !(Maybe [VariantSetMetadata])
     , _vsId              :: !(Maybe Text)
@@ -3321,6 +3608,8 @@ data VariantSet = VariantSet
 -- | Creates a value of 'VariantSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsReferenceSetId'
 --
 -- * 'vsDataSetId'
 --
@@ -3333,11 +3622,26 @@ variantSet
     :: VariantSet
 variantSet =
     VariantSet
-    { _vsDataSetId = Nothing
+    { _vsReferenceSetId = Nothing
+    , _vsDataSetId = Nothing
     , _vsReferenceBounds = Nothing
     , _vsMetadata = Nothing
     , _vsId = Nothing
     }
+
+-- | The reference set to which the variant set is mapped. The reference set
+-- describes the alignment provenance of the variant set, while the
+-- \`referenceBounds\` describe the shape of the actual variant data. The
+-- reference set\'s reference names are a superset of those found in the
+-- \`referenceBounds\`. For example, given a variant set that is mapped to
+-- the GRCh38 reference set and contains a single variant on reference
+-- \'X\', \`referenceBounds\` would contain only an entry for \'X\', while
+-- the associated reference set enumerates all possible references: \'1\',
+-- \'2\', \'X\', \'Y\', \'MT\', etc.
+vsReferenceSetId :: Lens' VariantSet (Maybe Text)
+vsReferenceSetId
+  = lens _vsReferenceSetId
+      (\ s a -> s{_vsReferenceSetId = a})
 
 -- | The dataset to which this variant set belongs.
 vsDataSetId :: Lens' VariantSet (Maybe Text)
@@ -3369,7 +3673,7 @@ instance FromJSON VariantSet where
           = withObject "VariantSet"
               (\ o ->
                  VariantSet <$>
-                   (o .:? "datasetId") <*>
+                   (o .:? "referenceSetId") <*> (o .:? "datasetId") <*>
                      (o .:? "referenceBounds" .!= mempty)
                      <*> (o .:? "metadata" .!= mempty)
                      <*> (o .:? "id"))
@@ -3378,7 +3682,8 @@ instance ToJSON VariantSet where
         toJSON VariantSet{..}
           = object
               (catMaybes
-                 [("datasetId" .=) <$> _vsDataSetId,
+                 [("referenceSetId" .=) <$> _vsReferenceSetId,
+                  ("datasetId" .=) <$> _vsDataSetId,
                   ("referenceBounds" .=) <$> _vsReferenceBounds,
                   ("metadata" .=) <$> _vsMetadata,
                   ("id" .=) <$> _vsId])
@@ -3718,7 +4023,7 @@ instance ToJSON CigarUnit where
 -- \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\"] }, {
+-- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\", ] }, {
 -- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
 -- ] } For a description of IAM and its features, see the [IAM developer\'s
 -- guide](https:\/\/cloud.google.com\/iam).
@@ -3748,7 +4053,15 @@ policy =
     , _polBindings = Nothing
     }
 
--- | Can be used to perform a read-modify-write.
+-- | \`etag\` is used for optimistic concurrency control as a way to help
+-- prevent simultaneous updates of a policy from overwriting each other. It
+-- is strongly suggested that systems make use of the \`etag\` in the
+-- read-modify-write cycle to perform policy updates in order to avoid race
+-- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
+-- and systems are expected to put that etag in the request to
+-- \`setIamPolicy\` to ensure that their change will be applied to the same
+-- version of the policy. If no \`etag\` is provided in the call to
+-- \`setIamPolicy\`, then the existing policy is overwritten blindly.
 polEtag :: Lens' Policy (Maybe Word8)
 polEtag
   = lens _polEtag (\ s a -> s{_polEtag = a}) .
@@ -4091,9 +4404,10 @@ svrEnd
   = lens _svrEnd (\ s a -> s{_svrEnd = a}) .
       mapping _Coerce
 
--- | The maximum number of calls to return. However, at least one variant
--- will always be returned, even if it has more calls than this limit. If
--- unspecified, defaults to 5000.
+-- | The maximum number of calls to return in a single page. Note that this
+-- limit may be exceeded in the event that a matching variant contains more
+-- calls than the requested maximum. If unspecified, defaults to 5000. The
+-- maximum value is 10000.
 svrMaxCalls :: Lens' SearchVariantsRequest (Maybe Int32)
 svrMaxCalls
   = lens _svrMaxCalls (\ s a -> s{_svrMaxCalls = a}) .
@@ -4122,8 +4436,8 @@ svrVariantSetIds
       . _Default
       . _Coerce
 
--- | The maximum number of variants to return. If unspecified, defaults to
--- 5000.
+-- | The maximum number of variants to return in a single page. If
+-- unspecified, defaults to 5000. The maximum value is 10000.
 svrPageSize :: Lens' SearchVariantsRequest (Maybe Int32)
 svrPageSize
   = lens _svrPageSize (\ s a -> s{_svrPageSize = a}) .
@@ -4298,6 +4612,109 @@ instance ToJSON OperationEvent where
           = object
               (catMaybes [("description" .=) <$> _oeDescription])
 
+-- | The stream variants request.
+--
+-- /See:/ 'streamVariantsRequest' smart constructor.
+data StreamVariantsRequest = StreamVariantsRequest
+    { _strVariantSetId  :: !(Maybe Text)
+    , _strStart         :: !(Maybe (Textual Int64))
+    , _strCallSetIds    :: !(Maybe [Text])
+    , _strReferenceName :: !(Maybe Text)
+    , _strEnd           :: !(Maybe (Textual Int64))
+    , _strProjectId     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StreamVariantsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'strVariantSetId'
+--
+-- * 'strStart'
+--
+-- * 'strCallSetIds'
+--
+-- * 'strReferenceName'
+--
+-- * 'strEnd'
+--
+-- * 'strProjectId'
+streamVariantsRequest
+    :: StreamVariantsRequest
+streamVariantsRequest =
+    StreamVariantsRequest
+    { _strVariantSetId = Nothing
+    , _strStart = Nothing
+    , _strCallSetIds = Nothing
+    , _strReferenceName = Nothing
+    , _strEnd = Nothing
+    , _strProjectId = Nothing
+    }
+
+-- | The variant set ID from which to stream variants.
+strVariantSetId :: Lens' StreamVariantsRequest (Maybe Text)
+strVariantSetId
+  = lens _strVariantSetId
+      (\ s a -> s{_strVariantSetId = a})
+
+-- | The beginning of the window (0-based, inclusive) for which overlapping
+-- variants should be returned.
+strStart :: Lens' StreamVariantsRequest (Maybe Int64)
+strStart
+  = lens _strStart (\ s a -> s{_strStart = a}) .
+      mapping _Coerce
+
+-- | Only return variant calls which belong to call sets with these IDs.
+-- Leaving this blank returns all variant calls.
+strCallSetIds :: Lens' StreamVariantsRequest [Text]
+strCallSetIds
+  = lens _strCallSetIds
+      (\ s a -> s{_strCallSetIds = a})
+      . _Default
+      . _Coerce
+
+-- | Required. Only return variants in this reference sequence.
+strReferenceName :: Lens' StreamVariantsRequest (Maybe Text)
+strReferenceName
+  = lens _strReferenceName
+      (\ s a -> s{_strReferenceName = a})
+
+-- | The end of the window (0-based, exclusive) for which overlapping
+-- variants should be returned.
+strEnd :: Lens' StreamVariantsRequest (Maybe Int64)
+strEnd
+  = lens _strEnd (\ s a -> s{_strEnd = a}) .
+      mapping _Coerce
+
+-- | The Google Developers Console project ID or number which will be billed
+-- for this access. The caller must have WRITE access to this project.
+-- Required.
+strProjectId :: Lens' StreamVariantsRequest (Maybe Text)
+strProjectId
+  = lens _strProjectId (\ s a -> s{_strProjectId = a})
+
+instance FromJSON StreamVariantsRequest where
+        parseJSON
+          = withObject "StreamVariantsRequest"
+              (\ o ->
+                 StreamVariantsRequest <$>
+                   (o .:? "variantSetId") <*> (o .:? "start") <*>
+                     (o .:? "callSetIds" .!= mempty)
+                     <*> (o .:? "referenceName")
+                     <*> (o .:? "end")
+                     <*> (o .:? "projectId"))
+
+instance ToJSON StreamVariantsRequest where
+        toJSON StreamVariantsRequest{..}
+          = object
+              (catMaybes
+                 [("variantSetId" .=) <$> _strVariantSetId,
+                  ("start" .=) <$> _strStart,
+                  ("callSetIds" .=) <$> _strCallSetIds,
+                  ("referenceName" .=) <$> _strReferenceName,
+                  ("end" .=) <$> _strEnd,
+                  ("projectId" .=) <$> _strProjectId])
+
 -- | ReferenceBound records an upper bound for the starting coordinate of
 -- variants in a particular reference.
 --
@@ -4329,7 +4746,7 @@ rbUpperBound
   = lens _rbUpperBound (\ s a -> s{_rbUpperBound = a})
       . mapping _Coerce
 
--- | The reference the bound is associate with.
+-- | The name of the reference associated with this reference bound.
 rbReferenceName :: Lens' ReferenceBound (Maybe Text)
 rbReferenceName
   = lens _rbReferenceName
@@ -4393,7 +4810,7 @@ binding =
     }
 
 -- | Specifies the identities requesting access for a Cloud Platform
--- resource. \`members\` can have the following formats: * \`allUsers\`: A
+-- resource. \`members\` can have the following values: * \`allUsers\`: A
 -- special identifier that represents anyone who is on the internet; with
 -- or without a Google account. * \`allAuthenticatedUsers\`: A special
 -- identifier that represents anyone who is authenticated with a Google
@@ -4590,7 +5007,9 @@ instance ToJSON ReadGroupSetInfo where
 -- reference assembly for a species, such as \`GRCh38\` which is
 -- representative of the human genome. A reference set defines a common
 -- coordinate space for comparing reference-aligned experimental data. A
--- reference set contains 1 or more references.
+-- reference set contains 1 or more references. For more genomics resource
+-- definitions, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'referenceSet' smart constructor.
 data ReferenceSet = ReferenceSet
@@ -4665,11 +5084,12 @@ rsMD5checksum
   = lens _rsMD5checksum
       (\ s a -> s{_rsMD5checksum = a})
 
--- | ID from http:\/\/www.ncbi.nlm.nih.gov\/taxonomy (e.g. 9606->human)
--- indicating the species which this assembly is intended to model. Note
--- that contained references may specify a different \`ncbiTaxonId\`, as
--- assemblies may contain reference sequences which do not belong to the
--- modeled species, e.g. EBV in a human reference genome.
+-- | ID from http:\/\/www.ncbi.nlm.nih.gov\/taxonomy (for example, 9606 for
+-- human) indicating the species which this reference set is intended to
+-- model. Note that contained references may specify a different
+-- \`ncbiTaxonId\`, as assemblies may contain reference sequences which do
+-- not belong to the modeled species, for example EBV in a human reference
+-- genome.
 rsNcbiTaxonId :: Lens' ReferenceSet (Maybe Int32)
 rsNcbiTaxonId
   = lens _rsNcbiTaxonId

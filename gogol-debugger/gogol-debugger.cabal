@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Lets you examine the stack and variables of your running application
-    without stopping or slowing it down.
+    Examines the call stack and variables of a running application without
+    stopping or slowing it down.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

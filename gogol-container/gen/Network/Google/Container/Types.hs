@@ -110,7 +110,7 @@ import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Container Engine API. This contains the host and root path used as a starting point for constructing service requests.
-containerService :: Service
+containerService :: ServiceConfig
 containerService
   = defaultService (ServiceId "container:v1")
       "container.googleapis.com"

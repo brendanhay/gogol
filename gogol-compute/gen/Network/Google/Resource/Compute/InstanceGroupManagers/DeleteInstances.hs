@@ -106,7 +106,7 @@ instanceGroupManagersDeleteInstances pIgmdiProject_ pIgmdiInstanceGroupManager_ 
     , _igmdiPayload = pIgmdiPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmdiProject :: Lens' InstanceGroupManagersDeleteInstances Text
 igmdiProject
   = lens _igmdiProject (\ s a -> s{_igmdiProject = a})

@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesPatch' request conforms to.
 type AccountUserProFilesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>

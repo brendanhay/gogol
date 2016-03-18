@@ -80,7 +80,7 @@ sslCertificatesInsert pSciProject_ pSciPayload_ =
     , _sciPayload = pSciPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 sciProject :: Lens' SSLCertificatesInsert Text
 sciProject
   = lens _sciProject (\ s a -> s{_sciProject = a})

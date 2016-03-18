@@ -18,55 +18,6 @@ module Network.Google.Plus.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The collection of moments to list.
-data MomentsListCollection
-    = Vault
-      -- ^ @vault@
-      -- All moments created by the requesting application for the authenticated
-      -- user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MomentsListCollection
-
-instance FromText MomentsListCollection where
-    fromText = \case
-        "vault" -> Just Vault
-        _ -> Nothing
-
-instance ToText MomentsListCollection where
-    toText = \case
-        Vault -> "vault"
-
-instance FromJSON MomentsListCollection where
-    parseJSON = parseJSONText "MomentsListCollection"
-
-instance ToJSON MomentsListCollection where
-    toJSON = toJSONText
-
--- | The collection to which to write moments.
-data MomentsInsertCollection
-    = MICVault
-      -- ^ @vault@
-      -- The default collection for writing new moments.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MomentsInsertCollection
-
-instance FromText MomentsInsertCollection where
-    fromText = \case
-        "vault" -> Just MICVault
-        _ -> Nothing
-
-instance ToText MomentsInsertCollection where
-    toText = \case
-        MICVault -> "vault"
-
-instance FromJSON MomentsInsertCollection where
-    parseJSON = parseJSONText "MomentsInsertCollection"
-
-instance ToJSON MomentsInsertCollection where
-    toJSON = toJSONText
-
 -- | The collection of people to list.
 data PeopleListByActivityCollection
     = Plusoners

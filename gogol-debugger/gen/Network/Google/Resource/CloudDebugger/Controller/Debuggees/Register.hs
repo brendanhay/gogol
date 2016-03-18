@@ -20,13 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Registers the debuggee with the controller. All agents should call this
--- API with the same request content to get back the same stable
--- \'debuggee_id\'. Agents should call this API again whenever
--- ListActiveBreakpoints or UpdateActiveBreakpoint return the error
--- google.rpc.Code.NOT_FOUND. It allows the server to disable the agent or
--- recover from any registration loss. If the debuggee is disabled server,
--- the response will have is_disabled\' set to true.
+-- Registers the debuggee with the controller service. All agents attached
+-- to the same application should call this method with the same request
+-- content to get back the same stable \`debuggee_id\`. Agents should call
+-- this method again whenever \`google.rpc.Code.NOT_FOUND\` is returned
+-- from any controller method. This allows the controller service to
+-- disable the agent or recover from any data loss. If the debuggee is
+-- disabled by the server, the response will have \`is_disabled\` set to
+-- \`true\`.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.register@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
@@ -70,13 +71,14 @@ type ControllerDebuggeesRegisterResource =
                              ReqBody '[JSON] RegisterDebuggeeRequest :>
                                Post '[JSON] RegisterDebuggeeResponse
 
--- | Registers the debuggee with the controller. All agents should call this
--- API with the same request content to get back the same stable
--- \'debuggee_id\'. Agents should call this API again whenever
--- ListActiveBreakpoints or UpdateActiveBreakpoint return the error
--- google.rpc.Code.NOT_FOUND. It allows the server to disable the agent or
--- recover from any registration loss. If the debuggee is disabled server,
--- the response will have is_disabled\' set to true.
+-- | Registers the debuggee with the controller service. All agents attached
+-- to the same application should call this method with the same request
+-- content to get back the same stable \`debuggee_id\`. Agents should call
+-- this method again whenever \`google.rpc.Code.NOT_FOUND\` is returned
+-- from any controller method. This allows the controller service to
+-- disable the agent or recover from any data loss. If the debuggee is
+-- disabled by the server, the response will have \`is_disabled\` set to
+-- \`true\`.
 --
 -- /See:/ 'controllerDebuggeesRegister' smart constructor.
 data ControllerDebuggeesRegister = ControllerDebuggeesRegister

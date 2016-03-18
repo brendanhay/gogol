@@ -40,6 +40,7 @@ module Network.Google.Resource.Analytics.Data.Ga.Get
     , dggEndDate
     , dggOutput
     , dggSort
+    , dggIncludeEmptyRows
     , dggDimensions
     , dggStartIndex
     , dggMaxResults
@@ -65,29 +66,31 @@ type DataGaGetResource =
                        QueryParam "filters" Text :>
                          QueryParam "output" DataGaGetOutput :>
                            QueryParam "sort" Text :>
-                             QueryParam "dimensions" Text :>
-                               QueryParam "start-index" (Textual Int32) :>
-                                 QueryParam "max-results" (Textual Int32) :>
-                                   QueryParam "segment" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] GaData
+                             QueryParam "include-empty-rows" Bool :>
+                               QueryParam "dimensions" Text :>
+                                 QueryParam "start-index" (Textual Int32) :>
+                                   QueryParam "max-results" (Textual Int32) :>
+                                     QueryParam "segment" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] GaData
 
 -- | Returns Analytics data for a view (profile).
 --
 -- /See:/ 'dataGaGet' smart constructor.
 data DataGaGet = DataGaGet
-    { _dggMetrics       :: !Text
-    , _dggSamplingLevel :: !(Maybe DataGaGetSamplingLevel)
-    , _dggFilters       :: !(Maybe Text)
-    , _dggIds           :: !Text
-    , _dggEndDate       :: !Text
-    , _dggOutput        :: !(Maybe DataGaGetOutput)
-    , _dggSort          :: !(Maybe Text)
-    , _dggDimensions    :: !(Maybe Text)
-    , _dggStartIndex    :: !(Maybe (Textual Int32))
-    , _dggMaxResults    :: !(Maybe (Textual Int32))
-    , _dggSegment       :: !(Maybe Text)
-    , _dggStartDate     :: !Text
+    { _dggMetrics          :: !Text
+    , _dggSamplingLevel    :: !(Maybe DataGaGetSamplingLevel)
+    , _dggFilters          :: !(Maybe Text)
+    , _dggIds              :: !Text
+    , _dggEndDate          :: !Text
+    , _dggOutput           :: !(Maybe DataGaGetOutput)
+    , _dggSort             :: !(Maybe Text)
+    , _dggIncludeEmptyRows :: !(Maybe Bool)
+    , _dggDimensions       :: !(Maybe Text)
+    , _dggStartIndex       :: !(Maybe (Textual Int32))
+    , _dggMaxResults       :: !(Maybe (Textual Int32))
+    , _dggSegment          :: !(Maybe Text)
+    , _dggStartDate        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataGaGet' with the minimum fields required to make a request.
@@ -107,6 +110,8 @@ data DataGaGet = DataGaGet
 -- * 'dggOutput'
 --
 -- * 'dggSort'
+--
+-- * 'dggIncludeEmptyRows'
 --
 -- * 'dggDimensions'
 --
@@ -132,6 +137,7 @@ dataGaGet pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
     , _dggEndDate = pDggEndDate_
     , _dggOutput = Nothing
     , _dggSort = Nothing
+    , _dggIncludeEmptyRows = Nothing
     , _dggDimensions = Nothing
     , _dggStartIndex = Nothing
     , _dggMaxResults = Nothing
@@ -179,6 +185,13 @@ dggOutput
 dggSort :: Lens' DataGaGet (Maybe Text)
 dggSort = lens _dggSort (\ s a -> s{_dggSort = a})
 
+-- | The response will include empty rows if this parameter is set to true,
+-- the default is true
+dggIncludeEmptyRows :: Lens' DataGaGet (Maybe Bool)
+dggIncludeEmptyRows
+  = lens _dggIncludeEmptyRows
+      (\ s a -> s{_dggIncludeEmptyRows = a})
+
 -- | A comma-separated list of Analytics dimensions. E.g.,
 -- \'ga:browser,ga:city\'.
 dggDimensions :: Lens' DataGaGet (Maybe Text)
@@ -223,6 +236,7 @@ instance GoogleRequest DataGaGet where
               _dggFilters
               _dggOutput
               _dggSort
+              _dggIncludeEmptyRows
               _dggDimensions
               _dggStartIndex
               _dggMaxResults

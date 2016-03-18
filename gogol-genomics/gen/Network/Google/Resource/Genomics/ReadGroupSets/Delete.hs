@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a read group set.
+-- Deletes a read group set. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.delete@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Delete
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type ReadGroupSetsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a read group set.
+-- | Deletes a read group set. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'readGroupSetsDelete' smart constructor.
 data ReadGroupSetsDelete = ReadGroupSetsDelete

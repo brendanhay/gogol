@@ -85,10 +85,18 @@ data ParametersType
       -- ^ @TYPE_NIELSEN_ONLINE_GLOBAL_MARKET@
     | TypeNielsenSite
       -- ^ @TYPE_NIELSEN_SITE@
+    | TypeNotSupported
+      -- ^ @TYPE_NOT_SUPPORTED@
     | TypeOrderId
       -- ^ @TYPE_ORDER_ID@
     | TypePageCategory
       -- ^ @TYPE_PAGE_CATEGORY@
+    | TypePetraNielsenAudienceProFile
+      -- ^ @TYPE_PETRA_NIELSEN_AUDIENCE_PROFILE@
+    | TypePetraNielsenDailyReachBuild
+      -- ^ @TYPE_PETRA_NIELSEN_DAILY_REACH_BUILD@
+    | TypePetraNielsenOnlineGlobalMarket
+      -- ^ @TYPE_PETRA_NIELSEN_ONLINE_GLOBAL_MARKET@
     | TypePixelLoad
       -- ^ @TYPE_PIXEL_LOAD@
     | TypeReachAndFrequency
@@ -126,8 +134,12 @@ instance FromText ParametersType where
         "TYPE_NIELSEN_DAILY_REACH_BUILD" -> Just TypeNielsenDailyReachBuild
         "TYPE_NIELSEN_ONLINE_GLOBAL_MARKET" -> Just TypeNielsenOnlineGlobalMarket
         "TYPE_NIELSEN_SITE" -> Just TypeNielsenSite
+        "TYPE_NOT_SUPPORTED" -> Just TypeNotSupported
         "TYPE_ORDER_ID" -> Just TypeOrderId
         "TYPE_PAGE_CATEGORY" -> Just TypePageCategory
+        "TYPE_PETRA_NIELSEN_AUDIENCE_PROFILE" -> Just TypePetraNielsenAudienceProFile
+        "TYPE_PETRA_NIELSEN_DAILY_REACH_BUILD" -> Just TypePetraNielsenDailyReachBuild
+        "TYPE_PETRA_NIELSEN_ONLINE_GLOBAL_MARKET" -> Just TypePetraNielsenOnlineGlobalMarket
         "TYPE_PIXEL_LOAD" -> Just TypePixelLoad
         "TYPE_REACH_AND_FREQUENCY" -> Just TypeReachAndFrequency
         "TYPE_THIRD_PARTY_DATA_PROVIDER" -> Just TypeThirdPartyDataProvider
@@ -156,8 +168,12 @@ instance ToText ParametersType where
         TypeNielsenDailyReachBuild -> "TYPE_NIELSEN_DAILY_REACH_BUILD"
         TypeNielsenOnlineGlobalMarket -> "TYPE_NIELSEN_ONLINE_GLOBAL_MARKET"
         TypeNielsenSite -> "TYPE_NIELSEN_SITE"
+        TypeNotSupported -> "TYPE_NOT_SUPPORTED"
         TypeOrderId -> "TYPE_ORDER_ID"
         TypePageCategory -> "TYPE_PAGE_CATEGORY"
+        TypePetraNielsenAudienceProFile -> "TYPE_PETRA_NIELSEN_AUDIENCE_PROFILE"
+        TypePetraNielsenDailyReachBuild -> "TYPE_PETRA_NIELSEN_DAILY_REACH_BUILD"
+        TypePetraNielsenOnlineGlobalMarket -> "TYPE_PETRA_NIELSEN_ONLINE_GLOBAL_MARKET"
         TypePixelLoad -> "TYPE_PIXEL_LOAD"
         TypeReachAndFrequency -> "TYPE_REACH_AND_FREQUENCY"
         TypeThirdPartyDataProvider -> "TYPE_THIRD_PARTY_DATA_PROVIDER"
@@ -1542,6 +1558,8 @@ data FilterPairType
       -- ^ @FILTER_DATE@
     | FilterDayOfWeek
       -- ^ @FILTER_DAY_OF_WEEK@
+    | FilterDfpOrderId
+      -- ^ @FILTER_DFP_ORDER_ID@
     | FilterDma
       -- ^ @FILTER_DMA@
     | FilterExchangeId
@@ -1616,8 +1634,22 @@ data FilterPairType
       -- ^ @FILTER_TARGETED_USER_LIST@
     | FilterTimeOfDay
       -- ^ @FILTER_TIME_OF_DAY@
+    | FilterTrueviewAdGroupAdId
+      -- ^ @FILTER_TRUEVIEW_AD_GROUP_AD_ID@
+    | FilterTrueviewAdGroupId
+      -- ^ @FILTER_TRUEVIEW_AD_GROUP_ID@
+    | FilterTrueviewAge
+      -- ^ @FILTER_TRUEVIEW_AGE@
     | FilterTrueviewConversionType
       -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
+    | FilterTrueviewGender
+      -- ^ @FILTER_TRUEVIEW_GENDER@
+    | FilterTrueviewInterest
+      -- ^ @FILTER_TRUEVIEW_INTEREST@
+    | FilterTrueviewParentalStatus
+      -- ^ @FILTER_TRUEVIEW_PARENTAL_STATUS@
+    | FilterTrueviewRemarketingList
+      -- ^ @FILTER_TRUEVIEW_REMARKETING_LIST@
     | FilterUnknown
       -- ^ @FILTER_UNKNOWN@
     | FilterUserList
@@ -1687,6 +1719,7 @@ instance FromText FilterPairType where
         "FILTER_DATA_PROVIDER" -> Just FilterDataProvider
         "FILTER_DATE" -> Just FilterDate
         "FILTER_DAY_OF_WEEK" -> Just FilterDayOfWeek
+        "FILTER_DFP_ORDER_ID" -> Just FilterDfpOrderId
         "FILTER_DMA" -> Just FilterDma
         "FILTER_EXCHANGE_ID" -> Just FilterExchangeId
         "FILTER_FLOODLIGHT_PIXEL_ID" -> Just FilterFloodlightPixelId
@@ -1724,7 +1757,14 @@ instance FromText FilterPairType where
         "FILTER_SITE_LANGUAGE" -> Just FilterSiteLanguage
         "FILTER_TARGETED_USER_LIST" -> Just FilterTargetedUserList
         "FILTER_TIME_OF_DAY" -> Just FilterTimeOfDay
+        "FILTER_TRUEVIEW_AD_GROUP_AD_ID" -> Just FilterTrueviewAdGroupAdId
+        "FILTER_TRUEVIEW_AD_GROUP_ID" -> Just FilterTrueviewAdGroupId
+        "FILTER_TRUEVIEW_AGE" -> Just FilterTrueviewAge
         "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Just FilterTrueviewConversionType
+        "FILTER_TRUEVIEW_GENDER" -> Just FilterTrueviewGender
+        "FILTER_TRUEVIEW_INTEREST" -> Just FilterTrueviewInterest
+        "FILTER_TRUEVIEW_PARENTAL_STATUS" -> Just FilterTrueviewParentalStatus
+        "FILTER_TRUEVIEW_REMARKETING_LIST" -> Just FilterTrueviewRemarketingList
         "FILTER_UNKNOWN" -> Just FilterUnknown
         "FILTER_USER_LIST" -> Just FilterUserList
         "FILTER_USER_LIST_FIRST_PARTY" -> Just FilterUserListFirstParty
@@ -1772,6 +1812,7 @@ instance ToText FilterPairType where
         FilterDataProvider -> "FILTER_DATA_PROVIDER"
         FilterDate -> "FILTER_DATE"
         FilterDayOfWeek -> "FILTER_DAY_OF_WEEK"
+        FilterDfpOrderId -> "FILTER_DFP_ORDER_ID"
         FilterDma -> "FILTER_DMA"
         FilterExchangeId -> "FILTER_EXCHANGE_ID"
         FilterFloodlightPixelId -> "FILTER_FLOODLIGHT_PIXEL_ID"
@@ -1809,7 +1850,14 @@ instance ToText FilterPairType where
         FilterSiteLanguage -> "FILTER_SITE_LANGUAGE"
         FilterTargetedUserList -> "FILTER_TARGETED_USER_LIST"
         FilterTimeOfDay -> "FILTER_TIME_OF_DAY"
+        FilterTrueviewAdGroupAdId -> "FILTER_TRUEVIEW_AD_GROUP_AD_ID"
+        FilterTrueviewAdGroupId -> "FILTER_TRUEVIEW_AD_GROUP_ID"
+        FilterTrueviewAge -> "FILTER_TRUEVIEW_AGE"
         FilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
+        FilterTrueviewGender -> "FILTER_TRUEVIEW_GENDER"
+        FilterTrueviewInterest -> "FILTER_TRUEVIEW_INTEREST"
+        FilterTrueviewParentalStatus -> "FILTER_TRUEVIEW_PARENTAL_STATUS"
+        FilterTrueviewRemarketingList -> "FILTER_TRUEVIEW_REMARKETING_LIST"
         FilterUnknown -> "FILTER_UNKNOWN"
         FilterUserList -> "FILTER_USER_LIST"
         FilterUserListFirstParty -> "FILTER_USER_LIST_FIRST_PARTY"
@@ -2006,6 +2054,8 @@ data ParametersGroupBysItem
       -- ^ @FILTER_DATE@
     | PGBIFilterDayOfWeek
       -- ^ @FILTER_DAY_OF_WEEK@
+    | PGBIFilterDfpOrderId
+      -- ^ @FILTER_DFP_ORDER_ID@
     | PGBIFilterDma
       -- ^ @FILTER_DMA@
     | PGBIFilterExchangeId
@@ -2080,8 +2130,22 @@ data ParametersGroupBysItem
       -- ^ @FILTER_TARGETED_USER_LIST@
     | PGBIFilterTimeOfDay
       -- ^ @FILTER_TIME_OF_DAY@
+    | PGBIFilterTrueviewAdGroupAdId
+      -- ^ @FILTER_TRUEVIEW_AD_GROUP_AD_ID@
+    | PGBIFilterTrueviewAdGroupId
+      -- ^ @FILTER_TRUEVIEW_AD_GROUP_ID@
+    | PGBIFilterTrueviewAge
+      -- ^ @FILTER_TRUEVIEW_AGE@
     | PGBIFilterTrueviewConversionType
       -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
+    | PGBIFilterTrueviewGender
+      -- ^ @FILTER_TRUEVIEW_GENDER@
+    | PGBIFilterTrueviewInterest
+      -- ^ @FILTER_TRUEVIEW_INTEREST@
+    | PGBIFilterTrueviewParentalStatus
+      -- ^ @FILTER_TRUEVIEW_PARENTAL_STATUS@
+    | PGBIFilterTrueviewRemarketingList
+      -- ^ @FILTER_TRUEVIEW_REMARKETING_LIST@
     | PGBIFilterUnknown
       -- ^ @FILTER_UNKNOWN@
     | PGBIFilterUserList
@@ -2151,6 +2215,7 @@ instance FromText ParametersGroupBysItem where
         "FILTER_DATA_PROVIDER" -> Just PGBIFilterDataProvider
         "FILTER_DATE" -> Just PGBIFilterDate
         "FILTER_DAY_OF_WEEK" -> Just PGBIFilterDayOfWeek
+        "FILTER_DFP_ORDER_ID" -> Just PGBIFilterDfpOrderId
         "FILTER_DMA" -> Just PGBIFilterDma
         "FILTER_EXCHANGE_ID" -> Just PGBIFilterExchangeId
         "FILTER_FLOODLIGHT_PIXEL_ID" -> Just PGBIFilterFloodlightPixelId
@@ -2188,7 +2253,14 @@ instance FromText ParametersGroupBysItem where
         "FILTER_SITE_LANGUAGE" -> Just PGBIFilterSiteLanguage
         "FILTER_TARGETED_USER_LIST" -> Just PGBIFilterTargetedUserList
         "FILTER_TIME_OF_DAY" -> Just PGBIFilterTimeOfDay
+        "FILTER_TRUEVIEW_AD_GROUP_AD_ID" -> Just PGBIFilterTrueviewAdGroupAdId
+        "FILTER_TRUEVIEW_AD_GROUP_ID" -> Just PGBIFilterTrueviewAdGroupId
+        "FILTER_TRUEVIEW_AGE" -> Just PGBIFilterTrueviewAge
         "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Just PGBIFilterTrueviewConversionType
+        "FILTER_TRUEVIEW_GENDER" -> Just PGBIFilterTrueviewGender
+        "FILTER_TRUEVIEW_INTEREST" -> Just PGBIFilterTrueviewInterest
+        "FILTER_TRUEVIEW_PARENTAL_STATUS" -> Just PGBIFilterTrueviewParentalStatus
+        "FILTER_TRUEVIEW_REMARKETING_LIST" -> Just PGBIFilterTrueviewRemarketingList
         "FILTER_UNKNOWN" -> Just PGBIFilterUnknown
         "FILTER_USER_LIST" -> Just PGBIFilterUserList
         "FILTER_USER_LIST_FIRST_PARTY" -> Just PGBIFilterUserListFirstParty
@@ -2236,6 +2308,7 @@ instance ToText ParametersGroupBysItem where
         PGBIFilterDataProvider -> "FILTER_DATA_PROVIDER"
         PGBIFilterDate -> "FILTER_DATE"
         PGBIFilterDayOfWeek -> "FILTER_DAY_OF_WEEK"
+        PGBIFilterDfpOrderId -> "FILTER_DFP_ORDER_ID"
         PGBIFilterDma -> "FILTER_DMA"
         PGBIFilterExchangeId -> "FILTER_EXCHANGE_ID"
         PGBIFilterFloodlightPixelId -> "FILTER_FLOODLIGHT_PIXEL_ID"
@@ -2273,7 +2346,14 @@ instance ToText ParametersGroupBysItem where
         PGBIFilterSiteLanguage -> "FILTER_SITE_LANGUAGE"
         PGBIFilterTargetedUserList -> "FILTER_TARGETED_USER_LIST"
         PGBIFilterTimeOfDay -> "FILTER_TIME_OF_DAY"
+        PGBIFilterTrueviewAdGroupAdId -> "FILTER_TRUEVIEW_AD_GROUP_AD_ID"
+        PGBIFilterTrueviewAdGroupId -> "FILTER_TRUEVIEW_AD_GROUP_ID"
+        PGBIFilterTrueviewAge -> "FILTER_TRUEVIEW_AGE"
         PGBIFilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
+        PGBIFilterTrueviewGender -> "FILTER_TRUEVIEW_GENDER"
+        PGBIFilterTrueviewInterest -> "FILTER_TRUEVIEW_INTEREST"
+        PGBIFilterTrueviewParentalStatus -> "FILTER_TRUEVIEW_PARENTAL_STATUS"
+        PGBIFilterTrueviewRemarketingList -> "FILTER_TRUEVIEW_REMARKETING_LIST"
         PGBIFilterUnknown -> "FILTER_UNKNOWN"
         PGBIFilterUserList -> "FILTER_USER_LIST"
         PGBIFilterUserListFirstParty -> "FILTER_USER_LIST_FIRST_PARTY"

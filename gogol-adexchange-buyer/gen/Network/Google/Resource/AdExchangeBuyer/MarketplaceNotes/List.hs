@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get all the notes associated with an order
+-- Get all the notes associated with a proposal
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacenotes.list@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
@@ -33,7 +33,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
     , MarketplaceNotesList
 
     -- * Request Lenses
-    , mnlOrderId
+    , mnlProposalId
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -44,41 +44,42 @@ import           Network.Google.Prelude
 type MarketplaceNotesListResource =
      "adexchangebuyer" :>
        "v1.4" :>
-         "marketplaceOrders" :>
-           Capture "orderId" Text :>
+         "proposals" :>
+           Capture "proposalId" Text :>
              "notes" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] GetOrderNotesResponse
 
--- | Get all the notes associated with an order
+-- | Get all the notes associated with a proposal
 --
 -- /See:/ 'marketplaceNotesList' smart constructor.
 newtype MarketplaceNotesList = MarketplaceNotesList
-    { _mnlOrderId :: Text
+    { _mnlProposalId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNotesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mnlOrderId'
+-- * 'mnlProposalId'
 marketplaceNotesList
-    :: Text -- ^ 'mnlOrderId'
+    :: Text -- ^ 'mnlProposalId'
     -> MarketplaceNotesList
-marketplaceNotesList pMnlOrderId_ =
+marketplaceNotesList pMnlProposalId_ =
     MarketplaceNotesList
-    { _mnlOrderId = pMnlOrderId_
+    { _mnlProposalId = pMnlProposalId_
     }
 
--- | The orderId to get notes for.
-mnlOrderId :: Lens' MarketplaceNotesList Text
-mnlOrderId
-  = lens _mnlOrderId (\ s a -> s{_mnlOrderId = a})
+-- | The proposalId to get notes for.
+mnlProposalId :: Lens' MarketplaceNotesList Text
+mnlProposalId
+  = lens _mnlProposalId
+      (\ s a -> s{_mnlProposalId = a})
 
 instance GoogleRequest MarketplaceNotesList where
         type Rs MarketplaceNotesList = GetOrderNotesResponse
         requestClient MarketplaceNotesList{..}
-          = go _mnlOrderId (Just AltJSON)
+          = go _mnlProposalId (Just AltJSON)
               adExchangeBuyerService
           where go
                   = buildClient

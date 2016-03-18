@@ -279,10 +279,11 @@ instance ToJSON Media where
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job
-    { _jName         :: !(Maybe Text)
-    , _jId           :: !(Maybe Text)
-    , _jReportTypeId :: !(Maybe Text)
-    , _jCreateTime   :: !(Maybe Text)
+    { _jName          :: !(Maybe Text)
+    , _jId            :: !(Maybe Text)
+    , _jSystemManaged :: !(Maybe Bool)
+    , _jReportTypeId  :: !(Maybe Text)
+    , _jCreateTime    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
@@ -293,6 +294,8 @@ data Job = Job
 --
 -- * 'jId'
 --
+-- * 'jSystemManaged'
+--
 -- * 'jReportTypeId'
 --
 -- * 'jCreateTime'
@@ -302,18 +305,25 @@ job =
     Job
     { _jName = Nothing
     , _jId = Nothing
+    , _jSystemManaged = Nothing
     , _jReportTypeId = Nothing
     , _jCreateTime = Nothing
     }
 
--- | The name of the job (max. 100 characters). TODO(lanthaler) Clarify what
--- this will actually be used for
+-- | The name of the job (max. 100 characters).
 jName :: Lens' Job (Maybe Text)
 jName = lens _jName (\ s a -> s{_jName = a})
 
 -- | The server-generated ID of the job (max. 40 characters).
 jId :: Lens' Job (Maybe Text)
 jId = lens _jId (\ s a -> s{_jId = a})
+
+-- | True if this a system-managed job that cannot be modified by the user;
+-- otherwise false.
+jSystemManaged :: Lens' Job (Maybe Bool)
+jSystemManaged
+  = lens _jSystemManaged
+      (\ s a -> s{_jSystemManaged = a})
 
 -- | The type of reports this job creates. Corresponds to the ID of a
 -- ReportType.
@@ -333,7 +343,8 @@ instance FromJSON Job where
               (\ o ->
                  Job <$>
                    (o .:? "name") <*> (o .:? "id") <*>
-                     (o .:? "reportTypeId")
+                     (o .:? "systemManaged")
+                     <*> (o .:? "reportTypeId")
                      <*> (o .:? "createTime"))
 
 instance ToJSON Job where
@@ -341,6 +352,7 @@ instance ToJSON Job where
           = object
               (catMaybes
                  [("name" .=) <$> _jName, ("id" .=) <$> _jId,
+                  ("systemManaged" .=) <$> _jSystemManaged,
                   ("reportTypeId" .=) <$> _jReportTypeId,
                   ("createTime" .=) <$> _jCreateTime])
 
@@ -400,8 +412,9 @@ instance ToJSON ListJobsResponse where
 --
 -- /See:/ 'reportType' smart constructor.
 data ReportType = ReportType
-    { _rtName :: !(Maybe Text)
-    , _rtId   :: !(Maybe Text)
+    { _rtName          :: !(Maybe Text)
+    , _rtId            :: !(Maybe Text)
+    , _rtSystemManaged :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportType' with the minimum fields required to make a request.
@@ -411,12 +424,15 @@ data ReportType = ReportType
 -- * 'rtName'
 --
 -- * 'rtId'
+--
+-- * 'rtSystemManaged'
 reportType
     :: ReportType
 reportType =
     ReportType
     { _rtName = Nothing
     , _rtId = Nothing
+    , _rtSystemManaged = Nothing
     }
 
 -- | The name of the report type (max. 100 characters).
@@ -427,14 +443,25 @@ rtName = lens _rtName (\ s a -> s{_rtName = a})
 rtId :: Lens' ReportType (Maybe Text)
 rtId = lens _rtId (\ s a -> s{_rtId = a})
 
+-- | True if this a system-managed report type; otherwise false. Reporting
+-- jobs for system-managed report types are created automatically and can
+-- thus not be used in the \`CreateJob\` method.
+rtSystemManaged :: Lens' ReportType (Maybe Bool)
+rtSystemManaged
+  = lens _rtSystemManaged
+      (\ s a -> s{_rtSystemManaged = a})
+
 instance FromJSON ReportType where
         parseJSON
           = withObject "ReportType"
               (\ o ->
-                 ReportType <$> (o .:? "name") <*> (o .:? "id"))
+                 ReportType <$>
+                   (o .:? "name") <*> (o .:? "id") <*>
+                     (o .:? "systemManaged"))
 
 instance ToJSON ReportType where
         toJSON ReportType{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _rtName, ("id" .=) <$> _rtId])
+                 [("name" .=) <$> _rtName, ("id" .=) <$> _rtId,
+                  ("systemManaged" .=) <$> _rtSystemManaged])

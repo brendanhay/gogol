@@ -54,10 +54,12 @@ library
         , Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
         , Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
         , Network.Google.Resource.AndroidEnterprise.Enterprises.Get
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
         , Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
         , Network.Google.Resource.AndroidEnterprise.Enterprises.List
         , Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
         , Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
+        , Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
         , Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
         , Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
         , Network.Google.Resource.AndroidEnterprise.Entitlements.Get
@@ -79,6 +81,18 @@ library
         , Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
         , Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
         , Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Delete
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Get
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Insert
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.List
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Patch
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Update
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Delete
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Get
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Insert
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.List
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Patch
+        , Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Update
         , Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
         , Network.Google.Resource.AndroidEnterprise.Users.Get
         , Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet

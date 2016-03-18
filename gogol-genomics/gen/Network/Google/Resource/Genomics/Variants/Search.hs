@@ -20,10 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a list of variants matching the criteria. Implements
+-- Gets a list of variants matching the criteria. For the definitions of
+-- variants and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchVariants](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L126).
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.search@.
 module Network.Google.Resource.Genomics.Variants.Search
     (
     -- * REST Resource
@@ -64,7 +67,10 @@ type VariantsSearchResource =
                            ReqBody '[JSON] SearchVariantsRequest :>
                              Post '[JSON] SearchVariantsResponse
 
--- | Gets a list of variants matching the criteria. Implements
+-- | Gets a list of variants matching the criteria. For the definitions of
+-- variants and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchVariants](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L126).
 --
 -- /See:/ 'variantsSearch' smart constructor.

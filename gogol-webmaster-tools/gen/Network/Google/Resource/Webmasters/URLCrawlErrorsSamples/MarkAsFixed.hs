@@ -23,7 +23,7 @@
 -- Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.markAsFixed@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.urlcrawlerrorssamples.markAsFixed@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
     (
     -- * REST Resource

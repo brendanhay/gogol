@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new variant.
+-- Creates a new variant. For the definitions of variants and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.create@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.create@.
 module Network.Google.Resource.Genomics.Variants.Create
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type VariantsCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Variant :> Post '[JSON] Variant
 
--- | Creates a new variant.
+-- | Creates a new variant. For the definitions of variants and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantsCreate' smart constructor.
 data VariantsCreate = VariantsCreate

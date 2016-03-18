@@ -81,8 +81,8 @@ ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | An auth token needed for inserting a customer for which domain already
--- exists. Can be generated at
--- https:\/\/www.google.com\/a\/cpanel\/\/TransferToken. Optional.
+-- exists. Can be generated at https:\/\/admin.google.com\/TransferToken.
+-- Optional.
 ciCustomerAuthToken :: Lens' CustomersInsert (Maybe Text)
 ciCustomerAuthToken
   = lens _ciCustomerAuthToken

@@ -18,9 +18,12 @@ module Network.Google.UserAccounts.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data OperationWarningsItemCode
-    = DeprecatedResourceUsed
+    = CleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | DeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -54,6 +57,7 @@ instance Hashable OperationWarningsItemCode
 
 instance FromText OperationWarningsItemCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just CleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just InjectedKernelsDeprecated
@@ -72,6 +76,7 @@ instance FromText OperationWarningsItemCode where
 
 instance ToText OperationWarningsItemCode where
     toText = \case
+        CleanupFailed -> "CLEANUP_FAILED"
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         InjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -93,8 +98,8 @@ instance FromJSON OperationWarningsItemCode where
 instance ToJSON OperationWarningsItemCode where
     toJSON = toJSONText
 
--- | [Output Only] Status of the operation. Can be one of the following:
--- PENDING, RUNNING, or DONE.
+-- | [Output Only] The status of the operation, which can be one of the
+-- following: PENDING, RUNNING, or DONE.
 data OperationStatus
     = Done
       -- ^ @DONE@

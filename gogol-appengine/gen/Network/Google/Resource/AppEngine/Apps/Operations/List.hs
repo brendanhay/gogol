@@ -26,7 +26,7 @@
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.operations.list@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.operations.list@.
 module Network.Google.Resource.AppEngine.Apps.Operations.List
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.operations.list@ method which the
 -- 'AppsOperationsList' request conforms to.
 type AppsOperationsListResource =
-     "v1beta4" :>
+     "v1beta5" :>
        "apps" :>
          Capture "appsId" Text :>
            "operations" :>

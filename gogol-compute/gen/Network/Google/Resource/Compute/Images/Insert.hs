@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an image resource in the specified project using the data
--- included in the request.
+-- Creates an image in the specified project using the data included in the
+-- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.insert@.
 module Network.Google.Resource.Compute.Images.Insert
@@ -53,8 +53,8 @@ type ImagesInsertResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Image :> Post '[JSON] Operation
 
--- | Creates an image resource in the specified project using the data
--- included in the request.
+-- | Creates an image in the specified project using the data included in the
+-- request.
 --
 -- /See:/ 'imagesInsert' smart constructor.
 data ImagesInsert = ImagesInsert

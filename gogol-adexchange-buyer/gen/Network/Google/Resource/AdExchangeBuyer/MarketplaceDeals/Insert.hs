@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Add new deals for the specified order
+-- Add new deals for the specified proposal
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacedeals.insert@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
@@ -34,7 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
 
     -- * Request Lenses
     , mdiPayload
-    , mdiOrderId
+    , mdiProposalId
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -45,20 +45,20 @@ import           Network.Google.Prelude
 type MarketplaceDealsInsertResource =
      "adexchangebuyer" :>
        "v1.4" :>
-         "marketplaceOrders" :>
-           Capture "orderId" Text :>
+         "proposals" :>
+           Capture "proposalId" Text :>
              "deals" :>
                "insert" :>
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AddOrderDealsRequest :>
                      Post '[JSON] AddOrderDealsResponse
 
--- | Add new deals for the specified order
+-- | Add new deals for the specified proposal
 --
 -- /See:/ 'marketplaceDealsInsert' smart constructor.
 data MarketplaceDealsInsert = MarketplaceDealsInsert
-    { _mdiPayload :: !AddOrderDealsRequest
-    , _mdiOrderId :: !Text
+    { _mdiPayload    :: !AddOrderDealsRequest
+    , _mdiProposalId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsInsert' with the minimum fields required to make a request.
@@ -67,15 +67,15 @@ data MarketplaceDealsInsert = MarketplaceDealsInsert
 --
 -- * 'mdiPayload'
 --
--- * 'mdiOrderId'
+-- * 'mdiProposalId'
 marketplaceDealsInsert
     :: AddOrderDealsRequest -- ^ 'mdiPayload'
-    -> Text -- ^ 'mdiOrderId'
+    -> Text -- ^ 'mdiProposalId'
     -> MarketplaceDealsInsert
-marketplaceDealsInsert pMdiPayload_ pMdiOrderId_ =
+marketplaceDealsInsert pMdiPayload_ pMdiProposalId_ =
     MarketplaceDealsInsert
     { _mdiPayload = pMdiPayload_
-    , _mdiOrderId = pMdiOrderId_
+    , _mdiProposalId = pMdiProposalId_
     }
 
 -- | Multipart request metadata.
@@ -83,16 +83,17 @@ mdiPayload :: Lens' MarketplaceDealsInsert AddOrderDealsRequest
 mdiPayload
   = lens _mdiPayload (\ s a -> s{_mdiPayload = a})
 
--- | OrderId for which deals need to be added.
-mdiOrderId :: Lens' MarketplaceDealsInsert Text
-mdiOrderId
-  = lens _mdiOrderId (\ s a -> s{_mdiOrderId = a})
+-- | proposalId for which deals need to be added.
+mdiProposalId :: Lens' MarketplaceDealsInsert Text
+mdiProposalId
+  = lens _mdiProposalId
+      (\ s a -> s{_mdiProposalId = a})
 
 instance GoogleRequest MarketplaceDealsInsert where
         type Rs MarketplaceDealsInsert =
              AddOrderDealsResponse
         requestClient MarketplaceDealsInsert{..}
-          = go _mdiOrderId (Just AltJSON) _mdiPayload
+          = go _mdiProposalId (Just AltJSON) _mdiPayload
               adExchangeBuyerService
           where go
                   = buildClient

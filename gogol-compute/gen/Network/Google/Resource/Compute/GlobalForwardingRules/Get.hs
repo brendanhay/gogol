@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified ForwardingRule resource.
+-- Returns the specified ForwardingRule resource. Get a list of available
+-- forwarding rules by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalForwardingRules.get@.
 module Network.Google.Resource.Compute.GlobalForwardingRules.Get
@@ -53,7 +54,8 @@ type GlobalForwardingRulesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ForwardingRule
 
--- | Returns the specified ForwardingRule resource.
+-- | Returns the specified ForwardingRule resource. Get a list of available
+-- forwarding rules by making a list() request.
 --
 -- /See:/ 'globalForwardingRulesGet' smart constructor.
 data GlobalForwardingRulesGet = GlobalForwardingRulesGet
@@ -78,7 +80,7 @@ globalForwardingRulesGet pGfrgProject_ pGfrgForwardingRule_ =
     , _gfrgForwardingRule = pGfrgForwardingRule_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 gfrgProject :: Lens' GlobalForwardingRulesGet Text
 gfrgProject
   = lens _gfrgProject (\ s a -> s{_gfrgProject = a})

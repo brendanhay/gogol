@@ -21,6 +21,14 @@ module Network.Google.AppEngine.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * NetworkUtilization
+    , NetworkUtilization
+    , networkUtilization
+    , nuTargetReceivedBytesPerSec
+    , nuTargetSentPacketsPerSec
+    , nuTargetReceivedPacketsPerSec
+    , nuTargetSentBytesPerSec
+
     -- * Status
     , Status
     , status
@@ -44,6 +52,12 @@ module Network.Google.AppEngine.Types
     , scriptHandler
     , shScriptPath
 
+    -- * ListServicesResponse
+    , ListServicesResponse
+    , listServicesResponse
+    , lsrNextPageToken
+    , lsrServices
+
     -- * URLMap
     , URLMap
     , urlMap
@@ -55,13 +69,20 @@ module Network.Google.AppEngine.Types
     , umAuthFailAction
     , umStaticFiles
     , umLogin
-    , umStaticDirectory
 
     -- * Library
     , Library
     , library
     , lName
     , lVersion
+
+    -- * DiskUtilization
+    , DiskUtilization
+    , diskUtilization
+    , duTargetWriteOpsPerSec
+    , duTargetReadOpsPerSec
+    , duTargetWriteBytesPerSec
+    , duTargetReadBytesPerSec
 
     -- * ListOperationsResponse
     , ListOperationsResponse
@@ -97,16 +118,27 @@ module Network.Google.AppEngine.Types
     -- * Application
     , Application
     , application
+    , aDefaultHostname
+    , aDefaultCookieExpiration
     , aLocation
+    , aAuthDomain
     , aCodeBucket
     , aName
     , aDispatchRules
+    , aDefaultBucket
     , aId
 
     -- * VersionBetaSettings
     , VersionBetaSettings
     , versionBetaSettings
     , vbsAddtional
+
+    -- * Service
+    , Service
+    , service
+    , sSplit
+    , sName
+    , sId
 
     -- * Operation
     , Operation
@@ -121,13 +153,8 @@ module Network.Google.AppEngine.Types
     , URLDispatchRule
     , urlDispatchRule
     , udrPath
+    , udrService
     , udrDomain
-    , udrModule
-
-    -- * StaticDirectoryHandlerHTTPHeaders
-    , StaticDirectoryHandlerHTTPHeaders
-    , staticDirectoryHandlerHTTPHeaders
-    , sdhhttphAddtional
 
     -- * ListVersionsResponse
     , ListVersionsResponse
@@ -145,21 +172,27 @@ module Network.Google.AppEngine.Types
     -- * AutomaticScaling
     , AutomaticScaling
     , automaticScaling
+    , asNetworkUtilization
     , asMaxTotalInstances
     , asMinIdleInstances
+    , asDiskUtilization
     , asMinPendingLatency
     , asCPUUtilization
     , asMaxIdleInstances
     , asMinTotalInstances
     , asMaxConcurrentRequests
     , asCoolDownPeriod
+    , asRequestUtilization
     , asMaxPendingLatency
 
-    -- * ListModulesResponse
-    , ListModulesResponse
-    , listModulesResponse
-    , lmrNextPageToken
-    , lmrModules
+    -- * OperationMetadataV1Beta5
+    , OperationMetadataV1Beta5
+    , operationMetadataV1Beta5
+    , omvbInsertTime
+    , omvbUser
+    , omvbMethod
+    , omvbEndTime
+    , omvbTarget
 
     -- * APIEndpointHandler
     , APIEndpointHandler
@@ -244,15 +277,9 @@ module Network.Google.AppEngine.Types
     , vId
     , vEnvVariables
     , vServingStatus
+    , vDiskUsageBytes
     , vLibraries
     , vDeployment
-
-    -- * Module
-    , Module
-    , module'
-    , mSplit
-    , mName
-    , mId
 
     -- * StaticFilesHandler
     , StaticFilesHandler
@@ -282,6 +309,12 @@ module Network.Google.AppEngine.Types
     , omOperationType
     , omTarget
 
+    -- * RequestUtilization
+    , RequestUtilization
+    , requestUtilization
+    , ruTargetConcurrentRequests
+    , ruTargetRequestCountPerSec
+
     -- * SourceReference
     , SourceReference
     , sourceReference
@@ -304,26 +337,16 @@ module Network.Google.AppEngine.Types
     , dContainer
     , dFiles
     , dSourceReferences
-
-    -- * StaticDirectoryHandler
-    , StaticDirectoryHandler
-    , staticDirectoryHandler
-    , sdhHTTPHeaders
-    , sdhRequireMatchingFile
-    , sdhExpiration
-    , sdhMimeType
-    , sdhApplicationReadable
-    , sdhDirectory
     ) where
 
 import           Network.Google.AppEngine.Types.Product
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta4' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
-appEngineService :: Service
+-- | Default request referring to version 'v1beta5' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
+appEngineService :: ServiceConfig
 appEngineService
-  = defaultService (ServiceId "appengine:v1beta4")
+  = defaultService (ServiceId "appengine:v1beta5")
       "appengine.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services

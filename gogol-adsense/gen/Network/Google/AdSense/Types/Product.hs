@@ -868,7 +868,7 @@ auuStatus :: Lens' AdUnit (Maybe Text)
 auuStatus
   = lens _auuStatus (\ s a -> s{_auuStatus = a})
 
--- | Settings specific to WAP mobile content ads (AFMC).
+-- | Settings specific to WAP mobile content ads (AFMC) - deprecated.
 auuMobileContentAdsSettings :: Lens' AdUnit (Maybe AdUnitMobileContentAdsSettings)
 auuMobileContentAdsSettings
   = lens _auuMobileContentAdsSettings
@@ -878,7 +878,7 @@ auuMobileContentAdsSettings
 auuKind :: Lens' AdUnit Text
 auuKind = lens _auuKind (\ s a -> s{_auuKind = a})
 
--- | Settings specific to feed ads (AFF).
+-- | Settings specific to feed ads (AFF) - deprecated.
 auuFeedAdsSettings :: Lens' AdUnit (Maybe AdUnitFeedAdsSettings)
 auuFeedAdsSettings
   = lens _auuFeedAdsSettings
@@ -901,7 +901,7 @@ auuName :: Lens' AdUnit (Maybe Text)
 auuName = lens _auuName (\ s a -> s{_auuName = a})
 
 -- | Settings specific to content ads (AFC) and highend mobile content ads
--- (AFMC).
+-- (AFMC - deprecated).
 auuContentAdsSettings :: Lens' AdUnit (Maybe AdUnitContentAdsSettings)
 auuContentAdsSettings
   = lens _auuContentAdsSettings
@@ -1185,7 +1185,7 @@ instance ToJSON Account where
                   ("timezone" .=) <$> _accTimezone,
                   ("subAccounts" .=) <$> _accSubAccounts])
 
--- | Settings specific to WAP mobile content ads (AFMC).
+-- | Settings specific to WAP mobile content ads (AFMC) - deprecated.
 --
 -- /See:/ 'adUnitMobileContentAdsSettings' smart constructor.
 data AdUnitMobileContentAdsSettings = AdUnitMobileContentAdsSettings
@@ -1473,7 +1473,6 @@ data AdClient = AdClient
     , _adSupportsReporting :: !(Maybe Bool)
     , _adId                :: !(Maybe Text)
     , _adProductCode       :: !(Maybe Text)
-    , _adArcReviewMode     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdClient' with the minimum fields required to make a request.
@@ -1489,8 +1488,6 @@ data AdClient = AdClient
 -- * 'adId'
 --
 -- * 'adProductCode'
---
--- * 'adArcReviewMode'
 adClient
     :: AdClient
 adClient =
@@ -1500,7 +1497,6 @@ adClient =
     , _adSupportsReporting = Nothing
     , _adId = Nothing
     , _adProductCode = Nothing
-    , _adArcReviewMode = Nothing
     }
 
 -- | Kind of resource this is, in this case adsense#adClient.
@@ -1529,13 +1525,6 @@ adProductCode
   = lens _adProductCode
       (\ s a -> s{_adProductCode = a})
 
--- | ARC review mode this ad client is in. Empty if the client is not opted
--- in to ARC. Possible values: POST_REVIEW, AUTOMATIC_PRE_REVIEW.
-adArcReviewMode :: Lens' AdClient (Maybe Text)
-adArcReviewMode
-  = lens _adArcReviewMode
-      (\ s a -> s{_adArcReviewMode = a})
-
 instance FromJSON AdClient where
         parseJSON
           = withObject "AdClient"
@@ -1545,8 +1534,7 @@ instance FromJSON AdClient where
                      (o .:? "arcOptIn")
                      <*> (o .:? "supportsReporting")
                      <*> (o .:? "id")
-                     <*> (o .:? "productCode")
-                     <*> (o .:? "arcReviewMode"))
+                     <*> (o .:? "productCode"))
 
 instance ToJSON AdClient where
         toJSON AdClient{..}
@@ -1556,8 +1544,7 @@ instance ToJSON AdClient where
                   ("arcOptIn" .=) <$> _adArcOptIn,
                   ("supportsReporting" .=) <$> _adSupportsReporting,
                   ("id" .=) <$> _adId,
-                  ("productCode" .=) <$> _adProductCode,
-                  ("arcReviewMode" .=) <$> _adArcReviewMode])
+                  ("productCode" .=) <$> _adProductCode])
 
 --
 -- /See:/ 'savedAdStyle' smart constructor.
@@ -1658,11 +1645,11 @@ customChannelTargetingInfo =
     }
 
 -- | The locations in which ads appear. (Only valid for content and mobile
--- content ads). Acceptable values for content ads are: TOP_LEFT,
--- TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT,
--- BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable
--- values for mobile content ads are: TOP, MIDDLE, BOTTOM,
--- MULTIPLE_LOCATIONS.
+-- content ads (deprecated)). Acceptable values for content ads are:
+-- TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER,
+-- MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT,
+-- MULTIPLE_LOCATIONS. Acceptable values for mobile content ads
+-- (deprecated) are: TOP, MIDDLE, BOTTOM, MULTIPLE_LOCATIONS.
 cctiLocation :: Lens' CustomChannelTargetingInfo (Maybe Text)
 cctiLocation
   = lens _cctiLocation (\ s a -> s{_cctiLocation = a})
@@ -1770,7 +1757,7 @@ instance ToJSON AdStyle where
                   Just ("kind" .= _asKind), ("font" .=) <$> _asFont,
                   ("colors" .=) <$> _asColors])
 
--- | Settings specific to feed ads (AFF).
+-- | Settings specific to feed ads (AFF) - deprecated.
 --
 -- /See:/ 'adUnitFeedAdsSettings' smart constructor.
 data AdUnitFeedAdsSettings = AdUnitFeedAdsSettings
@@ -2219,7 +2206,7 @@ instance ToJSON AdsenseReportsGenerateResponse where
                   ("totalMatchedRows" .=) <$> _argrTotalMatchedRows])
 
 -- | Settings specific to content ads (AFC) and highend mobile content ads
--- (AFMC).
+-- (AFMC - deprecated).
 --
 -- /See:/ 'adUnitContentAdsSettings' smart constructor.
 data AdUnitContentAdsSettings = AdUnitContentAdsSettings

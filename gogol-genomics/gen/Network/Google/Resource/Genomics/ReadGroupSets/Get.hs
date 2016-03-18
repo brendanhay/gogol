@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a read group set by ID.
+-- Gets a read group set by ID. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.get@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Get
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type ReadGroupSetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ReadGroupSet
 
--- | Gets a read group set by ID.
+-- | Gets a read group set by ID. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'readGroupSetsGet' smart constructor.
 data ReadGroupSetsGet = ReadGroupSetsGet

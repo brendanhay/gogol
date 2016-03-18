@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a dataset. This method supports patch semantics.
+-- Updates a dataset. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.patch@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.patch@.
 module Network.Google.Resource.Genomics.DataSets.Patch
     (
     -- * REST Resource
@@ -65,7 +68,10 @@ type DataSetsPatchResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] DataSet :> Patch '[JSON] DataSet
 
--- | Updates a dataset. This method supports patch semantics.
+-- | Updates a dataset. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
 -- /See:/ 'dataSetsPatch' smart constructor.
 data DataSetsPatch = DataSetsPatch

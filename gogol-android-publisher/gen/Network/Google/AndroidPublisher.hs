@@ -297,6 +297,7 @@ module Network.Google.AndroidPublisher
     , season
     , sStart
     , sEnd
+    , sProrations
 
     -- ** PageInfo
     , PageInfo
@@ -402,6 +403,12 @@ module Network.Google.AndroidPublisher
 
     -- ** EditsImagesUploadImageType
     , EditsImagesUploadImageType (..)
+
+    -- ** Prorate
+    , Prorate
+    , prorate
+    , pStart
+    , pDefaultPrice
 
     -- ** InAppProductsListResponse
     , InAppProductsListResponse

@@ -20,7 +20,7 @@ module Network.Google.Debugger.Types.Product where
 import           Network.Google.Debugger.Types.Sum
 import           Network.Google.Prelude
 
--- | The response of registering a debuggee.
+-- | Response for registering a debuggee.
 --
 -- /See:/ 'registerDebuggeeResponse' smart constructor.
 newtype RegisterDebuggeeResponse = RegisterDebuggeeResponse
@@ -39,8 +39,8 @@ registerDebuggeeResponse =
     { _rdrDebuggee = Nothing
     }
 
--- | The debuggee resource. The field \'id\' is guranteed to be set (in
--- addition to the echoed fields).
+-- | Debuggee resource. The field \`id\` is guranteed to be set (in addition
+-- to the echoed fields).
 rdrDebuggee :: Lens' RegisterDebuggeeResponse (Maybe Debuggee)
 rdrDebuggee
   = lens _rdrDebuggee (\ s a -> s{_rdrDebuggee = a})
@@ -125,7 +125,7 @@ instance ToJSON SourceContext where
                   ("cloudRepo" .=) <$> _scCloudRepo,
                   ("gerrit" .=) <$> _scGerrit, ("git" .=) <$> _scGit])
 
--- | The response of setting a breakpoint.
+-- | Response for setting a breakpoint.
 --
 -- /See:/ 'setBreakpointResponse' smart constructor.
 newtype SetBreakpointResponse = SetBreakpointResponse
@@ -144,7 +144,7 @@ setBreakpointResponse =
     { _sbrBreakpoint = Nothing
     }
 
--- | The breakpoint resource. The field \'id\' is guranteed to be set (in
+-- | Breakpoint resource. The field \`id\` is guaranteed to be set (in
 -- addition to the echoed fileds).
 sbrBreakpoint :: Lens' SetBreakpointResponse (Maybe Breakpoint)
 sbrBreakpoint
@@ -185,7 +185,7 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | The response of updating an active breakpoint. The message is defined to
+-- | Response for updating an active breakpoint. The message is defined to
 -- allow future extensions.
 --
 -- /See:/ 'updateActiveBreakpointResponse' smart constructor.
@@ -216,6 +216,7 @@ data GerritSourceContext = GerritSourceContext
     , _gscAliasName     :: !(Maybe Text)
     , _gscRevisionId    :: !(Maybe Text)
     , _gscHostURI       :: !(Maybe Text)
+    , _gscAliasContext  :: !(Maybe AliasContext)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GerritSourceContext' with the minimum fields required to make a request.
@@ -229,6 +230,8 @@ data GerritSourceContext = GerritSourceContext
 -- * 'gscRevisionId'
 --
 -- * 'gscHostURI'
+--
+-- * 'gscAliasContext'
 gerritSourceContext
     :: GerritSourceContext
 gerritSourceContext =
@@ -237,6 +240,7 @@ gerritSourceContext =
     , _gscAliasName = Nothing
     , _gscRevisionId = Nothing
     , _gscHostURI = Nothing
+    , _gscAliasContext = Nothing
     }
 
 -- | The full project name within the host. Projects may be nested, so
@@ -263,6 +267,12 @@ gscHostURI :: Lens' GerritSourceContext (Maybe Text)
 gscHostURI
   = lens _gscHostURI (\ s a -> s{_gscHostURI = a})
 
+-- | An alias, which may be a branch or tag.
+gscAliasContext :: Lens' GerritSourceContext (Maybe AliasContext)
+gscAliasContext
+  = lens _gscAliasContext
+      (\ s a -> s{_gscAliasContext = a})
+
 instance FromJSON GerritSourceContext where
         parseJSON
           = withObject "GerritSourceContext"
@@ -270,7 +280,8 @@ instance FromJSON GerritSourceContext where
                  GerritSourceContext <$>
                    (o .:? "gerritProject") <*> (o .:? "aliasName") <*>
                      (o .:? "revisionId")
-                     <*> (o .:? "hostUri"))
+                     <*> (o .:? "hostUri")
+                     <*> (o .:? "aliasContext"))
 
 instance ToJSON GerritSourceContext where
         toJSON GerritSourceContext{..}
@@ -279,7 +290,8 @@ instance ToJSON GerritSourceContext where
                  [("gerritProject" .=) <$> _gscGerritProject,
                   ("aliasName" .=) <$> _gscAliasName,
                   ("revisionId" .=) <$> _gscRevisionId,
-                  ("hostUri" .=) <$> _gscHostURI])
+                  ("hostUri" .=) <$> _gscHostURI,
+                  ("aliasContext" .=) <$> _gscAliasContext])
 
 -- | A unique identifier for a cloud repo.
 --
@@ -326,6 +338,41 @@ instance ToJSON RepoId where
               (catMaybes
                  [("uid" .=) <$> _riUid,
                   ("projectRepoId" .=) <$> _riProjectRepoId])
+
+-- | Labels with user defined metadata.
+--
+-- /See:/ 'extendedSourceContextLabels' smart constructor.
+newtype ExtendedSourceContextLabels = ExtendedSourceContextLabels
+    { _esclAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExtendedSourceContextLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'esclAddtional'
+extendedSourceContextLabels
+    :: HashMap Text Text -- ^ 'esclAddtional'
+    -> ExtendedSourceContextLabels
+extendedSourceContextLabels pEsclAddtional_ =
+    ExtendedSourceContextLabels
+    { _esclAddtional = _Coerce # pEsclAddtional_
+    }
+
+esclAddtional :: Lens' ExtendedSourceContextLabels (HashMap Text Text)
+esclAddtional
+  = lens _esclAddtional
+      (\ s a -> s{_esclAddtional = a})
+      . _Coerce
+
+instance FromJSON ExtendedSourceContextLabels where
+        parseJSON
+          = withObject "ExtendedSourceContextLabels"
+              (\ o ->
+                 ExtendedSourceContextLabels <$> (parseJSONObject o))
+
+instance ToJSON ExtendedSourceContextLabels where
+        toJSON = toJSON . _esclAddtional
 
 -- | Selects a repo using a Google Cloud Platform project ID (e.g.
 -- winged-cargo-31) and a repo name within that project.
@@ -398,11 +445,12 @@ formatMessage =
     , _fmParameters = Nothing
     }
 
--- | Format template of the message. The \"format\" uses placeholders \"$0\",
--- \"$1\", etc. to reference parameters. \"$$\" can be used to denote the \'$\'
--- character. Examples: \"Failed to load \'$0\' which helps debug $1 the
--- first time it is loaded. Again, $0 is very important.\" \"Please pay
--- $$10 to use $0 instead of $1.\"
+-- | Format template for the message. The \`format\` uses placeholders
+-- \`$0\`,
+-- \`$1\`, etc. to reference parameters. \`$$\` can be used to denote the \`$\`
+-- character. Examples: * \`Failed to load \'$0\' which helps debug $1 the
+-- first time it is loaded. Again, $0 is very important.\` * \`Please pay
+-- $$10 to use $0 instead of $1.\`
 fmFormat :: Lens' FormatMessage (Maybe Text)
 fmFormat = lens _fmFormat (\ s a -> s{_fmFormat = a})
 
@@ -439,6 +487,7 @@ data Breakpoint = Breakpoint
     , _bExpressions          :: !(Maybe [Text])
     , _bLogMessageFormat     :: !(Maybe Text)
     , _bId                   :: !(Maybe Text)
+    , _bLabels               :: !(Maybe BreakpointLabels)
     , _bUserEmail            :: !(Maybe Text)
     , _bVariableTable        :: !(Maybe [Variable])
     , _bStackFrames          :: !(Maybe [StackFrame])
@@ -468,6 +517,8 @@ data Breakpoint = Breakpoint
 --
 -- * 'bId'
 --
+-- * 'bLabels'
+--
 -- * 'bUserEmail'
 --
 -- * 'bVariableTable'
@@ -493,6 +544,7 @@ breakpoint =
     , _bExpressions = Nothing
     , _bLogMessageFormat = Nothing
     , _bId = Nothing
+    , _bLabels = Nothing
     , _bUserEmail = Nothing
     , _bVariableTable = Nothing
     , _bStackFrames = Nothing
@@ -503,39 +555,40 @@ breakpoint =
     }
 
 -- | Breakpoint status. The status includes an error flag and a human
--- readable message. This field will usually stay unset. The message can be
--- either informational or error. Nevertheless, clients should always
--- display the text message back to the user. Error status of a breakpoint
--- indicates complete failure. Example (non-final state): \'Still loading
--- symbols...\' Examples (final state): \'Failed to insert breakpoint\'
--- referring to breakpoint, \'Field f not found in class C\' referring to
--- condition, ...
+-- readable message. This field is usually unset. The message can be either
+-- informational or an error message. Regardless, clients should always
+-- display the text message back to the user. Error status indicates
+-- complete failure of the breakpoint. Example (non-final state): \`Still
+-- loading symbols...\` Examples (final state): * \`Invalid line number\`
+-- referring to location * \`Field f not found in class C\` referring to
+-- condition
 bStatus :: Lens' Breakpoint (Maybe StatusMessage)
 bStatus = lens _bStatus (\ s a -> s{_bStatus = a})
 
--- | Indicates the severity of the log. Only relevant when action is \"LOG\".
+-- | Indicates the severity of the log. Only relevant when action is \`LOG\`.
 bLogLevel :: Lens' Breakpoint (Maybe Text)
 bLogLevel
   = lens _bLogLevel (\ s a -> s{_bLogLevel = a})
 
--- | The breakpoint source location.
+-- | Breakpoint source location.
 bLocation :: Lens' Breakpoint (Maybe SourceLocation)
 bLocation
   = lens _bLocation (\ s a -> s{_bLocation = a})
 
--- | Defines what to do when the breakpoint hits.
+-- | Action that the agent should perform when the code at the breakpoint
+-- location is hit.
 bAction :: Lens' Breakpoint (Maybe Text)
 bAction = lens _bAction (\ s a -> s{_bAction = a})
 
--- | The time this breakpoint was finalized as seen by the server. The value
--- is in seconds resolution.
+-- | Time this breakpoint was finalized as seen by the server in seconds
+-- resolution.
 bFinalTime :: Lens' Breakpoint (Maybe Text)
 bFinalTime
   = lens _bFinalTime (\ s a -> s{_bFinalTime = a})
 
--- | A list of read-only expressions to evaluate at the breakpoint location.
+-- | List of read-only expressions to evaluate at the breakpoint location.
 -- The expressions are composed using expressions in the programming
--- language at the source location. If the breakpoint action is \"LOG\",
+-- language at the source location. If the breakpoint action is \`LOG\`,
 -- the evaluated expressions are included in log statements.
 bExpressions :: Lens' Breakpoint [Text]
 bExpressions
@@ -543,13 +596,13 @@ bExpressions
       . _Default
       . _Coerce
 
--- | Only relevant when action is \"LOG\". Defines the message to log when
+-- | Only relevant when action is \`LOG\`. Defines the message to log when
 -- the breakpoint hits. The message may include parameter placeholders
--- \"$0\", \"$1\", etc. These placeholders will be replaced with the
--- evaluated value of the appropriate expression. Expressions not
--- referenced in \"log_message_format\" will not be logged. Example:
--- \"Poisonous message received, id = $0, count = $1\" with expressions = [
--- \"message.id\", \"message.count\" ].
+-- \`$0\`, \`$1\`, etc. These placeholders are replaced with the evaluated
+-- value of the appropriate expression. Expressions not referenced in
+-- \`log_message_format\` are not logged. Example: \`Message received, id =
+-- $0, count = $1\` with \`expressions\` = \`[ message.id, message.count
+-- ]\`.
 bLogMessageFormat :: Lens' Breakpoint (Maybe Text)
 bLogMessageFormat
   = lens _bLogMessageFormat
@@ -559,21 +612,26 @@ bLogMessageFormat
 bId :: Lens' Breakpoint (Maybe Text)
 bId = lens _bId (\ s a -> s{_bId = a})
 
--- | The e-mail of the user that created this breakpoint
+-- | A set of custom breakpoint properties, populated by the agent, to be
+-- displayed to the user.
+bLabels :: Lens' Breakpoint (Maybe BreakpointLabels)
+bLabels = lens _bLabels (\ s a -> s{_bLabels = a})
+
+-- | E-mail address of the user that created this breakpoint
 bUserEmail :: Lens' Breakpoint (Maybe Text)
 bUserEmail
   = lens _bUserEmail (\ s a -> s{_bUserEmail = a})
 
--- | The variable_table exists to aid with computation, memory and network
--- traffic optimization. It enables storing a variable once and reference
--- it from multiple variables, including variables stored in the
--- variable_table itself. For example, the object \'this\', which may
--- appear at many levels of the stack, can have all of it\'s data stored
+-- | The \`variable_table\` exists to aid with computation, memory and
+-- network traffic optimization. It enables storing a variable once and
+-- reference it from multiple variables, including variables stored in the
+-- \`variable_table\` itself. For example, the same \`this\` object, which
+-- may appear at many levels of the stack, can have all of its data stored
 -- once in this table. The stack frame variables then would hold only a
--- reference to it. The variable var_index field is an index into this
--- repeated field. The stored objects are nameless and get their name from
--- the referencing variable. The effective variable is a merge of the
--- referencing veariable and the referenced variable.
+-- reference to it. The variable \`var_table_index\` field is an index into
+-- this repeated field. The stored objects are nameless and get their name
+-- from the referencing variable. The effective variable is a merge of the
+-- referencing variable and the referenced variable.
 bVariableTable :: Lens' Breakpoint [Variable]
 bVariableTable
   = lens _bVariableTable
@@ -588,19 +646,20 @@ bStackFrames
       . _Default
       . _Coerce
 
--- | A condition to trigger the breakpoint. The condition is a compound
+-- | Condition that triggers the breakpoint. The condition is a compound
 -- boolean expression composed using expressions in a programming language
 -- at the source location.
 bCondition :: Lens' Breakpoint (Maybe Text)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
 
--- | The evaluated expressions\' values at breakpoint time. The evaluated
+-- | Values of evaluated expressions at breakpoint time. The evaluated
 -- expressions appear in exactly the same order they are listed in the
--- \'expressions\' field. The \'name\' field holds the original expression
--- text, the \'value\'\/\'members\' field holds the result of the evaluated
--- expression. If the expression can not be evaluated, an error text is
--- placed in the value field.
+-- \`expressions\` field. The \`name\` field holds the original expression
+-- text, the \`value\` or \`members\` field holds the result of the
+-- evaluated expression. If the expression cannot be evaluated, the
+-- \`status\` inside the \`Variable\` will indicate an error and contain
+-- the error text.
 bEvaluatedExpressions :: Lens' Breakpoint [Variable]
 bEvaluatedExpressions
   = lens _bEvaluatedExpressions
@@ -608,8 +667,7 @@ bEvaluatedExpressions
       . _Default
       . _Coerce
 
--- | The time this breakpoint was created by the server. The value is in
--- seconds resolution.
+-- | Time this breakpoint was created by the server in seconds resolution.
 bCreateTime :: Lens' Breakpoint (Maybe Text)
 bCreateTime
   = lens _bCreateTime (\ s a -> s{_bCreateTime = a})
@@ -633,6 +691,7 @@ instance FromJSON Breakpoint where
                      <*> (o .:? "expressions" .!= mempty)
                      <*> (o .:? "logMessageFormat")
                      <*> (o .:? "id")
+                     <*> (o .:? "labels")
                      <*> (o .:? "userEmail")
                      <*> (o .:? "variableTable" .!= mempty)
                      <*> (o .:? "stackFrames" .!= mempty)
@@ -652,7 +711,8 @@ instance ToJSON Breakpoint where
                   ("finalTime" .=) <$> _bFinalTime,
                   ("expressions" .=) <$> _bExpressions,
                   ("logMessageFormat" .=) <$> _bLogMessageFormat,
-                  ("id" .=) <$> _bId, ("userEmail" .=) <$> _bUserEmail,
+                  ("id" .=) <$> _bId, ("labels" .=) <$> _bLabels,
+                  ("userEmail" .=) <$> _bUserEmail,
                   ("variableTable" .=) <$> _bVariableTable,
                   ("stackFrames" .=) <$> _bStackFrames,
                   ("condition" .=) <$> _bCondition,
@@ -661,7 +721,41 @@ instance ToJSON Breakpoint where
                   ("createTime" .=) <$> _bCreateTime,
                   ("isFinalState" .=) <$> _bIsFinalState])
 
--- | The response of getting breakpoint information.
+-- | A set of custom breakpoint properties, populated by the agent, to be
+-- displayed to the user.
+--
+-- /See:/ 'breakpointLabels' smart constructor.
+newtype BreakpointLabels = BreakpointLabels
+    { _blAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BreakpointLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'blAddtional'
+breakpointLabels
+    :: HashMap Text Text -- ^ 'blAddtional'
+    -> BreakpointLabels
+breakpointLabels pBlAddtional_ =
+    BreakpointLabels
+    { _blAddtional = _Coerce # pBlAddtional_
+    }
+
+blAddtional :: Lens' BreakpointLabels (HashMap Text Text)
+blAddtional
+  = lens _blAddtional (\ s a -> s{_blAddtional = a}) .
+      _Coerce
+
+instance FromJSON BreakpointLabels where
+        parseJSON
+          = withObject "BreakpointLabels"
+              (\ o -> BreakpointLabels <$> (parseJSONObject o))
+
+instance ToJSON BreakpointLabels where
+        toJSON = toJSON . _blAddtional
+
+-- | Response for getting breakpoint information.
 --
 -- /See:/ 'getBreakpointResponse' smart constructor.
 newtype GetBreakpointResponse = GetBreakpointResponse
@@ -680,8 +774,8 @@ getBreakpointResponse =
     { _gbrBreakpoint = Nothing
     }
 
--- | The complete breakpoint state. The fields \'id\' and \'location\' are
--- guranteed to be set.
+-- | Complete breakpoint state. The fields \`id\` and \`location\` are
+-- guaranteed to be set.
 gbrBreakpoint :: Lens' GetBreakpointResponse (Maybe Breakpoint)
 gbrBreakpoint
   = lens _gbrBreakpoint
@@ -699,36 +793,43 @@ instance ToJSON GetBreakpointResponse where
               (catMaybes [("breakpoint" .=) <$> _gbrBreakpoint])
 
 -- | Represents a variable or an argument possibly of a compound object type.
--- 1. A simple variable such as, int x = 5 is represented as: { name:
--- \"x\", value: \"5\" } 2. A compound object such as, struct T { int m1;
--- int m2; }; T x = { 3, 7 }; is represented as: { name: \"x\", members {
--- name: \"m1\", value: \"3\" }, members { name: \"m2\", value: \"7\" } }
--- 3. A pointer where the pointee was captured such as, T x = { 3, 7 }; T*
--- p = &x; is represented as: { name: \"p\", value: \"0x00500500\", members
--- { name: \"m1\", value: \"3\" }, members { name: \"m2\", value: \"7\" } }
--- 4. A pointer where the pointee was not captured or is inaccessible such
--- as, T* p = new T; is represented as: { name: \"p\", value:
--- \"0x00400400\", members { value: \"\" } } the value text should decribe
--- the reason for the missing value. such as , , . note that a null pointer
--- should not have members. 5. An unnamed value such as, int* p = new
--- int(7); is represented as, { name: \"p\", value: \"0x00500500\", members
--- { value: \"7\" } } 6. An unnamed pointer where the pointee was not
--- captured such as, int* p = new int(7); int** pp = &p; is represented as:
--- { name: \"pp\", value: \"0x00500500\", members { value: \"0x00400400\",
--- members { value: \"\" } } } To optimize computation, memory and network
--- traffic, variables that repeat in the output multiple times can be
--- stored once in a shared variable table and be referenced using the
--- var_index field. The variables stored in the shared table are nameless
--- and are essentially a partition of the complete variable. To reconstruct
--- the complete variable merge the referencing variable with the referenced
--- variable. When using the shared variable table, variables can be
--- represented as: T x = { 3, 7 }; T* p = &x; T& r = x; are represented as,
--- { name: \"x\", var_index: 3 } { name: \"p\", value \"0x00500500\",
--- var_index: 3 } { name: \"r\", var_index: 3 } with shared variable table
--- entry #3: { members { name: \"m1\", value: \"3\" }, members { name:
--- \"m2\", value: \"7\" } } Note that the pointer address is stored with
--- the referencing variable and not with the referenced variable, to allow
--- the referenced variable to be shared between pointer and references.
+-- Note how the following variables are represented: 1) A simple variable:
+-- int x = 5 { name: \"x\", value: \"5\", type: \"int\" } \/\/ Captured
+-- variable 2) A compound object: struct T { int m1; int m2; }; T x = { 3,
+-- 7 }; { \/\/ Captured variable name: \"x\", type: \"T\", members { name:
+-- \"m1\", value: \"3\", type: \"int\" }, members { name: \"m2\", value:
+-- \"7\", type: \"int\" } } 3) A pointer where the pointee was captured: T
+-- x = { 3, 7 }; T* p = &x; { \/\/ Captured variable name: \"p\", type:
+-- \"T*\", value: \"0x00500500\", members { name: \"m1\", value: \"3\",
+-- type: \"int\" }, members { name: \"m2\", value: \"7\", type: \"int\" } }
+-- 4) A pointer where the pointee was not captured: T* p = new T; { \/\/
+-- Captured variable name: \"p\", type: \"T*\", value: \"0x00400400\"
+-- status { is_error: true, description { format: \"unavailable\" } } } The
+-- status should describe the reason for the missing value, such as \`\`,
+-- \`\`, \` \`. Note that a null pointer should not have members. 5) An
+-- unnamed value: int* p = new int(7); { \/\/ Captured variable name:
+-- \"p\", value: \"0x00500500\", type: \"int*\", members { value: \"7\",
+-- type: \"int\" } } 6) An unnamed pointer where the pointee was not
+-- captured: int* p = new int(7); int** pp = &p; { \/\/ Captured variable
+-- name: \"pp\", value: \"0x00500500\", type: \"int**\", members { value:
+-- \"0x00400400\", type: \"int*\" status { is_error: true, description: {
+-- format: \"unavailable\" } } } } } To optimize computation, memory and
+-- network traffic, variables that repeat in the output multiple times can
+-- be stored once in a shared variable table and be referenced using the
+-- \`var_table_index\` field. The variables stored in the shared table are
+-- nameless and are essentially a partition of the complete variable. To
+-- reconstruct the complete variable, merge the referencing variable with
+-- the referenced variable. When using the shared variable table, the
+-- following variables: T x = { 3, 7 }; T* p = &x; T& r = x; { name: \"x\",
+-- var_table_index: 3, type: \"T\" } \/\/ Captured variables { name: \"p\",
+-- value \"0x00500500\", type=\"T*\", var_table_index: 3 } { name: \"r\",
+-- type=\"T&\", var_table_index: 3 } { \/\/ Shared variable table entry #3:
+-- members { name: \"m1\", value: \"3\", type: \"int\" }, members { name:
+-- \"m2\", value: \"7\", type: \"int\" } } Note that the pointer address is
+-- stored with the referencing variable and not with the referenced
+-- variable. This allows the referenced variable to be shared between
+-- pointers and references. The type field is optional. The debugger agent
+-- may or may not support it.
 --
 -- /See:/ 'variable' smart constructor.
 data Variable = Variable
@@ -737,6 +838,7 @@ data Variable = Variable
     , _vMembers       :: !(Maybe [Variable])
     , _vValue         :: !(Maybe Text)
     , _vName          :: !(Maybe Text)
+    , _vType          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Variable' with the minimum fields required to make a request.
@@ -752,6 +854,8 @@ data Variable = Variable
 -- * 'vValue'
 --
 -- * 'vName'
+--
+-- * 'vType'
 variable
     :: Variable
 variable =
@@ -761,46 +865,55 @@ variable =
     , _vMembers = Nothing
     , _vValue = Nothing
     , _vName = Nothing
+    , _vType = Nothing
     }
 
 -- | Status associated with the variable. This field will usually stay unset.
 -- A status of a single variable only applies to that variable or
 -- expression. The rest of breakpoint data still remains valid. Variables
 -- might be reported in error state even when breakpoint is not in final
--- state. The message may refer to variable name with \"refers_to\" set to
--- \"VARIABLE_NAME\". Alternatively \"refers_to\" will be set to
--- \"VARIABLE_VALUE\". In either case variable value and members will be
--- unset. Example of error message applied to name: \"Invalid expression
--- syntax\". Example of information message applied to value: \"Not
--- captured\". Examples of error message applied to value: \"Malformed
--- string\", \"Field f not found in class C\", \"Null pointer
--- dereference\".
+-- state. The message may refer to variable name with \`refers_to\` set to
+-- \`VARIABLE_NAME\`. Alternatively \`refers_to\` will be set to
+-- \`VARIABLE_VALUE\`. In either case variable value and members will be
+-- unset. Example of error message applied to name: \`Invalid expression
+-- syntax\`. Example of information message applied to value: \`Not
+-- captured\`. Examples of error message applied to value: * \`Malformed
+-- string\`, * \`Field f not found in class C\` * \`Null pointer
+-- dereference\`
 vStatus :: Lens' Variable (Maybe StatusMessage)
 vStatus = lens _vStatus (\ s a -> s{_vStatus = a})
 
--- | This is a reference to a variable in the shared variable table. More
--- than one variable can reference the same variable in the table. The
--- var_index field is an index into variable_table in Breakpoint.
+-- | Reference to a variable in the shared variable table. More than one
+-- variable can reference the same variable in the table. The
+-- \`var_table_index\` field is an index into \`variable_table\` in
+-- Breakpoint.
 vVarTableIndex :: Lens' Variable (Maybe Int32)
 vVarTableIndex
   = lens _vVarTableIndex
       (\ s a -> s{_vVarTableIndex = a})
       . mapping _Coerce
 
--- | The members contained or pointed to by the variable.
+-- | Members contained or pointed to by the variable.
 vMembers :: Lens' Variable [Variable]
 vMembers
   = lens _vMembers (\ s a -> s{_vMembers = a}) .
       _Default
       . _Coerce
 
--- | The simple value of the variable.
+-- | Simple value of the variable.
 vValue :: Lens' Variable (Maybe Text)
 vValue = lens _vValue (\ s a -> s{_vValue = a})
 
--- | The name of the variable, if any.
+-- | Name of the variable, if any.
 vName :: Lens' Variable (Maybe Text)
 vName = lens _vName (\ s a -> s{_vName = a})
+
+-- | Variable type (e.g. \`MyClass\`). If the variable is split with
+-- \`var_table_index\`, \`type\` goes next to \`value\`. The interpretation
+-- of a type is agent specific. It is recommended to include the dynamic
+-- type rather than a static type of an object.
+vType :: Lens' Variable (Maybe Text)
+vType = lens _vType (\ s a -> s{_vType = a})
 
 instance FromJSON Variable where
         parseJSON
@@ -810,7 +923,8 @@ instance FromJSON Variable where
                    (o .:? "status") <*> (o .:? "varTableIndex") <*>
                      (o .:? "members" .!= mempty)
                      <*> (o .:? "value")
-                     <*> (o .:? "name"))
+                     <*> (o .:? "name")
+                     <*> (o .:? "type"))
 
 instance ToJSON Variable where
         toJSON Variable{..}
@@ -819,9 +933,10 @@ instance ToJSON Variable where
                  [("status" .=) <$> _vStatus,
                   ("varTableIndex" .=) <$> _vVarTableIndex,
                   ("members" .=) <$> _vMembers,
-                  ("value" .=) <$> _vValue, ("name" .=) <$> _vName])
+                  ("value" .=) <$> _vValue, ("name" .=) <$> _vName,
+                  ("type" .=) <$> _vType])
 
--- | The response of listing breakpoints.
+-- | Response for listing breakpoints.
 --
 -- /See:/ 'listBreakpointsResponse' smart constructor.
 data ListBreakpointsResponse = ListBreakpointsResponse
@@ -844,15 +959,16 @@ listBreakpointsResponse =
     , _lbrBreakpoints = Nothing
     }
 
--- | A wait token that can be used in the next call to ListBreakpoints to
--- block until the list of breakpoints has changes.
+-- | A wait token that can be used in the next call to \`list\` (REST) or
+-- \`ListBreakpoints\` (RPC) to block until the list of breakpoints has
+-- changes.
 lbrNextWaitToken :: Lens' ListBreakpointsResponse (Maybe Text)
 lbrNextWaitToken
   = lens _lbrNextWaitToken
       (\ s a -> s{_lbrNextWaitToken = a})
 
--- | List of all breakpoints with complete state. The fields \'id\' and
--- \'location\' are guranteed to be set on each breakpoint.
+-- | List of all breakpoints with complete state. The fields \`id\` and
+-- \`location\` are guaranteed to be set on each breakpoint.
 lbrBreakpoints :: Lens' ListBreakpointsResponse [Breakpoint]
 lbrBreakpoints
   = lens _lbrBreakpoints
@@ -875,7 +991,7 @@ instance ToJSON ListBreakpointsResponse where
                  [("nextWaitToken" .=) <$> _lbrNextWaitToken,
                   ("breakpoints" .=) <$> _lbrBreakpoints])
 
--- | The response of listing debuggees.
+-- | Response for listing debuggees.
 --
 -- /See:/ 'listDebuggeesResponse' smart constructor.
 newtype ListDebuggeesResponse = ListDebuggeesResponse
@@ -894,10 +1010,10 @@ listDebuggeesResponse =
     { _ldrDebuggees = Nothing
     }
 
--- | The list of debuggees accessible to the calling user. Note that the
--- description field is the only human readable field that should be
--- displayed to the user. The fields \'debuggee.id\' and \'description\'
--- are guranteed to be set on each debuggee.
+-- | List of debuggees accessible to the calling user. Note that the
+-- \`description\` field is the only human readable field that should be
+-- displayed to the user. The fields \`debuggee.id\` and \`description\`
+-- fields are guaranteed to be set on each debuggee.
 ldrDebuggees :: Lens' ListDebuggeesResponse [Debuggee]
 ldrDebuggees
   = lens _ldrDebuggees (\ s a -> s{_ldrDebuggees = a})
@@ -916,7 +1032,7 @@ instance ToJSON ListDebuggeesResponse where
           = object
               (catMaybes [("debuggees" .=) <$> _ldrDebuggees])
 
--- | The request to update an active breakpoint.
+-- | Request to update an active breakpoint.
 --
 -- /See:/ 'updateActiveBreakpointRequest' smart constructor.
 newtype UpdateActiveBreakpointRequest = UpdateActiveBreakpointRequest
@@ -935,7 +1051,7 @@ updateActiveBreakpointRequest =
     { _uabrBreakpoint = Nothing
     }
 
--- | The updated breakpoint information. The field \'id\' must be set.
+-- | Updated breakpoint information. The field \'id\' must be set.
 uabrBreakpoint :: Lens' UpdateActiveBreakpointRequest (Maybe Breakpoint)
 uabrBreakpoint
   = lens _uabrBreakpoint
@@ -955,9 +1071,9 @@ instance ToJSON UpdateActiveBreakpointRequest where
 
 -- | Represents a contextual status message. The message can indicate an
 -- error or informational status, and refer to specific parts of the
--- containing object. For example, the Breakpoint.status field can indicate
--- an error referring to the BREAKPOINT_SOURCE_LOCATION with the message
--- \"Location not found\".
+-- containing object. For example, the \`Breakpoint.status\` field can
+-- indicate an error referring to the \`BREAKPOINT_SOURCE_LOCATION\` with
+-- the message \`Location not found\`.
 --
 -- /See:/ 'statusMessage' smart constructor.
 data StatusMessage = StatusMessage
@@ -1016,12 +1132,13 @@ instance ToJSON StatusMessage where
                   ("isError" .=) <$> _smIsError,
                   ("description" .=) <$> _smDescription])
 
--- | The response of listing active breakpoints.
+-- | Response for listing active breakpoints.
 --
 -- /See:/ 'listActiveBreakpointsResponse' smart constructor.
 data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse
     { _labrNextWaitToken :: !(Maybe Text)
     , _labrBreakpoints   :: !(Maybe [Breakpoint])
+    , _labrWaitExpired   :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListActiveBreakpointsResponse' with the minimum fields required to make a request.
@@ -1031,12 +1148,15 @@ data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse
 -- * 'labrNextWaitToken'
 --
 -- * 'labrBreakpoints'
+--
+-- * 'labrWaitExpired'
 listActiveBreakpointsResponse
     :: ListActiveBreakpointsResponse
 listActiveBreakpointsResponse =
     ListActiveBreakpointsResponse
     { _labrNextWaitToken = Nothing
     , _labrBreakpoints = Nothing
+    , _labrWaitExpired = Nothing
     }
 
 -- | A wait token that can be used in the next method call to block until the
@@ -1046,8 +1166,8 @@ labrNextWaitToken
   = lens _labrNextWaitToken
       (\ s a -> s{_labrNextWaitToken = a})
 
--- | List of all active breakpoints. The fields \'id\' and \'location\' are
--- guranteed to be set on each breakpoint.
+-- | List of all active breakpoints. The fields \`id\` and \`location\` are
+-- guaranteed to be set on each breakpoint.
 labrBreakpoints :: Lens' ListActiveBreakpointsResponse [Breakpoint]
 labrBreakpoints
   = lens _labrBreakpoints
@@ -1055,20 +1175,77 @@ labrBreakpoints
       . _Default
       . _Coerce
 
+-- | The \`wait_expired\` field is set to true by the server when the request
+-- times out and the field \`success_on_timeout\` is set to true.
+labrWaitExpired :: Lens' ListActiveBreakpointsResponse (Maybe Bool)
+labrWaitExpired
+  = lens _labrWaitExpired
+      (\ s a -> s{_labrWaitExpired = a})
+
 instance FromJSON ListActiveBreakpointsResponse where
         parseJSON
           = withObject "ListActiveBreakpointsResponse"
               (\ o ->
                  ListActiveBreakpointsResponse <$>
                    (o .:? "nextWaitToken") <*>
-                     (o .:? "breakpoints" .!= mempty))
+                     (o .:? "breakpoints" .!= mempty)
+                     <*> (o .:? "waitExpired"))
 
 instance ToJSON ListActiveBreakpointsResponse where
         toJSON ListActiveBreakpointsResponse{..}
           = object
               (catMaybes
                  [("nextWaitToken" .=) <$> _labrNextWaitToken,
-                  ("breakpoints" .=) <$> _labrBreakpoints])
+                  ("breakpoints" .=) <$> _labrBreakpoints,
+                  ("waitExpired" .=) <$> _labrWaitExpired])
+
+-- | An ExtendedSourceContext is a SourceContext combined with additional
+-- details describing the context.
+--
+-- /See:/ 'extendedSourceContext' smart constructor.
+data ExtendedSourceContext = ExtendedSourceContext
+    { _escContext :: !(Maybe SourceContext)
+    , _escLabels  :: !(Maybe ExtendedSourceContextLabels)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExtendedSourceContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'escContext'
+--
+-- * 'escLabels'
+extendedSourceContext
+    :: ExtendedSourceContext
+extendedSourceContext =
+    ExtendedSourceContext
+    { _escContext = Nothing
+    , _escLabels = Nothing
+    }
+
+-- | Any source context.
+escContext :: Lens' ExtendedSourceContext (Maybe SourceContext)
+escContext
+  = lens _escContext (\ s a -> s{_escContext = a})
+
+-- | Labels with user defined metadata.
+escLabels :: Lens' ExtendedSourceContext (Maybe ExtendedSourceContextLabels)
+escLabels
+  = lens _escLabels (\ s a -> s{_escLabels = a})
+
+instance FromJSON ExtendedSourceContext where
+        parseJSON
+          = withObject "ExtendedSourceContext"
+              (\ o ->
+                 ExtendedSourceContext <$>
+                   (o .:? "context") <*> (o .:? "labels"))
+
+instance ToJSON ExtendedSourceContext where
+        toJSON ExtendedSourceContext{..}
+          = object
+              (catMaybes
+                 [("context" .=) <$> _escContext,
+                  ("labels" .=) <$> _escLabels])
 
 -- | A GitSourceContext denotes a particular revision in a third party Git
 -- repository (e.g. GitHub).
@@ -1140,12 +1317,11 @@ sourceLocation =
     , _slLine = Nothing
     }
 
--- | A path to the source file within the source context of the target
--- binary.
+-- | Path to the source file within the source context of the target binary.
 slPath :: Lens' SourceLocation (Maybe Text)
 slPath = lens _slPath (\ s a -> s{_slPath = a})
 
--- | The line inside the file (first line value is \'1\').
+-- | Line inside the file. The first line in the file has the value \`1\`.
 slLine :: Lens' SourceLocation (Maybe Int32)
 slLine
   = lens _slLine (\ s a -> s{_slLine = a}) .
@@ -1194,17 +1370,17 @@ stackFrame =
     , _sfLocals = Nothing
     }
 
--- | The unmangled function name at the call site.
+-- | Demangled function name at the call site.
 sfFunction :: Lens' StackFrame (Maybe Text)
 sfFunction
   = lens _sfFunction (\ s a -> s{_sfFunction = a})
 
--- | The source location of the call site.
+-- | Source location of the call site.
 sfLocation :: Lens' StackFrame (Maybe SourceLocation)
 sfLocation
   = lens _sfLocation (\ s a -> s{_sfLocation = a})
 
--- | The set of arguments passed to this function Note that this might not be
+-- | Set of arguments passed to this function. Note that this might not be
 -- populated for all stack frames.
 sfArguments :: Lens' StackFrame [Variable]
 sfArguments
@@ -1212,8 +1388,8 @@ sfArguments
       _Default
       . _Coerce
 
--- | The set of local variables at the stack frame location. Note that this
--- might not be populated for all stack frames.
+-- | Set of local variables at the stack frame location. Note that this might
+-- not be populated for all stack frames.
 sfLocals :: Lens' StackFrame [Variable]
 sfLocals
   = lens _sfLocals (\ s a -> s{_sfLocals = a}) .
@@ -1243,9 +1419,10 @@ instance ToJSON StackFrame where
 --
 -- /See:/ 'cloudRepoSourceContext' smart constructor.
 data CloudRepoSourceContext = CloudRepoSourceContext
-    { _crscRepoId     :: !(Maybe RepoId)
-    , _crscAliasName  :: !(Maybe Text)
-    , _crscRevisionId :: !(Maybe Text)
+    { _crscRepoId       :: !(Maybe RepoId)
+    , _crscAliasName    :: !(Maybe Text)
+    , _crscRevisionId   :: !(Maybe Text)
+    , _crscAliasContext :: !(Maybe AliasContext)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudRepoSourceContext' with the minimum fields required to make a request.
@@ -1257,6 +1434,8 @@ data CloudRepoSourceContext = CloudRepoSourceContext
 -- * 'crscAliasName'
 --
 -- * 'crscRevisionId'
+--
+-- * 'crscAliasContext'
 cloudRepoSourceContext
     :: CloudRepoSourceContext
 cloudRepoSourceContext =
@@ -1264,6 +1443,7 @@ cloudRepoSourceContext =
     { _crscRepoId = Nothing
     , _crscAliasName = Nothing
     , _crscRevisionId = Nothing
+    , _crscAliasContext = Nothing
     }
 
 -- | The ID of the repo.
@@ -1283,13 +1463,20 @@ crscRevisionId
   = lens _crscRevisionId
       (\ s a -> s{_crscRevisionId = a})
 
+-- | An alias, which may be a branch or tag.
+crscAliasContext :: Lens' CloudRepoSourceContext (Maybe AliasContext)
+crscAliasContext
+  = lens _crscAliasContext
+      (\ s a -> s{_crscAliasContext = a})
+
 instance FromJSON CloudRepoSourceContext where
         parseJSON
           = withObject "CloudRepoSourceContext"
               (\ o ->
                  CloudRepoSourceContext <$>
                    (o .:? "repoId") <*> (o .:? "aliasName") <*>
-                     (o .:? "revisionId"))
+                     (o .:? "revisionId")
+                     <*> (o .:? "aliasContext"))
 
 instance ToJSON CloudRepoSourceContext where
         toJSON CloudRepoSourceContext{..}
@@ -1297,7 +1484,8 @@ instance ToJSON CloudRepoSourceContext where
               (catMaybes
                  [("repoId" .=) <$> _crscRepoId,
                   ("aliasName" .=) <$> _crscAliasName,
-                  ("revisionId" .=) <$> _crscRevisionId])
+                  ("revisionId" .=) <$> _crscRevisionId,
+                  ("aliasContext" .=) <$> _crscAliasContext])
 
 -- | A set of custom debuggee properties, populated by the agent, to be
 -- displayed to the user.
@@ -1337,20 +1525,21 @@ instance ToJSON DebuggeeLabels where
 -- more replicated processes executing the same code. Each of these
 -- processes is attached with a debugger agent, carrying out the debugging
 -- commands. The agents attached to the same debuggee are identified by
--- using exactly the same fields\' values when registering.
+-- using exactly the same field values when registering.
 --
 -- /See:/ 'debuggee' smart constructor.
 data Debuggee = Debuggee
-    { _dStatus         :: !(Maybe StatusMessage)
-    , _dUniquifier     :: !(Maybe Text)
-    , _dProject        :: !(Maybe Text)
-    , _dAgentVersion   :: !(Maybe Text)
-    , _dIsDisabled     :: !(Maybe Bool)
-    , _dId             :: !(Maybe Text)
-    , _dLabels         :: !(Maybe DebuggeeLabels)
-    , _dDescription    :: !(Maybe Text)
-    , _dIsInactive     :: !(Maybe Bool)
-    , _dSourceContexts :: !(Maybe [SourceContext])
+    { _dStatus            :: !(Maybe StatusMessage)
+    , _dUniquifier        :: !(Maybe Text)
+    , _dProject           :: !(Maybe Text)
+    , _dExtSourceContexts :: !(Maybe [ExtendedSourceContext])
+    , _dAgentVersion      :: !(Maybe Text)
+    , _dIsDisabled        :: !(Maybe Bool)
+    , _dId                :: !(Maybe Text)
+    , _dLabels            :: !(Maybe DebuggeeLabels)
+    , _dDescription       :: !(Maybe Text)
+    , _dIsInactive        :: !(Maybe Bool)
+    , _dSourceContexts    :: !(Maybe [SourceContext])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Debuggee' with the minimum fields required to make a request.
@@ -1362,6 +1551,8 @@ data Debuggee = Debuggee
 -- * 'dUniquifier'
 --
 -- * 'dProject'
+--
+-- * 'dExtSourceContexts'
 --
 -- * 'dAgentVersion'
 --
@@ -1383,6 +1574,7 @@ debuggee =
     { _dStatus = Nothing
     , _dUniquifier = Nothing
     , _dProject = Nothing
+    , _dExtSourceContexts = Nothing
     , _dAgentVersion = Nothing
     , _dIsDisabled = Nothing
     , _dId = Nothing
@@ -1393,38 +1585,49 @@ debuggee =
     }
 
 -- | Human readable message to be displayed to the user about this debuggee.
--- Absense of this field indicates no message. The message can be either
--- informational or error.
+-- Absence of this field indicates no status. The message can be either
+-- informational or an error status.
 dStatus :: Lens' Debuggee (Maybe StatusMessage)
 dStatus = lens _dStatus (\ s a -> s{_dStatus = a})
 
--- | The debuggee uniqifier within the project. Any string that id the
--- application within the project can be used. Recomended to include
--- environement and version or build id\'s.
+-- | Debuggee uniquifier within the project. Any string that identifies the
+-- application within the project can be used. Including environment and
+-- version or build IDs is recommended.
 dUniquifier :: Lens' Debuggee (Maybe Text)
 dUniquifier
   = lens _dUniquifier (\ s a -> s{_dUniquifier = a})
 
--- | The project the debuggee is associated with. Use the project number when
+-- | Project the debuggee is associated with. Use the project number when
 -- registering a Google Cloud Platform project.
 dProject :: Lens' Debuggee (Maybe Text)
 dProject = lens _dProject (\ s a -> s{_dProject = a})
 
+-- | References to the locations and revisions of the source code used in the
+-- deployed application. Contexts describing a remote repo related to the
+-- source code have a \`category\` label of \`remote_repo\`. Source
+-- snapshot source contexts have a \`category\` of \`snapshot\`.
+dExtSourceContexts :: Lens' Debuggee [ExtendedSourceContext]
+dExtSourceContexts
+  = lens _dExtSourceContexts
+      (\ s a -> s{_dExtSourceContexts = a})
+      . _Default
+      . _Coerce
+
 -- | Version ID of the agent release. The version ID is structured as
--- following: \"domain\/type\/vmajor.minor\" (for example
--- \"google.com\/gcp-java\/v1.1\").
+-- following: \`domain\/type\/vmajor.minor\` (for example
+-- \`google.com\/gcp-java\/v1.1\`).
 dAgentVersion :: Lens' Debuggee (Maybe Text)
 dAgentVersion
   = lens _dAgentVersion
       (\ s a -> s{_dAgentVersion = a})
 
--- | If set to true, indicates that the agent should disable itself and
+-- | If set to \`true\`, indicates that the agent should disable itself and
 -- detach from the debuggee.
 dIsDisabled :: Lens' Debuggee (Maybe Bool)
 dIsDisabled
   = lens _dIsDisabled (\ s a -> s{_dIsDisabled = a})
 
--- | Debuggee unique identifer generated by the server.
+-- | Unique identifier for the debuggee generated by the controller service.
 dId :: Lens' Debuggee (Maybe Text)
 dId = lens _dId (\ s a -> s{_dId = a})
 
@@ -1433,20 +1636,22 @@ dId = lens _dId (\ s a -> s{_dId = a})
 dLabels :: Lens' Debuggee (Maybe DebuggeeLabels)
 dLabels = lens _dLabels (\ s a -> s{_dLabels = a})
 
--- | A human readable description of the debuggee. Recommended to include
--- human readable project name, environment name, and version information .
+-- | Human readable description of the debuggee. Including a human-readable
+-- project name, environment name and version information is recommended.
 dDescription :: Lens' Debuggee (Maybe Text)
 dDescription
   = lens _dDescription (\ s a -> s{_dDescription = a})
 
--- | If set to true indicates that the debuggee has not been seen by the
--- Controller service in the last active time period (defined by the
--- server).
+-- | If set to \`true\`, indicates that the debuggee is considered as
+-- inactive by the Controller service.
 dIsInactive :: Lens' Debuggee (Maybe Bool)
 dIsInactive
   = lens _dIsInactive (\ s a -> s{_dIsInactive = a})
 
--- | Repository snapshots containing the source code of the project.
+-- | References to the locations and revisions of the source code used in the
+-- deployed application. NOTE: This field is deprecated. Consumers should
+-- use \`ext_source_contexts\` if it is not empty. Debug agents should
+-- populate both this field and \`ext_source_contexts\`.
 dSourceContexts :: Lens' Debuggee [SourceContext]
 dSourceContexts
   = lens _dSourceContexts
@@ -1461,6 +1666,7 @@ instance FromJSON Debuggee where
                  Debuggee <$>
                    (o .:? "status") <*> (o .:? "uniquifier") <*>
                      (o .:? "project")
+                     <*> (o .:? "extSourceContexts" .!= mempty)
                      <*> (o .:? "agentVersion")
                      <*> (o .:? "isDisabled")
                      <*> (o .:? "id")
@@ -1476,6 +1682,7 @@ instance ToJSON Debuggee where
                  [("status" .=) <$> _dStatus,
                   ("uniquifier" .=) <$> _dUniquifier,
                   ("project" .=) <$> _dProject,
+                  ("extSourceContexts" .=) <$> _dExtSourceContexts,
                   ("agentVersion" .=) <$> _dAgentVersion,
                   ("isDisabled" .=) <$> _dIsDisabled,
                   ("id" .=) <$> _dId, ("labels" .=) <$> _dLabels,
@@ -1534,7 +1741,7 @@ instance ToJSON CloudWorkspaceSourceContext where
                  [("workspaceId" .=) <$> _cwscWorkspaceId,
                   ("snapshotId" .=) <$> _cwscSnapshotId])
 
--- | The request to register a debuggee.
+-- | Request to register a debuggee.
 --
 -- /See:/ 'registerDebuggeeRequest' smart constructor.
 newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest
@@ -1553,8 +1760,8 @@ registerDebuggeeRequest =
     { _rDebuggee = Nothing
     }
 
--- | The debuggee information to register. The fields \'project\',
--- \'uniquifier\', \'description\' and \'agent_version\' of the debuggee
+-- | Debuggee information to register. The fields \`project\`,
+-- \`uniquifier\`, \`description\` and \`agent_version\` of the debuggee
 -- must be set.
 rDebuggee :: Lens' RegisterDebuggeeRequest (Maybe Debuggee)
 rDebuggee
@@ -1569,6 +1776,49 @@ instance FromJSON RegisterDebuggeeRequest where
 instance ToJSON RegisterDebuggeeRequest where
         toJSON RegisterDebuggeeRequest{..}
           = object (catMaybes [("debuggee" .=) <$> _rDebuggee])
+
+-- | An alias to a repo revision.
+--
+-- /See:/ 'aliasContext' smart constructor.
+data AliasContext = AliasContext
+    { _acKind :: !(Maybe Text)
+    , _acName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AliasContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acKind'
+--
+-- * 'acName'
+aliasContext
+    :: AliasContext
+aliasContext =
+    AliasContext
+    { _acKind = Nothing
+    , _acName = Nothing
+    }
+
+-- | The alias kind.
+acKind :: Lens' AliasContext (Maybe Text)
+acKind = lens _acKind (\ s a -> s{_acKind = a})
+
+-- | The alias name.
+acName :: Lens' AliasContext (Maybe Text)
+acName = lens _acName (\ s a -> s{_acName = a})
+
+instance FromJSON AliasContext where
+        parseJSON
+          = withObject "AliasContext"
+              (\ o ->
+                 AliasContext <$> (o .:? "kind") <*> (o .:? "name"))
+
+instance ToJSON AliasContext where
+        toJSON AliasContext{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _acKind, ("name" .=) <$> _acName])
 
 -- | A CloudWorkspaceId is a unique identifier for a cloud workspace. A cloud
 -- workspace is a place associated with a repo where modified files can be

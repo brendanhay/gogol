@@ -166,7 +166,7 @@ import           Network.Google.ReplicaPoolUpdater.Types.Product
 import           Network.Google.ReplicaPoolUpdater.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Compute Engine Instance Group Updater API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPoolUpdaterService :: Service
+replicaPoolUpdaterService :: ServiceConfig
 replicaPoolUpdaterService
   = defaultService
       (ServiceId "replicapoolupdater:v1beta1")

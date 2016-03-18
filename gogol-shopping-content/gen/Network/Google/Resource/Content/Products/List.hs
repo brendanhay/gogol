@@ -34,6 +34,7 @@ module Network.Google.Resource.Content.Products.List
 
     -- * Request Lenses
     , proMerchantId
+    , proIncludeInvalidInsertedItems
     , proPageToken
     , proMaxResults
     ) where
@@ -48,18 +49,20 @@ type ProductsListResource =
        "v2" :>
          Capture "merchantId" (Textual Word64) :>
            "products" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (Textual Word32) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ProductsListResponse
+             QueryParam "includeInvalidInsertedItems" Bool :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" (Textual Word32) :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ProductsListResponse
 
 -- | Lists the products in your Merchant Center account.
 --
 -- /See:/ 'productsList' smart constructor.
 data ProductsList = ProductsList
-    { _proMerchantId :: !(Textual Word64)
-    , _proPageToken  :: !(Maybe Text)
-    , _proMaxResults :: !(Maybe (Textual Word32))
+    { _proMerchantId                  :: !(Textual Word64)
+    , _proIncludeInvalidInsertedItems :: !(Maybe Bool)
+    , _proPageToken                   :: !(Maybe Text)
+    , _proMaxResults                  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsList' with the minimum fields required to make a request.
@@ -67,6 +70,8 @@ data ProductsList = ProductsList
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'proMerchantId'
+--
+-- * 'proIncludeInvalidInsertedItems'
 --
 -- * 'proPageToken'
 --
@@ -77,6 +82,7 @@ productsList
 productsList pProMerchantId_ =
     ProductsList
     { _proMerchantId = _Coerce # pProMerchantId_
+    , _proIncludeInvalidInsertedItems = Nothing
     , _proPageToken = Nothing
     , _proMaxResults = Nothing
     }
@@ -87,6 +93,14 @@ proMerchantId
   = lens _proMerchantId
       (\ s a -> s{_proMerchantId = a})
       . _Coerce
+
+-- | Flag to include the invalid inserted items in the result of the list
+-- request. By default the invalid items are not shown (the default value
+-- is false).
+proIncludeInvalidInsertedItems :: Lens' ProductsList (Maybe Bool)
+proIncludeInvalidInsertedItems
+  = lens _proIncludeInvalidInsertedItems
+      (\ s a -> s{_proIncludeInvalidInsertedItems = a})
 
 -- | The token returned by the previous request.
 proPageToken :: Lens' ProductsList (Maybe Text)
@@ -104,7 +118,9 @@ proMaxResults
 instance GoogleRequest ProductsList where
         type Rs ProductsList = ProductsListResponse
         requestClient ProductsList{..}
-          = go _proMerchantId _proPageToken _proMaxResults
+          = go _proMerchantId _proIncludeInvalidInsertedItems
+              _proPageToken
+              _proMaxResults
               (Just AltJSON)
               shoppingContentService
           where go

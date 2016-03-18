@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified firewall resource.
+-- Deletes the specified firewall.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.delete@.
 module Network.Google.Resource.Compute.Firewalls.Delete
@@ -52,7 +52,7 @@ type FirewallsDeleteResource =
                  Capture "firewall" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified firewall resource.
+-- | Deletes the specified firewall.
 --
 -- /See:/ 'firewallsDelete' smart constructor.
 data FirewallsDelete = FirewallsDelete
@@ -82,7 +82,7 @@ fdProject :: Lens' FirewallsDelete Text
 fdProject
   = lens _fdProject (\ s a -> s{_fdProject = a})
 
--- | Name of the firewall resource to delete.
+-- | Name of the firewall rule to delete.
 fdFirewall :: Lens' FirewallsDelete Text
 fdFirewall
   = lens _fdFirewall (\ s a -> s{_fdFirewall = a})

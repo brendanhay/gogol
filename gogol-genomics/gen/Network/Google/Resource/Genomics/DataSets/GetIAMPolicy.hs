@@ -20,11 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for the dataset. Is empty if the policy
--- or the resource does not exist. See Getting a Policy for more
--- information.
+-- Gets the access control policy for the dataset. This is empty if the
+-- policy or resource does not exist. See Getting a Policy for more
+-- information. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.getIamPolicy@.
 module Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
     (
     -- * REST Resource
@@ -65,9 +67,11 @@ type DataSetsGetIAMPolicyResource =
                          ReqBody '[JSON] GetIAMPolicyRequest :>
                            Post '[JSON] Policy
 
--- | Gets the access control policy for the dataset. Is empty if the policy
--- or the resource does not exist. See Getting a Policy for more
--- information.
+-- | Gets the access control policy for the dataset. This is empty if the
+-- policy or resource does not exist. See Getting a Policy for more
+-- information. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsGetIAMPolicy' smart constructor.
 data DataSetsGetIAMPolicy = DataSetsGetIAMPolicy

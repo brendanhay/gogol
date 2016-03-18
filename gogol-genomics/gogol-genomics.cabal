@@ -14,8 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    An API to store, process, explore, and share DNA sequence reads,
-    reference-based alignments, and variant calls.
+    Stores, processes, explores and shares genomic data. This API implements
+    the Global Alliance for Genomics and Health (GA4GH) v0.5.1 API as well
+    as several extensions.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -51,7 +52,6 @@ library
         , Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
         , Network.Google.Resource.Genomics.DataSets.Undelete
         , Network.Google.Resource.Genomics.Operations.Cancel
-        , Network.Google.Resource.Genomics.Operations.Delete
         , Network.Google.Resource.Genomics.Operations.Get
         , Network.Google.Resource.Genomics.Operations.List
         , Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
@@ -62,6 +62,7 @@ library
         , Network.Google.Resource.Genomics.ReadGroupSets.Patch
         , Network.Google.Resource.Genomics.ReadGroupSets.Search
         , Network.Google.Resource.Genomics.Reads.Search
+        , Network.Google.Resource.Genomics.Reads.Stream
         , Network.Google.Resource.Genomics.References.Bases.List
         , Network.Google.Resource.Genomics.References.Get
         , Network.Google.Resource.Genomics.References.Search
@@ -77,8 +78,10 @@ library
         , Network.Google.Resource.Genomics.Variants.Delete
         , Network.Google.Resource.Genomics.Variants.Get
         , Network.Google.Resource.Genomics.Variants.Import
+        , Network.Google.Resource.Genomics.Variants.Merge
         , Network.Google.Resource.Genomics.Variants.Patch
         , Network.Google.Resource.Genomics.Variants.Search
+        , Network.Google.Resource.Genomics.Variants.Stream
 
     other-modules:
           Network.Google.Genomics.Types.Product

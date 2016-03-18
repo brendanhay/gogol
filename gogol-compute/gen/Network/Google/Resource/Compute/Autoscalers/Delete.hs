@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified autoscaler resource.
+-- Deletes the specified autoscaler.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.delete@.
 module Network.Google.Resource.Compute.Autoscalers.Delete
@@ -54,7 +54,7 @@ type AutoscalersDeleteResource =
                    Capture "autoscaler" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified autoscaler resource.
+-- | Deletes the specified autoscaler.
 --
 -- /See:/ 'autoscalersDelete' smart constructor.
 data AutoscalersDelete = AutoscalersDelete
@@ -84,16 +84,16 @@ autoscalersDelete pAdProject_ pAdZone_ pAdAutoscaler_ =
     , _adAutoscaler = pAdAutoscaler_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 adProject :: Lens' AutoscalersDelete Text
 adProject
   = lens _adProject (\ s a -> s{_adProject = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 adZone :: Lens' AutoscalersDelete Text
 adZone = lens _adZone (\ s a -> s{_adZone = a})
 
--- | Name of the persistent autoscaler resource to delete.
+-- | Name of the autoscaler to delete.
 adAutoscaler :: Lens' AutoscalersDelete Text
 adAutoscaler
   = lens _adAutoscaler (\ s a -> s{_adAutoscaler = a})

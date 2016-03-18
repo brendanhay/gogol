@@ -26,7 +26,7 @@
 -- Otherwise, the device state is ignored and all devices are allowed
 -- access to Google services.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.getState@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.devices.getState@.
 module Network.Google.Resource.AndroidEnterprise.Devices.GetState
     (
     -- * REST Resource

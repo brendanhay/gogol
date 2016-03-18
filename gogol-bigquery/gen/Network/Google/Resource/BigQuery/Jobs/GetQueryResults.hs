@@ -101,7 +101,7 @@ jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
     , _jgqrMaxResults = Nothing
     }
 
--- | Job ID of the query job
+-- | [Required] Job ID of the query job
 jgqrJobId :: Lens' JobsGetQueryResults Text
 jgqrJobId
   = lens _jgqrJobId (\ s a -> s{_jgqrJobId = a})
@@ -122,7 +122,7 @@ jgqrPageToken
   = lens _jgqrPageToken
       (\ s a -> s{_jgqrPageToken = a})
 
--- | Project ID of the query job
+-- | [Required] Project ID of the query job
 jgqrProjectId :: Lens' JobsGetQueryResults Text
 jgqrProjectId
   = lens _jgqrProjectId

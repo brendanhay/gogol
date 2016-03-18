@@ -143,8 +143,11 @@ ptgipBearerToken
   = lens _ptgipBearerToken
       (\ s a -> s{_ptgipBearerToken = a})
 
--- | REQUIRED: The resource for which policy is being requested. Resource is
--- usually specified as a path, such as, \`projects\/{project}\`.
+-- | REQUIRED: The resource for which policy is being requested. \`resource\`
+-- is usually specified as a path, such as,
+-- \`projects\/{project}\/zones\/{zone}\/disks\/{disk}\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the documentation for the respective GetIamPolicy rpc.
 ptgipResource :: Lens' ProjectsTopicsGetIAMPolicy Text
 ptgipResource
   = lens _ptgipResource

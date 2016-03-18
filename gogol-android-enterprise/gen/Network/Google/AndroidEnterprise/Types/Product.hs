@@ -145,6 +145,58 @@ instance ToJSON GroupLicense where
                   ("productId" .=) <$> _glProductId,
                   ("acquisitionKind" .=) <$> _glAcquisitionKind])
 
+-- | The store page resources for the enterprise.
+--
+-- /See:/ 'storeLayoutPagesListResponse' smart constructor.
+data StoreLayoutPagesListResponse = StoreLayoutPagesListResponse
+    { _slplrKind :: !Text
+    , _slplrPage :: !(Maybe [StorePage])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StoreLayoutPagesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slplrKind'
+--
+-- * 'slplrPage'
+storeLayoutPagesListResponse
+    :: StoreLayoutPagesListResponse
+storeLayoutPagesListResponse =
+    StoreLayoutPagesListResponse
+    { _slplrKind = "androidenterprise#storeLayoutPagesListResponse"
+    , _slplrPage = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storeLayoutPagesListResponse\".
+slplrKind :: Lens' StoreLayoutPagesListResponse Text
+slplrKind
+  = lens _slplrKind (\ s a -> s{_slplrKind = a})
+
+-- | A store page of an enterprise.
+slplrPage :: Lens' StoreLayoutPagesListResponse [StorePage]
+slplrPage
+  = lens _slplrPage (\ s a -> s{_slplrPage = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StoreLayoutPagesListResponse where
+        parseJSON
+          = withObject "StoreLayoutPagesListResponse"
+              (\ o ->
+                 StoreLayoutPagesListResponse <$>
+                   (o .:? "kind" .!=
+                      "androidenterprise#storeLayoutPagesListResponse")
+                     <*> (o .:? "page" .!= mempty))
+
+instance ToJSON StoreLayoutPagesListResponse where
+        toJSON StoreLayoutPagesListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _slplrKind),
+                  ("page" .=) <$> _slplrPage])
+
 -- | A service account that can be used to authenticate as the enterprise to
 -- API calls that require such authentication.
 --
@@ -501,6 +553,152 @@ instance ToJSON ApprovalURLInfo where
                  [("approvalUrl" .=) <$> _auiApprovalURL,
                   Just ("kind" .= _auiKind)])
 
+-- | The store page resources for the enterprise.
+--
+-- /See:/ 'storeLayoutClustersListResponse' smart constructor.
+data StoreLayoutClustersListResponse = StoreLayoutClustersListResponse
+    { _slclrCluster :: !(Maybe [StoreCluster])
+    , _slclrKind    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StoreLayoutClustersListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slclrCluster'
+--
+-- * 'slclrKind'
+storeLayoutClustersListResponse
+    :: StoreLayoutClustersListResponse
+storeLayoutClustersListResponse =
+    StoreLayoutClustersListResponse
+    { _slclrCluster = Nothing
+    , _slclrKind = "androidenterprise#storeLayoutClustersListResponse"
+    }
+
+-- | A store cluster of an enterprise.
+slclrCluster :: Lens' StoreLayoutClustersListResponse [StoreCluster]
+slclrCluster
+  = lens _slclrCluster (\ s a -> s{_slclrCluster = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storeLayoutClustersListResponse\".
+slclrKind :: Lens' StoreLayoutClustersListResponse Text
+slclrKind
+  = lens _slclrKind (\ s a -> s{_slclrKind = a})
+
+instance FromJSON StoreLayoutClustersListResponse
+         where
+        parseJSON
+          = withObject "StoreLayoutClustersListResponse"
+              (\ o ->
+                 StoreLayoutClustersListResponse <$>
+                   (o .:? "cluster" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "androidenterprise#storeLayoutClustersListResponse"))
+
+instance ToJSON StoreLayoutClustersListResponse where
+        toJSON StoreLayoutClustersListResponse{..}
+          = object
+              (catMaybes
+                 [("cluster" .=) <$> _slclrCluster,
+                  Just ("kind" .= _slclrKind)])
+
+-- | Definition of a Google Play for Work store cluster, a list of products
+-- displayed as part of a store page.
+--
+-- /See:/ 'storeCluster' smart constructor.
+data StoreCluster = StoreCluster
+    { _scKind        :: !Text
+    , _scName        :: !(Maybe [LocalizedText])
+    , _scOrderInPage :: !(Maybe Text)
+    , _scId          :: !(Maybe Text)
+    , _scProductId   :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StoreCluster' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scKind'
+--
+-- * 'scName'
+--
+-- * 'scOrderInPage'
+--
+-- * 'scId'
+--
+-- * 'scProductId'
+storeCluster
+    :: StoreCluster
+storeCluster =
+    StoreCluster
+    { _scKind = "androidenterprise#storeCluster"
+    , _scName = Nothing
+    , _scOrderInPage = Nothing
+    , _scId = Nothing
+    , _scProductId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storeCluster\".
+scKind :: Lens' StoreCluster Text
+scKind = lens _scKind (\ s a -> s{_scKind = a})
+
+-- | Ordered list of localized strings giving the name of this page. The text
+-- displayed is the one that best matches the user locale, or the first
+-- entry if there is no good match. There needs to be at least one entry.
+scName :: Lens' StoreCluster [LocalizedText]
+scName
+  = lens _scName (\ s a -> s{_scName = a}) . _Default .
+      _Coerce
+
+-- | String (US-ASCII only) used to determine order of this cluster within
+-- the parent page\'s elements. Page elements are sorted in lexicographic
+-- order of this field. Duplicated values are allowed, but ordering between
+-- elements with duplicate order is undefined. The value of this field is
+-- never visible to a user, it is used solely for the purpose of defining
+-- an ordering. Maximum length is 20 characters.
+scOrderInPage :: Lens' StoreCluster (Maybe Text)
+scOrderInPage
+  = lens _scOrderInPage
+      (\ s a -> s{_scOrderInPage = a})
+
+-- | Unique ID of this cluster. Assigned by the server. Immutable once
+-- assigned.
+scId :: Lens' StoreCluster (Maybe Text)
+scId = lens _scId (\ s a -> s{_scId = a})
+
+-- | List of products in the order they are displayed in the cluster. There
+-- should not be duplicates within a cluster.
+scProductId :: Lens' StoreCluster [Text]
+scProductId
+  = lens _scProductId (\ s a -> s{_scProductId = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StoreCluster where
+        parseJSON
+          = withObject "StoreCluster"
+              (\ o ->
+                 StoreCluster <$>
+                   (o .:? "kind" .!= "androidenterprise#storeCluster")
+                     <*> (o .:? "name" .!= mempty)
+                     <*> (o .:? "orderInPage")
+                     <*> (o .:? "id")
+                     <*> (o .:? "productId" .!= mempty))
+
+instance ToJSON StoreCluster where
+        toJSON StoreCluster{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _scKind), ("name" .=) <$> _scName,
+                  ("orderInPage" .=) <$> _scOrderInPage,
+                  ("id" .=) <$> _scId,
+                  ("productId" .=) <$> _scProductId])
+
 -- | A product permissions resource represents the set of permissions
 -- required by a specific app and whether or not they have been accepted by
 -- an enterprise admin. The API can be used to read the set of permissions,
@@ -552,7 +750,7 @@ instance ToJSON ProductPermission where
                  [("state" .=) <$> _ppState,
                   ("permissionId" .=) <$> _ppPermissionId])
 
--- | A device resource represents a mobile device managed by the MDM and
+-- | A device resource represents a mobile device managed by the EMM and
 -- belonging to a specific enterprise user. This collection cannot be
 -- modified via the API; it is automatically populated as devices are set
 -- up to be managed.
@@ -587,11 +785,11 @@ device =
 dKind :: Lens' Device Text
 dKind = lens _dKind (\ s a -> s{_dKind = a})
 
--- | The mechanism by which this device is managed by the MDM.
--- \"managedDevice\" means that the MDM\'s app is a device owner.
--- \"managedProfile\" means that the MDM\'s app is the profile owner (and
+-- | The mechanism by which this device is managed by the EMM.
+-- \"managedDevice\" means that the EMM\'s app is a device owner.
+-- \"managedProfile\" means that the EMM\'s app is the profile owner (and
 -- there is a separate personal profile which is not managed).
--- \"containerApp\" means that the MDM\'s app is managing the Android for
+-- \"containerApp\" means that the EMM\'s app is managing the Android for
 -- Work container app on the device.
 dManagementType :: Lens' Device (Maybe Text)
 dManagementType
@@ -1192,12 +1390,12 @@ instance ToJSON Install where
 -- | A user resource represents an individual user within the enterprise\'s
 -- domain. Note that each user is associated with a Google account based on
 -- the user\'s corporate email address (which must be in one of the
--- enterprise\'s domains). As part of installing an MDM app to manage a
--- device the Google account must be provisioned to the device, and so the
--- user resource must be created before that. This can be done using the
--- Google Admin SDK Directory API. The ID for a user is an opaque string.
--- It can be retrieved using the list method queried by the user\'s primary
--- email address.
+-- enterprise\'s domains). As part of installing the EMM\'s DPC app to
+-- manage a device the Google account must be provisioned to the device,
+-- and so the user resource must be created before that. This can be done
+-- using the Google Admin SDK Directory API. The ID for a user is an opaque
+-- string. It can be retrieved using the list method queried by the user\'s
+-- primary email address.
 --
 -- /See:/ 'user' smart constructor.
 data User = User
@@ -1233,7 +1431,8 @@ uKind = lens _uKind (\ s a -> s{_uKind = a})
 uId :: Lens' User (Maybe Text)
 uId = lens _uId (\ s a -> s{_uId = a})
 
--- | The user\'s primary email, e.g. \"jsmith\'example.com\".
+-- | The user\'s primary email, e.g. \"jsmith\'example.com\". Will always be
+-- set for Google managed users and not set for EMM managed users.
 uPrimaryEmail :: Lens' User (Maybe Text)
 uPrimaryEmail
   = lens _uPrimaryEmail
@@ -1296,6 +1495,84 @@ instance ToJSON ProductsGenerateApprovalURLResponse
          where
         toJSON ProductsGenerateApprovalURLResponse{..}
           = object (catMaybes [("url" .=) <$> _pgaurURL])
+
+-- | Definition of a Google Play for Work store page, made of a localized
+-- name and links to other pages. A page also contains clusters defined as
+-- a subcollection.
+--
+-- /See:/ 'storePage' smart constructor.
+data StorePage = StorePage
+    { _spKind :: !Text
+    , _spLink :: !(Maybe [Text])
+    , _spName :: !(Maybe [LocalizedText])
+    , _spId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StorePage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spKind'
+--
+-- * 'spLink'
+--
+-- * 'spName'
+--
+-- * 'spId'
+storePage
+    :: StorePage
+storePage =
+    StorePage
+    { _spKind = "androidenterprise#storePage"
+    , _spLink = Nothing
+    , _spName = Nothing
+    , _spId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storePage\".
+spKind :: Lens' StorePage Text
+spKind = lens _spKind (\ s a -> s{_spKind = a})
+
+-- | Ordered list of pages a user should be able to reach from this page. The
+-- pages must exist, must not be this page, and once a link is created the
+-- page linked to cannot be deleted until all links to it are removed. It
+-- is recommended that the basic pages are created first, before adding the
+-- links between pages. No attempt is made to verify that all pages are
+-- reachable from the homepage.
+spLink :: Lens' StorePage [Text]
+spLink
+  = lens _spLink (\ s a -> s{_spLink = a}) . _Default .
+      _Coerce
+
+-- | Ordered list of localized strings giving the name of this page. The text
+-- displayed is the one that best matches the user locale, or the first
+-- entry if there is no good match. There needs to be at least one entry.
+spName :: Lens' StorePage [LocalizedText]
+spName
+  = lens _spName (\ s a -> s{_spName = a}) . _Default .
+      _Coerce
+
+-- | Unique ID of this page. Assigned by the server. Immutable once assigned.
+spId :: Lens' StorePage (Maybe Text)
+spId = lens _spId (\ s a -> s{_spId = a})
+
+instance FromJSON StorePage where
+        parseJSON
+          = withObject "StorePage"
+              (\ o ->
+                 StorePage <$>
+                   (o .:? "kind" .!= "androidenterprise#storePage") <*>
+                     (o .:? "link" .!= mempty)
+                     <*> (o .:? "name" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON StorePage where
+        toJSON StorePage{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _spKind), ("link" .=) <$> _spLink,
+                  ("name" .=) <$> _spName, ("id" .=) <$> _spId])
 
 --
 -- /See:/ 'enterprisesSendTestPushNotificationResponse' smart constructor.
@@ -1455,9 +1732,54 @@ instance ToJSON AppRestrictionsSchema where
                  [Just ("kind" .= _arsKind),
                   ("restrictions" .=) <$> _arsRestrictions])
 
+-- | A localized string with its locale.
+--
+-- /See:/ 'localizedText' smart constructor.
+data LocalizedText = LocalizedText
+    { _ltText   :: !(Maybe Text)
+    , _ltLocale :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocalizedText' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltText'
+--
+-- * 'ltLocale'
+localizedText
+    :: LocalizedText
+localizedText =
+    LocalizedText
+    { _ltText = Nothing
+    , _ltLocale = Nothing
+    }
+
+-- | The text localized in the associated locale.
+ltText :: Lens' LocalizedText (Maybe Text)
+ltText = lens _ltText (\ s a -> s{_ltText = a})
+
+-- | The BCP47 tag for a locale. (e.g. \"en-US\", \"de\").
+ltLocale :: Lens' LocalizedText (Maybe Text)
+ltLocale = lens _ltLocale (\ s a -> s{_ltLocale = a})
+
+instance FromJSON LocalizedText where
+        parseJSON
+          = withObject "LocalizedText"
+              (\ o ->
+                 LocalizedText <$>
+                   (o .:? "text") <*> (o .:? "locale"))
+
+instance ToJSON LocalizedText where
+        toJSON LocalizedText{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _ltText,
+                  ("locale" .=) <$> _ltLocale])
+
 -- | A UserToken is used by a user when setting up a managed device or
 -- profile with their work account on a device. When the user enters their
--- email address and token (activation code) the appropriate MDM app can be
+-- email address and token (activation code) the appropriate EMM app can be
 -- automatically downloaded.
 --
 -- /See:/ 'userToken' smart constructor.
@@ -1567,20 +1889,20 @@ instance ToJSON DevicesListResponse where
                   ("device" .=) <$> _dlrDevice])
 
 -- | An enterprise resource represents a binding between an organisation and
--- their MDM. To create an enterprise, an admin of the enterprise must
+-- their EMM. To create an enterprise, an admin of the enterprise must
 -- first go through a Play for Work sign-up flow. At the end of this the
 -- admin will be presented with a token (a short opaque alphanumeric
--- string). They must then present this to the MDM, who then supplies it to
--- the enroll method. Until this is done the MDM will not have any access
--- to the enterprise. After calling enroll the MDM should call setAccount
+-- string). They must then present this to the EMM, who then supplies it to
+-- the enroll method. Until this is done the EMM will not have any access
+-- to the enterprise. After calling enroll the EMM should call setAccount
 -- to specify the service account that will be allowed to act on behalf of
 -- the enterprise, which will be required for access to the enterprise\'s
 -- data through this API. Only one call of setAccount is allowed for a
 -- given enterprise; the only way to change the account later is to
 -- unenroll the enterprise and enroll it again (obtaining a new token). The
--- MDM can unenroll an enterprise in order to sever the binding between
+-- EMM can unenroll an enterprise in order to sever the binding between
 -- them. Re-enrolling an enterprise is possible, but requires a new token
--- to be retrieved. Enterprises.unenroll requires the MDM\'s credentials
+-- to be retrieved. Enterprises.unenroll requires the EMM\'s credentials
 -- (as enroll does), not the enterprise\'s. Enterprises.unenroll can only
 -- be used for enterprises that were previously enrolled with the enroll
 -- call. Any enterprises that were enrolled using the (deprecated)
@@ -1656,12 +1978,65 @@ instance ToJSON Enterprise where
                   ("primaryDomain" .=) <$> _ePrimaryDomain,
                   ("name" .=) <$> _eName, ("id" .=) <$> _eId])
 
+-- | General setting for the Google Play for Work store layout, currently
+-- only specifying the page to display the first time the store is opened.
+--
+-- /See:/ 'storeLayout' smart constructor.
+data StoreLayout = StoreLayout
+    { _slKind       :: !Text
+    , _slHomepageId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StoreLayout' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slKind'
+--
+-- * 'slHomepageId'
+storeLayout
+    :: StoreLayout
+storeLayout =
+    StoreLayout
+    { _slKind = "androidenterprise#storeLayout"
+    , _slHomepageId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storeLayout\".
+slKind :: Lens' StoreLayout Text
+slKind = lens _slKind (\ s a -> s{_slKind = a})
+
+-- | The ID of the store page to be used as the homepage. The homepage will
+-- be used as the first page shown in the Google Play for Work store. If
+-- there is no homepage set, an empty store is shown. The homepage can be
+-- unset (by not specifying it) to empty the store. If there exists at
+-- least one page, this field must be set to the ID of a valid page.
+slHomepageId :: Lens' StoreLayout (Maybe Text)
+slHomepageId
+  = lens _slHomepageId (\ s a -> s{_slHomepageId = a})
+
+instance FromJSON StoreLayout where
+        parseJSON
+          = withObject "StoreLayout"
+              (\ o ->
+                 StoreLayout <$>
+                   (o .:? "kind" .!= "androidenterprise#storeLayout")
+                     <*> (o .:? "homepageId"))
+
+instance ToJSON StoreLayout where
+        toJSON StoreLayout{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _slKind),
+                  ("homepageId" .=) <$> _slHomepageId])
+
 -- | A product represents an app in the Google Play Store that is available
 -- to at least some users in the enterprise. (Some apps are restricted to a
 -- single enterprise, and no information about them is made available
 -- outside that enterprise.) The information provided for each product
 -- (localized name, icon, link to the full Google Play details page) is
--- intended to allow a basic representation of the product within an MDM
+-- intended to allow a basic representation of the product within an EMM
 -- user interface.
 --
 -- /See:/ 'product' smart constructor.
@@ -1671,6 +2046,7 @@ data Product = Product
     , _pWorkDetailsURL       :: !(Maybe Text)
     , _pRequiresContainerApp :: !(Maybe Bool)
     , _pAppVersion           :: !(Maybe [AppVersion])
+    , _pProductPricing       :: !(Maybe Text)
     , _pDistributionChannel  :: !(Maybe Text)
     , _pIconURL              :: !(Maybe Text)
     , _pTitle                :: !(Maybe Text)
@@ -1692,6 +2068,8 @@ data Product = Product
 --
 -- * 'pAppVersion'
 --
+-- * 'pProductPricing'
+--
 -- * 'pDistributionChannel'
 --
 -- * 'pIconURL'
@@ -1710,6 +2088,7 @@ product =
     , _pWorkDetailsURL = Nothing
     , _pRequiresContainerApp = Nothing
     , _pAppVersion = Nothing
+    , _pProductPricing = Nothing
     , _pDistributionChannel = Nothing
     , _pIconURL = Nothing
     , _pTitle = Nothing
@@ -1748,6 +2127,12 @@ pAppVersion
   = lens _pAppVersion (\ s a -> s{_pAppVersion = a}) .
       _Default
       . _Coerce
+
+-- | Whether this product is free, free with in-app purchases, or paid.
+pProductPricing :: Lens' Product (Maybe Text)
+pProductPricing
+  = lens _pProductPricing
+      (\ s a -> s{_pProductPricing = a})
 
 -- | How and to whom the package is made available. The value
 -- publicGoogleHosted means that the package is available through the Play
@@ -1790,6 +2175,7 @@ instance FromJSON Product where
                      <*> (o .:? "workDetailsUrl")
                      <*> (o .:? "requiresContainerApp")
                      <*> (o .:? "appVersion" .!= mempty)
+                     <*> (o .:? "productPricing")
                      <*> (o .:? "distributionChannel")
                      <*> (o .:? "iconUrl")
                      <*> (o .:? "title")
@@ -1806,6 +2192,7 @@ instance ToJSON Product where
                   ("requiresContainerApp" .=) <$>
                     _pRequiresContainerApp,
                   ("appVersion" .=) <$> _pAppVersion,
+                  ("productPricing" .=) <$> _pProductPricing,
                   ("distributionChannel" .=) <$> _pDistributionChannel,
                   ("iconUrl" .=) <$> _pIconURL,
                   ("title" .=) <$> _pTitle,
@@ -1935,7 +2322,7 @@ instance ToJSON ProductPermissions where
 -- consent to these permissions on behalf of their users before an
 -- entitlement for the app can be created. The permissions collection is
 -- read-only. The information provided for each permission (localized name
--- and description) is intended to be used in the MDM user interface when
+-- and description) is intended to be used in the EMM user interface when
 -- obtaining consent from the enterprise.
 --
 -- /See:/ 'permission' smart constructor.
@@ -2106,7 +2493,7 @@ instance ToJSON CollectionViewersListResponse where
 -- true that a user has an app installed on one of their devices only if
 -- they have an entitlement to it. So if an entitlement is deleted, the app
 -- will be uninstalled from all devices. Similarly if the user installs an
--- app (and is permitted to do so), or the MDM triggers an install of the
+-- app (and is permitted to do so), or the EMM triggers an install of the
 -- app, an entitlement to that app is automatically created. If this is
 -- impossible - e.g. the enterprise has not purchased sufficient licenses -
 -- then installation fails. Note that entitlements are always user

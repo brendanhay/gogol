@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an autoscaler resource in the specified project using the data
--- included in the request.
+-- Creates an autoscaler in the specified project using the data included
+-- in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.insert@.
 module Network.Google.Resource.Compute.Autoscalers.Insert
@@ -55,8 +55,8 @@ type AutoscalersInsertResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Autoscaler :> Post '[JSON] Operation
 
--- | Creates an autoscaler resource in the specified project using the data
--- included in the request.
+-- | Creates an autoscaler in the specified project using the data included
+-- in the request.
 --
 -- /See:/ 'autoscalersInsert' smart constructor.
 data AutoscalersInsert = AutoscalersInsert
@@ -86,12 +86,12 @@ autoscalersInsert pAiiProject_ pAiiZone_ pAiiPayload_ =
     , _aiiPayload = pAiiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 aiiProject :: Lens' AutoscalersInsert Text
 aiiProject
   = lens _aiiProject (\ s a -> s{_aiiProject = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 aiiZone :: Lens' AutoscalersInsert Text
 aiiZone = lens _aiiZone (\ s a -> s{_aiiZone = a})
 

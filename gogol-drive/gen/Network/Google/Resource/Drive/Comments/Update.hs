@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing comment.
+-- Updates a comment with patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.update@.
 module Network.Google.Resource.Drive.Comments.Update
@@ -45,15 +45,15 @@ import           Network.Google.Prelude
 -- 'CommentsUpdate' request conforms to.
 type CommentsUpdateResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
                Capture "commentId" Text :>
                  QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Comment :> Put '[JSON] Comment
+                   ReqBody '[JSON] Comment :> Patch '[JSON] Comment
 
--- | Updates an existing comment.
+-- | Updates a comment with patch semantics.
 --
 -- /See:/ 'commentsUpdate' smart constructor.
 data CommentsUpdate = CommentsUpdate

@@ -34,6 +34,7 @@ module Network.Google.Resource.Content.Productstatuses.List
 
     -- * Request Lenses
     , plMerchantId
+    , plIncludeInvalidInsertedItems
     , plPageToken
     , plMaxResults
     ) where
@@ -48,18 +49,20 @@ type ProductstatusesListResource =
        "v2" :>
          Capture "merchantId" (Textual Word64) :>
            "productstatuses" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (Textual Word32) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ProductstatusesListResponse
+             QueryParam "includeInvalidInsertedItems" Bool :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" (Textual Word32) :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ProductstatusesListResponse
 
 -- | Lists the statuses of the products in your Merchant Center account.
 --
 -- /See:/ 'productstatusesList' smart constructor.
 data ProductstatusesList = ProductstatusesList
-    { _plMerchantId :: !(Textual Word64)
-    , _plPageToken  :: !(Maybe Text)
-    , _plMaxResults :: !(Maybe (Textual Word32))
+    { _plMerchantId                  :: !(Textual Word64)
+    , _plIncludeInvalidInsertedItems :: !(Maybe Bool)
+    , _plPageToken                   :: !(Maybe Text)
+    , _plMaxResults                  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesList' with the minimum fields required to make a request.
@@ -67,6 +70,8 @@ data ProductstatusesList = ProductstatusesList
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plMerchantId'
+--
+-- * 'plIncludeInvalidInsertedItems'
 --
 -- * 'plPageToken'
 --
@@ -77,6 +82,7 @@ productstatusesList
 productstatusesList pPlMerchantId_ =
     ProductstatusesList
     { _plMerchantId = _Coerce # pPlMerchantId_
+    , _plIncludeInvalidInsertedItems = Nothing
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
@@ -86,6 +92,14 @@ plMerchantId :: Lens' ProductstatusesList Word64
 plMerchantId
   = lens _plMerchantId (\ s a -> s{_plMerchantId = a})
       . _Coerce
+
+-- | Flag to include the invalid inserted items in the result of the list
+-- request. By default the invalid items are not shown (the default value
+-- is false).
+plIncludeInvalidInsertedItems :: Lens' ProductstatusesList (Maybe Bool)
+plIncludeInvalidInsertedItems
+  = lens _plIncludeInvalidInsertedItems
+      (\ s a -> s{_plIncludeInvalidInsertedItems = a})
 
 -- | The token returned by the previous request.
 plPageToken :: Lens' ProductstatusesList (Maybe Text)
@@ -103,7 +117,9 @@ instance GoogleRequest ProductstatusesList where
         type Rs ProductstatusesList =
              ProductstatusesListResponse
         requestClient ProductstatusesList{..}
-          = go _plMerchantId _plPageToken _plMaxResults
+          = go _plMerchantId _plIncludeInvalidInsertedItems
+              _plPageToken
+              _plMaxResults
               (Just AltJSON)
               shoppingContentService
           where go

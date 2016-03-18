@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the entire content of the UrlMap resource.
+-- Updates the entire content of the UrlMap resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.update@.
 module Network.Google.Resource.Compute.URLMaps.Update
@@ -54,7 +54,7 @@ type URLMapsUpdateResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] URLMap :> Put '[JSON] Operation
 
--- | Update the entire content of the UrlMap resource.
+-- | Updates the entire content of the UrlMap resource.
 --
 -- /See:/ 'urlMapsUpdate' smart constructor.
 data URLMapsUpdate = URLMapsUpdate
@@ -89,7 +89,7 @@ umuURLMap :: Lens' URLMapsUpdate Text
 umuURLMap
   = lens _umuURLMap (\ s a -> s{_umuURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umuProject :: Lens' URLMapsUpdate Text
 umuProject
   = lens _umuProject (\ s a -> s{_umuProject = a})

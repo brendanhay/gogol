@@ -21,7 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates an instance template in the specified project using the data
--- that is included in the request.
+-- that is included in the request. If you are creating a new template to
+-- update an existing instance group, your new instance template must use
+-- the same network or, if applicable, the same subnetwork as the original
+-- template.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.insert@.
 module Network.Google.Resource.Compute.InstanceTemplates.Insert
@@ -55,7 +58,10 @@ type InstanceTemplatesInsertResource =
                      Post '[JSON] Operation
 
 -- | Creates an instance template in the specified project using the data
--- that is included in the request.
+-- that is included in the request. If you are creating a new template to
+-- update an existing instance group, your new instance template must use
+-- the same network or, if applicable, the same subnetwork as the original
+-- template.
 --
 -- /See:/ 'instanceTemplatesInsert' smart constructor.
 data InstanceTemplatesInsert = InstanceTemplatesInsert
@@ -80,7 +86,7 @@ instanceTemplatesInsert pItiProject_ pItiPayload_ =
     , _itiPayload = pItiPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 itiProject :: Lens' InstanceTemplatesInsert Text
 itiProject
   = lens _itiProject (\ s a -> s{_itiProject = a})

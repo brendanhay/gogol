@@ -157,7 +157,9 @@ pstipBearerToken
 
 -- | REQUIRED: The resource for which policy detail is being requested.
 -- \`resource\` is usually specified as a path, such as,
--- \`projects\/{project}\`.
+-- \`projects\/{project}\/zones\/{zone}\/disks\/{disk}\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the documentation for the respective TestIamPermissions rpc.
 pstipResource :: Lens' ProjectsSubscriptionsTestIAMPermissions Text
 pstipResource
   = lens _pstipResource

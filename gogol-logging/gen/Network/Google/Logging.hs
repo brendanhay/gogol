@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Cloud Logging API lets you create logs, ingest log entries, and
--- manage log sinks.
+-- The Google Cloud Logging API lets you write log entries and manage your
+-- logs, log sinks and logs-based metrics.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference>
 module Network.Google.Logging
@@ -22,10 +22,109 @@ module Network.Google.Logging
     -- * Service Configuration
       loggingService
 
+    -- * OAuth Scopes
+    , loggingAdminScope
+    , loggingReadScope
+    , loggingWriteScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+
     -- * API Declaration
     , LoggingAPI
 
+    -- * Resources
+
+    -- ** logging.entries.list
+    , module Network.Google.Resource.Logging.Entries.List
+
+    -- ** logging.entries.write
+    , module Network.Google.Resource.Logging.Entries.Write
+
+    -- ** logging.monitoredResourceDescriptors.list
+    , module Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
+
+    -- ** logging.projects.logs.delete
+    , module Network.Google.Resource.Logging.Projects.Logs.Delete
+
+    -- ** logging.projects.metrics.create
+    , module Network.Google.Resource.Logging.Projects.Metrics.Create
+
+    -- ** logging.projects.metrics.delete
+    , module Network.Google.Resource.Logging.Projects.Metrics.Delete
+
+    -- ** logging.projects.metrics.get
+    , module Network.Google.Resource.Logging.Projects.Metrics.Get
+
+    -- ** logging.projects.metrics.list
+    , module Network.Google.Resource.Logging.Projects.Metrics.List
+
+    -- ** logging.projects.metrics.update
+    , module Network.Google.Resource.Logging.Projects.Metrics.Update
+
+    -- ** logging.projects.sinks.create
+    , module Network.Google.Resource.Logging.Projects.Sinks.Create
+
+    -- ** logging.projects.sinks.delete
+    , module Network.Google.Resource.Logging.Projects.Sinks.Delete
+
+    -- ** logging.projects.sinks.get
+    , module Network.Google.Resource.Logging.Projects.Sinks.Get
+
+    -- ** logging.projects.sinks.list
+    , module Network.Google.Resource.Logging.Projects.Sinks.List
+
+    -- ** logging.projects.sinks.update
+    , module Network.Google.Resource.Logging.Projects.Sinks.Update
+
     -- * Types
+
+    -- ** MonitoredResourceDescriptor
+    , MonitoredResourceDescriptor
+    , monitoredResourceDescriptor
+    , mrdDisplayName
+    , mrdLabels
+    , mrdType
+    , mrdDescription
+
+    -- ** ListLogEntriesResponse
+    , ListLogEntriesResponse
+    , listLogEntriesResponse
+    , llerNextPageToken
+    , llerEntries
+
+    -- ** MonitoredResourceLabels
+    , MonitoredResourceLabels
+    , monitoredResourceLabels
+    , mrlAddtional
+
+    -- ** ListLogMetricsResponse
+    , ListLogMetricsResponse
+    , listLogMetricsResponse
+    , llmrMetrics
+    , llmrNextPageToken
+
+    -- ** WriteLogEntriesRequest
+    , WriteLogEntriesRequest
+    , writeLogEntriesRequest
+    , wlerEntries
+    , wlerResource
+    , wlerLabels
+    , wlerLogName
+
+    -- ** Empty
+    , Empty
+    , empty
+
+    -- ** LogEntryLabels
+    , LogEntryLabels
+    , logEntryLabels
+    , lelAddtional
+
+    -- ** ListSinksResponse
+    , ListSinksResponse
+    , listSinksResponse
+    , lsrSinks
+    , lsrNextPageToken
 
     -- ** RequestLog
     , RequestLog
@@ -62,6 +161,54 @@ module Network.Google.Logging
     , rlSourceReference
     , rlAppEngineRelease
 
+    -- ** LogEntryProtoPayload
+    , LogEntryProtoPayload
+    , logEntryProtoPayload
+    , leppAddtional
+
+    -- ** WriteLogEntriesResponse
+    , WriteLogEntriesResponse
+    , writeLogEntriesResponse
+
+    -- ** LogSink
+    , LogSink
+    , logSink
+    , lsDestination
+    , lsOutputVersionFormat
+    , lsName
+    , lsFilter
+
+    -- ** ListMonitoredResourceDescriptorsResponse
+    , ListMonitoredResourceDescriptorsResponse
+    , listMonitoredResourceDescriptorsResponse
+    , lmrdrNextPageToken
+    , lmrdrResourceDescriptors
+
+    -- ** HTTPRequest
+    , HTTPRequest
+    , hTTPRequest
+    , httprStatus
+    , httprRequestURL
+    , httprRemoteIP
+    , httprValidatedWithOriginServer
+    , httprRequestSize
+    , httprUserAgent
+    , httprResponseSize
+    , httprRequestMethod
+    , httprCacheHit
+    , httprReferer
+
+    -- ** WriteLogEntriesRequestLabels
+    , WriteLogEntriesRequestLabels
+    , writeLogEntriesRequestLabels
+    , wlerlAddtional
+
+    -- ** MonitoredResource
+    , MonitoredResource
+    , monitoredResource
+    , mrLabels
+    , mrType
+
     -- ** LogLine
     , LogLine
     , logLine
@@ -69,6 +216,52 @@ module Network.Google.Logging
     , llSeverity
     , llLogMessage
     , llSourceLocation
+
+    -- ** LabelDescriptor
+    , LabelDescriptor
+    , labelDescriptor
+    , ldKey
+    , ldValueType
+    , ldDescription
+
+    -- ** ListLogEntriesRequest
+    , ListLogEntriesRequest
+    , listLogEntriesRequest
+    , llerOrderBy
+    , llerProjectIds
+    , llerFilter
+    , llerPageToken
+    , llerPageSize
+
+    -- ** LogEntryOperation
+    , LogEntryOperation
+    , logEntryOperation
+    , leoFirst
+    , leoProducer
+    , leoLast
+    , leoId
+
+    -- ** LogMetric
+    , LogMetric
+    , logMetric
+    , lmName
+    , lmFilter
+    , lmDescription
+
+    -- ** LogEntry
+    , LogEntry
+    , logEntry
+    , leOperation
+    , leSeverity
+    , leTextPayload
+    , leJSONPayload
+    , leHTTPRequest
+    , leResource
+    , leInsertId
+    , leLabels
+    , leProtoPayload
+    , leLogName
+    , leTimestamp
 
     -- ** SourceLocation
     , SourceLocation
@@ -82,14 +275,46 @@ module Network.Google.Logging
     , sourceReference
     , srRepository
     , srRevisionId
+
+    -- ** LogEntryJSONPayload
+    , LogEntryJSONPayload
+    , logEntryJSONPayload
+    , lejpAddtional
     ) where
 
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.Logging.Entries.List
+import           Network.Google.Resource.Logging.Entries.Write
+import           Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
+import           Network.Google.Resource.Logging.Projects.Logs.Delete
+import           Network.Google.Resource.Logging.Projects.Metrics.Create
+import           Network.Google.Resource.Logging.Projects.Metrics.Delete
+import           Network.Google.Resource.Logging.Projects.Metrics.Get
+import           Network.Google.Resource.Logging.Projects.Metrics.List
+import           Network.Google.Resource.Logging.Projects.Metrics.Update
+import           Network.Google.Resource.Logging.Projects.Sinks.Create
+import           Network.Google.Resource.Logging.Projects.Sinks.Delete
+import           Network.Google.Resource.Logging.Projects.Sinks.Get
+import           Network.Google.Resource.Logging.Projects.Sinks.List
+import           Network.Google.Resource.Logging.Projects.Sinks.Update
 
 {- $resources
 TODO
 -}
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud Logging API service.
-type LoggingAPI = ()
+type LoggingAPI =
+     EntriesListResource :<|> EntriesWriteResource :<|>
+       MonitoredResourceDescriptorsListResource
+       :<|> ProjectsSinksListResource
+       :<|> ProjectsSinksGetResource
+       :<|> ProjectsSinksCreateResource
+       :<|> ProjectsSinksDeleteResource
+       :<|> ProjectsSinksUpdateResource
+       :<|> ProjectsMetricsListResource
+       :<|> ProjectsMetricsGetResource
+       :<|> ProjectsMetricsCreateResource
+       :<|> ProjectsMetricsDeleteResource
+       :<|> ProjectsMetricsUpdateResource
+       :<|> ProjectsLogsDeleteResource

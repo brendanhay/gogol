@@ -41,8 +41,6 @@ library
         , Network.Google.Resource.Plus.Activities.Search
         , Network.Google.Resource.Plus.Comments.Get
         , Network.Google.Resource.Plus.Comments.List
-        , Network.Google.Resource.Plus.Moments.Insert
-        , Network.Google.Resource.Plus.Moments.List
         , Network.Google.Resource.Plus.People.Get
         , Network.Google.Resource.Plus.People.List
         , Network.Google.Resource.Plus.People.ListByActivity

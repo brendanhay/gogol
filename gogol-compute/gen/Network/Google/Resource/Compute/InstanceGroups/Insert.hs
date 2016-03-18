@@ -87,7 +87,7 @@ instanceGroupsInsert pIgiProject_ pIgiZone_ pIgiPayload_ =
     , _igiPayload = pIgiPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igiProject :: Lens' InstanceGroupsInsert Text
 igiProject
   = lens _igiProject (\ s a -> s{_igiProject = a})

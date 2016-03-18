@@ -41,6 +41,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     , ddbsPayload
     , ddbsBearerToken
     , ddbsDebuggeeId
+    , ddbsClientVersion
     , ddbsCallback
     ) where
 
@@ -62,10 +63,11 @@ type DebuggerDebuggeesBreakpointsSetResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Breakpoint :>
-                                   Post '[JSON] SetBreakpointResponse
+                             QueryParam "clientVersion" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Breakpoint :>
+                                     Post '[JSON] SetBreakpointResponse
 
 -- | Sets the breakpoint to the debuggee.
 --
@@ -79,6 +81,7 @@ data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet
     , _ddbsPayload        :: !Breakpoint
     , _ddbsBearerToken    :: !(Maybe Text)
     , _ddbsDebuggeeId     :: !Text
+    , _ddbsClientVersion  :: !(Maybe Text)
     , _ddbsCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,6 +105,8 @@ data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet
 --
 -- * 'ddbsDebuggeeId'
 --
+-- * 'ddbsClientVersion'
+--
 -- * 'ddbsCallback'
 debuggerDebuggeesBreakpointsSet
     :: Breakpoint -- ^ 'ddbsPayload'
@@ -117,6 +122,7 @@ debuggerDebuggeesBreakpointsSet pDdbsPayload_ pDdbsDebuggeeId_ =
     , _ddbsPayload = pDdbsPayload_
     , _ddbsBearerToken = Nothing
     , _ddbsDebuggeeId = pDdbsDebuggeeId_
+    , _ddbsClientVersion = Nothing
     , _ddbsCallback = Nothing
     }
 
@@ -158,11 +164,18 @@ ddbsBearerToken
   = lens _ddbsBearerToken
       (\ s a -> s{_ddbsBearerToken = a})
 
--- | The debuggee id to set the breakpoint to.
+-- | ID of the debuggee where the breakpoint is to be set.
 ddbsDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsSet Text
 ddbsDebuggeeId
   = lens _ddbsDebuggeeId
       (\ s a -> s{_ddbsDebuggeeId = a})
+
+-- | The client version making the call. Following: \`domain\/type\/version\`
+-- (e.g., \`google.com\/intellij\/v1\`).
+ddbsClientVersion :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
+ddbsClientVersion
+  = lens _ddbsClientVersion
+      (\ s a -> s{_ddbsClientVersion = a})
 
 -- | JSONP
 ddbsCallback :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
@@ -179,6 +192,7 @@ instance GoogleRequest
               _ddbsAccessToken
               _ddbsUploadType
               _ddbsBearerToken
+              _ddbsClientVersion
               _ddbsCallback
               (Just AltJSON)
               _ddbsPayload

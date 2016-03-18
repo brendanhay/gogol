@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a TargetPool resource in the specified project and region using
--- the data included in the request.
+-- Creates a target pool in the specified project and region using the data
+-- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.insert@.
 module Network.Google.Resource.Compute.TargetPools.Insert
@@ -55,8 +55,8 @@ type TargetPoolsInsertResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] TargetPool :> Post '[JSON] Operation
 
--- | Creates a TargetPool resource in the specified project and region using
--- the data included in the request.
+-- | Creates a target pool in the specified project and region using the data
+-- included in the request.
 --
 -- /See:/ 'targetPoolsInsert' smart constructor.
 data TargetPoolsInsert = TargetPoolsInsert
@@ -86,7 +86,7 @@ targetPoolsInsert pTpiProject_ pTpiPayload_ pTpiRegion_ =
     , _tpiRegion = pTpiRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tpiProject :: Lens' TargetPoolsInsert Text
 tpiProject
   = lens _tpiProject (\ s a -> s{_tpiProject = a})

@@ -183,7 +183,7 @@ import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2.0' of the Ad Exchange Seller API. This contains the host and root path used as a starting point for constructing service requests.
-adExchangeSellerService :: Service
+adExchangeSellerService :: ServiceConfig
 adExchangeSellerService
   = defaultService (ServiceId "adexchangeseller:v2.0")
       "www.googleapis.com"

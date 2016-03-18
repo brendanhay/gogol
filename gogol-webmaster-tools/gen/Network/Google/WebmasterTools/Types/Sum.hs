@@ -22,6 +22,8 @@ import           Network.Google.Prelude
 data URLCrawlErrorsSamplesMarkAsFixedCategory
     = AuthPermissions
       -- ^ @authPermissions@
+    | FlashContent
+      -- ^ @flashContent@
     | ManyToOneRedirect
       -- ^ @manyToOneRedirect@
     | NotFollowed
@@ -43,6 +45,7 @@ instance Hashable URLCrawlErrorsSamplesMarkAsFixedCategory
 instance FromText URLCrawlErrorsSamplesMarkAsFixedCategory where
     fromText = \case
         "authPermissions" -> Just AuthPermissions
+        "flashContent" -> Just FlashContent
         "manyToOneRedirect" -> Just ManyToOneRedirect
         "notFollowed" -> Just NotFollowed
         "notFound" -> Just NotFound
@@ -55,6 +58,7 @@ instance FromText URLCrawlErrorsSamplesMarkAsFixedCategory where
 instance ToText URLCrawlErrorsSamplesMarkAsFixedCategory where
     toText = \case
         AuthPermissions -> "authPermissions"
+        FlashContent -> "flashContent"
         ManyToOneRedirect -> "manyToOneRedirect"
         NotFollowed -> "notFollowed"
         NotFound -> "notFound"
@@ -135,6 +139,8 @@ instance ToJSON URLCrawlErrorsSamplesMarkAsFixedPlatform where
 data URLCrawlErrorsSamplesGetCategory
     = UCESGCAuthPermissions
       -- ^ @authPermissions@
+    | UCESGCFlashContent
+      -- ^ @flashContent@
     | UCESGCManyToOneRedirect
       -- ^ @manyToOneRedirect@
     | UCESGCNotFollowed
@@ -156,6 +162,7 @@ instance Hashable URLCrawlErrorsSamplesGetCategory
 instance FromText URLCrawlErrorsSamplesGetCategory where
     fromText = \case
         "authPermissions" -> Just UCESGCAuthPermissions
+        "flashContent" -> Just UCESGCFlashContent
         "manyToOneRedirect" -> Just UCESGCManyToOneRedirect
         "notFollowed" -> Just UCESGCNotFollowed
         "notFound" -> Just UCESGCNotFound
@@ -168,6 +175,7 @@ instance FromText URLCrawlErrorsSamplesGetCategory where
 instance ToText URLCrawlErrorsSamplesGetCategory where
     toText = \case
         UCESGCAuthPermissions -> "authPermissions"
+        UCESGCFlashContent -> "flashContent"
         UCESGCManyToOneRedirect -> "manyToOneRedirect"
         UCESGCNotFollowed -> "notFollowed"
         UCESGCNotFound -> "notFound"
@@ -218,6 +226,8 @@ instance ToJSON URLCrawlErrorscountsQueryPlatform where
 data URLCrawlErrorsSamplesListCategory
     = UCESLCAuthPermissions
       -- ^ @authPermissions@
+    | UCESLCFlashContent
+      -- ^ @flashContent@
     | UCESLCManyToOneRedirect
       -- ^ @manyToOneRedirect@
     | UCESLCNotFollowed
@@ -239,6 +249,7 @@ instance Hashable URLCrawlErrorsSamplesListCategory
 instance FromText URLCrawlErrorsSamplesListCategory where
     fromText = \case
         "authPermissions" -> Just UCESLCAuthPermissions
+        "flashContent" -> Just UCESLCFlashContent
         "manyToOneRedirect" -> Just UCESLCManyToOneRedirect
         "notFollowed" -> Just UCESLCNotFollowed
         "notFound" -> Just UCESLCNotFound
@@ -251,6 +262,7 @@ instance FromText URLCrawlErrorsSamplesListCategory where
 instance ToText URLCrawlErrorsSamplesListCategory where
     toText = \case
         UCESLCAuthPermissions -> "authPermissions"
+        UCESLCFlashContent -> "flashContent"
         UCESLCManyToOneRedirect -> "manyToOneRedirect"
         UCESLCNotFollowed -> "notFollowed"
         UCESLCNotFound -> "notFound"
@@ -301,6 +313,8 @@ instance ToJSON URLCrawlErrorsSamplesListPlatform where
 data URLCrawlErrorscountsQueryCategory
     = UCEQCAuthPermissions
       -- ^ @authPermissions@
+    | UCEQCFlashContent
+      -- ^ @flashContent@
     | UCEQCManyToOneRedirect
       -- ^ @manyToOneRedirect@
     | UCEQCNotFollowed
@@ -322,6 +336,7 @@ instance Hashable URLCrawlErrorscountsQueryCategory
 instance FromText URLCrawlErrorscountsQueryCategory where
     fromText = \case
         "authPermissions" -> Just UCEQCAuthPermissions
+        "flashContent" -> Just UCEQCFlashContent
         "manyToOneRedirect" -> Just UCEQCManyToOneRedirect
         "notFollowed" -> Just UCEQCNotFollowed
         "notFound" -> Just UCEQCNotFound
@@ -334,6 +349,7 @@ instance FromText URLCrawlErrorscountsQueryCategory where
 instance ToText URLCrawlErrorscountsQueryCategory where
     toText = \case
         UCEQCAuthPermissions -> "authPermissions"
+        UCEQCFlashContent -> "flashContent"
         UCEQCManyToOneRedirect -> "manyToOneRedirect"
         UCEQCNotFollowed -> "notFollowed"
         UCEQCNotFound -> "notFound"

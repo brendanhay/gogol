@@ -104,7 +104,7 @@ instanceGroupManagersResize pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ 
     , _igmrZone = pIgmrZone_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmrProject :: Lens' InstanceGroupManagersResize Text
 igmrProject
   = lens _igmrProject (\ s a -> s{_igmrProject = a})

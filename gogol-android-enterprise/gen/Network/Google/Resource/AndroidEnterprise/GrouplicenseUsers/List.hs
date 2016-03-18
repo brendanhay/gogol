@@ -23,7 +23,7 @@
 -- Retrieves the IDs of the users who have been granted entitlements under
 -- the license.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.grouplicenseusers.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.grouplicenseusers.list@.
 module Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
     (
     -- * REST Resource

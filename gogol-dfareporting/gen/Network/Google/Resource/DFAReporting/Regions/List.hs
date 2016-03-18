@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'RegionsList' request conforms to.
 type RegionsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "regions" :>

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enrolls an enterprise with the calling MDM.
+-- Enrolls an enterprise with the calling EMM.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.enroll@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.enroll@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ type EnterprisesEnrollResource =
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
 
--- | Enrolls an enterprise with the calling MDM.
+-- | Enrolls an enterprise with the calling EMM.
 --
 -- /See:/ 'enterprisesEnroll' smart constructor.
 data EnterprisesEnroll = EnterprisesEnroll
@@ -76,7 +76,7 @@ enterprisesEnroll pEeToken_ pEePayload_ =
     , _eePayload = pEePayload_
     }
 
--- | The token provided by the enterprise to register the MDM.
+-- | The token provided by the enterprise to register the EMM.
 eeToken :: Lens' EnterprisesEnroll Text
 eeToken = lens _eeToken (\ s a -> s{_eeToken = a})
 

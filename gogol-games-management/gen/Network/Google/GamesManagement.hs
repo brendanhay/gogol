@@ -200,13 +200,16 @@ module Network.Google.GamesManagement
     -- ** Player
     , Player
     , player
+    , pBannerURLLandscape
     , pLastPlayedWith
     , pAvatarImageURL
     , pKind
     , pExperienceInfo
     , pName
+    , pOriginalPlayerId
     , pDisplayName
     , pTitle
+    , pBannerURLPortrait
     , pPlayerId
 
     -- ** AchievementResetResponse

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a revision.
+-- Permanently deletes a revision. This method is only applicable to files
+-- with binary content in Drive.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.delete@.
 module Network.Google.Resource.Drive.Revisions.Delete
@@ -44,14 +45,15 @@ import           Network.Google.Prelude
 -- 'RevisionsDelete' request conforms to.
 type RevisionsDeleteResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "revisions" :>
                Capture "revisionId" Text :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Removes a revision.
+-- | Permanently deletes a revision. This method is only applicable to files
+-- with binary content in Drive.
 --
 -- /See:/ 'revisionsDelete' smart constructor.
 data RevisionsDelete = RevisionsDelete

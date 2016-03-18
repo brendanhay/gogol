@@ -222,7 +222,7 @@ import           Network.Google.StorageTransfer.Types.Product
 import           Network.Google.StorageTransfer.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-storageTransferService :: Service
+storageTransferService :: ServiceConfig
 storageTransferService
   = defaultService (ServiceId "storagetransfer:v1")
       "storagetransfer.googleapis.com"

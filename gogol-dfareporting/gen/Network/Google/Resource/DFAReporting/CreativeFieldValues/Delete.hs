@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesDelete' request conforms to.
 type CreativeFieldValuesDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified region resource.
+-- Returns the specified Region resource. Get a list of available regions
+-- by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regions.get@.
 module Network.Google.Resource.Compute.Regions.Get
@@ -51,7 +52,8 @@ type RegionsGetResource =
                Capture "region" Text :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Region
 
--- | Returns the specified region resource.
+-- | Returns the specified Region resource. Get a list of available regions
+-- by making a list() request.
 --
 -- /See:/ 'regionsGet' smart constructor.
 data RegionsGet = RegionsGet

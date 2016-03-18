@@ -884,9 +884,10 @@ instance ToJSON GroupItemListResponse where
 --
 -- /See:/ 'groupListResponse' smart constructor.
 data GroupListResponse = GroupListResponse
-    { _glrEtag  :: !(Maybe Text)
-    , _glrKind  :: !Text
-    , _glrItems :: !(Maybe [Group])
+    { _glrEtag          :: !(Maybe Text)
+    , _glrNextPageToken :: !(Maybe Text)
+    , _glrKind          :: !Text
+    , _glrItems         :: !(Maybe [Group])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupListResponse' with the minimum fields required to make a request.
@@ -894,6 +895,8 @@ data GroupListResponse = GroupListResponse
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'glrEtag'
+--
+-- * 'glrNextPageToken'
 --
 -- * 'glrKind'
 --
@@ -903,12 +906,18 @@ groupListResponse
 groupListResponse =
     GroupListResponse
     { _glrEtag = Nothing
+    , _glrNextPageToken = Nothing
     , _glrKind = "youtube#groupListResponse"
     , _glrItems = Nothing
     }
 
 glrEtag :: Lens' GroupListResponse (Maybe Text)
 glrEtag = lens _glrEtag (\ s a -> s{_glrEtag = a})
+
+glrNextPageToken :: Lens' GroupListResponse (Maybe Text)
+glrNextPageToken
+  = lens _glrNextPageToken
+      (\ s a -> s{_glrNextPageToken = a})
 
 glrKind :: Lens' GroupListResponse Text
 glrKind = lens _glrKind (\ s a -> s{_glrKind = a})
@@ -924,7 +933,7 @@ instance FromJSON GroupListResponse where
           = withObject "GroupListResponse"
               (\ o ->
                  GroupListResponse <$>
-                   (o .:? "etag") <*>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "youtube#groupListResponse")
                      <*> (o .:? "items" .!= mempty))
 
@@ -932,5 +941,7 @@ instance ToJSON GroupListResponse where
         toJSON GroupListResponse{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _glrEtag, Just ("kind" .= _glrKind),
+                 [("etag" .=) <$> _glrEtag,
+                  ("nextPageToken" .=) <$> _glrNextPageToken,
+                  Just ("kind" .= _glrKind),
                   ("items" .=) <$> _glrItems])

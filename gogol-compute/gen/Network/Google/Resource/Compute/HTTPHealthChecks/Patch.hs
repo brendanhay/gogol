@@ -87,7 +87,7 @@ hTTPHealthChecksPatch pHttphcpProject_ pHttphcpPayload_ pHttphcpHTTPHealthCheck_
     , _httphcpHTTPHealthCheck = pHttphcpHTTPHealthCheck_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphcpProject :: Lens' HTTPHealthChecksPatch Text
 httphcpProject
   = lens _httphcpProject

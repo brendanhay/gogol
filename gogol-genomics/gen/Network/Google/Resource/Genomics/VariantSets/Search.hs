@@ -20,10 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of all variant sets matching search criteria. Implements
+-- Returns a list of all variant sets matching search criteria. For the
+-- definitions of variant sets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchVariantSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L49).
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.search@.
 module Network.Google.Resource.Genomics.VariantSets.Search
     (
     -- * REST Resource
@@ -64,7 +68,11 @@ type VariantSetsSearchResource =
                            ReqBody '[JSON] SearchVariantSetsRequest :>
                              Post '[JSON] SearchVariantSetsResponse
 
--- | Returns a list of all variant sets matching search criteria. Implements
+-- | Returns a list of all variant sets matching search criteria. For the
+-- definitions of variant sets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchVariantSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L49).
 --
 -- /See:/ 'variantSetsSearch' smart constructor.

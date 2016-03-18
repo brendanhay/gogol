@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a call set.
+-- Deletes a call set. For the definitions of call sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.delete@.
 module Network.Google.Resource.Genomics.CallSets.Delete
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type CallSetsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a call set.
+-- | Deletes a call set. For the definitions of call sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsDelete' smart constructor.
 data CallSetsDelete = CallSetsDelete

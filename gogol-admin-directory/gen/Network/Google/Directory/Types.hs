@@ -26,7 +26,9 @@ module Network.Google.Directory.Types
     , adminDirectoryUserScope
     , adminDirectoryGroupMemberReadonlyScope
     , adminDirectoryUserAliasScope
+    , adminDirectoryResourceCalendarScope
     , adminDirectoryDeviceMobileActionScope
+    , adminDirectoryResourceCalendarReadonlyScope
     , adminDirectoryDomainReadonlyScope
     , adminDirectoryUserschemaScope
     , adminDirectoryUserschemaReadonlyScope
@@ -308,6 +310,17 @@ module Network.Google.Directory.Types
     , aliKind
     , aliAliases
 
+    -- * CalendarResource
+    , CalendarResource
+    , calendarResource
+    , crEtags
+    , crResourceId
+    , crResourceType
+    , crResourceName
+    , crKind
+    , crResourceEmail
+    , crResourceDescription
+
     -- * UserUndelete
     , UserUndelete
     , userUndelete
@@ -446,7 +459,7 @@ module Network.Google.Directory.Types
 
     -- * Role
     , Role
-    , role
+    , role'
     , rrEtag
     , rrKind
     , rrRoleName
@@ -643,6 +656,14 @@ module Network.Google.Directory.Types
     , domDomainName
     , domIsPrimary
 
+    -- * CalendarResources
+    , CalendarResources
+    , calendarResources
+    , crsEtag
+    , crsNextPageToken
+    , crsKind
+    , crsItems
+
     -- * ChromeosDevicesListOrderBy
     , ChromeosDevicesListOrderBy (..)
 
@@ -732,7 +753,7 @@ import           Network.Google.Directory.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'directory_v1' of the Admin Directory API. This contains the host and root path used as a starting point for constructing service requests.
-directoryService :: Service
+directoryService :: ServiceConfig
 directoryService
   = defaultService (ServiceId "admin:directory_v1")
       "www.googleapis.com"
@@ -765,9 +786,17 @@ adminDirectoryGroupMemberReadonlyScope = "https://www.googleapis.com/auth/admin.
 adminDirectoryUserAliasScope :: OAuthScope
 adminDirectoryUserAliasScope = "https://www.googleapis.com/auth/admin.directory.user.alias";
 
+-- | View and manage the provisioning of calendar resources on your domain
+adminDirectoryResourceCalendarScope :: OAuthScope
+adminDirectoryResourceCalendarScope = "https://www.googleapis.com/auth/admin.directory.resource.calendar";
+
 -- | Manage your mobile devices by performing administrative tasks
 adminDirectoryDeviceMobileActionScope :: OAuthScope
 adminDirectoryDeviceMobileActionScope = "https://www.googleapis.com/auth/admin.directory.device.mobile.action";
+
+-- | View calendar resources on your domain
+adminDirectoryResourceCalendarReadonlyScope :: OAuthScope
+adminDirectoryResourceCalendarReadonlyScope = "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly";
 
 -- | View domains related to your customers
 adminDirectoryDomainReadonlyScope :: OAuthScope

@@ -20,15 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Restores the project identified by the specified \`project_id\` (for
--- example, \`my-project-123\`). You can only use this method for a project
--- that has a lifecycle state of [DELETE_REQUESTED]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED].
--- After deletion starts, as indicated by a lifecycle state of
--- [DELETE_IN_PROGRESS]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_IN_PROGRESS],
--- the project cannot be restored. The caller must have modify permissions
--- for this project.
+-- Restores the Project identified by the specified \`project_id\` (for
+-- example, \`my-project-123\`). You can only use this method for a Project
+-- that has a lifecycle state of DELETE_REQUESTED. After deletion starts,
+-- as indicated by a lifecycle state of DELETE_IN_PROGRESS, the Project
+-- cannot be restored. The caller must have modify permissions for this
+-- Project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.undelete@.
 module Network.Google.Resource.CloudResourceManager.Projects.Undelete
@@ -46,6 +43,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Undelete
     , puPp
     , puAccessToken
     , puUploadType
+    , puPayload
     , puBearerToken
     , puProjectId
     , puCallback
@@ -57,7 +55,7 @@ import           Network.Google.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.undelete@ method which the
 -- 'ProjectsUndelete' request conforms to.
 type ProjectsUndeleteResource =
-     "v1beta1" :>
+     "v1" :>
        "projects" :>
          CaptureMode "projectId" "undelete" Text :>
            QueryParam "$.xgafv" Text :>
@@ -67,17 +65,16 @@ type ProjectsUndeleteResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] Empty
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] UndeleteProjectRequest :>
+                             Post '[JSON] Empty
 
--- | Restores the project identified by the specified \`project_id\` (for
--- example, \`my-project-123\`). You can only use this method for a project
--- that has a lifecycle state of [DELETE_REQUESTED]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED].
--- After deletion starts, as indicated by a lifecycle state of
--- [DELETE_IN_PROGRESS]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_IN_PROGRESS],
--- the project cannot be restored. The caller must have modify permissions
--- for this project.
+-- | Restores the Project identified by the specified \`project_id\` (for
+-- example, \`my-project-123\`). You can only use this method for a Project
+-- that has a lifecycle state of DELETE_REQUESTED. After deletion starts,
+-- as indicated by a lifecycle state of DELETE_IN_PROGRESS, the Project
+-- cannot be restored. The caller must have modify permissions for this
+-- Project.
 --
 -- /See:/ 'projectsUndelete' smart constructor.
 data ProjectsUndelete = ProjectsUndelete
@@ -86,6 +83,7 @@ data ProjectsUndelete = ProjectsUndelete
     , _puPp             :: !Bool
     , _puAccessToken    :: !(Maybe Text)
     , _puUploadType     :: !(Maybe Text)
+    , _puPayload        :: !UndeleteProjectRequest
     , _puBearerToken    :: !(Maybe Text)
     , _puProjectId      :: !Text
     , _puCallback       :: !(Maybe Text)
@@ -105,21 +103,25 @@ data ProjectsUndelete = ProjectsUndelete
 --
 -- * 'puUploadType'
 --
+-- * 'puPayload'
+--
 -- * 'puBearerToken'
 --
 -- * 'puProjectId'
 --
 -- * 'puCallback'
 projectsUndelete
-    :: Text -- ^ 'puProjectId'
+    :: UndeleteProjectRequest -- ^ 'puPayload'
+    -> Text -- ^ 'puProjectId'
     -> ProjectsUndelete
-projectsUndelete pPuProjectId_ =
+projectsUndelete pPuPayload_ pPuProjectId_ =
     ProjectsUndelete
     { _puXgafv = Nothing
     , _puUploadProtocol = Nothing
     , _puPp = True
     , _puAccessToken = Nothing
     , _puUploadType = Nothing
+    , _puPayload = pPuPayload_
     , _puBearerToken = Nothing
     , _puProjectId = pPuProjectId_
     , _puCallback = Nothing
@@ -150,6 +152,11 @@ puUploadType :: Lens' ProjectsUndelete (Maybe Text)
 puUploadType
   = lens _puUploadType (\ s a -> s{_puUploadType = a})
 
+-- | Multipart request metadata.
+puPayload :: Lens' ProjectsUndelete UndeleteProjectRequest
+puPayload
+  = lens _puPayload (\ s a -> s{_puPayload = a})
+
 -- | OAuth bearer token.
 puBearerToken :: Lens' ProjectsUndelete (Maybe Text)
 puBearerToken
@@ -176,6 +183,7 @@ instance GoogleRequest ProjectsUndelete where
               _puBearerToken
               _puCallback
               (Just AltJSON)
+              _puPayload
               resourceManagerService
           where go
                   = buildClient

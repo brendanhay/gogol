@@ -22,7 +22,7 @@
 --
 -- Retrieves details of an installation of an app on a device.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.get@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Get
     (
     -- * REST Resource

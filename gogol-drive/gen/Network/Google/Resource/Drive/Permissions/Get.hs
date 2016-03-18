@@ -33,8 +33,8 @@ module Network.Google.Resource.Drive.Permissions.Get
     , PermissionsGet
 
     -- * Request Lenses
-    , pggFileId
-    , pggPermissionId
+    , pgFileId
+    , pgPermissionId
     ) where
 
 import           Network.Google.Drive.Types
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PermissionsGet' request conforms to.
 type PermissionsGetResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "permissions" :>
@@ -55,42 +55,41 @@ type PermissionsGetResource =
 --
 -- /See:/ 'permissionsGet' smart constructor.
 data PermissionsGet = PermissionsGet
-    { _pggFileId       :: !Text
-    , _pggPermissionId :: !Text
+    { _pgFileId       :: !Text
+    , _pgPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pggFileId'
+-- * 'pgFileId'
 --
--- * 'pggPermissionId'
+-- * 'pgPermissionId'
 permissionsGet
-    :: Text -- ^ 'pggFileId'
-    -> Text -- ^ 'pggPermissionId'
+    :: Text -- ^ 'pgFileId'
+    -> Text -- ^ 'pgPermissionId'
     -> PermissionsGet
-permissionsGet pPggFileId_ pPggPermissionId_ =
+permissionsGet pPgFileId_ pPgPermissionId_ =
     PermissionsGet
-    { _pggFileId = pPggFileId_
-    , _pggPermissionId = pPggPermissionId_
+    { _pgFileId = pPgFileId_
+    , _pgPermissionId = pPgPermissionId_
     }
 
--- | The ID for the file.
-pggFileId :: Lens' PermissionsGet Text
-pggFileId
-  = lens _pggFileId (\ s a -> s{_pggFileId = a})
+-- | The ID of the file.
+pgFileId :: Lens' PermissionsGet Text
+pgFileId = lens _pgFileId (\ s a -> s{_pgFileId = a})
 
--- | The ID for the permission.
-pggPermissionId :: Lens' PermissionsGet Text
-pggPermissionId
-  = lens _pggPermissionId
-      (\ s a -> s{_pggPermissionId = a})
+-- | The ID of the permission.
+pgPermissionId :: Lens' PermissionsGet Text
+pgPermissionId
+  = lens _pgPermissionId
+      (\ s a -> s{_pgPermissionId = a})
 
 instance GoogleRequest PermissionsGet where
         type Rs PermissionsGet = Permission
         requestClient PermissionsGet{..}
-          = go _pggFileId _pggPermissionId (Just AltJSON)
+          = go _pgFileId _pgPermissionId (Just AltJSON)
               driveService
           where go
                   = buildClient (Proxy :: Proxy PermissionsGetResource)

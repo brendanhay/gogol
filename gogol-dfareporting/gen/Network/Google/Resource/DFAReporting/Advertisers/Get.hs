@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersGet' request conforms to.
 type AdvertisersGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>

@@ -20,10 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the set of Android app permissions for this app that have been
--- accepted by the enterprise.
+-- This method has been deprecated. To programmatically approve
+-- applications, you must use the iframe mechanism via the
+-- generateApprovalUrl and approve methods of the Products resource. For
+-- more information, see the Play EMM API usage requirements. The
+-- updatePermissions method (deprecated) updates the set of Android app
+-- permissions for this app that have been accepted by the enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.updatePermissions@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.updatePermissions@.
 module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
     (
     -- * REST Resource
@@ -56,8 +60,12 @@ type ProductsUpdatePermissionsResource =
                      ReqBody '[JSON] ProductPermissions :>
                        Put '[JSON] ProductPermissions
 
--- | Updates the set of Android app permissions for this app that have been
--- accepted by the enterprise.
+-- | This method has been deprecated. To programmatically approve
+-- applications, you must use the iframe mechanism via the
+-- generateApprovalUrl and approve methods of the Products resource. For
+-- more information, see the Play EMM API usage requirements. The
+-- updatePermissions method (deprecated) updates the set of Android app
+-- permissions for this app that have been accepted by the enterprise.
 --
 -- /See:/ 'productsUpdatePermissions' smart constructor.
 data ProductsUpdatePermissions = ProductsUpdatePermissions

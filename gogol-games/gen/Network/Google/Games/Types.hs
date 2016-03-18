@@ -822,13 +822,16 @@ module Network.Google.Games.Types
     -- * Player
     , Player
     , player
+    , plaBannerURLLandscape
     , plaLastPlayedWith
     , plaAvatarImageURL
     , plaKind
     , plaExperienceInfo
     , plaName
+    , plaOriginalPlayerId
     , plaDisplayName
     , plaTitle
+    , plaBannerURLPortrait
     , plaPlayerId
 
     -- * GamesAchievementIncrement
@@ -863,6 +866,13 @@ module Network.Google.Games.Types
     , eventChild
     , ecKind
     , ecChildId
+
+    -- * ApplicationVerifyResponse
+    , ApplicationVerifyResponse
+    , applicationVerifyResponse
+    , avrKind
+    , avrAlternatePlayerId
+    , avrPlayerId
 
     -- * PlayerEventListResponse
     , PlayerEventListResponse
@@ -922,12 +932,12 @@ import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Game Services API. This contains the host and root path used as a starting point for constructing service requests.
-gamesService :: Service
+gamesService :: ServiceConfig
 gamesService
   = defaultService (ServiceId "games:v1")
       "www.googleapis.com"
 
--- | Know your basic profile info and list of people in your circles.
+-- | Know the list of people in your circles, your age range, and language
 plusLoginScope :: OAuthScope
 plusLoginScope = "https://www.googleapis.com/auth/plus.login";
 

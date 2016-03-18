@@ -149,6 +149,7 @@ module Network.Google.Discovery.Types
     , rdName
     , rdPackagePath
     , rdFeatures
+    , rdVersionModule
     , rdVersion
     , rdParameters
     , rdDocumentationLink
@@ -254,7 +255,7 @@ import           Network.Google.Discovery.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the APIs Discovery Service. This contains the host and root path used as a starting point for constructing service requests.
-discoveryService :: Service
+discoveryService :: ServiceConfig
 discoveryService
   = defaultService (ServiceId "discovery:v1")
       "www.googleapis.com"

@@ -773,6 +773,59 @@ instance ToJSON BooksCloudLoadingResource where
                   ("title" .=) <$> _bclrTitle])
 
 --
+-- /See:/ 'volumeseriesInfoVolumeSeriesItemIssueItem' smart constructor.
+data VolumeseriesInfoVolumeSeriesItemIssueItem = VolumeseriesInfoVolumeSeriesItemIssueItem
+    { _vivsiiiIssueOrderNumber   :: !(Maybe (Textual Int32))
+    , _vivsiiiIssueDisplayNumber :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VolumeseriesInfoVolumeSeriesItemIssueItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vivsiiiIssueOrderNumber'
+--
+-- * 'vivsiiiIssueDisplayNumber'
+volumeseriesInfoVolumeSeriesItemIssueItem
+    :: VolumeseriesInfoVolumeSeriesItemIssueItem
+volumeseriesInfoVolumeSeriesItemIssueItem =
+    VolumeseriesInfoVolumeSeriesItemIssueItem
+    { _vivsiiiIssueOrderNumber = Nothing
+    , _vivsiiiIssueDisplayNumber = Nothing
+    }
+
+vivsiiiIssueOrderNumber :: Lens' VolumeseriesInfoVolumeSeriesItemIssueItem (Maybe Int32)
+vivsiiiIssueOrderNumber
+  = lens _vivsiiiIssueOrderNumber
+      (\ s a -> s{_vivsiiiIssueOrderNumber = a})
+      . mapping _Coerce
+
+vivsiiiIssueDisplayNumber :: Lens' VolumeseriesInfoVolumeSeriesItemIssueItem (Maybe Text)
+vivsiiiIssueDisplayNumber
+  = lens _vivsiiiIssueDisplayNumber
+      (\ s a -> s{_vivsiiiIssueDisplayNumber = a})
+
+instance FromJSON
+         VolumeseriesInfoVolumeSeriesItemIssueItem where
+        parseJSON
+          = withObject
+              "VolumeseriesInfoVolumeSeriesItemIssueItem"
+              (\ o ->
+                 VolumeseriesInfoVolumeSeriesItemIssueItem <$>
+                   (o .:? "issueOrderNumber") <*>
+                     (o .:? "issueDisplayNumber"))
+
+instance ToJSON
+         VolumeseriesInfoVolumeSeriesItemIssueItem where
+        toJSON VolumeseriesInfoVolumeSeriesItemIssueItem{..}
+          = object
+              (catMaybes
+                 [("issueOrderNumber" .=) <$>
+                    _vivsiiiIssueOrderNumber,
+                  ("issueDisplayNumber" .=) <$>
+                    _vivsiiiIssueDisplayNumber])
+
+--
 -- /See:/ 'annotation' smart constructor.
 data Annotation = Annotation
     { _aaSelectedText         :: !(Maybe Text)
@@ -1075,14 +1128,18 @@ instance ToJSON GeolayerDataGeoViewport where
 --
 -- /See:/ 'volumeUserInfo' smart constructor.
 data VolumeUserInfo = VolumeUserInfo
-    { _vuiCopy                   :: !(Maybe VolumeUserInfoCopy)
+    { _vuiIsFamilySharingAllowed :: !(Maybe Bool)
+    , _vuiIsFamilySharedToUser   :: !(Maybe Bool)
+    , _vuiCopy                   :: !(Maybe VolumeUserInfoCopy)
     , _vuiUserUploadedVolumeInfo :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
     , _vuiIsPurchased            :: !(Maybe Bool)
     , _vuiEntitlementType        :: !(Maybe (Textual Int32))
     , _vuiAcquisitionType        :: !(Maybe (Textual Int32))
+    , _vuiAcquiredTime           :: !(Maybe DateTime')
     , _vuiRentalState            :: !(Maybe Text)
     , _vuiIsPreOrdered           :: !(Maybe Bool)
     , _vuiReview                 :: !(Maybe Review)
+    , _vuiIsFamilySharedFromUser :: !(Maybe Bool)
     , _vuiRentalPeriod           :: !(Maybe VolumeUserInfoRentalPeriod)
     , _vuiUpdated                :: !(Maybe DateTime')
     , _vuiIsUploaded             :: !(Maybe Bool)
@@ -1094,6 +1151,10 @@ data VolumeUserInfo = VolumeUserInfo
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vuiIsFamilySharingAllowed'
+--
+-- * 'vuiIsFamilySharedToUser'
+--
 -- * 'vuiCopy'
 --
 -- * 'vuiUserUploadedVolumeInfo'
@@ -1104,11 +1165,15 @@ data VolumeUserInfo = VolumeUserInfo
 --
 -- * 'vuiAcquisitionType'
 --
+-- * 'vuiAcquiredTime'
+--
 -- * 'vuiRentalState'
 --
 -- * 'vuiIsPreOrdered'
 --
 -- * 'vuiReview'
+--
+-- * 'vuiIsFamilySharedFromUser'
 --
 -- * 'vuiRentalPeriod'
 --
@@ -1123,20 +1188,38 @@ volumeUserInfo
     :: VolumeUserInfo
 volumeUserInfo =
     VolumeUserInfo
-    { _vuiCopy = Nothing
+    { _vuiIsFamilySharingAllowed = Nothing
+    , _vuiIsFamilySharedToUser = Nothing
+    , _vuiCopy = Nothing
     , _vuiUserUploadedVolumeInfo = Nothing
     , _vuiIsPurchased = Nothing
     , _vuiEntitlementType = Nothing
     , _vuiAcquisitionType = Nothing
+    , _vuiAcquiredTime = Nothing
     , _vuiRentalState = Nothing
     , _vuiIsPreOrdered = Nothing
     , _vuiReview = Nothing
+    , _vuiIsFamilySharedFromUser = Nothing
     , _vuiRentalPeriod = Nothing
     , _vuiUpdated = Nothing
     , _vuiIsUploaded = Nothing
     , _vuiIsInMyBooks = Nothing
     , _vuiReadingPosition = Nothing
     }
+
+-- | Whether or not this volume can be shared with the family by the user.
+-- This includes sharing eligibility of both the volume and the user. If
+-- the value is true, the user can initiate a family sharing action.
+vuiIsFamilySharingAllowed :: Lens' VolumeUserInfo (Maybe Bool)
+vuiIsFamilySharingAllowed
+  = lens _vuiIsFamilySharingAllowed
+      (\ s a -> s{_vuiIsFamilySharingAllowed = a})
+
+-- | Whether or not the user received this volume through family sharing.
+vuiIsFamilySharedToUser :: Lens' VolumeUserInfo (Maybe Bool)
+vuiIsFamilySharedToUser
+  = lens _vuiIsFamilySharedToUser
+      (\ s a -> s{_vuiIsFamilySharedToUser = a})
 
 -- | Copy\/Paste accounting information.
 vuiCopy :: Lens' VolumeUserInfo (Maybe VolumeUserInfoCopy)
@@ -1168,6 +1251,15 @@ vuiAcquisitionType
       (\ s a -> s{_vuiAcquisitionType = a})
       . mapping _Coerce
 
+-- | Timestamp when this volume was acquired by the user. (RFC 3339 UTC
+-- date-time format) Acquiring includes purchase, user upload, receiving
+-- family sharing, etc.
+vuiAcquiredTime :: Lens' VolumeUserInfo (Maybe UTCTime)
+vuiAcquiredTime
+  = lens _vuiAcquiredTime
+      (\ s a -> s{_vuiAcquiredTime = a})
+      . mapping _DateTime
+
 -- | Whether this book is an active or an expired rental.
 vuiRentalState :: Lens' VolumeUserInfo (Maybe Text)
 vuiRentalState
@@ -1185,6 +1277,12 @@ vuiIsPreOrdered
 vuiReview :: Lens' VolumeUserInfo (Maybe Review)
 vuiReview
   = lens _vuiReview (\ s a -> s{_vuiReview = a})
+
+-- | Whether or not the user shared this volume with the family.
+vuiIsFamilySharedFromUser :: Lens' VolumeUserInfo (Maybe Bool)
+vuiIsFamilySharedFromUser
+  = lens _vuiIsFamilySharedFromUser
+      (\ s a -> s{_vuiIsFamilySharedFromUser = a})
 
 -- | Period during this book is\/was a valid rental.
 vuiRentalPeriod :: Lens' VolumeUserInfo (Maybe VolumeUserInfoRentalPeriod)
@@ -1224,13 +1322,18 @@ instance FromJSON VolumeUserInfo where
           = withObject "VolumeUserInfo"
               (\ o ->
                  VolumeUserInfo <$>
-                   (o .:? "copy") <*> (o .:? "userUploadedVolumeInfo")
+                   (o .:? "isFamilySharingAllowed") <*>
+                     (o .:? "isFamilySharedToUser")
+                     <*> (o .:? "copy")
+                     <*> (o .:? "userUploadedVolumeInfo")
                      <*> (o .:? "isPurchased")
                      <*> (o .:? "entitlementType")
                      <*> (o .:? "acquisitionType")
+                     <*> (o .:? "acquiredTime")
                      <*> (o .:? "rentalState")
                      <*> (o .:? "isPreordered")
                      <*> (o .:? "review")
+                     <*> (o .:? "isFamilySharedFromUser")
                      <*> (o .:? "rentalPeriod")
                      <*> (o .:? "updated")
                      <*> (o .:? "isUploaded")
@@ -1241,15 +1344,22 @@ instance ToJSON VolumeUserInfo where
         toJSON VolumeUserInfo{..}
           = object
               (catMaybes
-                 [("copy" .=) <$> _vuiCopy,
+                 [("isFamilySharingAllowed" .=) <$>
+                    _vuiIsFamilySharingAllowed,
+                  ("isFamilySharedToUser" .=) <$>
+                    _vuiIsFamilySharedToUser,
+                  ("copy" .=) <$> _vuiCopy,
                   ("userUploadedVolumeInfo" .=) <$>
                     _vuiUserUploadedVolumeInfo,
                   ("isPurchased" .=) <$> _vuiIsPurchased,
                   ("entitlementType" .=) <$> _vuiEntitlementType,
                   ("acquisitionType" .=) <$> _vuiAcquisitionType,
+                  ("acquiredTime" .=) <$> _vuiAcquiredTime,
                   ("rentalState" .=) <$> _vuiRentalState,
                   ("isPreordered" .=) <$> _vuiIsPreOrdered,
                   ("review" .=) <$> _vuiReview,
+                  ("isFamilySharedFromUser" .=) <$>
+                    _vuiIsFamilySharedFromUser,
                   ("rentalPeriod" .=) <$> _vuiRentalPeriod,
                   ("updated" .=) <$> _vuiUpdated,
                   ("isUploaded" .=) <$> _vuiIsUploaded,
@@ -1967,6 +2077,80 @@ instance ToJSON BooksVolumesRecommendedRateResponse
                     _bvrrrConsistencyToken])
 
 --
+-- /See:/ 'volumeseriesInfo' smart constructor.
+data VolumeseriesInfo = VolumeseriesInfo
+    { _viBookDisplayNumber    :: !(Maybe Text)
+    , _viKind                 :: !Text
+    , _viShortSeriesBookTitle :: !(Maybe Text)
+    , _viVolumeSeries         :: !(Maybe [VolumeseriesInfoVolumeSeriesItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VolumeseriesInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'viBookDisplayNumber'
+--
+-- * 'viKind'
+--
+-- * 'viShortSeriesBookTitle'
+--
+-- * 'viVolumeSeries'
+volumeseriesInfo
+    :: VolumeseriesInfo
+volumeseriesInfo =
+    VolumeseriesInfo
+    { _viBookDisplayNumber = Nothing
+    , _viKind = "books#volume_series_info"
+    , _viShortSeriesBookTitle = Nothing
+    , _viVolumeSeries = Nothing
+    }
+
+-- | The display number string. This should be used only for display purposes
+-- and the actual sequence should be inferred from the below orderNumber.
+viBookDisplayNumber :: Lens' VolumeseriesInfo (Maybe Text)
+viBookDisplayNumber
+  = lens _viBookDisplayNumber
+      (\ s a -> s{_viBookDisplayNumber = a})
+
+-- | Resource type.
+viKind :: Lens' VolumeseriesInfo Text
+viKind = lens _viKind (\ s a -> s{_viKind = a})
+
+-- | Short book title in the context of the series.
+viShortSeriesBookTitle :: Lens' VolumeseriesInfo (Maybe Text)
+viShortSeriesBookTitle
+  = lens _viShortSeriesBookTitle
+      (\ s a -> s{_viShortSeriesBookTitle = a})
+
+viVolumeSeries :: Lens' VolumeseriesInfo [VolumeseriesInfoVolumeSeriesItem]
+viVolumeSeries
+  = lens _viVolumeSeries
+      (\ s a -> s{_viVolumeSeries = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON VolumeseriesInfo where
+        parseJSON
+          = withObject "VolumeseriesInfo"
+              (\ o ->
+                 VolumeseriesInfo <$>
+                   (o .:? "bookDisplayNumber") <*>
+                     (o .:? "kind" .!= "books#volume_series_info")
+                     <*> (o .:? "shortSeriesBookTitle")
+                     <*> (o .:? "volumeSeries" .!= mempty))
+
+instance ToJSON VolumeseriesInfo where
+        toJSON VolumeseriesInfo{..}
+          = object
+              (catMaybes
+                 [("bookDisplayNumber" .=) <$> _viBookDisplayNumber,
+                  Just ("kind" .= _viKind),
+                  ("shortSeriesBookTitle" .=) <$>
+                    _viShortSeriesBookTitle,
+                  ("volumeSeries" .=) <$> _viVolumeSeries])
+
+--
 -- /See:/ 'bookshelf' smart constructor.
 data Bookshelf = Bookshelf
     { _bAccess             :: !(Maybe Text)
@@ -2107,22 +2291,37 @@ instance ToJSON Bookshelf where
 --
 -- /See:/ 'notification' smart constructor.
 data Notification = Notification
-    { _nKind    :: !Text
-    , _nBody    :: !(Maybe Text)
-    , _nLinkURL :: !(Maybe Text)
-    , _nIconURL :: !(Maybe Text)
-    , _nTitle   :: !(Maybe Text)
+    { _nTargetURL                      :: !(Maybe Text)
+    , _nShowNotificationSettingsAction :: !(Maybe Bool)
+    , _nKind                           :: !Text
+    , _nBody                           :: !(Maybe Text)
+    , _nPcampaignId                    :: !(Maybe Text)
+    , _nReason                         :: !(Maybe Text)
+    , _nDontShowNotification           :: !(Maybe Bool)
+    , _nNotificationType               :: !(Maybe Text)
+    , _nIconURL                        :: !(Maybe Text)
+    , _nTitle                          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Notification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'nTargetURL'
+--
+-- * 'nShowNotificationSettingsAction'
+--
 -- * 'nKind'
 --
 -- * 'nBody'
 --
--- * 'nLinkURL'
+-- * 'nPcampaignId'
+--
+-- * 'nReason'
+--
+-- * 'nDontShowNotification'
+--
+-- * 'nNotificationType'
 --
 -- * 'nIconURL'
 --
@@ -2131,12 +2330,26 @@ notification
     :: Notification
 notification =
     Notification
-    { _nKind = "books#notification"
+    { _nTargetURL = Nothing
+    , _nShowNotificationSettingsAction = Nothing
+    , _nKind = "books#notification"
     , _nBody = Nothing
-    , _nLinkURL = Nothing
+    , _nPcampaignId = Nothing
+    , _nReason = Nothing
+    , _nDontShowNotification = Nothing
+    , _nNotificationType = Nothing
     , _nIconURL = Nothing
     , _nTitle = Nothing
     }
+
+nTargetURL :: Lens' Notification (Maybe Text)
+nTargetURL
+  = lens _nTargetURL (\ s a -> s{_nTargetURL = a})
+
+nShowNotificationSettingsAction :: Lens' Notification (Maybe Bool)
+nShowNotificationSettingsAction
+  = lens _nShowNotificationSettingsAction
+      (\ s a -> s{_nShowNotificationSettingsAction = a})
 
 -- | Resource type.
 nKind :: Lens' Notification Text
@@ -2145,8 +2358,22 @@ nKind = lens _nKind (\ s a -> s{_nKind = a})
 nBody :: Lens' Notification (Maybe Text)
 nBody = lens _nBody (\ s a -> s{_nBody = a})
 
-nLinkURL :: Lens' Notification (Maybe Text)
-nLinkURL = lens _nLinkURL (\ s a -> s{_nLinkURL = a})
+nPcampaignId :: Lens' Notification (Maybe Text)
+nPcampaignId
+  = lens _nPcampaignId (\ s a -> s{_nPcampaignId = a})
+
+nReason :: Lens' Notification (Maybe Text)
+nReason = lens _nReason (\ s a -> s{_nReason = a})
+
+nDontShowNotification :: Lens' Notification (Maybe Bool)
+nDontShowNotification
+  = lens _nDontShowNotification
+      (\ s a -> s{_nDontShowNotification = a})
+
+nNotificationType :: Lens' Notification (Maybe Text)
+nNotificationType
+  = lens _nNotificationType
+      (\ s a -> s{_nNotificationType = a})
 
 nIconURL :: Lens' Notification (Maybe Text)
 nIconURL = lens _nIconURL (\ s a -> s{_nIconURL = a})
@@ -2159,9 +2386,14 @@ instance FromJSON Notification where
           = withObject "Notification"
               (\ o ->
                  Notification <$>
-                   (o .:? "kind" .!= "books#notification") <*>
-                     (o .:? "body")
-                     <*> (o .:? "linkUrl")
+                   (o .:? "targetUrl") <*>
+                     (o .:? "show_notification_settings_action")
+                     <*> (o .:? "kind" .!= "books#notification")
+                     <*> (o .:? "body")
+                     <*> (o .:? "pcampaign_id")
+                     <*> (o .:? "reason")
+                     <*> (o .:? "dont_show_notification")
+                     <*> (o .:? "notification_type")
                      <*> (o .:? "iconUrl")
                      <*> (o .:? "title"))
 
@@ -2169,8 +2401,15 @@ instance ToJSON Notification where
         toJSON Notification{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _nKind), ("body" .=) <$> _nBody,
-                  ("linkUrl" .=) <$> _nLinkURL,
+                 [("targetUrl" .=) <$> _nTargetURL,
+                  ("show_notification_settings_action" .=) <$>
+                    _nShowNotificationSettingsAction,
+                  Just ("kind" .= _nKind), ("body" .=) <$> _nBody,
+                  ("pcampaign_id" .=) <$> _nPcampaignId,
+                  ("reason" .=) <$> _nReason,
+                  ("dont_show_notification" .=) <$>
+                    _nDontShowNotification,
+                  ("notification_type" .=) <$> _nNotificationType,
                   ("iconUrl" .=) <$> _nIconURL,
                   ("title" .=) <$> _nTitle])
 
@@ -2904,6 +3143,52 @@ instance ToJSON GeolayerDataGeoBoundaryItemItem where
               (catMaybes
                  [("latitude" .=) <$> _gdgbiiLatitude,
                   ("longitude" .=) <$> _gdgbiiLongitude])
+
+--
+-- /See:/ 'series' smart constructor.
+data Series = Series
+    { _sKind   :: !Text
+    , _sSeries :: !(Maybe [SeriesSeriesItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Series' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sKind'
+--
+-- * 'sSeries'
+series
+    :: Series
+series =
+    Series
+    { _sKind = "books#series"
+    , _sSeries = Nothing
+    }
+
+-- | Resource type.
+sKind :: Lens' Series Text
+sKind = lens _sKind (\ s a -> s{_sKind = a})
+
+sSeries :: Lens' Series [SeriesSeriesItem]
+sSeries
+  = lens _sSeries (\ s a -> s{_sSeries = a}) . _Default
+      . _Coerce
+
+instance FromJSON Series where
+        parseJSON
+          = withObject "Series"
+              (\ o ->
+                 Series <$>
+                   (o .:? "kind" .!= "books#series") <*>
+                     (o .:? "series" .!= mempty))
+
+instance ToJSON Series where
+        toJSON Series{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _sKind),
+                  ("series" .=) <$> _sSeries])
 
 --
 -- /See:/ 'offersItemsItemItemsItem' smart constructor.
@@ -3730,6 +4015,64 @@ instance ToJSON
               (catMaybes
                  [("url" .=) <$> _dddwisisisURL,
                   ("attribution" .=) <$> _dddwisisisAttribution])
+
+--
+-- /See:/ 'seriesmembership' smart constructor.
+data Seriesmembership = Seriesmembership
+    { _serNextPageToken :: !(Maybe Text)
+    , _serKind          :: !Text
+    , _serMember        :: !(Maybe [Volume])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Seriesmembership' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'serNextPageToken'
+--
+-- * 'serKind'
+--
+-- * 'serMember'
+seriesmembership
+    :: Seriesmembership
+seriesmembership =
+    Seriesmembership
+    { _serNextPageToken = Nothing
+    , _serKind = "books#series#membership"
+    , _serMember = Nothing
+    }
+
+serNextPageToken :: Lens' Seriesmembership (Maybe Text)
+serNextPageToken
+  = lens _serNextPageToken
+      (\ s a -> s{_serNextPageToken = a})
+
+-- | Resorce type.
+serKind :: Lens' Seriesmembership Text
+serKind = lens _serKind (\ s a -> s{_serKind = a})
+
+serMember :: Lens' Seriesmembership [Volume]
+serMember
+  = lens _serMember (\ s a -> s{_serMember = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Seriesmembership where
+        parseJSON
+          = withObject "Seriesmembership"
+              (\ o ->
+                 Seriesmembership <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "books#series#membership")
+                     <*> (o .:? "member" .!= mempty))
+
+instance ToJSON Seriesmembership where
+        toJSON Seriesmembership{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _serNextPageToken,
+                  Just ("kind" .= _serKind),
+                  ("member" .=) <$> _serMember])
 
 --
 -- /See:/ 'userSettingsNotification' smart constructor.
@@ -4723,6 +5066,81 @@ instance ToJSON VolumeSaleInfo where
                   ("buyLink" .=) <$> _vsiBuyLink,
                   ("isEbook" .=) <$> _vsiIsEbook,
                   ("saleability" .=) <$> _vsiSaleability])
+
+--
+-- /See:/ 'seriesSeriesItem' smart constructor.
+data SeriesSeriesItem = SeriesSeriesItem
+    { _ssiSeriesId       :: !(Maybe Text)
+    , _ssiImageURL       :: !(Maybe Text)
+    , _ssiBannerImageURL :: !(Maybe Text)
+    , _ssiTitle          :: !(Maybe Text)
+    , _ssiSeriesType     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SeriesSeriesItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssiSeriesId'
+--
+-- * 'ssiImageURL'
+--
+-- * 'ssiBannerImageURL'
+--
+-- * 'ssiTitle'
+--
+-- * 'ssiSeriesType'
+seriesSeriesItem
+    :: SeriesSeriesItem
+seriesSeriesItem =
+    SeriesSeriesItem
+    { _ssiSeriesId = Nothing
+    , _ssiImageURL = Nothing
+    , _ssiBannerImageURL = Nothing
+    , _ssiTitle = Nothing
+    , _ssiSeriesType = Nothing
+    }
+
+ssiSeriesId :: Lens' SeriesSeriesItem (Maybe Text)
+ssiSeriesId
+  = lens _ssiSeriesId (\ s a -> s{_ssiSeriesId = a})
+
+ssiImageURL :: Lens' SeriesSeriesItem (Maybe Text)
+ssiImageURL
+  = lens _ssiImageURL (\ s a -> s{_ssiImageURL = a})
+
+ssiBannerImageURL :: Lens' SeriesSeriesItem (Maybe Text)
+ssiBannerImageURL
+  = lens _ssiBannerImageURL
+      (\ s a -> s{_ssiBannerImageURL = a})
+
+ssiTitle :: Lens' SeriesSeriesItem (Maybe Text)
+ssiTitle = lens _ssiTitle (\ s a -> s{_ssiTitle = a})
+
+ssiSeriesType :: Lens' SeriesSeriesItem (Maybe Text)
+ssiSeriesType
+  = lens _ssiSeriesType
+      (\ s a -> s{_ssiSeriesType = a})
+
+instance FromJSON SeriesSeriesItem where
+        parseJSON
+          = withObject "SeriesSeriesItem"
+              (\ o ->
+                 SeriesSeriesItem <$>
+                   (o .:? "seriesId") <*> (o .:? "imageUrl") <*>
+                     (o .:? "bannerImageUrl")
+                     <*> (o .:? "title")
+                     <*> (o .:? "seriesType"))
+
+instance ToJSON SeriesSeriesItem where
+        toJSON SeriesSeriesItem{..}
+          = object
+              (catMaybes
+                 [("seriesId" .=) <$> _ssiSeriesId,
+                  ("imageUrl" .=) <$> _ssiImageURL,
+                  ("bannerImageUrl" .=) <$> _ssiBannerImageURL,
+                  ("title" .=) <$> _ssiTitle,
+                  ("seriesType" .=) <$> _ssiSeriesType])
 
 --
 -- /See:/ 'metadata' smart constructor.
@@ -5864,6 +6282,83 @@ instance ToJSON Discoveryclusters where
                   ("totalClusters" .=) <$> _dTotalClusters,
                   ("clusters" .=) <$> _dClusters])
 
+--
+-- /See:/ 'volumeseriesInfoVolumeSeriesItem' smart constructor.
+data VolumeseriesInfoVolumeSeriesItem = VolumeseriesInfoVolumeSeriesItem
+    { _vivsiSeriesId       :: !(Maybe Text)
+    , _vivsiSeriesBookType :: !(Maybe Text)
+    , _vivsiOrderNumber    :: !(Maybe (Textual Int32))
+    , _vivsiIssue          :: !(Maybe [VolumeseriesInfoVolumeSeriesItemIssueItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VolumeseriesInfoVolumeSeriesItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vivsiSeriesId'
+--
+-- * 'vivsiSeriesBookType'
+--
+-- * 'vivsiOrderNumber'
+--
+-- * 'vivsiIssue'
+volumeseriesInfoVolumeSeriesItem
+    :: VolumeseriesInfoVolumeSeriesItem
+volumeseriesInfoVolumeSeriesItem =
+    VolumeseriesInfoVolumeSeriesItem
+    { _vivsiSeriesId = Nothing
+    , _vivsiSeriesBookType = Nothing
+    , _vivsiOrderNumber = Nothing
+    , _vivsiIssue = Nothing
+    }
+
+-- | The series id.
+vivsiSeriesId :: Lens' VolumeseriesInfoVolumeSeriesItem (Maybe Text)
+vivsiSeriesId
+  = lens _vivsiSeriesId
+      (\ s a -> s{_vivsiSeriesId = a})
+
+-- | The book type in the context of series. Examples - Single Issue,
+-- Collection Edition, etc.
+vivsiSeriesBookType :: Lens' VolumeseriesInfoVolumeSeriesItem (Maybe Text)
+vivsiSeriesBookType
+  = lens _vivsiSeriesBookType
+      (\ s a -> s{_vivsiSeriesBookType = a})
+
+-- | The book order number in the series.
+vivsiOrderNumber :: Lens' VolumeseriesInfoVolumeSeriesItem (Maybe Int32)
+vivsiOrderNumber
+  = lens _vivsiOrderNumber
+      (\ s a -> s{_vivsiOrderNumber = a})
+      . mapping _Coerce
+
+-- | List of issues. Applicable only for Collection Edition and Omnibus.
+vivsiIssue :: Lens' VolumeseriesInfoVolumeSeriesItem [VolumeseriesInfoVolumeSeriesItemIssueItem]
+vivsiIssue
+  = lens _vivsiIssue (\ s a -> s{_vivsiIssue = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON VolumeseriesInfoVolumeSeriesItem
+         where
+        parseJSON
+          = withObject "VolumeseriesInfoVolumeSeriesItem"
+              (\ o ->
+                 VolumeseriesInfoVolumeSeriesItem <$>
+                   (o .:? "seriesId") <*> (o .:? "seriesBookType") <*>
+                     (o .:? "orderNumber")
+                     <*> (o .:? "issue" .!= mempty))
+
+instance ToJSON VolumeseriesInfoVolumeSeriesItem
+         where
+        toJSON VolumeseriesInfoVolumeSeriesItem{..}
+          = object
+              (catMaybes
+                 [("seriesId" .=) <$> _vivsiSeriesId,
+                  ("seriesBookType" .=) <$> _vivsiSeriesBookType,
+                  ("orderNumber" .=) <$> _vivsiOrderNumber,
+                  ("issue" .=) <$> _vivsiIssue])
+
 -- | User settings in sub-objects, each for different purposes.
 --
 -- /See:/ 'userSettingsNotesExport' smart constructor.
@@ -6326,6 +6821,7 @@ data VolumeVolumeInfo = VolumeVolumeInfo
     , _vviCanonicalVolumeLink :: !(Maybe Text)
     , _vviReadingModes        :: !(Maybe JSONValue)
     , _vviIndustryIdentifiers :: !(Maybe [VolumeVolumeInfoIndustryIdentifiersItem])
+    , _vviSeriesInfo          :: !(Maybe VolumeseriesInfo)
     , _vviPrintedPageCount    :: !(Maybe (Textual Int32))
     , _vviMainCategory        :: !(Maybe Text)
     , _vviContentVersion      :: !(Maybe Text)
@@ -6362,6 +6858,8 @@ data VolumeVolumeInfo = VolumeVolumeInfo
 -- * 'vviReadingModes'
 --
 -- * 'vviIndustryIdentifiers'
+--
+-- * 'vviSeriesInfo'
 --
 -- * 'vviPrintedPageCount'
 --
@@ -6410,6 +6908,7 @@ volumeVolumeInfo =
     , _vviCanonicalVolumeLink = Nothing
     , _vviReadingModes = Nothing
     , _vviIndustryIdentifiers = Nothing
+    , _vviSeriesInfo = Nothing
     , _vviPrintedPageCount = Nothing
     , _vviMainCategory = Nothing
     , _vviContentVersion = Nothing
@@ -6471,6 +6970,11 @@ vviIndustryIdentifiers
       (\ s a -> s{_vviIndustryIdentifiers = a})
       . _Default
       . _Coerce
+
+vviSeriesInfo :: Lens' VolumeVolumeInfo (Maybe VolumeseriesInfo)
+vviSeriesInfo
+  = lens _vviSeriesInfo
+      (\ s a -> s{_vviSeriesInfo = a})
 
 -- | Total number of printed pages in generated pdf representation.
 vviPrintedPageCount :: Lens' VolumeVolumeInfo (Maybe Int32)
@@ -6601,6 +7105,7 @@ instance FromJSON VolumeVolumeInfo where
                      <*> (o .:? "canonicalVolumeLink")
                      <*> (o .:? "readingModes")
                      <*> (o .:? "industryIdentifiers" .!= mempty)
+                     <*> (o .:? "seriesInfo")
                      <*> (o .:? "printedPageCount")
                      <*> (o .:? "mainCategory")
                      <*> (o .:? "contentVersion")
@@ -6633,6 +7138,7 @@ instance ToJSON VolumeVolumeInfo where
                   ("readingModes" .=) <$> _vviReadingModes,
                   ("industryIdentifiers" .=) <$>
                     _vviIndustryIdentifiers,
+                  ("seriesInfo" .=) <$> _vviSeriesInfo,
                   ("printedPageCount" .=) <$> _vviPrintedPageCount,
                   ("mainCategory" .=) <$> _vviMainCategory,
                   ("contentVersion" .=) <$> _vviContentVersion,

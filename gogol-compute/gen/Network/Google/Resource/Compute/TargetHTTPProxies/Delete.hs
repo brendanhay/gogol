@@ -77,7 +77,7 @@ targetHTTPProxiesDelete pThttppdProject_ pThttppdTargetHTTPProxy_ =
     , _thttppdTargetHTTPProxy = pThttppdTargetHTTPProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thttppdProject :: Lens' TargetHTTPProxiesDelete Text
 thttppdProject
   = lens _thttppdProject

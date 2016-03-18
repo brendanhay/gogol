@@ -22,7 +22,7 @@
 --
 -- Retrieves the IDs of all of a user\'s devices.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.devices.list@.
 module Network.Google.Resource.AndroidEnterprise.Devices.List
     (
     -- * REST Resource

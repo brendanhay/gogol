@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List traces matching the filter expression.
+-- Returns of a list of traces that match the specified filter conditions.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.projects.traces.list@.
 module Network.Google.Resource.CloudTrace.Projects.Traces.List
@@ -77,7 +77,7 @@ type ProjectsTracesListResource =
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListTracesResponse
 
--- | List traces matching the filter expression.
+-- | Returns of a list of traces that match the specified filter conditions.
 --
 -- /See:/ 'projectsTracesList' smart constructor.
 data ProjectsTracesList = ProjectsTracesList
@@ -163,17 +163,19 @@ ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
 
--- | The trace field used to establish the order of traces returned by the
--- ListTraces method. Possible options are: trace_id name (name field of
--- root span) duration (different between end_time and start_time fields of
--- root span) start (start_time field of root span) Descending order can be
--- specified by appending \"desc\" to the sort field: name desc Only one
--- sort field is permitted, though this may change in the future.
+-- | Field used to sort the returned traces. Optional. Can be one of the
+-- following: * \`trace_id\` * \`name\` (\`name\` field of root span in the
+-- trace) * \`duration\` (difference between \`end_time\` and
+-- \`start_time\` fields of the root span) * \`start\` (\`start_time\`
+-- field of the root span) Descending order can be specified by appending
+-- \`desc\` to the sort field (for example, \`name desc\`). Only one sort
+-- field is permitted.
 ptlOrderBy :: Lens' ProjectsTracesList (Maybe Text)
 ptlOrderBy
   = lens _ptlOrderBy (\ s a -> s{_ptlOrderBy = a})
 
--- | End of the time interval (inclusive).
+-- | End of the time interval (inclusive) during which the trace data was
+-- collected from the application.
 ptlStartTime :: Lens' ProjectsTracesList (Maybe Text)
 ptlStartTime
   = lens _ptlStartTime (\ s a -> s{_ptlStartTime = a})
@@ -200,12 +202,14 @@ ptlBearerToken
   = lens _ptlBearerToken
       (\ s a -> s{_ptlBearerToken = a})
 
--- | Start of the time interval (exclusive).
+-- | Start of the time interval (inclusive) during which the trace data was
+-- collected from the application.
 ptlEndTime :: Lens' ProjectsTracesList (Maybe Text)
 ptlEndTime
   = lens _ptlEndTime (\ s a -> s{_ptlEndTime = a})
 
--- | ViewType specifies the projection of the result.
+-- | Type of data returned for traces in the list. Optional. Default is
+-- \`MINIMAL\`.
 ptlView :: Lens' ProjectsTracesList (Maybe Text)
 ptlView = lens _ptlView (\ s a -> s{_ptlView = a})
 
@@ -214,21 +218,21 @@ ptlFilter :: Lens' ProjectsTracesList (Maybe Text)
 ptlFilter
   = lens _ptlFilter (\ s a -> s{_ptlFilter = a})
 
--- | The token identifying the page of results to return from the ListTraces
--- method. If present, this value is should be taken from the
--- next_page_token field of a previous ListTracesResponse.
+-- | Token identifying the page of results to return. If provided, use the
+-- value of the \`next_page_token\` field from a previous request.
+-- Optional.
 ptlPageToken :: Lens' ProjectsTracesList (Maybe Text)
 ptlPageToken
   = lens _ptlPageToken (\ s a -> s{_ptlPageToken = a})
 
--- | The stringified-version of the project id.
+-- | ID of the Cloud project where the trace data is stored.
 ptlProjectId :: Lens' ProjectsTracesList Text
 ptlProjectId
   = lens _ptlProjectId (\ s a -> s{_ptlProjectId = a})
 
--- | Maximum number of topics to return. If not specified or \<= 0, the
--- implementation will select a reasonable value. The implemenation may
--- always return fewer than the requested page_size.
+-- | Maximum number of traces to return. If not specified or \<= 0, the
+-- implementation selects a reasonable value. The implementation may return
+-- fewer traces than the requested page size. Optional.
 ptlPageSize :: Lens' ProjectsTracesList (Maybe Int32)
 ptlPageSize
   = lens _ptlPageSize (\ s a -> s{_ptlPageSize = a}) .

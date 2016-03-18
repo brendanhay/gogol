@@ -22,7 +22,7 @@
 --
 -- Retrieves details of an entitlement.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.get@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Get
     (
     -- * REST Resource

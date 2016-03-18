@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a site from the set of the user\'s Webmaster Tools sites.
+-- Removes a site from the set of the user\'s Search Console sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.delete@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.delete@.
 module Network.Google.Resource.Webmasters.Sites.Delete
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ type SitesDeleteResource =
            Capture "siteUrl" Text :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Removes a site from the set of the user\'s Webmaster Tools sites.
+-- | Removes a site from the set of the user\'s Search Console sites.
 --
 -- /See:/ 'sitesDelete' smart constructor.
 newtype SitesDelete = SitesDelete

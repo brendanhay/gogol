@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google Cloud Trace API provides services for reading and writing
-    runtime trace data for Cloud applications.
+    The Cloud Trace API allows you to send traces to and retrieve traces
+    from Google Cloud Trace.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,7 +36,6 @@ library
     exposed-modules:
           Network.Google.CloudTrace
         , Network.Google.CloudTrace.Types
-        , Network.Google.Resource.CloudTrace.GetDiscovery
         , Network.Google.Resource.CloudTrace.Projects.PatchTraces
         , Network.Google.Resource.CloudTrace.Projects.Traces.Get
         , Network.Google.Resource.CloudTrace.Projects.Traces.List

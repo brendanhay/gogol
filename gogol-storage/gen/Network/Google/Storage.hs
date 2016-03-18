@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you store and retrieve potentially-large, immutable data objects.
+-- Stores and retrieves potentially large, immutable data objects.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference>
 module Network.Google.Storage
@@ -237,6 +237,12 @@ module Network.Google.Storage
     , oacptProjectNumber
     , oacptTeam
 
+    -- ** ObjectCustomerEncryption
+    , ObjectCustomerEncryption
+    , objectCustomerEncryption
+    , oceKeySha256
+    , oceEncryptionAlgorithm
+
     -- ** Bucket
     , Bucket
     , bucket
@@ -343,6 +349,7 @@ module Network.Google.Storage
     , objKind
     , objTimeDeleted
     , objCrc32c
+    , objCustomerEncryption
     , objBucket
     , objOwner
     , objSelfLink

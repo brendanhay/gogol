@@ -658,8 +658,8 @@ eUpdated
 eColorId :: Lens' Event (Maybe Text)
 eColorId = lens _eColorId (\ s a -> s{_eColorId = a})
 
--- | Whether anyone can invite themselves to the event. Optional. The default
--- is False.
+-- | Whether anyone can invite themselves to the event (currently works for
+-- Google+ events only). Optional. The default is False.
 eAnyoneCanAddSelf :: Lens' Event Bool
 eAnyoneCanAddSelf
   = lens _eAnyoneCanAddSelf

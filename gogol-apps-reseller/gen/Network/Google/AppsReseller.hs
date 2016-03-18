@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you create and manage your customers and their subscriptions.
+-- Creates and manages your customers and their subscriptions.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference>
 module Network.Google.AppsReseller
@@ -97,6 +97,7 @@ module Network.Google.AppsReseller
     -- ** Customer
     , Customer
     , customer
+    , cCustomerDomainVerified
     , cResourceUiURL
     , cKind
     , cCustomerId
@@ -162,6 +163,7 @@ module Network.Google.AppsReseller
     , subSKUId
     , subPlan
     , subCustomerId
+    , subCustomerDomain
     , subSuspensionReasons
     , subTransferInfo
     , subPurchaseOrderId

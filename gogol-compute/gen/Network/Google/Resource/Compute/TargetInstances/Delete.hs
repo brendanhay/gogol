@@ -84,7 +84,7 @@ targetInstancesDelete pTidProject_ pTidTargetInstance_ pTidZone_ =
     , _tidZone = pTidZone_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tidProject :: Lens' TargetInstancesDelete Text
 tidProject
   = lens _tidProject (\ s a -> s{_tidProject = a})

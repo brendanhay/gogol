@@ -964,6 +964,7 @@ data RestDescription = RestDescription
     , _rdName                      :: !(Maybe Text)
     , _rdPackagePath               :: !(Maybe Text)
     , _rdFeatures                  :: !(Maybe [Text])
+    , _rdVersionModule             :: !(Maybe Bool)
     , _rdVersion                   :: !(Maybe Text)
     , _rdParameters                :: !(Maybe RestDescriptionParameters)
     , _rdDocumentationLink         :: !(Maybe Text)
@@ -1017,6 +1018,8 @@ data RestDescription = RestDescription
 --
 -- * 'rdFeatures'
 --
+-- * 'rdVersionModule'
+--
 -- * 'rdVersion'
 --
 -- * 'rdParameters'
@@ -1060,6 +1063,7 @@ restDescription =
     , _rdName = Nothing
     , _rdPackagePath = Nothing
     , _rdFeatures = Nothing
+    , _rdVersionModule = Nothing
     , _rdVersion = Nothing
     , _rdParameters = Nothing
     , _rdDocumentationLink = Nothing
@@ -1167,6 +1171,11 @@ rdFeatures
       _Default
       . _Coerce
 
+rdVersionModule :: Lens' RestDescription (Maybe Bool)
+rdVersionModule
+  = lens _rdVersionModule
+      (\ s a -> s{_rdVersionModule = a})
+
 -- | The version of this API.
 rdVersion :: Lens' RestDescription (Maybe Text)
 rdVersion
@@ -1249,6 +1258,7 @@ instance FromJSON RestDescription where
                      <*> (o .:? "name")
                      <*> (o .:? "packagePath")
                      <*> (o .:? "features" .!= mempty)
+                     <*> (o .:? "version_module")
                      <*> (o .:? "version")
                      <*> (o .:? "parameters")
                      <*> (o .:? "documentationLink")
@@ -1283,6 +1293,7 @@ instance ToJSON RestDescription where
                   ("name" .=) <$> _rdName,
                   ("packagePath" .=) <$> _rdPackagePath,
                   ("features" .=) <$> _rdFeatures,
+                  ("version_module" .=) <$> _rdVersionModule,
                   ("version" .=) <$> _rdVersion,
                   ("parameters" .=) <$> _rdParameters,
                   ("documentationLink" .=) <$> _rdDocumentationLink,

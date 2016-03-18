@@ -87,7 +87,7 @@ targetInstancesInsert pTiiProject_ pTiiZone_ pTiiPayload_ =
     , _tiiPayload = pTiiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tiiProject :: Lens' TargetInstancesInsert Text
 tiiProject
   = lens _tiiProject (\ s a -> s{_tiiProject = a})

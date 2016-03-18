@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'UserProFilesGet' request conforms to.
 type UserProFilesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              QueryParam "alt" AltJSON :> Get '[JSON] UserProFile

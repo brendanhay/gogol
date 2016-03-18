@@ -202,7 +202,8 @@ instance ToJSON ListPopulationClause where
 --
 -- /See:/ 'creativeCustomEvent' smart constructor.
 data CreativeCustomEvent = CreativeCustomEvent
-    { _cceAdvertiserCustomEventType :: !(Maybe CreativeCustomEventAdvertiserCustomEventType)
+    { _cceAdvertiserCustomEventId   :: !(Maybe (Textual Int64))
+    , _cceAdvertiserCustomEventType :: !(Maybe CreativeCustomEventAdvertiserCustomEventType)
     , _cceAdvertiserCustomEventName :: !(Maybe Text)
     , _cceExitURL                   :: !(Maybe Text)
     , _cceTargetType                :: !(Maybe CreativeCustomEventTargetType)
@@ -216,6 +217,8 @@ data CreativeCustomEvent = CreativeCustomEvent
 -- | Creates a value of 'CreativeCustomEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cceAdvertiserCustomEventId'
 --
 -- * 'cceAdvertiserCustomEventType'
 --
@@ -238,7 +241,8 @@ creativeCustomEvent
     :: CreativeCustomEvent
 creativeCustomEvent =
     CreativeCustomEvent
-    { _cceAdvertiserCustomEventType = Nothing
+    { _cceAdvertiserCustomEventId = Nothing
+    , _cceAdvertiserCustomEventType = Nothing
     , _cceAdvertiserCustomEventName = Nothing
     , _cceExitURL = Nothing
     , _cceTargetType = Nothing
@@ -248,6 +252,14 @@ creativeCustomEvent =
     , _cceArtworkLabel = Nothing
     , _cceArtworkType = Nothing
     }
+
+-- | Unique ID of this event used by DDM Reporting and Data Transfer. This is
+-- a read-only field.
+cceAdvertiserCustomEventId :: Lens' CreativeCustomEvent (Maybe Int64)
+cceAdvertiserCustomEventId
+  = lens _cceAdvertiserCustomEventId
+      (\ s a -> s{_cceAdvertiserCustomEventId = a})
+      . mapping _Coerce
 
 -- | Type of the event. This is a read-only field.
 cceAdvertiserCustomEventType :: Lens' CreativeCustomEvent (Maybe CreativeCustomEventAdvertiserCustomEventType)
@@ -279,8 +291,8 @@ ccePopupWindowProperties
   = lens _ccePopupWindowProperties
       (\ s a -> s{_ccePopupWindowProperties = a})
 
--- | Reporting ID, used to differentiate multiple videos in a single
--- creative.
+-- | Video reporting ID, used to differentiate multiple videos in a single
+-- creative. This is a read-only field.
 cceVideoReportingId :: Lens' CreativeCustomEvent (Maybe Text)
 cceVideoReportingId
   = lens _cceVideoReportingId
@@ -312,8 +324,9 @@ instance FromJSON CreativeCustomEvent where
           = withObject "CreativeCustomEvent"
               (\ o ->
                  CreativeCustomEvent <$>
-                   (o .:? "advertiserCustomEventType") <*>
-                     (o .:? "advertiserCustomEventName")
+                   (o .:? "advertiserCustomEventId") <*>
+                     (o .:? "advertiserCustomEventType")
+                     <*> (o .:? "advertiserCustomEventName")
                      <*> (o .:? "exitUrl")
                      <*> (o .:? "targetType")
                      <*> (o .:? "popupWindowProperties")
@@ -326,7 +339,9 @@ instance ToJSON CreativeCustomEvent where
         toJSON CreativeCustomEvent{..}
           = object
               (catMaybes
-                 [("advertiserCustomEventType" .=) <$>
+                 [("advertiserCustomEventId" .=) <$>
+                    _cceAdvertiserCustomEventId,
+                  ("advertiserCustomEventType" .=) <$>
                     _cceAdvertiserCustomEventType,
                   ("advertiserCustomEventName" .=) <$>
                     _cceAdvertiserCustomEventName,
@@ -1333,6 +1348,7 @@ data InventoryItem = InventoryItem
     , _iiEstimatedConversionRate   :: !(Maybe (Textual Int64))
     , _iiProjectId                 :: !(Maybe (Textual Int64))
     , _iiSubAccountId              :: !(Maybe (Textual Int64))
+    , _iiType                      :: !(Maybe InventoryItemType)
     , _iiOrderId                   :: !(Maybe (Textual Int64))
     , _iiSiteId                    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1375,6 +1391,8 @@ data InventoryItem = InventoryItem
 --
 -- * 'iiSubAccountId'
 --
+-- * 'iiType'
+--
 -- * 'iiOrderId'
 --
 -- * 'iiSiteId'
@@ -1399,6 +1417,7 @@ inventoryItem =
     , _iiEstimatedConversionRate = Nothing
     , _iiProjectId = Nothing
     , _iiSubAccountId = Nothing
+    , _iiType = Nothing
     , _iiOrderId = Nothing
     , _iiSiteId = Nothing
     }
@@ -1512,6 +1531,10 @@ iiSubAccountId
       (\ s a -> s{_iiSubAccountId = a})
       . mapping _Coerce
 
+-- | Type of inventory item.
+iiType :: Lens' InventoryItem (Maybe InventoryItemType)
+iiType = lens _iiType (\ s a -> s{_iiType = a})
+
 -- | Order ID of this inventory item.
 iiOrderId :: Lens' InventoryItem (Maybe Int64)
 iiOrderId
@@ -1546,6 +1569,7 @@ instance FromJSON InventoryItem where
                      <*> (o .:? "estimatedConversionRate")
                      <*> (o .:? "projectId")
                      <*> (o .:? "subaccountId")
+                     <*> (o .:? "type")
                      <*> (o .:? "orderId")
                      <*> (o .:? "siteId"))
 
@@ -1574,6 +1598,7 @@ instance ToJSON InventoryItem where
                     _iiEstimatedConversionRate,
                   ("projectId" .=) <$> _iiProjectId,
                   ("subaccountId" .=) <$> _iiSubAccountId,
+                  ("type" .=) <$> _iiType,
                   ("orderId" .=) <$> _iiOrderId,
                   ("siteId" .=) <$> _iiSiteId])
 
@@ -2267,7 +2292,10 @@ directorySite =
 -- \"23\" for NZD - \"24\" for MYR - \"25\" for BRL - \"26\" for PTE -
 -- \"27\" for MXP - \"28\" for CLP - \"29\" for TRY - \"30\" for ARS -
 -- \"31\" for PEN - \"32\" for ILS - \"33\" for CHF - \"34\" for VEF -
--- \"35\" for COP - \"36\" for GTQ
+-- \"35\" for COP - \"36\" for GTQ - \"37\" for PLN - \"39\" for INR -
+-- \"40\" for THB - \"41\" for IDR - \"42\" for CZK - \"43\" for RON -
+-- \"44\" for HUF - \"45\" for RUB - \"46\" for AED - \"47\" for BGN -
+-- \"48\" for HRK
 dsCurrencyId :: Lens' DirectorySite (Maybe Int64)
 dsCurrencyId
   = lens _dsCurrencyId (\ s a -> s{_dsCurrencyId = a})
@@ -4272,11 +4300,13 @@ aDynamicClickTracker
       (\ s a -> s{_aDynamicClickTracker = a})
 
 -- | Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads, respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
--- refers to rendering an in-stream video ads developed with the VAST
--- standard.
+-- DISPLAY and DISPLAY_INTERSTITIAL refer to either rendering on desktop or
+-- on mobile devices or in mobile apps for regular or interstitial ads,
+-- respectively. APP and APP_INTERSTITIAL are only used for existing
+-- default ads. New mobile placements must be assigned DISPLAY or
+-- DISPLAY_INTERSTITIAL and default ads created for those placements will
+-- be limited to those compatibility types. IN_STREAM_VIDEO refers to
+-- rendering in-stream video ads developed with the VAST standard.
 aCompatibility :: Lens' Ad (Maybe AdCompatibility)
 aCompatibility
   = lens _aCompatibility
@@ -6839,6 +6869,7 @@ data Creative = Creative
     , _creThirdPartyRichMediaImpressionsURL   :: !(Maybe Text)
     , _creLastModifiedInfo                    :: !(Maybe LastModifiedInfo)
     , _creId                                  :: !(Maybe (Textual Int64))
+    , _creAuthoringSource                     :: !(Maybe CreativeAuthoringSource)
     , _creStudioAdvertiserId                  :: !(Maybe (Textual Int64))
     , _creCreativeAssets                      :: !(Maybe [CreativeAsset])
     , _creSubAccountId                        :: !(Maybe (Textual Int64))
@@ -6943,6 +6974,8 @@ data Creative = Creative
 --
 -- * 'creId'
 --
+-- * 'creAuthoringSource'
+--
 -- * 'creStudioAdvertiserId'
 --
 -- * 'creCreativeAssets'
@@ -7019,6 +7052,7 @@ creative =
     , _creThirdPartyRichMediaImpressionsURL = Nothing
     , _creLastModifiedInfo = Nothing
     , _creId = Nothing
+    , _creAuthoringSource = Nothing
     , _creStudioAdvertiserId = Nothing
     , _creCreativeAssets = Nothing
     , _creSubAccountId = Nothing
@@ -7149,7 +7183,7 @@ creSize :: Lens' Creative (Maybe Size)
 creSize = lens _creSize (\ s a -> s{_creSize = a})
 
 -- | Third-party URLs for tracking in-stream video creative events.
--- Applicable to the following creative types: INSTREAM_VIDEO and all
+-- Applicable to the following creative types: all INSTREAM_VIDEO and all
 -- VPAID.
 creThirdPartyURLs :: Lens' Creative [ThirdPartyTrackingURL]
 creThirdPartyURLs
@@ -7158,8 +7192,10 @@ creThirdPartyURLs
       . _Default
       . _Coerce
 
--- | List of counter events configured for the creative. Applicable to the
--- following creative types: all RICH_MEDIA, and all VPAID.
+-- | List of counter events configured for the creative. For ENHANCED_IMAGE
+-- creatives, these are read-only and auto-generated from clickTags.
+-- Applicable to the following creative types: ENHANCED_IMAGE, all
+-- RICH_MEDIA, and all VPAID.
 creCounterCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creCounterCustomEvents
   = lens _creCounterCustomEvents
@@ -7173,7 +7209,7 @@ creKind :: Lens' Creative Text
 creKind = lens _creKind (\ s a -> s{_creKind = a})
 
 -- | Whether creative should be treated as SSL compliant even if the system
--- scan shows it\'s not.
+-- scan shows it\'s not. Applicable to all creative types.
 creSSLOverride :: Lens' Creative (Maybe Bool)
 creSSLOverride
   = lens _creSSLOverride
@@ -7225,7 +7261,7 @@ creAdTagKeys
       . _Coerce
 
 -- | Whether the user can choose to skip the creative. Applicable to the
--- following creative types: INSTREAM_VIDEO.
+-- following creative types: all INSTREAM_VIDEO and all VPAID.
 creSkippable :: Lens' Creative (Maybe Bool)
 creSkippable
   = lens _creSkippable (\ s a -> s{_creSkippable = a})
@@ -7252,7 +7288,7 @@ creBackupImageReportingLabel
       (\ s a -> s{_creBackupImageReportingLabel = a})
 
 -- | Industry standard ID assigned to creative for reach and frequency.
--- Applicable to the following creative types: INSTREAM_VIDEO and all
+-- Applicable to the following creative types: all INSTREAM_VIDEO and all
 -- VPAID.
 creCommercialId :: Lens' Creative (Maybe Text)
 creCommercialId
@@ -7264,8 +7300,11 @@ creActive :: Lens' Creative (Maybe Bool)
 creActive
   = lens _creActive (\ s a -> s{_creActive = a})
 
--- | List of exit events configured for the creative. Applicable to the
--- following creative types: all RICH_MEDIA, and all VPAID.
+-- | List of exit events configured for the creative. For ENHANCED_BANNER and
+-- ENHANCED_IMAGE creatives, these are read-only and auto-generated from
+-- clickTags, For ENHANCED_BANNER, an event is also created from the
+-- backupImageReportingLabel. Applicable to the following creative types:
+-- ENHANCED_BANNER, ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.
 creExitCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creExitCustomEvents
   = lens _creExitCustomEvents
@@ -7301,7 +7340,7 @@ creOverrideCss
       (\ s a -> s{_creOverrideCss = a})
 
 -- | Description of the video ad. Applicable to the following creative types:
--- INSTREAM_VIDEO and all VPAID.
+-- all INSTREAM_VIDEO and all VPAID.
 creVideoDescription :: Lens' Creative (Maybe Text)
 creVideoDescription
   = lens _creVideoDescription
@@ -7376,6 +7415,14 @@ creId
   = lens _creId (\ s a -> s{_creId = a}) .
       mapping _Coerce
 
+-- | Source application where creative was authored. Presently, only DBM
+-- authored creatives will have this field set. Applicable to all creative
+-- types.
+creAuthoringSource :: Lens' Creative (Maybe CreativeAuthoringSource)
+creAuthoringSource
+  = lens _creAuthoringSource
+      (\ s a -> s{_creAuthoringSource = a})
+
 -- | Studio advertiser ID associated with rich media and VPAID creatives.
 -- This is a read-only field. Applicable to the following creative types:
 -- all RICH_MEDIA, and all VPAID.
@@ -7409,8 +7456,10 @@ creSubAccountId
 creType :: Lens' Creative (Maybe CreativeType)
 creType = lens _creType (\ s a -> s{_creType = a})
 
--- | List of timer events configured for the creative. Applicable to the
--- following creative types: all RICH_MEDIA, and all VPAID.
+-- | List of timer events configured for the creative. For ENHANCED_IMAGE
+-- creatives, these are read-only and auto-generated from clickTags.
+-- Applicable to the following creative types: ENHANCED_IMAGE, all
+-- RICH_MEDIA, and all VPAID.
 creTimerCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creTimerCustomEvents
   = lens _creTimerCustomEvents
@@ -7428,13 +7477,15 @@ creStudioCreativeId
       . mapping _Coerce
 
 -- | Compatibilities associated with this creative. This is a read-only
--- field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or
--- on mobile devices for regular or interstitial ads, respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
--- refers to rendering in in-stream video ads developed with the VAST
--- standard. Applicable to all creative types. Acceptable values are: -
--- \"APP\" - \"APP_INTERSTITIAL\" - \"IN_STREAM_VIDEO\" - \"WEB\" -
--- \"WEB_INTERSTITIAL\"
+-- field. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on
+-- desktop or on mobile devices or in mobile apps for regular or
+-- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
+-- rendering in mobile apps. Only pre-existing creatives may have these
+-- compatibilities since new creatives will either be assigned DISPLAY or
+-- DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in
+-- in-stream video ads developed with the VAST standard. Applicable to all
+-- creative types. Acceptable values are: - \"APP\" - \"APP_INTERSTITIAL\"
+-- - \"IN_STREAM_VIDEO\" - \"DISPLAY\" - \"DISPLAY_INTERSTITIAL\"
 creCompatibility :: Lens' Creative [CreativeCompatibilityItem]
 creCompatibility
   = lens _creCompatibility
@@ -7473,7 +7524,7 @@ creArchived
 
 -- | List of companion creatives assigned to an in-Stream videocreative.
 -- Acceptable values include IDs of existing flash and image creatives.
--- Applicable to the following creative types: INSTREAM_VIDEO and all
+-- Applicable to the following creative types: all INSTREAM_VIDEO and all
 -- VPAID.
 creCompanionCreatives :: Lens' Creative [Int64]
 creCompanionCreatives
@@ -7500,9 +7551,13 @@ creStudioTraffickedCreativeId
       (\ s a -> s{_creStudioTraffickedCreativeId = a})
       . mapping _Coerce
 
--- | URL of hosted image or another ad tag. This is a required field when
--- applicable. Applicable to the following creative types:
--- INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and REDIRECT
+-- | URL of hosted image or hosted video or another ad tag. For
+-- INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect
+-- URL. The standard for a VAST (Video Ad Serving Template) ad response
+-- allows for a redirect link to another VAST 2.0 or 3.0 call. This is a
+-- required field when applicable. Applicable to the following creative
+-- types: INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, REDIRECT, and
+-- INSTREAM_VIDEO_REDIRECT
 creRedirectURL :: Lens' Creative (Maybe Text)
 creRedirectURL
   = lens _creRedirectURL
@@ -7570,6 +7625,7 @@ instance FromJSON Creative where
                      <*> (o .:? "thirdPartyRichMediaImpressionsUrl")
                      <*> (o .:? "lastModifiedInfo")
                      <*> (o .:? "id")
+                     <*> (o .:? "authoringSource")
                      <*> (o .:? "studioAdvertiserId")
                      <*> (o .:? "creativeAssets" .!= mempty)
                      <*> (o .:? "subaccountId")
@@ -7643,6 +7699,7 @@ instance ToJSON Creative where
                     _creThirdPartyRichMediaImpressionsURL,
                   ("lastModifiedInfo" .=) <$> _creLastModifiedInfo,
                   ("id" .=) <$> _creId,
+                  ("authoringSource" .=) <$> _creAuthoringSource,
                   ("studioAdvertiserId" .=) <$> _creStudioAdvertiserId,
                   ("creativeAssets" .=) <$> _creCreativeAssets,
                   ("subaccountId" .=) <$> _creSubAccountId,
@@ -8742,6 +8799,7 @@ data SiteSettings = SiteSettings
     , _ssLookbackConfiguration :: !(Maybe LookbackConfiguration)
     , _ssTagSetting            :: !(Maybe TagSetting)
     , _ssActiveViewOptOut      :: !(Maybe Bool)
+    , _ssVideoActiveViewOptOut :: !(Maybe Bool)
     , _ssCreativeSettings      :: !(Maybe CreativeSettings)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8759,6 +8817,8 @@ data SiteSettings = SiteSettings
 --
 -- * 'ssActiveViewOptOut'
 --
+-- * 'ssVideoActiveViewOptOut'
+--
 -- * 'ssCreativeSettings'
 siteSettings
     :: SiteSettings
@@ -8769,6 +8829,7 @@ siteSettings =
     , _ssLookbackConfiguration = Nothing
     , _ssTagSetting = Nothing
     , _ssActiveViewOptOut = Nothing
+    , _ssVideoActiveViewOptOut = Nothing
     , _ssCreativeSettings = Nothing
     }
 
@@ -8801,6 +8862,19 @@ ssActiveViewOptOut
   = lens _ssActiveViewOptOut
       (\ s a -> s{_ssActiveViewOptOut = a})
 
+-- | Whether Verification and ActiveView are disabled for in-stream video
+-- creatives on this site. The same setting videoActiveViewOptOut exists on
+-- the directory site level -- the opt out occurs if either of these
+-- settings are true. These settings are distinct from
+-- DirectorySites.settings.activeViewOptOut or
+-- Sites.siteSettings.activeViewOptOut which only apply to display ads.
+-- However, Accounts.activeViewOptOut opts out both video traffic, as well
+-- as display ads, from Verification and ActiveView.
+ssVideoActiveViewOptOut :: Lens' SiteSettings (Maybe Bool)
+ssVideoActiveViewOptOut
+  = lens _ssVideoActiveViewOptOut
+      (\ s a -> s{_ssVideoActiveViewOptOut = a})
+
 -- | Site-wide creative settings.
 ssCreativeSettings :: Lens' SiteSettings (Maybe CreativeSettings)
 ssCreativeSettings
@@ -8817,6 +8891,7 @@ instance FromJSON SiteSettings where
                      <*> (o .:? "lookbackConfiguration")
                      <*> (o .:? "tagSetting")
                      <*> (o .:? "activeViewOptOut")
+                     <*> (o .:? "videoActiveViewOptOut")
                      <*> (o .:? "creativeSettings"))
 
 instance ToJSON SiteSettings where
@@ -8830,6 +8905,8 @@ instance ToJSON SiteSettings where
                     _ssLookbackConfiguration,
                   ("tagSetting" .=) <$> _ssTagSetting,
                   ("activeViewOptOut" .=) <$> _ssActiveViewOptOut,
+                  ("videoActiveViewOptOut" .=) <$>
+                    _ssVideoActiveViewOptOut,
                   ("creativeSettings" .=) <$> _ssCreativeSettings])
 
 -- | Content Category List Response
@@ -9075,7 +9152,10 @@ aaMaximumImageSize
 -- \"21\" for CNY - \"22\" for HKD - \"23\" for NZD - \"24\" for MYR -
 -- \"25\" for BRL - \"26\" for PTE - \"27\" for MXP - \"28\" for CLP -
 -- \"29\" for TRY - \"30\" for ARS - \"31\" for PEN - \"32\" for ILS -
--- \"33\" for CHF - \"34\" for VEF - \"35\" for COP - \"36\" for GTQ
+-- \"33\" for CHF - \"34\" for VEF - \"35\" for COP - \"36\" for GTQ -
+-- \"37\" for PLN - \"39\" for INR - \"40\" for THB - \"41\" for IDR -
+-- \"42\" for CZK - \"43\" for RON - \"44\" for HUF - \"45\" for RUB -
+-- \"46\" for AED - \"47\" for BGN - \"48\" for HRK
 aaCurrencyId :: Lens' Account (Maybe Int64)
 aaCurrencyId
   = lens _aaCurrencyId (\ s a -> s{_aaCurrencyId = a})
@@ -15047,7 +15127,6 @@ data FloodlightConfiguration = FloodlightConfiguration
     , _fcLookbackConfiguration                    :: !(Maybe LookbackConfiguration)
     , _fcAccountId                                :: !(Maybe (Textual Int64))
     , _fcId                                       :: !(Maybe (Textual Int64))
-    , _fcSSLRequired                              :: !(Maybe Bool)
     , _fcNATuralSearchConversionAttributionOption :: !(Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
     , _fcUserDefinedVariableConfigurations        :: !(Maybe [UserDefinedVariableConfiguration])
     , _fcSubAccountId                             :: !(Maybe (Textual Int64))
@@ -15084,8 +15163,6 @@ data FloodlightConfiguration = FloodlightConfiguration
 --
 -- * 'fcId'
 --
--- * 'fcSSLRequired'
---
 -- * 'fcNATuralSearchConversionAttributionOption'
 --
 -- * 'fcUserDefinedVariableConfigurations'
@@ -15113,7 +15190,6 @@ floodlightConfiguration =
     , _fcLookbackConfiguration = Nothing
     , _fcAccountId = Nothing
     , _fcId = Nothing
-    , _fcSSLRequired = Nothing
     , _fcNATuralSearchConversionAttributionOption = Nothing
     , _fcUserDefinedVariableConfigurations = Nothing
     , _fcSubAccountId = Nothing
@@ -15203,13 +15279,6 @@ fcId
   = lens _fcId (\ s a -> s{_fcId = a}) .
       mapping _Coerce
 
--- | Whether floodlight activities owned by this configuration are required
--- to be SSL-compliant.
-fcSSLRequired :: Lens' FloodlightConfiguration (Maybe Bool)
-fcSSLRequired
-  = lens _fcSSLRequired
-      (\ s a -> s{_fcSSLRequired = a})
-
 -- | Types of attribution options for natural search conversions.
 fcNATuralSearchConversionAttributionOption :: Lens' FloodlightConfiguration (Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
 fcNATuralSearchConversionAttributionOption
@@ -15276,7 +15345,6 @@ instance FromJSON FloodlightConfiguration where
                      <*> (o .:? "lookbackConfiguration")
                      <*> (o .:? "accountId")
                      <*> (o .:? "id")
-                     <*> (o .:? "sslRequired")
                      <*>
                      (o .:? "naturalSearchConversionAttributionOption")
                      <*>
@@ -15309,7 +15377,6 @@ instance ToJSON FloodlightConfiguration where
                     _fcLookbackConfiguration,
                   ("accountId" .=) <$> _fcAccountId,
                   ("id" .=) <$> _fcId,
-                  ("sslRequired" .=) <$> _fcSSLRequired,
                   ("naturalSearchConversionAttributionOption" .=) <$>
                     _fcNATuralSearchConversionAttributionOption,
                   ("userDefinedVariableConfigurations" .=) <$>
@@ -19260,11 +19327,11 @@ assComment :: Lens' AdSlot (Maybe Text)
 assComment
   = lens _assComment (\ s a -> s{_assComment = a})
 
--- | Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.
--- IN_STREAM_VIDEO refers to rendering in in-stream video ads developed
--- with the VAST standard.
+-- | Ad slot compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
+-- rendering either on desktop, mobile devices or in mobile apps for
+-- regular or interstitial ads respectively. APP and APP_INTERSTITIAL are
+-- for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in
+-- in-stream video ads developed with the VAST standard.
 assCompatibility :: Lens' AdSlot (Maybe AdSlotCompatibility)
 assCompatibility
   = lens _assCompatibility
@@ -20064,11 +20131,13 @@ p1SiteId
   = lens _p1SiteId (\ s a -> s{_p1SiteId = a}) .
       mapping _Coerce
 
--- | Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads,
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile
--- apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads
--- developed with the VAST standard. This field is required on insertion.
+-- | Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
+-- rendering on desktop, mobile devices or in mobile apps for regular or
+-- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
+-- allowed for new placement insertions. Instead, use DISPLAY or
+-- DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream
+-- video ads developed with the VAST standard.This field is required on
+-- insertion.
 p1Compatibility :: Lens' Placement (Maybe PlacementCompatibility)
 p1Compatibility
   = lens _p1Compatibility

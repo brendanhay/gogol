@@ -80,7 +80,7 @@ globalForwardingRulesInsert pGfriProject_ pGfriPayload_ =
     , _gfriPayload = pGfriPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 gfriProject :: Lens' GlobalForwardingRulesInsert Text
 gfriProject
   = lens _gfriProject (\ s a -> s{_gfriProject = a})

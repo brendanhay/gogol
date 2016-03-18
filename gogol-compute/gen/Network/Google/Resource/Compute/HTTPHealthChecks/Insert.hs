@@ -80,7 +80,7 @@ hTTPHealthChecksInsert pHttphciProject_ pHttphciPayload_ =
     , _httphciPayload = pHttphciPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphciProject :: Lens' HTTPHealthChecksInsert Text
 httphciProject
   = lens _httphciProject

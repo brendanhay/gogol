@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FilesGet' request conforms to.
 type FilesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "reports" :>
            Capture "reportId" (Textual Int64) :>
              "files" :>
@@ -52,7 +52,7 @@ type FilesGetResource =
                  QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
-         "v2.2" :>
+         "v2.4" :>
            "reports" :>
              Capture "reportId" (Textual Int64) :>
                "files" :>

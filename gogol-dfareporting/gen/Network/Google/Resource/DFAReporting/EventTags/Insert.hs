@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsInsert' request conforms to.
 type EventTagsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>

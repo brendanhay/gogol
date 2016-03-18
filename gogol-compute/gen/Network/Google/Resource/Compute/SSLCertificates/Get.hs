@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified SslCertificate resource.
+-- Returns the specified SslCertificate resource. Get a list of available
+-- SSL certificates by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.sslCertificates.get@.
 module Network.Google.Resource.Compute.SSLCertificates.Get
@@ -53,7 +54,8 @@ type SSLCertificatesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SSLCertificate
 
--- | Returns the specified SslCertificate resource.
+-- | Returns the specified SslCertificate resource. Get a list of available
+-- SSL certificates by making a list() request.
 --
 -- /See:/ 'sslCertificatesGet' smart constructor.
 data SSLCertificatesGet = SSLCertificatesGet
@@ -78,7 +80,7 @@ sslCertificatesGet pScgProject_ pScgSSLCertificate_ =
     , _scgSSLCertificate = pScgSSLCertificate_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 scgProject :: Lens' SSLCertificatesGet Text
 scgProject
   = lens _scgProject (\ s a -> s{_scgProject = a})

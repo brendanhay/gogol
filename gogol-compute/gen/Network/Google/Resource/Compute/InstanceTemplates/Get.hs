@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance template resource.
+-- Returns the specified instance template. Get a list of available
+-- instance templates by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.get@.
 module Network.Google.Resource.Compute.InstanceTemplates.Get
@@ -53,7 +54,8 @@ type InstanceTemplatesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] InstanceTemplate
 
--- | Returns the specified instance template resource.
+-- | Returns the specified instance template. Get a list of available
+-- instance templates by making a list() request.
 --
 -- /See:/ 'instanceTemplatesGet' smart constructor.
 data InstanceTemplatesGet = InstanceTemplatesGet
@@ -78,7 +80,7 @@ instanceTemplatesGet pItgProject_ pItgInstanceTemplate_ =
     , _itgInstanceTemplate = pItgInstanceTemplate_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 itgProject :: Lens' InstanceTemplatesGet Text
 itgProject
   = lens _itgProject (\ s a -> s{_itgProject = a})

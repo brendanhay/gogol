@@ -13,9 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you view Google Webmaster Tools data for your verified sites.
+-- Lets you view Google Search Console data for your verified sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference>
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference>
 module Network.Google.WebmasterTools
     (
     -- * Service Configuration
@@ -189,6 +189,7 @@ module Network.Google.WebmasterTools
     , saqrSearchType
     , saqrDimensionFilterGroups
     , saqrStartDate
+    , saqrStartRow
     , saqrDimensions
 
     -- ** URLCrawlErrorsSamplesListPlatform
@@ -229,7 +230,7 @@ import           Network.Google.WebmasterTools.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Webmaster Tools API service.
+-- | Represents the entirety of the methods and resources available for the Search Console API service.
 type WebmasterToolsAPI =
      URLCrawlErrorsSamplesListResource :<|>
        URLCrawlErrorsSamplesGetResource

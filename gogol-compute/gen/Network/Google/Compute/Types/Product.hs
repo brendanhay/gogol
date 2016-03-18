@@ -55,13 +55,18 @@ targetHTTPSProxyList =
     , _thplId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 thplNextPageToken :: Lens' TargetHTTPSProxyList (Maybe Text)
 thplNextPageToken
   = lens _thplNextPageToken
       (\ s a -> s{_thplNextPageToken = a})
 
--- | Type of resource.
+-- | Type of resource. Always compute#targetHttpsProxyList for lists of
+-- target HTTPS proxies.
 thplKind :: Lens' TargetHTTPSProxyList Text
 thplKind = lens _thplKind (\ s a -> s{_thplKind = a})
 
@@ -77,7 +82,8 @@ thplSelfLink :: Lens' TargetHTTPSProxyList (Maybe Text)
 thplSelfLink
   = lens _thplSelfLink (\ s a -> s{_thplSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 thplId :: Lens' TargetHTTPSProxyList (Maybe Text)
 thplId = lens _thplId (\ s a -> s{_thplId = a})
 
@@ -178,7 +184,13 @@ owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
 owidiValue
   = lens _owidiValue (\ s a -> s{_owidiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 owidiKey :: Lens' OperationWarningsItemDataItem (Maybe Text)
 owidiKey = lens _owidiKey (\ s a -> s{_owidiKey = a})
 
@@ -313,7 +325,7 @@ instance FromJSON DiskTypeAggregatedListItems where
 instance ToJSON DiskTypeAggregatedListItems where
         toJSON = toJSON . _dtaliAddtional
 
--- | Contains a list of Firewall resources.
+-- | Contains a list of firewalls.
 --
 -- /See:/ 'firewallList' smart constructor.
 data FirewallList = FirewallList
@@ -348,7 +360,11 @@ firewallList =
     , _flId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 flNextPageToken :: Lens' FirewallList (Maybe Text)
 flNextPageToken
   = lens _flNextPageToken
@@ -370,7 +386,8 @@ flSelfLink :: Lens' FirewallList (Maybe Text)
 flSelfLink
   = lens _flSelfLink (\ s a -> s{_flSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 flId :: Lens' FirewallList (Maybe Text)
 flId = lens _flId (\ s a -> s{_flId = a})
 
@@ -422,18 +439,21 @@ instancesScopedListWarning =
     , _islwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 islwData :: Lens' InstancesScopedListWarning [InstancesScopedListWarningDataItem]
 islwData
   = lens _islwData (\ s a -> s{_islwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 islwCode :: Lens' InstancesScopedListWarning (Maybe InstancesScopedListWarningCode)
 islwCode = lens _islwCode (\ s a -> s{_islwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 islwMessage :: Lens' InstancesScopedListWarning (Maybe Text)
 islwMessage
   = lens _islwMessage (\ s a -> s{_islwMessage = a})
@@ -489,7 +509,11 @@ instanceGroupList =
     , _iglId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 iglNextPageToken :: Lens' InstanceGroupList (Maybe Text)
 iglNextPageToken
   = lens _iglNextPageToken
@@ -539,6 +563,46 @@ instance ToJSON InstanceGroupList where
                   ("selfLink" .=) <$> _iglSelfLink,
                   ("id" .=) <$> _iglId])
 
+--
+-- /See:/ 'instancesSetMachineTypeRequest' smart constructor.
+newtype InstancesSetMachineTypeRequest = InstancesSetMachineTypeRequest
+    { _ismtrMachineType :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesSetMachineTypeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ismtrMachineType'
+instancesSetMachineTypeRequest
+    :: InstancesSetMachineTypeRequest
+instancesSetMachineTypeRequest =
+    InstancesSetMachineTypeRequest
+    { _ismtrMachineType = Nothing
+    }
+
+-- | Full or partial URL of the machine type resource. See Machine Types for
+-- a full list of machine types. For example:
+-- zones\/us-central1-f\/machineTypes\/n1-standard-1
+ismtrMachineType :: Lens' InstancesSetMachineTypeRequest (Maybe Text)
+ismtrMachineType
+  = lens _ismtrMachineType
+      (\ s a -> s{_ismtrMachineType = a})
+
+instance FromJSON InstancesSetMachineTypeRequest
+         where
+        parseJSON
+          = withObject "InstancesSetMachineTypeRequest"
+              (\ o ->
+                 InstancesSetMachineTypeRequest <$>
+                   (o .:? "machineType"))
+
+instance ToJSON InstancesSetMachineTypeRequest where
+        toJSON InstancesSetMachineTypeRequest{..}
+          = object
+              (catMaybes
+                 [("machineType" .=) <$> _ismtrMachineType])
+
 -- | A map of scoped autoscaler lists.
 --
 -- /See:/ 'autoscalerAggregatedListItems' smart constructor.
@@ -559,7 +623,7 @@ autoscalerAggregatedListItems pAaliAddtional_ =
     { _aaliAddtional = _Coerce # pAaliAddtional_
     }
 
--- | Name of the scope containing this set of autoscalers.
+-- | [Output Only] Name of the scope containing this set of autoscalers.
 aaliAddtional :: Lens' AutoscalerAggregatedListItems (HashMap Text AutoscalersScopedList)
 aaliAddtional
   = lens _aaliAddtional
@@ -778,13 +842,16 @@ snapshot =
     }
 
 -- | [Output Only] An indicator whether storageBytes is in a stable state or
--- it is being adjusted as a result of shared storage reallocation.
+-- it is being adjusted as a result of shared storage reallocation. This
+-- status can either be UPDATING, meaning the size of the snapshot is being
+-- updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
 sStorageBytesStatus :: Lens' Snapshot (Maybe SnapshotStorageBytesStatus)
 sStorageBytesStatus
   = lens _sStorageBytesStatus
       (\ s a -> s{_sStorageBytesStatus = a})
 
--- | [Output Only] The status of the snapshot.
+-- | [Output Only] The status of the snapshot. This can be CREATING,
+-- DELETING, FAILED, READY, or UPLOADING.
 sStatus :: Lens' Snapshot (Maybe SnapshotStatus)
 sStatus = lens _sStatus (\ s a -> s{_sStatus = a})
 
@@ -837,25 +904,28 @@ sCreationTimestamp
   = lens _sCreationTimestamp
       (\ s a -> s{_sCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 sId :: Lens' Snapshot (Maybe Word64)
 sId
   = lens _sId (\ s a -> s{_sId = a}) . mapping _Coerce
 
--- | Public visible licenses.
+-- | [Output Only] A list of public visible licenses that apply to this
+-- snapshot. This can be because the original image had licenses attached
+-- (such as a Windows image).
 sLicenses :: Lens' Snapshot [Text]
 sLicenses
   = lens _sLicenses (\ s a -> s{_sLicenses = a}) .
       _Default
       . _Coerce
 
--- | The source disk used to create this snapshot.
+-- | [Output Only] The source disk used to create this snapshot.
 sSourceDisk :: Lens' Snapshot (Maybe Text)
 sSourceDisk
   = lens _sSourceDisk (\ s a -> s{_sSourceDisk = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 sDescription :: Lens' Snapshot (Maybe Text)
 sDescription
   = lens _sDescription (\ s a -> s{_sDescription = a})
@@ -922,7 +992,7 @@ autoscalingPolicyCustomMetricUtilization =
     , _apcmuUtilizationTargetType = Nothing
     }
 
--- | Target value of the metric which Autoscaler should maintain. Must be a
+-- | Target value of the metric which autoscaler should maintain. Must be a
 -- positive value.
 apcmuUtilizationTarget :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Double)
 apcmuUtilizationTarget
@@ -930,16 +1000,23 @@ apcmuUtilizationTarget
       (\ s a -> s{_apcmuUtilizationTarget = a})
       . mapping _Coerce
 
--- | Identifier of the metric. It should be a Cloud Monitoring metric. The
--- metric can not have negative values. The metric should be an utilization
--- metric (increasing number of VMs handling requests x times should reduce
--- average value of the metric roughly x times). For example you could use:
--- compute.googleapis.com\/instance\/network\/received_bytes_count.
+-- | The identifier of the Cloud Monitoring metric. The metric cannot have
+-- negative values and should be a utilization metric, which means that the
+-- number of virtual machines handling requests should increase or decrease
+-- proportionally to the metric. The metric must also have a label of
+-- compute.googleapis.com\/resource_id with the value of the instance\'s
+-- unique ID, although this alone does not guarantee that the metric is
+-- valid. For example, the following is a valid metric:
+-- compute.googleapis.com\/instance\/network\/received_bytes_count The
+-- following is not a valid metric because it does not increase or decrease
+-- based on usage: compute.googleapis.com\/instance\/cpu\/reserved_cores
 apcmuMetric :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
 apcmuMetric
   = lens _apcmuMetric (\ s a -> s{_apcmuMetric = a})
 
--- | Defines type in which utilization_target is expressed.
+-- | Defines how target utilization value is expressed for a Cloud Monitoring
+-- metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE. If not
+-- specified, the default is GAUGE.
 apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
 apcmuUtilizationTargetType
   = lens _apcmuUtilizationTargetType
@@ -1001,7 +1078,11 @@ forwardingRuleList =
     , _frlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 frlNextPageToken :: Lens' ForwardingRuleList (Maybe Text)
 frlNextPageToken
   = lens _frlNextPageToken
@@ -1193,7 +1274,11 @@ operationList =
     , _olId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncate.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 olNextPageToken :: Lens' OperationList (Maybe Text)
 olNextPageToken
   = lens _olNextPageToken
@@ -1204,7 +1289,7 @@ olNextPageToken
 olKind :: Lens' OperationList Text
 olKind = lens _olKind (\ s a -> s{_olKind = a})
 
--- | [Output Only] The Operation resources.
+-- | [Output Only] A list of Operation resources.
 olItems :: Lens' OperationList [Operation]
 olItems
   = lens _olItems (\ s a -> s{_olItems = a}) . _Default
@@ -1215,7 +1300,8 @@ olSelfLink :: Lens' OperationList (Maybe Text)
 olSelfLink
   = lens _olSelfLink (\ s a -> s{_olSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 olId :: Lens' OperationList (Maybe Text)
 olId = lens _olId (\ s a -> s{_olId = a})
 
@@ -1274,7 +1360,11 @@ diskList =
     , _dlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 dlNextPageToken :: Lens' DiskList (Maybe Text)
 dlNextPageToken
   = lens _dlNextPageToken
@@ -1296,7 +1386,8 @@ dlSelfLink :: Lens' DiskList (Maybe Text)
 dlSelfLink
   = lens _dlSelfLink (\ s a -> s{_dlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dlId :: Lens' DiskList (Maybe Text)
 dlId = lens _dlId (\ s a -> s{_dlId = a})
 
@@ -1338,7 +1429,12 @@ targetPoolsAddInstanceRequest =
     { _tpairInstances = Nothing
     }
 
--- | URLs of the instances to be added to targetPool.
+-- | A full or partial URL to an instance to add to this target pool. This
+-- can be a full or partial URL. For example, the following are valid URLs:
+-- -
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project-id\/zones\/zone\/instances\/instance-name
+-- - projects\/project-id\/zones\/zone\/instances\/instance-name -
+-- zones\/zone\/instances\/instance-name
 tpairInstances :: Lens' TargetPoolsAddInstanceRequest [InstanceReference]
 tpairInstances
   = lens _tpairInstances
@@ -1433,7 +1529,11 @@ instanceGroupManagerList =
     , _igmlId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 igmlNextPageToken :: Lens' InstanceGroupManagerList (Maybe Text)
 igmlNextPageToken
   = lens _igmlNextPageToken
@@ -1482,6 +1582,69 @@ instance ToJSON InstanceGroupManagerList where
                   ("items" .=) <$> _igmlItems,
                   ("selfLink" .=) <$> _igmlSelfLink,
                   ("id" .=) <$> _igmlId])
+
+-- | An informational warning that appears when the list of addresses is
+-- empty.
+--
+-- /See:/ 'subnetworksScopedListWarning' smart constructor.
+data SubnetworksScopedListWarning = SubnetworksScopedListWarning
+    { _sslwData    :: !(Maybe [SubnetworksScopedListWarningDataItem])
+    , _sslwCode    :: !(Maybe SubnetworksScopedListWarningCode)
+    , _sslwMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworksScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sslwData'
+--
+-- * 'sslwCode'
+--
+-- * 'sslwMessage'
+subnetworksScopedListWarning
+    :: SubnetworksScopedListWarning
+subnetworksScopedListWarning =
+    SubnetworksScopedListWarning
+    { _sslwData = Nothing
+    , _sslwCode = Nothing
+    , _sslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
+sslwData :: Lens' SubnetworksScopedListWarning [SubnetworksScopedListWarningDataItem]
+sslwData
+  = lens _sslwData (\ s a -> s{_sslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+sslwCode :: Lens' SubnetworksScopedListWarning (Maybe SubnetworksScopedListWarningCode)
+sslwCode = lens _sslwCode (\ s a -> s{_sslwCode = a})
+
+-- | [Output Only] A human-readable description of the warning code.
+sslwMessage :: Lens' SubnetworksScopedListWarning (Maybe Text)
+sslwMessage
+  = lens _sslwMessage (\ s a -> s{_sslwMessage = a})
+
+instance FromJSON SubnetworksScopedListWarning where
+        parseJSON
+          = withObject "SubnetworksScopedListWarning"
+              (\ o ->
+                 SubnetworksScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON SubnetworksScopedListWarning where
+        toJSON SubnetworksScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _sslwData,
+                  ("code" .=) <$> _sslwCode,
+                  ("message" .=) <$> _sslwMessage])
 
 -- | An Image resource.
 --
@@ -1622,7 +1785,8 @@ iCreationTimestamp
   = lens _iCreationTimestamp
       (\ s a -> s{_iCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 iId :: Lens' Image (Maybe Word64)
 iId
   = lens _iId (\ s a -> s{_iId = a}) . mapping _Coerce
@@ -1644,8 +1808,8 @@ iSourceDisk :: Lens' Image (Maybe Text)
 iSourceDisk
   = lens _iSourceDisk (\ s a -> s{_iSourceDisk = a})
 
--- | Textual description of the resource; provided by the client when the
--- resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 iDescription :: Lens' Image (Maybe Text)
 iDescription
   = lens _iDescription (\ s a -> s{_iDescription = a})
@@ -1762,7 +1926,7 @@ umTests
   = lens _umTests (\ s a -> s{_umTests = a}) . _Default
       . _Coerce
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#urlMaps for url maps.
 umKind :: Lens' URLMap Text
 umKind = lens _umKind (\ s a -> s{_umKind = a})
 
@@ -1811,7 +1975,8 @@ umPathMatchers
       . _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource. Set by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 umId :: Lens' URLMap (Maybe Word64)
 umId
   = lens _umId (\ s a -> s{_umId = a}) .
@@ -1824,8 +1989,8 @@ umHostRules
       _Default
       . _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 umDescription :: Lens' URLMap (Maybe Text)
 umDescription
   = lens _umDescription
@@ -1937,13 +2102,18 @@ targetPoolList =
     , _tplId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tplNextPageToken :: Lens' TargetPoolList (Maybe Text)
 tplNextPageToken
   = lens _tplNextPageToken
       (\ s a -> s{_tplNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#targetPoolList for lists
+-- of target pools.
 tplKind :: Lens' TargetPoolList Text
 tplKind = lens _tplKind (\ s a -> s{_tplKind = a})
 
@@ -2018,7 +2188,11 @@ targetInstanceAggregatedList =
     , _tialId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tialNextPageToken :: Lens' TargetInstanceAggregatedList (Maybe Text)
 tialNextPageToken
   = lens _tialNextPageToken
@@ -2201,7 +2375,11 @@ diskAggregatedList =
     , _dalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 dalNextPageToken :: Lens' DiskAggregatedList (Maybe Text)
 dalNextPageToken
   = lens _dalNextPageToken
@@ -2221,7 +2399,8 @@ dalSelfLink :: Lens' DiskAggregatedList (Maybe Text)
 dalSelfLink
   = lens _dalSelfLink (\ s a -> s{_dalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dalId :: Lens' DiskAggregatedList (Maybe Text)
 dalId = lens _dalId (\ s a -> s{_dalId = a})
 
@@ -2423,7 +2602,11 @@ operationAggregatedList =
     , _oalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 oalNextPageToken :: Lens' OperationAggregatedList (Maybe Text)
 oalNextPageToken
   = lens _oalNextPageToken
@@ -2443,7 +2626,8 @@ oalSelfLink :: Lens' OperationAggregatedList (Maybe Text)
 oalSelfLink
   = lens _oalSelfLink (\ s a -> s{_oalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 oalId :: Lens' OperationAggregatedList (Maybe Text)
 oalId = lens _oalId (\ s a -> s{_oalId = a})
 
@@ -2600,7 +2784,11 @@ targetInstanceList =
     , _tilId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tilNextPageToken :: Lens' TargetInstanceList (Maybe Text)
 tilNextPageToken
   = lens _tilNextPageToken
@@ -2622,7 +2810,8 @@ tilSelfLink :: Lens' TargetInstanceList (Maybe Text)
 tilSelfLink
   = lens _tilSelfLink (\ s a -> s{_tilSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tilId :: Lens' TargetInstanceList (Maybe Text)
 tilId = lens _tilId (\ s a -> s{_tilId = a})
 
@@ -2681,7 +2870,11 @@ instanceGroupManagerAggregatedList =
     , _igmalId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 igmalNextPageToken :: Lens' InstanceGroupManagerAggregatedList (Maybe Text)
 igmalNextPageToken
   = lens _igmalNextPageToken
@@ -2820,13 +3013,18 @@ forwardingRuleAggregatedList =
     , _fralId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 fralNextPageToken :: Lens' ForwardingRuleAggregatedList (Maybe Text)
 fralNextPageToken
   = lens _fralNextPageToken
       (\ s a -> s{_fralNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always
+-- compute#forwardingRuleAggregatedList for lists of forwarding rules.
 fralKind :: Lens' ForwardingRuleAggregatedList Text
 fralKind = lens _fralKind (\ s a -> s{_fralKind = a})
 
@@ -2840,7 +3038,8 @@ fralSelfLink :: Lens' ForwardingRuleAggregatedList (Maybe Text)
 fralSelfLink
   = lens _fralSelfLink (\ s a -> s{_fralSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 fralId :: Lens' ForwardingRuleAggregatedList (Maybe Text)
 fralId = lens _fralId (\ s a -> s{_fralId = a})
 
@@ -2930,17 +3129,22 @@ targetPoolAggregatedList =
     , _tpalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tpalNextPageToken :: Lens' TargetPoolAggregatedList (Maybe Text)
 tpalNextPageToken
   = lens _tpalNextPageToken
       (\ s a -> s{_tpalNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#targetPoolAggregatedList
+-- for aggregated lists of target pools.
 tpalKind :: Lens' TargetPoolAggregatedList Text
 tpalKind = lens _tpalKind (\ s a -> s{_tpalKind = a})
 
--- | A map of scoped target pool lists.
+-- | [Output Only] A map of scoped target pool lists.
 tpalItems :: Lens' TargetPoolAggregatedList (Maybe TargetPoolAggregatedListItems)
 tpalItems
   = lens _tpalItems (\ s a -> s{_tpalItems = a})
@@ -3002,7 +3206,13 @@ oslwdiValue :: Lens' OperationsScopedListWarningDataItem (Maybe Text)
 oslwdiValue
   = lens _oslwdiValue (\ s a -> s{_oslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 oslwdiKey :: Lens' OperationsScopedListWarningDataItem (Maybe Text)
 oslwdiKey
   = lens _oslwdiKey (\ s a -> s{_oslwdiKey = a})
@@ -3024,7 +3234,7 @@ instance ToJSON OperationsScopedListWarningDataItem
                   ("key" .=) <$> _oslwdiKey])
 
 -- | A TargetPool resource. This resource defines a pool of instances,
--- associated HttpHealthCheck resources, and the fallback TargetPool.
+-- associated HttpHealthCheck resources, and the fallback target pool.
 --
 -- /See:/ 'targetPool' smart constructor.
 data TargetPool = TargetPool
@@ -3114,7 +3324,8 @@ tpBackupPool :: Lens' TargetPool (Maybe Text)
 tpBackupPool
   = lens _tpBackupPool (\ s a -> s{_tpBackupPool = a})
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#targetPool for target
+-- pools.
 tpKind :: Lens' TargetPool Text
 tpKind = lens _tpKind (\ s a -> s{_tpKind = a})
 
@@ -3139,7 +3350,7 @@ tpCreationTimestamp
   = lens _tpCreationTimestamp
       (\ s a -> s{_tpCreationTimestamp = a})
 
--- | A list of resource URLs to the member virtual machines serving this
+-- | A list of resource URLs to the virtual machine instances serving this
 -- pool. They must live in zones contained in the same region as this pool.
 tpInstances :: Lens' TargetPool [Text]
 tpInstances
@@ -3147,7 +3358,8 @@ tpInstances
       _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tpId :: Lens' TargetPool (Maybe Word64)
 tpId
   = lens _tpId (\ s a -> s{_tpId = a}) .
@@ -3175,8 +3387,8 @@ tpFailoverRatio
 tpRegion :: Lens' TargetPool (Maybe Text)
 tpRegion = lens _tpRegion (\ s a -> s{_tpRegion = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 tpDescription :: Lens' TargetPool (Maybe Text)
 tpDescription
   = lens _tpDescription
@@ -3227,7 +3439,7 @@ instance ToJSON TargetPool where
                   ("description" .=) <$> _tpDescription,
                   ("healthChecks" .=) <$> _tpHealthChecks])
 
--- | Contains a list of Image resources.
+-- | Contains a list of images.
 --
 -- /See:/ 'imageList' smart constructor.
 data ImageList = ImageList
@@ -3262,7 +3474,11 @@ imageList =
     , _ilId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 ilNextPageToken :: Lens' ImageList (Maybe Text)
 ilNextPageToken
   = lens _ilNextPageToken
@@ -3283,7 +3499,8 @@ ilSelfLink :: Lens' ImageList (Maybe Text)
 ilSelfLink
   = lens _ilSelfLink (\ s a -> s{_ilSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 ilId :: Lens' ImageList (Maybe Text)
 ilId = lens _ilId (\ s a -> s{_ilId = a})
 
@@ -3335,19 +3552,22 @@ vpnTunnelsScopedListWarning =
     , _vtslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 vtslwData :: Lens' VPNTunnelsScopedListWarning [VPNTunnelsScopedListWarningDataItem]
 vtslwData
   = lens _vtslwData (\ s a -> s{_vtslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 vtslwCode :: Lens' VPNTunnelsScopedListWarning (Maybe VPNTunnelsScopedListWarningCode)
 vtslwCode
   = lens _vtslwCode (\ s a -> s{_vtslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 vtslwMessage :: Lens' VPNTunnelsScopedListWarning (Maybe Text)
 vtslwMessage
   = lens _vtslwMessage (\ s a -> s{_vtslwMessage = a})
@@ -3438,14 +3658,15 @@ frIPAddress :: Lens' ForwardingRule (Maybe Text)
 frIPAddress
   = lens _frIPAddress (\ s a -> s{_frIPAddress = a})
 
--- | [Output Only] Type of the resource. Always compute#forwardingRule.
+-- | [Output Only] Type of the resource. Always compute#forwardingRule for
+-- Forwarding Rule resources.
 frKind :: Lens' ForwardingRule Text
 frKind = lens _frKind (\ s a -> s{_frKind = a})
 
 -- | Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets
 -- addressed to ports in the specified range will be forwarded to target.
--- Forwarding rules with the same \`[IPAddress, IPProtocol]\` pair must
--- have disjoint port ranges.
+-- Forwarding rules with the same [IPAddress, IPProtocol] pair must have
+-- disjoint port ranges.
 frPortRange :: Lens' ForwardingRule (Maybe Text)
 frPortRange
   = lens _frPortRange (\ s a -> s{_frPortRange = a})
@@ -3477,7 +3698,8 @@ frCreationTimestamp
   = lens _frCreationTimestamp
       (\ s a -> s{_frCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 frId :: Lens' ForwardingRule (Maybe Word64)
 frId
   = lens _frId (\ s a -> s{_frId = a}) .
@@ -3488,8 +3710,8 @@ frId
 frRegion :: Lens' ForwardingRule (Maybe Text)
 frRegion = lens _frRegion (\ s a -> s{_frRegion = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 frDescription :: Lens' ForwardingRule (Maybe Text)
 frDescription
   = lens _frDescription
@@ -3498,7 +3720,10 @@ frDescription
 -- | The URL of the target resource to receive the matched traffic. For
 -- regional forwarding rules, this target must live in the same region as
 -- the forwarding rule. For global forwarding rules, this target must be a
--- global TargetHttpProxy or TargetHttpsProxy resource.
+-- global TargetHttpProxy or TargetHttpsProxy resource. The forwarded
+-- traffic must be of a type appropriate to the target object. For example,
+-- TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires
+-- HTTPS traffic.
 frTarget :: Lens' ForwardingRule (Maybe Text)
 frTarget = lens _frTarget (\ s a -> s{_frTarget = a})
 
@@ -3569,7 +3794,11 @@ urlMapList =
     , _umlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 umlNextPageToken :: Lens' URLMapList (Maybe Text)
 umlNextPageToken
   = lens _umlNextPageToken
@@ -3643,7 +3872,13 @@ frslwdiValue :: Lens' ForwardingRulesScopedListWarningDataItem (Maybe Text)
 frslwdiValue
   = lens _frslwdiValue (\ s a -> s{_frslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 frslwdiKey :: Lens' ForwardingRulesScopedListWarningDataItem (Maybe Text)
 frslwdiKey
   = lens _frslwdiKey (\ s a -> s{_frslwdiKey = a})
@@ -3693,7 +3928,13 @@ igmslwdiValue
   = lens _igmslwdiValue
       (\ s a -> s{_igmslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 igmslwdiKey :: Lens' InstanceGroupManagersScopedListWarningDataItem (Maybe Text)
 igmslwdiKey
   = lens _igmslwdiKey (\ s a -> s{_igmslwdiKey = a})
@@ -3716,8 +3957,59 @@ instance ToJSON
                  [("value" .=) <$> _igmslwdiValue,
                   ("key" .=) <$> _igmslwdiKey])
 
--- | A Project resource. Projects can only be created in the Google
--- Developers Console. Unless marked otherwise, values can only be modified
+--
+-- /See:/ 'subnetworksScopedList' smart constructor.
+data SubnetworksScopedList = SubnetworksScopedList
+    { _sslSubnetworks :: !(Maybe [Subnetwork])
+    , _sslWarning     :: !(Maybe SubnetworksScopedListWarning)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworksScopedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sslSubnetworks'
+--
+-- * 'sslWarning'
+subnetworksScopedList
+    :: SubnetworksScopedList
+subnetworksScopedList =
+    SubnetworksScopedList
+    { _sslSubnetworks = Nothing
+    , _sslWarning = Nothing
+    }
+
+-- | List of subnetworks contained in this scope.
+sslSubnetworks :: Lens' SubnetworksScopedList [Subnetwork]
+sslSubnetworks
+  = lens _sslSubnetworks
+      (\ s a -> s{_sslSubnetworks = a})
+      . _Default
+      . _Coerce
+
+-- | An informational warning that appears when the list of addresses is
+-- empty.
+sslWarning :: Lens' SubnetworksScopedList (Maybe SubnetworksScopedListWarning)
+sslWarning
+  = lens _sslWarning (\ s a -> s{_sslWarning = a})
+
+instance FromJSON SubnetworksScopedList where
+        parseJSON
+          = withObject "SubnetworksScopedList"
+              (\ o ->
+                 SubnetworksScopedList <$>
+                   (o .:? "subnetworks" .!= mempty) <*>
+                     (o .:? "warning"))
+
+instance ToJSON SubnetworksScopedList where
+        toJSON SubnetworksScopedList{..}
+          = object
+              (catMaybes
+                 [("subnetworks" .=) <$> _sslSubnetworks,
+                  ("warning" .=) <$> _sslWarning])
+
+-- | A Project resource. Projects can only be created in the Google Cloud
+-- Platform Console. Unless marked otherwise, values can only be modified
 -- in the console.
 --
 -- /See:/ 'project' smart constructor.
@@ -3777,8 +4069,8 @@ project =
 pKind :: Lens' Project Text
 pKind = lens _pKind (\ s a -> s{_pKind = a})
 
--- | The location in Cloud Storage and naming method of the daily usage
--- report.
+-- | The naming prefix for daily usage reports and the Google Cloud Storage
+-- bucket where they are stored.
 pUsageExportLocation :: Lens' Project (Maybe UsageExportLocation)
 pUsageExportLocation
   = lens _pUsageExportLocation
@@ -3789,7 +4081,8 @@ pSelfLink :: Lens' Project (Maybe Text)
 pSelfLink
   = lens _pSelfLink (\ s a -> s{_pSelfLink = a})
 
--- | Name of the resource.
+-- | The project ID. For example: my-example-project. Use the project ID to
+-- make requests to Compute Engine.
 pName :: Lens' Project (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
@@ -3813,7 +4106,9 @@ pQuotas
   = lens _pQuotas (\ s a -> s{_pQuotas = a}) . _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server. This is not the project ID, and is just a unique
+-- ID used by Compute Engine to identify resources.
 pId :: Lens' Project (Maybe Word64)
 pId
   = lens _pId (\ s a -> s{_pId = a}) . mapping _Coerce
@@ -3885,6 +4180,7 @@ data Operation = Operation
     , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
+    , _oDescription         :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3933,6 +4229,8 @@ data Operation = Operation
 --
 -- * 'oRegion'
 --
+-- * 'oDescription'
+--
 -- * 'oTargetLink'
 --
 -- * 'oClientOperationId'
@@ -3960,46 +4258,47 @@ operation =
     , _oId = Nothing
     , _oOperationType = Nothing
     , _oRegion = Nothing
+    , _oDescription = Nothing
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
 
--- | [Output Only] Unique target ID which identifies a particular incarnation
--- of the target.
+-- | [Output Only] The unique target ID, which identifies a specific
+-- incarnation of the target resource.
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
   = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
       mapping _Coerce
 
--- | [Output Only] Status of the operation. Can be one of the following:
--- PENDING, RUNNING, or DONE.
+-- | [Output Only] The status of the operation, which can be one of the
+-- following: PENDING, RUNNING, or DONE.
 oStatus :: Lens' Operation (Maybe OperationStatus)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
--- | [Output Only] The time that this operation was requested. This is in
--- RFC3339 text format.
+-- | [Output Only] The time that this operation was requested. This value is
+-- in RFC3339 text format.
 oInsertTime :: Lens' Operation (Maybe Text)
 oInsertTime
   = lens _oInsertTime (\ s a -> s{_oInsertTime = a})
 
 -- | [Output Only] An optional progress indicator that ranges from 0 to 100.
 -- There is no requirement that this be linear or support any granularity
--- of operations. This should not be used to guess at when the operation
--- will be complete. This number should monotonically increase as the
--- operation progresses.
+-- of operations. This should not be used to guess when the operation will
+-- be complete. This number should monotonically increase as the operation
+-- progresses.
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
   = lens _oProgress (\ s a -> s{_oProgress = a}) .
       mapping _Coerce
 
 -- | [Output Only] The time that this operation was started by the server.
--- This is in RFC3339 text format.
+-- This value is in RFC3339 text format.
 oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
 -- | [Output Only] Type of the resource. Always compute#operation for
--- Operation resources.
+-- operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
@@ -4015,7 +4314,8 @@ oHTTPErrorMessage
   = lens _oHTTPErrorMessage
       (\ s a -> s{_oHTTPErrorMessage = a})
 
--- | [Output Only] URL of the zone where the operation resides.
+-- | [Output Only] The URL of the zone where the operation resides. Only
+-- available when performing per-zone operations.
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
 
@@ -4028,7 +4328,8 @@ oWarnings
       . _Coerce
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
--- message that was returned, such as 404.
+-- status code that was returned. For example, a 404 means the resource was
+-- not found.
 oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
@@ -4062,36 +4363,41 @@ oCreationTimestamp
   = lens _oCreationTimestamp
       (\ s a -> s{_oCreationTimestamp = a})
 
--- | [Output Only] The time that this operation was completed. This is in
--- RFC3339 text format.
+-- | [Output Only] The time that this operation was completed. This value is
+-- in RFC3339 text format.
 oEndTime :: Lens' Operation (Maybe Text)
 oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 oId :: Lens' Operation (Maybe Word64)
 oId
   = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
--- | [Output Only] Type of the operation, such as insert,
--- compute.instanceGroups.update, or compute.instanceGroups.delete.
+-- | [Output Only] The type of operation, such as insert, update, or delete,
+-- and so on.
 oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
   = lens _oOperationType
       (\ s a -> s{_oOperationType = a})
 
--- | [Output Only] URL of the region where the operation resides. Only
--- applicable for regional resources.
+-- | [Output Only] The URL of the region where the operation resides. Only
+-- available when performing regional operations.
 oRegion :: Lens' Operation (Maybe Text)
 oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
 
--- | [Output Only] URL of the resource the operation is mutating.
+-- | [Output Only] A textual description of the operation, which is set when
+-- the operation is created.
+oDescription :: Lens' Operation (Maybe Text)
+oDescription
+  = lens _oDescription (\ s a -> s{_oDescription = a})
+
+-- | [Output Only] The URL of the resource that the operation modifies.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
 
--- | [Output Only] An optional identifier specified by the client when the
--- mutation was initiated. Must be unique for all Operation resources in
--- the project.
+-- | [Output Only] Reserved for future use.
 oClientOperationId :: Lens' Operation (Maybe Text)
 oClientOperationId
   = lens _oClientOperationId
@@ -4121,6 +4427,7 @@ instance FromJSON Operation where
                      <*> (o .:? "id")
                      <*> (o .:? "operationType")
                      <*> (o .:? "region")
+                     <*> (o .:? "description")
                      <*> (o .:? "targetLink")
                      <*> (o .:? "clientOperationId"))
 
@@ -4146,6 +4453,7 @@ instance ToJSON Operation where
                   ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
                   ("operationType" .=) <$> _oOperationType,
                   ("region" .=) <$> _oRegion,
+                  ("description" .=) <$> _oDescription,
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
@@ -4176,7 +4484,13 @@ dslwdiValue :: Lens' DisksScopedListWarningDataItem (Maybe Text)
 dslwdiValue
   = lens _dslwdiValue (\ s a -> s{_dslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 dslwdiKey :: Lens' DisksScopedListWarningDataItem (Maybe Text)
 dslwdiKey
   = lens _dslwdiKey (\ s a -> s{_dslwdiKey = a})
@@ -4309,8 +4623,8 @@ dLastAttachTimestamp
   = lens _dLastAttachTimestamp
       (\ s a -> s{_dLastAttachTimestamp = a})
 
--- | Links to the users of the disk (attached instances) in form:
--- project\/zones\/zone\/instances\/instance
+-- | [Output Only] Links to the users of the disk (attached instances) in
+-- form: project\/zones\/zone\/instances\/instance
 dUsers :: Lens' Disk [Text]
 dUsers
   = lens _dUsers (\ s a -> s{_dUsers = a}) . _Default .
@@ -4326,7 +4640,13 @@ dUsers
 -- debian-cloud project, make sure to include the project in the URL:
 -- projects\/debian-cloud\/global\/images\/debian-7-wheezy-vYYYYMMDD where
 -- vYYYYMMDD is the image version. The fully-qualified URL will also work
--- in both cases.
+-- in both cases. You can also specify the latest image for a private image
+-- family by replacing the image name suffix with family\/family-name. For
+-- example: global\/images\/family\/my-private-family Or you can specify an
+-- image family from a publicly-available project. For example, to use the
+-- latest Debian 7 from the debian-cloud project, make sure to include the
+-- project in the URL:
+-- projects\/debian-cloud\/global\/images\/family\/debian-7
 dSourceImage :: Lens' Disk (Maybe Text)
 dSourceImage
   = lens _dSourceImage (\ s a -> s{_dSourceImage = a})
@@ -4361,7 +4681,7 @@ dSelfLink :: Lens' Disk (Maybe Text)
 dSelfLink
   = lens _dSelfLink (\ s a -> s{_dSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -4371,10 +4691,10 @@ dSelfLink
 dName :: Lens' Disk (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
--- | The ID value of the image used to create this disk. This value
--- identifies the exact image that was used to create this persistent disk.
--- For example, if you created the persistent disk from an image that was
--- later deleted and recreated under the same name, the source image ID
+-- | [Output Only] The ID value of the image used to create this disk. This
+-- value identifies the exact image that was used to create this persistent
+-- disk. For example, if you created the persistent disk from an image that
+-- was later deleted and recreated under the same name, the source image ID
 -- would identify the exact version of the image that was used.
 dSourceImageId :: Lens' Disk (Maybe Text)
 dSourceImageId
@@ -4387,12 +4707,13 @@ dCreationTimestamp
   = lens _dCreationTimestamp
       (\ s a -> s{_dCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dId :: Lens' Disk (Maybe Word64)
 dId
   = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
--- | Any applicable publicly visible licenses.
+-- | [Output Only] Any applicable publicly visible licenses.
 dLicenses :: Lens' Disk [Text]
 dLicenses
   = lens _dLicenses (\ s a -> s{_dLicenses = a}) .
@@ -4404,12 +4725,12 @@ dOptions :: Lens' Disk (Maybe Text)
 dOptions = lens _dOptions (\ s a -> s{_dOptions = a})
 
 -- | URL of the disk type resource describing which disk type to use to
--- create the disk; provided by the client when the disk is created.
+-- create the disk. Provide this when creating the disk.
 dType :: Lens' Disk (Maybe Text)
 dType = lens _dType (\ s a -> s{_dType = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 dDescription :: Lens' Disk (Maybe Text)
 dDescription
   = lens _dDescription (\ s a -> s{_dDescription = a})
@@ -4501,9 +4822,8 @@ dmrTargetDisk
   = lens _dmrTargetDisk
       (\ s a -> s{_dmrTargetDisk = a})
 
--- | The URL of the destination zone to move the disk to. This can be a full
--- or partial URL. For example, the following are all valid URLs to a zone:
--- -
+-- | The URL of the destination zone to move the disk. This can be a full or
+-- partial URL. For example, the following are all valid URLs to a zone: -
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone
 -- - projects\/project\/zones\/zone - zones\/zone
 dmrDestinationZone :: Lens' DiskMoveRequest (Maybe Text)
@@ -4525,7 +4845,7 @@ instance ToJSON DiskMoveRequest where
                  [("targetDisk" .=) <$> _dmrTargetDisk,
                   ("destinationZone" .=) <$> _dmrDestinationZone])
 
--- | Load balancing utilization policy.
+-- | Configuration parameters of autoscaling based on load balancing.
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
 newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
@@ -4544,12 +4864,9 @@ autoscalingPolicyLoadBalancingUtilization =
     { _aplbuUtilizationTarget = Nothing
     }
 
--- | Fraction of backend capacity utilization (set in HTTP load balancing
--- configuration) that Autoscaler should maintain. Must be a positive float
--- value. If not defined, the default is 0.8. For example if your
--- maxRatePerInstance capacity (in HTTP Load Balancing configuration) is
--- set at 10 and you would like to keep number of instances such that each
--- instance receives 7 QPS on average, set this to 0.7.
+-- | Fraction of backend capacity utilization (set in HTTP(s) load balancing
+-- configuration) that autoscaler should maintain. Must be a positive float
+-- value. If not defined, the default is 0.8.
 aplbuUtilizationTarget :: Lens' AutoscalingPolicyLoadBalancingUtilization (Maybe Double)
 aplbuUtilizationTarget
   = lens _aplbuUtilizationTarget
@@ -4600,7 +4917,13 @@ tpslwdiValue :: Lens' TargetPoolsScopedListWarningDataItem (Maybe Text)
 tpslwdiValue
   = lens _tpslwdiValue (\ s a -> s{_tpslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 tpslwdiKey :: Lens' TargetPoolsScopedListWarningDataItem (Maybe Text)
 tpslwdiKey
   = lens _tpslwdiKey (\ s a -> s{_tpslwdiKey = a})
@@ -4621,7 +4944,6 @@ instance ToJSON TargetPoolsScopedListWarningDataItem
                  [("value" .=) <$> _tpslwdiValue,
                   ("key" .=) <$> _tpslwdiKey])
 
--- | InstanceGroupManagers Next available tag: 19
 --
 -- /See:/ 'instanceGroupManager' smart constructor.
 data InstanceGroupManager = InstanceGroupManager
@@ -4639,6 +4961,7 @@ data InstanceGroupManager = InstanceGroupManager
     , _igmTargetPools       :: !(Maybe [Text])
     , _igmDescription       :: !(Maybe Text)
     , _igmInstanceGroup     :: !(Maybe Text)
+    , _igmNamedPorts        :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManager' with the minimum fields required to make a request.
@@ -4672,6 +4995,8 @@ data InstanceGroupManager = InstanceGroupManager
 -- * 'igmDescription'
 --
 -- * 'igmInstanceGroup'
+--
+-- * 'igmNamedPorts'
 instanceGroupManager
     :: InstanceGroupManager
 instanceGroupManager =
@@ -4690,6 +5015,7 @@ instanceGroupManager =
     , _igmTargetPools = Nothing
     , _igmDescription = Nothing
     , _igmInstanceGroup = Nothing
+    , _igmNamedPorts = Nothing
     }
 
 -- | [Output Only] The resource type, which is always
@@ -4779,7 +5105,8 @@ igmTargetPools
       . _Default
       . _Coerce
 
--- | An optional text description for the managed instance group.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 igmDescription :: Lens' InstanceGroupManager (Maybe Text)
 igmDescription
   = lens _igmDescription
@@ -4790,6 +5117,15 @@ igmInstanceGroup :: Lens' InstanceGroupManager (Maybe Text)
 igmInstanceGroup
   = lens _igmInstanceGroup
       (\ s a -> s{_igmInstanceGroup = a})
+
+-- | Named ports configured for the Instance Groups complementary to this
+-- Instance Group Manager.
+igmNamedPorts :: Lens' InstanceGroupManager [NamedPort]
+igmNamedPorts
+  = lens _igmNamedPorts
+      (\ s a -> s{_igmNamedPorts = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON InstanceGroupManager where
         parseJSON
@@ -4809,7 +5145,8 @@ instance FromJSON InstanceGroupManager where
                      <*> (o .:? "id")
                      <*> (o .:? "targetPools" .!= mempty)
                      <*> (o .:? "description")
-                     <*> (o .:? "instanceGroup"))
+                     <*> (o .:? "instanceGroup")
+                     <*> (o .:? "namedPorts" .!= mempty))
 
 instance ToJSON InstanceGroupManager where
         toJSON InstanceGroupManager{..}
@@ -4828,7 +5165,8 @@ instance ToJSON InstanceGroupManager where
                   ("id" .=) <$> _igmId,
                   ("targetPools" .=) <$> _igmTargetPools,
                   ("description" .=) <$> _igmDescription,
-                  ("instanceGroup" .=) <$> _igmInstanceGroup])
+                  ("instanceGroup" .=) <$> _igmInstanceGroup,
+                  ("namedPorts" .=) <$> _igmNamedPorts])
 
 --
 -- /See:/ 'instanceGroupsRemoveInstancesRequest' smart constructor.
@@ -4897,7 +5235,13 @@ rwidiValue :: Lens' RouteWarningsItemDataItem (Maybe Text)
 rwidiValue
   = lens _rwidiValue (\ s a -> s{_rwidiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 rwidiKey :: Lens' RouteWarningsItemDataItem (Maybe Text)
 rwidiKey = lens _rwidiKey (\ s a -> s{_rwidiKey = a})
 
@@ -4935,7 +5279,7 @@ instanceAggregatedListItems pIaliAddtional_ =
     { _ialiAddtional = _Coerce # pIaliAddtional_
     }
 
--- | Name of the scope containing this set of instances.
+-- | [Output Only] Name of the scope containing this set of instances.
 ialiAddtional :: Lens' InstanceAggregatedListItems (HashMap Text InstancesScopedList)
 ialiAddtional
   = lens _ialiAddtional
@@ -4951,8 +5295,8 @@ instance FromJSON InstanceAggregatedListItems where
 instance ToJSON InstanceAggregatedListItems where
         toJSON = toJSON . _ialiAddtional
 
--- | Informational warning which replaces the list of autoscalers when the
--- list is empty.
+-- | [Output Only] Informational warning which replaces the list of
+-- autoscalers when the list is empty.
 --
 -- /See:/ 'autoscalersScopedListWarning' smart constructor.
 data AutoscalersScopedListWarning = AutoscalersScopedListWarning
@@ -4979,18 +5323,21 @@ autoscalersScopedListWarning =
     , _aslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 aslwData :: Lens' AutoscalersScopedListWarning [AutoscalersScopedListWarningDataItem]
 aslwData
   = lens _aslwData (\ s a -> s{_aslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 aslwCode :: Lens' AutoscalersScopedListWarning (Maybe AutoscalersScopedListWarningCode)
 aslwCode = lens _aslwCode (\ s a -> s{_aslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 aslwMessage :: Lens' AutoscalersScopedListWarning (Maybe Text)
 aslwMessage
   = lens _aslwMessage (\ s a -> s{_aslwMessage = a})
@@ -5070,7 +5417,7 @@ targetPoolsRemoveInstanceRequest =
     { _tprirInstances = Nothing
     }
 
--- | URLs of the instances to be removed from targetPool.
+-- | URLs of the instances to be removed from target pool.
 tprirInstances :: Lens' TargetPoolsRemoveInstanceRequest [InstanceReference]
 tprirInstances
   = lens _tprirInstances
@@ -5119,7 +5466,13 @@ tislwdiValue :: Lens' TargetInstancesScopedListWarningDataItem (Maybe Text)
 tislwdiValue
   = lens _tislwdiValue (\ s a -> s{_tislwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 tislwdiKey :: Lens' TargetInstancesScopedListWarningDataItem (Maybe Text)
 tislwdiKey
   = lens _tislwdiKey (\ s a -> s{_tislwdiKey = a})
@@ -5169,19 +5522,22 @@ machineTypesScopedListWarning =
     , _mtslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 mtslwData :: Lens' MachineTypesScopedListWarning [MachineTypesScopedListWarningDataItem]
 mtslwData
   = lens _mtslwData (\ s a -> s{_mtslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 mtslwCode :: Lens' MachineTypesScopedListWarning (Maybe MachineTypesScopedListWarningCode)
 mtslwCode
   = lens _mtslwCode (\ s a -> s{_mtslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 mtslwMessage :: Lens' MachineTypesScopedListWarning (Maybe Text)
 mtslwMessage
   = lens _mtslwMessage (\ s a -> s{_mtslwMessage = a})
@@ -5254,7 +5610,8 @@ targetInstance =
     , _tiInstance = Nothing
     }
 
--- | Type of the resource.
+-- | [Output Only] The type of the resource. Always compute#targetInstance
+-- for target instances.
 tiKind :: Lens' TargetInstance Text
 tiKind = lens _tiKind (\ s a -> s{_tiKind = a})
 
@@ -5289,20 +5646,27 @@ tiCreationTimestamp
   = lens _tiCreationTimestamp
       (\ s a -> s{_tiCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tiId :: Lens' TargetInstance (Maybe Word64)
 tiId
   = lens _tiId (\ s a -> s{_tiId = a}) .
       mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 tiDescription :: Lens' TargetInstance (Maybe Text)
 tiDescription
   = lens _tiDescription
       (\ s a -> s{_tiDescription = a})
 
--- | The URL to the instance that terminates the relevant traffic.
+-- | A URL to the virtual machine instance that handles traffic for this
+-- target instance. When creating a target instance, you can provide the
+-- fully-qualified URL or a valid partial URL to the desired virtual
+-- machine. For example, the following are all valid URLs: -
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/instances\/instance
+-- - projects\/project\/zones\/zone\/instances\/instance -
+-- zones\/zone\/instances\/instance
 tiInstance :: Lens' TargetInstance (Maybe Text)
 tiInstance
   = lens _tiInstance (\ s a -> s{_tiInstance = a})
@@ -5358,7 +5722,8 @@ targetPoolInstanceHealth =
     , _tpihHealthStatus = Nothing
     }
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#targetPoolInstanceHealth
+-- when checking the health of an instance.
 tpihKind :: Lens' TargetPoolInstanceHealth Text
 tpihKind = lens _tpihKind (\ s a -> s{_tpihKind = a})
 
@@ -5609,19 +5974,22 @@ diskTypesScopedListWarning =
     , _dtslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 dtslwData :: Lens' DiskTypesScopedListWarning [DiskTypesScopedListWarningDataItem]
 dtslwData
   = lens _dtslwData (\ s a -> s{_dtslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 dtslwCode :: Lens' DiskTypesScopedListWarning (Maybe DiskTypesScopedListWarningCode)
 dtslwCode
   = lens _dtslwCode (\ s a -> s{_dtslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 dtslwMessage :: Lens' DiskTypesScopedListWarning (Maybe Text)
 dtslwMessage
   = lens _dtslwMessage (\ s a -> s{_dtslwMessage = a})
@@ -5762,7 +6130,13 @@ aslwdiValue :: Lens' AddressesScopedListWarningDataItem (Maybe Text)
 aslwdiValue
   = lens _aslwdiValue (\ s a -> s{_aslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 aslwdiKey :: Lens' AddressesScopedListWarningDataItem (Maybe Text)
 aslwdiKey
   = lens _aslwdiKey (\ s a -> s{_aslwdiKey = a})
@@ -5790,6 +6164,7 @@ data NetworkInterface = NetworkInterface
     { _niNetwork       :: !(Maybe Text)
     , _niName          :: !(Maybe Text)
     , _niNetworkIP     :: !(Maybe Text)
+    , _niSubnetwork    :: !(Maybe Text)
     , _niAccessConfigs :: !(Maybe [AccessConfig])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5803,6 +6178,8 @@ data NetworkInterface = NetworkInterface
 --
 -- * 'niNetworkIP'
 --
+-- * 'niSubnetwork'
+--
 -- * 'niAccessConfigs'
 networkInterface
     :: NetworkInterface
@@ -5811,6 +6188,7 @@ networkInterface =
     { _niNetwork = Nothing
     , _niName = Nothing
     , _niNetworkIP = Nothing
+    , _niSubnetwork = Nothing
     , _niAccessConfigs = Nothing
     }
 
@@ -5838,6 +6216,18 @@ niNetworkIP :: Lens' NetworkInterface (Maybe Text)
 niNetworkIP
   = lens _niNetworkIP (\ s a -> s{_niNetworkIP = a})
 
+-- | The URL of the Subnetwork resource for this instance. If the network
+-- resource is in legacy mode, do not provide this property. If the network
+-- is in auto subnet mode, providing the subnetwork is optional. If the
+-- network is in custom subnet mode, then this field should be specified.
+-- If you specify this property, you can specify the subnetwork as a full
+-- or partial URL. For example, the following are all valid URLs: -
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/subnetworks\/subnetwork
+-- - zones\/zone\/subnetworks\/subnetwork
+niSubnetwork :: Lens' NetworkInterface (Maybe Text)
+niSubnetwork
+  = lens _niSubnetwork (\ s a -> s{_niSubnetwork = a})
+
 -- | An array of configurations for this interface. Currently, ONE_TO_ONE_NAT
 -- is the only access config supported. If there are no accessConfigs
 -- specified, then this instance will have no external internet access.
@@ -5855,6 +6245,7 @@ instance FromJSON NetworkInterface where
                  NetworkInterface <$>
                    (o .:? "network") <*> (o .:? "name") <*>
                      (o .:? "networkIP")
+                     <*> (o .:? "subnetwork")
                      <*> (o .:? "accessConfigs" .!= mempty))
 
 instance ToJSON NetworkInterface where
@@ -5864,6 +6255,7 @@ instance ToJSON NetworkInterface where
                  [("network" .=) <$> _niNetwork,
                   ("name" .=) <$> _niName,
                   ("networkIP" .=) <$> _niNetworkIP,
+                  ("subnetwork" .=) <$> _niSubnetwork,
                   ("accessConfigs" .=) <$> _niAccessConfigs])
 
 --
@@ -5884,7 +6276,11 @@ targetPoolsRemoveHealthCheckRequest =
     { _tprhcrHealthChecks = Nothing
     }
 
--- | Health check URLs to be removed from targetPool.
+-- | Health check URL to be removed. This can be a full or valid partial URL.
+-- For example, the following are valid URLs: -
+-- https:\/\/www.googleapis.com\/compute\/beta\/projects\/project\/global\/httpHealthChecks\/health-check
+-- - projects\/project\/global\/httpHealthChecks\/health-check -
+-- global\/httpHealthChecks\/health-check
 tprhcrHealthChecks :: Lens' TargetPoolsRemoveHealthCheckRequest [HealthCheckReference]
 tprhcrHealthChecks
   = lens _tprhcrHealthChecks
@@ -5942,7 +6338,11 @@ instanceTemplateList =
     , _itlId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 itlNextPageToken :: Lens' InstanceTemplateList (Maybe Text)
 itlNextPageToken
   = lens _itlNextPageToken
@@ -5992,7 +6392,7 @@ instance ToJSON InstanceTemplateList where
                   ("selfLink" .=) <$> _itlSelfLink,
                   ("id" .=) <$> _itlId])
 
--- | Contains a list of route resources.
+-- | Contains a list of Route resources.
 --
 -- /See:/ 'routeList' smart constructor.
 data RouteList = RouteList
@@ -6027,7 +6427,11 @@ routeList =
     , _rlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 rlNextPageToken :: Lens' RouteList (Maybe Text)
 rlNextPageToken
   = lens _rlNextPageToken
@@ -6037,7 +6441,7 @@ rlNextPageToken
 rlKind :: Lens' RouteList Text
 rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
 
--- | A list of Route resources.
+-- | [Output Only] A list of Route resources.
 rlItems :: Lens' RouteList [Route]
 rlItems
   = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
@@ -6107,7 +6511,11 @@ targetVPNGatewayList =
     , _tvglId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tvglNextPageToken :: Lens' TargetVPNGatewayList (Maybe Text)
 tvglNextPageToken
   = lens _tvglNextPageToken
@@ -6130,7 +6538,8 @@ tvglSelfLink :: Lens' TargetVPNGatewayList (Maybe Text)
 tvglSelfLink
   = lens _tvglSelfLink (\ s a -> s{_tvglSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tvglId :: Lens' TargetVPNGatewayList (Maybe Text)
 tvglId = lens _tvglId (\ s a -> s{_tvglId = a})
 
@@ -6190,7 +6599,11 @@ sslCertificateList =
     , _sclId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 sclNextPageToken :: Lens' SSLCertificateList (Maybe Text)
 sclNextPageToken
   = lens _sclNextPageToken
@@ -6260,9 +6673,9 @@ firewallAllowedItem =
     }
 
 -- | The IP protocol that is allowed for this rule. The protocol type is
--- required when creating a firewall. This value can either be one of the
--- following well known protocol strings (tcp, udp, icmp, esp, ah, sctp),
--- or the IP protocol number.
+-- required when creating a firewall rule. This value can either be one of
+-- the following well known protocol strings (tcp, udp, icmp, esp, ah,
+-- sctp), or the IP protocol number.
 faiIPProtocol :: Lens' FirewallAllowedItem (Maybe Text)
 faiIPProtocol
   = lens _faiIPProtocol
@@ -6293,25 +6706,32 @@ instance ToJSON FirewallAllowedItem where
                  [("IPProtocol" .=) <$> _faiIPProtocol,
                   ("ports" .=) <$> _faiPorts])
 
--- | A network resource.
+-- | Represents a Network resource. Read Networks and Firewalls for more
+-- information.
 --
 -- /See:/ 'network' smart constructor.
 data Network = Network
-    { _nKind              :: !Text
-    , _nIPv4Range         :: !(Maybe Text)
-    , _nSelfLink          :: !(Maybe Text)
-    , _nName              :: !(Maybe Text)
-    , _nCreationTimestamp :: !(Maybe Text)
-    , _nId                :: !(Maybe (Textual Word64))
-    , _nGatewayIPv4       :: !(Maybe Text)
-    , _nDescription       :: !(Maybe Text)
+    { _nAutoCreateSubnetworks :: !(Maybe Bool)
+    , _nKind                  :: !Text
+    , _nSubnetworks           :: !(Maybe [Text])
+    , _nIPv4Range             :: !(Maybe Text)
+    , _nSelfLink              :: !(Maybe Text)
+    , _nName                  :: !(Maybe Text)
+    , _nCreationTimestamp     :: !(Maybe Text)
+    , _nId                    :: !(Maybe (Textual Word64))
+    , _nGatewayIPv4           :: !(Maybe Text)
+    , _nDescription           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'nAutoCreateSubnetworks'
+--
 -- * 'nKind'
+--
+-- * 'nSubnetworks'
 --
 -- * 'nIPv4Range'
 --
@@ -6330,7 +6750,9 @@ network
     :: Network
 network =
     Network
-    { _nKind = "compute#network"
+    { _nAutoCreateSubnetworks = Nothing
+    , _nKind = "compute#network"
+    , _nSubnetworks = Nothing
     , _nIPv4Range = Nothing
     , _nSelfLink = Nothing
     , _nName = Nothing
@@ -6340,9 +6762,26 @@ network =
     , _nDescription = Nothing
     }
 
+-- | When set to true, the network is created in \"auto subnet mode\". When
+-- set to false, the network is in \"custom subnet mode\". In \"auto subnet
+-- mode\", a newly created network is assigned the default CIDR of
+-- 10.128.0.0\/9 and it automatically creates one subnetwork per region.
+nAutoCreateSubnetworks :: Lens' Network (Maybe Bool)
+nAutoCreateSubnetworks
+  = lens _nAutoCreateSubnetworks
+      (\ s a -> s{_nAutoCreateSubnetworks = a})
+
 -- | [Output Only] Type of the resource. Always compute#network for networks.
 nKind :: Lens' Network Text
 nKind = lens _nKind (\ s a -> s{_nKind = a})
+
+-- | [Output Only] Server-defined fully-qualified URLs for all subnetworks in
+-- this network.
+nSubnetworks :: Lens' Network [Text]
+nSubnetworks
+  = lens _nSubnetworks (\ s a -> s{_nSubnetworks = a})
+      . _Default
+      . _Coerce
 
 -- | The range of internal addresses that are legal on this network. This
 -- range is a CIDR specification, for example: 192.168.0.0\/16. Provided by
@@ -6372,7 +6811,8 @@ nCreationTimestamp
   = lens _nCreationTimestamp
       (\ s a -> s{_nCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 nId :: Lens' Network (Maybe Word64)
 nId
   = lens _nId (\ s a -> s{_nId = a}) . mapping _Coerce
@@ -6384,8 +6824,8 @@ nGatewayIPv4 :: Lens' Network (Maybe Text)
 nGatewayIPv4
   = lens _nGatewayIPv4 (\ s a -> s{_nGatewayIPv4 = a})
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 nDescription :: Lens' Network (Maybe Text)
 nDescription
   = lens _nDescription (\ s a -> s{_nDescription = a})
@@ -6395,8 +6835,10 @@ instance FromJSON Network where
           = withObject "Network"
               (\ o ->
                  Network <$>
-                   (o .:? "kind" .!= "compute#network") <*>
-                     (o .:? "IPv4Range")
+                   (o .:? "autoCreateSubnetworks") <*>
+                     (o .:? "kind" .!= "compute#network")
+                     <*> (o .:? "subnetworks" .!= mempty)
+                     <*> (o .:? "IPv4Range")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
@@ -6408,7 +6850,10 @@ instance ToJSON Network where
         toJSON Network{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _nKind),
+                 [("autoCreateSubnetworks" .=) <$>
+                    _nAutoCreateSubnetworks,
+                  Just ("kind" .= _nKind),
+                  ("subnetworks" .=) <$> _nSubnetworks,
                   ("IPv4Range" .=) <$> _nIPv4Range,
                   ("selfLink" .=) <$> _nSelfLink,
                   ("name" .=) <$> _nName,
@@ -6445,17 +6890,20 @@ addressesScopedListWarning =
     , _aMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 aData :: Lens' AddressesScopedListWarning [AddressesScopedListWarningDataItem]
 aData
   = lens _aData (\ s a -> s{_aData = a}) . _Default .
       _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 aCode :: Lens' AddressesScopedListWarning (Maybe AddressesScopedListWarningCode)
 aCode = lens _aCode (\ s a -> s{_aCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 aMessage :: Lens' AddressesScopedListWarning (Maybe Text)
 aMessage = lens _aMessage (\ s a -> s{_aMessage = a})
 
@@ -6573,7 +7021,11 @@ instanceAggregatedList =
     , _ialId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 ialNextPageToken :: Lens' InstanceAggregatedList (Maybe Text)
 ialNextPageToken
   = lens _ialNextPageToken
@@ -6588,12 +7040,13 @@ ialKind = lens _ialKind (\ s a -> s{_ialKind = a})
 ialItems :: Lens' InstanceAggregatedList (Maybe InstanceAggregatedListItems)
 ialItems = lens _ialItems (\ s a -> s{_ialItems = a})
 
--- | [Output Only] Server defined URL for this resource.
+-- | [Output Only] Server-defined URL for this resource.
 ialSelfLink :: Lens' InstanceAggregatedList (Maybe Text)
 ialSelfLink
   = lens _ialSelfLink (\ s a -> s{_ialSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 ialId :: Lens' InstanceAggregatedList (Maybe Text)
 ialId = lens _ialId (\ s a -> s{_ialId = a})
 
@@ -6700,7 +7153,7 @@ aSelfLink :: Lens' Address (Maybe Text)
 aSelfLink
   = lens _aSelfLink (\ s a -> s{_aSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -6716,7 +7169,8 @@ aCreationTimestamp
   = lens _aCreationTimestamp
       (\ s a -> s{_aCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 aId :: Lens' Address (Maybe Word64)
 aId
   = lens _aId (\ s a -> s{_aId = a}) . mapping _Coerce
@@ -6726,8 +7180,8 @@ aId
 aRegion :: Lens' Address (Maybe Text)
 aRegion = lens _aRegion (\ s a -> s{_aRegion = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 aDescription :: Lens' Address (Maybe Text)
 aDescription
   = lens _aDescription (\ s a -> s{_aDescription = a})
@@ -6829,7 +7283,7 @@ zMaintenanceWindows
       . _Default
       . _Coerce
 
--- | [Output Only] Type of the resource. Always kind#zone for zones.
+-- | [Output Only] Type of the resource. Always compute#zone for zones.
 zKind :: Lens' Zone Text
 zKind = lens _zKind (\ s a -> s{_zKind = a})
 
@@ -6848,7 +7302,8 @@ zCreationTimestamp
   = lens _zCreationTimestamp
       (\ s a -> s{_zCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 zId :: Lens' Zone (Maybe Word64)
 zId
   = lens _zId (\ s a -> s{_zId = a}) . mapping _Coerce
@@ -6988,6 +7443,11 @@ instance ToJSON InstancesScopedList where
                  [("warning" .=) <$> _islWarning,
                   ("instances" .=) <$> _islInstances])
 
+-- | A full or valid partial URL to a health check. For example, the
+-- following are valid URLs: -
+-- https:\/\/www.googleapis.com\/compute\/beta\/projects\/project-id\/global\/httpHealthChecks\/health-check
+-- - projects\/project-id\/global\/httpHealthChecks\/health-check -
+-- global\/httpHealthChecks\/health-check
 --
 -- /See:/ 'healthCheckReference' smart constructor.
 newtype HealthCheckReference = HealthCheckReference
@@ -7095,7 +7555,11 @@ instanceGroupAggregatedList =
     , _igalId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 igalNextPageToken :: Lens' InstanceGroupAggregatedList (Maybe Text)
 igalNextPageToken
   = lens _igalNextPageToken
@@ -7145,20 +7609,20 @@ instance ToJSON InstanceGroupAggregatedList where
                   ("selfLink" .=) <$> _igalSelfLink,
                   ("id" .=) <$> _igalId])
 
--- | The route resource. A Route is a rule that specifies how certain packets
--- should be handled by the virtual network. Routes are associated with
--- instances by tag and the set of Routes for a particular instance is
--- called its routing table. For each packet leaving a instance, the system
--- searches that instance\'s routing table for a single best matching
--- Route. Routes match packets by destination IP address, preferring
--- smaller or more specific ranges over larger ones. If there is a tie, the
--- system selects the Route with the smallest priority value. If there is
--- still a tie, it uses the layer three and four packet headers to select
--- just one of the remaining matching Routes. The packet is then forwarded
--- as specified by the nextHop field of the winning Route -- either to
--- another instance destination, a instance gateway or a Google Compute
--- Engien-operated gateway. Packets that do not match any Route in the
--- sending instance\'s routing table are dropped.
+-- | Represents a Route resource. A route specifies how certain packets
+-- should be handled by the network. Routes are associated with instances
+-- by tags and the set of routes for a particular instance is called its
+-- routing table. For each packet leaving a instance, the system searches
+-- that instance\'s routing table for a single best matching route. Routes
+-- match packets by destination IP address, preferring smaller or more
+-- specific ranges over larger ones. If there is a tie, the system selects
+-- the route with the smallest priority value. If there is still a tie, it
+-- uses the layer three and four packet headers to select just one of the
+-- remaining matching routes. The packet is then forwarded as specified by
+-- the nextHop field of the winning route - either to another instance
+-- destination, a instance gateway or a Google Compute Engine-operated
+-- gateway. Packets that do not match any route in the sending instance\'s
+-- routing table are dropped.
 --
 -- /See:/ 'route' smart constructor.
 data Route = Route
@@ -7237,9 +7701,11 @@ route =
     , _rNextHopInstance = Nothing
     }
 
--- | Breaks ties between Routes of equal specificity. Routes with smaller
--- values win when tied with routes with larger values. Default value is
--- 1000. A valid range is between 0 and 65535.
+-- | The priority of this route. Priority is used to break ties in cases
+-- where there is more than one matching route of equal prefix length. In
+-- the case of two routes with equal prefix length, the one with the
+-- lowest-numbered priority value wins. Default value is 1000. Valid range
+-- is 0 through 65535.
 rPriority :: Lens' Route (Maybe Word32)
 rPriority
   = lens _rPriority (\ s a -> s{_rPriority = a}) .
@@ -7250,8 +7716,8 @@ rPriority
 rKind :: Lens' Route Text
 rKind = lens _rKind (\ s a -> s{_rKind = a})
 
--- | The URL to a gateway that should handle matching packets. Currently,
--- this is only the internet gateway:
+-- | The URL to a gateway that should handle matching packets. You can only
+-- specify the internet gateway using a full or partial valid URL:
 -- projects\/\/global\/gateways\/default-internet-gateway
 rNextHopGateway :: Lens' Route (Maybe Text)
 rNextHopGateway
@@ -7292,7 +7758,7 @@ rSelfLink :: Lens' Route (Maybe Text)
 rSelfLink
   = lens _rSelfLink (\ s a -> s{_rSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -7308,7 +7774,8 @@ rCreationTimestamp
   = lens _rCreationTimestamp
       (\ s a -> s{_rCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 rId :: Lens' Route (Maybe Word64)
 rId
   = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
@@ -7319,8 +7786,8 @@ rNextHopVPNTunnel
   = lens _rNextHopVPNTunnel
       (\ s a -> s{_rNextHopVPNTunnel = a})
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 rDescription :: Lens' Route (Maybe Text)
 rDescription
   = lens _rDescription (\ s a -> s{_rDescription = a})
@@ -7331,8 +7798,8 @@ rTags
   = lens _rTags (\ s a -> s{_rTags = a}) . _Default .
       _Coerce
 
--- | The fully-qualified URL to an instance that should handle matching
--- packets. For example:
+-- | The URL to an instance that should handle matching packets. You can
+-- specify this as a full or partial URL. For example:
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/instances\/
 rNextHopInstance :: Lens' Route (Maybe Text)
 rNextHopInstance
@@ -7410,7 +7877,13 @@ tvgslwdiValue
   = lens _tvgslwdiValue
       (\ s a -> s{_tvgslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 tvgslwdiKey :: Lens' TargetVPNGatewaysScopedListWarningDataItem (Maybe Text)
 tvgslwdiKey
   = lens _tvgslwdiKey (\ s a -> s{_tvgslwdiKey = a})
@@ -7450,9 +7923,9 @@ targetHTTPSProxiesSetSSLCertificatesRequest =
     { _thpsscrSSLCertificates = Nothing
     }
 
--- | New set of URLs to SslCertificate resources to associate with this
--- TargetHttpProxy. Currently exactly one ssl certificate must be
--- specified.
+-- | New set of SslCertificate resources to associate with this
+-- TargetHttpsProxy resource. Currently exactly one SslCertificate resource
+-- must be specified.
 thpsscrSSLCertificates :: Lens' TargetHTTPSProxiesSetSSLCertificatesRequest [Text]
 thpsscrSSLCertificates
   = lens _thpsscrSSLCertificates
@@ -7555,7 +8028,8 @@ itId
   = lens _itId (\ s a -> s{_itId = a}) .
       mapping _Coerce
 
--- | An optional text description for the instance template.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 itDescription :: Lens' InstanceTemplate (Maybe Text)
 itDescription
   = lens _itDescription
@@ -7661,6 +8135,7 @@ instance ToJSON ZoneMaintenanceWindowsItem where
                   ("endTime" .=) <$> _zmwiEndTime,
                   ("description" .=) <$> _zmwiDescription])
 
+-- | Represents a Target VPN gateway resource.
 --
 -- /See:/ 'targetVPNGateway' smart constructor.
 data TargetVPNGateway = TargetVPNGateway
@@ -7740,7 +8215,7 @@ tvgSelfLink :: Lens' TargetVPNGateway (Maybe Text)
 tvgSelfLink
   = lens _tvgSelfLink (\ s a -> s{_tvgSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -7756,7 +8231,8 @@ tvgCreationTimestamp
   = lens _tvgCreationTimestamp
       (\ s a -> s{_tvgCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tvgId :: Lens' TargetVPNGateway (Maybe Word64)
 tvgId
   = lens _tvgId (\ s a -> s{_tvgId = a}) .
@@ -7768,15 +8244,16 @@ tvgRegion
   = lens _tvgRegion (\ s a -> s{_tvgRegion = a})
 
 -- | [Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are
--- created using compute.vpntunnels.insert and associated to a VPN gateway.
+-- created using compute.vpntunnels.insert method and associated to a VPN
+-- gateway.
 tvgTunnels :: Lens' TargetVPNGateway [Text]
 tvgTunnels
   = lens _tvgTunnels (\ s a -> s{_tvgTunnels = a}) .
       _Default
       . _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 tvgDescription :: Lens' TargetVPNGateway (Maybe Text)
 tvgDescription
   = lens _tvgDescription
@@ -7856,8 +8333,8 @@ instance ToJSON URLMapsValidateResponse where
           = object (catMaybes [("result" .=) <$> _umvrResult])
 
 -- | An SslCertificate resource. This resource provides a mechanism to upload
--- an SSL key and certificate to global HTTPS loadbalancer to serve secure
--- connections.
+-- an SSL key and certificate to the load balancer to serve secure
+-- connections from the user.
 --
 -- /See:/ 'sslCertificate' smart constructor.
 data SSLCertificate = SSLCertificate
@@ -7936,7 +8413,8 @@ scCreationTimestamp
   = lens _scCreationTimestamp
       (\ s a -> s{_scCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 scId :: Lens' SSLCertificate (Maybe Word64)
 scId
   = lens _scId (\ s a -> s{_scId = a}) .
@@ -7950,8 +8428,8 @@ scCertificate
   = lens _scCertificate
       (\ s a -> s{_scCertificate = a})
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 scDescription :: Lens' SSLCertificate (Maybe Text)
 scDescription
   = lens _scDescription
@@ -8033,7 +8511,7 @@ targetPoolsAddHealthCheckRequest =
     { _tpahcrHealthChecks = Nothing
     }
 
--- | Health check URLs to be added to targetPool.
+-- | A list of HttpHealthCheck resources to add to the target pool.
 tpahcrHealthChecks :: Lens' TargetPoolsAddHealthCheckRequest [HealthCheckReference]
 tpahcrHealthChecks
   = lens _tpahcrHealthChecks
@@ -8128,8 +8606,10 @@ uelReportNamePrefix
 
 -- | The name of an existing bucket in Cloud Storage where the usage report
 -- object is stored. The Google Service Account is granted write access to
--- this bucket. This is just the bucket name, with no gs:\/\/ or
--- https:\/\/storage.googleapis.com\/ in front of it.
+-- this bucket. This can either be the bucket name by itself, such as
+-- example-bucket, or the bucket name with gs:\/\/ or
+-- https:\/\/storage.googleapis.com\/ in front of it, such as
+-- gs:\/\/example-bucket.
 uelBucketName :: Lens' UsageExportLocation (Maybe Text)
 uelBucketName
   = lens _uelBucketName
@@ -8184,7 +8664,11 @@ zoneList =
     , _zlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 zlNextPageToken :: Lens' ZoneList (Maybe Text)
 zlNextPageToken
   = lens _zlNextPageToken
@@ -8274,16 +8758,20 @@ miLastAttempt
 -- scheduled for the instance. Possible values: - NONE The instance is
 -- running, and the managed instance group does not have any scheduled
 -- actions for this instance. - CREATING The managed instance group is
--- creating this instance. - RECREATING The managed instance group is
--- recreating this instance. - DELETING The managed instance group is
--- permanently deleting this instance. - ABANDONING The managed instance
--- group is abandoning this instance. The instance will be removed from the
--- instance group and from any target pools that are associated with this
--- group. - RESTARTING The managed instance group is restarting the
--- instance. - REFRESHING The managed instance group is applying
--- configuration changes to the instance without stopping it. For example,
--- the group can update the target pool list for an instance without
--- stopping that instance.
+-- creating this instance. If the group fails to create this instance, it
+-- will try again until it is successful. - CREATING_WITHOUT_RETRIES The
+-- managed instance group is attempting to create this instance only once.
+-- If the group fails to create this instance, it does not try again and
+-- the group\'s target_size value is decreased. - RECREATING The managed
+-- instance group is recreating this instance. - DELETING The managed
+-- instance group is permanently deleting this instance. - ABANDONING The
+-- managed instance group is abandoning this instance. The instance will be
+-- removed from the instance group and from any target pools that are
+-- associated with this group. - RESTARTING The managed instance group is
+-- restarting the instance. - REFRESHING The managed instance group is
+-- applying configuration changes to the instance without stopping it. For
+-- example, the group can update the target pool list for an instance
+-- without stopping that instance.
 miCurrentAction :: Lens' ManagedInstance (Maybe ManagedInstanceCurrentAction)
 miCurrentAction
   = lens _miCurrentAction
@@ -8466,8 +8954,9 @@ backend =
 bGroup :: Lens' Backend (Maybe Text)
 bGroup = lens _bGroup (\ s a -> s{_bGroup = a})
 
--- | Specifies the balancing mode for this backend. The default is
--- UTILIZATION but available values are UTILIZATION and RATE.
+-- | Specifies the balancing mode for this backend. For global HTTP(S) load
+-- balancing, the default is UTILIZATION. Valid values are UTILIZATION and
+-- RATE.
 bBalancingMode :: Lens' Backend (Maybe BackendBalancingMode)
 bBalancingMode
   = lens _bBalancingMode
@@ -8482,25 +8971,26 @@ bMaxUtilization
       (\ s a -> s{_bMaxUtilization = a})
       . mapping _Coerce
 
--- | The max RPS of the group. Can be used with either balancing mode, but
--- required if RATE mode. For RATE mode, either maxRate or
--- maxRatePerInstance must be set.
+-- | The max requests per second (RPS) of the group. Can be used with either
+-- RATE or UTILIZATION balancing modes, but required if RATE mode. For RATE
+-- mode, either maxRate or maxRatePerInstance must be set.
 bMaxRate :: Lens' Backend (Maybe Int32)
 bMaxRate
   = lens _bMaxRate (\ s a -> s{_bMaxRate = a}) .
       mapping _Coerce
 
--- | The max RPS that a single backed instance can handle. This is used to
--- calculate the capacity of the group. Can be used in either balancing
--- mode. For RATE mode, either maxRate or maxRatePerInstance must be set.
+-- | The max requests per second (RPS) that a single backend instance can
+-- handle.This is used to calculate the capacity of the group. Can be used
+-- in either balancing mode. For RATE mode, either maxRate or
+-- maxRatePerInstance must be set.
 bMaxRatePerInstance :: Lens' Backend (Maybe Double)
 bMaxRatePerInstance
   = lens _bMaxRatePerInstance
       (\ s a -> s{_bMaxRatePerInstance = a})
       . mapping _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 bDescription :: Lens' Backend (Maybe Text)
 bDescription
   = lens _bDescription (\ s a -> s{_bDescription = a})
@@ -8568,19 +9058,22 @@ targetVPNGatewaysScopedListWarning =
     , _tvgslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 tvgslwData :: Lens' TargetVPNGatewaysScopedListWarning [TargetVPNGatewaysScopedListWarningDataItem]
 tvgslwData
   = lens _tvgslwData (\ s a -> s{_tvgslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 tvgslwCode :: Lens' TargetVPNGatewaysScopedListWarning (Maybe TargetVPNGatewaysScopedListWarningCode)
 tvgslwCode
   = lens _tvgslwCode (\ s a -> s{_tvgslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 tvgslwMessage :: Lens' TargetVPNGatewaysScopedListWarning (Maybe Text)
 tvgslwMessage
   = lens _tvgslwMessage
@@ -8604,7 +9097,7 @@ instance ToJSON TargetVPNGatewaysScopedListWarning
                   ("code" .=) <$> _tvgslwCode,
                   ("message" .=) <$> _tvgslwMessage])
 
--- | Contains a list of address resources.
+-- | Contains a list of addresses.
 --
 -- /See:/ 'addressList' smart constructor.
 data AddressList = AddressList
@@ -8639,7 +9132,11 @@ addressList =
     , _alId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 alNextPageToken :: Lens' AddressList (Maybe Text)
 alNextPageToken
   = lens _alNextPageToken
@@ -8650,7 +9147,7 @@ alNextPageToken
 alKind :: Lens' AddressList Text
 alKind = lens _alKind (\ s a -> s{_alKind = a})
 
--- | [Output Only] A list of Address resources.
+-- | [Output Only] A list of addresses.
 alItems :: Lens' AddressList [Address]
 alItems
   = lens _alItems (\ s a -> s{_alItems = a}) . _Default
@@ -8661,7 +9158,8 @@ alSelfLink :: Lens' AddressList (Maybe Text)
 alSelfLink
   = lens _alSelfLink (\ s a -> s{_alSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 alId :: Lens' AddressList (Maybe Text)
 alId = lens _alId (\ s a -> s{_alId = a})
 
@@ -8826,7 +9324,9 @@ igmasNone
       mapping _Coerce
 
 -- | [Output Only] The number of instances in the managed instance group that
--- are scheduled to be created or are currently being created.
+-- are scheduled to be created or are currently being created. If the group
+-- fails to create one of these instances, it tries again until it creates
+-- the instance successfully.
 igmasCreating :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasCreating
   = lens _igmasCreating
@@ -8937,7 +9437,7 @@ instance ToJSON ServiceAccount where
                  [("email" .=) <$> _saEmail,
                   ("scopes" .=) <$> _saScopes])
 
--- | Contains a list of Network resources.
+-- | Contains a list of networks.
 --
 -- /See:/ 'networkList' smart constructor.
 data NetworkList = NetworkList
@@ -8972,7 +9472,11 @@ networkList =
     , _nlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 nlNextPageToken :: Lens' NetworkList (Maybe Text)
 nlNextPageToken
   = lens _nlNextPageToken
@@ -8994,7 +9498,8 @@ nlSelfLink :: Lens' NetworkList (Maybe Text)
 nlSelfLink
   = lens _nlSelfLink (\ s a -> s{_nlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 nlId :: Lens' NetworkList (Maybe Text)
 nlId = lens _nlId (\ s a -> s{_nlId = a})
 
@@ -9059,7 +9564,7 @@ instance ToJSON InstanceGroupsListInstancesRequest
               (catMaybes
                  [("instanceState" .=) <$> _iglirInstanceState])
 
--- | A map of scoped target pool lists.
+-- | [Output Only] A map of scoped target pool lists.
 --
 -- /See:/ 'targetPoolAggregatedListItems' smart constructor.
 newtype TargetPoolAggregatedListItems = TargetPoolAggregatedListItems
@@ -9182,7 +9687,7 @@ instance FromJSON AddressAggregatedListItems where
 instance ToJSON AddressAggregatedListItems where
         toJSON = toJSON . _aAddtional
 
--- | Contains a list of persistent autoscaler resources.
+-- | Contains a list of Autoscaler resources.
 --
 -- /See:/ 'autoscalerList' smart constructor.
 data AutoscalerList = AutoscalerList
@@ -9217,13 +9722,18 @@ autoscalerList =
     , _autId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 autNextPageToken :: Lens' AutoscalerList (Maybe Text)
 autNextPageToken
   = lens _autNextPageToken
       (\ s a -> s{_autNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#autoscalerList for lists
+-- of autoscalers.
 autKind :: Lens' AutoscalerList Text
 autKind = lens _autKind (\ s a -> s{_autKind = a})
 
@@ -9239,7 +9749,8 @@ autSelfLink :: Lens' AutoscalerList (Maybe Text)
 autSelfLink
   = lens _autSelfLink (\ s a -> s{_autSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 autId :: Lens' AutoscalerList (Maybe Text)
 autId = lens _autId (\ s a -> s{_autId = a})
 
@@ -9298,7 +9809,11 @@ vpnTunnelAggregatedList =
     , _vtalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 vtalNextPageToken :: Lens' VPNTunnelAggregatedList (Maybe Text)
 vtalNextPageToken
   = lens _vtalNextPageToken
@@ -9319,7 +9834,8 @@ vtalSelfLink :: Lens' VPNTunnelAggregatedList (Maybe Text)
 vtalSelfLink
   = lens _vtalSelfLink (\ s a -> s{_vtalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 vtalId :: Lens' VPNTunnelAggregatedList (Maybe Text)
 vtalId = lens _vtalId (\ s a -> s{_vtalId = a})
 
@@ -9446,9 +9962,12 @@ adDeviceName :: Lens' AttachedDisk (Maybe Text)
 adDeviceName
   = lens _adDeviceName (\ s a -> s{_adDeviceName = a})
 
--- | Specifies the disk interface to use for attaching this disk, either SCSI
--- or NVME. The default is SCSI. For performance characteristics of SCSI
--- over NVMe, see Local SSD performance.
+-- | Specifies the disk interface to use for attaching this disk, which is
+-- either SCSI or NVME. The default is SCSI. Persistent disks must always
+-- use SCSI and the request will fail if you attempt to attach a persistent
+-- disk in any other format than SCSI. Local SSDs can use either NVME or
+-- SCSI. For performance characteristics of SCSI over NVMe, see Local SSD
+-- performance.
 adInterface :: Lens' AttachedDisk (Maybe AttachedDiskInterface)
 adInterface
   = lens _adInterface (\ s a -> s{_adInterface = a})
@@ -9510,7 +10029,7 @@ instance ToJSON AttachedDisk where
                   ("licenses" .=) <$> _adLicenses,
                   ("type" .=) <$> _adType, ("index" .=) <$> _adIndex])
 
--- | Contains a list of disk type resources.
+-- | Contains a list of disk types.
 --
 -- /See:/ 'diskTypeList' smart constructor.
 data DiskTypeList = DiskTypeList
@@ -9545,7 +10064,11 @@ diskTypeList =
     , _dtlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 dtlNextPageToken :: Lens' DiskTypeList (Maybe Text)
 dtlNextPageToken
   = lens _dtlNextPageToken
@@ -9568,7 +10091,8 @@ dtlSelfLink :: Lens' DiskTypeList (Maybe Text)
 dtlSelfLink
   = lens _dtlSelfLink (\ s a -> s{_dtlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dtlId :: Lens' DiskTypeList (Maybe Text)
 dtlId = lens _dtlId (\ s a -> s{_dtlId = a})
 
@@ -9593,7 +10117,7 @@ instance ToJSON DiskTypeList where
                   ("selfLink" .=) <$> _dtlSelfLink,
                   ("id" .=) <$> _dtlId])
 
--- | Contains a list of Machine Type resources.
+-- | Contains a list of machine types.
 --
 -- /See:/ 'machineTypeList' smart constructor.
 data MachineTypeList = MachineTypeList
@@ -9628,7 +10152,11 @@ machineTypeList =
     , _mtlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 mtlNextPageToken :: Lens' MachineTypeList (Maybe Text)
 mtlNextPageToken
   = lens _mtlNextPageToken
@@ -9651,7 +10179,8 @@ mtlSelfLink :: Lens' MachineTypeList (Maybe Text)
 mtlSelfLink
   = lens _mtlSelfLink (\ s a -> s{_mtlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 mtlId :: Lens' MachineTypeList (Maybe Text)
 mtlId = lens _mtlId (\ s a -> s{_mtlId = a})
 
@@ -9711,13 +10240,17 @@ targetHTTPProxyList =
     , _thttpplId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 thttpplNextPageToken :: Lens' TargetHTTPProxyList (Maybe Text)
 thttpplNextPageToken
   = lens _thttpplNextPageToken
       (\ s a -> s{_thttpplNextPageToken = a})
 
--- | Type of resource. Always compute#targetHttpProxyList for lists of Target
+-- | Type of resource. Always compute#targetHttpProxyList for lists of target
 -- HTTP proxies.
 thttpplKind :: Lens' TargetHTTPProxyList Text
 thttpplKind
@@ -9736,7 +10269,8 @@ thttpplSelfLink
   = lens _thttpplSelfLink
       (\ s a -> s{_thttpplSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 thttpplId :: Lens' TargetHTTPProxyList (Maybe Text)
 thttpplId
   = lens _thttpplId (\ s a -> s{_thttpplId = a})
@@ -9846,7 +10380,11 @@ diskTypeAggregatedList =
     , _dtalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 dtalNextPageToken :: Lens' DiskTypeAggregatedList (Maybe Text)
 dtalNextPageToken
   = lens _dtalNextPageToken
@@ -9866,7 +10404,8 @@ dtalSelfLink :: Lens' DiskTypeAggregatedList (Maybe Text)
 dtalSelfLink
   = lens _dtalSelfLink (\ s a -> s{_dtalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dtalId :: Lens' DiskTypeAggregatedList (Maybe Text)
 dtalId = lens _dtalId (\ s a -> s{_dtalId = a})
 
@@ -9967,13 +10506,14 @@ httphcHealthyThreshold
       (\ s a -> s{_httphcHealthyThreshold = a})
       . mapping _Coerce
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#httpHealthCheck for
+-- HTTP health checks.
 httphcKind :: Lens' HTTPHealthCheck Text
 httphcKind
   = lens _httphcKind (\ s a -> s{_httphcKind = a})
 
 -- | The request path of the HTTP health check request. The default value is
--- \"\/\".
+-- \/.
 httphcRequestPath :: Lens' HTTPHealthCheck (Maybe Text)
 httphcRequestPath
   = lens _httphcRequestPath
@@ -10010,7 +10550,8 @@ httphcCreationTimestamp
   = lens _httphcCreationTimestamp
       (\ s a -> s{_httphcCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 httphcId :: Lens' HTTPHealthCheck (Maybe Word64)
 httphcId
   = lens _httphcId (\ s a -> s{_httphcId = a}) .
@@ -10032,8 +10573,8 @@ httphcTimeoutSec
       (\ s a -> s{_httphcTimeoutSec = a})
       . mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 httphcDescription :: Lens' HTTPHealthCheck (Maybe Text)
 httphcDescription
   = lens _httphcDescription
@@ -10164,15 +10705,15 @@ autoscalersScopedList =
     , _aWarning = Nothing
     }
 
--- | List of autoscalers contained in this scope.
+-- | [Output Only] List of autoscalers contained in this scope.
 aAutoscalers :: Lens' AutoscalersScopedList [Autoscaler]
 aAutoscalers
   = lens _aAutoscalers (\ s a -> s{_aAutoscalers = a})
       . _Default
       . _Coerce
 
--- | Informational warning which replaces the list of autoscalers when the
--- list is empty.
+-- | [Output Only] Informational warning which replaces the list of
+-- autoscalers when the list is empty.
 aWarning :: Lens' AutoscalersScopedList (Maybe AutoscalersScopedListWarning)
 aWarning = lens _aWarning (\ s a -> s{_aWarning = a})
 
@@ -10225,13 +10766,18 @@ autoscalerAggregatedList =
     , _aalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 aalNextPageToken :: Lens' AutoscalerAggregatedList (Maybe Text)
 aalNextPageToken
   = lens _aalNextPageToken
       (\ s a -> s{_aalNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#autoscalerAggregatedList
+-- for aggregated lists of autoscalers.
 aalKind :: Lens' AutoscalerAggregatedList Text
 aalKind = lens _aalKind (\ s a -> s{_aalKind = a})
 
@@ -10244,7 +10790,8 @@ aalSelfLink :: Lens' AutoscalerAggregatedList (Maybe Text)
 aalSelfLink
   = lens _aalSelfLink (\ s a -> s{_aalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 aalId :: Lens' AutoscalerAggregatedList (Maybe Text)
 aalId = lens _aalId (\ s a -> s{_aalId = a})
 
@@ -10308,7 +10855,7 @@ autoscalingPolicy =
     , _apCoolDownPeriodSec = Nothing
     }
 
--- | Configuration parameters of autoscaling based on custom metric.
+-- | Configuration parameters of autoscaling based on a custom metric.
 apCustomMetricUtilizations :: Lens' AutoscalingPolicy [AutoscalingPolicyCustomMetricUtilization]
 apCustomMetricUtilizations
   = lens _apCustomMetricUtilizations
@@ -10316,19 +10863,17 @@ apCustomMetricUtilizations
       . _Default
       . _Coerce
 
--- | The maximum number of replicas that the Autoscaler can scale up to. This
--- field is required for config to be effective. Maximum number of replicas
--- should be not lower than minimal number of replicas. Absolute limit for
--- this value is defined in Autoscaler backend.
+-- | The maximum number of instances that the autoscaler can scale up to.
+-- This is required when creating or updating an autoscaler. The maximum
+-- number of replicas should not be lower than minimal number of replicas.
 apMaxNumReplicas :: Lens' AutoscalingPolicy (Maybe Int32)
 apMaxNumReplicas
   = lens _apMaxNumReplicas
       (\ s a -> s{_apMaxNumReplicas = a})
       . mapping _Coerce
 
--- | TODO(jbartosik): Add support for scaling based on muliple utilization
--- metrics (take max recommendation). Exactly one utilization policy should
--- be provided. Configuration parameters of CPU based autoscaling policy.
+-- | Defines the CPU utilization policy that allows the autoscaler to scale
+-- based on the average CPU utilization of a managed instance group.
 apCPUUtilization :: Lens' AutoscalingPolicy (Maybe AutoscalingPolicyCPUUtilization)
 apCPUUtilization
   = lens _apCPUUtilization
@@ -10340,20 +10885,23 @@ apLoadBalancingUtilization
   = lens _apLoadBalancingUtilization
       (\ s a -> s{_apLoadBalancingUtilization = a})
 
--- | The minimum number of replicas that the Autoscaler can scale down to.
--- Can\'t be less than 0. If not provided Autoscaler will choose default
--- value depending on maximal number of replicas.
+-- | The minimum number of replicas that the autoscaler can scale down to.
+-- This cannot be less than 0. If not provided, autoscaler will choose a
+-- default value depending on maximum number of instances allowed.
 apMinNumReplicas :: Lens' AutoscalingPolicy (Maybe Int32)
 apMinNumReplicas
   = lens _apMinNumReplicas
       (\ s a -> s{_apMinNumReplicas = a})
       . mapping _Coerce
 
--- | The number of seconds that the Autoscaler should wait between two
--- succeeding changes to the number of virtual machines. You should define
--- an interval that is at least as long as the initialization time of a
--- virtual machine and the time it may take for replica pool to create the
--- virtual machine. The default is 60 seconds.
+-- | The number of seconds that the autoscaler should wait before it starts
+-- collecting information from a new instance. This prevents the autoscaler
+-- from collecting information when the instance is initializing, during
+-- which the collected usage would not be reliable. The default time
+-- autoscaler waits is 60 seconds. Virtual machine initialization times
+-- might vary because of numerous factors. We recommend that you test how
+-- long an instance may take to initialize. To do this, create an instance
+-- and time the startup process.
 apCoolDownPeriodSec :: Lens' AutoscalingPolicy (Maybe Int32)
 apCoolDownPeriodSec
   = lens _apCoolDownPeriodSec
@@ -10420,7 +10968,11 @@ regionList =
     , _regId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 regNextPageToken :: Lens' RegionList (Maybe Text)
 regNextPageToken
   = lens _regNextPageToken
@@ -10443,7 +10995,8 @@ regSelfLink :: Lens' RegionList (Maybe Text)
 regSelfLink
   = lens _regSelfLink (\ s a -> s{_regSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 regId :: Lens' RegionList (Maybe Text)
 regId = lens _regId (\ s a -> s{_regId = a})
 
@@ -10503,7 +11056,11 @@ vpnTunnelList =
     , _vtlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 vtlNextPageToken :: Lens' VPNTunnelList (Maybe Text)
 vtlNextPageToken
   = lens _vtlNextPageToken
@@ -10526,7 +11083,8 @@ vtlSelfLink :: Lens' VPNTunnelList (Maybe Text)
 vtlSelfLink
   = lens _vtlSelfLink (\ s a -> s{_vtlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 vtlId :: Lens' VPNTunnelList (Maybe Text)
 vtlId = lens _vtlId (\ s a -> s{_vtlId = a})
 
@@ -10586,6 +11144,60 @@ instance ToJSON MachineTypeScratchDisksItem where
           = object (catMaybes [("diskGb" .=) <$> _mtsdiDiskGb])
 
 --
+-- /See:/ 'subnetworksScopedListWarningDataItem' smart constructor.
+data SubnetworksScopedListWarningDataItem = SubnetworksScopedListWarningDataItem
+    { _sslwdiValue :: !(Maybe Text)
+    , _sslwdiKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworksScopedListWarningDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sslwdiValue'
+--
+-- * 'sslwdiKey'
+subnetworksScopedListWarningDataItem
+    :: SubnetworksScopedListWarningDataItem
+subnetworksScopedListWarningDataItem =
+    SubnetworksScopedListWarningDataItem
+    { _sslwdiValue = Nothing
+    , _sslwdiKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+sslwdiValue :: Lens' SubnetworksScopedListWarningDataItem (Maybe Text)
+sslwdiValue
+  = lens _sslwdiValue (\ s a -> s{_sslwdiValue = a})
+
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
+sslwdiKey :: Lens' SubnetworksScopedListWarningDataItem (Maybe Text)
+sslwdiKey
+  = lens _sslwdiKey (\ s a -> s{_sslwdiKey = a})
+
+instance FromJSON
+         SubnetworksScopedListWarningDataItem where
+        parseJSON
+          = withObject "SubnetworksScopedListWarningDataItem"
+              (\ o ->
+                 SubnetworksScopedListWarningDataItem <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON SubnetworksScopedListWarningDataItem
+         where
+        toJSON SubnetworksScopedListWarningDataItem{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _sslwdiValue,
+                  ("key" .=) <$> _sslwdiKey])
+
+--
 -- /See:/ 'machineTypesScopedList' smart constructor.
 data MachineTypesScopedList = MachineTypesScopedList
     { _mtslMachineTypes :: !(Maybe [MachineType])
@@ -10636,6 +11248,159 @@ instance ToJSON MachineTypesScopedList where
                  [("machineTypes" .=) <$> _mtslMachineTypes,
                   ("warning" .=) <$> _mtslWarning])
 
+-- | A Subnetwork resource.
+--
+-- /See:/ 'subnetwork' smart constructor.
+data Subnetwork = Subnetwork
+    { _subKind              :: !Text
+    , _subNetwork           :: !(Maybe Text)
+    , _subGatewayAddress    :: !(Maybe Text)
+    , _subSelfLink          :: !(Maybe Text)
+    , _subName              :: !(Maybe Text)
+    , _subCreationTimestamp :: !(Maybe Text)
+    , _subIPCIdRRange       :: !(Maybe Text)
+    , _subId                :: !(Maybe (Textual Word64))
+    , _subRegion            :: !(Maybe Text)
+    , _subDescription       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Subnetwork' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'subKind'
+--
+-- * 'subNetwork'
+--
+-- * 'subGatewayAddress'
+--
+-- * 'subSelfLink'
+--
+-- * 'subName'
+--
+-- * 'subCreationTimestamp'
+--
+-- * 'subIPCIdRRange'
+--
+-- * 'subId'
+--
+-- * 'subRegion'
+--
+-- * 'subDescription'
+subnetwork
+    :: Subnetwork
+subnetwork =
+    Subnetwork
+    { _subKind = "compute#subnetwork"
+    , _subNetwork = Nothing
+    , _subGatewayAddress = Nothing
+    , _subSelfLink = Nothing
+    , _subName = Nothing
+    , _subCreationTimestamp = Nothing
+    , _subIPCIdRRange = Nothing
+    , _subId = Nothing
+    , _subRegion = Nothing
+    , _subDescription = Nothing
+    }
+
+-- | [Output Only] Type of the resource. Always compute#subnetwork for
+-- Subnetwork resources.
+subKind :: Lens' Subnetwork Text
+subKind = lens _subKind (\ s a -> s{_subKind = a})
+
+-- | The URL of the network to which this subnetwork belongs, provided by the
+-- client when initially creating the subnetwork. Only networks that are in
+-- the distributed mode can have subnetworks.
+subNetwork :: Lens' Subnetwork (Maybe Text)
+subNetwork
+  = lens _subNetwork (\ s a -> s{_subNetwork = a})
+
+-- | [Output Only] The gateway address for default routes to reach
+-- destination addresses outside this subnetwork.
+subGatewayAddress :: Lens' Subnetwork (Maybe Text)
+subGatewayAddress
+  = lens _subGatewayAddress
+      (\ s a -> s{_subGatewayAddress = a})
+
+-- | [Output Only] Server-defined URL for the resource.
+subSelfLink :: Lens' Subnetwork (Maybe Text)
+subSelfLink
+  = lens _subSelfLink (\ s a -> s{_subSelfLink = a})
+
+-- | The name of the resource, provided by the client when initially creating
+-- the resource. The name must be 1-63 characters long, and comply with
+-- RFC1035. Specifically, the name must be 1-63 characters long and match
+-- the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+subName :: Lens' Subnetwork (Maybe Text)
+subName = lens _subName (\ s a -> s{_subName = a})
+
+-- | [Output Only] Creation timestamp in RFC3339 text format.
+subCreationTimestamp :: Lens' Subnetwork (Maybe Text)
+subCreationTimestamp
+  = lens _subCreationTimestamp
+      (\ s a -> s{_subCreationTimestamp = a})
+
+-- | The range of internal addresses that are owned by this subnetwork.
+-- Provide this property when you create the subnetwork. For example,
+-- 10.0.0.0\/8 or 192.168.0.0\/16. Ranges must be unique and
+-- non-overlapping within a network.
+subIPCIdRRange :: Lens' Subnetwork (Maybe Text)
+subIPCIdRRange
+  = lens _subIPCIdRRange
+      (\ s a -> s{_subIPCIdRRange = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+subId :: Lens' Subnetwork (Maybe Word64)
+subId
+  = lens _subId (\ s a -> s{_subId = a}) .
+      mapping _Coerce
+
+-- | [Output Only] URL of the region where the Subnetwork resides.
+subRegion :: Lens' Subnetwork (Maybe Text)
+subRegion
+  = lens _subRegion (\ s a -> s{_subRegion = a})
+
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
+subDescription :: Lens' Subnetwork (Maybe Text)
+subDescription
+  = lens _subDescription
+      (\ s a -> s{_subDescription = a})
+
+instance FromJSON Subnetwork where
+        parseJSON
+          = withObject "Subnetwork"
+              (\ o ->
+                 Subnetwork <$>
+                   (o .:? "kind" .!= "compute#subnetwork") <*>
+                     (o .:? "network")
+                     <*> (o .:? "gatewayAddress")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "ipCidrRange")
+                     <*> (o .:? "id")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description"))
+
+instance ToJSON Subnetwork where
+        toJSON Subnetwork{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _subKind),
+                  ("network" .=) <$> _subNetwork,
+                  ("gatewayAddress" .=) <$> _subGatewayAddress,
+                  ("selfLink" .=) <$> _subSelfLink,
+                  ("name" .=) <$> _subName,
+                  ("creationTimestamp" .=) <$> _subCreationTimestamp,
+                  ("ipCidrRange" .=) <$> _subIPCIdRRange,
+                  ("id" .=) <$> _subId, ("region" .=) <$> _subRegion,
+                  ("description" .=) <$> _subDescription])
+
 --
 -- /See:/ 'machineTypeAggregatedList' smart constructor.
 data MachineTypeAggregatedList = MachineTypeAggregatedList
@@ -10670,7 +11435,11 @@ machineTypeAggregatedList =
     , _mtalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 mtalNextPageToken :: Lens' MachineTypeAggregatedList (Maybe Text)
 mtalNextPageToken
   = lens _mtalNextPageToken
@@ -10691,7 +11460,8 @@ mtalSelfLink :: Lens' MachineTypeAggregatedList (Maybe Text)
 mtalSelfLink
   = lens _mtalSelfLink (\ s a -> s{_mtalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 mtalId :: Lens' MachineTypeAggregatedList (Maybe Text)
 mtalId = lens _mtalId (\ s a -> s{_mtalId = a})
 
@@ -10717,7 +11487,7 @@ instance ToJSON MachineTypeAggregatedList where
                   ("selfLink" .=) <$> _mtalSelfLink,
                   ("id" .=) <$> _mtalId])
 
--- | A disk type resource.
+-- | A DiskType resource.
 --
 -- /See:/ 'diskType' smart constructor.
 data DiskType = DiskType
@@ -10796,7 +11566,8 @@ dtCreationTimestamp
   = lens _dtCreationTimestamp
       (\ s a -> s{_dtCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dtId :: Lens' DiskType (Maybe Word64)
 dtId
   = lens _dtId (\ s a -> s{_dtId = a}) .
@@ -10809,7 +11580,7 @@ dtValidDiskSize
   = lens _dtValidDiskSize
       (\ s a -> s{_dtValidDiskSize = a})
 
--- | [Output Only] An optional textual description of the resource.
+-- | [Output Only] An optional description of this resource.
 dtDescription :: Lens' DiskType (Maybe Text)
 dtDescription
   = lens _dtDescription
@@ -11027,17 +11798,20 @@ routeWarningsItem =
     , _rwiMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 rwiData :: Lens' RouteWarningsItem [RouteWarningsItemDataItem]
 rwiData
   = lens _rwiData (\ s a -> s{_rwiData = a}) . _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 rwiCode :: Lens' RouteWarningsItem (Maybe RouteWarningsItemCode)
 rwiCode = lens _rwiCode (\ s a -> s{_rwiCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 rwiMessage :: Lens' RouteWarningsItem (Maybe Text)
 rwiMessage
   = lens _rwiMessage (\ s a -> s{_rwiMessage = a})
@@ -11084,7 +11858,13 @@ mtslwdiValue :: Lens' MachineTypesScopedListWarningDataItem (Maybe Text)
 mtslwdiValue
   = lens _mtslwdiValue (\ s a -> s{_mtslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 mtslwdiKey :: Lens' MachineTypesScopedListWarningDataItem (Maybe Text)
 mtslwdiKey
   = lens _mtslwdiKey (\ s a -> s{_mtslwdiKey = a})
@@ -11132,7 +11912,13 @@ dtslwdiValue :: Lens' DiskTypesScopedListWarningDataItem (Maybe Text)
 dtslwdiValue
   = lens _dtslwdiValue (\ s a -> s{_dtslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 dtslwdiKey :: Lens' DiskTypesScopedListWarningDataItem (Maybe Text)
 dtslwdiKey
   = lens _dtslwdiKey (\ s a -> s{_dtslwdiKey = a})
@@ -11202,8 +11988,8 @@ thttppURLMap :: Lens' TargetHTTPProxy (Maybe Text)
 thttppURLMap
   = lens _thttppURLMap (\ s a -> s{_thttppURLMap = a})
 
--- | [Output Only] Type of resource. Always compute#operation for Operation
--- resources.
+-- | [Output Only] Type of resource. Always compute#targetHttpProxy for
+-- target HTTP proxies.
 thttppKind :: Lens' TargetHTTPProxy Text
 thttppKind
   = lens _thttppKind (\ s a -> s{_thttppKind = a})
@@ -11214,7 +12000,7 @@ thttppSelfLink
   = lens _thttppSelfLink
       (\ s a -> s{_thttppSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -11231,14 +12017,15 @@ thttppCreationTimestamp
   = lens _thttppCreationTimestamp
       (\ s a -> s{_thttppCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 thttppId :: Lens' TargetHTTPProxy (Maybe Word64)
 thttppId
   = lens _thttppId (\ s a -> s{_thttppId = a}) .
       mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 thttppDescription :: Lens' TargetHTTPProxy (Maybe Text)
 thttppDescription
   = lens _thttppDescription
@@ -11341,7 +12128,8 @@ machineType =
     , _mtDeprecated = Nothing
     }
 
--- | Type of the resource.
+-- | [Output Only] The type of the resource. Always compute#machineType for
+-- machine types.
 mtKind :: Lens' MachineType Text
 mtKind = lens _mtKind (\ s a -> s{_mtKind = a})
 
@@ -11381,13 +12169,15 @@ mtScratchDisks
       . _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 mtId :: Lens' MachineType (Maybe Word64)
 mtId
   = lens _mtId (\ s a -> s{_mtId = a}) .
       mapping _Coerce
 
--- | [Output Only] The tumber of CPUs exposed to the instance.
+-- | [Output Only] The number of virtual CPUs that are available to the
+-- instance.
 mtGuestCPUs :: Lens' MachineType (Maybe Int32)
 mtGuestCPUs
   = lens _mtGuestCPUs (\ s a -> s{_mtGuestCPUs = a}) .
@@ -11532,19 +12322,22 @@ targetInstancesScopedListWarning =
     , _tislwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 tislwData :: Lens' TargetInstancesScopedListWarning [TargetInstancesScopedListWarningDataItem]
 tislwData
   = lens _tislwData (\ s a -> s{_tislwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 tislwCode :: Lens' TargetInstancesScopedListWarning (Maybe TargetInstancesScopedListWarningCode)
 tislwCode
   = lens _tislwCode (\ s a -> s{_tislwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 tislwMessage :: Lens' TargetInstancesScopedListWarning (Maybe Text)
 tislwMessage
   = lens _tislwMessage (\ s a -> s{_tislwMessage = a})
@@ -11566,6 +12359,90 @@ instance ToJSON TargetInstancesScopedListWarning
                  [("data" .=) <$> _tislwData,
                   ("code" .=) <$> _tislwCode,
                   ("message" .=) <$> _tislwMessage])
+
+--
+-- /See:/ 'subnetworkAggregatedList' smart constructor.
+data SubnetworkAggregatedList = SubnetworkAggregatedList
+    { _salNextPageToken :: !(Maybe Text)
+    , _salKind          :: !Text
+    , _salItems         :: !(Maybe SubnetworkAggregatedListItems)
+    , _salSelfLink      :: !(Maybe Text)
+    , _salId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworkAggregatedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'salNextPageToken'
+--
+-- * 'salKind'
+--
+-- * 'salItems'
+--
+-- * 'salSelfLink'
+--
+-- * 'salId'
+subnetworkAggregatedList
+    :: SubnetworkAggregatedList
+subnetworkAggregatedList =
+    SubnetworkAggregatedList
+    { _salNextPageToken = Nothing
+    , _salKind = "compute#subnetworkAggregatedList"
+    , _salItems = Nothing
+    , _salSelfLink = Nothing
+    , _salId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+salNextPageToken :: Lens' SubnetworkAggregatedList (Maybe Text)
+salNextPageToken
+  = lens _salNextPageToken
+      (\ s a -> s{_salNextPageToken = a})
+
+-- | [Output Only] Type of resource. Always compute#subnetworkAggregatedList
+-- for aggregated lists of subnetworks.
+salKind :: Lens' SubnetworkAggregatedList Text
+salKind = lens _salKind (\ s a -> s{_salKind = a})
+
+-- | [Output] A map of scoped Subnetwork lists.
+salItems :: Lens' SubnetworkAggregatedList (Maybe SubnetworkAggregatedListItems)
+salItems = lens _salItems (\ s a -> s{_salItems = a})
+
+-- | [Output Only] Server-defined URL for this resource.
+salSelfLink :: Lens' SubnetworkAggregatedList (Maybe Text)
+salSelfLink
+  = lens _salSelfLink (\ s a -> s{_salSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+salId :: Lens' SubnetworkAggregatedList (Maybe Text)
+salId = lens _salId (\ s a -> s{_salId = a})
+
+instance FromJSON SubnetworkAggregatedList where
+        parseJSON
+          = withObject "SubnetworkAggregatedList"
+              (\ o ->
+                 SubnetworkAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#subnetworkAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON SubnetworkAggregatedList where
+        toJSON SubnetworkAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _salNextPageToken,
+                  Just ("kind" .= _salKind),
+                  ("items" .=) <$> _salItems,
+                  ("selfLink" .=) <$> _salSelfLink,
+                  ("id" .=) <$> _salId])
 
 --
 -- /See:/ 'autoscalersScopedListWarningDataItem' smart constructor.
@@ -11593,7 +12470,13 @@ autoscalersScopedListWarningDataItem =
 aValue :: Lens' AutoscalersScopedListWarningDataItem (Maybe Text)
 aValue = lens _aValue (\ s a -> s{_aValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 aKey :: Lens' AutoscalersScopedListWarningDataItem (Maybe Text)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
@@ -11646,7 +12529,11 @@ instanceGroupsListInstances =
     , _igliId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 igliNextPageToken :: Lens' InstanceGroupsListInstances (Maybe Text)
 igliNextPageToken
   = lens _igliNextPageToken
@@ -11698,6 +12585,10 @@ instance ToJSON InstanceGroupsListInstances where
                   ("selfLink" .=) <$> _igliSelfLink,
                   ("id" .=) <$> _igliId])
 
+-- | Represents an Autoscaler resource. Autoscalers allow you to
+-- automatically scale virtual machine instances in managed instance groups
+-- according to an autoscaling policy that you define. For more
+-- information, read Autoscaling Groups of Instances.
 --
 -- /See:/ 'autoscaler' smart constructor.
 data Autoscaler = Autoscaler
@@ -11748,7 +12639,8 @@ autoscaler =
     , _aaTarget = Nothing
     }
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#autoscaler for
+-- autoscalers.
 aaKind :: Lens' Autoscaler Text
 aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
 
@@ -11777,27 +12669,31 @@ aaCreationTimestamp
   = lens _aaCreationTimestamp
       (\ s a -> s{_aaCreationTimestamp = a})
 
--- | Autoscaling configuration.
+-- | The configuration parameters for the autoscaling algorithm. You can
+-- define one or more of the policies for an autoscaler: cpuUtilization,
+-- customMetricUtilizations, and loadBalancingUtilization. If none of these
+-- are specified, the default will be to autoscale based on cpuUtilization
+-- to 0.8 or 80%.
 aaAutoscalingPolicy :: Lens' Autoscaler (Maybe AutoscalingPolicy)
 aaAutoscalingPolicy
   = lens _aaAutoscalingPolicy
       (\ s a -> s{_aaAutoscalingPolicy = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 aaId :: Lens' Autoscaler (Maybe Word64)
 aaId
   = lens _aaId (\ s a -> s{_aaId = a}) .
       mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 aaDescription :: Lens' Autoscaler (Maybe Text)
 aaDescription
   = lens _aaDescription
       (\ s a -> s{_aaDescription = a})
 
--- | URL of Instance Group Manager or Replica Pool which will be controlled
--- by Autoscaler.
+-- | URL of the managed instance group that this autoscaler will scale.
 aaTarget :: Lens' Autoscaler (Maybe Text)
 aaTarget = lens _aaTarget (\ s a -> s{_aaTarget = a})
 
@@ -11857,18 +12753,21 @@ disksScopedListWarning =
     , _dslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 dslwData :: Lens' DisksScopedListWarning [DisksScopedListWarningDataItem]
 dslwData
   = lens _dslwData (\ s a -> s{_dslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 dslwCode :: Lens' DisksScopedListWarning (Maybe DisksScopedListWarningCode)
 dslwCode = lens _dslwCode (\ s a -> s{_dslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 dslwMessage :: Lens' DisksScopedListWarning (Maybe Text)
 dslwMessage
   = lens _dslwMessage (\ s a -> s{_dslwMessage = a})
@@ -11909,7 +12808,7 @@ targetVPNGatewayAggregatedListItems pTvgaliAddtional_ =
     { _tvgaliAddtional = _Coerce # pTvgaliAddtional_
     }
 
--- | [Output Only] Name of the scope containing this set of target vpn
+-- | [Output Only] Name of the scope containing this set of target VPN
 -- gateways.
 tvgaliAddtional :: Lens' TargetVPNGatewayAggregatedListItems (HashMap Text TargetVPNGatewaysScopedList)
 tvgaliAddtional
@@ -11957,19 +12856,22 @@ targetPoolsScopedListWarning =
     , _tpslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 tpslwData :: Lens' TargetPoolsScopedListWarning [TargetPoolsScopedListWarningDataItem]
 tpslwData
   = lens _tpslwData (\ s a -> s{_tpslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 tpslwCode :: Lens' TargetPoolsScopedListWarning (Maybe TargetPoolsScopedListWarningCode)
 tpslwCode
   = lens _tpslwCode (\ s a -> s{_tpslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 tpslwMessage :: Lens' TargetPoolsScopedListWarning (Maybe Text)
 tpslwMessage
   = lens _tpslwMessage (\ s a -> s{_tpslwMessage = a})
@@ -12152,8 +13054,8 @@ rrQuotas
       _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource; defined by the server
--- .
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 rrId :: Lens' Region (Maybe Word64)
 rrId
   = lens _rrId (\ s a -> s{_rrId = a}) .
@@ -12201,20 +13103,21 @@ instance ToJSON Region where
 --
 -- /See:/ 'vpnTunnel' smart constructor.
 data VPNTunnel = VPNTunnel
-    { _vtDetailedStatus    :: !(Maybe Text)
-    , _vtStatus            :: !(Maybe VPNTunnelStatus)
-    , _vtKind              :: !Text
-    , _vtPeerIP            :: !(Maybe Text)
-    , _vtTargetVPNGateway  :: !(Maybe Text)
-    , _vtSelfLink          :: !(Maybe Text)
-    , _vtSharedSecret      :: !(Maybe Text)
-    , _vtName              :: !(Maybe Text)
-    , _vtCreationTimestamp :: !(Maybe Text)
-    , _vtSharedSecretHash  :: !(Maybe Text)
-    , _vtId                :: !(Maybe (Textual Word64))
-    , _vtIkeVersion        :: !(Maybe (Textual Int32))
-    , _vtRegion            :: !(Maybe Text)
-    , _vtDescription       :: !(Maybe Text)
+    { _vtDetailedStatus       :: !(Maybe Text)
+    , _vtStatus               :: !(Maybe VPNTunnelStatus)
+    , _vtLocalTrafficSelector :: !(Maybe [Text])
+    , _vtKind                 :: !Text
+    , _vtPeerIP               :: !(Maybe Text)
+    , _vtTargetVPNGateway     :: !(Maybe Text)
+    , _vtSelfLink             :: !(Maybe Text)
+    , _vtSharedSecret         :: !(Maybe Text)
+    , _vtName                 :: !(Maybe Text)
+    , _vtCreationTimestamp    :: !(Maybe Text)
+    , _vtSharedSecretHash     :: !(Maybe Text)
+    , _vtId                   :: !(Maybe (Textual Word64))
+    , _vtIkeVersion           :: !(Maybe (Textual Int32))
+    , _vtRegion               :: !(Maybe Text)
+    , _vtDescription          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnel' with the minimum fields required to make a request.
@@ -12224,6 +13127,8 @@ data VPNTunnel = VPNTunnel
 -- * 'vtDetailedStatus'
 --
 -- * 'vtStatus'
+--
+-- * 'vtLocalTrafficSelector'
 --
 -- * 'vtKind'
 --
@@ -12254,6 +13159,7 @@ vpnTunnel =
     VPNTunnel
     { _vtDetailedStatus = Nothing
     , _vtStatus = Nothing
+    , _vtLocalTrafficSelector = Nothing
     , _vtKind = "compute#vpnTunnel"
     , _vtPeerIP = Nothing
     , _vtTargetVPNGateway = Nothing
@@ -12278,6 +13184,16 @@ vtDetailedStatus
 vtStatus :: Lens' VPNTunnel (Maybe VPNTunnelStatus)
 vtStatus = lens _vtStatus (\ s a -> s{_vtStatus = a})
 
+-- | Local traffic selector to use when establishing the VPN tunnel with peer
+-- VPN gateway. The value should be a CIDR formatted string, for example:
+-- 192.168.0.0\/16. The ranges should be disjoint.
+vtLocalTrafficSelector :: Lens' VPNTunnel [Text]
+vtLocalTrafficSelector
+  = lens _vtLocalTrafficSelector
+      (\ s a -> s{_vtLocalTrafficSelector = a})
+      . _Default
+      . _Coerce
+
 -- | [Output Only] Type of resource. Always compute#vpnTunnel for VPN
 -- tunnels.
 vtKind :: Lens' VPNTunnel Text
@@ -12287,8 +13203,8 @@ vtKind = lens _vtKind (\ s a -> s{_vtKind = a})
 vtPeerIP :: Lens' VPNTunnel (Maybe Text)
 vtPeerIP = lens _vtPeerIP (\ s a -> s{_vtPeerIP = a})
 
--- | URL of the VPN gateway to which this VPN tunnel is associated. Provided
--- by the client when the VPN tunnel is created.
+-- | URL of the VPN gateway with which this VPN tunnel is associated.
+-- Provided by the client when the VPN tunnel is created.
 vtTargetVPNGateway :: Lens' VPNTunnel (Maybe Text)
 vtTargetVPNGateway
   = lens _vtTargetVPNGateway
@@ -12299,14 +13215,14 @@ vtSelfLink :: Lens' VPNTunnel (Maybe Text)
 vtSelfLink
   = lens _vtSelfLink (\ s a -> s{_vtSelfLink = a})
 
--- | Shared secret used to set the secure session between the GCE VPN gateway
--- and the peer VPN gateway.
+-- | Shared secret used to set the secure session between the Cloud VPN
+-- gateway and the peer VPN gateway.
 vtSharedSecret :: Lens' VPNTunnel (Maybe Text)
 vtSharedSecret
   = lens _vtSharedSecret
       (\ s a -> s{_vtSharedSecret = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -12328,7 +13244,8 @@ vtSharedSecretHash
   = lens _vtSharedSecretHash
       (\ s a -> s{_vtSharedSecretHash = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 vtId :: Lens' VPNTunnel (Maybe Word64)
 vtId
   = lens _vtId (\ s a -> s{_vtId = a}) .
@@ -12345,8 +13262,8 @@ vtIkeVersion
 vtRegion :: Lens' VPNTunnel (Maybe Text)
 vtRegion = lens _vtRegion (\ s a -> s{_vtRegion = a})
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 vtDescription :: Lens' VPNTunnel (Maybe Text)
 vtDescription
   = lens _vtDescription
@@ -12358,7 +13275,8 @@ instance FromJSON VPNTunnel where
               (\ o ->
                  VPNTunnel <$>
                    (o .:? "detailedStatus") <*> (o .:? "status") <*>
-                     (o .:? "kind" .!= "compute#vpnTunnel")
+                     (o .:? "localTrafficSelector" .!= mempty)
+                     <*> (o .:? "kind" .!= "compute#vpnTunnel")
                      <*> (o .:? "peerIp")
                      <*> (o .:? "targetVpnGateway")
                      <*> (o .:? "selfLink")
@@ -12377,6 +13295,8 @@ instance ToJSON VPNTunnel where
               (catMaybes
                  [("detailedStatus" .=) <$> _vtDetailedStatus,
                   ("status" .=) <$> _vtStatus,
+                  ("localTrafficSelector" .=) <$>
+                    _vtLocalTrafficSelector,
                   Just ("kind" .= _vtKind),
                   ("peerIp" .=) <$> _vtPeerIP,
                   ("targetVpnGateway" .=) <$> _vtTargetVPNGateway,
@@ -12418,18 +13338,21 @@ operationsScopedListWarning =
     , _oslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 oslwData :: Lens' OperationsScopedListWarning [OperationsScopedListWarningDataItem]
 oslwData
   = lens _oslwData (\ s a -> s{_oslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 oslwCode :: Lens' OperationsScopedListWarning (Maybe OperationsScopedListWarningCode)
 oslwCode = lens _oslwCode (\ s a -> s{_oslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 oslwMessage :: Lens' OperationsScopedListWarning (Maybe Text)
 oslwMessage
   = lens _oslwMessage (\ s a -> s{_oslwMessage = a})
@@ -12489,7 +13412,7 @@ sAutomaticRestart
 -- | Defines the maintenance behavior for this instance. For standard
 -- instances, the default behavior is MIGRATE. For preemptible instances,
 -- the default and only possible behavior is TERMINATE. For more
--- information, see Setting maintenance behavior.
+-- information, see Setting Instance Scheduling Options.
 sOnHostMaintenance :: Lens' Scheduling (Maybe SchedulingOnHostMaintenance)
 sOnHostMaintenance
   = lens _sOnHostMaintenance
@@ -12544,7 +13467,13 @@ vtslwdiValue :: Lens' VPNTunnelsScopedListWarningDataItem (Maybe Text)
 vtslwdiValue
   = lens _vtslwdiValue (\ s a -> s{_vtslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 vtslwdiKey :: Lens' VPNTunnelsScopedListWarningDataItem (Maybe Text)
 vtslwdiKey
   = lens _vtslwdiKey (\ s a -> s{_vtslwdiKey = a})
@@ -12564,6 +13493,92 @@ instance ToJSON VPNTunnelsScopedListWarningDataItem
               (catMaybes
                  [("value" .=) <$> _vtslwdiValue,
                   ("key" .=) <$> _vtslwdiKey])
+
+-- | Contains a list of Subnetwork resources.
+--
+-- /See:/ 'subnetworkList' smart constructor.
+data SubnetworkList = SubnetworkList
+    { _slNextPageToken :: !(Maybe Text)
+    , _slKind          :: !Text
+    , _slItems         :: !(Maybe [Subnetwork])
+    , _slSelfLink      :: !(Maybe Text)
+    , _slId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworkList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slNextPageToken'
+--
+-- * 'slKind'
+--
+-- * 'slItems'
+--
+-- * 'slSelfLink'
+--
+-- * 'slId'
+subnetworkList
+    :: SubnetworkList
+subnetworkList =
+    SubnetworkList
+    { _slNextPageToken = Nothing
+    , _slKind = "compute#subnetworkList"
+    , _slItems = Nothing
+    , _slSelfLink = Nothing
+    , _slId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+slNextPageToken :: Lens' SubnetworkList (Maybe Text)
+slNextPageToken
+  = lens _slNextPageToken
+      (\ s a -> s{_slNextPageToken = a})
+
+-- | [Output Only] Type of resource. Always compute#subnetworkList for lists
+-- of subnetworks.
+slKind :: Lens' SubnetworkList Text
+slKind = lens _slKind (\ s a -> s{_slKind = a})
+
+-- | The Subnetwork resources.
+slItems :: Lens' SubnetworkList [Subnetwork]
+slItems
+  = lens _slItems (\ s a -> s{_slItems = a}) . _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+slSelfLink :: Lens' SubnetworkList (Maybe Text)
+slSelfLink
+  = lens _slSelfLink (\ s a -> s{_slSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+slId :: Lens' SubnetworkList (Maybe Text)
+slId = lens _slId (\ s a -> s{_slId = a})
+
+instance FromJSON SubnetworkList where
+        parseJSON
+          = withObject "SubnetworkList"
+              (\ o ->
+                 SubnetworkList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#subnetworkList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON SubnetworkList where
+        toJSON SubnetworkList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _slNextPageToken,
+                  Just ("kind" .= _slKind), ("items" .=) <$> _slItems,
+                  ("selfLink" .=) <$> _slSelfLink,
+                  ("id" .=) <$> _slId])
 
 -- | Informational warning which replaces the list of forwarding rules when
 -- the list is empty.
@@ -12593,19 +13608,22 @@ forwardingRulesScopedListWarning =
     , _frslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 frslwData :: Lens' ForwardingRulesScopedListWarning [ForwardingRulesScopedListWarningDataItem]
 frslwData
   = lens _frslwData (\ s a -> s{_frslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 frslwCode :: Lens' ForwardingRulesScopedListWarning (Maybe ForwardingRulesScopedListWarningCode)
 frslwCode
   = lens _frslwCode (\ s a -> s{_frslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 frslwMessage :: Lens' ForwardingRulesScopedListWarning (Maybe Text)
 frslwMessage
   = lens _frslwMessage (\ s a -> s{_frslwMessage = a})
@@ -12663,7 +13681,11 @@ hTTPHealthCheckList =
     , _httphclId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 httphclNextPageToken :: Lens' HTTPHealthCheckList (Maybe Text)
 httphclNextPageToken
   = lens _httphclNextPageToken
@@ -12741,19 +13763,22 @@ instanceGroupManagersScopedListWarning =
     , _igmslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 igmslwData :: Lens' InstanceGroupManagersScopedListWarning [InstanceGroupManagersScopedListWarningDataItem]
 igmslwData
   = lens _igmslwData (\ s a -> s{_igmslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 igmslwCode :: Lens' InstanceGroupManagersScopedListWarning (Maybe InstanceGroupManagersScopedListWarningCode)
 igmslwCode
   = lens _igmslwCode (\ s a -> s{_igmslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 igmslwMessage :: Lens' InstanceGroupManagersScopedListWarning (Maybe Text)
 igmslwMessage
   = lens _igmslwMessage
@@ -12909,7 +13934,11 @@ httpsHealthCheckList =
     , _hhclId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 hhclNextPageToken :: Lens' HTTPSHealthCheckList (Maybe Text)
 hhclNextPageToken
   = lens _hhclNextPageToken
@@ -12982,7 +14011,7 @@ operationErrorErrorsItem =
     , _oeeiMessage = Nothing
     }
 
--- | [Output Only] Indicates the field in the request which caused the error.
+-- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
 oeeiLocation :: Lens' OperationErrorErrorsItem (Maybe Text)
 oeeiLocation
@@ -13044,8 +14073,8 @@ license =
     , _lName = Nothing
     }
 
--- | If true, the customer will be charged license fee for running software
--- that contains this license on an instance.
+-- | [Output Only] If true, the customer will be charged license fee for
+-- running software that contains this license on an instance.
 lChargesUseFee :: Lens' License (Maybe Bool)
 lChargesUseFee
   = lens _lChargesUseFee
@@ -13136,7 +14165,7 @@ instance ToJSON PathRule where
                  [("service" .=) <$> _prService,
                   ("paths" .=) <$> _prPaths])
 
--- | Contains a list of instance resources.
+-- | Contains a list of instances.
 --
 -- /See:/ 'instanceList' smart constructor.
 data InstanceList = InstanceList
@@ -13171,7 +14200,11 @@ instanceList =
     , _insId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 insNextPageToken :: Lens' InstanceList (Maybe Text)
 insNextPageToken
   = lens _insNextPageToken
@@ -13182,19 +14215,20 @@ insNextPageToken
 insKind :: Lens' InstanceList Text
 insKind = lens _insKind (\ s a -> s{_insKind = a})
 
--- | [Output Only] A list of Instance resources.
+-- | [Output Only] A list of instances.
 insItems :: Lens' InstanceList [Instance]
 insItems
   = lens _insItems (\ s a -> s{_insItems = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] Server defined URL for this resource.
+-- | [Output Only] Server-defined URL for this resource.
 insSelfLink :: Lens' InstanceList (Maybe Text)
 insSelfLink
   = lens _insSelfLink (\ s a -> s{_insSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 insId :: Lens' InstanceList (Maybe Text)
 insId = lens _insId (\ s a -> s{_insId = a})
 
@@ -13218,6 +14252,43 @@ instance ToJSON InstanceList where
                   ("items" .=) <$> _insItems,
                   ("selfLink" .=) <$> _insSelfLink,
                   ("id" .=) <$> _insId])
+
+-- | [Output] A map of scoped Subnetwork lists.
+--
+-- /See:/ 'subnetworkAggregatedListItems' smart constructor.
+newtype SubnetworkAggregatedListItems = SubnetworkAggregatedListItems
+    { _saliAddtional :: HashMap Text SubnetworksScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworkAggregatedListItems' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'saliAddtional'
+subnetworkAggregatedListItems
+    :: HashMap Text SubnetworksScopedList -- ^ 'saliAddtional'
+    -> SubnetworkAggregatedListItems
+subnetworkAggregatedListItems pSaliAddtional_ =
+    SubnetworkAggregatedListItems
+    { _saliAddtional = _Coerce # pSaliAddtional_
+    }
+
+-- | Name of the scope containing this set of Subnetworks.
+saliAddtional :: Lens' SubnetworkAggregatedListItems (HashMap Text SubnetworksScopedList)
+saliAddtional
+  = lens _saliAddtional
+      (\ s a -> s{_saliAddtional = a})
+      . _Coerce
+
+instance FromJSON SubnetworkAggregatedListItems where
+        parseJSON
+          = withObject "SubnetworkAggregatedListItems"
+              (\ o ->
+                 SubnetworkAggregatedListItems <$>
+                   (parseJSONObject o))
+
+instance ToJSON SubnetworkAggregatedListItems where
+        toJSON = toJSON . _saliAddtional
 
 --
 -- /See:/ 'managedInstanceLastAttempt' smart constructor.
@@ -13288,7 +14359,11 @@ backendServiceList =
     , _bslId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 bslNextPageToken :: Lens' BackendServiceList (Maybe Text)
 bslNextPageToken
   = lens _bslNextPageToken
@@ -13311,7 +14386,8 @@ bslSelfLink :: Lens' BackendServiceList (Maybe Text)
 bslSelfLink
   = lens _bslSelfLink (\ s a -> s{_bslSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 bslId :: Lens' BackendServiceList (Maybe Text)
 bslId = lens _bslId (\ s a -> s{_bslId = a})
 
@@ -13364,19 +14440,22 @@ instanceGroupsScopedListWarning =
     , _igslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 igslwData :: Lens' InstanceGroupsScopedListWarning [InstanceGroupsScopedListWarningDataItem]
 igslwData
   = lens _igslwData (\ s a -> s{_igslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 igslwCode :: Lens' InstanceGroupsScopedListWarning (Maybe InstanceGroupsScopedListWarningCode)
 igslwCode
   = lens _igslwCode (\ s a -> s{_igslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 igslwMessage :: Lens' InstanceGroupsScopedListWarning (Maybe Text)
 igslwMessage
   = lens _igslwMessage (\ s a -> s{_igslwMessage = a})
@@ -13417,10 +14496,15 @@ autoscalingPolicyCPUUtilization =
     { _apcuUtilizationTarget = Nothing
     }
 
--- | The target utilization that the Autoscaler should maintain. It is
--- represented as a fraction of used cores. For example: 6 cores used in
--- 8-core VM are represented here as 0.75. Must be a float value between
--- (0, 1]. If not defined, the default is 0.8.
+-- | The target CPU utilization that the autoscaler should maintain. Must be
+-- a float value in the range (0, 1]. If not specified, the default is 0.8.
+-- If the CPU level is below the target utilization, the autoscaler scales
+-- down the number of instances until it reaches the minimum number of
+-- instances you specified or until the average CPU of your instances
+-- reaches the target utilization. If the average CPU is above the target
+-- utilization, the autoscaler scales up until it reaches the maximum
+-- number of instances you specified or until the average utilization
+-- reaches the target utilization.
 apcuUtilizationTarget :: Lens' AutoscalingPolicyCPUUtilization (Maybe Double)
 apcuUtilizationTarget
   = lens _apcuUtilizationTarget
@@ -13469,7 +14553,13 @@ igslwdiValue :: Lens' InstanceGroupsScopedListWarningDataItem (Maybe Text)
 igslwdiValue
   = lens _igslwdiValue (\ s a -> s{_igslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 igslwdiKey :: Lens' InstanceGroupsScopedListWarningDataItem (Maybe Text)
 igslwdiKey
   = lens _igslwdiKey (\ s a -> s{_igslwdiKey = a})
@@ -13523,7 +14613,7 @@ instance ToJSON ResourceGroupReference where
         toJSON ResourceGroupReference{..}
           = object (catMaybes [("group" .=) <$> _rgrGroup])
 
--- | A Firewall resource.
+-- | Represents a Firewall resource.
 --
 -- /See:/ 'firewall' smart constructor.
 data Firewall = Firewall
@@ -13608,12 +14698,11 @@ fTargetTags
       _Default
       . _Coerce
 
--- | URL of the network resource for this firewall rule. This field is
--- required for creating an instance but optional when creating a firewall
--- rule. If not specified when creating a firewall rule, the default
--- network is used: global\/networks\/default If you choose to specify this
--- property, you can specify the network as a full or partial URL. For
--- example, the following are all valid URLs: -
+-- | URL of the network resource for this firewall rule. If not specified
+-- when creating a firewall rule, the default network is used:
+-- global\/networks\/default If you choose to specify this property, you
+-- can specify the network as a full or partial URL. For example, the
+-- following are all valid URLs: -
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/myproject\/global\/networks\/my-network
 -- - projects\/myproject\/global\/networks\/my-network -
 -- global\/networks\/default
@@ -13653,7 +14742,8 @@ fCreationTimestamp
   = lens _fCreationTimestamp
       (\ s a -> s{_fCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 fId :: Lens' Firewall (Maybe Word64)
 fId
   = lens _fId (\ s a -> s{_fId = a}) . mapping _Coerce
@@ -13666,8 +14756,8 @@ fAllowed
       _Default
       . _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 fDescription :: Lens' Firewall (Maybe Text)
 fDescription
   = lens _fDescription (\ s a -> s{_fDescription = a})
@@ -13740,7 +14830,8 @@ hrHosts
   = lens _hrHosts (\ s a -> s{_hrHosts = a}) . _Default
       . _Coerce
 
--- | An optional textual description.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 hrDescription :: Lens' HostRule (Maybe Text)
 hrDescription
   = lens _hrDescription
@@ -13838,6 +14929,7 @@ data InstanceGroup = InstanceGroup
     , _iiSelfLink          :: !(Maybe Text)
     , _iiName              :: !(Maybe Text)
     , _iiCreationTimestamp :: !(Maybe Text)
+    , _iiSubnetwork        :: !(Maybe Text)
     , _iiId                :: !(Maybe (Textual Word64))
     , _iiDescription       :: !(Maybe Text)
     , _iiNamedPorts        :: !(Maybe [NamedPort])
@@ -13863,6 +14955,8 @@ data InstanceGroup = InstanceGroup
 --
 -- * 'iiCreationTimestamp'
 --
+-- * 'iiSubnetwork'
+--
 -- * 'iiId'
 --
 -- * 'iiDescription'
@@ -13880,6 +14974,7 @@ instanceGroup =
     , _iiSelfLink = Nothing
     , _iiName = Nothing
     , _iiCreationTimestamp = Nothing
+    , _iiSubnetwork = Nothing
     , _iiId = Nothing
     , _iiDescription = Nothing
     , _iiNamedPorts = Nothing
@@ -13905,8 +15000,8 @@ iiFingerprint
       (\ s a -> s{_iiFingerprint = a})
       . mapping _Coerce
 
--- | [Output Only] The URL of the network to which all instances in the
--- instance group belong.
+-- | The URL of the network to which all instances in the instance group
+-- belong.
 iiNetwork :: Lens' InstanceGroup (Maybe Text)
 iiNetwork
   = lens _iiNetwork (\ s a -> s{_iiNetwork = a})
@@ -13933,6 +15028,12 @@ iiCreationTimestamp
   = lens _iiCreationTimestamp
       (\ s a -> s{_iiCreationTimestamp = a})
 
+-- | The URL of the subnetwork to which all instances in the instance group
+-- belong.
+iiSubnetwork :: Lens' InstanceGroup (Maybe Text)
+iiSubnetwork
+  = lens _iiSubnetwork (\ s a -> s{_iiSubnetwork = a})
+
 -- | [Output Only] A unique identifier for this resource type. The server
 -- generates this identifier.
 iiId :: Lens' InstanceGroup (Maybe Word64)
@@ -13940,7 +15041,8 @@ iiId
   = lens _iiId (\ s a -> s{_iiId = a}) .
       mapping _Coerce
 
--- | An optional text description for the instance group.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 iiDescription :: Lens' InstanceGroup (Maybe Text)
 iiDescription
   = lens _iiDescription
@@ -13970,6 +15072,7 @@ instance FromJSON InstanceGroup where
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "subnetwork")
                      <*> (o .:? "id")
                      <*> (o .:? "description")
                      <*> (o .:? "namedPorts" .!= mempty))
@@ -13985,6 +15088,7 @@ instance ToJSON InstanceGroup where
                   ("selfLink" .=) <$> _iiSelfLink,
                   ("name" .=) <$> _iiName,
                   ("creationTimestamp" .=) <$> _iiCreationTimestamp,
+                  ("subnetwork" .=) <$> _iiSubnetwork,
                   ("id" .=) <$> _iiId,
                   ("description" .=) <$> _iiDescription,
                   ("namedPorts" .=) <$> _iiNamedPorts])
@@ -13993,61 +15097,67 @@ instance ToJSON InstanceGroup where
 --
 -- /See:/ 'snapshotList' smart constructor.
 data SnapshotList = SnapshotList
-    { _slNextPageToken :: !(Maybe Text)
-    , _slKind          :: !Text
-    , _slItems         :: !(Maybe [Snapshot])
-    , _slSelfLink      :: !(Maybe Text)
-    , _slId            :: !(Maybe Text)
+    { _snaNextPageToken :: !(Maybe Text)
+    , _snaKind          :: !Text
+    , _snaItems         :: !(Maybe [Snapshot])
+    , _snaSelfLink      :: !(Maybe Text)
+    , _snaId            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'slNextPageToken'
+-- * 'snaNextPageToken'
 --
--- * 'slKind'
+-- * 'snaKind'
 --
--- * 'slItems'
+-- * 'snaItems'
 --
--- * 'slSelfLink'
+-- * 'snaSelfLink'
 --
--- * 'slId'
+-- * 'snaId'
 snapshotList
     :: SnapshotList
 snapshotList =
     SnapshotList
-    { _slNextPageToken = Nothing
-    , _slKind = "compute#snapshotList"
-    , _slItems = Nothing
-    , _slSelfLink = Nothing
-    , _slId = Nothing
+    { _snaNextPageToken = Nothing
+    , _snaKind = "compute#snapshotList"
+    , _snaItems = Nothing
+    , _snaSelfLink = Nothing
+    , _snaId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
-slNextPageToken :: Lens' SnapshotList (Maybe Text)
-slNextPageToken
-  = lens _slNextPageToken
-      (\ s a -> s{_slNextPageToken = a})
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+snaNextPageToken :: Lens' SnapshotList (Maybe Text)
+snaNextPageToken
+  = lens _snaNextPageToken
+      (\ s a -> s{_snaNextPageToken = a})
 
 -- | Type of resource.
-slKind :: Lens' SnapshotList Text
-slKind = lens _slKind (\ s a -> s{_slKind = a})
+snaKind :: Lens' SnapshotList Text
+snaKind = lens _snaKind (\ s a -> s{_snaKind = a})
 
--- | A list of Snapshot resources.
-slItems :: Lens' SnapshotList [Snapshot]
-slItems
-  = lens _slItems (\ s a -> s{_slItems = a}) . _Default
+-- | [Output Only] A list of Snapshot resources.
+snaItems :: Lens' SnapshotList [Snapshot]
+snaItems
+  = lens _snaItems (\ s a -> s{_snaItems = a}) .
+      _Default
       . _Coerce
 
 -- | [Output Only] Server-defined URL for this resource.
-slSelfLink :: Lens' SnapshotList (Maybe Text)
-slSelfLink
-  = lens _slSelfLink (\ s a -> s{_slSelfLink = a})
+snaSelfLink :: Lens' SnapshotList (Maybe Text)
+snaSelfLink
+  = lens _snaSelfLink (\ s a -> s{_snaSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
-slId :: Lens' SnapshotList (Maybe Text)
-slId = lens _slId (\ s a -> s{_slId = a})
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+snaId :: Lens' SnapshotList (Maybe Text)
+snaId = lens _snaId (\ s a -> s{_snaId = a})
 
 instance FromJSON SnapshotList where
         parseJSON
@@ -14064,10 +15174,11 @@ instance ToJSON SnapshotList where
         toJSON SnapshotList{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _slNextPageToken,
-                  Just ("kind" .= _slKind), ("items" .=) <$> _slItems,
-                  ("selfLink" .=) <$> _slSelfLink,
-                  ("id" .=) <$> _slId])
+                 [("nextPageToken" .=) <$> _snaNextPageToken,
+                  Just ("kind" .= _snaKind),
+                  ("items" .=) <$> _snaItems,
+                  ("selfLink" .=) <$> _snaSelfLink,
+                  ("id" .=) <$> _snaId])
 
 --
 -- /See:/ 'testFailure' smart constructor.
@@ -14170,7 +15281,7 @@ spoContents
 spoKind :: Lens' SerialPortOutput Text
 spoKind = lens _spoKind (\ s a -> s{_spoKind = a})
 
--- | [Output Only] Server defined URL for the resource.
+-- | [Output Only] Server-defined URL for the resource.
 spoSelfLink :: Lens' SerialPortOutput (Maybe Text)
 spoSelfLink
   = lens _spoSelfLink (\ s a -> s{_spoSelfLink = a})
@@ -14226,7 +15337,11 @@ targetVPNGatewayAggregatedList =
     , _tvgalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tvgalNextPageToken :: Lens' TargetVPNGatewayAggregatedList (Maybe Text)
 tvgalNextPageToken
   = lens _tvgalNextPageToken
@@ -14249,7 +15364,8 @@ tvgalSelfLink
   = lens _tvgalSelfLink
       (\ s a -> s{_tvgalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tvgalId :: Lens' TargetVPNGatewayAggregatedList (Maybe Text)
 tvgalId = lens _tvgalId (\ s a -> s{_tvgalId = a})
 
@@ -14373,15 +15489,18 @@ targetHTTPSProxy =
     , _thpDescription = Nothing
     }
 
--- | URL to the UrlMap resource that defines the mapping from URL to the
--- BackendService.
+-- | A fully-qualified or valid partial URL to the UrlMap resource that
+-- defines the mapping from URL to the BackendService. For example, the
+-- following are all valid URLs for specifying a URL map: -
+-- https:\/\/www.googleapis.compute\/v1\/projects\/project\/global\/urlMaps\/url-map
+-- - projects\/project\/global\/urlMaps\/url-map - global\/urlMaps\/url-map
 thpURLMap :: Lens' TargetHTTPSProxy (Maybe Text)
 thpURLMap
   = lens _thpURLMap (\ s a -> s{_thpURLMap = a})
 
 -- | URLs to SslCertificate resources that are used to authenticate
--- connections to Backends. Currently exactly one SSL certificate must be
--- specified.
+-- connections between users and the load balancer. Currently, exactly one
+-- SSL certificate must be specified.
 thpSSLCertificates :: Lens' TargetHTTPSProxy [Text]
 thpSSLCertificates
   = lens _thpSSLCertificates
@@ -14389,7 +15508,8 @@ thpSSLCertificates
       . _Default
       . _Coerce
 
--- | Type of the resource.
+-- | [Output Only] Type of resource. Always compute#targetHttpsProxy for
+-- target HTTPS proxies.
 thpKind :: Lens' TargetHTTPSProxy Text
 thpKind = lens _thpKind (\ s a -> s{_thpKind = a})
 
@@ -14414,14 +15534,15 @@ thpCreationTimestamp
   = lens _thpCreationTimestamp
       (\ s a -> s{_thpCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 thpId :: Lens' TargetHTTPSProxy (Maybe Word64)
 thpId
   = lens _thpId (\ s a -> s{_thpId = a}) .
       mapping _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 thpDescription :: Lens' TargetHTTPSProxy (Maybe Text)
 thpDescription
   = lens _thpDescription
@@ -14602,7 +15723,7 @@ managedInstanceLastAttemptErrorsErrorsItem =
     , _milaeeiMessage = Nothing
     }
 
--- | [Output Only] Indicates the field in the request which caused the error.
+-- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
 milaeeiLocation :: Lens' ManagedInstanceLastAttemptErrorsErrorsItem (Maybe Text)
 milaeeiLocation
@@ -14666,7 +15787,13 @@ islwdiValue :: Lens' InstancesScopedListWarningDataItem (Maybe Text)
 islwdiValue
   = lens _islwdiValue (\ s a -> s{_islwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 islwdiKey :: Lens' InstancesScopedListWarningDataItem (Maybe Text)
 islwdiKey
   = lens _islwdiKey (\ s a -> s{_islwdiKey = a})
@@ -14688,7 +15815,7 @@ instance ToJSON InstancesScopedListWarningDataItem
                   ("key" .=) <$> _islwdiKey])
 
 -- | A BackendService resource. This resource defines a group of backend
--- virtual machines together with their serving capacity.
+-- virtual machines and their serving capacity.
 --
 -- /See:/ 'backendService' smart constructor.
 data BackendService = BackendService
@@ -14777,6 +15904,8 @@ bsFingerprint
       (\ s a -> s{_bsFingerprint = a})
       . mapping _Coerce
 
+-- | The protocol this BackendService uses to communicate with backends.
+-- Possible values are HTTP, HTTPS, HTTP2, TCP and SSL.
 bsProtocol :: Lens' BackendService (Maybe BackendServiceProtocol)
 bsProtocol
   = lens _bsProtocol (\ s a -> s{_bsProtocol = a})
@@ -14802,7 +15931,8 @@ bsCreationTimestamp
   = lens _bsCreationTimestamp
       (\ s a -> s{_bsCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 bsId :: Lens' BackendService (Maybe Word64)
 bsId
   = lens _bsId (\ s a -> s{_bsId = a}) .
@@ -14815,22 +15945,22 @@ bsTimeoutSec
   = lens _bsTimeoutSec (\ s a -> s{_bsTimeoutSec = a})
       . mapping _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 bsDescription :: Lens' BackendService (Maybe Text)
 bsDescription
   = lens _bsDescription
       (\ s a -> s{_bsDescription = a})
 
--- | Name of backend port. The same name should appear in the resource views
+-- | Name of backend port. The same name should appear in the instance groups
 -- referenced by this service. Required.
 bsPortName :: Lens' BackendService (Maybe Text)
 bsPortName
   = lens _bsPortName (\ s a -> s{_bsPortName = a})
 
--- | The list of URLs to the HttpHealthCheck resource for health checking
--- this BackendService. Currently at most one health check can be
--- specified, and a health check is required.
+-- | The list of URLs to the HttpHealthCheck or HttpsHealthCheck resource for
+-- health checking this BackendService. Currently at most one health check
+-- can be specified, and a health check is required.
 bsHealthChecks :: Lens' BackendService [Text]
 bsHealthChecks
   = lens _bsHealthChecks
@@ -14838,8 +15968,8 @@ bsHealthChecks
       . _Default
       . _Coerce
 
--- | Deprecated in favor of port name. The TCP port to connect on the
--- backend. The default value is 80.
+-- | Deprecated in favor of portName. The TCP port to connect on the backend.
+-- The default value is 80.
 bsPort :: Lens' BackendService (Maybe Int32)
 bsPort
   = lens _bsPort (\ s a -> s{_bsPort = a}) .
@@ -14914,9 +16044,9 @@ imrTargetInstance
   = lens _imrTargetInstance
       (\ s a -> s{_imrTargetInstance = a})
 
--- | The URL of the destination zone to move the instance to. This can be a
--- full or partial URL. For example, the following are all valid URLs to a
--- zone: -
+-- | The URL of the destination zone to move the instance. This can be a full
+-- or partial URL. For example, the following are all valid URLs to a zone:
+-- -
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone
 -- - projects\/project\/zones\/zone - zones\/zone
 imrDestinationZone :: Lens' InstanceMoveRequest (Maybe Text)
@@ -15107,7 +16237,8 @@ hhcCreationTimestamp
   = lens _hhcCreationTimestamp
       (\ s a -> s{_hhcCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 hhcId :: Lens' HTTPSHealthCheck (Maybe Word64)
 hhcId
   = lens _hhcId (\ s a -> s{_hhcId = a}) .
@@ -15128,8 +16259,8 @@ hhcTimeoutSec
       (\ s a -> s{_hhcTimeoutSec = a})
       . mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 hhcDescription :: Lens' HTTPSHealthCheck (Maybe Text)
 hhcDescription
   = lens _hhcDescription
@@ -15311,7 +16442,11 @@ addressAggregatedList =
     , _addId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 addNextPageToken :: Lens' AddressAggregatedList (Maybe Text)
 addNextPageToken
   = lens _addNextPageToken
@@ -15382,17 +16517,20 @@ operationWarningsItem =
     , _owiMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]
 owiData
   = lens _owiData (\ s a -> s{_owiData = a}) . _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 owiCode :: Lens' OperationWarningsItem (Maybe OperationWarningsItemCode)
 owiCode = lens _owiCode (\ s a -> s{_owiCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 owiMessage :: Lens' OperationWarningsItem (Maybe Text)
 owiMessage
   = lens _owiMessage (\ s a -> s{_owiMessage = a})
@@ -15610,18 +16748,18 @@ insnCPUPlatform
   = lens _insnCPUPlatform
       (\ s a -> s{_insnCPUPlatform = a})
 
--- | [Output Only] Server defined URL for this resource.
+-- | [Output Only] Server-defined URL for this resource.
 insnSelfLink :: Lens' Instance (Maybe Text)
 insnSelfLink
   = lens _insnSelfLink (\ s a -> s{_insnSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
--- created. The name must be 1-63 characters long, and comply with RFC1035.
--- Specifically, the name must be 1-63 characters long and match the
--- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
--- character must be a lowercase letter, and all following characters must
--- be a dash, lowercase letter, or digit, except the last character, which
--- cannot be a dash.
+-- | The name of the resource, provided by the client when initially creating
+-- the resource. The resource name must be 1-63 characters long, and comply
+-- with RFC1035. Specifically, the name must be 1-63 characters long and
+-- match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the
+-- first character must be a lowercase letter, and all following characters
+-- must be a dash, lowercase letter, or digit, except the last character,
+-- which cannot be a dash.
 insnName :: Lens' Instance (Maybe Text)
 insnName = lens _insnName (\ s a -> s{_insnName = a})
 
@@ -15638,9 +16776,17 @@ insnCreationTimestamp
       (\ s a -> s{_insnCreationTimestamp = a})
 
 -- | Full or partial URL of the machine type resource to use for this
--- instance. This is provided by the client when the instance is created.
--- For example, the following is a valid partial url:
--- zones\/zone\/machineTypes\/machine-type
+-- instance, in the format: zones\/zone\/machineTypes\/machine-type. This
+-- is provided by the client when the instance is created. For example, the
+-- following is a valid partial url to a predefined machine type:
+-- zones\/us-central1-f\/machineTypes\/n1-standard-1 To create a custom
+-- machine type, provide a URL to a machine type in the following format,
+-- where CPUS is 1 or an even number up to 32 (2, 4, 6, ... 24, etc), and
+-- MEMORY is the total memory for this instance. Memory must be a multiple
+-- of 256 MB and must be supplied in MB (e.g. 5 GB of memory is 5120 MB):
+-- zones\/zone\/machineTypes\/custom-CPUS-MEMORY For example:
+-- zones\/us-central1-f\/machineTypes\/custom-4-5120 For a full list of
+-- restrictions, read the Specifications for custom machine types.
 insnMachineType :: Lens' Instance (Maybe Text)
 insnMachineType
   = lens _insnMachineType
@@ -15652,7 +16798,8 @@ insnMetadata :: Lens' Instance (Maybe Metadata)
 insnMetadata
   = lens _insnMetadata (\ s a -> s{_insnMetadata = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 insnId :: Lens' Instance (Maybe Word64)
 insnId
   = lens _insnId (\ s a -> s{_insnId = a}) .
@@ -15681,17 +16828,17 @@ insnCanIPForward
   = lens _insnCanIPForward
       (\ s a -> s{_insnCanIPForward = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 insnDescription :: Lens' Instance (Maybe Text)
 insnDescription
   = lens _insnDescription
       (\ s a -> s{_insnDescription = a})
 
--- | A list of tags to appy to this instance. Tags are used to identify valid
--- sources or targets for network firewalls and are specified by the client
--- during instance creation. The tags can be later modified by the setTags
--- method. Each tag within the list must comply with RFC1035.
+-- | A list of tags to apply to this instance. Tags are used to identify
+-- valid sources or targets for network firewalls and are specified by the
+-- client during instance creation. The tags can be later modified by the
+-- setTags method. Each tag within the list must comply with RFC1035.
 insnTags :: Lens' Instance (Maybe Tags)
 insnTags = lens _insnTags (\ s a -> s{_insnTags = a})
 
@@ -15775,9 +16922,14 @@ pathMatcher =
     , _pmDescription = Nothing
     }
 
--- | The URL to the BackendService resource. This will be used if none of the
--- \'pathRules\' defined by this PathMatcher is met by the URL\'s path
--- portion.
+-- | The full or partial URL to the BackendService resource. This will be
+-- used if none of the pathRules defined by this PathMatcher is matched by
+-- the URL\'s path portion. For example, the following are all valid URLs
+-- to a BackendService resource: -
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/global\/backendServices\/backendService
+-- -
+-- compute\/v1\/projects\/project\/global\/backendServices\/backendService
+-- - global\/backendServices\/backendService
 pmDefaultService :: Lens' PathMatcher (Maybe Text)
 pmDefaultService
   = lens _pmDefaultService
@@ -15794,7 +16946,8 @@ pmPathRules
       _Default
       . _Coerce
 
--- | An optional textual description of the resource.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 pmDescription :: Lens' PathMatcher (Maybe Text)
 pmDescription
   = lens _pmDescription

@@ -26,7 +26,7 @@
 -- Operations.ListOperations to check whether the cancellation succeeded or
 -- the operation completed despite cancellation.
 --
--- /See:/ < Genomics API Reference> for @genomics.operations.cancel@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.cancel@.
 module Network.Google.Resource.Genomics.Operations.Cancel
     (
     -- * REST Resource

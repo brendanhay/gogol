@@ -126,7 +126,7 @@ import           Network.Google.GamesConfiguration.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1configuration' of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
-gamesConfigurationService :: Service
+gamesConfigurationService :: ServiceConfig
 gamesConfigurationService
   = defaultService
       (ServiceId "gamesConfiguration:v1configuration")

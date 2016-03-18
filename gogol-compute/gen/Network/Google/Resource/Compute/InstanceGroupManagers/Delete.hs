@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified managed instance group and all of the instances in
--- that group.
+-- that group. Note that the instance group must not belong to a backend
+-- service. Read Deleting an instance group for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.delete@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
@@ -56,7 +57,8 @@ type InstanceGroupManagersDeleteResource =
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified managed instance group and all of the instances in
--- that group.
+-- that group. Note that the instance group must not belong to a backend
+-- service. Read Deleting an instance group for more information.
 --
 -- /See:/ 'instanceGroupManagersDelete' smart constructor.
 data InstanceGroupManagersDelete = InstanceGroupManagersDelete
@@ -86,7 +88,7 @@ instanceGroupManagersDelete pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ 
     , _igmdZone = pIgmdZone_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmdProject :: Lens' InstanceGroupManagersDelete Text
 igmdProject
   = lens _igmdProject (\ s a -> s{_igmdProject = a})

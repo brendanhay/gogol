@@ -23,7 +23,7 @@
 -- Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorscounts.query@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.urlcrawlerrorscounts.query@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
     (
     -- * REST Resource

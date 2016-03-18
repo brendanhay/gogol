@@ -40,12 +40,17 @@ library
         , Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.GetProjectConfig
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
         , Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
         , Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.SetProjectConfig
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.SignOutUser
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.SignupNewUser
         , Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
         , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyCustomToken
         , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
 
     other-modules:

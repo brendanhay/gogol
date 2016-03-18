@@ -131,6 +131,7 @@ module Network.Google.AndroidPublisher.Types
     , season
     , sStart
     , sEnd
+    , sProrations
 
     -- * PageInfo
     , PageInfo
@@ -236,6 +237,12 @@ module Network.Google.AndroidPublisher.Types
 
     -- * EditsImagesUploadImageType
     , EditsImagesUploadImageType (..)
+
+    -- * Prorate
+    , Prorate
+    , prorate
+    , pStart
+    , pDefaultPrice
 
     -- * InAppProductsListResponse
     , InAppProductsListResponse
@@ -378,7 +385,7 @@ import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Play Developer API. This contains the host and root path used as a starting point for constructing service requests.
-androidPublisherService :: Service
+androidPublisherService :: ServiceConfig
 androidPublisherService
   = defaultService (ServiceId "androidpublisher:v2")
       "www.googleapis.com"

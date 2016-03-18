@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a network resource in the specified project using the data
--- included in the request.
+-- Creates a network in the specified project using the data included in
+-- the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.insert@.
 module Network.Google.Resource.Compute.Networks.Insert
@@ -53,8 +53,8 @@ type NetworksInsertResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Network :> Post '[JSON] Operation
 
--- | Creates a network resource in the specified project using the data
--- included in the request.
+-- | Creates a network in the specified project using the data included in
+-- the request.
 --
 -- /See:/ 'networksInsert' smart constructor.
 data NetworksInsert = NetworksInsert

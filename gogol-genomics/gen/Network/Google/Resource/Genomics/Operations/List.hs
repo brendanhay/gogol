@@ -22,7 +22,7 @@
 --
 -- Lists operations that match the specified filter in the request.
 --
--- /See:/ < Genomics API Reference> for @genomics.operations.list@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.list@.
 module Network.Google.Resource.Genomics.Operations.List
     (
     -- * REST Resource

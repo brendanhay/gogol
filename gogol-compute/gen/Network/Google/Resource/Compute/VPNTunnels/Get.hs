@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified VpnTunnel resource.
+-- Returns the specified VpnTunnel resource. Get a list of available VPN
+-- tunnels by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.vpnTunnels.get@.
 module Network.Google.Resource.Compute.VPNTunnels.Get
@@ -54,7 +55,8 @@ type VPNTunnelsGetResource =
                    Capture "vpnTunnel" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnel
 
--- | Returns the specified VpnTunnel resource.
+-- | Returns the specified VpnTunnel resource. Get a list of available VPN
+-- tunnels by making a list() request.
 --
 -- /See:/ 'vpnTunnelsGet' smart constructor.
 data VPNTunnelsGet = VPNTunnelsGet
@@ -94,7 +96,7 @@ vtgVPNTunnel :: Lens' VPNTunnelsGet Text
 vtgVPNTunnel
   = lens _vtgVPNTunnel (\ s a -> s{_vtgVPNTunnel = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 vtgRegion :: Lens' VPNTunnelsGet Text
 vtgRegion
   = lens _vtgRegion (\ s a -> s{_vtgRegion = a})

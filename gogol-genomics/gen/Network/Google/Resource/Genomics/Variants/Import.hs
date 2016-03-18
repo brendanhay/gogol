@@ -21,19 +21,22 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates variant data by asynchronously importing the provided
--- information. The variants for import will be merged with any existing
--- variant that matches its reference sequence, start, end, reference
--- bases, and alternative bases. If no such variant exists, a new one will
--- be created. When variants are merged, the call information from the new
--- variant is added to the existing variant, and other fields (such as
--- key\/value pairs) are discarded. In particular, this means for merged
--- VCF variants that have conflicting INFO fields, some data will be
--- arbitrarily discarded. As a special case, for single-sample VCF files,
--- QUAL and FILTER fields will be moved to the call level; these are
--- sometimes interpreted in a call-specific context. Imported VCF headers
--- are appended to the metadata already in a variant set.
+-- information. For the definitions of variant sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The variants for import will be merged with any existing variant that
+-- matches its reference sequence, start, end, reference bases, and
+-- alternative bases. If no such variant exists, a new one will be created.
+-- When variants are merged, the call information from the new variant is
+-- added to the existing variant, and other fields (such as key\/value
+-- pairs) are discarded. In particular, this means for merged VCF variants
+-- that have conflicting INFO fields, some data will be arbitrarily
+-- discarded. As a special case, for single-sample VCF files, QUAL and
+-- FILTER fields will be moved to the call level; these are sometimes
+-- interpreted in a call-specific context. Imported VCF headers are
+-- appended to the metadata already in a variant set.
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.import@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.import@.
 module Network.Google.Resource.Genomics.Variants.Import
     (
     -- * REST Resource
@@ -74,17 +77,20 @@ type VariantsImportResource =
                            Post '[JSON] Operation
 
 -- | Creates variant data by asynchronously importing the provided
--- information. The variants for import will be merged with any existing
--- variant that matches its reference sequence, start, end, reference
--- bases, and alternative bases. If no such variant exists, a new one will
--- be created. When variants are merged, the call information from the new
--- variant is added to the existing variant, and other fields (such as
--- key\/value pairs) are discarded. In particular, this means for merged
--- VCF variants that have conflicting INFO fields, some data will be
--- arbitrarily discarded. As a special case, for single-sample VCF files,
--- QUAL and FILTER fields will be moved to the call level; these are
--- sometimes interpreted in a call-specific context. Imported VCF headers
--- are appended to the metadata already in a variant set.
+-- information. For the definitions of variant sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The variants for import will be merged with any existing variant that
+-- matches its reference sequence, start, end, reference bases, and
+-- alternative bases. If no such variant exists, a new one will be created.
+-- When variants are merged, the call information from the new variant is
+-- added to the existing variant, and other fields (such as key\/value
+-- pairs) are discarded. In particular, this means for merged VCF variants
+-- that have conflicting INFO fields, some data will be arbitrarily
+-- discarded. As a special case, for single-sample VCF files, QUAL and
+-- FILTER fields will be moved to the call level; these are sometimes
+-- interpreted in a call-specific context. Imported VCF headers are
+-- appended to the metadata already in a variant set.
 --
 -- /See:/ 'variantsImport' smart constructor.
 data VariantsImport = VariantsImport

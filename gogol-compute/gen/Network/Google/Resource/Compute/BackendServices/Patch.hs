@@ -20,8 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the entire content of the BackendService resource. This method
--- supports patch semantics.
+-- Updates the entire content of the BackendService resource. There are
+-- several restrictions and guidelines to keep in mind when updating a
+-- backend service. Read Restrictions and Guidelines for more information.
+-- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.patch@.
 module Network.Google.Resource.Compute.BackendServices.Patch
@@ -56,8 +58,10 @@ type BackendServicesPatchResource =
                      ReqBody '[JSON] BackendService :>
                        Patch '[JSON] Operation
 
--- | Update the entire content of the BackendService resource. This method
--- supports patch semantics.
+-- | Updates the entire content of the BackendService resource. There are
+-- several restrictions and guidelines to keep in mind when updating a
+-- backend service. Read Restrictions and Guidelines for more information.
+-- This method supports patch semantics.
 --
 -- /See:/ 'backendServicesPatch' smart constructor.
 data BackendServicesPatch = BackendServicesPatch
@@ -87,7 +91,7 @@ backendServicesPatch pBspProject_ pBspPayload_ pBspBackendService_ =
     , _bspBackendService = pBspBackendService_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 bspProject :: Lens' BackendServicesPatch Text
 bspProject
   = lens _bspProject (\ s a -> s{_bspProject = a})

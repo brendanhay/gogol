@@ -20,11 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new variant set. The provided variant set must have a valid
--- \`datasetId\` set - all other fields are optional. Note that the \`id\`
--- field will be ignored, as this is assigned by the server.
+-- Creates a new variant set. For the definitions of variant sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The provided variant set must have a valid \`datasetId\` set - all other
+-- fields are optional. Note that the \`id\` field will be ignored, as this
+-- is assigned by the server.
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.create@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.create@.
 module Network.Google.Resource.Genomics.VariantSets.Create
     (
     -- * REST Resource
@@ -63,9 +66,12 @@ type VariantSetsCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] VariantSet :> Post '[JSON] VariantSet
 
--- | Creates a new variant set. The provided variant set must have a valid
--- \`datasetId\` set - all other fields are optional. Note that the \`id\`
--- field will be ignored, as this is assigned by the server.
+-- | Creates a new variant set. For the definitions of variant sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The provided variant set must have a valid \`datasetId\` set - all other
+-- fields are optional. Note that the \`id\` field will be ignored, as this
+-- is assigned by the server.
 --
 -- /See:/ 'variantSetsCreate' smart constructor.
 data VariantSetsCreate = VariantSetsCreate

@@ -22,7 +22,7 @@
 --
 -- Retrieves information about a specific sitemap.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.get@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.get@.
 module Network.Google.Resource.Webmasters.Sitemaps.Get
     (
     -- * REST Resource

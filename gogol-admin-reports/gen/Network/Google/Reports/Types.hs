@@ -153,7 +153,7 @@ import           Network.Google.Reports.Types.Product
 import           Network.Google.Reports.Types.Sum
 
 -- | Default request referring to version 'reports_v1' of the Admin Reports API. This contains the host and root path used as a starting point for constructing service requests.
-reportsService :: Service
+reportsService :: ServiceConfig
 reportsService
   = defaultService (ServiceId "admin:reports_v1")
       "www.googleapis.com"

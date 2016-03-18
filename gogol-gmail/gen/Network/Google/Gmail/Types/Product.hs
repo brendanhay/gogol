@@ -21,6 +21,41 @@ import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'batchDeleteMessagesRequest' smart constructor.
+newtype BatchDeleteMessagesRequest = BatchDeleteMessagesRequest
+    { _bdmrIds :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchDeleteMessagesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bdmrIds'
+batchDeleteMessagesRequest
+    :: BatchDeleteMessagesRequest
+batchDeleteMessagesRequest =
+    BatchDeleteMessagesRequest
+    { _bdmrIds = Nothing
+    }
+
+-- | The IDs of the messages to delete.
+bdmrIds :: Lens' BatchDeleteMessagesRequest [Text]
+bdmrIds
+  = lens _bdmrIds (\ s a -> s{_bdmrIds = a}) . _Default
+      . _Coerce
+
+instance FromJSON BatchDeleteMessagesRequest where
+        parseJSON
+          = withObject "BatchDeleteMessagesRequest"
+              (\ o ->
+                 BatchDeleteMessagesRequest <$>
+                   (o .:? "ids" .!= mempty))
+
+instance ToJSON BatchDeleteMessagesRequest where
+        toJSON BatchDeleteMessagesRequest{..}
+          = object (catMaybes [("ids" .=) <$> _bdmrIds])
+
+--
 -- /See:/ 'modifyThreadRequest' smart constructor.
 data ModifyThreadRequest = ModifyThreadRequest
     { _mtrRemoveLabelIds :: !(Maybe [Text])
@@ -949,9 +984,9 @@ wrLabelFilterAction
 -- events to. This topic name **must** already exist in Cloud Pub\/Sub and
 -- you **must** have already granted gmail \"publish\" permission on it.
 -- For example, \"projects\/my-project-identifier\/topics\/my-topic-name\"
--- (using the new Cloud Pub\/Sub \"v1beta2\" topic naming format). Note
--- that the \"my-project-identifier\" portion must exactly match your
--- Google developer project id (the one executing this watch request).
+-- (using the Cloud Pub\/Sub \"v1\" topic naming format). Note that the
+-- \"my-project-identifier\" portion must exactly match your Google
+-- developer project id (the one executing this watch request).
 wrTopicName :: Lens' WatchRequest (Maybe Text)
 wrTopicName
   = lens _wrTopicName (\ s a -> s{_wrTopicName = a})

@@ -99,7 +99,7 @@ instanceGroupManagersSetInstanceTemplate pIgmsitProject_ pIgmsitInstanceGroupMan
     , _igmsitPayload = pIgmsitPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmsitProject :: Lens' InstanceGroupManagersSetInstanceTemplate Text
 igmsitProject
   = lens _igmsitProject

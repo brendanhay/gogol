@@ -96,7 +96,7 @@ aiPayload :: Lens' AddressesInsert Address
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 aiRegion :: Lens' AddressesInsert Text
 aiRegion = lens _aiRegion (\ s a -> s{_aiRegion = a})
 

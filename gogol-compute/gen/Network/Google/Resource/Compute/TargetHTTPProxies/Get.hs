@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetHttpProxy resource.
+-- Returns the specified TargetHttpProxy resource. Get a list of available
+-- target HTTP proxies by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpProxies.get@.
 module Network.Google.Resource.Compute.TargetHTTPProxies.Get
@@ -53,7 +54,8 @@ type TargetHTTPProxiesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] TargetHTTPProxy
 
--- | Returns the specified TargetHttpProxy resource.
+-- | Returns the specified TargetHttpProxy resource. Get a list of available
+-- target HTTP proxies by making a list() request.
 --
 -- /See:/ 'targetHTTPProxiesGet' smart constructor.
 data TargetHTTPProxiesGet = TargetHTTPProxiesGet
@@ -78,7 +80,7 @@ targetHTTPProxiesGet pThttppgProject_ pThttppgTargetHTTPProxy_ =
     , _thttppgTargetHTTPProxy = pThttppgTargetHTTPProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thttppgProject :: Lens' TargetHTTPProxiesGet Text
 thttppgProject
   = lens _thttppgProject

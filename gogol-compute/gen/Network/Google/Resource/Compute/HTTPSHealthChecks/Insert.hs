@@ -80,7 +80,7 @@ httpsHealthChecksInsert pHhciProject_ pHhciPayload_ =
     , _hhciPayload = pHhciPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 hhciProject :: Lens' HTTPSHealthChecksInsert Text
 hhciProject
   = lens _hhciProject (\ s a -> s{_hhciProject = a})

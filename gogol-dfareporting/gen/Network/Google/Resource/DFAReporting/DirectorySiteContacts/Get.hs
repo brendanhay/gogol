@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'DirectorySiteContactsGet' request conforms to.
 type DirectorySiteContactsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySiteContacts" :>

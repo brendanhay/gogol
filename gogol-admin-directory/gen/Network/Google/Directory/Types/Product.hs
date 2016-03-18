@@ -2198,6 +2198,116 @@ instance ToJSON Aliases where
                  [("etag" .=) <$> _aliEtag, Just ("kind" .= _aliKind),
                   ("aliases" .=) <$> _aliAliases])
 
+-- | JSON template for Calendar Resource object in Directory API.
+--
+-- /See:/ 'calendarResource' smart constructor.
+data CalendarResource = CalendarResource
+    { _crEtags               :: !(Maybe Text)
+    , _crResourceId          :: !(Maybe Text)
+    , _crResourceType        :: !(Maybe Text)
+    , _crResourceName        :: !(Maybe Text)
+    , _crKind                :: !Text
+    , _crResourceEmail       :: !(Maybe Text)
+    , _crResourceDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CalendarResource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crEtags'
+--
+-- * 'crResourceId'
+--
+-- * 'crResourceType'
+--
+-- * 'crResourceName'
+--
+-- * 'crKind'
+--
+-- * 'crResourceEmail'
+--
+-- * 'crResourceDescription'
+calendarResource
+    :: CalendarResource
+calendarResource =
+    CalendarResource
+    { _crEtags = Nothing
+    , _crResourceId = Nothing
+    , _crResourceType = Nothing
+    , _crResourceName = Nothing
+    , _crKind = "admin#directory#resources#calendars#CalendarResource"
+    , _crResourceEmail = Nothing
+    , _crResourceDescription = Nothing
+    }
+
+-- | ETag of the resource.
+crEtags :: Lens' CalendarResource (Maybe Text)
+crEtags = lens _crEtags (\ s a -> s{_crEtags = a})
+
+-- | The unique ID for the calendar resource.
+crResourceId :: Lens' CalendarResource (Maybe Text)
+crResourceId
+  = lens _crResourceId (\ s a -> s{_crResourceId = a})
+
+-- | The type of the calendar resource. Used for grouping resources in the
+-- calendar user interface.
+crResourceType :: Lens' CalendarResource (Maybe Text)
+crResourceType
+  = lens _crResourceType
+      (\ s a -> s{_crResourceType = a})
+
+-- | The name of the calendar resource. For example, Training Room 1A
+crResourceName :: Lens' CalendarResource (Maybe Text)
+crResourceName
+  = lens _crResourceName
+      (\ s a -> s{_crResourceName = a})
+
+-- | The type of the resource. For calendar resources, the value is
+-- admin#directory#resources#calendars#CalendarResource.
+crKind :: Lens' CalendarResource Text
+crKind = lens _crKind (\ s a -> s{_crKind = a})
+
+-- | The read-only email ID for the calendar resource. Generated as part of
+-- creating a new calendar resource.
+crResourceEmail :: Lens' CalendarResource (Maybe Text)
+crResourceEmail
+  = lens _crResourceEmail
+      (\ s a -> s{_crResourceEmail = a})
+
+-- | The brief description of the calendar resource.
+crResourceDescription :: Lens' CalendarResource (Maybe Text)
+crResourceDescription
+  = lens _crResourceDescription
+      (\ s a -> s{_crResourceDescription = a})
+
+instance FromJSON CalendarResource where
+        parseJSON
+          = withObject "CalendarResource"
+              (\ o ->
+                 CalendarResource <$>
+                   (o .:? "etags") <*> (o .:? "resourceId") <*>
+                     (o .:? "resourceType")
+                     <*> (o .:? "resourceName")
+                     <*>
+                     (o .:? "kind" .!=
+                        "admin#directory#resources#calendars#CalendarResource")
+                     <*> (o .:? "resourceEmail")
+                     <*> (o .:? "resourceDescription"))
+
+instance ToJSON CalendarResource where
+        toJSON CalendarResource{..}
+          = object
+              (catMaybes
+                 [("etags" .=) <$> _crEtags,
+                  ("resourceId" .=) <$> _crResourceId,
+                  ("resourceType" .=) <$> _crResourceType,
+                  ("resourceName" .=) <$> _crResourceName,
+                  Just ("kind" .= _crKind),
+                  ("resourceEmail" .=) <$> _crResourceEmail,
+                  ("resourceDescription" .=) <$>
+                    _crResourceDescription])
+
 -- | JSON request template to undelete a user in Directory API.
 --
 -- /See:/ 'userUndelete' smart constructor.
@@ -3400,7 +3510,7 @@ instance ToJSON User where
 
 -- | JSON template for role resource in Directory API.
 --
--- /See:/ 'role' smart constructor.
+-- /See:/ 'role'' smart constructor.
 data Role = Role
     { _rrEtag             :: !(Maybe Text)
     , _rrKind             :: !Text
@@ -3431,9 +3541,9 @@ data Role = Role
 -- * 'rrIsSuperAdminRole'
 --
 -- * 'rrRolePrivileges'
-role
+role'
     :: Role
-role =
+role' =
     Role
     { _rrEtag = Nothing
     , _rrKind = "admin#directory#role"
@@ -5077,6 +5187,80 @@ instance ToJSON Domains where
                   ("verified" .=) <$> _domVerified,
                   ("domainName" .=) <$> _domDomainName,
                   ("isPrimary" .=) <$> _domIsPrimary])
+
+-- | JSON template for Calendar Resource List Response object in Directory
+-- API.
+--
+-- /See:/ 'calendarResources' smart constructor.
+data CalendarResources = CalendarResources
+    { _crsEtag          :: !(Maybe Text)
+    , _crsNextPageToken :: !(Maybe Text)
+    , _crsKind          :: !Text
+    , _crsItems         :: !(Maybe [CalendarResource])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CalendarResources' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crsEtag'
+--
+-- * 'crsNextPageToken'
+--
+-- * 'crsKind'
+--
+-- * 'crsItems'
+calendarResources
+    :: CalendarResources
+calendarResources =
+    CalendarResources
+    { _crsEtag = Nothing
+    , _crsNextPageToken = Nothing
+    , _crsKind = "admin#directory#resources#calendars#calendarResourcesList"
+    , _crsItems = Nothing
+    }
+
+-- | ETag of the resource.
+crsEtag :: Lens' CalendarResources (Maybe Text)
+crsEtag = lens _crsEtag (\ s a -> s{_crsEtag = a})
+
+-- | The continuation token, used to page through large result sets. Provide
+-- this value in a subsequent request to return the next page of results.
+crsNextPageToken :: Lens' CalendarResources (Maybe Text)
+crsNextPageToken
+  = lens _crsNextPageToken
+      (\ s a -> s{_crsNextPageToken = a})
+
+-- | Identifies this as a collection of CalendarResources. This is always
+-- admin#directory#resources#calendars#calendarResourcesList.
+crsKind :: Lens' CalendarResources Text
+crsKind = lens _crsKind (\ s a -> s{_crsKind = a})
+
+-- | The CalendarResources in this page of results.
+crsItems :: Lens' CalendarResources [CalendarResource]
+crsItems
+  = lens _crsItems (\ s a -> s{_crsItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON CalendarResources where
+        parseJSON
+          = withObject "CalendarResources"
+              (\ o ->
+                 CalendarResources <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "admin#directory#resources#calendars#calendarResourcesList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON CalendarResources where
+        toJSON CalendarResources{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _crsEtag,
+                  ("nextPageToken" .=) <$> _crsNextPageToken,
+                  Just ("kind" .= _crsKind),
+                  ("items" .=) <$> _crsItems])
 
 -- | Template for notifications list response.
 --

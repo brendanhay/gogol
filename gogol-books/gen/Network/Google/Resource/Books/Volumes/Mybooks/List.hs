@@ -35,6 +35,7 @@ module Network.Google.Resource.Books.Volumes.Mybooks.List
     -- * Request Lenses
     , vmlProcessingState
     , vmlAcquireMethod
+    , vmlCountry
     , vmlLocale
     , vmlSource
     , vmlStartIndex
@@ -57,11 +58,12 @@ type VolumesMybooksListResource =
                QueryParams "acquireMethod"
                  VolumesMybooksListAcquireMethod
                  :>
-                 QueryParam "locale" Text :>
-                   QueryParam "source" Text :>
-                     QueryParam "startIndex" (Textual Word32) :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+                 QueryParam "country" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "source" Text :>
+                       QueryParam "startIndex" (Textual Word32) :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of books in My Library.
 --
@@ -69,6 +71,7 @@ type VolumesMybooksListResource =
 data VolumesMybooksList = VolumesMybooksList
     { _vmlProcessingState :: !(Maybe [VolumesMybooksListProcessingState])
     , _vmlAcquireMethod   :: !(Maybe [VolumesMybooksListAcquireMethod])
+    , _vmlCountry         :: !(Maybe Text)
     , _vmlLocale          :: !(Maybe Text)
     , _vmlSource          :: !(Maybe Text)
     , _vmlStartIndex      :: !(Maybe (Textual Word32))
@@ -83,6 +86,8 @@ data VolumesMybooksList = VolumesMybooksList
 --
 -- * 'vmlAcquireMethod'
 --
+-- * 'vmlCountry'
+--
 -- * 'vmlLocale'
 --
 -- * 'vmlSource'
@@ -96,6 +101,7 @@ volumesMybooksList =
     VolumesMybooksList
     { _vmlProcessingState = Nothing
     , _vmlAcquireMethod = Nothing
+    , _vmlCountry = Nothing
     , _vmlLocale = Nothing
     , _vmlSource = Nothing
     , _vmlStartIndex = Nothing
@@ -118,6 +124,11 @@ vmlAcquireMethod
       (\ s a -> s{_vmlAcquireMethod = a})
       . _Default
       . _Coerce
+
+-- | ISO-3166-1 code to override the IP-based location.
+vmlCountry :: Lens' VolumesMybooksList (Maybe Text)
+vmlCountry
+  = lens _vmlCountry (\ s a -> s{_vmlCountry = a})
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex:\'en_US\'. Used for
 -- generating recommendations.
@@ -149,6 +160,7 @@ instance GoogleRequest VolumesMybooksList where
         requestClient VolumesMybooksList{..}
           = go (_vmlProcessingState ^. _Default)
               (_vmlAcquireMethod ^. _Default)
+              _vmlCountry
               _vmlLocale
               _vmlSource
               _vmlStartIndex

@@ -21,9 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns permissions that a caller has on the specified resource. See
--- Testing Permissions for more information.
+-- Testing Permissions for more information. For the definitions of
+-- datasets and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.testIamPermissions@.
 module Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
     (
     -- * REST Resource
@@ -65,7 +67,9 @@ type DataSetsTestIAMPermissionsResource =
                            Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. See
--- Testing Permissions for more information.
+-- Testing Permissions for more information. For the definitions of
+-- datasets and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsTestIAMPermissions' smart constructor.
 data DataSetsTestIAMPermissions = DataSetsTestIAMPermissions

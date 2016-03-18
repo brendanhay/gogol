@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified route resource.
+-- Returns the specified Route resource. Get a list of available routes by
+-- making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.get@.
 module Network.Google.Resource.Compute.Routes.Get
@@ -52,7 +53,8 @@ type RoutesGetResource =
                  Capture "route" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Route
 
--- | Returns the specified route resource.
+-- | Returns the specified Route resource. Get a list of available routes by
+-- making a list() request.
 --
 -- /See:/ 'routesGet' smart constructor.
 data RoutesGet = RoutesGet
@@ -77,12 +79,12 @@ routesGet pRouProject_ pRouRoute_ =
     , _rouRoute = pRouRoute_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 rouProject :: Lens' RoutesGet Text
 rouProject
   = lens _rouProject (\ s a -> s{_rouProject = a})
 
--- | Name of the route resource to return.
+-- | Name of the Route resource to return.
 rouRoute :: Lens' RoutesGet Text
 rouRoute = lens _rouRoute (\ s a -> s{_rouRoute = a})
 

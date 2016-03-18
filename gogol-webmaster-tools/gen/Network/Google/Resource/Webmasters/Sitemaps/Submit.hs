@@ -22,7 +22,7 @@
 --
 -- Submits a sitemap for a site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.submit@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.submit@.
 module Network.Google.Resource.Webmasters.Sitemaps.Submit
     (
     -- * REST Resource

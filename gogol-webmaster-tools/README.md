@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Webmaster Tools.
+A client library for the Google Search Console.
 
 
 ## Contribute

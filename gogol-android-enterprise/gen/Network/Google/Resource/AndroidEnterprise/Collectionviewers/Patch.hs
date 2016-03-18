@@ -25,7 +25,7 @@
 -- only such users will see the collection. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.patch@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collectionviewers.patch@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
     (
     -- * REST Resource

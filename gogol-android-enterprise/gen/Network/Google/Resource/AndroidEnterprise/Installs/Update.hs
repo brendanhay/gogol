@@ -24,7 +24,7 @@
 -- is already installed then it is updated to the latest version if
 -- necessary.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.update@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.update@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Update
     (
     -- * REST Resource

@@ -62,9 +62,6 @@ module Network.Google.Plus.Types
     , peiValue
     , peiType
 
-    -- * MomentsListCollection
-    , MomentsListCollection (..)
-
     -- * CommentActorImage
     , CommentActorImage
     , commentActorImage
@@ -77,9 +74,6 @@ module Network.Google.Plus.Types
     , aoaitiiURL
     , aoaitiiWidth
     , aoaitiiType
-
-    -- * MomentsInsertCollection
-    , MomentsInsertCollection (..)
 
     -- * PlacePosition
     , PlacePosition
@@ -149,17 +143,6 @@ module Network.Google.Plus.Types
     , caDisplayName
     , caId
     , caVerification
-
-    -- * Moment
-    , Moment
-    , moment
-    , mKind
-    , mResult
-    , mStartDate
-    , mObject
-    , mId
-    , mType
-    , mTarget
 
     -- * ActivityObject
     , ActivityObject
@@ -251,65 +234,6 @@ module Network.Google.Plus.Types
     , ActivityActorVerification
     , activityActorVerification
     , aavAdHocVerified
-
-    -- * ItemScope
-    , ItemScope
-    , itemScope
-    , isGivenName
-    , isContentSize
-    , isThumbnail
-    , isTickerSymbol
-    , isHeight
-    , isThumbnailURL
-    , isImage
-    , isStreetAddress
-    , isWorstRating
-    , isLocation
-    , isAttendees
-    , isText
-    , isKind
-    , isLatitude
-    , isPostalCode
-    , isEndDate
-    , isAssociatedMedia
-    , isPlayerType
-    , isURL
-    , isWidth
-    , isCaption
-    , isAddress
-    , isAddressCountry
-    , isPostOfficeBoxNumber
-    , isAdditionalName
-    , isFamilyName
-    , isDateCreated
-    , isRatingValue
-    , isDatePublished
-    , isStartDate
-    , isGender
-    , isName
-    , isBestRating
-    , isAddressLocality
-    , isPartOfTVSeries
-    , isContentURL
-    , isByArtist
-    , isAbout
-    , isReviewRating
-    , isDateModified
-    , isAuthor
-    , isGeo
-    , isId
-    , isPerformers
-    , isAttendeeCount
-    , isInAlbum
-    , isEmbedURL
-    , isType
-    , isContributor
-    , isLongitude
-    , isDuration
-    , isAddressRegion
-    , isAudio
-    , isDescription
-    , isBirthDate
 
     -- * ActivityObjectActorClientSpecificActorInfo
     , ActivityObjectActorClientSpecificActorInfo
@@ -531,18 +455,6 @@ module Network.Google.Plus.Types
     , commentActorVerification
     , cavAdHocVerified
 
-    -- * MomentsFeed
-    , MomentsFeed
-    , momentsFeed
-    , mfEtag
-    , mfNextPageToken
-    , mfNextLink
-    , mfKind
-    , mfItems
-    , mfSelfLink
-    , mfUpdated
-    , mfTitle
-
     -- * ActivityActorName
     , ActivityActorName
     , activityActorName
@@ -555,7 +467,7 @@ import           Network.Google.Plus.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google+ API. This contains the host and root path used as a starting point for constructing service requests.
-plusService :: Service
+plusService :: ServiceConfig
 plusService
   = defaultService (ServiceId "plus:v1")
       "www.googleapis.com"
@@ -564,7 +476,7 @@ plusService
 userinfoProfileScope :: OAuthScope
 userinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
 
--- | Know your basic profile info and list of people in your circles.
+-- | Know the list of people in your circles, your age range, and language
 plusLoginScope :: OAuthScope
 plusLoginScope = "https://www.googleapis.com/auth/plus.login";
 

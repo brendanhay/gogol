@@ -78,7 +78,7 @@ import           Network.Google.DataTransfer.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'datatransfer_v1' of the Admin Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-dataTransferService :: Service
+dataTransferService :: ServiceConfig
 dataTransferService
   = defaultService (ServiceId "admin:datatransfer_v1")
       "www.googleapis.com"

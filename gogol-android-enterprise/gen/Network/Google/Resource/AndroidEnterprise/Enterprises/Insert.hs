@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Establishes the binding between the MDM and an enterprise. This is now
+-- Establishes the binding between the EMM and an enterprise. This is now
 -- deprecated; use enroll instead.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.insert@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.insert@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ type EnterprisesInsertResource =
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
 
--- | Establishes the binding between the MDM and an enterprise. This is now
+-- | Establishes the binding between the EMM and an enterprise. This is now
 -- deprecated; use enroll instead.
 --
 -- /See:/ 'enterprisesInsert' smart constructor.
@@ -77,7 +77,7 @@ enterprisesInsert pEiToken_ pEiPayload_ =
     , _eiPayload = pEiPayload_
     }
 
--- | The token provided by the enterprise to register the MDM.
+-- | The token provided by the enterprise to register the EMM.
 eiToken :: Lens' EnterprisesInsert Text
 eiToken = lens _eiToken (\ s a -> s{_eiToken = a})
 

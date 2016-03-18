@@ -14,8 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google Compute Engine Instance Group Updater API provides services
-    for updating groups of Compute Engine Instances.
+    Updates groups of Compute Engine instances.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

@@ -133,7 +133,7 @@ clPageToken :: Lens' CreativesList' (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
--- | When specified, only creatives having the given direct deals status are
+-- | When specified, only creatives having the given deals status are
 -- returned.
 clDealsStatusFilter :: Lens' CreativesList' (Maybe CreativesListDealsStatusFilter)
 clDealsStatusFilter

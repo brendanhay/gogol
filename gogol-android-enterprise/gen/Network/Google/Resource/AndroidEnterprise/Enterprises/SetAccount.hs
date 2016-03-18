@@ -23,7 +23,7 @@
 -- Set the account that will be used to authenticate to the API as the
 -- enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.setAccount@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.setAccount@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
     (
     -- * REST Resource

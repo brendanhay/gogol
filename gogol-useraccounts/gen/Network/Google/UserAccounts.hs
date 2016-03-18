@@ -13,7 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for the Google Cloud User Accounts service.
+-- Creates and manages users and groups for accessing Google Compute Engine
+-- virtual machines.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference>
 module Network.Google.UserAccounts
@@ -146,6 +147,7 @@ module Network.Google.UserAccounts
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 

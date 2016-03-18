@@ -385,8 +385,12 @@ data ThirdPartyTrackingURLThirdPartyURLType
       -- ^ @VIDEO_MUTE@
     | VideoPause
       -- ^ @VIDEO_PAUSE@
+    | VideoProgress
+      -- ^ @VIDEO_PROGRESS@
     | VideoRewind
       -- ^ @VIDEO_REWIND@
+    | VideoSkip
+      -- ^ @VIDEO_SKIP@
     | VideoStart
       -- ^ @VIDEO_START@
     | VideoStop
@@ -412,7 +416,9 @@ instance FromText ThirdPartyTrackingURLThirdPartyURLType where
         "VIDEO_MIDPOINT" -> Just VideoMidpoint
         "VIDEO_MUTE" -> Just VideoMute
         "VIDEO_PAUSE" -> Just VideoPause
+        "VIDEO_PROGRESS" -> Just VideoProgress
         "VIDEO_REWIND" -> Just VideoRewind
+        "VIDEO_SKIP" -> Just VideoSkip
         "VIDEO_START" -> Just VideoStart
         "VIDEO_STOP" -> Just VideoStop
         "VIDEO_THIRD_QUARTILE" -> Just VideoThirdQuartile
@@ -433,7 +439,9 @@ instance ToText ThirdPartyTrackingURLThirdPartyURLType where
         VideoMidpoint -> "VIDEO_MIDPOINT"
         VideoMute -> "VIDEO_MUTE"
         VideoPause -> "VIDEO_PAUSE"
+        VideoProgress -> "VIDEO_PROGRESS"
         VideoRewind -> "VIDEO_REWIND"
+        VideoSkip -> "VIDEO_SKIP"
         VideoStart -> "VIDEO_START"
         VideoStop -> "VIDEO_STOP"
         VideoThirdQuartile -> "VIDEO_THIRD_QUARTILE"
@@ -602,22 +610,24 @@ instance FromJSON DirectorySiteContactAssignmentVisibility where
 instance ToJSON DirectorySiteContactAssignmentVisibility where
     toJSON = toJSONText
 
--- | Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads,
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile
--- apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads
--- developed with the VAST standard. This field is required on insertion.
+-- | Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
+-- rendering on desktop, mobile devices or in mobile apps for regular or
+-- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
+-- allowed for new placement insertions. Instead, use DISPLAY or
+-- DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream
+-- video ads developed with the VAST standard.This field is required on
+-- insertion.
 data PlacementCompatibility
     = App
       -- ^ @APP@
     | AppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | Display
+      -- ^ @DISPLAY@
+    | DisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | InStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | Web
-      -- ^ @WEB@
-    | WebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable PlacementCompatibility
@@ -626,18 +636,18 @@ instance FromText PlacementCompatibility where
     fromText = \case
         "APP" -> Just App
         "APP_INTERSTITIAL" -> Just AppInterstitial
+        "DISPLAY" -> Just Display
+        "DISPLAY_INTERSTITIAL" -> Just DisplayInterstitial
         "IN_STREAM_VIDEO" -> Just InStreamVideo
-        "WEB" -> Just Web
-        "WEB_INTERSTITIAL" -> Just WebInterstitial
         _ -> Nothing
 
 instance ToText PlacementCompatibility where
     toText = \case
         App -> "APP"
         AppInterstitial -> "APP_INTERSTITIAL"
+        Display -> "DISPLAY"
+        DisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         InStreamVideo -> "IN_STREAM_VIDEO"
-        Web -> "WEB"
-        WebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON PlacementCompatibility where
     parseJSON = parseJSONText "PlacementCompatibility"
@@ -754,42 +764,42 @@ instance FromJSON ReportsListSortField where
 instance ToJSON ReportsListSortField where
     toJSON = toJSONText
 
--- | Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.
--- IN_STREAM_VIDEO refers to rendering in in-stream video ads developed
--- with the VAST standard.
+-- | Ad slot compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
+-- rendering either on desktop, mobile devices or in mobile apps for
+-- regular or interstitial ads respectively. APP and APP_INTERSTITIAL are
+-- for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in
+-- in-stream video ads developed with the VAST standard.
 data AdSlotCompatibility
-    = PlanningRenderingEnvironmentTypeApp
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_APP@
-    | PlanningRenderingEnvironmentTypeAppInterstitial
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL@
-    | PlanningRenderingEnvironmentTypeInStreamVideo
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO@
-    | PlanningRenderingEnvironmentTypeWeb
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB@
-    | PlanningRenderingEnvironmentTypeWebInterstitial
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL@
+    = ASCApp
+      -- ^ @APP@
+    | ASCAppInterstitial
+      -- ^ @APP_INTERSTITIAL@
+    | ASCDisplay
+      -- ^ @DISPLAY@
+    | ASCDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
+    | ASCInStreamVideo
+      -- ^ @IN_STREAM_VIDEO@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable AdSlotCompatibility
 
 instance FromText AdSlotCompatibility where
     fromText = \case
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP" -> Just PlanningRenderingEnvironmentTypeApp
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL" -> Just PlanningRenderingEnvironmentTypeAppInterstitial
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO" -> Just PlanningRenderingEnvironmentTypeInStreamVideo
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB" -> Just PlanningRenderingEnvironmentTypeWeb
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL" -> Just PlanningRenderingEnvironmentTypeWebInterstitial
+        "APP" -> Just ASCApp
+        "APP_INTERSTITIAL" -> Just ASCAppInterstitial
+        "DISPLAY" -> Just ASCDisplay
+        "DISPLAY_INTERSTITIAL" -> Just ASCDisplayInterstitial
+        "IN_STREAM_VIDEO" -> Just ASCInStreamVideo
         _ -> Nothing
 
 instance ToText AdSlotCompatibility where
     toText = \case
-        PlanningRenderingEnvironmentTypeApp -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP"
-        PlanningRenderingEnvironmentTypeAppInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL"
-        PlanningRenderingEnvironmentTypeInStreamVideo -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO"
-        PlanningRenderingEnvironmentTypeWeb -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB"
-        PlanningRenderingEnvironmentTypeWebInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL"
+        ASCApp -> "APP"
+        ASCAppInterstitial -> "APP_INTERSTITIAL"
+        ASCDisplay -> "DISPLAY"
+        ASCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
+        ASCInStreamVideo -> "IN_STREAM_VIDEO"
 
 instance FromJSON AdSlotCompatibility where
     parseJSON = parseJSONText "AdSlotCompatibility"
@@ -1138,7 +1148,7 @@ instance ToJSON CreativeAssetMetadataDetectedFeaturesItem where
     toJSON = toJSONText
 
 -- | Select default ads with the specified compatibility. Applicable when
--- type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to
+-- type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to
 -- rendering either on desktop or on mobile devices for regular or
 -- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
 -- rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an
@@ -1148,12 +1158,12 @@ data AdsListCompatibility
       -- ^ @APP@
     | ALCAppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | ALCDisplay
+      -- ^ @DISPLAY@
+    | ALCDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | ALCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | ALCWeb
-      -- ^ @WEB@
-    | ALCWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable AdsListCompatibility
@@ -1162,18 +1172,18 @@ instance FromText AdsListCompatibility where
     fromText = \case
         "APP" -> Just ALCApp
         "APP_INTERSTITIAL" -> Just ALCAppInterstitial
+        "DISPLAY" -> Just ALCDisplay
+        "DISPLAY_INTERSTITIAL" -> Just ALCDisplayInterstitial
         "IN_STREAM_VIDEO" -> Just ALCInStreamVideo
-        "WEB" -> Just ALCWeb
-        "WEB_INTERSTITIAL" -> Just ALCWebInterstitial
         _ -> Nothing
 
 instance ToText AdsListCompatibility where
     toText = \case
         ALCApp -> "APP"
         ALCAppInterstitial -> "APP_INTERSTITIAL"
+        ALCDisplay -> "DISPLAY"
+        ALCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         ALCInStreamVideo -> "IN_STREAM_VIDEO"
-        ALCWeb -> "WEB"
-        ALCWebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON AdsListCompatibility where
     parseJSON = parseJSONText "AdsListCompatibility"
@@ -1311,6 +1321,8 @@ data CreativeCustomEventArtworkType
       -- ^ @ARTWORK_TYPE_FLASH@
     | ArtworkTypeHTML5
       -- ^ @ARTWORK_TYPE_HTML5@
+    | ArtworkTypeImage
+      -- ^ @ARTWORK_TYPE_IMAGE@
     | ArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -1321,6 +1333,7 @@ instance FromText CreativeCustomEventArtworkType where
     fromText = \case
         "ARTWORK_TYPE_FLASH" -> Just ArtworkTypeFlash
         "ARTWORK_TYPE_HTML5" -> Just ArtworkTypeHTML5
+        "ARTWORK_TYPE_IMAGE" -> Just ArtworkTypeImage
         "ARTWORK_TYPE_MIXED" -> Just ArtworkTypeMixed
         _ -> Nothing
 
@@ -1328,6 +1341,7 @@ instance ToText CreativeCustomEventArtworkType where
     toText = \case
         ArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         ArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
+        ArtworkTypeImage -> "ARTWORK_TYPE_IMAGE"
         ArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
 
 instance FromJSON CreativeCustomEventArtworkType where
@@ -1374,6 +1388,8 @@ data CreativeAssetArtworkType
       -- ^ @ARTWORK_TYPE_FLASH@
     | CAATArtworkTypeHTML5
       -- ^ @ARTWORK_TYPE_HTML5@
+    | CAATArtworkTypeImage
+      -- ^ @ARTWORK_TYPE_IMAGE@
     | CAATArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -1384,6 +1400,7 @@ instance FromText CreativeAssetArtworkType where
     fromText = \case
         "ARTWORK_TYPE_FLASH" -> Just CAATArtworkTypeFlash
         "ARTWORK_TYPE_HTML5" -> Just CAATArtworkTypeHTML5
+        "ARTWORK_TYPE_IMAGE" -> Just CAATArtworkTypeImage
         "ARTWORK_TYPE_MIXED" -> Just CAATArtworkTypeMixed
         _ -> Nothing
 
@@ -1391,6 +1408,7 @@ instance ToText CreativeAssetArtworkType where
     toText = \case
         CAATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         CAATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
+        CAATArtworkTypeImage -> "ARTWORK_TYPE_IMAGE"
         CAATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
 
 instance FromJSON CreativeAssetArtworkType where
@@ -1595,36 +1613,60 @@ instance ToJSON CreativeAssetDurationType where
 
 -- | Product from which this targetable remarketing list was originated.
 data TargetableRemarketingListListSource
-    = RemarketingListSourceDBm
+    = RemarketingListSourceAdx
+      -- ^ @REMARKETING_LIST_SOURCE_ADX@
+    | RemarketingListSourceDBm
       -- ^ @REMARKETING_LIST_SOURCE_DBM@
     | RemarketingListSourceDfa
       -- ^ @REMARKETING_LIST_SOURCE_DFA@
+    | RemarketingListSourceDfp
+      -- ^ @REMARKETING_LIST_SOURCE_DFP@
     | RemarketingListSourceDmp
       -- ^ @REMARKETING_LIST_SOURCE_DMP@
     | RemarketingListSourceGa
       -- ^ @REMARKETING_LIST_SOURCE_GA@
+    | RemarketingListSourceGplus
+      -- ^ @REMARKETING_LIST_SOURCE_GPLUS@
     | RemarketingListSourceOther
       -- ^ @REMARKETING_LIST_SOURCE_OTHER@
+    | RemarketingListSourcePlayStore
+      -- ^ @REMARKETING_LIST_SOURCE_PLAY_STORE@
+    | RemarketingListSourceXfp
+      -- ^ @REMARKETING_LIST_SOURCE_XFP@
+    | RemarketingListSourceYouTube
+      -- ^ @REMARKETING_LIST_SOURCE_YOUTUBE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable TargetableRemarketingListListSource
 
 instance FromText TargetableRemarketingListListSource where
     fromText = \case
+        "REMARKETING_LIST_SOURCE_ADX" -> Just RemarketingListSourceAdx
         "REMARKETING_LIST_SOURCE_DBM" -> Just RemarketingListSourceDBm
         "REMARKETING_LIST_SOURCE_DFA" -> Just RemarketingListSourceDfa
+        "REMARKETING_LIST_SOURCE_DFP" -> Just RemarketingListSourceDfp
         "REMARKETING_LIST_SOURCE_DMP" -> Just RemarketingListSourceDmp
         "REMARKETING_LIST_SOURCE_GA" -> Just RemarketingListSourceGa
+        "REMARKETING_LIST_SOURCE_GPLUS" -> Just RemarketingListSourceGplus
         "REMARKETING_LIST_SOURCE_OTHER" -> Just RemarketingListSourceOther
+        "REMARKETING_LIST_SOURCE_PLAY_STORE" -> Just RemarketingListSourcePlayStore
+        "REMARKETING_LIST_SOURCE_XFP" -> Just RemarketingListSourceXfp
+        "REMARKETING_LIST_SOURCE_YOUTUBE" -> Just RemarketingListSourceYouTube
         _ -> Nothing
 
 instance ToText TargetableRemarketingListListSource where
     toText = \case
+        RemarketingListSourceAdx -> "REMARKETING_LIST_SOURCE_ADX"
         RemarketingListSourceDBm -> "REMARKETING_LIST_SOURCE_DBM"
         RemarketingListSourceDfa -> "REMARKETING_LIST_SOURCE_DFA"
+        RemarketingListSourceDfp -> "REMARKETING_LIST_SOURCE_DFP"
         RemarketingListSourceDmp -> "REMARKETING_LIST_SOURCE_DMP"
         RemarketingListSourceGa -> "REMARKETING_LIST_SOURCE_GA"
+        RemarketingListSourceGplus -> "REMARKETING_LIST_SOURCE_GPLUS"
         RemarketingListSourceOther -> "REMARKETING_LIST_SOURCE_OTHER"
+        RemarketingListSourcePlayStore -> "REMARKETING_LIST_SOURCE_PLAY_STORE"
+        RemarketingListSourceXfp -> "REMARKETING_LIST_SOURCE_XFP"
+        RemarketingListSourceYouTube -> "REMARKETING_LIST_SOURCE_YOUTUBE"
 
 instance FromJSON TargetableRemarketingListListSource where
     parseJSON = parseJSONText "TargetableRemarketingListListSource"
@@ -2176,8 +2218,8 @@ instance ToJSON UserRolesListSortOrder where
     toJSON = toJSONText
 
 -- | Select only placements that are associated with these compatibilities.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads respectively. APP and
+-- DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or
+-- on mobile devices for regular or interstitial ads respectively. APP and
 -- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
 -- to rendering in in-stream video ads developed with the VAST standard.
 data PlacementsListCompatibilities
@@ -2185,12 +2227,12 @@ data PlacementsListCompatibilities
       -- ^ @APP@
     | PLCAppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | PLCDisplay
+      -- ^ @DISPLAY@
+    | PLCDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | PLCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | PLCWeb
-      -- ^ @WEB@
-    | PLCWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable PlacementsListCompatibilities
@@ -2199,18 +2241,18 @@ instance FromText PlacementsListCompatibilities where
     fromText = \case
         "APP" -> Just PLCApp
         "APP_INTERSTITIAL" -> Just PLCAppInterstitial
+        "DISPLAY" -> Just PLCDisplay
+        "DISPLAY_INTERSTITIAL" -> Just PLCDisplayInterstitial
         "IN_STREAM_VIDEO" -> Just PLCInStreamVideo
-        "WEB" -> Just PLCWeb
-        "WEB_INTERSTITIAL" -> Just PLCWebInterstitial
         _ -> Nothing
 
 instance ToText PlacementsListCompatibilities where
     toText = \case
         PLCApp -> "APP"
         PLCAppInterstitial -> "APP_INTERSTITIAL"
+        PLCDisplay -> "DISPLAY"
+        PLCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         PLCInStreamVideo -> "IN_STREAM_VIDEO"
-        PLCWeb -> "WEB"
-        PLCWebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON PlacementsListCompatibilities where
     parseJSON = parseJSONText "PlacementsListCompatibilities"
@@ -2250,12 +2292,12 @@ data CreativeCompatibilityItem
       -- ^ @APP@
     | CCIAppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | CCIDisplay
+      -- ^ @DISPLAY@
+    | CCIDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | CCIInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | CCIWeb
-      -- ^ @WEB@
-    | CCIWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable CreativeCompatibilityItem
@@ -2264,18 +2306,18 @@ instance FromText CreativeCompatibilityItem where
     fromText = \case
         "APP" -> Just CCIApp
         "APP_INTERSTITIAL" -> Just CCIAppInterstitial
+        "DISPLAY" -> Just CCIDisplay
+        "DISPLAY_INTERSTITIAL" -> Just CCIDisplayInterstitial
         "IN_STREAM_VIDEO" -> Just CCIInStreamVideo
-        "WEB" -> Just CCIWeb
-        "WEB_INTERSTITIAL" -> Just CCIWebInterstitial
         _ -> Nothing
 
 instance ToText CreativeCompatibilityItem where
     toText = \case
         CCIApp -> "APP"
         CCIAppInterstitial -> "APP_INTERSTITIAL"
+        CCIDisplay -> "DISPLAY"
+        CCIDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         CCIInStreamVideo -> "IN_STREAM_VIDEO"
-        CCIWeb -> "WEB"
-        CCIWebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON CreativeCompatibilityItem where
     parseJSON = parseJSONText "CreativeCompatibilityItem"
@@ -2588,6 +2630,39 @@ instance FromJSON FloodlightActivitiesListFloodlightActivityGroupType where
 instance ToJSON FloodlightActivitiesListFloodlightActivityGroupType where
     toJSON = toJSONText
 
+-- | Source application where creative was authored. Presently, only DBM
+-- authored creatives will have this field set. Applicable to all creative
+-- types.
+data CreativeAuthoringSource
+    = CreativeAuthoringSourceDBm
+      -- ^ @CREATIVE_AUTHORING_SOURCE_DBM@
+    | CreativeAuthoringSourceDcm
+      -- ^ @CREATIVE_AUTHORING_SOURCE_DCM@
+    | CreativeAuthoringSourceStudio
+      -- ^ @CREATIVE_AUTHORING_SOURCE_STUDIO@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CreativeAuthoringSource
+
+instance FromText CreativeAuthoringSource where
+    fromText = \case
+        "CREATIVE_AUTHORING_SOURCE_DBM" -> Just CreativeAuthoringSourceDBm
+        "CREATIVE_AUTHORING_SOURCE_DCM" -> Just CreativeAuthoringSourceDcm
+        "CREATIVE_AUTHORING_SOURCE_STUDIO" -> Just CreativeAuthoringSourceStudio
+        _ -> Nothing
+
+instance ToText CreativeAuthoringSource where
+    toText = \case
+        CreativeAuthoringSourceDBm -> "CREATIVE_AUTHORING_SOURCE_DBM"
+        CreativeAuthoringSourceDcm -> "CREATIVE_AUTHORING_SOURCE_DCM"
+        CreativeAuthoringSourceStudio -> "CREATIVE_AUTHORING_SOURCE_STUDIO"
+
+instance FromJSON CreativeAuthoringSource where
+    parseJSON = parseJSONText "CreativeAuthoringSource"
+
+instance ToJSON CreativeAuthoringSource where
+    toJSON = toJSONText
+
 data FloodlightConfigurationStandardVariableTypesItem
     = Num
       -- ^ @NUM@
@@ -2764,6 +2839,33 @@ instance FromJSON CreativesListSortOrder where
     parseJSON = parseJSONText "CreativesListSortOrder"
 
 instance ToJSON CreativesListSortOrder where
+    toJSON = toJSONText
+
+-- | Select only inventory items with this type.
+data InventoryItemsListType
+    = PlanningPlacementTypeCredit
+      -- ^ @PLANNING_PLACEMENT_TYPE_CREDIT@
+    | PlanningPlacementTypeRegular
+      -- ^ @PLANNING_PLACEMENT_TYPE_REGULAR@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable InventoryItemsListType
+
+instance FromText InventoryItemsListType where
+    fromText = \case
+        "PLANNING_PLACEMENT_TYPE_CREDIT" -> Just PlanningPlacementTypeCredit
+        "PLANNING_PLACEMENT_TYPE_REGULAR" -> Just PlanningPlacementTypeRegular
+        _ -> Nothing
+
+instance ToText InventoryItemsListType where
+    toText = \case
+        PlanningPlacementTypeCredit -> "PLANNING_PLACEMENT_TYPE_CREDIT"
+        PlanningPlacementTypeRegular -> "PLANNING_PLACEMENT_TYPE_REGULAR"
+
+instance FromJSON InventoryItemsListType where
+    parseJSON = parseJSONText "InventoryItemsListType"
+
+instance ToJSON InventoryItemsListType where
     toJSON = toJSONText
 
 -- | Popup window position either centered or at specific coordinate.
@@ -2986,36 +3088,60 @@ instance ToJSON AccountUserProFilesListSortOrder where
 
 -- | Product from which this remarketing list was originated.
 data RemarketingListListSource
-    = RLLSRemarketingListSourceDBm
+    = RLLSRemarketingListSourceAdx
+      -- ^ @REMARKETING_LIST_SOURCE_ADX@
+    | RLLSRemarketingListSourceDBm
       -- ^ @REMARKETING_LIST_SOURCE_DBM@
     | RLLSRemarketingListSourceDfa
       -- ^ @REMARKETING_LIST_SOURCE_DFA@
+    | RLLSRemarketingListSourceDfp
+      -- ^ @REMARKETING_LIST_SOURCE_DFP@
     | RLLSRemarketingListSourceDmp
       -- ^ @REMARKETING_LIST_SOURCE_DMP@
     | RLLSRemarketingListSourceGa
       -- ^ @REMARKETING_LIST_SOURCE_GA@
+    | RLLSRemarketingListSourceGplus
+      -- ^ @REMARKETING_LIST_SOURCE_GPLUS@
     | RLLSRemarketingListSourceOther
       -- ^ @REMARKETING_LIST_SOURCE_OTHER@
+    | RLLSRemarketingListSourcePlayStore
+      -- ^ @REMARKETING_LIST_SOURCE_PLAY_STORE@
+    | RLLSRemarketingListSourceXfp
+      -- ^ @REMARKETING_LIST_SOURCE_XFP@
+    | RLLSRemarketingListSourceYouTube
+      -- ^ @REMARKETING_LIST_SOURCE_YOUTUBE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable RemarketingListListSource
 
 instance FromText RemarketingListListSource where
     fromText = \case
+        "REMARKETING_LIST_SOURCE_ADX" -> Just RLLSRemarketingListSourceAdx
         "REMARKETING_LIST_SOURCE_DBM" -> Just RLLSRemarketingListSourceDBm
         "REMARKETING_LIST_SOURCE_DFA" -> Just RLLSRemarketingListSourceDfa
+        "REMARKETING_LIST_SOURCE_DFP" -> Just RLLSRemarketingListSourceDfp
         "REMARKETING_LIST_SOURCE_DMP" -> Just RLLSRemarketingListSourceDmp
         "REMARKETING_LIST_SOURCE_GA" -> Just RLLSRemarketingListSourceGa
+        "REMARKETING_LIST_SOURCE_GPLUS" -> Just RLLSRemarketingListSourceGplus
         "REMARKETING_LIST_SOURCE_OTHER" -> Just RLLSRemarketingListSourceOther
+        "REMARKETING_LIST_SOURCE_PLAY_STORE" -> Just RLLSRemarketingListSourcePlayStore
+        "REMARKETING_LIST_SOURCE_XFP" -> Just RLLSRemarketingListSourceXfp
+        "REMARKETING_LIST_SOURCE_YOUTUBE" -> Just RLLSRemarketingListSourceYouTube
         _ -> Nothing
 
 instance ToText RemarketingListListSource where
     toText = \case
+        RLLSRemarketingListSourceAdx -> "REMARKETING_LIST_SOURCE_ADX"
         RLLSRemarketingListSourceDBm -> "REMARKETING_LIST_SOURCE_DBM"
         RLLSRemarketingListSourceDfa -> "REMARKETING_LIST_SOURCE_DFA"
+        RLLSRemarketingListSourceDfp -> "REMARKETING_LIST_SOURCE_DFP"
         RLLSRemarketingListSourceDmp -> "REMARKETING_LIST_SOURCE_DMP"
         RLLSRemarketingListSourceGa -> "REMARKETING_LIST_SOURCE_GA"
+        RLLSRemarketingListSourceGplus -> "REMARKETING_LIST_SOURCE_GPLUS"
         RLLSRemarketingListSourceOther -> "REMARKETING_LIST_SOURCE_OTHER"
+        RLLSRemarketingListSourcePlayStore -> "REMARKETING_LIST_SOURCE_PLAY_STORE"
+        RLLSRemarketingListSourceXfp -> "REMARKETING_LIST_SOURCE_XFP"
+        RLLSRemarketingListSourceYouTube -> "REMARKETING_LIST_SOURCE_YOUTUBE"
 
 instance FromJSON RemarketingListListSource where
     parseJSON = parseJSONText "RemarketingListListSource"
@@ -3562,6 +3688,8 @@ data CreativesListTypes
       -- ^ @IMAGE@
     | InstreamVideo
       -- ^ @INSTREAM_VIDEO@
+    | InstreamVideoRedirect
+      -- ^ @INSTREAM_VIDEO_REDIRECT@
     | InternalRedirect
       -- ^ @INTERNAL_REDIRECT@
     | InterstitialInternalRedirect
@@ -3586,8 +3714,6 @@ data CreativesListTypes
       -- ^ @RICH_MEDIA_PEEL_DOWN@
     | TrackingText
       -- ^ @TRACKING_TEXT@
-    | VastRedirect
-      -- ^ @VAST_REDIRECT@
     | VpaidLinear
       -- ^ @VPAID_LINEAR@
     | VpaidNonLinear
@@ -3607,6 +3733,7 @@ instance FromText CreativesListTypes where
         "HTML5_BANNER" -> Just HTML5Banner
         "IMAGE" -> Just Image
         "INSTREAM_VIDEO" -> Just InstreamVideo
+        "INSTREAM_VIDEO_REDIRECT" -> Just InstreamVideoRedirect
         "INTERNAL_REDIRECT" -> Just InternalRedirect
         "INTERSTITIAL_INTERNAL_REDIRECT" -> Just InterstitialInternalRedirect
         "REDIRECT" -> Just Redirect
@@ -3619,7 +3746,6 @@ instance FromText CreativesListTypes where
         "RICH_MEDIA_MULTI_FLOATING" -> Just RichMediaMultiFloating
         "RICH_MEDIA_PEEL_DOWN" -> Just RichMediaPeelDown
         "TRACKING_TEXT" -> Just TrackingText
-        "VAST_REDIRECT" -> Just VastRedirect
         "VPAID_LINEAR" -> Just VpaidLinear
         "VPAID_NON_LINEAR" -> Just VpaidNonLinear
         _ -> Nothing
@@ -3635,6 +3761,7 @@ instance ToText CreativesListTypes where
         HTML5Banner -> "HTML5_BANNER"
         Image -> "IMAGE"
         InstreamVideo -> "INSTREAM_VIDEO"
+        InstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         InternalRedirect -> "INTERNAL_REDIRECT"
         InterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
         Redirect -> "REDIRECT"
@@ -3647,7 +3774,6 @@ instance ToText CreativesListTypes where
         RichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
         RichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
         TrackingText -> "TRACKING_TEXT"
-        VastRedirect -> "VAST_REDIRECT"
         VpaidLinear -> "VPAID_LINEAR"
         VpaidNonLinear -> "VPAID_NON_LINEAR"
 
@@ -4018,6 +4144,8 @@ data CreativeOptimizationConfigurationOptimizationModel
       -- ^ @POST_CLICK_AND_IMPRESSION@
     | PostImpression
       -- ^ @POST_IMPRESSION@
+    | VideoCompletion
+      -- ^ @VIDEO_COMPLETION@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable CreativeOptimizationConfigurationOptimizationModel
@@ -4028,6 +4156,7 @@ instance FromText CreativeOptimizationConfigurationOptimizationModel where
         "POST_CLICK" -> Just PostClick
         "POST_CLICK_AND_IMPRESSION" -> Just PostClickAndImpression
         "POST_IMPRESSION" -> Just PostImpression
+        "VIDEO_COMPLETION" -> Just VideoCompletion
         _ -> Nothing
 
 instance ToText CreativeOptimizationConfigurationOptimizationModel where
@@ -4036,6 +4165,7 @@ instance ToText CreativeOptimizationConfigurationOptimizationModel where
         PostClick -> "POST_CLICK"
         PostClickAndImpression -> "POST_CLICK_AND_IMPRESSION"
         PostImpression -> "POST_IMPRESSION"
+        VideoCompletion -> "VIDEO_COMPLETION"
 
 instance FromJSON CreativeOptimizationConfigurationOptimizationModel where
     parseJSON = parseJSONText "CreativeOptimizationConfigurationOptimizationModel"
@@ -4273,6 +4403,33 @@ instance FromJSON EventTagsListSortField where
 instance ToJSON EventTagsListSortField where
     toJSON = toJSONText
 
+-- | Type of inventory item.
+data InventoryItemType
+    = IITPlanningPlacementTypeCredit
+      -- ^ @PLANNING_PLACEMENT_TYPE_CREDIT@
+    | IITPlanningPlacementTypeRegular
+      -- ^ @PLANNING_PLACEMENT_TYPE_REGULAR@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable InventoryItemType
+
+instance FromText InventoryItemType where
+    fromText = \case
+        "PLANNING_PLACEMENT_TYPE_CREDIT" -> Just IITPlanningPlacementTypeCredit
+        "PLANNING_PLACEMENT_TYPE_REGULAR" -> Just IITPlanningPlacementTypeRegular
+        _ -> Nothing
+
+instance ToText InventoryItemType where
+    toText = \case
+        IITPlanningPlacementTypeCredit -> "PLANNING_PLACEMENT_TYPE_CREDIT"
+        IITPlanningPlacementTypeRegular -> "PLANNING_PLACEMENT_TYPE_REGULAR"
+
+instance FromJSON InventoryItemType where
+    parseJSON = parseJSONText "InventoryItemType"
+
+instance ToJSON InventoryItemType where
+    toJSON = toJSONText
+
 -- | Offset top unit for an asset. This is a read-only field if the asset
 -- displayType is ASSET_DISPLAY_TYPE_OVERLAY. Applicable to the following
 -- creative types: all RICH_MEDIA.
@@ -4415,6 +4572,8 @@ data AdsListCreativeType
       -- ^ @IMAGE@
     | ALCTInstreamVideo
       -- ^ @INSTREAM_VIDEO@
+    | ALCTInstreamVideoRedirect
+      -- ^ @INSTREAM_VIDEO_REDIRECT@
     | ALCTInternalRedirect
       -- ^ @INTERNAL_REDIRECT@
     | ALCTInterstitialInternalRedirect
@@ -4439,8 +4598,6 @@ data AdsListCreativeType
       -- ^ @RICH_MEDIA_PEEL_DOWN@
     | ALCTTrackingText
       -- ^ @TRACKING_TEXT@
-    | ALCTVastRedirect
-      -- ^ @VAST_REDIRECT@
     | ALCTVpaidLinear
       -- ^ @VPAID_LINEAR@
     | ALCTVpaidNonLinear
@@ -4460,6 +4617,7 @@ instance FromText AdsListCreativeType where
         "HTML5_BANNER" -> Just ALCTHTML5Banner
         "IMAGE" -> Just ALCTImage
         "INSTREAM_VIDEO" -> Just ALCTInstreamVideo
+        "INSTREAM_VIDEO_REDIRECT" -> Just ALCTInstreamVideoRedirect
         "INTERNAL_REDIRECT" -> Just ALCTInternalRedirect
         "INTERSTITIAL_INTERNAL_REDIRECT" -> Just ALCTInterstitialInternalRedirect
         "REDIRECT" -> Just ALCTRedirect
@@ -4472,7 +4630,6 @@ instance FromText AdsListCreativeType where
         "RICH_MEDIA_MULTI_FLOATING" -> Just ALCTRichMediaMultiFloating
         "RICH_MEDIA_PEEL_DOWN" -> Just ALCTRichMediaPeelDown
         "TRACKING_TEXT" -> Just ALCTTrackingText
-        "VAST_REDIRECT" -> Just ALCTVastRedirect
         "VPAID_LINEAR" -> Just ALCTVpaidLinear
         "VPAID_NON_LINEAR" -> Just ALCTVpaidNonLinear
         _ -> Nothing
@@ -4488,6 +4645,7 @@ instance ToText AdsListCreativeType where
         ALCTHTML5Banner -> "HTML5_BANNER"
         ALCTImage -> "IMAGE"
         ALCTInstreamVideo -> "INSTREAM_VIDEO"
+        ALCTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         ALCTInternalRedirect -> "INTERNAL_REDIRECT"
         ALCTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
         ALCTRedirect -> "REDIRECT"
@@ -4500,7 +4658,6 @@ instance ToText AdsListCreativeType where
         ALCTRichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
         ALCTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
         ALCTTrackingText -> "TRACKING_TEXT"
-        ALCTVastRedirect -> "VAST_REDIRECT"
         ALCTVpaidLinear -> "VPAID_LINEAR"
         ALCTVpaidNonLinear -> "VPAID_NON_LINEAR"
 
@@ -5541,6 +5698,8 @@ data CreativeArtworkType
       -- ^ @ARTWORK_TYPE_FLASH@
     | CATArtworkTypeHTML5
       -- ^ @ARTWORK_TYPE_HTML5@
+    | CATArtworkTypeImage
+      -- ^ @ARTWORK_TYPE_IMAGE@
     | CATArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -5551,6 +5710,7 @@ instance FromText CreativeArtworkType where
     fromText = \case
         "ARTWORK_TYPE_FLASH" -> Just CATArtworkTypeFlash
         "ARTWORK_TYPE_HTML5" -> Just CATArtworkTypeHTML5
+        "ARTWORK_TYPE_IMAGE" -> Just CATArtworkTypeImage
         "ARTWORK_TYPE_MIXED" -> Just CATArtworkTypeMixed
         _ -> Nothing
 
@@ -5558,6 +5718,7 @@ instance ToText CreativeArtworkType where
     toText = \case
         CATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         CATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
+        CATArtworkTypeImage -> "ARTWORK_TYPE_IMAGE"
         CATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
 
 instance FromJSON CreativeArtworkType where
@@ -6178,22 +6339,24 @@ instance ToJSON PlacementGroupsListSortOrder where
     toJSON = toJSONText
 
 -- | Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads, respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
--- refers to rendering an in-stream video ads developed with the VAST
--- standard.
+-- DISPLAY and DISPLAY_INTERSTITIAL refer to either rendering on desktop or
+-- on mobile devices or in mobile apps for regular or interstitial ads,
+-- respectively. APP and APP_INTERSTITIAL are only used for existing
+-- default ads. New mobile placements must be assigned DISPLAY or
+-- DISPLAY_INTERSTITIAL and default ads created for those placements will
+-- be limited to those compatibility types. IN_STREAM_VIDEO refers to
+-- rendering in-stream video ads developed with the VAST standard.
 data AdCompatibility
     = ACApp
       -- ^ @APP@
     | ACAppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | ACDisplay
+      -- ^ @DISPLAY@
+    | ACDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | ACInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | ACWeb
-      -- ^ @WEB@
-    | ACWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable AdCompatibility
@@ -6202,18 +6365,18 @@ instance FromText AdCompatibility where
     fromText = \case
         "APP" -> Just ACApp
         "APP_INTERSTITIAL" -> Just ACAppInterstitial
+        "DISPLAY" -> Just ACDisplay
+        "DISPLAY_INTERSTITIAL" -> Just ACDisplayInterstitial
         "IN_STREAM_VIDEO" -> Just ACInStreamVideo
-        "WEB" -> Just ACWeb
-        "WEB_INTERSTITIAL" -> Just ACWebInterstitial
         _ -> Nothing
 
 instance ToText AdCompatibility where
     toText = \case
         ACApp -> "APP"
         ACAppInterstitial -> "APP_INTERSTITIAL"
+        ACDisplay -> "DISPLAY"
+        ACDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         ACInStreamVideo -> "IN_STREAM_VIDEO"
-        ACWeb -> "WEB"
-        ACWebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON AdCompatibility where
     parseJSON = parseJSONText "AdCompatibility"
@@ -6351,6 +6514,8 @@ data CreativeType
       -- ^ @IMAGE@
     | CTInstreamVideo
       -- ^ @INSTREAM_VIDEO@
+    | CTInstreamVideoRedirect
+      -- ^ @INSTREAM_VIDEO_REDIRECT@
     | CTInternalRedirect
       -- ^ @INTERNAL_REDIRECT@
     | CTInterstitialInternalRedirect
@@ -6375,8 +6540,6 @@ data CreativeType
       -- ^ @RICH_MEDIA_PEEL_DOWN@
     | CTTrackingText
       -- ^ @TRACKING_TEXT@
-    | CTVastRedirect
-      -- ^ @VAST_REDIRECT@
     | CTVpaidLinear
       -- ^ @VPAID_LINEAR@
     | CTVpaidNonLinear
@@ -6396,6 +6559,7 @@ instance FromText CreativeType where
         "HTML5_BANNER" -> Just CTHTML5Banner
         "IMAGE" -> Just CTImage
         "INSTREAM_VIDEO" -> Just CTInstreamVideo
+        "INSTREAM_VIDEO_REDIRECT" -> Just CTInstreamVideoRedirect
         "INTERNAL_REDIRECT" -> Just CTInternalRedirect
         "INTERSTITIAL_INTERNAL_REDIRECT" -> Just CTInterstitialInternalRedirect
         "REDIRECT" -> Just CTRedirect
@@ -6408,7 +6572,6 @@ instance FromText CreativeType where
         "RICH_MEDIA_MULTI_FLOATING" -> Just CTRichMediaMultiFloating
         "RICH_MEDIA_PEEL_DOWN" -> Just CTRichMediaPeelDown
         "TRACKING_TEXT" -> Just CTTrackingText
-        "VAST_REDIRECT" -> Just CTVastRedirect
         "VPAID_LINEAR" -> Just CTVpaidLinear
         "VPAID_NON_LINEAR" -> Just CTVpaidNonLinear
         _ -> Nothing
@@ -6424,6 +6587,7 @@ instance ToText CreativeType where
         CTHTML5Banner -> "HTML5_BANNER"
         CTImage -> "IMAGE"
         CTInstreamVideo -> "INSTREAM_VIDEO"
+        CTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         CTInternalRedirect -> "INTERNAL_REDIRECT"
         CTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
         CTRedirect -> "REDIRECT"
@@ -6436,7 +6600,6 @@ instance ToText CreativeType where
         CTRichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
         CTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
         CTTrackingText -> "TRACKING_TEXT"
-        CTVastRedirect -> "VAST_REDIRECT"
         CTVpaidLinear -> "VPAID_LINEAR"
         CTVpaidNonLinear -> "VPAID_NON_LINEAR"
 
@@ -6852,8 +7015,12 @@ data CreativeAssetMetadataWarnedValidationRulesItem
       -- ^ @ASSET_FORMAT_UNSUPPORTED_DCM@
     | AssetInvalid
       -- ^ @ASSET_INVALID@
+    | ClickTagHardCoded
+      -- ^ @CLICK_TAG_HARD_CODED@
     | ClickTagInvalid
       -- ^ @CLICK_TAG_INVALID@
+    | ClickTagInGwd
+      -- ^ @CLICK_TAG_IN_GWD@
     | ClickTagMissing
       -- ^ @CLICK_TAG_MISSING@
     | ClickTagMoreThanOne
@@ -6897,7 +7064,9 @@ instance FromText CreativeAssetMetadataWarnedValidationRulesItem where
         "ADMOB_REFERENCED" -> Just ADMobReferenced
         "ASSET_FORMAT_UNSUPPORTED_DCM" -> Just AssetFormatUnsupportedDcm
         "ASSET_INVALID" -> Just AssetInvalid
+        "CLICK_TAG_HARD_CODED" -> Just ClickTagHardCoded
         "CLICK_TAG_INVALID" -> Just ClickTagInvalid
+        "CLICK_TAG_IN_GWD" -> Just ClickTagInGwd
         "CLICK_TAG_MISSING" -> Just ClickTagMissing
         "CLICK_TAG_MORE_THAN_ONE" -> Just ClickTagMoreThanOne
         "CLICK_TAG_NON_TOP_LEVEL" -> Just ClickTagNonTopLevel
@@ -6922,7 +7091,9 @@ instance ToText CreativeAssetMetadataWarnedValidationRulesItem where
         ADMobReferenced -> "ADMOB_REFERENCED"
         AssetFormatUnsupportedDcm -> "ASSET_FORMAT_UNSUPPORTED_DCM"
         AssetInvalid -> "ASSET_INVALID"
+        ClickTagHardCoded -> "CLICK_TAG_HARD_CODED"
         ClickTagInvalid -> "CLICK_TAG_INVALID"
+        ClickTagInGwd -> "CLICK_TAG_IN_GWD"
         ClickTagMissing -> "CLICK_TAG_MISSING"
         ClickTagMoreThanOne -> "CLICK_TAG_MORE_THAN_ONE"
         ClickTagNonTopLevel -> "CLICK_TAG_NON_TOP_LEVEL"
@@ -7085,6 +7256,8 @@ data ChangeLogsListObjectType
       -- ^ @OBJECT_PLACEMENT@
     | ObjectPlacementStrategy
       -- ^ @OBJECT_PLACEMENT_STRATEGY@
+    | ObjectPlaystoreLink
+      -- ^ @OBJECT_PLAYSTORE_LINK@
     | ObjectProvidedListClient
       -- ^ @OBJECT_PROVIDED_LIST_CLIENT@
     | ObjectRateCard
@@ -7137,6 +7310,7 @@ instance FromText ChangeLogsListObjectType where
         "OBJECT_MEDIA_ORDER" -> Just ObjectMediaOrder
         "OBJECT_PLACEMENT" -> Just ObjectPlacement
         "OBJECT_PLACEMENT_STRATEGY" -> Just ObjectPlacementStrategy
+        "OBJECT_PLAYSTORE_LINK" -> Just ObjectPlaystoreLink
         "OBJECT_PROVIDED_LIST_CLIENT" -> Just ObjectProvidedListClient
         "OBJECT_RATE_CARD" -> Just ObjectRateCard
         "OBJECT_REMARKETING_LIST" -> Just ObjectRemarketingList
@@ -7177,6 +7351,7 @@ instance ToText ChangeLogsListObjectType where
         ObjectMediaOrder -> "OBJECT_MEDIA_ORDER"
         ObjectPlacement -> "OBJECT_PLACEMENT"
         ObjectPlacementStrategy -> "OBJECT_PLACEMENT_STRATEGY"
+        ObjectPlaystoreLink -> "OBJECT_PLAYSTORE_LINK"
         ObjectProvidedListClient -> "OBJECT_PROVIDED_LIST_CLIENT"
         ObjectRateCard -> "OBJECT_RATE_CARD"
         ObjectRemarketingList -> "OBJECT_REMARKETING_LIST"

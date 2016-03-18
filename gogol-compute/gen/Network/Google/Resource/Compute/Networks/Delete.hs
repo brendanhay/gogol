@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified network resource.
+-- Deletes the specified network.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.delete@.
 module Network.Google.Resource.Compute.Networks.Delete
@@ -52,7 +52,7 @@ type NetworksDeleteResource =
                  Capture "network" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified network resource.
+-- | Deletes the specified network.
 --
 -- /See:/ 'networksDelete' smart constructor.
 data NetworksDelete = NetworksDelete
@@ -82,7 +82,7 @@ ndProject :: Lens' NetworksDelete Text
 ndProject
   = lens _ndProject (\ s a -> s{_ndProject = a})
 
--- | Name of the network resource to delete.
+-- | Name of the network to delete.
 ndNetwork :: Lens' NetworksDelete Text
 ndNetwork
   = lens _ndNetwork (\ s a -> s{_ndNetwork = a})

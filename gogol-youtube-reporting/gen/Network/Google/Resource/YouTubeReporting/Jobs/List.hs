@@ -38,6 +38,7 @@ module Network.Google.Resource.YouTubeReporting.Jobs.List
     , jlPp
     , jlAccessToken
     , jlUploadType
+    , jlIncludeSystemManaged
     , jlOnBehalfOfContentOwner
     , jlBearerToken
     , jlPageToken
@@ -58,13 +59,14 @@ type JobsListResource =
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListJobsResponse
+                   QueryParam "includeSystemManaged" Bool :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListJobsResponse
 
 -- | Lists jobs.
 --
@@ -75,6 +77,7 @@ data JobsList = JobsList
     , _jlPp                     :: !Bool
     , _jlAccessToken            :: !(Maybe Text)
     , _jlUploadType             :: !(Maybe Text)
+    , _jlIncludeSystemManaged   :: !(Maybe Bool)
     , _jlOnBehalfOfContentOwner :: !(Maybe Text)
     , _jlBearerToken            :: !(Maybe Text)
     , _jlPageToken              :: !(Maybe Text)
@@ -96,6 +99,8 @@ data JobsList = JobsList
 --
 -- * 'jlUploadType'
 --
+-- * 'jlIncludeSystemManaged'
+--
 -- * 'jlOnBehalfOfContentOwner'
 --
 -- * 'jlBearerToken'
@@ -114,6 +119,7 @@ jobsList =
     , _jlPp = True
     , _jlAccessToken = Nothing
     , _jlUploadType = Nothing
+    , _jlIncludeSystemManaged = Nothing
     , _jlOnBehalfOfContentOwner = Nothing
     , _jlBearerToken = Nothing
     , _jlPageToken = Nothing
@@ -145,6 +151,14 @@ jlAccessToken
 jlUploadType :: Lens' JobsList (Maybe Text)
 jlUploadType
   = lens _jlUploadType (\ s a -> s{_jlUploadType = a})
+
+-- | If set to true, also system-managed jobs will be returned; otherwise
+-- only user-created jobs will be returned. System-managed jobs can neither
+-- be modified nor deleted.
+jlIncludeSystemManaged :: Lens' JobsList (Maybe Bool)
+jlIncludeSystemManaged
+  = lens _jlIncludeSystemManaged
+      (\ s a -> s{_jlIncludeSystemManaged = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
@@ -184,6 +198,7 @@ instance GoogleRequest JobsList where
           = go _jlXgafv _jlUploadProtocol (Just _jlPp)
               _jlAccessToken
               _jlUploadType
+              _jlIncludeSystemManaged
               _jlOnBehalfOfContentOwner
               _jlBearerToken
               _jlPageToken

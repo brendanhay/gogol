@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a call set. This method supports patch semantics.
+-- Updates a call set. For the definitions of call sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.patch@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.patch@.
 module Network.Google.Resource.Genomics.CallSets.Patch
     (
     -- * REST Resource
@@ -65,7 +68,10 @@ type CallSetsPatchResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CallSet :> Patch '[JSON] CallSet
 
--- | Updates a call set. This method supports patch semantics.
+-- | Updates a call set. For the definitions of call sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
 -- /See:/ 'callSetsPatch' smart constructor.
 data CallSetsPatch = CallSetsPatch

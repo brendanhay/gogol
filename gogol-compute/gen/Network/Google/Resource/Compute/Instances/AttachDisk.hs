@@ -107,7 +107,7 @@ iadPayload :: Lens' InstancesAttachDisk AttachedDisk
 iadPayload
   = lens _iadPayload (\ s a -> s{_iadPayload = a})
 
--- | Instance name.
+-- | The instance name for this request.
 iadInstance :: Lens' InstancesAttachDisk Text
 iadInstance
   = lens _iadInstance (\ s a -> s{_iadInstance = a})

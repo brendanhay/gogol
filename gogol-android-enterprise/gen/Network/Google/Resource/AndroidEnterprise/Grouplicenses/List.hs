@@ -23,7 +23,7 @@
 -- Retrieves IDs of all products for which the enterprise has a group
 -- license.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.grouplicenses.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.grouplicenses.list@.
 module Network.Google.Resource.AndroidEnterprise.Grouplicenses.List
     (
     -- * REST Resource

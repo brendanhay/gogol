@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance resource.
+-- Returns the specified Instance resource. Get a list of available
+-- instances by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.get@.
 module Network.Google.Resource.Compute.Instances.Get
@@ -54,7 +55,8 @@ type InstancesGetResource =
                    Capture "instance" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Instance
 
--- | Returns the specified instance resource.
+-- | Returns the specified Instance resource. Get a list of available
+-- instances by making a list() request.
 --
 -- /See:/ 'instancesGet' smart constructor.
 data InstancesGet = InstancesGet

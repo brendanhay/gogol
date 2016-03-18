@@ -141,6 +141,7 @@ module Network.Google.DeploymentManager
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 
@@ -157,6 +158,7 @@ module Network.Google.DeploymentManager
     , DeploymentUpdate
     , deploymentUpdate
     , duManifest
+    , duLabels
 
     -- ** ResourceUpdate
     , ResourceUpdate
@@ -168,6 +170,12 @@ module Network.Google.DeploymentManager
     , ruManifest
     , ruFinalProperties
     , ruProperties
+
+    -- ** DeploymentLabelEntry
+    , DeploymentLabelEntry
+    , deploymentLabelEntry
+    , dleValue
+    , dleKey
 
     -- ** Manifest
     , Manifest
@@ -207,6 +215,12 @@ module Network.Google.DeploymentManager
     , rType
     , rUpdate
     , rProperties
+
+    -- ** DeploymentUpdateLabelEntry
+    , DeploymentUpdateLabelEntry
+    , deploymentUpdateLabelEntry
+    , duleValue
+    , duleKey
 
     -- ** ResourceUpdateErrorErrorsItem
     , ResourceUpdateErrorErrorsItem
@@ -298,6 +312,7 @@ module Network.Google.DeploymentManager
     , dName
     , dManifest
     , dId
+    , dLabels
     , dDescription
     , dUpdate
     , dTarget

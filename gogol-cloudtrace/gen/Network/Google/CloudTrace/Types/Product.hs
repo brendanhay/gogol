@@ -43,7 +43,7 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | Annotations via labels.
+-- | Collection of labels associated with the span.
 --
 -- /See:/ 'traceSpanLabels' smart constructor.
 newtype TraceSpanLabels = TraceSpanLabels
@@ -76,7 +76,7 @@ instance FromJSON TraceSpanLabels where
 instance ToJSON TraceSpanLabels where
         toJSON = toJSON . _tslAddtional
 
--- | A list of traces for the PatchTraces method.
+-- | List of new or updated traces.
 --
 -- /See:/ 'traces' smart constructor.
 newtype Traces = Traces
@@ -95,7 +95,7 @@ traces =
     { _tTraces = Nothing
     }
 
--- | A list of traces.
+-- | List of traces.
 tTraces :: Lens' Traces [Trace]
 tTraces
   = lens _tTraces (\ s a -> s{_tTraces = a}) . _Default
@@ -110,7 +110,11 @@ instance ToJSON Traces where
         toJSON Traces{..}
           = object (catMaybes [("traces" .=) <$> _tTraces])
 
--- | A span is the data recorded with a single span.
+-- | A span represents a single timed event within a trace. Spans can be
+-- nested and form a trace tree. Often, a trace contains a root span that
+-- describes the end-to-end latency of an operation and, optionally, one or
+-- more subspans for its suboperations. Spans do not need to be contiguous.
+-- There may be gaps between spans in a trace.
 --
 -- /See:/ 'traceSpan' smart constructor.
 data TraceSpan = TraceSpan
@@ -153,44 +157,43 @@ traceSpan =
     , _tsSpanId = Nothing
     }
 
--- | The start time of the span in nanoseconds from the UNIX epoch.
+-- | Start time of the span in nanoseconds from the UNIX epoch.
 tsStartTime :: Lens' TraceSpan (Maybe Text)
 tsStartTime
   = lens _tsStartTime (\ s a -> s{_tsStartTime = a})
 
--- | SpanKind distinguishes spans generated in a particular context. For
--- example, two spans with the same name, one with the kind RPC_CLIENT, and
--- the other with RPC_SERVER can indicate the queueing latency associated
--- with the span.
+-- | Distinguishes between spans generated in a particular context. For
+-- example, two spans with the same name may be distinguished using
+-- \`RPC_CLIENT\` and \`RPC_SERVER\` to identify queueing latency
+-- associated with the span.
 tsKind :: Lens' TraceSpan (Maybe Text)
 tsKind = lens _tsKind (\ s a -> s{_tsKind = a})
 
--- | The name of the trace. This is sanitized and displayed on the UI. This
--- may be a method name or some other per-callsite name. For the same
--- binary and the same call point, it is a good practice to choose a
--- consistent name in order to correlate cross-trace spans.
+-- | Name of the trace. The trace name is sanitized and displayed in the
+-- Cloud Trace tool in the Google Developers Console. The name may be a
+-- method name or some other per-call site name. For the same executable
+-- and the same call point, a best practice is to use a consistent name,
+-- which makes it easier to correlate cross-trace spans.
 tsName :: Lens' TraceSpan (Maybe Text)
 tsName = lens _tsName (\ s a -> s{_tsName = a})
 
--- | The end time of the span in nanoseconds from the UNIX epoch.
+-- | End time of the span in nanoseconds from the UNIX epoch.
 tsEndTime :: Lens' TraceSpan (Maybe Text)
 tsEndTime
   = lens _tsEndTime (\ s a -> s{_tsEndTime = a})
 
--- | Annotations via labels.
+-- | Collection of labels associated with the span.
 tsLabels :: Lens' TraceSpan (Maybe TraceSpanLabels)
 tsLabels = lens _tsLabels (\ s a -> s{_tsLabels = a})
 
--- | Identifies the parent of the current span. May be missing. Serialized
--- bytes representation of SpanId.
+-- | ID of the parent span, if any. Optional.
 tsParentSpanId :: Lens' TraceSpan (Maybe Word64)
 tsParentSpanId
   = lens _tsParentSpanId
       (\ s a -> s{_tsParentSpanId = a})
       . mapping _Coerce
 
--- | Identifier of the span within the trace. Each span should have an
--- identifier that is unique per trace.
+-- | Identifier for the span. This identifier must be unique within a trace.
 tsSpanId :: Lens' TraceSpan (Maybe Word64)
 tsSpanId
   = lens _tsSpanId (\ s a -> s{_tsSpanId = a}) .
@@ -219,7 +222,7 @@ instance ToJSON TraceSpan where
                   ("parentSpanId" .=) <$> _tsParentSpanId,
                   ("spanId" .=) <$> _tsSpanId])
 
--- | The response message for the ListTraces method.
+-- | The response message for the \`ListTraces\` method.
 --
 -- /See:/ 'listTracesResponse' smart constructor.
 data ListTracesResponse = ListTracesResponse
@@ -242,15 +245,15 @@ listTracesResponse =
     , _ltrTraces = Nothing
     }
 
--- | If defined, indicates that there are more topics that match the request,
--- and this value should be passed to the next ListTopicsRequest to
--- continue.
+-- | If defined, indicates that there are more traces that match the request
+-- and that this value should be passed to the next request to continue
+-- retrieving additional traces.
 ltrNextPageToken :: Lens' ListTracesResponse (Maybe Text)
 ltrNextPageToken
   = lens _ltrNextPageToken
       (\ s a -> s{_ltrNextPageToken = a})
 
--- | The list of trace records returned.
+-- | List of trace records returned.
 ltrTraces :: Lens' ListTracesResponse [Trace]
 ltrTraces
   = lens _ltrTraces (\ s a -> s{_ltrTraces = a}) .
@@ -272,8 +275,9 @@ instance ToJSON ListTracesResponse where
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
                   ("traces" .=) <$> _ltrTraces])
 
--- | A Trace is a collection of spans describing the execution timings of a
--- single operation.
+-- | A trace describes how long it takes for an application to perform an
+-- operation. It consists of a set of spans, each of which represent a
+-- single timed event within the operation.
 --
 -- /See:/ 'trace' smart constructor.
 data Trace = Trace
@@ -300,20 +304,18 @@ trace =
     , _tProjectId = Nothing
     }
 
--- | A 128-bit numeric value, formatted as a 32-byte hex string, that
--- represents a trace. Each trace should have an identifier that is
--- globally unique.
+-- | Globally unique identifier for the trace. This identifier is a 128-bit
+-- numeric value formatted as a 32-byte hex string.
 tTraceId :: Lens' Trace (Maybe Text)
 tTraceId = lens _tTraceId (\ s a -> s{_tTraceId = a})
 
--- | The collection of span records within this trace. Spans that appear in
--- calls to PatchTraces may be incomplete or partial.
+-- | Collection of spans in the trace.
 tSpans :: Lens' Trace [TraceSpan]
 tSpans
   = lens _tSpans (\ s a -> s{_tSpans = a}) . _Default .
       _Coerce
 
--- | The Project ID of the Google Cloud project.
+-- | Project ID of the Cloud project where the trace data is stored.
 tProjectId :: Lens' Trace (Maybe Text)
 tProjectId
   = lens _tProjectId (\ s a -> s{_tProjectId = a})

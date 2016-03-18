@@ -28,10 +28,10 @@ data AssociationSessionsStartProductCode
       -- AdSense For Games
     | Afmc
       -- ^ @AFMC@
-      -- AdSense For Mobile Content
+      -- AdSense For Mobile Content - deprecated
     | Afs
       -- ^ @AFS@
-      -- AdSense For Search
+      -- AdSense For Search - deprecated
     | Afv
       -- ^ @AFV@
       -- AdSense For Video

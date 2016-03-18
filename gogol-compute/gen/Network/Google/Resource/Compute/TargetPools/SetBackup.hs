@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Changes backup pool configurations.
+-- Changes a backup target pool\'s configurations.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.setBackup@.
 module Network.Google.Resource.Compute.TargetPools.SetBackup
@@ -60,7 +60,7 @@ type TargetPoolsSetBackupResource =
                            ReqBody '[JSON] TargetReference :>
                              Post '[JSON] Operation
 
--- | Changes backup pool configurations.
+-- | Changes a backup target pool\'s configurations.
 --
 -- /See:/ 'targetPoolsSetBackup' smart constructor.
 data TargetPoolsSetBackup = TargetPoolsSetBackup
@@ -99,12 +99,12 @@ targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
     , _tpsbRegion = pTpsbRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tpsbProject :: Lens' TargetPoolsSetBackup Text
 tpsbProject
   = lens _tpsbProject (\ s a -> s{_tpsbProject = a})
 
--- | Name of the TargetPool resource for which the backup is to be set.
+-- | Name of the TargetPool resource to set a backup pool for.
 tpsbTargetPool :: Lens' TargetPoolsSetBackup Text
 tpsbTargetPool
   = lens _tpsbTargetPool
@@ -115,7 +115,7 @@ tpsbPayload :: Lens' TargetPoolsSetBackup TargetReference
 tpsbPayload
   = lens _tpsbPayload (\ s a -> s{_tpsbPayload = a})
 
--- | New failoverRatio value for the containing target pool.
+-- | New failoverRatio value for the target pool.
 tpsbFailoverRatio :: Lens' TargetPoolsSetBackup (Maybe Double)
 tpsbFailoverRatio
   = lens _tpsbFailoverRatio

@@ -47,6 +47,7 @@ library
         , Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
         , Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
         , Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
+        , Network.Google.Resource.DoubleClickBidManager.Rubicon.Notifyproposalchange
 
     other-modules:
           Network.Google.DoubleClickBids.Types.Product

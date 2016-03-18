@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2.2@
+    This library is compatible with version @v2.4@
     of the API.
 
 source-repository head
@@ -130,7 +130,6 @@ library
         , Network.Google.Resource.DFAReporting.FloodlightActivities.List
         , Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
         , Network.Google.Resource.DFAReporting.FloodlightActivities.Update
-        , Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
         , Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
         , Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
         , Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List

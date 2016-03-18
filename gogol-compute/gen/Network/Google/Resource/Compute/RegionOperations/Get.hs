@@ -94,7 +94,7 @@ rogOperation :: Lens' RegionOperationsGet Text
 rogOperation
   = lens _rogOperation (\ s a -> s{_rogOperation = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the region for this request.
 rogRegion :: Lens' RegionOperationsGet Text
 rogRegion
   = lens _rogRegion (\ s a -> s{_rogRegion = a})

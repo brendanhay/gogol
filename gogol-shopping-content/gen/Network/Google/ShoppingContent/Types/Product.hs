@@ -1179,7 +1179,8 @@ instance ToJSON
 --
 -- /See:/ 'ordersCustomBatchRequestEntryCancelLineItem' smart constructor.
 data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntryCancelLineItem
-    { _ocbrecliQuantity   :: !(Maybe (Textual Word32))
+    { _ocbrecliAmount     :: !(Maybe Price)
+    , _ocbrecliQuantity   :: !(Maybe (Textual Word32))
     , _ocbrecliLineItemId :: !(Maybe Text)
     , _ocbrecliReason     :: !(Maybe Text)
     , _ocbrecliReasonText :: !(Maybe Text)
@@ -1188,6 +1189,8 @@ data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntry
 -- | Creates a value of 'OrdersCustomBatchRequestEntryCancelLineItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocbrecliAmount'
 --
 -- * 'ocbrecliQuantity'
 --
@@ -1200,11 +1203,20 @@ ordersCustomBatchRequestEntryCancelLineItem
     :: OrdersCustomBatchRequestEntryCancelLineItem
 ordersCustomBatchRequestEntryCancelLineItem =
     OrdersCustomBatchRequestEntryCancelLineItem
-    { _ocbrecliQuantity = Nothing
+    { _ocbrecliAmount = Nothing
+    , _ocbrecliQuantity = Nothing
     , _ocbrecliLineItemId = Nothing
     , _ocbrecliReason = Nothing
     , _ocbrecliReasonText = Nothing
     }
+
+-- | Amount to refund for the cancelation. Optional. If not set, Google will
+-- calculate the default based on the price and tax of the items involved.
+-- The amount must not be larger than the net amount left on the order.
+ocbrecliAmount :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Price)
+ocbrecliAmount
+  = lens _ocbrecliAmount
+      (\ s a -> s{_ocbrecliAmount = a})
 
 -- | The quantity to cancel.
 ocbrecliQuantity :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Word32)
@@ -1238,8 +1250,9 @@ instance FromJSON
               "OrdersCustomBatchRequestEntryCancelLineItem"
               (\ o ->
                  OrdersCustomBatchRequestEntryCancelLineItem <$>
-                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
-                     (o .:? "reason")
+                   (o .:? "amount") <*> (o .:? "quantity") <*>
+                     (o .:? "lineItemId")
+                     <*> (o .:? "reason")
                      <*> (o .:? "reasonText"))
 
 instance ToJSON
@@ -1248,7 +1261,8 @@ instance ToJSON
           OrdersCustomBatchRequestEntryCancelLineItem{..}
           = object
               (catMaybes
-                 [("quantity" .=) <$> _ocbrecliQuantity,
+                 [("amount" .=) <$> _ocbrecliAmount,
+                  ("quantity" .=) <$> _ocbrecliQuantity,
                   ("lineItemId" .=) <$> _ocbrecliLineItemId,
                   ("reason" .=) <$> _ocbrecliReason,
                   ("reasonText" .=) <$> _ocbrecliReasonText])
@@ -1435,7 +1449,8 @@ dId :: Lens' Datafeed (Maybe Int64)
 dId
   = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
--- | The two-letter ISO 639-1 language of the items in the feed.
+-- | The two-letter ISO 639-1 language of the items in the feed. Must be a
+-- valid language for targetCountry.
 dContentLanguage :: Lens' Datafeed (Maybe Text)
 dContentLanguage
   = lens _dContentLanguage
@@ -2771,52 +2786,6 @@ instance ToJSON Weight where
               (catMaybes
                  [("value" .=) <$> _wValue, ("unit" .=) <$> _wUnit])
 
---
--- /See:/ 'productInstallment' smart constructor.
-data ProductInstallment = ProductInstallment
-    { _piAmount :: !(Maybe Price)
-    , _piMonths :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProductInstallment' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'piAmount'
---
--- * 'piMonths'
-productInstallment
-    :: ProductInstallment
-productInstallment =
-    ProductInstallment
-    { _piAmount = Nothing
-    , _piMonths = Nothing
-    }
-
--- | The amount the buyer has to pay per month.
-piAmount :: Lens' ProductInstallment (Maybe Price)
-piAmount = lens _piAmount (\ s a -> s{_piAmount = a})
-
--- | The number of installments the buyer has to pay.
-piMonths :: Lens' ProductInstallment (Maybe Int64)
-piMonths
-  = lens _piMonths (\ s a -> s{_piMonths = a}) .
-      mapping _Coerce
-
-instance FromJSON ProductInstallment where
-        parseJSON
-          = withObject "ProductInstallment"
-              (\ o ->
-                 ProductInstallment <$>
-                   (o .:? "amount") <*> (o .:? "months"))
-
-instance ToJSON ProductInstallment where
-        toJSON ProductInstallment{..}
-          = object
-              (catMaybes
-                 [("amount" .=) <$> _piAmount,
-                  ("months" .=) <$> _piMonths])
-
 -- | An error returned by the API.
 --
 -- /See:/ 'error'' smart constructor.
@@ -3247,6 +3216,52 @@ instance ToJSON DatafeedsCustomBatchRequestEntry
                   ("datafeedId" .=) <$> _dcbreDatafeedId,
                   ("batchId" .=) <$> _dcbreBatchId])
 
+--
+-- /See:/ 'installment' smart constructor.
+data Installment = Installment
+    { _iAmount :: !(Maybe Price)
+    , _iMonths :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Installment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iAmount'
+--
+-- * 'iMonths'
+installment
+    :: Installment
+installment =
+    Installment
+    { _iAmount = Nothing
+    , _iMonths = Nothing
+    }
+
+-- | The amount the buyer has to pay per month.
+iAmount :: Lens' Installment (Maybe Price)
+iAmount = lens _iAmount (\ s a -> s{_iAmount = a})
+
+-- | The number of installments the buyer has to pay.
+iMonths :: Lens' Installment (Maybe Int64)
+iMonths
+  = lens _iMonths (\ s a -> s{_iMonths = a}) .
+      mapping _Coerce
+
+instance FromJSON Installment where
+        parseJSON
+          = withObject "Installment"
+              (\ o ->
+                 Installment <$>
+                   (o .:? "amount") <*> (o .:? "months"))
+
+instance ToJSON Installment where
+        toJSON Installment{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _iAmount,
+                  ("months" .=) <$> _iMonths])
+
 -- | The required fields vary based on the frequency of fetching. For a
 -- monthly fetch schedule, day_of_month and hour are required. For a weekly
 -- fetch schedule, weekday and hour are required. For a daily fetch
@@ -3254,13 +3269,14 @@ instance ToJSON DatafeedsCustomBatchRequestEntry
 --
 -- /See:/ 'datafeedFetchSchedule' smart constructor.
 data DatafeedFetchSchedule = DatafeedFetchSchedule
-    { _dfsFetchURL   :: !(Maybe Text)
-    , _dfsUsername   :: !(Maybe Text)
-    , _dfsPassword   :: !(Maybe Text)
-    , _dfsDayOfMonth :: !(Maybe (Textual Word32))
-    , _dfsHour       :: !(Maybe (Textual Word32))
-    , _dfsWeekday    :: !(Maybe Text)
-    , _dfsTimeZone   :: !(Maybe Text)
+    { _dfsFetchURL     :: !(Maybe Text)
+    , _dfsUsername     :: !(Maybe Text)
+    , _dfsMinuteOfHour :: !(Maybe (Textual Word32))
+    , _dfsPassword     :: !(Maybe Text)
+    , _dfsDayOfMonth   :: !(Maybe (Textual Word32))
+    , _dfsHour         :: !(Maybe (Textual Word32))
+    , _dfsWeekday      :: !(Maybe Text)
+    , _dfsTimeZone     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedFetchSchedule' with the minimum fields required to make a request.
@@ -3270,6 +3286,8 @@ data DatafeedFetchSchedule = DatafeedFetchSchedule
 -- * 'dfsFetchURL'
 --
 -- * 'dfsUsername'
+--
+-- * 'dfsMinuteOfHour'
 --
 -- * 'dfsPassword'
 --
@@ -3286,6 +3304,7 @@ datafeedFetchSchedule =
     DatafeedFetchSchedule
     { _dfsFetchURL = Nothing
     , _dfsUsername = Nothing
+    , _dfsMinuteOfHour = Nothing
     , _dfsPassword = Nothing
     , _dfsDayOfMonth = Nothing
     , _dfsHour = Nothing
@@ -3306,6 +3325,14 @@ dfsUsername :: Lens' DatafeedFetchSchedule (Maybe Text)
 dfsUsername
   = lens _dfsUsername (\ s a -> s{_dfsUsername = a})
 
+-- | The minute of the hour the feed file should be fetched (0-59).
+-- Read-only.
+dfsMinuteOfHour :: Lens' DatafeedFetchSchedule (Maybe Word32)
+dfsMinuteOfHour
+  = lens _dfsMinuteOfHour
+      (\ s a -> s{_dfsMinuteOfHour = a})
+      . mapping _Coerce
+
 -- | An optional password for fetch_url.
 dfsPassword :: Lens' DatafeedFetchSchedule (Maybe Text)
 dfsPassword
@@ -3318,7 +3345,7 @@ dfsDayOfMonth
       (\ s a -> s{_dfsDayOfMonth = a})
       . mapping _Coerce
 
--- | The hour of the day the feed file should be fetched (0-24).
+-- | The hour of the day the feed file should be fetched (0-23).
 dfsHour :: Lens' DatafeedFetchSchedule (Maybe Word32)
 dfsHour
   = lens _dfsHour (\ s a -> s{_dfsHour = a}) .
@@ -3341,7 +3368,8 @@ instance FromJSON DatafeedFetchSchedule where
               (\ o ->
                  DatafeedFetchSchedule <$>
                    (o .:? "fetchUrl") <*> (o .:? "username") <*>
-                     (o .:? "password")
+                     (o .:? "minuteOfHour")
+                     <*> (o .:? "password")
                      <*> (o .:? "dayOfMonth")
                      <*> (o .:? "hour")
                      <*> (o .:? "weekday")
@@ -3353,6 +3381,7 @@ instance ToJSON DatafeedFetchSchedule where
               (catMaybes
                  [("fetchUrl" .=) <$> _dfsFetchURL,
                   ("username" .=) <$> _dfsUsername,
+                  ("minuteOfHour" .=) <$> _dfsMinuteOfHour,
                   ("password" .=) <$> _dfsPassword,
                   ("dayOfMonth" .=) <$> _dfsDayOfMonth,
                   ("hour" .=) <$> _dfsHour,
@@ -4158,7 +4187,9 @@ instance ToJSON Account where
 --
 -- /See:/ 'inventorySetRequest' smart constructor.
 data InventorySetRequest = InventorySetRequest
-    { _isrQuantity               :: !(Maybe (Textual Word32))
+    { _isrLoyaltyPoints          :: !(Maybe LoyaltyPoints)
+    , _isrQuantity               :: !(Maybe (Textual Word32))
+    , _isrInstallment            :: !(Maybe Installment)
     , _isrSalePrice              :: !(Maybe Price)
     , _isrAvailability           :: !(Maybe Text)
     , _isrSalePriceEffectiveDate :: !(Maybe Text)
@@ -4170,7 +4201,11 @@ data InventorySetRequest = InventorySetRequest
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'isrLoyaltyPoints'
+--
 -- * 'isrQuantity'
+--
+-- * 'isrInstallment'
 --
 -- * 'isrSalePrice'
 --
@@ -4185,7 +4220,9 @@ inventorySetRequest
     :: InventorySetRequest
 inventorySetRequest =
     InventorySetRequest
-    { _isrQuantity = Nothing
+    { _isrLoyaltyPoints = Nothing
+    , _isrQuantity = Nothing
+    , _isrInstallment = Nothing
     , _isrSalePrice = Nothing
     , _isrAvailability = Nothing
     , _isrSalePriceEffectiveDate = Nothing
@@ -4193,12 +4230,24 @@ inventorySetRequest =
     , _isrPrice = Nothing
     }
 
+-- | Loyalty points that users receive after purchasing the item. Japan only.
+isrLoyaltyPoints :: Lens' InventorySetRequest (Maybe LoyaltyPoints)
+isrLoyaltyPoints
+  = lens _isrLoyaltyPoints
+      (\ s a -> s{_isrLoyaltyPoints = a})
+
 -- | The quantity of the product. Must be equal to or greater than zero.
 -- Supported only for local products.
 isrQuantity :: Lens' InventorySetRequest (Maybe Word32)
 isrQuantity
   = lens _isrQuantity (\ s a -> s{_isrQuantity = a}) .
       mapping _Coerce
+
+-- | Number and amount of installments to pay for an item. Brazil only.
+isrInstallment :: Lens' InventorySetRequest (Maybe Installment)
+isrInstallment
+  = lens _isrInstallment
+      (\ s a -> s{_isrInstallment = a})
 
 -- | The sale price of the product. Mandatory if sale_price_effective_date is
 -- defined.
@@ -4237,8 +4286,10 @@ instance FromJSON InventorySetRequest where
           = withObject "InventorySetRequest"
               (\ o ->
                  InventorySetRequest <$>
-                   (o .:? "quantity") <*> (o .:? "salePrice") <*>
-                     (o .:? "availability")
+                   (o .:? "loyaltyPoints") <*> (o .:? "quantity") <*>
+                     (o .:? "installment")
+                     <*> (o .:? "salePrice")
+                     <*> (o .:? "availability")
                      <*> (o .:? "salePriceEffectiveDate")
                      <*> (o .:? "sellOnGoogleQuantity")
                      <*> (o .:? "price"))
@@ -4247,7 +4298,9 @@ instance ToJSON InventorySetRequest where
         toJSON InventorySetRequest{..}
           = object
               (catMaybes
-                 [("quantity" .=) <$> _isrQuantity,
+                 [("loyaltyPoints" .=) <$> _isrLoyaltyPoints,
+                  ("quantity" .=) <$> _isrQuantity,
+                  ("installment" .=) <$> _isrInstallment,
                   ("salePrice" .=) <$> _isrSalePrice,
                   ("availability" .=) <$> _isrAvailability,
                   ("salePriceEffectiveDate" .=) <$>
@@ -4335,7 +4388,8 @@ instance ToJSON
 --
 -- /See:/ 'ordersCancelLineItemRequest' smart constructor.
 data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest
-    { _oclirQuantity    :: !(Maybe (Textual Word32))
+    { _oclirAmount      :: !(Maybe Price)
+    , _oclirQuantity    :: !(Maybe (Textual Word32))
     , _oclirLineItemId  :: !(Maybe Text)
     , _oclirReason      :: !(Maybe Text)
     , _oclirOperationId :: !(Maybe Text)
@@ -4345,6 +4399,8 @@ data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest
 -- | Creates a value of 'OrdersCancelLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oclirAmount'
 --
 -- * 'oclirQuantity'
 --
@@ -4359,12 +4415,20 @@ ordersCancelLineItemRequest
     :: OrdersCancelLineItemRequest
 ordersCancelLineItemRequest =
     OrdersCancelLineItemRequest
-    { _oclirQuantity = Nothing
+    { _oclirAmount = Nothing
+    , _oclirQuantity = Nothing
     , _oclirLineItemId = Nothing
     , _oclirReason = Nothing
     , _oclirOperationId = Nothing
     , _oclirReasonText = Nothing
     }
+
+-- | Amount to refund for the cancelation. Optional. If not set, Google will
+-- calculate the default based on the price and tax of the items involved.
+-- The amount must not be larger than the net amount left on the order.
+oclirAmount :: Lens' OrdersCancelLineItemRequest (Maybe Price)
+oclirAmount
+  = lens _oclirAmount (\ s a -> s{_oclirAmount = a})
 
 -- | The quantity to cancel.
 oclirQuantity :: Lens' OrdersCancelLineItemRequest (Maybe Word32)
@@ -4401,8 +4465,9 @@ instance FromJSON OrdersCancelLineItemRequest where
           = withObject "OrdersCancelLineItemRequest"
               (\ o ->
                  OrdersCancelLineItemRequest <$>
-                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
-                     (o .:? "reason")
+                   (o .:? "amount") <*> (o .:? "quantity") <*>
+                     (o .:? "lineItemId")
+                     <*> (o .:? "reason")
                      <*> (o .:? "operationId")
                      <*> (o .:? "reasonText"))
 
@@ -4410,7 +4475,8 @@ instance ToJSON OrdersCancelLineItemRequest where
         toJSON OrdersCancelLineItemRequest{..}
           = object
               (catMaybes
-                 [("quantity" .=) <$> _oclirQuantity,
+                 [("amount" .=) <$> _oclirAmount,
+                  ("quantity" .=) <$> _oclirQuantity,
                   ("lineItemId" .=) <$> _oclirLineItemId,
                   ("reason" .=) <$> _oclirReason,
                   ("operationId" .=) <$> _oclirOperationId,
@@ -6202,8 +6268,10 @@ instance ToJSON AccountshippingListResponse where
 --
 -- /See:/ 'inventory' smart constructor.
 data Inventory = Inventory
-    { _iKind                   :: !Text
+    { _iLoyaltyPoints          :: !(Maybe LoyaltyPoints)
+    , _iKind                   :: !Text
     , _iQuantity               :: !(Maybe (Textual Word32))
+    , _iInstallment            :: !(Maybe Installment)
     , _iSalePrice              :: !(Maybe Price)
     , _iAvailability           :: !(Maybe Text)
     , _iSalePriceEffectiveDate :: !(Maybe Text)
@@ -6215,9 +6283,13 @@ data Inventory = Inventory
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'iLoyaltyPoints'
+--
 -- * 'iKind'
 --
 -- * 'iQuantity'
+--
+-- * 'iInstallment'
 --
 -- * 'iSalePrice'
 --
@@ -6232,14 +6304,22 @@ inventory
     :: Inventory
 inventory =
     Inventory
-    { _iKind = "content#inventory"
+    { _iLoyaltyPoints = Nothing
+    , _iKind = "content#inventory"
     , _iQuantity = Nothing
+    , _iInstallment = Nothing
     , _iSalePrice = Nothing
     , _iAvailability = Nothing
     , _iSalePriceEffectiveDate = Nothing
     , _iSellOnGoogleQuantity = Nothing
     , _iPrice = Nothing
     }
+
+-- | Loyalty points that users receive after purchasing the item. Japan only.
+iLoyaltyPoints :: Lens' Inventory (Maybe LoyaltyPoints)
+iLoyaltyPoints
+  = lens _iLoyaltyPoints
+      (\ s a -> s{_iLoyaltyPoints = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#inventory\".
@@ -6252,6 +6332,11 @@ iQuantity :: Lens' Inventory (Maybe Word32)
 iQuantity
   = lens _iQuantity (\ s a -> s{_iQuantity = a}) .
       mapping _Coerce
+
+-- | Number and amount of installments to pay for an item. Brazil only.
+iInstallment :: Lens' Inventory (Maybe Installment)
+iInstallment
+  = lens _iInstallment (\ s a -> s{_iInstallment = a})
 
 -- | The sale price of the product. Mandatory if sale_price_effective_date is
 -- defined.
@@ -6290,8 +6375,10 @@ instance FromJSON Inventory where
           = withObject "Inventory"
               (\ o ->
                  Inventory <$>
-                   (o .:? "kind" .!= "content#inventory") <*>
-                     (o .:? "quantity")
+                   (o .:? "loyaltyPoints") <*>
+                     (o .:? "kind" .!= "content#inventory")
+                     <*> (o .:? "quantity")
+                     <*> (o .:? "installment")
                      <*> (o .:? "salePrice")
                      <*> (o .:? "availability")
                      <*> (o .:? "salePriceEffectiveDate")
@@ -6302,8 +6389,10 @@ instance ToJSON Inventory where
         toJSON Inventory{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _iKind),
+                 [("loyaltyPoints" .=) <$> _iLoyaltyPoints,
+                  Just ("kind" .= _iKind),
                   ("quantity" .=) <$> _iQuantity,
+                  ("installment" .=) <$> _iInstallment,
                   ("salePrice" .=) <$> _iSalePrice,
                   ("availability" .=) <$> _iAvailability,
                   ("salePriceEffectiveDate" .=) <$>
@@ -6362,6 +6451,89 @@ instance ToJSON OrdersGetByMerchantOrderIdResponse
               (catMaybes
                  [Just ("kind" .= _ogbmoirKind),
                   ("order" .=) <$> _ogbmoirOrder])
+
+--
+-- /See:/ 'orderPromotionBenefit' smart constructor.
+data OrderPromotionBenefit = OrderPromotionBenefit
+    { _opbTaxImpact :: !(Maybe Price)
+    , _opbDiscount  :: !(Maybe Price)
+    , _opbOfferIds  :: !(Maybe [Text])
+    , _opbSubType   :: !(Maybe Text)
+    , _opbType      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderPromotionBenefit' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'opbTaxImpact'
+--
+-- * 'opbDiscount'
+--
+-- * 'opbOfferIds'
+--
+-- * 'opbSubType'
+--
+-- * 'opbType'
+orderPromotionBenefit
+    :: OrderPromotionBenefit
+orderPromotionBenefit =
+    OrderPromotionBenefit
+    { _opbTaxImpact = Nothing
+    , _opbDiscount = Nothing
+    , _opbOfferIds = Nothing
+    , _opbSubType = Nothing
+    , _opbType = Nothing
+    }
+
+-- | The impact on tax when the promotion is applied.
+opbTaxImpact :: Lens' OrderPromotionBenefit (Maybe Price)
+opbTaxImpact
+  = lens _opbTaxImpact (\ s a -> s{_opbTaxImpact = a})
+
+-- | The discount in the order price when the promotion is applied.
+opbDiscount :: Lens' OrderPromotionBenefit (Maybe Price)
+opbDiscount
+  = lens _opbDiscount (\ s a -> s{_opbDiscount = a})
+
+-- | The OfferId(s) that were purchased in this order and map to this
+-- specific benefit of the promotion.
+opbOfferIds :: Lens' OrderPromotionBenefit [Text]
+opbOfferIds
+  = lens _opbOfferIds (\ s a -> s{_opbOfferIds = a}) .
+      _Default
+      . _Coerce
+
+-- | Further describes the benefit of the promotion. Note that we will expand
+-- on this enumeration as we support new promotion sub-types.
+opbSubType :: Lens' OrderPromotionBenefit (Maybe Text)
+opbSubType
+  = lens _opbSubType (\ s a -> s{_opbSubType = a})
+
+-- | Describes whether the promotion applies to products (e.g. 20% off) or to
+-- shipping (e.g. Free Shipping).
+opbType :: Lens' OrderPromotionBenefit (Maybe Text)
+opbType = lens _opbType (\ s a -> s{_opbType = a})
+
+instance FromJSON OrderPromotionBenefit where
+        parseJSON
+          = withObject "OrderPromotionBenefit"
+              (\ o ->
+                 OrderPromotionBenefit <$>
+                   (o .:? "taxImpact") <*> (o .:? "discount") <*>
+                     (o .:? "offerIds" .!= mempty)
+                     <*> (o .:? "subType")
+                     <*> (o .:? "type"))
+
+instance ToJSON OrderPromotionBenefit where
+        toJSON OrderPromotionBenefit{..}
+          = object
+              (catMaybes
+                 [("taxImpact" .=) <$> _opbTaxImpact,
+                  ("discount" .=) <$> _opbDiscount,
+                  ("offerIds" .=) <$> _opbOfferIds,
+                  ("subType" .=) <$> _opbSubType,
+                  ("type" .=) <$> _opbType])
 
 --
 -- /See:/ 'ordersCancelRequest' smart constructor.
@@ -6664,6 +6836,123 @@ instance ToJSON AccountShippingCarrierRate where
                   ("modifierFlatRate" .=) <$> _ascrModifierFlatRate])
 
 --
+-- /See:/ 'orderPromotion' smart constructor.
+data OrderPromotion = OrderPromotion
+    { _opEffectiveDates        :: !(Maybe Text)
+    , _opGenericRedemptionCode :: !(Maybe Text)
+    , _opRedemptionChannel     :: !(Maybe Text)
+    , _opBenefits              :: !(Maybe [OrderPromotionBenefit])
+    , _opLongTitle             :: !(Maybe Text)
+    , _opId                    :: !(Maybe Text)
+    , _opProductApplicability  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderPromotion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'opEffectiveDates'
+--
+-- * 'opGenericRedemptionCode'
+--
+-- * 'opRedemptionChannel'
+--
+-- * 'opBenefits'
+--
+-- * 'opLongTitle'
+--
+-- * 'opId'
+--
+-- * 'opProductApplicability'
+orderPromotion
+    :: OrderPromotion
+orderPromotion =
+    OrderPromotion
+    { _opEffectiveDates = Nothing
+    , _opGenericRedemptionCode = Nothing
+    , _opRedemptionChannel = Nothing
+    , _opBenefits = Nothing
+    , _opLongTitle = Nothing
+    , _opId = Nothing
+    , _opProductApplicability = Nothing
+    }
+
+-- | The date and time frame when the promotion is active and ready for
+-- validation review. Note that the promotion live time may be delayed for
+-- a few hours due to the validation review. Start date and end date are
+-- separated by a forward slash (\/). The start date is specified by the
+-- format (YYYY-MM-DD), followed by the letter ?T?, the time of the day
+-- when the sale starts (in Greenwich Mean Time, GMT), followed by an
+-- expression of the time zone for the sale. The end date is in the same
+-- format.
+opEffectiveDates :: Lens' OrderPromotion (Maybe Text)
+opEffectiveDates
+  = lens _opEffectiveDates
+      (\ s a -> s{_opEffectiveDates = a})
+
+-- | Optional. The text code that corresponds to the promotion when applied
+-- on the retailer?s website.
+opGenericRedemptionCode :: Lens' OrderPromotion (Maybe Text)
+opGenericRedemptionCode
+  = lens _opGenericRedemptionCode
+      (\ s a -> s{_opGenericRedemptionCode = a})
+
+-- | Indicates that the promotion is valid online.
+opRedemptionChannel :: Lens' OrderPromotion (Maybe Text)
+opRedemptionChannel
+  = lens _opRedemptionChannel
+      (\ s a -> s{_opRedemptionChannel = a})
+
+opBenefits :: Lens' OrderPromotion [OrderPromotionBenefit]
+opBenefits
+  = lens _opBenefits (\ s a -> s{_opBenefits = a}) .
+      _Default
+      . _Coerce
+
+-- | The full title of the promotion.
+opLongTitle :: Lens' OrderPromotion (Maybe Text)
+opLongTitle
+  = lens _opLongTitle (\ s a -> s{_opLongTitle = a})
+
+-- | The unique ID of the promotion.
+opId :: Lens' OrderPromotion (Maybe Text)
+opId = lens _opId (\ s a -> s{_opId = a})
+
+-- | Whether the promotion is applicable to all products or only specific
+-- products.
+opProductApplicability :: Lens' OrderPromotion (Maybe Text)
+opProductApplicability
+  = lens _opProductApplicability
+      (\ s a -> s{_opProductApplicability = a})
+
+instance FromJSON OrderPromotion where
+        parseJSON
+          = withObject "OrderPromotion"
+              (\ o ->
+                 OrderPromotion <$>
+                   (o .:? "effectiveDates") <*>
+                     (o .:? "genericRedemptionCode")
+                     <*> (o .:? "redemptionChannel")
+                     <*> (o .:? "benefits" .!= mempty)
+                     <*> (o .:? "longTitle")
+                     <*> (o .:? "id")
+                     <*> (o .:? "productApplicability"))
+
+instance ToJSON OrderPromotion where
+        toJSON OrderPromotion{..}
+          = object
+              (catMaybes
+                 [("effectiveDates" .=) <$> _opEffectiveDates,
+                  ("genericRedemptionCode" .=) <$>
+                    _opGenericRedemptionCode,
+                  ("redemptionChannel" .=) <$> _opRedemptionChannel,
+                  ("benefits" .=) <$> _opBenefits,
+                  ("longTitle" .=) <$> _opLongTitle,
+                  ("id" .=) <$> _opId,
+                  ("productApplicability" .=) <$>
+                    _opProductApplicability])
+
+--
 -- /See:/ 'price' smart constructor.
 data Price = Price
     { _pValue    :: !(Maybe Text)
@@ -6921,6 +7210,7 @@ data TestOrder = TestOrder
     , _toShippingCostTax           :: !(Maybe Price)
     , _toCustomer                  :: !(Maybe TestOrderCustomer)
     , _toPaymentMethod             :: !(Maybe TestOrderPaymentMethod)
+    , _toPromotions                :: !(Maybe [OrderPromotion])
     , _toShippingCost              :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6942,6 +7232,8 @@ data TestOrder = TestOrder
 --
 -- * 'toPaymentMethod'
 --
+-- * 'toPromotions'
+--
 -- * 'toShippingCost'
 testOrder
     :: TestOrder
@@ -6954,6 +7246,7 @@ testOrder =
     , _toShippingCostTax = Nothing
     , _toCustomer = Nothing
     , _toPaymentMethod = Nothing
+    , _toPromotions = Nothing
     , _toShippingCost = Nothing
     }
 
@@ -6998,6 +7291,14 @@ toPaymentMethod
   = lens _toPaymentMethod
       (\ s a -> s{_toPaymentMethod = a})
 
+-- | The details of the merchant provided promotions applied to the order.
+-- More details about the program are here.
+toPromotions :: Lens' TestOrder [OrderPromotion]
+toPromotions
+  = lens _toPromotions (\ s a -> s{_toPromotions = a})
+      . _Default
+      . _Coerce
+
 -- | The total cost of shipping for all items.
 toShippingCost :: Lens' TestOrder (Maybe Price)
 toShippingCost
@@ -7016,6 +7317,7 @@ instance FromJSON TestOrder where
                      <*> (o .:? "shippingCostTax")
                      <*> (o .:? "customer")
                      <*> (o .:? "paymentMethod")
+                     <*> (o .:? "promotions" .!= mempty)
                      <*> (o .:? "shippingCost"))
 
 instance ToJSON TestOrder where
@@ -7030,6 +7332,7 @@ instance ToJSON TestOrder where
                   ("shippingCostTax" .=) <$> _toShippingCostTax,
                   ("customer" .=) <$> _toCustomer,
                   ("paymentMethod" .=) <$> _toPaymentMethod,
+                  ("promotions" .=) <$> _toPromotions,
                   ("shippingCost" .=) <$> _toShippingCost])
 
 -- | A batch entry encoding a single non-batch datafeedstatuses response.
@@ -8019,7 +8322,7 @@ data Product = Product
     , _ppUnitPricingBaseMeasure :: !(Maybe ProductUnitPricingBaseMeasure)
     , _ppTaxes                  :: !(Maybe [ProductTax])
     , _ppMaterial               :: !(Maybe Text)
-    , _ppInstallment            :: !(Maybe ProductInstallment)
+    , _ppInstallment            :: !(Maybe Installment)
     , _ppChannel                :: !(Maybe Text)
     , _ppProductType            :: !(Maybe Text)
     , _ppIdentifierExists       :: !(Maybe Bool)
@@ -8055,6 +8358,7 @@ data Product = Product
     , _ppId                     :: !(Maybe Text)
     , _ppAdwordsLabels          :: !(Maybe [Text])
     , _ppPrice                  :: !(Maybe Price)
+    , _ppPromotionIds           :: !(Maybe [Text])
     , _ppSizeType               :: !(Maybe Text)
     , _ppMobileLink             :: !(Maybe Text)
     , _ppTitle                  :: !(Maybe Text)
@@ -8186,6 +8490,8 @@ data Product = Product
 --
 -- * 'ppPrice'
 --
+-- * 'ppPromotionIds'
+--
 -- * 'ppSizeType'
 --
 -- * 'ppMobileLink'
@@ -8274,6 +8580,7 @@ product =
     , _ppId = Nothing
     , _ppAdwordsLabels = Nothing
     , _ppPrice = Nothing
+    , _ppPromotionIds = Nothing
     , _ppSizeType = Nothing
     , _ppMobileLink = Nothing
     , _ppTitle = Nothing
@@ -8405,7 +8712,7 @@ ppMaterial
   = lens _ppMaterial (\ s a -> s{_ppMaterial = a})
 
 -- | Number and amount of installments to pay for an item. Brazil only.
-ppInstallment :: Lens' Product (Maybe ProductInstallment)
+ppInstallment :: Lens' Product (Maybe Installment)
 ppInstallment
   = lens _ppInstallment
       (\ s a -> s{_ppInstallment = a})
@@ -8629,6 +8936,14 @@ ppAdwordsLabels
 ppPrice :: Lens' Product (Maybe Price)
 ppPrice = lens _ppPrice (\ s a -> s{_ppPrice = a})
 
+-- | The unique ID of a promotion.
+ppPromotionIds :: Lens' Product [Text]
+ppPromotionIds
+  = lens _ppPromotionIds
+      (\ s a -> s{_ppPromotionIds = a})
+      . _Default
+      . _Coerce
+
 -- | The cut of the item. Recommended for apparel items.
 ppSizeType :: Lens' Product (Maybe Text)
 ppSizeType
@@ -8772,6 +9087,7 @@ instance FromJSON Product where
                      <*> (o .:? "id")
                      <*> (o .:? "adwordsLabels" .!= mempty)
                      <*> (o .:? "price")
+                     <*> (o .:? "promotionIds" .!= mempty)
                      <*> (o .:? "sizeType")
                      <*> (o .:? "mobileLink")
                      <*> (o .:? "title")
@@ -8852,6 +9168,7 @@ instance ToJSON Product where
                   ("offerId" .=) <$> _ppOfferId, ("id" .=) <$> _ppId,
                   ("adwordsLabels" .=) <$> _ppAdwordsLabels,
                   ("price" .=) <$> _ppPrice,
+                  ("promotionIds" .=) <$> _ppPromotionIds,
                   ("sizeType" .=) <$> _ppSizeType,
                   ("mobileLink" .=) <$> _ppMobileLink,
                   ("title" .=) <$> _ppTitle, ("adult" .=) <$> _ppAdult,
@@ -9655,6 +9972,7 @@ data Order = Order
     , _ooCustomer        :: !(Maybe OrderCustomer)
     , _ooId              :: !(Maybe Text)
     , _ooPaymentMethod   :: !(Maybe OrderPaymentMethod)
+    , _ooPromotions      :: !(Maybe [OrderPromotion])
     , _ooPaymentStatus   :: !(Maybe Text)
     , _ooShippingCost    :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9695,6 +10013,8 @@ data Order = Order
 --
 -- * 'ooPaymentMethod'
 --
+-- * 'ooPromotions'
+--
 -- * 'ooPaymentStatus'
 --
 -- * 'ooShippingCost'
@@ -9718,6 +10038,7 @@ order =
     , _ooCustomer = Nothing
     , _ooId = Nothing
     , _ooPaymentMethod = Nothing
+    , _ooPromotions = Nothing
     , _ooPaymentStatus = Nothing
     , _ooShippingCost = Nothing
     }
@@ -9814,6 +10135,14 @@ ooPaymentMethod
   = lens _ooPaymentMethod
       (\ s a -> s{_ooPaymentMethod = a})
 
+-- | The details of the merchant provided promotions applied to the order.
+-- More details about the program are here.
+ooPromotions :: Lens' Order [OrderPromotion]
+ooPromotions
+  = lens _ooPromotions (\ s a -> s{_ooPromotions = a})
+      . _Default
+      . _Coerce
+
 -- | The status of the payment.
 ooPaymentStatus :: Lens' Order (Maybe Text)
 ooPaymentStatus
@@ -9846,6 +10175,7 @@ instance FromJSON Order where
                      <*> (o .:? "customer")
                      <*> (o .:? "id")
                      <*> (o .:? "paymentMethod")
+                     <*> (o .:? "promotions" .!= mempty)
                      <*> (o .:? "paymentStatus")
                      <*> (o .:? "shippingCost"))
 
@@ -9868,6 +10198,7 @@ instance ToJSON Order where
                   ("shippingCostTax" .=) <$> _ooShippingCostTax,
                   ("customer" .=) <$> _ooCustomer, ("id" .=) <$> _ooId,
                   ("paymentMethod" .=) <$> _ooPaymentMethod,
+                  ("promotions" .=) <$> _ooPromotions,
                   ("paymentStatus" .=) <$> _ooPaymentStatus,
                   ("shippingCost" .=) <$> _ooShippingCost])
 

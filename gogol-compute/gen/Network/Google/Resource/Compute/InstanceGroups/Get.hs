@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance group resource.
+-- Returns the specified instance group. Get a list of available instance
+-- groups by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.get@.
 module Network.Google.Resource.Compute.InstanceGroups.Get
@@ -54,7 +55,8 @@ type InstanceGroupsGetResource =
                    Capture "instanceGroup" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] InstanceGroup
 
--- | Returns the specified instance group resource.
+-- | Returns the specified instance group. Get a list of available instance
+-- groups by making a list() request.
 --
 -- /See:/ 'instanceGroupsGet' smart constructor.
 data InstanceGroupsGet = InstanceGroupsGet
@@ -84,7 +86,7 @@ instanceGroupsGet pIggProject_ pIggZone_ pIggInstanceGroup_ =
     , _iggInstanceGroup = pIggInstanceGroup_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 iggProject :: Lens' InstanceGroupsGet Text
 iggProject
   = lens _iggProject (\ s a -> s{_iggProject = a})

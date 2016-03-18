@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetInstance resource.
+-- Returns the specified TargetInstance resource. Get a list of available
+-- target instances by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetInstances.get@.
 module Network.Google.Resource.Compute.TargetInstances.Get
@@ -55,7 +56,8 @@ type TargetInstancesGetResource =
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] TargetInstance
 
--- | Returns the specified TargetInstance resource.
+-- | Returns the specified TargetInstance resource. Get a list of available
+-- target instances by making a list() request.
 --
 -- /See:/ 'targetInstancesGet' smart constructor.
 data TargetInstancesGet = TargetInstancesGet
@@ -85,7 +87,7 @@ targetInstancesGet pTigProject_ pTigTargetInstance_ pTigZone_ =
     , _tigZone = pTigZone_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tigProject :: Lens' TargetInstancesGet Text
 tigProject
   = lens _tigProject (\ s a -> s{_tigProject = a})

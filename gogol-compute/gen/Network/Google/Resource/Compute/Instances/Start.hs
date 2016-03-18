@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This method starts an instance that was stopped using the using the
--- instances().stop method. For more information, see Restart an instance.
+-- Starts an instance that was stopped using the using the instances().stop
+-- method. For more information, see Restart an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.start@.
 module Network.Google.Resource.Compute.Instances.Start
@@ -56,8 +56,8 @@ type InstancesStartResource =
                      "start" :>
                        QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
--- | This method starts an instance that was stopped using the using the
--- instances().stop method. For more information, see Restart an instance.
+-- | Starts an instance that was stopped using the using the instances().stop
+-- method. For more information, see Restart an instance.
 --
 -- /See:/ 'instancesStart' smart constructor.
 data InstancesStart = InstancesStart

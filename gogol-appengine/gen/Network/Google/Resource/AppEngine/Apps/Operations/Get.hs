@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.operations.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.operations.get@.
 module Network.Google.Resource.AppEngine.Apps.Operations.Get
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.operations.get@ method which the
 -- 'AppsOperationsGet' request conforms to.
 type AppsOperationsGetResource =
-     "v1beta4" :>
+     "v1beta5" :>
        "apps" :>
          Capture "appsId" Text :>
            "operations" :>

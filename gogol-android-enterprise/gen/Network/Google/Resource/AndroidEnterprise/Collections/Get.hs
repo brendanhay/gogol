@@ -22,7 +22,7 @@
 --
 -- Retrieves the details of a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.get@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Get
     (
     -- * REST Resource

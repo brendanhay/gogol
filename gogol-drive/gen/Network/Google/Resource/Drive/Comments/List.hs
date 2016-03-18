@@ -33,11 +33,11 @@ module Network.Google.Resource.Drive.Comments.List
     , CommentsList
 
     -- * Request Lenses
-    , cllUpdatedMin
-    , cllPageToken
-    , cllFileId
-    , cllMaxResults
-    , cllIncludeDeleted
+    , cStartModifiedTime
+    , cPageToken
+    , cFileId
+    , cPageSize
+    , cIncludeDeleted
     ) where
 
 import           Network.Google.Drive.Types
@@ -47,13 +47,13 @@ import           Network.Google.Prelude
 -- 'CommentsList' request conforms to.
 type CommentsListResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
-               QueryParam "updatedMin" Text :>
+               QueryParam "startModifiedTime" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Int32) :>
+                   QueryParam "pageSize" (Textual Int32) :>
                      QueryParam "includeDeleted" Bool :>
                        QueryParam "alt" AltJSON :> Get '[JSON] CommentList
 
@@ -61,78 +61,75 @@ type CommentsListResource =
 --
 -- /See:/ 'commentsList' smart constructor.
 data CommentsList = CommentsList
-    { _cllUpdatedMin     :: !(Maybe Text)
-    , _cllPageToken      :: !(Maybe Text)
-    , _cllFileId         :: !Text
-    , _cllMaxResults     :: !(Textual Int32)
-    , _cllIncludeDeleted :: !Bool
+    { _cStartModifiedTime :: !(Maybe Text)
+    , _cPageToken         :: !(Maybe Text)
+    , _cFileId            :: !Text
+    , _cPageSize          :: !(Textual Int32)
+    , _cIncludeDeleted    :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cllUpdatedMin'
+-- * 'cStartModifiedTime'
 --
--- * 'cllPageToken'
+-- * 'cPageToken'
 --
--- * 'cllFileId'
+-- * 'cFileId'
 --
--- * 'cllMaxResults'
+-- * 'cPageSize'
 --
--- * 'cllIncludeDeleted'
+-- * 'cIncludeDeleted'
 commentsList
-    :: Text -- ^ 'cllFileId'
+    :: Text -- ^ 'cFileId'
     -> CommentsList
-commentsList pCllFileId_ =
+commentsList pCFileId_ =
     CommentsList
-    { _cllUpdatedMin = Nothing
-    , _cllPageToken = Nothing
-    , _cllFileId = pCllFileId_
-    , _cllMaxResults = 20
-    , _cllIncludeDeleted = False
+    { _cStartModifiedTime = Nothing
+    , _cPageToken = Nothing
+    , _cFileId = pCFileId_
+    , _cPageSize = 20
+    , _cIncludeDeleted = False
     }
 
--- | Only discussions that were updated after this timestamp will be
--- returned. Formatted as an RFC 3339 timestamp.
-cllUpdatedMin :: Lens' CommentsList (Maybe Text)
-cllUpdatedMin
-  = lens _cllUpdatedMin
-      (\ s a -> s{_cllUpdatedMin = a})
+-- | The minimum value of \'modifiedTime\' for the result comments (RFC 3339
+-- date-time).
+cStartModifiedTime :: Lens' CommentsList (Maybe Text)
+cStartModifiedTime
+  = lens _cStartModifiedTime
+      (\ s a -> s{_cStartModifiedTime = a})
 
--- | The continuation token, used to page through large result sets. To get
--- the next page of results, set this parameter to the value of
--- \"nextPageToken\" from the previous response.
-cllPageToken :: Lens' CommentsList (Maybe Text)
-cllPageToken
-  = lens _cllPageToken (\ s a -> s{_cllPageToken = a})
+-- | The token for continuing a previous list request on the next page. This
+-- should be set to the value of \'nextPageToken\' from the previous
+-- response.
+cPageToken :: Lens' CommentsList (Maybe Text)
+cPageToken
+  = lens _cPageToken (\ s a -> s{_cPageToken = a})
 
 -- | The ID of the file.
-cllFileId :: Lens' CommentsList Text
-cllFileId
-  = lens _cllFileId (\ s a -> s{_cllFileId = a})
+cFileId :: Lens' CommentsList Text
+cFileId = lens _cFileId (\ s a -> s{_cFileId = a})
 
--- | The maximum number of discussions to include in the response, used for
--- paging.
-cllMaxResults :: Lens' CommentsList Int32
-cllMaxResults
-  = lens _cllMaxResults
-      (\ s a -> s{_cllMaxResults = a})
-      . _Coerce
+-- | The maximum number of comments to return per page.
+cPageSize :: Lens' CommentsList Int32
+cPageSize
+  = lens _cPageSize (\ s a -> s{_cPageSize = a}) .
+      _Coerce
 
--- | If set, all comments and replies, including deleted comments and replies
--- (with content stripped) will be returned.
-cllIncludeDeleted :: Lens' CommentsList Bool
-cllIncludeDeleted
-  = lens _cllIncludeDeleted
-      (\ s a -> s{_cllIncludeDeleted = a})
+-- | Whether to include deleted comments. Deleted comments will not include
+-- their original content.
+cIncludeDeleted :: Lens' CommentsList Bool
+cIncludeDeleted
+  = lens _cIncludeDeleted
+      (\ s a -> s{_cIncludeDeleted = a})
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentList
         requestClient CommentsList{..}
-          = go _cllFileId _cllUpdatedMin _cllPageToken
-              (Just _cllMaxResults)
-              (Just _cllIncludeDeleted)
+          = go _cFileId _cStartModifiedTime _cPageToken
+              (Just _cPageSize)
+              (Just _cIncludeDeleted)
               (Just AltJSON)
               driveService
           where go

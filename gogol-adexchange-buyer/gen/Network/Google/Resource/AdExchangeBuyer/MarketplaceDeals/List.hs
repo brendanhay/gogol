@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all the deals for a given order
+-- List all the deals for a given proposal
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacedeals.list@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
@@ -33,7 +33,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
     , MarketplaceDealsList
 
     -- * Request Lenses
-    , mdlOrderId
+    , mdlProposalId
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -44,41 +44,42 @@ import           Network.Google.Prelude
 type MarketplaceDealsListResource =
      "adexchangebuyer" :>
        "v1.4" :>
-         "marketplaceOrders" :>
-           Capture "orderId" Text :>
+         "proposals" :>
+           Capture "proposalId" Text :>
              "deals" :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] GetOrderDealsResponse
 
--- | List all the deals for a given order
+-- | List all the deals for a given proposal
 --
 -- /See:/ 'marketplaceDealsList' smart constructor.
 newtype MarketplaceDealsList = MarketplaceDealsList
-    { _mdlOrderId :: Text
+    { _mdlProposalId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mdlOrderId'
+-- * 'mdlProposalId'
 marketplaceDealsList
-    :: Text -- ^ 'mdlOrderId'
+    :: Text -- ^ 'mdlProposalId'
     -> MarketplaceDealsList
-marketplaceDealsList pMdlOrderId_ =
+marketplaceDealsList pMdlProposalId_ =
     MarketplaceDealsList
-    { _mdlOrderId = pMdlOrderId_
+    { _mdlProposalId = pMdlProposalId_
     }
 
--- | The orderId to get deals for.
-mdlOrderId :: Lens' MarketplaceDealsList Text
-mdlOrderId
-  = lens _mdlOrderId (\ s a -> s{_mdlOrderId = a})
+-- | The proposalId to get deals for.
+mdlProposalId :: Lens' MarketplaceDealsList Text
+mdlProposalId
+  = lens _mdlProposalId
+      (\ s a -> s{_mdlProposalId = a})
 
 instance GoogleRequest MarketplaceDealsList where
         type Rs MarketplaceDealsList = GetOrderDealsResponse
         requestClient MarketplaceDealsList{..}
-          = go _mdlOrderId (Just AltJSON)
+          = go _mdlProposalId (Just AltJSON)
               adExchangeBuyerService
           where go
                   = buildClient

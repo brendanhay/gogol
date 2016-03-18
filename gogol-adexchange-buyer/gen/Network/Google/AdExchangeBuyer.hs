@@ -58,23 +58,8 @@ module Network.Google.AdExchangeBuyer
     -- ** adexchangebuyer.budget.update
     , module Network.Google.Resource.AdExchangeBuyer.Budget.Update
 
-    -- ** adexchangebuyer.clientaccess.delete
-    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
-
-    -- ** adexchangebuyer.clientaccess.get
-    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Get
-
-    -- ** adexchangebuyer.clientaccess.insert
-    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
-
-    -- ** adexchangebuyer.clientaccess.list
-    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
-
-    -- ** adexchangebuyer.clientaccess.patch
-    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
-
-    -- ** adexchangebuyer.clientaccess.update
-    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
+    -- ** adexchangebuyer.creatives.addDeal
+    , module Network.Google.Resource.AdExchangeBuyer.Creatives.AddDeal
 
     -- ** adexchangebuyer.creatives.get
     , module Network.Google.Resource.AdExchangeBuyer.Creatives.Get
@@ -85,8 +70,8 @@ module Network.Google.AdExchangeBuyer
     -- ** adexchangebuyer.creatives.list
     , module Network.Google.Resource.AdExchangeBuyer.Creatives.List
 
-    -- ** adexchangebuyer.deals.get
-    , module Network.Google.Resource.AdExchangeBuyer.Deals.Get
+    -- ** adexchangebuyer.creatives.removeDeal
+    , module Network.Google.Resource.AdExchangeBuyer.Creatives.RemoveDeal
 
     -- ** adexchangebuyer.marketplacedeals.delete
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
@@ -105,48 +90,6 @@ module Network.Google.AdExchangeBuyer
 
     -- ** adexchangebuyer.marketplacenotes.list
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
-
-    -- ** adexchangebuyer.marketplaceoffers.get
-    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Get
-
-    -- ** adexchangebuyer.marketplaceoffers.search
-    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Search
-
-    -- ** adexchangebuyer.marketplaceorders.get
-    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
-
-    -- ** adexchangebuyer.marketplaceorders.insert
-    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
-
-    -- ** adexchangebuyer.marketplaceorders.patch
-    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
-
-    -- ** adexchangebuyer.marketplaceorders.search
-    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
-
-    -- ** adexchangebuyer.marketplaceorders.update
-    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
-
-    -- ** adexchangebuyer.negotiationrounds.insert
-    , module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
-
-    -- ** adexchangebuyer.negotiations.get
-    , module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
-
-    -- ** adexchangebuyer.negotiations.insert
-    , module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
-
-    -- ** adexchangebuyer.negotiations.list
-    , module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
-
-    -- ** adexchangebuyer.offers.get
-    , module Network.Google.Resource.AdExchangeBuyer.Offers.Get
-
-    -- ** adexchangebuyer.offers.insert
-    , module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
-
-    -- ** adexchangebuyer.offers.list
-    , module Network.Google.Resource.AdExchangeBuyer.Offers.List
 
     -- ** adexchangebuyer.performanceReport.list
     , module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
@@ -169,17 +112,28 @@ module Network.Google.AdExchangeBuyer
     -- ** adexchangebuyer.pretargetingConfig.update
     , module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
 
+    -- ** adexchangebuyer.products.get
+    , module Network.Google.Resource.AdExchangeBuyer.Products.Get
+
+    -- ** adexchangebuyer.products.search
+    , module Network.Google.Resource.AdExchangeBuyer.Products.Search
+
+    -- ** adexchangebuyer.proposals.get
+    , module Network.Google.Resource.AdExchangeBuyer.Proposals.Get
+
+    -- ** adexchangebuyer.proposals.insert
+    , module Network.Google.Resource.AdExchangeBuyer.Proposals.Insert
+
+    -- ** adexchangebuyer.proposals.patch
+    , module Network.Google.Resource.AdExchangeBuyer.Proposals.Patch
+
+    -- ** adexchangebuyer.proposals.search
+    , module Network.Google.Resource.AdExchangeBuyer.Proposals.Search
+
+    -- ** adexchangebuyer.proposals.update
+    , module Network.Google.Resource.AdExchangeBuyer.Proposals.Update
+
     -- * Types
-
-    -- ** BrandDTO
-    , BrandDTO
-    , brandDTO
-    , bdtoAdvertiserId
-    , bdtoName
-    , bdtoId
-
-    -- ** MarketplaceOrdersUpdateUpdateAction
-    , MarketplaceOrdersUpdateUpdateAction (..)
 
     -- ** MarketplaceNote
     , MarketplaceNote
@@ -187,11 +141,11 @@ module Network.Google.AdExchangeBuyer
     , mnNote
     , mnKind
     , mnTimestampMs
+    , mnProposalId
     , mnDealId
+    , mnProposalRevisionNumber
     , mnNoteId
     , mnCreatorRole
-    , mnOrderId
-    , mnOrderRevisionNumber
 
     -- ** CreativeNATiveAd
     , CreativeNATiveAd
@@ -229,41 +183,10 @@ module Network.Google.AdExchangeBuyer
     , csriciAuctionType
     , csriciGeoCriteriaId
 
-    -- ** TermsDTO
-    , TermsDTO
-    , termsDTO
-    , tdtoFinalizeAutomatically
-    , tdtoBuyerBillingType
-    , tdtoTargetingAllAdSlots
-    , tdtoURLs
-    , tdtoEndDate
-    , tdtoCpm
-    , tdtoEstimatedSpend
-    , tdtoAdvertisers
-    , tdtoEstimatedImpressionsPerDay
-    , tdtoMonetizerType
-    , tdtoAudienceSegmentDescription
-    , tdtoCreativeReviewPolicy
-    , tdtoMinimumTrueLooks
-    , tdtoStartDate
-    , tdtoCreativeBlockingLevel
-    , tdtoSemiTransparent
-    , tdtoAudienceSegment
-    , tdtoDealPremium
-    , tdtoIsReservation
-    , tdtoAdSlots
-    , tdtoTermsAttributes
-    , tdtoInventorySegmentTargeting
-    , tdtoDescriptiveName
-    , tdtoMinimumSpendMicros
-    , tdtoTargetByDealId
-    , tdtoBillingTerms
-    , tdtoDescription
-
     -- ** CreateOrdersResponse
     , CreateOrdersResponse
     , createOrdersResponse
-    , corOrders
+    , corProposals
 
     -- ** AccountBidderLocationItem
     , AccountBidderLocationItem
@@ -293,32 +216,12 @@ module Network.Google.AdExchangeBuyer
     , addOrderNotesRequest
     , aonrNotes
 
-    -- ** GetFinalizedNegotiationByExternalDealIdRequest
-    , GetFinalizedNegotiationByExternalDealIdRequest
-    , getFinalizedNegotiationByExternalDealIdRequest
-    , gfnbedirIncludePrivateAuctions
-
     -- ** DeliveryControlFrequencyCap
     , DeliveryControlFrequencyCap
     , deliveryControlFrequencyCap
     , dcfcMaxImpressions
     , dcfcNumTimeUnits
     , dcfcTimeUnitType
-
-    -- ** DealPartyDTO
-    , DealPartyDTO
-    , dealPartyDTO
-    , dpdtoBuyerSellerRole
-    , dpdtoCustomerId
-    , dpdtoName
-    , dpdtoWebProperty
-    , dpdtoBuyer
-
-    -- ** GetNegotiationsResponse
-    , GetNegotiationsResponse
-    , getNegotiationsResponse
-    , gnrKind
-    , gnrNegotiations
 
     -- ** MarketplaceDealParty
     , MarketplaceDealParty
@@ -331,16 +234,10 @@ module Network.Google.AdExchangeBuyer
     , getOrderNotesResponse
     , gonrNotes
 
-    -- ** RuleKeyValuePair
-    , RuleKeyValuePair
-    , ruleKeyValuePair
-    , rkvpKeyName
-    , rkvpValue
-
     -- ** GetOrdersResponse
     , GetOrdersResponse
     , getOrdersResponse
-    , gorOrders
+    , gorProposals
 
     -- ** CreativeServingRestrictionsItemDisApprovalReasonsItem
     , CreativeServingRestrictionsItemDisApprovalReasonsItem
@@ -357,17 +254,8 @@ module Network.Google.AdExchangeBuyer
     -- ** CreateOrdersRequest
     , CreateOrdersRequest
     , createOrdersRequest
+    , cProposals
     , cWebPropertyCode
-    , cOrders
-
-    -- ** AdSize
-    , AdSize
-    , adSize
-    , asHeight
-    , asWidth
-
-    -- ** MarketplaceOrdersPatchUpdateAction
-    , MarketplaceOrdersPatchUpdateAction (..)
 
     -- ** CreativeCorrectionsItem
     , CreativeCorrectionsItem
@@ -379,11 +267,12 @@ module Network.Google.AdExchangeBuyer
     , AddOrderDealsResponse
     , addOrderDealsResponse
     , aodrDeals
-    , aodrOrderRevisionNumber
+    , aodrProposalRevisionNumber
 
     -- ** DeliveryControl
     , DeliveryControl
     , deliveryControl
+    , dcCreativeBlockingLevel
     , dcFrequencyCaps
     , dcDeliveryRateType
 
@@ -436,27 +325,6 @@ module Network.Google.AdExchangeBuyer
     , pretargetingConfigList
     , pclKind
     , pclItems
-
-    -- ** BuyerDTO
-    , BuyerDTO
-    , buyerDTO
-    , buySponsorAccountId
-    , buyEnabledForInterestTargetingDeals
-    , buyCustomerId
-    , buyEnabledForPreferredDeals
-    , buyAccountId
-    , buyDisplayName
-    , buyId
-
-    -- ** AdSlotDTO
-    , AdSlotDTO
-    , adSlotDTO
-    , asdtoWebPropertyId
-    , asdtoSize
-    , asdtoChannelCode
-    , asdtoChannelId
-    , asdtoName
-    , asdtoDescription
 
     -- ** DealTermsNonGuaranteedFixedPriceTerms
     , DealTermsNonGuaranteedFixedPriceTerms
@@ -518,7 +386,7 @@ module Network.Google.AdExchangeBuyer
     , deleteOrderDealsRequest
     , dodrUpdateAction
     , dodrDealIds
-    , dodrOrderRevisionNumber
+    , dodrProposalRevisionNumber
 
     -- ** CreativesListOpenAuctionStatusFilter
     , CreativesListOpenAuctionStatusFilter (..)
@@ -561,6 +429,7 @@ module Network.Google.AdExchangeBuyer
     , pcMobileDevices
     , pcLanguages
     , pcVerticals
+    , pcVideoPlayerSizes
     , pcConfigId
     , pcPlacements
     , pcExcludedUserLists
@@ -587,77 +456,36 @@ module Network.Google.AdExchangeBuyer
     , tvcsCompanionSizes
     , tvcsCreativeSizeType
 
-    -- ** NegotiationDTO
-    , NegotiationDTO
-    , negotiationDTO
-    , ndtoNegotiationState
-    , ndtoExternalDealId
-    , ndtoStatus
-    , ndtoDealType
-    , ndtoNegotiationRounds
-    , ndtoKind
-    , ndtoBilledBuyer
-    , ndtoBuyerEmailContacts
-    , ndtoStats
-    , ndtoSeller
-    , ndtoLabelNames
-    , ndtoOfferId
-    , ndtoNegotiationId
-    , ndtoSellerEmailContacts
-    , ndtoBuyer
-
-    -- ** OfferDTO
-    , OfferDTO
-    , offerDTO
-    , odtoCreator
-    , odtoStatus
-    , odtoOfferState
-    , odtoPointOfContact
-    , odtoTerms
-    , odtoKind
-    , odtoBilledBuyer
-    , odtoOpenToDealParties
-    , odtoEmailContacts
-    , odtoLabelNames
-    , odtoOfferId
-    , odtoClosedToDealParties
-    , odtoAnonymous
-    , odtoIsOpen
-
-    -- ** AudienceSegment
-    , AudienceSegment
-    , audienceSegment
-    , asNumCookies
-    , asName
-    , asId
-    , asDescription
+    -- ** Proposal
+    , Proposal
+    , proposal
+    , pBuyerPrivateData
+    , pIsSetupComplete
+    , pInventorySource
+    , pBuyerContacts
+    , pKind
+    , pOriginatorRole
+    , pRevisionNumber
+    , pBilledBuyer
+    , pIsRenegotiating
+    , pHasSellerSignedOff
+    , pSeller
+    , pProposalId
+    , pName
+    , pSellerContacts
+    , pLastUpdaterRole
+    , pLabels
+    , pRevisionTimeMs
+    , pProposalState
+    , pLastUpdaterOrCommentorRole
+    , pHasBuyerSignedOff
+    , pBuyer
 
     -- ** BillingInfoList
     , BillingInfoList
     , billingInfoList
     , bilKind
     , bilItems
-
-    -- ** MarketplaceOffer
-    , MarketplaceOffer
-    , marketplaceOffer
-    , moState
-    , moWebPropertyCode
-    , moCreationTimeMs
-    , moTerms
-    , moLastUpdateTimeMs
-    , moKind
-    , moRevisionNumber
-    , moHasCreatorSignedOff
-    , moFlightStartTimeMs
-    , moSharedTargetings
-    , moSeller
-    , moSyndicationProduct
-    , moFlightEndTimeMs
-    , moName
-    , moCreatorContacts
-    , moOfferId
-    , moLabels
 
     -- ** AddOrderNotesResponse
     , AddOrderNotesResponse
@@ -670,48 +498,11 @@ module Network.Google.AdExchangeBuyer
     , tvsHeight
     , tvsWidth
 
-    -- ** GetNegotiationsRequest
-    , GetNegotiationsRequest
-    , getNegotiationsRequest
-    , gnrSinceTimestampMillis
-    , gnrFinalized
-    , gnrIncludePrivateAuctions
-
-    -- ** MoneyDTO
-    , MoneyDTO
-    , moneyDTO
-    , mdtoCurrencyCode
-    , mdtoMicros
-
-    -- ** GetNegotiationByIdRequest
-    , GetNegotiationByIdRequest
-    , getNegotiationByIdRequest
-    , gnbirIncludePrivateAuctions
-
-    -- ** ListOffersResponse
-    , ListOffersResponse
-    , listOffersResponse
-    , lorKind
-    , lorOffers
-
     -- ** PretargetingConfigDimensionsItem
     , PretargetingConfigDimensionsItem
     , pretargetingConfigDimensionsItem
     , pcdiHeight
     , pcdiWidth
-
-    -- ** AdvertiserDTO
-    , AdvertiserDTO
-    , advertiserDTO
-    , adtoStatus
-    , adtoBrands
-    , adtoName
-    , adtoId
-
-    -- ** ListClientAccessCapabilitiesResponse
-    , ListClientAccessCapabilitiesResponse
-    , listClientAccessCapabilitiesResponse
-    , lcacrClientAccessPermissions
 
     -- ** TargetingValue
     , TargetingValue
@@ -733,14 +524,22 @@ module Network.Google.AdExchangeBuyer
     , price
     , pCurrencyCode
     , pAmountMicros
+    , pPricingType
+
+    -- ** PretargetingConfigVideoPlayerSizesItem
+    , PretargetingConfigVideoPlayerSizesItem
+    , pretargetingConfigVideoPlayerSizesItem
+    , pcvpsiMinWidth
+    , pcvpsiAspectRatio
+    , pcvpsiMinHeight
 
     -- ** EditAllOrderDealsRequest
     , EditAllOrderDealsRequest
     , editAllOrderDealsRequest
     , eUpdateAction
     , eDeals
-    , eOrder
-    , eOrderRevisionNumber
+    , eProposalRevisionNumber
+    , eProposal
 
     -- ** BillingInfo
     , BillingInfo
@@ -763,51 +562,6 @@ module Network.Google.AdExchangeBuyer
     , stExclusions
     , stInclusions
 
-    -- ** ListClientAccessCapabilitiesRequest
-    , ListClientAccessCapabilitiesRequest
-    , listClientAccessCapabilitiesRequest
-    , lcacrSponsorAccountId
-
-    -- ** InventorySegmentTargeting
-    , InventorySegmentTargeting
-    , inventorySegmentTargeting
-    , istNegativeVideoDurationSegments
-    , istNegativeIcmBrands
-    , istNegativeKeyValues
-    , istPositiveAudienceSegments
-    , istPositiveXfpPlacements
-    , istNegativeXfpAdSlots
-    , istPositiveOperatingSystemVersions
-    , istPositiveSizes
-    , istPositiveDeviceCategories
-    , istPositiveLocations
-    , istNegativeAdSizes
-    , istPositiveOperatingSystems
-    , istPositiveSiteURLs
-    , istNegativeInventorySlots
-    , istNegativeVideoAdPositionSegments
-    , istPositiveAdTypeSegments
-    , istPositiveIcmInterests
-    , istPositiveMobileApps
-    , istPositiveKeyValues
-    , istPositiveIcmBrands
-    , istPositiveVideoDurationSegments
-    , istNegativeAudienceSegments
-    , istNegativeXfpPlacements
-    , istPositiveXfpAdSlots
-    , istNegativeOperatingSystemVersions
-    , istNegativeSizes
-    , istNegativeLocations
-    , istNegativeDeviceCategories
-    , istNegativeOperatingSystems
-    , istPositiveAdSizes
-    , istNegativeSiteURLs
-    , istNegativeAdTypeSegments
-    , istPositiveVideoAdPositionSegments
-    , istPositiveInventorySlots
-    , istNegativeMobileApps
-    , istNegativeIcmInterests
-
     -- ** CreativeNATiveAdImage
     , CreativeNATiveAdImage
     , creativeNATiveAdImage
@@ -815,27 +569,27 @@ module Network.Google.AdExchangeBuyer
     , cnataiURL
     , cnataiWidth
 
-    -- ** WebPropertyDTO
-    , WebPropertyDTO
-    , webPropertyDTO
-    , wpdtoEnabledForPreferredDeals
-    , wpdtoSyndicationProduct
-    , wpdtoName
-    , wpdtoPropertyCode
-    , wpdtoId
-    , wpdtoSiteURLs
-    , wpdtoAllowInterestTargetedAds
-
-    -- ** ListOffersRequest
-    , ListOffersRequest
-    , listOffersRequest
-    , lorSinceTimestampMillis
-
-    -- ** ClientAccessCapabilities
-    , ClientAccessCapabilities
-    , clientAccessCapabilities
-    , cacClientAccountId
-    , cacCapabilities
+    -- ** Product
+    , Product
+    , product
+    , proState
+    , proInventorySource
+    , proWebPropertyCode
+    , proCreationTimeMs
+    , proTerms
+    , proLastUpdateTimeMs
+    , proKind
+    , proRevisionNumber
+    , proHasCreatorSignedOff
+    , proFlightStartTimeMs
+    , proSharedTargetings
+    , proSeller
+    , proSyndicationProduct
+    , proFlightEndTimeMs
+    , proName
+    , proCreatorContacts
+    , proLabels
+    , proProductId
 
     -- ** CreativeServingRestrictionsItem
     , CreativeServingRestrictionsItem
@@ -848,7 +602,7 @@ module Network.Google.AdExchangeBuyer
     , DeleteOrderDealsResponse
     , deleteOrderDealsResponse
     , dDeals
-    , dOrderRevisionNumber
+    , dProposalRevisionNumber
 
     -- ** PretargetingConfigPlacementsItem
     , PretargetingConfigPlacementsItem
@@ -864,35 +618,26 @@ module Network.Google.AdExchangeBuyer
     , mdWebPropertyCode
     , mdCreationTimeMs
     , mdTerms
-    , mdOfferRevisionNumber
     , mdLastUpdateTimeMs
     , mdKind
     , mdDeliveryControl
     , mdFlightStartTimeMs
     , mdSharedTargetings
+    , mdProposalId
     , mdDealId
     , mdInventoryDescription
     , mdSyndicationProduct
     , mdFlightEndTimeMs
     , mdName
     , mdSellerContacts
-    , mdOfferId
-    , mdOrderId
+    , mdCreativePreApprovalPolicy
+    , mdProductRevisionNumber
+    , mdProductId
 
     -- ** GetOffersResponse
     , GetOffersResponse
     , getOffersResponse
-    , gorOffers
-
-    -- ** StatsDTO
-    , StatsDTO
-    , statsDTO
-    , sdtoBids
-    , sdtoSpend
-    , sdtoImpressions
-    , sdtoGoodBids
-    , sdtoRevenue
-    , sdtoRequests
+    , gorProducts
 
     -- ** DealTermsNonGuaranteedAuctionTerms
     , DealTermsNonGuaranteedAuctionTerms
@@ -906,18 +651,8 @@ module Network.Google.AdExchangeBuyer
     , cfrriFilteringStatus
     , cfrriFilteringCount
 
-    -- ** NegotiationRoundDTO
-    , NegotiationRoundDTO
-    , negotiationRoundDTO
-    , nrdtoTerms
-    , nrdtoKind
-    , nrdtoOriginatorRole
-    , nrdtoAction
-    , nrdtoDBmPartnerId
-    , nrdtoNotes
-    , nrdtoNegotiationId
-    , nrdtoEditHistory
-    , nrdtoRoundNumber
+    -- ** ProposalsPatchUpdateAction
+    , ProposalsPatchUpdateAction (..)
 
     -- ** CreativesListDealsStatusFilter
     , CreativesListDealsStatusFilter (..)
@@ -925,21 +660,13 @@ module Network.Google.AdExchangeBuyer
     -- ** DealTerms
     , DealTerms
     , dealTerms
+    , dtEstimatedGrossSpend
     , dtNonGuaranteedFixedPriceTerms
     , dtNonGuaranteedAuctionTerms
+    , dtBrandingType
+    , dtEstimatedImpressionsPerDay
     , dtGuaranteedFixedPriceTerms
     , dtDescription
-
-    -- ** DateTime
-    , DateTime
-    , dateTime
-    , dtSecond
-    , dtDay
-    , dtYear
-    , dtHour
-    , dtMonth
-    , dtMinute
-    , dtTimeZoneId
 
     -- ** MarketplaceLabel
     , MarketplaceLabel
@@ -949,49 +676,20 @@ module Network.Google.AdExchangeBuyer
     , mlCreateTimeMs
     , mlLabel
 
-    -- ** EditHistoryDTO
-    , EditHistoryDTO
-    , editHistoryDTO
-    , ehdtoLastUpdatedByLoginName
-    , ehdtoCreatedByLoginName
-    , ehdtoLastUpdateTimeStamp
-    , ehdtoCreatedTimeStamp
-
     -- ** Buyer
     , Buyer
     , buyer
-    , bbAccountId
+    , buyAccountId
 
-    -- ** MarketplaceOrder
-    , MarketplaceOrder
-    , marketplaceOrder
-    , mBuyerPrivateData
-    , mIsSetupComplete
-    , mBuyerContacts
-    , mKind
-    , mOriginatorRole
-    , mRevisionNumber
-    , mBilledBuyer
-    , mIsRenegotiating
-    , mHasSellerSignedOff
-    , mSeller
-    , mOrderState
-    , mName
-    , mSellerContacts
-    , mLastUpdaterRole
-    , mLabels
-    , mRevisionTimeMs
-    , mOrderId
-    , mLastUpdaterOrCommentorRole
-    , mHasBuyerSignedOff
-    , mBuyer
+    -- ** ProposalsUpdateUpdateAction
+    , ProposalsUpdateUpdateAction (..)
 
     -- ** AddOrderDealsRequest
     , AddOrderDealsRequest
     , addOrderDealsRequest
     , aUpdateAction
     , aDeals
-    , aOrderRevisionNumber
+    , aProposalRevisionNumber
 
     -- ** DealTermsGuaranteedFixedPriceTerms
     , DealTermsGuaranteedFixedPriceTerms
@@ -1012,36 +710,17 @@ import           Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
 import           Network.Google.Resource.AdExchangeBuyer.Budget.Get
 import           Network.Google.Resource.AdExchangeBuyer.Budget.Patch
 import           Network.Google.Resource.AdExchangeBuyer.Budget.Update
-import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
-import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Get
-import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
-import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
-import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
-import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
+import           Network.Google.Resource.AdExchangeBuyer.Creatives.AddDeal
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.Get
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.List
-import           Network.Google.Resource.AdExchangeBuyer.Deals.Get
+import           Network.Google.Resource.AdExchangeBuyer.Creatives.RemoveDeal
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
-import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Get
-import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Search
-import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
-import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
-import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
-import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
-import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
-import           Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
-import           Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
-import           Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
-import           Network.Google.Resource.AdExchangeBuyer.Negotiations.List
-import           Network.Google.Resource.AdExchangeBuyer.Offers.Get
-import           Network.Google.Resource.AdExchangeBuyer.Offers.Insert
-import           Network.Google.Resource.AdExchangeBuyer.Offers.List
 import           Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
 import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
 import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
@@ -1049,6 +728,13 @@ import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Inse
 import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.List
 import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
 import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
+import           Network.Google.Resource.AdExchangeBuyer.Products.Get
+import           Network.Google.Resource.AdExchangeBuyer.Products.Search
+import           Network.Google.Resource.AdExchangeBuyer.Proposals.Get
+import           Network.Google.Resource.AdExchangeBuyer.Proposals.Insert
+import           Network.Google.Resource.AdExchangeBuyer.Proposals.Patch
+import           Network.Google.Resource.AdExchangeBuyer.Proposals.Search
+import           Network.Google.Resource.AdExchangeBuyer.Proposals.Update
 
 {- $resources
 TODO
@@ -1058,8 +744,11 @@ TODO
 type AdExchangeBuyerAPI =
      MarketplaceNotesInsertResource :<|>
        MarketplaceNotesListResource
-       :<|> DealsGetResource
-       :<|> NegotiationRoundsInsertResource
+       :<|> ProposalsInsertResource
+       :<|> ProposalsPatchResource
+       :<|> ProposalsGetResource
+       :<|> ProposalsSearchResource
+       :<|> ProposalsUpdateResource
        :<|> AccountsListResource
        :<|> AccountsPatchResource
        :<|> AccountsGetResource
@@ -1068,37 +757,22 @@ type AdExchangeBuyerAPI =
        :<|> BudgetGetResource
        :<|> BudgetUpdateResource
        :<|> CreativesInsertResource
+       :<|> CreativesRemoveDealResource
        :<|> CreativesListResource
        :<|> CreativesGetResource
+       :<|> CreativesAddDealResource
        :<|> PerformanceReportListResource
-       :<|> MarketplaceOffersGetResource
-       :<|> MarketplaceOffersSearchResource
        :<|> PretargetingConfigInsertResource
        :<|> PretargetingConfigListResource
        :<|> PretargetingConfigPatchResource
        :<|> PretargetingConfigGetResource
        :<|> PretargetingConfigDeleteResource
        :<|> PretargetingConfigUpdateResource
-       :<|> MarketplaceOrdersInsertResource
-       :<|> MarketplaceOrdersPatchResource
-       :<|> MarketplaceOrdersGetResource
-       :<|> MarketplaceOrdersSearchResource
-       :<|> MarketplaceOrdersUpdateResource
-       :<|> ClientAccessInsertResource
-       :<|> ClientAccessListResource
-       :<|> ClientAccessPatchResource
-       :<|> ClientAccessGetResource
-       :<|> ClientAccessDeleteResource
-       :<|> ClientAccessUpdateResource
        :<|> BillingInfoListResource
        :<|> BillingInfoGetResource
+       :<|> ProductsGetResource
+       :<|> ProductsSearchResource
        :<|> MarketplaceDealsInsertResource
        :<|> MarketplaceDealsListResource
        :<|> MarketplaceDealsDeleteResource
        :<|> MarketplaceDealsUpdateResource
-       :<|> NegotiationsInsertResource
-       :<|> NegotiationsListResource
-       :<|> NegotiationsGetResource
-       :<|> OffersInsertResource
-       :<|> OffersListResource
-       :<|> OffersGetResource

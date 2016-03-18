@@ -15,12 +15,12 @@ extra-source-files:    README.md
 
 description:
     The Google Cloud Resource Manager API provides methods for creating,
-    reading, and updating of project metadata.
+    reading, and updating project metadata.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta1@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -34,14 +34,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.CloudResourceManager.Organizations.Get
-        , Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
-        , Network.Google.Resource.CloudResourceManager.Organizations.List
-        , Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
-        , Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
-        , Network.Google.Resource.CloudResourceManager.Organizations.Update
-        , Network.Google.Resource.CloudResourceManager.Projects.Create
-        , Network.Google.Resource.CloudResourceManager.Projects.Delete
+          Network.Google.Resource.CloudResourceManager.Projects.Delete
         , Network.Google.Resource.CloudResourceManager.Projects.Get
         , Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
         , Network.Google.Resource.CloudResourceManager.Projects.List

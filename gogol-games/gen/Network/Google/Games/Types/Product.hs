@@ -6284,8 +6284,8 @@ achievementIncrementResponse =
 airKind :: Lens' AchievementIncrementResponse Text
 airKind = lens _airKind (\ s a -> s{_airKind = a})
 
--- | Whether the the current steps for the achievement has reached the number
--- of steps required to unlock.
+-- | Whether the current steps for the achievement has reached the number of
+-- steps required to unlock.
 airNewlyUnlocked :: Lens' AchievementIncrementResponse (Maybe Bool)
 airNewlyUnlocked
   = lens _airNewlyUnlocked
@@ -7590,19 +7590,24 @@ instance ToJSON GamesAchievementSetStepsAtLeast where
 --
 -- /See:/ 'player' smart constructor.
 data Player = Player
-    { _plaLastPlayedWith :: !(Maybe Played)
-    , _plaAvatarImageURL :: !(Maybe Text)
-    , _plaKind           :: !Text
-    , _plaExperienceInfo :: !(Maybe PlayerExperienceInfo)
-    , _plaName           :: !(Maybe PlayerName)
-    , _plaDisplayName    :: !(Maybe Text)
-    , _plaTitle          :: !(Maybe Text)
-    , _plaPlayerId       :: !(Maybe Text)
+    { _plaBannerURLLandscape :: !(Maybe Text)
+    , _plaLastPlayedWith     :: !(Maybe Played)
+    , _plaAvatarImageURL     :: !(Maybe Text)
+    , _plaKind               :: !Text
+    , _plaExperienceInfo     :: !(Maybe PlayerExperienceInfo)
+    , _plaName               :: !(Maybe PlayerName)
+    , _plaOriginalPlayerId   :: !(Maybe Text)
+    , _plaDisplayName        :: !(Maybe Text)
+    , _plaTitle              :: !(Maybe Text)
+    , _plaBannerURLPortrait  :: !(Maybe Text)
+    , _plaPlayerId           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plaBannerURLLandscape'
 --
 -- * 'plaLastPlayedWith'
 --
@@ -7614,24 +7619,37 @@ data Player = Player
 --
 -- * 'plaName'
 --
+-- * 'plaOriginalPlayerId'
+--
 -- * 'plaDisplayName'
 --
 -- * 'plaTitle'
+--
+-- * 'plaBannerURLPortrait'
 --
 -- * 'plaPlayerId'
 player
     :: Player
 player =
     Player
-    { _plaLastPlayedWith = Nothing
+    { _plaBannerURLLandscape = Nothing
+    , _plaLastPlayedWith = Nothing
     , _plaAvatarImageURL = Nothing
     , _plaKind = "games#player"
     , _plaExperienceInfo = Nothing
     , _plaName = Nothing
+    , _plaOriginalPlayerId = Nothing
     , _plaDisplayName = Nothing
     , _plaTitle = Nothing
+    , _plaBannerURLPortrait = Nothing
     , _plaPlayerId = Nothing
     }
+
+-- | The url to the landscape mode player banner image.
+plaBannerURLLandscape :: Lens' Player (Maybe Text)
+plaBannerURLLandscape
+  = lens _plaBannerURLLandscape
+      (\ s a -> s{_plaBannerURLLandscape = a})
 
 -- | Details about the last time this player played a multiplayer game with
 -- the currently authenticated player. Populated for PLAYED_WITH player
@@ -7663,6 +7681,16 @@ plaExperienceInfo
 plaName :: Lens' Player (Maybe PlayerName)
 plaName = lens _plaName (\ s a -> s{_plaName = a})
 
+-- | The player ID that was used for this player the first time they signed
+-- into the game in question. This is only populated for calls to
+-- player.get for the requesting player, only if the player ID has
+-- subsequently changed, and only to clients that support remapping player
+-- IDs.
+plaOriginalPlayerId :: Lens' Player (Maybe Text)
+plaOriginalPlayerId
+  = lens _plaOriginalPlayerId
+      (\ s a -> s{_plaOriginalPlayerId = a})
+
 -- | The name to display for the player.
 plaDisplayName :: Lens' Player (Maybe Text)
 plaDisplayName
@@ -7672,6 +7700,12 @@ plaDisplayName
 -- | The player\'s title rewarded for their game activities.
 plaTitle :: Lens' Player (Maybe Text)
 plaTitle = lens _plaTitle (\ s a -> s{_plaTitle = a})
+
+-- | The url to the portrait mode player banner image.
+plaBannerURLPortrait :: Lens' Player (Maybe Text)
+plaBannerURLPortrait
+  = lens _plaBannerURLPortrait
+      (\ s a -> s{_plaBannerURLPortrait = a})
 
 -- | The ID of the player.
 plaPlayerId :: Lens' Player (Maybe Text)
@@ -7683,25 +7717,33 @@ instance FromJSON Player where
           = withObject "Player"
               (\ o ->
                  Player <$>
-                   (o .:? "lastPlayedWith") <*> (o .:? "avatarImageUrl")
+                   (o .:? "bannerUrlLandscape") <*>
+                     (o .:? "lastPlayedWith")
+                     <*> (o .:? "avatarImageUrl")
                      <*> (o .:? "kind" .!= "games#player")
                      <*> (o .:? "experienceInfo")
                      <*> (o .:? "name")
+                     <*> (o .:? "originalPlayerId")
                      <*> (o .:? "displayName")
                      <*> (o .:? "title")
+                     <*> (o .:? "bannerUrlPortrait")
                      <*> (o .:? "playerId"))
 
 instance ToJSON Player where
         toJSON Player{..}
           = object
               (catMaybes
-                 [("lastPlayedWith" .=) <$> _plaLastPlayedWith,
+                 [("bannerUrlLandscape" .=) <$>
+                    _plaBannerURLLandscape,
+                  ("lastPlayedWith" .=) <$> _plaLastPlayedWith,
                   ("avatarImageUrl" .=) <$> _plaAvatarImageURL,
                   Just ("kind" .= _plaKind),
                   ("experienceInfo" .=) <$> _plaExperienceInfo,
                   ("name" .=) <$> _plaName,
+                  ("originalPlayerId" .=) <$> _plaOriginalPlayerId,
                   ("displayName" .=) <$> _plaDisplayName,
                   ("title" .=) <$> _plaTitle,
+                  ("bannerUrlPortrait" .=) <$> _plaBannerURLPortrait,
                   ("playerId" .=) <$> _plaPlayerId])
 
 -- | This is a JSON template for the payload to request to increment an
@@ -8047,6 +8089,69 @@ instance ToJSON EventChild where
               (catMaybes
                  [Just ("kind" .= _ecKind),
                   ("childId" .=) <$> _ecChildId])
+
+-- | This is a JSON template for a third party application verification
+-- response resource.
+--
+-- /See:/ 'applicationVerifyResponse' smart constructor.
+data ApplicationVerifyResponse = ApplicationVerifyResponse
+    { _avrKind              :: !Text
+    , _avrAlternatePlayerId :: !(Maybe Text)
+    , _avrPlayerId          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApplicationVerifyResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'avrKind'
+--
+-- * 'avrAlternatePlayerId'
+--
+-- * 'avrPlayerId'
+applicationVerifyResponse
+    :: ApplicationVerifyResponse
+applicationVerifyResponse =
+    ApplicationVerifyResponse
+    { _avrKind = "games#applicationVerifyResponse"
+    , _avrAlternatePlayerId = Nothing
+    , _avrPlayerId = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#applicationVerifyResponse.
+avrKind :: Lens' ApplicationVerifyResponse Text
+avrKind = lens _avrKind (\ s a -> s{_avrKind = a})
+
+-- | An alternate ID that was once used for the player that was issued the
+-- auth token used in this request. (This field is not normally populated.)
+avrAlternatePlayerId :: Lens' ApplicationVerifyResponse (Maybe Text)
+avrAlternatePlayerId
+  = lens _avrAlternatePlayerId
+      (\ s a -> s{_avrAlternatePlayerId = a})
+
+-- | The ID of the player that was issued the auth token used in this
+-- request.
+avrPlayerId :: Lens' ApplicationVerifyResponse (Maybe Text)
+avrPlayerId
+  = lens _avrPlayerId (\ s a -> s{_avrPlayerId = a})
+
+instance FromJSON ApplicationVerifyResponse where
+        parseJSON
+          = withObject "ApplicationVerifyResponse"
+              (\ o ->
+                 ApplicationVerifyResponse <$>
+                   (o .:? "kind" .!= "games#applicationVerifyResponse")
+                     <*> (o .:? "alternate_player_id")
+                     <*> (o .:? "player_id"))
+
+instance ToJSON ApplicationVerifyResponse where
+        toJSON ApplicationVerifyResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _avrKind),
+                  ("alternate_player_id" .=) <$> _avrAlternatePlayerId,
+                  ("player_id" .=) <$> _avrPlayerId])
 
 -- | This is a JSON template for a ListByPlayer response.
 --

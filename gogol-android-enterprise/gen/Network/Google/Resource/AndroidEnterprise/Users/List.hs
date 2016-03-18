@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up a user by email address.
+-- Looks up a user by their primary email address.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.list@.
 module Network.Google.Resource.AndroidEnterprise.Users.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ type UsersListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] UsersListResponse
 
--- | Looks up a user by email address.
+-- | Looks up a user by their primary email address.
 --
 -- /See:/ 'usersList' smart constructor.
 data UsersList = UsersList

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Changes target url for forwarding rule.
+-- Changes target URL for forwarding rule. The new target should be of the
+-- same type as the old target.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.forwardingRules.setTarget@.
 module Network.Google.Resource.Compute.ForwardingRules.SetTarget
@@ -58,7 +59,8 @@ type ForwardingRulesSetTargetResource =
                          ReqBody '[JSON] TargetReference :>
                            Post '[JSON] Operation
 
--- | Changes target url for forwarding rule.
+-- | Changes target URL for forwarding rule. The new target should be of the
+-- same type as the old target.
 --
 -- /See:/ 'forwardingRulesSetTarget' smart constructor.
 data ForwardingRulesSetTarget = ForwardingRulesSetTarget
@@ -93,7 +95,7 @@ forwardingRulesSetTarget pFrstProject_ pFrstForwardingRule_ pFrstPayload_ pFrstR
     , _frstRegion = pFrstRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 frstProject :: Lens' ForwardingRulesSetTarget Text
 frstProject
   = lens _frstProject (\ s a -> s{_frstProject = a})

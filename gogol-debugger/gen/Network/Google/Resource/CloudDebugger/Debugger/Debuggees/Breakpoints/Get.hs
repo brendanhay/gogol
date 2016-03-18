@@ -41,6 +41,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
     , ddbgBreakpointId
     , ddbgBearerToken
     , ddbgDebuggeeId
+    , ddbgClientVersion
     , ddbgCallback
     ) where
 
@@ -62,9 +63,10 @@ type DebuggerDebuggeesBreakpointsGetResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] GetBreakpointResponse
+                             QueryParam "clientVersion" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] GetBreakpointResponse
 
 -- | Gets breakpoint information.
 --
@@ -78,6 +80,7 @@ data DebuggerDebuggeesBreakpointsGet = DebuggerDebuggeesBreakpointsGet
     , _ddbgBreakpointId   :: !Text
     , _ddbgBearerToken    :: !(Maybe Text)
     , _ddbgDebuggeeId     :: !Text
+    , _ddbgClientVersion  :: !(Maybe Text)
     , _ddbgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,6 +104,8 @@ data DebuggerDebuggeesBreakpointsGet = DebuggerDebuggeesBreakpointsGet
 --
 -- * 'ddbgDebuggeeId'
 --
+-- * 'ddbgClientVersion'
+--
 -- * 'ddbgCallback'
 debuggerDebuggeesBreakpointsGet
     :: Text -- ^ 'ddbgBreakpointId'
@@ -116,6 +121,7 @@ debuggerDebuggeesBreakpointsGet pDdbgBreakpointId_ pDdbgDebuggeeId_ =
     , _ddbgBreakpointId = pDdbgBreakpointId_
     , _ddbgBearerToken = Nothing
     , _ddbgDebuggeeId = pDdbgDebuggeeId_
+    , _ddbgClientVersion = Nothing
     , _ddbgCallback = Nothing
     }
 
@@ -146,7 +152,7 @@ ddbgUploadType
   = lens _ddbgUploadType
       (\ s a -> s{_ddbgUploadType = a})
 
--- | The breakpoint to get.
+-- | ID of the breakpoint to get.
 ddbgBreakpointId :: Lens' DebuggerDebuggeesBreakpointsGet Text
 ddbgBreakpointId
   = lens _ddbgBreakpointId
@@ -158,11 +164,18 @@ ddbgBearerToken
   = lens _ddbgBearerToken
       (\ s a -> s{_ddbgBearerToken = a})
 
--- | The debuggee id to get the breakpoint from.
+-- | ID of the debuggee whose breakpoint to get.
 ddbgDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsGet Text
 ddbgDebuggeeId
   = lens _ddbgDebuggeeId
       (\ s a -> s{_ddbgDebuggeeId = a})
+
+-- | The client version making the call. Following: \`domain\/type\/version\`
+-- (e.g., \`google.com\/intellij\/v1\`).
+ddbgClientVersion :: Lens' DebuggerDebuggeesBreakpointsGet (Maybe Text)
+ddbgClientVersion
+  = lens _ddbgClientVersion
+      (\ s a -> s{_ddbgClientVersion = a})
 
 -- | JSONP
 ddbgCallback :: Lens' DebuggerDebuggeesBreakpointsGet (Maybe Text)
@@ -180,6 +193,7 @@ instance GoogleRequest
               _ddbgAccessToken
               _ddbgUploadType
               _ddbgBearerToken
+              _ddbgClientVersion
               _ddbgCallback
               (Just AltJSON)
               debuggerService

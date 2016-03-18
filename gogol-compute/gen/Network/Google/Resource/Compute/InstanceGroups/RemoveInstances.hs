@@ -95,7 +95,7 @@ instanceGroupsRemoveInstances pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInstan
     , _igriInstanceGroup = pIgriInstanceGroup_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igriProject :: Lens' InstanceGroupsRemoveInstances Text
 igriProject
   = lens _igriProject (\ s a -> s{_igriProject = a})

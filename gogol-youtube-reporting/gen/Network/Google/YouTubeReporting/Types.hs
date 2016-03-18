@@ -58,6 +58,7 @@ module Network.Google.YouTubeReporting.Types
     , job
     , jName
     , jId
+    , jSystemManaged
     , jReportTypeId
     , jCreateTime
 
@@ -72,6 +73,7 @@ module Network.Google.YouTubeReporting.Types
     , reportType
     , rtName
     , rtId
+    , rtSystemManaged
     ) where
 
 import           Network.Google.Prelude
@@ -79,7 +81,7 @@ import           Network.Google.YouTubeReporting.Types.Product
 import           Network.Google.YouTubeReporting.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Reporting API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeReportingService :: Service
+youTubeReportingService :: ServiceConfig
 youTubeReportingService
   = defaultService (ServiceId "youtubereporting:v1")
       "youtubereporting.googleapis.com"

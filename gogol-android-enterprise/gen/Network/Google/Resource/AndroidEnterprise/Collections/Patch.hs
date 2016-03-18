@@ -22,7 +22,7 @@
 --
 -- Updates a collection. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.patch@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.patch@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Patch
     (
     -- * REST Resource

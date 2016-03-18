@@ -80,7 +80,7 @@ targetHTTPProxiesInsert pThttppiProject_ pThttppiPayload_ =
     , _thttppiPayload = pThttppiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thttppiProject :: Lens' TargetHTTPProxiesInsert Text
 thttppiProject
   = lens _thttppiProject

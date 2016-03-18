@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the entire content of the BackendService resource.
+-- Updates the entire content of the BackendService resource. There are
+-- several restrictions and guidelines to keep in mind when updating a
+-- backend service. Read Restrictions and Guidelines for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.update@.
 module Network.Google.Resource.Compute.BackendServices.Update
@@ -55,7 +57,9 @@ type BackendServicesUpdateResource =
                      ReqBody '[JSON] BackendService :>
                        Put '[JSON] Operation
 
--- | Update the entire content of the BackendService resource.
+-- | Updates the entire content of the BackendService resource. There are
+-- several restrictions and guidelines to keep in mind when updating a
+-- backend service. Read Restrictions and Guidelines for more information.
 --
 -- /See:/ 'backendServicesUpdate' smart constructor.
 data BackendServicesUpdate = BackendServicesUpdate
@@ -85,7 +89,7 @@ backendServicesUpdate pBsuProject_ pBsuPayload_ pBsuBackendService_ =
     , _bsuBackendService = pBsuBackendService_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 bsuProject :: Lens' BackendServicesUpdate Text
 bsuProject
   = lens _bsuProject (\ s a -> s{_bsuProject = a})

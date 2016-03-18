@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsList' request conforms to.
 type FloodlightConfigurationsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>

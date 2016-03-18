@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesInsert' request conforms to.
 type LandingPagesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>

@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 -- 'FilesEmptyTrash' request conforms to.
 type FilesEmptyTrashResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            "trash" :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()

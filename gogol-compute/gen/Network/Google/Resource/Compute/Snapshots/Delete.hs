@@ -37,8 +37,8 @@ module Network.Google.Resource.Compute.Snapshots.Delete
     , SnapshotsDelete
 
     -- * Request Lenses
-    , sdSnapshot
-    , sdProject
+    , snaSnapshot
+    , snaProject
     ) where
 
 import           Network.Google.Compute.Types
@@ -64,41 +64,41 @@ type SnapshotsDeleteResource =
 --
 -- /See:/ 'snapshotsDelete' smart constructor.
 data SnapshotsDelete = SnapshotsDelete
-    { _sdSnapshot :: !Text
-    , _sdProject  :: !Text
+    { _snaSnapshot :: !Text
+    , _snaProject  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdSnapshot'
+-- * 'snaSnapshot'
 --
--- * 'sdProject'
+-- * 'snaProject'
 snapshotsDelete
-    :: Text -- ^ 'sdSnapshot'
-    -> Text -- ^ 'sdProject'
+    :: Text -- ^ 'snaSnapshot'
+    -> Text -- ^ 'snaProject'
     -> SnapshotsDelete
-snapshotsDelete pSdSnapshot_ pSdProject_ =
+snapshotsDelete pSnaSnapshot_ pSnaProject_ =
     SnapshotsDelete
-    { _sdSnapshot = pSdSnapshot_
-    , _sdProject = pSdProject_
+    { _snaSnapshot = pSnaSnapshot_
+    , _snaProject = pSnaProject_
     }
 
 -- | Name of the Snapshot resource to delete.
-sdSnapshot :: Lens' SnapshotsDelete Text
-sdSnapshot
-  = lens _sdSnapshot (\ s a -> s{_sdSnapshot = a})
+snaSnapshot :: Lens' SnapshotsDelete Text
+snaSnapshot
+  = lens _snaSnapshot (\ s a -> s{_snaSnapshot = a})
 
--- | Name of the project scoping this request.
-sdProject :: Lens' SnapshotsDelete Text
-sdProject
-  = lens _sdProject (\ s a -> s{_sdProject = a})
+-- | Project ID for this request.
+snaProject :: Lens' SnapshotsDelete Text
+snaProject
+  = lens _snaProject (\ s a -> s{_snaProject = a})
 
 instance GoogleRequest SnapshotsDelete where
         type Rs SnapshotsDelete = Operation
         requestClient SnapshotsDelete{..}
-          = go _sdProject _sdSnapshot (Just AltJSON)
+          = go _snaProject _snaSnapshot (Just AltJSON)
               computeService
           where go
                   = buildClient

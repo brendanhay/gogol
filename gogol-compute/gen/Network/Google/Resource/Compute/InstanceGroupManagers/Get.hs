@@ -21,6 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns all of the details about the specified managed instance group.
+-- Get a list of available managed instance groups by making a list()
+-- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.get@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Get
@@ -56,6 +58,8 @@ type InstanceGroupManagersGetResource =
                        Get '[JSON] InstanceGroupManager
 
 -- | Returns all of the details about the specified managed instance group.
+-- Get a list of available managed instance groups by making a list()
+-- request.
 --
 -- /See:/ 'instanceGroupManagersGet' smart constructor.
 data InstanceGroupManagersGet = InstanceGroupManagersGet
@@ -85,7 +89,7 @@ instanceGroupManagersGet pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
     , _igmgZone = pIgmgZone_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmgProject :: Lens' InstanceGroupManagersGet Text
 igmgProject
   = lens _igmgProject (\ s a -> s{_igmgProject = a})

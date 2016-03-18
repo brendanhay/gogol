@@ -44,6 +44,7 @@ library
         , Network.Google.Resource.Games.Achievements.UpdateMultiple
         , Network.Google.Resource.Games.Applications.Get
         , Network.Google.Resource.Games.Applications.Played
+        , Network.Google.Resource.Games.Applications.Verify
         , Network.Google.Resource.Games.Events.ListByPlayer
         , Network.Google.Resource.Games.Events.ListDefinitions
         , Network.Google.Resource.Games.Events.Record

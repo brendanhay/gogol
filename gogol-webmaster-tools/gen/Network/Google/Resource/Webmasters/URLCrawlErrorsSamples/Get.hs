@@ -22,7 +22,7 @@
 --
 -- Retrieves details about crawl errors for a site\'s sample URL.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.get@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.urlcrawlerrorssamples.get@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
     (
     -- * REST Resource

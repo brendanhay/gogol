@@ -94,7 +94,7 @@ rodOperation :: Lens' RegionOperationsDelete Text
 rodOperation
   = lens _rodOperation (\ s a -> s{_rodOperation = a})
 
--- | Name of the region scoping this request.
+-- | Name of the region for this request.
 rodRegion :: Lens' RegionOperationsDelete Text
 rodRegion
   = lens _rodRegion (\ s a -> s{_rodRegion = a})

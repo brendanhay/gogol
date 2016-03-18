@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified TargetPool resource.
+-- Deletes the specified target pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.delete@.
 module Network.Google.Resource.Compute.TargetPools.Delete
@@ -54,7 +54,7 @@ type TargetPoolsDeleteResource =
                    Capture "targetPool" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified TargetPool resource.
+-- | Deletes the specified target pool.
 --
 -- /See:/ 'targetPoolsDelete' smart constructor.
 data TargetPoolsDelete = TargetPoolsDelete
@@ -84,7 +84,7 @@ targetPoolsDelete pTpdProject_ pTpdTargetPool_ pTpdRegion_ =
     , _tpdRegion = pTpdRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tpdProject :: Lens' TargetPoolsDelete Text
 tpdProject
   = lens _tpdProject (\ s a -> s{_tpdProject = a})

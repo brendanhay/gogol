@@ -85,7 +85,7 @@ targetHTTPSProxiesSetURLMap pThpsumProject_ pThpsumPayload_ pThpsumTargetHTTPSPr
     , _thpsumTargetHTTPSProxy = pThpsumTargetHTTPSProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thpsumProject :: Lens' TargetHTTPSProxiesSetURLMap Text
 thpsumProject
   = lens _thpsumProject

@@ -23,7 +23,7 @@
 -- Lists the sitemaps-entries submitted for this site, or included in the
 -- sitemap index file (if sitemapIndex is specified in the request).
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.list@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.list@.
 module Network.Google.Resource.Webmasters.Sitemaps.List
     (
     -- * REST Resource

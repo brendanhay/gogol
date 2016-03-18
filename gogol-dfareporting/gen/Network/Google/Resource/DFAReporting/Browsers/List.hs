@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'BrowsersList' request conforms to.
 type BrowsersListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "browsers" :>

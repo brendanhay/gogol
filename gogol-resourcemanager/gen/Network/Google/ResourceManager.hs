@@ -14,7 +14,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- The Google Cloud Resource Manager API provides methods for creating,
--- reading, and updating of project metadata.
+-- reading, and updating project metadata.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference>
 module Network.Google.ResourceManager
@@ -23,33 +23,13 @@ module Network.Google.ResourceManager
       resourceManagerService
 
     -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
     , cloudPlatformScope
 
     -- * API Declaration
     , ResourceManagerAPI
 
     -- * Resources
-
-    -- ** cloudresourcemanager.organizations.get
-    , module Network.Google.Resource.CloudResourceManager.Organizations.Get
-
-    -- ** cloudresourcemanager.organizations.getIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
-
-    -- ** cloudresourcemanager.organizations.list
-    , module Network.Google.Resource.CloudResourceManager.Organizations.List
-
-    -- ** cloudresourcemanager.organizations.setIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
-
-    -- ** cloudresourcemanager.organizations.testIamPermissions
-    , module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
-
-    -- ** cloudresourcemanager.organizations.update
-    , module Network.Google.Resource.CloudResourceManager.Organizations.Update
-
-    -- ** cloudresourcemanager.projects.create
-    , module Network.Google.Resource.CloudResourceManager.Projects.Create
 
     -- ** cloudresourcemanager.projects.delete
     , module Network.Google.Resource.CloudResourceManager.Projects.Delete
@@ -93,11 +73,6 @@ module Network.Google.ResourceManager
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
 
-    -- ** OrganizationOwner
-    , OrganizationOwner
-    , organizationOwner
-    , ooDirectoryCustomerId
-
     -- ** Project
     , Project
     , project
@@ -140,34 +115,18 @@ module Network.Google.ResourceManager
     , projectLabels
     , plAddtional
 
-    -- ** Organization
-    , Organization
-    , organization
-    , oOwner
-    , oDisplayName
-    , oOrganizationId
+    -- ** UndeleteProjectRequest
+    , UndeleteProjectRequest
+    , undeleteProjectRequest
 
     -- ** Binding
     , Binding
     , binding
     , bMembers
     , bRole
-
-    -- ** ListOrganizationsResponse
-    , ListOrganizationsResponse
-    , listOrganizationsResponse
-    , lorNextPageToken
-    , lorOrganizations
     ) where
 
 import           Network.Google.Prelude
-import           Network.Google.Resource.CloudResourceManager.Organizations.Get
-import           Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
-import           Network.Google.Resource.CloudResourceManager.Organizations.List
-import           Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
-import           Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
-import           Network.Google.Resource.CloudResourceManager.Organizations.Update
-import           Network.Google.Resource.CloudResourceManager.Projects.Create
 import           Network.Google.Resource.CloudResourceManager.Projects.Delete
 import           Network.Google.Resource.CloudResourceManager.Projects.Get
 import           Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
@@ -184,17 +143,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud Resource Manager API service.
 type ResourceManagerAPI =
-     OrganizationsListResource :<|>
-       OrganizationsGetIAMPolicyResource
-       :<|> OrganizationsGetResource
-       :<|> OrganizationsSetIAMPolicyResource
-       :<|> OrganizationsTestIAMPermissionsResource
-       :<|> OrganizationsUpdateResource
-       :<|> ProjectsListResource
-       :<|> ProjectsUndeleteResource
+     ProjectsListResource :<|> ProjectsUndeleteResource
        :<|> ProjectsGetIAMPolicyResource
        :<|> ProjectsGetResource
-       :<|> ProjectsCreateResource
        :<|> ProjectsSetIAMPolicyResource
        :<|> ProjectsTestIAMPermissionsResource
        :<|> ProjectsDeleteResource

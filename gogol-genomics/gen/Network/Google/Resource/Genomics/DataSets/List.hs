@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists datasets within a project.
+-- Lists datasets within a project. For the definitions of datasets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.list@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.list@.
 module Network.Google.Resource.Genomics.DataSets.List
     (
     -- * REST Resource
@@ -66,7 +68,9 @@ type DataSetsListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListDataSetsResponse
 
--- | Lists datasets within a project.
+-- | Lists datasets within a project. For the definitions of datasets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsList' smart constructor.
 data DataSetsList = DataSetsList
@@ -165,8 +169,8 @@ dslProjectId :: Lens' DataSetsList (Maybe Text)
 dslProjectId
   = lens _dslProjectId (\ s a -> s{_dslProjectId = a})
 
--- | The maximum number of results returned by this request. If unspecified,
--- defaults to 50. The maximum value is 1024.
+-- | The maximum number of results to return in a single page. If
+-- unspecified, defaults to 50. The maximum value is 1024.
 dslPageSize :: Lens' DataSetsList (Maybe Int32)
 dslPageSize
   = lens _dslPageSize (\ s a -> s{_dslPageSize = a}) .

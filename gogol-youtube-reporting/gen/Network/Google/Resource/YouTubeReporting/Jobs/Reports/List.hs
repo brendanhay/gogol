@@ -34,12 +34,15 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
     , JobsReportsList
 
     -- * Request Lenses
+    , jrlCreatedAfter
     , jrlXgafv
     , jrlJobId
     , jrlUploadProtocol
     , jrlPp
     , jrlAccessToken
     , jrlUploadType
+    , jrlStartTimeAtOrAfter
+    , jrlStartTimeBefore
     , jrlOnBehalfOfContentOwner
     , jrlBearerToken
     , jrlPageToken
@@ -57,30 +60,36 @@ type JobsReportsListResource =
        "jobs" :>
          Capture "jobId" Text :>
            "reports" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "onBehalfOfContentOwner" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListReportsResponse
+             QueryParam "createdAfter" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "startTimeAtOrAfter" Text :>
+                           QueryParam "startTimeBefore" Text :>
+                             QueryParam "onBehalfOfContentOwner" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "pageSize" (Textual Int32) :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] ListReportsResponse
 
 -- | Lists reports created by a specific job. Returns NOT_FOUND if the job
 -- does not exist.
 --
 -- /See:/ 'jobsReportsList' smart constructor.
 data JobsReportsList = JobsReportsList
-    { _jrlXgafv                  :: !(Maybe Text)
+    { _jrlCreatedAfter           :: !(Maybe Text)
+    , _jrlXgafv                  :: !(Maybe Text)
     , _jrlJobId                  :: !Text
     , _jrlUploadProtocol         :: !(Maybe Text)
     , _jrlPp                     :: !Bool
     , _jrlAccessToken            :: !(Maybe Text)
     , _jrlUploadType             :: !(Maybe Text)
+    , _jrlStartTimeAtOrAfter     :: !(Maybe Text)
+    , _jrlStartTimeBefore        :: !(Maybe Text)
     , _jrlOnBehalfOfContentOwner :: !(Maybe Text)
     , _jrlBearerToken            :: !(Maybe Text)
     , _jrlPageToken              :: !(Maybe Text)
@@ -91,6 +100,8 @@ data JobsReportsList = JobsReportsList
 -- | Creates a value of 'JobsReportsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jrlCreatedAfter'
 --
 -- * 'jrlXgafv'
 --
@@ -103,6 +114,10 @@ data JobsReportsList = JobsReportsList
 -- * 'jrlAccessToken'
 --
 -- * 'jrlUploadType'
+--
+-- * 'jrlStartTimeAtOrAfter'
+--
+-- * 'jrlStartTimeBefore'
 --
 -- * 'jrlOnBehalfOfContentOwner'
 --
@@ -118,18 +133,28 @@ jobsReportsList
     -> JobsReportsList
 jobsReportsList pJrlJobId_ =
     JobsReportsList
-    { _jrlXgafv = Nothing
+    { _jrlCreatedAfter = Nothing
+    , _jrlXgafv = Nothing
     , _jrlJobId = pJrlJobId_
     , _jrlUploadProtocol = Nothing
     , _jrlPp = True
     , _jrlAccessToken = Nothing
     , _jrlUploadType = Nothing
+    , _jrlStartTimeAtOrAfter = Nothing
+    , _jrlStartTimeBefore = Nothing
     , _jrlOnBehalfOfContentOwner = Nothing
     , _jrlBearerToken = Nothing
     , _jrlPageToken = Nothing
     , _jrlPageSize = Nothing
     , _jrlCallback = Nothing
     }
+
+-- | If set, only reports created after the specified date\/time are
+-- returned.
+jrlCreatedAfter :: Lens' JobsReportsList (Maybe Text)
+jrlCreatedAfter
+  = lens _jrlCreatedAfter
+      (\ s a -> s{_jrlCreatedAfter = a})
 
 -- | V1 error format.
 jrlXgafv :: Lens' JobsReportsList (Maybe Text)
@@ -160,6 +185,20 @@ jrlUploadType :: Lens' JobsReportsList (Maybe Text)
 jrlUploadType
   = lens _jrlUploadType
       (\ s a -> s{_jrlUploadType = a})
+
+-- | If set, only reports whose start time is greater than or equal the
+-- specified date\/time are returned.
+jrlStartTimeAtOrAfter :: Lens' JobsReportsList (Maybe Text)
+jrlStartTimeAtOrAfter
+  = lens _jrlStartTimeAtOrAfter
+      (\ s a -> s{_jrlStartTimeAtOrAfter = a})
+
+-- | If set, only reports whose start time is smaller than the specified
+-- date\/time are returned.
+jrlStartTimeBefore :: Lens' JobsReportsList (Maybe Text)
+jrlStartTimeBefore
+  = lens _jrlStartTimeBefore
+      (\ s a -> s{_jrlStartTimeBefore = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
@@ -196,10 +235,13 @@ jrlCallback
 instance GoogleRequest JobsReportsList where
         type Rs JobsReportsList = ListReportsResponse
         requestClient JobsReportsList{..}
-          = go _jrlJobId _jrlXgafv _jrlUploadProtocol
+          = go _jrlJobId _jrlCreatedAfter _jrlXgafv
+              _jrlUploadProtocol
               (Just _jrlPp)
               _jrlAccessToken
               _jrlUploadType
+              _jrlStartTimeAtOrAfter
+              _jrlStartTimeBefore
               _jrlOnBehalfOfContentOwner
               _jrlBearerToken
               _jrlPageToken

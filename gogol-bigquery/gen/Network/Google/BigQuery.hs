@@ -164,6 +164,21 @@ module Network.Google.BigQuery
     , plKind
     , plProjects
 
+    -- ** ExplainQueryStep
+    , ExplainQueryStep
+    , explainQueryStep
+    , eqsSubsteps
+    , eqsKind
+
+    -- ** BigtableColumnFamily
+    , BigtableColumnFamily
+    , bigtableColumnFamily
+    , bcfFamilyId
+    , bcfColumns
+    , bcfOnlyReadLatest
+    , bcfType
+    , bcfEncoding
+
     -- ** JobStatistics
     , JobStatistics
     , jobStatistics
@@ -191,14 +206,22 @@ module Network.Google.BigQuery
     , dsDefaultTableExpirationMs
     , dsDescription
 
+    -- ** BigtableOptions
+    , BigtableOptions
+    , bigtableOptions
+    , boIgnoreUnspecifiedColumnFamilies
+    , boColumnFamilies
+
     -- ** ExternalDataConfiguration
     , ExternalDataConfiguration
     , externalDataConfiguration
+    , edcBigtableOptions
     , edcIgnoreUnknownValues
     , edcCompression
     , edcSourceFormat
     , edcSchema
     , edcMaxBadRecords
+    , edcAutodetect
     , edcSourceURIs
     , edcCSVOptions
 
@@ -249,6 +272,7 @@ module Network.Google.BigQuery
     , qrKind
     , qrQuery
     , qrTimeoutMs
+    , qrUseLegacySQL
     , qrDryRun
     , qrMaxResults
     , qrDefaultDataSet
@@ -265,6 +289,23 @@ module Network.Google.BigQuery
     , ProjectReference
     , projectReference
     , prProjectId
+
+    -- ** ExplainQueryStage
+    , ExplainQueryStage
+    , explainQueryStage
+    , eqsWaitRatioMax
+    , eqsRecordsWritten
+    , eqsSteps
+    , eqsWriteRatioAvg
+    , eqsRecordsRead
+    , eqsComputeRatioAvg
+    , eqsName
+    , eqsReadRatioMax
+    , eqsWaitRatioAvg
+    , eqsId
+    , eqsComputeRatioMax
+    , eqsWriteRatioMax
+    , eqsReadRatioAvg
 
     -- ** JobConfigurationLoad
     , JobConfigurationLoad
@@ -302,6 +343,7 @@ module Network.Google.BigQuery
     , tdiarKind
     , tdiarIgnoreUnknownValues
     , tdiarRows
+    , tdiarTemplateSuffix
     , tdiarSkipInvalidRows
 
     -- ** ProjectListProjectsItem
@@ -312,6 +354,16 @@ module Network.Google.BigQuery
     , plpiProjectReference
     , plpiId
     , plpiNumericId
+
+    -- ** BigtableColumn
+    , BigtableColumn
+    , bigtableColumn
+    , bcQualifierEncoded
+    , bcFieldName
+    , bcQualifierString
+    , bcOnlyReadLatest
+    , bcType
+    , bcEncoding
 
     -- ** Streamingbuffer
     , Streamingbuffer
@@ -342,7 +394,6 @@ module Network.Google.BigQuery
     , JobConfiguration
     , jobConfiguration
     , jcCopy
-    , jcLink
     , jcLoad
     , jcQuery
     , jcExtract
@@ -360,14 +411,6 @@ module Network.Google.BigQuery
     , jId
     , jStatistics
     , jConfiguration
-
-    -- ** JobConfigurationLink
-    , JobConfigurationLink
-    , jobConfigurationLink
-    , jDestinationTable
-    , jWriteDisPosition
-    , jCreateDisPosition
-    , jSourceURI
 
     -- ** TableDataInsertAllResponseInsertErrorsItem
     , TableDataInsertAllResponseInsertErrorsItem
@@ -409,8 +452,10 @@ module Network.Google.BigQuery
     , jcqCreateDisPosition
     , jcqUserDefinedFunctionResources
     , jcqAllowLargeResults
+    , jcqMaximumBillingTier
     , jcqQuery
     , jcqFlattenResults
+    , jcqUseLegacySQL
     , jcqDefaultDataSet
 
     -- ** TableDataInsertAllRequestRowsItem
@@ -440,6 +485,7 @@ module Network.Google.BigQuery
     -- ** ViewDefinition
     , ViewDefinition
     , viewDefinition
+    , vdUserDefinedFunctionResources
     , vdQuery
 
     -- ** UserDefinedFunctionResource
@@ -453,6 +499,8 @@ module Network.Google.BigQuery
     , jobStatistics2
     , jTotalBytesProcessed
     , jBillingTier
+    , jReferencedTables
+    , jQueryPlan
     , jCacheHit
     , jTotalBytesBilled
 

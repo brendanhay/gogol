@@ -93,6 +93,11 @@ module Network.Google.Compute.Types
     , iglSelfLink
     , iglId
 
+    -- * InstancesSetMachineTypeRequest
+    , InstancesSetMachineTypeRequest
+    , instancesSetMachineTypeRequest
+    , ismtrMachineType
+
     -- * AutoscalerAggregatedListItems
     , AutoscalerAggregatedListItems
     , autoscalerAggregatedListItems
@@ -199,6 +204,13 @@ module Network.Google.Compute.Types
     , igmlItems
     , igmlSelfLink
     , igmlId
+
+    -- * SubnetworksScopedListWarning
+    , SubnetworksScopedListWarning
+    , subnetworksScopedListWarning
+    , sslwData
+    , sslwCode
+    , sslwMessage
 
     -- * AttachedDiskType
     , AttachedDiskType (..)
@@ -450,6 +462,12 @@ module Network.Google.Compute.Types
     , igmslwdiValue
     , igmslwdiKey
 
+    -- * SubnetworksScopedList
+    , SubnetworksScopedList
+    , subnetworksScopedList
+    , sslSubnetworks
+    , sslWarning
+
     -- * DisksScopedListWarningCode
     , DisksScopedListWarningCode (..)
 
@@ -490,6 +508,7 @@ module Network.Google.Compute.Types
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 
@@ -559,6 +578,7 @@ module Network.Google.Compute.Types
     , igmTargetPools
     , igmDescription
     , igmInstanceGroup
+    , igmNamedPorts
 
     -- * TargetPoolsScopedListWarningCode
     , TargetPoolsScopedListWarningCode (..)
@@ -694,6 +714,7 @@ module Network.Google.Compute.Types
     , niNetwork
     , niName
     , niNetworkIP
+    , niSubnetwork
     , niAccessConfigs
 
     -- * TargetPoolsRemoveHealthCheckRequest
@@ -758,7 +779,9 @@ module Network.Google.Compute.Types
     -- * Network
     , Network
     , network
+    , nAutoCreateSubnetworks
     , nKind
+    , nSubnetworks
     , nIPv4Range
     , nSelfLink
     , nName
@@ -1251,11 +1274,34 @@ module Network.Google.Compute.Types
     , machineTypeScratchDisksItem
     , mtsdiDiskGb
 
+    -- * SubnetworksScopedListWarningDataItem
+    , SubnetworksScopedListWarningDataItem
+    , subnetworksScopedListWarningDataItem
+    , sslwdiValue
+    , sslwdiKey
+
     -- * MachineTypesScopedList
     , MachineTypesScopedList
     , machineTypesScopedList
     , mtslMachineTypes
     , mtslWarning
+
+    -- * SubnetworksScopedListWarningCode
+    , SubnetworksScopedListWarningCode (..)
+
+    -- * Subnetwork
+    , Subnetwork
+    , subnetwork
+    , subKind
+    , subNetwork
+    , subGatewayAddress
+    , subSelfLink
+    , subName
+    , subCreationTimestamp
+    , subIPCIdRRange
+    , subId
+    , subRegion
+    , subDescription
 
     -- * MachineTypeAggregatedList
     , MachineTypeAggregatedList
@@ -1367,6 +1413,15 @@ module Network.Google.Compute.Types
     , tislwCode
     , tislwMessage
 
+    -- * SubnetworkAggregatedList
+    , SubnetworkAggregatedList
+    , subnetworkAggregatedList
+    , salNextPageToken
+    , salKind
+    , salItems
+    , salSelfLink
+    , salId
+
     -- * AutoscalersScopedListWarningDataItem
     , AutoscalersScopedListWarningDataItem
     , autoscalersScopedListWarningDataItem
@@ -1444,6 +1499,7 @@ module Network.Google.Compute.Types
     , vpnTunnel
     , vtDetailedStatus
     , vtStatus
+    , vtLocalTrafficSelector
     , vtKind
     , vtPeerIP
     , vtTargetVPNGateway
@@ -1479,6 +1535,15 @@ module Network.Google.Compute.Types
     , vpnTunnelsScopedListWarningDataItem
     , vtslwdiValue
     , vtslwdiKey
+
+    -- * SubnetworkList
+    , SubnetworkList
+    , subnetworkList
+    , slNextPageToken
+    , slKind
+    , slItems
+    , slSelfLink
+    , slId
 
     -- * ForwardingRulesScopedListWarning
     , ForwardingRulesScopedListWarning
@@ -1552,6 +1617,11 @@ module Network.Google.Compute.Types
     , insItems
     , insSelfLink
     , insId
+
+    -- * SubnetworkAggregatedListItems
+    , SubnetworkAggregatedListItems
+    , subnetworkAggregatedListItems
+    , saliAddtional
 
     -- * ManagedInstanceLastAttempt
     , ManagedInstanceLastAttempt
@@ -1633,6 +1703,7 @@ module Network.Google.Compute.Types
     , iiSelfLink
     , iiName
     , iiCreationTimestamp
+    , iiSubnetwork
     , iiId
     , iiDescription
     , iiNamedPorts
@@ -1643,11 +1714,11 @@ module Network.Google.Compute.Types
     -- * SnapshotList
     , SnapshotList
     , snapshotList
-    , slNextPageToken
-    , slKind
-    , slItems
-    , slSelfLink
-    , slId
+    , snaNextPageToken
+    , snaKind
+    , snaItems
+    , snaSelfLink
+    , snaId
 
     -- * TestFailure
     , TestFailure
@@ -1844,7 +1915,7 @@ import           Network.Google.Compute.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Compute Engine API. This contains the host and root path used as a starting point for constructing service requests.
-computeService :: Service
+computeService :: ServiceConfig
 computeService
   = defaultService (ServiceId "compute:v1")
       "www.googleapis.com"

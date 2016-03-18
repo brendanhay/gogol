@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified zone resource.
+-- Returns the specified Zone resource. Get a list of available zones by
+-- making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.zones.get@.
 module Network.Google.Resource.Compute.Zones.Get
@@ -51,7 +52,8 @@ type ZonesGetResource =
                Capture "zone" Text :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Zone
 
--- | Returns the specified zone resource.
+-- | Returns the specified Zone resource. Get a list of available zones by
+-- making a list() request.
 --
 -- /See:/ 'zonesGet' smart constructor.
 data ZonesGet = ZonesGet

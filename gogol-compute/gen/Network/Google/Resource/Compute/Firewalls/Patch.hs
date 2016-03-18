@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified firewall resource with the data included in the
+-- Updates the specified firewall rule with the data included in the
 -- request. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.patch@.
@@ -55,7 +55,7 @@ type FirewallsPatchResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Firewall :> Patch '[JSON] Operation
 
--- | Updates the specified firewall resource with the data included in the
+-- | Updates the specified firewall rule with the data included in the
 -- request. This method supports patch semantics.
 --
 -- /See:/ 'firewallsPatch' smart constructor.
@@ -96,7 +96,7 @@ fpPayload :: Lens' FirewallsPatch Firewall
 fpPayload
   = lens _fpPayload (\ s a -> s{_fpPayload = a})
 
--- | Name of the firewall resource to update.
+-- | Name of the firewall rule to update.
 fpFirewall :: Lens' FirewallsPatch Text
 fpFirewall
   = lens _fpFirewall (\ s a -> s{_fpFirewall = a})

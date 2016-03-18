@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new dataset.
+-- Creates a new dataset. For the definitions of datasets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.create@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.create@.
 module Network.Google.Resource.Genomics.DataSets.Create
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type DataSetsCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] DataSet :> Post '[JSON] DataSet
 
--- | Creates a new dataset.
+-- | Creates a new dataset. For the definitions of datasets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsCreate' smart constructor.
 data DataSetsCreate = DataSetsCreate

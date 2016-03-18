@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 -- 'UserProFilesList' request conforms to.
 type UserProFilesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            QueryParam "alt" AltJSON :>
              Get '[JSON] UserProFileList

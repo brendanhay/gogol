@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API to schedule reporting jobs and download the resulting bulk data
--- reports about YouTube channels, videos etc. in the form of CSV files.
+-- Schedules reporting jobs and downloads the resulting bulk data reports
+-- about YouTube channels, videos, etc. in the form of CSV files.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference>
 module Network.Google.YouTubeReporting
@@ -93,6 +93,7 @@ module Network.Google.YouTubeReporting
     , job
     , jName
     , jId
+    , jSystemManaged
     , jReportTypeId
     , jCreateTime
 
@@ -107,6 +108,7 @@ module Network.Google.YouTubeReporting
     , reportType
     , rtName
     , rtId
+    , rtSystemManaged
     ) where
 
 import           Network.Google.Prelude

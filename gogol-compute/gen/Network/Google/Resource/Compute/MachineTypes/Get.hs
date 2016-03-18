@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified machine type resource.
+-- Returns the specified machine type. Get a list of available machine
+-- types by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.machineTypes.get@.
 module Network.Google.Resource.Compute.MachineTypes.Get
@@ -54,7 +55,8 @@ type MachineTypesGetResource =
                    Capture "machineType" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] MachineType
 
--- | Returns the specified machine type resource.
+-- | Returns the specified machine type. Get a list of available machine
+-- types by making a list() request.
 --
 -- /See:/ 'machineTypesGet' smart constructor.
 data MachineTypesGet = MachineTypesGet
@@ -93,7 +95,7 @@ mtgProject
 mtgZone :: Lens' MachineTypesGet Text
 mtgZone = lens _mtgZone (\ s a -> s{_mtgZone = a})
 
--- | Name of the machine type resource to return.
+-- | Name of the machine type to return.
 mtgMachineType :: Lens' MachineTypesGet Text
 mtgMachineType
   = lens _mtgMachineType

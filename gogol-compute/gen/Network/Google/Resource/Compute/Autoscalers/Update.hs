@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an autoscaler resource in the specified project using the data
--- included in the request.
+-- Updates an autoscaler in the specified project using the data included
+-- in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.update@.
 module Network.Google.Resource.Compute.Autoscalers.Update
@@ -57,8 +57,8 @@ type AutoscalersUpdateResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
 
--- | Updates an autoscaler resource in the specified project using the data
--- included in the request.
+-- | Updates an autoscaler in the specified project using the data included
+-- in the request.
 --
 -- /See:/ 'autoscalersUpdate' smart constructor.
 data AutoscalersUpdate = AutoscalersUpdate
@@ -92,12 +92,12 @@ autoscalersUpdate pAuProject_ pAuZone_ pAuPayload_ =
     , _auAutoscaler = Nothing
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 auProject :: Lens' AutoscalersUpdate Text
 auProject
   = lens _auProject (\ s a -> s{_auProject = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 auZone :: Lens' AutoscalersUpdate Text
 auZone = lens _auZone (\ s a -> s{_auZone = a})
 
@@ -106,7 +106,7 @@ auPayload :: Lens' AutoscalersUpdate Autoscaler
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
 
--- | Name of the autoscaler resource to update.
+-- | Name of the autoscaler to update.
 auAutoscaler :: Lens' AutoscalersUpdate (Maybe Text)
 auAutoscaler
   = lens _auAutoscaler (\ s a -> s{_auAutoscaler = a})

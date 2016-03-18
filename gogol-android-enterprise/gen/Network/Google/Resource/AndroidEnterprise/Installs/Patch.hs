@@ -24,7 +24,7 @@
 -- is already installed then it is updated to the latest version if
 -- necessary. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.patch@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.patch@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Patch
     (
     -- * REST Resource

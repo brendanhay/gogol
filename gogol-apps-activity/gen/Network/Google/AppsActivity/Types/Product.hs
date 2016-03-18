@@ -354,8 +354,10 @@ instance ToJSON PermissionChange where
 --
 -- /See:/ 'user' smart constructor.
 data User = User
-    { _uPhoto :: !(Maybe Photo)
-    , _uName  :: !(Maybe Text)
+    { _uPhoto        :: !(Maybe Photo)
+    , _uIsDeleted    :: !(Maybe Bool)
+    , _uName         :: !(Maybe Text)
+    , _uPermissionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'User' with the minimum fields required to make a request.
@@ -364,33 +366,61 @@ data User = User
 --
 -- * 'uPhoto'
 --
+-- * 'uIsDeleted'
+--
 -- * 'uName'
+--
+-- * 'uPermissionId'
 user
     :: User
 user =
     User
     { _uPhoto = Nothing
+    , _uIsDeleted = Nothing
     , _uName = Nothing
+    , _uPermissionId = Nothing
     }
 
--- | The profile photo of the user.
+-- | The profile photo of the user. Not present if the user has no profile
+-- photo.
 uPhoto :: Lens' User (Maybe Photo)
 uPhoto = lens _uPhoto (\ s a -> s{_uPhoto = a})
+
+-- | A boolean which indicates whether the specified User was deleted. If
+-- true, name, photo and permission_id will be omitted.
+uIsDeleted :: Lens' User (Maybe Bool)
+uIsDeleted
+  = lens _uIsDeleted (\ s a -> s{_uIsDeleted = a})
 
 -- | The displayable name of the user.
 uName :: Lens' User (Maybe Text)
 uName = lens _uName (\ s a -> s{_uName = a})
 
+-- | The permission ID associated with this user. Equivalent to the Drive
+-- API\'s permission ID for this user, returned as part of the Drive
+-- Permissions resource.
+uPermissionId :: Lens' User (Maybe Text)
+uPermissionId
+  = lens _uPermissionId
+      (\ s a -> s{_uPermissionId = a})
+
 instance FromJSON User where
         parseJSON
           = withObject "User"
-              (\ o -> User <$> (o .:? "photo") <*> (o .:? "name"))
+              (\ o ->
+                 User <$>
+                   (o .:? "photo") <*> (o .:? "isDeleted") <*>
+                     (o .:? "name")
+                     <*> (o .:? "permissionId"))
 
 instance ToJSON User where
         toJSON User{..}
           = object
               (catMaybes
-                 [("photo" .=) <$> _uPhoto, ("name" .=) <$> _uName])
+                 [("photo" .=) <$> _uPhoto,
+                  ("isDeleted" .=) <$> _uIsDeleted,
+                  ("name" .=) <$> _uName,
+                  ("permissionId" .=) <$> _uPermissionId])
 
 -- | An Activity resource is a combined view of multiple events. An activity
 -- has a list of individual events and a combined view of the common fields

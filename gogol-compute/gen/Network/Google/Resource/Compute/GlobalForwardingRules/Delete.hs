@@ -77,7 +77,7 @@ globalForwardingRulesDelete pGfrdProject_ pGfrdForwardingRule_ =
     , _gfrdForwardingRule = pGfrdForwardingRule_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 gfrdProject :: Lens' GlobalForwardingRulesDelete Text
 gfrdProject
   = lens _gfrdProject (\ s a -> s{_gfrdProject = a})

@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Gmail REST API.
+    Access Gmail mailboxes including sending user email.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -50,6 +50,7 @@ library
         , Network.Google.Resource.Gmail.Users.Labels.Patch
         , Network.Google.Resource.Gmail.Users.Labels.Update
         , Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
+        , Network.Google.Resource.Gmail.Users.Messages.BatchDelete
         , Network.Google.Resource.Gmail.Users.Messages.Delete
         , Network.Google.Resource.Gmail.Users.Messages.Get
         , Network.Google.Resource.Gmail.Users.Messages.Import

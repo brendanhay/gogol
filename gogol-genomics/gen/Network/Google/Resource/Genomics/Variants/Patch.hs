@@ -20,10 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a variant. This method supports patch semantics. Returns the
--- modified variant without its calls.
+-- Updates a variant. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics. Returns the modified variant
+-- without its calls.
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.patch@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.patch@.
 module Network.Google.Resource.Genomics.Variants.Patch
     (
     -- * REST Resource
@@ -66,8 +69,11 @@ type VariantsPatchResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Variant :> Patch '[JSON] Variant
 
--- | Updates a variant. This method supports patch semantics. Returns the
--- modified variant without its calls.
+-- | Updates a variant. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics. Returns the modified variant
+-- without its calls.
 --
 -- /See:/ 'variantsPatch' smart constructor.
 data VariantsPatch = VariantsPatch

@@ -110,7 +110,7 @@ instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_
     , _igmaiPayload = pIgmaiPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmaiProject :: Lens' InstanceGroupManagersAbandonInstances Text
 igmaiProject
   = lens _igmaiProject (\ s a -> s{_igmaiProject = a})

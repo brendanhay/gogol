@@ -334,8 +334,10 @@ module Network.Google.Analytics.Types
     , pCreated
     , pSelfLink
     , pAccountId
+    , pBotFilteringEnabled
     , pName
     , pCurrency
+    , pStarred
     , pInternalWebPropertyId
     , pId
     , pUpdated
@@ -372,6 +374,7 @@ module Network.Google.Analytics.Types
     , wpsKind
     , wpsProFiles
     , wpsName
+    , wpsStarred
     , wpsInternalWebPropertyId
     , wpsId
     , wpsWebsiteURL
@@ -481,6 +484,7 @@ module Network.Google.Analytics.Types
     , accCreated
     , accSelfLink
     , accName
+    , accStarred
     , accId
     , accUpdated
     , accPermissions
@@ -649,6 +653,7 @@ module Network.Google.Analytics.Types
     , proFileSummary
     , pfsKind
     , pfsName
+    , pfsStarred
     , pfsId
     , pfsType
 
@@ -669,6 +674,7 @@ module Network.Google.Analytics.Types
     , wSelfLink
     , wAccountId
     , wName
+    , wStarred
     , wInternalWebPropertyId
     , wId
     , wUpdated
@@ -761,6 +767,7 @@ module Network.Google.Analytics.Types
     , assKind
     , assWebProperties
     , assName
+    , assStarred
     , assId
 
     -- * RealtimeDataQuery
@@ -1018,7 +1025,7 @@ import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-analyticsService :: Service
+analyticsService :: ServiceConfig
 analyticsService
   = defaultService (ServiceId "analytics:v3")
       "www.googleapis.com"

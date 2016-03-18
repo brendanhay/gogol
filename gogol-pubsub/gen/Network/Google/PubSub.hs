@@ -124,6 +124,7 @@ module Network.Google.PubSub
     , PubsubMessage
     , pubsubMessage
     , pmData
+    , pmPublishTime
     , pmAttributes
     , pmMessageId
 

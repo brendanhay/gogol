@@ -23,7 +23,7 @@
 -- Adds or updates an entitlement to an app for a user. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.patch@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.patch@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
     (
     -- * REST Resource

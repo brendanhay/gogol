@@ -122,6 +122,8 @@ data ContainerEnabledBuiltInVariableItem
       -- ^ @debugMode@
     | CEBIVIDeviceName
       -- ^ @deviceName@
+    | CEBIVIEnvironmentName
+      -- ^ @environmentName@
     | CEBIVIErrorLine
       -- ^ @errorLine@
     | CEBIVIErrorMessage
@@ -196,6 +198,7 @@ instance FromText ContainerEnabledBuiltInVariableItem where
         "containerVersion" -> Just CEBIVIContainerVersion
         "debugMode" -> Just CEBIVIDebugMode
         "deviceName" -> Just CEBIVIDeviceName
+        "environmentName" -> Just CEBIVIEnvironmentName
         "errorLine" -> Just CEBIVIErrorLine
         "errorMessage" -> Just CEBIVIErrorMessage
         "errorUrl" -> Just CEBIVIErrorURL
@@ -242,6 +245,7 @@ instance ToText ContainerEnabledBuiltInVariableItem where
         CEBIVIContainerVersion -> "containerVersion"
         CEBIVIDebugMode -> "debugMode"
         CEBIVIDeviceName -> "deviceName"
+        CEBIVIEnvironmentName -> "environmentName"
         CEBIVIErrorLine -> "errorLine"
         CEBIVIErrorMessage -> "errorMessage"
         CEBIVIErrorURL -> "errorUrl"
@@ -526,4 +530,39 @@ instance FromJSON ContainerAccessPermissionItem where
     parseJSON = parseJSONText "ContainerAccessPermissionItem"
 
 instance ToJSON ContainerAccessPermissionItem where
+    toJSON = toJSONText
+
+-- | The type of this environment.
+data EnvironmentType
+    = Draft
+      -- ^ @draft@
+    | Latest
+      -- ^ @latest@
+    | Live
+      -- ^ @live@
+    | User
+      -- ^ @user@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable EnvironmentType
+
+instance FromText EnvironmentType where
+    fromText = \case
+        "draft" -> Just Draft
+        "latest" -> Just Latest
+        "live" -> Just Live
+        "user" -> Just User
+        _ -> Nothing
+
+instance ToText EnvironmentType where
+    toText = \case
+        Draft -> "draft"
+        Latest -> "latest"
+        Live -> "live"
+        User -> "user"
+
+instance FromJSON EnvironmentType where
+    parseJSON = parseJSONText "EnvironmentType"
+
+instance ToJSON EnvironmentType where
     toJSON = toJSONText

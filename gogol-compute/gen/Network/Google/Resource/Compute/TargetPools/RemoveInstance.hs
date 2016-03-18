@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes instance URL from targetPool.
+-- Removes instance URL from a target pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.removeInstance@.
 module Network.Google.Resource.Compute.TargetPools.RemoveInstance
@@ -58,7 +58,7 @@ type TargetPoolsRemoveInstanceResource =
                          ReqBody '[JSON] TargetPoolsRemoveInstanceRequest :>
                            Post '[JSON] Operation
 
--- | Removes instance URL from targetPool.
+-- | Removes instance URL from a target pool.
 --
 -- /See:/ 'targetPoolsRemoveInstance' smart constructor.
 data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance
@@ -93,11 +93,12 @@ targetPoolsRemoveInstance pTpriProject_ pTpriTargetPool_ pTpriPayload_ pTpriRegi
     , _tpriRegion = pTpriRegion_
     }
 
+-- | Project ID for this request.
 tpriProject :: Lens' TargetPoolsRemoveInstance Text
 tpriProject
   = lens _tpriProject (\ s a -> s{_tpriProject = a})
 
--- | Name of the TargetPool resource to which instance_url is to be removed.
+-- | Name of the TargetPool resource to remove instances from.
 tpriTargetPool :: Lens' TargetPoolsRemoveInstance Text
 tpriTargetPool
   = lens _tpriTargetPool

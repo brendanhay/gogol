@@ -21,7 +21,7 @@ import           Network.Google.Prelude
 -- | Defines the maintenance behavior for this instance. For standard
 -- instances, the default behavior is MIGRATE. For preemptible instances,
 -- the default and only possible behavior is TERMINATE. For more
--- information, see Setting maintenance behavior.
+-- information, see Setting Instance Scheduling Options.
 data SchedulingOnHostMaintenance
     = Migrate
       -- ^ @MIGRATE@
@@ -48,7 +48,9 @@ instance FromJSON SchedulingOnHostMaintenance where
 instance ToJSON SchedulingOnHostMaintenance where
     toJSON = toJSONText
 
--- | Defines type in which utilization_target is expressed.
+-- | Defines how target utilization value is expressed for a Cloud Monitoring
+-- metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE. If not
+-- specified, the default is GAUGE.
 data AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
     = DeltaPerMinute
       -- ^ @DELTA_PER_MINUTE@
@@ -79,9 +81,12 @@ instance FromJSON AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType 
 instance ToJSON AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data OperationWarningsItemCode
-    = DeprecatedResourceUsed
+    = CleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | DeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -115,6 +120,7 @@ instance Hashable OperationWarningsItemCode
 
 instance FromText OperationWarningsItemCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just CleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just InjectedKernelsDeprecated
@@ -133,6 +139,7 @@ instance FromText OperationWarningsItemCode where
 
 instance ToText OperationWarningsItemCode where
     toText = \case
+        CleanupFailed -> "CLEANUP_FAILED"
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         InjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -154,6 +161,8 @@ instance FromJSON OperationWarningsItemCode where
 instance ToJSON OperationWarningsItemCode where
     toJSON = toJSONText
 
+-- | The protocol this BackendService uses to communicate with backends.
+-- Possible values are HTTP, HTTPS, HTTP2, TCP and SSL.
 data BackendServiceProtocol
     = HTTP
       -- ^ @HTTP@
@@ -232,9 +241,12 @@ instance FromJSON ImageSourceType where
 instance ToJSON ImageSourceType where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data ForwardingRulesScopedListWarningCode
-    = FRSLWCDeprecatedResourceUsed
+    = FRSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | FRSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | FRSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -268,6 +280,7 @@ instance Hashable ForwardingRulesScopedListWarningCode
 
 instance FromText ForwardingRulesScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just FRSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just FRSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just FRSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just FRSLWCInjectedKernelsDeprecated
@@ -286,6 +299,7 @@ instance FromText ForwardingRulesScopedListWarningCode where
 
 instance ToText ForwardingRulesScopedListWarningCode where
     toText = \case
+        FRSLWCCleanupFailed -> "CLEANUP_FAILED"
         FRSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         FRSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         FRSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -307,9 +321,12 @@ instance FromJSON ForwardingRulesScopedListWarningCode where
 instance ToJSON ForwardingRulesScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data OperationsScopedListWarningCode
-    = OSLWCDeprecatedResourceUsed
+    = OSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | OSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | OSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -343,6 +360,7 @@ instance Hashable OperationsScopedListWarningCode
 
 instance FromText OperationsScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just OSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just OSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just OSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just OSLWCInjectedKernelsDeprecated
@@ -361,6 +379,7 @@ instance FromText OperationsScopedListWarningCode where
 
 instance ToText OperationsScopedListWarningCode where
     toText = \case
+        OSLWCCleanupFailed -> "CLEANUP_FAILED"
         OSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         OSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         OSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -382,9 +401,12 @@ instance FromJSON OperationsScopedListWarningCode where
 instance ToJSON OperationsScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data DisksScopedListWarningCode
-    = DSLWCDeprecatedResourceUsed
+    = DSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | DSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -418,6 +440,7 @@ instance Hashable DisksScopedListWarningCode
 
 instance FromText DisksScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just DSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just DSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just DSLWCInjectedKernelsDeprecated
@@ -436,6 +459,7 @@ instance FromText DisksScopedListWarningCode where
 
 instance ToText DisksScopedListWarningCode where
     toText = \case
+        DSLWCCleanupFailed -> "CLEANUP_FAILED"
         DSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         DSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -457,9 +481,12 @@ instance FromJSON DisksScopedListWarningCode where
 instance ToJSON DisksScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstanceGroupManagersScopedListWarningCode
-    = IGMSLWCDeprecatedResourceUsed
+    = IGMSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | IGMSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | IGMSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -493,6 +520,7 @@ instance Hashable InstanceGroupManagersScopedListWarningCode
 
 instance FromText InstanceGroupManagersScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just IGMSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just IGMSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just IGMSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just IGMSLWCInjectedKernelsDeprecated
@@ -511,6 +539,7 @@ instance FromText InstanceGroupManagersScopedListWarningCode where
 
 instance ToText InstanceGroupManagersScopedListWarningCode where
     toText = \case
+        IGMSLWCCleanupFailed -> "CLEANUP_FAILED"
         IGMSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         IGMSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         IGMSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -532,9 +561,12 @@ instance FromJSON InstanceGroupManagersScopedListWarningCode where
 instance ToJSON InstanceGroupManagersScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data TargetPoolsScopedListWarningCode
-    = TPSLWCDeprecatedResourceUsed
+    = TPSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | TPSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | TPSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -568,6 +600,7 @@ instance Hashable TargetPoolsScopedListWarningCode
 
 instance FromText TargetPoolsScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just TPSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just TPSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just TPSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just TPSLWCInjectedKernelsDeprecated
@@ -586,6 +619,7 @@ instance FromText TargetPoolsScopedListWarningCode where
 
 instance ToText TargetPoolsScopedListWarningCode where
     toText = \case
+        TPSLWCCleanupFailed -> "CLEANUP_FAILED"
         TPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         TPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -642,7 +676,8 @@ instance FromJSON TargetVPNGatewayStatus where
 instance ToJSON TargetVPNGatewayStatus where
     toJSON = toJSONText
 
--- | [Output Only] The status of the snapshot.
+-- | [Output Only] The status of the snapshot. This can be CREATING,
+-- DELETING, FAILED, READY, or UPLOADING.
 data SnapshotStatus
     = SSCreating
       -- ^ @CREATING@
@@ -681,9 +716,12 @@ instance FromJSON SnapshotStatus where
 instance ToJSON SnapshotStatus where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data TargetInstancesScopedListWarningCode
-    = TISLWCDeprecatedResourceUsed
+    = TISLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | TISLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | TISLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -717,6 +755,7 @@ instance Hashable TargetInstancesScopedListWarningCode
 
 instance FromText TargetInstancesScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just TISLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just TISLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just TISLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just TISLWCInjectedKernelsDeprecated
@@ -735,6 +774,7 @@ instance FromText TargetInstancesScopedListWarningCode where
 
 instance ToText TargetInstancesScopedListWarningCode where
     toText = \case
+        TISLWCCleanupFailed -> "CLEANUP_FAILED"
         TISLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TISLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         TISLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -756,9 +796,12 @@ instance FromJSON TargetInstancesScopedListWarningCode where
 instance ToJSON TargetInstancesScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data RouteWarningsItemCode
-    = RWICDeprecatedResourceUsed
+    = RWICCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RWICDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | RWICDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -792,6 +835,7 @@ instance Hashable RouteWarningsItemCode
 
 instance FromText RouteWarningsItemCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just RWICCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just RWICDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just RWICDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just RWICInjectedKernelsDeprecated
@@ -810,6 +854,7 @@ instance FromText RouteWarningsItemCode where
 
 instance ToText RouteWarningsItemCode where
     toText = \case
+        RWICCleanupFailed -> "CLEANUP_FAILED"
         RWICDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         RWICDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         RWICInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -832,7 +877,9 @@ instance ToJSON RouteWarningsItemCode where
     toJSON = toJSONText
 
 -- | [Output Only] An indicator whether storageBytes is in a stable state or
--- it is being adjusted as a result of shared storage reallocation.
+-- it is being adjusted as a result of shared storage reallocation. This
+-- status can either be UPDATING, meaning the size of the snapshot is being
+-- updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
 data SnapshotStorageBytesStatus
     = Updating
       -- ^ @UPDATING@
@@ -859,9 +906,12 @@ instance FromJSON SnapshotStorageBytesStatus where
 instance ToJSON SnapshotStorageBytesStatus where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data AddressesScopedListWarningCode
-    = ASLWCDeprecatedResourceUsed
+    = ASLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | ASLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | ASLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -895,6 +945,7 @@ instance Hashable AddressesScopedListWarningCode
 
 instance FromText AddressesScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just ASLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just ASLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ASLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just ASLWCInjectedKernelsDeprecated
@@ -913,6 +964,7 @@ instance FromText AddressesScopedListWarningCode where
 
 instance ToText AddressesScopedListWarningCode where
     toText = \case
+        ASLWCCleanupFailed -> "CLEANUP_FAILED"
         ASLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ASLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         ASLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -1035,16 +1087,20 @@ instance ToJSON DeprecationStatusState where
 -- scheduled for the instance. Possible values: - NONE The instance is
 -- running, and the managed instance group does not have any scheduled
 -- actions for this instance. - CREATING The managed instance group is
--- creating this instance. - RECREATING The managed instance group is
--- recreating this instance. - DELETING The managed instance group is
--- permanently deleting this instance. - ABANDONING The managed instance
--- group is abandoning this instance. The instance will be removed from the
--- instance group and from any target pools that are associated with this
--- group. - RESTARTING The managed instance group is restarting the
--- instance. - REFRESHING The managed instance group is applying
--- configuration changes to the instance without stopping it. For example,
--- the group can update the target pool list for an instance without
--- stopping that instance.
+-- creating this instance. If the group fails to create this instance, it
+-- will try again until it is successful. - CREATING_WITHOUT_RETRIES The
+-- managed instance group is attempting to create this instance only once.
+-- If the group fails to create this instance, it does not try again and
+-- the group\'s target_size value is decreased. - RECREATING The managed
+-- instance group is recreating this instance. - DELETING The managed
+-- instance group is permanently deleting this instance. - ABANDONING The
+-- managed instance group is abandoning this instance. The instance will be
+-- removed from the instance group and from any target pools that are
+-- associated with this group. - RESTARTING The managed instance group is
+-- restarting the instance. - REFRESHING The managed instance group is
+-- applying configuration changes to the instance without stopping it. For
+-- example, the group can update the target pool list for an instance
+-- without stopping that instance.
 data ManagedInstanceCurrentAction
     = MICAAbandoning
       -- ^ @ABANDONING@
@@ -1139,8 +1195,8 @@ instance FromJSON AccessConfigType where
 instance ToJSON AccessConfigType where
     toJSON = toJSONText
 
--- | [Output Only] Status of the operation. Can be one of the following:
--- PENDING, RUNNING, or DONE.
+-- | [Output Only] The status of the operation, which can be one of the
+-- following: PENDING, RUNNING, or DONE.
 data OperationStatus
     = Done
       -- ^ @DONE@
@@ -1171,9 +1227,12 @@ instance FromJSON OperationStatus where
 instance ToJSON OperationStatus where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data TargetVPNGatewaysScopedListWarningCode
-    = TVGSLWCDeprecatedResourceUsed
+    = TVGSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | TVGSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | TVGSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -1207,6 +1266,7 @@ instance Hashable TargetVPNGatewaysScopedListWarningCode
 
 instance FromText TargetVPNGatewaysScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just TVGSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just TVGSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just TVGSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just TVGSLWCInjectedKernelsDeprecated
@@ -1225,6 +1285,7 @@ instance FromText TargetVPNGatewaysScopedListWarningCode where
 
 instance ToText TargetVPNGatewaysScopedListWarningCode where
     toText = \case
+        TVGSLWCCleanupFailed -> "CLEANUP_FAILED"
         TVGSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TVGSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         TVGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -1391,7 +1452,9 @@ instance ToJSON RegionStatus where
 
 -- | [Output Only] The status of the VPN tunnel.
 data VPNTunnelStatus
-    = VTSAuthorizationError
+    = VTSAllocatingResources
+      -- ^ @ALLOCATING_RESOURCES@
+    | VTSAuthorizationError
       -- ^ @AUTHORIZATION_ERROR@
     | VTSDeprovisioning
       -- ^ @DEPROVISIONING@
@@ -1419,6 +1482,7 @@ instance Hashable VPNTunnelStatus
 
 instance FromText VPNTunnelStatus where
     fromText = \case
+        "ALLOCATING_RESOURCES" -> Just VTSAllocatingResources
         "AUTHORIZATION_ERROR" -> Just VTSAuthorizationError
         "DEPROVISIONING" -> Just VTSDeprovisioning
         "ESTABLISHED" -> Just VTSEstablished
@@ -1434,6 +1498,7 @@ instance FromText VPNTunnelStatus where
 
 instance ToText VPNTunnelStatus where
     toText = \case
+        VTSAllocatingResources -> "ALLOCATING_RESOURCES"
         VTSAuthorizationError -> "AUTHORIZATION_ERROR"
         VTSDeprovisioning -> "DEPROVISIONING"
         VTSEstablished -> "ESTABLISHED"
@@ -1452,8 +1517,9 @@ instance FromJSON VPNTunnelStatus where
 instance ToJSON VPNTunnelStatus where
     toJSON = toJSONText
 
--- | Specifies the balancing mode for this backend. The default is
--- UTILIZATION but available values are UTILIZATION and RATE.
+-- | Specifies the balancing mode for this backend. For global HTTP(S) load
+-- balancing, the default is UTILIZATION. Valid values are UTILIZATION and
+-- RATE.
 data BackendBalancingMode
     = Rate
       -- ^ @RATE@
@@ -1579,9 +1645,12 @@ instance FromJSON InstanceGroupsListInstancesRequestInstanceState where
 instance ToJSON InstanceGroupsListInstancesRequestInstanceState where
     toJSON = toJSONText
 
--- | Specifies the disk interface to use for attaching this disk, either SCSI
--- or NVME. The default is SCSI. For performance characteristics of SCSI
--- over NVMe, see Local SSD performance.
+-- | Specifies the disk interface to use for attaching this disk, which is
+-- either SCSI or NVME. The default is SCSI. Persistent disks must always
+-- use SCSI and the request will fail if you attempt to attach a persistent
+-- disk in any other format than SCSI. Local SSDs can use either NVME or
+-- SCSI. For performance characteristics of SCSI over NVMe, see Local SSD
+-- performance.
 data AttachedDiskInterface
     = Nvme
       -- ^ @NVME@
@@ -1635,9 +1704,91 @@ instance FromJSON ZoneStatus where
 instance ToJSON ZoneStatus where
     toJSON = toJSONText
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data SubnetworksScopedListWarningCode
+    = SSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | SSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | SSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | SSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | SSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | SSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | SSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | SSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | SSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | SSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | SSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | SSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | SSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | SSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SubnetworksScopedListWarningCode
+
+instance FromText SubnetworksScopedListWarningCode where
+    fromText = \case
+        "CLEANUP_FAILED" -> Just SSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Just SSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just SSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Just SSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just SSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just SSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just SSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just SSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Just SSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Just SSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Just SSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Just SSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Just SSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just SSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Just SSLWCUnreachable
+        _ -> Nothing
+
+instance ToText SubnetworksScopedListWarningCode where
+    toText = \case
+        SSLWCCleanupFailed -> "CLEANUP_FAILED"
+        SSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        SSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        SSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        SSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        SSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        SSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        SSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        SSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        SSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        SSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        SSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        SSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON SubnetworksScopedListWarningCode where
+    parseJSON = parseJSONText "SubnetworksScopedListWarningCode"
+
+instance ToJSON SubnetworksScopedListWarningCode where
+    toJSON = toJSONText
+
 -- | [Output Only] Name of the quota metric.
 data QuotaMetric
-    = BackendServices
+    = Autoscalers
+      -- ^ @AUTOSCALERS@
+    | BackendServices
       -- ^ @BACKEND_SERVICES@
     | CPUs
       -- ^ @CPUS@
@@ -1671,8 +1822,14 @@ data QuotaMetric
       -- ^ @SNAPSHOTS@
     | SsdTotalGb
       -- ^ @SSD_TOTAL_GB@
+    | SSLCertificates
+      -- ^ @SSL_CERTIFICATES@
     | StaticAddresses
       -- ^ @STATIC_ADDRESSES@
+    | Subnetworks
+      -- ^ @SUBNETWORKS@
+    | TargetHTTPSProxies
+      -- ^ @TARGET_HTTPS_PROXIES@
     | TargetHTTPProxies
       -- ^ @TARGET_HTTP_PROXIES@
     | TargetInstances
@@ -1691,6 +1848,7 @@ instance Hashable QuotaMetric
 
 instance FromText QuotaMetric where
     fromText = \case
+        "AUTOSCALERS" -> Just Autoscalers
         "BACKEND_SERVICES" -> Just BackendServices
         "CPUS" -> Just CPUs
         "DISKS_TOTAL_GB" -> Just DisksTotalGb
@@ -1708,7 +1866,10 @@ instance FromText QuotaMetric where
         "ROUTES" -> Just Routes
         "SNAPSHOTS" -> Just Snapshots
         "SSD_TOTAL_GB" -> Just SsdTotalGb
+        "SSL_CERTIFICATES" -> Just SSLCertificates
         "STATIC_ADDRESSES" -> Just StaticAddresses
+        "SUBNETWORKS" -> Just Subnetworks
+        "TARGET_HTTPS_PROXIES" -> Just TargetHTTPSProxies
         "TARGET_HTTP_PROXIES" -> Just TargetHTTPProxies
         "TARGET_INSTANCES" -> Just TargetInstances
         "TARGET_POOLS" -> Just TargetPools
@@ -1719,6 +1880,7 @@ instance FromText QuotaMetric where
 
 instance ToText QuotaMetric where
     toText = \case
+        Autoscalers -> "AUTOSCALERS"
         BackendServices -> "BACKEND_SERVICES"
         CPUs -> "CPUS"
         DisksTotalGb -> "DISKS_TOTAL_GB"
@@ -1736,7 +1898,10 @@ instance ToText QuotaMetric where
         Routes -> "ROUTES"
         Snapshots -> "SNAPSHOTS"
         SsdTotalGb -> "SSD_TOTAL_GB"
+        SSLCertificates -> "SSL_CERTIFICATES"
         StaticAddresses -> "STATIC_ADDRESSES"
+        Subnetworks -> "SUBNETWORKS"
+        TargetHTTPSProxies -> "TARGET_HTTPS_PROXIES"
         TargetHTTPProxies -> "TARGET_HTTP_PROXIES"
         TargetInstances -> "TARGET_INSTANCES"
         TargetPools -> "TARGET_POOLS"
@@ -1802,9 +1967,12 @@ instance FromJSON InstanceStatus where
 instance ToJSON InstanceStatus where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data MachineTypesScopedListWarningCode
-    = MTSLWCDeprecatedResourceUsed
+    = MTSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | MTSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | MTSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -1838,6 +2006,7 @@ instance Hashable MachineTypesScopedListWarningCode
 
 instance FromText MachineTypesScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just MTSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just MTSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just MTSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just MTSLWCInjectedKernelsDeprecated
@@ -1856,6 +2025,7 @@ instance FromText MachineTypesScopedListWarningCode where
 
 instance ToText MachineTypesScopedListWarningCode where
     toText = \case
+        MTSLWCCleanupFailed -> "CLEANUP_FAILED"
         MTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         MTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         MTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -1877,9 +2047,12 @@ instance FromJSON MachineTypesScopedListWarningCode where
 instance ToJSON MachineTypesScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data DiskTypesScopedListWarningCode
-    = DTSLWCDeprecatedResourceUsed
+    = DTSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | DTSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DTSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -1913,6 +2086,7 @@ instance Hashable DiskTypesScopedListWarningCode
 
 instance FromText DiskTypesScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just DTSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just DTSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DTSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just DTSLWCInjectedKernelsDeprecated
@@ -1931,6 +2105,7 @@ instance FromText DiskTypesScopedListWarningCode where
 
 instance ToText DiskTypesScopedListWarningCode where
     toText = \case
+        DTSLWCCleanupFailed -> "CLEANUP_FAILED"
         DTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         DTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -1952,9 +2127,12 @@ instance FromJSON DiskTypesScopedListWarningCode where
 instance ToJSON DiskTypesScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data AutoscalersScopedListWarningCode
-    = ADeprecatedResourceUsed
+    = ACleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | ADeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | ADiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -1988,6 +2166,7 @@ instance Hashable AutoscalersScopedListWarningCode
 
 instance FromText AutoscalersScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just ACleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just ADeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ADiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just AInjectedKernelsDeprecated
@@ -2006,6 +2185,7 @@ instance FromText AutoscalersScopedListWarningCode where
 
 instance ToText AutoscalersScopedListWarningCode where
     toText = \case
+        ACleanupFailed -> "CLEANUP_FAILED"
         ADeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ADiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         AInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -2027,9 +2207,12 @@ instance FromJSON AutoscalersScopedListWarningCode where
 instance ToJSON AutoscalersScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data VPNTunnelsScopedListWarningCode
-    = VTSLWCDeprecatedResourceUsed
+    = VTSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | VTSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | VTSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -2063,6 +2246,7 @@ instance Hashable VPNTunnelsScopedListWarningCode
 
 instance FromText VPNTunnelsScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just VTSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just VTSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just VTSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just VTSLWCInjectedKernelsDeprecated
@@ -2081,6 +2265,7 @@ instance FromText VPNTunnelsScopedListWarningCode where
 
 instance ToText VPNTunnelsScopedListWarningCode where
     toText = \case
+        VTSLWCCleanupFailed -> "CLEANUP_FAILED"
         VTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         VTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         VTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -2102,9 +2287,12 @@ instance FromJSON VPNTunnelsScopedListWarningCode where
 instance ToJSON VPNTunnelsScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstanceGroupsScopedListWarningCode
-    = IGSLWCDeprecatedResourceUsed
+    = IGSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | IGSLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | IGSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -2138,6 +2326,7 @@ instance Hashable InstanceGroupsScopedListWarningCode
 
 instance FromText InstanceGroupsScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just IGSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just IGSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just IGSLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just IGSLWCInjectedKernelsDeprecated
@@ -2156,6 +2345,7 @@ instance FromText InstanceGroupsScopedListWarningCode where
 
 instance ToText InstanceGroupsScopedListWarningCode where
     toText = \case
+        IGSLWCCleanupFailed -> "CLEANUP_FAILED"
         IGSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         IGSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         IGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
@@ -2228,9 +2418,12 @@ instance FromJSON InstanceWithNamedPortsStatus where
 instance ToJSON InstanceWithNamedPortsStatus where
     toJSON = toJSONText
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstancesScopedListWarningCode
-    = ISLWCDeprecatedResourceUsed
+    = ISLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | ISLWCDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
     | ISLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
@@ -2264,6 +2457,7 @@ instance Hashable InstancesScopedListWarningCode
 
 instance FromText InstancesScopedListWarningCode where
     fromText = \case
+        "CLEANUP_FAILED" -> Just ISLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Just ISLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ISLWCDiskSizeLargerThanImageSize
         "INJECTED_KERNELS_DEPRECATED" -> Just ISLWCInjectedKernelsDeprecated
@@ -2282,6 +2476,7 @@ instance FromText InstancesScopedListWarningCode where
 
 instance ToText InstancesScopedListWarningCode where
     toText = \case
+        ISLWCCleanupFailed -> "CLEANUP_FAILED"
         ISLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ISLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
         ISLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"

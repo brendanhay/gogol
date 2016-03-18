@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- View and manage your Google Analytics data
+-- Views and manages your Google Analytics data.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference>
 module Network.Google.Analytics
@@ -195,6 +195,9 @@ module Network.Google.Analytics
 
     -- ** analytics.management.segments.list
     , module Network.Google.Resource.Analytics.Management.Segments.List
+
+    -- ** analytics.management.unsampledReports.delete
+    , module Network.Google.Resource.Analytics.Management.UnSampledReports.Delete
 
     -- ** analytics.management.unsampledReports.get
     , module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
@@ -578,8 +581,10 @@ module Network.Google.Analytics
     , pCreated
     , pSelfLink
     , pAccountId
+    , pBotFilteringEnabled
     , pName
     , pCurrency
+    , pStarred
     , pInternalWebPropertyId
     , pId
     , pUpdated
@@ -616,6 +621,7 @@ module Network.Google.Analytics
     , wpsKind
     , wpsProFiles
     , wpsName
+    , wpsStarred
     , wpsInternalWebPropertyId
     , wpsId
     , wpsWebsiteURL
@@ -725,6 +731,7 @@ module Network.Google.Analytics
     , accCreated
     , accSelfLink
     , accName
+    , accStarred
     , accId
     , accUpdated
     , accPermissions
@@ -893,6 +900,7 @@ module Network.Google.Analytics
     , proFileSummary
     , pfsKind
     , pfsName
+    , pfsStarred
     , pfsId
     , pfsType
 
@@ -913,6 +921,7 @@ module Network.Google.Analytics
     , wSelfLink
     , wAccountId
     , wName
+    , wStarred
     , wInternalWebPropertyId
     , wId
     , wUpdated
@@ -1005,6 +1014,7 @@ module Network.Google.Analytics
     , assKind
     , assWebProperties
     , assName
+    , assStarred
     , assId
 
     -- ** RealtimeDataQuery
@@ -1313,6 +1323,7 @@ import           Network.Google.Resource.Analytics.Management.ProFileUserLinks.I
 import           Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
 import           Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
 import           Network.Google.Resource.Analytics.Management.Segments.List
+import           Network.Google.Resource.Analytics.Management.UnSampledReports.Delete
 import           Network.Google.Resource.Analytics.Management.UnSampledReports.Get
 import           Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
 import           Network.Google.Resource.Analytics.Management.UnSampledReports.List
@@ -1355,6 +1366,7 @@ type AnalyticsAPI =
        :<|> ManagementUnSampledReportsInsertResource
        :<|> ManagementUnSampledReportsListResource
        :<|> ManagementUnSampledReportsGetResource
+       :<|> ManagementUnSampledReportsDeleteResource
        :<|> ManagementAccountsListResource
        :<|> ManagementExperimentsInsertResource
        :<|> ManagementExperimentsListResource

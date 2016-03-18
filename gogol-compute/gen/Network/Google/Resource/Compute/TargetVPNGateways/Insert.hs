@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a TargetVpnGateway resource in the specified project and region
--- using the data included in the request.
+-- Creates a target VPN gateway in the specified project and region using
+-- the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.insert@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Insert
@@ -56,8 +56,8 @@ type TargetVPNGatewaysInsertResource =
                      ReqBody '[JSON] TargetVPNGateway :>
                        Post '[JSON] Operation
 
--- | Creates a TargetVpnGateway resource in the specified project and region
--- using the data included in the request.
+-- | Creates a target VPN gateway in the specified project and region using
+-- the data included in the request.
 --
 -- /See:/ 'targetVPNGatewaysInsert' smart constructor.
 data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert
@@ -97,7 +97,7 @@ tvgiPayload :: Lens' TargetVPNGatewaysInsert TargetVPNGateway
 tvgiPayload
   = lens _tvgiPayload (\ s a -> s{_tvgiPayload = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 tvgiRegion :: Lens' TargetVPNGatewaysInsert Text
 tvgiRegion
   = lens _tvgiRegion (\ s a -> s{_tvgiRegion = a})

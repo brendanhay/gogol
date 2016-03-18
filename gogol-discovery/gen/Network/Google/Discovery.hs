@@ -166,6 +166,7 @@ module Network.Google.Discovery
     , rdName
     , rdPackagePath
     , rdFeatures
+    , rdVersionModule
     , rdVersion
     , rdParameters
     , rdDocumentationLink

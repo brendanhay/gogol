@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gives AdSense Hosts access to report generation, ad code generation, and
--- publisher management capabilities.
+-- Generates performance reports, generates ad codes, and provides
+-- publisher management capabilities for AdSense Hosts.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference>
 module Network.Google.AdSenseHost

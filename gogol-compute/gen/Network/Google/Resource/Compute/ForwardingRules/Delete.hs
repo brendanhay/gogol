@@ -84,7 +84,7 @@ forwardingRulesDelete pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
     , _frdRegion = pFrdRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 frdProject :: Lens' ForwardingRulesDelete Text
 frdProject
   = lens _frdProject (\ s a -> s{_frdProject = a})

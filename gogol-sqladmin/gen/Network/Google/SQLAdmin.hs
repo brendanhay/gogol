@@ -222,9 +222,11 @@ module Network.Google.SQLAdmin
     , sKind
     , sPricingPlan
     , sIPConfiguration
+    , sMaintenanceWindow
     , sDatabaseReplicationEnabled
     , sTier
     , sDatabaseFlags
+    , sDataDiskType
     , sCrashSafeReplicationEnabled
     , sLocationPreference
     , sBackupConfiguration
@@ -258,6 +260,12 @@ module Network.Google.SQLAdmin
     , blcBinLogPosition
     , blcKind
     , blcBinLogFileName
+
+    -- ** DatabaseInstanceFailoverReplica
+    , DatabaseInstanceFailoverReplica
+    , databaseInstanceFailoverReplica
+    , difrName
+    , difrAvailable
 
     -- ** TiersListResponse
     , TiersListResponse
@@ -306,6 +314,14 @@ module Network.Google.SQLAdmin
     , icRequireSSL
     , icIPv4Enabled
 
+    -- ** MaintenanceWindow
+    , MaintenanceWindow
+    , maintenanceWindow
+    , mwKind
+    , mwDay
+    , mwHour
+    , mwUpdateTrack
+
     -- ** ImportContextCSVImportOptions
     , ImportContextCSVImportOptions
     , importContextCSVImportOptions
@@ -331,6 +347,7 @@ module Network.Google.SQLAdmin
     -- ** DatabaseInstance
     , DatabaseInstance
     , databaseInstance
+    , datBackendType
     , datMaxDiskSize
     , datOnPremisesConfiguration
     , datEtag
@@ -345,12 +362,14 @@ module Network.Google.SQLAdmin
     , datInstanceType
     , datReplicaNames
     , datSelfLink
+    , datFailoverReplica
     , datName
     , datMasterInstanceName
     , datReplicaConfiguration
     , datRegion
     , datServiceAccountEmailAddress
     , datIPAddresses
+    , datSuspensionReason
 
     -- ** CloneContext
     , CloneContext
@@ -369,6 +388,7 @@ module Network.Google.SQLAdmin
     , fAllowedStringValues
     , fType
     , fMinValue
+    , fRequiresRestart
 
     -- ** InstancesFailoverRequest
     , InstancesFailoverRequest

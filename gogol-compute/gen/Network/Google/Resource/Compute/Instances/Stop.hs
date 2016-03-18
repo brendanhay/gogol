@@ -20,12 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This method stops a running instance, shutting it down cleanly, and
--- allows you to restart the instance at a later time. Stopped instances do
--- not incur per-minute, virtual machine usage charges while they are
--- stopped, but any resources that the virtual machine is using, such as
--- persistent disks and static IP addresses,will continue to be charged
--- until they are deleted. For more information, see Stopping an instance.
+-- Stops a running instance, shutting it down cleanly, and allows you to
+-- restart the instance at a later time. Stopped instances do not incur
+-- per-minute, virtual machine usage charges while they are stopped, but
+-- any resources that the virtual machine is using, such as persistent
+-- disks and static IP addresses, will continue to be charged until they
+-- are deleted. For more information, see Stopping an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.stop@.
 module Network.Google.Resource.Compute.Instances.Stop
@@ -60,12 +60,12 @@ type InstancesStopResource =
                      "stop" :>
                        QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
--- | This method stops a running instance, shutting it down cleanly, and
--- allows you to restart the instance at a later time. Stopped instances do
--- not incur per-minute, virtual machine usage charges while they are
--- stopped, but any resources that the virtual machine is using, such as
--- persistent disks and static IP addresses,will continue to be charged
--- until they are deleted. For more information, see Stopping an instance.
+-- | Stops a running instance, shutting it down cleanly, and allows you to
+-- restart the instance at a later time. Stopped instances do not incur
+-- per-minute, virtual machine usage charges while they are stopped, but
+-- any resources that the virtual machine is using, such as persistent
+-- disks and static IP addresses, will continue to be charged until they
+-- are deleted. For more information, see Stopping an instance.
 --
 -- /See:/ 'instancesStop' smart constructor.
 data InstancesStop = InstancesStop

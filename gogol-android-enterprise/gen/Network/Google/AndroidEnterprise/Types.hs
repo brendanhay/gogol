@@ -31,6 +31,12 @@ module Network.Google.AndroidEnterprise.Types
     , glProductId
     , glAcquisitionKind
 
+    -- * StoreLayoutPagesListResponse
+    , StoreLayoutPagesListResponse
+    , storeLayoutPagesListResponse
+    , slplrKind
+    , slplrPage
+
     -- * EnterpriseAccount
     , EnterpriseAccount
     , enterpriseAccount
@@ -69,6 +75,21 @@ module Network.Google.AndroidEnterprise.Types
     , approvalURLInfo
     , auiApprovalURL
     , auiKind
+
+    -- * StoreLayoutClustersListResponse
+    , StoreLayoutClustersListResponse
+    , storeLayoutClustersListResponse
+    , slclrCluster
+    , slclrKind
+
+    -- * StoreCluster
+    , StoreCluster
+    , storeCluster
+    , scKind
+    , scName
+    , scOrderInPage
+    , scId
+    , scProductId
 
     -- * ProductPermission
     , ProductPermission
@@ -153,6 +174,14 @@ module Network.Google.AndroidEnterprise.Types
     , productsGenerateApprovalURLResponse
     , pgaurURL
 
+    -- * StorePage
+    , StorePage
+    , storePage
+    , spKind
+    , spLink
+    , spName
+    , spId
+
     -- * EnterprisesSendTestPushNotificationResponse
     , EnterprisesSendTestPushNotificationResponse
     , enterprisesSendTestPushNotificationResponse
@@ -170,6 +199,12 @@ module Network.Google.AndroidEnterprise.Types
     , appRestrictionsSchema
     , arsKind
     , arsRestrictions
+
+    -- * LocalizedText
+    , LocalizedText
+    , localizedText
+    , ltText
+    , ltLocale
 
     -- * UserToken
     , UserToken
@@ -192,6 +227,12 @@ module Network.Google.AndroidEnterprise.Types
     , eName
     , eId
 
+    -- * StoreLayout
+    , StoreLayout
+    , storeLayout
+    , slKind
+    , slHomepageId
+
     -- * Product
     , Product
     , product
@@ -200,6 +241,7 @@ module Network.Google.AndroidEnterprise.Types
     , pWorkDetailsURL
     , pRequiresContainerApp
     , pAppVersion
+    , pProductPricing
     , pDistributionChannel
     , pIconURL
     , pTitle
@@ -251,7 +293,7 @@ import           Network.Google.AndroidEnterprise.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
-androidEnterpriseService :: Service
+androidEnterpriseService :: ServiceConfig
 androidEnterpriseService
   = defaultService (ServiceId "androidenterprise:v1")
       "www.googleapis.com"

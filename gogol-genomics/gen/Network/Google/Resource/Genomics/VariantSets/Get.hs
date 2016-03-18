@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a variant set by ID.
+-- Gets a variant set by ID. For the definitions of variant sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.get@.
 module Network.Google.Resource.Genomics.VariantSets.Get
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type VariantSetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] VariantSet
 
--- | Gets a variant set by ID.
+-- | Gets a variant set by ID. For the definitions of variant sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsGet' smart constructor.
 data VariantSetsGet = VariantSetsGet

@@ -56,17 +56,25 @@ library
         , Network.Google.Resource.YouTube.Comments.MarkAsSpam
         , Network.Google.Resource.YouTube.Comments.SetModerationStatus
         , Network.Google.Resource.YouTube.Comments.Update
+        , Network.Google.Resource.YouTube.FanFundingEvents.List
         , Network.Google.Resource.YouTube.GuideCategories.List
         , Network.Google.Resource.YouTube.I18nLanguages.List
         , Network.Google.Resource.YouTube.I18nRegions.List
         , Network.Google.Resource.YouTube.LiveBroadcasts.Bind
-        , Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
         , Network.Google.Resource.YouTube.LiveBroadcasts.Control
         , Network.Google.Resource.YouTube.LiveBroadcasts.Delete
         , Network.Google.Resource.YouTube.LiveBroadcasts.Insert
         , Network.Google.Resource.YouTube.LiveBroadcasts.List
         , Network.Google.Resource.YouTube.LiveBroadcasts.Transition
         , Network.Google.Resource.YouTube.LiveBroadcasts.Update
+        , Network.Google.Resource.YouTube.LiveChatBans.Delete
+        , Network.Google.Resource.YouTube.LiveChatBans.Insert
+        , Network.Google.Resource.YouTube.LiveChatMessages.Delete
+        , Network.Google.Resource.YouTube.LiveChatMessages.Insert
+        , Network.Google.Resource.YouTube.LiveChatMessages.List
+        , Network.Google.Resource.YouTube.LiveChatModerators.Delete
+        , Network.Google.Resource.YouTube.LiveChatModerators.Insert
+        , Network.Google.Resource.YouTube.LiveChatModerators.List
         , Network.Google.Resource.YouTube.LiveStreams.Delete
         , Network.Google.Resource.YouTube.LiveStreams.Insert
         , Network.Google.Resource.YouTube.LiveStreams.List
@@ -80,6 +88,7 @@ library
         , Network.Google.Resource.YouTube.PlayLists.List
         , Network.Google.Resource.YouTube.PlayLists.Update
         , Network.Google.Resource.YouTube.Search.List
+        , Network.Google.Resource.YouTube.Sponsors.List
         , Network.Google.Resource.YouTube.Subscriptions.Delete
         , Network.Google.Resource.YouTube.Subscriptions.Insert
         , Network.Google.Resource.YouTube.Subscriptions.List

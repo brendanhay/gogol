@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists projects that are visible to the user and satisfy the specified
--- filter. This method returns projects in an unspecified order. New
--- projects do not necessarily appear at the end of the list.
+-- Lists Projects that are visible to the user and satisfy the specified
+-- filter. This method returns Projects in an unspecified order. New
+-- Projects do not necessarily appear at the end of the list.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.list@.
 module Network.Google.Resource.CloudResourceManager.Projects.List
@@ -53,7 +53,7 @@ import           Network.Google.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.list@ method which the
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
-     "v1beta1" :>
+     "v1" :>
        "projects" :>
          QueryParam "$.xgafv" Text :>
            QueryParam "upload_protocol" Text :>
@@ -68,9 +68,9 @@ type ProjectsListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListProjectsResponse
 
--- | Lists projects that are visible to the user and satisfy the specified
--- filter. This method returns projects in an unspecified order. New
--- projects do not necessarily appear at the end of the list.
+-- | Lists Projects that are visible to the user and satisfy the specified
+-- filter. This method returns Projects in an unspecified order. New
+-- Projects do not necessarily appear at the end of the list.
 --
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList = ProjectsList
@@ -170,17 +170,15 @@ plBearerToken
 plFilter :: Lens' ProjectsList (Maybe Text)
 plFilter = lens _plFilter (\ s a -> s{_plFilter = a})
 
--- | A pagination token returned from a previous call to ListProject that
--- indicates from where listing should continue. Note: pagination is not
--- yet supported; the server ignores this field. Optional.
+-- | A pagination token returned from a previous call to ListProjects that
+-- indicates from where listing should continue. Optional.
 plPageToken :: Lens' ProjectsList (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | The maximum number of Projects to return in the response. The server can
--- return fewer projects than requested. If unspecified, server picks an
--- appropriate default. Note: pagination is not yet supported; the server
--- ignores this field. Optional.
+-- return fewer Projects than requested. If unspecified, server picks an
+-- appropriate default. Optional.
 plPageSize :: Lens' ProjectsList (Maybe Int32)
 plPageSize
   = lens _plPageSize (\ s a -> s{_plPageSize = a}) .

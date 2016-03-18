@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing view (profile).
+-- Updates an existing goal.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.update@.
 module Network.Google.Resource.Analytics.Management.Goals.Update
@@ -60,7 +60,7 @@ type ManagementGoalsUpdateResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Goal :> Put '[JSON] Goal
 
--- | Updates an existing view (profile).
+-- | Updates an existing goal.
 --
 -- /See:/ 'managementGoalsUpdate' smart constructor.
 data ManagementGoalsUpdate = ManagementGoalsUpdate

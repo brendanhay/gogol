@@ -94,7 +94,7 @@ addAddress :: Lens' AddressesGet Text
 addAddress
   = lens _addAddress (\ s a -> s{_addAddress = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 addRegion :: Lens' AddressesGet Text
 addRegion
   = lens _addRegion (\ s a -> s{_addRegion = a})

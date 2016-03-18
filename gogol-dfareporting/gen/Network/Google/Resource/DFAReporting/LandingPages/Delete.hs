@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesDelete' request conforms to.
 type LandingPagesDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>

@@ -130,6 +130,7 @@ module Network.Google.YouTubeAnalytics.Types
     , GroupListResponse
     , groupListResponse
     , glrEtag
+    , glrNextPageToken
     , glrKind
     , glrItems
     ) where
@@ -139,7 +140,7 @@ import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeAnalyticsService :: Service
+youTubeAnalyticsService :: ServiceConfig
 youTubeAnalyticsService
   = defaultService (ServiceId "youtubeAnalytics:v1")
       "www.googleapis.com"

@@ -96,7 +96,7 @@ vtiPayload :: Lens' VPNTunnelsInsert VPNTunnel
 vtiPayload
   = lens _vtiPayload (\ s a -> s{_vtiPayload = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 vtiRegion :: Lens' VPNTunnelsInsert Text
 vtiRegion
   = lens _vtiRegion (\ s a -> s{_vtiRegion = a})

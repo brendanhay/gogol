@@ -13,8 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Admin Data Transfer API lets you transfer user data from one user to
--- another.
+-- Transfers user data from one user to another.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference>
 module Network.Google.DataTransfer

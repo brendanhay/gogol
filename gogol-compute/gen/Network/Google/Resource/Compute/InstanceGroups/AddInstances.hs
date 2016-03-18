@@ -22,7 +22,7 @@
 --
 -- Adds a list of instances to the specified instance group. All of the
 -- instances in the instance group must be in the same network\/subnetwork.
--- TODO: Change to comment to state \"if IG is load balanced.\"
+-- Read Adding instances for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.addInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.AddInstances
@@ -62,7 +62,7 @@ type InstanceGroupsAddInstancesResource =
 
 -- | Adds a list of instances to the specified instance group. All of the
 -- instances in the instance group must be in the same network\/subnetwork.
--- TODO: Change to comment to state \"if IG is load balanced.\"
+-- Read Adding instances for more information.
 --
 -- /See:/ 'instanceGroupsAddInstances' smart constructor.
 data InstanceGroupsAddInstances = InstanceGroupsAddInstances
@@ -97,7 +97,7 @@ instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceG
     , _igaiInstanceGroup = pIgaiInstanceGroup_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igaiProject :: Lens' InstanceGroupsAddInstances Text
 igaiProject
   = lens _igaiProject (\ s a -> s{_igaiProject = a})

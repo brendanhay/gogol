@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Cloud Trace API provides services for reading and writing
--- runtime trace data for Cloud applications.
+-- The Cloud Trace API allows you to send traces to and retrieve traces
+-- from Google Cloud Trace.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference>
 module Network.Google.CloudTrace
@@ -29,9 +29,6 @@ module Network.Google.CloudTrace
     , CloudTraceAPI
 
     -- * Resources
-
-    -- ** cloudtrace.getDiscovery
-    , module Network.Google.Resource.CloudTrace.GetDiscovery
 
     -- ** cloudtrace.projects.patchTraces
     , module Network.Google.Resource.CloudTrace.Projects.PatchTraces
@@ -85,7 +82,6 @@ module Network.Google.CloudTrace
 
 import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.CloudTrace.GetDiscovery
 import           Network.Google.Resource.CloudTrace.Projects.PatchTraces
 import           Network.Google.Resource.CloudTrace.Projects.Traces.Get
 import           Network.Google.Resource.CloudTrace.Projects.Traces.List
@@ -96,6 +92,6 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud Trace API service.
 type CloudTraceAPI =
-     GetDiscoveryResource :<|> ProjectsTracesListResource
-       :<|> ProjectsTracesGetResource
+     ProjectsTracesListResource :<|>
+       ProjectsTracesGetResource
        :<|> ProjectsPatchTracesResource

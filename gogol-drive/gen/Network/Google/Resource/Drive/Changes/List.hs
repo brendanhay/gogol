@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the changes for a user.
+-- Lists changes for a user.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.changes.list@.
 module Network.Google.Resource.Drive.Changes.List
@@ -33,12 +33,11 @@ module Network.Google.Resource.Drive.Changes.List
     , ChangesList
 
     -- * Request Lenses
-    , clIncludeSubscribed
-    , clStartChangeId
+    , clRestrictToMyDrive
     , clSpaces
     , clPageToken
-    , clMaxResults
-    , clIncludeDeleted
+    , clPageSize
+    , clIncludeRemoved
     ) where
 
 import           Network.Google.Drive.Types
@@ -48,100 +47,91 @@ import           Network.Google.Prelude
 -- 'ChangesList' request conforms to.
 type ChangesListResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "changes" :>
-           QueryParam "includeSubscribed" Bool :>
-             QueryParam "startChangeId" (Textual Int64) :>
+           QueryParam "pageToken" Text :>
+             QueryParam "restrictToMyDrive" Bool :>
                QueryParam "spaces" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Int32) :>
-                     QueryParam "includeDeleted" Bool :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] ChangeList
+                 QueryParam "pageSize" (Textual Int32) :>
+                   QueryParam "includeRemoved" Bool :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] ChangeList
 
--- | Lists the changes for a user.
+-- | Lists changes for a user.
 --
 -- /See:/ 'changesList' smart constructor.
 data ChangesList = ChangesList
-    { _clIncludeSubscribed :: !Bool
-    , _clStartChangeId     :: !(Maybe (Textual Int64))
-    , _clSpaces            :: !(Maybe Text)
-    , _clPageToken         :: !(Maybe Text)
-    , _clMaxResults        :: !(Textual Int32)
-    , _clIncludeDeleted    :: !Bool
+    { _clRestrictToMyDrive :: !Bool
+    , _clSpaces            :: !Text
+    , _clPageToken         :: !Text
+    , _clPageSize          :: !(Textual Int32)
+    , _clIncludeRemoved    :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clIncludeSubscribed'
---
--- * 'clStartChangeId'
+-- * 'clRestrictToMyDrive'
 --
 -- * 'clSpaces'
 --
 -- * 'clPageToken'
 --
--- * 'clMaxResults'
+-- * 'clPageSize'
 --
--- * 'clIncludeDeleted'
+-- * 'clIncludeRemoved'
 changesList
-    :: ChangesList
-changesList =
+    :: Text -- ^ 'clPageToken'
+    -> ChangesList
+changesList pClPageToken_ =
     ChangesList
-    { _clIncludeSubscribed = True
-    , _clStartChangeId = Nothing
-    , _clSpaces = Nothing
-    , _clPageToken = Nothing
-    , _clMaxResults = 100
-    , _clIncludeDeleted = True
+    { _clRestrictToMyDrive = False
+    , _clSpaces = "drive"
+    , _clPageToken = pClPageToken_
+    , _clPageSize = 100
+    , _clIncludeRemoved = True
     }
 
--- | Whether to include public files the user has opened and shared files.
--- When set to false, the list only includes owned files plus any shared or
--- public files the user has explicitly added to a folder they own.
-clIncludeSubscribed :: Lens' ChangesList Bool
-clIncludeSubscribed
-  = lens _clIncludeSubscribed
-      (\ s a -> s{_clIncludeSubscribed = a})
+-- | Whether to restrict the results to changes inside the My Drive
+-- hierarchy. This omits changes to files such as those in the Application
+-- Data folder or shared files which have not been added to My Drive.
+clRestrictToMyDrive :: Lens' ChangesList Bool
+clRestrictToMyDrive
+  = lens _clRestrictToMyDrive
+      (\ s a -> s{_clRestrictToMyDrive = a})
 
--- | Change ID to start listing changes from.
-clStartChangeId :: Lens' ChangesList (Maybe Int64)
-clStartChangeId
-  = lens _clStartChangeId
-      (\ s a -> s{_clStartChangeId = a})
-      . mapping _Coerce
-
--- | A comma-separated list of spaces to query. Supported values are
--- \'drive\', \'appDataFolder\' and \'photos\'.
-clSpaces :: Lens' ChangesList (Maybe Text)
+-- | A comma-separated list of spaces to query within the user corpus.
+-- Supported values are \'drive\', \'appDataFolder\' and \'photos\'.
+clSpaces :: Lens' ChangesList Text
 clSpaces = lens _clSpaces (\ s a -> s{_clSpaces = a})
 
--- | Page token for changes.
-clPageToken :: Lens' ChangesList (Maybe Text)
+-- | The token for continuing a previous list request on the next page. This
+-- should be set to the value of \'nextPageToken\' from the previous
+-- response or to the response from the getStartPageToken method.
+clPageToken :: Lens' ChangesList Text
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
--- | Maximum number of changes to return.
-clMaxResults :: Lens' ChangesList Int32
-clMaxResults
-  = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
-      . _Coerce
+-- | The maximum number of changes to return per page.
+clPageSize :: Lens' ChangesList Int32
+clPageSize
+  = lens _clPageSize (\ s a -> s{_clPageSize = a}) .
+      _Coerce
 
--- | Whether to include deleted items.
-clIncludeDeleted :: Lens' ChangesList Bool
-clIncludeDeleted
-  = lens _clIncludeDeleted
-      (\ s a -> s{_clIncludeDeleted = a})
+-- | Whether to include changes indicating that items have left the view of
+-- the changes list, for example by deletion or lost access.
+clIncludeRemoved :: Lens' ChangesList Bool
+clIncludeRemoved
+  = lens _clIncludeRemoved
+      (\ s a -> s{_clIncludeRemoved = a})
 
 instance GoogleRequest ChangesList where
         type Rs ChangesList = ChangeList
         requestClient ChangesList{..}
-          = go (Just _clIncludeSubscribed) _clStartChangeId
-              _clSpaces
-              _clPageToken
-              (Just _clMaxResults)
-              (Just _clIncludeDeleted)
+          = go (Just _clPageToken) (Just _clRestrictToMyDrive)
+              (Just _clSpaces)
+              (Just _clPageSize)
+              (Just _clIncludeRemoved)
               (Just AltJSON)
               driveService
           where go

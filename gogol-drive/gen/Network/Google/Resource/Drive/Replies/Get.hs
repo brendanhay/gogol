@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a reply.
+-- Gets a reply by ID.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.get@.
 module Network.Google.Resource.Drive.Replies.Get
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'RepliesGet' request conforms to.
 type RepliesGetResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
@@ -54,9 +54,9 @@ type RepliesGetResource =
                  "replies" :>
                    Capture "replyId" Text :>
                      QueryParam "includeDeleted" Bool :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] CommentReply
+                       QueryParam "alt" AltJSON :> Get '[JSON] Reply
 
--- | Gets a reply.
+-- | Gets a reply by ID.
 --
 -- /See:/ 'repliesGet' smart constructor.
 data RepliesGet = RepliesGet
@@ -104,14 +104,15 @@ rgCommentId :: Lens' RepliesGet Text
 rgCommentId
   = lens _rgCommentId (\ s a -> s{_rgCommentId = a})
 
--- | If set, this will succeed when retrieving a deleted reply.
+-- | Whether to return deleted replies. Deleted replies will not include
+-- their original content.
 rgIncludeDeleted :: Lens' RepliesGet Bool
 rgIncludeDeleted
   = lens _rgIncludeDeleted
       (\ s a -> s{_rgIncludeDeleted = a})
 
 instance GoogleRequest RepliesGet where
-        type Rs RepliesGet = CommentReply
+        type Rs RepliesGet = Reply
         requestClient RepliesGet{..}
           = go _rgFileId _rgCommentId _rgReplyId
               (Just _rgIncludeDeleted)

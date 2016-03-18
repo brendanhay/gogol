@@ -85,7 +85,7 @@ targetHTTPProxiesSetURLMap pThttppsumProject_ pThttppsumPayload_ pThttppsumTarge
     , _thttppsumTargetHTTPProxy = pThttppsumTargetHTTPProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thttppsumProject :: Lens' TargetHTTPProxiesSetURLMap Text
 thttppsumProject
   = lens _thttppsumProject
@@ -97,7 +97,7 @@ thttppsumPayload
   = lens _thttppsumPayload
       (\ s a -> s{_thttppsumPayload = a})
 
--- | Name of the TargetHttpProxy resource whose URL map is to be set.
+-- | Name of the TargetHttpProxy to set a URL map for.
 thttppsumTargetHTTPProxy :: Lens' TargetHTTPProxiesSetURLMap Text
 thttppsumTargetHTTPProxy
   = lens _thttppsumTargetHTTPProxy

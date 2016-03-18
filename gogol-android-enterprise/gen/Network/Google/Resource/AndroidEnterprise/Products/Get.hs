@@ -22,7 +22,7 @@
 --
 -- Retrieves details of a product for display to an enterprise admin.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.get@.
 module Network.Google.Resource.AndroidEnterprise.Products.Get
     (
     -- * REST Resource

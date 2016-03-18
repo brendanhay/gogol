@@ -22,7 +22,7 @@
 --
 -- Retrieves information about specific site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.get@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.get@.
 module Network.Google.Resource.Webmasters.Sites.Get
     (
     -- * REST Resource

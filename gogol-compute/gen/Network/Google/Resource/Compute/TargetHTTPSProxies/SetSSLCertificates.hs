@@ -86,7 +86,7 @@ targetHTTPSProxiesSetSSLCertificates pThpsscProject_ pThpsscPayload_ pThpsscTarg
     , _thpsscTargetHTTPSProxy = pThpsscTargetHTTPSProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thpsscProject :: Lens' TargetHTTPSProxiesSetSSLCertificates Text
 thpsscProject
   = lens _thpsscProject
@@ -98,7 +98,8 @@ thpsscPayload
   = lens _thpsscPayload
       (\ s a -> s{_thpsscPayload = a})
 
--- | Name of the TargetHttpsProxy resource whose URL map is to be set.
+-- | Name of the TargetHttpsProxy resource to set an SslCertificates resource
+-- for.
 thpsscTargetHTTPSProxy :: Lens' TargetHTTPSProxiesSetSSLCertificates Text
 thpsscTargetHTTPSProxy
   = lens _thpsscTargetHTTPSProxy

@@ -55,7 +55,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>

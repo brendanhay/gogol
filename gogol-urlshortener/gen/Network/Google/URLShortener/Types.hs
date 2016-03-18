@@ -77,7 +77,7 @@ import           Network.Google.URLShortener.Types.Product
 import           Network.Google.URLShortener.Types.Sum
 
 -- | Default request referring to version 'v1' of the URL Shortener API. This contains the host and root path used as a starting point for constructing service requests.
-uRLShortenerService :: Service
+uRLShortenerService :: ServiceConfig
 uRLShortenerService
   = defaultService (ServiceId "urlshortener:v1")
       "www.googleapis.com"

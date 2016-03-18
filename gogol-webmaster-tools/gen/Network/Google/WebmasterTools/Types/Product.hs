@@ -841,6 +841,7 @@ data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest
     , _saqrSearchType            :: !(Maybe Text)
     , _saqrDimensionFilterGroups :: !(Maybe [APIdimensionFilterGroup])
     , _saqrStartDate             :: !(Maybe Text)
+    , _saqrStartRow              :: !(Maybe (Textual Int32))
     , _saqrDimensions            :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -860,6 +861,8 @@ data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest
 --
 -- * 'saqrStartDate'
 --
+-- * 'saqrStartRow'
+--
 -- * 'saqrDimensions'
 searchAnalyticsQueryRequest
     :: SearchAnalyticsQueryRequest
@@ -871,6 +874,7 @@ searchAnalyticsQueryRequest =
     , _saqrSearchType = Nothing
     , _saqrDimensionFilterGroups = Nothing
     , _saqrStartDate = Nothing
+    , _saqrStartRow = Nothing
     , _saqrDimensions = Nothing
     }
 
@@ -929,6 +933,13 @@ saqrStartDate
   = lens _saqrStartDate
       (\ s a -> s{_saqrStartDate = a})
 
+-- | [Optional; Default is 0] Zero-based index of the first row in the
+-- response. Must be a non-negative number.
+saqrStartRow :: Lens' SearchAnalyticsQueryRequest (Maybe Int32)
+saqrStartRow
+  = lens _saqrStartRow (\ s a -> s{_saqrStartRow = a})
+      . mapping _Coerce
+
 -- | [Optional] Zero or more dimensions to group results by. Dimensions are
 -- the group-by values in the Search Analytics page. Dimensions are
 -- combined to create a unique row key for each row. Results are grouped in
@@ -950,6 +961,7 @@ instance FromJSON SearchAnalyticsQueryRequest where
                      <*> (o .:? "searchType")
                      <*> (o .:? "dimensionFilterGroups" .!= mempty)
                      <*> (o .:? "startDate")
+                     <*> (o .:? "startRow")
                      <*> (o .:? "dimensions" .!= mempty))
 
 instance ToJSON SearchAnalyticsQueryRequest where
@@ -963,6 +975,7 @@ instance ToJSON SearchAnalyticsQueryRequest where
                   ("dimensionFilterGroups" .=) <$>
                     _saqrDimensionFilterGroups,
                   ("startDate" .=) <$> _saqrStartDate,
+                  ("startRow" .=) <$> _saqrStartRow,
                   ("dimensions" .=) <$> _saqrDimensions])
 
 -- | List of sites with access level information.
@@ -984,8 +997,8 @@ sitesListResponse =
     { _slrSiteEntry = Nothing
     }
 
--- | Contains permission level information about a Webmaster Tools site. For
--- more information, see Permissions in Webmaster Tools.
+-- | Contains permission level information about a Search Console site. For
+-- more information, see Permissions in Search Console.
 slrSiteEntry :: Lens' SitesListResponse [WmxSite]
 slrSiteEntry
   = lens _slrSiteEntry (\ s a -> s{_slrSiteEntry = a})
@@ -1003,8 +1016,8 @@ instance ToJSON SitesListResponse where
           = object
               (catMaybes [("siteEntry" .=) <$> _slrSiteEntry])
 
--- | Contains permission level information about a Webmaster Tools site. For
--- more information, see Permissions in Webmaster Tools.
+-- | Contains permission level information about a Search Console site. For
+-- more information, see Permissions in Search Console.
 --
 -- /See:/ 'wmxSite' smart constructor.
 data WmxSite = WmxSite

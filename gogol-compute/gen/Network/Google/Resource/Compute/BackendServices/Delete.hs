@@ -77,7 +77,7 @@ backendServicesDelete pBsdProject_ pBsdBackendService_ =
     , _bsdBackendService = pBsdBackendService_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 bsdProject :: Lens' BackendServicesDelete Text
 bsdProject
   = lens _bsdProject (\ s a -> s{_bsdProject = a})

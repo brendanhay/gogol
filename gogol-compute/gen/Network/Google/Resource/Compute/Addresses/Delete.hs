@@ -94,7 +94,7 @@ aaAddress :: Lens' AddressesDelete Text
 aaAddress
   = lens _aaAddress (\ s a -> s{_aaAddress = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 aaRegion :: Lens' AddressesDelete Text
 aaRegion = lens _aaRegion (\ s a -> s{_aaRegion = a})
 

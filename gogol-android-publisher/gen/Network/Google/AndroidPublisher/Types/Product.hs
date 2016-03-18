@@ -771,8 +771,9 @@ instance ToJSON TracksListResponse where
 --
 -- /See:/ 'season' smart constructor.
 data Season = Season
-    { _sStart :: !(Maybe MonthDay)
-    , _sEnd   :: !(Maybe MonthDay)
+    { _sStart      :: !(Maybe MonthDay)
+    , _sEnd        :: !(Maybe MonthDay)
+    , _sProrations :: !(Maybe [Prorate])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Season' with the minimum fields required to make a request.
@@ -782,12 +783,15 @@ data Season = Season
 -- * 'sStart'
 --
 -- * 'sEnd'
+--
+-- * 'sProrations'
 season
     :: Season
 season =
     Season
     { _sStart = Nothing
     , _sEnd = Nothing
+    , _sProrations = Nothing
     }
 
 -- | Inclusive start date of the recurrence period.
@@ -798,16 +802,30 @@ sStart = lens _sStart (\ s a -> s{_sStart = a})
 sEnd :: Lens' Season (Maybe MonthDay)
 sEnd = lens _sEnd (\ s a -> s{_sEnd = a})
 
+-- | Optionally present list of prorations for the season. Each proration is
+-- a one-off discounted entry into a subscription. Each proration contains
+-- the first date on which the discount is available and the new pricing
+-- information.
+sProrations :: Lens' Season [Prorate]
+sProrations
+  = lens _sProrations (\ s a -> s{_sProrations = a}) .
+      _Default
+      . _Coerce
+
 instance FromJSON Season where
         parseJSON
           = withObject "Season"
-              (\ o -> Season <$> (o .:? "start") <*> (o .:? "end"))
+              (\ o ->
+                 Season <$>
+                   (o .:? "start") <*> (o .:? "end") <*>
+                     (o .:? "prorations" .!= mempty))
 
 instance ToJSON Season where
         toJSON Season{..}
           = object
               (catMaybes
-                 [("start" .=) <$> _sStart, ("end" .=) <$> _sEnd])
+                 [("start" .=) <$> _sStart, ("end" .=) <$> _sEnd,
+                  ("prorations" .=) <$> _sProrations])
 
 --
 -- /See:/ 'pageInfo' smart constructor.
@@ -1647,6 +1665,55 @@ instance ToJSON ImagesUploadResponse where
           = object (catMaybes [("image" .=) <$> _iurImage])
 
 --
+-- /See:/ 'prorate' smart constructor.
+data Prorate = Prorate
+    { _pStart        :: !(Maybe MonthDay)
+    , _pDefaultPrice :: !(Maybe Price)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Prorate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pStart'
+--
+-- * 'pDefaultPrice'
+prorate
+    :: Prorate
+prorate =
+    Prorate
+    { _pStart = Nothing
+    , _pDefaultPrice = Nothing
+    }
+
+-- | Defines the first day on which the price takes effect.
+pStart :: Lens' Prorate (Maybe MonthDay)
+pStart = lens _pStart (\ s a -> s{_pStart = a})
+
+-- | Default price cannot be zero and must be less than the full subscription
+-- price. Default price is always in the developer\'s Checkout merchant
+-- currency. Targeted countries have their prices set automatically based
+-- on the default_price.
+pDefaultPrice :: Lens' Prorate (Maybe Price)
+pDefaultPrice
+  = lens _pDefaultPrice
+      (\ s a -> s{_pDefaultPrice = a})
+
+instance FromJSON Prorate where
+        parseJSON
+          = withObject "Prorate"
+              (\ o ->
+                 Prorate <$>
+                   (o .:? "start") <*> (o .:? "defaultPrice"))
+
+instance ToJSON Prorate where
+        toJSON Prorate{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _pStart,
+                  ("defaultPrice" .=) <$> _pDefaultPrice])
+
+--
 -- /See:/ 'inAppProductsListResponse' smart constructor.
 data InAppProductsListResponse = InAppProductsListResponse
     { _iaplrTokenPagination :: !(Maybe TokenPagination)
@@ -1992,7 +2059,8 @@ iapPurchaseType
       (\ s a -> s{_iapPurchaseType = a})
 
 -- | Subscription period, specified in ISO 8601 format. Acceptable values are
--- \"P1W\" (one week), \"P1M\" (one month) and \"P1Y\" (one year).
+-- \"P1W\" (one week), \"P1M\" (one month), \"P3M\" (three months), \"P6M\"
+-- (six months), and \"P1Y\" (one year).
 iapSubscriptionPeriod :: Lens' InAppProduct (Maybe Text)
 iapSubscriptionPeriod
   = lens _iapSubscriptionPeriod

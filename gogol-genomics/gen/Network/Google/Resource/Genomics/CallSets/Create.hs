@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new call set.
+-- Creates a new call set. For the definitions of call sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.create@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.create@.
 module Network.Google.Resource.Genomics.CallSets.Create
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type CallSetsCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CallSet :> Post '[JSON] CallSet
 
--- | Creates a new call set.
+-- | Creates a new call set. For the definitions of call sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsCreate' smart constructor.
 data CallSetsCreate = CallSetsCreate

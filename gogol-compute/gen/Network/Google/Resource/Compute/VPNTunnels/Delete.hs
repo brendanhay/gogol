@@ -94,7 +94,7 @@ vtdVPNTunnel :: Lens' VPNTunnelsDelete Text
 vtdVPNTunnel
   = lens _vtdVPNTunnel (\ s a -> s{_vtdVPNTunnel = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 vtdRegion :: Lens' VPNTunnelsDelete Text
 vtdRegion
   = lens _vtdRegion (\ s a -> s{_vtdRegion = a})

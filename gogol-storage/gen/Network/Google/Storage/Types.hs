@@ -122,6 +122,12 @@ module Network.Google.Storage.Types
     , oacptProjectNumber
     , oacptTeam
 
+    -- * ObjectCustomerEncryption
+    , ObjectCustomerEncryption
+    , objectCustomerEncryption
+    , oceKeySha256
+    , oceEncryptionAlgorithm
+
     -- * Bucket
     , Bucket
     , bucket
@@ -228,6 +234,7 @@ module Network.Google.Storage.Types
     , objKind
     , objTimeDeleted
     , objCrc32c
+    , objCustomerEncryption
     , objBucket
     , objOwner
     , objSelfLink
@@ -343,7 +350,7 @@ import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Storage JSON API. This contains the host and root path used as a starting point for constructing service requests.
-storageService :: Service
+storageService :: ServiceConfig
 storageService
   = defaultService (ServiceId "storage:v1")
       "www.googleapis.com"

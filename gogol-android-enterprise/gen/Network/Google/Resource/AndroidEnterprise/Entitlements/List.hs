@@ -22,7 +22,7 @@
 --
 -- List of all entitlements for the specified user. Only the ID is set.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.list@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.List
     (
     -- * REST Resource

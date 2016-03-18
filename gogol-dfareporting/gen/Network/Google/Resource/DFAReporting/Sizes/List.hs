@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'SizesList' request conforms to.
 type SizesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>

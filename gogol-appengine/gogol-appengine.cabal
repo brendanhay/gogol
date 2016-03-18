@@ -14,13 +14,12 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google App Engine Admin API enables developers to provision and
-    manage their App Engine applications.
+    Provisions and manages App Engine applications.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta4@
+    This library is compatible with version @v1beta5@
     of the API.
 
 source-repository head
@@ -37,16 +36,17 @@ library
           Network.Google.AppEngine
         , Network.Google.AppEngine.Types
         , Network.Google.Resource.AppEngine.Apps.Get
-        , Network.Google.Resource.AppEngine.Apps.Modules.Delete
-        , Network.Google.Resource.AppEngine.Apps.Modules.Get
-        , Network.Google.Resource.AppEngine.Apps.Modules.List
-        , Network.Google.Resource.AppEngine.Apps.Modules.Patch
-        , Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
-        , Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
-        , Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
-        , Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
         , Network.Google.Resource.AppEngine.Apps.Operations.Get
         , Network.Google.Resource.AppEngine.Apps.Operations.List
+        , Network.Google.Resource.AppEngine.Apps.Services.Delete
+        , Network.Google.Resource.AppEngine.Apps.Services.Get
+        , Network.Google.Resource.AppEngine.Apps.Services.List
+        , Network.Google.Resource.AppEngine.Apps.Services.Patch
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.List
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
 
     other-modules:
           Network.Google.AppEngine.Types.Product

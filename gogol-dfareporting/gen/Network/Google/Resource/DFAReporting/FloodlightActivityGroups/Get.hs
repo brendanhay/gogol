@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsGet' request conforms to.
 type FloodlightActivityGroupsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>

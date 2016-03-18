@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the information about the current user along with Drive API
--- settings
+-- Gets information about the user, the user\'s Drive, and system
+-- capabilities.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.about.get@.
 module Network.Google.Resource.Drive.About.Get
@@ -33,10 +33,6 @@ module Network.Google.Resource.Drive.About.Get
     , aboutGet
     , AboutGet
 
-    -- * Request Lenses
-    , agIncludeSubscribed
-    , agStartChangeId
-    , agMaxChangeIdCount
     ) where
 
 import           Network.Google.Drive.Types
@@ -46,72 +42,28 @@ import           Network.Google.Prelude
 -- 'AboutGet' request conforms to.
 type AboutGetResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "about" :>
-           QueryParam "includeSubscribed" Bool :>
-             QueryParam "startChangeId" (Textual Int64) :>
-               QueryParam "maxChangeIdCount" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] About
+           QueryParam "alt" AltJSON :> Get '[JSON] About
 
--- | Gets the information about the current user along with Drive API
--- settings
+-- | Gets information about the user, the user\'s Drive, and system
+-- capabilities.
 --
 -- /See:/ 'aboutGet' smart constructor.
-data AboutGet = AboutGet
-    { _agIncludeSubscribed :: !Bool
-    , _agStartChangeId     :: !(Maybe (Textual Int64))
-    , _agMaxChangeIdCount  :: !(Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data AboutGet =
+    AboutGet
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AboutGet' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'agIncludeSubscribed'
---
--- * 'agStartChangeId'
---
--- * 'agMaxChangeIdCount'
 aboutGet
     :: AboutGet
-aboutGet =
-    AboutGet
-    { _agIncludeSubscribed = True
-    , _agStartChangeId = Nothing
-    , _agMaxChangeIdCount = 1
-    }
-
--- | When calculating the number of remaining change IDs, whether to include
--- public files the user has opened and shared files. When set to false,
--- this counts only change IDs for owned files and any shared or public
--- files that the user has explicitly added to a folder they own.
-agIncludeSubscribed :: Lens' AboutGet Bool
-agIncludeSubscribed
-  = lens _agIncludeSubscribed
-      (\ s a -> s{_agIncludeSubscribed = a})
-
--- | Change ID to start counting from when calculating number of remaining
--- change IDs
-agStartChangeId :: Lens' AboutGet (Maybe Int64)
-agStartChangeId
-  = lens _agStartChangeId
-      (\ s a -> s{_agStartChangeId = a})
-      . mapping _Coerce
-
--- | Maximum number of remaining change IDs to count
-agMaxChangeIdCount :: Lens' AboutGet Int64
-agMaxChangeIdCount
-  = lens _agMaxChangeIdCount
-      (\ s a -> s{_agMaxChangeIdCount = a})
-      . _Coerce
+aboutGet = AboutGet
 
 instance GoogleRequest AboutGet where
         type Rs AboutGet = About
-        requestClient AboutGet{..}
-          = go (Just _agIncludeSubscribed) _agStartChangeId
-              (Just _agMaxChangeIdCount)
-              (Just AltJSON)
-              driveService
+        requestClient AboutGet{}
+          = go (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy AboutGetResource)
                       mempty

@@ -94,7 +94,7 @@ zodOperation :: Lens' ZoneOperationsDelete Text
 zodOperation
   = lens _zodOperation (\ s a -> s{_zodOperation = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 zodZone :: Lens' ZoneOperationsDelete Text
 zodZone = lens _zodZone (\ s a -> s{_zodZone = a})
 

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>

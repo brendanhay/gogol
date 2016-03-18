@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'ChannelsStop' request conforms to.
 type ChannelsStopResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "channels" :>
            "stop" :>
              QueryParam "alt" AltJSON :>

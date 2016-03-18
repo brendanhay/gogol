@@ -14,7 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google Fonts Developer API.
+    Accesses the metadata for all families served by Google Fonts, providing
+    a list of families currently available (including available styles and a
+    list of supported script subsets).
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

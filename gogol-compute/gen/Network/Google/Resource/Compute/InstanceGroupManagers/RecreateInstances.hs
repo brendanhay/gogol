@@ -104,7 +104,7 @@ instanceGroupManagersRecreateInstances pIgmriProject_ pIgmriInstanceGroupManager
     , _igmriPayload = pIgmriPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmriProject :: Lens' InstanceGroupManagersRecreateInstances Text
 igmriProject
   = lens _igmriProject (\ s a -> s{_igmriProject = a})

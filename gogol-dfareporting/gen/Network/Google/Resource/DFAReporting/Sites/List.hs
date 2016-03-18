@@ -58,7 +58,7 @@ import           Network.Google.Prelude
 -- 'SitesList' request conforms to.
 type SitesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>

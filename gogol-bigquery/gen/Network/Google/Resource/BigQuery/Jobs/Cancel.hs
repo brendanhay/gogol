@@ -82,11 +82,11 @@ jobsCancel pJcJobId_ pJcProjectId_ =
     , _jcProjectId = pJcProjectId_
     }
 
--- | Job ID of the job to cancel
+-- | [Required] Job ID of the job to cancel
 jcJobId :: Lens' JobsCancel Text
 jcJobId = lens _jcJobId (\ s a -> s{_jcJobId = a})
 
--- | Project ID of the job to cancel
+-- | [Required] Project ID of the job to cancel
 jcProjectId :: Lens' JobsCancel Text
 jcProjectId
   = lens _jcProjectId (\ s a -> s{_jcProjectId = a})

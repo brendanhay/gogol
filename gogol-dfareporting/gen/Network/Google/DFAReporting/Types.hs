@@ -57,6 +57,7 @@ module Network.Google.DFAReporting.Types
     -- * CreativeCustomEvent
     , CreativeCustomEvent
     , creativeCustomEvent
+    , cceAdvertiserCustomEventId
     , cceAdvertiserCustomEventType
     , cceAdvertiserCustomEventName
     , cceExitURL
@@ -221,6 +222,7 @@ module Network.Google.DFAReporting.Types
     , iiEstimatedConversionRate
     , iiProjectId
     , iiSubAccountId
+    , iiType
     , iiOrderId
     , iiSiteId
 
@@ -904,6 +906,7 @@ module Network.Google.DFAReporting.Types
     , creThirdPartyRichMediaImpressionsURL
     , creLastModifiedInfo
     , creId
+    , creAuthoringSource
     , creStudioAdvertiserId
     , creCreativeAssets
     , creSubAccountId
@@ -932,6 +935,9 @@ module Network.Google.DFAReporting.Types
     , scId
     , scTitle
     , scContactType
+
+    -- * CreativeAuthoringSource
+    , CreativeAuthoringSource (..)
 
     -- * AccountsListResponse
     , AccountsListResponse
@@ -1020,6 +1026,9 @@ module Network.Google.DFAReporting.Types
     -- * CreativesListSortOrder
     , CreativesListSortOrder (..)
 
+    -- * InventoryItemsListType
+    , InventoryItemsListType (..)
+
     -- * ThirdPartyAuthenticationToken
     , ThirdPartyAuthenticationToken
     , thirdPartyAuthenticationToken
@@ -1081,6 +1090,7 @@ module Network.Google.DFAReporting.Types
     , ssLookbackConfiguration
     , ssTagSetting
     , ssActiveViewOptOut
+    , ssVideoActiveViewOptOut
     , ssCreativeSettings
 
     -- * PlacementStrategiesListSortField
@@ -1474,6 +1484,9 @@ module Network.Google.DFAReporting.Types
     , ptcrcfConversionDimensions
     , ptcrcfCustomFloodlightVariables
     , ptcrcfPerInteractionDimensions
+
+    -- * InventoryItemType
+    , InventoryItemType (..)
 
     -- * CreativeAssetPositionTopUnit
     , CreativeAssetPositionTopUnit (..)
@@ -1925,7 +1938,6 @@ module Network.Google.DFAReporting.Types
     , fcLookbackConfiguration
     , fcAccountId
     , fcId
-    , fcSSLRequired
     , fcNATuralSearchConversionAttributionOption
     , fcUserDefinedVariableConfigurations
     , fcSubAccountId
@@ -2520,10 +2532,10 @@ import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2.2' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
-dFAReportingService :: Service
+-- | Default request referring to version 'v2.4' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
+dFAReportingService :: ServiceConfig
 dFAReportingService
-  = defaultService (ServiceId "dfareporting:v2.2")
+  = defaultService (ServiceId "dfareporting:v2.4")
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports

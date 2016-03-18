@@ -22,7 +22,7 @@
 --
 -- Creates a new collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.insert@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.insert@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Insert
     (
     -- * REST Resource

@@ -87,7 +87,7 @@ forwardingRulesInsert pFriProject_ pFriPayload_ pFriRegion_ =
     , _friRegion = pFriRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 friProject :: Lens' ForwardingRulesInsert Text
 friProject
   = lens _friProject (\ s a -> s{_friProject = a})

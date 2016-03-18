@@ -18,6 +18,61 @@ module Network.Google.Logging.Types
     -- * Service Configuration
       loggingService
 
+    -- * OAuth Scopes
+    , loggingAdminScope
+    , loggingReadScope
+    , loggingWriteScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+
+    -- * MonitoredResourceDescriptor
+    , MonitoredResourceDescriptor
+    , monitoredResourceDescriptor
+    , mrdDisplayName
+    , mrdLabels
+    , mrdType
+    , mrdDescription
+
+    -- * ListLogEntriesResponse
+    , ListLogEntriesResponse
+    , listLogEntriesResponse
+    , llerNextPageToken
+    , llerEntries
+
+    -- * MonitoredResourceLabels
+    , MonitoredResourceLabels
+    , monitoredResourceLabels
+    , mrlAddtional
+
+    -- * ListLogMetricsResponse
+    , ListLogMetricsResponse
+    , listLogMetricsResponse
+    , llmrMetrics
+    , llmrNextPageToken
+
+    -- * WriteLogEntriesRequest
+    , WriteLogEntriesRequest
+    , writeLogEntriesRequest
+    , wlerEntries
+    , wlerResource
+    , wlerLabels
+    , wlerLogName
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * LogEntryLabels
+    , LogEntryLabels
+    , logEntryLabels
+    , lelAddtional
+
+    -- * ListSinksResponse
+    , ListSinksResponse
+    , listSinksResponse
+    , lsrSinks
+    , lsrNextPageToken
+
     -- * RequestLog
     , RequestLog
     , requestLog
@@ -53,6 +108,54 @@ module Network.Google.Logging.Types
     , rlSourceReference
     , rlAppEngineRelease
 
+    -- * LogEntryProtoPayload
+    , LogEntryProtoPayload
+    , logEntryProtoPayload
+    , leppAddtional
+
+    -- * WriteLogEntriesResponse
+    , WriteLogEntriesResponse
+    , writeLogEntriesResponse
+
+    -- * LogSink
+    , LogSink
+    , logSink
+    , lsDestination
+    , lsOutputVersionFormat
+    , lsName
+    , lsFilter
+
+    -- * ListMonitoredResourceDescriptorsResponse
+    , ListMonitoredResourceDescriptorsResponse
+    , listMonitoredResourceDescriptorsResponse
+    , lmrdrNextPageToken
+    , lmrdrResourceDescriptors
+
+    -- * HTTPRequest
+    , HTTPRequest
+    , hTTPRequest
+    , httprStatus
+    , httprRequestURL
+    , httprRemoteIP
+    , httprValidatedWithOriginServer
+    , httprRequestSize
+    , httprUserAgent
+    , httprResponseSize
+    , httprRequestMethod
+    , httprCacheHit
+    , httprReferer
+
+    -- * WriteLogEntriesRequestLabels
+    , WriteLogEntriesRequestLabels
+    , writeLogEntriesRequestLabels
+    , wlerlAddtional
+
+    -- * MonitoredResource
+    , MonitoredResource
+    , monitoredResource
+    , mrLabels
+    , mrType
+
     -- * LogLine
     , LogLine
     , logLine
@@ -60,6 +163,52 @@ module Network.Google.Logging.Types
     , llSeverity
     , llLogMessage
     , llSourceLocation
+
+    -- * LabelDescriptor
+    , LabelDescriptor
+    , labelDescriptor
+    , ldKey
+    , ldValueType
+    , ldDescription
+
+    -- * ListLogEntriesRequest
+    , ListLogEntriesRequest
+    , listLogEntriesRequest
+    , llerOrderBy
+    , llerProjectIds
+    , llerFilter
+    , llerPageToken
+    , llerPageSize
+
+    -- * LogEntryOperation
+    , LogEntryOperation
+    , logEntryOperation
+    , leoFirst
+    , leoProducer
+    , leoLast
+    , leoId
+
+    -- * LogMetric
+    , LogMetric
+    , logMetric
+    , lmName
+    , lmFilter
+    , lmDescription
+
+    -- * LogEntry
+    , LogEntry
+    , logEntry
+    , leOperation
+    , leSeverity
+    , leTextPayload
+    , leJSONPayload
+    , leHTTPRequest
+    , leResource
+    , leInsertId
+    , leLabels
+    , leProtoPayload
+    , leLogName
+    , leTimestamp
 
     -- * SourceLocation
     , SourceLocation
@@ -73,6 +222,11 @@ module Network.Google.Logging.Types
     , sourceReference
     , srRepository
     , srRevisionId
+
+    -- * LogEntryJSONPayload
+    , LogEntryJSONPayload
+    , logEntryJSONPayload
+    , lejpAddtional
     ) where
 
 import           Network.Google.Logging.Types.Product
@@ -80,7 +234,27 @@ import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2beta1' of the Google Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
-loggingService :: Service
+loggingService :: ServiceConfig
 loggingService
   = defaultService (ServiceId "logging:v2beta1")
       "logging.googleapis.com"
+
+-- | Administrate log data for your projects
+loggingAdminScope :: OAuthScope
+loggingAdminScope = "https://www.googleapis.com/auth/logging.admin";
+
+-- | View log data for your projects
+loggingReadScope :: OAuthScope
+loggingReadScope = "https://www.googleapis.com/auth/logging.read";
+
+-- | Submit log data for your projects
+loggingWriteScope :: OAuthScope
+loggingWriteScope = "https://www.googleapis.com/auth/logging.write";
+
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: OAuthScope
+cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: OAuthScope
+cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'RevisionsList' request conforms to.
 type RevisionsListResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "revisions" :>

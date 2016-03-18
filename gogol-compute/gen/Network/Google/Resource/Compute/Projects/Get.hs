@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified project resource.
+-- Returns the specified Project resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.projects.get@.
 module Network.Google.Resource.Compute.Projects.Get
@@ -48,7 +48,7 @@ type ProjectsGetResource =
            Capture "project" Text :>
              QueryParam "alt" AltJSON :> Get '[JSON] Project
 
--- | Returns the specified project resource.
+-- | Returns the specified Project resource.
 --
 -- /See:/ 'projectsGet' smart constructor.
 newtype ProjectsGet = ProjectsGet

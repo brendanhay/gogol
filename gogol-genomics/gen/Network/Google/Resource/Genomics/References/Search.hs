@@ -20,10 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches for references which match the given criteria. Implements
+-- Searches for references which match the given criteria. For the
+-- definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
--- /See:/ < Genomics API Reference> for @genomics.references.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.references.search@.
 module Network.Google.Resource.Genomics.References.Search
     (
     -- * REST Resource
@@ -64,7 +68,11 @@ type ReferencesSearchResource =
                            ReqBody '[JSON] SearchReferencesRequest :>
                              Post '[JSON] SearchReferencesResponse
 
--- | Searches for references which match the given criteria. Implements
+-- | Searches for references which match the given criteria. For the
+-- definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
 -- /See:/ 'referencesSearch' smart constructor.

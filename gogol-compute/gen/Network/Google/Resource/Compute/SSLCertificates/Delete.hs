@@ -77,7 +77,7 @@ sslCertificatesDelete pScdProject_ pScdSSLCertificate_ =
     , _scdSSLCertificate = pScdSSLCertificate_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 scdProject :: Lens' SSLCertificatesDelete Text
 scdProject
   = lens _scdProject (\ s a -> s{_scdProject = a})

@@ -22,7 +22,7 @@
 --
 -- Updates a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.update@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.update@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Update
     (
     -- * REST Resource

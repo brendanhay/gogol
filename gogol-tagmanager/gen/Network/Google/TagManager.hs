@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for accessing Tag Manager accounts and containers.
+-- Accesses Tag Manager accounts and containers.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference>
 module Network.Google.TagManager
@@ -41,6 +41,24 @@ module Network.Google.TagManager
     -- ** tagmanager.accounts.containers.delete
     , module Network.Google.Resource.TagManager.Accounts.Containers.Delete
 
+    -- ** tagmanager.accounts.containers.environments.create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
+
+    -- ** tagmanager.accounts.containers.environments.delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
+
+    -- ** tagmanager.accounts.containers.environments.get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
+
+    -- ** tagmanager.accounts.containers.environments.list
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
+
+    -- ** tagmanager.accounts.containers.environments.patch
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Patch
+
+    -- ** tagmanager.accounts.containers.environments.update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
+
     -- ** tagmanager.accounts.containers.folders.create
     , module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
 
@@ -67,6 +85,9 @@ module Network.Google.TagManager
 
     -- ** tagmanager.accounts.containers.move_folders.update
     , module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
+
+    -- ** tagmanager.accounts.containers.reauthorize_environments.update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.ReauthorizeEnvironments.Update
 
     -- ** tagmanager.accounts.containers.tags.create
     , module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
@@ -176,6 +197,11 @@ module Network.Google.TagManager
     , listFoldersResponse
     , lfrFolders
 
+    -- ** ListEnvironmentsResponse
+    , ListEnvironmentsResponse
+    , listEnvironmentsResponse
+    , lerEnvironments
+
     -- ** PublishContainerVersionResponse
     , PublishContainerVersionResponse
     , publishContainerVersionResponse
@@ -269,6 +295,22 @@ module Network.Google.TagManager
     , uaEmailAddress
     , uaContainerAccess
     , uaPermissionId
+
+    -- ** Environment
+    , Environment
+    , environment
+    , eContainerId
+    , eFingerprint
+    , eContainerVersionId
+    , eURL
+    , eAuthorizationCode
+    , eAccountId
+    , eName
+    , eEnableDebug
+    , eEnvironmentId
+    , eType
+    , eAuthorizationTimestampMs
+    , eDescription
 
     -- ** AccountAccess
     , AccountAccess
@@ -393,6 +435,9 @@ module Network.Google.TagManager
     , cvTrigger
     , cvNotes
 
+    -- ** EnvironmentType
+    , EnvironmentType (..)
+
     -- ** SetupTag
     , SetupTag
     , setupTag
@@ -464,6 +509,12 @@ module Network.Google.TagManager
 import           Network.Google.Prelude
 import           Network.Google.Resource.TagManager.Accounts.Containers.Create
 import           Network.Google.Resource.TagManager.Accounts.Containers.Delete
+import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
+import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
+import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
+import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
+import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Patch
+import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
 import           Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
 import           Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
 import           Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
@@ -473,6 +524,7 @@ import           Network.Google.Resource.TagManager.Accounts.Containers.Folders.
 import           Network.Google.Resource.TagManager.Accounts.Containers.Get
 import           Network.Google.Resource.TagManager.Accounts.Containers.List
 import           Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
+import           Network.Google.Resource.TagManager.Accounts.Containers.ReauthorizeEnvironments.Update
 import           Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
 import           Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
 import           Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
@@ -518,6 +570,8 @@ type TagManagerAPI =
        :<|> AccountsContainersVariablesCreateResource
        :<|> AccountsContainersVariablesDeleteResource
        :<|> AccountsContainersVariablesUpdateResource
+       :<|>
+       AccountsContainersReauthorizeEnvironmentsUpdateResource
        :<|> AccountsContainersFoldersEntitiesListResource
        :<|> AccountsContainersFoldersListResource
        :<|> AccountsContainersFoldersGetResource
@@ -538,6 +592,12 @@ type TagManagerAPI =
        :<|> AccountsContainersVersionsUpdateResource
        :<|> AccountsContainersVersionsPublishResource
        :<|> AccountsContainersMoveFoldersUpdateResource
+       :<|> AccountsContainersEnvironmentsListResource
+       :<|> AccountsContainersEnvironmentsPatchResource
+       :<|> AccountsContainersEnvironmentsGetResource
+       :<|> AccountsContainersEnvironmentsCreateResource
+       :<|> AccountsContainersEnvironmentsDeleteResource
+       :<|> AccountsContainersEnvironmentsUpdateResource
        :<|> AccountsContainersTagsListResource
        :<|> AccountsContainersTagsGetResource
        :<|> AccountsContainersTagsCreateResource

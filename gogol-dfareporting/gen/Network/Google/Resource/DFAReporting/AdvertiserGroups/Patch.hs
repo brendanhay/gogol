@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsPatch' request conforms to.
 type AdvertiserGroupsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>

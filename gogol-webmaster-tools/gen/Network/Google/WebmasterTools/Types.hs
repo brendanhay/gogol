@@ -140,6 +140,7 @@ module Network.Google.WebmasterTools.Types
     , saqrSearchType
     , saqrDimensionFilterGroups
     , saqrStartDate
+    , saqrStartRow
     , saqrDimensions
 
     -- * URLCrawlErrorsSamplesListPlatform
@@ -164,16 +165,16 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
 
--- | Default request referring to version 'v3' of the Webmaster Tools API. This contains the host and root path used as a starting point for constructing service requests.
-webmasterToolsService :: Service
+-- | Default request referring to version 'v3' of the Search Console API. This contains the host and root path used as a starting point for constructing service requests.
+webmasterToolsService :: ServiceConfig
 webmasterToolsService
   = defaultService (ServiceId "webmasters:v3")
       "www.googleapis.com"
 
--- | View and modify Webmaster Tools data for your verified sites
+-- | View and manage Search Console data for your verified sites
 webmastersScope :: OAuthScope
 webmastersScope = "https://www.googleapis.com/auth/webmasters";
 
--- | View Webmaster Tools data for your verified sites
+-- | View Search Console data for your verified sites
 webmastersReadonlyScope :: OAuthScope
 webmastersReadonlyScope = "https://www.googleapis.com/auth/webmasters.readonly";

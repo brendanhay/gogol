@@ -22,7 +22,7 @@
 --
 -- Gets information about an application.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.get@.
 module Network.Google.Resource.AppEngine.Apps.Get
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.get@ method which the
 -- 'AppsGet' request conforms to.
 type AppsGetResource =
-     "v1beta4" :>
+     "v1beta5" :>
        "apps" :>
          Capture "appsId" Text :>
            QueryParam "$.xgafv" Text :>
@@ -153,8 +153,10 @@ agAppsId = lens _agAppsId (\ s a -> s{_agAppsId = a})
 
 -- | Certain resources associated with an application are created on-demand.
 -- Controls whether these resources should be created when performing the
--- \`GET\` operation. If specified and any resources cloud not be created,
--- the request will fail with an error code.
+-- \`GET\` operation. If specified and any resources could not be created,
+-- the request will fail with an error code. Additionally, this parameter
+-- can cause the request to take longer to complete. Note: This parameter
+-- will be deprecated in a future version of the API.
 agEnsureResourcesExist :: Lens' AppsGet (Maybe Bool)
 agEnsureResourcesExist
   = lens _agEnsureResourcesExist

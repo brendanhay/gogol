@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a firewall resource in the specified project using the data
--- included in the request.
+-- Creates a firewall rule in the specified project using the data included
+-- in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.insert@.
 module Network.Google.Resource.Compute.Firewalls.Insert
@@ -53,8 +53,8 @@ type FirewallsInsertResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Firewall :> Post '[JSON] Operation
 
--- | Creates a firewall resource in the specified project using the data
--- included in the request.
+-- | Creates a firewall rule in the specified project using the data included
+-- in the request.
 --
 -- /See:/ 'firewallsInsert' smart constructor.
 data FirewallsInsert = FirewallsInsert

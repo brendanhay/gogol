@@ -23,7 +23,7 @@
 -- Approves the specified product (and the relevant app permissions, if
 -- any).
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.approve@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.approve@.
 module Network.Google.Resource.AndroidEnterprise.Products.Approve
     (
     -- * REST Resource

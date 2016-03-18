@@ -21,10 +21,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Undeletes a dataset by restoring a dataset which was deleted via this
--- API. This operation is only possible for a week after the deletion
--- occurred.
+-- API. For the definitions of datasets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This operation is only possible for a week after the deletion occurred.
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.undelete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.undelete@.
 module Network.Google.Resource.Genomics.DataSets.Undelete
     (
     -- * REST Resource
@@ -67,8 +69,10 @@ type DataSetsUndeleteResource =
                              Post '[JSON] DataSet
 
 -- | Undeletes a dataset by restoring a dataset which was deleted via this
--- API. This operation is only possible for a week after the deletion
--- occurred.
+-- API. For the definitions of datasets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This operation is only possible for a week after the deletion occurred.
 --
 -- /See:/ 'dataSetsUndelete' smart constructor.
 data DataSetsUndelete = DataSetsUndelete

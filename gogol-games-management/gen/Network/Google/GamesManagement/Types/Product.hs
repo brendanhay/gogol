@@ -788,19 +788,24 @@ instance ToJSON AchievementResetAllResponse where
 --
 -- /See:/ 'player' smart constructor.
 data Player = Player
-    { _pLastPlayedWith :: !(Maybe GamesPlayedResource)
-    , _pAvatarImageURL :: !(Maybe Text)
-    , _pKind           :: !Text
-    , _pExperienceInfo :: !(Maybe GamesPlayerExperienceInfoResource)
-    , _pName           :: !(Maybe PlayerName)
-    , _pDisplayName    :: !(Maybe Text)
-    , _pTitle          :: !(Maybe Text)
-    , _pPlayerId       :: !(Maybe Text)
+    { _pBannerURLLandscape :: !(Maybe Text)
+    , _pLastPlayedWith     :: !(Maybe GamesPlayedResource)
+    , _pAvatarImageURL     :: !(Maybe Text)
+    , _pKind               :: !Text
+    , _pExperienceInfo     :: !(Maybe GamesPlayerExperienceInfoResource)
+    , _pName               :: !(Maybe PlayerName)
+    , _pOriginalPlayerId   :: !(Maybe Text)
+    , _pDisplayName        :: !(Maybe Text)
+    , _pTitle              :: !(Maybe Text)
+    , _pBannerURLPortrait  :: !(Maybe Text)
+    , _pPlayerId           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pBannerURLLandscape'
 --
 -- * 'pLastPlayedWith'
 --
@@ -812,24 +817,37 @@ data Player = Player
 --
 -- * 'pName'
 --
+-- * 'pOriginalPlayerId'
+--
 -- * 'pDisplayName'
 --
 -- * 'pTitle'
+--
+-- * 'pBannerURLPortrait'
 --
 -- * 'pPlayerId'
 player
     :: Player
 player =
     Player
-    { _pLastPlayedWith = Nothing
+    { _pBannerURLLandscape = Nothing
+    , _pLastPlayedWith = Nothing
     , _pAvatarImageURL = Nothing
     , _pKind = "gamesManagement#player"
     , _pExperienceInfo = Nothing
     , _pName = Nothing
+    , _pOriginalPlayerId = Nothing
     , _pDisplayName = Nothing
     , _pTitle = Nothing
+    , _pBannerURLPortrait = Nothing
     , _pPlayerId = Nothing
     }
+
+-- | The url to the landscape mode player banner image.
+pBannerURLLandscape :: Lens' Player (Maybe Text)
+pBannerURLLandscape
+  = lens _pBannerURLLandscape
+      (\ s a -> s{_pBannerURLLandscape = a})
 
 -- | Details about the last time this player played a multiplayer game with
 -- the currently authenticated player. Populated for PLAYED_WITH player
@@ -861,6 +879,16 @@ pExperienceInfo
 pName :: Lens' Player (Maybe PlayerName)
 pName = lens _pName (\ s a -> s{_pName = a})
 
+-- | The player ID that was used for this player the first time they signed
+-- into the game in question. This is only populated for calls to
+-- player.get for the requesting player, only if the player ID has
+-- subsequently changed, and only to clients that support remapping player
+-- IDs.
+pOriginalPlayerId :: Lens' Player (Maybe Text)
+pOriginalPlayerId
+  = lens _pOriginalPlayerId
+      (\ s a -> s{_pOriginalPlayerId = a})
+
 -- | The name to display for the player.
 pDisplayName :: Lens' Player (Maybe Text)
 pDisplayName
@@ -869,6 +897,12 @@ pDisplayName
 -- | The player\'s title rewarded for their game activities.
 pTitle :: Lens' Player (Maybe Text)
 pTitle = lens _pTitle (\ s a -> s{_pTitle = a})
+
+-- | The url to the portrait mode player banner image.
+pBannerURLPortrait :: Lens' Player (Maybe Text)
+pBannerURLPortrait
+  = lens _pBannerURLPortrait
+      (\ s a -> s{_pBannerURLPortrait = a})
 
 -- | The ID of the player.
 pPlayerId :: Lens' Player (Maybe Text)
@@ -880,25 +914,32 @@ instance FromJSON Player where
           = withObject "Player"
               (\ o ->
                  Player <$>
-                   (o .:? "lastPlayedWith") <*> (o .:? "avatarImageUrl")
+                   (o .:? "bannerUrlLandscape") <*>
+                     (o .:? "lastPlayedWith")
+                     <*> (o .:? "avatarImageUrl")
                      <*> (o .:? "kind" .!= "gamesManagement#player")
                      <*> (o .:? "experienceInfo")
                      <*> (o .:? "name")
+                     <*> (o .:? "originalPlayerId")
                      <*> (o .:? "displayName")
                      <*> (o .:? "title")
+                     <*> (o .:? "bannerUrlPortrait")
                      <*> (o .:? "playerId"))
 
 instance ToJSON Player where
         toJSON Player{..}
           = object
               (catMaybes
-                 [("lastPlayedWith" .=) <$> _pLastPlayedWith,
+                 [("bannerUrlLandscape" .=) <$> _pBannerURLLandscape,
+                  ("lastPlayedWith" .=) <$> _pLastPlayedWith,
                   ("avatarImageUrl" .=) <$> _pAvatarImageURL,
                   Just ("kind" .= _pKind),
                   ("experienceInfo" .=) <$> _pExperienceInfo,
                   ("name" .=) <$> _pName,
+                  ("originalPlayerId" .=) <$> _pOriginalPlayerId,
                   ("displayName" .=) <$> _pDisplayName,
                   ("title" .=) <$> _pTitle,
+                  ("bannerUrlPortrait" .=) <$> _pBannerURLPortrait,
                   ("playerId" .=) <$> _pPlayerId])
 
 -- | This is a JSON template for an achievement reset response.

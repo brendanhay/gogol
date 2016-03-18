@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Gmail REST API.
+-- Access Gmail mailboxes including sending user email.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference>
 module Network.Google.Gmail
@@ -80,6 +80,9 @@ module Network.Google.Gmail
     -- ** gmail.users.messages.attachments.get
     , module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
 
+    -- ** gmail.users.messages.batchDelete
+    , module Network.Google.Resource.Gmail.Users.Messages.BatchDelete
+
     -- ** gmail.users.messages.delete
     , module Network.Google.Resource.Gmail.Users.Messages.Delete
 
@@ -132,6 +135,11 @@ module Network.Google.Gmail
     , module Network.Google.Resource.Gmail.Users.Watch
 
     -- * Types
+
+    -- ** BatchDeleteMessagesRequest
+    , BatchDeleteMessagesRequest
+    , batchDeleteMessagesRequest
+    , bdmrIds
 
     -- ** UsersMessagesGetFormat
     , UsersMessagesGetFormat (..)
@@ -339,6 +347,7 @@ import           Network.Google.Resource.Gmail.Users.Labels.List
 import           Network.Google.Resource.Gmail.Users.Labels.Patch
 import           Network.Google.Resource.Gmail.Users.Labels.Update
 import           Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
+import           Network.Google.Resource.Gmail.Users.Messages.BatchDelete
 import           Network.Google.Resource.Gmail.Users.Messages.Delete
 import           Network.Google.Resource.Gmail.Users.Messages.Get
 import           Network.Google.Resource.Gmail.Users.Messages.Import
@@ -389,6 +398,7 @@ type GmailAPI =
        :<|> UsersMessagesSendResource
        :<|> UsersMessagesUntrashResource
        :<|> UsersMessagesImportResource
+       :<|> UsersMessagesBatchDeleteResource
        :<|> UsersMessagesModifyResource
        :<|> UsersMessagesDeleteResource
        :<|> UsersGetProFileResource

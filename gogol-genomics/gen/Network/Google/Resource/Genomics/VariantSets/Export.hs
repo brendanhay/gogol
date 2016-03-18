@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Exports variant set data to an external destination.
+-- Exports variant set data to an external destination. For the definitions
+-- of variant sets and other genomics resources, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.export@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.export@.
 module Network.Google.Resource.Genomics.VariantSets.Export
     (
     -- * REST Resource
@@ -64,7 +67,10 @@ type VariantSetsExportResource =
                            ReqBody '[JSON] ExportVariantSetRequest :>
                              Post '[JSON] Operation
 
--- | Exports variant set data to an external destination.
+-- | Exports variant set data to an external destination. For the definitions
+-- of variant sets and other genomics resources, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsExport' smart constructor.
 data VariantSetsExport = VariantSetsExport

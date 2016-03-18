@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>

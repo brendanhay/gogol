@@ -20,10 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the existing traces specified by PatchTracesRequest and inserts
--- the new traces. Any existing trace or span fields included in an update
--- are overwritten by the update, and any additional fields in an update
--- are merged with the existing trace data.
+-- Sends new traces to Cloud Trace or updates existing traces. If the ID of
+-- a trace that you send matches that of an existing trace, any fields in
+-- the existing trace and its spans are overwritten by the provided values,
+-- and any new fields provided are merged with the existing trace data. If
+-- the ID does not match, a new trace is created.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.projects.patchTraces@.
 module Network.Google.Resource.CloudTrace.Projects.PatchTraces
@@ -67,10 +68,11 @@ type ProjectsPatchTracesResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Traces :> Patch '[JSON] Empty
 
--- | Updates the existing traces specified by PatchTracesRequest and inserts
--- the new traces. Any existing trace or span fields included in an update
--- are overwritten by the update, and any additional fields in an update
--- are merged with the existing trace data.
+-- | Sends new traces to Cloud Trace or updates existing traces. If the ID of
+-- a trace that you send matches that of an existing trace, any fields in
+-- the existing trace and its spans are overwritten by the provided values,
+-- and any new fields provided are merged with the existing trace data. If
+-- the ID does not match, a new trace is created.
 --
 -- /See:/ 'projectsPatchTraces' smart constructor.
 data ProjectsPatchTraces = ProjectsPatchTraces
@@ -160,7 +162,7 @@ pptBearerToken
   = lens _pptBearerToken
       (\ s a -> s{_pptBearerToken = a})
 
--- | The project id of the trace to patch.
+-- | ID of the Cloud project where the trace data is stored.
 pptProjectId :: Lens' ProjectsPatchTraces Text
 pptProjectId
   = lens _pptProjectId (\ s a -> s{_pptProjectId = a})

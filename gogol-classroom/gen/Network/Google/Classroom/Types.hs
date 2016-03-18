@@ -130,7 +130,7 @@ import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Classroom API. This contains the host and root path used as a starting point for constructing service requests.
-classroomService :: Service
+classroomService :: ServiceConfig
 classroomService
   = defaultService (ServiceId "classroom:v1")
       "classroom.googleapis.com"

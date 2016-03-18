@@ -22,7 +22,7 @@
 --
 -- Retrieves a user\'s details.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.get@.
 module Network.Google.Resource.AndroidEnterprise.Users.Get
     (
     -- * REST Resource

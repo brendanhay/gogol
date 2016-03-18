@@ -18,84 +18,6 @@ module Network.Google.AdExchangeBuyer.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The proposed action to take on the order.
-data MarketplaceOrdersUpdateUpdateAction
-    = Accept
-      -- ^ @accept@
-    | Cancel
-      -- ^ @cancel@
-    | Propose
-      -- ^ @propose@
-    | UnknownAction
-      -- ^ @unknownAction@
-    | UpdateFinalized
-      -- ^ @updateFinalized@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MarketplaceOrdersUpdateUpdateAction
-
-instance FromText MarketplaceOrdersUpdateUpdateAction where
-    fromText = \case
-        "accept" -> Just Accept
-        "cancel" -> Just Cancel
-        "propose" -> Just Propose
-        "unknownAction" -> Just UnknownAction
-        "updateFinalized" -> Just UpdateFinalized
-        _ -> Nothing
-
-instance ToText MarketplaceOrdersUpdateUpdateAction where
-    toText = \case
-        Accept -> "accept"
-        Cancel -> "cancel"
-        Propose -> "propose"
-        UnknownAction -> "unknownAction"
-        UpdateFinalized -> "updateFinalized"
-
-instance FromJSON MarketplaceOrdersUpdateUpdateAction where
-    parseJSON = parseJSONText "MarketplaceOrdersUpdateUpdateAction"
-
-instance ToJSON MarketplaceOrdersUpdateUpdateAction where
-    toJSON = toJSONText
-
--- | The proposed action to take on the order.
-data MarketplaceOrdersPatchUpdateAction
-    = MOPUAAccept
-      -- ^ @accept@
-    | MOPUACancel
-      -- ^ @cancel@
-    | MOPUAPropose
-      -- ^ @propose@
-    | MOPUAUnknownAction
-      -- ^ @unknownAction@
-    | MOPUAUpdateFinalized
-      -- ^ @updateFinalized@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MarketplaceOrdersPatchUpdateAction
-
-instance FromText MarketplaceOrdersPatchUpdateAction where
-    fromText = \case
-        "accept" -> Just MOPUAAccept
-        "cancel" -> Just MOPUACancel
-        "propose" -> Just MOPUAPropose
-        "unknownAction" -> Just MOPUAUnknownAction
-        "updateFinalized" -> Just MOPUAUpdateFinalized
-        _ -> Nothing
-
-instance ToText MarketplaceOrdersPatchUpdateAction where
-    toText = \case
-        MOPUAAccept -> "accept"
-        MOPUACancel -> "cancel"
-        MOPUAPropose -> "propose"
-        MOPUAUnknownAction -> "unknownAction"
-        MOPUAUpdateFinalized -> "updateFinalized"
-
-instance FromJSON MarketplaceOrdersPatchUpdateAction where
-    parseJSON = parseJSONText "MarketplaceOrdersPatchUpdateAction"
-
-instance ToJSON MarketplaceOrdersPatchUpdateAction where
-    toJSON = toJSONText
-
 -- | When specified, only creatives having the given open auction status are
 -- returned.
 data CreativesListOpenAuctionStatusFilter
@@ -137,22 +59,60 @@ instance FromJSON CreativesListOpenAuctionStatusFilter where
 instance ToJSON CreativesListOpenAuctionStatusFilter where
     toJSON = toJSONText
 
--- | When specified, only creatives having the given direct deals status are
+-- | The proposed action to take on the proposal.
+data ProposalsPatchUpdateAction
+    = Accept
+      -- ^ @accept@
+    | Cancel
+      -- ^ @cancel@
+    | Propose
+      -- ^ @propose@
+    | UnknownAction
+      -- ^ @unknownAction@
+    | UpdateFinalized
+      -- ^ @updateFinalized@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ProposalsPatchUpdateAction
+
+instance FromText ProposalsPatchUpdateAction where
+    fromText = \case
+        "accept" -> Just Accept
+        "cancel" -> Just Cancel
+        "propose" -> Just Propose
+        "unknownAction" -> Just UnknownAction
+        "updateFinalized" -> Just UpdateFinalized
+        _ -> Nothing
+
+instance ToText ProposalsPatchUpdateAction where
+    toText = \case
+        Accept -> "accept"
+        Cancel -> "cancel"
+        Propose -> "propose"
+        UnknownAction -> "unknownAction"
+        UpdateFinalized -> "updateFinalized"
+
+instance FromJSON ProposalsPatchUpdateAction where
+    parseJSON = parseJSONText "ProposalsPatchUpdateAction"
+
+instance ToJSON ProposalsPatchUpdateAction where
+    toJSON = toJSONText
+
+-- | When specified, only creatives having the given deals status are
 -- returned.
 data CreativesListDealsStatusFilter
     = CLDSFApproved
       -- ^ @approved@
-      -- Creatives which have been approved for serving on direct deals.
+      -- Creatives which have been approved for serving on deals.
     | CLDSFConditionallyApproved
       -- ^ @conditionally_approved@
-      -- Creatives which have been conditionally approved for serving on direct
-      -- deals.
+      -- Creatives which have been conditionally approved for serving on deals.
     | CLDSFDisApproved
       -- ^ @disapproved@
-      -- Creatives which have been disapproved for serving on direct deals.
+      -- Creatives which have been disapproved for serving on deals.
     | CLDSFNotChecked
       -- ^ @not_checked@
-      -- Creatives whose direct deals status is not yet checked.
+      -- Creatives whose deals status is not yet checked.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable CreativesListDealsStatusFilter
@@ -176,4 +136,43 @@ instance FromJSON CreativesListDealsStatusFilter where
     parseJSON = parseJSONText "CreativesListDealsStatusFilter"
 
 instance ToJSON CreativesListDealsStatusFilter where
+    toJSON = toJSONText
+
+-- | The proposed action to take on the proposal.
+data ProposalsUpdateUpdateAction
+    = PUUAAccept
+      -- ^ @accept@
+    | PUUACancel
+      -- ^ @cancel@
+    | PUUAPropose
+      -- ^ @propose@
+    | PUUAUnknownAction
+      -- ^ @unknownAction@
+    | PUUAUpdateFinalized
+      -- ^ @updateFinalized@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ProposalsUpdateUpdateAction
+
+instance FromText ProposalsUpdateUpdateAction where
+    fromText = \case
+        "accept" -> Just PUUAAccept
+        "cancel" -> Just PUUACancel
+        "propose" -> Just PUUAPropose
+        "unknownAction" -> Just PUUAUnknownAction
+        "updateFinalized" -> Just PUUAUpdateFinalized
+        _ -> Nothing
+
+instance ToText ProposalsUpdateUpdateAction where
+    toText = \case
+        PUUAAccept -> "accept"
+        PUUACancel -> "cancel"
+        PUUAPropose -> "propose"
+        PUUAUnknownAction -> "unknownAction"
+        PUUAUpdateFinalized -> "updateFinalized"
+
+instance FromJSON ProposalsUpdateUpdateAction where
+    parseJSON = parseJSONText "ProposalsUpdateUpdateAction"
+
+instance ToJSON ProposalsUpdateUpdateAction where
     toJSON = toJSONText

@@ -1622,6 +1622,33 @@ instance FromJSON ContentRatingLsfRating where
 instance ToJSON ContentRatingLsfRating where
     toJSON = toJSONText
 
+-- | The type of ban.
+data LiveChatBanSnippetType
+    = Permanent
+      -- ^ @permanent@
+    | Temporary
+      -- ^ @temporary@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveChatBanSnippetType
+
+instance FromText LiveChatBanSnippetType where
+    fromText = \case
+        "permanent" -> Just Permanent
+        "temporary" -> Just Temporary
+        _ -> Nothing
+
+instance ToText LiveChatBanSnippetType where
+    toText = \case
+        Permanent -> "permanent"
+        Temporary -> "temporary"
+
+instance FromJSON LiveChatBanSnippetType where
+    parseJSON = parseJSONText "LiveChatBanSnippetType"
+
+instance ToJSON LiveChatBanSnippetType where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Thailand\'s Board of Film and Video Censors.
 data ContentRatingBfvcRating
     = BFVC13
@@ -2093,6 +2120,8 @@ data VideoStatusRejectionReason
       -- ^ @duplicate@
     | InAppropriate
       -- ^ @inappropriate@
+    | Legal
+      -- ^ @legal@
     | Length
       -- ^ @length@
     | TermsOfUse
@@ -2113,6 +2142,7 @@ instance FromText VideoStatusRejectionReason where
         "copyright" -> Just Copyright
         "duplicate" -> Just Duplicate
         "inappropriate" -> Just InAppropriate
+        "legal" -> Just Legal
         "length" -> Just Length
         "termsOfUse" -> Just TermsOfUse
         "trademark" -> Just Trademark
@@ -2126,6 +2156,7 @@ instance ToText VideoStatusRejectionReason where
         Copyright -> "copyright"
         Duplicate -> "duplicate"
         InAppropriate -> "inappropriate"
+        Legal -> "legal"
         Length -> "length"
         TermsOfUse -> "termsOfUse"
         Trademark -> "trademark"
@@ -3286,6 +3317,42 @@ instance FromJSON ChannelSectionSnippetType where
 instance ToJSON ChannelSectionSnippetType where
     toJSON = toJSONText
 
+-- | The broadcastType parameter filters the API response to only include
+-- broadcasts with the specified type. This is only compatible with the
+-- mine filter for now.
+data LiveBroadcastsListBroadcastType
+    = All
+      -- ^ @all@
+      -- Return all broadcasts.
+    | Event
+      -- ^ @event@
+      -- Return only scheduled event broadcasts.
+    | Persistent
+      -- ^ @persistent@
+      -- Return only persistent broadcasts.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveBroadcastsListBroadcastType
+
+instance FromText LiveBroadcastsListBroadcastType where
+    fromText = \case
+        "all" -> Just All
+        "event" -> Just Event
+        "persistent" -> Just Persistent
+        _ -> Nothing
+
+instance ToText LiveBroadcastsListBroadcastType where
+    toText = \case
+        All -> "all"
+        Event -> "event"
+        Persistent -> "persistent"
+
+instance FromJSON LiveBroadcastsListBroadcastType where
+    parseJSON = parseJSONText "LiveBroadcastsListBroadcastType"
+
+instance ToJSON LiveBroadcastsListBroadcastType where
+    toJSON = toJSONText
+
 -- | The video\'s processing status. This value indicates whether YouTube was
 -- able to process the video or if the video is still being processed.
 data VideoProcessingDetailsProcessingStatus
@@ -3529,6 +3596,62 @@ instance FromJSON ContentRatingCNCRating where
     parseJSON = parseJSONText "ContentRatingCNCRating"
 
 instance ToJSON ContentRatingCNCRating where
+    toJSON = toJSONText
+
+-- | Rating system in Turkey - Evaluation and Classification Board of the
+-- Ministry of Culture and Tourism
+data ContentRatingEcbmctRating
+    = Ecbmct13a
+      -- ^ @ecbmct13a@
+    | Ecbmct13plus
+      -- ^ @ecbmct13plus@
+    | Ecbmct15a
+      -- ^ @ecbmct15a@
+    | Ecbmct15plus
+      -- ^ @ecbmct15plus@
+    | Ecbmct18plus
+      -- ^ @ecbmct18plus@
+    | Ecbmct7a
+      -- ^ @ecbmct7a@
+    | Ecbmct7plus
+      -- ^ @ecbmct7plus@
+    | EcbmctG
+      -- ^ @ecbmctG@
+    | EcbmctUnrated
+      -- ^ @ecbmctUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingEcbmctRating
+
+instance FromText ContentRatingEcbmctRating where
+    fromText = \case
+        "ecbmct13a" -> Just Ecbmct13a
+        "ecbmct13plus" -> Just Ecbmct13plus
+        "ecbmct15a" -> Just Ecbmct15a
+        "ecbmct15plus" -> Just Ecbmct15plus
+        "ecbmct18plus" -> Just Ecbmct18plus
+        "ecbmct7a" -> Just Ecbmct7a
+        "ecbmct7plus" -> Just Ecbmct7plus
+        "ecbmctG" -> Just EcbmctG
+        "ecbmctUnrated" -> Just EcbmctUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingEcbmctRating where
+    toText = \case
+        Ecbmct13a -> "ecbmct13a"
+        Ecbmct13plus -> "ecbmct13plus"
+        Ecbmct15a -> "ecbmct15a"
+        Ecbmct15plus -> "ecbmct15plus"
+        Ecbmct18plus -> "ecbmct18plus"
+        Ecbmct7a -> "ecbmct7a"
+        Ecbmct7plus -> "ecbmct7plus"
+        EcbmctG -> "ecbmctG"
+        EcbmctUnrated -> "ecbmctUnrated"
+
+instance FromJSON ContentRatingEcbmctRating where
+    parseJSON = parseJSONText "ContentRatingEcbmctRating"
+
+instance ToJSON ContentRatingEcbmctRating where
     toJSON = toJSONText
 
 -- | The video\'s rating in Greece.
@@ -4013,9 +4136,9 @@ instance ToJSON PlayListItemStatusPrivacyStatus where
 -- | The type of activity this subscription is for (only uploads,
 -- everything).
 data SubscriptionContentDetailsActivityType
-    = All
+    = SCDATAll
       -- ^ @all@
-    | Uploads
+    | SCDATUploads
       -- ^ @uploads@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -4023,14 +4146,14 @@ instance Hashable SubscriptionContentDetailsActivityType
 
 instance FromText SubscriptionContentDetailsActivityType where
     fromText = \case
-        "all" -> Just All
-        "uploads" -> Just Uploads
+        "all" -> Just SCDATAll
+        "uploads" -> Just SCDATUploads
         _ -> Nothing
 
 instance ToText SubscriptionContentDetailsActivityType where
     toText = \case
-        All -> "all"
-        Uploads -> "uploads"
+        SCDATAll -> "all"
+        SCDATUploads -> "uploads"
 
 instance FromJSON SubscriptionContentDetailsActivityType where
     parseJSON = parseJSONText "SubscriptionContentDetailsActivityType"
@@ -4040,7 +4163,9 @@ instance ToJSON SubscriptionContentDetailsActivityType where
 
 -- | The video\'s rating from South Africa\'s Film and Publication Board.
 data ContentRatingFpbRating
-    = Fpb1012Pg
+    = FPB10
+      -- ^ @fpb10@
+    | Fpb1012Pg
       -- ^ @fpb1012Pg@
     | FPB13
       -- ^ @fpb13@
@@ -4066,6 +4191,7 @@ instance Hashable ContentRatingFpbRating
 
 instance FromText ContentRatingFpbRating where
     fromText = \case
+        "fpb10" -> Just FPB10
         "fpb1012Pg" -> Just Fpb1012Pg
         "fpb13" -> Just FPB13
         "fpb16" -> Just FPB16
@@ -4080,6 +4206,7 @@ instance FromText ContentRatingFpbRating where
 
 instance ToText ContentRatingFpbRating where
     toText = \case
+        FPB10 -> "fpb10"
         Fpb1012Pg -> "fpb1012Pg"
         FPB13 -> "fpb13"
         FPB16 -> "fpb16"
@@ -4095,6 +4222,36 @@ instance FromJSON ContentRatingFpbRating where
     parseJSON = parseJSONText "ContentRatingFpbRating"
 
 instance ToJSON ContentRatingFpbRating where
+    toJSON = toJSONText
+
+data LiveBroadcastContentDetailsClosedCaptionsType
+    = ClosedCaptionsDisabled
+      -- ^ @closedCaptionsDisabled@
+    | ClosedCaptionsEmbedded
+      -- ^ @closedCaptionsEmbedded@
+    | ClosedCaptionsHTTPPost
+      -- ^ @closedCaptionsHttpPost@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveBroadcastContentDetailsClosedCaptionsType
+
+instance FromText LiveBroadcastContentDetailsClosedCaptionsType where
+    fromText = \case
+        "closedCaptionsDisabled" -> Just ClosedCaptionsDisabled
+        "closedCaptionsEmbedded" -> Just ClosedCaptionsEmbedded
+        "closedCaptionsHttpPost" -> Just ClosedCaptionsHTTPPost
+        _ -> Nothing
+
+instance ToText LiveBroadcastContentDetailsClosedCaptionsType where
+    toText = \case
+        ClosedCaptionsDisabled -> "closedCaptionsDisabled"
+        ClosedCaptionsEmbedded -> "closedCaptionsEmbedded"
+        ClosedCaptionsHTTPPost -> "closedCaptionsHttpPost"
+
+instance FromJSON LiveBroadcastContentDetailsClosedCaptionsType where
+    parseJSON = parseJSONText "LiveBroadcastContentDetailsClosedCaptionsType"
+
+instance ToJSON LiveBroadcastContentDetailsClosedCaptionsType where
     toJSON = toJSONText
 
 -- | The videoDimension parameter lets you restrict a search to only retrieve
@@ -4172,6 +4329,35 @@ instance FromJSON ContentRatingNkclvRating where
     parseJSON = parseJSONText "ContentRatingNkclvRating"
 
 instance ToJSON ContentRatingNkclvRating where
+    toJSON = toJSONText
+
+-- | The filter parameter specifies which channel sponsors to return.
+data SponsorsListFilter
+    = SLFAll
+      -- ^ @all@
+      -- Return all sponsors, from newest to oldest.
+    | SLFNewest
+      -- ^ @newest@
+      -- Return the most recent sponsors, from newest to oldest.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SponsorsListFilter
+
+instance FromText SponsorsListFilter where
+    fromText = \case
+        "all" -> Just SLFAll
+        "newest" -> Just SLFNewest
+        _ -> Nothing
+
+instance ToText SponsorsListFilter where
+    toText = \case
+        SLFAll -> "all"
+        SLFNewest -> "newest"
+
+instance FromJSON SponsorsListFilter where
+    parseJSON = parseJSONText "SponsorsListFilter"
+
+instance ToJSON SponsorsListFilter where
     toJSON = toJSONText
 
 -- | The videoType parameter lets you restrict a search to a particular type
@@ -5422,41 +5608,6 @@ instance FromJSON ContentRatingAgcomRating where
 instance ToJSON ContentRatingAgcomRating where
     toJSON = toJSONText
 
--- | Defines the context of the ping.
-data VideoConversionPingContext
-    = VCPCComment
-      -- ^ @comment@
-    | VCPCDislike
-      -- ^ @dislike@
-    | VCPCLike
-      -- ^ @like@
-    | VCPCShare
-      -- ^ @share@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable VideoConversionPingContext
-
-instance FromText VideoConversionPingContext where
-    fromText = \case
-        "comment" -> Just VCPCComment
-        "dislike" -> Just VCPCDislike
-        "like" -> Just VCPCLike
-        "share" -> Just VCPCShare
-        _ -> Nothing
-
-instance ToText VideoConversionPingContext where
-    toText = \case
-        VCPCComment -> "comment"
-        VCPCDislike -> "dislike"
-        VCPCLike -> "like"
-        VCPCShare -> "share"
-
-instance FromJSON VideoConversionPingContext where
-    parseJSON = parseJSONText "VideoConversionPingContext"
-
-instance ToJSON VideoConversionPingContext where
-    toJSON = toJSONText
-
 -- | The comment\'s moderation status. Will not be set if the comments were
 -- requested through the id filter.
 data CommentSnippetModerationStatus
@@ -5531,6 +5682,54 @@ instance FromJSON SearchListVideoLicense where
     parseJSON = parseJSONText "SearchListVideoLicense"
 
 instance ToJSON SearchListVideoLicense where
+    toJSON = toJSONText
+
+-- | The type of message, this will always be present, it determines the
+-- contents of the message as well as which fields will be present.
+data LiveChatMessageSnippetType
+    = LCMSTChatEndedEvent
+      -- ^ @chatEndedEvent@
+    | LCMSTFanFundingEvent
+      -- ^ @fanFundingEvent@
+    | LCMSTNewSponsorEvent
+      -- ^ @newSponsorEvent@
+    | LCMSTSponsorOnlyModeEndedEvent
+      -- ^ @sponsorOnlyModeEndedEvent@
+    | LCMSTSponsorOnlyModeStartedEvent
+      -- ^ @sponsorOnlyModeStartedEvent@
+    | LCMSTTextMessageEvent
+      -- ^ @textMessageEvent@
+    | LCMSTTombstone
+      -- ^ @tombstone@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveChatMessageSnippetType
+
+instance FromText LiveChatMessageSnippetType where
+    fromText = \case
+        "chatEndedEvent" -> Just LCMSTChatEndedEvent
+        "fanFundingEvent" -> Just LCMSTFanFundingEvent
+        "newSponsorEvent" -> Just LCMSTNewSponsorEvent
+        "sponsorOnlyModeEndedEvent" -> Just LCMSTSponsorOnlyModeEndedEvent
+        "sponsorOnlyModeStartedEvent" -> Just LCMSTSponsorOnlyModeStartedEvent
+        "textMessageEvent" -> Just LCMSTTextMessageEvent
+        "tombstone" -> Just LCMSTTombstone
+        _ -> Nothing
+
+instance ToText LiveChatMessageSnippetType where
+    toText = \case
+        LCMSTChatEndedEvent -> "chatEndedEvent"
+        LCMSTFanFundingEvent -> "fanFundingEvent"
+        LCMSTNewSponsorEvent -> "newSponsorEvent"
+        LCMSTSponsorOnlyModeEndedEvent -> "sponsorOnlyModeEndedEvent"
+        LCMSTSponsorOnlyModeStartedEvent -> "sponsorOnlyModeStartedEvent"
+        LCMSTTextMessageEvent -> "textMessageEvent"
+        LCMSTTombstone -> "tombstone"
+
+instance FromJSON LiveChatMessageSnippetType where
+    parseJSON = parseJSONText "LiveChatMessageSnippetType"
+
+instance ToJSON LiveChatMessageSnippetType where
     toJSON = toJSONText
 
 data LiveStreamStatusStreamStatus

@@ -80,11 +80,11 @@ jobsGet pJgJobId_ pJgProjectId_ =
     , _jgProjectId = pJgProjectId_
     }
 
--- | Job ID of the requested job
+-- | [Required] Job ID of the requested job
 jgJobId :: Lens' JobsGet Text
 jgJobId = lens _jgJobId (\ s a -> s{_jgJobId = a})
 
--- | Project ID of the requested job
+-- | [Required] Project ID of the requested job
 jgProjectId :: Lens' JobsGet Text
 jgProjectId
   = lens _jgProjectId (\ s a -> s{_jgProjectId = a})

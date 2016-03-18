@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CampaignsUpdate' request conforms to.
 type CampaignsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>

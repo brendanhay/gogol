@@ -22,7 +22,7 @@
 --
 -- Deletes a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.delete@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.delete@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Delete
     (
     -- * REST Resource

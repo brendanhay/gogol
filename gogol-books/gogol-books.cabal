@@ -74,6 +74,8 @@ library
         , Network.Google.Resource.Books.PromoOffer.Accept
         , Network.Google.Resource.Books.PromoOffer.Dismiss
         , Network.Google.Resource.Books.PromoOffer.Get
+        , Network.Google.Resource.Books.Series.Get
+        , Network.Google.Resource.Books.Series.Membership.Get
         , Network.Google.Resource.Books.Volumes.Associated.List
         , Network.Google.Resource.Books.Volumes.Get
         , Network.Google.Resource.Books.Volumes.List

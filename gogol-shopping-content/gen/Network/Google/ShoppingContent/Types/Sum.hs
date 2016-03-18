@@ -22,6 +22,10 @@ import           Network.Google.Prelude
 data OrdersGettestOrdertemplateTemplateName
     = TEMPLATE1
       -- ^ @template1@
+    | Template1a
+      -- ^ @template1a@
+    | Template1b
+      -- ^ @template1b@
     | TEMPLATE2
       -- ^ @template2@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -31,12 +35,16 @@ instance Hashable OrdersGettestOrdertemplateTemplateName
 instance FromText OrdersGettestOrdertemplateTemplateName where
     fromText = \case
         "template1" -> Just TEMPLATE1
+        "template1a" -> Just Template1a
+        "template1b" -> Just Template1b
         "template2" -> Just TEMPLATE2
         _ -> Nothing
 
 instance ToText OrdersGettestOrdertemplateTemplateName where
     toText = \case
         TEMPLATE1 -> "template1"
+        Template1a -> "template1a"
+        Template1b -> "template1b"
         TEMPLATE2 -> "template2"
 
 instance FromJSON OrdersGettestOrdertemplateTemplateName where

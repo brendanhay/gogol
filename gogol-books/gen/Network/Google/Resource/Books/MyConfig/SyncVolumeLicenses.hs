@@ -36,6 +36,7 @@ module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
     -- * Request Lenses
     , mcsvlCpksver
     , mcsvlLocale
+    , mcsvlIncludeNonComicsSeries
     , mcsvlVolumeIds
     , mcsvlFeatures
     , mcsvlSource
@@ -57,25 +58,27 @@ type MyConfigSyncVolumeLicensesResource =
                QueryParam "nonce" Text :>
                  QueryParam "cpksver" Text :>
                    QueryParam "locale" Text :>
-                     QueryParams "volumeIds" Text :>
-                       QueryParams "features"
-                         MyConfigSyncVolumeLicensesFeatures
-                         :>
-                         QueryParam "showPreorders" Bool :>
-                           QueryParam "alt" AltJSON :> Post '[JSON] Volumes
+                     QueryParam "includeNonComicsSeries" Bool :>
+                       QueryParams "volumeIds" Text :>
+                         QueryParams "features"
+                           MyConfigSyncVolumeLicensesFeatures
+                           :>
+                           QueryParam "showPreorders" Bool :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] Volumes
 
 -- | Request downloaded content access for specified volumes on the My eBooks
 -- shelf.
 --
 -- /See:/ 'myConfigSyncVolumeLicenses' smart constructor.
 data MyConfigSyncVolumeLicenses = MyConfigSyncVolumeLicenses
-    { _mcsvlCpksver       :: !Text
-    , _mcsvlLocale        :: !(Maybe Text)
-    , _mcsvlVolumeIds     :: !(Maybe [Text])
-    , _mcsvlFeatures      :: !(Maybe [MyConfigSyncVolumeLicensesFeatures])
-    , _mcsvlSource        :: !Text
-    , _mcsvlShowPreOrders :: !(Maybe Bool)
-    , _mcsvlNonce         :: !Text
+    { _mcsvlCpksver                :: !Text
+    , _mcsvlLocale                 :: !(Maybe Text)
+    , _mcsvlIncludeNonComicsSeries :: !(Maybe Bool)
+    , _mcsvlVolumeIds              :: !(Maybe [Text])
+    , _mcsvlFeatures               :: !(Maybe [MyConfigSyncVolumeLicensesFeatures])
+    , _mcsvlSource                 :: !Text
+    , _mcsvlShowPreOrders          :: !(Maybe Bool)
+    , _mcsvlNonce                  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyConfigSyncVolumeLicenses' with the minimum fields required to make a request.
@@ -85,6 +88,8 @@ data MyConfigSyncVolumeLicenses = MyConfigSyncVolumeLicenses
 -- * 'mcsvlCpksver'
 --
 -- * 'mcsvlLocale'
+--
+-- * 'mcsvlIncludeNonComicsSeries'
 --
 -- * 'mcsvlVolumeIds'
 --
@@ -104,6 +109,7 @@ myConfigSyncVolumeLicenses pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
     MyConfigSyncVolumeLicenses
     { _mcsvlCpksver = pMcsvlCpksver_
     , _mcsvlLocale = Nothing
+    , _mcsvlIncludeNonComicsSeries = Nothing
     , _mcsvlVolumeIds = Nothing
     , _mcsvlFeatures = Nothing
     , _mcsvlSource = pMcsvlSource_
@@ -120,6 +126,12 @@ mcsvlCpksver
 mcsvlLocale :: Lens' MyConfigSyncVolumeLicenses (Maybe Text)
 mcsvlLocale
   = lens _mcsvlLocale (\ s a -> s{_mcsvlLocale = a})
+
+-- | Set to true to include non-comics series. Defaults to false.
+mcsvlIncludeNonComicsSeries :: Lens' MyConfigSyncVolumeLicenses (Maybe Bool)
+mcsvlIncludeNonComicsSeries
+  = lens _mcsvlIncludeNonComicsSeries
+      (\ s a -> s{_mcsvlIncludeNonComicsSeries = a})
 
 -- | The volume(s) to request download restrictions for.
 mcsvlVolumeIds :: Lens' MyConfigSyncVolumeLicenses [Text]
@@ -160,6 +172,7 @@ instance GoogleRequest MyConfigSyncVolumeLicenses
           = go (Just _mcsvlSource) (Just _mcsvlNonce)
               (Just _mcsvlCpksver)
               _mcsvlLocale
+              _mcsvlIncludeNonComicsSeries
               (_mcsvlVolumeIds ^. _Default)
               (_mcsvlFeatures ^. _Default)
               _mcsvlShowPreOrders

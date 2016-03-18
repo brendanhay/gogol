@@ -80,7 +80,7 @@ targetHTTPSProxiesInsert pThpiProject_ pThpiPayload_ =
     , _thpiPayload = pThpiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thpiProject :: Lens' TargetHTTPSProxiesInsert Text
 thpiProject
   = lens _thpiProject (\ s a -> s{_thpiProject = a})

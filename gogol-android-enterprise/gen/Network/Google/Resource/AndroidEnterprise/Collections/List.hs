@@ -22,7 +22,7 @@
 --
 -- Retrieves the IDs of all the collections for an enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.list@.
 module Network.Google.Resource.AndroidEnterprise.Collections.List
     (
     -- * REST Resource

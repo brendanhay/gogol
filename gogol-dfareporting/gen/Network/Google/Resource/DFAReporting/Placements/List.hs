@@ -65,7 +65,7 @@ import           Network.Google.Prelude
 -- 'PlacementsList' request conforms to.
 type PlacementsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -339,8 +339,8 @@ pSortField
   = lens _pSortField (\ s a -> s{_pSortField = a})
 
 -- | Select only placements that are associated with these compatibilities.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads respectively. APP and
+-- DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or
+-- on mobile devices for regular or interstitial ads respectively. APP and
 -- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
 -- to rendering in in-stream video ads developed with the VAST standard.
 pCompatibilities :: Lens' PlacementsList [PlacementsListCompatibilities]

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesDelete' request conforms to.
 type PlacementStrategiesDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>

@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a dataset by ID.
+-- Gets a dataset by ID. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.get@.
 module Network.Google.Resource.Genomics.DataSets.Get
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type DataSetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] DataSet
 
--- | Gets a dataset by ID.
+-- | Gets a dataset by ID. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsGet' smart constructor.
 data DataSetsGet = DataSetsGet

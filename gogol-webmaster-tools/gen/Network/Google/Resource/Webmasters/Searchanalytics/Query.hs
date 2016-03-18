@@ -27,7 +27,7 @@
 -- you need to know which days have data, issue a broad date range query
 -- grouped by date for any metric, and see which day rows are returned.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.searchanalytics.query@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.searchanalytics.query@.
 module Network.Google.Resource.Webmasters.Searchanalytics.Query
     (
     -- * REST Resource

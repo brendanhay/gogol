@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the user\'s Webmaster Tools sites.
+-- Lists the user\'s Search Console sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.list@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.list@.
 module Network.Google.Resource.Webmasters.Sites.List
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ type SitesListResource =
            QueryParam "alt" AltJSON :>
              Get '[JSON] SitesListResponse
 
--- | Lists the user\'s Webmaster Tools sites.
+-- | Lists the user\'s Search Console sites.
 --
 -- /See:/ 'sitesList' smart constructor.
 data SitesList =

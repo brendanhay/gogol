@@ -22,7 +22,7 @@
 --
 -- Retrieves the set of products a user is entitled to access.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.getAvailableProductSet@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.getAvailableProductSet@.
 module Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
     (
     -- * REST Resource

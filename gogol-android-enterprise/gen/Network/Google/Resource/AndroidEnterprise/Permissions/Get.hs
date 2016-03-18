@@ -23,7 +23,7 @@
 -- Retrieves details of an Android app permission for display to an
 -- enterprise admin.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.permissions.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.permissions.get@.
 module Network.Google.Resource.AndroidEnterprise.Permissions.Get
     (
     -- * REST Resource

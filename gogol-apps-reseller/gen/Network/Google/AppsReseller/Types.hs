@@ -45,6 +45,7 @@ module Network.Google.AppsReseller.Types
     -- * Customer
     , Customer
     , customer
+    , cCustomerDomainVerified
     , cResourceUiURL
     , cKind
     , cCustomerId
@@ -110,6 +111,7 @@ module Network.Google.AppsReseller.Types
     , subSKUId
     , subPlan
     , subCustomerId
+    , subCustomerDomain
     , subSuspensionReasons
     , subTransferInfo
     , subPurchaseOrderId
@@ -129,7 +131,7 @@ import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Enterprise Apps Reseller API. This contains the host and root path used as a starting point for constructing service requests.
-appsResellerService :: Service
+appsResellerService :: ServiceConfig
 appsResellerService
   = defaultService (ServiceId "reseller:v1")
       "www.googleapis.com"

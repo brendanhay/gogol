@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified image resource.
+-- Returns the specified image. Get a list of available images by making a
+-- list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.get@.
 module Network.Google.Resource.Compute.Images.Get
@@ -52,7 +53,8 @@ type ImagesGetResource =
                  Capture "image" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Image
 
--- | Returns the specified image resource.
+-- | Returns the specified image. Get a list of available images by making a
+-- list() request.
 --
 -- /See:/ 'imagesGet' smart constructor.
 data ImagesGet = ImagesGet

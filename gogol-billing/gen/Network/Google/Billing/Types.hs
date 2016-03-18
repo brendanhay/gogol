@@ -54,7 +54,7 @@ import           Network.Google.Billing.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud Billing API. This contains the host and root path used as a starting point for constructing service requests.
-billingService :: Service
+billingService :: ServiceConfig
 billingService
   = defaultService (ServiceId "cloudbilling:v1")
       "cloudbilling.googleapis.com"

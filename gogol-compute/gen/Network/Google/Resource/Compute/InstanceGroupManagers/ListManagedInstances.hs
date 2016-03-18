@@ -98,7 +98,7 @@ instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupMa
     , _igmlmiZone = pIgmlmiZone_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmlmiProject :: Lens' InstanceGroupManagersListManagedInstances Text
 igmlmiProject
   = lens _igmlmiProject

@@ -584,6 +584,83 @@ instance ToJSON UploadLineItemsResponse where
               (catMaybes
                  [("uploadStatus" .=) <$> _ulirUploadStatus])
 
+-- | Publisher comment from Rubicon.
+--
+-- /See:/ 'note' smart constructor.
+data Note = Note
+    { _nUsername  :: !(Maybe Text)
+    , _nSource    :: !(Maybe Text)
+    , _nId        :: !(Maybe (Textual Int64))
+    , _nMessage   :: !(Maybe Text)
+    , _nTimestamp :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Note' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nUsername'
+--
+-- * 'nSource'
+--
+-- * 'nId'
+--
+-- * 'nMessage'
+--
+-- * 'nTimestamp'
+note
+    :: Note
+note =
+    Note
+    { _nUsername = Nothing
+    , _nSource = Nothing
+    , _nId = Nothing
+    , _nMessage = Nothing
+    , _nTimestamp = Nothing
+    }
+
+-- | Publisher user name.
+nUsername :: Lens' Note (Maybe Text)
+nUsername
+  = lens _nUsername (\ s a -> s{_nUsername = a})
+
+-- | Equals \"publisher\" for notification from Rubicon.
+nSource :: Lens' Note (Maybe Text)
+nSource = lens _nSource (\ s a -> s{_nSource = a})
+
+-- | Note id.
+nId :: Lens' Note (Maybe Int64)
+nId
+  = lens _nId (\ s a -> s{_nId = a}) . mapping _Coerce
+
+-- | Message from publisher.
+nMessage :: Lens' Note (Maybe Text)
+nMessage = lens _nMessage (\ s a -> s{_nMessage = a})
+
+-- | Time when the note was added, e.g. \"2015-12-16T17:25:35.000-08:00\".
+nTimestamp :: Lens' Note (Maybe Text)
+nTimestamp
+  = lens _nTimestamp (\ s a -> s{_nTimestamp = a})
+
+instance FromJSON Note where
+        parseJSON
+          = withObject "Note"
+              (\ o ->
+                 Note <$>
+                   (o .:? "username") <*> (o .:? "source") <*>
+                     (o .:? "id")
+                     <*> (o .:? "message")
+                     <*> (o .:? "timestamp"))
+
+instance ToJSON Note where
+        toJSON Note{..}
+          = object
+              (catMaybes
+                 [("username" .=) <$> _nUsername,
+                  ("source" .=) <$> _nSource, ("id" .=) <$> _nId,
+                  ("message" .=) <$> _nMessage,
+                  ("timestamp" .=) <$> _nTimestamp])
+
 -- | Report metadata.
 --
 -- /See:/ 'reportMetadata' smart constructor.
@@ -1304,6 +1381,87 @@ instance ToJSON Parameters where
                   ("filters" .=) <$> _pFilters,
                   ("groupBys" .=) <$> _pGroupBys,
                   ("type" .=) <$> _pType])
+
+-- | NotifyProposalChange request.
+--
+-- /See:/ 'notifyProposalChangeRequest' smart constructor.
+data NotifyProposalChangeRequest = NotifyProposalChangeRequest
+    { _npcrToken  :: !(Maybe Text)
+    , _npcrAction :: !(Maybe Text)
+    , _npcrHref   :: !(Maybe Text)
+    , _npcrId     :: !(Maybe (Textual Int64))
+    , _npcrNotes  :: !(Maybe [Note])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NotifyProposalChangeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'npcrToken'
+--
+-- * 'npcrAction'
+--
+-- * 'npcrHref'
+--
+-- * 'npcrId'
+--
+-- * 'npcrNotes'
+notifyProposalChangeRequest
+    :: NotifyProposalChangeRequest
+notifyProposalChangeRequest =
+    NotifyProposalChangeRequest
+    { _npcrToken = Nothing
+    , _npcrAction = Nothing
+    , _npcrHref = Nothing
+    , _npcrId = Nothing
+    , _npcrNotes = Nothing
+    }
+
+-- | Deal token, available when proposal is accepted by publisher.
+npcrToken :: Lens' NotifyProposalChangeRequest (Maybe Text)
+npcrToken
+  = lens _npcrToken (\ s a -> s{_npcrToken = a})
+
+-- | Action taken by publisher. One of: Accept, Decline, Append
+npcrAction :: Lens' NotifyProposalChangeRequest (Maybe Text)
+npcrAction
+  = lens _npcrAction (\ s a -> s{_npcrAction = a})
+
+-- | URL to access proposal detail.
+npcrHref :: Lens' NotifyProposalChangeRequest (Maybe Text)
+npcrHref = lens _npcrHref (\ s a -> s{_npcrHref = a})
+
+-- | Below are contents of notification from Rubicon. Proposal id.
+npcrId :: Lens' NotifyProposalChangeRequest (Maybe Int64)
+npcrId
+  = lens _npcrId (\ s a -> s{_npcrId = a}) .
+      mapping _Coerce
+
+-- | Notes from publisher
+npcrNotes :: Lens' NotifyProposalChangeRequest [Note]
+npcrNotes
+  = lens _npcrNotes (\ s a -> s{_npcrNotes = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON NotifyProposalChangeRequest where
+        parseJSON
+          = withObject "NotifyProposalChangeRequest"
+              (\ o ->
+                 NotifyProposalChangeRequest <$>
+                   (o .:? "token") <*> (o .:? "action") <*>
+                     (o .:? "href")
+                     <*> (o .:? "id")
+                     <*> (o .:? "notes" .!= mempty))
+
+instance ToJSON NotifyProposalChangeRequest where
+        toJSON NotifyProposalChangeRequest{..}
+          = object
+              (catMaybes
+                 [("token" .=) <$> _npcrToken,
+                  ("action" .=) <$> _npcrAction,
+                  ("href" .=) <$> _npcrHref, ("id" .=) <$> _npcrId,
+                  ("notes" .=) <$> _npcrNotes])
 
 -- | An explanation of a report failure.
 --

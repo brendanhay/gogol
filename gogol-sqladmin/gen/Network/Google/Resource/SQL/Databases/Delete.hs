@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a resource containing information about a database inside a
--- Cloud SQL instance.
+-- Deletes a database from a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.delete@.
 module Network.Google.Resource.SQL.Databases.Delete
@@ -55,8 +54,7 @@ type DatabasesDeleteResource =
                    Capture "database" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes a resource containing information about a database inside a
--- Cloud SQL instance.
+-- | Deletes a database from a Cloud SQL instance.
 --
 -- /See:/ 'databasesDelete' smart constructor.
 data DatabasesDelete = DatabasesDelete

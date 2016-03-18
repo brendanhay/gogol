@@ -379,7 +379,7 @@ import           Network.Google.Blogger.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Blogger API. This contains the host and root path used as a starting point for constructing service requests.
-bloggerService :: Service
+bloggerService :: ServiceConfig
 bloggerService
   = defaultService (ServiceId "blogger:v3")
       "www.googleapis.com"

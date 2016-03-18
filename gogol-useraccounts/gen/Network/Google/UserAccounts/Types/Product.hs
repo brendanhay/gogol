@@ -47,7 +47,13 @@ owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
 owidiValue
   = lens _owidiValue (\ s a -> s{_owidiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 owidiKey :: Lens' OperationWarningsItemDataItem (Maybe Text)
 owidiKey = lens _owidiKey (\ s a -> s{_owidiKey = a})
 
@@ -100,7 +106,11 @@ operationList =
     , _olId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncate.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 olNextPageToken :: Lens' OperationList (Maybe Text)
 olNextPageToken
   = lens _olNextPageToken
@@ -111,7 +121,7 @@ olNextPageToken
 olKind :: Lens' OperationList Text
 olKind = lens _olKind (\ s a -> s{_olKind = a})
 
--- | [Output Only] The Operation resources.
+-- | [Output Only] A list of Operation resources.
 olItems :: Lens' OperationList [Operation]
 olItems
   = lens _olItems (\ s a -> s{_olItems = a}) . _Default
@@ -122,7 +132,8 @@ olSelfLink :: Lens' OperationList (Maybe Text)
 olSelfLink
   = lens _olSelfLink (\ s a -> s{_olSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 olId :: Lens' OperationList (Maybe Text)
 olId = lens _olId (\ s a -> s{_olId = a})
 
@@ -358,6 +369,7 @@ data Operation = Operation
     , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
+    , _oDescription         :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -406,6 +418,8 @@ data Operation = Operation
 --
 -- * 'oRegion'
 --
+-- * 'oDescription'
+--
 -- * 'oTargetLink'
 --
 -- * 'oClientOperationId'
@@ -433,46 +447,47 @@ operation =
     , _oId = Nothing
     , _oOperationType = Nothing
     , _oRegion = Nothing
+    , _oDescription = Nothing
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
 
--- | [Output Only] Unique target ID which identifies a particular incarnation
--- of the target.
+-- | [Output Only] The unique target ID, which identifies a specific
+-- incarnation of the target resource.
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
   = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
       mapping _Coerce
 
--- | [Output Only] Status of the operation. Can be one of the following:
--- PENDING, RUNNING, or DONE.
+-- | [Output Only] The status of the operation, which can be one of the
+-- following: PENDING, RUNNING, or DONE.
 oStatus :: Lens' Operation (Maybe OperationStatus)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
--- | [Output Only] The time that this operation was requested. This is in
--- RFC3339 text format.
+-- | [Output Only] The time that this operation was requested. This value is
+-- in RFC3339 text format.
 oInsertTime :: Lens' Operation (Maybe Text)
 oInsertTime
   = lens _oInsertTime (\ s a -> s{_oInsertTime = a})
 
 -- | [Output Only] An optional progress indicator that ranges from 0 to 100.
 -- There is no requirement that this be linear or support any granularity
--- of operations. This should not be used to guess at when the operation
--- will be complete. This number should monotonically increase as the
--- operation progresses.
+-- of operations. This should not be used to guess when the operation will
+-- be complete. This number should monotonically increase as the operation
+-- progresses.
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
   = lens _oProgress (\ s a -> s{_oProgress = a}) .
       mapping _Coerce
 
 -- | [Output Only] The time that this operation was started by the server.
--- This is in RFC3339 text format.
+-- This value is in RFC3339 text format.
 oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
 -- | [Output Only] Type of the resource. Always compute#operation for
--- Operation resources.
+-- operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
@@ -488,7 +503,8 @@ oHTTPErrorMessage
   = lens _oHTTPErrorMessage
       (\ s a -> s{_oHTTPErrorMessage = a})
 
--- | [Output Only] URL of the zone where the operation resides.
+-- | [Output Only] The URL of the zone where the operation resides. Only
+-- available when performing per-zone operations.
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
 
@@ -501,7 +517,8 @@ oWarnings
       . _Coerce
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
--- message that was returned, such as 404.
+-- status code that was returned. For example, a 404 means the resource was
+-- not found.
 oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
@@ -535,36 +552,41 @@ oCreationTimestamp
   = lens _oCreationTimestamp
       (\ s a -> s{_oCreationTimestamp = a})
 
--- | [Output Only] The time that this operation was completed. This is in
--- RFC3339 text format.
+-- | [Output Only] The time that this operation was completed. This value is
+-- in RFC3339 text format.
 oEndTime :: Lens' Operation (Maybe Text)
 oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 oId :: Lens' Operation (Maybe Word64)
 oId
   = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
--- | [Output Only] Type of the operation, such as insert,
--- compute.instanceGroups.update, or compute.instanceGroups.delete.
+-- | [Output Only] The type of operation, such as insert, update, or delete,
+-- and so on.
 oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
   = lens _oOperationType
       (\ s a -> s{_oOperationType = a})
 
--- | [Output Only] URL of the region where the operation resides. Only
--- applicable for regional resources.
+-- | [Output Only] The URL of the region where the operation resides. Only
+-- available when performing regional operations.
 oRegion :: Lens' Operation (Maybe Text)
 oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
 
--- | [Output Only] URL of the resource the operation is mutating.
+-- | [Output Only] A textual description of the operation, which is set when
+-- the operation is created.
+oDescription :: Lens' Operation (Maybe Text)
+oDescription
+  = lens _oDescription (\ s a -> s{_oDescription = a})
+
+-- | [Output Only] The URL of the resource that the operation modifies.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
 
--- | [Output Only] An optional identifier specified by the client when the
--- mutation was initiated. Must be unique for all Operation resources in
--- the project.
+-- | [Output Only] Reserved for future use.
 oClientOperationId :: Lens' Operation (Maybe Text)
 oClientOperationId
   = lens _oClientOperationId
@@ -594,6 +616,7 @@ instance FromJSON Operation where
                      <*> (o .:? "id")
                      <*> (o .:? "operationType")
                      <*> (o .:? "region")
+                     <*> (o .:? "description")
                      <*> (o .:? "targetLink")
                      <*> (o .:? "clientOperationId"))
 
@@ -619,6 +642,7 @@ instance ToJSON Operation where
                   ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
                   ("operationType" .=) <$> _oOperationType,
                   ("region" .=) <$> _oRegion,
+                  ("description" .=) <$> _oDescription,
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
@@ -1315,7 +1339,7 @@ operationErrorErrorsItem =
     , _oeeiMessage = Nothing
     }
 
--- | [Output Only] Indicates the field in the request which caused the error.
+-- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
 oeeiLocation :: Lens' OperationErrorErrorsItem (Maybe Text)
 oeeiLocation
@@ -1457,17 +1481,20 @@ operationWarningsItem =
     , _owiMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]
 owiData
   = lens _owiData (\ s a -> s{_owiData = a}) . _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 owiCode :: Lens' OperationWarningsItem (Maybe OperationWarningsItemCode)
 owiCode = lens _owiCode (\ s a -> s{_owiCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 owiMessage :: Lens' OperationWarningsItem (Maybe Text)
 owiMessage
   = lens _owiMessage (\ s a -> s{_owiMessage = a})

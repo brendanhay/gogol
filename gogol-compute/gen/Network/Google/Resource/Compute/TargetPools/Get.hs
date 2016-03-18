@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetPool resource.
+-- Returns the specified target pool. Get a list of available target pools
+-- by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.get@.
 module Network.Google.Resource.Compute.TargetPools.Get
@@ -54,7 +55,8 @@ type TargetPoolsGetResource =
                    Capture "targetPool" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] TargetPool
 
--- | Returns the specified TargetPool resource.
+-- | Returns the specified target pool. Get a list of available target pools
+-- by making a list() request.
 --
 -- /See:/ 'targetPoolsGet' smart constructor.
 data TargetPoolsGet = TargetPoolsGet
@@ -84,7 +86,7 @@ targetPoolsGet pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
     , _tpgRegion = pTpgRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tpgProject :: Lens' TargetPoolsGet Text
 tpgProject
   = lens _tpgProject (\ s a -> s{_tpgProject = a})

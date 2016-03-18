@@ -97,7 +97,7 @@ instanceGroupManagersInsert pIgmiProject_ pIgmiZone_ pIgmiPayload_ =
     , _igmiPayload = pIgmiPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmiProject :: Lens' InstanceGroupManagersInsert Text
 igmiProject
   = lens _igmiProject (\ s a -> s{_igmiProject = a})

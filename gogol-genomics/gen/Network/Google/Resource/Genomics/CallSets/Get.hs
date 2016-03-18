@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a call set by ID.
+-- Gets a call set by ID. For the definitions of call sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.get@.
 module Network.Google.Resource.Genomics.CallSets.Get
     (
     -- * REST Resource
@@ -61,7 +63,9 @@ type CallSetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] CallSet
 
--- | Gets a call set by ID.
+-- | Gets a call set by ID. For the definitions of call sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsGet' smart constructor.
 data CallSetsGet = CallSetsGet

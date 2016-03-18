@@ -13,7 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Fonts Developer API.
+-- Accesses the metadata for all families served by Google Fonts, providing
+-- a list of families currently available (including available styles and a
+-- list of supported script subsets).
 --
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference>
 module Network.Google.Fonts

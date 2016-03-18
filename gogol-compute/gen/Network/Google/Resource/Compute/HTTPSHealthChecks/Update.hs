@@ -87,7 +87,7 @@ httpsHealthChecksUpdate pHhcuProject_ pHhcuPayload_ pHhcuHTTPSHealthCheck_ =
     , _hhcuHTTPSHealthCheck = pHhcuHTTPSHealthCheck_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 hhcuProject :: Lens' HTTPSHealthChecksUpdate Text
 hhcuProject
   = lens _hhcuProject (\ s a -> s{_hhcuProject = a})

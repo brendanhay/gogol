@@ -594,6 +594,150 @@ instance ToJSON ProjectList where
                   ("projects" .=) <$> _plProjects])
 
 --
+-- /See:/ 'explainQueryStep' smart constructor.
+data ExplainQueryStep = ExplainQueryStep
+    { _eqsSubsteps :: !(Maybe [Text])
+    , _eqsKind     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExplainQueryStep' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eqsSubsteps'
+--
+-- * 'eqsKind'
+explainQueryStep
+    :: ExplainQueryStep
+explainQueryStep =
+    ExplainQueryStep
+    { _eqsSubsteps = Nothing
+    , _eqsKind = Nothing
+    }
+
+-- | Human-readable stage descriptions.
+eqsSubsteps :: Lens' ExplainQueryStep [Text]
+eqsSubsteps
+  = lens _eqsSubsteps (\ s a -> s{_eqsSubsteps = a}) .
+      _Default
+      . _Coerce
+
+-- | Machine-readable operation type.
+eqsKind :: Lens' ExplainQueryStep (Maybe Text)
+eqsKind = lens _eqsKind (\ s a -> s{_eqsKind = a})
+
+instance FromJSON ExplainQueryStep where
+        parseJSON
+          = withObject "ExplainQueryStep"
+              (\ o ->
+                 ExplainQueryStep <$>
+                   (o .:? "substeps" .!= mempty) <*> (o .:? "kind"))
+
+instance ToJSON ExplainQueryStep where
+        toJSON ExplainQueryStep{..}
+          = object
+              (catMaybes
+                 [("substeps" .=) <$> _eqsSubsteps,
+                  ("kind" .=) <$> _eqsKind])
+
+--
+-- /See:/ 'bigtableColumnFamily' smart constructor.
+data BigtableColumnFamily = BigtableColumnFamily
+    { _bcfFamilyId       :: !(Maybe Text)
+    , _bcfColumns        :: !(Maybe [BigtableColumn])
+    , _bcfOnlyReadLatest :: !(Maybe Bool)
+    , _bcfType           :: !(Maybe Text)
+    , _bcfEncoding       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BigtableColumnFamily' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcfFamilyId'
+--
+-- * 'bcfColumns'
+--
+-- * 'bcfOnlyReadLatest'
+--
+-- * 'bcfType'
+--
+-- * 'bcfEncoding'
+bigtableColumnFamily
+    :: BigtableColumnFamily
+bigtableColumnFamily =
+    BigtableColumnFamily
+    { _bcfFamilyId = Nothing
+    , _bcfColumns = Nothing
+    , _bcfOnlyReadLatest = Nothing
+    , _bcfType = Nothing
+    , _bcfEncoding = Nothing
+    }
+
+-- | Identifier of the column family.
+bcfFamilyId :: Lens' BigtableColumnFamily (Maybe Text)
+bcfFamilyId
+  = lens _bcfFamilyId (\ s a -> s{_bcfFamilyId = a})
+
+-- | [Optional] Lists of columns that should be exposed as individual fields
+-- as opposed to a list of (column name, value) pairs. All columns whose
+-- qualifier matches a qualifier in this list can be accessed as .. Other
+-- columns can be accessed as a list through .Column field.
+bcfColumns :: Lens' BigtableColumnFamily [BigtableColumn]
+bcfColumns
+  = lens _bcfColumns (\ s a -> s{_bcfColumns = a}) .
+      _Default
+      . _Coerce
+
+-- | [Optional] If this is set only the latest version of value are exposed
+-- for all columns in this column family. This can be overridden for a
+-- specific column by listing that column in \'columns\' and specifying a
+-- different setting for that column.
+bcfOnlyReadLatest :: Lens' BigtableColumnFamily (Maybe Bool)
+bcfOnlyReadLatest
+  = lens _bcfOnlyReadLatest
+      (\ s a -> s{_bcfOnlyReadLatest = a})
+
+-- | [Optional] The type to convert the value in cells of this column family.
+-- The values are expected to be encoded using HBase Bytes.toBytes function
+-- when using the BINARY encoding value. Following BigQuery types are
+-- allowed (case-sensitive) - BYTES STRING INTEGER FLOAT BOOLEAN Defaut
+-- type is BYTES. This can be overridden for a specific column by listing
+-- that column in \'columns\' and specifying a type for it.
+bcfType :: Lens' BigtableColumnFamily (Maybe Text)
+bcfType = lens _bcfType (\ s a -> s{_bcfType = a})
+
+-- | [Optional] The encoding of the values when the type is not STRING.
+-- Acceptable encoding values are: TEXT - indicates values are alphanumeric
+-- text strings. BINARY - indicates values are encoded using HBase
+-- Bytes.toBytes family of functions. This can be overridden for a specific
+-- column by listing that column in \'columns\' and specifying an encoding
+-- for it.
+bcfEncoding :: Lens' BigtableColumnFamily (Maybe Text)
+bcfEncoding
+  = lens _bcfEncoding (\ s a -> s{_bcfEncoding = a})
+
+instance FromJSON BigtableColumnFamily where
+        parseJSON
+          = withObject "BigtableColumnFamily"
+              (\ o ->
+                 BigtableColumnFamily <$>
+                   (o .:? "familyId") <*> (o .:? "columns" .!= mempty)
+                     <*> (o .:? "onlyReadLatest")
+                     <*> (o .:? "type")
+                     <*> (o .:? "encoding"))
+
+instance ToJSON BigtableColumnFamily where
+        toJSON BigtableColumnFamily{..}
+          = object
+              (catMaybes
+                 [("familyId" .=) <$> _bcfFamilyId,
+                  ("columns" .=) <$> _bcfColumns,
+                  ("onlyReadLatest" .=) <$> _bcfOnlyReadLatest,
+                  ("type" .=) <$> _bcfType,
+                  ("encoding" .=) <$> _bcfEncoding])
+
+--
 -- /See:/ 'jobStatistics' smart constructor.
 data JobStatistics = JobStatistics
     { _jsCreationTime        :: !(Maybe (Textual Int64))
@@ -892,13 +1036,76 @@ instance ToJSON DataSet where
                   ("description" .=) <$> _dsDescription])
 
 --
+-- /See:/ 'bigtableOptions' smart constructor.
+data BigtableOptions = BigtableOptions
+    { _boIgnoreUnspecifiedColumnFamilies :: !(Maybe Bool)
+    , _boColumnFamilies                  :: !(Maybe [BigtableColumnFamily])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BigtableOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'boIgnoreUnspecifiedColumnFamilies'
+--
+-- * 'boColumnFamilies'
+bigtableOptions
+    :: BigtableOptions
+bigtableOptions =
+    BigtableOptions
+    { _boIgnoreUnspecifiedColumnFamilies = Nothing
+    , _boColumnFamilies = Nothing
+    }
+
+-- | [Optional] If field is true, then the column families that are not
+-- specified in columnFamilies list are not exposed in the table schema.
+-- Otherwise, they are read with BYTES type values. The default value is
+-- false.
+boIgnoreUnspecifiedColumnFamilies :: Lens' BigtableOptions (Maybe Bool)
+boIgnoreUnspecifiedColumnFamilies
+  = lens _boIgnoreUnspecifiedColumnFamilies
+      (\ s a -> s{_boIgnoreUnspecifiedColumnFamilies = a})
+
+-- | [Optional] List of column families to expose in the table schema along
+-- with their types. This list restricts the column families that can be
+-- referenced in queries and specifies their value types. You can use this
+-- list to do type conversions - see the \'type\' field for more details.
+-- If you leave this list empty, all column families are present in the
+-- table schema and their values are read as BYTES. During a query only the
+-- column families referenced in that query are read from Bigtable.
+boColumnFamilies :: Lens' BigtableOptions [BigtableColumnFamily]
+boColumnFamilies
+  = lens _boColumnFamilies
+      (\ s a -> s{_boColumnFamilies = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BigtableOptions where
+        parseJSON
+          = withObject "BigtableOptions"
+              (\ o ->
+                 BigtableOptions <$>
+                   (o .:? "ignoreUnspecifiedColumnFamilies") <*>
+                     (o .:? "columnFamilies" .!= mempty))
+
+instance ToJSON BigtableOptions where
+        toJSON BigtableOptions{..}
+          = object
+              (catMaybes
+                 [("ignoreUnspecifiedColumnFamilies" .=) <$>
+                    _boIgnoreUnspecifiedColumnFamilies,
+                  ("columnFamilies" .=) <$> _boColumnFamilies])
+
+--
 -- /See:/ 'externalDataConfiguration' smart constructor.
 data ExternalDataConfiguration = ExternalDataConfiguration
-    { _edcIgnoreUnknownValues :: !(Maybe Bool)
+    { _edcBigtableOptions     :: !(Maybe BigtableOptions)
+    , _edcIgnoreUnknownValues :: !(Maybe Bool)
     , _edcCompression         :: !(Maybe Text)
     , _edcSourceFormat        :: !(Maybe Text)
     , _edcSchema              :: !(Maybe TableSchema)
     , _edcMaxBadRecords       :: !(Maybe (Textual Int32))
+    , _edcAutodetect          :: !(Maybe Bool)
     , _edcSourceURIs          :: !(Maybe [Text])
     , _edcCSVOptions          :: !(Maybe CSVOptions)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -906,6 +1113,8 @@ data ExternalDataConfiguration = ExternalDataConfiguration
 -- | Creates a value of 'ExternalDataConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'edcBigtableOptions'
 --
 -- * 'edcIgnoreUnknownValues'
 --
@@ -917,6 +1126,8 @@ data ExternalDataConfiguration = ExternalDataConfiguration
 --
 -- * 'edcMaxBadRecords'
 --
+-- * 'edcAutodetect'
+--
 -- * 'edcSourceURIs'
 --
 -- * 'edcCSVOptions'
@@ -924,14 +1135,22 @@ externalDataConfiguration
     :: ExternalDataConfiguration
 externalDataConfiguration =
     ExternalDataConfiguration
-    { _edcIgnoreUnknownValues = Nothing
+    { _edcBigtableOptions = Nothing
+    , _edcIgnoreUnknownValues = Nothing
     , _edcCompression = Nothing
     , _edcSourceFormat = Nothing
     , _edcSchema = Nothing
     , _edcMaxBadRecords = Nothing
+    , _edcAutodetect = Nothing
     , _edcSourceURIs = Nothing
     , _edcCSVOptions = Nothing
     }
+
+-- | [Optional] Additional options if sourceFormat is set to BIGTABLE.
+edcBigtableOptions :: Lens' ExternalDataConfiguration (Maybe BigtableOptions)
+edcBigtableOptions
+  = lens _edcBigtableOptions
+      (\ s a -> s{_edcBigtableOptions = a})
 
 -- | [Optional] Indicates if BigQuery should allow extra values that are not
 -- represented in the table schema. If true, the extra values are ignored.
@@ -939,27 +1158,38 @@ externalDataConfiguration =
 -- there are too many bad records, an invalid error is returned in the job
 -- result. The default value is false. The sourceFormat property determines
 -- what BigQuery treats as an extra value: CSV: Trailing columns JSON:
--- Named values that don\'t match any column names
+-- Named values that don\'t match any column names Google Cloud Bigtable:
+-- This setting is ignored. Google Cloud Datastore backups: This setting is
+-- ignored. Avro: This setting is ignored.
 edcIgnoreUnknownValues :: Lens' ExternalDataConfiguration (Maybe Bool)
 edcIgnoreUnknownValues
   = lens _edcIgnoreUnknownValues
       (\ s a -> s{_edcIgnoreUnknownValues = a})
 
 -- | [Optional] The compression type of the data source. Possible values
--- include GZIP and NONE. The default value is NONE.
+-- include GZIP and NONE. The default value is NONE. This setting is
+-- ignored for Google Cloud Bigtable, Google Cloud Datastore backups and
+-- Avro formats.
 edcCompression :: Lens' ExternalDataConfiguration (Maybe Text)
 edcCompression
   = lens _edcCompression
       (\ s a -> s{_edcCompression = a})
 
 -- | [Required] The data format. For CSV files, specify \"CSV\". For
--- newline-delimited JSON, specify \"NEWLINE_DELIMITED_JSON\".
+-- newline-delimited JSON, specify \"NEWLINE_DELIMITED_JSON\". For Avro
+-- files, specify \"AVRO\". For Google Cloud Datastore backups, specify
+-- \"DATASTORE_BACKUP\". [Experimental] For Google Cloud Bigtable, specify
+-- \"BIGTABLE\". Please note that reading from Google Cloud Bigtable is
+-- experimental and has to be enabled for your project. Please contact
+-- Google Cloud Support to enable this for your project.
 edcSourceFormat :: Lens' ExternalDataConfiguration (Maybe Text)
 edcSourceFormat
   = lens _edcSourceFormat
       (\ s a -> s{_edcSourceFormat = a})
 
--- | [Required] The schema for the data.
+-- | [Optional] The schema for the data. Schema is required for CSV and JSON
+-- formats. Schema is disallowed for Google Cloud Bigtable, Cloud Datastore
+-- backups, and Avro formats.
 edcSchema :: Lens' ExternalDataConfiguration (Maybe TableSchema)
 edcSchema
   = lens _edcSchema (\ s a -> s{_edcSchema = a})
@@ -967,18 +1197,31 @@ edcSchema
 -- | [Optional] The maximum number of bad records that BigQuery can ignore
 -- when reading data. If the number of bad records exceeds this value, an
 -- invalid error is returned in the job result. The default value is 0,
--- which requires that all records are valid.
+-- which requires that all records are valid. This setting is ignored for
+-- Google Cloud Bigtable, Google Cloud Datastore backups and Avro formats.
 edcMaxBadRecords :: Lens' ExternalDataConfiguration (Maybe Int32)
 edcMaxBadRecords
   = lens _edcMaxBadRecords
       (\ s a -> s{_edcMaxBadRecords = a})
       . mapping _Coerce
 
+-- | [Experimental] Try to detect schema and format options automatically.
+-- Any option specified explicitly will be honored.
+edcAutodetect :: Lens' ExternalDataConfiguration (Maybe Bool)
+edcAutodetect
+  = lens _edcAutodetect
+      (\ s a -> s{_edcAutodetect = a})
+
 -- | [Required] The fully-qualified URIs that point to your data in Google
--- Cloud Storage. Each URI can contain one \'*\' wildcard character and it
--- must come after the \'bucket\' name. Size limits related to load jobs
--- apply to external data sources, plus an additional limit of 10 GB
--- maximum size across all URIs.
+-- Cloud. For Google Cloud Storage URIs: Each URI can contain one \'*\'
+-- wildcard character and it must come after the \'bucket\' name. Size
+-- limits related to load jobs apply to external data sources, plus an
+-- additional limit of 10 GB maximum size across all URIs. For Google Cloud
+-- Bigtable URIs: Exactly one URI can be specified and it has be a fully
+-- specified and valid HTTPS URL for a Google Cloud Bigtable table. For
+-- Google Cloud Datastore backups, exactly one URI can be specified, and it
+-- must end with \'.backup_info\'. Also, the \'*\' wildcard character is
+-- not allowed.
 edcSourceURIs :: Lens' ExternalDataConfiguration [Text]
 edcSourceURIs
   = lens _edcSourceURIs
@@ -997,11 +1240,13 @@ instance FromJSON ExternalDataConfiguration where
           = withObject "ExternalDataConfiguration"
               (\ o ->
                  ExternalDataConfiguration <$>
-                   (o .:? "ignoreUnknownValues") <*>
-                     (o .:? "compression")
+                   (o .:? "bigtableOptions") <*>
+                     (o .:? "ignoreUnknownValues")
+                     <*> (o .:? "compression")
                      <*> (o .:? "sourceFormat")
                      <*> (o .:? "schema")
                      <*> (o .:? "maxBadRecords")
+                     <*> (o .:? "autodetect")
                      <*> (o .:? "sourceUris" .!= mempty)
                      <*> (o .:? "csvOptions"))
 
@@ -1009,12 +1254,14 @@ instance ToJSON ExternalDataConfiguration where
         toJSON ExternalDataConfiguration{..}
           = object
               (catMaybes
-                 [("ignoreUnknownValues" .=) <$>
+                 [("bigtableOptions" .=) <$> _edcBigtableOptions,
+                  ("ignoreUnknownValues" .=) <$>
                     _edcIgnoreUnknownValues,
                   ("compression" .=) <$> _edcCompression,
                   ("sourceFormat" .=) <$> _edcSourceFormat,
                   ("schema" .=) <$> _edcSchema,
                   ("maxBadRecords" .=) <$> _edcMaxBadRecords,
+                  ("autodetect" .=) <$> _edcAutodetect,
                   ("sourceUris" .=) <$> _edcSourceURIs,
                   ("csvOptions" .=) <$> _edcCSVOptions])
 
@@ -1413,6 +1660,7 @@ data QueryRequest = QueryRequest
     , _qrKind           :: !Text
     , _qrQuery          :: !(Maybe Text)
     , _qrTimeoutMs      :: !(Maybe (Textual Word32))
+    , _qrUseLegacySQL   :: !(Maybe Bool)
     , _qrDryRun         :: !(Maybe Bool)
     , _qrMaxResults     :: !(Maybe (Textual Word32))
     , _qrDefaultDataSet :: !(Maybe DataSetReference)
@@ -1432,6 +1680,8 @@ data QueryRequest = QueryRequest
 --
 -- * 'qrTimeoutMs'
 --
+-- * 'qrUseLegacySQL'
+--
 -- * 'qrDryRun'
 --
 -- * 'qrMaxResults'
@@ -1446,6 +1696,7 @@ queryRequest =
     , _qrKind = "bigquery#queryRequest"
     , _qrQuery = Nothing
     , _qrTimeoutMs = Nothing
+    , _qrUseLegacySQL = Nothing
     , _qrDryRun = Nothing
     , _qrMaxResults = Nothing
     , _qrDefaultDataSet = Nothing
@@ -1487,6 +1738,18 @@ qrTimeoutMs
   = lens _qrTimeoutMs (\ s a -> s{_qrTimeoutMs = a}) .
       mapping _Coerce
 
+-- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
+-- for this query. The default value is true. If set to false, the query
+-- will use BigQuery\'s updated SQL dialect with improved standards
+-- compliance. When using BigQuery\'s updated SQL, the values of
+-- allowLargeResults and flattenResults are ignored. Queries with
+-- useLegacySql set to false will be run as if allowLargeResults is true
+-- and flattenResults is false.
+qrUseLegacySQL :: Lens' QueryRequest (Maybe Bool)
+qrUseLegacySQL
+  = lens _qrUseLegacySQL
+      (\ s a -> s{_qrUseLegacySQL = a})
+
 -- | [Optional] If set to true, BigQuery doesn\'t run the job. Instead, if
 -- the query is valid, BigQuery returns statistics about the job such as
 -- how many bytes would be processed. If the query is invalid, an error
@@ -1523,6 +1786,7 @@ instance FromJSON QueryRequest where
                      <*> (o .:? "kind" .!= "bigquery#queryRequest")
                      <*> (o .:? "query")
                      <*> (o .:? "timeoutMs")
+                     <*> (o .:? "useLegacySql")
                      <*> (o .:? "dryRun")
                      <*> (o .:? "maxResults")
                      <*> (o .:? "defaultDataset"))
@@ -1535,6 +1799,7 @@ instance ToJSON QueryRequest where
                   ("preserveNulls" .=) <$> _qrPreserveNulls,
                   Just ("kind" .= _qrKind), ("query" .=) <$> _qrQuery,
                   ("timeoutMs" .=) <$> _qrTimeoutMs,
+                  ("useLegacySql" .=) <$> _qrUseLegacySQL,
                   ("dryRun" .=) <$> _qrDryRun,
                   ("maxResults" .=) <$> _qrMaxResults,
                   ("defaultDataset" .=) <$> _qrDefaultDataSet])
@@ -1614,6 +1879,196 @@ instance ToJSON ProjectReference where
         toJSON ProjectReference{..}
           = object
               (catMaybes [("projectId" .=) <$> _prProjectId])
+
+--
+-- /See:/ 'explainQueryStage' smart constructor.
+data ExplainQueryStage = ExplainQueryStage
+    { _eqsWaitRatioMax    :: !(Maybe (Textual Double))
+    , _eqsRecordsWritten  :: !(Maybe (Textual Int64))
+    , _eqsSteps           :: !(Maybe [ExplainQueryStep])
+    , _eqsWriteRatioAvg   :: !(Maybe (Textual Double))
+    , _eqsRecordsRead     :: !(Maybe (Textual Int64))
+    , _eqsComputeRatioAvg :: !(Maybe (Textual Double))
+    , _eqsName            :: !(Maybe Text)
+    , _eqsReadRatioMax    :: !(Maybe (Textual Double))
+    , _eqsWaitRatioAvg    :: !(Maybe (Textual Double))
+    , _eqsId              :: !(Maybe (Textual Int64))
+    , _eqsComputeRatioMax :: !(Maybe (Textual Double))
+    , _eqsWriteRatioMax   :: !(Maybe (Textual Double))
+    , _eqsReadRatioAvg    :: !(Maybe (Textual Double))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExplainQueryStage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eqsWaitRatioMax'
+--
+-- * 'eqsRecordsWritten'
+--
+-- * 'eqsSteps'
+--
+-- * 'eqsWriteRatioAvg'
+--
+-- * 'eqsRecordsRead'
+--
+-- * 'eqsComputeRatioAvg'
+--
+-- * 'eqsName'
+--
+-- * 'eqsReadRatioMax'
+--
+-- * 'eqsWaitRatioAvg'
+--
+-- * 'eqsId'
+--
+-- * 'eqsComputeRatioMax'
+--
+-- * 'eqsWriteRatioMax'
+--
+-- * 'eqsReadRatioAvg'
+explainQueryStage
+    :: ExplainQueryStage
+explainQueryStage =
+    ExplainQueryStage
+    { _eqsWaitRatioMax = Nothing
+    , _eqsRecordsWritten = Nothing
+    , _eqsSteps = Nothing
+    , _eqsWriteRatioAvg = Nothing
+    , _eqsRecordsRead = Nothing
+    , _eqsComputeRatioAvg = Nothing
+    , _eqsName = Nothing
+    , _eqsReadRatioMax = Nothing
+    , _eqsWaitRatioAvg = Nothing
+    , _eqsId = Nothing
+    , _eqsComputeRatioMax = Nothing
+    , _eqsWriteRatioMax = Nothing
+    , _eqsReadRatioAvg = Nothing
+    }
+
+-- | Relative amount of time the slowest shard spent waiting to be scheduled.
+eqsWaitRatioMax :: Lens' ExplainQueryStage (Maybe Double)
+eqsWaitRatioMax
+  = lens _eqsWaitRatioMax
+      (\ s a -> s{_eqsWaitRatioMax = a})
+      . mapping _Coerce
+
+-- | Number of records written by the stage.
+eqsRecordsWritten :: Lens' ExplainQueryStage (Maybe Int64)
+eqsRecordsWritten
+  = lens _eqsRecordsWritten
+      (\ s a -> s{_eqsRecordsWritten = a})
+      . mapping _Coerce
+
+-- | List of operations within the stage in dependency order (approximately
+-- chronological).
+eqsSteps :: Lens' ExplainQueryStage [ExplainQueryStep]
+eqsSteps
+  = lens _eqsSteps (\ s a -> s{_eqsSteps = a}) .
+      _Default
+      . _Coerce
+
+-- | Relative amount of time the average shard spent on writing output.
+eqsWriteRatioAvg :: Lens' ExplainQueryStage (Maybe Double)
+eqsWriteRatioAvg
+  = lens _eqsWriteRatioAvg
+      (\ s a -> s{_eqsWriteRatioAvg = a})
+      . mapping _Coerce
+
+-- | Number of records read into the stage.
+eqsRecordsRead :: Lens' ExplainQueryStage (Maybe Int64)
+eqsRecordsRead
+  = lens _eqsRecordsRead
+      (\ s a -> s{_eqsRecordsRead = a})
+      . mapping _Coerce
+
+-- | Relative amount of time the average shard spent on CPU-bound tasks.
+eqsComputeRatioAvg :: Lens' ExplainQueryStage (Maybe Double)
+eqsComputeRatioAvg
+  = lens _eqsComputeRatioAvg
+      (\ s a -> s{_eqsComputeRatioAvg = a})
+      . mapping _Coerce
+
+-- | Human-readable name for stage.
+eqsName :: Lens' ExplainQueryStage (Maybe Text)
+eqsName = lens _eqsName (\ s a -> s{_eqsName = a})
+
+-- | Relative amount of time the slowest shard spent reading input.
+eqsReadRatioMax :: Lens' ExplainQueryStage (Maybe Double)
+eqsReadRatioMax
+  = lens _eqsReadRatioMax
+      (\ s a -> s{_eqsReadRatioMax = a})
+      . mapping _Coerce
+
+-- | Relative amount of time the average shard spent waiting to be scheduled.
+eqsWaitRatioAvg :: Lens' ExplainQueryStage (Maybe Double)
+eqsWaitRatioAvg
+  = lens _eqsWaitRatioAvg
+      (\ s a -> s{_eqsWaitRatioAvg = a})
+      . mapping _Coerce
+
+-- | Unique ID for stage within plan.
+eqsId :: Lens' ExplainQueryStage (Maybe Int64)
+eqsId
+  = lens _eqsId (\ s a -> s{_eqsId = a}) .
+      mapping _Coerce
+
+-- | Relative amount of time the slowest shard spent on CPU-bound tasks.
+eqsComputeRatioMax :: Lens' ExplainQueryStage (Maybe Double)
+eqsComputeRatioMax
+  = lens _eqsComputeRatioMax
+      (\ s a -> s{_eqsComputeRatioMax = a})
+      . mapping _Coerce
+
+-- | Relative amount of time the slowest shard spent on writing output.
+eqsWriteRatioMax :: Lens' ExplainQueryStage (Maybe Double)
+eqsWriteRatioMax
+  = lens _eqsWriteRatioMax
+      (\ s a -> s{_eqsWriteRatioMax = a})
+      . mapping _Coerce
+
+-- | Relative amount of time the average shard spent reading input.
+eqsReadRatioAvg :: Lens' ExplainQueryStage (Maybe Double)
+eqsReadRatioAvg
+  = lens _eqsReadRatioAvg
+      (\ s a -> s{_eqsReadRatioAvg = a})
+      . mapping _Coerce
+
+instance FromJSON ExplainQueryStage where
+        parseJSON
+          = withObject "ExplainQueryStage"
+              (\ o ->
+                 ExplainQueryStage <$>
+                   (o .:? "waitRatioMax") <*> (o .:? "recordsWritten")
+                     <*> (o .:? "steps" .!= mempty)
+                     <*> (o .:? "writeRatioAvg")
+                     <*> (o .:? "recordsRead")
+                     <*> (o .:? "computeRatioAvg")
+                     <*> (o .:? "name")
+                     <*> (o .:? "readRatioMax")
+                     <*> (o .:? "waitRatioAvg")
+                     <*> (o .:? "id")
+                     <*> (o .:? "computeRatioMax")
+                     <*> (o .:? "writeRatioMax")
+                     <*> (o .:? "readRatioAvg"))
+
+instance ToJSON ExplainQueryStage where
+        toJSON ExplainQueryStage{..}
+          = object
+              (catMaybes
+                 [("waitRatioMax" .=) <$> _eqsWaitRatioMax,
+                  ("recordsWritten" .=) <$> _eqsRecordsWritten,
+                  ("steps" .=) <$> _eqsSteps,
+                  ("writeRatioAvg" .=) <$> _eqsWriteRatioAvg,
+                  ("recordsRead" .=) <$> _eqsRecordsRead,
+                  ("computeRatioAvg" .=) <$> _eqsComputeRatioAvg,
+                  ("name" .=) <$> _eqsName,
+                  ("readRatioMax" .=) <$> _eqsReadRatioMax,
+                  ("waitRatioAvg" .=) <$> _eqsWaitRatioAvg,
+                  ("id" .=) <$> _eqsId,
+                  ("computeRatioMax" .=) <$> _eqsComputeRatioMax,
+                  ("writeRatioMax" .=) <$> _eqsWriteRatioMax,
+                  ("readRatioAvg" .=) <$> _eqsReadRatioAvg])
 
 --
 -- /See:/ 'jobConfigurationLoad' smart constructor.
@@ -1803,8 +2258,8 @@ jclSourceFormat
       (\ s a -> s{_jclSourceFormat = a})
 
 -- | [Optional] The schema for the destination table. The schema can be
--- omitted if the destination table already exists or if the schema can be
--- inferred from the loaded data.
+-- omitted if the destination table already exists, or if you\'re loading
+-- data from Google Cloud Datastore.
 jclSchema :: Lens' JobConfigurationLoad (Maybe TableSchema)
 jclSchema
   = lens _jclSchema (\ s a -> s{_jclSchema = a})
@@ -1847,7 +2302,9 @@ jclEncoding :: Lens' JobConfigurationLoad (Maybe Text)
 jclEncoding
   = lens _jclEncoding (\ s a -> s{_jclEncoding = a})
 
--- | [Optional] The separator for fields in a CSV file. BigQuery converts the
+-- | [Optional] The separator for fields in a CSV file. The separator can be
+-- any ISO-8859-1 single-byte character. To use a character in the range
+-- 128-255, you must encode the character as UTF8. BigQuery converts the
 -- string to ISO-8859-1 encoding, and then uses the first byte of the
 -- encoded string to split the data in its raw, binary state. BigQuery also
 -- supports the escape sequence \"\\t\" to specify a tab separator. The
@@ -1958,6 +2415,7 @@ data TableDataInsertAllRequest = TableDataInsertAllRequest
     { _tdiarKind                :: !Text
     , _tdiarIgnoreUnknownValues :: !(Maybe Bool)
     , _tdiarRows                :: !(Maybe [TableDataInsertAllRequestRowsItem])
+    , _tdiarTemplateSuffix      :: !(Maybe Text)
     , _tdiarSkipInvalidRows     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1971,6 +2429,8 @@ data TableDataInsertAllRequest = TableDataInsertAllRequest
 --
 -- * 'tdiarRows'
 --
+-- * 'tdiarTemplateSuffix'
+--
 -- * 'tdiarSkipInvalidRows'
 tableDataInsertAllRequest
     :: TableDataInsertAllRequest
@@ -1979,6 +2439,7 @@ tableDataInsertAllRequest =
     { _tdiarKind = "bigquery#tableDataInsertAllRequest"
     , _tdiarIgnoreUnknownValues = Nothing
     , _tdiarRows = Nothing
+    , _tdiarTemplateSuffix = Nothing
     , _tdiarSkipInvalidRows = Nothing
     }
 
@@ -2002,6 +2463,17 @@ tdiarRows
       _Default
       . _Coerce
 
+-- | [Experimental] If specified, treats the destination table as a base
+-- template, and inserts the rows into an instance table named
+-- \"{destination}{templateSuffix}\". BigQuery will manage creation of the
+-- instance table, using the schema of the base template table. See
+-- https:\/\/cloud.google.com\/bigquery\/streaming-data-into-bigquery#template-tables
+-- for considerations when working with templates tables.
+tdiarTemplateSuffix :: Lens' TableDataInsertAllRequest (Maybe Text)
+tdiarTemplateSuffix
+  = lens _tdiarTemplateSuffix
+      (\ s a -> s{_tdiarTemplateSuffix = a})
+
 -- | [Optional] Insert all valid rows of a request, even if invalid rows
 -- exist. The default value is false, which causes the entire request to
 -- fail if any invalid rows exist.
@@ -2019,6 +2491,7 @@ instance FromJSON TableDataInsertAllRequest where
                       "bigquery#tableDataInsertAllRequest")
                      <*> (o .:? "ignoreUnknownValues")
                      <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "templateSuffix")
                      <*> (o .:? "skipInvalidRows"))
 
 instance ToJSON TableDataInsertAllRequest where
@@ -2029,6 +2502,7 @@ instance ToJSON TableDataInsertAllRequest where
                   ("ignoreUnknownValues" .=) <$>
                     _tdiarIgnoreUnknownValues,
                   ("rows" .=) <$> _tdiarRows,
+                  ("templateSuffix" .=) <$> _tdiarTemplateSuffix,
                   ("skipInvalidRows" .=) <$> _tdiarSkipInvalidRows])
 
 --
@@ -2112,6 +2586,121 @@ instance ToJSON ProjectListProjectsItem where
                   ("projectReference" .=) <$> _plpiProjectReference,
                   ("id" .=) <$> _plpiId,
                   ("numericId" .=) <$> _plpiNumericId])
+
+--
+-- /See:/ 'bigtableColumn' smart constructor.
+data BigtableColumn = BigtableColumn
+    { _bcQualifierEncoded :: !(Maybe (Textual Word8))
+    , _bcFieldName        :: !(Maybe Text)
+    , _bcQualifierString  :: !(Maybe Text)
+    , _bcOnlyReadLatest   :: !(Maybe Bool)
+    , _bcType             :: !(Maybe Text)
+    , _bcEncoding         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BigtableColumn' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcQualifierEncoded'
+--
+-- * 'bcFieldName'
+--
+-- * 'bcQualifierString'
+--
+-- * 'bcOnlyReadLatest'
+--
+-- * 'bcType'
+--
+-- * 'bcEncoding'
+bigtableColumn
+    :: BigtableColumn
+bigtableColumn =
+    BigtableColumn
+    { _bcQualifierEncoded = Nothing
+    , _bcFieldName = Nothing
+    , _bcQualifierString = Nothing
+    , _bcOnlyReadLatest = Nothing
+    , _bcType = Nothing
+    , _bcEncoding = Nothing
+    }
+
+-- | [Required] Qualifier of the column. Columns in the parent column family
+-- that has this exact qualifier are exposed as . field. If the qualifier
+-- is valid UTF-8 string, it can be specified in the qualifier_string
+-- field. Otherwise, a base-64 encoded value must be set to
+-- qualifier_encoded. The column field name is the same as the column
+-- qualifier. However, if the qualifier is not a valid BigQuery field
+-- identifier i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier
+-- must be provided as field_name.
+bcQualifierEncoded :: Lens' BigtableColumn (Maybe Word8)
+bcQualifierEncoded
+  = lens _bcQualifierEncoded
+      (\ s a -> s{_bcQualifierEncoded = a})
+      . mapping _Coerce
+
+-- | [Optional] If the qualifier is not a valid BigQuery field identifier
+-- i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier must be
+-- provided as the column field name and is used as field name in queries.
+bcFieldName :: Lens' BigtableColumn (Maybe Text)
+bcFieldName
+  = lens _bcFieldName (\ s a -> s{_bcFieldName = a})
+
+bcQualifierString :: Lens' BigtableColumn (Maybe Text)
+bcQualifierString
+  = lens _bcQualifierString
+      (\ s a -> s{_bcQualifierString = a})
+
+-- | [Optional] If this is set, only the latest version of value in this
+-- column are exposed. \'onlyReadLatest\' can also be set at the column
+-- family level. However, the setting at this level takes precedence if
+-- \'onlyReadLatest\' is set at both levels.
+bcOnlyReadLatest :: Lens' BigtableColumn (Maybe Bool)
+bcOnlyReadLatest
+  = lens _bcOnlyReadLatest
+      (\ s a -> s{_bcOnlyReadLatest = a})
+
+-- | [Optional] The type to convert the value in cells of this column. The
+-- values are expected to be encoded using HBase Bytes.toBytes function
+-- when using the BINARY encoding value. Following BigQuery types are
+-- allowed (case-sensitive) - BYTES STRING INTEGER FLOAT BOOLEAN Defaut
+-- type is BYTES. \'type\' can also be set at the column family level.
+-- However, the setting at this level takes precedence if \'type\' is set
+-- at both levels.
+bcType :: Lens' BigtableColumn (Maybe Text)
+bcType = lens _bcType (\ s a -> s{_bcType = a})
+
+-- | [Optional] The encoding of the values when the type is not STRING.
+-- Acceptable encoding values are: TEXT - indicates values are alphanumeric
+-- text strings. BINARY - indicates values are encoded using HBase
+-- Bytes.toBytes family of functions. \'encoding\' can also be set at the
+-- column family level. However, the setting at this level takes precedence
+-- if \'encoding\' is set at both levels.
+bcEncoding :: Lens' BigtableColumn (Maybe Text)
+bcEncoding
+  = lens _bcEncoding (\ s a -> s{_bcEncoding = a})
+
+instance FromJSON BigtableColumn where
+        parseJSON
+          = withObject "BigtableColumn"
+              (\ o ->
+                 BigtableColumn <$>
+                   (o .:? "qualifierEncoded") <*> (o .:? "fieldName")
+                     <*> (o .:? "qualifierString")
+                     <*> (o .:? "onlyReadLatest")
+                     <*> (o .:? "type")
+                     <*> (o .:? "encoding"))
+
+instance ToJSON BigtableColumn where
+        toJSON BigtableColumn{..}
+          = object
+              (catMaybes
+                 [("qualifierEncoded" .=) <$> _bcQualifierEncoded,
+                  ("fieldName" .=) <$> _bcFieldName,
+                  ("qualifierString" .=) <$> _bcQualifierString,
+                  ("onlyReadLatest" .=) <$> _bcOnlyReadLatest,
+                  ("type" .=) <$> _bcType,
+                  ("encoding" .=) <$> _bcEncoding])
 
 --
 -- /See:/ 'streamingbuffer' smart constructor.
@@ -2347,7 +2936,6 @@ instance ToJSON JobListJobsItem where
 -- /See:/ 'jobConfiguration' smart constructor.
 data JobConfiguration = JobConfiguration
     { _jcCopy    :: !(Maybe JobConfigurationTableCopy)
-    , _jcLink    :: !(Maybe JobConfigurationLink)
     , _jcLoad    :: !(Maybe JobConfigurationLoad)
     , _jcQuery   :: !(Maybe JobConfigurationQuery)
     , _jcExtract :: !(Maybe JobConfigurationExtract)
@@ -2359,8 +2947,6 @@ data JobConfiguration = JobConfiguration
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jcCopy'
---
--- * 'jcLink'
 --
 -- * 'jcLoad'
 --
@@ -2374,7 +2960,6 @@ jobConfiguration
 jobConfiguration =
     JobConfiguration
     { _jcCopy = Nothing
-    , _jcLink = Nothing
     , _jcLoad = Nothing
     , _jcQuery = Nothing
     , _jcExtract = Nothing
@@ -2384,10 +2969,6 @@ jobConfiguration =
 -- | [Pick one] Copies a table.
 jcCopy :: Lens' JobConfiguration (Maybe JobConfigurationTableCopy)
 jcCopy = lens _jcCopy (\ s a -> s{_jcCopy = a})
-
--- | [Pick one] Configures a link job.
-jcLink :: Lens' JobConfiguration (Maybe JobConfigurationLink)
-jcLink = lens _jcLink (\ s a -> s{_jcLink = a})
 
 -- | [Pick one] Configures a load job.
 jcLoad :: Lens' JobConfiguration (Maybe JobConfigurationLoad)
@@ -2414,8 +2995,7 @@ instance FromJSON JobConfiguration where
           = withObject "JobConfiguration"
               (\ o ->
                  JobConfiguration <$>
-                   (o .:? "copy") <*> (o .:? "link") <*> (o .:? "load")
-                     <*> (o .:? "query")
+                   (o .:? "copy") <*> (o .:? "load") <*> (o .:? "query")
                      <*> (o .:? "extract")
                      <*> (o .:? "dryRun"))
 
@@ -2423,8 +3003,8 @@ instance ToJSON JobConfiguration where
         toJSON JobConfiguration{..}
           = object
               (catMaybes
-                 [("copy" .=) <$> _jcCopy, ("link" .=) <$> _jcLink,
-                  ("load" .=) <$> _jcLoad, ("query" .=) <$> _jcQuery,
+                 [("copy" .=) <$> _jcCopy, ("load" .=) <$> _jcLoad,
+                  ("query" .=) <$> _jcQuery,
                   ("extract" .=) <$> _jcExtract,
                   ("dryRun" .=) <$> _jcDryRun])
 
@@ -2548,93 +3128,6 @@ instance ToJSON Job where
                   ("selfLink" .=) <$> _jSelfLink, ("id" .=) <$> _jId,
                   ("statistics" .=) <$> _jStatistics,
                   ("configuration" .=) <$> _jConfiguration])
-
---
--- /See:/ 'jobConfigurationLink' smart constructor.
-data JobConfigurationLink = JobConfigurationLink
-    { _jDestinationTable  :: !(Maybe TableReference)
-    , _jWriteDisPosition  :: !(Maybe Text)
-    , _jCreateDisPosition :: !(Maybe Text)
-    , _jSourceURI         :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'JobConfigurationLink' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jDestinationTable'
---
--- * 'jWriteDisPosition'
---
--- * 'jCreateDisPosition'
---
--- * 'jSourceURI'
-jobConfigurationLink
-    :: JobConfigurationLink
-jobConfigurationLink =
-    JobConfigurationLink
-    { _jDestinationTable = Nothing
-    , _jWriteDisPosition = Nothing
-    , _jCreateDisPosition = Nothing
-    , _jSourceURI = Nothing
-    }
-
--- | [Required] The destination table of the link job.
-jDestinationTable :: Lens' JobConfigurationLink (Maybe TableReference)
-jDestinationTable
-  = lens _jDestinationTable
-      (\ s a -> s{_jDestinationTable = a})
-
--- | [Optional] Specifies the action that occurs if the destination table
--- already exists. The following values are supported: WRITE_TRUNCATE: If
--- the table already exists, BigQuery overwrites the table data.
--- WRITE_APPEND: If the table already exists, BigQuery appends the data to
--- the table. WRITE_EMPTY: If the table already exists and contains data, a
--- \'duplicate\' error is returned in the job result. The default value is
--- WRITE_EMPTY. Each action is atomic and only occurs if BigQuery is able
--- to complete the job successfully. Creation, truncation and append
--- actions occur as one atomic update upon job completion.
-jWriteDisPosition :: Lens' JobConfigurationLink (Maybe Text)
-jWriteDisPosition
-  = lens _jWriteDisPosition
-      (\ s a -> s{_jWriteDisPosition = a})
-
--- | [Optional] Specifies whether the job is allowed to create new tables.
--- The following values are supported: CREATE_IF_NEEDED: If the table does
--- not exist, BigQuery creates the table. CREATE_NEVER: The table must
--- already exist. If it does not, a \'notFound\' error is returned in the
--- job result. The default value is CREATE_IF_NEEDED. Creation, truncation
--- and append actions occur as one atomic update upon job completion.
-jCreateDisPosition :: Lens' JobConfigurationLink (Maybe Text)
-jCreateDisPosition
-  = lens _jCreateDisPosition
-      (\ s a -> s{_jCreateDisPosition = a})
-
--- | [Required] URI of source table to link.
-jSourceURI :: Lens' JobConfigurationLink [Text]
-jSourceURI
-  = lens _jSourceURI (\ s a -> s{_jSourceURI = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON JobConfigurationLink where
-        parseJSON
-          = withObject "JobConfigurationLink"
-              (\ o ->
-                 JobConfigurationLink <$>
-                   (o .:? "destinationTable") <*>
-                     (o .:? "writeDisposition")
-                     <*> (o .:? "createDisposition")
-                     <*> (o .:? "sourceUri" .!= mempty))
-
-instance ToJSON JobConfigurationLink where
-        toJSON JobConfigurationLink{..}
-          = object
-              (catMaybes
-                 [("destinationTable" .=) <$> _jDestinationTable,
-                  ("writeDisposition" .=) <$> _jWriteDisPosition,
-                  ("createDisposition" .=) <$> _jCreateDisPosition,
-                  ("sourceUri" .=) <$> _jSourceURI])
 
 --
 -- /See:/ 'tableDataInsertAllResponseInsertErrorsItem' smart constructor.
@@ -2897,8 +3390,10 @@ data JobConfigurationQuery = JobConfigurationQuery
     , _jcqCreateDisPosition            :: !(Maybe Text)
     , _jcqUserDefinedFunctionResources :: !(Maybe [UserDefinedFunctionResource])
     , _jcqAllowLargeResults            :: !(Maybe Bool)
+    , _jcqMaximumBillingTier           :: !(Textual Int32)
     , _jcqQuery                        :: !(Maybe Text)
     , _jcqFlattenResults               :: !Bool
+    , _jcqUseLegacySQL                 :: !(Maybe Bool)
     , _jcqDefaultDataSet               :: !(Maybe DataSetReference)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2924,9 +3419,13 @@ data JobConfigurationQuery = JobConfigurationQuery
 --
 -- * 'jcqAllowLargeResults'
 --
+-- * 'jcqMaximumBillingTier'
+--
 -- * 'jcqQuery'
 --
 -- * 'jcqFlattenResults'
+--
+-- * 'jcqUseLegacySQL'
 --
 -- * 'jcqDefaultDataSet'
 jobConfigurationQuery
@@ -2942,8 +3441,10 @@ jobConfigurationQuery =
     , _jcqCreateDisPosition = Nothing
     , _jcqUserDefinedFunctionResources = Nothing
     , _jcqAllowLargeResults = Nothing
+    , _jcqMaximumBillingTier = 1
     , _jcqQuery = Nothing
     , _jcqFlattenResults = True
+    , _jcqUseLegacySQL = Nothing
     , _jcqDefaultDataSet = Nothing
     }
 
@@ -2990,7 +3491,7 @@ jcqPreserveNulls
   = lens _jcqPreserveNulls
       (\ s a -> s{_jcqPreserveNulls = a})
 
--- | [Experimental] If querying an external data source outside of BigQuery,
+-- | [Optional] If querying an external data source outside of BigQuery,
 -- describes the data format, location and other properties of the data
 -- source. By defining these properties, the data source can then be
 -- queried as if it were a standard BigQuery table.
@@ -3026,6 +3527,15 @@ jcqAllowLargeResults
   = lens _jcqAllowLargeResults
       (\ s a -> s{_jcqAllowLargeResults = a})
 
+-- | [Optional] Limits the billing tier for this job. Queries that have
+-- resource usage beyond this tier will fail (without incurring a charge).
+-- If unspecified, this will be set to your project default.
+jcqMaximumBillingTier :: Lens' JobConfigurationQuery Int32
+jcqMaximumBillingTier
+  = lens _jcqMaximumBillingTier
+      (\ s a -> s{_jcqMaximumBillingTier = a})
+      . _Coerce
+
 -- | [Required] BigQuery SQL query to execute.
 jcqQuery :: Lens' JobConfigurationQuery (Maybe Text)
 jcqQuery = lens _jcqQuery (\ s a -> s{_jcqQuery = a})
@@ -3037,6 +3547,18 @@ jcqFlattenResults :: Lens' JobConfigurationQuery Bool
 jcqFlattenResults
   = lens _jcqFlattenResults
       (\ s a -> s{_jcqFlattenResults = a})
+
+-- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
+-- for this query. The default value is true. If set to false, the query
+-- will use BigQuery\'s updated SQL dialect with improved standards
+-- compliance. When using BigQuery\'s updated SQL, the values of
+-- allowLargeResults and flattenResults are ignored. Queries with
+-- useLegacySql set to false will be run as if allowLargeResults is true
+-- and flattenResults is false.
+jcqUseLegacySQL :: Lens' JobConfigurationQuery (Maybe Bool)
+jcqUseLegacySQL
+  = lens _jcqUseLegacySQL
+      (\ s a -> s{_jcqUseLegacySQL = a})
 
 -- | [Optional] Specifies the default dataset to use for unqualified table
 -- names in the query.
@@ -3059,8 +3581,10 @@ instance FromJSON JobConfigurationQuery where
                      <*> (o .:? "createDisposition")
                      <*> (o .:? "userDefinedFunctionResources" .!= mempty)
                      <*> (o .:? "allowLargeResults")
+                     <*> (o .:? "maximumBillingTier" .!= 1)
                      <*> (o .:? "query")
                      <*> (o .:? "flattenResults" .!= True)
+                     <*> (o .:? "useLegacySql")
                      <*> (o .:? "defaultDataset"))
 
 instance ToJSON JobConfigurationQuery where
@@ -3077,8 +3601,11 @@ instance ToJSON JobConfigurationQuery where
                   ("userDefinedFunctionResources" .=) <$>
                     _jcqUserDefinedFunctionResources,
                   ("allowLargeResults" .=) <$> _jcqAllowLargeResults,
+                  Just
+                    ("maximumBillingTier" .= _jcqMaximumBillingTier),
                   ("query" .=) <$> _jcqQuery,
                   Just ("flattenResults" .= _jcqFlattenResults),
+                  ("useLegacySql" .=) <$> _jcqUseLegacySQL,
                   ("defaultDataset" .=) <$> _jcqDefaultDataSet])
 
 --
@@ -3199,7 +3726,7 @@ instance ToJSON JobList where
                   ("nextPageToken" .=) <$> _jlNextPageToken,
                   Just ("kind" .= _jlKind), ("jobs" .=) <$> _jlJobs])
 
--- | [Experimental] If querying an external data source outside of BigQuery,
+-- | [Optional] If querying an external data source outside of BigQuery,
 -- describes the data format, location and other properties of the data
 -- source. By defining these properties, the data source can then be
 -- queried as if it were a standard BigQuery table.
@@ -3272,21 +3799,34 @@ instance ToJSON TableCell where
 
 --
 -- /See:/ 'viewDefinition' smart constructor.
-newtype ViewDefinition = ViewDefinition
-    { _vdQuery :: Maybe Text
+data ViewDefinition = ViewDefinition
+    { _vdUserDefinedFunctionResources :: !(Maybe [UserDefinedFunctionResource])
+    , _vdQuery                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ViewDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vdUserDefinedFunctionResources'
+--
 -- * 'vdQuery'
 viewDefinition
     :: ViewDefinition
 viewDefinition =
     ViewDefinition
-    { _vdQuery = Nothing
+    { _vdUserDefinedFunctionResources = Nothing
+    , _vdQuery = Nothing
     }
+
+-- | [Experimental] Describes user-defined function resources used in the
+-- query.
+vdUserDefinedFunctionResources :: Lens' ViewDefinition [UserDefinedFunctionResource]
+vdUserDefinedFunctionResources
+  = lens _vdUserDefinedFunctionResources
+      (\ s a -> s{_vdUserDefinedFunctionResources = a})
+      . _Default
+      . _Coerce
 
 -- | [Required] A query that BigQuery executes when the view is referenced.
 vdQuery :: Lens' ViewDefinition (Maybe Text)
@@ -3295,11 +3835,18 @@ vdQuery = lens _vdQuery (\ s a -> s{_vdQuery = a})
 instance FromJSON ViewDefinition where
         parseJSON
           = withObject "ViewDefinition"
-              (\ o -> ViewDefinition <$> (o .:? "query"))
+              (\ o ->
+                 ViewDefinition <$>
+                   (o .:? "userDefinedFunctionResources" .!= mempty) <*>
+                     (o .:? "query"))
 
 instance ToJSON ViewDefinition where
         toJSON ViewDefinition{..}
-          = object (catMaybes [("query" .=) <$> _vdQuery])
+          = object
+              (catMaybes
+                 [("userDefinedFunctionResources" .=) <$>
+                    _vdUserDefinedFunctionResources,
+                  ("query" .=) <$> _vdQuery])
 
 --
 -- /See:/ 'userDefinedFunctionResource' smart constructor.
@@ -3357,6 +3904,8 @@ instance ToJSON UserDefinedFunctionResource where
 data JobStatistics2 = JobStatistics2
     { _jTotalBytesProcessed :: !(Maybe (Textual Int64))
     , _jBillingTier         :: !(Maybe (Textual Int32))
+    , _jReferencedTables    :: !(Maybe [TableReference])
+    , _jQueryPlan           :: !(Maybe [ExplainQueryStage])
     , _jCacheHit            :: !(Maybe Bool)
     , _jTotalBytesBilled    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3369,6 +3918,10 @@ data JobStatistics2 = JobStatistics2
 --
 -- * 'jBillingTier'
 --
+-- * 'jReferencedTables'
+--
+-- * 'jQueryPlan'
+--
 -- * 'jCacheHit'
 --
 -- * 'jTotalBytesBilled'
@@ -3378,6 +3931,8 @@ jobStatistics2 =
     JobStatistics2
     { _jTotalBytesProcessed = Nothing
     , _jBillingTier = Nothing
+    , _jReferencedTables = Nothing
+    , _jQueryPlan = Nothing
     , _jCacheHit = Nothing
     , _jTotalBytesBilled = Nothing
     }
@@ -3394,6 +3949,23 @@ jBillingTier :: Lens' JobStatistics2 (Maybe Int32)
 jBillingTier
   = lens _jBillingTier (\ s a -> s{_jBillingTier = a})
       . mapping _Coerce
+
+-- | [Output-only, Experimental] Referenced tables for the job. Queries that
+-- reference more than 50 tables will not have a complete list.
+jReferencedTables :: Lens' JobStatistics2 [TableReference]
+jReferencedTables
+  = lens _jReferencedTables
+      (\ s a -> s{_jReferencedTables = a})
+      . _Default
+      . _Coerce
+
+-- | [Output-only, Experimental] Describes execution plan for the query as a
+-- list of stages.
+jQueryPlan :: Lens' JobStatistics2 [ExplainQueryStage]
+jQueryPlan
+  = lens _jQueryPlan (\ s a -> s{_jQueryPlan = a}) .
+      _Default
+      . _Coerce
 
 -- | [Output-only] Whether the query result was fetched from the query cache.
 jCacheHit :: Lens' JobStatistics2 (Maybe Bool)
@@ -3414,6 +3986,8 @@ instance FromJSON JobStatistics2 where
                  JobStatistics2 <$>
                    (o .:? "totalBytesProcessed") <*>
                      (o .:? "billingTier")
+                     <*> (o .:? "referencedTables" .!= mempty)
+                     <*> (o .:? "queryPlan" .!= mempty)
                      <*> (o .:? "cacheHit")
                      <*> (o .:? "totalBytesBilled"))
 
@@ -3424,6 +3998,8 @@ instance ToJSON JobStatistics2 where
                  [("totalBytesProcessed" .=) <$>
                     _jTotalBytesProcessed,
                   ("billingTier" .=) <$> _jBillingTier,
+                  ("referencedTables" .=) <$> _jReferencedTables,
+                  ("queryPlan" .=) <$> _jQueryPlan,
                   ("cacheHit" .=) <$> _jCacheHit,
                   ("totalBytesBilled" .=) <$> _jTotalBytesBilled])
 
@@ -3746,8 +4322,8 @@ tabNumBytes
   = lens _tabNumBytes (\ s a -> s{_tabNumBytes = a}) .
       mapping _Coerce
 
--- | [Experimental] Describes the data format, location, and other properties
--- of a table stored outside of BigQuery. By defining these properties, the
+-- | [Optional] Describes the data format, location, and other properties of
+-- a table stored outside of BigQuery. By defining these properties, the
 -- data source can then be queried as if it were a standard BigQuery table.
 tabExternalDataConfiguration :: Lens' Table (Maybe ExternalDataConfiguration)
 tabExternalDataConfiguration
@@ -3819,7 +4395,9 @@ tabId = lens _tabId (\ s a -> s{_tabId = a})
 
 -- | [Output-only] Describes the table type. The following values are
 -- supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined
--- by a SQL query. The default value is TABLE.
+-- by a SQL query. EXTERNAL: A table that references data stored in an
+-- external storage system, such as Google Cloud Storage. The default value
+-- is TABLE.
 tabType :: Lens' Table (Maybe Text)
 tabType = lens _tabType (\ s a -> s{_tabType = a})
 

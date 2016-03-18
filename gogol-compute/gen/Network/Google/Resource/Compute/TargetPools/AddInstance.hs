@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds instance url to targetPool.
+-- Adds an instance to a target pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.addInstance@.
 module Network.Google.Resource.Compute.TargetPools.AddInstance
@@ -58,7 +58,7 @@ type TargetPoolsAddInstanceResource =
                          ReqBody '[JSON] TargetPoolsAddInstanceRequest :>
                            Post '[JSON] Operation
 
--- | Adds instance url to targetPool.
+-- | Adds an instance to a target pool.
 --
 -- /See:/ 'targetPoolsAddInstance' smart constructor.
 data TargetPoolsAddInstance = TargetPoolsAddInstance
@@ -93,11 +93,12 @@ targetPoolsAddInstance pTpaiProject_ pTpaiTargetPool_ pTpaiPayload_ pTpaiRegion_
     , _tpaiRegion = pTpaiRegion_
     }
 
+-- | Project ID for this request.
 tpaiProject :: Lens' TargetPoolsAddInstance Text
 tpaiProject
   = lens _tpaiProject (\ s a -> s{_tpaiProject = a})
 
--- | Name of the TargetPool resource to which instance_url is to be added.
+-- | Name of the TargetPool resource to add instances to.
 tpaiTargetPool :: Lens' TargetPoolsAddInstance Text
 tpaiTargetPool
   = lens _tpaiTargetPool

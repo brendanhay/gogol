@@ -24,7 +24,7 @@
 -- product. All products have a schema, but this may be empty if no app
 -- restrictions are defined.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.getAppRestrictionsSchema@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.getAppRestrictionsSchema@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
     (
     -- * REST Resource

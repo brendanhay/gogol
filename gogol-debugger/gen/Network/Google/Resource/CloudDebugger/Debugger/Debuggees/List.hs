@@ -41,6 +41,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
     , ddlAccessToken
     , ddlUploadType
     , ddlBearerToken
+    , ddlClientVersion
     , ddlCallback
     ) where
 
@@ -61,9 +62,10 @@ type DebuggerDebuggeesListResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListDebuggeesResponse
+                           QueryParam "clientVersion" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListDebuggeesResponse
 
 -- | Lists all the debuggees that the user can set breakpoints to.
 --
@@ -77,6 +79,7 @@ data DebuggerDebuggeesList = DebuggerDebuggeesList
     , _ddlAccessToken     :: !(Maybe Text)
     , _ddlUploadType      :: !(Maybe Text)
     , _ddlBearerToken     :: !(Maybe Text)
+    , _ddlClientVersion   :: !(Maybe Text)
     , _ddlCallback        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,6 +103,8 @@ data DebuggerDebuggeesList = DebuggerDebuggeesList
 --
 -- * 'ddlBearerToken'
 --
+-- * 'ddlClientVersion'
+--
 -- * 'ddlCallback'
 debuggerDebuggeesList
     :: DebuggerDebuggeesList
@@ -113,6 +118,7 @@ debuggerDebuggeesList =
     , _ddlAccessToken = Nothing
     , _ddlUploadType = Nothing
     , _ddlBearerToken = Nothing
+    , _ddlClientVersion = Nothing
     , _ddlCallback = Nothing
     }
 
@@ -120,8 +126,8 @@ debuggerDebuggeesList =
 ddlXgafv :: Lens' DebuggerDebuggeesList (Maybe Text)
 ddlXgafv = lens _ddlXgafv (\ s a -> s{_ddlXgafv = a})
 
--- | When set to true the result includes all debuggees, otherwise only
--- debugees that are active.
+-- | When set to \`true\`, the result includes all debuggees. Otherwise, the
+-- result includes only debuggees that are active.
 ddlIncludeInactive :: Lens' DebuggerDebuggeesList (Maybe Bool)
 ddlIncludeInactive
   = lens _ddlIncludeInactive
@@ -133,8 +139,7 @@ ddlUploadProtocol
   = lens _ddlUploadProtocol
       (\ s a -> s{_ddlUploadProtocol = a})
 
--- | Set to the project number of the Google Cloud Platform to list the
--- debuggees that are part of that project.
+-- | Project number of a Google Cloud project whose debuggees to list.
 ddlProject :: Lens' DebuggerDebuggeesList (Maybe Text)
 ddlProject
   = lens _ddlProject (\ s a -> s{_ddlProject = a})
@@ -161,6 +166,13 @@ ddlBearerToken
   = lens _ddlBearerToken
       (\ s a -> s{_ddlBearerToken = a})
 
+-- | The client version making the call. Following: \`domain\/type\/version\`
+-- (e.g., \`google.com\/intellij\/v1\`).
+ddlClientVersion :: Lens' DebuggerDebuggeesList (Maybe Text)
+ddlClientVersion
+  = lens _ddlClientVersion
+      (\ s a -> s{_ddlClientVersion = a})
+
 -- | JSONP
 ddlCallback :: Lens' DebuggerDebuggeesList (Maybe Text)
 ddlCallback
@@ -175,6 +187,7 @@ instance GoogleRequest DebuggerDebuggeesList where
               _ddlAccessToken
               _ddlUploadType
               _ddlBearerToken
+              _ddlClientVersion
               _ddlCallback
               (Just AltJSON)
               debuggerService

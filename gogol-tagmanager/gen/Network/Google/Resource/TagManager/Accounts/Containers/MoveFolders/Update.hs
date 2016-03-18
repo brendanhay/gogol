@@ -37,6 +37,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
     , acmfuTriggerId
     , acmfuVariableId
     , acmfuFolderId
+    , acmfuPayload
     , acmfuAccountId
     , acmfuTagId
     ) where
@@ -58,7 +59,8 @@ type AccountsContainersMoveFoldersUpdateResource =
                      QueryParams "triggerId" Text :>
                        QueryParams "variableId" Text :>
                          QueryParams "tagId" Text :>
-                           QueryParam "alt" AltJSON :> Put '[JSON] ()
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Folder :> Put '[JSON] ()
 
 -- | Moves entities to a GTM Folder.
 --
@@ -68,6 +70,7 @@ data AccountsContainersMoveFoldersUpdate = AccountsContainersMoveFoldersUpdate
     , _acmfuTriggerId   :: !(Maybe [Text])
     , _acmfuVariableId  :: !(Maybe [Text])
     , _acmfuFolderId    :: !Text
+    , _acmfuPayload     :: !Folder
     , _acmfuAccountId   :: !Text
     , _acmfuTagId       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,20 +87,24 @@ data AccountsContainersMoveFoldersUpdate = AccountsContainersMoveFoldersUpdate
 --
 -- * 'acmfuFolderId'
 --
+-- * 'acmfuPayload'
+--
 -- * 'acmfuAccountId'
 --
 -- * 'acmfuTagId'
 accountsContainersMoveFoldersUpdate
     :: Text -- ^ 'acmfuContainerId'
     -> Text -- ^ 'acmfuFolderId'
+    -> Folder -- ^ 'acmfuPayload'
     -> Text -- ^ 'acmfuAccountId'
     -> AccountsContainersMoveFoldersUpdate
-accountsContainersMoveFoldersUpdate pAcmfuContainerId_ pAcmfuFolderId_ pAcmfuAccountId_ =
+accountsContainersMoveFoldersUpdate pAcmfuContainerId_ pAcmfuFolderId_ pAcmfuPayload_ pAcmfuAccountId_ =
     AccountsContainersMoveFoldersUpdate
     { _acmfuContainerId = pAcmfuContainerId_
     , _acmfuTriggerId = Nothing
     , _acmfuVariableId = Nothing
     , _acmfuFolderId = pAcmfuFolderId_
+    , _acmfuPayload = pAcmfuPayload_
     , _acmfuAccountId = pAcmfuAccountId_
     , _acmfuTagId = Nothing
     }
@@ -130,6 +137,11 @@ acmfuFolderId
   = lens _acmfuFolderId
       (\ s a -> s{_acmfuFolderId = a})
 
+-- | Multipart request metadata.
+acmfuPayload :: Lens' AccountsContainersMoveFoldersUpdate Folder
+acmfuPayload
+  = lens _acmfuPayload (\ s a -> s{_acmfuPayload = a})
+
 -- | The GTM Account ID.
 acmfuAccountId :: Lens' AccountsContainersMoveFoldersUpdate Text
 acmfuAccountId
@@ -152,6 +164,7 @@ instance GoogleRequest
               (_acmfuVariableId ^. _Default)
               (_acmfuTagId ^. _Default)
               (Just AltJSON)
+              _acmfuPayload
               tagManagerService
           where go
                   = buildClient

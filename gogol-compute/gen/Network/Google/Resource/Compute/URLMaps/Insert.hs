@@ -79,7 +79,7 @@ urlMapsInsert pUmiProject_ pUmiPayload_ =
     , _umiPayload = pUmiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umiProject :: Lens' URLMapsInsert Text
 umiProject
   = lens _umiProject (\ s a -> s{_umiProject = a})

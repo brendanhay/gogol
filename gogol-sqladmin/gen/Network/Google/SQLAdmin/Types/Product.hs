@@ -645,9 +645,11 @@ data Settings = Settings
     , _sKind                        :: !Text
     , _sPricingPlan                 :: !(Maybe Text)
     , _sIPConfiguration             :: !(Maybe IPConfiguration)
+    , _sMaintenanceWindow           :: !(Maybe MaintenanceWindow)
     , _sDatabaseReplicationEnabled  :: !(Maybe Bool)
     , _sTier                        :: !(Maybe Text)
     , _sDatabaseFlags               :: !(Maybe [DatabaseFlags])
+    , _sDataDiskType                :: !(Maybe Text)
     , _sCrashSafeReplicationEnabled :: !(Maybe Bool)
     , _sLocationPreference          :: !(Maybe LocationPreference)
     , _sBackupConfiguration         :: !(Maybe BackupConfiguration)
@@ -673,11 +675,15 @@ data Settings = Settings
 --
 -- * 'sIPConfiguration'
 --
+-- * 'sMaintenanceWindow'
+--
 -- * 'sDatabaseReplicationEnabled'
 --
 -- * 'sTier'
 --
 -- * 'sDatabaseFlags'
+--
+-- * 'sDataDiskType'
 --
 -- * 'sCrashSafeReplicationEnabled'
 --
@@ -696,16 +702,19 @@ settings =
     , _sKind = "sql#settings"
     , _sPricingPlan = Nothing
     , _sIPConfiguration = Nothing
+    , _sMaintenanceWindow = Nothing
     , _sDatabaseReplicationEnabled = Nothing
     , _sTier = Nothing
     , _sDatabaseFlags = Nothing
+    , _sDataDiskType = Nothing
     , _sCrashSafeReplicationEnabled = Nothing
     , _sLocationPreference = Nothing
     , _sBackupConfiguration = Nothing
     }
 
 -- | The type of replication this instance uses. This can be either
--- ASYNCHRONOUS or SYNCHRONOUS.
+-- ASYNCHRONOUS or SYNCHRONOUS. This property is only applicable to First
+-- Generation instances.
 sReplicationType :: Lens' Settings (Maybe Text)
 sReplicationType
   = lens _sReplicationType
@@ -715,7 +724,8 @@ sReplicationType
 -- instance should be activated and is applicable only when the instance
 -- state is RUNNABLE. This can be one of the following. ALWAYS: The
 -- instance should always be active. NEVER: The instance should never be
--- activated. ON_DEMAND: The instance is activated upon receiving requests.
+-- activated. ON_DEMAND: The instance is activated upon receiving requests;
+-- only applicable to First Generation instances.
 sActivationPolicy :: Lens' Settings (Maybe Text)
 sActivationPolicy
   = lens _sActivationPolicy
@@ -731,16 +741,16 @@ sSettingsVersion
       (\ s a -> s{_sSettingsVersion = a})
       . mapping _Coerce
 
--- | The size of data disk for the performance instance, specified in GB.
--- Setting this value for non-performance instances will result in an
--- error.
+-- | The size of data disk, in GB. The data disk size minimum is 10GB. This
+-- property is only applicable to Second Generation instances.
 sDataDiskSizeGb :: Lens' Settings (Maybe Int64)
 sDataDiskSizeGb
   = lens _sDataDiskSizeGb
       (\ s a -> s{_sDataDiskSizeGb = a})
       . mapping _Coerce
 
--- | The App Engine app IDs that can access this instance.
+-- | The App Engine app IDs that can access this instance. This property is
+-- only applicable to First Generation instances.
 sAuthorizedGaeApplications :: Lens' Settings [Text]
 sAuthorizedGaeApplications
   = lens _sAuthorizedGaeApplications
@@ -753,18 +763,27 @@ sKind :: Lens' Settings Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
 -- | The pricing plan for this instance. This can be either PER_USE or
--- PACKAGE.
+-- PACKAGE. Only PER_USE is supported for Second Generation instances.
 sPricingPlan :: Lens' Settings (Maybe Text)
 sPricingPlan
   = lens _sPricingPlan (\ s a -> s{_sPricingPlan = a})
 
 -- | The settings for IP Management. This allows to enable or disable the
 -- instance IP and manage which external networks can connect to the
--- instance.
+-- instance. The IPv4 address cannot be disabled for Second Generation
+-- instances.
 sIPConfiguration :: Lens' Settings (Maybe IPConfiguration)
 sIPConfiguration
   = lens _sIPConfiguration
       (\ s a -> s{_sIPConfiguration = a})
+
+-- | The maintenance window for this instance. This specifies when the
+-- instance may be restarted for maintenance purposes. This property is
+-- only applicable to Second Generation instances.
+sMaintenanceWindow :: Lens' Settings (Maybe MaintenanceWindow)
+sMaintenanceWindow
+  = lens _sMaintenanceWindow
+      (\ s a -> s{_sMaintenanceWindow = a})
 
 -- | Configuration specific to read replica instances. Indicates whether
 -- replication is enabled or not.
@@ -786,8 +805,17 @@ sDatabaseFlags
       . _Default
       . _Coerce
 
+-- | The type of data disk. Only supported for Second Generation instances.
+-- The default type is PD_SSD. This property is only applicable to Second
+-- Generation instances.
+sDataDiskType :: Lens' Settings (Maybe Text)
+sDataDiskType
+  = lens _sDataDiskType
+      (\ s a -> s{_sDataDiskType = a})
+
 -- | Configuration specific to read replica instances. Indicates whether
--- database flags for crash-safe replication are enabled.
+-- database flags for crash-safe replication are enabled. This property is
+-- only applicable to First Generation instances.
 sCrashSafeReplicationEnabled :: Lens' Settings (Maybe Bool)
 sCrashSafeReplicationEnabled
   = lens _sCrashSafeReplicationEnabled
@@ -795,7 +823,8 @@ sCrashSafeReplicationEnabled
 
 -- | The location preference settings. This allows the instance to be located
 -- as near as possible to either an App Engine app or GCE zone for better
--- performance.
+-- performance. App Engine co-location is only applicable to First
+-- Generation instances.
 sLocationPreference :: Lens' Settings (Maybe LocationPreference)
 sLocationPreference
   = lens _sLocationPreference
@@ -820,9 +849,11 @@ instance FromJSON Settings where
                      <*> (o .:? "kind" .!= "sql#settings")
                      <*> (o .:? "pricingPlan")
                      <*> (o .:? "ipConfiguration")
+                     <*> (o .:? "maintenanceWindow")
                      <*> (o .:? "databaseReplicationEnabled")
                      <*> (o .:? "tier")
                      <*> (o .:? "databaseFlags" .!= mempty)
+                     <*> (o .:? "dataDiskType")
                      <*> (o .:? "crashSafeReplicationEnabled")
                      <*> (o .:? "locationPreference")
                      <*> (o .:? "backupConfiguration"))
@@ -840,10 +871,12 @@ instance ToJSON Settings where
                   Just ("kind" .= _sKind),
                   ("pricingPlan" .=) <$> _sPricingPlan,
                   ("ipConfiguration" .=) <$> _sIPConfiguration,
+                  ("maintenanceWindow" .=) <$> _sMaintenanceWindow,
                   ("databaseReplicationEnabled" .=) <$>
                     _sDatabaseReplicationEnabled,
                   ("tier" .=) <$> _sTier,
                   ("databaseFlags" .=) <$> _sDatabaseFlags,
+                  ("dataDiskType" .=) <$> _sDataDiskType,
                   ("crashSafeReplicationEnabled" .=) <$>
                     _sCrashSafeReplicationEnabled,
                   ("locationPreference" .=) <$> _sLocationPreference,
@@ -1109,6 +1142,57 @@ instance ToJSON BinLogCoordinates where
                  [("binLogPosition" .=) <$> _blcBinLogPosition,
                   Just ("kind" .= _blcKind),
                   ("binLogFileName" .=) <$> _blcBinLogFileName])
+
+-- | The name and status of the failover replica. This property is applicable
+-- only to Second Generation instances.
+--
+-- /See:/ 'databaseInstanceFailoverReplica' smart constructor.
+data DatabaseInstanceFailoverReplica = DatabaseInstanceFailoverReplica
+    { _difrName      :: !(Maybe Text)
+    , _difrAvailable :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DatabaseInstanceFailoverReplica' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'difrName'
+--
+-- * 'difrAvailable'
+databaseInstanceFailoverReplica
+    :: DatabaseInstanceFailoverReplica
+databaseInstanceFailoverReplica =
+    DatabaseInstanceFailoverReplica
+    { _difrName = Nothing
+    , _difrAvailable = Nothing
+    }
+
+-- | The name of the failover replica.
+difrName :: Lens' DatabaseInstanceFailoverReplica (Maybe Text)
+difrName = lens _difrName (\ s a -> s{_difrName = a})
+
+-- | The availability status of the failover replica. A false status
+-- indicates that the failover replica is out of sync. The master can only
+-- failover to the falover replica when the status is true.
+difrAvailable :: Lens' DatabaseInstanceFailoverReplica (Maybe Bool)
+difrAvailable
+  = lens _difrAvailable
+      (\ s a -> s{_difrAvailable = a})
+
+instance FromJSON DatabaseInstanceFailoverReplica
+         where
+        parseJSON
+          = withObject "DatabaseInstanceFailoverReplica"
+              (\ o ->
+                 DatabaseInstanceFailoverReplica <$>
+                   (o .:? "name") <*> (o .:? "available"))
+
+instance ToJSON DatabaseInstanceFailoverReplica where
+        toJSON DatabaseInstanceFailoverReplica{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _difrName,
+                  ("available" .=) <$> _difrAvailable])
 
 -- | Tiers list response.
 --
@@ -1525,6 +1609,77 @@ instance ToJSON IPConfiguration where
                   ("requireSsl" .=) <$> _icRequireSSL,
                   ("ipv4Enabled" .=) <$> _icIPv4Enabled])
 
+-- | Maintenance window. This specifies when a v2 Cloud SQL instance should
+-- preferably be restarted for system maintenance puruposes.
+--
+-- /See:/ 'maintenanceWindow' smart constructor.
+data MaintenanceWindow = MaintenanceWindow
+    { _mwKind        :: !Text
+    , _mwDay         :: !(Maybe (Textual Int32))
+    , _mwHour        :: !(Maybe (Textual Int32))
+    , _mwUpdateTrack :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mwKind'
+--
+-- * 'mwDay'
+--
+-- * 'mwHour'
+--
+-- * 'mwUpdateTrack'
+maintenanceWindow
+    :: MaintenanceWindow
+maintenanceWindow =
+    MaintenanceWindow
+    { _mwKind = "sql#maintenanceWindow"
+    , _mwDay = Nothing
+    , _mwHour = Nothing
+    , _mwUpdateTrack = Nothing
+    }
+
+-- | This is always sql#maintenanceWindow.
+mwKind :: Lens' MaintenanceWindow Text
+mwKind = lens _mwKind (\ s a -> s{_mwKind = a})
+
+-- | day of week (1-7), starting on Monday.
+mwDay :: Lens' MaintenanceWindow (Maybe Int32)
+mwDay
+  = lens _mwDay (\ s a -> s{_mwDay = a}) .
+      mapping _Coerce
+
+-- | hour of day - 0 to 23.
+mwHour :: Lens' MaintenanceWindow (Maybe Int32)
+mwHour
+  = lens _mwHour (\ s a -> s{_mwHour = a}) .
+      mapping _Coerce
+
+mwUpdateTrack :: Lens' MaintenanceWindow (Maybe Text)
+mwUpdateTrack
+  = lens _mwUpdateTrack
+      (\ s a -> s{_mwUpdateTrack = a})
+
+instance FromJSON MaintenanceWindow where
+        parseJSON
+          = withObject "MaintenanceWindow"
+              (\ o ->
+                 MaintenanceWindow <$>
+                   (o .:? "kind" .!= "sql#maintenanceWindow") <*>
+                     (o .:? "day")
+                     <*> (o .:? "hour")
+                     <*> (o .:? "updateTrack"))
+
+instance ToJSON MaintenanceWindow where
+        toJSON MaintenanceWindow{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mwKind), ("day" .=) <$> _mwDay,
+                  ("hour" .=) <$> _mwHour,
+                  ("updateTrack" .=) <$> _mwUpdateTrack])
+
 -- | Options for importing data as CSV.
 --
 -- /See:/ 'importContextCSVImportOptions' smart constructor.
@@ -1682,8 +1837,8 @@ uPassword
 
 -- | The host name from which the user can connect. For insert operations,
 -- host defaults to an empty string. For update operations, host is
--- specified as part of the request URL. The host name is not mutable with
--- this API.
+-- specified as part of the request URL. The host name cannot be updated
+-- after insertion.
 uHost :: Lens' User (Maybe Text)
 uHost = lens _uHost (\ s a -> s{_uHost = a})
 
@@ -1720,7 +1875,8 @@ instance ToJSON User where
 --
 -- /See:/ 'databaseInstance' smart constructor.
 data DatabaseInstance = DatabaseInstance
-    { _datMaxDiskSize                :: !(Maybe (Textual Int64))
+    { _datBackendType                :: !(Maybe Text)
+    , _datMaxDiskSize                :: !(Maybe (Textual Int64))
     , _datOnPremisesConfiguration    :: !(Maybe OnPremisesConfiguration)
     , _datEtag                       :: !(Maybe Text)
     , _datState                      :: !(Maybe Text)
@@ -1734,17 +1890,21 @@ data DatabaseInstance = DatabaseInstance
     , _datInstanceType               :: !(Maybe Text)
     , _datReplicaNames               :: !(Maybe [Text])
     , _datSelfLink                   :: !(Maybe Text)
+    , _datFailoverReplica            :: !(Maybe DatabaseInstanceFailoverReplica)
     , _datName                       :: !(Maybe Text)
     , _datMasterInstanceName         :: !(Maybe Text)
     , _datReplicaConfiguration       :: !(Maybe ReplicaConfiguration)
     , _datRegion                     :: !(Maybe Text)
     , _datServiceAccountEmailAddress :: !(Maybe Text)
     , _datIPAddresses                :: !(Maybe [IPMApping])
+    , _datSuspensionReason           :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabaseInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'datBackendType'
 --
 -- * 'datMaxDiskSize'
 --
@@ -1774,6 +1934,8 @@ data DatabaseInstance = DatabaseInstance
 --
 -- * 'datSelfLink'
 --
+-- * 'datFailoverReplica'
+--
 -- * 'datName'
 --
 -- * 'datMasterInstanceName'
@@ -1785,11 +1947,14 @@ data DatabaseInstance = DatabaseInstance
 -- * 'datServiceAccountEmailAddress'
 --
 -- * 'datIPAddresses'
+--
+-- * 'datSuspensionReason'
 databaseInstance
     :: DatabaseInstance
 databaseInstance =
     DatabaseInstance
-    { _datMaxDiskSize = Nothing
+    { _datBackendType = Nothing
+    , _datMaxDiskSize = Nothing
     , _datOnPremisesConfiguration = Nothing
     , _datEtag = Nothing
     , _datState = Nothing
@@ -1803,13 +1968,23 @@ databaseInstance =
     , _datInstanceType = Nothing
     , _datReplicaNames = Nothing
     , _datSelfLink = Nothing
+    , _datFailoverReplica = Nothing
     , _datName = Nothing
     , _datMasterInstanceName = Nothing
     , _datReplicaConfiguration = Nothing
     , _datRegion = Nothing
     , _datServiceAccountEmailAddress = Nothing
     , _datIPAddresses = Nothing
+    , _datSuspensionReason = Nothing
     }
+
+-- | FIRST_GEN: Basic Cloud SQL instance that runs in a Google-managed
+-- container. SECOND_GEN: A newer Cloud SQL backend that runs in a Compute
+-- Engine VM. EXTERNAL: A MySQL server that is not managed by Google.
+datBackendType :: Lens' DatabaseInstance (Maybe Text)
+datBackendType
+  = lens _datBackendType
+      (\ s a -> s{_datBackendType = a})
 
 -- | The maximum disk size of the instance in bytes.
 datMaxDiskSize :: Lens' DatabaseInstance (Maybe Int64)
@@ -1837,7 +2012,8 @@ datEtag = lens _datEtag (\ s a -> s{_datEtag = a})
 datState :: Lens' DatabaseInstance (Maybe Text)
 datState = lens _datState (\ s a -> s{_datState = a})
 
--- | The IPv6 address assigned to the instance.
+-- | The IPv6 address assigned to the instance. This property is applicable
+-- only to First Generation instances.
 datIPv6Address :: Lens' DatabaseInstance (Maybe Text)
 datIPv6Address
   = lens _datIPv6Address
@@ -1850,7 +2026,7 @@ datServerCaCert
       (\ s a -> s{_datServerCaCert = a})
 
 -- | The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6.
--- Defaults to MYSQL_5_5. The databaseVersion can not be changed after
+-- Defaults to MYSQL_5_6. The databaseVersion can not be changed after
 -- instance creation.
 datDatabaseVersion :: Lens' DatabaseInstance (Maybe Text)
 datDatabaseVersion
@@ -1872,7 +2048,12 @@ datSettings
 datKind :: Lens' DatabaseInstance Text
 datKind = lens _datKind (\ s a -> s{_datKind = a})
 
--- | The current disk usage of the instance in bytes.
+-- | The current disk usage of the instance in bytes. This property has been
+-- deprecated. Users should use the
+-- \"cloudsql.googleapis.com\/database\/disk\/bytes_used\" metric in Cloud
+-- Monitoring API instead. Please see
+-- https:\/\/groups.google.com\/d\/msg\/google-cloud-sql-announce\/I_7-F9EBhT0\/BtvFtdFeAgAJ
+-- for details.
 datCurrentDiskSize :: Lens' DatabaseInstance (Maybe Int64)
 datCurrentDiskSize
   = lens _datCurrentDiskSize
@@ -1902,6 +2083,13 @@ datSelfLink :: Lens' DatabaseInstance (Maybe Text)
 datSelfLink
   = lens _datSelfLink (\ s a -> s{_datSelfLink = a})
 
+-- | The name and status of the failover replica. This property is applicable
+-- only to Second Generation instances.
+datFailoverReplica :: Lens' DatabaseInstance (Maybe DatabaseInstanceFailoverReplica)
+datFailoverReplica
+  = lens _datFailoverReplica
+      (\ s a -> s{_datFailoverReplica = a})
+
 -- | Name of the Cloud SQL instance. This does not include the project ID.
 datName :: Lens' DatabaseInstance (Maybe Text)
 datName = lens _datName (\ s a -> s{_datName = a})
@@ -1920,14 +2108,17 @@ datReplicaConfiguration
   = lens _datReplicaConfiguration
       (\ s a -> s{_datReplicaConfiguration = a})
 
--- | The geographical region. Can be us-central, asia-east1 or europe-west1.
--- Defaults to us-central. The region can not be changed after instance
--- creation.
+-- | The geographical region. Can be us-central (FIRST_GEN instances only),
+-- us-central1 (SECOND_GEN instances only), asia-east1 or europe-west1.
+-- Defaults to us-central or us-central1 depending on the instance type
+-- (First Generation or Second Generation). The region can not be changed
+-- after instance creation.
 datRegion :: Lens' DatabaseInstance (Maybe Text)
 datRegion
   = lens _datRegion (\ s a -> s{_datRegion = a})
 
--- | The service account email address assigned to the instance.
+-- | The service account email address assigned to the instance. This
+-- property is applicable only to Second Generation instances.
 datServiceAccountEmailAddress :: Lens' DatabaseInstance (Maybe Text)
 datServiceAccountEmailAddress
   = lens _datServiceAccountEmailAddress
@@ -1941,12 +2132,20 @@ datIPAddresses
       . _Default
       . _Coerce
 
+-- | If the instance state is SUSPENDED, the reason for the suspension.
+datSuspensionReason :: Lens' DatabaseInstance [Text]
+datSuspensionReason
+  = lens _datSuspensionReason
+      (\ s a -> s{_datSuspensionReason = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON DatabaseInstance where
         parseJSON
           = withObject "DatabaseInstance"
               (\ o ->
                  DatabaseInstance <$>
-                   (o .:? "maxDiskSize") <*>
+                   (o .:? "backendType") <*> (o .:? "maxDiskSize") <*>
                      (o .:? "onPremisesConfiguration")
                      <*> (o .:? "etag")
                      <*> (o .:? "state")
@@ -1960,18 +2159,21 @@ instance FromJSON DatabaseInstance where
                      <*> (o .:? "instanceType")
                      <*> (o .:? "replicaNames" .!= mempty)
                      <*> (o .:? "selfLink")
+                     <*> (o .:? "failoverReplica")
                      <*> (o .:? "name")
                      <*> (o .:? "masterInstanceName")
                      <*> (o .:? "replicaConfiguration")
                      <*> (o .:? "region")
                      <*> (o .:? "serviceAccountEmailAddress")
-                     <*> (o .:? "ipAddresses" .!= mempty))
+                     <*> (o .:? "ipAddresses" .!= mempty)
+                     <*> (o .:? "suspensionReason" .!= mempty))
 
 instance ToJSON DatabaseInstance where
         toJSON DatabaseInstance{..}
           = object
               (catMaybes
-                 [("maxDiskSize" .=) <$> _datMaxDiskSize,
+                 [("backendType" .=) <$> _datBackendType,
+                  ("maxDiskSize" .=) <$> _datMaxDiskSize,
                   ("onPremisesConfiguration" .=) <$>
                     _datOnPremisesConfiguration,
                   ("etag" .=) <$> _datEtag, ("state" .=) <$> _datState,
@@ -1985,6 +2187,7 @@ instance ToJSON DatabaseInstance where
                   ("instanceType" .=) <$> _datInstanceType,
                   ("replicaNames" .=) <$> _datReplicaNames,
                   ("selfLink" .=) <$> _datSelfLink,
+                  ("failoverReplica" .=) <$> _datFailoverReplica,
                   ("name" .=) <$> _datName,
                   ("masterInstanceName" .=) <$> _datMasterInstanceName,
                   ("replicaConfiguration" .=) <$>
@@ -1992,7 +2195,8 @@ instance ToJSON DatabaseInstance where
                   ("region" .=) <$> _datRegion,
                   ("serviceAccountEmailAddress" .=) <$>
                     _datServiceAccountEmailAddress,
-                  ("ipAddresses" .=) <$> _datIPAddresses])
+                  ("ipAddresses" .=) <$> _datIPAddresses,
+                  ("suspensionReason" .=) <$> _datSuspensionReason])
 
 -- | Database instance clone context.
 --
@@ -2068,6 +2272,7 @@ data Flag = Flag
     , _fAllowedStringValues :: !(Maybe [Text])
     , _fType                :: !(Maybe Text)
     , _fMinValue            :: !(Maybe (Textual Int64))
+    , _fRequiresRestart     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Flag' with the minimum fields required to make a request.
@@ -2087,6 +2292,8 @@ data Flag = Flag
 -- * 'fType'
 --
 -- * 'fMinValue'
+--
+-- * 'fRequiresRestart'
 flag
     :: Flag
 flag =
@@ -2098,6 +2305,7 @@ flag =
     , _fAllowedStringValues = Nothing
     , _fType = Nothing
     , _fMinValue = Nothing
+    , _fRequiresRestart = Nothing
     }
 
 -- | For INTEGER flags, the maximum allowed value.
@@ -2143,6 +2351,13 @@ fMinValue
   = lens _fMinValue (\ s a -> s{_fMinValue = a}) .
       mapping _Coerce
 
+-- | Indicates whether changing this flag will trigger a database restart.
+-- Only applicable to Second Generation instances.
+fRequiresRestart :: Lens' Flag (Maybe Bool)
+fRequiresRestart
+  = lens _fRequiresRestart
+      (\ s a -> s{_fRequiresRestart = a})
+
 instance FromJSON Flag where
         parseJSON
           = withObject "Flag"
@@ -2153,7 +2368,8 @@ instance FromJSON Flag where
                      <*> (o .:? "name")
                      <*> (o .:? "allowedStringValues" .!= mempty)
                      <*> (o .:? "type")
-                     <*> (o .:? "minValue"))
+                     <*> (o .:? "minValue")
+                     <*> (o .:? "requiresRestart"))
 
 instance ToJSON Flag where
         toJSON Flag{..}
@@ -2165,7 +2381,8 @@ instance ToJSON Flag where
                   ("name" .=) <$> _fName,
                   ("allowedStringValues" .=) <$> _fAllowedStringValues,
                   ("type" .=) <$> _fType,
-                  ("minValue" .=) <$> _fMinValue])
+                  ("minValue" .=) <$> _fMinValue,
+                  ("requiresRestart" .=) <$> _fRequiresRestart])
 
 -- | Instance failover request.
 --

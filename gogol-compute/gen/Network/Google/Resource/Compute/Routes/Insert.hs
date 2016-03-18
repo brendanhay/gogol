@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a route resource in the specified project using the data
+-- Creates a Route resource in the specified project using the data
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.insert@.
@@ -53,7 +53,7 @@ type RoutesInsertResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Route :> Post '[JSON] Operation
 
--- | Creates a route resource in the specified project using the data
+-- | Creates a Route resource in the specified project using the data
 -- included in the request.
 --
 -- /See:/ 'routesInsert' smart constructor.
@@ -79,7 +79,7 @@ routesInsert pRiProject_ pRiPayload_ =
     , _riPayload = pRiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 riProject :: Lens' RoutesInsert Text
 riProject
   = lens _riProject (\ s a -> s{_riProject = a})

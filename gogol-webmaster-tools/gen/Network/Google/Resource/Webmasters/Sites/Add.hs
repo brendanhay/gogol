@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a site to the set of the user\'s sites in Webmaster Tools.
+-- Adds a site to the set of the user\'s sites in Search Console.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.add@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.add@.
 module Network.Google.Resource.Webmasters.Sites.Add
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ type SitesAddResource =
            Capture "siteUrl" Text :>
              QueryParam "alt" AltJSON :> Put '[JSON] ()
 
--- | Adds a site to the set of the user\'s sites in Webmaster Tools.
+-- | Adds a site to the set of the user\'s sites in Search Console.
 --
 -- /See:/ 'sitesAdd' smart constructor.
 newtype SitesAdd = SitesAdd

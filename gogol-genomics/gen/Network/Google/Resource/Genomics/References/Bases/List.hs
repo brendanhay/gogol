@@ -20,11 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the bases in a reference, optionally restricted to a range.
+-- Lists the bases in a reference, optionally restricted to a range. For
+-- the definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 -- Implements
 -- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
--- /See:/ < Genomics API Reference> for @genomics.references.bases.list@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.references.bases.list@.
 module Network.Google.Resource.Genomics.References.Bases.List
     (
     -- * REST Resource
@@ -73,7 +76,10 @@ type ReferencesBasesListResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListBasesResponse
 
--- | Lists the bases in a reference, optionally restricted to a range.
+-- | Lists the bases in a reference, optionally restricted to a range. For
+-- the definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 -- Implements
 -- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
@@ -197,7 +203,9 @@ rblPageToken :: Lens' ReferencesBasesList (Maybe Text)
 rblPageToken
   = lens _rblPageToken (\ s a -> s{_rblPageToken = a})
 
--- | Specifies the maximum number of bases to return in a single page.
+-- | The maximum number of bases to return in a single page. If unspecified,
+-- defaults to 200Kbp (kilo base pairs). The maximum value is 10Mbp (mega
+-- base pairs).
 rblPageSize :: Lens' ReferencesBasesList (Maybe Int32)
 rblPageSize
   = lens _rblPageSize (\ s a -> s{_rblPageSize = a}) .

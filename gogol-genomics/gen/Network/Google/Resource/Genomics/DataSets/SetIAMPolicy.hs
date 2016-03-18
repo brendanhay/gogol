@@ -21,9 +21,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified dataset. Replaces any
--- existing policy. See Setting a Policy for more information.
+-- existing policy. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- See Setting a Policy for more information.
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.setIamPolicy@.
 module Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
     (
     -- * REST Resource
@@ -65,7 +68,10 @@ type DataSetsSetIAMPolicyResource =
                            Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified dataset. Replaces any
--- existing policy. See Setting a Policy for more information.
+-- existing policy. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- See Setting a Policy for more information.
 --
 -- /See:/ 'dataSetsSetIAMPolicy' smart constructor.
 data DataSetsSetIAMPolicy = DataSetsSetIAMPolicy

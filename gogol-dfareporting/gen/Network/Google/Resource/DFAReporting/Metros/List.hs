@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'MetrosList' request conforms to.
 type MetrosListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "metros" :>

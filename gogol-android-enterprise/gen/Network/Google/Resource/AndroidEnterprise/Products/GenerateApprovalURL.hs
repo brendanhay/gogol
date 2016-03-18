@@ -29,7 +29,7 @@
 -- property in a Products.approve call to approve the product. This URL can
 -- only be used to display permissions for up to 1 day.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.generateApprovalUrl@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.generateApprovalUrl@.
 module Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
     (
     -- * REST Resource

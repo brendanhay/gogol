@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'PermissionsList' request conforms to.
 type PermissionsListResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "permissions" :>
@@ -70,7 +70,7 @@ permissionsList pPlFileId_ =
     { _plFileId = pPlFileId_
     }
 
--- | The ID for the file.
+-- | The ID of the file.
 plFileId :: Lens' PermissionsList Text
 plFileId = lens _plFileId (\ s a -> s{_plFileId = a})
 

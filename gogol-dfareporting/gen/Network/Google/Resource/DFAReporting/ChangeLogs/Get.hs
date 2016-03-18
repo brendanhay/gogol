@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ChangeLogsGet' request conforms to.
 type ChangeLogsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>

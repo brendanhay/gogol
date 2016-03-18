@@ -37,6 +37,11 @@ module Network.Google.TagManager.Types
     , listFoldersResponse
     , lfrFolders
 
+    -- * ListEnvironmentsResponse
+    , ListEnvironmentsResponse
+    , listEnvironmentsResponse
+    , lerEnvironments
+
     -- * PublishContainerVersionResponse
     , PublishContainerVersionResponse
     , publishContainerVersionResponse
@@ -130,6 +135,22 @@ module Network.Google.TagManager.Types
     , uaEmailAddress
     , uaContainerAccess
     , uaPermissionId
+
+    -- * Environment
+    , Environment
+    , environment
+    , eContainerId
+    , eFingerprint
+    , eContainerVersionId
+    , eURL
+    , eAuthorizationCode
+    , eAccountId
+    , eName
+    , eEnableDebug
+    , eEnvironmentId
+    , eType
+    , eAuthorizationTimestampMs
+    , eDescription
 
     -- * AccountAccess
     , AccountAccess
@@ -254,6 +275,9 @@ module Network.Google.TagManager.Types
     , cvTrigger
     , cvNotes
 
+    -- * EnvironmentType
+    , EnvironmentType (..)
+
     -- * SetupTag
     , SetupTag
     , setupTag
@@ -327,7 +351,7 @@ import           Network.Google.TagManager.Types.Product
 import           Network.Google.TagManager.Types.Sum
 
 -- | Default request referring to version 'v1' of the Tag Manager API. This contains the host and root path used as a starting point for constructing service requests.
-tagManagerService :: Service
+tagManagerService :: ServiceConfig
 tagManagerService
   = defaultService (ServiceId "tagmanager:v1")
       "www.googleapis.com"

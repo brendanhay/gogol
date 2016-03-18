@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a snapshot of this disk.
+-- Creates a snapshot of a specified persistent disk.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.createSnapshot@.
 module Network.Google.Resource.Compute.Disks.CreateSnapshot
@@ -57,7 +57,7 @@ type DisksCreateSnapshotResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Snapshot :> Post '[JSON] Operation
 
--- | Creates a snapshot of this disk.
+-- | Creates a snapshot of a specified persistent disk.
 --
 -- /See:/ 'disksCreateSnapshot' smart constructor.
 data DisksCreateSnapshot = DisksCreateSnapshot

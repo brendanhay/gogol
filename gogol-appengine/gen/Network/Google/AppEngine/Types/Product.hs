@@ -20,42 +20,123 @@ module Network.Google.AppEngine.Types.Product where
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
+-- | Target scaling by network usage (for VM runtimes only).
+--
+-- /See:/ 'networkUtilization' smart constructor.
+data NetworkUtilization = NetworkUtilization
+    { _nuTargetReceivedBytesPerSec   :: !(Maybe (Textual Int32))
+    , _nuTargetSentPacketsPerSec     :: !(Maybe (Textual Int32))
+    , _nuTargetReceivedPacketsPerSec :: !(Maybe (Textual Int32))
+    , _nuTargetSentBytesPerSec       :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NetworkUtilization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nuTargetReceivedBytesPerSec'
+--
+-- * 'nuTargetSentPacketsPerSec'
+--
+-- * 'nuTargetReceivedPacketsPerSec'
+--
+-- * 'nuTargetSentBytesPerSec'
+networkUtilization
+    :: NetworkUtilization
+networkUtilization =
+    NetworkUtilization
+    { _nuTargetReceivedBytesPerSec = Nothing
+    , _nuTargetSentPacketsPerSec = Nothing
+    , _nuTargetReceivedPacketsPerSec = Nothing
+    , _nuTargetSentBytesPerSec = Nothing
+    }
+
+-- | Target bytes per second received.
+nuTargetReceivedBytesPerSec :: Lens' NetworkUtilization (Maybe Int32)
+nuTargetReceivedBytesPerSec
+  = lens _nuTargetReceivedBytesPerSec
+      (\ s a -> s{_nuTargetReceivedBytesPerSec = a})
+      . mapping _Coerce
+
+-- | Target packets per second sent.
+nuTargetSentPacketsPerSec :: Lens' NetworkUtilization (Maybe Int32)
+nuTargetSentPacketsPerSec
+  = lens _nuTargetSentPacketsPerSec
+      (\ s a -> s{_nuTargetSentPacketsPerSec = a})
+      . mapping _Coerce
+
+-- | Target packets per second received.
+nuTargetReceivedPacketsPerSec :: Lens' NetworkUtilization (Maybe Int32)
+nuTargetReceivedPacketsPerSec
+  = lens _nuTargetReceivedPacketsPerSec
+      (\ s a -> s{_nuTargetReceivedPacketsPerSec = a})
+      . mapping _Coerce
+
+-- | Target bytes per second sent.
+nuTargetSentBytesPerSec :: Lens' NetworkUtilization (Maybe Int32)
+nuTargetSentBytesPerSec
+  = lens _nuTargetSentBytesPerSec
+      (\ s a -> s{_nuTargetSentBytesPerSec = a})
+      . mapping _Coerce
+
+instance FromJSON NetworkUtilization where
+        parseJSON
+          = withObject "NetworkUtilization"
+              (\ o ->
+                 NetworkUtilization <$>
+                   (o .:? "targetReceivedBytesPerSec") <*>
+                     (o .:? "targetSentPacketsPerSec")
+                     <*> (o .:? "targetReceivedPacketsPerSec")
+                     <*> (o .:? "targetSentBytesPerSec"))
+
+instance ToJSON NetworkUtilization where
+        toJSON NetworkUtilization{..}
+          = object
+              (catMaybes
+                 [("targetReceivedBytesPerSec" .=) <$>
+                    _nuTargetReceivedBytesPerSec,
+                  ("targetSentPacketsPerSec" .=) <$>
+                    _nuTargetSentPacketsPerSec,
+                  ("targetReceivedPacketsPerSec" .=) <$>
+                    _nuTargetReceivedPacketsPerSec,
+                  ("targetSentBytesPerSec" .=) <$>
+                    _nuTargetSentBytesPerSec])
+
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
 -- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
 -- designed to be: - Simple to use and understand for most users - Flexible
 -- enough to meet unexpected needs # Overview The \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of
--- [google.rpc.Code][google.rpc.Code], but it may accept additional error
--- codes if needed. The error message should be a developer-facing English
--- message that helps developers *understand* and *resolve* the error. If a
--- localized user-facing error message is needed, put the localized message
--- in the error details or localize it in the client. The optional error
--- details may contain arbitrary information about the error. There is a
--- predefined set of error detail types in the package \`google.rpc\` which
--- can be used for common error conditions. # Language mapping The
--- \`Status\` message is the logical representation of the error model, but
--- it is not necessarily the actual wire format. When the \`Status\`
--- message is exposed in different client libraries and different wire
--- protocols, it can be mapped differently. For example, it will likely be
--- mapped to some exceptions in Java, but more likely mapped to some error
--- codes in C. # Other uses The error model and the \`Status\` message can
--- be used in a variety of environments, either with or without APIs, to
--- provide a consistent developer experience across different environments.
--- Example uses of this error model include: - Partial errors. If a service
--- needs to return partial errors to the client, it may embed the
--- \`Status\` in the normal response to indicate the partial errors. -
--- Workflow errors. A typical workflow has multiple steps. Each step may
--- have a \`Status\` message for error reporting purpose. - Batch
--- operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. The error code should be an enum value of google.rpc.Code, but
+-- it may accept additional error codes if needed. The error message should
+-- be a developer-facing English message that helps developers *understand*
+-- and *resolve* the error. If a localized user-facing error message is
+-- needed, put the localized message in the error details or localize it in
+-- the client. The optional error details may contain arbitrary information
+-- about the error. There is a predefined set of error detail types in the
+-- package \`google.rpc\` which can be used for common error conditions. #
+-- Language mapping The \`Status\` message is the logical representation of
+-- the error model, but it is not necessarily the actual wire format. When
+-- the \`Status\` message is exposed in different client libraries and
+-- different wire protocols, it can be mapped differently. For example, it
+-- will likely be mapped to some exceptions in Java, but more likely mapped
+-- to some error codes in C. # Other uses The error model and the
+-- \`Status\` message can be used in a variety of environments, either with
+-- or without APIs, to provide a consistent developer experience across
+-- different environments. Example uses of this error model include: -
+-- Partial errors. If a service needs to return partial errors to the
+-- client, it may embed the \`Status\` in the normal response to indicate
+-- the partial errors. - Workflow errors. A typical workflow has multiple
+-- steps. Each step may have a \`Status\` message for error reporting
+-- purpose. - Batch operations. If a client uses batch request and batch
+-- response, the \`Status\` message should be used directly inside batch
+-- response, one for each error sub-response. - Asynchronous operations. If
+-- an API call embeds asynchronous operation results in its response, the
+-- status of those operations should be represented directly using the
+-- \`Status\` message. - Logging. If some API errors are stored in logs,
+-- the message \`Status\` could be used directly after any stripping needed
+-- for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
@@ -90,8 +171,7 @@ sDetails
       _Default
       . _Coerce
 
--- | The status code, which should be an enum value of
--- [google.rpc.Code][google.rpc.Code].
+-- | The status code, which should be an enum value of google.rpc.Code.
 sCode :: Lens' Status (Maybe Int32)
 sCode
   = lens _sCode (\ s a -> s{_sCode = a}) .
@@ -99,8 +179,7 @@ sCode
 
 -- | A developer-facing error message, which should be in English. Any
 -- user-facing error message should be localized and sent in the
--- [google.rpc.Status.details][google.rpc.Status.details] field, or
--- localized by the client.
+-- google.rpc.Status.details field, or localized by the client.
 sMessage :: Lens' Status (Maybe Text)
 sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
 
@@ -157,10 +236,10 @@ instance FromJSON OperationSchema where
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
 
--- | Configuration for traffic splitting for versions within a single module.
--- Traffic splitting allows traffic directed to the module to be assigned
--- to one of several versions in a fractional way, enabling experiments and
--- canarying new builds, for example.
+-- | Configuration for traffic splitting for versions within a single
+-- service. Traffic splitting allows traffic directed to the service to be
+-- assigned to one of several versions in a fractional way, enabling
+-- experiments and canarying new builds, for example.
 --
 -- /See:/ 'trafficSplit' smart constructor.
 data TrafficSplit = TrafficSplit
@@ -190,14 +269,14 @@ tsShardBy :: Lens' TrafficSplit (Maybe Text)
 tsShardBy
   = lens _tsShardBy (\ s a -> s{_tsShardBy = a})
 
--- | Mapping from module version IDs within the module to fractional (0.000,
--- 1] allocations of traffic for that version. Each version may only be
--- specified once, but some versions in the module may not have any traffic
--- allocation. Modules that have traffic allocated in this field may not be
--- deleted until the module is deleted, or their traffic allocation is
--- removed. Allocations must sum to 1. Supports precision up to two decimal
--- places for IP-based splits and up to three decimal places for
--- cookie-based splits.
+-- | Mapping from service version IDs within the service to fractional
+-- (0.000, 1] allocations of traffic for that version. Each version may
+-- only be specified once, but some versions in the service may not have
+-- any traffic allocation. Services that have traffic allocated in this
+-- field may not be deleted until the service is deleted, or their traffic
+-- allocation is removed. Allocations must sum to 1. Supports precision up
+-- to two decimal places for IP-based splits and up to three decimal places
+-- for cookie-based splits.
 tsAllocations :: Lens' TrafficSplit (Maybe TrafficSplitAllocations)
 tsAllocations
   = lens _tsAllocations
@@ -251,6 +330,57 @@ instance ToJSON ScriptHandler where
           = object
               (catMaybes [("scriptPath" .=) <$> _shScriptPath])
 
+-- | Response message for \`Services.ListServices\`.
+--
+-- /See:/ 'listServicesResponse' smart constructor.
+data ListServicesResponse = ListServicesResponse
+    { _lsrNextPageToken :: !(Maybe Text)
+    , _lsrServices      :: !(Maybe [Service])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrNextPageToken'
+--
+-- * 'lsrServices'
+listServicesResponse
+    :: ListServicesResponse
+listServicesResponse =
+    ListServicesResponse
+    { _lsrNextPageToken = Nothing
+    , _lsrServices = Nothing
+    }
+
+-- | Continuation token for fetching the next page of results.
+lsrNextPageToken :: Lens' ListServicesResponse (Maybe Text)
+lsrNextPageToken
+  = lens _lsrNextPageToken
+      (\ s a -> s{_lsrNextPageToken = a})
+
+-- | The services belonging to the requested application.
+lsrServices :: Lens' ListServicesResponse [Service]
+lsrServices
+  = lens _lsrServices (\ s a -> s{_lsrServices = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListServicesResponse where
+        parseJSON
+          = withObject "ListServicesResponse"
+              (\ o ->
+                 ListServicesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "services" .!= mempty))
+
+instance ToJSON ListServicesResponse where
+        toJSON ListServicesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("services" .=) <$> _lsrServices])
+
 -- | A URL pattern and description of how it should be handled. App Engine
 -- can handle URLs by executing application code, or by serving static
 -- files uploaded with the code, such as images, CSS or JavaScript.
@@ -265,7 +395,6 @@ data URLMap = URLMap
     , _umAuthFailAction           :: !(Maybe Text)
     , _umStaticFiles              :: !(Maybe StaticFilesHandler)
     , _umLogin                    :: !(Maybe Text)
-    , _umStaticDirectory          :: !(Maybe StaticDirectoryHandler)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMap' with the minimum fields required to make a request.
@@ -287,8 +416,6 @@ data URLMap = URLMap
 -- * 'umStaticFiles'
 --
 -- * 'umLogin'
---
--- * 'umStaticDirectory'
 urlMap
     :: URLMap
 urlMap =
@@ -301,7 +428,6 @@ urlMap =
     , _umAuthFailAction = Nothing
     , _umStaticFiles = Nothing
     , _umLogin = Nothing
-    , _umStaticDirectory = Nothing
     }
 
 -- | Executes a script to handle the request that matches the URL pattern.
@@ -353,14 +479,6 @@ umStaticFiles
 umLogin :: Lens' URLMap (Maybe Text)
 umLogin = lens _umLogin (\ s a -> s{_umLogin = a})
 
--- | Serves the entire contents of a directory as static files. This
--- attribute is deprecated. You can mimic the behavior of static
--- directories using static files.
-umStaticDirectory :: Lens' URLMap (Maybe StaticDirectoryHandler)
-umStaticDirectory
-  = lens _umStaticDirectory
-      (\ s a -> s{_umStaticDirectory = a})
-
 instance FromJSON URLMap where
         parseJSON
           = withObject "URLMap"
@@ -372,8 +490,7 @@ instance FromJSON URLMap where
                      <*> (o .:? "redirectHttpResponseCode")
                      <*> (o .:? "authFailAction")
                      <*> (o .:? "staticFiles")
-                     <*> (o .:? "login")
-                     <*> (o .:? "staticDirectory"))
+                     <*> (o .:? "login"))
 
 instance ToJSON URLMap where
         toJSON URLMap{..}
@@ -387,8 +504,7 @@ instance ToJSON URLMap where
                     _umRedirectHTTPResponseCode,
                   ("authFailAction" .=) <$> _umAuthFailAction,
                   ("staticFiles" .=) <$> _umStaticFiles,
-                  ("login" .=) <$> _umLogin,
-                  ("staticDirectory" .=) <$> _umStaticDirectory])
+                  ("login" .=) <$> _umLogin])
 
 -- | A Python runtime third-party library required by the application.
 --
@@ -434,8 +550,89 @@ instance ToJSON Library where
                  [("name" .=) <$> _lName,
                   ("version" .=) <$> _lVersion])
 
--- | The response message for
--- [Operations.ListOperations][google.longrunning.Operations.ListOperations].
+-- | Target scaling by disk usage (for VM runtimes only).
+--
+-- /See:/ 'diskUtilization' smart constructor.
+data DiskUtilization = DiskUtilization
+    { _duTargetWriteOpsPerSec   :: !(Maybe (Textual Int32))
+    , _duTargetReadOpsPerSec    :: !(Maybe (Textual Int32))
+    , _duTargetWriteBytesPerSec :: !(Maybe (Textual Int32))
+    , _duTargetReadBytesPerSec  :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DiskUtilization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'duTargetWriteOpsPerSec'
+--
+-- * 'duTargetReadOpsPerSec'
+--
+-- * 'duTargetWriteBytesPerSec'
+--
+-- * 'duTargetReadBytesPerSec'
+diskUtilization
+    :: DiskUtilization
+diskUtilization =
+    DiskUtilization
+    { _duTargetWriteOpsPerSec = Nothing
+    , _duTargetReadOpsPerSec = Nothing
+    , _duTargetWriteBytesPerSec = Nothing
+    , _duTargetReadBytesPerSec = Nothing
+    }
+
+-- | Target ops per second written.
+duTargetWriteOpsPerSec :: Lens' DiskUtilization (Maybe Int32)
+duTargetWriteOpsPerSec
+  = lens _duTargetWriteOpsPerSec
+      (\ s a -> s{_duTargetWriteOpsPerSec = a})
+      . mapping _Coerce
+
+-- | Target ops per second read.
+duTargetReadOpsPerSec :: Lens' DiskUtilization (Maybe Int32)
+duTargetReadOpsPerSec
+  = lens _duTargetReadOpsPerSec
+      (\ s a -> s{_duTargetReadOpsPerSec = a})
+      . mapping _Coerce
+
+-- | Target bytes per second written.
+duTargetWriteBytesPerSec :: Lens' DiskUtilization (Maybe Int32)
+duTargetWriteBytesPerSec
+  = lens _duTargetWriteBytesPerSec
+      (\ s a -> s{_duTargetWriteBytesPerSec = a})
+      . mapping _Coerce
+
+-- | Target bytes per second read.
+duTargetReadBytesPerSec :: Lens' DiskUtilization (Maybe Int32)
+duTargetReadBytesPerSec
+  = lens _duTargetReadBytesPerSec
+      (\ s a -> s{_duTargetReadBytesPerSec = a})
+      . mapping _Coerce
+
+instance FromJSON DiskUtilization where
+        parseJSON
+          = withObject "DiskUtilization"
+              (\ o ->
+                 DiskUtilization <$>
+                   (o .:? "targetWriteOpsPerSec") <*>
+                     (o .:? "targetReadOpsPerSec")
+                     <*> (o .:? "targetWriteBytesPerSec")
+                     <*> (o .:? "targetReadBytesPerSec"))
+
+instance ToJSON DiskUtilization where
+        toJSON DiskUtilization{..}
+          = object
+              (catMaybes
+                 [("targetWriteOpsPerSec" .=) <$>
+                    _duTargetWriteOpsPerSec,
+                  ("targetReadOpsPerSec" .=) <$>
+                    _duTargetReadOpsPerSec,
+                  ("targetWriteBytesPerSec" .=) <$>
+                    _duTargetWriteBytesPerSec,
+                  ("targetReadBytesPerSec" .=) <$>
+                    _duTargetReadBytesPerSec])
+
+-- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
 data ListOperationsResponse = ListOperationsResponse
@@ -723,18 +920,28 @@ instance ToJSON VersionEnvVariables where
 --
 -- /See:/ 'application' smart constructor.
 data Application = Application
-    { _aLocation      :: !(Maybe Text)
-    , _aCodeBucket    :: !(Maybe Text)
-    , _aName          :: !(Maybe Text)
-    , _aDispatchRules :: !(Maybe [URLDispatchRule])
-    , _aId            :: !(Maybe Text)
+    { _aDefaultHostname         :: !(Maybe Text)
+    , _aDefaultCookieExpiration :: !(Maybe Text)
+    , _aLocation                :: !(Maybe Text)
+    , _aAuthDomain              :: !(Maybe Text)
+    , _aCodeBucket              :: !(Maybe Text)
+    , _aName                    :: !(Maybe Text)
+    , _aDispatchRules           :: !(Maybe [URLDispatchRule])
+    , _aDefaultBucket           :: !(Maybe Text)
+    , _aId                      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aDefaultHostname'
+--
+-- * 'aDefaultCookieExpiration'
+--
 -- * 'aLocation'
+--
+-- * 'aAuthDomain'
 --
 -- * 'aCodeBucket'
 --
@@ -742,26 +949,53 @@ data Application = Application
 --
 -- * 'aDispatchRules'
 --
+-- * 'aDefaultBucket'
+--
 -- * 'aId'
 application
     :: Application
 application =
     Application
-    { _aLocation = Nothing
+    { _aDefaultHostname = Nothing
+    , _aDefaultCookieExpiration = Nothing
+    , _aLocation = Nothing
+    , _aAuthDomain = Nothing
     , _aCodeBucket = Nothing
     , _aName = Nothing
     , _aDispatchRules = Nothing
+    , _aDefaultBucket = Nothing
     , _aId = Nothing
     }
 
--- | The location from which the application will be run. Choices are
--- \"us-central\" for United States and \"europe-west\" for European Union.
--- Application instances will run out of data centers in the chosen
--- location and all of the application\'s End User Content will be stored
--- at rest in the chosen location. The default is \"us-central\".
+-- | The hostname used to reach the application, as resolved by App Engine.
+-- \'OutputOnly
+aDefaultHostname :: Lens' Application (Maybe Text)
+aDefaultHostname
+  = lens _aDefaultHostname
+      (\ s a -> s{_aDefaultHostname = a})
+
+-- | Determines the cookie expiration policy for the application.
+-- \'OutputOnly
+aDefaultCookieExpiration :: Lens' Application (Maybe Text)
+aDefaultCookieExpiration
+  = lens _aDefaultCookieExpiration
+      (\ s a -> s{_aDefaultCookieExpiration = a})
+
+-- | The location from which the application will be run. Application
+-- instances will run out of data centers in the chosen location and all of
+-- the application\'s End User Content will be stored at rest. The default
+-- is \"us-central\". Choices are: \"us-central\" - Central US
+-- \"europe-west\" - Western Europe \"us-east1\" - Eastern US
 aLocation :: Lens' Application (Maybe Text)
 aLocation
   = lens _aLocation (\ s a -> s{_aLocation = a})
+
+-- | If set, only users from the specified Google Apps authentication domain
+-- may access the application. If not set, any Google Account may access
+-- the application.
+aAuthDomain :: Lens' Application (Maybe Text)
+aAuthDomain
+  = lens _aAuthDomain (\ s a -> s{_aAuthDomain = a})
 
 -- | A Google Cloud Storage bucket which can be used for storing files
 -- associated with an application. This bucket is associated with the
@@ -777,7 +1011,7 @@ aName :: Lens' Application (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
 -- | HTTP path dispatch rules for requests to the app that do not explicitly
--- target a module or version. The rules are order-dependent.
+-- target a service or version. The rules are order-dependent. \'OutputOnly
 aDispatchRules :: Lens' Application [URLDispatchRule]
 aDispatchRules
   = lens _aDispatchRules
@@ -785,8 +1019,14 @@ aDispatchRules
       . _Default
       . _Coerce
 
+-- | A Google Cloud Storage bucket which can be used by the application to
+-- store content. \'OutputOnly
+aDefaultBucket :: Lens' Application (Maybe Text)
+aDefaultBucket
+  = lens _aDefaultBucket
+      (\ s a -> s{_aDefaultBucket = a})
+
 -- | The relative name\/path of the application. Example: \"myapp\".
--- \'OutputOnly
 aId :: Lens' Application (Maybe Text)
 aId = lens _aId (\ s a -> s{_aId = a})
 
@@ -795,19 +1035,29 @@ instance FromJSON Application where
           = withObject "Application"
               (\ o ->
                  Application <$>
-                   (o .:? "location") <*> (o .:? "codeBucket") <*>
-                     (o .:? "name")
+                   (o .:? "defaultHostname") <*>
+                     (o .:? "defaultCookieExpiration")
+                     <*> (o .:? "location")
+                     <*> (o .:? "authDomain")
+                     <*> (o .:? "codeBucket")
+                     <*> (o .:? "name")
                      <*> (o .:? "dispatchRules" .!= mempty)
+                     <*> (o .:? "defaultBucket")
                      <*> (o .:? "id"))
 
 instance ToJSON Application where
         toJSON Application{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _aLocation,
+                 [("defaultHostname" .=) <$> _aDefaultHostname,
+                  ("defaultCookieExpiration" .=) <$>
+                    _aDefaultCookieExpiration,
+                  ("location" .=) <$> _aLocation,
+                  ("authDomain" .=) <$> _aAuthDomain,
                   ("codeBucket" .=) <$> _aCodeBucket,
                   ("name" .=) <$> _aName,
                   ("dispatchRules" .=) <$> _aDispatchRules,
+                  ("defaultBucket" .=) <$> _aDefaultBucket,
                   ("id" .=) <$> _aId])
 
 -- | Beta settings supplied to the application via metadata.
@@ -842,6 +1092,68 @@ instance FromJSON VersionBetaSettings where
 
 instance ToJSON VersionBetaSettings where
         toJSON = toJSON . _vbsAddtional
+
+-- | A service is a logical component of an application that can share state
+-- and communicate in a secure fashion with other services. For example, an
+-- application that handles customer requests might include separate
+-- services to handle other tasks such as API requests from mobile devices
+-- or backend data analysis. Each service has a collection of versions that
+-- define a specific set of code used to implement the functionality of
+-- that service.
+--
+-- /See:/ 'service' smart constructor.
+data Service = Service
+    { _sSplit :: !(Maybe TrafficSplit)
+    , _sName  :: !(Maybe Text)
+    , _sId    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Service' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sSplit'
+--
+-- * 'sName'
+--
+-- * 'sId'
+service
+    :: Service
+service =
+    Service
+    { _sSplit = Nothing
+    , _sName = Nothing
+    , _sId = Nothing
+    }
+
+-- | A mapping that defines fractional HTTP traffic diversion to different
+-- versions within the service.
+sSplit :: Lens' Service (Maybe TrafficSplit)
+sSplit = lens _sSplit (\ s a -> s{_sSplit = a})
+
+-- | The full path to the Service resource in the API. Example:
+-- \"apps\/myapp\/services\/default\" \'OutputOnly
+sName :: Lens' Service (Maybe Text)
+sName = lens _sName (\ s a -> s{_sName = a})
+
+-- | The relative name\/path of the service within the application. Example:
+-- \"default\" \'OutputOnly
+sId :: Lens' Service (Maybe Text)
+sId = lens _sId (\ s a -> s{_sId = a})
+
+instance FromJSON Service where
+        parseJSON
+          = withObject "Service"
+              (\ o ->
+                 Service <$>
+                   (o .:? "split") <*> (o .:? "name") <*> (o .:? "id"))
+
+instance ToJSON Service where
+        toJSON Service{..}
+          = object
+              (catMaybes
+                 [("split" .=) <$> _sSplit, ("name" .=) <$> _sName,
+                  ("id" .=) <$> _sId])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -902,9 +1214,8 @@ oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
 
 -- | The server-assigned name, which is only unique within the same service
--- that originally returns it. If you use the default HTTP mapping above,
--- the \`name\` should have the format of
--- \`operations\/some\/unique\/name\`.
+-- that originally returns it. If you use the default HTTP mapping, the
+-- \`name\` should have the format of \`operations\/some\/unique\/name\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -935,13 +1246,13 @@ instance ToJSON Operation where
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
 
--- | Rules to match an HTTP request and dispatch that request to a module.
+-- | Rules to match an HTTP request and dispatch that request to a service.
 --
 -- /See:/ 'urlDispatchRule' smart constructor.
 data URLDispatchRule = URLDispatchRule
-    { _udrPath   :: !(Maybe Text)
-    , _udrDomain :: !(Maybe Text)
-    , _udrModule :: !(Maybe Text)
+    { _udrPath    :: !(Maybe Text)
+    , _udrService :: !(Maybe Text)
+    , _udrDomain  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLDispatchRule' with the minimum fields required to make a request.
@@ -950,16 +1261,16 @@ data URLDispatchRule = URLDispatchRule
 --
 -- * 'udrPath'
 --
--- * 'udrDomain'
+-- * 'udrService'
 --
--- * 'udrModule'
+-- * 'udrDomain'
 urlDispatchRule
     :: URLDispatchRule
 urlDispatchRule =
     URLDispatchRule
     { _udrPath = Nothing
+    , _udrService = Nothing
     , _udrDomain = Nothing
-    , _udrModule = Nothing
     }
 
 -- | The pathname within the host. This must start with a \'\/\'. A single
@@ -968,6 +1279,12 @@ urlDispatchRule =
 udrPath :: Lens' URLDispatchRule (Maybe Text)
 udrPath = lens _udrPath (\ s a -> s{_udrPath = a})
 
+-- | The resource id of a Service in this application that should service the
+-- matched request. The Service must already exist. Example: \"default\".
+udrService :: Lens' URLDispatchRule (Maybe Text)
+udrService
+  = lens _udrService (\ s a -> s{_udrService = a})
+
 -- | The domain name to match on. Supports \'*\' (glob) wildcarding on the
 -- left-hand side of a \'.\'. If empty, all domains will be matched (the
 -- same as \'*\').
@@ -975,65 +1292,21 @@ udrDomain :: Lens' URLDispatchRule (Maybe Text)
 udrDomain
   = lens _udrDomain (\ s a -> s{_udrDomain = a})
 
--- | The resource id of a Module in this application that should service the
--- matched request. The Module must already exist. Example: \"default\".
-udrModule :: Lens' URLDispatchRule (Maybe Text)
-udrModule
-  = lens _udrModule (\ s a -> s{_udrModule = a})
-
 instance FromJSON URLDispatchRule where
         parseJSON
           = withObject "URLDispatchRule"
               (\ o ->
                  URLDispatchRule <$>
-                   (o .:? "path") <*> (o .:? "domain") <*>
-                     (o .:? "module"))
+                   (o .:? "path") <*> (o .:? "service") <*>
+                     (o .:? "domain"))
 
 instance ToJSON URLDispatchRule where
         toJSON URLDispatchRule{..}
           = object
               (catMaybes
                  [("path" .=) <$> _udrPath,
-                  ("domain" .=) <$> _udrDomain,
-                  ("module" .=) <$> _udrModule])
-
--- | HTTP headers to use for all responses from these URLs.
---
--- /See:/ 'staticDirectoryHandlerHTTPHeaders' smart constructor.
-newtype StaticDirectoryHandlerHTTPHeaders = StaticDirectoryHandlerHTTPHeaders
-    { _sdhhttphAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StaticDirectoryHandlerHTTPHeaders' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sdhhttphAddtional'
-staticDirectoryHandlerHTTPHeaders
-    :: HashMap Text Text -- ^ 'sdhhttphAddtional'
-    -> StaticDirectoryHandlerHTTPHeaders
-staticDirectoryHandlerHTTPHeaders pSdhhttphAddtional_ =
-    StaticDirectoryHandlerHTTPHeaders
-    { _sdhhttphAddtional = _Coerce # pSdhhttphAddtional_
-    }
-
-sdhhttphAddtional :: Lens' StaticDirectoryHandlerHTTPHeaders (HashMap Text Text)
-sdhhttphAddtional
-  = lens _sdhhttphAddtional
-      (\ s a -> s{_sdhhttphAddtional = a})
-      . _Coerce
-
-instance FromJSON StaticDirectoryHandlerHTTPHeaders
-         where
-        parseJSON
-          = withObject "StaticDirectoryHandlerHTTPHeaders"
-              (\ o ->
-                 StaticDirectoryHandlerHTTPHeaders <$>
-                   (parseJSONObject o))
-
-instance ToJSON StaticDirectoryHandlerHTTPHeaders
-         where
-        toJSON = toJSON . _sdhhttphAddtional
+                  ("service" .=) <$> _udrService,
+                  ("domain" .=) <$> _udrDomain])
 
 -- | Response message for \`Versions.ListVersions\`.
 --
@@ -1064,7 +1337,7 @@ lvrNextPageToken
   = lens _lvrNextPageToken
       (\ s a -> s{_lvrNextPageToken = a})
 
--- | The versions belonging to the requested application module.
+-- | The versions belonging to the requested application service.
 lvrVersions :: Lens' ListVersionsResponse [Version]
 lvrVersions
   = lens _lvrVersions (\ s a -> s{_lvrVersions = a}) .
@@ -1125,7 +1398,8 @@ fiMimeType
   = lens _fiMimeType (\ s a -> s{_fiMimeType = a})
 
 -- | The URL source to use to fetch this file. Must be a URL to a resource in
--- Google Cloud Storage.
+-- Google Cloud Storage in the form
+-- \'http(s):\/\/storage.googleapis.com\/\\\/\\\'.
 fiSourceURL :: Lens' FileInfo (Maybe Text)
 fiSourceURL
   = lens _fiSourceURL (\ s a -> s{_fiSourceURL = a})
@@ -1152,14 +1426,17 @@ instance ToJSON FileInfo where
 --
 -- /See:/ 'automaticScaling' smart constructor.
 data AutomaticScaling = AutomaticScaling
-    { _asMaxTotalInstances     :: !(Maybe (Textual Int32))
+    { _asNetworkUtilization    :: !(Maybe NetworkUtilization)
+    , _asMaxTotalInstances     :: !(Maybe (Textual Int32))
     , _asMinIdleInstances      :: !(Maybe (Textual Int32))
+    , _asDiskUtilization       :: !(Maybe DiskUtilization)
     , _asMinPendingLatency     :: !(Maybe Text)
     , _asCPUUtilization        :: !(Maybe CPUUtilization)
     , _asMaxIdleInstances      :: !(Maybe (Textual Int32))
     , _asMinTotalInstances     :: !(Maybe (Textual Int32))
     , _asMaxConcurrentRequests :: !(Maybe (Textual Int32))
     , _asCoolDownPeriod        :: !(Maybe Text)
+    , _asRequestUtilization    :: !(Maybe RequestUtilization)
     , _asMaxPendingLatency     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1167,9 +1444,13 @@ data AutomaticScaling = AutomaticScaling
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'asNetworkUtilization'
+--
 -- * 'asMaxTotalInstances'
 --
 -- * 'asMinIdleInstances'
+--
+-- * 'asDiskUtilization'
 --
 -- * 'asMinPendingLatency'
 --
@@ -1183,21 +1464,32 @@ data AutomaticScaling = AutomaticScaling
 --
 -- * 'asCoolDownPeriod'
 --
+-- * 'asRequestUtilization'
+--
 -- * 'asMaxPendingLatency'
 automaticScaling
     :: AutomaticScaling
 automaticScaling =
     AutomaticScaling
-    { _asMaxTotalInstances = Nothing
+    { _asNetworkUtilization = Nothing
+    , _asMaxTotalInstances = Nothing
     , _asMinIdleInstances = Nothing
+    , _asDiskUtilization = Nothing
     , _asMinPendingLatency = Nothing
     , _asCPUUtilization = Nothing
     , _asMaxIdleInstances = Nothing
     , _asMinTotalInstances = Nothing
     , _asMaxConcurrentRequests = Nothing
     , _asCoolDownPeriod = Nothing
+    , _asRequestUtilization = Nothing
     , _asMaxPendingLatency = Nothing
     }
+
+-- | Target scaling by network usage.
+asNetworkUtilization :: Lens' AutomaticScaling (Maybe NetworkUtilization)
+asNetworkUtilization
+  = lens _asNetworkUtilization
+      (\ s a -> s{_asNetworkUtilization = a})
 
 -- | Max number of instances that App Engine should start to handle requests.
 asMaxTotalInstances :: Lens' AutomaticScaling (Maybe Int32)
@@ -1207,13 +1499,19 @@ asMaxTotalInstances
       . mapping _Coerce
 
 -- | The minimum number of idle instances that App Engine should maintain for
--- this version. Only applies to the default version of a module, since
+-- this version. Only applies to the default version of a service, since
 -- other versions are not expected to receive significant traffic.
 asMinIdleInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMinIdleInstances
   = lens _asMinIdleInstances
       (\ s a -> s{_asMinIdleInstances = a})
       . mapping _Coerce
+
+-- | Target scaling by disk usage.
+asDiskUtilization :: Lens' AutomaticScaling (Maybe DiskUtilization)
+asDiskUtilization
+  = lens _asDiskUtilization
+      (\ s a -> s{_asDiskUtilization = a})
 
 -- | The minimum amount of time that App Engine should allow a request to
 -- wait in the pending queue before starting a new instance to handle it.
@@ -1261,6 +1559,12 @@ asCoolDownPeriod
   = lens _asCoolDownPeriod
       (\ s a -> s{_asCoolDownPeriod = a})
 
+-- | Target scaling by request utilization.
+asRequestUtilization :: Lens' AutomaticScaling (Maybe RequestUtilization)
+asRequestUtilization
+  = lens _asRequestUtilization
+      (\ s a -> s{_asRequestUtilization = a})
+
 -- | The maximum amount of time that App Engine should allow a request to
 -- wait in the pending queue before starting a new instance to handle it.
 asMaxPendingLatency :: Lens' AutomaticScaling (Maybe Text)
@@ -1273,22 +1577,27 @@ instance FromJSON AutomaticScaling where
           = withObject "AutomaticScaling"
               (\ o ->
                  AutomaticScaling <$>
-                   (o .:? "maxTotalInstances") <*>
-                     (o .:? "minIdleInstances")
+                   (o .:? "networkUtilization") <*>
+                     (o .:? "maxTotalInstances")
+                     <*> (o .:? "minIdleInstances")
+                     <*> (o .:? "diskUtilization")
                      <*> (o .:? "minPendingLatency")
                      <*> (o .:? "cpuUtilization")
                      <*> (o .:? "maxIdleInstances")
                      <*> (o .:? "minTotalInstances")
                      <*> (o .:? "maxConcurrentRequests")
                      <*> (o .:? "coolDownPeriod")
+                     <*> (o .:? "requestUtilization")
                      <*> (o .:? "maxPendingLatency"))
 
 instance ToJSON AutomaticScaling where
         toJSON AutomaticScaling{..}
           = object
               (catMaybes
-                 [("maxTotalInstances" .=) <$> _asMaxTotalInstances,
+                 [("networkUtilization" .=) <$> _asNetworkUtilization,
+                  ("maxTotalInstances" .=) <$> _asMaxTotalInstances,
                   ("minIdleInstances" .=) <$> _asMinIdleInstances,
+                  ("diskUtilization" .=) <$> _asDiskUtilization,
                   ("minPendingLatency" .=) <$> _asMinPendingLatency,
                   ("cpuUtilization" .=) <$> _asCPUUtilization,
                   ("maxIdleInstances" .=) <$> _asMaxIdleInstances,
@@ -1296,58 +1605,91 @@ instance ToJSON AutomaticScaling where
                   ("maxConcurrentRequests" .=) <$>
                     _asMaxConcurrentRequests,
                   ("coolDownPeriod" .=) <$> _asCoolDownPeriod,
+                  ("requestUtilization" .=) <$> _asRequestUtilization,
                   ("maxPendingLatency" .=) <$> _asMaxPendingLatency])
 
--- | Response message for \`Modules.ListModules\`.
+-- | Metadata for the given google.longrunning.Operation.
 --
--- /See:/ 'listModulesResponse' smart constructor.
-data ListModulesResponse = ListModulesResponse
-    { _lmrNextPageToken :: !(Maybe Text)
-    , _lmrModules       :: !(Maybe [Module])
+-- /See:/ 'operationMetadataV1Beta5' smart constructor.
+data OperationMetadataV1Beta5 = OperationMetadataV1Beta5
+    { _omvbInsertTime :: !(Maybe Text)
+    , _omvbUser       :: !(Maybe Text)
+    , _omvbMethod     :: !(Maybe Text)
+    , _omvbEndTime    :: !(Maybe Text)
+    , _omvbTarget     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListModulesResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationMetadataV1Beta5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lmrNextPageToken'
+-- * 'omvbInsertTime'
 --
--- * 'lmrModules'
-listModulesResponse
-    :: ListModulesResponse
-listModulesResponse =
-    ListModulesResponse
-    { _lmrNextPageToken = Nothing
-    , _lmrModules = Nothing
+-- * 'omvbUser'
+--
+-- * 'omvbMethod'
+--
+-- * 'omvbEndTime'
+--
+-- * 'omvbTarget'
+operationMetadataV1Beta5
+    :: OperationMetadataV1Beta5
+operationMetadataV1Beta5 =
+    OperationMetadataV1Beta5
+    { _omvbInsertTime = Nothing
+    , _omvbUser = Nothing
+    , _omvbMethod = Nothing
+    , _omvbEndTime = Nothing
+    , _omvbTarget = Nothing
     }
 
--- | Continuation token for fetching the next page of results.
-lmrNextPageToken :: Lens' ListModulesResponse (Maybe Text)
-lmrNextPageToken
-  = lens _lmrNextPageToken
-      (\ s a -> s{_lmrNextPageToken = a})
+-- | Timestamp that this operation was received. \'OutputOnly
+omvbInsertTime :: Lens' OperationMetadataV1Beta5 (Maybe Text)
+omvbInsertTime
+  = lens _omvbInsertTime
+      (\ s a -> s{_omvbInsertTime = a})
 
--- | The modules belonging to the requested application.
-lmrModules :: Lens' ListModulesResponse [Module]
-lmrModules
-  = lens _lmrModules (\ s a -> s{_lmrModules = a}) .
-      _Default
-      . _Coerce
+-- | The user who requested this operation. \'OutputOnly
+omvbUser :: Lens' OperationMetadataV1Beta5 (Maybe Text)
+omvbUser = lens _omvbUser (\ s a -> s{_omvbUser = a})
 
-instance FromJSON ListModulesResponse where
+-- | API method name that initiated the operation. Example:
+-- \"google.appengine.v1beta5.Version.CreateVersion\". \'OutputOnly
+omvbMethod :: Lens' OperationMetadataV1Beta5 (Maybe Text)
+omvbMethod
+  = lens _omvbMethod (\ s a -> s{_omvbMethod = a})
+
+-- | Timestamp that this operation was completed. (Not present if the
+-- operation is still in progress.) \'OutputOnly
+omvbEndTime :: Lens' OperationMetadataV1Beta5 (Maybe Text)
+omvbEndTime
+  = lens _omvbEndTime (\ s a -> s{_omvbEndTime = a})
+
+-- | Resource that this operation is acting on. Example:
+-- \"apps\/myapp\/services\/default\". \'OutputOnly
+omvbTarget :: Lens' OperationMetadataV1Beta5 (Maybe Text)
+omvbTarget
+  = lens _omvbTarget (\ s a -> s{_omvbTarget = a})
+
+instance FromJSON OperationMetadataV1Beta5 where
         parseJSON
-          = withObject "ListModulesResponse"
+          = withObject "OperationMetadataV1Beta5"
               (\ o ->
-                 ListModulesResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "modules" .!= mempty))
+                 OperationMetadataV1Beta5 <$>
+                   (o .:? "insertTime") <*> (o .:? "user") <*>
+                     (o .:? "method")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "target"))
 
-instance ToJSON ListModulesResponse where
-        toJSON ListModulesResponse{..}
+instance ToJSON OperationMetadataV1Beta5 where
+        toJSON OperationMetadataV1Beta5{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _lmrNextPageToken,
-                  ("modules" .=) <$> _lmrModules])
+                 [("insertTime" .=) <$> _omvbInsertTime,
+                  ("user" .=) <$> _omvbUser,
+                  ("method" .=) <$> _omvbMethod,
+                  ("endTime" .=) <$> _omvbEndTime,
+                  ("target" .=) <$> _omvbTarget])
 
 -- | Use Google Cloud Endpoints to handle requests.
 --
@@ -1664,14 +2006,14 @@ instance ToJSON CPUUtilization where
                     _cuAggregationWindowLength,
                   ("targetUtilization" .=) <$> _cuTargetUtilization])
 
--- | Mapping from module version IDs within the module to fractional (0.000,
--- 1] allocations of traffic for that version. Each version may only be
--- specified once, but some versions in the module may not have any traffic
--- allocation. Modules that have traffic allocated in this field may not be
--- deleted until the module is deleted, or their traffic allocation is
--- removed. Allocations must sum to 1. Supports precision up to two decimal
--- places for IP-based splits and up to three decimal places for
--- cookie-based splits.
+-- | Mapping from service version IDs within the service to fractional
+-- (0.000, 1] allocations of traffic for that version. Each version may
+-- only be specified once, but some versions in the service may not have
+-- any traffic allocation. Services that have traffic allocated in this
+-- field may not be deleted until the service is deleted, or their traffic
+-- allocation is removed. Allocations must sum to 1. Supports precision up
+-- to two decimal places for IP-based splits and up to three decimal places
+-- for cookie-based splits.
 --
 -- /See:/ 'trafficSplitAllocations' smart constructor.
 newtype TrafficSplitAllocations = TrafficSplitAllocations
@@ -1705,7 +2047,7 @@ instance FromJSON TrafficSplitAllocations where
 instance ToJSON TrafficSplitAllocations where
         toJSON = toJSON . _tsaAddtional
 
--- | A module with manual scaling runs continuously, allowing you to perform
+-- | A service with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
 --
 -- /See:/ 'manualScaling' smart constructor.
@@ -1725,7 +2067,7 @@ manualScaling =
     { _msInstances = Nothing
     }
 
--- | The number of instances to assign to the module at the start. This
+-- | The number of instances to assign to the service at the start. This
 -- number can later be altered by using the [Modules
 -- API](https:\/\/cloud.google.com\/appengine\/docs\/python\/modules\/functions)
 -- \`set_num_instances()\` function.
@@ -1744,10 +2086,10 @@ instance ToJSON ManualScaling where
           = object
               (catMaybes [("instances" .=) <$> _msInstances])
 
--- | A module with basic scaling will create an instance when the application
--- receives a request. The instance will be turned down when the app
--- becomes idle. Basic scaling is ideal for work that is intermittent or
--- driven by user activity.
+-- | A service with basic scaling will create an instance when the
+-- application receives a request. The instance will be turned down when
+-- the app becomes idle. Basic scaling is ideal for work that is
+-- intermittent or driven by user activity.
 --
 -- /See:/ 'basicScaling' smart constructor.
 data BasicScaling = BasicScaling
@@ -1800,7 +2142,7 @@ instance ToJSON BasicScaling where
                   ("idleTimeout" .=) <$> _bsIdleTimeout])
 
 -- | A Version is a specific set of source code and configuration files
--- deployed to a module.
+-- deployed to a service.
 --
 -- /See:/ 'version' smart constructor.
 data Version = Version
@@ -1828,6 +2170,7 @@ data Version = Version
     , _vId                :: !(Maybe Text)
     , _vEnvVariables      :: !(Maybe VersionEnvVariables)
     , _vServingStatus     :: !(Maybe Text)
+    , _vDiskUsageBytes    :: !(Maybe (Textual Int64))
     , _vLibraries         :: !(Maybe [Library])
     , _vDeployment        :: !(Maybe Deployment)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1884,6 +2227,8 @@ data Version = Version
 --
 -- * 'vServingStatus'
 --
+-- * 'vDiskUsageBytes'
+--
 -- * 'vLibraries'
 --
 -- * 'vDeployment'
@@ -1915,6 +2260,7 @@ version =
     , _vId = Nothing
     , _vEnvVariables = Nothing
     , _vServingStatus = Nothing
+    , _vDiskUsageBytes = Nothing
     , _vLibraries = Nothing
     , _vDeployment = Nothing
     }
@@ -1942,8 +2288,10 @@ vNobuildFilesRegex
   = lens _vNobuildFilesRegex
       (\ s a -> s{_vNobuildFilesRegex = a})
 
--- | The frontend instance class to use to run this app. Valid values are
--- \`[F1, F2, F4, F4_1G]\`. Default: \"F1\"
+-- | The instance class to use to run this app. Valid values for
+-- AutomaticScaling are \`[F1, F2, F4, F4_1G]\`. Valid values for
+-- ManualScaling and BasicScaling are \`[B1, B2, B4, B8, B4_1G]\`. Default:
+-- \"F1\" for AutomaticScaling, \"B1\" for ManualScaling and BasicScaling
 vInstanceClass :: Lens' Version (Maybe Text)
 vInstanceClass
   = lens _vInstanceClass
@@ -1990,8 +2338,7 @@ vErrorHandlers
       . _Default
       . _Coerce
 
--- | Whether to deploy this app in a VM container (deprecated, use
--- \"env\":\"2\").
+-- | Whether to deploy this app in a VM container.
 vVM :: Lens' Version (Maybe Bool)
 vVM = lens _vVM (\ s a -> s{_vVM = a})
 
@@ -2026,7 +2373,7 @@ vResources
   = lens _vResources (\ s a -> s{_vResources = a})
 
 -- | The full path to the Version resource in the API. Example:
--- \"apps\/myapp\/modules\/default\/versions\/v1\". \'OutputOnly
+-- \"apps\/myapp\/services\/default\/versions\/v1\". \'OutputOnly
 vName :: Lens' Version (Maybe Text)
 vName = lens _vName (\ s a -> s{_vName = a})
 
@@ -2041,16 +2388,16 @@ vBetaSettings
   = lens _vBetaSettings
       (\ s a -> s{_vBetaSettings = a})
 
--- | A module with basic scaling will create an instance when the application
--- receives a request. The instance will be turned down when the app
--- becomes idle. Basic scaling is ideal for work that is intermittent or
--- driven by user activity.
+-- | A service with basic scaling will create an instance when the
+-- application receives a request. The instance will be turned down when
+-- the app becomes idle. Basic scaling is ideal for work that is
+-- intermittent or driven by user activity.
 vBasicScaling :: Lens' Version (Maybe BasicScaling)
 vBasicScaling
   = lens _vBasicScaling
       (\ s a -> s{_vBasicScaling = a})
 
--- | A module with manual scaling runs continuously, allowing you to perform
+-- | A service with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
 vManualScaling :: Lens' Version (Maybe ManualScaling)
 vManualScaling
@@ -2064,7 +2411,7 @@ vAPIConfig :: Lens' Version (Maybe APIConfigHandler)
 vAPIConfig
   = lens _vAPIConfig (\ s a -> s{_vAPIConfig = a})
 
--- | The relative name\/path of the Version within the module. Example:
+-- | The relative name\/path of the Version within the service. Example:
 -- \"v1\". Version specifiers can contain lowercase letters, digits, and
 -- hyphens. It cannot begin with the prefix \`ah-\` and the names
 -- \`default\` and \`latest\` are reserved and cannot be used.
@@ -2087,6 +2434,14 @@ vServingStatus :: Lens' Version (Maybe Text)
 vServingStatus
   = lens _vServingStatus
       (\ s a -> s{_vServingStatus = a})
+
+-- | Total size of version files hosted on App Engine disk in bytes.
+-- \'OutputOnly
+vDiskUsageBytes :: Lens' Version (Maybe Int64)
+vDiskUsageBytes
+  = lens _vDiskUsageBytes
+      (\ s a -> s{_vDiskUsageBytes = a})
+      . mapping _Coerce
 
 -- | Configuration for Python runtime third-party libraries required by the
 -- application. Only returned in \`GET\` requests if \`view=FULL\` is set.
@@ -2132,6 +2487,7 @@ instance FromJSON Version where
                      <*> (o .:? "id")
                      <*> (o .:? "envVariables")
                      <*> (o .:? "servingStatus")
+                     <*> (o .:? "diskUsageBytes")
                      <*> (o .:? "libraries" .!= mempty)
                      <*> (o .:? "deployment"))
 
@@ -2161,66 +2517,9 @@ instance ToJSON Version where
                   ("apiConfig" .=) <$> _vAPIConfig, ("id" .=) <$> _vId,
                   ("envVariables" .=) <$> _vEnvVariables,
                   ("servingStatus" .=) <$> _vServingStatus,
+                  ("diskUsageBytes" .=) <$> _vDiskUsageBytes,
                   ("libraries" .=) <$> _vLibraries,
                   ("deployment" .=) <$> _vDeployment])
-
--- | A module is a component of an application that provides a single service
--- or configuration. A module has a collection of versions that define a
--- specific set of code used to implement the functionality of that module.
---
--- /See:/ 'module'' smart constructor.
-data Module = Module
-    { _mSplit :: !(Maybe TrafficSplit)
-    , _mName  :: !(Maybe Text)
-    , _mId    :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Module' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mSplit'
---
--- * 'mName'
---
--- * 'mId'
-module'
-    :: Module
-module' =
-    Module
-    { _mSplit = Nothing
-    , _mName = Nothing
-    , _mId = Nothing
-    }
-
--- | A mapping that defines fractional HTTP traffic diversion to different
--- versions within the module.
-mSplit :: Lens' Module (Maybe TrafficSplit)
-mSplit = lens _mSplit (\ s a -> s{_mSplit = a})
-
--- | The full path to the Module resource in the API. Example:
--- \"apps\/myapp\/modules\/default\" \'OutputOnly
-mName :: Lens' Module (Maybe Text)
-mName = lens _mName (\ s a -> s{_mName = a})
-
--- | The relative name\/path of the module within the application. Example:
--- \"default\" \'OutputOnly
-mId :: Lens' Module (Maybe Text)
-mId = lens _mId (\ s a -> s{_mId = a})
-
-instance FromJSON Module where
-        parseJSON
-          = withObject "Module"
-              (\ o ->
-                 Module <$>
-                   (o .:? "split") <*> (o .:? "name") <*> (o .:? "id"))
-
-instance ToJSON Module where
-        toJSON Module{..}
-          = object
-              (catMaybes
-                 [("split" .=) <$> _mSplit, ("name" .=) <$> _mName,
-                  ("id" .=) <$> _mId])
 
 -- | Files served directly to the user for a given URL, such as images, CSS
 -- stylesheets, or JavaScript source files. Static file handlers describe
@@ -2280,10 +2579,9 @@ sfhHTTPHeaders
 sfhPath :: Lens' StaticFilesHandler (Maybe Text)
 sfhPath = lens _sfhPath (\ s a -> s{_sfhPath = a})
 
--- | If true, this [UrlMap][google.appengine.v1beta4.UrlMap] entry does not
--- match the request unless the file referenced by the handler also exists.
--- If no such file exists, processing will continue with the next
--- [UrlMap][google.appengine.v1beta4.UrlMap] that matches the requested
+-- | If true, this UrlMap entry does not match the request unless the file
+-- referenced by the handler also exists. If no such file exists,
+-- processing will continue with the next UrlMap that matches the requested
 -- URL.
 sfhRequireMatchingFile :: Lens' StaticFilesHandler (Maybe Bool)
 sfhRequireMatchingFile
@@ -2405,8 +2703,7 @@ instance ToJSON ErrorHandler where
                   ("errorCode" .=) <$> _ehErrorCode,
                   ("staticFile" .=) <$> _ehStaticFile])
 
--- | Metadata for the given
--- [google.longrunning.Operation][google.longrunning.Operation].
+-- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
 data OperationMetadata = OperationMetadata
@@ -2497,6 +2794,60 @@ instance ToJSON OperationMetadata where
                   ("endTime" .=) <$> _omEndTime,
                   ("operationType" .=) <$> _omOperationType,
                   ("target" .=) <$> _omTarget])
+
+-- | Target scaling by request utilization (for VM runtimes only).
+--
+-- /See:/ 'requestUtilization' smart constructor.
+data RequestUtilization = RequestUtilization
+    { _ruTargetConcurrentRequests :: !(Maybe (Textual Int32))
+    , _ruTargetRequestCountPerSec :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RequestUtilization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ruTargetConcurrentRequests'
+--
+-- * 'ruTargetRequestCountPerSec'
+requestUtilization
+    :: RequestUtilization
+requestUtilization =
+    RequestUtilization
+    { _ruTargetConcurrentRequests = Nothing
+    , _ruTargetRequestCountPerSec = Nothing
+    }
+
+-- | Target number of concurrent requests.
+ruTargetConcurrentRequests :: Lens' RequestUtilization (Maybe Int32)
+ruTargetConcurrentRequests
+  = lens _ruTargetConcurrentRequests
+      (\ s a -> s{_ruTargetConcurrentRequests = a})
+      . mapping _Coerce
+
+-- | Target requests per second.
+ruTargetRequestCountPerSec :: Lens' RequestUtilization (Maybe Int32)
+ruTargetRequestCountPerSec
+  = lens _ruTargetRequestCountPerSec
+      (\ s a -> s{_ruTargetRequestCountPerSec = a})
+      . mapping _Coerce
+
+instance FromJSON RequestUtilization where
+        parseJSON
+          = withObject "RequestUtilization"
+              (\ o ->
+                 RequestUtilization <$>
+                   (o .:? "targetConcurrentRequests") <*>
+                     (o .:? "targetRequestCountPerSec"))
+
+instance ToJSON RequestUtilization where
+        toJSON RequestUtilization{..}
+          = object
+              (catMaybes
+                 [("targetConcurrentRequests" .=) <$>
+                    _ruTargetConcurrentRequests,
+                  ("targetRequestCountPerSec" .=) <$>
+                    _ruTargetRequestCountPerSec])
 
 -- | A reference to a particular snapshot of the source tree used to build
 -- and deploy the application.
@@ -2689,116 +3040,3 @@ instance ToJSON Deployment where
                  [("container" .=) <$> _dContainer,
                   ("files" .=) <$> _dFiles,
                   ("sourceReferences" .=) <$> _dSourceReferences])
-
--- | Files served directly to the user for a given URL, such as images, CSS
--- stylesheets, or JavaScript source files. Static directory handlers make
--- it easy to serve the entire contents of a directory as static files.
---
--- /See:/ 'staticDirectoryHandler' smart constructor.
-data StaticDirectoryHandler = StaticDirectoryHandler
-    { _sdhHTTPHeaders         :: !(Maybe StaticDirectoryHandlerHTTPHeaders)
-    , _sdhRequireMatchingFile :: !(Maybe Bool)
-    , _sdhExpiration          :: !(Maybe Text)
-    , _sdhMimeType            :: !(Maybe Text)
-    , _sdhApplicationReadable :: !(Maybe Bool)
-    , _sdhDirectory           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StaticDirectoryHandler' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sdhHTTPHeaders'
---
--- * 'sdhRequireMatchingFile'
---
--- * 'sdhExpiration'
---
--- * 'sdhMimeType'
---
--- * 'sdhApplicationReadable'
---
--- * 'sdhDirectory'
-staticDirectoryHandler
-    :: StaticDirectoryHandler
-staticDirectoryHandler =
-    StaticDirectoryHandler
-    { _sdhHTTPHeaders = Nothing
-    , _sdhRequireMatchingFile = Nothing
-    , _sdhExpiration = Nothing
-    , _sdhMimeType = Nothing
-    , _sdhApplicationReadable = Nothing
-    , _sdhDirectory = Nothing
-    }
-
--- | HTTP headers to use for all responses from these URLs.
-sdhHTTPHeaders :: Lens' StaticDirectoryHandler (Maybe StaticDirectoryHandlerHTTPHeaders)
-sdhHTTPHeaders
-  = lens _sdhHTTPHeaders
-      (\ s a -> s{_sdhHTTPHeaders = a})
-
--- | If true, this UrlMap entry does not match the request unless the file
--- referenced by the handler also exists. If no such file exists,
--- processing will continue with the next UrlMap that matches the requested
--- URL.
-sdhRequireMatchingFile :: Lens' StaticDirectoryHandler (Maybe Bool)
-sdhRequireMatchingFile
-  = lens _sdhRequireMatchingFile
-      (\ s a -> s{_sdhRequireMatchingFile = a})
-
--- | The length of time a static file served by this handler ought to be
--- cached by web proxies and browsers.
-sdhExpiration :: Lens' StaticDirectoryHandler (Maybe Text)
-sdhExpiration
-  = lens _sdhExpiration
-      (\ s a -> s{_sdhExpiration = a})
-
--- | If specified, all files served by this handler will be served using the
--- specified MIME type. If not specified, the MIME type for a file will be
--- derived from the file\'s filename extension.
-sdhMimeType :: Lens' StaticDirectoryHandler (Maybe Text)
-sdhMimeType
-  = lens _sdhMimeType (\ s a -> s{_sdhMimeType = a})
-
--- | By default, files declared in static file handlers are uploaded as
--- static data and are only served to end users, they cannot be read by an
--- application. If this field is set to true, the files are also uploaded
--- as code data so your application can read them. Both uploads are charged
--- against your code and static data storage resource quotas.
-sdhApplicationReadable :: Lens' StaticDirectoryHandler (Maybe Bool)
-sdhApplicationReadable
-  = lens _sdhApplicationReadable
-      (\ s a -> s{_sdhApplicationReadable = a})
-
--- | The path to the directory containing the static files, from the
--- application root directory. Everything after the end of the matched url
--- pattern is appended to static_dir to form the full path to the requested
--- file.
-sdhDirectory :: Lens' StaticDirectoryHandler (Maybe Text)
-sdhDirectory
-  = lens _sdhDirectory (\ s a -> s{_sdhDirectory = a})
-
-instance FromJSON StaticDirectoryHandler where
-        parseJSON
-          = withObject "StaticDirectoryHandler"
-              (\ o ->
-                 StaticDirectoryHandler <$>
-                   (o .:? "httpHeaders") <*>
-                     (o .:? "requireMatchingFile")
-                     <*> (o .:? "expiration")
-                     <*> (o .:? "mimeType")
-                     <*> (o .:? "applicationReadable")
-                     <*> (o .:? "directory"))
-
-instance ToJSON StaticDirectoryHandler where
-        toJSON StaticDirectoryHandler{..}
-          = object
-              (catMaybes
-                 [("httpHeaders" .=) <$> _sdhHTTPHeaders,
-                  ("requireMatchingFile" .=) <$>
-                    _sdhRequireMatchingFile,
-                  ("expiration" .=) <$> _sdhExpiration,
-                  ("mimeType" .=) <$> _sdhMimeType,
-                  ("applicationReadable" .=) <$>
-                    _sdhApplicationReadable,
-                  ("directory" .=) <$> _sdhDirectory])

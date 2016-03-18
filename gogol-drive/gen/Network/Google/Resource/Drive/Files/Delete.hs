@@ -20,8 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Permanently deletes a file by ID. Skips the trash. The currently
--- authenticated user must own the file.
+-- Permanently deletes a file owned by the user without moving it to the
+-- trash. If the target is a folder, all descendants owned by the user are
+-- also deleted.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.delete@.
 module Network.Google.Resource.Drive.Files.Delete
@@ -44,13 +45,14 @@ import           Network.Google.Prelude
 -- 'FilesDelete' request conforms to.
 type FilesDeleteResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Permanently deletes a file by ID. Skips the trash. The currently
--- authenticated user must own the file.
+-- | Permanently deletes a file owned by the user without moving it to the
+-- trash. If the target is a folder, all descendants owned by the user are
+-- also deleted.
 --
 -- /See:/ 'filesDelete' smart constructor.
 newtype FilesDelete = FilesDelete
@@ -70,7 +72,7 @@ filesDelete pFdFileId_ =
     { _fdFileId = pFdFileId_
     }
 
--- | The ID of the file to delete.
+-- | The ID of the file.
 fdFileId :: Lens' FilesDelete Text
 fdFileId = lens _fdFileId (\ s a -> s{_fdFileId = a})
 

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all of the replies to a comment.
+-- Lists a comment\'s replies.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.list@.
 module Network.Google.Resource.Drive.Replies.List
@@ -36,7 +36,7 @@ module Network.Google.Resource.Drive.Replies.List
     , rlPageToken
     , rlFileId
     , rlCommentId
-    , rlMaxResults
+    , rlPageSize
     , rlIncludeDeleted
     ) where
 
@@ -47,26 +47,25 @@ import           Network.Google.Prelude
 -- 'RepliesList' request conforms to.
 type RepliesListResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
                Capture "commentId" Text :>
                  "replies" :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
+                     QueryParam "pageSize" (Textual Int32) :>
                        QueryParam "includeDeleted" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] CommentReplyList
+                         QueryParam "alt" AltJSON :> Get '[JSON] ReplyList
 
--- | Lists all of the replies to a comment.
+-- | Lists a comment\'s replies.
 --
 -- /See:/ 'repliesList' smart constructor.
 data RepliesList = RepliesList
     { _rlPageToken      :: !(Maybe Text)
     , _rlFileId         :: !Text
     , _rlCommentId      :: !Text
-    , _rlMaxResults     :: !(Textual Int32)
+    , _rlPageSize       :: !(Textual Int32)
     , _rlIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,7 +79,7 @@ data RepliesList = RepliesList
 --
 -- * 'rlCommentId'
 --
--- * 'rlMaxResults'
+-- * 'rlPageSize'
 --
 -- * 'rlIncludeDeleted'
 repliesList
@@ -92,13 +91,13 @@ repliesList pRlFileId_ pRlCommentId_ =
     { _rlPageToken = Nothing
     , _rlFileId = pRlFileId_
     , _rlCommentId = pRlCommentId_
-    , _rlMaxResults = 20
+    , _rlPageSize = 20
     , _rlIncludeDeleted = False
     }
 
--- | The continuation token, used to page through large result sets. To get
--- the next page of results, set this parameter to the value of
--- \"nextPageToken\" from the previous response.
+-- | The token for continuing a previous list request on the next page. This
+-- should be set to the value of \'nextPageToken\' from the previous
+-- response.
 rlPageToken :: Lens' RepliesList (Maybe Text)
 rlPageToken
   = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
@@ -112,25 +111,24 @@ rlCommentId :: Lens' RepliesList Text
 rlCommentId
   = lens _rlCommentId (\ s a -> s{_rlCommentId = a})
 
--- | The maximum number of replies to include in the response, used for
--- paging.
-rlMaxResults :: Lens' RepliesList Int32
-rlMaxResults
-  = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
-      . _Coerce
+-- | The maximum number of replies to return per page.
+rlPageSize :: Lens' RepliesList Int32
+rlPageSize
+  = lens _rlPageSize (\ s a -> s{_rlPageSize = a}) .
+      _Coerce
 
--- | If set, all replies, including deleted replies (with content stripped)
--- will be returned.
+-- | Whether to include deleted replies. Deleted replies will not include
+-- their original content.
 rlIncludeDeleted :: Lens' RepliesList Bool
 rlIncludeDeleted
   = lens _rlIncludeDeleted
       (\ s a -> s{_rlIncludeDeleted = a})
 
 instance GoogleRequest RepliesList where
-        type Rs RepliesList = CommentReplyList
+        type Rs RepliesList = ReplyList
         requestClient RepliesList{..}
           = go _rlFileId _rlCommentId _rlPageToken
-              (Just _rlMaxResults)
+              (Just _rlPageSize)
               (Just _rlIncludeDeleted)
               (Just AltJSON)
               driveService

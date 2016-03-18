@@ -369,8 +369,8 @@ olNextPageToken
   = lens _olNextPageToken
       (\ s a -> s{_olNextPageToken = a})
 
--- | [Output Only] Type of resource. Always replicapoolupdater#operations for
--- Operations resource.
+-- | [Output Only] Type of resource. Always replicapoolupdater#operationList
+-- for OperationList resources.
 olKind :: Lens' OperationList Text
 olKind = lens _olKind (\ s a -> s{_olKind = a})
 
@@ -380,7 +380,7 @@ olItems
   = lens _olItems (\ s a -> s{_olItems = a}) . _Default
       . _Coerce
 
--- | [Output Only] Server-defined URL for this resource.
+-- | [Output Only] The fully qualified URL for the resource.
 olSelfLink :: Lens' OperationList (Maybe Text)
 olSelfLink
   = lens _olSelfLink (\ s a -> s{_olSelfLink = a})
@@ -707,7 +707,7 @@ oHTTPErrorStatusCode
 oUser :: Lens' Operation (Maybe Text)
 oUser = lens _oUser (\ s a -> s{_oUser = a})
 
--- | [Output Only] Server defined URL for the resource.
+-- | [Output Only] The fully qualified URL for the resource.
 oSelfLink :: Lens' Operation (Maybe Text)
 oSelfLink
   = lens _oSelfLink (\ s a -> s{_oSelfLink = a})

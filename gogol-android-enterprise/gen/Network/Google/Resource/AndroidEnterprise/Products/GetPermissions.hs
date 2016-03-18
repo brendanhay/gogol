@@ -22,7 +22,7 @@
 --
 -- Retrieves the Android app permissions required by this app.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.getPermissions@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.getPermissions@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
     (
     -- * REST Resource

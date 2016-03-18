@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountActiveAdSummariesGet' request conforms to.
 type AccountActiveAdSummariesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.4" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountActiveAdSummaries" :>

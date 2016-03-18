@@ -245,35 +245,35 @@ instance ToJSON SourceSplitResponse where
 -- designed to be: - Simple to use and understand for most users - Flexible
 -- enough to meet unexpected needs # Overview The \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of [google.rpc.Code][],
--- but it may accept additional error codes if needed. The error message
--- should be a developer-facing English message that helps developers
--- *understand* and *resolve* the error. If a localized user-facing error
--- message is needed, put the localized message in the error details or
--- localize it in the client. The optional error details may contain
--- arbitrary information about the error. There is a predefined set of
--- error detail types in the package \`google.rpc\` which can be used for
--- common error conditions. # Language mapping The \`Status\` message is
--- the logical representation of the error model, but it is not necessarily
--- the actual wire format. When the \`Status\` message is exposed in
--- different client libraries and different wire protocols, it can be
--- mapped differently. For example, it will likely be mapped to some
--- exceptions in Java, but more likely mapped to some error codes in C. #
--- Other uses The error model and the \`Status\` message can be used in a
--- variety of environments, either with or without APIs, to provide a
--- consistent developer experience across different environments. Example
--- uses of this error model include: - Partial errors. If a service needs
--- to return partial errors to the client, it may embed the \`Status\` in
--- the normal response to indicate the partial errors. - Workflow errors. A
--- typical workflow has multiple steps. Each step may have a \`Status\`
--- message for error reporting purpose. - Batch operations. If a client
--- uses batch request and batch response, the \`Status\` message should be
--- used directly inside batch response, one for each error sub-response. -
--- Asynchronous operations. If an API call embeds asynchronous operation
--- results in its response, the status of those operations should be
--- represented directly using the \`Status\` message. - Logging. If some
--- API errors are stored in logs, the message \`Status\` could be used
--- directly after any stripping needed for security\/privacy reasons.
+-- details. The error code should be an enum value of google.rpc.Code, but
+-- it may accept additional error codes if needed. The error message should
+-- be a developer-facing English message that helps developers *understand*
+-- and *resolve* the error. If a localized user-facing error message is
+-- needed, put the localized message in the error details or localize it in
+-- the client. The optional error details may contain arbitrary information
+-- about the error. There is a predefined set of error detail types in the
+-- package \`google.rpc\` which can be used for common error conditions. #
+-- Language mapping The \`Status\` message is the logical representation of
+-- the error model, but it is not necessarily the actual wire format. When
+-- the \`Status\` message is exposed in different client libraries and
+-- different wire protocols, it can be mapped differently. For example, it
+-- will likely be mapped to some exceptions in Java, but more likely mapped
+-- to some error codes in C. # Other uses The error model and the
+-- \`Status\` message can be used in a variety of environments, either with
+-- or without APIs, to provide a consistent developer experience across
+-- different environments. Example uses of this error model include: -
+-- Partial errors. If a service needs to return partial errors to the
+-- client, it may embed the \`Status\` in the normal response to indicate
+-- the partial errors. - Workflow errors. A typical workflow has multiple
+-- steps. Each step may have a \`Status\` message for error reporting
+-- purpose. - Batch operations. If a client uses batch request and batch
+-- response, the \`Status\` message should be used directly inside batch
+-- response, one for each error sub-response. - Asynchronous operations. If
+-- an API call embeds asynchronous operation results in its response, the
+-- status of those operations should be represented directly using the
+-- \`Status\` message. - Logging. If some API errors are stored in logs,
+-- the message \`Status\` could be used directly after any stripping needed
+-- for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
@@ -308,7 +308,7 @@ sDetails
       _Default
       . _Coerce
 
--- | The status code, which should be an enum value of [google.rpc.Code][].
+-- | The status code, which should be an enum value of google.rpc.Code.
 sCode :: Lens' Status (Maybe Int32)
 sCode
   = lens _sCode (\ s a -> s{_sCode = a}) .
@@ -316,8 +316,7 @@ sCode
 
 -- | A developer-facing error message, which should be in English. Any
 -- user-facing error message should be localized and sent in the
--- [google.rpc.Status.details][google.rpc.Status.details] field, or
--- localized by the client.
+-- google.rpc.Status.details field, or localized by the client.
 sMessage :: Lens' Status (Maybe Text)
 sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
 
@@ -473,7 +472,7 @@ wiProjectId :: Lens' WorkItem (Maybe Text)
 wiProjectId
   = lens _wiProjectId (\ s a -> s{_wiProjectId = a})
 
--- | Time when the lease on this [Work][] will expire.
+-- | Time when the lease on this Work will expire.
 wiLeaseExpireTime :: Lens' WorkItem (Maybe Text)
 wiLeaseExpireTime
   = lens _wiLeaseExpireTime
@@ -530,6 +529,86 @@ instance ToJSON WorkItem where
                   ("leaseExpireTime" .=) <$> _wiLeaseExpireTime,
                   ("configuration" .=) <$> _wiConfiguration,
                   ("seqMapTask" .=) <$> _wiSeqMapTask])
+
+-- | WorkerHealthReport contains information about the health of a worker.
+-- The VM should be identified by the labels attached to the WorkerMessage
+-- that this health ping belongs to.
+--
+-- /See:/ 'workerHealthReport' smart constructor.
+data WorkerHealthReport = WorkerHealthReport
+    { _whrVMIsHealthy    :: !(Maybe Bool)
+    , _whrReportInterval :: !(Maybe Text)
+    , _whrPods           :: !(Maybe [WorkerHealthReportPodsItem])
+    , _whrVMStartupTime  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerHealthReport' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'whrVMIsHealthy'
+--
+-- * 'whrReportInterval'
+--
+-- * 'whrPods'
+--
+-- * 'whrVMStartupTime'
+workerHealthReport
+    :: WorkerHealthReport
+workerHealthReport =
+    WorkerHealthReport
+    { _whrVMIsHealthy = Nothing
+    , _whrReportInterval = Nothing
+    , _whrPods = Nothing
+    , _whrVMStartupTime = Nothing
+    }
+
+-- | Whether the VM is healthy.
+whrVMIsHealthy :: Lens' WorkerHealthReport (Maybe Bool)
+whrVMIsHealthy
+  = lens _whrVMIsHealthy
+      (\ s a -> s{_whrVMIsHealthy = a})
+
+-- | The interval at which the worker is sending health reports. The default
+-- value of 0 should be interpreted as the field is not being explicitly
+-- set by the worker.
+whrReportInterval :: Lens' WorkerHealthReport (Maybe Text)
+whrReportInterval
+  = lens _whrReportInterval
+      (\ s a -> s{_whrReportInterval = a})
+
+-- | The pods running on the worker. See:
+-- http:\/\/kubernetes.io\/v1.1\/docs\/api-reference\/v1\/definitions.html#_v1_pod
+-- This field is used by the worker to send the status of the indvidual
+-- containers running on each worker.
+whrPods :: Lens' WorkerHealthReport [WorkerHealthReportPodsItem]
+whrPods
+  = lens _whrPods (\ s a -> s{_whrPods = a}) . _Default
+      . _Coerce
+
+-- | The time the VM was booted.
+whrVMStartupTime :: Lens' WorkerHealthReport (Maybe Text)
+whrVMStartupTime
+  = lens _whrVMStartupTime
+      (\ s a -> s{_whrVMStartupTime = a})
+
+instance FromJSON WorkerHealthReport where
+        parseJSON
+          = withObject "WorkerHealthReport"
+              (\ o ->
+                 WorkerHealthReport <$>
+                   (o .:? "vmIsHealthy") <*> (o .:? "reportInterval")
+                     <*> (o .:? "pods" .!= mempty)
+                     <*> (o .:? "vmStartupTime"))
+
+instance ToJSON WorkerHealthReport where
+        toJSON WorkerHealthReport{..}
+          = object
+              (catMaybes
+                 [("vmIsHealthy" .=) <$> _whrVMIsHealthy,
+                  ("reportInterval" .=) <$> _whrReportInterval,
+                  ("pods" .=) <$> _whrPods,
+                  ("vmStartupTime" .=) <$> _whrVMStartupTime])
 
 -- | Hints for splitting a Source into bundles (parts for parallel
 -- processing) using SourceSplitRequest.
@@ -669,9 +748,8 @@ instance ToJSON AutoscalingSettings where
                  [("maxNumWorkers" .=) <$> _asMaxNumWorkers,
                   ("algorithm" .=) <$> _asAlgorithm])
 
--- | Contains information about how a particular
--- [google.dataflow.v1beta3.Step][google.dataflow.v1beta3.Step] will be
--- executed.
+-- | Contains information about how a particular google.dataflow.v1beta3.Step
+-- will be executed.
 --
 -- /See:/ 'jobExecutionStageInfo' smart constructor.
 newtype JobExecutionStageInfo = JobExecutionStageInfo
@@ -912,6 +990,47 @@ instance ToJSON Sink where
           = object
               (catMaybes
                  [("codec" .=) <$> _sCodec, ("spec" .=) <$> _sSpec])
+
+-- | WorkerHealthReportResponse contains information returned to the worker
+-- in response to a health ping.
+--
+-- /See:/ 'workerHealthReportResponse' smart constructor.
+newtype WorkerHealthReportResponse = WorkerHealthReportResponse
+    { _whrrReportInterval :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerHealthReportResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'whrrReportInterval'
+workerHealthReportResponse
+    :: WorkerHealthReportResponse
+workerHealthReportResponse =
+    WorkerHealthReportResponse
+    { _whrrReportInterval = Nothing
+    }
+
+-- | A positive value indicates the worker should change its reporting
+-- interval to the specified value. The default value of zero means no
+-- change in report rate is requested by the server.
+whrrReportInterval :: Lens' WorkerHealthReportResponse (Maybe Text)
+whrrReportInterval
+  = lens _whrrReportInterval
+      (\ s a -> s{_whrrReportInterval = a})
+
+instance FromJSON WorkerHealthReportResponse where
+        parseJSON
+          = withObject "WorkerHealthReportResponse"
+              (\ o ->
+                 WorkerHealthReportResponse <$>
+                   (o .:? "reportInterval"))
+
+instance ToJSON WorkerHealthReportResponse where
+        toJSON WorkerHealthReportResponse{..}
+          = object
+              (catMaybes
+                 [("reportInterval" .=) <$> _whrrReportInterval])
 
 -- | Identifies a metric, by describing the source which generated the
 -- metric.
@@ -1684,7 +1803,8 @@ instance ToJSON JobMetrics where
 --
 -- /See:/ 'workItemStatus' smart constructor.
 data WorkItemStatus = WorkItemStatus
-    { _wisProgress                :: !(Maybe ApproximateProgress)
+    { _wisReportedProgress        :: !(Maybe ApproximateReportedProgress)
+    , _wisProgress                :: !(Maybe ApproximateProgress)
     , _wisSourceOperationResponse :: !(Maybe SourceOperationResponse)
     , _wisStopPosition            :: !(Maybe Position)
     , _wisDynamicSourceSplit      :: !(Maybe DynamicSourceSplit)
@@ -1700,6 +1820,8 @@ data WorkItemStatus = WorkItemStatus
 -- | Creates a value of 'WorkItemStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wisReportedProgress'
 --
 -- * 'wisProgress'
 --
@@ -1726,7 +1848,8 @@ workItemStatus
     :: WorkItemStatus
 workItemStatus =
     WorkItemStatus
-    { _wisProgress = Nothing
+    { _wisReportedProgress = Nothing
+    , _wisProgress = Nothing
     , _wisSourceOperationResponse = Nothing
     , _wisStopPosition = Nothing
     , _wisDynamicSourceSplit = Nothing
@@ -1739,7 +1862,13 @@ workItemStatus =
     , _wisWorkItemId = Nothing
     }
 
--- | The WorkItem\'s approximate progress.
+-- | The worker\'s progress through this WorkItem.
+wisReportedProgress :: Lens' WorkItemStatus (Maybe ApproximateReportedProgress)
+wisReportedProgress
+  = lens _wisReportedProgress
+      (\ s a -> s{_wisReportedProgress = a})
+
+-- | DEPRECATED in favor of reported_progress.
 wisProgress :: Lens' WorkItemStatus (Maybe ApproximateProgress)
 wisProgress
   = lens _wisProgress (\ s a -> s{_wisProgress = a})
@@ -1847,7 +1976,7 @@ instance FromJSON WorkItemStatus where
           = withObject "WorkItemStatus"
               (\ o ->
                  WorkItemStatus <$>
-                   (o .:? "progress") <*>
+                   (o .:? "reportedProgress") <*> (o .:? "progress") <*>
                      (o .:? "sourceOperationResponse")
                      <*> (o .:? "stopPosition")
                      <*> (o .:? "dynamicSourceSplit")
@@ -1863,7 +1992,8 @@ instance ToJSON WorkItemStatus where
         toJSON WorkItemStatus{..}
           = object
               (catMaybes
-                 [("progress" .=) <$> _wisProgress,
+                 [("reportedProgress" .=) <$> _wisReportedProgress,
+                  ("progress" .=) <$> _wisProgress,
                   ("sourceOperationResponse" .=) <$>
                     _wisSourceOperationResponse,
                   ("stopPosition" .=) <$> _wisStopPosition,
@@ -1876,6 +2006,45 @@ instance ToJSON WorkItemStatus where
                   ("errors" .=) <$> _wisErrors,
                   ("metricUpdates" .=) <$> _wisMetricUpdates,
                   ("workItemId" .=) <$> _wisWorkItemId])
+
+-- | Labels are used to group WorkerMessages. For example, a worker_message
+-- about a particular container might have the labels: { \"JOB_ID\":
+-- \"2015-04-22\", \"WORKER_ID\": \"wordcount-vm-2015…\"
+-- \"CONTAINER_TYPE\": \"worker\", \"CONTAINER_ID\": \"ac1234def\"} Label
+-- tags typically correspond to Label enum values. However, for ease of
+-- development other strings can be used as tags. LABEL_UNSPECIFIED should
+-- not be used here.
+--
+-- /See:/ 'workerMessageLabels' smart constructor.
+newtype WorkerMessageLabels = WorkerMessageLabels
+    { _wmlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerMessageLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wmlAddtional'
+workerMessageLabels
+    :: HashMap Text Text -- ^ 'wmlAddtional'
+    -> WorkerMessageLabels
+workerMessageLabels pWmlAddtional_ =
+    WorkerMessageLabels
+    { _wmlAddtional = _Coerce # pWmlAddtional_
+    }
+
+wmlAddtional :: Lens' WorkerMessageLabels (HashMap Text Text)
+wmlAddtional
+  = lens _wmlAddtional (\ s a -> s{_wmlAddtional = a})
+      . _Coerce
+
+instance FromJSON WorkerMessageLabels where
+        parseJSON
+          = withObject "WorkerMessageLabels"
+              (\ o -> WorkerMessageLabels <$> (parseJSONObject o))
+
+instance ToJSON WorkerMessageLabels where
+        toJSON = toJSON . _wmlAddtional
 
 -- | An instruction that copies its inputs (zero or more) to its (single)
 -- output.
@@ -1913,6 +2082,76 @@ instance FromJSON FlattenInstruction where
 instance ToJSON FlattenInstruction where
         toJSON FlattenInstruction{..}
           = object (catMaybes [("inputs" .=) <$> _fiInputs])
+
+-- | A message code is used to report status and error messages to the
+-- service. The message codes are intended to be machine readable. The
+-- service will take care of translating these into user understandable
+-- messages if necessary. Example use cases: 1. Worker processes reporting
+-- successful startup. 2. Worker processes reporting specific errors (e.g.
+-- package staging failure).
+--
+-- /See:/ 'workerMessageCode' smart constructor.
+data WorkerMessageCode = WorkerMessageCode
+    { _wmcParameters :: !(Maybe WorkerMessageCodeParameters)
+    , _wmcCode       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerMessageCode' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wmcParameters'
+--
+-- * 'wmcCode'
+workerMessageCode
+    :: WorkerMessageCode
+workerMessageCode =
+    WorkerMessageCode
+    { _wmcParameters = Nothing
+    , _wmcCode = Nothing
+    }
+
+-- | Parameters contains specific information about the code. This is a
+-- struct to allow parameters of different types. Examples: 1. For a
+-- \"HARNESS_STARTED\" message parameters might provide the name of the
+-- worker and additional data like timing information. 2. For a
+-- \"GCS_DOWNLOAD_ERROR\" parameters might contain fields listing the GCS
+-- objects being downloaded and fields containing errors. In general
+-- complex data structures should be avoided. If a worker needs to send a
+-- specific and complicated data structure then please consider defining a
+-- new proto and adding it to the data oneof in WorkerMessageResponse.
+-- Conventions: Parameters should only be used for information that isn\'t
+-- typically passed as a label. hostname and other worker identifiers
+-- should almost always be passed as labels since they will be included on
+-- most messages.
+wmcParameters :: Lens' WorkerMessageCode (Maybe WorkerMessageCodeParameters)
+wmcParameters
+  = lens _wmcParameters
+      (\ s a -> s{_wmcParameters = a})
+
+-- | The code is a string intended for consumption by a machine that
+-- identifies the type of message being sent. Examples: 1.
+-- \"HARNESS_STARTED\" might be used to indicate the worker harness has
+-- started. 2. \"GCS_DOWNLOAD_ERROR\" might be used to indicate an error
+-- downloading a GCS file as part of the boot process of one of the worker
+-- containers. This is a string and not an enum to make it easy to add new
+-- codes without waiting for an API change.
+wmcCode :: Lens' WorkerMessageCode (Maybe Text)
+wmcCode = lens _wmcCode (\ s a -> s{_wmcCode = a})
+
+instance FromJSON WorkerMessageCode where
+        parseJSON
+          = withObject "WorkerMessageCode"
+              (\ o ->
+                 WorkerMessageCode <$>
+                   (o .:? "parameters") <*> (o .:? "code"))
+
+instance ToJSON WorkerMessageCode where
+        toJSON WorkerMessageCode{..}
+          = object
+              (catMaybes
+                 [("parameters" .=) <$> _wmcParameters,
+                  ("code" .=) <$> _wmcCode])
 
 -- | Map of transform name prefixes of the job to be replaced to the
 -- corresponding name prefixes of the new job.
@@ -2658,6 +2897,59 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
+-- | Represents the level of parallelism in a WorkItem\'s input, reported by
+-- the worker.
+--
+-- /See:/ 'reportedParallelism' smart constructor.
+data ReportedParallelism = ReportedParallelism
+    { _rpValue      :: !(Maybe (Textual Double))
+    , _rpIsInfinite :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportedParallelism' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rpValue'
+--
+-- * 'rpIsInfinite'
+reportedParallelism
+    :: ReportedParallelism
+reportedParallelism =
+    ReportedParallelism
+    { _rpValue = Nothing
+    , _rpIsInfinite = Nothing
+    }
+
+-- | Specifies the level of parallelism in case it is finite.
+rpValue :: Lens' ReportedParallelism (Maybe Double)
+rpValue
+  = lens _rpValue (\ s a -> s{_rpValue = a}) .
+      mapping _Coerce
+
+-- | Specifies whether the parallelism is infinite. If true, \"value\" is
+-- ignored. Infinite parallelism means the service will assume that the
+-- work item can always be split into more non-empty work items by dynamic
+-- splitting. This is a work-around for lack of support for infinity by the
+-- current JSON-based Java RPC stack.
+rpIsInfinite :: Lens' ReportedParallelism (Maybe Bool)
+rpIsInfinite
+  = lens _rpIsInfinite (\ s a -> s{_rpIsInfinite = a})
+
+instance FromJSON ReportedParallelism where
+        parseJSON
+          = withObject "ReportedParallelism"
+              (\ o ->
+                 ReportedParallelism <$>
+                   (o .:? "value") <*> (o .:? "isInfinite"))
+
+instance ToJSON ReportedParallelism where
+        toJSON ReportedParallelism{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _rpValue,
+                  ("isInfinite" .=) <$> _rpIsInfinite])
+
 -- | Named properties associated with the step. Each kind of predefined step
 -- has its own required set of properties.
 --
@@ -2699,6 +2991,7 @@ instance ToJSON StepProperties where
 -- /See:/ 'topologyConfig' smart constructor.
 data TopologyConfig = TopologyConfig
     { _tcDataDiskAssignments           :: !(Maybe [DataDiskAssignment])
+    , _tcForwardingKeyBits             :: !(Maybe (Textual Int32))
     , _tcUserStageToComputationNameMap :: !(Maybe TopologyConfigUserStageToComputationNameMap)
     , _tcComputations                  :: !(Maybe [ComputationTopology])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2709,6 +3002,8 @@ data TopologyConfig = TopologyConfig
 --
 -- * 'tcDataDiskAssignments'
 --
+-- * 'tcForwardingKeyBits'
+--
 -- * 'tcUserStageToComputationNameMap'
 --
 -- * 'tcComputations'
@@ -2717,6 +3012,7 @@ topologyConfig
 topologyConfig =
     TopologyConfig
     { _tcDataDiskAssignments = Nothing
+    , _tcForwardingKeyBits = Nothing
     , _tcUserStageToComputationNameMap = Nothing
     , _tcComputations = Nothing
     }
@@ -2728,6 +3024,13 @@ tcDataDiskAssignments
       (\ s a -> s{_tcDataDiskAssignments = a})
       . _Default
       . _Coerce
+
+-- | The size (in bits) of keys that will be assigned to source messages.
+tcForwardingKeyBits :: Lens' TopologyConfig (Maybe Int32)
+tcForwardingKeyBits
+  = lens _tcForwardingKeyBits
+      (\ s a -> s{_tcForwardingKeyBits = a})
+      . mapping _Coerce
 
 -- | Maps user stage names to stable computation names.
 tcUserStageToComputationNameMap :: Lens' TopologyConfig (Maybe TopologyConfigUserStageToComputationNameMap)
@@ -2749,7 +3052,8 @@ instance FromJSON TopologyConfig where
               (\ o ->
                  TopologyConfig <$>
                    (o .:? "dataDiskAssignments" .!= mempty) <*>
-                     (o .:? "userStageToComputationNameMap")
+                     (o .:? "forwardingKeyBits")
+                     <*> (o .:? "userStageToComputationNameMap")
                      <*> (o .:? "computations" .!= mempty))
 
 instance ToJSON TopologyConfig where
@@ -2758,9 +3062,61 @@ instance ToJSON TopologyConfig where
               (catMaybes
                  [("dataDiskAssignments" .=) <$>
                     _tcDataDiskAssignments,
+                  ("forwardingKeyBits" .=) <$> _tcForwardingKeyBits,
                   ("userStageToComputationNameMap" .=) <$>
                     _tcUserStageToComputationNameMap,
                   ("computations" .=) <$> _tcComputations])
+
+-- | A suggestion by the service to the worker to dynamically split the
+-- WorkItem.
+--
+-- /See:/ 'approximateSplitRequest' smart constructor.
+data ApproximateSplitRequest = ApproximateSplitRequest
+    { _asrFractionConsumed :: !(Maybe (Textual Double))
+    , _asrPosition         :: !(Maybe Position)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApproximateSplitRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asrFractionConsumed'
+--
+-- * 'asrPosition'
+approximateSplitRequest
+    :: ApproximateSplitRequest
+approximateSplitRequest =
+    ApproximateSplitRequest
+    { _asrFractionConsumed = Nothing
+    , _asrPosition = Nothing
+    }
+
+-- | A fraction at which to split the work item, from 0.0 (beginning of the
+-- input) to 1.0 (end of the input).
+asrFractionConsumed :: Lens' ApproximateSplitRequest (Maybe Double)
+asrFractionConsumed
+  = lens _asrFractionConsumed
+      (\ s a -> s{_asrFractionConsumed = a})
+      . mapping _Coerce
+
+-- | A Position at which to split the work item.
+asrPosition :: Lens' ApproximateSplitRequest (Maybe Position)
+asrPosition
+  = lens _asrPosition (\ s a -> s{_asrPosition = a})
+
+instance FromJSON ApproximateSplitRequest where
+        parseJSON
+          = withObject "ApproximateSplitRequest"
+              (\ o ->
+                 ApproximateSplitRequest <$>
+                   (o .:? "fractionConsumed") <*> (o .:? "position"))
+
+instance ToJSON ApproximateSplitRequest where
+        toJSON ApproximateSplitRequest{..}
+          = object
+              (catMaybes
+                 [("fractionConsumed" .=) <$> _asrFractionConsumed,
+                  ("position" .=) <$> _asrPosition])
 
 -- | Provides data to pass through to the worker harness.
 --
@@ -2961,6 +3317,46 @@ instance ToJSON DataDiskAssignment where
                  [("vmInstance" .=) <$> _ddaVMInstance,
                   ("dataDisks" .=) <$> _ddaDataDisks])
 
+-- | A worker_message response allows the server to pass information to the
+-- sender.
+--
+-- /See:/ 'workerMessageResponse' smart constructor.
+newtype WorkerMessageResponse = WorkerMessageResponse
+    { _wmrWorkerHealthReportResponse :: Maybe WorkerHealthReportResponse
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerMessageResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wmrWorkerHealthReportResponse'
+workerMessageResponse
+    :: WorkerMessageResponse
+workerMessageResponse =
+    WorkerMessageResponse
+    { _wmrWorkerHealthReportResponse = Nothing
+    }
+
+-- | The service\'s response to a worker\'s health report.
+wmrWorkerHealthReportResponse :: Lens' WorkerMessageResponse (Maybe WorkerHealthReportResponse)
+wmrWorkerHealthReportResponse
+  = lens _wmrWorkerHealthReportResponse
+      (\ s a -> s{_wmrWorkerHealthReportResponse = a})
+
+instance FromJSON WorkerMessageResponse where
+        parseJSON
+          = withObject "WorkerMessageResponse"
+              (\ o ->
+                 WorkerMessageResponse <$>
+                   (o .:? "workerHealthReportResponse"))
+
+instance ToJSON WorkerMessageResponse where
+        toJSON WorkerMessageResponse{..}
+          = object
+              (catMaybes
+                 [("workerHealthReportResponse" .=) <$>
+                    _wmrWorkerHealthReportResponse])
+
 -- | The Dataflow service\'s idea of the current state of a WorkItem being
 -- processed by a worker.
 --
@@ -2972,6 +3368,7 @@ data WorkItemServiceState = WorkItemServiceState
     , _wissSuggestedStopPoint    :: !(Maybe ApproximateProgress)
     , _wissSuggestedStopPosition :: !(Maybe Position)
     , _wissLeaseExpireTime       :: !(Maybe Text)
+    , _wissSplitRequest          :: !(Maybe ApproximateSplitRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkItemServiceState' with the minimum fields required to make a request.
@@ -2989,6 +3386,8 @@ data WorkItemServiceState = WorkItemServiceState
 -- * 'wissSuggestedStopPosition'
 --
 -- * 'wissLeaseExpireTime'
+--
+-- * 'wissSplitRequest'
 workItemServiceState
     :: WorkItemServiceState
 workItemServiceState =
@@ -2999,6 +3398,7 @@ workItemServiceState =
     , _wissSuggestedStopPoint = Nothing
     , _wissSuggestedStopPosition = Nothing
     , _wissLeaseExpireTime = Nothing
+    , _wissSplitRequest = Nothing
     }
 
 -- | The index value to use for the next report sent by the worker. Note: If
@@ -3023,8 +3423,7 @@ wissHarnessData
   = lens _wissHarnessData
       (\ s a -> s{_wissHarnessData = a})
 
--- | The progress point in the WorkItem where the Dataflow service suggests
--- that the worker truncate the task.
+-- | DEPRECATED in favor of split_request.
 wissSuggestedStopPoint :: Lens' WorkItemServiceState (Maybe ApproximateProgress)
 wissSuggestedStopPoint
   = lens _wissSuggestedStopPoint
@@ -3042,6 +3441,13 @@ wissLeaseExpireTime
   = lens _wissLeaseExpireTime
       (\ s a -> s{_wissLeaseExpireTime = a})
 
+-- | The progress point in the WorkItem where the Dataflow service suggests
+-- that the worker truncate the task.
+wissSplitRequest :: Lens' WorkItemServiceState (Maybe ApproximateSplitRequest)
+wissSplitRequest
+  = lens _wissSplitRequest
+      (\ s a -> s{_wissSplitRequest = a})
+
 instance FromJSON WorkItemServiceState where
         parseJSON
           = withObject "WorkItemServiceState"
@@ -3052,7 +3458,8 @@ instance FromJSON WorkItemServiceState where
                      <*> (o .:? "harnessData")
                      <*> (o .:? "suggestedStopPoint")
                      <*> (o .:? "suggestedStopPosition")
-                     <*> (o .:? "leaseExpireTime"))
+                     <*> (o .:? "leaseExpireTime")
+                     <*> (o .:? "splitRequest"))
 
 instance ToJSON WorkItemServiceState where
         toJSON WorkItemServiceState{..}
@@ -3066,7 +3473,8 @@ instance ToJSON WorkItemServiceState where
                     _wissSuggestedStopPoint,
                   ("suggestedStopPosition" .=) <$>
                     _wissSuggestedStopPosition,
-                  ("leaseExpireTime" .=) <$> _wissLeaseExpireTime])
+                  ("leaseExpireTime" .=) <$> _wissLeaseExpireTime,
+                  ("splitRequest" .=) <$> _wissSplitRequest])
 
 -- | A task which initializes part of a streaming Dataflow job.
 --
@@ -3075,6 +3483,7 @@ data StreamingSetupTask = StreamingSetupTask
     { _sstStreamingComputationTopology :: !(Maybe TopologyConfig)
     , _sstReceiveWorkPort              :: !(Maybe (Textual Int32))
     , _sstWorkerHarnessPort            :: !(Maybe (Textual Int32))
+    , _sstDrain                        :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StreamingSetupTask' with the minimum fields required to make a request.
@@ -3086,6 +3495,8 @@ data StreamingSetupTask = StreamingSetupTask
 -- * 'sstReceiveWorkPort'
 --
 -- * 'sstWorkerHarnessPort'
+--
+-- * 'sstDrain'
 streamingSetupTask
     :: StreamingSetupTask
 streamingSetupTask =
@@ -3093,6 +3504,7 @@ streamingSetupTask =
     { _sstStreamingComputationTopology = Nothing
     , _sstReceiveWorkPort = Nothing
     , _sstWorkerHarnessPort = Nothing
+    , _sstDrain = Nothing
     }
 
 -- | The global topology of the streaming Dataflow job.
@@ -3117,6 +3529,10 @@ sstWorkerHarnessPort
       (\ s a -> s{_sstWorkerHarnessPort = a})
       . mapping _Coerce
 
+-- | The user has requested drain.
+sstDrain :: Lens' StreamingSetupTask (Maybe Bool)
+sstDrain = lens _sstDrain (\ s a -> s{_sstDrain = a})
+
 instance FromJSON StreamingSetupTask where
         parseJSON
           = withObject "StreamingSetupTask"
@@ -3124,7 +3540,8 @@ instance FromJSON StreamingSetupTask where
                  StreamingSetupTask <$>
                    (o .:? "streamingComputationTopology") <*>
                      (o .:? "receiveWorkPort")
-                     <*> (o .:? "workerHarnessPort"))
+                     <*> (o .:? "workerHarnessPort")
+                     <*> (o .:? "drain"))
 
 instance ToJSON StreamingSetupTask where
         toJSON StreamingSetupTask{..}
@@ -3133,7 +3550,8 @@ instance ToJSON StreamingSetupTask where
                  [("streamingComputationTopology" .=) <$>
                     _sstStreamingComputationTopology,
                   ("receiveWorkPort" .=) <$> _sstReceiveWorkPort,
-                  ("workerHarnessPort" .=) <$> _sstWorkerHarnessPort])
+                  ("workerHarnessPort" .=) <$> _sstWorkerHarnessPort,
+                  ("drain" .=) <$> _sstDrain])
 
 -- | The codec to use for interpreting an element in the input PTable.
 --
@@ -3310,6 +3728,41 @@ instance FromJSON SinkCodec where
 
 instance ToJSON SinkCodec where
         toJSON = toJSON . _scAddtional
+
+--
+-- /See:/ 'workerHealthReportPodsItem' smart constructor.
+newtype WorkerHealthReportPodsItem = WorkerHealthReportPodsItem
+    { _whrpiAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerHealthReportPodsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'whrpiAddtional'
+workerHealthReportPodsItem
+    :: HashMap Text JSONValue -- ^ 'whrpiAddtional'
+    -> WorkerHealthReportPodsItem
+workerHealthReportPodsItem pWhrpiAddtional_ =
+    WorkerHealthReportPodsItem
+    { _whrpiAddtional = _Coerce # pWhrpiAddtional_
+    }
+
+-- | Properties of the object.
+whrpiAddtional :: Lens' WorkerHealthReportPodsItem (HashMap Text JSONValue)
+whrpiAddtional
+  = lens _whrpiAddtional
+      (\ s a -> s{_whrpiAddtional = a})
+      . _Coerce
+
+instance FromJSON WorkerHealthReportPodsItem where
+        parseJSON
+          = withObject "WorkerHealthReportPodsItem"
+              (\ o ->
+                 WorkerHealthReportPodsItem <$> (parseJSONObject o))
+
+instance ToJSON WorkerHealthReportPodsItem where
+        toJSON = toJSON . _whrpiAddtional
 
 -- | The user function to invoke.
 --
@@ -3494,6 +3947,47 @@ instance FromJSON WorkerPoolPoolArgs where
 
 instance ToJSON WorkerPoolPoolArgs where
         toJSON = toJSON . _wppaAddtional
+
+-- | The response to the worker messages.
+--
+-- /See:/ 'sendWorkerMessagesResponse' smart constructor.
+newtype SendWorkerMessagesResponse = SendWorkerMessagesResponse
+    { _swmrWorkerMessageResponses :: Maybe [WorkerMessageResponse]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SendWorkerMessagesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'swmrWorkerMessageResponses'
+sendWorkerMessagesResponse
+    :: SendWorkerMessagesResponse
+sendWorkerMessagesResponse =
+    SendWorkerMessagesResponse
+    { _swmrWorkerMessageResponses = Nothing
+    }
+
+-- | The servers response to the worker messages.
+swmrWorkerMessageResponses :: Lens' SendWorkerMessagesResponse [WorkerMessageResponse]
+swmrWorkerMessageResponses
+  = lens _swmrWorkerMessageResponses
+      (\ s a -> s{_swmrWorkerMessageResponses = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON SendWorkerMessagesResponse where
+        parseJSON
+          = withObject "SendWorkerMessagesResponse"
+              (\ o ->
+                 SendWorkerMessagesResponse <$>
+                   (o .:? "workerMessageResponses" .!= mempty))
+
+instance ToJSON SendWorkerMessagesResponse where
+        toJSON SendWorkerMessagesResponse{..}
+          = object
+              (catMaybes
+                 [("workerMessageResponses" .=) <$>
+                    _swmrWorkerMessageResponses])
 
 -- | Identifies the location of a streaming side input.
 --
@@ -3840,6 +4334,7 @@ data Job = Job
     , _jClientRequestId      :: !(Maybe Text)
     , _jCurrentState         :: !(Maybe Text)
     , _jReplacedByJobId      :: !(Maybe Text)
+    , _jTempFiles            :: !(Maybe [Text])
     , _jSteps                :: !(Maybe [Step])
     , _jExecutionInfo        :: !(Maybe JobExecutionInfo)
     , _jName                 :: !(Maybe Text)
@@ -3865,6 +4360,8 @@ data Job = Job
 -- * 'jCurrentState'
 --
 -- * 'jReplacedByJobId'
+--
+-- * 'jTempFiles'
 --
 -- * 'jSteps'
 --
@@ -3894,6 +4391,7 @@ job =
     , _jClientRequestId = Nothing
     , _jCurrentState = Nothing
     , _jReplacedByJobId = Nothing
+    , _jTempFiles = Nothing
     , _jSteps = Nothing
     , _jExecutionInfo = Nothing
     , _jName = Nothing
@@ -3949,6 +4447,18 @@ jReplacedByJobId :: Lens' Job (Maybe Text)
 jReplacedByJobId
   = lens _jReplacedByJobId
       (\ s a -> s{_jReplacedByJobId = a})
+
+-- | A set of files the system should be aware of that are used for temporary
+-- storage. These temporary files will be removed on job completion. No
+-- duplicates are allowed. No file patterns are supported. The supported
+-- files are: Google Cloud Storage:
+-- storage.googleapis.com\/{bucket}\/{object}
+-- bucket.storage.googleapis.com\/{object}
+jTempFiles :: Lens' Job [Text]
+jTempFiles
+  = lens _jTempFiles (\ s a -> s{_jTempFiles = a}) .
+      _Default
+      . _Coerce
 
 -- | The top-level steps that constitute the entire job.
 jSteps :: Lens' Job [Step]
@@ -4021,6 +4531,7 @@ instance FromJSON Job where
                      <*> (o .:? "clientRequestId")
                      <*> (o .:? "currentState")
                      <*> (o .:? "replacedByJobId")
+                     <*> (o .:? "tempFiles" .!= mempty)
                      <*> (o .:? "steps" .!= mempty)
                      <*> (o .:? "executionInfo")
                      <*> (o .:? "name")
@@ -4041,6 +4552,7 @@ instance ToJSON Job where
                   ("clientRequestId" .=) <$> _jClientRequestId,
                   ("currentState" .=) <$> _jCurrentState,
                   ("replacedByJobId" .=) <$> _jReplacedByJobId,
+                  ("tempFiles" .=) <$> _jTempFiles,
                   ("steps" .=) <$> _jSteps,
                   ("executionInfo" .=) <$> _jExecutionInfo,
                   ("name" .=) <$> _jName,
@@ -4084,6 +4596,104 @@ instance ToJSON ReadInstruction where
         toJSON ReadInstruction{..}
           = object (catMaybes [("source" .=) <$> _riSource])
 
+-- | A progress measurement of a WorkItem by a worker.
+--
+-- /See:/ 'approximateReportedProgress' smart constructor.
+data ApproximateReportedProgress = ApproximateReportedProgress
+    { _arpFractionConsumed     :: !(Maybe (Textual Double))
+    , _arpConsumedParallelism  :: !(Maybe ReportedParallelism)
+    , _arpRemainingParallelism :: !(Maybe ReportedParallelism)
+    , _arpPosition             :: !(Maybe Position)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApproximateReportedProgress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'arpFractionConsumed'
+--
+-- * 'arpConsumedParallelism'
+--
+-- * 'arpRemainingParallelism'
+--
+-- * 'arpPosition'
+approximateReportedProgress
+    :: ApproximateReportedProgress
+approximateReportedProgress =
+    ApproximateReportedProgress
+    { _arpFractionConsumed = Nothing
+    , _arpConsumedParallelism = Nothing
+    , _arpRemainingParallelism = Nothing
+    , _arpPosition = Nothing
+    }
+
+-- | Completion as fraction of the input consumed, from 0.0 (beginning,
+-- nothing consumed), to 1.0 (end of the input, entire input consumed).
+arpFractionConsumed :: Lens' ApproximateReportedProgress (Maybe Double)
+arpFractionConsumed
+  = lens _arpFractionConsumed
+      (\ s a -> s{_arpFractionConsumed = a})
+      . mapping _Coerce
+
+-- | Total amount of parallelism in the portion of input of this work item
+-- that has already been consumed. In the first two examples above (see
+-- remaining_parallelism), the value should be 30 or 3 respectively. The
+-- sum of remaining_parallelism and consumed_parallelism should equal the
+-- total amount of parallelism in this work item. If specified, must be
+-- finite.
+arpConsumedParallelism :: Lens' ApproximateReportedProgress (Maybe ReportedParallelism)
+arpConsumedParallelism
+  = lens _arpConsumedParallelism
+      (\ s a -> s{_arpConsumedParallelism = a})
+
+-- | Total amount of parallelism in the input of this WorkItem that has not
+-- been consumed yet (i.e. can be delegated to a new WorkItem via dynamic
+-- splitting). \"Amount of parallelism\" refers to how many non-empty parts
+-- of the input can be read in parallel. This does not necessarily equal
+-- number of records. An input that can be read in parallel down to the
+-- individual records is called \"perfectly splittable\". An example of
+-- non-perfectly parallelizable input is a block-compressed file format
+-- where a block of records has to be read as a whole, but different blocks
+-- can be read in parallel. Examples: * If we have read 30 records out of
+-- 50 in a perfectly splittable 50-record input, this value should be 20. *
+-- If we are reading through block 3 in a block-compressed file consisting
+-- of 5 blocks, this value should be 2 (since blocks 4 and 5 can be
+-- processed in parallel by new work items via dynamic splitting). * If we
+-- are reading through the last block in a block-compressed file, or
+-- reading or processing the last record in a perfectly splittable input,
+-- this value should be 0, because the remainder of the work item cannot be
+-- further split.
+arpRemainingParallelism :: Lens' ApproximateReportedProgress (Maybe ReportedParallelism)
+arpRemainingParallelism
+  = lens _arpRemainingParallelism
+      (\ s a -> s{_arpRemainingParallelism = a})
+
+-- | A Position within the work to represent a progress.
+arpPosition :: Lens' ApproximateReportedProgress (Maybe Position)
+arpPosition
+  = lens _arpPosition (\ s a -> s{_arpPosition = a})
+
+instance FromJSON ApproximateReportedProgress where
+        parseJSON
+          = withObject "ApproximateReportedProgress"
+              (\ o ->
+                 ApproximateReportedProgress <$>
+                   (o .:? "fractionConsumed") <*>
+                     (o .:? "consumedParallelism")
+                     <*> (o .:? "remainingParallelism")
+                     <*> (o .:? "position"))
+
+instance ToJSON ApproximateReportedProgress where
+        toJSON ApproximateReportedProgress{..}
+          = object
+              (catMaybes
+                 [("fractionConsumed" .=) <$> _arpFractionConsumed,
+                  ("consumedParallelism" .=) <$>
+                    _arpConsumedParallelism,
+                  ("remainingParallelism" .=) <$>
+                    _arpRemainingParallelism,
+                  ("position" .=) <$> _arpPosition])
+
 -- | The sink to write to, plus its parameters.
 --
 -- /See:/ 'sinkSpec' smart constructor.
@@ -4125,23 +4735,25 @@ instance ToJSON SinkSpec where
 --
 -- /See:/ 'workerPool' smart constructor.
 data WorkerPool = WorkerPool
-    { _wpAutoscalingSettings :: !(Maybe AutoscalingSettings)
-    , _wpDiskSizeGb          :: !(Maybe (Textual Int32))
-    , _wpKind                :: !(Maybe Text)
-    , _wpTaskrunnerSettings  :: !(Maybe TaskRunnerSettings)
-    , _wpNumWorkers          :: !(Maybe (Textual Int32))
-    , _wpNetwork             :: !(Maybe Text)
-    , _wpZone                :: !(Maybe Text)
-    , _wpPackages            :: !(Maybe [Package])
-    , _wpOnHostMaintenance   :: !(Maybe Text)
-    , _wpDiskSourceImage     :: !(Maybe Text)
-    , _wpMachineType         :: !(Maybe Text)
-    , _wpMetadata            :: !(Maybe WorkerPoolMetadata)
-    , _wpDiskType            :: !(Maybe Text)
-    , _wpTeardownPolicy      :: !(Maybe Text)
-    , _wpDefaultPackageSet   :: !(Maybe Text)
-    , _wpPoolArgs            :: !(Maybe WorkerPoolPoolArgs)
-    , _wpDataDisks           :: !(Maybe [Disk])
+    { _wpAutoscalingSettings         :: !(Maybe AutoscalingSettings)
+    , _wpDiskSizeGb                  :: !(Maybe (Textual Int32))
+    , _wpKind                        :: !(Maybe Text)
+    , _wpTaskrunnerSettings          :: !(Maybe TaskRunnerSettings)
+    , _wpNumWorkers                  :: !(Maybe (Textual Int32))
+    , _wpNetwork                     :: !(Maybe Text)
+    , _wpZone                        :: !(Maybe Text)
+    , _wpPackages                    :: !(Maybe [Package])
+    , _wpOnHostMaintenance           :: !(Maybe Text)
+    , _wpDiskSourceImage             :: !(Maybe Text)
+    , _wpSubnetwork                  :: !(Maybe Text)
+    , _wpMachineType                 :: !(Maybe Text)
+    , _wpMetadata                    :: !(Maybe WorkerPoolMetadata)
+    , _wpDiskType                    :: !(Maybe Text)
+    , _wpTeardownPolicy              :: !(Maybe Text)
+    , _wpDefaultPackageSet           :: !(Maybe Text)
+    , _wpPoolArgs                    :: !(Maybe WorkerPoolPoolArgs)
+    , _wpWorkerHarnessContainerImage :: !(Maybe Text)
+    , _wpDataDisks                   :: !(Maybe [Disk])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerPool' with the minimum fields required to make a request.
@@ -4168,6 +4780,8 @@ data WorkerPool = WorkerPool
 --
 -- * 'wpDiskSourceImage'
 --
+-- * 'wpSubnetwork'
+--
 -- * 'wpMachineType'
 --
 -- * 'wpMetadata'
@@ -4179,6 +4793,8 @@ data WorkerPool = WorkerPool
 -- * 'wpDefaultPackageSet'
 --
 -- * 'wpPoolArgs'
+--
+-- * 'wpWorkerHarnessContainerImage'
 --
 -- * 'wpDataDisks'
 workerPool
@@ -4195,12 +4811,14 @@ workerPool =
     , _wpPackages = Nothing
     , _wpOnHostMaintenance = Nothing
     , _wpDiskSourceImage = Nothing
+    , _wpSubnetwork = Nothing
     , _wpMachineType = Nothing
     , _wpMetadata = Nothing
     , _wpDiskType = Nothing
     , _wpTeardownPolicy = Nothing
     , _wpDefaultPackageSet = Nothing
     , _wpPoolArgs = Nothing
+    , _wpWorkerHarnessContainerImage = Nothing
     , _wpDataDisks = Nothing
     }
 
@@ -4243,8 +4861,8 @@ wpNetwork :: Lens' WorkerPool (Maybe Text)
 wpNetwork
   = lens _wpNetwork (\ s a -> s{_wpNetwork = a})
 
--- | Zone to run the worker pools in (e.g. \"us-central1-b\"). If empty or
--- unspecified, the service will attempt to choose a reasonable default.
+-- | Zone to run the worker pools in. If empty or unspecified, the service
+-- will attempt to choose a reasonable default.
 wpZone :: Lens' WorkerPool (Maybe Text)
 wpZone = lens _wpZone (\ s a -> s{_wpZone = a})
 
@@ -4267,6 +4885,12 @@ wpDiskSourceImage :: Lens' WorkerPool (Maybe Text)
 wpDiskSourceImage
   = lens _wpDiskSourceImage
       (\ s a -> s{_wpDiskSourceImage = a})
+
+-- | Subnetwork to which VMs will be assigned, if desired. Expected to be of
+-- the form \"zones\/ZONE\/subnetworks\/SUBNETWORK\".
+wpSubnetwork :: Lens' WorkerPool (Maybe Text)
+wpSubnetwork
+  = lens _wpSubnetwork (\ s a -> s{_wpSubnetwork = a})
 
 -- | Machine type (e.g. \"n1-standard-1\"). If empty or unspecified, the
 -- service will attempt to choose a reasonable default.
@@ -4315,6 +4939,13 @@ wpPoolArgs :: Lens' WorkerPool (Maybe WorkerPoolPoolArgs)
 wpPoolArgs
   = lens _wpPoolArgs (\ s a -> s{_wpPoolArgs = a})
 
+-- | Docker container image that executes Dataflow worker harness, residing
+-- in Google Container Registry. Required.
+wpWorkerHarnessContainerImage :: Lens' WorkerPool (Maybe Text)
+wpWorkerHarnessContainerImage
+  = lens _wpWorkerHarnessContainerImage
+      (\ s a -> s{_wpWorkerHarnessContainerImage = a})
+
 -- | Data disks that are used by a VM in this workflow.
 wpDataDisks :: Lens' WorkerPool [Disk]
 wpDataDisks
@@ -4337,12 +4968,14 @@ instance FromJSON WorkerPool where
                      <*> (o .:? "packages" .!= mempty)
                      <*> (o .:? "onHostMaintenance")
                      <*> (o .:? "diskSourceImage")
+                     <*> (o .:? "subnetwork")
                      <*> (o .:? "machineType")
                      <*> (o .:? "metadata")
                      <*> (o .:? "diskType")
                      <*> (o .:? "teardownPolicy")
                      <*> (o .:? "defaultPackageSet")
                      <*> (o .:? "poolArgs")
+                     <*> (o .:? "workerHarnessContainerImage")
                      <*> (o .:? "dataDisks" .!= mempty))
 
 instance ToJSON WorkerPool where
@@ -4360,12 +4993,15 @@ instance ToJSON WorkerPool where
                   ("packages" .=) <$> _wpPackages,
                   ("onHostMaintenance" .=) <$> _wpOnHostMaintenance,
                   ("diskSourceImage" .=) <$> _wpDiskSourceImage,
+                  ("subnetwork" .=) <$> _wpSubnetwork,
                   ("machineType" .=) <$> _wpMachineType,
                   ("metadata" .=) <$> _wpMetadata,
                   ("diskType" .=) <$> _wpDiskType,
                   ("teardownPolicy" .=) <$> _wpTeardownPolicy,
                   ("defaultPackageSet" .=) <$> _wpDefaultPackageSet,
                   ("poolArgs" .=) <$> _wpPoolArgs,
+                  ("workerHarnessContainerImage" .=) <$>
+                    _wpWorkerHarnessContainerImage,
                   ("dataDisks" .=) <$> _wpDataDisks])
 
 -- | Defines a particular step within a Dataflow job. A job consists of
@@ -4487,6 +5123,54 @@ instance ToJSON Package where
               (catMaybes
                  [("location" .=) <$> _pLocation,
                   ("name" .=) <$> _pName])
+
+-- | Parameters contains specific information about the code. This is a
+-- struct to allow parameters of different types. Examples: 1. For a
+-- \"HARNESS_STARTED\" message parameters might provide the name of the
+-- worker and additional data like timing information. 2. For a
+-- \"GCS_DOWNLOAD_ERROR\" parameters might contain fields listing the GCS
+-- objects being downloaded and fields containing errors. In general
+-- complex data structures should be avoided. If a worker needs to send a
+-- specific and complicated data structure then please consider defining a
+-- new proto and adding it to the data oneof in WorkerMessageResponse.
+-- Conventions: Parameters should only be used for information that isn\'t
+-- typically passed as a label. hostname and other worker identifiers
+-- should almost always be passed as labels since they will be included on
+-- most messages.
+--
+-- /See:/ 'workerMessageCodeParameters' smart constructor.
+newtype WorkerMessageCodeParameters = WorkerMessageCodeParameters
+    { _wmcpAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerMessageCodeParameters' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wmcpAddtional'
+workerMessageCodeParameters
+    :: HashMap Text JSONValue -- ^ 'wmcpAddtional'
+    -> WorkerMessageCodeParameters
+workerMessageCodeParameters pWmcpAddtional_ =
+    WorkerMessageCodeParameters
+    { _wmcpAddtional = _Coerce # pWmcpAddtional_
+    }
+
+-- | Properties of the object.
+wmcpAddtional :: Lens' WorkerMessageCodeParameters (HashMap Text JSONValue)
+wmcpAddtional
+  = lens _wmcpAddtional
+      (\ s a -> s{_wmcpAddtional = a})
+      . _Coerce
+
+instance FromJSON WorkerMessageCodeParameters where
+        parseJSON
+          = withObject "WorkerMessageCodeParameters"
+              (\ o ->
+                 WorkerMessageCodeParameters <$> (parseJSONObject o))
+
+instance ToJSON WorkerMessageCodeParameters where
+        toJSON = toJSON . _wmcpAddtional
 
 -- | When a task splits using WorkItemStatus.dynamic_source_split, this
 -- message describes the two parts of the split relative to the description
@@ -4862,7 +5546,8 @@ instance ToJSON Source where
                   ("codec" .=) <$> _souCodec, ("spec" .=) <$> _souSpec,
                   ("metadata" .=) <$> _souMetadata])
 
--- | A progress measurement of a WorkItem by a worker.
+-- | Obsolete in favor of ApproximateReportedProgress and
+-- ApproximateSplitRequest.
 --
 -- /See:/ 'approximateProgress' smart constructor.
 data ApproximateProgress = ApproximateProgress
@@ -4889,21 +5574,20 @@ approximateProgress =
     , _apPosition = Nothing
     }
 
--- | Completion as an estimated time remaining.
+-- | Obsolete.
 apRemainingTime :: Lens' ApproximateProgress (Maybe Text)
 apRemainingTime
   = lens _apRemainingTime
       (\ s a -> s{_apRemainingTime = a})
 
--- | Completion as percentage of the work, from 0.0 (beginning, nothing
--- complete), to 1.0 (end of the work range, entire WorkItem complete).
+-- | Obsolete.
 apPercentComplete :: Lens' ApproximateProgress (Maybe Double)
 apPercentComplete
   = lens _apPercentComplete
       (\ s a -> s{_apPercentComplete = a})
       . mapping _Coerce
 
--- | A Position within the work to represent a progress.
+-- | Obsolete.
 apPosition :: Lens' ApproximateProgress (Maybe Position)
 apPosition
   = lens _apPosition (\ s a -> s{_apPosition = a})
@@ -4923,6 +5607,81 @@ instance ToJSON ApproximateProgress where
                  [("remainingTime" .=) <$> _apRemainingTime,
                   ("percentComplete" .=) <$> _apPercentComplete,
                   ("position" .=) <$> _apPosition])
+
+-- | WorkerMessage provides information to the backend about a worker.
+--
+-- /See:/ 'workerMessage' smart constructor.
+data WorkerMessage = WorkerMessage
+    { _wmWorkerHealthReport :: !(Maybe WorkerHealthReport)
+    , _wmTime               :: !(Maybe Text)
+    , _wmWorkerMessageCode  :: !(Maybe WorkerMessageCode)
+    , _wmLabels             :: !(Maybe WorkerMessageLabels)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerMessage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wmWorkerHealthReport'
+--
+-- * 'wmTime'
+--
+-- * 'wmWorkerMessageCode'
+--
+-- * 'wmLabels'
+workerMessage
+    :: WorkerMessage
+workerMessage =
+    WorkerMessage
+    { _wmWorkerHealthReport = Nothing
+    , _wmTime = Nothing
+    , _wmWorkerMessageCode = Nothing
+    , _wmLabels = Nothing
+    }
+
+-- | The health of a worker.
+wmWorkerHealthReport :: Lens' WorkerMessage (Maybe WorkerHealthReport)
+wmWorkerHealthReport
+  = lens _wmWorkerHealthReport
+      (\ s a -> s{_wmWorkerHealthReport = a})
+
+-- | The timestamp of the worker_message.
+wmTime :: Lens' WorkerMessage (Maybe Text)
+wmTime = lens _wmTime (\ s a -> s{_wmTime = a})
+
+-- | A worker message code.
+wmWorkerMessageCode :: Lens' WorkerMessage (Maybe WorkerMessageCode)
+wmWorkerMessageCode
+  = lens _wmWorkerMessageCode
+      (\ s a -> s{_wmWorkerMessageCode = a})
+
+-- | Labels are used to group WorkerMessages. For example, a worker_message
+-- about a particular container might have the labels: { \"JOB_ID\":
+-- \"2015-04-22\", \"WORKER_ID\": \"wordcount-vm-2015…\"
+-- \"CONTAINER_TYPE\": \"worker\", \"CONTAINER_ID\": \"ac1234def\"} Label
+-- tags typically correspond to Label enum values. However, for ease of
+-- development other strings can be used as tags. LABEL_UNSPECIFIED should
+-- not be used here.
+wmLabels :: Lens' WorkerMessage (Maybe WorkerMessageLabels)
+wmLabels = lens _wmLabels (\ s a -> s{_wmLabels = a})
+
+instance FromJSON WorkerMessage where
+        parseJSON
+          = withObject "WorkerMessage"
+              (\ o ->
+                 WorkerMessage <$>
+                   (o .:? "workerHealthReport") <*> (o .:? "time") <*>
+                     (o .:? "workerMessageCode")
+                     <*> (o .:? "labels"))
+
+instance ToJSON WorkerMessage where
+        toJSON WorkerMessage{..}
+          = object
+              (catMaybes
+                 [("workerHealthReport" .=) <$> _wmWorkerHealthReport,
+                  ("time" .=) <$> _wmTime,
+                  ("workerMessageCode" .=) <$> _wmWorkerMessageCode,
+                  ("labels" .=) <$> _wmLabels])
 
 -- | Location information for a specific key-range of a sharded computation.
 -- Currently we only support UTF-8 character splits to simplify encoding
@@ -5051,6 +5810,7 @@ instance ToJSON MultiOutputInfo where
 -- /See:/ 'partialGroupByKeyInstruction' smart constructor.
 data PartialGroupByKeyInstruction = PartialGroupByKeyInstruction
     { _pgbkiValueCombiningFn  :: !(Maybe PartialGroupByKeyInstructionValueCombiningFn)
+    , _pgbkiSideInputs        :: !(Maybe [SideInputInfo])
     , _pgbkiInput             :: !(Maybe InstructionInput)
     , _pgbkiInputElementCodec :: !(Maybe PartialGroupByKeyInstructionInputElementCodec)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5061,6 +5821,8 @@ data PartialGroupByKeyInstruction = PartialGroupByKeyInstruction
 --
 -- * 'pgbkiValueCombiningFn'
 --
+-- * 'pgbkiSideInputs'
+--
 -- * 'pgbkiInput'
 --
 -- * 'pgbkiInputElementCodec'
@@ -5069,6 +5831,7 @@ partialGroupByKeyInstruction
 partialGroupByKeyInstruction =
     PartialGroupByKeyInstruction
     { _pgbkiValueCombiningFn = Nothing
+    , _pgbkiSideInputs = Nothing
     , _pgbkiInput = Nothing
     , _pgbkiInputElementCodec = Nothing
     }
@@ -5078,6 +5841,14 @@ pgbkiValueCombiningFn :: Lens' PartialGroupByKeyInstruction (Maybe PartialGroupB
 pgbkiValueCombiningFn
   = lens _pgbkiValueCombiningFn
       (\ s a -> s{_pgbkiValueCombiningFn = a})
+
+-- | Zero or more side inputs.
+pgbkiSideInputs :: Lens' PartialGroupByKeyInstruction [SideInputInfo]
+pgbkiSideInputs
+  = lens _pgbkiSideInputs
+      (\ s a -> s{_pgbkiSideInputs = a})
+      . _Default
+      . _Coerce
 
 -- | Describes the input to the partial group-by-key instruction.
 pgbkiInput :: Lens' PartialGroupByKeyInstruction (Maybe InstructionInput)
@@ -5095,14 +5866,17 @@ instance FromJSON PartialGroupByKeyInstruction where
           = withObject "PartialGroupByKeyInstruction"
               (\ o ->
                  PartialGroupByKeyInstruction <$>
-                   (o .:? "valueCombiningFn") <*> (o .:? "input") <*>
-                     (o .:? "inputElementCodec"))
+                   (o .:? "valueCombiningFn") <*>
+                     (o .:? "sideInputs" .!= mempty)
+                     <*> (o .:? "input")
+                     <*> (o .:? "inputElementCodec"))
 
 instance ToJSON PartialGroupByKeyInstruction where
         toJSON PartialGroupByKeyInstruction{..}
           = object
               (catMaybes
                  [("valueCombiningFn" .=) <$> _pgbkiValueCombiningFn,
+                  ("sideInputs" .=) <$> _pgbkiSideInputs,
                   ("input" .=) <$> _pgbkiInput,
                   ("inputElementCodec" .=) <$>
                     _pgbkiInputElementCodec])
@@ -5410,6 +6184,46 @@ instance FromJSON SideInputInfoKind where
 
 instance ToJSON SideInputInfoKind where
         toJSON = toJSON . _siikAddtional
+
+-- | A request for sending worker messages to the service.
+--
+-- /See:/ 'sendWorkerMessagesRequest' smart constructor.
+newtype SendWorkerMessagesRequest = SendWorkerMessagesRequest
+    { _swmrWorkerMessages :: Maybe [WorkerMessage]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SendWorkerMessagesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'swmrWorkerMessages'
+sendWorkerMessagesRequest
+    :: SendWorkerMessagesRequest
+sendWorkerMessagesRequest =
+    SendWorkerMessagesRequest
+    { _swmrWorkerMessages = Nothing
+    }
+
+-- | The WorkerMessages to send.
+swmrWorkerMessages :: Lens' SendWorkerMessagesRequest [WorkerMessage]
+swmrWorkerMessages
+  = lens _swmrWorkerMessages
+      (\ s a -> s{_swmrWorkerMessages = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON SendWorkerMessagesRequest where
+        parseJSON
+          = withObject "SendWorkerMessagesRequest"
+              (\ o ->
+                 SendWorkerMessagesRequest <$>
+                   (o .:? "workerMessages" .!= mempty))
+
+instance ToJSON SendWorkerMessagesRequest where
+        toJSON SendWorkerMessagesRequest{..}
+          = object
+              (catMaybes
+                 [("workerMessages" .=) <$> _swmrWorkerMessages])
 
 -- | DEPRECATED in favor of DerivedSource.
 --

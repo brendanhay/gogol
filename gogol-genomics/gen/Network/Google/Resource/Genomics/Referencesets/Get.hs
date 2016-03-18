@@ -20,10 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a reference set. Implements
+-- Gets a reference set. For the definitions of references and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
--- /See:/ < Genomics API Reference> for @genomics.referencesets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.referencesets.get@.
 module Network.Google.Resource.Genomics.Referencesets.Get
     (
     -- * REST Resource
@@ -62,7 +65,10 @@ type ReferencesetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ReferenceSet
 
--- | Gets a reference set. Implements
+-- | Gets a reference set. For the definitions of references and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
 -- /See:/ 'referencesetsGet' smart constructor.

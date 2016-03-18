@@ -51,6 +51,9 @@ data ScoresListCollection
     | Social
       -- ^ @SOCIAL@
       -- List only social scores.
+    | Social1P
+      -- ^ @SOCIAL_1P@
+      -- List only social scores, not respecting the fACL.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ScoresListCollection
@@ -59,12 +62,14 @@ instance FromText ScoresListCollection where
     fromText = \case
         "PUBLIC" -> Just Public
         "SOCIAL" -> Just Social
+        "SOCIAL_1P" -> Just Social1P
         _ -> Nothing
 
 instance ToText ScoresListCollection where
     toText = \case
         Public -> "PUBLIC"
         Social -> "SOCIAL"
+        Social1P -> "SOCIAL_1P"
 
 instance FromJSON ScoresListCollection where
     parseJSON = parseJSONText "ScoresListCollection"
@@ -114,6 +119,9 @@ data ScoresListWindowCollection
     | SLWCSocial
       -- ^ @SOCIAL@
       -- List only social scores.
+    | SLWCSocial1P
+      -- ^ @SOCIAL_1P@
+      -- List only social scores, not respecting the fACL.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ScoresListWindowCollection
@@ -122,12 +130,14 @@ instance FromText ScoresListWindowCollection where
     fromText = \case
         "PUBLIC" -> Just SLWCPublic
         "SOCIAL" -> Just SLWCSocial
+        "SOCIAL_1P" -> Just SLWCSocial1P
         _ -> Nothing
 
 instance ToText ScoresListWindowCollection where
     toText = \case
         SLWCPublic -> "PUBLIC"
         SLWCSocial -> "SOCIAL"
+        SLWCSocial1P -> "SOCIAL_1P"
 
 instance FromJSON ScoresListWindowCollection where
     parseJSON = parseJSONText "ScoresListWindowCollection"

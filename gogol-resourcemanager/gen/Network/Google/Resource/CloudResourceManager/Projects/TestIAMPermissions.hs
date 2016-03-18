@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Tests the specified permissions against the IAM access control policy
--- for the specified project.
+-- Returns permissions that a caller has on the specified Project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.testIamPermissions@.
 module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
@@ -51,7 +50,7 @@ import           Network.Google.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.testIamPermissions@ method which the
 -- 'ProjectsTestIAMPermissions' request conforms to.
 type ProjectsTestIAMPermissionsResource =
-     "v1beta1" :>
+     "v1" :>
        "projects" :>
          CaptureMode "resource" "testIamPermissions" Text :>
            QueryParam "$.xgafv" Text :>
@@ -65,8 +64,7 @@ type ProjectsTestIAMPermissionsResource =
                            ReqBody '[JSON] TestIAMPermissionsRequest :>
                              Post '[JSON] TestIAMPermissionsResponse
 
--- | Tests the specified permissions against the IAM access control policy
--- for the specified project.
+-- | Returns permissions that a caller has on the specified Project.
 --
 -- /See:/ 'projectsTestIAMPermissions' smart constructor.
 data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions
@@ -157,9 +155,11 @@ ptipBearerToken
   = lens _ptipBearerToken
       (\ s a -> s{_ptipBearerToken = a})
 
--- | REQUIRED: The resource for which policy detail is being requested.
--- \`resource\` is usually specified as a path, such as,
--- \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy detail is being requested.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the \`testIamPermissions\` documentation.
 ptipResource :: Lens' ProjectsTestIAMPermissions Text
 ptipResource
   = lens _ptipResource (\ s a -> s{_ptipResource = a})

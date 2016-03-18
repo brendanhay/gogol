@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets one trace by id.
+-- Gets a single trace by its ID.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.projects.traces.get@.
 module Network.Google.Resource.CloudTrace.Projects.Traces.Get
@@ -64,7 +64,7 @@ type ProjectsTracesGetResource =
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Trace
 
--- | Gets one trace by id.
+-- | Gets a single trace by its ID.
 --
 -- /See:/ 'projectsTracesGet' smart constructor.
 data ProjectsTracesGet = ProjectsTracesGet
@@ -117,7 +117,7 @@ projectsTracesGet pPtgTraceId_ pPtgProjectId_ =
     , _ptgCallback = Nothing
     }
 
--- | The trace id of the trace to return.
+-- | ID of the trace to return.
 ptgTraceId :: Lens' ProjectsTracesGet Text
 ptgTraceId
   = lens _ptgTraceId (\ s a -> s{_ptgTraceId = a})
@@ -154,7 +154,7 @@ ptgBearerToken
   = lens _ptgBearerToken
       (\ s a -> s{_ptgBearerToken = a})
 
--- | The project id of the trace to return.
+-- | ID of the Cloud project where the trace data is stored.
 ptgProjectId :: Lens' ProjectsTracesGet Text
 ptgProjectId
   = lens _ptgProjectId (\ s a -> s{_ptgProjectId = a})

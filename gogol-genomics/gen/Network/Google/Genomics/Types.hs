@@ -119,6 +119,12 @@ module Network.Google.Genomics.Types
     , vcGenotype
     , vcInfo
 
+    -- * MergeVariantsRequest
+    , MergeVariantsRequest
+    , mergeVariantsRequest
+    , mvrVariants
+    , mvrVariantSetId
+
     -- * ReadGroup
     , ReadGroup
     , readGroup
@@ -217,10 +223,20 @@ module Network.Google.Genomics.Types
     , readGroupInfo
     , rgiAddtional
 
+    -- * StreamVariantsResponse
+    , StreamVariantsResponse
+    , streamVariantsResponse
+    , svrVariants
+
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- * StreamReadsResponse
+    , StreamReadsResponse
+    , streamReadsResponse
+    , srrAlignments
 
     -- * SearchCallSetsResponse
     , SearchCallSetsResponse
@@ -272,8 +288,19 @@ module Network.Google.Genomics.Types
     -- * SearchVariantsResponse
     , SearchVariantsResponse
     , searchVariantsResponse
-    , svrVariants
-    , svrNextPageToken
+    , sVariants
+    , sNextPageToken
+
+    -- * StreamReadsRequest
+    , StreamReadsRequest
+    , streamReadsRequest
+    , sShard
+    , sReadGroupSetId
+    , sTotalShards
+    , sStart
+    , sReferenceName
+    , sEnd
+    , sProjectId
 
     -- * SearchCallSetsRequest
     , SearchCallSetsRequest
@@ -286,8 +313,8 @@ module Network.Google.Genomics.Types
     -- * SearchReadsResponse
     , SearchReadsResponse
     , searchReadsResponse
-    , sNextPageToken
-    , sAlignments
+    , seaNextPageToken
+    , seaAlignments
 
     -- * Program
     , Program
@@ -370,6 +397,7 @@ module Network.Google.Genomics.Types
     -- * VariantSet
     , VariantSet
     , variantSet
+    , vsReferenceSetId
     , vsDataSetId
     , vsReferenceBounds
     , vsMetadata
@@ -472,6 +500,16 @@ module Network.Google.Genomics.Types
     , operationEvent
     , oeDescription
 
+    -- * StreamVariantsRequest
+    , StreamVariantsRequest
+    , streamVariantsRequest
+    , strVariantSetId
+    , strStart
+    , strCallSetIds
+    , strReferenceName
+    , strEnd
+    , strProjectId
+
     -- * ReferenceBound
     , ReferenceBound
     , referenceBound
@@ -524,7 +562,7 @@ import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Genomics API. This contains the host and root path used as a starting point for constructing service requests.
-genomicsService :: Service
+genomicsService :: ServiceConfig
 genomicsService
   = defaultService (ServiceId "genomics:v1")
       "genomics.googleapis.com"

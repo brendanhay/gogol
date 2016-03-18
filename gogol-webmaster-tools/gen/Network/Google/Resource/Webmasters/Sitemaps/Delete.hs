@@ -22,7 +22,7 @@
 --
 -- Deletes a sitemap from this site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.delete@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.delete@.
 module Network.Google.Resource.Webmasters.Sitemaps.Delete
     (
     -- * REST Resource

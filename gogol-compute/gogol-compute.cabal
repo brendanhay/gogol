@@ -142,6 +142,7 @@ library
         , Network.Google.Resource.Compute.Instances.List
         , Network.Google.Resource.Compute.Instances.Reset
         , Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
+        , Network.Google.Resource.Compute.Instances.SetMachineType
         , Network.Google.Resource.Compute.Instances.SetMetadata
         , Network.Google.Resource.Compute.Instances.SetScheduling
         , Network.Google.Resource.Compute.Instances.SetTags
@@ -176,6 +177,11 @@ library
         , Network.Google.Resource.Compute.Snapshots.Delete
         , Network.Google.Resource.Compute.Snapshots.Get
         , Network.Google.Resource.Compute.Snapshots.List
+        , Network.Google.Resource.Compute.Subnetworks.AggregatedList
+        , Network.Google.Resource.Compute.Subnetworks.Delete
+        , Network.Google.Resource.Compute.Subnetworks.Get
+        , Network.Google.Resource.Compute.Subnetworks.Insert
+        , Network.Google.Resource.Compute.Subnetworks.List
         , Network.Google.Resource.Compute.TargetHTTPProxies.Delete
         , Network.Google.Resource.Compute.TargetHTTPProxies.Get
         , Network.Google.Resource.Compute.TargetHTTPProxies.Insert

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified TargetVpnGateway resource.
+-- Deletes the specified target VPN gateway.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.delete@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Delete
@@ -54,7 +54,7 @@ type TargetVPNGatewaysDeleteResource =
                    Capture "targetVpnGateway" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified TargetVpnGateway resource.
+-- | Deletes the specified target VPN gateway.
 --
 -- /See:/ 'targetVPNGatewaysDelete' smart constructor.
 data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete
@@ -89,13 +89,13 @@ tvgdProject :: Lens' TargetVPNGatewaysDelete Text
 tvgdProject
   = lens _tvgdProject (\ s a -> s{_tvgdProject = a})
 
--- | Name of the TargetVpnGateway resource to delete.
+-- | Name of the target VPN gateway to delete.
 tvgdTargetVPNGateway :: Lens' TargetVPNGatewaysDelete Text
 tvgdTargetVPNGateway
   = lens _tvgdTargetVPNGateway
       (\ s a -> s{_tvgdTargetVPNGateway = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 tvgdRegion :: Lens' TargetVPNGatewaysDelete Text
 tvgdRegion
   = lens _tvgdRegion (\ s a -> s{_tvgdRegion = a})

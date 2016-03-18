@@ -43,6 +43,7 @@ library
         , Network.Google.Resource.Dataflow.Projects.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+        , Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
     other-modules:
           Network.Google.Dataflow.Types.Product

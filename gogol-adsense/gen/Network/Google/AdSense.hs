@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gives AdSense publishers access to their inventory and the ability to
--- generate reports
+-- Accesses AdSense publishers\' inventory and generates performance
+-- reports.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference>
 module Network.Google.AdSense
@@ -316,7 +316,6 @@ module Network.Google.AdSense
     , adSupportsReporting
     , adId
     , adProductCode
-    , adArcReviewMode
 
     -- ** SavedAdStyle
     , SavedAdStyle

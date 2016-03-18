@@ -675,6 +675,57 @@ instance ToJSON ObjectAccessControlProjectTeam where
                  [("projectNumber" .=) <$> _oacptProjectNumber,
                   ("team" .=) <$> _oacptTeam])
 
+-- | Metadata of customer-supplied encryption key, if the object is encrypted
+-- by such a key.
+--
+-- /See:/ 'objectCustomerEncryption' smart constructor.
+data ObjectCustomerEncryption = ObjectCustomerEncryption
+    { _oceKeySha256           :: !(Maybe Text)
+    , _oceEncryptionAlgorithm :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ObjectCustomerEncryption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oceKeySha256'
+--
+-- * 'oceEncryptionAlgorithm'
+objectCustomerEncryption
+    :: ObjectCustomerEncryption
+objectCustomerEncryption =
+    ObjectCustomerEncryption
+    { _oceKeySha256 = Nothing
+    , _oceEncryptionAlgorithm = Nothing
+    }
+
+-- | SHA256 hash value of the encryption key.
+oceKeySha256 :: Lens' ObjectCustomerEncryption (Maybe Text)
+oceKeySha256
+  = lens _oceKeySha256 (\ s a -> s{_oceKeySha256 = a})
+
+-- | The encryption algorithm.
+oceEncryptionAlgorithm :: Lens' ObjectCustomerEncryption (Maybe Text)
+oceEncryptionAlgorithm
+  = lens _oceEncryptionAlgorithm
+      (\ s a -> s{_oceEncryptionAlgorithm = a})
+
+instance FromJSON ObjectCustomerEncryption where
+        parseJSON
+          = withObject "ObjectCustomerEncryption"
+              (\ o ->
+                 ObjectCustomerEncryption <$>
+                   (o .:? "keySha256") <*>
+                     (o .:? "encryptionAlgorithm"))
+
+instance ToJSON ObjectCustomerEncryption where
+        toJSON ObjectCustomerEncryption{..}
+          = object
+              (catMaybes
+                 [("keySha256" .=) <$> _oceKeySha256,
+                  ("encryptionAlgorithm" .=) <$>
+                    _oceEncryptionAlgorithm])
+
 -- | A bucket.
 --
 -- /See:/ 'bucket' smart constructor.
@@ -1264,6 +1315,7 @@ data Object = Object
     , _objKind               :: !Text
     , _objTimeDeleted        :: !(Maybe DateTime')
     , _objCrc32c             :: !(Maybe Text)
+    , _objCustomerEncryption :: !(Maybe ObjectCustomerEncryption)
     , _objBucket             :: !(Maybe Text)
     , _objOwner              :: !(Maybe ObjectOwner)
     , _objSelfLink           :: !(Maybe Text)
@@ -1299,6 +1351,8 @@ data Object = Object
 -- * 'objTimeDeleted'
 --
 -- * 'objCrc32c'
+--
+-- * 'objCustomerEncryption'
 --
 -- * 'objBucket'
 --
@@ -1348,6 +1402,7 @@ object' =
     , _objKind = "storage#object"
     , _objTimeDeleted = Nothing
     , _objCrc32c = Nothing
+    , _objCustomerEncryption = Nothing
     , _objBucket = Nothing
     , _objOwner = Nothing
     , _objSelfLink = Nothing
@@ -1398,6 +1453,13 @@ objTimeDeleted
 objCrc32c :: Lens' Object (Maybe Text)
 objCrc32c
   = lens _objCrc32c (\ s a -> s{_objCrc32c = a})
+
+-- | Metadata of customer-supplied encryption key, if the object is encrypted
+-- by such a key.
+objCustomerEncryption :: Lens' Object (Maybe ObjectCustomerEncryption)
+objCustomerEncryption
+  = lens _objCustomerEncryption
+      (\ s a -> s{_objCustomerEncryption = a})
 
 -- | The name of the bucket containing this object.
 objBucket :: Lens' Object (Maybe Text)
@@ -1526,6 +1588,7 @@ instance FromJSON Object where
                      (o .:? "kind" .!= "storage#object")
                      <*> (o .:? "timeDeleted")
                      <*> (o .:? "crc32c")
+                     <*> (o .:? "customerEncryption")
                      <*> (o .:? "bucket")
                      <*> (o .:? "owner")
                      <*> (o .:? "selfLink")
@@ -1555,6 +1618,7 @@ instance ToJSON Object where
                   Just ("kind" .= _objKind),
                   ("timeDeleted" .=) <$> _objTimeDeleted,
                   ("crc32c" .=) <$> _objCrc32c,
+                  ("customerEncryption" .=) <$> _objCustomerEncryption,
                   ("bucket" .=) <$> _objBucket,
                   ("owner" .=) <$> _objOwner,
                   ("selfLink" .=) <$> _objSelfLink,

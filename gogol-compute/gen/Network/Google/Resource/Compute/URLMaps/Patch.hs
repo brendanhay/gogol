@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the entire content of the UrlMap resource. This method supports
+-- Updates the entire content of the UrlMap resource. This method supports
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.patch@.
@@ -55,7 +55,7 @@ type URLMapsPatchResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
 
--- | Update the entire content of the UrlMap resource. This method supports
+-- | Updates the entire content of the UrlMap resource. This method supports
 -- patch semantics.
 --
 -- /See:/ 'urlMapsPatch' smart constructor.
@@ -91,7 +91,7 @@ umpURLMap :: Lens' URLMapsPatch Text
 umpURLMap
   = lens _umpURLMap (\ s a -> s{_umpURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umpProject :: Lens' URLMapsPatch Text
 umpProject
   = lens _umpProject (\ s a -> s{_umpProject = a})

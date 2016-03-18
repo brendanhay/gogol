@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the project identified by the specified \`project_id\` (for
+-- Retrieves the Project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). The caller must have read permissions for
--- this project.
+-- this Project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.get@.
 module Network.Google.Resource.CloudResourceManager.Projects.Get
@@ -51,7 +51,7 @@ import           Network.Google.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.get@ method which the
 -- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
-     "v1beta1" :>
+     "v1" :>
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
@@ -63,9 +63,9 @@ type ProjectsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Project
 
--- | Retrieves the project identified by the specified \`project_id\` (for
+-- | Retrieves the Project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). The caller must have read permissions for
--- this project.
+-- this Project.
 --
 -- /See:/ 'projectsGet' smart constructor.
 data ProjectsGet = ProjectsGet
@@ -144,7 +144,7 @@ pgBearerToken
   = lens _pgBearerToken
       (\ s a -> s{_pgBearerToken = a})
 
--- | The project ID (for example, \`my-project-123\`). Required.
+-- | The Project ID (for example, \`my-project-123\`). Required.
 pgProjectId :: Lens' ProjectsGet Text
 pgProjectId
   = lens _pgProjectId (\ s a -> s{_pgProjectId = a})

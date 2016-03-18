@@ -198,7 +198,7 @@ import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Fitness. This contains the host and root path used as a starting point for constructing service requests.
-fitnessService :: Service
+fitnessService :: ServiceConfig
 fitnessService
   = defaultService (ServiceId "fitness:v1")
       "www.googleapis.com"

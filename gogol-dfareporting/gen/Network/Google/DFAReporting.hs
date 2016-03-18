@@ -315,9 +315,6 @@ module Network.Google.DFAReporting
     -- ** dfareporting.floodlightActivities.update
     , module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
 
-    -- ** dfareporting.floodlightActivityGroups.delete
-    , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
-
     -- ** dfareporting.floodlightActivityGroups.get
     , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
 
@@ -646,6 +643,7 @@ module Network.Google.DFAReporting
     -- ** CreativeCustomEvent
     , CreativeCustomEvent
     , creativeCustomEvent
+    , cceAdvertiserCustomEventId
     , cceAdvertiserCustomEventType
     , cceAdvertiserCustomEventName
     , cceExitURL
@@ -810,6 +808,7 @@ module Network.Google.DFAReporting
     , iiEstimatedConversionRate
     , iiProjectId
     , iiSubAccountId
+    , iiType
     , iiOrderId
     , iiSiteId
 
@@ -1493,6 +1492,7 @@ module Network.Google.DFAReporting
     , creThirdPartyRichMediaImpressionsURL
     , creLastModifiedInfo
     , creId
+    , creAuthoringSource
     , creStudioAdvertiserId
     , creCreativeAssets
     , creSubAccountId
@@ -1521,6 +1521,9 @@ module Network.Google.DFAReporting
     , scId
     , scTitle
     , scContactType
+
+    -- ** CreativeAuthoringSource
+    , CreativeAuthoringSource (..)
 
     -- ** AccountsListResponse
     , AccountsListResponse
@@ -1609,6 +1612,9 @@ module Network.Google.DFAReporting
     -- ** CreativesListSortOrder
     , CreativesListSortOrder (..)
 
+    -- ** InventoryItemsListType
+    , InventoryItemsListType (..)
+
     -- ** ThirdPartyAuthenticationToken
     , ThirdPartyAuthenticationToken
     , thirdPartyAuthenticationToken
@@ -1670,6 +1676,7 @@ module Network.Google.DFAReporting
     , ssLookbackConfiguration
     , ssTagSetting
     , ssActiveViewOptOut
+    , ssVideoActiveViewOptOut
     , ssCreativeSettings
 
     -- ** PlacementStrategiesListSortField
@@ -2063,6 +2070,9 @@ module Network.Google.DFAReporting
     , ptcrcfConversionDimensions
     , ptcrcfCustomFloodlightVariables
     , ptcrcfPerInteractionDimensions
+
+    -- ** InventoryItemType
+    , InventoryItemType (..)
 
     -- ** CreativeAssetPositionTopUnit
     , CreativeAssetPositionTopUnit (..)
@@ -2514,7 +2524,6 @@ module Network.Google.DFAReporting
     , fcLookbackConfiguration
     , fcAccountId
     , fcId
-    , fcSSLRequired
     , fcNATuralSearchConversionAttributionOption
     , fcUserDefinedVariableConfigurations
     , fcSubAccountId
@@ -3202,7 +3211,6 @@ import           Network.Google.Resource.DFAReporting.FloodlightActivities.Inser
 import           Network.Google.Resource.DFAReporting.FloodlightActivities.List
 import           Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
 import           Network.Google.Resource.DFAReporting.FloodlightActivities.Update
-import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
 import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
 import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
 import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
@@ -3498,5 +3506,4 @@ type DFAReportingAPI =
        :<|> FloodlightActivityGroupsListResource
        :<|> FloodlightActivityGroupsPatchResource
        :<|> FloodlightActivityGroupsGetResource
-       :<|> FloodlightActivityGroupsDeleteResource
        :<|> FloodlightActivityGroupsUpdateResource

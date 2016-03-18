@@ -98,9 +98,11 @@ module Network.Google.SQLAdmin.Types
     , sKind
     , sPricingPlan
     , sIPConfiguration
+    , sMaintenanceWindow
     , sDatabaseReplicationEnabled
     , sTier
     , sDatabaseFlags
+    , sDataDiskType
     , sCrashSafeReplicationEnabled
     , sLocationPreference
     , sBackupConfiguration
@@ -134,6 +136,12 @@ module Network.Google.SQLAdmin.Types
     , blcBinLogPosition
     , blcKind
     , blcBinLogFileName
+
+    -- * DatabaseInstanceFailoverReplica
+    , DatabaseInstanceFailoverReplica
+    , databaseInstanceFailoverReplica
+    , difrName
+    , difrAvailable
 
     -- * TiersListResponse
     , TiersListResponse
@@ -182,6 +190,14 @@ module Network.Google.SQLAdmin.Types
     , icRequireSSL
     , icIPv4Enabled
 
+    -- * MaintenanceWindow
+    , MaintenanceWindow
+    , maintenanceWindow
+    , mwKind
+    , mwDay
+    , mwHour
+    , mwUpdateTrack
+
     -- * ImportContextCSVImportOptions
     , ImportContextCSVImportOptions
     , importContextCSVImportOptions
@@ -207,6 +223,7 @@ module Network.Google.SQLAdmin.Types
     -- * DatabaseInstance
     , DatabaseInstance
     , databaseInstance
+    , datBackendType
     , datMaxDiskSize
     , datOnPremisesConfiguration
     , datEtag
@@ -221,12 +238,14 @@ module Network.Google.SQLAdmin.Types
     , datInstanceType
     , datReplicaNames
     , datSelfLink
+    , datFailoverReplica
     , datName
     , datMasterInstanceName
     , datReplicaConfiguration
     , datRegion
     , datServiceAccountEmailAddress
     , datIPAddresses
+    , datSuspensionReason
 
     -- * CloneContext
     , CloneContext
@@ -245,6 +264,7 @@ module Network.Google.SQLAdmin.Types
     , fAllowedStringValues
     , fType
     , fMinValue
+    , fRequiresRestart
 
     -- * InstancesFailoverRequest
     , InstancesFailoverRequest
@@ -405,7 +425,7 @@ import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
 
 -- | Default request referring to version 'v1beta4' of the Cloud SQL Administration API. This contains the host and root path used as a starting point for constructing service requests.
-sQLAdminService :: Service
+sQLAdminService :: ServiceConfig
 sQLAdminService
   = defaultService (ServiceId "sqladmin:v1beta4")
       "www.googleapis.com"

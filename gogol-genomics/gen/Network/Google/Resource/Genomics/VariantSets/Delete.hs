@@ -20,10 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the contents of a variant set. The variant set object is not
--- deleted.
+-- Deletes a variant set including all variants, call sets, and calls
+-- within. This is not reversible. For the definitions of variant sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.delete@.
 module Network.Google.Resource.Genomics.VariantSets.Delete
     (
     -- * REST Resource
@@ -62,8 +64,10 @@ type VariantSetsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes the contents of a variant set. The variant set object is not
--- deleted.
+-- | Deletes a variant set including all variants, call sets, and calls
+-- within. This is not reversible. For the definitions of variant sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsDelete' smart constructor.
 data VariantSetsDelete = VariantSetsDelete

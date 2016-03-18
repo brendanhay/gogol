@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified HttpHealthCheck resource.
+-- Returns the specified HttpHealthCheck resource. Get a list of available
+-- HTTP health checks by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.httpHealthChecks.get@.
 module Network.Google.Resource.Compute.HTTPHealthChecks.Get
@@ -53,7 +54,8 @@ type HTTPHealthChecksGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] HTTPHealthCheck
 
--- | Returns the specified HttpHealthCheck resource.
+-- | Returns the specified HttpHealthCheck resource. Get a list of available
+-- HTTP health checks by making a list() request.
 --
 -- /See:/ 'hTTPHealthChecksGet' smart constructor.
 data HTTPHealthChecksGet = HTTPHealthChecksGet
@@ -78,7 +80,7 @@ hTTPHealthChecksGet pHttphcgProject_ pHttphcgHTTPHealthCheck_ =
     , _httphcgHTTPHealthCheck = pHttphcgHTTPHealthCheck_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphcgProject :: Lens' HTTPHealthChecksGet Text
 httphcgProject
   = lens _httphcgProject
