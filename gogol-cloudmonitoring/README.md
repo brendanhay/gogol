@@ -1,4 +1,4 @@
-# gogol-monitoring
+# gogol-cloudmonitoring
 
 * [Version](#version)
 * [Description](#description)
@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Monitoring.
+A client library for the Google Cloud Monitoring.
 
 
 ## Contribute
@@ -25,4 +25,4 @@ For any problems, comments, or feedback please create an issue [here on GitHub](
 
 ## Licence
 
-`gogol-monitoring` is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).
+`gogol-cloudmonitoring` is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).

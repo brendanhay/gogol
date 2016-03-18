@@ -13,217 +13,352 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for accessing Google Cloud and API monitoring data.
+-- The Google Monitoring API lets you manage your monitoring data and
+-- configurations.
 --
--- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference>
+-- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference>
 module Network.Google.Monitoring
     (
     -- * Service Configuration
       monitoringService
 
     -- * OAuth Scopes
+    , monitoringReadScope
     , cloudPlatformScope
     , monitoringScope
+    , monitoringWriteScope
 
     -- * API Declaration
     , MonitoringAPI
 
     -- * Resources
 
-    -- ** cloudmonitoring.metricDescriptors.create
-    , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
+    -- ** monitoring.projects.collectdTimeSeries.create
+    , module Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
 
-    -- ** cloudmonitoring.metricDescriptors.delete
-    , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
+    -- ** monitoring.projects.groups.create
+    , module Network.Google.Resource.Monitoring.Projects.Groups.Create
 
-    -- ** cloudmonitoring.metricDescriptors.list
-    , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
+    -- ** monitoring.projects.groups.delete
+    , module Network.Google.Resource.Monitoring.Projects.Groups.Delete
 
-    -- ** cloudmonitoring.timeseries.list
-    , module Network.Google.Resource.CloudMonitoring.Timeseries.List
+    -- ** monitoring.projects.groups.get
+    , module Network.Google.Resource.Monitoring.Projects.Groups.Get
 
-    -- ** cloudmonitoring.timeseries.write
-    , module Network.Google.Resource.CloudMonitoring.Timeseries.Write
+    -- ** monitoring.projects.groups.list
+    , module Network.Google.Resource.Monitoring.Projects.Groups.List
 
-    -- ** cloudmonitoring.timeseriesDescriptors.list
-    , module Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.List
+    -- ** monitoring.projects.groups.members.list
+    , module Network.Google.Resource.Monitoring.Projects.Groups.Members.List
+
+    -- ** monitoring.projects.groups.update
+    , module Network.Google.Resource.Monitoring.Projects.Groups.Update
+
+    -- ** monitoring.projects.metricDescriptors.create
+    , module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Create
+
+    -- ** monitoring.projects.metricDescriptors.delete
+    , module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
+
+    -- ** monitoring.projects.metricDescriptors.get
+    , module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Get
+
+    -- ** monitoring.projects.metricDescriptors.list
+    , module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.List
+
+    -- ** monitoring.projects.monitoredResourceDescriptors.get
+    , module Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.Get
+
+    -- ** monitoring.projects.monitoredResourceDescriptors.list
+    , module Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.List
+
+    -- ** monitoring.projects.timeSeries.create
+    , module Network.Google.Resource.Monitoring.Projects.TimeSeries.Create
+
+    -- ** monitoring.projects.timeSeries.list
+    , module Network.Google.Resource.Monitoring.Projects.TimeSeries.List
 
     -- * Types
 
-    -- ** MetricDescriptorTypeDescriptor
-    , MetricDescriptorTypeDescriptor
-    , metricDescriptorTypeDescriptor
-    , mdtdMetricType
-    , mdtdValueType
+    -- ** MonitoredResourceDescriptor
+    , MonitoredResourceDescriptor
+    , monitoredResourceDescriptor
+    , mrdName
+    , mrdDisplayName
+    , mrdLabels
+    , mrdType
+    , mrdDescription
 
-    -- ** ListTimeseriesResponse
-    , ListTimeseriesResponse
-    , listTimeseriesResponse
-    , ltrNextPageToken
-    , ltrKind
-    , ltrOldest
-    , ltrYoungest
-    , ltrTimeseries
+    -- ** ListTimeSeriesResponse
+    , ListTimeSeriesResponse
+    , listTimeSeriesResponse
+    , ltsrNextPageToken
+    , ltsrTimeSeries
 
     -- ** MetricDescriptor
     , MetricDescriptor
     , metricDescriptor
-    , mdProject
-    , mdTypeDescriptor
+    , mdMetricKind
     , mdName
+    , mdDisplayName
     , mdLabels
+    , mdType
+    , mdValueType
     , mdDescription
+    , mdUnit
 
-    -- ** WriteTimeseriesRequest
-    , WriteTimeseriesRequest
-    , writeTimeseriesRequest
-    , wtrCommonLabels
-    , wtrTimeseries
+    -- ** Group
+    , Group
+    , group'
+    , gName
+    , gDisplayName
+    , gFilter
+    , gIsCluster
+    , gParentName
 
-    -- ** WriteTimeseriesRequestCommonLabels
-    , WriteTimeseriesRequestCommonLabels
-    , writeTimeseriesRequestCommonLabels
-    , wtrclAddtional
+    -- ** TypedValue
+    , TypedValue
+    , typedValue
+    , tvBoolValue
+    , tvDoubleValue
+    , tvStringValue
+    , tvDistributionValue
+    , tvInt64Value
 
-    -- ** MetricDescriptorLabelDescriptor
-    , MetricDescriptorLabelDescriptor
-    , metricDescriptorLabelDescriptor
-    , mdldKey
-    , mdldDescription
+    -- ** MonitoredResourceLabels
+    , MonitoredResourceLabels
+    , monitoredResourceLabels
+    , mrlAddtional
 
-    -- ** PointDistributionUnderflowBucket
-    , PointDistributionUnderflowBucket
-    , pointDistributionUnderflowBucket
-    , pdubUpperBound
-    , pdubCount
+    -- ** SourceContext
+    , SourceContext
+    , sourceContext
+    , scFileName
 
-    -- ** TimeseriesListAggregator
-    , TimeseriesListAggregator (..)
+    -- ** Distribution
+    , Distribution
+    , distribution
+    , dSumOfSquaredDeviation
+    , dMean
+    , dCount
+    , dBucketCounts
+    , dRange
+    , dBucketOptions
+
+    -- ** Field
+    , Field
+    , field
+    , fKind
+    , fOneofIndex
+    , fName
+    , fJSONName
+    , fCardinality
+    , fOptions
+    , fPacked
+    , fDefaultValue
+    , fNumber
+    , fTypeURL
+
+    -- ** Empty
+    , Empty
+    , empty
+
+    -- ** ListGroupsResponse
+    , ListGroupsResponse
+    , listGroupsResponse
+    , lgrNextPageToken
+    , lgrGroup
 
     -- ** ListMetricDescriptorsResponse
     , ListMetricDescriptorsResponse
     , listMetricDescriptorsResponse
-    , lmdrMetrics
+    , lmdrMetricDescriptors
     , lmdrNextPageToken
-    , lmdrKind
 
-    -- ** ListTimeseriesDescriptorsRequest
-    , ListTimeseriesDescriptorsRequest
-    , listTimeseriesDescriptorsRequest
-    , ltdrKind
+    -- ** OptionValue
+    , OptionValue
+    , optionValue
+    , ovAddtional
 
-    -- ** TimeseriesDescriptorLabels
-    , TimeseriesDescriptorLabels
-    , timeseriesDescriptorLabels
-    , tdlAddtional
+    -- ** CreateTimeSeriesRequest
+    , CreateTimeSeriesRequest
+    , createTimeSeriesRequest
+    , ctsrTimeSeries
 
-    -- ** PointDistributionBucket
-    , PointDistributionBucket
-    , pointDistributionBucket
-    , pdbUpperBound
-    , pdbCount
-    , pdbLowerBound
+    -- ** ListMonitoredResourceDescriptorsResponse
+    , ListMonitoredResourceDescriptorsResponse
+    , listMonitoredResourceDescriptorsResponse
+    , lmrdrNextPageToken
+    , lmrdrResourceDescriptors
 
-    -- ** WriteTimeseriesResponse
-    , WriteTimeseriesResponse
-    , writeTimeseriesResponse
-    , wtrKind
+    -- ** Explicit
+    , Explicit
+    , explicit
+    , eBounds
 
-    -- ** TimeseriesDescriptorLabel
-    , TimeseriesDescriptorLabel
-    , timeseriesDescriptorLabel
-    , tdlValue
-    , tdlKey
+    -- ** MetricLabels
+    , MetricLabels
+    , metricLabels
+    , mlAddtional
 
-    -- ** PointDistribution
-    , PointDistribution
-    , pointDistribution
-    , pdOverflowBucket
-    , pdBuckets
-    , pdUnderflowBucket
+    -- ** CollectdPayloadMetadata
+    , CollectdPayloadMetadata
+    , collectdPayloadMetadata
+    , cpmAddtional
+
+    -- ** CollectdValue
+    , CollectdValue
+    , collectdValue
+    , cvDataSourceName
+    , cvDataSourceType
+    , cvValue
+
+    -- ** CreateCollectdTimeSeriesRequest
+    , CreateCollectdTimeSeriesRequest
+    , createCollectdTimeSeriesRequest
+    , cctsrCollectdPayloads
+    , cctsrResource
+    , cctsrCollectdVersion
 
     -- ** Point
     , Point
     , point
-    , pBoolValue
-    , pStart
-    , pDoubleValue
-    , pStringValue
-    , pDistributionValue
-    , pEnd
-    , pInt64Value
+    , pValue
+    , pInterval
 
-    -- ** PointDistributionOverflowBucket
-    , PointDistributionOverflowBucket
-    , pointDistributionOverflowBucket
-    , pdobCount
-    , pdobLowerBound
+    -- ** CollectdPayload
+    , CollectdPayload
+    , collectdPayload
+    , cpStartTime
+    , cpPluginInstance
+    , cpValues
+    , cpTypeInstance
+    , cpEndTime
+    , cpMetadata
+    , cpType
+    , cpPlugin
 
-    -- ** ListTimeseriesDescriptorsResponse
-    , ListTimeseriesDescriptorsResponse
-    , listTimeseriesDescriptorsResponse
-    , lNextPageToken
-    , lKind
-    , lOldest
-    , lYoungest
-    , lTimeseries
+    -- ** Metric
+    , Metric
+    , metric
+    , mLabels
+    , mType
 
-    -- ** ListMetricDescriptorsRequest
-    , ListMetricDescriptorsRequest
-    , listMetricDescriptorsRequest
-    , lisKind
+    -- ** Exponential
+    , Exponential
+    , exponential
+    , eGrowthFactor
+    , eScale
+    , eNumFiniteBuckets
 
-    -- ** TimeseriesPoint
-    , TimeseriesPoint
-    , timeseriesPoint
-    , tpPoint
-    , tpTimeseriesDesc
+    -- ** Range
+    , Range
+    , range
+    , rMax
+    , rMin
 
-    -- ** TimeseriesDescriptorsListAggregator
-    , TimeseriesDescriptorsListAggregator (..)
+    -- ** MonitoredResource
+    , MonitoredResource
+    , monitoredResource
+    , mrLabels
+    , mrType
 
-    -- ** DeleteMetricDescriptorResponse
-    , DeleteMetricDescriptorResponse
-    , deleteMetricDescriptorResponse
-    , dmdrKind
+    -- ** TimeInterval
+    , TimeInterval
+    , timeInterval
+    , tiStartTime
+    , tiEndTime
 
-    -- ** ListTimeseriesRequest
-    , ListTimeseriesRequest
-    , listTimeseriesRequest
-    , ltrtKind
+    -- ** ListGroupMembersResponse
+    , ListGroupMembersResponse
+    , listGroupMembersResponse
+    , lgmrNextPageToken
+    , lgmrMembers
+    , lgmrTotalSize
 
-    -- ** TimeseriesDescriptor
-    , TimeseriesDescriptor
-    , timeseriesDescriptor
-    , tdProject
-    , tdMetric
-    , tdLabels
+    -- ** LabelDescriptor
+    , LabelDescriptor
+    , labelDescriptor
+    , ldKey
+    , ldValueType
+    , ldDescription
 
-    -- ** Timeseries
-    , Timeseries
-    , timeseries
-    , tPoints
-    , tTimeseriesDesc
+    -- ** Linear
+    , Linear
+    , linear
+    , lOffSet
+    , lWidth
+    , lNumFiniteBuckets
+
+    -- ** Type
+    , Type
+    , type'
+    , tSourceContext
+    , tOneofs
+    , tName
+    , tOptions
+    , tFields
+    , tSyntax
+
+    -- ** Option
+    , Option
+    , option
+    , oValue
+    , oName
+
+    -- ** BucketOptions
+    , BucketOptions
+    , bucketOptions
+    , boExponentialBuckets
+    , boLinearBuckets
+    , boExplicitBuckets
+
+    -- ** TimeSeries
+    , TimeSeries
+    , timeSeries
+    , tsPoints
+    , tsMetricKind
+    , tsMetric
+    , tsResource
+    , tsValueType
     ) where
 
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
-import           Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
-import           Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
-import           Network.Google.Resource.CloudMonitoring.Timeseries.List
-import           Network.Google.Resource.CloudMonitoring.Timeseries.Write
-import           Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.List
+import           Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
+import           Network.Google.Resource.Monitoring.Projects.Groups.Create
+import           Network.Google.Resource.Monitoring.Projects.Groups.Delete
+import           Network.Google.Resource.Monitoring.Projects.Groups.Get
+import           Network.Google.Resource.Monitoring.Projects.Groups.List
+import           Network.Google.Resource.Monitoring.Projects.Groups.Members.List
+import           Network.Google.Resource.Monitoring.Projects.Groups.Update
+import           Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Create
+import           Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
+import           Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Get
+import           Network.Google.Resource.Monitoring.Projects.MetricDescriptors.List
+import           Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.Get
+import           Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.List
+import           Network.Google.Resource.Monitoring.Projects.TimeSeries.Create
+import           Network.Google.Resource.Monitoring.Projects.TimeSeries.List
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Cloud Monitoring API service.
+-- | Represents the entirety of the methods and resources available for the Google Monitoring API service.
 type MonitoringAPI =
-     MetricDescriptorsListResource :<|>
-       MetricDescriptorsCreateResource
-       :<|> MetricDescriptorsDeleteResource
-       :<|> TimeseriesDescriptorsListResource
-       :<|> TimeseriesListResource
-       :<|> TimeseriesWriteResource
+     ProjectsMetricDescriptorsListResource :<|>
+       ProjectsMetricDescriptorsGetResource
+       :<|> ProjectsMetricDescriptorsCreateResource
+       :<|> ProjectsMetricDescriptorsDeleteResource
+       :<|> ProjectsGroupsMembersListResource
+       :<|> ProjectsGroupsListResource
+       :<|> ProjectsGroupsGetResource
+       :<|> ProjectsGroupsCreateResource
+       :<|> ProjectsGroupsDeleteResource
+       :<|> ProjectsGroupsUpdateResource
+       :<|> ProjectsCollectdTimeSeriesCreateResource
+       :<|> ProjectsMonitoredResourceDescriptorsListResource
+       :<|> ProjectsMonitoredResourceDescriptorsGetResource
+       :<|> ProjectsTimeSeriesListResource
+       :<|> ProjectsTimeSeriesCreateResource
