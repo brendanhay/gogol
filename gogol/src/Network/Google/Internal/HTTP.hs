@@ -49,10 +49,9 @@ perform :: (MonadCatch m, MonadResource m, GoogleRequest a)
         -> m (Either Error (Rs a))
 perform Env{..} x = catches go handlers
   where
-    Request {..} = _cliRequest
-    Service {..} = _cliService
-
-    Client  {..} = requestClient x
+    Request       {..} = _cliRequest
+    ServiceConfig {..} = _cliService
+    Client        {..} = requestClient x
         & clientService %~ appEndo (getDual _envOverride)
 
     go = liftResourceT $ do

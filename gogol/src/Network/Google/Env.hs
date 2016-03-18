@@ -22,7 +22,7 @@ import           Network.HTTP.Conduit
 
 -- | The environment containing the parameters required to make Google requests.
 data Env = Env
-    { _envOverride :: !(Dual (Endo Service))
+    { _envOverride :: !(Dual (Endo ServiceConfig))
     , _envLogger   :: !Logger
     , _envManager  :: !Manager
     , _envStore    :: !Store
@@ -36,7 +36,7 @@ class HasEnv a where
     {-# MINIMAL environment #-}
 
     -- | The currently applied overrides to all 'Service' configuration.
-    envOverride :: Lens' a (Dual (Endo Service))
+    envOverride :: Lens' a (Dual (Endo ServiceConfig))
 
     -- | The function used to output log messages.
     envLogger   :: Lens' a Logger
@@ -61,7 +61,7 @@ instance HasEnv Env where
 -- To override a specific service, it's suggested you use
 -- either 'configure' or 'reconfigure' with a modified version of the default
 -- service, such as @Network.Google.Gmail.gmailService@.
-override :: HasEnv a => (Service -> Service) -> a -> a
+override :: HasEnv a => (ServiceConfig -> ServiceConfig) -> a -> a
 override f = envOverride <>~ Dual (Endo f)
 
 -- | Configure a specific service. All requests belonging to the
@@ -71,7 +71,7 @@ override f = envOverride <>~ Dual (Endo f)
 -- as @Network.Google.Gmail.gmailService@.
 --
 -- /See:/ 'reconfigure'.
-configure :: HasEnv a => Service -> a -> a
+configure :: HasEnv a => ServiceConfig -> a -> a
 configure s = override f
   where
     f x | on (==) _svcId s x = s
@@ -84,7 +84,7 @@ configure s = override f
 -- as @Network.Google.Gmail.gmailService@.
 --
 -- /See:/ 'configure'.
-reconfigure :: (MonadReader r m, HasEnv r) => Service -> m a -> m a
+reconfigure :: (MonadReader r m, HasEnv r) => ServiceConfig -> m a -> m a
 reconfigure = local . configure
 
 -- | Scope an action such that any HTTP response will use this timeout value.
