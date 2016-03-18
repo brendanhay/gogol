@@ -99,9 +99,22 @@ mname abrv (Suffix suf) (Global g) =
         e    = Text.replace "." "" abrv
         x:xs = map (upperAcronym . toPascal) g
 
-dname, cname :: Global -> Name
-dname = name . Text.unpack . renameReserved . upperHead . global
-cname = name . Text.unpack . renameReserved . lowerHead . lowerFirstAcronym . global
+dname :: Global -> Name
+dname = name
+      . Text.unpack
+      . renameReserved
+      . upperHead
+      . Text.dropWhile separator
+      . global
+
+cname :: Global -> Name
+cname = name
+      . Text.unpack
+      . renameReserved
+      . lowerHead
+      . Text.dropWhile separator
+      . lowerFirstAcronym
+      . global
 
 bname :: Prefix -> Text -> Name
 bname (Prefix p) = name
