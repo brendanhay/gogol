@@ -58,7 +58,7 @@ data AltJSON  = AltJSON  deriving (Eq, Ord, Show, Read, Generic, Typeable)
 data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
 instance ToText AltJSON  where toText = const "json"
-instance ToText AltMedia where toText = const "media"
+instance ToText AltMedia where toText = const "multipart"
 
 newtype OAuthScope = OAuthScope Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
