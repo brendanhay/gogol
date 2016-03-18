@@ -51,6 +51,17 @@
                     }
                 }
             }
+        },
+        "liveBroadcasts": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "broadcastType": {
+                            "default": "event"
+                        }
+                    }
+                }
+            }
         }
     }
 }
