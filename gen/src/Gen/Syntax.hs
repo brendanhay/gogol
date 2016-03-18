@@ -34,7 +34,7 @@ import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
 
 urlSig :: Name -> Decl
-urlSig n = TypeSig noLoc [n] (TyCon "Service")
+urlSig n = TypeSig noLoc [n] (TyCon "ServiceConfig")
 
 urlDecl :: Service a -> Name -> Decl
 urlDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds

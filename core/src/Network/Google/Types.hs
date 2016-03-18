@@ -25,7 +25,7 @@ module Network.Google.Types where
 
 import           Control.Applicative
 import           Control.Exception.Lens                (exception)
-import           Control.Lens                          hiding (coerce)
+import           Control.Lens
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
@@ -43,7 +43,6 @@ import           Data.Foldable                         (foldl')
 import           Data.Monoid
 import           Data.String
 import           Data.Text                             (Text)
-import qualified Data.Text                             as Text
 import qualified Data.Text.Encoding                    as Text
 import           Data.Text.Lazy.Builder                (Builder)
 import qualified Data.Text.Lazy.Builder                as Build
@@ -154,7 +153,7 @@ instance AsError Error where
         ServiceError e -> Right e
         x              -> Left  x
 
-data Service = Service
+data ServiceConfig = ServiceConfig
     { _svcId      :: !ServiceId
     , _svcHost    :: !ByteString
     , _svcPath    :: !Builder
@@ -163,8 +162,8 @@ data Service = Service
     , _svcTimeout :: !(Maybe Seconds)
     }
 
-defaultService :: ServiceId -> ByteString -> Service
-defaultService i h = Service
+defaultService :: ServiceId -> ByteString -> ServiceConfig
+defaultService i h = ServiceConfig
     { _svcId      = i
     , _svcHost    = h
     , _svcPath    = mempty
@@ -173,19 +172,19 @@ defaultService i h = Service
     , _svcTimeout = Just 70
     }
 
-serviceHost :: Lens' Service ByteString
+serviceHost :: Lens' ServiceConfig ByteString
 serviceHost = lens _svcHost (\s a -> s { _svcHost = a })
 
-servicePath :: Lens' Service Builder
+servicePath :: Lens' ServiceConfig Builder
 servicePath = lens _svcPath (\s a -> s { _svcPath = a })
 
-servicePort :: Lens' Service Int
+servicePort :: Lens' ServiceConfig Int
 servicePort = lens _svcPort (\s a -> s { _svcPort = a })
 
-serviceSecure :: Lens' Service Bool
+serviceSecure :: Lens' ServiceConfig Bool
 serviceSecure = lens _svcSecure (\s a -> s { _svcSecure = a })
 
-serviceTimeout :: Lens' Service (Maybe Seconds)
+serviceTimeout :: Lens' ServiceConfig (Maybe Seconds)
 serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
 
 -- | A single part of a multipart message.
@@ -239,18 +238,28 @@ data Client a = Client
     { _cliAccept   :: !(Maybe MediaType)
     , _cliMethod   :: !Method
     , _cliCheck    :: !(Status -> Bool)
-    , _cliService  :: !Service
+    , _cliService  :: !ServiceConfig
     , _cliRequest  :: !Request
     , _cliResponse :: !(Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
     }
 
-clientService :: Lens' (Client a) Service
+clientService :: Lens' (Client a) ServiceConfig
 clientService = lens _cliService (\s a -> s { _cliService = a })
 
-mime :: FromStream c a => Proxy c -> Method -> [Int] -> Request -> Service -> Client a
+mime :: FromStream c a
+     => Proxy c
+     -> Method
+     -> [Int]
+     -> Request
+     -> ServiceConfig
+     -> Client a
 mime p = client (fromStream p) (Just (contentType p))
 
-discard :: Method -> [Int] -> Request -> Service -> Client ()
+discard :: Method
+        -> [Int]
+        -> Request
+        -> ServiceConfig
+        -> Client ()
 discard = client (\b -> closeResumableSource b >> pure (Right ())) Nothing
 
 client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
@@ -258,7 +267,7 @@ client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
        -> Method
        -> [Int]
        -> Request
-       -> Service
+       -> ServiceConfig
        -> Client a
 client f cs m ns rq s = Client
     { _cliAccept   = cs
@@ -437,61 +446,61 @@ instance ( ToBody c a
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Get (c ': cs) a) where
-    type Fn (Get (c ': cs) a) = Service -> Client a
+    type Fn (Get (c ': cs) a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodGet [200, 203]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Get (c ': cs) ()) where
-    type Fn (Get (c ': cs) ()) = Service -> Client ()
+    type Fn (Get (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodGet [204]
 
 instance {-# OVERLAPPABLE #-}
   (FromStream c a, cs' ~ (c ': cs)) => GoogleClient (Post cs' a) where
-    type Fn (Post cs' a) = Service -> Client a
+    type Fn (Post cs' a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPost [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Post cs ()) where
-    type Fn (Post cs ()) = Service -> Client ()
+    type Fn (Post cs ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodPost [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Put (c ': cs) a) where
-    type Fn (Put (c ': cs) a) = Service -> Client a
+    type Fn (Put (c ': cs) a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPut [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Put (c ': cs) ()) where
-    type Fn (Put (c ': cs) ()) = Service -> Client ()
+    type Fn (Put (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodPut [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Patch (c ': cs) a) where
-    type Fn (Patch (c ': cs) a) = Service -> Client a
+    type Fn (Patch (c ': cs) a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPatch [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Patch (c ': cs) ()) where
-    type Fn (Patch (c ': cs) ()) = Service -> Client ()
+    type Fn (Patch (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodPatch [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Delete (c ': cs) a) where
-    type Fn (Delete (c ': cs) a) = Service -> Client a
+    type Fn (Delete (c ': cs) a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodDelete [200, 202]
 
 instance {-# OVERLAPPING #-}
    GoogleClient (Delete (c ': cs) ()) where
-    type Fn (Delete (c ': cs) ()) = Service -> Client ()
+    type Fn (Delete (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodDelete [204]
 

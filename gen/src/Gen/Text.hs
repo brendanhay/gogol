@@ -100,6 +100,7 @@ separator x =
    || x == '-'
    || x == '_'
    || x == '*'
+   || x == '$'
 
 dot :: Char -> Bool
 dot x = x == '.'
