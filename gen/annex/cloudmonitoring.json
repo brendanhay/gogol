@@ -1,5 +1,5 @@
 {
-    "library": "monitoring",
-    "canonicalName": "Monitoring"
+    "library": "cloudmonitoring",
+    "canonicalName": "CloudMonitoring"
 }
 
