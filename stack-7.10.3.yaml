@@ -31,11 +31,13 @@ packages:
   - gogol-books
   - gogol-civicinfo
   - gogol-classroom
+  - gogol-cloudmonitoring
   - gogol-cloudtrace
   - gogol-compute
   - gogol-container
   - gogol-customsearch
   - gogol-dataflow
+  - gogol-dataproc
   - gogol-datastore
   - gogol-debugger
   - gogol-deploymentmanager
@@ -57,6 +59,7 @@ packages:
   - gogol-groups-migration
   - gogol-groups-settings
   - gogol-identity-toolkit
+  - gogol-kgsearch
   - gogol-latencytest
   - gogol-logging
   - gogol-maps-coordinate
@@ -66,6 +69,7 @@ packages:
   - gogol-oauth2
   - gogol-pagespeed
   - gogol-partners
+  - gogol-people
   - gogol-play-moviespartner
   - gogol-plus
   - gogol-plus-domains
@@ -77,6 +81,7 @@ packages:
   - gogol-replicapool-updater
   - gogol-resourcemanager
   - gogol-resourceviews
+  - gogol-script
   - gogol-shopping-content
   - gogol-siteverification
   - gogol-spectrum
@@ -88,6 +93,7 @@ packages:
   - gogol-translate
   - gogol-urlshortener
   - gogol-useraccounts
+  - gogol-vision
   - gogol-webmaster-tools
   - gogol-youtube
   - gogol-youtube-analytics
