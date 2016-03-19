@@ -19,10 +19,10 @@ module Network.Google.UserAccounts.Types
       userAccountsService
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , cloudUseraccountsScope
-    , cloudUseraccountsReadonlyScope
+    , authCloudPlatformReadOnlyScope
+    , authCloudPlatformScope
+    , authCloudUseraccountsScope
+    , authCloudUseraccountsReadonlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -204,17 +204,17 @@ userAccountsService
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: OAuthScope
+authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | Manage your Google Cloud User Accounts
-cloudUseraccountsScope :: OAuthScope
-cloudUseraccountsScope = "https://www.googleapis.com/auth/cloud.useraccounts";
+authCloudUseraccountsScope :: OAuthScope
+authCloudUseraccountsScope = "https://www.googleapis.com/auth/cloud.useraccounts";
 
 -- | View your Google Cloud User Accounts
-cloudUseraccountsReadonlyScope :: OAuthScope
-cloudUseraccountsReadonlyScope = "https://www.googleapis.com/auth/cloud.useraccounts.readonly";
+authCloudUseraccountsReadonlyScope :: OAuthScope
+authCloudUseraccountsReadonlyScope = "https://www.googleapis.com/auth/cloud.useraccounts.readonly";

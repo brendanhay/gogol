@@ -22,16 +22,16 @@ module Network.Google.Script
       scriptService
 
     -- * OAuth Scopes
-    , scriptAllScope
-    , feedsScope
-    , adminDirectoryUserScope
-    , userinfoEmailScope
-    , formsCurrentonlyScope
-    , driveScope
-    , adminDirectoryGroupScope
-    , feedsScope
-    , formsScope
-    , groupsScope
+    , mailGoogleComScope
+    , m8FeedsScope
+    , authAdminDirectoryUserScope
+    , authUserinfoEmailScope
+    , authFormsCurrentonlyScope
+    , authDriveScope
+    , authAdminDirectoryGroupScope
+    , calendarFeedsScope
+    , authFormsScope
+    , authGroupsScope
 
     -- * API Declaration
     , ScriptAPI

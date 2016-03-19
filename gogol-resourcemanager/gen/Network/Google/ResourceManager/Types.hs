@@ -19,8 +19,8 @@ module Network.Google.ResourceManager.Types
       resourceManagerService
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
+    , authCloudPlatformReadOnlyScope
+    , authCloudPlatformScope
 
     -- * ResourceId
     , ResourceId
@@ -103,9 +103,9 @@ resourceManagerService
       "cloudresourcemanager.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: OAuthScope
+authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

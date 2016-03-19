@@ -19,8 +19,8 @@ module Network.Google.FusionTables.Types
       fusionTablesService
 
     -- * OAuth Scopes
-    , fusiontablesReadonlyScope
-    , fusiontablesScope
+    , authFusiontablesReadonlyScope
+    , authFusiontablesScope
 
     -- * ColumnList
     , ColumnList
@@ -238,9 +238,9 @@ fusionTablesService
       "www.googleapis.com"
 
 -- | View your Fusion Tables
-fusiontablesReadonlyScope :: OAuthScope
-fusiontablesReadonlyScope = "https://www.googleapis.com/auth/fusiontables.readonly";
+authFusiontablesReadonlyScope :: OAuthScope
+authFusiontablesReadonlyScope = "https://www.googleapis.com/auth/fusiontables.readonly";
 
 -- | Manage your Fusion Tables
-fusiontablesScope :: OAuthScope
-fusiontablesScope = "https://www.googleapis.com/auth/fusiontables";
+authFusiontablesScope :: OAuthScope
+authFusiontablesScope = "https://www.googleapis.com/auth/fusiontables";

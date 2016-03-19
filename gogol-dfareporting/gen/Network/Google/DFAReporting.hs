@@ -22,8 +22,8 @@ module Network.Google.DFAReporting
       dFAReportingService
 
     -- * OAuth Scopes
-    , dfareportingScope
-    , dfatraffickingScope
+    , authDfareportingScope
+    , authDfatraffickingScope
 
     -- * API Declaration
     , DFAReportingAPI

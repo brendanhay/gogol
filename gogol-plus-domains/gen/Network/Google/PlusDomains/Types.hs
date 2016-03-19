@@ -19,16 +19,16 @@ module Network.Google.PlusDomains.Types
       plusDomainsService
 
     -- * OAuth Scopes
-    , userinfoProfileScope
-    , plusLoginScope
-    , plusProfilesReadScope
-    , userinfoEmailScope
-    , plusStreamWriteScope
-    , plusStreamReadScope
-    , plusMeScope
-    , plusCirclesReadScope
-    , plusMediaUploadScope
-    , plusCirclesWriteScope
+    , authUserinfoProfileScope
+    , authPlusLoginScope
+    , authPlusProfilesReadScope
+    , authUserinfoEmailScope
+    , authPlusStreamWriteScope
+    , authPlusStreamReadScope
+    , authPlusMeScope
+    , authPlusCirclesReadScope
+    , authPlusMediaUploadScope
+    , authPlusCirclesWriteScope
 
     -- * Audience
     , Audience
@@ -582,43 +582,43 @@ plusDomainsService
       "www.googleapis.com"
 
 -- | View your basic profile info
-userinfoProfileScope :: OAuthScope
-userinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
+authUserinfoProfileScope :: OAuthScope
+authUserinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
 
 -- | Know the list of people in your circles, your age range, and language
-plusLoginScope :: OAuthScope
-plusLoginScope = "https://www.googleapis.com/auth/plus.login";
+authPlusLoginScope :: OAuthScope
+authPlusLoginScope = "https://www.googleapis.com/auth/plus.login";
 
 -- | View your own Google+ profile and profiles visible to you
-plusProfilesReadScope :: OAuthScope
-plusProfilesReadScope = "https://www.googleapis.com/auth/plus.profiles.read";
+authPlusProfilesReadScope :: OAuthScope
+authPlusProfilesReadScope = "https://www.googleapis.com/auth/plus.profiles.read";
 
 -- | View your email address
-userinfoEmailScope :: OAuthScope
-userinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: OAuthScope
+authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
 
 -- | Manage your Google+ posts, comments, and stream
-plusStreamWriteScope :: OAuthScope
-plusStreamWriteScope = "https://www.googleapis.com/auth/plus.stream.write";
+authPlusStreamWriteScope :: OAuthScope
+authPlusStreamWriteScope = "https://www.googleapis.com/auth/plus.stream.write";
 
 -- | View your Google+ posts, comments, and stream
-plusStreamReadScope :: OAuthScope
-plusStreamReadScope = "https://www.googleapis.com/auth/plus.stream.read";
+authPlusStreamReadScope :: OAuthScope
+authPlusStreamReadScope = "https://www.googleapis.com/auth/plus.stream.read";
 
 -- | Know who you are on Google
-plusMeScope :: OAuthScope
-plusMeScope = "https://www.googleapis.com/auth/plus.me";
+authPlusMeScope :: OAuthScope
+authPlusMeScope = "https://www.googleapis.com/auth/plus.me";
 
 -- | View your circles and the people and pages in them
-plusCirclesReadScope :: OAuthScope
-plusCirclesReadScope = "https://www.googleapis.com/auth/plus.circles.read";
+authPlusCirclesReadScope :: OAuthScope
+authPlusCirclesReadScope = "https://www.googleapis.com/auth/plus.circles.read";
 
 -- | Send your photos and videos to Google+
-plusMediaUploadScope :: OAuthScope
-plusMediaUploadScope = "https://www.googleapis.com/auth/plus.media.upload";
+authPlusMediaUploadScope :: OAuthScope
+authPlusMediaUploadScope = "https://www.googleapis.com/auth/plus.media.upload";
 
 -- | Manage your circles and add people and pages. People and pages you add
 -- to your circles will be notified. Others may see this information
 -- publicly. People you add to circles can use Hangouts with you.
-plusCirclesWriteScope :: OAuthScope
-plusCirclesWriteScope = "https://www.googleapis.com/auth/plus.circles.write";
+authPlusCirclesWriteScope :: OAuthScope
+authPlusCirclesWriteScope = "https://www.googleapis.com/auth/plus.circles.write";

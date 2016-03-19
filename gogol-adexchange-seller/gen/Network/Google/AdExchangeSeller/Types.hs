@@ -19,8 +19,8 @@ module Network.Google.AdExchangeSeller.Types
       adExchangeSellerService
 
     -- * OAuth Scopes
-    , adexchangeSellerReadonlyScope
-    , adexchangeSellerScope
+    , authAdexchangeSellerReadonlyScope
+    , authAdexchangeSellerScope
 
     -- * AdClients
     , AdClients
@@ -189,9 +189,9 @@ adExchangeSellerService
       "www.googleapis.com"
 
 -- | View your Ad Exchange data
-adexchangeSellerReadonlyScope :: OAuthScope
-adexchangeSellerReadonlyScope = "https://www.googleapis.com/auth/adexchange.seller.readonly";
+authAdexchangeSellerReadonlyScope :: OAuthScope
+authAdexchangeSellerReadonlyScope = "https://www.googleapis.com/auth/adexchange.seller.readonly";
 
 -- | View and manage your Ad Exchange data
-adexchangeSellerScope :: OAuthScope
-adexchangeSellerScope = "https://www.googleapis.com/auth/adexchange.seller";
+authAdexchangeSellerScope :: OAuthScope
+authAdexchangeSellerScope = "https://www.googleapis.com/auth/adexchange.seller";

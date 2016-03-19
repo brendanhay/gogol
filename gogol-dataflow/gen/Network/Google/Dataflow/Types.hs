@@ -19,8 +19,8 @@ module Network.Google.Dataflow.Types
       dataflowService
 
     -- * OAuth Scopes
-    , userinfoEmailScope
-    , cloudPlatformScope
+    , authUserinfoEmailScope
+    , authCloudPlatformScope
 
     -- * JobExecutionInfoStages
     , JobExecutionInfoStages
@@ -798,9 +798,9 @@ dataflowService
       "dataflow.googleapis.com"
 
 -- | View your email address
-userinfoEmailScope :: OAuthScope
-userinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: OAuthScope
+authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

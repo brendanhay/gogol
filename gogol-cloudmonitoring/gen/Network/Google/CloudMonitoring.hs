@@ -22,8 +22,8 @@ module Network.Google.CloudMonitoring
       cloudMonitoringService
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , monitoringScope
+    , authCloudPlatformScope
+    , authMonitoringScope
 
     -- * API Declaration
     , CloudMonitoringAPI

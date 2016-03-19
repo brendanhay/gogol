@@ -23,8 +23,8 @@ module Network.Google.YouTubeReporting
       youTubeReportingService
 
     -- * OAuth Scopes
-    , ytAnalyticsReadonlyScope
-    , ytAnalyticsMonetaryReadonlyScope
+    , authYtAnalyticsReadonlyScope
+    , authYtAnalyticsMonetaryReadonlyScope
 
     -- * API Declaration
     , YouTubeReportingAPI

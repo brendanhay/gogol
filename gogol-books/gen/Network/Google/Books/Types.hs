@@ -19,7 +19,7 @@ module Network.Google.Books.Types
       booksService
 
     -- * OAuth Scopes
-    , booksScope
+    , authBooksScope
 
     -- * UserSettings
     , UserSettings
@@ -923,5 +923,5 @@ booksService
       "www.googleapis.com"
 
 -- | Manage your books
-booksScope :: OAuthScope
-booksScope = "https://www.googleapis.com/auth/books";
+authBooksScope :: OAuthScope
+authBooksScope = "https://www.googleapis.com/auth/books";

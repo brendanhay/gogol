@@ -19,8 +19,8 @@ module Network.Google.YouTubeReporting.Types
       youTubeReportingService
 
     -- * OAuth Scopes
-    , ytAnalyticsReadonlyScope
-    , ytAnalyticsMonetaryReadonlyScope
+    , authYtAnalyticsReadonlyScope
+    , authYtAnalyticsMonetaryReadonlyScope
 
     -- * ListReportsResponse
     , ListReportsResponse
@@ -87,10 +87,10 @@ youTubeReportingService
       "youtubereporting.googleapis.com"
 
 -- | View YouTube Analytics reports for your YouTube content
-ytAnalyticsReadonlyScope :: OAuthScope
-ytAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
+authYtAnalyticsReadonlyScope :: OAuthScope
+authYtAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
-ytAnalyticsMonetaryReadonlyScope :: OAuthScope
-ytAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
+authYtAnalyticsMonetaryReadonlyScope :: OAuthScope
+authYtAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";

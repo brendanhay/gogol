@@ -22,13 +22,13 @@ module Network.Google.BigQuery
       bigQueryService
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , devstorageReadOnlyScope
-    , bigqueryInsertdataScope
-    , devstorageReadWriteScope
-    , bigqueryScope
-    , devstorageFullControlScope
+    , authCloudPlatformReadOnlyScope
+    , authCloudPlatformScope
+    , authDevstorageReadOnlyScope
+    , authBigqueryInsertdataScope
+    , authDevstorageReadWriteScope
+    , authBigqueryScope
+    , authDevstorageFullControlScope
 
     -- * API Declaration
     , BigQueryAPI

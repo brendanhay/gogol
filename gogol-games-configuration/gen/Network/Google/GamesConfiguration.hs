@@ -22,7 +22,7 @@ module Network.Google.GamesConfiguration
       gamesConfigurationService
 
     -- * OAuth Scopes
-    , androidpublisherScope
+    , authAndroidpublisherScope
 
     -- * API Declaration
     , GamesConfigurationAPI

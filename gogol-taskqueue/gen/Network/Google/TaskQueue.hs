@@ -22,8 +22,8 @@ module Network.Google.TaskQueue
       taskQueueService
 
     -- * OAuth Scopes
-    , taskqueueConsumerScope
-    , taskqueueScope
+    , authTaskqueueConsumerScope
+    , authTaskqueueScope
 
     -- * API Declaration
     , TaskQueueAPI

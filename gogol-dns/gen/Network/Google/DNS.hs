@@ -23,10 +23,10 @@ module Network.Google.DNS
       dNSService
 
     -- * OAuth Scopes
-    , ndevClouddnsReadonlyScope
-    , cloudPlatformReadOnlyScope
-    , ndevClouddnsReadwriteScope
-    , cloudPlatformScope
+    , authNdevClouddnsReadonlyScope
+    , authCloudPlatformReadOnlyScope
+    , authNdevClouddnsReadwriteScope
+    , authCloudPlatformScope
 
     -- * API Declaration
     , DNSAPI

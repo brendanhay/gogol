@@ -22,8 +22,8 @@ module Network.Google.Mirror
       mirrorService
 
     -- * OAuth Scopes
-    , glassTimelineScope
-    , glassLocationScope
+    , authGlassTimelineScope
+    , authGlassLocationScope
 
     -- * API Declaration
     , MirrorAPI

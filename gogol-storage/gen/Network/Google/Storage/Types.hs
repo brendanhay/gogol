@@ -19,11 +19,11 @@ module Network.Google.Storage.Types
       storageService
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , devstorageReadOnlyScope
-    , devstorageReadWriteScope
-    , devstorageFullControlScope
+    , authCloudPlatformReadOnlyScope
+    , authCloudPlatformScope
+    , authDevstorageReadOnlyScope
+    , authDevstorageReadWriteScope
+    , authDevstorageFullControlScope
 
     -- * ObjectOwner
     , ObjectOwner
@@ -356,21 +356,21 @@ storageService
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: OAuthScope
+authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View your data in Google Cloud Storage
-devstorageReadOnlyScope :: OAuthScope
-devstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
+authDevstorageReadOnlyScope :: OAuthScope
+authDevstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+authDevstorageReadWriteScope :: OAuthScope
+authDevstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
 
 -- | Manage your data and permissions in Google Cloud Storage
-devstorageFullControlScope :: OAuthScope
-devstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";
+authDevstorageFullControlScope :: OAuthScope
+authDevstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";

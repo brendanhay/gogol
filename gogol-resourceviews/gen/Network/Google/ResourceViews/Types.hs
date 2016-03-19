@@ -19,12 +19,12 @@ module Network.Google.ResourceViews.Types
       resourceViewsService
 
     -- * OAuth Scopes
-    , computeScope
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , ndevCloudmanScope
-    , ndevCloudmanReadonlyScope
-    , computeReadonlyScope
+    , authComputeScope
+    , authCloudPlatformReadOnlyScope
+    , authCloudPlatformScope
+    , authNdevCloudmanScope
+    , authNdevCloudmanReadonlyScope
+    , authComputeReadonlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -181,27 +181,27 @@ resourceViewsService
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-computeScope :: OAuthScope
-computeScope = "https://www.googleapis.com/auth/compute";
+authComputeScope :: OAuthScope
+authComputeScope = "https://www.googleapis.com/auth/compute";
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: OAuthScope
+authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View and manage your Google Cloud Platform management resources and
 -- deployment status information
-ndevCloudmanScope :: OAuthScope
-ndevCloudmanScope = "https://www.googleapis.com/auth/ndev.cloudman";
+authNdevCloudmanScope :: OAuthScope
+authNdevCloudmanScope = "https://www.googleapis.com/auth/ndev.cloudman";
 
 -- | View your Google Cloud Platform management resources and deployment
 -- status information
-ndevCloudmanReadonlyScope :: OAuthScope
-ndevCloudmanReadonlyScope = "https://www.googleapis.com/auth/ndev.cloudman.readonly";
+authNdevCloudmanReadonlyScope :: OAuthScope
+authNdevCloudmanReadonlyScope = "https://www.googleapis.com/auth/ndev.cloudman.readonly";
 
 -- | View your Google Compute Engine resources
-computeReadonlyScope :: OAuthScope
-computeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";
+authComputeReadonlyScope :: OAuthScope
+authComputeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";

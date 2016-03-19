@@ -22,12 +22,12 @@ module Network.Google.Compute
       computeService
 
     -- * OAuth Scopes
-    , computeScope
-    , cloudPlatformScope
-    , devstorageReadOnlyScope
-    , devstorageReadWriteScope
-    , computeReadonlyScope
-    , devstorageFullControlScope
+    , authComputeScope
+    , authCloudPlatformScope
+    , authDevstorageReadOnlyScope
+    , authDevstorageReadWriteScope
+    , authComputeReadonlyScope
+    , authDevstorageFullControlScope
 
     -- * API Declaration
     , ComputeAPI

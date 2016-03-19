@@ -19,7 +19,7 @@ module Network.Google.AdExchangeBuyer.Types
       adExchangeBuyerService
 
     -- * OAuth Scopes
-    , adexchangeBuyerScope
+    , authAdexchangeBuyerScope
 
     -- * MarketplaceNote
     , MarketplaceNote
@@ -596,5 +596,5 @@ adExchangeBuyerService
       "www.googleapis.com"
 
 -- | Manage your Ad Exchange buyer account configuration
-adexchangeBuyerScope :: OAuthScope
-adexchangeBuyerScope = "https://www.googleapis.com/auth/adexchange.buyer";
+authAdexchangeBuyerScope :: OAuthScope
+authAdexchangeBuyerScope = "https://www.googleapis.com/auth/adexchange.buyer";

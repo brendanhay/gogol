@@ -19,8 +19,8 @@ module Network.Google.Reports.Types
       reportsService
 
     -- * OAuth Scopes
-    , adminReportsUsageReadonlyScope
-    , adminReportsAuditReadonlyScope
+    , authAdminReportsUsageReadonlyScope
+    , authAdminReportsAuditReadonlyScope
 
     -- * UsageReportParametersItem
     , UsageReportParametersItem
@@ -159,9 +159,9 @@ reportsService
       "www.googleapis.com"
 
 -- | View usage reports of Google Apps for your domain
-adminReportsUsageReadonlyScope :: OAuthScope
-adminReportsUsageReadonlyScope = "https://www.googleapis.com/auth/admin.reports.usage.readonly";
+authAdminReportsUsageReadonlyScope :: OAuthScope
+authAdminReportsUsageReadonlyScope = "https://www.googleapis.com/auth/admin.reports.usage.readonly";
 
 -- | View audit reports of Google Apps for your domain
-adminReportsAuditReadonlyScope :: OAuthScope
-adminReportsAuditReadonlyScope = "https://www.googleapis.com/auth/admin.reports.audit.readonly";
+authAdminReportsAuditReadonlyScope :: OAuthScope
+authAdminReportsAuditReadonlyScope = "https://www.googleapis.com/auth/admin.reports.audit.readonly";

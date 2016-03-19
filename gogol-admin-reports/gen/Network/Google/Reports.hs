@@ -23,8 +23,8 @@ module Network.Google.Reports
       reportsService
 
     -- * OAuth Scopes
-    , adminReportsUsageReadonlyScope
-    , adminReportsAuditReadonlyScope
+    , authAdminReportsUsageReadonlyScope
+    , authAdminReportsAuditReadonlyScope
 
     -- * API Declaration
     , ReportsAPI

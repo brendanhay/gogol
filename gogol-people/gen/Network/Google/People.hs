@@ -23,15 +23,15 @@ module Network.Google.People
       peopleService
 
     -- * OAuth Scopes
-    , userBirthdayReadScope
-    , userinfoProfileScope
-    , plusLoginScope
-    , userPhonenumbersReadScope
-    , userinfoEmailScope
-    , contactsReadonlyScope
-    , userAddressesReadScope
-    , contactsScope
-    , userEmailsReadScope
+    , authUserBirthdayReadScope
+    , authUserinfoProfileScope
+    , authPlusLoginScope
+    , authUserPhonenumbersReadScope
+    , authUserinfoEmailScope
+    , authContactsReadonlyScope
+    , authUserAddressesReadScope
+    , authContactsScope
+    , authUserEmailsReadScope
 
     -- * API Declaration
     , PeopleAPI

@@ -22,8 +22,8 @@ module Network.Google.AppsTasks
       appsTasksService
 
     -- * OAuth Scopes
-    , tasksReadonlyScope
-    , tasksScope
+    , authTasksReadonlyScope
+    , authTasksScope
 
     -- * API Declaration
     , AppsTasksAPI

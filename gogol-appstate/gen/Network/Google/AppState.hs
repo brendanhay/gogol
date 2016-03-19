@@ -22,7 +22,7 @@ module Network.Google.AppState
       appStateService
 
     -- * OAuth Scopes
-    , appstateScope
+    , authAppstateScope
 
     -- * API Declaration
     , AppStateAPI

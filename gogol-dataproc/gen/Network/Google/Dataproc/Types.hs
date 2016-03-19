@@ -19,10 +19,10 @@ module Network.Google.Dataproc.Types
       dataprocService
 
     -- * OAuth Scopes
-    , loggingAdminScope
-    , loggingReadScope
-    , loggingWriteScope
-    , cloudPlatformScope
+    , authLoggingAdminScope
+    , authLoggingReadScope
+    , authLoggingWriteScope
+    , authCloudPlatformScope
 
     -- * JobReference
     , JobReference
@@ -404,17 +404,17 @@ dataprocService
       "dataproc.googleapis.com"
 
 -- | Administrate log data for your projects
-loggingAdminScope :: OAuthScope
-loggingAdminScope = "https://www.googleapis.com/auth/logging.admin";
+authLoggingAdminScope :: OAuthScope
+authLoggingAdminScope = "https://www.googleapis.com/auth/logging.admin";
 
 -- | View log data for your projects
-loggingReadScope :: OAuthScope
-loggingReadScope = "https://www.googleapis.com/auth/logging.read";
+authLoggingReadScope :: OAuthScope
+authLoggingReadScope = "https://www.googleapis.com/auth/logging.read";
 
 -- | Submit log data for your projects
-loggingWriteScope :: OAuthScope
-loggingWriteScope = "https://www.googleapis.com/auth/logging.write";
+authLoggingWriteScope :: OAuthScope
+authLoggingWriteScope = "https://www.googleapis.com/auth/logging.write";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

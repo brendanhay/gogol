@@ -19,7 +19,7 @@ module Network.Google.GroupsMigration.Types
       groupsMigrationService
 
     -- * OAuth Scopes
-    , appsGroupsMigrationScope
+    , authAppsGroupsMigrationScope
 
     -- * Groups
     , Groups
@@ -39,5 +39,5 @@ groupsMigrationService
       "www.googleapis.com"
 
 -- | Manage messages in groups on your domain
-appsGroupsMigrationScope :: OAuthScope
-appsGroupsMigrationScope = "https://www.googleapis.com/auth/apps.groups.migration";
+authAppsGroupsMigrationScope :: OAuthScope
+authAppsGroupsMigrationScope = "https://www.googleapis.com/auth/apps.groups.migration";

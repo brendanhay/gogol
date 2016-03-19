@@ -19,11 +19,11 @@ module Network.Google.AppsActivity.Types
       appsActivityService
 
     -- * OAuth Scopes
-    , driveMetadataReadonlyScope
-    , activityScope
-    , driveReadonlyScope
-    , driveScope
-    , driveMetadataScope
+    , authDriveMetadataReadonlyScope
+    , authActivityScope
+    , authDriveReadonlyScope
+    , authDriveScope
+    , authDriveMetadataScope
 
     -- * Parent
     , Parent
@@ -132,21 +132,21 @@ appsActivityService
       "www.googleapis.com"
 
 -- | View metadata for files in your Google Drive
-driveMetadataReadonlyScope :: OAuthScope
-driveMetadataReadonlyScope = "https://www.googleapis.com/auth/drive.metadata.readonly";
+authDriveMetadataReadonlyScope :: OAuthScope
+authDriveMetadataReadonlyScope = "https://www.googleapis.com/auth/drive.metadata.readonly";
 
 -- | View the activity history of your Google Apps
-activityScope :: OAuthScope
-activityScope = "https://www.googleapis.com/auth/activity";
+authActivityScope :: OAuthScope
+authActivityScope = "https://www.googleapis.com/auth/activity";
 
 -- | View the files in your Google Drive
-driveReadonlyScope :: OAuthScope
-driveReadonlyScope = "https://www.googleapis.com/auth/drive.readonly";
+authDriveReadonlyScope :: OAuthScope
+authDriveReadonlyScope = "https://www.googleapis.com/auth/drive.readonly";
 
 -- | View and manage the files in your Google Drive
-driveScope :: OAuthScope
-driveScope = "https://www.googleapis.com/auth/drive";
+authDriveScope :: OAuthScope
+authDriveScope = "https://www.googleapis.com/auth/drive";
 
 -- | View and manage metadata of files in your Google Drive
-driveMetadataScope :: OAuthScope
-driveMetadataScope = "https://www.googleapis.com/auth/drive.metadata";
+authDriveMetadataScope :: OAuthScope
+authDriveMetadataScope = "https://www.googleapis.com/auth/drive.metadata";

@@ -19,8 +19,8 @@ module Network.Google.Mirror.Types
       mirrorService
 
     -- * OAuth Scopes
-    , glassTimelineScope
-    , glassLocationScope
+    , authGlassTimelineScope
+    , authGlassLocationScope
 
     -- * TimelineListOrderBy
     , TimelineListOrderBy (..)
@@ -218,9 +218,9 @@ mirrorService
       "www.googleapis.com"
 
 -- | View and manage your Glass timeline
-glassTimelineScope :: OAuthScope
-glassTimelineScope = "https://www.googleapis.com/auth/glass.timeline";
+authGlassTimelineScope :: OAuthScope
+authGlassTimelineScope = "https://www.googleapis.com/auth/glass.timeline";
 
 -- | View your location
-glassLocationScope :: OAuthScope
-glassLocationScope = "https://www.googleapis.com/auth/glass.location";
+authGlassLocationScope :: OAuthScope
+authGlassLocationScope = "https://www.googleapis.com/auth/glass.location";

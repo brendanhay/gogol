@@ -19,7 +19,7 @@ module Network.Google.LatencyTest.Types
       latencyTestService
 
     -- * OAuth Scopes
-    , monitoringReadonlyScope
+    , authMonitoringReadonlyScope
 
     -- * IntValue
     , IntValue
@@ -74,5 +74,5 @@ latencyTestService
       "cloudlatencytest-pa.googleapis.com"
 
 -- | View monitoring data for all of your Google Cloud and API projects
-monitoringReadonlyScope :: OAuthScope
-monitoringReadonlyScope = "https://www.googleapis.com/auth/monitoring.readonly";
+authMonitoringReadonlyScope :: OAuthScope
+authMonitoringReadonlyScope = "https://www.googleapis.com/auth/monitoring.readonly";

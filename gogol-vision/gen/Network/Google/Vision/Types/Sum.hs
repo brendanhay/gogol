@@ -16,7 +16,7 @@
 --
 module Network.Google.Vision.Types.Sum where
 
-import Network.Google.Prelude
+import           Network.Google.Prelude
 
 -- | Under-exposed likelihood.
 data FaceAnnotationUnderExposedLikelihood
@@ -618,10 +618,10 @@ instance ToJSON LandmarkType where
 
 -- | V1 error format.
 data Xgafv
-    = $1
+    = X1
       -- ^ @1@
       -- v1 error format
-    | $2
+    | X2
       -- ^ @2@
       -- v2 error format
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -630,14 +630,14 @@ instance Hashable Xgafv
 
 instance FromText Xgafv where
     fromText = \case
-        "1" -> Just $1
-        "2" -> Just $2
+        "1" -> Just X1
+        "2" -> Just X2
         _ -> Nothing
 
 instance ToText Xgafv where
     toText = \case
-        $1 -> "1"
-        $2 -> "2"
+        X1 -> "1"
+        X2 -> "2"
 
 instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"

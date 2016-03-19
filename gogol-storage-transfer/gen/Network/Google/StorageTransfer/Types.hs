@@ -19,7 +19,7 @@ module Network.Google.StorageTransfer.Types
       storageTransferService
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    , authCloudPlatformScope
 
     -- * ErrorSummary
     , ErrorSummary
@@ -228,5 +228,5 @@ storageTransferService
       "storagetransfer.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

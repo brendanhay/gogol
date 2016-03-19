@@ -23,10 +23,10 @@ module Network.Google.Monitoring
       monitoringService
 
     -- * OAuth Scopes
-    , monitoringReadScope
-    , cloudPlatformScope
-    , monitoringScope
-    , monitoringWriteScope
+    , authMonitoringReadScope
+    , authCloudPlatformScope
+    , authMonitoringScope
+    , authMonitoringWriteScope
 
     -- * API Declaration
     , MonitoringAPI

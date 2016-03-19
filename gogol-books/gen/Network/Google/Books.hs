@@ -22,7 +22,7 @@ module Network.Google.Books
       booksService
 
     -- * OAuth Scopes
-    , booksScope
+    , authBooksScope
 
     -- * API Declaration
     , BooksAPI

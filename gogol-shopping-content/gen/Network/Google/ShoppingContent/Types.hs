@@ -19,7 +19,7 @@ module Network.Google.ShoppingContent.Types
       shoppingContentService
 
     -- * OAuth Scopes
-    , contentScope
+    , authContentScope
 
     -- * OrdersAcknowledgeRequest
     , OrdersAcknowledgeRequest
@@ -1289,5 +1289,5 @@ shoppingContentService
       "www.googleapis.com"
 
 -- | Manage your product listings and accounts for Google Shopping
-contentScope :: OAuthScope
-contentScope = "https://www.googleapis.com/auth/content";
+authContentScope :: OAuthScope
+authContentScope = "https://www.googleapis.com/auth/content";

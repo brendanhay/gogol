@@ -19,9 +19,9 @@ module Network.Google.Debugger.Types
       debuggerService
 
     -- * OAuth Scopes
-    , cloudDebuggerScope
-    , cloudDebugletcontrollerScope
-    , cloudPlatformScope
+    , authCloudDebuggerScope
+    , authCloudDebugletcontrollerScope
+    , authCloudPlatformScope
 
     -- * RegisterDebuggeeResponse
     , RegisterDebuggeeResponse
@@ -240,13 +240,13 @@ debuggerService
       "clouddebugger.googleapis.com"
 
 -- | Manage cloud debugger
-cloudDebuggerScope :: OAuthScope
-cloudDebuggerScope = "https://www.googleapis.com/auth/cloud_debugger";
+authCloudDebuggerScope :: OAuthScope
+authCloudDebuggerScope = "https://www.googleapis.com/auth/cloud_debugger";
 
 -- | Manage active breakpoints in cloud debugger
-cloudDebugletcontrollerScope :: OAuthScope
-cloudDebugletcontrollerScope = "https://www.googleapis.com/auth/cloud_debugletcontroller";
+authCloudDebugletcontrollerScope :: OAuthScope
+authCloudDebugletcontrollerScope = "https://www.googleapis.com/auth/cloud_debugletcontroller";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

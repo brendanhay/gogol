@@ -23,7 +23,7 @@ module Network.Google.AndroidEnterprise
       androidEnterpriseService
 
     -- * OAuth Scopes
-    , androidenterpriseScope
+    , authAndroidenterpriseScope
 
     -- * API Declaration
     , AndroidEnterpriseAPI

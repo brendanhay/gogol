@@ -19,7 +19,7 @@ module Network.Google.AndroidEnterprise.Types
       androidEnterpriseService
 
     -- * OAuth Scopes
-    , androidenterpriseScope
+    , authAndroidenterpriseScope
 
     -- * GroupLicense
     , GroupLicense
@@ -299,5 +299,5 @@ androidEnterpriseService
       "www.googleapis.com"
 
 -- | Manage corporate Android devices
-androidenterpriseScope :: OAuthScope
-androidenterpriseScope = "https://www.googleapis.com/auth/androidenterprise";
+authAndroidenterpriseScope :: OAuthScope
+authAndroidenterpriseScope = "https://www.googleapis.com/auth/androidenterprise";

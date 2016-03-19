@@ -19,8 +19,8 @@ module Network.Google.CloudMonitoring.Types
       cloudMonitoringService
 
     -- * OAuth Scopes
-    , cloudPlatformScope
-    , monitoringScope
+    , authCloudPlatformScope
+    , authMonitoringScope
 
     -- * MetricDescriptorTypeDescriptor
     , MetricDescriptorTypeDescriptor
@@ -190,10 +190,10 @@ cloudMonitoringService
       "www.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View and write monitoring data for all of your Google and third-party
 -- Cloud and API projects
-monitoringScope :: OAuthScope
-monitoringScope = "https://www.googleapis.com/auth/monitoring";
+authMonitoringScope :: OAuthScope
+authMonitoringScope = "https://www.googleapis.com/auth/monitoring";

@@ -19,7 +19,7 @@ module Network.Google.PlayMoviesPartner.Types
       playMoviesPartnerService
 
     -- * OAuth Scopes
-    , playmoviesPartnerReadonlyScope
+    , authPlaymoviesPartnerReadonlyScope
 
     -- * Avail
     , Avail
@@ -176,5 +176,5 @@ playMoviesPartnerService
       "playmoviespartner.googleapis.com"
 
 -- | View the digital assets you publish on Google Play Movies and TV
-playmoviesPartnerReadonlyScope :: OAuthScope
-playmoviesPartnerReadonlyScope = "https://www.googleapis.com/auth/playmovies_partner.readonly";
+authPlaymoviesPartnerReadonlyScope :: OAuthScope
+authPlaymoviesPartnerReadonlyScope = "https://www.googleapis.com/auth/playmovies_partner.readonly";

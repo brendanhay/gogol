@@ -19,12 +19,12 @@ module Network.Google.Analytics.Types
       analyticsService
 
     -- * OAuth Scopes
-    , analyticsManageUsersScope
-    , analyticsProvisionScope
-    , analyticsManageUsersReadonlyScope
-    , analyticsScope
-    , analyticsReadonlyScope
-    , analyticsEditScope
+    , authAnalyticsManageUsersScope
+    , authAnalyticsProvisionScope
+    , authAnalyticsManageUsersReadonlyScope
+    , authAnalyticsScope
+    , authAnalyticsReadonlyScope
+    , authAnalyticsEditScope
 
     -- * UnSampledReports
     , UnSampledReports
@@ -1031,26 +1031,26 @@ analyticsService
       "www.googleapis.com"
 
 -- | Manage Google Analytics Account users by email address
-analyticsManageUsersScope :: OAuthScope
-analyticsManageUsersScope = "https://www.googleapis.com/auth/analytics.manage.users";
+authAnalyticsManageUsersScope :: OAuthScope
+authAnalyticsManageUsersScope = "https://www.googleapis.com/auth/analytics.manage.users";
 
 -- | Create a new Google Analytics account along with its default property
 -- and view
-analyticsProvisionScope :: OAuthScope
-analyticsProvisionScope = "https://www.googleapis.com/auth/analytics.provision";
+authAnalyticsProvisionScope :: OAuthScope
+authAnalyticsProvisionScope = "https://www.googleapis.com/auth/analytics.provision";
 
 -- | View Google Analytics user permissions
-analyticsManageUsersReadonlyScope :: OAuthScope
-analyticsManageUsersReadonlyScope = "https://www.googleapis.com/auth/analytics.manage.users.readonly";
+authAnalyticsManageUsersReadonlyScope :: OAuthScope
+authAnalyticsManageUsersReadonlyScope = "https://www.googleapis.com/auth/analytics.manage.users.readonly";
 
 -- | View and manage your Google Analytics data
-analyticsScope :: OAuthScope
-analyticsScope = "https://www.googleapis.com/auth/analytics";
+authAnalyticsScope :: OAuthScope
+authAnalyticsScope = "https://www.googleapis.com/auth/analytics";
 
 -- | View your Google Analytics data
-analyticsReadonlyScope :: OAuthScope
-analyticsReadonlyScope = "https://www.googleapis.com/auth/analytics.readonly";
+authAnalyticsReadonlyScope :: OAuthScope
+authAnalyticsReadonlyScope = "https://www.googleapis.com/auth/analytics.readonly";
 
 -- | Edit Google Analytics management entities
-analyticsEditScope :: OAuthScope
-analyticsEditScope = "https://www.googleapis.com/auth/analytics.edit";
+authAnalyticsEditScope :: OAuthScope
+authAnalyticsEditScope = "https://www.googleapis.com/auth/analytics.edit";

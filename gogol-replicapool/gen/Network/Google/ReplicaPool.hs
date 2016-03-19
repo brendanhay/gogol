@@ -23,10 +23,10 @@ module Network.Google.ReplicaPool
       replicaPoolService
 
     -- * OAuth Scopes
-    , computeScope
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , computeReadonlyScope
+    , authComputeScope
+    , authCloudPlatformReadOnlyScope
+    , authCloudPlatformScope
+    , authComputeReadonlyScope
 
     -- * API Declaration
     , ReplicaPoolAPI

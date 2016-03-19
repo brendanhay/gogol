@@ -22,7 +22,7 @@ module Network.Google.EmailMigration
       emailMigrationService
 
     -- * OAuth Scopes
-    , emailMigrationScope
+    , authEmailMigrationScope
 
     -- * API Declaration
     , EmailMigrationAPI

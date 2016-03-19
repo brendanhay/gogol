@@ -19,8 +19,8 @@ module Network.Google.Autoscaler.Types
       autoscalerService
 
     -- * OAuth Scopes
-    , computeScope
-    , computeReadonlyScope
+    , authComputeScope
+    , authComputeReadonlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -180,9 +180,9 @@ autoscalerService
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-computeScope :: OAuthScope
-computeScope = "https://www.googleapis.com/auth/compute";
+authComputeScope :: OAuthScope
+authComputeScope = "https://www.googleapis.com/auth/compute";
 
 -- | View your Google Compute Engine resources
-computeReadonlyScope :: OAuthScope
-computeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";
+authComputeReadonlyScope :: OAuthScope
+authComputeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";

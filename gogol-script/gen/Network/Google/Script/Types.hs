@@ -19,16 +19,16 @@ module Network.Google.Script.Types
       scriptService
 
     -- * OAuth Scopes
-    , scriptAllScope
-    , feedsScope
-    , adminDirectoryUserScope
-    , userinfoEmailScope
-    , formsCurrentonlyScope
-    , driveScope
-    , adminDirectoryGroupScope
-    , feedsScope
-    , formsScope
-    , groupsScope
+    , mailGoogleComScope
+    , m8FeedsScope
+    , authAdminDirectoryUserScope
+    , authUserinfoEmailScope
+    , authFormsCurrentonlyScope
+    , authDriveScope
+    , authAdminDirectoryGroupScope
+    , calendarFeedsScope
+    , authFormsScope
+    , authGroupsScope
 
     -- * Status
     , Status
@@ -99,41 +99,41 @@ scriptService
       "script.googleapis.com"
 
 -- | View and manage your mail
-scriptAllScope :: OAuthScope
-scriptAllScope = "https://mail.google.com/";
+mailGoogleComScope :: OAuthScope
+mailGoogleComScope = "https://mail.google.com/";
 
 -- | Manage your contacts
-feedsScope :: OAuthScope
-feedsScope = "https://www.google.com/m8/feeds";
+m8FeedsScope :: OAuthScope
+m8FeedsScope = "https://www.google.com/m8/feeds";
 
 -- | View and manage the provisioning of users on your domain
-adminDirectoryUserScope :: OAuthScope
-adminDirectoryUserScope = "https://www.googleapis.com/auth/admin.directory.user";
+authAdminDirectoryUserScope :: OAuthScope
+authAdminDirectoryUserScope = "https://www.googleapis.com/auth/admin.directory.user";
 
 -- | View your email address
-userinfoEmailScope :: OAuthScope
-userinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: OAuthScope
+authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
 
 -- | View and manage forms that this application has been installed in
-formsCurrentonlyScope :: OAuthScope
-formsCurrentonlyScope = "https://www.googleapis.com/auth/forms.currentonly";
+authFormsCurrentonlyScope :: OAuthScope
+authFormsCurrentonlyScope = "https://www.googleapis.com/auth/forms.currentonly";
 
 -- | View and manage the files in your Google Drive
-driveScope :: OAuthScope
-driveScope = "https://www.googleapis.com/auth/drive";
+authDriveScope :: OAuthScope
+authDriveScope = "https://www.googleapis.com/auth/drive";
 
 -- | View and manage the provisioning of groups on your domain
-adminDirectoryGroupScope :: OAuthScope
-adminDirectoryGroupScope = "https://www.googleapis.com/auth/admin.directory.group";
+authAdminDirectoryGroupScope :: OAuthScope
+authAdminDirectoryGroupScope = "https://www.googleapis.com/auth/admin.directory.group";
 
 -- | Manage your calendars
-feedsScope :: OAuthScope
-feedsScope = "https://www.google.com/calendar/feeds";
+calendarFeedsScope :: OAuthScope
+calendarFeedsScope = "https://www.google.com/calendar/feeds";
 
 -- | View and manage your forms in Google Drive
-formsScope :: OAuthScope
-formsScope = "https://www.googleapis.com/auth/forms";
+authFormsScope :: OAuthScope
+authFormsScope = "https://www.googleapis.com/auth/forms";
 
 -- | View and manage your Google Groups
-groupsScope :: OAuthScope
-groupsScope = "https://www.googleapis.com/auth/groups";
+authGroupsScope :: OAuthScope
+authGroupsScope = "https://www.googleapis.com/auth/groups";

@@ -19,12 +19,12 @@ module Network.Google.Compute.Types
       computeService
 
     -- * OAuth Scopes
-    , computeScope
-    , cloudPlatformScope
-    , devstorageReadOnlyScope
-    , devstorageReadWriteScope
-    , computeReadonlyScope
-    , devstorageFullControlScope
+    , authComputeScope
+    , authCloudPlatformScope
+    , authDevstorageReadOnlyScope
+    , authDevstorageReadWriteScope
+    , authComputeReadonlyScope
+    , authDevstorageFullControlScope
 
     -- * TargetHTTPSProxyList
     , TargetHTTPSProxyList
@@ -1921,25 +1921,25 @@ computeService
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-computeScope :: OAuthScope
-computeScope = "https://www.googleapis.com/auth/compute";
+authComputeScope :: OAuthScope
+authComputeScope = "https://www.googleapis.com/auth/compute";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View your data in Google Cloud Storage
-devstorageReadOnlyScope :: OAuthScope
-devstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
+authDevstorageReadOnlyScope :: OAuthScope
+authDevstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+authDevstorageReadWriteScope :: OAuthScope
+authDevstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
 
 -- | View your Google Compute Engine resources
-computeReadonlyScope :: OAuthScope
-computeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";
+authComputeReadonlyScope :: OAuthScope
+authComputeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";
 
 -- | Manage your data and permissions in Google Cloud Storage
-devstorageFullControlScope :: OAuthScope
-devstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";
+authDevstorageFullControlScope :: OAuthScope
+authDevstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";

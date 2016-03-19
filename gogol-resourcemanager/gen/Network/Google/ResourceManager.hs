@@ -23,8 +23,8 @@ module Network.Google.ResourceManager
       resourceManagerService
 
     -- * OAuth Scopes
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
+    , authCloudPlatformReadOnlyScope
+    , authCloudPlatformScope
 
     -- * API Declaration
     , ResourceManagerAPI

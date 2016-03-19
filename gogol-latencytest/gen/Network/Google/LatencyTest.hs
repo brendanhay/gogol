@@ -22,7 +22,7 @@ module Network.Google.LatencyTest
       latencyTestService
 
     -- * OAuth Scopes
-    , monitoringReadonlyScope
+    , authMonitoringReadonlyScope
 
     -- * API Declaration
     , LatencyTestAPI

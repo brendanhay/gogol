@@ -19,7 +19,7 @@ module Network.Google.DoubleClickSearch.Types
       doubleClickSearchService
 
     -- * OAuth Scopes
-    , doubleclicksearchScope
+    , authDoubleclicksearchScope
 
     -- * ReportRow
     , ReportRow
@@ -209,5 +209,5 @@ doubleClickSearchService
       "www.googleapis.com"
 
 -- | View and manage your advertising data in DoubleClick Search
-doubleclicksearchScope :: OAuthScope
-doubleclicksearchScope = "https://www.googleapis.com/auth/doubleclicksearch";
+authDoubleclicksearchScope :: OAuthScope
+authDoubleclicksearchScope = "https://www.googleapis.com/auth/doubleclicksearch";

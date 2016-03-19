@@ -19,7 +19,7 @@ module Network.Google.Billing.Types
       billingService
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    , authCloudPlatformScope
 
     -- * BillingAccount
     , BillingAccount
@@ -60,5 +60,5 @@ billingService
       "cloudbilling.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

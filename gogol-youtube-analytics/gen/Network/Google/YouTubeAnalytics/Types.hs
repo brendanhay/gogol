@@ -19,11 +19,11 @@ module Network.Google.YouTubeAnalytics.Types
       youTubeAnalyticsService
 
     -- * OAuth Scopes
-    , youtubeScope
-    , ytAnalyticsReadonlyScope
-    , youtubepartnerScope
-    , ytAnalyticsMonetaryReadonlyScope
-    , youtubeReadonlyScope
+    , authYoutubeScope
+    , authYtAnalyticsReadonlyScope
+    , authYoutubepartnerScope
+    , authYtAnalyticsMonetaryReadonlyScope
+    , authYoutubeReadonlyScope
 
     -- * GroupContentDetails
     , GroupContentDetails
@@ -146,22 +146,22 @@ youTubeAnalyticsService
       "www.googleapis.com"
 
 -- | Manage your YouTube account
-youtubeScope :: OAuthScope
-youtubeScope = "https://www.googleapis.com/auth/youtube";
+authYoutubeScope :: OAuthScope
+authYoutubeScope = "https://www.googleapis.com/auth/youtube";
 
 -- | View YouTube Analytics reports for your YouTube content
-ytAnalyticsReadonlyScope :: OAuthScope
-ytAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
+authYtAnalyticsReadonlyScope :: OAuthScope
+authYtAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
 
 -- | View and manage your assets and associated content on YouTube
-youtubepartnerScope :: OAuthScope
-youtubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
+authYoutubepartnerScope :: OAuthScope
+authYoutubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
-ytAnalyticsMonetaryReadonlyScope :: OAuthScope
-ytAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
+authYtAnalyticsMonetaryReadonlyScope :: OAuthScope
+authYtAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
 
 -- | View your YouTube account
-youtubeReadonlyScope :: OAuthScope
-youtubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";
+authYoutubeReadonlyScope :: OAuthScope
+authYoutubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";

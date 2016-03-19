@@ -23,8 +23,8 @@ module Network.Google.Autoscaler
       autoscalerService
 
     -- * OAuth Scopes
-    , computeScope
-    , computeReadonlyScope
+    , authComputeScope
+    , authComputeReadonlyScope
 
     -- * API Declaration
     , AutoscalerAPI

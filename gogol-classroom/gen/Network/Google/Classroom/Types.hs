@@ -19,12 +19,12 @@ module Network.Google.Classroom.Types
       classroomService
 
     -- * OAuth Scopes
-    , classroomRostersReadonlyScope
-    , classroomCoursesScope
-    , classroomProfileEmailsScope
-    , classroomProfilePhotosScope
-    , classroomRostersScope
-    , classroomCoursesReadonlyScope
+    , authClassroomRostersReadonlyScope
+    , authClassroomCoursesScope
+    , authClassroomProfileEmailsScope
+    , authClassroomProfilePhotosScope
+    , authClassroomRostersScope
+    , authClassroomCoursesReadonlyScope
 
     -- * ListCourseAliasesResponse
     , ListCourseAliasesResponse
@@ -136,25 +136,25 @@ classroomService
       "classroom.googleapis.com"
 
 -- | View your Google Classroom class rosters
-classroomRostersReadonlyScope :: OAuthScope
-classroomRostersReadonlyScope = "https://www.googleapis.com/auth/classroom.rosters.readonly";
+authClassroomRostersReadonlyScope :: OAuthScope
+authClassroomRostersReadonlyScope = "https://www.googleapis.com/auth/classroom.rosters.readonly";
 
 -- | Manage your Google Classroom classes
-classroomCoursesScope :: OAuthScope
-classroomCoursesScope = "https://www.googleapis.com/auth/classroom.courses";
+authClassroomCoursesScope :: OAuthScope
+authClassroomCoursesScope = "https://www.googleapis.com/auth/classroom.courses";
 
 -- | View the email addresses of people in your classes
-classroomProfileEmailsScope :: OAuthScope
-classroomProfileEmailsScope = "https://www.googleapis.com/auth/classroom.profile.emails";
+authClassroomProfileEmailsScope :: OAuthScope
+authClassroomProfileEmailsScope = "https://www.googleapis.com/auth/classroom.profile.emails";
 
 -- | View the profile photos of people in your classes
-classroomProfilePhotosScope :: OAuthScope
-classroomProfilePhotosScope = "https://www.googleapis.com/auth/classroom.profile.photos";
+authClassroomProfilePhotosScope :: OAuthScope
+authClassroomProfilePhotosScope = "https://www.googleapis.com/auth/classroom.profile.photos";
 
 -- | Manage your Google Classroom class rosters
-classroomRostersScope :: OAuthScope
-classroomRostersScope = "https://www.googleapis.com/auth/classroom.rosters";
+authClassroomRostersScope :: OAuthScope
+authClassroomRostersScope = "https://www.googleapis.com/auth/classroom.rosters";
 
 -- | View your Google Classroom classes
-classroomCoursesReadonlyScope :: OAuthScope
-classroomCoursesReadonlyScope = "https://www.googleapis.com/auth/classroom.courses.readonly";
+authClassroomCoursesReadonlyScope :: OAuthScope
+authClassroomCoursesReadonlyScope = "https://www.googleapis.com/auth/classroom.courses.readonly";

@@ -19,13 +19,13 @@ module Network.Google.Gmail.Types
       gmailService
 
     -- * OAuth Scopes
-    , gmailAllScope
-    , gmailModifyScope
-    , gmailLabelsScope
-    , gmailSendScope
-    , gmailInsertScope
-    , gmailComposeScope
-    , gmailReadonlyScope
+    , mailGoogleComScope
+    , authGmailModifyScope
+    , authGmailLabelsScope
+    , authGmailSendScope
+    , authGmailInsertScope
+    , authGmailComposeScope
+    , authGmailReadonlyScope
 
     -- * BatchDeleteMessagesRequest
     , BatchDeleteMessagesRequest
@@ -232,29 +232,29 @@ gmailService
       "www.googleapis.com"
 
 -- | View and manage your mail
-gmailAllScope :: OAuthScope
-gmailAllScope = "https://mail.google.com/";
+mailGoogleComScope :: OAuthScope
+mailGoogleComScope = "https://mail.google.com/";
 
 -- | View and modify but not delete your email
-gmailModifyScope :: OAuthScope
-gmailModifyScope = "https://www.googleapis.com/auth/gmail.modify";
+authGmailModifyScope :: OAuthScope
+authGmailModifyScope = "https://www.googleapis.com/auth/gmail.modify";
 
 -- | Manage mailbox labels
-gmailLabelsScope :: OAuthScope
-gmailLabelsScope = "https://www.googleapis.com/auth/gmail.labels";
+authGmailLabelsScope :: OAuthScope
+authGmailLabelsScope = "https://www.googleapis.com/auth/gmail.labels";
 
 -- | Send email on your behalf
-gmailSendScope :: OAuthScope
-gmailSendScope = "https://www.googleapis.com/auth/gmail.send";
+authGmailSendScope :: OAuthScope
+authGmailSendScope = "https://www.googleapis.com/auth/gmail.send";
 
 -- | Insert mail into your mailbox
-gmailInsertScope :: OAuthScope
-gmailInsertScope = "https://www.googleapis.com/auth/gmail.insert";
+authGmailInsertScope :: OAuthScope
+authGmailInsertScope = "https://www.googleapis.com/auth/gmail.insert";
 
 -- | Manage drafts and send emails
-gmailComposeScope :: OAuthScope
-gmailComposeScope = "https://www.googleapis.com/auth/gmail.compose";
+authGmailComposeScope :: OAuthScope
+authGmailComposeScope = "https://www.googleapis.com/auth/gmail.compose";
 
 -- | View your emails messages and settings
-gmailReadonlyScope :: OAuthScope
-gmailReadonlyScope = "https://www.googleapis.com/auth/gmail.readonly";
+authGmailReadonlyScope :: OAuthScope
+authGmailReadonlyScope = "https://www.googleapis.com/auth/gmail.readonly";

@@ -19,8 +19,8 @@ module Network.Google.SQLAdmin.Types
       sQLAdminService
 
     -- * OAuth Scopes
-    , sqlserviceAdminScope
-    , cloudPlatformScope
+    , authSqlserviceAdminScope
+    , authCloudPlatformScope
 
     -- * SSLCert
     , SSLCert
@@ -431,9 +431,9 @@ sQLAdminService
       "www.googleapis.com"
 
 -- | Manage your Google SQL Service instances
-sqlserviceAdminScope :: OAuthScope
-sqlserviceAdminScope = "https://www.googleapis.com/auth/sqlservice.admin";
+authSqlserviceAdminScope :: OAuthScope
+authSqlserviceAdminScope = "https://www.googleapis.com/auth/sqlservice.admin";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

@@ -22,9 +22,9 @@ module Network.Google.Games
       gamesService
 
     -- * OAuth Scopes
-    , plusLoginScope
-    , gamesScope
-    , driveAppdataScope
+    , authPlusLoginScope
+    , authGamesScope
+    , authDriveAppdataScope
 
     -- * API Declaration
     , GamesAPI

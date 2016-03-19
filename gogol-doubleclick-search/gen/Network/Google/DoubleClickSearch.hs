@@ -23,7 +23,7 @@ module Network.Google.DoubleClickSearch
       doubleClickSearchService
 
     -- * OAuth Scopes
-    , doubleclicksearchScope
+    , authDoubleclicksearchScope
 
     -- * API Declaration
     , DoubleClickSearchAPI

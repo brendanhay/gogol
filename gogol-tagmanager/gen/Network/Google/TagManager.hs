@@ -22,13 +22,13 @@ module Network.Google.TagManager
       tagManagerService
 
     -- * OAuth Scopes
-    , tagmanagerReadonlyScope
-    , tagmanagerEditContainersScope
-    , tagmanagerManageAccountsScope
-    , tagmanagerDeleteContainersScope
-    , tagmanagerManageUsersScope
-    , tagmanagerPublishScope
-    , tagmanagerEditContainerversionsScope
+    , authTagmanagerReadonlyScope
+    , authTagmanagerEditContainersScope
+    , authTagmanagerManageAccountsScope
+    , authTagmanagerDeleteContainersScope
+    , authTagmanagerManageUsersScope
+    , authTagmanagerPublishScope
+    , authTagmanagerEditContainerversionsScope
 
     -- * API Declaration
     , TagManagerAPI

@@ -19,7 +19,7 @@ module Network.Google.AppsLicensing.Types
       appsLicensingService
 
     -- * OAuth Scopes
-    , appsLicensingScope
+    , authAppsLicensingScope
 
     -- * LicenseAssignmentInsert
     , LicenseAssignmentInsert
@@ -56,5 +56,5 @@ appsLicensingService
       "www.googleapis.com"
 
 -- | View and manage Google Apps licenses for your domain
-appsLicensingScope :: OAuthScope
-appsLicensingScope = "https://www.googleapis.com/auth/apps.licensing";
+authAppsLicensingScope :: OAuthScope
+authAppsLicensingScope = "https://www.googleapis.com/auth/apps.licensing";

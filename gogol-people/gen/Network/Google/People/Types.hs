@@ -19,15 +19,15 @@ module Network.Google.People.Types
       peopleService
 
     -- * OAuth Scopes
-    , userBirthdayReadScope
-    , userinfoProfileScope
-    , plusLoginScope
-    , userPhonenumbersReadScope
-    , userinfoEmailScope
-    , contactsReadonlyScope
-    , userAddressesReadScope
-    , contactsScope
-    , userEmailsReadScope
+    , authUserBirthdayReadScope
+    , authUserinfoProfileScope
+    , authPlusLoginScope
+    , authUserPhonenumbersReadScope
+    , authUserinfoEmailScope
+    , authContactsReadonlyScope
+    , authUserAddressesReadScope
+    , authContactsScope
+    , authUserEmailsReadScope
 
     -- * Photo
     , Photo
@@ -336,37 +336,37 @@ peopleService
       "people.googleapis.com"
 
 -- | View your complete date of birth
-userBirthdayReadScope :: OAuthScope
-userBirthdayReadScope = "https://www.googleapis.com/auth/user.birthday.read";
+authUserBirthdayReadScope :: OAuthScope
+authUserBirthdayReadScope = "https://www.googleapis.com/auth/user.birthday.read";
 
 -- | View your basic profile info
-userinfoProfileScope :: OAuthScope
-userinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
+authUserinfoProfileScope :: OAuthScope
+authUserinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
 
 -- | Know your basic profile info and list of people in your circles.
-plusLoginScope :: OAuthScope
-plusLoginScope = "https://www.googleapis.com/auth/plus.login";
+authPlusLoginScope :: OAuthScope
+authPlusLoginScope = "https://www.googleapis.com/auth/plus.login";
 
 -- | View your phone numbers
-userPhonenumbersReadScope :: OAuthScope
-userPhonenumbersReadScope = "https://www.googleapis.com/auth/user.phonenumbers.read";
+authUserPhonenumbersReadScope :: OAuthScope
+authUserPhonenumbersReadScope = "https://www.googleapis.com/auth/user.phonenumbers.read";
 
 -- | View your email address
-userinfoEmailScope :: OAuthScope
-userinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: OAuthScope
+authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
 
 -- | View your contacts
-contactsReadonlyScope :: OAuthScope
-contactsReadonlyScope = "https://www.googleapis.com/auth/contacts.readonly";
+authContactsReadonlyScope :: OAuthScope
+authContactsReadonlyScope = "https://www.googleapis.com/auth/contacts.readonly";
 
 -- | View your street addresses
-userAddressesReadScope :: OAuthScope
-userAddressesReadScope = "https://www.googleapis.com/auth/user.addresses.read";
+authUserAddressesReadScope :: OAuthScope
+authUserAddressesReadScope = "https://www.googleapis.com/auth/user.addresses.read";
 
 -- | Manage your contacts
-contactsScope :: OAuthScope
-contactsScope = "https://www.googleapis.com/auth/contacts";
+authContactsScope :: OAuthScope
+authContactsScope = "https://www.googleapis.com/auth/contacts";
 
 -- | View your email addresses
-userEmailsReadScope :: OAuthScope
-userEmailsReadScope = "https://www.googleapis.com/auth/user.emails.read";
+authUserEmailsReadScope :: OAuthScope
+authUserEmailsReadScope = "https://www.googleapis.com/auth/user.emails.read";

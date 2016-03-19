@@ -23,8 +23,8 @@ module Network.Google.AdExchangeSeller
       adExchangeSellerService
 
     -- * OAuth Scopes
-    , adexchangeSellerReadonlyScope
-    , adexchangeSellerScope
+    , authAdexchangeSellerReadonlyScope
+    , authAdexchangeSellerScope
 
     -- * API Declaration
     , AdExchangeSellerAPI

@@ -23,8 +23,8 @@ module Network.Google.MapsEngine
       mapsEngineService
 
     -- * OAuth Scopes
-    , mapsengineScope
-    , mapsengineReadonlyScope
+    , authMapsengineScope
+    , authMapsengineReadonlyScope
 
     -- * API Declaration
     , MapsEngineAPI

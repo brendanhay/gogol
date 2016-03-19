@@ -19,12 +19,12 @@ module Network.Google.YouTube.Types
       youTubeService
 
     -- * OAuth Scopes
-    , youtubeUploadScope
-    , youtubeScope
-    , youtubepartnerScope
-    , youtubeForceSslScope
-    , youtubeReadonlyScope
-    , youtubepartnerChannelAuditScope
+    , authYoutubeUploadScope
+    , authYoutubeScope
+    , authYoutubepartnerScope
+    , authYoutubeForceSslScope
+    , authYoutubeReadonlyScope
+    , authYoutubepartnerChannelAuditScope
 
     -- * LiveChatMessageAuthorDetails
     , LiveChatMessageAuthorDetails
@@ -2037,26 +2037,26 @@ youTubeService
       "www.googleapis.com"
 
 -- | Manage your YouTube videos
-youtubeUploadScope :: OAuthScope
-youtubeUploadScope = "https://www.googleapis.com/auth/youtube.upload";
+authYoutubeUploadScope :: OAuthScope
+authYoutubeUploadScope = "https://www.googleapis.com/auth/youtube.upload";
 
 -- | Manage your YouTube account
-youtubeScope :: OAuthScope
-youtubeScope = "https://www.googleapis.com/auth/youtube";
+authYoutubeScope :: OAuthScope
+authYoutubeScope = "https://www.googleapis.com/auth/youtube";
 
 -- | View and manage your assets and associated content on YouTube
-youtubepartnerScope :: OAuthScope
-youtubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
+authYoutubepartnerScope :: OAuthScope
+authYoutubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
 
 -- | Manage your YouTube account
-youtubeForceSslScope :: OAuthScope
-youtubeForceSslScope = "https://www.googleapis.com/auth/youtube.force-ssl";
+authYoutubeForceSslScope :: OAuthScope
+authYoutubeForceSslScope = "https://www.googleapis.com/auth/youtube.force-ssl";
 
 -- | View your YouTube account
-youtubeReadonlyScope :: OAuthScope
-youtubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";
+authYoutubeReadonlyScope :: OAuthScope
+authYoutubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";
 
 -- | View private information of your YouTube channel relevant during the
 -- audit process with a YouTube partner
-youtubepartnerChannelAuditScope :: OAuthScope
-youtubepartnerChannelAuditScope = "https://www.googleapis.com/auth/youtubepartner-channel-audit";
+authYoutubepartnerChannelAuditScope :: OAuthScope
+authYoutubepartnerChannelAuditScope = "https://www.googleapis.com/auth/youtubepartner-channel-audit";

@@ -19,14 +19,14 @@ module Network.Google.Drive.Types
       driveService
 
     -- * OAuth Scopes
-    , driveMetadataReadonlyScope
-    , drivePhotosReadonlyScope
-    , driveAppdataScope
-    , driveReadonlyScope
-    , driveScope
-    , driveFileScope
-    , driveMetadataScope
-    , driveScriptsScope
+    , authDriveMetadataReadonlyScope
+    , authDrivePhotosReadonlyScope
+    , authDriveAppdataScope
+    , authDriveReadonlyScope
+    , authDriveScope
+    , authDriveFileScope
+    , authDriveMetadataScope
+    , authDriveScriptsScope
 
     -- * FileList
     , FileList
@@ -352,34 +352,34 @@ driveService
       "www.googleapis.com"
 
 -- | View metadata for files in your Google Drive
-driveMetadataReadonlyScope :: OAuthScope
-driveMetadataReadonlyScope = "https://www.googleapis.com/auth/drive.metadata.readonly";
+authDriveMetadataReadonlyScope :: OAuthScope
+authDriveMetadataReadonlyScope = "https://www.googleapis.com/auth/drive.metadata.readonly";
 
 -- | View the photos, videos and albums in your Google Photos
-drivePhotosReadonlyScope :: OAuthScope
-drivePhotosReadonlyScope = "https://www.googleapis.com/auth/drive.photos.readonly";
+authDrivePhotosReadonlyScope :: OAuthScope
+authDrivePhotosReadonlyScope = "https://www.googleapis.com/auth/drive.photos.readonly";
 
 -- | View and manage its own configuration data in your Google Drive
-driveAppdataScope :: OAuthScope
-driveAppdataScope = "https://www.googleapis.com/auth/drive.appdata";
+authDriveAppdataScope :: OAuthScope
+authDriveAppdataScope = "https://www.googleapis.com/auth/drive.appdata";
 
 -- | View the files in your Google Drive
-driveReadonlyScope :: OAuthScope
-driveReadonlyScope = "https://www.googleapis.com/auth/drive.readonly";
+authDriveReadonlyScope :: OAuthScope
+authDriveReadonlyScope = "https://www.googleapis.com/auth/drive.readonly";
 
 -- | View and manage the files in your Google Drive
-driveScope :: OAuthScope
-driveScope = "https://www.googleapis.com/auth/drive";
+authDriveScope :: OAuthScope
+authDriveScope = "https://www.googleapis.com/auth/drive";
 
 -- | View and manage Google Drive files and folders that you have opened or
 -- created with this app
-driveFileScope :: OAuthScope
-driveFileScope = "https://www.googleapis.com/auth/drive.file";
+authDriveFileScope :: OAuthScope
+authDriveFileScope = "https://www.googleapis.com/auth/drive.file";
 
 -- | View and manage metadata of files in your Google Drive
-driveMetadataScope :: OAuthScope
-driveMetadataScope = "https://www.googleapis.com/auth/drive.metadata";
+authDriveMetadataScope :: OAuthScope
+authDriveMetadataScope = "https://www.googleapis.com/auth/drive.metadata";
 
 -- | Modify your Google Apps Script scripts\' behavior
-driveScriptsScope :: OAuthScope
-driveScriptsScope = "https://www.googleapis.com/auth/drive.scripts";
+authDriveScriptsScope :: OAuthScope
+authDriveScriptsScope = "https://www.googleapis.com/auth/drive.scripts";

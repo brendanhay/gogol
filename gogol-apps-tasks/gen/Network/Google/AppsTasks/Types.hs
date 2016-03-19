@@ -19,8 +19,8 @@ module Network.Google.AppsTasks.Types
       appsTasksService
 
     -- * OAuth Scopes
-    , tasksReadonlyScope
-    , tasksScope
+    , authTasksReadonlyScope
+    , authTasksScope
 
     -- * TaskLinksItem
     , TaskLinksItem
@@ -86,9 +86,9 @@ appsTasksService
       "www.googleapis.com"
 
 -- | View your tasks
-tasksReadonlyScope :: OAuthScope
-tasksReadonlyScope = "https://www.googleapis.com/auth/tasks.readonly";
+authTasksReadonlyScope :: OAuthScope
+authTasksReadonlyScope = "https://www.googleapis.com/auth/tasks.readonly";
 
 -- | Manage your tasks
-tasksScope :: OAuthScope
-tasksScope = "https://www.googleapis.com/auth/tasks";
+authTasksScope :: OAuthScope
+authTasksScope = "https://www.googleapis.com/auth/tasks";

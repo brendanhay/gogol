@@ -19,8 +19,8 @@ module Network.Google.DFAReporting.Types
       dFAReportingService
 
     -- * OAuth Scopes
-    , dfareportingScope
-    , dfatraffickingScope
+    , authDfareportingScope
+    , authDfatraffickingScope
 
     -- * PlacementsListSortOrder
     , PlacementsListSortOrder (..)
@@ -2539,10 +2539,10 @@ dFAReportingService
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports
-dfareportingScope :: OAuthScope
-dfareportingScope = "https://www.googleapis.com/auth/dfareporting";
+authDfareportingScope :: OAuthScope
+authDfareportingScope = "https://www.googleapis.com/auth/dfareporting";
 
 -- | View and manage your DoubleClick Campaign Manager\'s (DCM) display ad
 -- campaigns
-dfatraffickingScope :: OAuthScope
-dfatraffickingScope = "https://www.googleapis.com/auth/dfatrafficking";
+authDfatraffickingScope :: OAuthScope
+authDfatraffickingScope = "https://www.googleapis.com/auth/dfatrafficking";

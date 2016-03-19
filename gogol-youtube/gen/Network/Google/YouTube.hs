@@ -22,12 +22,12 @@ module Network.Google.YouTube
       youTubeService
 
     -- * OAuth Scopes
-    , youtubeUploadScope
-    , youtubeScope
-    , youtubepartnerScope
-    , youtubeForceSslScope
-    , youtubeReadonlyScope
-    , youtubepartnerChannelAuditScope
+    , authYoutubeUploadScope
+    , authYoutubeScope
+    , authYoutubepartnerScope
+    , authYoutubeForceSslScope
+    , authYoutubeReadonlyScope
+    , authYoutubepartnerChannelAuditScope
 
     -- * API Declaration
     , YouTubeAPI

@@ -24,33 +24,33 @@ module Network.Google.Directory
       directoryService
 
     -- * OAuth Scopes
-    , adminDirectoryRolemanagementReadonlyScope
-    , adminDirectoryGroupReadonlyScope
-    , adminDirectoryDeviceChromeosReadonlyScope
-    , adminDirectoryDeviceChromeosScope
-    , adminDirectoryUserScope
-    , adminDirectoryGroupMemberReadonlyScope
-    , adminDirectoryUserAliasScope
-    , adminDirectoryResourceCalendarScope
-    , adminDirectoryDeviceMobileActionScope
-    , adminDirectoryResourceCalendarReadonlyScope
-    , adminDirectoryDomainReadonlyScope
-    , adminDirectoryUserschemaScope
-    , adminDirectoryUserschemaReadonlyScope
-    , adminDirectoryDomainScope
-    , adminDirectoryRolemanagementScope
-    , adminDirectoryGroupScope
-    , adminDirectoryOrgunitReadonlyScope
-    , adminDirectoryCustomerScope
-    , adminDirectoryCustomerReadonlyScope
-    , adminDirectoryOrgunitScope
-    , adminDirectoryUserReadonlyScope
-    , adminDirectoryUserAliasReadonlyScope
-    , adminDirectoryUserSecurityScope
-    , adminDirectoryGroupMemberScope
-    , adminDirectoryNotificationsScope
-    , adminDirectoryDeviceMobileScope
-    , adminDirectoryDeviceMobileReadonlyScope
+    , authAdminDirectoryRolemanagementReadonlyScope
+    , authAdminDirectoryGroupReadonlyScope
+    , authAdminDirectoryDeviceChromeosReadonlyScope
+    , authAdminDirectoryDeviceChromeosScope
+    , authAdminDirectoryUserScope
+    , authAdminDirectoryGroupMemberReadonlyScope
+    , authAdminDirectoryUserAliasScope
+    , authAdminDirectoryResourceCalendarScope
+    , authAdminDirectoryDeviceMobileActionScope
+    , authAdminDirectoryResourceCalendarReadonlyScope
+    , authAdminDirectoryDomainReadonlyScope
+    , authAdminDirectoryUserschemaScope
+    , authAdminDirectoryUserschemaReadonlyScope
+    , authAdminDirectoryDomainScope
+    , authAdminDirectoryRolemanagementScope
+    , authAdminDirectoryGroupScope
+    , authAdminDirectoryOrgunitReadonlyScope
+    , authAdminDirectoryCustomerScope
+    , authAdminDirectoryCustomerReadonlyScope
+    , authAdminDirectoryOrgunitScope
+    , authAdminDirectoryUserReadonlyScope
+    , authAdminDirectoryUserAliasReadonlyScope
+    , authAdminDirectoryUserSecurityScope
+    , authAdminDirectoryGroupMemberScope
+    , authAdminDirectoryNotificationsScope
+    , authAdminDirectoryDeviceMobileScope
+    , authAdminDirectoryDeviceMobileReadonlyScope
 
     -- * API Declaration
     , DirectoryAPI

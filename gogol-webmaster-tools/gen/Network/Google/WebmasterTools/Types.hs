@@ -19,8 +19,8 @@ module Network.Google.WebmasterTools.Types
       webmasterToolsService
 
     -- * OAuth Scopes
-    , webmastersScope
-    , webmastersReadonlyScope
+    , authWebmastersScope
+    , authWebmastersReadonlyScope
 
     -- * WmxSitemapContent
     , WmxSitemapContent
@@ -172,9 +172,9 @@ webmasterToolsService
       "www.googleapis.com"
 
 -- | View and manage Search Console data for your verified sites
-webmastersScope :: OAuthScope
-webmastersScope = "https://www.googleapis.com/auth/webmasters";
+authWebmastersScope :: OAuthScope
+authWebmastersScope = "https://www.googleapis.com/auth/webmasters";
 
 -- | View Search Console data for your verified sites
-webmastersReadonlyScope :: OAuthScope
-webmastersReadonlyScope = "https://www.googleapis.com/auth/webmasters.readonly";
+authWebmastersReadonlyScope :: OAuthScope
+authWebmastersReadonlyScope = "https://www.googleapis.com/auth/webmasters.readonly";

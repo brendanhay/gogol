@@ -19,7 +19,7 @@ module Network.Google.AppState.Types
       appStateService
 
     -- * OAuth Scopes
-    , appstateScope
+    , authAppstateScope
 
     -- * WriteResult
     , WriteResult
@@ -61,5 +61,5 @@ appStateService
       "www.googleapis.com"
 
 -- | View and manage your data for this application
-appstateScope :: OAuthScope
-appstateScope = "https://www.googleapis.com/auth/appstate";
+authAppstateScope :: OAuthScope
+authAppstateScope = "https://www.googleapis.com/auth/appstate";

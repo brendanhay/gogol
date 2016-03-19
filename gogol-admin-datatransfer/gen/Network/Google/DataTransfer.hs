@@ -22,8 +22,8 @@ module Network.Google.DataTransfer
       dataTransferService
 
     -- * OAuth Scopes
-    , adminDatatransferReadonlyScope
-    , adminDatatransferScope
+    , authAdminDatatransferReadonlyScope
+    , authAdminDatatransferScope
 
     -- * API Declaration
     , DataTransferAPI

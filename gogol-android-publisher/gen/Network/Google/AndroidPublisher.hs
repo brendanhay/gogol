@@ -22,7 +22,7 @@ module Network.Google.AndroidPublisher
       androidPublisherService
 
     -- * OAuth Scopes
-    , androidpublisherScope
+    , authAndroidpublisherScope
 
     -- * API Declaration
     , AndroidPublisherAPI

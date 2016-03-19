@@ -19,7 +19,7 @@ module Network.Google.CloudTrace.Types
       cloudTraceService
 
     -- * OAuth Scopes
-    , cloudPlatformScope
+    , authCloudPlatformScope
 
     -- * Empty
     , Empty
@@ -71,5 +71,5 @@ cloudTraceService
       "cloudtrace.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

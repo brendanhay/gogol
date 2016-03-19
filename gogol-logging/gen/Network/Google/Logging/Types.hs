@@ -19,11 +19,11 @@ module Network.Google.Logging.Types
       loggingService
 
     -- * OAuth Scopes
-    , loggingAdminScope
-    , loggingReadScope
-    , loggingWriteScope
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
+    , authLoggingAdminScope
+    , authLoggingReadScope
+    , authLoggingWriteScope
+    , authCloudPlatformReadOnlyScope
+    , authCloudPlatformScope
 
     -- * MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
@@ -240,21 +240,21 @@ loggingService
       "logging.googleapis.com"
 
 -- | Administrate log data for your projects
-loggingAdminScope :: OAuthScope
-loggingAdminScope = "https://www.googleapis.com/auth/logging.admin";
+authLoggingAdminScope :: OAuthScope
+authLoggingAdminScope = "https://www.googleapis.com/auth/logging.admin";
 
 -- | View log data for your projects
-loggingReadScope :: OAuthScope
-loggingReadScope = "https://www.googleapis.com/auth/logging.read";
+authLoggingReadScope :: OAuthScope
+authLoggingReadScope = "https://www.googleapis.com/auth/logging.read";
 
 -- | Submit log data for your projects
-loggingWriteScope :: OAuthScope
-loggingWriteScope = "https://www.googleapis.com/auth/logging.write";
+authLoggingWriteScope :: OAuthScope
+authLoggingWriteScope = "https://www.googleapis.com/auth/logging.write";
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: OAuthScope
+authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";

@@ -19,12 +19,12 @@ module Network.Google.Fitness.Types
       fitnessService
 
     -- * OAuth Scopes
-    , fitnessBodyReadScope
-    , fitnessActivityReadScope
-    , fitnessActivityWriteScope
-    , fitnessLocationReadScope
-    , fitnessLocationWriteScope
-    , fitnessBodyWriteScope
+    , authFitnessBodyReadScope
+    , authFitnessActivityReadScope
+    , authFitnessActivityWriteScope
+    , authFitnessLocationReadScope
+    , authFitnessLocationWriteScope
+    , authFitnessBodyWriteScope
 
     -- * AggregateBucketType
     , AggregateBucketType (..)
@@ -204,25 +204,25 @@ fitnessService
       "www.googleapis.com"
 
 -- | View body sensor information in Google Fit
-fitnessBodyReadScope :: OAuthScope
-fitnessBodyReadScope = "https://www.googleapis.com/auth/fitness.body.read";
+authFitnessBodyReadScope :: OAuthScope
+authFitnessBodyReadScope = "https://www.googleapis.com/auth/fitness.body.read";
 
 -- | View your activity information in Google Fit
-fitnessActivityReadScope :: OAuthScope
-fitnessActivityReadScope = "https://www.googleapis.com/auth/fitness.activity.read";
+authFitnessActivityReadScope :: OAuthScope
+authFitnessActivityReadScope = "https://www.googleapis.com/auth/fitness.activity.read";
 
 -- | View and store your activity information in Google Fit
-fitnessActivityWriteScope :: OAuthScope
-fitnessActivityWriteScope = "https://www.googleapis.com/auth/fitness.activity.write";
+authFitnessActivityWriteScope :: OAuthScope
+authFitnessActivityWriteScope = "https://www.googleapis.com/auth/fitness.activity.write";
 
 -- | View your stored location data in Google Fit
-fitnessLocationReadScope :: OAuthScope
-fitnessLocationReadScope = "https://www.googleapis.com/auth/fitness.location.read";
+authFitnessLocationReadScope :: OAuthScope
+authFitnessLocationReadScope = "https://www.googleapis.com/auth/fitness.location.read";
 
 -- | View and store your location data in Google Fit
-fitnessLocationWriteScope :: OAuthScope
-fitnessLocationWriteScope = "https://www.googleapis.com/auth/fitness.location.write";
+authFitnessLocationWriteScope :: OAuthScope
+authFitnessLocationWriteScope = "https://www.googleapis.com/auth/fitness.location.write";
 
 -- | View and store body sensor data in Google Fit
-fitnessBodyWriteScope :: OAuthScope
-fitnessBodyWriteScope = "https://www.googleapis.com/auth/fitness.body.write";
+authFitnessBodyWriteScope :: OAuthScope
+authFitnessBodyWriteScope = "https://www.googleapis.com/auth/fitness.body.write";

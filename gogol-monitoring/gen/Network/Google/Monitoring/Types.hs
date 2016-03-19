@@ -19,10 +19,10 @@ module Network.Google.Monitoring.Types
       monitoringService
 
     -- * OAuth Scopes
-    , monitoringReadScope
-    , cloudPlatformScope
-    , monitoringScope
-    , monitoringWriteScope
+    , authMonitoringReadScope
+    , authCloudPlatformScope
+    , authMonitoringScope
+    , authMonitoringWriteScope
 
     -- * MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
@@ -279,18 +279,18 @@ monitoringService
 
 -- | View monitoring data for all of your Google Cloud and third-party
 -- projects
-monitoringReadScope :: OAuthScope
-monitoringReadScope = "https://www.googleapis.com/auth/monitoring.read";
+authMonitoringReadScope :: OAuthScope
+authMonitoringReadScope = "https://www.googleapis.com/auth/monitoring.read";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View and write monitoring data for all of your Google and third-party
 -- Cloud and API projects
-monitoringScope :: OAuthScope
-monitoringScope = "https://www.googleapis.com/auth/monitoring";
+authMonitoringScope :: OAuthScope
+authMonitoringScope = "https://www.googleapis.com/auth/monitoring";
 
 -- | Publish metric data to your Google Cloud projects
-monitoringWriteScope :: OAuthScope
-monitoringWriteScope = "https://www.googleapis.com/auth/monitoring.write";
+authMonitoringWriteScope :: OAuthScope
+authMonitoringWriteScope = "https://www.googleapis.com/auth/monitoring.write";

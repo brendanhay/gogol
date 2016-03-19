@@ -19,7 +19,7 @@ module Network.Google.AdSenseHost.Types
       adSenseHostService
 
     -- * OAuth Scopes
-    , adsensehostScope
+    , authAdsensehostScope
 
     -- * AdClients
     , AdClients
@@ -201,5 +201,5 @@ adSenseHostService
       "www.googleapis.com"
 
 -- | View and manage your AdSense host data and associated accounts
-adsensehostScope :: OAuthScope
-adsensehostScope = "https://www.googleapis.com/auth/adsensehost";
+authAdsensehostScope :: OAuthScope
+authAdsensehostScope = "https://www.googleapis.com/auth/adsensehost";

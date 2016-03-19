@@ -19,9 +19,9 @@ module Network.Google.Games.Types
       gamesService
 
     -- * OAuth Scopes
-    , plusLoginScope
-    , gamesScope
-    , driveAppdataScope
+    , authPlusLoginScope
+    , authGamesScope
+    , authDriveAppdataScope
 
     -- * PlayersListCollection
     , PlayersListCollection (..)
@@ -938,14 +938,14 @@ gamesService
       "www.googleapis.com"
 
 -- | Know the list of people in your circles, your age range, and language
-plusLoginScope :: OAuthScope
-plusLoginScope = "https://www.googleapis.com/auth/plus.login";
+authPlusLoginScope :: OAuthScope
+authPlusLoginScope = "https://www.googleapis.com/auth/plus.login";
 
 -- | Share your Google+ profile information and view and manage your game
 -- activity
-gamesScope :: OAuthScope
-gamesScope = "https://www.googleapis.com/auth/games";
+authGamesScope :: OAuthScope
+authGamesScope = "https://www.googleapis.com/auth/games";
 
 -- | View and manage its own configuration data in your Google Drive
-driveAppdataScope :: OAuthScope
-driveAppdataScope = "https://www.googleapis.com/auth/drive.appdata";
+authDriveAppdataScope :: OAuthScope
+authDriveAppdataScope = "https://www.googleapis.com/auth/drive.appdata";

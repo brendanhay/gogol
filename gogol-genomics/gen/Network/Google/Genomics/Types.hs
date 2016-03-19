@@ -19,11 +19,11 @@ module Network.Google.Genomics.Types
       genomicsService
 
     -- * OAuth Scopes
-    , genomicsScope
-    , cloudPlatformScope
-    , genomicsReadonlyScope
-    , devstorageReadWriteScope
-    , bigqueryScope
+    , authGenomicsScope
+    , authCloudPlatformScope
+    , authGenomicsReadonlyScope
+    , authDevstorageReadWriteScope
+    , authBigqueryScope
 
     -- * ReadInfo
     , ReadInfo
@@ -568,21 +568,21 @@ genomicsService
       "genomics.googleapis.com"
 
 -- | View and manage Genomics data
-genomicsScope :: OAuthScope
-genomicsScope = "https://www.googleapis.com/auth/genomics";
+authGenomicsScope :: OAuthScope
+authGenomicsScope = "https://www.googleapis.com/auth/genomics";
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: OAuthScope
+authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
 
 -- | View Genomics data
-genomicsReadonlyScope :: OAuthScope
-genomicsReadonlyScope = "https://www.googleapis.com/auth/genomics.readonly";
+authGenomicsReadonlyScope :: OAuthScope
+authGenomicsReadonlyScope = "https://www.googleapis.com/auth/genomics.readonly";
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+authDevstorageReadWriteScope :: OAuthScope
+authDevstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
 
 -- | View and manage your data in Google BigQuery
-bigqueryScope :: OAuthScope
-bigqueryScope = "https://www.googleapis.com/auth/bigquery";
+authBigqueryScope :: OAuthScope
+authBigqueryScope = "https://www.googleapis.com/auth/bigquery";

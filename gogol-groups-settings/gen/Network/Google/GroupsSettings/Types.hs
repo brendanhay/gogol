@@ -19,7 +19,7 @@ module Network.Google.GroupsSettings.Types
       groupsSettingsService
 
     -- * OAuth Scopes
-    , appsGroupsSettingsScope
+    , authAppsGroupsSettingsScope
 
     -- * Groups
     , Groups
@@ -65,5 +65,5 @@ groupsSettingsService
       "www.googleapis.com"
 
 -- | View and manage the settings of a Google Apps Group
-appsGroupsSettingsScope :: OAuthScope
-appsGroupsSettingsScope = "https://www.googleapis.com/auth/apps.groups.settings";
+authAppsGroupsSettingsScope :: OAuthScope
+authAppsGroupsSettingsScope = "https://www.googleapis.com/auth/apps.groups.settings";

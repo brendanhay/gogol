@@ -19,10 +19,10 @@ module Network.Google.OAuth2.Types
       oAuth2Service
 
     -- * OAuth Scopes
-    , userinfoProfileScope
-    , plusLoginScope
-    , userinfoEmailScope
-    , plusMeScope
+    , authUserinfoProfileScope
+    , authPlusLoginScope
+    , authUserinfoEmailScope
+    , authPlusMeScope
 
     -- * TokenInfo
     , TokenInfo
@@ -79,17 +79,17 @@ oAuth2Service
       "www.googleapis.com"
 
 -- | View your basic profile info
-userinfoProfileScope :: OAuthScope
-userinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
+authUserinfoProfileScope :: OAuthScope
+authUserinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
 
 -- | Know the list of people in your circles, your age range, and language
-plusLoginScope :: OAuthScope
-plusLoginScope = "https://www.googleapis.com/auth/plus.login";
+authPlusLoginScope :: OAuthScope
+authPlusLoginScope = "https://www.googleapis.com/auth/plus.login";
 
 -- | View your email address
-userinfoEmailScope :: OAuthScope
-userinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: OAuthScope
+authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
 
 -- | Know who you are on Google
-plusMeScope :: OAuthScope
-plusMeScope = "https://www.googleapis.com/auth/plus.me";
+authPlusMeScope :: OAuthScope
+authPlusMeScope = "https://www.googleapis.com/auth/plus.me";
