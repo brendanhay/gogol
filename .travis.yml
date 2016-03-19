@@ -111,6 +111,8 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-classroom
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.3 LIBRARY=gogol-cloudmonitoring
+      addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-cloudtrace
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-container
@@ -118,6 +120,8 @@ matrix:
     - env: GHCVER=7.10.3 LIBRARY=gogol-customsearch
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-dataflow
+      addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.3 LIBRARY=gogol-dataproc
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-datastore
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
@@ -157,6 +161,8 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-identity-toolkit
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.3 LIBRARY=gogol-kgsearch
+      addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-latencytest
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-logging
@@ -172,6 +178,8 @@ matrix:
     - env: GHCVER=7.10.3 LIBRARY=gogol-pagespeed
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-partners
+      addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.3 LIBRARY=gogol-people
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-play-moviespartner
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
@@ -195,6 +203,8 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-resourceviews
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.3 LIBRARY=gogol-script
+      addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-shopping-content
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-siteverification
@@ -214,6 +224,8 @@ matrix:
     - env: GHCVER=7.10.3 LIBRARY=gogol-urlshortener
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-useraccounts
+      addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.3 LIBRARY=gogol-vision
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.3 LIBRARY=gogol-webmaster-tools
       addons: { apt: { packages: [ghc-7.10.3], sources: [hvr-ghc] } }
