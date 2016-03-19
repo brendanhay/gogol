@@ -196,8 +196,8 @@ overlap :: (Eq a, Hashable a) => Set a -> Set a -> Bool
 overlap xs ys = not . Set.null $ Set.intersection xs ys
 
 acronymPrefixes :: Global -> [CI Text]
-acronymPrefixes (global -> g) = filter (/= full) $
-    map CI.mk (xs ++ map suffix ys ++ zs)
+acronymPrefixes (global -> renameSpecial -> g) =
+    filter (/= full) $ map CI.mk (xs ++ map suffix ys ++ zs)
   where
     -- Take the next char
     suffix x = Text.snoc x c

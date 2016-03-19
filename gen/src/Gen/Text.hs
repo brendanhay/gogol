@@ -88,6 +88,14 @@ renameBranch t
             , (">=", "GreaterEqual")
             ]
 
+renameSpecial :: Text -> Text
+renameSpecial t =
+    case Text.uncons t of
+        Nothing           -> t
+        Just (x, xs)
+            | separator x -> renameSpecial xs
+            | otherwise   -> t
+
 separator :: Char -> Bool
 separator x =
       x == '\\'
