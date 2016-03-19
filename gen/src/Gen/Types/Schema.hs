@@ -31,6 +31,7 @@ import           Data.Aeson           hiding (Array, Bool, Object, String)
 import qualified Data.Aeson           as A
 import           Data.Aeson.TH
 import           Data.Aeson.Types     (Parser)
+import           Data.Foldable        (foldMap)
 import           Data.Function        (on)
 import qualified Data.HashMap.Strict  as Map
 import           Data.Maybe
@@ -437,11 +438,13 @@ serviceName :: Service a -> String
 serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
 scopeName :: Service a -> Text -> String
-scopeName s k =
-    let y = _sCanonicalName s <> "AllScope"
-     in Text.unpack . toCamel $
-        case Text.split (== '/') k of
-            [] -> y
-            xs -> case last xs of
-                "" -> y
-                x  -> x <> "Scope"
+scopeName s k = Text.unpack . toCamel $
+    case parts of
+        [] -> _sCanonicalName s <> "AllScope"
+        xs -> foldMap upperHead xs <> "Scope"
+  where
+    parts = filter (not . url) (Text.split (== '/') k)
+
+    url x = Text.null x
+         || Text.isPrefixOf "http" x
+         || Text.isPrefixOf "www"  x
