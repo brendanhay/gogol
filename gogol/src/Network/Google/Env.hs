@@ -68,7 +68,7 @@ instance HasEnv s (Env s) where
 -- To override a specific service, it's suggested you use
 -- either 'configure' or 'reconfigure' with a modified version of the default
 -- service, such as @Network.Google.Gmail.gmailService@.
-override :: HasEnv s a => (Service -> ServiceConfig) -> a -> a
+override :: HasEnv s a => (ServiceConfig -> ServiceConfig) -> a -> a
 override f = envOverride <>~ Dual (Endo f)
 
 -- | Configure a specific service. All requests belonging to the
@@ -116,7 +116,7 @@ timeout s = local (override (serviceTimeout ?~ s))
 -- The 'Allow'ed 'OAuthScope's are used to authorize any @service_account@ that is
 -- found with the appropriate scopes. See the top-level module of each individual
 -- @gogol-*@ library for a list of available scopes, such as
--- @Network.Google.Compute.computeScope@.
+-- @Network.Google.Compute.authComputeScope@.
 --
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --

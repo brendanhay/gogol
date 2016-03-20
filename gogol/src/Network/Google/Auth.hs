@@ -153,7 +153,7 @@ exchange c l = fmap (Auth c) . action l
   where
     action = case c of
         FromMetadata s    -> metadataToken       s
-        FromAccount  a    -> serviceAccountToken a (getScopes c)
+        FromAccount  a    -> serviceAccountToken a (allowScopes c)
         FromClient   x n  -> exchangeCode        x n
         FromUser     u    -> authorizedUserToken u Nothing
 
@@ -167,7 +167,7 @@ refresh (Auth c t) l = fmap (Auth c) . action l
   where
     action = case c of
         FromMetadata s   -> metadataToken       s
-        FromAccount  a   -> serviceAccountToken a (getScopes c)
+        FromAccount  a   -> serviceAccountToken a (allowScopes c)
         FromClient   x _ -> refreshToken        x t
         FromUser     u   -> authorizedUserToken u (_tokenRefresh t)
 

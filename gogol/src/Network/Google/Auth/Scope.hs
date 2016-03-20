@@ -41,13 +41,11 @@ import           Network.HTTP.Types           (urlEncode)
 -- with a 'Proxy' type, or explicitly specifying the type annotation without
 -- having separate functions.
 --
--- This seems sufficiently general, does it already exist?
---
 -- /See:/ '!'.
 allow :: proxy s -> k s -> k s
 allow _ = id
 
--- | Type-restrict the supplied credentials etc. to no scopes.
+-- | Type-restrict the supplied credentials (etc.) to no scopes.
 forbid :: k '[] -> k '[]
 forbid = id
 
@@ -61,16 +59,17 @@ forbid = id
 -- listed in the scopes the credentials supports.
 --
 -- For error message/presentation purposes, this wraps the result of
--- the membership checks below.
-type family Authorize (s :: [Symbol]) a :: Constraint where
-    Authorize s a = MatchAnyScope s (Scopes a) ~ 'True
+-- the 'HasScope' membership check to show both lists of scopes before
+-- reduction.
+type family HasScope (s :: [Symbol]) a :: Constraint where
+    HasScope s a = (s `HasScope'` Scopes a) ~ 'True
 
--- | Check if any scope exists in both parameters.
-type family MatchAnyScope a b where
-    MatchAnyScope a         '[] = 'True
-    MatchAnyScope (x ': xs) b   = x ∈ b || MatchAnyScope xs b
+-- | Check if any of actual supplied scopes 's' exist in the required set 'a'.
+type family HasScope' s a where
+    HasScope' s         '[] = 'True -- No scopes are required.
+    HasScope' (x ': xs) a   = x ∈ a || HasScope' xs a
 
--- | Set membership.
+-- | Membership.
 type family (∈) a b where
     (∈) x '[]       = 'False
     (∈) x (y ': xs) = x == y || x ∈ xs
@@ -82,19 +81,19 @@ type family (++) xs ys where
     (++) (a ': as) bs = a ': (as ++ bs)
 
 class Allow a where
-    -- | Obtain a list of supported 'OAuthScope's from a proxy type.
-    getScopes :: proxy a -> [OAuthScope]
+    -- | Obtain a list of supported 'OAuthScope' values from a proxy.
+    allowScopes :: proxy a -> [OAuthScope]
 
 instance Allow '[] where
-    getScopes _ = []
+    allowScopes _ = []
 
 instance (KnownSymbol x, Allow xs) => Allow (x ': xs) where
-    getScopes _ = scope (Proxy :: Proxy x) : getScopes (Proxy :: Proxy xs)
+    allowScopes _ = scope (Proxy :: Proxy x) : allowScopes (Proxy :: Proxy xs)
       where
         scope = OAuthScope . Text.pack . symbolVal
 
 instance Allow s => Allow (Credentials s) where
-    getScopes _ = getScopes (Proxy :: Proxy s)
+    allowScopes _ = allowScopes (Proxy :: Proxy s)
 
 concatScopes :: [OAuthScope] -> Text
 concatScopes = Text.intercalate " " . coerce

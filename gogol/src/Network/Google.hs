@@ -48,8 +48,8 @@ module Network.Google
     , forbid
     , (!)
 
-    , type Authorize
-    , type MatchAnyScope
+    , type HasScope
+    , type HasScope'
 
     -- * Sending Requests
     , send
@@ -97,7 +97,6 @@ module Network.Google
     , tlsManagerSettings
 
     -- * Re-exported Types
-    , Proxy       (..)
     , OctetStream
     , PlainText
     , JSON
@@ -208,7 +207,7 @@ instance (Monoid w, MonadGoogle s m) => MonadGoogle s (LRW.RWST r w s' m) where
 -- | Send a request, returning the associated response if successful.
 --
 -- Throws 'Error'.
-send :: (MonadGoogle s m, Authorize s a, GoogleRequest a) => a -> m (Rs a)
+send :: (MonadGoogle s m, HasScope s a, GoogleRequest a) => a -> m (Rs a)
 send x = liftGoogle $ do
     e <- ask
     r <- perform e x
@@ -222,7 +221,7 @@ send x = liftGoogle $ do
 --
 -- Throws 'Error'.
 download :: ( MonadGoogle s m
-            , Authorize   s (MediaDownload a)
+            , HasScope    s (MediaDownload a)
             , GoogleRequest (MediaDownload a)
             )
          => a
@@ -233,7 +232,7 @@ download = send . MediaDownload
 --
 -- Throws 'Error'.
 upload :: ( MonadGoogle s m
-          , Authorize   s (MediaUpload a)
+          , HasScope    s (MediaUpload a)
           , GoogleRequest (MediaUpload a)
           )
        => a

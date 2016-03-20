@@ -31,7 +31,7 @@ redirectURI = "urn:ietf:wg:oauth:2.0:oob"
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#formingtheurl Forming the URL>.
 formURL :: Allow s => OAuthClient -> proxy s -> Text
-formURL c = formURLWith c . getScopes
+formURL c = formURLWith c . allowScopes
 
 -- | Form a URL using 'OAuthScope' values.
 --
