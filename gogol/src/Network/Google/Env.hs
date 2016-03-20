@@ -29,7 +29,7 @@ import           Network.HTTP.Conduit
 
 -- | The environment containing the parameters required to make Google requests.
 data Env (s :: [Symbol]) = Env
-    { _envOverride :: !(Dual (Endo Service))
+    { _envOverride :: !(Dual (Endo ServiceConfig))
     , _envLogger   :: !Logger
     , _envManager  :: !Manager
     , _envStore    :: !(Store s)
@@ -68,7 +68,7 @@ instance HasEnv s (Env s) where
 -- To override a specific service, it's suggested you use
 -- either 'configure' or 'reconfigure' with a modified version of the default
 -- service, such as @Network.Google.Gmail.gmailService@.
-override :: HasEnv s a => (Service -> Service) -> a -> a
+override :: HasEnv s a => (Service -> ServiceConfig) -> a -> a
 override f = envOverride <>~ Dual (Endo f)
 
 -- | Configure a specific service. All requests belonging to the
@@ -78,7 +78,7 @@ override f = envOverride <>~ Dual (Endo f)
 -- as @Network.Google.Gmail.gmailService@.
 --
 -- /See:/ 'reconfigure'.
-configure :: HasEnv s a => Service -> a -> a
+configure :: HasEnv s a => ServiceConfig -> a -> a
 configure s = override f
   where
     f x | on (==) _svcId s x = s
@@ -91,7 +91,7 @@ configure s = override f
 -- as @Network.Google.Gmail.gmailService@.
 --
 -- /See:/ 'configure'.
-reconfigure :: (MonadReader r m, HasEnv s r) => Service -> m a -> m a
+reconfigure :: (MonadReader r m, HasEnv s r) => ServiceConfig -> m a -> m a
 reconfigure = local . configure
 
 -- | Scope an action such that any HTTP response will use this timeout value.
