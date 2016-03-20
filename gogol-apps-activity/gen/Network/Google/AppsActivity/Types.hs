@@ -127,7 +127,7 @@ import           Network.Google.AppsActivity.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Apps Activity API. This contains the host and root path used as a starting point for constructing service requests.
-appsActivityService :: Service
+appsActivityService :: ServiceConfig
 appsActivityService
   = defaultService (ServiceId "appsactivity:v1")
       "www.googleapis.com"

@@ -793,7 +793,7 @@ import           Network.Google.Dataflow.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1b3' of the Google Dataflow API. This contains the host and root path used as a starting point for constructing service requests.
-dataflowService :: Service
+dataflowService :: ServiceConfig
 dataflowService
   = defaultService (ServiceId "dataflow:v1b3")
       "dataflow.googleapis.com"

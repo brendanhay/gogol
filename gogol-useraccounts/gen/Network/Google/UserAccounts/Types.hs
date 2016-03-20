@@ -199,7 +199,7 @@ import           Network.Google.UserAccounts.Types.Product
 import           Network.Google.UserAccounts.Types.Sum
 
 -- | Default request referring to version 'beta' of the Cloud User Accounts API. This contains the host and root path used as a starting point for constructing service requests.
-userAccountsService :: Service
+userAccountsService :: ServiceConfig
 userAccountsService
   = defaultService (ServiceId "clouduseraccounts:beta")
       "www.googleapis.com"

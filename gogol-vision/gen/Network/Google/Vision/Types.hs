@@ -246,7 +246,7 @@ import           Network.Google.Vision.Types.Product
 import           Network.Google.Vision.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Vision API. This contains the host and root path used as a starting point for constructing service requests.
-visionService :: Service
+visionService :: ServiceConfig
 visionService
   = defaultService (ServiceId "vision:v1")
       "vision.googleapis.com"

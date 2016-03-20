@@ -523,7 +523,7 @@ import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the BigQuery API. This contains the host and root path used as a starting point for constructing service requests.
-bigQueryService :: Service
+bigQueryService :: ServiceConfig
 bigQueryService
   = defaultService (ServiceId "bigquery:v2")
       "www.googleapis.com"

@@ -167,7 +167,7 @@ import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
 
 -- | Default request referring to version 'v3' of the Search Console API. This contains the host and root path used as a starting point for constructing service requests.
-webmasterToolsService :: Service
+webmasterToolsService :: ServiceConfig
 webmasterToolsService
   = defaultService (ServiceId "webmasters:v3")
       "www.googleapis.com"

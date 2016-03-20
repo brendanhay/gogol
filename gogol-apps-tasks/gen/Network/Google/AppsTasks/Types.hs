@@ -81,7 +81,7 @@ import           Network.Google.AppsTasks.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
-appsTasksService :: Service
+appsTasksService :: ServiceConfig
 appsTasksService
   = defaultService (ServiceId "tasks:v1")
       "www.googleapis.com"

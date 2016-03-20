@@ -176,7 +176,7 @@ import           Network.Google.ResourceViews.Types.Product
 import           Network.Google.ResourceViews.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Groups API. This contains the host and root path used as a starting point for constructing service requests.
-resourceViewsService :: Service
+resourceViewsService :: ServiceConfig
 resourceViewsService
   = defaultService (ServiceId "resourceviews:v1beta2")
       "www.googleapis.com"

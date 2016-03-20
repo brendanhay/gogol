@@ -156,7 +156,7 @@ import           Network.Google.KnowledgeGraphSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Identity and Access Management API. This contains the host and root path used as a starting point for constructing service requests.
-knowledgeGraphSearchService :: Service
+knowledgeGraphSearchService :: ServiceConfig
 knowledgeGraphSearchService
   = defaultService (ServiceId "iam:v1")
       "iam.googleapis.com"

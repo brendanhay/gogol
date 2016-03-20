@@ -213,7 +213,7 @@ import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.6' of the Prediction API. This contains the host and root path used as a starting point for constructing service requests.
-predictionService :: Service
+predictionService :: ServiceConfig
 predictionService
   = defaultService (ServiceId "prediction:v1.6")
       "www.googleapis.com"

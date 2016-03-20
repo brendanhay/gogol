@@ -34,7 +34,7 @@ import           Network.Google.GroupsMigration.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Groups Migration API. This contains the host and root path used as a starting point for constructing service requests.
-groupsMigrationService :: Service
+groupsMigrationService :: ServiceConfig
 groupsMigrationService
   = defaultService (ServiceId "groupsmigration:v1")
       "www.googleapis.com"

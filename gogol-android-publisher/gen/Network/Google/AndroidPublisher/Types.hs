@@ -386,7 +386,7 @@ import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Play Developer API. This contains the host and root path used as a starting point for constructing service requests.
-androidPublisherService :: Service
+androidPublisherService :: ServiceConfig
 androidPublisherService
   = defaultService (ServiceId "androidpublisher:v2")
       "www.googleapis.com"

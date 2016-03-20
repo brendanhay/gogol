@@ -184,7 +184,7 @@ import           Network.Google.CloudMonitoring.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2beta2' of the Cloud Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
-cloudMonitoringService :: Service
+cloudMonitoringService :: ServiceConfig
 cloudMonitoringService
   = defaultService
       (ServiceId "cloudmonitoring:v2beta2")

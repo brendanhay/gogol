@@ -171,7 +171,7 @@ import           Network.Google.PlayMoviesPartner.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Movies Partner API. This contains the host and root path used as a starting point for constructing service requests.
-playMoviesPartnerService :: Service
+playMoviesPartnerService :: ServiceConfig
 playMoviesPartnerService
   = defaultService (ServiceId "playmoviespartner:v1")
       "playmoviespartner.googleapis.com"

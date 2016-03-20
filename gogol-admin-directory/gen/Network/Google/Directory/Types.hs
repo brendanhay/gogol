@@ -754,7 +754,7 @@ import           Network.Google.Directory.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'directory_v1' of the Admin Directory API. This contains the host and root path used as a starting point for constructing service requests.
-directoryService :: Service
+directoryService :: ServiceConfig
 directoryService
   = defaultService (ServiceId "admin:directory_v1")
       "www.googleapis.com"

@@ -233,7 +233,7 @@ import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
-fusionTablesService :: Service
+fusionTablesService :: ServiceConfig
 fusionTablesService
   = defaultService (ServiceId "fusiontables:v2")
       "www.googleapis.com"

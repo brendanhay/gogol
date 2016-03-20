@@ -1284,7 +1284,7 @@ import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
 
 -- | Default request referring to version 'v2' of the Content API for Shopping. This contains the host and root path used as a starting point for constructing service requests.
-shoppingContentService :: Service
+shoppingContentService :: ServiceConfig
 shoppingContentService
   = defaultService (ServiceId "content:v2")
       "www.googleapis.com"

@@ -577,7 +577,7 @@ import           Network.Google.PlusDomains.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google+ Domains API. This contains the host and root path used as a starting point for constructing service requests.
-plusDomainsService :: Service
+plusDomainsService :: ServiceConfig
 plusDomainsService
   = defaultService (ServiceId "plusDomains:v1")
       "www.googleapis.com"

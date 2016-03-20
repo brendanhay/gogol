@@ -268,7 +268,7 @@ import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Cloud Deployment Manager API. This contains the host and root path used as a starting point for constructing service requests.
-deploymentManagerService :: Service
+deploymentManagerService :: ServiceConfig
 deploymentManagerService
   = defaultService (ServiceId "deploymentmanager:v2")
       "www.googleapis.com"

@@ -347,7 +347,7 @@ import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Drive API. This contains the host and root path used as a starting point for constructing service requests.
-driveService :: Service
+driveService :: ServiceConfig
 driveService
   = defaultService (ServiceId "drive:v3")
       "www.googleapis.com"

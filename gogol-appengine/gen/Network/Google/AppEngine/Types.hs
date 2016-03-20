@@ -345,7 +345,7 @@ import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta5' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
-appEngineService :: Service
+appEngineService :: ServiceConfig
 appEngineService
   = defaultService (ServiceId "appengine:v1beta5")
       "appengine.googleapis.com"

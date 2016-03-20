@@ -94,7 +94,7 @@ import           Network.Google.Script.Types.Product
 import           Network.Google.Script.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Apps Script Execution API. This contains the host and root path used as a starting point for constructing service requests.
-scriptService :: Service
+scriptService :: ServiceConfig
 scriptService
   = defaultService (ServiceId "script:v1")
       "script.googleapis.com"

@@ -591,7 +591,7 @@ import           Network.Google.AdExchangeBuyer.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.4' of the Ad Exchange Buyer API. This contains the host and root path used as a starting point for constructing service requests.
-adExchangeBuyerService :: Service
+adExchangeBuyerService :: ServiceConfig
 adExchangeBuyerService
   = defaultService (ServiceId "adexchangebuyer:v1.4")
       "www.googleapis.com"

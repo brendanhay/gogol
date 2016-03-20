@@ -175,7 +175,7 @@ import           Network.Google.Autoscaler.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Autoscaler API. This contains the host and root path used as a starting point for constructing service requests.
-autoscalerService :: Service
+autoscalerService :: ServiceConfig
 autoscalerService
   = defaultService (ServiceId "autoscaler:v1beta2")
       "www.googleapis.com"

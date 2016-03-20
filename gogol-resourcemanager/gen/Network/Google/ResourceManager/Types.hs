@@ -97,7 +97,7 @@ import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
-resourceManagerService :: Service
+resourceManagerService :: ServiceConfig
 resourceManagerService
   = defaultService
       (ServiceId "cloudresourcemanager:v1")

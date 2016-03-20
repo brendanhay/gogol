@@ -273,7 +273,7 @@ import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
-monitoringService :: Service
+monitoringService :: ServiceConfig
 monitoringService
   = defaultService (ServiceId "monitoring:v3")
       "monitoring.googleapis.com"

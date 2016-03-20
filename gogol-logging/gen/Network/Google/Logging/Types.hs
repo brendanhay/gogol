@@ -235,7 +235,7 @@ import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2beta1' of the Google Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
-loggingService :: Service
+loggingService :: ServiceConfig
 loggingService
   = defaultService (ServiceId "logging:v2beta1")
       "logging.googleapis.com"

@@ -235,7 +235,7 @@ import           Network.Google.Debugger.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
-debuggerService :: Service
+debuggerService :: ServiceConfig
 debuggerService
   = defaultService (ServiceId "clouddebugger:v2")
       "clouddebugger.googleapis.com"

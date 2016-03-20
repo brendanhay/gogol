@@ -204,7 +204,7 @@ import           Network.Google.DoubleClickSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the DoubleClick Search API. This contains the host and root path used as a starting point for constructing service requests.
-doubleClickSearchService :: Service
+doubleClickSearchService :: ServiceConfig
 doubleClickSearchService
   = defaultService (ServiceId "doubleclicksearch:v2")
       "www.googleapis.com"

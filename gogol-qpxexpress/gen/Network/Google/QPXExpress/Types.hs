@@ -256,7 +256,7 @@ import           Network.Google.QPXExpress.Types.Product
 import           Network.Google.QPXExpress.Types.Sum
 
 -- | Default request referring to version 'v1' of the QPX Express API. This contains the host and root path used as a starting point for constructing service requests.
-qPXExpressService :: Service
+qPXExpressService :: ServiceConfig
 qPXExpressService
   = defaultService (ServiceId "qpxExpress:v1")
       "www.googleapis.com"

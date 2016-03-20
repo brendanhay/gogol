@@ -426,7 +426,7 @@ import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
 
 -- | Default request referring to version 'v1beta4' of the Cloud SQL Administration API. This contains the host and root path used as a starting point for constructing service requests.
-sQLAdminService :: Service
+sQLAdminService :: ServiceConfig
 sQLAdminService
   = defaultService (ServiceId "sqladmin:v1beta4")
       "www.googleapis.com"

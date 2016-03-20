@@ -1026,7 +1026,7 @@ import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-analyticsService :: Service
+analyticsService :: ServiceConfig
 analyticsService
   = defaultService (ServiceId "analytics:v3")
       "www.googleapis.com"

@@ -74,7 +74,7 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google OAuth2 API. This contains the host and root path used as a starting point for constructing service requests.
-oAuth2Service :: Service
+oAuth2Service :: ServiceConfig
 oAuth2Service
   = defaultService (ServiceId "oauth2:v2")
       "www.googleapis.com"

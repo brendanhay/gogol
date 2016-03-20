@@ -213,7 +213,7 @@ import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Mirror API. This contains the host and root path used as a starting point for constructing service requests.
-mirrorService :: Service
+mirrorService :: ServiceConfig
 mirrorService
   = defaultService (ServiceId "mirror:v1")
       "www.googleapis.com"

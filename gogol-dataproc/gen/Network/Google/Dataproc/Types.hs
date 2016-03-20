@@ -399,7 +399,7 @@ import           Network.Google.Dataproc.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud Dataproc API. This contains the host and root path used as a starting point for constructing service requests.
-dataprocService :: Service
+dataprocService :: ServiceConfig
 dataprocService
   = defaultService (ServiceId "dataproc:v1")
       "dataproc.googleapis.com"

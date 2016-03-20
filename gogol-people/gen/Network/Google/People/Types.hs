@@ -331,7 +331,7 @@ import           Network.Google.People.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google People API. This contains the host and root path used as a starting point for constructing service requests.
-peopleService :: Service
+peopleService :: ServiceConfig
 peopleService
   = defaultService (ServiceId "people:v1")
       "people.googleapis.com"

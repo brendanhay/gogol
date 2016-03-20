@@ -56,7 +56,7 @@ import           Network.Google.AppState.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google App State API. This contains the host and root path used as a starting point for constructing service requests.
-appStateService :: Service
+appStateService :: ServiceConfig
 appStateService
   = defaultService (ServiceId "appstate:v1")
       "www.googleapis.com"
