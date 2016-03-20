@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -226,35 +227,35 @@ import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
-gmailService :: ServiceConfig
+gmailService :: Service
 gmailService
   = defaultService (ServiceId "gmail:v1")
       "www.googleapis.com"
 
 -- | View and manage your mail
-mailGoogleComScope :: OAuthScope
-mailGoogleComScope = "https://mail.google.com/";
+mailGoogleComScope :: Proxy '["https://mail.google.com/"]
+mailGoogleComScope = Proxy;
 
 -- | View and modify but not delete your email
-authGmailModifyScope :: OAuthScope
-authGmailModifyScope = "https://www.googleapis.com/auth/gmail.modify";
+authGmailModifyScope :: Proxy '["https://www.googleapis.com/auth/gmail.modify"]
+authGmailModifyScope = Proxy;
 
 -- | Manage mailbox labels
-authGmailLabelsScope :: OAuthScope
-authGmailLabelsScope = "https://www.googleapis.com/auth/gmail.labels";
+authGmailLabelsScope :: Proxy '["https://www.googleapis.com/auth/gmail.labels"]
+authGmailLabelsScope = Proxy;
 
 -- | Send email on your behalf
-authGmailSendScope :: OAuthScope
-authGmailSendScope = "https://www.googleapis.com/auth/gmail.send";
+authGmailSendScope :: Proxy '["https://www.googleapis.com/auth/gmail.send"]
+authGmailSendScope = Proxy;
 
 -- | Insert mail into your mailbox
-authGmailInsertScope :: OAuthScope
-authGmailInsertScope = "https://www.googleapis.com/auth/gmail.insert";
+authGmailInsertScope :: Proxy '["https://www.googleapis.com/auth/gmail.insert"]
+authGmailInsertScope = Proxy;
 
 -- | Manage drafts and send emails
-authGmailComposeScope :: OAuthScope
-authGmailComposeScope = "https://www.googleapis.com/auth/gmail.compose";
+authGmailComposeScope :: Proxy '["https://www.googleapis.com/auth/gmail.compose"]
+authGmailComposeScope = Proxy;
 
 -- | View your emails messages and settings
-authGmailReadonlyScope :: OAuthScope
-authGmailReadonlyScope = "https://www.googleapis.com/auth/gmail.readonly";
+authGmailReadonlyScope :: Proxy '["https://www.googleapis.com/auth/gmail.readonly"]
+authGmailReadonlyScope = Proxy;

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -212,15 +213,15 @@ import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Mirror API. This contains the host and root path used as a starting point for constructing service requests.
-mirrorService :: ServiceConfig
+mirrorService :: Service
 mirrorService
   = defaultService (ServiceId "mirror:v1")
       "www.googleapis.com"
 
 -- | View and manage your Glass timeline
-authGlassTimelineScope :: OAuthScope
-authGlassTimelineScope = "https://www.googleapis.com/auth/glass.timeline";
+authGlassTimelineScope :: Proxy '["https://www.googleapis.com/auth/glass.timeline"]
+authGlassTimelineScope = Proxy;
 
 -- | View your location
-authGlassLocationScope :: OAuthScope
-authGlassLocationScope = "https://www.googleapis.com/auth/glass.location";
+authGlassLocationScope :: Proxy '["https://www.googleapis.com/auth/glass.location"]
+authGlassLocationScope = Proxy;

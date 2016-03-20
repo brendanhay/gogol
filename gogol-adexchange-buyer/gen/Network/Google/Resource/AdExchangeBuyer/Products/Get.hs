@@ -75,6 +75,8 @@ pgProductId
 
 instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
+        type Scopes ProductsGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ProductsGet{..}
           = go _pgProductId (Just AltJSON)
               adExchangeBuyerService

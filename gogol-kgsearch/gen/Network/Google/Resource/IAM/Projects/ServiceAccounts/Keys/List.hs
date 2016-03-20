@@ -177,6 +177,8 @@ instance GoogleRequest
          ProjectsServiceAccountsKeysList where
         type Rs ProjectsServiceAccountsKeysList =
              ListServiceAccountKeysResponse
+        type Scopes ProjectsServiceAccountsKeysList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsKeysList{..}
           = go _psaklName (_psaklKeyTypes ^. _Default)
               _psaklXgafv

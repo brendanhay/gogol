@@ -101,6 +101,8 @@ smgSeriesId
 
 instance GoogleRequest SeriesMembershipGet where
         type Rs SeriesMembershipGet = Seriesmembership
+        type Scopes SeriesMembershipGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient SeriesMembershipGet{..}
           = go (Just _smgSeriesId) _smgPageToken _smgPageSize
               (Just AltJSON)

@@ -101,6 +101,8 @@ suPayload
 
 instance GoogleRequest StorelayoutpagesUpdate where
         type Rs StorelayoutpagesUpdate = StorePage
+        type Scopes StorelayoutpagesUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutpagesUpdate{..}
           = go _suEnterpriseId _suPageId (Just AltJSON)
               _suPayload

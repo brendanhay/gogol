@@ -139,6 +139,9 @@ mdlPageToken
 instance GoogleRequest MetricDescriptorsList where
         type Rs MetricDescriptorsList =
              ListMetricDescriptorsResponse
+        type Scopes MetricDescriptorsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient MetricDescriptorsList{..}
           = go _mdlProject (Just _mdlCount) _mdlQuery
               _mdlPageToken

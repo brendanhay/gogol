@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -172,15 +173,15 @@ import           Network.Google.MapsCoordinate.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Maps Coordinate API. This contains the host and root path used as a starting point for constructing service requests.
-mapsCoordinateService :: ServiceConfig
+mapsCoordinateService :: Service
 mapsCoordinateService
   = defaultService (ServiceId "coordinate:v1")
       "www.googleapis.com"
 
 -- | View and manage your Google Maps Coordinate jobs
-authCoordinateScope :: OAuthScope
-authCoordinateScope = "https://www.googleapis.com/auth/coordinate";
+authCoordinateScope :: Proxy '["https://www.googleapis.com/auth/coordinate"]
+authCoordinateScope = Proxy;
 
 -- | View your Google Coordinate jobs
-authCoordinateReadonlyScope :: OAuthScope
-authCoordinateReadonlyScope = "https://www.googleapis.com/auth/coordinate.readonly";
+authCoordinateReadonlyScope :: Proxy '["https://www.googleapis.com/auth/coordinate.readonly"]
+authCoordinateReadonlyScope = Proxy;

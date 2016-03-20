@@ -141,6 +141,10 @@ fcIgnoreDefaultVisibility
 
 instance GoogleRequest FilesCreate where
         type Rs FilesCreate = File
+        type Scopes FilesCreate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient FilesCreate{..}
           = go (Just _fcUseContentAsIndexableText)
               _fcOCRLanguage
@@ -156,6 +160,8 @@ instance GoogleRequest FilesCreate where
 instance GoogleRequest (MediaUpload FilesCreate)
          where
         type Rs (MediaUpload FilesCreate) = File
+        type Scopes (MediaUpload FilesCreate) =
+             Scopes FilesCreate
         requestClient (MediaUpload FilesCreate{..} body)
           = go (Just _fcUseContentAsIndexableText)
               _fcOCRLanguage

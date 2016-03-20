@@ -87,6 +87,9 @@ ccFileId = lens _ccFileId (\ s a -> s{_ccFileId = a})
 
 instance GoogleRequest CommentsCreate where
         type Rs CommentsCreate = Comment
+        type Scopes CommentsCreate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient CommentsCreate{..}
           = go _ccFileId (Just AltJSON) _ccPayload driveService
           where go

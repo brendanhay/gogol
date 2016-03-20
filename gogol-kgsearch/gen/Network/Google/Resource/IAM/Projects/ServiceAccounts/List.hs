@@ -184,6 +184,8 @@ instance GoogleRequest ProjectsServiceAccountsList
          where
         type Rs ProjectsServiceAccountsList =
              ListServiceAccountsResponse
+        type Scopes ProjectsServiceAccountsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsList{..}
           = go _psalName _psalXgafv _psalUploadProtocol
               (Just _psalPp)

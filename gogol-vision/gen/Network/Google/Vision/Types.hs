@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -245,11 +246,11 @@ import           Network.Google.Vision.Types.Product
 import           Network.Google.Vision.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Vision API. This contains the host and root path used as a starting point for constructing service requests.
-visionService :: ServiceConfig
+visionService :: Service
 visionService
   = defaultService (ServiceId "vision:v1")
       "vision.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

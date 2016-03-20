@@ -226,6 +226,10 @@ instance GoogleRequest ProjectsGroupsMembersList
          where
         type Rs ProjectsGroupsMembersList =
              ListGroupMembersResponse
+        type Scopes ProjectsGroupsMembersList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring",
+               "https://www.googleapis.com/auth/monitoring.read"]
         requestClient ProjectsGroupsMembersList{..}
           = go _pgmlName _pgmlIntervalStartTime _pgmlXgafv
               _pgmlUploadProtocol

@@ -168,6 +168,9 @@ pscCallback
 
 instance GoogleRequest ProjectsSinksCreate where
         type Rs ProjectsSinksCreate = LogSink
+        type Scopes ProjectsSinksCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsSinksCreate{..}
           = go _pscProjectName _pscXgafv _pscUploadProtocol
               (Just _pscPp)

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -522,35 +523,35 @@ import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the BigQuery API. This contains the host and root path used as a starting point for constructing service requests.
-bigQueryService :: ServiceConfig
+bigQueryService :: Service
 bigQueryService
   = defaultService (ServiceId "bigquery:v2")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
-authDevstorageReadOnlyScope :: OAuthScope
-authDevstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
+authDevstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+authDevstorageReadOnlyScope = Proxy;
 
 -- | Insert data into Google BigQuery
-authBigqueryInsertdataScope :: OAuthScope
-authBigqueryInsertdataScope = "https://www.googleapis.com/auth/bigquery.insertdata";
+authBigqueryInsertdataScope :: Proxy '["https://www.googleapis.com/auth/bigquery.insertdata"]
+authBigqueryInsertdataScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-authDevstorageReadWriteScope :: OAuthScope
-authDevstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+authDevstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+authDevstorageReadWriteScope = Proxy;
 
 -- | View and manage your data in Google BigQuery
-authBigqueryScope :: OAuthScope
-authBigqueryScope = "https://www.googleapis.com/auth/bigquery";
+authBigqueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
+authBigqueryScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-authDevstorageFullControlScope :: OAuthScope
-authDevstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";
+authDevstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+authDevstorageFullControlScope = Proxy;

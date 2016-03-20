@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -93,47 +94,47 @@ import           Network.Google.Script.Types.Product
 import           Network.Google.Script.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Apps Script Execution API. This contains the host and root path used as a starting point for constructing service requests.
-scriptService :: ServiceConfig
+scriptService :: Service
 scriptService
   = defaultService (ServiceId "script:v1")
       "script.googleapis.com"
 
 -- | View and manage your mail
-mailGoogleComScope :: OAuthScope
-mailGoogleComScope = "https://mail.google.com/";
+mailGoogleComScope :: Proxy '["https://mail.google.com/"]
+mailGoogleComScope = Proxy;
 
 -- | Manage your contacts
-m8FeedsScope :: OAuthScope
-m8FeedsScope = "https://www.google.com/m8/feeds";
+m8FeedsScope :: Proxy '["https://www.google.com/m8/feeds"]
+m8FeedsScope = Proxy;
 
 -- | View and manage the provisioning of users on your domain
-authAdminDirectoryUserScope :: OAuthScope
-authAdminDirectoryUserScope = "https://www.googleapis.com/auth/admin.directory.user";
+authAdminDirectoryUserScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user"]
+authAdminDirectoryUserScope = Proxy;
 
 -- | View your email address
-authUserinfoEmailScope :: OAuthScope
-authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+authUserinfoEmailScope = Proxy;
 
 -- | View and manage forms that this application has been installed in
-authFormsCurrentonlyScope :: OAuthScope
-authFormsCurrentonlyScope = "https://www.googleapis.com/auth/forms.currentonly";
+authFormsCurrentonlyScope :: Proxy '["https://www.googleapis.com/auth/forms.currentonly"]
+authFormsCurrentonlyScope = Proxy;
 
 -- | View and manage the files in your Google Drive
-authDriveScope :: OAuthScope
-authDriveScope = "https://www.googleapis.com/auth/drive";
+authDriveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
+authDriveScope = Proxy;
 
 -- | View and manage the provisioning of groups on your domain
-authAdminDirectoryGroupScope :: OAuthScope
-authAdminDirectoryGroupScope = "https://www.googleapis.com/auth/admin.directory.group";
+authAdminDirectoryGroupScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group"]
+authAdminDirectoryGroupScope = Proxy;
 
 -- | Manage your calendars
-calendarFeedsScope :: OAuthScope
-calendarFeedsScope = "https://www.google.com/calendar/feeds";
+calendarFeedsScope :: Proxy '["https://www.google.com/calendar/feeds"]
+calendarFeedsScope = Proxy;
 
 -- | View and manage your forms in Google Drive
-authFormsScope :: OAuthScope
-authFormsScope = "https://www.googleapis.com/auth/forms";
+authFormsScope :: Proxy '["https://www.googleapis.com/auth/forms"]
+authFormsScope = Proxy;
 
 -- | View and manage your Google Groups
-authGroupsScope :: OAuthScope
-authGroupsScope = "https://www.googleapis.com/auth/groups";
+authGroupsScope :: Proxy '["https://www.googleapis.com/auth/groups"]
+authGroupsScope = Proxy;

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -388,15 +389,15 @@ import           Network.Google.AppsCalendar.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Calendar API. This contains the host and root path used as a starting point for constructing service requests.
-appsCalendarService :: ServiceConfig
+appsCalendarService :: Service
 appsCalendarService
   = defaultService (ServiceId "calendar:v3")
       "www.googleapis.com"
 
 -- | Manage your calendars
-authCalendarScope :: OAuthScope
-authCalendarScope = "https://www.googleapis.com/auth/calendar";
+authCalendarScope :: Proxy '["https://www.googleapis.com/auth/calendar"]
+authCalendarScope = Proxy;
 
 -- | View your calendars
-authCalendarReadonlyScope :: OAuthScope
-authCalendarReadonlyScope = "https://www.googleapis.com/auth/calendar.readonly";
+authCalendarReadonlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.readonly"]
+authCalendarReadonlyScope = Proxy;

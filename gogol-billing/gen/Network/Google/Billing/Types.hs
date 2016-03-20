@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -54,11 +55,11 @@ import           Network.Google.Billing.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud Billing API. This contains the host and root path used as a starting point for constructing service requests.
-billingService :: ServiceConfig
+billingService :: Service
 billingService
   = defaultService (ServiceId "cloudbilling:v1")
       "cloudbilling.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

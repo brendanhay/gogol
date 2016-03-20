@@ -156,6 +156,9 @@ rssCallback
 
 instance GoogleRequest ReadsStream where
         type Rs ReadsStream = StreamReadsResponse
+        type Scopes ReadsStream =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient ReadsStream{..}
           = go _rssXgafv _rssUploadProtocol (Just _rssPp)
               _rssAccessToken

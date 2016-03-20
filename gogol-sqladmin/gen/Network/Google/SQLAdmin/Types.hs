@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -425,15 +426,15 @@ import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
 
 -- | Default request referring to version 'v1beta4' of the Cloud SQL Administration API. This contains the host and root path used as a starting point for constructing service requests.
-sQLAdminService :: ServiceConfig
+sQLAdminService :: Service
 sQLAdminService
   = defaultService (ServiceId "sqladmin:v1beta4")
       "www.googleapis.com"
 
 -- | Manage your Google SQL Service instances
-authSqlserviceAdminScope :: OAuthScope
-authSqlserviceAdminScope = "https://www.googleapis.com/auth/sqlservice.admin";
+authSqlserviceAdminScope :: Proxy '["https://www.googleapis.com/auth/sqlservice.admin"]
+authSqlserviceAdminScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

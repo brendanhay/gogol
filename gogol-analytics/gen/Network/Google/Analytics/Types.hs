@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -1025,32 +1026,32 @@ import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-analyticsService :: ServiceConfig
+analyticsService :: Service
 analyticsService
   = defaultService (ServiceId "analytics:v3")
       "www.googleapis.com"
 
 -- | Manage Google Analytics Account users by email address
-authAnalyticsManageUsersScope :: OAuthScope
-authAnalyticsManageUsersScope = "https://www.googleapis.com/auth/analytics.manage.users";
+authAnalyticsManageUsersScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]
+authAnalyticsManageUsersScope = Proxy;
 
 -- | Create a new Google Analytics account along with its default property
 -- and view
-authAnalyticsProvisionScope :: OAuthScope
-authAnalyticsProvisionScope = "https://www.googleapis.com/auth/analytics.provision";
+authAnalyticsProvisionScope :: Proxy '["https://www.googleapis.com/auth/analytics.provision"]
+authAnalyticsProvisionScope = Proxy;
 
 -- | View Google Analytics user permissions
-authAnalyticsManageUsersReadonlyScope :: OAuthScope
-authAnalyticsManageUsersReadonlyScope = "https://www.googleapis.com/auth/analytics.manage.users.readonly";
+authAnalyticsManageUsersReadonlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users.readonly"]
+authAnalyticsManageUsersReadonlyScope = Proxy;
 
 -- | View and manage your Google Analytics data
-authAnalyticsScope :: OAuthScope
-authAnalyticsScope = "https://www.googleapis.com/auth/analytics";
+authAnalyticsScope :: Proxy '["https://www.googleapis.com/auth/analytics"]
+authAnalyticsScope = Proxy;
 
 -- | View your Google Analytics data
-authAnalyticsReadonlyScope :: OAuthScope
-authAnalyticsReadonlyScope = "https://www.googleapis.com/auth/analytics.readonly";
+authAnalyticsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
+authAnalyticsReadonlyScope = Proxy;
 
 -- | Edit Google Analytics management entities
-authAnalyticsEditScope :: OAuthScope
-authAnalyticsEditScope = "https://www.googleapis.com/auth/analytics.edit";
+authAnalyticsEditScope :: Proxy '["https://www.googleapis.com/auth/analytics.edit"]
+authAnalyticsEditScope = Proxy;

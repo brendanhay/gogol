@@ -92,7 +92,8 @@ bacgEntity
 instance GoogleRequest BucketAccessControlsGet where
         type Rs BucketAccessControlsGet = BucketAccessControl
         type Scopes BucketAccessControlsGet =
-             '["https://www.googleapis.com/auth/devstorage.full_control"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsGet{..}
           = go _bacgBucket _bacgEntity (Just AltJSON)
               storageService

@@ -120,7 +120,8 @@ instance GoogleRequest ObjectAccessControlsInsert
         type Rs ObjectAccessControlsInsert =
              ObjectAccessControl
         type Scopes ObjectAccessControlsInsert =
-             '["https://www.googleapis.com/auth/devstorage.full_control"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsInsert{..}
           = go _oaciBucket _oaciObject _oaciGeneration
               (Just AltJSON)

@@ -80,6 +80,7 @@ instance GoogleRequest RelyingPartyVerifyCustomToken
          where
         type Rs RelyingPartyVerifyCustomToken =
              VerifyCustomTokenResponse
+        type Scopes RelyingPartyVerifyCustomToken = '[]
         requestClient RelyingPartyVerifyCustomToken{..}
           = go (Just AltJSON) _rpvctPayload
               identityToolkitService

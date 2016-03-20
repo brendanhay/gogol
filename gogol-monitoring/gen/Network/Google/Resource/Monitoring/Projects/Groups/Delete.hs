@@ -151,6 +151,9 @@ pgdCallback
 
 instance GoogleRequest ProjectsGroupsDelete where
         type Rs ProjectsGroupsDelete = Empty
+        type Scopes ProjectsGroupsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient ProjectsGroupsDelete{..}
           = go _pgdName _pgdXgafv _pgdUploadProtocol
               (Just _pgdPp)

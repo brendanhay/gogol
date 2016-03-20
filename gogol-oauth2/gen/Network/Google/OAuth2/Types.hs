@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -73,23 +74,23 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google OAuth2 API. This contains the host and root path used as a starting point for constructing service requests.
-oAuth2Service :: ServiceConfig
+oAuth2Service :: Service
 oAuth2Service
   = defaultService (ServiceId "oauth2:v2")
       "www.googleapis.com"
 
 -- | View your basic profile info
-authUserinfoProfileScope :: OAuthScope
-authUserinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
+authUserinfoProfileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
+authUserinfoProfileScope = Proxy;
 
 -- | Know the list of people in your circles, your age range, and language
-authPlusLoginScope :: OAuthScope
-authPlusLoginScope = "https://www.googleapis.com/auth/plus.login";
+authPlusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
+authPlusLoginScope = Proxy;
 
 -- | View your email address
-authUserinfoEmailScope :: OAuthScope
-authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+authUserinfoEmailScope = Proxy;
 
 -- | Know who you are on Google
-authPlusMeScope :: OAuthScope
-authPlusMeScope = "https://www.googleapis.com/auth/plus.me";
+authPlusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
+authPlusMeScope = Proxy;

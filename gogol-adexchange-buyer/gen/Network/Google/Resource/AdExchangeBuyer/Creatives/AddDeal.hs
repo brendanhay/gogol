@@ -103,6 +103,8 @@ cadAccountId
 
 instance GoogleRequest CreativesAddDeal where
         type Rs CreativesAddDeal = ()
+        type Scopes CreativesAddDeal =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient CreativesAddDeal{..}
           = go _cadAccountId _cadBuyerCreativeId _cadDealId
               (Just AltJSON)

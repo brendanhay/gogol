@@ -153,6 +153,8 @@ iaCallback
 
 instance GoogleRequest ImagesAnnotate where
         type Rs ImagesAnnotate = BatchAnnotateImagesResponse
+        type Scopes ImagesAnnotate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ImagesAnnotate{..}
           = go _iaXgafv _iaUploadProtocol (Just _iaPp)
               _iaAccessToken

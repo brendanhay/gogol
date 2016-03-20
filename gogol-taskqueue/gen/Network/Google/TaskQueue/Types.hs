@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -76,15 +77,15 @@ import           Network.Google.TaskQueue.Types.Product
 import           Network.Google.TaskQueue.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the TaskQueue API. This contains the host and root path used as a starting point for constructing service requests.
-taskQueueService :: ServiceConfig
+taskQueueService :: Service
 taskQueueService
   = defaultService (ServiceId "taskqueue:v1beta2")
       "www.googleapis.com"
 
 -- | Consume Tasks from your Taskqueues
-authTaskqueueConsumerScope :: OAuthScope
-authTaskqueueConsumerScope = "https://www.googleapis.com/auth/taskqueue.consumer";
+authTaskqueueConsumerScope :: Proxy '["https://www.googleapis.com/auth/taskqueue.consumer"]
+authTaskqueueConsumerScope = Proxy;
 
 -- | Manage your Tasks and Taskqueues
-authTaskqueueScope :: OAuthScope
-authTaskqueueScope = "https://www.googleapis.com/auth/taskqueue";
+authTaskqueueScope :: Proxy '["https://www.googleapis.com/auth/taskqueue"]
+authTaskqueueScope = Proxy;

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -175,33 +176,33 @@ import           Network.Google.ResourceViews.Types.Product
 import           Network.Google.ResourceViews.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Groups API. This contains the host and root path used as a starting point for constructing service requests.
-resourceViewsService :: ServiceConfig
+resourceViewsService :: Service
 resourceViewsService
   = defaultService (ServiceId "resourceviews:v1beta2")
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-authComputeScope :: OAuthScope
-authComputeScope = "https://www.googleapis.com/auth/compute";
+authComputeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
+authComputeScope = Proxy;
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View and manage your Google Cloud Platform management resources and
 -- deployment status information
-authNdevCloudmanScope :: OAuthScope
-authNdevCloudmanScope = "https://www.googleapis.com/auth/ndev.cloudman";
+authNdevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
+authNdevCloudmanScope = Proxy;
 
 -- | View your Google Cloud Platform management resources and deployment
 -- status information
-authNdevCloudmanReadonlyScope :: OAuthScope
-authNdevCloudmanReadonlyScope = "https://www.googleapis.com/auth/ndev.cloudman.readonly";
+authNdevCloudmanReadonlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+authNdevCloudmanReadonlyScope = Proxy;
 
 -- | View your Google Compute Engine resources
-authComputeReadonlyScope :: OAuthScope
-authComputeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";
+authComputeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
+authComputeReadonlyScope = Proxy;

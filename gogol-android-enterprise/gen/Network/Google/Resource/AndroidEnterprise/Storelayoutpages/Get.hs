@@ -89,6 +89,8 @@ sgPageId = lens _sgPageId (\ s a -> s{_sgPageId = a})
 
 instance GoogleRequest StorelayoutpagesGet where
         type Rs StorelayoutpagesGet = StorePage
+        type Scopes StorelayoutpagesGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutpagesGet{..}
           = go _sgEnterpriseId _sgPageId (Just AltJSON)
               androidEnterpriseService

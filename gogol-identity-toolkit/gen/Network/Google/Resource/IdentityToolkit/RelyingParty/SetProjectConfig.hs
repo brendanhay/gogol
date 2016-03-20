@@ -82,6 +82,7 @@ instance GoogleRequest RelyingPartySetProjectConfig
          where
         type Rs RelyingPartySetProjectConfig =
              IdentitytoolkitRelyingPartySetProjectConfigResponse
+        type Scopes RelyingPartySetProjectConfig = '[]
         requestClient RelyingPartySetProjectConfig{..}
           = go (Just AltJSON) _rpspcPayload
               identityToolkitService

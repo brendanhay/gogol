@@ -186,6 +186,8 @@ prjdCallback
 instance GoogleRequest ProjectsRegionsJobsDelete
          where
         type Rs ProjectsRegionsJobsDelete = Empty
+        type Scopes ProjectsRegionsJobsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsJobsDelete{..}
           = go _prjdProjectId _prjdRegion _prjdJobId _prjdXgafv
               _prjdUploadProtocol

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -166,24 +167,24 @@ import           Network.Google.ReplicaPoolUpdater.Types.Product
 import           Network.Google.ReplicaPoolUpdater.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Compute Engine Instance Group Updater API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPoolUpdaterService :: ServiceConfig
+replicaPoolUpdaterService :: Service
 replicaPoolUpdaterService
   = defaultService
       (ServiceId "replicapoolupdater:v1beta1")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View and manage replica pools
-authReplicapoolScope :: OAuthScope
-authReplicapoolScope = "https://www.googleapis.com/auth/replicapool";
+authReplicapoolScope :: Proxy '["https://www.googleapis.com/auth/replicapool"]
+authReplicapoolScope = Proxy;
 
 -- | View replica pools
-authReplicapoolReadonlyScope :: OAuthScope
-authReplicapoolReadonlyScope = "https://www.googleapis.com/auth/replicapool.readonly";
+authReplicapoolReadonlyScope :: Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
+authReplicapoolReadonlyScope = Proxy;

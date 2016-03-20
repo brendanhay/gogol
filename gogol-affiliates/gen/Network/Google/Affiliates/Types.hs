@@ -346,7 +346,7 @@ import           Network.Google.Affiliates.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta1' of the Google Affiliate Network API. This contains the host and root path used as a starting point for constructing service requests.
-affiliatesService :: ServiceConfig
+affiliatesService :: Service
 affiliatesService
   = defaultService (ServiceId "gan:v1beta1")
       "www.googleapis.com"

@@ -112,6 +112,9 @@ ruCommentId
 
 instance GoogleRequest RepliesUpdate where
         type Rs RepliesUpdate = Reply
+        type Scopes RepliesUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient RepliesUpdate{..}
           = go _ruFileId _ruCommentId _ruReplyId (Just AltJSON)
               _ruPayload

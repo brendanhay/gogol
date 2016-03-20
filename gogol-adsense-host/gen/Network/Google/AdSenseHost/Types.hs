@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -195,11 +196,11 @@ import           Network.Google.AdSenseHost.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v4.1' of the AdSense Host API. This contains the host and root path used as a starting point for constructing service requests.
-adSenseHostService :: ServiceConfig
+adSenseHostService :: Service
 adSenseHostService
   = defaultService (ServiceId "adsensehost:v4.1")
       "www.googleapis.com"
 
 -- | View and manage your AdSense host data and associated accounts
-authAdsensehostScope :: OAuthScope
-authAdsensehostScope = "https://www.googleapis.com/auth/adsensehost";
+authAdsensehostScope :: Proxy '["https://www.googleapis.com/auth/adsensehost"]
+authAdsensehostScope = Proxy;

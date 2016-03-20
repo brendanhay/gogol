@@ -76,6 +76,9 @@ lId = lens _lId (\ s a -> s{_lId = a})
 
 instance GoogleRequest LiveChatMessagesDelete where
         type Rs LiveChatMessagesDelete = ()
+        type Scopes LiveChatMessagesDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatMessagesDelete{..}
           = go (Just _lId) (Just AltJSON) youTubeService
           where go

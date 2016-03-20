@@ -198,6 +198,8 @@ instance GoogleRequest ProjectsRegionsOperationsList
          where
         type Rs ProjectsRegionsOperationsList =
              ListOperationsResponse
+        type Scopes ProjectsRegionsOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsOperationsList{..}
           = go _prolName _prolXgafv _prolUploadProtocol
               (Just _prolPp)

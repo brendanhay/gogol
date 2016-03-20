@@ -76,7 +76,7 @@ import           Network.Google.FreebaseSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Freebase Search. This contains the host and root path used as a starting point for constructing service requests.
-freebaseSearchService :: ServiceConfig
+freebaseSearchService :: Service
 freebaseSearchService
   = defaultService (ServiceId "freebase:v1")
       "www.googleapis.com"

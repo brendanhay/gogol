@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -2031,32 +2032,32 @@ import           Network.Google.YouTube.Types.Product
 import           Network.Google.YouTube.Types.Sum
 
 -- | Default request referring to version 'v3' of the YouTube Data API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeService :: ServiceConfig
+youTubeService :: Service
 youTubeService
   = defaultService (ServiceId "youtube:v3")
       "www.googleapis.com"
 
 -- | Manage your YouTube videos
-authYoutubeUploadScope :: OAuthScope
-authYoutubeUploadScope = "https://www.googleapis.com/auth/youtube.upload";
+authYoutubeUploadScope :: Proxy '["https://www.googleapis.com/auth/youtube.upload"]
+authYoutubeUploadScope = Proxy;
 
 -- | Manage your YouTube account
-authYoutubeScope :: OAuthScope
-authYoutubeScope = "https://www.googleapis.com/auth/youtube";
+authYoutubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
+authYoutubeScope = Proxy;
 
 -- | View and manage your assets and associated content on YouTube
-authYoutubepartnerScope :: OAuthScope
-authYoutubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
+authYoutubepartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+authYoutubepartnerScope = Proxy;
 
 -- | Manage your YouTube account
-authYoutubeForceSslScope :: OAuthScope
-authYoutubeForceSslScope = "https://www.googleapis.com/auth/youtube.force-ssl";
+authYoutubeForceSslScope :: Proxy '["https://www.googleapis.com/auth/youtube.force-ssl"]
+authYoutubeForceSslScope = Proxy;
 
 -- | View your YouTube account
-authYoutubeReadonlyScope :: OAuthScope
-authYoutubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";
+authYoutubeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
+authYoutubeReadonlyScope = Proxy;
 
 -- | View private information of your YouTube channel relevant during the
 -- audit process with a YouTube partner
-authYoutubepartnerChannelAuditScope :: OAuthScope
-authYoutubepartnerChannelAuditScope = "https://www.googleapis.com/auth/youtubepartner-channel-audit";
+authYoutubepartnerChannelAuditScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner-channel-audit"]
+authYoutubepartnerChannelAuditScope = Proxy;

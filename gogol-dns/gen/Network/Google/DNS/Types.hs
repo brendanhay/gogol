@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -107,23 +108,23 @@ import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
-dNSService :: ServiceConfig
+dNSService :: Service
 dNSService
   = defaultService (ServiceId "dns:v1")
       "www.googleapis.com"
 
 -- | View your DNS records hosted by Google Cloud DNS
-authNdevClouddnsReadonlyScope :: OAuthScope
-authNdevClouddnsReadonlyScope = "https://www.googleapis.com/auth/ndev.clouddns.readonly";
+authNdevClouddnsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readonly"]
+authNdevClouddnsReadonlyScope = Proxy;
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your DNS records hosted by Google Cloud DNS
-authNdevClouddnsReadwriteScope :: OAuthScope
-authNdevClouddnsReadwriteScope = "https://www.googleapis.com/auth/ndev.clouddns.readwrite";
+authNdevClouddnsReadwriteScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+authNdevClouddnsReadwriteScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

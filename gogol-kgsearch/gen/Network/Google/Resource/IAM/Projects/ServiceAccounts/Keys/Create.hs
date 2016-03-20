@@ -174,6 +174,8 @@ instance GoogleRequest
          ProjectsServiceAccountsKeysCreate where
         type Rs ProjectsServiceAccountsKeysCreate =
              ServiceAccountKey
+        type Scopes ProjectsServiceAccountsKeysCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsKeysCreate{..}
           = go _psakcName _psakcXgafv _psakcUploadProtocol
               (Just _psakcPp)

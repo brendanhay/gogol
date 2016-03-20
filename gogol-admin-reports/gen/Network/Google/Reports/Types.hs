@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -153,15 +154,15 @@ import           Network.Google.Reports.Types.Product
 import           Network.Google.Reports.Types.Sum
 
 -- | Default request referring to version 'reports_v1' of the Admin Reports API. This contains the host and root path used as a starting point for constructing service requests.
-reportsService :: ServiceConfig
+reportsService :: Service
 reportsService
   = defaultService (ServiceId "admin:reports_v1")
       "www.googleapis.com"
 
 -- | View usage reports of Google Apps for your domain
-authAdminReportsUsageReadonlyScope :: OAuthScope
-authAdminReportsUsageReadonlyScope = "https://www.googleapis.com/auth/admin.reports.usage.readonly";
+authAdminReportsUsageReadonlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
+authAdminReportsUsageReadonlyScope = Proxy;
 
 -- | View audit reports of Google Apps for your domain
-authAdminReportsAuditReadonlyScope :: OAuthScope
-authAdminReportsAuditReadonlyScope = "https://www.googleapis.com/auth/admin.reports.audit.readonly";
+authAdminReportsAuditReadonlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+authAdminReportsAuditReadonlyScope = Proxy;

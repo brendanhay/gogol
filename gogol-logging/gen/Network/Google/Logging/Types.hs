@@ -235,27 +235,27 @@ import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2beta1' of the Google Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
-loggingService :: ServiceConfig
+loggingService :: Service
 loggingService
   = defaultService (ServiceId "logging:v2beta1")
       "logging.googleapis.com"
 
 -- | Administrate log data for your projects
-authLoggingAdminScope :: OAuthScope
-authLoggingAdminScope = "https://www.googleapis.com/auth/logging.admin";
+authLoggingAdminScope :: Proxy '["https://www.googleapis.com/auth/logging.admin"]
+authLoggingAdminScope = Proxy;
 
 -- | View log data for your projects
-authLoggingReadScope :: OAuthScope
-authLoggingReadScope = "https://www.googleapis.com/auth/logging.read";
+authLoggingReadScope :: Proxy '["https://www.googleapis.com/auth/logging.read"]
+authLoggingReadScope = Proxy;
 
 -- | Submit log data for your projects
-authLoggingWriteScope :: OAuthScope
-authLoggingWriteScope = "https://www.googleapis.com/auth/logging.write";
+authLoggingWriteScope :: Proxy '["https://www.googleapis.com/auth/logging.write"]
+authLoggingWriteScope = Proxy;
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

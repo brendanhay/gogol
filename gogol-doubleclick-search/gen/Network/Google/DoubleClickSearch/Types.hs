@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -203,11 +204,11 @@ import           Network.Google.DoubleClickSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the DoubleClick Search API. This contains the host and root path used as a starting point for constructing service requests.
-doubleClickSearchService :: ServiceConfig
+doubleClickSearchService :: Service
 doubleClickSearchService
   = defaultService (ServiceId "doubleclicksearch:v2")
       "www.googleapis.com"
 
 -- | View and manage your advertising data in DoubleClick Search
-authDoubleclicksearchScope :: OAuthScope
-authDoubleclicksearchScope = "https://www.googleapis.com/auth/doubleclicksearch";
+authDoubleclicksearchScope :: Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]
+authDoubleclicksearchScope = Proxy;

@@ -168,6 +168,10 @@ pmcCallback
 
 instance GoogleRequest ProjectsMetricsCreate where
         type Rs ProjectsMetricsCreate = LogMetric
+        type Scopes ProjectsMetricsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.write"]
         requestClient ProjectsMetricsCreate{..}
           = go _pmcProjectName _pmcXgafv _pmcUploadProtocol
               (Just _pmcPp)

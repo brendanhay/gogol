@@ -92,6 +92,7 @@ instance GoogleRequest RelyingPartyGetProjectConfig
          where
         type Rs RelyingPartyGetProjectConfig =
              IdentitytoolkitRelyingPartyGetProjectConfigResponse
+        type Scopes RelyingPartyGetProjectConfig = '[]
         requestClient RelyingPartyGetProjectConfig{..}
           = go _rpgpcDelegatedProjectNumber _rpgpcProjectNumber
               (Just AltJSON)

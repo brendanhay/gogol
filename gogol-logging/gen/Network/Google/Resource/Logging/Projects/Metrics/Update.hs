@@ -169,6 +169,10 @@ pmuCallback
 
 instance GoogleRequest ProjectsMetricsUpdate where
         type Rs ProjectsMetricsUpdate = LogMetric
+        type Scopes ProjectsMetricsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.write"]
         requestClient ProjectsMetricsUpdate{..}
           = go _pmuMetricName _pmuXgafv _pmuUploadProtocol
               (Just _pmuPp)

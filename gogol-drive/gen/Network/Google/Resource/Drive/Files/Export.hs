@@ -98,6 +98,10 @@ feFileId = lens _feFileId (\ s a -> s{_feFileId = a})
 
 instance GoogleRequest FilesExport where
         type Rs FilesExport = ()
+        type Scopes FilesExport =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient FilesExport{..}
           = go _feFileId (Just _feMimeType) (Just AltJSON)
               driveService
@@ -108,6 +112,8 @@ instance GoogleRequest FilesExport where
 instance GoogleRequest (MediaDownload FilesExport)
          where
         type Rs (MediaDownload FilesExport) = Stream
+        type Scopes (MediaDownload FilesExport) =
+             Scopes FilesExport
         requestClient (MediaDownload FilesExport{..})
           = go _feFileId (Just _feMimeType) (Just AltMedia)
               driveService

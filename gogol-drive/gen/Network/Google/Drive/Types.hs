@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -346,40 +347,40 @@ import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Drive API. This contains the host and root path used as a starting point for constructing service requests.
-driveService :: ServiceConfig
+driveService :: Service
 driveService
   = defaultService (ServiceId "drive:v3")
       "www.googleapis.com"
 
 -- | View metadata for files in your Google Drive
-authDriveMetadataReadonlyScope :: OAuthScope
-authDriveMetadataReadonlyScope = "https://www.googleapis.com/auth/drive.metadata.readonly";
+authDriveMetadataReadonlyScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
+authDriveMetadataReadonlyScope = Proxy;
 
 -- | View the photos, videos and albums in your Google Photos
-authDrivePhotosReadonlyScope :: OAuthScope
-authDrivePhotosReadonlyScope = "https://www.googleapis.com/auth/drive.photos.readonly";
+authDrivePhotosReadonlyScope :: Proxy '["https://www.googleapis.com/auth/drive.photos.readonly"]
+authDrivePhotosReadonlyScope = Proxy;
 
 -- | View and manage its own configuration data in your Google Drive
-authDriveAppdataScope :: OAuthScope
-authDriveAppdataScope = "https://www.googleapis.com/auth/drive.appdata";
+authDriveAppdataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
+authDriveAppdataScope = Proxy;
 
 -- | View the files in your Google Drive
-authDriveReadonlyScope :: OAuthScope
-authDriveReadonlyScope = "https://www.googleapis.com/auth/drive.readonly";
+authDriveReadonlyScope :: Proxy '["https://www.googleapis.com/auth/drive.readonly"]
+authDriveReadonlyScope = Proxy;
 
 -- | View and manage the files in your Google Drive
-authDriveScope :: OAuthScope
-authDriveScope = "https://www.googleapis.com/auth/drive";
+authDriveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
+authDriveScope = Proxy;
 
 -- | View and manage Google Drive files and folders that you have opened or
 -- created with this app
-authDriveFileScope :: OAuthScope
-authDriveFileScope = "https://www.googleapis.com/auth/drive.file";
+authDriveFileScope :: Proxy '["https://www.googleapis.com/auth/drive.file"]
+authDriveFileScope = Proxy;
 
 -- | View and manage metadata of files in your Google Drive
-authDriveMetadataScope :: OAuthScope
-authDriveMetadataScope = "https://www.googleapis.com/auth/drive.metadata";
+authDriveMetadataScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata"]
+authDriveMetadataScope = Proxy;
 
 -- | Modify your Google Apps Script scripts\' behavior
-authDriveScriptsScope :: OAuthScope
-authDriveScriptsScope = "https://www.googleapis.com/auth/drive.scripts";
+authDriveScriptsScope :: Proxy '["https://www.googleapis.com/auth/drive.scripts"]
+authDriveScriptsScope = Proxy;

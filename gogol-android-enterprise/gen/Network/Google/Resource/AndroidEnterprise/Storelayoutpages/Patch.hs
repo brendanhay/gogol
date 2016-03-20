@@ -103,6 +103,8 @@ spPayload
 
 instance GoogleRequest StorelayoutpagesPatch where
         type Rs StorelayoutpagesPatch = StorePage
+        type Scopes StorelayoutpagesPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutpagesPatch{..}
           = go _spEnterpriseId _spPageId (Just AltJSON)
               _spPayload

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -135,17 +136,17 @@ import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1management' of the Google Play Game Services Management API. This contains the host and root path used as a starting point for constructing service requests.
-gamesManagementService :: ServiceConfig
+gamesManagementService :: Service
 gamesManagementService
   = defaultService
       (ServiceId "gamesManagement:v1management")
       "www.googleapis.com"
 
 -- | Know the list of people in your circles, your age range, and language
-authPlusLoginScope :: OAuthScope
-authPlusLoginScope = "https://www.googleapis.com/auth/plus.login";
+authPlusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
+authPlusLoginScope = Proxy;
 
 -- | Share your Google+ profile information and view and manage your game
 -- activity
-authGamesScope :: OAuthScope
-authGamesScope = "https://www.googleapis.com/auth/games";
+authGamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
+authGamesScope = Proxy;

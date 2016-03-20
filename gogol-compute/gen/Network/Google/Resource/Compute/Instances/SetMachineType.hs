@@ -116,6 +116,9 @@ ismtInstance
 
 instance GoogleRequest InstancesSetMachineType where
         type Rs InstancesSetMachineType = Operation
+        type Scopes InstancesSetMachineType =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient InstancesSetMachineType{..}
           = go _ismtProject _ismtZone _ismtInstance
               (Just AltJSON)

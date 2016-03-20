@@ -179,6 +179,8 @@ aslCallback
 
 instance GoogleRequest AppsServicesList where
         type Rs AppsServicesList = ListServicesResponse
+        type Scopes AppsServicesList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesList{..}
           = go _aslAppsId _aslXgafv _aslUploadProtocol
               (Just _aslPp)

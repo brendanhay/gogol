@@ -77,6 +77,8 @@ piPayload
 
 instance GoogleRequest ProposalsInsert where
         type Rs ProposalsInsert = CreateOrdersResponse
+        type Scopes ProposalsInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ProposalsInsert{..}
           = go (Just AltJSON) _piPayload adExchangeBuyerService
           where go

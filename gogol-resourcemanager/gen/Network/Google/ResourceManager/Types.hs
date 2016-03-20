@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -96,16 +97,16 @@ import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
-resourceManagerService :: ServiceConfig
+resourceManagerService :: Service
 resourceManagerService
   = defaultService
       (ServiceId "cloudresourcemanager:v1")
       "cloudresourcemanager.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

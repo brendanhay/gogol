@@ -106,6 +106,9 @@ instance GoogleRequest
          AccountsContainersEnvironmentsGet where
         type Rs AccountsContainersEnvironmentsGet =
              Environment
+        type Scopes AccountsContainersEnvironmentsGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersEnvironmentsGet{..}
           = go _acegAccountId _acegContainerId
               _acegEnvironmentId

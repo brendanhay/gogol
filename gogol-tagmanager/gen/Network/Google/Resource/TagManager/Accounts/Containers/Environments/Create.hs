@@ -106,6 +106,8 @@ instance GoogleRequest
          AccountsContainersEnvironmentsCreate where
         type Rs AccountsContainersEnvironmentsCreate =
              Environment
+        type Scopes AccountsContainersEnvironmentsCreate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersEnvironmentsCreate{..}
           = go _acecAccountId _acecContainerId (Just AltJSON)

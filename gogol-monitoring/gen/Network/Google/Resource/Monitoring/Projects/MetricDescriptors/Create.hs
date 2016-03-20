@@ -171,6 +171,10 @@ instance GoogleRequest
          ProjectsMetricDescriptorsCreate where
         type Rs ProjectsMetricDescriptorsCreate =
              MetricDescriptor
+        type Scopes ProjectsMetricDescriptorsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring",
+               "https://www.googleapis.com/auth/monitoring.write"]
         requestClient ProjectsMetricDescriptorsCreate{..}
           = go _pmdcName _pmdcXgafv _pmdcUploadProtocol
               (Just _pmdcPp)

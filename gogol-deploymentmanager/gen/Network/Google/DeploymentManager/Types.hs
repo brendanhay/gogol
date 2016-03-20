@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -267,25 +268,25 @@ import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Cloud Deployment Manager API. This contains the host and root path used as a starting point for constructing service requests.
-deploymentManagerService :: ServiceConfig
+deploymentManagerService :: Service
 deploymentManagerService
   = defaultService (ServiceId "deploymentmanager:v2")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View and manage your Google Cloud Platform management resources and
 -- deployment status information
-authNdevCloudmanScope :: OAuthScope
-authNdevCloudmanScope = "https://www.googleapis.com/auth/ndev.cloudman";
+authNdevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
+authNdevCloudmanScope = Proxy;
 
 -- | View your Google Cloud Platform management resources and deployment
 -- status information
-authNdevCloudmanReadonlyScope :: OAuthScope
-authNdevCloudmanReadonlyScope = "https://www.googleapis.com/auth/ndev.cloudman.readonly";
+authNdevCloudmanReadonlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+authNdevCloudmanReadonlyScope = Proxy;

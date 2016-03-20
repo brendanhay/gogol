@@ -235,6 +235,9 @@ instance GoogleRequest TimeseriesDescriptorsList
          where
         type Rs TimeseriesDescriptorsList =
              ListTimeseriesDescriptorsResponse
+        type Scopes TimeseriesDescriptorsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient TimeseriesDescriptorsList{..}
           = go _tdlProject _tdlMetric (Just _tdlYoungest)
               _tdlWindow

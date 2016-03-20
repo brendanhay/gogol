@@ -152,6 +152,9 @@ vCallback
 
 instance GoogleRequest VariantsStream where
         type Rs VariantsStream = StreamVariantsResponse
+        type Scopes VariantsStream =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantsStream{..}
           = go _vXgafv _vUploadProtocol (Just _vPp)
               _vAccessToken

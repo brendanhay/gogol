@@ -206,6 +206,8 @@ asvlCallback
 instance GoogleRequest AppsServicesVersionsList where
         type Rs AppsServicesVersionsList =
              ListVersionsResponse
+        type Scopes AppsServicesVersionsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesVersionsList{..}
           = go _asvlAppsId _asvlServicesId _asvlXgafv
               _asvlUploadProtocol

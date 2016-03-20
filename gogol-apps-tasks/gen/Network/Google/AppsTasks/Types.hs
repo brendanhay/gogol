@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -80,15 +81,15 @@ import           Network.Google.AppsTasks.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
-appsTasksService :: ServiceConfig
+appsTasksService :: Service
 appsTasksService
   = defaultService (ServiceId "tasks:v1")
       "www.googleapis.com"
 
 -- | View your tasks
-authTasksReadonlyScope :: OAuthScope
-authTasksReadonlyScope = "https://www.googleapis.com/auth/tasks.readonly";
+authTasksReadonlyScope :: Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
+authTasksReadonlyScope = Proxy;
 
 -- | Manage your tasks
-authTasksScope :: OAuthScope
-authTasksScope = "https://www.googleapis.com/auth/tasks";
+authTasksScope :: Proxy '["https://www.googleapis.com/auth/tasks"]
+authTasksScope = Proxy;

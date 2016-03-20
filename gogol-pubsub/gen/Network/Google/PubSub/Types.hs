@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -158,15 +159,15 @@ import           Network.Google.PubSub.Types.Product
 import           Network.Google.PubSub.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Cloud Pub/Sub API. This contains the host and root path used as a starting point for constructing service requests.
-pubSubService :: ServiceConfig
+pubSubService :: Service
 pubSubService
   = defaultService (ServiceId "pubsub:v1")
       "pubsub.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View and manage Pub\/Sub topics and subscriptions
-authPubsubScope :: OAuthScope
-authPubsubScope = "https://www.googleapis.com/auth/pubsub";
+authPubsubScope :: Proxy '["https://www.googleapis.com/auth/pubsub"]
+authPubsubScope = Proxy;

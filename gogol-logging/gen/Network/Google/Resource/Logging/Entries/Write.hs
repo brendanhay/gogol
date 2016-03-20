@@ -155,6 +155,10 @@ ewCallback
 
 instance GoogleRequest EntriesWrite where
         type Rs EntriesWrite = WriteLogEntriesResponse
+        type Scopes EntriesWrite =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.write"]
         requestClient EntriesWrite{..}
           = go _ewXgafv _ewUploadProtocol (Just _ewPp)
               _ewAccessToken

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -350,27 +351,27 @@ import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Storage JSON API. This contains the host and root path used as a starting point for constructing service requests.
-storageService :: ServiceConfig
+storageService :: Service
 storageService
   = defaultService (ServiceId "storage:v1")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
-authDevstorageReadOnlyScope :: OAuthScope
-authDevstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
+authDevstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+authDevstorageReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-authDevstorageReadWriteScope :: OAuthScope
-authDevstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+authDevstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+authDevstorageReadWriteScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-authDevstorageFullControlScope :: OAuthScope
-authDevstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";
+authDevstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+authDevstorageFullControlScope = Proxy;

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -81,16 +82,16 @@ import           Network.Google.YouTubeReporting.Types.Product
 import           Network.Google.YouTubeReporting.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Reporting API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeReportingService :: ServiceConfig
+youTubeReportingService :: Service
 youTubeReportingService
   = defaultService (ServiceId "youtubereporting:v1")
       "youtubereporting.googleapis.com"
 
 -- | View YouTube Analytics reports for your YouTube content
-authYtAnalyticsReadonlyScope :: OAuthScope
-authYtAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
+authYtAnalyticsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
+authYtAnalyticsReadonlyScope = Proxy;
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
-authYtAnalyticsMonetaryReadonlyScope :: OAuthScope
-authYtAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
+authYtAnalyticsMonetaryReadonlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
+authYtAnalyticsMonetaryReadonlyScope = Proxy;

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -232,15 +233,15 @@ import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
-fusionTablesService :: ServiceConfig
+fusionTablesService :: Service
 fusionTablesService
   = defaultService (ServiceId "fusiontables:v2")
       "www.googleapis.com"
 
 -- | View your Fusion Tables
-authFusiontablesReadonlyScope :: OAuthScope
-authFusiontablesReadonlyScope = "https://www.googleapis.com/auth/fusiontables.readonly";
+authFusiontablesReadonlyScope :: Proxy '["https://www.googleapis.com/auth/fusiontables.readonly"]
+authFusiontablesReadonlyScope = Proxy;
 
 -- | Manage your Fusion Tables
-authFusiontablesScope :: OAuthScope
-authFusiontablesScope = "https://www.googleapis.com/auth/fusiontables";
+authFusiontablesScope :: Proxy '["https://www.googleapis.com/auth/fusiontables"]
+authFusiontablesScope = Proxy;

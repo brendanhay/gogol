@@ -188,6 +188,11 @@ pslCallback
 
 instance GoogleRequest ProjectsSinksList where
         type Rs ProjectsSinksList = ListSinksResponse
+        type Scopes ProjectsSinksList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsSinksList{..}
           = go _pslProjectName _pslXgafv _pslUploadProtocol
               (Just _pslPp)

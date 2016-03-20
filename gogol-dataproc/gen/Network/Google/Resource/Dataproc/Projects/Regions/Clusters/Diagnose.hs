@@ -191,6 +191,8 @@ pCallback
 instance GoogleRequest
          ProjectsRegionsClustersDiagnose where
         type Rs ProjectsRegionsClustersDiagnose = Operation
+        type Scopes ProjectsRegionsClustersDiagnose =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsClustersDiagnose{..}
           = go _pProjectId _pRegion _pClusterName _pXgafv
               _pUploadProtocol

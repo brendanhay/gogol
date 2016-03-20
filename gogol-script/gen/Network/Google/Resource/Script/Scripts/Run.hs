@@ -181,6 +181,17 @@ srCallback
 
 instance GoogleRequest ScriptsRun where
         type Rs ScriptsRun = Operation
+        type Scopes ScriptsRun =
+             '["https://mail.google.com/",
+               "https://www.google.com/calendar/feeds",
+               "https://www.google.com/m8/feeds",
+               "https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/forms",
+               "https://www.googleapis.com/auth/forms.currentonly",
+               "https://www.googleapis.com/auth/groups",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ScriptsRun{..}
           = go _srScriptId _srXgafv _srUploadProtocol
               (Just _srPp)

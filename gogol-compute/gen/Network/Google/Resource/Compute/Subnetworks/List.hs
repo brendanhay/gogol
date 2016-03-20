@@ -147,6 +147,10 @@ slMaxResults
 
 instance GoogleRequest SubnetworksList where
         type Rs SubnetworksList = SubnetworkList
+        type Scopes SubnetworksList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient SubnetworksList{..}
           = go _slProject _slRegion _slFilter _slPageToken
               (Just _slMaxResults)

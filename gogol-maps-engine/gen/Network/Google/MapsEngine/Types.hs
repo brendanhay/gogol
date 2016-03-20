@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -763,15 +764,15 @@ import           Network.Google.MapsEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Maps Engine API. This contains the host and root path used as a starting point for constructing service requests.
-mapsEngineService :: ServiceConfig
+mapsEngineService :: Service
 mapsEngineService
   = defaultService (ServiceId "mapsengine:v1")
       "www.googleapis.com"
 
 -- | View and manage your Google My Maps data
-authMapsengineScope :: OAuthScope
-authMapsengineScope = "https://www.googleapis.com/auth/mapsengine";
+authMapsengineScope :: Proxy '["https://www.googleapis.com/auth/mapsengine"]
+authMapsengineScope = Proxy;
 
 -- | View your Google My Maps data
-authMapsengineReadonlyScope :: OAuthScope
-authMapsengineReadonlyScope = "https://www.googleapis.com/auth/mapsengine.readonly";
+authMapsengineReadonlyScope :: Proxy '["https://www.googleapis.com/auth/mapsengine.readonly"]
+authMapsengineReadonlyScope = Proxy;

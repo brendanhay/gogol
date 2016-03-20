@@ -90,6 +90,9 @@ lcmiPayload
 
 instance GoogleRequest LiveChatMessagesInsert where
         type Rs LiveChatMessagesInsert = LiveChatMessage
+        type Scopes LiveChatMessagesInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatMessagesInsert{..}
           = go (Just _lcmiPart) (Just AltJSON) _lcmiPayload
               youTubeService

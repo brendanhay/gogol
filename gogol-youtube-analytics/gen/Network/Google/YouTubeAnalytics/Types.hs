@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -140,28 +141,28 @@ import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeAnalyticsService :: ServiceConfig
+youTubeAnalyticsService :: Service
 youTubeAnalyticsService
   = defaultService (ServiceId "youtubeAnalytics:v1")
       "www.googleapis.com"
 
 -- | Manage your YouTube account
-authYoutubeScope :: OAuthScope
-authYoutubeScope = "https://www.googleapis.com/auth/youtube";
+authYoutubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
+authYoutubeScope = Proxy;
 
 -- | View YouTube Analytics reports for your YouTube content
-authYtAnalyticsReadonlyScope :: OAuthScope
-authYtAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
+authYtAnalyticsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
+authYtAnalyticsReadonlyScope = Proxy;
 
 -- | View and manage your assets and associated content on YouTube
-authYoutubepartnerScope :: OAuthScope
-authYoutubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
+authYoutubepartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+authYoutubepartnerScope = Proxy;
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
-authYtAnalyticsMonetaryReadonlyScope :: OAuthScope
-authYtAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
+authYtAnalyticsMonetaryReadonlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
+authYtAnalyticsMonetaryReadonlyScope = Proxy;
 
 -- | View your YouTube account
-authYoutubeReadonlyScope :: OAuthScope
-authYoutubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";
+authYoutubeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
+authYoutubeReadonlyScope = Proxy;

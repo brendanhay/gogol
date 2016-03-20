@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -33,11 +34,11 @@ import           Network.Google.GroupsMigration.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Groups Migration API. This contains the host and root path used as a starting point for constructing service requests.
-groupsMigrationService :: ServiceConfig
+groupsMigrationService :: Service
 groupsMigrationService
   = defaultService (ServiceId "groupsmigration:v1")
       "www.googleapis.com"
 
 -- | Manage messages in groups on your domain
-authAppsGroupsMigrationScope :: OAuthScope
-authAppsGroupsMigrationScope = "https://www.googleapis.com/auth/apps.groups.migration";
+authAppsGroupsMigrationScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.migration"]
+authAppsGroupsMigrationScope = Proxy;

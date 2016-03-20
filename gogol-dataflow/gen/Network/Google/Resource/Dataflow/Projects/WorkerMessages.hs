@@ -168,6 +168,9 @@ pwmCallback
 instance GoogleRequest ProjectsWorkerMessages where
         type Rs ProjectsWorkerMessages =
              SendWorkerMessagesResponse
+        type Scopes ProjectsWorkerMessages =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsWorkerMessages{..}
           = go _pwmProjectId _pwmXgafv _pwmUploadProtocol
               (Just _pwmPp)

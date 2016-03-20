@@ -62,6 +62,14 @@ aboutGet = AboutGet
 
 instance GoogleRequest AboutGet where
         type Rs AboutGet = About
+        type Scopes AboutGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient AboutGet{}
           = go (Just AltJSON) driveService
           where go

@@ -80,6 +80,7 @@ instance GoogleRequest RelyingPartySignupNewUser
          where
         type Rs RelyingPartySignupNewUser =
              SignupNewUserResponse
+        type Scopes RelyingPartySignupNewUser = '[]
         requestClient RelyingPartySignupNewUser{..}
           = go (Just AltJSON) _rpsnuPayload
               identityToolkitService

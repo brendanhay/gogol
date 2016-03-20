@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -126,12 +127,12 @@ import           Network.Google.GamesConfiguration.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1configuration' of the Google Play Game Services Publishing API. This contains the host and root path used as a starting point for constructing service requests.
-gamesConfigurationService :: ServiceConfig
+gamesConfigurationService :: Service
 gamesConfigurationService
   = defaultService
       (ServiceId "gamesConfiguration:v1configuration")
       "www.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-authAndroidpublisherScope :: OAuthScope
-authAndroidpublisherScope = "https://www.googleapis.com/auth/androidpublisher";
+authAndroidpublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
+authAndroidpublisherScope = Proxy;

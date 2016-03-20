@@ -167,6 +167,9 @@ psuCallback
 
 instance GoogleRequest ProjectsSinksUpdate where
         type Rs ProjectsSinksUpdate = LogSink
+        type Scopes ProjectsSinksUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsSinksUpdate{..}
           = go _psuSinkName _psuXgafv _psuUploadProtocol
               (Just _psuPp)

@@ -121,6 +121,10 @@ instance GoogleRequest
         type Rs
                AccountsContainersReauthorizeEnvironmentsUpdate
              = Environment
+        type Scopes
+               AccountsContainersReauthorizeEnvironmentsUpdate
+             =
+             '["https://www.googleapis.com/auth/tagmanager.publish"]
         requestClient
           AccountsContainersReauthorizeEnvironmentsUpdate{..}
           = go _acreuAccountId _acreuContainerId

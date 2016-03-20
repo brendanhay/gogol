@@ -107,7 +107,8 @@ instance GoogleRequest ObjectAccessControlsList where
         type Rs ObjectAccessControlsList =
              ObjectAccessControls
         type Scopes ObjectAccessControlsList =
-             '["https://www.googleapis.com/auth/devstorage.full_control"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsList{..}
           = go _oaclBucket _oaclObject _oaclGeneration
               (Just AltJSON)

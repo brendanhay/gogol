@@ -105,6 +105,8 @@ acedEnvironmentId
 instance GoogleRequest
          AccountsContainersEnvironmentsDelete where
         type Rs AccountsContainersEnvironmentsDelete = ()
+        type Scopes AccountsContainersEnvironmentsDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersEnvironmentsDelete{..}
           = go _acedAccountId _acedContainerId

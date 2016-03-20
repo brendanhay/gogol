@@ -100,6 +100,9 @@ rcCommentId
 
 instance GoogleRequest RepliesCreate where
         type Rs RepliesCreate = Reply
+        type Scopes RepliesCreate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient RepliesCreate{..}
           = go _rcFileId _rcCommentId (Just AltJSON) _rcPayload
               driveService

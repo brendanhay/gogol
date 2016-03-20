@@ -154,6 +154,11 @@ pmgCallback
 
 instance GoogleRequest ProjectsMetricsGet where
         type Rs ProjectsMetricsGet = LogMetric
+        type Scopes ProjectsMetricsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsMetricsGet{..}
           = go _pmgMetricName _pmgXgafv _pmgUploadProtocol
               (Just _pmgPp)

@@ -222,6 +222,9 @@ pclCallback
 instance GoogleRequest PeopleConnectionsList where
         type Rs PeopleConnectionsList =
              ListConnectionsResponse
+        type Scopes PeopleConnectionsList =
+             '["https://www.googleapis.com/auth/contacts",
+               "https://www.googleapis.com/auth/contacts.readonly"]
         requestClient PeopleConnectionsList{..}
           = go _pclResourceName _pclSyncToken _pclXgafv
               _pclUploadProtocol

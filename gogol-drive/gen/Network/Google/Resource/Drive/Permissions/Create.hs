@@ -127,6 +127,9 @@ pcFileId = lens _pcFileId (\ s a -> s{_pcFileId = a})
 
 instance GoogleRequest PermissionsCreate where
         type Rs PermissionsCreate = Permission
+        type Scopes PermissionsCreate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
         requestClient PermissionsCreate{..}
           = go _pcFileId _pcSendNotificationEmail
               _pcEmailMessage

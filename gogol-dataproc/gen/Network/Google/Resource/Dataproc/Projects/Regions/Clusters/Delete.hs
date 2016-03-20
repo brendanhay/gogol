@@ -185,6 +185,8 @@ prcdCallback
 instance GoogleRequest ProjectsRegionsClustersDelete
          where
         type Rs ProjectsRegionsClustersDelete = Operation
+        type Scopes ProjectsRegionsClustersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsClustersDelete{..}
           = go _prcdProjectId _prcdRegion _prcdClusterName
               _prcdXgafv

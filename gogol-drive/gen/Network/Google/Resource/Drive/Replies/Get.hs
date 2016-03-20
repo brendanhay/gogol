@@ -113,6 +113,10 @@ rgIncludeDeleted
 
 instance GoogleRequest RepliesGet where
         type Rs RepliesGet = Reply
+        type Scopes RepliesGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.readonly"]
         requestClient RepliesGet{..}
           = go _rgFileId _rgCommentId _rgReplyId
               (Just _rgIncludeDeleted)

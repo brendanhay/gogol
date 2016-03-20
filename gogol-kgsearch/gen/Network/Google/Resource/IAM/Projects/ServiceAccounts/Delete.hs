@@ -157,6 +157,8 @@ psadCallback
 instance GoogleRequest ProjectsServiceAccountsDelete
          where
         type Rs ProjectsServiceAccountsDelete = Empty
+        type Scopes ProjectsServiceAccountsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsDelete{..}
           = go _psadName _psadXgafv _psadUploadProtocol
               (Just _psadPp)

@@ -174,7 +174,8 @@ instance GoogleRequest ProjectsTestIAMPermissions
         type Rs ProjectsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes ProjectsTestIAMPermissions =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsTestIAMPermissions{..}
           = go _ptipResource _ptipXgafv _ptipUploadProtocol
               (Just _ptipPp)

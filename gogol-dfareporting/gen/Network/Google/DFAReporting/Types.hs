@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -2533,16 +2534,16 @@ import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2.4' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
-dFAReportingService :: ServiceConfig
+dFAReportingService :: Service
 dFAReportingService
   = defaultService (ServiceId "dfareporting:v2.4")
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports
-authDfareportingScope :: OAuthScope
-authDfareportingScope = "https://www.googleapis.com/auth/dfareporting";
+authDfareportingScope :: Proxy '["https://www.googleapis.com/auth/dfareporting"]
+authDfareportingScope = Proxy;
 
 -- | View and manage your DoubleClick Campaign Manager\'s (DCM) display ad
 -- campaigns
-authDfatraffickingScope :: OAuthScope
-authDfatraffickingScope = "https://www.googleapis.com/auth/dfatrafficking";
+authDfatraffickingScope :: Proxy '["https://www.googleapis.com/auth/dfatrafficking"]
+authDfatraffickingScope = Proxy;

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -212,23 +213,23 @@ import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.6' of the Prediction API. This contains the host and root path used as a starting point for constructing service requests.
-predictionService :: ServiceConfig
+predictionService :: Service
 predictionService
   = defaultService (ServiceId "prediction:v1.6")
       "www.googleapis.com"
 
 -- | View your data in Google Cloud Storage
-authDevstorageReadOnlyScope :: OAuthScope
-authDevstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
+authDevstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+authDevstorageReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-authDevstorageReadWriteScope :: OAuthScope
-authDevstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+authDevstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+authDevstorageReadWriteScope = Proxy;
 
 -- | Manage your data in the Google Prediction API
-authPredictionScope :: OAuthScope
-authPredictionScope = "https://www.googleapis.com/auth/prediction";
+authPredictionScope :: Proxy '["https://www.googleapis.com/auth/prediction"]
+authPredictionScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-authDevstorageFullControlScope :: OAuthScope
-authDevstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";
+authDevstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+authDevstorageFullControlScope = Proxy;

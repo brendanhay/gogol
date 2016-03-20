@@ -94,7 +94,8 @@ instance GoogleRequest BucketAccessControlsDelete
          where
         type Rs BucketAccessControlsDelete = ()
         type Scopes BucketAccessControlsDelete =
-             '["https://www.googleapis.com/auth/devstorage.full_control"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsDelete{..}
           = go _bacdBucket _bacdEntity (Just AltJSON)
               storageService

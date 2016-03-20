@@ -116,6 +116,8 @@ sppClusterId
 
 instance GoogleRequest StorelayoutclustersPatch where
         type Rs StorelayoutclustersPatch = StoreCluster
+        type Scopes StorelayoutclustersPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutclustersPatch{..}
           = go _sppEnterpriseId _sppPageId _sppClusterId
               (Just AltJSON)

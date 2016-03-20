@@ -185,6 +185,8 @@ asvdCallback
 instance GoogleRequest AppsServicesVersionsDelete
          where
         type Rs AppsServicesVersionsDelete = Operation
+        type Scopes AppsServicesVersionsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesVersionsDelete{..}
           = go _asvdAppsId _asvdServicesId _asvdVersionsId
               _asvdXgafv

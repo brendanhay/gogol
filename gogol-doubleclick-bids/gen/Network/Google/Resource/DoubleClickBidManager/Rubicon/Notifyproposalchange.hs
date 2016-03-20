@@ -78,6 +78,7 @@ rnPayload
 instance GoogleRequest RubiconNotifyproposalchange
          where
         type Rs RubiconNotifyproposalchange = ()
+        type Scopes RubiconNotifyproposalchange = '[]
         requestClient RubiconNotifyproposalchange{..}
           = go (Just AltJSON) _rnPayload doubleClickBidsService
           where go

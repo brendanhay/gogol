@@ -155,6 +155,9 @@ pldCallback
 
 instance GoogleRequest ProjectsLogsDelete where
         type Rs ProjectsLogsDelete = Empty
+        type Scopes ProjectsLogsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsLogsDelete{..}
           = go _pldLogName _pldXgafv _pldUploadProtocol
               (Just _pldPp)

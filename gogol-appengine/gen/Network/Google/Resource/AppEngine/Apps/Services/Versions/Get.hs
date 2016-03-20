@@ -194,6 +194,8 @@ asvgCallback
 
 instance GoogleRequest AppsServicesVersionsGet where
         type Rs AppsServicesVersionsGet = Version
+        type Scopes AppsServicesVersionsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesVersionsGet{..}
           = go _asvgAppsId _asvgServicesId _asvgVersionsId
               _asvgXgafv

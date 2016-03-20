@@ -159,6 +159,8 @@ psakdCallback
 instance GoogleRequest
          ProjectsServiceAccountsKeysDelete where
         type Rs ProjectsServiceAccountsKeysDelete = Empty
+        type Scopes ProjectsServiceAccountsKeysDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsKeysDelete{..}
           = go _psakdName _psakdXgafv _psakdUploadProtocol
               (Just _psakdPp)

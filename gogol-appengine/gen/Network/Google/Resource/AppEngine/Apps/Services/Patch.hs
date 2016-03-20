@@ -204,6 +204,8 @@ aspCallback
 
 instance GoogleRequest AppsServicesPatch where
         type Rs AppsServicesPatch = Operation
+        type Scopes AppsServicesPatch =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesPatch{..}
           = go _aspAppsId _aspServicesId _aspXgafv
               _aspUploadProtocol

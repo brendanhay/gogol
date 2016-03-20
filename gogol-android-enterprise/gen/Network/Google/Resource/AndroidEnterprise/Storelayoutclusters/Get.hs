@@ -103,6 +103,8 @@ stoClusterId
 
 instance GoogleRequest StorelayoutclustersGet where
         type Rs StorelayoutclustersGet = StoreCluster
+        type Scopes StorelayoutclustersGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutclustersGet{..}
           = go _stoEnterpriseId _stoPageId _stoClusterId
               (Just AltJSON)

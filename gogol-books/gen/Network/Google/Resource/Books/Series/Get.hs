@@ -77,6 +77,8 @@ sgSeriesId
 
 instance GoogleRequest SeriesGet where
         type Rs SeriesGet = Series
+        type Scopes SeriesGet =
+             '["https://www.googleapis.com/auth/books"]
         requestClient SeriesGet{..}
           = go _sgSeriesId (Just AltJSON) booksService
           where go

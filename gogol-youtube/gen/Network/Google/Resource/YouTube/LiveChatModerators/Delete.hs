@@ -76,6 +76,9 @@ lcmdId = lens _lcmdId (\ s a -> s{_lcmdId = a})
 
 instance GoogleRequest LiveChatModeratorsDelete where
         type Rs LiveChatModeratorsDelete = ()
+        type Scopes LiveChatModeratorsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatModeratorsDelete{..}
           = go (Just _lcmdId) (Just AltJSON) youTubeService
           where go

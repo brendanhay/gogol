@@ -131,7 +131,6 @@ instance GoogleRequest FilesCopy where
         type Scopes FilesCopy =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.appdata",
-               "https://www.googleapis.com/auth/drive.apps.readonly",
                "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.photos.readonly"]
         requestClient FilesCopy{..}

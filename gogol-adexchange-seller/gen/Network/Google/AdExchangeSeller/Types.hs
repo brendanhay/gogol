@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -183,15 +184,15 @@ import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2.0' of the Ad Exchange Seller API. This contains the host and root path used as a starting point for constructing service requests.
-adExchangeSellerService :: ServiceConfig
+adExchangeSellerService :: Service
 adExchangeSellerService
   = defaultService (ServiceId "adexchangeseller:v2.0")
       "www.googleapis.com"
 
 -- | View your Ad Exchange data
-authAdexchangeSellerReadonlyScope :: OAuthScope
-authAdexchangeSellerReadonlyScope = "https://www.googleapis.com/auth/adexchange.seller.readonly";
+authAdexchangeSellerReadonlyScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller.readonly"]
+authAdexchangeSellerReadonlyScope = Proxy;
 
 -- | View and manage your Ad Exchange data
-authAdexchangeSellerScope :: OAuthScope
-authAdexchangeSellerScope = "https://www.googleapis.com/auth/adexchange.seller";
+authAdexchangeSellerScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
+authAdexchangeSellerScope = Proxy;

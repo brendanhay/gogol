@@ -158,6 +158,8 @@ psagCallback
 instance GoogleRequest ProjectsServiceAccountsGet
          where
         type Rs ProjectsServiceAccountsGet = ServiceAccount
+        type Scopes ProjectsServiceAccountsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsGet{..}
           = go _psagName _psagXgafv _psagUploadProtocol
               (Just _psagPp)

@@ -157,6 +157,8 @@ progCallback
 instance GoogleRequest ProjectsRegionsOperationsGet
          where
         type Rs ProjectsRegionsOperationsGet = Operation
+        type Scopes ProjectsRegionsOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsOperationsGet{..}
           = go _progName _progXgafv _progUploadProtocol
               (Just _progPp)

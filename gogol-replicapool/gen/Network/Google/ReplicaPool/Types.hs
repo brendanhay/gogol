@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -158,23 +159,23 @@ import           Network.Google.ReplicaPool.Types.Product
 import           Network.Google.ReplicaPool.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPoolService :: ServiceConfig
+replicaPoolService :: Service
 replicaPoolService
   = defaultService (ServiceId "replicapool:v1beta2")
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-authComputeScope :: OAuthScope
-authComputeScope = "https://www.googleapis.com/auth/compute";
+authComputeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
+authComputeScope = Proxy;
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View your Google Compute Engine resources
-authComputeReadonlyScope :: OAuthScope
-authComputeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";
+authComputeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
+authComputeReadonlyScope = Proxy;

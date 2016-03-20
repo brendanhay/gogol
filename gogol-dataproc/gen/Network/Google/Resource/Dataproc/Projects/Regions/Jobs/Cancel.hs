@@ -204,6 +204,8 @@ prjcCallback
 instance GoogleRequest ProjectsRegionsJobsCancel
          where
         type Rs ProjectsRegionsJobsCancel = Job
+        type Scopes ProjectsRegionsJobsCancel =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsJobsCancel{..}
           = go _prjcProjectId _prjcRegion _prjcJobId _prjcXgafv
               _prjcUploadProtocol

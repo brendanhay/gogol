@@ -112,6 +112,10 @@ sMaxResults
 
 instance GoogleRequest SponsorsList where
         type Rs SponsorsList = SponsorListResponse
+        type Scopes SponsorsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient SponsorsList{..}
           = go (Just _sPart) (Just _sFilter) _sPageToken
               (Just _sMaxResults)

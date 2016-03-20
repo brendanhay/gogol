@@ -216,6 +216,8 @@ prcpCallback
 instance GoogleRequest ProjectsRegionsClustersPatch
          where
         type Rs ProjectsRegionsClustersPatch = Operation
+        type Scopes ProjectsRegionsClustersPatch =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsClustersPatch{..}
           = go _prcpProjectId _prcpRegion _prcpClusterName
               _prcpXgafv

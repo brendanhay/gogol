@@ -134,7 +134,8 @@ instance GoogleRequest ObjectAccessControlsUpdate
         type Rs ObjectAccessControlsUpdate =
              ObjectAccessControl
         type Scopes ObjectAccessControlsUpdate =
-             '["https://www.googleapis.com/auth/devstorage.full_control"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsUpdate{..}
           = go _oacuBucket _oacuObject _oacuEntity
               _oacuGeneration

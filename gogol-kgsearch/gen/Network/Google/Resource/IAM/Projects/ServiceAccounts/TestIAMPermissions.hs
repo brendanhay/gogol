@@ -178,6 +178,8 @@ instance GoogleRequest
          ProjectsServiceAccountsTestIAMPermissions where
         type Rs ProjectsServiceAccountsTestIAMPermissions =
              TestIAMPermissionsResponse
+        type Scopes ProjectsServiceAccountsTestIAMPermissions
+             = '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient
           ProjectsServiceAccountsTestIAMPermissions{..}
           = go _psatipResource _psatipXgafv

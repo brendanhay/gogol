@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -917,11 +918,11 @@ import           Network.Google.Books.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Books API. This contains the host and root path used as a starting point for constructing service requests.
-booksService :: ServiceConfig
+booksService :: Service
 booksService
   = defaultService (ServiceId "books:v1")
       "www.googleapis.com"
 
 -- | Manage your books
-authBooksScope :: OAuthScope
-authBooksScope = "https://www.googleapis.com/auth/books";
+authBooksScope :: Proxy '["https://www.googleapis.com/auth/books"]
+authBooksScope = Proxy;

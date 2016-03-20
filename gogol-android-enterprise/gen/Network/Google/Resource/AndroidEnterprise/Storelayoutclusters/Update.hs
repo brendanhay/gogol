@@ -117,6 +117,8 @@ suuClusterId
 instance GoogleRequest StorelayoutclustersUpdate
          where
         type Rs StorelayoutclustersUpdate = StoreCluster
+        type Scopes StorelayoutclustersUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutclustersUpdate{..}
           = go _suuEnterpriseId _suuPageId _suuClusterId
               (Just AltJSON)

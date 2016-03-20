@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -379,15 +380,15 @@ import           Network.Google.Blogger.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Blogger API. This contains the host and root path used as a starting point for constructing service requests.
-bloggerService :: ServiceConfig
+bloggerService :: Service
 bloggerService
   = defaultService (ServiceId "blogger:v3")
       "www.googleapis.com"
 
 -- | Manage your Blogger account
-authBloggerScope :: OAuthScope
-authBloggerScope = "https://www.googleapis.com/auth/blogger";
+authBloggerScope :: Proxy '["https://www.googleapis.com/auth/blogger"]
+authBloggerScope = Proxy;
 
 -- | View your Blogger account
-authBloggerReadonlyScope :: OAuthScope
-authBloggerReadonlyScope = "https://www.googleapis.com/auth/blogger.readonly";
+authBloggerReadonlyScope :: Proxy '["https://www.googleapis.com/auth/blogger.readonly"]
+authBloggerReadonlyScope = Proxy;

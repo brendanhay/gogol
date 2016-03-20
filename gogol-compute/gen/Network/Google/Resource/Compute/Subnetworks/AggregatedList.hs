@@ -140,6 +140,10 @@ instance GoogleRequest SubnetworksAggregatedList
          where
         type Rs SubnetworksAggregatedList =
              SubnetworkAggregatedList
+        type Scopes SubnetworksAggregatedList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient SubnetworksAggregatedList{..}
           = go _salProject _salFilter _salPageToken
               (Just _salMaxResults)

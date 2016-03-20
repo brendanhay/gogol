@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -385,11 +386,11 @@ import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Play Developer API. This contains the host and root path used as a starting point for constructing service requests.
-androidPublisherService :: ServiceConfig
+androidPublisherService :: Service
 androidPublisherService
   = defaultService (ServiceId "androidpublisher:v2")
       "www.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-authAndroidpublisherScope :: OAuthScope
-authAndroidpublisherScope = "https://www.googleapis.com/auth/androidpublisher";
+authAndroidpublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
+authAndroidpublisherScope = Proxy;

@@ -102,6 +102,9 @@ siRegion = lens _siRegion (\ s a -> s{_siRegion = a})
 
 instance GoogleRequest SubnetworksInsert where
         type Rs SubnetworksInsert = Operation
+        type Scopes SubnetworksInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient SubnetworksInsert{..}
           = go _siProject _siRegion (Just AltJSON) _siPayload
               computeService

@@ -132,6 +132,8 @@ instance GoogleRequest RevisionsGet where
 instance GoogleRequest (MediaDownload RevisionsGet)
          where
         type Rs (MediaDownload RevisionsGet) = Stream
+        type Scopes (MediaDownload RevisionsGet) =
+             Scopes RevisionsGet
         requestClient (MediaDownload RevisionsGet{..})
           = go _rggFileId _rggRevisionId
               (Just _rggAcknowledgeAbuse)

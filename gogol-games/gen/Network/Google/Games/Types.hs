@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -932,20 +933,20 @@ import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Game Services API. This contains the host and root path used as a starting point for constructing service requests.
-gamesService :: ServiceConfig
+gamesService :: Service
 gamesService
   = defaultService (ServiceId "games:v1")
       "www.googleapis.com"
 
 -- | Know the list of people in your circles, your age range, and language
-authPlusLoginScope :: OAuthScope
-authPlusLoginScope = "https://www.googleapis.com/auth/plus.login";
+authPlusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
+authPlusLoginScope = Proxy;
 
 -- | Share your Google+ profile information and view and manage your game
 -- activity
-authGamesScope :: OAuthScope
-authGamesScope = "https://www.googleapis.com/auth/games";
+authGamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
+authGamesScope = Proxy;
 
 -- | View and manage its own configuration data in your Google Drive
-authDriveAppdataScope :: OAuthScope
-authDriveAppdataScope = "https://www.googleapis.com/auth/drive.appdata";
+authDriveAppdataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
+authDriveAppdataScope = Proxy;

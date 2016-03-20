@@ -173,6 +173,8 @@ instance GoogleRequest
          ProjectsServiceAccountsSignBlob where
         type Rs ProjectsServiceAccountsSignBlob =
              SignBlobResponse
+        type Scopes ProjectsServiceAccountsSignBlob =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsSignBlob{..}
           = go _psasbName _psasbXgafv _psasbUploadProtocol
               (Just _psasbPp)

@@ -93,6 +93,8 @@ rciCustomer
 
 instance GoogleRequest ResourcesCalendarsInsert where
         type Rs ResourcesCalendarsInsert = CalendarResource
+        type Scopes ResourcesCalendarsInsert =
+             '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
         requestClient ResourcesCalendarsInsert{..}
           = go _rciCustomer (Just AltJSON) _rciPayload
               directoryService

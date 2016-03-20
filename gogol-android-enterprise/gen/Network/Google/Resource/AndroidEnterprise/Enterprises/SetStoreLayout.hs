@@ -91,6 +91,8 @@ esslPayload
 instance GoogleRequest EnterprisesSetStoreLayout
          where
         type Rs EnterprisesSetStoreLayout = StoreLayout
+        type Scopes EnterprisesSetStoreLayout =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesSetStoreLayout{..}
           = go _esslEnterpriseId (Just AltJSON) _esslPayload
               androidEnterpriseService

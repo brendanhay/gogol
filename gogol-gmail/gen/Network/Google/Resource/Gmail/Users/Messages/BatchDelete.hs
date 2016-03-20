@@ -92,6 +92,8 @@ umbdUserId
 
 instance GoogleRequest UsersMessagesBatchDelete where
         type Rs UsersMessagesBatchDelete = ()
+        type Scopes UsersMessagesBatchDelete =
+             '["https://mail.google.com/"]
         requestClient UsersMessagesBatchDelete{..}
           = go _umbdUserId (Just AltJSON) _umbdPayload
               gmailService

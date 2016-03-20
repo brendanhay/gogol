@@ -153,6 +153,11 @@ psgCallback
 
 instance GoogleRequest ProjectsSinksGet where
         type Rs ProjectsSinksGet = LogSink
+        type Scopes ProjectsSinksGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsSinksGet{..}
           = go _psgSinkName _psgXgafv _psgUploadProtocol
               (Just _psgPp)

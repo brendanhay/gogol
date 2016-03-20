@@ -153,6 +153,9 @@ psdCallback
 
 instance GoogleRequest ProjectsSinksDelete where
         type Rs ProjectsSinksDelete = Empty
+        type Scopes ProjectsSinksDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsSinksDelete{..}
           = go _psdSinkName _psdXgafv _psdUploadProtocol
               (Just _psdPp)

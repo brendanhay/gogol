@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -64,15 +65,15 @@ import           Network.Google.SiteVerification.Types.Product
 import           Network.Google.SiteVerification.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Site Verification API. This contains the host and root path used as a starting point for constructing service requests.
-siteVerificationService :: ServiceConfig
+siteVerificationService :: Service
 siteVerificationService
   = defaultService (ServiceId "siteVerification:v1")
       "www.googleapis.com"
 
 -- | Manage your new site verifications with Google
-authSiteverificationVerifyOnlyScope :: OAuthScope
-authSiteverificationVerifyOnlyScope = "https://www.googleapis.com/auth/siteverification.verify_only";
+authSiteverificationVerifyOnlyScope :: Proxy '["https://www.googleapis.com/auth/siteverification.verify_only"]
+authSiteverificationVerifyOnlyScope = Proxy;
 
 -- | Manage the list of sites and domains you control
-authSiteverificationScope :: OAuthScope
-authSiteverificationScope = "https://www.googleapis.com/auth/siteverification";
+authSiteverificationScope :: Proxy '["https://www.googleapis.com/auth/siteverification"]
+authSiteverificationScope = Proxy;

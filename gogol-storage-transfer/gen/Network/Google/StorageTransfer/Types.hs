@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -222,11 +223,11 @@ import           Network.Google.StorageTransfer.Types.Product
 import           Network.Google.StorageTransfer.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-storageTransferService :: ServiceConfig
+storageTransferService :: Service
 storageTransferService
   = defaultService (ServiceId "storagetransfer:v1")
       "storagetransfer.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

@@ -160,6 +160,11 @@ instance GoogleRequest
          ProjectsMonitoredResourceDescriptorsGet where
         type Rs ProjectsMonitoredResourceDescriptorsGet =
              MonitoredResourceDescriptor
+        type Scopes ProjectsMonitoredResourceDescriptorsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring",
+               "https://www.googleapis.com/auth/monitoring.read",
+               "https://www.googleapis.com/auth/monitoring.write"]
         requestClient
           ProjectsMonitoredResourceDescriptorsGet{..}
           = go _pmrdgName _pmrdgXgafv _pmrdgUploadProtocol

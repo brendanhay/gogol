@@ -136,7 +136,8 @@ instance GoogleRequest ObjectAccessControlsPatch
         type Rs ObjectAccessControlsPatch =
              ObjectAccessControl
         type Scopes ObjectAccessControlsPatch =
-             '["https://www.googleapis.com/auth/devstorage.full_control"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsPatch{..}
           = go _oacpBucket _oacpObject _oacpEntity
               _oacpGeneration

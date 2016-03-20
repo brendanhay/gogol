@@ -184,6 +184,8 @@ asvcCallback
 instance GoogleRequest AppsServicesVersionsCreate
          where
         type Rs AppsServicesVersionsCreate = Operation
+        type Scopes AppsServicesVersionsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesVersionsCreate{..}
           = go _asvcAppsId _asvcServicesId _asvcXgafv
               _asvcUploadProtocol

@@ -157,6 +157,11 @@ elCallback
 
 instance GoogleRequest EntriesList where
         type Rs EntriesList = ListLogEntriesResponse
+        type Scopes EntriesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.read"]
         requestClient EntriesList{..}
           = go _elXgafv _elUploadProtocol (Just _elPp)
               _elAccessToken

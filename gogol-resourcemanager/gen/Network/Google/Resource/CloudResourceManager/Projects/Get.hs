@@ -157,7 +157,8 @@ pgCallback
 instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project
         type Scopes ProjectsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsGet{..}
           = go _pgProjectId _pgXgafv _pgUploadProtocol
               (Just _pgPp)

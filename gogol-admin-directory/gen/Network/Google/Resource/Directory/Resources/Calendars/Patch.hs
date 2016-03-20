@@ -106,6 +106,8 @@ rcpCalendarResourceId
 
 instance GoogleRequest ResourcesCalendarsPatch where
         type Rs ResourcesCalendarsPatch = CalendarResource
+        type Scopes ResourcesCalendarsPatch =
+             '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
         requestClient ResourcesCalendarsPatch{..}
           = go _rcpCustomer _rcpCalendarResourceId
               (Just AltJSON)

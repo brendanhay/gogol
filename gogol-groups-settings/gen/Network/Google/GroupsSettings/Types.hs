@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -59,11 +60,11 @@ import           Network.Google.GroupsSettings.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Groups Settings API. This contains the host and root path used as a starting point for constructing service requests.
-groupsSettingsService :: ServiceConfig
+groupsSettingsService :: Service
 groupsSettingsService
   = defaultService (ServiceId "groupssettings:v1")
       "www.googleapis.com"
 
 -- | View and manage the settings of a Google Apps Group
-authAppsGroupsSettingsScope :: OAuthScope
-authAppsGroupsSettingsScope = "https://www.googleapis.com/auth/apps.groups.settings";
+authAppsGroupsSettingsScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.settings"]
+authAppsGroupsSettingsScope = Proxy;

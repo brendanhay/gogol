@@ -154,6 +154,10 @@ pmdCallback
 
 instance GoogleRequest ProjectsMetricsDelete where
         type Rs ProjectsMetricsDelete = Empty
+        type Scopes ProjectsMetricsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.write"]
         requestClient ProjectsMetricsDelete{..}
           = go _pmdMetricName _pmdXgafv _pmdUploadProtocol
               (Just _pmdPp)

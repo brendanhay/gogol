@@ -122,6 +122,10 @@ ffelMaxResults
 instance GoogleRequest FanFundingEventsList where
         type Rs FanFundingEventsList =
              FanFundingEventListResponse
+        type Scopes FanFundingEventsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient FanFundingEventsList{..}
           = go (Just _ffelPart) _ffelHl _ffelPageToken
               (Just _ffelMaxResults)

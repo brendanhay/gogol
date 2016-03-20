@@ -89,6 +89,8 @@ sdPageId = lens _sdPageId (\ s a -> s{_sdPageId = a})
 
 instance GoogleRequest StorelayoutpagesDelete where
         type Rs StorelayoutpagesDelete = ()
+        type Scopes StorelayoutpagesDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutpagesDelete{..}
           = go _sdEnterpriseId _sdPageId (Just AltJSON)
               androidEnterpriseService

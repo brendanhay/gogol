@@ -169,6 +169,8 @@ asdCallback
 
 instance GoogleRequest AppsServicesDelete where
         type Rs AppsServicesDelete = Operation
+        type Scopes AppsServicesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesDelete{..}
           = go _asdAppsId _asdServicesId _asdXgafv
               _asdUploadProtocol

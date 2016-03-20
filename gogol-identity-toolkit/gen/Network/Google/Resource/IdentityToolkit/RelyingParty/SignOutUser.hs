@@ -81,6 +81,7 @@ rpsouPayload
 instance GoogleRequest RelyingPartySignOutUser where
         type Rs RelyingPartySignOutUser =
              IdentitytoolkitRelyingPartySignOutUserResponse
+        type Scopes RelyingPartySignOutUser = '[]
         requestClient RelyingPartySignOutUser{..}
           = go (Just AltJSON) _rpsouPayload
               identityToolkitService

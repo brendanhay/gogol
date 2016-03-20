@@ -91,6 +91,9 @@ lcbiPayload
 
 instance GoogleRequest LiveChatBansInsert where
         type Rs LiveChatBansInsert = LiveChatBan
+        type Scopes LiveChatBansInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatBansInsert{..}
           = go (Just _lcbiPart) (Just AltJSON) _lcbiPayload
               youTubeService

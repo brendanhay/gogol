@@ -197,6 +197,8 @@ instance GoogleRequest ProjectsRegionsClustersList
          where
         type Rs ProjectsRegionsClustersList =
              ListClustersResponse
+        type Scopes ProjectsRegionsClustersList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsClustersList{..}
           = go _prclProjectId _prclRegion _prclXgafv
               _prclUploadProtocol

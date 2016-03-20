@@ -184,6 +184,11 @@ muCallback
 
 instance GoogleRequest MediaUpload' where
         type Rs MediaUpload' = Media
+        type Scopes MediaUpload' =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.read",
+               "https://www.googleapis.com/auth/logging.write"]
         requestClient MediaUpload'{..}
           = go _muResourceName _muXgafv _muUploadProtocol
               (Just _muPp)
@@ -201,6 +206,8 @@ instance GoogleRequest MediaUpload' where
 instance GoogleRequest (MediaUpload MediaUpload')
          where
         type Rs (MediaUpload MediaUpload') = Media
+        type Scopes (MediaUpload MediaUpload') =
+             Scopes MediaUpload'
         requestClient (MediaUpload MediaUpload'{..} body)
           = go _muResourceName _muXgafv _muUploadProtocol
               (Just _muPp)

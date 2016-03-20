@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -183,17 +184,17 @@ import           Network.Google.CloudMonitoring.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2beta2' of the Cloud Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
-cloudMonitoringService :: ServiceConfig
+cloudMonitoringService :: Service
 cloudMonitoringService
   = defaultService
       (ServiceId "cloudmonitoring:v2beta2")
       "www.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View and write monitoring data for all of your Google and third-party
 -- Cloud and API projects
-authMonitoringScope :: OAuthScope
-authMonitoringScope = "https://www.googleapis.com/auth/monitoring";
+authMonitoringScope :: Proxy '["https://www.googleapis.com/auth/monitoring"]
+authMonitoringScope = Proxy;

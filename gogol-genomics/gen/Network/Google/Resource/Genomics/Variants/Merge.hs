@@ -169,6 +169,9 @@ vmCallback
 
 instance GoogleRequest VariantsMerge where
         type Rs VariantsMerge = Empty
+        type Scopes VariantsMerge =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
         requestClient VariantsMerge{..}
           = go _vmXgafv _vmUploadProtocol (Just _vmPp)
               _vmAccessToken

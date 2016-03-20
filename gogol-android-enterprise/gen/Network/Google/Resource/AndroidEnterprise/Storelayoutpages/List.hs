@@ -80,6 +80,8 @@ slEnterpriseId
 instance GoogleRequest StorelayoutpagesList where
         type Rs StorelayoutpagesList =
              StoreLayoutPagesListResponse
+        type Scopes StorelayoutpagesList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutpagesList{..}
           = go _slEnterpriseId (Just AltJSON)
               androidEnterpriseService

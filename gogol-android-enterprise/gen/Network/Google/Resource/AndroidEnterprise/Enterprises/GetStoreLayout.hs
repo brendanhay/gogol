@@ -78,6 +78,8 @@ egslEnterpriseId
 instance GoogleRequest EnterprisesGetStoreLayout
          where
         type Rs EnterprisesGetStoreLayout = StoreLayout
+        type Scopes EnterprisesGetStoreLayout =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesGetStoreLayout{..}
           = go _egslEnterpriseId (Just AltJSON)
               androidEnterpriseService

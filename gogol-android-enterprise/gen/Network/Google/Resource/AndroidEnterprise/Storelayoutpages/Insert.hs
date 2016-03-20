@@ -90,6 +90,8 @@ siPayload
 
 instance GoogleRequest StorelayoutpagesInsert where
         type Rs StorelayoutpagesInsert = StorePage
+        type Scopes StorelayoutpagesInsert =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutpagesInsert{..}
           = go _siEnterpriseId (Just AltJSON) _siPayload
               androidEnterpriseService

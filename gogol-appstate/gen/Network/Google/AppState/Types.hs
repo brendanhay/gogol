@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -55,11 +56,11 @@ import           Network.Google.AppState.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google App State API. This contains the host and root path used as a starting point for constructing service requests.
-appStateService :: ServiceConfig
+appStateService :: Service
 appStateService
   = defaultService (ServiceId "appstate:v1")
       "www.googleapis.com"
 
 -- | View and manage your data for this application
-authAppstateScope :: OAuthScope
-authAppstateScope = "https://www.googleapis.com/auth/appstate";
+authAppstateScope :: Proxy '["https://www.googleapis.com/auth/appstate"]
+authAppstateScope = Proxy;

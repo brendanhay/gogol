@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -234,19 +235,19 @@ import           Network.Google.Debugger.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
-debuggerService :: ServiceConfig
+debuggerService :: Service
 debuggerService
   = defaultService (ServiceId "clouddebugger:v2")
       "clouddebugger.googleapis.com"
 
 -- | Manage cloud debugger
-authCloudDebuggerScope :: OAuthScope
-authCloudDebuggerScope = "https://www.googleapis.com/auth/cloud_debugger";
+authCloudDebuggerScope :: Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
+authCloudDebuggerScope = Proxy;
 
 -- | Manage active breakpoints in cloud debugger
-authCloudDebugletcontrollerScope :: OAuthScope
-authCloudDebugletcontrollerScope = "https://www.googleapis.com/auth/cloud_debugletcontroller";
+authCloudDebugletcontrollerScope :: Proxy '["https://www.googleapis.com/auth/cloud_debugletcontroller"]
+authCloudDebugletcontrollerScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

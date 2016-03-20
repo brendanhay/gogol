@@ -90,6 +90,9 @@ mddMetric
 instance GoogleRequest MetricDescriptorsDelete where
         type Rs MetricDescriptorsDelete =
              DeleteMetricDescriptorResponse
+        type Scopes MetricDescriptorsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient MetricDescriptorsDelete{..}
           = go _mddProject _mddMetric (Just AltJSON)
               cloudMonitoringService

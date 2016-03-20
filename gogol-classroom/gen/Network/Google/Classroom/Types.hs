@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -130,31 +131,31 @@ import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Classroom API. This contains the host and root path used as a starting point for constructing service requests.
-classroomService :: ServiceConfig
+classroomService :: Service
 classroomService
   = defaultService (ServiceId "classroom:v1")
       "classroom.googleapis.com"
 
 -- | View your Google Classroom class rosters
-authClassroomRostersReadonlyScope :: OAuthScope
-authClassroomRostersReadonlyScope = "https://www.googleapis.com/auth/classroom.rosters.readonly";
+authClassroomRostersReadonlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters.readonly"]
+authClassroomRostersReadonlyScope = Proxy;
 
 -- | Manage your Google Classroom classes
-authClassroomCoursesScope :: OAuthScope
-authClassroomCoursesScope = "https://www.googleapis.com/auth/classroom.courses";
+authClassroomCoursesScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses"]
+authClassroomCoursesScope = Proxy;
 
 -- | View the email addresses of people in your classes
-authClassroomProfileEmailsScope :: OAuthScope
-authClassroomProfileEmailsScope = "https://www.googleapis.com/auth/classroom.profile.emails";
+authClassroomProfileEmailsScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.emails"]
+authClassroomProfileEmailsScope = Proxy;
 
 -- | View the profile photos of people in your classes
-authClassroomProfilePhotosScope :: OAuthScope
-authClassroomProfilePhotosScope = "https://www.googleapis.com/auth/classroom.profile.photos";
+authClassroomProfilePhotosScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.photos"]
+authClassroomProfilePhotosScope = Proxy;
 
 -- | Manage your Google Classroom class rosters
-authClassroomRostersScope :: OAuthScope
-authClassroomRostersScope = "https://www.googleapis.com/auth/classroom.rosters";
+authClassroomRostersScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters"]
+authClassroomRostersScope = Proxy;
 
 -- | View your Google Classroom classes
-authClassroomCoursesReadonlyScope :: OAuthScope
-authClassroomCoursesReadonlyScope = "https://www.googleapis.com/auth/classroom.courses.readonly";
+authClassroomCoursesReadonlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses.readonly"]
+authClassroomCoursesReadonlyScope = Proxy;

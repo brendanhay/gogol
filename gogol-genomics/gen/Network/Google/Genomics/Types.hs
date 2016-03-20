@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -562,27 +563,27 @@ import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Genomics API. This contains the host and root path used as a starting point for constructing service requests.
-genomicsService :: ServiceConfig
+genomicsService :: Service
 genomicsService
   = defaultService (ServiceId "genomics:v1")
       "genomics.googleapis.com"
 
 -- | View and manage Genomics data
-authGenomicsScope :: OAuthScope
-authGenomicsScope = "https://www.googleapis.com/auth/genomics";
+authGenomicsScope :: Proxy '["https://www.googleapis.com/auth/genomics"]
+authGenomicsScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View Genomics data
-authGenomicsReadonlyScope :: OAuthScope
-authGenomicsReadonlyScope = "https://www.googleapis.com/auth/genomics.readonly";
+authGenomicsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/genomics.readonly"]
+authGenomicsReadonlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-authDevstorageReadWriteScope :: OAuthScope
-authDevstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+authDevstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+authDevstorageReadWriteScope = Proxy;
 
 -- | View and manage your data in Google BigQuery
-authBigqueryScope :: OAuthScope
-authBigqueryScope = "https://www.googleapis.com/auth/bigquery";
+authBigqueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
+authBigqueryScope = Proxy;

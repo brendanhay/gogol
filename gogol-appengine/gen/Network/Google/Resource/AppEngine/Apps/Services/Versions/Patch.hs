@@ -207,6 +207,8 @@ asvpCallback
 instance GoogleRequest AppsServicesVersionsPatch
          where
         type Rs AppsServicesVersionsPatch = Operation
+        type Scopes AppsServicesVersionsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesVersionsPatch{..}
           = go _asvpAppsId _asvpServicesId _asvpVersionsId
               _asvpXgafv

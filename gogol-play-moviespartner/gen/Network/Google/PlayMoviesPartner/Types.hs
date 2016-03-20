@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -170,11 +171,11 @@ import           Network.Google.PlayMoviesPartner.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Movies Partner API. This contains the host and root path used as a starting point for constructing service requests.
-playMoviesPartnerService :: ServiceConfig
+playMoviesPartnerService :: Service
 playMoviesPartnerService
   = defaultService (ServiceId "playmoviespartner:v1")
       "playmoviespartner.googleapis.com"
 
 -- | View the digital assets you publish on Google Play Movies and TV
-authPlaymoviesPartnerReadonlyScope :: OAuthScope
-authPlaymoviesPartnerReadonlyScope = "https://www.googleapis.com/auth/playmovies_partner.readonly";
+authPlaymoviesPartnerReadonlyScope :: Proxy '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+authPlaymoviesPartnerReadonlyScope = Proxy;

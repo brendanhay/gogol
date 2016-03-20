@@ -119,6 +119,10 @@ livMaxResults
 instance GoogleRequest LiveChatModeratorsList where
         type Rs LiveChatModeratorsList =
              LiveChatModeratorListResponse
+        type Scopes LiveChatModeratorsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient LiveChatModeratorsList{..}
           = go (Just _livLiveChatId) (Just _livPart)
               _livPageToken

@@ -187,6 +187,11 @@ pmlCallback
 
 instance GoogleRequest ProjectsMetricsList where
         type Rs ProjectsMetricsList = ListLogMetricsResponse
+        type Scopes ProjectsMetricsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsMetricsList{..}
           = go _pmlProjectName _pmlXgafv _pmlUploadProtocol
               (Just _pmlPp)

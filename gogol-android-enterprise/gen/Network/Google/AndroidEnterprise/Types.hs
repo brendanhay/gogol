@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -293,11 +294,11 @@ import           Network.Google.AndroidEnterprise.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
-androidEnterpriseService :: ServiceConfig
+androidEnterpriseService :: Service
 androidEnterpriseService
   = defaultService (ServiceId "androidenterprise:v1")
       "www.googleapis.com"
 
 -- | Manage corporate Android devices
-authAndroidenterpriseScope :: OAuthScope
-authAndroidenterpriseScope = "https://www.googleapis.com/auth/androidenterprise";
+authAndroidenterpriseScope :: Proxy '["https://www.googleapis.com/auth/androidenterprise"]
+authAndroidenterpriseScope = Proxy;

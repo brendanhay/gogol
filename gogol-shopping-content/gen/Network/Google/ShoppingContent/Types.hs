@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -1283,11 +1284,11 @@ import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
 
 -- | Default request referring to version 'v2' of the Content API for Shopping. This contains the host and root path used as a starting point for constructing service requests.
-shoppingContentService :: ServiceConfig
+shoppingContentService :: Service
 shoppingContentService
   = defaultService (ServiceId "content:v2")
       "www.googleapis.com"
 
 -- | Manage your product listings and accounts for Google Shopping
-authContentScope :: OAuthScope
-authContentScope = "https://www.googleapis.com/auth/content";
+authContentScope :: Proxy '["https://www.googleapis.com/auth/content"]
+authContentScope = Proxy;

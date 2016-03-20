@@ -223,6 +223,9 @@ tlYoungest
 
 instance GoogleRequest TimeseriesList where
         type Rs TimeseriesList = ListTimeseriesResponse
+        type Scopes TimeseriesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient TimeseriesList{..}
           = go _tlProject _tlMetric (Just _tlYoungest)
               _tlWindow

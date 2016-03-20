@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -198,23 +199,23 @@ import           Network.Google.UserAccounts.Types.Product
 import           Network.Google.UserAccounts.Types.Sum
 
 -- | Default request referring to version 'beta' of the Cloud User Accounts API. This contains the host and root path used as a starting point for constructing service requests.
-userAccountsService :: ServiceConfig
+userAccountsService :: Service
 userAccountsService
   = defaultService (ServiceId "clouduseraccounts:beta")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: OAuthScope
-authCloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+authCloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | Manage your Google Cloud User Accounts
-authCloudUseraccountsScope :: OAuthScope
-authCloudUseraccountsScope = "https://www.googleapis.com/auth/cloud.useraccounts";
+authCloudUseraccountsScope :: Proxy '["https://www.googleapis.com/auth/cloud.useraccounts"]
+authCloudUseraccountsScope = Proxy;
 
 -- | View your Google Cloud User Accounts
-authCloudUseraccountsReadonlyScope :: OAuthScope
-authCloudUseraccountsReadonlyScope = "https://www.googleapis.com/auth/cloud.useraccounts.readonly";
+authCloudUseraccountsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
+authCloudUseraccountsReadonlyScope = Proxy;

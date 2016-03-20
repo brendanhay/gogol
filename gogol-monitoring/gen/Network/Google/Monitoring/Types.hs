@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -272,25 +273,25 @@ import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
-monitoringService :: ServiceConfig
+monitoringService :: Service
 monitoringService
   = defaultService (ServiceId "monitoring:v3")
       "monitoring.googleapis.com"
 
 -- | View monitoring data for all of your Google Cloud and third-party
 -- projects
-authMonitoringReadScope :: OAuthScope
-authMonitoringReadScope = "https://www.googleapis.com/auth/monitoring.read";
+authMonitoringReadScope :: Proxy '["https://www.googleapis.com/auth/monitoring.read"]
+authMonitoringReadScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View and write monitoring data for all of your Google and third-party
 -- Cloud and API projects
-authMonitoringScope :: OAuthScope
-authMonitoringScope = "https://www.googleapis.com/auth/monitoring";
+authMonitoringScope :: Proxy '["https://www.googleapis.com/auth/monitoring"]
+authMonitoringScope = Proxy;
 
 -- | Publish metric data to your Google Cloud projects
-authMonitoringWriteScope :: OAuthScope
-authMonitoringWriteScope = "https://www.googleapis.com/auth/monitoring.write";
+authMonitoringWriteScope :: Proxy '["https://www.googleapis.com/auth/monitoring.write"]
+authMonitoringWriteScope = Proxy;

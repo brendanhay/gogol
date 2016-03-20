@@ -106,7 +106,8 @@ instance GoogleRequest
         type Rs DefaultObjectAccessControlsUpdate =
              ObjectAccessControl
         type Scopes DefaultObjectAccessControlsUpdate =
-             '["https://www.googleapis.com/auth/devstorage.full_control"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsUpdate{..}
           = go _doacuBucket _doacuEntity (Just AltJSON)
               _doacuPayload

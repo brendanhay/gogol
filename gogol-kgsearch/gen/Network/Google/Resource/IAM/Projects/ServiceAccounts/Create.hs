@@ -169,6 +169,8 @@ instance GoogleRequest ProjectsServiceAccountsCreate
          where
         type Rs ProjectsServiceAccountsCreate =
              ServiceAccount
+        type Scopes ProjectsServiceAccountsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsCreate{..}
           = go _psacName _psacXgafv _psacUploadProtocol
               (Just _psacPp)

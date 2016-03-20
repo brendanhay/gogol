@@ -94,7 +94,8 @@ instance GoogleRequest
          DefaultObjectAccessControlsDelete where
         type Rs DefaultObjectAccessControlsDelete = ()
         type Scopes DefaultObjectAccessControlsDelete =
-             '["https://www.googleapis.com/auth/devstorage.full_control"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsDelete{..}
           = go _doacdBucket _doacdEntity (Just AltJSON)
               storageService

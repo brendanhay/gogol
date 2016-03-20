@@ -169,6 +169,11 @@ mdCallback
 
 instance GoogleRequest MediaDownload' where
         type Rs MediaDownload' = Media
+        type Scopes MediaDownload' =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.read",
+               "https://www.googleapis.com/auth/logging.write"]
         requestClient MediaDownload'{..}
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
@@ -185,6 +190,8 @@ instance GoogleRequest MediaDownload' where
 instance GoogleRequest (MediaDownload MediaDownload')
          where
         type Rs (MediaDownload MediaDownload') = Stream
+        type Scopes (MediaDownload MediaDownload') =
+             Scopes MediaDownload'
         requestClient (MediaDownload MediaDownload'{..})
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)

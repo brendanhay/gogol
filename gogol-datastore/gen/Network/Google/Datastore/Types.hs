@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -302,19 +303,19 @@ import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta2' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
-datastoreService :: ServiceConfig
+datastoreService :: Service
 datastoreService
   = defaultService (ServiceId "datastore:v1beta2")
       "www.googleapis.com"
 
 -- | View your email address
-authUserinfoEmailScope :: OAuthScope
-authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+authUserinfoEmailScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;
 
 -- | View and manage your Google Cloud Datastore data
-authDatastoreScope :: OAuthScope
-authDatastoreScope = "https://www.googleapis.com/auth/datastore";
+authDatastoreScope :: Proxy '["https://www.googleapis.com/auth/datastore"]
+authDatastoreScope = Proxy;

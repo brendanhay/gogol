@@ -90,6 +90,9 @@ lPayload = lens _lPayload (\ s a -> s{_lPayload = a})
 
 instance GoogleRequest LiveChatModeratorsInsert where
         type Rs LiveChatModeratorsInsert = LiveChatModerator
+        type Scopes LiveChatModeratorsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatModeratorsInsert{..}
           = go (Just _lPart) (Just AltJSON) _lPayload
               youTubeService

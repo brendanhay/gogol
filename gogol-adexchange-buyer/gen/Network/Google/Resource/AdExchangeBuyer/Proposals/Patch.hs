@@ -117,6 +117,8 @@ ppProposalId
 
 instance GoogleRequest ProposalsPatch where
         type Rs ProposalsPatch = Proposal
+        type Scopes ProposalsPatch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ProposalsPatch{..}
           = go _ppProposalId _ppRevisionNumber _ppUpdateAction
               (Just AltJSON)

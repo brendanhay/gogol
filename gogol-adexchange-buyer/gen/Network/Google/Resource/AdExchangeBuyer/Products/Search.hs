@@ -76,6 +76,8 @@ psPqlQuery
 
 instance GoogleRequest ProductsSearch where
         type Rs ProductsSearch = GetOffersResponse
+        type Scopes ProductsSearch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ProductsSearch{..}
           = go _psPqlQuery (Just AltJSON)
               adExchangeBuyerService

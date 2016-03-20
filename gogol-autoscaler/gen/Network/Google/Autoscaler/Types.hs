@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -174,15 +175,15 @@ import           Network.Google.Autoscaler.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta2' of the Google Compute Engine Autoscaler API. This contains the host and root path used as a starting point for constructing service requests.
-autoscalerService :: ServiceConfig
+autoscalerService :: Service
 autoscalerService
   = defaultService (ServiceId "autoscaler:v1beta2")
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-authComputeScope :: OAuthScope
-authComputeScope = "https://www.googleapis.com/auth/compute";
+authComputeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
+authComputeScope = Proxy;
 
 -- | View your Google Compute Engine resources
-authComputeReadonlyScope :: OAuthScope
-authComputeReadonlyScope = "https://www.googleapis.com/auth/compute.readonly";
+authComputeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
+authComputeReadonlyScope = Proxy;

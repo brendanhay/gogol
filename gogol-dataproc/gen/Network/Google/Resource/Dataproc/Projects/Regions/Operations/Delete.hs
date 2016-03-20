@@ -159,6 +159,8 @@ prodCallback
 instance GoogleRequest
          ProjectsRegionsOperationsDelete where
         type Rs ProjectsRegionsOperationsDelete = Empty
+        type Scopes ProjectsRegionsOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsOperationsDelete{..}
           = go _prodName _prodXgafv _prodUploadProtocol
               (Just _prodPp)

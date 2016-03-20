@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -78,15 +79,15 @@ import           Network.Google.DataTransfer.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'datatransfer_v1' of the Admin Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-dataTransferService :: ServiceConfig
+dataTransferService :: Service
 dataTransferService
   = defaultService (ServiceId "admin:datatransfer_v1")
       "www.googleapis.com"
 
 -- | View data transfers between users in your organization
-authAdminDatatransferReadonlyScope :: OAuthScope
-authAdminDatatransferReadonlyScope = "https://www.googleapis.com/auth/admin.datatransfer.readonly";
+authAdminDatatransferReadonlyScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer.readonly"]
+authAdminDatatransferReadonlyScope = Proxy;
 
 -- | View and manage data transfers between users in your organization
-authAdminDatatransferScope :: OAuthScope
-authAdminDatatransferScope = "https://www.googleapis.com/auth/admin.datatransfer";
+authAdminDatatransferScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer"]
+authAdminDatatransferScope = Proxy;

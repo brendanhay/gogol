@@ -208,7 +208,9 @@ rqStartDate
 instance GoogleRequest ReportsQuery where
         type Rs ReportsQuery = ResultTable
         type Scopes ReportsQuery =
-             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient ReportsQuery{..}
           = go (Just _rqIds) (Just _rqStartDate)

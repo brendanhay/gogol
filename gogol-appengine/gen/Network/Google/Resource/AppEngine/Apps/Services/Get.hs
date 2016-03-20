@@ -168,6 +168,8 @@ asgCallback
 
 instance GoogleRequest AppsServicesGet where
         type Rs AppsServicesGet = Service
+        type Scopes AppsServicesGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsServicesGet{..}
           = go _asgAppsId _asgServicesId _asgXgafv
               _asgUploadProtocol

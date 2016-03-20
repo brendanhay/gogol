@@ -132,6 +132,8 @@ instance GoogleRequest
          AccountsContainersEnvironmentsPatch where
         type Rs AccountsContainersEnvironmentsPatch =
              Environment
+        type Scopes AccountsContainersEnvironmentsPatch =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersEnvironmentsPatch{..}
           = go _acepAccountId _acepContainerId
               _acepEnvironmentId

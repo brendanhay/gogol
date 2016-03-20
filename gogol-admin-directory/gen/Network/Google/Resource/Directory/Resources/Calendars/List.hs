@@ -105,6 +105,9 @@ rclMaxResults
 
 instance GoogleRequest ResourcesCalendarsList where
         type Rs ResourcesCalendarsList = CalendarResources
+        type Scopes ResourcesCalendarsList =
+             '["https://www.googleapis.com/auth/admin.directory.resource.calendar",
+               "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"]
         requestClient ResourcesCalendarsList{..}
           = go _rclCustomer _rclPageToken _rclMaxResults
               (Just AltJSON)

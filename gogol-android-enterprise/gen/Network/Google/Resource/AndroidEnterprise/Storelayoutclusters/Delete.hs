@@ -104,6 +104,8 @@ sddClusterId
 instance GoogleRequest StorelayoutclustersDelete
          where
         type Rs StorelayoutclustersDelete = ()
+        type Scopes StorelayoutclustersDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutclustersDelete{..}
           = go _sddEnterpriseId _sddPageId _sddClusterId
               (Just AltJSON)

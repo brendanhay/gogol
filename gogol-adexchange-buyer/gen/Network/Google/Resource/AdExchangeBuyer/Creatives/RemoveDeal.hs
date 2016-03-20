@@ -103,6 +103,8 @@ crdAccountId
 
 instance GoogleRequest CreativesRemoveDeal where
         type Rs CreativesRemoveDeal = ()
+        type Scopes CreativesRemoveDeal =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient CreativesRemoveDeal{..}
           = go _crdAccountId _crdBuyerCreativeId _crdDealId
               (Just AltJSON)

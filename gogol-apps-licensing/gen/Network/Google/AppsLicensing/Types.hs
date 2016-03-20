@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -50,11 +51,11 @@ import           Network.Google.AppsLicensing.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Enterprise License Manager API. This contains the host and root path used as a starting point for constructing service requests.
-appsLicensingService :: ServiceConfig
+appsLicensingService :: Service
 appsLicensingService
   = defaultService (ServiceId "licensing:v1")
       "www.googleapis.com"
 
 -- | View and manage Google Apps licenses for your domain
-authAppsLicensingScope :: OAuthScope
-authAppsLicensingScope = "https://www.googleapis.com/auth/apps.licensing";
+authAppsLicensingScope :: Proxy '["https://www.googleapis.com/auth/apps.licensing"]
+authAppsLicensingScope = Proxy;

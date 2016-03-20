@@ -184,6 +184,8 @@ prccCallback
 instance GoogleRequest ProjectsRegionsClustersCreate
          where
         type Rs ProjectsRegionsClustersCreate = Operation
+        type Scopes ProjectsRegionsClustersCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsClustersCreate{..}
           = go _prccProjectId _prccRegion _prccXgafv
               _prccUploadProtocol

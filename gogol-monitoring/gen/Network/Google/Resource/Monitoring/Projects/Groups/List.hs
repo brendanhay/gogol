@@ -221,6 +221,10 @@ pglCallback
 
 instance GoogleRequest ProjectsGroupsList where
         type Rs ProjectsGroupsList = ListGroupsResponse
+        type Scopes ProjectsGroupsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring",
+               "https://www.googleapis.com/auth/monitoring.read"]
         requestClient ProjectsGroupsList{..}
           = go _pglName _pglXgafv _pglUploadProtocol
               _pglChildrenOfGroup

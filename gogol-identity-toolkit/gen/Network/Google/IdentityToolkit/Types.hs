@@ -405,7 +405,7 @@ import           Network.Google.IdentityToolkit.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Identity Toolkit API. This contains the host and root path used as a starting point for constructing service requests.
-identityToolkitService :: ServiceConfig
+identityToolkitService :: Service
 identityToolkitService
   = defaultService (ServiceId "identitytoolkit:v3")
       "www.googleapis.com"

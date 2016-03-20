@@ -176,6 +176,10 @@ pctscCallback
 instance GoogleRequest
          ProjectsCollectdTimeSeriesCreate where
         type Rs ProjectsCollectdTimeSeriesCreate = Empty
+        type Scopes ProjectsCollectdTimeSeriesCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring",
+               "https://www.googleapis.com/auth/monitoring.write"]
         requestClient ProjectsCollectdTimeSeriesCreate{..}
           = go _pctscName _pctscXgafv _pctscUploadProtocol
               (Just _pctscPp)

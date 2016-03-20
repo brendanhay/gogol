@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -398,23 +399,23 @@ import           Network.Google.Dataproc.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud Dataproc API. This contains the host and root path used as a starting point for constructing service requests.
-dataprocService :: ServiceConfig
+dataprocService :: Service
 dataprocService
   = defaultService (ServiceId "dataproc:v1")
       "dataproc.googleapis.com"
 
 -- | Administrate log data for your projects
-authLoggingAdminScope :: OAuthScope
-authLoggingAdminScope = "https://www.googleapis.com/auth/logging.admin";
+authLoggingAdminScope :: Proxy '["https://www.googleapis.com/auth/logging.admin"]
+authLoggingAdminScope = Proxy;
 
 -- | View log data for your projects
-authLoggingReadScope :: OAuthScope
-authLoggingReadScope = "https://www.googleapis.com/auth/logging.read";
+authLoggingReadScope :: Proxy '["https://www.googleapis.com/auth/logging.read"]
+authLoggingReadScope = Proxy;
 
 -- | Submit log data for your projects
-authLoggingWriteScope :: OAuthScope
-authLoggingWriteScope = "https://www.googleapis.com/auth/logging.write";
+authLoggingWriteScope :: Proxy '["https://www.googleapis.com/auth/logging.write"]
+authLoggingWriteScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

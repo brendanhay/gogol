@@ -75,6 +75,8 @@ pgProposalId
 
 instance GoogleRequest ProposalsGet where
         type Rs ProposalsGet = Proposal
+        type Scopes ProposalsGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient ProposalsGet{..}
           = go _pgProposalId (Just AltJSON)
               adExchangeBuyerService

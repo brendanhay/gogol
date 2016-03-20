@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -77,11 +78,11 @@ import           Network.Google.URLShortener.Types.Product
 import           Network.Google.URLShortener.Types.Sum
 
 -- | Default request referring to version 'v1' of the URL Shortener API. This contains the host and root path used as a starting point for constructing service requests.
-uRLShortenerService :: ServiceConfig
+uRLShortenerService :: Service
 uRLShortenerService
   = defaultService (ServiceId "urlshortener:v1")
       "www.googleapis.com"
 
 -- | Manage your goo.gl short URLs
-authUrlshortenerScope :: OAuthScope
-authUrlshortenerScope = "https://www.googleapis.com/auth/urlshortener";
+authUrlshortenerScope :: Proxy '["https://www.googleapis.com/auth/urlshortener"]
+authUrlshortenerScope = Proxy;

@@ -151,6 +151,10 @@ pggCallback
 
 instance GoogleRequest ProjectsGroupsGet where
         type Rs ProjectsGroupsGet = Group
+        type Scopes ProjectsGroupsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring",
+               "https://www.googleapis.com/auth/monitoring.read"]
         requestClient ProjectsGroupsGet{..}
           = go _pggName _pggXgafv _pggUploadProtocol
               (Just _pggPp)

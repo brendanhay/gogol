@@ -174,6 +174,8 @@ instance GoogleRequest ProjectsServiceAccountsUpdate
          where
         type Rs ProjectsServiceAccountsUpdate =
              ServiceAccount
+        type Scopes ProjectsServiceAccountsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsUpdate{..}
           = go _psauName _psauXgafv _psauUploadProtocol
               (Just _psauPp)

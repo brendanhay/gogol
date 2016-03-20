@@ -177,6 +177,9 @@ pgcCallback
 
 instance GoogleRequest ProjectsGroupsCreate where
         type Rs ProjectsGroupsCreate = Group
+        type Scopes ProjectsGroupsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient ProjectsGroupsCreate{..}
           = go _pgcName _pgcXgafv _pgcValidateOnly
               _pgcUploadProtocol

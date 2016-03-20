@@ -102,6 +102,10 @@ sgRegion = lens _sgRegion (\ s a -> s{_sgRegion = a})
 
 instance GoogleRequest SubnetworksGet where
         type Rs SubnetworksGet = Subnetwork
+        type Scopes SubnetworksGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient SubnetworksGet{..}
           = go _sgProject _sgRegion _sgSubnetwork
               (Just AltJSON)

@@ -120,6 +120,8 @@ musrdUnSampledReportId
 instance GoogleRequest
          ManagementUnSampledReportsDelete where
         type Rs ManagementUnSampledReportsDelete = ()
+        type Scopes ManagementUnSampledReportsDelete =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient ManagementUnSampledReportsDelete{..}
           = go _musrdAccountId _musrdWebPropertyId
               _musrdProFileId

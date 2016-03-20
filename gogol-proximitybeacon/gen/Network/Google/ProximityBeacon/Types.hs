@@ -151,7 +151,7 @@ import           Network.Google.ProximityBeacon.Types.Product
 import           Network.Google.ProximityBeacon.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Proximity Beacon API. This contains the host and root path used as a starting point for constructing service requests.
-proximityBeaconService :: ServiceConfig
+proximityBeaconService :: Service
 proximityBeaconService
   = defaultService
       (ServiceId "proximitybeacon:v1beta1")

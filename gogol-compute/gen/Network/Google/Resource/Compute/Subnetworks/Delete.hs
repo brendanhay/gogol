@@ -100,6 +100,9 @@ sdRegion = lens _sdRegion (\ s a -> s{_sdRegion = a})
 
 instance GoogleRequest SubnetworksDelete where
         type Rs SubnetworksDelete = Operation
+        type Scopes SubnetworksDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient SubnetworksDelete{..}
           = go _sdProject _sdRegion _sdSubnetwork
               (Just AltJSON)

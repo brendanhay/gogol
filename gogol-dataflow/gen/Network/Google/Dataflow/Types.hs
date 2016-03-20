@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -792,15 +793,15 @@ import           Network.Google.Dataflow.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1b3' of the Google Dataflow API. This contains the host and root path used as a starting point for constructing service requests.
-dataflowService :: ServiceConfig
+dataflowService :: Service
 dataflowService
   = defaultService (ServiceId "dataflow:v1b3")
       "dataflow.googleapis.com"
 
 -- | View your email address
-authUserinfoEmailScope :: OAuthScope
-authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+authUserinfoEmailScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -330,43 +331,43 @@ import           Network.Google.People.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google People API. This contains the host and root path used as a starting point for constructing service requests.
-peopleService :: ServiceConfig
+peopleService :: Service
 peopleService
   = defaultService (ServiceId "people:v1")
       "people.googleapis.com"
 
 -- | View your complete date of birth
-authUserBirthdayReadScope :: OAuthScope
-authUserBirthdayReadScope = "https://www.googleapis.com/auth/user.birthday.read";
+authUserBirthdayReadScope :: Proxy '["https://www.googleapis.com/auth/user.birthday.read"]
+authUserBirthdayReadScope = Proxy;
 
 -- | View your basic profile info
-authUserinfoProfileScope :: OAuthScope
-authUserinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
+authUserinfoProfileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
+authUserinfoProfileScope = Proxy;
 
 -- | Know your basic profile info and list of people in your circles.
-authPlusLoginScope :: OAuthScope
-authPlusLoginScope = "https://www.googleapis.com/auth/plus.login";
+authPlusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
+authPlusLoginScope = Proxy;
 
 -- | View your phone numbers
-authUserPhonenumbersReadScope :: OAuthScope
-authUserPhonenumbersReadScope = "https://www.googleapis.com/auth/user.phonenumbers.read";
+authUserPhonenumbersReadScope :: Proxy '["https://www.googleapis.com/auth/user.phonenumbers.read"]
+authUserPhonenumbersReadScope = Proxy;
 
 -- | View your email address
-authUserinfoEmailScope :: OAuthScope
-authUserinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+authUserinfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+authUserinfoEmailScope = Proxy;
 
 -- | View your contacts
-authContactsReadonlyScope :: OAuthScope
-authContactsReadonlyScope = "https://www.googleapis.com/auth/contacts.readonly";
+authContactsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/contacts.readonly"]
+authContactsReadonlyScope = Proxy;
 
 -- | View your street addresses
-authUserAddressesReadScope :: OAuthScope
-authUserAddressesReadScope = "https://www.googleapis.com/auth/user.addresses.read";
+authUserAddressesReadScope :: Proxy '["https://www.googleapis.com/auth/user.addresses.read"]
+authUserAddressesReadScope = Proxy;
 
 -- | Manage your contacts
-authContactsScope :: OAuthScope
-authContactsScope = "https://www.googleapis.com/auth/contacts";
+authContactsScope :: Proxy '["https://www.googleapis.com/auth/contacts"]
+authContactsScope = Proxy;
 
 -- | View your email addresses
-authUserEmailsReadScope :: OAuthScope
-authUserEmailsReadScope = "https://www.googleapis.com/auth/user.emails.read";
+authUserEmailsReadScope :: Proxy '["https://www.googleapis.com/auth/user.emails.read"]
+authUserEmailsReadScope = Proxy;

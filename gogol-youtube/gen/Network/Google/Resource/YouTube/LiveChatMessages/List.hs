@@ -151,6 +151,10 @@ lcmlProFileImageSize
 instance GoogleRequest LiveChatMessagesList where
         type Rs LiveChatMessagesList =
              LiveChatMessageListResponse
+        type Scopes LiveChatMessagesList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient LiveChatMessagesList{..}
           = go (Just _lcmlLiveChatId) (Just _lcmlPart) _lcmlHl
               _lcmlPageToken

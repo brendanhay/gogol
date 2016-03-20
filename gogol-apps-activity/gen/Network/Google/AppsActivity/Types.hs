@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -126,27 +127,27 @@ import           Network.Google.AppsActivity.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Apps Activity API. This contains the host and root path used as a starting point for constructing service requests.
-appsActivityService :: ServiceConfig
+appsActivityService :: Service
 appsActivityService
   = defaultService (ServiceId "appsactivity:v1")
       "www.googleapis.com"
 
 -- | View metadata for files in your Google Drive
-authDriveMetadataReadonlyScope :: OAuthScope
-authDriveMetadataReadonlyScope = "https://www.googleapis.com/auth/drive.metadata.readonly";
+authDriveMetadataReadonlyScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
+authDriveMetadataReadonlyScope = Proxy;
 
 -- | View the activity history of your Google Apps
-authActivityScope :: OAuthScope
-authActivityScope = "https://www.googleapis.com/auth/activity";
+authActivityScope :: Proxy '["https://www.googleapis.com/auth/activity"]
+authActivityScope = Proxy;
 
 -- | View the files in your Google Drive
-authDriveReadonlyScope :: OAuthScope
-authDriveReadonlyScope = "https://www.googleapis.com/auth/drive.readonly";
+authDriveReadonlyScope :: Proxy '["https://www.googleapis.com/auth/drive.readonly"]
+authDriveReadonlyScope = Proxy;
 
 -- | View and manage the files in your Google Drive
-authDriveScope :: OAuthScope
-authDriveScope = "https://www.googleapis.com/auth/drive";
+authDriveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
+authDriveScope = Proxy;
 
 -- | View and manage metadata of files in your Google Drive
-authDriveMetadataScope :: OAuthScope
-authDriveMetadataScope = "https://www.googleapis.com/auth/drive.metadata";
+authDriveMetadataScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata"]
+authDriveMetadataScope = Proxy;

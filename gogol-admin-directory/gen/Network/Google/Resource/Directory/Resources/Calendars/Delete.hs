@@ -93,6 +93,8 @@ rcdCalendarResourceId
 
 instance GoogleRequest ResourcesCalendarsDelete where
         type Rs ResourcesCalendarsDelete = ()
+        type Scopes ResourcesCalendarsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
         requestClient ResourcesCalendarsDelete{..}
           = go _rcdCustomer _rcdCalendarResourceId
               (Just AltJSON)

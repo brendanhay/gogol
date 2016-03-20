@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -131,15 +132,15 @@ import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Enterprise Apps Reseller API. This contains the host and root path used as a starting point for constructing service requests.
-appsResellerService :: ServiceConfig
+appsResellerService :: Service
 appsResellerService
   = defaultService (ServiceId "reseller:v1")
       "www.googleapis.com"
 
 -- | Manage users on your domain
-authAppsOrderReadonlyScope :: OAuthScope
-authAppsOrderReadonlyScope = "https://www.googleapis.com/auth/apps.order.readonly";
+authAppsOrderReadonlyScope :: Proxy '["https://www.googleapis.com/auth/apps.order.readonly"]
+authAppsOrderReadonlyScope = Proxy;
 
 -- | Manage users on your domain
-authAppsOrderScope :: OAuthScope
-authAppsOrderScope = "https://www.googleapis.com/auth/apps.order";
+authAppsOrderScope :: Proxy '["https://www.googleapis.com/auth/apps.order"]
+authAppsOrderScope = Proxy;

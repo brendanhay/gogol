@@ -180,6 +180,9 @@ pguCallback
 
 instance GoogleRequest ProjectsGroupsUpdate where
         type Rs ProjectsGroupsUpdate = Group
+        type Scopes ProjectsGroupsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring"]
         requestClient ProjectsGroupsUpdate{..}
           = go _pguName _pguXgafv _pguValidateOnly
               _pguUploadProtocol

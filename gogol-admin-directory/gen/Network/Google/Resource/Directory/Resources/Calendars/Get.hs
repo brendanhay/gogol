@@ -94,6 +94,9 @@ rcgCalendarResourceId
 
 instance GoogleRequest ResourcesCalendarsGet where
         type Rs ResourcesCalendarsGet = CalendarResource
+        type Scopes ResourcesCalendarsGet =
+             '["https://www.googleapis.com/auth/admin.directory.resource.calendar",
+               "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"]
         requestClient ResourcesCalendarsGet{..}
           = go _rcgCustomer _rcgCalendarResourceId
               (Just AltJSON)

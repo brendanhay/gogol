@@ -177,6 +177,11 @@ instance GoogleRequest
          MonitoredResourceDescriptorsList where
         type Rs MonitoredResourceDescriptorsList =
              ListMonitoredResourceDescriptorsResponse
+        type Scopes MonitoredResourceDescriptorsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/logging.admin",
+               "https://www.googleapis.com/auth/logging.read"]
         requestClient MonitoredResourceDescriptorsList{..}
           = go _mrdlXgafv _mrdlUploadProtocol (Just _mrdlPp)
               _mrdlAccessToken

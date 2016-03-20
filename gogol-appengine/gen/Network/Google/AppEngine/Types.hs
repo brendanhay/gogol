@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -344,11 +345,11 @@ import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1beta5' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
-appEngineService :: ServiceConfig
+appEngineService :: Service
 appEngineService
   = defaultService (ServiceId "appengine:v1beta5")
       "appengine.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: OAuthScope
-authCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+authCloudPlatformScope = Proxy;

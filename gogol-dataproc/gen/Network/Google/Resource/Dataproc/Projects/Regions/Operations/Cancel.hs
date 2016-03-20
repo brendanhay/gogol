@@ -165,6 +165,8 @@ procCallback
 instance GoogleRequest
          ProjectsRegionsOperationsCancel where
         type Rs ProjectsRegionsOperationsCancel = Empty
+        type Scopes ProjectsRegionsOperationsCancel =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsOperationsCancel{..}
           = go _procName _procXgafv _procUploadProtocol
               (Just _procPp)

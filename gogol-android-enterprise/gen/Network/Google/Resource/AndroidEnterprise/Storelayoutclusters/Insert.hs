@@ -103,6 +103,8 @@ sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
 instance GoogleRequest StorelayoutclustersInsert
          where
         type Rs StorelayoutclustersInsert = StoreCluster
+        type Scopes StorelayoutclustersInsert =
+             '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient StorelayoutclustersInsert{..}
           = go _sEnterpriseId _sPageId (Just AltJSON) _sPayload
               androidEnterpriseService

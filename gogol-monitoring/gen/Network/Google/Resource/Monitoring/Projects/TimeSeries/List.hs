@@ -336,6 +336,10 @@ ptslCallback
 instance GoogleRequest ProjectsTimeSeriesList where
         type Rs ProjectsTimeSeriesList =
              ListTimeSeriesResponse
+        type Scopes ProjectsTimeSeriesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/monitoring",
+               "https://www.googleapis.com/auth/monitoring.read"]
         requestClient ProjectsTimeSeriesList{..}
           = go _ptslName _ptslIntervalStartTime _ptslXgafv
               _ptslUploadProtocol

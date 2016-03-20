@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -166,15 +167,15 @@ import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
 
 -- | Default request referring to version 'v3' of the Search Console API. This contains the host and root path used as a starting point for constructing service requests.
-webmasterToolsService :: ServiceConfig
+webmasterToolsService :: Service
 webmasterToolsService
   = defaultService (ServiceId "webmasters:v3")
       "www.googleapis.com"
 
 -- | View and manage Search Console data for your verified sites
-authWebmastersScope :: OAuthScope
-authWebmastersScope = "https://www.googleapis.com/auth/webmasters";
+authWebmastersScope :: Proxy '["https://www.googleapis.com/auth/webmasters"]
+authWebmastersScope = Proxy;
 
 -- | View Search Console data for your verified sites
-authWebmastersReadonlyScope :: OAuthScope
-authWebmastersReadonlyScope = "https://www.googleapis.com/auth/webmasters.readonly";
+authWebmastersReadonlyScope :: Proxy '["https://www.googleapis.com/auth/webmasters.readonly"]
+authWebmastersReadonlyScope = Proxy;
