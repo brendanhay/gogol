@@ -62,22 +62,94 @@ instance ToText AltJSON  where toText = const "json"
 instance ToText AltMedia where toText = const "multipart"
 
 newtype OAuthScope = OAuthScope Text
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromText
+        , ToText
+        , FromJSON
+        , ToJSON
+        )
 
 newtype AccessToken = AccessToken Text
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromText
+        , ToText
+        , FromJSON
+        , ToJSON
+        )
 
 newtype RefreshToken = RefreshToken Text
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromText, ToText, FromJSON, ToJSON)
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromText
+        , ToText
+        , FromJSON
+        , ToJSON
+        )
 
 newtype ClientId = ClientId Text
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromText
+        , ToText
+        , FromJSON
+        , ToJSON
+        )
 
 newtype Secret = Secret Text
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromText
+        , ToText
+        , FromJSON
+        , ToJSON
+        )
 
 newtype ServiceId = ServiceId Text
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromText
+        , ToText
+        , FromJSON
+        , ToJSON
+        )
 
 newtype MediaDownload a = MediaDownload a
 data    MediaUpload   a = MediaUpload   a RequestBody
