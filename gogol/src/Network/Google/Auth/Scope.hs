@@ -65,6 +65,7 @@ type family HasScope (s :: [Symbol]) a :: Constraint where
     HasScope s a = (s `HasScope'` Scopes a) ~ 'True
 
 -- | Check if any of actual supplied scopes 's' exist in the required set 'a'.
+-- If the required set 'a' is empty, then succeed.
 type family HasScope' s a where
     HasScope' s         '[] = 'True -- No scopes are required.
     HasScope' (x ': xs) a   = x ∈ a || HasScope' xs a
@@ -80,19 +81,19 @@ type family (++) xs ys where
     (++) '[] b        = b
     (++) (a ': as) bs = a ': (as ++ bs)
 
-class Allow a where
+class AllowScopes a where
     -- | Obtain a list of supported 'OAuthScope' values from a proxy.
     allowScopes :: proxy a -> [OAuthScope]
 
-instance Allow '[] where
+instance AllowScopes '[] where
     allowScopes _ = []
 
-instance (KnownSymbol x, Allow xs) => Allow (x ': xs) where
+instance (KnownSymbol x, AllowScopes xs) => AllowScopes (x ': xs) where
     allowScopes _ = scope (Proxy :: Proxy x) : allowScopes (Proxy :: Proxy xs)
       where
         scope = OAuthScope . Text.pack . symbolVal
 
-instance Allow s => Allow (Credentials s) where
+instance AllowScopes s => AllowScopes (Credentials s) where
     allowScopes _ = allowScopes (Proxy :: Proxy s)
 
 concatScopes :: [OAuthScope] -> Text

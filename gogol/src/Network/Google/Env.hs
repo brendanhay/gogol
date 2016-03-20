@@ -121,14 +121,14 @@ timeout s = local (override (serviceTimeout ?~ s))
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
 -- /See:/ 'newEnvWith', 'getApplicationDefault'.
-newEnv :: (MonadIO m, MonadCatch m, Allow s) => m (Env s)
+newEnv :: (MonadIO m, MonadCatch m, AllowScopes s) => m (Env s)
 newEnv = do
     m <- liftIO (newManager tlsManagerSettings)
     c <- getApplicationDefault m
     newEnvWith c (\_ _ -> pure ()) m
 
 -- /See:/ 'newEnv'.
-newEnvWith :: (MonadIO m, MonadCatch m, Allow s)
+newEnvWith :: (MonadIO m, MonadCatch m, AllowScopes s)
            => Credentials s
            -> Logger
            -> Manager

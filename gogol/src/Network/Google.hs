@@ -28,6 +28,9 @@
 -- application stack.
 module Network.Google
     (
+    -- * Usage
+    -- $usage
+
     -- * Running Google Actions
       Google      (..)
     , MonadGoogle (..)
@@ -44,12 +47,14 @@ module Network.Google
     , getApplicationDefault
 
     -- ** Authorization
+    -- $auth
+
     , allow
     , forbid
     , (!)
 
+    , AllowScopes
     , type HasScope
-    , type HasScope'
 
     -- * Sending Requests
     , send
@@ -152,17 +157,17 @@ runGoogle :: (MonadResource m, HasEnv s r) => r -> Google s a -> m a
 runGoogle e m = liftResourceT $ runReaderT (unGoogle m) (e ^. environment)
 
 -- | Monads in which 'Google' actions may be embedded.
-class ( Allow       s
-      , Functor     m
+class ( Functor     m
       , Applicative m
       , Monad       m
       , MonadIO     m
       , MonadCatch  m
+      , AllowScopes s
       ) => MonadGoogle s m | m -> s where
     -- | Lift a computation to the 'Google' monad.
     liftGoogle :: Google s a -> m a
 
-instance Allow s => MonadGoogle s (Google s) where
+instance AllowScopes s => MonadGoogle s (Google s) where
     liftGoogle = id
 
 instance MonadBaseControl IO (Google s) where
@@ -242,6 +247,14 @@ upload x = send . MediaUpload x
 
 hoistError :: MonadThrow m => Either Error a -> m a
 hoistError = either (throwingM _Error) return
+
+{- $usage
+Usage explanation and example placeholder.
+-}
+
+{- $auth
+Authorization explanation and example placeholder.
+-}
 
 {- $async
 Requests can be sent asynchronously, but due to guarantees about resource closure
