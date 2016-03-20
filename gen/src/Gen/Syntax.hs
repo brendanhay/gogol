@@ -47,7 +47,9 @@ serviceDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
 scopeSig :: Name -> Text -> Decl
 scopeSig n v = TypeSig noLoc [n] $
     TyApp (TyCon "Proxy") $
-        TyPromoted $ PromotedList True [PromotedString (Text.unpack v)]
+        TyPromoted $ PromotedList True
+            [ TyPromoted $ PromotedString (Text.unpack v)
+            ]
 
 scopeDecl :: Name -> Decl
 scopeDecl n = sfun noLoc n [] (UnGuardedRhs (var "Proxy")) noBinds
@@ -286,7 +288,8 @@ requestDecl n p api url fs m =
 
     ss = InsType noLoc (TyApp (TyCon "Scopes") (tycon n)) $
         TyPromoted $
-            PromotedList True (map (PromotedString . Text.unpack) (_mScopes m))
+            PromotedList True $
+                map (TyPromoted . PromotedString . Text.unpack) (_mScopes m)
 
     extras = catMaybes [alt, payload]
       where
