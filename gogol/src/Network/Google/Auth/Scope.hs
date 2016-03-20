@@ -35,21 +35,21 @@ import           Network.Google.Prelude       (GoogleRequest (..),
                                                OAuthScope (..))
 import           Network.HTTP.Types           (urlEncode)
 
--- | Type-restrict the supplied credentials etc. to the specific scopes.
+-- | Annotate credentials with the specified scopes.
 --
--- This simply exists to allow users to choose between using 'getCredentials'
--- with a 'Proxy' type, or explicitly specifying the type annotation without
--- having separate functions.
+-- This exists to allow users to choose between using 'getCredentials'
+-- with a 'Proxy' type constructed via use of '(!)', or explicitly
+-- specifying the scopes in a type annotation.
 --
--- /See:/ '!'.
+-- /See:/ '!' and the related scopes available for each service.
 allow :: proxy s -> k s -> k s
 allow _ = id
 
--- | Type-restrict the supplied credentials (etc.) to no scopes.
+-- | Annotate credentials with no scope authorization.
 forbid :: k '[] -> k '[]
 forbid = id
 
--- | Append the type-level lists of two 'Proxy' values.
+-- | Append two sets of scopes.
 --
 -- /See:/ 'allow'.
 (!) :: proxy xs -> proxy ys -> Proxy (xs ++ ys)
