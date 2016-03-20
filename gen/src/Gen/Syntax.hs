@@ -33,7 +33,7 @@ import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
 
 serviceSig :: Name -> Decl
-serviceSig n = TypeSig noLoc [n] (TyCon "Service")
+serviceSig n = TypeSig noLoc [n] (TyCon "ServiceConfig")
 
 serviceDecl :: Service a -> Name -> Decl
 serviceDecl s n = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
