@@ -15,21 +15,20 @@ module Gen.Syntax where
 import           Control.Lens                 hiding (iso, mapping, op, pre,
                                                strict)
 import           Data.Either
-import           Data.Foldable                (find, foldl', foldr')
-import           Data.Hashable
+import           Data.Foldable                (foldl', foldr')
 import qualified Data.HashMap.Strict          as Map
 import           Data.List                    (delete, nub)
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
-import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import           Data.Text.Manipulate
-import           Debug.Trace
-import           Gen.Orphans
 import           Gen.Text
 import           Gen.Types
-import           Language.Haskell.Exts.Build
+import           Language.Haskell.Exts.Build  (app, appFun, infixApp, lamE,
+                                               listE, name, noBinds, paren,
+                                               patBind, pvar, sfun, strE, sym,
+                                               var)
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
 
@@ -174,6 +173,7 @@ httpMethod = TyCon . unqual . Text.unpack . Text.toTitle . _mHttpMethod
 subPaths :: Text -> [Type]
 subPaths = map sing . filter (not . Text.null) . Text.split (== '/')
 
+jsonMedia, streamMedia :: Type
 jsonMedia   = tylist ["JSON"]
 streamMedia = tylist ["OctetStream"]
 
@@ -187,10 +187,12 @@ uploadParam =
     TyApp (TyApp (TyCon "QueryParam") (sing "uploadType"))
           (TyCon "AltMedia")
 
+metadataPat, downloadPat, uploadPat :: Method a -> Pat
 metadataPat = pattern 1
 downloadPat = pattern 2
 uploadPat   = pattern 3
 
+pattern :: Integer -> Method a -> Pat
 pattern n m = case (n, down, up) of
     (1, True, True) -> infixOr go   (infixOr wild wild)
     (2, True, True) -> infixOr wild (infixOr go   wild)
@@ -219,8 +221,8 @@ downloadDecl :: Global
              -> [Local]
              -> Method Solved
              -> Decl
-downloadDecl n p api url fs m =
-    googleRequestDecl n ty [rs, ss] [alt] p api url fs m pat prec
+downloadDecl n pre api url fs m =
+    googleRequestDecl ty [rs, ss] [alt] pre api url m pat prec
   where
     ty = TyApp (TyCon "MediaDownload") (tycon n)
 
@@ -243,8 +245,8 @@ uploadDecl :: Global
              -> [Local]
              -> Method Solved
              -> Decl
-uploadDecl n p api url fs m =
-    googleRequestDecl n ty [rs, ss] extras p api url fs m pat prec
+uploadDecl n pre api url fs m =
+    googleRequestDecl ty [rs, ss] extras pre api url m pat prec
   where
     ty = TyApp (TyCon "MediaUpload") (tycon n)
 
@@ -261,7 +263,7 @@ uploadDecl n p api url fs m =
              (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 
         payload
-            | isJust (_mRequest m) = [var (fname p "payload")]
+            | isJust (_mRequest m) = [var (fname pre "payload")]
             | otherwise            = []
 
     pat = uploadPat m
@@ -280,8 +282,8 @@ requestDecl :: Global
             -> [Local]
             -> Method Solved
             -> Decl
-requestDecl n p api url fs m =
-    googleRequestDecl n (tycon n) [rs, ss] extras p api url fs m pat prec
+requestDecl n pre api url fs m =
+    googleRequestDecl (tycon n) [rs, ss] extras pre api url m pat prec
   where
     rs = InsType noLoc (TyApp (TyCon "Rs") (tycon n)) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
@@ -297,26 +299,24 @@ requestDecl n p api url fs m =
              (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 
         payload
-            | isJust (_mRequest m) = Just $ var (fname p "payload")
+            | isJust (_mRequest m) = Just $ var (fname pre "payload")
             | otherwise            = Nothing
 
     pat = metadataPat m
 
     prec = PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
 
-googleRequestDecl :: Global
-                  -> Type
+googleRequestDecl :: Type
                   -> [InstDecl]
                   -> [Exp]
                   -> Prefix
                   -> Name
                   -> Name
-                  -> [Local]
                   -> Method Solved
                   -> Pat
                   -> Pat
                   -> Decl
-googleRequestDecl g n assoc extras p api url fields m pat prec =
+googleRequestDecl n assoc extras pre api url m pat prec =
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n] (assoc ++ [request])
   where
     request = InsDecl (FunBind [match])
@@ -350,7 +350,7 @@ googleRequestDecl g n assoc extras p api url fields m pat prec =
             _       -> v l
 
         ps = _mParameters m
-        v  = var . fname p
+        v  = var . fname pre
 
     fs = delete "alt"
        . orderParams id (Map.keys (_mParameters m))
@@ -358,9 +358,9 @@ googleRequestDecl g n assoc extras p api url fields m pat prec =
        $ map fst (rights (extractPath (_mPath m))) ++ _mParameterOrder m
 
 jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl]
-jsonDecls g p (Map.toList -> rs) = [from, to]
+jsonDecls g p (Map.toList -> rs) = [from', to']
   where
-    from = InstDecl noLoc Nothing [] [] (unqual "FromJSON") [tycon g]
+    from' = InstDecl noLoc Nothing [] [] (unqual "FromJSON") [tycon g]
         [ funD "parseJSON" $
             app (app (var "withObject") (dstr g)) $
                 lamE noLoc [pvar "o"] $
@@ -374,7 +374,7 @@ jsonDecls g p (Map.toList -> rs) = [from, to]
         | monoid s        = defJS l (var "mempty")
         | otherwise       = optJS l
 
-    to = case rs of
+    to' = case rs of
         [(k, v)] | _additional v ->
             InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon g]
                 [ funD "toJSON" $
@@ -383,14 +383,14 @@ jsonDecls g p (Map.toList -> rs) = [from, to]
 
         _                   ->
             InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon g]
-                [ wildcardD "toJSON" g omit none (map encode rs)
+                [ wildcardD "toJSON" g omit emptyObj (map encode rs)
                 ]
 
     omit = app (var "object")
          . app (var "catMaybes")
          . listE
 
-    none = var "emptyObject"
+    emptyObj = var "emptyObject"
 
     encode (l, s)
         | TMaybe {} <- _type s = infixApp (paren (app n o)) "<$>" a

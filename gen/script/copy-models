@@ -14,6 +14,6 @@ for dir in $source/*/; do
     if find $dir -type f -name '*.json' | grep '/v[a-z0-9_\.]*/' 2>&1 > /dev/null; then
         name=$(basename $dir)
         echo " -> Copy $name"
-        cp -rf $dir $target/$name
+        cp -r $dir $target/$name
     fi
 done

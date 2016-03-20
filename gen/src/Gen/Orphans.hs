@@ -12,7 +12,6 @@
 module Gen.Orphans where
 
 import           Data.Aeson
-import           Data.Aeson.Types
 import           Data.Bifunctor
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
